@@ -1,0 +1,399 @@
+# AI-Guided SaaS Platform Configuration (.prp)
+# This file defines how models are displayed and how code is generated
+# Language: Properties file format
+# Version: 1.0.0
+# Created: 2025-07-06
+# =============================================================================
+# MODEL CONFIGURATION
+# =============================================================================
+
+# Primary AI Provider Configuration
+ai.provider.primary=openai
+ai.provider.fallback=anthropic
+ai.provider.research=google
+
+# OpenAI Configuration
+openai.api.key=${OPENAI_API_KEY}
+openai.api.base_url=https://api.openai.com/v1
+openai.model.primary=gpt-4-turbo-preview
+openai.model.fallback=gpt-3.5-turbo
+openai.model.code_generation=gpt-4
+openai.model.documentation=gpt-3.5-turbo
+openai.model.analysis=gpt-4
+openai.tokens.max=4096
+openai.tokens.context=8192
+openai.temperature.default=0.7
+openai.temperature.code=0.2
+openai.temperature.creative=0.9
+openai.display_name=OpenAI GPT-4
+openai.rate_limit.requests_per_minute=60
+openai.rate_limit.tokens_per_minute=90000
+
+# Anthropic Configuration
+anthropic.api.key=${ANTHROPIC_API_KEY}
+anthropic.api.base_url=https://api.anthropic.com
+anthropic.model.primary=claude-3-opus-20240229
+anthropic.model.fallback=claude-3-sonnet-20240229
+anthropic.model.code_generation=claude-3-opus-20240229
+anthropic.tokens.max=4096
+anthropic.tokens.context=200000
+anthropic.temperature.default=0.7
+anthropic.temperature.code=0.1
+anthropic.display_name=Claude 3 Opus
+anthropic.rate_limit.requests_per_minute=50
+anthropic.rate_limit.tokens_per_minute=80000
+
+# Google AI Configuration
+google.api.key=${GOOGLE_AI_API_KEY}
+google.api.base_url=https://generativelanguage.googleapis.com/v1
+google.model.primary=gemini-pro
+google.model.fallback=gemini-pro-vision
+google.tokens.max=2048
+google.tokens.context=32768
+google.temperature.default=0.8
+google.display_name=Google Gemini Pro
+google.rate_limit.requests_per_minute=60
+google.rate_limit.tokens_per_minute=120000
+
+# =============================================================================
+# CODE GENERATION CONFIGURATION
+# =============================================================================
+
+# Framework Preferences
+framework.primary=nextjs
+framework.version=14.2.0
+framework.app_directory=true
+framework.typescript=true
+framework.eslint=true
+framework.tailwind=true
+
+# React Configuration
+react.version=18
+react.strict_mode=true
+react.concurrent_features=true
+react.component.style=functional
+react.hooks.preferred=true
+react.state_management=zustand
+react.testing_library=@testing-library/react
+
+# TypeScript Configuration
+typescript.version=5.0
+typescript.strict=true
+typescript.no_unused_locals=true
+typescript.no_unused_parameters=true
+typescript.exact_optional_property_types=true
+typescript.no_implicit_returns=true
+
+# Database Configuration
+database.orm=prisma
+database.provider=postgresql
+database.connection_pooling=true
+database.migrations.auto=false
+database.schema_validation=true
+database.query_logging=development
+
+# Styling Configuration
+styling.framework=tailwindcss
+styling.version=3.4.0
+styling.css_modules=false
+styling.styled_components=false
+styling.emotion=false
+styling.ui_library=shadcn/ui
+
+# Build Configuration
+build.bundler=webpack
+build.minification=true
+build.source_maps=development
+build.tree_shaking=true
+build.code_splitting=true
+build.lazy_loading=true
+
+# =============================================================================
+# DEVELOPMENT ENVIRONMENT
+# =============================================================================
+
+# Development Server
+dev.server.port=3000
+dev.server.host=localhost
+dev.server.hot_reload=true
+dev.server.fast_refresh=true
+dev.server.open_browser=false
+
+# Testing Configuration
+testing.framework=jest
+testing.e2e=playwright
+testing.coverage.threshold=80
+testing.coverage.reports=html,lcov,text
+testing.watch_mode=true
+testing.parallel=true
+
+# Linting Configuration
+linting.eslint=true
+linting.prettier=true
+linting.husky=true
+linting.lint_staged=true
+linting.commit_lint=true
+
+# Build Optimization
+optimization.bundle_analyzer=false
+optimization.webpack_bundle_analyzer=development
+optimization.image_optimization=true
+optimization.font_optimization=true
+optimization.css_optimization=true
+
+# =============================================================================
+# AI AGENT ORCHESTRATION
+# =============================================================================
+
+# Multi-Agent System
+agents.enabled=true
+agents.max_concurrent=5
+agents.timeout=30000
+agents.retry_attempts=3
+agents.parallel_execution=true
+
+# Agent Types
+agent.code_generator.model=openai.gpt-4
+agent.code_generator.temperature=0.2
+agent.code_generator.max_tokens=4096
+
+agent.documentation.model=openai.gpt-3.5-turbo
+agent.documentation.temperature=0.5
+agent.documentation.max_tokens=2048
+
+agent.testing.model=anthropic.claude-3-sonnet
+agent.testing.temperature=0.3
+agent.testing.max_tokens=3072
+
+agent.review.model=google.gemini-pro
+agent.review.temperature=0.4
+agent.review.max_tokens=2048
+
+agent.optimization.model=openai.gpt-4
+agent.optimization.temperature=0.1
+agent.optimization.max_tokens=4096
+
+# Agent Coordination
+coordination.queue_system=redis
+coordination.message_broker=redis
+coordination.state_management=shared
+coordination.conflict_resolution=priority_based
+
+# =============================================================================
+# SECURITY & COMPLIANCE
+# =============================================================================
+
+# Rate Limiting
+rate_limit.enabled=true
+rate_limit.window=60000
+rate_limit.max_requests=100
+rate_limit.skip_successful_requests=false
+rate_limit.skip_failed_requests=false
+
+# Authentication
+auth.provider=nextauth
+auth.session_strategy=jwt
+auth.jwt_secret=${NEXTAUTH_SECRET}
+auth.session_max_age=2592000
+auth.update_age=86400
+
+# OAuth Providers
+auth.google.enabled=true
+auth.google.client_id=${GOOGLE_CLIENT_ID}
+auth.google.client_secret=${GOOGLE_CLIENT_SECRET}
+
+auth.github.enabled=true
+auth.github.client_id=${GITHUB_CLIENT_ID}
+auth.github.client_secret=${GITHUB_CLIENT_SECRET}
+
+# Security Headers
+security.csp.enabled=true
+security.hsts.enabled=true
+security.xss_protection=true
+security.content_type_nosniff=true
+security.referrer_policy=strict-origin-when-cross-origin
+
+# Threat Detection
+security.ddos_protection=true
+security.ip_whitelist.enabled=false
+security.suspicious_activity_detection=true
+security.automated_blocking=true
+
+# Compliance
+compliance.gdpr.enabled=true
+compliance.ccpa.enabled=true
+compliance.soc2.enabled=true
+compliance.data_retention_days=365
+compliance.audit_logging=true
+
+# =============================================================================
+# PERFORMANCE & MONITORING
+# =============================================================================
+
+# Caching Strategy
+cache.strategy=redis
+cache.ttl.default=3600
+cache.ttl.static_assets=86400
+cache.ttl.api_responses=300
+cache.ttl.user_sessions=1800
+
+# Redis Configuration
+redis.host=${REDIS_HOST}
+redis.port=${REDIS_PORT}
+redis.password=${REDIS_PASSWORD}
+redis.db=0
+redis.max_connections=10
+redis.retry_attempts=3
+
+# Database Performance
+database.connection_pool.min=2
+database.connection_pool.max=10
+database.query_timeout=30000
+database.statement_timeout=60000
+database.idle_timeout=300000
+
+# CDN Configuration
+cdn.enabled=true
+cdn.provider=vercel
+cdn.cache_control=public, max-age=31536000
+cdn.image_optimization=true
+cdn.compression=true
+
+# Application Performance Monitoring
+apm.enabled=true
+apm.provider=vercel
+apm.sample_rate=0.1
+apm.trace_propagation=true
+apm.error_tracking=true
+
+# Analytics
+analytics.enabled=true
+analytics.provider=vercel
+analytics.privacy_mode=true
+analytics.cookie_consent=true
+analytics.data_retention_days=90
+
+# Logging
+logging.level=info
+logging.format=json
+logging.destination=console,file
+logging.file.path=./logs/app.log
+logging.file.max_size=10MB
+logging.file.max_files=5
+
+# Health Checks
+health.enabled=true
+health.endpoint=/api/health
+health.checks=database,redis,external_apis
+health.timeout=5000
+health.interval=30000
+
+# =============================================================================
+# DEPLOYMENT CONFIGURATION
+# =============================================================================
+
+# Environment Settings
+environment.production.domain=${PRODUCTION_DOMAIN}
+environment.staging.domain=${STAGING_DOMAIN}
+environment.development.domain=localhost:3000
+
+# Build Settings
+build.output=standalone
+build.experimental.app_dir=true
+build.experimental.server_components=true
+build.experimental.turbo=true
+
+# Deployment Targets
+deployment.vercel.enabled=true
+deployment.vercel.project_id=${VERCEL_PROJECT_ID}
+deployment.vercel.team_id=${VERCEL_TEAM_ID}
+
+deployment.docker.enabled=true
+deployment.docker.registry=ghcr.io
+deployment.docker.image_name=ai-guided-saas
+
+deployment.kubernetes.enabled=false
+deployment.kubernetes.namespace=ai-guided-saas
+deployment.kubernetes.replicas=3
+
+# Environment Variables
+env.validation.required=OPENAI_API_KEY,NEXTAUTH_SECRET,DATABASE_URL
+env.validation.optional=ANTHROPIC_API_KEY,GOOGLE_AI_API_KEY
+env.encryption.enabled=true
+env.encryption.algorithm=aes-256-gcm
+
+# =============================================================================
+# FEATURE FLAGS
+# =============================================================================
+
+# Core Features
+features.ai_generation.enabled=true
+features.collaboration.enabled=true
+features.template_marketplace.enabled=true
+features.analytics_dashboard.enabled=true
+features.admin_panel.enabled=true
+
+# Experimental Features
+features.experimental.ai_agents.enabled=true
+features.experimental.real_time_collaboration.enabled=true
+features.experimental.advanced_analytics.enabled=false
+features.experimental.ai_code_review.enabled=true
+
+# Beta Features
+features.beta.voice_commands.enabled=false
+features.beta.ai_debugging.enabled=true
+features.beta.automated_testing.enabled=true
+features.beta.performance_optimization.enabled=true
+
+# =============================================================================
+# INTEGRATION CONFIGURATION
+# =============================================================================
+
+# External APIs
+integration.stripe.enabled=true
+integration.stripe.public_key=${STRIPE_PUBLIC_KEY}
+integration.stripe.secret_key=${STRIPE_SECRET_KEY}
+integration.stripe.webhook_secret=${STRIPE_WEBHOOK_SECRET}
+
+integration.supabase.enabled=true
+integration.supabase.url=${SUPABASE_URL}
+integration.supabase.anon_key=${SUPABASE_ANON_KEY}
+integration.supabase.service_role_key=${SUPABASE_SERVICE_ROLE_KEY}
+
+integration.github.enabled=true
+integration.github.app_id=${GITHUB_APP_ID}
+integration.github.private_key=${GITHUB_PRIVATE_KEY}
+integration.github.webhook_secret=${GITHUB_WEBHOOK_SECRET}
+
+# Webhooks
+webhooks.enabled=true
+webhooks.timeout=10000
+webhooks.retry_attempts=3
+webhooks.signature_verification=true
+
+# =============================================================================
+# NOTIFICATION CONFIGURATION
+# =============================================================================
+
+# Email Notifications
+notifications.email.enabled=true
+notifications.email.provider=resend
+notifications.email.api_key=${RESEND_API_KEY}
+notifications.email.from_address=noreply@ai-guided-saas.com
+notifications.email.templates.welcome=welcome-template
+notifications.email.templates.password_reset=password-reset-template
+
+# Push Notifications
+notifications.push.enabled=true
+notifications.push.vapid_public_key=${VAPID_PUBLIC_KEY}
+notifications.push.vapid_private_key=${VAPID_PRIVATE_KEY}
+
+# In-App Notifications
+notifications.in_app.enabled=true
+notifications.in_app.real_time=true
+notifications.in_app.persistence=true
+notifications.in_app.max_history=100
+
+# =============================================================================
+# END OF CONFIGURATION
+# =============================================================================
