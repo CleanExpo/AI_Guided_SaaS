@@ -35,19 +35,20 @@ openai.rate_limit.tokens_per_minute=200000
 # Anthropic Configuration
 anthropic.api.key=${ANTHROPIC_API_KEY}
 anthropic.api.base_url=https://api.anthropic.com
-anthropic.model.primary=claude-3-5-sonnet-20241022
-anthropic.model.fallback=claude-3-5-sonnet-20241022
-anthropic.model.code_generation=claude-3-5-sonnet-20241022
-anthropic.model.orchestrator=claude-3-5-sonnet-20241022
-anthropic.model.blog_agent=claude-3-5-sonnet-20241022
-anthropic.model.link_building=claude-3-5-sonnet-20241022
-anthropic.tokens.max=8192
-anthropic.tokens.context=200000
+anthropic.model.primary=claude-4-sonnet
+anthropic.model.fallback=claude-4-opus
+anthropic.model.code_generation=claude-4-sonnet
+anthropic.model.orchestrator=claude-4-sonnet
+anthropic.model.blog_agent=claude-4-sonnet
+anthropic.model.link_building=claude-4-sonnet
+anthropic.model.opus=claude-4-opus
+anthropic.tokens.max=16384
+anthropic.tokens.context=500000
 anthropic.temperature.default=0.7
 anthropic.temperature.code=0.1
-anthropic.display_name=Claude 3.5 Sonnet
-anthropic.rate_limit.requests_per_minute=50
-anthropic.rate_limit.tokens_per_minute=80000
+anthropic.display_name=Claude 4 Sonnet
+anthropic.rate_limit.requests_per_minute=100
+anthropic.rate_limit.tokens_per_minute=150000
 
 # Google AI Configuration
 google.api.key=${GOOGLE_AI_API_KEY}
@@ -161,9 +162,9 @@ agents.cron_scheduling=true
 
 # Specialized Agent Configuration
 # Orchestrator Agent - Main coordination and task distribution
-agent.orchestrator.model=anthropic.claude-3-5-sonnet-20241022
+agent.orchestrator.model=anthropic.claude-4-sonnet
 agent.orchestrator.temperature=0.3
-agent.orchestrator.max_tokens=8192
+agent.orchestrator.max_tokens=16384
 agent.orchestrator.role=coordinator
 agent.orchestrator.priority=1
 agent.orchestrator.cron_schedule=*/5 * * * *
@@ -193,18 +194,18 @@ agent.collection.priority=4
 agent.collection.cron_schedule=0 */2 * * *
 
 # Blog Agent - Content creation and management
-agent.blog.model=anthropic.claude-3-5-sonnet-20241022
+agent.blog.model=anthropic.claude-4-sonnet
 agent.blog.temperature=0.7
-agent.blog.max_tokens=8192
+agent.blog.max_tokens=16384
 agent.blog.role=content_creator
 agent.blog.priority=5
 agent.blog.cron_schedule=0 8 * * *
 
 # Link Building Agent - SEO link strategy (hybrid model)
-agent.link_building.model_primary=anthropic.claude-3-5-sonnet-20241022
+agent.link_building.model_primary=anthropic.claude-4-sonnet
 agent.link_building.model_secondary=openai.gpt-4o-mini
 agent.link_building.temperature=0.5
-agent.link_building.max_tokens=8192
+agent.link_building.max_tokens=16384
 agent.link_building.role=link_strategist
 agent.link_building.priority=6
 agent.link_building.cron_schedule=0 10 * * 1
@@ -426,6 +427,18 @@ integration.pydantic_ai.api_key=${PYDANTIC_AI_API_KEY}
 integration.pydantic_ai.base_url=https://api.pydantic.ai/v1
 integration.pydantic_ai.model_validation=true
 integration.pydantic_ai.schema_generation=true
+
+integration.perplexity.enabled=true
+integration.perplexity.api_key=${PERPLEXITY_API_KEY}
+integration.perplexity.base_url=https://api.perplexity.ai
+integration.perplexity.search_model=llama-3.1-sonar-small-128k-online
+integration.perplexity.research_model=llama-3.1-sonar-large-128k-online
+integration.perplexity.chat_model=llama-3.1-sonar-huge-128k-online
+integration.perplexity.real_time_search=true
+integration.perplexity.citations=true
+integration.perplexity.max_tokens=4096
+integration.perplexity.temperature=0.2
+integration.perplexity.rate_limit=20
 
 integration.google_search_console.enabled=true
 integration.google_search_console.client_id=${GSC_CLIENT_ID}
