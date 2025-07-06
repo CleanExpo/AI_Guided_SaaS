@@ -15,31 +15,37 @@ ai.provider.research=google
 # OpenAI Configuration
 openai.api.key=${OPENAI_API_KEY}
 openai.api.base_url=https://api.openai.com/v1
-openai.model.primary=gpt-4-turbo-preview
-openai.model.fallback=gpt-3.5-turbo
-openai.model.code_generation=gpt-4
-openai.model.documentation=gpt-3.5-turbo
-openai.model.analysis=gpt-4
-openai.tokens.max=4096
-openai.tokens.context=8192
+openai.model.primary=gpt-4o-mini
+openai.model.fallback=gpt-4o-mini
+openai.model.code_generation=gpt-4o-mini
+openai.model.documentation=gpt-4o-mini
+openai.model.analysis=gpt-4o-mini
+openai.model.product_optimization=gpt-4o-mini
+openai.model.product_tagging=gpt-4o-mini
+openai.model.collection=gpt-4o-mini
+openai.tokens.max=16384
+openai.tokens.context=128000
 openai.temperature.default=0.7
 openai.temperature.code=0.2
 openai.temperature.creative=0.9
-openai.display_name=OpenAI GPT-4
-openai.rate_limit.requests_per_minute=60
-openai.rate_limit.tokens_per_minute=90000
+openai.display_name=OpenAI GPT-4o Mini
+openai.rate_limit.requests_per_minute=500
+openai.rate_limit.tokens_per_minute=200000
 
 # Anthropic Configuration
 anthropic.api.key=${ANTHROPIC_API_KEY}
 anthropic.api.base_url=https://api.anthropic.com
-anthropic.model.primary=claude-3-opus-20240229
-anthropic.model.fallback=claude-3-sonnet-20240229
-anthropic.model.code_generation=claude-3-opus-20240229
-anthropic.tokens.max=4096
+anthropic.model.primary=claude-3-5-sonnet-20241022
+anthropic.model.fallback=claude-3-5-sonnet-20241022
+anthropic.model.code_generation=claude-3-5-sonnet-20241022
+anthropic.model.orchestrator=claude-3-5-sonnet-20241022
+anthropic.model.blog_agent=claude-3-5-sonnet-20241022
+anthropic.model.link_building=claude-3-5-sonnet-20241022
+anthropic.tokens.max=8192
 anthropic.tokens.context=200000
 anthropic.temperature.default=0.7
 anthropic.temperature.code=0.1
-anthropic.display_name=Claude 3 Opus
+anthropic.display_name=Claude 3.5 Sonnet
 anthropic.rate_limit.requests_per_minute=50
 anthropic.rate_limit.tokens_per_minute=80000
 
@@ -147,37 +153,78 @@ optimization.css_optimization=true
 
 # Multi-Agent System
 agents.enabled=true
-agents.max_concurrent=5
-agents.timeout=30000
+agents.max_concurrent=6
+agents.timeout=60000
 agents.retry_attempts=3
 agents.parallel_execution=true
+agents.cron_scheduling=true
 
-# Agent Types
-agent.code_generator.model=openai.gpt-4
-agent.code_generator.temperature=0.2
-agent.code_generator.max_tokens=4096
+# Specialized Agent Configuration
+# Orchestrator Agent - Main coordination and task distribution
+agent.orchestrator.model=anthropic.claude-3-5-sonnet-20241022
+agent.orchestrator.temperature=0.3
+agent.orchestrator.max_tokens=8192
+agent.orchestrator.role=coordinator
+agent.orchestrator.priority=1
+agent.orchestrator.cron_schedule=*/5 * * * *
 
-agent.documentation.model=openai.gpt-3.5-turbo
-agent.documentation.temperature=0.5
-agent.documentation.max_tokens=2048
+# Product Optimization Agent - SEO and product enhancement
+agent.product_optimization.model=openai.gpt-4o-mini
+agent.product_optimization.temperature=0.4
+agent.product_optimization.max_tokens=16384
+agent.product_optimization.role=optimizer
+agent.product_optimization.priority=2
+agent.product_optimization.cron_schedule=0 */6 * * *
 
-agent.testing.model=anthropic.claude-3-sonnet
-agent.testing.temperature=0.3
-agent.testing.max_tokens=3072
+# Product Tagging Agent - Content categorization and tagging
+agent.product_tagging.model=openai.gpt-4o-mini
+agent.product_tagging.temperature=0.2
+agent.product_tagging.max_tokens=8192
+agent.product_tagging.role=tagger
+agent.product_tagging.priority=3
+agent.product_tagging.cron_schedule=0 */4 * * *
 
-agent.review.model=google.gemini-pro
-agent.review.temperature=0.4
-agent.review.max_tokens=2048
+# Collection Agent - Data gathering and aggregation
+agent.collection.model=openai.gpt-4o-mini
+agent.collection.temperature=0.1
+agent.collection.max_tokens=16384
+agent.collection.role=collector
+agent.collection.priority=4
+agent.collection.cron_schedule=0 */2 * * *
 
-agent.optimization.model=openai.gpt-4
-agent.optimization.temperature=0.1
-agent.optimization.max_tokens=4096
+# Blog Agent - Content creation and management
+agent.blog.model=anthropic.claude-3-5-sonnet-20241022
+agent.blog.temperature=0.7
+agent.blog.max_tokens=8192
+agent.blog.role=content_creator
+agent.blog.priority=5
+agent.blog.cron_schedule=0 8 * * *
+
+# Link Building Agent - SEO link strategy (hybrid model)
+agent.link_building.model_primary=anthropic.claude-3-5-sonnet-20241022
+agent.link_building.model_secondary=openai.gpt-4o-mini
+agent.link_building.temperature=0.5
+agent.link_building.max_tokens=8192
+agent.link_building.role=link_strategist
+agent.link_building.priority=6
+agent.link_building.cron_schedule=0 10 * * 1
 
 # Agent Coordination
 coordination.queue_system=redis
 coordination.message_broker=redis
 coordination.state_management=shared
 coordination.conflict_resolution=priority_based
+coordination.task_distribution=round_robin
+coordination.health_monitoring=true
+coordination.performance_tracking=true
+
+# CRON Job Configuration
+cron.enabled=true
+cron.timezone=UTC
+cron.max_concurrent_jobs=3
+cron.job_timeout=300000
+cron.retry_failed_jobs=true
+cron.log_execution=true
 
 # =============================================================================
 # SECURITY & COMPLIANCE
@@ -364,6 +411,46 @@ integration.github.enabled=true
 integration.github.app_id=${GITHUB_APP_ID}
 integration.github.private_key=${GITHUB_PRIVATE_KEY}
 integration.github.webhook_secret=${GITHUB_WEBHOOK_SECRET}
+
+# AI and Search Integrations
+integration.jina_ai.enabled=true
+integration.jina_ai.api_key=${JINA_AI_API_KEY}
+integration.jina_ai.base_url=https://api.jina.ai/v1
+integration.jina_ai.search_endpoint=/search
+integration.jina_ai.reader_endpoint=/reader
+integration.jina_ai.free_tier=true
+integration.jina_ai.rate_limit=100
+
+integration.pydantic_ai.enabled=true
+integration.pydantic_ai.api_key=${PYDANTIC_AI_API_KEY}
+integration.pydantic_ai.base_url=https://api.pydantic.ai/v1
+integration.pydantic_ai.model_validation=true
+integration.pydantic_ai.schema_generation=true
+
+integration.google_search_console.enabled=true
+integration.google_search_console.client_id=${GSC_CLIENT_ID}
+integration.google_search_console.client_secret=${GSC_CLIENT_SECRET}
+integration.google_search_console.refresh_token=${GSC_REFRESH_TOKEN}
+integration.google_search_console.property_url=${GSC_PROPERTY_URL}
+integration.google_search_console.api_quota_limit=200
+
+# Admin Dashboard Configuration
+admin.enabled=true
+admin.access_codes.enabled=true
+admin.access_codes.master=${ADMIN_MASTER_CODE}
+admin.access_codes.readonly=${ADMIN_READONLY_CODE}
+admin.access_codes.agent_control=${ADMIN_AGENT_CODE}
+admin.session_timeout=3600
+admin.multi_factor_auth=true
+admin.audit_logging=true
+
+# User Dashboard Configuration
+user_dashboard.enabled=true
+user_dashboard.agent_control=true
+user_dashboard.results_viewing=true
+user_dashboard.real_time_updates=true
+user_dashboard.export_capabilities=true
+user_dashboard.notification_preferences=true
 
 # Webhooks
 webhooks.enabled=true
