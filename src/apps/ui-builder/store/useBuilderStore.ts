@@ -97,17 +97,21 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
     })),
   saveProject: () => {
     const { components } = get();
-    localStorage.setItem('ai_builder_project', JSON.stringify(components));
-    alert('Project saved successfully!');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('ai_builder_project', JSON.stringify(components));
+      alert('Project saved successfully!');
+    }
   },
   loadProject: () => {
-    const saved = localStorage.getItem('ai_builder_project');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      set({ components: parsed, selectedId: null });
-      alert('Project loaded successfully!');
-    } else {
-      alert('No saved project found!');
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('ai_builder_project');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        set({ components: parsed, selectedId: null });
+        alert('Project loaded successfully!');
+      } else {
+        alert('No saved project found!');
+      }
     }
   },
   reset: () => set({ components: [], selectedId: null }),

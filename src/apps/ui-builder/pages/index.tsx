@@ -1,4 +1,6 @@
 // apps/ui-builder/pages/index.tsx
+'use client';
+
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import BuilderCanvas from '../components/BuilderCanvas';
