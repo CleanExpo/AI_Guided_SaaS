@@ -18,10 +18,27 @@ type BuilderStore = {
   addComponent: (type: string) => void;
   selectComponent: (id: string) => void;
   updateComponentProps: (id: string, newProps: ComponentProps) => void;
+  saveProject: () => void;
+  loadProject: () => void;
   reset: () => void;
 };
 
-export const useBuilderStore = create<BuilderStore>((set) => ({
+function getDefaultProps(type: string): ComponentProps {
+  switch (type) {
+    case 'button':
+      return { label: 'Click Me' };
+    case 'input':
+      return { placeholder: 'Enter text...' };
+    case 'card':
+      return { title: 'Card Title', body: 'Card body text.' };
+    case 'hero':
+      return { heading: 'Welcome!', subheading: 'Start building.' };
+    default:
+      return {};
+  }
+}
+
+export const useBuilderStore = create<BuilderStore>((set, get) => ({
   components: [],
   selectedId: null,
   addComponent: (type) =>
@@ -31,12 +48,7 @@ export const useBuilderStore = create<BuilderStore>((set) => ({
         {
           id: `${type}-${Date.now()}`,
           type,
-          props: {
-            ...(type === 'button' && { label: 'Click Me' }),
-            ...(type === 'input' && { placeholder: 'Enter text...' }),
-            ...(type === 'card' && { title: 'Card Title', body: 'Card body text.' }),
-            ...(type === 'hero' && { heading: 'Welcome!', subheading: 'Start building.' }),
-          },
+          props: getDefaultProps(type),
         },
       ],
     })),
@@ -47,5 +59,20 @@ export const useBuilderStore = create<BuilderStore>((set) => ({
         c.id === id ? { ...c, props: { ...c.props, ...newProps } } : c
       ),
     })),
+  saveProject: () => {
+    const { components } = get();
+    localStorage.setItem('ai_builder_project', JSON.stringify(components));
+    alert('Project saved successfully!');
+  },
+  loadProject: () => {
+    const saved = localStorage.getItem('ai_builder_project');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      set({ components: parsed, selectedId: null });
+      alert('Project loaded successfully!');
+    } else {
+      alert('No saved project found!');
+    }
+  },
   reset: () => set({ components: [], selectedId: null }),
 }));
