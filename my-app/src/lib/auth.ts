@@ -3,10 +3,13 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { createClient } from '@supabase/supabase-js'
 import bcrypt from 'bcryptjs'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Handle missing environment variables gracefully for demo deployment
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase = supabaseUrl && supabaseKey 
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
 
 export const authOptions = {
   providers: [
@@ -21,7 +24,7 @@ export const authOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials: any) {
-        if (!credentials?.email || !credentials?.password) {
+        if (!credentials?.email || !credentials?.password || !supabase) {
           return null
         }
 
@@ -67,7 +70,7 @@ export const authOptions = {
       return session
     },
     async signIn({ user, account }: any) {
-      if (account?.provider === 'google') {
+      if (account?.provider === 'google' && supabase) {
         const { data: existingUser } = await supabase
           .from('users')
           .select('id')
