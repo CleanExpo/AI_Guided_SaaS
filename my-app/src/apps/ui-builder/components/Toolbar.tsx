@@ -1,4 +1,6 @@
 // apps/ui-builder/components/Toolbar.tsx
+'use client'
+
 import React, { useState } from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 

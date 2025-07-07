@@ -1,4 +1,6 @@
 // apps/ui-builder/components/AssistantPrompt.tsx
+'use client'
+
 import React, { useState } from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 import { logAssistantInteraction, generateCausalContext } from '../../../packages/causal-engine/assistant-utils';

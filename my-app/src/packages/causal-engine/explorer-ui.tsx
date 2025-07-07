@@ -1,4 +1,6 @@
 // packages/causal-engine/explorer-ui.tsx
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import { logger } from './logger';
 import { CausalScorer } from './scorer';
