@@ -11,7 +11,7 @@ export default function ComponentPropsEditor() {
 
   if (!selectedComponent) return null;
 
-  const { type, props } = selectedComponent;
+  const { type, props, schema } = selectedComponent;
 
   const handleChange = (key: string, value: string) => {
     updateProps(selectedComponent.id, { [key]: value });
@@ -21,14 +21,23 @@ export default function ComponentPropsEditor() {
     <div className="p-4 bg-white border-t border-gray-300">
       <h2 className="text-lg font-semibold mb-2">Edit {type} Properties</h2>
       <form className="space-y-3">
-        {Object.entries(props).map(([key, value]) => (
+        {schema?.map(({ key, label, type: inputType }) => (
           <div key={key}>
-            <label className="block text-sm font-medium text-gray-700">{key}</label>
-            <input
-              className="w-full px-3 py-1 border rounded text-sm"
-              value={value}
-              onChange={(e) => handleChange(key, e.target.value)}
-            />
+            <label className="block text-sm font-medium text-gray-700">{label}</label>
+            {inputType === 'textarea' ? (
+              <textarea
+                className="w-full px-3 py-1 border rounded text-sm"
+                value={props[key] || ''}
+                onChange={(e) => handleChange(key, e.target.value)}
+                rows={3}
+              />
+            ) : (
+              <input
+                className="w-full px-3 py-1 border rounded text-sm"
+                value={props[key] || ''}
+                onChange={(e) => handleChange(key, e.target.value)}
+              />
+            )}
           </div>
         ))}
       </form>

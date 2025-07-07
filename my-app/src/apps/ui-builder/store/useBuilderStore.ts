@@ -6,10 +6,17 @@ type ComponentProps = {
   [key: string]: string;
 };
 
+type PropSchema = {
+  key: string;
+  label: string;
+  type: 'text' | 'textarea';
+};
+
 type ComponentInstance = {
   id: string;
   type: string;
   props: ComponentProps;
+  schema?: PropSchema[];
 };
 
 type BuilderStore = {
@@ -33,8 +40,36 @@ function getDefaultProps(type: string): ComponentProps {
       return { title: 'Card Title', body: 'Card body text.' };
     case 'hero':
       return { heading: 'Welcome!', subheading: 'Start building.' };
+    case 'two-col':
+      return { left: 'Left side content', right: 'Right side content' };
     default:
       return {};
+  }
+}
+
+function getDefaultSchema(type: string): PropSchema[] {
+  switch (type) {
+    case 'button':
+      return [{ key: 'label', label: 'Button Label', type: 'text' }];
+    case 'card':
+      return [
+        { key: 'title', label: 'Card Title', type: 'text' },
+        { key: 'body', label: 'Card Body', type: 'textarea' },
+      ];
+    case 'input':
+      return [{ key: 'placeholder', label: 'Placeholder', type: 'text' }];
+    case 'hero':
+      return [
+        { key: 'heading', label: 'Heading', type: 'text' },
+        { key: 'subheading', label: 'Subheading', type: 'text' },
+      ];
+    case 'two-col':
+      return [
+        { key: 'left', label: 'Left Column Text', type: 'textarea' },
+        { key: 'right', label: 'Right Column Text', type: 'textarea' },
+      ];
+    default:
+      return [];
   }
 }
 
@@ -49,6 +84,7 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
           id: `${type}-${Date.now()}`,
           type,
           props: getDefaultProps(type),
+          schema: getDefaultSchema(type),
         },
       ],
     })),

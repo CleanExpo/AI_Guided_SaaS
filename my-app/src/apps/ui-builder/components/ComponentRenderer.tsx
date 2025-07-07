@@ -40,6 +40,18 @@ export default function ComponentRenderer({ type, props = {} }: Props) {
         </div>
       );
 
+    case 'two-col':
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <div className="p-4 border rounded bg-gray-50">
+            {props.left || 'Left side content'}
+          </div>
+          <div className="p-4 border rounded bg-gray-50">
+            {props.right || 'Right side content'}
+          </div>
+        </div>
+      );
+
     default:
       return (
         <div className="text-red-500 font-mono">Unknown component: {type}</div>
