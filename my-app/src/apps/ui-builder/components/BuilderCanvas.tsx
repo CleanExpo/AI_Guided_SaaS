@@ -1,11 +1,26 @@
 // apps/ui-builder/components/BuilderCanvas.tsx
 import React from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
+import { logger } from '../../../packages/causal-engine/logger';
 
 export default function BuilderCanvas() {
   const components = useBuilderStore((state) => state.components);
   const selectComponent = useBuilderStore((state) => state.selectComponent);
   const selectedId = useBuilderStore((state) => state.selectedId);
+
+  const handleComponentClick = (component: any) => {
+    selectComponent(component.id);
+    
+    // Log component selection as "kept" action
+    logger.log({
+      componentId: component.id,
+      componentType: component.type,
+      page: 'ui-builder',
+      promptContext: 'User selected component for editing',
+      action: 'kept',
+      timestamp: Date.now(),
+    });
+  };
 
   return (
     <main className="flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto">
@@ -16,7 +31,7 @@ export default function BuilderCanvas() {
           components.map((c) => (
             <div
               key={c.id}
-              onClick={() => selectComponent(c.id)}
+              onClick={() => handleComponentClick(c)}
               className={`p-4 bg-white shadow-md border rounded cursor-pointer ${
                 c.id === selectedId ? 'ring-2 ring-blue-500' : ''
               }`}
