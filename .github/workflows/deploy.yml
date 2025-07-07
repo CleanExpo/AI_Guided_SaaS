@@ -128,7 +128,7 @@ jobs:
           echo "preview_url=$url" >> $GITHUB_OUTPUT
           
       - name: Comment PR with preview URL
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: github.event_name == 'pull_request'
         with:
           script: |
@@ -170,7 +170,7 @@ jobs:
           curl -f ${{ steps.deploy.outputs.production_url }}/api/health || exit 1
           
       - name: Notify deployment success
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.repos.createCommitStatus({
