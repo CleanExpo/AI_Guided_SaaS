@@ -1,0 +1,47 @@
+// apps/ui-builder/components/ComponentRenderer.tsx
+import React from 'react';
+
+type Props = {
+  type: string;
+};
+
+export default function ComponentRenderer({ type }: Props) {
+  switch (type) {
+    case 'button':
+      return (
+        <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Click Me
+        </button>
+      );
+
+    case 'card':
+      return (
+        <div className="p-6 border rounded shadow bg-white w-full max-w-md">
+          <h3 className="text-lg font-semibold mb-2">Card Title</h3>
+          <p className="text-sm text-gray-600">This is a sample card component.</p>
+        </div>
+      );
+
+    case 'input':
+      return (
+        <input
+          type="text"
+          placeholder="Enter text..."
+          className="px-3 py-2 border rounded w-full max-w-sm"
+        />
+      );
+
+    case 'hero':
+      return (
+        <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white p-8 rounded shadow-md w-full max-w-2xl">
+          <h1 className="text-3xl font-bold mb-2">Welcome to Your SaaS!</h1>
+          <p className="text-lg">Start building something amazing without code.</p>
+        </div>
+      );
+
+    default:
+      return (
+        <div className="text-red-500 font-mono">Unknown component: {type}</div>
+      );
+  }
+}
