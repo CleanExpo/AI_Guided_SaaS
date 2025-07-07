@@ -1,14 +1,14 @@
 import { z } from 'zod'
 
-// Environment variable schema
+// Environment variable schema with build-time safe defaults
 const envSchema = z.object({
   // Next.js
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  NEXTAUTH_URL: z.string().url().default('http://localhost:3000'),
-  NEXTAUTH_SECRET: z.string().min(32),
+  NEXTAUTH_URL: z.string().default('http://localhost:3000'),
+  NEXTAUTH_SECRET: z.string().default('development-secret-that-is-at-least-32-characters-long-for-jwt-encryption'),
 
   // Database
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
 
   // Authentication
@@ -17,25 +17,49 @@ const envSchema = z.object({
 
   // AI Services
   OPENAI_API_KEY: z.string().optional(),
+  ANTHROPIC_API_KEY: z.string().optional(),
+  PERPLEXITY_API_KEY: z.string().optional(),
+
+  // Email Service
+  RESEND_API_KEY: z.string().optional(),
 
   // Payment
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
+
+  // App Configuration
+  APP_URL: z.string().default('http://localhost:3000'),
+  APP_NAME: z.string().default('AI Guided SaaS Builder'),
+
+  // Feature Flags
+  ANALYTICS_ENABLED: z.string().default('true'),
+  ENABLE_COLLABORATION: z.string().default('true'),
+  ENABLE_TEMPLATES: z.string().default('true'),
+  ENABLE_ANALYTICS: z.string().default('true'),
+  ENABLE_ADMIN_PANEL: z.string().default('true'),
 })
 
-// Parse and validate environment variables
+// Parse and validate environment variables with graceful fallbacks
 let env: z.infer<typeof envSchema>
 
 try {
   env = envSchema.parse(process.env)
 } catch (error) {
+  // During build time, use safe defaults
   console.warn('Environment validation failed, using defaults:', error)
-  env = {
-    NODE_ENV: 'development',
-    NEXTAUTH_URL: 'http://localhost:3000',
-    NEXTAUTH_SECRET: 'development-secret-that-is-at-least-32-characters-long-for-jwt-encryption',
-  } as z.infer<typeof envSchema>
+  env = envSchema.parse({
+    NODE_ENV: process.env.NODE_ENV || 'development',
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'development-secret-that-is-at-least-32-characters-long-for-jwt-encryption',
+    APP_URL: process.env.APP_URL || 'http://localhost:3000',
+    APP_NAME: process.env.APP_NAME || 'AI Guided SaaS Builder',
+    ANALYTICS_ENABLED: process.env.ANALYTICS_ENABLED || 'true',
+    ENABLE_COLLABORATION: process.env.ENABLE_COLLABORATION || 'true',
+    ENABLE_TEMPLATES: process.env.ENABLE_TEMPLATES || 'true',
+    ENABLE_ANALYTICS: process.env.ENABLE_ANALYTICS || 'true',
+    ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL || 'true',
+  })
 }
 
 export { env }

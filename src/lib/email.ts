@@ -33,7 +33,7 @@ class EmailService {
 
   constructor() {
     this.apiKey = process.env.RESEND_API_KEY || '';
-    if (!this.apiKey) {
+    if (!this.apiKey && process.env.NODE_ENV !== 'development') {
       console.warn('RESEND_API_KEY not found in environment variables');
     }
   }
