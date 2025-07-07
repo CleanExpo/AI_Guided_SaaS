@@ -3,22 +3,23 @@ import React from 'react';
 
 type Props = {
   type: string;
+  props?: { [key: string]: string };
 };
 
-export default function ComponentRenderer({ type }: Props) {
+export default function ComponentRenderer({ type, props = {} }: Props) {
   switch (type) {
     case 'button':
       return (
         <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Click Me
+          {props.label || 'Click Me'}
         </button>
       );
 
     case 'card':
       return (
         <div className="p-6 border rounded shadow bg-white w-full max-w-md">
-          <h3 className="text-lg font-semibold mb-2">Card Title</h3>
-          <p className="text-sm text-gray-600">This is a sample card component.</p>
+          <h3 className="text-lg font-semibold mb-2">{props.title || 'Card Title'}</h3>
+          <p className="text-sm text-gray-600">{props.body || 'This is a sample card component.'}</p>
         </div>
       );
 
@@ -26,7 +27,7 @@ export default function ComponentRenderer({ type }: Props) {
       return (
         <input
           type="text"
-          placeholder="Enter text..."
+          placeholder={props.placeholder || 'Enter text...'}
           className="px-3 py-2 border rounded w-full max-w-sm"
         />
       );
@@ -34,8 +35,8 @@ export default function ComponentRenderer({ type }: Props) {
     case 'hero':
       return (
         <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white p-8 rounded shadow-md w-full max-w-2xl">
-          <h1 className="text-3xl font-bold mb-2">Welcome to Your SaaS!</h1>
-          <p className="text-lg">Start building something amazing without code.</p>
+          <h1 className="text-3xl font-bold mb-2">{props.heading || 'Welcome to Your SaaS!'}</h1>
+          <p className="text-lg">{props.subheading || 'Start building something amazing without code.'}</p>
         </div>
       );
 

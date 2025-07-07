@@ -3,6 +3,7 @@ import React from 'react';
 import Sidebar from '../components/Sidebar';
 import BuilderCanvas from '../components/BuilderCanvas';
 import PreviewPane from '../components/PreviewPane';
+import ComponentPropsEditor from '../components/ComponentPropsEditor';
 
 export default function UIBuilderHome() {
   return (
@@ -11,6 +12,7 @@ export default function UIBuilderHome() {
       <div className="flex flex-col flex-grow">
         <BuilderCanvas />
         <PreviewPane />
+        <ComponentPropsEditor />
       </div>
     </div>
   );

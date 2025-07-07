@@ -4,6 +4,8 @@ import { useBuilderStore } from '../store/useBuilderStore';
 
 export default function BuilderCanvas() {
   const components = useBuilderStore((state) => state.components);
+  const selectComponent = useBuilderStore((state) => state.selectComponent);
+  const selectedId = useBuilderStore((state) => state.selectedId);
 
   return (
     <main className="flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto">
@@ -14,9 +16,12 @@ export default function BuilderCanvas() {
           components.map((c) => (
             <div
               key={c.id}
-              className="p-4 bg-white shadow-md border rounded text-gray-700"
+              onClick={() => selectComponent(c.id)}
+              className={`p-4 bg-white shadow-md border rounded cursor-pointer ${
+                c.id === selectedId ? 'ring-2 ring-blue-500' : ''
+              }`}
             >
-              📦 {c.type} component placeholder
+              📦 {c.type} component (click to edit)
             </div>
           ))
         )}

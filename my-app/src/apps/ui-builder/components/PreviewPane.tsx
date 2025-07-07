@@ -15,7 +15,7 @@ export default function PreviewPane() {
         ) : (
           components.map((c) => (
             <div key={c.id}>
-              <ComponentRenderer type={c.type} />
+              <ComponentRenderer type={c.type} props={c.props} />
             </div>
           ))
         )}
