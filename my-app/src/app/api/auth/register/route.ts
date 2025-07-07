@@ -3,10 +3,13 @@ import bcrypt from 'bcryptjs'
 import { createClient } from '@supabase/supabase-js'
 import { z } from 'zod'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Handle missing environment variables gracefully for demo deployment
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase = supabaseUrl && supabaseKey 
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -18,6 +21,14 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { name, email, password } = registerSchema.parse(body)
+
+    // Return error if Supabase is not configured
+    if (!supabase) {
+      return NextResponse.json(
+        { error: 'Database not configured for demo deployment' },
+        { status: 503 }
+      )
+    }
 
     // Check if user already exists
     const { data: existingUser } = await supabase
