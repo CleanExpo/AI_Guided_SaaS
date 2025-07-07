@@ -1,0 +1,271 @@
+/* UI Builder Custom Styles */
+
+.ui-builder {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Canvas Grid */
+.canvas-grid {
+  background-image: 
+    linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Component Selection */
+.component-selected {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.component-hover {
+  outline: 1px solid #93c5fd;
+  outline-offset: 1px;
+}
+
+/* Drag and Drop */
+.drag-preview {
+  opacity: 0.8;
+  transform: rotate(5deg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.drop-zone-active {
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 2px dashed #3b82f6;
+}
+
+/* Resize Handles */
+.resize-handle {
+  position: absolute;
+  background: #3b82f6;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+}
+
+.resize-handle-se {
+  bottom: -4px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  cursor: se-resize;
+}
+
+.resize-handle-ne {
+  top: -4px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  cursor: ne-resize;
+}
+
+.resize-handle-sw {
+  bottom: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  cursor: sw-resize;
+}
+
+.resize-handle-nw {
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  cursor: nw-resize;
+}
+
+/* Component Toolbar */
+.component-toolbar {
+  position: absolute;
+  top: -32px;
+  left: 0;
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.component-toolbar button {
+  padding: 4px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.component-toolbar button:hover {
+  background: #f3f4f6;
+}
+
+.component-toolbar button.delete:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Sidebar Scrollbar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Canvas Scrollbar */
+.canvas-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.canvas-scroll::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.canvas-scroll::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.canvas-scroll::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Component Animation */
+.component-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.component-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.component-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.component-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+/* Loading States */
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  border-top-color: #3b82f6;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ui-builder {
+    font-size: 14px;
+  }
+  
+  .component-toolbar {
+    top: -28px;
+  }
+  
+  .component-toolbar button {
+    padding: 3px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .canvas-grid {
+    background-image: 
+      linear-gradient(to right, #374151 1px, transparent 1px),
+      linear-gradient(to bottom, #374151 1px, transparent 1px);
+  }
+  
+  .component-toolbar {
+    background: rgba(31, 41, 55, 0.95);
+    border-color: #4b5563;
+  }
+  
+  .component-toolbar button:hover {
+    background: #374151;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .ui-builder .sidebar,
+  .ui-builder .toolbar,
+  .component-toolbar {
+    display: none !important;
+  }
+  
+  .ui-builder .canvas {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus Styles */
+.ui-builder button:focus,
+.ui-builder input:focus,
+.ui-builder select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .component-selected {
+    outline: 3px solid #000000;
+  }
+  
+  .component-toolbar {
+    border: 2px solid #000000;
+  }
+}
