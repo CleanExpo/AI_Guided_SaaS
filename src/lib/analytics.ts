@@ -84,9 +84,9 @@ export class AnalyticsService {
       const totalTemplates = await this.getTotalTemplates()
       
       // Get revenue metrics
-      const revenueData = await this.getRevenueMetrics()
+      const revenueData = await this.getBasicRevenueMetrics()
       const totalRevenue = revenueData.totalRevenue
-      const monthlyRevenue = revenueData.monthlyRecurringRevenue
+      const monthlyRevenue = revenueData.monthlyRevenue
       
       // Calculate conversion rate
       const conversionRate = await this.getConversionRate()
@@ -328,7 +328,7 @@ export class AnalyticsService {
     return result[0]?.count || 0
   }
 
-  private static async getRevenueMetrics(): Promise<{ totalRevenue: number; monthlyRevenue: number }> {
+  private static async getBasicRevenueMetrics(): Promise<{ totalRevenue: number; monthlyRevenue: number }> {
     const totalResult = await DatabaseService.query(`
       SELECT SUM(amount) as total FROM payments WHERE status = 'succeeded'
     `)

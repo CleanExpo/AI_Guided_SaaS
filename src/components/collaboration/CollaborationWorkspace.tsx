@@ -145,7 +145,7 @@ export default function CollaborationWorkspace({
     })
 
     socket.on('cursor_update', (data: { userId: string; user: CollaborationUser; position: CursorPosition }) => {
-      if (data.userId !== session?.user?.id) {
+      if (data.userId !== (session?.user as any)?.id) {
         setCursors(prev => {
           const newCursors = new Map(prev)
           newCursors.set(data.userId, { user: data.user, position: data.position })

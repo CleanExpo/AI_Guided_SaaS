@@ -538,6 +538,12 @@ export class AdminService {
           status: 'warn' as const,
           message: 'High WebSocket connection count',
           responseTime: 200
+        },
+        {
+          name: 'Cache Service',
+          status: 'fail' as const,
+          message: 'Redis connection timeout',
+          responseTime: 5000
         }
       ]
 
