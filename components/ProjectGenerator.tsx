@@ -55,10 +55,10 @@ ${config.features.map(feature => `- ${feature}`).join('\n')}
 
 ## Technology Stack
 
-- **Frontend:** ${config.technology.frontend}
-- **Backend:** ${config.technology.backend}
-- **Database:** ${config.technology.database}
-- **Hosting:** ${config.technology.hosting}
+- **Frontend:** ${config.technology?.frontend || 'React'}
+- **Backend:** ${config.technology?.backend || 'Node.js'}
+- **Database:** ${config.technology?.database || 'PostgreSQL'}
+- **Hosting:** ${config.technology?.hosting || 'Vercel'}
 
 ## Target Audience
 
@@ -77,7 +77,7 @@ npm run dev
 
 ## Development
 
-This project was generated using AI-Guided SaaS Builder with the ${config.persona.name} persona.
+This project was generated using AI-Guided SaaS Builder with the ${config.persona?.name || 'Developer'} persona.
 `
   })
 
@@ -270,19 +270,19 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="text-blue-700 font-medium">Frontend:</span>
-                <span className="ml-2">{config.technology.frontend}</span>
+                <span className="ml-2">{config.technology?.frontend || 'React'}</span>
               </div>
               <div>
                 <span className="text-blue-700 font-medium">Backend:</span>
-                <span className="ml-2">{config.technology.backend}</span>
+                <span className="ml-2">{config.technology?.backend || 'Node.js'}</span>
               </div>
               <div>
                 <span className="text-blue-700 font-medium">Database:</span>
-                <span className="ml-2">{config.technology.database}</span>
+                <span className="ml-2">{config.technology?.database || 'PostgreSQL'}</span>
               </div>
               <div>
                 <span className="text-blue-700 font-medium">Hosting:</span>
-                <span className="ml-2">{config.technology.hosting}</span>
+                <span className="ml-2">{config.technology?.hosting || 'Vercel'}</span>
               </div>
             </div>
           </div>

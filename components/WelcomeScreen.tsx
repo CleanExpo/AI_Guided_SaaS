@@ -14,50 +14,62 @@ const personas: Persona[] = [
   {
     id: 'ai-architect',
     name: 'AI Architect',
-    description: 'Expert in AI-driven development and intelligent automation',
-    expertise: ['Machine Learning', 'AI Integration', 'Automation', 'Data Science'],
-    tone: 'Technical and innovative',
-    avatar: '🤖'
+    description: 'Expert in AI-powered development workflows and intelligent automation',
+    expertise: ['Machine Learning', 'AI Integration', 'Automation', 'Data Processing'],
+    tone: 'Technical and forward-thinking',
+    avatar: '🤖',
+    role: 'architect',
+    color: 'blue'
   },
   {
     id: 'fullstack-wizard',
     name: 'Fullstack Wizard',
-    description: 'Master of both frontend and backend development',
-    expertise: ['React', 'Node.js', 'Databases', 'API Design'],
-    tone: 'Comprehensive and practical',
-    avatar: '🧙‍♂️'
+    description: 'Master of both frontend and backend development with modern frameworks',
+    expertise: ['React', 'Node.js', 'Database Design', 'API Development'],
+    tone: 'Comprehensive and detail-oriented',
+    avatar: '🧙‍♂️',
+    role: 'developer',
+    color: 'purple'
   },
   {
     id: 'ui-designer',
-    name: 'UI/UX Designer',
-    description: 'Specialist in creating beautiful and intuitive user experiences',
-    expertise: ['Design Systems', 'User Research', 'Prototyping', 'Accessibility'],
+    name: 'UI Designer',
+    description: 'Focused on creating beautiful, user-friendly interfaces',
+    expertise: ['UI/UX Design', 'Responsive Design', 'Design Systems', 'User Research'],
     tone: 'Creative and user-focused',
-    avatar: '🎨'
+    avatar: '🎨',
+    role: 'designer',
+    color: 'pink'
   },
   {
     id: 'devops-engineer',
     name: 'DevOps Engineer',
-    description: 'Expert in deployment, scaling, and infrastructure management',
-    expertise: ['Cloud Platforms', 'CI/CD', 'Monitoring', 'Security'],
-    tone: 'Systematic and reliable',
-    avatar: '⚙️'
+    description: 'Specializes in deployment, scaling, and infrastructure management',
+    expertise: ['CI/CD', 'Cloud Platforms', 'Containerization', 'Monitoring'],
+    tone: 'Systematic and reliability-focused',
+    avatar: '⚙️',
+    role: 'devops',
+    color: 'green'
   },
   {
     id: 'startup-founder',
     name: 'Startup Founder',
-    description: 'Focused on rapid MVP development and market validation',
-    expertise: ['MVP Development', 'Market Research', 'Growth Hacking', 'Lean Startup'],
-    tone: 'Fast-paced and results-driven',
-    avatar: '🚀'
+    description: 'Entrepreneurial mindset focused on MVP development and rapid iteration',
+    expertise: ['MVP Development', 'Market Validation', 'Lean Startup', 'Growth Hacking'],
+    tone: 'Energetic and results-driven',
+    avatar: '🚀',
+    role: 'founder',
+    color: 'orange'
   },
   {
     id: 'enterprise-consultant',
     name: 'Enterprise Consultant',
-    description: 'Specialist in large-scale, enterprise-grade solutions',
-    expertise: ['Enterprise Architecture', 'Scalability', 'Security', 'Compliance'],
+    description: 'Expert in large-scale applications with enterprise-grade requirements',
+    expertise: ['Enterprise Architecture', 'Security', 'Scalability', 'Compliance'],
     tone: 'Professional and thorough',
-    avatar: '🏢'
+    avatar: '🏢',
+    role: 'consultant',
+    color: 'gray'
   }
 ]
 

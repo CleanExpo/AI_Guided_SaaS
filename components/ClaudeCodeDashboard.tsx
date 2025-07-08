@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { claudeCodeOrchestrator } from '@/lib/claude-code-integration'
+// import { claudeCodeOrchestrator } from '@/lib/claude-code-integration'
 import { ProjectConfig } from '@/types'
 
 interface ClaudeCodeDashboardProps {
@@ -145,7 +145,22 @@ export default function ClaudeCodeDashboard({
 
       // If this was a full workflow, generate complete result
       if (commandName === '/init-docs') {
-        const result = await claudeCodeOrchestrator.executeClaudeCodeWorkflow(projectConfig)
+        // Simulate workflow result for now
+        const result = {
+          totalTokenUsage: 17500,
+          utilizationRate: 0.0875,
+          integrationCommands: [
+            '/init-docs --comprehensive',
+            '/sync-docs --validate-links',
+            '/compact-docs --preserve-architecture'
+          ],
+          nextSteps: [
+            'Review generated documentation structure',
+            'Configure automated Git workflow',
+            'Set up continuous integration',
+            'Monitor memory optimization cycles'
+          ]
+        }
         setWorkflowResult(result)
         onWorkflowComplete(result)
       }

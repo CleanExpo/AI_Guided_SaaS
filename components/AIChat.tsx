@@ -62,7 +62,8 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
     {
       id: '1',
       role: 'assistant',
-      content: `Hello! I'm your ${persona.name} assistant. I'll help you build an amazing project tailored to your needs. Let's start by understanding what you want to create.`,
+      sender: 'assistant',
+      content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS application today?',
       timestamp: new Date()
     }
   ])
@@ -107,6 +108,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
       const newMessage: ChatMessage = {
         id: Date.now().toString(),
         role: 'assistant',
+        sender: 'assistant',
         content: question.question,
         timestamp: new Date()
       }
@@ -120,6 +122,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
+      sender: 'user',
       content: response,
       timestamp: new Date()
     }
@@ -165,7 +168,8 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
       const completionMessage: ChatMessage = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: `Perfect! I have all the information I need. Let me generate your ${finalData.name} project with the features you've selected. This will take just a moment...`,
+        sender: 'assistant',
+        content: 'I understand you want to generate code. This feature will be implemented to integrate with your development workflow.',
         timestamp: new Date()
       }
       setMessages(prev => [...prev, completionMessage])

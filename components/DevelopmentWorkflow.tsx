@@ -92,11 +92,11 @@ export default function DevelopmentWorkflow({ projectConfig, onPhaseComplete }: 
               <div className="text-sm text-gray-600">Features</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">{projectConfig.technology.frontend}</div>
+              <div className="text-2xl font-bold text-green-600">{projectConfig.technology?.frontend || 'React'}</div>
               <div className="text-sm text-gray-600">Frontend</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">{projectConfig.technology.backend}</div>
+              <div className="text-2xl font-bold text-purple-600">{projectConfig.technology?.backend || 'Node.js'}</div>
               <div className="text-sm text-gray-600">Backend</div>
             </div>
             <div className="text-center">
@@ -204,7 +204,7 @@ export default function DevelopmentWorkflow({ projectConfig, onPhaseComplete }: 
       {/* AI Recommendations */}
       <Card>
         <CardHeader>
-          <CardTitle>AI Recommendations for {projectConfig.persona.name}</CardTitle>
+          <CardTitle>AI Recommendations for {projectConfig.persona?.name || 'Developer'}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -222,7 +222,7 @@ export default function DevelopmentWorkflow({ projectConfig, onPhaseComplete }: 
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>• Use TypeScript for better code quality</li>
                 <li>• Implement proper error handling</li>
-                <li>• Follow {projectConfig.technology.frontend} conventions</li>
+                <li>• Follow {projectConfig.technology?.frontend || 'React'} conventions</li>
                 <li>• Set up continuous integration</li>
               </ul>
             </div>

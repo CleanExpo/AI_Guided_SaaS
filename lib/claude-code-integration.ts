@@ -139,7 +139,7 @@ export class InitDocsCommand implements ClaudeCommand {
 
 ## 🎯 CORE CAPABILITIES
 - **Features**: ${projectContext.features.join(', ')}
-- **Technology Stack**: ${Object.values(projectContext.technology).join(', ')}
+- **Technology Stack**: ${projectContext.technology ? Object.values(projectContext.technology).join(', ') : 'Not specified'}
 - **Target Audience**: ${projectContext.targetAudience}
 
 ## 📊 CURRENT STATE
@@ -169,14 +169,14 @@ export class InitDocsCommand implements ClaudeCommand {
 ## 📋 PROJECT OVERVIEW
 **Name**: ${projectContext.name}
 **Timeline**: ${projectContext.timeline}
-**Persona**: ${projectContext.persona.name} (${projectContext.persona.expertise.join(', ')})
+**Persona**: ${projectContext.persona?.name || 'Developer'} (${projectContext.persona?.expertise?.join(', ') || 'General development'})
 
 ## 🏗️ ARCHITECTURE OVERVIEW
 ### Technology Stack
-- **Frontend**: ${projectContext.technology.frontend}
-- **Backend**: ${projectContext.technology.backend}
-- **Database**: ${projectContext.technology.database}
-- **Hosting**: ${projectContext.technology.hosting}
+- **Frontend**: ${projectContext.technology?.frontend || 'React'}
+- **Backend**: ${projectContext.technology?.backend || 'Node.js'}
+- **Database**: ${projectContext.technology?.database || 'PostgreSQL'}
+- **Hosting**: ${projectContext.technology?.hosting || 'Vercel'}
 
 ### Code Structure Analysis
 - **Components**: ${discoveryResults.projectStructure.components} files
