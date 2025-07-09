@@ -1,5 +1,6 @@
 'use client'
 
+// Force deployment trigger - 2025-01-09
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -189,7 +190,7 @@ export default function Dashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            Welcome back{session?.user?.name ? `, ${session.user.name}` : ''}!
+          Welcome back{session?.user?.name ? `, ${session.user.name}` : ""}!
           </h1>
           <p className="text-muted-foreground">
             Here's what's happening with your AI-guided SaaS platform today.
