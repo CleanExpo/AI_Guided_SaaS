@@ -43,8 +43,6 @@ const config: Config = {
           '800': '#1e293b',
           '900': '#0f172a',
         },
-      },
-      colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
