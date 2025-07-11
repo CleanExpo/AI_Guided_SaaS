@@ -64,7 +64,7 @@ const quickActions = [
     description: 'Work with your team',
     href: '/collaborate',
     icon: Users,
-    color: 'bg-purple-500',
+    color: 'bg-brand-primary-500',
   },
   {
     title: 'Templates',

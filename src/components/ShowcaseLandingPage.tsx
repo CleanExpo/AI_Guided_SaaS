@@ -44,7 +44,7 @@ const personas = [
     name: 'Fullstack Wizard',
     description: 'Master of frontend and backend development',
     avatar: '🧙‍♂️',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-brand-primary-500 to-pink-500',
     icon: Code,
   },
   {
@@ -78,7 +78,7 @@ const liveFeatures = [
     description: 'Drag-and-drop interface builder with real-time preview',
     icon: Wrench,
     demo: 'ui-builder',
-    color: 'bg-purple-500',
+    color: 'bg-brand-primary-500',
   },
   {
     title: 'Analytics Dashboard',
@@ -289,7 +289,7 @@ export default function ShowcaseLandingPage() {
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
-          <Wrench className="w-5 h-5 text-purple-400" />
+          <Wrench className="w-5 h-5 text-brand-primary-400" />
           <CardTitle className="text-white">Visual UI Builder</CardTitle>
         </div>
         <CardDescription className="text-white/80">
@@ -423,7 +423,7 @@ export default function ShowcaseLandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
       {/* Hero Section */}
       <section className="relative py-20 px-4 text-center">
         <div className="max-w-6xl mx-auto">
@@ -440,7 +440,7 @@ export default function ShowcaseLandingPage() {
               AI-Powered SaaS Platform
             </Badge>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
               AI-Guided SaaS Builder
             </h1>
 
@@ -556,7 +556,7 @@ export default function ShowcaseLandingPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+                className="bg-gradient-to-r from-blue-500 to-brand-primary-500 hover:from-blue-600 hover:to-brand-primary-600"
                 asChild
               >
                 <Link href="/auth/signin">

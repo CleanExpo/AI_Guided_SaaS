@@ -1,10 +1,10 @@
-'use client'
-import { useState, useEffect } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+'use client';
+import { useState, useEffect } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
   Users,
   Plus,
@@ -18,34 +18,34 @@ import {
   Calendar,
   Activity,
   Globe,
-  Lock
-} from 'lucide-react'
+  Lock,
+} from 'lucide-react';
 
 interface CollaborationSession {
-  id: string
-  projectId: string
-  name: string
-  participants: number
-  lastActivity: Date
-  isActive: boolean
-  isPublic: boolean
-  comments: number
-  changes: number
-  createdAt: Date
+  id: string;
+  projectId: string;
+  name: string;
+  participants: number;
+  lastActivity: Date;
+  isActive: boolean;
+  isPublic: boolean;
+  comments: number;
+  changes: number;
+  createdAt: Date;
 }
 
 export default function CollaborationDashboard() {
-  const [sessions, setSessions] = useState<CollaborationSession[]>([])
-  const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filter, setFilter] = useState<'all' | 'active' | 'recent'>('all')
+  const [sessions, setSessions] = useState<CollaborationSession[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState<'all' | 'active' | 'recent'>('all');
 
   useEffect(() => {
-    loadCollaborationSessions()
-  }, [])
+    loadCollaborationSessions();
+  }, []);
 
   const loadCollaborationSessions = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       // Simulate API call - in production this would fetch real data
       const mockSessions: CollaborationSession[] = [
@@ -59,7 +59,7 @@ export default function CollaborationDashboard() {
           isPublic: true,
           comments: 23,
           changes: 47,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2) // 2 days ago
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2), // 2 days ago
         },
         {
           id: 'session-2',
@@ -71,7 +71,7 @@ export default function CollaborationDashboard() {
           isPublic: false,
           comments: 8,
           changes: 12,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24) // 1 day ago
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
         },
         {
           id: 'session-3',
@@ -83,7 +83,7 @@ export default function CollaborationDashboard() {
           isPublic: true,
           comments: 15,
           changes: 8,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6) // 6 hours ago
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6), // 6 hours ago
         },
         {
           id: 'session-4',
@@ -95,52 +95,56 @@ export default function CollaborationDashboard() {
           isPublic: false,
           comments: 31,
           changes: 19,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3) // 3 days ago
-        }
-      ]
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), // 3 days ago
+        },
+      ];
 
-      setSessions(mockSessions)
+      setSessions(mockSessions);
     } catch (error) {
-      console.error('Error loading collaboration sessions:', error)
+      console.error('Error loading collaboration sessions:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const filteredSessions = sessions.filter(session => {
-    const matchesSearch = session.name.toLowerCase().includes(searchTerm.toLowerCase())
-    
+    const matchesSearch = session.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
     switch (filter) {
       case 'active':
-        return matchesSearch && session.isActive
+        return matchesSearch && session.isActive;
       case 'recent':
-        const oneDayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24)
-        return matchesSearch && session.lastActivity > oneDayAgo
+        const oneDayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24);
+        return matchesSearch && session.lastActivity > oneDayAgo;
       default:
-        return matchesSearch
+        return matchesSearch;
     }
-  })
+  });
 
   const formatTimeAgo = (date: Date) => {
-    const now = new Date()
-    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60))
-    
-    if (diffInMinutes < 1) return 'Just now'
-    if (diffInMinutes < 60) return `${diffInMinutes}m ago`
-    
-    const diffInHours = Math.floor(diffInMinutes / 60)
-    if (diffInHours < 24) return `${diffInHours}h ago`
-    
-    const diffInDays = Math.floor(diffInHours / 24)
-    return `${diffInDays}d ago`
-  }
+    const now = new Date();
+    const diffInMinutes = Math.floor(
+      (now.getTime() - date.getTime()) / (1000 * 60)
+    );
+
+    if (diffInMinutes < 1) return 'Just now';
+    if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) return `${diffInHours}h ago`;
+
+    const diffInDays = Math.floor(diffInHours / 24);
+    return `${diffInDays}d ago`;
+  };
 
   const getActivityLevel = (session: CollaborationSession) => {
-    const totalActivity = session.comments + session.changes
-    if (totalActivity > 30) return { level: 'High', color: 'bg-green-500' }
-    if (totalActivity > 15) return { level: 'Medium', color: 'bg-yellow-500' }
-    return { level: 'Low', color: 'bg-gray-400' }
-  }
+    const totalActivity = session.comments + session.changes;
+    if (totalActivity > 30) return { level: 'High', color: 'bg-green-500' };
+    if (totalActivity > 15) return { level: 'Medium', color: 'bg-yellow-500' };
+    return { level: 'Low', color: 'bg-gray-400' };
+  };
 
   if (loading) {
     return (
@@ -150,7 +154,7 @@ export default function CollaborationDashboard() {
           <p className="text-gray-600">Loading collaboration sessions...</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -158,8 +162,12 @@ export default function CollaborationDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Collaboration Dashboard</h1>
-          <p className="text-gray-600">Manage your collaborative projects and sessions</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Collaboration Dashboard
+          </h1>
+          <p className="text-gray-600">
+            Manage your collaborative projects and sessions
+          </p>
         </div>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
@@ -174,8 +182,12 @@ export default function CollaborationDashboard() {
             <div className="flex items-center space-x-2">
               <Activity className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="text-sm font-medium text-gray-600">Active Sessions</p>
-                <p className="text-2xl font-bold">{sessions.filter(s => s.isActive).length}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Active Sessions
+                </p>
+                <p className="text-2xl font-bold">
+                  {sessions.filter(s => s.isActive).length}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -186,8 +198,12 @@ export default function CollaborationDashboard() {
             <div className="flex items-center space-x-2">
               <Users className="h-5 w-5 text-green-600" />
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Participants</p>
-                <p className="text-2xl font-bold">{sessions.reduce((sum, s) => sum + s.participants, 0)}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Participants
+                </p>
+                <p className="text-2xl font-bold">
+                  {sessions.reduce((sum, s) => sum + s.participants, 0)}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -196,10 +212,14 @@ export default function CollaborationDashboard() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <MessageCircle className="h-5 w-5 text-purple-600" />
+              <MessageCircle className="h-5 w-5 text-brand-primary-600" />
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Comments</p>
-                <p className="text-2xl font-bold">{sessions.reduce((sum, s) => sum + s.comments, 0)}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Comments
+                </p>
+                <p className="text-2xl font-bold">
+                  {sessions.reduce((sum, s) => sum + s.comments, 0)}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -210,8 +230,12 @@ export default function CollaborationDashboard() {
             <div className="flex items-center space-x-2">
               <Edit className="h-5 w-5 text-orange-600" />
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Changes</p>
-                <p className="text-2xl font-bold">{sessions.reduce((sum, s) => sum + s.changes, 0)}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Changes
+                </p>
+                <p className="text-2xl font-bold">
+                  {sessions.reduce((sum, s) => sum + s.changes, 0)}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -224,7 +248,7 @@ export default function CollaborationDashboard() {
           <Input
             placeholder="Search collaboration sessions..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={e => setSearchTerm(e.target.value)}
           />
         </div>
         <div className="flex space-x-2">
@@ -258,9 +282,13 @@ export default function CollaborationDashboard() {
           <Card>
             <CardContent className="p-8 text-center">
               <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No collaboration sessions found</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                No collaboration sessions found
+              </h3>
               <p className="text-gray-600 mb-4">
-                {searchTerm ? 'Try adjusting your search terms.' : 'Create your first collaboration session to get started.'}
+                {searchTerm
+                  ? 'Try adjusting your search terms.'
+                  : 'Create your first collaboration session to get started.'}
               </p>
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
@@ -269,18 +297,26 @@ export default function CollaborationDashboard() {
             </CardContent>
           </Card>
         ) : (
-          filteredSessions.map((session) => {
-            const activity = getActivityLevel(session)
-            
+          filteredSessions.map(session => {
+            const activity = getActivityLevel(session);
+
             return (
-              <Card key={session.id} className="hover:shadow-md transition-shadow">
+              <Card
+                key={session.id}
+                className="hover:shadow-md transition-shadow"
+              >
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="text-lg font-semibold text-gray-900">{session.name}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {session.name}
+                        </h3>
                         {session.isActive && (
-                          <Badge variant="default" className="bg-green-100 text-green-800">
+                          <Badge
+                            variant="default"
+                            className="bg-green-100 text-green-800"
+                          >
                             <Activity className="h-3 w-3 mr-1" />
                             Live
                           </Badge>
@@ -291,7 +327,7 @@ export default function CollaborationDashboard() {
                           <Lock className="h-4 w-4 text-gray-400" />
                         )}
                       </div>
-                      
+
                       <div className="flex items-center space-x-6 text-sm text-gray-600 mb-3">
                         <div className="flex items-center space-x-1">
                           <Users className="h-4 w-4" />
@@ -307,18 +343,26 @@ export default function CollaborationDashboard() {
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock className="h-4 w-4" />
-                          <span>Last active {formatTimeAgo(session.lastActivity)}</span>
+                          <span>
+                            Last active {formatTimeAgo(session.lastActivity)}
+                          </span>
                         </div>
                       </div>
 
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2">
-                          <div className={`w-2 h-2 rounded-full ${activity.color}`}></div>
-                          <span className="text-xs text-gray-500">{activity.level} Activity</span>
+                          <div
+                            className={`w-2 h-2 rounded-full ${activity.color}`}
+                          ></div>
+                          <span className="text-xs text-gray-500">
+                            {activity.level} Activity
+                          </span>
                         </div>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
                           <Calendar className="h-3 w-3" />
-                          <span>Created {formatTimeAgo(session.createdAt)}</span>
+                          <span>
+                            Created {formatTimeAgo(session.createdAt)}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -335,14 +379,18 @@ export default function CollaborationDashboard() {
                       <Button variant="outline" size="sm">
                         <Settings className="h-4 w-4" />
                       </Button>
-                      <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-red-600 hover:text-red-700"
+                      >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            )
+            );
           })
         )}
       </div>
@@ -350,9 +398,12 @@ export default function CollaborationDashboard() {
       {/* Demo Notice */}
       <Alert>
         <AlertDescription>
-          This dashboard shows simulated collaboration sessions. In production, this would display real-time data from your collaboration rooms with live participant counts, activity metrics, and session management capabilities.
+          This dashboard shows simulated collaboration sessions. In production,
+          this would display real-time data from your collaboration rooms with
+          live participant counts, activity metrics, and session management
+          capabilities.
         </AlertDescription>
       </Alert>
     </div>
-  )
+  );
 }

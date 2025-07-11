@@ -30,7 +30,11 @@
     "claude:status": "echo \"📊 Checking Claude Code status...\"",
     "self-check": "ts-node ./scripts/run-self-check.ts",
     "health": "npm run self-check",
-    "health:quick": "npm run self-check"
+    "health:quick": "npm run self-check",
+    "build:sync": "ts-node scripts/build-sync-agent.ts",
+    "build:full": "npm run build:sync && npm run build",
+    "deploy:safe": "npm run build:sync && npm run deploy:production",
+    "purple:purge": "ts-node scripts/build-sync-agent.ts --color-only"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

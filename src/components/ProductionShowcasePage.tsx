@@ -51,7 +51,7 @@ const personas = [
     name: 'Fullstack Wizard',
     description: 'Master of frontend and backend development',
     avatar: '🧙‍♂️',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-brand-primary-500 to-pink-500',
     icon: Code,
     features: ['Next.js 15', 'TypeScript', 'API Development'],
   },
@@ -90,7 +90,7 @@ const productionFeatures = [
     description: 'Production drag-and-drop interface builder',
     icon: Wrench,
     demo: 'ui-builder',
-    color: 'bg-purple-500',
+    color: 'bg-brand-primary-500',
     component: 'UIBuilder',
   },
   {
@@ -298,7 +298,7 @@ export default function ProductionShowcasePage() {
           <Card className="glass border-0">
             <CardHeader>
               <div className="flex items-center gap-2">
-                <Wrench className="w-5 h-5 text-purple-400" />
+                <Wrench className="w-5 h-5 text-brand-primary-400" />
                 <CardTitle className="text-white">
                   Production UI Builder
                 </CardTitle>
@@ -309,7 +309,10 @@ export default function ProductionShowcasePage() {
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
-                <Button asChild className="bg-purple-600 hover:bg-purple-700">
+                <Button
+                  asChild
+                  className="bg-brand-primary-600 hover:bg-brand-primary-700"
+                >
                   <Link href="/ui-builder">
                     Launch UI Builder
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -409,7 +412,7 @@ export default function ProductionShowcasePage() {
           >
             <Card className="glass border-0 h-full">
               <CardHeader className="text-center">
-                <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-3">
+                <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-brand-primary-500 flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
                 <CardTitle className="text-white text-lg">
@@ -432,7 +435,7 @@ export default function ProductionShowcasePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
       {/* Hero Section */}
       <section className="relative py-20 px-4 text-center">
         <div className="max-w-6xl mx-auto">
@@ -449,7 +452,7 @@ export default function ProductionShowcasePage() {
               Production-Ready AI Platform
             </Badge>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
               AI-Guided SaaS Platform
             </h1>
 
@@ -578,7 +581,7 @@ export default function ProductionShowcasePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+                className="bg-gradient-to-r from-blue-500 to-brand-primary-500 hover:from-blue-600 hover:to-brand-primary-600"
                 asChild
               >
                 <Link href="/auth/signin">

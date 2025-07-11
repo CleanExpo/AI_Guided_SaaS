@@ -222,7 +222,7 @@ export default function LandingPage() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-brand-primary-500 flex items-center justify-center">
                         <Globe className="h-4 w-4 text-white" />
                       </div>
                       <span className="font-medium">

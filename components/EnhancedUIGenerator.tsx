@@ -1,28 +1,31 @@
-'use client'
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { ProjectConfig } from '@/types'
-import { Palette, Sparkles, Wand2, Eye } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ProjectConfig } from '@/types';
+import { Palette, Sparkles, Wand2, Eye } from 'lucide-react';
 
 interface EnhancedUIGeneratorProps {
-  projectConfig: ProjectConfig
-  onUIGenerated: (ui: unknown) => void
+  projectConfig: ProjectConfig;
+  onUIGenerated: (ui: unknown) => void;
 }
 
-export default function EnhancedUIGenerator({ projectConfig }: EnhancedUIGeneratorProps) {
+export default function EnhancedUIGenerator({
+  projectConfig,
+}: EnhancedUIGeneratorProps) {
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Wand2 className="w-5 h-5 text-purple-600" />
+            <Wand2 className="w-5 h-5 text-brand-primary-600" />
             100x UI Enhancement Generator
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-600 mb-4">
-            Transform your UI with AI-powered enhancements tailored for {projectConfig.name}
+            Transform your UI with AI-powered enhancements tailored for{' '}
+            {projectConfig.name}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card className="p-4">
@@ -40,7 +43,7 @@ export default function EnhancedUIGenerator({ projectConfig }: EnhancedUIGenerat
 
             <Card className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Sparkles className="w-4 h-4 text-purple-600" />
+                <Sparkles className="w-4 h-4 text-brand-primary-600" />
                 <h3 className="font-medium">Component Library</h3>
               </div>
               <p className="text-sm text-gray-600 mb-3">
@@ -73,10 +76,11 @@ export default function EnhancedUIGenerator({ projectConfig }: EnhancedUIGenerat
         </CardHeader>
         <CardContent>
           <p className="text-gray-600">
-            Advanced UI generation features will be available in the next update.
+            Advanced UI generation features will be available in the next
+            update.
           </p>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
