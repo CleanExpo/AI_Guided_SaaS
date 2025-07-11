@@ -38,8 +38,6 @@ export interface Persona {
   avatar: string
   color: string
   tone?: string
-  personalityMode?: PersonalityMode
-  personalityConfig?: PersonalityConfig
 }
 
 export interface ChatMessage {
@@ -96,42 +94,4 @@ export interface CollaborationUser {
   email: string
   avatar?: string
   isOnline: boolean
-}
-
-// Personality system types
-export interface PersonalityMode {
-  id: string
-  name: string
-  description: string
-  systemPrompt: string
-  temperature: number
-  characteristics: PersonalityCharacteristics
-}
-
-export interface PersonalityCharacteristics {
-  candid: boolean
-  witty: boolean
-  informal: boolean
-  practical: boolean
-  intellectuallyHonest: boolean
-}
-
-export interface PersonalityConfig {
-  defaultMode: string
-  grokSettings: {
-    candidnessLevel: number // 1-10 scale
-    humorLevel: number // 1-10 scale
-    formalityLevel: number // 1-10 scale (inverted for Grok)
-    practicalFocus: boolean
-  }
-  userPreferences: {
-    rememberMode: boolean
-    autoApplyContext: boolean
-  }
-}
-
-export interface TransformContext {
-  messageHistory: ChatMessage[]
-  userContext: string
-  taskType: 'technical' | 'creative' | 'general'
 }
