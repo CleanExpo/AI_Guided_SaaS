@@ -1,8 +1,8 @@
 'use client';
 
-// Force deployment trigger - 2025-01-12
+// Force deployment trigger - 2025-01-12-showcase
 import { useSession } from 'next-auth/react';
-import LandingPage from '@/components/LandingPage';
+import ShowcaseLandingPage from '@/components/ShowcaseLandingPage';
 import Dashboard from '@/components/Dashboard';
 
 export default function HomePage() {
@@ -20,6 +20,6 @@ export default function HomePage() {
     );
   }
 
-  // Show dashboard for authenticated users, landing page for everyone else
-  return session ? <Dashboard /> : <LandingPage />;
+  // Show our beautiful showcase landing page for non-authenticated users, dashboard for authenticated users
+  return session ? <Dashboard /> : <ShowcaseLandingPage />;
 }
