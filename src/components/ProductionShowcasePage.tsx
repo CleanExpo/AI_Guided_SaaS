@@ -403,9 +403,9 @@ export default function ProductionShowcasePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50 dark:from-gray-950 dark:via-purple-950/20 dark:to-blue-950/20">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 text-center">
+      <section className="relative py-32 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -414,17 +414,17 @@ export default function ProductionShowcasePage() {
           >
             <Badge
               variant="outline"
-              className="mb-6 glass border-white/20 text-white"
+              className="mb-6 border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
             >
               <Sparkles className="w-3 h-3 mr-1" />
               Production-Ready AI Platform
             </Badge>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
               AI-Guided SaaS Platform
             </h1>
 
-            <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
               Experience sophisticated engineering with multi-agent AI
               orchestration, advanced token optimization, and production-grade
               system architecture.
@@ -438,7 +438,7 @@ export default function ProductionShowcasePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-16"
           >
-            <h2 className="text-2xl font-bold text-white mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
               Advanced Engineering Foundation
             </h2>
             {renderEngineeringHighlights()}
