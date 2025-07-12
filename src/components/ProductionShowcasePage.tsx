@@ -29,8 +29,14 @@ import {
 import Link from 'next/link';
 
 // Import your actual production components
-import ClaudeCodeDashboard from '../../components/ClaudeCodeDashboard';
-import { ProjectConfig } from '@/types';
+import ClaudeCodeDashboard from '@/components/ClaudeCodeDashboard';
+
+interface WorkflowResult {
+  totalTokenUsage: number;
+  utilizationRate: number;
+  integrationCommands: string[];
+  nextSteps: string[];
+}
 
 const personas = [
   {
@@ -149,43 +155,6 @@ export default function ProductionShowcasePage() {
     memoryOptimization: 78,
   });
 
-  // Mock project config for ClaudeCodeDashboard
-  const mockProjectConfig: ProjectConfig = {
-    name: 'AI Guided SaaS Platform',
-    description:
-      'Advanced AI-powered development platform with sophisticated engineering',
-    features: [
-      'Claude Code Integration',
-      'UI Builder',
-      'Analytics',
-      'Collaboration',
-    ],
-    techStack: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'PostgreSQL'],
-    framework: 'Next.js',
-    styling: 'Tailwind CSS',
-    technology: {
-      frontend: 'Next.js 15',
-      backend: 'Node.js',
-      database: 'PostgreSQL',
-      hosting: 'Vercel',
-    },
-    timeline: 'Production Ready',
-    targetAudience: 'Professional Developers',
-    persona: {
-      id: 'ai-architect',
-      name: 'AI Architect',
-      role: 'AI Development Expert',
-      description: 'Expert in AI-powered development workflows',
-      expertise: [
-        'AI Integration',
-        'System Architecture',
-        'Performance Optimization',
-      ],
-      avatar: '🤖',
-      color: 'from-blue-500 to-cyan-500',
-    },
-  };
-
   // Simulate real-time system updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -285,9 +254,8 @@ export default function ProductionShowcasePage() {
         return (
           <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
             <ClaudeCodeDashboard
-              projectConfig={mockProjectConfig}
-              onWorkflowComplete={result => {
-                console.log('Workflow completed:', result);
+              onWorkflowComplete={(result: WorkflowResult) => {
+                console.log('Claude Code workflow completed:', result);
               }}
             />
           </div>
