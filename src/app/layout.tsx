@@ -87,9 +87,7 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen bg-background flex flex-col">
             <Header />
-            <main className="flex-1 container mx-auto px-4 py-8">
-              {children}
-            </main>
+            <main className="flex-1 pt-20 pb-8">{children}</main>
             <Footer />
           </div>
           <Toaster />
