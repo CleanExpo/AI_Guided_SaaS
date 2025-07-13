@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
+import { authenticateAdminRequest } from '@/lib/auth-helpers'
 import { adminService } from '@/lib/admin'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const authResult = await authenticateAdminRequest()
     
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    if (!authResult.success || !authResult.session) {
+      return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
 
     // Check if user has admin permissions
-    const hasPermission = await adminService.checkAdminPermission(session.user.email, 'view_admin_panel')
+    const hasPermission = await adminService.checkAdminPermission(authResult.session.user.email, 'view_admin_panel')
     if (!hasPermission) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
@@ -85,10 +84,10 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const authResult = await authenticateAdminRequest()
     
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    if (!authResult.success || !authResult.session) {
+      return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
 
     const body = await request.json()
@@ -96,30 +95,30 @@ export async function POST(request: NextRequest) {
 
     switch (action) {
       case 'update_user_status':
-        const hasUserPermission = await adminService.checkAdminPermission(session.user.email, 'manage_users')
+        const hasUserPermission = await adminService.checkAdminPermission(authResult.session.user.email, 'manage_users')
         if (!hasUserPermission) {
           return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
         }
 
-        await adminService.updateUserStatus(data.userId, data.status, session.user.email)
+        await adminService.updateUserStatus(data.userId, data.status, authResult.session.user.email)
         return NextResponse.json({ success: true })
 
       case 'moderate_content':
-        const hasContentPermission = await adminService.checkAdminPermission(session.user.email, 'moderate_content')
+        const hasContentPermission = await adminService.checkAdminPermission(authResult.session.user.email, 'moderate_content')
         if (!hasContentPermission) {
           return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
         }
 
-        await adminService.moderateContent(data.contentId, data.action, session.user.email, data.reason)
+        await adminService.moderateContent(data.contentId, data.action, authResult.session.user.email, data.reason)
         return NextResponse.json({ success: true })
 
       case 'update_configuration':
-        const hasConfigPermission = await adminService.checkAdminPermission(session.user.email, 'system_configuration')
+        const hasConfigPermission = await adminService.checkAdminPermission(authResult.session.user.email, 'system_configuration')
         if (!hasConfigPermission) {
           return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
         }
 
-        await adminService.updateConfiguration(data.configId, data.value, session.user.email)
+        await adminService.updateConfiguration(data.configId, data.value, authResult.session.user.email)
         return NextResponse.json({ success: true })
 
       default:

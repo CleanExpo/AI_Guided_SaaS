@@ -1,6 +1,36 @@
 import { DatabaseService } from './database'
 import { isServiceConfigured } from './env'
 
+// Database result types
+interface CountResult {
+  count: number
+}
+
+interface SumResult {
+  total: number
+}
+
+interface SubscriptionBreakdownResult {
+  tier: string
+  count: number
+  revenue: number
+}
+
+interface CategoryResult {
+  category: string
+  count: number
+}
+
+interface FrameworkResult {
+  framework: string
+  count: number
+}
+
+interface StatusResult {
+  status: string
+  count: number
+}
+
 // Analytics interfaces
 export interface PlatformMetrics {
   totalUsers: number
@@ -138,13 +168,13 @@ export class AnalyticsService {
       const newUsers = await DatabaseService.query(`
         SELECT COUNT(*) as count FROM users 
         WHERE created_at >= ? AND created_at <= ?
-      `, [startDate.toISOString(), endDate.toISOString()])
+      `, [startDate.toISOString(), endDate.toISOString()]) as unknown as CountResult[]
 
       // Get active users (users with activity in last 30 days)
       const activeUsers = await DatabaseService.query(`
         SELECT COUNT(DISTINCT user_id) as count FROM activity_logs 
         WHERE created_at >= ?
-      `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()])
+      `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]
 
       // Calculate retention rates
       const retention = await this.calculateRetentionRates()
@@ -167,7 +197,7 @@ export class AnalyticsService {
   }
 
   // Get revenue analytics
-  static async getRevenueMetrics(timeRange: string = '30d'): Promise<RevenueMetrics> {
+  static async getRevenueMetrics(_timeRange: string = '30d'): Promise<RevenueMetrics> {
     if (!this.isConfigured()) {
       return this.getMockRevenueMetrics()
     }
@@ -177,14 +207,14 @@ export class AnalyticsService {
       const totalRevenue = await DatabaseService.query(`
         SELECT SUM(amount) as total FROM payments 
         WHERE status = 'succeeded'
-      `)
+      `) as unknown as SumResult[]
 
       // Get monthly recurring revenue
       const monthlyRevenue = await DatabaseService.query(`
         SELECT SUM(amount) as total FROM payments 
         WHERE status = 'succeeded' 
         AND created_at >= ?
-      `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()])
+      `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as SumResult[]
 
       // Get subscription breakdown
       const subscriptionBreakdown = await DatabaseService.query(`
@@ -195,11 +225,11 @@ export class AnalyticsService {
         FROM subscriptions 
         WHERE status = 'active'
         GROUP BY tier
-      `)
+      `) as unknown as SubscriptionBreakdownResult[]
 
       return {
-        totalRevenue: totalRevenue[0]?.total || 0,
-        monthlyRecurringRevenue: monthlyRevenue[0]?.total || 0,
+        totalRevenue: Number(totalRevenue[0]?.total) || 0,
+        monthlyRecurringRevenue: Number(monthlyRevenue[0]?.total) || 0,
         averageRevenuePerUser: 0, // TODO: Calculate ARPU
         churnRate: 0, // TODO: Calculate churn rate
         lifetimeValue: 0, // TODO: Calculate LTV
@@ -225,10 +255,10 @@ export class AnalyticsService {
         SELECT COUNT(*) as count FROM activity_logs 
         WHERE action LIKE '%api%' 
         AND created_at >= ?
-      `, [new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()])
+      `, [new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]
 
       return {
-        apiCalls: apiCalls[0]?.count || 0,
+        apiCalls: Number(apiCalls[0]?.count) || 0,
         errorRate: 0.02, // 2% error rate
         averageResponseTime: 150, // 150ms
         uptime: 99.9,
@@ -257,7 +287,7 @@ export class AnalyticsService {
           COUNT(*) as count
         FROM templates 
         GROUP BY status
-      `)
+      `) as unknown as StatusResult[]
 
       // Get category breakdown
       const categoryStats = await DatabaseService.query(`
@@ -269,7 +299,7 @@ export class AnalyticsService {
         GROUP BY category
         ORDER BY count DESC
         LIMIT 10
-      `)
+      `) as unknown as CategoryResult[]
 
       // Get framework breakdown
       const frameworkStats = await DatabaseService.query(`
@@ -281,12 +311,12 @@ export class AnalyticsService {
         GROUP BY framework
         ORDER BY count DESC
         LIMIT 10
-      `)
+      `) as unknown as FrameworkResult[]
 
-      const totalTemplates = templateStats.reduce((sum, stat) => sum + stat.count, 0)
-      const pendingReviews = templateStats.find(s => s.status === 'pending')?.count || 0
-      const approvedTemplates = templateStats.find(s => s.status === 'approved')?.count || 0
-      const rejectedTemplates = templateStats.find(s => s.status === 'rejected')?.count || 0
+      const totalTemplates = templateStats.reduce((sum, stat) => sum + Number(stat.count), 0)
+      const pendingReviews = Number(templateStats.find(s => s.status === 'pending')?.count) || 0
+      const approvedTemplates = Number(templateStats.find(s => s.status === 'approved')?.count) || 0
+      const rejectedTemplates = Number(templateStats.find(s => s.status === 'rejected')?.count) || 0
 
       return {
         totalTemplates,
@@ -306,41 +336,41 @@ export class AnalyticsService {
 
   // Helper methods
   private static async getTotalUsers(): Promise<number> {
-    const result = await DatabaseService.query('SELECT COUNT(*) as count FROM users')
-    return result[0]?.count || 0
+    const result = await DatabaseService.query('SELECT COUNT(*) as count FROM users') as unknown as CountResult[]
+    return Number(result[0]?.count) || 0
   }
 
   private static async getActiveUsers(): Promise<number> {
     const result = await DatabaseService.query(`
       SELECT COUNT(DISTINCT user_id) as count FROM activity_logs 
       WHERE created_at >= ?
-    `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()])
-    return result[0]?.count || 0
+    `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]
+    return Number(result[0]?.count) || 0
   }
 
   private static async getTotalProjects(): Promise<number> {
-    const result = await DatabaseService.query('SELECT COUNT(*) as count FROM projects')
-    return result[0]?.count || 0
+    const result = await DatabaseService.query('SELECT COUNT(*) as count FROM projects') as unknown as CountResult[]
+    return Number(result[0]?.count) || 0
   }
 
   private static async getTotalTemplates(): Promise<number> {
-    const result = await DatabaseService.query('SELECT COUNT(*) as count FROM templates WHERE status = "approved"')
-    return result[0]?.count || 0
+    const result = await DatabaseService.query('SELECT COUNT(*) as count FROM templates WHERE status = "approved"') as unknown as CountResult[]
+    return Number(result[0]?.count) || 0
   }
 
   private static async getBasicRevenueMetrics(): Promise<{ totalRevenue: number; monthlyRevenue: number }> {
     const totalResult = await DatabaseService.query(`
       SELECT SUM(amount) as total FROM payments WHERE status = 'succeeded'
-    `)
+    `) as unknown as SumResult[]
     
     const monthlyResult = await DatabaseService.query(`
       SELECT SUM(amount) as total FROM payments 
       WHERE status = 'succeeded' AND created_at >= ?
-    `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()])
+    `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as SumResult[]
 
     return {
-      totalRevenue: totalResult[0]?.total || 0,
-      monthlyRevenue: monthlyResult[0]?.total || 0
+      totalRevenue: Number(totalResult[0]?.total) || 0,
+      monthlyRevenue: Number(monthlyResult[0]?.total) || 0
     }
   }
 
@@ -350,9 +380,9 @@ export class AnalyticsService {
     const paidUsers = await DatabaseService.query(`
       SELECT COUNT(DISTINCT user_id) as count FROM subscriptions 
       WHERE status = 'active' AND tier != 'free'
-    `)
+    `) as unknown as CountResult[]
     
-    const paid = paidUsers[0]?.count || 0
+    const paid = Number(paidUsers[0]?.count) || 0
     return totalUsers > 0 ? (paid / totalUsers) * 100 : 0
   }
 
@@ -361,14 +391,14 @@ export class AnalyticsService {
     return 1200 // 20 minutes in seconds
   }
 
-  private static async calculateRetentionRates(): Promise<{ day1: number; day7: number; day30: number }> {
-    // Mock implementation - would need proper cohort analysis
-    return {
-      day1: 85.2,
-      day7: 62.8,
-      day30: 45.1
+    private static async calculateRetentionRates(): Promise<{ day1: number; day7: number; day30: number }> {
+      // Mock implementation - would need proper cohort analysis
+      return {
+        day1: 85.2,
+        day7: 62.8,
+        day30: 45.1
+      } as const
     }
-  }
 
   private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string; users: number }>> {
     // Mock implementation - would generate daily user counts

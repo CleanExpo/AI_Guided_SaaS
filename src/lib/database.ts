@@ -17,6 +17,29 @@ export interface User {
   updated_at: string
 }
 
+export interface ProjectConfig {
+  framework?: string
+  template?: string
+  features?: string[]
+  styling?: {
+    theme?: string
+    colors?: Record<string, string>
+  }
+  deployment?: {
+    platform?: string
+    domain?: string
+  }
+  [key: string]: unknown
+}
+
+export interface ProjectFiles {
+  [path: string]: {
+    content: string
+    type: 'file' | 'directory'
+    size?: number
+  }
+}
+
 export interface Project {
   id: string
   user_id: string
@@ -24,10 +47,18 @@ export interface Project {
   description?: string
   framework: string
   status: 'draft' | 'generating' | 'completed' | 'error'
-  config: any
-  files?: any
+  config: ProjectConfig
+  files?: ProjectFiles
   created_at: string
   updated_at: string
+}
+
+export interface ActivityMetadata {
+  ip_address?: string
+  user_agent?: string
+  duration?: number
+  error_message?: string
+  [key: string]: unknown
 }
 
 export interface ActivityLog {
@@ -36,8 +67,15 @@ export interface ActivityLog {
   action: string
   resource_type: string
   resource_id?: string
-  metadata?: any
+  metadata?: ActivityMetadata
   created_at: string
+}
+
+export interface UsageMetadata {
+  session_id?: string
+  feature_used?: string
+  processing_time?: number
+  [key: string]: unknown
 }
 
 export interface UsageRecord {
@@ -45,7 +83,7 @@ export interface UsageRecord {
   user_id: string
   resource_type: string
   quantity: number
-  metadata?: any
+  metadata?: UsageMetadata
   created_at: string
 }
 
@@ -60,8 +98,39 @@ export interface FeatureFlag {
   updated_at: string
 }
 
+export interface PaymentMetadata {
+  invoice_id?: string
+  subscription_id?: string
+  plan_name?: string
+  billing_cycle?: string
+  [key: string]: unknown
+}
+
+export interface Subscription {
+  id: string
+  user_id: string
+  stripe_subscription_id: string
+  stripe_customer_id: string
+  status: 'active' | 'canceled' | 'past_due' | 'unpaid'
+  tier: 'free' | 'pro' | 'enterprise'
+  current_period_start: string
+  current_period_end: string
+  cancel_at_period_end: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface DatabaseRecord {
+  id: string
+  created_at: string
+  updated_at?: string
+  [key: string]: unknown
+}
+
 // Create Supabase client with error handling
-let supabase: any = null
+import type { SupabaseClient } from '@supabase/supabase-js'
+
+let supabase: SupabaseClient | null = null
 
 if (isServiceConfigured('supabase')) {
   supabase = createClient(
@@ -102,7 +171,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('users')
         .insert(userData)
         .select()
@@ -135,7 +204,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('users')
         .select('*')
         .eq('id', id)
@@ -172,7 +241,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('users')
         .select('*')
         .eq('email', email)
@@ -197,7 +266,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('users')
         .update({ ...updates, updated_at: new Date().toISOString() })
         .eq('id', id)
@@ -233,7 +302,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('projects')
         .insert(projectData)
         .select()
@@ -280,7 +349,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('projects')
         .select('*')
         .eq('user_id', userId)
@@ -305,7 +374,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('projects')
         .update({ ...updates, updated_at: new Date().toISOString() })
         .eq('id', id)
@@ -330,7 +399,7 @@ export class DatabaseService {
     action: string,
     resourceType: string,
     resourceId?: string,
-    metadata?: any
+    metadata?: ActivityMetadata
   ): Promise<void> {
     if (!this.checkDatabase()) {
       console.log('Activity logged (mock):', { userId, action, resourceType, resourceId, metadata })
@@ -338,7 +407,7 @@ export class DatabaseService {
     }
 
     try {
-      const { error } = await supabase
+      const { error } = await supabase!
         .from('activity_logs')
         .insert({
           user_id: userId,
@@ -358,14 +427,14 @@ export class DatabaseService {
   }
 
   // Usage tracking
-  static async recordUsage(userId: string, resourceType: string, quantity: number, metadata?: any): Promise<void> {
+  static async recordUsage(userId: string, resourceType: string, quantity: number, metadata?: UsageMetadata): Promise<void> {
     if (!this.checkDatabase()) {
       console.log('Usage recorded (mock):', { userId, resourceType, quantity, metadata })
       return
     }
 
     try {
-      const { error } = await supabase
+      const { error } = await supabase!
         .from('usage_records')
         .insert({
           user_id: userId,
@@ -398,7 +467,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('feature_flags')
         .select('*')
         .eq('name', name)
@@ -431,7 +500,7 @@ export class DatabaseService {
   }
 
   // Generic query method for complex operations
-  static async query(sql: string, params?: any[]): Promise<any[]> {
+  static async query(sql: string, params?: unknown[]): Promise<DatabaseRecord[]> {
     if (!this.checkDatabase()) {
       console.log('Query executed (mock):', { sql, params })
       return []
@@ -449,13 +518,13 @@ export class DatabaseService {
   }
 
   // Generic record creation
-  static async createRecord(table: string, data: any): Promise<any> {
+  static async createRecord(table: string, data: DatabaseRecord): Promise<DatabaseRecord | null> {
     if (!this.checkDatabase()) {
-      return { id: `${table}-${Date.now()}`, ...data }
+      return { ...data, id: `${table}-${Date.now()}` }
     }
 
     try {
-      const { data: result, error } = await supabase
+      const { data: result, error } = await supabase!
         .from(table)
         .insert(data)
         .select()
@@ -480,7 +549,7 @@ export class DatabaseService {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('users')
         .select('*')
         .eq('stripe_customer_id', customerId)
@@ -505,7 +574,7 @@ export class DatabaseService {
     currency: string
     status: string
     description?: string
-    metadata?: any
+    metadata?: PaymentMetadata
   }): Promise<void> {
     if (!this.checkDatabase()) {
       console.log('Payment recorded (mock):', paymentData)
@@ -513,7 +582,7 @@ export class DatabaseService {
     }
 
     try {
-      const { error } = await supabase
+      const { error } = await supabase!
         .from('payments')
         .insert({
           user_id: paymentData.user_id,
@@ -534,17 +603,25 @@ export class DatabaseService {
     }
   }
 
-  static async getUserSubscription(userId: string): Promise<any> {
+  static async getUserSubscription(userId: string): Promise<Subscription | null> {
     if (!this.checkDatabase()) {
       return {
+        id: 'mock-subscription',
+        user_id: userId,
+        stripe_subscription_id: 'mock-stripe-sub',
+        stripe_customer_id: 'mock-stripe-customer',
         tier: 'free',
         status: 'active',
-        current_period_end: null
+        current_period_start: new Date().toISOString(),
+        current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+        cancel_at_period_end: false,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       }
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('subscriptions')
         .select('*')
         .eq('user_id', userId)
@@ -579,7 +656,7 @@ export class DatabaseService {
     }
 
     try {
-      const { error } = await supabase
+      const { error } = await supabase!
         .from('subscriptions')
         .upsert({
           ...subscriptionData,
@@ -613,7 +690,7 @@ export class DatabaseService {
       const startOfMonth = month ? new Date(month.getFullYear(), month.getMonth(), 1) : new Date(new Date().getFullYear(), new Date().getMonth(), 1)
       const endOfMonth = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth() + 1, 0)
 
-      const { data: usageData, error } = await supabase
+      const { data: usageData, error } = await supabase!
         .from('usage_records')
         .select('resource_type, quantity')
         .eq('user_id', userId)
@@ -625,7 +702,7 @@ export class DatabaseService {
         return { projects: 0, aiGenerations: 0, storage: '0MB' }
       }
 
-      const usage = usageData.reduce((acc: Record<string, number>, record: any) => {
+      const usage = (usageData || []).reduce((acc: Record<string, number>, record: { resource_type: string; quantity: number }) => {
         acc[record.resource_type] = (acc[record.resource_type] || 0) + record.quantity
         return acc
       }, {} as Record<string, number>)
@@ -635,7 +712,7 @@ export class DatabaseService {
 
       return {
         projects: projectCount.length,
-        aiGenerations: usage.ai_generations || 0,
+        aiGenerations: usage['ai_generations'] || 0,
         storage: '0MB' // TODO: Calculate actual storage usage
       }
     } catch (error) {

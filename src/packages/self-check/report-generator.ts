@@ -6,6 +6,54 @@ import { checkModules } from './module-checker';
 import { auditDependencies, getSecurityAudit } from './dependency-auditor';
 import { analyzeCausalLogs, generateCausalInsights } from './causal-feedback-replayer';
 
+// Type definitions for self-check report system
+export interface ModuleReport {
+  status: string
+  present: string[]
+  missing: string[]
+}
+
+export interface DependencyReport {
+  status: string
+  summary: string
+  outdated: string[]
+}
+
+export interface SecurityReport {
+  status: string
+  summary: string
+  vulnerabilities: string[]
+}
+
+export interface CausalAnalysis {
+  status: string
+  summary: string
+  patterns: string[]
+  recommendations: string[]
+}
+
+export interface CausalInsights {
+  totalInteractions: number
+  uniqueComponents: number
+  topIssues: string[]
+}
+
+export interface HealthMetrics {
+  moduleScore: number
+  dependencyScore: number
+  securityScore: number
+  uxScore: number
+  overallScore: number
+}
+
+export interface ReportData {
+  moduleReport: ModuleReport
+  depReport: DependencyReport
+  securityReport: SecurityReport
+  causalAnalysis: CausalAnalysis
+  causalInsights: CausalInsights
+}
+
 export async function generateSelfCheckReport(): Promise<string> {
   const timestamp = new Date().toISOString();
   
@@ -132,7 +180,7 @@ ${getSystemRecommendations(depReport, securityReport).map(rec => `- ${rec}`).joi
   return report;
 }
 
-function getOverallHealthStatus(moduleReport: any, depReport: any, securityReport: any, causalAnalysis: any): string {
+function getOverallHealthStatus(moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis): string {
   const issues = [];
   
   if (moduleReport.missing.length > 0) issues.push('missing modules');
@@ -146,7 +194,7 @@ function getOverallHealthStatus(moduleReport: any, depReport: any, securityRepor
   return `❌ Needs Attention - Multiple issues: ${issues.join(', ')}`;
 }
 
-function getImmediateActions(moduleReport: any, depReport: any, securityReport: any, causalAnalysis: any): string[] {
+function getImmediateActions(moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis): string[] {
   const actions = [];
 
   if (securityReport.vulnerabilities.length > 0) {
@@ -172,7 +220,7 @@ function getImmediateActions(moduleReport: any, depReport: any, securityReport: 
   return actions;
 }
 
-function getSystemRecommendations(depReport: any, securityReport: any): string[] {
+function getSystemRecommendations(depReport: DependencyReport, securityReport: SecurityReport): string[] {
   const recommendations = [];
 
   if (depReport.outdated.length > 0) {
@@ -191,27 +239,27 @@ function getSystemRecommendations(depReport: any, securityReport: any): string[]
   return recommendations;
 }
 
-function getModuleScore(moduleReport: any): number {
+function getModuleScore(moduleReport: ModuleReport): number {
   const total = moduleReport.present.length + moduleReport.missing.length;
   if (total === 0) return 100;
   return Math.round((moduleReport.present.length / total) * 100);
 }
 
-function getDependencyScore(depReport: any): number {
+function getDependencyScore(depReport: DependencyReport): number {
   if (depReport.outdated.length === 0) return 100;
   if (depReport.outdated.length <= 2) return 85;
   if (depReport.outdated.length <= 5) return 70;
   return 50;
 }
 
-function getSecurityScore(securityReport: any): number {
+function getSecurityScore(securityReport: SecurityReport): number {
   if (securityReport.vulnerabilities.length === 0) return 100;
   if (securityReport.vulnerabilities.some((v: string) => v.includes('🔴'))) return 30;
   if (securityReport.vulnerabilities.some((v: string) => v.includes('🟠'))) return 60;
   return 80;
 }
 
-function getUXScore(causalInsights: any): number {
+function getUXScore(causalInsights: CausalInsights): number {
   if (causalInsights.totalInteractions === 0) return 90; // No data yet
   if (causalInsights.topIssues.length === 0 || causalInsights.topIssues[0] === 'No significant issues detected') return 100;
   if (causalInsights.topIssues.length <= 1) return 85;
@@ -219,7 +267,7 @@ function getUXScore(causalInsights: any): number {
   return 50;
 }
 
-function getOverallScore(moduleReport: any, depReport: any, securityReport: any, causalInsights: any): number {
+function getOverallScore(moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalInsights: CausalInsights): number {
   const moduleScore = getModuleScore(moduleReport);
   const depScore = getDependencyScore(depReport);
   const securityScore = getSecurityScore(securityReport);

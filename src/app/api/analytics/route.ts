@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
+import { authenticateApiRequest } from '@/lib/auth-helpers'
 import { AnalyticsService } from '@/lib/analytics'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const authResult = await authenticateApiRequest()
+    if (!authResult.success || !authResult.session) {
+      return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
 
     const { searchParams } = new URL(request.url)
@@ -53,9 +52,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const authResult = await authenticateApiRequest()
+    if (!authResult.success || !authResult.session) {
+      return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
 
     // Check if user has admin role (you might want to implement role checking)
