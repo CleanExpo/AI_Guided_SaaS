@@ -12,20 +12,22 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
-  Bot,
-  Code,
-  Palette,
-  Rocket,
   Sparkles,
-  Brain,
   BarChart3,
   Users,
   ArrowRight,
   Wrench,
-  Database,
   Shield,
+  Brain,
   Zap,
 } from 'lucide-react';
+import {
+  AIIcon,
+  CodeIcon,
+  RocketIcon,
+  DatabaseIcon,
+  BrandIcon,
+} from '@/components/ui/icons';
 import Link from 'next/link';
 
 // Import your actual production components
@@ -45,7 +47,7 @@ const personas = [
     description: 'Expert in AI-powered development workflows',
     avatar: '🤖',
     color: 'from-blue-500 to-cyan-500',
-    icon: Bot,
+    icon: AIIcon,
     features: [
       'Claude Code Integration',
       'Multi-Agent Orchestration',
@@ -58,7 +60,7 @@ const personas = [
     description: 'Master of frontend and backend development',
     avatar: '🧙‍♂️',
     color: 'from-brand-primary-500 to-pink-500',
-    icon: Code,
+    icon: CodeIcon,
     features: ['Next.js 15', 'TypeScript', 'API Development'],
   },
   {
@@ -67,7 +69,7 @@ const personas = [
     description: 'Creating beautiful, user-friendly interfaces',
     avatar: '🎨',
     color: 'from-pink-500 to-rose-500',
-    icon: Palette,
+    icon: BrandIcon,
     features: ['shadcn/ui', 'Tailwind CSS', 'Framer Motion'],
   },
   {
@@ -76,7 +78,7 @@ const personas = [
     description: 'MVP development and rapid iteration',
     avatar: '🚀',
     color: 'from-orange-500 to-red-500',
-    icon: Rocket,
+    icon: RocketIcon,
     features: ['Rapid Prototyping', 'Deployment', 'Analytics'],
   },
 ];
@@ -122,13 +124,13 @@ const engineeringHighlights = [
     title: 'Multi-Agent Architecture',
     description:
       'Orchestrated AI agents for documentation, research, and optimization',
-    icon: Bot,
+    icon: AIIcon,
     metrics: '5 Specialized Agents',
   },
   {
     title: 'Token Optimization Engine',
     description: 'Strategic memory management with 150K context optimization',
-    icon: Database,
+    icon: DatabaseIcon,
     metrics: '96% Quality Retention',
   },
   {
