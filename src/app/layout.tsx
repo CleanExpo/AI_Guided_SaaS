@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
@@ -41,9 +41,6 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   manifest: '/manifest.json',
-  themeColor: '#1e40af',
-  colorScheme: 'light dark',
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   authors: [{ name: 'AI Guided SaaS Team' }],
   creator: 'AI Guided SaaS Platform',
@@ -74,6 +71,13 @@ export const metadata: Metadata = {
       'Complete AI-powered SaaS development platform with intelligent guidance and automation',
     images: ['/og-image.png'],
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1e40af',
+  colorScheme: 'light dark',
 };
 
 export default function RootLayout({
