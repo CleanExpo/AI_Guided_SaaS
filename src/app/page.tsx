@@ -1,6 +1,6 @@
 'use client';
 
-// Force deployment trigger - 2025-01-12-showcase
+// Force deployment trigger - 2025-01-13-enhanced-icons-final
 import { useSession } from 'next-auth/react';
 import ProductionShowcasePage from '@/components/ProductionShowcasePage';
 import Dashboard from '@/components/Dashboard';
