@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
+import { authenticateApiRequest } from '@/lib/auth-helpers'
 import { CollaborationService } from '@/lib/collaboration'
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const authResult = await authenticateApiRequest()
+    if (!authResult.success || !authResult.session) {
+      return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
 
     const { projectId, settings } = await request.json()
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest) {
     // Create collaboration room
     const roomId = await CollaborationService.createRoom(
       projectId,
-      session.user.email,
+      authResult.session.user.email,
       settings
     )
 
@@ -41,9 +40,9 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const authResult = await authenticateApiRequest()
+    if (!authResult.success || !authResult.session) {
+      return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
 
     const { searchParams } = new URL(request.url)

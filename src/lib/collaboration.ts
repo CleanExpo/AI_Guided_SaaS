@@ -3,6 +3,63 @@ import { Server as HTTPServer } from 'http'
 import { DatabaseService } from './database'
 import { isServiceConfigured } from './env'
 
+// Database row interfaces
+interface DatabaseRecord {
+  id: string
+  created_at: string
+  updated_at?: string
+  [key: string]: any
+}
+
+interface DatabaseUser {
+  id: string
+  name: string
+  email: string
+  avatar?: string
+  created_at: string
+  updated_at?: string
+}
+
+interface DatabaseRoom {
+  id: string
+  project_id: string
+  name: string
+  owner_id: string
+  participants: string
+  settings: string
+  created_at: string
+  updated_at: string
+}
+
+interface DatabaseProjectChange {
+  id: string
+  project_id: string
+  user_id: string
+  type: string
+  path: string
+  content: string
+  previous_content?: string
+  timestamp: string
+}
+
+interface DatabaseComment {
+  id: string
+  project_id: string
+  user_id: string
+  content: string
+  position: string
+  resolved: boolean
+  created_at: string
+  updated_at: string
+}
+
+interface ProjectData {
+  id: string
+  name: string
+  description: string
+  files: unknown[]
+}
+
 // Collaboration interfaces
 export interface CollaborationRoom {
   id: string
@@ -299,7 +356,7 @@ export class CollaborationService {
         )
 
         if (rooms.length > 0) {
-          const room = this.parseRoomFromDB(rooms[0])
+          const room = this.parseRoomFromDB(rooms[0] as unknown as DatabaseRoom)
           this.rooms.set(roomId, room)
           return room
         }
@@ -528,9 +585,13 @@ export class CollaborationService {
         )
 
         if (users.length > 0) {
+          const user = users[0] as unknown as DatabaseUser
           return {
-            ...users[0],
-            role: 'editor',
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar,
+            role: 'editor' as const,
             isOnline: true,
             lastSeen: new Date()
           }
@@ -551,7 +612,7 @@ export class CollaborationService {
     }
   }
 
-  private static async getProjectData(projectId: string): Promise<any> {
+  private static async getProjectData(projectId: string): Promise<ProjectData> {
     if (isServiceConfigured('database')) {
       try {
         const projects = await DatabaseService.query(
@@ -560,7 +621,13 @@ export class CollaborationService {
         )
 
         if (projects.length > 0) {
-          return projects[0]
+          const project = projects[0] as unknown as ProjectData
+          return {
+            id: project.id,
+            name: project.name || 'Untitled Project',
+            description: project.description || 'No description',
+            files: project.files || []
+          }
         }
       } catch (error) {
         console.error('Database error getting project:', error)
@@ -586,9 +653,12 @@ export class CollaborationService {
     }
   }
 
-  private static parseRoomFromDB(dbRoom: any): CollaborationRoom {
+  private static parseRoomFromDB(dbRoom: DatabaseRoom): CollaborationRoom {
     return {
-      ...dbRoom,
+      id: dbRoom.id,
+      projectId: dbRoom.project_id,
+      name: dbRoom.name,
+      ownerId: dbRoom.owner_id,
       participants: JSON.parse(dbRoom.participants || '[]'),
       settings: JSON.parse(dbRoom.settings || '{}'),
       createdAt: new Date(dbRoom.created_at),
@@ -620,12 +690,19 @@ export class CollaborationService {
           [projectId, limit]
         )
 
-        return changes.map(change => ({
-          ...change,
-          content: JSON.parse(change.content),
-          previousContent: change.previous_content ? JSON.parse(change.previous_content) : undefined,
-          timestamp: new Date(change.timestamp)
-        }))
+        return changes.map(change => {
+          const dbChange = change as unknown as DatabaseProjectChange
+          return {
+            id: dbChange.id,
+            projectId: dbChange.project_id,
+            userId: dbChange.user_id,
+            type: dbChange.type as 'create' | 'update' | 'delete',
+            path: dbChange.path,
+            content: JSON.parse(dbChange.content),
+            previousContent: dbChange.previous_content ? JSON.parse(dbChange.previous_content) : undefined,
+            timestamp: new Date(dbChange.timestamp)
+          }
+        })
       } catch (error) {
         console.error('Database error getting project changes:', error)
       }
@@ -642,13 +719,20 @@ export class CollaborationService {
           [projectId]
         )
 
-        return comments.map(comment => ({
-          ...comment,
-          position: JSON.parse(comment.position),
-          replies: [], // TODO: Implement nested comments
-          createdAt: new Date(comment.created_at),
-          updatedAt: new Date(comment.updated_at)
-        }))
+        return comments.map(comment => {
+          const dbComment = comment as unknown as DatabaseComment
+          return {
+            id: dbComment.id,
+            projectId: dbComment.project_id,
+            userId: dbComment.user_id,
+            content: dbComment.content,
+            position: JSON.parse(dbComment.position),
+            replies: [], // TODO: Implement nested comments
+            resolved: dbComment.resolved,
+            createdAt: new Date(dbComment.created_at),
+            updatedAt: new Date(dbComment.updated_at || dbComment.created_at)
+          }
+        })
       } catch (error) {
         console.error('Database error getting comments:', error)
       }

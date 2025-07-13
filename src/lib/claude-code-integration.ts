@@ -3,6 +3,71 @@
 
 import { ProjectConfig } from '@/types'
 
+// Type definitions for discovery and analysis results
+export interface DiscoveryResults {
+  projectStructure: {
+    components: number
+    pages: number
+    apis: number
+    utilities: number
+  }
+  dependencies: {
+    production: number
+    development: number
+    critical: number
+  }
+  codeComplexity: {
+    averageComplexity: number
+    highComplexityFiles: number
+    technicalDebt: string
+  }
+}
+
+export interface MemoryFile {
+  filename: string
+  content: string
+  tokens: number
+  priority: 'critical' | 'high' | 'medium' | 'low'
+}
+
+export interface HierarchyResults {
+  coreMemory: MemoryFile[]
+  projectDocumentation: MemoryFile[]
+  supportingDocumentation: MemoryFile[]
+  totalTokens: number
+}
+
+export interface CrossReferenceSystem {
+  crossReferences: number
+  linkedDocuments: number
+  navigationPaths: number
+  searchableTerms: number
+}
+
+export interface MemoryAnalysis {
+  currentTokens: number
+  maxTokens: number
+  utilizationRate: number
+  fragmentationLevel: number
+  compressionOpportunities: string[]
+}
+
+export interface CompactionResults {
+  compactedSections: number
+  preservedCriticalInfo: number
+  archivedContent: number
+  optimizedReferences: number
+  tokensReclaimed: number
+}
+
+export interface QualityReport {
+  retentionScore: number
+  criticalInfoPreserved: boolean
+  navigationIntegrity: boolean
+  searchabilityMaintained: boolean
+  recommendations: string[]
+}
+
 export interface ClaudeCommand {
   name: string
   description: string
@@ -104,25 +169,25 @@ export class InitDocsCommand implements ClaudeCommand {
     }
   }
 
-  private async generateMemoryFiles(projectContext: ProjectConfig, discoveryResults: any) {
-    const memoryFiles = [
+  private async generateMemoryFiles(projectContext: ProjectConfig, discoveryResults: DiscoveryResults): Promise<MemoryFile[]> {
+    const memoryFiles: MemoryFile[] = [
       {
         filename: 'CLAUDE.md',
         content: this.generateCoreMemoryFile(projectContext),
         tokens: 2000,
-        priority: 'critical'
+        priority: 'critical' as const
       },
       {
         filename: 'PROJECT_CONTEXT.md',
         content: this.generateProjectContextFile(projectContext, discoveryResults),
         tokens: 1500,
-        priority: 'high'
+        priority: 'high' as const
       },
       {
         filename: 'DEVELOPMENT_STATUS.md',
         content: this.generateDevelopmentStatusFile(projectContext),
         tokens: 1200,
-        priority: 'high'
+        priority: 'high' as const
       }
     ]
 
@@ -163,7 +228,7 @@ export class InitDocsCommand implements ClaudeCommand {
 *Auto-compact: Preserve project identity, current status, and active development context*`
   }
 
-  private generateProjectContextFile(projectContext: ProjectConfig, discoveryResults: any): string {
+  private generateProjectContextFile(projectContext: ProjectConfig, discoveryResults: DiscoveryResults): string {
     return `# Project Context - Technical Foundation
 
 ## 📋 PROJECT OVERVIEW
@@ -224,7 +289,7 @@ ${projectContext.features.map(feature => `- **${feature}**: ✅ Implemented`).jo
 *Status updated through Claude Code integration and automated development tracking*`
   }
 
-  private async createDocumentationHierarchy(memoryFiles: any[]) {
+  private async createDocumentationHierarchy(memoryFiles: MemoryFile[]): Promise<HierarchyResults> {
     // Simulate hierarchy creation
     await new Promise(resolve => setTimeout(resolve, 500))
 
@@ -236,7 +301,7 @@ ${projectContext.features.map(feature => `- **${feature}**: ✅ Implemented`).jo
     }
   }
 
-  private async establishCrossReferences(hierarchyResults: any) {
+  private async establishCrossReferences(hierarchyResults: HierarchyResults): Promise<CrossReferenceSystem> {
     // Simulate cross-reference system establishment
     await new Promise(resolve => setTimeout(resolve, 300))
 
@@ -304,7 +369,7 @@ export class CompactDocsCommand implements ClaudeCommand {
     }
   }
 
-  private async performStrategicCompaction(memoryAnalysis: any) {
+  private async performStrategicCompaction(memoryAnalysis: MemoryAnalysis): Promise<CompactionResults> {
     await new Promise(resolve => setTimeout(resolve, 1200))
 
     return {
@@ -316,7 +381,7 @@ export class CompactDocsCommand implements ClaudeCommand {
     }
   }
 
-  private async validateQualityPreservation(compactionResults: any) {
+  private async validateQualityPreservation(compactionResults: CompactionResults): Promise<QualityReport> {
     await new Promise(resolve => setTimeout(resolve, 400))
 
     return {

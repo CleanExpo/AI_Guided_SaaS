@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
+import { authenticateApiRequest } from '@/lib/auth-helpers'
 import { TemplateMarketplace } from '@/lib/templates'
 
 export async function GET(request: NextRequest) {
@@ -47,15 +46,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const authResult = await authenticateApiRequest()
+    if (!authResult.success || !authResult.session) {
+      return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
 
     const templateData = await request.json()
 
     const result = await TemplateMarketplace.submitTemplate(
-      session.user.id,
+      authResult.session.user.id,
       templateData
     )
 

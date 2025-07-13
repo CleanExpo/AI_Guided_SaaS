@@ -1,0 +1,153 @@
+/**
+ * NextAuth Helper Functions with Proper TypeScript Support
+ * Provides type-safe wrappers for NextAuth operations
+ */
+
+import { getServerSession as nextAuthGetServerSession } from 'next-auth/next'
+import { authOptions } from './auth'
+import type { Session } from 'next-auth'
+
+// Extended session type with guaranteed user ID
+export interface AuthenticatedSession extends Session {
+  user: {
+    id: string
+    email: string
+    name: string
+    image?: string
+  }
+}
+
+/**
+ * Type-safe wrapper for getServerSession that ensures proper typing
+ */
+export async function getServerSession(): Promise<AuthenticatedSession | null> {
+  try {
+    // @ts-expect-error - NextAuth types are complex, using type assertion for safety
+    const session = await nextAuthGetServerSession(authOptions)
+    
+    if (!session?.user) {
+      return null
+    }
+
+    // Ensure the session has the required user ID
+    return {
+      ...session,
+      user: {
+        id: (session.user as { id?: string }).id || '',
+        email: session.user.email || '',
+        name: session.user.name || '',
+        image: session.user.image || undefined
+      }
+    } as AuthenticatedSession
+  } catch (error) {
+    console.error('Error getting server session:', error)
+    return null
+  }
+}
+
+/**
+ * Type-safe helper to check if user is authenticated
+ */
+export async function requireAuth(): Promise<AuthenticatedSession> {
+  const session = await getServerSession()
+  
+  if (!session) {
+    throw new Error('Authentication required')
+  }
+  
+  return session
+}
+
+/**
+ * Type-safe helper to get user ID from session
+ */
+export async function getUserId(): Promise<string | null> {
+  const session = await getServerSession()
+  return session?.user?.id || null
+}
+
+/**
+ * Type-safe helper to check if user has admin permissions
+ */
+export async function isAdmin(): Promise<boolean> {
+  const session = await getServerSession()
+  
+  if (!session?.user?.email) {
+    return false
+  }
+  
+  // Check against admin emails or admin role in database
+  const adminEmails = [
+    'admin@aiguidedSaaS.com',
+    'support@aiguidedSaaS.com'
+  ]
+  
+  return adminEmails.includes(session.user.email)
+}
+
+/**
+ * Type-safe helper for API route authentication
+ */
+export async function authenticateApiRequest(): Promise<{
+  success: boolean
+  session: AuthenticatedSession | null
+  error?: string
+}> {
+  try {
+    const session = await getServerSession()
+    
+    if (!session) {
+      return {
+        success: false,
+        session: null,
+        error: 'Authentication required'
+      }
+    }
+    
+    return {
+      success: true,
+      session
+    }
+  } catch {
+    return {
+      success: false,
+      session: null,
+      error: 'Authentication error'
+    }
+  }
+}
+
+/**
+ * Type-safe helper for admin API route authentication
+ */
+export async function authenticateAdminRequest(): Promise<{
+  success: boolean
+  session: AuthenticatedSession | null
+  error?: string
+}> {
+  try {
+    const authResult = await authenticateApiRequest()
+    
+    if (!authResult.success || !authResult.session) {
+      return authResult
+    }
+    
+    const adminCheck = await isAdmin()
+    
+    if (!adminCheck) {
+      return {
+        success: false,
+        session: null,
+        error: 'Admin access required'
+      }
+    }
+    
+    return authResult
+  } catch {
+    return {
+      success: false,
+      session: null,
+      error: 'Admin authentication error'
+    }
+  }
+}

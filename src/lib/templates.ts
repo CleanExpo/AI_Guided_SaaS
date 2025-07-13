@@ -215,24 +215,33 @@ export class TemplateMarketplace {
 
     try {
       const submission = await DatabaseService.createRecord('template_submissions', {
+        id: `submission-${Date.now()}`,
         template_data: templateData,
         submitted_by: userId,
         status: 'pending',
-        submitted_at: new Date().toISOString()
+        submitted_at: new Date().toISOString(),
+        created_at: new Date().toISOString()
       })
 
       // Log the submission
-      await DatabaseService.logActivity(
-        userId,
-        'template_submission',
-        'marketplace',
-        submission.id,
-        { templateName: templateData.name }
-      )
+      if (submission) {
+        await DatabaseService.logActivity(
+          userId,
+          'template_submission',
+          'marketplace',
+          submission.id,
+          { templateName: templateData.name }
+        )
 
-      return {
-        success: true,
-        submissionId: submission.id
+        return {
+          success: true,
+          submissionId: submission.id
+        }
+      } else {
+        return {
+          success: false,
+          error: 'Failed to create submission record'
+        }
       }
     } catch (error) {
       console.error('Error submitting template:', error)
@@ -278,11 +287,13 @@ export class TemplateMarketplace {
       // For free templates, just record the download
       if (template.pricing.type === 'free') {
         await DatabaseService.createRecord('template_purchases', {
+          id: `purchase-${Date.now()}`,
           user_id: userId,
           template_id: templateId,
           price_paid: 0,
           currency: 'USD',
-          purchased_at: new Date().toISOString()
+          purchased_at: new Date().toISOString(),
+          created_at: new Date().toISOString()
         })
 
         // Update download count
@@ -351,12 +362,12 @@ export class TemplateMarketplace {
         ORDER BY c.name
       `)
 
-      return categories.map(cat => ({
-        id: cat.id,
-        name: cat.name,
-        description: cat.description,
-        icon: cat.icon,
-        templateCount: cat.template_count || 0
+      return categories.map((cat: any) => ({
+        id: cat.id as string,
+        name: cat.name as string,
+        description: cat.description as string,
+        icon: cat.icon as string,
+        templateCount: (cat.template_count as number) || 0
       }))
     } catch (error) {
       console.error('Error fetching categories:', error)
