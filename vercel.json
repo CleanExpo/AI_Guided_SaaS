@@ -55,9 +55,9 @@
   ],
   "redirects": [
     {
-      "source": "/dashboard",
-      "destination": "/",
-      "permanent": false
+      "source": "/old-dashboard",
+      "destination": "/dashboard",
+      "permanent": true
     }
   ],
   "rewrites": [
