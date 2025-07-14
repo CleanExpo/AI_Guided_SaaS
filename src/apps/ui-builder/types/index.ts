@@ -14,9 +14,9 @@ export interface ComponentConfig {
   name: string;
   position: Position;
   size: Size;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
   children?: ComponentConfig[];
-  style?: Record<string, any>;
+  style?: Record<string, unknown>;
   className?: string;
 }
 
@@ -36,14 +36,14 @@ export interface MotiaComponent {
   category: string;
   description: string;
   icon: string;
-  defaultProps: Record<string, any>;
+  defaultProps: Record<string, unknown>;
   propTypes: Record<string, PropType>;
   preview: string;
 }
 
 export interface PropType {
   type: 'string' | 'number' | 'boolean' | 'select' | 'color' | 'array' | 'object';
-  default?: any;
+  default?: unknown;
   options?: string[];
   required?: boolean;
   description?: string;
