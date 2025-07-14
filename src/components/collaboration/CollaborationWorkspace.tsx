@@ -115,7 +115,7 @@ export default function CollaborationWorkspace({
       }
     })
 
-    socket.on('room_joined', (data: { room: CollaborationRoom; project: any }) => {
+    socket.on('room_joined', (data: { room: CollaborationRoom; project: unknown }) => {
       console.log('Joined room:', data.room)
       setRoom(data.room)
       setParticipants(data.room.participants || [])
@@ -145,7 +145,7 @@ export default function CollaborationWorkspace({
     })
 
     socket.on('cursor_update', (data: { userId: string; user: CollaborationUser; position: CursorPosition }) => {
-      if (data.userId !== (session?.user as any)?.id) {
+      if (data.userId !== (session?.user as { id?: string })?.id) {
         setCursors(prev => {
           const newCursors = new Map(prev)
           newCursors.set(data.userId, { user: data.user, position: data.position })

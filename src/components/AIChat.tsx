@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Persona, ProjectConfig, ChatMessage } from '@/types'
@@ -87,19 +87,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages])
-
-  useEffect(() => {
-    if (currentQuestionIndex < chatQuestions.length) {
-      setTimeout(() => {
-        askNextQuestion()
-      }, 1000)
-    }
-  }, [currentQuestionIndex])
-
-  const askNextQuestion = () => {
+  const askNextQuestion = useCallback(() => {
     if (currentQuestionIndex >= chatQuestions.length) return
 
     setIsTyping(true)
@@ -115,7 +103,19 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
       setMessages(prev => [...prev, newMessage])
       setIsTyping(false)
     }, 1500)
-  }
+  }, [currentQuestionIndex])
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
+  useEffect(() => {
+    if (currentQuestionIndex < chatQuestions.length) {
+      setTimeout(() => {
+        askNextQuestion()
+      }, 1000)
+    }
+  }, [currentQuestionIndex, askNextQuestion])
 
   const handleUserResponse = (response: string) => {
     // Add user message
