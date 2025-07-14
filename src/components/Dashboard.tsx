@@ -104,57 +104,56 @@ export default function Dashboard() {
   useEffect(() => {
     const loadDashboardData = async () => {
       try {
-        // Simulate API calls
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        setLoading(true);
 
-        setStats({
-          totalProjects: 12,
-          activeUsers: 8,
-          systemHealth: 98,
-          deploymentsToday: 5,
-        });
-
-        setRecentActivity([
-          {
-            id: '1',
-            type: 'project',
-            title: 'New UI Component Created',
-            description: 'Button component added to design system',
-            timestamp: '2 minutes ago',
-            status: 'success',
-          },
-          {
-            id: '2',
-            type: 'deployment',
-            title: 'Production Deployment',
-            description: 'Successfully deployed to production',
-            timestamp: '15 minutes ago',
-            status: 'success',
-          },
-          {
-            id: '3',
-            type: 'health',
-            title: 'System Health Check',
-            description: 'All systems operational',
-            timestamp: '1 hour ago',
-            status: 'info',
-          },
-          {
-            id: '4',
-            type: 'collaboration',
-            title: 'Team Member Joined',
-            description: 'New team member added to workspace',
-            timestamp: '2 hours ago',
-            status: 'info',
-          },
+        // Load real dashboard stats from API
+        const [statsResponse, activityResponse] = await Promise.all([
+          fetch('/api/dashboard/stats'),
+          fetch('/api/dashboard/activity')
         ]);
+
+        if (statsResponse.ok) {
+          const statsData = await statsResponse.json();
+          setStats({
+            totalProjects: statsData.totalProjects || 0,
+            activeUsers: statsData.activeUsers || 0,
+            systemHealth: statsData.systemHealth || 0,
+            deploymentsToday: statsData.deploymentsToday || 0,
+          });
+        } else {
+          // Fallback to default values if API fails
+          setStats({
+            totalProjects: 0,
+            activeUsers: 0,
+            systemHealth: 0,
+            deploymentsToday: 0,
+          });
+        }
+
+        if (activityResponse.ok) {
+          const activityData = await activityResponse.json();
+          setRecentActivity(activityData.activities || []);
+        } else {
+          // Fallback to empty array if API fails
+          setRecentActivity([]);
+        }
 
         setLoading(false);
       } catch (error) {
         console.error('Failed to load dashboard data:', error);
+        
+        // Set fallback data on error
+        setStats({
+          totalProjects: 0,
+          activeUsers: 0,
+          systemHealth: 0,
+          deploymentsToday: 0,
+        });
+        setRecentActivity([]);
+        
         toast({
           title: 'Error',
-          description: 'Failed to load dashboard data',
+          description: 'Failed to load dashboard data. Showing offline mode.',
           variant: 'destructive',
         });
         setLoading(false);

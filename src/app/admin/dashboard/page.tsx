@@ -13,8 +13,7 @@ import {
   BarChart3, 
   Database, 
   LogOut,
-  CheckCircle,
-  AlertTriangle
+  CheckCircle
 } from 'lucide-react'
 
 interface AdminUser {

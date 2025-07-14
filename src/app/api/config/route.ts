@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
  * POST /api/config/reload
  * Reloads configuration (development only)
  */
-export async function POST(_request: NextRequest) {
+export async function POST() {
   try {
     if (process.env.NODE_ENV !== 'development') {
       return NextResponse.json(

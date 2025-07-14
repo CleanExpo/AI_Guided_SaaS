@@ -31,14 +31,18 @@ export default function TemplatesPage() {
     try {
       setLoading(true)
       
-      // Simulate API call to templates endpoint
-      const response = await fetch('/api/templates')
-      if (!response.ok) {
-        throw new Error('Failed to fetch templates')
+      // Try to get real data from API, fallback to demo data if needed
+      const response = await fetch('/api/templates');
+      let templates: Template[] = [];
+      
+      if (response.ok) {
+        const apiData = await response.json();
+        templates = apiData.templates || [];
       }
       
-      // For now, use mock data since the API might not return real data yet
-      const mockTemplates: Template[] = [
+      // If no real data available, use demo templates
+      if (templates.length === 0) {
+        templates = [
         {
           id: '1',
           name: 'Modern Dashboard',
@@ -99,9 +103,10 @@ export default function TemplatesPage() {
           tags: ['saas', 'auth', 'billing'],
           featured: true
         }
-      ]
+        ];
+      }
       
-      setTemplates(mockTemplates)
+      setTemplates(templates)
       setLoading(false)
     } catch (error) {
       console.error('Failed to load templates:', error)
@@ -116,7 +121,7 @@ export default function TemplatesPage() {
 
   useEffect(() => {
     loadTemplates()
-  }, [])
+  }, [loadTemplates])
 
   const categories = [
     { id: 'all', name: 'All Templates', count: templates.length },
@@ -133,14 +138,14 @@ export default function TemplatesPage() {
 
   const featuredTemplates = templates.filter(template => template.featured)
 
-  const handleDownload = (templateId: string) => {
+  const handleDownload = () => {
     toast({
       title: 'Download Started',
       description: 'Template download has been initiated',
     })
   }
 
-  const handlePreview = (templateId: string) => {
+  const handlePreview = () => {
     toast({
       title: 'Preview',
       description: 'Opening template preview...',
@@ -309,14 +314,14 @@ export default function TemplatesPage() {
                       <Button 
                         size="sm" 
                         className="flex-1"
-                        onClick={() => handleDownload(template.id)}
+                        onClick={() => handleDownload()}
                       >
                         📥 Download
                       </Button>
                       <Button 
                         size="sm" 
                         variant="outline"
-                        onClick={() => handlePreview(template.id)}
+                        onClick={() => handlePreview()}
                       >
                         👁️ Preview
                       </Button>
@@ -365,14 +370,14 @@ export default function TemplatesPage() {
                       <Button 
                         size="sm" 
                         className="flex-1"
-                        onClick={() => handleDownload(template.id)}
+                        onClick={() => handleDownload()}
                       >
                         📥 Download
                       </Button>
                       <Button 
                         size="sm" 
                         variant="outline"
-                        onClick={() => handlePreview(template.id)}
+                        onClick={() => handlePreview()}
                       >
                         👁️ Preview
                       </Button>
