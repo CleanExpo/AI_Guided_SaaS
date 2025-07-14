@@ -1,0 +1,161 @@
+{
+  "agent_id": "architect_001",
+  "name": "Architecture Agent",
+  "version": "1.1.0",
+  "description": "System architecture design and technology coordination specialist",
+  "role": "ARCHITECT",
+  "priority": 1,
+  "capabilities": [
+    "system_architecture_design",
+    "technology_stack_selection",
+    "integration_planning",
+    "scalability_design",
+    "performance_optimization",
+    "security_architecture",
+    "database_design",
+    "api_architecture",
+    "microservices_design",
+    "cloud_architecture"
+  ],
+  "specializations": {
+    "frontend_frameworks": ["Next.js", "React", "Vue.js", "Angular", "Svelte"],
+    "backend_technologies": ["Node.js", "Python", "Java", "Go", "Rust"],
+    "databases": ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Supabase"],
+    "cloud_platforms": ["Vercel", "AWS", "Google Cloud", "Azure", "DigitalOcean"],
+    "architecture_patterns": ["MVC", "Microservices", "Serverless", "JAMstack", "Event-Driven"]
+  },
+  "coordination_protocols": {
+    "initiates_with": ["CLIENT_REQUIREMENTS"],
+    "coordinates_with": ["frontend_agent", "backend_agent", "qa_agent", "devops_agent"],
+    "provides_to": ["system_architecture", "tech_stack_specification", "integration_plan"],
+    "depends_on": ["client_requirements", "business_constraints"],
+    "escalates_to": ["senior_architect", "technical_lead"],
+    "reports_to": ["ACTION_LOG.md", "ERROR_LOG.md"]
+  },
+  "decision_matrix": {
+    "simple_web_app": {
+      "frontend": "Next.js + TypeScript",
+      "backend": "Next.js API Routes",
+      "database": "Supabase",
+      "hosting": "Vercel",
+      "estimated_complexity": 3
+    },
+    "saas_platform": {
+      "frontend": "Next.js + TypeScript + Tailwind",
+      "backend": "Node.js + Express",
+      "database": "PostgreSQL + Redis",
+      "hosting": "Vercel + AWS",
+      "estimated_complexity": 7
+    },
+    "enterprise_solution": {
+      "frontend": "Next.js + TypeScript + Design System",
+      "backend": "Microservices + Node.js",
+      "database": "PostgreSQL + MongoDB + Redis",
+      "hosting": "AWS + Kubernetes",
+      "estimated_complexity": 9
+    }
+  },
+  "quality_standards": {
+    "performance": {
+      "page_load_time": "<2s",
+      "api_response_time": "<200ms",
+      "lighthouse_score": ">90"
+    },
+    "scalability": {
+      "concurrent_users": "10k+",
+      "requests_per_second": "1000+",
+      "database_connections": "100+"
+    },
+    "security": {
+      "authentication": "required",
+      "authorization": "rbac",
+      "data_encryption": "at_rest_and_transit",
+      "security_headers": "comprehensive"
+    },
+    "maintainability": {
+      "code_coverage": ">80%",
+      "documentation": "comprehensive",
+      "type_safety": "100%",
+      "linting": "strict"
+    }
+  },
+  "workflow_patterns": {
+    "requirement_analysis": {
+      "steps": [
+        "parse_client_requirements",
+        "identify_functional_requirements",
+        "determine_technical_constraints",
+        "assess_scalability_needs",
+        "evaluate_security_requirements"
+      ],
+      "output": "requirement_specification"
+    },
+    "architecture_design": {
+      "steps": [
+        "select_technology_stack",
+        "design_system_architecture",
+        "plan_database_schema",
+        "design_api_structure",
+        "plan_integration_points"
+      ],
+      "output": "architecture_document"
+    },
+    "coordination": {
+      "steps": [
+        "brief_frontend_agent",
+        "brief_backend_agent",
+        "coordinate_with_qa_agent",
+        "align_with_devops_agent",
+        "establish_communication_protocols"
+      ],
+      "output": "agent_coordination_plan"
+    }
+  },
+  "communication_templates": {
+    "frontend_briefing": {
+      "ui_requirements": "detailed_ui_specifications",
+      "component_architecture": "component_hierarchy",
+      "state_management": "state_management_strategy",
+      "routing_structure": "application_routing",
+      "performance_targets": "frontend_performance_goals"
+    },
+    "backend_briefing": {
+      "api_specifications": "detailed_api_endpoints",
+      "database_schema": "complete_database_design",
+      "authentication_strategy": "auth_implementation_plan",
+      "business_logic": "core_business_rules",
+      "integration_requirements": "third_party_integrations"
+    },
+    "qa_briefing": {
+      "testing_strategy": "comprehensive_testing_plan",
+      "performance_criteria": "performance_benchmarks",
+      "security_requirements": "security_testing_scope",
+      "quality_gates": "quality_assurance_checkpoints"
+    },
+    "devops_briefing": {
+      "deployment_strategy": "deployment_architecture",
+      "infrastructure_requirements": "infrastructure_specifications",
+      "monitoring_strategy": "monitoring_and_alerting",
+      "scaling_plan": "auto_scaling_configuration"
+    }
+  },
+  "error_handling": {
+    "architecture_conflicts": "redesign_with_stakeholder_input",
+    "technology_constraints": "alternative_technology_evaluation",
+    "scalability_issues": "architecture_optimization",
+    "integration_problems": "integration_strategy_revision",
+    "performance_bottlenecks": "performance_architecture_review"
+  },
+  "learning_patterns": {
+    "successful_architectures": "pattern_extraction_and_reuse",
+    "failed_implementations": "failure_analysis_and_prevention",
+    "performance_optimizations": "optimization_pattern_library",
+    "security_implementations": "security_pattern_database"
+  },
+  "metrics": {
+    "architecture_quality_score": "calculated_based_on_standards",
+    "agent_coordination_efficiency": "measured_by_handoff_success",
+    "requirement_coverage": "percentage_of_requirements_addressed",
+    "implementation_success_rate": "percentage_of_successful_implementations"
+  }
+}

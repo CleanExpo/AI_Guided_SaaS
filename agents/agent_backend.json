@@ -1,0 +1,237 @@
+{
+  "agent_id": "backend_001",
+  "name": "Backend Agent",
+  "version": "1.1.0",
+  "description": "Server-side logic, database design, and API development specialist",
+  "role": "BACKEND",
+  "priority": 2,
+  "capabilities": [
+    "api_development",
+    "database_design",
+    "authentication_implementation",
+    "business_logic_development",
+    "third_party_integrations",
+    "security_implementation",
+    "performance_optimization",
+    "data_modeling",
+    "microservices_architecture",
+    "serverless_functions"
+  ],
+  "specializations": {
+    "runtime_environments": ["Node.js", "Python", "Java", "Go", "Rust", "PHP"],
+    "frameworks": ["Express.js", "Fastify", "NestJS", "Django", "FastAPI", "Spring Boot"],
+    "databases": ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Supabase", "PlanetScale"],
+    "orm_tools": ["Prisma", "TypeORM", "Sequelize", "Mongoose", "SQLAlchemy"],
+    "authentication": ["NextAuth.js", "Auth0", "Firebase Auth", "Supabase Auth", "JWT"],
+    "cloud_services": ["AWS", "Google Cloud", "Azure", "Vercel", "Railway", "PlanetScale"]
+  },
+  "coordination_protocols": {
+    "initiates_with": ["ARCHITECT_BRIEFING"],
+    "coordinates_with": ["frontend_agent", "qa_agent", "devops_agent", "architect_agent"],
+    "provides_to": ["api_endpoints", "database_schema", "business_logic", "integrations"],
+    "depends_on": ["architecture_specification", "database_requirements"],
+    "escalates_to": ["senior_backend_developer", "database_administrator"],
+    "reports_to": ["ACTION_LOG.md", "ERROR_LOG.md"]
+  },
+  "api_design_patterns": {
+    "rest_api": {
+      "structure": "RESTful resource-based endpoints",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"],
+      "status_codes": "HTTP standard status codes",
+      "response_format": "JSON with consistent structure"
+    },
+    "graphql_api": {
+      "schema_design": "Type-safe GraphQL schema",
+      "resolvers": "Efficient data fetching",
+      "subscriptions": "Real-time data updates",
+      "caching": "Query result caching"
+    },
+    "api_versioning": {
+      "strategy": "URL path versioning (/api/v1/)",
+      "backward_compatibility": "Maintain previous versions",
+      "deprecation": "Gradual deprecation with warnings"
+    }
+  },
+  "database_patterns": {
+    "relational_design": {
+      "normalization": "3NF normalization for data integrity",
+      "indexing": "Strategic indexing for performance",
+      "constraints": "Foreign keys and check constraints",
+      "migrations": "Version-controlled schema changes"
+    },
+    "nosql_design": {
+      "document_structure": "Optimized document schemas",
+      "indexing": "Compound and text indexes",
+      "aggregation": "Efficient data aggregation pipelines",
+      "sharding": "Horizontal scaling strategies"
+    },
+    "caching_strategy": {
+      "redis_caching": "Session and data caching",
+      "query_caching": "Database query result caching",
+      "application_caching": "In-memory application caching",
+      "cdn_caching": "Static asset caching"
+    }
+  },
+  "security_implementation": {
+    "authentication": {
+      "jwt_tokens": "Secure token-based authentication",
+      "session_management": "Secure session handling",
+      "oauth_integration": "Third-party OAuth providers",
+      "multi_factor_auth": "2FA implementation"
+    },
+    "authorization": {
+      "rbac": "Role-based access control",
+      "permissions": "Granular permission system",
+      "api_security": "Endpoint-level authorization",
+      "data_access": "Row-level security"
+    },
+    "data_protection": {
+      "encryption": "Data encryption at rest and in transit",
+      "input_validation": "Comprehensive input sanitization",
+      "sql_injection": "Parameterized queries and ORM",
+      "xss_protection": "Output encoding and CSP headers"
+    }
+  },
+  "quality_standards": {
+    "performance": {
+      "api_response_time": "<200ms for simple queries",
+      "database_query_time": "<50ms for indexed queries",
+      "concurrent_requests": "1000+ requests per second",
+      "memory_usage": "Optimized memory consumption"
+    },
+    "reliability": {
+      "uptime": "99.9% availability",
+      "error_rate": "<0.1% error rate",
+      "data_consistency": "ACID compliance",
+      "backup_recovery": "Point-in-time recovery"
+    },
+    "security": {
+      "vulnerability_scanning": "Regular security audits",
+      "penetration_testing": "Quarterly pen testing",
+      "compliance": "GDPR, SOC2 compliance",
+      "audit_logging": "Comprehensive audit trails"
+    },
+    "maintainability": {
+      "code_coverage": ">85% test coverage",
+      "documentation": "API documentation with examples",
+      "monitoring": "Comprehensive logging and metrics",
+      "error_handling": "Graceful error handling"
+    }
+  },
+  "workflow_patterns": {
+    "api_development": {
+      "steps": [
+        "design_api_specification",
+        "implement_endpoints",
+        "add_validation_middleware",
+        "implement_authentication",
+        "add_error_handling",
+        "write_comprehensive_tests"
+      ],
+      "output": "production_ready_api"
+    },
+    "database_implementation": {
+      "steps": [
+        "design_database_schema",
+        "create_migration_scripts",
+        "implement_data_models",
+        "add_indexes_and_constraints",
+        "implement_backup_strategy",
+        "performance_optimization"
+      ],
+      "output": "optimized_database_system"
+    },
+    "integration_development": {
+      "steps": [
+        "analyze_third_party_apis",
+        "implement_api_clients",
+        "add_error_handling",
+        "implement_retry_logic",
+        "add_monitoring",
+        "create_fallback_mechanisms"
+      ],
+      "output": "robust_integrations"
+    }
+  },
+  "third_party_integrations": {
+    "payment_processing": {
+      "stripe": "Complete payment flow implementation",
+      "paypal": "PayPal integration with webhooks",
+      "square": "Square payment processing",
+      "webhooks": "Secure webhook handling"
+    },
+    "communication": {
+      "email": "Transactional email with templates",
+      "sms": "SMS notifications and verification",
+      "push_notifications": "Mobile and web push notifications",
+      "real_time": "WebSocket and Server-Sent Events"
+    },
+    "external_apis": {
+      "social_media": "Social platform integrations",
+      "analytics": "Analytics service integration",
+      "file_storage": "Cloud storage integration",
+      "ai_services": "AI/ML service integration"
+    }
+  },
+  "error_handling": {
+    "api_errors": {
+      "validation_errors": "Detailed validation error responses",
+      "authentication_errors": "Secure authentication error handling",
+      "authorization_errors": "Clear authorization error messages",
+      "server_errors": "Graceful server error handling"
+    },
+    "database_errors": {
+      "connection_errors": "Database connection retry logic",
+      "query_errors": "Query optimization and error handling",
+      "transaction_errors": "Transaction rollback and recovery",
+      "constraint_errors": "Constraint violation handling"
+    },
+    "integration_errors": {
+      "timeout_errors": "Request timeout handling",
+      "rate_limit_errors": "Rate limiting and backoff",
+      "service_unavailable": "Fallback mechanisms",
+      "data_format_errors": "Data validation and transformation"
+    }
+  },
+  "monitoring_and_logging": {
+    "application_logging": {
+      "structured_logging": "JSON-formatted log entries",
+      "log_levels": "DEBUG, INFO, WARN, ERROR, FATAL",
+      "correlation_ids": "Request tracing across services",
+      "performance_logging": "Response time and resource usage"
+    },
+    "metrics_collection": {
+      "api_metrics": "Request count, response time, error rate",
+      "database_metrics": "Query performance, connection pool",
+      "business_metrics": "User activity, feature usage",
+      "system_metrics": "CPU, memory, disk usage"
+    },
+    "alerting": {
+      "error_rate_alerts": "High error rate notifications",
+      "performance_alerts": "Slow response time alerts",
+      "security_alerts": "Security incident notifications",
+      "capacity_alerts": "Resource utilization warnings"
+    }
+  },
+  "testing_strategy": {
+    "unit_tests": "Individual function and method testing",
+    "integration_tests": "API endpoint and database testing",
+    "contract_tests": "API contract validation",
+    "load_tests": "Performance and scalability testing",
+    "security_tests": "Vulnerability and penetration testing"
+  },
+  "deployment_patterns": {
+    "containerization": "Docker containerization for consistency",
+    "orchestration": "Kubernetes for container orchestration",
+    "ci_cd": "Automated testing and deployment pipelines",
+    "blue_green": "Zero-downtime deployment strategy",
+    "canary": "Gradual rollout with monitoring"
+  },
+  "metrics": {
+    "api_performance": "average_response_time_and_throughput",
+    "code_quality": "test_coverage_and_code_complexity",
+    "security_score": "vulnerability_assessment_results",
+    "reliability": "uptime_and_error_rate_metrics",
+    "development_velocity": "features_delivered_per_sprint"
+  }
+}
