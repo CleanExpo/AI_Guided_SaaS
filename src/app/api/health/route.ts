@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
@@ -166,7 +166,7 @@ function checkMemory(): {
 }
 
 // Also support HEAD requests for simple health checks
-export async function HEAD(request: NextRequest) {
+export async function HEAD() {
   try {
     // Quick health check without detailed information
     const isHealthy = process.env.NEXTAUTH_SECRET && 
@@ -182,7 +182,7 @@ export async function HEAD(request: NextRequest) {
       }
     })
     
-  } catch (error) {
+  } catch {
     return new NextResponse(null, { status: 503 })
   }
 }
