@@ -40,7 +40,7 @@ export default function SignInForm() {
           router.push('/dashboard')
         }
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.')
     } finally {
       setIsLoading(false)
@@ -53,7 +53,7 @@ export default function SignInForm() {
 
     try {
       await signIn('google', { callbackUrl: '/dashboard' })
-    } catch (error) {
+    } catch {
       setError('Failed to sign in with Google')
       setIsGoogleLoading(false)
     }
@@ -142,7 +142,7 @@ export default function SignInForm() {
           </form>
 
           <div className="text-center text-sm">
-            <span className="text-gray-600">Don't have an account? </span>
+            <span className="text-gray-600">Don&apos;t have an account? </span>
             <Button
               variant="link"
               className="p-0 h-auto font-normal"

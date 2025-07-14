@@ -3,12 +3,23 @@ import React from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 import { logger } from '../../../packages/causal-engine/logger';
 
+type ComponentInstance = {
+  id: string;
+  type: string;
+  props: Record<string, string>;
+  schema?: Array<{
+    key: string;
+    label: string;
+    type: 'text' | 'textarea';
+  }>;
+};
+
 export default function BuilderCanvas() {
   const components = useBuilderStore((state) => state.components);
   const selectComponent = useBuilderStore((state) => state.selectComponent);
   const selectedId = useBuilderStore((state) => state.selectedId);
 
-  const handleComponentClick = (component: any) => {
+  const handleComponentClick = (component: ComponentInstance) => {
     selectComponent(component.id);
     
     // Log component selection as "kept" action
