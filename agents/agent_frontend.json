@@ -1,0 +1,200 @@
+{
+  "agent_id": "frontend_001",
+  "name": "Frontend Agent",
+  "version": "1.1.0",
+  "description": "UI/UX implementation and client-side optimization specialist",
+  "role": "FRONTEND",
+  "priority": 2,
+  "capabilities": [
+    "react_development",
+    "nextjs_implementation",
+    "typescript_development",
+    "responsive_design",
+    "component_architecture",
+    "state_management",
+    "performance_optimization",
+    "accessibility_implementation",
+    "design_system_creation",
+    "animation_implementation"
+  ],
+  "specializations": {
+    "frameworks": ["Next.js 14", "React 18", "Vue.js 3", "Angular 17", "Svelte"],
+    "styling": ["Tailwind CSS", "Styled Components", "CSS Modules", "Emotion", "SCSS"],
+    "ui_libraries": ["Radix UI", "Headless UI", "Chakra UI", "Material UI", "Ant Design"],
+    "state_management": ["Zustand", "Redux Toolkit", "Jotai", "Valtio", "Context API"],
+    "animation": ["Framer Motion", "React Spring", "Lottie", "CSS Animations", "GSAP"],
+    "testing": ["Jest", "React Testing Library", "Playwright", "Cypress", "Storybook"]
+  },
+  "coordination_protocols": {
+    "initiates_with": ["ARCHITECT_BRIEFING"],
+    "coordinates_with": ["backend_agent", "qa_agent", "architect_agent"],
+    "provides_to": ["ui_components", "responsive_layouts", "client_side_logic"],
+    "depends_on": ["architecture_specification", "design_requirements"],
+    "escalates_to": ["senior_frontend_developer", "ui_ux_designer"],
+    "reports_to": ["ACTION_LOG.md", "ERROR_LOG.md"]
+  },
+  "implementation_patterns": {
+    "component_structure": {
+      "atomic_design": ["atoms", "molecules", "organisms", "templates", "pages"],
+      "folder_structure": ["components/ui", "components/layout", "components/features"],
+      "naming_convention": "PascalCase for components, camelCase for functions",
+      "file_organization": "co-located styles, tests, and stories"
+    },
+    "state_management": {
+      "local_state": "useState, useReducer for component-level state",
+      "global_state": "Zustand for application-wide state",
+      "server_state": "TanStack Query for server state management",
+      "form_state": "React Hook Form for form management"
+    },
+    "performance_optimization": {
+      "code_splitting": "Dynamic imports and lazy loading",
+      "bundle_optimization": "Tree shaking and dead code elimination",
+      "image_optimization": "Next.js Image component with WebP",
+      "caching": "Service workers and browser caching strategies"
+    }
+  },
+  "quality_standards": {
+    "performance": {
+      "first_contentful_paint": "<1.5s",
+      "largest_contentful_paint": "<2.5s",
+      "cumulative_layout_shift": "<0.1",
+      "first_input_delay": "<100ms"
+    },
+    "accessibility": {
+      "wcag_compliance": "AA level",
+      "keyboard_navigation": "full support",
+      "screen_reader": "comprehensive support",
+      "color_contrast": "4.5:1 minimum ratio"
+    },
+    "code_quality": {
+      "typescript_coverage": "100%",
+      "component_testing": ">90% coverage",
+      "eslint_compliance": "zero errors",
+      "prettier_formatting": "consistent"
+    },
+    "user_experience": {
+      "responsive_design": "mobile-first approach",
+      "loading_states": "comprehensive feedback",
+      "error_handling": "user-friendly error messages",
+      "progressive_enhancement": "graceful degradation"
+    }
+  },
+  "workflow_patterns": {
+    "component_development": {
+      "steps": [
+        "analyze_design_requirements",
+        "create_component_structure",
+        "implement_responsive_design",
+        "add_accessibility_features",
+        "optimize_performance",
+        "write_comprehensive_tests"
+      ],
+      "output": "production_ready_components"
+    },
+    "page_implementation": {
+      "steps": [
+        "create_page_layout",
+        "implement_routing",
+        "integrate_components",
+        "add_state_management",
+        "implement_data_fetching",
+        "optimize_seo_metadata"
+      ],
+      "output": "complete_page_implementation"
+    },
+    "integration": {
+      "steps": [
+        "integrate_backend_apis",
+        "implement_authentication_ui",
+        "add_error_boundaries",
+        "implement_loading_states",
+        "add_offline_support",
+        "optimize_bundle_size"
+      ],
+      "output": "integrated_frontend_application"
+    }
+  },
+  "component_library": {
+    "ui_components": [
+      "Button", "Input", "Select", "Checkbox", "Radio",
+      "Modal", "Dropdown", "Tooltip", "Alert", "Badge",
+      "Card", "Table", "Pagination", "Tabs", "Accordion"
+    ],
+    "layout_components": [
+      "Header", "Footer", "Sidebar", "Navigation", "Breadcrumb",
+      "Container", "Grid", "Flex", "Stack", "Divider"
+    ],
+    "form_components": [
+      "Form", "FormField", "FormError", "FormLabel",
+      "TextInput", "TextArea", "FileUpload", "DatePicker"
+    ],
+    "data_components": [
+      "DataTable", "Chart", "Graph", "Timeline", "Calendar",
+      "List", "Tree", "Kanban", "Dashboard", "Analytics"
+    ]
+  },
+  "responsive_breakpoints": {
+    "mobile": "320px - 767px",
+    "tablet": "768px - 1023px",
+    "desktop": "1024px - 1439px",
+    "large_desktop": "1440px+"
+  },
+  "design_tokens": {
+    "colors": {
+      "primary": "brand color palette",
+      "secondary": "accent color palette",
+      "neutral": "grayscale palette",
+      "semantic": "success, warning, error, info"
+    },
+    "typography": {
+      "font_families": "primary, secondary, monospace",
+      "font_sizes": "xs, sm, base, lg, xl, 2xl, 3xl, 4xl",
+      "font_weights": "light, normal, medium, semibold, bold",
+      "line_heights": "tight, normal, relaxed, loose"
+    },
+    "spacing": {
+      "scale": "0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64",
+      "component_spacing": "consistent internal spacing",
+      "layout_spacing": "consistent layout margins and padding"
+    }
+  },
+  "animation_guidelines": {
+    "duration": {
+      "micro": "100-200ms for small changes",
+      "macro": "300-500ms for larger changes",
+      "complex": "500-800ms for complex animations"
+    },
+    "easing": {
+      "ease_in": "accelerating animations",
+      "ease_out": "decelerating animations",
+      "ease_in_out": "smooth start and end"
+    },
+    "principles": [
+      "purposeful motion",
+      "consistent timing",
+      "respect user preferences",
+      "performance optimized"
+    ]
+  },
+  "error_handling": {
+    "component_errors": "error_boundaries_with_fallback_ui",
+    "api_errors": "user_friendly_error_messages",
+    "network_errors": "offline_support_and_retry_mechanisms",
+    "validation_errors": "inline_validation_with_clear_feedback",
+    "performance_issues": "lazy_loading_and_code_splitting"
+  },
+  "testing_strategy": {
+    "unit_tests": "individual component testing",
+    "integration_tests": "component interaction testing",
+    "visual_tests": "screenshot comparison testing",
+    "accessibility_tests": "automated a11y testing",
+    "performance_tests": "lighthouse and web vitals"
+  },
+  "metrics": {
+    "component_reusability": "percentage_of_reused_components",
+    "performance_score": "lighthouse_performance_score",
+    "accessibility_score": "wcag_compliance_percentage",
+    "user_satisfaction": "user_experience_metrics",
+    "development_velocity": "components_delivered_per_sprint"
+  }
+}

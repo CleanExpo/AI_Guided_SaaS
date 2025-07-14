@@ -1,0 +1,246 @@
+{
+  "agent_id": "devops_001",
+  "name": "DevOps Agent",
+  "version": "1.1.0",
+  "description": "Infrastructure, deployment, and operations specialist",
+  "role": "DEVOPS",
+  "priority": 4,
+  "capabilities": [
+    "infrastructure_automation",
+    "ci_cd_pipeline_design",
+    "containerization",
+    "cloud_deployment",
+    "monitoring_setup",
+    "security_hardening",
+    "performance_optimization",
+    "disaster_recovery",
+    "scaling_automation",
+    "cost_optimization"
+  ],
+  "specializations": {
+    "cloud_platforms": ["Vercel", "AWS", "Google Cloud", "Azure", "DigitalOcean"],
+    "containerization": ["Docker", "Kubernetes", "Docker Compose", "Podman"],
+    "ci_cd_tools": ["GitHub Actions", "GitLab CI", "Jenkins", "CircleCI", "Azure DevOps"],
+    "infrastructure_as_code": ["Terraform", "CloudFormation", "Pulumi", "CDK"],
+    "monitoring_tools": ["Prometheus", "Grafana", "DataDog", "New Relic", "Sentry"],
+    "security_tools": ["Vault", "SOPS", "Trivy", "Falco", "OPA Gatekeeper"]
+  },
+  "coordination_protocols": {
+    "initiates_with": ["QA_APPROVAL"],
+    "coordinates_with": ["qa_agent", "backend_agent", "architect_agent"],
+    "provides_to": ["deployment_pipeline", "infrastructure", "monitoring", "security"],
+    "depends_on": ["qa_validation", "security_approval"],
+    "escalates_to": ["senior_devops_engineer", "infrastructure_architect"],
+    "reports_to": ["ACTION_LOG.md", "ERROR_LOG.md"]
+  },
+  "deployment_strategies": {
+    "blue_green": {
+      "description": "Zero-downtime deployment with environment switching",
+      "use_case": "Production deployments requiring zero downtime",
+      "rollback_time": "<30 seconds",
+      "resource_overhead": "2x infrastructure during deployment"
+    },
+    "canary": {
+      "description": "Gradual traffic shifting to new version",
+      "use_case": "Risk mitigation for critical applications",
+      "traffic_split": "5% -> 25% -> 50% -> 100%",
+      "monitoring_period": "15 minutes per stage"
+    },
+    "rolling": {
+      "description": "Sequential instance replacement",
+      "use_case": "Standard deployments with brief downtime",
+      "instance_replacement": "One at a time",
+      "health_check_timeout": "60 seconds"
+    },
+    "recreate": {
+      "description": "Stop all instances, deploy new version",
+      "use_case": "Development and staging environments",
+      "downtime": "2-5 minutes",
+      "resource_efficiency": "Highest"
+    }
+  },
+  "infrastructure_patterns": {
+    "serverless": {
+      "platforms": ["Vercel Functions", "AWS Lambda", "Cloudflare Workers"],
+      "benefits": ["Auto-scaling", "Pay-per-use", "Zero server management"],
+      "limitations": ["Cold starts", "Execution time limits", "Vendor lock-in"],
+      "best_for": ["APIs", "Event processing", "Static sites"]
+    },
+    "containerized": {
+      "orchestration": ["Kubernetes", "Docker Swarm", "ECS", "Cloud Run"],
+      "benefits": ["Portability", "Scalability", "Resource efficiency"],
+      "complexity": ["Container management", "Networking", "Storage"],
+      "best_for": ["Microservices", "Complex applications", "Multi-cloud"]
+    },
+    "traditional": {
+      "platforms": ["VMs", "Bare metal", "Managed services"],
+      "benefits": ["Full control", "Predictable performance", "Legacy compatibility"],
+      "overhead": ["Server management", "OS updates", "Scaling complexity"],
+      "best_for": ["Legacy apps", "Compliance requirements", "High performance"]
+    }
+  },
+  "ci_cd_pipeline": {
+    "source_control": {
+      "branching_strategy": "GitFlow with feature branches",
+      "commit_standards": "Conventional commits with semantic versioning",
+      "code_review": "Required PR reviews with automated checks",
+      "merge_strategy": "Squash and merge for clean history"
+    },
+    "build_pipeline": {
+      "stages": [
+        "code_checkout",
+        "dependency_installation",
+        "linting_and_formatting",
+        "unit_testing",
+        "security_scanning",
+        "build_compilation",
+        "artifact_creation"
+      ],
+      "parallel_execution": "Linting, testing, and security scanning",
+      "caching": "Dependencies and build artifacts",
+      "failure_handling": "Fast fail with detailed error reporting"
+    },
+    "deployment_pipeline": {
+      "environments": ["development", "staging", "production"],
+      "promotion_gates": ["Automated tests", "Security scans", "Manual approval"],
+      "rollback_strategy": "Automated rollback on health check failure",
+      "notification": "Slack/Teams integration for deployment status"
+    }
+  },
+  "monitoring_and_observability": {
+    "application_monitoring": {
+      "metrics": ["Response time", "Error rate", "Throughput", "Availability"],
+      "logging": ["Structured JSON logs", "Centralized log aggregation"],
+      "tracing": ["Distributed tracing for microservices"],
+      "alerting": ["Threshold-based and anomaly detection alerts"]
+    },
+    "infrastructure_monitoring": {
+      "system_metrics": ["CPU", "Memory", "Disk", "Network"],
+      "container_metrics": ["Container resource usage", "Pod health"],
+      "cloud_metrics": ["Service quotas", "Billing", "Service health"],
+      "custom_metrics": ["Business KPIs", "Application-specific metrics"]
+    },
+    "security_monitoring": {
+      "vulnerability_scanning": "Continuous container and dependency scanning",
+      "compliance_monitoring": "SOC2, GDPR, PCI compliance tracking",
+      "access_monitoring": "User access and privilege escalation detection",
+      "threat_detection": "Anomaly detection and incident response"
+    }
+  },
+  "security_hardening": {
+    "network_security": {
+      "firewall_rules": "Principle of least privilege network access",
+      "ssl_tls": "TLS 1.3 with strong cipher suites",
+      "ddos_protection": "Cloud-based DDoS mitigation",
+      "network_segmentation": "Isolated network zones for different tiers"
+    },
+    "application_security": {
+      "secrets_management": "Encrypted secrets with rotation",
+      "authentication": "Multi-factor authentication for admin access",
+      "authorization": "Role-based access control (RBAC)",
+      "input_validation": "Comprehensive input sanitization"
+    },
+    "infrastructure_security": {
+      "os_hardening": "Minimal OS installation with security patches",
+      "container_security": "Non-root containers with read-only filesystems",
+      "access_control": "SSH key-based access with bastion hosts",
+      "audit_logging": "Comprehensive audit trail for all actions"
+    }
+  },
+  "disaster_recovery": {
+    "backup_strategy": {
+      "database_backups": "Automated daily backups with point-in-time recovery",
+      "application_backups": "Code and configuration version control",
+      "infrastructure_backups": "Infrastructure as Code for reproducibility",
+      "retention_policy": "30 days daily, 12 months monthly, 7 years yearly"
+    },
+    "recovery_procedures": {
+      "rto": "Recovery Time Objective: 4 hours",
+      "rpo": "Recovery Point Objective: 1 hour",
+      "failover_testing": "Quarterly disaster recovery drills",
+      "documentation": "Detailed runbooks for all recovery scenarios"
+    },
+    "high_availability": {
+      "multi_az_deployment": "Cross-availability zone redundancy",
+      "load_balancing": "Health check-based traffic distribution",
+      "auto_scaling": "Automatic scaling based on demand",
+      "circuit_breakers": "Fault tolerance and graceful degradation"
+    }
+  },
+  "performance_optimization": {
+    "application_optimization": {
+      "caching": "Multi-layer caching strategy (CDN, application, database)",
+      "compression": "Gzip/Brotli compression for static assets",
+      "minification": "CSS/JS minification and bundling",
+      "image_optimization": "WebP format with responsive images"
+    },
+    "infrastructure_optimization": {
+      "auto_scaling": "Predictive and reactive scaling policies",
+      "resource_rightsizing": "Regular resource utilization analysis",
+      "cost_optimization": "Reserved instances and spot instances",
+      "performance_monitoring": "Continuous performance baseline tracking"
+    },
+    "database_optimization": {
+      "query_optimization": "Query performance analysis and indexing",
+      "connection_pooling": "Database connection pool management",
+      "read_replicas": "Read replica scaling for read-heavy workloads",
+      "caching": "Database query result caching"
+    }
+  },
+  "cost_management": {
+    "resource_optimization": {
+      "rightsizing": "Regular instance size optimization",
+      "scheduling": "Dev/test environment scheduling",
+      "reserved_capacity": "Reserved instances for predictable workloads",
+      "spot_instances": "Spot instances for fault-tolerant workloads"
+    },
+    "cost_monitoring": {
+      "budget_alerts": "Automated budget threshold alerts",
+      "cost_allocation": "Resource tagging for cost attribution",
+      "usage_analytics": "Regular cost and usage analysis",
+      "optimization_recommendations": "Automated cost optimization suggestions"
+    }
+  },
+  "compliance_and_governance": {
+    "policy_enforcement": {
+      "resource_policies": "Automated policy enforcement with OPA",
+      "security_policies": "Security baseline enforcement",
+      "compliance_scanning": "Continuous compliance monitoring",
+      "remediation": "Automated remediation for policy violations"
+    },
+    "audit_and_reporting": {
+      "audit_trails": "Comprehensive audit logging",
+      "compliance_reports": "Automated compliance reporting",
+      "security_assessments": "Regular security posture assessments",
+      "documentation": "Maintained compliance documentation"
+    }
+  },
+  "automation_tools": {
+    "infrastructure_automation": {
+      "terraform": "Infrastructure provisioning and management",
+      "ansible": "Configuration management and application deployment",
+      "helm": "Kubernetes application package management",
+      "scripts": "Custom automation scripts for specific tasks"
+    },
+    "deployment_automation": {
+      "github_actions": "CI/CD pipeline automation",
+      "argocd": "GitOps-based deployment automation",
+      "flux": "Kubernetes GitOps operator",
+      "custom_operators": "Kubernetes custom operators for complex deployments"
+    }
+  },
+  "error_handling": {
+    "deployment_failures": "Automated rollback with health checks",
+    "infrastructure_issues": "Auto-healing and self-recovery mechanisms",
+    "security_incidents": "Incident response automation",
+    "performance_degradation": "Automatic scaling and optimization",
+    "cost_overruns": "Budget alerts and automatic resource scaling"
+  },
+  "metrics": {
+    "deployment_success_rate": "Percentage of successful deployments",
+    "mean_time_to_recovery": "Average time to resolve incidents",
+    "infrastructure_uptime": "System availability percentage",
+    "cost_efficiency": "Cost per transaction or user",
+    "security_posture": "Security compliance score"
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "agent_id": "qa_001",
+  "name": "QA Agent",
+  "version": "1.1.0",
+  "description": "Quality assurance, testing, and validation specialist",
+  "role": "QA",
+  "priority": 3,
+  "capabilities": [
+    "test_strategy_design",
+    "automated_testing",
+    "performance_testing",
+    "security_testing",
+    "accessibility_testing",
+    "cross_browser_testing",
+    "api_testing",
+    "database_testing",
+    "user_acceptance_testing",
+    "regression_testing"
+  ],
+  "specializations": {
+    "testing_frameworks": ["Jest", "Playwright", "Cypress", "Selenium", "TestCafe"],
+    "api_testing": ["Postman", "Insomnia", "REST Assured", "Supertest", "Newman"],
+    "performance_testing": ["Lighthouse", "WebPageTest", "K6", "Artillery", "JMeter"],
+    "security_testing": ["OWASP ZAP", "Burp Suite", "Snyk", "SonarQube", "Checkmarx"],
+    "accessibility_testing": ["axe-core", "WAVE", "Pa11y", "Lighthouse a11y", "NVDA"],
+    "visual_testing": ["Percy", "Chromatic", "Applitools", "BackstopJS", "Pixelmatch"]
+  },
+  "coordination_protocols": {
+    "initiates_with": ["FRONTEND_BACKEND_COMPLETION"],
+    "coordinates_with": ["frontend_agent", "backend_agent", "devops_agent", "architect_agent"],
+    "provides_to": ["test_reports", "quality_metrics", "bug_reports", "performance_analysis"],
+    "depends_on": ["implementation_completion", "test_requirements"],
+    "escalates_to": ["senior_qa_engineer", "test_manager"],
+    "reports_to": ["ACTION_LOG.md", "ERROR_LOG.md"]
+  },
+  "testing_strategy": {
+    "test_pyramid": {
+      "unit_tests": "70% - Fast, isolated component testing",
+      "integration_tests": "20% - Component interaction testing",
+      "e2e_tests": "10% - Full user journey testing"
+    },
+    "testing_types": {
+      "functional_testing": "Feature behavior validation",
+      "non_functional_testing": "Performance, security, usability",
+      "regression_testing": "Existing functionality validation",
+      "smoke_testing": "Basic functionality verification"
+    },
+    "test_environments": {
+      "development": "Developer testing environment",
+      "staging": "Production-like testing environment",
+      "production": "Live environment monitoring"
+    }
+  },
+  "quality_gates": {
+    "code_quality": {
+      "test_coverage": ">90% for critical paths",
+      "code_complexity": "Cyclomatic complexity <10",
+      "duplication": "<3% code duplication",
+      "maintainability": "Maintainability index >70"
+    },
+    "performance": {
+      "page_load_time": "<2 seconds",
+      "api_response_time": "<200ms",
+      "lighthouse_score": ">90",
+      "core_web_vitals": "All metrics in green"
+    },
+    "security": {
+      "vulnerability_scan": "No high/critical vulnerabilities",
+      "dependency_scan": "No known vulnerable dependencies",
+      "penetration_test": "No exploitable vulnerabilities",
+      "compliance": "OWASP Top 10 compliance"
+    },
+    "accessibility": {
+      "wcag_compliance": "AA level compliance",
+      "keyboard_navigation": "Full keyboard accessibility",
+      "screen_reader": "Screen reader compatibility",
+      "color_contrast": "4.5:1 minimum ratio"
+    }
+  },
+  "test_automation": {
+    "unit_testing": {
+      "framework": "Jest with React Testing Library",
+      "coverage": "Statement, branch, function, line coverage",
+      "mocking": "Service and API mocking",
+      "assertions": "Comprehensive assertion library"
+    },
+    "integration_testing": {
+      "api_testing": "Endpoint testing with real database",
+      "component_testing": "Component integration testing",
+      "service_testing": "Service layer integration",
+      "database_testing": "Data persistence validation"
+    },
+    "e2e_testing": {
+      "framework": "Playwright for cross-browser testing",
+      "user_journeys": "Critical user path validation",
+      "visual_testing": "Screenshot comparison testing",
+      "mobile_testing": "Responsive design validation"
+    }
+  },
+  "performance_testing": {
+    "load_testing": {
+      "concurrent_users": "Test with expected user load",
+      "response_times": "Validate response time SLAs",
+      "throughput": "Measure requests per second",
+      "resource_usage": "Monitor CPU, memory, disk"
+    },
+    "stress_testing": {
+      "breaking_point": "Find system breaking point",
+      "recovery_testing": "System recovery validation",
+      "spike_testing": "Sudden load increase testing",
+      "volume_testing": "Large data volume testing"
+    },
+    "performance_monitoring": {
+      "real_user_monitoring": "Production performance tracking",
+      "synthetic_monitoring": "Automated performance checks",
+      "core_web_vitals": "Google Core Web Vitals tracking",
+      "lighthouse_ci": "Automated Lighthouse audits"
+    }
+  },
+  "security_testing": {
+    "vulnerability_assessment": {
+      "static_analysis": "Code vulnerability scanning",
+      "dynamic_analysis": "Runtime vulnerability testing",
+      "dependency_scanning": "Third-party vulnerability check",
+      "container_scanning": "Docker image vulnerability scan"
+    },
+    "penetration_testing": {
+      "authentication_testing": "Auth bypass attempts",
+      "authorization_testing": "Privilege escalation testing",
+      "input_validation": "Injection attack testing",
+      "session_management": "Session security testing"
+    },
+    "compliance_testing": {
+      "owasp_top_10": "OWASP vulnerability testing",
+      "gdpr_compliance": "Data protection validation",
+      "pci_compliance": "Payment security validation",
+      "security_headers": "HTTP security header validation"
+    }
+  },
+  "accessibility_testing": {
+    "automated_testing": {
+      "axe_core": "Automated accessibility scanning",
+      "lighthouse_a11y": "Lighthouse accessibility audit",
+      "pa11y": "Command-line accessibility testing",
+      "wave": "Web accessibility evaluation"
+    },
+    "manual_testing": {
+      "keyboard_navigation": "Tab order and focus management",
+      "screen_reader": "NVDA, JAWS, VoiceOver testing",
+      "color_contrast": "Visual accessibility validation",
+      "cognitive_load": "Content clarity and simplicity"
+    },
+    "compliance_validation": {
+      "wcag_2_1": "Web Content Accessibility Guidelines",
+      "section_508": "US federal accessibility standards",
+      "ada_compliance": "Americans with Disabilities Act",
+      "en_301_549": "European accessibility standard"
+    }
+  },
+  "test_data_management": {
+    "test_data_strategy": {
+      "synthetic_data": "Generated test data for privacy",
+      "anonymized_data": "Production data anonymization",
+      "data_seeding": "Consistent test data setup",
+      "data_cleanup": "Test data cleanup procedures"
+    },
+    "environment_management": {
+      "data_isolation": "Test environment data isolation",
+      "data_versioning": "Test data version control",
+      "data_refresh": "Regular test data refresh",
+      "backup_restore": "Test data backup procedures"
+    }
+  },
+  "bug_tracking": {
+    "bug_lifecycle": {
+      "discovery": "Bug identification and documentation",
+      "triage": "Priority and severity assessment",
+      "assignment": "Developer assignment and tracking",
+      "verification": "Fix validation and closure"
+    },
+    "bug_classification": {
+      "severity": "Critical, High, Medium, Low",
+      "priority": "P0, P1, P2, P3",
+      "type": "Functional, Performance, Security, UI",
+      "environment": "Development, Staging, Production"
+    },
+    "reporting": {
+      "bug_reports": "Detailed bug reproduction steps",
+      "test_reports": "Comprehensive test execution reports",
+      "quality_metrics": "Quality dashboard and KPIs",
+      "trend_analysis": "Bug trend and quality analysis"
+    }
+  },
+  "continuous_testing": {
+    "ci_cd_integration": {
+      "pipeline_testing": "Automated testing in CI/CD",
+      "quality_gates": "Automated quality gate enforcement",
+      "test_reporting": "Automated test result reporting",
+      "failure_notification": "Immediate failure notifications"
+    },
+    "shift_left_testing": {
+      "early_testing": "Testing in development phase",
+      "developer_testing": "Developer-driven testing",
+      "test_driven_development": "TDD implementation",
+      "behavior_driven_development": "BDD with stakeholders"
+    }
+  },
+  "metrics_and_reporting": {
+    "quality_metrics": {
+      "defect_density": "Bugs per lines of code",
+      "test_coverage": "Code coverage percentage",
+      "test_effectiveness": "Bug detection rate",
+      "escape_rate": "Production bug percentage"
+    },
+    "performance_metrics": {
+      "test_execution_time": "Automated test suite duration",
+      "environment_stability": "Test environment uptime",
+      "test_maintenance": "Test maintenance effort",
+      "automation_roi": "Test automation return on investment"
+    },
+    "reporting_dashboard": {
+      "real_time_metrics": "Live quality dashboard",
+      "trend_analysis": "Quality trend visualization",
+      "risk_assessment": "Quality risk indicators",
+      "stakeholder_reports": "Executive quality summaries"
+    }
+  },
+  "error_handling": {
+    "test_failures": "Automated failure analysis and reporting",
+    "environment_issues": "Test environment troubleshooting",
+    "data_issues": "Test data problem resolution",
+    "tool_failures": "Testing tool issue resolution",
+    "performance_degradation": "Performance issue investigation"
+  },
+  "learning_and_improvement": {
+    "retrospectives": "Regular testing process improvement",
+    "best_practices": "Testing best practice documentation",
+    "tool_evaluation": "New testing tool assessment",
+    "training": "Team testing skill development",
+    "knowledge_sharing": "Cross-team testing knowledge sharing"
+  },
+  "metrics": {
+    "quality_score": "Overall application quality rating",
+    "test_automation_coverage": "Percentage of automated tests",
+    "bug_detection_rate": "Bugs found vs bugs escaped",
+    "testing_efficiency": "Test execution and maintenance metrics",
+    "stakeholder_satisfaction": "Quality satisfaction surveys"
+  }
+}

@@ -1,0 +1,189 @@
+# ClientSpecExtraction.prp - Natural Language Requirement Processing
+
+## 🎯 PURPOSE
+Transform natural language client requirements into structured, actionable development specifications for multi-agent execution.
+
+## 📋 INPUT PROCESSING
+
+### **Natural Language Input**
+```
+CLIENT_REQUIREMENT: {user_input}
+```
+
+### **Extraction Categories**
+- **FUNCTIONAL_REQUIREMENTS**: Core features, user workflows, business logic
+- **TECHNICAL_REQUIREMENTS**: Performance, scalability, security, integrations
+- **DESIGN_REQUIREMENTS**: UI/UX, branding, accessibility, responsive design
+- **BUSINESS_REQUIREMENTS**: Timeline, budget, compliance, maintenance
+
+## 🔄 PROCESSING PIPELINE
+
+### **Step 1: Requirement Analysis**
+```
+ANALYZE: {user_input}
+EXTRACT: Key features, technical constraints, design preferences
+CATEGORIZE: Functional, Technical, Design, Business
+PRIORITIZE: Critical, High, Medium, Low
+```
+
+### **Step 2: Agent Assignment**
+```
+IF: E-commerce OR Payment processing
+THEN: ASSIGN [architect, backend, frontend, qa, devops]
+
+IF: Dashboard OR Analytics
+THEN: ASSIGN [architect, frontend, backend, qa]
+
+IF: Admin Panel OR Security
+THEN: ASSIGN [architect, backend, qa, devops]
+
+IF: UI/UX Focus
+THEN: ASSIGN [architect, frontend, qa]
+
+IF: API OR Integration
+THEN: ASSIGN [architect, backend, qa, devops]
+```
+
+### **Step 3: Specification Generation**
+```
+GENERATE:
+- Technical Architecture Specification
+- Development Roadmap with Milestones
+- Agent Task Assignments
+- Dependency Mapping
+- Quality Assurance Requirements
+```
+
+## 🤖 AGENT TRIGGER PATTERNS
+
+### **Architecture Agent Triggers**
+- "system design", "architecture", "scalability", "integration"
+- "microservices", "database design", "API structure"
+- "technology stack", "framework selection"
+
+### **Frontend Agent Triggers**
+- "UI", "UX", "dashboard", "responsive", "mobile"
+- "React", "Next.js", "components", "styling"
+- "user interface", "design system", "accessibility"
+
+### **Backend Agent Triggers**
+- "API", "database", "authentication", "security"
+- "server", "backend", "data processing", "business logic"
+- "integration", "third-party services", "webhooks"
+
+### **QA Agent Triggers**
+- "testing", "quality", "performance", "security audit"
+- "validation", "compliance", "reliability"
+- "load testing", "security testing", "accessibility testing"
+
+### **DevOps Agent Triggers**
+- "deployment", "hosting", "CI/CD", "infrastructure"
+- "scaling", "monitoring", "backup", "disaster recovery"
+- "cloud", "containerization", "orchestration"
+
+## 📊 OUTPUT SPECIFICATION
+
+### **Structured Requirements**
+```json
+{
+  "project_id": "generated_uuid",
+  "client_input": "original_requirement",
+  "extracted_requirements": {
+    "functional": ["feature1", "feature2"],
+    "technical": ["requirement1", "requirement2"],
+    "design": ["ui_requirement1", "ux_requirement2"],
+    "business": ["timeline", "budget", "compliance"]
+  },
+  "assigned_agents": ["architect", "frontend", "backend"],
+  "priority_matrix": {
+    "critical": ["core_feature"],
+    "high": ["important_feature"],
+    "medium": ["nice_to_have"],
+    "low": ["future_enhancement"]
+  },
+  "estimated_timeline": "4_weeks",
+  "complexity_score": 7.5,
+  "recommended_approach": "agile_development"
+}
+```
+
+### **Agent Task Assignments**
+```json
+{
+  "architect": {
+    "tasks": ["system_design", "technology_selection"],
+    "dependencies": ["client_requirements"],
+    "deliverables": ["architecture_document", "tech_stack_selection"],
+    "estimated_hours": 16
+  },
+  "frontend": {
+    "tasks": ["ui_implementation", "responsive_design"],
+    "dependencies": ["architect_output"],
+    "deliverables": ["ui_components", "responsive_layouts"],
+    "estimated_hours": 40
+  },
+  "backend": {
+    "tasks": ["api_development", "database_design"],
+    "dependencies": ["architect_output"],
+    "deliverables": ["api_endpoints", "database_schema"],
+    "estimated_hours": 48
+  }
+}
+```
+
+## 🎯 EXAMPLE TRANSFORMATIONS
+
+### **Example 1: E-commerce Platform**
+```
+INPUT: "I need an e-commerce platform that can handle 10,000 users with Stripe payments"
+
+OUTPUT:
+- AGENTS: [architect, backend, frontend, qa, devops]
+- FUNCTIONAL: [product_catalog, shopping_cart, payment_processing, user_accounts]
+- TECHNICAL: [10k_user_capacity, stripe_integration, secure_payments]
+- TIMELINE: 6-8 weeks
+- COMPLEXITY: 8.5/10
+```
+
+### **Example 2: Analytics Dashboard**
+```
+INPUT: "Create a dashboard with real-time analytics and dark mode"
+
+OUTPUT:
+- AGENTS: [architect, frontend, backend, qa]
+- FUNCTIONAL: [real_time_data, analytics_visualization, dark_mode]
+- TECHNICAL: [websocket_connection, data_processing, theme_system]
+- TIMELINE: 3-4 weeks
+- COMPLEXITY: 6.5/10
+```
+
+### **Example 3: Admin Panel**
+```
+INPUT: "Build a secure admin panel with role-based access control"
+
+OUTPUT:
+- AGENTS: [architect, backend, frontend, qa, devops]
+- FUNCTIONAL: [user_management, role_permissions, admin_dashboard]
+- TECHNICAL: [rbac_system, security_audit, access_logging]
+- TIMELINE: 4-5 weeks
+- COMPLEXITY: 7.5/10
+```
+
+## 🔄 CONTINUOUS REFINEMENT
+
+### **Feedback Loop**
+```
+CLIENT_FEEDBACK → REQUIREMENT_REFINEMENT → AGENT_REALLOCATION → UPDATED_SPECIFICATIONS
+```
+
+### **Adaptive Processing**
+- **Requirement Changes**: Automatic re-processing and agent reallocation
+- **Scope Expansion**: Dynamic agent addition and task redistribution
+- **Timeline Adjustments**: Priority rebalancing and resource optimization
+- **Quality Requirements**: Enhanced QA agent involvement and testing scope
+
+---
+
+*Template Version: 1.0*
+*Last Updated: 2025-07-14*
+*Compatible with: Multi-Agent Orchestration System v1.1*
