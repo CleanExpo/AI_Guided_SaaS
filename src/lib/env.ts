@@ -64,8 +64,28 @@ try {
 
 export { env }
 
+// Demo mode detection - checks if we're using placeholder/demo values
+export function isDemoMode(): boolean {
+  const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY
+  
+  // Check if we have demo/placeholder values
+  const hasDemoSupabase = !supabaseUrl || !supabaseKey || 
+    supabaseUrl.includes('demo-') || 
+    supabaseUrl.includes('placeholder') ||
+    supabaseKey.includes('demo-') ||
+    supabaseKey.includes('placeholder')
+  
+  return hasDemoSupabase
+}
+
 // Service configuration helpers
 export function isServiceConfigured(service: string): boolean {
+  // In demo mode, services are considered "not configured" to trigger fallbacks
+  if (isDemoMode()) {
+    return false
+  }
+  
   switch (service) {
     case 'supabase':
       return !!(env.NEXT_PUBLIC_SUPABASE_URL && env.SUPABASE_SERVICE_ROLE_KEY)

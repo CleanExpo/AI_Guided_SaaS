@@ -5,6 +5,7 @@
 
 import { getServerSession as nextAuthGetServerSession } from 'next-auth/next'
 import { authOptions } from './auth'
+import { isDemoMode } from './env'
 import type { Session } from 'next-auth'
 
 // Extended session type with guaranteed user ID
@@ -15,12 +16,33 @@ export interface AuthenticatedSession extends Session {
     name: string
     image?: string
   }
+  expires: string
+}
+
+/**
+ * Create a demo session for demo mode
+ */
+function createDemoSession(): AuthenticatedSession {
+  return {
+    user: {
+      id: 'demo-user-id',
+      email: 'demo@aiguidedSaaS.com',
+      name: 'Demo User',
+      image: undefined
+    },
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24 hours from now
+  }
 }
 
 /**
  * Type-safe wrapper for getServerSession that ensures proper typing
  */
 export async function getServerSession(): Promise<AuthenticatedSession | null> {
+  // In demo mode, return a mock session
+  if (isDemoMode()) {
+    return createDemoSession()
+  }
+
   try {
     // @ts-expect-error - NextAuth types are complex, using type assertion for safety
     const session = await nextAuthGetServerSession(authOptions)
