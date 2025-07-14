@@ -231,7 +231,7 @@ export default function TemplatesPage() {
           <CardContent>
             <div className="text-2xl font-bold">{featuredTemplates.length}</div>
             <p className="text-xs text-muted-foreground">
-              Editor's choice
+              Editor&apos;s choice
             </p>
           </CardContent>
         </Card>
