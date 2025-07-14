@@ -1,0 +1,204 @@
+{
+  "name": "ai-guided-saas-environment-manager",
+  "version": "1.0.0",
+  "description": "MCP Taskmaster Environment & Workflow Management System",
+  "server": {
+    "name": "ai-guided-saas-orchestrator",
+    "version": "1.0.0",
+    "capabilities": {
+      "tools": true,
+      "resources": true,
+      "prompts": true
+    }
+  },
+  "project": {
+    "name": "AI Guided SaaS",
+    "path": "D:\\AI Guided SaaS",
+    "supabaseProjectId": "rkhsfiuuydxnqxaefbwy",
+    "githubRepo": "https://github.com/CleanExpo/AI_Guided_SaaS",
+    "vercelProject": "https://vercel.com/unite-group/ai-guided-saas",
+    "environments": {
+      "development": {
+        "envFile": ".env.local",
+        "url": "http://localhost:3000"
+      },
+      "production": {
+        "envFile": ".env.production",
+        "url": "https://ai-guided-saas-fkqvot40t-unite-group.vercel.app"
+      }
+    }
+  },
+  "agents": {
+    "agent_architect": {
+      "role": "System Architecture & Design",
+      "capabilities": ["system-design", "workflow-optimization", "integration-planning"],
+      "priority": 1
+    },
+    "agent_devops": {
+      "role": "Platform Integration & Deployment",
+      "capabilities": ["github-integration", "vercel-deployment", "supabase-management", "environment-sync"],
+      "priority": 2
+    },
+    "agent_backend": {
+      "role": "Environment Validation & Security",
+      "capabilities": ["env-validation", "credential-rotation", "security-audit"],
+      "priority": 3
+    },
+    "agent_qa": {
+      "role": "Testing & Validation",
+      "capabilities": ["environment-testing", "deployment-validation", "health-monitoring"],
+      "priority": 4
+    },
+    "agent_frontend": {
+      "role": "Dashboard & Monitoring",
+      "capabilities": ["status-dashboard", "workflow-ui", "monitoring-interface"],
+      "priority": 5
+    }
+  },
+  "tools": {
+    "environment_manager": {
+      "name": "Environment Variable Manager",
+      "description": "Centralized management of environment variables across all platforms",
+      "capabilities": [
+        "validate-env-schema",
+        "sync-environments",
+        "rotate-credentials",
+        "generate-env-templates"
+      ]
+    },
+    "platform_sync": {
+      "name": "Platform Synchronization Tool",
+      "description": "Automated synchronization between GitHub, Vercel, and Supabase",
+      "capabilities": [
+        "github-env-sync",
+        "vercel-env-sync",
+        "supabase-config-sync",
+        "cross-platform-validation"
+      ]
+    },
+    "workflow_orchestrator": {
+      "name": "Workflow Orchestration Engine",
+      "description": "Automated deployment and workflow management",
+      "capabilities": [
+        "deployment-pipeline",
+        "workflow-automation",
+        "task-coordination",
+        "status-monitoring"
+      ]
+    },
+    "credential_rotator": {
+      "name": "Credential Rotation Manager",
+      "description": "Automated security credential updates and management",
+      "capabilities": [
+        "api-key-rotation",
+        "secret-generation",
+        "security-audit",
+        "compliance-check"
+      ]
+    },
+    "health_monitor": {
+      "name": "System Health Monitor",
+      "description": "Real-time monitoring and health checks across all platforms",
+      "capabilities": [
+        "service-health-check",
+        "performance-monitoring",
+        "error-detection",
+        "alert-management"
+      ]
+    }
+  },
+  "workflows": {
+    "environment_setup": {
+      "name": "Complete Environment Setup",
+      "description": "End-to-end environment configuration and validation",
+      "steps": [
+        "validate-env-schema",
+        "generate-missing-credentials",
+        "sync-to-platforms",
+        "validate-deployment",
+        "monitor-health"
+      ],
+      "agents": ["agent_devops", "agent_backend", "agent_qa"]
+    },
+    "credential_rotation": {
+      "name": "Security Credential Rotation",
+      "description": "Automated rotation of all security credentials",
+      "steps": [
+        "audit-current-credentials",
+        "generate-new-credentials",
+        "update-all-platforms",
+        "validate-functionality",
+        "revoke-old-credentials"
+      ],
+      "agents": ["agent_backend", "agent_devops", "agent_qa"]
+    },
+    "deployment_pipeline": {
+      "name": "Automated Deployment Pipeline",
+      "description": "Complete deployment from code to production",
+      "steps": [
+        "validate-environment",
+        "run-tests",
+        "deploy-to-vercel",
+        "update-supabase",
+        "monitor-deployment"
+      ],
+      "agents": ["agent_devops", "agent_qa", "agent_architect"]
+    }
+  },
+  "monitoring": {
+    "healthChecks": {
+      "interval": "5m",
+      "endpoints": [
+        "https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/api/health",
+        "https://rkhsfiuuydxnqxaefbwy.supabase.co/rest/v1/"
+      ]
+    },
+    "alerts": {
+      "channels": ["action-log", "error-log"],
+      "thresholds": {
+        "response_time": "5s",
+        "error_rate": "5%",
+        "uptime": "99%"
+      }
+    }
+  },
+  "security": {
+    "credentialRotation": {
+      "schedule": "monthly",
+      "autoRotate": ["api-keys", "webhooks", "secrets"],
+      "manualRotate": ["oauth-credentials", "database-passwords"]
+    },
+    "validation": {
+      "envSchema": true,
+      "secretsAudit": true,
+      "complianceCheck": true
+    }
+  },
+  "integration": {
+    "claudeCodeCLI": {
+      "enabled": true,
+      "contextSharing": true,
+      "taskCreation": true
+    },
+    "vscode": {
+      "enabled": true,
+      "extensionIntegration": true,
+      "workspaceSync": true
+    },
+    "github": {
+      "enabled": true,
+      "autoSync": true,
+      "webhooks": true
+    },
+    "vercel": {
+      "enabled": true,
+      "deploymentHooks": true,
+      "envSync": true
+    },
+    "supabase": {
+      "enabled": true,
+      "configSync": true,
+      "migrationManagement": true
+    }
+  }
+}

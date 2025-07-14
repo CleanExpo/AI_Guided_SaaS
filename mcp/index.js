@@ -7,7 +7,14 @@
 
 const AgentBridge = require('./bridges/agent-bridge.js');
 const OrchestratorServer = require('./servers/orchestrator-server.js');
+const EnvironmentManager = require('./tools/environment-manager.js');
+const PlatformSync = require('./tools/platform-sync.js');
+const fs = require('fs');
 const path = require('path');
+
+// Load MCP configuration
+const configPath = path.join(__dirname, 'config', 'mcp-config.json');
+const mcpConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 class MCPTaskmasterCLI {
     constructor() {
