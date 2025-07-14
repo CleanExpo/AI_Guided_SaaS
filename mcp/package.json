@@ -1,0 +1,30 @@
+{
+  "name": "ai-guided-saas-mcp",
+  "version": "1.0.0",
+  "description": "AI Guided SaaS Multi-Agent Coordination Protocol - MCP Taskmaster System",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js start",
+    "status": "node index.js status",
+    "list-tasks": "node index.js list-tasks",
+    "help": "node index.js help"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "saas",
+    "multi-agent",
+    "taskmaster",
+    "orchestration"
+  ],
+  "author": "AI Guided SaaS Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
