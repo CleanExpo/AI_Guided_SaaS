@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { authenticateApiRequest } from '@/lib/auth-helpers'
 import { AnalyticsService } from '@/lib/analytics'
+import { isDemoMode } from '@/lib/env'
 
 export async function GET(request: NextRequest) {
   try {
@@ -38,6 +39,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       data,
+      demoMode: isDemoMode(),
       testMode: !AnalyticsService.isConfigured()
     })
 
