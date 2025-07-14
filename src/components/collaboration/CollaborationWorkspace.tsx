@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { io, Socket } from 'socket.io-client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -55,19 +55,7 @@ export default function CollaborationWorkspace({
   const workspaceRef = useRef<HTMLDivElement>(null)
   const mousePosition = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
 
-  useEffect(() => {
-    if (session?.user) {
-      initializeCollaboration()
-    }
-
-    return () => {
-      if (socket) {
-        socket.disconnect()
-      }
-    }
-  }, [session, projectId, roomId])
-
-  const initializeCollaboration = async () => {
+  const initializeCollaboration = useCallback(async () => {
     setLoading(true)
     try {
       // Initialize Socket.IO connection
@@ -90,7 +78,19 @@ export default function CollaborationWorkspace({
     } finally {
       setLoading(false)
     }
-  }
+  }, [session?.user?.email, projectId, roomId, onRoomCreated])
+
+  useEffect(() => {
+    if (session?.user) {
+      initializeCollaboration()
+    }
+
+    return () => {
+      if (socket) {
+        socket.disconnect()
+      }
+    }
+  }, [session, projectId, roomId, initializeCollaboration, socket])
 
   const setupSocketListeners = (socket: Socket) => {
     socket.on('connect', () => {
