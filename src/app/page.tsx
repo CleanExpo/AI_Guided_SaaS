@@ -2,8 +2,8 @@
 
 // Force deployment trigger - 2025-01-13-enhanced-icons-final
 import { useSession } from 'next-auth/react';
-import LandingPageEnhanced from '@/components/LandingPageEnhanced';
-import DashboardEnhanced from '@/components/dashboard/DashboardEnhanced';
+import LandingPageProduction from '@/components/LandingPageProduction';
+import Dashboard from '@/components/Dashboard';
 
 export default function HomePage() {
   const { data: session, status } = useSession();
@@ -21,5 +21,5 @@ export default function HomePage() {
   }
 
   // Show our beautiful showcase landing page for non-authenticated users, dashboard for authenticated users
-  return session ? <DashboardEnhanced /> : <LandingPageEnhanced />;
+  return session ? <Dashboard /> : <LandingPageProduction />;
 }
