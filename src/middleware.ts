@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { logSecurity, logWarn } from './lib/production-logger';
 
 // Rate limiting store (in production, use Redis or external service)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
@@ -104,7 +105,7 @@ function validateRequest(request: NextRequest): string | null {
   
   // Allow legitimate bots but log them
   if (botPatterns.some(pattern => pattern.test(userAgent))) {
-    console.log(`Bot detected: ${userAgent}`);
+    logSecurity('Bot detected', { userAgent });
   }
   
   return null;
@@ -126,7 +127,7 @@ export function middleware(request: NextRequest) {
   // Validate request for suspicious patterns
   const validationError = validateRequest(request);
   if (validationError) {
-    console.warn(`Blocked suspicious request: ${validationError}`, {
+    logSecurity(`Blocked suspicious request: ${validationError}`, {
       url: request.url,
       userAgent: request.headers.get('user-agent'),
       ip: request.headers.get('x-forwarded-for') || request.ip,
@@ -144,7 +145,7 @@ export function middleware(request: NextRequest) {
     : { maxRequests: RATE_LIMIT_CONFIG.maxRequests, windowMs: RATE_LIMIT_CONFIG.windowMs };
   
   if (!checkRateLimit(rateLimitKey, maxRequests, windowMs)) {
-    console.warn(`Rate limit exceeded for ${rateLimitKey}`, {
+    logWarn(`Rate limit exceeded for ${rateLimitKey}`, {
       pathname,
       ip: request.headers.get('x-forwarded-for') || request.ip,
     });

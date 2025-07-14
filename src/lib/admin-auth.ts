@@ -3,6 +3,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { NextRequest } from 'next/server'
+import { logAdmin, logWarn } from './production-logger'
 
 export interface AdminUser {
   id: string
@@ -65,7 +66,7 @@ export class AdminAuthService {
     try {
       // Check if admin panel is enabled
       if (process.env.ENABLE_ADMIN_PANEL !== 'true') {
-        console.log('Admin panel is disabled')
+        logWarn('Admin panel is disabled')
         return null
       }
 
@@ -85,7 +86,7 @@ export class AdminAuthService {
 
       // In production, check against database for additional admin accounts
       // For now, only master admin is supported
-      console.log('Invalid admin credentials provided')
+      logWarn('Invalid admin credentials provided', { email })
       return null
     } catch (error) {
       console.error('Error authenticating admin:', error)
@@ -166,7 +167,7 @@ export class AdminAuthService {
 
       // Additional security checks
       if (session.role !== 'super_admin' && session.role !== 'admin' && session.role !== 'moderator') {
-        console.log('Invalid admin role in session')
+        logWarn('Invalid admin role in session', { role: session.role })
         return null
       }
 
@@ -237,7 +238,11 @@ export class AdminAuthService {
       }
 
       // In production, save to database
-      console.log('Admin activity logged:', JSON.stringify(activity, null, 2))
+      logAdmin('Activity logged', activity.adminId, {
+        action: activity.action,
+        target: activity.target,
+        details: activity.details
+      })
 
       // You could also send to monitoring service
       // await monitoringService.logAdminActivity(activity)
