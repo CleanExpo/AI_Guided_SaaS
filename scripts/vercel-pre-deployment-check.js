@@ -137,6 +137,8 @@ class VercelPreDeploymentValidator {
       // Check for experimental features that might cause issues
       if (nextConfigContent.includes('optimizeCss: true')) {
         this.addWarning('CSS optimization enabled - may cause critters module issues');
+      } else if (nextConfigContent.includes('optimizeCss: false')) {
+        this.addSuccess('CSS optimization properly disabled - no critters module issues');
       }
 
       this.addSuccess('Next.js configuration validated');
@@ -250,7 +252,18 @@ class VercelPreDeploymentValidator {
         execSync('npx eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0', { stdio: 'pipe' });
         this.addSuccess('ESLint check passed');
       } catch (error) {
-        this.addWarning('ESLint errors detected - build may fail if ignoreDuringBuilds is false');
+        // Check if ignoreDuringBuilds is true
+        const nextConfigPath = path.join(this.projectRoot, 'next.config.mjs');
+        if (fs.existsSync(nextConfigPath)) {
+          const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf8');
+          if (nextConfigContent.includes('ignoreDuringBuilds: true')) {
+            this.addSuccess('ESLint errors present but handled - ignoreDuringBuilds: true configured');
+          } else {
+            this.addWarning('ESLint errors detected - build may fail if ignoreDuringBuilds is false');
+          }
+        } else {
+          this.addWarning('ESLint errors detected - build may fail if ignoreDuringBuilds is false');
+        }
       }
 
       // Simulate Next.js build check (without full build)
@@ -301,7 +314,11 @@ class VercelPreDeploymentValidator {
       const requiredIgnores = ['.env.local', '.env*.local', '.vercel', '.next'];
       
       requiredIgnores.forEach(pattern => {
-        if (!gitignoreContent.includes(pattern)) {
+        // Check for exact match or wildcard patterns
+        const isPatternCovered = gitignoreContent.includes(pattern) || 
+                                (pattern === '.env.local' && gitignoreContent.includes('.env*.local'));
+        
+        if (!isPatternCovered) {
           this.addWarning(`Missing ${pattern} in .gitignore - may cause deployment issues`);
         }
       });

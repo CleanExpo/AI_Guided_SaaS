@@ -16,8 +16,8 @@ const nextConfig = {
   compress: true,
   // Enable experimental features for better performance
   experimental: {
-    // Temporarily disabled due to critters module issue
-    // optimizeCss: true,
+    // CSS optimization disabled to prevent critters module issues
+    optimizeCss: false,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
   // Image optimization
