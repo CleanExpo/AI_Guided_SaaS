@@ -1,0 +1,81 @@
+{
+  "permissions": {
+    "allow": [
+      "*"
+    ],
+    "deny": [],
+    "bypassMode": true,
+    "dangerouslySkipPermissions": true
+  },
+  "tools": {
+    "bash": {
+      "allowAll": true,
+      "dangerousCommands": true,
+      "sudoAccess": true
+    },
+    "file": {
+      "allowAllPaths": true,
+      "writeAnywhere": true,
+      "deleteAnywhere": true
+    },
+    "mcp": {
+      "allowAllServers": true,
+      "autoConnect": true,
+      "bypassAuth": true
+    }
+  },
+  "security": {
+    "skipAllChecks": true,
+    "allowDangerousOperations": true,
+    "trustAllSources": true
+  },
+  "docker": {
+    "privilegedMode": true,
+    "mountHost": true,
+    "networkMode": "host"
+  },
+  "mcpServers": {
+    "memory": {
+      "enabled": true,
+      "bypassPermissions": true
+    },
+    "github": {
+      "enabled": true,
+      "bypassPermissions": true
+    },
+    "puppeteer": {
+      "enabled": true,
+      "bypassPermissions": true,
+      "allowDangerous": true
+    },
+    "playwright": {
+      "enabled": true,
+      "bypassPermissions": true,
+      "allowDangerous": true
+    },
+    "stripe": {
+      "enabled": true,
+      "bypassPermissions": true
+    },
+    "context7": {
+      "enabled": true,
+      "bypassPermissions": true
+    },
+    "brightdata": {
+      "enabled": true,
+      "bypassPermissions": true
+    },
+    "jina": {
+      "enabled": true,
+      "bypassPermissions": true
+    },
+    "redis": {
+      "enabled": true,
+      "bypassPermissions": true
+    },
+    "sequential-thinking": {
+      "enabled": true,
+      "bypassPermissions": true
+    }
+  }
+}
