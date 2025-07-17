@@ -19,7 +19,7 @@
     "test:accessibility": "jest --testPathPattern=accessibility",
     "validate": "npm run typecheck && npm run lint && npm run test",
     "validate:full": "npm run typecheck && npm run lint && npm run test:coverage && npm run test:accessibility",
-    "deploy:check": "node scripts/vercel-pre-deployment-check.js",
+    "deploy:check": "node scripts/vercel-pre-deployment-check.cjs",
     "pre-deploy": "node scripts/vercel-pre-deployment-check.js",
     "deploy:staging": "vercel --token=$VERCEL_TOKEN",
     "deploy:production": "vercel --prod --token=$VERCEL_TOKEN",
