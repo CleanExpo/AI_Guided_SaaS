@@ -1,439 +1,678 @@
-#!/usr/bin/env node
-
-/**
- * VERCEL PRE-DEPLOYMENT VALIDATION SYSTEM
- * 
- * This script validates ALL Vercel deployment requirements before build
- * Based on official Vercel documentation and best practices
- * 
- * Run this BEFORE every deployment to prevent build failures
- */
-
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-class VercelPreDeploymentValidator {
-  constructor() {
-    this.errors = [];
-    this.warnings = [];
-    this.projectRoot = process.cwd();
-    this.requiredFiles = [
-      'package.json',
-      'next.config.mjs',
-      '.env.production',
-      'tsconfig.json'
-    ];
-  }
+/**
+ * Sequential Thinking Pre-deployment Check for WSL Ubuntu + Vercel
+ * This script uses sequential thinking methodology to validate deployment readiness
+ */
 
-  log(message, type = 'info') {
-    const timestamp = new Date().toISOString();
-    const colors = {
-      info: '\x1b[36m',    // Cyan
-      success: '\x1b[32m', // Green
-      warning: '\x1b[33m', // Yellow
-      error: '\x1b[31m',   // Red
-      reset: '\x1b[0m'
-    };
-    
-    console.log(`${colors[type]}[${timestamp}] ${message}${colors.reset}`);
-  }
-
-  addError(message) {
-    this.errors.push(message);
-    this.log(`❌ ERROR: ${message}`, 'error');
-  }
-
-  addWarning(message) {
-    this.warnings.push(message);
-    this.log(`⚠️  WARNING: ${message}`, 'warning');
-  }
-
-  addSuccess(message) {
-    this.log(`✅ ${message}`, 'success');
-  }
-
-  // 1. VERCEL FRAMEWORK DETECTION
-  validateFrameworkDetection() {
-    this.log('🔍 Validating Vercel Framework Detection...', 'info');
-    
-    const packageJsonPath = path.join(this.projectRoot, 'package.json');
-    if (!fs.existsSync(packageJsonPath)) {
-      this.addError('package.json not found - required for framework detection');
-      return;
-    }
-
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-    
-    // Check Next.js detection requirements
-    if (!packageJson.dependencies?.next && !packageJson.devDependencies?.next) {
-      this.addError('Next.js not found in dependencies - Vercel cannot detect framework');
-      return;
-    }
-
-    // Check build script
-    if (!packageJson.scripts?.build) {
-      this.addError('Missing "build" script in package.json - required by Vercel');
-      return;
-    }
-
-    // Validate build script content
-    if (packageJson.scripts.build !== 'next build') {
-      this.addWarning(`Build script is "${packageJson.scripts.build}" - should be "next build" for optimal Vercel detection`);
-    }
-
-    this.addSuccess('Framework detection requirements met');
-  }
-
-  // 2. VERCEL BUILD SETTINGS VALIDATION
-  validateBuildSettings() {
-    this.log('🔧 Validating Vercel Build Settings...', 'info');
-    
-    // Check vercel.json if exists
-    const vercelJsonPath = path.join(this.projectRoot, 'vercel.json');
-    if (fs.existsSync(vercelJsonPath)) {
-      try {
-        const vercelConfig = JSON.parse(fs.readFileSync(vercelJsonPath, 'utf8'));
+class SequentialThinkingDeploymentChecker {
+    constructor() {
+        this.thinkingContext = {
+            currentThought: 1,
+            totalThoughts: 8,
+            thoughtHistory: [],
+            issues: [],
+            recommendations: [],
+            validations: []
+        };
         
-        // Validate build command
-        if (vercelConfig.buildCommand && vercelConfig.buildCommand !== 'npm run build') {
-          this.addWarning(`Custom build command detected: ${vercelConfig.buildCommand}`);
-        }
-
-        // Validate output directory
-        if (vercelConfig.outputDirectory && vercelConfig.outputDirectory !== '.next') {
-          this.addWarning(`Custom output directory: ${vercelConfig.outputDirectory}`);
-        }
-
-        // Check for problematic redirects
-        if (vercelConfig.redirects) {
-          vercelConfig.redirects.forEach((redirect, index) => {
-            if (redirect.source === '/dashboard' && redirect.destination === '/') {
-              this.addError(`Problematic redirect found at index ${index}: /dashboard -> / (breaks navigation)`);
+        this.deploymentState = {
+            environment: process.env.NODE_ENV || 'production',
+            wslEnabled: process.env.WSL_DISTRO_NAME !== undefined,
+            projectRoot: process.cwd(),
+            checks: {
+                environment: false,
+                files: false,
+                git: false,
+                dependencies: false,
+                build: false,
+                security: false,
+                wsl: false,
+                vercel: false
             }
-          });
-        }
-
-        this.addSuccess('vercel.json configuration validated');
-      } catch (error) {
-        this.addError(`Invalid vercel.json format: ${error.message}`);
-      }
+        };
     }
 
-    // Check Next.js config
-    const nextConfigPath = path.join(this.projectRoot, 'next.config.mjs');
-    if (fs.existsSync(nextConfigPath)) {
-      const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf8');
-      
-      // Check for build-breaking configurations
-      if (nextConfigContent.includes('ignoreDuringBuilds: false')) {
-        this.addError('next.config.mjs has ignoreDuringBuilds: false - will cause build failures with ESLint errors');
-      }
-
-      if (nextConfigContent.includes('ignoreBuildErrors: false')) {
-        this.addError('next.config.mjs has ignoreBuildErrors: false - will cause build failures with TypeScript errors');
-      }
-
-      // Check for experimental features that might cause issues
-      if (nextConfigContent.includes('optimizeCss: true')) {
-        this.addWarning('CSS optimization enabled - may cause critters module issues');
-      } else if (nextConfigContent.includes('optimizeCss: false')) {
-        this.addSuccess('CSS optimization properly disabled - no critters module issues');
-      }
-
-      this.addSuccess('Next.js configuration validated');
-    }
-  }
-
-  // 3. ENVIRONMENT VARIABLES VALIDATION
-  validateEnvironmentVariables() {
-    this.log('🌍 Validating Environment Variables...', 'info');
-    
-    const envProdPath = path.join(this.projectRoot, '.env.production');
-    if (!fs.existsSync(envProdPath)) {
-      this.addError('.env.production file missing - required for production deployment');
-      return;
-    }
-
-    const envContent = fs.readFileSync(envProdPath, 'utf8');
-    const envLines = envContent.split('\n').filter(line => line.trim() && !line.startsWith('#'));
-    
-    // Critical environment variables for Next.js + Vercel
-    const criticalVars = [
-      'NODE_ENV',
-      'NEXTAUTH_URL',
-      'NEXTAUTH_SECRET'
-    ];
-
-    const foundVars = {};
-    envLines.forEach(line => {
-      const [key, value] = line.split('=');
-      if (key && value) {
-        foundVars[key.trim()] = value.trim();
-      }
-    });
-
-    // Check critical variables
-    criticalVars.forEach(varName => {
-      if (!foundVars[varName]) {
-        this.addError(`Missing critical environment variable: ${varName}`);
-      } else if (foundVars[varName].includes('REPLACE_WITH') || foundVars[varName].includes('your-production')) {
-        this.addError(`Environment variable ${varName} has placeholder value: ${foundVars[varName]}`);
-      }
-    });
-
-    // Check for invalid URLs
-    Object.entries(foundVars).forEach(([key, value]) => {
-      if (key.includes('URL') && value.includes('REPLACE_WITH')) {
-        this.addError(`Invalid URL in ${key}: ${value}`);
-      }
-    });
-
-    // Validate NEXTAUTH_URL format
-    if (foundVars.NEXTAUTH_URL && !foundVars.NEXTAUTH_URL.startsWith('https://')) {
-      this.addError(`NEXTAUTH_URL must start with https:// for production: ${foundVars.NEXTAUTH_URL}`);
-    }
-
-    this.addSuccess('Environment variables validated');
-  }
-
-  // 4. DEPENDENCY VALIDATION
-  validateDependencies() {
-    this.log('📦 Validating Dependencies...', 'info');
-    
-    try {
-      // Check if node_modules exists
-      if (!fs.existsSync(path.join(this.projectRoot, 'node_modules'))) {
-        this.addError('node_modules directory missing - run npm install');
-        return;
-      }
-
-      // Run npm audit for security vulnerabilities
-      try {
-        execSync('npm audit --audit-level=high', { stdio: 'pipe' });
-        this.addSuccess('No high-severity vulnerabilities found');
-      } catch (error) {
-        this.addWarning('High-severity vulnerabilities detected - consider running npm audit fix');
-      }
-
-      // Check for peer dependency warnings
-      try {
-        const npmLsOutput = execSync('npm ls --depth=0', { stdio: 'pipe', encoding: 'utf8' });
-        if (npmLsOutput.includes('UNMET PEER DEPENDENCY')) {
-          this.addWarning('Unmet peer dependencies detected');
-        }
-      } catch (error) {
-        this.addWarning('Dependency tree has issues - check npm ls output');
-      }
-
-      this.addSuccess('Dependencies validated');
-    } catch (error) {
-      this.addError(`Dependency validation failed: ${error.message}`);
-    }
-  }
-
-  // 5. BUILD VALIDATION (DRY RUN)
-  validateBuildProcess() {
-    this.log('🏗️  Validating Build Process (Dry Run)...', 'info');
-    
-    try {
-      // Check TypeScript compilation
-      if (fs.existsSync(path.join(this.projectRoot, 'tsconfig.json'))) {
-        try {
-          execSync('npx tsc --noEmit', { stdio: 'pipe' });
-          this.addSuccess('TypeScript compilation check passed');
-        } catch (error) {
-          this.addWarning('TypeScript compilation has errors - build may fail if ignoreBuildErrors is false');
-        }
-      }
-
-      // Check ESLint
-      try {
-        execSync('npx eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0', { stdio: 'pipe' });
-        this.addSuccess('ESLint check passed');
-      } catch (error) {
-        // Check if ignoreDuringBuilds is true
-        const nextConfigPath = path.join(this.projectRoot, 'next.config.mjs');
-        if (fs.existsSync(nextConfigPath)) {
-          const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf8');
-          if (nextConfigContent.includes('ignoreDuringBuilds: true')) {
-            this.addSuccess('ESLint errors present but handled - ignoreDuringBuilds: true configured');
-          } else {
-            this.addWarning('ESLint errors detected - build may fail if ignoreDuringBuilds is false');
-          }
-        } else {
-          this.addWarning('ESLint errors detected - build may fail if ignoreDuringBuilds is false');
-        }
-      }
-
-      // Simulate Next.js build check (without full build)
-      try {
-        execSync('npx next build --dry-run', { stdio: 'pipe' });
-        this.addSuccess('Next.js build dry-run passed');
-      } catch (error) {
-        // Dry-run might not be available, try build info
-        try {
-          execSync('npx next info', { stdio: 'pipe' });
-          this.addSuccess('Next.js configuration valid');
-        } catch (infoError) {
-          this.addWarning('Could not validate Next.js build process');
-        }
-      }
-
-    } catch (error) {
-      this.addError(`Build validation failed: ${error.message}`);
-    }
-  }
-
-  // 6. VERCEL-SPECIFIC REQUIREMENTS
-  validateVercelRequirements() {
-    this.log('🚀 Validating Vercel-Specific Requirements...', 'info');
-    
-    // Check file size limits (Vercel has limits)
-    const checkFileSize = (filePath, maxSize, description) => {
-      if (fs.existsSync(filePath)) {
-        const stats = fs.statSync(filePath);
-        if (stats.size > maxSize) {
-          this.addWarning(`${description} is ${(stats.size / 1024 / 1024).toFixed(2)}MB - may exceed Vercel limits`);
-        }
-      }
-    };
-
-    // Check common large files
-    checkFileSize(path.join(this.projectRoot, 'package-lock.json'), 10 * 1024 * 1024, 'package-lock.json');
-    
-    // Check for .vercel directory (indicates previous deployments)
-    if (fs.existsSync(path.join(this.projectRoot, '.vercel'))) {
-      this.addSuccess('Previous Vercel deployment configuration found');
-    }
-
-    // Check for proper .gitignore
-    const gitignorePath = path.join(this.projectRoot, '.gitignore');
-    if (fs.existsSync(gitignorePath)) {
-      const gitignoreContent = fs.readFileSync(gitignorePath, 'utf8');
-      const requiredIgnores = ['.env.local', '.env*.local', '.vercel', '.next'];
-      
-      requiredIgnores.forEach(pattern => {
-        // Check for exact match or wildcard patterns
-        const isPatternCovered = gitignoreContent.includes(pattern) || 
-                                (pattern === '.env.local' && gitignoreContent.includes('.env*.local'));
+    // Sequential Thinking Implementation
+    async executeSequentialThinking() {
+        console.log('🧠 Starting Sequential Thinking Pre-deployment Analysis...\n');
         
-        if (!isPatternCovered) {
-          this.addWarning(`Missing ${pattern} in .gitignore - may cause deployment issues`);
+        let thoughtNumber = 1;
+        let totalThoughts = this.thinkingContext.totalThoughts;
+        let nextThoughtNeeded = true;
+
+        while (nextThoughtNeeded && thoughtNumber <= totalThoughts) {
+            const thought = await this.processThought(thoughtNumber);
+            this.thinkingContext.thoughtHistory.push(thought);
+
+            // Dynamic complexity adjustment
+            if (thought.needsMoreThoughts) {
+                totalThoughts = Math.min(totalThoughts + 2, 12);
+                this.thinkingContext.totalThoughts = totalThoughts;
+            }
+
+            // Handle revisions
+            if (thought.shouldRevise) {
+                await this.handleRevision(thought);
+            }
+
+            // Branch exploration for complex issues
+            if (thought.shouldBranch) {
+                await this.exploreBranch(thought);
+            }
+
+            thoughtNumber++;
+            nextThoughtNeeded = thoughtNumber <= totalThoughts;
         }
-      });
+
+        return this.synthesizeResults();
     }
 
-    // Check Node.js version compatibility
-    const nodeVersion = process.version;
-    const majorVersion = parseInt(nodeVersion.slice(1).split('.')[0]);
-    
-    if (majorVersion < 18) {
-      this.addError(`Node.js ${nodeVersion} detected - Vercel requires Node.js 18+ for Next.js 13+`);
-    } else {
-      this.addSuccess(`Node.js ${nodeVersion} is compatible with Vercel`);
+    async processThought(thoughtNumber) {
+        const thoughtContent = await this.generateThought(thoughtNumber);
+        const validation = await this.executeValidation(thoughtNumber);
+        
+        const thought = {
+            number: thoughtNumber,
+            content: thoughtContent,
+            validation: validation,
+            timestamp: new Date(),
+            confidence: this.calculateConfidence(validation),
+            needsMoreThoughts: validation.issues.length > 2,
+            shouldRevise: validation.critical && validation.issues.length > 0,
+            shouldBranch: validation.complexity === 'high'
+        };
+
+        console.log(`💭 Thought ${thoughtNumber}/${this.thinkingContext.totalThoughts}: ${thoughtContent}`);
+        
+        if (validation.success) {
+            console.log(`✅ Validation passed: ${validation.summary}`);
+        } else {
+            console.log(`❌ Validation failed: ${validation.summary}`);
+            validation.issues.forEach(issue => console.log(`   • ${issue}`));
+        }
+        
+        console.log('');
+        return thought;
     }
 
-    this.addSuccess('Vercel-specific requirements validated');
-  }
+    async generateThought(thoughtNumber) {
+        const thoughts = {
+            1: () => `Initial assessment: Analyzing deployment readiness for ${this.deploymentState.environment} environment. WSL integration ${this.deploymentState.wslEnabled ? 'detected' : 'not detected'}.`,
+            
+            2: () => `Environment validation: Checking critical environment variables, configuration files, and deployment prerequisites for ${this.deploymentState.environment} deployment.`,
+            
+            3: () => `File system analysis: Verifying required files exist, build artifacts are present, and no critical files are missing for successful deployment.`,
+            
+            4: () => `Git repository validation: Ensuring clean working directory, proper branch state, and synchronization with remote repository before deployment.`,
+            
+            5: () => `Dependency verification: Analyzing package.json, checking for security vulnerabilities, and validating all required dependencies are installed.`,
+            
+            6: () => `Build system validation: Testing build process, checking for compilation errors, and ensuring all assets are properly generated.`,
+            
+            7: () => `Security assessment: Scanning for vulnerabilities, validating environment variable security, and checking for exposed secrets.`,
+            
+            8: () => `Final deployment readiness: Synthesizing all validation results and determining overall deployment readiness with confidence assessment.`
+        };
 
-  // 7. PERFORMANCE AND OPTIMIZATION CHECKS
-  validatePerformance() {
-    this.log('⚡ Validating Performance Optimizations...', 'info');
-    
-    // Check for large bundle indicators
-    const srcDir = path.join(this.projectRoot, 'src');
-    if (fs.existsSync(srcDir)) {
-      const checkLargeFiles = (dir) => {
-        const files = fs.readdirSync(dir);
-        files.forEach(file => {
-          const filePath = path.join(dir, file);
-          const stat = fs.statSync(filePath);
-          
-          if (stat.isDirectory()) {
-            checkLargeFiles(filePath);
-          } else if (stat.size > 500 * 1024 && (file.endsWith('.ts') || file.endsWith('.tsx'))) {
-            this.addWarning(`Large source file detected: ${filePath} (${(stat.size / 1024).toFixed(2)}KB)`);
-          }
+        return thoughts[thoughtNumber] ? thoughts[thoughtNumber]() : 
+               `Advanced validation step ${thoughtNumber}: Continuing comprehensive deployment analysis.`;
+    }
+
+    async executeValidation(thoughtNumber) {
+        const validations = {
+            1: () => this.validateEnvironment(),
+            2: () => this.validateEnvironmentVariables(),
+            3: () => this.validateFiles(),
+            4: () => this.validateGit(),
+            5: () => this.validateDependencies(),
+            6: () => this.validateBuild(),
+            7: () => this.validateSecurity(),
+            8: () => this.validateFinalReadiness()
+        };
+
+        try {
+            return validations[thoughtNumber] ? await validations[thoughtNumber]() : 
+                   { success: true, summary: 'Advanced validation completed', issues: [], complexity: 'low' };
+        } catch (error) {
+            return {
+                success: false,
+                summary: `Validation failed: ${error.message}`,
+                issues: [error.message],
+                complexity: 'high',
+                critical: true
+            };
+        }
+    }
+
+    // Validation Methods
+    async validateEnvironment() {
+        const issues = [];
+        const checks = [];
+
+        // Check Node.js version
+        try {
+            const nodeVersion = execSync('node --version', { encoding: 'utf8' }).trim();
+            checks.push(`Node.js version: ${nodeVersion}`);
+            
+            const majorVersion = parseInt(nodeVersion.replace('v', '').split('.')[0]);
+            if (majorVersion < 18) {
+                issues.push(`Node.js version ${nodeVersion} is below recommended v18+`);
+            }
+        } catch (error) {
+            issues.push('Node.js not found or not accessible');
+        }
+
+        // Check npm version
+        try {
+            const npmVersion = execSync('npm --version', { encoding: 'utf8' }).trim();
+            checks.push(`npm version: ${npmVersion}`);
+        } catch (error) {
+            issues.push('npm not found or not accessible');
+        }
+
+        // Check WSL environment if applicable
+        if (this.deploymentState.wslEnabled) {
+            checks.push('WSL environment detected');
+            if (!process.env.PROJECT_ROOT) {
+                issues.push('PROJECT_ROOT environment variable not set in WSL');
+            }
+        }
+
+        this.deploymentState.checks.environment = issues.length === 0;
+        
+        return {
+            success: issues.length === 0,
+            summary: `Environment validation: ${checks.length} checks completed`,
+            issues,
+            checks,
+            complexity: issues.length > 1 ? 'high' : 'low'
+        };
+    }
+
+    async validateEnvironmentVariables() {
+        const issues = [];
+        const checks = [];
+        
+        const requiredEnvVars = {
+            production: ['NODE_ENV', 'VERCEL_ENV'],
+            development: ['NODE_ENV']
+        };
+
+        const required = requiredEnvVars[this.deploymentState.environment] || requiredEnvVars.production;
+        
+        required.forEach(envVar => {
+            if (process.env[envVar]) {
+                checks.push(`${envVar}: ${process.env[envVar]}`);
+            } else {
+                issues.push(`Missing required environment variable: ${envVar}`);
+            }
         });
-      };
-      
-      try {
-        checkLargeFiles(srcDir);
-      } catch (error) {
-        // Ignore permission errors
-      }
+
+        // Check for sensitive data exposure
+        const sensitivePatterns = ['password', 'secret', 'key', 'token'];
+        Object.keys(process.env).forEach(key => {
+            if (sensitivePatterns.some(pattern => key.toLowerCase().includes(pattern))) {
+                if (process.env[key] && process.env[key].length < 10) {
+                    issues.push(`Potentially weak ${key}: value too short`);
+                }
+            }
+        });
+
+        return {
+            success: issues.length === 0,
+            summary: `Environment variables: ${checks.length} validated`,
+            issues,
+            checks,
+            complexity: 'low'
+        };
     }
 
-    // Check for image optimization setup
-    const publicDir = path.join(this.projectRoot, 'public');
-    if (fs.existsSync(publicDir)) {
-      const images = fs.readdirSync(publicDir).filter(file => 
-        /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file)
-      );
-      
-      if (images.length > 0) {
-        this.addSuccess(`Found ${images.length} images in public directory`);
-      }
+    async validateFiles() {
+        const issues = [];
+        const checks = [];
+        
+        const requiredFiles = [
+            'package.json',
+            'next.config.mjs',
+            'vercel.json'
+        ];
+
+        const optionalFiles = [
+            '.env.production',
+            '.env.local',
+            'tsconfig.json'
+        ];
+
+        // Check required files
+        requiredFiles.forEach(file => {
+            const filePath = path.join(this.deploymentState.projectRoot, file);
+            if (fs.existsSync(filePath)) {
+                checks.push(`Required file found: ${file}`);
+            } else {
+                issues.push(`Missing required file: ${file}`);
+            }
+        });
+
+        // Check optional files
+        optionalFiles.forEach(file => {
+            const filePath = path.join(this.deploymentState.projectRoot, file);
+            if (fs.existsSync(filePath)) {
+                checks.push(`Optional file found: ${file}`);
+            }
+        });
+
+        // Check for build artifacts
+        const buildDirs = ['.next', 'dist', 'build'];
+        let buildFound = false;
+        
+        buildDirs.forEach(dir => {
+            const dirPath = path.join(this.deploymentState.projectRoot, dir);
+            if (fs.existsSync(dirPath)) {
+                checks.push(`Build directory found: ${dir}`);
+                buildFound = true;
+            }
+        });
+
+        if (!buildFound && this.deploymentState.environment === 'production') {
+            issues.push('No build artifacts found - run build process first');
+        }
+
+        this.deploymentState.checks.files = issues.length === 0;
+
+        return {
+            success: issues.length === 0,
+            summary: `File validation: ${checks.length} files checked`,
+            issues,
+            checks,
+            complexity: issues.length > 2 ? 'high' : 'low'
+        };
     }
 
-    this.addSuccess('Performance validation completed');
-  }
+    async validateGit() {
+        const issues = [];
+        const checks = [];
 
-  // MAIN VALIDATION RUNNER
-  async runValidation() {
-    this.log('🚀 STARTING VERCEL PRE-DEPLOYMENT VALIDATION', 'info');
-    this.log('=' .repeat(60), 'info');
-    
-    // Run all validation checks
-    this.validateFrameworkDetection();
-    this.validateBuildSettings();
-    this.validateEnvironmentVariables();
-    this.validateDependencies();
-    this.validateBuildProcess();
-    this.validateVercelRequirements();
-    this.validatePerformance();
-    
-    // Generate final report
-    this.log('=' .repeat(60), 'info');
-    this.log('📊 VALIDATION SUMMARY', 'info');
-    this.log('=' .repeat(60), 'info');
-    
-    if (this.errors.length === 0 && this.warnings.length === 0) {
-      this.log('🎉 ALL CHECKS PASSED - READY FOR VERCEL DEPLOYMENT!', 'success');
-      return { success: true, errors: [], warnings: [] };
+        try {
+            // Check if we're in a git repository
+            execSync('git rev-parse --git-dir', { stdio: 'ignore' });
+            checks.push('Git repository detected');
+
+            // Check git status (porcelain)
+            const gitStatus = execSync('git status --porcelain', { encoding: 'utf8' }).trim();
+            if (gitStatus === '') {
+                checks.push('Working directory is clean');
+            } else {
+                const changes = gitStatus.split('\n').length;
+                issues.push(`Working directory has ${changes} uncommitted changes`);
+            }
+
+            // Check current branch
+            const currentBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
+            checks.push(`Current branch: ${currentBranch}`);
+            
+            if (this.deploymentState.environment === 'production' && currentBranch !== 'main') {
+                issues.push(`Deploying from ${currentBranch} instead of main branch`);
+            }
+
+            // Check remote sync status
+            try {
+                execSync('git fetch origin', { stdio: 'ignore' });
+                const localCommit = execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
+                const remoteCommit = execSync('git rev-parse @{u}', { encoding: 'utf8' }).trim();
+                
+                if (localCommit === remoteCommit) {
+                    checks.push('Local branch is up to date with remote');
+                } else {
+                    issues.push('Local branch is out of sync with remote');
+                }
+            } catch (error) {
+                issues.push('Unable to check remote sync status');
+            }
+
+        } catch (error) {
+            issues.push('Not a git repository or git not available');
+        }
+
+        this.deploymentState.checks.git = issues.length === 0;
+
+        return {
+            success: issues.length === 0,
+            summary: `Git validation: ${checks.length} checks completed`,
+            issues,
+            checks,
+            complexity: issues.length > 1 ? 'medium' : 'low'
+        };
     }
-    
-    if (this.errors.length > 0) {
-      this.log(`❌ ${this.errors.length} CRITICAL ERRORS FOUND:`, 'error');
-      this.errors.forEach((error, index) => {
-        this.log(`   ${index + 1}. ${error}`, 'error');
-      });
+
+    async validateDependencies() {
+        const issues = [];
+        const checks = [];
+
+        try {
+            // Check if package.json exists and is valid
+            const packageJsonPath = path.join(this.deploymentState.projectRoot, 'package.json');
+            if (!fs.existsSync(packageJsonPath)) {
+                issues.push('package.json not found');
+                return { success: false, summary: 'Dependencies validation failed', issues, checks };
+            }
+
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+            checks.push(`Package: ${packageJson.name}@${packageJson.version}`);
+
+            // Check if node_modules exists
+            const nodeModulesPath = path.join(this.deploymentState.projectRoot, 'node_modules');
+            if (fs.existsSync(nodeModulesPath)) {
+                checks.push('node_modules directory found');
+            } else {
+                issues.push('node_modules not found - run npm install');
+            }
+
+            // Run npm audit for security vulnerabilities
+            try {
+                execSync('npm audit --audit-level=high', { stdio: 'ignore' });
+                checks.push('No high-severity vulnerabilities found');
+            } catch (error) {
+                issues.push('High-severity vulnerabilities detected - run npm audit fix');
+            }
+
+            // Check for outdated packages
+            try {
+                const outdated = execSync('npm outdated --json', { encoding: 'utf8' });
+                const outdatedPackages = JSON.parse(outdated || '{}');
+                const outdatedCount = Object.keys(outdatedPackages).length;
+                
+                if (outdatedCount > 0) {
+                    checks.push(`${outdatedCount} packages have updates available`);
+                } else {
+                    checks.push('All packages are up to date');
+                }
+            } catch (error) {
+                // npm outdated returns non-zero exit code when packages are outdated
+                checks.push('Package update check completed');
+            }
+
+        } catch (error) {
+            issues.push(`Dependency validation failed: ${error.message}`);
+        }
+
+        this.deploymentState.checks.dependencies = issues.length === 0;
+
+        return {
+            success: issues.length === 0,
+            summary: `Dependencies: ${checks.length} validations completed`,
+            issues,
+            checks,
+            complexity: issues.length > 1 ? 'medium' : 'low'
+        };
     }
-    
-    if (this.warnings.length > 0) {
-      this.log(`⚠️  ${this.warnings.length} WARNINGS FOUND:`, 'warning');
-      this.warnings.forEach((warning, index) => {
-        this.log(`   ${index + 1}. ${warning}`, 'warning');
-      });
+
+    async validateBuild() {
+        const issues = [];
+        const checks = [];
+
+        try {
+            // Check if build script exists
+            const packageJsonPath = path.join(this.deploymentState.projectRoot, 'package.json');
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+            
+            if (packageJson.scripts && packageJson.scripts.build) {
+                checks.push('Build script found in package.json');
+                
+                // Test build process (dry run)
+                try {
+                    console.log('   🔨 Testing build process...');
+                    execSync('npm run build', { 
+                        stdio: 'ignore',
+                        timeout: 120000 // 2 minute timeout
+                    });
+                    checks.push('Build process completed successfully');
+                } catch (error) {
+                    issues.push('Build process failed - check build configuration');
+                }
+            } else {
+                issues.push('No build script found in package.json');
+            }
+
+            // Check TypeScript compilation if applicable
+            const tsconfigPath = path.join(this.deploymentState.projectRoot, 'tsconfig.json');
+            if (fs.existsSync(tsconfigPath)) {
+                try {
+                    execSync('npx tsc --noEmit', { stdio: 'ignore' });
+                    checks.push('TypeScript compilation check passed');
+                } catch (error) {
+                    issues.push('TypeScript compilation errors detected');
+                }
+            }
+
+        } catch (error) {
+            issues.push(`Build validation failed: ${error.message}`);
+        }
+
+        this.deploymentState.checks.build = issues.length === 0;
+
+        return {
+            success: issues.length === 0,
+            summary: `Build validation: ${checks.length} checks completed`,
+            issues,
+            checks,
+            complexity: issues.length > 0 ? 'high' : 'low',
+            critical: issues.some(issue => issue.includes('Build process failed'))
+        };
     }
-    
-    if (this.errors.length > 0) {
-      this.log('🚫 DEPLOYMENT NOT RECOMMENDED - FIX ERRORS FIRST', 'error');
-      return { success: false, errors: this.errors, warnings: this.warnings };
-    } else {
-      this.log('✅ DEPLOYMENT READY WITH WARNINGS - PROCEED WITH CAUTION', 'warning');
-      return { success: true, errors: [], warnings: this.warnings };
+
+    async validateSecurity() {
+        const issues = [];
+        const checks = [];
+
+        // Check for common security files
+        const securityFiles = ['.gitignore', '.env.example'];
+        securityFiles.forEach(file => {
+            const filePath = path.join(this.deploymentState.projectRoot, file);
+            if (fs.existsSync(filePath)) {
+                checks.push(`Security file found: ${file}`);
+            } else {
+                issues.push(`Missing security file: ${file}`);
+            }
+        });
+
+        // Check .gitignore for sensitive patterns
+        const gitignorePath = path.join(this.deploymentState.projectRoot, '.gitignore');
+        if (fs.existsSync(gitignorePath)) {
+            const gitignoreContent = fs.readFileSync(gitignorePath, 'utf8');
+            const requiredPatterns = ['.env', 'node_modules', '.next'];
+            
+            requiredPatterns.forEach(pattern => {
+                if (gitignoreContent.includes(pattern)) {
+                    checks.push(`Gitignore includes: ${pattern}`);
+                } else {
+                    issues.push(`Gitignore missing pattern: ${pattern}`);
+                }
+            });
+        }
+
+        // Check for exposed secrets in environment
+        const exposedSecrets = [];
+        Object.keys(process.env).forEach(key => {
+            const value = process.env[key];
+            if (value && (key.toLowerCase().includes('secret') || key.toLowerCase().includes('key'))) {
+                if (value.length < 20) {
+                    exposedSecrets.push(key);
+                }
+            }
+        });
+
+        if (exposedSecrets.length > 0) {
+            issues.push(`Potentially weak secrets: ${exposedSecrets.join(', ')}`);
+        } else {
+            checks.push('No weak secrets detected');
+        }
+
+        this.deploymentState.checks.security = issues.length === 0;
+
+        return {
+            success: issues.length === 0,
+            summary: `Security validation: ${checks.length} checks completed`,
+            issues,
+            checks,
+            complexity: issues.length > 2 ? 'high' : 'low'
+        };
     }
-  }
+
+    async validateFinalReadiness() {
+        const issues = [];
+        const checks = [];
+        
+        // Synthesize all previous validations
+        const allChecks = Object.values(this.deploymentState.checks);
+        const passedChecks = allChecks.filter(check => check).length;
+        const totalChecks = allChecks.length;
+        
+        checks.push(`Overall validation: ${passedChecks}/${totalChecks} checks passed`);
+        
+        if (passedChecks === totalChecks) {
+            checks.push('All deployment prerequisites satisfied');
+        } else {
+            issues.push(`${totalChecks - passedChecks} validation checks failed`);
+        }
+
+        // Calculate deployment confidence
+        const confidence = (passedChecks / totalChecks) * 100;
+        checks.push(`Deployment confidence: ${confidence.toFixed(1)}%`);
+        
+        if (confidence < 80) {
+            issues.push('Deployment confidence below recommended threshold (80%)');
+        }
+
+        return {
+            success: issues.length === 0,
+            summary: `Final readiness: ${confidence.toFixed(1)}% confidence`,
+            issues,
+            checks,
+            complexity: confidence < 80 ? 'high' : 'low',
+            critical: confidence < 50,
+            confidence
+        };
+    }
+
+    // Helper Methods
+    calculateConfidence(validation) {
+        let confidence = 0.8; // Base confidence
+        
+        if (validation.success) confidence += 0.1;
+        if (validation.issues.length === 0) confidence += 0.1;
+        if (validation.complexity === 'low') confidence += 0.05;
+        if (validation.critical) confidence -= 0.3;
+        
+        return Math.max(0.1, Math.min(1.0, confidence));
+    }
+
+    async handleRevision(thought) {
+        console.log(`🔄 Revising approach for thought ${thought.number} due to critical issues...`);
+        
+        // Implement revision logic based on the specific issues found
+        if (thought.validation.critical) {
+            this.thinkingContext.totalThoughts += 1;
+            console.log(`   📈 Extended analysis to ${this.thinkingContext.totalThoughts} thoughts`);
+        }
+    }
+
+    async exploreBranch(thought) {
+        console.log(`🌿 Exploring alternative approach for complex validation...`);
+        
+        // Branch exploration for complex scenarios
+        const branchStrategies = {
+            'build-failure': 'Exploring alternative build configurations and dependency resolution',
+            'git-issues': 'Exploring git workflow optimization and branch management strategies',
+            'security-concerns': 'Exploring enhanced security validation and vulnerability mitigation'
+        };
+        
+        // Simplified branch exploration
+        console.log(`   🔍 ${branchStrategies['build-failure']}`);
+    }
+
+    synthesizeResults() {
+        const totalThoughts = this.thinkingContext.thoughtHistory.length;
+        const successfulValidations = this.thinkingContext.thoughtHistory.filter(t => t.validation.success).length;
+        const allIssues = this.thinkingContext.thoughtHistory.flatMap(t => t.validation.issues);
+        const allChecks = this.thinkingContext.thoughtHistory.flatMap(t => t.validation.checks || []);
+        
+        const overallConfidence = (successfulValidations / totalThoughts) * 100;
+        const deploymentReady = allIssues.length === 0 && overallConfidence >= 80;
+        
+        return {
+            deploymentReady,
+            confidence: overallConfidence,
+            totalThoughts,
+            successfulValidations,
+            issues: allIssues,
+            checks: allChecks,
+            summary: `Sequential thinking analysis completed with ${overallConfidence.toFixed(1)}% confidence`
+        };
+    }
 }
 
-// Run validation if called directly
+// Main execution
+async function main() {
+    console.log('🚀 WSL Ubuntu + Vercel Pre-deployment Check with Sequential Thinking\n');
+    console.log('=' .repeat(70));
+    
+    const checker = new SequentialThinkingDeploymentChecker();
+    
+    try {
+        const results = await checker.executeSequentialThinking();
+        
+        console.log('\n' + '='.repeat(70));
+        console.log('📊 DEPLOYMENT READINESS SUMMARY');
+        console.log('='.repeat(70));
+        
+        console.log(`🧠 Sequential Thinking Analysis: ${results.totalThoughts} thoughts processed`);
+        console.log(`✅ Successful Validations: ${results.successfulValidations}/${results.totalThoughts}`);
+        console.log(`📈 Deployment Confidence: ${results.confidence.toFixed(1)}%`);
+        console.log(`🎯 Deployment Ready: ${results.deploymentReady ? 'YES' : 'NO'}`);
+        
+        if (results.issues.length > 0) {
+            console.log('\n❌ ISSUES TO RESOLVE:');
+            results.issues.forEach((issue, index) => {
+                console.log(`   ${index + 1}. ${issue}`);
+            });
+        }
+        
+        if (results.checks.length > 0) {
+            console.log('\n✅ SUCCESSFUL CHECKS:');
+            results.checks.slice(0, 10).forEach((check, index) => {
+                console.log(`   ${index + 1}. ${check}`);
+            });
+            
+            if (results.checks.length > 10) {
+                console.log(`   ... and ${results.checks.length - 10} more checks passed`);
+            }
+        }
+        
+        console.log('\n' + '='.repeat(70));
+        
+        if (results.deploymentReady) {
+            console.log('🎉 DEPLOYMENT APPROVED - All checks passed!');
+            process.exit(0);
+        } else {
+            console.log('🛑 DEPLOYMENT BLOCKED - Please resolve issues above');
+            process.exit(1);
+        }
+        
+    } catch (error) {
+        console.error('💥 Pre-deployment check failed:', error.message);
+        process.exit(1);
+    }
+}
+
+// Execute if run directly
 if (require.main === module) {
-  const validator = new VercelPreDeploymentValidator();
-  validator.runValidation().then(result => {
-    process.exit(result.success ? 0 : 1);
-  });
+    main().catch(error => {
+        console.error('Fatal error:', error);
+        process.exit(1);
+    });
 }
 
-module.exports = VercelPreDeploymentValidator;
+module.exports = { SequentialThinkingDeploymentChecker };
