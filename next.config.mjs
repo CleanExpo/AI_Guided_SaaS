@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Docker optimization - standalone output for minimal container size
+  output: 'standalone',
+  
   // Production-ready configuration with build stability
   eslint: {
     // Allow builds to complete while still showing warnings

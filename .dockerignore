@@ -1,24 +1,72 @@
+# Docker ignore file for AI Guided SaaS
+# Excludes unnecessary files to reduce build context and image size
+
 # Dependencies
 node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Build outputs
-.next
-out
-dist
-build
+# Next.js build outputs
+.next/
+out/
+build/
+dist/
 
-# Environment variables
+# Environment files (will be injected at runtime)
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+!.env.production.template
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation and markdown files
+*.md
+!README.md
+docs/
+examples/
+
+# Test files
+__tests__/
+**/*.test.js
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.js
+**/*.spec.ts
+**/*.spec.tsx
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
 
 # Logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
 # Runtime data
 pids
@@ -27,25 +75,17 @@ pids
 *.pid.lock
 
 # Coverage directory used by tools like istanbul
-coverage
+coverage/
+*.lcov
 
 # Dependency directories
-node_modules/
-
-# TypeScript cache
-*.tsbuildinfo
+jspm_packages/
 
 # Optional npm cache directory
 .npm
 
 # Optional eslint cache
 .eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
 
 # Optional REPL history
 .node_repl_history
@@ -60,44 +100,108 @@ node_modules/
 .cache
 .parcel-cache
 
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# Temporary folders
+tmp/
+temp/
+
+# Claude Code
+.claude/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# Project specific excludes
+reports/
+mcp-orchestration/
+nginx/
+tools/
+patterns/
+prp_templates/
+PRPs/
+agents/
+scripts/
+Logo/
+
+# Large documentation files
+*.docx
+*.pdf
+*.prp
+
+# Archive directories
+archive/
+
+# MCP specific
+mcp/bridges/
+mcp/servers/
+mcp/taskmaster/
+
+# Build artifacts
+*.tar.gz
+*.zip
+
 # IDE files
-.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# JetBrains
 .idea/
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
 
-# Git
-.git
-.gitignore
+# Vim
+*.swp
+*.swo
 
-# Documentation files that were deleted
-*.md
-!README.md
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
 
-# Test files
-tests/
-playwright.config.js
+# Local development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Archive and research directories
-archive/
-research/
-PRPs/
-
-# Scripts directory
-scripts/
-
-# Tools directory
-tools/
-
-# Examples directory
-examples/
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.save
