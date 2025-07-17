@@ -1,0 +1,47 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ],
+      "env": {}
+    },
+    "bright-data": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@brightdata/mcp"
+      ],
+      "env": {
+        "API_TOKEN": "$BRIGHTDATA_API_KEY",
+        "RATE_LIMIT": "100/1h"
+      }
+    },
+    "puppeteer": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "env": {
+        "PUPPETEER_LAUNCH_OPTIONS": "{\"headless\": false, \"args\": []}",
+        "ALLOW_DANGEROUS": "true"
+      }
+    },
+    "digitalocean": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@digitalocean/mcp-server"
+      ],
+      "env": {
+        "DIGITALOCEAN_TOKEN": "$DIGITALOCEAN_TOKEN"
+      }
+    }
+  }
+}

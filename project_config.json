@@ -1,0 +1,121 @@
+{
+  "name": "AI-Guided-SaaS-Visual",
+  "description": "AI-powered SaaS platform with Claude Code visual capabilities, screenshot-to-code conversion, and premium visual development features.",
+  "version": "2.0.0",
+  "frontend": {
+    "framework": "Next.js 14",
+    "language": "TypeScript",
+    "ui": "Tailwind CSS + shadcn/ui",
+    "state": "Context API + Zustand",
+    "routing": "Next.js App Router"
+  },
+  "visual": {
+    "features": [
+      "screenshot-to-code",
+      "drag-drop-upload",
+      "visual-templates",
+      "component-extraction",
+      "design-analysis"
+    ],
+    "mcp_servers": [
+      "@modelcontextprotocol/server-puppeteer",
+      "@playwright/mcp",
+      "@jinaai/mcp-scraper",
+      "@brightdata/mcp"
+    ],
+    "processing": {
+      "image_formats": ["png", "jpg", "jpeg", "webp", "svg"],
+      "max_file_size": "10MB",
+      "compression": true,
+      "caching": "IndexedDB + Redis"
+    }
+  },
+  "backend": {
+    "api": "Next.js API Routes",
+    "database": "Supabase (PostgreSQL)",
+    "auth": "NextAuth.js",
+    "payments": "Stripe",
+    "ai": "OpenAI GPT-4 Vision"
+  },
+  "storage": {
+    "local": ["LocalStorage", "IndexedDB"],
+    "cloud": ["Supabase Storage", "Vercel Blob"],
+    "cache": ["Redis", "Memory Cache"]
+  },
+  "validation": {
+    "forms": "Zod + React Hook Form",
+    "api": "Zod schemas",
+    "images": "Sharp validation"
+  },
+  "tooltips": "React Tooltip, Floating UI",
+  "tours": "React Joyride",
+  "export": ["Markdown", "JSON", "ZIP", "Claude Code Bundle"],
+  "accessibility": "WCAG 2.1 AA",
+  "testing": {
+    "unit": "Jest",
+    "integration": "Testing Library",
+    "e2e": "Playwright",
+    "visual": "Playwright Visual Testing"
+  },
+  "deployment": {
+    "platforms": ["Vercel", "Netlify", "Docker", "DigitalOcean"],
+    "ci_cd": "GitHub Actions",
+    "monitoring": "Vercel Analytics + Custom Telemetry"
+  },
+  "subscription_tiers": {
+    "starter": {
+      "price": 79,
+      "features": ["basic-ui-builder", "5-projects", "community-support"]
+    },
+    "professional": {
+      "price": 149,
+      "features": [
+        "screenshot-to-code",
+        "visual-templates",
+        "unlimited-projects",
+        "priority-support",
+        "basic-mcp-servers"
+      ]
+    },
+    "enterprise": {
+      "price": 279,
+      "features": [
+        "all-visual-features",
+        "custom-mcp-servers",
+        "white-label",
+        "dedicated-support",
+        "sla-guarantee"
+      ]
+    }
+  },
+  "env": {
+    "NODE_ENV": "development",
+    "PUBLIC_URL": "/",
+    "CLAUDE_BYPASS_PERMISSIONS": "true",
+    "CLAUDE_DANGEROUSLY_SKIP_PERMISSIONS": "true",
+    "ALLOW_DANGEROUS": "true",
+    "SKIP_PERMISSION_CHECKS": "true"
+  },
+  "docker": {
+    "development": {
+      "compose_file": "docker-compose.bypass.yml",
+      "dockerfile": "Dockerfile.claude",
+      "bypass_mode": "enabled",
+      "privileged": true
+    }
+  },
+  "mcp": {
+    "servers": {
+      "memory": { "enabled": true, "bypass": true },
+      "sequential-thinking": { "enabled": true, "bypass": true },
+      "github": { "enabled": true, "bypass": true },
+      "puppeteer": { "enabled": true, "bypass": true },
+      "playwright": { "enabled": true, "bypass": true },
+      "stripe": { "enabled": true, "bypass": true },
+      "brightdata": { "enabled": true, "bypass": true },
+      "jina": { "enabled": true, "bypass": true },
+      "redis": { "enabled": true, "bypass": true }
+    },
+    "bypass_permissions": true
+  }
+}

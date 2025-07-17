@@ -1,0 +1,85 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "--node-options=--experimental-vm-modules", "@upstash/context7-mcp@1.0.6"],
+      "transport": "stdio"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "transport": "stdio"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "transport": "stdio"
+    },
+    "stripe": {
+      "command": "node",
+      "args": ["C:/Users/Disaster Recovery 4/Documents/Cline/MCP/stripe-agent-toolkit-server/dist/index.js"],
+      "transport": "stdio"
+    },
+    "fetch": {
+      "command": "node",
+      "args": ["C:/Users/Disaster Recovery 4/Documents/Cline/MCP/fetch-mcp/dist/index.js"],
+      "transport": "stdio"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "transport": "stdio"
+    },
+    "magic-21st": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": {
+        "API_KEY": "cb36fba51af6068f87ca48aa2a514ca1efeb400fd98e9789c5f8b29a1777de7b"
+      },
+      "transport": "stdio"
+    },
+    "bright-data": {
+      "command": "npx",
+      "args": ["@brightdata/mcp"],
+      "env": {
+        "API_TOKEN": "$BRIGHTDATA_API_KEY",
+        "RATE_LIMIT": "100/1h"
+      },
+      "transport": "stdio"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "env": {
+        "PUPPETEER_LAUNCH_OPTIONS": "{\"headless\": false, \"args\": []}",
+        "ALLOW_DANGEROUS": "true"
+      },
+      "transport": "stdio"
+    },
+    "digitalocean": {
+      "command": "npx",
+      "args": ["-y", "@digitalocean/mcp-server"],
+      "env": {
+        "DIGITALOCEAN_TOKEN": "$DIGITALOCEAN_TOKEN"
+      },
+      "transport": "stdio"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest", "--headless"],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "/home/$USER/.cache/playwright",
+        "DISPLAY": ":99"
+      },
+      "transport": "stdio"
+    },
+    "jina-scraper": {
+      "command": "npx",
+      "args": ["@jinaai/mcp-scraper@latest"],
+      "env": {
+        "JINA_API_KEY": "$JINA_API_KEY"
+      },
+      "transport": "stdio"
+    }
+  }
+}
