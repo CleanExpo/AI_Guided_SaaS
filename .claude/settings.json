@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "dangerously-skip-permissions"
+    ],
+    "deny": []
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "skipPrompts": true,
+    "allow": [
+      "Bash(mkdir:*)"
+    ],
+    "deny": []
+  },
+  "tools": {
+    "fileOperations": true,
+    "webSearch": true,
+    "webFetch": true,
+    "bash": true,
+    "edit": true,
+    "git": true
+  },
+  "contextEngineering": {
+    "enabled": true,
+    "prpGeneration": true,
+    "agentCoordination": true,
+    "mcpIntegration": true,
+    "autoValidation": true
+  },
+  "multiAgent": {
+    "coordinationEnabled": true,
+    "parallelExecution": true,
+    "errorEscalation": true,
+    "healthChecks": true
+  },
+  "enabledMcpjsonServers": [
+    "context7",
+    "bright-data",
+    "puppeteer",
+    "digitalocean"
+  ],
+  "enableAllProjectMcpServers": true
+}
