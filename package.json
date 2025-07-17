@@ -1,6 +1,7 @@
 {
   "name": "ai-guided-saas",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -34,7 +35,10 @@
     "build:sync": "ts-node scripts/build-sync-agent.ts",
     "build:full": "npm run build:sync && npm run build",
     "deploy:safe": "npm run build:sync && npm run deploy:production",
-    "purple:purge": "ts-node scripts/build-sync-agent.ts --color-only"
+    "purple:purge": "ts-node scripts/build-sync-agent.ts --color-only",
+    "agents:orchestrate": "node scripts/activate-enhanced-orchestration.js",
+    "agents:status": "echo \"📊 Checking agent status...\" && node scripts/activate-enhanced-orchestration.js --status",
+    "agents:pr18": "echo \"🎯 Activating PR #18 acceleration...\" && node scripts/activate-enhanced-orchestration.js"
   },
   "dependencies": {
     "@next-auth/supabase-adapter": "^0.2.1",
