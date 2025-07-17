@@ -47,7 +47,9 @@ const buttonVariants = cva(
 );
 
 export interface ButtonPremiumProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 
+    'size' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' |
+    'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'transition'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   glow?: boolean;
@@ -112,7 +114,6 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
     const motionProps = asChild ? {} : {
       whileHover: { scale: variant === 'floating' ? 1.05 : 1.02 },
       whileTap: { scale: 0.98 },
-      transition: { duration: 0.2, ease: 'easeOut' },
     };
 
     return (
