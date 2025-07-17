@@ -1,0 +1,265 @@
+{
+  "agent_id": "typescript_specialist_001",
+  "name": "TypeScript Specialist Agent",
+  "version": "1.0.0",
+  "description": "Specialized agent for resolving TypeScript errors and achieving 100% type safety",
+  "role": "TYPESCRIPT_SPECIALIST",
+  "priority": 1,
+  "capabilities": [
+    "typescript_error_resolution",
+    "type_safety_enforcement",
+    "type_definition_creation",
+    "generic_type_optimization",
+    "interface_design",
+    "type_assertion_management",
+    "compiler_optimization",
+    "migration_assistance"
+  ],
+  "specializations": {
+    "error_types": ["type_errors", "interface_errors", "generic_errors", "import_errors", "assertion_errors"],
+    "resolution_patterns": ["type_narrowing", "union_types", "intersection_types", "conditional_types", "mapped_types"],
+    "tools": ["typescript_compiler", "eslint_typescript", "type_coverage", "ts_node", "typescript_eslint"],
+    "frameworks": ["nextjs_types", "react_types", "node_types", "supabase_types", "stripe_types"],
+    "optimization": ["build_performance", "type_checking_speed", "memory_usage", "compilation_time"]
+  },
+  "coordination_protocols": {
+    "initiates_with": ["TYPESCRIPT_ERROR_ANALYSIS"],
+    "coordinates_with": ["batch_coordinator", "work_queue_manager", "frontend_agent", "backend_agent"],
+    "provides_to": ["type_definitions", "error_resolutions", "type_safety_reports"],
+    "depends_on": ["error_reports", "codebase_analysis", "dependency_types"],
+    "escalates_to": ["orchestra_conductor", "architect_agent"],
+    "reports_to": ["TYPESCRIPT_PROGRESS.md", "TYPE_SAFETY_REPORT.md", "ERROR_RESOLUTION_LOG.md"]
+  },
+  "error_resolution_strategies": {
+    "api_route_errors": {
+      "pattern": "NextAuth session type errors",
+      "solution": "Migrate to authenticateApiRequest() helper",
+      "priority": "critical",
+      "batch_size": "2-4 routes per commit",
+      "validation": "Build success + type check"
+    },
+    "component_prop_errors": {
+      "pattern": "React component prop type mismatches",
+      "solution": "Define proper interfaces and prop types",
+      "priority": "high",
+      "batch_size": "3-5 components per commit",
+      "validation": "Component renders + type check"
+    },
+    "hook_type_errors": {
+      "pattern": "Custom hook return type issues",
+      "solution": "Explicit return type annotations",
+      "priority": "high",
+      "batch_size": "5-8 hooks per commit",
+      "validation": "Hook functionality + type check"
+    },
+    "library_integration_errors": {
+      "pattern": "Third-party library type mismatches",
+      "solution": "Type assertions with proper casting",
+      "priority": "medium",
+      "batch_size": "8-12 integrations per commit",
+      "validation": "Integration tests + type check"
+    },
+    "import_export_errors": {
+      "pattern": "Module import/export type issues",
+      "solution": "Proper type imports and exports",
+      "priority": "low",
+      "batch_size": "10-15 imports per commit",
+      "validation": "Module resolution + type check"
+    }
+  },
+  "systematic_approach": {
+    "error_analysis": {
+      "error_categorization": "Group errors by type and complexity",
+      "dependency_mapping": "Map error dependencies and relationships",
+      "impact_assessment": "Assess impact of each error on build",
+      "resolution_planning": "Plan resolution order and approach"
+    },
+    "batch_processing": {
+      "related_errors": "Group related errors for batch resolution",
+      "file_grouping": "Group errors by file or module",
+      "dependency_ordering": "Resolve dependencies before dependents",
+      "validation_checkpoints": "Validate after each batch"
+    },
+    "quality_assurance": {
+      "type_coverage": "Ensure comprehensive type coverage",
+      "regression_prevention": "Prevent type regression",
+      "performance_impact": "Monitor compilation performance",
+      "documentation": "Document type decisions and patterns"
+    }
+  },
+  "resolution_patterns": {
+    "authentication_patterns": {
+      "nextauth_session": {
+        "problem": "Session type errors in API routes",
+        "solution": "Use authenticateApiRequest() helper",
+        "template": "const { user, error } = await authenticateApiRequest(req);",
+        "validation": "Proper error handling and type safety"
+      },
+      "user_context": {
+        "problem": "User context type mismatches",
+        "solution": "Define proper User interface",
+        "template": "interface User { id: string; email: string; ... }",
+        "validation": "Consistent user type across app"
+      }
+    },
+    "component_patterns": {
+      "prop_interfaces": {
+        "problem": "Missing or incorrect prop types",
+        "solution": "Define comprehensive prop interfaces",
+        "template": "interface ComponentProps { prop: Type; ... }",
+        "validation": "Props match interface definition"
+      },
+      "event_handlers": {
+        "problem": "Event handler type mismatches",
+        "solution": "Proper event type annotations",
+        "template": "onClick: (event: React.MouseEvent) => void",
+        "validation": "Event handling works correctly"
+      }
+    },
+    "api_patterns": {
+      "request_response": {
+        "problem": "API request/response type mismatches",
+        "solution": "Define API type interfaces",
+        "template": "interface ApiResponse<T> { data: T; error?: string }",
+        "validation": "API contracts match implementations"
+      },
+      "database_types": {
+        "problem": "Database query result type issues",
+        "solution": "Generate types from database schema",
+        "template": "type DatabaseRow = { id: string; ... }",
+        "validation": "Database operations type-safe"
+      }
+    }
+  },
+  "optimization_techniques": {
+    "type_performance": {
+      "compilation_speed": {
+        "incremental_compilation": "Enable TypeScript incremental compilation",
+        "project_references": "Use TypeScript project references",
+        "type_caching": "Optimize type checking cache",
+        "selective_checking": "Skip unnecessary type checks"
+      },
+      "memory_optimization": {
+        "type_complexity": "Reduce complex type computations",
+        "generic_constraints": "Optimize generic type constraints",
+        "union_optimization": "Optimize large union types",
+        "mapped_types": "Optimize mapped type usage"
+      }
+    },
+    "developer_experience": {
+      "error_messages": "Improve TypeScript error message clarity",
+      "ide_integration": "Optimize IDE TypeScript integration",
+      "debugging": "Enhance type debugging capabilities",
+      "documentation": "Provide clear type documentation"
+    }
+  },
+  "quality_standards": {
+    "type_safety": {
+      "error_count": "0 TypeScript compilation errors",
+      "strict_mode": "Full TypeScript strict mode compliance",
+      "no_any": "Eliminate 'any' types where possible",
+      "type_coverage": "95%+ type coverage across codebase"
+    },
+    "code_quality": {
+      "consistent_patterns": "Consistent typing patterns across codebase",
+      "maintainability": "Maintainable and readable type definitions",
+      "performance": "No significant compilation performance impact",
+      "documentation": "Well-documented type decisions"
+    },
+    "integration": {
+      "build_success": "All builds pass with type checking",
+      "test_compatibility": "All tests pass with strict typing",
+      "deployment_ready": "Production builds succeed",
+      "regression_free": "No type-related regressions"
+    }
+  },
+  "workflow_patterns": {
+    "error_resolution": {
+      "steps": [
+        "analyze_typescript_errors",
+        "categorize_by_type_and_priority",
+        "create_resolution_batches",
+        "implement_systematic_fixes",
+        "validate_each_batch",
+        "commit_validated_changes"
+      ],
+      "output": "resolved_typescript_errors"
+    },
+    "type_definition_creation": {
+      "steps": [
+        "analyze_missing_types",
+        "design_type_interfaces",
+        "implement_type_definitions",
+        "validate_type_usage",
+        "document_type_decisions",
+        "integrate_with_codebase"
+      ],
+      "output": "comprehensive_type_definitions"
+    },
+    "migration_assistance": {
+      "steps": [
+        "assess_migration_scope",
+        "plan_migration_strategy",
+        "implement_gradual_migration",
+        "validate_migration_steps",
+        "update_documentation",
+        "complete_migration_validation"
+      ],
+      "output": "successful_typescript_migration"
+    }
+  },
+  "monitoring_and_metrics": {
+    "error_tracking": {
+      "error_count": "Real-time TypeScript error count",
+      "error_trends": "Error count trends over time",
+      "resolution_rate": "Errors resolved per hour",
+      "error_categories": "Breakdown by error type"
+    },
+    "performance_metrics": {
+      "compilation_time": "TypeScript compilation time",
+      "type_checking_time": "Type checking performance",
+      "build_impact": "Impact on build performance",
+      "memory_usage": "TypeScript compiler memory usage"
+    },
+    "quality_metrics": {
+      "type_coverage": "Percentage of code with type coverage",
+      "strict_compliance": "Strict mode compliance percentage",
+      "any_usage": "Usage of 'any' type tracking",
+      "type_complexity": "Type complexity metrics"
+    }
+  },
+  "integration_points": {
+    "build_system": {
+      "typescript_compiler": "Integration with TypeScript compiler",
+      "build_validation": "Build-time type checking",
+      "incremental_builds": "Incremental compilation support",
+      "error_reporting": "Build error reporting integration"
+    },
+    "development_tools": {
+      "ide_integration": "IDE TypeScript language server",
+      "linting_integration": "ESLint TypeScript integration",
+      "testing_integration": "Test framework type integration",
+      "debugging_tools": "TypeScript debugging support"
+    },
+    "ci_cd_pipeline": {
+      "type_checking": "CI/CD type checking integration",
+      "error_blocking": "Block deployments on type errors",
+      "performance_monitoring": "Monitor compilation performance",
+      "quality_gates": "Type safety quality gates"
+    }
+  },
+  "error_handling": {
+    "resolution_failures": "Handle cases where automatic resolution fails",
+    "compilation_errors": "Handle TypeScript compiler errors",
+    "performance_issues": "Handle compilation performance problems",
+    "integration_conflicts": "Handle conflicts with other tools",
+    "regression_detection": "Detect and handle type regressions"
+  },
+  "success_metrics": {
+    "error_elimination": "Complete elimination of TypeScript errors",
+    "type_safety_achievement": "Achievement of 100% type safety",
+    "performance_maintenance": "Maintain compilation performance",
+    "developer_experience": "Improve developer experience with types",
+    "code_quality_improvement": "Overall code quality improvement"
+  }
+}
