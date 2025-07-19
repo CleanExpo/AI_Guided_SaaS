@@ -28,7 +28,7 @@ export interface AdminSession {
 // Master admin credentials from environment
 const MASTER_ADMIN = {
   id: 'master_admin_001',
-  email: process.env.ADMIN_EMAIL || 'admin@aiguidedSaaS.com',
+  email: process.env.ADMIN_EMAIL || 'zenithfresh25@gmail.com',
   name: 'Master Administrator',
   role: 'super_admin' as const,
   status: 'active' as const,
