@@ -1,0 +1,22 @@
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-07-19 19:50:36.485"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-07-19 19:50:36.487"}
+{"arguments":{"url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 20:34:29.509","tool":"puppeteer_navigate"}
+{"0":"n","1":"p","2":"x","level":"info","message":"Launching browser with config:","service":"mcp-puppeteer","timestamp":"2025-07-19 20:34:29.526"}
+{"level":"info","message":"Browser launched successfully","service":"mcp-puppeteer","timestamp":"2025-07-19 20:34:34.005"}
+{"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-07-19 20:34:34.006","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app"}
+{"level":"info","message":"Navigation successful","service":"mcp-puppeteer","status":200,"timestamp":"2025-07-19 20:34:38.587","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app"}
+{"arguments":{"height":1080,"name":"production-landing-page","width":1920},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 20:34:44.435","tool":"puppeteer_screenshot"}
+{"arguments":{"url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 20:34:58.117","tool":"puppeteer_navigate"}
+{"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-07-19 20:34:58.117","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"}
+{"level":"info","message":"Navigation successful","service":"mcp-puppeteer","status":200,"timestamp":"2025-07-19 20:34:59.621","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"}
+{"arguments":{"height":1080,"name":"production-signin-page","width":1920},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 20:35:07.178","tool":"puppeteer_screenshot"}
+{"arguments":{"url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 20:53:36.555","tool":"puppeteer_navigate"}
+{"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-07-19 20:53:36.577","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"}
+{"error":"Attempted to use detached Frame 'C73A3759E7DD79C5124B716B3B6FE879'.","level":"error","message":"Navigation failed","service":"mcp-puppeteer","timestamp":"2025-07-19 20:53:36.590","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"}
+{"arguments":{"url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 21:04:33.444","tool":"puppeteer_navigate"}
+{"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-07-19 21:04:33.447","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"}
+{"error":"Attempted to use detached Frame 'C73A3759E7DD79C5124B716B3B6FE879'.","level":"error","message":"Navigation failed","service":"mcp-puppeteer","timestamp":"2025-07-19 21:04:33.448","url":"https://ai-guided-saas-fkqvot40t-unite-group.vercel.app/auth/signin"}
+{"arguments":{},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 21:04:38.638","tool":"puppeteer_connect_active_tab"}
+{"arguments":{},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-19 21:34:45.482","tool":"puppeteer_connect_active_tab"}
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-07-19 22:04:34.369"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-07-19 22:04:34.370"}

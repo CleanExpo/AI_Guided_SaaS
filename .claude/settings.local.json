@@ -31,7 +31,8 @@
     "context7",
     "bright-data",
     "puppeteer",
-    "digitalocean"
+    "digitalocean",
+    "magic-21st"
   ],
   "enableAllProjectMcpServers": true
 }
