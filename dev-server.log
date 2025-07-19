@@ -1,0 +1,81 @@
+
+> ai-guided-saas@1.0.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+  ▲ Next.js 14.2.30
+  - Local:        http://localhost:3001
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 9.2s
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 775ms (73 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 26.4s (1723 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /mcp 404 in 26983ms
+ ✓ Compiled in 2.4s (870 modules)
+ ○ Compiling /admin/login ...
+ ✓ Compiled /admin/login in 6.1s (1719 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/login 200 in 7191ms
+ ✓ Compiled /_not-found in 485ms (1722 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /_next/static/css/app/layout.css?v=1752964994661 404 in 744ms
+ GET /_next/static/media/e4af272ccee01ff0-s.p.woff2 404 in 801ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 741ms
+ GET /_next/static/chunks/main-app.js?v=1752964994661 404 in 805ms
+ GET /_next/static/chunks/app/layout.js 404 in 51ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/mnt/d/AI Guided SaaS/.next/server/vendor-chunks/get-nonce.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/get-nonce' in /mnt/d/AI Guided SaaS/.next/server for build dependencies doesn't lead to expected result '/mnt/d/AI Guided SaaS/.next/server/vendor-chunks/get-nonce.js', but to 'Error: Can't resolve './vendor-chunks/get-nonce' in '/mnt/d/AI Guided SaaS/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/get-nonce (expected /mnt/d/AI Guided SaaS/.next/server/vendor-chunks/get-nonce.js)
+<w>  at file dependencies /mnt/d/AI Guided SaaS/.next/server/webpack-runtime.js
+<w>  at file /mnt/d/AI Guided SaaS/.next/server/webpack-runtime.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/.next/server/app/_not-found/page.js
+<w>  at file /mnt/d/AI Guided SaaS/.next/server/app/_not-found/page.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/server/require.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/server/require.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/server/load-components.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/utils.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/handle-externals.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/handle-externals.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at resolve commonjs /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/clsx' in /mnt/d/AI Guided SaaS/.next/server for build dependencies doesn't lead to expected result '/mnt/d/AI Guided SaaS/.next/server/vendor-chunks/clsx.js', but to 'Error: Can't resolve './vendor-chunks/clsx' in '/mnt/d/AI Guided SaaS/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/clsx (expected /mnt/d/AI Guided SaaS/.next/server/vendor-chunks/clsx.js)
+<w>  at file dependencies /mnt/d/AI Guided SaaS/.next/server/webpack-runtime.js
+<w>  at file /mnt/d/AI Guided SaaS/.next/server/webpack-runtime.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/.next/server/app/_not-found/page.js
+<w>  at file /mnt/d/AI Guided SaaS/.next/server/app/_not-found/page.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/server/require.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/server/require.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/server/load-components.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/utils.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/handle-externals.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/handle-externals.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at resolve commonjs /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/@swc' in /mnt/d/AI Guided SaaS/.next/server for build dependencies doesn't lead to expected result '/mnt/d/AI Guided SaaS/.next/server/vendor-chunks/@swc.js', but to 'Error: Can't resolve './vendor-chunks/@swc' in '/mnt/d/AI Guided SaaS/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/@swc (expected /mnt/d/AI Guided SaaS/.next/server/vendor-chunks/@swc.js)
+<w>  at file dependencies /mnt/d/AI Guided SaaS/.next/server/webpack-runtime.js
+<w>  at file /mnt/d/AI Guided SaaS/.next/server/webpack-runtime.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/.next/server/app/_not-found/page.js
+<w>  at file /mnt/d/AI Guided SaaS/.next/server/app/_not-found/page.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/server/require.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/server/require.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/server/load-components.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/utils.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/handle-externals.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/handle-externals.js
+<w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at resolve commonjs /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
