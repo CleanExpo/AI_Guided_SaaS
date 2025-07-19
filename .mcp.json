@@ -1,47 +1,64 @@
 {
   "mcpServers": {
     "context7": {
-      "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp@latest"
-      ],
-      "env": {}
+      "args": ["-y", "--node-options=--experimental-vm-modules", "@upstash/context7-mcp@1.0.6"],
+      "transport": "stdio"
     },
-    "bright-data": {
-      "type": "stdio",
+    "sequential-thinking": {
       "command": "npx",
-      "args": [
-        "@brightdata/mcp"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "transport": "stdio"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "transport": "stdio"
+    },
+    "stripe": {
+      "command": "node",
+      "args": ["/mnt/c/Users/Disaster Recovery 4/Documents/Cline/MCP/stripe-agent-toolkit-server/dist/index.js"],
+      "transport": "stdio"
+    },
+    "fetch": {
+      "command": "node",
+      "args": ["/mnt/c/Users/Disaster Recovery 4/Documents/Cline/MCP/fetch-mcp/dist/index.js"],
+      "transport": "stdio"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "transport": "stdio"
+    },
+    "magic-21st": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
       "env": {
-        "API_TOKEN": "$BRIGHTDATA_API_KEY",
-        "RATE_LIMIT": "100/1h"
-      }
+        "API_KEY": "cb36fba51af6068f87ca48aa2a514ca1efeb400fd98e9789c5f8b29a1777de7b"
+      },
+      "transport": "stdio"
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "$BRAVE_API_KEY"
+      },
+      "transport": "stdio"
     },
     "puppeteer": {
-      "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-puppeteer"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
       "env": {
         "PUPPETEER_LAUNCH_OPTIONS": "{\"headless\": false, \"args\": []}",
         "ALLOW_DANGEROUS": "true"
-      }
+      },
+      "transport": "stdio"
     },
-    "digitalocean": {
-      "type": "stdio",
+    "wsl-sequential-thinking": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@digitalocean/mcp-server"
-      ],
-      "env": {
-        "DIGITALOCEAN_TOKEN": "$DIGITALOCEAN_TOKEN"
-      }
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "transport": "stdio"
     }
   }
 }
