@@ -316,6 +316,7 @@ docker-compose logs -f
 # Health check
 curl http://localhost:3000/api/health
 
+
 # Cleanup
 docker-compose down
 docker system prune
