@@ -409,3 +409,131 @@
     display: none !important;
   }
 }
+
+/* Grid pattern for no-code builder */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 640px) {
+  /* Adjust font sizes for mobile */
+  h1 {
+    @apply text-3xl md:text-5xl;
+  }
+  
+  h2 {
+    @apply text-2xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  /* Touch-friendly buttons */
+  button {
+    @apply min-h-[44px];
+  }
+  
+  /* Mobile navigation adjustments */
+  .mobile-menu {
+    @apply fixed inset-0 z-50 bg-white dark:bg-gray-900;
+  }
+  
+  /* Hide desktop-only elements */
+  .desktop-only {
+    @apply hidden;
+  }
+  
+  /* Full-width cards on mobile */
+  .responsive-card {
+    @apply w-full;
+  }
+}
+
+/* Tablet-specific styles */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .tablet-cols-2 {
+    @apply grid-cols-2;
+  }
+  
+  /* Hide mobile-only elements */
+  .mobile-only {
+    @apply hidden;
+  }
+}
+
+/* Desktop-specific styles */
+@media (min-width: 1024px) {
+  /* Hide mobile-only elements */
+  .mobile-only {
+    @apply hidden;
+  }
+  
+  /* Show desktop-only elements */
+  .desktop-only {
+    @apply block;
+  }
+}
+
+/* Performance optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Prevent layout shift */
+img, video {
+  @apply max-w-full h-auto;
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Touch feedback */
+@media (hover: none) {
+  button:active {
+    @apply scale-95;
+  }
+}
+
+/* Ensure smooth transitions */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Responsive text utilities */
+.text-responsive {
+  @apply text-sm sm:text-base md:text-lg lg:text-xl;
+}
+
+/* Responsive spacing utilities */
+.spacing-responsive {
+  @apply p-4 sm:p-6 md:p-8 lg:p-12;
+}
+
+/* Safe area insets for mobile devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
