@@ -2,7 +2,7 @@
   "permissions": {
     "skipPrompts": true,
     "allow": [
-      "Bash(mkdir:*)"
+      "Bash(npx:*)"
     ],
     "deny": []
   },
