@@ -15,6 +15,9 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('')
   const router = useRouter()
 
+  // Debug: Log when component mounts
+  console.log('🔥 ADMIN LOGIN PAGE LOADED - NO REDIRECT!')
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
