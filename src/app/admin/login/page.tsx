@@ -10,19 +10,21 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { AlertTriangle, Shield, Eye, EyeOff } from 'lucide-react'
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setError('')
 
     try {
+      const formData = new FormData(e.currentTarget)
+      const email = formData.get('email') as string
+      const password = formData.get('password') as string
+
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
@@ -81,9 +83,9 @@ export default function AdminLoginPage() {
                 </Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  defaultValue="admin@aiguidedSaaS.com"
                   placeholder="admin@aiguidedSaaS.com"
                   className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
                 />
@@ -96,9 +98,8 @@ export default function AdminLoginPage() {
                 <div className="relative">
                   <Input
                     id="password"
+                    name="password"
                     type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter admin password"
                     className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 pr-10"
                   />
