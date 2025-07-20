@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -33,7 +32,7 @@ import {
 } from '@/lib/admin';
 
 export default function AdminPanel() {
-  const { data: session } = useSession();
+  const [adminUser, setAdminUser] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
   const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
@@ -44,6 +43,18 @@ export default function AdminPanel() {
   const [searchTerm, setSearchTerm] = useState('');
   const [userFilter, setUserFilter] = useState('all');
   const [contentFilter, setContentFilter] = useState('all');
+
+  useEffect(() => {
+    // Load admin user from localStorage
+    const adminUserData = localStorage.getItem('admin-user');
+    if (adminUserData) {
+      try {
+        setAdminUser(JSON.parse(adminUserData));
+      } catch (error) {
+        console.error('Error parsing admin user:', error);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     loadAdminData();
@@ -84,7 +95,7 @@ export default function AdminPanel() {
       await adminService.updateUserStatus(
         userId,
         status,
-        session?.user?.email || 'admin'
+        adminUser?.email || 'admin'
       );
       await loadAdminData(); // Refresh data
     } catch (error) {
@@ -100,7 +111,7 @@ export default function AdminPanel() {
       await adminService.moderateContent(
         contentId,
         action,
-        session?.user?.email || 'admin'
+        adminUser?.email || 'admin'
       );
       await loadAdminData(); // Refresh data
     } catch (error) {
@@ -187,7 +198,7 @@ export default function AdminPanel() {
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
-                Welcome, {session?.user?.name}
+                Welcome, {adminUser?.name || 'Admin'}
               </span>
             </div>
           </div>
