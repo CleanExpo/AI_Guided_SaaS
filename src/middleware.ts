@@ -114,6 +114,11 @@ function validateRequest(request: NextRequest): string | null {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
+  // CRITICAL: Skip middleware for admin routes to prevent NextAuth interference
+  if (pathname.startsWith('/admin')) {
+    return NextResponse.next();
+  }
+  
   // Skip middleware for static files and internal Next.js routes
   if (
     pathname.startsWith('/_next') ||
@@ -189,11 +194,12 @@ export const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
+     * - admin (admin routes - handled separately)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public folder files
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!admin|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };
