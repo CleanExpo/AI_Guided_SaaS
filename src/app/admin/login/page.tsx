@@ -85,7 +85,6 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@aiguidedSaaS.com"
-                  required
                   className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
                 />
               </div>
@@ -101,7 +100,6 @@ export default function AdminLoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter admin password"
-                    required
                     className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 pr-10"
                   />
                   <button
