@@ -147,13 +147,4 @@ function formatAgentResponse(result: any): string {
   return response
 }
 
-// Helper function to save project artifacts
-async function saveProjectArtifacts(
-  projectId: string,
-  userId: string,
-  artifacts: Map<string, any>
-): Promise<void> {
-  // This would save to your project storage system
-  // Implementation depends on your storage architecture
-  console.log(`Saving ${artifacts.size} artifacts for project ${projectId}`)
-}
+// saveProjectArtifacts is now imported from @/lib/project-storage

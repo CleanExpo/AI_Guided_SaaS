@@ -103,9 +103,15 @@ Please provide clean, well-documented code following best practices.`
   return response.message
 }
 
+/**
+ * Legacy alias for generateChatCompletion
+ */
+export const generateAIResponse = generateChatCompletion
+
 export default {
   generateChatCompletion,
   generateCompletion,
+  generateAIResponse,
   analyzeCode,
   generateCodeSuggestions,
 }
