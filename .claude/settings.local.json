@@ -2,7 +2,8 @@
   "permissions": {
     "skipPrompts": true,
     "allow": [
-      "Bash(cd:*)"
+      "Bash(git pull:*)",
+      "Bash(true)"
     ],
     "deny": []
   },
