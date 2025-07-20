@@ -20,7 +20,10 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps) {
     '/admin/login', // Admin login has its own layout
   ];
   
-  const shouldShowLayout = !noLayoutRoutes.includes(pathname);
+  // All admin routes should not use the main app header (which uses NextAuth)
+  const isAdminRoute = pathname.startsWith('/admin');
+  
+  const shouldShowLayout = !noLayoutRoutes.includes(pathname) && !isAdminRoute;
   
   if (shouldShowLayout) {
     return (
