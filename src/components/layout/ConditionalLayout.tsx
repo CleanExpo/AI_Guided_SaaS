@@ -17,6 +17,7 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps) {
     '/', // Landing page has its own header
     '/auth/signin',
     '/auth/signup',
+    '/admin/login', // Admin login has its own layout
   ];
   
   const shouldShowLayout = !noLayoutRoutes.includes(pathname);
