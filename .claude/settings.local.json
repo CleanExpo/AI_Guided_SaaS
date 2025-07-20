@@ -3,7 +3,9 @@
     "skipPrompts": true,
     "allow": [
       "Bash(git checkout:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git pull:*)",
+      "Bash(true)"
     ],
     "deny": []
   },
