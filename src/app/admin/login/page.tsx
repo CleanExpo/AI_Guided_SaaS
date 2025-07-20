@@ -67,9 +67,9 @@ export default function AdminLoginPage() {
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600">
               <Shield className="h-6 w-6 text-white" />
             </div>
-            <CardTitle className="text-4xl font-bold text-red-500 animate-pulse">🔥 ADMIN LOGIN - LATEST VERSION 🔥</CardTitle>
+            <CardTitle className="text-4xl font-bold text-red-500 animate-pulse">🔥 ADMIN LOGIN - FIXED VERSION 🔥</CardTitle>
             <CardDescription className="text-yellow-300 text-lg font-bold">
-              ⚡ DEPLOYMENT TEST - IF YOU SEE THIS, IT WORKED! ⚡
+              ✅ Environment Variables Updated - Ready to Login! ✅
             </CardDescription>
           </CardHeader>
           <CardContent>
