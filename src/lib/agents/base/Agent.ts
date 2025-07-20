@@ -32,6 +32,14 @@ export interface AgentContext {
   artifacts: Map<string, any>
 }
 
+export interface AgentArtifact {
+  type: 'code' | 'documentation' | 'configuration' | 'test' | 'other';
+  name: string;
+  content: string;
+  path?: string;
+  metadata?: Record<string, any>;
+}
+
 export interface AgentResult {
   success: boolean
   output: any

@@ -11,7 +11,7 @@ import {
 import { useToast } from "@/hooks/use-toast"
 
 export function Toaster() {
-  const { toasts } = useToast()
+  const { toasts }: { toasts: any[] } = useToast() as any
 
   return (
     <ToastProvider>

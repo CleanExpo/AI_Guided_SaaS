@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "transport": "stdio"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/mnt/d", "/home/phill_mcgurk"],
+      "transport": "stdio"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "transport": "stdio"
+    },
+    "everything": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-everything"],
+      "transport": "stdio"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "--node-options=--experimental-vm-modules", "@upstash/context7-mcp@latest"],
+      "transport": "stdio"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--headless"],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "/home/phill_mcgurk/.cache/playwright",
+        "DISPLAY": ":99"
+      },
+      "transport": "stdio"
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://localhost/mydb"],
+      "transport": "stdio"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "env": {
+        "PUPPETEER_LAUNCH_OPTIONS": "{\"headless\": false, \"args\": []}",
+        "ALLOW_DANGEROUS": "true"
+      },
+      "transport": "stdio"
+    }
+  }
+}

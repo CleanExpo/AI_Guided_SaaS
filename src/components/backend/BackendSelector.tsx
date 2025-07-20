@@ -1,35 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardHeader, 
-  CardTitle 
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { 
-  Database, 
-  Server, 
-  Cloud, 
-  Check, 
-  X, 
-  Loader2,
-  AlertTriangle
-} from 'lucide-react'
-import { 
-  BackendConfig,
-  getBackendConfig,
-  setBackendConfig,
-  createBackendAdapter,
-  switchBackend,
-  loadBackendConfig
-} from '@/lib/backend/adapter-factory'
+import { BackendConfig, BackendType } from '@/lib/backend/types'
+import { createBackendAdapter, switchBackend, getBackendConfig } from '@/lib/backend/adapter-factory'
+
+
 
 export function BackendSelector() {
   const [selectedBackend, setSelectedBackend] = useState<string>('supabase')
@@ -85,11 +59,8 @@ export function BackendSelector() {
     setTesting(true)
     setTestResult(null)
 
-    const testConfig: BackendConfig = {
-      type: selectedBackend as any,
-      url: formData[selectedBackend as keyof typeof formData].url,
-      apiKey: formData[selectedBackend as keyof typeof formData].apiKey
-    }
+    const testConfig: BackendConfig = { backend: selectedBackend as any as BackendType, type: selectedBackend as any, url: formData[selectedBackend as keyof typeof formData].url, apiKey: formData[selectedBackend as keyof typeof formData].apiKey
+     }
 
     try {
       const adapter = createBackendAdapter(testConfig)
@@ -112,11 +83,8 @@ export function BackendSelector() {
   }
 
   const handleSave = async () => {
-    const newConfig: BackendConfig = {
-      type: selectedBackend as any,
-      url: formData[selectedBackend as keyof typeof formData].url,
-      apiKey: formData[selectedBackend as keyof typeof formData].apiKey
-    }
+    const newConfig: BackendConfig = { backend: selectedBackend as any as BackendType, type: selectedBackend as any, url: formData[selectedBackend as keyof typeof formData].url, apiKey: formData[selectedBackend as keyof typeof formData].apiKey
+     }
 
     await switchBackend(newConfig)
     setConfig(newConfig)

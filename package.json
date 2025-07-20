@@ -38,7 +38,14 @@
     "purple:purge": "ts-node scripts/build-sync-agent.ts --color-only",
     "agents:orchestrate": "node scripts/activate-enhanced-orchestration.js",
     "agents:status": "echo \"📊 Checking agent status...\" && node scripts/activate-enhanced-orchestration.js --status",
-    "agents:pr18": "echo \"🎯 Activating PR #18 acceleration...\" && node scripts/activate-enhanced-orchestration.js"
+    "agents:pr18": "echo \"🎯 Activating PR #18 acceleration...\" && node scripts/activate-enhanced-orchestration.js",
+    "agents:init": "tsx scripts/initialize-agent-system.ts",
+    "agents:load": "tsx scripts/load-deployment-agents.ts",
+    "agents:deploy": "tsx scripts/execute-deployment-fixes.ts",
+    "agents:test": "tsx scripts/test-agent-workflow.ts",
+    "agents:monitor": "echo \"💓 Monitoring agents...\" && node scripts/monitor-agents.cjs",
+    "fix:typescript": "node scripts/execute-deployment-fixes.cjs",
+    "fix:all": "npm run fix:typescript && npm run typecheck"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

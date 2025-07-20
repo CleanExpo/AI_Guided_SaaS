@@ -40,3 +40,5 @@
 {"error":"Unexpected token ':'","level":"error","message":"Script evaluation failed","service":"mcp-puppeteer","timestamp":"2025-07-20 08:43:37.352"}
 {"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-07-20 15:02:51.940"}
 {"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-07-20 15:02:51.941"}
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-07-20 19:52:04.786"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-07-20 19:52:04.788"}

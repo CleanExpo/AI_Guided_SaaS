@@ -2,12 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { 
-  CreateProjectSchema, 
-  ProjectTypeSchema,
-  validateSafe,
-  z 
-} from '@/lib/validation'
+import { CreateProjectSchema, ProjectTypeSchema, validateSafe, z } from '@/lib/validation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -17,8 +12,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2, AlertCircle } from 'lucide-react'
 
+const ExtendedProjectSchema = CreateProjectSchema.extend({
+  config: z.object({
+    database: z.string().optional(),
+    hosting: z.string().optional(),
+    authentication: z.string().optional(),
+    api_style: z.string().optional()
+  }).optional()
+});
+
 // Type-safe form data
-type CreateProjectForm = z.infer<typeof CreateProjectSchema>
+type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>
 
 export function ValidatedProjectForm() {
   const router = useRouter()
@@ -42,7 +46,7 @@ export function ValidatedProjectForm() {
     setGeneralError(null)
 
     // Validate form data
-    const validation = validateSafe(CreateProjectSchema, formData)
+    const validation = validateSafe(ExtendedProjectSchema, formData)
     
     if (!validation.success) {
       // Map validation errors to form fields
@@ -164,7 +168,7 @@ export function ValidatedProjectForm() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {ProjectTypeSchema.options.map(type => (
+                  {ProjectTypeSchema.options.map((type: any) => (
                     <SelectItem key={type} value={type}>
                       {type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     </SelectItem>
@@ -257,7 +261,7 @@ export function ValidatedProjectForm() {
                 'Payment',
                 'Email',
                 'Analytics'
-              ].map(feature => (
+              ].map((feature: any) => (
                 <label key={feature} className="flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -267,7 +271,7 @@ export function ValidatedProjectForm() {
                       if (e.target.checked) {
                         updateConfig('features', [...features, feature])
                       } else {
-                        updateConfig('features', features.filter(f => f !== feature))
+                        updateConfig('features', features.filter((f: any) => f !== feature))
                       }
                     }}
                     className="rounded border-gray-300"
@@ -317,7 +321,7 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {
     setTouched(prev => new Set(prev).add(String(field)))
     
     // Validate single field
-    const fieldSchema = schema.shape[field as string]
+    const fieldSchema = (schema as any).shape[field as string]
     if (fieldSchema) {
       const result = fieldSchema.safeParse(value)
       if (!result.success) {

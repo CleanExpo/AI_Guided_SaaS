@@ -77,36 +77,7 @@ export async function POST(req: NextRequest) {
 }
 
 // Example of using the query builder
-export async function searchProjects(query: string, userId: string) {
-  const backend = getBackendAdapter()
-  
-  const projects = await backend
-    .query('projects')
-    .where('userId', '=', userId)
-    .where('name', 'like', `%${query}%`)
-    .orderBy('createdAt', 'desc')
-    .limit(20)
-    .execute()
 
-  return projects
-}
 
 // Example of real-time subscription
-export async function subscribeToProjectUpdates(
-  userId: string,
-  onUpdate: (project: any) => void
-) {
-  const backend = getBackendAdapter()
-  
-  const unsubscribe = backend.subscribe(
-    'projects',
-    (event) => {
-      if (event.record.userId === userId) {
-        onUpdate(event.record)
-      }
-    },
-    { userId }
-  )
-
-  return unsubscribe
-}
+// Only export HTTP methods

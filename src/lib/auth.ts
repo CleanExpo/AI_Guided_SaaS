@@ -2,7 +2,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { createClient } from '@supabase/supabase-js'
 import bcrypt from 'bcryptjs'
-import type { NextAuthOptions } from 'next-auth'
+import NextAuth, { type NextAuthOptions } from 'next-auth'
 
 // Handle missing environment variables gracefully for demo deployment
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -58,19 +58,19 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.id = user.id
       }
       return token
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (token && session.user) {
         session.user.id = token.id as string
       }
       return session
     },
-    async signIn({ user, account }) {
+    async signIn({ user, account }: { user: any; account: any }) {
       if (account?.provider === 'google' && supabase) {
         const { data: existingUser } = await supabase
           .from('users')

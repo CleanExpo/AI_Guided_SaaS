@@ -115,7 +115,7 @@ export const N8nWorkflowSchema = z.object({
 
 export class N8nClient {
   private baseUrl: string
-  private headers: HeadersInit = {}
+  private headers: Record<string, string> = {}
 
   constructor(private config: N8nConfig) {
     this.baseUrl = config.url.replace(/\/$/, '')
@@ -134,7 +134,7 @@ export class N8nClient {
   // Workflow operations
   async listWorkflows(): Promise<N8nWorkflow[]> {
     const response = await this.request('/workflows')
-    return response.data
+    return (response as any).data
   }
 
   async getWorkflow(id: string): Promise<N8nWorkflow> {
@@ -189,7 +189,7 @@ export class N8nClient {
   async listExecutions(workflowId?: string): Promise<N8nExecution[]> {
     const params = workflowId ? `?workflowId=${workflowId}` : ''
     const response = await this.request(`/executions${params}`)
-    return response.data
+    return (response as any).data
   }
 
   async getExecution(id: string): Promise<N8nExecution> {
@@ -247,7 +247,7 @@ export class N8nClient {
   // Credential operations (requires appropriate permissions)
   async listCredentials(): Promise<any[]> {
     const response = await this.request('/credentials')
-    return response.data
+    return (response as any).data
   }
 
   async testCredentials(id: string): Promise<boolean> {

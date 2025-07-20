@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import { 
-  ChatRequestSchema, 
-  ChatResponseSchema,
-  createValidatedApiHandler,
-  validateOrThrow,
-  ValidationError,
-  z
-} from '@/lib/validation'
+import { ChatRequestSchema, ChatResponseSchema, z } from '@/lib/validation'
 import { generateAIResponse } from '@/lib/ai'
+
+// Inline validation function
+function validateOrThrow<T>(schema: z.ZodType<T>, data: unknown): T {
+  return schema.parse(data);
+}
 
 // Type-safe request/response types
 type ChatRequest = z.infer<typeof ChatRequestSchema>
@@ -86,7 +84,7 @@ async function processChatRequest(
   })
 
   // Create response message
-  const responseMessage = {
+  const responseMessage = JSON.stringify({
     role: 'assistant' as const,
     content: aiResponse,
     timestamp: new Date().toISOString(),
@@ -94,7 +92,7 @@ async function processChatRequest(
       model: model || 'gpt-4',
       tokens: maxTokens
     }
-  }
+  })
 
   // Save to project if projectId provided
   let projectUpdates: any[] = []
@@ -127,19 +125,4 @@ async function saveToProject(
   return []
 }
 
-/**
- * Alternative: Using createValidatedApiHandler helper
- */
-export const validatedHandler = createValidatedApiHandler(
-  ChatRequestSchema,
-  ChatResponseSchema,
-  async (request: ChatRequest) => {
-    // Your handler logic here
-    return {
-      message: {
-        role: 'assistant',
-        content: 'Validated response'
-      }
-    }
-  }
-)
+// Export for Next.js App Router

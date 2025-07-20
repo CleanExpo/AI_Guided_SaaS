@@ -137,14 +137,14 @@ export class StrapiAdapter implements BackendAdapter {
       })
     })
 
-    return this.mapStrapiProject(response.data)
+    return this.mapStrapiProject((response as any).data)
   }
 
   async getProject(id: string): Promise<Project | null> {
     try {
       const response = await this.request<{ data: any }>(`/projects/${id}?populate=user`)
-      return this.mapStrapiProject(response.data)
-    } catch (error) {
+      return this.mapStrapiProject((response as any).data)
+    } catch (error: any) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
@@ -166,7 +166,7 @@ export class StrapiAdapter implements BackendAdapter {
       })
     })
 
-    return this.mapStrapiProject(response.data)
+    return this.mapStrapiProject((response as any).data)
   }
 
   async deleteProject(id: string): Promise<void> {
@@ -209,7 +209,7 @@ export class StrapiAdapter implements BackendAdapter {
     }>(`/projects?${params.toString()}`)
 
     return {
-      data: response.data.map(this.mapStrapiProject),
+      data: (response as any).data.map(this.mapStrapiProject),
       total: response.meta.pagination.total,
       page: response.meta.pagination.page,
       pageSize: response.meta.pagination.pageSize,
@@ -224,14 +224,14 @@ export class StrapiAdapter implements BackendAdapter {
       body: JSON.stringify({ data })
     })
 
-    return this.mapStrapiRecord(response.data) as T
+    return this.mapStrapiRecord((response as any).data) as T
   }
 
   async read<T>(collection: string, id: string): Promise<T | null> {
     try {
       const response = await this.request<{ data: any }>(`/${collection}/${id}`)
-      return this.mapStrapiRecord(response.data) as T
-    } catch (error) {
+      return this.mapStrapiRecord((response as any).data) as T
+    } catch (error: any) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
@@ -245,7 +245,7 @@ export class StrapiAdapter implements BackendAdapter {
       body: JSON.stringify({ data })
     })
 
-    return this.mapStrapiRecord(response.data) as T
+    return this.mapStrapiRecord((response as any).data) as T
   }
 
   async delete(collection: string, id: string): Promise<void> {
@@ -289,7 +289,7 @@ export class StrapiAdapter implements BackendAdapter {
     }>(`/${collection}?${params.toString()}`)
 
     return {
-      data: response.data.map(this.mapStrapiRecord) as T[],
+      data: (response as any).data.map(this.mapStrapiRecord) as T[],
       total: response.meta.pagination.total,
       page: response.meta.pagination.page,
       pageSize: response.meta.pagination.pageSize,
@@ -410,7 +410,7 @@ export class StrapiAdapter implements BackendAdapter {
     }>(`/${collection}?${params.toString()}`)
 
     return {
-      data: response.data.map(this.mapStrapiRecord) as T[],
+      data: (response as any).data.map(this.mapStrapiRecord) as T[],
       meta: response.meta
     }
   }

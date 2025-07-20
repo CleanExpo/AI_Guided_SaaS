@@ -125,7 +125,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     }
   }
 
-  const generateProjectStructure = (data: typeof projectData, features: typeof features) => {
+  const generateProjectStructure = (data: typeof projectData, features: any) => {
     const structure = {
       name: data.name,
       type: 'directory' as const,

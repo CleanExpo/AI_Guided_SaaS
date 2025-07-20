@@ -207,7 +207,7 @@ export class NocoDBAdapter implements BackendAdapter {
         `${this.getTableEndpoint('projects')}/${id}`
       )
       return this.mapNocoDBProject(project)
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
@@ -310,7 +310,7 @@ export class NocoDBAdapter implements BackendAdapter {
         `${this.getTableEndpoint(collection)}/${id}`
       )
       return this.mapNocoDBRecord(result) as T
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
