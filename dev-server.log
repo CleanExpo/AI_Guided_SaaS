@@ -79,3 +79,4 @@
 <w>  at file dependencies /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
 <w>  at file /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
 <w>  at resolve commonjs /mnt/d/AI Guided SaaS/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+ GET /mcp 404 in 2345ms
