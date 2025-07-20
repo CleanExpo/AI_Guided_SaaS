@@ -3,12 +3,17 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { AdminDashboard } from '@/components/admin/AdminDashboard'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { AdminAnalytics } from '@/components/admin/AdminAnalytics'
 import { cn } from '@/lib/utils'
 import { 
-  Shield, 
+  BarChart3, 
   LogOut,
-  RefreshCw
+  RefreshCw,
+  ArrowLeft,
+  Download,
+  Calendar,
+  Filter
 } from 'lucide-react'
 
 interface AdminUser {
@@ -19,28 +24,12 @@ interface AdminUser {
   permissions: string[]
 }
 
-export default function AdminDashboardPage() {
+export default function AdminAnalyticsPage() {
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const [stats, setStats] = useState<any>({
-    totalUsers: 0,
-    activeUsers: 0,
-    newUsersToday: 0,
-    newUsersThisWeek: 0,
-    systemHealth: 'healthy',
-    uptime: '99.9%',
-    cpuUsage: '0%',
-    memoryUsage: '0%',
-    totalProjects: 0,
-    activeProjects: 0,
-    apiCalls: {
-      today: 0,
-      thisWeek: 0,
-      thisMonth: 0
-    },
-    recentActivity: []
-  })
+  const [timeRange, setTimeRange] = useState('7d')
+  const [analyticsData, setAnalyticsData] = useState<any>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -56,7 +45,7 @@ export default function AdminDashboardPage() {
       try {
         const parsedUser = JSON.parse(user)
         setAdminUser(parsedUser)
-        loadDashboardStats()
+        loadAnalyticsData()
       } catch (error) {
         console.error('Error parsing admin user:', error)
         router.push('/admin/login')
@@ -66,12 +55,12 @@ export default function AdminDashboardPage() {
     }
 
     checkAuth()
-  }, [router])
+  }, [router, timeRange])
 
-  const loadDashboardStats = async () => {
+  const loadAnalyticsData = async () => {
     try {
       const token = localStorage.getItem('admin-token')
-      const response = await fetch('/api/admin/stats', {
+      const response = await fetch(`/api/admin/analytics?range=${timeRange}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -80,11 +69,11 @@ export default function AdminDashboardPage() {
       if (response.ok) {
         const result = await response.json()
         if (result.success && result.data) {
-          setStats(result.data)
+          setAnalyticsData(result.data)
         }
       }
     } catch (error) {
-      console.error('Error loading stats:', error)
+      console.error('Error loading analytics:', error)
     }
   }
 
@@ -96,30 +85,13 @@ export default function AdminDashboardPage() {
 
   const handleRefresh = async () => {
     setRefreshing(true)
-    await loadDashboardStats()
+    await loadAnalyticsData()
     setTimeout(() => setRefreshing(false), 500)
   }
 
-  const handleNavigate = (section: string) => {
-    switch (section) {
-      case 'users':
-        router.push('/admin/users')
-        break
-      case 'analytics':
-        router.push('/admin/analytics')
-        break
-      case 'database':
-        router.push('/admin/database')
-        break
-      case 'logs':
-        router.push('/admin/logs')
-        break
-      case 'activity':
-        router.push('/admin/activity')
-        break
-      default:
-        break
-    }
+  const handleExport = () => {
+    // TODO: Implement export functionality
+    console.log('Exporting analytics data...')
   }
 
   if (loading) {
@@ -127,7 +99,7 @@ export default function AdminDashboardPage() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
-          <p className="text-slate-600">Loading admin dashboard...</p>
+          <p className="text-slate-600">Loading analytics...</p>
         </div>
       </div>
     )
@@ -144,13 +116,41 @@ export default function AdminDashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Shield className="h-8 w-8 text-purple-600 mr-3" />
+              <Button
+                onClick={() => router.push('/admin/dashboard')}
+                variant="ghost"
+                size="sm"
+                className="mr-4"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <BarChart3 className="h-8 w-8 text-purple-600 mr-3" />
               <div>
-                <h1 className="text-xl font-semibold text-slate-900">Admin Dashboard</h1>
-                <p className="text-xs text-slate-500">System Overview & Management</p>
+                <h1 className="text-xl font-semibold text-slate-900">Analytics</h1>
+                <p className="text-xs text-slate-500">Platform insights & performance metrics</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <select
+                value={timeRange}
+                onChange={(e) => setTimeRange(e.target.value)}
+                className="text-sm border border-slate-200 rounded-md px-3 py-1"
+              >
+                <option value="24h">Last 24 hours</option>
+                <option value="7d">Last 7 days</option>
+                <option value="30d">Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+              </select>
+              <Button
+                onClick={handleExport}
+                variant="outline"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <Download className="h-4 w-4" />
+                Export
+              </Button>
               <Button
                 onClick={handleRefresh}
                 variant="ghost"
@@ -165,10 +165,6 @@ export default function AdminDashboardPage() {
                 Refresh
               </Button>
               <div className="border-l border-slate-200 h-8 mx-2" />
-              <div className="text-right">
-                <p className="text-sm font-medium text-slate-900">{adminUser.name}</p>
-                <p className="text-xs text-slate-500">{adminUser.email}</p>
-              </div>
               <Button
                 onClick={handleLogout}
                 variant="outline"
@@ -185,11 +181,18 @@ export default function AdminDashboardPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AdminDashboard 
-          stats={stats}
-          adminUser={adminUser}
-          onNavigate={handleNavigate}
-        />
+        {analyticsData ? (
+          <AdminAnalytics 
+            data={analyticsData}
+            timeRange={timeRange}
+          />
+        ) : (
+          <Card>
+            <CardContent className="flex items-center justify-center h-64">
+              <p className="text-slate-500">Loading analytics data...</p>
+            </CardContent>
+          </Card>
+        )}
       </main>
     </div>
   )

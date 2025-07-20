@@ -9,6 +9,12 @@ const EXPECTED_URL = 'https://ai-guided-saa-s.vercel.app';
 
 console.log('🔍 Validating environment configuration...\n');
 
+// Check if running in Vercel/CI or local development
+const isVercelBuild = process.env.VERCEL || process.env.CI;
+const isLocalBuild = !isVercelBuild;
+
+console.log(`Build environment: ${isVercelBuild ? 'Vercel/CI' : 'Local Development'}\n`);
+
 // Check critical environment variables
 const envVars = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
@@ -25,23 +31,29 @@ Object.entries(envVars).forEach(([key, value]) => {
 
 let hasErrors = false;
 
-// Validate URLs
-['NEXTAUTH_URL', 'NEXT_PUBLIC_APP_URL', 'APP_URL'].forEach(key => {
-  const value = envVars[key];
-  if (!value) {
-    console.error(`❌ ${key} is not set!`);
-    hasErrors = true;
-  } else if (value.includes('steel')) {
-    console.error(`❌ ${key} contains old 'steel' URL: ${value}`);
-    console.error(`   Should be: ${EXPECTED_URL}`);
-    hasErrors = true;
-  } else if (value !== EXPECTED_URL && key !== 'APP_URL') {
-    console.warn(`⚠️  ${key} might be incorrect: ${value}`);
-    console.warn(`   Expected: ${EXPECTED_URL}`);
-  } else {
-    console.log(`✅ ${key} is correct`);
-  }
-});
+// For local builds, skip strict validation
+if (isLocalBuild) {
+  console.log('\n⚠️  Local development build - skipping strict environment validation');
+  console.log('Make sure to set environment variables for production deployment');
+} else {
+  // Validate URLs only for Vercel/production builds
+  ['NEXTAUTH_URL', 'NEXT_PUBLIC_APP_URL', 'APP_URL'].forEach(key => {
+    const value = envVars[key];
+    if (!value) {
+      console.error(`❌ ${key} is not set!`);
+      hasErrors = true;
+    } else if (value.includes('steel')) {
+      console.error(`❌ ${key} contains old 'steel' URL: ${value}`);
+      console.error(`   Should be: ${EXPECTED_URL}`);
+      hasErrors = true;
+    } else if (value !== EXPECTED_URL && key !== 'APP_URL') {
+      console.warn(`⚠️  ${key} might be incorrect: ${value}`);
+      console.warn(`   Expected: ${EXPECTED_URL}`);
+    } else {
+      console.log(`✅ ${key} is correct`);
+    }
+  });
+}
 
 // Special handling for Vercel deployments
 if (process.env.VERCEL) {
@@ -61,13 +73,15 @@ if (process.env.VERCEL) {
 
 console.log('\n' + '='.repeat(50));
 
-if (hasErrors) {
+if (hasErrors && isVercelBuild) {
   console.error('❌ Environment validation FAILED!');
   console.error('\nPlease update the following in Vercel Dashboard:');
   console.error('1. Go to Settings → Environment Variables');
   console.error('2. Set all URLs to: ' + EXPECTED_URL);
   console.error('3. Redeploy the application\n');
   process.exit(1);
+} else if (isLocalBuild) {
+  console.log('✅ Local build proceeding without strict validation');
 } else {
   console.log('✅ Environment validation PASSED!');
   console.log('Admin routes should work correctly.\n');

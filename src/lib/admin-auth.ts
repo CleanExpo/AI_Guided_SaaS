@@ -317,6 +317,9 @@ export class AdminAuthService {
 // Export singleton instance
 export const adminAuthService = AdminAuthService.getInstance()
 
+// Export convenience methods
+export const verifyAdminToken = (token: string) => adminAuthService.verifyAdminToken(token)
+
 // Middleware helper for protecting admin routes
 export async function requireAdminAuth(
   request: NextRequest,
