@@ -1,24 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminAuth } from '@/lib/admin-auth'
-
-// Mock user data - replace with actual database queries
-const getMockUsers = () => {
-  const users = []
-  for (let i = 1; i <= 50; i++) {
-    users.push({
-      id: `user_${i}`,
-      email: `user${i}@example.com`,
-      name: `User ${i}`,
-      status: i % 10 === 0 ? 'inactive' : 'active',
-      role: i % 5 === 0 ? 'premium' : 'free',
-      createdAt: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString(),
-      lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
-      projectsCount: Math.floor(Math.random() * 20),
-      apiCalls: Math.floor(Math.random() * 1000)
-    })
-  }
-  return users
-}
+import { AdminQueries } from '@/lib/admin-queries'
+import { DatabaseService } from '@/lib/database'
 
 export async function GET(request: NextRequest) {
   try {
@@ -38,52 +21,59 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || ''
     const status = searchParams.get('status') || 'all'
     const sortBy = searchParams.get('sortBy') || 'createdAt'
-    const sortOrder = searchParams.get('sortOrder') || 'desc'
+    const sortOrder = (searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc'
 
-    // Get mock users
-    let users = getMockUsers()
-
-    // Apply filters
-    if (search) {
-      users = users.filter(user => 
-        user.email.toLowerCase().includes(search.toLowerCase()) ||
-        user.name.toLowerCase().includes(search.toLowerCase())
-      )
-    }
-
-    if (status !== 'all') {
-      users = users.filter(user => user.status === status)
-    }
-
-    // Apply sorting
-    users.sort((a, b) => {
-      const aVal = a[sortBy as keyof typeof a]
-      const bVal = b[sortBy as keyof typeof b]
+    try {
+      // Get real users from database
+      const result = await AdminQueries.getUsers({
+        page,
+        limit,
+        search,
+        status,
+        sortBy,
+        sortOrder
+      })
       
-      if (sortOrder === 'asc') {
-        return aVal > bVal ? 1 : -1
-      } else {
-        return aVal < bVal ? 1 : -1
+      // Log admin activity
+      if (auth.session) {
+        await DatabaseService.logActivity(
+          auth.session.adminId,
+          'view_users_list',
+          'admin_users',
+          undefined,
+          {
+            page,
+            limit,
+            search,
+            status,
+            ip_address: request.headers.get('x-forwarded-for') || 'unknown',
+            user_agent: request.headers.get('user-agent') || 'unknown'
+          }
+        )
       }
-    })
 
-    // Apply pagination
-    const startIndex = (page - 1) * limit
-    const endIndex = startIndex + limit
-    const paginatedUsers = users.slice(startIndex, endIndex)
-
-    return NextResponse.json({
-      success: true,
-      data: {
-        users: paginatedUsers,
-        pagination: {
-          page,
-          limit,
-          total: users.length,
-          totalPages: Math.ceil(users.length / limit)
-        }
-      }
-    })
+      return NextResponse.json({
+        success: true,
+        data: result
+      })
+    } catch (dbError) {
+      console.error('Database error:', dbError)
+      
+      // Return empty list if database is not available
+      return NextResponse.json({
+        success: true,
+        data: {
+          users: [],
+          pagination: {
+            page,
+            limit,
+            total: 0,
+            totalPages: 0
+          }
+        },
+        warning: 'Unable to fetch users due to database connection issues'
+      })
+    }
 
   } catch (error) {
     console.error('Admin users list error:', error)

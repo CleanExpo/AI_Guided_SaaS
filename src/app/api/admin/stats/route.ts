@@ -1,31 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { verifyAdminToken } from '@/lib/admin-auth'
-
-// Mock data for now - replace with actual database queries
-const getMockStats = () => {
-  return {
-    totalUsers: 1284,
-    activeUsers: 423,
-    newUsersToday: 17,
-    newUsersThisWeek: 89,
-    systemHealth: 'healthy',
-    uptime: '99.9%',
-    cpuUsage: '23%',
-    memoryUsage: '41%',
-    totalProjects: 3421,
-    activeProjects: 892,
-    apiCalls: {
-      today: 15234,
-      thisWeek: 98234,
-      thisMonth: 423891
-    },
-    recentActivity: [
-      { type: 'user_signup', message: 'New user registered', timestamp: new Date().toISOString() },
-      { type: 'project_created', message: 'New project created', timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString() },
-      { type: 'api_call', message: 'API usage spike detected', timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString() },
-    ]
-  }
-}
+import { AdminQueries } from '@/lib/admin-queries'
+import { DatabaseService } from '@/lib/database'
 
 export async function GET(request: NextRequest) {
   try {
@@ -41,7 +17,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Verify the admin token
-    const admin = await verifyAdminToken(token)
+    const admin = verifyAdminToken(token)
     if (!admin) {
       return NextResponse.json(
         { error: 'Unauthorized - Invalid token' },
@@ -49,17 +25,59 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Get stats data
-    const stats = getMockStats()
+    try {
+      // Get real stats from database
+      const stats = await AdminQueries.getAdminStats()
+      
+      // Log admin activity
+      if (admin.adminId) {
+        await DatabaseService.logActivity(
+          admin.adminId,
+          'view_admin_stats',
+          'admin_dashboard',
+          undefined,
+          {
+            ip_address: request.headers.get('x-forwarded-for') || 'unknown',
+            user_agent: request.headers.get('user-agent') || 'unknown'
+          }
+        )
+      }
 
-    // In production, you would fetch real data from database:
-    // const stats = await getStatsFromDatabase()
+      return NextResponse.json({
+        success: true,
+        data: stats,
+        timestamp: new Date().toISOString()
+      })
+    } catch (dbError) {
+      console.error('Database error:', dbError)
+      
+      // Fallback to basic stats if database is not available
+      const fallbackStats = {
+        totalUsers: 0,
+        activeUsers: 0,
+        newUsersToday: 0,
+        newUsersThisWeek: 0,
+        systemHealth: 'warning' as const,
+        uptime: 'N/A',
+        cpuUsage: 'N/A',
+        memoryUsage: 'N/A',
+        totalProjects: 0,
+        activeProjects: 0,
+        apiCalls: {
+          today: 0,
+          thisWeek: 0,
+          thisMonth: 0
+        },
+        recentActivity: []
+      }
 
-    return NextResponse.json({
-      success: true,
-      data: stats,
-      timestamp: new Date().toISOString()
-    })
+      return NextResponse.json({
+        success: true,
+        data: fallbackStats,
+        warning: 'Using fallback data due to database connection issues',
+        timestamp: new Date().toISOString()
+      })
+    }
 
   } catch (error) {
     console.error('Admin stats error:', error)

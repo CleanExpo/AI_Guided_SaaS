@@ -1,31 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminAuth } from '@/lib/admin-auth'
-
-// Mock user data
-const getMockUser = (id: string) => {
-  return {
-    id,
-    email: `user${id}@example.com`,
-    name: `User ${id}`,
-    status: 'active',
-    role: 'free',
-    createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-    lastLogin: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-    projectsCount: 5,
-    apiCalls: 234,
-    profile: {
-      bio: 'A passionate developer',
-      avatar: null,
-      location: 'San Francisco, CA',
-      company: 'Tech Corp'
-    },
-    subscription: {
-      plan: 'free',
-      status: 'active',
-      expiresAt: null
-    }
-  }
-}
+import { AdminQueries } from '@/lib/admin-queries'
+import { DatabaseService } from '@/lib/database'
 
 // Get specific user
 export async function GET(
@@ -41,12 +17,44 @@ export async function GET(
       )
     }
 
-    const user = getMockUser(params.id)
+    try {
+      // Get real user data from database
+      const user = await AdminQueries.getUserById(params.id)
+      
+      // Log admin activity
+      if (auth.session) {
+        await DatabaseService.logActivity(
+          auth.session.adminId,
+          'view_user_details',
+          'admin_users',
+          params.id,
+          {
+            ip_address: request.headers.get('x-forwarded-for') || 'unknown',
+            user_agent: request.headers.get('user-agent') || 'unknown'
+          }
+        )
+      }
 
-    return NextResponse.json({
-      success: true,
-      data: user
-    })
+      return NextResponse.json({
+        success: true,
+        data: user
+      })
+    } catch (dbError) {
+      console.error('Database error:', dbError)
+      
+      // Return error if user not found
+      if (dbError instanceof Error && dbError.message === 'User not found') {
+        return NextResponse.json(
+          { error: 'User not found' },
+          { status: 404 }
+        )
+      }
+      
+      return NextResponse.json(
+        { error: 'Unable to fetch user due to database connection issues' },
+        { status: 503 }
+      )
+    }
 
   } catch (error) {
     console.error('Admin get user error:', error)
