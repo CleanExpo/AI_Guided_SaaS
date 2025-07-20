@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
             </div>
             <CardTitle className="text-2xl font-bold text-white">Admin Login</CardTitle>
             <CardDescription className="text-slate-300">
-              Access the AI Guided SaaS administration panel - v2.0
+              🚀 FRESH DEPLOYMENT - Admin Panel Access Portal 🚀
             </CardDescription>
           </CardHeader>
           <CardContent>
