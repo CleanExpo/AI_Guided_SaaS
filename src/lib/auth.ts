@@ -2,82 +2,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { createClient } from '@supabase/supabase-js'
 import bcrypt from 'bcryptjs'
-import type { User } from 'next-auth'
-import type { JWT } from 'next-auth/jwt'
-import type { AdapterUser } from 'next-auth/adapters'
-
-// NextAuth type definitions
-interface ExtendedUser extends User {
-  id: string
-}
-
-interface Account {
-  provider: string
-  providerAccountId: string
-  type: string
-  access_token?: string
-  refresh_token?: string
-  expires_at?: number
-}
-
-interface Profile {
-  sub?: string
-  name?: string
-  email?: string
-  picture?: string
-}
-
-interface JWTCallbackParams {
-  token: JWT
-  user?: ExtendedUser | AdapterUser
-  account?: Account | null
-  profile?: Profile | undefined
-  trigger?: 'signIn' | 'signUp' | 'update' | undefined
-  isNewUser?: boolean | undefined
-  session?: {
-    user: {
-      id?: string
-      email?: string | null
-      name?: string | null
-      image?: string | null
-    }
-    expires: string
-  }
-}
-
-interface SessionCallbackParams {
-  session: {
-    user: {
-      id?: string
-      email?: string | null
-      name?: string | null
-      image?: string | null
-    }
-    expires: string
-  }
-  token: JWT
-  user: AdapterUser
-  newSession?: {
-    user: {
-      id?: string
-      email?: string | null
-      name?: string | null
-      image?: string | null
-    }
-    expires: string
-  }
-  trigger?: 'update'
-}
-
-interface SignInCallbackParams {
-  user: ExtendedUser | AdapterUser
-  account: Account | null
-  profile?: Profile | undefined
-  email?: {
-    verificationRequest?: boolean
-  }
-  credentials?: Record<string, string>
-}
+import type { NextAuthOptions } from 'next-auth'
 
 // Handle missing environment variables gracefully for demo deployment
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -87,7 +12,7 @@ const supabase = supabaseUrl && supabaseKey
   ? createClient(supabaseUrl, supabaseKey)
   : null;
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -99,7 +24,7 @@ export const authOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' }
       },
-      async authorize(credentials: Record<string, string> | undefined) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password || !supabase) {
           return null
         }
@@ -133,19 +58,19 @@ export const authOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, user }: JWTCallbackParams) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id
       }
       return token
     },
-    async session({ session, token }: SessionCallbackParams) {
-      if (token) {
+    async session({ session, token }) {
+      if (token && session.user) {
         session.user.id = token.id as string
       }
       return session
     },
-    async signIn({ user, account }: SignInCallbackParams) {
+    async signIn({ user, account }) {
       if (account?.provider === 'google' && supabase) {
         const { data: existingUser } = await supabase
           .from('users')
@@ -175,9 +100,34 @@ export const authOptions = {
   },
   pages: {
     signIn: '/auth/signin',
+    signUp: '/auth/signup',
+    error: '/auth/error',
   },
   session: {
-    strategy: 'jwt' as const,
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
+}
+
+// Extend NextAuth types
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string
+      email: string
+      name?: string | null
+      image?: string | null
+    }
+  }
+  
+  interface User {
+    id: string
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string
+  }
 }

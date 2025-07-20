@@ -2,7 +2,7 @@
   "permissions": {
     "skipPrompts": true,
     "allow": [
-      "Bash(ls:*)"
+      "Bash(npm install:*)"
     ],
     "deny": []
   },
