@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  nocodb:
+    image: nocodb/nocodb:latest
+    container_name: ai-guided-saas-nocodb
+    restart: unless-stopped
+    environment:
+      NC_DB: "pg://nocodb_pg:5432?u=postgres&p=${NOCODB_DATABASE_PASSWORD:-nocodb}&d=nocodb"
+      NC_AUTH_JWT_SECRET: ${NOCODB_JWT_SECRET:-your-jwt-secret}
+      NC_PUBLIC_URL: ${NOCODB_PUBLIC_URL:-http://localhost:8080}
+      NC_DISABLE_TELE: true
+    volumes:
+      - nocodb-data:/usr/app/data
+    ports:
+      - '8080:8080'
+    networks:
+      - ai-guided-saas
+    depends_on:
+      - nocodb_pg
+
+  nocodb_pg:
+    image: postgres:15-alpine
+    container_name: ai-guided-saas-nocodb-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nocodb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${NOCODB_DATABASE_PASSWORD:-nocodb}
+    volumes:
+      - nocodb-pg-data:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
+    networks:
+      - ai-guided-saas
+
+  # Optional: NocoDB with existing database
+  nocodb-external:
+    image: nocodb/nocodb:latest
+    container_name: ai-guided-saas-nocodb-external
+    restart: unless-stopped
+    environment:
+      NC_DB: ${DATABASE_URL}
+      NC_AUTH_JWT_SECRET: ${NOCODB_JWT_SECRET:-your-jwt-secret}
+      NC_PUBLIC_URL: ${NOCODB_PUBLIC_URL:-http://localhost:8081}
+      NC_DISABLE_TELE: true
+    volumes:
+      - nocodb-external-data:/usr/app/data
+    ports:
+      - '8081:8080'
+    networks:
+      - ai-guided-saas
+    profiles:
+      - external-db
+
+volumes:
+  nocodb-data:
+  nocodb-pg-data:
+  nocodb-external-data:
+
+networks:
+  ai-guided-saas:
+    driver: bridge
