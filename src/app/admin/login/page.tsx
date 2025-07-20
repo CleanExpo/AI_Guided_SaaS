@@ -138,10 +138,10 @@ export default function AdminLoginPage() {
                 <p className="mb-2">Default Admin Credentials:</p>
                 <div className="bg-slate-700/50 rounded p-3 text-left font-mono text-xs">
                   <p>Email: admin@aiguidedSaaS.com</p>
-                  <p>Password: AdminSecure2024!</p>
+                  <p>Password: Check environment configuration</p>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
-                  Change these credentials after first login
+                  Contact system administrator for credentials
                 </p>
               </div>
             </div>

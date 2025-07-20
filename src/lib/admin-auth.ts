@@ -38,7 +38,7 @@ const MASTER_ADMIN = {
   name: 'Master Administrator',
   role: 'super_admin' as const,
   status: 'active' as const,
-  password: 'AdminSecure2024!',
+  password: process.env.ADMIN_PASSWORD || 'AdminSecure2024!',
   permissions: [
     'manage_users',
     'moderate_content',
