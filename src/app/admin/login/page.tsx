@@ -17,6 +17,9 @@ export default function AdminLoginPage() {
 
   // Debug: Log when component mounts
   console.log('🔥 ADMIN LOGIN PAGE LOADED - NO REDIRECT!')
+  console.log('Environment:', process.env.NODE_ENV)
+  console.log('NextAuth URL:', process.env.NEXTAUTH_URL)
+  console.log('App URL:', process.env.NEXT_PUBLIC_APP_URL)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
