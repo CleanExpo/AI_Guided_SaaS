@@ -38,3 +38,5 @@
 {"arguments":{"script":"// Check what email is shown in the default credentials\nconst defaultCreds = document.body.innerText.match(/Email: ([^\\n]+)/);\nconst emailInput = document.querySelector('input[type=\"email\"]');\n{\n    defaultCredsEmail: defaultCreds ? defaultCreds[1] : 'not found',\n    emailInputValue: emailInput ? emailInput.value : 'not found',\n    pageText: document.body.innerText.includes('zenithfresh25') ? 'Contains new email' : 'Contains old email'\n}"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-07-20 08:43:37.348","tool":"puppeteer_evaluate"}
 {"level":"debug","message":"Executing script in browser","scriptLength":441,"service":"mcp-puppeteer","timestamp":"2025-07-20 08:43:37.348"}
 {"error":"Unexpected token ':'","level":"error","message":"Script evaluation failed","service":"mcp-puppeteer","timestamp":"2025-07-20 08:43:37.352"}
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-07-20 15:02:51.940"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-07-20 15:02:51.941"}
