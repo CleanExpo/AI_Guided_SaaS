@@ -289,27 +289,27 @@ export class AdminQueries {
       // Enrich user data with additional information
       const enrichedUsers = await Promise.all((users || []).map(async (user) => {
         // Get user's project count
-        const { count: projectsCount } = await supabase
+        const { count: projectsCount } = await supabase!
           .from('projects')
           .select('*', { count: 'exact', head: true })
           .eq('user_id', user.id)
 
         // Get user's API usage
-        const { count: apiCalls } = await supabase
+        const { count: apiCalls } = await supabase!
           .from('activity_logs')
           .select('*', { count: 'exact', head: true })
           .eq('user_id', user.id)
           .eq('action', 'api_call')
 
         // Get subscription status
-        const { data: subscription } = await supabase
+        const { data: subscription } = await supabase!
           .from('subscriptions')
           .select('status, price_id')
           .eq('user_id', user.id)
           .single()
 
         // Determine user status and role
-        const lastSession = await supabase
+        const lastSession = await supabase!
           .from('sessions')
           .select('expires')
           .eq('user_id', user.id)
@@ -317,16 +317,17 @@ export class AdminQueries {
           .limit(1)
           .single()
 
-        const isActive = lastSession?.data?.expires && new Date(lastSession.data.expires) > new Date()
+        const sessionData = lastSession?.data
+        const isActive = sessionData?.expires && new Date(sessionData.expires) > new Date()
 
         return {
           id: user.id,
           email: user.email,
           name: user.name || 'Unnamed User',
           status: isActive ? 'active' : 'inactive',
-          role: subscription?.data?.price_id ? 'premium' : 'free',
+          role: subscription?.status === 'active' ? 'premium' : 'free',
           createdAt: user.created_at,
-          lastLogin: lastSession?.data?.expires || user.created_at,
+          lastLogin: sessionData?.expires || user.created_at,
           projectsCount: projectsCount || 0,
           apiCalls: apiCalls || 0
         }

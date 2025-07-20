@@ -88,7 +88,7 @@ export async function PUT(
       success: true,
       message: 'User updated successfully',
       data: {
-        ...getMockUser(params.id),
+        id: params.id,
         ...body,
         updatedAt: new Date().toISOString()
       }

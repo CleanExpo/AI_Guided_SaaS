@@ -186,12 +186,12 @@ export class MCPOrchestrator {
   }): MCPTool[] {
     let tools: MCPTool[] = []
     
-    for (const server of this.servers.values()) {
+    for (const server of Array.from(this.servers.values())) {
       if (filter?.server && server.id !== filter.server) {
         continue
       }
       
-      const serverTools = server.tools.filter(tool => {
+      const serverTools = server.tools.filter((tool: MCPTool) => {
         if (filter?.category && tool.category !== filter.category) {
           return false
         }
@@ -413,13 +413,13 @@ export class MCPOrchestrator {
   /**
    * Get a prompt
    */
-  async getPrompt(serverId: string, name: string, arguments?: Record<string, any>): Promise<string> {
+  async getPrompt(serverId: string, name: string, args?: Record<string, any>): Promise<string> {
     const server = this.servers.get(serverId)
     if (!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`)
     }
     
-    return this.sendRequest(serverId, 'prompts/get', { name, arguments })
+    return this.sendRequest(serverId, 'prompts/get', { name, arguments: args })
   }
 
   // Private methods
@@ -505,12 +505,12 @@ export class MCPOrchestrator {
   private async executeToolCall(
     serverId: string,
     toolName: string,
-    arguments: Record<string, any>,
+    args: Record<string, any>,
     timeout?: number
   ): Promise<any> {
     return this.sendRequest(serverId, 'tools/call', {
       name: toolName,
-      arguments
+      arguments: args
     }, timeout)
   }
 

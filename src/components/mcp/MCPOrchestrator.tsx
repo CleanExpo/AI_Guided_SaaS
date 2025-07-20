@@ -12,7 +12,7 @@ import { Badge } from '@/components/ui/badge'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { 
   Server, 
-  Tool, 
+  Settings, 
   Play, 
   StopCircle,
   ChevronDown,
@@ -32,7 +32,7 @@ import {
 import { useMCP } from '@/hooks/useMCP'
 import { getAllServers, getServersByCategory, ServerCapabilities } from '@/lib/mcp/mcp-registry'
 import { MCPTool, MCPToolCall, MCPOrchestrationPlan } from '@/lib/mcp/mcp-orchestrator'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/hooks/use-toast'
 
 interface MCPOrchestratorProps {
   projectId?: string
@@ -301,7 +301,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           }}
                         >
                           <div className="flex items-center gap-2">
-                            <Tool className="h-4 w-4" />
+                            <Settings className="h-4 w-4" />
                             <span className="font-medium">{tool.name}</span>
                           </div>
                           <p className="text-sm text-muted-foreground mt-1">

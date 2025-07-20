@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { MCPOrchestrator, MCPServer, MCPTool, MCPToolCall, MCPToolResult, MCPOrchestrationPlan } from '@/lib/mcp/mcp-orchestrator'
 import { getServerConfig, checkServerEnvironment, getAllServers } from '@/lib/mcp/mcp-registry'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/hooks/use-toast'
 
 export interface UseMCPOptions {
   autoConnect?: string[] // Server IDs to auto-connect

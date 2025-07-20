@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { ApiTracking } from './api-tracking'
 
@@ -189,7 +189,7 @@ export function withRateLimit(
       
       // Clean up old entries periodically
       if (Math.random() < 0.01) { // 1% chance
-        for (const [key, value] of requestCounts.entries()) {
+        for (const [key, value] of Array.from(requestCounts.entries())) {
           if (now > value.resetTime) {
             requestCounts.delete(key)
           }
