@@ -26,9 +26,15 @@ export interface AdminSession {
 }
 
 // Master admin credentials from environment
+const MASTER_ADMIN_EMAILS = [
+  process.env.ADMIN_EMAIL || 'admin@aiguidedSaaS.com',
+  'zenithfresh25@gmail.com', // fallback admin email
+  'admin@aiguidedSaaS.com'   // default admin email
+]
+
 const MASTER_ADMIN = {
   id: 'master_admin_001',
-  email: process.env.ADMIN_EMAIL || 'zenithfresh25@gmail.com',
+  email: process.env.ADMIN_EMAIL || 'admin@aiguidedSaaS.com',
   name: 'Master Administrator',
   role: 'super_admin' as const,
   status: 'active' as const,
@@ -70,11 +76,14 @@ export class AdminAuthService {
         return null
       }
 
-      // Check master admin credentials
-      if (email === MASTER_ADMIN.email && password === MASTER_ADMIN.password) {
+      // Check master admin credentials - allow any of the valid admin emails
+      console.log('Admin login attempt:', { email, adminPanelEnabled: process.env.ENABLE_ADMIN_PANEL })
+      
+      if (MASTER_ADMIN_EMAILS.includes(email) && password === MASTER_ADMIN.password) {
+        console.log('Admin login successful for:', email)
         return {
           id: MASTER_ADMIN.id,
-          email: MASTER_ADMIN.email,
+          email: email, // Use the email they logged in with
           name: MASTER_ADMIN.name,
           role: MASTER_ADMIN.role,
           status: MASTER_ADMIN.status,
