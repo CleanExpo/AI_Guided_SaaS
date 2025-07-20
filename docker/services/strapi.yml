@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  strapi:
+    image: strapi/strapi:4.15.5-alpine
+    container_name: ai-guided-saas-strapi
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: ${STRAPI_DATABASE_PASSWORD:-strapi}
+      JWT_SECRET: ${STRAPI_JWT_SECRET:-your-jwt-secret}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET:-your-admin-jwt-secret}
+      APP_KEYS: ${STRAPI_APP_KEYS:-key1,key2,key3,key4}
+      NODE_ENV: ${NODE_ENV:-development}
+    volumes:
+      - ./strapi/config:/opt/app/config
+      - ./strapi/src:/opt/app/src
+      - ./strapi/package.json:/opt/app/package.json
+      - ./strapi/yarn.lock:/opt/app/yarn.lock
+      - ./strapi/.env:/opt/app/.env
+      - strapi-uploads:/opt/app/public/uploads
+    ports:
+      - '1337:1337'
+    networks:
+      - ai-guided-saas
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai-guided-saas-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: ${STRAPI_DATABASE_PASSWORD:-strapi}
+    volumes:
+      - strapi-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - ai-guided-saas
+
+volumes:
+  strapi-data:
+  strapi-uploads:
+
+networks:
+  ai-guided-saas:
+    driver: bridge
