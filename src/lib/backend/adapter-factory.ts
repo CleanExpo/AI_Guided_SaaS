@@ -1,3 +1,4 @@
+// Backend adapter factory
 import { BackendAdapter, BackendConfig } from './types'
 import { SupabaseAdapter } from './adapters/supabase'
 import { StrapiAdapter } from './adapters/strapi'
@@ -110,22 +111,17 @@ export function setBackendConfig(config: BackendConfig): void {
 }
 
 /**
- * React hook for using the backend adapter
+ * Hook to get current backend adapter
  */
 export function useBackend(): BackendAdapter {
   return getBackendAdapter()
 }
 
 /**
- * Higher-order component for injecting backend adapter
+ * Get current backend adapter instance
  */
-export function withBackend<P extends { backend?: BackendAdapter }>(
-  Component: React.ComponentType<P>
-): React.ComponentType<Omit<P, 'backend'>> {
-  return function WithBackendComponent(props: Omit<P, 'backend'>) {
-    const backend = useBackend()
-    return <Component {...(props as P)} backend={backend} />
-  }
+export function getCurrentBackend(): BackendAdapter | null {
+  return currentAdapter
 }
 
 /**
