@@ -4,23 +4,19 @@
  */
 
 export interface TextSplitterConfig {
-  chunkSize: number
-  chunkOverlap: number
+  chunkSize: number, chunkOverlap: number
   lengthFunction?: (text: string) => number
   keepSeparator?: boolean
 }
 
 export interface TextChunk {
-  text: string
-  metadata: {
-    startIndex: number
-    endIndex: number
-    chunkIndex: number
+  text: string, metadata: {
+    startIndex: number, endIndex: number, chunkIndex: number
   }
 }
 
 export abstract class TextSplitter {
-  protected config: TextSplitterConfig
+  protected, config: TextSplitterConfig
 
   constructor(config: TextSplitterConfig) {
     this.config = {
@@ -109,7 +105,7 @@ export abstract class TextSplitter {
  * Splits text by a specified separator (default: double newline)
  */
 export class CharacterTextSplitter extends TextSplitter {
-  private separator: string
+  private, separator: string
 
   constructor(config: TextSplitterConfig & { separator?: string }) {
     super(config)
@@ -135,7 +131,7 @@ export class CharacterTextSplitter extends TextSplitter {
  * Tries multiple separators in order of preference
  */
 export class RecursiveCharacterTextSplitter extends TextSplitter {
-  private separators: string[]
+  private, separators: string[]
 
   constructor(config: TextSplitterConfig & { separators?: string[] }) {
     super(config)
@@ -155,7 +151,7 @@ export class RecursiveCharacterTextSplitter extends TextSplitter {
     const remainingSeparators = separators.slice(1)
 
     if (!separator) {
-      // Last resort: split by character
+      // Last, resort: split by character
       return this.splitByCharacter(text)
     }
 
@@ -222,7 +218,7 @@ export class RecursiveCharacterTextSplitter extends TextSplitter {
  * Splits code files intelligently by functions/classes
  */
 export class CodeTextSplitter extends TextSplitter {
-  private language: string
+  private, language: string
 
   constructor(config: TextSplitterConfig & { language: string }) {
     super(config)
@@ -323,6 +319,6 @@ export function createTextSplitter(
     case 'markdown':
       return new MarkdownTextSplitter(config)
     default:
-      throw new Error(`Unknown text splitter type: ${type}`)
+      throw new Error(`Unknown text, splitter: type: ${type}`)
   }
 }

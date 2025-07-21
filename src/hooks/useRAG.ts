@@ -13,28 +13,22 @@ export interface UseRAGOptions {
 }
 
 export interface UseRAGReturn {
-  // Query operations
-  query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>
+  // Query operations, query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>
   streamQuery: (question: string, options?: Partial<RAGQuery>) => AsyncGenerator<string, void, unknown>
   
-  // Document operations
-  addDocument: (content: string, metadata: any) => Promise<string>
+  // Document operations, addDocument: (content: string, metadata) => Promise<string>
   addFromUrl: (url: string) => Promise<string[]>
   addFromFile: (file: File) => Promise<string>
   ingestCodebase: (path: string, options?: any) => Promise<{ documentsAdded: number; errors: string[] }>
   
-  // Knowledge base management
-  updateDocument: (id: string, content?: string, metadata?: any) => Promise<void>
+  // Knowledge base management, updateDocument: (id: string, content?: string, metadata?: any) => Promise<void>
   deleteDocument: (id: string) => Promise<void>
   getSimilar: (documentId: string, topK?: number) => Promise<any[]>
   getStats: () => Promise<any>
   exportKnowledge: (format?: 'json' | 'markdown') => Promise<string>
   clearKnowledge: () => Promise<void>
   
-  // State
-  loading: boolean
-  error: string | null
-  initialized: boolean
+  // State, loading: boolean, error: string | null, initialized: boolean
 }
 
 export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {
@@ -54,8 +48,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {
         provider: options.provider || 'memory',
         apiKey: options.apiKey,
         indexName: options.indexName,
-        dimension: 1536, // OpenAI embedding dimension
-        metric: 'cosine'
+        dimension: 1536, // OpenAI embedding dimension, metric: 'cosine'
       })
 
       const engine = new RAGEngine({
@@ -143,8 +136,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {
   // Add document to knowledge base
   const addDocument = useCallback(async (
     content: string,
-    metadata: any
-  ): Promise<string> => {
+    metadata): Promise<string> => {
     setLoading(true)
     setError(null)
 
@@ -211,8 +203,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {
       const engine = await initializeEngine()
       
       const id = await engine.addDocument(content, {
-        source: file.name,
-        type: getDocumentTypeFromFile(file),
+        source: file.name: type: getDocumentTypeFromFile(file),
         title: file.name
       })
       

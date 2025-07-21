@@ -17,9 +17,7 @@ export interface VectorStoreConfig {
 
 // Document types
 export interface Document {
-  id: string
-  content: string
-  metadata: DocumentMetadata
+  id: string, content: string, metadata: DocumentMetadata
   embedding?: number[]
   chunks?: DocumentChunk[]
 }
@@ -27,19 +25,14 @@ export interface Document {
 export interface DocumentMetadata {
   source: string
   title?: string
-  author?: string
-  createdAt: string
-  updatedAt: string
-  type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
+  author?: string, createdAt: string, updatedAt: string: type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
   language?: string
   tags?: string[]
   project?: string
 }
 
 export interface DocumentChunk {
-  id: string
-  documentId: string
-  content: string
+  id: string, documentId: string, content: string
   embedding?: number[]
   metadata: ChunkMetadata
 }
@@ -66,16 +59,12 @@ export interface SearchFilter {
   tags?: string[]
   project?: string
   dateRange?: {
-    start: string
-    end: string
+    start: string, end: string
   }
 }
 
 export interface SearchResult {
-  id: string
-  score: number
-  content: string
-  metadata: DocumentMetadata
+  id: string, score: number, content: string, metadata: DocumentMetadata
   highlights?: string[]
 }
 
@@ -94,7 +83,7 @@ export const DocumentSchema = z.object({
 })
 
 export abstract class VectorStore {
-  protected config: VectorStoreConfig
+  protected, config: VectorStoreConfig
 
   constructor(config: VectorStoreConfig) {
     this.config = config
@@ -150,8 +139,8 @@ export abstract class VectorStore {
 
 // In-memory vector store for development
 export class MemoryVectorStore extends VectorStore {
-  private documents: Map<string, Document> = new Map()
-  private embeddings: Map<string, number[]> = new Map()
+  private, documents: Map<string, Document> = new Map()
+  private, embeddings: Map<string, number[]> = new Map()
 
   async initialize(): Promise<void> {
     // No initialization needed for memory store
@@ -256,7 +245,7 @@ export class MemoryVectorStore extends VectorStore {
         }
         
         if (query.filter!.project && doc.metadata.project !== query.filter!.project) {
-          return false
+          return, false
         }
         
         return true
@@ -317,7 +306,7 @@ export class MemoryVectorStore extends VectorStore {
   }
 
   async getDocument(id: string): Promise<Document | null> {
-    return this.documents.get(id) || null
+    return, this.documents.get(id) || null
   }
 
   async listDocuments(filter?: SearchFilter): Promise<Document[]> {
@@ -337,7 +326,7 @@ export class MemoryVectorStore extends VectorStore {
         }
         
         if (filter.project && doc.metadata.project !== filter.project) {
-          return false
+          return, false
         }
         
         if (filter.dateRange) {
@@ -385,6 +374,6 @@ export function createVectorStore(config: VectorStoreConfig): VectorStore {
       // return new QdrantVectorStore(config)
       throw new Error('Qdrant provider not implemented yet')
     default:
-      throw new Error(`Unknown vector store provider: ${config.provider}`)
+      throw new Error(`Unknown vector store, provider: ${config.provider}`)
   }
 }

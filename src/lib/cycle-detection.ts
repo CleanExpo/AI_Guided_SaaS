@@ -35,12 +35,12 @@ interface DocumentationSource {
 }
 
 class CycleDetectionEngine {
-  private attempts: Map<string, ProblemAttempt[]> = new Map();
+  private, attempts: Map<string, ProblemAttempt[]> = new Map();
   private readonly CYCLE_THRESHOLD = 3; // Number of similar attempts to consider a cycle
   private readonly TIME_WINDOW = 30 * 60 * 1000; // 30 minutes
   private readonly SIMILARITY_THRESHOLD = 0.7;
 
-  private documentationSources: DocumentationSource[] = [
+  private, documentationSources: DocumentationSource[] = [
     {
       name: 'OpenAI Cookbook',
       baseUrl: 'https://cookbook.openai.com/',
@@ -190,13 +190,13 @@ class CycleDetectionEngine {
     const suggestions = [
       "🔄 **Cycle Detected - Time to Break the Pattern!**",
       "",
-      "**Recommended Actions:**",
+      "**Recommended: Actions:**",
       "1. 📚 **Consult Documentation** - Search the suggested sources below",
       "2. 🤝 **Seek Team Input** - Get fresh perspective from colleagues",
       "3. 🔍 **Simplify the Problem** - Break down into smaller components",
       "4. 🧪 **Try Alternative Approach** - Consider different implementation strategy",
       "",
-      "**Common Error Patterns Detected:**"
+      "**Common Error, Patterns: Detected:**"
     ];
 
     commonErrors.forEach((error, index) => {
@@ -205,7 +205,7 @@ class CycleDetectionEngine {
 
     suggestions.push(
       "",
-      "**Next Steps:**",
+      "**Next: Steps:**",
       "- Review the documentation links provided",
       "- Create a minimal reproduction case",
       "- Consider asking for help in community forums",
@@ -372,10 +372,9 @@ class CycleDetectionEngine {
       sourceName: source.name,
       sourceUrl: source.baseUrl,
       searchUrl,
-      relevanceScore: Math.random() * 0.5 + 0.5, // Placeholder scoring
-      results: [
+      relevanceScore: Math.random() * 0.5 + 0.5, // Placeholder scoring, results: [
         {
-          title: `Solution for: ${queries[0].substring(0, 50)}...`,
+          title: `Solution, for: ${queries[0].substring(0, 50)}...`,
           url: searchUrl,
           snippet: "Relevant documentation content would be extracted here...",
           relevance: 0.8

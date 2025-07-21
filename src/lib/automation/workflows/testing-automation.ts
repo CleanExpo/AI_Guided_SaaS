@@ -290,8 +290,8 @@ return [{
 </head>
 <body>
   <div class="header {{ $json.success ? '' : 'failed' }}">
-    <h1>Test Report: {{ $json.projectId }}</h1>
-    <p>Run ID: {{ $json.runId }} | {{ $json.timestamp }}</p>
+    <h1>Test, Report: {{ $json.projectId }}</h1>
+    <p>Run, ID: {{ $json.runId }} | {{ $json.timestamp }}</p>
   </div>
 
   <div class="summary">
@@ -389,8 +389,7 @@ return [{
         bodyParametersJson: `{{
           JSON.stringify({
             projectId: $node["Aggregate Results"].json.projectId,
-            runId: $node["Aggregate Results"].json.runId,
-            type: 'test-report',
+            runId: $node["Aggregate Results"].json.runId: type: 'test-report',
             format: 'html',
             content: $json.html
           })
@@ -489,47 +488,47 @@ return {
   // Define connections
   const connections = {
     'trigger_1': {
-      'main': [[{ node: 'merge_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'merge_1', type: 'main' as const index: 0 }]]
     },
     'schedule_1': {
-      'main': [[{ node: 'merge_1', type: 'main' as const, index: 1 }]]
+      'main': [[{ node: 'merge_1', type: 'main' as const index: 1 }]]
     },
     'merge_1': {
-      'main': [[{ node: 'code_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_1', type: 'main' as const index: 0 }]]
     },
     'code_1': {
       'main': [[
-        { node: 'http_unit', type: 'main' as const, index: 0 },
-        { node: 'http_integration', type: 'main' as const, index: 0 },
-        { node: 'http_e2e', type: 'main' as const, index: 0 }
+        { node: 'http_unit', type: 'main' as const index: 0 },
+        { node: 'http_integration', type: 'main' as const index: 0 },
+        { node: 'http_e2e', type: 'main' as const index: 0 }
       ]]
     },
     'http_unit': {
-      'main': [[{ node: 'code_2', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_2', type: 'main' as const index: 0 }]]
     },
     'http_integration': {
-      'main': [[{ node: 'code_2', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_2', type: 'main' as const index: 0 }]]
     },
     'http_e2e': {
-      'main': [[{ node: 'code_2', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_2', type: 'main' as const index: 0 }]]
     },
     'code_2': {
-      'main': [[{ node: 'if_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'if_1', type: 'main' as const index: 0 }]]
     },
     'if_1': {
       'main': [
-        [{ node: 'html_1', type: 'main' as const, index: 0 }], // Success
-        [{ node: 'code_3', type: 'main' as const, index: 0 }]  // Failure
+        [{ node: 'html_1', type: 'main' as const index: 0 }], // Success
+        [{ node: 'code_3', type: 'main' as const index: 0 }]  // Failure
       ]
     },
     'html_1': {
-      'main': [[{ node: 'http_upload', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'http_upload', type: 'main' as const index: 0 }]]
     },
     'http_upload': {
-      'main': [[{ node: 'slack_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'slack_1', type: 'main' as const index: 0 }]]
     },
     'code_3': {
-      'main': [[{ node: 'slack_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'slack_1', type: 'main' as const index: 0 }]]
     }
   }
 

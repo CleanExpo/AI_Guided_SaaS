@@ -12,28 +12,22 @@ import { AgentMonitor, startAgentMonitoring, getMonitoringDashboard } from '../s
 import { AgentCommunication, initializeAgentCommunication, sendAgentMessage, performAgentHandoff } from '../src/lib/agents/AgentCommunication'
 
 interface TestResult {
-  test_name: string
-  success: boolean
-  duration: number
-  details: any
+  test_name: string, success: boolean, duration: number, details: any
   error?: string
 }
 
 interface TestSuite {
-  suite_name: string
-  tests: TestResult[]
-  overall_success: boolean
-  total_duration: number
-  success_rate: number
+  suite_name: string, tests: TestResult[]
+  overall_success: boolean, total_duration: number, success_rate: number
 }
 
 class AgentWorkflowTester {
-  private testResults: TestSuite[] = []
-  private loader: AgentLoader
-  private registry: AgentRegistry
-  private coordinator: AgentCoordinator
-  private monitor: AgentMonitor
-  private communication: AgentCommunication
+  private, testResults: TestSuite[] = []
+  private, loader: AgentLoader
+  private, registry: AgentRegistry
+  private, coordinator: AgentCoordinator
+  private, monitor: AgentMonitor
+  private, communication: AgentCommunication
 
   constructor() {
     console.log('🧪 Initializing Agent Workflow Tester...')
@@ -53,22 +47,22 @@ class AgentWorkflowTester {
     const startTime = Date.now()
 
     try {
-      // Test Suite 1: Agent Discovery and Loading
+      // Test Suite, 1: Agent Discovery and Loading
       await this.testAgentDiscoveryAndLoading()
 
-      // Test Suite 2: Agent Registry Management
+      // Test Suite, 2: Agent Registry Management
       await this.testAgentRegistryManagement()
 
-      // Test Suite 3: Agent Communication System
+      // Test Suite, 3: Agent Communication System
       await this.testAgentCommunication()
 
-      // Test Suite 4: Agent Coordination and Workflows
+      // Test Suite, 4: Agent Coordination and Workflows
       await this.testAgentCoordination()
 
-      // Test Suite 5: Agent Monitoring and Health
+      // Test Suite, 5: Agent Monitoring and Health
       await this.testAgentMonitoring()
 
-      // Test Suite 6: Integration and End-to-End
+      // Test Suite, 6: Integration and End-to-End
       await this.testEndToEndIntegration()
 
       const totalDuration = Date.now() - startTime
@@ -76,14 +70,14 @@ class AgentWorkflowTester {
       // Generate comprehensive report
       this.generateTestReport(totalDuration)
 
-    } catch (error: any) {
-      console.error('❌ Test suite failed:', error)
+    } catch (error) {
+      console.error('❌ Test suite, failed:', error)
       process.exit(1)
     }
   }
 
   /**
-   * Test Suite 1: Agent Discovery and Loading
+   * Test Suite, 1: Agent Discovery and Loading
    */
   private async testAgentDiscoveryAndLoading(): Promise<void> {
     const suite: TestSuite = {
@@ -169,7 +163,7 @@ class AgentWorkflowTester {
   }
 
   /**
-   * Test Suite 2: Agent Registry Management
+   * Test Suite, 2: Agent Registry Management
    */
   private async testAgentRegistryManagement(): Promise<void> {
     const suite: TestSuite = {
@@ -261,7 +255,7 @@ class AgentWorkflowTester {
   }
 
   /**
-   * Test Suite 3: Agent Communication System
+   * Test Suite, 3: Agent Communication System
    */
   private async testAgentCommunication(): Promise<void> {
     const suite: TestSuite = {
@@ -360,8 +354,7 @@ class AgentWorkflowTester {
       }
 
       return {
-        handoff_successful: handoffSuccess,
-        handoff_type: 'architecture'
+        handoff_successful: handoffSuccess: handoff_type: 'architecture'
       }
     })
 
@@ -370,7 +363,7 @@ class AgentWorkflowTester {
   }
 
   /**
-   * Test Suite 4: Agent Coordination and Workflows
+   * Test Suite, 4: Agent Coordination and Workflows
    */
   private async testAgentCoordination(): Promise<void> {
     const suite: TestSuite = {
@@ -399,8 +392,7 @@ class AgentWorkflowTester {
         plan_id: plan.id,
         task_count: plan.tasks.length,
         execution_phases: plan.execution_order.length,
-        estimated_duration: plan.estimated_duration,
-        project_type: plan.project_type
+        estimated_duration: plan.estimated_duration: project_type: plan.project_type
       }
     })
 
@@ -416,7 +408,7 @@ class AgentWorkflowTester {
       const result = await executeProjectCoordination(plan.id)
 
       if (!result || result.success_rate < 50) {
-        throw new Error(`Coordination execution failed or low success rate: ${result?.success_rate || 0}%`)
+        throw new Error(`Coordination execution failed or low success, rate: ${result?.success_rate || 0}%`)
       }
 
       return {
@@ -445,7 +437,7 @@ class AgentWorkflowTester {
   }
 
   /**
-   * Test Suite 5: Agent Monitoring and Health
+   * Test Suite, 5: Agent Monitoring and Health
    */
   private async testAgentMonitoring(): Promise<void> {
     const suite: TestSuite = {
@@ -543,7 +535,7 @@ class AgentWorkflowTester {
   }
 
   /**
-   * Test Suite 6: Integration and End-to-End
+   * Test Suite, 6: Integration and End-to-End
    */
   private async testEndToEndIntegration(): Promise<void> {
     const suite: TestSuite = {
@@ -605,8 +597,7 @@ class AgentWorkflowTester {
         
         await this.communication.sendMessage({
           from_agent: currentAgent.agent_id,
-          to_agent: nextAgent.agent_id,
-          type: 'handoff',
+          to_agent: nextAgent.agent_id: type: 'handoff',
           priority: 'high',
           payload: {
             stage: `${currentAgent.role}_to_${nextAgent.role}`,
@@ -689,7 +680,7 @@ class AgentWorkflowTester {
       
       console.log(`    ✅ PASSED (${duration}ms)`)
       
-    } catch (error: any) {
+    } catch (error) {
       const duration = Date.now() - startTime
       
       suite.tests.push({
@@ -730,42 +721,42 @@ class AgentWorkflowTester {
     const overallSuccessRate = (passedTests / totalTests) * 100
     const overallSuccess = overallSuccessRate >= 80
 
-    console.log(`\n📊 OVERALL SUMMARY:`)
-    console.log(`   Total Test Suites: ${this.testResults.length}`)
-    console.log(`   Total Tests: ${totalTests}`)
-    console.log(`   Passed Tests: ${passedTests}`)
-    console.log(`   Failed Tests: ${totalTests - passedTests}`)
-    console.log(`   Success Rate: ${overallSuccessRate.toFixed(1)}%`)
-    console.log(`   Total Duration: ${totalDuration}ms`)
-    console.log(`   Overall Result: ${overallSuccess ? '✅ SUCCESS' : '❌ FAILURE'}`)
+    console.log(`\n📊 OVERALL, SUMMARY:`)
+    console.log(`   Total Test, Suites: ${this.testResults.length}`)
+    console.log(`   Total, Tests: ${totalTests}`)
+    console.log(`   Passed, Tests: ${passedTests}`)
+    console.log(`   Failed, Tests: ${totalTests - passedTests}`)
+    console.log(`   Success, Rate: ${overallSuccessRate.toFixed(1)}%`)
+    console.log(`   Total, Duration: ${totalDuration}ms`)
+    console.log(`   Overall, Result: ${overallSuccess ? '✅ SUCCESS' : '❌ FAILURE'}`)
 
-    console.log(`\n📋 SUITE BREAKDOWN:`)
+    console.log(`\n📋 SUITE, BREAKDOWN:`)
     this.testResults.forEach(suite => {
       const status = suite.overall_success ? '✅' : '❌'
       console.log(`   ${status} ${suite.suite_name}: ${suite.success_rate.toFixed(1)}% (${suite.tests.filter(t => t.success).length}/${suite.tests.length})`)
     })
 
     if (totalTests - passedTests > 0) {
-      console.log(`\n❌ FAILED TESTS:`)
+      console.log(`\n❌ FAILED, TESTS:`)
       allTests.filter(t => !t.success).forEach(test => {
         console.log(`   - ${test.test_name}: ${test.error}`)
       })
     }
 
-    console.log(`\n🎯 AGENT SYSTEM STATUS:`)
+    console.log(`\n🎯 AGENT SYSTEM, STATUS:`)
     try {
       const registryStatus = this.registry.getRegistryStatus()
       const dashboard = this.monitor.getMonitoringDashboard()
       const commStats = this.communication.getCommunicationStats()
 
-      console.log(`   Registered Agents: ${registryStatus.total_agents}`)
-      console.log(`   Healthy Agents: ${dashboard.overview.healthy_agents}`)
-      console.log(`   System Health Score: ${dashboard.overview.system_health_score.toFixed(1)}%`)
-      console.log(`   Total Messages: ${commStats.total_messages}`)
-      console.log(`   Communication Success Rate: ${commStats.success_rate.toFixed(1)}%`)
-      console.log(`   Active Channels: ${commStats.active_channels}`)
-    } catch (error: any) {
-      console.log(`   Status retrieval failed: ${error.message}`)
+      console.log(`   Registered, Agents: ${registryStatus.total_agents}`)
+      console.log(`   Healthy, Agents: ${dashboard.overview.healthy_agents}`)
+      console.log(`   System Health, Score: ${dashboard.overview.system_health_score.toFixed(1)}%`)
+      console.log(`   Total, Messages: ${commStats.total_messages}`)
+      console.log(`   Communication Success, Rate: ${commStats.success_rate.toFixed(1)}%`)
+      console.log(`   Active, Channels: ${commStats.active_channels}`)
+    } catch (error) {
+      console.log(`   Status retrieval, failed: ${error.message}`)
     }
 
     console.log('\n' + '='.repeat(80))
@@ -782,8 +773,8 @@ async function main() {
   try {
     const tester = new AgentWorkflowTester()
     await tester.runAllTests()
-  } catch (error: any) {
-    console.error('❌ Test execution failed:', error)
+  } catch (error) {
+    console.error('❌ Test execution, failed:', error)
     process.exit(1)
   }
 }

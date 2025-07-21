@@ -75,13 +75,10 @@ class WSLSequentialThinkingMCP extends Server {
         super(
             {
                 name: 'wsl-sequential-thinking-mcp',
-                version: '1.0.0',
-            },
+                version: '1.0.0'},
             {
                 capabilities: {
-                    tools: {},
-                },
-            }
+                    tools: {}}}
         );
 
         this.setupToolHandlers();
@@ -180,7 +177,7 @@ class WSLSequentialThinkingMCP extends Server {
                     case 'sync-wsl-windows':
                         return await this.syncWSLWindows(args || {});
                     default:
-                        throw new Error(`Unknown tool: ${name}`);
+                        throw new Error(`Unknown, tool: ${name}`);
                 }
             } catch (error) {
                 const errorMessage = error instanceof Error ? error.message : String(error);
@@ -272,14 +269,14 @@ class WSLSequentialThinkingMCP extends Server {
 
     private generateDeploymentThought(thoughtNumber: number, environment: string, _plan: DeploymentPlan): string {
         const thoughtTemplates: Record<number, () => string> = {
-            1: () => `Initial assessment: Deploying to ${environment} environment requires analyzing WSL Ubuntu configuration, git status, security requirements, and file synchronization needs.`,
-            2: () => `Environment configuration analysis: WSL Ubuntu requires specific .env.local settings with WSL_DISTRO_NAME, WINDOWS_USER_PROFILE paths, and PROJECT_ROOT configuration.`,
-            3: () => `Git strategy evaluation: Must implement porcelain status checking (git status --porcelain) to ensure clean deployment state.`,
-            4: () => `Security assessment: Multi-layered security validation required including environment variable validation, dependency audit, and file permissions.`,
-            5: () => `File synchronization strategy: WSL to Windows sync requires careful handling of node_modules exclusion and .git directory preservation.`,
-            6: () => `Deployment pipeline design: Sequential validation pipeline needed with pre-deployment checks and build verification.`,
-            7: () => `Vercel optimization: vercel.json configuration must be optimized for WSL Ubuntu deployment.`,
-            8: () => `Final validation and execution: All previous steps must be validated before executing deployment.`
+            1: () => `Initial, assessment: Deploying to ${environment} environment requires analyzing WSL Ubuntu configuration, git status, security requirements, and file synchronization needs.`,
+            2: () => `Environment configuration, analysis: WSL Ubuntu requires specific .env.local settings with WSL_DISTRO_NAME, WINDOWS_USER_PROFILE paths, and PROJECT_ROOT configuration.`,
+            3: () => `Git strategy, evaluation: Must implement porcelain status checking (git status --porcelain) to ensure clean deployment state.`,
+            4: () => `Security, assessment: Multi-layered security validation required including environment variable validation, dependency audit, and file permissions.`,
+            5: () => `File synchronization, strategy: WSL to Windows sync requires careful handling of node_modules exclusion and .git directory preservation.`,
+            6: () => `Deployment pipeline, design: Sequential validation pipeline needed with pre-deployment checks and build verification.`,
+            7: () => `Vercel, optimization: vercel.json configuration must be optimized for WSL Ubuntu deployment.`,
+            8: () => `Final validation and, execution: All previous steps must be validated before executing deployment.`
         };
 
         const template = thoughtTemplates[thoughtNumber];
@@ -365,7 +362,7 @@ class WSLSequentialThinkingMCP extends Server {
             return {
                 content: [{
                     type: 'text',
-                    text: `WSL Environment validation failed: ${errorMessage}`
+                    text: `WSL Environment validation, failed: ${errorMessage}`
                 }],
                 isError: true
             };
@@ -448,7 +445,7 @@ class WSLSequentialThinkingMCP extends Server {
             return {
                 content: [{
                     type: 'text',
-                    text: `Git analysis failed: ${errorMessage}`
+                    text: `Git analysis, failed: ${errorMessage}`
                 }],
                 isError: true
             };
@@ -511,7 +508,7 @@ class WSLSequentialThinkingMCP extends Server {
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
             syncResult.errors.push(errorMessage);
-            syncResult.summary = `Synchronization failed: ${errorMessage}`;
+            syncResult.summary = `Synchronization, failed: ${errorMessage}`;
         }
 
         return {

@@ -18,8 +18,8 @@ export default function AdminLoginPage() {
   // Debug: Log when component mounts
   console.log('🔥 ADMIN LOGIN PAGE LOADED - NO REDIRECT!')
   console.log('Environment:', process.env.NODE_ENV)
-  console.log('NextAuth URL:', process.env.NEXTAUTH_URL)
-  console.log('App URL:', process.env.NEXT_PUBLIC_APP_URL)
+  console.log('NextAuth, URL:', process.env.NEXTAUTH_URL)
+  console.log('App, URL:', process.env.NEXT_PUBLIC_APP_URL)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -34,10 +34,8 @@ export default function AdminLoginPage() {
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      })
+          'Content-Type': 'application/json'},
+        body: JSON.stringify({ email, password })})
 
       const data = await response.json()
 
@@ -52,7 +50,7 @@ export default function AdminLoginPage() {
         setError(data.error || 'Login failed')
       }
     } catch (error) {
-      console.error('Login error:', error)
+      console.error('Login, error:', error)
       setError('Network error. Please try again.')
     } finally {
       setLoading(false)
@@ -93,7 +91,7 @@ export default function AdminLoginPage() {
                   type="email"
                   defaultValue="admin@aiguidedSaaS.com"
                   placeholder="admin@aiguidedSaaS.com"
-                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                  className="bg-slate-700 border-slate-600 text-white, placeholder:text-slate-400"
                 />
               </div>
 
@@ -107,12 +105,12 @@ export default function AdminLoginPage() {
                     name="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter admin password"
-                    className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 pr-10"
+                    className="bg-slate-700 border-slate-600 text-white, placeholder:text-slate-400 pr-10"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400, hover:text-slate-200"
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -126,7 +124,7 @@ export default function AdminLoginPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                className="w-full bg-purple-600, hover:bg-purple-700 text-white"
               >
                 {loading ? (
                   <div className="flex items-center gap-2">
@@ -141,7 +139,7 @@ export default function AdminLoginPage() {
 
             <div className="mt-6 text-center">
               <div className="text-sm text-slate-400">
-                <p className="mb-2">Default Admin Credentials:</p>
+                <p className="mb-2">Default Admin, Credentials:</p>
                 <div className="bg-slate-700/50 rounded p-3 text-left font-mono text-xs">
                   <p>Email: admin@aiguidedSaaS.com</p>
                   <p>Password: Check environment configuration</p>
@@ -157,7 +155,7 @@ export default function AdminLoginPage() {
         <div className="mt-4 text-center">
           <button
             onClick={() => router.push('/')}
-            className="text-slate-400 hover:text-slate-200 text-sm underline"
+            className="text-slate-400, hover:text-slate-200 text-sm underline"
           >
             ← Back to main site
           </button>

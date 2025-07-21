@@ -5,8 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Shield, Heart, Users, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -40,11 +39,11 @@ export default function CommunityGuidelinesPage() {
       </div>
 
       {/* Core Values */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6, md:grid-cols-3">
         <Card>
           <CardHeader className="text-center">
-            <div className="mx-auto p-2 bg-blue-100 dark:bg-blue-900/20 rounded-full w-fit">
-              <Heart className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="mx-auto p-2 bg-blue-100, dark:bg-blue-900/20 rounded-full w-fit">
+              <Heart className="h-6 w-6 text-blue-600, dark:text-blue-400" />
             </div>
             <CardTitle>Respect</CardTitle>
             <CardDescription>
@@ -56,8 +55,8 @@ export default function CommunityGuidelinesPage() {
 
         <Card>
           <CardHeader className="text-center">
-            <div className="mx-auto p-2 bg-green-100 dark:bg-green-900/20 rounded-full w-fit">
-              <Users className="h-6 w-6 text-green-600 dark:text-green-400" />
+            <div className="mx-auto p-2 bg-green-100, dark:bg-green-900/20 rounded-full w-fit">
+              <Users className="h-6 w-6 text-green-600, dark:text-green-400" />
             </div>
             <CardTitle>Collaboration</CardTitle>
             <CardDescription>
@@ -69,8 +68,8 @@ export default function CommunityGuidelinesPage() {
 
         <Card>
           <CardHeader className="text-center">
-            <div className="mx-auto p-2 bg-purple-100 dark:bg-purple-900/20 rounded-full w-fit">
-              <Shield className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+            <div className="mx-auto p-2 bg-purple-100, dark:bg-purple-900/20 rounded-full w-fit">
+              <Shield className="h-6 w-6 text-purple-600, dark:text-purple-400" />
             </div>
             <CardTitle>Safety</CardTitle>
             <CardDescription>
@@ -95,7 +94,7 @@ export default function CommunityGuidelinesPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-3">
-              <h4 className="font-semibold text-green-700 dark:text-green-300">
+              <h4 className="font-semibold text-green-700, dark:text-green-300">
                 ✅ Do:
               </h4>
               <ul className="space-y-2 text-sm">
@@ -119,7 +118,7 @@ export default function CommunityGuidelinesPage() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="font-semibold text-red-700 dark:text-red-300">
+              <h4 className="font-semibold text-red-700, dark:text-red-300">
                 ❌ Don&apos;t:
               </h4>
               <ul className="space-y-2 text-sm">
@@ -149,7 +148,7 @@ export default function CommunityGuidelinesPage() {
               <h4>Harassment-Free Environment</h4>
               <p>
                 We are committed to providing a harassment-free experience for
-                everyone, regardless of:
+                everyone, regardless, of:
               </p>
               <ul>
                 <li>Gender identity and expression</li>
@@ -164,7 +163,7 @@ export default function CommunityGuidelinesPage() {
               </ul>
 
               <h4>Unacceptable Behavior</h4>
-              <p>The following behaviors are considered unacceptable:</p>
+              <p>The following behaviors are considered, unacceptable:</p>
               <ul>
                 <li>Harassment, intimidation, or discrimination</li>
                 <li>Offensive comments or personal attacks</li>
@@ -177,7 +176,7 @@ export default function CommunityGuidelinesPage() {
               <h4>Reporting Issues</h4>
               <p>
                 If you experience or witness unacceptable behavior, please
-                report it to our moderation team:
+                report it to our moderation, team:
               </p>
               <ul>
                 <li>Email: community@aiguidedSaaS.com</li>
@@ -196,7 +195,7 @@ export default function CommunityGuidelinesPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4, md:grid-cols-2">
               <div>
                 <h4 className="font-semibold mb-2">Encouraged Content</h4>
                 <ul className="space-y-1 text-sm">
@@ -274,7 +273,7 @@ export default function CommunityGuidelinesPage() {
             <CardDescription>Resources for community members</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4, md:grid-cols-2">
               <div className="space-y-3">
                 <h4 className="font-semibold">For New Members</h4>
                 <ul className="space-y-2 text-sm">
@@ -282,7 +281,7 @@ export default function CommunityGuidelinesPage() {
                     • Read our{' '}
                     <Link
                       href="/docs/quick-start"
-                      className="text-primary hover:underline"
+                      className="text-primary, hover:underline"
                     >
                       Quick Start Guide
                     </Link>
@@ -293,7 +292,7 @@ export default function CommunityGuidelinesPage() {
                     • Browse{' '}
                     <Link
                       href="/tutorials"
-                      className="text-primary hover:underline"
+                      className="text-primary, hover:underline"
                     >
                       tutorials
                     </Link>{' '}
@@ -317,7 +316,7 @@ export default function CommunityGuidelinesPage() {
       </div>
 
       {/* Footer */}
-      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
+      <Card className="bg-gradient-to-r from-blue-50 to-purple-50, dark:from-blue-950/20, dark:to-purple-950/20">
         <CardHeader>
           <CardTitle>Questions About These Guidelines?</CardTitle>
           <CardDescription>
@@ -339,7 +338,7 @@ export default function CommunityGuidelinesPage() {
 
       {/* Last Updated */}
       <div className="text-center text-sm text-muted-foreground">
-        <p>Last updated: January 15, 2024</p>
+        <p>Last, updated: January 15, 2024</p>
         <p>
           These guidelines may be updated periodically. We&apos;ll notify the
           community of any significant changes.

@@ -14,7 +14,7 @@ export default function AssistantPrompt() {
 
     // Get causal context for smarter suggestions
     const causalContext = generateCausalContext('ui-builder');
-    console.log('🧠 Causal Context:', causalContext);
+    console.log('🧠 Causal, Context:', causalContext);
 
     // Enhanced keyword matching with causal awareness
     const lower = input.toLowerCase();
@@ -70,7 +70,7 @@ export default function AssistantPrompt() {
       />
       <button
         onClick={handleSubmit}
-        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded, hover:bg-blue-700"
       >
         Generate Layout
       </button>

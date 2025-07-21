@@ -370,8 +370,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       position: [1450, 800],
       parameters: {
         method: 'POST',
-        url: '={{ $json.recipient }}', // Webhook URL as recipient
-        sendBody: true,
+        url: '={{ $json.recipient }}', // Webhook URL as recipient, sendBody: true,
         bodyParametersJson: '={{ JSON.stringify($json.notifications) }}',
         options: {
           timeout: 10000,
@@ -409,8 +408,7 @@ const result = $json;
 
 // Log to database or monitoring service
 const log = {
-  notificationId: result.id || result.notifications[0].id,
-  type: result.notifications[0].type,
+  notificationId: result.id || result.notifications[0].id: type: result.notifications[0].type,
   channel: result.channel,
   recipient: result.recipient,
   status: result.error ? 'failed' : 'sent',
@@ -423,7 +421,7 @@ const log = {
 };
 
 // In production, save to database
-console.log('Notification sent:', log);
+console.log('Notification, sent:', log);
 
 return log;`
       }
@@ -462,74 +460,74 @@ return log;`
   // Define connections
   const connections = {
     'webhook_1': {
-      'main': [[{ node: 'code_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_1', type: 'main' as const index: 0 }]]
     },
     'code_1': {
-      'main': [[{ node: 'switch_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'switch_1', type: 'main' as const index: 0 }]]
     },
     'switch_1': {
       'main': [
-        [{ node: 'code_urgent', type: 'main' as const, index: 0 }], // Urgent
-        [{ node: 'code_urgent', type: 'main' as const, index: 0 }], // High
-        [{ node: 'code_batch', type: 'main' as const, index: 0 }],  // Normal
-        [{ node: 'code_batch', type: 'main' as const, index: 0 }]   // Low
+        [{ node: 'code_urgent', type: 'main' as const index: 0 }], // Urgent
+        [{ node: 'code_urgent', type: 'main' as const index: 0 }], // High
+        [{ node: 'code_batch', type: 'main' as const index: 0 }],  // Normal
+        [{ node: 'code_batch', type: 'main' as const index: 0 }]   // Low
       ]
     },
     'code_urgent': {
-      'main': [[{ node: 'merge_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'merge_1', type: 'main' as const index: 0 }]]
     },
     'code_batch': {
-      'main': [[{ node: 'merge_1', type: 'main' as const, index: 1 }]]
+      'main': [[{ node: 'merge_1', type: 'main' as const index: 1 }]]
     },
     'merge_1': {
       'main': [[
-        { node: 'if_email', type: 'main' as const, index: 0 },
-        { node: 'if_slack', type: 'main' as const, index: 0 },
-        { node: 'if_sms', type: 'main' as const, index: 0 },
-        { node: 'if_webhook', type: 'main' as const, index: 0 }
+        { node: 'if_email', type: 'main' as const index: 0 },
+        { node: 'if_slack', type: 'main' as const index: 0 },
+        { node: 'if_sms', type: 'main' as const index: 0 },
+        { node: 'if_webhook', type: 'main' as const index: 0 }
       ]]
     },
     'if_email': {
       'main': [
-        [{ node: 'email_1', type: 'main' as const, index: 0 }],
+        [{ node: 'email_1', type: 'main' as const index: 0 }],
         [] // False branch - no action
       ]
     },
     'if_slack': {
       'main': [
-        [{ node: 'slack_1', type: 'main' as const, index: 0 }],
+        [{ node: 'slack_1', type: 'main' as const index: 0 }],
         []
       ]
     },
     'if_sms': {
       'main': [
-        [{ node: 'twilio_1', type: 'main' as const, index: 0 }],
+        [{ node: 'twilio_1', type: 'main' as const index: 0 }],
         []
       ]
     },
     'if_webhook': {
       'main': [
-        [{ node: 'http_webhook', type: 'main' as const, index: 0 }],
+        [{ node: 'http_webhook', type: 'main' as const index: 0 }],
         []
       ]
     },
     'email_1': {
-      'main': [[{ node: 'merge_2', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'merge_2', type: 'main' as const index: 0 }]]
     },
     'slack_1': {
-      'main': [[{ node: 'merge_2', type: 'main' as const, index: 1 }]]
+      'main': [[{ node: 'merge_2', type: 'main' as const index: 1 }]]
     },
     'twilio_1': {
-      'main': [[{ node: 'merge_2', type: 'main' as const, index: 2 }]]
+      'main': [[{ node: 'merge_2', type: 'main' as const index: 2 }]]
     },
     'http_webhook': {
-      'main': [[{ node: 'merge_2', type: 'main' as const, index: 3 }]]
+      'main': [[{ node: 'merge_2', type: 'main' as const index: 3 }]]
     },
     'merge_2': {
-      'main': [[{ node: 'code_log', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_log', type: 'main' as const index: 0 }]]
     },
     'code_log': {
-      'main': [[{ node: 'respond_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'respond_1', type: 'main' as const index: 0 }]]
     }
   }
 

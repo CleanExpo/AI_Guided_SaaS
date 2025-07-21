@@ -8,8 +8,7 @@ import {
   CardEnhancedContent,
   CardEnhancedDescription,
   CardEnhancedHeader,
-  CardEnhancedTitle,
-} from '@/components/ui/card-enhanced';
+  CardEnhancedTitle} from '@/components/ui/card-enhanced';
 import { ButtonPremium } from '@/components/ui/button-premium';
 import { ThemeToggle } from '@/lib/theme/dark-mode';
 import {
@@ -28,8 +27,7 @@ import {
   Calendar,
   Bell,
   Settings,
-  Plus,
-} from 'lucide-react';
+  Plus} from 'lucide-react';
 
 // Mock data for demonstration
 const generateMockData = () => ({
@@ -37,27 +35,22 @@ const generateMockData = () => ({
     totalUsers: Math.floor(Math.random() * 10000) + 5000,
     revenue: Math.floor(Math.random() * 50000) + 25000,
     conversionRate: (Math.random() * 5 + 2).toFixed(1),
-    activeProjects: Math.floor(Math.random() * 100) + 50,
-  },
+    activeProjects: Math.floor(Math.random() * 100) + 50},
   trends: {
     users: Math.random() > 0.5 ? 'up' : 'down',
     revenue: Math.random() > 0.3 ? 'up' : 'down',
     conversion: Math.random() > 0.4 ? 'up' : 'down',
-    projects: Math.random() > 0.6 ? 'up' : 'down',
-  },
+    projects: Math.random() > 0.6 ? 'up' : 'down'},
   chartData: Array.from({ length: 7 }, (_, i) => ({
     day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
     users: Math.floor(Math.random() * 1000) + 500,
-    revenue: Math.floor(Math.random() * 5000) + 2000,
-  })),
+    revenue: Math.floor(Math.random() * 5000) + 2000})),
   recentActivity: [
     { id: 1, action: 'New user registered', time: '2 minutes ago', type: 'user' },
     { id: 2, action: 'Payment received', time: '5 minutes ago', type: 'payment' },
     { id: 3, action: 'Project created', time: '12 minutes ago', type: 'project' },
     { id: 4, action: 'API call made', time: '18 minutes ago', type: 'api' },
-    { id: 5, action: 'User upgraded plan', time: '25 minutes ago', type: 'upgrade' },
-  ],
-});
+    { id: 5, action: 'User upgraded plan', time: '25 minutes ago', type: 'upgrade' }]});
 
 interface MetricCardProps {
   title: string;
@@ -168,9 +161,9 @@ function ActivityFeed({ activities }: { activities: any[] }) {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="flex items-center space-x-3 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
+              className="flex items-center space-x-3 p-3 rounded-lg bg-white/50, dark:bg-gray-800/50 backdrop-blur-sm"
             >
-              <div className={`p-2 rounded-full bg-gray-100 dark:bg-gray-700 ${getActivityColor(activity.type)}`}>
+              <div className={`p-2 rounded-full bg-gray-100, dark:bg-gray-700 ${getActivityColor(activity.type)}`}>
                 <Icon className="h-4 w-4" />
               </div>
               <div className="flex-1">
@@ -215,42 +208,37 @@ export default function DashboardEnhanced() {
       value: data.metrics.totalUsers.toLocaleString(),
       change: '+12.5%',
       trend: data.trends.users,
-      icon: Users,
-    },
+      icon: Users},
     {
       title: 'Revenue',
       value: `$${data.metrics.revenue.toLocaleString()}`,
       change: '+8.2%',
       trend: data.trends.revenue,
-      icon: DollarSign,
-    },
+      icon: DollarSign},
     {
       title: 'Conversion Rate',
       value: `${data.metrics.conversionRate}%`,
       change: '+2.1%',
       trend: data.trends.conversion,
-      icon: TrendingUp,
-    },
+      icon: TrendingUp},
     {
       title: 'Active Projects',
       value: data.metrics.activeProjects.toString(),
       change: '+15.3%',
       trend: data.trends.projects,
-      icon: Target,
-    },
-  ];
+      icon: Target}];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark:from-slate-900, dark:via-slate-800, dark:to-slate-900 p-6">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
               Dashboard
             </h1>
             <p className="text-muted-foreground mt-1">
-              Last updated: {lastUpdated.toLocaleTimeString()}
+              Last, updated: {lastUpdated.toLocaleTimeString()}
             </p>
           </div>
           
@@ -287,7 +275,7 @@ export default function DashboardEnhanced() {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6 mb-8">
         {metrics.map((metric, index) => (
           <MetricCard
             key={metric.title}
@@ -302,7 +290,7 @@ export default function DashboardEnhanced() {
       </div>
 
       {/* Charts and Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1, lg:grid-cols-3 gap-6 mb-8">
         {/* Chart */}
         <div className="lg:col-span-2">
           <CardEnhanced variant="glass">
@@ -355,7 +343,7 @@ export default function DashboardEnhanced() {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
         <CardEnhanced variant="glass" hover className="cursor-pointer">
           <CardEnhancedContent className="flex items-center justify-center p-6">
             <div className="text-center">

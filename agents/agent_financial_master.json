@@ -1,0 +1,180 @@
+{
+  "id": "agent_financial_master",
+  "name": "Master CRM Financial Control Agent",
+  "version": "1.0.0",
+  "description": "Real-time financial tracking, cost monitoring, and billing management agent",
+  "capabilities": [
+    "real_time_cost_tracking",
+    "vendor_api_integration",
+    "billing_management",
+    "financial_analytics",
+    "budget_monitoring",
+    "cost_optimization"
+  ],
+  "config": {
+    "updateInterval": 300000,
+    "costCheckFrequency": 60000,
+    "budgetAlertThreshold": 0.8,
+    "optimizationEnabled": true,
+    "multiCurrency": true,
+    "defaultCurrency": "USD"
+  },
+  "vendorIntegrations": {
+    "ai_services": {
+      "openai": {
+        "endpoint": "https://api.openai.com/v1/usage",
+        "metrics": ["tokens", "requests", "models"],
+        "costModel": "per_token"
+      },
+      "anthropic": {
+        "endpoint": "https://api.anthropic.com/v1/usage",
+        "metrics": ["tokens", "requests", "models"],
+        "costModel": "per_token"
+      },
+      "google_ai": {
+        "endpoint": "https://generativelanguage.googleapis.com/v1/usage",
+        "metrics": ["characters", "requests", "models"],
+        "costModel": "per_character"
+      }
+    },
+    "cloud_providers": {
+      "aws": {
+        "services": ["ec2", "s3", "rds", "lambda"],
+        "costExplorer": true,
+        "budgetAlerts": true
+      },
+      "vercel": {
+        "endpoint": "https://api.vercel.com/v1/usage",
+        "metrics": ["bandwidth", "functions", "builds"],
+        "costModel": "usage_based"
+      },
+      "railway": {
+        "endpoint": "https://api.railway.app/v1/usage",
+        "metrics": ["cpu", "memory", "egress"],
+        "costModel": "resource_based"
+      }
+    },
+    "databases": {
+      "supabase": {
+        "endpoint": "https://api.supabase.com/v1/usage",
+        "metrics": ["storage", "bandwidth", "requests"],
+        "tiers": ["free", "pro", "team"]
+      },
+      "redis": {
+        "endpoint": "https://api.redis.com/v1/usage",
+        "metrics": ["memory", "commands", "bandwidth"],
+        "costModel": "memory_based"
+      }
+    }
+  },
+  "financialTracking": {
+    "realTimeCosts": {
+      "granularity": ["minute", "hour", "day", "month"],
+      "breakdown": ["service", "client", "project", "feature"],
+      "aggregation": ["sum", "average", "peak", "trend"]
+    },
+    "budgetManagement": {
+      "levels": ["global", "client", "project", "service"],
+      "alerts": {
+        "thresholds": [50, 75, 90, 100],
+        "actions": ["notify", "throttle", "suspend", "optimize"]
+      },
+      "forecasting": {
+        "enabled": true,
+        "algorithms": ["linear", "exponential", "ml_based"],
+        "horizon": "30_days"
+      }
+    },
+    "billing": {
+      "cycles": ["hourly", "daily", "weekly", "monthly"],
+      "methods": ["prepaid", "postpaid", "credit_based"],
+      "invoicing": {
+        "automatic": true,
+        "formats": ["pdf", "csv", "api"],
+        "details": ["itemized", "summarized", "custom"]
+      }
+    }
+  },
+  "analytics": {
+    "costAnalytics": {
+      "metrics": [
+        "costPerRequest",
+        "costPerUser",
+        "costPerFeature",
+        "roi",
+        "efficiency"
+      ],
+      "visualizations": [
+        "timeSeries",
+        "heatmap",
+        "sankey",
+        "treemap"
+      ]
+    },
+    "optimization": {
+      "recommendations": {
+        "enabled": true,
+        "frequency": "daily",
+        "types": [
+          "serviceDowngrade",
+          "cachingOpportunities",
+          "batchProcessing",
+          "alternativeServices"
+        ]
+      },
+      "automation": {
+        "enabled": true,
+        "actions": [
+          "autoScale",
+          "cacheOptimization",
+          "requestBatching",
+          "serviceSwapping"
+        ]
+      }
+    },
+    "reporting": {
+      "scheduled": {
+        "daily": ["costSummary", "anomalies"],
+        "weekly": ["trendAnalysis", "optimization"],
+        "monthly": ["fullReport", "invoicing"]
+      },
+      "realTime": {
+        "dashboard": true,
+        "alerts": true,
+        "api": true
+      }
+    }
+  },
+  "masterControls": {
+    "resourceManagement": {
+      "autoScaling": {
+        "enabled": true,
+        "policies": ["cost", "performance", "balanced"]
+      },
+      "quotas": {
+        "enforced": true,
+        "levels": ["global", "client", "service"],
+        "actions": ["warn", "throttle", "block"]
+      }
+    },
+    "permissions": {
+      "roles": ["master", "admin", "viewer", "client"],
+      "granularity": ["global", "service", "feature"],
+      "audit": {
+        "enabled": true,
+        "retention": "90_days"
+      }
+    },
+    "emergencyControls": {
+      "killSwitch": {
+        "enabled": true,
+        "triggers": ["costSpike", "securityBreach", "manual"]
+      },
+      "costCap": {
+        "enabled": true,
+        "hardLimit": true,
+        "gracefulDegradation": true
+      }
+    }
+  }
+}

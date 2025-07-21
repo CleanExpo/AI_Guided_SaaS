@@ -1,0 +1,216 @@
+version: '3.8'
+
+services:
+  # Agent Orchestrator (Main Controller)
+  orchestrator:
+    build:
+      context: .
+      dockerfile: docker/agents/Dockerfile.agent
+    container_name: ai-saas-orchestrator
+    environment:
+      - NODE_ENV=production
+      - AGENT_TYPE=orchestrator
+      - AGENT_ID=orchestrator-main
+      - PULSE_MODE=enabled
+      - MAX_CONCURRENT_AGENTS=2
+    volumes:
+      - ./src:/app/src:ro
+      - ./agent-data:/app/agent-data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - agent-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Frontend Agent Container
+  agent-frontend:
+    build:
+      context: .
+      dockerfile: docker/agents/Dockerfile.agent
+    container_name: ai-saas-agent-frontend
+    environment:
+      - NODE_ENV=production
+      - AGENT_TYPE=frontend
+      - AGENT_ID=agent_frontend
+      - ORCHESTRATOR_URL=http://orchestrator:3000
+    volumes:
+      - ./src:/app/src:ro
+      - ./agent-data/frontend:/app/agent-data
+    networks:
+      - agent-network
+    depends_on:
+      - orchestrator
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+
+  # Backend Agent Container
+  agent-backend:
+    build:
+      context: .
+      dockerfile: docker/agents/Dockerfile.agent
+    container_name: ai-saas-agent-backend
+    environment:
+      - NODE_ENV=production
+      - AGENT_TYPE=backend
+      - AGENT_ID=agent_backend
+      - ORCHESTRATOR_URL=http://orchestrator:3000
+    volumes:
+      - ./src:/app/src:ro
+      - ./agent-data/backend:/app/agent-data
+    networks:
+      - agent-network
+    depends_on:
+      - orchestrator
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+
+  # Architect Agent Container
+  agent-architect:
+    build:
+      context: .
+      dockerfile: docker/agents/Dockerfile.agent
+    container_name: ai-saas-agent-architect
+    environment:
+      - NODE_ENV=production
+      - AGENT_TYPE=architect
+      - AGENT_ID=agent_architect
+      - ORCHESTRATOR_URL=http://orchestrator:3000
+    volumes:
+      - ./src:/app/src:ro
+      - ./agent-data/architect:/app/agent-data
+    networks:
+      - agent-network
+    depends_on:
+      - orchestrator
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 768M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+
+  # QA Agent Container
+  agent-qa:
+    build:
+      context: .
+      dockerfile: docker/agents/Dockerfile.agent
+    container_name: ai-saas-agent-qa
+    environment:
+      - NODE_ENV=production
+      - AGENT_TYPE=qa
+      - AGENT_ID=agent_qa
+      - ORCHESTRATOR_URL=http://orchestrator:3000
+    volumes:
+      - ./src:/app/src:ro
+      - ./agent-data/qa:/app/agent-data
+    networks:
+      - agent-network
+    depends_on:
+      - orchestrator
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+
+  # DevOps Agent Container
+  agent-devops:
+    build:
+      context: .
+      dockerfile: docker/agents/Dockerfile.agent
+    container_name: ai-saas-agent-devops
+    environment:
+      - NODE_ENV=production
+      - AGENT_TYPE=devops
+      - AGENT_ID=agent_devops
+      - ORCHESTRATOR_URL=http://orchestrator:3000
+    volumes:
+      - ./src:/app/src:ro
+      - ./agent-data/devops:/app/agent-data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - agent-network
+    depends_on:
+      - orchestrator
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+
+  # Resource Monitor (Prometheus)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ai-saas-prometheus
+    volumes:
+      - ./docker/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - agent-network
+    ports:
+      - "9090:9090"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
+  # Container Stats Exporter
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: ai-saas-cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - agent-network
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
+networks:
+  agent-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  prometheus-data:

@@ -10,19 +10,14 @@ export async function GET(request: NextRequest) {
     }
 
     const debugInfo = {
-      NODE_ENV: process.env.NODE_ENV,
-      ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL,
-      ADMIN_EMAIL: process.env.ADMIN_EMAIL,
-      MASTER_ADMIN_ENABLED: process.env.MASTER_ADMIN_ENABLED,
-      // Don't expose actual password, just check if it exists
-      ADMIN_JWT_SECRET_SET: !!process.env.ADMIN_JWT_SECRET,
-      ADMIN_SESSION_SECRET_SET: !!process.env.ADMIN_SESSION_SECRET,
+      NODE_ENV: process.env.NODE_ENV: ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL: ADMIN_EMAIL: process.env.ADMIN_EMAIL: MASTER_ADMIN_ENABLED: process.env.MASTER_ADMIN_ENABLED,
+      // Don't expose actual password, just check if it exists, ADMIN_JWT_SECRET_SET: !!process.env.ADMIN_JWT_SECRET: ADMIN_SESSION_SECRET_SET: !!process.env.ADMIN_SESSION_SECRET,
       timestamp: new Date().toISOString()
     }
 
     return Response.json(debugInfo)
   } catch (error) {
-    console.error('Debug endpoint error:', error)
+    console.error('Debug endpoint, error:', error)
     return Response.json({ error: 'Debug error' }, { status: 500 })
   }
 }

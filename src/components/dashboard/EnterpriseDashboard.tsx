@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -23,24 +22,21 @@ import {
   Globe,
   Zap,
   Shield,
-  Package,
-} from 'lucide-react';
+  Package} from 'lucide-react';
 import {
   AnalyticsService,
   PlatformMetrics,
   UserMetrics,
   RevenueMetrics,
   SystemMetrics,
-  ContentMetrics,
-} from '@/lib/analytics';
+  ContentMetrics} from '@/lib/analytics';
 
 interface EnterpriseDashboardProps {
   userRole?: 'admin' | 'user';
 }
 
 export default function EnterpriseDashboard({
-  userRole = 'user',
-}: EnterpriseDashboardProps) {
+  userRole = 'user'}: EnterpriseDashboardProps) {
   const { data: session } = useSession();
   void session; // Mark as used for future auth implementation
   const [loading, setLoading] = useState(true);
@@ -71,8 +67,7 @@ export default function EnterpriseDashboard({
         AnalyticsService.getUserMetrics(timeRange),
         AnalyticsService.getRevenueMetrics(timeRange),
         AnalyticsService.getSystemMetrics(),
-        AnalyticsService.getContentMetrics(),
-      ]);
+        AnalyticsService.getContentMetrics()]);
 
       setPlatformMetrics(platform);
       setUserMetrics(users);
@@ -81,7 +76,7 @@ export default function EnterpriseDashboard({
       setContentMetrics(content);
       setTestMode(!AnalyticsService.isConfigured());
     } catch (error) {
-      console.error('Error loading dashboard data:', error);
+      console.error('Error loading dashboard, data:', error);
     } finally {
       setLoading(false);
     }
@@ -90,8 +85,7 @@ export default function EnterpriseDashboard({
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
-    }).format(amount);
+      currency: 'USD'}).format(amount);
   };
 
   const formatNumber = (num: number) => {
@@ -159,7 +153,7 @@ export default function EnterpriseDashboard({
 
       {/* Platform Overview */}
       {platformMetrics && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Users</CardTitle>
@@ -241,7 +235,7 @@ export default function EnterpriseDashboard({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Uptime</span>
@@ -294,17 +288,17 @@ export default function EnterpriseDashboard({
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="mt-6 grid grid-cols-1, md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-2">
                 <Server className="h-4 w-4 text-blue-500" />
                 <span className="text-sm">
-                  Active Connections: {systemMetrics.activeConnections}
+                  Active, Connections: {systemMetrics.activeConnections}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
                 <Database className="h-4 w-4 text-green-500" />
                 <span className="text-sm">
-                  DB Connections: {systemMetrics.databaseConnections}
+                  DB, Connections: {systemMetrics.databaseConnections}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
@@ -320,7 +314,7 @@ export default function EnterpriseDashboard({
 
       {/* Revenue Analytics */}
       {revenueMetrics && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -409,7 +403,7 @@ export default function EnterpriseDashboard({
 
       {/* User Analytics */}
       {userMetrics && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -514,7 +508,7 @@ export default function EnterpriseDashboard({
 
       {/* Content Analytics */}
       {contentMetrics && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -600,7 +594,7 @@ export default function EnterpriseDashboard({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1, md:grid-cols-3 gap-4">
               <Button variant="outline" className="justify-start">
                 <Users className="h-4 w-4 mr-2" />
                 Manage Users

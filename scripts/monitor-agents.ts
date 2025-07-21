@@ -1,4 +1,11 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
+interface MonitoringDashboard {
+  agents: any[];
+  recent_activity: any[];
+  performance_metrics;
+  error_logs: any[];
+  alerts?: any[];
+}
 
 /**
  * Agent Monitoring Script
@@ -35,14 +42,14 @@ async function main() {
       // System Overview
       console.log('🏥 System Health')
       console.log('----------------')
-      console.log(`Overall Score: ${dashboard.overview.system_health_score.toFixed(1)}%`)
+      console.log(`Overall, Score: ${dashboard.overview.system_health_score.toFixed(1)}%`)
       console.log(`Status: ${systemStatus.system_health.status.toUpperCase()}`)
       console.log()
       
       // Agent Status
       console.log('🤖 Agent Status')
       console.log('---------------')
-      console.log(`Total Agents: ${dashboard.overview.total_agents}`)
+      console.log(`Total, Agents: ${dashboard.overview.total_agents}`)
       console.log(`✅ Healthy: ${dashboard.overview.healthy_agents}`)
       console.log(`⚠️  Warning: ${dashboard.overview.warning_agents}`)
       console.log(`❌ Critical: ${dashboard.overview.critical_agents}`)
@@ -53,8 +60,8 @@ async function main() {
       console.log('📡 Communication')
       console.log('----------------')
       console.log(`Messages: ${systemStatus.communication.total_messages}`)
-      console.log(`Success Rate: ${systemStatus.communication.success_rate.toFixed(1)}%`)
-      console.log(`Active Channels: ${systemStatus.communication.active_channels}`)
+      console.log(`Success, Rate: ${systemStatus.communication.success_rate.toFixed(1)}%`)
+      console.log(`Active, Channels: ${systemStatus.communication.active_channels}`)
       console.log()
       
       // Recent Activity
@@ -84,7 +91,7 @@ async function main() {
     setInterval(monitor, 2000)
     
   } catch (error) {
-    console.error('❌ Monitoring failed:', error)
+    console.error('❌ Monitoring, failed:', error)
     process.exit(1)
   }
 }

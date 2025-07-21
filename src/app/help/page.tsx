@@ -5,8 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -15,14 +14,12 @@ import {
   Mail,
   Phone,
   Search,
-  HelpCircle,
-} from 'lucide-react';
+  HelpCircle} from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Help & Support - AI Guided SaaS Platform',
   description:
-    'Get help and support for AI Guided SaaS Platform - FAQs, guides, and contact options',
-};
+    'Get help and support for AI Guided SaaS Platform - FAQs, guides, and contact options'};
 
 const supportOptions = [
   {
@@ -30,58 +27,47 @@ const supportOptions = [
     description: 'Comprehensive guides and API reference',
     icon: Book,
     href: '/docs',
-    action: 'Browse Docs',
-  },
+    action: 'Browse Docs'},
   {
     title: 'Community Forum',
     description: 'Get help from the community',
     icon: MessageCircle,
     href: '/community',
-    action: 'Join Discussion',
-  },
+    action: 'Join Discussion'},
   {
     title: 'Email Support',
     description: 'Contact our support team directly',
     icon: Mail,
     href: 'mailto:support@aiguidedSaaS.com',
-    action: 'Send Email',
-  },
+    action: 'Send Email'},
   {
     title: 'Phone Support',
     description: 'Speak with our support team',
     icon: Phone,
     href: 'tel:+15551234567',
-    action: 'Call Now',
-  },
-];
+    action: 'Call Now'}];
 
 const faqs = [
   {
     question: 'How do I get started with the platform?',
     answer:
-      'Visit our Getting Started guide in the documentation to set up your account and create your first project.',
-  },
+      'Visit our Getting Started guide in the documentation to set up your account and create your first project.'},
   {
     question: 'What programming languages are supported?',
     answer:
-      'Our platform supports JavaScript, TypeScript, Python, and more. Check our documentation for the complete list.',
-  },
+      'Our platform supports JavaScript, TypeScript, Python, and more. Check our documentation for the complete list.'},
   {
     question: 'How can I integrate with my existing tools?',
     answer:
-      'We offer APIs and webhooks for seamless integration. Visit our API documentation for detailed instructions.',
-  },
+      'We offer APIs and webhooks for seamless integration. Visit our API documentation for detailed instructions.'},
   {
     question: 'Is there a free trial available?',
     answer:
-      'Yes! We offer a 14-day free trial with full access to all features. No credit card required.',
-  },
+      'Yes! We offer a 14-day free trial with full access to all features. No credit card required.'},
   {
     question: 'How do I upgrade my plan?',
     answer:
-      'You can upgrade your plan anytime from your account settings or contact our sales team for enterprise options.',
-  },
-];
+      'You can upgrade your plan anytime from your account settings or contact our sales team for enterprise options.'}];
 
 export default function HelpPage() {
   return (
@@ -106,13 +92,13 @@ export default function HelpPage() {
         </div>
 
         {/* Support Options */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6 mb-16">
           {supportOptions.map(option => {
             const Icon = option.icon;
             return (
               <Card
                 key={option.title}
-                className="text-center hover:shadow-lg transition-shadow"
+                className="text-center, hover:shadow-lg transition-shadow"
               >
                 <CardHeader>
                   <Icon className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -158,7 +144,7 @@ export default function HelpPage() {
             Our support team is available 24/7 to assist you with any questions
             or issues.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col, sm:flex-row gap-4 justify-center">
             <Button asChild>
               <Link href="/contact">Contact Support</Link>
             </Button>

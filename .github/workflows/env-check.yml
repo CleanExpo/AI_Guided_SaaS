@@ -1,0 +1,87 @@
+name: Environment Variable Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  env-check:
+    name: Validate Environment Variables
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Check environment configuration
+        run: |
+          echo "🔍 Checking environment variable configuration..."
+          npx ts-node scripts/env-cli.ts check
+      
+      - name: Validate required variables
+        run: |
+          echo "✅ Validating required environment variables..."
+          npx ts-node scripts/env-cli.ts validate --env ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+      
+      - name: Pre-deployment check
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "🚀 Running pre-deployment environment check..."
+          npx ts-node scripts/env-cli.ts pre-deploy
+      
+      - name: Export environment status
+        if: always()
+        run: |
+          npx ts-node scripts/env-cli.ts export -o env-status.json
+          echo "📊 Environment Status:"
+          cat env-status.json
+      
+      - name: Upload environment report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: env-status-report
+          path: env-status.json
+          retention-days: 7
+      
+      - name: Comment PR with status
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const status = JSON.parse(fs.readFileSync('env-status.json', 'utf8'));
+            
+            let comment = '## 🔧 Environment Variable Status\n\n';
+            
+            if (status.isValid) {
+              comment += '✅ **All environment variables are properly configured!**\n\n';
+            } else {
+              comment += '❌ **Environment configuration has issues**\n\n';
+            }
+            
+            comment += `### Summary\n`;
+            comment += `- Total Variables: ${status.summary.total}\n`;
+            comment += `- ✅ Valid: ${status.summary.valid}\n`;
+            comment += `- ❌ Missing: ${status.summary.missing}\n`;
+            comment += `- ⚠️ Invalid: ${status.summary.invalid}\n`;
+            comment += `- ⚠️ Warnings: ${status.summary.warnings}\n`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

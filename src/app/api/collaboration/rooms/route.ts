@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Collaboration room creation error:', error)
+    console.error('Collaboration room creation, error:', error)
     return NextResponse.json(
       { error: 'Failed to create collaboration room' },
       { status: 500 }
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Get room participants error:', error)
+    console.error('Get room participants, error:', error)
     return NextResponse.json(
       { error: 'Failed to get room participants' },
       { status: 500 }

@@ -22,8 +22,7 @@ interface ThemeProviderProps {
 export function ThemeProvider({
   children,
   defaultTheme = 'system',
-  storageKey = 'ai-guided-saas-theme',
-}: ThemeProviderProps) {
+  storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
@@ -93,8 +92,7 @@ export function ThemeProvider({
     theme,
     setTheme,
     resolvedTheme,
-    toggleTheme,
-  };
+    toggleTheme};
 
   return (
     <ThemeContext.Provider value={value}>
@@ -118,7 +116,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors, hover:bg-gray-50, focus:outline-none, focus:ring-2, focus:ring-blue-500, focus:ring-offset-2, dark:border-gray-700, dark:bg-gray-800, dark:text-gray-100, dark:hover:bg-gray-700"
       aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}
     >
       {/* Sun icon for light mode */}
@@ -171,14 +169,13 @@ export function ThemeSelector() {
   const themes = [
     { value: 'light', label: 'Light', icon: '☀️' },
     { value: 'dark', label: 'Dark', icon: '🌙' },
-    { value: 'system', label: 'System', icon: '💻' },
-  ] as const;
+    { value: 'system', label: 'System', icon: '💻' }] as const;
 
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover:bg-gray-50, focus:outline-none, focus:ring-2, focus:ring-blue-500, focus:ring-offset-2, dark:border-gray-700, dark:bg-gray-800, dark:text-gray-100, dark:hover:bg-gray-700"
       >
         <span>{themes.find(t => t.value === theme)?.icon}</span>
         <span>{themes.find(t => t.value === theme)?.label}</span>
@@ -193,7 +190,7 @@ export function ThemeSelector() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-lg border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+        <div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-lg border border-gray-200 bg-white py-1 shadow-lg, dark:border-gray-700, dark:bg-gray-800">
           {themes.map((themeOption) => (
             <button
               key={themeOption.value}
@@ -201,10 +198,10 @@ export function ThemeSelector() {
                 setTheme(themeOption.value);
                 setIsOpen(false);
               }}
-              className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 ${
+              className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors, hover:bg-gray-100, dark:hover:bg-gray-700 ${
                 theme === themeOption.value
-                  ? 'bg-blue-50 text-blue-900 dark:bg-blue-900 dark:text-blue-100'
-                  : 'text-gray-900 dark:text-gray-100'
+                  ? 'bg-blue-50 text-blue-900, dark:bg-blue-900, dark:text-blue-100'
+                  : 'text-gray-900, dark:text-gray-100'
               }`}
             >
               <span>{themeOption.icon}</span>
@@ -274,8 +271,7 @@ export const themeColors = {
     destructiveForeground: '#ffffff',
     border: '#e2e8f0',
     input: '#e2e8f0',
-    ring: '#3b82f6',
-  },
+    ring: '#3b82f6'},
   dark: {
     background: '#0f172a',
     foreground: '#f8fafc',
@@ -295,8 +291,6 @@ export const themeColors = {
     destructiveForeground: '#ffffff',
     border: '#334155',
     input: '#334155',
-    ring: '#3b82f6',
-  },
-};
+    ring: '#3b82f6'}};
 
 export type { Theme, ThemeContextType };

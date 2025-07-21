@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Templates API error:', error)
+    console.error('Templates API, error:', error)
     return NextResponse.json(
       { error: 'Failed to fetch templates' },
       { status: 500 }
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result)
 
   } catch (error) {
-    console.error('Template submission error:', error)
+    console.error('Template submission, error:', error)
     return NextResponse.json(
       { error: 'Failed to submit template' },
       { status: 500 }

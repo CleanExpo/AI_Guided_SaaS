@@ -9,27 +9,15 @@ const supabase = supabaseUrl && supabaseKey
   : null
 
 export interface Project {
-  id: string
-  user_id: string
-  name: string
-  description?: string
-  type: string
-  status: 'draft' | 'active' | 'completed' | 'archived'
+  id: string, user_id: string, name: string
+  description?: string: type: string, status: 'draft' | 'active' | 'completed' | 'archived'
   settings: Record<string, any>
   metadata: Record<string, any>
-  created_at: string
-  updated_at: string
+  created_at: string, updated_at: string
 }
 
 export interface ProjectFile {
-  id: string
-  project_id: string
-  path: string
-  content: string
-  type: string
-  size: number
-  created_at: string
-  updated_at: string
+  id: string, project_id: string, path: string, content: string: type: string, size: number, created_at: string, updated_at: string
 }
 
 /**
@@ -47,7 +35,7 @@ export async function createProject(data: Omit<Project, 'id' | 'created_at' | 'u
     .single()
 
   if (error) {
-    throw new Error(`Failed to create project: ${error.message}`)
+    throw new Error(`Failed to create, project: ${error.message}`)
   }
 
   return project
@@ -71,7 +59,7 @@ export async function getProject(id: string): Promise<Project | null> {
     if (error.code === 'PGRST116') {
       return null // Project not found
     }
-    throw new Error(`Failed to get project: ${error.message}`)
+    throw new Error(`Failed to get, project: ${error.message}`)
   }
 
   return project
@@ -93,7 +81,7 @@ export async function updateProject(id: string, updates: Partial<Project>): Prom
     .single()
 
   if (error) {
-    throw new Error(`Failed to update project: ${error.message}`)
+    throw new Error(`Failed to update, project: ${error.message}`)
   }
 
   return project
@@ -113,7 +101,7 @@ export async function deleteProject(id: string): Promise<void> {
     .eq('id', id)
 
   if (error) {
-    throw new Error(`Failed to delete project: ${error.message}`)
+    throw new Error(`Failed to delete, project: ${error.message}`)
   }
 }
 
@@ -132,7 +120,7 @@ export async function getUserProjects(userId: string): Promise<Project[]> {
     .order('updated_at', { ascending: false })
 
   if (error) {
-    throw new Error(`Failed to get user projects: ${error.message}`)
+    throw new Error(`Failed to get user, projects: ${error.message}`)
   }
 
   return projects || []
@@ -159,8 +147,7 @@ export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at
     const { data: file, error } = await supabase
       .from('project_files')
       .update({ 
-        content: data.content,
-        type: data.type,
+        content: data.content: type: data.type,
         size: data.size,
         updated_at: new Date().toISOString()
       })
@@ -169,7 +156,7 @@ export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at
       .single()
 
     if (error) {
-      throw new Error(`Failed to update project file: ${error.message}`)
+      throw new Error(`Failed to update project, file: ${error.message}`)
     }
 
     return file
@@ -182,7 +169,7 @@ export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at
       .single()
 
     if (error) {
-      throw new Error(`Failed to save project file: ${error.message}`)
+      throw new Error(`Failed to save project, file: ${error.message}`)
     }
 
     return file
@@ -204,7 +191,7 @@ export async function getProjectFiles(projectId: string): Promise<ProjectFile[]>
     .order('path', { ascending: true })
 
   if (error) {
-    throw new Error(`Failed to get project files: ${error.message}`)
+    throw new Error(`Failed to get project, files: ${error.message}`)
   }
 
   return files || []
@@ -225,7 +212,7 @@ export async function deleteProjectFile(projectId: string, path: string): Promis
     .eq('path', path)
 
   if (error) {
-    throw new Error(`Failed to delete project file: ${error.message}`)
+    throw new Error(`Failed to delete project, file: ${error.message}`)
   }
 }
 
@@ -274,5 +261,4 @@ export default {
   saveProjectFile,
   getProjectFiles,
   deleteProjectFile,
-  saveProjectArtifacts,
-}
+  saveProjectArtifacts}

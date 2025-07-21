@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import { ButtonEnhanced } from './button-enhanced';
 
 interface EmptyStateProps {
@@ -189,8 +189,7 @@ const illustrations = {
         opacity="0.4"
       />
     </svg>
-  ),
-};
+  )};
 
 export function EmptyState({
   title,
@@ -200,31 +199,26 @@ export function EmptyState({
   action,
   secondaryAction,
   className,
-  size = 'md',
-}: EmptyStateProps) {
+  size = 'md'}: EmptyStateProps) {
   const sizeClasses = {
     sm: {
       container: 'py-8 px-4',
       illustration: 'w-24 h-24 mb-4',
       title: 'text-lg font-semibold',
       description: 'text-sm',
-      spacing: 'space-y-3',
-    },
+      spacing: 'space-y-3'},
     md: {
       container: 'py-12 px-6',
       illustration: 'w-32 h-32 mb-6',
       title: 'text-xl font-semibold',
       description: 'text-base',
-      spacing: 'space-y-4',
-    },
+      spacing: 'space-y-4'},
     lg: {
       container: 'py-16 px-8',
       illustration: 'w-40 h-40 mb-8',
       title: 'text-2xl font-semibold',
       description: 'text-lg',
-      spacing: 'space-y-6',
-    },
-  };
+      spacing: 'space-y-6'}};
 
   const currentSize = sizeClasses[size];
 
@@ -259,7 +253,7 @@ export function EmptyState({
 
       {/* Actions */}
       {(action || secondaryAction) && (
-        <div className="flex flex-col sm:flex-row gap-3 mt-2">
+        <div className="flex flex-col, sm:flex-row gap-3 mt-2">
           {action && (
             <ButtonEnhanced
               onClick={action.onClick}
@@ -290,8 +284,7 @@ export function NoDataFound({
   description = "There's no data to display at the moment.",
   onRefresh,
   onCreate,
-  className,
-}: {
+  className}: {
   title?: string;
   description?: string;
   onRefresh?: () => void;
@@ -308,16 +301,14 @@ export function NoDataFound({
           ? {
               label: 'Create New',
               onClick: onCreate,
-              variant: 'brand',
-            }
+              variant: 'brand'}
           : undefined
       }
       secondaryAction={
         onRefresh
           ? {
               label: 'Refresh',
-              onClick: onRefresh,
-            }
+              onClick: onRefresh}
           : undefined
       }
       className={className}
@@ -329,8 +320,7 @@ export function SearchNotFound({
   query,
   onClear,
   onTryAgain,
-  className,
-}: {
+  className}: {
   query?: string;
   onClear?: () => void;
   onTryAgain?: () => void;
@@ -350,16 +340,14 @@ export function SearchNotFound({
           ? {
               label: 'Clear Search',
               onClick: onClear,
-              variant: 'outline',
-            }
+              variant: 'outline'}
           : undefined
       }
       secondaryAction={
         onTryAgain
           ? {
               label: 'Try Again',
-              onClick: onTryAgain,
-            }
+              onClick: onTryAgain}
           : undefined
       }
       className={className}
@@ -372,8 +360,7 @@ export function ErrorState({
   description = 'We encountered an error while loading this content.',
   onRetry,
   onGoBack,
-  className,
-}: {
+  className}: {
   title?: string;
   description?: string;
   onRetry?: () => void;
@@ -390,16 +377,14 @@ export function ErrorState({
           ? {
               label: 'Try Again',
               onClick: onRetry,
-              variant: 'brand',
-            }
+              variant: 'brand'}
           : undefined
       }
       secondaryAction={
         onGoBack
           ? {
               label: 'Go Back',
-              onClick: onGoBack,
-            }
+              onClick: onGoBack}
           : undefined
       }
       className={className}
@@ -412,8 +397,7 @@ export function MaintenanceMode({
   description = "We're currently performing maintenance. Please check back soon.",
   estimatedTime,
   onNotifyMe,
-  className,
-}: {
+  className}: {
   title?: string;
   description?: string;
   estimatedTime?: string;
@@ -425,7 +409,7 @@ export function MaintenanceMode({
       title={title}
       description={
         estimatedTime
-          ? `${description} Estimated completion: ${estimatedTime}`
+          ? `${description} Estimated, completion: ${estimatedTime}`
           : description
       }
       illustration="maintenance"
@@ -434,8 +418,7 @@ export function MaintenanceMode({
           ? {
               label: 'Notify Me',
               onClick: onNotifyMe,
-              variant: 'brand',
-            }
+              variant: 'brand'}
           : undefined
       }
       className={className}
@@ -448,8 +431,7 @@ export function ComingSoon({
   description = 'This feature is currently under development.',
   onNotifyMe,
   onLearnMore,
-  className,
-}: {
+  className}: {
   title?: string;
   description?: string;
   onNotifyMe?: () => void;
@@ -466,16 +448,14 @@ export function ComingSoon({
           ? {
               label: 'Notify Me',
               onClick: onNotifyMe,
-              variant: 'brand',
-            }
+              variant: 'brand'}
           : undefined
       }
       secondaryAction={
         onLearnMore
           ? {
               label: 'Learn More',
-              onClick: onLearnMore,
-            }
+              onClick: onLearnMore}
           : undefined
       }
       className={className}
@@ -487,8 +467,7 @@ export function ComingSoon({
 export function LoadingState({
   title = 'Loading...',
   description = 'Please wait while we fetch your data.',
-  className,
-}: {
+  className}: {
   title?: string;
   description?: string;
   className?: string;
@@ -528,7 +507,7 @@ export function EmptyStateCard({ children, className }: EmptyStateCardProps) {
   return (
     <div
       className={cn(
-        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50 dark:bg-brand-secondary-900/50 p-8',
+        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8',
         className
       )}
     >
@@ -542,8 +521,7 @@ export function GridEmptyState({
   title = 'No items yet',
   description = 'Get started by creating your first item.',
   onCreate,
-  className,
-}: {
+  className}: {
   title?: string;
   description?: string;
   onCreate?: () => void;
@@ -561,8 +539,7 @@ export function GridEmptyState({
             ? {
                 label: 'Create First Item',
                 onClick: onCreate,
-                variant: 'brand',
-              }
+                variant: 'brand'}
             : undefined
         }
       />

@@ -40,7 +40,7 @@ export async function GET(
         data: user
       })
     } catch (dbError) {
-      console.error('Database error:', dbError)
+      console.error('Database, error:', dbError)
       
       // Return error if user not found
       if (dbError instanceof Error && dbError.message === 'User not found') {
@@ -57,7 +57,7 @@ export async function GET(
     }
 
   } catch (error) {
-    console.error('Admin get user error:', error)
+    console.error('Admin get user, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -95,7 +95,7 @@ export async function PUT(
     })
 
   } catch (error) {
-    console.error('Admin update user error:', error)
+    console.error('Admin update user, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -126,7 +126,7 @@ export async function DELETE(
     })
 
   } catch (error) {
-    console.error('Admin delete user error:', error)
+    console.error('Admin delete user, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -141,7 +141,5 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  })
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'}})
 }

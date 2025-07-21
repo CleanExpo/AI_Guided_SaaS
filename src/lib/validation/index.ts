@@ -41,5 +41,18 @@ export * from './decorators'
 // Agent-specific schemas
 export * from './agent-schemas'
 
+// Schema exports
+export * from './schemas'
+
 // Re-export Zod for convenience
 export { z }
+
+// Utility functions
+export function validateSafe<T>(schema: z.ZodType<T>, data: unknown): { success: true, data: T } | { success: false, error: z.ZodError } {
+  const result = schema.safeParse(data)
+  if (result.success) {
+    return { success: true, data: result.data }
+  } else {
+    return { success: false, error: result.error }
+  }
+}

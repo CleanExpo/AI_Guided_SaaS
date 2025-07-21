@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # Elasticsearch for log storage
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: ai-saas-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - logging-network
+    ports:
+      - "9200:9200"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+
+  # Kibana for log visualization
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: ai-saas-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - logging-network
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # Fluent Bit for log collection and forwarding
+  fluent-bit:
+    image: fluent/fluent-bit:2.2
+    container_name: ai-saas-fluent-bit
+    volumes:
+      - ./docker/logging/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro
+      - ./docker/logging/parsers.conf:/fluent-bit/etc/parsers.conf:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - logging-network
+      - agent-network
+    depends_on:
+      - elasticsearch
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
+  # Log rotation service
+  logrotate:
+    image: blacklabelops/logrotate:latest
+    container_name: ai-saas-logrotate
+    environment:
+      - LOGS_DIRECTORIES=/logs
+      - LOGROTATE_INTERVAL=daily
+      - LOGROTATE_COPIES=7
+      - LOGROTATE_SIZE=100M
+      - LOGROTATE_CRONSCHEDULE=0 * * * * *
+    volumes:
+      - ./logs:/logs
+    networks:
+      - logging-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 128M
+
+networks:
+  logging-network:
+    driver: bridge
+  agent-network:
+    external: true
+
+volumes:
+  elasticsearch-data:

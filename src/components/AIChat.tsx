@@ -7,8 +7,7 @@ import { Persona, ProjectConfig, ChatMessage } from '@/types'
 import { Send, Bot, User } from 'lucide-react'
 
 interface AIChatProps {
-  persona: Persona
-  onProjectConfigReady: (config: ProjectConfig) => void
+  persona: Persona, onProjectConfigReady: (config: ProjectConfig) => void
 }
 
 const chatQuestions = [
@@ -30,8 +29,7 @@ const chatQuestions = [
   {
     id: 'features',
     question: "What key features would you like to include?",
-    type: 'features' as const,
-    options: [
+    type: 'features' as const options: [
       'User Authentication',
       'Payment Processing',
       'Real-time Chat',
@@ -52,8 +50,7 @@ const chatQuestions = [
   {
     id: 'timeline',
     question: "What's your target timeline for this project?",
-    type: 'select' as const,
-    options: ['1-2 weeks', '1 month', '2-3 months', '6+ months']
+    type: 'select' as const options: ['1-2 weeks', '1 month', '2-3 months', '6+ months']
   }
 ]
 
@@ -196,7 +193,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
     
     if (currentQuestion?.type === 'features') {
       const response = selectedFeatures.length > 0 
-        ? `Selected features: ${selectedFeatures.join(', ')}`
+        ? `Selected, features: ${selectedFeatures.join(', ')}`
         : userInput
       handleUserResponse(response)
     } else {
@@ -277,8 +274,8 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
             <div className="border-t p-6">
               {currentQuestion?.type === 'features' && (
                 <div className="mb-4">
-                  <p className="text-sm text-gray-600 mb-3">Select the features you would like to include:</p>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                  <p className="text-sm text-gray-600 mb-3">Select the features you would like to, include:</p>
+                  <div className="grid grid-cols-2, md:grid-cols-3 gap-2">
                     {currentQuestion.options?.map((feature) => (
                       <Button
                         key={feature}
@@ -323,7 +320,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
                         ? "Or describe custom features"
                         : "Type your response"
                     }
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md, focus:outline-none, focus:ring-2, focus:ring-blue-500"
                   />
                   <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0}>
                     <Send className="w-4 h-4" />

@@ -19,17 +19,15 @@ interface PooledConnection {
 }
 
 class DatabaseConnectionPool {
-  private pool: PooledConnection[] = [];
-  private config: ConnectionPoolConfig;
-  private supabaseUrl: string;
-  private supabaseKey: string;
+  private, pool: PooledConnection[] = [];
+  private, config: ConnectionPoolConfig;
+  private, supabaseUrl: string;
+  private, supabaseKey: string;
 
   constructor(config: Partial<ConnectionPoolConfig> = {}) {
     this.config = {
       maxConnections: config.maxConnections || 10,
-      idleTimeout: config.idleTimeout || 30000, // 30 seconds
-      connectionTimeout: config.connectionTimeout || 5000, // 5 seconds
-      retryAttempts: config.retryAttempts || 3,
+      idleTimeout: config.idleTimeout || 30000, // 30 seconds, connectionTimeout: config.connectionTimeout || 5000, // 5 seconds, retryAttempts: config.retryAttempts || 3,
       retryDelay: config.retryDelay || 1000, // 1 second
     };
 
@@ -58,24 +56,18 @@ class DatabaseConnectionPool {
     
     const client = createClient(this.supabaseUrl, this.supabaseKey, {
       auth: {
-        persistSession: false,
-      },
+        persistSession: false},
       db: {
-        schema: 'public',
-      },
+        schema: 'public'},
       global: {
         headers: {
-          'x-connection-id': connectionId,
-        },
-      },
-    });
+          'x-connection-id': connectionId}}});
 
     const connection: PooledConnection = {
       client,
       isActive: false,
       lastUsed: Date.now(),
-      connectionId,
-    };
+      connectionId};
 
     this.pool.push(connection);
     return connection;
@@ -96,7 +88,7 @@ class DatabaseConnectionPool {
       const shouldRemove = isIdle && !connection.isActive && this.pool.length > minConnections;
       
       if (shouldRemove) {
-        console.log(`Removing idle connection: ${connection.connectionId}`);
+        console.log(`Removing idle, connection: ${connection.connectionId}`);
       }
       
       return !shouldRemove;
@@ -127,7 +119,7 @@ class DatabaseConnectionPool {
   private async waitForAvailableConnection(): Promise<PooledConnection> {
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
-        reject(new Error('Connection timeout: No available connections'));
+        reject(new Error('Connection, timeout: No available connections'));
       }, this.config.connectionTimeout);
 
       const checkForConnection = () => {
@@ -182,8 +174,7 @@ class DatabaseConnectionPool {
       activeConnections: this.pool.filter(conn => conn.isActive).length,
       idleConnections: this.pool.filter(conn => !conn.isActive).length,
       maxConnections: this.config.maxConnections,
-      poolUtilization: (this.pool.filter(conn => conn.isActive).length / this.config.maxConnections) * 100,
-    };
+      poolUtilization: (this.pool.filter(conn => conn.isActive).length / this.config.maxConnections) * 100};
   }
 
   async healthCheck(): Promise<boolean> {
@@ -197,7 +188,7 @@ class DatabaseConnectionPool {
       this.releaseConnection(connection);
       return !error;
     } catch (error) {
-      console.error('Database health check failed:', error);
+      console.error('Database health check, failed:', error);
       return false;
     }
   }

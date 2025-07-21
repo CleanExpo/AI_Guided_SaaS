@@ -11,26 +11,20 @@ export const componentList: ComponentType[] = [
   {
     id: 'button',
     name: 'Button',
-    description: 'Interactive button element',
-  },
+    description: 'Interactive button element'},
   {
     id: 'card',
     name: 'Card',
-    description: 'Content container with title and body',
-  },
+    description: 'Content container with title and body'},
   {
     id: 'input',
     name: 'Input',
-    description: 'Text input field',
-  },
+    description: 'Text input field'},
   {
     id: 'hero',
     name: 'Hero Section',
-    description: 'Large banner with heading and subheading',
-  },
+    description: 'Large banner with heading and subheading'},
   {
     id: 'two-col',
     name: 'Two Column Layout',
-    description: 'Side-by-side content container',
-  },
-];
+    description: 'Side-by-side content container'}];

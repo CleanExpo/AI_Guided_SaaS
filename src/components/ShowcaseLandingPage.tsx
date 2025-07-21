@@ -8,8 +8,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -26,8 +25,7 @@ import {
   Pause,
   RefreshCw,
   TrendingUp,
-  Wrench,
-} from 'lucide-react';
+  Wrench} from 'lucide-react';
 import Link from 'next/link';
 
 const personas = [
@@ -37,33 +35,28 @@ const personas = [
     description: 'Expert in AI-powered development workflows',
     avatar: '🤖',
     color: 'from-blue-500 to-cyan-500',
-    icon: Bot,
-  },
+    icon: Bot},
   {
     id: 'fullstack-wizard',
     name: 'Fullstack Wizard',
     description: 'Master of frontend and backend development',
     avatar: '🧙‍♂️',
     color: 'from-brand-primary-500 to-pink-500',
-    icon: Code,
-  },
+    icon: Code},
   {
     id: 'ui-designer',
     name: 'UI Designer',
     description: 'Creating beautiful, user-friendly interfaces',
     avatar: '🎨',
     color: 'from-pink-500 to-rose-500',
-    icon: Palette,
-  },
+    icon: Palette},
   {
     id: 'startup-founder',
     name: 'Startup Founder',
     description: 'MVP development and rapid iteration',
     avatar: '🚀',
     color: 'from-orange-500 to-red-500',
-    icon: Rocket,
-  },
-];
+    icon: Rocket}];
 
 const liveFeatures = [
   {
@@ -71,37 +64,31 @@ const liveFeatures = [
     description: 'Advanced AI-powered development with token optimization',
     icon: Brain,
     demo: 'claude-dashboard',
-    color: 'bg-blue-500',
-  },
+    color: 'bg-blue-500'},
   {
     title: 'Visual UI Builder',
     description: 'Drag-and-drop interface builder with real-time preview',
     icon: Wrench,
     demo: 'ui-builder',
-    color: 'bg-brand-primary-500',
-  },
+    color: 'bg-brand-primary-500'},
   {
     title: 'Analytics Dashboard',
     description: 'Real-time performance monitoring and insights',
     icon: BarChart3,
     demo: 'analytics',
-    color: 'bg-green-500',
-  },
+    color: 'bg-green-500'},
   {
     title: 'Collaboration Workspace',
     description: 'Team collaboration with real-time synchronization',
     icon: Users,
     demo: 'collaboration',
-    color: 'bg-orange-500',
-  },
-];
+    color: 'bg-orange-500'}];
 
 const claudeCommands = [
   { command: '/init-docs', status: 'completed', tokens: '+8K' },
   { command: '/sync-docs', status: 'executing', tokens: '+2K' },
   { command: '/compact-docs', status: 'pending', tokens: '-15K' },
-  { command: '/docs:status', status: 'pending', tokens: '+500' },
-];
+  { command: '/docs:status', status: 'pending', tokens: '+500' }];
 
 export default function ShowcaseLandingPage() {
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
@@ -127,7 +114,7 @@ export default function ShowcaseLandingPage() {
   }, [isPlaying]);
 
   const renderPersonaShowcase = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const Icon = persona.icon;
         return (
@@ -206,7 +193,7 @@ export default function ShowcaseLandingPage() {
               size="sm"
               variant="ghost"
               onClick={() => setIsPlaying(!isPlaying)}
-              className="text-white hover:bg-white/10"
+              className="text-white, hover:bg-white/10"
             >
               {isPlaying ? (
                 <Pause className="w-4 h-4" />
@@ -218,7 +205,7 @@ export default function ShowcaseLandingPage() {
               size="sm"
               variant="ghost"
               onClick={() => setMemoryUsage(42)}
-              className="text-white hover:bg-white/10"
+              className="text-white, hover:bg-white/10"
             >
               <RefreshCw className="w-4 h-4" />
             </Button>
@@ -258,8 +245,7 @@ export default function ShowcaseLandingPage() {
               }`}
               animate={{
                 scale: index === commandIndex ? 1.02 : 1,
-                opacity: index === commandIndex ? 1 : 0.7,
-              }}
+                opacity: index === commandIndex ? 1 : 0.7}}
             >
               <div className="flex items-center gap-2">
                 <div
@@ -302,7 +288,7 @@ export default function ShowcaseLandingPage() {
             component => (
               <motion.div
                 key={component}
-                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer hover:bg-white/20 transition-colors"
+                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer, hover:bg-white/20 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -379,15 +365,12 @@ export default function ShowcaseLandingPage() {
             {
               name: 'Alex Chen',
               status: 'online',
-              action: 'Editing Dashboard.tsx',
-            },
+              action: 'Editing Dashboard.tsx'},
             { name: 'Sarah Kim', status: 'online', action: 'Reviewing PR #42' },
             {
               name: 'Mike Johnson',
               status: 'away',
-              action: 'Last seen 5m ago',
-            },
-          ].map(user => (
+              action: 'Last seen 5m ago'}].map(user => (
             <div key={user.name} className="flex items-center gap-3">
               <div
                 className={`w-3 h-3 rounded-full ${
@@ -440,7 +423,7 @@ export default function ShowcaseLandingPage() {
               AI-Powered SaaS Platform
             </Badge>
 
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-5xl, md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
               AI-Guided SaaS Builder
             </h1>
 
@@ -483,7 +466,7 @@ export default function ShowcaseLandingPage() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid, lg:grid-cols-3 gap-8">
             {/* Feature Tabs */}
             <div className="lg:col-span-1">
               <div className="space-y-3">
@@ -495,7 +478,7 @@ export default function ShowcaseLandingPage() {
                       className={`w-full p-4 rounded-lg text-left transition-all ${
                         activeDemo === feature.demo
                           ? 'bg-white/20 border border-white/30'
-                          : 'bg-white/5 hover:bg-white/10'
+                          : 'bg-white/5, hover:bg-white/10'
                       }`}
                       onClick={() => setActiveDemo(feature.demo)}
                       whileHover={{ scale: 1.02 }}
@@ -553,10 +536,10 @@ export default function ShowcaseLandingPage() {
               Join the next generation of AI-powered development
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col, sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-brand-primary-500 hover:from-blue-600 hover:to-brand-primary-600"
+                className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600, hover:to-brand-primary-600"
                 asChild
               >
                 <Link href="/auth/signin">
@@ -567,7 +550,7 @@ export default function ShowcaseLandingPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/20 text-white hover:bg-white/10"
+                className="border-white/20 text-white, hover:bg-white/10"
                 asChild
               >
                 <Link href="/ui-builder">

@@ -13,14 +13,14 @@ type ScoreMap = {
 };
 
 export class CausalScorer {
-  private logs: CausalLogEntry[];
+  private, logs: CausalLogEntry[];
 
   constructor(logs: CausalLogEntry[]) {
     this.logs = logs;
   }
 
   /**
-   * Generate score map: for each (page + componentType), track outcomes
+   * Generate score, map: for each (page + componentType), track outcomes
    */
   getComponentScoreMap(): ScoreMap {
     const map: ScoreMap = {};
@@ -43,14 +43,14 @@ export class CausalScorer {
    * 0 = consistently deleted; 1 = always kept/edited
    * Uses Inverse Propensity Weighting (IPW) principles
    */
-  scoreComponent(page: string, componentType: string): number {
+  scoreComponent(page: string: componentType: string): number {
     const map = this.getComponentScoreMap();
     const key = `${page}:${componentType}`;
     const stats = map[key];
 
     if (!stats || stats.total === 0) return 0.5; // unknown gets neutral
 
-    // IPW-inspired scoring: weight positive actions higher
+    // IPW-inspired, scoring: weight positive actions higher
     const retainScore = (stats.kept + 0.75 * stats.edited) / stats.total;
     const deleteScore = stats.deleted / stats.total;
     
@@ -63,7 +63,7 @@ export class CausalScorer {
   /**
    * Get confidence level based on sample size
    */
-  getConfidence(page: string, componentType: string): 'low' | 'medium' | 'high' {
+  getConfidence(page: string: componentType: string): 'low' | 'medium' | 'high' {
     const map = this.getComponentScoreMap();
     const key = `${page}:${componentType}`;
     const stats = map[key];

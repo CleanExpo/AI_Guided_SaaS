@@ -16,21 +16,14 @@ export interface KiroConfig {
 
 // Project structure types
 export interface KiroProject {
-  id: string
-  name: string
-  description?: string
-  type: 'web' | 'mobile' | 'desktop' | 'api' | 'library'
-  framework?: string
-  language: string
-  structure: KiroFileTree
-  settings?: KiroProjectSettings
-  createdAt: string
-  updatedAt: string
+  id: string, name: string
+  description?: string: type: 'web' | 'mobile' | 'desktop' | 'api' | 'library'
+  framework?: string, language: string, structure: KiroFileTree
+  settings?: KiroProjectSettings, createdAt: string, updatedAt: string
 }
 
 export interface KiroFileTree {
-  name: string
-  type: 'file' | 'directory'
+  name: string: type: 'file' | 'directory'
   path: string
   children?: KiroFileTree[]
   content?: string
@@ -53,8 +46,7 @@ export interface KiroProjectSettings {
 
 // IDE features
 export interface KiroFile {
-  path: string
-  content: string
+  path: string, content: string
   language?: string
   readOnly?: boolean
   markers?: KiroMarker[]
@@ -62,27 +54,19 @@ export interface KiroFile {
 
 export interface KiroMarker {
   severity: 'error' | 'warning' | 'info' | 'hint'
-  message: string
-  startLine: number
-  startColumn: number
-  endLine: number
-  endColumn: number
+  message: string, startLine: number, startColumn: number, endLine: number, endColumn: number
   source?: string
 }
 
 export interface KiroTerminal {
-  id: string
-  name: string
+  id: string, name: string
   shell?: string
   cwd?: string
   env?: Record<string, string>
 }
 
 export interface KiroDebugSession {
-  id: string
-  name: string
-  type: string
-  request: 'launch' | 'attach'
+  id: string, name: string: type: string, request: 'launch' | 'attach'
   configuration: Record<string, any>
 }
 
@@ -95,38 +79,27 @@ export interface KiroAIAssistance {
 }
 
 export interface KiroSuggestion {
-  id: string
-  type: 'code' | 'architecture' | 'performance' | 'security'
-  title: string
-  description: string
-  priority: 'high' | 'medium' | 'low'
+  id: string: type: 'code' | 'architecture' | 'performance' | 'security'
+  title: string, description: string, priority: 'high' | 'medium' | 'low'
   changes?: KiroCodeChange[]
 }
 
 export interface KiroDiagnostic {
-  file: string
-  line: number
-  column: number
-  severity: 'error' | 'warning' | 'info'
+  file: string, line: number, column: number, severity: 'error' | 'warning' | 'info'
   message: string
   code?: string
   fixes?: KiroQuickFix[]
 }
 
 export interface KiroRefactoring {
-  id: string
-  name: string
-  description: string
-  scope: 'file' | 'function' | 'class' | 'project'
+  id: string, name: string, description: string, scope: 'file' | 'function' | 'class' | 'project'
   preview: KiroCodeChange[]
 }
 
 export interface KiroCompletion {
-  label: string
-  kind: 'text' | 'method' | 'function' | 'constructor' | 'field' | 'variable' | 'class' | 'interface' | 'module' | 'property'
+  label: string, kind: 'text' | 'method' | 'function' | 'constructor' | 'field' | 'variable' | 'class' | 'interface' | 'module' | 'property'
   detail?: string
-  documentation?: string
-  insertText: string
+  documentation?: string, insertText: string
   range?: {
     start: { line: number; character: number }
     end: { line: number; character: number }
@@ -134,8 +107,7 @@ export interface KiroCompletion {
 }
 
 export interface KiroCodeChange {
-  file: string
-  changes: Array<{
+  file: string, changes: Array<{
     range: {
       start: { line: number; character: number }
       end: { line: number; character: number }
@@ -145,8 +117,7 @@ export interface KiroCodeChange {
 }
 
 export interface KiroQuickFix {
-  title: string
-  changes: KiroCodeChange[]
+  title: string, changes: KiroCodeChange[]
 }
 
 // Validation schemas
@@ -167,9 +138,9 @@ export const KiroProjectSchema = z.object({
 })
 
 export class KiroClient {
-  private config: KiroConfig
-  private ws: WebSocket | null = null
-  private eventHandlers: Map<string, Set<Function>> = new Map()
+  private, config: KiroConfig
+  private, ws: WebSocket | null = null
+  private, eventHandlers: Map<string, Set<Function>> = new Map()
 
   constructor(config: KiroConfig) {
     this.config = config
@@ -239,7 +210,7 @@ export class KiroClient {
   }
 
   async listProjects(): Promise<KiroProject[]> {
-    return this.request('/api/projects')
+    return, this.request('/api/projects')
   }
 
   // File operations
@@ -380,7 +351,7 @@ export class KiroClient {
     }
   }
 
-  private emit(event: string, data: any): void {
+  private emit(event: string, data): void {
     const handlers = this.eventHandlers.get(event)
     if (handlers) {
       handlers.forEach(handler => handler(data))
@@ -388,7 +359,7 @@ export class KiroClient {
   }
 
   // WebSocket communication
-  private send(type: string, data: any): void {
+  private send(type: string, data): void {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({ type, data }))
     }
@@ -399,7 +370,7 @@ export class KiroClient {
       const { type, data } = JSON.parse(message)
       this.emit(type, data)
     } catch (error) {
-      console.error('Failed to parse WebSocket message:', error)
+      console.error('Failed to parse WebSocket, message:', error)
     }
   }
 
@@ -407,9 +378,9 @@ export class KiroClient {
   private async request<T = any>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${this.config.apiUrl}${endpoint}`
     
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers
+      ...(options.headers as Record<string, string> || {})
     }
     
     if (this.config.apiKey) {
@@ -423,7 +394,7 @@ export class KiroClient {
     
     if (!response.ok) {
       const error = await response.json().catch(() => ({ message: response.statusText }))
-      throw new Error(error.message || `Request failed: ${response.statusText}`)
+      throw new Error(error.message || `Request, failed: ${response.statusText}`)
     }
     
     return response.json()

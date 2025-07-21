@@ -12,15 +12,13 @@ import {
   GitBranch,
   Database,
   TrendingUp,
-  Sparkles,
-} from 'lucide-react';
+  Sparkles} from 'lucide-react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -58,8 +56,7 @@ interface MemoryStatus {
 }
 
 export default function ClaudeCodeDashboard({
-  onWorkflowComplete,
-}: Omit<ClaudeCodeDashboardProps, 'projectConfig'>) {
+  onWorkflowComplete}: Omit<ClaudeCodeDashboardProps, 'projectConfig'>) {
   const [isExecuting, setIsExecuting] = useState(false);
   const [currentCommand, setCurrentCommand] = useState<string | null>(null);
   const [commandHistory, setCommandHistory] = useState<CommandExecution[]>([]);
@@ -69,8 +66,7 @@ export default function ClaudeCodeDashboard({
     utilizationRate: 0.21,
     optimizationLevel: 'Strategic - High Capacity Available',
     lastCompaction: null,
-    efficiency: 78,
-  });
+    efficiency: 78});
   const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(
     null
   );
@@ -82,33 +78,28 @@ export default function ClaudeCodeDashboard({
       icon: Sparkles,
       category: 'initialization',
       tokenImpact: 8000,
-      estimatedTime: 12000,
-    },
+      estimatedTime: 12000},
     {
       command: '/sync-docs',
       description: 'Synchronize documentation with project state',
       icon: GitBranch,
       category: 'maintenance',
       tokenImpact: 2000,
-      estimatedTime: 5000,
-    },
+      estimatedTime: 5000},
     {
       command: '/compact-docs',
       description: 'Optimize context window with strategic compression',
       icon: Database,
       category: 'optimization',
       tokenImpact: -15000,
-      estimatedTime: 8000,
-    },
+      estimatedTime: 8000},
     {
       command: '/docs:status',
       description: 'Check documentation health and optimization status',
       icon: BarChart3,
       category: 'monitoring',
       tokenImpact: 500,
-      estimatedTime: 2000,
-    },
-  ];
+      estimatedTime: 2000}];
 
   const executeCommand = async (commandName: string) => {
     if (isExecuting) return;
@@ -125,8 +116,7 @@ export default function ClaudeCodeDashboard({
       status: 'executing',
       output: '',
       tokenImpact: command.tokenImpact,
-      executionTime: 0,
-    };
+      executionTime: 0};
 
     setCommandHistory(prev => [execution, ...prev]);
 
@@ -151,8 +141,7 @@ export default function ClaudeCodeDashboard({
         efficiency: Math.min(
           100,
           prev.efficiency + (command.tokenImpact < 0 ? 10 : -2)
-        ),
-      }));
+        )}));
 
       // Update command history
       setCommandHistory(prev =>
@@ -162,8 +151,7 @@ export default function ClaudeCodeDashboard({
                 ...cmd,
                 status: 'completed',
                 output: generateCommandOutput(commandName),
-                executionTime,
-              }
+                executionTime}
             : cmd
         )
       );
@@ -177,15 +165,12 @@ export default function ClaudeCodeDashboard({
           integrationCommands: [
             '/init-docs --comprehensive',
             '/sync-docs --validate-links',
-            '/compact-docs --preserve-architecture',
-          ],
+            '/compact-docs --preserve-architecture'],
           nextSteps: [
             'Review generated documentation structure',
             'Configure automated Git workflow',
             'Set up continuous integration',
-            'Monitor memory optimization cycles',
-          ],
-        };
+            'Monitor memory optimization cycles']};
         setWorkflowResult(result);
         onWorkflowComplete(result);
       }
@@ -196,8 +181,7 @@ export default function ClaudeCodeDashboard({
             ? {
                 ...cmd,
                 status: 'error',
-                output: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-              }
+                output: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`}
             : cmd
         )
       );
@@ -221,27 +205,27 @@ export default function ClaudeCodeDashboard({
 ✅ Core memory file (CLAUDE.md) generated
 ✅ 11 specialized documentation files created
 ✅ Cross-reference system established
-🧠 Token usage optimized: 42K/200K (21% utilization)`;
+🧠 Token usage, optimized: 42K/200K (21% utilization)`;
 
       case '/sync-docs':
         return `🔄 Documentation Synchronized
 ✅ Project state analysis complete
 ✅ 8 files updated with latest changes
 ✅ Cross-references validated and updated
-🎯 Documentation coherence: 98%`;
+🎯 Documentation, coherence: 98%`;
 
       case '/compact-docs':
         return `🗜️ Context Optimization Complete
 ✅ 14,000 tokens saved (33% compression)
-✅ Quality preserved: 96%
+✅ Quality, preserved: 96%
 ✅ Critical information retained
-💾 New utilization: 28K/200K (14%)`;
+💾 New, utilization: 28K/200K (14%)`;
 
       case '/docs:status':
         return `📊 Documentation Health Report
-✅ Memory utilization: ${Math.round(memoryStatus.utilizationRate * 100)}%
-✅ Optimization level: ${memoryStatus.optimizationLevel}
-✅ Cross-reference integrity: 98%
+✅ Memory, utilization: ${Math.round(memoryStatus.utilizationRate * 100)}%
+✅ Optimization, level: ${memoryStatus.optimizationLevel}
+✅ Cross-reference, integrity: 98%
 ✅ Ready for next development phase`;
 
       default:
@@ -442,7 +426,7 @@ export default function ClaudeCodeDashboard({
 
                   <div className="flex justify-between text-xs text-muted-foreground mt-2">
                     <span>
-                      Token Impact: {execution.tokenImpact > 0 ? '+' : ''}
+                      Token: Impact: {execution.tokenImpact > 0 ? '+' : ''}
                       {execution.tokenImpact}
                     </span>
                     <span>Status: {execution.status}</span>

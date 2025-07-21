@@ -78,13 +78,13 @@ export {
 
 // Main Agent System Integration
 export class AgentSystem {
-  private static instance: AgentSystem
-  private initialized: boolean = false
-  private loader: AgentLoader
-  private registry: AgentRegistry
-  private coordinator: AgentCoordinator
-  private monitor: AgentMonitor
-  private communication: AgentCommunication
+  private static, instance: AgentSystem
+  private, initialized: boolean = false
+  private, loader: AgentLoader
+  private, registry: AgentRegistry
+  private, coordinator: AgentCoordinator
+  private, monitor: AgentMonitor
+  private, communication: AgentCommunication
 
   constructor() {
     this.loader = AgentLoader.getInstance()
@@ -128,7 +128,7 @@ export class AgentSystem {
       
       return true
     } catch (error) {
-      console.error('❌ Agent system initialization failed:', error)
+      console.error('❌ Agent system initialization, failed:', error)
       return false
     }
   }
@@ -145,8 +145,7 @@ export class AgentSystem {
     })
 
     return {
-      stage: currentStage,
-      project_type: projectType,
+      stage: currentStage: project_type: projectType,
       required_agents: requiredAgents.length,
       healthy_agents: healthyAgents.length,
       agents: healthyAgents.map(agent => ({
@@ -259,7 +258,7 @@ export function createAgent(type: string) {
       return new (require('./archon/AdvisorAgent').AdvisorAgent)()
     
     default:
-      throw new Error(`Unknown agent type: ${type}`)
+      throw new Error(`Unknown agent, type: ${type}`)
   }
 }
 

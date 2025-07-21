@@ -11,8 +11,7 @@ interface EnhancedUIGeneratorProps {
 }
 
 export default function EnhancedUIGenerator({
-  projectConfig,
-}: EnhancedUIGeneratorProps) {
+  projectConfig}: EnhancedUIGeneratorProps) {
   return (
     <div className="space-y-6">
       <Card>
@@ -27,7 +26,7 @@ export default function EnhancedUIGenerator({
             Transform your UI with AI-powered enhancements tailored for{' '}
             {projectConfig.name}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
             <Card className="p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Palette className="w-4 h-4 text-blue-600" />

@@ -30,7 +30,7 @@ import { useToast } from '@/components/ui/use-toast'
 
 interface RAGKnowledgeBaseProps {
   projectId?: string
-  onSourceSelected?: (source: any) => void
+  onSourceSelected?: (source) => void
 }
 
 export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps) {
@@ -49,8 +49,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
     error,
     initialized
   } = useRAG({
-    provider: 'memory', // Use memory provider for demo
-    retrievalTopK: 5
+    provider: 'memory', // Use memory provider for demo, retrievalTopK: 5
   })
 
   const [searchQuery, setSearchQuery] = useState('')
@@ -82,7 +81,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       const knowledgeStats = await getStats()
       setStats(knowledgeStats)
     } catch (err) {
-      console.error('Failed to load stats:', err)
+      console.error('Failed to load, stats:', err)
     }
   }
 
@@ -108,7 +107,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         })
       }
     } catch (err) {
-      console.error('Search failed:', err)
+      console.error('Search, failed:', err)
     }
   }
 
@@ -128,8 +127,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       
       await addDocument(documentContent, {
         source: 'manual',
-        title: documentTitle,
-        type: documentType as any,
+        title: documentTitle: type: documentType as any,
         tags,
         project: projectId
       })
@@ -147,7 +145,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         description: 'Document added to knowledge base'
       })
     } catch (err) {
-      console.error('Failed to add document:', err)
+      console.error('Failed to add, document:', err)
     }
   }
 
@@ -167,7 +165,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       setUrlInput('')
       await loadStats()
     } catch (err) {
-      console.error('Failed to add from URL:', err)
+      console.error('Failed to add, from: URL:', err)
     }
   }
 
@@ -180,7 +178,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       await addFromFile(file)
       await loadStats()
     } catch (err) {
-      console.error('Failed to add file:', err)
+      console.error('Failed to add, file:', err)
     }
   }
 
@@ -212,12 +210,12 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         })
       }
     } catch (err) {
-      console.error('Failed to ingest codebase:', err)
+      console.error('Failed to ingest, codebase:', err)
     }
   }
 
   // Handle source selection
-  const handleSourceSelect = (source: any) => {
+  const handleSourceSelect = (source) => {
     setSelectedSource(source)
     if (onSourceSelected) {
       onSourceSelected(source)
@@ -241,7 +239,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
 
   return (
     <div className="space-y-6">
-      {/* Search Bar */}
+      {/* Search, Bar */}
       <Card>
         <CardContent className="pt-6">
           <div className="flex gap-2">
@@ -262,9 +260,9 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         </CardContent>
       </Card>
 
-      {/* Main Content */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Knowledge Management */}
+      {/* Main, Content */}
+      <div className="grid gap-6, md:grid-cols-2">
+        {/* Knowledge, Management */}
         <div className="space-y-6">
           <Card>
             <CardHeader>
@@ -433,7 +431,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">Top Topics</p>
                     <div className="flex flex-wrap gap-2">
-                      {stats.topics.slice(0, 5).map((topic: any) => (
+                      {stats.topics.slice(0, 5).map((topic) => (
                         <Badge key={topic.topic} variant="secondary">
                           {topic.topic} ({topic.count})
                         </Badge>
@@ -473,7 +471,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
           )}
         </div>
 
-        {/* Search Results */}
+        {/* Search, Results */}
         <div className="space-y-6">
           <Card className="h-[600px]">
             <CardHeader>

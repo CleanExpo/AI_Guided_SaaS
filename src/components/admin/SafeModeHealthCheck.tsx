@@ -19,9 +19,7 @@ interface HealthIssue {
 
 interface BatchConfig {
   maxIssuesPerBatch: number;
-  maxTimePerBatch: number; // seconds
-  pauseBetweenBatches: number; // seconds
-  requireConfirmation: boolean;
+  maxTimePerBatch: number; // seconds, pauseBetweenBatches: number; // seconds, requireConfirmation: boolean;
 }
 
 interface CheckpointState {
@@ -41,10 +39,7 @@ export default function SafeModeHealthCheck() {
   const [processingLog, setProcessingLog] = useState<string[]>([]);
   const [batchConfig, setBatchConfig] = useState<BatchConfig>({
     maxIssuesPerBatch: 3,
-    maxTimePerBatch: 300, // 5 minutes
-    pauseBetweenBatches: 30, // 30 seconds
-    requireConfirmation: true,
-  });
+    maxTimePerBatch: 300, // 5 minutes, pauseBetweenBatches: 30, // 30 seconds, requireConfirmation: true});
 
   const pauseTimer = useRef<NodeJS.Timeout | null>(null);
   const batchTimer = useRef<NodeJS.Timeout | null>(null);
@@ -59,8 +54,7 @@ export default function SafeModeHealthCheck() {
       description: 'Package @types/node has a security vulnerability',
       file: 'package.json',
       autoFixable: true,
-      estimatedTime: 60,
-    },
+      estimatedTime: 60},
     {
       id: 'DEP-001',
       type: 'high',
@@ -69,8 +63,7 @@ export default function SafeModeHealthCheck() {
       description: 'Using deprecated version of react-router',
       file: 'package.json',
       autoFixable: true,
-      estimatedTime: 120,
-    },
+      estimatedTime: 120},
     {
       id: 'MOD-001',
       type: 'medium',
@@ -80,8 +73,7 @@ export default function SafeModeHealthCheck() {
       file: 'src/components/ui/card.tsx',
       line: 15,
       autoFixable: true,
-      estimatedTime: 180,
-    },
+      estimatedTime: 180},
     {
       id: 'PERF-001',
       type: 'medium',
@@ -91,8 +83,7 @@ export default function SafeModeHealthCheck() {
       file: 'src/app/page.tsx',
       line: 42,
       autoFixable: true,
-      estimatedTime: 90,
-    },
+      estimatedTime: 90},
     {
       id: 'UX-001',
       type: 'low',
@@ -102,16 +93,13 @@ export default function SafeModeHealthCheck() {
       file: 'src/components/auth/SignInForm.tsx',
       line: 28,
       autoFixable: true,
-      estimatedTime: 45,
-    },
-  ];
+      estimatedTime: 45}];
 
   const scanForIssues = async () => {
     setIsScanning(true);
     setProcessingLog(prev => [
       ...prev,
-      '🔍 Starting comprehensive health scan...',
-    ]);
+      '🔍 Starting comprehensive health scan...']);
 
     // Simulate scanning delay
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -119,13 +107,12 @@ export default function SafeModeHealthCheck() {
     setIssues(mockIssues);
     setProcessingLog(prev => [
       ...prev,
-      `✅ Scan complete: Found ${mockIssues.length} issues`,
-    ]);
+      `✅ Scan, complete: Found ${mockIssues.length} issues`]);
     setIsScanning(false);
   };
 
   const createBatches = (allIssues: HealthIssue[]): HealthIssue[][] => {
-    // Sort by priority: critical > high > medium > low
+    // Sort by, priority: critical > high > medium > low
     const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
     const sortedIssues = [...allIssues].sort(
       (a, b) => priorityOrder[a.type] - priorityOrder[b.type]
@@ -147,8 +134,7 @@ export default function SafeModeHealthCheck() {
     if (issues.length === 0) {
       setProcessingLog(prev => [
         ...prev,
-        '❌ No issues to process. Run scan first.',
-      ]);
+        '❌ No issues to process. Run scan first.']);
       return;
     }
 
@@ -158,15 +144,13 @@ export default function SafeModeHealthCheck() {
       currentBatch: 0,
       totalBatches: batches.length,
       startTime: Date.now(),
-      lastCheckpoint: Date.now(),
-    };
+      lastCheckpoint: Date.now()};
 
     setCheckpoint(newCheckpoint);
     setIsProcessing(true);
     setProcessingLog(prev => [
       ...prev,
-      `🚀 Starting safe processing: ${batches.length} batches`,
-    ]);
+      `🚀 Starting safe, processing: ${batches.length} batches`]);
 
     await processBatch(batches[0], 0, batches);
   };
@@ -179,8 +163,7 @@ export default function SafeModeHealthCheck() {
     setCurrentBatch(batch);
     setProcessingLog(prev => [
       ...prev,
-      `📦 Processing batch ${batchIndex + 1}/${allBatches.length} (${batch.length} issues)`,
-    ]);
+      `📦 Processing batch ${batchIndex + 1}/${allBatches.length} (${batch.length} issues)`]);
 
     // Show batch confirmation if required
     if (batchConfig.requireConfirmation && batchIndex > 0) {
@@ -207,8 +190,7 @@ export default function SafeModeHealthCheck() {
         const updatedCheckpoint = {
           ...checkpoint,
           completedIssues: [...checkpoint.completedIssues, issue.id],
-          lastCheckpoint: Date.now(),
-        };
+          lastCheckpoint: Date.now()};
         setCheckpoint(updatedCheckpoint);
       }
 
@@ -220,15 +202,13 @@ export default function SafeModeHealthCheck() {
     if (nextBatchIndex < allBatches.length) {
       setProcessingLog(prev => [
         ...prev,
-        `⏳ Pausing ${batchConfig.pauseBetweenBatches}s before next batch...`,
-      ]);
+        `⏳ Pausing ${batchConfig.pauseBetweenBatches}s before next batch...`]);
 
       pauseTimer.current = setTimeout(() => {
         if (checkpoint) {
           setCheckpoint({
             ...checkpoint,
-            currentBatch: nextBatchIndex,
-          });
+            currentBatch: nextBatchIndex});
         }
         processBatch(allBatches[nextBatchIndex], nextBatchIndex, allBatches);
       }, batchConfig.pauseBetweenBatches * 1000);
@@ -238,8 +218,7 @@ export default function SafeModeHealthCheck() {
       setCurrentBatch([]);
       setProcessingLog(prev => [
         ...prev,
-        '🎉 All issues processed successfully!',
-      ]);
+        '🎉 All issues processed successfully!']);
     }
   };
 
@@ -250,8 +229,8 @@ export default function SafeModeHealthCheck() {
     return new Promise(resolve => {
       const confirmed = window.confirm(
         `Ready to process batch ${batchIndex + 1}?\n\n` +
-          `Issues to fix:\n${batch.map(issue => `• ${issue.title}`).join('\n')}\n\n` +
-          `Estimated time: ${Math.round(batch.reduce((sum, issue) => sum + issue.estimatedTime, 0) / 60)} minutes\n\n` +
+          `Issues to, fix:\n${batch.map(issue => `• ${issue.title}`).join('\n')}\n\n` +
+          `Estimated, time: ${Math.round(batch.reduce((sum, issue) => sum + issue.estimatedTime, 0) / 60)} minutes\n\n` +
           `Click OK to continue or Cancel to pause.`
       );
       resolve(confirmed);
@@ -347,14 +326,14 @@ export default function SafeModeHealthCheck() {
           <Button
             onClick={scanForIssues}
             disabled={isScanning || isProcessing}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-blue-600, hover:bg-blue-700"
           >
             {isScanning ? '🔍 Scanning...' : '🔍 Scan for Issues'}
           </Button>
           {issues.length > 0 && !isProcessing && (
             <Button
               onClick={startSafeProcessing}
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-green-600, hover:bg-green-700"
             >
               🚀 Start Safe Processing
             </Button>
@@ -366,7 +345,7 @@ export default function SafeModeHealthCheck() {
               </Button>
               <Button
                 onClick={pauseProcessing}
-                className="bg-red-600 hover:bg-red-700"
+                className="bg-red-600, hover:bg-red-700"
               >
                 🛑 Stop
               </Button>
@@ -375,7 +354,7 @@ export default function SafeModeHealthCheck() {
           {checkpoint && !isProcessing && (
             <Button
               onClick={resumeProcessing}
-              className="bg-orange-600 hover:bg-orange-700"
+              className="bg-orange-600, hover:bg-orange-700"
             >
               ▶️ Resume
             </Button>
@@ -391,7 +370,7 @@ export default function SafeModeHealthCheck() {
         <h3 className="font-medium text-gray-700 mb-3">
           ⚙️ Batch Configuration
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Issues per batch
@@ -404,8 +383,7 @@ export default function SafeModeHealthCheck() {
               onChange={e =>
                 setBatchConfig(prev => ({
                   ...prev,
-                  maxIssuesPerBatch: parseInt(e.target.value) || 3,
-                }))
+                  maxIssuesPerBatch: parseInt(e.target.value) || 3}))
               }
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm"
               disabled={isProcessing}
@@ -425,8 +403,7 @@ export default function SafeModeHealthCheck() {
               onChange={e =>
                 setBatchConfig(prev => ({
                   ...prev,
-                  maxTimePerBatch: (parseInt(e.target.value) || 5) * 60,
-                }))
+                  maxTimePerBatch: (parseInt(e.target.value) || 5) * 60}))
               }
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm"
               disabled={isProcessing}
@@ -446,8 +423,7 @@ export default function SafeModeHealthCheck() {
               onChange={e =>
                 setBatchConfig(prev => ({
                   ...prev,
-                  pauseBetweenBatches: parseInt(e.target.value) || 30,
-                }))
+                  pauseBetweenBatches: parseInt(e.target.value) || 30}))
               }
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm"
               disabled={isProcessing}
@@ -463,8 +439,7 @@ export default function SafeModeHealthCheck() {
                 onChange={e =>
                   setBatchConfig(prev => ({
                     ...prev,
-                    requireConfirmation: e.target.checked,
-                  }))
+                    requireConfirmation: e.target.checked}))
                 }
                 className="mr-2"
                 disabled={isProcessing}

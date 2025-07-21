@@ -35,8 +35,7 @@ export async function POST(request: NextRequest) {
     const upload = {
       id: `upload_${Date.now()}`,
       filename: file.name,
-      size: file.size,
-      type: file.type,
+      size: file.size: type: file.type,
       timestamp: new Date().toISOString(),
       status: 'completed',
       urls: {
@@ -45,15 +44,14 @@ export async function POST(request: NextRequest) {
         optimized: `/uploads/optimized/${file.name}`
       },
       metadata: {
-        dimensions: { width: 0, height: 0 }, // Would be extracted from actual image
-        format: file.type.split('/')[1],
+        dimensions: { width: 0, height: 0 }, // Would be extracted from actual image, format: file.type.split('/')[1],
         processing_time: 250
       }
     };
 
     return NextResponse.json(upload);
   } catch (error) {
-    console.error('Visual upload error:', error);
+    console.error('Visual upload, error:', error);
     return NextResponse.json(
       { error: 'Failed to upload image' },
       { status: 500 }
@@ -74,7 +72,7 @@ export async function GET() {
 
     return NextResponse.json(capabilities);
   } catch (error) {
-    console.error('Visual upload capabilities error:', error);
+    console.error('Visual upload capabilities, error:', error);
     return NextResponse.json(
       { error: 'Failed to get upload capabilities' },
       { status: 500 }

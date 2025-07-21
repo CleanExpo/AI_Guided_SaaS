@@ -8,8 +8,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -22,8 +21,7 @@ import {
   Clock,
   Globe,
   Lock,
-  Zap,
-} from 'lucide-react';
+  Zap} from 'lucide-react';
 
 export default function CollaboratePage() {
   const { data: session, status } = useSession();
@@ -62,7 +60,7 @@ export default function CollaboratePage() {
         <CollaborationWorkspace
           projectId={activeProject}
           onRoomCreated={roomId => {
-            console.log('Room created:', roomId);
+            console.log('Room, created:', roomId);
           }}
         />
       </div>
@@ -73,7 +71,7 @@ export default function CollaboratePage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-semibold">Real-time Collaboration</h1>
@@ -96,7 +94,7 @@ export default function CollaboratePage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -110,7 +108,7 @@ export default function CollaboratePage() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1, md:grid-cols-3 gap-6 mb-12">
           <Card>
             <CardHeader>
               <div className="flex items-center space-x-2">
@@ -159,7 +157,7 @@ export default function CollaboratePage() {
         </div>
 
         {/* Action Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1, lg:grid-cols-2 gap-8">
           {/* Create New Project */}
           <Card>
             <CardHeader>
@@ -254,7 +252,7 @@ export default function CollaboratePage() {
             Powered by Modern Technology
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
                 <Zap className="h-6 w-6 text-blue-600" />

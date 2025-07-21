@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -16,8 +15,7 @@ import {
   Clock,
   CheckCircle,
   ArrowRight,
-  BookOpen,
-} from 'lucide-react';
+  BookOpen} from 'lucide-react';
 import Link from 'next/link';
 
 interface LearningPath {
@@ -46,16 +44,12 @@ const learningPaths: LearningPath[] = [
       {
         id: '1',
         title: 'Getting Started with AI Guided SaaS',
-        duration: '15 min',
-      },
+        duration: '15 min'},
       { id: '2', title: 'Advanced UI Builder Techniques', duration: '25 min' },
       {
         id: '5',
         title: 'Collaboration and Team Workflows',
-        duration: '20 min',
-      },
-    ],
-  },
+        duration: '20 min'}]},
   {
     id: 'developer',
     title: 'Full-Stack Developer Path',
@@ -67,26 +61,20 @@ const learningPaths: LearningPath[] = [
       {
         id: '1',
         title: 'Getting Started with AI Guided SaaS',
-        duration: '15 min',
-      },
+        duration: '15 min'},
       { id: '2', title: 'Advanced UI Builder Techniques', duration: '25 min' },
       {
         id: '3',
         title: 'API Integration and Data Management',
-        duration: '30 min',
-      },
+        duration: '30 min'},
       {
         id: '4',
         title: 'Deployment and Production Best Practices',
-        duration: '40 min',
-      },
+        duration: '40 min'},
       {
         id: '6',
         title: 'Performance Optimization and Scaling',
-        duration: '35 min',
-      },
-    ],
-  },
+        duration: '35 min'}]},
   {
     id: 'team-lead',
     title: 'Team Lead & Project Manager Path',
@@ -98,25 +86,19 @@ const learningPaths: LearningPath[] = [
       {
         id: '1',
         title: 'Getting Started with AI Guided SaaS',
-        duration: '15 min',
-      },
+        duration: '15 min'},
       {
         id: '5',
         title: 'Collaboration and Team Workflows',
-        duration: '20 min',
-      },
+        duration: '20 min'},
       {
         id: '4',
         title: 'Deployment and Production Best Practices',
-        duration: '40 min',
-      },
+        duration: '40 min'},
       {
         id: '6',
         title: 'Performance Optimization and Scaling',
-        duration: '35 min',
-      },
-    ],
-  },
+        duration: '35 min'}]},
   {
     id: 'enterprise',
     title: 'Enterprise & DevOps Path',
@@ -127,26 +109,19 @@ const learningPaths: LearningPath[] = [
       {
         id: '3',
         title: 'API Integration and Data Management',
-        duration: '30 min',
-      },
+        duration: '30 min'},
       {
         id: '4',
         title: 'Deployment and Production Best Practices',
-        duration: '40 min',
-      },
+        duration: '40 min'},
       {
         id: '6',
         title: 'Performance Optimization and Scaling',
-        duration: '35 min',
-      },
+        duration: '35 min'},
       {
         id: '5',
         title: 'Collaboration and Team Workflows',
-        duration: '20 min',
-      },
-    ],
-  },
-];
+        duration: '20 min'}]}];
 
 export default function LearningPathPage() {
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
@@ -239,7 +214,7 @@ export default function LearningPathPage() {
               key={tutorial.id}
               className={`transition-all ${
                 completedTutorials.has(tutorial.id)
-                  ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800'
+                  ? 'bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800'
                   : ''
               }`}
             >
@@ -282,9 +257,9 @@ export default function LearningPathPage() {
 
         {/* Completion */}
         {progress === 100 && (
-          <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
+          <Card className="bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800">
             <CardHeader>
-              <CardTitle className="text-green-700 dark:text-green-300">
+              <CardTitle className="text-green-700, dark:text-green-300">
                 🎉 Learning Path Completed!
               </CardTitle>
               <CardDescription>
@@ -327,13 +302,13 @@ export default function LearningPathPage() {
       </div>
 
       {/* Learning Paths Grid */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6, md:grid-cols-2">
         {learningPaths.map(path => {
           const progress = getPathProgress(path);
           return (
             <Card
               key={path.id}
-              className="cursor-pointer hover:shadow-lg transition-all"
+              className="cursor-pointer, hover:shadow-lg transition-all"
             >
               <CardHeader>
                 <div className="flex items-center justify-between">

@@ -39,8 +39,7 @@ export default function CausalExplorerUI() {
           key,
           ...data,
           componentType,
-          page,
-        };
+          page};
       }
     );
 
@@ -86,7 +85,7 @@ export default function CausalExplorerUI() {
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1, md:grid-cols-4 gap-4 mb-8">
         <div className="bg-white p-4 rounded-lg shadow border">
           <h3 className="text-sm font-medium text-gray-500">
             Total Interactions
@@ -119,13 +118,13 @@ export default function CausalExplorerUI() {
       <div className="mb-6 flex gap-4">
         <button
           onClick={refreshData}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="px-4 py-2 bg-blue-600 text-white rounded, hover:bg-blue-700"
         >
           🔄 Refresh Data
         </button>
         <button
           onClick={clearAllLogs}
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          className="px-4 py-2 bg-red-600 text-white rounded, hover:bg-red-700"
         >
           🗑️ Clear All Logs
         </button>

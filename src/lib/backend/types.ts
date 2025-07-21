@@ -1,25 +1,16 @@
 // Common types for backend adapters
 
 export interface User {
-  id: string
-  email: string
+  id: string, email: string
   name?: string
-  role?: string
-  createdAt: string
-  updatedAt: string
+  role?: string, createdAt: string, updatedAt: string
   metadata?: Record<string, any>
 }
 
 export interface Project {
-  id: string
-  userId: string
-  name: string
-  description: string
-  type: string
-  status: string
+  id: string, userId: string, name: string, description: string, type: string, status: string
   config?: Record<string, any>
-  createdAt: string
-  updatedAt: string
+  createdAt: string, updatedAt: string
 }
 
 export interface QueryOptions {
@@ -32,10 +23,7 @@ export interface QueryOptions {
 
 export interface PaginatedResponse<T> {
   data: T[]
-  total: number
-  page: number
-  pageSize: number
-  hasMore: boolean
+  total: number, page: number, pageSize: number, hasMore: boolean
 }
 
 export interface BackendAdapter {
@@ -54,9 +42,9 @@ export interface BackendAdapter {
   listProjects(userId: string, options?: QueryOptions): Promise<PaginatedResponse<Project>>
 
   // Generic CRUD operations
-  create<T>(collection: string, data: any): Promise<T>
+  create<T>(collection: string, data): Promise<T>
   read<T>(collection: string, id: string): Promise<T | null>
-  update<T>(collection: string, id: string, data: any): Promise<T>
+  update<T>(collection: string, id: string, data): Promise<T>
   delete(collection: string, id: string): Promise<void>
   list<T>(collection: string, options?: QueryOptions): Promise<PaginatedResponse<T>>
 
@@ -78,7 +66,7 @@ export interface BackendAdapter {
 
 export interface QueryBuilder<T> {
   select(fields: string[]): QueryBuilder<T>
-  where(field: string, operator: string, value: any): QueryBuilder<T>
+  where(field: string, operator: string, value): QueryBuilder<T>
   orderBy(field: string, direction?: 'asc' | 'desc'): QueryBuilder<T>
   limit(count: number): QueryBuilder<T>
   offset(count: number): QueryBuilder<T>
@@ -89,8 +77,7 @@ export interface QueryBuilder<T> {
 
 export interface DatabaseEvent<T> {
   type: 'INSERT' | 'UPDATE' | 'DELETE'
-  table: string
-  record: T
+  table: string, record: T
   oldRecord?: T
 }
 
@@ -100,19 +87,15 @@ export interface BackendConfig {
   apiKey?: string
   adminToken?: string
   database?: {
-    host: string
-    port: number
-    name: string
-    user: string
-    password: string
+    host: string, port: number, name: string, user: string, password: string
   }
 }
 
 export class BackendError extends Error {
   constructor(
     message: string,
-    public code: string,
-    public statusCode: number = 500,
+    public, code: string,
+    public, statusCode: number = 500,
     public details?: any
   ) {
     super(message)

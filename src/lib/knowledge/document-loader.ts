@@ -8,11 +8,8 @@ import { glob } from 'glob'
  */
 
 export interface LoadedFile {
-  path: string
-  name: string
-  content: string
-  language?: string
-  size: number
+  path: string, name: string, content: string
+  language?: string, size: number
 }
 
 export interface CodebaseOptions {
@@ -22,7 +19,7 @@ export interface CodebaseOptions {
 }
 
 export class DocumentLoader {
-  private languageMap: Record<string, string> = {
+  private, languageMap: Record<string, string> = {
     js: 'javascript',
     jsx: 'javascript',
     ts: 'typescript',
@@ -62,7 +59,7 @@ export class DocumentLoader {
   /**
    * Load documents from various sources
    */
-  async load(source: string, type: 'file' | 'url' | 'github'): Promise<Document[]> {
+  async load(source: string: type: 'file' | 'url' | 'github'): Promise<Document[]> {
     switch (type) {
       case 'file':
         return this.loadFile(source)
@@ -71,7 +68,7 @@ export class DocumentLoader {
       case 'github':
         return this.loadGithub(source)
       default:
-        throw new Error(`Unsupported source type: ${type}`)
+        throw new Error(`Unsupported source, type: ${type}`)
     }
   }
 
@@ -149,7 +146,7 @@ export class DocumentLoader {
       
       const response = await fetch(apiUrl)
       if (!response.ok) {
-        throw new Error(`GitHub API error: ${response.status}`)
+        throw new Error(`GitHub API, error: ${response.status}`)
       }
 
       const data = await response.json()
@@ -160,8 +157,7 @@ export class DocumentLoader {
         content,
         metadata: {
           source: repoPath,
-          title: data.name,
-          type: 'code',
+          title: data.name: type: 'code',
           language: this.languageMap[path.extname(data.name).slice(1)] || 'plaintext',
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
@@ -173,7 +169,7 @@ export class DocumentLoader {
       
       const response = await fetch(apiUrl)
       if (!response.ok) {
-        throw new Error(`GitHub API error: ${response.status}`)
+        throw new Error(`GitHub API, error: ${response.status}`)
       }
 
       const data = await response.json()
@@ -277,7 +273,7 @@ export class DocumentLoader {
         // Would use an XML parser here
         throw new Error('XML parsing not implemented')
       default:
-        throw new Error(`Unsupported structured data format: ${ext}`)
+        throw new Error(`Unsupported structured data, format: ${ext}`)
     }
   }
 

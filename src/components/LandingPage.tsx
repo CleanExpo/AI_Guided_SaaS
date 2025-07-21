@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
   Zap,
@@ -23,8 +22,7 @@ import {
   Palette,
   Shield,
   Globe,
-  Star,
-} from 'lucide-react';
+  Star} from 'lucide-react';
 import Link from 'next/link';
 
 const features = [
@@ -32,39 +30,32 @@ const features = [
     icon: Brain,
     title: 'AI-Powered Development',
     description:
-      'Leverage advanced AI to accelerate your development workflow and make smarter decisions.',
-  },
+      'Leverage advanced AI to accelerate your development workflow and make smarter decisions.'},
   {
     icon: Wrench,
     title: 'Visual UI Builder',
     description:
-      'Create stunning interfaces with our drag-and-drop UI builder and component library.',
-  },
+      'Create stunning interfaces with our drag-and-drop UI builder and component library.'},
   {
     icon: BarChart3,
     title: 'Advanced Analytics',
     description:
-      'Get deep insights into your application performance and user behavior.',
-  },
+      'Get deep insights into your application performance and user behavior.'},
   {
     icon: Users,
     title: 'Team Collaboration',
     description:
-      'Work seamlessly with your team using real-time collaboration tools.',
-  },
+      'Work seamlessly with your team using real-time collaboration tools.'},
   {
     icon: Code,
     title: 'Code Generation',
     description:
-      'Generate production-ready code automatically from your designs and specifications.',
-  },
+      'Generate production-ready code automatically from your designs and specifications.'},
   {
     icon: Shield,
     title: 'Enterprise Security',
     description:
-      'Built with security-first principles and enterprise-grade protection.',
-  },
-];
+      'Built with security-first principles and enterprise-grade protection.'}];
 
 const benefits = [
   'Reduce development time by 70%',
@@ -72,8 +63,7 @@ const benefits = [
   'Real-time team collaboration',
   'Enterprise-grade security',
   'Scalable cloud infrastructure',
-  'Comprehensive analytics dashboard',
-];
+  'Comprehensive analytics dashboard'];
 
 export default function LandingPage() {
   return (
@@ -86,7 +76,7 @@ export default function LandingPage() {
             AI-Powered SaaS Platform
           </Badge>
 
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+          <h1 className="text-4xl, md:text-6xl font-bold tracking-tight mb-6">
             Build Better Software
             <span className="block text-primary">Faster Than Ever</span>
           </h1>
@@ -97,7 +87,7 @@ export default function LandingPage() {
             unprecedented speed and intelligence.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col, sm:flex-row gap-4 justify-center mb-12">
             <Button size="lg" asChild>
               <Link href="/auth/signin">
                 Get Started Free
@@ -133,7 +123,7 @@ export default function LandingPage() {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl, md:text-4xl font-bold mb-4">
               Everything You Need to Build Amazing Software
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -142,11 +132,11 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid, md:grid-cols-2, lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="border-0 shadow-lg hover:shadow-xl transition-shadow"
+                className="border-0 shadow-lg, hover:shadow-xl transition-shadow"
               >
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
@@ -168,9 +158,9 @@ export default function LandingPage() {
       {/* Benefits Section */}
       <section className="py-20 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid, lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl, md:text-4xl font-bold mb-6">
                 Why Choose Our Platform?
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
@@ -241,7 +231,7 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl, md:text-4xl font-bold mb-6">
             Ready to Transform Your Development Process?
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
@@ -249,7 +239,7 @@ export default function LandingPage() {
             tools.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col, sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
               <Link href="/auth/signin">
                 Get Started Free

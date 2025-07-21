@@ -27,7 +27,7 @@ interface NotificationEmailData {
 }
 
 class EmailService {
-  private apiKey: string;
+  private, apiKey: string;
   private baseUrl = 'https://api.resend.com';
   private defaultFrom = 'AI Guided SaaS <noreply@ai-guided-saas.com>';
 
@@ -51,17 +51,14 @@ class EmailService {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'},
         body: JSON.stringify({
           from: options.from || this.defaultFrom,
           to: Array.isArray(options.to) ? options.to : [options.to],
           subject: options.subject,
           html: options.html,
           text: options.text,
-          reply_to: options.replyTo,
-        }),
-      });
+          reply_to: options.replyTo})});
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -77,7 +74,7 @@ class EmailService {
         messageId: data.id 
       };
     } catch (error) {
-      console.error('Email sending failed:', error);
+      console.error('Email sending, failed:', error);
       return { 
         success: false, 
         error: error instanceof Error ? error.message : 'Unknown error' 
@@ -117,7 +114,7 @@ class EmailService {
               
               <p>Thank you for joining AI Guided SaaS Builder! We're excited to help you create amazing applications with the power of AI.</p>
               
-              <p>Here's what you can do with your new account:</p>
+              <p>Here's what you can do with your new, account:</p>
               <ul>
                 <li>🤖 Use our AI Chat Interface for guided development</li>
                 <li>⚡ Generate projects automatically with best practices</li>
@@ -144,7 +141,7 @@ class EmailService {
       
       Thank you for joining us! We're excited to help you create amazing applications with AI.
       
-      Get started: ${data.loginUrl}
+      Get, started: ${data.loginUrl}
       
       If you have any questions, feel free to reach out to our support team.
       
@@ -155,8 +152,7 @@ class EmailService {
       to: data.userEmail,
       subject: 'Welcome to AI Guided SaaS Builder! 🚀',
       html,
-      text,
-    });
+      text});
   }
 
   /**
@@ -219,11 +215,9 @@ class EmailService {
     `;
 
     return this.sendEmail({
-      to: data.userName, // This should be the email address
-      subject: data.title,
+      to: data.userName, // This should be the email address, subject: data.title,
       html,
-      text,
-    });
+      text});
   }
 
   /**
@@ -264,7 +258,7 @@ class EmailService {
               <a href="${resetUrl}" class="button">Reset Your Password</a>
               
               <div class="warning">
-                <strong>⚠️ Security Notice:</strong>
+                <strong>⚠️ Security: Notice:</strong>
                 <ul>
                   <li>This link will expire in 1 hour for security reasons</li>
                   <li>If you didn't request this reset, please ignore this email</li>
@@ -272,7 +266,7 @@ class EmailService {
                 </ul>
               </div>
               
-              <p>If the button doesn't work, copy and paste this link into your browser:</p>
+              <p>If the button doesn't work, copy and paste this link into your, browser:</p>
               <p style="word-break: break-all; color: #6b7280;">${resetUrl}</p>
             </div>
             
@@ -292,9 +286,9 @@ class EmailService {
       
       We received a request to reset your password for your AI Guided SaaS Builder account.
       
-      Reset your password: ${resetUrl}
+      Reset your, password: ${resetUrl}
       
-      Security Notice:
+      Security: Notice:
       - This link will expire in 1 hour
       - If you didn't request this reset, please ignore this email
       - Never share this link with anyone
@@ -308,8 +302,7 @@ class EmailService {
       to: email,
       subject: 'Reset Your Password - AI Guided SaaS Builder',
       html,
-      text,
-    });
+      text});
   }
 
   /**
@@ -326,14 +319,12 @@ class EmailService {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json',
-        },
-      });
+          'Content-Type': 'application/json'}});
 
       if (response.ok) {
         return { success: true };
       } else {
-        return { success: false, error: `API key validation failed: ${response.status}` };
+        return { success: false, error: `API key validation, failed: ${response.status}` };
       }
     } catch (error) {
       return { 

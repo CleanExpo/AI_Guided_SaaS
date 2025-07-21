@@ -26,25 +26,19 @@ const securityHeaders = {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https:",
     "font-src 'self' data:",
-    "connect-src 'self' https://api.openai.com https://api.anthropic.com https://api.stripe.com",
-    "frame-src 'self' https://js.stripe.com",
-  ].join('; '),
+    "connect-src 'self' https://api.openai.com, https://api.anthropic.com, https://api.stripe.com",
+    "frame-src 'self' https://js.stripe.com"].join('; '),
   
   // Permissions policy
   'Permissions-Policy': [
     'camera=()',
     'microphone=()',
     'geolocation=()',
-    'interest-cohort=()',
-  ].join(', '),
-};
+    'interest-cohort=()'].join(', ')};
 
 // Rate limiting configuration
 const RATE_LIMIT_CONFIG = {
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  maxRequests: 100, // requests per window
-  apiWindowMs: 1 * 60 * 1000, // 1 minute for API routes
-  apiMaxRequests: 20, // API requests per minute
+  windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 100, // requests per window, apiWindowMs: 1 * 60 * 1000, // 1 minute for API routes, apiMaxRequests: 20, // API requests per minute
 };
 
 function getRateLimitKey(request: NextRequest): string {
@@ -62,8 +56,7 @@ function checkRateLimit(key: string, maxRequests: number, windowMs: number): boo
     // Reset or create new record
     rateLimitStore.set(key, {
       count: 1,
-      resetTime: now + windowMs,
-    });
+      resetTime: now + windowMs});
     return true;
   }
   
@@ -100,8 +93,7 @@ function validateRequest(request: NextRequest): string | null {
     /bot/i,
     /crawler/i,
     /spider/i,
-    /scraper/i,
-  ];
+    /scraper/i];
   
   // Allow legitimate bots but log them
   if (botPatterns.some(pattern => pattern.test(userAgent))) {
@@ -132,11 +124,10 @@ export function middleware(request: NextRequest) {
   // Validate request for suspicious patterns
   const validationError = validateRequest(request);
   if (validationError) {
-    logSecurity(`Blocked suspicious request: ${validationError}`, {
+    logSecurity(`Blocked suspicious, request: ${validationError}`, {
       url: request.url,
       userAgent: request.headers.get('user-agent'),
-      ip: request.headers.get('x-forwarded-for') || request.ip,
-    });
+      ip: request.headers.get('x-forwarded-for') || request.ip});
     
     return new NextResponse('Forbidden', { status: 403 });
   }
@@ -152,15 +143,12 @@ export function middleware(request: NextRequest) {
   if (!checkRateLimit(rateLimitKey, maxRequests, windowMs)) {
     logWarn(`Rate limit exceeded for ${rateLimitKey}`, {
       pathname,
-      ip: request.headers.get('x-forwarded-for') || request.ip,
-    });
+      ip: request.headers.get('x-forwarded-for') || request.ip});
     
     return new NextResponse('Too Many Requests', { 
       status: 429,
       headers: {
-        'Retry-After': Math.ceil(windowMs / 1000).toString(),
-      },
-    });
+        'Retry-After': Math.ceil(windowMs / 1000).toString()}});
   }
   
   // Create response with security headers
@@ -193,13 +181,11 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
+     * Match all request paths except for the ones starting, with:
      * - admin (admin routes - handled separately)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public folder files
      */
-    '/((?!admin|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
-};
+    '/((?!admin|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)']};

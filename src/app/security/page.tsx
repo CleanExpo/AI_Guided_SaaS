@@ -4,47 +4,39 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Lock, Eye, Server, CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Security - AI Guided SaaS Platform',
   description:
-    'Learn about our security measures and data protection practices',
-};
+    'Learn about our security measures and data protection practices'};
 
 const securityFeatures = [
   {
     icon: Shield,
     title: 'Enterprise-Grade Security',
     description:
-      'SOC 2 Type II compliant with industry-leading security standards',
-  },
+      'SOC 2 Type II compliant with industry-leading security standards'},
   {
     icon: Lock,
     title: 'Data Encryption',
-    description: 'End-to-end encryption for data in transit and at rest',
-  },
+    description: 'End-to-end encryption for data in transit and at rest'},
   {
     icon: Eye,
     title: 'Privacy Protection',
-    description: 'GDPR and CCPA compliant data handling practices',
-  },
+    description: 'GDPR and CCPA compliant data handling practices'},
   {
     icon: Server,
     title: 'Secure Infrastructure',
-    description: 'Cloud infrastructure with 99.9% uptime guarantee',
-  },
-];
+    description: 'Cloud infrastructure with 99.9% uptime guarantee'}];
 
 const certifications = [
   { name: 'SOC 2 Type II', status: 'Certified' },
   { name: 'ISO 27001', status: 'In Progress' },
   { name: 'GDPR Compliant', status: 'Certified' },
-  { name: 'CCPA Compliant', status: 'Certified' },
-];
+  { name: 'CCPA Compliant', status: 'Certified' }];
 
 export default function SecurityPage() {
   return (
@@ -59,7 +51,7 @@ export default function SecurityPage() {
         </div>
 
         {/* Security Features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1, md:grid-cols-2 gap-8 mb-16">
           {securityFeatures.map(feature => {
             const Icon = feature.icon;
             return (
@@ -83,7 +75,7 @@ export default function SecurityPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
               {certifications.map(cert => (
                 <div
                   key={cert.name}
@@ -107,7 +99,7 @@ export default function SecurityPage() {
         {/* Security Practices */}
         <div className="prose prose-lg max-w-none">
           <h2 className="text-2xl font-bold mb-6">Our Security Practices</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1, md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold mb-3">Data Protection</h3>
               <ul className="space-y-2 text-muted-foreground">

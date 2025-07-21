@@ -68,7 +68,7 @@ export default function TemplateMarketplace({
         setTestMode(data.testMode)
       }
     } catch (error) {
-      console.error('Error loading templates:', error)
+      console.error('Error loading, templates:', error)
     } finally {
       setLoading(false)
     }
@@ -83,7 +83,7 @@ export default function TemplateMarketplace({
         setCategories(data.categories)
       }
     } catch (error) {
-      console.error('Error loading categories:', error)
+      console.error('Error loading, categories:', error)
     }
   }
 
@@ -115,7 +115,7 @@ export default function TemplateMarketplace({
         }
       }
     } catch (error) {
-      console.error('Error purchasing template:', error)
+      console.error('Error purchasing, template:', error)
     }
   }
 
@@ -195,7 +195,7 @@ export default function TemplateMarketplace({
             </div>
 
             {/* Filters */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1, md:grid-cols-4 gap-4">
               <select
                 value={selectedCategory}
                 onChange={(e) => {
@@ -266,11 +266,11 @@ export default function TemplateMarketplace({
       ) : (
         <div className={
           viewMode === 'grid' 
-            ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+            ? 'grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6'
             : 'space-y-4'
         }>
           {templates.map((template) => (
-            <Card key={template.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+            <Card key={template.id} className="overflow-hidden, hover:shadow-lg transition-shadow">
               {viewMode === 'grid' ? (
                 <>
                   {/* Grid View */}

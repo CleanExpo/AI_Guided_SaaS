@@ -34,8 +34,8 @@ export default function SelfCheckTrigger() {
       
       setStatus('✅ Health check completed successfully');
     } catch (err) {
-      setStatus(`❌ Error generating report: ${(err as Error).message}`);
-      console.error('Self-check error:', err);
+      setStatus(`❌ Error generating, report: ${(err as Error).message}`);
+      console.error('Self-check, error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -45,31 +45,30 @@ export default function SelfCheckTrigger() {
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    return `# AI Guided SaaS - System Health Report
-Generated: ${new Date().toISOString()}
+    return `# AI Guided SaaS - System Health Report, Generated: ${new Date().toISOString()}
 
 ## Executive Summary
-Overall Health Score: 92/100 ✅
+Overall Health, Score: 92/100 ✅
 
-## Module Completeness: 95/100
-✅ UI Builder: Present and functional
-✅ Causal Engine: Present and functional  
-✅ Self-Check System: Present and functional
-✅ Admin Panel: Present and functional
-✅ Collaboration Tools: Present and functional
+## Module, Completeness: 95/100
+✅ UI, Builder: Present and functional
+✅ Causal, Engine: Present and functional  
+✅ Self-Check, System: Present and functional
+✅ Admin, Panel: Present and functional
+✅ Collaboration, Tools: Present and functional
 
-## Dependency Health: 88/100
+## Dependency, Health: 88/100
 ✅ Core dependencies up to date
 ⚠️ 3 minor updates available
 ✅ No critical vulnerabilities found
 
-## Security Posture: 94/100
+## Security, Posture: 94/100
 ✅ No high-severity vulnerabilities
 ✅ Authentication system configured
 ✅ HTTPS enforced
 ✅ Environment variables secured
 
-## User Experience: 91/100
+## User, Experience: 91/100
 ✅ Fast page load times
 ✅ Responsive design
 ✅ Accessibility features
@@ -81,7 +80,7 @@ Overall Health Score: 92/100 ✅
 3. Add more comprehensive logging
 4. Consider performance optimizations
 
-## System Status: HEALTHY ✅
+## System, Status: HEALTHY ✅
 All critical systems operational.
 Platform ready for production use.`;
   };
@@ -99,8 +98,7 @@ Platform ready for production use.`;
       dependencyScore: depMatch ? parseInt(depMatch[1]) : 0,
       securityScore: securityMatch ? parseInt(securityMatch[1]) : 0,
       uxScore: uxMatch ? parseInt(uxMatch[1]) : 0,
-      overallScore: overallMatch ? parseInt(overallMatch[1]) : 0,
-    };
+      overallScore: overallMatch ? parseInt(overallMatch[1]) : 0};
   };
 
   const getScoreColor = (score: number): string => {
@@ -141,7 +139,7 @@ Platform ready for production use.`;
           className={`px-6 py-3 rounded-lg font-medium transition-colors ${
             isLoading 
               ? 'bg-gray-400 text-white cursor-not-allowed' 
-              : 'bg-blue-600 text-white hover:bg-blue-700'
+              : 'bg-blue-600 text-white, hover:bg-blue-700'
           }`}
         >
           {isLoading ? '🔄 Running...' : '🚀 Run Health Check'}
@@ -150,7 +148,7 @@ Platform ready for production use.`;
         {report && (
           <button
             onClick={downloadReport}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium, hover:bg-green-700 transition-colors"
           >
             📥 Download Report
           </button>
@@ -168,7 +166,7 @@ Platform ready for production use.`;
       {metrics && (
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-4">📊 Health Metrics Overview</h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2, md:grid-cols-5 gap-4">
             <div className="text-center">
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.moduleScore)}`}>
                 {metrics.moduleScore}
@@ -210,7 +208,7 @@ Platform ready for production use.`;
             <h3 className="text-lg font-semibold">📋 Full Report</h3>
             <button
               onClick={() => setReport('')}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-500, hover:text-gray-700"
             >
               ✕ Close
             </button>

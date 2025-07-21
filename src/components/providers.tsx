@@ -11,11 +11,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 60 * 1000, // 1 minute
-        refetchOnWindowFocus: false,
-      },
-    },
-  }))
+        staleTime: 60 * 1000, // 1 minute, refetchOnWindowFocus: false}}}))
 
   // Exclude admin routes from NextAuth SessionProvider to prevent automatic redirects
   const isAdminRoute = pathname?.startsWith('/admin')

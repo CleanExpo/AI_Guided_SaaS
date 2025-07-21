@@ -5,8 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -15,21 +14,18 @@ import {
   Github,
   Twitter,
   Hash,
-  ExternalLink,
-} from 'lucide-react';
+  ExternalLink} from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Community - AI Guided SaaS Platform',
   description:
-    'Join our vibrant community of developers building the future with AI',
-};
+    'Join our vibrant community of developers building the future with AI'};
 
 const communityStats = [
   { label: 'Active Members', value: '15,000+', icon: Users },
   { label: 'Monthly Posts', value: '2,500+', icon: MessageSquare },
   { label: 'Projects Shared', value: '800+', icon: Github },
-  { label: 'Countries', value: '50+', icon: ExternalLink },
-];
+  { label: 'Countries', value: '50+', icon: ExternalLink }];
 
 const platforms = [
   {
@@ -38,25 +34,21 @@ const platforms = [
     icon: Hash,
     members: '8,500+',
     link: '#',
-    color: 'bg-indigo-100 text-indigo-800',
-  },
+    color: 'bg-indigo-100 text-indigo-800'},
   {
     name: 'GitHub Discussions',
     description: 'Share code, report issues, and contribute to the platform',
     icon: Github,
     members: '3,200+',
     link: '#',
-    color: 'bg-gray-100 text-gray-800',
-  },
+    color: 'bg-gray-100 text-gray-800'},
   {
     name: 'Twitter Community',
     description: 'Follow updates and connect with fellow developers',
     icon: Twitter,
     members: '12,000+',
     link: '#',
-    color: 'bg-blue-100 text-blue-800',
-  },
-];
+    color: 'bg-blue-100 text-blue-800'}];
 
 const featuredPosts = [
   {
@@ -64,23 +56,19 @@ const featuredPosts = [
     author: 'Sarah Chen',
     replies: 24,
     likes: 156,
-    category: 'Showcase',
-  },
+    category: 'Showcase'},
   {
     title: 'Best Practices for AI Prompt Engineering',
     author: 'Mike Rodriguez',
     replies: 18,
     likes: 89,
-    category: 'Tutorial',
-  },
+    category: 'Tutorial'},
   {
-    title: 'Feature Request: Dark Mode for Code Editor',
+    title: 'Feature, Request: Dark Mode for Code Editor',
     author: 'Alex Kim',
     replies: 42,
     likes: 203,
-    category: 'Feature Request',
-  },
-];
+    category: 'Feature Request'}];
 
 export default function CommunityPage() {
   return (
@@ -95,7 +83,7 @@ export default function CommunityPage() {
         </div>
 
         {/* Community Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2, md:grid-cols-4 gap-6 mb-16">
           {communityStats.map(stat => {
             const Icon = stat.icon;
             return (
@@ -117,7 +105,7 @@ export default function CommunityPage() {
           <h2 className="text-2xl font-bold text-center mb-8">
             Where to Find Us
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-8">
             {platforms.map(platform => {
               const Icon = platform.icon;
               return (
@@ -188,7 +176,7 @@ export default function CommunityPage() {
           <p className="text-muted-foreground mb-6">
             Help us maintain a welcoming and productive environment for everyone
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-4 text-sm">
             <div>
               <h3 className="font-semibold mb-2">Be Respectful</h3>
               <p className="text-muted-foreground">

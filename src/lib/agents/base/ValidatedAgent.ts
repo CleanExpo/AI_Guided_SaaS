@@ -7,8 +7,8 @@ import { AgentResultSchema } from '@/lib/validation/agent-schemas'
  * Base class for agents with built-in validation
  */
 export abstract class ValidatedAgent extends Agent {
-  protected inputSchema: z.ZodSchema
-  protected outputSchema: z.ZodSchema
+  protected, inputSchema: z.ZodSchema
+  protected, outputSchema: z.ZodSchema
 
   constructor(config: AgentConfig, inputSchema: z.ZodSchema, outputSchema: z.ZodSchema) {
     super(config)
@@ -21,7 +21,7 @@ export abstract class ValidatedAgent extends Agent {
    */
   @Validate(z.string(), AgentResultSchema)
   async process(input: string): Promise<AgentResult> {
-    return super.process(input)
+    return, super.process(input)
   }
 
   /**
@@ -34,13 +34,13 @@ export abstract class ValidatedAgent extends Agent {
         const validatedInput = this.inputSchema.parse(input)
         return this.executeValidated(validatedInput)
       } catch (error) {
-        this.think(`Input validation failed: ${error}`)
+        this.think(`Input validation, failed: ${error}`)
         return {
           success: false,
           output: null,
           messages: this.messages,
           artifacts: this.context.artifacts,
-          error: `Input validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+          error: `Input validation, failed: ${error instanceof Error ? error.message : 'Unknown error'}`
         }
       }
     }
@@ -52,17 +52,17 @@ export abstract class ValidatedAgent extends Agent {
   /**
    * Execute with validated input
    */
-  protected abstract executeValidated(input: any): Promise<AgentResult>
+  protected abstract executeValidated(input): Promise<AgentResult>
 
   /**
    * Validate output before returning
    */
-  protected validateOutput(output: any): any {
+  protected validateOutput(output): any {
     if (this.outputSchema) {
       try {
         return this.outputSchema.parse(output)
       } catch (error) {
-        this.think(`Output validation failed: ${error}`)
+        this.think(`Output validation, failed: ${error}`)
         throw error
       }
     }
@@ -122,7 +122,7 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
         confidence: 0.95
       }
     } catch (error) {
-      this.think(`Error during analysis: ${error}`)
+      this.think(`Error during, analysis: ${error}`)
       return {
         success: false,
         output: null,
@@ -135,7 +135,7 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
 
   private async analyzeRequirements(input: string): Promise<any> {
     // Simplified for example - implement your actual logic
-    const prompt = `Analyze these requirements and provide a structured analysis: ${input}`
+    const prompt = `Analyze these requirements and provide a structured, analysis: ${input}`
     
     const response = await generateAIResponse(prompt, {
       model: this.config.model,

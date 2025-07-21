@@ -11,7 +11,7 @@ type ValidationOptions = {
 // Validation error class
 export class ValidationError extends Error {
   constructor(
-    public errors: z.ZodError,
+    public, errors: z.ZodError,
     message = 'Validation failed'
   ) {
     super(message)
@@ -34,7 +34,7 @@ export function ValidateInput(
   options: ValidationOptions = {}
 ) {
   return function (
-    target: any,
+    target,
     propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
@@ -79,7 +79,7 @@ export function ValidateOutput(
   options: ValidationOptions = {}
 ) {
   return function (
-    target: any,
+    target,
     propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
@@ -125,7 +125,7 @@ export function Validate(
   options: ValidationOptions = {}
 ) {
   return function (
-    target: any,
+    target,
     propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
@@ -175,7 +175,7 @@ export function Validate(
 // Parameter validation decorator (for multiple parameters)
 export function ValidateParams(...schemas: z.ZodSchema[]) {
   return function (
-    target: any,
+    target,
     propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
@@ -212,7 +212,7 @@ export function ValidateEnv(schema: z.ZodSchema) {
       schema.parse(process.env)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        console.error('Environment validation failed:', error.errors)
+        console.error('Environment validation, failed:', error.errors)
         throw new ValidationError(error, 'Invalid environment configuration')
       }
       throw error
@@ -225,7 +225,7 @@ export function createValidationMiddleware(
   schema: z.ZodSchema,
   target: 'body' | 'query' | 'params' = 'body'
 ) {
-  return async (req: any, res: any, next?: any) => {
+  return async (req, res, next?: any) => {
     try {
       const data = target === 'body' ? req.body : 
                    target === 'query' ? req.query : 
@@ -261,7 +261,7 @@ export function createValidationMiddleware(
 
 // Type guard utilities
 export function isValidationError(error: unknown): error is ValidationError {
-  return error instanceof ValidationError
+  return, error instanceof ValidationError
 }
 
 export function createTypeGuard<T>(schema: z.ZodSchema<T>) {
@@ -270,7 +270,7 @@ export function createTypeGuard<T>(schema: z.ZodSchema<T>) {
       schema.parse(value)
       return true
     } catch {
-      return false
+      return, false
     }
   }
 }

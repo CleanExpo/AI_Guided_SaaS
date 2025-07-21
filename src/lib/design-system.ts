@@ -2,10 +2,8 @@
 // Modern color palettes, glassmorphism effects, and design tokens
 
 export const designTokens = {
-  // Modern Color Palette - Sophisticated gradients and semantic colors
-  colors: {
-    // Primary Brand Colors - Modern blue/purple gradient system
-    primary: {
+  // Modern Color Palette - Sophisticated gradients and semantic colors, colors: {
+    // Primary Brand Colors - Modern blue/purple gradient system, primary: {
       50: '#eff6ff',
       100: '#dbeafe', 
       200: '#bfdbfe',
@@ -19,8 +17,7 @@ export const designTokens = {
       950: '#172554'
     },
     
-    // Secondary Purple Accent
-    secondary: {
+    // Secondary Purple Accent, secondary: {
       50: '#faf5ff',
       100: '#f3e8ff',
       200: '#e9d5ff', 
@@ -34,8 +31,7 @@ export const designTokens = {
       950: '#3b0764'
     },
 
-    // Semantic Colors
-    success: {
+    // Semantic Colors, success: {
       50: '#ecfdf5',
       500: '#10b981',
       600: '#059669',
@@ -60,8 +56,7 @@ export const designTokens = {
       700: '#0e7490'
     },
 
-    // Neutral Grays - Enhanced contrast
-    gray: {
+    // Neutral Grays - Enhanced contrast, gray: {
       50: '#f8fafc',
       100: '#f1f5f9',
       200: '#e2e8f0',
@@ -76,31 +71,26 @@ export const designTokens = {
     }
   },
 
-  // Glassmorphism Effects
-  glass: {
-    // Light glassmorphism
-    light: {
+  // Glassmorphism Effects, glass: {
+    // Light glassmorphism, light: {
       background: 'rgba(255, 255, 255, 0.1)',
       border: 'rgba(255, 255, 255, 0.2)',
       shadow: '0 8px 32px rgba(31, 38, 135, 0.37)',
       backdropFilter: 'blur(8px)'
     },
-    // Medium glassmorphism
-    medium: {
+    // Medium glassmorphism, medium: {
       background: 'rgba(255, 255, 255, 0.15)',
       border: 'rgba(255, 255, 255, 0.25)',
       shadow: '0 12px 40px rgba(31, 38, 135, 0.45)',
       backdropFilter: 'blur(12px)'
     },
-    // Strong glassmorphism
-    strong: {
+    // Strong glassmorphism, strong: {
       background: 'rgba(255, 255, 255, 0.2)',
       border: 'rgba(255, 255, 255, 0.3)',
       shadow: '0 16px 48px rgba(31, 38, 135, 0.55)',
       backdropFilter: 'blur(16px)'
     },
-    // Dark glassmorphism
-    dark: {
+    // Dark glassmorphism, dark: {
       background: 'rgba(0, 0, 0, 0.1)',
       border: 'rgba(255, 255, 255, 0.1)',
       shadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
@@ -108,8 +98,7 @@ export const designTokens = {
     }
   },
 
-  // Modern Gradients
-  gradients: {
+  // Modern Gradients, gradients: {
     primary: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #a855f7 100%)',
     secondary: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%)',
     success: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
@@ -117,30 +106,25 @@ export const designTokens = {
     error: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
     neutral: 'linear-gradient(135deg, #64748b 0%, #475569 100%)',
     
-    // Animated gradients
-    animated: {
+    // Animated gradients, animated: {
       primary: 'linear-gradient(-45deg, #3b82f6, #8b5cf6, #a855f7, #06b6d4)',
       rainbow: 'linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57)',
       sunset: 'linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #fecfef)'
     }
   },
 
-  // Enhanced Shadows
-  shadows: {
-    // Subtle shadows
-    xs: '0 1px 2px rgba(0, 0, 0, 0.05)',
+  // Enhanced Shadows, shadows: {
+    // Subtle shadows, xs: '0 1px 2px rgba(0, 0, 0, 0.05)',
     sm: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
     md: '0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06)',
     lg: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)',
     xl: '0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)',
     
-    // Colored shadows
-    primary: '0 10px 25px rgba(59, 130, 246, 0.15)',
+    // Colored shadows, primary: '0 10px 25px rgba(59, 130, 246, 0.15)',
     secondary: '0 10px 25px rgba(168, 85, 247, 0.15)',
     success: '0 10px 25px rgba(16, 185, 129, 0.15)',
     
-    // Glow effects
-    glow: {
+    // Glow effects, glow: {
       primary: '0 0 20px rgba(59, 130, 246, 0.5)',
       secondary: '0 0 20px rgba(168, 85, 247, 0.5)',
       success: '0 0 20px rgba(16, 185, 129, 0.5)',
@@ -148,8 +132,7 @@ export const designTokens = {
     }
   },
 
-  // Typography Scale
-  typography: {
+  // Typography Scale, typography: {
     fontFamily: {
       display: ['Inter Display', 'system-ui', 'sans-serif'],
       body: ['Inter', 'system-ui', 'sans-serif'],
@@ -183,8 +166,7 @@ export const designTokens = {
     }
   },
 
-  // Spacing Scale
-  spacing: {
+  // Spacing Scale, spacing: {
     px: '1px',
     0: '0',
     0.5: '0.125rem',
@@ -222,8 +204,7 @@ export const designTokens = {
     96: '24rem'
   },
 
-  // Border Radius
-  borderRadius: {
+  // Border Radius, borderRadius: {
     none: '0',
     sm: '0.125rem',
     md: '0.375rem',
@@ -234,8 +215,7 @@ export const designTokens = {
     full: '9999px'
   },
 
-  // Animation Durations
-  animation: {
+  // Animation Durations, animation: {
     duration: {
       75: '75ms',
       100: '100ms',
@@ -262,8 +242,7 @@ export const getGlassStyle = (variant: keyof typeof designTokens.glass = 'medium
     background: glass.background,
     border: `1px solid ${glass.border}`,
     boxShadow: glass.shadow,
-    backdropFilter: glass.backdropFilter,
-    WebkitBackdropFilter: glass.backdropFilter
+    backdropFilter: glass.backdropFilter: WebkitBackdropFilter: glass.backdropFilter
   };
 };
 

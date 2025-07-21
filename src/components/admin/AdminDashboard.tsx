@@ -24,32 +24,16 @@ import {
 import { cn } from '@/lib/utils'
 
 interface DashboardStats {
-  totalUsers: number
-  activeUsers: number
-  newUsersToday: number
-  newUsersThisWeek: number
-  systemHealth: string
-  uptime: string
-  cpuUsage: string
-  memoryUsage: string
-  totalProjects: number
-  activeProjects: number
-  apiCalls: {
-    today: number
-    thisWeek: number
-    thisMonth: number
+  totalUsers: number, activeUsers: number, newUsersToday: number, newUsersThisWeek: number, systemHealth: string, uptime: string, cpuUsage: string, memoryUsage: string, totalProjects: number, activeProjects: number, apiCalls: {
+    today: number, thisWeek: number, thisMonth: number
   }
   recentActivity: Array<{
-    type: string
-    message: string
-    timestamp: string
+    type: string, message: string, timestamp: string
   }>
 }
 
 interface AdminDashboardProps {
-  stats: DashboardStats
-  adminUser: any
-  onNavigate: (section: string) => void
+  stats: DashboardStats, adminUser: any, onNavigate: (section: string) => void
 }
 
 export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardProps) {
@@ -103,7 +87,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
   return (
     <div className="space-y-8">
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
@@ -166,7 +150,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
       </div>
 
       {/* System Health & Performance */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -254,7 +238,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
       </div>
 
       {/* Quick Actions Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
         <Card 
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-blue-500"
           onClick={() => onNavigate('users')}

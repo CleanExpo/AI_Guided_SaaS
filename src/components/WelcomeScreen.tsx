@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Persona } from '@/types';
 import { Bot, Code, Palette, Rocket, Sparkles, Zap } from 'lucide-react';
@@ -26,13 +25,11 @@ const personas: Persona[] = [
       'Machine Learning',
       'AI Integration',
       'Automation',
-      'Data Processing',
-    ],
+      'Data Processing'],
     tone: 'Technical and forward-thinking',
     avatar: '🤖',
     role: 'architect',
-    color: 'blue',
-  },
+    color: 'blue'},
   {
     id: 'fullstack-wizard',
     name: 'Fullstack Wizard',
@@ -42,8 +39,7 @@ const personas: Persona[] = [
     tone: 'Comprehensive and detail-oriented',
     avatar: '🧙‍♂️',
     role: 'developer',
-    color: 'purple',
-  },
+    color: 'purple'},
   {
     id: 'ui-designer',
     name: 'UI Designer',
@@ -52,13 +48,11 @@ const personas: Persona[] = [
       'UI/UX Design',
       'Responsive Design',
       'Design Systems',
-      'User Research',
-    ],
+      'User Research'],
     tone: 'Creative and user-focused',
     avatar: '🎨',
     role: 'designer',
-    color: 'pink',
-  },
+    color: 'pink'},
   {
     id: 'devops-engineer',
     name: 'DevOps Engineer',
@@ -68,8 +62,7 @@ const personas: Persona[] = [
     tone: 'Systematic and reliability-focused',
     avatar: '⚙️',
     role: 'devops',
-    color: 'green',
-  },
+    color: 'green'},
   {
     id: 'startup-founder',
     name: 'Startup Founder',
@@ -79,13 +72,11 @@ const personas: Persona[] = [
       'MVP Development',
       'Market Validation',
       'Lean Startup',
-      'Growth Hacking',
-    ],
+      'Growth Hacking'],
     tone: 'Energetic and results-driven',
     avatar: '🚀',
     role: 'founder',
-    color: 'orange',
-  },
+    color: 'orange'},
   {
     id: 'enterprise-consultant',
     name: 'Enterprise Consultant',
@@ -95,14 +86,11 @@ const personas: Persona[] = [
       'Enterprise Architecture',
       'Security',
       'Scalability',
-      'Compliance',
-    ],
+      'Compliance'],
     tone: 'Professional and thorough',
     avatar: '🏢',
     role: 'consultant',
-    color: 'gray',
-  },
-];
+    color: 'gray'}];
 
 const getPersonaIcon = (personaId: string) => {
   switch (personaId) {
@@ -146,11 +134,11 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6">
           {personas.map(persona => (
             <Card
               key={persona.id}
-              className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+              className={`cursor-pointer transition-all duration-300, hover:shadow-lg, hover:scale-105 ${
                 selectedPersona === persona.id
                   ? 'ring-2 ring-blue-500 shadow-lg scale-105'
                   : 'hover:shadow-md'

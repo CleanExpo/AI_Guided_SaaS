@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return NextResponse.json(
         { error: 'Failed to create user' },
         { status: 500 }
@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.error('Registration error:', error)
+    console.error('Registration, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

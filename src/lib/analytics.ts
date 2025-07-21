@@ -11,82 +11,48 @@ interface SumResult {
 }
 
 interface SubscriptionBreakdownResult {
-  tier: string
-  count: number
-  revenue: number
+  tier: string, count: number, revenue: number
 }
 
 interface CategoryResult {
-  category: string
-  count: number
+  category: string, count: number
 }
 
 interface FrameworkResult {
-  framework: string
-  count: number
+  framework: string, count: number
 }
 
 interface StatusResult {
-  status: string
-  count: number
+  status: string, count: number
 }
 
 // Analytics interfaces
 export interface PlatformMetrics {
-  totalUsers: number
-  activeUsers: number
-  totalProjects: number
-  totalTemplates: number
-  totalRevenue: number
-  monthlyRevenue: number
-  conversionRate: number
-  averageSessionTime: number
+  totalUsers: number, activeUsers: number, totalProjects: number, totalTemplates: number, totalRevenue: number, monthlyRevenue: number, conversionRate: number, averageSessionTime: number
 }
 
 export interface UserMetrics {
-  newUsers: number
-  activeUsers: number
-  churned: number
-  retention: {
-    day1: number
-    day7: number
-    day30: number
+  newUsers: number, activeUsers: number, churned: number, retention: {
+    day1: number, day7: number, day30: number
   }
   topCountries: Array<{ country: string; users: number }>
   userGrowth: Array<{ date: string; users: number }>
 }
 
 export interface RevenueMetrics {
-  totalRevenue: number
-  monthlyRecurringRevenue: number
-  averageRevenuePerUser: number
-  churnRate: number
-  lifetimeValue: number
-  revenueGrowth: Array<{ date: string; revenue: number }>
+  totalRevenue: number, monthlyRecurringRevenue: number, averageRevenuePerUser: number, churnRate: number, lifetimeValue: number, revenueGrowth: Array<{ date: string; revenue: number }>
   subscriptionBreakdown: Array<{ tier: string; count: number; revenue: number }>
   templateRevenue: Array<{ templateId: string; name: string; revenue: number }>
 }
 
 export interface SystemMetrics {
-  apiCalls: number
-  errorRate: number
-  averageResponseTime: number
-  uptime: number
-  activeConnections: number
-  databaseConnections: number
-  cacheHitRate: number
-  storageUsed: number
+  apiCalls: number, errorRate: number, averageResponseTime: number, uptime: number, activeConnections: number, databaseConnections: number, cacheHitRate: number, storageUsed: number
 }
 
 export interface ContentMetrics {
-  totalTemplates: number
-  pendingReviews: number
-  approvedTemplates: number
-  rejectedTemplates: number
-  topCategories: Array<{ category: string; count: number }>
+  totalTemplates: number, pendingReviews: number, approvedTemplates: number, rejectedTemplates: number, topCategories: Array<{ category: string; count: number }>
   topFrameworks: Array<{ framework: string; count: number }>
-  averageRating: number
-  totalDownloads: number
+  averageRating: number, totalDownloads: number
 }
 
 // Analytics service
@@ -135,7 +101,7 @@ export class AnalyticsService {
         averageSessionTime
       }
     } catch (error) {
-      console.error('Error fetching platform metrics:', error)
+      console.error('Error fetching platform, metrics:', error)
       return this.getMockPlatformMetrics()
     }
   }
@@ -159,8 +125,7 @@ export class AnalyticsService {
           break
         case '90d':
           startDate.setDate(endDate.getDate() - 90)
-          break
-        default:
+          break, default:
           startDate.setDate(endDate.getDate() - 30)
       }
 
@@ -191,7 +156,7 @@ export class AnalyticsService {
         userGrowth
       }
     } catch (error) {
-      console.error('Error fetching user metrics:', error)
+      console.error('Error fetching user, metrics:', error)
       return this.getMockUserMetrics()
     }
   }
@@ -230,15 +195,11 @@ export class AnalyticsService {
       return {
         totalRevenue: Number(totalRevenue[0]?.total) || 0,
         monthlyRecurringRevenue: Number(monthlyRevenue[0]?.total) || 0,
-        averageRevenuePerUser: 0, // TODO: Calculate ARPU
-        churnRate: 0, // TODO: Calculate churn rate
-        lifetimeValue: 0, // TODO: Calculate LTV
-        revenueGrowth: [], // TODO: Get revenue growth data
-        subscriptionBreakdown: subscriptionBreakdown || [],
+        averageRevenuePerUser: 0, // TODO: Calculate ARPU, churnRate: 0, // TODO: Calculate churn rate, lifetimeValue: 0, // TODO: Calculate LTV, revenueGrowth: [], // TODO: Get revenue growth data, subscriptionBreakdown: subscriptionBreakdown || [],
         templateRevenue: [] // TODO: Get template revenue data
       }
     } catch (error) {
-      console.error('Error fetching revenue metrics:', error)
+      console.error('Error fetching revenue, metrics:', error)
       return this.getMockRevenueMetrics()
     }
   }
@@ -259,16 +220,14 @@ export class AnalyticsService {
 
       return {
         apiCalls: Number(apiCalls[0]?.count) || 0,
-        errorRate: 0.02, // 2% error rate
-        averageResponseTime: 150, // 150ms
-        uptime: 99.9,
+        errorRate: 0.02, // 2% error rate, averageResponseTime: 150, // 150ms, uptime: 99.9,
         activeConnections: 45,
         databaseConnections: 12,
         cacheHitRate: 85.5,
         storageUsed: 2.4 // GB
       }
     } catch (error) {
-      console.error('Error fetching system metrics:', error)
+      console.error('Error fetching system, metrics:', error)
       return this.getMockSystemMetrics()
     }
   }
@@ -329,7 +288,7 @@ export class AnalyticsService {
         totalDownloads: 15420
       }
     } catch (error) {
-      console.error('Error fetching content metrics:', error)
+      console.error('Error fetching content, metrics:', error)
       return this.getMockContentMetrics()
     }
   }

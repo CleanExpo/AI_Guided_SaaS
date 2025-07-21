@@ -11,36 +11,28 @@ export interface MigrationOptions {
 }
 
 export interface MigrationProgress {
-  totalRecords: number
-  processedRecords: number
-  currentCollection: string
-  errors: MigrationError[]
+  totalRecords: number, processedRecords: number, currentCollection: string, errors: MigrationError[]
   status: 'running' | 'completed' | 'failed'
 }
 
 export interface MigrationError {
-  collection: string
-  recordId: string
-  error: string
+  collection: string, recordId: string, error: string
 }
 
 export interface MigrationResult {
-  success: boolean
-  totalRecords: number
-  migratedRecords: number
-  errors: MigrationError[]
+  success: boolean, totalRecords: number, migratedRecords: number, errors: MigrationError[]
   duration: number
 }
 
 export class BackendMigrator {
-  private sourceAdapter: BackendAdapter
-  private targetAdapter: BackendAdapter
-  private options: MigrationOptions
-  private progress: MigrationProgress
+  private, sourceAdapter: BackendAdapter
+  private, targetAdapter: BackendAdapter
+  private, options: MigrationOptions
+  private, progress: MigrationProgress
 
   constructor(
-    sourceConfig: any,
-    targetConfig: any,
+    sourceConfig,
+    targetConfig,
     options: MigrationOptions = {}
   ) {
     this.sourceAdapter = createBackendAdapter(sourceConfig)
@@ -183,8 +175,7 @@ export class BackendMigrator {
     // Create new user (without password for security)
     const newUser = await this.targetAdapter.create<User>('users', {
       ...user,
-      // Generate temporary password
-      password: this.generateTempPassword()
+      // Generate temporary password, password: this.generateTempPassword()
     })
 
     return newUser
@@ -198,7 +189,7 @@ export class BackendMigrator {
     return this.targetAdapter.create<Project>('projects', mappedProject)
   }
 
-  private async migrateGenericRecord(record: any): Promise<any> {
+  private async migrateGenericRecord(record): Promise<any> {
     const collection = this.progress.currentCollection
     return this.targetAdapter.create(collection, record)
   }
@@ -218,9 +209,8 @@ export class BackendMigrator {
  * Validate that source and target backends are compatible
  */
 export async function validateMigration(
-  sourceConfig: any,
-  targetConfig: any
-): Promise<{ valid: boolean; issues: string[] }> {
+  sourceConfig,
+  targetConfig): Promise<{ valid: boolean; issues: string[] }> {
   const issues: string[] = []
   
   try {
@@ -248,7 +238,7 @@ export async function validateMigration(
     }
 
   } catch (error) {
-    issues.push(`Configuration error: ${error}`)
+    issues.push(`Configuration, error: ${error}`)
   }
 
   return {
@@ -261,7 +251,7 @@ export async function validateMigration(
  * Export data from a backend
  */
 export async function exportBackendData(
-  config: any,
+  config,
   collections: string[] = ['users', 'projects']
 ): Promise<Record<string, any[]>> {
   const adapter = createBackendAdapter(config)
@@ -293,7 +283,7 @@ export async function exportBackendData(
  * Import data to a backend
  */
 export async function importBackendData(
-  config: any,
+  config,
   data: Record<string, any[]>,
   options: { overwrite?: boolean } = {}
 ): Promise<MigrationResult> {

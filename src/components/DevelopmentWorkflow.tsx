@@ -22,9 +22,7 @@ const workflowPhases = [
       'Project structure defined',
       'Technology stack selected',
       'Database schema designed',
-      'API endpoints planned',
-    ],
-  },
+      'API endpoints planned']},
   {
     id: 'development',
     title: 'Core Development',
@@ -35,9 +33,7 @@ const workflowPhases = [
       'Set up development environment',
       'Implement authentication system',
       'Build core features',
-      'Create user interface',
-    ],
-  },
+      'Create user interface']},
   {
     id: 'testing',
     title: 'Testing & Quality Assurance',
@@ -48,9 +44,7 @@ const workflowPhases = [
       'Write unit tests',
       'Perform integration testing',
       'User acceptance testing',
-      'Performance optimization',
-    ],
-  },
+      'Performance optimization']},
   {
     id: 'deployment',
     title: 'Deployment & Launch',
@@ -61,15 +55,11 @@ const workflowPhases = [
       'Set up production environment',
       'Deploy application',
       'Configure monitoring',
-      'Launch and announce',
-    ],
-  },
-];
+      'Launch and announce']}];
 
 export default function DevelopmentWorkflow({
   projectConfig,
-  onPhaseComplete,
-}: DevelopmentWorkflowProps) {
+  onPhaseComplete}: DevelopmentWorkflowProps) {
   const [activePhase, setActivePhase] = useState('development');
 
   const handlePhaseComplete = (phaseId: string) => {
@@ -89,7 +79,7 @@ export default function DevelopmentWorkflow({
           <CardTitle>AI Development Workflow - {projectConfig.name}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">
                 {projectConfig.features.length}
@@ -119,7 +109,7 @@ export default function DevelopmentWorkflow({
       </Card>
 
       {/* Workflow Phases */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
         {workflowPhases.map(phase => {
           const IconComponent = phase.icon;
           const isActive = activePhase === phase.id;
@@ -224,7 +214,7 @@ export default function DevelopmentWorkflow({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <h4 className="font-medium text-gray-900">Next Steps</h4>
               <ul className="text-sm text-gray-600 space-y-1">

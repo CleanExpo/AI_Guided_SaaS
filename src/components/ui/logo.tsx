@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 
 interface LogoProps {
   variant?: 'full' | 'icon' | 'horizontal';
@@ -15,23 +15,20 @@ const sizeClasses = {
   sm: 'w-8 h-8',
   md: 'w-12 h-12',
   lg: 'w-16 h-16',
-  xl: 'w-24 h-24',
-};
+  xl: 'w-24 h-24'};
 
 const textSizeClasses = {
   xs: 'text-xs',
   sm: 'text-sm',
   md: 'text-lg',
   lg: 'text-xl',
-  xl: 'text-2xl',
-};
+  xl: 'text-2xl'};
 
 export function Logo({
   variant = 'icon',
   size = 'md',
   className,
-  showText = false,
-}: LogoProps) {
+  showText = false}: LogoProps) {
   const LogoIcon = () => (
     <div
       className={cn(
@@ -67,8 +64,7 @@ export function Logo({
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px',
-          }}
+                      : '20px'}}
         />
       </div>
 
@@ -96,8 +92,7 @@ export function Logo({
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px',
-          }}
+                      : '20px'}}
         />
       </div>
 
@@ -114,8 +109,7 @@ export function Logo({
                   ? '14px'
                   : size === 'lg'
                     ? '18px'
-                    : '24px',
-        }}
+                    : '24px'}}
       >
         AGS
       </div>
@@ -134,8 +128,7 @@ export function Logo({
                     ? '8px'
                     : size === 'lg'
                       ? '10px'
-                      : '12px',
-          }}
+                      : '12px'}}
         >
           AI GUIDED SAAS
         </div>
@@ -183,15 +176,13 @@ export function Logo({
 export function LogoSVG({
   variant = 'icon',
   size = 'md',
-  className,
-}: LogoProps) {
+  className}: LogoProps) {
   const dimensions = {
     xs: 24,
     sm: 32,
     md: 48,
     lg: 64,
-    xl: 96,
-  };
+    xl: 96};
 
   const dim = dimensions[size];
 

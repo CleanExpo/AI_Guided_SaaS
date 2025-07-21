@@ -4,46 +4,40 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import { designTokens } from '@/lib/design-system';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:pointer-events-none, disabled:opacity-50 relative overflow-hidden',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-lg hover:shadow-xl',
-        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-sm hover:shadow-md',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow-md',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
-        gradient: 'text-white shadow-lg hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700',
-        glass: 'text-foreground shadow-lg hover:shadow-xl backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20',
-        glow: 'bg-primary text-primary-foreground shadow-lg hover:shadow-xl',
-        floating: 'bg-background text-foreground border border-border shadow-lg hover:shadow-xl transform hover:scale-105',
-      },
+        default: 'bg-primary text-primary-foreground, hover:bg-primary/90 shadow-lg, hover:shadow-xl',
+        destructive: 'bg-destructive text-destructive-foreground, hover:bg-destructive/90 shadow-lg, hover:shadow-xl',
+        outline: 'border border-input bg-background, hover:bg-accent, hover:text-accent-foreground shadow-sm, hover:shadow-md',
+        secondary: 'bg-secondary text-secondary-foreground, hover:bg-secondary/80 shadow-sm, hover:shadow-md',
+        ghost: 'hover:bg-accent, hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4, hover:underline',
+        gradient: 'text-white shadow-lg, hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600, hover:from-blue-700, hover:to-purple-700',
+        glass: 'text-foreground shadow-lg, hover:shadow-xl backdrop-blur-md bg-white/10 border border-white/20, hover:bg-white/20',
+        glow: 'bg-primary text-primary-foreground shadow-lg, hover:shadow-xl',
+        floating: 'bg-background text-foreground border border-border shadow-lg, hover:shadow-xl transform, hover:scale-105'},
       size: {
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-lg px-8',
         xl: 'h-12 rounded-lg px-10 text-base',
-        icon: 'h-10 w-10',
-      },
+        icon: 'h-10 w-10'},
       animation: {
         none: '',
         pulse: 'animate-pulse-slow',
         bounce: 'animate-bounce-subtle',
         float: 'animate-float',
-        shimmer: 'relative before:absolute before:inset-0 before:bg-shimmer-gradient before:animate-shimmer',
-      },
-    },
+        shimmer: 'relative, before:absolute, before:inset-0, before:bg-shimmer-gradient, before:animate-shimmer'}},
     defaultVariants: {
       variant: 'default',
       size: 'default',
-      animation: 'none',
-    },
-  }
+      animation: 'none'}}
 );
 
 export interface ButtonPremiumProps
@@ -113,8 +107,7 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
 
     const motionProps = asChild ? {} : {
       whileHover: { scale: variant === 'floating' ? 1.05 : 1.02 },
-      whileTap: { scale: 0.98 },
-    };
+      whileTap: { scale: 0.98 }};
 
     return (
       <Comp
@@ -144,8 +137,7 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
               left: ripple.x - 10,
               top: ripple.y - 10,
               width: 20,
-              height: 20,
-            }}
+              height: 20}}
           />
         ))}
         

@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
                     request.headers.get('x-real-ip') || 
                     'unknown'
 
-    console.log(`Admin login successful: ${admin.email} from ${clientIP}`)
+    console.log(`Admin login, successful: ${admin.email} from ${clientIP}`)
 
     // Return success response with token
     const response = createAdminResponse({
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
     return response
 
   } catch (error) {
-    console.error('Admin login error:', error)
+    console.error('Admin login, error:', error)
     return createAdminResponse(
       {
         success: false,
@@ -94,7 +94,5 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  })
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'}})
 }

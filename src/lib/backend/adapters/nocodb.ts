@@ -21,12 +21,12 @@ function uuidv4(): string {
 }
 
 export class NocoDBAdapter implements BackendAdapter {
-  private baseUrl: string
-  private apiToken: string
+  private, baseUrl: string
+  private, apiToken: string
   private projectId?: string
   private authToken?: string
 
-  constructor(private config: BackendConfig) {
+  constructor(private, config: BackendConfig) {
     if (!config.url || !config.apiKey) {
       throw new Error('NocoDB URL and API token are required')
     }
@@ -46,10 +46,10 @@ export class NocoDBAdapter implements BackendAdapter {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       'xc-token': this.apiToken,
-      ...options.headers
+      ...(options.headers as Record<string, string> || {})
     }
 
     if (this.authToken) {
@@ -156,7 +156,7 @@ export class NocoDBAdapter implements BackendAdapter {
 
       return this.mapNocoDBUser(user)
     } catch {
-      return null
+      return, null
     }
   }
 
@@ -189,8 +189,7 @@ export class NocoDBAdapter implements BackendAdapter {
         id: uuidv4(),
         user_id: data.userId,
         name: data.name,
-        description: data.description,
-        type: data.type,
+        description: data.description: type: data.type,
         status: data.status,
         config: JSON.stringify(data.config || {}),
         created_at: new Date().toISOString(),
@@ -207,7 +206,7 @@ export class NocoDBAdapter implements BackendAdapter {
         `${this.getTableEndpoint('projects')}/${id}`
       )
       return this.mapNocoDBProject(project)
-    } catch (error: any) {
+    } catch (error) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
@@ -266,11 +265,7 @@ export class NocoDBAdapter implements BackendAdapter {
     const response = await this.request<{
       list: any[]
       pageInfo: {
-        totalRows: number
-        page: number
-        pageSize: number
-        isFirstPage: boolean
-        isLastPage: boolean
+        totalRows: number, page: number, pageSize: number, isFirstPage: boolean, isLastPage: boolean
       }
     }>(`${this.getTableEndpoint('projects')}?${params.toString()}`)
 
@@ -287,7 +282,7 @@ export class NocoDBAdapter implements BackendAdapter {
   }
 
   // Generic CRUD
-  async create<T>(collection: string, data: any): Promise<T> {
+  async create<T>(collection: string, data): Promise<T> {
     // Add metadata fields
     const createData = {
       ...data,
@@ -310,7 +305,7 @@ export class NocoDBAdapter implements BackendAdapter {
         `${this.getTableEndpoint(collection)}/${id}`
       )
       return this.mapNocoDBRecord(result) as T
-    } catch (error: any) {
+    } catch (error) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
@@ -318,7 +313,7 @@ export class NocoDBAdapter implements BackendAdapter {
     }
   }
 
-  async update<T>(collection: string, id: string, data: any): Promise<T> {
+  async update<T>(collection: string, id: string, data): Promise<T> {
     const updateData = {
       ...data,
       updated_at: new Date().toISOString()
@@ -369,11 +364,7 @@ export class NocoDBAdapter implements BackendAdapter {
     const response = await this.request<{
       list: any[]
       pageInfo: {
-        totalRows: number
-        page: number
-        pageSize: number
-        isFirstPage: boolean
-        isLastPage: boolean
+        totalRows: number, page: number, pageSize: number, isFirstPage: boolean, isLastPage: boolean
       }
     }>(`${this.getTableEndpoint(collection)}?${params.toString()}`)
 
@@ -441,7 +432,7 @@ export class NocoDBAdapter implements BackendAdapter {
   }
 
   // Helper methods
-  private mapNocoDBUser(user: any): User {
+  private mapNocoDBUser(user): User {
     return {
       id: user.id,
       email: user.email,
@@ -453,13 +444,12 @@ export class NocoDBAdapter implements BackendAdapter {
     }
   }
 
-  private mapNocoDBProject(project: any): Project {
+  private mapNocoDBProject(project): Project {
     return {
       id: project.id,
       userId: project.user_id,
       name: project.name,
-      description: project.description,
-      type: project.type,
+      description: project.description: type: project.type,
       status: project.status,
       config: project.config ? JSON.parse(project.config) : {},
       createdAt: project.created_at,
@@ -467,12 +457,12 @@ export class NocoDBAdapter implements BackendAdapter {
     }
   }
 
-  private mapNocoDBRecord(record: any): any {
+  private mapNocoDBRecord(record): any {
     // Parse any JSON fields
     const parsed = { ...record }
     
     // Common JSON fields
-    ['config', 'metadata', 'data'].forEach(field => {
+    ['config', 'metadata', 'data'].forEach((field) => {
       if (parsed[field] && typeof parsed[field] === 'string') {
         try {
           parsed[field] = JSON.parse(parsed[field])
@@ -496,11 +486,10 @@ export class NocoDBAdapter implements BackendAdapter {
   async executeQuery<T>(
     collection: string,
     params: URLSearchParams
-  ): Promise<{ list: T[]; pageInfo: any }> {
+  ): Promise<{ list: T[]; pageInfo}> {
     const response = await this.request<{
       list: any[]
-      pageInfo: any
-    }>(`${this.getTableEndpoint(collection)}?${params.toString()}`)
+      pageInfo}>(`${this.getTableEndpoint(collection)}?${params.toString()}`)
 
     return {
       list: response.list.map(this.mapNocoDBRecord) as T[],
@@ -511,12 +500,12 @@ export class NocoDBAdapter implements BackendAdapter {
 
 // NocoDB Query Builder implementation
 class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
-  private params: URLSearchParams
-  private whereConditions: string[] = []
+  private, params: URLSearchParams
+  private, whereConditions: string[] = []
 
   constructor(
-    private adapter: NocoDBAdapter,
-    private collection: string
+    private, adapter: NocoDBAdapter,
+    private, collection: string
   ) {
     this.params = new URLSearchParams()
   }
@@ -526,7 +515,7 @@ class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
     return this
   }
 
-  where(field: string, operator: string, value: any): QueryBuilder<T> {
+  where(field: string, operator: string, value): QueryBuilder<T> {
     const operatorMap: Record<string, string> = {
       '=': 'eq',
       '!=': 'neq',
@@ -540,7 +529,7 @@ class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
 
     const nocoOperator = operatorMap[operator]
     if (!nocoOperator) {
-      throw new Error(`Unsupported operator: ${operator}`)
+      throw new Error(`Unsupported, operator: ${operator}`)
     }
 
     this.whereConditions.push(`(${field},${nocoOperator},${value})`)
@@ -569,7 +558,7 @@ class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
       this.params.append('where', this.whereConditions.join('~and'))
     }
 
-    const { list } = await (this.adapter as any).executeQuery<T>(
+    const { list } = await (this.adapter as any).executeQuery(
       this.collection,
       this.params
     )
@@ -588,7 +577,7 @@ class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
       this.params.append('where', this.whereConditions.join('~and'))
     }
 
-    const { pageInfo } = await (this.adapter as any).executeQuery<T>(
+    const { pageInfo } = await (this.adapter as any).executeQuery(
       this.collection,
       this.params
     )

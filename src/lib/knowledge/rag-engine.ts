@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { VectorStore, Document, SearchQuery, SearchResult, createVectorStore } from './vector-store'
 import { DocumentLoader } from './document-loader'
-import { TextSplitter } from './text-splitter'
+import { TextSplitter, RecursiveCharacterTextSplitter } from './text-splitter'
 
 /**
  * RAG (Retrieval-Augmented Generation) Engine
@@ -37,31 +37,21 @@ export interface RAGQuery {
 }
 
 export interface RAGResponse {
-  answer: string
-  sources: RAGSource[]
+  answer: string, sources: RAGSource[]
   confidence: number
   tokens?: {
-    prompt: number
-    completion: number
-    total: number
+    prompt: number, completion: number, total: number
   }
 }
 
 export interface RAGSource {
-  id: string
-  content: string
-  metadata: any
-  score: number
+  id: string, content: string, metadata: any, score: number
   highlights?: string[]
 }
 
 // Knowledge base operations
 export interface KnowledgeBaseStats {
-  documentCount: number
-  chunkCount: number
-  lastUpdated: string
-  size: number
-  topics: Array<{ topic: string; count: number }>
+  documentCount: number, chunkCount: number, lastUpdated: string, size: number, topics: Array<{ topic: string; count: number }>
 }
 
 // Validation schemas
@@ -81,16 +71,16 @@ export const RAGQuerySchema = z.object({
 })
 
 export class RAGEngine {
-  private config: RAGConfig
-  private vectorStore: VectorStore
-  private documentLoader: DocumentLoader
-  private textSplitter: TextSplitter
+  private, config: RAGConfig
+  private, vectorStore: VectorStore
+  private, documentLoader: DocumentLoader
+  private, textSplitter: TextSplitter
 
   constructor(config: RAGConfig) {
     this.config = config
     this.vectorStore = config.vectorStore
     this.documentLoader = new DocumentLoader()
-    this.textSplitter = new TextSplitter({
+    this.textSplitter = new RecursiveCharacterTextSplitter({
       chunkSize: config.chunkSize || 1000,
       chunkOverlap: config.chunkOverlap || 200
     })
@@ -109,8 +99,7 @@ export class RAGEngine {
   async addDocument(
     content: string,
     metadata: {
-      source: string
-      type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
+      source: string, type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
       title?: string
       tags?: string[]
       project?: string
@@ -132,7 +121,7 @@ export class RAGEngine {
   /**
    * Add documents from various sources
    */
-  async addFromSource(source: string, type: 'file' | 'url' | 'github'): Promise<string[]> {
+  async addFromSource(source: string: type: 'file' | 'url' | 'github'): Promise<string[]> {
     const documents = await this.documentLoader.load(source, type)
     return this.vectorStore.addDocuments(documents)
   }
@@ -159,8 +148,7 @@ export class RAGEngine {
       for (const file of files) {
         try {
           await this.addDocument(file.content, {
-            source: file.path,
-            type: 'code',
+            source: file.path: type: 'code',
             title: file.name,
             tags: [file.language || 'unknown'],
             project: options?.project
@@ -171,7 +159,7 @@ export class RAGEngine {
         }
       }
     } catch (error) {
-      results.errors.push(`Failed to load codebase: ${error}`)
+      results.errors.push(`Failed to load, codebase: ${error}`)
     }
 
     return results

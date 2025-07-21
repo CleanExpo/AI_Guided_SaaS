@@ -30,8 +30,7 @@ export default function SystemResourceMonitor() {
     operationCount: 0,
     sessionDuration: 0,
     lastOperation: 'None',
-    isHealthy: true,
-  });
+    isHealthy: true});
 
   const [thresholds] = useState<PerformanceThresholds>({
     cpuWarning: 70,
@@ -83,8 +82,7 @@ export default function SystemResourceMonitor() {
         operationHistory[operationHistory.length - 1]?.operation || 'None',
       isHealthy:
         simulatedCpu < thresholds.cpuCritical &&
-        simulatedMemory < thresholds.memoryCritical,
-    };
+        simulatedMemory < thresholds.memoryCritical};
 
     setMetrics(newMetrics);
     checkThresholds(newMetrics);
@@ -118,7 +116,7 @@ export default function SystemResourceMonitor() {
     // Session Duration Alert
     if (currentMetrics.sessionDuration >= thresholds.maxSessionDuration) {
       newAlerts.push(
-        `🟠 SESSION LIMIT: ${Math.floor(currentMetrics.sessionDuration / 60)} minutes - Take a break`
+        `🟠 SESSION, LIMIT: ${Math.floor(currentMetrics.sessionDuration / 60)} minutes - Take a break`
       );
     }
 
@@ -129,7 +127,7 @@ export default function SystemResourceMonitor() {
 
     if (recentOps >= thresholds.maxOperationsPerMinute) {
       newAlerts.push(
-        `🟠 HIGH ACTIVITY: ${recentOps} operations in last minute - Slow down`
+        `🟠 HIGH, ACTIVITY: ${recentOps} operations in last minute - Slow down`
       );
     }
 
@@ -164,15 +162,14 @@ export default function SystemResourceMonitor() {
         timestamp,
         operation,
         duration: Math.random() * 2000 + 500, // Simulated duration
-      },
-    ]);
+      }]);
   };
 
   const emergencyStop = () => {
     stopMonitoring();
     setAlerts(['🚨 EMERGENCY STOP ACTIVATED - All operations halted']);
 
-    // In a real implementation, this would:
+    // In a real implementation, this, would:
     // - Kill running processes
     // - Save current state
     // - Clear memory caches
@@ -219,7 +216,7 @@ export default function SystemResourceMonitor() {
           {!isMonitoring ? (
             <Button
               onClick={startMonitoring}
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-green-600, hover:bg-green-700"
             >
               ▶️ Start Monitoring
             </Button>
@@ -230,7 +227,7 @@ export default function SystemResourceMonitor() {
               </Button>
               <Button
                 onClick={emergencyStop}
-                className="bg-red-600 hover:bg-red-700"
+                className="bg-red-600, hover:bg-red-700"
               >
                 🚨 Emergency Stop
               </Button>
@@ -260,7 +257,7 @@ export default function SystemResourceMonitor() {
       )}
 
       {/* Metrics Dashboard */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
         {/* CPU Usage */}
         <Card className="p-4">
           <div className="flex items-center justify-between mb-2">
@@ -411,7 +408,7 @@ export default function SystemResourceMonitor() {
             className={`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`}
           />
           <span className="font-medium">
-            System Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}
+            System, Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}
           </span>
           {!metrics.isHealthy && (
             <span className="text-red-600 font-medium">

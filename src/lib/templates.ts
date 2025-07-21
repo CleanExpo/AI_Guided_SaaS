@@ -3,18 +3,11 @@ import { DatabaseService } from './database'
 
 // Template type definitions
 export interface Template {
-  id: string
-  name: string
-  description: string
-  category: string
-  tags: string[]
-  framework: string
-  difficulty: 'beginner' | 'intermediate' | 'advanced'
+  id: string, name: string, description: string, category: string, tags: string[]
+  framework: string, difficulty: 'beginner' | 'intermediate' | 'advanced'
   author: {
-    id: string
-    name: string
-    avatar?: string
-    verified: boolean
+    id: string, name: string
+    avatar?: string, verified: boolean
   }
   pricing: {
     type: 'free' | 'premium' | 'pro'
@@ -22,51 +15,35 @@ export interface Template {
     currency?: string
   }
   stats: {
-    downloads: number
-    rating: number
-    reviews: number
-    lastUpdated: string
+    downloads: number, rating: number, reviews: number, lastUpdated: string
   }
   files: TemplateFile[]
   preview: {
     images: string[]
-    demoUrl?: string
-    features: string[]
+    demoUrl?: string, features: string[]
   }
   metadata: {
-    version: string
-    license: string
-    dependencies: Record<string, string>
+    version: string, license: string, dependencies: Record<string, string>
     requirements: string[]
   }
   revenue?: {
-    totalEarnings: number
-    monthlyEarnings: number
-    sharePercentage: number
+    totalEarnings: number, monthlyEarnings: number, sharePercentage: number
   }
 }
 
 export interface TemplateFile {
-  path: string
-  content: string
-  type: 'component' | 'page' | 'config' | 'style' | 'api' | 'util'
+  path: string, content: string, type: 'component' | 'page' | 'config' | 'style' | 'api' | 'util'
   description?: string
 }
 
 export interface TemplateCategory {
-  id: string
-  name: string
-  description: string
-  icon: string
-  templateCount: number
+  id: string, name: string, description: string, icon: string, templateCount: number
 }
 
 export interface TemplateSubmission {
-  id: string
-  templateData: Partial<Template>
+  id: string, templateData: Partial<Template>
   status: 'pending' | 'approved' | 'rejected' | 'needs_revision'
-  submittedBy: string
-  submittedAt: string
+  submittedBy: string, submittedAt: string
   reviewedBy?: string
   reviewedAt?: string
   reviewNotes?: string
@@ -98,7 +75,7 @@ export class TemplateMarketplace {
 
       return templates.map(this.formatTemplate)
     } catch (error) {
-      console.error('Error fetching featured templates:', error)
+      console.error('Error fetching featured, templates:', error)
       return this.getMockFeaturedTemplates()
     }
   }
@@ -121,7 +98,7 @@ export class TemplateMarketplace {
 
       return templates.map(this.formatTemplate)
     } catch (error) {
-      console.error('Error fetching templates by category:', error)
+      console.error('Error fetching templates by, category:', error)
       return this.getMockTemplatesByCategory(category)
     }
   }
@@ -172,7 +149,7 @@ export class TemplateMarketplace {
       const templates = await DatabaseService.query(sql, params)
       return templates.map(this.formatTemplate)
     } catch (error) {
-      console.error('Error searching templates:', error)
+      console.error('Error searching, templates:', error)
       return this.getMockSearchResults(query)
     }
   }
@@ -195,7 +172,7 @@ export class TemplateMarketplace {
 
       return this.formatTemplate(template[0])
     } catch (error) {
-      console.error('Error fetching template:', error)
+      console.error('Error fetching, template:', error)
       return this.getMockTemplate(id)
     }
   }
@@ -209,8 +186,7 @@ export class TemplateMarketplace {
     if (!this.isConfigured()) {
       return {
         success: true,
-        submissionId: `submission-${Date.now()}`,
-      }
+        submissionId: `submission-${Date.now()}`}
     }
 
     try {
@@ -244,7 +220,7 @@ export class TemplateMarketplace {
         }
       }
     } catch (error) {
-      console.error('Error submitting template:', error)
+      console.error('Error submitting, template:', error)
       return {
         success: false,
         error: 'Failed to submit template'
@@ -314,7 +290,7 @@ export class TemplateMarketplace {
         downloadUrl: `/api/templates/${templateId}/download`
       }
     } catch (error) {
-      console.error('Error purchasing template:', error)
+      console.error('Error purchasing, template:', error)
       return {
         success: false,
         error: 'Failed to purchase template'
@@ -340,7 +316,7 @@ export class TemplateMarketplace {
 
       return templates.map(this.formatTemplate)
     } catch (error) {
-      console.error('Error fetching user templates:', error)
+      console.error('Error fetching user, templates:', error)
       return this.getMockUserTemplates()
     }
   }
@@ -362,7 +338,7 @@ export class TemplateMarketplace {
         ORDER BY c.name
       `)
 
-      return categories.map((cat: any) => ({
+      return categories.map((cat) => ({
         id: cat.id as string,
         name: cat.name as string,
         description: cat.description as string,
@@ -370,13 +346,13 @@ export class TemplateMarketplace {
         templateCount: (cat.template_count as number) || 0
       }))
     } catch (error) {
-      console.error('Error fetching categories:', error)
+      console.error('Error fetching, categories:', error)
       return this.getMockCategories()
     }
   }
 
   // Format template data
-  private static formatTemplate(data: any): Template {
+  private static formatTemplate(data): Template {
     return {
       id: data.id,
       name: data.name,

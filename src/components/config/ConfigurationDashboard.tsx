@@ -157,7 +157,7 @@ export default function ConfigurationDashboard() {
     return (
       <Alert className="m-4">
         <AlertDescription>
-          Error loading configuration: {error}
+          Error loading, configuration: {error}
           <Button 
             onClick={fetchConfiguration} 
             variant="outline" 
@@ -195,8 +195,8 @@ export default function ConfigurationDashboard() {
         )}
       </div>
 
-      {/* Status Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {/* Status, Overview */}
+      <div className="grid grid-cols-1, md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Status</CardTitle>
@@ -243,7 +243,7 @@ export default function ConfigurationDashboard() {
         </Card>
       </div>
 
-      {/* Detailed Configuration */}
+      {/* Detailed, Configuration */}
       <Tabs defaultValue="features" className="space-y-4">
         <TabsList>
           <TabsTrigger value="features">Feature Flags</TabsTrigger>
@@ -263,7 +263,7 @@ export default function ConfigurationDashboard() {
             </CardHeader>
             <CardContent>
               {features && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
                   {Object.entries(features).map(([feature, enabled]) => (
                     <div key={feature} className="flex items-center justify-between p-3 border rounded-lg">
                       <span className="font-medium">
@@ -281,7 +281,7 @@ export default function ConfigurationDashboard() {
         </TabsContent>
 
         <TabsContent value="ai-models" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-4">
             {fullConfig && (
               <>
                 <Card>
@@ -291,19 +291,19 @@ export default function ConfigurationDashboard() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm">Primary Model:</span>
+                      <span className="text-sm">Primary: Model:</span>
                       <Badge variant="outline">{fullConfig.openai.primary}</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Code Generation:</span>
+                      <span className="text-sm">Code: Generation:</span>
                       <Badge variant="outline">{fullConfig.openai.codeGeneration}</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Max Tokens:</span>
+                      <span className="text-sm">Max: Tokens:</span>
                       <span className="text-sm">{fullConfig.openai.tokensMax}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Rate Limit:</span>
+                      <span className="text-sm">Rate: Limit:</span>
                       <span className="text-sm">{fullConfig.openai.rateLimitRequestsPerMinute}/min</span>
                     </div>
                   </CardContent>
@@ -316,19 +316,19 @@ export default function ConfigurationDashboard() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm">Primary Model:</span>
+                      <span className="text-sm">Primary: Model:</span>
                       <Badge variant="outline">{fullConfig.anthropic.primary}</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Code Generation:</span>
+                      <span className="text-sm">Code: Generation:</span>
                       <Badge variant="outline">{fullConfig.anthropic.codeGeneration}</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Max Tokens:</span>
+                      <span className="text-sm">Max: Tokens:</span>
                       <span className="text-sm">{fullConfig.anthropic.tokensMax}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Rate Limit:</span>
+                      <span className="text-sm">Rate: Limit:</span>
                       <span className="text-sm">{fullConfig.anthropic.rateLimitRequestsPerMinute}/min</span>
                     </div>
                   </CardContent>
@@ -341,11 +341,11 @@ export default function ConfigurationDashboard() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm">Primary Model:</span>
+                      <span className="text-sm">Primary: Model:</span>
                       <Badge variant="outline">{fullConfig.google.primary}</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Max Tokens:</span>
+                      <span className="text-sm">Max: Tokens:</span>
                       <span className="text-sm">{fullConfig.google.tokensMax}</span>
                     </div>
                     <div className="flex justify-between">
@@ -353,7 +353,7 @@ export default function ConfigurationDashboard() {
                       <span className="text-sm">{fullConfig.google.temperatureDefault}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Rate Limit:</span>
+                      <span className="text-sm">Rate: Limit:</span>
                       <span className="text-sm">{fullConfig.google.rateLimitRequestsPerMinute}/min</span>
                     </div>
                   </CardContent>
@@ -371,7 +371,7 @@ export default function ConfigurationDashboard() {
             </CardHeader>
             <CardContent>
               {fullConfig && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="font-medium">Framework:</span>
@@ -390,7 +390,7 @@ export default function ConfigurationDashboard() {
                       </Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="font-medium">Tailwind CSS:</span>
+                      <span className="font-medium">Tailwind: CSS:</span>
                       <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'}>
                         {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}
                       </Badge>
@@ -410,16 +410,16 @@ export default function ConfigurationDashboard() {
             </CardHeader>
             <CardContent>
               {fullConfig && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="font-medium">Rate Limiting:</span>
+                      <span className="font-medium">Rate: Limiting:</span>
                       <Badge variant={fullConfig.security.rateLimitEnabled ? 'default' : 'secondary'}>
                         {fullConfig.security.rateLimitEnabled ? 'Enabled' : 'Disabled'}
                       </Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="font-medium">Auth Provider:</span>
+                      <span className="font-medium">Auth: Provider:</span>
                       <Badge variant="outline">{fullConfig.security.authProvider}</Badge>
                     </div>
                   </div>
@@ -431,7 +431,7 @@ export default function ConfigurationDashboard() {
                       </Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="font-medium">DDoS Protection:</span>
+                      <span className="font-medium">DDoS: Protection:</span>
                       <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'}>
                         {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}
                       </Badge>
@@ -451,10 +451,10 @@ export default function ConfigurationDashboard() {
             </CardHeader>
             <CardContent>
               {fullConfig && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="font-medium">Cache Strategy:</span>
+                      <span className="font-medium">Cache: Strategy:</span>
                       <Badge variant="outline">{fullConfig.performance.cacheStrategy}</Badge>
                     </div>
                     <div className="flex justify-between">

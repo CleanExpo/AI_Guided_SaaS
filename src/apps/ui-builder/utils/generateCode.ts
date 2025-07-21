@@ -6,7 +6,7 @@ export const generateCodeFromComponent = (
 ): string => {
   switch (type) {
     case 'button':
-      return `<button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+      return `<button className="px-4 py-2 bg-blue-600 text-white rounded, hover:bg-blue-700">
   ${props.label || 'Click Me'}
 </button>`;
 
@@ -30,7 +30,7 @@ export const generateCodeFromComponent = (
 </div>`;
 
     case 'two-col':
-      return `<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+      return `<div className="grid grid-cols-1, md:grid-cols-2 gap-4 w-full">
   <div className="p-4 border rounded bg-gray-50">
     ${props.left || 'Left side content'}
   </div>
@@ -40,6 +40,6 @@ export const generateCodeFromComponent = (
 </div>`;
 
     default:
-      return `<!-- Unknown component: ${type} -->`;
+      return `<!-- Unknown, component: ${type} -->`;
   }
 };

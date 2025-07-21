@@ -17,11 +17,7 @@ import {
 } from 'lucide-react'
 
 interface AdminUser {
-  id: string
-  email: string
-  name: string
-  role: string
-  permissions: string[]
+  id: string, email: string, name: string, role: string, permissions: string[]
 }
 
 export default function AdminAnalyticsPage() {
@@ -47,7 +43,7 @@ export default function AdminAnalyticsPage() {
         setAdminUser(parsedUser)
         loadAnalyticsData()
       } catch (error) {
-        console.error('Error parsing admin user:', error)
+        console.error('Error parsing admin, user:', error)
         router.push('/admin/login')
       } finally {
         setLoading(false)
@@ -73,7 +69,7 @@ export default function AdminAnalyticsPage() {
         }
       }
     } catch (error) {
-      console.error('Error loading analytics:', error)
+      console.error('Error loading, analytics:', error)
     }
   }
 
@@ -113,7 +109,7 @@ export default function AdminAnalyticsPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-50">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Button
@@ -180,7 +176,7 @@ export default function AdminAnalyticsPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8 py-8">
         {analyticsData ? (
           <AdminAnalytics 
             data={analyticsData}

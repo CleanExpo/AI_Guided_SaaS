@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
         timestamp: new Date().toISOString()
       })
     } catch (dbError) {
-      console.error('Database error:', dbError)
+      console.error('Database, error:', dbError)
       
       // Fallback to basic stats if database is not available
       const fallbackStats = {
@@ -57,8 +57,7 @@ export async function GET(request: NextRequest) {
         activeUsers: 0,
         newUsersToday: 0,
         newUsersThisWeek: 0,
-        systemHealth: 'warning' as const,
-        uptime: 'N/A',
+        systemHealth: 'warning' as const uptime: 'N/A',
         cpuUsage: 'N/A',
         memoryUsage: 'N/A',
         totalProjects: 0,
@@ -80,7 +79,7 @@ export async function GET(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('Admin stats error:', error)
+    console.error('Admin stats, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -95,7 +94,5 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  })
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'}})
 }

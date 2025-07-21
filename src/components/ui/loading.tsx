@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 
 interface LoadingProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -15,22 +15,19 @@ const sizeClasses = {
   sm: 'w-6 h-6',
   md: 'w-8 h-8',
   lg: 'w-12 h-12',
-  xl: 'w-16 h-16',
-};
+  xl: 'w-16 h-16'};
 
 const colorClasses = {
   primary: 'text-brand-primary-600',
   secondary: 'text-brand-secondary-600',
   accent: 'text-brand-primary-500',
-  muted: 'text-muted-foreground',
-};
+  muted: 'text-muted-foreground'};
 
 // Spinner Loading Component
 export function Spinner({
   size = 'md',
   className,
-  color = 'primary',
-}: LoadingProps) {
+  color = 'primary'}: LoadingProps) {
   return (
     <div
       className={cn(
@@ -51,15 +48,13 @@ export function Spinner({
 export function LoadingDots({
   size = 'md',
   className,
-  color = 'primary',
-}: LoadingProps) {
+  color = 'primary'}: LoadingProps) {
   const dotSize = {
     xs: 'w-1 h-1',
     sm: 'w-1.5 h-1.5',
     md: 'w-2 h-2',
     lg: 'w-3 h-3',
-    xl: 'w-4 h-4',
-  };
+    xl: 'w-4 h-4'};
 
   return (
     <div
@@ -78,8 +73,7 @@ export function LoadingDots({
           )}
           style={{
             animationDelay: `${i * 0.2}s`,
-            animationDuration: '1.4s',
-          }}
+            animationDuration: '1.4s'}}
         />
       ))}
       <span className="sr-only">Loading...</span>
@@ -91,8 +85,7 @@ export function LoadingDots({
 export function LoadingPulse({
   size = 'md',
   className,
-  color = 'primary',
-}: LoadingProps) {
+  color = 'primary'}: LoadingProps) {
   return (
     <div
       className={cn(
@@ -123,17 +116,15 @@ export function Skeleton({
   variant = 'rectangular',
   width,
   height,
-  lines = 1,
-}: SkeletonProps) {
+  lines = 1}: SkeletonProps) {
   const baseClasses =
-    'animate-pulse bg-brand-secondary-200 dark:bg-brand-secondary-700';
+    'animate-pulse bg-brand-secondary-200, dark:bg-brand-secondary-700';
 
   const variantClasses = {
     text: 'h-4 rounded',
     circular: 'rounded-full',
     rectangular: 'rounded',
-    rounded: 'rounded-lg',
-  };
+    rounded: 'rounded-lg'};
 
   if (variant === 'text' && lines > 1) {
     return (
@@ -169,15 +160,13 @@ export function Skeleton({
 export function LoadingWave({
   size = 'md',
   className,
-  color = 'primary',
-}: LoadingProps) {
+  color = 'primary'}: LoadingProps) {
   const barHeight = {
     xs: 'h-2',
     sm: 'h-3',
     md: 'h-4',
     lg: 'h-6',
-    xl: 'h-8',
-  };
+    xl: 'h-8'};
 
   return (
     <div
@@ -195,8 +184,7 @@ export function LoadingWave({
           )}
           style={{
             animationDelay: `${i * 0.1}s`,
-            animationDuration: '1.2s',
-          }}
+            animationDuration: '1.2s'}}
         />
       ))}
       <span className="sr-only">Loading...</span>
@@ -247,8 +235,7 @@ export function CardSkeleton({ className }: { className?: string }) {
 export function TableSkeleton({
   rows = 5,
   columns = 4,
-  className,
-}: {
+  className}: {
   rows?: number;
   columns?: number;
   className?: string;
@@ -345,19 +332,16 @@ export function ProgressLoading({
   className,
   showPercentage = false,
   color = 'primary',
-  size = 'md',
-}: ProgressLoadingProps) {
+  size = 'md'}: ProgressLoadingProps) {
   const heightClasses = {
     sm: 'h-1',
     md: 'h-2',
-    lg: 'h-3',
-  };
+    lg: 'h-3'};
 
   const progressColorClasses = {
     primary: 'bg-brand-primary-600',
     secondary: 'bg-brand-secondary-600',
-    accent: 'bg-brand-primary-500',
-  };
+    accent: 'bg-brand-primary-500'};
 
   return (
     <div className={cn('w-full', className)}>
@@ -390,7 +374,7 @@ export function ShimmerEffect({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'relative overflow-hidden bg-brand-secondary-100 dark:bg-brand-secondary-800',
+        'relative overflow-hidden bg-brand-secondary-100, dark:bg-brand-secondary-800',
         className
       )}
     >
@@ -411,8 +395,7 @@ export function LoadingContainer({
   loading,
   children,
   fallback,
-  className,
-}: LoadingContainerProps) {
+  className}: LoadingContainerProps) {
   if (loading) {
     return (
       <div className={cn('flex items-center justify-center p-8', className)}>

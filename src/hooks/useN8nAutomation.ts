@@ -2,41 +2,29 @@ import { useState, useCallback } from 'react'
 import { toast } from '@/components/ui/use-toast'
 
 export interface N8nWorkflow {
-  id?: string
-  name: string
-  active: boolean
+  id?: string, name: string, active: boolean
   tags?: string[]
 }
 
 export interface N8nExecution {
-  id: string
-  workflowId: string
-  mode: string
-  startedAt: string
-  stoppedAt?: string
-  finished: boolean
-  status: 'running' | 'success' | 'error'
+  id: string, workflowId: string, mode: string, startedAt: string
+  stoppedAt?: string, finished: boolean, status: 'running' | 'success' | 'error'
 }
 
 export interface UseN8nAutomationReturn {
-  // Workflow management
-  listWorkflows: () => Promise<N8nWorkflow[]>
-  createWorkflow: (type: string, config: any) => Promise<N8nWorkflow>
+  // Workflow management, listWorkflows: () => Promise<N8nWorkflow[]>
+  createWorkflow: (type: string, config) => Promise<N8nWorkflow>
   deleteWorkflow: (id: string) => Promise<void>
   toggleWorkflow: (id: string, active: boolean) => Promise<void>
   
-  // Execution management
-  executeWorkflow: (workflowId: string, data?: any) => Promise<N8nExecution>
+  // Execution management, executeWorkflow: (workflowId: string, data?: any) => Promise<N8nExecution>
   listExecutions: (workflowId?: string) => Promise<N8nExecution[]>
   getExecutionStatus: (executionId: string) => Promise<N8nExecution>
   retryExecution: (executionId: string) => Promise<N8nExecution>
   
-  // Webhook triggers
-  triggerWebhook: (action: string, projectId: string, data?: any) => Promise<any>
+  // Webhook triggers, triggerWebhook: (action: string, projectId: string, data?: any) => Promise<any>
   
-  // State
-  loading: boolean
-  error: string | null
+  // State, loading: boolean, error: string | null
 }
 
 export function useN8nAutomation(): UseN8nAutomationReturn {
@@ -69,7 +57,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
   }, [])
 
   // Create a new workflow
-  const createWorkflow = useCallback(async (type: string, config: any) => {
+  const createWorkflow = useCallback(async (type: string, config) => {
     setLoading(true)
     setError(null)
     

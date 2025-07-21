@@ -20,8 +20,7 @@ import { Button } from '@/components/ui/button'
 import { Plus, Save, Download, Upload } from 'lucide-react'
 
 interface FlowchartBuilderProps {
-  projectName: string
-  onSaveFlow: (nodes: Node[], edges: Edge[]) => void
+  projectName: string, onSaveFlow: (nodes: Node[], edges: Edge[]) => void
 }
 
 const initialNodes: Node[] = [
@@ -29,32 +28,26 @@ const initialNodes: Node[] = [
     id: '1',
     type: 'input',
     position: { x: 250, y: 25 },
-    data: { label: 'Start' },
-  },
+    data: { label: 'Start' }},
   {
     id: '2',
     position: { x: 100, y: 125 },
-    data: { label: 'User Input' },
-  },
+    data: { label: 'User Input' }},
   {
     id: '3',
     position: { x: 400, y: 125 },
-    data: { label: 'Process Data' },
-  },
+    data: { label: 'Process Data' }},
   {
     id: '4',
     type: 'output',
     position: { x: 250, y: 250 },
-    data: { label: 'End' },
-  },
-]
+    data: { label: 'End' }}]
 
 const initialEdges: Edge[] = [
   { id: 'e1-2', source: '1', target: '2' },
   { id: 'e1-3', source: '1', target: '3' },
   { id: 'e2-4', source: '2', target: '4' },
-  { id: 'e3-4', source: '3', target: '4' },
-]
+  { id: 'e3-4', source: '3', target: '4' }]
 
 export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartBuilderProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
@@ -70,8 +63,7 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
     const newNode: Node = {
       id: nodeId.toString(),
       position: { x: Math.random() * 400, y: Math.random() * 400 },
-      data: { label: `Node ${nodeId}` },
-    }
+      data: { label: `Node ${nodeId}` }}
     setNodes((nds) => nds.concat(newNode))
     setNodeId((id) => id + 1)
   }, [nodeId, setNodes])
@@ -86,8 +78,7 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
       nodes,
       edges,
       projectName,
-      timestamp: new Date().toISOString(),
-    }
+      timestamp: new Date().toISOString()}
     const dataStr = JSON.stringify(flowData, null, 2)
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr)
     
@@ -112,7 +103,7 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
             alert('Flow imported successfully!')
           }
         } catch {
-          alert('Error importing flow: Invalid file format')
+          alert('Error importing, flow: Invalid file format')
         }
       }
       reader.readAsText(file)
@@ -181,7 +172,7 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
 
       <Card className="mt-4">
         <CardContent className="pt-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-4 text-sm">
             <div>
               <h4 className="font-medium text-gray-900 mb-1">Navigation</h4>
               <p className="text-gray-600">Use mouse wheel to zoom, drag to pan</p>

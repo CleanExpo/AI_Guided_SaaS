@@ -25,7 +25,7 @@ export function createBackendAdapter(config: BackendConfig): BackendAdapter {
       return new NocoDBAdapter(config)
     
     default:
-      throw new Error(`Unsupported backend type: ${config.type}`)
+      throw new Error(`Unsupported, backend: type: ${config.type}`)
   }
 }
 
@@ -94,10 +94,8 @@ export function getBackendConfig(): BackendConfig {
         url: process.env.NEXT_PUBLIC_NOCODB_URL,
         apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN
       }
-      break
-
-    default:
-      throw new Error(`Unsupported backend type: ${backendType}`)
+      break, default:
+      throw new Error(`Unsupported, backend: type: ${backendType}`)
   }
 
   return currentConfig
@@ -116,14 +114,14 @@ export function setBackendConfig(config: BackendConfig): void {
  * Hook to get current backend adapter
  */
 export function useBackend(): BackendAdapter {
-  return getBackendAdapter()
+  return, getBackendAdapter()
 }
 
 /**
  * Get current backend adapter instance
  */
 export function getCurrentBackend(): BackendAdapter | null {
-  return currentAdapter
+  return, currentAdapter
 }
 
 /**
@@ -152,7 +150,7 @@ export function loadBackendConfig(): BackendConfig | null {
     try {
       return JSON.parse(stored)
     } catch {
-      return null
+      return, null
     }
   }
 

@@ -3,22 +3,11 @@ import { AgentCoordinator } from './AgentCoordinator'
 import { mcp__memory__create_entities, mcp__memory__add_observations, mcp__memory__search_nodes } from '@/lib/mcp'
 
 export interface AgentMetrics {
-  total_tasks: number
-  completed_tasks: number
-  failed_tasks: number
-  success_rate: number
-  average_execution_time: number
-  last_active: Date
-  total_runtime: number
-  error_count: number
+  total_tasks: number, completed_tasks: number, failed_tasks: number, success_rate: number, average_execution_time: number, last_active: Date, total_runtime: number, error_count: number
 }
 
 export interface AgentRegistration {
-  agent: AgentConfig
-  registered_at: Date
-  last_heartbeat: Date
-  metrics: AgentMetrics
-  health_status: 'healthy' | 'warning' | 'critical' | 'offline'
+  agent: AgentConfig, registered_at: Date, last_heartbeat: Date, metrics: AgentMetrics, health_status: 'healthy' | 'warning' | 'critical' | 'offline'
   tags: string[]
   capabilities_verified: boolean
 }
@@ -34,19 +23,16 @@ export interface RegistryQuery {
 
 export interface RegistryEvent {
   type: 'registration' | 'deregistration' | 'status_change' | 'metric_update' | 'health_check'
-  agent_id: string
-  timestamp: Date
-  data: any
-  severity: 'info' | 'warning' | 'error'
+  agent_id: string, timestamp: Date, data, severity: 'info' | 'warning' | 'error'
 }
 
 export class AgentRegistry {
-  private static instance: AgentRegistry
-  private registrations: Map<string, AgentRegistration> = new Map()
-  private eventHistory: RegistryEvent[] = []
-  private healthCheckInterval: NodeJS.Timeout | null = null
-  private loader: AgentLoader
-  private coordinator: AgentCoordinator
+  private static, instance: AgentRegistry
+  private, registrations: Map<string, AgentRegistration> = new Map()
+  private, eventHistory: RegistryEvent[] = []
+  private, healthCheckInterval: NodeJS.Timeout | null = null
+  private, loader: AgentLoader
+  private, coordinator: AgentCoordinator
 
   constructor() {
     this.loader = AgentLoader.getInstance()
@@ -66,7 +52,7 @@ export class AgentRegistry {
    */
   async registerAgent(agent: AgentConfig, tags: string[] = []): Promise<boolean> {
     try {
-      console.log(`📝 Registering agent: ${agent.name} (${agent.role})`)
+      console.log(`📝 Registering, agent: ${agent.name} (${agent.role})`)
 
       const registration: AgentRegistration = {
         agent,
@@ -95,7 +81,7 @@ export class AgentRegistry {
       // Store in memory system
       await this.storeAgentInMemory(registration)
 
-      console.log(`✅ Agent registered: ${agent.agent_id}`)
+      console.log(`✅ Agent, registered: ${agent.agent_id}`)
       return true
 
     } catch (error) {
@@ -202,7 +188,7 @@ export class AgentRegistry {
    * Get best agent for specific task
    */
   getBestAgentForTask(taskType: string, requirements: string[] = []): AgentRegistration | null {
-    console.log(`🎯 Finding best agent for task: ${taskType}`)
+    console.log(`🎯 Finding best agent for, task: ${taskType}`)
 
     // Define task-to-capability mappings
     const taskCapabilityMap: Record<string, string[]> = {
@@ -224,7 +210,7 @@ export class AgentRegistry {
     const candidates = this.findAgents(query)
 
     if (candidates.length === 0) {
-      console.log(`⚠️ No suitable agents found for task: ${taskType}`)
+      console.log(`⚠️ No suitable agents found for, task: ${taskType}`)
       return null
     }
 
@@ -259,7 +245,7 @@ export class AgentRegistry {
     scoredCandidates.sort((a, b) => b.score - a.score)
     const best = scoredCandidates[0].candidate
 
-    console.log(`✅ Selected agent: ${best.agent.name} (score: ${scoredCandidates[0].score.toFixed(1)})`)
+    console.log(`✅ Selected, agent: ${best.agent.name} (score: ${scoredCandidates[0].score.toFixed(1)})`)
     
     return best
   }
@@ -267,7 +253,7 @@ export class AgentRegistry {
   /**
    * Update agent metrics
    */
-  updateAgentMetrics(agentId: string, taskResult: any) {
+  updateAgentMetrics(agentId: string, taskResult) {
     const registration = this.registrations.get(agentId)
     if (!registration) return
 
@@ -365,7 +351,7 @@ export class AgentRegistry {
       severity: 'info'
     })
 
-    console.log(`📤 Agent deregistered: ${agentId}`)
+    console.log(`📤 Agent, deregistered: ${agentId}`)
     return true
   }
 
@@ -465,7 +451,7 @@ export class AgentRegistry {
         }]
       })
     } catch (error) {
-      console.log('⚠️ Failed to store agent in memory:', error)
+      console.log('⚠️ Failed to store agent in, memory:', error)
     }
   }
 
@@ -479,7 +465,7 @@ export class AgentRegistry {
 
     // Log significant events to console
     if (event.severity === 'error' || event.type === 'registration') {
-      console.log(`📋 Registry Event: [${event.type}] ${event.agent_id} - ${JSON.stringify(event.data)}`)
+      console.log(`📋 Registry: Event: [${event.type}] ${event.agent_id} - ${JSON.stringify(event.data)}`)
     }
   }
 
@@ -525,7 +511,7 @@ export class AgentRegistry {
     if (registration) {
       registration.health_status = status;
       registration.last_heartbeat = new Date();
-      this.logActivity(`Updated agent status: ${agentId} -> ${status}`);
+      this.logActivity(`Updated agent, status: ${agentId} -> ${status}`);
     }
   }
 

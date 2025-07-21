@@ -14,8 +14,7 @@ const UIBuilderHomepage = dynamic(
           <p className="text-gray-600">Loading UI Builder...</p>
         </div>
       </div>
-    ),
-  }
+    )}
 );
 
 export default function UIBuilderPage() {

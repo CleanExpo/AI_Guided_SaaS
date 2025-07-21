@@ -1,0 +1,105 @@
+groups:
+  - name: application_alerts
+    interval: 30s
+    rules:
+      # API Response Time High
+      - alert: APIResponseTimeHigh
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High API response time"
+          description: "95th percentile response time is above 500ms (current: {{ $value }}s)"
+
+      # API Error Rate High
+      - alert: APIErrorRateHigh
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "High API error rate"
+          description: "API error rate is above 5% (current: {{ $value | humanizePercentage }})"
+
+      # Database Connection Pool Exhausted
+      - alert: DatabaseConnectionPoolExhausted
+        expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Database connection pool near exhaustion"
+          description: "Database connections are above 80% of max (current: {{ $value | humanizePercentage }})"
+
+      # Redis Memory Usage High
+      - alert: RedisMemoryHigh
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "Redis memory usage high"
+          description: "Redis memory usage is above 90% (current: {{ $value | humanizePercentage }})"
+
+      # Agent Execution Failures
+      - alert: AgentExecutionFailures
+        expr: rate(agent_execution_failures_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: agents
+        annotations:
+          summary: "High agent execution failure rate"
+          description: "Agent failures are above 10% (current: {{ $value | humanizePercentage }})"
+
+      # Task Queue Backlog
+      - alert: TaskQueueBacklog
+        expr: task_queue_length > 100
+        for: 10m
+        labels:
+          severity: warning
+          service: agents
+        annotations:
+          summary: "Task queue backlog growing"
+          description: "Task queue has {{ $value }} pending tasks"
+
+  - name: business_alerts
+    interval: 1m
+    rules:
+      # No New Projects
+      - alert: NoNewProjects
+        expr: increase(projects_created_total[1h]) == 0
+        for: 2h
+        labels:
+          severity: info
+          service: business
+        annotations:
+          summary: "No new projects created in the last hour"
+          description: "No new projects have been created for {{ $value }} hours"
+
+      # High Resource Usage Per User
+      - alert: HighResourceUsagePerUser
+        expr: (sum by (user_id) (rate(api_requests_total[5m]))) > 100
+        for: 10m
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "User {{ $labels.user_id }} has high API usage"
+          description: "User is making {{ $value }} requests per second"
+
+      # Payment Processing Failures
+      - alert: PaymentProcessingFailures
+        expr: rate(payment_failures_total[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          service: business
+        annotations:
+          summary: "Payment processing failures detected"
+          description: "Payment failure rate is {{ $value | humanizePercentage }}"

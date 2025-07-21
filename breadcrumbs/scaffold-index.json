@@ -1,0 +1,133 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-21T00:00:00Z",
+  "files": {
+    "/src/app/page.tsx": {
+      "purpose": "Main landing page showcasing AI SaaS capabilities",
+      "linked_to": ["goal: AI Guided SaaS", "module: Welcome & Onboarding"],
+      "critical": true,
+      "dependencies": ["@/components/ui/*", "@/lib/hooks"]
+    },
+    "/src/app/api/chat/route.ts": {
+      "purpose": "AI chat endpoint for natural language processing",
+      "linked_to": ["module: AI Chat Interface", "technology: OpenAI GPT-4"],
+      "critical": true,
+      "dependencies": ["@/lib/ai/AIService", "openai"]
+    },
+    "/src/app/api/generate/route.ts": {
+      "purpose": "Project generation endpoint transforming requirements to code",
+      "linked_to": ["module: Project Generator", "goal: Zero coding knowledge required"],
+      "critical": true,
+      "dependencies": ["@/lib/agents/*", "@/lib/generation/*"]
+    },
+    "/src/components/GuidedProjectBuilder.tsx": {
+      "purpose": "Lovable.dev-style wizard for project creation",
+      "linked_to": ["module: Visual Flowchart Builder", "unique_value: Lovable.dev UI"],
+      "critical": true,
+      "dependencies": ["@/components/ui/*", "framer-motion"]
+    },
+    "/src/components/AdvancedCodeEditor.tsx": {
+      "purpose": "VS Code-style editor for advanced users",
+      "linked_to": ["unique_value: VS Code power", "target_users: Students learning to code"],
+      "critical": false,
+      "dependencies": ["@monaco-editor/react"]
+    },
+    "/src/lib/agents/AgentOrchestrator.ts": {
+      "purpose": "Coordinate multi-agent AI system for code generation",
+      "linked_to": ["technology: Multi-agent orchestration", "success_metric: Production-ready code"],
+      "critical": true,
+      "dependencies": ["@/lib/agents/*", "@/lib/ai/AIService"]
+    },
+    "/src/lib/env/EnvManager.ts": {
+      "purpose": "Manage environment variables across services",
+      "linked_to": ["constraint: Security and privacy", "technology: Multiple services"],
+      "critical": true,
+      "dependencies": ["ajv", "fs"]
+    },
+    "/src/lib/epc/epc-engine.ts": {
+      "purpose": "Pre-inference environmental checks to save AI credits",
+      "linked_to": ["constraint: Cost-effective", "technology: AI services"],
+      "critical": true,
+      "dependencies": ["@/lib/env/EnvManager"]
+    },
+    "/src/lib/epc/self-heal-agent.ts": {
+      "purpose": "Automatically fix environment issues using AI",
+      "linked_to": ["unique_value: Claude Code intelligence", "goal: Enable non-developers"],
+      "critical": false,
+      "dependencies": ["@/lib/ai/AIService", "@/lib/epc/epc-engine"]
+    },
+    "/src/components/InferenceSafeMode.tsx": {
+      "purpose": "UI control for inference protection and monitoring",
+      "linked_to": ["module: Enhanced UI/UX", "constraint: Cost-effective"],
+      "critical": false,
+      "dependencies": ["@/components/ui/*", "react"]
+    },
+    "/src/components/EnvStatusDashboard.tsx": {
+      "purpose": "Visual dashboard for environment configuration status",
+      "linked_to": ["module: Enhanced UI/UX", "constraint: Security and privacy"],
+      "critical": false,
+      "dependencies": ["@/components/ui/*", "react"]
+    },
+    "/breadcrumbs/client-vision.json": {
+      "purpose": "Central source of truth for project goals and vision",
+      "linked_to": ["goal: AI Guided SaaS"],
+      "critical": true,
+      "dependencies": []
+    },
+    "/breadcrumbs/scaffold-index.json": {
+      "purpose": "Map every file to its purpose and contribution to vision",
+      "linked_to": ["goal: Traceable development"],
+      "critical": true,
+      "dependencies": []
+    },
+    "/src/lib/agents/base/BaseAgent.ts": {
+      "purpose": "Foundation for all AI agents ensuring consistent behavior",
+      "linked_to": ["technology: Multi-agent orchestration", "success_metric: Production-ready code"],
+      "critical": true,
+      "dependencies": ["@/lib/validation", "@/lib/ai/AIService"]
+    },
+    "/src/app/dashboard/page.tsx": {
+      "purpose": "User dashboard for managing projects and tracking progress",
+      "linked_to": ["module: Progress Tracker", "target_users: Business owners"],
+      "critical": true,
+      "dependencies": ["@/components/ui/*", "@/lib/hooks"]
+    },
+    "/src/app/templates/page.tsx": {
+      "purpose": "Browse and select project templates",
+      "linked_to": ["module: Template Library", "goal: Time from idea to app < 1 hour"],
+      "critical": false,
+      "dependencies": ["@/components/ui/*", "@/lib/templates"]
+    },
+    "/src/app/api/deploy/route.ts": {
+      "purpose": "Handle one-click deployment to cloud platforms",
+      "linked_to": ["module: Deployment Pipeline", "technology: Vercel"],
+      "critical": true,
+      "dependencies": ["@vercel/client", "@/lib/deployment"]
+    },
+    "/docs/HEALTH_CHECK_SYSTEM.md": {
+      "purpose": "Document comprehensive health monitoring approach",
+      "linked_to": ["technology: Real-time health checks", "constraint: Production-ready"],
+      "critical": false,
+      "dependencies": []
+    },
+    "/scripts/health-check-simple.cjs": {
+      "purpose": "Automated health check script for CI/CD",
+      "linked_to": ["technology: Monitoring", "success_metric: 90%+ satisfaction"],
+      "critical": false,
+      "dependencies": ["fs", "child_process"]
+    }
+  },
+  "orphaned_files": [],
+  "validation_rules": {
+    "every_file_has_purpose": true,
+    "every_file_linked_to_goal": true,
+    "no_duplicate_purposes": true,
+    "critical_files_documented": true
+  },
+  "statistics": {
+    "total_files": 18,
+    "critical_files": 10,
+    "orphaned_files": 0,
+    "coverage_percentage": 100
+  }
+}

@@ -24,13 +24,11 @@ export default function BuilderCanvas() {
     
     // Log component selection as "kept" action
     logger.log({
-      componentId: component.id,
-      componentType: component.type,
+      componentId: component.id: componentType: component.type,
       page: 'ui-builder',
       promptContext: 'User selected component for editing',
       action: 'kept',
-      timestamp: Date.now(),
-    });
+      timestamp: Date.now()});
   };
 
   return (

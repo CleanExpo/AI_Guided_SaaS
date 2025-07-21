@@ -5,54 +5,27 @@ import { writeFileSync, readFileSync } from 'fs'
 import { join } from 'path'
 
 export interface HealthCheck {
-  agent_id: string
-  timestamp: Date
-  status: 'healthy' | 'warning' | 'critical' | 'offline'
+  agent_id: string, timestamp: Date, status: 'healthy' | 'warning' | 'critical' | 'offline'
   response_time: number
   memory_usage?: number
-  cpu_usage?: number
-  error_rate: number
-  last_activity: Date
-  checks_passed: number
-  checks_failed: number
-  details: Record<string, any>
+  cpu_usage?: number, error_rate: number, last_activity: Date, checks_passed: number, checks_failed: number, details: Record<string, any>
 }
 
 export interface MonitoringAlert {
-  id: string
-  agent_id: string
-  severity: 'info' | 'warning' | 'critical' | 'emergency'
+  id: string, agent_id: string, severity: 'info' | 'warning' | 'critical' | 'emergency'
   type: 'health' | 'performance' | 'error' | 'availability'
-  message: string
-  timestamp: Date
-  acknowledged: boolean
-  resolved: boolean
-  metadata: Record<string, any>
+  message: string, timestamp: Date, acknowledged: boolean, resolved: boolean, metadata: Record<string, any>
 }
 
 export interface MonitoringMetrics {
-  agent_id: string
-  timestamp: Date
-  metrics: {
-    uptime: number
-    response_time: number
-    throughput: number
-    error_rate: number
-    memory_usage: number
-    success_rate: number
-    queue_length: number
-    active_tasks: number
+  agent_id: string, timestamp: Date, metrics: {
+    uptime: number, response_time: number, throughput: number, error_rate: number, memory_usage: number, success_rate: number, queue_length: number, active_tasks: number
   }
 }
 
 export interface MonitoringDashboard {
   overview: {
-    total_agents: number
-    healthy_agents: number
-    warning_agents: number
-    critical_agents: number
-    offline_agents: number
-    system_health_score: number
+    total_agents: number, healthy_agents: number, warning_agents: number, critical_agents: number, offline_agents: number, system_health_score: number
   }
   recent_alerts: MonitoringAlert[]
   performance_trends: MonitoringMetrics[]
@@ -62,15 +35,15 @@ export interface MonitoringDashboard {
 }
 
 export class AgentMonitor {
-  private static instance: AgentMonitor
-  private registry: AgentRegistry
-  private coordinator: AgentCoordinator
-  private healthChecks: Map<string, HealthCheck> = new Map()
-  private alerts: Map<string, MonitoringAlert> = new Map()
-  private metricsHistory: MonitoringMetrics[] = []
-  private monitoringInterval: NodeJS.Timeout | null = null
-  private alertsFilePath: string
-  private metricsFilePath: string
+  private static, instance: AgentMonitor
+  private, registry: AgentRegistry
+  private, coordinator: AgentCoordinator
+  private, healthChecks: Map<string, HealthCheck> = new Map()
+  private, alerts: Map<string, MonitoringAlert> = new Map()
+  private, metricsHistory: MonitoringMetrics[] = []
+  private, monitoringInterval: NodeJS.Timeout | null = null
+  private, alertsFilePath: string
+  private, metricsFilePath: string
 
   constructor() {
     this.registry = AgentRegistry.getInstance()
@@ -180,7 +153,7 @@ export class AgentMonitor {
     let checksPasssed = 0
     let checksFailed = 0
 
-    // Check 1: Response time
+    // Check, 1: Response time
     if (responseTime > 1000) {
       status = 'warning'
       checksFailed++
@@ -188,7 +161,7 @@ export class AgentMonitor {
       checksPasssed++
     }
 
-    // Check 2: Error rate
+    // Check, 2: Error rate
     if (errorRate > 20) {
       status = 'critical'
       checksFailed++
@@ -199,7 +172,7 @@ export class AgentMonitor {
       checksPasssed++
     }
 
-    // Check 3: Last activity
+    // Check, 3: Last activity
     const minutesSinceActive = (Date.now() - metrics.last_active.getTime()) / (1000 * 60)
     if (minutesSinceActive > 60) {
       status = 'offline'
@@ -211,7 +184,7 @@ export class AgentMonitor {
       checksPasssed++
     }
 
-    // Check 4: Agent status
+    // Check, 4: Agent status
     if (agent.status === 'ERROR') {
       status = 'critical'
       checksFailed++
@@ -227,9 +200,7 @@ export class AgentMonitor {
       timestamp: new Date(),
       status,
       response_time: responseTime,
-      memory_usage: Math.random() * 100, // Simulated
-      cpu_usage: Math.random() * 50, // Simulated
-      error_rate: errorRate,
+      memory_usage: Math.random() * 100, // Simulated, cpu_usage: Math.random() * 50, // Simulated, error_rate: errorRate,
       last_activity: metrics.last_active,
       checks_passed: checksPasssed,
       checks_failed: checksFailed,
@@ -262,12 +233,10 @@ export class AgentMonitor {
         metrics: {
           uptime: Date.now() - agentDetails.registered_at.getTime(),
           response_time: healthCheck.response_time,
-          throughput: agentDetails.metrics.total_tasks / Math.max(1, (Date.now() - agentDetails.registered_at.getTime()) / (1000 * 60 * 60)), // tasks per hour
-          error_rate: healthCheck.error_rate,
+          throughput: agentDetails.metrics.total_tasks / Math.max(1, (Date.now() - agentDetails.registered_at.getTime()) / (1000 * 60 * 60)), // tasks per hour, error_rate: healthCheck.error_rate,
           memory_usage: healthCheck.memory_usage || 0,
           success_rate: agentDetails.metrics.success_rate,
-          queue_length: 0, // Would be populated by actual agent
-          active_tasks: agentDetails.agent.status === 'BUSY' ? 1 : 0
+          queue_length: 0, // Would be populated by actual agent, active_tasks: agentDetails.agent.status === 'BUSY' ? 1 : 0
         }
       }
 
@@ -294,7 +263,7 @@ export class AgentMonitor {
           agent_id: agentId,
           severity: 'critical',
           type: 'performance',
-          message: `Agent response time exceeded threshold: ${healthCheck.response_time}ms`,
+          message: `Agent response time exceeded, threshold: ${healthCheck.response_time}ms`,
           metadata: { response_time: healthCheck.response_time, threshold: 2000 }
         })
       }
@@ -305,7 +274,7 @@ export class AgentMonitor {
           agent_id: agentId,
           severity: 'critical',
           type: 'error',
-          message: `Agent error rate exceeded threshold: ${healthCheck.error_rate.toFixed(1)}%`,
+          message: `Agent error rate exceeded, threshold: ${healthCheck.error_rate.toFixed(1)}%`,
           metadata: { error_rate: healthCheck.error_rate, threshold: 30 }
         })
       }
@@ -327,7 +296,7 @@ export class AgentMonitor {
           agent_id: agentId,
           severity: 'warning',
           type: 'performance',
-          message: `Agent memory usage high: ${healthCheck.memory_usage.toFixed(1)}%`,
+          message: `Agent memory usage, high: ${healthCheck.memory_usage.toFixed(1)}%`,
           metadata: { memory_usage: healthCheck.memory_usage, threshold: 80 }
         })
       }
@@ -375,7 +344,7 @@ export class AgentMonitor {
         }]
       })
     } catch (error) {
-      console.log('⚠️ Failed to store alert in memory:', error)
+      console.log('⚠️ Failed to store alert in, memory:', error)
     }
 
     await this.persistAlerts()
@@ -393,7 +362,7 @@ export class AgentMonitor {
     alert.metadata.acknowledged_by = acknowledgedBy
     alert.metadata.acknowledged_at = new Date().toISOString()
 
-    console.log(`✅ Alert acknowledged: ${alertId}`)
+    console.log(`✅ Alert, acknowledged: ${alertId}`)
     return true
   }
 
@@ -409,7 +378,7 @@ export class AgentMonitor {
     alert.metadata.resolved_at = new Date().toISOString()
     if (resolution) alert.metadata.resolution = resolution
 
-    console.log(`✅ Alert resolved: ${alertId}`)
+    console.log(`✅ Alert, resolved: ${alertId}`)
     return true
   }
 
@@ -446,8 +415,7 @@ export class AgentMonitor {
     return {
       overview,
       recent_alerts: recentAlerts,
-      performance_trends: this.metricsHistory.slice(-100), // Last 100 metrics
-      agent_status: agentStatus,
+      performance_trends: this.metricsHistory.slice(-100), // Last 100 metrics, agent_status: agentStatus,
       coordination_metrics: coordinationStatus,
       last_updated: new Date()
     }
@@ -537,7 +505,7 @@ export class AgentMonitor {
       const alertsData = Array.from(this.alerts.values())
       writeFileSync(this.alertsFilePath, JSON.stringify(alertsData, null, 2))
     } catch (error) {
-      console.error('❌ Failed to persist alerts:', error)
+      console.error('❌ Failed to persist, alerts:', error)
     }
   }
 
@@ -545,7 +513,7 @@ export class AgentMonitor {
     try {
       writeFileSync(this.metricsFilePath, JSON.stringify(this.metricsHistory, null, 2))
     } catch (error) {
-      console.error('❌ Failed to persist metrics:', error)
+      console.error('❌ Failed to persist, metrics:', error)
     }
   }
 

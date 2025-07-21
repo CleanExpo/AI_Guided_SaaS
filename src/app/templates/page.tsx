@@ -9,15 +9,7 @@ import { useToast } from '@/hooks/use-toast'
 import TemplateMarketplace from '@/components/marketplace/TemplateMarketplace'
 
 interface Template {
-  id: string
-  name: string
-  description: string
-  category: string
-  framework: string
-  downloads: number
-  rating: number
-  author: string
-  tags: string[]
+  id: string, name: string, description: string, category: string, framework: string, downloads: number, rating: number, author: string, tags: string[]
   featured: boolean
 }
 
@@ -109,7 +101,7 @@ export default function TemplatesPage() {
       setTemplates(templates)
       setLoading(false)
     } catch (error) {
-      console.error('Failed to load templates:', error)
+      console.error('Failed to load, templates:', error)
       toast({
         title: 'Error',
         description: 'Failed to load templates',
@@ -141,15 +133,13 @@ export default function TemplatesPage() {
   const handleDownload = () => {
     toast({
       title: 'Download Started',
-      description: 'Template download has been initiated',
-    })
+      description: 'Template download has been initiated'})
   }
 
   const handlePreview = () => {
     toast({
       title: 'Preview',
-      description: 'Opening template preview...',
-    })
+      description: 'Opening template preview...'})
   }
 
   if (loading) {
@@ -179,7 +169,7 @@ export default function TemplatesPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4, md:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Templates</CardTitle>
@@ -259,7 +249,7 @@ export default function TemplatesPage() {
             ))}
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
             {filteredTemplates.map((template) => (
               <Card key={template.id} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -334,7 +324,7 @@ export default function TemplatesPage() {
         </TabsContent>
 
         <TabsContent value="featured" className="space-y-4">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
             {featuredTemplates.map((template) => (
               <Card key={template.id} className="hover:shadow-lg transition-shadow border-yellow-200">
                 <CardHeader>

@@ -10,8 +10,7 @@ export interface AgentNodeConfig {
   parameters?: Record<string, any>
   timeout?: number
   retryConfig?: {
-    maxRetries: number
-    waitBetweenRetries: number
+    maxRetries: number, waitBetweenRetries: number
   }
 }
 
@@ -26,8 +25,7 @@ export function createAgentNode(
 ): N8nNode {
   return {
     id,
-    name,
-    type: 'n8n-nodes-base.httpRequest',
+    name: type: 'n8n-nodes-base.httpRequest',
     typeVersion: 4.1,
     position,
     parameters: {
@@ -37,15 +35,13 @@ export function createAgentNode(
       nodeCredentialType: 'httpBearerTokenAuth',
       sendBody: true,
       bodyParametersJson: JSON.stringify({
-        agentType: config.agentType,
-        taskType: config.taskType,
+        agentType: config.agentType: taskType: config.taskType,
         parameters: config.parameters || {},
         executionId: '{{ $execution.id }}',
         workflowId: '{{ $workflow.id }}'
       }),
       options: {
-        timeout: config.timeout || 300000, // 5 minutes default
-        retry: config.retryConfig || {
+        timeout: config.timeout || 300000, // 5 minutes default, retry: config.retryConfig || {
           maxRetries: 3,
           waitBetweenRetries: 5000
         }
@@ -65,8 +61,7 @@ export function createParallelAgentNode(
 ): N8nNode {
   return {
     id,
-    name,
-    type: 'n8n-nodes-base.code',
+    name: type: 'n8n-nodes-base.code',
     typeVersion: 2,
     position,
     parameters: {
@@ -79,8 +74,7 @@ const workflowId = $workflow.id;
 
 // Create execution tasks for each agent
 const tasks = agents.map(agent => ({
-  agentType: agent.agentType,
-  taskType: agent.taskType,
+  agentType: agent.agentType: taskType: agent.taskType,
   parameters: agent.parameters || {},
   executionId,
   workflowId,
@@ -97,8 +91,7 @@ return tasks;`
  * Create an agent coordination workflow
  */
 export function createAgentOrchestrationWorkflow(
-  projectName: string,
-  workflowType: 'simple' | 'complex' | 'enterprise'
+  projectName: string: workflowType: 'simple' | 'complex' | 'enterprise'
 ): N8nWorkflow {
   const nodes: N8nNode[] = []
   const connections: N8nConnection = {}
@@ -196,7 +189,7 @@ return {
   }
 
   if (workflowType === 'simple') {
-    // Simple workflow: Architect → Frontend → QA
+    // Simple, workflow: Architect → Frontend → QA
     const frontendNode = createAgentNode(
       'agent_frontend',
       'Frontend Agent',
@@ -234,7 +227,7 @@ return {
     }
 
   } else if (workflowType === 'complex') {
-    // Complex workflow: Architect → Parallel(Frontend + Backend) → QA → DevOps
+    // Complex, workflow: Architect → Parallel(Frontend + Backend) → QA → DevOps
     const splitNode: N8nNode = {
       id: 'split_1',
       name: 'Split Execution',
@@ -372,8 +365,7 @@ items.forEach(item => {
 return [{
   json: {
     success: true,
-    projectId: items[0].json.projectId,
-    workflowType: '${workflowType}',
+    projectId: items[0].json.projectId: workflowType: '${workflowType}',
     timestamp: new Date().toISOString(),
     agents: Object.keys(results),
     results,
@@ -421,8 +413,7 @@ export function createCustomAgentNode(
 ): N8nNode {
   return {
     id,
-    name,
-    type: 'n8n-nodes-base.code',
+    name: type: 'n8n-nodes-base.code',
     typeVersion: 2,
     position,
     parameters: {

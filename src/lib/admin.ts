@@ -1,84 +1,47 @@
 // Admin panel service for system management
 
 export interface AdminUser {
-  id: string
-  email: string
-  name: string
-  role: 'super_admin' | 'admin' | 'moderator'
+  id: string, email: string, name: string, role: 'super_admin' | 'admin' | 'moderator'
   status: 'active' | 'suspended' | 'pending'
-  lastLogin: Date
-  createdAt: Date
-  permissions: AdminPermission[]
+  lastLogin: Date, createdAt: Date, permissions: AdminPermission[]
 }
 
 export interface AdminPermission {
-  id: string
-  name: string
-  description: string
-  category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
+  id: string, name: string, description: string, category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
 }
 
 export interface SystemStats {
-  totalUsers: number
-  activeUsers: number
-  totalProjects: number
-  totalTemplates: number
-  totalRevenue: number
-  systemHealth: 'healthy' | 'warning' | 'critical'
-  uptime: number
-  errorRate: number
+  totalUsers: number, activeUsers: number, totalProjects: number, totalTemplates: number, totalRevenue: number, systemHealth: 'healthy' | 'warning' | 'critical'
+  uptime: number, errorRate: number
 }
 
 export interface UserManagement {
-  id: string
-  email: string
-  name: string
-  subscription: 'free' | 'pro' | 'enterprise'
+  id: string, email: string, name: string, subscription: 'free' | 'pro' | 'enterprise'
   status: 'active' | 'suspended' | 'deleted'
-  joinDate: Date
-  lastActive: Date
-  projectCount: number
-  billingStatus: 'current' | 'past_due' | 'canceled'
+  joinDate: Date, lastActive: Date, projectCount: number, billingStatus: 'current' | 'past_due' | 'canceled'
 }
 
 export interface ContentModeration {
-  id: string
-  type: 'template' | 'project' | 'comment' | 'collaboration'
-  title: string
-  author: string
-  status: 'pending' | 'approved' | 'rejected' | 'flagged'
-  reportCount: number
-  createdAt: Date
+  id: string, type: 'template' | 'project' | 'comment' | 'collaboration'
+  title: string, author: string, status: 'pending' | 'approved' | 'rejected' | 'flagged'
+  reportCount: number, createdAt: Date
   reviewedAt?: Date
   reviewedBy?: string
 }
 
 export interface SystemConfiguration {
-  id: string
-  category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security'
-  key: string
-  value: string
-  description: string
-  type: 'string' | 'number' | 'boolean' | 'json'
-  isSecret: boolean
-  lastModified: Date
-  modifiedBy: string
+  id: string, category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security'
+  key: string, value: string, description: string, type: 'string' | 'number' | 'boolean' | 'json'
+  isSecret: boolean, lastModified: Date, modifiedBy: string
 }
 
 export interface AdminActivity {
-  id: string
-  adminId: string
-  adminName: string
-  action: string
-  target: string
-  details: Record<string, unknown>
-  timestamp: Date
-  ipAddress: string
-  userAgent: string
+  id: string, adminId: string, adminName: string, action: string, target: string, details: Record<string, unknown>
+  timestamp: Date, ipAddress: string, userAgent: string
 }
 
 export class AdminService {
-  private static instance: AdminService
+  private static, instance: AdminService
   private initialized = false
 
   static getInstance(): AdminService {
@@ -96,7 +59,7 @@ export class AdminService {
       console.log('Initializing admin service...')
       this.initialized = true
     } catch (error) {
-      console.error('Failed to initialize admin service:', error)
+      console.error('Failed to initialize admin, service:', error)
       throw error
     }
   }
@@ -174,7 +137,7 @@ export class AdminService {
 
       return { users, total, pages }
     } catch (error) {
-      console.error('Error fetching users:', error)
+      console.error('Error fetching, users:', error)
       throw error
     }
   }
@@ -187,7 +150,7 @@ export class AdminService {
       // In production, update the database
       console.log(`Updated user ${userId} status to ${status}`)
     } catch (error) {
-      console.error('Error updating user status:', error)
+      console.error('Error updating user, status:', error)
       throw error
     }
   }
@@ -249,7 +212,7 @@ export class AdminService {
 
       return { content, total, pages }
     } catch (error) {
-      console.error('Error fetching content for moderation:', error)
+      console.error('Error fetching content for, moderation:', error)
       throw error
     }
   }
@@ -264,7 +227,7 @@ export class AdminService {
       await this.logAdminActivity(adminId, 'moderate_content', contentId, { action, reason })
       console.log(`Content ${contentId} ${action}ed by admin ${adminId}`)
     } catch (error) {
-      console.error('Error moderating content:', error)
+      console.error('Error moderating, content:', error)
       throw error
     }
   }
@@ -321,7 +284,7 @@ export class AdminService {
 
       return mockConfig
     } catch (error) {
-      console.error('Error fetching system configuration:', error)
+      console.error('Error fetching system, configuration:', error)
       throw error
     }
   }
@@ -335,7 +298,7 @@ export class AdminService {
       await this.logAdminActivity(adminId, 'update_configuration', configId, { value })
       console.log(`Configuration ${configId} updated by admin ${adminId}`)
     } catch (error) {
-      console.error('Error updating configuration:', error)
+      console.error('Error updating, configuration:', error)
       throw error
     }
   }
@@ -357,7 +320,7 @@ export class AdminService {
 
       return stats
     } catch (error) {
-      console.error('Error fetching system stats:', error)
+      console.error('Error fetching system, stats:', error)
       throw error
     }
   }
@@ -385,9 +348,9 @@ export class AdminService {
       }
 
       // In production, save to database
-      console.log('Admin activity logged:', activity)
+      console.log('Admin activity, logged:', activity)
     } catch (error) {
-      console.error('Error logging admin activity:', error)
+      console.error('Error logging admin, activity:', error)
     }
   }
 
@@ -444,7 +407,7 @@ export class AdminService {
 
       return { activities, total, pages }
     } catch (error) {
-      console.error('Error fetching admin activity:', error)
+      console.error('Error fetching admin, activity:', error)
       throw error
     }
   }
@@ -456,7 +419,7 @@ export class AdminService {
       // For now, return true for demo purposes
       return true
     } catch (error) {
-      console.error('Error checking admin permission:', error)
+      console.error('Error checking admin, permission:', error)
       return false
     }
   }
@@ -498,7 +461,7 @@ export class AdminService {
 
       return permissions
     } catch (error) {
-      console.error('Error fetching admin permissions:', error)
+      console.error('Error fetching admin, permissions:', error)
       throw error
     }
   }
@@ -507,8 +470,7 @@ export class AdminService {
   async performSystemHealthCheck(): Promise<{
     status: 'healthy' | 'warning' | 'critical'
     checks: Array<{
-      name: string
-      status: 'pass' | 'fail' | 'warn'
+      name: string, status: 'pass' | 'fail' | 'warn'
       message: string
       responseTime?: number
     }>
@@ -517,32 +479,27 @@ export class AdminService {
       const checks = [
         {
           name: 'Database Connection',
-          status: 'pass' as const,
-          message: 'Database is responding normally',
+          status: 'pass' as const message: 'Database is responding normally',
           responseTime: 45
         },
         {
           name: 'OpenAI API',
-          status: 'pass' as const,
-          message: 'AI services are operational',
+          status: 'pass' as const message: 'AI services are operational',
           responseTime: 120
         },
         {
           name: 'Stripe API',
-          status: 'pass' as const,
-          message: 'Payment processing is working',
+          status: 'pass' as const message: 'Payment processing is working',
           responseTime: 89
         },
         {
           name: 'Collaboration Service',
-          status: 'warn' as const,
-          message: 'High WebSocket connection count',
+          status: 'warn' as const message: 'High WebSocket connection count',
           responseTime: 200
         },
         {
           name: 'Cache Service',
-          status: 'fail' as const,
-          message: 'Redis connection timeout',
+          status: 'fail' as const message: 'Redis connection timeout',
           responseTime: 5000
         }
       ]
@@ -554,7 +511,7 @@ export class AdminService {
 
       return { status, checks }
     } catch (error) {
-      console.error('Error performing health check:', error)
+      console.error('Error performing health, check:', error)
       return {
         status: 'critical',
         checks: [{

@@ -5,145 +5,87 @@ import { isServiceConfigured } from './env'
 
 // Database row interfaces
 interface DatabaseRecord {
-  id: string
-  created_at: string
+  id: string, created_at: string
   updated_at?: string
   [key: string]: any
 }
 
 interface DatabaseUser {
-  id: string
-  name: string
-  email: string
-  avatar?: string
-  created_at: string
+  id: string, name: string, email: string
+  avatar?: string, created_at: string
   updated_at?: string
 }
 
 interface DatabaseRoom {
-  id: string
-  project_id: string
-  name: string
-  owner_id: string
-  participants: string
-  settings: string
-  created_at: string
-  updated_at: string
+  id: string, project_id: string, name: string, owner_id: string, participants: string, settings: string, created_at: string, updated_at: string
 }
 
 interface DatabaseProjectChange {
-  id: string
-  project_id: string
-  user_id: string
-  type: string
-  path: string
-  content: string
-  previous_content?: string
-  timestamp: string
+  id: string, project_id: string, user_id: string, type: string, path: string, content: string
+  previous_content?: string, timestamp: string
 }
 
 interface DatabaseComment {
-  id: string
-  project_id: string
-  user_id: string
-  content: string
-  position: string
-  resolved: boolean
-  created_at: string
-  updated_at: string
+  id: string, project_id: string, user_id: string, content: string, position: string, resolved: boolean, created_at: string, updated_at: string
 }
 
 interface ProjectData {
-  id: string
-  name: string
-  description: string
-  files: unknown[]
+  id: string, name: string, description: string, files: unknown[]
 }
 
 // Collaboration interfaces
 export interface CollaborationRoom {
-  id: string
-  projectId: string
-  name: string
-  ownerId: string
-  participants: CollaborationUser[]
-  settings: RoomSettings
-  createdAt: Date
-  updatedAt: Date
+  id: string, projectId: string, name: string, ownerId: string, participants: CollaborationUser[]
+  settings: RoomSettings, createdAt: Date, updatedAt: Date
 }
 
 export interface CollaborationUser {
-  id: string
-  name: string
-  email: string
-  avatar?: string
-  role: 'owner' | 'editor' | 'viewer'
-  cursor?: CursorPosition
-  isOnline: boolean
-  lastSeen: Date
+  id: string, name: string, email: string
+  avatar?: string, role: 'owner' | 'editor' | 'viewer'
+  cursor?: CursorPosition, isOnline: boolean, lastSeen: Date
 }
 
 export interface CursorPosition {
-  x: number
-  y: number
+  x: number, y: number
   elementId?: string
   selection?: {
-    start: number
-    end: number
+    start: number, end: number
   }
 }
 
 export interface RoomSettings {
-  allowGuests: boolean
-  maxParticipants: number
-  permissions: {
-    canEdit: boolean
-    canComment: boolean
-    canInvite: boolean
-    canExport: boolean
+  allowGuests: boolean, maxParticipants: number, permissions: {
+    canEdit: boolean, canComment: boolean, canInvite: boolean, canExport: boolean
   }
 }
 
 export interface CollaborationEvent {
   type: 'cursor' | 'edit' | 'comment' | 'join' | 'leave' | 'sync'
-  userId: string
-  roomId: string
-  data: Record<string, unknown>
+  userId: string, roomId: string, data: Record<string, unknown>
   timestamp: Date
 }
 
 export interface ProjectChange {
-  id: string
-  projectId: string
-  userId: string
-  type: 'create' | 'update' | 'delete'
-  path: string
-  content: Record<string, unknown>
+  id: string, projectId: string, userId: string, type: 'create' | 'update' | 'delete'
+  path: string, content: Record<string, unknown>
   previousContent?: Record<string, unknown>
   timestamp: Date
 }
 
 export interface Comment {
-  id: string
-  projectId: string
-  userId: string
-  content: string
-  position: {
-    x: number
-    y: number
+  id: string, projectId: string, userId: string, content: string, position: {
+    x: number, y: number
     elementId?: string
   }
   replies: Comment[]
-  resolved: boolean
-  createdAt: Date
-  updatedAt: Date
+  resolved: boolean, createdAt: Date, updatedAt: Date
 }
 
 // Collaboration service
 export class CollaborationService {
-  private static io: SocketIOServer | null = null
-  private static rooms: Map<string, CollaborationRoom> = new Map()
-  private static userSockets: Map<string, string[]> = new Map()
+  private static, io: SocketIOServer | null = null
+  private static, rooms: Map<string, CollaborationRoom> = new Map()
+  private static, userSockets: Map<string, string[]> = new Map()
 
   // Initialize Socket.IO server
   static initialize(httpServer: HTTPServer): SocketIOServer {
@@ -168,7 +110,7 @@ export class CollaborationService {
     if (!this.io) return
 
     this.io.on('connection', (socket) => {
-      console.log('User connected:', socket.id)
+      console.log('User, connected:', socket.id)
 
       // Handle user authentication
       socket.on('authenticate', async (data: { userId: string; token: string }) => {
@@ -190,7 +132,7 @@ export class CollaborationService {
             socket.disconnect()
           }
         } catch (error) {
-          console.error('Authentication error:', error)
+          console.error('Authentication, error:', error)
           socket.emit('authentication_failed')
           socket.disconnect()
         }
@@ -236,7 +178,7 @@ export class CollaborationService {
           })
 
         } catch (error) {
-          console.error('Join room error:', error)
+          console.error('Join room, error:', error)
           socket.emit('error', { message: 'Failed to join room' })
         }
       })
@@ -279,7 +221,7 @@ export class CollaborationService {
           })
 
         } catch (error) {
-          console.error('Project change error:', error)
+          console.error('Project change, error:', error)
           socket.emit('error', { message: 'Failed to save changes' })
         }
       })
@@ -308,14 +250,14 @@ export class CollaborationService {
           })
 
         } catch (error) {
-          console.error('Comment error:', error)
+          console.error('Comment, error:', error)
           socket.emit('error', { message: 'Failed to add comment' })
         }
       })
 
       // Handle disconnect
       socket.on('disconnect', async () => {
-        console.log('User disconnected:', socket.id)
+        console.log('User, disconnected:', socket.id)
         
         const userId = socket.data.userId
         const roomId = socket.data.roomId
@@ -361,7 +303,7 @@ export class CollaborationService {
           return room
         }
       } catch (error) {
-        console.error('Database error getting room:', error)
+        console.error('Database error getting, room:', error)
       }
     }
 
@@ -403,7 +345,7 @@ export class CollaborationService {
           ]
         )
       } catch (error) {
-        console.error('Database error creating room:', error)
+        console.error('Database error creating, room:', error)
       }
     }
 
@@ -466,7 +408,7 @@ export class CollaborationService {
           [JSON.stringify(room.participants), room.updatedAt.toISOString(), room.id]
         )
       } catch (error) {
-        console.error('Database error updating room participants:', error)
+        console.error('Database error updating room, participants:', error)
       }
     }
 
@@ -474,7 +416,7 @@ export class CollaborationService {
   }
 
   // Handle user leaving room
-  private static async handleLeaveRoom(socket: any, roomId: string) {
+  private static async handleLeaveRoom(socket, roomId: string) {
     const userId = socket.data.userId
     
     if (!userId || !roomId) return
@@ -524,7 +466,7 @@ export class CollaborationService {
           ]
         )
       } catch (error) {
-        console.error('Database error saving project change:', error)
+        console.error('Database error saving project, change:', error)
       }
     }
 
@@ -555,7 +497,7 @@ export class CollaborationService {
           ]
         )
       } catch (error) {
-        console.error('Database error saving comment:', error)
+        console.error('Database error saving, comment:', error)
       }
     }
 
@@ -591,13 +533,12 @@ export class CollaborationService {
             name: user.name,
             email: user.email,
             avatar: user.avatar,
-            role: 'editor' as const,
-            isOnline: true,
+            role: 'editor' as const isOnline: true,
             lastSeen: new Date()
           }
         }
       } catch (error) {
-        console.error('Database error getting user info:', error)
+        console.error('Database error getting user, info:', error)
       }
     }
 
@@ -630,7 +571,7 @@ export class CollaborationService {
           }
         }
       } catch (error) {
-        console.error('Database error getting project:', error)
+        console.error('Database error getting, project:', error)
       }
     }
 
@@ -695,8 +636,7 @@ export class CollaborationService {
           return {
             id: dbChange.id,
             projectId: dbChange.project_id,
-            userId: dbChange.user_id,
-            type: dbChange.type as 'create' | 'update' | 'delete',
+            userId: dbChange.user_id: type: dbChange.type as 'create' | 'update' | 'delete',
             path: dbChange.path,
             content: JSON.parse(dbChange.content),
             previousContent: dbChange.previous_content ? JSON.parse(dbChange.previous_content) : undefined,
@@ -704,7 +644,7 @@ export class CollaborationService {
           }
         })
       } catch (error) {
-        console.error('Database error getting project changes:', error)
+        console.error('Database error getting project, changes:', error)
       }
     }
 
@@ -727,14 +667,13 @@ export class CollaborationService {
             userId: dbComment.user_id,
             content: dbComment.content,
             position: JSON.parse(dbComment.position),
-            replies: [], // TODO: Implement nested comments
-            resolved: dbComment.resolved,
+            replies: [], // TODO: Implement nested comments, resolved: dbComment.resolved,
             createdAt: new Date(dbComment.created_at),
             updatedAt: new Date(dbComment.updated_at || dbComment.created_at)
           }
         })
       } catch (error) {
-        console.error('Database error getting comments:', error)
+        console.error('Database error getting, comments:', error)
       }
     }
 

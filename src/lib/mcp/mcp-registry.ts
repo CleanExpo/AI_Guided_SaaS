@@ -4,11 +4,7 @@
  */
 
 export interface MCPServerConfig {
-  id: string
-  name: string
-  description: string
-  url: string
-  category: 'development' | 'data' | 'automation' | 'ai' | 'integration' | 'other'
+  id: string, name: string, description: string, url: string, category: 'development' | 'data' | 'automation' | 'ai' | 'integration' | 'other'
   requiredEnv?: string[]
   setupInstructions?: string
   documentation?: string
@@ -177,8 +173,7 @@ export function getServersByCategory(category: MCPServerConfig['category']): MCP
  * Check if server environment is configured
  */
 export function checkServerEnvironment(server: MCPServerConfig): {
-  configured: boolean
-  missing: string[]
+  configured: boolean, missing: string[]
 } {
   if (!server.requiredEnv || server.requiredEnv.length === 0) {
     return { configured: true, missing: [] }
@@ -205,9 +200,9 @@ export const CustomMCPServers: MCPServerConfig[] = [
     url: 'ws://localhost:3001/mcp',
     category: 'development',
     setupInstructions: `
-1. Install dependencies: npm install
-2. Start the MCP server: npm run mcp:server
-3. The server will be available at ws://localhost:3001/mcp
+1. Install, dependencies: npm install
+2. Start the MCP, server: npm run, mcp:server
+3. The server will be available at, ws://localhost:3001/mcp
     `
   },
   {

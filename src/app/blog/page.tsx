@@ -5,8 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowRight } from 'lucide-react';
@@ -14,8 +13,7 @@ import { Calendar, User, ArrowRight } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Blog - AI Guided SaaS Platform',
   description:
-    'Latest news, updates, and insights from AI Guided SaaS Platform',
-};
+    'Latest news, updates, and insights from AI Guided SaaS Platform'};
 
 const blogPosts = [
   {
@@ -27,8 +25,7 @@ const blogPosts = [
     date: '2024-01-15',
     category: 'Product Updates',
     readTime: '5 min read',
-    featured: true,
-  },
+    featured: true},
   {
     id: 2,
     title: 'Best Practices for SaaS Development in 2024',
@@ -38,31 +35,27 @@ const blogPosts = [
     date: '2024-01-10',
     category: 'Development',
     readTime: '8 min read',
-    featured: false,
-  },
+    featured: false},
   {
     id: 3,
-    title: 'Security First: Protecting Your Applications',
+    title: 'Security, First: Protecting Your Applications',
     excerpt:
       'A comprehensive guide to implementing security best practices in your development workflow.',
     author: 'Alex Rodriguez',
     date: '2024-01-05',
     category: 'Security',
     readTime: '6 min read',
-    featured: false,
-  },
+    featured: false},
   {
     id: 4,
-    title: 'Community Spotlight: Developer Success Stories',
+    title: 'Community, Spotlight: Developer Success Stories',
     excerpt:
       'Hear from developers who have transformed their workflow with our platform.',
     author: 'Emma Wilson',
     date: '2024-01-01',
     category: 'Community',
     readTime: '4 min read',
-    featured: false,
-  },
-];
+    featured: false}];
 
 const categories = [
   'All',
@@ -70,8 +63,7 @@ const categories = [
   'Development',
   'Security',
   'Community',
-  'Tutorials',
-];
+  'Tutorials'];
 
 export default function BlogPage() {
   const featuredPost = blogPosts.find(post => post.featured);
@@ -94,7 +86,7 @@ export default function BlogPage() {
             <Badge
               key={category}
               variant={category === 'All' ? 'default' : 'secondary'}
-              className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+              className="cursor-pointer, hover:bg-primary, hover:text-primary-foreground transition-colors"
             >
               {category}
             </Badge>
@@ -151,7 +143,7 @@ export default function BlogPage() {
         )}
 
         {/* Regular Posts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-8">
           {regularPosts.map(post => (
             <Card key={post.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -197,7 +189,7 @@ export default function BlogPage() {
             Subscribe to our newsletter to get the latest posts delivered to
             your inbox.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+          <div className="flex flex-col, sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"

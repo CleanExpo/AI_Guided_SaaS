@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Service - AI Guided SaaS Platform',
-  description: 'Terms and conditions for using our platform',
-};
+  description: 'Terms and conditions for using our platform'};
 
 export default function TermsPage() {
   return (
@@ -11,7 +10,7 @@ export default function TermsPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
         <p className="text-muted-foreground mb-8">
-          Last updated: {new Date().toLocaleDateString()}
+          Last, updated: {new Date().toLocaleDateString()}
         </p>
 
         <div className="prose prose-lg max-w-none space-y-6">

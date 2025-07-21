@@ -36,7 +36,7 @@ import { useToast } from '@/hooks/use-toast'
 
 interface MCPOrchestratorProps {
   projectId?: string
-  onToolResult?: (result: any) => void
+  onToolResult?: (result) => void
 }
 
 export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProps) {
@@ -53,8 +53,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
     loading,
     initialized
   } = useMCP({
-    autoConnect: ['filesystem'], // Auto-connect filesystem by default
-    debug: true
+    autoConnect: ['filesystem'], // Auto-connect filesystem by default, debug: true
   })
 
   const [selectedTool, setSelectedTool] = useState<MCPTool | null>(null)
@@ -121,7 +120,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
         description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}`
       })
     } catch (error) {
-      console.error('Tool execution failed:', error)
+      console.error('Tool execution, failed:', error)
     }
   }
 
@@ -131,8 +130,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
 
     const step = {
       id: `step_${planSteps.length + 1}`,
-      type: 'tool' as const,
-      server: selectedTool.server,
+      type: 'tool' as const server: selectedTool.server,
       operation: selectedTool.name,
       arguments: { ...toolArguments }
     }
@@ -176,7 +174,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
         description: `Completed ${resultsArray.length} steps`
       })
     } catch (error) {
-      console.error('Plan execution failed:', error)
+      console.error('Plan execution, failed:', error)
     }
   }
 
@@ -186,15 +184,14 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
     
     const required = tool.inputSchema.required || []
     return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({
-      name,
-      type: schema.type || 'string',
+      name: type: schema.type || 'string',
       required: required.includes(name)
     }))
   }
 
   return (
     <div className="space-y-6">
-      {/* Server Management */}
+      {/* Server, Management */}
       <Card>
         <CardHeader>
           <CardTitle>MCP Servers</CardTitle>
@@ -208,7 +205,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
               {categories.map(category => (
                 <TabsTrigger key={category} value={category} className="flex items-center gap-2">
                   {getCategoryIcon(category)}
-                  <span className="hidden md:inline">{category}</span>
+                  <span className="hidden, md:inline">{category}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -263,9 +260,9 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
         </CardContent>
       </Card>
 
-      {/* Tool Execution */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Tool Selection */}
+      {/* Tool, Execution */}
+      <div className="grid gap-6, md:grid-cols-2">
+        {/* Tool, Selection */}
         <Card className="h-[600px]">
           <CardHeader>
             <CardTitle>Available Tools</CardTitle>
@@ -278,7 +275,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
               <div className="space-y-2">
                 {servers.filter(s => s.status === 'connected').map(server => (
                   <Collapsible key={server.id} defaultOpen>
-                    <CollapsibleTrigger className="flex items-center gap-2 w-full p-2 hover:bg-accent rounded">
+                    <CollapsibleTrigger className="flex items-center gap-2 w-full p-2, hover:bg-accent rounded">
                       <ChevronRight className="h-4 w-4" />
                       <Server className="h-4 w-4" />
                       <span className="font-medium">{server.name}</span>
@@ -317,7 +314,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
           </CardContent>
         </Card>
 
-        {/* Tool Configuration */}
+        {/* Tool, Configuration */}
         <Card className="h-[600px]">
           <CardHeader>
             <CardTitle>Tool Configuration</CardTitle>
@@ -390,7 +387,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
         </Card>
       </div>
 
-      {/* Orchestration Plan */}
+      {/* Orchestration, Plan */}
       <Card>
         <CardHeader>
           <CardTitle>Orchestration Plan</CardTitle>
@@ -453,7 +450,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
         </CardContent>
       </Card>
 
-      {/* Execution Results */}
+      {/* Execution, Results */}
       {executionResults.length > 0 && (
         <Card>
           <CardHeader>

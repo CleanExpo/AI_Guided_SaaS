@@ -30,39 +30,34 @@ interface RateLimitTier {
 export const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
   anonymous: {
     name: 'Anonymous',
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    maxRequests: 100,
+    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 100,
     description: 'Anonymous users - 100 requests per 15 minutes'
   },
   authenticated: {
     name: 'Authenticated',
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    maxRequests: 1000,
+    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 1000,
     description: 'Authenticated users - 1000 requests per 15 minutes'
   },
   premium: {
     name: 'Premium',
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    maxRequests: 5000,
+    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 5000,
     description: 'Premium users - 5000 requests per 15 minutes'
   },
   api: {
     name: 'API',
-    windowMs: 60 * 1000, // 1 minute
-    maxRequests: 100,
+    windowMs: 60 * 1000, // 1 minute, maxRequests: 100,
     description: 'API endpoints - 100 requests per minute'
   },
   upload: {
     name: 'Upload',
-    windowMs: 60 * 60 * 1000, // 1 hour
-    maxRequests: 50,
+    windowMs: 60 * 60 * 1000, // 1 hour, maxRequests: 50,
     description: 'File uploads - 50 uploads per hour'
   }
 };
 
 class RateLimiter {
-  private redisClient: any = null;
-  private fallbackStore: Map<string, { count: number; resetTime: number }> = new Map();
+  private, redisClient: any = null;
+  private, fallbackStore: Map<string, { count: number; resetTime: number }> = new Map();
 
   constructor() {
     this.initializeRedis();
@@ -74,8 +69,7 @@ class RateLimiter {
       if (process.env.REDIS_URL) {
         const { createClient } = await import('redis');
         this.redisClient = createClient({
-          url: process.env.REDIS_URL,
-        });
+          url: process.env.REDIS_URL});
         
         await this.redisClient.connect();
         console.log('Redis connected for rate limiting');
@@ -83,7 +77,7 @@ class RateLimiter {
         console.warn('Redis not available, using in-memory fallback for rate limiting');
       }
     } catch (error) {
-      console.warn('Failed to connect to Redis, using in-memory fallback:', error);
+      console.warn('Failed to connect to Redis, using in-memory, fallback:', error);
       this.redisClient = null;
     }
   }
@@ -140,7 +134,7 @@ class RateLimiter {
         totalHits
       };
     } catch (error) {
-      console.error('Redis rate limit check failed:', error);
+      console.error('Redis rate limit check, failed:', error);
       // Fallback to memory-based rate limiting
       return this.checkRateLimitMemory(key, config, now, windowStart);
     }
@@ -201,7 +195,7 @@ class RateLimiter {
           resetTime: now + windowMs
         };
       } catch (error) {
-        console.error('Failed to get rate limit status from Redis:', error);
+        console.error('Failed to get rate limit status, from: Redis:', error);
       }
     }
 
@@ -218,7 +212,7 @@ class RateLimiter {
     return endpoint ? `${base}:${endpoint}` : base;
   }
 
-  getUserTier(user: any): keyof typeof RATE_LIMIT_TIERS {
+  getUserTier(user): keyof typeof RATE_LIMIT_TIERS {
     if (!user) return 'anonymous';
     if (user.subscription === 'premium') return 'premium';
     return 'authenticated';
@@ -256,7 +250,7 @@ export function createRateLimitMiddleware(
   tier: keyof typeof RATE_LIMIT_TIERS,
   customConfig?: Partial<RateLimitConfig>
 ) {
-  return async function rateLimitMiddleware(req: any, res: any, next?: () => void) {
+  return async function rateLimitMiddleware(req, res, next?: () => void) {
     const rateLimiter = getRateLimiter();
     const tierConfig = RATE_LIMIT_TIERS[tier];
     
@@ -299,7 +293,7 @@ export function createRateLimitMiddleware(
         next();
       }
     } catch (error) {
-      console.error('Rate limiting error:', error);
+      console.error('Rate limiting, error:', error);
       // On error, allow the request to proceed
       if (next) {
         next();
@@ -310,7 +304,7 @@ export function createRateLimitMiddleware(
 
 // Helper function for API route protection
 export async function checkApiRateLimit(
-  req: any,
+  req,
   tier: keyof typeof RATE_LIMIT_TIERS = 'api'
 ): Promise<RateLimitResult> {
   const rateLimiter = getRateLimiter();

@@ -5,16 +5,11 @@ export interface AgentRefinement {
   originalAgents: AgentConfiguration[]
   refinedAgents: RefinedAgent[]
   improvements: AgentImprovement[]
-  collaborationStrategy: CollaborationStrategy
-  performanceMetrics: PerformanceMetrics
-  recommendations: string[]
+  collaborationStrategy: CollaborationStrategy, performanceMetrics: PerformanceMetrics, recommendations: string[]
 }
 
 export interface AgentConfiguration {
-  id: string
-  name: string
-  role: string
-  capabilities: string[]
+  id: string, name: string, role: string, capabilities: string[]
   tools: string[]
   model?: string
   temperature?: number
@@ -24,82 +19,60 @@ export interface AgentConfiguration {
 export interface RefinedAgent extends AgentConfiguration {
   refinements: Refinement[]
   collaborationRoles: CollaborationRole[]
-  performanceProfile: PerformanceProfile
-  specializations: string[]
+  performanceProfile: PerformanceProfile, specializations: string[]
 }
 
 export interface Refinement {
   type: 'capability' | 'prompt' | 'tool' | 'parameter' | 'collaboration'
-  original: string
-  refined: string
-  rationale: string
-  impact: 'high' | 'medium' | 'low'
+  original: string, refined: string, rationale: string, impact: 'high' | 'medium' | 'low'
 }
 
 export interface CollaborationRole {
-  withAgent: string
-  interactionType: 'provider' | 'consumer' | 'peer'
+  withAgent: string, interactionType: 'provider' | 'consumer' | 'peer'
   dataExchange: string[]
   protocol: string
 }
 
 export interface PerformanceProfile {
   speed: 'fast' | 'moderate' | 'slow'
-  accuracy: number // 0-100
-  resourceUsage: 'low' | 'medium' | 'high'
+  accuracy: number // 0-100, resourceUsage: 'low' | 'medium' | 'high'
   specialtyAreas: string[]
   weaknesses: string[]
 }
 
 export interface AgentImprovement {
-  agentId: string
-  improvementType: string
-  description: string
-  implementation: string
-  expectedBenefit: string
+  agentId: string, improvementType: string, description: string, implementation: string, expectedBenefit: string
 }
 
 export interface CollaborationStrategy {
-  orchestration: OrchestrationPattern
-  communicationFlow: CommunicationFlow[]
+  orchestration: OrchestrationPattern, communicationFlow: CommunicationFlow[]
   sharedResources: SharedResource[]
   conflictResolution: ConflictResolution
 }
 
 export interface OrchestrationPattern {
   type: 'hierarchical' | 'peer-to-peer' | 'hub-spoke' | 'pipeline'
-  coordinator?: string
-  description: string
-  benefits: string[]
+  coordinator?: string, description: string, benefits: string[]
 }
 
 export interface CommunicationFlow {
-  from: string
-  to: string
-  dataType: string
-  frequency: 'continuous' | 'on-demand' | 'scheduled'
+  from: string, to: string, dataType: string, frequency: 'continuous' | 'on-demand' | 'scheduled'
   protocol: string
 }
 
 export interface SharedResource {
-  name: string
-  type: 'memory' | 'artifact' | 'model' | 'tool'
+  name: string, type: 'memory' | 'artifact' | 'model' | 'tool'
   accessPattern: 'read-only' | 'read-write' | 'exclusive'
   owners: string[]
 }
 
 export interface ConflictResolution {
-  strategy: string
-  priorityRules: string[]
+  strategy: string, priorityRules: string[]
   escalationPath: string[]
 }
 
 export interface PerformanceMetrics {
-  overallEfficiency: number // 0-100
-  collaborationScore: number // 0-100
-  redundancyReduction: number // percentage
-  specialization: number // 0-100
-  scalability: string
+  overallEfficiency: number // 0-100, collaborationScore: number // 0-100, redundancyReduction: number // percentage, specialization: number // 0-100, scalability: string
 }
 
 export class AgentRefinerAgent extends Agent {
@@ -138,18 +111,18 @@ export class AgentRefinerAgent extends Agent {
         requirementCount: requirements.length 
       })
 
-      // Step 1: Analyze current agent configuration
+      // Step, 1: Analyze current agent configuration
       const analysis = await this.analyzeAgentTeam(currentAgents, requirements)
       this.observe('Agent team analysis complete', analysis)
 
-      // Step 2: Profile agent performance
+      // Step, 2: Profile agent performance
       const performanceProfiles = await this.profileAgentPerformance(
         currentAgents,
         analysis
       )
       this.observe('Performance profiling complete', performanceProfiles)
 
-      // Step 3: Identify improvement opportunities
+      // Step, 3: Identify improvement opportunities
       const improvements = await this.identifyImprovements(
         currentAgents,
         analysis,
@@ -158,7 +131,7 @@ export class AgentRefinerAgent extends Agent {
       )
       this.observe('Identified improvements', { count: improvements.length })
 
-      // Step 4: Refine agent configurations
+      // Step, 4: Refine agent configurations
       const refinedAgents = await this.refineAgents(
         currentAgents,
         improvements,
@@ -166,7 +139,7 @@ export class AgentRefinerAgent extends Agent {
       )
       this.observe('Refined agent configurations', { count: refinedAgents.length })
 
-      // Step 5: Design collaboration strategy
+      // Step, 5: Design collaboration strategy
       const collaborationStrategy = await this.designCollaboration(
         refinedAgents,
         requirements,
@@ -174,7 +147,7 @@ export class AgentRefinerAgent extends Agent {
       )
       this.observe('Designed collaboration strategy', collaborationStrategy)
 
-      // Step 6: Calculate performance metrics
+      // Step, 6: Calculate performance metrics
       const performanceMetrics = await this.calculateMetrics(
         currentAgents,
         refinedAgents,
@@ -182,7 +155,7 @@ export class AgentRefinerAgent extends Agent {
       )
       this.observe('Calculated performance metrics', performanceMetrics)
 
-      // Step 7: Generate recommendations
+      // Step, 7: Generate recommendations
       const recommendations = await this.generateRecommendations(
         refinedAgents,
         collaborationStrategy,
@@ -220,7 +193,7 @@ export class AgentRefinerAgent extends Agent {
       }
 
     } catch (error) {
-      this.think(`Error during agent refinement: ${error}`)
+      this.think(`Error during agent, refinement: ${error}`)
       throw error
     }
   }
@@ -230,7 +203,7 @@ export class AgentRefinerAgent extends Agent {
     requirements: string[]
     constraints: string[]
   }> {
-    const parsePrompt = `Parse this input to extract current agent configurations and requirements:
+    const parsePrompt = `Parse this input to extract current agent configurations and, requirements:
 
 Input:
 "${input}"
@@ -257,7 +230,7 @@ Format as JSON with arrays for each category.`
     agents: AgentConfiguration[],
     requirements: string[]
   ): Promise<any> {
-    const analysisPrompt = `Analyze this team of AI agents:
+    const analysisPrompt = `Analyze this team of AI, agents:
 
 Agents:
 ${JSON.stringify(agents, null, 2)}
@@ -286,16 +259,15 @@ Format as detailed JSON analysis.`
 
   private async profileAgentPerformance(
     agents: AgentConfiguration[],
-    analysis: any
-  ): Promise<Map<string, PerformanceProfile>> {
+    analysis): Promise<Map<string, PerformanceProfile>> {
     const profiles = new Map<string, PerformanceProfile>()
 
     for (const agent of agents) {
-      const profilePrompt = `Profile the performance characteristics of this agent:
+      const profilePrompt = `Profile the performance characteristics of this, agent:
 
 Agent: ${JSON.stringify(agent, null, 2)}
 
-Context from analysis:
+Context from, analysis:
 ${JSON.stringify(analysis, null, 2)}
 
 Determine:
@@ -323,25 +295,25 @@ Format as JSON PerformanceProfile.`
 
   private async identifyImprovements(
     agents: AgentConfiguration[],
-    analysis: any,
+    analysis,
     performanceProfiles: Map<string, PerformanceProfile>,
     requirements: string[]
   ): Promise<AgentImprovement[]> {
-    const improvementPrompt = `Identify improvements for this agent team:
+    const improvementPrompt = `Identify improvements for this agent, team:
 
-Current Agents:
+Current, Agents:
 ${JSON.stringify(agents, null, 2)}
 
-Analysis Insights:
+Analysis, Insights:
 ${JSON.stringify(analysis, null, 2)}
 
-Performance Profiles:
+Performance, Profiles:
 ${JSON.stringify(Array.from(performanceProfiles.entries()), null, 2)}
 
 Requirements:
 ${requirements.join('\n')}
 
-Suggest improvements for:
+Suggest improvements, for:
 1. Individual agent capabilities
 2. System prompts and parameters
 3. Tool assignments
@@ -370,18 +342,18 @@ Format as JSON array of AgentImprovement objects.`
       const agentImprovements = improvements.filter(i => i.agentId === agent.id)
       const profile = performanceProfiles.get(agent.id)!
 
-      const refinePrompt = `Refine this agent configuration:
+      const refinePrompt = `Refine this agent, configuration:
 
-Original Agent:
+Original, Agent:
 ${JSON.stringify(agent, null, 2)}
 
-Improvements to Apply:
+Improvements to, Apply:
 ${JSON.stringify(agentImprovements, null, 2)}
 
-Performance Profile:
+Performance, Profile:
 ${JSON.stringify(profile, null, 2)}
 
-Create a refined version with:
+Create a refined version, with:
 1. Applied improvements
 2. Optimized capabilities
 3. Collaboration roles
@@ -407,9 +379,9 @@ Format as JSON RefinedAgent object.`
     requirements: string[],
     constraints: string[]
   ): Promise<CollaborationStrategy> {
-    const collaborationPrompt = `Design optimal collaboration strategy for these agents:
+    const collaborationPrompt = `Design optimal collaboration strategy for these, agents:
 
-Refined Agents:
+Refined, Agents:
 ${JSON.stringify(agents.map(a => ({
   id: a.id,
   name: a.name,
@@ -448,18 +420,18 @@ Format as JSON CollaborationStrategy object.`
     refinedAgents: RefinedAgent[],
     collaborationStrategy: CollaborationStrategy
   ): Promise<PerformanceMetrics> {
-    const metricsPrompt = `Calculate performance metrics for the refined agent system:
+    const metricsPrompt = `Calculate performance metrics for the refined agent, system:
 
-Original System:
-- Agent count: ${originalAgents.length}
-- Total capabilities: ${originalAgents.flatMap(a => a.capabilities).length}
+Original, System:
+- Agent, count: ${originalAgents.length}
+- Total, capabilities: ${originalAgents.flatMap(a => a.capabilities).length}
 
-Refined System:
-- Agent count: ${refinedAgents.length}
-- Total capabilities: ${refinedAgents.flatMap(a => a.capabilities).length}
+Refined, System:
+- Agent, count: ${refinedAgents.length}
+- Total, capabilities: ${refinedAgents.flatMap(a => a.capabilities).length}
 - Specializations: ${refinedAgents.flatMap(a => a.specializations).length}
 
-Collaboration Strategy:
+Collaboration, Strategy:
 ${JSON.stringify(collaborationStrategy, null, 2)}
 
 Calculate:
@@ -485,17 +457,17 @@ Format as JSON PerformanceMetrics object.`
     collaborationStrategy: CollaborationStrategy,
     performanceMetrics: PerformanceMetrics
   ): Promise<string[]> {
-    const recommendPrompt = `Generate actionable recommendations for implementing this refined agent system:
+    const recommendPrompt = `Generate actionable recommendations for implementing this refined agent, system:
 
-Refined Agents Summary:
+Refined Agents, Summary:
 ${refinedAgents.map(a => `${a.name}: ${a.specializations.join(', ')}`).join('\n')}
 
-Collaboration Strategy: ${collaborationStrategy.orchestration.type}
+Collaboration, Strategy: ${collaborationStrategy.orchestration.type}
 
-Performance Metrics:
+Performance, Metrics:
 ${JSON.stringify(performanceMetrics, null, 2)}
 
-Provide 5-7 specific recommendations for:
+Provide 5-7 specific recommendations, for:
 1. Deployment order
 2. Testing approach
 3. Monitoring setup

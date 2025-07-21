@@ -61,7 +61,7 @@ async function main() {
       console.log()
       
       // Recent Activity
-      if (dashboard.recent_activity.length > 0) {
+      if (dashboard.recent_activity || [].length > 0) {
         console.log('📋 Recent Activity')
         console.log('-----------------')
         dashboard.recent_activity.slice(0, 5).forEach(activity => {

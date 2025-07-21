@@ -18,8 +18,7 @@ import {
   Calendar,
   Activity,
   Globe,
-  Lock,
-} from 'lucide-react';
+  Lock} from 'lucide-react';
 
 interface CollaborationSession {
   id: string;
@@ -54,8 +53,7 @@ export default function CollaborationDashboard() {
           projectId: 'project-1',
           name: 'E-commerce Website Redesign',
           participants: 4,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago
-          isActive: true,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago, isActive: true,
           isPublic: true,
           comments: 23,
           changes: 47,
@@ -66,8 +64,7 @@ export default function CollaborationDashboard() {
           projectId: 'project-2',
           name: 'Mobile App UI Components',
           participants: 2,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
-          isActive: false,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago, isActive: false,
           isPublic: false,
           comments: 8,
           changes: 12,
@@ -78,8 +75,7 @@ export default function CollaborationDashboard() {
           projectId: 'project-3',
           name: 'API Documentation Review',
           participants: 6,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
-          isActive: true,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago, isActive: true,
           isPublic: true,
           comments: 15,
           changes: 8,
@@ -90,18 +86,16 @@ export default function CollaborationDashboard() {
           projectId: 'project-4',
           name: 'Database Schema Planning',
           participants: 3,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
-          isActive: false,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago, isActive: false,
           isPublic: false,
           comments: 31,
           changes: 19,
           createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), // 3 days ago
-        },
-      ];
+        }];
 
       setSessions(mockSessions);
     } catch (error) {
-      console.error('Error loading collaboration sessions:', error);
+      console.error('Error loading collaboration, sessions:', error);
     } finally {
       setLoading(false);
     }
@@ -176,7 +170,7 @@ export default function CollaborationDashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1, md:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
@@ -243,7 +237,7 @@ export default function CollaborationDashboard() {
       </div>
 
       {/* Filters and Search */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col, sm:flex-row gap-4">
         <div className="flex-1">
           <Input
             placeholder="Search collaboration sessions..."
@@ -382,7 +376,7 @@ export default function CollaborationDashboard() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-red-600 hover:text-red-700"
+                        className="text-red-600, hover:text-red-700"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>

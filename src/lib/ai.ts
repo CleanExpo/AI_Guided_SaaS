@@ -3,8 +3,7 @@ import OpenAI from 'openai'
 
 // Initialize OpenAI client
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || '',
-})
+  apiKey: process.env.OPENAI_API_KEY || ''})
 
 export interface AIMessage {
   role: 'system' | 'user' | 'assistant'
@@ -14,9 +13,7 @@ export interface AIMessage {
 export interface AIResponse {
   message: string
   usage?: {
-    total_tokens: number
-    prompt_tokens: number
-    completion_tokens: number
+    total_tokens: number, prompt_tokens: number, completion_tokens: number
   }
   model?: string
 }
@@ -39,20 +36,22 @@ export async function generateChatCompletion(options: ChatCompletionOptions): Pr
       messages: options.messages,
       temperature: options.temperature || 0.7,
       max_tokens: options.max_tokens || 2000,
-      stream: options.stream || false,
-    })
+      stream: false})
 
-    return {
-      message: response.choices[0]?.message?.content || '',
-      usage: response.usage ? {
-        total_tokens: response.usage.total_tokens,
-        prompt_tokens: response.usage.prompt_tokens,
-        completion_tokens: response.usage.completion_tokens,
-      } : undefined,
-      model: response.model,
+    // Type guard to ensure we have a non-streaming response
+    if ('choices' in response) {
+      return {
+        message: response.choices[0]?.message?.content || '',
+        usage: response.usage ? {
+          total_tokens: response.usage.total_tokens,
+          prompt_tokens: response.usage.prompt_tokens,
+          completion_tokens: response.usage.completion_tokens} : undefined,
+        model: response.model}
+    } else {
+      throw new Error('Unexpected streaming response')
     }
   } catch (error) {
-    console.error('AI generation error:', error)
+    console.error('AI generation, error:', error)
     throw new Error('Failed to generate AI response')
   }
 }
@@ -67,21 +66,20 @@ export async function generateCompletion(prompt: string, options?: {
 }): Promise<AIResponse> {
   return generateChatCompletion({
     messages: [{ role: 'user', content: prompt }],
-    ...options,
-  })
+    ...options})
 }
 
 /**
  * Analyze code with AI
  */
 export async function analyzeCode(code: string, language?: string): Promise<string> {
-  const prompt = `Analyze the following ${language || 'code'} and provide insights:
+  const prompt = `Analyze the following ${language || 'code'} and provide, insights:
 
 \`\`\`${language || ''}
 ${code}
 \`\`\`
 
-Please provide:
+Please, provide:
 1. Code quality assessment
 2. Potential improvements
 3. Security considerations
@@ -95,7 +93,7 @@ Please provide:
  * Generate code suggestions
  */
 export async function generateCodeSuggestions(description: string, language: string = 'typescript'): Promise<string> {
-  const prompt = `Generate ${language} code based on this description: ${description}
+  const prompt = `Generate ${language} code based on this, description: ${description}
 
 Please provide clean, well-documented code following best practices.`
 
@@ -113,5 +111,4 @@ export default {
   generateCompletion,
   generateAIResponse,
   analyzeCode,
-  generateCodeSuggestions,
-}
+  generateCodeSuggestions}

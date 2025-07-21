@@ -4,15 +4,9 @@ import { RequirementAnalysis } from './AnalystAgent'
 import { ProjectPlan } from './ProjectManagerAgent'
 
 export interface SystemArchitecture {
-  overview: ArchitectureOverview
-  components: Component[]
-  dataModel: DataModel
-  apiDesign: APIDesign
-  infrastructure: Infrastructure
-  security: SecurityArchitecture
-  integrations: Integration[]
-  deploymentStrategy: DeploymentStrategy
-  technicalDecisions: TechnicalDecision[]
+  overview: ArchitectureOverview, components: Component[]
+  dataModel: DataModel, apiDesign: APIDesign, infrastructure: Infrastructure, security: SecurityArchitecture, integrations: Integration[]
+  deploymentStrategy: DeploymentStrategy, technicalDecisions: TechnicalDecision[]
   architecturalPatterns: string[]
 }
 
@@ -25,37 +19,26 @@ export interface ArchitectureOverview {
 }
 
 export interface QualityAttribute {
-  name: string
-  requirement: string
-  approach: string
-  tradeoffs: string[]
+  name: string, requirement: string, approach: string, tradeoffs: string[]
 }
 
 export interface Component {
-  id: string
-  name: string
-  type: 'frontend' | 'backend' | 'service' | 'database' | 'external'
-  responsibility: string
-  technology: string[]
+  id: string, name: string, type: 'frontend' | 'backend' | 'service' | 'database' | 'external'
+  responsibility: string, technology: string[]
   interfaces: ComponentInterface[]
   dependencies: string[]
   scalability: string
 }
 
 export interface ComponentInterface {
-  name: string
-  type: 'REST' | 'GraphQL' | 'WebSocket' | 'gRPC' | 'Event'
-  description: string
-  methods: InterfaceMethod[]
+  name: string, type: 'REST' | 'GraphQL' | 'WebSocket' | 'gRPC' | 'Event'
+  description: string, methods: InterfaceMethod[]
 }
 
 export interface InterfaceMethod {
   name: string
   httpMethod?: string
-  path?: string
-  input: string
-  output: string
-  description: string
+  path?: string, input: string, output: string, description: string
 }
 
 export interface DataModel {
@@ -66,49 +49,33 @@ export interface DataModel {
 }
 
 export interface Entity {
-  name: string
-  description: string
-  attributes: Attribute[]
+  name: string, description: string, attributes: Attribute[]
   businessRules: string[]
 }
 
 export interface Attribute {
-  name: string
-  type: string
-  required: boolean
+  name: string, type: string, required: boolean
   unique?: boolean
-  indexed?: boolean
-  description: string
+  indexed?: boolean, description: string
 }
 
 export interface Relationship {
-  from: string
-  to: string
-  type: 'one-to-one' | 'one-to-many' | 'many-to-many'
+  from: string, to: string, type: 'one-to-one' | 'one-to-many' | 'many-to-many'
   description: string
 }
 
 export interface DataFlow {
-  name: string
-  source: string
-  destination: string
-  dataType: string
-  frequency: string
-  volume: string
+  name: string, source: string, destination: string, dataType: string, frequency: string, volume: string
 }
 
 export interface StorageStrategy {
   databases: Database[]
-  caching: CachingStrategy
-  fileStorage: FileStorageStrategy
+  caching: CachingStrategy, fileStorage: FileStorageStrategy
 }
 
 export interface Database {
-  name: string
-  type: 'relational' | 'document' | 'key-value' | 'graph' | 'time-series'
-  technology: string
-  purpose: string
-  entities: string[]
+  name: string, type: 'relational' | 'document' | 'key-value' | 'graph' | 'time-series'
+  technology: string, purpose: string, entities: string[]
 }
 
 export interface CachingStrategy {
@@ -118,53 +85,31 @@ export interface CachingStrategy {
 }
 
 export interface FileStorageStrategy {
-  type: string
-  provider: string
-  structure: string
+  type: string, provider: string, structure: string
 }
 
 export interface APIDesign {
   style: 'REST' | 'GraphQL' | 'gRPC' | 'Mixed'
-  versioning: string
-  authentication: string
-  authorization: string
-  rateLimiting: string
-  documentation: string
-  endpoints: APIEndpoint[]
+  versioning: string, authentication: string, authorization: string, rateLimiting: string, documentation: string, endpoints: APIEndpoint[]
 }
 
 export interface APIEndpoint {
-  path: string
-  method: string
-  description: string
-  authentication: boolean
-  requestSchema: any
-  responseSchema: any
-  errorHandling: string[]
+  path: string, method: string, description: string, authentication: boolean, requestSchema: any, responseSchema: any, errorHandling: string[]
 }
 
 export interface Infrastructure {
-  hostingPlatform: string
-  computeResources: ComputeResource[]
-  networking: NetworkingConfig
-  monitoring: MonitoringStrategy
-  backup: BackupStrategy
+  hostingPlatform: string, computeResources: ComputeResource[]
+  networking: NetworkingConfig, monitoring: MonitoringStrategy, backup: BackupStrategy
 }
 
 export interface ComputeResource {
-  name: string
-  type: string
-  specifications: Record<string, any>
-  scalingPolicy: string
-  estimatedCost: string
+  name: string, type: string, specifications: Record<string, any>
+  scalingPolicy: string, estimatedCost: string
 }
 
 export interface NetworkingConfig {
-  vpc: boolean
-  subnets: string[]
-  loadBalancer: string
-  cdn: string
-  dns: string
+  vpc: boolean, subnets: string[]
+  loadBalancer: string, cdn: string, dns: string
 }
 
 export interface MonitoringStrategy {
@@ -175,17 +120,12 @@ export interface MonitoringStrategy {
 }
 
 export interface Alert {
-  name: string
-  condition: string
-  severity: 'critical' | 'warning' | 'info'
+  name: string, condition: string, severity: 'critical' | 'warning' | 'info'
   action: string
 }
 
 export interface BackupStrategy {
-  frequency: string
-  retention: string
-  type: string
-  location: string
+  frequency: string, retention: string, type: string, location: string
 }
 
 export interface SecurityArchitecture {
@@ -197,80 +137,56 @@ export interface SecurityArchitecture {
 }
 
 export interface ThreatModel {
-  threat: string
-  category: string
-  likelihood: 'high' | 'medium' | 'low'
+  threat: string, category: string, likelihood: 'high' | 'medium' | 'low'
   impact: 'high' | 'medium' | 'low'
   mitigation: string[]
 }
 
 export interface SecurityControl {
-  name: string
-  type: string
-  implementation: string
-  scope: string[]
+  name: string, type: string, implementation: string, scope: string[]
 }
 
 export interface DataProtection {
-  encryption: EncryptionStrategy
-  privacy: PrivacyMeasure[]
+  encryption: EncryptionStrategy, privacy: PrivacyMeasure[]
   accessControl: AccessControlModel
 }
 
 export interface EncryptionStrategy {
-  atRest: string
-  inTransit: string
-  keyManagement: string
+  atRest: string, inTransit: string, keyManagement: string
 }
 
 export interface PrivacyMeasure {
-  name: string
-  description: string
-  implementation: string
+  name: string, description: string, implementation: string
 }
 
 export interface AccessControlModel {
-  type: string
-  implementation: string
-  roles: string[]
+  type: string, implementation: string, roles: string[]
 }
 
 export interface Integration {
-  name: string
-  type: 'API' | 'Webhook' | 'SDK' | 'Database' | 'Message Queue'
-  purpose: string
-  protocol: string
-  authentication: string
-  dataFormat: string
-  errorHandling: string
+  name: string, type: 'API' | 'Webhook' | 'SDK' | 'Database' | 'Message Queue'
+  purpose: string, protocol: string, authentication: string, dataFormat: string, errorHandling: string
 }
 
 export interface DeploymentStrategy {
-  approach: string
-  environments: Environment[]
+  approach: string, environments: Environment[]
   pipeline: PipelineStage[]
-  rollbackStrategy: string
-  blueGreenDeployment: boolean
+  rollbackStrategy: string, blueGreenDeployment: boolean
 }
 
 export interface Environment {
-  name: string
-  purpose: string
-  configuration: Record<string, any>
+  name: string, purpose: string, configuration: Record<string, any>
   resources: string[]
 }
 
 export interface PipelineStage {
-  name: string
-  actions: string[]
+  name: string, actions: string[]
   triggers: string[]
   approvals: string[]
 }
 
 export interface TechnicalDecision {
-  decision: string
-  rationale: string
-  alternatives: string[]
+  decision: string, rationale: string, alternatives: string[]
   tradeoffs: string[]
   risks: string[]
 }
@@ -319,7 +235,7 @@ export class ArchitectAgent extends Agent {
         constraintCount: constraints.length
       })
 
-      // Step 1: Define architecture overview and style
+      // Step, 1: Define architecture overview and style
       const overview = await this.defineArchitectureOverview(
         input,
         requirements,
@@ -328,7 +244,7 @@ export class ArchitectAgent extends Agent {
       )
       this.observe('Defined architecture overview', overview)
 
-      // Step 2: Design system components
+      // Step, 2: Design system components
       const components = await this.designComponents(
         requirements,
         userStories,
@@ -336,7 +252,7 @@ export class ArchitectAgent extends Agent {
       )
       this.observe('Designed system components', { componentCount: components.length })
 
-      // Step 3: Create data model
+      // Step, 3: Create data model
       const dataModel = await this.createDataModel(
         requirements,
         userStories,
@@ -344,7 +260,7 @@ export class ArchitectAgent extends Agent {
       )
       this.observe('Created data model', { entityCount: dataModel.entities.length })
 
-      // Step 4: Design APIs
+      // Step, 4: Design APIs
       const apiDesign = await this.designAPIs(
         components,
         dataModel,
@@ -352,7 +268,7 @@ export class ArchitectAgent extends Agent {
       )
       this.observe('Designed APIs', { endpointCount: apiDesign.endpoints.length })
 
-      // Step 5: Plan infrastructure
+      // Step, 5: Plan infrastructure
       const infrastructure = await this.planInfrastructure(
         components,
         overview,
@@ -360,7 +276,7 @@ export class ArchitectAgent extends Agent {
       )
       this.observe('Planned infrastructure', infrastructure)
 
-      // Step 6: Design security architecture
+      // Step, 6: Design security architecture
       const security = await this.designSecurity(
         requirements,
         components,
@@ -368,11 +284,11 @@ export class ArchitectAgent extends Agent {
       )
       this.observe('Designed security architecture', { threatCount: security.threats.length })
 
-      // Step 7: Plan integrations
+      // Step, 7: Plan integrations
       const integrations = await this.planIntegrations(input, components)
       this.observe('Planned integrations', { integrationCount: integrations.length })
 
-      // Step 8: Define deployment strategy
+      // Step, 8: Define deployment strategy
       const deploymentStrategy = await this.defineDeploymentStrategy(
         infrastructure,
         components,
@@ -380,7 +296,7 @@ export class ArchitectAgent extends Agent {
       )
       this.observe('Defined deployment strategy', deploymentStrategy)
 
-      // Step 9: Document technical decisions
+      // Step, 9: Document technical decisions
       const technicalDecisions = await this.documentDecisions(
         overview,
         components,
@@ -426,7 +342,7 @@ export class ArchitectAgent extends Agent {
       }
 
     } catch (error) {
-      this.think(`Error during architecture design: ${error}`)
+      this.think(`Error during architecture, design: ${error}`)
       throw error
     }
   }
@@ -437,18 +353,18 @@ export class ArchitectAgent extends Agent {
     constraints: string[],
     qualityStandards: string[]
   ): Promise<ArchitectureOverview> {
-    const prompt = `Design the high-level architecture for this project:
+    const prompt = `Design the high-level architecture for this, project:
 
-Project Description:
+Project, Description:
 ${input}
 
-Key Requirements:
+Key, Requirements:
 ${requirements.slice(0, 10).join('\n')}
 
 Constraints:
 ${constraints.join('\n')}
 
-Quality Standards:
+Quality, Standards:
 ${qualityStandards.join('\n')}
 
 Provide:
@@ -474,16 +390,16 @@ Format as JSON ArchitectureOverview object.`
     userStories: any[],
     architectureStyle: string
   ): Promise<Component[]> {
-    const prompt = `Design system components based on:
+    const prompt = `Design system components based, on:
 
-Architecture Style: ${architectureStyle}
+Architecture, Style: ${architectureStyle}
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
 
-User Stories Summary:
+User Stories, Summary:
 ${userStories.slice(0, 10).map(s => s.title).join('\n')}
 
-Create components with:
+Create components, with:
 - Clear responsibilities
 - Technology choices
 - Interfaces
@@ -501,7 +417,7 @@ Format as JSON array of Component objects.`
     })
 
     const components = JSON.parse(response)
-    return components.map((c: any, index: number) => ({
+    return components.map((c, index: number) => ({
       ...c,
       id: `comp-${index + 1}`
     }))
@@ -512,12 +428,12 @@ Format as JSON array of Component objects.`
     userStories: any[],
     components: Component[]
   ): Promise<DataModel> {
-    const prompt = `Create a comprehensive data model:
+    const prompt = `Create a comprehensive data, model:
 
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
 
-Components needing data:
+Components needing, data:
 ${components.filter(c => c.type === 'backend' || c.type === 'database').map(c => c.name).join(', ')}
 
 Design:
@@ -544,18 +460,18 @@ Format as JSON DataModel object.`
     dataModel: DataModel,
     userStories: any[]
   ): Promise<APIDesign> {
-    const prompt = `Design comprehensive API architecture:
+    const prompt = `Design comprehensive API, architecture:
 
-Components with APIs:
+Components with, APIs:
 ${JSON.stringify(components.filter(c => c.interfaces.length > 0).map(c => ({
   name: c.name,
   interfaces: c.interfaces
 })), null, 2)}
 
-Data Entities:
+Data, Entities:
 ${dataModel.entities.map(e => e.name).join(', ')}
 
-Key User Stories:
+Key User, Stories:
 ${userStories.slice(0, 10).map(s => s.title).join('\n')}
 
 Design:
@@ -579,15 +495,14 @@ Format as JSON APIDesign object.`
   private async planInfrastructure(
     components: Component[],
     overview: ArchitectureOverview,
-    timeline: any
-  ): Promise<Infrastructure> {
-    const prompt = `Plan infrastructure for the system:
+    timeline): Promise<Infrastructure> {
+    const prompt = `Plan infrastructure for the, system:
 
-Architecture Style: ${overview.style}
+Architecture, Style: ${overview.style}
 Components:
 ${components.map(c => `${c.name} (${c.type})`).join('\n')}
 
-Quality Attributes:
+Quality, Attributes:
 ${overview.qualityAttributes.map(q => `${q.name}: ${q.requirement}`).join('\n')}
 
 Timeline: ${timeline?.totalDuration || 'Not specified'}
@@ -617,9 +532,9 @@ Format as JSON Infrastructure object.`
     components: Component[],
     dataModel: DataModel
   ): Promise<SecurityArchitecture> {
-    const prompt = `Design comprehensive security architecture:
+    const prompt = `Design comprehensive security, architecture:
 
-Security-related Requirements:
+Security-related, Requirements:
 ${requirements.filter(r => 
   r.toLowerCase().includes('security') || 
   r.toLowerCase().includes('auth') || 
@@ -629,7 +544,7 @@ ${requirements.filter(r =>
 Components:
 ${components.map(c => c.name).join(', ')}
 
-Sensitive Data:
+Sensitive, Data:
 ${dataModel.entities.filter(e => 
   e.name.toLowerCase().includes('user') || 
   e.name.toLowerCase().includes('payment') ||
@@ -658,15 +573,15 @@ Format as JSON SecurityArchitecture object.`
     input: string,
     components: Component[]
   ): Promise<Integration[]> {
-    const prompt = `Identify and plan external integrations:
+    const prompt = `Identify and plan external, integrations:
 
-Project Description:
+Project, Description:
 ${input}
 
-System Components:
+System, Components:
 ${components.map(c => `${c.name}: ${c.responsibility}`).join('\n')}
 
-Identify potential integrations for:
+Identify potential integrations, for:
 - Payment processing
 - Authentication providers
 - Email/SMS services
@@ -689,18 +604,17 @@ Format as JSON array of Integration objects.`
   private async defineDeploymentStrategy(
     infrastructure: Infrastructure,
     components: Component[],
-    timeline: any
-  ): Promise<DeploymentStrategy> {
-    const prompt = `Define deployment strategy:
+    timeline): Promise<DeploymentStrategy> {
+    const prompt = `Define deployment, strategy:
 
 Infrastructure:
 ${JSON.stringify(infrastructure.hostingPlatform)}
 
-Components to Deploy:
+Components to, Deploy:
 ${components.map(c => `${c.name} (${c.type})`).join('\n')}
 
-Timeline Constraints:
-${timeline?.phases?.map((p: any) => p.name).join(', ') || 'Not specified'}
+Timeline, Constraints:
+${timeline?.phases?.map((p) => p.name).join(', ') || 'Not specified'}
 
 Design:
 1. Deployment approach (CI/CD, manual, hybrid)
@@ -725,13 +639,13 @@ Format as JSON DeploymentStrategy object.`
     components: Component[],
     infrastructure: Infrastructure
   ): Promise<TechnicalDecision[]> {
-    const prompt = `Document key technical decisions made:
+    const prompt = `Document key technical decisions, made:
 
-Architecture Style: ${overview.style}
-Key Technologies:
+Architecture, Style: ${overview.style}
+Key, Technologies:
 ${[...new Set(components.flatMap(c => c.technology))].join(', ')}
 
-Infrastructure Platform: ${infrastructure.hostingPlatform}
+Infrastructure, Platform: ${infrastructure.hostingPlatform}
 
 For each major decision, document:
 1. The decision made

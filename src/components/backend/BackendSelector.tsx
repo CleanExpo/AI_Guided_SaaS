@@ -1,7 +1,15 @@
 'use client'
 
-import { BackendConfig, BackendType } from '@/lib/backend/types'
-import { createBackendAdapter, switchBackend, getBackendConfig } from '@/lib/backend/adapter-factory'
+import { useState, useEffect } from 'react'
+import { BackendConfig } from '@/lib/backend/types'
+import { createBackendAdapter, switchBackend, getBackendConfig, loadBackendConfig } from '@/lib/backend/adapter-factory'
+import { Database, Server, Cloud, Check, X, Loader2, AlertTriangle } from 'lucide-react'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 
 
@@ -10,8 +18,7 @@ export function BackendSelector() {
   const [config, setConfig] = useState<BackendConfig | null>(null)
   const [testing, setTesting] = useState(false)
   const [testResult, setTestResult] = useState<{
-    success: boolean
-    message: string
+    success: boolean, message: string
   } | null>(null)
   const [formData, setFormData] = useState({
     supabase: {
@@ -59,8 +66,11 @@ export function BackendSelector() {
     setTesting(true)
     setTestResult(null)
 
-    const testConfig: BackendConfig = { backend: selectedBackend as any as BackendType, type: selectedBackend as any, url: formData[selectedBackend as keyof typeof formData].url, apiKey: formData[selectedBackend as keyof typeof formData].apiKey
-     }
+    const testConfig: BackendConfig = { 
+      type: selectedBackend as 'supabase' | 'strapi' | 'nocodb', 
+      url: formData[selectedBackend as keyof typeof formData].url, 
+      apiKey: formData[selectedBackend as keyof typeof formData].apiKey
+    }
 
     try {
       const adapter = createBackendAdapter(testConfig)
@@ -83,7 +93,10 @@ export function BackendSelector() {
   }
 
   const handleSave = async () => {
-    const newConfig: BackendConfig = { backend: selectedBackend as any as BackendType, type: selectedBackend as any, url: formData[selectedBackend as keyof typeof formData].url, apiKey: formData[selectedBackend as keyof typeof formData].apiKey
+    const newConfig: BackendConfig = { 
+      type: selectedBackend as 'supabase' | 'strapi' | 'nocodb', 
+      url: formData[selectedBackend as keyof typeof formData].url, 
+      apiKey: formData[selectedBackend as keyof typeof formData].apiKey
      }
 
     await switchBackend(newConfig)
@@ -142,7 +155,7 @@ export function BackendSelector() {
           <RadioGroup
             value={selectedBackend}
             onValueChange={setSelectedBackend}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            className="grid grid-cols-1, md:grid-cols-3 gap-4"
           >
             {Object.entries(backendInfo).map(([key, info]) => {
               const Icon = info.icon
@@ -150,7 +163,7 @@ export function BackendSelector() {
                 <Label
                   key={key}
                   htmlFor={key}
-                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer hover:bg-accent"
+                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer, hover:bg-accent"
                 >
                   <RadioGroupItem value={key} id={key} className="sr-only" />
                   <Icon className={`h-8 w-8 ${info.color}`} />
@@ -258,7 +271,7 @@ export function BackendSelector() {
           <div className="space-y-4">
             {selectedBackend === 'supabase' && (
               <div className="space-y-2">
-                <h4 className="font-semibold">Supabase Setup:</h4>
+                <h4 className="font-semibold">Supabase, Setup:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
                   <li>Create a project at supabase.com</li>
                   <li>Copy your project URL from Settings → API</li>
@@ -270,10 +283,10 @@ export function BackendSelector() {
             
             {selectedBackend === 'strapi' && (
               <div className="space-y-2">
-                <h4 className="font-semibold">Strapi Setup:</h4>
+                <h4 className="font-semibold">Strapi, Setup:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
                   <li>Run: docker-compose -f docker/services/strapi.yml up</li>
-                  <li>Access Strapi admin at http://localhost:1337/admin</li>
+                  <li>Access Strapi admin at, http://localhost:1337/admin</li>
                   <li>Create an admin user and configure content types</li>
                   <li>Generate an API token from Settings → API Tokens</li>
                 </ol>
@@ -282,10 +295,10 @@ export function BackendSelector() {
             
             {selectedBackend === 'nocodb' && (
               <div className="space-y-2">
-                <h4 className="font-semibold">NocoDB Setup:</h4>
+                <h4 className="font-semibold">NocoDB, Setup:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
                   <li>Run: docker-compose -f docker/services/nocodb.yml up</li>
-                  <li>Access NocoDB at http://localhost:8080</li>
+                  <li>Access NocoDB at, http://localhost:8080</li>
                   <li>Create your project and tables</li>
                   <li>Generate an API token from Account Settings</li>
                 </ol>

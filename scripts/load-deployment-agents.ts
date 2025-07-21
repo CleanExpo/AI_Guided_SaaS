@@ -15,8 +15,7 @@ import {
 interface DeploymentIssue {
   type: 'typescript' | 'test' | 'todo' | 'config'
   priority: 'high' | 'medium' | 'low'
-  description: string
-  files: string[]
+  description: string, files: string[]
 }
 
 async function main() {
@@ -65,7 +64,7 @@ async function main() {
       }
     ]
 
-    console.log('📋 Critical Issues Identified:')
+    console.log('📋 Critical Issues, Identified:')
     criticalIssues.forEach((issue, index) => {
       console.log(`${index + 1}. [${issue.priority.toUpperCase()}] ${issue.type}: ${issue.description}`)
     })
@@ -75,7 +74,7 @@ async function main() {
     console.log('🤖 Loading Required Agents...')
     const deploymentAgents = await agentSystem.getAgentsForNextStage('deployment', 'saas_platform')
     
-    console.log(`✅ Loaded ${deploymentAgents.healthy_agents} healthy agents:`)
+    console.log(`✅ Loaded ${deploymentAgents.healthy_agents} healthy, agents:`)
     deploymentAgents.agents.forEach(agent => {
       console.log(`  • ${agent.name} (${agent.role})`)
     })
@@ -87,7 +86,7 @@ async function main() {
     // Create coordination plan for fixing deployment issues
     console.log('📋 Creating Coordination Plan...')
     const coordinationPlan = await createProjectCoordination(
-      `Fix critical deployment issues for AI Guided SaaS:
+      `Fix critical deployment issues for AI Guided, SaaS:
       1. Create missing use-toast hook export to resolve 40+ TypeScript errors
       2. Fix API route type incompatibilities in Next.js routes
       3. Configure TypeScript compiler for iterator support
@@ -100,10 +99,10 @@ async function main() {
       'deployment'
     )
 
-    console.log(`✅ Coordination plan created: ${coordinationPlan.id}`)
+    console.log(`✅ Coordination plan, created: ${coordinationPlan.id}`)
     console.log(`  • Tasks: ${coordinationPlan.tasks.length}`)
-    console.log(`  • Execution Phases: ${coordinationPlan.execution_order.length}`)
-    console.log(`  • Estimated Duration: ${(coordinationPlan.estimated_duration / 1000).toFixed(0)}s`)
+    console.log(`  • Execution, Phases: ${coordinationPlan.execution_order.length}`)
+    console.log(`  • Estimated, Duration: ${(coordinationPlan.estimated_duration / 1000).toFixed(0)}s`)
     console.log()
 
     // Send initial messages to agents
@@ -152,7 +151,7 @@ async function main() {
     console.log()
 
     // Display execution strategy
-    console.log('🎯 Execution Strategy:')
+    console.log('🎯 Execution, Strategy:')
     console.log('1. TypeScript Specialist will fix compilation errors')
     console.log('2. QA Agent will fix test configuration')
     console.log('3. Backend/Frontend agents will complete TODOs')
@@ -182,22 +181,22 @@ async function main() {
       JSON.stringify(deploymentPlan, null, 2)
     )
 
-    console.log('💾 Deployment plan saved to: deployment-plan.json')
+    console.log('💾 Deployment plan saved, to: deployment-plan.json')
     console.log()
 
     console.log('🚀 Ready to Execute!')
-    console.log('Run: npm run agents:execute-plan deployment-plan.json')
+    console.log('Run: npm run, agents:execute-plan deployment-plan.json')
     console.log()
 
     // Show current agent status
     const agentStatus = agentSystem.getSystemStatus()
-    console.log('📊 Current System Status:')
-    console.log(`  • Healthy Agents: ${agentStatus.agents.healthy}/${agentStatus.agents.total}`)
-    console.log(`  • System Health: ${agentStatus.system_health.overall_score.toFixed(1)}%`)
-    console.log(`  • Ready for Execution: ${agentStatus.system_health.status === 'excellent' ? '✅ Yes' : '⚠️ Check health'}`)
+    console.log('📊 Current System, Status:')
+    console.log(`  • Healthy, Agents: ${agentStatus.agents.healthy}/${agentStatus.agents.total}`)
+    console.log(`  • System, Health: ${agentStatus.system_health.overall_score.toFixed(1)}%`)
+    console.log(`  • Ready for, Execution: ${agentStatus.system_health.status === 'excellent' ? '✅ Yes' : '⚠️ Check health'}`)
 
   } catch (error) {
-    console.error('❌ Failed to load deployment agents:', error)
+    console.error('❌ Failed to load deployment, agents:', error)
     process.exit(1)
   }
 }

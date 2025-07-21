@@ -5,8 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Code, Key, Database, Webhook, ExternalLink } from 'lucide-react';
@@ -14,8 +13,7 @@ import { Code, Key, Database, Webhook, ExternalLink } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'API Documentation - AI Guided SaaS Platform',
   description:
-    'Complete API reference and documentation for AI Guided SaaS Platform',
-};
+    'Complete API reference and documentation for AI Guided SaaS Platform'};
 
 const apiSections = [
   {
@@ -27,11 +25,8 @@ const apiSections = [
       {
         method: 'POST',
         path: '/auth/refresh',
-        description: 'Refresh access token',
-      },
-      { method: 'POST', path: '/auth/logout', description: 'Logout user' },
-    ],
-  },
+        description: 'Refresh access token'},
+      { method: 'POST', path: '/auth/logout', description: 'Logout user' }]},
   {
     title: 'Projects',
     description: 'Manage your projects and configurations',
@@ -42,16 +37,12 @@ const apiSections = [
       {
         method: 'GET',
         path: '/projects/{id}',
-        description: 'Get project details',
-      },
+        description: 'Get project details'},
       { method: 'PUT', path: '/projects/{id}', description: 'Update project' },
       {
         method: 'DELETE',
         path: '/projects/{id}',
-        description: 'Delete project',
-      },
-    ],
-  },
+        description: 'Delete project'}]},
   {
     title: 'AI Generation',
     description: 'Access AI-powered code generation features',
@@ -61,15 +52,11 @@ const apiSections = [
       {
         method: 'POST',
         path: '/ai/optimize',
-        description: 'Optimize existing code',
-      },
+        description: 'Optimize existing code'},
       {
         method: 'POST',
         path: '/ai/review',
-        description: 'Review code quality',
-      },
-    ],
-  },
+        description: 'Review code quality'}]},
   {
     title: 'Webhooks',
     description: 'Set up webhooks for real-time notifications',
@@ -80,29 +67,21 @@ const apiSections = [
       {
         method: 'DELETE',
         path: '/webhooks/{id}',
-        description: 'Delete webhook',
-      },
-    ],
-  },
-];
+        description: 'Delete webhook'}]}];
 
 const quickStart = [
   {
     step: 1,
     title: 'Get API Key',
-    description: 'Generate your API key from the dashboard',
-  },
+    description: 'Generate your API key from the dashboard'},
   {
     step: 2,
     title: 'Make Request',
-    description: 'Include your API key in the Authorization header',
-  },
+    description: 'Include your API key in the Authorization header'},
   {
     step: 3,
     title: 'Handle Response',
-    description: 'Process the JSON response from our API',
-  },
-];
+    description: 'Process the JSON response from our API'}];
 
 const getMethodColor = (method: string) => {
   switch (method) {
@@ -133,7 +112,7 @@ export default function ApiDocsPage() {
         {/* Quick Start */}
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center">Quick Start</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-6">
             {quickStart.map(item => (
               <Card key={item.step} className="text-center">
                 <CardHeader>
@@ -168,7 +147,7 @@ export default function ApiDocsPage() {
                     {section.endpoints.map((endpoint, index) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+                        className="flex items-center justify-between p-4 border rounded-lg, hover:bg-muted/50 transition-colors"
                       >
                         <div className="flex items-center space-x-4">
                           <Badge className={getMethodColor(endpoint.method)}>
@@ -206,7 +185,7 @@ export default function ApiDocsPage() {
           <CardContent>
             <div className="bg-muted rounded-lg p-4 overflow-x-auto">
               <pre className="text-sm">
-                <code>{`curl -X POST https://api.aiguidedSaaS.com/ai/generate \\
+                <code>{`curl -X POST, https://api.aiguidedSaaS.com/ai/generate \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -240,7 +219,7 @@ export default function ApiDocsPage() {
               PHP
             </Badge>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+          <div className="flex flex-col, sm:flex-row gap-4 justify-center mt-6">
             <Button asChild>
               <Link href="/docs">View Full Documentation</Link>
             </Button>

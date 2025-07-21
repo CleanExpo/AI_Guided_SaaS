@@ -23,8 +23,7 @@ import {
   FileText,
   Settings,
   BarChart3,
-  Wrench,
-} from 'lucide-react';
+  Wrench} from 'lucide-react';
 import { useState } from 'react';
 
 const productLinks = [
@@ -32,38 +31,33 @@ const productLinks = [
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Collaboration', href: '/collaborate', icon: Users },
   { name: 'Templates', href: '/templates', icon: FileText },
-  { name: 'Admin Panel', href: '/admin', icon: Settings },
-];
+  { name: 'Admin Panel', href: '/admin', icon: Settings }];
 
 const companyLinks = [
   { name: 'About Us', href: '/about' },
   { name: 'Careers', href: '/careers' },
   { name: 'Press Kit', href: '/press' },
   { name: 'Contact', href: '/contact' },
-  { name: 'Blog', href: '/blog' },
-];
+  { name: 'Blog', href: '/blog' }];
 
 const resourcesLinks = [
   { name: 'Documentation', href: '/docs', icon: BookOpen },
   { name: 'Help Center', href: '/help', icon: HelpCircle },
   { name: 'API Reference', href: '/api-docs' },
   { name: 'Tutorials', href: '/tutorials' },
-  { name: 'Community', href: '/community' },
-];
+  { name: 'Community', href: '/community' }];
 
 const legalLinks = [
   { name: 'Privacy Policy', href: '/privacy' },
   { name: 'Terms of Service', href: '/terms' },
   { name: 'Cookie Policy', href: '/cookies' },
   { name: 'GDPR', href: '/gdpr' },
-  { name: 'Security', href: '/security' },
-];
+  { name: 'Security', href: '/security' }];
 
 const socialLinks = [
   { name: 'GitHub', href: 'https://github.com', icon: Github },
   { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
-  { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
-];
+  { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin }];
 
 export function Footer() {
   const [email, setEmail] = useState('');
@@ -88,8 +82,8 @@ export function Footer() {
     <footer className="bg-background border-t">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
-        <div className="py-12 lg:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="py-12, lg:py-16">
+          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-6 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center space-x-3 mb-4">
@@ -138,7 +132,7 @@ export function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
+                      className="text-muted-foreground, hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
                     >
                       <link.icon className="h-3 w-3" />
                       <span>{link.name}</span>
@@ -156,7 +150,7 @@ export function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      className="text-muted-foreground, hover:text-foreground transition-colors text-sm"
                     >
                       {link.name}
                     </Link>
@@ -173,7 +167,7 @@ export function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
+                      className="text-muted-foreground, hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
                     >
                       {link.icon && <link.icon className="h-3 w-3" />}
                       <span>{link.name}</span>
@@ -191,7 +185,7 @@ export function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      className="text-muted-foreground, hover:text-foreground transition-colors text-sm"
                     >
                       {link.name}
                     </Link>
@@ -206,7 +200,7 @@ export function Footer() {
 
         {/* Trust Badges & Contact Info */}
         <div className="py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
             {/* Trust Badges */}
             <div className="space-y-3">
               <h4 className="text-sm font-semibold">Security & Compliance</h4>
@@ -270,7 +264,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground, hover:text-foreground transition-colors"
                   >
                     <social.icon className="h-5 w-5" />
                     <span className="sr-only">{social.name}</span>
@@ -285,7 +279,7 @@ export function Footer() {
 
         {/* Bottom Footer */}
         <div className="py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex flex-col, md:flex-row justify-between items-center space-y-4, md:space-y-0">
             <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <span>
                 © {new Date().getFullYear()} AI Guided SaaS Platform. All
@@ -296,7 +290,7 @@ export function Footer() {
             <div className="flex items-center space-x-6 text-sm">
               <Link
                 href="/status"
-                className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-1"
+                className="text-muted-foreground, hover:text-foreground transition-colors flex items-center space-x-1"
               >
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>All Systems Operational</span>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 
 interface IconProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -15,16 +15,14 @@ const sizeClasses = {
   md: 'w-5 h-5',
   lg: 'w-6 h-6',
   xl: 'w-8 h-8',
-  '2xl': 'w-10 h-10',
-};
+  '2xl': 'w-10 h-10'};
 
 const colorClasses = {
   primary: 'text-brand-primary-600',
   secondary: 'text-brand-secondary-600',
   accent: 'text-brand-primary-500',
   muted: 'text-muted-foreground',
-  current: 'text-current',
-};
+  current: 'text-current'};
 
 // Base Icon Component
 function Icon({

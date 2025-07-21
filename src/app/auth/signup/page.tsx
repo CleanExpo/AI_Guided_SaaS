@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
@@ -15,8 +14,7 @@ import { Github, Mail } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Sign Up - AI Guided SaaS Platform',
-  description: 'Create your account to get started with AI-powered development',
-};
+  description: 'Create your account to get started with AI-powered development'};
 
 export default function SignUpPage() {
   return (
@@ -88,7 +86,7 @@ export default function SignUpPage() {
             <span className="text-muted-foreground">
               Already have an account?{' '}
             </span>
-            <Link href="/auth/signin" className="text-primary hover:underline">
+            <Link href="/auth/signin" className="text-primary, hover:underline">
               Sign in
             </Link>
           </div>

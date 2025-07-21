@@ -14,7 +14,7 @@ export default function Sidebar() {
           <li
             key={comp.id}
             onClick={() => addComponent(comp.id)}
-            className="mb-3 p-2 rounded hover:bg-gray-700 cursor-pointer transition"
+            className="mb-3 p-2 rounded, hover:bg-gray-700 cursor-pointer transition"
           >
             <div className="text-sm font-medium">{comp.name}</div>
             <div className="text-xs text-gray-300">{comp.description}</div>

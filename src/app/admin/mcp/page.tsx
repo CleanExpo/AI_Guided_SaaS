@@ -80,7 +80,7 @@ export default function MCPPage() {
       id: 'stripe',
       name: 'Stripe Agent Toolkit',
       status: 'running',
-      url: 'node C:/Users/Disaster Recovery 4/Documents/Cline/MCP/stripe-agent-toolkit-server/dist/index.js',
+      url: 'node: C:/Users/Disaster Recovery 4/Documents/Cline/MCP/stripe-agent-toolkit-server/dist/index.js',
       description: 'Stripe payment processing and product management',
       tools: ['create_product', 'create_price', 'create_payment_link'],
       resources: ['products', 'prices', 'payment-links']
@@ -89,7 +89,7 @@ export default function MCPPage() {
       id: 'fetch',
       name: 'Fetch MCP',
       status: 'running',
-      url: 'node C:/Users/Disaster Recovery 4/Documents/Cline/MCP/fetch-mcp/dist/index.js',
+      url: 'node: C:/Users/Disaster Recovery 4/Documents/Cline/MCP/fetch-mcp/dist/index.js',
       description: 'Web content fetching and processing',
       tools: ['fetch_html', 'fetch_markdown', 'fetch_txt', 'fetch_json'],
       resources: ['web-content', 'api-responses']
@@ -188,8 +188,8 @@ export default function MCPPage() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
-          {/* System Status */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* System, Status */}
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">System Status</CardTitle>
@@ -238,14 +238,14 @@ export default function MCPPage() {
             </Card>
           </div>
 
-          {/* Services Status */}
+          {/* Services, Status */}
           {mcpStatus && (
             <Card>
               <CardHeader>
                 <CardTitle>Services Status</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1, md:grid-cols-3 gap-4">
                   {Object.entries(mcpStatus.services).map(([service, status]) => (
                     <div key={service} className="flex items-center justify-between p-3 border rounded-lg">
                       <span className="font-medium">{service.replace('_', ' ').toUpperCase()}</span>
@@ -259,7 +259,7 @@ export default function MCPPage() {
         </TabsContent>
 
         <TabsContent value="servers" className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
             {mcpServers.map(server => (
               <Card key={server.id}>
                 <CardHeader>
@@ -323,7 +323,7 @@ export default function MCPPage() {
               <CardTitle>Available Tools</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
                 {mcpServers.flatMap(server => 
                   server.tools.map(tool => (
                     <div key={`${server.id}-${tool}`} className="p-3 border rounded-lg">
@@ -350,7 +350,7 @@ export default function MCPPage() {
               <CardTitle>Available Resources</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
                 {mcpServers.flatMap(server => 
                   server.resources.map(resource => (
                     <div key={`${server.id}-${resource}`} className="p-3 border rounded-lg">

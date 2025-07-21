@@ -11,9 +11,7 @@ import type { Session } from 'next-auth'
 // Extended session type with guaranteed user ID
 export interface AuthenticatedSession extends Session {
   user: {
-    id: string
-    email: string
-    name: string
+    id: string, email: string, name: string
     image?: string
   }
   expires: string
@@ -44,7 +42,6 @@ export async function getServerSession(): Promise<AuthenticatedSession | null> {
   }
 
   try {
-    // @ts-expect-error - NextAuth types are complex, using type assertion for safety
     const session = await nextAuthGetServerSession(authOptions)
     
     if (!session?.user) {
@@ -62,7 +59,7 @@ export async function getServerSession(): Promise<AuthenticatedSession | null> {
       }
     } as AuthenticatedSession
   } catch (error) {
-    console.error('Error getting server session:', error)
+    console.error('Error getting server, session:', error)
     return null
   }
 }
@@ -111,8 +108,7 @@ export async function isAdmin(): Promise<boolean> {
  * Type-safe helper for API route authentication
  */
 export async function authenticateApiRequest(): Promise<{
-  success: boolean
-  session: AuthenticatedSession | null
+  success: boolean, session: AuthenticatedSession | null
   error?: string
 }> {
   try {
@@ -143,8 +139,7 @@ export async function authenticateApiRequest(): Promise<{
  * Type-safe helper for admin API route authentication
  */
 export async function authenticateAdminRequest(): Promise<{
-  success: boolean
-  session: AuthenticatedSession | null
+  success: boolean, session: AuthenticatedSession | null
   error?: string
 }> {
   try {

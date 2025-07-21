@@ -5,8 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -15,41 +14,34 @@ import {
   Users,
   Zap,
   CheckCircle,
-  ArrowRight,
-} from 'lucide-react';
+  ArrowRight} from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Enterprise Solutions - AI Guided SaaS Platform',
   description:
-    'Enterprise-grade AI development platform for large organizations',
-};
+    'Enterprise-grade AI development platform for large organizations'};
 
 const enterpriseFeatures = [
   {
     icon: Shield,
     title: 'Advanced Security',
     description:
-      'SOC 2 compliance, SSO integration, and enterprise-grade security controls',
-  },
+      'SOC 2 compliance, SSO integration, and enterprise-grade security controls'},
   {
     icon: Users,
     title: 'Team Management',
     description:
-      'Advanced user management, role-based access control, and team collaboration',
-  },
+      'Advanced user management, role-based access control, and team collaboration'},
   {
     icon: Zap,
     title: 'Priority Support',
     description:
-      '24/7 dedicated support with guaranteed response times and account management',
-  },
+      '24/7 dedicated support with guaranteed response times and account management'},
   {
     icon: Building,
     title: 'Custom Deployment',
     description:
-      'On-premise, private cloud, or hybrid deployment options available',
-  },
-];
+      'On-premise, private cloud, or hybrid deployment options available'}];
 
 const benefits = [
   'Unlimited projects and team members',
@@ -59,8 +51,7 @@ const benefits = [
   'Dedicated account manager',
   'Custom integrations and workflows',
   'Priority feature requests',
-  'Training and onboarding support',
-];
+  'Training and onboarding support'];
 
 export default function EnterprisePage() {
   return (
@@ -124,7 +115,7 @@ export default function EnterprisePage() {
           <h2 className="text-2xl font-bold text-center mb-8">
             Enterprise Features
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1, md:grid-cols-2 gap-8">
             {enterpriseFeatures.map(feature => {
               const Icon = feature.icon;
               return (
@@ -150,7 +141,7 @@ export default function EnterprisePage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
@@ -181,7 +172,7 @@ export default function EnterprisePage() {
               <Badge variant="outline">Flexible payment terms</Badge>
               <Badge variant="outline">Multi-year agreements</Badge>
             </div>
-            <Button size="lg" className="w-full md:w-auto">
+            <Button size="lg" className="w-full, md:w-auto">
               Get Custom Quote
             </Button>
           </CardContent>
@@ -194,7 +185,7 @@ export default function EnterprisePage() {
             Speak with our enterprise team to learn how we can help your
             organization
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col, sm:flex-row gap-4 justify-center">
             <Button asChild size="lg">
               <Link href="/contact">Contact Sales</Link>
             </Button>
@@ -203,7 +194,7 @@ export default function EnterprisePage() {
             </Button>
           </div>
           <div className="mt-6 text-sm text-muted-foreground">
-            <p>Enterprise sales: enterprise@aiguidedSaaS.com</p>
+            <p>Enterprise, sales: enterprise@aiguidedSaaS.com</p>
             <p>Phone: +1 (555) 123-4567</p>
           </div>
         </div>

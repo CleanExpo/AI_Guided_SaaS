@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Code, Key, Globe, Download } from 'lucide-react';
@@ -44,16 +43,15 @@ https://api.aiguidedSaaS.com/v1/auth
 
 ### API Key Authentication
 
-Include your API key in the request headers:
+Include your API key in the request, headers:
 
-\`\`\`http
-Authorization: Bearer YOUR_API_KEY
+\`\`\`http, Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 \`\`\`
 
 ### OAuth 2.0
 
-We support OAuth 2.0 with the following providers:
+We support OAuth 2.0 with the following, providers:
 - Google
 - GitHub
 - Microsoft
@@ -65,7 +63,7 @@ We support OAuth 2.0 with the following providers:
 
 Authenticate a user with email and password.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "email": "user@example.com",
@@ -95,7 +93,7 @@ Authenticate a user with email and password.
 
 Register a new user account.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "email": "user@example.com",
@@ -125,7 +123,7 @@ Register a new user account.
 
 Refresh an expired access token.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "refreshToken": "refresh_token_here"
@@ -148,8 +146,7 @@ Refresh an expired access token.
 Invalidate the current session.
 
 **Headers:**
-\`\`\`http
-Authorization: Bearer jwt_token_here
+\`\`\`http, Authorization: Bearer jwt_token_here
 \`\`\`
 
 **Response:**
@@ -165,8 +162,7 @@ Authorization: Bearer jwt_token_here
 Get current user information.
 
 **Headers:**
-\`\`\`http
-Authorization: Bearer jwt_token_here
+\`\`\`http, Authorization: Bearer jwt_token_here
 \`\`\`
 
 **Response:**
@@ -189,7 +185,7 @@ Authorization: Bearer jwt_token_here
 
 ## Error Responses
 
-All endpoints return consistent error responses:
+All endpoints return consistent error, responses:
 
 \`\`\`json
 {
@@ -213,7 +209,7 @@ All endpoints return consistent error responses:
 
 ## Rate Limiting
 
-Authentication endpoints are rate limited:
+Authentication endpoints are rate, limited:
 - Login: 5 attempts per minute per IP
 - Register: 3 attempts per minute per IP
 - Refresh: 10 requests per minute per user
@@ -225,8 +221,7 @@ Authentication endpoints are rate limited:
 3. **Validate on server** - Always validate tokens on your backend
 4. **Use HTTPS** - Never send tokens over unencrypted connections
 5. **Implement logout** - Properly invalidate sessions on logout
-    `,
-  },
+    `},
   endpoints: {
     slug: 'endpoints',
     title: 'API Endpoints Reference',
@@ -250,10 +245,10 @@ https://api.aiguidedSaaS.com/v1
 
 List all projects for the authenticated user.
 
-**Query Parameters:**
+**Query, Parameters:**
 - \`page\` (optional) - Page number (default: 1)
 - \`limit\` (optional) - Items per page (default: 20, max: 100)
-- \`status\` (optional) - Filter by status: active, archived, draft
+- \`status\` (optional) - Filter by, status: active, archived, draft
 
 **Response:**
 \`\`\`json
@@ -285,7 +280,7 @@ List all projects for the authenticated user.
 
 Create a new project.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "name": "My New Project",
@@ -342,7 +337,7 @@ List all components in a project.
 
 Create a new component.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "name": "UserCard",
@@ -373,7 +368,7 @@ List project deployments.
 
 Create a new deployment.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "environment": "production",
@@ -401,9 +396,9 @@ Rollback to a previous deployment.
 
 Get project analytics data.
 
-**Query Parameters:**
-- \`timeRange\` - Time range: 1d, 7d, 30d, 90d
-- \`metrics\` - Comma-separated metrics: pageviews, users, sessions
+**Query, Parameters:**
+- \`timeRange\` - Time, range: 1d, 7d, 30d, 90d
+- \`metrics\` - Comma-separated, metrics: pageviews, users, sessions
 
 **Response:**
 \`\`\`json
@@ -436,7 +431,7 @@ List project collaborators.
 
 Invite a new collaborator.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "email": "collaborator@example.com",
@@ -469,7 +464,7 @@ Get template details and preview.
 
 Generate code using AI.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "prompt": "Create a user authentication form",
@@ -499,7 +494,7 @@ List configured webhooks.
 
 Create a new webhook.
 
-**Request Body:**
+**Request, Body:**
 \`\`\`json
 {
   "url": "https://yourapp.com/webhook",
@@ -510,9 +505,9 @@ Create a new webhook.
 
 ## Response Format
 
-All API responses follow this format:
+All API responses follow this, format:
 
-**Success Response:**
+**Success, Response:**
 \`\`\`json
 {
   "success": true,
@@ -521,7 +516,7 @@ All API responses follow this format:
 }
 \`\`\`
 
-**Error Response:**
+**Error, Response:**
 \`\`\`json
 {
   "success": false,
@@ -543,8 +538,7 @@ All API responses follow this format:
 - \`404\` - Not Found
 - \`429\` - Rate Limited
 - \`500\` - Internal Server Error
-    `,
-  },
+    `},
   sdks: {
     slug: 'sdks',
     title: 'SDKs and Libraries',
@@ -599,7 +593,7 @@ const client = new AiGuidedSaaS({
   timeout: 30000,
   retries: 3,
   onError: (error) => {
-    console.error('API Error:', error)
+    console.error('API, Error:', error)
   }
 })
 \`\`\`
@@ -725,12 +719,12 @@ from aiguidedSaaS.exceptions import (
 
 try:
     project = client.projects.get("proj_123")
-except AuthenticationError:
+except, AuthenticationError:
     print("Invalid API key")
-except RateLimitError:
+except, RateLimitError:
     print("Rate limit exceeded")
-except AiGuidedSaaSError as e:
-    print(f"API Error: {e.message}")
+except AiGuidedSaaSError as, e:
+    print(f"API, Error: {e.message}")
 \`\`\`
 
 ## Go SDK
@@ -760,13 +754,12 @@ func main() {
     // Create project
     project, err := client.Projects.Create(context.Background(), &aiguidedSaaS.CreateProjectRequest{
         Name:      "My Go Project",
-        Framework: "gin",
-    })
+        Framework: "gin"})
     if err != nil {
         log.Fatal(err)
     }
     
-    fmt.Printf("Created project: %s\\n", project.ID)
+    fmt.Printf("Created, project: %s\\n", project.ID)
 }
 \`\`\`
 
@@ -797,7 +790,7 @@ $project = $client->projects()->create([
     'framework' => 'laravel'
 ]);
 
-echo "Created project: " . $project['id'];
+echo "Created, project: " . $project['id'];
 ?>
 \`\`\`
 
@@ -825,7 +818,7 @@ project = client.projects.create(
   framework: 'rails'
 )
 
-puts "Created project: #{project.id}"
+puts "Created, project: #{project.id}"
 \`\`\`
 
 ## CLI Tool
@@ -893,7 +886,7 @@ def verify_webhook(payload, signature, secret):
 
 ## Rate Limiting
 
-All SDKs implement automatic rate limiting and retry logic:
+All SDKs implement automatic rate limiting and retry, logic:
 
 - **Rate Limits**: 1000 requests per hour per API key
 - **Burst Limits**: 100 requests per minute
@@ -901,7 +894,7 @@ All SDKs implement automatic rate limiting and retry logic:
 
 ## Error Handling
 
-All SDKs provide consistent error handling:
+All SDKs provide consistent error, handling:
 
 \`\`\`typescript
 try {
@@ -923,9 +916,7 @@ try {
 - **GitHub Issues**: Report SDK issues on our GitHub repositories
 - **Community**: Join our [Discord community](https://discord.gg/aiguidedSaaS)
 - **Email**: sdk-support@aiguidedSaaS.com
-    `,
-  },
-};
+    `}};
 
 export default function ApiDocPage() {
   const params = useParams();
@@ -989,7 +980,7 @@ export default function ApiDocPage() {
                 })
                 .replace(
                   /\[([^\]]+)\]\(([^)]+)\)/g,
-                  '<a href="$2" class="text-primary hover:underline">$1</a>'
+                  '<a href="$2" class="text-primary, hover:underline">$1</a>'
                 )
                 .replace(
                   /```(\w+)?\n([\s\S]*?)```/g,
@@ -998,8 +989,7 @@ export default function ApiDocPage() {
                 .replace(
                   /`([^`]+)`/g,
                   '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>'
-                ),
-            }}
+                )}}
           />
         </CardContent>
       </Card>
@@ -1011,7 +1001,7 @@ export default function ApiDocPage() {
           <CardDescription>Explore more API documentation</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4, md:grid-cols-2">
             {Object.values(apiDocs)
               .filter(d => d.slug !== doc.slug)
               .slice(0, 2)
@@ -1049,7 +1039,7 @@ export default function ApiDocPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4, md:grid-cols-3">
             <div className="flex items-center gap-3 p-3 border rounded-lg">
               <Key className="h-5 w-5 text-primary" />
               <div>

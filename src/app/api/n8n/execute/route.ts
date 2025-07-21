@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Failed to execute workflow:', error)
+    console.error('Failed to execute, workflow:', error)
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -100,7 +100,7 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Failed to list executions:', error)
+    console.error('Failed to list, executions:', error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to list executions' },
       { status: 500 }
@@ -155,7 +155,7 @@ export async function PUT(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('Failed to get/retry execution:', error)
+    console.error('Failed to get/retry, execution:', error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to process execution' },
       { status: 500 }

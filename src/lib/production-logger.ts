@@ -7,8 +7,7 @@ export enum LogLevel {
   ERROR = 0,
   WARN = 1,
   INFO = 2,
-  DEBUG = 3,
-}
+  DEBUG = 3}
 
 interface LogEntry {
   timestamp: string;
@@ -20,9 +19,9 @@ interface LogEntry {
 }
 
 class ProductionLogger {
-  private isDevelopment: boolean;
-  private logLevel: LogLevel;
-  private logs: LogEntry[] = [];
+  private, isDevelopment: boolean;
+  private, logLevel: LogLevel;
+  private, logs: LogEntry[] = [];
   private maxLogs = 1000; // Keep last 1000 logs in memory
 
   constructor() {
@@ -39,8 +38,7 @@ class ProductionLogger {
       timestamp: new Date().toISOString(),
       level,
       message,
-      context,
-    };
+      context};
   }
 
   private writeLog(entry: LogEntry): void {
@@ -64,7 +62,7 @@ class ProductionLogger {
   }
 
   private async sendToLoggingService(entry: LogEntry): Promise<void> {
-    // In a real production environment, this would send to:
+    // In a real production environment, this would send, to:
     // - CloudWatch, DataDog, Splunk, etc.
     // - Database logging table
     // - External monitoring service

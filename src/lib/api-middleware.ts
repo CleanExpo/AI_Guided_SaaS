@@ -41,7 +41,7 @@ export function withApiTracking(handler: ApiHandler): ApiHandler {
       }
     } catch (error) {
       // Handler threw an error
-      console.error('API handler error:', error)
+      console.error('API handler, error:', error)
       errorMessage = error instanceof Error ? error.message : 'Unknown error'
       
       response = NextResponse.json(
@@ -61,7 +61,7 @@ export function withApiTracking(handler: ApiHandler): ApiHandler {
       )
     } catch (trackingError) {
       // Don't fail the request if tracking fails
-      console.error('API tracking error:', trackingError)
+      console.error('API tracking, error:', trackingError)
     }
     
     return response
@@ -128,7 +128,7 @@ export function trackResourceUsage(
             )
           }
         } catch (error) {
-          console.error('Resource tracking error:', error)
+          console.error('Resource tracking, error:', error)
         }
       }
       

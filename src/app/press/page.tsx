@@ -4,8 +4,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Download, ExternalLink, Calendar } from 'lucide-react';
@@ -13,8 +12,7 @@ import { Download, ExternalLink, Calendar } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Press & Media - AI Guided SaaS Platform',
   description:
-    'Press releases, media kit, and company information for journalists and media',
-};
+    'Press releases, media kit, and company information for journalists and media'};
 
 const pressReleases = [
   {
@@ -22,30 +20,25 @@ const pressReleases = [
     date: '2024-01-15',
     excerpt:
       'Funding will accelerate AI development and expand platform capabilities.',
-    category: 'Funding',
-  },
+    category: 'Funding'},
   {
     title: 'Platform Reaches 50,000 Active Developers',
     date: '2024-01-01',
     excerpt:
       'Milestone reflects growing adoption of AI-powered development tools.',
-    category: 'Milestone',
-  },
+    category: 'Milestone'},
   {
     title: 'New AI Code Generation Features Launched',
     date: '2023-12-15',
     excerpt: 'Advanced AI capabilities now available to all platform users.',
-    category: 'Product',
-  },
-];
+    category: 'Product'}];
 
 const mediaAssets = [
   { name: 'Company Logo (PNG)', size: '2.1 MB', type: 'Logo' },
   { name: 'Company Logo (SVG)', size: '156 KB', type: 'Logo' },
   { name: 'Product Screenshots', size: '8.4 MB', type: 'Screenshots' },
   { name: 'Executive Photos', size: '12.3 MB', type: 'Photos' },
-  { name: 'Brand Guidelines', size: '3.2 MB', type: 'Guidelines' },
-];
+  { name: 'Brand Guidelines', size: '3.2 MB', type: 'Guidelines' }];
 
 export default function PressPage() {
   return (
@@ -71,7 +64,7 @@ export default function PressPage() {
               with intuitive development tools to help teams build better
               applications faster.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="grid grid-cols-2, md:grid-cols-4 gap-4 text-center">
               <div>
                 <div className="text-2xl font-bold">50,000+</div>
                 <div className="text-sm text-muted-foreground">
@@ -132,7 +125,7 @@ export default function PressPage() {
         {/* Media Kit */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Media Kit</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
             {mediaAssets.map((asset, index) => (
               <Card key={index}>
                 <CardContent className="p-4">
@@ -171,7 +164,7 @@ export default function PressPage() {
                 <strong>Phone:</strong> +1 (555) 123-4567
               </p>
               <p>
-                <strong>Response Time:</strong> Within 24 hours
+                <strong>Response, Time:</strong> Within 24 hours
               </p>
             </div>
           </CardContent>

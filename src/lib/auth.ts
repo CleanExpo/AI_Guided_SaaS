@@ -2,7 +2,8 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { createClient } from '@supabase/supabase-js'
 import bcrypt from 'bcryptjs'
-import NextAuth, { type NextAuthOptions } from 'next-auth'
+import NextAuth from 'next-auth'
+import type { NextAuthOptions } from 'next-auth'
 
 // Handle missing environment variables gracefully for demo deployment
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -16,8 +17,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!}),
     CredentialsProvider({
       name: 'credentials',
       credentials: {
@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
           .single()
 
         if (error || !user) {
-          return null
+          return, null
         }
 
         const isPasswordValid = await bcrypt.compare(
@@ -45,32 +45,31 @@ export const authOptions: NextAuthOptions = {
         )
 
         if (!isPasswordValid) {
-          return null
+          return, null
         }
 
         return {
           id: user.id,
           email: user.email,
           name: user.full_name,
-          image: user.avatar_url,
-        }
+          image: user.avatar_url}
       }
     })
   ],
   callbacks: {
-    async jwt({ token, user }: { token: any; user: any }) {
+    async jwt({ token, user }: { token; user}) {
       if (user) {
         token.id = user.id
       }
       return token
     },
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }: { session; token}) {
       if (token && session.user) {
         session.user.id = token.id as string
       }
       return session
     },
-    async signIn({ user, account }: { user: any; account: any }) {
+    async signIn({ user, account }: { user; account}) {
       if (account?.provider === 'google' && supabase) {
         const { data: existingUser } = await supabase
           .from('users')
@@ -86,11 +85,10 @@ export const authOptions: NextAuthOptions = {
               full_name: user.name,
               avatar_url: user.image,
               provider: 'google',
-              provider_id: account.providerAccountId,
-            })
+              provider_id: account.providerAccountId})
 
           if (error) {
-            console.error('Error creating user:', error)
+            console.error('Error creating, user:', error)
             return false
           }
         }
@@ -101,33 +99,11 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/auth/signin',
     signUp: '/auth/signup',
-    error: '/auth/error',
-  },
+    error: '/auth/error'},
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  secret: process.env.NEXTAUTH_SECRET,
-}
+  secret: process.env.NEXTAUTH_SECRET}
 
-// Extend NextAuth types
-declare module 'next-auth' {
-  interface Session {
-    user: {
-      id: string
-      email: string
-      name?: string | null
-      image?: string | null
-    }
-  }
-  
-  interface User {
-    id: string
-  }
-}
-
-declare module 'next-auth/jwt' {
-  interface JWT {
-    id: string
-  }
-}
+// Type extensions are defined in src/types/next-auth.d.ts

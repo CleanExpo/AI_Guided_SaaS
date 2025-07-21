@@ -26,8 +26,7 @@ const navigation = [
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Collaboration', href: '/collaborate', icon: Users },
   { name: 'Templates', href: '/templates', icon: FileText },
-  { name: 'Admin', href: '/admin', icon: Settings },
-]
+  { name: 'Admin', href: '/admin', icon: Settings }]
 
 export function Navigation() {
   const pathname = usePathname()
@@ -45,7 +44,7 @@ export function Navigation() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden, md:flex items-center space-x-1">
             {navigation.map((item) => {
               const isActive = pathname === item.href || 
                 (item.href !== '/' && pathname.startsWith(item.href))
@@ -58,7 +57,7 @@ export function Navigation() {
                     'flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                      : 'text-muted-foreground, hover:text-foreground, hover:bg-accent'
                   )}
                 >
                   <item.icon className="h-4 w-4" />
@@ -76,8 +75,8 @@ export function Navigation() {
               size="sm"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all, dark:-rotate-90, dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all, dark:rotate-0, dark:scale-100" />
               <span className="sr-only">Toggle theme</span>
             </Button>
 

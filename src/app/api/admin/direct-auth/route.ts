@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     }, { status: 401 })
 
   } catch (error) {
-    console.error('Direct auth error:', error)
+    console.error('Direct auth, error:', error)
     return NextResponse.json({
       success: false,
       error: 'Authentication failed'

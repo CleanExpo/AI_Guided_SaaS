@@ -6,28 +6,18 @@ import { ProjectConfig } from '@/types'
 // Type definitions for discovery and analysis results
 export interface DiscoveryResults {
   projectStructure: {
-    components: number
-    pages: number
-    apis: number
-    utilities: number
+    components: number, pages: number, apis: number, utilities: number
   }
   dependencies: {
-    production: number
-    development: number
-    critical: number
+    production: number, development: number, critical: number
   }
   codeComplexity: {
-    averageComplexity: number
-    highComplexityFiles: number
-    technicalDebt: string
+    averageComplexity: number, highComplexityFiles: number, technicalDebt: string
   }
 }
 
 export interface MemoryFile {
-  filename: string
-  content: string
-  tokens: number
-  priority: 'critical' | 'high' | 'medium' | 'low'
+  filename: string, content: string, tokens: number, priority: 'critical' | 'high' | 'medium' | 'low'
 }
 
 export interface HierarchyResults {
@@ -38,97 +28,66 @@ export interface HierarchyResults {
 }
 
 export interface CrossReferenceSystem {
-  crossReferences: number
-  linkedDocuments: number
-  navigationPaths: number
-  searchableTerms: number
+  crossReferences: number, linkedDocuments: number, navigationPaths: number, searchableTerms: number
 }
 
 export interface MemoryAnalysis {
-  currentTokens: number
-  maxTokens: number
-  utilizationRate: number
-  fragmentationLevel: number
-  compressionOpportunities: string[]
+  currentTokens: number, maxTokens: number, utilizationRate: number, fragmentationLevel: number, compressionOpportunities: string[]
 }
 
 export interface CompactionResults {
-  compactedSections: number
-  preservedCriticalInfo: number
-  archivedContent: number
-  optimizedReferences: number
-  tokensReclaimed: number
+  compactedSections: number, preservedCriticalInfo: number, archivedContent: number, optimizedReferences: number, tokensReclaimed: number
 }
 
 export interface QualityReport {
-  retentionScore: number
-  criticalInfoPreserved: boolean
-  navigationIntegrity: boolean
-  searchabilityMaintained: boolean
-  recommendations: string[]
+  retentionScore: number, criticalInfoPreserved: boolean, navigationIntegrity: boolean, searchabilityMaintained: boolean, recommendations: string[]
 }
 
 export interface ClaudeCommand {
-  name: string
-  description: string
-  tokenImpact: number
-  memoryLevel: 'user' | 'project' | 'modular'
+  name: string, description: string, tokenImpact: number, memoryLevel: 'user' | 'project' | 'modular'
   execute(projectContext: ProjectConfig): Promise<ClaudeCommandResult>
 }
 
 export interface ClaudeCommandResult {
-  success: boolean
-  message: string
-  tokenUsage: number
+  success: boolean, message: string, tokenUsage: number
   generatedFiles?: string[]
   optimizationReport?: OptimizationReport
   nextSteps?: string[]
 }
 
 export interface OptimizationReport {
-  originalTokens: number
-  optimizedTokens: number
-  compressionRatio: number
-  qualityRetention: number
-  recommendations: string[]
+  originalTokens: number, optimizedTokens: number, compressionRatio: number, qualityRetention: number, recommendations: string[]
 }
 
 export interface MultiAgentOrchestrationResult {
-  totalTokenUsage: number
-  utilizationRate: number
-  integrationCommands: string[]
+  totalTokenUsage: number, utilizationRate: number, integrationCommands: string[]
   nextSteps: string[]
   agentReports: AgentReport[]
 }
 
 export interface AgentReport {
-  agentName: string
-  tasksCompleted: number
-  tokensProcessed: number
-  qualityScore: number
-  recommendations: string[]
+  agentName: string, tasksCompleted: number, tokensProcessed: number, qualityScore: number, recommendations: string[]
 }
 
 // Enhanced /init-docs Command
 export class InitDocsCommand implements ClaudeCommand {
   name = '/init-docs'
   description = 'Comprehensive documentation analysis and generation following Claude Code best practices'
-  tokenImpact = 8000
-  memoryLevel: 'project' = 'project'
+  tokenImpact = 8000, memoryLevel: 'project' = 'project'
 
   async execute(projectContext: ProjectConfig): Promise<ClaudeCommandResult> {
     console.log('🚀 Executing Claude Code /init-docs command...')
 
-    // Phase 1: Automated Discovery and Analysis
+    // Phase, 1: Automated Discovery and Analysis
     const discoveryResults = await this.performAutomatedDiscovery(projectContext)
 
-    // Phase 2: Memory File Generation
+    // Phase, 2: Memory File Generation
     const memoryFiles = await this.generateMemoryFiles(projectContext, discoveryResults)
 
-    // Phase 3: Documentation Hierarchy Creation
+    // Phase, 3: Documentation Hierarchy Creation
     const hierarchyResults = await this.createDocumentationHierarchy(memoryFiles)
 
-    // Phase 4: Cross-Reference System
+    // Phase, 4: Cross-Reference System
     const crossReferenceSystem = await this.establishCrossReferences(hierarchyResults)
 
     return {
@@ -318,19 +277,18 @@ ${projectContext.features.map(feature => `- **${feature}**: ✅ Implemented`).jo
 export class CompactDocsCommand implements ClaudeCommand {
   name = '/compact-docs'
   description = 'Strategic memory optimization with 150K context management'
-  tokenImpact = -15000
-  memoryLevel: 'modular' = 'modular'
+  tokenImpact = -15000, memoryLevel: 'modular' = 'modular'
 
   async execute(projectContext: ProjectConfig): Promise<ClaudeCommandResult> {
     console.log('🗜️ Executing Claude Code /compact-docs command...')
 
-    // Phase 1: Memory Analysis
+    // Phase, 1: Memory Analysis
     const memoryAnalysis = await this.analyzeCurrentMemoryUsage()
 
-    // Phase 2: Strategic Compaction
+    // Phase, 2: Strategic Compaction
     const compactionResults = await this.performStrategicCompaction(memoryAnalysis)
 
-    // Phase 3: Quality Preservation
+    // Phase, 3: Quality Preservation
     const qualityReport = await this.validateQualityPreservation(compactionResults)
 
     return {

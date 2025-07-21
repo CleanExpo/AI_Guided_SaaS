@@ -13,10 +13,7 @@ export interface RuntimeConfig {
 }
 
 export interface AgentTask {
-  id: string
-  agentType: string
-  input: string
-  priority: 'critical' | 'high' | 'medium' | 'low'
+  id: string, agentType: string, input: string, priority: 'critical' | 'high' | 'medium' | 'low'
   dependencies?: string[]
   timeout?: number
   retries?: number
@@ -24,32 +21,17 @@ export interface AgentTask {
 }
 
 export interface TaskResult {
-  taskId: string
-  agentType: string
-  result: AgentResult
-  startTime: number
-  endTime: number
-  duration: number
-  retryCount: number
+  taskId: string, agentType: string, result: AgentResult, startTime: number, endTime: number, duration: number, retryCount: number
   error?: Error
 }
 
 export interface RuntimeMetrics {
-  totalTasks: number
-  completedTasks: number
-  failedTasks: number
-  averageDuration: number
-  agentMetrics: Map<string, AgentMetrics>
-  memoryUsage: number
-  concurrentTasks: number
+  totalTasks: number, completedTasks: number, failedTasks: number, averageDuration: number, agentMetrics: Map<string, AgentMetrics>
+  memoryUsage: number, concurrentTasks: number
 }
 
 export interface AgentMetrics {
-  tasksCompleted: number
-  tasksFailed: number
-  averageDuration: number
-  averageConfidence: number
-  totalMessages: number
+  tasksCompleted: number, tasksFailed: number, averageDuration: number, averageConfidence: number, totalMessages: number
 }
 
 export interface ExecutionPlan {
@@ -60,22 +42,21 @@ export interface ExecutionPlan {
 }
 
 export class AgentRuntime extends EventEmitter {
-  private config: RuntimeConfig
-  private agents: Map<string, Agent>
-  private sharedMemory: Map<string, any>
-  private taskQueue: AgentTask[]
-  private runningTasks: Map<string, Promise<TaskResult>>
-  private completedTasks: Map<string, TaskResult>
-  private metrics: RuntimeMetrics
-  private isRunning: boolean
+  private, config: RuntimeConfig
+  private, agents: Map<string, Agent>
+  private, sharedMemory: Map<string, any>
+  private, taskQueue: AgentTask[]
+  private, runningTasks: Map<string, Promise<TaskResult>>
+  private, completedTasks: Map<string, TaskResult>
+  private, metrics: RuntimeMetrics
+  private, isRunning: boolean
 
   constructor(config: RuntimeConfig = {}) {
     super()
     
     this.config = {
       maxConcurrentAgents: 5,
-      timeoutMs: 300000, // 5 minutes
-      retryAttempts: 2,
+      timeoutMs: 300000, // 5 minutes, retryAttempts: 2,
       enableLogging: true,
       enableMetrics: true,
       sharedMemoryLimit: 1000,
@@ -104,16 +85,16 @@ export class AgentRuntime extends EventEmitter {
    * Execute a natural language request using intelligent agent orchestration
    */
   async executeRequest(request: string): Promise<ExecutionPlan & { results: TaskResult[] }> {
-    this.log('info', `Executing request: ${request}`)
+    this.log('info', `Executing, request: ${request}`)
     
-    // Step 1: Analyze request and create execution plan
+    // Step, 1: Analyze request and create execution plan
     const plan = await this.createExecutionPlan(request)
     this.emit('plan-created', plan)
     
-    // Step 2: Execute the plan
+    // Step, 2: Execute the plan
     const results = await this.executePlan(plan)
     
-    // Step 3: Return plan and results
+    // Step, 3: Return plan and results
     return {
       ...plan,
       results
@@ -124,11 +105,11 @@ export class AgentRuntime extends EventEmitter {
    * Create an execution plan from a natural language request
    */
   private async createExecutionPlan(request: string): Promise<ExecutionPlan> {
-    const plannerPrompt = `Analyze this request and create an execution plan using available agents:
+    const plannerPrompt = `Analyze this request and create an execution plan using available, agents:
 
 Request: "${request}"
 
-Available agents:
+Available, agents:
 - analyst: Requirements analysis and user story creation
 - project-manager: Project planning and resource allocation
 - architect: System design and technical architecture
@@ -137,7 +118,7 @@ Available agents:
 - agent-refiner: Optimize agent configurations
 - advisor: Strategic advice and decision support
 
-Create an execution plan with:
+Create an execution plan, with:
 1. Which agents to use
 2. What input to give each agent
 3. Dependencies between agents
@@ -146,24 +127,23 @@ Create an execution plan with:
 
 Consider that agents can share data through shared memory.
 
-Format as JSON with:
+Format as JSON, with:
 {
   "tasks": [{ "id", "agentType", "input", "priority", "dependencies" }],
   "executionNotes": "explanation of the plan"
 }`
 
     const response = await generateAIResponse(plannerPrompt, {
-      temperature: 0.4,
-      responseFormat: 'json'
+      temperature: 0.4
     })
 
-    const planData = JSON.parse(response)
+    const planData = JSON.parse(response.message)
     
     // Build dependency map and execution order
     const tasks = planData.tasks
     const dependencies = new Map<string, string[]>()
     
-    tasks.forEach((task: any) => {
+    tasks.forEach((task) => {
       if (task.dependencies && task.dependencies.length > 0) {
         dependencies.set(task.id, task.dependencies)
       }
@@ -244,19 +224,22 @@ Format as JSON with:
         // Execute with timeout
         const result = await this.executeWithTimeout(
           agent.process(task.input),
-          task.timeout ?? this.config.timeoutMs
+          task.timeout ?? this.config.timeoutMs ?? 30000
         )
 
         // Update shared memory with agent outputs
         if (result.success) {
-          this.updateSharedMemory(agent.getContext())
+          // Agent doesn't have getContext, use the context we set
+          this.updateSharedMemory({
+            sharedMemory: this.sharedMemory,
+            artifacts: new Map()
+          })
         }
 
         // Record metrics
         const endTime = Date.now()
         const taskResult: TaskResult = {
-          taskId: task.id,
-          agentType: task.agentType,
+          taskId: task.id: agentType: task.agentType,
           result,
           startTime,
           endTime,
@@ -284,14 +267,12 @@ Format as JSON with:
     // Task failed after all retries
     const endTime = Date.now()
     const failedResult: TaskResult = {
-      taskId: task.id,
-      agentType: task.agentType,
+      taskId: task.id: agentType: task.agentType,
       result: {
         success: false,
-        output: null,
+        output: lastError?.message || 'Task failed after retries',
         messages: [],
-        artifacts: new Map(),
-        error: lastError?.message
+        artifacts: new Map()
       },
       startTime,
       endTime,
@@ -417,7 +398,7 @@ Format as JSON with:
 
       if (batch.length === 0) {
         // Circular dependency or invalid plan
-        throw new Error('Invalid execution plan: circular dependencies detected')
+        throw new Error('Invalid execution, plan: circular dependencies detected')
       }
 
       batch.forEach(id => executed.add(id))
@@ -431,7 +412,7 @@ Format as JSON with:
    * Estimate execution time for a plan
    */
   private estimateExecutionTime(tasks: AgentTask[]): number {
-    // Simple estimation: 30 seconds per task, with parallelization considered
+    // Simple, estimation: 30 seconds per task, with parallelization considered
     const baseTime = 30000 // 30 seconds
     const parallelFactor = Math.min(tasks.length, this.config.maxConcurrentAgents!)
     

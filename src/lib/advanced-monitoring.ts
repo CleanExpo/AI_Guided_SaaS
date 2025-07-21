@@ -40,13 +40,12 @@ interface SystemHealth {
 }
 
 class AdvancedMonitoringSystem {
-  private securityEvents: SecurityEvent[] = [];
-  private performanceMetrics: PerformanceMetric[] = [];
-  private systemHealth: SystemHealth[] = [];
+  private, securityEvents: SecurityEvent[] = [];
+  private, performanceMetrics: PerformanceMetric[] = [];
+  private, systemHealth: SystemHealth[] = [];
   private alertThresholds = {
     errorRate: 0.01, // 1%
-    responseTime: 2000, // 2 seconds
-    memoryUsage: 0.85, // 85%
+    responseTime: 2000, // 2 seconds, memoryUsage: 0.85, // 85%
     cpuUsage: 0.80, // 80%
   };
 
@@ -56,8 +55,7 @@ class AdvancedMonitoringSystem {
   logSecurityEvent(event: Omit<SecurityEvent, 'timestamp'>): void {
     const securityEvent: SecurityEvent = {
       ...event,
-      timestamp: new Date(),
-    };
+      timestamp: new Date()};
 
     this.securityEvents.push(securityEvent);
     this.trimEventHistory();
@@ -73,8 +71,7 @@ class AdvancedMonitoringSystem {
         type: event.type,
         severity: event.severity,
         source: event.source,
-        details: event.details,
-      });
+        details: event.details});
     }
   }
 
@@ -86,8 +83,7 @@ class AdvancedMonitoringSystem {
       ...metric,
       timestamp: new Date(),
       memoryUsage: this.getMemoryUsage(),
-      cpuUsage: this.getCpuUsage(),
-    };
+      cpuUsage: this.getCpuUsage()};
 
     this.performanceMetrics.push(performanceMetric);
     this.trimPerformanceHistory();
@@ -97,8 +93,7 @@ class AdvancedMonitoringSystem {
       this.triggerPerformanceAlert('High response time detected', {
         endpoint: metric.endpoint,
         responseTime: metric.responseTime,
-        threshold: this.alertThresholds.responseTime,
-      });
+        threshold: this.alertThresholds.responseTime});
     }
   }
 
@@ -111,14 +106,12 @@ class AdvancedMonitoringSystem {
       memoryUsage: {
         used: process.memoryUsage().heapUsed,
         total: process.memoryUsage().heapTotal,
-        percentage: process.memoryUsage().heapUsed / process.memoryUsage().heapTotal,
-      },
+        percentage: process.memoryUsage().heapUsed / process.memoryUsage().heapTotal},
       cpuUsage: this.getCpuUsage(),
       activeConnections: this.getActiveConnections(),
       errorRate: this.calculateErrorRate(),
       responseTime: this.calculateAverageResponseTime(),
-      timestamp: new Date(),
-    };
+      timestamp: new Date()};
 
     this.systemHealth.push(health);
     this.trimHealthHistory();
@@ -159,8 +152,7 @@ class AdvancedMonitoringSystem {
       criticalEvents: recentEvents.filter(e => e.severity === 'critical').length,
       attackAttempts: recentEvents.filter(e => e.type === 'attack').length,
       topAttackTypes,
-      recentEvents: recentEvents.slice(-10),
-    };
+      recentEvents: recentEvents.slice(-10)};
   }
 
   /**
@@ -189,8 +181,7 @@ class AdvancedMonitoringSystem {
     const slowestEndpoints = Object.entries(endpointTimes)
       .map(([endpoint, times]) => ({
         endpoint,
-        avgTime: times.reduce((sum, time) => sum + time, 0) / times.length,
-      }))
+        avgTime: times.reduce((sum, time) => sum + time, 0) / times.length}))
       .sort((a, b) => b.avgTime - a.avgTime)
       .slice(0, 5);
 
@@ -198,16 +189,14 @@ class AdvancedMonitoringSystem {
       .filter(health => health.timestamp > last24Hours)
       .map(health => ({
         timestamp: health.timestamp,
-        usage: health.memoryUsage.percentage,
-      }));
+        usage: health.memoryUsage.percentage}));
 
     return {
       averageResponseTime: this.calculateAverageResponseTime(),
       slowestEndpoints,
       errorRate: this.calculateErrorRate(),
       throughput: recentMetrics.length / 24, // requests per hour
-      memoryTrend,
-    };
+      memoryTrend};
   }
 
   /**
@@ -249,8 +238,7 @@ class AdvancedMonitoringSystem {
       securityAnalytics,
       performanceAnalytics,
       alerts: this.getRecentAlerts(),
-      recommendations,
-    };
+      recommendations};
   }
 
   // Private helper methods
@@ -311,8 +299,7 @@ class AdvancedMonitoringSystem {
       message: `Security ${event.severity} alert: ${event.type} from ${event.source}`,
       severity: event.severity,
       timestamp: new Date(),
-      details: event,
-    };
+      details: event};
 
     // In production, this would send to external monitoring services
     if (typeof window === 'undefined') {
@@ -324,10 +311,8 @@ class AdvancedMonitoringSystem {
     const alert = {
       type: 'performance',
       message,
-      severity: 'medium' as const,
-      timestamp: new Date(),
-      details,
-    };
+      severity: 'medium' as const timestamp: new Date(),
+      details};
 
     if (typeof window === 'undefined') {
       logWarn('Performance alert triggered', alert);
@@ -338,15 +323,13 @@ class AdvancedMonitoringSystem {
     if (health.memoryUsage.percentage > this.alertThresholds.memoryUsage) {
       this.triggerPerformanceAlert('High memory usage detected', {
         usage: health.memoryUsage.percentage,
-        threshold: this.alertThresholds.memoryUsage,
-      });
+        threshold: this.alertThresholds.memoryUsage});
     }
 
     if (health.errorRate > this.alertThresholds.errorRate) {
       this.triggerPerformanceAlert('High error rate detected', {
         errorRate: health.errorRate,
-        threshold: this.alertThresholds.errorRate,
-      });
+        threshold: this.alertThresholds.errorRate});
     }
   }
 

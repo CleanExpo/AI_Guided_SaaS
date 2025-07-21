@@ -8,50 +8,33 @@ import { analyzeCausalLogs, generateCausalInsights } from './causal-feedback-rep
 
 // Type definitions for self-check report system
 export interface ModuleReport {
-  status: string
-  present: string[]
+  status: string, present: string[]
   missing: string[]
 }
 
 export interface DependencyReport {
-  status: string
-  summary: string
-  outdated: string[]
+  status: string, summary: string, outdated: string[]
 }
 
 export interface SecurityReport {
-  status: string
-  summary: string
-  vulnerabilities: string[]
+  status: string, summary: string, vulnerabilities: string[]
 }
 
 export interface CausalAnalysis {
-  status: string
-  summary: string
-  patterns: string[]
+  status: string, summary: string, patterns: string[]
   recommendations: string[]
 }
 
 export interface CausalInsights {
-  totalInteractions: number
-  uniqueComponents: number
-  topIssues: string[]
+  totalInteractions: number, uniqueComponents: number, topIssues: string[]
 }
 
 export interface HealthMetrics {
-  moduleScore: number
-  dependencyScore: number
-  securityScore: number
-  uxScore: number
-  overallScore: number
+  moduleScore: number, dependencyScore: number, securityScore: number, uxScore: number, overallScore: number
 }
 
 export interface ReportData {
-  moduleReport: ModuleReport
-  depReport: DependencyReport
-  securityReport: SecurityReport
-  causalAnalysis: CausalAnalysis
-  causalInsights: CausalInsights
+  moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis, causalInsights: CausalInsights
 }
 
 export async function generateSelfCheckReport(): Promise<string> {
@@ -65,9 +48,7 @@ export async function generateSelfCheckReport(): Promise<string> {
   const causalInsights = generateCausalInsights();
 
   // Generate comprehensive report
-  const report = `# 🧠 AI Guided SaaS Self-Health Report
-
-Generated: ${timestamp}
+  const report = `# 🧠 AI Guided SaaS Self-Health Report, Generated: ${timestamp}
 
 ## 📊 Executive Summary
 
@@ -189,9 +170,9 @@ function getOverallHealthStatus(moduleReport: ModuleReport, depReport: Dependenc
   if (causalAnalysis.patterns.some((p: string) => p.includes('❌'))) issues.push('UX concerns');
 
   if (issues.length === 0) return '✅ Excellent - All systems healthy';
-  if (issues.length === 1) return `⚠️ Good - Minor issue: ${issues[0]}`;
+  if (issues.length === 1) return `⚠️ Good - Minor, issue: ${issues[0]}`;
   if (issues.length === 2) return `⚠️ Fair - Issues: ${issues.join(', ')}`;
-  return `❌ Needs Attention - Multiple issues: ${issues.join(', ')}`;
+  return `❌ Needs Attention - Multiple, issues: ${issues.join(', ')}`;
 }
 
 function getImmediateActions(moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis): string[] {
@@ -202,7 +183,7 @@ function getImmediateActions(moduleReport: ModuleReport, depReport: DependencyRe
   }
 
   if (moduleReport.missing.length > 0) {
-    actions.push(`🟠 **HIGH**: Implement missing modules: ${moduleReport.missing.join(', ')}`);
+    actions.push(`🟠 **HIGH**: Implement missing, modules: ${moduleReport.missing.join(', ')}`);
   }
 
   if (depReport.outdated.length > 3) {
@@ -273,6 +254,6 @@ function getOverallScore(moduleReport: ModuleReport, depReport: DependencyReport
   const securityScore = getSecurityScore(securityReport);
   const uxScore = getUXScore(causalInsights);
 
-  // Weighted average: Security is most important, then modules, then dependencies, then UX
+  // Weighted, average: Security is most important, then modules, then dependencies, then UX
   return Math.round((securityScore * 0.4) + (moduleScore * 0.3) + (depScore * 0.2) + (uxScore * 0.1));
 }

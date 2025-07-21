@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, BookOpen, ExternalLink } from 'lucide-react';
@@ -36,44 +35,44 @@ Welcome to AI Guided SaaS! This guide will help you get started with our platfor
 
 ## Prerequisites
 
-Before you begin, make sure you have:
+Before you begin, make sure you, have:
 - A modern web browser (Chrome, Firefox, Safari, or Edge)
 - An internet connection
 - Basic understanding of web development concepts
 
-## Step 1: Create Your Account
+## Step, 1: Create Your Account
 
 1. Visit our [signup page](/auth/signup)
 2. Enter your email address and create a secure password
 3. Verify your email address
 4. Complete your profile setup
 
-## Step 2: Explore the Dashboard
+## Step, 2: Explore the Dashboard
 
-Once logged in, you'll see the main dashboard with:
+Once logged in, you'll see the main dashboard, with:
 - **Project Overview**: Your current projects and their status
 - **Quick Actions**: Common tasks like creating new projects
 - **Recent Activity**: Your latest actions and updates
 - **Learning Resources**: Tutorials and documentation links
 
-## Step 3: Create Your First Project
+## Step, 3: Create Your First Project
 
 1. Click "New Project" on the dashboard
 2. Choose a project template or start from scratch
-3. Configure your project settings:
+3. Configure your project, settings:
    - Project name and description
    - Technology stack preferences
    - Deployment target
 4. Click "Create Project"
 
-## Step 4: Use the UI Builder
+## Step, 4: Use the UI Builder
 
 1. Navigate to the UI Builder from your project
 2. Drag and drop components to build your interface
 3. Customize styling and behavior
 4. Preview your changes in real-time
 
-## Step 5: Deploy Your Project
+## Step, 5: Deploy Your Project
 
 1. Click "Deploy" in your project dashboard
 2. Choose your deployment target (Vercel, Netlify, etc.)
@@ -91,8 +90,7 @@ Once logged in, you'll see the main dashboard with:
 - Browse our [documentation](/docs)
 - Contact [support](/contact)
 - Join our [Discord community](https://discord.gg/aiguidedSaaS)
-    `,
-  },
+    `},
   installation: {
     slug: 'installation',
     title: 'Installation Guide',
@@ -107,7 +105,7 @@ AI Guided SaaS can be used in multiple ways depending on your needs and preferen
 
 ## Web Application (Recommended)
 
-The easiest way to get started is through our web application:
+The easiest way to get started is through our web, application:
 
 1. Visit [https://aiguidedSaaS.com](/)
 2. Create an account or sign in
@@ -115,7 +113,7 @@ The easiest way to get started is through our web application:
 
 ## CLI Tool
 
-For advanced users who prefer command-line interfaces:
+For advanced users who prefer command-line, interfaces:
 
 ### Prerequisites
 - Node.js 18+ installed
@@ -146,7 +144,7 @@ aiguidedSaaS create my-project
 
 ## VS Code Extension
 
-Enhance your development experience with our VS Code extension:
+Enhance your development experience with our VS Code, extension:
 
 1. Open VS Code
 2. Go to Extensions (Ctrl+Shift+X)
@@ -163,11 +161,11 @@ Enhance your development experience with our VS Code extension:
 
 ## Docker Setup
 
-For containerized development environments:
+For containerized development, environments:
 
 \`\`\`dockerfile
 # Dockerfile
-FROM node:18-alpine
+FROM, node:18-alpine
 
 WORKDIR /app
 
@@ -186,7 +184,7 @@ CMD ["aiguidedSaaS", "dev"]
 
 ## Environment Configuration
 
-Create a \`.env.local\` file in your project root:
+Create a \`.env.local\` file in your project, root:
 
 \`\`\`env
 # Required
@@ -225,7 +223,7 @@ npm update -g @aiguidedSaaS/cli
 
 ### Getting Help
 
-If you encounter issues:
+If you encounter, issues:
 1. Check our [troubleshooting guide](/docs/troubleshooting)
 2. Search [community discussions](/community)
 3. Contact [support](/contact)
@@ -243,8 +241,7 @@ If you encounter issues:
 - 5GB+ free disk space
 - High-speed internet
 - Multiple monitors (for better productivity)
-    `,
-  },
+    `},
   configuration: {
     slug: 'configuration',
     title: 'Configuration Guide',
@@ -261,7 +258,7 @@ Customize AI Guided SaaS to match your development workflow and preferences.
 
 ### Basic Settings
 
-Configure your project through the dashboard or configuration file:
+Configure your project through the dashboard or configuration, file:
 
 \`\`\`json
 {
@@ -307,7 +304,7 @@ Configure your project through the dashboard or configuration file:
 
 ### Interface Settings
 
-Customize your workspace:
+Customize your, workspace:
 - **Theme**: Light, Dark, or Auto
 - **Layout**: Sidebar position and size
 - **Panels**: Show/hide different panels
@@ -315,7 +312,7 @@ Customize your workspace:
 
 ### AI Behavior
 
-Configure how AI assists you:
+Configure how AI assists, you:
 - **Suggestion Frequency**: How often AI provides suggestions
 - **Auto-completion**: Enable/disable automatic code completion
 - **Code Style**: Preferred coding patterns and conventions
@@ -325,7 +322,7 @@ Configure how AI assists you:
 
 ### Roles and Permissions
 
-Set up team access levels:
+Set up team access, levels:
 
 \`\`\`json
 {
@@ -353,7 +350,7 @@ Set up team access levels:
 
 ### Workflow Settings
 
-Configure team workflows:
+Configure team, workflows:
 - **Code Review**: Required reviewers and approval process
 - **Deployment Gates**: Automated checks before deployment
 - **Notification Settings**: When and how team members are notified
@@ -362,7 +359,7 @@ Configure team workflows:
 
 ### Version Control
 
-Connect with your Git provider:
+Connect with your Git, provider:
 
 \`\`\`json
 {
@@ -377,7 +374,7 @@ Connect with your Git provider:
 
 ### External Services
 
-Configure third-party integrations:
+Configure third-party, integrations:
 
 \`\`\`json
 {
@@ -553,7 +550,7 @@ SENDGRID_API_KEY=SG...
 
 ## Configuration Validation
 
-Use our CLI tool to validate your configuration:
+Use our CLI tool to validate your, configuration:
 
 \`\`\`bash
 # Validate configuration
@@ -580,9 +577,7 @@ Need help with configuration?
 - Check our [troubleshooting guide](/docs/troubleshooting)
 - Browse [community discussions](/community)
 - Contact [support](/contact)
-    `,
-  },
-};
+    `}};
 
 export default function DocPage() {
   const params = useParams();
@@ -625,7 +620,7 @@ export default function DocPage() {
         <div className="flex items-center gap-2">
           <Badge variant="secondary">{doc.category}</Badge>
           <span className="text-sm text-muted-foreground">
-            Last updated: {new Date(doc.lastUpdated).toLocaleDateString()}
+            Last, updated: {new Date(doc.lastUpdated).toLocaleDateString()}
           </span>
         </div>
         <h1 className="text-4xl font-bold">{doc.title}</h1>
@@ -646,7 +641,7 @@ export default function DocPage() {
                 })
                 .replace(
                   /\[([^\]]+)\]\(([^)]+)\)/g,
-                  '<a href="$2" class="text-primary hover:underline">$1</a>'
+                  '<a href="$2" class="text-primary, hover:underline">$1</a>'
                 )
                 .replace(
                   /```(\w+)?\n([\s\S]*?)```/g,
@@ -655,8 +650,7 @@ export default function DocPage() {
                 .replace(
                   /`([^`]+)`/g,
                   '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>'
-                ),
-            }}
+                )}}
           />
         </CardContent>
       </Card>
@@ -670,7 +664,7 @@ export default function DocPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4, md:grid-cols-2">
             {Object.values(docPages)
               .filter(d => d.slug !== doc.slug)
               .slice(0, 2)

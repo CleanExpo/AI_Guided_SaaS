@@ -3,13 +3,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import {
   ChevronRightIcon,
   ChevronDownIcon,
   MenuIcon,
-  CloseIcon,
-} from './icons';
+  CloseIcon} from './icons';
 import { ButtonEnhanced } from './button-enhanced';
 
 // Breadcrumb Components
@@ -31,15 +30,13 @@ export function Breadcrumb({
   items,
   separator = <ChevronRightIcon size="sm" />,
   className,
-  maxItems = 5,
-}: BreadcrumbProps) {
+  maxItems = 5}: BreadcrumbProps) {
   const displayItems =
     items.length > maxItems
       ? [
           items[0],
           { label: '...', href: undefined },
-          ...items.slice(-(maxItems - 2)),
-        ]
+          ...items.slice(-(maxItems - 2))]
       : items;
 
   return (
@@ -54,7 +51,7 @@ export function Breadcrumb({
             {item.href && !item.current ? (
               <Link
                 href={item.href}
-                className="flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center text-sm font-medium text-muted-foreground, hover:text-foreground transition-colors"
               >
                 {item.icon && <span className="mr-2">{item.icon}</span>}
                 {item.label}
@@ -93,15 +90,13 @@ export function AutoBreadcrumb({
   className,
   homeLabel = 'Home',
   homeHref = '/',
-  pathMapping = {},
-}: AutoBreadcrumbProps) {
+  pathMapping = {}}: AutoBreadcrumbProps) {
   const pathname = usePathname();
 
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const segments = pathname.split('/').filter(Boolean);
     const breadcrumbs: BreadcrumbItem[] = [
-      { label: homeLabel, href: homeHref },
-    ];
+      { label: homeLabel, href: homeHref }];
 
     let currentPath = '';
     segments.forEach((segment, index) => {
@@ -116,8 +111,7 @@ export function AutoBreadcrumb({
       breadcrumbs.push({
         label,
         href: isLast ? undefined : currentPath,
-        current: isLast,
-      });
+        current: isLast});
     });
 
     return breadcrumbs;
@@ -150,8 +144,7 @@ export function NavigationMenu({
   orientation = 'horizontal',
   variant = 'default',
   className,
-  onItemClick,
-}: NavigationMenuProps) {
+  onItemClick}: NavigationMenuProps) {
   const pathname = usePathname();
   const [openDropdowns, setOpenDropdowns] = React.useState<Set<string>>(
     new Set()
@@ -177,24 +170,20 @@ export function NavigationMenu({
       container: '',
       item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
       active:
-        'bg-brand-primary-100 text-brand-primary-900 dark:bg-brand-primary-900 dark:text-brand-primary-100',
-      inactive: 'text-muted-foreground hover:text-foreground hover:bg-accent',
-    },
+        'bg-brand-primary-100 text-brand-primary-900, dark:bg-brand-primary-900, dark:text-brand-primary-100',
+      inactive: 'text-muted-foreground, hover:text-foreground, hover:bg-accent'},
     pills: {
       container:
-        'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg',
+        'bg-brand-secondary-100, dark:bg-brand-secondary-800 p-1 rounded-lg',
       item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
       active: 'bg-background text-foreground shadow-sm',
-      inactive: 'text-muted-foreground hover:text-foreground',
-    },
+      inactive: 'text-muted-foreground, hover:text-foreground'},
     underline: {
       container: 'border-b border-border',
       item: 'px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent',
       active: 'text-brand-primary-600 border-brand-primary-600',
       inactive:
-        'text-muted-foreground hover:text-foreground hover:border-border',
-    },
-  };
+        'text-muted-foreground, hover:text-foreground, hover:border-border'}};
 
   const currentVariant = variantClasses[variant];
 
@@ -304,8 +293,7 @@ export function MobileNavigation({
   items,
   trigger,
   className,
-  onItemClick,
-}: MobileNavigationProps) {
+  onItemClick}: MobileNavigationProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleItemClick = (item: NavItem) => {
@@ -320,7 +308,7 @@ export function MobileNavigation({
       {/* Trigger */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-md hover:bg-accent"
+        className="p-2 rounded-md, hover:bg-accent"
         aria-label="Toggle navigation menu"
       >
         {trigger || (isOpen ? <CloseIcon size="md" /> : <MenuIcon size="md" />)}
@@ -346,7 +334,7 @@ export function MobileNavigation({
             <h2 className="text-lg font-semibold">Navigation</h2>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-md hover:bg-accent"
+              className="p-2 rounded-md, hover:bg-accent"
             >
               <CloseIcon size="md" />
             </button>
@@ -381,8 +369,7 @@ export function Pagination({
   showFirstLast = true,
   showPrevNext = true,
   maxVisiblePages = 5,
-  className,
-}: PaginationProps) {
+  className}: PaginationProps) {
   const getVisiblePages = () => {
     const pages: (number | string)[] = [];
     const halfVisible = Math.floor(maxVisiblePages / 2);
@@ -520,8 +507,7 @@ export function Tabs({
   onTabChange,
   variant = 'default',
   orientation = 'horizontal',
-  className,
-}: TabsProps) {
+  className}: TabsProps) {
   const [internalActiveTab, setInternalActiveTab] = React.useState(
     activeTab || items[0]?.id
   );
@@ -539,22 +525,18 @@ export function Tabs({
       tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent',
       active: 'text-brand-primary-600 border-brand-primary-600',
       inactive:
-        'text-muted-foreground hover:text-foreground hover:border-border',
-    },
+        'text-muted-foreground, hover:text-foreground, hover:border-border'},
     pills: {
       container:
-        'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg',
+        'bg-brand-secondary-100, dark:bg-brand-secondary-800 p-1 rounded-lg',
       tab: 'px-4 py-2 text-sm font-medium transition-colors rounded-md',
       active: 'bg-background text-foreground shadow-sm',
-      inactive: 'text-muted-foreground hover:text-foreground',
-    },
+      inactive: 'text-muted-foreground, hover:text-foreground'},
     underline: {
       container: '',
       tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent',
       active: 'text-brand-primary-600 border-brand-primary-600',
-      inactive: 'text-muted-foreground hover:text-foreground',
-    },
-  };
+      inactive: 'text-muted-foreground, hover:text-foreground'}};
 
   const currentVariant = variantClasses[variant];
   const activeItem = items.find(item => item.id === currentActiveTab);

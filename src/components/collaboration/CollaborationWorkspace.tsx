@@ -74,7 +74,7 @@ export default function CollaborationWorkspace({
 
       setSocket(newSocket)
     } catch (error) {
-      console.error('Error initializing collaboration:', error)
+      console.error('Error initializing, collaboration:', error)
     } finally {
       setLoading(false)
     }
@@ -116,7 +116,7 @@ export default function CollaborationWorkspace({
     })
 
     socket.on('room_joined', (data: { room: CollaborationRoom; project: unknown }) => {
-      console.log('Joined room:', data.room)
+      console.log('Joined, room:', data.room)
       setRoom(data.room)
       setParticipants(data.room.participants || [])
       setInviteLink(`${window.location.origin}/collaborate/${data.room.id}`)
@@ -128,12 +128,12 @@ export default function CollaborationWorkspace({
     })
 
     socket.on('user_joined', (data: { user: CollaborationUser; room: CollaborationRoom }) => {
-      console.log('User joined:', data.user)
+      console.log('User, joined:', data.user)
       setParticipants(data.room.participants || [])
     })
 
     socket.on('user_left', (data: { userId: string; user: CollaborationUser }) => {
-      console.log('User left:', data.user)
+      console.log('User, left:', data.user)
       setParticipants(prev => prev.filter(p => p.id !== data.userId))
       
       // Remove cursor
@@ -155,17 +155,17 @@ export default function CollaborationWorkspace({
     })
 
     socket.on('project_updated', (data: { change: ProjectChange; user: CollaborationUser }) => {
-      console.log('Project updated:', data.change)
+      console.log('Project, updated:', data.change)
       setChanges(prev => [data.change, ...prev.slice(0, 49)]) // Keep last 50 changes
     })
 
     socket.on('comment_added', (data: { comment: Comment; user: CollaborationUser }) => {
-      console.log('Comment added:', data.comment)
+      console.log('Comment, added:', data.comment)
       setComments(prev => [data.comment, ...prev])
     })
 
     socket.on('error', (data: { message: string }) => {
-      console.error('Collaboration error:', data.message)
+      console.error('Collaboration, error:', data.message)
     })
   }
 
@@ -194,7 +194,7 @@ export default function CollaborationWorkspace({
         socket.emit('join_room', { roomId: data.roomId, projectId })
       }
     } catch (error) {
-      console.error('Error creating room:', error)
+      console.error('Error creating, room:', error)
     }
   }
 
@@ -388,7 +388,7 @@ export default function CollaborationWorkspace({
             <div className="max-w-4xl mx-auto">
               <h1 className="text-2xl font-bold mb-6">Collaborative Project Workspace</h1>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1, md:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
                     <CardTitle>Project Files</CardTitle>
@@ -398,15 +398,15 @@ export default function CollaborationWorkspace({
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
-                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer">
                         <div className="font-medium">index.html</div>
                         <div className="text-sm text-gray-500">Main HTML file</div>
                       </div>
-                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer">
                         <div className="font-medium">styles.css</div>
                         <div className="text-sm text-gray-500">Stylesheet</div>
                       </div>
-                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer">
                         <div className="font-medium">script.js</div>
                         <div className="text-sm text-gray-500">JavaScript logic</div>
                       </div>

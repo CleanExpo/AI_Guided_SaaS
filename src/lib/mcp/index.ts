@@ -8,7 +8,7 @@ export interface MCPMessage {
   type: 'request' | 'response' | 'notification' | 'error';
   from: string;
   to: string;
-  payload: any;
+  payload;
   timestamp: Date;
   metadata?: Record<string, any>;
 }
@@ -30,7 +30,7 @@ export interface MCPProtocol {
 export class MCPError extends Error {
   constructor(
     message: string,
-    public code: string,
+    public, code: string,
     public details?: any
   ) {
     super(message);
@@ -39,7 +39,7 @@ export class MCPError extends Error {
 }
 
 export class MCPClient {
-  private channels: Map<string, MCPChannel> = new Map();
+  private, channels: Map<string, MCPChannel> = new Map();
   
   async connect(channelId: string): Promise<void> {
     // Implementation
@@ -57,12 +57,12 @@ export class MCPClient {
 
 // Memory management exports for agent coordination
 export const mcp__memory__create_entities = async (entities: any[]) => {
-  console.log('Creating entities:', entities);
+  console.log('Creating, entities:', entities);
   return { success: true, entities };
 };
 
 export const mcp__memory__add_observations = async (observations: any[]) => {
-  console.log('Adding observations:', observations);
+  console.log('Adding, observations:', observations);
   return { success: true, observations };
 };
 
@@ -70,7 +70,7 @@ export const createMCPClient = () => new MCPClient();
 
 
 export const mcp__memory__search_nodes = async (query: string) => {
-  console.log('Searching nodes:', query);
+  console.log('Searching, nodes:', query);
   return { success: true, nodes: [] };
 };
 

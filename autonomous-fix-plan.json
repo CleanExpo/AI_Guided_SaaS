@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-07-21T19:23:23.308Z",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Type Definition Fixes",
+      "description": "Fix missing type definitions and module augmentations",
+      "agent": "TypeScriptAgent",
+      "actions": [
+        "Create/update src/types/next-auth.d.ts",
+        "Add missing interface extensions",
+        "Fix module declarations"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Import/Export Fixes",
+      "description": "Update import statements and fix module resolutions",
+      "agent": "NextJSAgent",
+      "actions": [
+        "Update next-auth imports",
+        "Fix module paths",
+        "Add missing exports"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Component Type Fixes",
+      "description": "Fix React component type issues",
+      "agent": "ReactAgent",
+      "actions": [
+        "Add prop type definitions",
+        "Fix event handler types",
+        "Update component signatures"
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Function Signature Fixes",
+      "description": "Fix function parameters and return types",
+      "agent": "TypeScriptAgent",
+      "actions": [
+        "Add parameter types",
+        "Fix return type annotations",
+        "Update function overloads"
+      ]
+    }
+  ],
+  "estimatedTime": "10-15 minutes",
+  "automationLevel": "Semi-autonomous with verification"
+}

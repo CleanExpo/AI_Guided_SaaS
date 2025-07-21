@@ -1,0 +1,168 @@
+# Makefile for AI Guided SaaS Agent Management
+.PHONY: help build up down restart logs status clean scale health monitor
+
+# Default environment
+ENV ?= development
+COMPOSE_FILE := docker-compose.agents.yml
+PULSE_MODE ?= constrained
+
+# Colors for output
+GREEN := \033[0;32m
+YELLOW := \033[0;33m
+RED := \033[0;31m
+NC := \033[0m # No Color
+
+help: ## Show this help message
+	@echo '${GREEN}AI Guided SaaS - Agent Management${NC}'
+	@echo ''
+	@echo 'Usage:'
+	@echo '  ${YELLOW}make${NC} ${GREEN}<target>${NC}'
+	@echo ''
+	@echo 'Targets:'
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  ${YELLOW}%-15s${NC} %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	@echo ''
+	@echo 'Environment Variables:'
+	@echo '  ${YELLOW}ENV${NC}          Environment (development/production) [current: ${ENV}]'
+	@echo '  ${YELLOW}PULSE_MODE${NC}   Pulse mode (constrained/development/production/performance) [current: ${PULSE_MODE}]'
+
+build: ## Build agent Docker images
+	@echo '${GREEN}Building agent images...${NC}'
+	docker-compose -f $(COMPOSE_FILE) build
+	@echo '${GREEN}✓ Agent images built successfully${NC}'
+
+up: ## Start all agents with pulse control
+	@echo '${GREEN}Starting agents in ${PULSE_MODE} mode...${NC}'
+	@ENV=$(ENV) PULSE_MODE=$(PULSE_MODE) docker-compose -f $(COMPOSE_FILE) up -d
+	@sleep 5
+	@make status
+	@echo '${GREEN}✓ Agents started successfully${NC}'
+
+down: ## Stop all agents gracefully
+	@echo '${YELLOW}Stopping all agents...${NC}'
+	docker-compose -f $(COMPOSE_FILE) down
+	@echo '${GREEN}✓ All agents stopped${NC}'
+
+restart: ## Restart all agents
+	@echo '${YELLOW}Restarting agents...${NC}'
+	@make down
+	@sleep 2
+	@make up
+
+logs: ## View agent logs (use AGENT=<name> for specific agent)
+ifdef AGENT
+	@echo '${GREEN}Showing logs for ${AGENT}...${NC}'
+	docker-compose -f $(COMPOSE_FILE) logs -f $(AGENT)
+else
+	@echo '${GREEN}Showing logs for all agents...${NC}'
+	docker-compose -f $(COMPOSE_FILE) logs -f
+endif
+
+status: ## Show agent status and resource usage
+	@echo '${GREEN}Agent Status:${NC}'
+	@echo ''
+	@docker-compose -f $(COMPOSE_FILE) ps
+	@echo ''
+	@echo '${GREEN}Resource Usage:${NC}'
+	@docker stats --no-stream --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}" $$(docker-compose -f $(COMPOSE_FILE) ps -q)
+
+clean: ## Clean up stopped containers and unused images
+	@echo '${YELLOW}Cleaning up...${NC}'
+	docker-compose -f $(COMPOSE_FILE) down -v --remove-orphans
+	docker image prune -f
+	@echo '${GREEN}✓ Cleanup complete${NC}'
+
+scale: ## Scale agents (use TYPE=<agent-type> COUNT=<number>)
+ifndef TYPE
+	@echo '${RED}Error: TYPE is required (e.g., make scale TYPE=frontend COUNT=3)${NC}'
+	@exit 1
+endif
+ifndef COUNT
+	@echo '${RED}Error: COUNT is required (e.g., make scale TYPE=frontend COUNT=3)${NC}'
+	@exit 1
+endif
+	@echo '${YELLOW}Scaling ${TYPE} to ${COUNT} instances...${NC}'
+	docker-compose -f $(COMPOSE_FILE) up -d --scale agent-$(TYPE)=$(COUNT)
+	@echo '${GREEN}✓ Scaled ${TYPE} to ${COUNT} instances${NC}'
+
+health: ## Check health of all agents
+	@echo '${GREEN}Checking agent health...${NC}'
+	@echo ''
+	@for container in $$(docker-compose -f $(COMPOSE_FILE) ps -q); do \
+		name=$$(docker inspect -f '{{.Name}}' $$container | sed 's/\///'); \
+		health=$$(docker inspect -f '{{.State.Health.Status}}' $$container 2>/dev/null || echo "no health check"); \
+		if [ "$$health" = "healthy" ]; then \
+			echo "  ✓ $$name: ${GREEN}$$health${NC}"; \
+		elif [ "$$health" = "no health check" ]; then \
+			echo "  ? $$name: ${YELLOW}$$health${NC}"; \
+		else \
+			echo "  ✗ $$name: ${RED}$$health${NC}"; \
+		fi; \
+	done
+
+monitor: ## Open monitoring dashboard
+	@echo '${GREEN}Opening monitoring dashboards...${NC}'
+	@echo '  Prometheus: http://localhost:9090'
+	@echo '  cAdvisor:   http://localhost:8080'
+	@command -v xdg-open >/dev/null 2>&1 && xdg-open http://localhost:9090 || \
+		command -v open >/dev/null 2>&1 && open http://localhost:9090 || \
+		echo '${YELLOW}Please open http://localhost:9090 in your browser${NC}'
+
+# Advanced commands
+pulse-config: ## Update pulse configuration (use MAX_AGENTS=<n> INTERVAL=<ms>)
+	@echo '${YELLOW}Updating pulse configuration...${NC}'
+	@curl -X POST http://localhost:3000/api/agents/pulse-config \
+		-H "Content-Type: application/json" \
+		-d '{"maxConcurrentAgents": ${MAX_AGENTS:-2}, "pulseInterval": ${INTERVAL:-2000}}' \
+		| jq '.' || echo '${RED}Failed to update configuration${NC}'
+
+agent-exec: ## Execute command in agent container (use AGENT=<name> CMD=<command>)
+ifndef AGENT
+	@echo '${RED}Error: AGENT is required (e.g., make agent-exec AGENT=frontend CMD="ls -la")${NC}'
+	@exit 1
+endif
+ifndef CMD
+	@echo '${RED}Error: CMD is required (e.g., make agent-exec AGENT=frontend CMD="ls -la")${NC}'
+	@exit 1
+endif
+	@echo '${GREEN}Executing command in agent-${AGENT}...${NC}'
+	docker-compose -f $(COMPOSE_FILE) exec agent-$(AGENT) $(CMD)
+
+# Development helpers
+dev-mode: ## Start agents in development mode with live reload
+	@echo '${GREEN}Starting in development mode...${NC}'
+	ENV=development PULSE_MODE=development docker-compose -f $(COMPOSE_FILE) up
+
+prod-mode: ## Start agents in production mode
+	@echo '${GREEN}Starting in production mode...${NC}'
+	ENV=production PULSE_MODE=production docker-compose -f $(COMPOSE_FILE) up -d
+
+stress-test: ## Run stress test on agents
+	@echo '${YELLOW}Running stress test...${NC}'
+	@echo 'This will generate high load to test pulse control and scaling'
+	@for i in $$(seq 1 50); do \
+		curl -X POST http://localhost:3000/api/agents/task \
+			-H "Content-Type: application/json" \
+			-d '{"name": "stress-test-$$i", "type": "test", "priority": "medium"}' & \
+	done
+	@wait
+	@echo '${GREEN}✓ Stress test completed${NC}'
+
+# Monitoring and debugging
+debug-agent: ## Debug specific agent (use AGENT=<name>)
+ifndef AGENT
+	@echo '${RED}Error: AGENT is required (e.g., make debug-agent AGENT=frontend)${NC}'
+	@exit 1
+endif
+	@echo '${GREEN}Debugging agent-${AGENT}...${NC}'
+	docker-compose -f $(COMPOSE_FILE) logs --tail=100 -f agent-$(AGENT)
+
+metrics: ## Export current metrics
+	@echo '${GREEN}Exporting metrics...${NC}'
+	@curl -s http://localhost:9090/api/v1/query?query=up | jq '.data.result[] | {agent: .metric.agent_id, status: .value[1]}' > metrics-$$(date +%Y%m%d-%H%M%S).json
+	@echo '${GREEN}✓ Metrics exported${NC}'
+
+# Aliases for common operations
+start: up
+stop: down
+ps: status
+tail: logs

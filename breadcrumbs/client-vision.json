@@ -1,0 +1,92 @@
+{
+  "project_name": "AI Guided SaaS",
+  "vision": "Revolutionary AI-powered platform for non-developers to create production-ready projects",
+  "goal": "Enable users to build full-stack applications through natural language without coding knowledge",
+  "core_features": [
+    "Natural language project creation",
+    "Visual project builder with AI guidance",
+    "Real-time preview and iteration",
+    "One-click deployment to production",
+    "Multi-agent AI system for code generation"
+  ],
+  "modules": [
+    {
+      "name": "Welcome & Onboarding",
+      "purpose": "Guide new users through platform capabilities",
+      "priority": "high"
+    },
+    {
+      "name": "AI Chat Interface",
+      "purpose": "Natural language interaction for project requirements",
+      "priority": "high"
+    },
+    {
+      "name": "Project Generator",
+      "purpose": "Transform requirements into working code",
+      "priority": "high"
+    },
+    {
+      "name": "Code Export & Download",
+      "purpose": "Allow users to own and deploy their code",
+      "priority": "high"
+    },
+    {
+      "name": "Progress Tracker",
+      "purpose": "Show project build status and milestones",
+      "priority": "medium"
+    },
+    {
+      "name": "Visual Flowchart Builder",
+      "purpose": "Design application flow visually",
+      "priority": "medium"
+    },
+    {
+      "name": "Deployment Pipeline",
+      "purpose": "One-click deployment to Vercel/Netlify",
+      "priority": "high"
+    },
+    {
+      "name": "Template Library",
+      "purpose": "Pre-built starting points for common projects",
+      "priority": "medium"
+    },
+    {
+      "name": "Enhanced UI/UX",
+      "purpose": "Beautiful, intuitive interface inspired by Lovable.dev",
+      "priority": "high"
+    }
+  ],
+  "target_users": [
+    "Non-technical entrepreneurs",
+    "Business owners needing custom software",
+    "Students learning to code",
+    "Rapid prototypers",
+    "Small teams without developers"
+  ],
+  "success_metrics": [
+    "Time from idea to deployed app < 1 hour",
+    "Zero coding knowledge required",
+    "90%+ user satisfaction",
+    "Production-ready code quality",
+    "Scalable to enterprise needs"
+  ],
+  "technology_stack": {
+    "frontend": "Next.js 14, TypeScript, Tailwind CSS",
+    "backend": "Next.js API Routes, Supabase",
+    "ai": "OpenAI GPT-4, Claude 3.5, Multi-agent orchestration",
+    "deployment": "Vercel, Docker containers",
+    "monitoring": "Real-time health checks, telemetry"
+  },
+  "unique_value_proposition": "Combine Lovable.dev's intuitive UI with VS Code's power and Claude Code's intelligence",
+  "constraints": [
+    "Must work for complete beginners",
+    "Generated code must be maintainable",
+    "Platform must be cost-effective",
+    "Security and privacy are paramount"
+  ],
+  "LLM_context": {
+    "primary": "Claude 3.5 Sonnet",
+    "secondary": "GPT-4",
+    "fallback": "Open-source models via OpenRouter"
+  }
+}

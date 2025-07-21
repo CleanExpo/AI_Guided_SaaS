@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import { getGlassStyle, designTokens } from '@/lib/design-system';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
@@ -30,34 +30,29 @@ const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
         case 'glass':
           return {
             ...getGlassStyle(glassVariant),
-            border: `1px solid ${getGlassStyle(glassVariant).border}`,
-          };
+            border: `1px solid ${getGlassStyle(glassVariant).border}`};
         case 'gradient':
           const gradientValue = gradient ? designTokens.gradients[gradient] : designTokens.gradients.primary;
           return {
             background: typeof gradientValue === 'string' ? gradientValue : gradientValue.primary || designTokens.gradients.primary,
             border: 'none',
-            color: 'white',
-          };
+            color: 'white'};
         case 'elevated':
           return {
             background: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))',
-            boxShadow: designTokens.shadows.xl,
-          };
+            boxShadow: designTokens.shadows.xl};
         case 'floating':
           return {
             background: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))',
             boxShadow: designTokens.shadows.lg,
-            transform: 'translateY(-2px)',
-          };
+            transform: 'translateY(-2px)'};
         default:
           return {
             background: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))',
-            boxShadow: designTokens.shadows.sm,
-          };
+            boxShadow: designTokens.shadows.sm};
       }
     };
 
@@ -66,13 +61,11 @@ const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
       y: -4,
       boxShadow: variant === 'glass' 
         ? getGlassStyle(glassVariant).boxShadow 
-        : designTokens.shadows.xl,
-    } : {};
+        : designTokens.shadows.xl} : {};
 
     const baseStyles = getVariantStyles();
     const glowStyles = glow ? {
-      boxShadow: `${designTokens.shadows.glow.primary}, ${baseStyles.boxShadow || designTokens.shadows.sm}`,
-    } : {};
+      boxShadow: `${designTokens.shadows.glow.primary}, ${baseStyles.boxShadow || designTokens.shadows.sm}`} : {};
 
     return (
       <motion.div
@@ -84,15 +77,13 @@ const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
         )}
         style={{
           ...getVariantStyles(),
-          ...glowStyles,
-        }}
+          ...glowStyles}}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={hoverAnimation}
         transition={{
           duration: 0.3,
-          ease: 'easeOut',
-        }}
+          ease: 'easeOut'}}
         {...props}
       >
         {children}
@@ -168,5 +159,4 @@ export {
   CardEnhancedTitle,
   CardEnhancedDescription,
   CardEnhancedContent,
-  CardEnhancedFooter,
-};
+  CardEnhancedFooter};

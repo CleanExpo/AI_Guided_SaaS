@@ -94,7 +94,7 @@ return {
         authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth',
         sendBody: true,
-        bodyParametersJson: '={{ JSON.stringify({ projectId: $json.projectId, type: "all" }) }}',
+        bodyParametersJson: '={{ JSON.stringify({ projectId: $json.projectId: type: "all" }) }}',
         options: {
           timeout: 180000 // 3 minutes
         }
@@ -279,8 +279,8 @@ return {
 <p><strong>Time:</strong> {{ $json.timestamp }}</p>
 <p><strong>Message:</strong> {{ $json.message }}</p>
 
-{{ $json.success ? '<p><strong>Production URL:</strong> <a href="' + $json.deploymentUrl + '">' + $json.deploymentUrl + '</a></p>' : '' }}
-<p><strong>Staging URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}</a></p>
+{{ $json.success ? '<p><strong>Production, URL:</strong> <a href="' + $json.deploymentUrl + '">' + $json.deploymentUrl + '</a></p>' : '' }}
+<p><strong>Staging, URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}</a></p>
 
 <h3>Details</h3>
 <pre>{{ JSON.stringify($json.details, null, 2) }}</pre>
@@ -296,40 +296,40 @@ return {
   // Define connections
   const connections = {
     'webhook_1': {
-      'main': [[{ node: 'code_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_1', type: 'main' as const index: 0 }]]
     },
     'code_1': {
-      'main': [[{ node: 'http_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'http_1', type: 'main' as const index: 0 }]]
     },
     'http_1': {
-      'main': [[{ node: 'http_2', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'http_2', type: 'main' as const index: 0 }]]
     },
     'http_2': {
-      'main': [[{ node: 'http_3', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'http_3', type: 'main' as const index: 0 }]]
     },
     'http_3': {
-      'main': [[{ node: 'wait_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'wait_1', type: 'main' as const index: 0 }]]
     },
     'wait_1': {
-      'main': [[{ node: 'http_4', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'http_4', type: 'main' as const index: 0 }]]
     },
     'http_4': {
-      'main': [[{ node: 'if_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'if_1', type: 'main' as const index: 0 }]]
     },
     'if_1': {
       'main': [
-        [{ node: 'http_5', type: 'main' as const, index: 0 }], // True branch
-        [{ node: 'code_3', type: 'main' as const, index: 0 }]  // False branch
+        [{ node: 'http_5', type: 'main' as const index: 0 }], // True branch
+        [{ node: 'code_3', type: 'main' as const index: 0 }]  // False branch
       ]
     },
     'http_5': {
-      'main': [[{ node: 'code_2', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'code_2', type: 'main' as const index: 0 }]]
     },
     'code_2': {
-      'main': [[{ node: 'email_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'email_1', type: 'main' as const index: 0 }]]
     },
     'code_3': {
-      'main': [[{ node: 'email_1', type: 'main' as const, index: 0 }]]
+      'main': [[{ node: 'email_1', type: 'main' as const index: 0 }]]
     }
   }
 

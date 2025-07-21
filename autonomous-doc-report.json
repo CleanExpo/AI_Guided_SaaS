@@ -1,0 +1,2837 @@
+{
+  "timestamp": "2025-07-21T20:03:14.109Z",
+  "totalErrors": 404,
+  "categories": {
+    "Other": [
+      {
+        "file": "mcp/wsl-sequential-thinking-server.ts",
+        "line": 186,
+        "column": 91,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "scripts/autonomous-doc-finder.ts",
+        "line": 79,
+        "column": 57,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "scripts/autonomous-doc-finder.ts",
+        "line": 83,
+        "column": 43,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "scripts/comprehensive-health-check.ts",
+        "line": 306,
+        "column": 29,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "scripts/env-cli.ts",
+        "line": 2,
+        "column": 1,
+        "code": "TS18026",
+        "message": "'#!' can only be used at the start of a file."
+      },
+      {
+        "file": "scripts/env-cli.ts",
+        "line": 2,
+        "column": 16,
+        "code": "TS1005",
+        "message": "';' expected."
+      },
+      {
+        "file": "scripts/env-cli.ts",
+        "line": 42,
+        "column": 26,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "scripts/env-cli.ts",
+        "line": 87,
+        "column": 26,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "scripts/env-cli.ts",
+        "line": 145,
+        "column": 28,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "scripts/mcp-doc-agent.ts",
+        "line": 108,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "scripts/mcp-doc-agent.ts",
+        "line": 108,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "scripts/mcp-doc-agent.ts",
+        "line": 108,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/admin/mcp/page.tsx",
+        "line": 110,
+        "column": 24,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/app/api/admin/route.ts",
+        "line": 55,
+        "column": 40,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/app/api/agent-chat/route.ts",
+        "line": 71,
+        "column": 42,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/app/api/auth/register/route.ts",
+        "line": 62,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/auth/register/route.ts",
+        "line": 62,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/auth/register/route.ts",
+        "line": 62,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/feedback/route.ts",
+        "line": 39,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/feedback/route.ts",
+        "line": 39,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/feedback/route.ts",
+        "line": 39,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/feedback/route.ts",
+        "line": 98,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/feedback/route.ts",
+        "line": 98,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/feedback/route.ts",
+        "line": 98,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/requirements/process/route.ts",
+        "line": 144,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/requirements/process/route.ts",
+        "line": 144,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/requirements/process/route.ts",
+        "line": 144,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/roadmap/validate/route.ts",
+        "line": 120,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/roadmap/validate/route.ts",
+        "line": 120,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/roadmap/validate/route.ts",
+        "line": 120,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/templates/route.ts",
+        "line": 61,
+        "column": 36,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/app/api/tutorials/progress/route.ts",
+        "line": 36,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/tutorials/progress/route.ts",
+        "line": 36,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/tutorials/progress/route.ts",
+        "line": 36,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/tutorials/progress/route.ts",
+        "line": 69,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/tutorials/progress/route.ts",
+        "line": 69,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/tutorials/progress/route.ts",
+        "line": 69,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/validated-chat/route.ts",
+        "line": 10,
+        "column": 27,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 149,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 149,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 149,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 151,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 177,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 177,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 177,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 179,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 200,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 200,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 200,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 202,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 261,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 261,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 261,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 263,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 331,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 331,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 331,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 333,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 359,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 359,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 359,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 361,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 385,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 385,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 385,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 387,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 417,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 417,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 417,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 419,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 438,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 438,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 438,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "line": 440,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/app/projects/[id]/editor/page.tsx",
+        "line": 57,
+        "column": 22,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/app/projects/new-guided/page.tsx",
+        "line": 43,
+        "column": 24,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/AgentPulseMonitor.tsx",
+        "line": 62,
+        "column": 21,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/AgentPulseMonitor.tsx",
+        "line": 85,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/components/AgentPulseMonitor.tsx",
+        "line": 85,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/components/AgentPulseMonitor.tsx",
+        "line": 85,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/components/ClaudeCodeDashboard.tsx",
+        "line": 189,
+        "column": 33,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/ClaudeCodeDashboard.tsx",
+        "line": 190,
+        "column": 34,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/ClientRequirementsCapture.tsx",
+        "line": 86,
+        "column": 21,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/ContainerMonitor.tsx",
+        "line": 47,
+        "column": 25,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/DataSourceManager.tsx",
+        "line": 81,
+        "column": 26,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/DataSourceManager.tsx",
+        "line": 83,
+        "column": 24,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "line": 246,
+        "column": 18,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "line": 246,
+        "column": 20,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "line": 246,
+        "column": 23,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "line": 246,
+        "column": 25,
+        "code": "TS1005",
+        "message": "';' expected."
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "line": 248,
+        "column": 6,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "line": 252,
+        "column": 3,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "line": 530,
+        "column": 1,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/components/InferenceSafeMode.tsx",
+        "line": 53,
+        "column": 21,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/InferenceSafeMode.tsx",
+        "line": 66,
+        "column": 20,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/ProjectGenerator.tsx",
+        "line": 241,
+        "column": 48,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/config/ConfigurationDashboard.tsx",
+        "line": 156,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/components/config/ConfigurationDashboard.tsx",
+        "line": 156,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/components/config/ConfigurationDashboard.tsx",
+        "line": 156,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/components/forms/ValidatedProjectForm.tsx",
+        "line": 346,
+        "column": 41,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/health/HealthCheckDashboard.tsx",
+        "line": 89,
+        "column": 25,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/health/HealthCheckDashboard.tsx",
+        "line": 150,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/components/health/HealthCheckDashboard.tsx",
+        "line": 150,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/components/health/HealthCheckDashboard.tsx",
+        "line": 150,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/components/ide/KiroIDE.tsx",
+        "line": 108,
+        "column": 25,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 499,
+        "column": 63,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 499,
+        "column": 69,
+        "code": "TS1381",
+        "message": "Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 500,
+        "column": 21,
+        "code": "TS1382",
+        "message": "Unexpected token. Did you mean `{'>'}` or `&gt;`?"
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 528,
+        "column": 21,
+        "code": "TS1381",
+        "message": "Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 529,
+        "column": 19,
+        "code": "TS17002",
+        "message": "Expected corresponding JSX closing tag for 'ScrollArea'."
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 530,
+        "column": 17,
+        "code": "TS17002",
+        "message": "Expected corresponding JSX closing tag for 'CardContent'."
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 531,
+        "column": 15,
+        "code": "TS17002",
+        "message": "Expected corresponding JSX closing tag for 'Card'."
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 532,
+        "column": 13,
+        "code": "TS17002",
+        "message": "Expected corresponding JSX closing tag for 'div'."
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 535,
+        "column": 5,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "line": 536,
+        "column": 3,
+        "code": "TS1109",
+        "message": "Expression expected."
+      },
+      {
+        "file": "src/components/mcp/MCPOrchestrator.tsx",
+        "line": 116,
+        "column": 28,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/hooks/useKiroIDE.ts",
+        "line": 398,
+        "column": 58,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/hooks/useKiroIDE.ts",
+        "line": 479,
+        "column": 58,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/hooks/useMCP.ts",
+        "line": 102,
+        "column": 53,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/admin-auth.ts",
+        "line": 379,
+        "column": 42,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/admin-queries.ts",
+        "line": 287,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/admin-queries.ts",
+        "line": 287,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/admin-queries.ts",
+        "line": 287,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/agents/AgentCommunication.ts",
+        "line": 699,
+        "column": 41,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentCoordinator.ts",
+        "line": 206,
+        "column": 47,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 112,
+        "column": 38,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 177,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 177,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 177,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 178,
+        "column": 34,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 179,
+        "column": 9,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 261,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 261,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 261,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 335,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 335,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 335,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 359,
+        "column": 36,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 361,
+        "column": 45,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "line": 363,
+        "column": 42,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentOrchestrator.ts",
+        "line": 61,
+        "column": 37,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentOrchestrator.ts",
+        "line": 251,
+        "column": 56,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/AgentRegistry.ts",
+        "line": 84,
+        "column": 84,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/CPURateLimiter.ts",
+        "line": 288,
+        "column": 35,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/ContainerizedPulseOrchestrator.ts",
+        "line": 58,
+        "column": 59,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/ContainerizedPulseOrchestrator.ts",
+        "line": 75,
+        "column": 18,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/agents/ContainerizedPulseOrchestrator.ts",
+        "line": 75,
+        "column": 20,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/agents/ContainerizedPulseOrchestrator.ts",
+        "line": 75,
+        "column": 23,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/agents/ContainerizedPulseOrchestrator.ts",
+        "line": 76,
+        "column": 61,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/DockerAgentManager.ts",
+        "line": 73,
+        "column": 58,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/DockerAgentManager.ts",
+        "line": 348,
+        "column": 43,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/PulsedAgentOrchestrator.ts",
+        "line": 69,
+        "column": 36,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/base/ValidatedAgent.ts",
+        "line": 14,
+        "column": 17,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/agents/base/ValidatedAgent.ts",
+        "line": 159,
+        "column": 52,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 60,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 60,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 60,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 98,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 98,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 98,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 132,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 132,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 132,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 232,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 232,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 232,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/api-tracking.ts",
+        "line": 234,
+        "column": 9,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/api/rate-limiter.ts",
+        "line": 298,
+        "column": 15,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/api/rate-limiter.ts",
+        "line": 298,
+        "column": 17,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/api/rate-limiter.ts",
+        "line": 298,
+        "column": 20,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/api/rate-limiter.ts",
+        "line": 304,
+        "column": 15,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/api/rate-limiter.ts",
+        "line": 304,
+        "column": 17,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/api/rate-limiter.ts",
+        "line": 304,
+        "column": 20,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/auth.ts",
+        "line": 93,
+        "column": 20,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/auth.ts",
+        "line": 93,
+        "column": 22,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/auth.ts",
+        "line": 93,
+        "column": 25,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/automation/n8n-client.ts",
+        "line": 237,
+        "column": 32,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/automation/n8n-client.ts",
+        "line": 391,
+        "column": 37,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "line": 19,
+        "column": 40,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "line": 22,
+        "column": 38,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "line": 25,
+        "column": 38,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "line": 38,
+        "column": 49,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "line": 133,
+        "column": 26,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "line": 134,
+        "column": 47,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "line": 138,
+        "column": 65,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/nocodb.ts",
+        "line": 304,
+        "column": 39,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/nocodb.ts",
+        "line": 312,
+        "column": 41,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/nocodb.ts",
+        "line": 335,
+        "column": 39,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 37,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 37,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 37,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 54,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 54,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 54,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 70,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 70,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 70,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 88,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 88,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 88,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 103,
+        "column": 19,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 107,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 107,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 107,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 131,
+        "column": 19,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 136,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 136,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 136,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 149,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 149,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 149,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 174,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 174,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 174,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 195,
+        "column": 19,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 199,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 199,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 199,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 223,
+        "column": 19,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 228,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 228,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 228,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 241,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 241,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 241,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 271,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 271,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 271,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 331,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 331,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 331,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 343,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 343,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 343,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 438,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 438,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 438,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 455,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 455,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "line": 455,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/backend/migration.ts",
+        "line": 267,
+        "column": 46,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/migration.ts",
+        "line": 300,
+        "column": 46,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/backend/migration.ts",
+        "line": 306,
+        "column": 58,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/breadcrumb/breadcrumb-agent.ts",
+        "line": 90,
+        "column": 41,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/breadcrumb/breadcrumb-agent.ts",
+        "line": 93,
+        "column": 37,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/breadcrumb/breadcrumb-agent.ts",
+        "line": 96,
+        "column": 64,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/breadcrumb/breadcrumb-agent.ts",
+        "line": 99,
+        "column": 57,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/cycle-detection.ts",
+        "line": 338,
+        "column": 27,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/data/MockDataGenerator.ts",
+        "line": 319,
+        "column": 35,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 180,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 180,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 180,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 213,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 213,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 213,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 250,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 250,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 250,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 276,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 276,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 276,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 311,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 311,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 311,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 358,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 358,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 358,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 384,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 384,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 384,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 421,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 421,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 421,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 447,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 447,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 447,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 529,
+        "column": 21,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 533,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 533,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 533,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 558,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 558,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 558,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 598,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 598,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 598,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 631,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 631,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 631,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 668,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 668,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 668,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 700,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 700,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/database.ts",
+        "line": 700,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/database/connection-pool.ts",
+        "line": 225,
+        "column": 43,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/docs/DynamicDocumentationSystem.ts",
+        "line": 108,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/docs/DynamicDocumentationSystem.ts",
+        "line": 108,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/docs/DynamicDocumentationSystem.ts",
+        "line": 108,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/email.ts",
+        "line": 355,
+        "column": 83,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/email.ts",
+        "line": 356,
+        "column": 95,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/email.ts",
+        "line": 357,
+        "column": 110,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/epc/epc-engine.ts",
+        "line": 98,
+        "column": 69,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/epc/epc-engine.ts",
+        "line": 102,
+        "column": 69,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/health/HealthCheckService.ts",
+        "line": 89,
+        "column": 28,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/health/database-health.ts",
+        "line": 51,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/health/database-health.ts",
+        "line": 51,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/health/database-health.ts",
+        "line": 51,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/health/database-health.ts",
+        "line": 178,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/health/database-health.ts",
+        "line": 178,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/health/database-health.ts",
+        "line": 178,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/hierarchical-memory-system.ts",
+        "line": 184,
+        "column": 38,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/ide/kiro-client.ts",
+        "line": 194,
+        "column": 21,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/ide/kiro-client.ts",
+        "line": 338,
+        "column": 34,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/ide/kiro-client.ts",
+        "line": 386,
+        "column": 47,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/ide/kiro-client.ts",
+        "line": 438,
+        "column": 39,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/knowledge/text-splitter.ts",
+        "line": 115,
+        "column": 17,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/knowledge/text-splitter.ts",
+        "line": 141,
+        "column": 17,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/knowledge/text-splitter.ts",
+        "line": 228,
+        "column": 17,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/knowledge/text-splitter.ts",
+        "line": 315,
+        "column": 46,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/knowledge/text-splitter.ts",
+        "line": 317,
+        "column": 55,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/knowledge/text-splitter.ts",
+        "line": 324,
+        "column": 45,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/knowledge/vector-store.ts",
+        "line": 374,
+        "column": 42,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/logger.ts",
+        "line": 57,
+        "column": 21,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/logger.ts",
+        "line": 57,
+        "column": 23,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/logger.ts",
+        "line": 57,
+        "column": 26,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/logger.ts",
+        "line": 58,
+        "column": 37,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/mcp/mcp-orchestrator.ts",
+        "line": 551,
+        "column": 38,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 45,
+        "column": 17,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 49,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 49,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 49,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 70,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 70,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 70,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 95,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 95,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 95,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 115,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 115,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 115,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 134,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 134,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 134,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 171,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 171,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 171,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 180,
+        "column": 19,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 184,
+        "column": 14,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 184,
+        "column": 16,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 184,
+        "column": 19,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 206,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 206,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 206,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 227,
+        "column": 12,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 227,
+        "column": 14,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "line": 227,
+        "column": 17,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/requirements/ClientRequirementsProcessor.ts",
+        "line": 126,
+        "column": 39,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/requirements/ClientRequirementsProcessor.ts",
+        "line": 147,
+        "column": 69,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/requirements/ClientRequirementsProcessor.ts",
+        "line": 265,
+        "column": 71,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/roadmap/RoadmapValidator.ts",
+        "line": 229,
+        "column": 65,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/roadmap/RoadmapValidator.ts",
+        "line": 232,
+        "column": 39,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/roadmap/RoadmapValidator.ts",
+        "line": 254,
+        "column": 17,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/roadmap/RoadmapValidator.ts",
+        "line": 254,
+        "column": 19,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/roadmap/RoadmapValidator.ts",
+        "line": 254,
+        "column": 22,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/roadmap/RoadmapValidator.ts",
+        "line": 255,
+        "column": 7,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 60,
+        "column": 44,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 65,
+        "column": 45,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 96,
+        "column": 52,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 110,
+        "column": 45,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 147,
+        "column": 60,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 159,
+        "column": 44,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 164,
+        "column": 45,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 234,
+        "column": 42,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 244,
+        "column": 15,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 244,
+        "column": 17,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 244,
+        "column": 20,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 249,
+        "column": 51,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 255,
+        "column": 40,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 284,
+        "column": 40,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 287,
+        "column": 38,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "line": 298,
+        "column": 39,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/index.ts",
+        "line": 52,
+        "column": 39,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/schemas.ts",
+        "line": 226,
+        "column": 40,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/lib/validation/schemas.ts",
+        "line": 242,
+        "column": 42,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/packages/self-check/dependency-auditor.ts",
+        "line": 30,
+        "column": 73,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/packages/self-check/dependency-auditor.ts",
+        "line": 99,
+        "column": 40,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/utils/helpers.ts",
+        "line": 88,
+        "column": 23,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/utils/helpers.ts",
+        "line": 91,
+        "column": 23,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 71,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 71,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 71,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 89,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 89,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 89,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 97,
+        "column": 16,
+        "code": "TS1005",
+        "message": "')' expected."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 97,
+        "column": 18,
+        "code": "TS1434",
+        "message": "Unexpected keyword or identifier."
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "line": 97,
+        "column": 21,
+        "code": "TS1128",
+        "message": "Declaration or statement expected."
+      },
+      {
+        "file": "tests/chaos/chaos-monkey.ts",
+        "line": 367,
+        "column": 29,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "tests/e2e/comprehensive-validation.spec.ts",
+        "line": 79,
+        "column": 18,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "tests/e2e/comprehensive-validation.spec.ts",
+        "line": 129,
+        "column": 31,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "tests/e2e/comprehensive-validation.spec.ts",
+        "line": 130,
+        "column": 22,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "tests/simulation/client-simulation-runner.ts",
+        "line": 178,
+        "column": 26,
+        "code": "TS1005",
+        "message": "',' expected."
+      },
+      {
+        "file": "tests/unit/lib/agents/CPURateLimiter.test.ts",
+        "line": 33,
+        "column": 48,
+        "code": "TS1005",
+        "message": "',' expected."
+      }
+    ]
+  },
+  "automationReady": true
+}

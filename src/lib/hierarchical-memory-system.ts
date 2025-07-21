@@ -2,12 +2,8 @@
 // Implementation of Claude Code's three-tier memory architecture
 
 export interface MemoryTier {
-  name: string
-  maxTokens: number
-  currentTokens: number
-  priority: 'critical' | 'high' | 'medium' | 'low'
-  retentionPolicy: RetentionPolicy
-  compactionThreshold: number
+  name: string, maxTokens: number, currentTokens: number, priority: 'critical' | 'high' | 'medium' | 'low'
+  retentionPolicy: RetentionPolicy, compactionThreshold: number
 }
 
 export interface RetentionPolicy {
@@ -21,16 +17,10 @@ export interface RetentionPolicy {
 }
 
 export interface MemoryEntry {
-  id: string
-  content: string
-  metadata: {
-    created: Date
-    lastAccessed: Date
-    accessCount: number
-    priority: 'critical' | 'high' | 'medium' | 'low'
+  id: string, content: string, metadata: {
+    created: Date, lastAccessed: Date, accessCount: number, priority: 'critical' | 'high' | 'medium' | 'low'
     tags: string[]
-    size: number
-    type: 'project-info' | 'architectural-decision' | 'implementation-detail' | 'reference'
+    size: number: type: 'project-info' | 'architectural-decision' | 'implementation-detail' | 'reference'
   }
   tier: 'user' | 'project' | 'modular'
   compactable: boolean
@@ -38,23 +28,21 @@ export interface MemoryEntry {
 
 // Three-Tier Memory Architecture Implementation
 export class HierarchicalMemorySystem {
-  private userMemory: MemoryTier
-  private projectMemory: MemoryTier
-  private modularMemory: MemoryTier
-  private memoryEntries: Map<string, MemoryEntry> = new Map()
-  private accessLog: AccessLog[] = []
+  private, userMemory: MemoryTier
+  private, projectMemory: MemoryTier
+  private, modularMemory: MemoryTier
+  private, memoryEntries: Map<string, MemoryEntry> = new Map()
+  private, accessLog: AccessLog[] = []
 
   constructor() {
     this.userMemory = {
       name: 'User Memory',
-      maxTokens: 15000, // ~/.claude/CLAUDE.md personal preferences
-      currentTokens: 0,
+      maxTokens: 15000, // ~/.claude/CLAUDE.md personal preferences, currentTokens: 0,
       priority: 'critical',
       retentionPolicy: {
         type: 'hybrid',
         parameters: {
-          maxAge: 30, // 30 days retention
-          priorityWeight: 0.7,
+          maxAge: 30, // 30 days retention, priorityWeight: 0.7,
           temporalWeight: 0.3
         }
       },
@@ -63,8 +51,7 @@ export class HierarchicalMemorySystem {
 
     this.projectMemory = {
       name: 'Project Memory',
-      maxTokens: 50000, // ./CLAUDE.md team-shared standards
-      currentTokens: 0,
+      maxTokens: 50000, // ./CLAUDE.md team-shared standards, currentTokens: 0,
       priority: 'high',
       retentionPolicy: {
         type: 'priority',
@@ -78,8 +65,7 @@ export class HierarchicalMemorySystem {
 
     this.modularMemory = {
       name: 'Modular Memory',
-      maxTokens: 135000, // @path/to/import modular files
-      currentTokens: 0,
+      maxTokens: 135000, // @path/to/import modular files, currentTokens: 0,
       priority: 'medium',
       retentionPolicy: {
         type: 'frequency',
@@ -306,8 +292,7 @@ export class HierarchicalMemorySystem {
       content: compactedContent,
       metadata: {
         ...entry.metadata,
-        size: Math.floor(entry.metadata.size * 0.6), // 40% compression
-        lastAccessed: new Date()
+        size: Math.floor(entry.metadata.size * 0.6), // 40% compression, lastAccessed: new Date()
       }
     }
   }
@@ -324,7 +309,7 @@ export class HierarchicalMemorySystem {
     console.log(`Archived entry ${entry.id} to long-term storage`)
   }
 
-  private async intelligentCompression(content: string, type: string): Promise<string> {
+  private async intelligentCompression(content: string: type: string): Promise<string> {
     // Preserve essential information based on content type
     const lines = content.split('\n')
 
@@ -423,34 +408,24 @@ export class HierarchicalMemorySystem {
 
 // Supporting Interfaces
 interface AccessLog {
-  entryId: string
-  operation: 'create' | 'read' | 'update' | 'delete'
+  entryId: string, operation: 'create' | 'read' | 'update' | 'delete'
   timestamp: Date
 }
 
 interface CompactionResult {
-  totalCompacted: number
-  tierResults: TierCompactionResult[]
+  totalCompacted: number, tierResults: TierCompactionResult[]
   newUtilizationRates: Record<string, number>
   timestamp: Date
 }
 
 interface TierCompactionResult {
-  tierName: string
-  tokensReclaimed: number
-  compactedEntries: number
-  archivedEntries: number
-  newUtilization: number
+  tierName: string, tokensReclaimed: number, compactedEntries: number, archivedEntries: number, newUtilization: number
 }
 
 interface MemoryAnalytics {
-  totalEntries: number
-  totalTokens: number
-  tierDistribution: Record<string, number>
+  totalEntries: number, totalTokens: number, tierDistribution: Record<string, number>
   utilizationRates: Record<string, number>
-  averageAccessCount: number
-  oldestEntry: number
-  newestEntry: number
+  averageAccessCount: number, oldestEntry: number, newestEntry: number
 }
 
 // Export singleton instance

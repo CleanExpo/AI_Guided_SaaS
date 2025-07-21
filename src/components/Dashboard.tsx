@@ -7,8 +7,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -27,8 +26,7 @@ import {
   Star,
   ArrowRight,
   Calendar,
-  Activity,
-} from 'lucide-react';
+  Activity} from 'lucide-react';
 import Link from 'next/link';
 
 interface Project {
@@ -55,49 +53,42 @@ const quickActions = [
     href: '/analyze',
     icon: Github,
     color: 'bg-gradient-to-br from-blue-500 to-blue-600',
-    featured: true,
-  },
+    featured: true},
   {
     title: 'UI Builder',
     description: 'Create beautiful components with drag & drop',
     href: '/ui-builder',
     icon: Palette,
     color: 'bg-gradient-to-br from-purple-500 to-purple-600',
-    featured: true,
-  },
+    featured: true},
   {
     title: 'Form Builder',
     description: 'Build dynamic forms in minutes',
     href: '/form-builder',
     icon: Wrench,
     color: 'bg-gradient-to-br from-green-500 to-green-600',
-    featured: true,
-  },
+    featured: true},
   {
     title: 'Browse Templates',
     description: 'Start with pre-built project templates',
     href: '/templates',
     icon: FileText,
     color: 'bg-gradient-to-br from-orange-500 to-orange-600',
-    featured: false,
-  },
+    featured: false},
   {
     title: 'Team Collaboration',
     description: 'Invite team members and collaborate',
     href: '/collaborate',
     icon: Users,
     color: 'bg-gradient-to-br from-indigo-500 to-indigo-600',
-    featured: false,
-  },
+    featured: false},
   {
     title: 'Analytics',
     description: 'View your project insights',
     href: '/analytics',
     icon: BarChart3,
     color: 'bg-gradient-to-br from-teal-500 to-teal-600',
-    featured: false,
-  },
-];
+    featured: false}];
 
 const recentProjects: Project[] = [
   {
@@ -107,16 +98,14 @@ const recentProjects: Project[] = [
     status: 'active',
     lastUpdated: '2 hours ago',
     type: 'repository',
-    progress: 75,
-  },
+    progress: 75},
   {
     id: '2',
     name: 'Contact Form Component',
     description: 'Reusable contact form with validation',
     status: 'completed',
     lastUpdated: '1 day ago',
-    type: 'ui-component',
-  },
+    type: 'ui-component'},
   {
     id: '3',
     name: 'Landing Page Template',
@@ -124,9 +113,7 @@ const recentProjects: Project[] = [
     status: 'draft',
     lastUpdated: '3 days ago',
     type: 'template',
-    progress: 30,
-  },
-];
+    progress: 30}];
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -134,8 +121,7 @@ export default function Dashboard() {
     projectsCreated: 12,
     componentsBuilt: 34,
     deploymentsThisWeek: 8,
-    timesSaved: '24 hours',
-  });
+    timesSaved: '24 hours'});
 
   const getProjectIcon = (type: string) => {
     switch (type) {
@@ -166,21 +152,21 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark:from-slate-900, dark:via-slate-800, dark:to-slate-900">
       <div className="container mx-auto py-8 px-4 space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            <h1 className="text-3xl, md:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
               Welcome back{session?.user?.name ? `, ${session.user.name.split(' ')[0]}` : ''}! 👋
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">
+            <p className="text-lg text-gray-600, dark:text-gray-300 mt-2">
               Ready to build something amazing today?
             </p>
           </div>
           <Button 
             size="lg" 
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+            className="bg-gradient-to-r from-blue-600 to-purple-600, hover:from-blue-700, hover:to-purple-700 text-white"
             asChild
           >
             <Link href="/analyze">
@@ -191,7 +177,7 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-4">
           <Card className="bg-white/50 backdrop-blur-sm border-white/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">
@@ -200,7 +186,7 @@ export default function Dashboard() {
               <Rocket className="h-4 w-4 text-blue-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.projectsCreated}</div>
+              <div className="text-2xl font-bold text-gray-900, dark:text-white">{stats.projectsCreated}</div>
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <TrendingUp className="inline h-3 w-3 mr-1 text-green-500" />
                 +3 this week
@@ -216,7 +202,7 @@ export default function Dashboard() {
               <Palette className="h-4 w-4 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.componentsBuilt}</div>
+              <div className="text-2xl font-bold text-gray-900, dark:text-white">{stats.componentsBuilt}</div>
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <TrendingUp className="inline h-3 w-3 mr-1 text-green-500" />
                 +7 this week
@@ -232,7 +218,7 @@ export default function Dashboard() {
               <Zap className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.deploymentsThisWeek}</div>
+              <div className="text-2xl font-bold text-gray-900, dark:text-white">{stats.deploymentsThisWeek}</div>
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <Calendar className="inline h-3 w-3 mr-1" />
                 This week
@@ -248,7 +234,7 @@ export default function Dashboard() {
               <Clock className="h-4 w-4 text-orange-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.timesSaved}</div>
+              <div className="text-2xl font-bold text-gray-900, dark:text-white">{stats.timesSaved}</div>
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <Star className="inline h-3 w-3 mr-1 text-yellow-500" />
                 With AI assistance
@@ -259,16 +245,16 @@ export default function Dashboard() {
 
         {/* Quick Actions */}
         <div>
-          <h2 className="text-2xl font-bold tracking-tight mb-6 text-gray-900 dark:text-white">
+          <h2 className="text-2xl font-bold tracking-tight mb-6 text-gray-900, dark:text-white">
             Quick Actions
           </h2>
           
           {/* Featured Actions */}
-          <div className="grid gap-6 md:grid-cols-3 mb-6">
+          <div className="grid gap-6, md:grid-cols-3 mb-6">
             {quickActions.filter(action => action.featured).map(action => (
               <Card
                 key={action.title}
-                className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white/50 backdrop-blur-sm border-white/20 hover:scale-105"
+                className="group, hover:shadow-xl transition-all duration-300 cursor-pointer bg-white/50 backdrop-blur-sm border-white/20, hover:scale-105"
               >
                 <Link href={action.href}>
                   <CardHeader className="pb-4">
@@ -278,10 +264,10 @@ export default function Dashboard() {
                       </div>
                       <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
                     </div>
-                    <CardTitle className="text-lg text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                    <CardTitle className="text-lg text-gray-900, dark:text-white group-hover:text-blue-600 transition-colors">
                       {action.title}
                     </CardTitle>
-                    <CardDescription className="text-gray-600 dark:text-gray-300">
+                    <CardDescription className="text-gray-600, dark:text-gray-300">
                       {action.description}
                     </CardDescription>
                   </CardHeader>
@@ -291,11 +277,11 @@ export default function Dashboard() {
           </div>
 
           {/* Other Actions */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4, md:grid-cols-2, lg:grid-cols-3">
             {quickActions.filter(action => !action.featured).map(action => (
               <Card
                 key={action.title}
-                className="group hover:shadow-md transition-all duration-200 cursor-pointer bg-white/30 backdrop-blur-sm border-white/20"
+                className="group, hover:shadow-md transition-all duration-200 cursor-pointer bg-white/30 backdrop-blur-sm border-white/20"
               >
                 <Link href={action.href}>
                   <CardHeader className="pb-3">
@@ -304,10 +290,10 @@ export default function Dashboard() {
                         <action.icon className="h-4 w-4 text-white" />
                       </div>
                       <div className="flex-1">
-                        <CardTitle className="text-base text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                        <CardTitle className="text-base text-gray-900, dark:text-white group-hover:text-blue-600 transition-colors">
                           {action.title}
                         </CardTitle>
-                        <CardDescription className="text-sm text-gray-600 dark:text-gray-300">
+                        <CardDescription className="text-sm text-gray-600, dark:text-gray-300">
                           {action.description}
                         </CardDescription>
                       </div>
@@ -322,7 +308,7 @@ export default function Dashboard() {
         {/* Recent Projects */}
         <div>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900, dark:text-white">
               Recent Projects
             </h2>
             <Button variant="outline" asChild>
@@ -333,20 +319,20 @@ export default function Dashboard() {
             </Button>
           </div>
           
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4, md:grid-cols-2, lg:grid-cols-3">
             {recentProjects.map(project => (
               <Card
                 key={project.id}
-                className="group hover:shadow-lg transition-all duration-200 cursor-pointer bg-white/50 backdrop-blur-sm border-white/20"
+                className="group, hover:shadow-lg transition-all duration-200 cursor-pointer bg-white/50 backdrop-blur-sm border-white/20"
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
                     <div className="flex items-center space-x-2">
-                      <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
+                      <div className="p-2 rounded-lg bg-gray-100, dark:bg-gray-800">
                         {getProjectIcon(project.type)}
                       </div>
                       <div>
-                        <CardTitle className="text-base text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                        <CardTitle className="text-base text-gray-900, dark:text-white group-hover:text-blue-600 transition-colors">
                           {project.name}
                         </CardTitle>
                         <CardDescription className="text-sm">
@@ -384,13 +370,13 @@ export default function Dashboard() {
             ))}
             
             {/* Add New Project Card */}
-            <Card className="group hover:shadow-lg transition-all duration-200 cursor-pointer bg-white/30 backdrop-blur-sm border-white/20 border-dashed">
+            <Card className="group, hover:shadow-lg transition-all duration-200 cursor-pointer bg-white/30 backdrop-blur-sm border-white/20 border-dashed">
               <Link href="/analyze">
                 <CardContent className="flex flex-col items-center justify-center h-full py-12 text-center">
                   <div className="p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 mb-4 group-hover:scale-110 transition-transform">
                     <Plus className="h-8 w-8 text-white" />
                   </div>
-                  <CardTitle className="text-lg text-gray-900 dark:text-white mb-2">
+                  <CardTitle className="text-lg text-gray-900, dark:text-white mb-2">
                     Start New Project
                   </CardTitle>
                   <CardDescription>

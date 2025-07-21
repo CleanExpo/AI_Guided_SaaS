@@ -2,21 +2,18 @@
 
 import * as React from 'react'
 import { ChevronDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/cn'
 
 const CollapsibleContext = React.createContext<{
-  open: boolean
-  onOpenChange: (open: boolean) => void
+  open: boolean, onOpenChange: (open: boolean) => void
 }>({
   open: false,
-  onOpenChange: () => {},
-})
+  onOpenChange: () => {}})
 
 interface CollapsibleProps {
   open?: boolean
   defaultOpen?: boolean
-  onOpenChange?: (open: boolean) => void
-  children: React.ReactNode
+  onOpenChange?: (open: boolean) => void, children: React.ReactNode
   className?: string
 }
 
@@ -49,7 +46,7 @@ const CollapsibleTrigger = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        'flex w-full items-center justify-between py-2 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180',
+        'flex w-full items-center justify-between py-2 font-medium transition-all, hover:underline [&[data-state=open]>svg]:rotate-180',
         className
       )}
       data-state={open ? 'open' : 'closed'}

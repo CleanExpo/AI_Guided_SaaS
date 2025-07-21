@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Configuration API error:', error);
+    console.error('Configuration API, error:', error);
     return NextResponse.json(
       { error: 'Failed to load configuration' },
       { status: 500 }
@@ -96,7 +96,7 @@ export async function POST() {
     });
 
   } catch (error) {
-    console.error('Configuration reload error:', error);
+    console.error('Configuration reload, error:', error);
     return NextResponse.json(
       { error: 'Failed to reload configuration' },
       { status: 500 }

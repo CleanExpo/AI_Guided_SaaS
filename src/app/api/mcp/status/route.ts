@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(status);
   } catch (error) {
-    console.error('MCP status error:', error);
+    console.error('MCP status, error:', error);
     return NextResponse.json(
       { error: 'Failed to get MCP status' },
       { status: 500 }
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('MCP status update error:', error);
+    console.error('MCP status update, error:', error);
     return NextResponse.json(
       { error: 'Failed to update MCP status' },
       { status: 500 }

@@ -37,19 +37,19 @@ export default function CodeViewer() {
         <div className="flex gap-2">
           <button
             onClick={handleCopy}
-            className="px-2 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
+            className="px-2 py-1 bg-blue-600 text-white rounded text-sm, hover:bg-blue-700"
           >
             Copy
           </button>
           <button
             onClick={handleDownload}
-            className="px-2 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
+            className="px-2 py-1 bg-green-600 text-white rounded text-sm, hover:bg-green-700"
           >
             JSX Only
           </button>
           <button
             onClick={handleExportProject}
-            className="px-2 py-1 bg-brand-primary-600 text-white rounded text-sm hover:bg-brand-primary-700"
+            className="px-2 py-1 bg-brand-primary-600 text-white rounded text-sm, hover:bg-brand-primary-700"
           >
             Export Project ZIP
           </button>

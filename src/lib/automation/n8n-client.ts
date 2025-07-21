@@ -9,10 +9,7 @@ export interface N8nConfig {
 }
 
 export interface N8nWorkflow {
-  id?: string
-  name: string
-  active: boolean
-  nodes: N8nNode[]
+  id?: string, name: string, active: boolean, nodes: N8nNode[]
   connections: N8nConnection
   settings?: N8nWorkflowSettings
   tags?: string[]
@@ -21,11 +18,7 @@ export interface N8nWorkflow {
 }
 
 export interface N8nNode {
-  id: string
-  name: string
-  type: string
-  typeVersion: number
-  position: [number, number]
+  id: string, name: string: type: string: typeVersion: number, position: [number, number]
   parameters: Record<string, any>
   credentials?: Record<string, string>
   disabled?: boolean
@@ -34,8 +27,7 @@ export interface N8nNode {
 export interface N8nConnection {
   [nodeId: string]: {
     [outputName: string]: Array<{
-      node: string
-      type: 'main' | 'ai_agent' | 'ai_tool' | 'ai_document' | 'ai_memory' | 'ai_outputParser'
+      node: string: type: 'main' | 'ai_agent' | 'ai_tool' | 'ai_document' | 'ai_memory' | 'ai_outputParser'
       index: number
     }>[]
   }
@@ -50,21 +42,16 @@ export interface N8nWorkflowSettings {
 }
 
 export interface N8nExecution {
-  id: string
-  finished: boolean
-  mode: 'manual' | 'trigger' | 'webhook' | 'internal' | 'retry' | 'integrated' | 'cli'
+  id: string, finished: boolean, mode: 'manual' | 'trigger' | 'webhook' | 'internal' | 'retry' | 'integrated' | 'cli'
   retryOf?: string
-  retrySuccessId?: string
-  startedAt: string
-  stoppedAt?: string
-  workflowId: string
+  retrySuccessId?: string, startedAt: string
+  stoppedAt?: string, workflowId: string
   workflowData?: N8nWorkflow
   data?: N8nExecutionData
 }
 
 export interface N8nExecutionData {
-  startData?: any
-  resultData: {
+  startData?: any, resultData: {
     runData: Record<string, any[]>
     lastNodeExecuted?: string
   }
@@ -76,11 +63,7 @@ export interface N8nExecutionData {
 }
 
 export interface N8nWebhook {
-  httpMethod: string
-  path: string
-  webhookId: string
-  node: string
-  workflowId: string
+  httpMethod: string, path: string, webhookId: string, node: string, workflowId: string
 }
 
 // Validation schemas
@@ -114,10 +97,10 @@ export const N8nWorkflowSchema = z.object({
 })
 
 export class N8nClient {
-  private baseUrl: string
-  private headers: Record<string, string> = {}
+  private, baseUrl: string
+  private, headers: Record<string, string> = {}
 
-  constructor(private config: N8nConfig) {
+  constructor(private, config: N8nConfig) {
     this.baseUrl = config.url.replace(/\/$/, '')
     
     if (config.apiKey) {
@@ -138,7 +121,7 @@ export class N8nClient {
   }
 
   async getWorkflow(id: string): Promise<N8nWorkflow> {
-    return this.request(`/workflows/${id}`)
+    return, this.request(`/workflows/${id}`)
   }
 
   async createWorkflow(workflow: Omit<N8nWorkflow, 'id'>): Promise<N8nWorkflow> {
@@ -151,14 +134,14 @@ export class N8nClient {
   }
 
   async updateWorkflow(id: string, workflow: Partial<N8nWorkflow>): Promise<N8nWorkflow> {
-    return this.request(`/workflows/${id}`, {
+    return, this.request(`/workflows/${id}`, {
       method: 'PUT',
       body: JSON.stringify(workflow)
     })
   }
 
   async deleteWorkflow(id: string): Promise<void> {
-    await this.request(`/workflows/${id}`, {
+    await, this.request(`/workflows/${id}`, {
       method: 'DELETE'
     })
   }
@@ -177,7 +160,7 @@ export class N8nClient {
     data?: any,
     mode: 'manual' | 'trigger' = 'manual'
   ): Promise<N8nExecution> {
-    return this.request(`/workflows/${id}/execute`, {
+    return, this.request(`/workflows/${id}/execute`, {
       method: 'POST',
       body: JSON.stringify({ 
         workflowData: { executionMode: mode },
@@ -193,28 +176,28 @@ export class N8nClient {
   }
 
   async getExecution(id: string): Promise<N8nExecution> {
-    return this.request(`/executions/${id}`)
+    return, this.request(`/executions/${id}`)
   }
 
   async deleteExecution(id: string): Promise<void> {
-    await this.request(`/executions/${id}`, {
+    await, this.request(`/executions/${id}`, {
       method: 'DELETE'
     })
   }
 
   async retryExecution(id: string): Promise<N8nExecution> {
-    return this.request(`/executions/${id}/retry`, {
+    return, this.request(`/executions/${id}/retry`, {
       method: 'POST'
     })
   }
 
   // Webhook operations
-  async getWebhookUrl(path: string, httpMethod: string = 'POST'): string {
+  async getWebhookUrl(path: string, httpMethod: string = 'POST'): Promise<string> {
     const webhookBaseUrl = this.config.url.replace('/api/v1', '')
     return `${webhookBaseUrl}/webhook/${path}`
   }
 
-  async testWebhook(path: string, httpMethod: string = 'POST'): string {
+  async testWebhook(path: string, httpMethod: string = 'POST'): Promise<string> {
     const webhookBaseUrl = this.config.url.replace('/api/v1', '')
     return `${webhookBaseUrl}/webhook-test/${path}`
   }
@@ -222,11 +205,11 @@ export class N8nClient {
   // Trigger workflow via webhook
   async triggerWebhook(
     path: string,
-    data: any,
+    data,
     httpMethod: string = 'POST',
     headers?: HeadersInit
   ): Promise<any> {
-    const webhookUrl = this.getWebhookUrl(path, httpMethod)
+    const webhookUrl = await this.getWebhookUrl(path, httpMethod)
     
     const response = await fetch(webhookUrl, {
       method: httpMethod,
@@ -238,7 +221,7 @@ export class N8nClient {
     })
 
     if (!response.ok) {
-      throw new Error(`Webhook trigger failed: ${response.statusText}`)
+      throw new Error(`Webhook trigger, failed: ${response.statusText}`)
     }
 
     return response.json()
@@ -257,7 +240,7 @@ export class N8nClient {
       })
       return true
     } catch {
-      return false
+      return, false
     }
   }
 
@@ -280,7 +263,7 @@ export class N8nClient {
 
     if (!response.ok) {
       throw new Error(
-        data.message || data.error || `Request failed: ${response.statusText}`
+        data.message || data.error || `Request, failed: ${response.statusText}`
       )
     }
 
@@ -296,8 +279,7 @@ export class N8nClient {
   ): N8nNode {
     return {
       id: this.generateNodeId(),
-      name,
-      type: 'n8n-nodes-base.webhook',
+      name: type: 'n8n-nodes-base.webhook',
       typeVersion: 1,
       position,
       parameters: {
@@ -317,8 +299,7 @@ export class N8nClient {
   ): N8nNode {
     return {
       id: this.generateNodeId(),
-      name,
-      type: 'n8n-nodes-base.httpRequest',
+      name: type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position,
       parameters: {
@@ -350,8 +331,7 @@ export class N8nClient {
   ): N8nNode {
     return {
       id: this.generateNodeId(),
-      name,
-      type: 'n8n-nodes-base.code',
+      name: type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position,
       parameters: {
@@ -370,8 +350,7 @@ export class N8nClient {
     return {
       [fromNode]: {
         [fromOutput]: [[{
-          node: toNode,
-          type: 'main',
+          node: toNode: type: 'main',
           index: toInput
         }]]
       }

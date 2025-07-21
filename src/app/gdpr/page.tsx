@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'GDPR Compliance - AI Guided SaaS Platform',
-  description: 'Our commitment to GDPR compliance and data protection',
-};
+  description: 'Our commitment to GDPR compliance and data protection'};
 
 export default function GdprPage() {
   return (
@@ -11,7 +10,7 @@ export default function GdprPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">GDPR Compliance</h1>
         <p className="text-muted-foreground mb-8">
-          Last updated: {new Date().toLocaleDateString()}
+          Last, updated: {new Date().toLocaleDateString()}
         </p>
 
         <div className="prose prose-lg max-w-none space-y-6">
@@ -30,7 +29,7 @@ export default function GdprPage() {
             <h2 className="text-2xl font-semibold mb-4">
               Your Rights Under GDPR
             </h2>
-            <p>As a data subject, you have the following rights:</p>
+            <p>As a data subject, you have the following, rights:</p>
             <ul className="list-disc pl-6 mb-6">
               <li>Right to access your personal data</li>
               <li>Right to rectification of inaccurate data</li>
@@ -45,8 +44,7 @@ export default function GdprPage() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">Data Processing</h2>
             <p>
-              We process your personal data based on the following legal
-              grounds:
+              We process your personal data based on the following legal, grounds:
             </p>
             <ul className="list-disc pl-6 mb-6">
               <li>Consent for marketing communications</li>
@@ -88,14 +86,14 @@ export default function GdprPage() {
             </h2>
             <p>
               To exercise any of your GDPR rights, please contact our Data
-              Protection Officer at:
+              Protection Officer, at:
             </p>
             <div className="bg-muted p-4 rounded-lg mt-4">
               <p>
                 <strong>Email:</strong> dpo@aiguidedSaaS.com
               </p>
               <p>
-                <strong>Response Time:</strong> Within 30 days
+                <strong>Response, Time:</strong> Within 30 days
               </p>
             </div>
           </section>
@@ -104,7 +102,7 @@ export default function GdprPage() {
             <h2 className="text-2xl font-semibold mb-4">Data Transfers</h2>
             <p>
               When we transfer your data outside the EU, we ensure adequate
-              protection through:
+              protection, through:
             </p>
             <ul className="list-disc pl-6 mb-6">
               <li>Standard Contractual Clauses (SCCs)</li>
@@ -116,18 +114,17 @@ export default function GdprPage() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
             <p>
-              For any questions about our GDPR compliance or data protection
-              practices:
+              For any questions about our GDPR compliance or data protection, practices:
             </p>
             <div className="bg-muted p-4 rounded-lg mt-4">
               <p>
-                <strong>Data Protection Officer:</strong> dpo@aiguidedSaaS.com
+                <strong>Data Protection, Officer:</strong> dpo@aiguidedSaaS.com
               </p>
               <p>
-                <strong>Privacy Team:</strong> privacy@aiguidedSaaS.com
+                <strong>Privacy, Team:</strong> privacy@aiguidedSaaS.com
               </p>
               <p>
-                <strong>Supervisory Authority:</strong> You may also contact
+                <strong>Supervisory, Authority:</strong> You may also contact
                 your local data protection authority
               </p>
             </div>

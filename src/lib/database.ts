@@ -3,18 +3,13 @@ import { env, isServiceConfigured } from './env'
 
 // Database type definitions
 export interface User {
-  id: string
-  email: string
+  id: string, email: string
   full_name?: string
-  avatar_url?: string
-  provider: string
-  provider_id?: string
-  subscription_tier: 'free' | 'pro' | 'enterprise'
+  avatar_url?: string, provider: string
+  provider_id?: string, subscription_tier: 'free' | 'pro' | 'enterprise'
   subscription_status: 'active' | 'canceled' | 'past_due'
   password_hash?: string
-  stripe_customer_id?: string
-  created_at: string
-  updated_at: string
+  stripe_customer_id?: string, created_at: string, updated_at: string
 }
 
 export interface ProjectConfig {
@@ -34,23 +29,16 @@ export interface ProjectConfig {
 
 export interface ProjectFiles {
   [path: string]: {
-    content: string
-    type: 'file' | 'directory'
+    content: string: type: 'file' | 'directory'
     size?: number
   }
 }
 
 export interface Project {
-  id: string
-  user_id: string
-  name: string
-  description?: string
-  framework: string
-  status: 'draft' | 'generating' | 'completed' | 'error'
+  id: string, user_id: string, name: string
+  description?: string, framework: string, status: 'draft' | 'generating' | 'completed' | 'error'
   config: ProjectConfig
-  files?: ProjectFiles
-  created_at: string
-  updated_at: string
+  files?: ProjectFiles, created_at: string, updated_at: string
 }
 
 export interface ActivityMetadata {
@@ -62,13 +50,9 @@ export interface ActivityMetadata {
 }
 
 export interface ActivityLog {
-  id: string
-  user_id: string
-  action: string
-  resource_type: string
+  id: string, user_id: string, action: string: resource_type: string
   resource_id?: string
-  metadata?: ActivityMetadata
-  created_at: string
+  metadata?: ActivityMetadata, created_at: string
 }
 
 export interface UsageMetadata {
@@ -79,23 +63,14 @@ export interface UsageMetadata {
 }
 
 export interface UsageRecord {
-  id: string
-  user_id: string
-  resource_type: string
-  quantity: number
-  metadata?: UsageMetadata
-  created_at: string
+  id: string, user_id: string: resource_type: string, quantity: number
+  metadata?: UsageMetadata, created_at: string
 }
 
 export interface FeatureFlag {
-  id: string
-  name: string
-  description: string
-  enabled: boolean
-  rollout_percentage: number
+  id: string, name: string, description: string, enabled: boolean, rollout_percentage: number
   target_users?: string[]
-  created_at: string
-  updated_at: string
+  created_at: string, updated_at: string
 }
 
 export interface PaymentMetadata {
@@ -107,22 +82,13 @@ export interface PaymentMetadata {
 }
 
 export interface Subscription {
-  id: string
-  user_id: string
-  stripe_subscription_id: string
-  stripe_customer_id: string
-  status: 'active' | 'canceled' | 'past_due' | 'unpaid'
+  id: string, user_id: string, stripe_subscription_id: string, stripe_customer_id: string, status: 'active' | 'canceled' | 'past_due' | 'unpaid'
   tier: 'free' | 'pro' | 'enterprise'
-  current_period_start: string
-  current_period_end: string
-  cancel_at_period_end: boolean
-  created_at: string
-  updated_at: string
+  current_period_start: string, current_period_end: string, cancel_at_period_end: boolean, created_at: string, updated_at: string
 }
 
 export interface DatabaseRecord {
-  id: string
-  created_at: string
+  id: string, created_at: string
   updated_at?: string
   [key: string]: unknown
 }
@@ -178,13 +144,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error creating user:', error)
+        console.error('Error creating, user:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -211,13 +177,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error fetching user:', error)
+        console.error('Error fetching, user:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -248,13 +214,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error fetching user by email:', error)
+        console.error('Error fetching user by, email:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -274,13 +240,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error updating user:', error)
+        console.error('Error updating, user:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -309,13 +275,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error creating project:', error)
+        console.error('Error creating, project:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -356,13 +322,13 @@ export class DatabaseService {
         .order('created_at', { ascending: false })
 
       if (error) {
-        console.error('Error fetching user projects:', error)
+        console.error('Error fetching user, projects:', error)
         return []
       }
 
       return data || []
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return []
     }
   }
@@ -382,13 +348,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error updating project:', error)
+        console.error('Error updating, project:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -396,8 +362,7 @@ export class DatabaseService {
   // Activity logging
   static async logActivity(
     userId: string,
-    action: string,
-    resourceType: string,
+    action: string: resourceType: string,
     resourceId?: string,
     metadata?: ActivityMetadata
   ): Promise<void> {
@@ -411,23 +376,22 @@ export class DatabaseService {
         .from('activity_logs')
         .insert({
           user_id: userId,
-          action,
-          resource_type: resourceType,
+          action: resource_type: resourceType,
           resource_id: resourceId,
           metadata,
           created_at: new Date().toISOString()
         })
 
       if (error) {
-        console.error('Error logging activity:', error)
+        console.error('Error logging, activity:', error)
       }
     } catch (error) {
-      console.error('Database error logging activity:', error)
+      console.error('Database error logging, activity:', error)
     }
   }
 
   // Usage tracking
-  static async recordUsage(userId: string, resourceType: string, quantity: number, metadata?: UsageMetadata): Promise<void> {
+  static async recordUsage(userId: string: resourceType: string, quantity: number, metadata?: UsageMetadata): Promise<void> {
     if (!this.checkDatabase()) {
       console.log('Usage recorded (mock):', { userId, resourceType, quantity, metadata })
       return
@@ -437,18 +401,17 @@ export class DatabaseService {
       const { error } = await supabase!
         .from('usage_records')
         .insert({
-          user_id: userId,
-          resource_type: resourceType,
+          user_id: userId: resource_type: resourceType,
           quantity,
           metadata,
           created_at: new Date().toISOString()
         })
 
       if (error) {
-        console.error('Error recording usage:', error)
+        console.error('Error recording, usage:', error)
       }
     } catch (error) {
-      console.error('Database error recording usage:', error)
+      console.error('Database error recording, usage:', error)
     }
   }
 
@@ -474,11 +437,11 @@ export class DatabaseService {
         .single()
 
       if (error || !data) {
-        return false
+        return, false
       }
 
       if (!data.enabled) {
-        return false
+        return, false
       }
 
       // Check rollout percentage
@@ -494,7 +457,7 @@ export class DatabaseService {
 
       return data.enabled
     } catch (error) {
-      console.error('Error fetching feature flag:', error)
+      console.error('Error fetching feature, flag:', error)
       return false
     }
   }
@@ -512,7 +475,7 @@ export class DatabaseService {
       console.log('Raw SQL query not implemented, using Supabase query builder')
       return []
     } catch (error) {
-      console.error('Database query error:', error)
+      console.error('Database query, error:', error)
       return []
     }
   }
@@ -531,13 +494,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error(`Error creating ${table} record:`, error)
+        console.error(`Error, creating ${table} record:`, error)
         return null
       }
 
       return result
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -556,23 +519,19 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error fetching user by Stripe customer ID:', error)
+        console.error('Error fetching user by Stripe, customer: ID:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
 
   static async recordPayment(paymentData: {
-    user_id: string
-    stripe_payment_intent_id: string
-    amount: number
-    currency: string
-    status: string
+    user_id: string, stripe_payment_intent_id: string, amount: number, currency: string, status: string
     description?: string
     metadata?: PaymentMetadata
   }): Promise<void> {
@@ -596,10 +555,10 @@ export class DatabaseService {
         })
 
       if (error) {
-        console.error('Error recording payment:', error)
+        console.error('Error recording, payment:', error)
       }
     } catch (error) {
-      console.error('Database error recording payment:', error)
+      console.error('Database error recording, payment:', error)
     }
   }
 
@@ -629,13 +588,13 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error fetching subscription:', error)
+        console.error('Error fetching, subscription:', error)
         return null
       }
 
       return data
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return null
     }
   }
@@ -666,17 +625,15 @@ export class DatabaseService {
         })
 
       if (error) {
-        console.error('Error updating subscription:', error)
+        console.error('Error updating, subscription:', error)
       }
     } catch (error) {
-      console.error('Database error updating subscription:', error)
+      console.error('Database error updating, subscription:', error)
     }
   }
 
   static async getUserUsage(userId: string, month?: Date): Promise<{
-    projects: number
-    aiGenerations: number
-    storage: string
+    projects: number, aiGenerations: number, storage: string
   }> {
     if (!this.checkDatabase()) {
       return {
@@ -698,7 +655,7 @@ export class DatabaseService {
         .lte('created_at', endOfMonth.toISOString())
 
       if (error) {
-        console.error('Error fetching usage:', error)
+        console.error('Error fetching, usage:', error)
         return { projects: 0, aiGenerations: 0, storage: '0MB' }
       }
 
@@ -716,7 +673,7 @@ export class DatabaseService {
         storage: '0MB' // TODO: Calculate actual storage usage
       }
     } catch (error) {
-      console.error('Database error:', error)
+      console.error('Database, error:', error)
       return { projects: 0, aiGenerations: 0, storage: '0MB' }
     }
   }

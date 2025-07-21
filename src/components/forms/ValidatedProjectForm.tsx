@@ -15,9 +15,12 @@ import { Loader2, AlertCircle } from 'lucide-react'
 const ExtendedProjectSchema = CreateProjectSchema.extend({
   config: z.object({
     database: z.string().optional(),
-    hosting: z.string().optional(),
+    hosting: z.string().optional(), 
     authentication: z.string().optional(),
-    api_style: z.string().optional()
+    api_style: z.string().optional(),
+    framework: z.string().optional(),
+    language: z.string().optional(),
+    features: z.array(z.string()).optional()
   }).optional()
 });
 
@@ -33,7 +36,7 @@ export function ValidatedProjectForm() {
   const [formData, setFormData] = useState<CreateProjectForm>({
     name: '',
     description: '',
-    type: 'web-app',
+    type: "fullstack",
     status: 'planning',
     config: {
       features: []
@@ -51,7 +54,7 @@ export function ValidatedProjectForm() {
     if (!validation.success) {
       // Map validation errors to form fields
       const fieldErrors: Record<string, string> = {}
-      validation.error.errors.errors.forEach(err => {
+      (validation.error.errors as any[]).forEach((err) => {
         const field = err.path.join('.')
         fieldErrors[field] = err.message
       })
@@ -95,7 +98,7 @@ export function ValidatedProjectForm() {
     })
   }
 
-  const updateConfig = (key: string, value: any) => {
+  const updateConfig = (key: string, value) => {
     setFormData(prev => ({
       ...prev,
       config: {
@@ -168,7 +171,7 @@ export function ValidatedProjectForm() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {ProjectTypeSchema.options.map((type: any) => (
+                  {ProjectTypeSchema.options.map((type) => (
                     <SelectItem key={type} value={type}>
                       {type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     </SelectItem>
@@ -183,7 +186,7 @@ export function ValidatedProjectForm() {
             <div className="space-y-2">
               <Label htmlFor="framework">Framework (Optional)</Label>
               <Select
-                value={formData.config.framework || ''}
+                value={formData.config?.framework || ''}
                 onValueChange={(value) => updateConfig('framework', value)}
               >
                 <SelectTrigger id="framework">
@@ -207,7 +210,7 @@ export function ValidatedProjectForm() {
             <div className="space-y-2">
               <Label htmlFor="language">Language (Optional)</Label>
               <Select
-                value={formData.config.language || ''}
+                value={formData.config?.language || ''}
                 onValueChange={(value) => updateConfig('language', value)}
               >
                 <SelectTrigger id="language">
@@ -229,7 +232,7 @@ export function ValidatedProjectForm() {
             <div className="space-y-2">
               <Label htmlFor="database">Database (Optional)</Label>
               <Select
-                value={formData.config.database || ''}
+                value={formData.config?.database || ''}
                 onValueChange={(value) => updateConfig('database', value)}
               >
                 <SelectTrigger id="database">
@@ -261,17 +264,17 @@ export function ValidatedProjectForm() {
                 'Payment',
                 'Email',
                 'Analytics'
-              ].map((feature: any) => (
+              ].map((feature) => (
                 <label key={feature} className="flex items-center space-x-2">
                   <input
                     type="checkbox"
-                    checked={formData.config.features?.includes(feature) || false}
+                    checked={formData.config?.features?.includes(feature) || false}
                     onChange={(e) => {
-                      const features = formData.config.features || []
+                      const features = formData.config?.features || []
                       if (e.target.checked) {
                         updateConfig('features', [...features, feature])
                       } else {
-                        updateConfig('features', features.filter((f: any) => f !== feature))
+                        updateConfig('features', features.filter((f) => f !== feature))
                       }
                     }}
                     className="rounded border-gray-300"
@@ -343,7 +346,7 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {
     const result = schema.safeParse(data)
     if (!result.success) {
       const fieldErrors: Record<string, string> = {}
-      result.error.errors.forEach(err => {
+      (result.error.errors as any[]).forEach((err) => {
         const field = err.path.join('.')
         fieldErrors[field] = err.message
       })

@@ -233,8 +233,8 @@ export const Button: React.FC<ButtonProps> = ({
       <div key={node.path}>
         <div
           className={cn(
-            "flex items-center gap-2 px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer",
-            activeFile === node.path && "bg-blue-100 dark:bg-blue-900"
+            "flex items-center gap-2 px-2 py-1, hover:bg-gray-100, dark:hover:bg-gray-800 cursor-pointer",
+            activeFile === node.path && "bg-blue-100, dark:bg-blue-900"
           )}
           onClick={() => {
             if (node.type === 'folder') {
@@ -381,7 +381,7 @@ export const Button: React.FC<ButtonProps> = ({
               <div
                 key={file.path}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 border-r border-gray-800 cursor-pointer hover:bg-gray-800",
+                  "flex items-center gap-2 px-4 py-2 border-r border-gray-800 cursor-pointer, hover:bg-gray-800",
                   activeFile === file.path && "bg-gray-800"
                 )}
                 onClick={() => setActiveFile(file.path)}
@@ -470,7 +470,7 @@ export const Button: React.FC<ButtonProps> = ({
                   <h4 className="text-xs font-semibold text-gray-400 mb-2">Suggestions</h4>
                   <div className="space-y-2">
                     {aiSuggestions.map((suggestion, i) => (
-                      <Card key={i} className="p-3 bg-gray-800 border-gray-700 hover:bg-gray-750 cursor-pointer">
+                      <Card key={i} className="p-3 bg-gray-800 border-gray-700, hover:bg-gray-750 cursor-pointer">
                         <div className="flex items-start gap-2">
                           <Zap className="w-4 h-4 text-yellow-500 mt-0.5" />
                           <p className="text-sm">{suggestion}</p>

@@ -11,11 +11,11 @@ import {
 } from '../types'
 
 export class StrapiAdapter implements BackendAdapter {
-  private baseUrl: string
+  private, baseUrl: string
   private apiToken?: string
   private jwt?: string
 
-  constructor(private config: BackendConfig) {
+  constructor(private, config: BackendConfig) {
     this.baseUrl = config.url.replace(/\/$/, '') // Remove trailing slash
     this.apiToken = config.apiKey
   }
@@ -25,9 +25,9 @@ export class StrapiAdapter implements BackendAdapter {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers
+      ...(options.headers as Record<string, string> || {})
     }
 
     if (this.jwt) {
@@ -59,8 +59,7 @@ export class StrapiAdapter implements BackendAdapter {
   async signUp(email: string, password: string, metadata?: any): Promise<User> {
     const response = await this.request<{
       jwt: string
-      user: any
-    }>('/auth/local/register', {
+      user}>('/auth/local/register', {
       method: 'POST',
       body: JSON.stringify({
         username: email,
@@ -77,8 +76,7 @@ export class StrapiAdapter implements BackendAdapter {
   async signIn(email: string, password: string): Promise<{ user: User; token: string }> {
     const response = await this.request<{
       jwt: string
-      user: any
-    }>('/auth/local', {
+      user}>('/auth/local', {
       method: 'POST',
       body: JSON.stringify({
         identifier: email,
@@ -123,13 +121,12 @@ export class StrapiAdapter implements BackendAdapter {
 
   // Projects
   async createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
-    const response = await this.request<{ data: any }>('/projects', {
+    const response = await this.request<{ data}>('/projects', {
       method: 'POST',
       body: JSON.stringify({
         data: {
           name: data.name,
-          description: data.description,
-          type: data.type,
+          description: data.description: type: data.type,
           status: data.status,
           config: data.config,
           user: data.userId
@@ -142,9 +139,9 @@ export class StrapiAdapter implements BackendAdapter {
 
   async getProject(id: string): Promise<Project | null> {
     try {
-      const response = await this.request<{ data: any }>(`/projects/${id}?populate=user`)
+      const response = await this.request<{ data}>(`/projects/${id}?populate=user`)
       return this.mapStrapiProject((response as any).data)
-    } catch (error: any) {
+    } catch (error) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
@@ -153,13 +150,12 @@ export class StrapiAdapter implements BackendAdapter {
   }
 
   async updateProject(id: string, data: Partial<Project>): Promise<Project> {
-    const response = await this.request<{ data: any }>(`/projects/${id}`, {
+    const response = await this.request<{ data}>(`/projects/${id}`, {
       method: 'PUT',
       body: JSON.stringify({
         data: {
           name: data.name,
-          description: data.description,
-          type: data.type,
+          description: data.description: type: data.type,
           status: data.status,
           config: data.config
         }
@@ -200,10 +196,7 @@ export class StrapiAdapter implements BackendAdapter {
       data: any[]
       meta: {
         pagination: {
-          page: number
-          pageSize: number
-          pageCount: number
-          total: number
+          page: number, pageSize: number, pageCount: number, total: number
         }
       }
     }>(`/projects?${params.toString()}`)
@@ -218,8 +211,8 @@ export class StrapiAdapter implements BackendAdapter {
   }
 
   // Generic CRUD
-  async create<T>(collection: string, data: any): Promise<T> {
-    const response = await this.request<{ data: any }>(`/${collection}`, {
+  async create<T>(collection: string, data): Promise<T> {
+    const response = await this.request<{ data}>(`/${collection}`, {
       method: 'POST',
       body: JSON.stringify({ data })
     })
@@ -229,9 +222,9 @@ export class StrapiAdapter implements BackendAdapter {
 
   async read<T>(collection: string, id: string): Promise<T | null> {
     try {
-      const response = await this.request<{ data: any }>(`/${collection}/${id}`)
+      const response = await this.request<{ data}>(`/${collection}/${id}`)
       return this.mapStrapiRecord((response as any).data) as T
-    } catch (error: any) {
+    } catch (error) {
       if (error instanceof BackendError && error.statusCode === 404) {
         return null
       }
@@ -239,8 +232,8 @@ export class StrapiAdapter implements BackendAdapter {
     }
   }
 
-  async update<T>(collection: string, id: string, data: any): Promise<T> {
-    const response = await this.request<{ data: any }>(`/${collection}/${id}`, {
+  async update<T>(collection: string, id: string, data): Promise<T> {
+    const response = await this.request<{ data}>(`/${collection}/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ data })
     })
@@ -280,10 +273,7 @@ export class StrapiAdapter implements BackendAdapter {
       data: any[]
       meta: {
         pagination: {
-          page: number
-          pageSize: number
-          pageCount: number
-          total: number
+          page: number, pageSize: number, pageCount: number, total: number
         }
       }
     }>(`/${collection}?${params.toString()}`)
@@ -356,7 +346,7 @@ export class StrapiAdapter implements BackendAdapter {
   }
 
   // Helper methods
-  private mapStrapiUser(user: any): User {
+  private mapStrapiUser(user): User {
     return {
       id: user.id.toString(),
       email: user.email,
@@ -372,14 +362,13 @@ export class StrapiAdapter implements BackendAdapter {
     }
   }
 
-  private mapStrapiProject(data: any): Project {
+  private mapStrapiProject(data): Project {
     const attributes = data.attributes || data
     return {
       id: data.id.toString(),
       userId: attributes.user?.data?.id?.toString() || attributes.user,
       name: attributes.name,
-      description: attributes.description,
-      type: attributes.type,
+      description: attributes.description: type: attributes.type,
       status: attributes.status,
       config: attributes.config,
       createdAt: attributes.createdAt,
@@ -387,7 +376,7 @@ export class StrapiAdapter implements BackendAdapter {
     }
   }
 
-  private mapStrapiRecord(data: any): any {
+  private mapStrapiRecord(data): any {
     if (!data) return data
     
     const attributes = data.attributes || data
@@ -403,11 +392,10 @@ export class StrapiAdapter implements BackendAdapter {
   async executeQuery<T>(
     collection: string,
     params: URLSearchParams
-  ): Promise<{ data: T[]; meta: any }> {
+  ): Promise<{ data: T[]; meta}> {
     const response = await this.request<{
       data: any[]
-      meta: any
-    }>(`/${collection}?${params.toString()}`)
+      meta}>(`/${collection}?${params.toString()}`)
 
     return {
       data: (response as any).data.map(this.mapStrapiRecord) as T[],
@@ -418,12 +406,12 @@ export class StrapiAdapter implements BackendAdapter {
 
 // Strapi Query Builder implementation
 class StrapiQueryBuilder<T> implements QueryBuilder<T> {
-  private params: URLSearchParams
-  private selectedFields: string[] = []
+  private, params: URLSearchParams
+  private, selectedFields: string[] = []
 
   constructor(
-    private adapter: StrapiAdapter,
-    private collection: string
+    private, adapter: StrapiAdapter,
+    private, collection: string
   ) {
     this.params = new URLSearchParams()
   }
@@ -434,7 +422,7 @@ class StrapiQueryBuilder<T> implements QueryBuilder<T> {
     return this
   }
 
-  where(field: string, operator: string, value: any): QueryBuilder<T> {
+  where(field: string, operator: string, value): QueryBuilder<T> {
     const operatorMap: Record<string, string> = {
       '=': '$eq',
       '!=': '$ne',
@@ -448,7 +436,7 @@ class StrapiQueryBuilder<T> implements QueryBuilder<T> {
 
     const strapiOperator = operatorMap[operator]
     if (!strapiOperator) {
-      throw new Error(`Unsupported operator: ${operator}`)
+      throw new Error(`Unsupported, operator: ${operator}`)
     }
 
     this.params.append(`filters[${field}][${strapiOperator}]`, value.toString())
@@ -473,7 +461,7 @@ class StrapiQueryBuilder<T> implements QueryBuilder<T> {
   }
 
   async execute(): Promise<T[]> {
-    const { data } = await (this.adapter as any).executeQuery<T>(
+    const { data } = await (this.adapter as any).executeQuery(
       this.collection,
       this.params
     )
@@ -488,7 +476,7 @@ class StrapiQueryBuilder<T> implements QueryBuilder<T> {
 
   async count(): Promise<number> {
     this.params.append('pagination[withCount]', 'true')
-    const { meta } = await (this.adapter as any).executeQuery<T>(
+    const { meta } = await (this.adapter as any).executeQuery(
       this.collection,
       this.params
     )

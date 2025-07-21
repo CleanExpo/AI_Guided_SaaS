@@ -3,6 +3,7 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { ChatRequestSchema, ChatResponseSchema, z } from '@/lib/validation'
 import { generateAIResponse } from '@/lib/ai'
+import { ValidationError } from '@/utils/validation'
 
 // Inline validation function
 function validateOrThrow<T>(schema: z.ZodType<T>, data: unknown): T {
@@ -42,10 +43,21 @@ export async function POST(req: NextRequest) {
 
   } catch (error) {
     if (error instanceof ValidationError) {
-      return NextResponse.json(error.toApiError(), { status: 400 })
+      return NextResponse.json({ 
+        error: error.message,
+        field: error.field,
+        code: error.code 
+      }, { status: 400 })
+    }
+    
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ 
+        error: 'Validation failed',
+        details: error.errors 
+      }, { status: 400 })
     }
 
-    console.error('Chat API error:', error)
+    console.error('Chat API, error:', error)
     return NextResponse.json(
       { 
         error: 'INTERNAL_ERROR',
@@ -64,7 +76,7 @@ async function processChatRequest(
   request: ChatRequest,
   userId: string
 ): Promise<ChatResponse> {
-  const { messages, projectId, model, temperature, maxTokens, stream } = request
+  const { messages, projectId, model, temperature, maxTokens } = request
 
   // Get the last user message
   const lastMessage = messages[messages.length - 1]
@@ -73,26 +85,25 @@ async function processChatRequest(
   }
 
   // Generate AI response
-  const aiResponse = await generateAIResponse(lastMessage.content, {
-    model: model || 'gpt-4',
-    temperature: temperature || 0.7,
-    maxTokens,
+  const aiResponse = await generateAIResponse({
     messages: messages.map(m => ({
       role: m.role,
       content: m.content
-    }))
+    })),
+    model: model || 'gpt-4',
+    temperature: temperature || 0.7,
+    max_tokens: maxTokens
   })
 
   // Create response message
-  const responseMessage = JSON.stringify({
-    role: 'assistant' as const,
-    content: aiResponse,
+  const responseMessage = {
+    role: 'assistant' as const content: aiResponse,
     timestamp: new Date().toISOString(),
     metadata: {
       model: model || 'gpt-4',
       tokens: maxTokens
     }
-  })
+  }
 
   // Save to project if projectId provided
   let projectUpdates: any[] = []
@@ -101,13 +112,11 @@ async function processChatRequest(
   }
 
   return {
-    message: responseMessage,
-    usage: {
-      promptTokens: 0, // Would need to calculate from actual API response
-      completionTokens: 0,
-      totalTokens: 0
-    },
-    projectUpdates
+    message: aiResponse.message,
+    metadata: {
+      model: model || 'gpt-4',
+      tokens: maxTokens
+    }
   }
 }
 
@@ -118,10 +127,9 @@ async function saveToProject(
   projectId: string,
   userId: string,
   messages: any[],
-  response: any
-): Promise<any[]> {
+  response): Promise<any[]> {
   // Implementation would save to database
-  console.log('Saving to project:', projectId)
+  console.log('Saving to, project:', projectId)
   return []
 }
 

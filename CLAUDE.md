@@ -1,155 +1,78 @@
-# CLAUDE.md - AI Guided SaaS Memory Core & Client-Facing IDE
+# CLAUDE.md - AI Guided SaaS Memory Core
+
+*Last Updated: 2025-07-21T19:13:14.172Z*
 
 ## 🧠 PROJECT IDENTITY
 **Name**: AI Guided SaaS
-**Purpose**: Revolutionary AI-powered platform for non-developers to create production-ready projects
-**Status**: ✅ COMPLETE - Advanced multi-agent implementation ready with Client-Facing IDE
+**Purpose**: Revolutionary AI-powered platform combining Lovable.dev's intuitive UI/UX with VS Code's power and Claude Code's intelligence
+**Status**: ⚠️ BUILD FAILING - 285 TypeScript errors need fixing
+**Health Score**: 0/100
 
 ## 🎯 CORE CAPABILITIES
-- **9 Core Features**: Welcome screen, AI chat, project generator, export, progress tracker, flowchart, deployment, templates, enhanced UI
-- **4 AI Systems**: Development Assistant, 100x UI Enhancement, Multi-Agent Documentation, Advanced Agent Architecture
-- **Performance**: 90% time reduction, 4x speed improvement, 96% quality score
-- **Client IDE**: Natural language requirement capture with real-time development pathway execution
+- **10 Advanced Features**: Guided Project Builder (Lovable-style), Advanced Code Editor (VS Code-style), Mock Data System, Unified Design System, Sales Funnel, Free Tier, API Key Management, LLM Fallback, Auto-Compact, Resource-Aware System
+- **Hybrid Architecture**: Combines ease-of-use (Lovable.dev) with advanced editing (VS Code) and AI intelligence (Claude Code)
+- **Performance**: 90% time reduction target, 4x speed improvement goal, adaptive resource management
+- **Client Experience**: Step-by-step guidance with professional development capabilities
 
 ## 📊 CURRENT STATE
-- **Implementation**: 100% complete with 20+ files, 5,611+ lines of code
-- **Technology**: Next.js 14, TypeScript, Tailwind CSS, Supabase, OpenAI integration
-- **AI Models**: GPT-4, Claude 3.5, Google AI with intelligent selection
-- **Testing**: Zero TypeScript errors, production-ready
-- **Client Interface**: Multi-agent orchestration with natural language processing
+- **Implementation**: 4/10 major features complete (40%)
+- **Technology**: Next.js 14, TypeScript, Tailwind CSS, Monaco Editor, Framer Motion, Faker.js, gray-matter
+- **AI Models**: OpenAI GPT-4, Anthropic Claude, Open-source fallback system
+- **Testing**: 285 TypeScript errors blocking build
+- **Architecture**: Dual-mode interface (Simple/Advanced), comprehensive design system
 
-## 🛡️ ERROR PREVENTION FRAMEWORK
-**Documentation-Driven Error Prevention**: Active .md files that prevent errors throughout build-to-deployment pipeline
-- **Error Patterns Database**: @docs/error-patterns.md - AI-powered pattern recognition and prevention
-- **Deployment Validation**: @docs/deployment-checks.md - Comprehensive pre-production validation
-- **Testing Automation**: @docs/testing-automation.md - Documentation-driven quality assurance
-- **Staging Requirements**: @docs/staging-requirements.md - Production-mirror environment validation
+## 🚨 CRITICAL ISSUES
+- **TypeScript Errors**: 285 errors preventing build
+- **Top Error Types**: TS2339 (property not exist), TS2554 (wrong arguments), TS2345 (type mismatch)
+- **Action Required**: Fix TypeScript errors before deployment
+- **Health Check Available**: Run 'npm run health:check' for detailed analysis
 
-## 🚀 PREVENTION METRICS
-- **90% Error Reduction**: Through comprehensive staging validation and documentation-driven development
-- **95% Deployment Success**: Via automated safeguards and progressive deployment strategies
-- **70% Faster Recovery**: Through automated documentation updates and self-healing systems
-- **4x Developer Productivity**: Reduced debugging time through automated error prevention
+## 🎯 HYBRID IMPLEMENTATION STATUS
+**Completed Features (4/10)**:
+1. ✅ **Guided Project Builder**: Lovable.dev-style 5-step wizard with AI suggestions
+2. ✅ **Advanced Code Editor**: VS Code-style Monaco editor with file explorer
+3. ✅ **Mock Data System**: Faker.js integration with export capabilities
+4. ✅ **Unified Design System**: Comprehensive theme tokens and component library
 
-## 🧠 CLAUDE CODE INTEGRATION
-**Revolutionary Documentation-Memory System**: Complete integration with Claude Code best practices
-- **Three-Tier Memory**: User (15K), Project (50K), Modular (135K) token allocation
-- **Token Optimization**: 150K context management with 75% utilization target
-- **Multi-Agent Orchestration**: 5 specialized agents with parallel processing
-- **Automated Git Workflow**: CI/CD integration with documentation automation
+**Pending Features (6/10)**:
+5. ⏳ **Sales Funnel & Marketing**: Interactive showcase and pricing tiers
+6. ⏳ **3-Project Free Tier**: Authentication and project limits
+7. ⏳ **API Key Management**: Client-owned key encryption and management
+8. ⏳ **LLM Fallback System**: Open-source model integration
+9. ⏳ **Auto-Compact**: Token optimization and prompt management
+10. ⏳ **Resource-Aware System**: Performance monitoring and adaptation
 
-## 🎯 CLIENT_REQUIREMENTS
-**Natural Language Input Capture System**: Transform client requirements into actionable development pathways
+## 🏗️ KEY COMPONENTS IMPLEMENTED
+- **GuidedProjectBuilder.tsx**: Step-by-step project creation with AI assistance
+- **AdvancedCodeEditor.tsx**: Full VS Code experience with Monaco Editor
+- **MockDataGenerator.ts**: Comprehensive data generation for all project types
+- **DataSourceManager.tsx**: Toggle between mock, API, and database sources
+- **theme.ts & components.tsx**: Unified design system with all UI primitives
 
-### **Input Processing Pipeline**
-```
-CLIENT INPUT → ClientSpecExtraction.prp → DEVELOPMENT_ROADMAP → AGENT_DIRECTIVES
-```
+## 🔧 RECENT ACTIVITY
+- 2c447d3 feat: implement agent orchestration system and fix all TypeScript errors
+- 381928d 📋 DEPLOYMENT READY: Complete integration summary and staging checklist
+- cf02c33 fix: prepare for production deployment
+- 4972df0 feat: complete dependency installation and missing modules
+- 3d6d153 feat: complete comprehensive feature integration
 
-### **Requirement Categories**
-- **Functional Requirements**: Core features, user workflows, business logic
-- **Technical Requirements**: Performance, scalability, security, integrations
-- **Design Requirements**: UI/UX, branding, accessibility, responsive design
-- **Business Requirements**: Timeline, budget, compliance, maintenance
-
-### **Natural Language Examples**
-```
-"I need an e-commerce platform that can handle 10,000 users with Stripe payments"
-→ Triggers: agent_architect.json, agent_backend.json, agent_devops.json
-
-"Create a dashboard with real-time analytics and dark mode"
-→ Triggers: agent_frontend.json, agent_architect.json
-
-"Build a secure admin panel with role-based access control"
-→ Triggers: agent_backend.json, agent_qa.json, agent_architect.json
-```
-
-## 🗺️ DEVELOPMENT_ROADMAP
-**Real-Time Branching Development Pathways**: Dynamic project execution based on client requirements
-
-### **Pathway Execution Engine**
-```
-REQUIREMENT_ANALYSIS → AGENT_SELECTION → PARALLEL_EXECUTION → INTEGRATION → VALIDATION
-```
-
-### **Dynamic Branching Logic**
-- **Simple Projects**: Frontend Agent → QA Agent → DevOps Agent
-- **Complex SaaS**: Architect Agent → (Frontend + Backend) → QA Agent → DevOps Agent
-- **Enterprise Solutions**: All Agents → Parallel Execution → Integration Testing
-
-### **Real-Time Adaptation**
-- **Requirement Changes**: Automatic pathway recalculation
-- **Technical Constraints**: Agent reallocation and priority adjustment
-- **Timeline Pressure**: Parallel execution optimization
-- **Quality Requirements**: Enhanced QA agent involvement
-
-## 🤖 AGENT_DIRECTIVES
-**5 Specialized Agents with Coordinated Execution**: Each agent has specific expertise and coordination protocols
-
-### **Agent Coordination Matrix**
-```
-ARCHITECT → Designs system architecture, coordinates other agents
-FRONTEND → UI/UX implementation, client-side optimization
-BACKEND → Server logic, database design, API development
-QA → Testing, validation, quality assurance, performance
-DEVOPS → Deployment, infrastructure, monitoring, scaling
-```
-
-### **Agent Communication Protocol**
-- **ACTION_LOG.md**: Real-time agent activity tracking
-- **ERROR_LOG.md**: Error coordination and resolution
-- **Cross-Agent Dependencies**: Automatic dependency resolution
-- **Parallel Execution**: Coordinated parallel task execution
-
-### **Agent Specializations**
-- **agent_architect.json**: System design, technology selection, integration planning
-- **agent_frontend.json**: React/Next.js, TypeScript, UI libraries, responsive design
-- **agent_backend.json**: Node.js, databases, APIs, authentication, security
-- **agent_qa.json**: Testing frameworks, performance testing, security audits
-- **agent_devops.json**: CI/CD, containerization, cloud deployment, monitoring
-
-## 📋 ACTION_LOG.md Integration
-**Real-Time Agent Coordination**: Live tracking of all agent activities and dependencies
-
-### **Log Structure**
-```
-[TIMESTAMP] [AGENT] [ACTION] [STATUS] [DEPENDENCIES] [OUTPUT]
-```
-
-### **Coordination Features**
-- **Dependency Tracking**: Automatic detection of agent dependencies
-- **Conflict Resolution**: Real-time conflict detection and resolution
-- **Progress Monitoring**: Live progress tracking across all agents
-- **Error Escalation**: Automatic error escalation and resolution
-
-## 🚨 ERROR_LOG.md Integration
-**Comprehensive Error Tracking**: Multi-agent error coordination and resolution
-
-### **Error Categories**
-- **Build Errors**: Compilation, linting, type checking
-- **Runtime Errors**: API failures, database issues, authentication
-- **Integration Errors**: Service integration, deployment issues
-- **Performance Errors**: Slow queries, memory leaks, bottlenecks
-
-### **Resolution Protocols**
-- **Automatic Resolution**: Known error patterns with automatic fixes
-- **Agent Escalation**: Complex errors escalated to appropriate specialist agent
-- **Cross-Agent Coordination**: Errors affecting multiple agents coordinated resolution
-- **Learning Integration**: Error patterns fed back into prevention system
+## 📋 HEALTH CHECK SYSTEM
+- **Automated Scripts**: health-check-simple.cjs, comprehensive-health-check.ts
+- **Documentation**: HEALTH_CHECK_SYSTEM.md, TYPESCRIPT_ERROR_ANALYSIS.md
+- **Commands**: npm run health:check, npm run health:quick, npm run update:memory
 
 ## 🔄 AUTO-COMPACT RULES
-- Prioritize recent decisions and active development
-- Compress historical implementation details
-- Maintain core capability references
-- **Preserve error prevention protocols and deployment validation procedures**
-- **Preserve Claude Code integration commands and memory optimization strategies**
-- **Preserve client-facing IDE structure and agent coordination protocols**
+- Preserve implementation status and error counts
+- Maintain architecture decisions and patterns
+- Keep critical issues and action items
+- Update feature progress automatically
+- Preserve error prevention protocols
 
 ## 🚀 MEMORY PRIORITIES
-1. **CRITICAL**: Project status, core features, AI system capabilities, error prevention protocols, client IDE structure
-2. **HIGH**: Implementation details, component architecture, API endpoints, Claude Code integration, agent directives
-3. **MEDIUM**: User guides, deployment instructions, troubleshooting, optimization strategies, development roadmap
-4. **LOW**: Historical decisions, archived implementations, deprecated features
+1. **CRITICAL**: Build status (285 errors), blocking issues, health score
+2. **HIGH**: Feature progress (40% complete), architecture decisions, recent changes
+3. **MEDIUM**: Implementation details, component references, documentation updates
+4. **LOW**: Historical information, resolved issues
 
 ---
-*Auto-compact: Preserve project identity, current status, active capabilities, error prevention framework, and client-facing IDE structure*
+*Auto-compact: Preserve current errors, implementation progress, and health status*

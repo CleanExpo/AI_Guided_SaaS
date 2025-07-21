@@ -33,8 +33,7 @@ export const filterComponentsByScore = (
       causalScore: score,
       confidence,
       suggested: score >= 0.7 && confidence !== 'low',
-      deprioritize: score < 0.4 && confidence !== 'low',
-    };
+      deprioritize: score < 0.4 && confidence !== 'low'};
   });
 };
 
@@ -82,12 +81,12 @@ export const generateCausalContext = (page: string = 'ui-builder'): string => {
   
   if (topComponents.length > 0) {
     const topTypes = topComponents.map(c => c.key.split(':')[1]).join(', ');
-    context += `High-performing components: ${topTypes}. `;
+    context += `High-performing, components: ${topTypes}. `;
   }
   
   if (lowComponents.length > 0) {
     const lowTypes = lowComponents.map(c => c.key.split(':')[1]).join(', ');
-    context += `Avoid suggesting: ${lowTypes} (poor user retention). `;
+    context += `Avoid, suggesting: ${lowTypes} (poor user retention). `;
   }
   
   return context;
@@ -108,7 +107,6 @@ export const logAssistantInteraction = (
       page,
       promptContext: prompt,
       action: 'added',
-      timestamp: Date.now(),
-    });
+      timestamp: Date.now()});
   });
 };

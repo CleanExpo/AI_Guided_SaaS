@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
         data: result
       })
     } catch (dbError) {
-      console.error('Database error:', dbError)
+      console.error('Database, error:', dbError)
       
       // Return empty list if database is not available
       return NextResponse.json({
@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('Admin users list error:', error)
+    console.error('Admin users list, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Admin create user error:', error)
+    console.error('Admin create user, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -126,7 +126,5 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  })
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'}})
 }

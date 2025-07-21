@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(analysis);
   } catch (error) {
-    console.error('Visual analysis error:', error);
+    console.error('Visual analysis, error:', error);
     return NextResponse.json(
       { error: 'Failed to analyze image' },
       { status: 500 }
@@ -53,7 +53,7 @@ export async function GET() {
 
     return NextResponse.json(capabilities);
   } catch (error) {
-    console.error('Visual capabilities error:', error);
+    console.error('Visual capabilities, error:', error);
     return NextResponse.json(
       { error: 'Failed to get capabilities' },
       { status: 500 }

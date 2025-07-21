@@ -6,23 +6,14 @@ import { NextRequest } from 'next/server'
 import { logAdmin, logWarn } from './production-logger'
 
 export interface AdminUser {
-  id: string
-  email: string
-  name: string
-  role: 'super_admin' | 'admin' | 'moderator'
+  id: string, email: string, name: string, role: 'super_admin' | 'admin' | 'moderator'
   status: 'active' | 'suspended' | 'pending'
-  lastLogin: Date
-  createdAt: Date
-  permissions: string[]
+  lastLogin: Date, createdAt: Date, permissions: string[]
 }
 
 export interface AdminSession {
-  adminId: string
-  email: string
-  role: string
-  permissions: string[]
-  iat: number
-  exp: number
+  adminId: string, email: string, role: string, permissions: string[]
+  iat: number, exp: number
 }
 
 // Master admin credentials from environment
@@ -36,9 +27,7 @@ const MASTER_ADMIN = {
   id: 'master_admin_001',
   email: process.env.ADMIN_EMAIL || 'admin@aiguidedSaaS.com',
   name: 'Master Administrator',
-  role: 'super_admin' as const,
-  status: 'active' as const,
-  password: process.env.ADMIN_PASSWORD || 'AdminSecure2024!',
+  role: 'super_admin' as const status: 'active' as const password: process.env.ADMIN_PASSWORD || 'AdminSecure2024!',
   permissions: [
     'manage_users',
     'moderate_content',
@@ -51,9 +40,9 @@ const MASTER_ADMIN = {
 }
 
 export class AdminAuthService {
-  private static instance: AdminAuthService
-  private jwtSecret: string
-  private sessionSecret: string
+  private static, instance: AdminAuthService
+  private, jwtSecret: string
+  private, sessionSecret: string
 
   constructor() {
     this.jwtSecret = process.env.ADMIN_JWT_SECRET || 'AdminJWT2024SecureTokenKey!@#$%^&*()'
@@ -77,14 +66,13 @@ export class AdminAuthService {
       }
 
       // Check master admin credentials - allow any of the valid admin emails
-      console.log('Admin login attempt:', { email, adminPanelEnabled: process.env.ENABLE_ADMIN_PANEL })
+      console.log('Admin login, attempt:', { email, adminPanelEnabled: process.env.ENABLE_ADMIN_PANEL })
       
       if (MASTER_ADMIN_EMAILS.includes(email) && password === MASTER_ADMIN.password) {
-        console.log('Admin login successful for:', email)
+        console.log('Admin login successful, for:', email)
         return {
           id: MASTER_ADMIN.id,
-          email: email, // Use the email they logged in with
-          name: MASTER_ADMIN.name,
+          email: email, // Use the email they logged in with, name: MASTER_ADMIN.name,
           role: MASTER_ADMIN.role,
           status: MASTER_ADMIN.status,
           lastLogin: new Date(),
@@ -98,7 +86,7 @@ export class AdminAuthService {
       logWarn('Invalid admin credentials provided', { email })
       return null
     } catch (error) {
-      console.error('Error authenticating admin:', error)
+      console.error('Error authenticating, admin:', error)
       return null
     }
   }
@@ -114,12 +102,11 @@ export class AdminAuthService {
       }
 
       return jwt.sign(payload, this.jwtSecret, {
-        expiresIn: '8h', // 8 hour session
-        issuer: 'ai-guided-saas-admin',
+        expiresIn: '8h', // 8 hour session, issuer: 'ai-guided-saas-admin',
         audience: 'admin-panel'
       })
     } catch (error) {
-      console.error('Error generating admin token:', error)
+      console.error('Error generating admin, token:', error)
       throw new Error('Failed to generate admin token')
     }
   }
@@ -134,7 +121,7 @@ export class AdminAuthService {
 
       return decoded
     } catch (error) {
-      console.error('Error verifying admin token:', error)
+      console.error('Error verifying admin, token:', error)
       return null
     }
   }
@@ -151,12 +138,12 @@ export class AdminAuthService {
       // Check cookies
       const tokenCookie = request.cookies.get('admin-token')
       if (tokenCookie) {
-        return tokenCookie.value
+        return, tokenCookie.value
       }
 
       return null
     } catch (error) {
-      console.error('Error extracting admin token:', error)
+      console.error('Error extracting admin, token:', error)
       return null
     }
   }
@@ -171,7 +158,7 @@ export class AdminAuthService {
 
       const session = this.verifyAdminToken(token)
       if (!session) {
-        return null
+        return, null
       }
 
       // Additional security checks
@@ -182,7 +169,7 @@ export class AdminAuthService {
 
       return session
     } catch (error) {
-      console.error('Error verifying admin session:', error)
+      console.error('Error verifying admin, session:', error)
       return null
     }
   }
@@ -198,7 +185,7 @@ export class AdminAuthService {
       // Check specific permission
       return session.permissions.includes(permission)
     } catch (error) {
-      console.error('Error checking admin permission:', error)
+      console.error('Error checking admin, permission:', error)
       return false
     }
   }
@@ -209,7 +196,7 @@ export class AdminAuthService {
       const saltRounds = 12
       return await bcrypt.hash(password, saltRounds)
     } catch (error) {
-      console.error('Error hashing password:', error)
+      console.error('Error hashing, password:', error)
       throw new Error('Failed to hash password')
     }
   }
@@ -219,7 +206,7 @@ export class AdminAuthService {
     try {
       return await bcrypt.compare(password, hash)
     } catch (error) {
-      console.error('Error verifying password:', error)
+      console.error('Error verifying, password:', error)
       return false
     }
   }
@@ -256,7 +243,7 @@ export class AdminAuthService {
       // You could also send to monitoring service
       // await monitoringService.logAdminActivity(activity)
     } catch (error) {
-      console.error('Error logging admin activity:', error)
+      console.error('Error logging admin, activity:', error)
     }
   }
 
@@ -280,7 +267,7 @@ export class AdminAuthService {
       // In production, query database for other admin accounts
       return null
     } catch (error) {
-      console.error('Error getting admin by ID:', error)
+      console.error('Error getting admin, by: ID:', error)
       return null
     }
   }
@@ -308,7 +295,7 @@ export class AdminAuthService {
 
       return { session }
     } catch (error) {
-      console.error('Error validating and refreshing session:', error)
+      console.error('Error validating and refreshing, session:', error)
       return { session: null }
     }
   }
@@ -352,7 +339,7 @@ export async function requireAdminAuth(
       session
     }
   } catch (error) {
-    console.error('Error in admin auth middleware:', error)
+    console.error('Error in admin auth, middleware:', error)
     return {
       authorized: false,
       error: 'Authentication error'

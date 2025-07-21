@@ -63,8 +63,7 @@ export default function NoCodeBuilder() {
     { icon: Square, label: 'Button', type: 'button' },
     { icon: Image, label: 'Image', type: 'image' },
     { icon: Square, label: 'Card', type: 'card' },
-    { icon: Grid3X3, label: 'Grid', type: 'grid' },
-  ];
+    { icon: Grid3X3, label: 'Grid', type: 'grid' }];
 
   const viewportSizes = {
     desktop: 'w-full',
@@ -72,7 +71,7 @@ export default function NoCodeBuilder() {
     mobile: 'max-w-sm'
   };
 
-  const handleDragStart = (e: React.DragEvent, type: string) => {
+  const handleDragStart = (e: React.DragEvent: type: string) => {
     e.dataTransfer.setData('componentType', type);
     setIsDragging(true);
   };
@@ -105,9 +104,9 @@ export default function NoCodeBuilder() {
   };
 
   return (
-    <div className="h-screen flex bg-gray-50 dark:bg-gray-950">
+    <div className="h-screen flex bg-gray-50, dark:bg-gray-950">
       {/* Left Sidebar - Component Library */}
-      <div className="w-64 bg-white dark:bg-gray-900 border-r p-4">
+      <div className="w-64 bg-white, dark:bg-gray-900 border-r p-4">
         <h3 className="font-semibold mb-4 flex items-center gap-2">
           <Layers className="w-4 h-4" />
           Components
@@ -120,7 +119,7 @@ export default function NoCodeBuilder() {
                 key={comp.type}
                 draggable
                 onDragStart={(e) => handleDragStart(e, comp.type)}
-                className="p-4 cursor-move hover:shadow-lg transition-all hover:scale-105 hover:border-purple-500"
+                className="p-4 cursor-move, hover:shadow-lg transition-all, hover:scale-105, hover:border-purple-500"
               >
                 <div className="flex flex-col items-center gap-2">
                   <comp.icon className="w-6 h-6 text-purple-500" />
@@ -149,7 +148,7 @@ export default function NoCodeBuilder() {
       {/* Center - Canvas */}
       <div className="flex-1 flex flex-col">
         {/* Top Toolbar */}
-        <div className="bg-white dark:bg-gray-900 border-b px-4 py-2">
+        <div className="bg-white, dark:bg-gray-900 border-b px-4 py-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm">
@@ -161,7 +160,7 @@ export default function NoCodeBuilder() {
               <Separator orientation="vertical" className="h-6" />
               
               {/* Viewport Switcher */}
-              <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-md p-1">
+              <div className="flex items-center gap-1 bg-gray-100, dark:bg-gray-800 rounded-md p-1">
                 <Button
                   variant={currentView === 'desktop' ? 'default' : 'ghost'}
                   size="sm"
@@ -202,11 +201,11 @@ export default function NoCodeBuilder() {
                 <Eye className="w-4 h-4 mr-2" />
                 Preview
               </Button>
-              <Button size="sm" className="bg-purple-500 hover:bg-purple-600">
+              <Button size="sm" className="bg-purple-500, hover:bg-purple-600">
                 <Save className="w-4 h-4 mr-2" />
                 Save
               </Button>
-              <Button size="sm" className="bg-green-500 hover:bg-green-600">
+              <Button size="sm" className="bg-green-500, hover:bg-green-600">
                 <Play className="w-4 h-4 mr-2" />
                 Publish
               </Button>
@@ -215,11 +214,11 @@ export default function NoCodeBuilder() {
         </div>
 
         {/* Canvas Area */}
-        <div className="flex-1 overflow-auto p-8 bg-gray-100 dark:bg-gray-950">
+        <div className="flex-1 overflow-auto p-8 bg-gray-100, dark:bg-gray-950">
           <div className={cn("mx-auto transition-all", viewportSizes[currentView])}>
             <div
               className={cn(
-                "min-h-[600px] bg-white dark:bg-gray-900 rounded-lg shadow-xl border-2 transition-all",
+                "min-h-[600px] bg-white, dark:bg-gray-900 rounded-lg shadow-xl border-2 transition-all",
                 isDragging && "border-purple-500 border-dashed",
                 showGrid && "bg-grid-pattern"
               )}
@@ -241,7 +240,7 @@ export default function NoCodeBuilder() {
                   <div
                     key={component.id}
                     className={cn(
-                      "relative group cursor-pointer border-2 border-transparent hover:border-purple-500 p-4 rounded",
+                      "relative group cursor-pointer border-2 border-transparent, hover:border-purple-500 p-4 rounded",
                       selectedComponent === component.id && "border-purple-500"
                     )}
                     onClick={() => setSelectedComponent(component.id)}
@@ -284,7 +283,7 @@ export default function NoCodeBuilder() {
       </div>
 
       {/* Right Sidebar - Properties Panel */}
-      <div className="w-80 bg-white dark:bg-gray-900 border-l p-4">
+      <div className="w-80 bg-white, dark:bg-gray-900 border-l p-4">
         <Tabs defaultValue="properties">
           <TabsList className="w-full">
             <TabsTrigger value="properties" className="flex-1">Properties</TabsTrigger>

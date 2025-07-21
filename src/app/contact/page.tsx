@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact - AI Guided SaaS Platform',
-  description: 'Get in touch with our team',
-};
+  description: 'Get in touch with our team'};
 
 export default function ContactPage() {
   return (
@@ -14,7 +13,7 @@ export default function ContactPage() {
           Get in touch with our team. We&apos;d love to hear from you.
         </p>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8, md:grid-cols-2">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
             <div className="space-y-4">

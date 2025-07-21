@@ -3,47 +3,29 @@ import { generateAIResponse } from '@/lib/ai'
 import { RequirementAnalysis, UserStory } from './AnalystAgent'
 
 export interface ProjectPlan {
-  projectName: string
-  projectDescription: string
-  timeline: Timeline
-  milestones: Milestone[]
+  projectName: string, projectDescription: string, timeline: Timeline, milestones: Milestone[]
   workBreakdown: WorkPackage[]
-  resourceAllocation: ResourcePlan
-  riskMitigation: RiskMitigation[]
-  communicationPlan: CommunicationPlan
-  qualityAssurance: QualityPlan
+  resourceAllocation: ResourcePlan, riskMitigation: RiskMitigation[]
+  communicationPlan: CommunicationPlan, qualityAssurance: QualityPlan
 }
 
 export interface Timeline {
-  startDate: string
-  endDate: string
-  totalDuration: string
-  phases: Phase[]
+  startDate: string, endDate: string, totalDuration: string, phases: Phase[]
 }
 
 export interface Phase {
-  name: string
-  startDate: string
-  endDate: string
-  deliverables: string[]
+  name: string, startDate: string, endDate: string, deliverables: string[]
   dependencies: string[]
 }
 
 export interface Milestone {
-  id: string
-  name: string
-  date: string
-  criteria: string[]
+  id: string, name: string, date: string, criteria: string[]
   deliverables: string[]
 }
 
 export interface WorkPackage {
-  id: string
-  name: string
-  description: string
-  assignedTo: string[]
-  estimatedHours: number
-  dependencies: string[]
+  id: string, name: string, description: string, assignedTo: string[]
+  estimatedHours: number, dependencies: string[]
   deliverables: string[]
   priority: 'critical' | 'high' | 'medium' | 'low'
 }
@@ -56,40 +38,31 @@ export interface ResourcePlan {
 }
 
 export interface TeamMember {
-  role: string
-  responsibilities: string[]
+  role: string, responsibilities: string[]
   skillsNeeded: string[]
   allocation: number // percentage
 }
 
 export interface RiskMitigation {
-  risk: string
-  probability: 'high' | 'medium' | 'low'
+  risk: string, probability: 'high' | 'medium' | 'low'
   impact: 'high' | 'medium' | 'low'
-  mitigationStrategy: string
-  contingencyPlan: string
-  owner: string
+  mitigationStrategy: string, contingencyPlan: string, owner: string
 }
 
 export interface CommunicationPlan {
   stakeholders: Stakeholder[]
   meetings: Meeting[]
-  reportingSchedule: string
-  escalationPath: string[]
+  reportingSchedule: string, escalationPath: string[]
 }
 
 export interface Stakeholder {
-  name: string
-  role: string
-  interest: 'high' | 'medium' | 'low'
+  name: string, role: string, interest: 'high' | 'medium' | 'low'
   influence: 'high' | 'medium' | 'low'
   communicationNeeds: string[]
 }
 
 export interface Meeting {
-  type: string
-  frequency: string
-  participants: string[]
+  type: string, frequency: string, participants: string[]
   purpose: string
 }
 
@@ -141,36 +114,36 @@ export class ProjectManagerAgent extends Agent {
         userStoryCount: userStories.length 
       })
 
-      // Step 1: Define project scope and objectives
+      // Step, 1: Define project scope and objectives
       const projectScope = await this.defineProjectScope(input, requirements)
       this.observe('Defined project scope', projectScope)
 
-      // Step 2: Create timeline and phases
+      // Step, 2: Create timeline and phases
       const timeline = await this.createTimeline(projectScope, userStories, constraints)
       this.observe('Created project timeline', timeline)
 
-      // Step 3: Define milestones
+      // Step, 3: Define milestones
       const milestones = await this.defineMilestones(timeline, userStories)
       this.observe('Defined project milestones', milestones)
 
-      // Step 4: Create work breakdown structure
+      // Step, 4: Create work breakdown structure
       const workBreakdown = await this.createWorkBreakdown(userStories, milestones)
       this.observe('Created work breakdown structure', { packageCount: workBreakdown.length })
 
-      // Step 5: Plan resource allocation
+      // Step, 5: Plan resource allocation
       const resourcePlan = await this.planResources(workBreakdown, timeline)
       this.observe('Planned resource allocation', resourcePlan)
 
-      // Step 6: Develop risk mitigation strategies
+      // Step, 6: Develop risk mitigation strategies
       const risks = this.getSharedMemory('identified-risks') || []
       const riskMitigation = await this.planRiskMitigation(risks, projectScope)
       this.observe('Developed risk mitigation plans', { riskCount: riskMitigation.length })
 
-      // Step 7: Create communication plan
+      // Step, 7: Create communication plan
       const communicationPlan = await this.createCommunicationPlan(projectScope, resourcePlan)
       this.observe('Created communication plan', communicationPlan)
 
-      // Step 8: Define quality assurance plan
+      // Step, 8: Define quality assurance plan
       const qualityPlan = await this.defineQualityPlan(requirements, userStories)
       this.observe('Defined quality assurance plan', qualityPlan)
 
@@ -211,7 +184,7 @@ export class ProjectManagerAgent extends Agent {
       }
 
     } catch (error) {
-      this.think(`Error during project planning: ${error}`)
+      this.think(`Error during project, planning: ${error}`)
       throw error
     }
   }
@@ -220,12 +193,12 @@ export class ProjectManagerAgent extends Agent {
     input: string, 
     requirements: string[]
   ): Promise<{ name: string; description: string; objectives: string[] }> {
-    const prompt = `Based on the project description and requirements, define the project scope:
+    const prompt = `Based on the project description and requirements, define the project, scope:
 
-Project Description:
+Project, Description:
 ${input}
 
-Key Requirements:
+Key, Requirements:
 ${requirements.join('\n')}
 
 Provide:
@@ -245,23 +218,20 @@ Format as JSON.`
   }
 
   private async createTimeline(
-    projectScope: any,
+    projectScope,
     userStories: UserStory[],
     constraints: string[]
   ): Promise<Timeline> {
-    const prompt = `Create a realistic project timeline based on:
+    const prompt = `Create a realistic project timeline based, on:
 
 Project: ${projectScope.name}
-User Stories: ${userStories.length} stories
-Constraints: ${constraints.join(', ')}
+User, Stories: ${userStories.length} stories, Constraints: ${constraints.join(', ')}
 
 Consider:
 - Complexity of user stories
 - Dependencies between features
 - Testing and deployment time
-- Buffer for unexpected issues
-
-Provide:
+- Buffer for unexpected issues, Provide:
 - Start and end dates
 - Total duration
 - Project phases with dates and deliverables
@@ -281,15 +251,15 @@ Format as JSON with a Timeline structure.`
     timeline: Timeline,
     userStories: UserStory[]
   ): Promise<Milestone[]> {
-    const prompt = `Define project milestones based on the timeline and user stories:
+    const prompt = `Define project milestones based on the timeline and user, stories:
 
-Timeline Phases:
+Timeline, Phases:
 ${JSON.stringify(timeline.phases, null, 2)}
 
-High-Priority User Stories:
+High-Priority User, Stories:
 ${userStories.filter(s => s.priority === 'high').map(s => s.title).join('\n')}
 
-Create 4-6 major milestones with:
+Create 4-6 major milestones, with:
 - Clear success criteria
 - Specific deliverables
 - Target dates aligned with phases
@@ -303,7 +273,7 @@ Format as JSON array of Milestone objects.`
     })
 
     const milestones = JSON.parse(response)
-    return milestones.map((m: any, index: number) => ({
+    return milestones.map((m, index: number) => ({
       ...m,
       id: `M${index + 1}`
     }))
@@ -313,15 +283,15 @@ Format as JSON array of Milestone objects.`
     userStories: UserStory[],
     milestones: Milestone[]
   ): Promise<WorkPackage[]> {
-    const prompt = `Create a work breakdown structure for the project:
+    const prompt = `Create a work breakdown structure for the, project:
 
-User Stories:
+User, Stories:
 ${JSON.stringify(userStories, null, 2)}
 
 Milestones:
 ${JSON.stringify(milestones, null, 2)}
 
-Break down the work into packages that:
+Break down the work into packages, that:
 - Map to user stories and milestones
 - Have clear deliverables
 - Include effort estimates in hours
@@ -337,7 +307,7 @@ Format as JSON array of WorkPackage objects.`
     })
 
     const packages = JSON.parse(response)
-    return packages.map((p: any, index: number) => ({
+    return packages.map((p, index: number) => ({
       ...p,
       id: `WP-${index + 1}`
     }))
@@ -347,9 +317,9 @@ Format as JSON array of WorkPackage objects.`
     workPackages: WorkPackage[],
     timeline: Timeline
   ): Promise<ResourcePlan> {
-    const prompt = `Plan resource allocation for the project:
+    const prompt = `Plan resource allocation for the, project:
 
-Work Packages:
+Work, Packages:
 ${JSON.stringify(workPackages.map(wp => ({
   name: wp.name,
   estimatedHours: wp.estimatedHours,
@@ -379,12 +349,11 @@ Format as JSON ResourcePlan object.`
 
   private async planRiskMitigation(
     risks: string[],
-    projectScope: any
-  ): Promise<RiskMitigation[]> {
-    const prompt = `Create risk mitigation plans for identified risks:
+    projectScope): Promise<RiskMitigation[]> {
+    const prompt = `Create risk mitigation plans for identified, risks:
 
 Project: ${projectScope.name}
-Identified Risks:
+Identified, Risks:
 ${risks.join('\n')}
 
 For each risk, provide:
@@ -406,13 +375,13 @@ Format as JSON array of RiskMitigation objects.`
   }
 
   private async createCommunicationPlan(
-    projectScope: any,
+    projectScope,
     resourcePlan: ResourcePlan
   ): Promise<CommunicationPlan> {
-    const prompt = `Create a communication plan for the project:
+    const prompt = `Create a communication plan for the, project:
 
 Project: ${projectScope.name}
-Team Structure:
+Team, Structure:
 ${JSON.stringify(resourcePlan.teamStructure, null, 2)}
 
 Define:
@@ -436,12 +405,12 @@ Format as JSON CommunicationPlan object.`
     requirements: string[],
     userStories: UserStory[]
   ): Promise<QualityPlan> {
-    const prompt = `Define a quality assurance plan:
+    const prompt = `Define a quality assurance, plan:
 
-Key Requirements:
+Key, Requirements:
 ${requirements.slice(0, 10).join('\n')}
 
-Acceptance Criteria from User Stories:
+Acceptance Criteria from User, Stories:
 ${userStories.slice(0, 5).map(s => s.acceptanceCriteria.join(', ')).join('\n')}
 
 Include:

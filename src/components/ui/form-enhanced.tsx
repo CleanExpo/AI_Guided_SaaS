@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 import { CheckIcon, AlertIcon, ErrorIcon } from './icons';
 
 // Enhanced Input Component
@@ -22,25 +22,22 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const inputVariants = {
   default: 'border border-input bg-background',
-  filled: 'border-0 bg-brand-secondary-100 dark:bg-brand-secondary-800',
+  filled: 'border-0 bg-brand-secondary-100, dark:bg-brand-secondary-800',
   underlined: 'border-0 border-b-2 border-input bg-transparent rounded-none',
-  outlined: 'border-2 border-input bg-background',
-};
+  outlined: 'border-2 border-input bg-background'};
 
 const inputSizes = {
   xs: 'h-7 px-2 text-xs',
   sm: 'h-8 px-3 text-sm',
   md: 'h-9 px-3 text-sm',
   lg: 'h-10 px-4 text-base',
-  xl: 'h-12 px-4 text-lg',
-};
+  xl: 'h-12 px-4 text-lg'};
 
 const inputStates = {
   default: '',
-  error: 'border-red-500 focus:border-red-500 focus:ring-red-500',
-  success: 'border-green-500 focus:border-green-500 focus:ring-green-500',
-  warning: 'border-yellow-500 focus:border-yellow-500 focus:ring-yellow-500',
-};
+  error: 'border-red-500, focus:border-red-500, focus:ring-red-500',
+  success: 'border-green-500, focus:border-green-500, focus:ring-green-500',
+  warning: 'border-yellow-500, focus:border-yellow-500, focus:ring-yellow-500'};
 
 export function InputEnhanced({
   className,
@@ -100,7 +97,7 @@ export function InputEnhanced({
 
       <div className="relative flex items-center">
         {leftAddon && (
-          <div className="flex items-center px-3 border border-r-0 border-input bg-brand-secondary-50 dark:bg-brand-secondary-900 rounded-l-md">
+          <div className="flex items-center px-3 border border-r-0 border-input bg-brand-secondary-50, dark:bg-brand-secondary-900 rounded-l-md">
             {leftAddon}
           </div>
         )}
@@ -115,7 +112,7 @@ export function InputEnhanced({
           <input
             id={inputId}
             className={cn(
-              'flex w-full rounded-md font-medium ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+              'flex w-full rounded-md font-medium ring-offset-background, file:border-0, file:bg-transparent, file:text-sm, file:font-medium, placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:cursor-not-allowed, disabled:opacity-50',
               inputVariants[variant],
               inputSizes[inputSize],
               inputStates[hasError ? 'error' : state],
@@ -136,7 +133,7 @@ export function InputEnhanced({
         </div>
 
         {rightAddon && (
-          <div className="flex items-center px-3 border border-l-0 border-input bg-brand-secondary-50 dark:bg-brand-secondary-900 rounded-r-md">
+          <div className="flex items-center px-3 border border-l-0 border-input bg-brand-secondary-50, dark:bg-brand-secondary-900 rounded-r-md">
             {rightAddon}
           </div>
         )}
@@ -196,15 +193,13 @@ export function TextareaEnhanced({
   const textareaSizes = {
     sm: 'min-h-[60px] px-3 py-2 text-sm',
     md: 'min-h-[80px] px-3 py-2 text-sm',
-    lg: 'min-h-[120px] px-4 py-3 text-base',
-  };
+    lg: 'min-h-[120px] px-4 py-3 text-base'};
 
   const resizeClasses = {
     none: 'resize-none',
     vertical: 'resize-y',
     horizontal: 'resize-x',
-    both: 'resize',
-  };
+    both: 'resize'};
 
   return (
     <div className="w-full">
@@ -221,7 +216,7 @@ export function TextareaEnhanced({
       <textarea
         id={textareaId}
         className={cn(
-          'flex w-full rounded-md border border-input bg-background font-medium ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          'flex w-full rounded-md border border-input bg-background font-medium ring-offset-background, placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:cursor-not-allowed, disabled:opacity-50',
           inputVariants[variant],
           textareaSizes[textareaSize],
           inputStates[hasError ? 'error' : state],
@@ -303,7 +298,7 @@ export function SelectEnhanced({
         <select
           id={selectId}
           className={cn(
-            'flex w-full rounded-md border border-input bg-background font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none',
+            'flex w-full rounded-md border border-input bg-background font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:cursor-not-allowed, disabled:opacity-50 appearance-none',
             inputVariants[variant],
             inputSizes[selectSize],
             inputStates[hasError ? 'error' : state],
@@ -394,15 +389,13 @@ export function CheckboxEnhanced({
   const checkboxSizes = {
     sm: 'w-4 h-4',
     md: 'w-5 h-5',
-    lg: 'w-6 h-6',
-  };
+    lg: 'w-6 h-6'};
 
   const checkboxStates = {
     default: 'border-input',
     error: 'border-red-500',
     success: 'border-green-500',
-    warning: 'border-yellow-500',
-  };
+    warning: 'border-yellow-500'};
 
   return (
     <div className="flex items-start space-x-3">
@@ -412,7 +405,7 @@ export function CheckboxEnhanced({
           type="checkbox"
           id={checkboxId}
           className={cn(
-            'rounded border-2 text-brand-primary-600 focus:ring-brand-primary-500 focus:ring-2 focus:ring-offset-2',
+            'rounded border-2 text-brand-primary-600, focus:ring-brand-primary-500, focus:ring-2, focus:ring-offset-2',
             checkboxSizes[checkboxSize],
             checkboxStates[state],
             className
@@ -465,15 +458,13 @@ export function RadioEnhanced({
   const radioSizes = {
     sm: 'w-4 h-4',
     md: 'w-5 h-5',
-    lg: 'w-6 h-6',
-  };
+    lg: 'w-6 h-6'};
 
   const radioStates = {
     default: 'border-input',
     error: 'border-red-500',
     success: 'border-green-500',
-    warning: 'border-yellow-500',
-  };
+    warning: 'border-yellow-500'};
 
   return (
     <div className="flex items-start space-x-3">
@@ -482,7 +473,7 @@ export function RadioEnhanced({
           type="radio"
           id={radioId}
           className={cn(
-            'border-2 text-brand-primary-600 focus:ring-brand-primary-500 focus:ring-2 focus:ring-offset-2',
+            'border-2 text-brand-primary-600, focus:ring-brand-primary-500, focus:ring-2, focus:ring-offset-2',
             radioSizes[radioSize],
             radioStates[state],
             className
@@ -541,8 +532,7 @@ export function RadioGroup({
   label,
   required,
   helperText,
-  errorText,
-}: RadioGroupProps) {
+  errorText}: RadioGroupProps) {
   const hasError = state === 'error' || errorText;
   const displayText = hasError ? errorText : helperText;
 
@@ -609,8 +599,7 @@ export function FormField({
   required,
   helperText,
   errorText,
-  className,
-}: FormFieldProps) {
+  className}: FormFieldProps) {
   const hasError = !!errorText;
   const displayText = hasError ? errorText : helperText;
 
@@ -651,8 +640,7 @@ export function FormGroup({
   children,
   title,
   description,
-  className,
-}: FormGroupProps) {
+  className}: FormGroupProps) {
   return (
     <div className={cn('space-y-4', className)}>
       {(title || description) && (

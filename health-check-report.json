@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-07-21T20:09:59.257Z",
+  "results": [
+    {
+      "category": "TypeScript",
+      "status": "fail",
+      "errors": 1206,
+      "errorTypes": {
+        "TS1005": 537,
+        "TS1434": 244,
+        "TS1068": 238,
+        "TS1128": 92,
+        "TS1109": 60,
+        "TS1003": 9,
+        "TS1472": 1,
+        "TS1381": 5,
+        "TS1382": 2,
+        "TS2657": 2,
+        "TS17002": 4,
+        "TS1181": 1,
+        "TS1131": 1,
+        "TS1136": 2,
+        "TS1011": 6,
+        "TS1110": 2
+      }
+    },
+    {
+      "category": "Dependencies",
+      "status": "pass",
+      "errors": 0
+    },
+    {
+      "category": "Build",
+      "status": "fail",
+      "errors": 1
+    },
+    {
+      "category": "File Structure",
+      "status": "pass",
+      "errors": 0
+    }
+  ],
+  "summary": {
+    "totalErrors": 1207,
+    "failedChecks": 2,
+    "totalChecks": 4
+  }
+}

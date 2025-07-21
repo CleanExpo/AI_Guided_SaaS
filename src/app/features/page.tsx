@@ -17,8 +17,7 @@ import {
 
 export const metadata: Metadata = {
   title: 'Features - AI Guided SaaS',
-  description: 'Explore the powerful features of AI Guided SaaS platform for building production-ready applications.',
-}
+  description: 'Explore the powerful features of AI Guided SaaS platform for building production-ready applications.'}
 
 const features = [
   {
@@ -110,7 +109,7 @@ export default function FeaturesPage() {
       {/* Hero Section */}
       <section className="relative px-6 py-24 mx-auto max-w-7xl">
         <div className="text-center">
-          <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+          <h1 className="text-5xl font-bold tracking-tight text-gray-900, sm:text-6xl">
             Powerful Features for
             <span className="text-purple-600"> Modern Development</span>
           </h1>
@@ -121,13 +120,13 @@ export default function FeaturesPage() {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
               href="/auth/signin"
-              className="rounded-md bg-purple-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+              className="rounded-md bg-purple-600 px-6 py-3 text-base font-semibold text-white shadow-sm, hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
             >
               Get Started Free
             </Link>
             <Link
               href="/pricing"
-              className="text-base font-semibold leading-6 text-gray-900 hover:text-purple-600"
+              className="text-base font-semibold leading-6 text-gray-900, hover:text-purple-600"
             >
               View Pricing <span aria-hidden="true">→</span>
             </Link>
@@ -137,11 +136,11 @@ export default function FeaturesPage() {
 
       {/* Main Features */}
       <section className="px-6 py-24 mx-auto max-w-7xl">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-12, md:grid-cols-2, lg:grid-cols-3">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="relative p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+              className="relative p-8 bg-white rounded-2xl shadow-lg, hover:shadow-xl transition-shadow"
             >
               <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg">
                 <feature.icon className="w-6 h-6 text-purple-600" />
@@ -175,7 +174,7 @@ export default function FeaturesPage() {
             Dozens of additional features to supercharge your development
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
           {additionalFeatures.map((feature, index) => (
             <div
               key={index}
@@ -191,9 +190,9 @@ export default function FeaturesPage() {
       {/* CTA Section */}
       <section className="px-6 py-24 mx-auto max-w-7xl">
         <div className="relative overflow-hidden bg-purple-600 rounded-3xl">
-          <div className="px-6 py-24 sm:px-12">
+          <div className="px-6 py-24, sm:px-12">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-white, sm:text-4xl">
                 Ready to Build Something Amazing?
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-purple-100">
@@ -202,13 +201,13 @@ export default function FeaturesPage() {
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
                   href="/auth/signin"
-                  className="rounded-md bg-white px-6 py-3 text-base font-semibold text-purple-600 shadow-sm hover:bg-purple-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  className="rounded-md bg-white px-6 py-3 text-base font-semibold text-purple-600 shadow-sm, hover:bg-purple-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Start Building Free
                 </Link>
                 <Link
                   href="/docs"
-                  className="text-base font-semibold leading-6 text-white hover:text-purple-100"
+                  className="text-base font-semibold leading-6 text-white, hover:text-purple-100"
                 >
                   Read Documentation <span aria-hidden="true">→</span>
                 </Link>

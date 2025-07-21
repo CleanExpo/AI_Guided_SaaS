@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
         
         if (!problemDescription || !attemptedSolution || !outcome || !sessionId) {
           return NextResponse.json(
-            { error: 'Missing required fields: problemDescription, attemptedSolution, outcome, sessionId' },
+            { error: 'Missing required, fields: problemDescription, attemptedSolution, outcome, sessionId' },
             { status: 400 }
           );
         }
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         
         if (!sessionId) {
           return NextResponse.json(
-            { error: 'Missing required field: sessionId' },
+            { error: 'Missing required, field: sessionId' },
             { status: 400 }
           );
         }
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
         
         if (!problemDescription) {
           return NextResponse.json(
-            { error: 'Missing required field: problemDescription' },
+            { error: 'Missing required, field: problemDescription' },
             { status: 400 }
           );
         }
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
         
         if (!sessionId) {
           return NextResponse.json(
-            { error: 'Missing required field: sessionId' },
+            { error: 'Missing required, field: sessionId' },
             { status: 400 }
           );
         }
@@ -113,12 +113,12 @@ export async function POST(request: NextRequest) {
 
       default:
         return NextResponse.json(
-          { error: 'Invalid action. Supported actions: record_attempt, detect_cycle, search_documentation, analyze_session' },
+          { error: 'Invalid action. Supported, actions: record_attempt, detect_cycle, search_documentation, analyze_session' },
           { status: 400 }
         );
     }
   } catch (error) {
-    console.error('Cycle detection API error:', error);
+    console.error('Cycle detection API, error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -147,7 +147,7 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Cycle detection GET error:', error);
+    console.error('Cycle detection GET, error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

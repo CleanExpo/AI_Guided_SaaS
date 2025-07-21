@@ -19,10 +19,8 @@ export default function AdminDirectLoginPage() {
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      })
+          'Content-Type': 'application/json'},
+        body: JSON.stringify({ email, password })})
 
       const data = await response.json()
 
@@ -64,7 +62,7 @@ export default function AdminDirectLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white, focus:outline-none, focus:border-purple-500"
                 required
               />
             </div>
@@ -75,7 +73,7 @@ export default function AdminDirectLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white, focus:outline-none, focus:border-purple-500"
                 placeholder="Enter admin password"
                 required
               />
@@ -84,17 +82,17 @@ export default function AdminDirectLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded font-medium disabled:opacity-50"
+              className="w-full bg-purple-600, hover:bg-purple-700 text-white py-2 rounded font-medium, disabled:opacity-50"
             >
               {loading ? 'Logging in...' : 'Sign In'}
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm text-slate-400">
-            <p>Use password: AdminSecure2024!</p>
+            <p>Use, password: AdminSecure2024!</p>
             <p className="mt-2">
-              Regular admin login:{' '}
-              <a href="/admin/login" className="text-purple-400 hover:underline">
+              Regular admin, login:{' '}
+              <a href="/admin/login" className="text-purple-400, hover:underline">
                 /admin/login
               </a>
             </p>

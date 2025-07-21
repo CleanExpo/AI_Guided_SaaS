@@ -2,10 +2,7 @@ import { NextRequest } from 'next/server'
 import { supabase } from './database'
 
 export interface ApiMetric {
-  endpoint: string
-  method: string
-  statusCode: number
-  responseTime: number
+  endpoint: string, method: string, statusCode: number, responseTime: number
   userId?: string
   errorMessage?: string
   metadata?: Record<string, unknown>
@@ -58,7 +55,7 @@ export class ApiTracking {
         })
       
       if (error) {
-        console.error('Error tracking API call:', error)
+        console.error('Error tracking API, call:', error)
       }
       
       // Also log as activity if user is authenticated
@@ -66,7 +63,7 @@ export class ApiTracking {
         await this.logApiActivity(userId, endpoint, method, statusCode)
       }
     } catch (error) {
-      console.error('Error in API tracking:', error)
+      console.error('Error in API, tracking:', error)
     }
   }
   
@@ -96,17 +93,16 @@ export class ApiTracking {
         })
       
       if (error) {
-        console.error('Error logging API activity:', error)
+        console.error('Error logging API, activity:', error)
       }
     } catch (error) {
-      console.error('Error in activity logging:', error)
+      console.error('Error in activity, logging:', error)
     }
   }
   
   // Track specific resource usage
   static async trackResourceUsage(
-    userId: string,
-    resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use',
+    userId: string: resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use',
     quantity: number = 1,
     metadata?: Record<string, unknown>
   ): Promise<void> {
@@ -119,8 +115,7 @@ export class ApiTracking {
       const { error } = await supabase
         .from('usage_records')
         .insert({
-          user_id: userId,
-          resource_type: resourceType,
+          user_id: userId: resource_type: resourceType,
           quantity,
           metadata: {
             ...metadata,
@@ -130,10 +125,10 @@ export class ApiTracking {
         })
       
       if (error) {
-        console.error('Error tracking resource usage:', error)
+        console.error('Error tracking resource, usage:', error)
       }
     } catch (error) {
-      console.error('Error in resource tracking:', error)
+      console.error('Error in resource, tracking:', error)
     }
   }
   
@@ -141,10 +136,7 @@ export class ApiTracking {
   static async getApiPerformanceSummary(
     timeRange: '1h' | '24h' | '7d' | '30d' = '24h'
   ): Promise<{
-    totalCalls: number
-    avgResponseTime: number
-    errorRate: number
-    topEndpoints: Array<{ endpoint: string; calls: number; avgTime: number }>
+    totalCalls: number, avgResponseTime: number, errorRate: number, topEndpoints: Array<{ endpoint: string; calls: number; avgTime: number }>
   } | null> {
     if (!supabase) return null
     
@@ -174,7 +166,7 @@ export class ApiTracking {
         .gte('created_at', startTime.toISOString())
       
       if (error || !metrics) {
-        console.error('Error fetching API metrics:', error)
+        console.error('Error fetching API, metrics:', error)
         return null
       }
       
@@ -211,7 +203,7 @@ export class ApiTracking {
         topEndpoints
       }
     } catch (error) {
-      console.error('Error calculating API performance:', error)
+      console.error('Error calculating API, performance:', error)
       return null
     }
   }
@@ -230,12 +222,12 @@ export class ApiTracking {
         .lt('created_at', cutoffDate.toISOString())
       
       if (error) {
-        console.error('Error cleaning up old metrics:', error)
+        console.error('Error cleaning up old, metrics:', error)
       } else {
         console.log('Old API metrics cleaned up successfully')
       }
     } catch (error) {
-      console.error('Error in metrics cleanup:', error)
+      console.error('Error in metrics, cleanup:', error)
     }
   }
 }

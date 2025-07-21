@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Cookie Policy - AI Guided SaaS Platform',
-  description: 'Our cookie policy and how we use cookies on our platform',
-};
+  description: 'Our cookie policy and how we use cookies on our platform'};
 
 export default function CookiesPage() {
   return (
@@ -11,7 +10,7 @@ export default function CookiesPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Cookie Policy</h1>
         <p className="text-muted-foreground mb-8">
-          Last updated: {new Date().toLocaleDateString()}
+          Last, updated: {new Date().toLocaleDateString()}
         </p>
 
         <div className="prose prose-lg max-w-none space-y-6">
@@ -27,7 +26,7 @@ export default function CookiesPage() {
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">How We Use Cookies</h2>
-            <p>We use cookies for various purposes including:</p>
+            <p>We use cookies for various purposes, including:</p>
             <ul className="list-disc pl-6 mb-6">
               <li>Essential functionality and security</li>
               <li>Remembering your preferences and settings</li>

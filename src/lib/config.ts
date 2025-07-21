@@ -148,9 +148,9 @@ export interface PlatformConfig {
 }
 
 class ConfigurationManager {
-  private static instance: ConfigurationManager;
-  private config: PlatformConfig | null = null;
-  private configPath: string;
+  private static, instance: ConfigurationManager;
+  private, config: PlatformConfig | null = null;
+  private, configPath: string;
 
   private constructor() {
     this.configPath = path.join(process.cwd(), 'ai-guided-saas.prp');
@@ -177,7 +177,7 @@ class ConfigurationManager {
       this.config = this.transformToTypedConfig(parsedConfig);
       return this.config;
     } catch (error) {
-      console.error('Failed to load configuration:', error);
+      console.error('Failed to load, configuration:', error);
       throw new Error('Configuration file not found or invalid');
     }
   }
@@ -392,7 +392,7 @@ class ConfigurationManager {
       case 'google':
         return config.google;
       default:
-        throw new Error(`Unknown AI provider: ${provider}`);
+        throw new Error(`Unknown AI, provider: ${provider}`);
     }
   }
 

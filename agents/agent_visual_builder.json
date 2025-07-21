@@ -1,0 +1,171 @@
+{
+  "id": "agent_visual_builder",
+  "name": "Advanced Visual UI/UX Builder Agent",
+  "version": "1.0.0",
+  "description": "AI-powered visual component builder with real-time preview and direct manipulation",
+  "capabilities": [
+    "visual_component_generation",
+    "real_time_preview",
+    "drag_drop_interface",
+    "interactive_editing",
+    "responsive_design",
+    "accessibility_compliance"
+  ],
+  "config": {
+    "previewRefreshRate": 100,
+    "autoSaveInterval": 30000,
+    "undoHistoryLimit": 100,
+    "multiDevicePreview": true,
+    "collaborationEnabled": true
+  },
+  "visualBuilderFeatures": {
+    "componentLibrary": {
+      "sources": ["shadcn", "mui", "antd", "custom"],
+      "aiGenerated": true,
+      "customization": {
+        "themes": ["light", "dark", "custom"],
+        "variables": ["colors", "spacing", "typography", "shadows"],
+        "responsive": ["mobile", "tablet", "desktop", "wide"]
+      }
+    },
+    "interactiveCanvas": {
+      "capabilities": [
+        "dragAndDrop",
+        "resize",
+        "rotate",
+        "align",
+        "distribute",
+        "group"
+      ],
+      "smartGuides": {
+        "enabled": true,
+        "snapping": true,
+        "alignment": true,
+        "spacing": true
+      },
+      "realTimeSync": {
+        "codeGeneration": true,
+        "bidirectional": true,
+        "conflictResolution": "automatic"
+      }
+    },
+    "directManipulation": {
+      "properties": {
+        "visual": ["colors", "gradients", "shadows", "borders"],
+        "layout": ["flex", "grid", "position", "spacing"],
+        "typography": ["font", "size", "weight", "lineHeight"],
+        "animation": ["transitions", "keyframes", "interactions"]
+      },
+      "controls": {
+        "type": "contextual",
+        "precision": "pixel",
+        "preview": "instant"
+      }
+    }
+  },
+  "aiCapabilities": {
+    "naturalLanguage": {
+      "commands": [
+        "Make this button more prominent",
+        "Add a hero section with parallax",
+        "Create a dashboard with charts",
+        "Make it look like Apple's design"
+      ],
+      "understanding": {
+        "context": true,
+        "intent": true,
+        "style": true
+      }
+    },
+    "designSuggestions": {
+      "enabled": true,
+      "types": [
+        "layoutOptimization",
+        "colorHarmony",
+        "accessibilityImprovements",
+        "performanceEnhancements"
+      ],
+      "learning": {
+        "userPreferences": true,
+        "industryTrends": true,
+        "a11yCompliance": true
+      }
+    },
+    "codeGeneration": {
+      "frameworks": ["react", "vue", "angular", "svelte"],
+      "styling": ["css", "scss", "tailwind", "styled-components"],
+      "optimization": {
+        "bundleSize": true,
+        "performance": true,
+        "seo": true
+      }
+    }
+  },
+  "previewEngine": {
+    "rendering": {
+      "engine": "chrome",
+      "realTime": true,
+      "hotReload": true
+    },
+    "devices": {
+      "presets": ["iphone", "ipad", "android", "desktop"],
+      "custom": {
+        "enabled": true,
+        "viewport": "adjustable",
+        "orientation": ["portrait", "landscape"]
+      }
+    },
+    "interactions": {
+      "hover": true,
+      "click": true,
+      "animations": true,
+      "scrolling": true
+    },
+    "debugging": {
+      "console": true,
+      "elementInspector": true,
+      "performanceMetrics": true,
+      "accessibilityAudit": true
+    }
+  },
+  "collaboration": {
+    "realTime": {
+      "enabled": true,
+      "cursors": true,
+      "presence": true,
+      "comments": true
+    },
+    "versioning": {
+      "automatic": true,
+      "branching": true,
+      "merging": true,
+      "comparison": true
+    },
+    "sharing": {
+      "livePreview": true,
+      "embedCode": true,
+      "exportOptions": ["html", "react", "vue", "figma"]
+    }
+  },
+  "integrations": {
+    "design": {
+      "figma": {
+        "import": true,
+        "export": true,
+        "sync": true
+      },
+      "sketch": {
+        "import": true
+      }
+    },
+    "assets": {
+      "unsplash": true,
+      "icons": ["feather", "heroicons", "fontawesome"],
+      "fonts": ["google", "adobe", "custom"]
+    },
+    "deployment": {
+      "platforms": ["vercel", "netlify", "github-pages"],
+      "instant": true
+    }
+  }
+}

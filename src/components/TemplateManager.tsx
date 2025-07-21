@@ -5,8 +5,7 @@ import { ProjectConfig, ProjectFile } from '@/types'
 import { Files } from 'lucide-react'
 
 interface TemplateManagerProps {
-  currentConfig: ProjectConfig
-  currentFiles: ProjectFile[]
+  currentConfig: ProjectConfig, currentFiles: ProjectFile[]
   onLoadTemplate: (config: ProjectConfig, files: ProjectFile[]) => void
 }
 

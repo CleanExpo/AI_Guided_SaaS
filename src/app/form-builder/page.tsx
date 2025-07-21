@@ -74,7 +74,7 @@ export default function FormBuilderPage() {
             variant="ghost"
             size="sm"
             onClick={() => removeField(field.id)}
-            className="text-red-500 hover:text-red-700"
+            className="text-red-500, hover:text-red-700"
           >
             <Trash2 className="h-4 w-4" />
           </Button>
@@ -222,7 +222,7 @@ export default function FormBuilderPage() {
         <p className="text-gray-600">Create custom forms with drag-and-drop simplicity</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1, lg:grid-cols-2 gap-8">
         {/* Form Configuration */}
         <div>
           <Card className="mb-6">

@@ -21,7 +21,7 @@ export default function ComponentPropsEditor() {
     <div className="p-4 bg-white border-t border-gray-300">
       <h2 className="text-lg font-semibold mb-2">Edit {type} Properties</h2>
       <form className="space-y-3">
-        {schema?.map(({ key, label, type: inputType }) => (
+        {schema?.map(({ key, label: type: inputType }) => (
           <div key={key}>
             <label className="block text-sm font-medium text-gray-700">{label}</label>
             {inputType === 'textarea' ? (

@@ -5,15 +5,13 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Pricing - AI Guided SaaS Platform',
-  description: 'Choose the perfect plan for your development needs',
-};
+  description: 'Choose the perfect plan for your development needs'};
 
 const plans = [
   {
@@ -26,10 +24,8 @@ const plans = [
       'Basic AI assistance',
       'Standard templates',
       'Community support',
-      '10GB storage',
-    ],
-    popular: false,
-  },
+      '10GB storage'],
+    popular: false},
   {
     name: 'Professional',
     price: '$99',
@@ -42,10 +38,8 @@ const plans = [
       'Priority support',
       '100GB storage',
       'Team collaboration',
-      'Custom integrations',
-    ],
-    popular: true,
-  },
+      'Custom integrations'],
+    popular: true},
   {
     name: 'Enterprise',
     price: 'Custom',
@@ -58,11 +52,8 @@ const plans = [
       'Dedicated support',
       'Unlimited storage',
       'Advanced security',
-      'SLA guarantee',
-    ],
-    popular: false,
-  },
-];
+      'SLA guarantee'],
+    popular: false}];
 
 export default function PricingPage() {
   return (
@@ -75,7 +66,7 @@ export default function PricingPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1, md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {plans.map(plan => (
           <Card
             key={plan.name}

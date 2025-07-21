@@ -8,62 +8,45 @@ export interface ToolRefinement {
   modifications: ToolModification[]
   removals: ToolRemoval[]
   integrations: ToolIntegration[]
-  performance: ToolPerformanceAnalysis
-  recommendations: string[]
+  performance: ToolPerformanceAnalysis, recommendations: string[]
 }
 
 export interface Tool {
-  id: string
-  name: string
-  description: string
-  category: string
-  capabilities: string[]
+  id: string, name: string, description: string, category: string, capabilities: string[]
   limitations: string[]
   dependencies: string[]
-  cost: ToolCost
-  performance: ToolPerformance
+  cost: ToolCost, performance: ToolPerformance
 }
 
 export interface ToolAddition {
-  tool: Tool
-  rationale: string
-  alternatives: string[]
+  tool: Tool, rationale: string, alternatives: string[]
   integrationPlan: string
 }
 
 export interface ToolModification {
-  toolId: string
-  originalConfig: any
-  newConfig: any
-  changes: string[]
+  toolId: string, originalConfig: any, newConfig: any, changes: string[]
   rationale: string
 }
 
 export interface ToolRemoval {
-  toolId: string
-  toolName: string
-  rationale: string
+  toolId: string, toolName: string, rationale: string
   replacement?: string
 }
 
 export interface ToolIntegration {
   tools: string[]
   integrationType: 'sequential' | 'parallel' | 'conditional' | 'fallback'
-  description: string
-  dataFlow: string
-  benefits: string[]
+  description: string, dataFlow: string, benefits: string[]
 }
 
 export interface ToolCost {
   type: 'free' | 'freemium' | 'paid' | 'usage-based'
-  estimatedMonthly: number
-  scalingFactors: string[]
+  estimatedMonthly: number, scalingFactors: string[]
 }
 
 export interface ToolPerformance {
   speed: 'fast' | 'moderate' | 'slow'
-  reliability: number // 0-100
-  scalability: 'high' | 'medium' | 'low'
+  reliability: number // 0-100, scalability: 'high' | 'medium' | 'low'
   resourceUsage: ResourceUsage
 }
 
@@ -74,14 +57,13 @@ export interface ResourceUsage {
 }
 
 export interface ToolPerformanceAnalysis {
-  overallEfficiency: number // 0-100
-  bottlenecks: string[]
+  overallEfficiency: number // 0-100, bottlenecks: string[]
   optimizations: string[]
   costEffectiveness: number // 0-100
 }
 
 export class ToolsRefinerAgent extends Agent {
-  private toolLibrary: Map<string, Tool>
+  private, toolLibrary: Map<string, Tool>
 
   constructor() {
     super({
@@ -121,11 +103,11 @@ export class ToolsRefinerAgent extends Agent {
         requirementCount: requirements.length 
       })
 
-      // Step 1: Analyze current tools
+      // Step, 1: Analyze current tools
       const toolAnalysis = await this.analyzeCurrentTools(currentTools, requirements)
       this.observe('Tool analysis complete', toolAnalysis)
 
-      // Step 2: Identify missing capabilities
+      // Step, 2: Identify missing capabilities
       const missingCapabilities = await this.identifyGaps(
         currentTools,
         requirements,
@@ -133,7 +115,7 @@ export class ToolsRefinerAgent extends Agent {
       )
       this.observe('Identified capability gaps', missingCapabilities)
 
-      // Step 3: Recommend additions
+      // Step, 3: Recommend additions
       const additions = await this.recommendAdditions(
         missingCapabilities,
         constraints,
@@ -141,7 +123,7 @@ export class ToolsRefinerAgent extends Agent {
       )
       this.observe('Recommended tool additions', { count: additions.length })
 
-      // Step 4: Optimize configurations
+      // Step, 4: Optimize configurations
       const modifications = await this.optimizeConfigurations(
         currentTools,
         requirements,
@@ -149,7 +131,7 @@ export class ToolsRefinerAgent extends Agent {
       )
       this.observe('Configuration optimizations', { count: modifications.length })
 
-      // Step 5: Identify redundancies
+      // Step, 5: Identify redundancies
       const removals = await this.identifyRedundancies(
         currentTools,
         additions,
@@ -157,14 +139,14 @@ export class ToolsRefinerAgent extends Agent {
       )
       this.observe('Identified redundant tools', { count: removals.length })
 
-      // Step 6: Plan integrations
+      // Step, 6: Plan integrations
       const integrations = await this.planIntegrations(
         [...currentTools, ...additions.map(a => a.tool)],
         requirements
       )
       this.observe('Planned tool integrations', { count: integrations.length })
 
-      // Step 7: Analyze performance
+      // Step, 7: Analyze performance
       const performance = await this.analyzePerformance(
         currentTools,
         additions,
@@ -173,7 +155,7 @@ export class ToolsRefinerAgent extends Agent {
       )
       this.observe('Performance analysis', performance)
 
-      // Step 8: Generate recommendations
+      // Step, 8: Generate recommendations
       const recommendations = await this.generateRecommendations(
         additions,
         modifications,
@@ -223,7 +205,7 @@ export class ToolsRefinerAgent extends Agent {
       }
 
     } catch (error) {
-      this.think(`Error during tool refinement: ${error}`)
+      this.think(`Error during tool, refinement: ${error}`)
       throw error
     }
   }
@@ -277,7 +259,7 @@ export class ToolsRefinerAgent extends Agent {
     requirements: string[]
     constraints: string[]
   }> {
-    const parsePrompt = `Parse this input to extract current tools, requirements, and constraints:
+    const parsePrompt = `Parse this input to extract current tools, requirements, and, constraints:
 
 Input:
 "${input}"
@@ -328,7 +310,7 @@ Format as JSON with arrays for each category.`
     tools: Tool[],
     requirements: string[]
   ): Promise<any> {
-    const analysisPrompt = `Analyze these tools against the requirements:
+    const analysisPrompt = `Analyze these tools against the, requirements:
 
 Tools:
 ${JSON.stringify(tools, null, 2)}
@@ -357,17 +339,16 @@ Format as detailed JSON analysis.`
   private async identifyGaps(
     currentTools: Tool[],
     requirements: string[],
-    analysis: any
-  ): Promise<string[]> {
-    const gapPrompt = `Identify capability gaps based on the analysis:
+    analysis): Promise<string[]> {
+    const gapPrompt = `Identify capability gaps based on the, analysis:
 
-Current tool capabilities:
+Current tool, capabilities:
 ${currentTools.map(t => `${t.name}: ${t.capabilities.join(', ')}`).join('\n')}
 
 Requirements:
 ${requirements.join('\n')}
 
-Analysis insights:
+Analysis, insights:
 ${JSON.stringify(analysis, null, 2)}
 
 List specific capabilities that are missing or insufficient.`
@@ -385,18 +366,18 @@ List specific capabilities that are missing or insufficient.`
     constraints: string[],
     currentTools: Tool[]
   ): Promise<ToolAddition[]> {
-    const recommendPrompt = `Recommend tools to fill these capability gaps:
+    const recommendPrompt = `Recommend tools to fill these capability, gaps:
 
-Missing capabilities:
+Missing, capabilities:
 ${gaps.join('\n')}
 
 Constraints:
 ${constraints.join('\n')}
 
-Current tools:
+Current, tools:
 ${currentTools.map(t => t.name).join(', ')}
 
-For each recommendation:
+For each, recommendation:
 1. Suggest a specific tool
 2. Explain the rationale
 3. List alternatives
@@ -415,7 +396,7 @@ Format as JSON array of ToolAddition objects.`
     const additions = JSON.parse(response)
     
     // Enrich with tool details from library or create new
-    return additions.map((addition: any) => {
+    return additions.map((addition) => {
       const tool = this.toolLibrary.get(addition.toolId) || {
         id: addition.toolId || addition.tool.name.toLowerCase().replace(/\s+/g, '-'),
         name: addition.tool.name,
@@ -445,20 +426,19 @@ Format as JSON array of ToolAddition objects.`
   private async optimizeConfigurations(
     tools: Tool[],
     requirements: string[],
-    analysis: any
-  ): Promise<ToolModification[]> {
-    const optimizePrompt = `Optimize tool configurations for better performance:
+    analysis): Promise<ToolModification[]> {
+    const optimizePrompt = `Optimize tool configurations for better, performance:
 
-Current tools and configs:
+Current tools and, configs:
 ${JSON.stringify(tools, null, 2)}
 
 Requirements:
 ${requirements.join('\n')}
 
-Analysis insights:
+Analysis, insights:
 ${JSON.stringify(analysis, null, 2)}
 
-Suggest configuration changes to:
+Suggest configuration changes, to:
 1. Improve performance
 2. Reduce resource usage
 3. Enhance reliability
@@ -480,18 +460,18 @@ Format as JSON array of ToolModification objects.`
     additions: ToolAddition[],
     requirements: string[]
   ): Promise<ToolRemoval[]> {
-    const redundancyPrompt = `Identify redundant tools that can be removed:
+    const redundancyPrompt = `Identify redundant tools that can be, removed:
 
-Current tools:
+Current, tools:
 ${currentTools.map(t => `${t.name}: ${t.capabilities.join(', ')}`).join('\n')}
 
-Planned additions:
+Planned, additions:
 ${additions.map(a => `${a.tool.name}: ${a.tool.capabilities.join(', ')}`).join('\n')}
 
 Requirements:
 ${requirements.join('\n')}
 
-Identify tools that:
+Identify tools, that:
 1. Duplicate functionality
 2. Are superseded by new additions
 3. No longer meet requirements
@@ -512,15 +492,15 @@ Format as JSON array of ToolRemoval objects.`
     allTools: Tool[],
     requirements: string[]
   ): Promise<ToolIntegration[]> {
-    const integrationPrompt = `Plan integrations between tools for optimal workflow:
+    const integrationPrompt = `Plan integrations between tools for optimal, workflow:
 
-Available tools:
+Available, tools:
 ${allTools.map(t => `${t.name}: ${t.capabilities.join(', ')}`).join('\n')}
 
 Requirements:
 ${requirements.join('\n')}
 
-Design integrations that:
+Design integrations, that:
 1. Create efficient workflows
 2. Share data effectively
 3. Minimize redundancy
@@ -545,14 +525,14 @@ Format as JSON array of ToolIntegration objects.`
     modifications: ToolModification[],
     removals: ToolRemoval[]
   ): Promise<ToolPerformanceAnalysis> {
-    const performancePrompt = `Analyze the overall performance impact of tool changes:
+    const performancePrompt = `Analyze the overall performance impact of tool, changes:
 
-Current tools: ${currentTools.length}
+Current, tools: ${currentTools.length}
 Additions: ${additions.length}
 Modifications: ${modifications.length}
 Removals: ${removals.length}
 
-Tool details:
+Tool, details:
 ${JSON.stringify({
   current: currentTools.map(t => ({ name: t.name, performance: t.performance })),
   adding: additions.map(a => ({ name: a.tool.name, performance: a.tool.performance }))
@@ -582,15 +562,15 @@ Format as JSON ToolPerformanceAnalysis object.`
     integrations: ToolIntegration[],
     performance: ToolPerformanceAnalysis
   ): Promise<string[]> {
-    const recommendPrompt = `Generate actionable recommendations based on the tool refinement analysis:
+    const recommendPrompt = `Generate actionable recommendations based on the tool refinement, analysis:
 
-Changes summary:
+Changes, summary:
 - ${additions.length} tools to add
 - ${modifications.length} configurations to modify
 - ${removals.length} tools to remove
 - ${integrations.length} integrations to implement
 
-Performance analysis:
+Performance, analysis:
 ${JSON.stringify(performance, null, 2)}
 
 Provide 5-7 specific, actionable recommendations prioritized by impact.`

@@ -7,11 +7,8 @@ import { z } from 'zod'
 
 // MCP types
 export interface MCPServer {
-  id: string
-  name: string
-  url: string
-  description?: string
-  capabilities: MCPCapability[]
+  id: string, name: string, url: string
+  description?: string, capabilities: MCPCapability[]
   tools: MCPTool[]
   status: 'connected' | 'disconnected' | 'error'
   metadata?: Record<string, any>
@@ -24,21 +21,16 @@ export interface MCPCapability {
 }
 
 export interface MCPTool {
-  name: string
-  description: string
-  inputSchema: any
-  outputSchema?: any
-  server: string
+  name: string, description: string, inputSchema: any
+  outputSchema?: any, server: string
   category?: string
   tags?: string[]
 }
 
 export interface MCPResource {
-  uri: string
-  name: string
+  uri: string, name: string
   description?: string
-  mimeType?: string
-  server: string
+  mimeType?: string, server: string
 }
 
 export interface MCPPrompt {
@@ -54,39 +46,28 @@ export interface MCPPrompt {
 
 // Execution types
 export interface MCPToolCall {
-  tool: string
-  server: string
-  arguments: Record<string, any>
+  tool: string, server: string, arguments: Record<string, any>
   timeout?: number
 }
 
 export interface MCPToolResult {
-  tool: string
-  server: string
-  result: any
-  error?: string
-  duration: number
-  timestamp: string
+  tool: string, server: string, result: any
+  error?: string, duration: number, timestamp: string
 }
 
 export interface MCPOrchestrationPlan {
-  id: string
-  description: string
-  steps: MCPExecutionStep[]
+  id: string, description: string, steps: MCPExecutionStep[]
   dependencies: Record<string, string[]>
   parallel: boolean
 }
 
 export interface MCPExecutionStep {
-  id: string
-  type: 'tool' | 'resource' | 'prompt'
-  server: string
-  operation: string
+  id: string: type: 'tool' | 'resource' | 'prompt'
+  server: string, operation: string
   arguments?: Record<string, any>
   dependsOn?: string[]
   retryPolicy?: {
-    maxRetries: number
-    backoffMs: number
+    maxRetries: number, backoffMs: number
   }
 }
 
@@ -112,12 +93,10 @@ export const MCPOrchestrationPlanSchema = z.object({
 })
 
 export class MCPOrchestrator {
-  private servers: Map<string, MCPServer> = new Map()
-  private connections: Map<string, WebSocket> = new Map()
-  private pendingRequests: Map<string, {
-    resolve: (value: any) => void
-    reject: (error: any) => void
-    timeout: NodeJS.Timeout
+  private, servers: Map<string, MCPServer> = new Map()
+  private, connections: Map<string, WebSocket> = new Map()
+  private, pendingRequests: Map<string, {
+    resolve: (value) => void, reject: (error) => void, timeout: NodeJS.Timeout
   }> = new Map()
 
   constructor(private config?: {
@@ -492,7 +471,7 @@ export class MCPOrchestrator {
     try {
       const response = await this.sendRequest(serverId, 'tools/list', {})
       
-      return response.tools.map((tool: any) => ({
+      return response.tools.map((tool) => ({
         ...tool,
         server: serverId
       }))
@@ -517,7 +496,7 @@ export class MCPOrchestrator {
   private async sendRequest(
     serverId: string,
     method: string,
-    params: any,
+    params,
     timeout?: number
   ): Promise<any> {
     const connection = this.connections.get(serverId)

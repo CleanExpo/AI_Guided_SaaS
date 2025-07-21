@@ -7,8 +7,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -46,25 +45,19 @@ const tutorials: Record<string, Tutorial> = {
       {
         title: 'Platform Overview',
         content:
-          'Understand the core components of AI Guided SaaS and how they work together to accelerate your development process.',
-      },
+          'Understand the core components of AI Guided SaaS and how they work together to accelerate your development process.'},
       {
         title: 'Setting Up Your Workspace',
         content:
-          'Configure your development environment and connect your preferred tools and services.',
-      },
+          'Configure your development environment and connect your preferred tools and services.'},
       {
         title: 'Creating Your First Project',
         content:
-          'Use our AI-powered project generator to create a new application with best practices built-in.',
-      },
+          'Use our AI-powered project generator to create a new application with best practices built-in.'},
       {
         title: 'Exploring the UI Builder',
         content:
-          'Learn how to use our visual interface builder to create stunning user interfaces without writing code.',
-      },
-    ],
-  },
+          'Learn how to use our visual interface builder to create stunning user interfaces without writing code.'}]},
   '2': {
     id: '2',
     title: 'Advanced UI Builder Techniques',
@@ -79,20 +72,15 @@ const tutorials: Record<string, Tutorial> = {
       {
         title: 'Custom Component Creation',
         content:
-          'Learn how to create reusable custom components that fit your design system.',
-      },
+          'Learn how to create reusable custom components that fit your design system.'},
       {
         title: 'State Management Patterns',
         content:
-          'Implement complex state management using our built-in patterns and best practices.',
-      },
+          'Implement complex state management using our built-in patterns and best practices.'},
       {
         title: 'Animation and Interactions',
         content:
-          'Add smooth animations and interactive elements to enhance user experience.',
-      },
-    ],
-  },
+          'Add smooth animations and interactive elements to enhance user experience.'}]},
   '3': {
     id: '3',
     title: 'API Integration and Data Management',
@@ -108,19 +96,14 @@ const tutorials: Record<string, Tutorial> = {
       {
         title: 'API Configuration',
         content:
-          'Set up and configure API connections with authentication and error handling.',
-      },
+          'Set up and configure API connections with authentication and error handling.'},
       {
         title: 'Data Modeling',
         content:
-          'Design efficient data models and implement caching strategies.',
-      },
+          'Design efficient data models and implement caching strategies.'},
       {
         title: 'Real-time Updates',
-        content: 'Implement real-time data synchronization and live updates.',
-      },
-    ],
-  },
+        content: 'Implement real-time data synchronization and live updates.'}]},
   '4': {
     id: '4',
     title: 'Deployment and Production Best Practices',
@@ -136,20 +119,15 @@ const tutorials: Record<string, Tutorial> = {
       {
         title: 'Environment Configuration',
         content:
-          'Set up staging and production environments with proper configuration management.',
-      },
+          'Set up staging and production environments with proper configuration management.'},
       {
         title: 'CI/CD Pipeline Setup',
         content:
-          'Implement automated testing and deployment pipelines for reliable releases.',
-      },
+          'Implement automated testing and deployment pipelines for reliable releases.'},
       {
         title: 'Monitoring and Observability',
         content:
-          'Set up monitoring, logging, and alerting for production applications.',
-      },
-    ],
-  },
+          'Set up monitoring, logging, and alerting for production applications.'}]},
   '5': {
     id: '5',
     title: 'Collaboration and Team Workflows',
@@ -165,20 +143,15 @@ const tutorials: Record<string, Tutorial> = {
       {
         title: 'Team Setup',
         content:
-          'Create and manage teams, assign roles, and set up permissions.',
-      },
+          'Create and manage teams, assign roles, and set up permissions.'},
       {
         title: 'Real-time Collaboration',
         content:
-          'Use real-time editing and commenting features for seamless teamwork.',
-      },
+          'Use real-time editing and commenting features for seamless teamwork.'},
       {
         title: 'Version Control',
         content:
-          'Manage project versions and handle merge conflicts effectively.',
-      },
-    ],
-  },
+          'Manage project versions and handle merge conflicts effectively.'}]},
   '6': {
     id: '6',
     title: 'Performance Optimization and Scaling',
@@ -193,21 +166,15 @@ const tutorials: Record<string, Tutorial> = {
       {
         title: 'Performance Analysis',
         content:
-          'Use our built-in performance tools to identify bottlenecks and optimization opportunities.',
-      },
+          'Use our built-in performance tools to identify bottlenecks and optimization opportunities.'},
       {
         title: 'Code Optimization',
         content:
-          'Implement code-level optimizations and best practices for better performance.',
-      },
+          'Implement code-level optimizations and best practices for better performance.'},
       {
         title: 'Infrastructure Scaling',
         content:
-          'Design and implement scalable infrastructure patterns for growing applications.',
-      },
-    ],
-  },
-};
+          'Design and implement scalable infrastructure patterns for growing applications.'}]}};
 
 export default function TutorialPage() {
   const params = useParams();
@@ -315,7 +282,7 @@ export default function TutorialPage() {
             key={index}
             className={`transition-all ${
               completedSteps.has(index)
-                ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800'
+                ? 'bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800'
                 : ''
             }`}
           >
@@ -346,9 +313,9 @@ export default function TutorialPage() {
 
       {/* Next Steps */}
       {progress === 100 && (
-        <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
+        <Card className="bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800">
           <CardHeader>
-            <CardTitle className="text-green-700 dark:text-green-300">
+            <CardTitle className="text-green-700, dark:text-green-300">
               🎉 Tutorial Completed!
             </CardTitle>
             <CardDescription>

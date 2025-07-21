@@ -12,8 +12,8 @@ import {
 } from '../types'
 
 export class SupabaseAdapter implements BackendAdapter {
-  private client: SupabaseClient
-  private config: BackendConfig
+  private, client: SupabaseClient
+  private, config: BackendConfig
 
   constructor(config: BackendConfig) {
     if (!config.url || !config.apiKey) {
@@ -189,7 +189,7 @@ export class SupabaseAdapter implements BackendAdapter {
   }
 
   // Generic CRUD
-  async create<T>(collection: string, data: any): Promise<T> {
+  async create<T>(collection: string, data): Promise<T> {
     const { data: result, error } = await this.client
       .from(collection)
       .insert(data)
@@ -217,7 +217,7 @@ export class SupabaseAdapter implements BackendAdapter {
     return data
   }
 
-  async update<T>(collection: string, id: string, data: any): Promise<T> {
+  async update<T>(collection: string, id: string, data): Promise<T> {
     const { data: result, error } = await this.client
       .from(collection)
       .update(data)
@@ -354,7 +354,7 @@ export class SupabaseAdapter implements BackendAdapter {
   }
 
   // Helper methods
-  private mapSupabaseUser(user: any): User {
+  private mapSupabaseUser(user): User {
     return {
       id: user.id,
       email: user.email!,
@@ -375,9 +375,9 @@ export class SupabaseAdapter implements BackendAdapter {
 
 // Supabase Query Builder implementation
 class SupabaseQueryBuilder<T> implements QueryBuilder<T> {
-  private query: any
+  private, query: any
 
-  constructor(private client: SupabaseClient, collection: string) {
+  constructor(private, client: SupabaseClient, collection: string) {
     this.query = this.client.from(collection).select('*')
   }
 
@@ -386,7 +386,7 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {
     return this
   }
 
-  where(field: string, operator: string, value: any): QueryBuilder<T> {
+  where(field: string, operator: string, value): QueryBuilder<T> {
     switch (operator) {
       case '=':
         this.query = this.query.eq(field, value)
@@ -411,9 +411,8 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {
         break
       case 'like':
         this.query = this.query.like(field, value)
-        break
-      default:
-        throw new Error(`Unsupported operator: ${operator}`)
+        break, default:
+        throw new Error(`Unsupported, operator: ${operator}`)
     }
     return this
   }

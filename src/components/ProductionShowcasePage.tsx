@@ -8,8 +8,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
   Sparkles,
@@ -19,15 +18,13 @@ import {
   Wrench,
   Shield,
   Brain,
-  Zap,
-} from 'lucide-react';
+  Zap} from 'lucide-react';
 import {
   AIIcon,
   CodeIcon,
   RocketIcon,
   DatabaseIcon,
-  BrandIcon,
-} from '@/components/ui/icons';
+  BrandIcon} from '@/components/ui/icons';
 import Link from 'next/link';
 
 // Import your actual production components
@@ -51,9 +48,7 @@ const personas = [
     features: [
       'Claude Code Integration',
       'Multi-Agent Orchestration',
-      'Token Optimization',
-    ],
-  },
+      'Token Optimization']},
   {
     id: 'fullstack-wizard',
     name: 'Fullstack Wizard',
@@ -61,8 +56,7 @@ const personas = [
     avatar: '🧙‍♂️',
     color: 'from-brand-primary-500 to-pink-500',
     icon: CodeIcon,
-    features: ['Next.js 15', 'TypeScript', 'API Development'],
-  },
+    features: ['Next.js 15', 'TypeScript', 'API Development']},
   {
     id: 'ui-designer',
     name: 'UI Designer',
@@ -70,8 +64,7 @@ const personas = [
     avatar: '🎨',
     color: 'from-pink-500 to-rose-500',
     icon: BrandIcon,
-    features: ['shadcn/ui', 'Tailwind CSS', 'Framer Motion'],
-  },
+    features: ['shadcn/ui', 'Tailwind CSS', 'Framer Motion']},
   {
     id: 'startup-founder',
     name: 'Startup Founder',
@@ -79,9 +72,7 @@ const personas = [
     avatar: '🚀',
     color: 'from-orange-500 to-red-500',
     icon: RocketIcon,
-    features: ['Rapid Prototyping', 'Deployment', 'Analytics'],
-  },
-];
+    features: ['Rapid Prototyping', 'Deployment', 'Analytics']}];
 
 const productionFeatures = [
   {
@@ -91,33 +82,28 @@ const productionFeatures = [
     icon: Brain,
     demo: 'claude-dashboard',
     color: 'bg-blue-500',
-    component: 'ClaudeCodeDashboard',
-  },
+    component: 'ClaudeCodeDashboard'},
   {
     title: 'Visual UI Builder',
     description: 'Production drag-and-drop interface builder',
     icon: Wrench,
     demo: 'ui-builder',
     color: 'bg-brand-primary-500',
-    component: 'UIBuilder',
-  },
+    component: 'UIBuilder'},
   {
     title: 'System Analytics',
     description: 'Real-time system monitoring and performance analytics',
     icon: BarChart3,
     demo: 'analytics',
     color: 'bg-green-500',
-    component: 'SystemResourceMonitor',
-  },
+    component: 'SystemResourceMonitor'},
   {
     title: 'Collaboration Hub',
     description: 'Production team collaboration workspace',
     icon: Users,
     demo: 'collaboration',
     color: 'bg-orange-500',
-    component: 'CollaborationWorkspace',
-  },
-];
+    component: 'CollaborationWorkspace'}];
 
 const engineeringHighlights = [
   {
@@ -125,27 +111,22 @@ const engineeringHighlights = [
     description:
       'Orchestrated AI agents for documentation, research, and optimization',
     icon: AIIcon,
-    metrics: '5 Specialized Agents',
-  },
+    metrics: '5 Specialized Agents'},
   {
     title: 'Token Optimization Engine',
     description: 'Strategic memory management with 150K context optimization',
     icon: DatabaseIcon,
-    metrics: '96% Quality Retention',
-  },
+    metrics: '96% Quality Retention'},
   {
     title: 'Causal Engine System',
     description: 'Advanced dependency tracking and cycle detection',
     icon: Zap,
-    metrics: 'Real-time Analysis',
-  },
+    metrics: 'Real-time Analysis'},
   {
     title: 'Self-Check Framework',
     description: 'Automated system health monitoring and validation',
     icon: Shield,
-    metrics: '100% Uptime Target',
-  },
-];
+    metrics: '100% Uptime Target'}];
 
 export default function ProductionShowcasePage() {
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
@@ -154,8 +135,7 @@ export default function ProductionShowcasePage() {
     uptime: '99.9%',
     activeUsers: 12,
     systemHealth: 98,
-    memoryOptimization: 78,
-  });
+    memoryOptimization: 78});
 
   // Simulate real-time system updates
   useEffect(() => {
@@ -170,15 +150,14 @@ export default function ProductionShowcasePage() {
         memoryOptimization: Math.max(
           70,
           Math.min(85, prev.memoryOptimization + (Math.random() - 0.5) * 3)
-        ),
-      }));
+        )}));
     }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
   const renderPersonaShowcase = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const Icon = persona.icon;
         return (
@@ -221,7 +200,7 @@ export default function ProductionShowcasePage() {
                     >
                       <div className="space-y-2">
                         <p className="text-sm text-white/90 font-medium">
-                          Core Technologies:
+                          Core, Technologies:
                         </p>
                         {persona.features.map((feature, idx) => (
                           <Badge
@@ -257,7 +236,7 @@ export default function ProductionShowcasePage() {
           <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
             <ClaudeCodeDashboard
               onWorkflowComplete={(result: WorkflowResult) => {
-                console.log('Claude Code workflow completed:', result);
+                console.log('Claude Code workflow, completed:', result);
               }}
             />
           </div>
@@ -281,7 +260,7 @@ export default function ProductionShowcasePage() {
               <div className="text-center py-8">
                 <Button
                   asChild
-                  className="bg-brand-primary-600 hover:bg-brand-primary-700"
+                  className="bg-brand-primary-600, hover:bg-brand-primary-700"
                 >
                   <Link href="/ui-builder">
                     Launch UI Builder
@@ -325,7 +304,7 @@ export default function ProductionShowcasePage() {
                 </div>
               </div>
               <div className="text-center">
-                <Button asChild className="bg-green-600 hover:bg-green-700">
+                <Button asChild className="bg-green-600, hover:bg-green-700">
                   <Link href="/analytics">
                     View Full Analytics
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -350,7 +329,7 @@ export default function ProductionShowcasePage() {
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
-                <Button asChild className="bg-orange-600 hover:bg-orange-700">
+                <Button asChild className="bg-orange-600, hover:bg-orange-700">
                   <Link href="/collaborate">
                     Enter Collaboration Hub
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -370,7 +349,7 @@ export default function ProductionShowcasePage() {
   };
 
   const renderEngineeringHighlights = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
       {engineeringHighlights.map((highlight, index) => {
         const Icon = highlight.icon;
         return (
@@ -405,7 +384,7 @@ export default function ProductionShowcasePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50 dark:from-gray-950 dark:via-purple-950/20 dark:to-blue-950/20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50, dark:from-gray-950, dark:via-purple-950/20, dark:to-blue-950/20">
       {/* Hero Section */}
       <section className="relative py-32 px-4 text-center">
         <div className="max-w-6xl mx-auto">
@@ -416,17 +395,17 @@ export default function ProductionShowcasePage() {
           >
             <Badge
               variant="outline"
-              className="mb-6 border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
+              className="mb-6 border-purple-200, dark:border-purple-800 text-purple-700, dark:text-purple-300 bg-purple-50/50, dark:bg-purple-950/50"
             >
               <Sparkles className="w-3 h-3 mr-1" />
               Production-Ready AI Platform
             </Badge>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
+            <h1 className="text-5xl, md:text-7xl font-bold text-gradient mb-6">
               AI-Guided SaaS Platform
             </h1>
 
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600, dark:text-gray-300 mb-12 max-w-3xl mx-auto">
               Experience sophisticated engineering with multi-agent AI
               orchestration, advanced token optimization, and production-grade
               system architecture.
@@ -440,7 +419,7 @@ export default function ProductionShowcasePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-16"
           >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+            <h2 className="text-2xl font-bold text-gray-900, dark:text-white mb-8">
               Advanced Engineering Foundation
             </h2>
             {renderEngineeringHighlights()}
@@ -478,7 +457,7 @@ export default function ProductionShowcasePage() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid, lg:grid-cols-3 gap-8">
             {/* Feature Tabs */}
             <div className="lg:col-span-1">
               <div className="space-y-3">
@@ -490,7 +469,7 @@ export default function ProductionShowcasePage() {
                       className={`w-full p-4 rounded-lg text-left transition-all ${
                         activeDemo === feature.demo
                           ? 'bg-white/20 border border-white/30'
-                          : 'bg-white/5 hover:bg-white/10'
+                          : 'bg-white/5, hover:bg-white/10'
                       }`}
                       onClick={() => setActiveDemo(feature.demo)}
                       whileHover={{ scale: 1.02 }}
@@ -548,10 +527,10 @@ export default function ProductionShowcasePage() {
               Join the next generation of sophisticated AI-powered development
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col, sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-brand-primary-500 hover:from-blue-600 hover:to-brand-primary-600"
+                className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600, hover:to-brand-primary-600"
                 asChild
               >
                 <Link href="/auth/signin">
@@ -562,7 +541,7 @@ export default function ProductionShowcasePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/20 text-white hover:bg-white/10"
+                className="border-white/20 text-white, hover:bg-white/10"
                 asChild
               >
                 <Link href="/admin">

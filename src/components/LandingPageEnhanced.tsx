@@ -6,8 +6,7 @@ import {
   CardEnhancedContent,
   CardEnhancedDescription,
   CardEnhancedHeader,
-  CardEnhancedTitle,
-} from '@/components/ui/card-enhanced';
+  CardEnhancedTitle} from '@/components/ui/card-enhanced';
 import { Badge } from '@/components/ui/badge';
 import {
   Wrench,
@@ -25,8 +24,7 @@ import {
   Star,
   Sparkles,
   TrendingUp,
-  Clock,
-} from 'lucide-react';
+  Clock} from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -37,44 +35,37 @@ const features = [
     title: 'AI-Powered Development',
     description:
       'Leverage advanced AI to accelerate your development workflow and make smarter decisions with intelligent code generation.',
-    gradient: 'primary',
-  },
+    gradient: 'primary'},
   {
     icon: Wrench,
     title: 'Visual UI Builder',
     description:
       'Create stunning interfaces with our drag-and-drop UI builder and comprehensive component library.',
-    gradient: 'secondary',
-  },
+    gradient: 'secondary'},
   {
     icon: BarChart3,
     title: 'Advanced Analytics',
     description:
       'Get deep insights into your application performance and user behavior with real-time dashboards.',
-    gradient: 'success',
-  },
+    gradient: 'success'},
   {
     icon: Users,
     title: 'Team Collaboration',
     description:
       'Work seamlessly with your team using real-time collaboration tools and shared workspaces.',
-    gradient: 'warning',
-  },
+    gradient: 'warning'},
   {
     icon: Code,
     title: 'Code Generation',
     description:
       'Generate production-ready code automatically from your designs and specifications with AI assistance.',
-    gradient: 'primary',
-  },
+    gradient: 'primary'},
   {
     icon: Shield,
     title: 'Enterprise Security',
     description:
       'Built with security-first principles and enterprise-grade protection for your applications.',
-    gradient: 'error',
-  },
-];
+    gradient: 'error'}];
 
 const benefits = [
   { text: 'Reduce development time by 70%', icon: Clock },
@@ -82,15 +73,13 @@ const benefits = [
   { text: 'Real-time team collaboration', icon: Users },
   { text: 'Enterprise-grade security', icon: Shield },
   { text: 'Scalable cloud infrastructure', icon: Globe },
-  { text: 'Comprehensive analytics dashboard', icon: BarChart3 },
-];
+  { text: 'Comprehensive analytics dashboard', icon: BarChart3 }];
 
 const stats = [
   { value: '10,000+', label: 'Developers', icon: Users },
   { value: '99.9%', label: 'Uptime', icon: TrendingUp },
   { value: '70%', label: 'Faster Development', icon: Rocket },
-  { value: '24/7', label: 'Support', icon: Shield },
-];
+  { value: '24/7', label: 'Support', icon: Shield }];
 
 export default function LandingPageEnhanced() {
   const [heroRef, heroInView] = useInView({ threshold: 0.1, triggerOnce: true });
@@ -99,7 +88,7 @@ export default function LandingPageEnhanced() {
   const [statsRef, statsInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark:from-slate-900, dark:via-slate-800, dark:to-slate-900">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float" />
@@ -120,19 +109,19 @@ export default function LandingPageEnhanced() {
               AI-Powered SaaS Platform
             </Badge>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent dark:from-white dark:via-blue-100 dark:to-purple-100">
+            <h1 className="text-4xl, md:text-6xl, lg:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent, dark:from-white, dark:via-blue-100, dark:to-purple-100">
               Build Better Software
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Faster Than Ever
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl, md:text-2xl text-gray-600, dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
               Transform your development workflow with our AI-guided SaaS platform. 
               Create, collaborate, and deploy applications with unprecedented speed and intelligence.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col, sm:flex-row gap-4 justify-center mb-12">
               <ButtonPremium 
                 size="xl" 
                 variant="gradient" 
@@ -159,7 +148,7 @@ export default function LandingPageEnhanced() {
               </ButtonPremium>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500, dark:text-gray-400">
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-4 w-4 text-green-500" />
                 No credit card required
@@ -184,7 +173,7 @@ export default function LandingPageEnhanced() {
             initial={{ opacity: 0, y: 30 }}
             animate={statsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            className="grid grid-cols-2, md:grid-cols-4 gap-6"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -195,10 +184,10 @@ export default function LandingPageEnhanced() {
               >
                 <CardEnhanced variant="glass" className="text-center p-6">
                   <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-600" />
-                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+                  <div className="text-3xl font-bold text-gray-900, dark:text-white mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-sm text-gray-600, dark:text-gray-400">
                     {stat.label}
                   </div>
                 </CardEnhanced>
@@ -217,16 +206,16 @@ export default function LandingPageEnhanced() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            <h2 className="text-3xl, md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
               Everything You Need to Build Amazing Software
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600, dark:text-gray-300 max-w-3xl mx-auto">
               Our comprehensive platform provides all the tools and intelligence
               you need to create, deploy, and scale your applications.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid, md:grid-cols-2, lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -258,16 +247,16 @@ export default function LandingPageEnhanced() {
       {/* Benefits Section */}
       <section ref={benefitsRef} className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid, lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={benefitsInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+              <h2 className="text-3xl, md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
                 Why Choose Our Platform?
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600, dark:text-gray-300 mb-8 leading-relaxed">
                 Join thousands of developers and teams who have transformed
                 their development process with our AI-powered platform.
               </p>
@@ -279,12 +268,12 @@ export default function LandingPageEnhanced() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={benefitsInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
+                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50, dark:bg-gray-800/50 backdrop-blur-sm"
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
                       <benefit.icon className="h-4 w-4 text-white" />
                     </div>
-                    <span className="text-base font-medium text-gray-900 dark:text-white">
+                    <span className="text-base font-medium text-gray-900, dark:text-white">
                       {benefit.text}
                     </span>
                   </motion.div>
@@ -322,7 +311,7 @@ export default function LandingPageEnhanced() {
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
                         <CheckCircle className="h-5 w-5 text-white" />
                       </div>
-                      <span className="font-semibold text-gray-900 dark:text-white">Project Created</span>
+                      <span className="font-semibold text-gray-900, dark:text-white">Project Created</span>
                     </div>
                     <Badge variant="secondary">2 min ago</Badge>
                   </motion.div>
@@ -337,7 +326,7 @@ export default function LandingPageEnhanced() {
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
                         <Code className="h-5 w-5 text-white" />
                       </div>
-                      <span className="font-semibold text-gray-900 dark:text-white">AI Code Generated</span>
+                      <span className="font-semibold text-gray-900, dark:text-white">AI Code Generated</span>
                     </div>
                     <Badge variant="secondary">1 min ago</Badge>
                   </motion.div>
@@ -352,7 +341,7 @@ export default function LandingPageEnhanced() {
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
                         <Globe className="h-5 w-5 text-white" />
                       </div>
-                      <span className="font-semibold text-gray-900 dark:text-white">
+                      <span className="font-semibold text-gray-900, dark:text-white">
                         Deployed to Production
                       </span>
                     </div>
@@ -374,14 +363,14 @@ export default function LandingPageEnhanced() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            <h2 className="text-3xl, md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
               Ready to Transform Your Development Process?
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+            <p className="text-xl text-gray-600, dark:text-gray-300 mb-8">
               Join thousands of developers building the future with AI-powered tools.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <div className="flex flex-col, sm:flex-row gap-4 justify-center mb-8">
               <ButtonPremium 
                 size="xl" 
                 variant="gradient" 
@@ -414,7 +403,7 @@ export default function LandingPageEnhanced() {
                   className="h-5 w-5 fill-yellow-400 text-yellow-400"
                 />
               ))}
-              <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
+              <span className="ml-2 text-sm text-gray-500, dark:text-gray-400">
                 Trusted by 10,000+ developers
               </span>
             </div>

@@ -13,12 +13,7 @@ export interface RequirementAnalysis {
 }
 
 export interface UserStory {
-  id: string
-  title: string
-  asA: string
-  iWant: string
-  soThat: string
-  acceptanceCriteria: string[]
+  id: string, title: string, asA: string, iWant: string, soThat: string, acceptanceCriteria: string[]
   priority: 'high' | 'medium' | 'low'
   estimatedEffort: 'small' | 'medium' | 'large'
 }
@@ -50,36 +45,36 @@ export class AnalystAgent extends Agent {
     try {
       this.think('Starting requirement analysis process...')
 
-      // Step 1: Extract raw requirements
+      // Step, 1: Extract raw requirements
       const rawRequirements = await this.extractRequirements(input)
       this.observe('Extracted raw requirements', rawRequirements)
 
-      // Step 2: Categorize requirements
+      // Step, 2: Categorize requirements
       const categorizedReqs = await this.categorizeRequirements(rawRequirements)
       this.observe('Categorized requirements', categorizedReqs)
 
-      // Step 3: Generate user stories
+      // Step, 3: Generate user stories
       const userStories = await this.generateUserStories(
         categorizedReqs.functionalRequirements,
         input
       )
       this.observe('Generated user stories', userStories)
 
-      // Step 4: Identify risks and constraints
+      // Step, 4: Identify risks and constraints
       const risks = await this.identifyRisks(input, categorizedReqs)
       const constraints = await this.identifyConstraints(input)
       
       this.observe('Identified risks', risks)
       this.observe('Identified constraints', constraints)
 
-      // Step 5: Define success criteria
+      // Step, 5: Define success criteria
       const successCriteria = await this.defineSuccessCriteria(
         categorizedReqs.functionalRequirements,
         userStories
       )
       this.observe('Defined success criteria', successCriteria)
 
-      // Step 6: Technical considerations
+      // Step, 6: Technical considerations
       const technicalConsiderations = await this.analyzeTechnicalAspects(input, categorizedReqs)
       this.observe('Technical considerations', technicalConsiderations)
 
@@ -117,15 +112,15 @@ export class AnalystAgent extends Agent {
       }
 
     } catch (error) {
-      this.think(`Error during analysis: ${error}`)
+      this.think(`Error during, analysis: ${error}`)
       throw error
     }
   }
 
   private async extractRequirements(input: string): Promise<string> {
-    const prompt = `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any assumptions:
+    const prompt = `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions:
 
-Project Description:
+Project, Description:
 ${input}
 
 Provide a comprehensive list of all requirements found.`
@@ -143,7 +138,7 @@ Provide a comprehensive list of all requirements found.`
     nonFunctionalRequirements: string[]
     assumptions: string[]
   }> {
-    const prompt = `Categorize the following requirements into:
+    const prompt = `Categorize the following requirements, into:
 1. Functional Requirements (what the system should do)
 2. Non-Functional Requirements (quality attributes like performance, security, usability)
 3. Assumptions (things we assume to be true)
@@ -168,10 +163,10 @@ Format the response as JSON with arrays for each category.`
   ): Promise<UserStory[]> {
     const prompt = `Based on these functional requirements and the original project description, create user stories in the standard format.
 
-Functional Requirements:
+Functional, Requirements:
 ${functionalReqs.join('\n')}
 
-Original Description:
+Original, Description:
 ${originalInput}
 
 For each user story, provide:
@@ -194,7 +189,7 @@ Format as JSON array of user story objects.`
     const stories = JSON.parse(response)
     
     // Add IDs to stories
-    return stories.map((story: any, index: number) => ({
+    return stories.map((story, index: number) => ({
       ...story,
       id: `US-${index + 1}`
     }))
@@ -202,14 +197,13 @@ Format as JSON array of user story objects.`
 
   private async identifyRisks(
     input: string,
-    requirements: any
-  ): Promise<string[]> {
+    requirements): Promise<string[]> {
     const prompt = `Identify potential risks for this project based on the requirements and description.
 
-Project Description:
+Project, Description:
 ${input}
 
-Requirements Summary:
+Requirements, Summary:
 ${JSON.stringify(requirements, null, 2)}
 
 List technical risks, business risks, timeline risks, and any other concerns. Be specific and actionable.`
@@ -224,7 +218,7 @@ List technical risks, business risks, timeline risks, and any other concerns. Be
   }
 
   private async identifyConstraints(input: string): Promise<string[]> {
-    const prompt = `Identify all constraints mentioned or implied in this project description:
+    const prompt = `Identify all constraints mentioned or implied in this project, description:
 
 ${input}
 
@@ -250,10 +244,10 @@ List each constraint clearly.`
   ): Promise<string[]> {
     const prompt = `Define measurable success criteria for this project based on the requirements and user stories.
 
-Functional Requirements:
+Functional, Requirements:
 ${functionalReqs.join('\n')}
 
-Key User Stories:
+Key User, Stories:
 ${userStories.slice(0, 5).map(s => s.title).join('\n')}
 
 Provide specific, measurable, achievable, relevant, and time-bound (SMART) criteria.`
@@ -268,11 +262,10 @@ Provide specific, measurable, achievable, relevant, and time-bound (SMART) crite
 
   private async analyzeTechnicalAspects(
     input: string,
-    requirements: any
-  ): Promise<string[]> {
-    const prompt = `Analyze the technical aspects and considerations for this project:
+    requirements): Promise<string[]> {
+    const prompt = `Analyze the technical aspects and considerations for this, project:
 
-Project Description:
+Project, Description:
 ${input}
 
 Requirements:

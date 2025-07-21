@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy - AI Guided SaaS Platform',
-  description: 'Our privacy policy and data protection practices',
-};
+  description: 'Our privacy policy and data protection practices'};
 
 export default function PrivacyPage() {
   return (
@@ -11,7 +10,7 @@ export default function PrivacyPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
         <p className="text-muted-foreground mb-8">
-          Last updated: {new Date().toLocaleDateString()}
+          Last, updated: {new Date().toLocaleDateString()}
         </p>
 
         <div className="prose prose-lg max-w-none space-y-6">

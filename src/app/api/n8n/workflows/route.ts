@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
       }))
     })
   } catch (error) {
-    console.error('Failed to list workflows:', error)
+    console.error('Failed to list, workflows:', error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to list workflows' },
       { status: 500 }
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Failed to create workflow:', error)
+    console.error('Failed to create, workflow:', error)
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -137,7 +137,7 @@ export async function PUT(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Failed to update workflow:', error)
+    console.error('Failed to update, workflow:', error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to update workflow' },
       { status: 500 }

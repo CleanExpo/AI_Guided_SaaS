@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(generation);
   } catch (error) {
-    console.error('Visual generation error:', error);
+    console.error('Visual generation, error:', error);
     return NextResponse.json(
       { error: 'Failed to generate image' },
       { status: 500 }
@@ -63,7 +63,7 @@ export async function GET() {
 
     return NextResponse.json(capabilities);
   } catch (error) {
-    console.error('Visual generation capabilities error:', error);
+    console.error('Visual generation capabilities, error:', error);
     return NextResponse.json(
       { error: 'Failed to get generation capabilities' },
       { status: 500 }

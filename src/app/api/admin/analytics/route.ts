@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
         range
       })
     } catch (dbError) {
-      console.error('Database error:', dbError)
+      console.error('Database, error:', dbError)
       
       // Fallback to empty analytics if database is not available
       const fallbackData = {
@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
     }
 
   } catch (error) {
-    console.error('Admin analytics error:', error)
+    console.error('Admin analytics, error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -105,7 +105,5 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  })
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'}})
 }

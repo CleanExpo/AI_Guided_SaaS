@@ -16,10 +16,13 @@ export type {
   AgentTask,
   TaskResult,
   RuntimeMetrics,
-  ExecutionPlan,
+  ExecutionPlan
+} from './AgentRuntime'
+
+export type {
   OrchestratorConfig,
   ProjectRequest,
   ProjectResult,
   ProjectSummary,
   Deliverable
-} from './AgentRuntime'
+} from './AgentOrchestrator'

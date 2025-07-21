@@ -1,204 +1,319 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Clock, Users, Star, PlayCircle } from 'lucide-react';
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Tutorials - AI Guided SaaS Platform',
-  description: 'Step-by-step tutorials to master AI Guided SaaS Platform',
-};
+import React, { useState, useEffect } from 'react'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { 
+  Play, 
+  Clock, 
+  Trophy, 
+  CheckCircle, 
+  Lock,
+  Star,
+  Zap,
+  BookOpen,
+  Code,
+  Rocket
+} from 'lucide-react'
+import { cn } from '@/utils/cn'
+import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem'
+import { InteractiveTutorialSystem, Tutorial } from '@/lib/tutorials/InteractiveTutorialSystem'
+import { useSession } from 'next-auth/react'
 
-const tutorials = [
-  {
-    id: 1,
-    title: 'Getting Started with AI Code Generation',
-    description:
-      'Learn the basics of using AI to generate high-quality code for your projects.',
-    level: 'Beginner',
-    duration: '15 min',
-    rating: 4.8,
-    students: 1250,
-    category: 'Getting Started',
-  },
-  {
-    id: 2,
-    title: 'Building Your First SaaS Application',
-    description:
-      'Complete walkthrough of creating a full-stack SaaS app from scratch.',
-    level: 'Intermediate',
-    duration: '45 min',
-    rating: 4.9,
-    students: 890,
-    category: 'Full Stack',
-  },
-  {
-    id: 3,
-    title: 'Advanced AI Prompt Engineering',
-    description:
-      'Master the art of crafting effective prompts for better AI-generated code.',
-    level: 'Advanced',
-    duration: '30 min',
-    rating: 4.7,
-    students: 650,
-    category: 'AI & ML',
-  },
-  {
-    id: 4,
-    title: 'API Integration Best Practices',
-    description:
-      'Learn how to integrate external APIs efficiently in your applications.',
-    level: 'Intermediate',
-    duration: '25 min',
-    rating: 4.6,
-    students: 720,
-    category: 'Backend',
-  },
-  {
-    id: 5,
-    title: 'Deploying to Production',
-    description:
-      'Complete guide to deploying your applications to production environments.',
-    level: 'Intermediate',
-    duration: '35 min',
-    rating: 4.8,
-    students: 980,
-    category: 'DevOps',
-  },
-  {
-    id: 6,
-    title: 'UI/UX Design with AI Assistance',
-    description:
-      'Create beautiful user interfaces with AI-powered design suggestions.',
-    level: 'Beginner',
-    duration: '20 min',
-    rating: 4.5,
-    students: 540,
-    category: 'Design',
-  },
-];
+interface TutorialCardProps {
+  tutorial: Tutorial, isCompleted: boolean, isLocked: boolean, onStart: () => void
+}
 
-const categories = [
-  'All',
-  'Getting Started',
-  'Full Stack',
-  'AI & ML',
-  'Backend',
-  'DevOps',
-  'Design',
-];
-
-const getLevelColor = (level: string) => {
-  switch (level) {
-    case 'Beginner':
-      return 'bg-green-100 text-green-800';
-    case 'Intermediate':
-      return 'bg-yellow-100 text-yellow-800';
-    case 'Advanced':
-      return 'bg-red-100 text-red-800';
-    default:
-      return 'bg-gray-100 text-gray-800';
+function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
+  const difficultyColors = {
+    beginner: 'bg-green-100 text-green-700',
+    intermediate: 'bg-yellow-100 text-yellow-700',
+    advanced: 'bg-red-100 text-red-700'
   }
-};
 
-export default function TutorialsPage() {
+  const categoryIcons = {
+    basics: BookOpen,
+    projects: Code,
+    ai: Zap,
+    deployment: Rocket,
+    advanced: Trophy
+  }
+
+  const CategoryIcon = categoryIcons[tutorial.category as keyof typeof categoryIcons] || BookOpen
+
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">Tutorials</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Master AI Guided SaaS Platform with our comprehensive step-by-step
-            tutorials
-          </p>
-        </div>
-
-        {/* Categories */}
-        <div className="flex flex-wrap gap-2 justify-center mb-12">
-          {categories.map(category => (
-            <Badge
-              key={category}
-              variant={category === 'All' ? 'default' : 'secondary'}
-              className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-            >
-              {category}
-            </Badge>
-          ))}
-        </div>
-
-        {/* Tutorials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {tutorials.map(tutorial => (
-            <Card
-              key={tutorial.id}
-              className="hover:shadow-lg transition-shadow"
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <Badge variant="secondary">{tutorial.category}</Badge>
-                  <Badge className={getLevelColor(tutorial.level)}>
-                    {tutorial.level}
-                  </Badge>
-                </div>
-                <CardTitle className="line-clamp-2">{tutorial.title}</CardTitle>
-                <CardDescription className="line-clamp-3">
-                  {tutorial.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-sm text-muted-foreground">
-                    <div className="flex items-center space-x-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{tutorial.duration}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Users className="h-4 w-4" />
-                      <span>{tutorial.students.toLocaleString()}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span>{tutorial.rating}</span>
-                    </div>
-                  </div>
-                  <Button asChild className="w-full">
-                    <Link href={`/tutorials/${tutorial.id}`}>
-                      <PlayCircle className="mr-2 h-4 w-4" />
-                      Start Tutorial
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Learning Path */}
-        <div className="mt-16 text-center bg-muted rounded-lg p-8">
-          <h2 className="text-2xl font-semibold mb-4">
-            Structured Learning Path
-          </h2>
-          <p className="text-muted-foreground mb-6">
-            Follow our recommended learning path to become an expert in
-            AI-powered development
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild>
-              <Link href="/tutorials/learning-path">View Learning Path</Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/docs">Browse Documentation</Link>
-            </Button>
+    <Card className={cn(
+      "p-6 transition-all duration-200",
+      isLocked ? "opacity-60" : "hover:shadow-lg",
+      isCompleted && "border-green-500"
+    )}>
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className={cn(
+            "h-12 w-12 rounded-lg flex items-center justify-center",
+            isCompleted ? "bg-green-100" : "bg-primary/10"
+          )}>
+            {isCompleted ? (
+              <CheckCircle className="h-6 w-6 text-green-600" />
+            ) : isLocked ? (
+              <Lock className="h-6 w-6 text-muted-foreground" />
+            ) : (
+              <CategoryIcon className="h-6 w-6 text-primary" />
+            )}
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg">{tutorial.title}</h3>
+            <div className="flex items-center gap-2 mt-1">
+              <Badge variant="secondary" className={difficultyColors[tutorial.difficulty]}>
+                {tutorial.difficulty}
+              </Badge>
+              <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                <span>{tutorial.estimatedTime}</span>
+              </div>
+            </div>
           </div>
         </div>
+        {tutorial.completionRewards.badges && tutorial.completionRewards.badges.length > 0 && (
+          <div className="flex gap-1">
+            {tutorial.completionRewards.badges.map((badge) => (
+              <div key={badge} className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                <Star className="h-4 w-4 text-yellow-600" />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
+
+      <p className="text-sm text-muted-foreground mb-4">
+        {tutorial.description}
+      </p>
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-1 text-sm">
+          <Trophy className="h-4 w-4 text-primary" />
+          <span>{tutorial.completionRewards.points} points</span>
+        </div>
+        <Button
+          onClick={onStart}
+          disabled={isLocked}
+          variant={isCompleted ? "outline" : "default"}
+          size="sm"
+        >
+          {isCompleted ? (
+            <>
+              <CheckCircle className="h-4 w-4 mr-2" />
+              Review
+            </>
+          ) : isLocked ? (
+            <>
+              <Lock className="h-4 w-4 mr-2" />
+              Locked
+            </>
+          ) : (
+            <>
+              <Play className="h-4 w-4 mr-2" />
+              Start
+            </>
+          )}
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
+export default function TutorialsPage() {
+  const { data: session } = useSession()
+  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)
+  const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)
+  const [tutorials, setTutorials] = useState<Tutorial[]>([])
+  const [completedTutorials, setCompletedTutorials] = useState<string[]>([])
+  const [userProgress, setUserProgress] = useState<any>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+
+  useEffect(() => {
+    // Initialize systems
+    const docs = new DynamicDocumentationSystem()
+    const tutorialSys = new InteractiveTutorialSystem(docs)
+    
+    setDocSystem(docs)
+    setTutorialSystem(tutorialSys)
+    
+    // Load tutorials
+    const allTutorials = tutorialSys.getAllTutorials()
+    setTutorials(allTutorials)
+    
+    return () => {
+      docs.destroy()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (session?.user?.id && tutorialSystem) {
+      // Load user progress
+      loadUserProgress()
+    }
+  }, [session, tutorialSystem])
+
+  const loadUserProgress = async () => {
+    if (!session?.user?.id) return
+    
+    try {
+      const response = await fetch(`/api/tutorials/progress?userId=${session.user.id}`)
+      const data = await response.json()
+      
+      const completed = data.progress
+        .filter((p) => p.completed_at)
+        .map((p) => p.tutorial_id)
+      
+      setCompletedTutorials(completed)
+      
+      // Calculate overall progress
+      const totalPoints = data.progress.reduce((sum: number, p) => sum + (p.score || 0), 0)
+      setUserProgress({
+        completedCount: completed.length,
+        totalPoints,
+        level: Math.floor(totalPoints / 1000) + 1
+      })
+    } catch (error) {
+      console.error('Failed to load, progress:', error)
+    }
+  }
+
+  const handleStartTutorial = async (tutorialId: string) => {
+    if (!tutorialSystem || !session?.user?.id) return
+    
+    try {
+      await tutorialSystem.startTutorial(tutorialId, session.user.id)
+      // In a real app, this would open the tutorial overlay
+      window.location.href = `/tutorials/${tutorialId}`
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
+  const isLocked = (tutorial: Tutorial): boolean => {
+    if (tutorial.prerequisites.length === 0) return false
+    return !tutorial.prerequisites.every(prereq => completedTutorials.includes(prereq))
+  }
+
+  const categories = [
+    { id: 'all', label: 'All Tutorials', icon: BookOpen },
+    { id: 'basics', label: 'Basics', icon: BookOpen },
+    { id: 'projects', label: 'Projects', icon: Code },
+    { id: 'ai', label: 'AI Features', icon: Zap },
+    { id: 'deployment', label: 'Deployment', icon: Rocket },
+    { id: 'advanced', label: 'Advanced', icon: Trophy }
+  ]
+
+  const filteredTutorials = selectedCategory === 'all' 
+    ? tutorials 
+    : tutorials.filter(t => t.category === selectedCategory)
+
+  const completionPercentage = tutorials.length > 0 
+    ? (completedTutorials.length / tutorials.length) * 100 
+    : 0
+
+  if (!tutorialSystem) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading tutorials...</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">Interactive Tutorials</h1>
+        <p className="text-muted-foreground">
+          Learn by doing with our step-by-step interactive tutorials
+        </p>
+      </div>
+
+      {/* Progress Overview */}
+      {userProgress && (
+        <Card className="p-6 mb-8">
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-6">
+            <div>
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Overall Progress</h3>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold">
+                    {completedTutorials.length}/{tutorials.length}
+                  </span>
+                  <span className="text-sm text-muted-foreground">
+                    {completionPercentage.toFixed(0)}%
+                  </span>
+                </div>
+                <Progress value={completionPercentage} className="h-2" />
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Total Points</h3>
+              <div className="flex items-center gap-2">
+                <Trophy className="h-6 w-6 text-yellow-500" />
+                <span className="text-2xl font-bold">{userProgress.totalPoints}</span>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Current Level</h3>
+              <div className="flex items-center gap-2">
+                <Star className="h-6 w-6 text-primary" />
+                <span className="text-2xl font-bold">Level {userProgress.level}</span>
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+
+      {/* Category Filter */}
+      <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+        {categories.map((category) => {
+          const Icon = category.icon
+          return (
+            <Button
+              key={category.id}
+              variant={selectedCategory === category.id ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedCategory(category.id)}
+              className="shrink-0"
+            >
+              <Icon className="h-4 w-4 mr-2" />
+              {category.label}
+            </Button>
+          )
+        })}
+      </div>
+
+      {/* Tutorials Grid */}
+      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6">
+        {filteredTutorials.map((tutorial) => (
+          <TutorialCard
+            key={tutorial.id}
+            tutorial={tutorial}
+            isCompleted={completedTutorials.includes(tutorial.id)}
+            isLocked={isLocked(tutorial)}
+            onStart={() => handleStartTutorial(tutorial.id)}
+          />
+        ))}
+      </div>
+
+      {filteredTutorials.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">
+            No tutorials found in this category.
+          </p>
+        </div>
+      )}
     </div>
-  );
+  )
 }

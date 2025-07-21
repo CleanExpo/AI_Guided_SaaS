@@ -1,0 +1,69 @@
+groups:
+  - name: agent_alerts
+    interval: 30s
+    rules:
+      # High CPU usage alert
+      - alert: AgentHighCPU
+        expr: |
+          rate(container_cpu_usage_seconds_total{name=~"ai-saas-agent-.*"}[5m]) > 0.8
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent container {{ $labels.name }} has high CPU usage"
+          description: "CPU usage is above 80% (current: {{ $value | humanizePercentage }})"
+
+      # High memory usage alert
+      - alert: AgentHighMemory
+        expr: |
+          container_memory_usage_bytes{name=~"ai-saas-agent-.*"} / container_spec_memory_limit_bytes{name=~"ai-saas-agent-.*"} > 0.9
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent container {{ $labels.name }} has high memory usage"
+          description: "Memory usage is above 90% of limit"
+
+      # Container restart alert
+      - alert: AgentRestarting
+        expr: |
+          increase(container_restart_count[5m]) > 0
+        labels:
+          severity: critical
+        annotations:
+          summary: "Agent container {{ $labels.name }} is restarting"
+          description: "Container has restarted {{ $value }} times in the last 5 minutes"
+
+      # Agent unhealthy alert
+      - alert: AgentUnhealthy
+        expr: |
+          up{job="agents"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Agent {{ $labels.instance }} is unhealthy"
+          description: "Agent health check is failing"
+
+      # Task queue backup alert
+      - alert: TaskQueueBackup
+        expr: |
+          agent_task_queue_length > 50
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Task queue is backing up"
+          description: "{{ $value }} tasks are queued"
+
+      # System overload alert
+      - alert: SystemOverload
+        expr: |
+          (avg(rate(container_cpu_usage_seconds_total{name=~"ai-saas-.*"}[5m])) > 0.7) and
+          (avg(container_memory_usage_bytes{name=~"ai-saas-.*"} / container_spec_memory_limit_bytes{name=~"ai-saas-.*"}) > 0.8)
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: "System is under heavy load"
+          description: "Both CPU and memory usage are high across agent containers"

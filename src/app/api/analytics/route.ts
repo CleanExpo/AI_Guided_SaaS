@@ -31,8 +31,7 @@ export async function GET(request: NextRequest) {
         break
       case 'content':
         data = await AnalyticsService.getContentMetrics()
-        break
-      default:
+        break, default:
         return NextResponse.json({ error: 'Invalid analytics type' }, { status: 400 })
     }
 
@@ -44,7 +43,7 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Analytics API error:', error)
+    console.error('Analytics API, error:', error)
     return NextResponse.json(
       { error: 'Failed to fetch analytics data' },
       { status: 500 }
@@ -83,7 +82,7 @@ export async function POST(request: NextRequest) {
       analyticsData.content = await AnalyticsService.getContentMetrics()
     }
 
-    // In a real implementation, you might want to:
+    // In a real implementation, you might want, to:
     // 1. Generate a CSV/Excel file
     // 2. Store it temporarily
     // 3. Return a download URL
@@ -98,7 +97,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Analytics export error:', error)
+    console.error('Analytics export, error:', error)
     return NextResponse.json(
       { error: 'Failed to export analytics data' },
       { status: 500 }

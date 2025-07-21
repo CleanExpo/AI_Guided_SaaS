@@ -3,13 +3,7 @@ import { join } from 'path'
 import { mcp__memory__create_entities, mcp__memory__search_nodes } from '@/lib/mcp'
 
 export interface AgentConfig {
-  agent_id: string
-  name: string
-  version: string
-  description: string
-  role: string
-  priority: number
-  capabilities: string[]
+  agent_id: string, name: string, version: string, description: string, role: string, priority: number, capabilities: string[]
   specializations: Record<string, any>
   coordination_protocols: {
     initiates_with: string[]
@@ -36,8 +30,7 @@ export interface AgentLoadResult {
 }
 
 export interface AgentDiscoveryResult {
-  total_agents: number
-  core_agents: AgentConfig[]
+  total_agents: number, core_agents: AgentConfig[]
   orchestration_agents: AgentConfig[]
   specialist_agents: AgentConfig[]
   missing_agents: string[]
@@ -45,10 +38,10 @@ export interface AgentDiscoveryResult {
 }
 
 export class AgentLoader {
-  private static instance: AgentLoader
-  private agentsPath: string
-  private loadedAgents: Map<string, AgentConfig> = new Map()
-  private agentDependencies: Map<string, string[]> = new Map()
+  private static, instance: AgentLoader
+  private, agentsPath: string
+  private, loadedAgents: Map<string, AgentConfig> = new Map()
+  private, agentDependencies: Map<string, string[]> = new Map()
 
   constructor(agentsPath: string = '') {
     // Default to project agents directory
@@ -111,11 +104,11 @@ export class AgentLoader {
       // Store in memory system for persistence
       await this.storeInMemory(result)
 
-      console.log(`📊 Discovery complete: ${result.total_agents} agents loaded`)
+      console.log(`📊 Discovery, complete: ${result.total_agents} agents loaded`)
       
     } catch (error) {
-      console.error('❌ Agent discovery failed:', error)
-      result.load_errors.push(`Discovery failed: ${error}`)
+      console.error('❌ Agent discovery, failed:', error)
+      result.load_errors.push(`Discovery, failed: ${error}`)
     }
 
     return result
@@ -152,14 +145,14 @@ export class AgentLoader {
 
     return { 
       success: false, 
-      error: `Agent not found: ${identifier}` 
+      error: `Agent not, found: ${identifier}` 
     }
   }
 
   /**
    * Get agents required for next stage based on current project state
    */
-  async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise<AgentConfig[]> {
+  async getRequiredAgentsForStage(currentStage: string: projectType: string = 'saas_platform'): Promise<AgentConfig[]> {
     const stageAgentMap: Record<string, string[]> = {
       'requirements': ['ARCHITECT'],
       'architecture': ['ARCHITECT', 'FRONTEND', 'BACKEND'],
@@ -216,7 +209,7 @@ export class AgentLoader {
       executionChain.unshift(orchestratorResult.agent) // Add at beginning
     }
 
-    console.log(`🔗 Execution chain loaded: ${executionChain.map(a => a.role).join(' → ')}`)
+    console.log(`🔗 Execution chain, loaded: ${executionChain.map(a => a.role).join(' → ')}`)
     
     return executionChain
   }
@@ -300,7 +293,7 @@ export class AgentLoader {
       const files = readdirSync(this.agentsPath)
       return files.filter(file => file.startsWith('agent_') && file.endsWith('.json'))
     } catch (error) {
-      console.error(`❌ Failed to read agents directory: ${this.agentsPath}`)
+      console.error(`❌ Failed to read agents, directory: ${this.agentsPath}`)
       return []
     }
   }
@@ -324,7 +317,7 @@ export class AgentLoader {
     } catch (error) {
       return {
         success: false,
-        error: `Parse error: ${error}`
+        error: `Parse, error: ${error}`
       }
     }
   }
@@ -392,24 +385,22 @@ export class AgentLoader {
   private async storeInMemory(result: AgentDiscoveryResult) {
     try {
       // Store agent discovery results in memory system
-      await mcp__memory__create_entities({
-        entities: [{
+      await mcp__memory__create_entities([{
           name: 'AgentDiscoverySession',
           entityType: 'session',
           observations: [
             `Discovered ${result.total_agents} agents`,
-            `Core agents: ${result.core_agents.length}`,
-            `Orchestration agents: ${result.orchestration_agents.length}`,
-            `Specialist agents: ${result.specialist_agents.length}`,
-            `Load errors: ${result.load_errors.length}`,
-            `Missing critical agents: ${result.missing_agents.join(', ') || 'none'}`
+            `Core, agents: ${result.core_agents.length}`,
+            `Orchestration, agents: ${result.orchestration_agents.length}`,
+            `Specialist, agents: ${result.specialist_agents.length}`,
+            `Load, errors: ${result.load_errors.length}`,
+            `Missing critical, agents: ${result.missing_agents.join(', ') || 'none'}`
           ]
-        }]
-      })
+        }])
 
       console.log('💾 Agent discovery results stored in memory')
     } catch (error) {
-      console.log('⚠️ Failed to store in memory system:', error)
+      console.log('⚠️ Failed to store in memory, system:', error)
     }
   }
 

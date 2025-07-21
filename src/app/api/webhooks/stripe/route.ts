@@ -9,8 +9,7 @@ const supabase = createClient(
 );
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-06-30.basil',
-});
+  apiVersion: '2025-06-30.basil'});
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
@@ -33,7 +32,7 @@ export async function POST(req: NextRequest) {
     try {
       event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
     } catch (err) {
-      console.error('Webhook signature verification failed:', err);
+      console.error('Webhook signature verification, failed:', err);
       return NextResponse.json(
         { error: 'Webhook signature verification failed' },
         { status: 400 }
@@ -41,7 +40,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Handle the event
-    console.log(`Received event: ${event.type}`);
+    console.log(`Received, event: ${event.type}`);
 
     switch (event.type) {
       case 'customer.subscription.created':
@@ -89,12 +88,12 @@ export async function POST(req: NextRequest) {
         break;
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        console.log(`Unhandled, event: type: ${event.type}`);
     }
 
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error('Webhook error:', error);
+    console.error('Webhook, error:', error);
     return NextResponse.json(
       { error: 'Webhook handler failed' },
       { status: 500 }
@@ -103,8 +102,8 @@ export async function POST(req: NextRequest) {
 }
 
 // Event Handlers
-async function handleSubscriptionCreated(subscription: any) {
-  console.log('Subscription created:', subscription.id);
+async function handleSubscriptionCreated(subscription) {
+  console.log('Subscription, created:', subscription.id);
   
   
   try {
@@ -113,7 +112,7 @@ async function handleSubscriptionCreated(subscription: any) {
     const email = customer.email;
     
     if (!email) {
-      console.error('No email found for customer:', subscription.customer);
+      console.error('No email found for, customer:', subscription.customer);
       return;
     }
     
@@ -125,7 +124,7 @@ async function handleSubscriptionCreated(subscription: any) {
       .single();
     
     if (userError || !user) {
-      console.error('User not found:', email);
+      console.error('User not, found:', email);
       return;
     }
     
@@ -143,21 +142,20 @@ async function handleSubscriptionCreated(subscription: any) {
         cancel_at: subscription.cancel_at ? new Date(subscription.cancel_at * 1000).toISOString() : null,
         canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null,
         trial_start: subscription.trial_start ? new Date(subscription.trial_start * 1000).toISOString() : null,
-        trial_end: subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null,
-      });
+        trial_end: subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null});
     
     if (error) {
-      console.error('Error creating subscription:', error);
+      console.error('Error creating, subscription:', error);
     } else {
       console.log('Subscription created in database');
     }
   } catch (error) {
-    console.error('Error handling subscription creation:', error);
+    console.error('Error handling subscription, creation:', error);
   }
 }
 
-async function handleSubscriptionUpdated(subscription: any) {
-  console.log('Subscription updated:', subscription.id);
+async function handleSubscriptionUpdated(subscription) {
+  console.log('Subscription, updated:', subscription.id);
   
   
   try {
@@ -170,22 +168,21 @@ async function handleSubscriptionUpdated(subscription: any) {
         current_period_end: subscription.current_period_end ? new Date(subscription.current_period_end * 1000).toISOString() : null,
         cancel_at: subscription.cancel_at ? new Date(subscription.cancel_at * 1000).toISOString() : null,
         canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null,
-        trial_end: subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null,
-      })
+        trial_end: subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null})
       .eq('stripe_subscription_id', subscription.id);
     
     if (error) {
-      console.error('Error updating subscription:', error);
+      console.error('Error updating, subscription:', error);
     } else {
       console.log('Subscription updated in database');
     }
   } catch (error) {
-    console.error('Error handling subscription update:', error);
+    console.error('Error handling subscription, update:', error);
   }
 }
 
-async function handleSubscriptionDeleted(subscription: any) {
-  console.log('Subscription deleted:', subscription.id);
+async function handleSubscriptionDeleted(subscription) {
+  console.log('Subscription, deleted:', subscription.id);
   
   
   try {
@@ -198,17 +195,17 @@ async function handleSubscriptionDeleted(subscription: any) {
       .eq('stripe_subscription_id', subscription.id);
     
     if (error) {
-      console.error('Error deleting subscription:', error);
+      console.error('Error deleting, subscription:', error);
     } else {
       console.log('Subscription marked as canceled in database');
     }
   } catch (error) {
-    console.error('Error handling subscription deletion:', error);
+    console.error('Error handling subscription, deletion:', error);
   }
 }
 
-async function handleTrialWillEnd(subscription: any) {
-  console.log('Trial will end for subscription:', subscription.id);
+async function handleTrialWillEnd(subscription) {
+  console.log('Trial will end for, subscription:', subscription.id);
   
   
   try {
@@ -228,21 +225,19 @@ async function handleTrialWillEnd(subscription: any) {
     await supabase
       .from('notifications')
       .insert({
-        user_id: sub.user_id,
-        type: 'trial_ending',
+        user_id: sub.user_id: type: 'trial_ending',
         title: 'Your trial is ending soon',
         message: 'Your trial period will end in 3 days. Please update your payment method to continue using our services.',
-        read: false,
-      });
+        read: false});
     
     console.log('Trial ending notification created');
   } catch (error) {
-    console.error('Error handling trial end notification:', error);
+    console.error('Error handling trial end, notification:', error);
   }
 }
 
-async function handlePaymentSucceeded(invoice: any) {
-  console.log('Payment succeeded for invoice:', invoice.id);
+async function handlePaymentSucceeded(invoice) {
+  console.log('Payment succeeded for, invoice:', invoice.id);
   
   
   try {
@@ -255,21 +250,20 @@ async function handlePaymentSucceeded(invoice: any) {
         amount: invoice.amount_paid,
         currency: invoice.currency,
         status: 'succeeded',
-        paid_at: new Date().toISOString(),
-      });
+        paid_at: new Date().toISOString()});
     
     if (error) {
-      console.error('Error recording payment:', error);
+      console.error('Error recording, payment:', error);
     } else {
       console.log('Payment recorded in database');
     }
   } catch (error) {
-    console.error('Error handling payment success:', error);
+    console.error('Error handling payment, success:', error);
   }
 }
 
-async function handlePaymentFailed(invoice: any) {
-  console.log('Payment failed for invoice:', invoice.id);
+async function handlePaymentFailed(invoice) {
+  console.log('Payment failed for, invoice:', invoice.id);
   
   
   try {
@@ -282,8 +276,7 @@ async function handlePaymentFailed(invoice: any) {
         amount: invoice.amount_due,
         currency: invoice.currency,
         status: 'failed',
-        failed_at: new Date().toISOString(),
-      });
+        failed_at: new Date().toISOString()});
     
     // Get subscription to find user
     const { data: sub } = await supabase
@@ -297,22 +290,20 @@ async function handlePaymentFailed(invoice: any) {
       await supabase
         .from('notifications')
         .insert({
-          user_id: sub.user_id,
-          type: 'payment_failed',
+          user_id: sub.user_id: type: 'payment_failed',
           title: 'Payment Failed',
           message: 'Your payment could not be processed. Please update your payment method.',
-          read: false,
-        });
+          read: false});
     }
     
     console.log('Payment failure handled');
   } catch (error) {
-    console.error('Error handling payment failure:', error);
+    console.error('Error handling payment, failure:', error);
   }
 }
 
 async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent) {
-  console.log('Payment intent succeeded:', paymentIntent.id);
+  console.log('Payment intent, succeeded:', paymentIntent.id);
   
   
   try {
@@ -325,21 +316,20 @@ async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent)
         currency: paymentIntent.currency,
         status: 'succeeded',
         paid_at: new Date().toISOString(),
-        metadata: paymentIntent.metadata,
-      });
+        metadata: paymentIntent.metadata});
     
     if (error) {
-      console.error('Error recording payment intent:', error);
+      console.error('Error recording payment, intent:', error);
     } else {
       console.log('Payment intent recorded');
     }
   } catch (error) {
-    console.error('Error handling payment intent success:', error);
+    console.error('Error handling payment intent, success:', error);
   }
 }
 
 async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
-  console.log('Payment intent failed:', paymentIntent.id);
+  console.log('Payment intent, failed:', paymentIntent.id);
   
   
   try {
@@ -353,21 +343,20 @@ async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
         status: 'failed',
         failed_at: new Date().toISOString(),
         failure_message: paymentIntent.last_payment_error?.message,
-        metadata: paymentIntent.metadata,
-      });
+        metadata: paymentIntent.metadata});
     
     if (error) {
-      console.error('Error recording failed payment intent:', error);
+      console.error('Error recording failed payment, intent:', error);
     } else {
       console.log('Failed payment intent recorded');
     }
   } catch (error) {
-    console.error('Error handling payment intent failure:', error);
+    console.error('Error handling payment intent, failure:', error);
   }
 }
 
 async function handleCustomerCreated(customer: Stripe.Customer) {
-  console.log('Customer created:', customer.id);
+  console.log('Customer, created:', customer.id);
   
   
   try {
@@ -383,17 +372,17 @@ async function handleCustomerCreated(customer: Stripe.Customer) {
       .eq('email', customer.email);
     
     if (error) {
-      console.error('Error updating user with customer ID:', error);
+      console.error('Error updating user with, customer: ID:', error);
     } else {
       console.log('User updated with Stripe customer ID');
     }
   } catch (error) {
-    console.error('Error handling customer creation:', error);
+    console.error('Error handling customer, creation:', error);
   }
 }
 
 async function handleCustomerUpdated(customer: Stripe.Customer) {
-  console.log('Customer updated:', customer.id);
+  console.log('Customer, updated:', customer.id);
   
   
   try {
@@ -409,23 +398,22 @@ async function handleCustomerUpdated(customer: Stripe.Customer) {
         updated_at: new Date().toISOString(),
         metadata: {
           stripe_customer_name: customer.name,
-          stripe_customer_phone: customer.phone,
-        }
+          stripe_customer_phone: customer.phone}
       })
       .eq('stripe_customer_id', customer.id);
     
     if (error) {
-      console.error('Error updating customer data:', error);
+      console.error('Error updating customer, data:', error);
     } else {
       console.log('Customer data updated');
     }
   } catch (error) {
-    console.error('Error handling customer update:', error);
+    console.error('Error handling customer, update:', error);
   }
 }
 
 async function handleCustomerDeleted(customer: Stripe.Customer) {
-  console.log('Customer deleted:', customer.id);
+  console.log('Customer, deleted:', customer.id);
   
   
   try {
@@ -436,11 +424,11 @@ async function handleCustomerDeleted(customer: Stripe.Customer) {
       .eq('stripe_customer_id', customer.id);
     
     if (error) {
-      console.error('Error removing customer ID from user:', error);
+      console.error('Error removing customer ID from, user:', error);
     } else {
       console.log('Customer ID removed from user');
     }
   } catch (error) {
-    console.error('Error handling customer deletion:', error);
+    console.error('Error handling customer, deletion:', error);
   }
 }

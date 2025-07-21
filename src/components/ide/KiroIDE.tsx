@@ -68,7 +68,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
           description: `Project "${project.name}" opened successfully`
         })
       } catch (error) {
-        console.error('Failed to initialize Kiro:', error)
+        console.error('Failed to, initialize: Kiro:', error)
         toast({
           title: 'Connection Error',
           description: 'Failed to connect to Kiro IDE',
@@ -101,7 +101,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
 
   const handleTerminalOutput = (data: { terminalId: string; output: string }) => {
     // Update terminal output
-    console.log('Terminal output:', data)
+    console.log('Terminal, output:', data)
   }
 
   const handleAISuggestion = (data: KiroAIAssistance) => {
@@ -130,7 +130,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
       })
       setActiveFile(path)
     } catch (error) {
-      console.error('Failed to open file:', error)
+      console.error('Failed to open, file:', error)
       toast({
         title: 'Error',
         description: 'Failed to open file',
@@ -149,7 +149,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         description: `${path} saved successfully`
       })
     } catch (error) {
-      console.error('Failed to save file:', error)
+      console.error('Failed to save, file:', error)
       toast({
         title: 'Error',
         description: 'Failed to save file',
@@ -177,7 +177,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
       setTerminals(prev => [...prev, terminal])
       setActiveTerminal(terminal.id)
     } catch (error) {
-      console.error('Failed to create terminal:', error)
+      console.error('Failed to create, terminal:', error)
       toast({
         title: 'Error',
         description: 'Failed to create terminal',
@@ -192,7 +192,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
     try {
       await client.executeCommand(activeTerminal, command)
     } catch (error) {
-      console.error('Failed to execute command:', error)
+      console.error('Failed to execute, command:', error)
     }
   }
 
@@ -204,7 +204,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
       const assistance = await client.getAISuggestions(activeFile)
       setAiAssistance(assistance)
     } catch (error) {
-      console.error('Failed to get AI suggestions:', error)
+      console.error('Failed to get AI, suggestions:', error)
       toast({
         title: 'Error',
         description: 'Failed to get AI suggestions',
@@ -223,7 +223,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         description: 'AI suggestion applied successfully'
       })
     } catch (error) {
-      console.error('Failed to apply suggestion:', error)
+      console.error('Failed to apply, suggestion:', error)
       toast({
         title: 'Error',
         description: 'Failed to apply suggestion',
@@ -243,7 +243,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
     return (
       <div key={tree.path} style={{ paddingLeft: `${level * 16}px` }}>
         <div
-          className="flex items-center gap-2 py-1 px-2 hover:bg-accent rounded cursor-pointer"
+          className="flex items-center gap-2 py-1 px-2, hover:bg-accent rounded cursor-pointer"
           onClick={handleClick}
         >
           {tree.type === 'directory' ? (
@@ -290,9 +290,9 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         </div>
       </div>
 
-      {/* Main content */}
+      {/* Main, content */}
       <ResizablePanelGroup direction="horizontal" className="flex-1">
-        {/* File explorer */}
+        {/* File, explorer */}
         <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
           <div className="h-full border-r">
             <div className="p-2 border-b">
@@ -309,7 +309,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         {/* Editor */}
         <ResizablePanel defaultSize={60}>
           <ResizablePanelGroup direction="vertical">
-            {/* Editor tabs and content */}
+            {/* Editor, tabs and content */}
             <ResizablePanel defaultSize={70}>
               <div className="h-full flex flex-col">
                 {/* Tabs */}
@@ -317,7 +317,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
                   {openFiles.map(file => (
                     <div
                       key={file.path}
-                      className={`flex items-center gap-2 px-3 py-2 border-r cursor-pointer hover:bg-accent ${
+                      className={`flex items-center gap-2 px-3 py-2 border-r cursor-pointer, hover:bg-accent ${
                         activeFile === file.path ? 'bg-accent' : ''
                       }`}
                       onClick={() => setActiveFile(file.path)}
@@ -325,7 +325,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
                       <FileCode2 className="h-3 w-3" />
                       <span className="text-sm">{file.path.split('/').pop()}</span>
                       <button
-                        className="ml-2 hover:bg-destructive/20 rounded"
+                        className="ml-2, hover:bg-destructive/20 rounded"
                         onClick={(e) => {
                           e.stopPropagation()
                           closeFile(file.path)
@@ -337,7 +337,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
                   ))}
                 </div>
 
-                {/* Editor content */}
+                {/* Editor, content */}
                 <div className="flex-1 p-4 overflow-auto">
                   {activeFile && openFiles.find(f => f.path === activeFile) ? (
                     <div ref={editorRef} className="font-mono text-sm">
@@ -368,7 +368,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
                   </Button>
                 </div>
                 <div ref={terminalRef} className="flex-1 bg-black text-white p-2 font-mono text-sm overflow-auto">
-                  {/* Terminal content would go here */}
+                  {/* Terminal, content would go here */}
                   <p>$ Ready for commands...</p>
                 </div>
               </div>
@@ -378,7 +378,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
 
         <ResizableHandle />
 
-        {/* AI Assistant */}
+        {/* AI, Assistant */}
         <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
           <div className="h-full border-l">
             <Tabs defaultValue="suggestions" className="h-full">

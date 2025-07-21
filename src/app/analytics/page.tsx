@@ -6,8 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  CardTitle} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -50,9 +49,7 @@ export default function AnalyticsPage() {
         const response = await fetch('/api/analytics', {
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+            'Content-Type': 'application/json'}});
 
         if (response.ok) {
           const result = await response.json();
@@ -61,7 +58,7 @@ export default function AnalyticsPage() {
           }
         }
       } catch (apiError) {
-        console.log('API not available, using demo data:', apiError);
+        console.log('API not available, using demo, data:', apiError);
       }
 
       // Use API data if available, otherwise use demo data
@@ -75,8 +72,7 @@ export default function AnalyticsPage() {
           { path: '/ui-builder', views: 3102, percentage: 24.1 },
           { path: '/admin', views: 2134, percentage: 16.6 },
           { path: '/collaborate', views: 1876, percentage: 14.6 },
-          { path: '/analytics', views: 1214, percentage: 9.5 },
-        ],
+          { path: '/analytics', views: 1214, percentage: 9.5 }],
         userActivity: [
           { date: '2024-01-01', users: 245, sessions: 312 },
           { date: '2024-01-02', users: 289, sessions: 367 },
@@ -84,20 +80,17 @@ export default function AnalyticsPage() {
           { date: '2024-01-04', users: 298, sessions: 389 },
           { date: '2024-01-05', users: 356, sessions: 445 },
           { date: '2024-01-06', users: 412, sessions: 523 },
-          { date: '2024-01-07', users: 387, sessions: 498 },
-        ],
-      };
+          { date: '2024-01-07', users: 387, sessions: 498 }]};
 
       setAnalyticsData(mockData);
       setLoading(false);
       setRefreshing(false);
     } catch (error) {
-      console.error('Failed to load analytics data:', error);
+      console.error('Failed to load analytics, data:', error);
       toast({
         title: 'Error',
         description: 'Failed to load analytics data',
-        variant: 'destructive',
-      });
+        variant: 'destructive'});
       setLoading(false);
       setRefreshing(false);
     }
@@ -114,8 +107,7 @@ export default function AnalyticsPage() {
   const handleExport = () => {
     toast({
       title: 'Export Started',
-      description: 'Analytics data export has been initiated',
-    });
+      description: 'Analytics data export has been initiated'});
   };
 
   if (loading) {
@@ -167,7 +159,7 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4, md:grid-cols-2, lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Page Views</CardTitle>
@@ -240,7 +232,7 @@ export default function AnalyticsPage() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4, md:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle>User Activity Trend</CardTitle>

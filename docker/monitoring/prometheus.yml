@@ -1,0 +1,46 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Scrape Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Scrape cAdvisor for container metrics
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+    metric_relabel_configs:
+      # Only keep metrics for our agent containers
+      - source_labels: [container_label_com_docker_compose_service]
+        regex: 'agent-.*|orchestrator'
+        action: keep
+
+  # Scrape Node Exporter for host metrics
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Scrape agent health endpoints
+  - job_name: 'agents'
+    static_configs:
+      - targets: 
+        - 'agent-frontend:3001'
+        - 'agent-backend:3002'
+        - 'agent-architect:3003'
+        - 'agent-qa:3004'
+        - 'agent-devops:3005'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+# Alert rules
+rule_files:
+  - '/etc/prometheus/alerts.yml'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []

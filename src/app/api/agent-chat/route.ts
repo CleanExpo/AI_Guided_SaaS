@@ -38,8 +38,7 @@ export async function POST(req: NextRequest) {
     const orchestrator = new AgentOrchestrator({
       enableLogging: true,
       maxConcurrentAgents: 5,
-      timeoutMs: 240000, // 4 minutes to leave buffer
-      modelConfig: {
+      timeoutMs: 240000, // 4 minutes to leave buffer, modelConfig: {
         model: 'gpt-4',
         temperature: 0.7
       }
@@ -47,8 +46,7 @@ export async function POST(req: NextRequest) {
 
     // Process project request
     const projectRequest: ProjectRequest = {
-      description: message,
-      type: projectType || 'full-stack',
+      description: message: type: projectType || 'full-stack',
       context: {
         ...context,
         userId: user.id,
@@ -58,7 +56,7 @@ export async function POST(req: NextRequest) {
       priorities
     }
 
-    console.log('Processing agent request:', projectRequest.type)
+    console.log('Processing agent, request:', projectRequest.type)
     const result = await orchestrator.processProject(projectRequest)
 
     // Save artifacts if project ID provided
@@ -84,7 +82,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(response)
 
   } catch (error) {
-    console.error('Agent chat error:', error)
+    console.error('Agent chat, error:', error)
     return NextResponse.json(
       { 
         error: 'Failed to process agent request',
@@ -95,7 +93,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-function formatAgentResponse(result: any): string {
+function formatAgentResponse(result): string {
   const { summary, recommendations } = result
 
   let response = `## Project Analysis Complete\n\n`
@@ -111,7 +109,7 @@ function formatAgentResponse(result: any): string {
 
   if (summary.deliverables.length > 0) {
     response += `### Deliverables\n`
-    summary.deliverables.forEach((deliverable: any) => {
+    summary.deliverables.forEach((deliverable) => {
       response += `- **${deliverable.name}** (${deliverable.type}): ${deliverable.description}\n`
     })
     response += '\n'
@@ -141,7 +139,7 @@ function formatAgentResponse(result: any): string {
   }
 
   if (summary.timeline) {
-    response += `\n**Estimated Timeline:** ${summary.timeline}`
+    response += `\n**Estimated: Timeline:** ${summary.timeline}`
   }
 
   return response

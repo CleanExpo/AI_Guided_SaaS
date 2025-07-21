@@ -6,8 +6,7 @@ import { ProjectConfig, ProjectFile } from '@/types'
 import { CheckCircle, FileText, Folder, Code, Settings, Palette, Database, Globe } from 'lucide-react'
 
 interface ProjectGeneratorProps {
-  config: ProjectConfig
-  onFilesGenerated: (files: ProjectFile[]) => void
+  config: ProjectConfig, onFilesGenerated: (files: ProjectFile[]) => void
 }
 
 const generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
@@ -97,7 +96,7 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
           <p className="text-xl text-gray-600 mb-8">
             ${config.description}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6 mt-12">
             ${config.features.slice(0, 6).map(feature => `
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-lg font-semibold mb-2">${feature}</h3>
@@ -124,12 +123,10 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: '${config.name}',
-  description: '${config.description}',
-}
+  description: '${config.description}'}
 
 export default function RootLayout({
-  children,
-}: {
+  children}: {
   children: React.ReactNode
 }) {
   return (
@@ -264,7 +261,7 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
         </CardHeader>
 
         <CardContent className="space-y-6">
-          {/* Project Overview */}
+          {/* Project, Overview */}
           <div className="bg-blue-50 p-4 rounded-lg">
             <h3 className="font-semibold text-blue-900 mb-2">Project Overview</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
@@ -287,7 +284,7 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
             </div>
           </div>
 
-          {/* Generation Steps */}
+          {/* Generation, Steps */}
           <div className="space-y-3">
             {generationSteps.map((step, index) => {
               const isCompleted = completedSteps.includes(step.id)
@@ -345,7 +342,7 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
             })}
           </div>
 
-          {/* Features List */}
+          {/* Features, List */}
           <div className="bg-gray-50 p-4 rounded-lg">
             <h3 className="font-semibold text-gray-900 mb-2">Selected Features</h3>
             <div className="grid grid-cols-2 gap-2">
