@@ -10,54 +10,65 @@ interface RateLimitConfig {
   skipSuccessfulRequests?: boolean;
   skipFailedRequests?: boolean;
   message?: string;
-}
+};
 
 interface RateLimitResult {
   allowed: boolean;
   remaining: number;
   resetTime: number;
-  totalHits: number;
-}
+  totalHits: number
+};
 
 interface RateLimitTier {
   name: string;
   windowMs: number;
   maxRequests: number;
-  description: string;
+  description: string
 }
 
 // Rate limit tiers for different user types
 export const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
   anonymous: {
     name: 'Anonymous',
-    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 100,
-    description: 'Anonymous users - 100 requests per 15 minutes'
-  },
-  authenticated: {
+    windowMs: 15 * 60 * 1000,
+  // 15 minutes
+  maxRequests: 100,
+    description: 'Anonymous users - 100 requests per 15 minutes';
+  }},
+    authenticated: {
     name: 'Authenticated',
-    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 1000,
-    description: 'Authenticated users - 1000 requests per 15 minutes'
-  },
-  premium: {
+    windowMs: 15 * 60 * 1000,
+  // 15 minutes
+  maxRequests: 1000,
+    description: 'Authenticated users - 1000 requests per 15 minutes';
+  }},
+    premium: {
     name: 'Premium',
-    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 5000,
-    description: 'Premium users - 5000 requests per 15 minutes'
-  },
-  api: {
+    windowMs: 15 * 60 * 1000,
+  // 15 minutes
+  maxRequests: 5000,
+    description: 'Premium users - 5000 requests per 15 minutes';
+  }},
+    api: {
     name: 'API',
-    windowMs: 60 * 1000, // 1 minute, maxRequests: 100,
-    description: 'API endpoints - 100 requests per minute'
-  },
-  upload: {
+    windowMs: 60 * 1000,
+  // 1 minute
+  maxRequests: 100,
+    description: 'API endpoints - 100 requests per minute';
+  }},
+    upload: {
     name: 'Upload',
-    windowMs: 60 * 60 * 1000, // 1 hour, maxRequests: 50,
-    description: 'File uploads - 50 uploads per hour'
-  }
+    windowMs: 60 * 60 * 1000,
+  // 1 hour
+  maxRequests: 50,
+    description: 'File uploads - 50 uploads per hour';
+  }},
 };
 
 class RateLimiter {
   private redisClient: any = null;
-  private fallbackStore: Map<string, { count: number, resetTime: number }> = new Map();
+  private fallbackStore: Map<string, { count: number, resetTime: number }> =
+    new Map();
 
   constructor() {
     this.initializeRedis();
@@ -69,15 +80,21 @@ class RateLimiter {
       if (process.env.REDIS_URL) {
         const { createClient } = await import('redis');
         this.redisClient = createClient({
-          url: process.env.REDIS_URL});
-        
+          url: process.env.REDIS_URL;
+        }});
+
         await this.redisClient.connect();
-        console.log('Redis connected for rate limiting');
+
       } else {
-        console.warn('Redis not available, using in-memory fallback for rate limiting');
+        console.warn(
+          'Redis not available, using in-memory fallback for rate limiting'
+        );
       }
     } catch (error) {
-      console.warn('Failed to connect to Redis, using in-memory, fallback:', error);
+      console.warn(
+        'Failed to connect to Redis, using in-memory, fallback:',
+        error
+      );
       this.redisClient = null;
     }
   }
@@ -103,26 +120,26 @@ class RateLimiter {
     windowStart: number
   ): Promise<RateLimitResult> {
     const redisKey = `rate_limit:${key}`;
-    
+
     try {
       // Use Redis sorted set for sliding window
       const pipeline = this.redisClient.multi();
-      
+
       // Remove expired entries
       pipeline.zRemRangeByScore(redisKey, 0, windowStart);
-      
+
       // Add current request
       pipeline.zAdd(redisKey, { score: now, value: `${now}-${Math.random()}` });
-      
+
       // Count requests in window
       pipeline.zCard(redisKey);
-      
+
       // Set expiration
       pipeline.expire(redisKey, Math.ceil(config.windowMs / 1000));
-      
+
       const results = await pipeline.exec();
       const totalHits = results[2][1] as number;
-      
+
       const allowed = totalHits <= config.maxRequests;
       const remaining = Math.max(0, config.maxRequests - totalHits);
       const resetTime = now + config.windowMs;
@@ -131,7 +148,7 @@ class RateLimiter {
         allowed,
         remaining,
         resetTime,
-        totalHits
+        totalHits,
       };
     } catch (error) {
       console.error('Redis rate limit check, failed:', error);
@@ -147,20 +164,20 @@ class RateLimiter {
     windowStart: number
   ): RateLimitResult {
     const stored = this.fallbackStore.get(key);
-    
+
     if (!stored || stored.resetTime <= now) {
       // New window or expired
       const newEntry = {
         count: 1,
-        resetTime: now + config.windowMs
+        resetTime: now + config.windowMs,
       };
       this.fallbackStore.set(key, newEntry);
-      
+
       return {
         allowed: true,
         remaining: config.maxRequests - 1,
         resetTime: newEntry.resetTime,
-        totalHits: 1
+        totalHits: 1,
       };
     }
 
@@ -173,26 +190,29 @@ class RateLimiter {
       allowed,
       remaining,
       resetTime: stored.resetTime,
-      totalHits: stored.count
+      totalHits: stored.count,
     };
   }
 
-  async getRateLimitStatus(key: string, windowMs: number): Promise<{
+  async getRateLimitStatus(
+    key: string,
+    windowMs: number
+  ): Promise<{
     requests: number,
-    resetTime: number;
+    resetTime: number
   }> {
     if (this.redisClient) {
       try {
         const redisKey = `rate_limit:${key}`;
         const now = Date.now();
         const windowStart = now - windowMs;
-        
+
         await this.redisClient.zRemRangeByScore(redisKey, 0, windowStart);
         const requests = await this.redisClient.zCard(redisKey);
-        
+
         return {
           requests,
-          resetTime: now + windowMs
+          resetTime: now + windowMs,
         };
       } catch (error) {
         console.error('Failed to get rate limit status, from: Redis,', error);
@@ -203,7 +223,7 @@ class RateLimiter {
     const stored = this.fallbackStore.get(key);
     return {
       requests: stored?.count || 0,
-      resetTime: stored?.resetTime || Date.now() + windowMs
+      resetTime: stored?.resetTime || Date.now() + windowMs,
     };
   }
 
@@ -253,30 +273,30 @@ export function createRateLimitMiddleware(
   return async function rateLimitMiddleware(req, res, next?: () => void) {
     const rateLimiter = getRateLimiter();
     const tierConfig = RATE_LIMIT_TIERS[tier];
-    
+
     const config: RateLimitConfig = {
       windowMs: tierConfig.windowMs,
       maxRequests: tierConfig.maxRequests,
       message: `Rate limit exceeded. ${tierConfig.description}`,
-      ...customConfig
+      ...customConfig,
     };
 
     // Generate key based on IP and user ID
     const ip = req.ip || req.connection?.remoteAddress || 'unknown';
     const userId = req.user?.id || 'anonymous';
     const endpoint = req.url?.split('?')[0] || 'unknown';
-    
+
     const key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);
-    
+
     try {
       const result = await rateLimiter.checkRateLimit(key, config);
-      
+
       // Set rate limit headers
       res.setHeader('X-RateLimit-Limit', config.maxRequests);
       res.setHeader('X-RateLimit-Remaining', result.remaining);
       res.setHeader('X-RateLimit-Reset', Math.ceil(result.resetTime / 1000));
       res.setHeader('X-RateLimit-Window', Math.ceil(config.windowMs / 1000));
-      
+
       if (!result.allowed) {
         res.status(429).json({
           error: 'Rate limit exceeded',
@@ -284,11 +304,11 @@ export function createRateLimitMiddleware(
           retryAfter: Math.ceil((result.resetTime - Date.now()) / 1000),
           limit: config.maxRequests,
           remaining: result.remaining,
-          resetTime: result.resetTime
-        });
+          resetTime: result.resetTime;
+        }});
         return;
       }
-      
+
       if (next) {
         next();
       }
@@ -309,18 +329,18 @@ export async function checkApiRateLimit(
 ): Promise<RateLimitResult> {
   const rateLimiter = getRateLimiter();
   const tierConfig = RATE_LIMIT_TIERS[tier];
-  
+
   const ip = req.ip || req.connection?.remoteAddress || 'unknown';
   const userId = req.user?.id || 'anonymous';
   const endpoint = req.url?.split('?')[0] || 'unknown';
-  
+
   const key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);
-  
+
   return rateLimiter.checkRateLimit(key, {
     windowMs: tierConfig.windowMs,
-    maxRequests: tierConfig.maxRequests
-  });
-}
+    maxRequests: tierConfig.maxRequests;
+  }});
+};
 
 export type { RateLimitConfig, RateLimitResult, RateLimitTier };
 export { RateLimiter };

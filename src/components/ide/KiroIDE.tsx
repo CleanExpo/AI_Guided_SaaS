@@ -1,44 +1,30 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
-import { 
-  FileCode2, 
-  FolderTree, 
-  Terminal, 
-  Bug, 
-  Lightbulb,
-  Play,
-  Save,
-  RefreshCw,
-  Settings,
-  X
-} from 'lucide-react'
-import { getKiroClient, KiroClient, KiroFile, KiroFileTree, KiroTerminal, KiroAIAssistance } from '@/lib/ide/kiro-client'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { useToast } from '@/components/ui/use-toast'
-
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
+import { FileCode2, FolderTree, Terminal, Bug, Lightbulb, Play, Save, RefreshCw, Settings, X } from 'lucide-react';
+import { getKiroClient, KiroClient, KiroFile, KiroFileTree, KiroTerminal, KiroAIAssistance } from '@/lib/ide/kiro-client';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { useToast } from '@/components/ui/use-toast';
 interface KiroIDEProps {
   projectId: string
   onClose?: () => void
-}
+};
 
 export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
   const { toast } = useToast()
-  const [client, setClient] = useState<KiroClient | null>(null)</KiroClient>
-  const [fileTree, setFileTree] = useState<KiroFileTree | null>(null)</KiroFileTree>
-  const [openFiles, setOpenFiles] = useState<KiroFile[]>([])</KiroFile>
-  const [activeFile, setActiveFile] = useState<string | null>(null)</string>
-  const [terminals, setTerminals] = useState<KiroTerminal[]>([])</KiroTerminal>
-  const [activeTerminal, setActiveTerminal] = useState<string | null>(null)</string>
-      </KiroAIAssistance>
+  const [client, setClient] = useState<KiroClient | null>(null)
+  const [fileTree, setFileTree] = useState<KiroFileTree | null>(null)
+  const [openFiles, setOpenFiles] = useState<KiroFile[]>([])
+  const [activeFile, setActiveFile] = useState<string | null>(null)
+  const [terminals, setTerminals] = useState<KiroTerminal[]>([])
+  const [activeTerminal, setActiveTerminal] = useState<string | null>(null)
   const [aiAssistance, setAiAssistance] = useState<KiroAIAssistance | null>(null)
   const [loading, setLoading] = useState(true)
   const [connected, setConnected] = useState(false)
-  </KiroAIAssistance>
   const editorRef = useRef<HTMLDivElement>(null)</HTMLDivElement>
   const terminalRef = useRef<HTMLDivElement>(null)
 
@@ -102,7 +88,6 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
 
   const handleTerminalOutput = (data: { terminalId: string, output: string }) => {
     // Update terminal output
-    console.log('Terminal output:', data)
   }
 
   const handleAISuggestion = (data: KiroAIAssistance) => {
@@ -117,7 +102,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
       variant: 'destructive'
     }
       )}
-    </div>
+
     );
   // File operations
   const openFile = async (path: string) => {
@@ -139,10 +124,9 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         variant: 'destructive'
       }
       )}
-    </div>
-    );
-  }
 
+    );
+}
   const saveFile = async (path: string, content: string) => {
     if (!client) return
     
@@ -160,10 +144,9 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         variant: 'destructive'
       }
       )}
-    </div>
-    );
-  }
 
+    );
+}
   const closeFile = (path: string) => {
     setOpenFiles(prev => prev.filter(f => f.path !== path))
     if (activeFile === path) {
@@ -190,10 +173,9 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         variant: 'destructive'
       }
       )}
-    </div>
-    );
-  }
 
+    );
+}
   const executeCommand = async (command: string) => {
     if (!client || !activeTerminal) return
     
@@ -219,10 +201,9 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         variant: 'destructive'
       }
       )}
-    </div>
-    );
-  }
 
+    );
+}
   const applySuggestion = async (suggestionId: string) => {
     if (!client) return
     
@@ -240,10 +221,9 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         variant: 'destructive'
       }
       )}
-    </div>
-    );
-  }
 
+    );
+}
   // File tree rendering
   const renderFileTree = (tree: KiroFileTree, level: number = 0) => {
     const handleClick = () => {
@@ -253,7 +233,8 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
     }
 
     return (
-      <div key={tree.path} style={{ paddingLeft: `${level * 16}px` }}></div>
+    <div
+                key={tree.path} style={{ paddingLeft: `${level * 16}px` }}></div>
         <div
           className="flex items-center gap-2 py-1 px-2 hover:bg-accent rounded cursor-pointer"
           onClick={handleClick}
@@ -266,22 +247,21 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
           <span className="text-sm">{tree.name}</span>
         </div>
         {tree.children && tree.children.map(child => renderFileTree(child, level + 1))}
-      </div>
-    );
-  }
 
+    );
+}
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen"></div>
+    <div className="flex items-center justify-center h-screen"></div>
         <div className="text-center"></div>
           <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" /></RefreshCw>
           <p>Connecting to Kiro IDE...</p>
-    );
   }
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="border-b px-4 py-2 flex items-center justify-between"></div>
         <div className="flex items-center gap-4"></div>
           <h2 className="text-lg font-semibold">Kiro IDE</h2>
@@ -312,7 +292,8 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
             {/* Editor, tabs and content */}</ResizablePanelGroup>
             <ResizablePanel defaultSize={70}></ResizablePanel>
               <div className="h-full flex flex-col">
-                {/* Tabs */}</div>
+                {/* Tabs */}
+
                 <div className="flex border-b overflow-x-auto">
                   {openFiles.map(file => (</div>
                     <div
@@ -331,19 +312,18 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
                           closeFile(file.path)
                        }}
                       ></button>
-                        <X className="h-3 w-3" /></X>
-                      </button>))}
+                        <X className="h-3 w-3" /></X>))}
 
                 {/* Editor, content */}
                 <div className="flex-1 p-4 overflow-auto">
                   {activeFile && openFiles.find(f => f.path === activeFile) ? (</div>
                     <div ref={editorRef} className="font-mono text-sm">
-                      {/* This would be replaced with a proper code editor like Monaco */}</div>
+                      {/* This would be replaced with a proper code editor like Monaco */}
+
                       <pre>{openFiles.find(f => f.path === activeFile)?.content}</pre>) : (
                     <div className="flex items-center justify-center h-full text-muted-foreground"></div>
                       <p>No file selected</p>
-  );
-}
+  }
 
             <ResizableHandle />
 
@@ -358,7 +338,8 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
                   <Button size="sm" variant="ghost" onClick={createTerminal}></Button>
                     <Play className="h-4 w-4" /></Play>
                 <div ref={terminalRef} className="flex-1 bg-black text-white p-2 font-mono text-sm overflow-auto">
-                  {/* Terminal, content would go here */}</div>
+                  {/* Terminal, content would go here */}
+
                   <p>$ Ready for commands...</p>
 
         <ResizableHandle />
@@ -408,4 +389,3 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
                           {diagnostic.message}</p>))}
     );
 }
-</HTMLDivElement>

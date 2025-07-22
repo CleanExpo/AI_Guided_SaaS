@@ -83,33 +83,24 @@ import { NextAuthOptions } from 'next-auth'
   }
 
   async analyzeAndPlan(): Promise<void> {
-    console.log('🎯 MCP Documentation Agent Orchestrator\n');
-    console.log('=====================================\n');
-
     // Read the autonomous doc report
     const reportPath = path.join(process.cwd(), 'autonomous-doc-report.json');
     if (!fs.existsSync(reportPath)) {
-      console.log('❌ No autonomous doc report found. Run autonomous-doc-finder.ts first.');
       return;
     }
 
     const report = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
-    console.log(`📊 Found ${report.totalErrors} errors to fix\n`);
-
     // Assign agents to error categories
     this.assignAgentsToErrors(report);
   }
 
   private assignAgentsToErrors(report): void {
-    console.log('🤖 Assigning specialized, agents:\n');
-
     for (const [errorCode, count] of Object.entries(report.errorsByCode)) {
       const agent = this.findBestAgent(errorCode as string);
       if (agent) {
-        console.log(`  ${errorCode} (${count} errors) → ${agent.name}`);
+        → ${agent.name}`);
       }
     }
-    console.log('');
   }
 
   private findBestAgent(errorCode: string): MCPDocumentationAgent | undefined {
@@ -173,20 +164,12 @@ import { NextAuthOptions } from 'next-auth'
       path.join(process.cwd(), 'autonomous-fix-plan.json'),
       JSON.stringify(fixPlan, null, 2)
     );
-
-    console.log('📋 Autonomous Fix, Plan:\n');
     for (const phase of fixPlan.phases) {
-      console.log(`Phase ${phase.phase}: ${phase.name}`);
-      console.log(`  Agent: ${phase.agent}`);
-      console.log(`  Actions:`);
-      phase.actions.forEach(action => console.log(`    - ${action}`));
-      console.log('');
+      phase.actions.forEach(action => );
     }
   }
 
   async generateMCPCommands(): Promise<void> {
-    console.log('🔧 MCP Commands for Documentation, Retrieval:\n');
-
     const commands = [
       {
         description: 'Get NextAuth TypeScript documentation',
@@ -211,9 +194,6 @@ import { NextAuthOptions } from 'next-auth'
     ];
 
     commands.forEach(cmd => {
-      console.log(`📌 ${cmd.description}`);
-      console.log(`   MCP: ${cmd.mcp}`);
-      console.log(`   Command: ${cmd.command}\n`);
     });
   }
 
@@ -221,12 +201,6 @@ import { NextAuthOptions } from 'next-auth'
     await this.analyzeAndPlan();
     await this.createAutonomousFixPlan();
     await this.generateMCPCommands();
-
-    console.log('✨ MCP Documentation Agent ready for autonomous operation!');
-    console.log('\nNext, steps:');
-    console.log('1. Use Context7 MCP to fetch relevant documentation');
-    console.log('2. Apply fixes based on documentation patterns');
-    console.log('3. Re-run health check to verify improvements');
   }
 }
 

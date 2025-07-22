@@ -10,7 +10,8 @@ export default function TermsPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
         <p className="text-muted-foreground mb-8">
-          Last, updated: {new Date().toLocaleDateString()}</p>
+          Last,
+    updated: {new Date().toLocaleDateString()}</p>
 
         <div className="prose prose-lg max-w-none space-y-6">
           <section>
@@ -44,18 +45,8 @@ export default function TermsPage() {
             <p>
               If you have any questions about these Terms of Service, please
               contact us at legal@aiguidedSaaS.com.</p>
-    );
-}
+  }
 
-    </section>
-    </section>
-    </section>
-    </div>
-    </div>
+    
   );
-</section>
-</section>
-</div>
-</div>
-</div>
 }

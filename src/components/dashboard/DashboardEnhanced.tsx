@@ -3,31 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import {
-  CardEnhanced,
-  CardEnhancedContent,
-  CardEnhancedDescription,
-  CardEnhancedHeader,
-  CardEnhancedTitle} from '@/components/ui/card-enhanced';
+import { CardEnhanced, CardEnhancedContent, CardEnhancedDescription, CardEnhancedHeader, CardEnhancedTitle } from '@/components/ui/card-enhanced';
 import { ButtonPremium } from '@/components/ui/button-premium';
 import { ThemeToggle } from '@/lib/theme/dark-mode';
-import {
-  BarChart3,
-  Users,
-  TrendingUp,
-  DollarSign,
-  Activity,
-  Zap,
-  Target,
-  ArrowUpRight,
-  ArrowDownRight,
-  RefreshCw,
-  Download,
-  Filter,
-  Calendar,
-  Bell,
-  Settings,
-  Plus} from 'lucide-react';
+import { BarChart3, Users, TrendingUp, DollarSign, Activity, Zap, Target, ArrowUpRight, ArrowDownRight, RefreshCw, Download, Filter, Calendar, Bell, Settings, Plus } from 'lucide-react';
 
 // Mock data for demonstration
 const generateMockData = () => ({
@@ -36,7 +15,7 @@ const generateMockData = () => ({
     revenue: Math.floor(Math.random() * 50000) + 25000,
     conversionRate: (Math.random() * 5 + 2).toFixed(1),
     activeProjects: Math.floor(Math.random() * 100) + 50},
-  trends: {
+    trends: {
     users: Math.random() > 0.5 ? 'up' : 'down',
     revenue: Math.random() > 0.3 ? 'up' : 'down',
     conversion: Math.random() > 0.4 ? 'up' : 'down',
@@ -59,7 +38,7 @@ interface MetricCardProps {
   trend: 'up' | 'down';
   icon: React.ElementType;
   delay: number;
-}
+}}
 
 function MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps) {
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
@@ -77,7 +56,8 @@ function MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCa
             {title}</CardEnhancedTitle>
           <Icon className="h-4 w-4 text-muted-foreground" /></Icon>
         <CardEnhancedContent></CardEnhancedContent>
-          <div className="text-2xl font-bold">{value}</div>
+          <div className="text-2xl font-bold">{value}
+
           <div className="flex items-center text-xs text-muted-foreground">
             {trend === 'up' ? (</div>
               <ArrowUpRight className="mr-1 h-3 w-3 text-green-500" />
@@ -90,11 +70,10 @@ function MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCa
           </div>
         
         {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" /></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover: opacity-100" />
       </CardEnhanced>
     </motion.div>
-  );
-}
+  );}
 
 function SimpleChart({ data }: { data: any[] }) {
   const maxValue = Math.max(...data.map(d => d.users));
@@ -118,10 +97,9 @@ function SimpleChart({ data }: { data: any[] }) {
           <span className="text-xs text-muted-foreground mt-2">{item.day}</span>
         </motion.div>
       ))}
-    </div>
+
     );
 }
-
 function ActivityFeed({ activities }: { activities: any[] }) {
   const getActivityIcon = (type: string) => {
     switch (type) {
@@ -131,7 +109,7 @@ function ActivityFeed({ activities }: { activities: any[] }) {
       case 'api': return Zap;
       case 'upgrade': return TrendingUp;
       default: return Activity;
-    }
+    }}
   };
 
   const getActivityColor = (type: string) => {
@@ -142,7 +120,7 @@ function ActivityFeed({ activities }: { activities: any[] }) {
       case 'api': return 'text-yellow-500';
       case 'upgrade': return 'text-orange-500';
       default: return 'text-gray-500';
-    }
+    }}
   };
 
   return (
@@ -151,7 +129,7 @@ function ActivityFeed({ activities }: { activities: any[] }) {
         {activities.map((activity, index) => {
           const Icon = getActivityIcon(activity.type);
           return (
-            <motion.div
+    <motion.div
               key={activity.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -166,13 +144,10 @@ function ActivityFeed({ activities }: { activities: any[] }) {
                 <p className="text-xs text-muted-foreground">{activity.time}</p>
             </motion.div>
           );
-        }
-      )}
+  }}
     </div>
-        </AnimatePresence>
-    );
       );
-}
+};
 
 export default function DashboardEnhanced() {
   const [data, setData] = useState(generateMockData());
@@ -225,15 +200,17 @@ export default function DashboardEnhanced() {
       icon: Target}];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6">
-      {/* Header */}</div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900, dark:via-slate-800 dark:to-slate-900 p-6">
+      {/* Header */}
+
       <div className="mb-8"></div>
         <div className="flex items-center justify-between"></div>
           <div></div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
               Dashboard</h1>
             <p className="text-muted-foreground mt-1">
-              Last, updated: {lastUpdated.toLocaleTimeString()}</p>
+              Last,
+    updated: {lastUpdated.toLocaleTimeString()}</p>
           
           <div className="flex items-center gap-4"></div>
             <ButtonPremium
@@ -278,7 +255,8 @@ export default function DashboardEnhanced() {
 
       {/* Charts and Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        {/* Chart */}</div>
+        {/* Chart */}
+
         <div className="lg:col-span-2"></div>
           <CardEnhanced variant="glass"></CardEnhanced>
             <CardEnhancedHeader></CardEnhancedHeader>
@@ -348,5 +326,4 @@ export default function DashboardEnhanced() {
                 <Zap className="h-6 w-6 text-white" /></Zap>
               <h3 className="font-semibold">API Keys</h3>
               <p className="text-sm text-muted-foreground">Manage integrations</p>
-    );
-}
+  }

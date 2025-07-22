@@ -14,7 +14,7 @@ export function createNotificationSystemWorkflow(
       type: 'n8n-nodes-base.webhook',
       typeVersion: 1,
       position: [250, 400],
-      parameters: {
+    parameters: {
         httpMethod: 'POST',
         path: webhookPath,
         responseMode: 'responseNode',
@@ -29,7 +29,7 @@ export function createNotificationSystemWorkflow(
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [450, 400],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 const notification = $input.item.json;
@@ -47,7 +47,7 @@ if (!notification.recipient && !notification.recipients) {
 const defaults = {
   priority: 'normal',
   channels: ['email'],
-  metadata: {},
+    metadata: {},
   timestamp: new Date().toISOString()
 };
 
@@ -58,34 +58,34 @@ const typeConfigs = {
     template: 'deployment-success',
     channels: ['email', 'slack']
   },
-  deployment_failure: {
+    deployment_failure: {
     subject: 'Deployment Failed',
     template: 'deployment-failure',
     channels: ['email', 'slack', 'sms'],
     priority: 'high'
   },
-  test_complete: {
+    test_complete: {
     subject: 'Test Run Complete',
     template: 'test-report',
     channels: ['email', 'slack']
   },
-  user_signup: {
+    user_signup: {
     subject: 'Welcome to AI Guided SaaS',
     template: 'welcome',
     channels: ['email']
   },
-  project_created: {
+    project_created: {
     subject: 'New Project Created',
     template: 'project-created',
     channels: ['email', 'webhook']
   },
-  error_alert: {
+    error_alert: {
     subject: 'Error Alert',
     template: 'error-alert',
     channels: ['email', 'slack', 'pagerduty'],
     priority: 'urgent'
   },
-  custom: {
+    custom: {
     subject: notification.subject || 'Notification',
     template: notification.template || 'custom',
     channels: notification.channels || defaults.channels
@@ -121,9 +121,9 @@ return prepared;`
       type: 'n8n-nodes-base.switch',
       typeVersion: 1,
       position: [650, 400],
-      parameters: {
+    parameters: {
         dataPropertyName: 'priority',
-        values: {
+    values: {
           string: [
             {
               value: 'urgent',
@@ -154,7 +154,7 @@ return prepared;`
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [850, 200],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 // For urgent notifications, send to all channels immediately
@@ -173,7 +173,7 @@ return {
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [850, 500],
-      parameters: {
+    parameters: {
         mode: 'runOnceForAllItems',
         jsCode: `
 // Group notifications by recipient and channel
@@ -212,7 +212,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.merge',
       typeVersion: 2,
       position: [1050, 400],
-      parameters: {
+    parameters: {
         mode: 'combine',
         combinationMode: 'multiplex'
       }
@@ -225,7 +225,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.if',
       typeVersion: 1,
       position: [1250, 300],
-      parameters: {
+    parameters: {
         conditions: {
           string: [
             {
@@ -243,17 +243,17 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.emailSend',
       typeVersion: 2,
       position: [1450, 200],
-      parameters: {
+    parameters: {
         fromEmail: '={{ $env.NOTIFICATION_EMAIL }}',
         toEmail: '={{ $json.recipient }}',
         subject: '={{ $json.notifications[0].subject }}',
         emailFormat: 'html',
         htmlBody: '={{ $json.notifications.length > 1 ? $json.notifications.map(n => n.body || n.message).join("<hr>") : ($json.notifications[0].body || $json.notifications[0].message) }}',
-        options: {
+    options: {
           appendAttribution: false
         }
       },
-      credentials: {
+    credentials: {
         smtp: 'SMTP Credentials'
       }
     },
@@ -265,7 +265,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.if',
       typeVersion: 1,
       position: [1250, 400],
-      parameters: {
+    parameters: {
         conditions: {
           string: [
             {
@@ -283,17 +283,17 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.slack',
       typeVersion: 2,
       position: [1450, 400],
-      parameters: {
+    parameters: {
         authentication: 'oAuth2',
         resource: 'message',
         operation: 'post',
         channel: '={{ $json.recipient.startsWith("#") ? $json.recipient : "@" + $json.recipient }}',
         text: '={{ $json.notifications[0].subject }}',
-        otherOptions: {
+    otherOptions: {
           blocks: [
             {
               type: 'section',
-              text: {
+    text: {
                 type: 'mrkdwn',
                 text: '{{ $json.notifications[0].message }}'
               }
@@ -302,7 +302,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
           thread_ts: '={{ $json.threadId }}'
         }
       },
-      credentials: {
+    credentials: {
         slackOAuth2Api: 'Slack OAuth2'
       }
     },
@@ -314,7 +314,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.if',
       typeVersion: 1,
       position: [1250, 500],
-      parameters: {
+    parameters: {
         conditions: {
           string: [
             {
@@ -332,13 +332,13 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.twilio',
       typeVersion: 1,
       position: [1450, 600],
-      parameters: {
+    parameters: {
         operation: 'send',
         from: '={{ $env.TWILIO_PHONE_NUMBER }}',
         to: '={{ $json.recipient }}',
         message: '={{ $json.notifications[0].subject + ": " + ($json.notifications[0].shortMessage || $json.notifications[0].message) }}'
       },
-      credentials: {
+    credentials: {
         twilioApi: 'Twilio API'
       }
     },
@@ -350,7 +350,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.if',
       typeVersion: 1,
       position: [1250, 600],
-      parameters: {
+    parameters: {
         conditions: {
           string: [
             {
@@ -368,13 +368,15 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [1450, 800],
-      parameters: {
+    parameters: {
         method: 'POST',
-        url: '={{ $json.recipient }}', // Webhook URL as recipient, sendBody: true,
+        url: '={{ $json.recipient }}',
+  // Webhook URL as recipient
+  sendBody: true,
         bodyParametersJson: '={{ JSON.stringify($json.notifications) }}',
-        options: {
+    options: {
           timeout: 10000,
-          retry: {
+    retry: {
             maxRetries: 3,
             waitBetweenRetries: 1000
           }
@@ -389,7 +391,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.merge',
       typeVersion: 2,
       position: [1650, 400],
-      parameters: {
+    parameters: {
         mode: 'combine',
         combinationMode: 'multiplex'
       }
@@ -401,7 +403,7 @@ return Object.values(batched).map(batch => ({ json: batch }));`
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [1850, 400],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 const result = $json;
@@ -414,15 +416,13 @@ const log = {
   status: result.error ? 'failed' : 'sent',
   error: result.error,
   timestamp: new Date().toISOString(),
-  metadata: {
+    metadata: {
     priority: result.notifications[0].priority,
     batchSize: result.notifications.length
   }
 };
 
 // In production, save to database
-console.log('Notification sent:', log);
-
 return log;`
       }
     },
@@ -434,7 +434,7 @@ return log;`
       type: 'n8n-nodes-base.respondToWebhook',
       typeVersion: 1,
       position: [2050, 400],
-      parameters: {
+    parameters: {
         respondWith: 'json',
         responseBody: `{{
           JSON.stringify({
@@ -445,7 +445,7 @@ return log;`
             timestamp: $json.timestamp
           })
         }}`,
-        responseHeaders: {
+    responseHeaders: {
           entries: [
             {
               name: 'Content-Type',

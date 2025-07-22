@@ -8,14 +8,14 @@ interface ConnectionPoolConfig {
   idleTimeout: number;
   connectionTimeout: number;
   retryAttempts: number;
-  retryDelay: number;
-}
+  retryDelay: number
+};
 
 interface PooledConnection {
   client: SupabaseClient;
   isActive: boolean;
   lastUsed: number;
-  connectionId: string;
+  connectionId: string
 }
 
 class DatabaseConnectionPool {
@@ -27,7 +27,11 @@ class DatabaseConnectionPool {
   constructor(config: Partial<ConnectionPoolConfig> = {}) {
     this.config = {
       maxConnections: config.maxConnections || 10,
-      idleTimeout: config.idleTimeout || 30000, // 30 seconds, connectionTimeout: config.connectionTimeout || 5000, // 5 seconds, retryAttempts: config.retryAttempts || 3,
+      idleTimeout: config.idleTimeout || 30000,
+  // 30 seconds
+  connectionTimeout: config.connectionTimeout || 5000,
+  // 5 seconds
+  retryAttempts: config.retryAttempts || 3,
       retryDelay: config.retryDelay || 1000, // 1 second
     };
 
@@ -40,7 +44,7 @@ class DatabaseConnectionPool {
 
     // Initialize the pool
     this.initializePool();
-    
+
     // Start cleanup interval
     this.startCleanupInterval();
   }
@@ -53,21 +57,27 @@ class DatabaseConnectionPool {
 
   private createConnection(): PooledConnection {
     const connectionId = `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
+
     const client = createClient(this.supabaseUrl, this.supabaseKey, {
       auth: {
-        persistSession: false},
-      db: {
-        schema: 'public'},
-      global: {
+        persistSession: false;
+      }},
+    db: {
+        schema: 'public';
+      }},
+    global: {
         headers: {
-          'x-connection-id': connectionId}}});
+          'x-connection-id': connectionId,
+        },
+      },
+    });
 
     const connection: PooledConnection = {
       client,
       isActive: false,
       lastUsed: Date.now(),
-      connectionId};
+      connectionId,
+    };
 
     this.pool.push(connection);
     return connection;
@@ -83,14 +93,15 @@ class DatabaseConnectionPool {
     const now = Date.now();
     const minConnections = 2;
 
-    this.pool = this.pool.filter((connection) => {
+    this.pool = this.pool.filter(connection => {
       const isIdle = now - connection.lastUsed > this.config.idleTimeout;
-      const shouldRemove = isIdle && !connection.isActive && this.pool.length > minConnections;
-      
+      const shouldRemove =
+        isIdle && !connection.isActive && this.pool.length > minConnections;
+
       if (shouldRemove) {
-        console.log(`Removing idle, connection: ${connection.connectionId}`);
+
       }
-      
+
       return !shouldRemove;
     });
   }
@@ -119,7 +130,7 @@ class DatabaseConnectionPool {
   private async waitForAvailableConnection(): Promise<PooledConnection> {
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
-        reject(new Error('Connection, timeout: No available connections'));
+        reject(new Error('Connection, timeout: No available connections'))
       }, this.config.connectionTimeout);
 
       const checkForConnection = () => {
@@ -155,12 +166,15 @@ class DatabaseConnectionPool {
       this.releaseConnection(connection);
 
       if (retryCount < this.config.retryAttempts) {
-        console.warn(`Operation failed, retrying (${retryCount + 1}/${this.config.retryAttempts}):`, error);
-        
+        console.warn(
+          `Operation failed, retrying (${retryCount + 1}/${this.config.retryAttempts}):`,
+          error
+        );
+
         // Exponential backoff
         const delay = this.config.retryDelay * Math.pow(2, retryCount);
         await new Promise(resolve => setTimeout(resolve, delay));
-        
+
         return this.executeWithRetry(operation, retryCount + 1);
       }
 
@@ -174,7 +188,11 @@ class DatabaseConnectionPool {
       activeConnections: this.pool.filter(conn => conn.isActive).length,
       idleConnections: this.pool.filter(conn => !conn.isActive).length,
       maxConnections: this.config.maxConnections,
-      poolUtilization: (this.pool.filter(conn => conn.isActive).length / this.config.maxConnections) * 100};
+      poolUtilization:
+        (this.pool.filter(conn => conn.isActive).length /
+          this.config.maxConnections) *
+        100,
+    };
   }
 
   async healthCheck(): Promise<boolean> {
@@ -184,7 +202,7 @@ class DatabaseConnectionPool {
         .from('research_projects')
         .select('count')
         .limit(1);
-      
+
       this.releaseConnection(connection);
       return !error;
     } catch (error) {
@@ -210,11 +228,13 @@ export function getConnectionPool(): DatabaseConnectionPool {
     poolInstance = new DatabaseConnectionPool();
   }
   return poolInstance;
-}
+};
 
-export function createConnectionPool(config?: Partial<ConnectionPoolConfig>): DatabaseConnectionPool {
+export function createConnectionPool(
+  config?: Partial<ConnectionPoolConfig>
+): DatabaseConnectionPool {
   return new DatabaseConnectionPool(config);
-}
+};
 
 export type { ConnectionPoolConfig, PooledConnection };
 export { DatabaseConnectionPool };

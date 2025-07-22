@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 interface ResponsiveLayoutProps {
   children: React.ReactNode;
   className?: string;
-}
+};
 
 export default function ResponsiveLayout({ children, className }: ResponsiveLayoutProps) {
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'laptop' | 'desktop'>('desktop');
@@ -22,7 +22,7 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
         setViewport('laptop');
       } else {
         setViewport('desktop');
-      }
+}
     };
 
     handleResize();
@@ -37,13 +37,14 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
         viewport === 'mobile' && "px-4",
         viewport === 'tablet' && "px-6",
         viewport === 'laptop' && "px-8",
-        viewport === 'desktop' && "px-12",
-        className
+        viewport === 'desktop' && "px-12" className
       )}
       data-viewport={viewport}
     >
-      {/* Mobile-first responsive container */}</div>
+      {/* Mobile-first responsive container */}
+
       <div className="mx-auto max-w-[1920px]">
-        {children}</div>
+        {children}
+
     );
 }

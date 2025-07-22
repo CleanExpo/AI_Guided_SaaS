@@ -16,10 +16,8 @@ export default function Sidebar() {
             onClick={() => addComponent(comp.id)}
             className="mb-3 p-2 rounded hover:bg-gray-700 cursor-pointer transition"
           ></li>
-            <div className="text-sm font-medium">{comp.name}</div>
-            <div className="text-xs text-gray-300">{comp.description}</div>
-          </li>
-        ))}
+            <div className="text-sm font-medium">{comp.name}
+
+            <div className="text-xs text-gray-300">{comp.description}</div>))}
       </ul>
-    );
-}
+  }

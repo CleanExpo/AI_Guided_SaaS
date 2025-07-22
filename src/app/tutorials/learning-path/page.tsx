@@ -1,21 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import {
-  ArrowLeft,
-  Clock,
-  CheckCircle,
-  ArrowRight,
-  BookOpen} from 'lucide-react';
+import { ArrowLeft, Clock, CheckCircle, ArrowRight, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 
 interface LearningPath {
@@ -29,7 +19,7 @@ interface LearningPath {
   title: string;
     duration: string;
     completed?: boolean;
-  }>;
+  }>
 }
 
 const learningPaths: LearningPath[] = [
@@ -137,7 +127,7 @@ export default function LearningPathPage() {
       newCompleted.delete(tutorialId);
     } else {
       newCompleted.add(tutorialId);
-    }
+}
     setCompletedTutorials(newCompleted);
   };
 
@@ -155,8 +145,9 @@ export default function LearningPathPage() {
     const progress = getPathProgress(path);
 
     return (
-      <div className="max-w-4xl mx-auto space-y-8">
-        {/* Header */}</div>
+    <div className="max-w-4xl mx-auto space-y-8">
+        {/* Header */}
+
         <div className="flex items-center gap-4">
           <Button
             variant="outline"
@@ -237,7 +228,6 @@ export default function LearningPathPage() {
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
           ))}
-        </div>
 
         {/* Completion */}
         {progress === 100 && (
@@ -246,7 +236,7 @@ export default function LearningPathPage() {
               <CardTitle className="text-green-700 dark:text-green-300">
                 🎉 Learning Path Completed!</CardTitle>
               <CardDescription>
-                Congratulations! You&apos;ve completed the {path.title}. Ready
+                Congratulations! You&apos, ve completed the {path.title}. Ready
                 to explore more?</CardDescription>
             <CardContent>
               <div className="flex gap-2">
@@ -255,13 +245,13 @@ export default function LearningPathPage() {
                 <Link href="/ui-builder">
                   <Button variant="outline">Try UI Builder</Button>
         )}
-      </div>
-    );
-  }
 
+    );
+}
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center gap-4">
         <Link href="/tutorials">
           <Button variant="outline" size="sm">
@@ -277,7 +267,7 @@ export default function LearningPathPage() {
         {learningPaths.map(path => {
           const progress = getPathProgress(path);
           return (
-            <Card
+    <Card
               key={path.id}
               className="cursor-pointer hover:shadow-lg transition-all"
             >
@@ -314,35 +304,11 @@ export default function LearningPathPage() {
                   >
                     {progress > 0 ? 'Continue Path' : 'Start Path'}</Button>
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-    );
-        }
-      )}
-    </div>
-        </div>
-        </Card>
-        </CardHeader>
-        </div>
-        </div>
-        </div>
-        </CardHeader>
-        </div>
-        </Link>
-        </Card>
-        </CardHeader>
-        </CardContent>
-        </div>
-        </Link>
-        </div>
-        </Link>
-        </Button>
-        </div>
-        </CardHeader>
-        </div>
-        </CardContent>
-        </div>
-        </div>
-    );
+                  
+  }
+      );}
+
+        
 
       {/* Quick Start */}
       <Card>
@@ -360,8 +326,6 @@ export default function LearningPathPage() {
           </CardHeader>
           </CardContent>
           </div>
-          </Link>
-      );
 </CardContent>
 </CardHeader>
 </Card>
@@ -372,13 +336,7 @@ export default function LearningPathPage() {
 </Card>
 </div>
 </CardHeader>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardHeader>
+</div></CardHeader>
 </Card>
 </div>
 </div>
@@ -386,3 +344,4 @@ export default function LearningPathPage() {
 
 </string>
 </string>
+}

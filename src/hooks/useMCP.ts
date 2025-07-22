@@ -7,7 +7,7 @@ export interface UseMCPOptions {
   autoConnect?: string[] // Server IDs to auto-connect
   debug?: boolean
   defaultTimeout?: number
-}
+};
 
 export interface UseMCPReturn {
   // Server management
@@ -28,8 +28,7 @@ export interface UseMCPReturn {
   
   // Resources & Prompts
   listResources: (serverId: string) => Promise<any[]>
-  readResource: (serverId: string;
-  uri: string) => Promise<any>
+  readResource: (serverId: string; uri: string) => Promise<any>
   listPrompts: (serverId: string) => Promise<any[]>
   getPrompt: (serverId: string;
   name: string, args?: any) => Promise<string>
@@ -38,7 +37,7 @@ export interface UseMCPReturn {
   loading: boolean
   error: string | null
   initialized: boolean
-}
+};
 
 export function useMCP(options: UseMCPOptions = {}): UseMCPReturn {
   const { toast } = useToast()

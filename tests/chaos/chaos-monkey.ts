@@ -23,7 +23,7 @@ export interface ChaosResult {
   error?: string
   recoveryTime?: number
   systemResponse: {
-    selfHealed: boolean, alertsTriggered: string[]
+    selfHealed: boolean; alertsTriggered: string[]
     servicesAffected: string[]
   }
 }
@@ -51,12 +51,10 @@ export class ChaosMonkey extends EventEmitter {
         category: 'network',
         action: async () => {
           // Simulate network latency (would use tc command in real Linux)
-          console.log('🌐 Introducing network latency...')
           process.env.CHAOS_NETWORK_LATENCY = '500'
         },
         recovery: async () => {
           delete process.env.CHAOS_NETWORK_LATENCY
-          console.log('✅ Network latency removed')
         }
       },
       {
@@ -67,13 +65,11 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'high',
         category: 'network',
         action: async () => {
-          console.log('🔌 Creating network partition...')
           // In Docker, this would block communication between containers
           await execAsync('docker network disconnect agent-network ai-saas-agent-backend || true')
         },
         recovery: async () => {
           await execAsync('docker network connect agent-network ai-saas-agent-backend || true')
-          console.log('✅ Network partition healed')
         }
       },
       
@@ -86,7 +82,6 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'high',
         category: 'resource',
         action: async () => {
-          console.log('🔥 Spiking CPU usage...')
           // CPU stress test
           const workers: any[] = []
           const cores = require('os').cpus().length
@@ -116,7 +111,6 @@ export class ChaosMonkey extends EventEmitter {
             (global as any).chaosWorkers.forEach((w) => clearInterval(w))
             delete (global as any).chaosWorkers
           }
-          console.log('✅ CPU usage normalized')
         }
       },
       {
@@ -127,7 +121,6 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'high',
         category: 'resource',
         action: async () => {
-          console.log('💧 Simulating memory leak...')
           const leaks: any[] = []
           const leakInterval = setInterval(() => {
             // Allocate 50MB
@@ -151,7 +144,6 @@ export class ChaosMonkey extends EventEmitter {
           if (global.gc) {
             global.gc()
           }
-          console.log('✅ Memory leak cleaned')
         }
       },
       
@@ -166,8 +158,6 @@ export class ChaosMonkey extends EventEmitter {
         action: async () => {
           const agents = ['frontend', 'backend', 'qa']
           const target = agents[Math.floor(Math.random() * agents.length)]
-          console.log(`☠️ Killing agent-${target} container...`)
-          
           try {
             await execAsync(`docker stop ai-saas-agent-${target} || true`)
           } catch (error) {
@@ -177,7 +167,6 @@ export class ChaosMonkey extends EventEmitter {
         recovery: async () => {
           try {
             await execAsync('docker-compose -f docker-compose.agents.yml up -d')
-            console.log('✅ Container restarted')
           } catch (error) {
             console.error('Failed to restart container:', error)
           }
@@ -191,12 +180,10 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'medium',
         category: 'service',
         action: async () => {
-          console.log('⏱️ Making service unresponsive...')
           process.env.CHAOS_SERVICE_TIMEOUT = 'true'
         },
         recovery: async () => {
           delete process.env.CHAOS_SERVICE_TIMEOUT
-          console.log('✅ Service responsiveness restored')
         }
       },
       
@@ -209,7 +196,6 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'high',
         category: 'database',
         action: async () => {
-          console.log('🗄️ Dropping database connections...')
           try {
             // Terminate all connections except our own
             await execAsync(`docker exec ai-saas-postgres psql -U postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'ai_guided_saas';" || true`)
@@ -219,7 +205,6 @@ export class ChaosMonkey extends EventEmitter {
         },
         recovery: async () => {
           // Connections should auto-reconnect
-          console.log('✅ Database connections will auto-recover')
         }
       },
       {
@@ -230,12 +215,10 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'low',
         category: 'database',
         action: async () => {
-          console.log('🐌 Slowing down database queries...')
           process.env.CHAOS_DB_SLOW_QUERIES = '2000' // 2 second delay
         },
         recovery: async () => {
           delete process.env.CHAOS_DB_SLOW_QUERIES
-          console.log('✅ Database query speed restored')
         }
       },
       
@@ -248,12 +231,10 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'medium',
         category: 'agent',
         action: async () => {
-          console.log('🤖 Injecting agent task failures...')
           process.env.CHAOS_AGENT_FAILURE_RATE = '0.5' // 50% failure rate
         },
         recovery: async () => {
           delete process.env.CHAOS_AGENT_FAILURE_RATE
-          console.log('✅ Agent task success rate restored')
         }
       },
       {
@@ -264,12 +245,10 @@ export class ChaosMonkey extends EventEmitter {
         severity: 'high',
         category: 'agent',
         action: async () => {
-          console.log('📡 Breaking agent communication...')
           process.env.CHAOS_AGENT_COMM_FAILURE = 'true'
         },
         recovery: async () => {
           delete process.env.CHAOS_AGENT_COMM_FAILURE
-          console.log('✅ Agent communication restored')
         }
       }
     ]
@@ -277,11 +256,8 @@ export class ChaosMonkey extends EventEmitter {
   
   start(intervalMs: number = 60000) {
     if (this.isRunning) {
-      console.log('⚠️ Chaos Monkey is already running')
       return
     }
-    
-    console.log('🐵 Chaos Monkey started!')
     this.isRunning = true
     
     this.interval = setInterval(() => {
@@ -294,8 +270,6 @@ export class ChaosMonkey extends EventEmitter {
   
   stop() {
     if (!this.isRunning) return
-    
-    console.log('🛑 Stopping Chaos Monkey...')
     this.isRunning = false
     
     if (this.interval) {
@@ -327,7 +301,6 @@ export class ChaosMonkey extends EventEmitter {
     }
     
     try {
-      console.log(`\n🎲 Chaos Monkey: Executing "${scenario.name}"`)
       this.emit('chaos:start', scenario)
       
       // Execute chaos
@@ -343,7 +316,6 @@ export class ChaosMonkey extends EventEmitter {
       await new Promise(resolve => setTimeout(resolve, chaosDuration))
       
       // Attempt recovery
-      console.log('🔧 Attempting recovery...')
       await scenario.recovery()
       result.recovered = true
       result.recoveryTime = Date.now() - monitorStart
@@ -427,8 +399,6 @@ export class ChaosMonkey extends EventEmitter {
   }
   
   private async cleanupAllScenarios() {
-    console.log('🧹 Cleaning up all chaos scenarios...')
-    
     for (const scenario of this.scenarios) {
       try {
         await scenario.recovery()

@@ -1,13 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -24,13 +18,13 @@ interface AnalyticsData {
     path: string;
   views: number;
     percentage: number;
-  }>;
+  }}>
   userActivity: Array<{
     date: string,
-    users: number;
+    users: number,
     sessions: number;
-  }>;
-}
+  }}>
+};
 
 export default function AnalyticsPage() {
   const { toast } = useToast();
@@ -47,7 +41,7 @@ export default function AnalyticsPage() {
       try {
         const response = await fetch('/api/analytics', {
           credentials: 'include',
-          headers: {
+    headers: {
             'Content-Type': 'application/json'
           }
         });
@@ -59,7 +53,7 @@ export default function AnalyticsPage() {
           }
         }
       } catch (apiError) {
-        console.log('API not available using demo data:', apiError);
+
       }
 
       // Use API data if available, otherwise use demo data
@@ -98,7 +92,7 @@ export default function AnalyticsPage() {
       });
       setLoading(false);
       setRefreshing(false);
-    }
+}
   }, [toast]);
 
   useEffect(() => {
@@ -118,24 +112,20 @@ export default function AnalyticsPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading analytics...</p>
-        </div>
-    );
   }
 
   if (!analyticsData) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <p className="text-muted-foreground">Failed to load analytics data</p>
           <Button onClick={handleRefresh} className="mt-4">
             Retry
           </Button>
-        </div>
-    );
   }
 
   return (
@@ -147,7 +137,7 @@ export default function AnalyticsPage() {
             Analytics Dashboard
           </h1>
           <p className="text-muted-foreground">
-            Monitor your platform&apos;s performance and user engagement
+            Monitor your platform&apos, s performance and user engagement
           </p>
         </div>
         <div className="flex space-x-2">
@@ -170,7 +160,7 @@ export default function AnalyticsPage() {
           <CardContent>
             <div className="text-2xl font-bold">
               {analyticsData.pageViews.toLocaleString()}
-            </div>
+
             <p className="text-xs text-muted-foreground">
               +12.5% from last month
             </p>
@@ -186,7 +176,7 @@ export default function AnalyticsPage() {
           <CardContent>
             <div className="text-2xl font-bold">
               {analyticsData.uniqueVisitors.toLocaleString()}
-            </div>
+
             <p className="text-xs text-muted-foreground">
               +8.2% from last month
             </p>
@@ -202,7 +192,7 @@ export default function AnalyticsPage() {
           <CardContent>
             <div className="text-2xl font-bold">
               {analyticsData.averageSessionTime}
-            </div>
+
             <p className="text-xs text-muted-foreground">
               +15.3% from last month
             </p>
@@ -218,7 +208,7 @@ export default function AnalyticsPage() {
               {analyticsData.bounceRate}%
             </div>
             <Progress value={100 - analyticsData.bounceRate} className="mt-2" />
-          </CardContent>
+          
         </Card>
       </div>
 
@@ -246,15 +236,14 @@ export default function AnalyticsPage() {
                       key={day.date}
                       className="flex items-center justify-between"
                     >
-                      <div className="text-sm font-medium">Day {index + 1}</div>
+                      <div className="text-sm font-medium">Day {index + 1}
+
                       <div className="flex items-center space-x-4">
                         <Badge variant="outline">{day.users} users</Badge>
                         <Badge variant="secondary">
                           {day.sessions} sessions
-                        </Badge>
-                      </div>
-                  ))}
-                </div>
+                        </Badge>))}
+
               </CardContent>
             </Card>
 
@@ -305,27 +294,23 @@ export default function AnalyticsPage() {
                       </span>
                     </div>
                     <Progress value={page.percentage} className="h-2" />
-                  </div>
+                  
                 ))}
-              </div>
+
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="enterprise">
           <EnterpriseDashboard />
-        </TabsContent>
+        
       </Tabs>
-    </div>
-  );
 </CardContent>
 </Card>
 </div>
 </TabsContent>
 </Tabs>
-</div>
-</div>
-</div>
-</div>
+</div></div>
 }
 </AnalyticsData>
+}

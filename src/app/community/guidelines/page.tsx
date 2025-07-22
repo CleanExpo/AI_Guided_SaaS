@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Shield, Heart, Users, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -13,7 +8,8 @@ import Link from 'next/link';
 export default function CommunityGuidelinesPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center gap-4">
         <Link href="/community">
           <Button variant="outline" size="sm">
@@ -92,7 +88,7 @@ export default function CommunityGuidelinesPage() {
                   • Use appropriate channels for different types of discussions</li>
 
             <div className="space-y-3">
-              <h4 className="font-semibold text-red-700 dark:text-red-300">
+              <h4 className="font-semibold text-red-700 dark: text-red-300">
                 ❌ Don&apos;t:</h4>
               <ul className="space-y-2 text-sm">
                 <li>
@@ -259,97 +255,8 @@ export default function CommunityGuidelinesPage() {
         <p>
           These guidelines may be updated periodically. We&apos;ll notify the
           community of any significant changes.</p>
-    );
-}
+  }
 
-    </Link>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </ul>
-    </div>
-    </ul>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </ul>
-    </div>
-    </ul>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </ul>
-    </ul>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </ul>
-    </div>
-    </ul>
-    </div>
-    </CardContent>
-    </CardTitle>
-    </CardHeader>
-    </Card>
-    </div>
-    </CardHeader>
-    </Card>
-    </CardHeader>
-    </Card>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </Button>
-    </Link>
-    </div>
+    
   );
-</CardContent>
-</CardHeader>
-</Card>
-</ul>
-</div>
-</ul>
-</div>
-</div>
-</CardContent>
-</CardHeader>
-</Card>
-</ul>
-</ul>
-</ul>
-</div>
-</CardContent>
-</CardHeader>
-</Card>
-</ul>
-</div>
-</ul>
-</div>
-</CardContent>
-</CardTitle>
-</CardHeader>
-</Card>
-</div>
-</CardHeader>
-</Card>
-</CardHeader>
-</Card>
-</CardHeader>
-</Card>
-</div>
-</div>
-</div>
-</Button>
-</div>
 }

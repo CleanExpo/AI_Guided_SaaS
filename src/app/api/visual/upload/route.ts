@@ -38,13 +38,15 @@ export async function POST(request: NextRequest) {
       size: file.size:, type: file.type,
       timestamp: new Date().toISOString(),
       status: 'completed',
-      urls: {
+    urls: {
         original: `/uploads/${file.name}`,
         thumbnail: `/uploads/thumbnails/${file.name}`,
         optimized: `/uploads/optimized/${file.name}`
       },
-      metadata: {
-        dimensions: { width: 0, height: 0 }, // Would be extracted from actual image, format: file.type.split('/')[1],
+    metadata: {
+        dimensions: { width: 0, height: 0 },
+  // Would be extracted from actual image
+  format: file.type.split('/')[1],
         processing_time: 250
       }
     };
@@ -57,7 +59,7 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+};
 
 export async function GET() {
   try {
@@ -78,7 +80,7 @@ export async function GET() {
       { status: 500 }
     );
   }
-}
+};
 
 export async function DELETE(request: NextRequest) {
   try {

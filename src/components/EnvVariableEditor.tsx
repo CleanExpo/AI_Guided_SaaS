@@ -1,29 +1,14 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
-import { 
-  Key, 
-  Lock, 
-  Eye, 
-  EyeOff, 
-  Plus, 
-  Trash2, 
-  AlertTriangle,
-  CheckCircle,
-  Copy,
-  Download,
-  Upload,
-  Shield,
-  Info
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Key, Lock, Eye, EyeOff, Plus, Trash2, AlertTriangle, CheckCircle, Copy, Download, Upload, Shield, Info } from 'lucide-react';
+import { cn } from '@/utils/cn';
 interface EnvVariable {
   key: string;
   value: string
@@ -31,7 +16,7 @@ interface EnvVariable {
   type: 'public' | 'secret' | 'api_key'
   required: boolean
   validated?: boolean
-}
+};
 
 interface EnvVariableEditorProps {
   variables: EnvVariable[];
@@ -56,7 +41,7 @@ const commonVariables: Record<string, EnvVariable[]> = {
     { key: 'ANTHROPIC_API_KEY', value: '', type: 'api_key', required: false, description: 'Anthropic Claude API key' },
     { key: 'GOOGLE_AI_API_KEY', value: '', type: 'api_key', required: false, description: 'Google AI API key' }
   ]
-}
+};
 
 export function EnvVariableEditor({ 
   variables: initialVariables, 
@@ -64,8 +49,8 @@ export function EnvVariableEditor({
   projectType = 'default',
   readOnly = false 
 }: EnvVariableEditorProps) {</string>
-  const [variables, setVariables] = useState<EnvVariable[]>(initialVariables)</EnvVariable>
-  const [showSecrets, setShowSecrets] = useState<Record<string, boolean>>({})</Record>
+  const [variables, setVariables] = useState<EnvVariable[]>(initialVariables)
+  const [showSecrets, setShowSecrets] = useState<Record<string, boolean>>({})
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
   const [isValidating, setIsValidating] = useState(false)
   
@@ -175,9 +160,9 @@ export function EnvVariableEditor({
             description: existing?.description
           }
       )}
-    </div>
+
   );
-      })
+  }
       
       setVariables(imported)
       onChange(imported)
@@ -269,7 +254,8 @@ export function EnvVariableEditor({
         {variables.map((variable, index) => (
           <div key={index} className="border rounded-lg p-4">
             <div className="grid grid-cols-12 gap-4">
-              {/* Key */}</div>
+              {/* Key */}
+
               <div className="col-span-4">
                 <label className="text-sm font-medium mb-1 block">Key</label>
                 <Input
@@ -293,8 +279,7 @@ export function EnvVariableEditor({
                     placeholder={variable.type === 'api_key' ? 'sk-...' : 'Enter value'}
                     disabled={readOnly}
                     className={cn(
-                      "pr-10",
-                      validationErrors[variable.key] && "border-red-500"
+                      "pr-10" validationErrors[variable.key] && "border-red-500"
                     )}
                   />
                   {variable.type !== 'public' && (</Input>
@@ -309,8 +294,7 @@ export function EnvVariableEditor({
                         <Eye className="h-4 w-4" />
                       )}</Eye>
                   )}
-                </div>
-              
+
               {/* Type & Actions */}
               <div className="col-span-2 flex items-end gap-2">
                 <select
@@ -332,23 +316,18 @@ export function EnvVariableEditor({
                     <Trash2 className="h-4 w-4 text-red-500" />
                   </Button>
                 )}
-              </div>
-            
+
             {/* Description & Metadata */}
             <div className="mt-3 flex items-start justify-between">
               <div className="flex-1">
                 {variable.description && (</div>
                   <p className="text-sm text-muted-foreground">{variable.description}</p>
-  );
-}
+  }
                 {validationErrors[variable.key] && (
                   <p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}</p>
-  
-        </div>
-    );
-}
+  }
               <div className="flex items-center gap-2">
-                <Badge className={cn("text-xs", getTypeBadgeColor(variable.type))}>
+                <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))}>
                   {getTypeIcon(variable.type)}</Badge>
                   <span className="ml-1">{variable.type}</span>
                 </Badge>
@@ -370,38 +349,14 @@ export function EnvVariableEditor({
             <Plus className="h-4 w-4 mr-2" />
             Add Variable</Plus>
         )}
-      </div>
-      
+
       {/* Validation */}
       <div className="mt-6 flex justify-end">
         <Button
           onClick={validateVariables}
           disabled={isValidating}
         >
-          {isValidating ? 'Validating...' : 'Validate All'}</Button>
-    );
-</div>
-</div>
-</div>
-</div>
-</div>
-</Alert>
-</span>
-</label>
-</div>
-</h3>
-</div>
-</div>
-</div>
-</Card>
-}
-    </Alert>
-    </span>
-    </label>
-    </div>
-    </h3>
-    </div>
-    </div>
-    </Card>
+          {isValidating ? 'Validating...' : 'Validate All'}
   );
+  }
 }

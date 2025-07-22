@@ -11,7 +11,7 @@ interface EPCCheckResult {
   action: 'allow_inference' | 'block_inference' | 'warn_proceed';
   recommendations?: string[];
   score: number; // 0-100 confidence score
-}
+};
 
 interface ServiceRequirements {
   openai?: boolean;
@@ -20,7 +20,7 @@ interface ServiceRequirements {
   redis?: boolean;
   stripe?: boolean;
   google?: boolean;
-}
+};
 
 export class EPCEngine {
   private envManager: EnvManager;
@@ -41,9 +41,14 @@ export class EPCEngine {
    * @param requiredServices - Services required for this inference
    * @returns EPCCheckResult with detailed status
    */
-  async performPreflightCheck(requiredServices?: ServiceRequirements): Promise<EPCCheckResult> {
+  async performPreflightCheck(
+    requiredServices?: ServiceRequirements
+  ): Promise<EPCCheckResult> {
     // Check cache
-    if (this.cachedResult && Date.now() - this.lastCheckTime < this.cacheExpiry) {
+    if (
+      this.cachedResult &&
+      Date.now() - this.lastCheckTime < this.cacheExpiry
+    ) {
       return this.cachedResult;
     }
 
@@ -55,13 +60,13 @@ export class EPCEngine {
       mismatched: [],
       action: 'allow_inference',
       recommendations: [],
-      score: 100
+      score: 100,
     };
 
     try {
       // Run validation
       const validation = this.envManager.validate();
-      
+
       // Check for missing required variables
       for (const error of validation.errors) {
         if (error.severity === 'error' && error.message.includes('missing')) {
@@ -73,7 +78,10 @@ export class EPCEngine {
 
       // Check specific service requirements
       if (requiredServices) {
-        const criticalMissing = this.checkServiceRequirements(requiredServices, validation);
+        const criticalMissing = this.checkServiceRequirements(
+          requiredServices,
+          validation
+        );
         result.missing.push(...criticalMissing);
       }
 
@@ -86,10 +94,13 @@ export class EPCEngine {
       result.mismatched = mismatched;
 
       // Calculate score and determine action
-      const totalIssues = result.missing.length + result.invalid.length + 
-                         result.outdated.length + result.mismatched.length;
-      
-      result.score = Math.max(0, 100 - (totalIssues * 10));
+      const totalIssues =
+        result.missing.length +
+        result.invalid.length +
+        result.outdated.length +
+        result.mismatched.length;
+
+      result.score = Math.max(0, 100 - totalIssues * 10);
 
       // Determine action based on issues
       if (result.missing.length > 0 || result.invalid.length > 0) {
@@ -107,7 +118,6 @@ export class EPCEngine {
       this.lastCheckTime = Date.now();
 
       return result;
-
     } catch (error) {
       console.error('EPC Engine, error:', error);
       return {
@@ -117,8 +127,10 @@ export class EPCEngine {
         invalid: [],
         mismatched: [],
         action: 'block_inference',
-        recommendations: ['Failed to perform environment check. Please check your configuration.'],
-        score: 0
+        recommendations: [
+          'Failed to perform environment check. Please check your configuration.',
+        ],
+        score: 0,
       };
     }
   }
@@ -127,8 +139,9 @@ export class EPCEngine {
    * Check if specific services have required variables
    */
   private checkServiceRequirements(
-    required: ServiceRequirements, 
-    validation): string[] {
+    required: ServiceRequirements,
+    validation
+  ): string[] {
     const criticalMissing: string[] = [];
     const config = JSON.parse(fs.readFileSync(this.configPath, 'utf-8'));
 
@@ -136,7 +149,7 @@ export class EPCEngine {
       const openaiVars = Object.keys(config.services.openai.variables);
       for (const varName of openaiVars) {
         if (config.services.openai.variables[varName].required) {
-          const error = validation.errors.find((e) => e.variable === varName);
+          const error = validation.errors.find(e => e.variable === varName);
           if (error && error.severity === 'error') {
             criticalMissing.push(varName);
           }
@@ -148,7 +161,7 @@ export class EPCEngine {
       const claudeVars = Object.keys(config.services.anthropic.variables);
       for (const varName of claudeVars) {
         if (config.services.anthropic.variables[varName].required) {
-          const error = validation.errors.find((e) => e.variable === varName);
+          const error = validation.errors.find(e => e.variable === varName);
           if (error && error.severity === 'error') {
             criticalMissing.push(varName);
           }
@@ -157,7 +170,7 @@ export class EPCEngine {
     }
 
     // Check other services similarly...
-    
+
     return [...new Set(criticalMissing)]; // Remove duplicates
   }
 
@@ -166,9 +179,13 @@ export class EPCEngine {
    */
   private async checkOutdatedVariables(): Promise<string[]> {
     const outdated: string[] = [];
-    
+
     try {
-      const defaultsPath = path.join(process.cwd(), '.docs', 'env.defaults.json');
+      const defaultsPath = path.join(
+        process.cwd(),
+        '.docs',
+        'env.defaults.json'
+      );
       if (fs.existsSync(defaultsPath)) {
         const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8'));
         // Logic to compare current values with defaults
@@ -186,19 +203,25 @@ export class EPCEngine {
    */
   private checkEnvironmentMismatches(): string[] {
     const mismatched: string[] = [];
-    
+
     try {
       const config = JSON.parse(fs.readFileSync(this.configPath, 'utf-8'));
       const envOverrides = config.environments || {};
-      
+
       // Compare development vs production overrides
       const devOverrides = envOverrides.development?.overrides || {};
       const prodOverrides = envOverrides.production?.overrides || {};
-      
+
       for (const key of Object.keys(devOverrides)) {
         if (prodOverrides[key] && devOverrides[key] !== prodOverrides[key]) {
           // Check if the difference is expected (like test vs live keys)
-          if (!this.isExpectedEnvironmentDifference(key, devOverrides[key], prodOverrides[key])) {
+          if (
+            !this.isExpectedEnvironmentDifference(
+              key,
+              devOverrides[key],
+              prodOverrides[key]
+            )
+          ) {
             mismatched.push(key);
           }
         }
@@ -213,12 +236,22 @@ export class EPCEngine {
   /**
    * Check if environment difference is expected
    */
-  private isExpectedEnvironmentDifference(key: string, devValue: string, prodValue: string): boolean {
+  private isExpectedEnvironmentDifference(
+    key: string,
+    devValue: string,
+    prodValue: string
+  ): boolean {
     // Expected differences
     if (key === 'NEXTAUTH_URL') return true;
-    if (key.includes('STRIPE') && devValue.includes('test') && prodValue.includes('live')) return true;
-    if (key === 'REDIS_TLS' && devValue === 'false' && prodValue === 'true') return true;
-    
+    if (
+      key.includes('STRIPE') &&
+      devValue.includes('test') &&
+      prodValue.includes('live')
+    )
+      return true;
+    if (key === 'REDIS_TLS' && devValue === 'false' && prodValue === 'true')
+      return true;
+
     return false;
   }
 
@@ -229,29 +262,46 @@ export class EPCEngine {
     const recommendations: string[] = [];
 
     if (result.missing.length > 0) {
-      recommendations.push(`Missing ${result.missing.length} required, variables: ${result.missing.join(', ')}`);
-      recommendations.push('Run "npm run, env:setup" to configure missing variables');
+      recommendations.push(
+        `Missing ${result.missing.length} required, variables: ${result.missing.join(', ')}`
+      );
+      recommendations.push(
+        'Run "npm run, env: setup" to configure missing variables'
+      )
     }
 
     if (result.invalid.length > 0) {
-      recommendations.push(`Invalid ${result.invalid.length} variables: ${result.invalid.join(', ')}`);
+      recommendations.push(
+        `Invalid ${result.invalid.length} variables: ${result.invalid.join(', ')}`
+      );
       recommendations.push('Check variable formats match expected patterns');
     }
 
     if (result.outdated.length > 0) {
-      recommendations.push(`${result.outdated.length} variables may be outdated`);
-      recommendations.push('Consider running "npm run, env:sync" to update configuration');
+      recommendations.push(
+        `${result.outdated.length} variables may be outdated`
+      );
+      recommendations.push(
+        'Consider running "npm run, env: sync" to update configuration'
+      )
     }
 
     if (result.mismatched.length > 0) {
-      recommendations.push(`${result.mismatched.length} variables differ between environments`);
+      recommendations.push(
+        `${result.mismatched.length} variables differ between environments`
+      );
       recommendations.push('Review environment-specific configurations');
     }
 
     // AI-specific recommendations
-    if (result.missing.includes('OPENAI_API_KEY') || result.missing.includes('CLAUDE_API_KEY')) {
+    if (
+      result.missing.includes('OPENAI_API_KEY') ||
+      result.missing.includes('CLAUDE_API_KEY')
+    ) {
       recommendations.push('AI service keys are missing - inference will fail');
-      recommendations.push('Did you recently rotate API keys? Update .env.local');
+      recommendations.push(
+        'Did you recently rotate API keys? Update .env.local'
+      );
     }
 
     return recommendations;
@@ -260,15 +310,24 @@ export class EPCEngine {
   /**
    * Quick check method for UI components
    */
-  async quickCheck(): Promise<{ status: 'ready' | 'warning' | 'error', message: string }> {
+  async quickCheck(): Promise<{
+    status: 'ready' | 'warning' | 'error',
+    message: string
+  }> {
     const result = await this.performPreflightCheck();
-    
+
     if (result.env_check === 'pass') {
       return { status: 'ready', message: 'Environment ready for inference' };
     } else if (result.env_check === 'warning') {
-      return { status: 'warning', message: `${result.outdated.length + result.mismatched.length} warnings` };
+      return {
+        status: 'warning',
+        message: `${result.outdated.length + result.mismatched.length} warnings`,
+      };
     } else {
-      return { status: 'error', message: `${result.missing.length + result.invalid.length} errors` };
+      return {
+        status: 'error',
+        message: `${result.missing.length + result.invalid.length} errors`,
+      };
     }
   }
 

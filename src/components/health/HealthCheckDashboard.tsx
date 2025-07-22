@@ -1,26 +1,12 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import {
-  Activity,
-  CheckCircle,
-  AlertCircle,
-  XCircle,
-  RefreshCw,
-  Clock,
-  Database,
-  Globe,
-  Server,
-  Cpu,
-  HardDrive,
-  Zap
-} from 'lucide-react'
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Activity, CheckCircle, AlertCircle, XCircle, RefreshCw, Clock, Database, Globe, Server, Cpu, HardDrive, Zap } from 'lucide-react';
 interface HealthCheck {
   name: string;
   status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown'
@@ -28,7 +14,7 @@ interface HealthCheck {
   details?: any
   error?: string;
   timestamp: string
-}
+};
 
 interface SystemMetrics {
   cpu: {
@@ -43,7 +29,7 @@ interface SystemMetrics {
     total: number, used: number, free: number, percentage: number
   }
   uptime: number
-}
+};
 
 interface HealthStatus {
   status: 'healthy' | 'unhealthy' | 'degraded'
@@ -52,15 +38,14 @@ interface HealthStatus {
   version: string;
   environment: string;
   timestamp: string
-}
+};
 
 export function HealthCheckDashboard() {
       </HealthStatus>
   const [healthData, setHealthData] = useState<HealthStatus | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [autoRefresh, setAutoRefresh] = useState(true)</HealthStatus>
-      </string>
+  const [autoRefresh, setAutoRefresh] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -137,15 +122,14 @@ export function HealthCheckDashboard() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-[400px]">
         <RefreshCw className="h-8 w-8 animate-spin text-primary" />
       </div>
-    );
   }
 
   if (error) {
     return (
-      <Card className="border-red-200 bg-red-50">
+    <Card className="border-red-200 bg-red-50">
         <CardHeader>
           <CardTitle className="text-red-800">Health Check Error</CardTitle>
         <CardContent>
@@ -156,18 +140,19 @@ export function HealthCheckDashboard() {
             variant="outline"
           >
             Retry</Button>
-    );
   }
 
   if (!healthData) return null
 
   return (
     <div className="space-y-6">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            {getStatusIcon(healthData.status)}</div>
+            {getStatusIcon(healthData.status)}
+
             <h2 className="text-2xl font-bold">System Health</h2>
           <Badge className={getStatusColor(healthData.status)}>
             {healthData.status.toUpperCase()}</Badge>
@@ -237,7 +222,7 @@ export function HealthCheckDashboard() {
                       {check.name.includes('external') && <Globe className="h-4 w-4" />}
                       {check.name}</Globe>
                     {getStatusIcon(check.status)}
-                  </div>
+
                 <CardContent>
                   {check.error ? (</CardContent>
                     <p className="text-sm text-red-600">{check.error}</p>
@@ -256,15 +241,15 @@ export function HealthCheckDashboard() {
                               <span className="font-medium">
                                 {typeof value === 'object' ? JSON.stringify(value) : String(value)}</span>))}
                       )}
-                    </div>
+
                   )}
                 </CardContent>
             ))}
-          </div>
 
         <TabsContent value="metrics" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* CPU, Metrics */}</div>
+            {/* CPU, Metrics */}
+
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
@@ -333,8 +318,7 @@ export function HealthCheckDashboard() {
                     
                     {check.error && (
                       <p className="text-sm text-red-600 mt-2">{check.error}</p>
-  );
-}
+  }
                     
                     {check.details && (
                       <pre className="text-xs bg-muted p-2 rounded overflow-x-auto">
@@ -342,27 +326,18 @@ export function HealthCheckDashboard() {
                     )}
                     
                     <p className="text-xs text-muted-foreground">
-                      Last, checked: {new, Date(check.timestamp).toLocaleString()}</p>))}
+                      Last,
+    checked: {new, Date(check.timestamp).toLocaleString()}</p>))}
     );
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
 </TabsContent>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardTitle>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardTitle>
 </CardHeader>
 </Card>
@@ -376,58 +351,13 @@ export function HealthCheckDashboard() {
 </TabsContent>
 </TabsList>
 </Tabs>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
 }
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </TabsContent>
-    </div>
-    </div>
-    </CardContent>
-    </CardTitle>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </CardContent>
-    </CardTitle>
-    </CardHeader>
-    </Card>
-    </TabsContent>
-    </div>
-    </CardTitle>
-    </div>
-    </CardHeader>
-    </Card>
-    </div>
-    </TabsContent>
-    </TabsList>
-    </Tabs>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
+    
   );
 }

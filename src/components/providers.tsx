@@ -1,17 +1,18 @@
 'use client'
 
-import { SessionProvider } from 'next-auth/react'
-import { ThemeProvider } from 'next-themes'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useState } from 'react'
-import { usePathname } from 'next/navigation'
-
+import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider } from 'next-themes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 export function Providers({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 60 * 1000, // 1 minute, refetchOnWindowFocus: false}}}))
+        staleTime: 60 * 1000,
+  // 1 minute
+  refetchOnWindowFocus: false}}}))
 
   // Exclude admin routes from NextAuth SessionProvider to prevent automatic redirects
   const isAdminRoute = pathname?.startsWith('/admin')
@@ -19,7 +20,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   if (isAdminRoute) {
     // Admin routes don't use NextAuth - they have their own authentication system
     return (
-      <QueryClientProvider client={queryClient}></QueryClientProvider>
+    <QueryClientProvider client={queryClient}></QueryClientProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -27,7 +28,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
           disableTransitionOnChange
         >
           {children}</ThemeProvider>
-    );
   }
 
   // Regular routes use NextAuth SessionProvider
@@ -41,5 +41,4 @@ export function Providers({ children }: { children: React.ReactNode }) {
           disableTransitionOnChange
         >
           {children}</ThemeProvider>
-    );
-}
+  }

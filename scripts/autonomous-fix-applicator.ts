@@ -28,7 +28,7 @@ import { JWT } from "next-auth/jwt"
 declare module "next-auth" {
   interface Session {
     user: {
-      id: string, email: string, name: string
+      id: string; email: string; name: string
       image?: string
     } & DefaultSession["user"]
   }
@@ -40,7 +40,7 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
   interface JWT {
-    id: string, email: string, name: string
+    id: string; email: string; name: string
     picture?: string
   }
 }`
@@ -77,24 +77,15 @@ declare module "next-auth/jwt" {
   private failedFixes: string[] = [];
 
   async applyFixes(): Promise<void> {
-    console.log('🔧 Autonomous Fix Applicator\n');
-    console.log('===========================\n');
-
     // Sort fixes by priority
     this.fixes.sort((a, b) => a.priority - b.priority);
 
     for (const fix of this.fixes) {
-      console.log(`\n📌 Applying, Fix: ${fix.solution}`);
-      console.log(`   Error, Code: ${fix.errorCode}`);
-      console.log(`   Pattern: ${fix.pattern}`);
-
       try {
         await this.applyFix(fix);
         this.appliedFixes.push(fix.solution);
-        console.log(`   ✅ Success`);
       } catch (error) {
         this.failedFixes.push(fix.solution);
-        console.log(`   ❌ Failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     }
 
@@ -116,7 +107,6 @@ declare module "next-auth/jwt" {
         
         // Write the file
         fs.writeFileSync(filePath, file.content);
-        console.log(`   📄 Created: ${file.path}`);
       }
     }
 
@@ -129,23 +119,18 @@ declare module "next-auth/jwt" {
           let content = fs.readFileSync(filePath, 'utf-8');
           content = content.replace(update.oldPattern, update.newContent);
           fs.writeFileSync(filePath, content);
-          console.log(`   📝 Updated: ${update.path}`);
         }
       }
     }
   }
 
   private async verifyFixes(): Promise<void> {
-    console.log('\n🔍 Verifying fixes...\n');
-    
     try {
       const output = execSync('npm run typecheck 2>&1', { encoding: 'utf-8' });
       const remainingErrors = (output.match(/error TS/g) || []).length;
-      console.log(`   TypeScript, errors: ${remainingErrors}`);
     } catch (error) {
       const output = error.stdout?.toString() || '';
       const remainingErrors = (output.match(/error TS/g) || []).length;
-      console.log(`   TypeScript errors, remaining: ${remainingErrors}`);
     }
   }
 
@@ -166,20 +151,12 @@ declare module "next-auth/jwt" {
       path.join(process.cwd(), 'autonomous-fix-report.json'),
       JSON.stringify(report, null, 2)
     );
-
-    console.log('\n📊 Fix, Summary:');
-    console.log(`   Applied: ${this.appliedFixes.length}`);
-    console.log(`   Failed: ${this.failedFixes.length}`);
-    console.log(`   Success, Rate: ${report.successRate}`);
-    console.log('\n📄 Report saved to autonomous-fix-report.json');
   }
 }
 
 // Additional fix patterns based on documentation
 class DocumentationBasedFixer {
   async applyDocumentationPatterns(): Promise<void> {
-    console.log('\n📚 Applying documentation-based patterns...\n');
-
     // Pattern, 1: Fix all NextAuth session type issues
     await this.fixNextAuthSessions();
     
@@ -191,8 +168,6 @@ class DocumentationBasedFixer {
   }
 
   private async fixNextAuthSessions(): Promise<void> {
-    console.log('🔐 Fixing NextAuth session types...');
-    
     // This would use Context7 documentation to ensure correct patterns
     const files = [
       'src/app/api/auth/[...nextauth]/route.ts',
@@ -203,18 +178,15 @@ class DocumentationBasedFixer {
     for (const file of files) {
       const filePath = path.join(process.cwd(), file);
       if (fs.existsSync(filePath)) {
-        console.log(`   Checking: ${file}`);
       }
     }
   }
 
   private async fixImportExports(): Promise<void> {
-    console.log('📦 Fixing import/export statements...');
     // Implementation based on documentation patterns
   }
 
   private async addTypeAnnotations(): Promise<void> {
-    console.log('📝 Adding type annotations...');
     // Implementation based on TypeScript best practices
   }
 }
@@ -226,9 +198,6 @@ async function main() {
 
   const docFixer = new DocumentationBasedFixer();
   await docFixer.applyDocumentationPatterns();
-
-  console.log('\n✨ Autonomous fix application complete!');
-  console.log('\nNext: Run npm run, health:check to verify improvements');
 }
 
 main().catch(console.error);

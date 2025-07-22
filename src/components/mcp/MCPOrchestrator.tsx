@@ -1,43 +1,24 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Badge } from '@/components/ui/badge'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { 
-  Server, 
-  Settings, 
-  Play, 
-  StopCircle,
-  ChevronDown,
-  ChevronRight,
-  Loader2,
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
-  FileText,
-  MessageSquare,
-  Database,
-  Code,
-  Zap,
-  Globe,
-  Brain
-} from 'lucide-react'
-import { useMCP } from '@/hooks/useMCP'
-import { getAllServers, getServersByCategory, ServerCapabilities } from '@/lib/mcp/mcp-registry'
-import { MCPTool, MCPToolCall, MCPOrchestrationPlan } from '@/lib/mcp/mcp-orchestrator'
-import { useToast } from '@/hooks/use-toast'
-
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Badge } from '@/components/ui/badge';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Server, Settings, Play, StopCircle, ChevronDown, ChevronRight, Loader2, CheckCircle2, XCircle, AlertCircle, FileText, MessageSquare, Database, Code, Zap, Globe, Brain } from 'lucide-react';
+import { useMCP } from '@/hooks/useMCP';
+import { getAllServers, getServersByCategory, ServerCapabilities } from '@/lib/mcp/mcp-registry';
+import { MCPTool, MCPToolCall, MCPOrchestrationPlan } from '@/lib/mcp/mcp-orchestrator';
+import { useToast } from '@/hooks/use-toast';
 interface MCPOrchestratorProps {
   projectId?: string
   onToolResult?: (result: any) => void
-}
+};
 
 export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProps) {
   const { toast } = useToast()
@@ -134,7 +115,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
       type: 'tool' as const,
       server: selectedTool.server,
       operation: selectedTool.name,
-      arguments: { ...toolArguments }
+    arguments: { ...toolArguments }
     }
 
     setPlanSteps(prev => [...prev, step])
@@ -181,7 +162,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
   }
 
   // Parse tool input schema for UI
-  const getToolInputFields = (tool: MCPTool): Array<{ name: string, type: string; required: boolean }> => {
+  const getToolInputFields = (tool: MCPTool): Array<{ name: string, type: string, required: boolean }> => {
     if (!tool.inputSchema || !tool.inputSchema.properties) return []
     
     const required = tool.inputSchema.required || []
@@ -208,9 +189,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
               {categories.map(category => (
                 <TabsTrigger key={category} value={category} className="flex items-center gap-2">
                   {getCategoryIcon(category)}
-                  <span className="hidden md:inline">{category}</span>
-                </TabsTrigger>
-              ))}
+                  <span className="hidden md:inline">{category}</span>))}
             </TabsList>
 
             {categories.map(category => (
@@ -220,8 +199,8 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                   const isConnected = status === 'connected'
                   
                   return (
-                    <div
-                      key={server.id}
+    <div
+                key={server.id}
                       className="flex items-center justify-between p-3 border rounded-lg"
                     >
                       <div className="flex items-center gap-3">
@@ -251,9 +230,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           disabled={loading}
                         >
                           {isConnected ? 'Disconnect' : 'Connect'}
-                        </Button>
-                      </div>
-                  )
+                        </Button>)
                 })}
               </TabsContent>
             ))}
@@ -304,13 +281,9 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           </div>
                           <p className="text-sm text-muted-foreground mt-1">
                             {tool.description}
-                          </p>
-                        </div>
-                      ))}
-                    </CollapsibleContent>
-                  </Collapsible>
-                ))}
-              </div>
+                          </p>))}
+                    </CollapsibleContent>))}
+
             </ScrollArea>
           </CardContent>
         </Card>
@@ -357,9 +330,8 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           rows={3}
                         />
                       )}
-                    </div>
+
                   ))}
-                </div>
 
                 <div className="flex gap-2">
                   <Button
@@ -376,13 +348,9 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                     disabled={loading}
                   >
                     Add to Plan
-                  </Button>
-                </div>
-            ) : (
+                  </Button>) : (
               <div className="flex items-center justify-center h-full text-muted-foreground">
-                <p>Select a tool from the left panel</p>
-              </div>
-            )}
+                <p>Select a tool from the left panel</p>)}
           </CardContent>
         </Card>
       </div>
@@ -431,10 +399,8 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                       )}
                     >
                       <XCircle className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ))}
-              </div>
+                    </Button>))}
+
           )}
 
           <Button
@@ -483,35 +449,30 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                     {result.error && (
                       <div className="text-sm text-red-500">
                         Error: {result.error}
-                      </div>
+
                     )}
                     
                     {result.result && (
                       <div className="text-sm bg-muted p-2 rounded">
                         <pre className="whitespace-pre-wrap">
                           {JSON.stringify(result.result, null, 2)}
-                        </pre>
-                      </div>
-                    )}
-                  </div>
+                        </pre>)}
+
                 ))}
-              </div>
+
             </ScrollArea>
-          </CardContent>
-        </Card>
-      )}
-    </div>
+          </CardContent>)}
+
   )
 </CardContent>
 </Card>
 </CardContent>
 </Card>
-</div>
-</div>
-</TabsContent>
+</div></TabsContent>
 </Tabs>
 </CardContent>
 </Card>
 </div>
 }
 </MCPTool>
+}

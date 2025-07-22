@@ -13,7 +13,11 @@ export class Logger {
     this.isDevelopment = process.env.NODE_ENV === 'development';
   }
 
-  private formatMessage(level: LogLevel, message: string, meta?: LogMeta): string {
+  private formatMessage(
+    level: LogLevel,
+    message: string,
+    meta?: LogMeta
+  ): string {
     const timestamp = new Date().toISOString();
     const metaStr = meta ? ` ${JSON.stringify(meta)}` : '';
     return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr}`;
@@ -21,7 +25,7 @@ export class Logger {
 
   private log(level: LogLevel, message: string, meta?: LogMeta): void {
     const formattedMessage = this.formatMessage(level, message, meta);
-    
+
     switch (level) {
       case 'error':
         console.error(formattedMessage);
@@ -34,9 +38,7 @@ export class Logger {
           console.debug(formattedMessage);
         }
         break;
-      default:
-        console.log(formattedMessage);
-    }
+      default: }
   }
 
   /**
@@ -77,14 +79,18 @@ export class Logger {
   /**
    * Log API requests
    */
-  logApiRequest(method: string, url: string, statusCode: number, duration: number): void {
+  logApiRequest(
+    method: string,
+    url: string,
+    statusCode: number,
+    duration: number
+  ): void {
     this.info('API Request', {
       method,
       url,
       statusCode,
       duration,
-      timestamp: new Date().toISOString()
-    });
+      timestamp: new Date().toISOString()});
   }
 
   /**
@@ -95,8 +101,7 @@ export class Logger {
       userId,
       action,
       details,
-      timestamp: new Date().toISOString()
-    });
+      timestamp: new Date().toISOString()});
   }
 
   /**
@@ -106,8 +111,7 @@ export class Logger {
     this.info('System Event', {
       event,
       details,
-      timestamp: new Date().toISOString()
-    });
+      timestamp: new Date().toISOString()});
   }
 
   /**
@@ -118,8 +122,7 @@ export class Logger {
       operation,
       duration,
       details,
-      timestamp: new Date().toISOString()
-    });
+      timestamp: new Date().toISOString()});
   }
 
   /**
@@ -130,8 +133,7 @@ export class Logger {
       event,
       userId,
       details,
-      timestamp: new Date().toISOString()
-    });
+      timestamp: new Date().toISOString()});
   }
 }
 
@@ -143,17 +145,34 @@ export default logger;
 export { logger };
 
 // Export convenience functions
-export const logInfo = (message: string, meta?: LogMeta) => logger.info(message, meta);
-export const logError = (message: string, error?: Error | unknown) => logger.error(message, error);
-export const logWarn = (message: string, meta?: LogMeta) => logger.warn(message, meta);
-export const logDebug = (message: string, meta?: LogMeta) => logger.debug(message, meta);
-export const logApiRequest = (method: string, url: string, statusCode: number, duration: number) => 
-  logger.logApiRequest(method, url, statusCode, duration);
-export const logUserAction = (userId: string, action: string, details?: LogMeta) => 
-  logger.logUserAction(userId, action, details);
-export const logSystemEvent = (event: string, details?: LogMeta) => 
+export const logInfo = (message: string, meta?: LogMeta) =>
+  logger.info(message, meta);
+export const logError = (message: string, error?: Error | unknown) =>
+  logger.error(message, error);
+export const logWarn = (message: string, meta?: LogMeta) =>
+  logger.warn(message, meta);
+export const logDebug = (message: string, meta?: LogMeta) =>
+  logger.debug(message, meta);
+export const logApiRequest = (
+  method: string,
+  url: string,
+  statusCode: number,
+  duration: number
+) => logger.logApiRequest(method, url, statusCode, duration);
+export const logUserAction = (
+  userId: string,
+  action: string,
+  details?: LogMeta
+) => logger.logUserAction(userId, action, details);
+export const logSystemEvent = (event: string, details?: LogMeta) =>
   logger.logSystemEvent(event, details);
-export const logPerformance = (operation: string, duration: number, details?: LogMeta) => 
-  logger.logPerformance(operation, duration, details);
-export const logSecurityEvent = (event: string, userId?: string, details?: LogMeta) => 
-  logger.logSecurityEvent(event, userId, details);
+export const logPerformance = (
+  operation: string,
+  duration: number,
+  details?: LogMeta
+) => logger.logPerformance(operation, duration, details);
+export const logSecurityEvent = (
+  event: string,
+  userId?: string,
+  details?: LogMeta
+) => logger.logSecurityEvent(event, userId, details);

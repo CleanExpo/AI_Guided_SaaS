@@ -47,10 +47,10 @@
     "fix:typescript": "node scripts/fix-typescript-comprehensive.cjs",
     "fix:eslint": "eslint . --fix",
     "fix:prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
-    "fix:all": "node scripts/fix-all-errors-loop.js",
+    "fix:all": "node scripts/fix-all-errors-loop.cjs",
     "fix:mcp": "node scripts/fix-mcp-permanent.cjs",
     "verify:mcp": "node scripts/verify-mcp-integrity.cjs",
-    "health:check": "node scripts/health-check-exhaustive.js",
+    "health:check": "node scripts/health-check-exhaustive.cjs",
     "health:simple": "node scripts/health-check-simple.cjs",
     "health:full": "npm run health:check && npm run build",
     "prepare": "husky install",
@@ -66,9 +66,7 @@
     "env:history": "ts-node scripts/env-cli.ts history",
     "env:compact": "ts-node scripts/env-cli.ts compact",
     "env:setup": "ts-node scripts/env-cli.ts setup",
-    "env:pre-deploy": "ts-node scripts/env-cli.ts pre-deploy",
-    "fix:mcp": "node scripts/fix-mcp-permanent.cjs",
-    "verify:mcp": "node scripts/verify-mcp-integrity.cjs"
+    "env:pre-deploy": "ts-node scripts/env-cli.ts pre-deploy"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.57.0",
@@ -120,7 +118,7 @@
     "react-intersection-observer": "^9.16.0",
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^3.0.3",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-syntax-highlighter": "^5.8.0",
     "redis": "^5.6.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",

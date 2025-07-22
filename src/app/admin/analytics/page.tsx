@@ -1,28 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { AdminAnalytics } from '@/components/admin/AdminAnalytics'
-import { cn } from '@/lib/utils'
-import { 
-  BarChart3, 
-  LogOut,
-  RefreshCw,
-  ArrowLeft,
-  Download,
-  Calendar,
-  Filter
-} from 'lucide-react'
-
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
+import { cn } from '@/lib/utils';
+import { BarChart3, LogOut, RefreshCw, ArrowLeft, Download, Calendar, Filter } from 'lucide-react';
 interface AdminUser {
   id: string;
-  email: string
+  email: string;
   name: string;
-  role: string
- ;
-  permissions: string[]
+  role: string;
+  permissions: string[];
 }
 
 export default function AdminAnalyticsPage() {
@@ -92,16 +82,16 @@ export default function AdminAnalyticsPage() {
 
   const handleExport = () => {
     // TODO: Implement export functionality
-    console.log('Exporting analytics data...')
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
           <p className="text-slate-600">Loading analytics...</p>
         </div>
+      </div>
     );
   }
 
@@ -128,6 +118,7 @@ export default function AdminAnalyticsPage() {
                 <h1 className="text-xl font-semibold text-slate-900">Analytics</h1>
                 <p className="text-xs text-slate-500">Platform insights & performance metrics</p>
               </div>
+            </div>
             <div className="flex items-center space-x-4">
               <select
                 value={timeRange}
@@ -152,10 +143,7 @@ export default function AdminAnalyticsPage() {
                 onClick={handleRefresh}
                 variant="ghost"
                 size="sm"
-                className={cn(
-                  "flex items-center gap-2",
-                  refreshing && "animate-spin"
-                )}
+                className={cn("flex items-center gap-2", refreshing && "animate-spin")}
                 disabled={refreshing}
               >
                 <RefreshCw className="h-4 w-4" />
@@ -172,6 +160,7 @@ export default function AdminAnalyticsPage() {
                 Logout
               </Button>
             </div>
+          </div>
         </div>
       </header>
 
@@ -192,10 +181,4 @@ export default function AdminAnalyticsPage() {
       </main>
     </div>
   );
-</div>
-</header>
-</div>
-</div>
 }
-</any>
-</AdminUser>

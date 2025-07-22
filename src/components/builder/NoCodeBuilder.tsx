@@ -8,47 +8,15 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import {
-  Layers,
-  Layout,
-  Type,
-  Image,
-  Square,
-  Circle,
-  Triangle,
-  Palette,
-  Settings,
-  Code,
-  Eye,
-  EyeOff,
-  Plus,
-  Minus,
-  Move,
-  Copy,
-  Trash2,
-  Undo,
-  Redo,
-  Download,
-  Upload,
-  Play,
-  Save,
-  MousePointer2,
-  Grid3X3,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
-  Bold,
-  Italic,
-  Underline
-} from 'lucide-react';
+import { Layers, Layout, Type, Image, Square, Circle, Triangle, Palette, Settings, Code, Eye, EyeOff, Plus, Minus, Move, Copy, Trash2, Undo, Redo, Download, Upload, Play, Save, MousePointer2, Grid3X3, AlignLeft, AlignCenter, AlignRight, Bold, Italic, Underline } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Component {
   id: string;
   type: string;
-  props: Record<string, any>;
+  props: Record<string, any>
   children?: Component[];
-}
+};
 
 export default function NoCodeBuilder() {</string>
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
@@ -100,13 +68,14 @@ export default function NoCodeBuilder() {</string>
       case 'container':
         return { padding: '20px', background: '#ffffff' };
       default:
-        return {};
-    }
+        return {}
+}
   };
 
   return (
     <div className="h-screen flex bg-gray-50 dark:bg-gray-950">
-      {/* Left Sidebar - Component Library */}</div>
+      {/* Left Sidebar - Component Library */}
+
       <div className="w-64 bg-white dark:bg-gray-900 border-r p-4">
         <h3 className="font-semibold mb-4 flex items-center gap-2">
           <Layers className="w-4 h-4" />
@@ -119,14 +88,11 @@ export default function NoCodeBuilder() {</string>
                 key={comp.type}
                 draggable
                 onDragStart={(e) => handleDragStart(e, comp.type)}
-                className="p-4 cursor-move hover:shadow-lg transition-all hover:scale-105 hover:border-purple-500"
+                className="p-4 cursor-move hover:shadow-lg transition-all, hover:scale-105 hover:border-purple-500"
               ></Card>
                 <div className="flex flex-col items-center gap-2">
                   <comp.icon className="w-6 h-6 text-purple-500" />
-                  <span className="text-xs">{comp.label}</span>
-                </div>
-            ))}
-          </div>
+                  <span className="text-xs">{comp.label}</span>))}
 
         <Separator className="my-4" />
         
@@ -141,7 +107,8 @@ export default function NoCodeBuilder() {</string>
 
       {/* Center - Canvas */}
       <div className="flex-1 flex flex-col">
-        {/* Top Toolbar */}</div>
+        {/* Top Toolbar */}
+
         <div className="bg-white dark:bg-gray-900 border-b px-4 py-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -185,7 +152,7 @@ export default function NoCodeBuilder() {</string>
                 size="sm"
                 onClick={() => setShowGrid(!showGrid)}
               ></Button>
-                <Grid3X3 className={cn("w-4 h-4", showGrid && "text-purple-500")} />
+                <Grid3X3 className={cn("w-4 h-4" showGrid && "text-purple-500")} />
               </Button>
 
             <div className="flex items-center gap-2">
@@ -201,12 +168,11 @@ export default function NoCodeBuilder() {</string>
 
         {/* Canvas Area */}
         <div className="flex-1 overflow-auto p-8 bg-gray-100 dark:bg-gray-950">
-          <div className={cn("mx-auto transition-all", viewportSizes[currentView])}>
+          <div className={cn("mx-auto transition-all" viewportSizes[currentView])}>
             <div
               className={cn(
                 "min-h-[600px] bg-white, dark:bg-gray-900 rounded-lg shadow-xl border-2 transition-all",
-                isDragging && "border-purple-500 border-dashed",
-                showGrid && "bg-grid-pattern"
+                isDragging && "border-purple-500 border-dashed" showGrid && "bg-grid-pattern"
               )}
               onDragOver={(e) => e.preventDefault()}
               onDrop={handleDrop}
@@ -216,8 +182,7 @@ export default function NoCodeBuilder() {</string>
                   <div className="text-center">
                     <MousePointer2 className="w-12 h-12 mx-auto mb-4" />
                     <p>Drag components here to start building</p>
-  );
-}
+  }
               
               {/* Render Components */}
               <div className="p-8">
@@ -225,12 +190,12 @@ export default function NoCodeBuilder() {</string>
                   <div
                     key={component.id}
                     className={cn(
-                      "relative group cursor-pointer border-2 border-transparent, hover:border-purple-500 p-4 rounded",
-                      selectedComponent === component.id && "border-purple-500"
+                      "relative group cursor-pointer border-2 border-transparent, hover:border-purple-500 p-4 rounded" selectedComponent === component.id && "border-purple-500"
                     )}
                     onClick={() => setSelectedComponent(component.id)}
                   >
-                    {/* Component Actions */}</div>
+                    {/* Component Actions */}
+
                     <div className="absolute -top-8 right-0 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
                       <Button size="sm" variant="ghost" className="h-6 w-6 p-0">
                         <Copy className="w-3 h-3" />
@@ -243,8 +208,7 @@ export default function NoCodeBuilder() {</string>
                     {component.type === 'text' && (
                       <p style={{ fontSize: component.props.fontSize, color: component.props.color }}>
                         {component.props.text}</p>
-  );
-}
+  }
                     {component.type === 'button' && (
                       <Button variant={component.props.variant} size={component.props.size}>
                         {component.props.text}</Button>
@@ -256,9 +220,8 @@ export default function NoCodeBuilder() {</string>
                       >
                         Container</div>
                     )}
-                  </div>
+
                 ))}
-              </div>
 
       {/* Right Sidebar - Properties Panel */}
       <div className="w-80 bg-white dark:bg-gray-900 border-l p-4">
@@ -289,8 +252,7 @@ export default function NoCodeBuilder() {</string>
               <div className="text-center text-gray-400 mt-8">
                 <Settings className="w-12 h-12 mx-auto mb-4" />
                 <p>Select a component to edit properties</p>
-  );
-}
+  }
           </TabsContent>
           
           <TabsContent value="style" className="mt-4">
@@ -332,65 +294,26 @@ export default function NoCodeBuilder() {</string>
                 <div>
                   <Label>Component ID</Label>
                   <Input placeholder="component-id" />
-                </div>
-    );
-</div>
-</h4>
+                </h4>
 </div>
 </TabsContent>
-</div>
-</div>
-</div>
-</h4>
+</div></h4>
 </div>
 </TabsContent>
-</div>
-</div>
-</h4>
+</div></h4>
 </div>
 </TabsList>
 </Tabs>
-</div>
-</div>
+</div></Button>
 </Button>
 </Button>
-</Button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</Button>
+</div></Button>
 </Button>
 </div>
 </ScrollArea>
 </h3>
 </div>
 }
-    </h4>
-    </div>
-    </TabsContent>
-    </div>
-    </div>
-    </h4>
-    </div>
-    </TabsContent>
-    </div>
-    </h4>
-    </div>
-    </TabsList>
-    </Tabs>
-    </div>
-    </Button>
-    </Button>
-    </div>
-    </div>
-    </div>
-    </Button>
-    </div>
-    </ScrollArea>
-    </h3>
-    </div>
+    
   );
 }
-</string>

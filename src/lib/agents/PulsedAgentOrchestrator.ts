@@ -10,7 +10,7 @@ export interface PulseConfig {
   maxMemoryUsage: number // percentage (0-100)
   maxCpuUsage: number // percentage (0-100)
   enableAdaptiveThrottling: boolean
-}
+};
 
 export interface ResourceMetrics {
   cpuUsage: number;
@@ -18,7 +18,7 @@ export interface ResourceMetrics {
   activeAgents: number;
   queuedTasks: number;
   timestamp: Date
-}
+};
 
 export interface AgentExecutionMetrics {
   agentId: string;
@@ -27,7 +27,7 @@ export interface AgentExecutionMetrics {
   averageExecutionTime: number;
   isAvailable: boolean
   cooldownUntil?: Date
-}
+};
 
 export class PulsedAgentOrchestrator extends AgentOrchestrator {
   private pulseConfig: PulseConfig
@@ -46,7 +46,15 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     
     this.pulseConfig = {
       maxConcurrentAgents: 2,
-      pulseInterval: 1000, // 1 second between pulses, cooldownPeriod: 5000, // 5 seconds cooldown, maxMemoryUsage: 80, // 80% max memory, maxCpuUsage: 70, // 70% max CPU, enableAdaptiveThrottling: true,
+      pulseInterval: 1000,
+  // 1 second between pulses
+  cooldownPeriod: 5000,
+  // 5 seconds cooldown
+  maxMemoryUsage: 80,
+  // 80% max memory
+  maxCpuUsage: 70,
+  // 70% max CPU
+  enableAdaptiveThrottling: true,
       ...pulseConfig
     }
     
@@ -61,19 +69,19 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     
     // Listen to rate limiter events
     this.cpuRateLimiter.on('throttle', (data) => {
-      console.log('⚠️ CPU throttling activated:', data)
+
       this.handleThrottleEvent(data)
     })
     
     this.cpuRateLimiter.on('release', (data) => {
-      console.log('✅ CPU throttling released:', data)
+
     })
   }
   
   async initialize(): Promise<void> {
     await super.initialize()
     this.startPulseEngine()
-    console.log('🔄 Pulsed Agent Orchestrator initialized with throttling')
+
   }
   
   private startPulseEngine(): void {
@@ -88,7 +96,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
   private async pulse(): Promise<void> {
     // Wait if CPU rate limiter has throttled
     if (this.cpuRateLimiter.isCurrentlyThrottled()) {
-      console.log('⏸️ Pulse skipped due to CPU throttling')
+
       return
     }
     
@@ -98,7 +106,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     
     // Adaptive throttling based on system load
     if (this.shouldThrottle(resources)) {
-      console.log('⚠️ System under high load throttling agent execution')
+
       return
     }
     
@@ -227,7 +235,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical'
     requirements: Record<string, any>
   }): Promise<any> {
-    console.log(`📋 Queueing, task: ${task.name} (Priority: ${task.priority})`)
+    `)
     
     const priorityMap = {
       critical: 4,
@@ -258,7 +266,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     
     // Log paused tasks
     if (nonCriticalTasks.length > 0) {
-      console.log(`⏸️ Paused ${nonCriticalTasks.length} non-critical tasks due to CPU throttling`)
+
     }
   }
 
@@ -269,10 +277,10 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     const cpuSummary = this.cpuRateLimiter.getMetricsSummary()
     
     return {
-      ...baseStatus,
-      pulse: {
+      ...baseStatus
+    pulse: {
         config: this.pulseConfig,
-        taskQueue: {
+    taskQueue: {
           length: this.taskQueue.length,
           priorities: this.taskQueue.reduce((acc, item) => {
             const priority = ['low', 'medium', 'high', 'critical'][item.priority - 1]
@@ -296,7 +304,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
             ? Math.max(0, metrics.cooldownUntil.getTime() - Date.now())
             : 0
         })),
-        cpuRateLimiter: {
+    cpuRateLimiter: {
           status: cpuStatus,
           summary: cpuSummary
         }
@@ -309,12 +317,11 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       ...this.pulseConfig,
       ...config
     }
-    console.log('✅ Pulse configuration updated:', this.pulseConfig)
+
   }
   
   async shutdown(): Promise<void> {
-    console.log('🛑 Shutting down Pulsed Agent Orchestrator...')
-    
+
     // Stop pulse engine
     if (this.pulseTimer) {
       clearInterval(this.pulseTimer)

@@ -6,7 +6,7 @@ export interface N8nWorkflow {
   name: string;
   active: boolean
   tags?: string[]
-}
+};
 
 export interface N8nExecution {
   id: string;
@@ -16,15 +16,14 @@ export interface N8nExecution {
   stoppedAt?: string;
   finished: boolean;
   status: 'running' | 'success' | 'error'
-}
+};
 
 export interface UseN8nAutomationReturn {
   // Workflow management;
   listWorkflows: () => Promise<N8nWorkflow[]>
   createWorkflow: (type: string, config) => Promise<N8nWorkflow>
   deleteWorkflow: (id: string) => Promise<void>
-  toggleWorkflow: (id: string;
-  active: boolean) => Promise<void>
+  toggleWorkflow: (id: string; active: boolean) => Promise<void>
   
   // Execution management;
   executeWorkflow: (workflowId: string, data?: any) => Promise<N8nExecution>
@@ -39,7 +38,7 @@ export interface UseN8nAutomationReturn {
   // State;
   loading: boolean;
   error: string | null
-}
+};
 
 export function useN8nAutomation(): UseN8nAutomationReturn {
   const [loading, setLoading] = useState(false)
@@ -78,7 +77,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
     try {
       const response = await fetch('/api/n8n/workflows', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type, ...config })
       })
       
@@ -143,7 +142,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
     try {
       const response = await fetch(`/api/n8n/workflows?id=${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ active })
       })
       
@@ -175,7 +174,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
     try {
       const response = await fetch('/api/n8n/execute', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ workflowId, data })
       })
       
@@ -298,7 +297,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
     try {
       const response = await fetch('/api/n8n/webhook', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action, projectId, data })
       })
       

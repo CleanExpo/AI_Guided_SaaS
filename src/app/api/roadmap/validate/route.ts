@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
             title: `Roadmap: Deviation, ${deviation.type}`,
             message: deviation.description,
             action_url: `/projects/${projectId}/roadmap`,
-            metadata: {
+    metadata: {
               projectId,
               deviation,
               milestoneId: deviation.milestoneId
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-}
+};
 
 export async function GET(request: NextRequest) {
   try {

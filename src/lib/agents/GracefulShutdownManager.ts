@@ -5,7 +5,7 @@ export interface ShutdownHandler {
   priority: number // Lower number = higher priority;
   timeout: number // milliseconds;
   handler: () => Promise<void>
-}
+};
 
 export class GracefulShutdownManager extends EventEmitter {
   private static instance: GracefulShutdownManager
@@ -33,7 +33,7 @@ export class GracefulShutdownManager extends EventEmitter {
     // Sort by priority (lower number = higher priority)
     this.handlers.sort((a, b) => a.priority - b.priority)
     
-    console.log(`Registered shutdown, handler: ${handler.name} (priority: ${handler.priority})`)
+    `)
   }
   
   /**
@@ -41,7 +41,7 @@ export class GracefulShutdownManager extends EventEmitter {
    */
   unregisterHandler(name: string): void {
     this.handlers = this.handlers.filter(h => h.name !== name)
-    console.log(`Unregistered shutdown, handler: ${name}`)
+
   }
   
   /**
@@ -49,14 +49,12 @@ export class GracefulShutdownManager extends EventEmitter {
    */
   async shutdown(reason: string = 'Manual shutdown'): Promise<void> {
     if (this.isShuttingDown) {
-      console.log('Shutdown already in progress...')
+
       return
     }
     
     this.isShuttingDown = true
-    console.log(`\n🛑 Initiating graceful, shutdown: ${reason}`)
-    console.log(`   ${this.handlers.length} handlers to execute`)
-    
+
     this.emit('shutdown:start', reason)
     
     // Set overall timeout
@@ -72,8 +70,7 @@ export class GracefulShutdownManager extends EventEmitter {
         this.executeHandlers(),
         timeoutPromise
       ])
-      
-      console.log('✅ Graceful shutdown completed successfully')
+
       this.emit('shutdown:complete')
       
     } catch (error) {
@@ -81,7 +78,7 @@ export class GracefulShutdownManager extends EventEmitter {
       this.emit('shutdown:error', error)
       
       // Force exit after error
-      console.log('Forcing exit in 5 seconds...')
+
       setTimeout(() => {
         process.exit(1)
       }, 5000)
@@ -93,8 +90,7 @@ export class GracefulShutdownManager extends EventEmitter {
    */
   private async executeHandlers(): Promise<void> {
     for (const handler of this.handlers) {
-      console.log(`⚡ Executing shutdown, handler: ${handler.name}`)
-      
+
       const startTime = Date.now()
       
       try {
@@ -109,8 +105,7 @@ export class GracefulShutdownManager extends EventEmitter {
         ])
         
         const duration = Date.now() - startTime
-        console.log(`✓ ${handler.name} completed in ${duration}ms`)
-        
+
       } catch (error) {
         console.error(`✗ ${handler.name} failed:`, error)
         this.emit('handler:error', { handler: handler.name, error })
@@ -126,7 +121,7 @@ export class GracefulShutdownManager extends EventEmitter {
   private setupSignalHandlers(): void {
     // Handle SIGTERM (Docker stop, Kubernetes termination)
     process.on('SIGTERM', () => {
-      console.log('\nReceived SIGTERM')
+
       this.shutdown('SIGTERM signal').then(() => {
         process.exit(0)
       })
@@ -134,7 +129,7 @@ export class GracefulShutdownManager extends EventEmitter {
     
     // Handle SIGINT (Ctrl+C)
     process.on('SIGINT', () => {
-      console.log('\nReceived SIGINT')
+
       this.shutdown('SIGINT signal').then(() => {
         process.exit(0)
       })
@@ -172,7 +167,7 @@ export const createDatabaseShutdownHandler = (db): ShutdownHandler => ({
   priority: 10,
   timeout: 10000,
   handler: async () => {
-    console.log('Closing database connections...')
+
     await db.close()
   }
 })
@@ -182,7 +177,7 @@ export const createRedisShutdownHandler = (redis): ShutdownHandler => ({
   priority: 20,
   timeout: 5000,
   handler: async () => {
-    console.log('Closing Redis connections...')
+
     await redis.quit()
   }
 })
@@ -192,10 +187,10 @@ export const createHttpServerShutdownHandler = (server): ShutdownHandler => ({
   priority: 30,
   timeout: 15000,
   handler: async () => {
-    console.log('Closing HTTP server...')
+
     return new Promise((resolve) => {
       server.close(() => {
-        console.log('HTTP server closed')
+
         resolve()
       })
     })
@@ -207,7 +202,7 @@ export const createAgentShutdownHandler = (agent): ShutdownHandler => ({
   priority: 40,
   timeout: 10000,
   handler: async () => {
-    console.log(`Stopping agent ${agent.id}...`)
+
     await agent.stop()
   }
 })
@@ -217,7 +212,7 @@ export const createContainerShutdownHandler = (containerManager): ShutdownHandle
   priority: 50,
   timeout: 20000,
   handler: async () => {
-    console.log('Stopping Docker containers...')
+
     await containerManager.stopAllContainers()
   }
 })

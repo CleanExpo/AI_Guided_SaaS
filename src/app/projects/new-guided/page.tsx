@@ -1,15 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { GuidedProjectBuilder } from '@/components/GuidedProjectBuilder'
-import { LiveProjectPreview } from '@/components/LiveProjectPreview'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft, Sparkles, Zap } from 'lucide-react'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { GuidedProjectBuilder } from '@/components/GuidedProjectBuilder';
+import { LiveProjectPreview } from '@/components/LiveProjectPreview';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, Sparkles, Zap } from 'lucide-react';
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
-
+import { useSession } from 'next-auth/react';
 export default function NewGuidedProjectPage() {
   const router = useRouter()
   const { data: session } = useSession()
@@ -21,7 +20,7 @@ export default function NewGuidedProjectPage() {
       // Send to API to generate project
       const response = await fetch('/api/projects/generate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...completedData,
           userId: session?.user?.id,
@@ -46,13 +45,14 @@ export default function NewGuidedProjectPage() {
   // First time user? Show comparison
   if (showComparison) {
     return (
-      <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold text-center mb-8">
             Choose Your Project Creation Experience</h1>
           
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {/* Guided Mode */}</div>
+            {/* Guided Mode */}
+
             <Card className="p-6 border-2 hover:border-primary transition-colors cursor-pointer"
                   onClick={() => setShowComparison(false)}></Card>
               <div className="text-center mb-4">
@@ -113,12 +113,12 @@ export default function NewGuidedProjectPage() {
               
               <Button variant="outline" className="w-full mt-6">
                 Use Advanced Mode</Button>
-    );
   }
   
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="bg-white border-b sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -141,7 +141,8 @@ export default function NewGuidedProjectPage() {
       {/* Main, Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Left: Guided Builder */}</div>
+          {/* Left: Guided Builder */}
+
           <div>
             <GuidedProjectBuilder 
               onComplete={handleProjectComplete}
@@ -153,36 +154,18 @@ export default function NewGuidedProjectPage() {
             <LiveProjectPreview 
               projectData={projectData}
             />
-          </div>
-    );
-</div>
-</div>
-</Button>
-</div>
-</div>
-</div>
+          </Button>
+</div></ul>
 </div>
 </ul>
-</div>
-</ul>
-</div>
-</div>
-</div>
+</div></div>
 }
 
 // Add missing imports
-import { Badge } from '@/components/ui/badge'
-import { CheckCircle } from 'lucide-react'
+import { Badge } from '@/components/ui/badge';
+import { CheckCircle } from 'lucide-react';
 }
-    </div>
-    </Button>
-    </Link>
-    </div>
-    </div>
-    </ul>
-    </div>
-    </ul>
-    </div>
-    </div>
+
+    
   );
 }

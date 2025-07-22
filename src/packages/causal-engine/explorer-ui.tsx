@@ -11,8 +11,8 @@ interface CausalInsight {
   confidence: string;
   total: number;
   componentType: string;
-  page: string;
-}
+  page: string
+};
 
 export default function CausalExplorerUI() {
       </CausalInsight>
@@ -43,8 +43,8 @@ export default function CausalExplorerUI() {
           ...data,
           componentType,
           page
-        };
-      }
+        }
+}
     );
 
     setInsights(formattedInsights.sort((a, b) => b.score - a.score));
@@ -60,7 +60,7 @@ export default function CausalExplorerUI() {
     ) {
       logger.clearLogs();
       refreshData();
-    }
+}
   };
 
   const getScoreColor = (score: number) => {
@@ -172,8 +172,7 @@ export default function CausalExplorerUI() {
                       {comp.total}
                     </td>
                 ))}
-              </tbody>
-            </table>)}
+              </tbody>)}
 
       {/* Low Performers */}
       {lowComponents.length > 0 && (
@@ -220,8 +219,7 @@ export default function CausalExplorerUI() {
                       {comp.total}
                     </td>
                 ))}
-              </tbody>
-            </table>)}
+              </tbody>)}
 
       {/* All Components */}
       <div>
@@ -275,7 +273,7 @@ export default function CausalExplorerUI() {
               generate insights!
             </div>
           )}
-        </div>
+
     );
 </td>
 </td>
@@ -284,9 +282,7 @@ export default function CausalExplorerUI() {
 </tr>
 </thead>
 </table>
-</div>
-</div>
-</td>
+</div></td>
 </td>
 </span>
 </td>
@@ -295,9 +291,7 @@ export default function CausalExplorerUI() {
 </tr>
 </thead>
 </table>
-</div>
-</div>
-</td>
+</div></td>
 </td>
 </span>
 </td>
@@ -306,44 +300,9 @@ export default function CausalExplorerUI() {
 </tr>
 </thead>
 </table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+</div></div>
 }
 
-    </td>
-    </tr>
-    </tbody>
-    </tr>
-    </thead>
-    </table>
-    </div>
-    </td>
-    </td>
-    </tr>
-    </tbody>
-    </tr>
-    </thead>
-    </table>
-    </div>
-    </td>
-    </td>
-    </tr>
-    </tbody>
-    </tr>
-    </thead>
-    </table>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+    
   );
 }

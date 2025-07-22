@@ -1,20 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Monitor, 
-  Smartphone, 
-  Tablet,
-  Code,
-  Eye,
-  RefreshCw,
-  Sparkles
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Monitor, Smartphone, Tablet, Code, Eye, RefreshCw, Sparkles } from 'lucide-react';
+import { cn } from '@/utils/cn';
 interface LiveProjectPreviewProps {
   projectData: {
     projectType?: string
@@ -25,7 +16,7 @@ interface LiveProjectPreviewProps {
     primaryColor?: string
   }
   mockData?: any
-}
+};
 
 interface MockTemplate {
   id: string;
@@ -48,7 +39,7 @@ const styleMap: Record<string, string> = {
   professional: 'rounded shadow',
   minimal: 'rounded-sm',
   dark: 'rounded-lg shadow-2xl bg-gray-900 text-white'
-}
+};
 
 export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreviewProps) {</string>
   const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
@@ -130,7 +121,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                   <div class="text-gray-600">Conversion Rate</div>
           </section>
         ` : ''}
-      </div>
+
     `
   }
 
@@ -191,7 +182,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                       <span class="font-semibold">$12,345</span>
                     </div>
               ` : ''}
-            </div>
+
     `
   }
 
@@ -225,8 +216,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                     <button class="${primaryColor} text-white px-4 py-2 rounded text-sm">
                       Add to Cart</button>
             `).join('')}
-          </div>
-        
+
         ${features.includes('payments') ? `
           <div class="container mx-auto px-4 py-4 border-t">
             <div class="flex items-center justify-center gap-4 text-gray-500">
@@ -236,7 +226,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                 <div class="w-12 h-8 bg-gray-200 rounded"></div>
                 <div class="w-12 h-8 bg-gray-200 rounded"></div>
         ` : ''}
-      </div>
+
     `
   }
 
@@ -259,12 +249,13 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <div class="grid grid-cols-4 gap-6 mb-6">
             ${['Total Revenue', 'Active Users', 'Conversion Rate', 'Growth'].map((label, i) => `</div>
               <div class="bg-white p-6 rounded-lg shadow">
-                <div class="text-sm text-gray-600 mb-2">${label}</div>
+                <div class="text-sm text-gray-600 mb-2">${label}
+
                 <div class="text-2xl font-bold ${i === 0 ? primaryColor.replace('bg-', 'text-') : ''}">
-                  ${i === 0 ? '$123,456' : i === 1 ? '1,234' : i === 2 ? '12.3%' : '+23.5%'}</div>
+                  ${i === 0 ? '$123,456' : i === 1 ? '1,234' : i === 2 ? '12.3%' : '+23.5%'}
+
             `).join('')}
-          </div>
-          
+
           <!-- Charts -->
           <div class="grid grid-cols-2 gap-6">
             <div class="bg-white p-6 rounded-lg shadow">
@@ -278,7 +269,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                 <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-400">
                   Analytics Chart</div>
             ` : ''}
-          </div>
+
     `
   }
 
@@ -310,13 +301,13 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                 <Sparkles className="h-3 w-3 mr-1" />
                 Generating...</Sparkles>
             )}
-          </div>
+
           <button
             onClick={generatePreview}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             disabled={isGenerating}
           >
-            <RefreshCw className={cn("h-4 w-4", isGenerating && "animate-spin")} />
+            <RefreshCw className={cn("h-4 w-4" isGenerating && "animate-spin")} />
           </button>
         
         {/* Device Selector */}
@@ -324,8 +315,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <button
             onClick={() => setDevice('desktop')}
             className={cn(
-              "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors",
-              device === 'desktop' ? "bg-primary text-white" : "hover:bg-gray-100"
+              "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors" device === 'desktop' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
           ></button>
             <Monitor className="h-4 w-4" />
@@ -334,8 +324,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <button
             onClick={() => setDevice('tablet')}
             className={cn(
-              "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors",
-              device === 'tablet' ? "bg-primary text-white" : "hover:bg-gray-100"
+              "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors" device === 'tablet' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
           ></button>
             <Tablet className="h-4 w-4" />
@@ -344,8 +333,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <button
             onClick={() => setDevice('mobile')}
             className={cn(
-              "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors",
-              device === 'mobile' ? "bg-primary text-white" : "hover:bg-gray-100"
+              "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors" device === 'mobile' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
           ></button>
             <Smartphone className="h-4 w-4" />
@@ -358,8 +346,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           "mx-auto bg-white shadow-xl transition-all duration-300",
           deviceSizes[device],
           device === 'mobile' && 'rounded-3xl',
-          device === 'tablet' && 'rounded-2xl',
-          device === 'desktop' && 'rounded-lg'
+          device === 'tablet' && 'rounded-2xl' device === 'desktop' && 'rounded-lg'
         )}>
           {isGenerating ? (</div>
             <div className="h-[600px] flex items-center justify-center">
@@ -370,8 +357,8 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
               className="h-[600px] overflow-auto"
               dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
-          )}</div>
-      
+          )}
+
       {/* Code View Tab */}
       <Tabs defaultValue="preview" className="border-t">
         <TabsList className="grid w-full grid-cols-2">
@@ -379,57 +366,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <TabsTrigger value="code">Code</TabsTrigger>
         <TabsContent value="code" className="p-4">
           <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-auto text-sm">
-            <code>{previewHtml}</code>
-    );
-</pre>
-</TabsContent>
-</TabsList>
-</Tabs>
-</div>
-</div>
-</Badge>
-</div>
-</div>
-</div>
-</Card>
-</div>
-</div>
-}
-    </pre>
-    </TabsContent>
-    </TabsList>
-    </Tabs>
-    </div>
-    </Badge>
-    </div>
-    </div>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </header>
-    </div>
-    </div>
-    </div>
-    </div>
-    </nav>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </section>
-    </nav>
-    </div>
-    </header>
-    </div>
+            <code>{previewHtml}
   );
+  }
 }

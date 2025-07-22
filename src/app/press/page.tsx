@@ -1,10 +1,5 @@
 import { Metadata } from 'next';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Download, ExternalLink, Calendar } from 'lucide-react';
@@ -98,7 +93,6 @@ export default function PressPage() {
                       <ExternalLink className="h-4 w-4" />
                     </Button>
             ))}
-          </div>
 
         {/* Media Kit */}
         <div className="mb-12">
@@ -116,7 +110,6 @@ export default function PressPage() {
                       <Download className="h-4 w-4 mr-2" />
                       Download</Download>
             ))}
-          </div>
 
         {/* Contact Information */}
         <Card>
@@ -131,63 +124,9 @@ export default function PressPage() {
               <p>
                 <strong>Phone:</strong> +1 (555) 123-4567
               <p>
-                <strong>Response, Time:</strong> Within 24 hours
-    );
-}
+                <strong>Response, Time: </strong> Within 24 hours
+    );}
 
-    </p>
-    </p>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </Button>
-    </div>
-    </CardContent>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
+    
   );
-</p>
-</div>
-</CardContent>
-</CardHeader>
-</Card>
-</Button>
-</div>
-</div>
-</CardContent>
-</Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
-</Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
-</CardHeader>
-</Card>
-</div>
-</div>
-</div>
 }

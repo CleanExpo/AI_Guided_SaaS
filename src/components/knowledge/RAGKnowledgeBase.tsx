@@ -1,37 +1,22 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  Search, 
-  Upload, 
-  Database, 
-  FileText, 
-  Code, 
-  BookOpen,
-  Globe,
-  Trash2,
-  Download,
-  RefreshCw,
-  ChevronRight,
-  FileCode,
-  MessageSquare
-} from 'lucide-react'
-import { useRAG } from '@/hooks/useRAG'
-import { useToast } from '@/components/ui/use-toast'
-
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Search, Upload, Database, FileText, Code, BookOpen, Globe, Trash2, Download, RefreshCw, ChevronRight, FileCode, MessageSquare } from 'lucide-react';
+import { useRAG } from '@/hooks/useRAG';
+import { useToast } from '@/components/ui/use-toast';
 interface RAGKnowledgeBaseProps {
   projectId?: string
   onSourceSelected?: (source) => void
-}
+};
 
 export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps) {
   const { toast } = useToast()
@@ -49,18 +34,19 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
     error,
     initialized
   } = useRAG({
-    provider: 'memory', // Use memory provider for demo, retrievalTopK: 5
+    provider: 'memory',
+  // Use memory provider for demo
+  retrievalTopK: 5
   })
 
   const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<any[]>([])</any>
-  const [stats, setStats] = useState<any>(null)</any>
+  const [searchResults, setSearchResults] = useState<any[]>([])
+  const [stats, setStats] = useState<any>(null)
   const [selectedSource, setSelectedSource] = useState<any>(null)
   
   // Document upload state
   const [documentContent, setDocumentContent] = useState('')
-  const [documentTitle, setDocumentTitle] = useState('')</any>
-      </string>
+  const [documentTitle, setDocumentTitle] = useState('')
   const [documentType, setDocumentType] = useState<string>('documentation')
   const [documentTags, setDocumentTags] = useState('')
   
@@ -93,7 +79,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
     try {
       const response = await query(searchQuery, {
         filters: projectId ? { project: projectId } : undefined,
-        options: {
+    options: {
           topK: 10,
           includeScores: true
         }
@@ -107,7 +93,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
           description: 'No matching documents found in the knowledge base'
         }
       )}
-    </div>
+
     );
     } catch (err) {
       console.error('Search, failed:', err)
@@ -213,7 +199,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
           description: `Added ${result.documentsAdded} files with ${result.errors.length} errors`
         }
       )}
-    </div>
+
     );
     } catch (err) {
       console.error('Failed to ingest, codebase:', err)
@@ -245,7 +231,8 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
 
   return (
     <div className="space-y-6">
-      {/* Search, Bar */}</div>
+      {/* Search, Bar */}
+
       <Card></Card>
         <CardContent className="pt-6"></CardContent>
           <div className="flex gap-2"></div>
@@ -263,7 +250,8 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
 
       {/* Main, Content */}
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Knowledge, Management */}</div>
+        {/* Knowledge, Management */}
+
         <div className="space-y-6"></div>
           <Card></Card>
             <CardHeader></CardHeader>
@@ -407,7 +395,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                         <Badge key={topic.topic} variant="secondary">
                           {topic.topic} ({topic.count})</Badge>
                   ))}
-                    </div>
+
                 )}
 
                 <div className="flex gap-2 pt-4"></div>
@@ -433,7 +421,6 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <Trash2 className="h-4 w-4 mr-2" />
                     Clear</Trash2>
           )}
-        </div>
 
         {/* Search, Results */}
         <div className="space-y-6"></div>
@@ -461,7 +448,8 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       <div className="flex items-start justify-between"></div>
                         <div className="flex-1"></div>
                           <div className="flex items-center gap-2 mb-2">
-                            {getTypeIcon(result.metadata.type)}</div>
+                            {getTypeIcon(result.metadata.type)}
+
                             <h4 className="font-medium">
                               {result.metadata.title || result.metadata.source}</h4>
                           
@@ -475,7 +463,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                               <span className="text-xs text-muted-foreground">
                                 Score: {(result.score * 100).toFixed(0)}%</span>
                             )}
-                          </div>
+
                         <ChevronRight className="h-4 w-4 text-muted-foreground" /></ChevronRight>))}
     );
 }

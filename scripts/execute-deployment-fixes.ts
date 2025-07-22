@@ -214,7 +214,6 @@ export { useToast, toast }`
 }
 
 async function applyFixes() {
-  console.log('🔧 Applying Critical Fixes...\n')
 
   const fixes = [
     // Fix, 1: Create use-toast hook
@@ -229,7 +228,7 @@ async function applyFixes() {
         }
         
         fs.writeFileSync(hookPath, CRITICAL_FIXES.USE_TOAST_HOOK.content)
-        console.log(`✅ Created: ${CRITICAL_FIXES.USE_TOAST_HOOK.file}`)
+
       }
     },
     
@@ -239,7 +238,7 @@ async function applyFixes() {
       apply: async () => {
         const componentPath = path.join(process.cwd(), CRITICAL_FIXES.USE_TOAST_COMPONENT.file)
         fs.writeFileSync(componentPath, CRITICAL_FIXES.USE_TOAST_COMPONENT.content)
-        console.log(`✅ Created: ${CRITICAL_FIXES.USE_TOAST_COMPONENT.file}`)
+
       }
     },
     
@@ -251,7 +250,7 @@ async function applyFixes() {
         const currentConfig = fs.readFileSync(tsconfigPath, 'utf-8')
         const updatedConfig = CRITICAL_FIXES.TSCONFIG_UPDATE.update(currentConfig)
         fs.writeFileSync(tsconfigPath, updatedConfig)
-        console.log(`✅ Updated: ${CRITICAL_FIXES.TSCONFIG_UPDATE.file}`)
+
       }
     }
   ]
@@ -266,13 +265,10 @@ async function applyFixes() {
 }
 
 async function main() {
-  console.log('🚀 Executing Deployment Fixes with Agent Coordination')
-  console.log('==================================================\n')
 
   try {
     // Apply critical fixes first
     await applyFixes()
-    console.log()
 
     // Check if agent system is ready
     const status = agentSystem.getSystemStatus()
@@ -286,12 +282,12 @@ async function main() {
     if (fs.existsSync('deployment-plan.json')) {
       const deploymentPlan = JSON.parse(fs.readFileSync('deployment-plan.json', 'utf-8'))
       coordinationPlanId = deploymentPlan.coordination_plan_id
-      console.log(`📋 Loaded deployment, plan: ${coordinationPlanId}`)
+
     }
 
     // Create new coordination plan if needed
     if (!coordinationPlanId) {
-      console.log('📋 Creating new coordination plan...')
+
       const { createProjectCoordination } = await import('../src/lib/agents')
       
       const plan = await createProjectCoordination(
@@ -304,11 +300,9 @@ async function main() {
     }
 
     // Execute coordination
-    console.log(`\n🔄 Executing coordination, plan: ${coordinationPlanId}`)
-    
+
     // Simulate agent fixes for remaining issues
-    console.log('\n🤖 Agent, Activities:')
-    
+
     // TypeScript Specialist fixes
     await sendAgentMessage(
       'TYPESCRIPT_SPECIALIST',
@@ -324,7 +318,6 @@ async function main() {
       },
       'response'
     )
-    console.log('  ✅ TypeScript, Specialist: Fixed critical compilation errors')
 
     // QA Agent validates
     await sendAgentMessage(
@@ -337,7 +330,6 @@ async function main() {
       },
       'notification'
     )
-    console.log('  🧪 QA, Agent: Validating fixes and preparing tests')
 
     // DevOps prepares deployment
     await sendAgentMessage(
@@ -354,34 +346,26 @@ async function main() {
       },
       'notification'
     )
-    console.log('  🚀 DevOps, Agent: Deployment preparations complete')
 
     // Get final system status
-    console.log('\n📊 Final System, Status:')
+
     const dashboard = getMonitoringDashboard()
     const finalStatus = agentSystem.getSystemStatus()
     
-    console.log(`  • System, Health: ${dashboard.overview.system_health_score.toFixed(1)}%`)
-    console.log(`  • Healthy, Agents: ${dashboard.overview.healthy_agents}/${dashboard.overview.total_agents}`)
-    console.log(`  • Communication, Success: ${finalStatus.communication.success_rate.toFixed(1)}%`)
+    }%`)
+
+    }%`)
     
     // Test the build
-    console.log('\n🔨 Testing Build...')
+
     const { execSync } = await import('child_process')
     
     try {
       execSync('npm run typecheck', { stdio: 'pipe' })
-      console.log('  ✅ TypeScript, compilation: SUCCESS')
-    } catch (error) {
-      console.log('  ⚠️ TypeScript, compilation: Some warnings remain')
-    }
 
-    console.log('\n✅ DEPLOYMENT FIXES APPLIED!')
-    console.log('\nNext, Steps:')
-    console.log('1. Run: npm run build')
-    console.log('2. Run: npm run test')
-    console.log('3. Run: npm run, deploy:staging')
-    console.log('4. Monitor: npm run, agents:monitor')
+    } catch (error) {
+
+    }
 
   } catch (error) {
     console.error('❌ Execution, failed:', error)

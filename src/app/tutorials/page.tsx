@@ -1,27 +1,15 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  Play, 
-  Clock, 
-  Trophy, 
-  CheckCircle, 
-  Lock,
-  Star,
-  Zap,
-  BookOpen,
-  Code,
-  Rocket
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem'
-import { InteractiveTutorialSystem, Tutorial } from '@/lib/tutorials/InteractiveTutorialSystem'
-import { useSession } from 'next-auth/react'
-
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Play, Clock, Trophy, CheckCircle, Lock, Star, Zap, BookOpen, Code, Rocket } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
+import { InteractiveTutorialSystem, Tutorial } from '@/lib/tutorials/InteractiveTutorialSystem';
+import { useSession } from 'next-auth/react';
 interface TutorialCardProps {
   tutorial: Tutorial;
   isCompleted: boolean;
@@ -49,14 +37,12 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
   return (
     <Card className={cn(
       "p-6 transition-all duration-200",
-      isLocked ? "opacity-60" : "hover:shadow-lg",
-      isCompleted && "border-green-500"
+      isLocked ? "opacity-60" : "hover:shadow-lg" isCompleted && "border-green-500"
     )}>
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className={cn(
-            "h-12 w-12 rounded-lg flex items-center justify-center",
-            isCompleted ? "bg-green-100" : "bg-primary/10"
+            "h-12 w-12 rounded-lg flex items-center justify-center" isCompleted ? "bg-green-100" : "bg-primary/10"
           )}>
             {isCompleted ? (</div>
               <CheckCircle className="h-6 w-6 text-green-600" />
@@ -81,9 +67,8 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
                 <Star className="h-4 w-4 text-yellow-600" />
               </div>
             ))}
-          </div>
+
         )}
-      </div>
 
       <p className="text-sm text-muted-foreground mb-4">
         {tutorial.description}</p>
@@ -116,16 +101,15 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
             </>
           )}
         </Button>
-    );
-}
+  };
 
 export default function TutorialsPage() {
   const { data: session } = useSession()
-  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)</DynamicDocumentationSystem>
-  const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)</InteractiveTutorialSystem>
-  const [tutorials, setTutorials] = useState<Tutorial[]>([])</Tutorial>
-  const [completedTutorials, setCompletedTutorials] = useState<string[]>([])</string>
-  const [userProgress, setUserProgress] = useState<any>(null)</any>
+  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)
+  const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)
+  const [tutorials, setTutorials] = useState<Tutorial[]>([])
+  const [completedTutorials, setCompletedTutorials] = useState<string[]>([])
+  const [userProgress, setUserProgress] = useState<any>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
   useEffect(() => {
@@ -143,7 +127,7 @@ export default function TutorialsPage() {
     return () => {
       docs.destroy()
     }
-      </div>
+
       </div>
       </string>
   }, [])
@@ -216,18 +200,16 @@ export default function TutorialsPage() {
 
   if (!tutorialSystem) {
     return (
-      <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading tutorials...</p>
-    
-        </div>
-    );
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Interactive Tutorials</h1>
         <p className="text-muted-foreground">
@@ -259,16 +241,14 @@ export default function TutorialsPage() {
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Current Level</h3>
               <div className="flex items-center gap-2">
                 <Star className="h-6 w-6 text-primary" />
-                <span className="text-2xl font-bold">Level {userProgress.level}</span>
-              </div>
-      )}
+                <span className="text-2xl font-bold">Level {userProgress.level}</span>)}
 
       {/* Category Filter */}
       <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
         {categories.map((category) => {
           const Icon = category.icon
           return (
-            <Button
+    <Button
               key={category.id}
               variant={selectedCategory === category.id ? "default" : "outline"}
               size="sm"
@@ -277,15 +257,12 @@ export default function TutorialsPage() {
             ></Button>
               <Icon className="h-4 w-4 mr-2" />
               {category.label}</Icon>
-    );
-        }
-      )}
-    </div>
+  }
+      );}
+
         </Card>
         </div>
         </div>
-        </div>
-    );
 
       {/* Tutorials Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -303,14 +280,9 @@ export default function TutorialsPage() {
         <div className="text-center py-12">
           <p className="text-muted-foreground">
             No tutorials found in this category.</p>
-      </div>
-  );
-}
+  }
       );
-</div>
-</div>
-</div>
-</Card>
+</div></Card>
 </div>
 </div>
 }

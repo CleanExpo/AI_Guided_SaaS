@@ -1,14 +1,14 @@
 // Types
-export * from './types'
+export * from './types';
 
 // Adapters
-export { SupabaseAdapter } from './adapters/supabase'
-export { StrapiAdapter } from './adapters/strapi'
-export { NocoDBAdapter } from './adapters/nocodb'
+export { SupabaseAdapter } from './adapters/supabase';
+export { StrapiAdapter } from './adapters/strapi';
+export { NocoDBAdapter } from './adapters/nocodb';
 
 // Factory and utilities
-export * from './adapter-factory'
-export * from './migration'
+export * from './adapter-factory';
+export * from './migration';
 
 // Default export for convenience
-export { getBackendAdapter as default } from './adapter-factory'
+export { getBackendAdapter as default } from './adapter-factory';

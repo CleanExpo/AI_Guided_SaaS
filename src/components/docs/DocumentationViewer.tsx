@@ -1,38 +1,23 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { 
-  Book, 
-  Code, 
-  Play, 
-  Search, 
-  ChevronRight,
-  ChevronLeft,
-  BookOpen,
-  Clock,
-  Hash,
-  Sparkles,
-  CheckCircle,
-  Circle,
-  Star
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-import { DynamicDocumentationSystem, DocumentationSection } from '@/lib/docs/DynamicDocumentationSystem'
-import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem'
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Book, Code, Play, Search, ChevronRight, ChevronLeft, BookOpen, Clock, Hash, Sparkles, CheckCircle, Circle, Star } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { DynamicDocumentationSystem, DocumentationSection } from '@/lib/docs/DynamicDocumentationSystem';
+import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 interface DocumentationViewerProps {
   documentationSystem: DynamicDocumentationSystem;
   tutorialSystem: InteractiveTutorialSystem;
-  userId: string
-  initialSectionId?: string
+  userId: string;
+  initialSectionId?: string;
 }
 
 export function DocumentationViewer({
@@ -41,11 +26,10 @@ export function DocumentationViewer({
   userId,
   initialSectionId
 }: DocumentationViewerProps) {
-      </DocumentationSection>
   const [selectedSection, setSelectedSection] = useState<DocumentationSection | null>(null)
-  const [searchQuery, setSearchQuery] = useState('')</DocumentationSection>
-  const [searchResults, setSearchResults] = useState<DocumentationSection[]>([])</DocumentationSection>
-      </any>
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<DocumentationSection[]>([])
+      
   const [userProgress, setUserProgress] = useState<any>(null)
   const [isSearching, setIsSearching] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -106,7 +90,7 @@ export function DocumentationViewer({
       // In a real app, this would start the tutorial overlay
       window.location.href = `/tutorials/${tutorialId}`
     } catch (error) {
-      console.error('Failed to start, tutorial:', error)
+      console.error('Failed to start tutorial:', error)
     }
   }
 
@@ -133,14 +117,14 @@ export function DocumentationViewer({
 
   return (
     <div className="flex h-full">
-      {/* Sidebar */}</div>
+      {/* Sidebar */}
       <div className={cn(
-        "border-r transition-all duration-300 flex flex-col",
+        "border-r transition-all duration-300 flex flex-col", 
         sidebarCollapsed ? "w-16" : "w-80"
       )}>
-        {/* Search */}</div>
+        {/* Search */}
         <div className="p-4 border-b">
-          {!sidebarCollapsed && (</div>
+          {!sidebarCollapsed && (
             <div className="relative">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
               <input
@@ -150,26 +134,32 @@ export function DocumentationViewer({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
-              /></input>)}
+              />
+            </div>
+          )}
           <Button
             variant="ghost"
             size="sm"
             className={cn("mt-2", sidebarCollapsed && "w-full")}
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-          ></Button>
-            {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}</ChevronLeft>
+          >
+            {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+          </Button>
+        </div>
 
         {/* Navigation */}
         <ScrollArea className="flex-1">
           <div className="p-4 space-y-6">
-            {isSearching ? (</div>
+            {isSearching ? (
               <div className="text-center py-8">
                 <div className="inline-flex items-center text-sm text-muted-foreground">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary mr-2" />
-                  Searching...</div>
+                  Searching...
+                </div>
+              </div>
             ) : searchResults.length > 0 ? (
               <div>
-                {!sidebarCollapsed && (</div>
+                {!sidebarCollapsed && (
                   <h3 className="text-sm font-semibold mb-2">Search Results</h3>
                 )}
                 <div className="space-y-1">
@@ -182,72 +172,83 @@ export function DocumentationViewer({
                         setSearchQuery('')
                      }}
                       className={cn(
-                        "w-full text-left p-2 rounded-md text-sm, hover:bg-muted transition-colors",
+                        "w-full text-left p-2 rounded-md text-sm hover:bg-muted transition-colors", 
                         selectedSection?.id === section.id && "bg-muted"
                       )}
                     >
-                      {sidebarCollapsed ? (</button>
+                      {sidebarCollapsed ? (
                         <div className="flex justify-center">
-                          {isCompleted(section.id) ? (</div>
+                          {isCompleted(section.id) ? (
                             <CheckCircle className="h-4 w-4 text-green-600" />
-                          ) : (</CheckCircle>
+                          ) : (
                             <Circle className="h-4 w-4 text-muted-foreground" />
-                          )}</Circle>) : (
+                          )}
+                        </div>
+                      ) : (
                         <div className="flex items-center gap-2">
-                          {isCompleted(section.id) ? (</div>
+                          {isCompleted(section.id) ? (
                             <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
-                          ) : (</CheckCircle>
+                          ) : (
                             <Circle className="h-4 w-4 text-muted-foreground shrink-0" />
-                          )}</Circle>
-                          <span className="truncate">{section.title}</span>)}
+                          )}
+                          <span className="truncate">{section.title}</span>
+                        </div>
+                      )}
                     </button>
                   ))}
                 </div>
+              </div>
             ) : (
               categories.map((category) => {
                 const sections = documentationSystem.getSectionsByCategory(category.id)
                 if (sections.length === 0) return null
 
                 return (
-                  <div key={category.id}>
-                    {!sidebarCollapsed && (</div>
+    <div
+                key={category.id}>
+                    {!sidebarCollapsed && (
                       <div className="flex items-center gap-2 mb-2">
                         <category.icon className="h-4 w-4 text-muted-foreground" />
-                        <h3 className="text-sm font-semibold">{category.label}</h3>)}
+                        <h3 className="text-sm font-semibold">{category.label}</h3>
+                      </div>
+                    )}
                     <div className="space-y-1">
                       {sections.map((section) => (
                         <button
                           key={section.id}
                           onClick={() => setSelectedSection(section)}
                           className={cn(
-                            "w-full text-left p-2 rounded-md text-sm, hover:bg-muted transition-colors",
-                            selectedSection?.id === section.id && "bg-muted"
+                            "w-full text-left p-2 rounded-md text-sm hover:bg-muted transition-colors", 
+                        selectedSection?.id === section.id && "bg-muted"
                           )}
                         >
-                          {sidebarCollapsed ? (</button>
+                          {sidebarCollapsed ? (
                             <div className="flex justify-center">
-                              {isCompleted(section.id) ? (</div>
+                              {isCompleted(section.id) ? (
                                 <CheckCircle className="h-4 w-4 text-green-600" />
-                              ) : (</CheckCircle>
+                              ) : (
                                 <Circle className="h-4 w-4 text-muted-foreground" />
-                              )}</Circle>) : (
+                              )}
+                            </div>
+                          ) : (
                             <div className="flex items-center gap-2">
-                              {isCompleted(section.id) ? (</div>
+                              {isCompleted(section.id) ? (
                                 <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
-                              ) : (</CheckCircle>
+                              ) : (
                                 <Circle className="h-4 w-4 text-muted-foreground shrink-0" />
-                              )}</Circle>
-                              <span className="truncate">{section.title}</span>)}
+                              )}
+                              <span className="truncate">{section.title}</span>
+                            </div>
+                          )}
                         </button>
                       ))}
                     </div>
-    );
                   </div>
-                  </ScrollArea>
-                  </div>
-              })
+                );
+  }
             )}
           </div>
+        </ScrollArea>
 
         {/* Progress */}
         {!sidebarCollapsed && userProgress && (
@@ -256,7 +257,9 @@ export function DocumentationViewer({
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Progress</span>
                 <span className="font-medium">
-                  {userProgress.sectionsCompleted?.length || 0} / {documentationSystem.getAllSections().length}</span>
+                  {userProgress.sectionsCompleted?.length || 0} / {documentationSystem.getAllSections().length}
+                </span>
+              </div>
               <div className="w-full bg-muted rounded-full h-2">
                 <div 
                   className="bg-primary rounded-full h-2 transition-all duration-300"
@@ -267,34 +270,41 @@ export function DocumentationViewer({
               </div>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Star className="h-3 w-3" />
-                <span>{userProgress.totalPoints || 0} points</span>)}
+                <span>{userProgress.totalPoints || 0} points</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Content */}
       <div className="flex-1 overflow-hidden">
-        {selectedSection ? (</div>
+        {selectedSection ? (
           <div className="h-full flex flex-col">
-            {/* Header */}</div>
+            {/* Header */}
             <div className="p-6 border-b">
               <div className="flex items-start justify-between">
                 <div>
                   <h1 className="text-2xl font-bold mb-2">{selectedSection.title}</h1>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)}>
-                      {selectedSection.metadata.difficulty}</Badge>
+                      {selectedSection.metadata.difficulty}
+                    </Badge>
                     <div className="flex items-center gap-1">
                       <Clock className="h-4 w-4" />
                       <span>{selectedSection.metadata.estimatedTime}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Hash className="h-4 w-4" />
-                      <span>{selectedSection.metadata.tags.join(', ')}</span>
-                    </div>
+                      <span>{selectedSection.metadata.tags.join(', ')}
+
                 {!isCompleted(selectedSection.id) && (
                   <Button onClick={handleSectionComplete}>
-                    Mark as Complete</Button>
+                    Mark as Complete
+                  </Button>
                 )}
               </div>
+            </div>
 
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
@@ -316,12 +326,6 @@ export function DocumentationViewer({
                   <ReactMarkdown
                     components={{
                       code({ node, className, children, ...props}: any) {
-                            </div>
-                            </div>
-                            </div>
-                            </Tabs>
-                            </ScrollArea>
-                            </TabsContent>
                         const match = /language-(\w+)/.exec(className || '')
                         const inline = node?.properties?.inline
                         return !inline && match ? (
@@ -331,11 +335,13 @@ export function DocumentationViewer({
                             PreTag="div"
                             {...props}
                           >
-                            {String(children).replace(/\n$/, '')}</ReactMarkdown>
+                            {String(children).replace(/\n$/, '')}
+                          </SyntaxHighlighter>
                         ) : (
                           <code className={className} {...props}>
-                            {children}</code>
-    );
+                            {children}
+                          </code>
+                        )
                       }
                     }}
                   >
@@ -348,20 +354,19 @@ export function DocumentationViewer({
                       <h3 className="text-sm font-semibold mb-2">Related Topics</h3>
                       <div className="space-y-1">
                         {selectedSection.relatedSections.map((relatedId) => {
-                              </div>
                           const related = documentationSystem.getSection(relatedId)
-                          return related ? (</div>
+                          return related ? (
                             <button
                               key={relatedId}
                               onClick={() => setSelectedSection(related)}
                               className="text-sm text-primary hover:underline"
                             >
-                              {related.title}</button>
+                              {related.title}
+                            </button>
                           ) : null
-                        }
-      )}
-    </div>
-  );
+                        })}
+                      </div>
+                    </div>
                   )}
                 </TabsContent>
 
@@ -375,15 +380,18 @@ export function DocumentationViewer({
                           language={example.language}
                           PreTag="div"
                         >
-                          {example.code}</SyntaxHighlighter>
+                          {example.code}
+                        </SyntaxHighlighter>
                         {example.runnable && (
                           <Button size="sm" className="mt-2">
                             <Play className="h-4 w-4 mr-2" />
-                            Run Example</Play>
+                            Run Example
+                          </Button>
                         )}
                       </Card>
                     ))}
                   </div>
+                </TabsContent>
 
                 <TabsContent value="interactive" className="p-6">
                   <div className="space-y-4">
@@ -392,48 +400,56 @@ export function DocumentationViewer({
                         <div className="flex items-center justify-between mb-2">
                           <h3 className="font-semibold">{element.title}</h3>
                           <Badge variant="outline">{element.type}</Badge>
+                        </div>
                         <p className="text-sm text-muted-foreground mb-4">
-                          {element.description}</p>
+                          {element.description}
+                        </p>
                         {element.type === 'tutorial' && (
                           <Button 
                             onClick={() => startRelatedTutorial(element.config.tutorialId)}
-                          ></Button>
+                          >
                             <Play className="h-4 w-4 mr-2" />
-                            Start Tutorial</Play>
+                            Start Tutorial
+                          </Button>
                         )}
                         {element.type === 'playground' && (
                           <Button variant="outline">
                             <Code className="h-4 w-4 mr-2" />
-                            Open Playground</Code>
+                            Open Playground
+                          </Button>
                         )}
                         {element.completionTracking && (
                           <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
                             <Sparkles className="h-4 w-4" />
-                            <span>{element.completionTracking.points} points</span>)}
+                            <span>{element.completionTracking.points} points</span>
+                          </div>
+                        )}
                       </Card>
                     ))}
                   </div>
+                </TabsContent>
 
                 <TabsContent value="system" className="p-6">
-                  {selectedSection.systemState && (</TabsContent>
+                  {selectedSection.systemState && (
                     <div className="space-y-6">
                       <Card className="p-4">
                         <h3 className="font-semibold mb-3">Current System State</h3>
                         <div className="space-y-3 text-sm">
                           <div>
-                            <span className="text-muted-foreground">Active, Components:</span>
+                            <span className="text-muted-foreground">Active Components:</span>
                             <div className="flex flex-wrap gap-2 mt-1">
                               {selectedSection.systemState.componentsActive.map((comp) => (
                                 <Badge key={comp} variant="secondary">{comp}</Badge>
-                  ))}
+                              ))}
                             </div>
+                          </div>
                           <div>
-                            <span className="text-muted-foreground">Enabled, Features:</span>
+                            <span className="text-muted-foreground">Enabled Features:</span>
                             <div className="flex flex-wrap gap-2 mt-1">
                               {selectedSection.systemState.featuresEnabled.map((feature) => (
                                 <Badge key={feature} variant="outline">{feature}</Badge>
-                  ))}
-                            </div>
+                              ))}
+                            
 
                       <Card className="p-4">
                         <h3 className="font-semibold mb-3">Configuration Values</h3>
@@ -441,70 +457,41 @@ export function DocumentationViewer({
                           {Object.entries(selectedSection.systemState.configurationValues).map(([key, value]) => (
                             <div key={key} className="flex justify-between">
                               <span className="text-muted-foreground">{key}:</span>
-                              <span>{JSON.stringify(value)}</span>))}
+                              <span>{JSON.stringify(value)}</span>
+                            </div>
+                          ))}
                         </div>
-
+                      </Card>
                       <Card className="p-4">
                         <h3 className="font-semibold mb-3">Performance Metrics</h3>
                         <div className="space-y-2 text-sm">
                           {Object.entries(selectedSection.systemState.performanceMetrics).map(([key, value]) => (
                             <div key={key} className="flex justify-between">
                               <span className="text-muted-foreground">{key}:</span>
-                              <span className="font-medium">{value}</span>))}
+                              <span className="font-medium">{value}</span>
+                            </div>
+                          ))}
                         </div>
-
+                      </Card>
                       <p className="text-xs text-muted-foreground">
-                        Last, updated: {new Date(selectedSection.systemState.lastUpdated).toLocaleString()}</p>
-        </TabsContent>
-        </div>
-        </Card>
-        </Button>
-        </TabsContent>
-        </div>
-        </Card>
-        </div>
-        </Button>
-        </div>
-        </Card>
-        </div>
-        </div>
-        </Card>
-        </div>
-        </Card>
-        </div>
-    );
-}
-                </TabsContent>
-            </Tabs>) : (
+                        Last updated: {new Date(selectedSection.systemState.lastUpdated).toLocaleString()}
+                      </p>
+                    </div>
+                  )}
+                
+
+        ) : (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
               <Book className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h2 className="text-lg font-semibold mb-2">Select a Documentation Section</h2>
               <p className="text-sm text-muted-foreground">
-                Choose a topic from the sidebar to get started</p>
-        </div>
-    );
+                Choose a topic from the sidebar to get started
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
-      );
-</div>
-</Button>
-</div>
-</Card>
-</div>
-</TabsContent>
-</Button>
-</Card>
-</div>
-</TabsContent>
-</ScrollArea>
-</Tabs>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</ScrollArea>
-</div>
-}
-</any>

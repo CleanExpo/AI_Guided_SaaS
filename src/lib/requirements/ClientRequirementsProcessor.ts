@@ -11,30 +11,28 @@ export interface ExtractedRequirement {
   agents: string[];
   keywords: string[]
   constraints?: string[]
-}
+};
 
 export interface DevelopmentRoadmap {
   id: string;
   projectName: string;
   requirements: ExtractedRequirement[];
-  phases: RoadmapPhase[]
-  estimatedDuration: string;
+  phases: RoadmapPhase[]; estimatedDuration: string;
   complexity: 'simple' | 'moderate' | 'complex' | 'enterprise'
-}
+};
 
 export interface RoadmapPhase {
   id: string;
   name: string;
   agents: string[];
-  tasks: string[]
-  dependencies: string[];
+  tasks: string[]; dependencies: string[];
   duration: string;
   parallel: boolean
-}
+};
 
 export class ClientRequirementsProcessor {
   private aiService: AIService
-  private agentCoordinator: AgentCoordinator
+  private, agentCoordinator: AgentCoordinator
   private, extractionTemplate: string
   
   constructor(aiService: AIService, agentCoordinator: AgentCoordinator) {
@@ -54,8 +52,6 @@ export class ClientRequirementsProcessor {
   async processClientInput(input: string): Promise<{
     requirements: ExtractedRequirement[], roadmap: DevelopmentRoadmap
   }> {
-    console.log('📋 Processing client requirements...')
-    
     // Extract requirements using AI
     const requirements = await this.extractRequirements(input)
     
@@ -77,8 +73,8 @@ ${this.extractionTemplate}
 Client: Input:
 ${input}
 
-Extract all requirements and return them as a JSON array following this, structure:
-{
+Extract all requirements and return them as a JSON array following this,
+    structure: {
   "requirements": [
     {
       "id": "req_001",
@@ -433,7 +429,7 @@ Focus on, identifying:
 # Client Specification Extraction Template
 
 ## Categories:
-- Functional: Core features and capabilities
+-, Functional: Core features and capabilities
 -, Technical: Technology stack, performance, scalability
 - Design: UI/UX, branding, visual elements
 - Business: Timeline, budget, compliance

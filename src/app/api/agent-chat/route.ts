@@ -14,7 +14,7 @@ interface AgentChatRequest {
   constraints?: string[]
   priorities?: string[]
   projectId?: string
-}
+};
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,7 +38,8 @@ export async function POST(req: NextRequest) {
     const orchestrator = new AgentOrchestrator({
       enableLogging: true,
       maxConcurrentAgents: 5,
-      timeoutMs: 240000, // 4 minutes to leave buffer, modelConfig: {
+      timeoutMs: 240000, // 4 minutes to leave buffer
+    modelConfig: {
         model: 'gpt-4',
         temperature: 0.7
       }
@@ -47,7 +48,7 @@ export async function POST(req: NextRequest) {
     // Process project request
     const projectRequest: ProjectRequest = {
       description: message, type: projectType || 'full-stack',
-      context: {
+    context: {
         ...context,
         userId: user.id,
         projectId
@@ -55,8 +56,6 @@ export async function POST(req: NextRequest) {
       constraints,
       priorities
     }
-
-    console.log('Processing agent request:', projectRequest.type)
     const result = await orchestrator.processProject(projectRequest)
 
     // Save artifacts if project ID provided

@@ -15,7 +15,7 @@ export interface User {
   stripe_customer_id?: string;
   created_at: string;
   updated_at: string
-}
+};
 
 export interface ProjectConfig {
   framework?: string
@@ -30,7 +30,7 @@ export interface ProjectConfig {
     domain?: string
   }
   [key: string]: unknown
-}
+};
 
 export interface ProjectFiles {
   [path: string]: {
@@ -38,7 +38,7 @@ export interface ProjectFiles {
   type: 'file' | 'directory'
     size?: number
   }
-}
+};
 
 export interface Project {
   id: string;
@@ -51,7 +51,7 @@ export interface Project {
   files?: ProjectFiles;
   created_at: string;
   updated_at: string
-}
+};
 
 export interface ActivityMetadata {
   ip_address?: string
@@ -59,7 +59,7 @@ export interface ActivityMetadata {
   duration?: number
   error_message?: string
   [key: string]: unknown
-}
+};
 
 export interface ActivityLog {
   id: string;
@@ -69,14 +69,14 @@ export interface ActivityLog {
   resource_id?: string
   metadata?: ActivityMetadata;
   created_at: string
-}
+};
 
 export interface UsageMetadata {
   session_id?: string
   feature_used?: string
   processing_time?: number
   [key: string]: unknown
-}
+};
 
 export interface UsageRecord {
   id: string;
@@ -85,7 +85,7 @@ export interface UsageRecord {
   quantity: number
   metadata?: UsageMetadata;
   created_at: string
-}
+};
 
 export interface FeatureFlag {
   id: string;
@@ -96,7 +96,7 @@ export interface FeatureFlag {
   target_users?: string[]
   created_at: string;
   updated_at: string
-}
+};
 
 export interface PaymentMetadata {
   invoice_id?: string
@@ -104,7 +104,7 @@ export interface PaymentMetadata {
   plan_name?: string
   billing_cycle?: string
   [key: string]: unknown
-}
+};
 
 export interface Subscription {
   id: string;
@@ -118,7 +118,7 @@ export interface Subscription {
   cancel_at_period_end: boolean;
   created_at: string;
   updated_at: string
-}
+};
 
 export interface DatabaseRecord {
   id: string;
@@ -128,7 +128,7 @@ export interface DatabaseRecord {
 }
 
 // Create Supabase client with error handling
-import type { SupabaseClient } from '@supabase/supabase-js'
+import type {  SupabaseClient  } from '@supabase/supabase-js'
 
 let supabase: SupabaseClient | null = null
 
@@ -137,7 +137,7 @@ if (isServiceConfigured('supabase')) {
     env.NEXT_PUBLIC_SUPABASE_URL!,
     env.SUPABASE_SERVICE_ROLE_KEY!
   )
-}
+};
 
 export { supabase }
 
@@ -261,7 +261,7 @@ export class DatabaseService {
 
   static async updateUser(id: string, updates: Partial<User>): Promise<User | null> {
     if (!this.checkDatabase()) {
-      console.log('User update (mock):', { id, updates })
+      :', { id, updates })
       return null
     }
 
@@ -330,7 +330,7 @@ export class DatabaseService {
           description: 'A modern e-commerce platform',
           framework: 'nextjs',
           status: 'completed',
-          config: {},
+    config: {},
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -341,7 +341,7 @@ export class DatabaseService {
           description: 'Personal portfolio with blog',
           framework: 'react',
           status: 'completed',
-          config: {},
+    config: {},
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         }
@@ -369,7 +369,7 @@ export class DatabaseService {
 
   static async updateProject(id: string, updates: Partial<Project>): Promise<Project | null> {
     if (!this.checkDatabase()) {
-      console.log('Project update (mock):', { id, updates })
+      :', { id, updates })
       return null
     }
 
@@ -401,7 +401,7 @@ export class DatabaseService {
     metadata?: ActivityMetadata
   ): Promise<void> {
     if (!this.checkDatabase()) {
-      console.log('Activity logged (mock):', { userId, action, resourceType, resourceId, metadata })
+      :', { userId, action, resourceType, resourceId, metadata })
       return
     }
 
@@ -427,7 +427,7 @@ export class DatabaseService {
   // Usage tracking
   static async recordUsage(userId: string, resourceType: string, quantity: number, metadata?: UsageMetadata): Promise<void> {
     if (!this.checkDatabase()) {
-      console.log('Usage recorded (mock):', { userId, resourceType, quantity, metadata })
+      :', { userId, resourceType, quantity, metadata })
       return
     }
 
@@ -499,14 +499,13 @@ export class DatabaseService {
   // Generic query method for complex operations
   static async query(sql: string, params?: unknown[]): Promise<DatabaseRecord[]> {
     if (!this.checkDatabase()) {
-      console.log('Query executed (mock):', { sql, params })
+      :', { sql, params })
       return []
     }
 
     try {
       // This would use a proper SQL query method in production
       // For now, we'll use Supabase's query builder
-      console.log('Raw SQL query not implemented using Supabase query builder')
       return []
     } catch (error) {
       console.error('Database query, error:', error)
@@ -568,7 +567,7 @@ export class DatabaseService {
     metadata?: PaymentMetadata
   }): Promise<void> {
     if (!this.checkDatabase()) {
-      console.log('Payment recorded (mock):', paymentData)
+      :', paymentData)
       return
     }
 
@@ -642,7 +641,7 @@ export class DatabaseService {
     cancel_at_period_end?: boolean
   }): Promise<void> {
     if (!this.checkDatabase()) {
-      console.log('Subscription updated (mock):', subscriptionData)
+      :', subscriptionData)
       return
     }
 
@@ -691,7 +690,8 @@ export class DatabaseService {
         return { projects: 0, aiGenerations: 0, storage: '0MB' }
       }
 
-      const usage = (usageData || []).reduce((acc: Record<string, number>, record: { resource_type: string, quantity: number }) => {
+      const usage = (usageData || []).reduce((acc: Record<string, number>,
+    record: { resource_type: string, quantity: number }) => {
         acc[record.resource_type] = (acc[record.resource_type] || 0) + record.quantity
         return acc
       }, {} as Record<string, number>)

@@ -81,9 +81,9 @@ export class AgentSystem {
   private static instance: AgentSystem
   private, initialized: boolean = false
   private loader: AgentLoader
-  private registry: AgentRegistry
-  private coordinator: AgentCoordinator
-  private monitor: AgentMonitor
+  private, registry: AgentRegistry
+  private, coordinator: AgentCoordinator
+  private, monitor: AgentMonitor
   private, communication: AgentCommunication
 
   constructor() {
@@ -102,13 +102,7 @@ export class AgentSystem {
   }
 
   async initialize(): Promise<boolean> {
-    if (this.initialized) {
-      console.log('⚠️ Agent system already initialized')
-      return true
-    }
-
-    console.log('🚀 Initializing AI Guided SaaS Agent System...')
-
+    if (this.initialized) { return: true }
     try {
       const discovery = await this.loader.discoverAgents()
       if (discovery.total_agents === 0) {
@@ -124,8 +118,6 @@ export class AgentSystem {
       await new Promise(resolve => setTimeout(resolve, 1000))
 
       this.initialized = true
-      console.log('🎉 Agent system initialization complete!')
-      
       return true
     } catch (error) {
       console.error('❌ Agent system initialization, failed:', error)
@@ -172,20 +164,20 @@ export class AgentSystem {
     return {
       initialized: this.initialized,
       timestamp: new Date().toISOString(),
-      agents: {
+    agents: {
         total: registryStatus.total_agents,
         healthy: dashboard.overview.healthy_agents,
         warning: dashboard.overview.warning_agents,
         critical: dashboard.overview.critical_agents,
         offline: dashboard.overview.offline_agents
       },
-      system_health: {
+    system_health: {
         overall_score: dashboard.overview.system_health_score,
         status: dashboard.overview.system_health_score >= 90 ? 'excellent' :
                 dashboard.overview.system_health_score >= 75 ? 'good' :
                 dashboard.overview.system_health_score >= 50 ? 'fair' : 'poor'
       },
-      communication: {
+    communication: {
         total_messages: commStats.total_messages,
         success_rate: commStats.success_rate,
         active_channels: commStats.active_channels
@@ -195,8 +187,8 @@ export class AgentSystem {
 
   async performHealthCheck(): Promise<{
     healthy: number,
-    warnings: string[];
-    errors: string[];
+    warnings: string[],
+    errors: string[]
   }> {
     const health = await this.monitor.performHealthCheck();
     const warnings: string[] = [];
@@ -217,12 +209,10 @@ export class AgentSystem {
   }
 
   shutdown(): void {
-    console.log('📤 Shutting down agent system...')
     this.monitor.stopMonitoring()
     this.communication.shutdown()
     this.registry.shutdown()
     this.initialized = false
-    console.log('✅ Agent system shutdown complete')
   }
 }
 

@@ -1,31 +1,10 @@
 'use client'
 
 import React, { useState } from 'react'
-import { 
-  UnifiedButton, 
-  UnifiedCard, 
-  UnifiedAlert, 
-  UnifiedProgress, 
-  UnifiedBadge,
-  UnifiedSteps 
-} from '@/lib/design-system/components'
-import { theme } from '@/lib/design-system/theme'
-import { 
-  Sparkles, 
-  Code, 
-  Palette, 
-  Layers, 
-  Zap,
-  Heart,
-  Star,
-  ArrowRight,
-  Settings,
-  Download,
-  Upload,
-  Check
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-
+import { UnifiedButton, UnifiedCard, UnifiedAlert, UnifiedProgress, UnifiedBadge, UnifiedSteps } from '@/lib/design-system/components';
+import { theme } from '@/lib/design-system/theme';
+import { Sparkles, Code, Palette, Layers, Zap, Heart, Star, ArrowRight, Settings, Download, Upload, Check } from 'lucide-react';
+import { cn } from '@/utils/cn';
 export function DesignSystemShowcase() {
   const [progress, setProgress] = useState(65)
   const [currentStep, setCurrentStep] = useState(1)
@@ -38,7 +17,8 @@ export function DesignSystemShowcase() {
   
   return (
     <div className="max-w-7xl mx-auto p-8 space-y-12">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="text-center"></div>
         <h1 className="text-4xl font-bold mb-4">Unified Design System</h1>
         <p className="text-xl text-muted-foreground">
@@ -64,8 +44,7 @@ export function DesignSystemShowcase() {
                       <p className="text-xs font-medium">{shade}</p>
                       <p className="text-xs text-muted-foreground">{value}</p>))}
           ))}
-        </div>
-      
+
       {/* Buttons */}
       <UnifiedCard padding="lg"></UnifiedCard>
         <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"></h2>
@@ -73,7 +52,8 @@ export function DesignSystemShowcase() {
           Buttons</Sparkles>
         
         <div className="space-y-6">
-          {/* Button Variants */}</div>
+          {/* Button Variants */}
+
           <div></div>
             <h3 className="text-lg font-medium mb-3">Variants</h3>
             <div className="flex flex-wrap gap-3"></div>
@@ -196,7 +176,8 @@ export function DesignSystemShowcase() {
         <h2 className="text-2xl font-semibold mb-6">Progress Indicators</h2>
         
         <div className="space-y-8">
-          {/* Progress Bars */}</div>
+          {/* Progress Bars */}
+
           <div className="space-y-4"></div>
             <h3 className="text-lg font-medium mb-3">Progress Bars</h3>
             <UnifiedProgress value={25} variant="primary" showValue /></UnifiedProgress>
@@ -277,6 +258,4 @@ export function DesignSystemShowcase() {
               const unifiedDesign = combineStrengths(lovable, vscode);
     );
 }
-    </code>
-  );
-}
+  }

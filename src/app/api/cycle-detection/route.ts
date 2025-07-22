@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cycleDetectionEngine } from '@/lib/cycle-detection';
-import type { DocumentationSearchResult, CycleDetectionResult } from '@/lib/cycle-detection';
+import type { 
+  DocumentationSearchResult,
+  CycleDetectionResult,
+ } from '@/lib/cycle-detection';
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,11 +12,26 @@ export async function POST(request: NextRequest) {
 
     switch (action) {
       case 'record_attempt': {
-        const { problemDescription, attemptedSolution, outcome, errorMessages, sessionId, userId } = data;
-        
-        if (!problemDescription || !attemptedSolution || !outcome || !sessionId) {
+        const {
+          problemDescription,
+          attemptedSolution,
+          outcome,
+          errorMessages,
+          sessionId,
+          userId,
+        } = data;
+
+        if (
+          !problemDescription ||
+          !attemptedSolution ||
+          !outcome ||
+          !sessionId
+        ) {
           return NextResponse.json(
-            { error: 'Missing required, fields: problemDescription, attemptedSolution, outcome, sessionId' },
+            {
+              error:
+                'Missing required, fields: problemDescription, attemptedSolution, outcome, sessionId',
+            },
             { status: 400 }
           );
         }
@@ -24,19 +42,19 @@ export async function POST(request: NextRequest) {
           outcome,
           errorMessages: errorMessages || [],
           sessionId,
-          userId
+          userId,
         });
 
-        return NextResponse.json({ 
-          success: true, 
+        return NextResponse.json({
+          success: true,
           attemptId,
-          message: 'Problem attempt recorded successfully'
-        });
+          message: 'Problem attempt recorded successfully';
+        }});
       }
 
       case 'detect_cycle': {
         const { sessionId } = data;
-        
+
         if (!sessionId) {
           return NextResponse.json(
             { error: 'Missing required, field: sessionId' },
@@ -45,16 +63,16 @@ export async function POST(request: NextRequest) {
         }
 
         const cycleResult = cycleDetectionEngine.detectCycle(sessionId);
-        
+
         return NextResponse.json({
           success: true,
-          cycleDetection: cycleResult
-        });
+          cycleDetection: cycleResult;
+        }});
       }
 
       case 'search_documentation': {
         const { problemDescription, errorMessages, relevantSources } = data;
-        
+
         if (!problemDescription) {
           return NextResponse.json(
             { error: 'Missing required, field: problemDescription' },
@@ -62,21 +80,22 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const searchResults = await cycleDetectionEngine.searchDocumentationSources(
-          problemDescription,
-          errorMessages || [],
-          relevantSources || []
-        );
+        const searchResults =
+          await cycleDetectionEngine.searchDocumentationSources(
+            problemDescription,
+            errorMessages || [],
+            relevantSources || []
+          );
 
         return NextResponse.json({
           success: true,
-          searchResults
+          searchResults,
         });
       }
 
       case 'analyze_session': {
         const { sessionId } = data;
-        
+
         if (!sessionId) {
           return NextResponse.json(
             { error: 'Missing required, field: sessionId' },
@@ -86,13 +105,16 @@ export async function POST(request: NextRequest) {
 
         // Comprehensive session analysis
         const cycleResult = cycleDetectionEngine.detectCycle(sessionId);
-        
+
         let searchResults: DocumentationSearchResult[] = [];
-        if (cycleResult.isCyclic && cycleResult.documentationSources.length > 0) {
+        if (
+          cycleResult.isCyclic &&
+          cycleResult.documentationSources.length > 0
+        ) {
           // Extract the most recent problem for search context
           const recentPattern = cycleResult.repeatedPatterns[0] || '';
           const [problemType] = recentPattern.split(':');
-          
+
           searchResults = await cycleDetectionEngine.searchDocumentationSources(
             `${problemType} development issue`,
             [],
@@ -102,18 +124,20 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({
           success: true,
-          analysis: {
+    analysis: {
             cycleDetection: cycleResult,
             searchResults,
             recommendations: generateRecommendations(cycleResult),
-            timestamp: new Date().toISOString()
-          }
-        });
+            timestamp: new Date().toISOString()};
+        }});
       }
 
       default:
         return NextResponse.json(
-          { error: 'Invalid action. Supported, actions: record_attempt, detect_cycle, search_documentation, analyze_session' },
+          {
+            error:
+              'Invalid action. Supported, actions: record_attempt, detect_cycle, search_documentation, analyze_session',
+          },
           { status: 400 }
         );
     }
@@ -124,12 +148,12 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+};
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const sessionId = searchParams.get('sessionId');
-  
+
   if (!sessionId) {
     return NextResponse.json(
       { error: 'Missing sessionId parameter' },
@@ -139,13 +163,12 @@ export async function GET(request: NextRequest) {
 
   try {
     const cycleResult = cycleDetectionEngine.detectCycle(sessionId);
-    
+
     return NextResponse.json({
       success: true,
       sessionId,
       cycleDetection: cycleResult,
-      timestamp: new Date().toISOString()
-    });
+      timestamp: new Date().toISOString()});
   } catch (error) {
     console.error('Cycle detection GET, error:', error);
     return NextResponse.json(
@@ -175,7 +198,7 @@ function generateRecommendations(cycleResult: CycleDetectionResult): string[] {
 
     if (cycleResult.repeatedPatterns.length > 1) {
       recommendations.push(
-        '🔄 **Multiple patterns detected** - Consider if there\'s a fundamental misunderstanding',
+        "🔄 **Multiple patterns detected** - Consider if there's a fundamental misunderstanding",
         '📖 **Review fundamentals** - Go back to basic concepts and documentation'
       );
     }

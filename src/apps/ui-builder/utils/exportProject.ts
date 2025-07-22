@@ -13,7 +13,7 @@ export const exportProjectAsZip = (components: ComponentInstance[]) => {
   const zip = new JSZip();
 
   const componentBlocks = components
-    .map((c) => generateCodeFromComponent(c.type, c.props))
+    .map(c => generateCodeFromComponent(c.type, c.props))
     .join('\n\n');
 
   const indexHTML = `<!DOCTYPE html>
@@ -26,7 +26,7 @@ export const exportProjectAsZip = (components: ComponentInstance[]) => {
 <body class="bg-gray-100 p-8 font-sans">
   <div class="max-w-4xl mx-auto space-y-4">
 ${componentBlocks}
-  </div>
+
 </body>
 </html>`;
 
@@ -35,7 +35,7 @@ ${componentBlocks}
   zip.file('index.html', indexHTML);
   zip.file('style.css', styleCSS);
 
-  zip.generateAsync({ type: 'blob' }).then((blob) => {
+  zip.generateAsync({ type: 'blob' }).then(blob => {
     saveAs(blob, 'ai-builder-export.zip');
   });
 };

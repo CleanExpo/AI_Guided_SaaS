@@ -1,20 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  MessageSquare,
-  Users,
-  Github,
-  Twitter,
-  Hash,
-  ExternalLink} from 'lucide-react';
+import { MessageSquare, Users, Github, Twitter, Hash, ExternalLink } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Community - AI Guided SaaS Platform',
@@ -83,23 +72,19 @@ export default function CommunityPage() {
         {/* Community Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {communityStats.map(stat => {
-            const Icon = stat.icon;
-            return (
-              <Card key={stat.label} className="text-center">
+            const Icon = stat.icon, return (
+    <Card key={stat.label} className="text-center">
                 <CardContent className="pt-6">
                   <Icon className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">{stat.value}</div>
+                  <div className="text-2xl font-bold">{stat.value}
+
                   <div className="text-sm text-muted-foreground">
-                    {stat.label}</div>
+                    {stat.label}
+
     );
-          }
-      )}
-    </div>
-        </div>
-        </div>
-        </Card>
-        </CardContent>
-    );
+  }}
+
+        </div></Card>
 
         {/* Community Platforms */}
         <div className="mb-16">
@@ -107,9 +92,8 @@ export default function CommunityPage() {
             Where to Find Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {platforms.map(platform => {
-              const Icon = platform.icon;
-              return (
-                <Card
+              const Icon = platform.icon, return (
+    <Card
                   key={platform.name}
                   className="hover:shadow-lg transition-shadow"
                 >
@@ -124,16 +108,13 @@ export default function CommunityPage() {
                       <Link href={platform.link}>
                         Join Now</Link>
                         <ExternalLink className="ml-2 h-4 w-4" />
-                      </Link>
-    );
-            }
-      )}
-    </div>
+                      
+  }
+      );}
+
         </div>
         </CardHeader>
         </CardContent>
-        </Button>
-    );
 
         {/* Featured Discussions */}
         <div className="mb-16">
@@ -159,14 +140,13 @@ export default function CommunityPage() {
                       <MessageSquare className="h-4 w-4" />
                     </Button>
             ))}
-          </div>
 
         {/* Community Guidelines */}
         <div className="text-center bg-muted rounded-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">Community Guidelines</h2>
           <p className="text-muted-foreground mb-6">
             Help us maintain a welcoming and productive environment for everyone</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="grid grid-cols-1 md: grid-cols-3 gap-4 text-sm">
             <div>
               <h3 className="font-semibold mb-2">Be Respectful</h3>
               <p className="text-muted-foreground">
@@ -184,10 +164,5 @@ export default function CommunityPage() {
           </div>
           </Card>
           </CardContent>
-          </div>
-          </div>
-          </div>
-          </div>
-          </Button>
-      );
-}
+          </div></div>
+  }

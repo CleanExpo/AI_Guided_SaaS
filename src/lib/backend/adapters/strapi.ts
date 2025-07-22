@@ -189,7 +189,8 @@ export class StrapiAdapter implements BackendAdapter {
     params.append('populate', 'user')
 
     const response = await this.request<{
-      data: any[], meta: {
+      data: any[],
+    meta: {
         pagination: {
           page: number, pageSize: number, pageCount: number, total: number
         }
@@ -263,7 +264,8 @@ export class StrapiAdapter implements BackendAdapter {
     }
 
     const response = await this.request<{
-      data: any[], meta: {
+      data: any[],
+    meta: {
         pagination: {
           page: number, pageSize: number, pageCount: number, total: number
         }
@@ -306,7 +308,7 @@ export class StrapiAdapter implements BackendAdapter {
 
     const response = await fetch(`${this.baseUrl}/api/upload`, {
       method: 'POST',
-      headers: {
+    headers: {
         ...(this.jwt ? { Authorization: `Bearer ${this.jwt}` } : {}),
         ...(this.apiToken ? { Authorization: `Bearer ${this.apiToken}` } : {})
       },
@@ -346,7 +348,7 @@ export class StrapiAdapter implements BackendAdapter {
       role: user.role?.type || 'authenticated',
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-      metadata: {
+    metadata: {
         blocked: user.blocked,
         confirmed: user.confirmed,
         provider: user.provider

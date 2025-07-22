@@ -1,15 +1,14 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2, Send, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2, Send, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 interface ProcessedRequirements {
   requirements: Array<{
     id: string;
@@ -26,14 +25,13 @@ interface ProcessedRequirements {
   summary: {
     totalRequirements: number, complexity: string, estimatedDuration: string, assignedAgents: string[]
   }
-}
+};
 
 export function ClientRequirementsCapture() {
   const [input, setInput] = useState('')
   const [projectName, setProjectName] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
-  const [error, setError] = useState<string | null>(null)</string>
-      </ProcessedRequirements>
+  const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<ProcessedRequirements | null>(null)
 
   const examplePrompts = [
@@ -58,12 +56,12 @@ export function ClientRequirementsCapture() {
     try {
       const response = await fetch('/api/requirements/process', {
         method: 'POST',
-        headers: {
+    headers: {
           'Content-Type': 'application/json'},
         body: JSON.stringify({
           input,
           projectName,
-          metadata: {
+    metadata: {
             source: 'web_form',
             timestamp: new Date().toISOString()
           }
@@ -178,7 +176,6 @@ export function ClientRequirementsCapture() {
                 >
                   {example}</button>
               ))}
-            </div>
 
       {result && (
         <>
@@ -220,9 +217,8 @@ export function ClientRequirementsCapture() {
                         <Badge key={agent} variant="outline" className="text-xs">
                           {agent.replace('agent_', '')}</Badge>
                   ))}
-                    </div>
+
                 ))}
-              </div>
 
           <Card></Card>
             <CardHeader></CardHeader>
@@ -232,7 +228,8 @@ export function ClientRequirementsCapture() {
                 {result.roadmap.phases.map((phase, index) => (</div>
                   <div key={phase.name} className="flex items-start gap-4"></div>
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
-                      {index + 1}</div>
+                      {index + 1}
+
                     <div className="flex-1 space-y-1"></div>
                       <h4 className="font-medium">{phase.name}</h4>
                       <p className="text-sm text-muted-foreground">
@@ -242,14 +239,12 @@ export function ClientRequirementsCapture() {
                           <Badge key={agent} variant="secondary" className="text-xs">
                             {agent.replace('agent_', '')}</Badge>
                   ))}
-                      </div>
+
                 ))}
-              </div>
+
         </>
       )}
-    </div>
+
     );
 }
-    </string>
-  );
-}
+  }

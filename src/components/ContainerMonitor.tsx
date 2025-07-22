@@ -1,21 +1,11 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import {
-  Container,
-  Play,
-  Square,
-  RefreshCw,
-  Trash2,
-  Activity,
-  AlertTriangle,
-  CheckCircle
-} from 'lucide-react'
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Container, Play, Square, RefreshCw, Trash2, Activity, AlertTriangle, CheckCircle } from 'lucide-react';
 interface ContainerInfo {
   id: string;
   name: string
@@ -24,17 +14,16 @@ interface ContainerInfo {
   health: 'healthy' | 'unhealthy' | 'unknown'
   cpuUsage: number;
   memoryUsage: number
-  memoryLimit: number;
+ ; memoryLimit: number;
   uptime: number
  ;
   restartCount: number
-}
+};
 
 export function ContainerMonitor() {
       </ContainerInfo>
   const [containers, setContainers] = useState<ContainerInfo[]>([])
   const [isLoading, setIsLoading] = useState(true)
-      </string>
   const [selectedContainer, setSelectedContainer] = useState<string | null>(null)
 
   useEffect(() => {
@@ -89,9 +78,8 @@ export function ContainerMonitor() {
     } as const
     
     return (
-      <Badge variant={variants[health as keyof typeof variants] || 'secondary'}>
+    <Badge variant={variants[health as keyof typeof variants] || 'secondary'}>
         {health}</Badge>
-    );
   }
 
   const formatUptime = (seconds: number) => {
@@ -122,13 +110,15 @@ export function ContainerMonitor() {
               ></div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    {getStatusIcon(container.status)}</div>
+                    {getStatusIcon(container.status)}
+
                     <div>
                       <h3 className="font-medium">{container.name}</h3>
                       <p className="text-sm text-muted-foreground">
                         ID: {container.id.substring(0, 12)}</p>
                   <div className="flex items-center gap-2">
-                    {getHealthBadge(container.health)}</div>
+                    {getHealthBadge(container.health)}
+
                     <div className="flex gap-1">
                       {container.status === 'running' ? (</div>
                         <Button
@@ -196,7 +186,6 @@ export function ContainerMonitor() {
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>Uptime: {formatUptime(container.uptime)}</span>
                   <span>Restarts: {container.restartCount}</span>))}
-          </div>
 
           <div className="mt-6 flex gap-2">
             <Button onClick={() => handleContainerAction('all', 'start')}>
@@ -227,33 +216,17 @@ export function ContainerMonitor() {
                 [2024-01-20, 10:23:47] Health check server running on port 3001
                 [2024-01-20, 10:23:48] Ready to process tasks...</code>
       )}
-    </div>
+
     );
 </CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardTitle>
 </CardHeader>
 </Card>
 </div>
 }
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </CardTitle>
-    </CardHeader>
-    </Card>
-    </div>
+    
   );
 }
-</string>

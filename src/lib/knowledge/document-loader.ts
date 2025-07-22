@@ -13,13 +13,13 @@ export interface LoadedFile {
   content: string
   language?: string;
   size: number
-}
+};
 
 export interface CodebaseOptions {
   include?: string[]
   exclude?: string[]
   maxFileSize?: number
-}
+};
 
 export class DocumentLoader {
   private languageMap: Record<string, string> = {
@@ -88,7 +88,7 @@ export class DocumentLoader {
       return [{
         id: this.generateId(),
         content,
-        metadata: {
+    metadata: {
           source: filePath,
           title: path.basename(filePath),
           type: this.getDocumentType(ext),
@@ -118,7 +118,7 @@ export class DocumentLoader {
       return [{
         id: this.generateId(),
         content,
-        metadata: {
+    metadata: {
           source: url,
           title: this.extractTitleFromUrl(url),
           type: this.getDocumentTypeFromMime(contentType),
@@ -158,7 +158,7 @@ export class DocumentLoader {
       return [{
         id: this.generateId(),
         content,
-        metadata: {
+    metadata: {
           source: repoPath,
           title: data.name, type: 'code',
           language: this.languageMap[path.extname(data.name).slice(1)] || 'plaintext',
@@ -181,7 +181,7 @@ export class DocumentLoader {
       return [{
         id: this.generateId(),
         content,
-        metadata: {
+    metadata: {
           source: repoPath,
           title: `${owner}/${repo} README`,
           type: 'documentation',

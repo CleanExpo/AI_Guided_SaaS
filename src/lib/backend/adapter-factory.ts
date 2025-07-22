@@ -4,8 +4,6 @@ import { SupabaseAdapter } from './adapters/supabase'
 import { StrapiAdapter } from './adapters/strapi'
 import { NocoDBAdapter } from './adapters/nocodb'
 
-
-
 // Global instance cache
 let currentAdapter: BackendAdapter | null = null
 let currentConfig: BackendConfig | null = null

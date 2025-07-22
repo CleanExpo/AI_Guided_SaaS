@@ -10,17 +10,17 @@ import { Progress } from '@/components/ui/progress';
 
 interface ConfigurationData {
   status: string;
-  features: {
+    features: {
     enabled: string[];
-  total: number;
+  total: number,
   };
   aiProviders: {
     primary: string,
-    fallback: string;
-    research: string;
+    fallback: string,
+    research: string,
   };
-  timestamp: string;
-}
+  timestamp: string,
+};
 
 interface FeatureFlags {
   aiGeneration: boolean;
@@ -32,58 +32,58 @@ interface FeatureFlags {
   experimentalRealTimeCollaboration: boolean;
   experimentalAdvancedAnalytics: boolean;
   betaVoiceCommands: boolean;
-  betaAiDebugging: boolean;
-}
+  betaAiDebugging: boolean,
+};
 
 interface FullConfig {
   aiProvider: {
     primary: string;
   fallback: string;
-    research: string;
+    research: string,
   };
   openai: {
     displayName: string,
-    primary: string;
-    codeGeneration: string;
-    tokensMax: number;
-    temperatureCode: number;
-    rateLimitRequestsPerMinute: number;
+    primary: string,
+    codeGeneration: string,
+    tokensMax: number,
+    temperatureCode: number,
+    rateLimitRequestsPerMinute: number
   };
   anthropic: {
     displayName: string,
-    primary: string;
-    codeGeneration: string;
-    tokensMax: number;
-    temperatureCode: number;
-    rateLimitRequestsPerMinute: number;
+    primary: string,
+    codeGeneration: string,
+    tokensMax: number,
+    temperatureCode: number,
+    rateLimitRequestsPerMinute: number
   };
   google: {
     displayName: string,
-    primary: string;
-    tokensMax: number;
-    temperatureDefault: number;
-    rateLimitRequestsPerMinute: number;
+    primary: string,
+    tokensMax: number,
+    temperatureDefault: number,
+    rateLimitRequestsPerMinute: number,
   };
   framework: {
     primary: string,
-    version: string;
-    typescript: boolean;
-    tailwind: boolean;
+    version: string,
+    typescript: boolean,
+    tailwind: boolean,
   };
   security: {
     rateLimitEnabled: boolean,
-    authProvider: string;
-    cspEnabled: boolean;
-    ddosProtection: boolean;
+    authProvider: string,
+    cspEnabled: boolean,
+    ddosProtection: boolean,
   };
   performance: {
     cacheStrategy: string,
-    cdnEnabled: boolean;
-    apmEnabled: boolean;
-    analyticsEnabled: boolean;
+    cdnEnabled: boolean,
+    apmEnabled: boolean,
+    analyticsEnabled: boolean,
   };
-  features: FeatureFlags;
-}
+  features: FeatureFlags,
+};
 
 export default function ConfigurationDashboard() {
       </ConfigurationData>
@@ -124,7 +124,7 @@ export default function ConfigurationDashboard() {
       setError(err instanceof Error ? err.message : 'Unknown error occurred');
     } finally {
       setLoading(false);
-    }
+}
   };
 
   const reloadConfiguration = async () => {
@@ -139,7 +139,7 @@ export default function ConfigurationDashboard() {
       setError(err instanceof Error ? err.message : 'Failed to reload configuration');
     } finally {
       setReloading(false);
-    }
+}
   };
 
   useEffect(() => {
@@ -148,20 +148,18 @@ export default function ConfigurationDashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8"></div>
+    <div className="flex items-center justify-center p-8"></div>
         <div className="text-center"></div>
           <Progress value={66} className="w-64 mb-4" /></Progress>
           <p className="text-sm text-muted-foreground">Loading configuration...</p>
-    
-        </div>
-    );
   }
 
   if (error) {
     return (
-      <Alert className="m-4"></Alert>
+    <Alert className="m-4"></Alert>
         <AlertDescription>
-          Error loading, configuration: {error}</AlertDescription>
+          Error loading,
+    configuration: {error}</AlertDescription>
           <Button 
             onClick={fetchConfiguration} 
             variant="outline" 
@@ -169,7 +167,6 @@ export default function ConfigurationDashboard() {
             className="ml-4"
           >
             Retry</Button>
-    );
   }
 
   const enabledFeaturesCount = features ? Object.values(features).filter(Boolean).length : 0;
@@ -191,7 +188,6 @@ export default function ConfigurationDashboard() {
           >
             {reloading ? 'Reloading...' : 'Reload Config'}</Button>
         )}
-      </div>
 
       {/* Status, Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4"></div>
@@ -207,7 +203,8 @@ export default function ConfigurationDashboard() {
             <CardTitle className="text-sm font-medium">Features Enabled</CardTitle>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">
-              {enabledFeaturesCount}/{totalFeaturesCount}</div>
+              {enabledFeaturesCount}/{totalFeaturesCount}
+
             <Progress value={featureCompletionPercentage} className="mt-2" /></Progress>
 
         <Card></Card>
@@ -249,7 +246,7 @@ export default function ConfigurationDashboard() {
                       <Badge variant={enabled ? 'default' : 'secondary'}>
                         {enabled ? 'Enabled' : 'Disabled'}</Badge>
                   ))}
-                </div>
+
               )}
             </CardContent>
 
@@ -319,7 +316,6 @@ export default function ConfigurationDashboard() {
                     </div>
               </>
             )}
-          </div>
 
         <TabsContent value="framework" className="space-y-4"></TabsContent>
           <Card></Card>
@@ -400,8 +396,7 @@ export default function ConfigurationDashboard() {
                         {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}</Badge>)}
     );
 }
-
-</string>
 </FeatureFlags>
 </FullConfig>
 </ConfigurationData>
+}

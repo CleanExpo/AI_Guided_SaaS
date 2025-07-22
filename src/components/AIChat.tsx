@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Persona, ProjectConfig, ChatMessage } from '@/types'
-import { Send, Bot, User } from 'lucide-react'
-
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Persona, ProjectConfig, ChatMessage } from '@/types';
+import { Send, Bot, User } from 'lucide-react';
 interface AIChatProps {
   persona: Persona;
   onProjectConfigReady: (config: ProjectConfig) => void
@@ -66,7 +65,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
       timestamp: new Date()
     }
   ])
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)</ChatMessage>
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({
     persona: persona,
     features: [],
@@ -78,17 +77,15 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
     }
       </Partial>
   })
-  const [userInput, setUserInput] = useState('')</Partial>
-      </string>
+  const [userInput, setUserInput] = useState('')
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
-  const [isTyping, setIsTyping] = useState(false)</string>
-      </HTMLDivElement>
+  const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
       )}
-    </div>
+
     );
   const askNextQuestion = useCallback(() => {
     if (currentQuestionIndex >= chatQuestions.length) return
@@ -277,7 +274,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
                       >
                         {feature}</Button>
                     ))}
-                  </div>
+
               )}
 
               {currentQuestion?.type === 'select' && (
@@ -292,7 +289,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
                       >
                         {option}</Button>
                     ))}
-                  </div>
+
               )}
 
               {(currentQuestion?.type === 'text' || currentQuestion?.type === 'features') && (
@@ -307,12 +304,10 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
                         ? "Or describe custom features"
                         : "Type your response"
                     }
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none, focus:ring-2 focus:ring-blue-500"
                   /></input>
                   <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0}></Button>
-                    <Send className="w-4 h-4" /></Send>
-                  </Button>)}
+                    <Send className="w-4 h-4" />)}
           )}
         </CardContent>
-    );
-}
+  }

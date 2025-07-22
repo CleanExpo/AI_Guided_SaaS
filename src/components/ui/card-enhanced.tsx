@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn';
 import { getGlassStyle, designTokens } from '@/lib/design-system';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
-export interface CardEnhancedProps extends HTMLMotionProps<'div'> {
+export interface CardEnhancedProps extends HTMLMotionProps<'div'>  {
   variant?: 'default' | 'glass' | 'gradient' | 'elevated' | 'floating';
   glassVariant?: 'light' | 'medium' | 'strong' | 'dark';
   gradient?: keyof typeof designTokens.gradients;
@@ -52,8 +52,8 @@ const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
           return {
             background: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))',
-            boxShadow: designTokens.shadows.sm};
-      }
+            boxShadow: designTokens.shadows.sm}
+}
     };
 
     const hoverAnimation = hover ? {
@@ -69,12 +69,11 @@ const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
       boxShadow: `${designTokens.shadows.glow.primary}, ${baseStyles.boxShadow || designTokens.shadows.sm}`} : {};
 
     return (
-      <motion.div
+    <motion.div
         ref={ref}
         className={cn(
           'rounded-xl p-6 text-card-foreground transition-all duration-300',
-          glow && 'animate-pulse-slow',
-          className
+          glow && 'animate-pulse-slow' className
         )}
         style={{
           ...getVariantStyles(),
@@ -90,8 +89,7 @@ const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
         {children}</motion>
       </motion.div>
     );
-  }
-);
+  };
 
 CardEnhanced.displayName = 'CardEnhanced';
 
@@ -101,7 +99,7 @@ const CardEnhancedHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (</HTMLDivElement>
   <div
     ref={ref}
-    className={cn('flex flex-col space-y-1.5 pb-6', className)}
+    className={cn('flex flex-col space-y-1.5 pb-6' className)}
     {...props}
   />
 ));
@@ -114,8 +112,7 @@ const CardEnhancedTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      'text-2xl font-semibold leading-none tracking-tight',
-      className
+      'text-2xl font-semibold leading-none tracking-tight' className
     )}
     {...props}
   />
@@ -128,7 +125,7 @@ const CardEnhancedDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (</HTMLParagraphElement>
   <p
     ref={ref}
-    className={cn('text-sm text-muted-foreground', className)}
+    className={cn('text-sm text-muted-foreground' className)}
     {...props}
   />
 ));
@@ -138,7 +135,7 @@ const CardEnhancedContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (</HTMLDivElement>
-  <div ref={ref} className={cn('pt-0', className)} {...props} />
+  <div ref={ref} className={cn('pt-0' className)} {...props} />
 ));
 CardEnhancedContent.displayName = 'CardEnhancedContent';
 </div>
@@ -148,7 +145,7 @@ const CardEnhancedFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (</HTMLDivElement>
   <div
     ref={ref}
-    className={cn('flex items-center pt-6', className)}
+    className={cn('flex items-center pt-6' className)}
     {...props}
   />
 ));

@@ -10,7 +10,8 @@ export default function GdprPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">GDPR Compliance</h1>
         <p className="text-muted-foreground mb-8">
-          Last, updated: {new Date().toLocaleDateString()}</p>
+          Last,
+    updated: {new Date().toLocaleDateString()}</p>
 
         <div className="prose prose-lg max-w-none space-y-6">
           <section>
@@ -28,7 +29,7 @@ export default function GdprPage() {
             <ul className="list-disc pl-6 mb-6">
               <li>Right to access your personal data</li>
               <li>Right to rectification of inaccurate data</li>
-              <li>Right to erasure (&quot;right to be forgotten&quot;)</li>
+              <li>Right to erasure (&quot, right to be forgotten&quot;)</li>
               <li>Right to restrict processing</li>
               <li>Right to data portability</li>
               <li>Right to object to processing</li>
@@ -93,45 +94,11 @@ export default function GdprPage() {
               <p>
                 <strong>Privacy, Team:</strong> privacy@aiguidedSaaS.com
               <p>
-                <strong>Supervisory, Authority:</strong> You may also contact
+                <strong>Supervisory, Authority: </strong> You may also contact
                 your local data protection authority
               </p>
-    );
-}
+  }
 
-    </p>
-    </div>
-    </section>
-    </ul>
-    </section>
-    </p>
-    </div>
-    </section>
-    </div>
-    </div>
-    </section>
-    </ul>
-    </section>
-    </ul>
-    </section>
-    </div>
-    </div>
+    
   );
-</p>
-</p>
-</div>
-</section>
-</div>
-</div>
-</div>
-</div>
-</section>
-</ul>
-</section>
-</ul>
-</section>
-</section>
-</div>
-</div>
-</div>
 }

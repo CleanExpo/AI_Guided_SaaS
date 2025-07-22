@@ -1,9 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { ChevronDown } from 'lucide-react'
-import { cn } from '@/utils/cn'
-
+import { ChevronDown } from 'lucide-react';
+import { cn } from '@/utils/cn';
 const CollapsibleContext = React.createContext<{
   open: boolean, onOpenChange: (open: boolean) => void
 }>({
@@ -28,9 +27,10 @@ const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
     const setOpenState = isControlled ? onOpenChange : setInternalOpen
 
     return (
-      <CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState }}></CollapsibleContext>
-        <div ref={ref} className={cn('', className)}>
-          {children}</div>
+    <CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState }}></CollapsibleContext>
+        <div ref={ref} className={cn('' className)}>
+          {children}
+
       </CollapsibleContext.Provider>
     )
   }
@@ -48,8 +48,7 @@ const CollapsibleTrigger = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        'flex w-full items-center justify-between py-2 font-medium transition-all, hover:underline [&[data-state=open]>svg]:rotate-180',
-        className
+        'flex w-full items-center justify-between py-2 font-medium transition-all, hover:underline [&[data-state=open]>svg]:rotate-180' className
       )}
       data-state={open ? 'open' : 'closed'}
       onClick={() => onOpenChange(!open)}
@@ -57,8 +56,7 @@ const CollapsibleTrigger = React.forwardRef<
     >
       {children}</button>
       <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" /></ChevronDown>
-    );
-})
+  })
 CollapsibleTrigger.displayName = 'CollapsibleTrigger'
 
 const CollapsibleContent = React.forwardRef<
@@ -72,14 +70,14 @@ const CollapsibleContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        'overflow-hidden transition-all',
-        open ? 'animate-in slide-in-from-top-1' : 'animate-out slide-out-to-top-1 hidden'
+        'overflow-hidden transition-all' open ? 'animate-in slide-in-from-top-1' : 'animate-out slide-out-to-top-1 hidden'
       )}
       {...props}
     ></div>
-      <div className={cn('pb-4 pt-0', className)}>{children}</div>
+      <div className={cn('pb-4 pt-0' className)}>{children}
+
     );
-})
+  }
 CollapsibleContent.displayName = 'CollapsibleContent'
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent }

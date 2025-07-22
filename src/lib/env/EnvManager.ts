@@ -13,43 +13,43 @@ interface EnvVariable {
   value?: string;
   status?: 'valid' | 'warning' | 'error' | 'missing';
   message?: string;
-}
+};
 
 interface ServiceConfig {
   name: string;
   category: string;
   status: string;
   variables: Record<string, EnvVariable>;
-}
+};
 
 interface EnvConfig {
   version: string;
-  services: Record<string, ServiceConfig>;
+  services: Record<string, ServiceConfig>,
   environments: Record<string, any>;
   validation: {
     strictMode: boolean;
-  allowExtraVars: boolean;
+    allowExtraVars: boolean;
     warnOnMissing: boolean;
-    errorOnInvalid: boolean;
+    errorOnInvalid: boolean
   };
-}
+};
 
 interface ValidationResult {
   isValid: boolean;
   errors: Array<{
     service: string;
-  variable: string;
+    variable: string;
     message: string;
-    severity: 'error' | 'warning';
+    severity: 'error' | 'warning'
   }>;
   summary: {
     total: number,
-    valid: number;
+    valid: number,
     missing: number;
     invalid: number;
-    warnings: number;
+    warnings: number
   };
-}
+};
 
 export class EnvManager {
   private configPath: string;
@@ -66,7 +66,7 @@ export class EnvManager {
     this.schemaPath = path.join(projectRoot, '.docs', 'env.validation.schema');
     this.historyPath = path.join(projectRoot, '.docs', 'env.history.log');
     this.envPath = path.join(projectRoot, '.env.local');
-    
+
     // Fallback to .env if .env.local doesn't exist
     if (!fs.existsSync(this.envPath)) {
       this.envPath = path.join(projectRoot, '.env');
@@ -89,11 +89,11 @@ export class EnvManager {
 
   private loadEnvFile(): Record<string, string> {
     const env: Record<string, string> = {};
-    
+
     if (fs.existsSync(this.envPath)) {
       const envContent = fs.readFileSync(this.envPath, 'utf-8');
       const lines = envContent.split('\n');
-      
+
       for (const line of lines) {
         const trimmed = line.trim();
         if (trimmed && !trimmed.startsWith('#')) {
@@ -105,14 +105,14 @@ export class EnvManager {
         }
       }
     }
-    
+
     // Also include process.env for runtime checks
     Object.keys(process.env).forEach(key => {
       if (!env[key] && process.env[key]) {
         env[key] = process.env[key]!;
       }
     });
-    
+
     return env;
   }
 
@@ -120,8 +120,15 @@ export class EnvManager {
     if (!this.config) {
       return {
         isValid: false,
-        errors: [{ service: 'system', variable: 'config', message: 'Configuration not loaded', severity: 'error' }],
-        summary: { total: 0, valid: 0, missing: 0, invalid: 0, warnings: 0 }
+        errors: [
+          {
+            service: 'system',
+            variable: 'config',
+            message: 'Configuration not loaded',
+            severity: 'error';
+          }},
+        ],
+    summary: { total: 0, valid: 0, missing: 0, invalid: 0, warnings: 0 },
       };
     }
 
@@ -143,20 +150,24 @@ export class EnvManager {
             service: serviceKey,
             variable: varName,
             message: `Required variable is missing`,
-            severity: 'error'
-          });
+            severity: 'error';
+          }});
           summary.missing++;
           continue;
         }
 
         // Check optional variables if warnOnMissing is true
-        if (!varConfig.required && !value && this.config.validation.warnOnMissing) {
+        if (
+          !varConfig.required &&
+          !value &&
+          this.config.validation.warnOnMissing
+        ) {
           errors.push({
             service: serviceKey,
             variable: varName,
             message: `Optional variable is not set`,
-            severity: 'warning'
-          });
+            severity: 'warning';
+          }});
           summary.warnings++;
           continue;
         }
@@ -194,7 +205,9 @@ export class EnvManager {
               service: serviceKey,
               variable: varName,
               message: errorMessage,
-              severity: this.config.validation.errorOnInvalid ? 'error' : 'warning'
+              severity: this.config.validation.errorOnInvalid
+                ? 'error'
+                : 'warning',
             });
             summary.invalid++;
           }
@@ -203,7 +216,10 @@ export class EnvManager {
     }
 
     // Check for extra variables if strictMode is enabled
-    if (this.config.validation.strictMode && !this.config.validation.allowExtraVars) {
+    if (
+      this.config.validation.strictMode &&
+      !this.config.validation.allowExtraVars
+    ) {
       const definedVars = new Set<string>();
       for (const service of Object.values(this.config.services)) {
         Object.keys(service.variables).forEach(v => definedVars.add(v));
@@ -215,8 +231,8 @@ export class EnvManager {
             service: 'unknown',
             variable: envVar,
             message: 'Variable not defined in configuration',
-            severity: 'warning'
-          });
+            severity: 'warning';
+          }});
           summary.warnings++;
         }
       }
@@ -225,7 +241,7 @@ export class EnvManager {
     return {
       isValid: errors.filter(e => e.severity === 'error').length === 0,
       errors,
-      summary
+      summary,
     };
   }
 
@@ -238,8 +254,10 @@ export class EnvManager {
     if (this.config) {
       for (const [key, value] of Object.entries(env)) {
         let found = false;
-        
-        for (const [serviceKey, service] of Object.entries(this.config.services)) {
+
+        for (const [serviceKey, service] of Object.entries(
+          this.config.services
+        )) {
           if (service.variables[key]) {
             found = true;
             break;
@@ -255,15 +273,18 @@ export class EnvManager {
               name: serviceKey,
               category: 'unknown',
               status: 'active',
-              variables: {}
+    variables: {},
             };
           }
-          
+
           this.config.services[serviceKey].variables[key] = {
-            required: false, type: 'string',
+            required: false,
+            type: 'string',
             description: `Auto-detected variable`,
-            sensitive: key.includes('SECRET') || key.includes('KEY') || key.includes('PASSWORD')
-          };
+            sensitive:
+              key.includes('SECRET') ||
+              key.includes('KEY') ||
+              key.includes('PASSWORD')};
         }
       }
 
@@ -288,7 +309,8 @@ export class EnvManager {
       vercel: /VERCEL/i,
       stripe: /STRIPE/i,
       github: /GITHUB/i,
-      nextauth: /NEXTAUTH|AUTH/i};
+      nextauth: /NEXTAUTH|AUTH/i,
+    };
 
     for (const [service, pattern] of Object.entries(patterns)) {
       if (pattern.test(varName)) {
@@ -300,14 +322,16 @@ export class EnvManager {
   }
 
   private logChange(action: string, message: string): void {
-    const history = JSON.parse(fs.readFileSync(this.historyPath, 'utf-8') || '[]');
+    const history = JSON.parse(
+      fs.readFileSync(this.historyPath, 'utf-8') || '[]'
+    );
     history.push({
       timestamp: new Date().toISOString(),
       action,
       user: process.env.USER || 'unknown',
       environment: process.env.NODE_ENV || 'development',
-      changes: { message }
-    });
+    changes: { message };
+    }});
 
     // Keep only last 100 entries
     if (history.length > 100) {
@@ -323,12 +347,14 @@ export class EnvManager {
     const status: Record<string, any> = {};
 
     if (this.config) {
-      for (const [serviceKey, service] of Object.entries(this.config.services)) {
+      for (const [serviceKey, service] of Object.entries(
+        this.config.services
+      )) {
         status[serviceKey] = {
           name: service.name,
           category: service.category,
           status: service.status,
-          variables: {}
+    variables: {},
         };
 
         for (const [varName, varConfig] of Object.entries(service.variables)) {
@@ -338,9 +364,14 @@ export class EnvManager {
           status[serviceKey].variables[varName] = {
             set: !!value,
             required: varConfig.required,
-            status: error ? (error.severity === 'error' ? '❌' : '⚠️') : (value ? '✅' : ''),
-            message: error?.message || (value ? 'Valid' : 'Not set')
-          };
+            status: error
+              ? error.severity === 'error'
+                ? '❌'
+                : '⚠️'
+              : value
+                ? '✅'
+                : '',
+            message: error?.message || (value ? 'Valid' : 'Not set')};
         }
       }
     }
@@ -349,7 +380,7 @@ export class EnvManager {
       summary: validation.summary,
       isValid: validation.isValid,
       services: status,
-      environment: process.env.NODE_ENV || 'development'
+      environment: process.env.NODE_ENV || 'development',
     };
   }
 
@@ -370,7 +401,7 @@ export class EnvManager {
     // Service breakdown
     for (const [serviceKey, service] of Object.entries(status.services)) {
       report += chalk.bold(`\n${service.name} (${service.category}):\n`);
-      
+
       for (const [varName, varStatus] of Object.entries(service.variables)) {
         const icon = varStatus.status || '  ';
         const required = varStatus.required ? chalk.red('*') : ' ';

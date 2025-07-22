@@ -24,8 +24,6 @@ class ClaudeMemoryUpdater {
   private sections: MemorySection[] = [];
 
   async updateMemory(): Promise<void> {
-    console.log('🧠 Updating CLAUDE.md with latest project status...\n');
-
     // Gather current project status
     const status = await this.gatherProjectStatus();
     
@@ -34,8 +32,6 @@ class ClaudeMemoryUpdater {
     
     // Update CLAUDE.md
     await this.updateClaudeMd();
-    
-    console.log('✅ CLAUDE.md updated successfully!');
   }
 
   private async gatherProjectStatus(): Promise<ProjectStatus> {

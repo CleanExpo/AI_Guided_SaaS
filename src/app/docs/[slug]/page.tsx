@@ -1,12 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, BookOpen, ExternalLink } from 'lucide-react';
@@ -19,7 +14,7 @@ interface DocPage {
   content: string;
   category: string;
   lastUpdated: string;
-}
+}}
 
 const docPages: Record<string, DocPage> = {
   'quick-start': {
@@ -92,7 +87,7 @@ Once logged in, you'll see the main dashboard, with:
 - Contact [support](/contact)
 - Join our [Discord community](https://discord.gg/aiguidedSaaS)
     `},
-  installation: {
+    installation: {
     slug: 'installation',
     title: 'Installation Guide',
     description:
@@ -243,7 +238,7 @@ If you encounter, issues:
 - High-speed internet
 - Multiple monitors (for better productivity)
     `},
-  configuration: {
+    configuration: {
     slug: 'configuration',
     title: 'Configuration Guide',
     description:
@@ -587,7 +582,7 @@ export default function DocPage() {
 
   if (!doc) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Documentation Not Found</h1>
           <p className="text-muted-foreground mb-6">
@@ -596,12 +591,12 @@ export default function DocPage() {
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Documentation</ArrowLeft>
-    );
   }
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center gap-4">
         <Link href="/docs">
           <Button variant="outline" size="sm">
@@ -613,7 +608,8 @@ export default function DocPage() {
         <div className="flex items-center gap-2">
           <Badge variant="secondary">{doc.category}</Badge>
           <span className="text-sm text-muted-foreground">
-            Last, updated: {new Date(doc.lastUpdated).toLocaleDateString()}</span>
+            Last,
+    updated: {new Date(doc.lastUpdated).toLocaleDateString()}</span>
         <h1 className="text-4xl font-bold">{doc.title}</h1>
         <p className="text-xl text-muted-foreground">{doc.description}</p>
 
@@ -631,7 +627,7 @@ export default function DocPage() {
                 })
                 .replace(
                   /\[([^\]]+)\]\(([^)]+)\)/g,</h>
-                  '<a href="$2" class="text-primary, hover:underline">$1</a>'
+                  '<a href="$2" class="text-primary hover:underline">$1</a>'
                 )
                 .replace(
                   /```(\w+)?\n([\s\S]*?)```/g,
@@ -667,7 +663,6 @@ export default function DocPage() {
                       <CardDescription>
                         {relatedDoc.description}</CardDescription>
               ))}
-          </div>
 
       {/* Help Section */}
       <Card>
@@ -708,6 +703,4 @@ export default function DocPage() {
         </Link>
         </Button>
         </Link>
-        </Button>
-    );
-}
+  }

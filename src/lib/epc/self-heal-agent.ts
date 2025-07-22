@@ -5,20 +5,25 @@ import fs from 'fs';
 import path from 'path';
 
 interface HealingAction {
-  type: 'update_env' | 'rotate_key' | 'sync_config' | 'manual_fix' | 'suggest_fix';
+  type:
+    | 'update_env'
+    | 'rotate_key'
+    | 'sync_config'
+    | 'manual_fix'
+    | 'suggest_fix';
   description: string;
   automated: boolean;
   risk: 'low' | 'medium' | 'high';
   command?: string;
   suggestedValue?: string;
-}
+};
 
 interface HealingPlan {
   issues: string[];
   actions: HealingAction[];
   estimatedTime: string;
-  confidence: number;
-}
+  confidence: number
+};
 
 export class SelfHealingAgent {
   private epcEngine: EPCEngine;
@@ -32,14 +37,16 @@ export class SelfHealingAgent {
     this.envManager = new EnvManager(projectRoot);
     this.aiService = new AIService();
     this.historyPath = path.join(projectRoot, '.docs', 'healing-history.json');
-    
+
     this.loadHistory();
   }
 
   private loadHistory(): void {
     try {
       if (fs.existsSync(this.historyPath)) {
-        this.healingHistory = JSON.parse(fs.readFileSync(this.historyPath, 'utf-8'));
+        this.healingHistory = JSON.parse(
+          fs.readFileSync(this.historyPath, 'utf-8')
+        );
       }
     } catch (error) {
       console.error('Failed to load healing, history:', error);
@@ -48,7 +55,10 @@ export class SelfHealingAgent {
 
   private saveHistory(): void {
     try {
-      fs.writeFileSync(this.historyPath, JSON.stringify(this.healingHistory, null, 2));
+      fs.writeFileSync(
+        this.historyPath,
+        JSON.stringify(this.healingHistory, null, 2)
+      );
     } catch (error) {
       console.error('Failed to save healing, history:', error);
     }
@@ -62,7 +72,7 @@ export class SelfHealingAgent {
       issues: [],
       actions: [],
       estimatedTime: '1-2 minutes',
-      confidence: 0
+      confidence: 0,
     };
 
     // Collect all issues
@@ -70,7 +80,7 @@ export class SelfHealingAgent {
       ...epcResult.missing.map((v: string) => `Missing: ${v}`),
       ...epcResult.invalid.map((v: string) => `Invalid: ${v}`),
       ...epcResult.outdated.map((v: string) => `Outdated: ${v}`),
-      ...epcResult.mismatched.map((v: string) => `Mismatched: ${v}`)
+      ...epcResult.mismatched.map((v: string) => `Mismatched: ${v}`),
     ];
 
     // Generate healing actions for each type of issue
@@ -91,7 +101,8 @@ export class SelfHealingAgent {
 
     // Calculate confidence based on automated actions
     const automatedCount = plan.actions.filter(a => a.automated).length;
-    plan.confidence = Math.round((automatedCount / plan.actions.length) * 100) || 0;
+    plan.confidence =
+      Math.round((automatedCount / plan.actions.length) * 100) || 0;
 
     // Estimate time based on actions
     plan.estimatedTime = this.estimateHealingTime(plan.actions);
@@ -102,15 +113,17 @@ export class SelfHealingAgent {
   /**
    * Generate action for missing variable
    */
-  private async generateMissingVarAction(varName: string): Promise<HealingAction | null> {
+  private async generateMissingVarAction(
+    varName: string
+  ): Promise<HealingAction | null> {
     // Check if it's a known pattern
     if (varName.includes('API_KEY')) {
       const service = this.identifyService(varName);
-      
+
       // Use AI to suggest solution
       const prompt = `The environment variable ${varName} is missing. This appears to be an API key for ${service}. 
                       What's the most likely reason and solution? Keep response concise.`;
-      
+
       try {
         const response = await this.aiService.generateResponse(prompt);
         const suggestion = response.message;
@@ -121,8 +134,7 @@ export class SelfHealingAgent {
           automated: false,
           risk: 'medium',
           command: `npm run, env:setup`,
-          suggestedValue: this.getDefaultValue(varName)
-        };
+          suggestedValue: this.getDefaultValue(varName)};
       } catch (error) {
         // Fallback if AI fails
         return {
@@ -130,7 +142,7 @@ export class SelfHealingAgent {
           description: `Add ${varName} to .env.local file`,
           automated: false,
           risk: 'low',
-          command: `echo "${varName}=your_value_here" >> .env.local`
+          command: `echo "${varName}=your_value_here" >> .env.local`,
         };
       }
     }
@@ -139,23 +151,26 @@ export class SelfHealingAgent {
       type: 'manual_fix',
       description: `Configure ${varName}`,
       automated: false,
-      risk: 'low'
+      risk: 'low',
     };
   }
 
   /**
    * Generate action for invalid variable
    */
-  private async generateInvalidVarAction(varName: string): Promise<HealingAction | null> {
+  private async generateInvalidVarAction(
+    varName: string
+  ): Promise<HealingAction | null> {
     const config = this.getVariableConfig(varName);
-    
+
     if (config?.pattern) {
       return {
         type: 'suggest_fix',
         description: `Fix ${varName} format to match, pattern: ${config.pattern}`,
         automated: false,
         risk: 'low',
-        suggestedValue: config.example || 'Check documentation for correct format'
+        suggestedValue:
+          config.example || 'Check documentation for correct format',
       };
     }
 
@@ -163,24 +178,26 @@ export class SelfHealingAgent {
       type: 'manual_fix',
       description: `Validate and fix ${varName} value`,
       automated: false,
-      risk: 'low'
+      risk: 'low',
     };
   }
 
   /**
    * Generate action for outdated variable
    */
-  private async generateOutdatedVarAction(varName: string): Promise<HealingAction | null> {
+  private async generateOutdatedVarAction(
+    varName: string
+  ): Promise<HealingAction | null> {
     // Check recent changes
     const recentChange = this.checkRecentChanges(varName);
-    
+
     if (recentChange) {
       return {
         type: 'sync_config',
         description: `Sync ${varName} with latest configuration`,
         automated: true,
         risk: 'low',
-        command: 'npm run, env:sync'
+        command: 'npm run, env:sync',
       };
     }
 
@@ -191,7 +208,7 @@ export class SelfHealingAgent {
         description: `Consider rotating ${varName} for security`,
         automated: false,
         risk: 'medium',
-        command: `Visit provider dashboard to regenerate ${varName}`
+        command: `Visit provider dashboard to regenerate ${varName}`,
       };
     }
 
@@ -201,17 +218,20 @@ export class SelfHealingAgent {
   /**
    * Execute healing plan
    */
-  async executeHealing(plan: HealingPlan, autoApprove: boolean = false): Promise<{
+  async executeHealing(
+    plan: HealingPlan,
+    autoApprove: boolean = false
+  ): Promise<{
     success: boolean,
-    applied: string[];
+    applied: string[],
     failed: string[];
-    manual: string[];
+    manual: string[]
   }> {
     const result = {
       success: true,
       applied: [] as string[],
       failed: [] as string[],
-      manual: [] as string[]
+      manual: [] as string[],
     };
 
     for (const action of plan.actions) {
@@ -233,8 +253,8 @@ export class SelfHealingAgent {
       timestamp: new Date().toISOString(),
       plan,
       result,
-      autoApproved: autoApprove
-    });
+      autoApproved: autoApprove;
+    }});
     this.saveHistory();
 
     return result;
@@ -248,17 +268,19 @@ export class SelfHealingAgent {
       case 'sync_config':
         await this.envManager.sync();
         break;
-        
+
       case 'update_env':
         // Update env file with suggested value
         if (action.suggestedValue) {
           // Implementation for updating env file
-          console.log(`Would update env with ${action.suggestedValue}`);
+
         }
         break;
-        
+
       default:
-        throw new Error(`Cannot automatically apply action, type: ${action.type}`);
+        throw new Error(
+          `Cannot automatically apply action, type: ${action.type}`
+        );
     }
   }
 
@@ -275,7 +297,7 @@ export class SelfHealingAgent {
       STRIPE: 'Stripe',
       GOOGLE: 'Google',
       GITHUB: 'GitHub',
-      VERCEL: 'Vercel'
+      VERCEL: 'Vercel',
     };
 
     for (const [pattern, service] of Object.entries(patterns)) {
@@ -294,7 +316,7 @@ export class SelfHealingAgent {
     try {
       const configPath = path.join(process.cwd(), '.docs', 'env.config.json');
       const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-      
+
       for (const service of Object.values(config.services)) {
         if ((service as any).variables[varName]) {
           return (service as any).variables[varName];
@@ -303,7 +325,7 @@ export class SelfHealingAgent {
     } catch (error) {
       console.error('Failed to get variable config:', error);
     }
-    
+
     return null;
   }
 
@@ -312,9 +334,13 @@ export class SelfHealingAgent {
    */
   private getDefaultValue(varName: string): string {
     try {
-      const defaultsPath = path.join(process.cwd(), '.docs', 'env.defaults.json');
+      const defaultsPath = path.join(
+        process.cwd(),
+        '.docs',
+        'env.defaults.json'
+      );
       const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8'));
-      
+
       for (const service of Object.values(defaults.defaults)) {
         if ((service as any)[varName]) {
           return (service as any)[varName].value || '';
@@ -323,7 +349,7 @@ export class SelfHealingAgent {
     } catch (error) {
       console.error('Failed to get default, value:', error);
     }
-    
+
     return '';
   }
 
@@ -333,9 +359,13 @@ export class SelfHealingAgent {
   private checkRecentChanges(varName: string): boolean {
     // Check healing history for recent changes to this variable
     const recentHealing = this.healingHistory
-      .filter(h => h.timestamp > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
+      .filter(
+        h =>
+          h.timestamp >
+          new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+      )
       .find(h => h.plan.issues.some((i: string) => i.includes(varName)));
-    
+
     return !!recentHealing;
   }
 
@@ -345,7 +375,7 @@ export class SelfHealingAgent {
   private estimateHealingTime(actions: HealingAction[]): string {
     const automated = actions.filter(a => a.automated).length;
     const manual = actions.filter(a => !a.automated).length;
-    
+
     if (manual === 0) {
       return 'Less than 1 minute';
     } else if (manual <= 3) {

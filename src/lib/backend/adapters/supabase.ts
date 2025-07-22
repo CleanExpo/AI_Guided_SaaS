@@ -29,7 +29,7 @@ export class SupabaseAdapter implements BackendAdapter {
     const { data, error } = await this.client.auth.signUp({
       email,
       password,
-      options: {
+    options: {
         data: metadata
       }
     })

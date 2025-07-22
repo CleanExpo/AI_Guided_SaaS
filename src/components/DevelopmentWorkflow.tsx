@@ -9,7 +9,7 @@ import { CheckCircle, Clock, Play, Code, TestTube, Rocket } from 'lucide-react';
 interface DevelopmentWorkflowProps {
   projectConfig: ProjectConfig;
   onPhaseComplete: (phase: string) => void;
-}
+}}
 
 const workflowPhases = [
   {
@@ -68,12 +68,13 @@ export default function DevelopmentWorkflow({
     const currentIndex = workflowPhases.findIndex(p => p.id === phaseId);
     if (currentIndex < workflowPhases.length - 1) {
       setActivePhase(workflowPhases[currentIndex + 1].id);
-    }
+}
   };
 
   return (
     <div className="space-y-6">
-      {/* Project Overview */}</div>
+      {/* Project Overview */}
+
       <Card>
         <CardHeader>
           <CardTitle>AI Development Workflow - {projectConfig.name}</CardTitle>
@@ -81,19 +82,23 @@ export default function DevelopmentWorkflow({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">
-                {projectConfig.features.length}</div>
+                {projectConfig.features.length}
+
               <div className="text-sm text-gray-600">Features</div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">
-                {projectConfig.technology?.frontend || 'React'}</div>
+                {projectConfig.technology?.frontend || 'React'}
+
               <div className="text-sm text-gray-600">Frontend</div>
             <div className="text-center">
               <div className="text-2xl font-bold text-brand-primary-600">
-                {projectConfig.technology?.backend || 'Node.js'}</div>
+                {projectConfig.technology?.backend || 'Node.js'}
+
               <div className="text-sm text-gray-600">Backend</div>
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-600">
-                {projectConfig.timeline}</div>
+                {projectConfig.timeline}
+
               <div className="text-sm text-gray-600">Timeline</div>
         </CardContent>
 
@@ -102,10 +107,8 @@ export default function DevelopmentWorkflow({
         {workflowPhases.map(phase => {
           const IconComponent = phase.icon;
           const isActive = activePhase === phase.id;
-          const isCompleted = phase.status === 'completed';
-
-          return (
-            <Card
+          const isCompleted = phase.status === 'completed', return (
+    <Card
               key={phase.id}
               className={`transition-all duration-200 ${
                 isActive ? 'ring-2 ring-blue-500 shadow-lg' : ''
@@ -173,22 +176,9 @@ export default function DevelopmentWorkflow({
                       <span className="text-sm font-medium">
                         Phase Completed</span>)}
     );
-        }
-      )}
-    </div>
-        </Card>
-        </CardHeader>
-        </CardContent>
-        </div>
-        </div>
-        </div>
-        </CardHeader>
-        </CardTitle>
-        </div>
-        </CardContent>
-        </div>
-        </div>
-    );
+  }}
+
+        
 
       {/* AI Recommendations */}
       <Card>
@@ -218,23 +208,12 @@ export default function DevelopmentWorkflow({
           </CardContent>
           </div>
           </ul>
-          </div>
-          </ul>
-      );
-</div>
-</div>
-</CardContent>
+          </div></CardContent>
 </CardHeader>
 </Card>
 </CardTitle>
 </CardHeader>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
 }

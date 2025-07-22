@@ -2,7 +2,8 @@
 // Combines Lovable.dev's friendly aesthetics with VS Code's professional power
 
 export const theme = {
-  // Brand Colors, colors: {
+  // Brand Colors
+    colors: {
     primary: {
       50: '#f0f9ff',
       100: '#e0f2fe',
@@ -71,7 +72,8 @@ export const theme = {
       900: '#171717'}
   },
   
-  // Typography, typography: {
+  // Typography
+    typography: {
     fonts: {
       heading: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       body: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
@@ -100,7 +102,8 @@ export const theme = {
       loose: 2}
   },
   
-  // Spacing, spacing: {
+  // Spacing
+    spacing: {
     0: '0px',
     1: '0.25rem',
     2: '0.5rem',
@@ -115,7 +118,8 @@ export const theme = {
     20: '5rem',
     24: '6rem'},
   
-  // Border Radius, borderRadius: {
+  // Border Radius
+    borderRadius: {
     none: '0px',
     sm: '0.125rem',
     base: '0.25rem',
@@ -126,7 +130,8 @@ export const theme = {
     '3xl': '1.5rem',
     full: '9999px'},
   
-  // Shadows, shadows: {
+  // Shadows
+    shadows: {
     sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
     base: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
     md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
@@ -136,13 +141,15 @@ export const theme = {
     inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
     none: 'none'},
   
-  // Transitions, transitions: {
+  // Transitions
+    transitions: {
     fast: '150ms',
     base: '250ms',
     slow: '350ms',
     slower: '500ms'},
   
-  // Z-index, zIndex: {
+  // Z-index
+    zIndex: {
     0: 0,
     10: 10,
     20: 20,
@@ -162,32 +169,34 @@ export const theme = {
     popover: 1060,
     tooltip: 1070},
   
-  // Breakpoints, breakpoints: {
+  // Breakpoints
+    breakpoints: {
     sm: '640px',
     md: '768px',
     lg: '1024px',
     xl: '1280px',
     '2xl': '1536px'},
   
-  // Component Variants, components: {
+  // Component Variants
+    components: {
     button: {
       primary: {
         bg: 'primary.600',
         color: 'white',
         hover: 'primary.700',
         active: 'primary.800'},
-      secondary: {
+    secondary: {
         bg: 'secondary.600',
         color: 'white',
         hover: 'secondary.700',
         active: 'secondary.800'},
-      outline: {
+    outline: {
         bg: 'transparent',
         color: 'neutral.700',
         border: 'neutral.300',
         hover: 'neutral.50',
         active: 'neutral.100'},
-      ghost: {
+    ghost: {
         bg: 'transparent',
         color: 'neutral.700',
         hover: 'neutral.100',
@@ -199,7 +208,7 @@ export const theme = {
         border: 'neutral.200',
         shadow: 'base',
         radius: 'lg'},
-      elevated: {
+    elevated: {
         bg: 'white',
         border: 'transparent',
         shadow: 'lg',
@@ -226,19 +235,19 @@ export const getColor = (path: string): string => {
   }
   
   return value
-}
+};
 
 export const getSpacing = (size: keyof typeof theme.spacing): string => {
   return theme.spacing[size]
-}
+};
 
 export const getShadow = (size: keyof typeof theme.shadows): string => {
   return theme.shadows[size]
-}
+};
 
 export const getRadius = (size: keyof typeof theme.borderRadius): string => {
   return theme.borderRadius[size]
-}
+};
 
 export const getTransition = (speed: keyof typeof theme.transitions): string => {
   return `all ${theme.transitions[speed]} ease-in-out`

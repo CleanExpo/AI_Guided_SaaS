@@ -16,7 +16,7 @@ interface EmptyStateProps {
   };
   secondaryAction?: {
     label: string,
-    onClick: () => void;
+    onClick: () => void,
   };
   className?: string;
   size?: 'sm' | 'md' | 'lg';
@@ -50,7 +50,7 @@ const illustrations = {
       />
       <circle cx="85" cy="85" r="8" fill="currentColor" opacity="0.5" />
     </svg>
-  ),
+  }
   data: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <rect
@@ -110,7 +110,7 @@ const illustrations = {
         opacity="0.5"
       />
     </svg>
-  ),
+  }
   error: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle
@@ -137,7 +137,7 @@ const illustrations = {
         opacity="0.2"
       />
     </svg>
-  ),
+  }
   maintenance: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle
@@ -162,7 +162,7 @@ const illustrations = {
         opacity="0.4"
       />
     </svg>
-  ),
+  }
   construction: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <rect
@@ -227,28 +227,26 @@ export function EmptyState({
       className={cn(
         'flex flex-col items-center justify-center text-center',
         currentSize.container,
-        currentSize.spacing,
-        className
+        currentSize.spacing className
       )}
     >
-      {/* Illustration or Icon */}</div>
-      <div className={cn('text-muted-foreground', currentSize.illustration)}>
-        {icon || illustrations[illustration as keyof typeof illustrations]}</div>
+      {/* Illustration or Icon */}
+
+      <div className={cn('text-muted-foreground' currentSize.illustration)}>
+        {icon || illustrations[illustration as keyof typeof illustrations]}
 
       {/* Title */}
-      <h3 className={cn('text-foreground', currentSize.title)}>{title}</h3>
+      <h3 className={cn('text-foreground' currentSize.title)}>{title}</h3>
 
       {/* Description */}
       {description && (
         <p
           className={cn(
-            'text-muted-foreground max-w-md',
-            currentSize.description
+            'text-muted-foreground max-w-md' currentSize.description
           )}
         >
           {description}</p>
-  );
-}
+  }
 
       {/* Actions */}
       {(action || secondaryAction) && (
@@ -269,12 +267,11 @@ export function EmptyState({
             >
               {secondaryAction.label}</ButtonEnhanced>
           )}
-        </div>
+
       )}
-    </div>
+
     );
 }
-
 // Specialized Empty State Components
 export function NoDataFound({
   title = 'No data found',
@@ -283,8 +280,7 @@ export function NoDataFound({
   onCreate,
   className}: {
   title?: string;
-  description?: string;
-  onRefresh?: () => void;
+  description?: string, onRefresh?: () => void;
   onCreate?: () => void;
   className?: string;
 }) {
@@ -311,15 +307,14 @@ export function NoDataFound({
       className={className}
     />
   );
-}
+};
 
 export function SearchNotFound({
   query,
   onClear,
   onTryAgain,
   className}: {
-  query?: string;
-  onClear?: () => void;
+  query?: string, onClear?: () => void;
   onTryAgain?: () => void;
   className?: string;
 }) {
@@ -350,7 +345,7 @@ export function SearchNotFound({
       className={className}
     />
   );
-}
+};
 
 export function ErrorState({
   title = 'Something went wrong',
@@ -359,8 +354,7 @@ export function ErrorState({
   onGoBack,
   className}: {
   title?: string;
-  description?: string;
-  onRetry?: () => void;
+  description?: string, onRetry?: () => void;
   onGoBack?: () => void;
   className?: string;
 }) {
@@ -387,7 +381,7 @@ export function ErrorState({
       className={className}
     />
   );
-}
+};
 
 export function MaintenanceMode({
   title = 'Under Maintenance',
@@ -397,8 +391,7 @@ export function MaintenanceMode({
   className}: {
   title?: string;
   description?: string;
-  estimatedTime?: string;
-  onNotifyMe?: () => void;
+  estimatedTime?: string, onNotifyMe?: () => void;
   className?: string;
 }) {
   return (
@@ -421,7 +414,7 @@ export function MaintenanceMode({
       className={className}
     />
   );
-}
+};
 
 export function ComingSoon({
   title = 'Coming Soon',
@@ -430,8 +423,7 @@ export function ComingSoon({
   onLearnMore,
   className}: {
   title?: string;
-  description?: string;
-  onNotifyMe?: () => void;
+  description?: string, onNotifyMe?: () => void;
   onLearnMore?: () => void;
   className?: string;
 }) {
@@ -459,7 +451,6 @@ export function ComingSoon({
     />
   );
 }
-
 // Loading Empty State
 export function LoadingState({
   title = 'Loading...',
@@ -467,13 +458,11 @@ export function LoadingState({
   className}: {
   title?: string;
   description?: string;
-  className?: string;
-}) {
+  className?: string, }) {
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4',
-        className
+        'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4' className
       )}
     >
       <div className="w-32 h-32 mb-6 text-muted-foreground">
@@ -486,29 +475,26 @@ export function LoadingState({
       {description && (
         <p className="text-base text-muted-foreground max-w-md">
           {description}</p>
-  );
-}
+  }
     );
 }
-
 // Empty State with Custom Content
 interface EmptyStateCardProps {
   children: React.ReactNode;
   className?: string;
-}
+};
 
 export function EmptyStateCard({ children, className }: EmptyStateCardProps) {
   return (
     <div
       className={cn(
-        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8',
-        className
+        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className
       )}
     >
-      {children}</div>
+      {children}
+
     );
 }
-
 // Grid Empty State (for when showing empty grid/list items)
 export function GridEmptyState({
   title = 'No items yet',
@@ -516,8 +502,7 @@ export function GridEmptyState({
   onCreate,
   className}: {
   title?: string;
-  description?: string;
-  onCreate?: () => void;
+  description?: string, onCreate?: () => void;
   className?: string;
 }) {
   return (
@@ -537,5 +522,4 @@ export function GridEmptyState({
         }
       />
     </EmptyStateCard>
-    );
-}
+  }

@@ -1,15 +1,14 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ProjectConfig, ProjectFile } from '@/types'
-import { Rocket } from 'lucide-react'
-
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProjectConfig, ProjectFile } from '@/types';
+import { Rocket } from 'lucide-react';
 interface DeploymentScreenProps {
   config: ProjectConfig;
   files: ProjectFile[]
-}
+};
 
-export default function DeploymentScreen({ config }: DeploymentScreenProps) {
+export default function DeploymentScreen() {
   return (
     <Card></Card>
       <CardHeader></CardHeader>
@@ -19,5 +18,4 @@ export default function DeploymentScreen({ config }: DeploymentScreenProps) {
       <CardContent></CardContent>
         <p className="text-gray-600">
           Deployment features for {config.name} coming soon...</p>
-    );
-}
+  }

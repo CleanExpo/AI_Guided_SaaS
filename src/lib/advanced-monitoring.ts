@@ -9,11 +9,11 @@ interface SecurityEvent {
   type: 'attack' | 'breach' | 'suspicious' | 'rate_limit' | 'auth_failure';
   severity: 'critical' | 'high' | 'medium' | 'low';
   source: string;
-  details: Record<string, unknown>;
+  details: Record<string, unknown>,
   timestamp: Date;
   ip?: string;
   userAgent?: string;
-}
+};
 
 interface PerformanceMetric {
   endpoint: string;
@@ -22,21 +22,21 @@ interface PerformanceMetric {
   statusCode: number;
   timestamp: Date;
   memoryUsage: number;
-  cpuUsage: number;
-}
+  cpuUsage: number
+};
 
 interface SystemHealth {
   uptime: number;
-  memoryUsage: {
+    memoryUsage: {
     used: number;
   total: number;
-    percentage: number;
+    percentage: number
   };
   cpuUsage: number;
   activeConnections: number;
   errorRate: number;
   responseTime: number;
-  timestamp: Date;
+  timestamp: Date
 }
 
 class AdvancedMonitoringSystem {
@@ -45,7 +45,9 @@ class AdvancedMonitoringSystem {
   private systemHealth: SystemHealth[] = [];
   private alertThresholds = {
     errorRate: 0.01, // 1%
-    responseTime: 2000, // 2 seconds, memoryUsage: 0.85, // 85%
+    responseTime: 2000,
+  // 2 seconds
+  memoryUsage: 0.85, // 85%
     cpuUsage: 0.80, // 80%
   };
 
@@ -103,7 +105,7 @@ class AdvancedMonitoringSystem {
   monitorSystemHealth(): SystemHealth {
     const health: SystemHealth = {
       uptime: process.uptime(),
-      memoryUsage: {
+    memoryUsage: {
         used: process.memoryUsage().heapUsed,
         total: process.memoryUsage().heapTotal,
         percentage: process.memoryUsage().heapUsed / process.memoryUsage().heapTotal},
@@ -127,10 +129,10 @@ class AdvancedMonitoringSystem {
    */
   getSecurityAnalytics(): {
     totalEvents: number,
-    criticalEvents: number;
-    attackAttempts: number;
+    criticalEvents: number,
+    attackAttempts: number,
     topAttackTypes: Array<{ type: string, count: number }>;
-    recentEvents: SecurityEvent[];
+    recentEvents: SecurityEvent[]
   } {
     const last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const recentEvents = this.securityEvents.filter(
@@ -204,13 +206,13 @@ class AdvancedMonitoringSystem {
    */
   generateMonitoringReport(): {
     timestamp: Date,
-    systemHealth: SystemHealth;
+    systemHealth: SystemHealth,
     securityAnalytics: {
       totalEvents: number,
-      criticalEvents: number;
-      attackAttempts: number;
+      criticalEvents: number,
+      attackAttempts: number,
       topAttackTypes: Array<{ type: string, count: number }>;
-      recentEvents: SecurityEvent[];
+      recentEvents: SecurityEvent[]
     };
     performanceAnalytics: {
       averageResponseTime: number,
@@ -219,8 +221,8 @@ class AdvancedMonitoringSystem {
       throughput: number;
       memoryTrend: Array<{ timestamp: Date, usage: number }>;
     };
-    alerts: Array<{ type: string, message: string; severity: string; timestamp: Date }>;
-    recommendations: string[];
+    alerts: Array<{ type: string, message: string, severity: string, timestamp: Date }>;
+    recommendations: string[]
   } {
     const currentHealth = this.monitorSystemHealth();
     const securityAnalytics = this.getSecurityAnalytics();
@@ -337,10 +339,10 @@ class AdvancedMonitoringSystem {
     health: SystemHealth,
     security: {
       totalEvents: number,
-      criticalEvents: number;
-      attackAttempts: number;
+      criticalEvents: number,
+      attackAttempts: number,
       topAttackTypes: Array<{ type: string, count: number }>;
-      recentEvents: SecurityEvent[];
+      recentEvents: SecurityEvent[]
     },
     performance: {
       averageResponseTime: number,
@@ -375,7 +377,7 @@ class AdvancedMonitoringSystem {
     return recommendations;
   }
 
-  private getRecentAlerts(): Array<{ type: string, message: string; severity: string; timestamp: Date }> {
+  private getRecentAlerts(): Array<{ type: string, message: string, severity: string, timestamp: Date }> {
     // In a real implementation, this would return actual alerts
     return [];
   }

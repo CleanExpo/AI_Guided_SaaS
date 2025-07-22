@@ -1,6 +1,5 @@
 import * as React from "react"
-import { Toast, ToastActionElement, ToastProps } from "@/components/ui/toast"
-
+import { Toast, ToastActionElement, ToastProps } from '@/components/ui/toast';
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
 
@@ -22,7 +21,7 @@ let count = 0
 function genId() {
   count = (count + 1) % Number.MAX_VALUE
   return count.toString()
-}
+};
 
 type ActionType = typeof actionTypes
 
@@ -42,7 +41,7 @@ type Action =
   | {
       type: ActionType["REMOVE_TOAST"]
       toastId?: ToasterToast["id"]
-    }
+    };
 
 interface State {
   toasts: ToasterToast[]
@@ -64,7 +63,7 @@ const addToRemoveQueue = (toastId: string) => {
   }, TOAST_REMOVE_DELAY)
 
   toastTimeouts.set(toastId, timeout)
-}
+};
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -90,7 +89,7 @@ export const reducer = (state: State, action: Action): State => {
           addToRemoveQueue(toast.id)
         }
       )}
-    </div>
+
     );
       return {
         ...state,
@@ -124,7 +123,7 @@ function dispatch(action: Action) {
     listener(memoryState)
   }
       )}
-    </div>
+
     );
 type Toast = Omit<ToasterToast, "id">
 
@@ -135,7 +134,7 @@ function toast({ ...props }: Toast) {
   const update = (props: ToasterToast) =>
     dispatch({
       type: "UPDATE_TOAST",
-      toast: { ...props, id }})
+    toast: { ...props, id }})
   const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
 
   dispatch({
@@ -173,10 +172,11 @@ function useToast() {</ToasterToast>
     toast,
     dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }
       )}
-    </div>
+
     );
-}
+};
 
 export { useToast, toast }</State>
 }
 </typeof>
+}

@@ -1,10 +1,5 @@
 import { Metadata } from 'next';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Lock, Eye, Server, CheckCircle } from 'lucide-react';
 
@@ -51,22 +46,16 @@ export default function SecurityPage() {
         {/* Security Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {securityFeatures.map(feature => {
-            const Icon = feature.icon;
-            return (
-              <Card key={feature.title}>
+            const Icon = feature.icon, return (
+    <Card key={feature.title}>
                 <CardHeader>
                   <Icon className="h-12 w-12 text-primary mb-4" />
                   <CardTitle>{feature.title}</CardTitle>
                   <CardDescription>{feature.description}</CardDescription>
-    );
-          }
-      )}
-    </div>
-        </div>
-        </div>
-        </Card>
-        </CardHeader>
-    );
+  }
+      );}
+
+        </div></Card>
 
         {/* Certifications */}
         <Card className="mb-16">
@@ -90,12 +79,11 @@ export default function SecurityPage() {
                   >
                     {cert.status}</Badge>
                   ))}
-            </div>
 
         {/* Security Practices */}
         <div className="prose prose-lg max-w-none">
           <h2 className="text-2xl font-bold mb-6">Our Security Practices</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md: grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold mb-3">Data Protection</h3>
               <ul className="space-y-2 text-muted-foreground">
@@ -113,10 +101,6 @@ export default function SecurityPage() {
           </Card>
           </CardHeader>
           </CardContent>
+          </div></ul>
           </div>
-          </div>
-          </ul>
-          </div>
-          </ul>
-      );
-}
+  }

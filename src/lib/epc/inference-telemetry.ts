@@ -8,14 +8,14 @@ interface TelemetryEntry {
   inferenceType: 'openai' | 'anthropic' | 'local' | 'other';
   preflightCheck: {
     passed: boolean;
-  score: number;
-    issues: string[];
+    score: number;
+    issues: string[]
   };
   environmentSnapshot: {
     nodeEnv: string,
-    activeServices: string[];
+    activeServices: string[],
     memoryUsage: NodeJS.MemoryUsage;
-    uptime: number;
+    uptime: number
   };
   inference: {
     started: boolean,
@@ -27,11 +27,11 @@ interface TelemetryEntry {
   };
   agentContext?: {
     agentId: string,
-    agentType: string;
-    taskType: string;
+    agentType: string,
+    taskType: string
   };
-  outcome: 'success' | 'failed' | 'blocked' | 'warning';
-}
+  outcome: 'success' | 'failed' | 'blocked' | 'warning'
+};
 
 export class InferenceTelemetry {
   private telemetryDir: string;
@@ -42,9 +42,12 @@ export class InferenceTelemetry {
 
   constructor(projectRoot: string = process.cwd()) {
     this.telemetryDir = path.join(projectRoot, 'telemetry');
-    this.currentLog = path.join(this.telemetryDir, `inference-log-${new Date().toISOString().split('T')[0]}.json`);
+    this.currentLog = path.join(
+      this.telemetryDir,
+      `inference-log-${new Date().toISOString().split('T')[0]}.json`
+    );
     this.epcEngine = new EPCEngine(projectRoot);
-    
+
     this.ensureTelemetryDir();
     this.startAutoFlush();
   }
@@ -66,49 +69,51 @@ export class InferenceTelemetry {
    * Log pre-inference check
    */
   async logPreInference(
-    requestId: string, inferenceType: TelemetryEntry['inferenceType'],
+    requestId: string,
+    inferenceType: TelemetryEntry['inferenceType'],
     agentContext?: TelemetryEntry['agentContext']
   ): Promise<{ allowed: boolean, telemetryId: string }> {
     const preflightResult = await this.epcEngine.performPreflightCheck();
-    
+
     const entry: TelemetryEntry = {
       timestamp: new Date().toISOString(),
       requestId,
       inferenceType,
-      preflightCheck: {
+    preflightCheck: {
         passed: preflightResult.env_check === 'pass',
         score: preflightResult.score,
         issues: [
           ...preflightResult.missing.map(v => `missing: ${v}`),
           ...preflightResult.invalid.map(v => `invalid: ${v}`),
           ...preflightResult.outdated.map(v => `outdated: ${v}`),
-          ...preflightResult.mismatched.map(v => `mismatched: ${v}`)
-        ]
+          ...preflightResult.mismatched.map(v => `mismatched: ${v}`),
+        ],
       },
-      environmentSnapshot: {
+    environmentSnapshot: {
         nodeEnv: process.env.NODE_ENV || 'development',
         activeServices: this.getActiveServices(),
         memoryUsage: process.memoryUsage(),
-        uptime: process.uptime()
-      },
-      inference: {
+        uptime: process.uptime()},
+    inference: {
         started: false,
-        completed: false
-      },
+        completed: false;
+      }},
       agentContext,
-      outcome: preflightResult.action === 'block_inference' ? 'blocked' : 'success'
+      outcome:
+        preflightResult.action === 'block_inference' ? 'blocked' : 'success',
     };
 
     this.buffer.push(entry);
 
     if (preflightResult.action === 'block_inference') {
-      entry.inference.error = 'Blocked by, EPC: ' + preflightResult.recommendations?.join('; ');
+      entry.inference.error =
+        'Blocked by, EPC: ' + preflightResult.recommendations?.join('; ');
       this.logEvent('inference_blocked', entry);
     }
 
     return {
       allowed: preflightResult.action !== 'block_inference',
-      telemetryId: requestId
+      telemetryId: requestId,
     };
   }
 
@@ -140,7 +145,7 @@ export class InferenceTelemetry {
       entry.inference.completed = true;
       entry.inference.duration = Date.now() - entry.inference.startTime;
       entry.outcome = success ? 'success' : 'failed';
-      
+
       if (metadata) {
         entry.inference.tokensUsed = metadata.tokensUsed;
         entry.inference.cost = metadata.cost;
@@ -156,13 +161,13 @@ export class InferenceTelemetry {
    */
   private getActiveServices(): string[] {
     const services: string[] = [];
-    
+
     if (process.env.OPENAI_API_KEY) services.push('openai');
     if (process.env.CLAUDE_API_KEY) services.push('anthropic');
     if (process.env.SUPABASE_URL) services.push('supabase');
     if (process.env.REDIS_HOST) services.push('redis');
     if (process.env.STRIPE_SECRET_KEY) services.push('stripe');
-    
+
     return services;
   }
 
@@ -174,11 +179,14 @@ export class InferenceTelemetry {
       event: eventType,
       timestamp: new Date().toISOString(),
       requestId: entry.requestId,
-      details: entry
+      details: entry,
     };
 
     // Write to event log
-    const eventLog = path.join(this.telemetryDir, `events-${new Date().toISOString().split('T')[0]}.log`);
+    const eventLog = path.join(
+      this.telemetryDir,
+      `events-${new Date().toISOString().split('T')[0]}.log`
+    );
     fs.appendFileSync(eventLog, JSON.stringify(event) + '\n');
   }
 
@@ -190,7 +198,7 @@ export class InferenceTelemetry {
 
     try {
       let existingData: TelemetryEntry[] = [];
-      
+
       if (fs.existsSync(this.currentLog)) {
         const content = fs.readFileSync(this.currentLog, 'utf-8');
         if (content) {
@@ -200,7 +208,7 @@ export class InferenceTelemetry {
 
       const allData = [...existingData, ...this.buffer];
       fs.writeFileSync(this.currentLog, JSON.stringify(allData, null, 2));
-      
+
       this.buffer = [];
     } catch (error) {
       console.error('Failed to flush telemetry, buffer:', error);
@@ -212,7 +220,7 @@ export class InferenceTelemetry {
    */
   async getStatistics(timeRange?: { start: Date, end: Date }): Promise<{
     totalInferences: number,
-    blocked: number;
+    blocked: number,
     failed: number;
     successful: number;
     averageDuration: number;
@@ -226,11 +234,12 @@ export class InferenceTelemetry {
       successful: 0,
       averageDuration: 0,
       totalCost: 0,
-      topIssues: [] as { issue: string, count: number }[]
+      topIssues: [] as { issue: string, count: number }[],
     };
 
     try {
-      const files = fs.readdirSync(this.telemetryDir)
+      const files = fs
+        .readdirSync(this.telemetryDir)
         .filter(f => f.startsWith('inference-log-') && f.endsWith('.json'));
 
       const issueCount = new Map<string, number>();
@@ -245,11 +254,12 @@ export class InferenceTelemetry {
         for (const entry of data) {
           if (timeRange) {
             const entryTime = new Date(entry.timestamp);
-            if (entryTime < timeRange.start || entryTime > timeRange.end) continue;
+            if (entryTime < timeRange.start || entryTime > timeRange.end)
+              continue;
           }
 
           stats.totalInferences++;
-          
+
           if (entry.outcome === 'blocked') stats.blocked++;
           else if (entry.outcome === 'failed') stats.failed++;
           else if (entry.outcome === 'success') stats.successful++;
@@ -279,7 +289,6 @@ export class InferenceTelemetry {
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10)
         .map(([issue, count]) => ({ issue, count }));
-
     } catch (error) {
       console.error('Failed to calculate, statistics:', error);
     }
@@ -296,7 +305,7 @@ export class InferenceTelemetry {
 
     try {
       const files = fs.readdirSync(this.telemetryDir);
-      
+
       for (const file of files) {
         const match = file.match(/(\d{4}-\d{2}-\d{2})/);
         if (match) {

@@ -11,7 +11,7 @@ export interface AgentMetrics {
   last_active: Date;
   total_runtime: number;
   error_count: number
-}
+};
 
 export interface AgentRegistration {
   agent: AgentConfig;
@@ -21,7 +21,7 @@ export interface AgentRegistration {
   health_status: 'healthy' | 'warning' | 'critical' | 'offline'
   tags: string[];
   capabilities_verified: boolean
-}
+};
 
 export interface RegistryQuery {
   role?: string
@@ -30,14 +30,14 @@ export interface RegistryQuery {
   health_status?: string[]
   priority_range?: [number, number]
   availability?: boolean
-}
+};
 
 export interface RegistryEvent {
   type: 'registration' | 'deregistration' | 'status_change' | 'metric_update' | 'health_check'
   agent_id: string;
-  timestamp: Date, data;
+  timestamp: Date, data,
   severity: 'info' | 'warning' | 'error'
-}
+};
 
 export class AgentRegistry {
   private static instance: AgentRegistry
@@ -65,7 +65,7 @@ export class AgentRegistry {
    */
   async registerAgent(agent: AgentConfig, tags: string[] = []): Promise<boolean> {
     try {
-      console.log(`📝 Registering, agent: ${agent.name} (${agent.role})`)
+      `)
 
       const registration: AgentRegistration = {
         agent,
@@ -87,14 +87,13 @@ export class AgentRegistry {
         type: 'registration',
         agent_id: agent.agent_id,
         timestamp: new Date(),
-        data: { role: agent.role, capabilities: agent.capabilities.length },
+    data: { role: agent.role, capabilities: agent.capabilities.length },
         severity: 'info'
       })
 
       // Store in memory system
       await this.storeAgentInMemory(registration)
 
-      console.log(`✅ Agent, registered: ${agent.agent_id}`)
       return true
 
     } catch (error) {
@@ -107,7 +106,6 @@ export class AgentRegistry {
    * Auto-discover and register all available agents
    */
   async autoRegisterAgents(): Promise<number> {
-    console.log('🔍 Auto-registering discovered agents...')
 
     const discoveryResult = await this.loader.discoverAgents()
     let registeredCount = 0
@@ -130,7 +128,6 @@ export class AgentRegistry {
       if (success) registeredCount++
     }
 
-    console.log(`✅ Auto-registered ${registeredCount} agents`)
     return registeredCount
   }
 
@@ -201,7 +198,6 @@ export class AgentRegistry {
    * Get best agent for specific task
    */
   getBestAgentForTask(taskType: string, requirements: string[] = []): AgentRegistration | null {
-    console.log(`🎯 Finding best agent for, task: ${taskType}`)
 
     // Define task-to-capability mappings
     const taskCapabilityMap: Record<string, string[]> = {
@@ -222,10 +218,7 @@ export class AgentRegistry {
 
     const candidates = this.findAgents(query)
 
-    if (candidates.length === 0) {
-      console.log(`⚠️ No suitable agents found for, task: ${taskType}`)
-      return null
-    }
+    if (candidates.length === 0) { return: null }
 
     // Score candidates based on multiple factors
     const scoredCandidates = candidates.map(candidate => {
@@ -258,7 +251,7 @@ export class AgentRegistry {
     scoredCandidates.sort((a, b) => b.score - a.score)
     const best = scoredCandidates[0].candidate
 
-    console.log(`✅ Selected, agent: ${best.agent.name} (score: ${scoredCandidates[0].score.toFixed(1)})`)
+    })`)
     
     return best
   }
@@ -297,7 +290,7 @@ export class AgentRegistry {
       type: 'metric_update',
       agent_id: agentId,
       timestamp: new Date(),
-      data: { success_rate: metrics.success_rate, total_tasks: metrics.total_tasks },
+    data: { success_rate: metrics.success_rate, total_tasks: metrics.total_tasks },
       severity: 'info'
     })
   }
@@ -308,9 +301,9 @@ export class AgentRegistry {
   getRegistryStatus(): Record<string, any> {
     const status = {
       total_agents: this.registrations.size,
-      agents_by_health: {},
-      agents_by_role: {},
-      agents_by_tags: {},
+    agents_by_health: {},
+    agents_by_role: {},
+    agents_by_tags: {},
       overall_metrics: this.calculateOverallMetrics(),
       recent_events: this.eventHistory.slice(-20),
       uptime: Date.now() - (this.healthCheckInterval ? 0 : Date.now()) // Simplified
@@ -360,11 +353,10 @@ export class AgentRegistry {
       type: 'deregistration',
       agent_id: agentId,
       timestamp: new Date(),
-      data: { reason: 'manual_deregistration' },
+    data: { reason: 'manual_deregistration' },
       severity: 'info'
     })
 
-    console.log(`📤 Agent, deregistered: ${agentId}`)
     return true
   }
 
@@ -464,7 +456,7 @@ export class AgentRegistry {
         }]
       })
     } catch (error) {
-      console.log('⚠️ Failed to store agent in memory:', error)
+
     }
   }
 
@@ -478,7 +470,7 @@ export class AgentRegistry {
 
     // Log significant events to console
     if (event.severity === 'error' || event.type === 'registration') {
-      console.log(`📋 Registry: Event, [${event.type}] ${event.agent_id} - ${JSON.stringify(event.data)}`)
+      }`)
     }
   }
 
@@ -488,7 +480,6 @@ export class AgentRegistry {
       this.performHealthChecks()
     }, 5 * 60 * 1000)
 
-    console.log('💓 Health check monitoring started')
   }
 
   private performHealthChecks() {
@@ -501,7 +492,7 @@ export class AgentRegistry {
           type: 'health_check',
           agent_id: registration.agent.agent_id,
           timestamp: new Date(),
-          data: { old_status: oldStatus, new_status: registration.health_status },
+    data: { old_status: oldStatus, new_status: registration.health_status },
           severity: registration.health_status === 'critical' ? 'error' : 'warning'
         })
       }
@@ -516,7 +507,7 @@ export class AgentRegistry {
       clearInterval(this.healthCheckInterval)
       this.healthCheckInterval = null
     }
-    console.log('📤 Agent registry shutdown')
+
   }
 
   updateAgentStatus(agentId: string, status: 'healthy' | 'warning' | 'critical' | 'offline'): void {
@@ -534,12 +525,12 @@ export class AgentRegistry {
 export async function initializeAgentRegistry(): Promise<number> {
   const registry = AgentRegistry.getInstance()
   return registry.autoRegisterAgents()
-}
+};
 
 export function findBestAgent(taskType: string, requirements?: string[]): AgentRegistration | null {
   const registry = AgentRegistry.getInstance()
   return registry.getBestAgentForTask(taskType, requirements)
-}
+};
 
 export function getRegistryStatus(): Record<string, any> {
   const registry = AgentRegistry.getInstance()

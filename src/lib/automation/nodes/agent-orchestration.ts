@@ -41,8 +41,10 @@ export function createAgentNode(
         executionId: '{{ $execution.id }}',
         workflowId: '{{ $workflow.id }}'
       }),
-      options: {
-        timeout: config.timeout || 300000, // 5 minutes default, retry: config.retryConfig || {
+    options: {
+        timeout: config.timeout || 300000,
+  // 5 minutes default
+  retry: config.retryConfig || {
           maxRetries: 3,
           waitBetweenRetries: 5000
         }
@@ -176,7 +178,7 @@ return {
     {
       agentType: 'architect',
       taskType: 'design_system',
-      parameters: {
+    parameters: {
         includeDatabase: true,
         includeAPI: true,
         includeInfrastructure: true
@@ -197,7 +199,7 @@ return {
       {
         agentType: 'frontend',
         taskType: 'implement_ui',
-        parameters: {
+    parameters: {
           framework: 'nextjs',
           styling: 'tailwind'
         }
@@ -212,7 +214,7 @@ return {
       {
         agentType: 'qa',
         taskType: 'test_application',
-        parameters: {
+    parameters: {
           testTypes: ['unit', 'integration', 'e2e']
         }
       },
@@ -235,9 +237,9 @@ return {
       type: 'n8n-nodes-base.splitInBatches',
       typeVersion: 1,
       position: [850, 400],
-      parameters: {
+    parameters: {
         batchSize: 1,
-        options: {}
+    options: {}
       }
     }
     nodes.push(splitNode)
@@ -248,7 +250,7 @@ return {
       {
         agentType: 'frontend',
         taskType: 'implement_ui',
-        parameters: {
+    parameters: {
           framework: 'nextjs',
           styling: 'tailwind',
           responsive: true
@@ -264,7 +266,7 @@ return {
       {
         agentType: 'backend',
         taskType: 'implement_api',
-        parameters: {
+    parameters: {
           database: 'postgresql',
           auth: 'jwt',
           api: 'rest'
@@ -280,7 +282,7 @@ return {
       type: 'n8n-nodes-base.merge',
       typeVersion: 2,
       position: [1250, 400],
-      parameters: {
+    parameters: {
         mode: 'combine',
         combinationMode: 'multiplex'
       }
@@ -293,7 +295,7 @@ return {
       {
         agentType: 'qa',
         taskType: 'test_full_stack',
-        parameters: {
+    parameters: {
           testTypes: ['unit', 'integration', 'e2e', 'performance']
         }
       },
@@ -307,7 +309,7 @@ return {
       {
         agentType: 'devops',
         taskType: 'deploy_application',
-        parameters: {
+    parameters: {
           environment: 'production',
           monitoring: true,
           ci_cd: true

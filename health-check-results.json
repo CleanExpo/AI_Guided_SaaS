@@ -1,0 +1,1701 @@
+{
+  "timestamp": "2025-07-22T05:16:18.765Z",
+  "typescript": {
+    "errors": 10533,
+    "warnings": 0,
+    "files": [
+      {
+        "file": "src/lib/agents/archon/ToolsRefinerAgent.ts",
+        "count": 243
+      },
+      {
+        "file": "src/lib/mcp/mcp-orchestrator.ts",
+        "count": 221
+      },
+      {
+        "file": "src/lib/agents/bmad/ArchitectAgent.ts",
+        "count": 212
+      },
+      {
+        "file": "src/lib/config.ts",
+        "count": 208
+      },
+      {
+        "file": "src/lib/agents/archon/AgentRefinerAgent.ts",
+        "count": 175
+      },
+      {
+        "file": "src/lib/agents/archon/AdvisorAgent.ts",
+        "count": 173
+      },
+      {
+        "file": "src/lib/agents/bmad/ProjectManagerAgent.ts",
+        "count": 161
+      },
+      {
+        "file": "src/lib/admin-queries.ts",
+        "count": 158
+      },
+      {
+        "file": "src/lib/agents/bmad/AnalystAgent.ts",
+        "count": 146
+      },
+      {
+        "file": "src/components/ui/form-enhanced.tsx",
+        "count": 145
+      }
+    ]
+  },
+  "eslint": {
+    "errors": 398,
+    "warnings": 2,
+    "files": [
+      {
+        "file": "tests/chaos/chaos-monkey.ts",
+        "errors": 13,
+        "warnings": 0
+      },
+      {
+        "file": "mcp/index.js",
+        "errors": 9,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/admin/AdminAnalytics.tsx",
+        "errors": 9,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/mcp/index.ts",
+        "errors": 9,
+        "warnings": 1
+      },
+      {
+        "file": "src/lib/agents/runners/frontend-agent.ts",
+        "errors": 8,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin/analytics/page.tsx",
+        "errors": 6,
+        "warnings": 1
+      },
+      {
+        "file": "src/components/builder/ProCodeEditor.tsx",
+        "errors": 6,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/runners/backend-agent.ts",
+        "errors": 6,
+        "warnings": 0
+      },
+      {
+        "file": "mcp/cli/env-manager.js",
+        "errors": 4,
+        "warnings": 0
+      },
+      {
+        "file": "mcp/tools/environment-manager.js",
+        "errors": 4,
+        "warnings": 0
+      },
+      {
+        "file": "src/packages/causal-engine/assistant-utils.ts",
+        "errors": 4,
+        "warnings": 0
+      },
+      {
+        "file": "mcp/tools/platform-sync.js",
+        "errors": 3,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/autonomous-fix-applicator.ts",
+        "errors": 3,
+        "warnings": 0
+      },
+      {
+        "file": "src/utils/validation.ts",
+        "errors": 3,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/build-sync-agent.ts",
+        "errors": 2,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/production-logger.ts",
+        "errors": 2,
+        "warnings": 0
+      },
+      {
+        "file": "src/packages/self-check/causal-feedback-replayer.ts",
+        "errors": 2,
+        "warnings": 0
+      },
+      {
+        "file": "tests/setup.ts",
+        "errors": 2,
+        "warnings": 0
+      },
+      {
+        "file": "mcp/dist/wsl-sequential-thinking-server.js",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "mcp/wsl-sequential-thinking-server.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/activate-enhanced-orchestration.js",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/agent-health-check.js",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/autonomous-doc-finder.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/comprehensive-health-check.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/env-cli.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/execute-deployment-fixes.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/initialize-agent-system.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/load-deployment-agents.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/mcp-autonomous-integration.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/mcp-doc-agent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/monitor-agents.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/run-agent.js",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/run-chaos-tests.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/test-agent-workflow.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "scripts/test-mcps.js",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin-direct/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin/dashboard/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin/debug/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin/login/layout.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin/login/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin/mcp/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/admin/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/analytics/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api-docs/[slug]/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api-docs/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/analytics/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/auth/login/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/debug/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/direct-auth/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/stats/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/users/[id]/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/admin/users/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/agent-chat/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/agents/pulse-config/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/analytics/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/auth/[...nextauth]/options.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/auth/register/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/auth/session/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/backend-example/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/config/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/cycle-detection/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/email/test/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/env/status/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/feedback/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/health/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/mcp/status/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/n8n/execute/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/n8n/webhook/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/n8n/workflows/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/requirements/process/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/roadmap/validate/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/support/chat/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/templates/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/validated-chat/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/visual/analyze/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/visual/generate/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/visual/upload/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/api/webhooks/stripe/route.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/auth/signin/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/auth/signup/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/blog/[id]/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/blog/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/builder/no-code/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/builder/pro-code/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/collaborate/dashboard/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/collaborate/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/community/guidelines/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/community/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/config/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/contact/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/cookies/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/dashboard/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/demo/data-flexibility/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/demo/design-system/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/docs/[slug]/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/docs/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/enterprise/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/features/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/form-builder/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/gdpr/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/help/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/layout.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/press/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/pricing/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/privacy/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/projects/[id]/editor/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/projects/new-guided/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/security/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/status/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/templates/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/terms/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/tutorials/[id]/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/tutorials/learning-path/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/tutorials/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/ui-builder/page.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/app.config.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/AssistantPrompt.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/BuilderCanvas.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/CodeViewer.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/ComponentPropsEditor.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/ComponentRenderer.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/DeploymentPanel.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/PreviewPane.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/Sidebar.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/components/Toolbar.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/lib/componentList.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/pages/index.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/apps/ui-builder/store/useBuilderStore.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/AIChat.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/AIDocumentationGenerator.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/AdvancedCodeEditor.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/AdvancedDocumentationDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/AgentPulseMonitor.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ClaudeCodeDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ClientRequirementsCapture.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ContainerMonitor.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/Dashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/DataSourceManager.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/DeploymentScreen.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/DesignSystemShowcase.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/DevelopmentWorkflow.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/EnhancedUIGenerator.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/EnvStatusDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/EnvVariableEditor.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/FeedbackWidget.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/FlowchartBuilder.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/GuidedProjectBuilder.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/InferenceSafeMode.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/LandingPage.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/LandingPageEnhanced.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/LandingPageProduction.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/LiveProjectPreview.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/MDFolderAgent.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ProductionShowcasePage.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ProgressTracker.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ProjectGenerator.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ShowcaseLandingPage.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/TemplateManager.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/WelcomeScreen.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/admin/AdminDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/admin/AdminPanel.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/admin/EnhancedAdminPanel.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/admin/SafeModeHealthCheck.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/admin/SelfCheckTrigger.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/admin/SystemResourceMonitor.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/auth/SignInForm.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/backend/BackendSelector.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/builder/NoCodeBuilder.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/collaboration/CollaborationDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/collaboration/CollaborationWorkspace.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/config/ConfigurationDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/dashboard/DashboardEnhanced.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/dashboard/EnterpriseDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/docs/DocumentationViewer.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/forms/ValidatedProjectForm.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/health/AlertsPanel.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/health/HealthCheckDashboard.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/health/SystemMetrics.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/health/TaskQueueVisualizer.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ide/KiroIDE.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ide/KiroProjectSetup.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/knowledge/RAGKnowledgeBase.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/layout/Footer.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/layout/Header.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/layout/ResponsiveLayout.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/marketplace/TemplateMarketplace.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/mcp/MCPOrchestrator.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/navigation.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/providers.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/support/AISupportChat.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/alert.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/button-basic.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/button-enhanced.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/button-premium.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/card-enhanced.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/collapsible.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/dropdown-menu.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/empty-states.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/form-enhanced.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/icons.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/input.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/label.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/loading.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/logo.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/navigation-menu.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/navigation.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/progress.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/radio-group.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/resizable.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/scroll-area.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/select.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/separator.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/sheet.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/switch.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/tabs.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/textarea.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/toast.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/toaster.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/use-toast.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/hooks/useKiroIDE.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/hooks/useMCP.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/hooks/useN8nAutomation.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/hooks/useRAG.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/admin-auth.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/admin-queries.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/admin.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/advanced-monitoring.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/AgentCommunication.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/AgentCoordinator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/AgentLoader.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/AgentMonitor.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/AgentOrchestrator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/AgentRegistry.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/CPURateLimiter.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/ContainerizedPulseOrchestrator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/DockerAgentManager.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/GracefulShutdownManager.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/PulsedAgentOrchestrator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/archon/AdvisorAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/archon/AgentRefinerAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/archon/PromptRefinerAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/archon/ToolsRefinerAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/base/Agent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/base/ValidatedAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/bmad/AnalystAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/bmad/ArchitectAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/bmad/ProjectManagerAgent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/index.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/runners/architect-agent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/runners/base-agent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/runtime/AgentOrchestrator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/agents/runtime/AgentRuntime.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/ai.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/ai/AIService.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/analytics.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/analytics/PredictiveAnalytics.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/api-middleware.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/api/rate-limiter.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/auth-helpers.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/auth.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/automation/n8n-client.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/automation/nodes/agent-orchestration.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/automation/workflows/notification-system.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/automation/workflows/project-deployment.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/automation/workflows/testing-automation.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/backend/adapter-factory.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/backend/adapters/nocodb.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/backend/adapters/strapi.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/backend/adapters/supabase.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/backend/migration.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/backend/types.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/breadcrumb/breadcrumb-agent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/claude-code-integration.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/collaboration.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/config.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/data/MockDataGenerator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/database.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/database/connection-pool.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/design-system.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/design-system/components.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/design-system/theme.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/docs/DynamicDocumentationSystem.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/email.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/env.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/env/EnvManager.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/epc/epc-engine.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/epc/inference-telemetry.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/epc/self-heal-agent.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/health/AlertingService.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/health/HealthCheckService.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/health/database-health.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/health/external-services-health.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/hierarchical-memory-system.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/ide/kiro-client.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/ide/kiro-server-mock.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/knowledge/document-loader.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/knowledge/rag-engine.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/knowledge/text-splitter.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/knowledge/vector-store.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/mcp/mcp-orchestrator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/mcp/mcp-registry.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/project-storage.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/requirements/ClientRequirementsProcessor.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/roadmap/RoadmapValidator.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/templates.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/theme/dark-mode.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/token-optimization-engine.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/tutorials/InteractiveTutorialSystem.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/validation/decorators.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/lib/validation/schemas.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/middleware.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/packages/causal-engine/explorer-ui.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/packages/self-check/dependency-auditor.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/types/monitoring.d.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/types/next-auth.d.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/utils/constants.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/utils/helpers.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "tests/e2e/comprehensive-validation.spec.ts",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "tests/simulation/client-simulation-runner.ts",
+        "errors": 1,
+        "warnings": 0
+      }
+    ]
+  },
+  "tests": {
+    "failed": 0,
+    "passed": 0,
+    "coverage": 0
+  },
+  "build": {
+    "success": false,
+    "errors": [
+      "Error: ",
+      " \u001b[2m50\u001b[0m |   const [error, setError] = useState<string | null>(null)",
+      " \u001b[2m50\u001b[0m |   const [error, setError] = useState<string | null>(null)",
+      "    Syntax Error",
+      "Error: ",
+      "    Syntax Error",
+      "Error: ",
+      "    Syntax Error",
+      "Error: ",
+      "    Syntax Error"
+    ]
+  },
+  "dependencies": {
+    "missing": 0,
+    "outdated": 18,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 3,
+      "high": 0,
+      "critical": 0,
+      "total": 3
+    }
+  },
+  "fileSystem": {
+    "missing": [],
+    "invalid": []
+  },
+  "performance": {
+    "buildTime": 14.292,
+    "bundleSize": 0
+  },
+  "healthScore": 27
+}

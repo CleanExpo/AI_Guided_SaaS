@@ -3,13 +3,13 @@
 import { create } from 'zustand';
 
 type ComponentProps = {
-  [key: string]: string;
+  [key: string]: string
 };
 
 type PropSchema = {
   key: string;
   label: string;
-  type: 'text' | 'textarea';
+  type: 'text' | 'textarea'
 };
 
 type ComponentInstance = {
@@ -24,10 +24,10 @@ type BuilderStore = {
   selectedId: string | null;
   addComponent: (type: string) => void;
   selectComponent: (id: string) => void;
-  updateComponentProps: (id: string, newProps: ComponentProps) => void;
+  updateComponentProps: (id: string; newProps: ComponentProps) => void;
   saveProject: () => void;
   loadProject: () => void;
-  reset: () => void;
+  reset: () => void
 };
 
 function getDefaultProps(type: string): ComponentProps {
@@ -54,39 +54,44 @@ function getDefaultSchema(type: string): PropSchema[] {
     case 'card':
       return [
         { key: 'title', label: 'Card Title', type: 'text' },
-        { key: 'body', label: 'Card Body', type: 'textarea' }];
+        { key: 'body', label: 'Card Body', type: 'textarea' },
+      ];
     case 'input':
       return [{ key: 'placeholder', label: 'Placeholder', type: 'text' }];
     case 'hero':
       return [
         { key: 'heading', label: 'Heading', type: 'text' },
-        { key: 'subheading', label: 'Subheading', type: 'text' }];
+        { key: 'subheading', label: 'Subheading', type: 'text' },
+      ];
     case 'two-col':
       return [
         { key: 'left', label: 'Left Column Text', type: 'textarea' },
-        { key: 'right', label: 'Right Column Text', type: 'textarea' }];
-    default:
-      return [];
+        { key: 'right', label: 'Right Column Text', type: 'textarea' },
+      ];
+    default: return []
   }
-}
+};
 
 export const useBuilderStore = create<BuilderStore>((set, get) => ({
   components: [],
   selectedId: null,
-  addComponent: (type) =>
-    set((state) => ({
+  addComponent: type =>
+    set(state => ({
       components: [
         ...state.components,
         {
           id: `${type}-${Date.now()}`,
           type,
           props: getDefaultProps(type),
-          schema: getDefaultSchema(type)}]})),
-  selectComponent: (id) => set({ selectedId: id }),
+          schema: getDefaultSchema(type)},
+      ],
+    })),
+  selectComponent: id => set({ selectedId: id }),
   updateComponentProps: (id, newProps) =>
-    set((state) => ({
-      components: state.components.map((c) =>
-        c.id === id ? { ...c, props: { ...c.props, ...newProps } } : c
+    set(state => ({
+      components: state.components.map(c =>
+        c.id === id ? { ...c,
+    props: { ...c.props, ...newProps } } : c
       )})),
   saveProject: () => {
     const { components } = get();

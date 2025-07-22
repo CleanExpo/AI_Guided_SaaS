@@ -1,29 +1,18 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { Switch } from '@/components/ui/switch'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Code2, 
-  Smartphone, 
-  Monitor, 
-  Server, 
-  Package,
-  FileCode2,
-  Settings,
-  Rocket,
-  CheckCircle
-} from 'lucide-react'
-import { useKiroIDE } from '@/hooks/useKiroIDE'
-import { useToast } from '@/components/ui/use-toast'
-
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Code2, Smartphone, Monitor, Server, Package, FileCode2, Settings, Rocket, CheckCircle } from 'lucide-react';
+import { useKiroIDE } from '@/hooks/useKiroIDE';
+import { useToast } from '@/components/ui/use-toast';
 interface KiroProjectSetupProps {
   onProjectCreated?: (projectId: string) => void
   initialData?: {
@@ -32,7 +21,7 @@ interface KiroProjectSetupProps {
     type?: string
     framework?: string
   }
-}
+};
 
 export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectSetupProps) {
   const { toast } = useToast()
@@ -49,7 +38,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
       startCommand: '',
       testCommand: '',
       outputDirectory: '',
-      environment: {} as Record<string, string>,</string>
+    environment: {} as Record<string, string>,</string>
       dependencies: {} as Record<string, string>
     }
       </string>
@@ -124,10 +113,9 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         variant: 'destructive'
       }
       )}
-    </div>
-    );
-  }
 
+    );
+}
   const generateProjectStructure = (data: typeof projectData, features) => {
     const structure = {
       name: data.name, type: 'directory' as const path: '/',
@@ -150,7 +138,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
           name: data.name.toLowerCase().replace(/\s+/g, '-'),
           version: '1.0.0',
           description: data.description,
-          scripts: {
+    scripts: {
             dev: data.settings.startCommand || 'npm run dev',
             build: data.settings.buildCommand || 'npm run build',
             test: data.settings.testCommand || 'npm test'
@@ -159,7 +147,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         }, null, 2)
       }
       )}
-    </div>
+
     );
     // TypeScript config
     if (features.typescript) {
@@ -170,7 +158,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         content: generateTsConfig(data.type)
       }
       )}
-    </div>
+
     );
     // ESLint config
     if (features.eslint) {
@@ -181,7 +169,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         content: generateEslintConfig(data.type, features.typescript)
       }
       )}
-    </div>
+
     );
     // Framework-specific structure
     switch (data.framework) {
@@ -231,7 +219,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         { name: 'Dockerfile', type: 'file', path: '/Dockerfile', content: generateDockerfile(data.type, data.framework) },
         { name: 'docker-compose.yml', type: 'file', path: '/docker-compose.yml', content: generateDockerCompose(data.name) }
       )}
-    </div>
+
     );
     // CI/CD files
     if (features.ci_cd) {
@@ -252,7 +240,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         }]
       }
       )}
-    </div>
+
     );
     return structure
   }
@@ -273,7 +261,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                 value={projectData.name}
                 onChange={(e) => setProjectData({ ...projectData, name: e.target.value}
       )}
-    </div>
+
   );
                 placeholder="My Awesome Project"
               /></Input>
@@ -285,7 +273,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                 value={projectData.description}
                 onChange={(e) => setProjectData({ ...projectData, description: e.target.value}
       )}
-    </div>
+
   );
                 placeholder="A brief description of your project..."
                 rows={3}
@@ -301,15 +289,12 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                     size="sm"
                     onClick={() => setProjectData({ ...projectData: type, type.value}
       )}
-    </div>
+
   );
                     className="flex flex-col items-center gap-1 h-auto py-3"
                   ></Button>
                     <type.icon className="h-5 w-5" /></type>
-                    <span className="text-xs">{type.label}</span>
-                  </Button>
-                ))}
-              </div>
+                    <span className="text-xs">{type.label}</span>))}
 
             <div className="space-y-2"></div>
               <Label htmlFor="framework">Framework</Label>
@@ -317,7 +302,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                 value={projectData.framework}
                 onValueChange={(value) => setProjectData({ ...projectData, framework: value}
       )}
-    </div>
+
     );
               ></Select>
                 <SelectTrigger id="framework"></SelectTrigger>
@@ -347,7 +332,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                       onCheckedChange={(checked) => 
                         setFeatures({ ...features, [key]: checked}
       )}
-    </div>
+
   );
                     /></Switch>))}
 
@@ -360,10 +345,10 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                     value={projectData.settings.buildCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-                      settings: { ...projectData.settings, buildCommand: e.target.value}
+    settings: { ...projectData.settings, buildCommand: e.target.value}
                     }
       )}
-    </div>
+
     );
                     placeholder="npm run build"
                   /></Input>
@@ -374,10 +359,10 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                     value={projectData.settings.startCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-                      settings: { ...projectData.settings, startCommand: e.target.value}
+    settings: { ...projectData.settings, startCommand: e.target.value}
                     }
       )}
-    </div>
+
     );
                     placeholder="npm run dev"
                   /></Input>
@@ -388,10 +373,10 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                     value={projectData.settings.testCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-                      settings: { ...projectData.settings, testCommand: e.target.value}
+    settings: { ...projectData.settings, testCommand: e.target.value}
                     }
       )}
-    </div>
+
     );
                     placeholder="npm test"
                   /></Input>
@@ -414,15 +399,14 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                 <Badge variant="outline" className="text-yellow-500">
                   Disconnected</Badge>
               )}
-            </div>
+
             <Button 
               onClick={handleCreateProject}
               disabled={loading || !projectData.name}
             ></Button>
               <Rocket className="h-4 w-4 mr-2" />
               Create Project</Rocket>
-      );
-}
+  }
 
 // Helper functions for generating file contents
 function generateGitignore(projectType: string): string {
@@ -533,21 +517,17 @@ function generateEslintConfig(projectType: string, typescript: boolean): string 
 }
 
 function generateNextLayout(name: string): string {
-  return `import type { Metadata } from 'next'
+  return `import type {  Metadata  } from 'next'
 
 export const metadata: Metadata = {
   title: '${name}',
-  description: 'Generated by Kiro IDE'}
+  description: 'Generated by Kiro IDE'};
 
-export default function RootLayout({
-  children}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout() {
   return (
     <html lang="en"></html>
       <body>{children}</body>
-    );
-}`
+  }`
 }
 
 function generateReactApp(name: string): string {
@@ -558,8 +538,7 @@ function App() {
     <div className="App"></div>
       <h1>Welcome to ${name}</h1>
       <p>Edit src/App.tsx to get started</p>
-    );
-}
+  };
 
 export default App`
 }
@@ -575,7 +554,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode></React>
-    <App /></App>
+    <App />
   </React.StrictMode>
 )`
 }
@@ -607,7 +586,6 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 
 // Start server
 app.listen(PORT, () => {
-  console.log(\`Server is running on port \${PORT}\`)
 })`
 }
 
@@ -622,7 +600,7 @@ function generateHtmlTemplate(name: string): string {
     <title>${name}</title>
   <body></body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
   </body>
 </html>`
 }
@@ -706,13 +684,13 @@ function generateGithubWorkflow(name: string): string {
 jobs:
  , test:
     runs-on: ubuntu-latest, steps:
-    - uses: actions/checkout@v3
+    -, uses: actions/checkout@v3
     
     -, name: Use Node.js, uses: actions/setup-node@v3, with:
         node-version: '18',
         cache: 'npm'
     
     - run: npm ci
-    - run: npm run build --if-present
+    -, run: npm run build --if-present
     -, run: npm test`
 }

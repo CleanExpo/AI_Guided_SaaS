@@ -14,7 +14,7 @@ export interface AdminUser {
   lastLogin: Date;
   createdAt: Date;
   permissions: string[]
-}
+};
 
 export interface AdminSession {
   adminId: string;
@@ -36,7 +36,7 @@ const MASTER_ADMIN = {
   id: 'master_admin_001',
   email: process.env.ADMIN_EMAIL || 'admin@aiguidedSaaS.com',
   name: 'Master Administrator',
-  role: 'super_admin' as const status: 'active' as const password: process.env.ADMIN_PASSWORD || 'AdminSecure2024!'; permissions: [
+  role: 'super_admin' as const status: 'active' as const password: process.env.ADMIN_PASSWORD || 'AdminSecure2024!', permissions: [
     'manage_users',
     'moderate_content',
     'view_analytics',
@@ -45,11 +45,11 @@ const MASTER_ADMIN = {
     'security_controls',
     'emergency_access'
   ]
-}
+};
 
 export class AdminAuthService {
   private static instance: AdminAuthService
-  private jwtSecret: string
+  private, jwtSecret: string
   private, sessionSecret: string
 
   constructor() {
@@ -74,17 +74,16 @@ export class AdminAuthService {
       }
 
       // Check master admin credentials - allow any of the valid admin emails
-      console.log('Admin login attempt:', { email, adminPanelEnabled: process.env.ENABLE_ADMIN_PANEL })
-      
       if (MASTER_ADMIN_EMAILS.includes(email) && password === MASTER_ADMIN.password) {
-        console.log('Admin login successful for:', email)
         return {
           id: MASTER_ADMIN.id,
-          email: email, // Use the email they logged in with, name: MASTER_ADMIN.name,
+          email: email,
+  // Use the email they logged in with
+  name: MASTER_ADMIN.name,
           role: MASTER_ADMIN.role,
           status: MASTER_ADMIN.status,
           lastLogin: new Date(),
-          createdAt: new Date('2024-01-01'); permissions: MASTER_ADMIN.permissions
+          createdAt: new Date('2024-01-01'), permissions: MASTER_ADMIN.permissions
         }
       }
 
@@ -104,11 +103,13 @@ export class AdminAuthService {
       const payload: Omit<AdminSession, 'iat' | 'exp'> = {
         adminId: admin.id,
         email: admin.email,
-        role: admin.role; permissions: admin.permissions
+        role: admin.role, permissions: admin.permissions
       }
 
       return jwt.sign(payload, this.jwtSecret, {
-        expiresIn: '8h', // 8 hour session, issuer: 'ai-guided-saas-admin',
+        expiresIn: '8h',
+  // 8 hour session
+  issuer: 'ai-guided-saas-admin',
         audience: 'admin-panel'
       })
     } catch (error) {
@@ -261,7 +262,7 @@ export class AdminAuthService {
           role: MASTER_ADMIN.role,
           status: MASTER_ADMIN.status,
           lastLogin: new Date(),
-          createdAt: new Date('2024-01-01'); permissions: MASTER_ADMIN.permissions
+          createdAt: new Date('2024-01-01'), permissions: MASTER_ADMIN.permissions
         }
       }
 

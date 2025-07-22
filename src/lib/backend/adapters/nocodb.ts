@@ -18,7 +18,7 @@ function uuidv4(): string {
     const v = c === 'x' ? r : (r & 0x3 | 0x8)
     return v.toString(16)
   })
-}
+};
 
 export class NocoDBAdapter implements BackendAdapter {
   private baseUrl: string
@@ -261,7 +261,8 @@ export class NocoDBAdapter implements BackendAdapter {
     }
 
     const response = await this.request<{
-      list: any[], pageInfo: {
+      list: any[],
+    pageInfo: {
         totalRows: number, page: number, pageSize: number, isFirstPage: boolean, isLastPage: boolean
       }
     }>(`${this.getTableEndpoint('projects')}?${params.toString()}`)
@@ -357,7 +358,8 @@ export class NocoDBAdapter implements BackendAdapter {
     }
 
     const response = await this.request<{
-      list: any[], pageInfo: {
+      list: any[],
+    pageInfo: {
         totalRows: number, page: number, pageSize: number, isFirstPage: boolean, isLastPage: boolean
       }
     }>(`${this.getTableEndpoint(collection)}?${params.toString()}`)
@@ -397,7 +399,7 @@ export class NocoDBAdapter implements BackendAdapter {
 
     const response = await fetch(`${this.baseUrl}/api/v1/db/storage/upload`, {
       method: 'POST',
-      headers: {
+    headers: {
         'xc-token': this.apiToken
       },
       body: formData

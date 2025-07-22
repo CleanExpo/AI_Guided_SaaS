@@ -1,44 +1,44 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AdminDirectLoginPage() {
-  const [email, setEmail] = useState('admin@aiguidedSaaS.com')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [email, setEmail] = useState('admin@aiguidedSaaS.com');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
     try {
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+    headers: {
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password })
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
-        localStorage.setItem('admin-token', data.token)
-        localStorage.setItem('admin-user', JSON.stringify(data.admin))
-        router.push('/admin/dashboard')
+        localStorage.setItem('admin-token', data.token);
+        localStorage.setItem('admin-user', JSON.stringify(data.admin));
+        router.push('/admin/dashboard');
       } else {
-        setError(data.error || 'Login failed')
+        setError(data.error || 'Login failed');
       }
     } catch (error) {
-      setError('Network error. Please try again.')
+      setError('Network error. Please try again.');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
@@ -63,7 +63,7 @@ export default function AdminDirectLoginPage() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white focus:outline-none focus:border-purple-500"
                 required
               />
@@ -74,7 +74,7 @@ export default function AdminDirectLoginPage() {
               <input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-white focus:outline-none focus:border-purple-500"
                 placeholder="Enter admin password"
                 required
@@ -94,14 +94,16 @@ export default function AdminDirectLoginPage() {
             <p>Use password: AdminSecure2024!</p>
             <p className="mt-2">
               Regular admin login:{' '}
-              <a href="/admin/login" className="text-purple-400 hover:underline">
+              <a
+                href="/admin/login"
+                className="text-purple-400 hover:underline"
+              >
                 /admin/login
               </a>
             </p>
           </div>
+        </div>
       </div>
+    </div>
   );
-</div>
-</div>
 }
-</div>

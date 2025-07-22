@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-}
+};
 
 export async function GET(request: NextRequest) {
   try {
@@ -121,7 +121,7 @@ async function analyzeFeedback(feedback) {
     // Use AI to analyze feedback sentiment and extract insights
     const analysis = await fetch('/api/ai/analyze', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         text: feedback.feedback_text: type, 'feedback_analysis'
       })
@@ -162,7 +162,7 @@ async function createAlertIfNeeded(feedback) {
         severity: 'high',
         title: `Multiple ${feedback.type} reports`,
         description: `${similar.length} similar ${feedback.type} reports in last 24 hours`,
-        metadata: {
+    metadata: {
           feedbackIds: similar.map(f => f.id),
           commonContext: extractCommonContext(similar)
         },
@@ -199,7 +199,8 @@ function extractCommonContext(feedbackList: any[]): any {
 
 async function getFeedbackAnalytics(feedback: any[]) {
   const analytics = {
-    total: feedback.length, byType: {} as Record<string, number>,
+    total: feedback.length,
+    byType: {} as Record<string, number>,
     bySentiment: {} as Record<string, number>,
     recentTrend: 'stable' as 'improving' | 'stable' | 'declining',
     topIssues: [] as Array<{ type: string, count: number }>,

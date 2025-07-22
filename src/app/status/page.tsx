@@ -1,11 +1,6 @@
 import { Metadata } from 'next';
 import { HealthCheckDashboard } from '@/components/health/HealthCheckDashboard';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CheckCircle, AlertCircle, Clock } from 'lucide-react';
@@ -39,26 +34,26 @@ const incidents = [
 const getStatusIcon = (status: string) => {
   switch (status) {
     case 'operational':
-      return <CheckCircle className="h-5 w-5 text-green-500" />;
+      return <CheckCircle className="h-5 w-5 text-green-500" />
     case 'degraded':</CheckCircle>
-      return <AlertCircle className="h-5 w-5 text-yellow-500" />;
+      return <AlertCircle className="h-5 w-5 text-yellow-500" />
     case 'outage':</AlertCircle>
-      return <AlertCircle className="h-5 w-5 text-red-500" />;
-    default:</AlertCircle>
-      return <Clock className="h-5 w-5 text-gray-500" />;
+      return <AlertCircle className="h-5 w-5 text-red-500" />
+    default: </AlertCircle>
+      return <Clock className="h-5 w-5 text-gray-500" />,
   }
 };
 
 const getStatusBadge = (status: string) => {
   switch (status) {
     case 'operational':</Clock>
-      return <Badge className="bg-green-100 text-green-800">Operational</Badge>;
+      return <Badge className="bg-green-100 text-green-800">Operational</Badge>
     case 'scheduled':
-      return <Badge className="bg-blue-100 text-blue-800">Scheduled</Badge>;
+      return <Badge className="bg-blue-100 text-blue-800">Scheduled</Badge>
     case 'resolved':
-      return <Badge className="bg-gray-100 text-gray-800">Resolved</Badge>;
+      return <Badge className="bg-gray-100 text-gray-800">Resolved</Badge>
     default:
-      return <Badge variant="secondary">{status}</Badge>;
+      return <Badge variant="secondary">{status}</Badge>
   }
 };
 
@@ -109,17 +104,17 @@ export default function StatusPage() {
                       className="flex items-center justify-between p-4 border rounded-lg"
                     >
                       <div className="flex items-center space-x-3">
-                        {getStatusIcon(service.status)}</div>
+                        {getStatusIcon(service.status)}
+
                         <span className="font-medium">{service.name}</span>
                       </div>
                       <div className="flex items-center space-x-4">
                         <span className="text-sm text-muted-foreground">
                           {service.uptime} uptime</span>
                         {getStatusBadge(service.status)}
-                      </div>
+
                   ))}
-                </div>
-          
+
           <TabsContent value="health">
             <HealthCheckDashboard />
           </TabsContent>
@@ -138,20 +133,19 @@ export default function StatusPage() {
                       <div className="flex items-start justify-between mb-2">
                         <h3 className="font-semibold">{incident.title}</h3>
                         {getStatusBadge(incident.status)}
-                      </div>
+
                       <p className="text-muted-foreground mb-2">
                         {incident.description}</p>
                       <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                         <span>{incident.date}</span>
                         <span>Duration: {incident.duration}</span>))}
-                </div>
 
             {/* Subscribe to Updates */}
             <div className="text-center bg-muted rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-2">Stay Updated</h2>
               <p className="text-muted-foreground mb-4">
                 Subscribe to status updates and incident notifications</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+              <div className="flex flex-col sm: flex-row gap-4 justify-center max-w-md mx-auto">
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -159,41 +153,8 @@ export default function StatusPage() {
                 />
                 <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
                   Subscribe</button>
-    );
-}
+  }
 
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </TabsContent>
-    </TabsList>
-    </Tabs>
-    </div>
-    </div>
+    
   );
-</CardContent>
-</CardHeader>
-</Card>
-</CardContent>
-</CardHeader>
-</Card>
-</div>
-</CardContent>
-</CardHeader>
-</Card>
-</div>
-</TabsContent>
-</TabsList>
-</Tabs>
-</div>
-</div>
-</div>
 }

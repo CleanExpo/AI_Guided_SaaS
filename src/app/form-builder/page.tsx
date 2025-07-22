@@ -15,13 +15,13 @@ interface FormField {
   placeholder?: string;
   required: boolean;
   options?: string[];
-}
+};
 
 interface FormConfig {
   title: string;
   description: string;
-  fields: FormField[];
-}
+  fields: FormField[],
+};
 
 export default function FormBuilderPage() {
   const [formConfig, setFormConfig] = useState<FormConfig>({
@@ -86,7 +86,7 @@ export default function FormBuilderPage() {
             value={field.label}
             onChange={(e) => updateField(field.id, { label: e.target.value}
       )}
-    </div>
+
   );
           /></Input>
         
@@ -98,7 +98,7 @@ export default function FormBuilderPage() {
               value={field.placeholder || ''}
               onChange={(e) => updateField(field.id, { placeholder: e.target.value}
       )}
-    </div>
+
   );
             /></Input>)}
 
@@ -112,7 +112,7 @@ export default function FormBuilderPage() {
                 options: e.target.value.split('\n').filter((opt: string) => opt.trim()) 
              }
       )}
-    </div>
+
     );
               rows={3}
             /></Textarea>)}
@@ -124,11 +124,10 @@ export default function FormBuilderPage() {
             checked={field.required}
             onChange={(e) = /> updateField(field.id, { required: e.target.checked}
       )}
-    </div>
+
     );
           /></input>
           <Label htmlFor={`required-${field.id}`}>Required field</Label>
-      );
   const renderFormPreview = () => (
     <div className="space-y-4"></div>
       <div></div>
@@ -153,8 +152,9 @@ export default function FormBuilderPage() {
             
             {field.type === 'email' && (</Input>
               <Input
-                id={`preview-${field.id}`}
-                type="email"
+                id={`preview-${field.id}`};
+
+type="email"
                 placeholder={field.placeholder}
                 required={field.required}
               />
@@ -203,11 +203,10 @@ export default function FormBuilderPage() {
                     /></input>
                     <Label htmlFor={`preview-${field.id}-${index}`}>{option}</Label>))}
             )}
-          </div>
+
         ))}
         
         <Button type="submit" className="w-full">Submit Form</Button>
-    );
   return (
     <div className="container mx-auto py-8"></div>
       <div className="mb-8"></div>
@@ -215,7 +214,8 @@ export default function FormBuilderPage() {
         <p className="text-gray-600">Create custom forms with drag-and-drop simplicity</p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Form Configuration */}</div>
+        {/* Form Configuration */}
+
         <div></div>
           <Card className="mb-6"></Card>
             <CardHeader></CardHeader>
@@ -253,7 +253,6 @@ export default function FormBuilderPage() {
                     <Plus className="h-4 w-4 mr-2" />
                     {type.charAt(0).toUpperCase() + type.slice(1)}</Plus>
                 ))}
-              </div>
 
           {/* Field Editors */}
           <div></div>
@@ -265,7 +264,6 @@ export default function FormBuilderPage() {
             ) : (
               formConfig.fields.map(renderFieldEditor)
             )}
-          </div>
 
         {/* Preview */}
         <div></div>
@@ -300,10 +298,8 @@ export default function FormBuilderPage() {
                     <code>{JSON.stringify(formConfig, null, 2)}</code>
                 )}
               </CardContent>
-    );
 </HTMLTextAreaElement>
 }
 
     </HTMLTextAreaElement>
-  );
-}
+  }

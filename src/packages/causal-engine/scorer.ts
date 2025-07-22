@@ -1,6 +1,6 @@
 // packages/causal-engine/scorer.ts
 
-import type { CausalLogEntry } from './logger';
+import type {  CausalLogEntry  } from './logger';
 
 type ScoreMap = {
   [key: string]: {
@@ -8,7 +8,7 @@ type ScoreMap = {
     kept: number;
     edited: number;
     deleted: number;
-    added: number;
+    added: number
   };
 };
 
@@ -53,17 +53,20 @@ export class CausalScorer {
     // IPW-inspired, scoring: weight positive actions higher
     const retainScore = (stats.kept + 0.75 * stats.edited) / stats.total;
     const deleteScore = stats.deleted / stats.total;
-    
+
     // Penalize high deletion rates more heavily
-    const finalScore = retainScore - (deleteScore * 0.5);
-    
+    const finalScore = retainScore - deleteScore * 0.5;
+
     return Math.min(Math.max(finalScore, 0), 1); // clamp between 0–1
   }
 
   /**
    * Get confidence level based on sample size
    */
-  getConfidence(page: string, componentType: string): 'low' | 'medium' | 'high' {
+  getConfidence(
+    page: string,
+    componentType: string
+  ): 'low' | 'medium' | 'high' {
     const map = this.getComponentScoreMap();
     const key = `${page}:${componentType}`;
     const stats = map[key];
@@ -76,23 +79,27 @@ export class CausalScorer {
   /**
    * Optional: return all scores for review
    */
-  getAllScores(): { [key: string]: { score: number; confidence: string; total: number } } {
+  getAllScores(): {
+    [key: string]: { score: number; confidence: string; total: number };
+  } {
     const map = this.getComponentScoreMap();
-    const result: { [key: string]: { score: number; confidence: string; total: number } } = {};
+    const result: {
+      [key: string]: { score: number; confidence: string; total: number };
+    } = {};
 
     for (const key in map) {
       const { total, kept, edited, deleted } = map[key];
       const retainScore = (kept + 0.75 * edited) / total;
       const deleteScore = deleted / total;
-      const finalScore = retainScore - (deleteScore * 0.5);
-      
+      const finalScore = retainScore - deleteScore * 0.5;
+
       const [page, componentType] = key.split(':');
       const confidence = this.getConfidence(page, componentType);
-      
+
       result[key] = {
         score: Math.min(Math.max(finalScore, 0), 1),
         confidence,
-        total
+        total,
       };
     }
 
@@ -102,7 +109,9 @@ export class CausalScorer {
   /**
    * Get top performing components
    */
-  getTopComponents(limit: number = 5): Array<{ key: string; score: number; confidence: string }> {
+  getTopComponents(
+    limit: number = 5
+  ): Array<{ key: string; score: number; confidence: string }> {
     const scores = this.getAllScores();
     return Object.entries(scores)
       .map(([key, data]) => ({ key, ...data }))
@@ -113,7 +122,9 @@ export class CausalScorer {
   /**
    * Get components that need improvement
    */
-  getLowPerformingComponents(threshold: number = 0.3): Array<{ key: string; score: number; confidence: string }> {
+  getLowPerformingComponents(
+    threshold: number = 0.3
+  ): Array<{ key: string; score: number; confidence: string }> {
     const scores = this.getAllScores();
     return Object.entries(scores)
       .map(([key, data]) => ({ key, ...data }))

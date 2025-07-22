@@ -262,7 +262,7 @@ export function createValidationMiddleware(
 // Type guard utilities
 export function isValidationError(error: unknown): error is ValidationError {
   return, error instanceof ValidationError
-}
+};
 
 export function createTypeGuard<T>(schema: z.ZodSchema<T>) {
   return (value: unknown): value is T => {

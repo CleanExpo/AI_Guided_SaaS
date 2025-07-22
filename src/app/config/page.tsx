@@ -1,8 +1,8 @@
 import ConfigurationDashboard from '@/components/config/ConfigurationDashboard';
 
 export default function ConfigPage() {
-  return <ConfigurationDashboard />;
-}
+  return <ConfigurationDashboard />
+};
 
 export const metadata = {
   title: 'Platform Configuration | AI Guided SaaS',

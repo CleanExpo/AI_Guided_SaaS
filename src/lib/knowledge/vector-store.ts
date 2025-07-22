@@ -22,7 +22,7 @@ export interface Document {
   metadata: DocumentMetadata
   embedding?: number[]
   chunks?: DocumentChunk[]
-}
+};
 
 export interface DocumentMetadata {
   source: string
@@ -34,7 +34,7 @@ export interface DocumentMetadata {
   language?: string
   tags?: string[]
   project?: string
-}
+};
 
 export interface DocumentChunk {
   id: string;
@@ -42,7 +42,7 @@ export interface DocumentChunk {
   content: string
   embedding?: number[]
   metadata: ChunkMetadata
-}
+};
 
 export interface ChunkMetadata {
   position: number
@@ -59,7 +59,7 @@ export interface SearchQuery {
   topK?: number
   includeMetadata?: boolean
   includeScores?: boolean
-}
+};
 
 export interface SearchFilter {
   type?: string[]
@@ -69,7 +69,7 @@ export interface SearchFilter {
     start: string;
   end: string
   }
-}
+};
 
 export interface SearchResult {
   id: string;
@@ -182,7 +182,7 @@ export class MemoryVectorStore extends VectorStore {
           documentId: id,
           content: chunks[i],
           embedding: chunkEmbedding,
-          metadata: {
+    metadata: {
             position: i
           }
         }

@@ -4,8 +4,8 @@ export interface ProjectFormData {
   description: string;
   features: string[];
   technology: string;
-  complexity: 'simple' | 'moderate' | 'complex';
-}
+  complexity: 'simple' | 'moderate' | 'complex'
+};
 
 export interface ValidationResult {
   isValid: boolean;

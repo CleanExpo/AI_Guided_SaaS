@@ -8,7 +8,7 @@ export interface User {
   createdAt: string;
   updatedAt: string
   metadata?: Record<string, any>
-}
+};
 
 export interface Project {
   id: string;
@@ -20,7 +20,7 @@ export interface Project {
   config?: Record<string, any>
   createdAt: string;
   updatedAt: string
-}
+};
 
 export interface QueryOptions {
   limit?: number
@@ -28,18 +28,17 @@ export interface QueryOptions {
   orderBy?: string
   order?: 'asc' | 'desc'
   filters?: Record<string, any>
-}
+};
 
 export interface PaginatedResponse<T> {
   data: T[], total: number, page: number, pageSize: number, hasMore: boolean
-}
+};
 
 export interface BackendAdapter {
   // Authentication
   signUp(email: string;
   password: string, metadata?: any): Promise<User>
-  signIn(email: string;
-  password: string): Promise<{ user: User;
+  signIn(email: string; password: string): Promise<{ user: User;
   token: string }>
   signOut(): Promise<void>
   getCurrentUser(): Promise<User | null>
@@ -73,7 +72,7 @@ export interface BackendAdapter {
   uploadFile(bucket: string, path: string, file: File): Promise<string>
   deleteFile(bucket: string, path: string): Promise<void>
   getFileUrl(bucket: string, path: string): string
-}
+};
 
 export interface QueryBuilder<T> {
   select(fields: string[]): QueryBuilder<T>
@@ -84,13 +83,13 @@ export interface QueryBuilder<T> {
   execute(): Promise<T[]>
   single(): Promise<T | null>
   count(): Promise<number>
-}
+};
 
 export interface DatabaseEvent<T> {
   type: 'INSERT' | 'UPDATE' | 'DELETE'
   table: string, record: T
   oldRecord?: T
-}
+};
 
 export interface BackendConfig {
   type: 'supabase' | 'strapi' | 'nocodb'
@@ -104,7 +103,7 @@ export interface BackendConfig {
   user: string;
   password: string
   }
-}
+};
 
 export class BackendError extends Error {
   constructor(

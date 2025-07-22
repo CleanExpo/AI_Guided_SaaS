@@ -1,29 +1,15 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Progress } from '@/components/ui/progress'
-import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Sparkles, 
-  ArrowRight, 
-  ArrowLeft,
-  CheckCircle,
-  Target,
-  Code,
-  Palette,
-  Database,
-  Rocket,
-  MessageSquare,
-  Loader2,
-  Lightbulb
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-import { useChat } from 'ai/react'
-
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Progress } from '@/components/ui/progress';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, ArrowRight, ArrowLeft, CheckCircle, Target, Code, Palette, Database, Rocket, MessageSquare, Loader2, Lightbulb } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { useChat } from 'ai/react';
 interface Step {
   id: string;
   title: string;
@@ -31,7 +17,7 @@ interface Step {
   icon: React.ElementType;
   fields: Field[]
   helper?: string
-}
+};
 
 interface Field {
   name: string;
@@ -42,7 +28,7 @@ interface Field {
   label: string }[]
   required?: boolean
   validation?: (value) => string | null
-}
+};
 
 interface GuidedProjectBuilderProps {
   onComplete: (projectData) => void
@@ -220,10 +206,8 @@ const steps: Step[] = [
 export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedProjectBuilderProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState(initialData)
-      </Record>
   const [errors, setErrors] = useState<Record<string, string>>({})
-  const [isProcessing, setIsProcessing] = useState(false)</Record>
-      </string>
+  const [isProcessing, setIsProcessing] = useState(false)
   const [aiSuggestions, setAiSuggestions] = useState<string[]>([])
   
   const { messages, append, isLoading } = useChat({
@@ -274,10 +258,9 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
       setCurrentStep(prev => prev - 1)
       setErrors({}
       )}
-    </div>
-    );
-  }
 
+    );
+}
   const handleFieldChange = (fieldName: string, value) => {
     setFormData((prev) => ({ ...prev, [fieldName]: value }))
     // Clear error for this field
@@ -297,7 +280,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
       content: `Based on the project data so, far: ${JSON.stringify(formData)}, suggest helpful tips, for: ${step.title}`
     }
       )}
-    </div>
+
     );
   const processProjectData = async () => {
     try {
@@ -307,11 +290,11 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
         description: formData.description,
         targetAudience: formData.targetAudience,
         features: [...(formData.features || []), ...(formData.customFeatures ? [formData.customFeatures] : [])],
-        design: {
+    design: {
           style: formData.designStyle,
           primaryColor: formData.primaryColor
         },
-        technical: {
+    technical: {
           hosting: formData.hostingPreference,
           integrations: formData.integrations || []
         },
@@ -328,7 +311,8 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      {/* Progress, Bar */}</div>
+      {/* Progress, Bar */}
+
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>
@@ -361,8 +345,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                 <div className="flex items-start gap-3">
                   <Lightbulb className="h-5 w-5 text-primary mt-0.5" />
                   <p className="text-sm">{step.helper}</p>
-  );
-}
+  }
 
             {/* Fields */}
             <div className="space-y-6">
@@ -401,7 +384,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                             "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors",
                             formData[field.name] === option.value
                               ? "border-primary bg-primary/5"
-                              : "border-border, hover:border-primary/50"
+                              : "border-border hover:border-primary/50"
                           )}
                         >
                           <input
@@ -412,10 +395,8 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                             onChange={() = /> handleFieldChange(field.name, option.value)}
                             className="sr-only"
                           /></input>
-                          <span className="text-sm font-medium">{option.label}</span>
-                        </label>
-                      ))}
-                    </div>
+                          <span className="text-sm font-medium">{option.label}</span>))}
+
                   )}
                   
                   {field.type === 'select' && (
@@ -423,8 +404,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                       value={formData[field.name] || ''}
                       onChange={(e) => handleFieldChange(field.name, e.target.value)}
                       className={cn(
-                        "w-full p-2 border rounded-md",
-                        errors[field.name] && 'border-red-500'
+                        "w-full p-2 border rounded-md" errors[field.name] && 'border-red-500'
                       )}
                     ></select>
                       <option value="">Select an option</option>
@@ -444,7 +424,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                             "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors",
                             formData[field.name]?.includes(option.value)
                               ? "border-primary bg-primary/5"
-                              : "border-border, hover:border-primary/50"
+                              : "border-border hover:border-primary/50"
                           )}
                         >
                           <input
@@ -461,18 +441,14 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                             }}
                             className="rounded border-gray-300"
                           /></input>
-                          <span className="text-sm">{option.label}</span>
-                        </label>
-                      ))}
-                    </div>
+                          <span className="text-sm">{option.label}</span>))}
+
                   )}
                   
                   {errors[field.name] && (
                     <p className="text-sm text-red-500 mt-1">{errors[field.name]}</p>
-  );
-}
+  }
               ))}
-            </div>
 
             {/* AI, Suggestions */}
             {aiSuggestions.length > 0 && (
@@ -522,15 +498,10 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
     );
 </div>
 </h4>
-</div>
-</div>
-</div>
-</Card>
+</div></Card>
 </AnimatePresence>
 }
     </h4>
     </div>
     </Card>
-    </AnimatePresence>
-  );
-}
+  }

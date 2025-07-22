@@ -1,24 +1,11 @@
 'use client'
 
-import { useState, useCallback } from 'react'
-import {
-  ReactFlow,
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  Node,
-  Edge,
-  Connection,
-  BackgroundVariant
-} from '@xyflow/react'
+import { useState, useCallback } from 'react';
+import { ReactFlow, MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge, Node, Edge, Connection, BackgroundVariant } from '@xyflow/react';
 import '@xyflow/react/dist/style.css'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Plus, Save, Download, Upload } from 'lucide-react'
-
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Plus, Save, Download, Upload } from 'lucide-react';
 interface FlowchartBuilderProps {
   projectName: string;
   onSaveFlow: (nodes: Node[];
@@ -64,8 +51,8 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
   const addNode = useCallback(() => {
     const newNode: Node = {
       id: nodeId.toString(),
-      position: { x: Math.random() * 400, y: Math.random() * 400 },
-      data: { label: `Node ${nodeId}` }}
+    position: { x: Math.random() * 400, y: Math.random() * 400 },
+    data: { label: `Node ${nodeId}` }}
     setNodes((nds) => nds.concat(newNode))
     setNodeId((id) => id + 1)
   }, [nodeId, setNodes])
@@ -171,5 +158,4 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
             <div></div>
               <h4 className="font-medium text-gray-900 mb-1">Editing</h4>
               <p className="text-gray-600">Double-click nodes to edit labels</p>
-    );
-}
+  }

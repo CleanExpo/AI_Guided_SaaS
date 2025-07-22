@@ -182,8 +182,8 @@ agent_uptime_seconds{agent_type="${AGENT_TYPE}",agent_id="${AGENT_ID}"} ${metric
 
 // Start health check server
 server.listen(HEALTH_CHECK_PORT, () => {
-  console.log(`Health check server running on port ${HEALTH_CHECK_PORT}`)
-  console.log(`Agent: ${AGENT_TYPE} (${AGENT_ID})`)
+
+  `)
 })
 
 // Perform health check periodically
@@ -204,9 +204,9 @@ setInterval(() => {
 
 // Handle graceful shutdown
 process.on('SIGTERM', () => {
-  console.log('Received SIGTERM, shutting down gracefully...')
+
   server.close(() => {
-    console.log('Health check server closed')
+
     process.exit(0)
   })
 })

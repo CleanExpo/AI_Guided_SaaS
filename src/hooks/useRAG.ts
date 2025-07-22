@@ -10,7 +10,7 @@ export interface UseRAGOptions {
   chunkSize?: number
   chunkOverlap?: number
   retrievalTopK?: number
-}
+};
 
 export interface UseRAGReturn {
   // Query operations;
@@ -31,7 +31,7 @@ export interface UseRAGReturn {
   clearKnowledge: () => Promise<void>
   
   // State, loading: boolean, error: string | null, initialized: boolean
-}
+};
 
 export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {
   const { toast } = useToast()
@@ -50,7 +50,9 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {
         provider: options.provider || 'memory',
         apiKey: options.apiKey,
         indexName: options.indexName,
-        dimension: 1536, // OpenAI embedding dimension, metric: 'cosine'
+        dimension: 1536,
+  // OpenAI embedding dimension
+  metric: 'cosine'
       })
 
       const engine = new RAGEngine({

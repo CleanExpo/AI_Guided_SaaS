@@ -4,27 +4,27 @@ import { isServiceConfigured } from './env'
 // Database result types
 interface CountResult {
   count: number
-}
+};
 
 interface SumResult {
   total: number
-}
+};
 
 interface SubscriptionBreakdownResult {
   tier: string;
   count: number;
   revenue: number
-}
+};
 
 interface CategoryResult {
   category: string;
   count: number
-}
+};
 
 interface FrameworkResult {
   framework: string;
   count: number
-}
+};
 
 interface StatusResult {
   status: string;
@@ -41,20 +41,20 @@ export interface PlatformMetrics {
   monthlyRevenue: number;
   conversionRate: number;
   averageSessionTime: number
-}
+};
 
 export interface UserMetrics {
   newUsers: number;
   activeUsers: number;
   churned: number;
-  retention: {
+    retention: {
     day1: number;
   day7: number;
   day30: number
   }
   topCountries: Array<{ country: string, users: number }>
   userGrowth: Array<{ date: string, users: number }>
-}
+};
 
 export interface RevenueMetrics {
   totalRevenue: number;
@@ -64,9 +64,9 @@ export interface RevenueMetrics {
   lifetimeValue: number;
   revenueGrowth: Array<{ date: string;
   revenue: number }>
-  subscriptionBreakdown: Array<{ tier: string, count: number; revenue: number }>
-  templateRevenue: Array<{ templateId: string, name: string; revenue: number }>
-}
+  subscriptionBreakdown: Array<{ tier: string, count: number, revenue: number }>
+  templateRevenue: Array<{ templateId: string, name: string, revenue: number }>
+};
 
 export interface SystemMetrics {
   apiCalls: number;
@@ -77,7 +77,7 @@ export interface SystemMetrics {
   databaseConnections: number;
   cacheHitRate: number;
   storageUsed: number
-}
+};
 
 export interface ContentMetrics {
   totalTemplates: number;
@@ -230,7 +230,15 @@ export class AnalyticsService {
       return {
         totalRevenue: Number(totalRevenue[0]?.total) || 0,
         monthlyRecurringRevenue: Number(monthlyRevenue[0]?.total) || 0,
-        averageRevenuePerUser: 0, // TODO: Calculate ARPU, churnRate: 0, // TODO: Calculate churn rate, lifetimeValue: 0, // TODO: Calculate LTV, revenueGrowth: [], // TODO: Get revenue growth data, subscriptionBreakdown: subscriptionBreakdown || [],
+        averageRevenuePerUser: 0,
+  // TODO: Calculate ARPU
+ , churnRate: 0,
+  // TODO: Calculate churn rate
+ , lifetimeValue: 0,
+  // TODO: Calculate LTV
+ , revenueGrowth: [],
+  // TODO: Get revenue growth data
+ , subscriptionBreakdown: subscriptionBreakdown || [],
         templateRevenue: [] // TODO: Get template revenue data
       }
     } catch (error) {
@@ -255,7 +263,11 @@ export class AnalyticsService {
 
       return {
         apiCalls: Number(apiCalls[0]?.count) || 0,
-        errorRate: 0.02, // 2% error rate, averageResponseTime: 150, // 150ms, uptime: 99.9,
+        errorRate: 0.02,
+  // 2% error rate
+  averageResponseTime: 150,
+  // 150ms
+  uptime: 99.9,
         activeConnections: 45,
         databaseConnections: 12,
         cacheHitRate: 85.5,
@@ -385,7 +397,7 @@ export class AnalyticsService {
     return 1200 // 20 minutes in seconds
   }
 
-    private static async calculateRetentionRates(): Promise<{ day1: number, day7: number; day30: number }> {
+    private static async calculateRetentionRates(): Promise<{ day1: number, day7: number, day30: number }> {
       // Mock implementation - would need proper cohort analysis
       return {
         day1: 85.2,
@@ -429,7 +441,7 @@ export class AnalyticsService {
       newUsers: 234,
       activeUsers: 8934,
       churned: 45,
-      retention: {
+    retention: {
         day1: 85.2,
         day7: 62.8,
         day30: 45.1

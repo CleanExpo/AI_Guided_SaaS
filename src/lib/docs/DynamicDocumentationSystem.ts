@@ -12,7 +12,7 @@ export interface DocumentationSection {
   id: string;
   title: string;
   content: string;
-  metadata: {
+    metadata: {
     category: string;
   tags: string[];
   difficulty: 'beginner' | 'intermediate' | 'advanced'
@@ -20,10 +20,9 @@ export interface DocumentationSection {
   lastUpdated: Date;
   version: string
   }
-  relatedSections: string[], interactiveElements: InteractiveElement[]
-  codeExamples: CodeExample[]
+  relatedSections: string[], interactiveElements: InteractiveElement[], codeExamples: CodeExample[]
   systemState?: SystemStateContext
-}
+};
 
 export interface InteractiveElement {
   id: string;
@@ -35,7 +34,7 @@ export interface InteractiveElement {
     required: boolean;
   points: number
   }
-}
+};
 
 export interface CodeExample {
   id: string;
@@ -45,21 +44,19 @@ export interface CodeExample {
   runnable: boolean
   expectedOutput?: string
   systemRequirements?: string[]
-}
+};
 
 export interface SystemStateContext {
   componentsActive: string[];
-  featuresEnabled: string[]
-  configurationValues: Record<string, any>
+  featuresEnabled: string[]; configurationValues: Record<string, any>
   performanceMetrics: Record<string, number>
   lastUpdated: Date
-}
+};
 
 export interface UserProgress {
   userId: string;
   sectionsCompleted: string[];
-  interactiveElementsCompleted: string[]
-  quizScores: Record<string, number>
+  interactiveElementsCompleted: string[]; quizScores: Record<string, number>
   totalPoints: number;
   currentPath: string[];
   preferences: {
@@ -67,7 +64,7 @@ export interface UserProgress {
     learningStyle: 'visual' | 'textual' | 'interactive'
     topics: string[]
   }
-}
+};
 
 export interface DocumentationSearchResult {
   sectionId: string;
@@ -75,7 +72,7 @@ export interface DocumentationSearchResult {
   snippet: string;
   relevanceScore: number;
   context: string[]
-}
+};
 
 export class DynamicDocumentationSystem extends EventEmitter {
   private sections: Map<string, DocumentationSection> = new Map()
@@ -151,7 +148,7 @@ export class DynamicDocumentationSystem extends EventEmitter {
         id: 'api-reference',
         title: 'API Reference',
         content: this.buildAPIDocumentationContent(endpoints || []),
-        metadata: {
+    metadata: {
           category: 'reference',
           tags: ['api', 'endpoints', 'integration'],
           difficulty: 'intermediate',
@@ -166,7 +163,7 @@ export class DynamicDocumentationSystem extends EventEmitter {
             type: 'playground',
             title: 'API Playground',
             description: 'Test API endpoints interactively',
-            config: {
+    config: {
               baseUrl: process.env.NEXT_PUBLIC_API_URL,
               authRequired: true
             }
@@ -239,7 +236,7 @@ export class DynamicDocumentationSystem extends EventEmitter {
     return `// ${endpoint.description}
 const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}${endpoint.path}', {
   method: '${endpoint.method}',
-  headers: {
+    headers: {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer YOUR_API_KEY'
   }${endpoint.method !== 'GET' ? `,
@@ -247,7 +244,7 @@ const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}${endpoint.path}
 });
 
 const data = await response.json();
-console.log(data);`
+`
   }
   
   private async generateComponentDocumentation(): Promise<void> {
@@ -256,7 +253,7 @@ console.log(data);`
       id: 'component-library',
       title: 'Component Library',
       content: await this.scanAndDocumentComponents(),
-      metadata: {
+    metadata: {
         category: 'reference',
         tags: ['components', 'ui', 'design-system'],
         difficulty: 'beginner',
@@ -271,7 +268,7 @@ console.log(data);`
           type: 'playground',
           title: 'Component Playground',
           description: 'Interact with components and see live code',
-          config: {
+    config: {
             components: ['Button', 'Card', 'Modal', 'Form']
           }
         }
@@ -314,7 +311,7 @@ A comprehensive form system with validation.`
       id: 'troubleshooting',
       title: 'Troubleshooting Guide',
       content: this.buildTroubleshootingContent(errors || []),
-      metadata: {
+    metadata: {
         category: 'guide',
         tags: ['troubleshooting', 'errors', 'debugging'],
         difficulty: 'intermediate',
@@ -329,7 +326,7 @@ A comprehensive form system with validation.`
           type: 'demo',
           title: 'Error Diagnosis Tool',
           description: 'Paste your error message for instant solutions',
-          config: {
+    config: {
             aiPowered: true
           }
         }
@@ -373,7 +370,7 @@ A comprehensive form system with validation.`
       id: 'performance-optimization',
       title: 'Performance Optimization Guide',
       content: await this.buildPerformanceContent(),
-      metadata: {
+    metadata: {
         category: 'guide',
         tags: ['performance', 'optimization', 'best-practices'],
         difficulty: 'advanced',
@@ -388,7 +385,7 @@ A comprehensive form system with validation.`
           type: 'demo',
           title: 'Performance Analyzer',
           description: 'Analyze your application performance in real-time',
-          config: {
+    config: {
             metrics: ['response-time', 'throughput', 'error-rate']
           }
         }
@@ -694,10 +691,10 @@ LIMIT 50;`,
         userId,
         sectionsCompleted: [],
         interactiveElementsCompleted: [],
-        quizScores: {},
+    quizScores: {},
         totalPoints: 0,
         currentPath: [],
-        preferences: {
+    preferences: {
           difficulty: 'beginner',
           learningStyle: 'interactive',
           topics: []
@@ -883,9 +880,9 @@ LIMIT 50;`,
   <title>AI Guided SaaS Documentation</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-    pre { background: #f4f4f4, padding: 10px; overflow-x: auto; }
-    code { background: #f4f4f4, padding: 2px 4px; }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px }
+    pre { background: #f4f4f4, padding: 10px; overflow-x: auto }
+    code { background: #f4f4f4, padding: 2px 4px }
   </style>
 </head>
 <body>

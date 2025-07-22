@@ -5,20 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import {
-  Users,
-  Plus,
-  Clock,
-  MessageCircle,
-  Settings,
-  Share2,
-  Trash2,
-  Edit,
-  Eye,
-  Calendar,
-  Activity,
-  Globe,
-  Lock} from 'lucide-react';
+import { Users, Plus, Clock, MessageCircle, Settings, Share2, Trash2, Edit, Eye, Calendar, Activity, Globe, Lock } from 'lucide-react';
 
 interface CollaborationSession {
   id: string;
@@ -30,8 +17,8 @@ interface CollaborationSession {
   isPublic: boolean;
   comments: number;
   changes: number;
-  createdAt: Date;
-}
+  createdAt: Date,
+};
 
 export default function CollaborationDashboard() {
       </CollaborationSession>
@@ -54,52 +41,60 @@ export default function CollaborationDashboard() {
           projectId: 'project-1',
           name: 'E-commerce Website Redesign',
           participants: 4,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago, isActive: true,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 15),
+  // 15 minutes ago
+  isActive: true,
           isPublic: true,
           comments: 23,
           changes: 47,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2), // 2 days ago
-        },
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2); // 2 days ago
+        }},
         {
           id: 'session-2',
           projectId: 'project-2',
           name: 'Mobile App UI Components',
           participants: 2,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago, isActive: false,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2),
+  // 2 hours ago
+  isActive: false,
           isPublic: false,
           comments: 8,
           changes: 12,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
-        },
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24); // 1 day ago
+        }},
         {
           id: 'session-3',
           projectId: 'project-3',
           name: 'API Documentation Review',
           participants: 6,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago, isActive: true,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 30),
+  // 30 minutes ago
+  isActive: true,
           isPublic: true,
           comments: 15,
           changes: 8,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6), // 6 hours ago
-        },
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6); // 6 hours ago
+        }},
         {
           id: 'session-4',
           projectId: 'project-4',
           name: 'Database Schema Planning',
           participants: 3,
-          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago, isActive: false,
+          lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24),
+  // 1 day ago
+  isActive: false,
           isPublic: false,
           comments: 31,
           changes: 19,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), // 3 days ago
-        }];
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3); // 3 days ago
+        }}];
 
       setSessions(mockSessions);
     } catch (error) {
       console.error('Error loading collaboration, sessions:', error);
     } finally {
       setLoading(false);
-    }
+}
   };
 
   const filteredSessions = sessions.filter(session => {
@@ -113,9 +108,8 @@ export default function CollaborationDashboard() {
       case 'recent':
         const oneDayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24);
         return matchesSearch && session.lastActivity > oneDayAgo;
-      default:
-        return matchesSearch;
-    }
+      default: return matchesSearch;
+    }}
   });
 
   const formatTimeAgo = (date: Date) => {
@@ -138,23 +132,21 @@ export default function CollaborationDashboard() {
     const totalActivity = session.comments + session.changes;
     if (totalActivity > 30) return { level: 'High', color: 'bg-green-500' };
     if (totalActivity > 15) return { level: 'Medium', color: 'bg-yellow-500' };
-    return { level: 'Low', color: 'bg-gray-400' };
-  };
+    return { level: 'Low', color: 'bg-gray-400' }
+};
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8">
+    <div className="flex items-center justify-center p-8">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading collaboration sessions...</p>
-    
-        </div>
-    );
   }
 
   return (
     <div className="space-y-6">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
@@ -255,7 +247,7 @@ export default function CollaborationDashboard() {
             const activity = getActivityLevel(session);
 
             return (
-              <Card
+    <Card
                 key={session.id}
                 className="hover:shadow-md transition-shadow"
               >
@@ -325,8 +317,7 @@ export default function CollaborationDashboard() {
                         className="text-red-600 hover:text-red-700"
                       >
                         <Trash2 className="h-4 w-4" />
-                      </Button>
-    );
+                      
               </div>
               </Button>
               </div>
@@ -341,21 +332,13 @@ export default function CollaborationDashboard() {
               </div>
               </Card>
               </CardContent>
-              </div>
-              </div>
-              </div>
-              </Card>
+              </div></Card>
               </CardContent>
               </Button>
               </CardContent>
-              </div>
-              </div>
-              </div>
-              </div>
-              </Button>
+              </div></Button>
           })
         )}
-      </div>
 
       {/* Demo Notice */}
       <Alert>
@@ -364,34 +347,19 @@ export default function CollaborationDashboard() {
           this would display real-time data from your collaboration rooms with
           live participant counts, activity metrics, and session management
           capabilities.</AlertDescription>
-          </Alert>
-      );
 </CardContent>
 </Button>
 </CardContent>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </Card>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </Card>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </Card>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </Card>
 </div>
 </Button>
-</div>
-</div>
-</div>
+</div></div>
 }

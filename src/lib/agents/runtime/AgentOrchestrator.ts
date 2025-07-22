@@ -9,7 +9,7 @@ export interface OrchestratorConfig {
     model?: string
     temperature?: number
   }
-}
+};
 
 export interface ProjectRequest {
   description: string
@@ -17,7 +17,7 @@ export interface ProjectRequest {
   context?: Record<string, any>
   constraints?: string[]
   priorities?: string[]
-}
+};
 
 export interface ProjectResult {
   request: ProjectRequest;
@@ -26,23 +26,22 @@ export interface ProjectResult {
   summary: ProjectSummary;
   artifacts: Map<string, any>
   recommendations: string[]
-}
+};
 
 export interface ProjectSummary {
   overview: string;
   keyFindings: string[];
-  deliverables: Deliverable[]
-  nextSteps: string[];
+  deliverables: Deliverable[]; nextSteps: string[];
   risks: string[]
   timeline?: string
-}
+};
 
 export interface Deliverable {
   name: string;
   type: string;
   description: string
   location?: string
-}
+};
 
 export class AgentOrchestrator {
   private runtime: AgentRuntime
@@ -53,7 +52,7 @@ export class AgentOrchestrator {
       enableLogging: true,
       maxConcurrentAgents: 5,
       timeoutMs: 300000,
-      modelConfig: {
+    modelConfig: {
         model: 'gpt-4',
         temperature: 0.7
       },
@@ -285,7 +284,6 @@ Return as a simple array of recommendation strings.`
    */
   private log(message: string): void {
     if (!this.config.enableLogging) return
-    console.log(`[AgentOrchestrator] ${message}`)
   }
 
   /**
@@ -302,7 +300,7 @@ export async function analyzeProject(description: string): Promise<ProjectResult
   return orchestrator.processProject({
     description: type, 'analysis'
   })
-}
+};
 
 export async function planProject(description: string, constraints?: string[]): Promise<ProjectResult> {
   const orchestrator = new AgentOrchestrator()
@@ -310,7 +308,7 @@ export async function planProject(description: string, constraints?: string[]): 
     description: type, 'planning',
     constraints
   })
-}
+};
 
 export async function architectProject(description: string, priorities?: string[]): Promise<ProjectResult> {
   const orchestrator = new AgentOrchestrator()
@@ -318,7 +316,7 @@ export async function architectProject(description: string, priorities?: string[
     description: type, 'architecture',
     priorities
   })
-}
+};
 
 export async function fullStackProject(
   description: string,

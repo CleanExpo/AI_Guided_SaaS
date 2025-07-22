@@ -23,7 +23,6 @@ export function withApiTracking(handler: ApiHandler): ApiHandler {
         userId = session?.user?.id
       } catch (error) {
         // Session might not be available for all routes
-        console.log('Session not available for tracking')
       }
       
       // Call the actual handler
@@ -171,7 +170,7 @@ export function withRateLimit(
               },
               { 
                 status: 429,
-                headers: {
+    headers: {
                   'X-RateLimit-Limit': maxRequests.toString(),
                   'X-RateLimit-Remaining': '0',
                   'X-RateLimit-Reset': new Date(userLimit.resetTime).toISOString()

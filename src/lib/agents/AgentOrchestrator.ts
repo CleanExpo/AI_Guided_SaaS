@@ -3,21 +3,21 @@ import { AgentCoordinator } from './AgentCoordinator'
 import { AgentRegistry } from './AgentRegistry'
 import { AgentMonitor } from './AgentMonitor'
 import { AgentCommunication } from './AgentCommunication'
-import type { AgentConfig } from './AgentLoader'
+import type {  AgentConfig  } from './AgentLoader'
 
 export interface OrchestratorConfig {
   stage: 'planning' | 'development' | 'testing' | 'deployment' | 'production'
   projectType: string;
   maxConcurrentAgents: number;
   enableMonitoring: boolean
-}
+};
 
 export class AgentOrchestrator {
   private loader: AgentLoader
-  private coordinator: AgentCoordinator
-  private registry: AgentRegistry
-  private monitor: AgentMonitor
-  private communication: AgentCommunication
+  private, coordinator: AgentCoordinator
+  private, registry: AgentRegistry
+  private, monitor: AgentMonitor
+  private, communication: AgentCommunication
   private, config: OrchestratorConfig
   private initialized = false
   
@@ -39,12 +39,10 @@ export class AgentOrchestrator {
   
   async initialize(): Promise<void> {
     if (this.initialized) {
-      console.log('🤖 Orchestrator already initialized')
+
       return
     }
-    
-    console.log('🚀 Initializing Agent Orchestrator...')
-    
+
     // Initialize communication channels
     await this.communication.initialize()
     
@@ -62,7 +60,7 @@ export class AgentOrchestrator {
     }
     
     this.initialized = true
-    console.log('✅ Agent Orchestrator initialized successfully')
+
   }
   
   private async registerAgent(agent: AgentConfig): Promise<void> {
@@ -74,7 +72,7 @@ export class AgentOrchestrator {
       status: "ACTIVE" as const endpoint: `internal://${agent.agent_id}`,
       version: agent.version,
       last_heartbeat: new Date(),
-      metadata: {
+    metadata: {
         role: agent.role,
         specializations: agent.specializations,
         priority: agent.priority
@@ -95,9 +93,7 @@ export class AgentOrchestrator {
     if (!this.initialized) {
       await this.initialize()
     }
-    
-    console.log('🎯 Executing workflow:', requirements.type)
-    
+
     // Create coordination plan
     const plan = await this.coordinator.createCoordinationPlan(
       this.config.projectType,
@@ -113,7 +109,7 @@ export class AgentOrchestrator {
       const metrics = this.monitor.getAgentMetrics(
         this.registry.getActiveAgents().map(a => a.agent_id)
       )
-      console.log('📊 Execution metrics:', metrics)
+
     }
     
     return result
@@ -123,8 +119,7 @@ export class AgentOrchestrator {
     name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical'
     requirements: Record<string, any>
   }): Promise<any> {
-    console.log(`🎼 Orchestrating, task: ${task.name}`)
-    
+
     // Find suitable agents
     const suitableAgents = this.findSuitableAgents(task)
     
@@ -184,7 +179,13 @@ export class AgentOrchestrator {
   private calculateDeadline(priority: string): Date {
     const now = new Date()
     const deadlines = {
-      critical: 5 * 60 * 1000,      // 5 minutes, high: 30 * 60 * 1000,         // 30 minutes, medium: 2 * 60 * 60 * 1000,   // 2 hours, low: 24 * 60 * 60 * 1000      // 24 hours
+      critical: 5 * 60 * 1000,
+  // 5 minutes
+  high: 30 * 60 * 1000,
+  // 30 minutes
+  medium: 2 * 60 * 60 * 1000,
+  // 2 hours
+  low: 24 * 60 * 60 * 1000      // 24 hours
     }
     
     return new Date(now.getTime() + (deadlines[priority as keyof typeof deadlines] || deadlines.medium))
@@ -198,14 +199,14 @@ export class AgentOrchestrator {
     return {
       initialized: this.initialized,
       stage: this.config.stage,
-      agents: {
+    agents: {
         total: agents.length,
         healthy: healthyAgents.length,
         busy: agents.filter(a => a.health_status === 'warning').length,
         offline: agents.filter(a => a.health_status === 'offline').length
       },
       system: metrics,
-      communication: {
+    communication: {
         channels: this.communication.getActiveChannels().length,
         messages: this.communication.getMessageCount()
       }
@@ -213,8 +214,7 @@ export class AgentOrchestrator {
   }
   
   async shutdown(): Promise<void> {
-    console.log('🛑 Shutting down Agent Orchestrator...')
-    
+
     // Stop monitoring
     if (this.config.enableMonitoring) {
       this.monitor.stopMonitoring()
@@ -230,7 +230,7 @@ export class AgentOrchestrator {
     }
     
     this.initialized = false
-    console.log('✅ Agent Orchestrator shut down successfully')
+
   }
 }
 
@@ -242,6 +242,6 @@ export function getOrchestrator(config?: Partial<OrchestratorConfig>): AgentOrch
     orchestratorInstance = new AgentOrchestrator(config)
   }
   return orchestratorInstance
-}
+};
 
 export default AgentOrchestrator

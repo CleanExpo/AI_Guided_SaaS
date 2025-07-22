@@ -18,17 +18,17 @@ export async function POST(request: NextRequest) {
       id: `analysis_${Date.now()}`,
       type: analysisType,
       timestamp: new Date().toISOString(),
-      results: {
+    results: {
         confidence: 0.95,
         categories: ['object', 'scene'],
         description: 'Image analysis completed',
-        metadata: {
+    metadata: {
           dimensions: { width: 0, height: 0 },
           format: 'unknown',
-          size: 0
-        }
+          size: 0;
+        }},
       },
-      processing_time: 150
+      processing_time: 150,
     };
 
     return NextResponse.json(analysis);
@@ -39,16 +39,21 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+};
 
 export async function GET() {
   try {
     // Return available analysis types and capabilities
     const capabilities = {
       supported_formats: ['jpg', 'jpeg', 'png', 'webp'],
-      analysis_types: ['general', 'object_detection', 'scene_analysis', 'text_extraction'],
+      analysis_types: [
+        'general',
+        'object_detection',
+        'scene_analysis',
+        'text_extraction',
+      ],
       max_file_size: '10MB',
-      processing_time_estimate: '1-5 seconds'
+      processing_time_estimate: '1-5 seconds',
     };
 
     return NextResponse.json(capabilities);

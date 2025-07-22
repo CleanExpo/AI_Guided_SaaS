@@ -11,7 +11,7 @@ export interface AgentConfig {
   model?: string
   temperature?: number
   maxTokens?: number
-}
+};
 
 export interface AgentMessage {
   id: string;
@@ -20,7 +20,7 @@ export interface AgentMessage {
   content: string
   metadata?: Record<string, any>
   timestamp: Date
-}
+};
 
 export interface AgentContext {
   projectId: string;
@@ -30,7 +30,7 @@ export interface AgentContext {
   history: AgentMessage[];
   sharedMemory: Map<string, any>
   artifacts: Map<string, any>
-}
+};
 
 export interface AgentArtifact {
   type: 'code' | 'documentation' | 'configuration' | 'test' | 'other';
@@ -38,7 +38,7 @@ export interface AgentArtifact {
   content: string;
   path?: string;
   metadata?: Record<string, any>;
-}
+};
 
 export interface AgentResult {
   success: boolean;
@@ -47,11 +47,11 @@ export interface AgentResult {
   artifacts?: Map<string, any>
   nextSteps?: string[]
   confidence?: number
-}
+};
 
 export abstract class Agent extends EventEmitter {
   protected config: AgentConfig
-  protected context: AgentContext
+  protected, context: AgentContext
   protected, messages: AgentMessage[] = []
   protected isProcessing: boolean = false
 
@@ -154,7 +154,7 @@ export abstract class Agent extends EventEmitter {
       
       return {
         success: false,
-        output: { error: errorMessage },
+    output: { error: errorMessage },
         messages: this.messages
       }
     } finally {

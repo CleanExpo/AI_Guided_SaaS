@@ -1,20 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  Building,
-  Shield,
-  Users,
-  Zap,
-  CheckCircle,
-  ArrowRight} from 'lucide-react';
+import { Building, Shield, Users, Zap, CheckCircle, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Enterprise Solutions - AI Guided SaaS Platform',
@@ -104,26 +93,16 @@ export default function EnterprisePage() {
             Enterprise Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {enterpriseFeatures.map(feature => {
-              const Icon = feature.icon;
-              return (
-                <Card key={feature.title}>
+              const Icon = feature.icon, return (
+    <Card key={feature.title}>
                   <CardHeader>
                     <Icon className="h-12 w-12 text-primary mb-4" />
                     <CardTitle>{feature.title}</CardTitle>
                     <CardDescription>{feature.description}</CardDescription>
-    );
-            }
-      )}
-    </div>
-        </div>
-        </Card>
-        </div>
-        </div>
-        </div>
-        </div>
-        </Card>
-        </CardHeader>
-    );
+  }
+      );}
+
+        
 
         {/* Benefits */}
         <Card className="mb-16">
@@ -138,7 +117,6 @@ export default function EnterprisePage() {
                 <div key={index} className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
                   <span>{benefit}</span>))}
-            </div>
 
         {/* Pricing */}
         <Card className="mb-16">
@@ -179,9 +157,5 @@ export default function EnterprisePage() {
           </Card>
           </CardHeader>
           </CardContent>
-          </div>
-          </div>
-          </Button>
-          </div>
-      );
-}
+          </div></Button>
+  }

@@ -6,7 +6,7 @@ export interface N8nConfig {
   apiKey?: string
   username?: string
   password?: string
-}
+};
 
 export interface N8nWorkflow {
   id?: string;
@@ -18,7 +18,7 @@ export interface N8nWorkflow {
   tags?: string[]
   createdAt?: string
   updatedAt?: string
-}
+};
 
 export interface N8nNode {
   id: string;
@@ -29,7 +29,7 @@ export interface N8nNode {
   parameters: Record<string, any>
   credentials?: Record<string, string>
   disabled?: boolean
-}
+};
 
 export interface N8nConnection {
   [nodeId: string]: {
@@ -39,7 +39,7 @@ export interface N8nConnection {
       index: number
     }>[]
   }
-}
+};
 
 export interface N8nWorkflowSettings {
   executionOrder?: 'v1'
@@ -47,7 +47,7 @@ export interface N8nWorkflowSettings {
   callerPolicy?: 'any' | 'none' | 'workflowsFromAList' | 'workflowsFromSameOwner'
   errorWorkflow?: string
   timezone?: string
-}
+};
 
 export interface N8nExecution {
   id: string;
@@ -60,7 +60,7 @@ export interface N8nExecution {
   workflowId: string
   workflowData?: N8nWorkflow
   data?: N8nExecutionData
-}
+};
 
 export interface N8nExecutionData {
   startData?: any;
@@ -72,7 +72,7 @@ export interface N8nExecutionData {
     contextData: Record<string, any>
     nodeExecutionStack: any[], waitingExecution: Record<string, any>
   }
-}
+};
 
 export interface N8nWebhook {
   httpMethod: string;
@@ -229,7 +229,7 @@ export class N8nClient {
     
     const response = await fetch(webhookUrl, {
       method: httpMethod,
-      headers: {
+    headers: {
         'Content-Type': 'application/json',
         ...headers
       },
@@ -269,7 +269,7 @@ export class N8nClient {
     
     const response = await fetch(url, {
       ...options,
-      headers: {
+    headers: {
         ...this.headers,
         ...options.headers
       }
@@ -298,7 +298,7 @@ export class N8nClient {
       name: type: 'n8n-nodes-base.webhook',
       typeVersion: 1,
       position,
-      parameters: {
+    parameters: {
         httpMethod,
         path,
         responseMode: 'lastNode',
@@ -318,12 +318,12 @@ export class N8nClient {
       name: type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position,
-      parameters: {
+    parameters: {
         method,
         url,
         authentication: 'none',
         sendHeaders: true,
-        headerParameters: {
+    headerParameters: {
           parameters: [
             {
               name: 'Content-Type',
@@ -332,10 +332,10 @@ export class N8nClient {
           ]
         },
         sendBody: true,
-        bodyParameters: {
+    bodyParameters: {
           parameters: []
         },
-        options: {}
+    options: {}
       }
     }
   }
@@ -350,7 +350,7 @@ export class N8nClient {
       name: type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position,
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: code
       }

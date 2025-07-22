@@ -1,11 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowRight } from 'lucide-react';
@@ -88,7 +83,6 @@ export default function BlogPage() {
             >
               {category}</Badge>
                   ))}
-        </div>
 
         {/* Featured Post */}
         {featuredPost && (
@@ -155,7 +149,6 @@ export default function BlogPage() {
                       <ArrowRight className="ml-1 h-3 w-3" />
                     </Link>
           ))}
-        </div>
 
         {/* Newsletter Signup */}
         <div className="mt-16 text-center bg-muted rounded-lg p-8">
@@ -163,41 +156,15 @@ export default function BlogPage() {
           <p className="text-muted-foreground mb-6">
             Subscribe to our newsletter to get the latest posts delivered to
             your inbox.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+          <div className="flex flex-col sm: flex-row gap-4 justify-center max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
               className="flex-1 px-4 py-2 rounded-md border border-input bg-background"
             />
             <Button>Subscribe</Button>
-    );
-}
+  }
 
-    </Button>
-    </div>
-    </CardContent>
-    </div>
-    </CardHeader>
-    </Card>
-    </Button>
-    </div>
-    </div>
-    </div>
-    </Card>
-    </div>
+    
   );
-</CardContent>
-</div>
-</CardHeader>
-</Card>
-</Button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</Card>
-</div>
-</div>
 }

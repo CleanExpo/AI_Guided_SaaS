@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ProjectConfig, ProjectFile } from '@/types'
-import { CheckCircle, FileText, Folder, Code, Settings, Palette, Database, Globe } from 'lucide-react'
-
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProjectConfig, ProjectFile } from '@/types';
+import { CheckCircle, FileText, Folder, Code, Settings, Palette, Database, Globe } from 'lucide-react';
 interface ProjectGeneratorProps {
   config: ProjectConfig;
   onFilesGenerated: (files: ProjectFile[]) => void
@@ -23,13 +22,13 @@ const generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
       version: '1.0.0',
       description: config.description,
       main: 'index.js',
-      scripts: {
+    scripts: {
         dev: 'next dev',
         build: 'next build',
         start: 'next start',
         lint: 'next lint'
       },
-      dependencies: {
+    dependencies: {
         'react': '^18.0.0',
         'react-dom': '^18.0.0',
         'next': '^14.0.0',
@@ -110,25 +109,21 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
     name: 'layout.tsx',
     path: 'app/layout.tsx',
     type: 'component',
-    content: `import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+    content: `import type {  Metadata  } from 'next'
+import { Inter } from 'next/font/google';
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: '${config.name}',
-  description: '${config.description}'}
+  description: '${config.description}'};
 
-export default function RootLayout({
-  children}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout() {
   return (
     <html lang="en"></html>
       <body className={inter.className}>{children}</body>
-    );
-}`
+  }`
   })
 
   // Generate global CSS
@@ -143,8 +138,7 @@ export default function RootLayout({
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+  --background-end-rgb: 255, 255, 255, }
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -163,11 +157,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
+  }}
 }`
   })
 
@@ -185,7 +178,7 @@ export async function GET(request: NextRequest) {
     timestamp: new Date().toISOString()
   }
       )}
-    </div>
+
   );
 export async function POST(request: NextRequest) {
   const body = await request.json()
@@ -198,7 +191,7 @@ export async function POST(request: NextRequest) {
 }`
     }
       )}
-    </div>
+
     );
   return files
 }
@@ -215,13 +208,12 @@ const generationSteps = [
 
 export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGeneratorProps) {
   const [currentStep, setCurrentStep] = useState(0)
-      </string>
   const [completedSteps, setCompletedSteps] = useState<string[]>([])
   const [isGenerating, setIsGenerating] = useState(true)
 
   useEffect(() => {
     const generateFiles = async () => {</string>
-      for (let i = 0; i < generationSteps.length; i++) {
+      for (let i = 0; i < generationSteps.length, i++) {
         const step = generationSteps[i]
         setCurrentStep(i)
         
@@ -285,8 +277,8 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
               const IconComponent = step.icon
 
               return (
-                <div
-                  key={step.id}
+    <div
+                key={step.id}
                   className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 ${
                     isCompleted
                       ? 'bg-green-50 border border-green-200'
@@ -326,12 +318,9 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                   )}
-                </div>
+
     );
-            }
-      )}
-    </div>
-    );
+};
 
           {/* Features, List */}
           <div className="bg-gray-50 p-4 rounded-lg"></div>
@@ -341,7 +330,6 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
                 <div key={index} className="flex items-center space-x-2"></div>
                   <CheckCircle className="w-4 h-4 text-green-500" /></CheckCircle>
                   <span className="text-sm text-gray-700">{feature}</span>))}
-            </div>
 
           {!isGenerating && (
             <div className="text-center"></div>
@@ -351,8 +339,6 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
               </div>
               <p className="text-sm text-gray-600 mt-2">
                 Redirecting to your project dashboard...</p>
-  );
-}
+  }
         </CardContent>
-      );
-}
+  }

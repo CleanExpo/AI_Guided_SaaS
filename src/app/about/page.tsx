@@ -32,7 +32,7 @@ export default function AboutPage() {
             Our platform combines cutting-edge AI technology with intuitive
             development tools to create a seamless experience for building
             modern applications. From UI generation to code optimization,
-            we&apos;re here to guide you every step of the way.
+            we&apos, re here to guide you every step of the way.
           </p>
 
           <h2 className="text-2xl font-semibold mb-4">Our Values</h2>
@@ -43,7 +43,7 @@ export default function AboutPage() {
             <li>Community-driven development</li>
           </ul>
         </div>
+      </div>
     </div>
   );
 }
-</div>

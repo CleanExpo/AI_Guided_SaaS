@@ -9,34 +9,34 @@ import { analyzeCausalLogs, generateCausalInsights } from './causal-feedback-rep
 // Type definitions for self-check report system
 export interface ModuleReport {
   status: string;
-  present: string[]
+  present: string[];
   missing: string[]
-}
+};
 
 export interface DependencyReport {
   status: string;
   summary: string;
   outdated: string[]
-}
+};
 
 export interface SecurityReport {
   status: string;
   summary: string;
   vulnerabilities: string[]
-}
+};
 
 export interface CausalAnalysis {
   status: string;
   summary: string;
-  patterns: string[]
+  patterns: string[];
   recommendations: string[]
-}
+};
 
 export interface CausalInsights {
   totalInteractions: number;
   uniqueComponents: number;
   topIssues: string[]
-}
+};
 
 export interface HealthMetrics {
   moduleScore: number;
@@ -44,7 +44,7 @@ export interface HealthMetrics {
   securityScore: number;
   uxScore: number;
   overallScore: number
-}
+};
 
 export interface ReportData {
   moduleReport: ModuleReport;
@@ -52,11 +52,11 @@ export interface ReportData {
   securityReport: SecurityReport;
   causalAnalysis: CausalAnalysis;
   causalInsights: CausalInsights
-}
+};
 
 export async function generateSelfCheckReport(): Promise<string> {
   const timestamp = new Date().toISOString();
-  
+
   // Gather all diagnostic data
   const moduleReport = checkModules();
   const depReport = auditDependencies();
@@ -130,13 +130,17 @@ ${causalInsights.topIssues.map(issue => `- ${issue}`).join('\n')}
 ## 🎯 Recommendations
 
 ### Immediate Actions
-${getImmediateActions(moduleReport, depReport, securityReport, causalAnalysis).map(action => `- ${action}`).join('\n')}
+${getImmediateActions(moduleReport, depReport, securityReport, causalAnalysis)
+  .map(action => `- ${action}`)
+  .join('\n')}
 
 ### UX Improvements
 ${causalAnalysis.recommendations.map(rec => `- ${rec}`).join('\n')}
 
 ### System Improvements
-${getSystemRecommendations(depReport, securityReport).map(rec => `- ${rec}`).join('\n')}
+${getSystemRecommendations(depReport, securityReport)
+  .map(rec => `- ${rec}`)
+  .join('\n')}
 
 ---
 
@@ -178,13 +182,20 @@ ${getSystemRecommendations(depReport, securityReport).map(rec => `- ${rec}`).joi
   return report;
 }
 
-function getOverallHealthStatus(moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis): string {
+function getOverallHealthStatus(
+  moduleReport: ModuleReport,
+  depReport: DependencyReport,
+  securityReport: SecurityReport,
+  causalAnalysis: CausalAnalysis
+): string {
   const issues = [];
-  
+
   if (moduleReport.missing.length > 0) issues.push('missing modules');
   if (depReport.outdated.length > 0) issues.push('outdated dependencies');
-  if (securityReport.vulnerabilities.length > 0) issues.push('security vulnerabilities');
-  if (causalAnalysis.patterns.some((p: string) => p.includes('❌'))) issues.push('UX concerns');
+  if (securityReport.vulnerabilities.length > 0)
+    issues.push('security vulnerabilities');
+  if (causalAnalysis.patterns.some((p: string) => p.includes('❌')))
+    issues.push('UX concerns');
 
   if (issues.length === 0) return '✅ Excellent - All systems healthy';
   if (issues.length === 1) return `⚠️ Good - Minor, issue: ${issues[0]}`;
@@ -192,23 +203,36 @@ function getOverallHealthStatus(moduleReport: ModuleReport, depReport: Dependenc
   return `❌ Needs Attention - Multiple, issues: ${issues.join(', ')}`;
 }
 
-function getImmediateActions(moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis): string[] {
+function getImmediateActions(
+  moduleReport: ModuleReport,
+  depReport: DependencyReport,
+  securityReport: SecurityReport,
+  causalAnalysis: CausalAnalysis
+): string[] {
   const actions = [];
 
   if (securityReport.vulnerabilities.length > 0) {
-    actions.push('🔴 **URGENT**: Address security vulnerabilities with `npm audit fix`');
+    actions.push(
+      '🔴 **URGENT**: Address security vulnerabilities with `npm audit fix`'
+    );
   }
 
   if (moduleReport.missing.length > 0) {
-    actions.push(`🟠 **HIGH**: Implement missing, modules: ${moduleReport.missing.join(', ')}`);
+    actions.push(
+      `🟠 **HIGH**: Implement missing, modules: ${moduleReport.missing.join(', ')}`
+    );
   }
 
   if (depReport.outdated.length > 3) {
-    actions.push('🟡 **MEDIUM**: Update outdated dependencies during next maintenance window');
+    actions.push(
+      '🟡 **MEDIUM**: Update outdated dependencies during next maintenance window'
+    );
   }
 
   if (causalAnalysis.patterns.some((p: string) => p.includes('❌'))) {
-    actions.push('🟢 **LOW**: Review high-deletion components for UX improvements');
+    actions.push(
+      '🟢 **LOW**: Review high-deletion components for UX improvements'
+    );
   }
 
   if (actions.length === 0) {
@@ -218,12 +242,17 @@ function getImmediateActions(moduleReport: ModuleReport, depReport: DependencyRe
   return actions;
 }
 
-function getSystemRecommendations(depReport: DependencyReport, securityReport: SecurityReport): string[] {
+function getSystemRecommendations(
+  depReport: DependencyReport,
+  securityReport: SecurityReport
+): string[] {
   const recommendations = [];
 
   if (depReport.outdated.length > 0) {
     recommendations.push('Set up automated dependency updates with Dependabot');
-    recommendations.push('Implement dependency vulnerability scanning in CI/CD');
+    recommendations.push(
+      'Implement dependency vulnerability scanning in CI/CD'
+    );
   }
 
   if (securityReport.vulnerabilities.length > 0) {
@@ -252,25 +281,38 @@ function getDependencyScore(depReport: DependencyReport): number {
 
 function getSecurityScore(securityReport: SecurityReport): number {
   if (securityReport.vulnerabilities.length === 0) return 100;
-  if (securityReport.vulnerabilities.some((v: string) => v.includes('🔴'))) return 30;
-  if (securityReport.vulnerabilities.some((v: string) => v.includes('🟠'))) return 60;
+  if (securityReport.vulnerabilities.some((v: string) => v.includes('🔴')))
+    return 30;
+  if (securityReport.vulnerabilities.some((v: string) => v.includes('🟠')))
+    return 60;
   return 80;
 }
 
 function getUXScore(causalInsights: CausalInsights): number {
   if (causalInsights.totalInteractions === 0) return 90; // No data yet
-  if (causalInsights.topIssues.length === 0 || causalInsights.topIssues[0] === 'No significant issues detected') return 100;
+  if (
+    causalInsights.topIssues.length === 0 ||
+    causalInsights.topIssues[0] === 'No significant issues detected'
+  )
+    return 100;
   if (causalInsights.topIssues.length <= 1) return 85;
   if (causalInsights.topIssues.length <= 3) return 70;
   return 50;
 }
 
-function getOverallScore(moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalInsights: CausalInsights): number {
+function getOverallScore(
+  moduleReport: ModuleReport,
+  depReport: DependencyReport,
+  securityReport: SecurityReport,
+  causalInsights: CausalInsights
+): number {
   const moduleScore = getModuleScore(moduleReport);
   const depScore = getDependencyScore(depReport);
   const securityScore = getSecurityScore(securityReport);
   const uxScore = getUXScore(causalInsights);
 
   // Weighted, average: Security is most important, then modules, then dependencies, then UX
-  return Math.round((securityScore * 0.4) + (moduleScore * 0.3) + (depScore * 0.2) + (uxScore * 0.1));
+  return Math.round(
+    securityScore * 0.4 + moduleScore * 0.3 + depScore * 0.2 + uxScore * 0.1
+  );
 }

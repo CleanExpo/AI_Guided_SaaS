@@ -90,8 +90,6 @@ class BuildSyncAgent {
         error: '❌',
         debug: '🔍'}[type] || '📋';
 
-    console.log(`${prefix} [${timestamp}] ${message}`);
-
     if (type === 'error') this.errors.push(message);
     if (type === 'warning') this.warnings.push(message);
   }

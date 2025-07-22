@@ -15,7 +15,7 @@ export function createTestingAutomationWorkflow(
       type: 'n8n-nodes-base.webhook',
       typeVersion: 1,
       position: [250, 300],
-      parameters: {
+    parameters: {
         httpMethod: 'POST',
         path: webhookPath,
         responseMode: 'lastNode',
@@ -23,14 +23,13 @@ export function createTestingAutomationWorkflow(
       }
     },
 
-    // 2. Schedule trigger (alternative)
-    {
+    // 2. Schedule trigger (alternative) {
       id: 'schedule_1',
       name: 'Scheduled Tests',
       type: 'n8n-nodes-base.scheduleTrigger',
       typeVersion: 1,
       position: [250, 500],
-      parameters: {
+    parameters: {
         rule: {
           interval: [
             {
@@ -50,7 +49,7 @@ export function createTestingAutomationWorkflow(
       type: 'n8n-nodes-base.merge',
       typeVersion: 2,
       position: [450, 400],
-      parameters: {
+    parameters: {
         mode: 'combine',
         combinationMode: 'multiplex'
       }
@@ -63,7 +62,7 @@ export function createTestingAutomationWorkflow(
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [650, 400],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 const input = $input.item.json;
@@ -101,7 +100,7 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [850, 300],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.API_URL }}/api/test/unit',
         authentication: 'predefinedCredentialType',
@@ -115,7 +114,7 @@ return {
             runId: $json.runId
           })
         }}`,
-        options: {
+    options: {
           timeout: 120000 // 2 minutes
         }
       }
@@ -128,7 +127,7 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [850, 400],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.API_URL }}/api/test/integration',
         authentication: 'predefinedCredentialType',
@@ -141,7 +140,7 @@ return {
             runId: $json.runId
           })
         }}`,
-        options: {
+    options: {
           timeout: 180000 // 3 minutes
         }
       }
@@ -154,7 +153,7 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [850, 500],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.API_URL }}/api/test/e2e',
         authentication: 'predefinedCredentialType',
@@ -168,7 +167,7 @@ return {
             runId: $json.runId
           })
         }}`,
-        options: {
+    options: {
           timeout: 300000 // 5 minutes
         }
       }
@@ -181,7 +180,7 @@ return {
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [1050, 400],
-      parameters: {
+    parameters: {
         mode: 'runOnceForAllItems',
         jsCode: `
 const items = $input.all();
@@ -246,7 +245,7 @@ return [{
       type: 'n8n-nodes-base.if',
       typeVersion: 1,
       position: [1250, 400],
-      parameters: {
+    parameters: {
         conditions: {
           boolean: [
             {
@@ -265,7 +264,7 @@ return [{
       type: 'n8n-nodes-base.html',
       typeVersion: 1,
       position: [1450, 300],
-      parameters: {
+    parameters: {
         operation: 'generateHtmlTemplate',
         html: `
 <!DOCTYPE html>
@@ -273,25 +272,27 @@ return [{
 <head>
   <title>Test Report - {{ $json.projectId }}</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .header { background: #28a745, color: white; padding: 20px; border-radius: 5px; }
-    .failed { background: #dc3545; }
-    .summary { display: flex, gap: 20px; margin: 20px 0; }
-    .metric { background: #f8f9fa, padding: 15px; border-radius: 5px; flex: 1; }
-    .metric h3 { margin: 0 0 10px 0; }
-    .suite { margin: 20px 0, padding: 15px; background: #f8f9fa; border-radius: 5px; }
-    table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-    th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
-    .coverage { display: flex, gap: 10px; margin: 10px 0; }
-    .coverage-item { flex: 1; }
-    .bar { background: #e0e0e0, height: 20px; border-radius: 3px; overflow: hidden; }
-    .bar-fill { background: #28a745, height: 100%; }
+    body { font-family: Arial, sans-serif; margin: 20px }
+    .header { background: #28a745, color: white, padding: 20px; border-radius: 5px }
+    .failed { background: #dc3545 }
+    .summary { display: flex, gap: 20px, margin: 20px 0 }
+    .metric { background: #f8f9fa, padding: 15px; border-radius: 5px; flex: 1 }
+    .metric h3 { margin: 0 0 10px 0 }
+    .suite { margin: 20px 0, padding: 15px, background: #f8f9fa; border-radius: 5px }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0 }
+    th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd }
+    .coverage { display: flex, gap: 10px, margin: 10px 0 }
+    .coverage-item { flex: 1 }
+    .bar { background: #e0e0e0, height: 20px; border-radius: 3px; overflow: hidden }
+    .bar-fill { background: #28a745, height: 100% }
   </style>
 </head>
 <body>
   <div class="header {{ $json.success ? '' : 'failed' }}">
-    <h1>Test, Report: {{ $json.projectId }}</h1>
-    <p>Run, ID: {{ $json.runId }} | {{ $json.timestamp }}</p>
+    <h1>Test,
+    Report: {{ $json.projectId }}</h1>
+    <p>Run,
+    ID: {{ $json.runId }} | {{ $json.timestamp }}</p>
   </div>
 
   <div class="summary">
@@ -373,7 +374,7 @@ return [{
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [1650, 300],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.API_URL }}/api/reports/upload',
         authentication: 'predefinedCredentialType',
@@ -387,7 +388,7 @@ return [{
             content: $json.html
           })
         }}`,
-        options: {}
+    options: {}
       }
     },
 
@@ -398,7 +399,7 @@ return [{
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [1450, 500],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 const results = $json;
@@ -432,13 +433,13 @@ return {
       type: 'n8n-nodes-base.slack',
       typeVersion: 2,
       position: [1850, 400],
-      parameters: {
+    parameters: {
         authentication: 'oAuth2',
         resource: 'message',
         operation: 'post',
         channel: '={{ $env.SLACK_CHANNEL }}',
         text: '={{ $json.message || "Test run completed for " + $json.projectId }}',
-        otherOptions: {
+    otherOptions: {
           attachments: [
             {
               color: '={{ $json.success ? "good" : "danger" }}',
@@ -472,7 +473,7 @@ return {
           ]
         }
       },
-      credentials: {
+    credentials: {
         slackOAuth2Api: 'Slack OAuth2'
       }
     }

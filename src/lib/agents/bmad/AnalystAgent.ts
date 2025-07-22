@@ -1,16 +1,16 @@
-import { Agent, AgentConfig, AgentResult } from '../base/Agent'
-import { generateAIResponse } from '@/lib/ai'
+import { Agent, AgentConfig, AgentResult } from '../base/Agent';
+import { generateAIResponse } from '@/lib/ai';
 
 export interface RequirementAnalysis {
   functionalRequirements: string[];
-  nonFunctionalRequirements: string[]
+  nonFunctionalRequirements: string[];
   constraints: string[];
-  assumptions: string[]
+  assumptions: string[];
   risks: string[];
-  successCriteria: string[]
+  successCriteria: string[];
   userStories: UserStory[];
   technicalConsiderations: string[]
-}
+};
 
 export interface UserStory {
   id: string;
@@ -19,9 +19,9 @@ export interface UserStory {
   iWant: string;
   soThat: string;
   acceptanceCriteria: string[];
-  priority: 'high' | 'medium' | 'low'
+  priority: 'high' | 'medium' | 'low';
   estimatedEffort: 'small' | 'medium' | 'large'
-}
+};
 
 export class AnalystAgent extends Agent {
   constructor() {
@@ -29,59 +29,60 @@ export class AnalystAgent extends Agent {
       id: 'analyst-agent',
       name: 'Requirements Analyst',
       role: 'Analyze and document project requirements',
-      description: 'Expert in requirement gathering, analysis, and documentation. Creates comprehensive requirement specifications from user input.',
+      description:
+        'Expert in requirement gathering, analysis, and documentation. Creates comprehensive requirement specifications from user input.',
       capabilities: [
         'Requirement extraction',
         'User story creation',
         'Risk analysis',
         'Success criteria definition',
-        'Constraint identification'
+        'Constraint identification',
       ],
-      tools: [
-        'requirement-parser',
-        'user-story-generator',
-        'risk-analyzer'
-      ],
-      temperature: 0.3 // Lower temperature for more consistent analysis
-    })
+      tools: ['requirement-parser', 'user-story-generator', 'risk-analyzer'],
+      temperature: 0.3; // Lower temperature for more consistent analysis
+    }});
   }
 
   protected async execute(input: string): Promise<AgentResult> {
     try {
-      this.think('Starting requirement analysis process...')
+      this.think('Starting requirement analysis process...');
 
       // Step, 1: Extract raw requirements
-      const rawRequirements = await this.extractRequirements(input)
-      this.observe('Extracted raw requirements', rawRequirements)
+      const rawRequirements = await this.extractRequirements(input);
+      this.observe('Extracted raw requirements', rawRequirements);
 
       // Step, 2: Categorize requirements
-      const categorizedReqs = await this.categorizeRequirements(rawRequirements)
-      this.observe('Categorized requirements', categorizedReqs)
+      const categorizedReqs =
+        await this.categorizeRequirements(rawRequirements);
+      this.observe('Categorized requirements', categorizedReqs);
 
       // Step, 3: Generate user stories
       const userStories = await this.generateUserStories(
         categorizedReqs.functionalRequirements,
         input
-      )
-      this.observe('Generated user stories', userStories)
+      );
+      this.observe('Generated user stories', userStories);
 
       // Step, 4: Identify risks and constraints
-      const risks = await this.identifyRisks(input, categorizedReqs)
-      const constraints = await this.identifyConstraints(input)
-      
-      this.observe('Identified risks', risks)
-      this.observe('Identified constraints', constraints)
+      const risks = await this.identifyRisks(input, categorizedReqs);
+      const constraints = await this.identifyConstraints(input);
+
+      this.observe('Identified risks', risks);
+      this.observe('Identified constraints', constraints);
 
       // Step, 5: Define success criteria
       const successCriteria = await this.defineSuccessCriteria(
         categorizedReqs.functionalRequirements,
         userStories
-      )
-      this.observe('Defined success criteria', successCriteria)
+      );
+      this.observe('Defined success criteria', successCriteria);
 
       // Step, 6: Technical considerations
-      const technicalConsiderations = await this.analyzeTechnicalAspects(input, categorizedReqs)
-      this.observe('Technical considerations', technicalConsiderations)
+      const technicalConsiderations = await this.analyzeTechnicalAspects(
+        input,
+        categorizedReqs
+      );
+      this.observe('Technical considerations', technicalConsiderations);
 
       // Compile final analysis
       const analysis: RequirementAnalysis = {
@@ -92,16 +93,19 @@ export class AnalystAgent extends Agent {
         risks,
         successCriteria,
         userStories,
-        technicalConsiderations
-      }
+        technicalConsiderations,
+      };
 
       // Store analysis in artifacts
-      this.setArtifact('requirement-analysis', analysis)
-      
+      this.setArtifact('requirement-analysis', analysis);
+
       // Share key insights with other agents
-      this.setSharedMemory('primary-requirements', categorizedReqs.functionalRequirements)
-      this.setSharedMemory('user-stories', userStories)
-      this.setSharedMemory('technical-constraints', constraints)
+      this.setSharedMemory(
+        'primary-requirements',
+        categorizedReqs.functionalRequirements
+      );
+      this.setSharedMemory('user-stories', userStories);
+      this.setSharedMemory('technical-constraints', constraints);
 
       return {
         success: true,
@@ -111,14 +115,13 @@ export class AnalystAgent extends Agent {
         nextSteps: [
           'Project Manager to create project plan',
           'Architect to design system architecture',
-          'Review and validate requirements with stakeholder'
+          'Review and validate requirements with stakeholder',
         ],
-        confidence: 0.95
-      }
-
+        confidence: 0.95,
+      };
     } catch (error) {
-      this.think(`Error during, analysis: ${error}`)
-      throw error
+      this.think(`Error during, analysis: ${error}`);
+      throw error;
     }
   }
 
@@ -128,18 +131,19 @@ export class AnalystAgent extends Agent {
 Project, Description:
 ${input}
 
-Provide a comprehensive list of all requirements found.`
+Provide a comprehensive list of all requirements found.`;
 
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
-      temperature: this.config.temperature
-    })
+      temperature: this.config.temperature;
+    }});
 
-    return response
+    return response;
   }
 
   private async categorizeRequirements(rawRequirements: string): Promise<{
-    functionalRequirements: string[], nonFunctionalRequirements: string[]
+    functionalRequirements: string[],
+    nonFunctionalRequirements: string[],
     assumptions: string[]
   }> {
     const prompt = `Categorize the following requirements, into:
@@ -150,15 +154,15 @@ Provide a comprehensive list of all requirements found.`
 Requirements:
 ${rawRequirements}
 
-Format the response as JSON with arrays for each category.`
+Format the response as JSON with arrays for each category.`;
 
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
       temperature: 0.1,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    return JSON.parse(response)
+    return JSON.parse(response);
   }
 
   private async generateUserStories(
@@ -182,26 +186,24 @@ For each user story, provide:
 - Priority (high/medium/low)
 - Estimated effort (small/medium/large)
 
-Format as JSON array of user story objects.`
+Format as JSON array of user story objects.`;
 
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
       temperature: 0.3,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    const stories = JSON.parse(response)
-    
+    const stories = JSON.parse(response);
+
     // Add IDs to stories
     return stories.map((story, index: number) => ({
       ...story,
-      id: `US-${index + 1}`
-    }))
+      id: `US-${index + 1}`;
+    }}));
   }
 
-  private async identifyRisks(
-    input: string,
-    requirements): Promise<string[]> {
+  private async identifyRisks(input: string, requirements): Promise<string[]> {
     const prompt = `Identify potential risks for this project based on the requirements and description.
 
 Project, Description:
@@ -210,15 +212,15 @@ ${input}
 Requirements, Summary:
 ${JSON.stringify(requirements, null, 2)}
 
-List technical risks, business risks, timeline risks, and any other concerns. Be specific and actionable.`
+List technical risks, business risks, timeline risks, and any other concerns. Be specific and actionable.`;
 
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
-      temperature: 0.4
-    })
+      temperature: 0.4;
+    }});
 
     // Parse response into array
-    return response.split('\n').filter(line => line.trim().length > 0)
+    return response.split('\n').filter(line => line.trim().length > 0);
   }
 
   private async identifyConstraints(input: string): Promise<string[]> {
@@ -232,14 +234,14 @@ Include:
 - Regulatory constraints (compliance, security requirements)
 - Operational constraints (performance, scalability needs)
 
-List each constraint clearly.`
+List each constraint clearly.`;
 
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
-      temperature: 0.2
-    })
+      temperature: 0.2;
+    }});
 
-    return response.split('\n').filter(line => line.trim().length > 0)
+    return response.split('\n').filter(line => line.trim().length > 0);
   }
 
   private async defineSuccessCriteria(
@@ -252,21 +254,25 @@ Functional, Requirements:
 ${functionalReqs.join('\n')}
 
 Key User, Stories:
-${userStories.slice(0, 5).map(s => s.title).join('\n')}
+${userStories
+  .slice(0, 5)
+  .map(s => s.title)
+  .join('\n')}
 
-Provide specific, measurable, achievable, relevant, and time-bound (SMART) criteria.`
+Provide specific, measurable, achievable, relevant, and time-bound (SMART) criteria.`;
 
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
-      temperature: 0.3
-    })
+      temperature: 0.3;
+    }});
 
-    return response.split('\n').filter(line => line.trim().length > 0)
+    return response.split('\n').filter(line => line.trim().length > 0);
   }
 
   private async analyzeTechnicalAspects(
     input: string,
-    requirements): Promise<string[]> {
+    requirements
+  ): Promise<string[]> {
     const prompt = `Analyze the technical aspects and considerations for this, project:
 
 Project, Description:
@@ -282,13 +288,13 @@ Identify:
 - Security considerations
 - Performance requirements
 - Scalability needs
-- Development complexity areas`
+- Development complexity areas`;
 
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
-      temperature: 0.3
-    })
+      temperature: 0.3;
+    }});
 
-    return response.split('\n').filter(line => line.trim().length > 0)
+    return response.split('\n').filter(line => line.trim().length > 0);
   }
 }

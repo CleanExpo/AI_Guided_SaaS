@@ -6,7 +6,7 @@ import { join } from 'path'
 export interface CoordinationTask {
   id: string;
   agent_id: string;
-  action: string, input;
+  action: string, input,
   dependencies: string[];
   priority: 'low' | 'medium' | 'high' | 'critical'
   status: 'pending' | 'ready' | 'in_progress' | 'completed' | 'failed' | 'blocked'
@@ -15,7 +15,7 @@ export interface CoordinationTask {
   completed_at?: Date
   result?: any
   error?: string
-}
+};
 
 export interface CoordinationPlan {
   id: string;
@@ -27,7 +27,7 @@ export interface CoordinationPlan {
   estimated_duration: number;
   status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed'
   progress: number
-}
+};
 
 export interface AgentHandoff {
   from_agent: string;
@@ -36,19 +36,18 @@ export interface AgentHandoff {
   timestamp: Date;
   success: boolean
   notes?: string
-}
+};
 
 export interface CoordinationResult {
   plan: CoordinationPlan;
   completed_tasks: CoordinationTask[];
-  failed_tasks: CoordinationTask[]
-  handoffs: AgentHandoff[];
+  failed_tasks: CoordinationTask[]; handoffs: AgentHandoff[];
   total_duration: number;
-  success_rate: number, final_output}
+  success_rate: number, final_output};
 
 export class AgentCoordinator {
   private static instance: AgentCoordinator
-  private loader: AgentLoader
+  private, loader: AgentLoader
   private, activePlans: Map<string, CoordinationPlan> = new Map()
   private handoffHistory: AgentHandoff[] = []
   private actionLogPath: string
@@ -74,7 +73,6 @@ export class AgentCoordinator {
     projectRequirements: string, projectType: string = 'saas_platform',
     stage: string = 'full_stack'
   ): Promise<CoordinationPlan> {
-    console.log('📋 Creating coordination plan...')
 
     const planId = `plan_${Date.now()}`
     const requiredAgents = await this.loader.getRequiredAgentsForStage(stage, projectType)
@@ -110,8 +108,6 @@ export class AgentCoordinator {
     this.activePlans.set(planId, plan)
     await this.logPlanCreation(plan)
 
-    console.log(`✅ Coordination plan, created: ${tasks.length} tasks, ${executionOrder.length} execution phases`)
-    
     return plan
   }
 
@@ -124,7 +120,6 @@ export class AgentCoordinator {
       throw new Error(`Plan not, found: ${planId}`)
     }
 
-    console.log(`🚀 Executing coordination, plan: ${planId}`)
     plan.status = 'executing'
     
     const startTime = Date.now()
@@ -136,7 +131,7 @@ export class AgentCoordinator {
       // Execute tasks in phases (respecting dependencies)
       for (let phaseIndex = 0; phaseIndex < plan.execution_order.length; phaseIndex++) {
         const phase = plan.execution_order[phaseIndex]
-        console.log(`📍 Executing phase ${phaseIndex + 1}/${plan.execution_order.length}: ${phase.join(', ')}`)
+        }`)
 
         // Execute tasks in this phase (can run in parallel)
         const phasePromises = phase.map(taskId => this.executeTask(plan, taskId))
@@ -176,7 +171,7 @@ export class AgentCoordinator {
         
         // Check if we should continue (fail fast on critical errors)
         if (this.shouldStopExecution(failedTasks)) {
-          console.log('❌ Stopping execution due to critical failures')
+
           break
         }
       }
@@ -199,7 +194,7 @@ export class AgentCoordinator {
 
       await this.logExecutionCompletion(result)
       
-      console.log(`✅ Coordination plan, completed: ${successRate.toFixed(1)}% success rate`)
+      }% success rate`)
       
       return result
 
@@ -229,7 +224,7 @@ export class AgentCoordinator {
       throw new Error(`Agent not, available: ${task.agent_id}`)
     }
 
-    console.log(`⚡ Executing, task: ${task.action} (${agent.agent.role})`)
+    `)
     
     task.status = 'in_progress'
     task.started_at = new Date()
@@ -275,7 +270,7 @@ export class AgentCoordinator {
   getCoordinationStatus(): Record<string, any> {
     const status: Record<string, any> = {
       active_plans: this.activePlans.size,
-      plans: {},
+    plans: {},
       agent_status: this.loader.getAgentStatus(),
       recent_handoffs: this.handoffHistory.slice(-10),
       coordination_metrics: this.calculateCoordinationMetrics()
@@ -345,7 +340,7 @@ export class AgentCoordinator {
           id: `task_${startIndex + index}`,
           agent_id: agent.agent_id,
           action: patternName,
-          input: { requirements, pattern },
+    input: { requirements, pattern },
           dependencies: index > 0 ? [`task_${startIndex + index - 1}`] : [],
           priority: agent.priority <= 2 ? 'high' : 'medium',
           status: 'pending',
@@ -505,7 +500,7 @@ export class AgentCoordinator {
       const updatedContent = existingContent + '\n' + entry
       writeFileSync(this.actionLogPath, updatedContent)
     } catch (error) {
-      console.log('⚠️ Failed to update ACTION_LOG.md:', error)
+
     }
   }
 
@@ -515,7 +510,7 @@ export class AgentCoordinator {
       const updatedContent = existingContent + '\n' + entry
       writeFileSync(this.errorLogPath, updatedContent)
     } catch (error) {
-      console.log('⚠️ Failed to update ERROR_LOG.md:', error)
+
     }
   }
 }
@@ -528,12 +523,12 @@ export async function createProjectCoordination(
 ): Promise<CoordinationPlan> {
   const coordinator = AgentCoordinator.getInstance()
   return coordinator.createCoordinationPlan(requirements, projectType, stage)
-}
+};
 
 export async function executeProjectCoordination(planId: string): Promise<CoordinationResult> {
   const coordinator = AgentCoordinator.getInstance()
   return coordinator.executeCoordinationPlan(planId)
-}
+};
 
 export function getCoordinationStatus(): Record<string, any> {
   const coordinator = AgentCoordinator.getInstance()

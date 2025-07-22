@@ -33,7 +33,7 @@ export const generateCodeFromComponent = (
       return `<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
   <div className="p-4 border rounded bg-gray-50">
     ${props.left || 'Left side content'}
-  </div>
+
   <div className="p-4 border rounded bg-gray-50">
     ${props.right || 'Right side content'}
   </div>`;

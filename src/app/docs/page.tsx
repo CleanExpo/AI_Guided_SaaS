@@ -1,16 +1,14 @@
 'use client'
 
-import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem'
-import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem'
-import { DocumentationViewer } from '@/components/docs/DocumentationViewer'
-import { AISupportChat } from '@/components/support/AISupportChat'
-import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
-
+import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
+import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
+import { DocumentationViewer } from '@/components/docs/DocumentationViewer';
+import { AISupportChat } from '@/components/support/AISupportChat';
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 export default function DocsPage() {
   const { data: session } = useSession()
-  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)</DynamicDocumentationSystem>
-      </InteractiveTutorialSystem>
+  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)
   const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)
   
   useEffect(() => {
@@ -28,13 +26,10 @@ export default function DocsPage() {
   
   if (!docSystem || !tutorialSystem) {
     return (
-      <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading documentation...</p>
-    
-        </div>
-    );
   }
   
   return (
@@ -66,17 +61,9 @@ export default function DocsPage() {
         tutorialSystem={tutorialSystem}
         userId={session?.user?.id || 'anonymous'}
       />
-    </div>
-    );
-}
+    
+  }
 
-    </header>
-    </div>
+    
   );
-</div>
-</header>
-</div>
-</div>
-</InteractiveTutorialSystem>
 }
-</InteractiveTutorialSystem>

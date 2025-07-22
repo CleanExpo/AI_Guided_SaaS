@@ -3,7 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { prompt, style = 'realistic', dimensions = { width: 512, height: 512 } } = body;
+    const {
+      prompt,
+      style = 'realistic',
+      dimensions = { width: 512, height: 512 };
+    }} = body;
 
     if (!prompt) {
       return NextResponse.json(
@@ -21,17 +25,16 @@ export async function POST(request: NextRequest) {
       dimensions,
       timestamp: new Date().toISOString(),
       status: 'completed',
-      result: {
+    result: {
         image_url: '/placeholder-generated-image.jpg',
         thumbnail_url: '/placeholder-thumbnail.jpg',
-        metadata: {
+    metadata: {
           model: 'stable-diffusion-v2',
           steps: 50,
           guidance_scale: 7.5,
-          seed: Math.floor(Math.random() * 1000000)
-        }
-      },
-      processing_time: 3500
+          seed: Math.floor(Math.random() * 1000000)};
+      }},
+      processing_time: 3500,
     };
 
     return NextResponse.json(generation);
@@ -42,23 +45,29 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+};
 
 export async function GET() {
   try {
     // Return available generation options and capabilities
     const capabilities = {
-      supported_styles: ['realistic', 'artistic', 'cartoon', 'abstract', 'photographic'],
+      supported_styles: [
+        'realistic',
+        'artistic',
+        'cartoon',
+        'abstract',
+        'photographic',
+      ],
       supported_dimensions: [
         { width: 512, height: 512 },
         { width: 768, height: 768 },
         { width: 1024, height: 1024 },
         { width: 512, height: 768 },
-        { width: 768, height: 512 }
+        { width: 768, height: 512 },
       ],
       max_prompt_length: 500,
       processing_time_estimate: '2-10 seconds',
-      models: ['stable-diffusion-v2', 'dalle-2', 'midjourney-v4']
+      models: ['stable-diffusion-v2', 'dalle-2', 'midjourney-v4'],
     };
 
     return NextResponse.json(capabilities);

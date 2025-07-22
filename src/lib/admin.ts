@@ -9,14 +9,14 @@ export interface AdminUser {
   lastLogin: Date;
   createdAt: Date;
   permissions: AdminPermission[]
-}
+};
 
 export interface AdminPermission {
   id: string;
   name: string;
   description: string;
   category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
-}
+};
 
 export interface SystemStats {
   totalUsers: number;
@@ -27,7 +27,7 @@ export interface SystemStats {
   systemHealth: 'healthy' | 'warning' | 'critical'
   uptime: number;
   errorRate: number
-}
+};
 
 export interface UserManagement {
   id: string;
@@ -39,7 +39,7 @@ export interface UserManagement {
   lastActive: Date;
   projectCount: number;
   billingStatus: 'current' | 'past_due' | 'canceled'
-}
+};
 
 export interface ContentModeration {
   id: string;
@@ -51,7 +51,7 @@ export interface ContentModeration {
   createdAt: Date
   reviewedAt?: Date
   reviewedBy?: string
-}
+};
 
 export interface SystemConfiguration {
   id: string;
@@ -63,7 +63,7 @@ export interface SystemConfiguration {
   isSecret: boolean;
   lastModified: Date;
   modifiedBy: string
-}
+};
 
 export interface AdminActivity {
   id: string;
@@ -75,7 +75,7 @@ export interface AdminActivity {
   timestamp: Date;
   ipAddress: string;
   userAgent: string
-}
+};
 
 export class AdminService {
   private static instance: AdminService
@@ -93,7 +93,6 @@ export class AdminService {
 
     try {
       // Initialize admin service
-      console.log('Initializing admin service...')
       this.initialized = true
     } catch (error) {
       console.error('Failed to initialize admin, service:', error)
@@ -110,7 +109,7 @@ export class AdminService {
       subscription?: string
       search?: string
     }
-  ): Promise<{ users: UserManagement[], total: number; pages: number }> {
+  ): Promise<{ users: UserManagement[], total: number, pages: number }> {
     try {
       // In production, this would query the actual database
       const mockUsers: UserManagement[] = [
@@ -185,7 +184,6 @@ export class AdminService {
       await this.logAdminActivity(adminId, 'update_user_status', userId, { status })
       
       // In production, update the database
-      console.log(`Updated user ${userId} status to ${status}`)
     } catch (error) {
       console.error('Error updating user, status:', error)
       throw error
@@ -200,7 +198,7 @@ export class AdminService {
       type?: string
       status?: string
     }
-  ): Promise<{ content: ContentModeration[], total: number; pages: number }> {
+  ): Promise<{ content: ContentModeration[], total: number, pages: number }> {
     try {
       const mockContent: ContentModeration[] = [
         {
@@ -262,7 +260,6 @@ export class AdminService {
   ): Promise<void> {
     try {
       await this.logAdminActivity(adminId, 'moderate_content', contentId, { action, reason })
-      console.log(`Content ${contentId} ${action}ed by admin ${adminId}`)
     } catch (error) {
       console.error('Error moderating, content:', error)
       throw error
@@ -333,7 +330,6 @@ export class AdminService {
   ): Promise<void> {
     try {
       await this.logAdminActivity(adminId, 'update_configuration', configId, { value })
-      console.log(`Configuration ${configId} updated by admin ${adminId}`)
     } catch (error) {
       console.error('Error updating, configuration:', error)
       throw error
@@ -385,7 +381,6 @@ export class AdminService {
       }
 
       // In production, save to database
-      console.log('Admin activity logged:', activity)
     } catch (error) {
       console.error('Error logging admin, activity:', error)
     }
@@ -400,7 +395,7 @@ export class AdminService {
       dateFrom?: Date
       dateTo?: Date
     }
-  ): Promise<{ activities: AdminActivity[], total: number; pages: number }> {
+  ): Promise<{ activities: AdminActivity[], total: number, pages: number }> {
     try {
       const mockActivities: AdminActivity[] = [
         {
@@ -409,7 +404,7 @@ export class AdminService {
           adminName: 'John Admin',
           action: 'update_user_status',
           target: 'user_123',
-          details: { status: 'suspended' },
+    details: { status: 'suspended' },
           timestamp: new Date(Date.now() - 1000 * 60 * 30),
           ipAddress: '192.168.1.1',
           userAgent: 'Mozilla/5.0...'
@@ -420,7 +415,7 @@ export class AdminService {
           adminName: 'John Admin',
           action: 'moderate_content',
           target: 'template_456',
-          details: { action: 'approve' },
+    details: { action: 'approve' },
           timestamp: new Date(Date.now() - 1000 * 60 * 60),
           ipAddress: '192.168.1.1',
           userAgent: 'Mozilla/5.0...'

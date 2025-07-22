@@ -10,7 +10,7 @@ export interface RuntimeConfig {
   enableLogging?: boolean
   enableMetrics?: boolean
   sharedMemoryLimit?: number
-}
+};
 
 export interface AgentTask {
   id: string;
@@ -21,7 +21,7 @@ export interface AgentTask {
   timeout?: number
   retries?: number
   metadata?: Record<string, any>
-}
+};
 
 export interface TaskResult {
   taskId: string;
@@ -32,7 +32,7 @@ export interface TaskResult {
   duration: number;
   retryCount: number
   error?: Error
-}
+};
 
 export interface RuntimeMetrics {
   totalTasks: number;
@@ -42,7 +42,7 @@ export interface RuntimeMetrics {
   agentMetrics: Map<string, AgentMetrics>
   memoryUsage: number;
   concurrentTasks: number
-}
+};
 
 export interface AgentMetrics {
   tasksCompleted: number;
@@ -50,14 +50,14 @@ export interface AgentMetrics {
   averageDuration: number;
   averageConfidence: number;
   totalMessages: number
-}
+};
 
 export interface ExecutionPlan {
   tasks: AgentTask[];
   dependencies: Map<string, string[]>
   executionOrder: string[][];
   estimatedDuration: number
-}
+};
 
 export class AgentRuntime extends EventEmitter {
   private config: RuntimeConfig
@@ -74,7 +74,9 @@ export class AgentRuntime extends EventEmitter {
     
     this.config = {
       maxConcurrentAgents: 5,
-      timeoutMs: 300000, // 5 minutes, retryAttempts: 2,
+      timeoutMs: 300000,
+  // 5 minutes
+  retryAttempts: 2,
       enableLogging: true,
       enableMetrics: true,
       sharedMemoryLimit: 1000,
@@ -128,9 +130,9 @@ export class AgentRuntime extends EventEmitter {
 Request: "${request}"
 
 Available, agents:
-- analyst: Requirements analysis and user story creation
+-, analyst: Requirements analysis and user story creation
 - project-manager: Project planning and resource allocation
-- architect: System design and technical architecture
+-, architect: System design and technical architecture
 - prompt-refiner: Optimize prompts for clarity
 - tools-refiner: Optimize tool selection and configuration
 - agent-refiner: Optimize agent configurations
@@ -145,8 +147,8 @@ Create an execution plan, with:
 
 Consider that agents can share data through shared memory.
 
-Format as JSON, with:
-{
+Format as JSON,
+    with: {
   "tasks": [{ "id", "agentType", "input", "priority", "dependencies" }],
   "executionNotes": "explanation of the plan"
 }`
@@ -286,7 +288,7 @@ Format as JSON, with:
     const endTime = Date.now()
     const failedResult: TaskResult = {
       taskId: task.id, agentType: task.agentType,
-      result: {
+    result: {
         success: false,
         output: lastError?.message || 'Task failed after retries',
         messages: [],
@@ -537,7 +539,7 @@ Format as JSON, with:
     if (!this.config.enableLogging) return
 
     const timestamp = new Date().toISOString()
-    console.log(`[${timestamp}] [AgentRuntime] [${level.toUpperCase()}] ${message}`)
+    }] ${message}`)
     this.emit('log', { level, message, timestamp })
   }
 

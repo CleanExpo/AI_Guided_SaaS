@@ -1,28 +1,14 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { 
-  MessageCircle, 
-  Send, 
-  Bot, 
-  User, 
-  Book, 
-  Play,
-  HelpCircle,
-  Loader2,
-  X,
-  ChevronDown,
-  Search,
-  Sparkles
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem'
-import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem'
-
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { MessageCircle, Send, Bot, User, Book, Play, HelpCircle, Loader2, X, ChevronDown, Search, Sparkles } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
+import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
 interface Message {
   id: string;
   role: 'user' | 'assistant' | 'system'
@@ -35,14 +21,14 @@ interface Message {
   code: string }>
     actionButtons?: Array<{ label: string, action: string; data?: any }>
   }
-}
+};
 
 interface AISupportChatProps {
   documentationSystem: DynamicDocumentationSystem;
   tutorialSystem: InteractiveTutorialSystem;
   userId: string
   projectId?: string
-}
+};
 
 export function AISupportChat({ 
   documentationSystem, 
@@ -64,7 +50,7 @@ export function AISupportChat({
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [showQuickActions, setShowQuickActions] = useState(true)</Message>
+  const [showQuickActions, setShowQuickActions] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)</HTMLDivElement>
   const chatContainerRef = useRef<HTMLDivElement>(null)
 
@@ -75,7 +61,7 @@ export function AISupportChat({
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
       )}
-    </div>
+
     );
   const handleSendMessage = async () => {
     if (!input.trim() || isLoading) return
@@ -102,10 +88,10 @@ export function AISupportChat({
       // Send to AI for enhanced response
       const response = await fetch('/api/support/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: input,
-          context: {
+    context: {
             userId,
             projectId,
             documentationResults: docResults.slice(0, 3),
@@ -122,7 +108,7 @@ export function AISupportChat({
         role: 'assistant',
         content: data.response,
         timestamp: new Date(),
-        metadata: {
+    metadata: {
           suggestedDocs: data.suggestedDocs,
           suggestedTutorials: data.suggestedTutorials,
           codeBlocks: data.codeBlocks,
@@ -159,11 +145,11 @@ export function AISupportChat({
           role: 'assistant',
           content: 'Here are the main documentation, categories:',
           timestamp: new Date(),
-          metadata: {
+    metadata: {
             actionButtons: categories.map(cat => ({
               label: cat.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()),
               action: 'browse-category',
-              data: { category: cat }
+    data: { category: cat }
             }))
           }
         }
@@ -177,12 +163,12 @@ export function AISupportChat({
           role: 'assistant',
           content: 'Here are some recommended tutorials for, you:',
           timestamp: new Date(),
-          metadata: {
+    metadata: {
             suggestedTutorials: tutorials.slice(0, 3).map(t => t.id),
             actionButtons: tutorials.slice(0, 3).map(t => ({
               label: `Start: ${t.title}`,
               action: 'start-tutorial',
-              data: { tutorialId: t.id }
+    data: { tutorialId: t.id }
             }))
           }
         }
@@ -214,12 +200,12 @@ export function AISupportChat({
           role: 'assistant',
           content: `Here are the ${data.category} documentation, sections:`,
           timestamp: new Date(),
-          metadata: {
+    metadata: {
             suggestedDocs: sections.map(s => s.id),
             actionButtons: sections.slice(0, 5).map(s => ({
               label: s.title,
               action: 'open-doc',
-              data: { sectionId: s.id }
+    data: { sectionId: s.id }
             }))
           }
         }
@@ -255,12 +241,12 @@ export function AISupportChat({
       role: 'assistant',
       content: `Found ${results.length} results for "${searchQuery}":`,
       timestamp: new Date(),
-      metadata: {
+    metadata: {
         suggestedDocs: results.slice(0, 5).map(r => r.sectionId),
         actionButtons: results.slice(0, 5).map(r => ({
           label: r.title,
           action: 'open-doc',
-          data: { sectionId: r.sectionId }
+    data: { sectionId: r.sectionId }
         }))
       }
     }
@@ -277,26 +263,23 @@ export function AISupportChat({
 
   if (!isOpen) {
     return (
-      <Button
+    <Button
         className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
         onClick={() => setIsOpen(true)}
       ></Button>
         <MessageCircle className="h-6 w-6" />
       </Button>
-    );
   }
 
   return (
     <div
       ref={chatContainerRef}
       className={cn(
-        "fixed bottom-6 right-6 z-50 transition-all duration-300",
-        isMinimized ? "h-14" : "h-[600px]"
+        "fixed bottom-6 right-6 z-50 transition-all duration-300" isMinimized ? "h-14" : "h-[600px]"
       )}
     >
       <Card className={cn(
-        "w-[400px] flex flex-col shadow-xl",
-        isMinimized ? "h-14" : "h-full"
+        "w-[400px] flex flex-col shadow-xl" isMinimized ? "h-14" : "h-full"
       )}>
         {/* Header */}</Card>
         <div className="flex items-center justify-between p-4 border-b">
@@ -308,8 +291,7 @@ export function AISupportChat({
               <h3 className="font-semibold text-sm">AI Support</h3>
               {!isMinimized && (
                 <p className="text-xs text-muted-foreground">Always here to help</p>
-  );
-}
+  }
           <div className="flex gap-1">
             <Button
               size="sm"
@@ -317,8 +299,7 @@ export function AISupportChat({
               onClick={() => setIsMinimized(!isMinimized)}
             ></Button>
               <ChevronDown className={cn(
-                "h-4 w-4 transition-transform",
-                isMinimized && "rotate-180"
+                "h-4 w-4 transition-transform" isMinimized && "rotate-180"
               )} />
             </Button>
             <Button
@@ -342,7 +323,7 @@ export function AISupportChat({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none, focus:ring-2 focus:ring-primary/20"
                   /></input>
                 <Button size="sm" onClick={handleSearch}>
                   Search</Button>
@@ -354,13 +335,11 @@ export function AISupportChat({
                   <div
                     key={message.id}
                     className={cn(
-                      "flex gap-3",
-                      message.role === 'user' && "flex-row-reverse"
+                      "flex gap-3" message.role === 'user' && "flex-row-reverse"
                     )}
                   >
                     <div className={cn(
-                      "h-8 w-8 rounded-full flex items-center justify-center shrink-0",
-                      message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
+                      "h-8 w-8 rounded-full flex items-center justify-center shrink-0" message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
                     )}>
                       {message.role === 'user' ? (</div>
                         <User className="h-4 w-4" />
@@ -368,12 +347,10 @@ export function AISupportChat({
                         <Bot className="h-4 w-4" />
                       )}</Bot>
                     <div className={cn(
-                      "flex-1 space-y-2",
-                      message.role === 'user' && "flex flex-col items-end"
+                      "flex-1 space-y-2" message.role === 'user' && "flex flex-col items-end"
                     )}>
                       <div className={cn(
-                        "rounded-lg px-3 py-2 max-w-[85%] text-sm",
-                        message.role === 'user'
+                        "rounded-lg px-3 py-2 max-w-[85%] text-sm" message.role === 'user'
                           ? "bg-primary text-primary-foreground"
                           : "bg-muted"
                       )}>
@@ -383,8 +360,7 @@ export function AISupportChat({
                       {message.metadata?.codeBlocks?.map((block, index) => (
                         <div key={index} className="max-w-[85%]">
                           <pre className="bg-zinc-900 text-zinc-100 p-3 rounded-lg overflow-x-auto text-xs">
-                            <code>{block.code}</code>
-                          </pre>))}
+                            <code>{block.code}</code>))}
                       
                       {/* Suggested docs */}
                       {message.metadata?.suggestedDocs && message.metadata.suggestedDocs.length > 0 && (
@@ -397,7 +373,7 @@ export function AISupportChat({
                                 key={docId}
                                 onClick={() => handleActionButton('open-doc', { sectionId: docId}
       )}
-    </div>
+
   );
                                 className="text-xs text-primary hover:underline block text-left"
                               >
@@ -405,7 +381,7 @@ export function AISupportChat({
                             ) : null
                           }
       )}
-    </div>
+
   );
                       )}
                       
@@ -422,9 +398,9 @@ export function AISupportChat({
                             >
                               {button.label}</Button>
                           ))}
-                        </div>
+
                       )}
-                    </div>
+
                 ))}
                 
                 {isLoading && (
@@ -454,10 +430,8 @@ export function AISupportChat({
                       onClick={() => handleQuickAction(action.action)}
                     ></Button>
                       <action.icon className="h-4 w-4" />
-                      <span className="text-xs">{action.label}</span>
-                    </Button>
-                  ))}
-                </div>
+                      <span className="text-xs">{action.label}</span>))}
+
             )}
 
             {/* Input */}
@@ -491,22 +465,7 @@ export function AISupportChat({
                 <p className="text-xs text-muted-foreground">
                   AI-powered support with real-time documentation</p>
           </>
-        )}
-      </Card>
-          </div>
-          </div>
-          </div>
-          </ScrollArea>
-          </div>
-          </div>
-      );
-</ScrollArea>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+        );}
+      
+  );
 }
-</HTMLDivElement>

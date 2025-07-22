@@ -7,7 +7,7 @@ export const initialBuilderState: BuilderState = {
   historyIndex: -1,
   zoom: 100,
   gridEnabled: true,
-  previewMode: false
+  previewMode: false,
 };
 
 export const builderConfig = {
@@ -16,21 +16,21 @@ export const builderConfig = {
     maxZoom: 200,
     zoomStep: 25,
     gridSize: 20,
-    snapToGrid: true
-  },
-  components: {
+    snapToGrid: true;
+  }},
+    components: {
     minWidth: 50,
     minHeight: 30,
     defaultWidth: 200,
-    defaultHeight: 100
-  },
-  history: {
-    maxSteps: 50
-  },
-  autosave: {
+    defaultHeight: 100;
+  }},
+    history: {
+    maxSteps: 50;
+  }},
+    autosave: {
     enabled: true,
-    interval: 30000 // 30 seconds
-  }
+    interval: 30000; // 30 seconds
+  }},
 };
 
 export const shortcuts = {
@@ -42,5 +42,5 @@ export const shortcuts = {
   selectAll: 'Ctrl+A',
   save: 'Ctrl+S',
   export: 'Ctrl+E',
-  preview: 'Ctrl+P'
+  preview: 'Ctrl+P',
 };

@@ -1,20 +1,6 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 import Link from 'next/link'
-import { 
-  Brain, 
-  Zap, 
-  Shield, 
-  Users, 
-  Code2, 
-  Rocket,
-  FileCode,
-  GitBranch,
-  Database,
-  Cloud,
-  Lock,
-  BarChart
-} from 'lucide-react'
-
+import { Brain, Zap, Shield, Users, Code2, Rocket, FileCode, GitBranch, Database, Cloud, Lock, BarChart } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Features - AI Guided SaaS',
   description: 'Explore the powerful features of AI Guided SaaS platform for building production-ready applications.'}
@@ -106,7 +92,8 @@ const additionalFeatures = [
 export default function FeaturesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
-      {/* Hero Section */}</div>
+      {/* Hero Section */}
+
       <section className="relative px-6 py-24 mx-auto max-w-7xl">
         <div className="text-center">
           <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
@@ -148,9 +135,7 @@ export default function FeaturesPage() {
                 {feature.highlights.map((highlight, idx) => (
                   <li key={idx} className="flex items-start">
                     <span className="flex-shrink-0 w-1.5 h-1.5 mt-2 bg-purple-600 rounded-full" />
-                    <span className="ml-3 text-sm text-gray-600">{highlight}</span>
-                  </li>
-                ))}
+                    <span className="ml-3 text-sm text-gray-600">{highlight}</span>))}
               </ul>))}
 
       {/* Additional Features */}
@@ -168,12 +153,11 @@ export default function FeaturesPage() {
             >
               <feature.icon className="w-5 h-5 text-purple-600 flex-shrink-0" />
               <span className="ml-3 text-gray-700">{feature.text}</span>))}
-        </div>
 
       {/* CTA Section */}
       <section className="px-6 py-24 mx-auto max-w-7xl">
         <div className="relative overflow-hidden bg-purple-600 rounded-3xl">
-          <div className="px-6 py-24 sm:px-12">
+          <div className="px-6 py-24 sm: px-12">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 Ready to Build Something Amazing?</h2>
@@ -190,24 +174,7 @@ export default function FeaturesPage() {
                   className="text-base font-semibold leading-6 text-white hover:text-purple-100"
                 >
                   Read Documentation <span aria-hidden="true">→</span>
-                </Link>
-    );
-}
-    </section>
-    </div>
-    </section>
-    </div>
-    </section>
-    </div>
-    </section>
+  }
+    
   );
-</div>
-</section>
-</div>
-</section>
-</div>
-</section>
-</div>
-</div>
-</section>
 }

@@ -129,7 +129,6 @@ async function saveToProject(
   messages: any[],
   response): Promise<any[]> {
   // Implementation would save to database
-  console.log('Saving to project:', projectId)
   return []
 }
 

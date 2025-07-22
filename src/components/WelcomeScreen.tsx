@@ -1,19 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Persona } from '@/types';
 import { Bot, Code, Palette, Rocket, Sparkles, Zap } from 'lucide-react';
 
 interface WelcomeScreenProps {
   onSelectPersona: (persona: Persona) => void;
-}
+}}
 
 const personas: Persona[] = [
   {
@@ -95,19 +90,19 @@ const personas: Persona[] = [
 const getPersonaIcon = (personaId: string) => {
   switch (personaId) {
     case 'ai-architect':
-      return <Bot className="w-8 h-8" />;
+      return <Bot className="w-8 h-8" />
     case 'fullstack-wizard':</Bot>
-      return <Code className="w-8 h-8" />;
+      return <Code className="w-8 h-8" />
     case 'ui-designer':</Code>
-      return <Palette className="w-8 h-8" />;
+      return <Palette className="w-8 h-8" />
     case 'devops-engineer':</Palette>
-      return <Zap className="w-8 h-8" />;
+      return <Zap className="w-8 h-8" />
     case 'startup-founder':</Zap>
-      return <Rocket className="w-8 h-8" />;
+      return <Rocket className="w-8 h-8" />
     case 'enterprise-consultant':</Rocket>
-      return <Sparkles className="w-8 h-8" />;
-    default:</Sparkles>
-      return <Bot className="w-8 h-8" />;
+      return <Sparkles className="w-8 h-8" />
+    default: </Sparkles>
+      return <Bot className="w-8 h-8" />,
   }
 };
 
@@ -145,7 +140,8 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
             ></Card>
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-4 text-blue-600">
-                  {getPersonaIcon(persona.id)}</div>
+                  {getPersonaIcon(persona.id)}
+
                 <CardTitle className="text-xl font-semibold">
                   {persona.name}</CardTitle>
                 <CardDescription className="text-sm text-gray-600">
@@ -163,7 +159,7 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
                         >
                           {skill}</span>
                       ))}
-                    </div>
+
                   <div>
                     <h4 className="font-medium text-sm text-gray-700 mb-1">
                       Tone:</h4>
@@ -178,27 +174,19 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
                     ? 'Selected!'
                     : 'Choose This Persona'}</Button>
           ))}
-        </div>
 
         <div className="text-center mt-12">
           <p className="text-sm text-gray-500">
             Each persona provides specialized guidance and recommendations based
             on their expertise area.</p>
-    );
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
-</div>
-</div>
-</div>
+</div></div>
 }
 
     </CardContent>
     </CardHeader>
     </div>
-    </div>
-  );
-}
+  }
 </string>
+}

@@ -23,7 +23,6 @@ export default function DeploymentPanel() {
         className="px-4 py-2 bg-brand-primary-600 text-white rounded hover:bg-brand-primary-700"
       >
         Export & Deploy to Vercel</button>
-    );
 </div>
 }
 

@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
         memoryUsage: 'N/A',
         totalProjects: 0,
         activeProjects: 0,
-        apiCalls: {
+    apiCalls: {
           today: 0,
           thisWeek: 0,
           thisMonth: 0

@@ -10,13 +10,13 @@ interface EmailOptions {
   text?: string;
   from?: string;
   replyTo?: string;
-}
+};
 
 interface WelcomeEmailData {
   userName: string;
   userEmail: string;
-  loginUrl: string;
-}
+  loginUrl: string
+};
 
 interface NotificationEmailData {
   userName: string;
@@ -41,7 +41,9 @@ class EmailService {
   /**
    * Send a generic email
    */
-  async sendEmail(options: EmailOptions): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  async sendEmail(
+    options: EmailOptions
+  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     if (!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' };
     }
@@ -49,35 +51,37 @@ class EmailService {
     try {
       const response = await fetch(`${this.baseUrl}/emails`, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'},
+    headers: {
+          Authorization: `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           from: options.from || this.defaultFrom,
           to: Array.isArray(options.to) ? options.to : [options.to],
           subject: options.subject,
           html: options.html,
           text: options.text,
-          reply_to: options.replyTo})});
+          reply_to: options.replyTo;
+        }})});
 
       if (!response.ok) {
         const errorData = await response.json();
-        return { 
-          success: false, 
-          error: errorData.message || `HTTP ${response.status}` 
+        return {
+          success: false,
+          error: errorData.message || `HTTP ${response.status}`,
         };
       }
 
       const data = await response.json();
-      return { 
-        success: true, 
-        messageId: data.id 
+      return {
+        success: true,
+        messageId: data.id,
       };
     } catch (error) {
       console.error('Email sending, failed:', error);
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Unknown error' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
       };
     }
   }
@@ -85,7 +89,9 @@ class EmailService {
   /**
    * Send welcome email to new users
    */
-  async sendWelcomeEmail(data: WelcomeEmailData): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  async sendWelcomeEmail(
+    data: WelcomeEmailData
+  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     const html = `
       <!DOCTYPE html>
       <html>
@@ -94,13 +100,13 @@ class EmailService {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Welcome to AI Guided SaaS Builder</title>
           <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { text-align: center; margin-bottom: 30px; }
-            .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
-            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0; }
-            .button { display: inline-block, background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
-            .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333 }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px }
+            .header { text-align: center; margin-bottom: 30px }
+            .logo { font-size: 24px; font-weight: bold; color: #2563eb }
+            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0 }
+            .button { display: inline-block, background: #2563eb, color: white, padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0 }
+            .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px }
           </style>
         </head>
         <body>
@@ -150,13 +156,16 @@ class EmailService {
       to: data.userEmail,
       subject: 'Welcome to AI Guided SaaS Builder! 🚀',
       html,
-      text});
+      text,
+    });
   }
 
   /**
    * Send notification email
    */
-  async sendNotificationEmail(data: NotificationEmailData): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  async sendNotificationEmail(
+    data: NotificationEmailData
+  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     const html = `
       <!DOCTYPE html>
       <html>
@@ -165,13 +174,13 @@ class EmailService {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>${data.title}</title>
           <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { text-align: center; margin-bottom: 30px; }
-            .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
-            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0; }
-            .button { display: inline-block, background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
-            .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333 }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px }
+            .header { text-align: center; margin-bottom: 30px }
+            .logo { font-size: 24px; font-weight: bold; color: #2563eb }
+            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0 }
+            .button { display: inline-block, background: #2563eb, color: white, padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0 }
+            .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px }
           </style>
         </head>
         <body>
@@ -185,11 +194,14 @@ class EmailService {
               
               <p>${data.message}</p>
               
-              ${data.actionUrl && data.actionText ? `
+              ${
+                data.actionUrl && data.actionText
+                  ? `
                 <a href="${data.actionUrl}" class="button">${data.actionText}</a>
-              ` : ''}
-            </div>
-            
+              `
+                  : ''
+              }
+
             <div class="footer">
               <p>Best regards,<br>The AI Guided SaaS Builder Team</p>
             </div>
@@ -211,15 +223,22 @@ class EmailService {
     `;
 
     return this.sendEmail({
-      to: data.userName, // This should be the email address, subject: data.title,
+      to: data.userName,
+  // This should be the email address
+  subject: data.title,
       html,
-      text});
+      text,
+    });
   }
 
   /**
    * Send password reset email
    */
-  async sendPasswordResetEmail(email: string, resetUrl: string, userName: string): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  async sendPasswordResetEmail(
+    email: string,
+    resetUrl: string,
+    userName: string
+  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     const html = `
       <!DOCTYPE html>
       <html>
@@ -228,14 +247,14 @@ class EmailService {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Reset Your Password</title>
           <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { text-align: center; margin-bottom: 30px; }
-            .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
-            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0; }
-            .button { display: inline-block, background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
-            .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
-            .warning { background: #fef3c7, border: 1px solid #f59e0b; padding: 15px; border-radius: 6px; margin: 15px 0; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333 }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px }
+            .header { text-align: center; margin-bottom: 30px }
+            .logo { font-size: 24px; font-weight: bold; color: #2563eb }
+            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0 }
+            .button { display: inline-block, background: #dc2626, color: white, padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0 }
+            .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px }
+            .warning { background: #fef3c7, border: 1px solid #f59e0b, padding: 15px; border-radius: 6px; margin: 15px 0 }
           </style>
         </head>
         <body>
@@ -296,7 +315,8 @@ class EmailService {
       to: email,
       subject: 'Reset Your Password - AI Guided SaaS Builder',
       html,
-      text});
+      text,
+    });
   }
 
   /**
@@ -311,19 +331,24 @@ class EmailService {
       // Test with a simple API call to verify the key
       const response = await fetch(`${this.baseUrl}/domains`, {
         method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'}});
+    headers: {
+          Authorization: `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.ok) {
         return { success: true };
       } else {
-        return { success: false, error: `API key validation, failed: ${response.status}` };
+        return {
+          success: false,
+          error: `API key validation, failed: ${response.status}`,
+        };
       }
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Unknown error' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
       };
     }
   }
@@ -337,9 +362,15 @@ export default emailService;
 export { EmailService };
 
 // Export convenience functions
-export const sendEmail = (options: EmailOptions) => emailService.sendEmail(options);
-export const sendWelcomeEmail = (data: WelcomeEmailData) => emailService.sendWelcomeEmail(data);
-export const sendNotificationEmail = (data: NotificationEmailData) => emailService.sendNotificationEmail(data);
-export const sendPasswordResetEmail = (email: string, resetUrl: string, userName: string) => 
-  emailService.sendPasswordResetEmail(email, resetUrl, userName);
+export const sendEmail = (options: EmailOptions) =>
+  emailService.sendEmail(options);
+export const sendWelcomeEmail = (data: WelcomeEmailData) =>
+  emailService.sendWelcomeEmail(data);
+export const sendNotificationEmail = (data: NotificationEmailData) =>
+  emailService.sendNotificationEmail(data);
+export const sendPasswordResetEmail = (
+  email: string,
+  resetUrl: string,
+  userName: string
+) => emailService.sendPasswordResetEmail(email, resetUrl, userName);
 export const testEmailConfiguration = () => emailService.testConfiguration();

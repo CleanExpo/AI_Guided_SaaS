@@ -6,8 +6,7 @@ const AGENT_TYPE = process.env.AGENT_TYPE || 'unknown'
 const AGENT_ID = process.env.AGENT_ID || 'unknown'
 const ORCHESTRATOR_URL = process.env.ORCHESTRATOR_URL || 'http://localhost:3000'
 
-console.log(`Starting agent: ${AGENT_TYPE} (${AGENT_ID})`)
-console.log(`Orchestrator URL: ${ORCHESTRATOR_URL}`)
+`)
 
 // Agent type to script mapping
 const agentScripts = {
@@ -51,8 +50,7 @@ agent.on('error', (error) => {
 })
 
 agent.on('exit', (code, signal) => {
-  console.log(`Agent process exited with code ${code} and signal ${signal}`)
-  
+
   // Kill health check process
   healthCheck.kill()
   
@@ -62,8 +60,7 @@ agent.on('exit', (code, signal) => {
 
 // Handle graceful shutdown
 process.on('SIGTERM', () => {
-  console.log('Received SIGTERM, shutting down agent...')
-  
+
   // Send SIGTERM to child processes
   agent.kill('SIGTERM')
   healthCheck.kill('SIGTERM')
@@ -77,7 +74,7 @@ process.on('SIGTERM', () => {
 })
 
 process.on('SIGINT', () => {
-  console.log('Received SIGINT, shutting down agent...')
+
   agent.kill('SIGINT')
   healthCheck.kill('SIGINT')
 })

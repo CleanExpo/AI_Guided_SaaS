@@ -13,10 +13,8 @@ export interface AgentConfig {
   specializations: Record<string, any>
   coordination_protocols: {
     initiates_with: string[];
-  coordinates_with: string[]
-    provides_to: string[];
-  depends_on: string[]
-    escalates_to: string[];
+  coordinates_with: string[]; provides_to: string[];
+  depends_on: string[]; escalates_to: string[];
   reports_to: string[]
   }
   workflow_patterns: Record<string, any>
@@ -27,26 +25,24 @@ export interface AgentConfig {
   status?: 'STANDBY' | 'ACTIVE' | 'BUSY' | 'ERROR' | 'OFFLINE'
   last_action?: string
   next_action?: string
-}
+};
 
 export interface AgentLoadResult {
   success: boolean
   agent?: AgentConfig
   error?: string
-}
+};
 
 export interface AgentDiscoveryResult {
   total_agents: number;
   core_agents: AgentConfig[];
-  orchestration_agents: AgentConfig[]
-  specialist_agents: AgentConfig[];
-  missing_agents: string[]
-  load_errors: string[]
-}
+  orchestration_agents: AgentConfig[]; specialist_agents: AgentConfig[];
+  missing_agents: string[]; load_errors: string[]
+};
 
 export class AgentLoader {
   private static instance: AgentLoader
-  private agentsPath: string
+  private, agentsPath: string
   private, loadedAgents: Map<string, AgentConfig> = new Map()
   private agentDependencies: Map<string, string[]> = new Map()
 
@@ -66,8 +62,7 @@ export class AgentLoader {
    * Discover and load all available agents
    */
   async discoverAgents(): Promise<AgentDiscoveryResult> {
-    console.log('🔍 Discovering agents...')
-    
+
     const result: AgentDiscoveryResult = {
       total_agents: 0,
       core_agents: [],
@@ -80,7 +75,6 @@ export class AgentLoader {
     try {
       // Get all agent files from the agents directory
       const agentFiles = this.getAgentFiles()
-      console.log(`📁 Found ${agentFiles.length} agent files`)
 
       // Load each agent
       for (const file of agentFiles) {
@@ -93,10 +87,10 @@ export class AgentLoader {
           this.loadedAgents.set(agent.agent_id, agent)
           this.categorizeAgent(agent, result)
           
-          console.log(`✅ Loaded: ${agent.name} (${agent.role})`)
+          `)
         } else {
           result.load_errors.push(`Failed to load ${file}: ${loadResult.error}`)
-          console.log(`❌ Failed to load ${file}: ${loadResult.error}`)
+
         }
       }
 
@@ -111,8 +105,6 @@ export class AgentLoader {
       // Store in memory system for persistence
       await this.storeInMemory(result)
 
-      console.log(`📊 Discovery, complete: ${result.total_agents} agents loaded`)
-      
     } catch (error) {
       console.error('❌ Agent discovery, failed:', error)
       result.load_errors.push(`Discovery, failed: ${error}`)
@@ -188,7 +180,7 @@ export class AgentLoader {
     // Sort by priority
     requiredAgents.sort((a, b) => a.priority - b.priority)
 
-    console.log(`🎯 Required agents for ${currentStage}: ${requiredAgents.map(a => a.role).join(', ')}`)
+    .join(', ')}`)
     
     return requiredAgents
   }
@@ -197,7 +189,6 @@ export class AgentLoader {
    * Load agent coordination chain for full project execution
    */
   async loadExecutionChain(projectRequirements: string): Promise<AgentConfig[]> {
-    console.log('⚡ Loading full execution chain...')
 
     // Load all core agents
     const executionChain: AgentConfig[] = []
@@ -216,7 +207,7 @@ export class AgentLoader {
       executionChain.unshift(orchestratorResult.agent) // Add at beginning
     }
 
-    console.log(`🔗 Execution chain, loaded: ${executionChain.map(a => a.role).join(' → ')}`)
+    .join(' → ')}`)
     
     return executionChain
   }
@@ -227,8 +218,8 @@ export class AgentLoader {
   getAgentStatus(): Record<string, any> {
     const status: Record<string, any> = {
       total_loaded: this.loadedAgents.size,
-      agents_by_status: {},
-      agents_by_role: {},
+    agents_by_status: {},
+    agents_by_role: {},
       dependency_graph: Object.fromEntries(this.agentDependencies),
       last_updated: new Date().toISOString()
     }
@@ -262,8 +253,7 @@ export class AgentLoader {
       agent.status = status
       if (lastAction) agent.last_action = lastAction
       if (nextAction) agent.next_action = nextAction
-      
-      console.log(`📝 Updated ${agent.role}: ${status}`)
+
     }
   }
 
@@ -401,9 +391,8 @@ export class AgentLoader {
           ]
         }])
 
-      console.log('💾 Agent discovery results stored in memory')
     } catch (error) {
-      console.log('⚠️ Failed to store in memory system:', error)
+
     }
   }
 
@@ -413,7 +402,7 @@ export class AgentLoader {
   reset() {
     this.loadedAgents.clear()
     this.agentDependencies.clear()
-    console.log('🔄 Agent loader reset')
+
   }
 }
 
@@ -421,17 +410,17 @@ export class AgentLoader {
 export async function discoverAllAgents(): Promise<AgentDiscoveryResult> {
   const loader = AgentLoader.getInstance()
   return loader.discoverAgents()
-}
+};
 
 export async function loadRequiredAgents(stage: string, projectType?: string): Promise<AgentConfig[]> {
   const loader = AgentLoader.getInstance()
   return loader.getRequiredAgentsForStage(stage, projectType)
-}
+};
 
 export async function loadExecutionChain(requirements: string): Promise<AgentConfig[]> {
   const loader = AgentLoader.getInstance()
   return loader.loadExecutionChain(requirements)
-}
+};
 
 export function getAgentStatus(): Record<string, any> {
   const loader = AgentLoader.getInstance()

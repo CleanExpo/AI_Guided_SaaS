@@ -19,7 +19,7 @@ export interface Project {
   metadata: Record<string, any>
   created_at: string;
   updated_at: string
-}
+};
 
 export interface ProjectFile {
   id: string;
@@ -262,7 +262,7 @@ export async function saveProjectArtifacts(
       size: new Blob([typeof content === 'string' ? content : JSON.stringify(content)]).size
     })
   }
-}
+};
 
 export default {
   createProject,

@@ -15,22 +15,22 @@ interface HealthIssue {
   line?: number;
   autoFixable: boolean;
   estimatedTime: number; // seconds
-}
+};
 
 interface BatchConfig {
   maxIssuesPerBatch: number;
   maxTimePerBatch: number; // seconds;
   pauseBetweenBatches: number; // seconds;
-  requireConfirmation: boolean;
-}
+  requireConfirmation: boolean,
+};
 
 interface CheckpointState {
   completedIssues: string[];
   currentBatch: number;
   totalBatches: number;
   startTime: number;
-  lastCheckpoint: number;
-}
+  lastCheckpoint: number
+};
 
 export default function SafeModeHealthCheck() {
       </HealthIssue>
@@ -46,7 +46,11 @@ export default function SafeModeHealthCheck() {
   const [batchConfig, setBatchConfig] = useState<BatchConfig>({
     maxIssuesPerBatch: 3,
         </BatchConfig>
-    maxTimePerBatch: 300, // 5 minutes, pauseBetweenBatches: 30, // 30 seconds, requireConfirmation: true});
+    maxTimePerBatch: 300,
+  // 5 minutes
+  pauseBetweenBatches: 30,
+  // 30 seconds
+  requireConfirmation: true});
       </NodeJS>
   const pauseTimer = useRef<NodeJS.Timeout | null>(null);
       </NodeJS>
@@ -129,12 +133,10 @@ export default function SafeModeHealthCheck() {
     const batches: HealthIssue[][] = [];
     for (
       let i = 0;</NodeJS>
-      i < sortedIssues.length;
-      i += batchConfig.maxIssuesPerBatch
+      i < sortedIssues.length, i += batchConfig.maxIssuesPerBatch
     ) {
       batches.push(sortedIssues.slice(i, i + batchConfig.maxIssuesPerBatch));
-    }
-
+}
     return batches;
   };
 
@@ -184,7 +186,7 @@ export default function SafeModeHealthCheck() {
     }
 
     // Process each issue in the batch
-    for (let i = 0; i < batch.length; i++) {
+    for (let i = 0; i < batch.length, i++) {
       const issue = batch[i];
       setProcessingLog(prev => [...prev, `🔧 Fixing: ${issue.title}`]);
 
@@ -200,11 +202,9 @@ export default function SafeModeHealthCheck() {
           completedIssues: [...checkpoint.completedIssues, issue.id],
           lastCheckpoint: Date.now()};
         setCheckpoint(updatedCheckpoint);
-      }
-
+}
       setProcessingLog(prev => [...prev, `✅ Fixed: ${issue.title}`]);
-    }
-
+}
     // Move to next batch or complete
     const nextBatchIndex = batchIndex + 1;
     if (nextBatchIndex < allBatches.length) {
@@ -217,7 +217,7 @@ export default function SafeModeHealthCheck() {
           setCheckpoint({
             ...checkpoint,
             currentBatch: nextBatchIndex});
-        }
+}
         processBatch(allBatches[nextBatchIndex], nextBatchIndex, allBatches);
       }, batchConfig.pauseBetweenBatches * 1000);
     } else {
@@ -227,7 +227,7 @@ export default function SafeModeHealthCheck() {
       setProcessingLog(prev => [
         ...prev,
         '🎉 All issues processed successfully!']);
-    }
+}
   };
 
   const showBatchConfirmation = (
@@ -241,10 +241,9 @@ export default function SafeModeHealthCheck() {
           `Estimated, time: ${Math.round(batch.reduce((sum, issue) => sum + issue.estimatedTime, 0) / 60)} minutes\n\n` +
           `Click OK to continue or Cancel to pause.`
           </boolean>
-      );
       resolve(confirmed);
-    });
-  };
+  }
+};
 
   const pauseProcessing = () => {
     if (pauseTimer.current) {
@@ -269,7 +268,7 @@ export default function SafeModeHealthCheck() {
       setIsProcessing(true);
       setProcessingLog(prev => [...prev, '▶️ Resuming processing...']);
       processBatch(remainingBatches[0], checkpoint.currentBatch, batches);
-    }
+}
   };
 
   const resetProcessing = () => {
@@ -297,9 +296,8 @@ export default function SafeModeHealthCheck() {
         return 'text-yellow-600 bg-yellow-100';
       case 'low':
         return 'text-blue-600 bg-blue-100';
-      default:
-        return 'text-gray-600 bg-gray-100';
-    }
+      default: return 'text-gray-600 bg-gray-100';
+    }}
   };
 
   const getCategoryIcon = (category: HealthIssue['category']) => {
@@ -314,14 +312,14 @@ export default function SafeModeHealthCheck() {
         return '⚡';
       case 'ux':
         return '👤';
-      default:
-        return '🔧';
-    }
+      default: return '🔧';
+    }}
   };
 
   return (
     <div className="space-y-6">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
@@ -466,15 +464,18 @@ export default function SafeModeHealthCheck() {
                 <span className="text-lg">
                   {getCategoryIcon(issue.category)}</span>
                 <div className="flex-1">
-                  <div className="font-medium">{issue.title}</div>
+                  <div className="font-medium">{issue.title}
+
                   <div className="text-sm text-gray-600">
-                    {issue.description}</div>
+                    {issue.description}
+
                 <div
                   className={`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
                 >
-                  {issue.type.toUpperCase()}</div>
+                  {issue.type.toUpperCase()}
+
             ))}
-          </div>
+
       )}
 
       {/* Issues List */}
@@ -495,25 +496,29 @@ export default function SafeModeHealthCheck() {
                 <span className="text-lg">
                   {getCategoryIcon(issue.category)}</span>
                 <div className="flex-1">
-                  <div className="font-medium">{issue.title}</div>
+                  <div className="font-medium">{issue.title}
+
                   <div className="text-sm text-gray-600">
-                    {issue.description}</div>
+                    {issue.description}
+
                   {issue.file && (
                     <div className="text-xs text-gray-500">
                       {issue.file}
-                      {issue.line ? `:${issue.line}` : ''}</div>
+                      {issue.line ? `:${issue.line}` : ''}
+
                   )}
-                </div>
+
                 <div
                   className={`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
                 >
-                  {issue.type.toUpperCase()}</div>
+                  {issue.type.toUpperCase()}
+
                 {checkpoint?.completedIssues.includes(issue.id) && (
                   <span className="text-green-600">✅</span>
                 )}
-              </div>
+
             ))}
-          </div>
+
       )}
 
       {/* Processing Log */}
@@ -523,9 +528,10 @@ export default function SafeModeHealthCheck() {
           <div className="bg-gray-900 text-green-200 p-4 rounded font-mono text-sm max-h-48 overflow-y-auto">
             {processingLog.map((log, index) => (
               <div key={index} className="mb-1">
-                [{new Date().toLocaleTimeString()}] {log}</div>
+                [{new Date().toLocaleTimeString()}] {log}
+
             ))}
-          </div>
+
       )}
 
       {/* Safety Guidelines */}
@@ -546,7 +552,6 @@ export default function SafeModeHealthCheck() {
             • <strong>Emergency stop</strong>: Pause immediately if system
             becomes slow
           </li>
-    );
 </li>
 </li>
 </li>
@@ -558,31 +563,10 @@ export default function SafeModeHealthCheck() {
 </div>
 </Card>
 </label>
-</div>
-</div>
-</div>
-</div>
-</div>
-</Card>
-</div>
-</div>
-</div>
+</div></Card>
+</div></div>
 }
 
-    </li>
-    </li>
-    </ul>
-    </Card>
-    </Card>
-    </div>
-    </Card>
-    </label>
-    </div>
-    </div>
-    </div>
-    </Card>
-    </div>
-    </div>
+    
   );
 }
-</CheckpointState>

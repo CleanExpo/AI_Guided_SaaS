@@ -1,28 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { 
-  Users, 
-  Activity, 
-  BarChart3, 
-  Database,
-  TrendingUp,
-  TrendingDown,
-  Clock,
-  AlertCircle,
-  CheckCircle2,
-  XCircle,
-  ArrowUpRight,
-  Server,
-  Cpu,
-  HardDrive,
-  Globe
-} from 'lucide-react'
-import { cn } from '@/lib/utils'
-
+import { useEffect, useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Users, Activity, BarChart3, Database, TrendingUp, TrendingDown, Clock, AlertCircle, CheckCircle2, XCircle, ArrowUpRight, Server, Cpu, HardDrive, Globe } from 'lucide-react';
+import { cn } from '@/lib/utils';
 interface DashboardStats {
   totalUsers: number;
   activeUsers: number;
@@ -34,7 +17,7 @@ interface DashboardStats {
   memoryUsage: string;
   totalProjects: number;
   activeProjects: number;
-  apiCalls: {
+    apiCalls: {
     today: number;
   thisWeek: number;
   thisMonth: number
@@ -42,13 +25,13 @@ interface DashboardStats {
   recentActivity: Array<{
     type: string, message: string, timestamp: string
   }>
-}
+};
 
 interface AdminDashboardProps {
   stats: DashboardStats;
   adminUser: any;
   onNavigate: (section: string) => void
-}
+};
 
 export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardProps) {
   const [refreshing, setRefreshing] = useState(false)
@@ -100,14 +83,16 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
 
   return (
     <div className="space-y-8">
-      {/* Key Metrics */}</div>
+      {/* Key Metrics */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
         <Card className="hover:shadow-lg transition-shadow"></Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" /></Users>
           <CardContent></CardContent>
-            <div className="text-2xl font-bold">{formatNumber(stats.totalUsers)}</div>
+            <div className="text-2xl font-bold">{formatNumber(stats.totalUsers)}
+
             <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
               <TrendingUp className="h-3 w-3 text-green-500 mr-1" /></TrendingUp>
               <span className="text-green-600">+{stats.newUsersToday} today</span>
@@ -118,7 +103,8 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" /></Activity>
           <CardContent></CardContent>
-            <div className="text-2xl font-bold">{formatNumber(stats.activeUsers)}</div>
+            <div className="text-2xl font-bold">{formatNumber(stats.activeUsers)}
+
             <div className="flex items-center mt-1"></div>
               <Progress 
                 value={(stats.activeUsers / stats.totalUsers) * 100} 
@@ -132,7 +118,8 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
             <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground" /></BarChart3>
           <CardContent></CardContent>
-            <div className="text-2xl font-bold">{formatNumber(stats.totalProjects)}</div>
+            <div className="text-2xl font-bold">{formatNumber(stats.totalProjects)}
+
             <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
               <span className="text-purple-600">{stats.activeProjects} active</span>
             </div>
@@ -142,7 +129,8 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
             <CardTitle className="text-sm font-medium">API Calls Today</CardTitle>
             <Globe className="h-4 w-4 text-muted-foreground" /></Globe>
           <CardContent></CardContent>
-            <div className="text-2xl font-bold">{formatNumber(stats.apiCalls.today)}</div>
+            <div className="text-2xl font-bold">{formatNumber(stats.apiCalls.today)}
+
             <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
               <TrendingUp className="h-3 w-3 text-green-500 mr-1" /></TrendingUp>
               <span>+12% from yesterday</span>
@@ -159,7 +147,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
           <CardContent className="space-y-4"></CardContent>
             <div className="flex items-center justify-between"></div>
               <span className="text-sm font-medium">Status</span>
-              <div className={cn("flex items-center gap-2", getHealthColor(stats.systemHealth))}></div>
+              <div className={cn("flex items-center gap-2" getHealthColor(stats.systemHealth))}></div>
                 <CheckCircle2 className="h-4 w-4" /></CheckCircle2>
                 <span className="font-semibold capitalize">{stats.systemHealth}</span>
               </div>
@@ -199,7 +187,8 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
             <div className="space-y-4">
               {stats.recentActivity.map((activity, index) => (</div>
                 <div key={index} className="flex items-start gap-3">
-                  {getActivityIcon(activity.type)}</div>
+                  {getActivityIcon(activity.type)}
+
                   <div className="flex-1 space-y-1"></div>
                     <p className="text-sm font-medium leading-none">
                       {activity.message}</p>
@@ -259,5 +248,4 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
                 <p className="text-sm font-medium text-muted-foreground">Check</p>
                 <p className="text-xl font-semibold">Logs</p>
               <Activity className="h-8 w-8 text-orange-500" /></Activity>
-    );
-}
+  }

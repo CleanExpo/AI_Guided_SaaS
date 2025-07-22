@@ -9,7 +9,7 @@ export interface HealthCheckResult {
   details?: any
   error?: string;
   timestamp: Date
-}
+};
 
 export interface SystemMetrics {
   cpu: {
@@ -24,7 +24,7 @@ export interface SystemMetrics {
     total: number, used: number, free: number, percentage: number
   }
   uptime: number
-}
+};
 
 export interface HealthStatus {
   status: 'healthy' | 'unhealthy' | 'degraded'
@@ -33,7 +33,7 @@ export interface HealthStatus {
   version: string;
   environment: string;
   timestamp: Date
-}
+};
 
 export type HealthCheck = () => Promise<HealthCheckResult>
 
@@ -55,7 +55,7 @@ export class HealthCheckService extends EventEmitter {
    */
   registerCheck(name: string, check: HealthCheck): void {
     this.checks.set(name, check)
-    console.log(`Registered health, check: ${name}`)
+
   }
   
   /**
@@ -63,7 +63,7 @@ export class HealthCheckService extends EventEmitter {
    */
   unregisterCheck(name: string): void {
     this.checks.delete(name)
-    console.log(`Unregistered health, check: ${name}`)
+
   }
   
   /**
@@ -121,7 +121,7 @@ export class HealthCheckService extends EventEmitter {
     this.emit('health:checked', status)
     
     const totalTime = performance.now() - startTime
-    console.log(`Health check completed in ${totalTime.toFixed(2)}ms - Status: ${overallStatus}`)
+    }ms - Status: ${overallStatus}`)
     
     return status
   }
@@ -148,8 +148,7 @@ export class HealthCheckService extends EventEmitter {
         console.error('Error running periodic health, check:', error)
       }
     }, intervalMs)
-    
-    console.log(`Started periodic health checks every ${intervalMs}ms`)
+
   }
   
   /**
@@ -159,7 +158,7 @@ export class HealthCheckService extends EventEmitter {
     if (this.checkInterval) {
       clearInterval(this.checkInterval)
       this.checkInterval = null
-      console.log('Stopped periodic health checks')
+
     }
   }
   
@@ -185,13 +184,13 @@ export class HealthCheckService extends EventEmitter {
         cores: cpus.length,
         loadAverage: os.loadavg()
       },
-      memory: {
+    memory: {
         total: totalMemory,
         used: usedMemory,
         free: freeMemory,
         percentage: (usedMemory / totalMemory) * 100
       },
-      disk: {
+    disk: {
         // This is a placeholder - real disk usage would require additional dependencies, total: 0,
         used: 0,
         free: 0,
@@ -231,7 +230,7 @@ export class HealthCheckService extends EventEmitter {
       return {
         name: 'system',
         status,
-        details: {
+    details: {
           cpu: `${metrics.cpu.usage.toFixed(1)}%`,
           memory: `${metrics.memory.percentage.toFixed(1)}%`,
           uptime: `${Math.floor(metrics.uptime / 3600)}h`,
@@ -258,10 +257,10 @@ export class HealthCheckService extends EventEmitter {
       return {
         name: 'process',
         status,
-        details: {
+    details: {
           pid: process.pid,
           uptime: `${Math.floor(process.uptime())}s`,
-          memory: {
+    memory: {
             heapUsed: `${heapUsed.toFixed(2)}MB`,
             heapTotal: `${heapTotal.toFixed(2)}MB`,
             percentage: `${heapPercentage.toFixed(1)}%`
@@ -297,7 +296,7 @@ export const createDatabaseHealthCheck = (db): HealthCheck => async () => {
       timestamp: new Date()
     }
   }
-}
+};
 
 export const createRedisHealthCheck = (redis): HealthCheck => async () => {
   const start = performance.now()
@@ -320,7 +319,7 @@ export const createRedisHealthCheck = (redis): HealthCheck => async () => {
       timestamp: new Date()
     }
   }
-}
+};
 
 export const createExternalServiceHealthCheck = (
   name: string,
@@ -347,7 +346,7 @@ export const createExternalServiceHealthCheck = (
         name,
         status: 'healthy',
         responseTime,
-        details: {
+    details: {
           statusCode: response.status
         },
         timestamp: new Date()
@@ -365,7 +364,7 @@ export const createExternalServiceHealthCheck = (
         name,
         status: 'degraded',
         responseTime,
-        details: {
+    details: {
           statusCode: response.status
         },
         timestamp: new Date()

@@ -10,7 +10,8 @@ export default function PrivacyPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
         <p className="text-muted-foreground mb-8">
-          Last, updated: {new Date().toLocaleDateString()}</p>
+          Last,
+    updated: {new Date().toLocaleDateString()}</p>
 
         <div className="prose prose-lg max-w-none space-y-6">
           <section>
@@ -48,18 +49,8 @@ export default function PrivacyPage() {
             <p>
               If you have any questions about this Privacy Policy, please
               contact us at privacy@aiguidedSaaS.com.</p>
-    );
-}
+  }
 
-    </section>
-    </section>
-    </section>
-    </div>
-    </div>
+    
   );
-</section>
-</section>
-</div>
-</div>
-</div>
 }

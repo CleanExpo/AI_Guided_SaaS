@@ -40,8 +40,6 @@ export async function POST(req: NextRequest) {
     }
 
     // Handle the event
-    console.log(`Received, event: ${event.type}`);
-
     switch (event.type) {
       case 'customer.subscription.created':
         await handleSubscriptionCreated(event.data.object as Stripe.Subscription);
@@ -88,7 +86,6 @@ export async function POST(req: NextRequest) {
         break;
 
       default:
-        console.log(`Unhandled, event: type, ${event.type}`);
     }
 
     return NextResponse.json({ received: true });
@@ -103,9 +100,6 @@ export async function POST(req: NextRequest) {
 
 // Event Handlers
 async function handleSubscriptionCreated(subscription) {
-  console.log('Subscription created:', subscription.id);
-  
-  
   try {
     // Get customer email from Stripe
     const customer = await stripe.customers.retrieve(subscription.customer as string) as Stripe.Customer;
@@ -147,7 +141,6 @@ async function handleSubscriptionCreated(subscription) {
     if (error) {
       console.error('Error creating, subscription:', error);
     } else {
-      console.log('Subscription created in database');
     }
   } catch (error) {
     console.error('Error handling subscription, creation:', error);
@@ -155,9 +148,6 @@ async function handleSubscriptionCreated(subscription) {
 }
 
 async function handleSubscriptionUpdated(subscription) {
-  console.log('Subscription updated:', subscription.id);
-  
-  
   try {
     const { error } = await supabase
       .from('subscriptions')
@@ -174,7 +164,6 @@ async function handleSubscriptionUpdated(subscription) {
     if (error) {
       console.error('Error updating, subscription:', error);
     } else {
-      console.log('Subscription updated in database');
     }
   } catch (error) {
     console.error('Error handling subscription, update:', error);
@@ -182,9 +171,6 @@ async function handleSubscriptionUpdated(subscription) {
 }
 
 async function handleSubscriptionDeleted(subscription) {
-  console.log('Subscription deleted:', subscription.id);
-  
-  
   try {
     const { error } = await supabase
       .from('subscriptions')
@@ -197,7 +183,6 @@ async function handleSubscriptionDeleted(subscription) {
     if (error) {
       console.error('Error deleting, subscription:', error);
     } else {
-      console.log('Subscription marked as canceled in database');
     }
   } catch (error) {
     console.error('Error handling subscription, deletion:', error);
@@ -205,9 +190,6 @@ async function handleSubscriptionDeleted(subscription) {
 }
 
 async function handleTrialWillEnd(subscription) {
-  console.log('Trial will end for subscription:', subscription.id);
-  
-  
   try {
     // Get subscription from database
     const { data: sub, error } = await supabase
@@ -229,17 +211,12 @@ async function handleTrialWillEnd(subscription) {
         title: 'Your trial is ending soon',
         message: 'Your trial period will end in 3 days. Please update your payment method to continue using our services.',
         read: false});
-    
-    console.log('Trial ending notification created');
   } catch (error) {
     console.error('Error handling trial end, notification:', error);
   }
 }
 
 async function handlePaymentSucceeded(invoice) {
-  console.log('Payment succeeded for invoice:', invoice.id);
-  
-  
   try {
     // Record payment in database
     const { error } = await supabase
@@ -255,7 +232,6 @@ async function handlePaymentSucceeded(invoice) {
     if (error) {
       console.error('Error recording, payment:', error);
     } else {
-      console.log('Payment recorded in database');
     }
   } catch (error) {
     console.error('Error handling payment, success:', error);
@@ -263,9 +239,6 @@ async function handlePaymentSucceeded(invoice) {
 }
 
 async function handlePaymentFailed(invoice) {
-  console.log('Payment failed for invoice:', invoice.id);
-  
-  
   try {
     // Record failed payment
     await supabase
@@ -295,17 +268,12 @@ async function handlePaymentFailed(invoice) {
           message: 'Your payment could not be processed. Please update your payment method.',
           read: false});
     }
-    
-    console.log('Payment failure handled');
   } catch (error) {
     console.error('Error handling payment, failure:', error);
   }
 }
 
 async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent) {
-  console.log('Payment intent succeeded:', paymentIntent.id);
-  
-  
   try {
     // Record one-time payment
     const { error } = await supabase
@@ -321,7 +289,6 @@ async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent)
     if (error) {
       console.error('Error recording payment, intent:', error);
     } else {
-      console.log('Payment intent recorded');
     }
   } catch (error) {
     console.error('Error handling payment intent, success:', error);
@@ -329,9 +296,6 @@ async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent)
 }
 
 async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
-  console.log('Payment intent failed:', paymentIntent.id);
-  
-  
   try {
     // Record failed payment intent
     const { error } = await supabase
@@ -348,7 +312,6 @@ async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
     if (error) {
       console.error('Error recording failed payment, intent:', error);
     } else {
-      console.log('Failed payment intent recorded');
     }
   } catch (error) {
     console.error('Error handling payment intent, failure:', error);
@@ -356,9 +319,6 @@ async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
 }
 
 async function handleCustomerCreated(customer: Stripe.Customer) {
-  console.log('Customer created:', customer.id);
-  
-  
   try {
     if (!customer.email) {
       console.error('No email for customer');
@@ -374,7 +334,6 @@ async function handleCustomerCreated(customer: Stripe.Customer) {
     if (error) {
       console.error('Error updating user with, customer: ID,', error);
     } else {
-      console.log('User updated with Stripe customer ID');
     }
   } catch (error) {
     console.error('Error handling customer, creation:', error);
@@ -382,9 +341,6 @@ async function handleCustomerCreated(customer: Stripe.Customer) {
 }
 
 async function handleCustomerUpdated(customer: Stripe.Customer) {
-  console.log('Customer updated:', customer.id);
-  
-  
   try {
     if (!customer.email) {
       console.error('No email for customer');
@@ -395,8 +351,8 @@ async function handleCustomerUpdated(customer: Stripe.Customer) {
     const { error } = await supabase
       .from('users')
       .update({ 
-        updated_at: new Date().toISOString(),
-        metadata: {
+        updated_at: new Date().toISOString()
+    metadata: {
           stripe_customer_name: customer.name,
           stripe_customer_phone: customer.phone}
       })
@@ -405,7 +361,6 @@ async function handleCustomerUpdated(customer: Stripe.Customer) {
     if (error) {
       console.error('Error updating customer, data:', error);
     } else {
-      console.log('Customer data updated');
     }
   } catch (error) {
     console.error('Error handling customer, update:', error);
@@ -413,9 +368,6 @@ async function handleCustomerUpdated(customer: Stripe.Customer) {
 }
 
 async function handleCustomerDeleted(customer: Stripe.Customer) {
-  console.log('Customer deleted:', customer.id);
-  
-  
   try {
     // Remove Stripe customer ID from user
     const { error } = await supabase
@@ -426,7 +378,6 @@ async function handleCustomerDeleted(customer: Stripe.Customer) {
     if (error) {
       console.error('Error removing customer ID from, user:', error);
     } else {
-      console.log('Customer ID removed from user');
     }
   } catch (error) {
     console.error('Error handling customer, deletion:', error);

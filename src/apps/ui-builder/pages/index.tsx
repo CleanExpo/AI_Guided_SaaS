@@ -24,5 +24,4 @@ export default function UIBuilderHome() {
         <ComponentPropsEditor /></ComponentPropsEditor>
         <CodeViewer /></CodeViewer>
         <DeploymentPanel /></DeploymentPanel>
-    );
-}
+  }

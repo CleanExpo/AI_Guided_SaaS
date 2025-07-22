@@ -1,36 +1,19 @@
 'use client'
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { useSession } from 'next-auth/react'
-import { io, Socket } from 'socket.io-client'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import {
-  Users,
-  MessageCircle,
-  Copy,
-  Crown,
-  Eye,
-  Edit3,
-  Clock,
-  Wifi,
-  WifiOff
-} from 'lucide-react'
-import {
-  CollaborationRoom,
-  CollaborationUser,
-  CursorPosition,
-  Comment,
-  ProjectChange
-} from '@/lib/collaboration'
-
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useSession } from 'next-auth/react';
+import { io, Socket } from 'socket.io-client';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Users, MessageCircle, Copy, Crown, Eye, Edit3, Clock, Wifi, WifiOff } from 'lucide-react';
+import { CollaborationRoom, CollaborationUser, CursorPosition, Comment, ProjectChange } from '@/lib/collaboration';
 interface CollaborationWorkspaceProps {
   projectId: string
   roomId?: string
   onRoomCreated?: (roomId: string) => void
-}
+};
 
 export default function CollaborationWorkspace({
   projectId,
@@ -38,22 +21,19 @@ export default function CollaborationWorkspace({
   onRoomCreated
 }: CollaborationWorkspaceProps) {
   const { data: session } = useSession()
-  const [socket, setSocket] = useState<Socket | null>(null)</Socket>
-  const [room, setRoom] = useState<CollaborationRoom | null>(null)</CollaborationRoom>
-  const [participants, setParticipants] = useState<CollaborationUser[]>([])</CollaborationUser>
-  const [comments, setComments] = useState<Comment[]>([])</Comment>
-      </ProjectChange>
+  const [socket, setSocket] = useState<Socket | null>(null)
+  const [room, setRoom] = useState<CollaborationRoom | null>(null)
+  const [participants, setParticipants] = useState<CollaborationUser[]>([])
+  const [comments, setComments] = useState<Comment[]>([])
   const [changes, setChanges] = useState<ProjectChange[]>([])
   const [connected, setConnected] = useState(false)
   const [loading, setLoading] = useState(false)
   const [newComment, setNewComment] = useState('')
   const [showComments, setShowComments] = useState(false)
-  const [showParticipants, setShowParticipants] = useState(true)</ProjectChange>
-      </Map>
+  const [showParticipants, setShowParticipants] = useState(true)
   const [cursors, setCursors] = useState<Map<string, { user: CollaborationUser, position: CursorPosition }>>(new Map())
   const [inviteLink, setInviteLink] = useState('')
   const [testMode, setTestMode] = useState(false)
-  </Map>
   const workspaceRef = useRef<HTMLDivElement>(null)</HTMLDivElement>
   const mousePosition = useRef<{ x: number, y: number }>({ x: 0, y: 0 })
 
@@ -96,18 +76,14 @@ export default function CollaborationWorkspace({
 
   const setupSocketListeners = (socket: Socket) => {
     socket.on('connect', () => {
-      console.log('Connected to collaboration server')
       setConnected(true)
     })
 
     socket.on('disconnect', () => {
-      console.log('Disconnected from collaboration server')
       setConnected(false)
     })
 
     socket.on('authenticated', (data: { user: CollaborationUser }) => {
-      console.log('Authenticated:', data.user)
-      
       // Join or create room
       if (roomId) {
         socket.emit('join_room', { roomId, projectId })
@@ -118,7 +94,6 @@ export default function CollaborationWorkspace({
     })
 
     socket.on('room_joined', (data: { room: CollaborationRoom, project: unknown }) => {
-      console.log('Joined room:', data.room)
       setRoom(data.room)
       setParticipants(data.room.participants || [])
       setInviteLink(`${window.location.origin}/collaborate/${data.room.id}`)
@@ -130,12 +105,10 @@ export default function CollaborationWorkspace({
     })
 
     socket.on('user_joined', (data: { user: CollaborationUser, room: CollaborationRoom }) => {
-      console.log('User joined:', data.user)
       setParticipants(data.room.participants || [])
     })
 
     socket.on('user_left', (data: { userId: string, user: CollaborationUser }) => {
-      console.log('User left:', data.user)
       setParticipants(prev => prev.filter(p => p.id !== data.userId))
       
       // Remove cursor
@@ -146,7 +119,7 @@ export default function CollaborationWorkspace({
       })
     })
 
-    socket.on('cursor_update', (data: { userId: string, user: CollaborationUser; position: CursorPosition }) => {
+    socket.on('cursor_update', (data: { userId: string, user: CollaborationUser, position: CursorPosition }) => {
       if (data.userId !== (session?.user as { id?: string })?.id) {
         setCursors(prev => {
           const newCursors = new Map(prev)
@@ -154,17 +127,15 @@ export default function CollaborationWorkspace({
           return newCursors
         }
       )}
-    </div>
+
   );
-    })
+  }
 
     socket.on('project_updated', (data: { change: ProjectChange, user: CollaborationUser }) => {
-      console.log('Project updated:', data.change)
       setChanges(prev => [data.change, ...prev.slice(0, 49)]) // Keep last 50 changes
     })
 
     socket.on('comment_added', (data: { comment: Comment, user: CollaborationUser }) => {
-      console.log('Comment added:', data.comment)
       setComments(prev => [data.comment, ...prev])
     })
 
@@ -172,18 +143,19 @@ export default function CollaborationWorkspace({
       console.error('Collaboration, error:', data.message)
     }
       )}
-    </div>
+
     );
   const createNewRoom = async (socket: Socket) => {
     try {
       const response = await fetch('/api/collaboration/rooms', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           projectId,
-          settings: {
+    settings: {
             allowGuests: true,
-            maxParticipants: 10; permissions: {
+            maxParticipants: 10,
+    permissions: {
               canEdit: true,
               canComment: true,
               canInvite: true,
@@ -197,7 +169,7 @@ export default function CollaborationWorkspace({
       if (data.success) {
         socket.emit('join_room', { roomId: data.roomId, projectId }
       )}
-    </div>
+
     );
     } catch (error) {
       console.error('Error creating, room:', error)
@@ -224,17 +196,16 @@ export default function CollaborationWorkspace({
         position
       }
       )}
-    </div>
-    );
-  }
 
+    );
+}
   const handleAddComment = () => {
     if (!socket || !room || !newComment.trim()) return
 
     const comment = {
       projectId,
       content: newComment,
-      position: {
+    position: {
         x: mousePosition.current.x,
         y: mousePosition.current.y
       }
@@ -247,7 +218,6 @@ export default function CollaborationWorkspace({
 
     setNewComment('')
   }
-
 
   const copyInviteLink = () => {
     navigator.clipboard.writeText(inviteLink)
@@ -275,16 +245,16 @@ export default function CollaborationWorkspace({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8"></div>
+    <div className="flex items-center justify-center p-8"></div>
         <div className="text-center"></div>
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Initializing collaboration...</p>
-    );
   }
 
   return (
     <div className="h-full flex flex-col">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center justify-between p-4 border-b"></div>
         <div className="flex items-center space-x-4"></div>
           <div className="flex items-center space-x-2">
@@ -300,7 +270,6 @@ export default function CollaborationWorkspace({
             <Badge variant="outline">
               {participants.length} participant{participants.length !== 1 ? 's' : ''}</Badge>
           )}
-        </div>
 
         <div className="flex items-center space-x-2"></div>
           <Button
@@ -324,7 +293,6 @@ export default function CollaborationWorkspace({
               <Copy className="h-4 w-4 mr-1" />
               Copy Link</Copy>
           )}
-        </div>
 
       {testMode && (
         <Alert className="m-4"></Alert>
@@ -333,7 +301,8 @@ export default function CollaborationWorkspace({
       )}
 
       <div className="flex-1 flex">
-        {/* Main workspace */}</div>
+        {/* Main workspace */}
+
         <div 
           ref={workspaceRef}
           className="flex-1 relative bg-gray-50 overflow-hidden"
@@ -353,7 +322,8 @@ export default function CollaborationWorkspace({
               <div className="flex items-center space-x-1"></div>
                 <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg"></div>
                 <div className="bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-lg">
-                  {user.name}</div>
+                  {user.name}
+
           ))}
 
           {/* Comments overlay */}
@@ -370,7 +340,8 @@ export default function CollaborationWorkspace({
                 <div className="text-xs font-medium text-yellow-800 mb-1">
                   Comment</div>
                 <div className="text-sm text-yellow-700">
-                  {comment.content}</div>
+                  {comment.content}
+
           ))}
 
           {/* Project workspace content */}
@@ -412,7 +383,6 @@ export default function CollaborationWorkspace({
                       {changes.length === 0 && (
                         <div className="text-sm text-gray-500">No recent changes</div>
                       )}
-                    </div>
 
               {/* Add comment section */}
               <Card className="mt-6"></Card>
@@ -452,7 +422,7 @@ export default function CollaborationWorkspace({
                         <span className="text-sm font-medium">
                           {participant.name.charAt(0)}</span>
                       )}
-                    </div>
+
                     <div 
                       className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`}
                     ></div>
@@ -461,14 +431,15 @@ export default function CollaborationWorkspace({
                     <div className="flex items-center space-x-1"></div>
                       <span className="font-medium">{participant.name}</span>
                       {getRoleIcon(participant.role)}
-                    </div>
-                    <div className="text-sm text-gray-500">{participant.email}</div>
+
+                    <div className="text-sm text-gray-500">{participant.email}
+
               ))}
               
               {participants.length === 0 && (
                 <div className="text-sm text-gray-500">No participants yet</div>
               )}
-            </div>
+
         )}
 
         {/* Comments sidebar */}
@@ -480,16 +451,18 @@ export default function CollaborationWorkspace({
               {comments.map((comment) => (</div>
                 <div key={comment.id} className="border rounded-lg p-3"></div>
                   <div className="text-sm font-medium mb-1">Anonymous User</div>
-                  <div className="text-sm text-gray-700 mb-2">{comment.content}</div>
+                  <div className="text-sm text-gray-700 mb-2">{comment.content}
+
                   <div className="text-xs text-gray-500">
-                    {new Date(comment.createdAt).toLocaleTimeString()}</div>
+                    {new Date(comment.createdAt).toLocaleTimeString()}
+
               ))}
               
               {comments.length === 0 && (
                 <div className="text-sm text-gray-500">No comments yet</div>
               )}
-            </div>
+
         )}
-      </div>
+
     );
 }

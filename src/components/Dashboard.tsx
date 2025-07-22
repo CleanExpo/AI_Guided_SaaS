@@ -2,31 +2,10 @@
 
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  Wrench,
-  BarChart3,
-  Users,
-  FileText,
-  TrendingUp,
-  Clock,
-  Rocket,
-  Plus,
-  Github,
-  Palette,
-  Code,
-  Zap,
-  Star,
-  ArrowRight,
-  Calendar,
-  Activity} from 'lucide-react';
+import { Wrench, BarChart3, Users, FileText, TrendingUp, Clock, Rocket, Plus, Github, Palette, Code, Zap, Star, ArrowRight, Calendar, Activity } from 'lucide-react';
 import Link from 'next/link';
 
 interface Project {
@@ -37,14 +16,14 @@ interface Project {
   lastUpdated: string;
   type: 'repository' | 'ui-component' | 'form' | 'template';
   progress?: number;
-}
+};
 
 interface DashboardStats {
   projectsCreated: number;
   componentsBuilt: number;
   deploymentsThisWeek: number;
   timesSaved: string;
-}
+}}
 
 const quickActions = [
   {
@@ -127,38 +106,39 @@ export default function Dashboard() {
   const getProjectIcon = (type: string) => {
     switch (type) {
       case 'repository':</DashboardStats>
-        return <Github className="h-4 w-4" />;
+        return <Github className="h-4 w-4" />
       case 'ui-component':</Github>
-        return <Palette className="h-4 w-4" />;
+        return <Palette className="h-4 w-4" />
       case 'form':</Palette>
-        return <Wrench className="h-4 w-4" />;
+        return <Wrench className="h-4 w-4" />
       case 'template':</Wrench>
-        return <FileText className="h-4 w-4" />;
-      default:</FileText>
-        return <Code className="h-4 w-4" />;
+        return <FileText className="h-4 w-4" />
+      default: </FileText>
+        return <Code className="h-4 w-4" />,
     }
   };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':</Code>
-        return <Badge className="bg-blue-100 text-blue-700 border-blue-200">Active</Badge>;
+        return <Badge className="bg-blue-100 text-blue-700 border-blue-200">Active</Badge>
       case 'completed':
-        return <Badge className="bg-green-100 text-green-700 border-green-200">Completed</Badge>;
+        return <Badge className="bg-green-100 text-green-700 border-green-200">Completed</Badge>
       case 'draft':
-        return <Badge variant="outline">Draft</Badge>;
+        return <Badge variant="outline">Draft</Badge>
       default:
-        return <Badge variant="secondary">{status}</Badge>;
+        return <Badge variant="secondary">{status}</Badge>
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900, dark:via-slate-800 dark:to-slate-900">
       <div className="container mx-auto py-8 px-4 space-y-8">
-        {/* Header */}</div>
+        {/* Header */}
+
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
               Welcome back{session?.user?.name ? `, ${session.user.name.split(' ')[0]}` : ''}! 👋</h1>
             <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">
               Ready to build something amazing today?</p>
@@ -180,7 +160,8 @@ export default function Dashboard() {
               <Rocket className="h-4 w-4 text-blue-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.projectsCreated}</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.projectsCreated}
+
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <TrendingUp className="inline h-3 w-3 mr-1 text-green-500" />
                 +3 this week</TrendingUp>
@@ -192,7 +173,8 @@ export default function Dashboard() {
               <Palette className="h-4 w-4 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.componentsBuilt}</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.componentsBuilt}
+
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <TrendingUp className="inline h-3 w-3 mr-1 text-green-500" />
                 +7 this week</TrendingUp>
@@ -204,7 +186,8 @@ export default function Dashboard() {
               <Zap className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.deploymentsThisWeek}</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.deploymentsThisWeek}
+
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <Calendar className="inline h-3 w-3 mr-1" />
                 This week</Calendar>
@@ -216,7 +199,8 @@ export default function Dashboard() {
               <Clock className="h-4 w-4 text-orange-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.timesSaved}</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stats.timesSaved}
+
               <p className="text-xs text-gray-500 flex items-center mt-1">
                 <Star className="inline h-3 w-3 mr-1 text-yellow-500" />
                 With AI assistance</Star>
@@ -246,7 +230,6 @@ export default function Dashboard() {
                     <CardDescription className="text-gray-600 dark:text-gray-300">
                       {action.description}</CardDescription>
             ))}
-          </div>
 
           {/* Other Actions */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -267,7 +250,6 @@ export default function Dashboard() {
                         <CardDescription className="text-sm text-gray-600 dark:text-gray-300">
                           {action.description}</CardDescription>
             ))}
-          </div>
 
         {/* Recent Projects */}
         <div>
@@ -290,14 +272,15 @@ export default function Dashboard() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-center space-x-2">
                       <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
-                        {getProjectIcon(project.type)}</div>
+                        {getProjectIcon(project.type)}
+
                       <div>
                         <CardTitle className="text-base text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
                           {project.name}</CardTitle>
                         <CardDescription className="text-sm">
                           {project.description}</CardDescription>
                     {getStatusBadge(project.status)}
-                  </div>
+
                 <CardContent className="pt-0">
                   {project.progress && (</CardContent>
                     <div className="mb-3">
@@ -331,18 +314,11 @@ export default function Dashboard() {
                     Start New Project</CardTitle>
                   <CardDescription>
                     Analyze a repository or create something new</CardDescription>
-    );
 </CardContent>
 </Card>
-</div>
-</div>
-</div>
-</CardHeader>
+</div></CardHeader>
 </Button>
-</div>
-</div>
-</div>
-</CardHeader>
+</div></CardHeader>
 </CardHeader>
 </div>
 </p>
@@ -357,41 +333,9 @@ export default function Dashboard() {
 </p>
 </CardContent>
 </Card>
-</div>
-</div>
-</div>
-</div>
+</div></div>
 }
 
-    </CardContent>
-    </Link>
-    </Card>
-    </div>
-    </div>
-    </CardHeader>
-    </Button>
-    </div>
-    </div>
-    </CardHeader>
-    </Link>
-    </CardHeader>
-    </Link>
-    </div>
-    </p>
-    </CardContent>
-    </Card>
-    </p>
-    </CardContent>
-    </Card>
-    </p>
-    </CardContent>
-    </Card>
-    </p>
-    </CardContent>
-    </Card>
-    </div>
-    </Link>
-    </div>
-    </div>
+    
   );
 }

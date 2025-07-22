@@ -3,7 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { createClient } from '@supabase/supabase-js'
 import bcrypt from 'bcryptjs'
 import NextAuth from 'next-auth'
-import type { NextAuthOptions } from 'next-auth'
+import type {  NextAuthOptions  } from 'next-auth'
 
 // Handle missing environment variables gracefully for demo deployment
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -20,9 +20,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!}),
     CredentialsProvider({
       name: 'credentials',
-      credentials: {
+    credentials: {
         email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' }
+    password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
         if (!adminUser) { return null; }
@@ -54,7 +54,7 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
-  callbacks: {
+    callbacks: {
     async jwt({ token, user }: { token; user}) {
       if (user) {
         token.id = user.id
@@ -94,14 +94,14 @@ export const authOptions: NextAuthOptions = {
       return true
     }
   },
-  pages: {
+    pages: {
     signIn: '/auth/signin',
     signUp: '/auth/signup',
     error: '/auth/error'},
-  session: {
+    session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
+    maxAge: 30 * 24 * 60 * 60; // 30 days
+  }},
   secret: process.env.NEXTAUTH_SECRET}
 
 // Type extensions are defined in src/types/next-auth.d.ts

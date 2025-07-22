@@ -10,8 +10,8 @@ interface HealthMetrics {
   dependencyScore: number;
   securityScore: number;
   uxScore: number;
-  overallScore: number;
-}
+  overallScore: number
+};
 
 export default function SelfCheckTrigger() {
   const [status, setStatus] = useState('');
@@ -39,7 +39,7 @@ export default function SelfCheckTrigger() {
       console.error('Self-check, error:', err);
     } finally {
       setIsLoading(false);
-    }
+}
   };
 </HealthMetrics>
   const generateMockReport = async (): Promise<string> => {
@@ -84,7 +84,7 @@ Overall Health, Score: 92/100 ✅
 
 ## System, Status: HEALTHY ✅
 All critical systems operational.
-Platform ready for production use.`;
+Platform ready for production use.`,
   };
 
   const extractMetricsFromReport = (reportText: string): HealthMetrics => {
@@ -100,8 +100,8 @@ Platform ready for production use.`;
       dependencyScore: depMatch ? parseInt(depMatch[1]) : 0,
       securityScore: securityMatch ? parseInt(securityMatch[1]) : 0,
       uxScore: uxMatch ? parseInt(uxMatch[1]) : 0,
-      overallScore: overallMatch ? parseInt(overallMatch[1]) : 0};
-  };
+      overallScore: overallMatch ? parseInt(overallMatch[1]) : 0}
+};
 
   const getScoreColor = (score: number): string => {
     if (score >= 90) return 'text-green-600 bg-green-100';
@@ -151,14 +151,12 @@ Platform ready for production use.`;
           >
             📥 Download Report</button>
         )}
-      </div>
 
       {/* Status */}
       {status && (
         <div className="mb-6 p-4 bg-gray-50 rounded-lg"></div>
           <p className="text-sm font-medium">{status}</p>
-  );
-}
+  }
 
       {/* Quick Metrics View */}
       {metrics && (
@@ -167,26 +165,30 @@ Platform ready for production use.`;
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
             <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.moduleScore)}`}>
-                {metrics.moduleScore}</div>
+                {metrics.moduleScore}
+
               <p className="text-xs text-gray-600 mt-1">Modules</p>
             <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.dependencyScore)}`}>
-                {metrics.dependencyScore}</div>
+                {metrics.dependencyScore}
+
               <p className="text-xs text-gray-600 mt-1">Dependencies</p>
             <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.securityScore)}`}>
-                {metrics.securityScore}</div>
+                {metrics.securityScore}
+
               <p className="text-xs text-gray-600 mt-1">Security</p>
             <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.uxScore)}`}>
-                {metrics.uxScore}</div>
+                {metrics.uxScore}
+
               <p className="text-xs text-gray-600 mt-1">UX</p>
             <div className="text-center"></div>
               <div className={`text-3xl font-bold px-3 py-2 rounded border-2 ${getScoreColor(metrics.overallScore)}`}>
-                {metrics.overallScore}</div>
+                {metrics.overallScore}
+
               <p className="text-xs text-gray-600 mt-1">Overall</p>
-  );
-}
+  }
 
       {/* Full Report */}
       {report && (
@@ -209,5 +211,4 @@ Platform ready for production use.`;
           <li>• <strong>Dependencies</strong>: Checks for outdated npm packages</li>
           <li>• <strong>Security</strong>: Scans for known vulnerabilities</li>
           <li>• <strong>User Experience</strong>: Analyzes causal data for UX insights</li>
-    );
-}
+  }

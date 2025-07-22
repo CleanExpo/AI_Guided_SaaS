@@ -1,15 +1,14 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ProjectConfig } from '@/types'
-import { FolderOpen } from 'lucide-react'
-
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProjectConfig } from '@/types';
+import { FolderOpen } from 'lucide-react';
 interface MDFolderAgentProps {
   projectConfig: ProjectConfig;
   onMDGenerationComplete: (result: unknown) => void
-}
+};
 
-export default function MDFolderAgent({ projectConfig }: MDFolderAgentProps) {
+export default function MDFolderAgent() {
   return (
     <Card></Card>
       <CardHeader></CardHeader>
@@ -19,5 +18,4 @@ export default function MDFolderAgent({ projectConfig }: MDFolderAgentProps) {
       <CardContent></CardContent>
         <p className="text-gray-600">
           Markdown folder management for {projectConfig.name} coming soon...</p>
-    );
-}
+  }

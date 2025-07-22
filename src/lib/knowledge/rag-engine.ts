@@ -34,7 +34,7 @@ export interface RAGQuery {
     includeScores?: boolean
     stream?: boolean
   }
-}
+};
 
 export interface RAGResponse {
   answer: string;
@@ -45,7 +45,7 @@ export interface RAGResponse {
   completion: number;
   total: number
   }
-}
+};
 
 export interface RAGSource {
   id: string;
@@ -83,8 +83,8 @@ export const RAGQuerySchema = z.object({
 
 export class RAGEngine {
   private config: RAGConfig
-  private vectorStore: VectorStore
-  private documentLoader: DocumentLoader
+  private, vectorStore: VectorStore
+  private, documentLoader: DocumentLoader
   private, textSplitter: TextSplitter
 
   constructor(config: RAGConfig) {
@@ -119,7 +119,7 @@ export class RAGEngine {
     const document: Document = {
       id: this.generateId(),
       content,
-      metadata: {
+    metadata: {
         ...metadata,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
@@ -387,7 +387,7 @@ Answer:`
         highlights: s.highlights
       })),
       confidence: 0.85,
-      tokens: {
+    tokens: {
         prompt: prompt.length / 4,
         completion: answer.length / 4,
         total: (prompt.length + answer.length) / 4

@@ -8,7 +8,7 @@ export interface RateLimiterConfig {
   cooldownPeriod: number // milliseconds;
   burstAllowance: number // percentage above limit for short bursts;
   adaptiveScaling: boolean
-}
+};
 
 export interface ResourceMetrics {
   cpuUsage: number;
@@ -18,7 +18,7 @@ export interface ResourceMetrics {
   freeMemory: number;
   loadAverage: number[];
   timestamp: Date
-}
+};
 
 export class CPURateLimiter extends EventEmitter {
   private config: RateLimiterConfig
@@ -140,8 +140,6 @@ export class CPURateLimiter extends EventEmitter {
         until: this.throttleUntil,
         metrics: this.metrics[this.metrics.length - 1]
       })
-      
-      console.log('⚠️ CPU, Rate: Limiter Throttling activated')
     }
   }
   
@@ -168,8 +166,6 @@ export class CPURateLimiter extends EventEmitter {
     this.emit('release', {
       metrics: this.metrics[this.metrics.length - 1]
     })
-    
-    console.log('✅ CPU, Rate: Limiter Throttling released')
   }
   
   private recordMetrics(metrics: ResourceMetrics): void {
@@ -209,8 +205,6 @@ export class CPURateLimiter extends EventEmitter {
       ...this.config,
       ...newConfig
     }
-    
-    console.log('✅ CPU Rate Limiter config updated:', this.config)
   }
   
   public async waitForResources(): Promise<void> {
@@ -274,7 +268,6 @@ export class CPURateLimiter extends EventEmitter {
     }
     
     this.removeAllListeners()
-    console.log('🛑 CPU Rate Limiter shutdown')
   }
 }
 

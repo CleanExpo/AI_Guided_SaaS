@@ -6,32 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Code2,
-  FileText,
-  Folder,
-  FolderOpen,
-  GitBranch,
-  Terminal,
-  Search,
-  Settings,
-  Package,
-  FileCode2,
-  FileJson,
-  Play,
-  Bug,
-  GitCommit,
-  GitPullRequest,
-  ChevronRight,
-  ChevronDown,
-  X,
-  Plus,
-  Save,
-  RefreshCw,
-  Sparkles,
-  Zap,
-  Eye
-} from 'lucide-react';
+import { Code2, FileText, Folder, FolderOpen, GitBranch, Terminal, Search, Settings, Package, FileCode2, FileJson, Play, Bug, GitCommit, GitPullRequest, ChevronRight, ChevronDown, X, Plus, Save, RefreshCw, Sparkles, Zap, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Editor from '@monaco-editor/react';
 
@@ -41,7 +16,7 @@ interface FileNode {
   path: string;
   children?: FileNode[];
   content?: string;
-}
+};
 
 interface OpenFile {
   path: string;
@@ -52,9 +27,7 @@ interface OpenFile {
 }
 
 export default function ProCodeEditor() {
-      </OpenFile>
   const [openFiles, setOpenFiles] = useState<OpenFile[]>([]);
-      </string>
   const [activeFile, setActiveFile] = useState<string | null>(null);
   const [fileTree, setFileTree] = useState<FileNode[]>([
     {
@@ -75,12 +48,12 @@ function App() {
       <header className="App-header">
         <h1>Welcome to AI Guided SaaS</h1>
         <p>Start editing to see AI-powered suggestions!</p>
-    );
+      </header>
+    </div>
+  );
 }
 
 export default App;`
-        </header>
-        </div>
         },
         {
           name: 'components',
@@ -107,8 +80,9 @@ export const Button: React.FC<ButtonProps> = ({
       className={\`btn btn-\${variant}\`}
       onClick={onClick}
     >
-      {children}</button>
-    );
+      {children}
+    </button>
+  );
 };`
             }
           ]
@@ -129,13 +103,8 @@ export const Button: React.FC<ButtonProps> = ({
   }
 }`
     }
-      </FileNode>
-      </div>
-      </header>
-      </ButtonProps>
   ]);
   
-      </Set>
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['/src']));
   const [terminalOutput, setTerminalOutput] = useState<string[]>([
     '$ npm install',
@@ -146,12 +115,10 @@ export const Button: React.FC<ButtonProps> = ({
     '',
     '  VITE v5.0.0  ready in 523 ms',
     '',
-    '  ➜  Local: http,//localhost:5173/',
+    '  ➜  Local: http://localhost:5173/',
     '  ➜  Network: use --host to expose',
     '  ➜  press h to show help'
-      </string>
   ]);
-      </string>
   const [aiSuggestions, setAiSuggestions] = useState<string[]>([]);
   const [sidebarTab, setSidebarTab] = useState('explorer');
 
@@ -170,8 +137,7 @@ export const Button: React.FC<ButtonProps> = ({
         return 'css';
       case 'html':
         return 'html';
-      default:
-        return 'plaintext';
+      default: return 'plaintext';
     }
   };
 
@@ -181,11 +147,11 @@ export const Button: React.FC<ButtonProps> = ({
       case 'ts':
       case 'tsx':
       case 'js':
-      case 'jsx':</string>
+      case 'jsx':
         return <FileCode2 className="w-4 h-4 text-blue-500" />;
-      case 'json':</FileCode2>
+      case 'json':
         return <FileJson className="w-4 h-4 text-yellow-500" />;
-      default:</FileJson>
+      default:
         return <FileText className="w-4 h-4 text-gray-500" />;
     }
   };
@@ -241,42 +207,42 @@ export const Button: React.FC<ButtonProps> = ({
       <div key={node.path}>
         <div
           className={cn(
-            "flex items-center gap-2 px-2 py-1, hover:bg-gray-100, dark: hover,bg-gray-800 cursor-pointer",
-            activeFile === node.path && "bg-blue-100, dark:bg-blue-900"
+            "flex items-center gap-2 px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer",
+            activeFile === node.path && "bg-blue-100 dark:bg-blue-900"
           )}
           onClick={() => {
             if (node.type === 'folder') {
-                  </div>
               handleFolderToggle(node.path);
-           } else {
+            } else {
               handleFileClick(node);
             }
           }}
         >
-          {node.type === 'folder' ? (</div>
+          {node.type === 'folder' ? (
             <>
               {expandedFolders.has(node.path) ? (
                 <ChevronDown className="w-4 h-4" />
-              ) : (</ChevronDown>
+              ) : (
                 <ChevronRight className="w-4 h-4" />
               )}
-              {expandedFolders.has(node.path) ? (</ChevronRight>
+              {expandedFolders.has(node.path) ? (
                 <FolderOpen className="w-4 h-4 text-yellow-600" />
-              ) : (</FolderOpen>
+              ) : (
                 <Folder className="w-4 h-4 text-yellow-600" />
-              )}</Folder>
+              )}
             </>
           ) : (
             <>
               <div className="w-4" />
-              {getFileIcon(node.name)}</div>
+              {getFileIcon(node.name)}
             </>
           )}
           <span className="text-sm">{node.name}</span>
         </div>
         {node.type === 'folder' && expandedFolders.has(node.path) && node.children && (
           <div className="ml-4">
-            {renderFileTree(node.children)}</div>
+            {renderFileTree(node.children)}
+          </div>
         )}
       </div>
     ));
@@ -284,14 +250,14 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <div className="h-screen flex bg-gray-900 text-gray-100">
-      {/* Activity Bar */}</div>
+      {/* Activity Bar */}
       <div className="w-12 bg-gray-950 flex flex-col items-center py-2 gap-4">
         <Button
           variant="ghost"
           size="sm"
           className={cn("w-10 h-10 p-0", sidebarTab === 'explorer' && "bg-gray-800")}
           onClick={() => setSidebarTab('explorer')}
-        ></Button>
+        >
           <FileText className="w-5 h-5" />
         </Button>
         <Button
@@ -299,7 +265,7 @@ export const Button: React.FC<ButtonProps> = ({
           size="sm"
           className={cn("w-10 h-10 p-0", sidebarTab === 'search' && "bg-gray-800")}
           onClick={() => setSidebarTab('search')}
-        ></Button>
+        >
           <Search className="w-5 h-5" />
         </Button>
         <Button
@@ -307,7 +273,7 @@ export const Button: React.FC<ButtonProps> = ({
           size="sm"
           className={cn("w-10 h-10 p-0", sidebarTab === 'git' && "bg-gray-800")}
           onClick={() => setSidebarTab('git')}
-        ></Button>
+        >
           <GitBranch className="w-5 h-5" />
         </Button>
         <Button
@@ -315,7 +281,7 @@ export const Button: React.FC<ButtonProps> = ({
           size="sm"
           className={cn("w-10 h-10 p-0", sidebarTab === 'debug' && "bg-gray-800")}
           onClick={() => setSidebarTab('debug')}
-        ></Button>
+        >
           <Bug className="w-5 h-5" />
         </Button>
         <Button
@@ -323,12 +289,11 @@ export const Button: React.FC<ButtonProps> = ({
           size="sm"
           className={cn("w-10 h-10 p-0", sidebarTab === 'extensions' && "bg-gray-800")}
           onClick={() => setSidebarTab('extensions')}
-        ></Button>
+        >
           <Package className="w-5 h-5" />
         </Button>
         
         <div className="flex-1" />
-        </div>
         <Button
           variant="ghost"
           size="sm"
@@ -336,17 +301,22 @@ export const Button: React.FC<ButtonProps> = ({
         >
           <Settings className="w-5 h-5" />
         </Button>
+      </div>
 
       {/* Sidebar */}
       <div className="w-64 bg-gray-850 border-r border-gray-800">
-        {sidebarTab === 'explorer' && (</div>
+        {sidebarTab === 'explorer' && (
           <div className="h-full flex flex-col">
             <div className="p-2 border-b border-gray-800">
               <h3 className="text-xs font-semibold uppercase text-gray-400">Explorer</h3>
+            </div>
             <ScrollArea className="flex-1">
               <div className="p-2">
-                {renderFileTree(fileTree)}</div>
-            </ScrollArea>)}
+                {renderFileTree(fileTree)}
+              </div>
+            </ScrollArea>
+          </div>
+        )}
         
         {sidebarTab === 'search' && (
           <div className="p-4">
@@ -364,27 +334,32 @@ export const Button: React.FC<ButtonProps> = ({
             <div className="space-y-2">
               <Button variant="outline" size="sm" className="w-full">
                 <GitCommit className="w-4 h-4 mr-2" />
-                Commit</GitCommit>
+                Commit
+              </Button>
               <Button variant="outline" size="sm" className="w-full">
                 <GitPullRequest className="w-4 h-4 mr-2" />
-                Pull Request</GitPullRequest>
-              </Button>)}
+                Pull Request
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Main Editor Area */}
       <div className="flex-1 flex flex-col">
-        {/* Tabs */}</div>
+        {/* Tabs */}
         <div className="bg-gray-850 border-b border-gray-800">
           <div className="flex items-center">
             {openFiles.map((file) => (
               <div
                 key={file.path}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 border-r border-gray-800 cursor-pointer, hover:bg-gray-800",
+                  "flex items-center gap-2 px-4 py-2 border-r border-gray-800 cursor-pointer hover:bg-gray-800", 
                   activeFile === file.path && "bg-gray-800"
                 )}
                 onClick={() => setActiveFile(file.path)}
               >
-                {getFileIcon(file.name)}</div>
+                {getFileIcon(file.name)}
                 <span className="text-sm">{file.name}</span>
                 {file.isDirty && <span className="text-xs">●</span>}
                 <Button
@@ -396,11 +371,13 @@ export const Button: React.FC<ButtonProps> = ({
                     setOpenFiles(openFiles.filter(f => f.path !== file.path));
                     if (activeFile === file.path) {
                       setActiveFile(openFiles[0]?.path || null);
-                   }
+                    }
                   }}
-                ></Button>
+                >
                   <X className="w-3 h-3" />
-                </Button>))}
+                </Button>
+              </div>
+            ))}
             <Button
               variant="ghost"
               size="sm"
@@ -408,11 +385,13 @@ export const Button: React.FC<ButtonProps> = ({
             >
               <Plus className="w-4 h-4" />
             </Button>
+          </div>
+        </div>
 
         {/* Editor */}
         <div className="flex-1 flex">
           <div className="flex-1">
-            {activeFile && openFiles.find(f => f.path === activeFile) ? (</div>
+            {activeFile && openFiles.find(f => f.path === activeFile) ? (
               <Editor
                 height="100%"
                 theme="vs-dark"
@@ -420,7 +399,7 @@ export const Button: React.FC<ButtonProps> = ({
                 value={openFiles.find(f => f.path === activeFile)?.content}
                 onChange={handleEditorChange}
                 options={{
-                  minimap: { enabled: true},
+                  minimap: { enabled: true },
                   fontSize: 14,
                   lineNumbers: 'on',
                   rulers: [80],
@@ -438,24 +417,28 @@ export const Button: React.FC<ButtonProps> = ({
                   }
                 }}
               />
-            ) : (</Editor>
+            ) : (
               <div className="h-full flex items-center justify-center text-gray-500">
                 <div className="text-center">
                   <Code2 className="w-16 h-16 mx-auto mb-4" />
                   <p>Select a file to start coding</p>
-  );
-}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* AI Assistant Panel */}
           <div className="w-80 bg-gray-850 border-l border-gray-800">
             <div className="p-4 border-b border-gray-800">
               <h3 className="text-sm font-semibold flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-yellow-500" />
-                AI Assistant</Sparkles>
+                AI Assistant
+              </h3>
+            </div>
             
             <div className="p-4 space-y-4">
               {/* AI Suggestions */}
-              {aiSuggestions.length > 0 && (</div>
+              {aiSuggestions.length > 0 && (
                 <div>
                   <h4 className="text-xs font-semibold text-gray-400 mb-2">Suggestions</h4>
                   <div className="space-y-2">
@@ -464,8 +447,11 @@ export const Button: React.FC<ButtonProps> = ({
                         <div className="flex items-start gap-2">
                           <Zap className="w-4 h-4 text-yellow-500 mt-0.5" />
                           <p className="text-sm">{suggestion}</p>
+                        </div>
+                      </Card>
                     ))}
                   </div>
+                </div>
               )}
 
               {/* Quick Actions */}
@@ -474,13 +460,21 @@ export const Button: React.FC<ButtonProps> = ({
                 <div className="space-y-2">
                   <Button variant="outline" size="sm" className="w-full justify-start">
                     <RefreshCw className="w-4 h-4 mr-2" />
-                    Refactor Code</RefreshCw>
+                    Refactor Code
+                  </Button>
                   <Button variant="outline" size="sm" className="w-full justify-start">
                     <Bug className="w-4 h-4 mr-2" />
-                    Fix Issues</Bug>
+                    Fix Issues
+                  </Button>
                   <Button variant="outline" size="sm" className="w-full justify-start">
                     <Sparkles className="w-4 h-4 mr-2" />
-                    Generate Tests</Sparkles>
+                    Generate Tests
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Bottom Panel - Terminal */}
         <div className="h-64 bg-gray-950 border-t border-gray-800">
@@ -488,16 +482,21 @@ export const Button: React.FC<ButtonProps> = ({
             <TabsList className="bg-gray-850 border-b border-gray-800 rounded-none">
               <TabsTrigger value="terminal">
                 <Terminal className="w-4 h-4 mr-2" />
-                Terminal</Terminal>
+                Terminal
+              </TabsTrigger>
               <TabsTrigger value="problems">
                 <Bug className="w-4 h-4 mr-2" />
-                Problems</Bug>
+                Problems
+              </TabsTrigger>
               <TabsTrigger value="output">
                 <FileText className="w-4 h-4 mr-2" />
-                Output</FileText>
+                Output
+              </TabsTrigger>
               <TabsTrigger value="debug-console">
                 <Code2 className="w-4 h-4 mr-2" />
-                Debug Console</Code2>
+                Debug Console
+              </TabsTrigger>
+            </TabsList>
             
             <TabsContent value="terminal" className="h-full p-4">
               <div className="font-mono text-sm">
@@ -511,9 +510,23 @@ export const Button: React.FC<ButtonProps> = ({
                     placeholder="Enter command..."
                   />
                 </div>
+              </div>
+            </TabsContent>
             
             <TabsContent value="problems" className="h-full p-4">
               <p className="text-sm text-gray-400">No problems detected</p>
+            </TabsContent>
+            
+            <TabsContent value="output" className="h-full p-4">
+              <p className="text-sm text-gray-400">No output</p>
+            </TabsContent>
+            
+            <TabsContent value="debug-console" className="h-full p-4">
+              <p className="text-sm text-gray-400">Debug console inactive</p>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
 
       {/* Status Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-6 bg-blue-600 flex items-center justify-between px-4 text-xs">
@@ -527,63 +540,10 @@ export const Button: React.FC<ButtonProps> = ({
           <span>Spaces: 2</span>
           <Button variant="ghost" size="sm" className="h-4 px-2 text-xs">
             <Eye className="w-3 h-3 mr-1" />
-            Live Preview</Eye>
-    );
-</Button>
-</div>
-</div>
-</TabsContent>
-</div>
-</TabsContent>
-</TabsTrigger>
-</TabsTrigger>
-</TabsTrigger>
-</TabsTrigger>
-</TabsList>
-</Tabs>
-</div>
-</Button>
-</Button>
-</Button>
-</div>
-</div>
-</Card>
-</div>
-</div>
-</h3>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</Button>
-</div>
-</div>
-</div>
-</div>
-}
-    </Button>
-    </div>
-    </TabsContent>
-    </div>
-    </TabsContent>
-    </TabsTrigger>
-    </TabsTrigger>
-    </TabsList>
-    </Tabs>
-    </div>
-    </Button>
-    </Button>
-    </div>
-    </Card>
-    </div>
-    </h3>
-    </div>
-    </div>
-    </div>
-    </Button>
-    </div>
+            Live Preview
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -2,12 +2,7 @@
 
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -27,7 +22,7 @@ interface Tutorial {
     title: string;
   content: string;
     completed?: boolean;
-  }>;
+  }>
 }
 
 const tutorials: Record<string, Tutorial> = {
@@ -187,7 +182,7 @@ export default function TutorialPage() {
 
   if (!tutorial) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Tutorial Not Found</h1>
           <p className="text-muted-foreground mb-6">
@@ -196,7 +191,6 @@ export default function TutorialPage() {
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Tutorials</ArrowLeft>
-    );
   }
 
   const handleStepComplete = (stepIndex: number) => {
@@ -205,7 +199,7 @@ export default function TutorialPage() {
       newCompleted.delete(stepIndex);
     } else {
       newCompleted.add(stepIndex);
-    }
+}
     setCompletedSteps(newCompleted);
   };
 
@@ -213,7 +207,8 @@ export default function TutorialPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center gap-4">
         <Link href="/tutorials">
           <Button variant="outline" size="sm">
@@ -256,7 +251,6 @@ export default function TutorialPage() {
               <Badge key={tag} variant="outline">
                 {tag}</Badge>
                   ))}
-          </div>
 
       {/* Tutorial Steps */}
       <div className="space-y-4">
@@ -287,7 +281,6 @@ export default function TutorialPage() {
             <CardContent>
               <p className="text-muted-foreground">{step.content}</p>
         ))}
-      </div>
 
       {/* Next Steps */}
       {progress === 100 && (
@@ -296,7 +289,7 @@ export default function TutorialPage() {
             <CardTitle className="text-green-700 dark:text-green-300">
               🎉 Tutorial Completed!</CardTitle>
             <CardDescription>
-              Congratulations! You&apos;ve completed this tutorial. Ready for
+              Congratulations! You&apos, ve completed this tutorial. Ready for
               the next challenge?</CardDescription>
           <CardContent>
             <div className="flex gap-2">
@@ -305,7 +298,7 @@ export default function TutorialPage() {
               <Link href="/ui-builder">
                 <Button variant="outline">Try UI Builder</Button>
       )}
-    </div>
+
     );
 </CardContent>
 </CardHeader>
@@ -315,40 +308,13 @@ export default function TutorialPage() {
 </CardHeader>
 </div>
 </CardContent>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardHeader>
+</div></CardHeader>
 </Card>
 </div>
 </Button>
 </div>
 }
 
-    </Link>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </CardContent>
-    </div>
-    </CardHeader>
-    </div>
-    </CardContent>
-    </div>
-    </div>
-    </div>
-    </CardHeader>
-    </Card>
-    </div>
-    </Button>
-    </Link>
-    </div>
-    </Button>
-    </Link>
-    </div>
+    
   );
 }
-</number>

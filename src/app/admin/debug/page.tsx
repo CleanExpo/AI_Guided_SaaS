@@ -49,7 +49,4 @@ export default function AdminDebugPage() {
           <p>This page helps diagnose admin routing issues on Vercel.</p>
           <p>If you see this page, admin routes are accessible.</p>
         </div>
-    </div>
-  );
-}
-</div>
+  }

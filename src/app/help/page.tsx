@@ -1,20 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  MessageCircle,
-  Book,
-  Mail,
-  Phone,
-  Search,
-  HelpCircle} from 'lucide-react';
+import { MessageCircle, Book, Mail, Phone, Search, HelpCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Help & Support - AI Guided SaaS Platform',
@@ -91,9 +80,8 @@ export default function HelpPage() {
         {/* Support Options */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {supportOptions.map(option => {
-            const Icon = option.icon;
-            return (
-              <Card
+            const Icon = option.icon, return (
+    <Card
                 key={option.title}
                 className="text-center hover:shadow-lg transition-shadow"
               >
@@ -104,16 +92,11 @@ export default function HelpPage() {
                 <CardContent>
                   <Button asChild className="w-full">
                     <Link href={option.href}>{option.action}</Link>
-    );
-          }
-      )}
-    </div>
-        </div>
-        </div>
-        </CardHeader>
+  }
+      );}
+
+        </div></CardHeader>
         </CardContent>
-        </Button>
-    );
 
         {/* FAQ Section */}
         <div className="mb-16">
@@ -130,7 +113,6 @@ export default function HelpPage() {
                 <CardContent>
                   <p className="text-muted-foreground">{faq.answer}</p>
             ))}
-          </div>
 
         {/* Contact Section */}
         <div className="text-center bg-muted rounded-lg p-8">
@@ -138,7 +120,7 @@ export default function HelpPage() {
           <p className="text-muted-foreground mb-6">
             Our support team is available 24/7 to assist you with any questions
             or issues.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm: flex-row gap-4 justify-center">
             <Button asChild>
               <Link href="/contact">Contact Support</Link>
             <Button variant="outline" asChild>
@@ -148,6 +130,4 @@ export default function HelpPage() {
           </CardHeader>
           </CardContent>
           </div>
-          </Button>
-      );
-}
+  }

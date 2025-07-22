@@ -15,7 +15,7 @@ export function createProjectDeploymentWorkflow(
       type: 'n8n-nodes-base.webhook',
       typeVersion: 1,
       position: [250, 300],
-      parameters: {
+    parameters: {
         httpMethod: 'POST',
         path: webhookPath,
         responseMode: 'lastNode',
@@ -30,7 +30,7 @@ export function createProjectDeploymentWorkflow(
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [450, 300],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 const projectId = $input.item.json.projectId;
@@ -59,13 +59,13 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [650, 200],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.API_URL }}/api/build',
         authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth',
         sendHeaders: true,
-        headerParameters: {
+    headerParameters: {
           parameters: [
             {
               name: 'Content-Type',
@@ -75,7 +75,7 @@ return {
         },
         sendBody: true,
         bodyParametersJson: '={{ JSON.stringify($json) }}',
-        options: {
+    options: {
           timeout: 300000 // 5 minutes
         }
       }
@@ -88,14 +88,14 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [850, 200],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.API_URL }}/api/test',
         authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth',
         sendBody: true,
         bodyParametersJson: '={{ JSON.stringify({ projectId: $json.projectId: type, "all" }) }}',
-        options: {
+    options: {
           timeout: 180000 // 3 minutes
         }
       }
@@ -108,13 +108,13 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [1050, 200],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.VERCEL_API_URL }}/v13/deployments',
         authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth',
         sendHeaders: true,
-        headerParameters: {
+    headerParameters: {
           parameters: [
             {
               name: 'Authorization',
@@ -123,8 +123,9 @@ return {
           ]
         },
         sendBody: true,
-        bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId, gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" } }) }}',
-        options: {}
+        bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
+    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" } }) }}',
+    options: {}
       }
     },
 
@@ -135,7 +136,7 @@ return {
       type: 'n8n-nodes-base.wait',
       typeVersion: 1,
       position: [1250, 200],
-      parameters: {
+    parameters: {
         amount: 30,
         unit: 'seconds'
       }
@@ -147,12 +148,12 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [1450, 200],
-      parameters: {
+    parameters: {
         method: 'GET',
         url: '={{ $node["Deploy to Staging"].json.url }}/api/health',
-        options: {
+    options: {
           timeout: 10000,
-          retry: {
+    retry: {
             maxRetries: 3,
             waitBetweenRetries: 5000
           }
@@ -160,14 +161,13 @@ return {
       }
     },
 
-    // 7. Deploy to production (if health check passes)
-    {
+    // 7. Deploy to production (if health check passes) {
       id: 'if_1',
       name: 'Check Health Status',
       type: 'n8n-nodes-base.if',
       typeVersion: 1,
       position: [1650, 300],
-      parameters: {
+    parameters: {
         conditions: {
           boolean: [
             {
@@ -185,13 +185,13 @@ return {
       type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
       position: [1850, 200],
-      parameters: {
+    parameters: {
         method: 'POST',
         url: '={{ $env.VERCEL_API_URL }}/v13/deployments',
         authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth',
         sendHeaders: true,
-        headerParameters: {
+    headerParameters: {
           parameters: [
             {
               name: 'Authorization',
@@ -200,8 +200,9 @@ return {
           ]
         },
         sendBody: true,
-        bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId, gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" }, target: "production" }) }}',
-        options: {}
+        bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
+    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" }, target: "production" }) }}',
+    options: {}
       }
     },
 
@@ -212,7 +213,7 @@ return {
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [2050, 200],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 const deploymentUrl = $node["Deploy to Production"].json.url;
@@ -225,7 +226,7 @@ return {
   stagingUrl: $node["Deploy to Staging"].json.url,
   timestamp: new Date().toISOString(),
   message: \`Project \${projectId} successfully deployed to production!\`,
-  details: {
+    details: {
     buildDuration: $node["Trigger Build"].json.duration,
     testsPassed: $node["Run Tests"].json.passed,
     healthCheckStatus: $node["Health Check"].json.status
@@ -240,7 +241,7 @@ return {
       type: 'n8n-nodes-base.code',
       typeVersion: 2,
       position: [1850, 400],
-      parameters: {
+    parameters: {
         mode: 'runOnceForEachItem',
         jsCode: `
 const projectId = $node["Extract Project Data"].json.projectId;
@@ -253,7 +254,7 @@ return {
   message: \`Deployment failed for project \${projectId}\`,
   error: healthStatus.error || 'Health check failed',
   stagingUrl: $node["Deploy to Staging"].json.url,
-  details: {
+    details: {
     healthCheckStatus: healthStatus.status,
     healthCheckMessage: healthStatus.message
   }
@@ -268,7 +269,7 @@ return {
       type: 'n8n-nodes-base.emailSend',
       typeVersion: 2,
       position: [2250, 300],
-      parameters: {
+    parameters: {
         fromEmail: '={{ $env.NOTIFICATION_EMAIL }}',
         toEmail: '={{ $env.ADMIN_EMAIL }}',
         subject: 'Deployment {{ $json.success ? "Successful" : "Failed" }} - {{ $json.projectId }}',
@@ -285,9 +286,9 @@ return {
 <h3>Details</h3>
 <pre>{{ JSON.stringify($json.details, null, 2) }}</pre>
 `,
-        options: {}
+    options: {}
       },
-      credentials: {
+    credentials: {
         smtp: 'SMTP Credentials'
       }
     }

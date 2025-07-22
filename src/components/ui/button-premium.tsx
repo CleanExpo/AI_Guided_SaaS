@@ -8,7 +8,7 @@ import { cn } from '@/utils/cn';
 import { designTokens } from '@/lib/design-system';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:pointer-events-none, disabled:opacity-50 relative overflow-hidden',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden',
   {
     variants: {
       variant: {
@@ -22,13 +22,13 @@ const buttonVariants = cva(
         glass: 'text-foreground shadow-lg, hover:shadow-xl backdrop-blur-md bg-white/10 border border-white/20, hover:bg-white/20',
         glow: 'bg-primary text-primary-foreground shadow-lg, hover:shadow-xl',
         floating: 'bg-background text-foreground border border-border shadow-lg, hover:shadow-xl transform, hover:scale-105'},
-      size: {
+    size: {
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-lg px-8',
         xl: 'h-12 rounded-lg px-10 text-base',
         icon: 'h-10 w-10'},
-      animation: {
+    animation: {
         none: '',
         pulse: 'animate-pulse-slow',
         bounce: 'animate-bounce-subtle',
@@ -40,11 +40,10 @@ const buttonVariants = cva(
       animation: 'none'}}
 );
 
-export interface ButtonPremiumProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 
+export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 
     'size' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' |
     'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'transition'>,</React>
-    VariantProps<typeof buttonVariants> {
+    VariantProps<typeof buttonVariants>  {
   asChild?: boolean;
   glow?: boolean;
   ripple?: boolean;
@@ -69,7 +68,7 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
     ...props 
   }, ref) => {</HTMLButtonElement>
         </Array>
-    const [ripples, setRipples] = React.useState<Array<{ id: number, x: number; y: number }>>([]);
+    const [ripples, setRipples] = React.useState<Array<{ id: number, x: number, y: number }>>([]);
     const rippleId = React.useRef(0);
 
     const Comp = asChild ? Slot : motion.button;
@@ -87,11 +86,10 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
         setTimeout(() => {
           setRipples(prev => prev.filter(r => r.id !== newRipple.id));
         }, 600);
-      }
-      
+}
       if (props.onClick) {
         props.onClick(event);
-      }
+}
     };
 
     const getGlowStyles = () => {
@@ -103,18 +101,18 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
         case 'destructive':
           return { boxShadow: `${designTokens.shadows.glow.primary}, 0 0 30px rgba(239, 68, 68, 0.3)` };
         default:
-          return { boxShadow: designTokens.shadows.glow.primary };
-      }
+          return { boxShadow: designTokens.shadows.glow.primary }
+}
     };
 
     const motionProps = asChild ? {} : {
       whileHover: { scale: variant === 'floating' ? 1.05 : 1.02 },
-      whileTap: { scale: 0.98 }};
+    whileTap: { scale: 0.98 }};
 
     return (
-      <Comp
+    <Comp
         className={cn(
-          buttonVariants({ variant, size, animation, className }),
+          buttonVariants({ variant, size, animation className }),
           glow && 'animate-pulse-slow',
           loading && 'cursor-not-allowed opacity-70'
         )}
@@ -150,7 +148,7 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
         )}
         
         {/* Content */}
-        <div className={cn('flex items-center gap-2', loading && 'opacity-0')}>
+        <div className={cn('flex items-center gap-2' loading && 'opacity-0')}>
           {icon && iconPosition === 'left' && (</div>
             <span className="flex-shrink-0">{icon}</span>
           )}
@@ -158,13 +156,11 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
           {icon && iconPosition === 'right' && (
             <span className="flex-shrink-0">{icon}</span>
           )}
-        </div>
+
     );
-  }
-);
+  };
 
 ButtonPremium.displayName = 'ButtonPremium';
 
-export { ButtonPremium, buttonVariants };
-
+export { ButtonPremium, buttonVariants }
 }

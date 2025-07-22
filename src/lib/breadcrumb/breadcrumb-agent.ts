@@ -9,29 +9,34 @@ interface ClientVision {
   core_features: string[];
   modules: Array<{
     name: string;
-  purpose: string;
-    priority: string;
+    purpose: string;
+    priority: string
   }>;
-}
+};
 
 interface FileMapping {
   purpose: string;
   linked_to: string[];
   critical: boolean;
-  dependencies: string[];
-}
+  dependencies: string[]
+};
 
 interface ValidationResult {
   isValid: boolean;
   issues: Array<{
-    type: 'missing_purpose' | 'not_linked' | 'orphaned' | 'duplicate_purpose' | 'misaligned';
+    type:
+      | 'missing_purpose'
+      | 'not_linked'
+      | 'orphaned'
+      | 'duplicate_purpose'
+      | 'misaligned';
     file?: string;
     message: string;
-    severity: 'error' | 'warning';
+    severity: 'error' | 'warning'
   }>;
   suggestions: string[];
-  alignmentScore: number;
-}
+  alignmentScore: number
+};
 
 export class BreadcrumbAgent {
   private visionPath: string;
@@ -40,9 +45,17 @@ export class BreadcrumbAgent {
   private index: any = null;
 
   constructor(projectRoot: string = process.cwd()) {
-    this.visionPath = path.join(projectRoot, 'breadcrumbs', 'client-vision.json');
-    this.indexPath = path.join(projectRoot, 'breadcrumbs', 'scaffold-index.json');
-    
+    this.visionPath = path.join(
+      projectRoot,
+      'breadcrumbs',
+      'client-vision.json'
+    );
+    this.indexPath = path.join(
+      projectRoot,
+      'breadcrumbs',
+      'scaffold-index.json'
+    );
+
     this.loadConfigs();
   }
 
@@ -67,7 +80,7 @@ export class BreadcrumbAgent {
       isValid: true,
       issues: [],
       suggestions: [],
-      alignmentScore: 100
+      alignmentScore: 100,
     };
 
     if (!this.vision || !this.index) {
@@ -75,8 +88,8 @@ export class BreadcrumbAgent {
       result.issues.push({
         type: 'missing_purpose',
         message: 'Breadcrumb configuration files not found',
-        severity: 'error'
-      });
+        severity: 'error';
+      }});
       result.alignmentScore = 0;
       return result;
     }
@@ -105,8 +118,8 @@ export class BreadcrumbAgent {
    * Validate individual file mapping
    */
   private async validateFile(
-    filePath: string, 
-    mapping: FileMapping, 
+    filePath: string,
+    mapping: FileMapping,
     result: ValidationResult
   ): Promise<void> {
     // Check if file exists
@@ -116,8 +129,8 @@ export class BreadcrumbAgent {
         type: 'orphaned',
         file: filePath,
         message: `File ${filePath} is mapped but doesn't exist`,
-        severity: 'error'
-      });
+        severity: 'error';
+      }});
       result.isValid = false;
       return;
     }
@@ -128,8 +141,8 @@ export class BreadcrumbAgent {
         type: 'missing_purpose',
         file: filePath,
         message: `File ${filePath} has no defined purpose`,
-        severity: 'error'
-      });
+        severity: 'error';
+      }});
       result.isValid = false;
     }
 
@@ -139,8 +152,8 @@ export class BreadcrumbAgent {
         type: 'not_linked',
         file: filePath,
         message: `File ${filePath} is not linked to any goal or module`,
-        severity: 'warning'
-      });
+        severity: 'warning';
+      }});
     }
 
     // Validate links exist in vision
@@ -151,8 +164,8 @@ export class BreadcrumbAgent {
             type: 'misaligned',
             file: filePath,
             message: `File ${filePath} has invalid, link: ${link}`,
-            severity: 'warning'
-          });
+            severity: 'warning';
+          }});
         }
       }
     }
@@ -171,27 +184,26 @@ export class BreadcrumbAgent {
     switch (type.trim()) {
       case 'goal':
         return value === this.vision.goal || value === this.vision.project_name;
-      
+
       case 'module':
         return this.vision.modules.some(m => m.name === value);
-      
+
       case 'technology':
         return true; // Would validate against technology stack
-      
+
       case 'unique_value':
         return true; // Would validate against unique value proposition
-      
+
       case 'target_users':
         return this.vision.target_users.some(u => value.includes(u));
-      
+
       case 'success_metric':
         return this.vision.success_metrics.some(m => value.includes(m));
-      
+
       case 'constraint':
         return this.vision.constraints.some(c => value.includes(c));
-      
-      default:
-        return false;
+
+      default: return false
     }
   }
 
@@ -199,9 +211,14 @@ export class BreadcrumbAgent {
    * Check for files not in the index
    */
   private async checkOrphanedFiles(result: ValidationResult): Promise<void> {
-    const srcPattern = path.join(process.cwd(), 'src', '**', '*.{ts,tsx,js,jsx}');
+    const srcPattern = path.join(
+      process.cwd(),
+      'src',
+      '**',
+      '*.{ts,tsx,js,jsx}'
+    );
     const files = await glob(srcPattern);
-    
+
     const indexedFiles = new Set(
       Object.keys(this.index.files).map(f => path.join(process.cwd(), f))
     );
@@ -209,12 +226,14 @@ export class BreadcrumbAgent {
     for (const file of files) {
       if (!indexedFiles.has(file)) {
         const relativePath = path.relative(process.cwd(), file);
-        
+
         // Skip test files and generated files
-        if (relativePath.includes('.test.') || 
-            relativePath.includes('.spec.') ||
-            relativePath.includes('node_modules') ||
-            relativePath.includes('.next')) {
+        if (
+          relativePath.includes('.test.') ||
+          relativePath.includes('.spec.') ||
+          relativePath.includes('node_modules') ||
+          relativePath.includes('.next')
+        ) {
           continue;
         }
 
@@ -222,8 +241,8 @@ export class BreadcrumbAgent {
           type: 'orphaned',
           file: relativePath,
           message: `File /${relativePath} exists but is not mapped to any goal`,
-          severity: 'warning'
-        });
+          severity: 'warning';
+        }});
       }
     }
   }
@@ -235,23 +254,23 @@ export class BreadcrumbAgent {
     if (!this.vision) return;
 
     for (const module of this.vision.modules) {
-      const hasImplementation = Object.values(this.index.files).some(
-        (mapping) => mapping.linked_to?.includes(`module: ${module.name}`)
+      const hasImplementation = Object.values(this.index.files).some(mapping =>
+        mapping.linked_to?.includes(`module: ${module.name}`)
       );
 
       if (!hasImplementation && module.priority === 'high') {
         result.issues.push({
           type: 'misaligned',
           message: `High priority module "${module.name}" has no implementation`,
-          severity: 'error'
-        });
+          severity: 'error';
+        }});
         result.isValid = false;
       } else if (!hasImplementation) {
         result.issues.push({
           type: 'misaligned',
           message: `Module "${module.name}" has no implementation`,
-          severity: 'warning'
-        });
+          severity: 'warning';
+        }});
       }
     }
   }
@@ -261,12 +280,14 @@ export class BreadcrumbAgent {
    */
   private calculateAlignmentScore(result: ValidationResult): number {
     const errorCount = result.issues.filter(i => i.severity === 'error').length;
-    const warningCount = result.issues.filter(i => i.severity === 'warning').length;
-    
+    const warningCount = result.issues.filter(
+      i => i.severity === 'warning'
+    ).length;
+
     let score = 100;
     score -= errorCount * 10;
     score -= warningCount * 3;
-    
+
     return Math.max(0, score);
   }
 
@@ -285,28 +306,28 @@ export class BreadcrumbAgent {
     if (issueCounts.get('orphaned')) {
       suggestions.push(
         `Found ${issueCounts.get('orphaned')} orphaned files. ` +
-        `Run 'npm run, breadcrumb:sync' to update the index.`
-      );
+          `Run 'npm run, breadcrumb: sync' to update the index.`
+      )
     }
 
     if (issueCounts.get('not_linked')) {
       suggestions.push(
         `${issueCounts.get('not_linked')} files are not linked to project goals. ` +
-        `Review their purpose or consider removing them.`
+          `Review their purpose or consider removing them.`
       );
     }
 
     if (issueCounts.get('misaligned')) {
       suggestions.push(
         `Some features lack implementation. ` +
-        `Prioritize building missing high-priority modules.`
+          `Prioritize building missing high-priority modules.`
       );
     }
 
     if (result.alignmentScore < 70) {
       suggestions.push(
         `Low alignment score (${result.alignmentScore}%). ` +
-        `The codebase may be drifting from the original vision.`
+          `The codebase may be drifting from the original vision.`
       );
     }
 
@@ -318,13 +339,13 @@ export class BreadcrumbAgent {
    */
   async checkFeatureFulfillment(featureName: string): Promise<{
     isFulfilled: boolean,
-    implementedIn: string[];
-    gaps: string[];
+    implementedIn: string[],
+    gaps: string[]
   }> {
     const result = {
       isFulfilled: false,
       implementedIn: [] as string[],
-      gaps: [] as string[]
+      gaps: [] as string[],
     };
 
     if (!this.index) return result;
@@ -353,27 +374,34 @@ export class BreadcrumbAgent {
   async updateIndex(): Promise<void> {
     if (!this.index) return;
 
-    const srcPattern = path.join(process.cwd(), 'src', '**', '*.{ts,tsx,js,jsx}');
+    const srcPattern = path.join(
+      process.cwd(),
+      'src',
+      '**',
+      '*.{ts,tsx,js,jsx}'
+    );
     const files = await glob(srcPattern);
-    
+
     const currentFiles = new Set(Object.keys(this.index.files));
     let updated = false;
 
     for (const file of files) {
-      const relativePath = '/' + path.relative(process.cwd(), file).replace(/\\/g, '/');
-      
-      if (!currentFiles.has(relativePath) && 
-          !relativePath.includes('.test.') && 
-          !relativePath.includes('.spec.') &&
-          !relativePath.includes('node_modules') &&
-          !relativePath.includes('.next')) {
-        
+      const relativePath =
+        '/' + path.relative(process.cwd(), file).replace(/\\/g, '/');
+
+      if (
+        !currentFiles.has(relativePath) &&
+        !relativePath.includes('.test.') &&
+        !relativePath.includes('.spec.') &&
+        !relativePath.includes('node_modules') &&
+        !relativePath.includes('.next')
+      ) {
         // Add new file with placeholder
         this.index.files[relativePath] = {
           purpose: 'TODO: Define purpose',
           linked_to: [],
           critical: false,
-          dependencies: []
+          dependencies: [],
         };
         updated = true;
       }
@@ -382,7 +410,7 @@ export class BreadcrumbAgent {
     if (updated) {
       this.index.lastUpdated = new Date().toISOString();
       fs.writeFileSync(this.indexPath, JSON.stringify(this.index, null, 2));
-      console.log('✅ Scaffold index updated with new files');
+
     }
   }
 
@@ -391,7 +419,7 @@ export class BreadcrumbAgent {
    */
   getBreadcrumbTrail(filePath: string): string[] {
     const trail: string[] = [];
-    
+
     if (!this.index || !this.vision) return trail;
 
     const mapping = this.index.files[filePath];
@@ -399,13 +427,13 @@ export class BreadcrumbAgent {
 
     // Build trail from vision to file
     trail.push(`🎯 ${this.vision.project_name}: ${this.vision.vision}`);
-    
+
     if (mapping.linked_to) {
       for (const link of mapping.linked_to) {
         trail.push(`  → ${link}`);
       }
     }
-    
+
     trail.push(`  📄 ${filePath}: ${mapping.purpose}`);
 
     return trail;

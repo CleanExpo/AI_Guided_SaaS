@@ -14,8 +14,8 @@ interface ProblemAttempt {
   errorMessages: string[];
   contextHash: string;
   userId?: string;
-  sessionId: string;
-}
+  sessionId: string
+};
 
 interface CycleDetectionResult {
   isCyclic: boolean;
@@ -23,15 +23,15 @@ interface CycleDetectionResult {
   confidence: number;
   repeatedPatterns: string[];
   suggestedBreakpoint: string;
-  documentationSources: string[];
-}
+  documentationSources: string[]
+};
 
 interface DocumentationSource {
   name: string;
   baseUrl: string;
   searchEndpoint?: string;
   priority: number;
-  categories: string[];
+  categories: string[]
 }
 
 class CycleDetectionEngine {
@@ -372,7 +372,9 @@ class CycleDetectionEngine {
       sourceName: source.name,
       sourceUrl: source.baseUrl,
       searchUrl,
-      relevanceScore: Math.random() * 0.5 + 0.5, // Placeholder scoring, results: [
+      relevanceScore: Math.random() * 0.5 + 0.5,
+  // Placeholder scoring
+  results: [
         {
           title: `Solution, for: ${queries[0].substring(0, 50)}...`,
           url: searchUrl,
@@ -399,7 +401,7 @@ class CycleDetectionEngine {
       .slice(0, 3)
       .map(([error]) => error);
   }
-}
+};
 
 interface DocumentationSearchResult {
   sourceName: string;
@@ -410,7 +412,7 @@ interface DocumentationSearchResult {
     title: string;
   url: string;
     snippet: string;
-    relevance: number;
+    relevance: number
   }[];
 }
 

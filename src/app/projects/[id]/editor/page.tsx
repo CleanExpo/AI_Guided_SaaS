@@ -1,31 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { AdvancedCodeEditor } from '@/components/AdvancedCodeEditor'
-import { EnvVariableEditor } from '@/components/EnvVariableEditor'
-import { LiveProjectPreview } from '@/components/LiveProjectPreview'
-import { DataSourceManager } from '@/components/DataSourceManager'
-import { 
-  Code, 
-  Settings, 
-  Eye, 
-  Rocket, 
-  GitBranch,
-  Shield,
-  Sparkles,
-  ToggleLeft,
-  ToggleRight,
-  Download,
-  Upload,
-  Database
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-
+import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { AdvancedCodeEditor } from '@/components/AdvancedCodeEditor';
+import { EnvVariableEditor } from '@/components/EnvVariableEditor';
+import { LiveProjectPreview } from '@/components/LiveProjectPreview';
+import { DataSourceManager } from '@/components/DataSourceManager';
+import { Code, Settings, Eye, Rocket, GitBranch, Shield, Sparkles, ToggleLeft, ToggleRight, Download, Upload, Database } from 'lucide-react';
+import { cn } from '@/utils/cn';
 interface ProjectData {
   id: string;
   name: string;
@@ -34,7 +20,7 @@ interface ProjectData {
   files: any[];
   envVariables: any[]
   deploymentUrl?: string
-}
+};
 
 export default function ProjectEditorPage() {
   const params = useParams()
@@ -68,7 +54,7 @@ export default function ProjectEditorPage() {
     try {
       const response = await fetch(`/api/projects/${projectId}/files`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ files })
       })
       
@@ -87,7 +73,7 @@ export default function ProjectEditorPage() {
     try {
       const response = await fetch(`/api/projects/${projectId}/env`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ variables })
       })
       
@@ -111,7 +97,7 @@ export default function ProjectEditorPage() {
       if (result.success) {
         setProject({ ...project!, deploymentUrl: result.url }
       )}
-    </div>
+
     );
     } catch (error) {
       console.error('Failed to, deploy:', error)
@@ -136,27 +122,24 @@ export default function ProjectEditorPage() {
   
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading project...</p>
-    
-        </div>
-    );
   }
   
   if (!project) {
     return (
-      <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen">
         <Card className="p-8 text-center">
           <h2 className="text-xl font-semibold mb-2">Project not found</h2>
           <p className="text-muted-foreground">The project you're looking for doesn't exist.</p>
-    );
   }
   
   return (
     <div className="h-screen flex flex-col">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -166,8 +149,7 @@ export default function ProjectEditorPage() {
                 <Badge variant="outline">{project.type}</Badge>
                 <Badge 
                   className={cn(
-                    project.status === 'deployed' ? 'bg-green-100 text-green-700' : '',
-                    project.status === 'draft' ? 'bg-gray-100 text-gray-700' : ''
+                    project.status === 'deployed' ? 'bg-green-100 text-green-700' : '' project.status === 'draft' ? 'bg-gray-100 text-gray-700' : ''
                   )}
                 >
                   {project.status}</Badge>
@@ -180,14 +162,13 @@ export default function ProjectEditorPage() {
                   >
                     View Live →</a>
                 )}
-              </div>
-          
+
           <div className="flex items-center gap-4">
-            {/* Mode, Toggle */}</div>
+            {/* Mode, Toggle */}
+
             <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-lg">
               <span className={cn(
-                "text-sm font-medium transition-colors",
-                activeMode === 'simple' ? 'text-primary' : 'text-gray-500'
+                "text-sm font-medium transition-colors" activeMode === 'simple' ? 'text-primary' : 'text-gray-500'
               )}>
                 Simple</span>
               <button
@@ -200,8 +181,7 @@ export default function ProjectEditorPage() {
                   <ToggleRight className="h-6 w-6 text-primary" />
                 )}</ToggleRight>
               <span className={cn(
-                "text-sm font-medium transition-colors",
-                activeMode === 'advanced' ? 'text-primary' : 'text-gray-500'
+                "text-sm font-medium transition-colors" activeMode === 'advanced' ? 'text-primary' : 'text-gray-500'
               )}>
                 Advanced</span>
             
@@ -262,8 +242,7 @@ export default function ProjectEditorPage() {
                             <Badge key={feature} variant="secondary">
                               {feature}</Badge>
                   ))}
-                        </div>
-                
+
                 <TabsContent value="settings" className="mt-6">
                   <Card className="p-6">
                     <h3 className="font-semibold mb-4">Project Settings</h3>
@@ -300,7 +279,7 @@ export default function ProjectEditorPage() {
                     projectId={projectId}
                     onDataChange={(data) => {
                       // Handle data changes
-                      console.log('Data sources updated:', data)
+
                    }}
                   /></DataSourceManager>
             
@@ -320,68 +299,14 @@ export default function ProjectEditorPage() {
             initialFiles={project.files}
             onSave={handleSaveFiles}
           />
-        )}</AdvancedCodeEditor>
-    );
-</TabsContent>
-</select>
-</div>
-</select>
-</div>
-</select>
-</div>
-</div>
-</Card>
-</TabsContent>
-</div>
-</Card>
-</TabsContent>
-</TabsTrigger>
-</TabsTrigger>
-</TabsTrigger>
-</TabsTrigger>
-</TabsList>
-</Tabs>
-</div>
-</div>
-</Button>
-</Button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</Card>
-</div>
-</div>
+        )}
+  );
 }
 
 // Add missing imports
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 }
-    </TabsContent>
-    </select>
-    </div>
-    </select>
-    </div>
-    </select>
-    </div>
-    </Card>
-    </TabsContent>
-    </div>
-    </Card>
-    </TabsContent>
-    </TabsTrigger>
-    </TabsTrigger>
-    </TabsList>
-    </Tabs>
-    </div>
-    </Button>
-    </div>
-    </div>
-    </div>
-    </Card>
-    </div>
+    
   );
 }
-</ProjectData>

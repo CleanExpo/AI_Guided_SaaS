@@ -4,16 +4,15 @@ import { HealthStatus, HealthCheckResult } from './HealthCheckService'
 export interface AlertConfig {
   enabled: boolean;
   channels: AlertChannel[];
-  rules: AlertRule[]
-  cooldownPeriod: number // milliseconds;
+  rules: AlertRule[]; cooldownPeriod: number // milliseconds;
   maxAlertsPerHour: number
-}
+};
 
 export interface AlertChannel {
   type: 'email' | 'slack' | 'webhook' | 'console'
   config: any;
   enabled: boolean
-}
+};
 
 export interface AlertRule {
   name: string;
@@ -21,7 +20,7 @@ export interface AlertRule {
   severity: 'low' | 'medium' | 'high' | 'critical'
   message: string;
   channels: string[] // channel types to use
-}
+};
 
 export interface Alert {
   id: string;
@@ -32,7 +31,7 @@ export interface Alert {
   details: any;
   status: HealthStatus;
   acknowledged: boolean
-}
+};
 
 export class AlertingService extends EventEmitter {
   private config: AlertConfig
@@ -47,7 +46,9 @@ export class AlertingService extends EventEmitter {
       enabled: true,
       channels: [],
       rules: this.getDefaultRules(),
-      cooldownPeriod: 5 * 60 * 1000, // 5 minutes, maxAlertsPerHour: 10,
+      cooldownPeriod: 5 * 60 * 1000,
+  // 5 minutes
+  maxAlertsPerHour: 10,
       ...config
     }
   }
@@ -76,14 +77,14 @@ export class AlertingService extends EventEmitter {
     // Check cooldown
     const lastAlert = this.lastAlertTime.get(rule.name)
     if (lastAlert && Date.now() - lastAlert.getTime() < this.config.cooldownPeriod) {
-      console.log(`Alert ${rule.name} is in cooldown period`)
+
       return
     }
     
     // Check rate limit
     const hourlyCount = this.getHourlyAlertCount()
     if (hourlyCount >= this.config.maxAlertsPerHour) {
-      console.log('Alert rate limit exceeded')
+
       return
     }
     
@@ -110,7 +111,7 @@ export class AlertingService extends EventEmitter {
     // Emit event
     this.emit('alert:triggered', alert)
     
-    console.log(`Alert, triggered: ${rule.name} (${rule.severity})`)
+    `)
   }
   
   /**
@@ -164,14 +165,14 @@ export class AlertingService extends EventEmitter {
       critical: '🔥'
     }
     
-    console.log('\n' + '='.repeat(60))
-    console.log(`${severityEmoji[alert.severity]} HEALTH, ALERT: ${alert.title}`)
-    console.log('='.repeat(60))
-    console.log(`Severity: ${alert.severity.toUpperCase()}`)
-    console.log(`Time: ${alert.timestamp.toISOString()}`)
-    console.log(`Message: ${alert.message}`)
-    console.log('Details:', JSON.stringify(alert.details, null, 2))
-    console.log('='.repeat(60) + '\n')
+    )
+
+    )
+    }`)
+    }`)
+
+    )
+    + '\n')
   }
   
   /**
@@ -180,7 +181,7 @@ export class AlertingService extends EventEmitter {
   private async sendEmail(alert: Alert, config): Promise<void> {
     // Implementation would depend on email service
     // Example with SendGrid, Resend, etc.
-    console.log('Email alert would be sent to:', config.recipients)
+
   }
   
   /**
@@ -235,7 +236,7 @@ export class AlertingService extends EventEmitter {
     
     await fetch(config.webhookUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
   }
@@ -250,7 +251,7 @@ export class AlertingService extends EventEmitter {
     
     await fetch(config.url, {
       method: config.method || 'POST',
-      headers: {
+    headers: {
         'Content-Type': 'application/json',
         ...(config.headers || {})
       },
@@ -273,7 +274,7 @@ export class AlertingService extends EventEmitter {
       degradedChecks: status.checks
         .filter(c => c.status === 'degraded')
         .map(c => ({ name: c.name, error: c.error })),
-      systemMetrics: {
+    systemMetrics: {
         cpu: `${status.metrics.cpu.usage.toFixed(1)}%`,
         memory: `${status.metrics.memory.percentage.toFixed(1)}%`,
         uptime: `${Math.floor(status.metrics.uptime / 3600)}h`
@@ -385,7 +386,7 @@ export class AlertingService extends EventEmitter {
    */
   updateConfig(config: Partial<AlertConfig>): void {
     this.config = { ...this.config, ...config }
-    console.log('Alert configuration updated')
+
   }
   
   /**
@@ -393,7 +394,7 @@ export class AlertingService extends EventEmitter {
    */
   addRule(rule: AlertRule): void {
     this.config.rules.push(rule)
-    console.log(`Added alert, rule: ${rule.name}`)
+
   }
   
   /**
@@ -401,6 +402,6 @@ export class AlertingService extends EventEmitter {
    */
   removeRule(ruleName: string): void {
     this.config.rules = this.config.rules.filter(r => r.name !== ruleName)
-    console.log(`Removed alert, rule: ${ruleName}`)
+
   }
 }

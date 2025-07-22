@@ -1,17 +1,16 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { CreateProjectSchema, ProjectTypeSchema, validateSafe, z } from '@/lib/validation'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2, AlertCircle } from 'lucide-react'
-
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { CreateProjectSchema, ProjectTypeSchema, validateSafe, z } from '@/lib/validation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2, AlertCircle } from 'lucide-react';
 const ExtendedProjectSchema = CreateProjectSchema.extend({
   config: z.object({
     database: z.string().optional(),
@@ -30,11 +29,9 @@ type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>
 export function ValidatedProjectForm() {
       </typeof>
   const router = useRouter()
-  const [isSubmitting, setIsSubmitting] = useState(false)</typeof>
-  const [errors, setErrors] = useState<Record<string, string>>({})</Record>
-      </string>
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
   const [generalError, setGeneralError] = useState<string | null>(null)
-</string>
   const [formData, setFormData] = useState<CreateProjectForm>({
     name: '',
     description: '',
@@ -71,7 +68,7 @@ export function ValidatedProjectForm() {
     try {
       const response = await fetch('/api/projects', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(validation.data)
       })
 
@@ -102,12 +99,12 @@ export function ValidatedProjectForm() {
       return newErrors
     }
       )}
-    </div>
+
     );
   const updateConfig = (key: string, value) => {
     setFormData(prev => ({
       ...prev,
-      config: {
+    config: {
         ...prev.config,
         [key]: value
       }
@@ -141,8 +138,7 @@ export function ValidatedProjectForm() {
             {errors.name && (</Input>
               <p id="name-error" className="text-sm text-destructive">
                 {errors.name}</p>
-  );
-}
+  }
 
           <div className="space-y-2"></div>
             <Label htmlFor="description">Description *</Label>
@@ -158,8 +154,7 @@ export function ValidatedProjectForm() {
             {errors.description && (</Textarea>
               <p id="description-error" className="text-sm text-destructive">
                 {errors.description}</p>
-  );
-}
+  }
 
           <div className="grid grid-cols-2 gap-4"></div>
             <div className="space-y-2"></div>
@@ -178,8 +173,7 @@ export function ValidatedProjectForm() {
                 </SelectContent>
               {errors.type && (
                 <p className="text-sm text-destructive">{errors.type}</p>
-  );
-}
+  }
 
             <div className="space-y-2"></div>
               <Label htmlFor="framework">Framework (Optional)</Label>
@@ -263,10 +257,7 @@ export function ValidatedProjectForm() {
                     }}
                     className="rounded border-gray-300"
                   /></input>
-                  <span className="text-sm">{feature}</span>
-                </label>
-              ))}
-            </div>
+                  <span className="text-sm">{feature}</span>))}
 
           <div className="flex justify-end space-x-4"></div>
             <Button
@@ -286,15 +277,14 @@ export function ValidatedProjectForm() {
                 'Create Project'
               )}
             </Button>
-    );
-}
+  }
 
 /**
  * Example of a custom hook for form validation
  */
 export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</T>
-  const [data, setData] = useState<T>(initialData)</T>
-  const [errors, setErrors] = useState<Record<string, string>>({})</Record>
+  const [data, setData] = useState<T>(initialData)
+  const [errors, setErrors] = useState<Record<string, string>>({})
   const [touched, setTouched] = useState<Set<string>>(new Set())
 </Set>
   const updateField = <K extends keyof T>(field: K, value: T[K]) => {
@@ -317,11 +307,9 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</
           return newErrors
         }
       )}
-    </div>
+
       </T>
-      </K>
-  );
-    }
+  }
   }
 
   const validate = () => {

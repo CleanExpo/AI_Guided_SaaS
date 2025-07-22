@@ -6,12 +6,12 @@ import { logger } from '../../../packages/causal-engine/logger';
 type ComponentInstance = {
   id: string;
   type: string;
-  props: Record<string, string>;</string>
+  props: Record<string, string></string>
   schema?: Array<{
     key: string;
     label: string;
-    type: 'text' | 'textarea';
-  }>;
+    type: 'text' | 'textarea'
+  }>
 };
 
 export default function BuilderCanvas() {
@@ -48,6 +48,6 @@ export default function BuilderCanvas() {
               📦 {c.type} component (click to edit)
           ))
         )}
-      </div>
+
     );
 }

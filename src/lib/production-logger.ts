@@ -7,7 +7,8 @@ export enum LogLevel {
   ERROR = 0,
   WARN = 1,
   INFO = 2,
-  DEBUG = 3}
+  DEBUG = 3,
+};
 
 interface LogEntry {
   timestamp: string;
@@ -33,20 +34,27 @@ class ProductionLogger {
     return level <= this.logLevel;
   }
 
-  private createLogEntry(level: LogLevel, message: string, context?: Record<string, unknown>): LogEntry {
+  private createLogEntry(
+    level: LogLevel,
+    message: string,
+    context?: Record<string, unknown>
+  ): LogEntry {
     return {
       timestamp: new Date().toISOString(),
       level,
       message,
-      context};
+      context,
+    };
   }
 
   private writeLog(entry: LogEntry): void {
     // In development, still use console for immediate feedback
     if (this.isDevelopment) {
       const levelName = LogLevel[entry.level];
-      const contextStr = entry.context ? ` ${JSON.stringify(entry.context)}` : '';
-      console.log(`[${entry.timestamp}] ${levelName}: ${entry.message}${contextStr}`);
+      const contextStr = entry.context
+        ? ` ${JSON.stringify(entry.context)}`
+        : '';
+
     }
 
     // Store in memory (in production, this would go to a logging service)
@@ -66,7 +74,7 @@ class ProductionLogger {
     // - CloudWatch, DataDog, Splunk, etc.
     // - Database logging table
     // - External monitoring service
-    
+
     // For now, we'll just ensure it doesn't expose sensitive data
     try {
       // Example: await fetch('/api/logs', { method: 'POST', body: JSON.stringify(entry) });
@@ -105,11 +113,19 @@ class ProductionLogger {
     this.warn(`SECURITY: ${event}`, context);
   }
 
-  adminActivity(activity: string, adminId: string, context?: Record<string, unknown>): void {
+  adminActivity(
+    activity: string,
+    adminId: string,
+    context?: Record<string, unknown>
+  ): void {
     this.info(`ADMIN: ${activity}`, { adminId, ...context });
   }
 
-  userActivity(activity: string, userId: string, context?: Record<string, unknown>): void {
+  userActivity(
+    activity: string,
+    userId: string,
+    context?: Record<string, unknown>
+  ): void {
     this.debug(`USER: ${activity}`, { userId, ...context });
   }
 
@@ -118,7 +134,7 @@ class ProductionLogger {
     if (!this.isDevelopment) {
       return []; // Don't expose logs in production
     }
-    
+
     if (level !== undefined) {
       return this.logs.filter(log => log.level === level);
     }
@@ -130,10 +146,23 @@ class ProductionLogger {
 export const logger = new ProductionLogger();
 
 // Convenience functions for common use cases
-export const logError = (message: string, context?: Record<string, unknown>) => logger.error(message, context);
-export const logWarn = (message: string, context?: Record<string, unknown>) => logger.warn(message, context);
-export const logInfo = (message: string, context?: Record<string, unknown>) => logger.info(message, context);
-export const logDebug = (message: string, context?: Record<string, unknown>) => logger.debug(message, context);
-export const logSecurity = (event: string, context?: Record<string, unknown>) => logger.securityEvent(event, context);
-export const logAdmin = (activity: string, adminId: string, context?: Record<string, unknown>) => logger.adminActivity(activity, adminId, context);
-export const logUser = (activity: string, userId: string, context?: Record<string, unknown>) => logger.userActivity(activity, userId, context);
+export const logError = (message: string, context?: Record<string, unknown>) =>
+  logger.error(message, context);
+export const logWarn = (message: string, context?: Record<string, unknown>) =>
+  logger.warn(message, context);
+export const logInfo = (message: string, context?: Record<string, unknown>) =>
+  logger.info(message, context);
+export const logDebug = (message: string, context?: Record<string, unknown>) =>
+  logger.debug(message, context);
+export const logSecurity = (event: string, context?: Record<string, unknown>) =>
+  logger.securityEvent(event, context);
+export const logAdmin = (
+  activity: string,
+  adminId: string,
+  context?: Record<string, unknown>
+) => logger.adminActivity(activity, adminId, context);
+export const logUser = (
+  activity: string,
+  userId: string,
+  context?: Record<string, unknown>
+) => logger.userActivity(activity, userId, context);

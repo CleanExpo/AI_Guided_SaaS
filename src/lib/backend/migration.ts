@@ -8,7 +8,7 @@ export interface MigrationOptions {
   includeProjects?: boolean
   includeCustomCollections?: string[]
   dryRun?: boolean
-}
+};
 
 export interface MigrationProgress {
   totalRecords: number;
@@ -16,13 +16,13 @@ export interface MigrationProgress {
   currentCollection: string;
   errors: MigrationError[];
   status: 'running' | 'completed' | 'failed'
-}
+};
 
 export interface MigrationError {
   collection: string;
   recordId: string;
   error: string
-}
+};
 
 export interface MigrationResult {
   success: boolean;
@@ -30,12 +30,12 @@ export interface MigrationResult {
   migratedRecords: number;
   errors: MigrationError[];
   duration: number
-}
+};
 
 export class BackendMigrator {
   private sourceAdapter: BackendAdapter
-  private targetAdapter: BackendAdapter
-  private options: MigrationOptions
+  private, targetAdapter: BackendAdapter
+  private, options: MigrationOptions
   private, progress: MigrationProgress
 
   constructor(
@@ -183,7 +183,8 @@ export class BackendMigrator {
     // Create new user (without password for security)
     const newUser = await this.targetAdapter.create<User>('users', {
       ...user,
-      // Generate temporary password, password: this.generateTempPassword()
+  // Generate temporary password
+  password: this.generateTempPassword()
     })
 
     return newUser
@@ -293,7 +294,7 @@ export async function exportBackendData(
 export async function importBackendData(
   config,
   data: Record<string, any[]>,
-  options: { overwrite?: boolean } = {}
+    options: { overwrite?: boolean } = {}
 ): Promise<MigrationResult> {
   const adapter = createBackendAdapter(config)
   const startTime = Date.now()

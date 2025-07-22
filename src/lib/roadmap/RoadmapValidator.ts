@@ -8,9 +8,8 @@ export interface RoadmapMilestone {
   actualDate?: Date;
   status: 'pending' | 'in_progress' | 'completed' | 'delayed' | 'blocked'
   completionCriteria: CompletionCriterion[];
-  dependencies: string[]
-  deliverables: string[]
-}
+  dependencies: string[]; deliverables: string[]
+};
 
 export interface CompletionCriterion {
   id: string;
@@ -24,14 +23,14 @@ export interface CompletionCriterion {
   status: 'pending' | 'passed' | 'failed'
   lastChecked?: Date
   result?: any
-}
+};
 
 export interface RoadmapValidationResult {
   roadmapId: string;
   validationDate: Date;
   overallStatus: 'on_track' | 'at_risk' | 'delayed' | 'blocked'
   completionPercentage: number;
-  milestones: {
+    milestones: {
     total: number;
   completed: number;
   inProgress: number;
@@ -40,7 +39,7 @@ export interface RoadmapValidationResult {
   }
   deviations: RoadmapDeviation[], recommendations: string[]
   nextMilestone?: RoadmapMilestone, estimatedCompletionDate: Date
-}
+};
 
 export interface RoadmapDeviation {
   type: 'delay' | 'scope_change' | 'blocker' | 'resource_issue'
@@ -49,7 +48,7 @@ export interface RoadmapDeviation {
   description: string;
   impact: string;
   suggestedAction: string
-}
+};
 
 export class RoadmapValidator {
   private milestones: Map<string, RoadmapMilestone> = new Map()
@@ -110,7 +109,7 @@ export class RoadmapValidator {
       criteria.push({
         id: `${phase.id}_feature_${index}`,
         description: task, type: 'feature',
-        validation: {
+    validation: {
           method: 'automated',
           script: `validate_feature_${phase.id}_${index}`
         },
@@ -124,7 +123,7 @@ export class RoadmapValidator {
         id: `${phase.id}_test_coverage`,
         description: 'Unit test coverage > 80%',
         type: 'test',
-        validation: {
+    validation: {
           method: 'automated',
           threshold: 80
         },
@@ -138,7 +137,7 @@ export class RoadmapValidator {
         id: `${phase.id}_performance`,
         description: 'API response time < 200ms',
         type: 'performance',
-        validation: {
+    validation: {
           method: 'automated',
           threshold: 200
         },
@@ -151,7 +150,7 @@ export class RoadmapValidator {
       id: `${phase.id}_documentation`,
       description: 'Technical documentation complete',
       type: 'documentation',
-      validation: {
+    validation: {
         method: 'manual'
       },
       status: 'pending'
@@ -166,7 +165,7 @@ export class RoadmapValidator {
       validationDate: new Date(),
       overallStatus: 'on_track',
       completionPercentage: 0,
-      milestones: {
+    milestones: {
         total: this.milestones.size,
         completed: 0,
         inProgress: 0,

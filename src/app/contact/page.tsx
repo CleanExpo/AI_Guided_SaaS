@@ -10,7 +10,7 @@ export default function ContactPage() {
       <div className="max-w-2xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
         <p className="text-xl text-muted-foreground mb-8 text-center">
-          Get in touch with our team. We&apos;d love to hear from you.</p>
+          Get in touch with our team. We&apos, d love to hear from you.</p>
 
         <div className="grid gap-8 md:grid-cols-2">
           <div>
@@ -39,25 +39,13 @@ export default function ContactPage() {
               </div>
               <div className="flex justify-between">
                 <span>Saturday</span>
-                <span>10:00 AM -, 4:00 PM PST</span>
+                <span>10:00 AM -, 4: 00 PM PST</span>
               </div>
               <div className="flex justify-between">
                 <span>Sunday</span>
                 <span>Closed</span>
-    );
-}
+  }
 
   );
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+</div></div>
 }
-</div>

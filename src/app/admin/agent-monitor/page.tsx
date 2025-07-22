@@ -1,14 +1,13 @@
 'use client'
 
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AgentPulseMonitor } from '@/components/AgentPulseMonitor'
-import { ContainerMonitor } from '@/components/ContainerMonitor'
-import { SystemMetrics } from '@/components/health/SystemMetrics'
-import { TaskQueueVisualizer } from '@/components/health/TaskQueueVisualizer'
-import { AlertsPanel } from '@/components/health/AlertsPanel'
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { AgentPulseMonitor } from '@/components/AgentPulseMonitor';
+import { ContainerMonitor } from '@/components/ContainerMonitor';
+import { SystemMetrics } from '@/components/health/SystemMetrics';
+import { TaskQueueVisualizer } from '@/components/health/TaskQueueVisualizer';
+import { AlertsPanel } from '@/components/health/AlertsPanel';
 export default function AgentMonitorPage() {
   return (
     <div className="container mx-auto p-6 space-y-6">
@@ -19,6 +18,7 @@ export default function AgentMonitorPage() {
             Real-time monitoring of AI agents with pulse control and Docker containerization
           </p>
         </div>
+      </div>
 
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
@@ -113,4 +113,3 @@ export default function AgentMonitorPage() {
     </div>
   );
 }
-</div>

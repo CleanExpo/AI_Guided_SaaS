@@ -3,29 +3,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import {
-  Bot,
-  Code,
-  Palette,
-  Rocket,
-  Sparkles,
-  Brain,
-  BarChart3,
-  Users,
-  ArrowRight,
-  Play,
-  Pause,
-  RefreshCw,
-  TrendingUp,
-  Wrench} from 'lucide-react';
+import { Bot, Code, Palette, Rocket, Sparkles, Brain, BarChart3, Users, ArrowRight, Play, Pause, RefreshCw, TrendingUp, Wrench } from 'lucide-react';
 import Link from 'next/link';
 
 const personas = [
@@ -107,7 +88,7 @@ export default function ShowcaseLandingPage() {
       setMemoryUsage(prev => {
         const newValue = prev + (Math.random() - 0.5) * 5;
         return Math.max(20, Math.min(80, newValue));
-      });
+  };
 
       setCommandIndex(prev => (prev + 1) % claudeCommands.length);
     }, 2000);
@@ -120,7 +101,7 @@ export default function ShowcaseLandingPage() {
       {personas.map((persona, index) => {
         const Icon = persona.icon;
         return (
-          <motion.div
+    <motion.div
             key={persona.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -164,20 +145,17 @@ export default function ShowcaseLandingPage() {
                         <Link href="/auth/signin">
                           Start with {persona.name}</Link>
                           <ArrowRight className="ml-2 h-3 w-3" />
-                        </Link>
+                        
                     </motion.div>
                   )}
                 </AnimatePresence>
           </motion.div>
         );
-      }
-      )}
-    </div>
-        </CardHeader>
-        </CardContent>
-        </Button>
-    );
-      );
+  }}
+
+        </div>
+  );
+}
   const renderClaudeDashboard = () => (
     <Card className="glass border-0">
       <CardHeader>
@@ -255,14 +233,9 @@ export default function ShowcaseLandingPage() {
                 {cmd.tokens}</Badge>
             </motion.div>
           ))}
-        </div>
-        </Card>
-        </CardHeader>
-        </div>
-        </div>
-        </CardContent>
-        </div>
-    );
+
+        
+
   const renderUIBuilder = () => (
     <Card className="glass border-0">
       <CardHeader>
@@ -285,17 +258,13 @@ export default function ShowcaseLandingPage() {
               </motion.div>
                 </Card>
                 </CardHeader>
-                </div>
-                </CardContent>
-            )
+                </div>)
           )}
-        </div>
+
         <div className="h-32 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex items-center justify-center">
           <div className="text-center text-white/60">
             <Palette className="w-8 h-8 mx-auto mb-2" />
             <p className="text-sm">Drop components here</p>
-        </div>
-    );
   const renderAnalytics = () => (
     <Card className="glass border-0">
       <CardHeader>
@@ -327,10 +296,8 @@ export default function ShowcaseLandingPage() {
         </CardContent>
         </div>
         </div>
-        </div>
-    );
           )}
-        </div>
+
     );
   const renderCollaboration = () => (
     <Card className="glass border-0">
@@ -360,16 +327,14 @@ export default function ShowcaseLandingPage() {
               />
               <div className="flex-1">
                 <div className="text-sm font-medium text-white">
-                  {user.name}</div>
-                <div className="text-xs text-white/60">{user.action}</div>
+                  {user.name}
+
+                <div className="text-xs text-white/60">{user.action}
+
           ))}
-        </div>
-        </Card>
-        </CardHeader>
-        </div>
-        </CardContent>
-        </div>
-    );
+
+        
+
   const renderDemo = () => {
     switch (activeDemo) {
       case 'claude-dashboard':
@@ -380,14 +345,13 @@ export default function ShowcaseLandingPage() {
         return renderAnalytics();
       case 'collaboration':
         return renderCollaboration();
-      default:
-        return renderClaudeDashboard();
-    }
+      default: return renderClaudeDashboard()}
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
-      {/* Hero Section */}</div>
+      {/* Hero Section */}
+
       <section className="relative py-20 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -439,13 +403,13 @@ export default function ShowcaseLandingPage() {
           </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Feature Tabs */}</div>
+            {/* Feature Tabs */}
+
             <div className="lg:col-span-1">
               <div className="space-y-3">
                 {liveFeatures.map(feature => {
-                  const Icon = feature.icon;
-                  return (
-                    <motion.button
+                  const Icon = feature.icon, return (
+    <motion.button
                       key={feature.demo}
                       className={`w-full p-4 rounded-lg text-left transition-all ${
                         activeDemo === feature.demo
@@ -467,15 +431,9 @@ export default function ShowcaseLandingPage() {
                             {feature.description}</p>
                     </motion.button>
                   );
-                }
-      )}
-    </div>
-        </section>
-        </div>
-        </section>
-        </div>
-        </div>
-    );
+  }}
+
+        
 
             {/* Live Demo */}
             <div className="lg:col-span-2">
@@ -522,18 +480,14 @@ export default function ShowcaseLandingPage() {
                 <Link href="/ui-builder">
                   Try UI Builder</Link>
                   <Wrench className="ml-2 h-4 w-4" />
-                </Link>
+                
           </motion.div>
           </div>
           </AnimatePresence>
           </section>
-          </div>
-      );
 </section>
 </AnimatePresence>
-</div>
-</div>
-</section>
+</div></section>
 </div>
 </section>
 }

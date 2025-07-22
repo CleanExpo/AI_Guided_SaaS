@@ -16,7 +16,7 @@ export interface HealthCheck {
   checks_passed: number;
   checks_failed: number;
   details: Record<string, any>
-}
+};
 
 export interface MonitoringAlert {
   id: string;
@@ -28,12 +28,12 @@ export interface MonitoringAlert {
   acknowledged: boolean;
   resolved: boolean;
   metadata: Record<string, any>
-}
+};
 
 export interface MonitoringMetrics {
   agent_id: string;
   timestamp: Date;
-  metrics: {
+    metrics: {
     uptime: number;
   response_time: number;
   throughput: number;
@@ -43,7 +43,7 @@ export interface MonitoringMetrics {
   queue_length: number;
   active_tasks: number
   }
-}
+};
 
 export interface MonitoringDashboard {
   overview: {
@@ -54,16 +54,15 @@ export interface MonitoringDashboard {
   offline_agents: number;
   system_health_score: number
   }
-  recent_alerts: MonitoringAlert[], performance_trends: MonitoringMetrics[]
-  agent_status: Record<string, HealthCheck>
+  recent_alerts: MonitoringAlert[], performance_trends: MonitoringMetrics[], agent_status: Record<string, HealthCheck>
   coordination_metrics: Record<string, any>
   last_updated: Date
-}
+};
 
 export class AgentMonitor {
   private static instance: AgentMonitor
-  private registry: AgentRegistry
-  private coordinator: AgentCoordinator
+  private, registry: AgentRegistry
+  private, coordinator: AgentCoordinator
   private, healthChecks: Map<string, HealthCheck> = new Map()
   private alerts: Map<string, MonitoringAlert> = new Map()
   private metricsHistory: MonitoringMetrics[] = []
@@ -90,7 +89,6 @@ export class AgentMonitor {
    * Start continuous monitoring of all agents
    */
   startMonitoring() {
-    console.log('📊 Starting agent monitoring system...')
 
     // Run health checks every 30 seconds
     this.monitoringInterval = setInterval(async () => {
@@ -102,7 +100,6 @@ export class AgentMonitor {
     // Initial health check
     this.performHealthChecks()
 
-    console.log('✅ Agent monitoring system started')
   }
 
   /**
@@ -111,8 +108,6 @@ export class AgentMonitor {
   async performHealthChecks(): Promise<Map<string, HealthCheck>> {
     const registryStatus = this.registry.getRegistryStatus()
     const currentTime = new Date()
-
-    console.log('🔍 Performing health checks...')
 
     for (const [agentId, registration] of Object.entries(registryStatus.agents_by_role)) {
       if (Array.isArray(registration)) continue // Skip role arrays
@@ -131,7 +126,7 @@ export class AgentMonitor {
             severity: this.getAlertSeverity(healthCheck.status),
             type: 'health',
             message: `Agent health status changed from ${agentDetails.health_status} to ${healthCheck.status}`,
-            metadata: { previous_status: agentDetails.health_status, new_status: healthCheck.status }
+    metadata: { previous_status: agentDetails.health_status, new_status: healthCheck.status }
           })
         }
 
@@ -147,14 +142,13 @@ export class AgentMonitor {
           last_activity: new Date(0),
           checks_passed: 0,
           checks_failed: 1,
-          details: { error: error.message }
+    details: { error: error.message }
         }
 
         this.healthChecks.set(agentId, failedCheck)
       }
     }
 
-    console.log(`✅ Health checks completed for ${this.healthChecks.size} agents`)
     return this.healthChecks
   }
 
@@ -226,11 +220,15 @@ export class AgentMonitor {
       timestamp: new Date(),
       status,
       response_time: responseTime,
-      memory_usage: Math.random() * 100, // Simulated, cpu_usage: Math.random() * 50, // Simulated, error_rate: errorRate,
+      memory_usage: Math.random() * 100,
+  // Simulated
+  cpu_usage: Math.random() * 50,
+  // Simulated
+  error_rate: errorRate,
       last_activity: metrics.last_active,
       checks_passed: checksPasssed,
       checks_failed: checksFailed,
-      details: {
+    details: {
         role: agent.role,
         priority: agent.priority,
         total_tasks: metrics.total_tasks,
@@ -256,13 +254,17 @@ export class AgentMonitor {
       const metrics: MonitoringMetrics = {
         agent_id: agentId,
         timestamp: new Date(),
-        metrics: {
+    metrics: {
           uptime: Date.now() - agentDetails.registered_at.getTime(),
           response_time: healthCheck.response_time,
-          throughput: agentDetails.metrics.total_tasks / Math.max(1, (Date.now() - agentDetails.registered_at.getTime()) / (1000 * 60 * 60)), // tasks per hour, error_rate: healthCheck.error_rate,
+          throughput: agentDetails.metrics.total_tasks / Math.max(1, (Date.now() - agentDetails.registered_at.getTime()) / (1000 * 60 * 60)),
+  // tasks per hour
+  error_rate: healthCheck.error_rate,
           memory_usage: healthCheck.memory_usage || 0,
           success_rate: agentDetails.metrics.success_rate,
-          queue_length: 0, // Would be populated by actual agent, active_tasks: agentDetails.agent.status === 'BUSY' ? 1 : 0
+          queue_length: 0,
+  // Would be populated by actual agent
+  active_tasks: agentDetails.agent.status === 'BUSY' ? 1 : 0
         }
       }
 
@@ -290,7 +292,7 @@ export class AgentMonitor {
           severity: 'critical',
           type: 'performance',
           message: `Agent response time exceeded, threshold: ${healthCheck.response_time}ms`,
-          metadata: { response_time: healthCheck.response_time, threshold: 2000 }
+    metadata: { response_time: healthCheck.response_time, threshold: 2000 }
         })
       }
 
@@ -301,7 +303,7 @@ export class AgentMonitor {
           severity: 'critical',
           type: 'error',
           message: `Agent error rate exceeded, threshold: ${healthCheck.error_rate.toFixed(1)}%`,
-          metadata: { error_rate: healthCheck.error_rate, threshold: 30 }
+    metadata: { error_rate: healthCheck.error_rate, threshold: 30 }
         })
       }
 
@@ -312,7 +314,7 @@ export class AgentMonitor {
           severity: 'emergency',
           type: 'availability',
           message: `Agent is offline and unresponsive`,
-          metadata: { last_activity: healthCheck.last_activity }
+    metadata: { last_activity: healthCheck.last_activity }
         })
       }
 
@@ -323,7 +325,7 @@ export class AgentMonitor {
           severity: 'warning',
           type: 'performance',
           message: `Agent memory usage, high: ${healthCheck.memory_usage.toFixed(1)}%`,
-          metadata: { memory_usage: healthCheck.memory_usage, threshold: 80 }
+    metadata: { memory_usage: healthCheck.memory_usage, threshold: 80 }
         })
       }
     }
@@ -353,7 +355,7 @@ export class AgentMonitor {
     if (alert.severity === 'critical' || alert.severity === 'emergency') {
       console.error(`🚨 ${alert.severity.toUpperCase()} ALERT: ${alert.message} (${alert.agent_id})`)
     } else {
-      console.log(`⚠️ ${alert.severity.toUpperCase()}: ${alert.message} (${alert.agent_id})`)
+      }: ${alert.message} (${alert.agent_id})`)
     }
 
     // Store alert in memory system
@@ -370,7 +372,7 @@ export class AgentMonitor {
         }]
       })
     } catch (error) {
-      console.log('⚠️ Failed to store alert in memory:', error)
+
     }
 
     await this.persistAlerts()
@@ -388,7 +390,6 @@ export class AgentMonitor {
     alert.metadata.acknowledged_by = acknowledgedBy
     alert.metadata.acknowledged_at = new Date().toISOString()
 
-    console.log(`✅ Alert, acknowledged: ${alertId}`)
     return true
   }
 
@@ -404,7 +405,6 @@ export class AgentMonitor {
     alert.metadata.resolved_at = new Date().toISOString()
     if (resolution) alert.metadata.resolution = resolution
 
-    console.log(`✅ Alert, resolved: ${alertId}`)
     return true
   }
 
@@ -441,7 +441,9 @@ export class AgentMonitor {
     return {
       overview,
       recent_alerts: recentAlerts,
-      performance_trends: this.metricsHistory.slice(-100), // Last 100 metrics, agent_status: agentStatus,
+      performance_trends: this.metricsHistory.slice(-100),
+  // Last 100 metrics
+  agent_status: agentStatus,
       coordination_metrics: coordinationStatus,
       last_updated: new Date()
     }
@@ -483,13 +485,13 @@ export class AgentMonitor {
     return {
       time_range: timeRange,
       metrics_count: recentMetrics.length,
-      averages: {
+    averages: {
         response_time: avgResponseTime,
         throughput: avgThroughput,
         error_rate: avgErrorRate,
         success_rate: avgSuccessRate
       },
-      trends: {
+    trends: {
         response_time_trend: this.calculateTrend(recentMetrics.map(m => m.metrics.response_time)),
         throughput_trend: this.calculateTrend(recentMetrics.map(m => m.metrics.throughput)),
         error_rate_trend: this.calculateTrend(recentMetrics.map(m => m.metrics.error_rate)),
@@ -551,19 +553,19 @@ export class AgentMonitor {
       clearInterval(this.monitoringInterval)
       this.monitoringInterval = null
     }
-    console.log('📊 Agent monitoring stopped')
+
   }
 }
 
 // Convenience functions
 export function startAgentMonitoring(): AgentMonitor {
   return AgentMonitor.getInstance()
-}
+};
 
 export function getMonitoringDashboard(): MonitoringDashboard {
   const monitor = AgentMonitor.getInstance()
   return monitor.getMonitoringDashboard()
-}
+};
 
 export function getAgentHealth(agentId: string): Record<string, any> {
   const monitor = AgentMonitor.getInstance()

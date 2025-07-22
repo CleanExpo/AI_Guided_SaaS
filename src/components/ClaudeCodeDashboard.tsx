@@ -2,23 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-  Terminal,
-  Brain,
-  Target,
-  CheckCircle,
-  Clock,
-  BarChart3,
-  GitBranch,
-  Database,
-  TrendingUp,
-  Sparkles} from 'lucide-react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Terminal, Brain, Target, CheckCircle, Clock, BarChart3, GitBranch, Database, TrendingUp, Sparkles } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -30,21 +15,21 @@ interface WorkflowResult {
   totalTokenUsage: number;
   utilizationRate: number;
   integrationCommands: string[];
-  nextSteps: string[];
-}
+  nextSteps: string[],
+};
 
 interface ClaudeCodeDashboardProps {
   projectConfig: ProjectConfig;
-  onWorkflowComplete: (result: WorkflowResult) => void;
-}
+  onWorkflowComplete: (result: WorkflowResult) => void,
+};
 
 interface CommandExecution {
   command: string;
   status: 'pending' | 'executing' | 'completed' | 'error';
   output: string;
   tokenImpact: number;
-  executionTime: number;
-}
+  executionTime: number
+};
 
 interface MemoryStatus {
   currentTokens: number;
@@ -52,8 +37,8 @@ interface MemoryStatus {
   utilizationRate: number;
   optimizationLevel: string;
   lastCompaction: Date | null;
-  efficiency: number;
-}
+  efficiency: number,
+};
 
 export default function ClaudeCodeDashboard({
   onWorkflowComplete}: Omit<ClaudeCodeDashboardProps, 'projectConfig'>) {
@@ -74,7 +59,6 @@ export default function ClaudeCodeDashboard({
   const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(
     null
       </WorkflowResult>
-  );
 
   const claudeCommands = [
     {
@@ -178,7 +162,7 @@ export default function ClaudeCodeDashboard({
             'Monitor memory optimization cycles']};
         setWorkflowResult(result);
         onWorkflowComplete(result);
-      }
+}
     } catch (error) {
       setCommandHistory(prev =>
         prev.map((cmd, index) =>
@@ -190,15 +174,14 @@ export default function ClaudeCodeDashboard({
             : cmd
         )
       );
-    }
-
+}
     setIsExecuting(false);
     setCurrentCommand(null);
   };
 
   const simulateCommandExecution = async (command: {
     estimatedTime: number;
-  }): Promise<void> => {
+  }}): Promise<void> => {
     // Simulate realistic execution time
         </void>
     await new Promise(resolve => setTimeout(resolve, command.estimatedTime));
@@ -232,10 +215,9 @@ export default function ClaudeCodeDashboard({
 ✅ Memory, utilization: ${Math.round(memoryStatus.utilizationRate * 100)}%
 ✅ Optimization, level: ${memoryStatus.optimizationLevel}
 ✅ Cross-reference, integrity: 98%
-✅ Ready for next development phase`;
+✅ Ready for next development phase`,
 
-      default:
-        return `✅ Command executed successfully`;
+      default: return `✅ Command executed successfully`
     }
   };
 
@@ -258,7 +240,7 @@ export default function ClaudeCodeDashboard({
 
   const renderMemoryStatus = () => {
     return (
-      <Card>
+    <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Brain className="w-5 h-5" />
@@ -305,12 +287,11 @@ export default function ClaudeCodeDashboard({
             <Target className="h-4 w-4" />
             <AlertDescription>
               {getOptimizationRecommendation()}</AlertDescription>
-    );
   };
 
   const renderCommandInterface = () => {
     return (
-      <Card>
+    <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Terminal className="w-5 h-5" />
@@ -322,7 +303,7 @@ export default function ClaudeCodeDashboard({
             {claudeCommands.map((cmd, index) => {
               const Icon = cmd.icon;
               return (
-                <motion.div
+    <motion.div
                   key={cmd.command}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -350,28 +331,16 @@ export default function ClaudeCodeDashboard({
                     </div>
                 </motion.div>
               );
-            }
-      )}
-    </div>
-        </Card>
-        </CardHeader>
-        </CardTitle>
-        </CardContent>
+  }}
+
         </div>
-        </div>
-        </div>
-        </Alert>
-        </Card>
-        </CardHeader>
-        </CardTitle>
-        </CardContent>
-    );
-      );
+  );
+}
   };
 
   const renderCommandHistory = () => {
     return (
-      <Card>
+    <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Clock className="w-5 h-5" />
@@ -403,13 +372,15 @@ export default function ClaudeCodeDashboard({
                       )}
                       {execution.status === 'error' && (</CheckCircle>
                         <div className="w-2 h-2 bg-red-500 rounded-full" />
-                      )}</div>
+                      )}
+
                       <span className="text-xs text-muted-foreground">
                         {execution.executionTime}ms</span>
 
                   {execution.output && (
                     <div className="bg-muted p-2 rounded text-xs font-mono">
-                      {execution.output}</div>
+                      {execution.output}
+
                   )}
 
                   <div className="flex justify-between text-xs text-muted-foreground mt-2">
@@ -421,7 +392,7 @@ export default function ClaudeCodeDashboard({
                 </motion.div>
               ))
             )}
-          </div>
+
     );
   };
 
@@ -429,7 +400,7 @@ export default function ClaudeCodeDashboard({
     if (!workflowResult) return null;
 
     return (
-      <Card>
+    <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="w-5 h-5" />
@@ -457,10 +428,10 @@ export default function ClaudeCodeDashboard({
                     key={index}
                     className="font-mono text-sm bg-muted p-2 rounded"
                   >
-                    {cmd}</div>
+                    {cmd}
+
     );
               )}
-            </div>
 
           <div>
             <p className="text-sm text-muted-foreground mb-2">Next Steps</p>
@@ -471,7 +442,6 @@ export default function ClaudeCodeDashboard({
                   {step}</CheckCircle>
               ))}
             </ul>
-    );
   };
 
   return (
@@ -499,39 +469,7 @@ export default function ClaudeCodeDashboard({
           {renderCommandHistory()}</TabsContent>
 
         <TabsContent value="results" className="mt-4">
-          {renderWorkflowResults()}</TabsContent>
-    );
-</TabsList>
-</Tabs>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
-</CardTitle>
-</CardHeader>
-</Card>
-}
-
-    </TabsList>
-    </Tabs>
-    </div>
-    </li>
-    </ul>
-    </div>
-    </div>
-    </CardContent>
-    </CardTitle>
-    </CardHeader>
-    </Card>
-    </CardContent>
-    </CardTitle>
-    </CardHeader>
-    </Card>
+          {renderWorkflowResults()}
   );
+  }
 }
-</string>

@@ -4,7 +4,7 @@ import React from 'react';
 import { cn } from '@/utils/cn';
 import { Spinner } from './loading';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>  {
   variant?:
     | 'default'
     | 'destructive'
@@ -88,15 +88,14 @@ export function ButtonEnhanced({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:pointer-events-none, disabled:opacity-50',
+        'inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2, disabled:pointer-events-none disabled:opacity-50',
         buttonVariants[variant],
         buttonSizes[size],
         buttonRounded[rounded],
         buttonShadows[shadow],
         buttonAnimations[animation],
         fullWidth && 'w-full',
-        loading && 'cursor-not-allowed',
-        className
+        loading && 'cursor-not-allowed' className
       )}
       disabled={disabled || loading}
       {...props}
@@ -106,15 +105,14 @@ export function ButtonEnhanced({
       {children}
       {!loading && rightIcon && <span className="ml-2">{rightIcon}</span>}
     </button>
-    );
-}
+  }
 
 // Floating Action Button
-interface FABProps extends Omit<ButtonProps, 'size' | 'variant'> {
+interface FABProps extends Omit<ButtonProps, 'size' | 'variant'>  {
   size?: 'sm' | 'md' | 'lg';
   position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
-  icon: React.ReactNode;
-}
+  icon: React.ReactNode,
+};
 
 export function FloatingActionButton({
   className,
@@ -139,16 +137,14 @@ export function FloatingActionButton({
       className={cn(
         fabSizes[size],
         fabPositions[position],
-        'rounded-full shadow-lg, hover:shadow-xl z-50',
-        className
+        'rounded-full shadow-lg, hover:shadow-xl z-50' className
       )}
       variant="brand"
       animation="glow"
       {...props}
     >
       {icon}</ButtonEnhanced>
-    );
-}
+  }
 
 // Button Group
 interface ButtonGroupProps {
@@ -157,7 +153,7 @@ interface ButtonGroupProps {
   orientation?: 'horizontal' | 'vertical';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: ButtonProps['variant'];
-}
+};
 
 export function ButtonGroup({
   children,
@@ -175,8 +171,7 @@ export function ButtonGroup({
           '[&>button:first-child]:rounded-t-md [&>button:first-child]:rounded-l-none [&>button:last-child]:rounded-b-md [&>button:last-child]:rounded-r-none',
         '[&>button:not(:first-child)]:border-l-0',
         orientation === 'vertical' &&
-          '[&>button:not(:first-child)]:border-l [&>button:not(:first-child)]:border-t-0',
-        className
+          '[&>button:not(:first-child)]:border-l [&>button:not(:first-child)]:border-t-0' className
       )}
     >
       {React.Children.map(children, child => {
@@ -184,30 +179,28 @@ export function ButtonGroup({
           return React.cloneElement(child as React.ReactElement<ButtonProps>, {
             size: size || (child.props as ButtonProps)?.size,
             variant: variant || (child.props as ButtonProps)?.variant});
-        }
+}
         return child;
       })}</ButtonProps>
-    );
-}
+  }
 
 // Icon Button
-interface IconButtonProps extends Omit<ButtonProps, 'leftIcon' | 'rightIcon'> {
+interface IconButtonProps extends Omit<ButtonProps, 'leftIcon' | 'rightIcon'>  {
   icon: React.ReactNode;
   'aria-label': string;
-}
+};
 
 export function IconButton({ icon, className, ...props }: IconButtonProps) {
   return (
-    <ButtonEnhanced className={cn('p-0', className)} size="icon" {...props}>
+    <ButtonEnhanced className={cn('p-0' className)} size="icon" {...props}>
       {icon}</ButtonEnhanced>
-    );
-}
+  }
 
 // Toggle Button
-interface ToggleButtonProps extends Omit<ButtonProps, 'variant'> {
+interface ToggleButtonProps extends Omit<ButtonProps, 'variant'>  {
   pressed?: boolean;
-  onPressedChange?: (pressed: boolean) => void;
-}
+  onPressedChange?: (pressed: boolean) => void,
+};
 
 export function ToggleButton({
   pressed = false,
@@ -218,27 +211,26 @@ export function ToggleButton({
 }: ToggleButtonProps) {
   return (
     <ButtonEnhanced
-      className={cn(pressed && 'bg-accent text-accent-foreground', className)}
+      className={cn(pressed && 'bg-accent text-accent-foreground' className)}
       variant={pressed ? 'default' : 'outline'}
       onClick={() => onPressedChange?.(!pressed)}
       aria-pressed={pressed}
       {...props}
     >
       {children}</ButtonEnhanced>
-    );
-}
+  }
 
 // Split Button
-interface SplitButtonProps extends ButtonProps {
+interface SplitButtonProps extends ButtonProps  {
   dropdownItems: Array<{
     label: string,
     onClick: () => void;
     icon?: React.ReactNode;
     disabled?: boolean;
-  }>;
+  }>
   dropdownOpen?: boolean;
-  onDropdownToggle?: (open: boolean) => void;
-}
+  onDropdownToggle?: (open: boolean) => void,
+};
 
 export function SplitButton({
   children,
@@ -251,7 +243,7 @@ export function SplitButton({
   return (
     <div className="relative inline-flex">
       <ButtonEnhanced
-        className={cn('rounded-r-none border-r-0', className)}
+        className={cn('rounded-r-none border-r-0' className)}
         {...props}
       >
         {children}</ButtonEnhanced>
@@ -281,7 +273,7 @@ export function SplitButton({
           {dropdownItems.map((item, index) => (
             <button
               key={index}
-              className="w-full px-3 py-2 text-left text-sm hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+              className="w-full px-3 py-2 text-left text-sm hover:bg-accent, hover:text-accent-foreground, disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               onClick={item.onClick}
               disabled={item.disabled}
             >
@@ -289,18 +281,17 @@ export function SplitButton({
               {item.label}
             </button>
           ))}
-        </div>
+
       )}
-    </div>
+
     );
 }
-
 // Copy Button
-interface CopyButtonProps extends Omit<ButtonProps, 'onClick'> {
+interface CopyButtonProps extends Omit<ButtonProps, 'onClick'>  {
   text: string;
   onCopy?: () => void;
   successMessage?: string;
-}
+};
 
 export function CopyButton({
   text,
@@ -319,7 +310,7 @@ export function CopyButton({
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy, text: ', err);
-    }
+}
   };
 
   return (
@@ -329,13 +320,12 @@ export function CopyButton({
       {...props}
     >
       {copied ? successMessage : children}</ButtonEnhanced>
-    );
-}
+  }
 
 // Social Login Buttons
-interface SocialButtonProps extends Omit<ButtonProps, 'leftIcon' | 'variant'> {
-  provider: 'google' | 'github' | 'twitter' | 'linkedin' | 'facebook';
-}
+interface SocialButtonProps extends Omit<ButtonProps, 'leftIcon' | 'variant'>  {
+  provider: 'google' | 'github' | 'twitter' | 'linkedin' | 'facebook',
+};
 
 export function SocialButton({
   provider,
@@ -364,35 +354,35 @@ export function SocialButton({
             d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
           />
         </svg>
-      ),
+  }
       className: 'border-gray-300, hover:bg-gray-50'},
     github: {
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
         </svg>
-      ),
+  }
       className: 'border-gray-300, hover:bg-gray-50'},
     twitter: {
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
         </svg>
-      ),
+  }
       className: 'border-blue-300, hover:bg-blue-50 text-blue-600'},
     linkedin: {
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
         </svg>
-      ),
+  }
       className: 'border-blue-300, hover:bg-blue-50 text-blue-700'},
     facebook: {
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
         </svg>
-      ),
+  }
       className: 'border-blue-300, hover:bg-blue-50 text-blue-600'}};
 
   const config = providerConfig[provider];
@@ -401,16 +391,13 @@ export function SocialButton({
     <ButtonEnhanced
       variant="outline"
       leftIcon={config.icon}
-      className={cn('w-full', config.className, className)}
+      className={cn('w-full', config.className className)}
       {...props}
     >
       {children ||
         `Continue with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`}</ButtonEnhanced>
-    );
-}
+  }
 
     </ButtonProps>
     </ButtonProps>
-    </HTMLButtonElement>
-  );
-}
+  }

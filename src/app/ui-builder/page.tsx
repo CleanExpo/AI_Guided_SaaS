@@ -12,15 +12,11 @@ const UIBuilderHomepage = dynamic(
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading UI Builder...</p>
-  
-        </div>
-    );
-}
+  }
 );
 
 export default function UIBuilderPage() {
-  return <UIBuilderHomepage />;
+  return <UIBuilderHomepage />
 }
 </UIBuilderHomepage>
 }
-</div>

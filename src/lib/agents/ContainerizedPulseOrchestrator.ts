@@ -3,13 +3,13 @@ import { DockerAgentManager, ContainerStatus } from './DockerAgentManager'
 import { AgentConfig } from './AgentLoader'
 import { OrchestratorConfig } from './AgentOrchestrator'
 
-export interface ContainerizedPulseConfig extends PulseConfig {
+export interface ContainerizedPulseConfig extends PulseConfig  {
   useContainers: boolean, autoScaling: boolean, minAgentsPerType: number, maxAgentsPerType: number, scaleUpThreshold: number // CPU/Memory percentage, scaleDownThreshold: number
-}
+};
 
 export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
   private dockerManager: DockerAgentManager
-  private containerizedConfig: ContainerizedPulseConfig
+  private, containerizedConfig: ContainerizedPulseConfig
   private, lastScaleCheck: Date = new Date()
   private scaleCheckInterval: number = 60000 // 1 minute
   
@@ -33,7 +33,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
     await super.initialize()
     
     if (this.containerizedConfig.useContainers) {
-      console.log('🐳 Initializing containerized agents...')
+
       await this.initializeContainers()
     }
   }
@@ -49,7 +49,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
     for (const agent of agents) {
       try {
         await this.dockerManager.startAgentContainer(agent)
-        console.log(`✅ Started container for ${agent.name}`)
+
       } catch (error) {
         console.error(`Failed to start container for ${agent.name}:`, error)
       }
@@ -138,14 +138,11 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
   }
   
   private async checkAndScale(containerMetrics): Promise<void> {
-    console.log('🔍 Checking auto-scaling conditions...')
-    
+
     // Scale up if resources are high
     if (containerMetrics.avgCpuUsage > this.containerizedConfig.scaleUpThreshold ||
         containerMetrics.avgMemoryUsage > this.containerizedConfig.scaleUpThreshold) {
-      
-      console.log('📈 High resource usage detected considering scale up...')
-      
+
       // Find which agent types need scaling
       const agentTypes = await this.identifyAgentTypesForScaling()
       
@@ -154,7 +151,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
         
         if (currentCount < this.containerizedConfig.maxAgentsPerType) {
           await this.dockerManager.scaleAgents(currentCount + 1, agentType)
-          console.log(`✅ Scaled up ${agentType} agents to ${currentCount + 1}`)
+
         }
       }
     }
@@ -162,9 +159,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
     // Scale down if resources are low
     else if (containerMetrics.avgCpuUsage < this.containerizedConfig.scaleDownThreshold &&
              containerMetrics.avgMemoryUsage < this.containerizedConfig.scaleDownThreshold) {
-      
-      console.log('📉 Low resource usage detected considering scale down...')
-      
+
       const agentTypes = await this.identifyAgentTypesForScaling()
       
       for (const agentType of agentTypes) {
@@ -172,7 +167,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
         
         if (currentCount > this.containerizedConfig.minAgentsPerType) {
           await this.dockerManager.scaleAgents(currentCount - 1, agentType)
-          console.log(`✅ Scaled down ${agentType} agents to ${currentCount - 1}`)
+
         }
       }
     }
@@ -196,8 +191,8 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
       const containerStatuses = await this.dockerManager.getAllContainerStatuses()
       
       return {
-        ...baseStatus,
-        containerization: {
+        ...baseStatus
+    containerization: {
           enabled: true,
           autoScaling: this.containerizedConfig.autoScaling,
           containers: containerStatuses.map(status => ({
@@ -207,7 +202,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
             cpu: `${status.cpuUsage.toFixed(1)}%`,
             memory: `${status.memoryUsage.toFixed(0)}MB`
           })),
-          scaling: {
+    scaling: {
             minPerType: this.containerizedConfig.minAgentsPerType, maxPerType: this.containerizedConfig.maxAgentsPerType,
             scaleUpThreshold: `${this.containerizedConfig.scaleUpThreshold}%`,
             scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
@@ -220,8 +215,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
   }
   
   async shutdown(): Promise<void> {
-    console.log('🛑 Shutting down Containerized Pulse Orchestrator...')
-    
+
     if (this.containerizedConfig.useContainers) {
       // Stop all agent containers
       const agents = this.loader.getLoadedAgents()

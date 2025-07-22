@@ -5,26 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { 
-  ArrowRight, 
-  Sparkles, 
-  Code2, 
-  Zap, 
-  Shield, 
-  Globe, 
-  Rocket,
-  CheckCircle2,
-  Users,
-  BarChart3,
-  Layers,
-  Bot,
-  Palette,
-  Terminal,
-  MousePointer2,
-  Smartphone,
-  Laptop,
-  Star
-} from 'lucide-react';
+import { ArrowRight, Sparkles, Code2, Zap, Shield, Globe, Rocket, CheckCircle2, Users, BarChart3, Layers, Bot, Palette, Terminal, MousePointer2, Smartphone, Laptop, Star } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
@@ -109,11 +90,12 @@ export default function LandingPageProduction() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-950 dark:to-gray-900">
-      {/* Header */}</div>
+    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900, dark:via-gray-950 dark:to-gray-900">
+      {/* Header */}
+
       <header className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "bg-white/80, dark:bg-gray-900/80 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm" : "bg-transparent"
       )}></header>
         <div className="container mx-auto px-4 py-4"></div>
           <nav className="flex items-center justify-between"></nav>
@@ -140,7 +122,7 @@ export default function LandingPageProduction() {
             <Badge className="bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">
               🚀 Trusted by 10,000+ developers</Badge>
             
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-orange-600 to-gray-900 dark:from-white dark:via-orange-400 dark:to-white bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-orange-600 to-gray-900, dark:from-white, dark:via-orange-400 dark:to-white bg-clip-text text-transparent">
               From Idea to Production</h1>
               <br /></br>
               <span className="text-4xl md:text-6xl">in Minutes</span>
@@ -172,7 +154,7 @@ export default function LandingPageProduction() {
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /></div>
                       <span>Building...</span>) : (
                     <span className="flex items-center gap-2"></span>
-                      Build Now <ArrowRight className="w-4 h-4" /></ArrowRight>
+                      Build Now <ArrowRight className="w-4 h-4" />
                   )}
                 </Button>
 
@@ -182,11 +164,10 @@ export default function LandingPageProduction() {
                 <button
                   key={example}
                   onClick={() => setAppIdea(example)}
-                  className="px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-all hover:scale-105"
+                  className="px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800, hover:bg-gray-200, dark:hover:bg-gray-700 rounded-full transition-all hover:scale-105"
                 >
                   {example}</button>
               ))}
-            </div>
 
       {/* Two-Tier Showcase */}
       <section id="tiers" className="py-20 px-4 bg-gray-50 dark:bg-gray-950"></section>
@@ -205,7 +186,7 @@ export default function LandingPageProduction() {
                   "px-6 py-3 rounded-full transition-all",
                   selectedTier === 'no-code' 
                     ? "bg-orange-500 text-white" 
-                    : "text-gray-600, dark:text-gray-400"
+                    : "text-gray-600 dark:text-gray-400"
                 )}
               ></button>
                 <span className="flex items-center gap-2"></span>
@@ -217,7 +198,7 @@ export default function LandingPageProduction() {
                   "px-6 py-3 rounded-full transition-all",
                   selectedTier === 'pro-code' 
                     ? "bg-orange-500 text-white" 
-                    : "text-gray-600, dark:text-gray-400"
+                    : "text-gray-600 dark:text-gray-400"
                 )}
               ></button>
                 <span className="flex items-center gap-2"></span>
@@ -226,10 +207,10 @@ export default function LandingPageProduction() {
 
           {/* Tier Showcase */}
           <div className="grid md:grid-cols-2 gap-8">
-            {/* No-Code Tier */}</div>
+            {/* No-Code Tier */}
+
             <Card className={cn(
-              "p-8 transition-all duration-300",
-              selectedTier === 'no-code' 
+              "p-8 transition-all duration-300" selectedTier === 'no-code' 
                 ? "ring-2 ring-orange-500 scale-105 shadow-2xl" 
                 : "opacity-50"
             )}></Card>
@@ -270,8 +251,7 @@ export default function LandingPageProduction() {
 
             {/* Pro-Code Tier */}
             <Card className={cn(
-              "p-8 transition-all duration-300",
-              selectedTier === 'pro-code' 
+              "p-8 transition-all duration-300" selectedTier === 'pro-code' 
                 ? "ring-2 ring-orange-500 scale-105 shadow-2xl" 
                 : "opacity-50"
             )}></Card>
@@ -325,7 +305,6 @@ export default function LandingPageProduction() {
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
             ))}
-          </div>
 
       {/* Stats Section */}
       <section className="py-20 px-4 bg-orange-50 dark:bg-orange-950/20"></section>
@@ -354,7 +333,8 @@ export default function LandingPageProduction() {
               Choose the plan that fits your needs</p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Free Plan */}</div>
+            {/* Free Plan */}
+
             <Card className="p-8 hover:shadow-lg transition-all"></Card>
               <div className="space-y-6"></div>
                 <div></div>
@@ -462,11 +442,9 @@ export default function LandingPageProduction() {
                 <p className="text-gray-600 dark:text-gray-400 mb-4">
                   "{testimonial.content}"</p>
                 <div></div>
-                  <div className="font-semibold">{testimonial.name}</div>
-                  <div className="text-sm text-gray-500">{testimonial.role}</div>
-              </Card>
-            ))}
-          </div>
+                  <div className="font-semibold">{testimonial.name}
+
+                  <div className="text-sm text-gray-500">{testimonial.role}</div>))}
 
       {/* Final CTA */}
       <section className="py-20 px-4"></section>
@@ -486,7 +464,7 @@ export default function LandingPageProduction() {
       {/* Footer */}
       <footer className="py-12 px-4 border-t"></footer>
         <div className="container mx-auto max-w-6xl"></div>
-          <div className="grid md:grid-cols-4 gap-8"></div>
+          <div className="grid md: grid-cols-4 gap-8"></div>
             <div></div>
               <div className="flex items-center gap-2 mb-4"></div>
                 <Sparkles className="w-6 h-6 text-orange-500" /></Sparkles>
@@ -518,5 +496,4 @@ export default function LandingPageProduction() {
           
           <div className="mt-12 pt-8 border-t text-center text-sm text-gray-600 dark:text-gray-400">
             © 2025 AI Guided SaaS. All rights reserved.</div>
-    );
-}
+  }

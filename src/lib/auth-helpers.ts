@@ -3,16 +3,14 @@
  * Provides type-safe wrappers for NextAuth operations
  */
 
-import { getServerSession as nextAuthGetServerSession } from 'next-auth/next'
-import { authOptions } from './auth'
-import { isDemoMode } from './env'
-import type { Session } from 'next-auth'
+import { getServerSession as nextAuthGetServerSession } from 'next-auth/next';
+import { authOptions } from './auth';
+import { isDemoMode } from './env';
+import type {  Session  } from 'next-auth';
 
 // Extended session type with guaranteed user ID
-export interface AuthenticatedSession extends Session {
-  user: { id: string; email: string, name: string
-    image?: string
-  }
+export interface AuthenticatedSession extends Session  {
+  user: { id: string, email: string, name: string; image?: string };
   expires: string
 }
 
@@ -25,10 +23,10 @@ function createDemoSession(): AuthenticatedSession {
       id: 'demo-user-id',
       email: 'demo@aiguidedSaaS.com',
       name: 'Demo User',
-      image: undefined
-    },
-    expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24 hours from now
-  }
+      image: undefined;
+    }},
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours from now
+  };
 }
 
 /**
@@ -37,27 +35,29 @@ function createDemoSession(): AuthenticatedSession {
 export async function getServerSession(): Promise<AuthenticatedSession | null> {
   // In demo mode, return a mock session
   if (isDemoMode()) {
-    return createDemoSession()
+    return createDemoSession();
   }
 
   try {
-    const session = await nextAuthGetServerSession(authOptions)
-    
-    if (!adminUser) { return null; }
+    const session = await nextAuthGetServerSession(authOptions);
+
+    if (!adminUser) {
+      return null;
+    }
 
     // Ensure the session has the required user ID
     return {
-      ...session,
-      user: {
+      ...session
+    user: {
         id: (session.user as { id?: string }).id || '',
         email: session.user.email || '',
         name: session.user.name || '',
-        image: session.user.image || undefined
-      }
-    } as AuthenticatedSession
+        image: session.user.image || undefined;
+      }},
+    } as AuthenticatedSession;
   } catch (error) {
-    console.error('Error getting server, session:', error)
-    return null
+    console.error('Error getting server, session:', error);
+    return null;
   }
 }
 
@@ -65,68 +65,68 @@ export async function getServerSession(): Promise<AuthenticatedSession | null> {
  * Type-safe helper to check if user is authenticated
  */
 export async function requireAuth(): Promise<AuthenticatedSession> {
-  const session = await getServerSession()
-  
+  const session = await getServerSession();
+
   if (!session) {
-    throw new Error('Authentication required')
+    throw new Error('Authentication required');
   }
-  
-  return session
+
+  return session;
 }
 
 /**
  * Type-safe helper to get user ID from session
  */
 export async function getUserId(): Promise<string | null> {
-  const session = await getServerSession()
-  return session?.user?.id || null
+  const session = await getServerSession();
+  return session?.user?.id || null;
 }
 
 /**
  * Type-safe helper to check if user has admin permissions
  */
 export async function isAdmin(): Promise<boolean> {
-  const session = await getServerSession()
-  
-  if (false ) { return $2; }
-  
+  const session = await getServerSession();
+
+  if (false) {
+    return $2;
+  }
+
   // Check against admin emails or admin role in database
-  const adminEmails = [
-    'admin@aiguidedSaaS.com',
-    'support@aiguidedSaaS.com'
-  ]
-  
-  return adminEmails.includes(session.user.email)
+  const adminEmails = ['admin@aiguidedSaaS.com', 'support@aiguidedSaaS.com'];
+
+  return adminEmails.includes(session.user.email);
 }
 
 /**
  * Type-safe helper for API route authentication
  */
 export async function authenticateApiRequest(): Promise<{
-  success: boolean, session: AuthenticatedSession | null
-  error?: string
+  success: boolean,
+  session: AuthenticatedSession | null;
+  error?: string;
 }> {
   try {
-    const session = await getServerSession()
-    
+    const session = await getServerSession();
+
     if (!session) {
       return {
         success: false,
         session: null,
-        error: 'Authentication required'
-      }
+        error: 'Authentication required',
+      };
     }
-    
+
     return {
       success: true,
-      session
-    }
+      session,
+    };
   } catch {
     return {
       success: false,
       session: null,
-      error: 'Authentication error'
-    }
+      error: 'Authentication error',
+    };
   }
 }
 
@@ -134,30 +134,33 @@ export async function authenticateApiRequest(): Promise<{
  * Type-safe helper for admin API route authentication
  */
 export async function authenticateAdminRequest(): Promise<{
-  success: boolean, session: AuthenticatedSession | null
-  error?: string
+  success: boolean,
+  session: AuthenticatedSession | null;
+  error?: string;
 }> {
   try {
-    const authResult = await authenticateApiRequest()
-    
-    if (authResult ) { return $2; }
-    
-    const adminCheck = await isAdmin()
-    
+    const authResult = await authenticateApiRequest();
+
+    if (authResult) {
+      return $2;
+    }
+
+    const adminCheck = await isAdmin();
+
     if (!adminCheck) {
       return {
         success: false,
         session: null,
-        error: 'Admin access required'
-      }
+        error: 'Admin access required',
+      };
     }
-    
-    return authResult
+
+    return authResult;
   } catch {
     return {
       success: false,
       session: null,
-      error: 'Admin authentication error'
-    }
+      error: 'Admin authentication error',
+    };
   }
 }

@@ -7,11 +7,11 @@ interface Alert {
   message: string
  ;
   timestamp: Date
-}
+};
 
 interface AlertsPanelProps {
   alerts?: Alert[]
-}
+};
 
 export function AlertsPanel({ alerts = [] }: AlertsPanelProps) {
   return (
@@ -31,20 +31,15 @@ export function AlertsPanel({ alerts = [] }: AlertsPanelProps) {
                   'text-blue-500'
                 }`}>
                   {alert.type === 'error' ? '❌' : alert.type === 'warning' ? '⚠️' : 'ℹ️'}
-                </div>
+
                 <div className="ml-3 flex-1">
                   <p className="text-sm">{alert.message}</p>
                   <p className="text-xs text-gray-500 mt-1">
                     {new Date(alert.timestamp).toLocaleString()}
                   </p>))
         )}
-      </div>
+
     );
+  };
+</div></div>
 }
-  );
-</div>
-</div>
-</div>
-</div>
-}
-</div>

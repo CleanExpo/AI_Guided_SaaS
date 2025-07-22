@@ -1,12 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Code, Key, Database, Webhook, ExternalLink } from 'lucide-react';
@@ -114,9 +108,8 @@ const getMethodColor = (method: string) => {
       return 'bg-yellow-100 text-yellow-800';
     case 'DELETE':
       return 'bg-red-100 text-red-800';
-    default:
-      return 'bg-gray-100 text-gray-800';
-  }
+    default: return 'bg-gray-100 text-gray-800';
+  }}
 };
 
 export default function ApiDocsPage() {
@@ -138,18 +131,16 @@ export default function ApiDocsPage() {
                 <CardHeader>
                   <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
                     {item.step}
-                  </div>
+
                   <CardTitle className="text-lg">{item.title}</CardTitle>
                   <CardDescription>{item.description}</CardDescription>
             ))}
-          </div>
 
         {/* API Sections */}
         <div className="space-y-8 mb-16">
           {apiSections.map(section => {
-            const Icon = section.icon;
-            return (
-              <Card key={section.title}>
+            const Icon = section.icon, return (
+    <Card key={section.title}>
                 <CardHeader>
                   <div className="flex items-center space-x-3">
                     <Icon className="h-8 w-8 text-primary" />
@@ -176,24 +167,13 @@ export default function ApiDocsPage() {
                           </span>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
-                          </Button>
+                          
                     ))}
-                  </div>
+
     );
-          }
-      )}
-    </div>
-        </div>
-        </div>
-        </Card>
-        </CardHeader>
-        </div>
-        </Card>
-        </CardHeader>
-        </div>
-        </CardContent>
-        </div>
-    );
+  }}
+
+        
 
         {/* Code Example */}
         <Card className="mb-16">
@@ -254,6 +234,4 @@ export default function ApiDocsPage() {
           </pre>
           </div>
           </div>
-          </Button>
-      );
-}
+  }

@@ -1,20 +1,18 @@
 'use client'
 
-import { useState } from 'react'
-import { signIn, getSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
-import { Alert, AlertDescription } from '../ui/alert'
-import { Loader2, Mail, Lock, Chrome } from 'lucide-react'
-
+import { useState } from 'react';
+import { signIn, getSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Alert, AlertDescription } from '../ui/alert';
+import { Loader2, Mail, Lock, Chrome } from 'lucide-react';
 export default function SignInForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
-      </string>
   const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     email: '',
@@ -88,7 +86,7 @@ export default function SignInForm() {
 
           <div className="relative"></div>
             <div className="absolute inset-0 flex items-center"></div>
-              <span className="w-full border-t" /></span>
+              <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase"></div>
               <span className="bg-background px-2 text-muted-foreground">
@@ -106,7 +104,7 @@ export default function SignInForm() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value}
       )}
-    </div>
+
   );
                   className="pl-10"
                   required
@@ -123,7 +121,7 @@ export default function SignInForm() {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value}
       )}
-    </div>
+
   );
                   className="pl-10"
                   required
@@ -143,7 +141,7 @@ export default function SignInForm() {
               onClick={() => router.push('/auth/signup')}
             >
               Sign up</Button>
-      );
-}
+  }
 
 </string>
+}

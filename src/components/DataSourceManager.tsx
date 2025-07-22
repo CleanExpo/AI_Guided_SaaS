@@ -1,35 +1,15 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Database, 
-  Cloud, 
-  FileJson, 
-  Sparkles,
-  RefreshCw,
-  Settings,
-  CheckCircle,
-  AlertCircle,
-  AlertTriangle,
-  Loader2,
-  ToggleLeft,
-  ToggleRight,
-  Download,
-  Upload,
-  Link,
-  Unlink,
-  Play,
-  Pause
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-import { MockDataGenerator, DataSource, DataSchema } from '@/lib/data/MockDataGenerator'
-
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Database, Cloud, FileJson, Sparkles, RefreshCw, Settings, CheckCircle, AlertCircle, AlertTriangle, Loader2, ToggleLeft, ToggleRight, Download, Upload, Link, Unlink, Play, Pause } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { MockDataGenerator, DataSource, DataSchema } from '@/lib/data/MockDataGenerator';
 interface DataSourceManagerProps {
   projectId: string
   onDataChange?: (data) => void
@@ -47,7 +27,8 @@ const defaultDataSources: DataSource[] = [
     id: 'api-endpoint',
     name: 'REST API',
     type: 'api',
-    config: { endpoint: '', headers: {} },
+    config: { endpoint: '',
+    headers: {} },
     isActive: false
   },
   {
@@ -60,12 +41,12 @@ const defaultDataSources: DataSource[] = [
 ]
 
 export function DataSourceManager({ projectId, onDataChange }: DataSourceManagerProps) {
-  const [dataSources, setDataSources] = useState<DataSource[]>(defaultDataSources)</DataSource>
+  const [dataSources, setDataSources] = useState<DataSource[]>(defaultDataSources)
   const [activeSource, setActiveSource] = useState<DataSource>(dataSources[0])
-  const [isLoading, setIsLoading] = useState(false)</DataSource>
-      </any>
+  const [isLoading, setIsLoading] = useState(false)
+      
   const [testResult, setTestResult] = useState<any>(null)
-  const [mockGenerator] = useState(() => new MockDataGenerator())</any>
+  const [mockGenerator] = useState(() => new MockDataGenerator())
       </Record>
   const [generatedData, setGeneratedData] = useState<Record<string, any[]>>({})
   const [selectedSchema, setSelectedSchema] = useState('users')
@@ -126,7 +107,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
           tables: ['users', 'products', 'orders']
         }
       )}
-    </div>
+
     );
     } catch (error) {
       setTestResult({
@@ -176,7 +157,8 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
   
   return (
     <div className="space-y-6">
-      {/* Data, Sources List */}</div>
+      {/* Data, Sources List */}
+
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Data Sources</h3>
         <div className="space-y-3">
@@ -185,22 +167,23 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
               key={source.id}
               className={cn(
                 "flex items-center justify-between p-4 rounded-lg border transition-colors",
-                source.isActive ? "border-primary bg-primary/5" : "border-gray-200, hover:border-gray-300"
+                source.isActive ? "border-primary bg-primary/5" : "border-gray-200 hover:border-gray-300"
               )}
             >
               <div className="flex items-center gap-3">
-                {getSourceIcon(source.type)}</div>
+                {getSourceIcon(source.type)}
+
                 <div>
                   <h4 className="font-medium">{source.name}</h4>
                   <div className="flex items-center gap-2 mt-1">
-                    <Badge className={cn("text-xs", getSourceBadgeColor(source.type))}>
+                    <Badge className={cn("text-xs" getSourceBadgeColor(source.type))}>
                       {source.type}</Badge>
                     {source.lastSync && (
                       <span className="text-xs text-muted-foreground">
-                        Last, sync: {source.lastSync.toLocaleString()}</span>
+                        Last,
+    sync: {source.lastSync.toLocaleString()}</span>
                     )}
-                  </div>
-              
+
               <div className="flex items-center gap-2">
                 {source.isActive ? (</div>
                   <Badge className="bg-green-100 text-green-700">
@@ -214,10 +197,9 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                   >
                     Activate</Button>
                 )}
-              </div>
+
           ))}
-        </div>
-      
+
       {/* Active, Source Configuration */}
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">
@@ -296,7 +278,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                   endpoint: e.target.value
                }
       )}
-    </div>
+
   );
                 placeholder="https://api.example.com/data"
                 className="mt-1"
@@ -347,8 +329,8 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 )}</AlertCircle>
                 <AlertDescription>{testResult.message}</AlertDescription>
             )}
-          </div>
-        )}
+
+        );}
         
         {activeSource.type === 'database' && (
           <div className="space-y-4">
@@ -362,7 +344,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                   connectionString: e.target.value
                }
       )}
-    </div>
+
   );
                 placeholder="postgresql://user:password@host:port/database"
                 className="mt-1"
@@ -390,41 +372,10 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 </>
               )}
             </Button>)}
-          </Card>
-          </div>
-          </Badge>
-          </Card>
-          </div>
-          </Alert>
-          </Tabs>
-          </TabsList>
-          </TabsContent>
-          </div>
-          </div>
-          </table>
-          </thead>
-          </Button>
-          </div>
-          </Alert>
-      );
-</thead>
-</table>
-</div>
-</div>
-</div>
-</div>
-</TabsContent>
-</TabsList>
-</Tabs>
-</Alert>
-</div>
-</div>
-</Card>
-</Badge>
-</div>
-</Card>
+          
+  );
 }
 
 // Add missing import
-import { Textarea } from '@/components/ui/textarea'
+import { Textarea } from '@/components/ui/textarea';
 }

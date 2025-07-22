@@ -8,7 +8,7 @@ export interface CausalLogEntry {
   page: string;
   promptContext: string;
   action: LogActionType;
-  timestamp: number;
+  timestamp: number
 }
 
 /**
@@ -22,7 +22,7 @@ export class CausalLogger {
     const logs = this.getLogs();
     logs.push(entry);
     localStorage.setItem(this.key, JSON.stringify(logs));
-    console.log('[🧠 Logger] Logged:', entry);
+
   }
 
   getLogs(): CausalLogEntry[] {
@@ -47,10 +47,13 @@ export class CausalLogger {
       );
       await supabase.from('causal_logs').insert([entry]);
     } catch (error) {
-      console.warn('[🧠 Logger] Supabase logging failed, falling back to, localStorage:', error);
+      console.warn(
+        '[🧠 Logger] Supabase logging failed, falling back to, localStorage:',
+        error
+      );
       this.log(entry);
     }
   }
-}
+};
 
 export const logger = new CausalLogger();

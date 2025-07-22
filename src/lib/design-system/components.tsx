@@ -1,27 +1,18 @@
 'use client'
 
 import React from 'react'
-import { cn } from '@/utils/cn'
-import { motion, HTMLMotionProps } from 'framer-motion'
-import { 
-  CheckCircle, 
-  AlertCircle, 
-  Info, 
-  AlertTriangle,
-  X,
-  ChevronRight,
-  Loader2
-} from 'lucide-react'
-
+import { cn } from '@/utils/cn';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { CheckCircle, AlertCircle, Info, AlertTriangle, X, ChevronRight, Loader2 } from 'lucide-react';
 // Unified Button Component
-interface UnifiedButtonProps extends HTMLMotionProps<"button"> {
+interface UnifiedButtonProps extends HTMLMotionProps<"button">  {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   loading?: boolean
   icon?: React.ReactNode
   iconPosition?: 'left' | 'right'
   fullWidth?: boolean
-}
+};
 
 export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonProps>(
   ({ 
@@ -51,7 +42,7 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
       xl: 'px-8 py-4 text-xl'}
     
     return (
-      <motion.button
+    <motion.button
         ref={ref}
         className={cn(
           'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200',
@@ -59,8 +50,7 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
           'disabled:opacity-50, disabled:cursor-not-allowed',
           variants[variant],
           sizes[size],
-          fullWidth && 'w-full',
-          className
+          fullWidth && 'w-full' className
         )}
         disabled={disabled || loading}
         whileHover={{ scale: disabled || loading ? 1 : 1.02 }}
@@ -68,7 +58,7 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
         {...props}
       >
         {loading && (</motion>
-          <Loader2 className={cn("h-4 w-4 animate-spin", children && "mr-2")} />
+          <Loader2 className={cn("h-4 w-4 animate-spin" children && "mr-2")} />
         )}
         {!loading && icon && iconPosition === 'left' && (</Loader2>
           <span className={cn(children && "mr-2")}>{icon}</span>
@@ -85,11 +75,11 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
 UnifiedButton.displayName = 'UnifiedButton'
 
 // Unified Card Component
-interface UnifiedCardProps extends HTMLMotionProps<"div"> {
+interface UnifiedCardProps extends HTMLMotionProps<"div">  {
   variant?: 'default' | 'elevated' | 'outline' | 'gradient'
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   interactive?: boolean
-}
+};
 
 export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(
   ({ 
@@ -114,14 +104,13 @@ export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(
       xl: 'p-10'}
     
     return (
-      <motion.div
+    <motion.div
         ref={ref}
         className={cn(
           'rounded-xl transition-all duration-200',
           variants[variant],
           paddings[padding],
-          interactive && 'cursor-pointer, hover:shadow-xl, hover:-translate-y-1',
-          className
+          interactive && 'cursor-pointer, hover:shadow-xl, hover:-translate-y-1' className
         )}
         whileHover={interactive ? { y: -4 } : {}}
         {...props}
@@ -143,7 +132,7 @@ interface UnifiedAlertProps {
   onDismiss?: () => void
   icon?: React.ReactNode
   className?: string
-}
+};
 
 export function UnifiedAlert({ 
   type = 'info', 
@@ -185,25 +174,25 @@ export function UnifiedAlert({
       exit={{ opacity: 0, y: -10 }}
       className={cn(
         'flex items-start p-4 rounded-lg border',
-        config.bg,
-        className
+        config.bg className
       )}
     ></motion>
       <div className="flex-shrink-0">
-        {icon || config.icon}</div>
+        {icon || config.icon}
+
       <div className="ml-3 flex-1">
         {title && (</div>
-          <h3 className={cn('text-sm font-medium mb-1', config.title)}>
+          <h3 className={cn('text-sm font-medium mb-1' config.title)}>
             {title}</h3>
         )}
-        <p className={cn('text-sm', config.description)}>
+        <p className={cn('text-sm' config.description)}>
           {description}</p>
       {dismissible && (
         <button
           onClick={onDismiss}
           className="ml-3 flex-shrink-0 rounded-md p-1.5 hover:bg-black/5 transition-colors"
         ></button>
-          <X className="h-4 w-4" /></X>
+          <X className="h-4 w-4" />
       )}
     </motion.div>
   )
@@ -218,7 +207,7 @@ interface UnifiedProgressProps {
   showValue?: boolean
   animated?: boolean
   className?: string
-}
+};
 
 export function UnifiedProgress({ 
   value, 
@@ -244,20 +233,19 @@ export function UnifiedProgress({
     error: 'bg-error-600'}
   
   return (
-    <div className={cn('w-full', className)}>
+    <div className={cn('w-full' className)}>
       {showValue && (</div>
         <div className="flex justify-between mb-1"></div>
           <span className="text-sm font-medium">Progress</span>
           <span className="text-sm text-neutral-600">{percentage.toFixed(0)}%</span>)}
-      <div className={cn('bg-neutral-200 rounded-full overflow-hidden', sizes[size])}></div>
+      <div className={cn('bg-neutral-200 rounded-full overflow-hidden' sizes[size])}></div>
         <motion.div
-          className={cn('h-full rounded-full', variants[variant])}
+          className={cn('h-full rounded-full' variants[variant])}
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: animated ? 0.5 : 0, ease: "easeOut" }}
         /></motion>
-    );
-}
+  }
 
 // Unified Badge Component
 interface UnifiedBadgeProps {
@@ -267,7 +255,7 @@ interface UnifiedBadgeProps {
   dot?: boolean;
   children: React.ReactNode
   className?: string
-}
+};
 
 export function UnifiedBadge({ 
   variant = 'default', 
@@ -296,16 +284,14 @@ export function UnifiedBadge({
     <span className={cn(
       'inline-flex items-center gap-1 font-medium rounded-full',
       variants[variant],
-      sizes[size],
-      className
+      sizes[size] className
     )}>
       {dot && (</span>
         <span className="w-1.5 h-1.5 bg-current rounded-full" />
       )}
       {icon}
       {children}</span>
-    );
-}
+  }
 
 // Unified Step Indicator Component
 interface Step {
@@ -313,7 +299,7 @@ interface Step {
   title: string
   description?: string
   icon?: React.ReactNode
-}
+};
 
 interface UnifiedStepsProps {
   steps: Step[];
@@ -321,7 +307,7 @@ interface UnifiedStepsProps {
   variant?: 'linear' | 'circular'
   size?: 'sm' | 'md' | 'lg'
   className?: string
-}
+};
 
 export function UnifiedSteps({ 
   steps, 
@@ -331,7 +317,7 @@ export function UnifiedSteps({
   className 
 }: UnifiedStepsProps) {
   return (
-    <div className={cn('w-full', className)}>
+    <div className={cn('w-full' className)}>
       {variant === 'linear' ? (</div>
         <div className="flex items-center justify-between">
           {steps.map((step, index) => {
@@ -339,12 +325,11 @@ export function UnifiedSteps({
             const isCompleted = index < currentStep
             
             return (
-              <React.Fragment key={step.id}></React>
+    <React.Fragment key={step.id}></React>
                 <div className="flex flex-col items-center flex-1"></div>
                   <motion.div
                     className={cn(
-                      'w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors',
-                      isCompleted ? 'bg-primary-600 text-white' : 
+                      'w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors' isCompleted ? 'bg-primary-600 text-white' : 
                       isActive ? 'bg-primary-600 text-white ring-4 ring-primary-100' : 
                       'bg-neutral-200 text-neutral-600'
                     )}
@@ -362,15 +347,13 @@ export function UnifiedSteps({
                   </motion.div>
                   <div className="text-center mt-2"></div>
                     <p className={cn(
-                      'text-sm font-medium',
-                      isActive ? 'text-primary-700' : 'text-neutral-600'
+                      'text-sm font-medium' isActive ? 'text-primary-700' : 'text-neutral-600'
                     )}>
                       {step.title}</p>
                     {step.description && (
                       <p className="text-xs text-neutral-500 mt-1">
                         {step.description}</p>
-  );
-}
+  }
                 {index < steps.length - 1 && (
                   <div className="flex-1 max-w-[100px]"></div>
                     <div className="h-1 bg-neutral-200 rounded-full overflow-hidden"></div>
@@ -379,22 +362,22 @@ export function UnifiedSteps({
                         initial={{ width: 0 }}
                         animate={{ width: isCompleted ? '100%' : '0%' }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                      /></motion>)}
+                      />)}
               </React.Fragment>
             )
           }
-      )}
-    </div>
+      );}
+
     );
       ) : (
         // Circular variant implementation
         <div className="relative">
-          {/* Circular steps implementation */}</div>
+          {/* Circular steps implementation */}
+
       )}
-    </div>
+
       );
 }
-
 // Export all components
 export default {
   UnifiedButton,

@@ -4,11 +4,11 @@ interface TaskQueueVisualizerProps {
   queue?: Array<{
     id: string;
   name: string
-    priority: string
+   ; priority: string
    ;
   status: string
   }>
-}
+};
 
 export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
   return (
@@ -32,13 +32,8 @@ export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
                 {task.status}
               </span>))
         )}
-      </div>
+
     );
+  };
+</div></div>
 }
-  );
-</div>
-</div>
-</div>
-</div>
-}
-</div>

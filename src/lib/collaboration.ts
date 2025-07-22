@@ -9,7 +9,7 @@ interface DatabaseRecord {
   created_at: string
   updated_at?: string
   [key: string]: any
-}
+};
 
 interface DatabaseUser {
   id: string;
@@ -18,7 +18,7 @@ interface DatabaseUser {
   avatar?: string;
   created_at: string
   updated_at?: string
-}
+};
 
 interface DatabaseRoom {
   id: string;
@@ -29,7 +29,7 @@ interface DatabaseRoom {
   settings: string;
   created_at: string;
   updated_at: string
-}
+};
 
 interface DatabaseProjectChange {
   id: string;
@@ -40,7 +40,7 @@ interface DatabaseProjectChange {
   content: string
   previous_content?: string;
   timestamp: string
-}
+};
 
 interface DatabaseComment {
   id: string;
@@ -51,7 +51,7 @@ interface DatabaseComment {
   resolved: boolean;
   created_at: string;
   updated_at: string
-}
+};
 
 interface ProjectData {
   id: string;
@@ -70,7 +70,7 @@ export interface CollaborationRoom {
   settings: RoomSettings;
   createdAt: Date;
   updatedAt: Date
-}
+};
 
 export interface CollaborationUser {
   id: string;
@@ -81,7 +81,7 @@ export interface CollaborationUser {
   cursor?: CursorPosition;
   isOnline: boolean;
   lastSeen: Date
-}
+};
 
 export interface CursorPosition {
   x: number;
@@ -91,18 +91,18 @@ export interface CursorPosition {
     start: number;
   end: number
   }
-}
+};
 
 export interface RoomSettings {
   allowGuests: boolean;
   maxParticipants: number;
-  permissions: {
+    permissions: {
     canEdit: boolean;
   canComment: boolean;
   canInvite: boolean;
   canExport: boolean
   }
-}
+};
 
 export interface CollaborationEvent {
   type: 'cursor' | 'edit' | 'comment' | 'join' | 'leave' | 'sync'
@@ -110,7 +110,7 @@ export interface CollaborationEvent {
   roomId: string;
   data: Record<string, unknown>
   timestamp: Date
-}
+};
 
 export interface ProjectChange {
   id: string;
@@ -121,7 +121,7 @@ export interface ProjectChange {
   content: Record<string, unknown>
   previousContent?: Record<string, unknown>
   timestamp: Date
-}
+};
 
 export interface Comment {
   id: string;
@@ -165,8 +165,6 @@ export class CollaborationService {
     if (!this.io) return
 
     this.io.on('connection', (socket) => {
-      console.log('User connected:', socket.id)
-
       // Handle user authentication
       socket.on('authenticate', async (data: { userId: string, token: string }) => {
         try {
@@ -312,8 +310,6 @@ export class CollaborationService {
 
       // Handle disconnect
       socket.on('disconnect', async () => {
-        console.log('User disconnected:', socket.id)
-        
         const userId = socket.data.userId
         const roomId = socket.data.roomId
 
@@ -369,9 +365,10 @@ export class CollaborationService {
       name: `Project ${projectId} Collaboration`,
       ownerId: userId,
       participants: [],
-      settings: {
+    settings: {
         allowGuests: false,
-        maxParticipants: 10; permissions: {
+        maxParticipants: 10,
+    permissions: {
           canEdit: true,
           canComment: true,
           canInvite: true,
@@ -715,7 +712,9 @@ export class CollaborationService {
             userId: dbComment.user_id,
             content: dbComment.content,
             position: JSON.parse(dbComment.position),
-            replies: [], // TODO: Implement nested comments, resolved: dbComment.resolved,
+            replies: [],
+  // TODO: Implement nested comments
+ , resolved: dbComment.resolved,
             createdAt: new Date(dbComment.created_at),
             updatedAt: new Date(dbComment.updated_at || dbComment.created_at)
           }

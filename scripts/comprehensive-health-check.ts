@@ -10,14 +10,14 @@ import { join } from 'path'
 import { pathToFileURL } from 'url'
 
 interface HealthCheckResult {
-  category: string, item: string, status: 'pass' | 'fail' | 'warning'
-  message: string, severity: 'critical' | 'high' | 'medium' | 'low'
+  category: string; item: string; status: 'pass' | 'fail' | 'warning'
+  message: string; severity: 'critical' | 'high' | 'medium' | 'low'
 }
 
 interface HealthReport {
-  timestamp: Date, results: HealthCheckResult[]
+  timestamp: Date; results: HealthCheckResult[]
   summary: {
-    total: number, passed: number, failed: number, warnings: number, criticalIssues: number
+    total: number; passed: number; failed: number; warnings: number; criticalIssues: number
   }
 }
 
@@ -26,8 +26,7 @@ class ComprehensiveHealthCheck {
   private baseUrl = 'http://localhost:3000'
   
   async run(): Promise<HealthReport> {
-    console.log('🏥 Starting Comprehensive Health Check...\n')
-    
+
     // 1. Check project structure
     await this.checkProjectStructure()
     
@@ -60,8 +59,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkProjectStructure() {
-    console.log('📁 Checking Project Structure...')
-    
+
     const requiredDirs = [
       'src/app',
       'src/components',
@@ -87,8 +85,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkConfiguration() {
-    console.log('⚙️ Checking Configuration Files...')
-    
+
     const configs = [
       { file: 'package.json', severity: 'critical' as const },
       { file: 'tsconfig.json', severity: 'critical' as const },
@@ -110,8 +107,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkAPIEndpoints() {
-    console.log('🔌 Checking API Endpoints...')
-    
+
     const endpoints = [
       '/api/health',
       '/api/auth/session',
@@ -148,7 +144,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkPages() {
-    console.log('📄 Checking Pages (No 404s)...')
+    ...')
     
     const pages = [
       '/',
@@ -192,8 +188,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkDatabaseConnections() {
-    console.log('🗄️ Checking Database Connections...')
-    
+
     // Check for database configuration
     const hasSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
     const hasSupabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
@@ -208,8 +203,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkAuthentication() {
-    console.log('🔐 Checking Authentication...')
-    
+
     // Check NextAuth configuration
     const hasAuthSecret = process.env.NEXTAUTH_SECRET
     const hasAuthUrl = process.env.NEXTAUTH_URL
@@ -224,8 +218,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkAgentSystem() {
-    console.log('🤖 Checking Agent System...')
-    
+
     const agentFiles = [
       'src/lib/agents/AgentOrchestrator.ts',
       'src/lib/agents/AgentLoader.ts',
@@ -247,8 +240,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkAdminDashboard() {
-    console.log('👨‍💼 Checking Admin Dashboard...')
-    
+
     const adminComponents = [
       'src/components/admin/AdminDashboard.tsx',
       'src/components/admin/AdminPanel.tsx',
@@ -270,8 +262,7 @@ class ComprehensiveHealthCheck {
   }
   
   private async checkMissingComponents() {
-    console.log('🔍 Checking for Missing Components...')
-    
+
     const criticalComponents = [
       'src/components/Dashboard.tsx',
       'src/components/AIChat.tsx',
@@ -298,7 +289,7 @@ class ComprehensiveHealthCheck {
     this.results.push(result)
     
     const icon = result.status === 'pass' ? '✅' : result.status === 'warning' ? '⚠️' : '❌'
-    console.log(`${icon} ${result.item}: ${result.message}`)
+
   }
   
   private generateReport(): HealthReport {
@@ -322,29 +313,21 @@ class ComprehensiveHealthCheck {
 async function main() {
   const healthCheck = new ComprehensiveHealthCheck()
   const report = await healthCheck.run()
-  
-  console.log('\n📊 Health Check Summary')
-  console.log('======================')
-  console.log(`Total: Checks, ${report.summary.total}`)
-  console.log(`✅ Passed: ${report.summary.passed}`)
-  console.log(`❌ Failed: ${report.summary.failed}`)
-  console.log(`⚠️ Warnings: ${report.summary.warnings}`)
-  console.log(`🚨 Critical: Issues, ${report.summary.criticalIssues}`)
-  
+
   // Show critical issues
   if (report.summary.criticalIssues > 0) {
-    console.log('\n🚨 Critical: Issues,')
+
     report.results
       .filter(r => r.status === 'fail' && r.severity === 'critical')
-      .forEach(r => console.log(`- ${r.category}: ${r.item} - ${r.message}`))
+      .forEach(r => )
   }
   
   // Show all failures
   if (report.summary.failed > 0) {
-    console.log('\n❌ All, Failed: Checks,')
+
     report.results
       .filter(r => r.status === 'fail')
-      .forEach(r => console.log(`- ${r.category}: ${r.item} - ${r.message}`))
+      .forEach(r => )
   }
   
   // Save report
@@ -352,9 +335,7 @@ async function main() {
   await import('fs').then(fs => 
     fs.promises.writeFile(reportPath, JSON.stringify(report, null, 2))
   )
-  
-  console.log(`\n📄 Full report saved, to: ${reportPath}`)
-  
+
   return report
 }
 

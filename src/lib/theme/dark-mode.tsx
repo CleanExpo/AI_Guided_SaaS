@@ -8,7 +8,7 @@ interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   resolvedTheme: 'light' | 'dark';
-  toggleTheme: () => void;
+  toggleTheme: () => void
 }
 
     </ThemeContextType>
@@ -18,7 +18,7 @@ interface ThemeProviderProps {
   children: React.ReactNode;
   defaultTheme?: Theme;
   storageKey?: string;
-}
+};
 
 export function ThemeProvider({
   children,
@@ -33,7 +33,7 @@ export function ThemeProvider({
     const savedTheme = localStorage.getItem(storageKey) as Theme;
     if (savedTheme) {
       setTheme(savedTheme);
-    }
+}
   }, [storageKey]);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export function ThemeProvider({
         const root = window.document.documentElement;
         root.classList.remove('light', 'dark');
         root.classList.add(newResolvedTheme);
-      }
+}
     };
 
     mediaQuery.addEventListener('change', handleChange);
@@ -87,7 +87,7 @@ export function ThemeProvider({
       setTheme('system');
     } else {
       setTheme('light');
-    }
+}
   };
 
   const value: ThemeContextType = {
@@ -101,13 +101,13 @@ export function ThemeProvider({
       {children}</ThemeContext>
     </ThemeContext.Provider>
   );
-}
+};
 
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
-  }
+}
   return context;
 }
 
@@ -118,7 +118,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark: hover bg-gray-700"
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2, dark:border-gray-700, dark:bg-gray-800, dark:text-gray-100 dark: hover bg-gray-700"
       aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}
     >
       {/* Sun icon for light mode */}</button>
@@ -156,10 +156,10 @@ export function ThemeToggle() {
       {/* System indicator */}
       {theme === 'system' && (
         <div className="absolute -bottom-1 -right-1 h-2 w-2 rounded-full bg-blue-500" />
-      )}</div>
+      )}
+
     );
 }
-
 // Advanced theme toggle with dropdown
 export function ThemeSelector() {
   const { theme, setTheme } = useTheme();
@@ -174,7 +174,7 @@ export function ThemeSelector() {
     <div className="relative"></div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2, dark:border-gray-700, dark:bg-gray-800, dark:text-gray-100 dark:hover:bg-gray-700"
       ></button>
         <span>{themes.find(t => t.value === theme)?.icon}</span>
         <span>{themes.find(t => t.value === theme)?.label}</span>
@@ -197,7 +197,7 @@ export function ThemeSelector() {
              }}
               className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors, hover:bg-gray-100, dark:hover:bg-gray-700 ${
                 theme === themeOption.value
-                  ? 'bg-blue-50 text-blue-900, dark:bg-blue-900, dark:text-blue-100'
+                  ? 'bg-blue-50 text-blue-900, dark:bg-blue-900 dark:text-blue-100'
                   : 'text-gray-900  dark:text-gray-100'
               }`}
             ></button>
@@ -209,16 +209,15 @@ export function ThemeSelector() {
                     fillRule="evenodd"
                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                     clipRule="evenodd"
-                  /></path>
+                  />
               )}
             </button>
           ))}
-        </div>
+
       )}
-    </div>
+
     );
 }
-
 // Hook to detect if user prefers dark mode
 export function usePrefersDarkMode() {
   const [prefersDark, setPrefersDark] = useState(false);
@@ -268,7 +267,7 @@ export const themeColors = {
     border: '#e2e8f0',
     input: '#e2e8f0',
     ring: '#3b82f6'},
-  dark: {
+    dark: {
     background: '#0f172a',
     foreground: '#f8fafc',
     card: '#1e293b',
@@ -289,7 +288,7 @@ export const themeColors = {
     input: '#334155',
     ring: '#3b82f6'}};
 
-export type { Theme, ThemeContextType };
-
+export type { Theme, ThemeContextType }
 }
 </Theme>
+}

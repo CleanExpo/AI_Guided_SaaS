@@ -11,8 +11,8 @@ interface SystemMetrics {
   operationCount: number;
   sessionDuration: number;
   lastOperation: string;
-  isHealthy: boolean;
-}
+  isHealthy: boolean,
+};
 
 interface PerformanceThresholds {
   cpuWarning: number;
@@ -20,8 +20,8 @@ interface PerformanceThresholds {
   memoryWarning: number;
   memoryCritical: number;
   maxOperationsPerMinute: number;
-  maxSessionDuration: number;
-}
+  maxSessionDuration: number,
+};
 
 export default function SystemResourceMonitor() {
   const [metrics, setMetrics] = useState<SystemMetrics>({
@@ -48,9 +48,9 @@ export default function SystemResourceMonitor() {
   const [operationHistory, setOperationHistory] = useState<
     Array<{
       timestamp: number,
-      operation: string;
+      operation: string,
       duration: number;
-    }>
+    }}>
   >([]);
 
       </number>
@@ -105,8 +105,7 @@ export default function SystemResourceMonitor() {
       newAlerts.push(
         `🟡 WARNING: CPU usage at ${currentMetrics.cpuUsage}% - Consider pausing operations`
       );
-    }
-
+}
     // Memory Alerts
     if (currentMetrics.memoryUsage >= thresholds.memoryCritical) {
       newAlerts.push(
@@ -116,15 +115,13 @@ export default function SystemResourceMonitor() {
       newAlerts.push(
         `🟡 WARNING: Memory usage at ${currentMetrics.memoryUsage}% - Consider cleanup`
       );
-    }
-
+}
     // Session Duration Alert
     if (currentMetrics.sessionDuration >= thresholds.maxSessionDuration) {
       newAlerts.push(
         `🟠 SESSION, LIMIT: ${Math.floor(currentMetrics.sessionDuration / 60)} minutes - Take a break`
       );
-    }
-
+}
     // Operation Rate Alert
     const recentOps = operationHistory.filter(
       op => Date.now() - op.timestamp < 60000
@@ -134,8 +131,7 @@ export default function SystemResourceMonitor() {
       newAlerts.push(
         `🟠 HIGH, ACTIVITY: ${recentOps} operations in last minute - Slow down`
       );
-    }
-
+}
     setAlerts(newAlerts);
   };
 
@@ -166,8 +162,8 @@ export default function SystemResourceMonitor() {
       {
         timestamp,
         operation,
-        duration: Math.random() * 2000 + 500, // Simulated duration
-      }]);
+        duration: Math.random() * 2000 + 500; // Simulated duration
+      }}]);
   };
 
   const emergencyStop = () => {
@@ -201,13 +197,14 @@ export default function SystemResourceMonitor() {
     return () => {
       if (monitoringInterval.current) {
         clearInterval(monitoringInterval.current);
-      }
-    };
-  }, []);
+}
+    }
+}, []);
 
   return (
     <div className="space-y-6">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
@@ -232,7 +229,6 @@ export default function SystemResourceMonitor() {
                 🚨 Emergency Stop</Button>
             </>
           )}
-        </div>
 
       {/* Alerts */}
       {alerts.length > 0 && (
@@ -248,20 +244,19 @@ export default function SystemResourceMonitor() {
                     : 'border-orange-500 bg-orange-50'
               }
             >
-              <div className="font-medium">{alert}</div>
-            </Alert>
-          ))}
-        </div>
+              <div className="font-medium">{alert}</div>))}
+
       )}
 
       {/* Metrics Dashboard */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* CPU Usage */}</div>
+        {/* CPU Usage */}
+
         <Card className="p-4">
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">CPU Usage</h3>
             <div
-              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.cpuUsage, thresholds.cpuWarning  thresholds.cpuCritical)}`}
+              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.cpuUsage thresholds.cpuWarning  thresholds.cpuCritical)}`}
             >
               {metrics.cpuUsage}%</div>
           <div className="w-full bg-gray-200 rounded-full h-2">
@@ -281,7 +276,7 @@ export default function SystemResourceMonitor() {
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">Memory Usage</h3>
             <div
-              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.memoryUsage, thresholds.memoryWarning  thresholds.memoryCritical)}`}
+              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.memoryUsage thresholds.memoryWarning  thresholds.memoryCritical)}`}
             >
               {metrics.memoryUsage}%</div>
           <div className="w-full bg-gray-200 rounded-full h-2">
@@ -301,9 +296,10 @@ export default function SystemResourceMonitor() {
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">Operations</h3>
             <div className="px-2 py-1 rounded text-sm font-bold bg-blue-100 text-blue-600">
-              {metrics.operationCount}</div>
+              {metrics.operationCount}
+
           <div className="text-xs text-gray-500">
-            Last: {metrics.lastOperation}</div>
+            Last: {metrics.lastOperation}
 
         {/* Session Duration */}
         <Card className="p-4">
@@ -319,9 +315,10 @@ export default function SystemResourceMonitor() {
                     : 'bg-green-100 text-green-600'
               }`}
             >
-              {formatDuration(metrics.sessionDuration)}</div>
+              {formatDuration(metrics.sessionDuration)}
+
           <div className="text-xs text-gray-500">
-            Limit: {formatDuration(thresholds.maxSessionDuration)}</div>
+            Limit: {formatDuration(thresholds.maxSessionDuration)}
 
       {/* Test Operations */}
       {isMonitoring && (
@@ -377,17 +374,16 @@ export default function SystemResourceMonitor() {
             className={`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`}
           />
           <span className="font-medium">
-            System, Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}</span>
+            System,
+    Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}</span>
           {!metrics.isHealthy && (
             <span className="text-red-600 font-medium">
               - REDUCE OPERATIONS IMMEDIATELY</span>
           )}
-        </div>
+
     );
 </Card>
-</div>
-</div>
-</Card>
+</div></Card>
 </div>
 </Card>
 </Card>
@@ -398,15 +394,6 @@ export default function SystemResourceMonitor() {
 </div>
 }
 
-    </Card>
-    </div>
-    </Card>
-    </div>
-    </Card>
-    </div>
-    </Card>
-    </Card>
-    </div>
+    
   );
 }
-</number>

@@ -1,25 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
-import { Button } from '@/components/ui/button'
-import { 
-  Home, 
-  Settings, 
-  Users, 
-  BarChart3, 
-  Wrench, 
-  FileText, 
-  Zap,
-  LogOut,
-  User,
-  Moon,
-  Sun
-} from 'lucide-react'
-import { useTheme } from 'next-themes'
-import { cn } from '@/lib/utils'
-
+import { usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
+import { Home, Settings, Users, BarChart3, Wrench, FileText, Zap, LogOut, User, Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { cn } from '@/lib/utils';
 const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
   { name: 'UI Builder', href: '/ui-builder', icon: Wrench },
@@ -37,7 +24,8 @@ export function Navigation() {
     <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"></nav>
       <div className="container mx-auto px-4"></div>
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}</div>
+          {/* Logo */}
+
           <Link href="/" className="flex items-center space-x-2"></Link>
             <Zap className="h-6 w-6 text-primary" /></Zap>
             <span className="font-bold text-xl">AI SaaS Platform</span>
@@ -50,28 +38,27 @@ export function Navigation() {
                 (item.href !== '/' && pathname.startsWith(item.href))
               
               return (
-                <Link
+    <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
                     'flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground, hover:text-foreground, hover:bg-accent'
+                      : 'text-muted-foreground, hover:text-foreground hover:bg-accent'
                   )}
                 ></Link>
                   <item.icon className="h-4 w-4" /></item>
                   <span>{item.name}</span>
-                </Link>
-    );
-            }
-      )}
-    </div>
+  }
+      );}
+
     );
 
           {/* Right side actions */}
           <div className="flex items-center space-x-2">
-            {/* Theme toggle */}</div>
+            {/* Theme toggle */}
+
             <Button
               variant="ghost"
               size="sm"
@@ -94,12 +81,11 @@ export function Navigation() {
                   size="sm"
                   onClick={() => signOut()}
                 ></Button>
-                  <LogOut className="h-4 w-4" /></LogOut>
-                </Button>) : (
+                  <LogOut className="h-4 w-4" /></LogOut>) : (
               <Link href="/auth/signin"></Link>
                 <Button variant="default" size="sm">
                   Sign In</Button>
             )}
-          </div>
+
       );
 }

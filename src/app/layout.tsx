@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next';
+import type {  Metadata, Viewport  } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     'Complete AI-powered SaaS development platform with intelligent guidance and automation',
   keywords: ['AI', 'SaaS', 'Development', 'Automation', 'Platform'],
-  icons: {
+    icons: {
     icon: [
       {
         url: '/favicon.ico',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'AI Guided SaaS Team' }],
   creator: 'AI Guided SaaS Platform',
   publisher: 'AI Guided SaaS Platform',
-  openGraph: {
+    openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://aiguidedSaaS.com',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'AI Guided SaaS Platform'}]},
-  twitter: {
+    twitter: {
     card: 'summary_large_image',
     site: '@aiguidedSaaS',
     creator: '@aiguidedSaaS',
@@ -66,10 +66,7 @@ export const viewport: Viewport = {
   themeColor: '#1e40af',
   colorScheme: 'light dark'};
 
-export default function RootLayout({
-  children}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout() {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -78,16 +75,9 @@ export default function RootLayout({
             <ConditionalLayout>
               {children}</ConditionalLayout>
           <Toaster />
-        </Providers>
-    );
-}
+        
+  }
 
-    </Providers>
-    </body>
-    </html>
+    
   );
-</div>
-</Providers>
-</body>
-</html>
 }

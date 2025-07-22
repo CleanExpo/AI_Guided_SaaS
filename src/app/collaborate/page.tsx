@@ -3,25 +3,12 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import CollaborationWorkspace from '@/components/collaboration/CollaborationWorkspace';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import {
-  Users,
-  Plus,
-  Share2,
-  MessageCircle,
-  Clock,
-  Globe,
-  Lock,
-  Zap} from 'lucide-react';
+import { Users, Plus, Share2, MessageCircle, Clock, Globe, Lock, Zap } from 'lucide-react';
 
 export default function CollaboratePage() {
   const { data: session, status } = useSession();
@@ -32,15 +19,13 @@ export default function CollaboratePage() {
 
   if (status === 'loading') {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-    );
   }
 
   if (!session) {
     redirect('/auth/signin');
-  }
-
+}
   const handleCreateProject = () => {
     if (!projectName.trim()) return;
 
@@ -56,19 +41,19 @@ export default function CollaboratePage() {
 
   if (showWorkspace && activeProject) {
     return (
-      <div className="h-screen">
+    <div className="h-screen">
         <CollaborationWorkspace
           projectId={activeProject}
           onRoomCreated={roomId => {
-            console.log('Room created:', roomId);
+
          }}
         /></CollaborationWorkspace>
-    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -87,7 +72,8 @@ export default function CollaboratePage() {
                 Welcome, {session.user?.name}</span>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Hero Section */}</div>
+        {/* Hero Section */}
+
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Collaborate in Real-time</h2>
@@ -131,7 +117,8 @@ export default function CollaboratePage() {
 
         {/* Action Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Create New Project */}</div>
+          {/* Create New Project */}
+
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -240,14 +227,7 @@ export default function CollaboratePage() {
               <h4 className="font-semibold mb-2">Version Control</h4>
               <p className="text-sm text-gray-600">
                 Complete change history tracking</p>
-    );
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</Alert>
+</div></Alert>
 </div>
 </CardContent>
 </CardHeader>
@@ -268,42 +248,9 @@ export default function CollaboratePage() {
 </div>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+</div></div>
 }
 
-    </Alert>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </CardContent>
-    </div>
-    </CardHeader>
-    </Card>
-    </CardContent>
-    </div>
-    </CardHeader>
-    </Card>
-    </CardContent>
-    </div>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+    
   );
 }
-</string>

@@ -15,7 +15,7 @@ export interface AgentMessage {
   expires_at?: Date
   retry_count?: number
   metadata?: Record<string, any>
-}
+};
 
 export interface CommunicationChannel {
   id: string;
@@ -26,7 +26,7 @@ export interface CommunicationChannel {
   created_at: Date;
   message_count: number;
   last_activity: Date
-}
+};
 
 export interface MessageQueue {
   agent_id: string;
@@ -34,7 +34,7 @@ export interface MessageQueue {
   processing: boolean;
   max_size: number;
   last_processed: Date
-}
+};
 
 export interface HandoffProtocol {
   from_agent: string;
@@ -44,7 +44,7 @@ export interface HandoffProtocol {
   validation_rules: string[];
   success_criteria: string[]
   rollback_procedure?: string
-}
+};
 
 export interface CommunicationStats {
   total_messages: number;
@@ -55,11 +55,11 @@ export interface CommunicationStats {
   error_rate: number;
   active_channels: number;
   queued_messages: number
-}
+};
 
 export class AgentCommunication extends EventEmitter {
   private static instance: AgentCommunication
-  private registry: AgentRegistry
+  private, registry: AgentRegistry
   private, messageQueues: Map<string, MessageQueue> = new Map()
   private channels: Map<string, CommunicationChannel> = new Map()
   private handoffProtocols: Map<string, HandoffProtocol> = new Map()
@@ -115,8 +115,6 @@ export class AgentCommunication extends EventEmitter {
     // Emit event for listeners
     this.emit('message_sent', fullMessage)
 
-    console.log(`📤 Message, sent: ${fullMessage.type} from ${fullMessage.from_agent} to ${fullMessage.to_agent}`)
-    
     return messageId
   }
 
@@ -170,7 +168,7 @@ export class AgentCommunication extends EventEmitter {
       from_agent: originalRequest.to_agent,
       to_agent: originalRequest.from_agent: type, 'response',
       priority: originalRequest.priority,
-      payload: {
+    payload: {
         success,
         data: responseData,
         original_request_id: originalRequest.id
@@ -186,7 +184,7 @@ export class AgentCommunication extends EventEmitter {
     fromAgent: string,
     toAgent: string, handoffType: HandoffProtocol['handoff_type'],
     data): Promise<boolean> {
-    console.log(`🔄 Initiating, handoff: ${fromAgent} → ${toAgent} (${handoffType})`)
+    `)
 
     const protocolKey = `${fromAgent}_to_${toAgent}_${handoffType}`
     const protocol = this.handoffProtocols.get(protocolKey)
@@ -209,13 +207,13 @@ export class AgentCommunication extends EventEmitter {
         from_agent: fromAgent,
         to_agent: toAgent, type: 'handoff',
         priority: 'high',
-        payload: {
+    payload: {
           handoff_type: handoffType,
           data,
           protocol: protocolKey,
           validation_passed: true
         },
-        metadata: {
+    metadata: {
           protocol_version: '1.0',
           validation_timestamp: new Date().toISOString()
         }
@@ -226,8 +224,7 @@ export class AgentCommunication extends EventEmitter {
       const acknowledged = await this.waitForHandoffAcknowledgment(messageId, ackTimeout)
 
       if (acknowledged) {
-        console.log(`✅ Handoff, completed: ${fromAgent} → ${toAgent}`)
-        
+
         // Store in memory system
         await this.storeHandoffInMemory(fromAgent, toAgent, handoffType, data)
         
@@ -266,7 +263,7 @@ export class AgentCommunication extends EventEmitter {
 
     this.channels.set(channelId, channel)
     
-    console.log(`📺 Channel, created: ${name} (${participants.length} participants)`)
+    `)
     
     return channelId
   }
@@ -294,7 +291,7 @@ export class AgentCommunication extends EventEmitter {
           to_agent: participant, type: 'notification',
           priority,
           payload: message,
-          metadata: { channel_id: channelId, channel_name: channel.name }
+    metadata: { channel_id: channelId, channel_name: channel.name }
         })
         messageIds.push(messageId)
       }
@@ -304,8 +301,6 @@ export class AgentCommunication extends EventEmitter {
     channel.message_count += messageIds.length
     channel.last_activity = new Date()
 
-    console.log(`📡 Broadcast sent to channel ${channel.name}: ${messageIds.length} messages`)
-    
     return messageIds
   }
 
@@ -352,8 +347,9 @@ export class AgentCommunication extends EventEmitter {
    */
   getCommunicationStats(): CommunicationStats {
     const stats: CommunicationStats = {
-      total_messages: this.messageHistory.length, messages_by_type: {},
-      messages_by_priority: {},
+      total_messages: this.messageHistory.length,
+    messages_by_type: {},
+    messages_by_priority: {},
       average_response_time: 0,
       success_rate: 0,
       error_rate: 0,
@@ -474,7 +470,6 @@ export class AgentCommunication extends EventEmitter {
       this.processMessageQueues()
     }, 5000)
 
-    console.log('📬 Message processing started')
   }
 
   private async processMessageQueues(): Promise<void> {
@@ -503,7 +498,7 @@ export class AgentCommunication extends EventEmitter {
   private async processMessage(agentId: string, message: AgentMessage): Promise<void> {
     // Check if message expired
     if (message.expires_at && message.expires_at <= new Date()) {
-      console.log(`⏰ Message, expired: ${message.id}`)
+
       return
     }
 
@@ -522,15 +517,14 @@ export class AgentCommunication extends EventEmitter {
         await this.processHeartbeat(agentId, message)
         break, default:
         // General notification processing
-        console.log(`📨 Message delivered to ${agentId}: ${message.type}`)
+
     }
 
     this.emit('message_received', message)
   }
 
   private async processRequest(agentId: string, message: AgentMessage): Promise<void> {
-    console.log(`📥 Request received by ${agentId} from ${message.from_agent}`)
-    
+
     // Here you would integrate with actual agent processing
     // For now, we'll simulate a response
     setTimeout(async () => {
@@ -543,19 +537,18 @@ export class AgentCommunication extends EventEmitter {
   }
 
   private async processResponse(agentId: string, message: AgentMessage): Promise<void> {
-    console.log(`📨 Response received by ${agentId} from ${message.from_agent}`)
+
     // Response processing is handled by the sendRequest promise resolution
   }
 
   private async processHandoff(agentId: string, message: AgentMessage): Promise<void> {
-    console.log(`🔄 Handoff received by ${agentId} from ${message.from_agent}`)
-    
+
     // Send acknowledgment
     await this.sendMessage({
       from_agent: agentId,
       to_agent: message.from_agent: type, 'response',
       priority: 'high',
-      payload: {
+    payload: {
         handoff_acknowledged: true,
         acknowledgment_timestamp: new Date().toISOString()
       },
@@ -577,7 +570,7 @@ export class AgentCommunication extends EventEmitter {
         from_agent: 'ARCHITECT',
         to_agent: 'FRONTEND',
         handoff_type: 'architecture',
-        data_schema: {
+    data_schema: {
           ui_specifications: 'object',
           component_architecture: 'object',
           state_management: 'object',
@@ -590,7 +583,7 @@ export class AgentCommunication extends EventEmitter {
         from_agent: 'ARCHITECT',
         to_agent: 'BACKEND',
         handoff_type: 'architecture',
-        data_schema: {
+    data_schema: {
           api_specifications: 'object',
           database_schema: 'object',
           authentication_strategy: 'object',
@@ -603,7 +596,7 @@ export class AgentCommunication extends EventEmitter {
         from_agent: 'FRONTEND',
         to_agent: 'QA',
         handoff_type: 'implementation',
-        data_schema: {
+    data_schema: {
           component_tests: 'array',
           ui_implementation: 'object',
           integration_points: 'array'
@@ -615,7 +608,7 @@ export class AgentCommunication extends EventEmitter {
         from_agent: 'BACKEND',
         to_agent: 'QA',
         handoff_type: 'implementation',
-        data_schema: {
+    data_schema: {
           api_endpoints: 'array',
           database_implementation: 'object',
           integration_tests: 'array'
@@ -627,7 +620,7 @@ export class AgentCommunication extends EventEmitter {
         from_agent: 'QA',
         to_agent: 'DEVOPS',
         handoff_type: 'validation',
-        data_schema: {
+    data_schema: {
           test_results: 'object',
           quality_metrics: 'object',
           deployment_readiness: 'boolean'
@@ -642,7 +635,6 @@ export class AgentCommunication extends EventEmitter {
       this.handoffProtocols.set(key, protocol)
     })
 
-    console.log(`🔧 Handoff protocols, configured: ${protocols.length}`)
   }
 
   private validateHandoffData(data, protocol: HandoffProtocol): { valid: boolean; error?: string } {
@@ -690,7 +682,7 @@ export class AgentCommunication extends EventEmitter {
         ]
       }])
     } catch (error) {
-      console.log('⚠️ Failed to store handoff in memory:', error)
+
     }
   }
 
@@ -741,14 +733,14 @@ export class AgentCommunication extends EventEmitter {
       this.processingInterval = null
     }
     this.removeAllListeners()
-    console.log('📬 Agent communication system shutdown')
+
   }
 }
 
 // Convenience functions
 export function initializeAgentCommunication(): AgentCommunication {
   return, AgentCommunication.getInstance()
-}
+};
 
 export async function sendAgentMessage(
   fromAgent: string,
@@ -762,7 +754,7 @@ export async function sendAgentMessage(
     type,
     payload: message
   })
-}
+};
 
 export async function performAgentHandoff(
   fromAgent: string,

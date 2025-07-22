@@ -52,12 +52,8 @@ export default function CodeViewer() {
             Export Project ZIP</button>
       <pre className="text-sm whitespace-pre-wrap">
         {code || '// Add components to generate code'}</pre>
-    );
-</div>
-</div>
-</section>
+</div></section>
 }
 
     </section>
-  );
-}
+  }

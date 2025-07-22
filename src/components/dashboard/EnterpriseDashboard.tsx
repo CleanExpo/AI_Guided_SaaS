@@ -1,39 +1,17 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import {
-  Users,
-  DollarSign,
-  TrendingUp,
-  Activity,
-  Server,
-  Database,
-  BarChart3,
-  Globe,
-  Zap,
-  Shield,
-  Package} from 'lucide-react';
-import {
-  AnalyticsService,
-  PlatformMetrics,
-  UserMetrics,
-  RevenueMetrics,
-  SystemMetrics,
-  ContentMetrics} from '@/lib/analytics';
+import { Users, DollarSign, TrendingUp, Activity, Server, Database, BarChart3, Globe, Zap, Shield, Package } from 'lucide-react';
+import { AnalyticsService, PlatformMetrics, UserMetrics, RevenueMetrics, SystemMetrics, ContentMetrics } from '@/lib/analytics';
 
 interface EnterpriseDashboardProps {
   userRole?: 'admin' | 'user';
-}
+};
 
 export default function EnterpriseDashboard({
   userRole = 'user'}: EnterpriseDashboardProps) {
@@ -49,15 +27,12 @@ export default function EnterpriseDashboard({
   const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(
     null
       </RevenueMetrics>
-  );
   const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(
     null
       </SystemMetrics>
-  );
   const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(
     null
       </ContentMetrics>
-  );
   const [testMode, setTestMode] = useState(false);
 
   useEffect(() => {
@@ -84,7 +59,7 @@ export default function EnterpriseDashboard({
       console.error('Error loading dashboard, data:', error);
     } finally {
       setLoading(false);
-    }
+}
   };
 
   const formatCurrency = (amount: number) => {
@@ -109,18 +84,16 @@ export default function EnterpriseDashboard({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading enterprise dashboard...</p>
-    
-        </div>
-    );
   }
 
   return (
     <div className="space-y-6">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex flex-col space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -146,7 +119,6 @@ export default function EnterpriseDashboard({
               production, this would display real-time analytics from your
               database and monitoring systems.</AlertDescription>
         )}
-      </div>
 
       {/* Platform Overview */}
       {platformMetrics && (
@@ -158,7 +130,8 @@ export default function EnterpriseDashboard({
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatNumber(platformMetrics.totalUsers)}</div>
+                {formatNumber(platformMetrics.totalUsers)}
+
               <p className="text-xs text-muted-foreground">
                 {formatNumber(platformMetrics.activeUsers)} active this month</p>
 
@@ -170,7 +143,8 @@ export default function EnterpriseDashboard({
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatCurrency(platformMetrics.totalRevenue)}</div>
+                {formatCurrency(platformMetrics.totalRevenue)}
+
               <p className="text-xs text-muted-foreground">
                 {formatCurrency(platformMetrics.monthlyRevenue)} this month</p>
 
@@ -182,7 +156,8 @@ export default function EnterpriseDashboard({
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatNumber(platformMetrics.totalProjects)}</div>
+                {formatNumber(platformMetrics.totalProjects)}
+
               <p className="text-xs text-muted-foreground">
                 AI-generated projects</p>
 
@@ -194,10 +169,10 @@ export default function EnterpriseDashboard({
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatPercentage(platformMetrics.conversionRate)}</div>
+                {formatPercentage(platformMetrics.conversionRate)}
+
               <p className="text-xs text-muted-foreground">
-                Free to paid conversion</p>
-          </Card>)}
+                Free to paid conversion</p>)}
 
       {/* System Health */}
       {systemMetrics && (
@@ -256,11 +231,13 @@ export default function EnterpriseDashboard({
               <div className="flex items-center space-x-2">
                 <Server className="h-4 w-4 text-blue-500" />
                 <span className="text-sm">
-                  Active, Connections: {systemMetrics.activeConnections}</span>
+                  Active,
+    Connections: {systemMetrics.activeConnections}</span>
               <div className="flex items-center space-x-2">
                 <Database className="h-4 w-4 text-green-500" />
                 <span className="text-sm">
-                  DB, Connections: {systemMetrics.databaseConnections}</span>
+                  DB,
+    Connections: {systemMetrics.databaseConnections}</span>
               <div className="flex items-center space-x-2">
                 <Zap className="h-4 w-4 text-brand-primary-500" />
                 <span className="text-sm">
@@ -315,7 +292,8 @@ export default function EnterpriseDashboard({
                         <div className="text-sm font-bold">
                           {formatNumber(tier.count)} users</div>
                         <div className="text-xs text-gray-500">
-                          {formatCurrency(tier.revenue)}</div>
+                          {formatCurrency(tier.revenue)}
+
                     <Progress
                       value={
                         (tier.count /
@@ -399,7 +377,8 @@ export default function EnterpriseDashboard({
                         {country.country}</span>
                     <div className="text-right">
                       <div className="text-sm font-bold">
-                        {formatNumber(country.users)}</div>
+                        {formatNumber(country.users)}
+
                       <div className="text-xs text-gray-500">
                         {formatPercentage(
                           (country.users /
@@ -408,10 +387,10 @@ export default function EnterpriseDashboard({
                               0
                             )) *
                             100
-                        )}</div>
+                        )}
+
                 ))}
-              </div>
-          </Card>)}
+              </div>)}
 
       {/* Content Analytics */}
       {contentMetrics && (
@@ -426,19 +405,23 @@ export default function EnterpriseDashboard({
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {formatNumber(contentMetrics.totalTemplates)}</div>
+                    {formatNumber(contentMetrics.totalTemplates)}
+
                   <div className="text-xs text-gray-500">Total Templates</div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {formatNumber(contentMetrics.totalDownloads)}</div>
+                    {formatNumber(contentMetrics.totalDownloads)}
+
                   <div className="text-xs text-gray-500">Total Downloads</div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {contentMetrics.pendingReviews}</div>
+                    {contentMetrics.pendingReviews}
+
                   <div className="text-xs text-gray-500">Pending Reviews</div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {contentMetrics.averageRating}</div>
+                    {contentMetrics.averageRating}
+
                   <div className="text-xs text-gray-500">Average Rating</div>
             </CardContent>
 
@@ -489,7 +472,7 @@ export default function EnterpriseDashboard({
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Export Analytics</BarChart3>
       )}
-    </div>
+
     );
 </Button>
 </Button>
@@ -498,58 +481,25 @@ export default function EnterpriseDashboard({
 </CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardHeader>
 </Card>
 </CardContent>
@@ -562,71 +512,11 @@ export default function EnterpriseDashboard({
 </Card>
 </div>
 </Alert>
-</div>
-</div>
-</div>
-</div>
-</div>
+</div></div>
 }
 
-    </Button>
-    </Button>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </CardContent>
-    </Card>
-    </CardContent>
-    </Card>
-    </CardContent>
-    </Card>
-    </CardContent>
-    </Card>
-    </div>
-    </Alert>
-    </div>
-    </div>
+    
   );
 }
-</UserMetrics>
 </PlatformMetrics>
+}

@@ -1,12 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
@@ -78,14 +73,15 @@ export default function SignUpPage() {
               Sign in</Link>
 
           <div className="text-center text-xs text-muted-foreground">
-            By creating an account, you agree to our{' '}</div>
+            By creating an account, you agree to our{' '}
+
             <Link href="/terms" className="hover:underline">
               Terms of Service</Link>{' '}
             and{' '}
             <Link href="/privacy" className="hover:underline">
               Privacy Policy</Link>
-    );
-}
+    )
+  );
 
     </form>
     </div>
@@ -94,12 +90,8 @@ export default function SignUpPage() {
     </CardContent>
     </CardHeader>
     </Card>
-    </div>
-  );
 </form>
-</div>
-</div>
-</Button>
+</div></Button>
 </Button>
 </div>
 </CardContent>

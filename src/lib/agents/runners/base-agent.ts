@@ -7,14 +7,14 @@ export interface AgentTask {
   priority: string;
   payload: any;
   createdAt: Date
-}
+};
 
 export interface AgentContext {
   agentId: string;
   agentType: string;
   orchestratorUrl: string;
   capabilities: string[]
-}
+};
 
 export abstract class BaseAgent extends EventEmitter {
   protected context: AgentContext
@@ -28,8 +28,7 @@ export abstract class BaseAgent extends EventEmitter {
   }
   
   async start(): Promise<void> {
-    console.log(`Starting ${this.context.agentType} agent: ${this.context.agentId}`)
-    
+
     this.isRunning = true
     
     // Register with orchestrator
@@ -46,8 +45,7 @@ export abstract class BaseAgent extends EventEmitter {
   }
   
   async stop(): Promise<void> {
-    console.log(`Stopping ${this.context.agentType} agent: ${this.context.agentId}`)
-    
+
     this.isRunning = false
     
     // Stop heartbeat
@@ -73,7 +71,7 @@ export abstract class BaseAgent extends EventEmitter {
         capabilities: this.context.capabilities,
         status: 'ready'
       })
-      console.log('Successfully registered with orchestrator')
+
     } catch (error) {
       console.error('Failed to register with, orchestrator:', error)
       throw error
@@ -85,7 +83,7 @@ export abstract class BaseAgent extends EventEmitter {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/unregister`, {
         agentId: this.context.agentId
       })
-      console.log('Successfully unregistered from orchestrator')
+
     } catch (error) {
       console.error('Failed to unregister from, orchestrator:', error)
     }
@@ -127,7 +125,7 @@ export abstract class BaseAgent extends EventEmitter {
   }
   
   private async executeTask(task: AgentTask): Promise<void> {
-    console.log(`Executing, task: ${task.id} (${task.type})`)
+    `)
     
     this.currentTask = task
     this.emit('task:start', task)
@@ -187,11 +185,11 @@ export abstract class BaseAgent extends EventEmitter {
 
 // Graceful shutdown handling
 process.on('SIGTERM', async () => {
-  console.log('Received SIGTERM shutting down gracefully...')
+
   process.exit(0)
 })
 
 process.on('SIGINT', async () => {
-  console.log('Received SIGINT shutting down gracefully...')
+
   process.exit(0)
 })

@@ -3,28 +3,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import {
-  Sparkles,
-  BarChart3,
-  Users,
-  ArrowRight,
-  Wrench,
-  Shield,
-  Brain,
-  Zap} from 'lucide-react';
-import {
-  AIIcon,
-  CodeIcon,
-  RocketIcon,
-  DatabaseIcon,
-  BrandIcon} from '@/components/ui/icons';
+import { Sparkles, BarChart3, Users, ArrowRight, Wrench, Shield, Brain, Zap } from 'lucide-react';
+import { AIIcon, CodeIcon, RocketIcon, DatabaseIcon, BrandIcon } from '@/components/ui/icons';
 import Link from 'next/link';
 
 // Import your actual production components
@@ -35,7 +17,7 @@ interface WorkflowResult {
   utilizationRate: number;
   integrationCommands: string[];
   nextSteps: string[];
-}
+}}
 
 const personas = [
   {
@@ -163,7 +145,7 @@ export default function ProductionShowcasePage() {
       {personas.map((persona, index) => {
         const Icon = persona.icon;
         return (
-          <motion.div
+    <motion.div
             key={persona.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -209,39 +191,35 @@ export default function ProductionShowcasePage() {
                           >
                             {feature}</Badge>
                   ))}
-                      </div>
+
                       <Button size="sm" className="w-full" asChild>
                         <Link href="/auth/signin">
                           Start with {persona.name}</Link>
                           <ArrowRight className="ml-2 h-3 w-3" />
-                        </Link>
+                        
                     </motion.div>
                   )}
                 </AnimatePresence>
           </motion.div>
         );
-      }
-      )}
-    </div>
-        </CardHeader>
-        </CardContent>
-        </Button>
-    );
-      );
+  }}
+
+        </div>
+  );
+}
   const renderProductionDemo = () => {
     switch (activeDemo) {
       case 'claude-dashboard':
         return (
-          <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
+    <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
             <ClaudeCodeDashboard
               onWorkflowComplete={(result: WorkflowResult) => {
-                console.log('Claude Code workflow completed:', result);
+
              }}
             /></ClaudeCodeDashboard>
-    );
       case 'ui-builder':
         return (
-          <Card className="glass border-0">
+    <Card className="glass border-0">
             <CardHeader>
               <div className="flex items-center gap-2">
                 <Wrench className="w-5 h-5 text-brand-primary-400" />
@@ -262,10 +240,9 @@ export default function ProductionShowcasePage() {
                 <p className="text-white/60 text-sm mt-4">
                   Access the full production UI Builder with your component
                   library</p>
-    );
       case 'analytics':
         return (
-          <Card className="glass border-0">
+    <Card className="glass border-0">
             <CardHeader>
               <div className="flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-green-400" />
@@ -276,11 +253,13 @@ export default function ProductionShowcasePage() {
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-white">
-                    {systemMetrics.uptime}</div>
+                    {systemMetrics.uptime}
+
                   <div className="text-sm text-white/60">System Uptime</div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-white">
-                    {systemMetrics.activeUsers}</div>
+                    {systemMetrics.activeUsers}
+
                   <div className="text-sm text-white/60">Active Users</div>
               <div className="text-center">
                 <Button asChild className="bg-green-600 hover:bg-green-700">
@@ -288,10 +267,9 @@ export default function ProductionShowcasePage() {
                     View Full Analytics</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
-    );
       case 'collaboration':
         return (
-          <Card className="glass border-0">
+    <Card className="glass border-0">
             <CardHeader>
               <div className="flex items-center gap-2">
                 <Users className="w-5 h-5 text-orange-400" />
@@ -300,16 +278,15 @@ export default function ProductionShowcasePage() {
                 Production team collaboration workspace</CardDescription>
             <CardContent>
               <div className="text-center py-8">
-                <Button asChild className="bg-orange-600 hover:bg-orange-700">
+                <Button asChild className="bg-orange-600 hover: bg-orange-700">
                   <Link href="/collaborate">
                     Enter Collaboration Hub</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 <p className="text-white/60 text-sm mt-4">
                   Access real-time team collaboration features</p>
-    );
-      default:
-        return null;
+  }
+      default: return null
     }
   };
 
@@ -318,7 +295,7 @@ export default function ProductionShowcasePage() {
       {engineeringHighlights.map((highlight, index) => {
         const Icon = highlight.icon;
         return (
-          <motion.div
+    <motion.div
             key={highlight.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -338,36 +315,15 @@ export default function ProductionShowcasePage() {
                   {highlight.metrics}</Badge>
           </motion.div>
         );
-      }
-      )}
-    </div>
-        </Card>
-        </CardHeader>
+  }}
+
         </div>
-        </CardContent>
-        </div>
-        </Card>
-        </CardHeader>
-        </div>
-        </CardContent>
-        </div>
-        </div>
-        </Button>
-        </Card>
-        </CardHeader>
-        </div>
-        </CardContent>
-        </div>
-        </Button>
-        </div>
-        </Card>
-        </CardHeader>
-        </CardContent>
-    );
-      );
+  );
+}
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50 dark:from-gray-950 dark:via-purple-950/20 dark:to-blue-950/20">
-      {/* Hero Section */}</div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50 dark:from-gray-950, dark:via-purple-950/20 dark:to-blue-950/20">
+      {/* Hero Section */}
+
       <section className="relative py-32 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -377,7 +333,7 @@ export default function ProductionShowcasePage() {
           >
             <Badge
               variant="outline"
-              className="mb-6 border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
+              className="mb-6 border-purple-200 dark:border-purple-800 text-purple-700, dark:text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
             >
               <Sparkles className="w-3 h-3 mr-1" />
               Production-Ready AI Platform</Sparkles>
@@ -431,13 +387,13 @@ export default function ProductionShowcasePage() {
           </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Feature Tabs */}</div>
+            {/* Feature Tabs */}
+
             <div className="lg:col-span-1">
               <div className="space-y-3">
                 {productionFeatures.map(feature => {
-                  const Icon = feature.icon;
-                  return (
-                    <motion.button
+                  const Icon = feature.icon, return (
+    <motion.button
                       key={feature.demo}
                       className={`w-full p-4 rounded-lg text-left transition-all ${
                         activeDemo === feature.demo
@@ -459,15 +415,9 @@ export default function ProductionShowcasePage() {
                             {feature.description}</p>
                     </motion.button>
                   );
-                }
-      )}
-    </div>
-        </section>
-        </div>
-        </section>
-        </div>
-        </div>
-    );
+  }}
+
+        
 
             {/* Live Production Demo */}
             <div className="lg:col-span-2">
@@ -514,29 +464,21 @@ export default function ProductionShowcasePage() {
                 <Link href="/admin">
                   View System Admin</Link>
                   <Shield className="ml-2 h-4 w-4" />
-                </Link>
+                
           </motion.div>
           </div>
           </AnimatePresence>
           </section>
-          </div>
-      );
 </section>
 </AnimatePresence>
-</div>
-</div>
-</section>
+</div></section>
 </div>
 </section>
 </div>
 </CardHeader>
 </Card>
 </Button>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </div>
 </CardHeader>
 </Card>

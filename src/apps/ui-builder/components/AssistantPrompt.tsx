@@ -14,8 +14,6 @@ export default function AssistantPrompt() {
 
     // Get causal context for smarter suggestions
     const causalContext = generateCausalContext('ui-builder');
-    console.log('🧠 Causal, Context:', causalContext);
-
     // Enhanced keyword matching with causal awareness
     const lower = input.toLowerCase();
     const generatedComponents: string[] = [];
@@ -23,37 +21,35 @@ export default function AssistantPrompt() {
     if (lower.includes('landing')) {
       addComponent('hero');
       generatedComponents.push('hero');
-    }
+}
     if (lower.includes('signup')) {
       addComponent('input');
       generatedComponents.push('input');
-    }
+}
     if (lower.includes('features')) {
       addComponent('card');
       generatedComponents.push('card');
-    }
+}
     if (lower.includes('form')) {
       addComponent('input');
       generatedComponents.push('input');
-    }
+}
     if (lower.includes('cta') || lower.includes('button')) {
       addComponent('button');
       generatedComponents.push('button');
-    }
+}
     if (lower.includes('columns') || lower.includes('layout')) {
       addComponent('two-col');
       generatedComponents.push('two-col');
-    }
+}
     if (lower.includes('about') || lower.includes('content')) {
       addComponent('two-col');
       generatedComponents.push('two-col');
-    }
-
+}
     // Log the AI interaction for future learning
     if (generatedComponents.length > 0) {
       logAssistantInteraction(input, generatedComponents, 'ui-builder');
-    }
-
+}
     alert(`Assistant has scaffolded ${generatedComponents.length} components! ${causalContext ? '🧠 Using causal insights.' : ''}`);
     setInput('');
   };
@@ -70,8 +66,8 @@ export default function AssistantPrompt() {
       /></input>
       <button
         onClick={handleSubmit}
-        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover: bg-blue-700"
       >
         Generate Layout</button>
-    );
+    )
 }

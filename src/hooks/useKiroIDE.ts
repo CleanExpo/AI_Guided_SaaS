@@ -27,18 +27,15 @@ export interface UseKiroIDEReturn {
   
   // File operations;
   readFile: (path: string) => Promise<KiroFile>
-  writeFile: (path: string;
-  content: string) => Promise<void>
+  writeFile: (path: string; content: string) => Promise<void>
   createFile: (path: string, content?: string) => Promise<void>
   deleteFile: (path: string) => Promise<void>
-  renameFile: (oldPath: string;
-  newPath: string) => Promise<void>
+  renameFile: (oldPath: string; newPath: string) => Promise<void>
   getFileTree: (projectId: string) => Promise<KiroFileTree>
   
   // Terminal operations;
   createTerminal: (config?: Partial<KiroTerminal>) => Promise<KiroTerminal>
-  executeCommand: (terminalId: string;
-  command: string) => Promise<void>
+  executeCommand: (terminalId: string; command: string) => Promise<void>
   closeTerminal: (terminalId: string) => Promise<void>
   
   // AI assistance;
@@ -67,7 +64,7 @@ export interface UseKiroIDEReturn {
   openFiles: KiroFile[]
   terminals: KiroTerminal[]
   debugSessions: KiroDebugSession[]
-}
+};
 
 export function useKiroIDE(): UseKiroIDEReturn {
   const { toast } = useToast()

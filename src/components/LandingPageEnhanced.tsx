@@ -1,30 +1,9 @@
 'use client';
 
 import { ButtonPremium } from '@/components/ui/button-premium';
-import {
-  CardEnhanced,
-  CardEnhancedContent,
-  CardEnhancedDescription,
-  CardEnhancedHeader,
-  CardEnhancedTitle} from '@/components/ui/card-enhanced';
+import { CardEnhanced, CardEnhancedContent, CardEnhancedDescription, CardEnhancedHeader, CardEnhancedTitle } from '@/components/ui/card-enhanced';
 import { Badge } from '@/components/ui/badge';
-import {
-  Wrench,
-  BarChart3,
-  Users,
-  FileText,
-  ArrowRight,
-  CheckCircle,
-  Rocket,
-  Brain,
-  Code,
-  Palette,
-  Shield,
-  Globe,
-  Star,
-  Sparkles,
-  TrendingUp,
-  Clock} from 'lucide-react';
+import { Wrench, BarChart3, Users, FileText, ArrowRight, CheckCircle, Rocket, Brain, Code, Palette, Shield, Globe, Star, Sparkles, TrendingUp, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -88,8 +67,9 @@ export default function LandingPageEnhanced() {
   const [statsRef, statsInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      {/* Animated Background Elements */}</div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900, dark:via-slate-800 dark:to-slate-900">
+      {/* Animated Background Elements */}
+
       <div className="fixed inset-0 overflow-hidden pointer-events-none"></div>
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float" /></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} /></div>
@@ -107,7 +87,7 @@ export default function LandingPageEnhanced() {
               <Sparkles className="w-3 h-3 mr-1" />
               AI-Powered SaaS Platform</Sparkles>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent dark:from-white dark:via-blue-100 dark:to-purple-100">
+            <h1 className="text-4xl md:text-6xl, lg:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent, dark:from-white, dark:via-blue-100 dark:to-purple-100">
               Build Better Software</h1>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Faster Than Ever</span>
@@ -169,9 +149,11 @@ export default function LandingPageEnhanced() {
                 <CardEnhanced variant="glass" className="text-center p-6"></CardEnhanced>
                   <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-600" /></stat>
                   <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
-                    {stat.value}</div>
+                    {stat.value}
+
                   <div className="text-sm text-gray-600 dark:text-gray-400">
-                    {stat.label}</div>
+                    {stat.label}
+
               </motion.div>
             ))}
           </motion.div>
@@ -185,7 +167,7 @@ export default function LandingPageEnhanced() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="text-center mb-16"
           ></motion>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
               Everything You Need to Build Amazing Software</h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Our comprehensive platform provides all the tools and intelligence
@@ -211,7 +193,6 @@ export default function LandingPageEnhanced() {
                       {feature.description}</CardEnhancedDescription>
               </motion.div>
             ))}
-          </div>
 
       {/* Benefits Section */}
       <section ref={benefitsRef} className="py-20 px-4"></section>
@@ -222,7 +203,7 @@ export default function LandingPageEnhanced() {
               animate={benefitsInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             ></motion>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
                 Why Choose Our Platform?</h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
                 Join thousands of developers and teams who have transformed
@@ -243,7 +224,6 @@ export default function LandingPageEnhanced() {
                       {benefit.text}</span>
                   </motion.div>
                 ))}
-              </div>
 
               <ButtonPremium 
                 size="lg" 
@@ -316,7 +296,7 @@ export default function LandingPageEnhanced() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             viewport={{ once: true }}
           ></motion>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
               Ready to Transform Your Development Process?</h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
               Join thousands of developers building the future with AI-powered tools.</p>

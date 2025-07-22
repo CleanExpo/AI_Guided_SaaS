@@ -1,6 +1,5 @@
 #!/usr/bin/env tsx
 
-
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
@@ -44,11 +43,8 @@ class AutonomousDocumentationFinder {
   }
 
   async analyzeTypeScriptErrors(): Promise<void> {
-    console.log('🔍 Analyzing TypeScript errors...\n');
-    
     try {
       execSync('npm run typecheck', { stdio: 'pipe' });
-      console.log('✅ No TypeScript errors found!');
       return;
     } catch (error) {
       const output = error.stdout?.toString() || '';
@@ -69,8 +65,6 @@ class AutonomousDocumentationFinder {
         message: match[5]
       });
     }
-
-    console.log(`Found ${this.errors.length} TypeScript errors\n`);
   }
 
   async categorizeErrors(): Promise<Map<string, TypeScriptError[]>> {
@@ -83,13 +77,8 @@ class AutonomousDocumentationFinder {
       }
       categories.get(category)!.push(error);
     }
-
-    console.log('📊 Error, Categories:');
     for (const [category, errors] of categories) {
-      console.log(`  ${category}: ${errors.length} errors`);
     }
-    console.log('');
-
     return categories;
   }
 
@@ -148,24 +137,15 @@ class AutonomousDocumentationFinder {
   }
 
   async createFixStrategy(categories: Map<string, TypeScriptError[]>): Promise<void> {
-    console.log('\n🔧 Creating Fix, Strategies:\n');
-    
     for (const [category, errors] of categories) {
-      console.log(`\n${category} (${errors.length} errors):`);
+      :`);
       
       const sampleError = errors[0];
       const strategy = this.fixStrategies.get(sampleError.code) || 'General type checking documentation needed';
-      
-      console.log(`  Strategy: ${strategy}`);
-      console.log(`  Sample: ${sampleError.file}:${sampleError.line} - ${sampleError.message}`);
-      
       // Generate specific fix recommendations
       if (category === 'NextAuth Session Types') {
-        console.log(`  Fix: Create or update /src/types/next-auth.d.ts with proper module augmentation`);
       } else if (category === 'Import/Export Issues') {
-        console.log(`  Fix: Update import statements and ensure all exports are properly defined`);
       } else if (category === 'Missing Properties') {
-        console.log(`  Fix: Extend interfaces or add optional chaining where appropriate`);
       }
     }
   }
@@ -184,8 +164,6 @@ class AutonomousDocumentationFinder {
       path.join(process.cwd(), 'autonomous-doc-report.json'),
       JSON.stringify(report, null, 2)
     );
-    
-    console.log('\n📄 Report saved to autonomous-doc-report.json');
   }
 
   private getErrorCountByCode(): Record<string, number> {
@@ -197,17 +175,12 @@ class AutonomousDocumentationFinder {
   }
 
   async run(): Promise<void> {
-    console.log('🤖 Autonomous Documentation Finder\n');
-    console.log('==================================\n');
-    
     await this.analyzeTypeScriptErrors();
     if (this.errors.length === 0) return;
     
     const categories = await this.categorizeErrors();
     await this.createFixStrategy(categories);
     await this.generateReport();
-    
-    console.log('\n✨ Ready for autonomous documentation retrieval and fixes!');
   }
 }
 

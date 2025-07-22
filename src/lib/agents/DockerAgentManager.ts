@@ -8,11 +8,11 @@ export interface ContainerConfig {
   name: string;
   image: string;
   environment: Record<string, string>
-  cpuLimit: string // e.g., "0.5" for 50% of one CPU;
+  cpuLimit: string // e.g., "0.5" for 50% of one CPU,
   memoryLimit: string // e.g., "512m" for 512MB
   volumes?: string[]
   network?: string
-}
+};
 
 export interface ContainerStatus {
   id: string;
@@ -22,7 +22,7 @@ export interface ContainerStatus {
   memoryUsage: number;
   uptime: number;
   health: 'healthy' | 'unhealthy' | 'unknown'
-}
+};
 
 export class DockerAgentManager {
   private static instance: DockerAgentManager
@@ -44,7 +44,7 @@ export class DockerAgentManager {
     // Check if container already exists
     const exists = await this.containerExists(containerName)
     if (exists) {
-      console.log(`Container ${containerName} already exists, starting it...`)
+
       return this.startExistingContainer(containerName)
     }
     
@@ -52,7 +52,7 @@ export class DockerAgentManager {
     const config: ContainerConfig = {
       name: containerName,
       image: 'ai-saas-agent:latest',
-      environment: {
+    environment: {
         NODE_ENV: 'production',
         AGENT_TYPE: agent.role, AGENT_ID: agent.agent_id:, ORCHESTRATOR_URL: 'http://orchestrator:3000',
         MAX_MEMORY: this.getMemoryLimit(agent.priority),
@@ -71,7 +71,7 @@ export class DockerAgentManager {
     const containerId = await this.createContainer(config)
     await this.updateContainerStatus(containerName)
     
-    console.log(`✅ Started agent, container: ${containerName} (${containerId})`)
+    `)
     return containerId
   }
   
@@ -83,8 +83,7 @@ export class DockerAgentManager {
     
     try {
       await execAsync(`docker stop ${containerName} --time 10`)
-      console.log(`✅ Stopped agent, container: ${containerName}`)
-      
+
       // Update status
       const status = this.containerMap.get(containerName)
       if (status) {
@@ -122,7 +121,9 @@ export class DockerAgentManager {
         status: 'running',
         cpuUsage: parseFloat(stats.CPUPerc.replace('%', '')),
         memoryUsage: this.parseMemoryUsage(stats.MemUsage),
-        uptime: 0, // Would need to calculate from container start time, health: this.parseHealthStatus(healthResult.stdout.trim())
+        uptime: 0,
+  // Would need to calculate from container start time
+  health: this.parseHealthStatus(healthResult.stdout.trim())
       }
       
       this.containerMap.set(containerName, status)
@@ -169,15 +170,14 @@ export class DockerAgentManager {
     const currentCount = currentContainers.length
     
     if (currentCount === targetCount) {
-      console.log(`Agent type ${agentType} already at target, count: ${targetCount}`)
+
       return
     }
     
     if (currentCount < targetCount) {
       // Scale up
       const toCreate = targetCount - currentCount
-      console.log(`Scaling up ${agentType} agents: +${toCreate}`)
-      
+
       for (let i = 0; i < toCreate; i++) {
         const instanceId = `${agentType}-${currentCount + i + 1}`
         await this.createAgentInstance(agentType, instanceId)
@@ -185,8 +185,7 @@ export class DockerAgentManager {
     } else {
       // Scale down
       const toRemove = currentCount - targetCount
-      console.log(`Scaling down ${agentType} agents: -${toRemove}`)
-      
+
       // Remove the most recent instances
       const containersToStop = currentContainers.slice(-toRemove)
       for (const container of containersToStop) {
@@ -208,7 +207,7 @@ export class DockerAgentManager {
       
       for (const container of stoppedContainers) {
         await, execAsync(`docker rm ${container}`)
-        console.log(`Removed stopped, container: ${container}`)
+
       }
     } catch (error) {
       console.error('Failed to cleanup, containers:', error)
@@ -270,7 +269,15 @@ export class DockerAgentManager {
   private getCpuLimit(priority: number): string {
     // Higher priority agents get more CPU
     const cpuMap: Record<number, string> = {
-      1: '0.75', // Architect - highest priority, 2: '0.5',  // Frontend/Backend, 3: '0.5',  // QA, 4: '0.5',  // DevOps, 5: '0.25'  // Low priority agents
+      1: '0.75',
+  // Architect - highest priority
+  2: '0.5',
+  // Frontend/Backend
+  3: '0.5',
+  // QA
+  4: '0.5',
+  // DevOps
+  5: '0.25'  // Low priority agents
     }
     return cpuMap[priority] || '0.25'
   }
@@ -278,7 +285,15 @@ export class DockerAgentManager {
   private getMemoryLimit(priority: number): string {
     // Higher priority agents get more memory
     const memoryMap: Record<number, string> = {
-      1: '768m', // Architect, 2: '512m', // Frontend/Backend, 3: '512m', // QA, 4: '512m', // DevOps, 5: '256m'  // Low priority agents
+      1: '768m',
+  // Architect
+  2: '512m',
+  // Frontend/Backend
+  3: '512m',
+  // QA
+  4: '512m',
+  // DevOps
+  5: '256m'  // Low priority agents
     }
     return memoryMap[priority] || '256m'
   }
@@ -327,7 +342,7 @@ export class DockerAgentManager {
   private async createAgentInstance(agentType: string, instanceId: string): Promise<void> {
     // This would create a new instance of an agent type
     // Implementation depends on your agent configuration system
-    console.log(`Creating new agent, instance: ${agentType}-${instanceId}`)
+
   }
 }
 
@@ -335,17 +350,17 @@ export class DockerAgentManager {
 export async function startAgentInContainer(agent: AgentConfig): Promise<string> {
   const manager = DockerAgentManager.getInstance()
   return manager.startAgentContainer(agent)
-}
+};
 
 export async function stopAgentContainer(agentId: string): Promise<void> {
   const manager = DockerAgentManager.getInstance()
   return manager.stopAgentContainer(agentId)
-}
+};
 
 export async function getAgentContainerStatus(agentId: string): Promise<ContainerStatus | null> {
   const manager = DockerAgentManager.getInstance()
   return manager.getContainerStatus(agentId)
-}
+};
 
 export async function getAllAgentStatuses(): Promise<ContainerStatus[]> {
   const manager = DockerAgentManager.getInstance()

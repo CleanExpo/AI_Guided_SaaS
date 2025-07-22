@@ -5,9 +5,6 @@ import { writeFileSync } from 'fs'
 import { join } from 'path'
 
 async function main() {
-  console.log('🚀 AI Guided SaaS - Client Simulation Testing')
-  console.log('===========================================\n')
-  
   const runner = new ClientSimulationRunner()
   
   try {
@@ -23,8 +20,6 @@ async function main() {
     writeFileSync(summaryPath, results.summary)
     
     // Display summary
-    console.log(results.summary)
-    
     // Exit with appropriate code
     process.exit(results.failed > 0 ? 1 : 0)
     

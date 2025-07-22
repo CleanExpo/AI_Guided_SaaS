@@ -1,7 +1,6 @@
 #!/usr/bin/env tsx
 // Temporary disable for TypeScript compliance
 
-
 // import { Command } from 'commander';
 import { EnvManager } from '../src/lib/env/EnvManager';
 // chalk import disabled for now
@@ -30,13 +29,13 @@ program
       const result = envManager.validate(options.env);
       spinner.stop();
       
-      console.log(envManager.generateReport());
+      );
       
       if (!result.isValid) {
-        console.log(chalk.red('\n❌ Validation failed!'));
+        );
         process.exit(1);
       } else {
-        console.log(chalk.green('\n✅ All environment variables are valid!'));
+        );
       }
     } catch (error) {
       spinner.fail('Validation failed');
@@ -52,22 +51,22 @@ program
   .action(() => {
     const status = envManager.getStatus();
     
-    console.log(chalk.bold('\n🔍 Quick Environment Check\n'));
+    );
     
     if (status.isValid) {
-      console.log(chalk.green('✅ Environment is properly configured'));
+      );
     } else {
-      console.log(chalk.red('❌ Environment has issues'));
+      );
     }
     
-    console.log(`\nEnvironment: ${chalk.cyan(status.environment)}`);
-    console.log(`Valid: ${chalk.green(status.summary.valid)}/${status.summary.total}`);
+    }`);
+    }/${status.summary.total}`);
     
     if (status.summary.missing > 0) {
-      console.log(chalk.red(`Missing: ${status.summary.missing} required variables`));
+      );
     }
     if (status.summary.warnings > 0) {
-      console.log(chalk.yellow(`Warnings: ${status.summary.warnings}`));
+      );
     }
   });
 
@@ -82,7 +81,7 @@ program
       await envManager.sync();
       spinner.succeed('Environment synchronized');
       
-      console.log(chalk.green('\n✅ Configuration updated with current environment'));
+      );
     } catch (error) {
       spinner.fail('Sync failed');
       console.error(error);
@@ -99,7 +98,7 @@ program
     const historyPath = path.join(process.cwd(), '.docs', 'env.history.log');
     
     if (!fs.existsSync(historyPath)) {
-      console.log(chalk.yellow('No history found'));
+      );
       return;
     }
     
@@ -107,16 +106,12 @@ program
     const count = parseInt(options.number);
     const recent = history.slice(-count).reverse();
     
-    console.log(chalk.bold('\n📜 Environment Variable History\n'));
+    );
     
     for (const entry of recent) {
       const date = new Date(entry.timestamp).toLocaleString();
-      console.log(chalk.gray(`[${date}]`));
-      console.log(`  Action: ${chalk.cyan(entry.action)}`);
-      console.log(`  User: ${entry.user}`);
-      console.log(`  Environment: ${entry.environment}`);
-      console.log(`  Changes: ${entry.changes.message}`);
-      console.log('');
+      );
+      }`);
     }
   });
 
@@ -140,7 +135,7 @@ program
       try {
         envManager.compact();
         spinner.succeed('Configuration compacted');
-        console.log(chalk.green('\n✅ Unused variables removed'));
+        );
       } catch (error) {
         spinner.fail('Compact failed');
         console.error(error);
@@ -158,11 +153,11 @@ program
     const missingVars = validation.errors.filter(e => e.severity === 'error' && e.message.includes('missing'));
     
     if (missingVars.length === 0) {
-      console.log(chalk.green('✅ All required variables are set!'));
+      );
       return;
     }
     
-    console.log(chalk.yellow(`\n⚠️  Found ${missingVars.length} missing required variables\n`));
+    );
     
     const configPath = path.join(process.cwd(), '.docs', 'env.config.json');
     const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
@@ -173,11 +168,11 @@ program
       const service = config.services[error.service];
       const varConfig = service.variables[error.variable];
       
-      console.log(chalk.bold(`\n${service.name} - ${error.variable}`));
-      console.log(chalk.gray(varConfig.description));
+      );
+      );
       
       if (varConfig.example) {
-        console.log(chalk.gray(`Example: ${varConfig.example}`));
+        );
       }
       
       const { value } = await inquirer.prompt([
@@ -206,7 +201,7 @@ program
     
     // Write updated env file
     fs.writeFileSync(envPath, envContent.trim() + '\n');
-    console.log(chalk.green(`\n✅ Updated ${envPath} with ${missingVars.length} variables`));
+    );
   });
 
 // Export command
@@ -217,7 +212,7 @@ program
   .action((options) => {
     const status = envManager.getStatus();
     fs.writeFileSync(options.output, JSON.stringify(status, null, 2));
-    console.log(chalk.green(`✅ Status exported to ${options.output}`));
+    );
   });
 
 // Pre-deploy hook command
@@ -225,7 +220,7 @@ program
   .command('pre-deploy')
   .description('Pre-deployment environment check')
   .action(() => {
-    console.log(chalk.bold('\n🚀 Pre-Deployment Environment Check\n'));
+    );
     
     const validation = envManager.validate(process.env.NODE_ENV || 'production');
     
@@ -235,18 +230,18 @@ program
     
     for (const error of validation.errors) {
       if (error.severity === 'error' && criticalServices.includes(error.service)) {
-        console.log(chalk.red(`❌ Critical: ${error.service}.${error.variable} - ${error.message}`));
+        );
         criticalErrors++;
       }
     }
     
     if (criticalErrors > 0) {
-      console.log(chalk.red(`\n❌ Deployment, blocked: ${criticalErrors} critical errors found`));
+      );
       process.exit(1);
     } else if (validation.errors.filter(e => e.severity === 'error').length > 0) {
-      console.log(chalk.yellow('\n⚠️  Non-critical errors found, deployment allowed with warnings'));
+      );
     } else {
-      console.log(chalk.green('\n✅ Environment ready for deployment!'));
+      );
     }
   });
 

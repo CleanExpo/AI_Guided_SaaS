@@ -8,24 +8,14 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { 
-  Shield, 
-  AlertTriangle, 
-  CheckCircle2, 
-  XCircle,
-  RefreshCw,
-  Zap,
-  Activity,
-  Settings,
-  Info
-} from 'lucide-react';
+import { Shield, AlertTriangle, CheckCircle2, XCircle, RefreshCw, Zap, Activity, Settings, Info } from 'lucide-react';
 
 interface EPCStatus {
   env_check: 'pass' | 'fail' | 'warning';
   score: number;
   issues: string[];
   recommendations?: string[];
-}
+};
 
 interface TelemetryStats {
   totalInferences: number;
@@ -33,8 +23,8 @@ interface TelemetryStats {
   failed: number;
   successful: number;
   averageDuration: number;
-  totalCost: number;
-}
+  totalCost: number,
+};
 
 export function InferenceSafeMode() {
   const [enabled, setEnabled] = useState(true);
@@ -57,7 +47,7 @@ export function InferenceSafeMode() {
       console.error('Failed to check, environment:', error);
     } finally {
       setChecking(false);
-    }
+}
   };
 
   // Fetch telemetry stats
@@ -68,7 +58,7 @@ export function InferenceSafeMode() {
       setStats(data);
     } catch (error) {
       console.error('Failed to fetch, stats:', error);
-    }
+}
   };
 
   // Run self-healing
@@ -77,7 +67,7 @@ export function InferenceSafeMode() {
     try {
       const response = await fetch('/api/epc/heal', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ autoApprove: autoHeal })
       });
       const result = await response.json();
@@ -90,7 +80,7 @@ export function InferenceSafeMode() {
       console.error('Failed to run, healing:', error);
     } finally {
       setHealingInProgress(false);
-    }
+}
   };
 
   useEffect(() => {
@@ -107,11 +97,11 @@ export function InferenceSafeMode() {
     
     switch (status.env_check) {
       case 'pass':</TelemetryStats>
-        return <CheckCircle2 className="h-5 w-5 text-green-500" />;
+        return <CheckCircle2 className="h-5 w-5 text-green-500" />
       case 'warning':</CheckCircle2>
-        return <AlertTriangle className="h-5 w-5 text-yellow-500" />;
+        return <AlertTriangle className="h-5 w-5 text-yellow-500" />
       case 'fail':</AlertTriangle>
-        return <XCircle className="h-5 w-5 text-red-500" />;
+        return <XCircle className="h-5 w-5 text-red-500" />
     }
   };
 
@@ -130,7 +120,8 @@ export function InferenceSafeMode() {
 
   return (
     <div className="space-y-4">
-      {/* Main, Control Card */}</div>
+      {/* Main, Control Card */}
+
       <Card></Card>
         <CardHeader></CardHeader>
           <div className="flex items-center justify-between"></div>
@@ -146,10 +137,12 @@ export function InferenceSafeMode() {
             Protect your AI credits by validating environment before inference</CardDescription>
         <CardContent></CardContent>
           <div className="space-y-4">
-            {/* Status, Display */}</div>
+            {/* Status, Display */}
+
             <div className="flex items-center justify-between p-4 border rounded-lg"></div>
               <div className="flex items-center gap-3">
-                {getStatusIcon()}</div>
+                {getStatusIcon()}
+
                 <div></div>
                   <p className="font-medium">Environment Status</p>
                   <p className="text-sm text-muted-foreground">
@@ -214,7 +207,6 @@ export function InferenceSafeMode() {
                   )}
                 </Button>
               )}
-            </div>
 
       {/* Statistics, Card */}
       {stats && (
@@ -266,6 +258,6 @@ export function InferenceSafeMode() {
               <p>
                 Enable Auto-heal to automatically fix common issues like missing 
                 API keys or outdated configurations.</p>
-    );
-}
+  }
 </EPCStatus>
+}

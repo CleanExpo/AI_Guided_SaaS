@@ -1,9 +1,9 @@
 export interface ClientScenario {
-  id: string, name: string, description: string, projectType: 'crm' | 'ecommerce' | 'booking' | 'dashboard' | 'blog' | 'api'
-  requirements: string, expectedAgents: string[]
-  expectedDuration: string, criticalFeatures: string[]
+  id: string; name: string; description: string; projectType: 'crm' | 'ecommerce' | 'booking' | 'dashboard' | 'blog' | 'api'
+  requirements: string; expectedAgents: string[]
+  expectedDuration: string; criticalFeatures: string[]
   successCriteria: {
-    metric: string, threshold: number, unit: string
+    metric: string; threshold: number; unit: string
   }[]
 }
 

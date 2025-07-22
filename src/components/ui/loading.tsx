@@ -33,15 +33,13 @@ export function Spinner({
       className={cn(
         'animate-spin rounded-full border-2 border-current border-t-transparent',
         sizeClasses[size],
-        colorClasses[color],
-        className
+        colorClasses[color] className
       )}
       role="status"
       aria-label="Loading"
     >
       <span className="sr-only">Loading...</span>
-    );
-}
+  }
 
 // Dots Loading Component
 export function LoadingDots({
@@ -57,7 +55,7 @@ export function LoadingDots({
 
   return (
     <div
-      className={cn('flex space-x-1', className)}
+      className={cn('flex space-x-1' className)}
       role="status"
       aria-label="Loading"
     >
@@ -67,17 +65,16 @@ export function LoadingDots({
           className={cn(
             'rounded-full animate-pulse',
             dotSize[size],
-            colorClasses[color],
-            'bg-current'
+            colorClasses[color] 'bg-current'
           )}
           style={{
             animationDelay: `${i * 0.2}s`,
             animationDuration: '1.4s'}}
         />
-      ))}</div>
+      ))}
+
       <span className="sr-only">Loading...</span>
-    );
-}
+  }
 
 // Pulse Loading Component
 export function LoadingPulse({
@@ -89,15 +86,13 @@ export function LoadingPulse({
       className={cn(
         'rounded-full animate-pulse-slow bg-current opacity-75',
         sizeClasses[size],
-        colorClasses[color],
-        className
+        colorClasses[color] className
       )}
       role="status"
       aria-label="Loading"
     >
       <span className="sr-only">Loading...</span>
-    );
-}
+  }
 
 // Skeleton Loading Component
 interface SkeletonProps {
@@ -106,7 +101,7 @@ interface SkeletonProps {
   width?: string | number;
   height?: string | number;
   lines?: number;
-}
+};
 
 export function Skeleton({
   className,
@@ -125,31 +120,29 @@ export function Skeleton({
 
   if (variant === 'text' && lines > 1) {
     return (
-      <div className={cn('space-y-2', className)}>
+    <div className={cn('space-y-2' className)}>
         {Array.from({ length: lines }).map((_, i) => (
           <div
             key={i}
             className={cn(
               baseClasses,
-              variantClasses.text,
-              i === lines - 1 ? 'w-3/4' : 'w-full'
+              variantClasses.text i === lines - 1 ? 'w-3/4' : 'w-full'
             )}
             style={{ width: i === lines - 1 ? '75%' : width, height }}
           />
-        ))}</div>
-    );
-  }
+        ))}
 
+    );
+}
   return (
     <div
-      className={cn(baseClasses, variantClasses[variant], className)}
+      className={cn(baseClasses, variantClasses[variant] className)}
       style={{ width, height }}
       role="status"
       aria-label="Loading content"
     >
       <span className="sr-only">Loading...</span>
-    );
-}
+  }
 
 // Wave Loading Component
 export function LoadingWave({
@@ -165,7 +158,7 @@ export function LoadingWave({
 
   return (
     <div
-      className={cn('flex items-end space-x-1', className)}
+      className={cn('flex items-end space-x-1' className)}
       role="status"
       aria-label="Loading"
     >
@@ -174,28 +167,28 @@ export function LoadingWave({
           key={i}
           className={cn(
             'w-1 bg-current animate-bounce-subtle',
-            barHeight[size],
-            colorClasses[color]
+            barHeight[size] colorClasses[color]
           )}
           style={{
             animationDelay: `${i * 0.1}s`,
             animationDuration: '1.2s'}}
         />
-      ))}</div>
+      ))}
+
       <span className="sr-only">Loading...</span>
-    );
-}
+  }
 
 // Brand Loading Component with Logo
 export function BrandLoader({ size = 'md', className }: LoadingProps) {
   return (
     <div
-      className={cn('flex flex-col items-center space-y-4', className)}
+      className={cn('flex flex-col items-center space-y-4' className)}
       role="status"
       aria-label="Loading"
     >
-      <div className={cn('relative', sizeClasses[size])}>
-        {/* Brand Logo with Animation */}</div>
+      <div className={cn('relative' sizeClasses[size])}>
+        {/* Brand Logo with Animation */}
+
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary-600 to-brand-primary-800 animate-pulse-slow" />
         <div className="absolute inset-2 rounded-full bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center">
           <span className="text-white font-bold text-xs">AGS</span>
@@ -206,21 +199,19 @@ export function BrandLoader({ size = 'md', className }: LoadingProps) {
       <div className="text-sm text-brand-secondary-600 animate-pulse">
         Loading AI Guided SaaS...</div>
       <span className="sr-only">Loading AI Guided SaaS Platform...</span>
-    );
-}
+  }
 
 // Card Skeleton
 export function CardSkeleton({ className }: { className?: string }) {
   return (
-    <div className={cn('p-6 border rounded-lg space-y-4', className)}>
+    <div className={cn('p-6 border rounded-lg space-y-4' className)}>
       <Skeleton variant="rectangular" height="20px" width="60%" />
       <Skeleton variant="text" lines={3} />
       <div className="flex space-x-2">
         <Skeleton variant="rectangular" height="32px" width="80px" />
         <Skeleton variant="rectangular" height="32px" width="80px" />
       </div>
-    );
-}
+  }
 
 // Table Skeleton
 export function TableSkeleton({
@@ -229,11 +220,11 @@ export function TableSkeleton({
   className}: {
   rows?: number;
   columns?: number;
-  className?: string;
-}) {
+  className?: string, }) {
   return (
-    <div className={cn('space-y-3', className)}>
-      {/* Header */}</div>
+    <div className={cn('space-y-3' className)}>
+      {/* Header */}
+
       <div className="flex space-x-4">
         {Array.from({ length: columns }).map((_, i) => (
           <Skeleton
@@ -256,17 +247,15 @@ export function TableSkeleton({
           ))}</Skeleton>))}
     );
 }
-
 // Page Loading Component
 export function PageLoader({ className }: { className?: string }) {
   return (
     <div
-      className={cn('min-h-screen flex items-center justify-center', className)}
+      className={cn('min-h-screen flex items-center justify-center' className)}
     >
       <BrandLoader size="xl" />
     </div>
-    );
-}
+  }
 
 // Button Loading State
 interface ButtonLoadingProps {
@@ -275,7 +264,7 @@ interface ButtonLoadingProps {
   className?: string;
   disabled?: boolean;
   size?: 'xs' | 'sm' | 'md' | 'lg';
-}
+};
 
 export function ButtonLoading({
   loading = false,
@@ -289,8 +278,7 @@ export function ButtonLoading({
     <button
       className={cn(
         'relative inline-flex items-center justify-center',
-        loading && 'cursor-not-allowed',
-        className
+        loading && 'cursor-not-allowed' className
       )}
       disabled={disabled || loading}
       {...props}
@@ -301,9 +289,7 @@ export function ButtonLoading({
         </div>
       )}
       <span className={cn(loading && 'opacity-0')}>{children}</span>
-    </button>
-    );
-}
+  }
 
 // Progress Bar Loading
 interface ProgressLoadingProps {
@@ -312,7 +298,7 @@ interface ProgressLoadingProps {
   showPercentage?: boolean;
   color?: 'primary' | 'secondary' | 'accent';
   size?: 'sm' | 'md' | 'lg';
-}
+};
 
 export function ProgressLoading({
   progress = 0,
@@ -331,41 +317,36 @@ export function ProgressLoading({
     accent: 'bg-brand-primary-500'};
 
   return (
-    <div className={cn('w-full', className)}>
+    <div className={cn('w-full' className)}>
       {showPercentage && (</div>
         <div className="flex justify-between text-sm text-brand-secondary-600 mb-1">
           <span>Progress</span>
           <span>{Math.round(progress)}%</span>)}
       <div
         className={cn(
-          'w-full bg-brand-secondary-200 rounded-full overflow-hidden',
-          heightClasses[size]
+          'w-full bg-brand-secondary-200 rounded-full overflow-hidden' heightClasses[size]
         )}
       >
         <div
           className={cn(
-            'h-full transition-all duration-300 ease-out rounded-full',
-            progressColorClasses[color]
+            'h-full transition-all duration-300 ease-out rounded-full' progressColorClasses[color]
           )}
           style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
         />
       </div>
-    );
-}
+  }
 
 // Shimmer Effect
 export function ShimmerEffect({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'relative overflow-hidden bg-brand-secondary-100, dark:bg-brand-secondary-800',
-        className
+        'relative overflow-hidden bg-brand-secondary-100, dark:bg-brand-secondary-800' className
       )}
     >
       <div className="absolute inset-0 -translate-x-full animate-shimmer bg-shimmer-gradient" />
     </div>
-    );
-}
+  }
 
 // Loading Container
 interface LoadingContainerProps {
@@ -373,7 +354,7 @@ interface LoadingContainerProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
   className?: string;
-}
+};
 
 export function LoadingContainer({
   loading,
@@ -382,34 +363,31 @@ export function LoadingContainer({
   className}: LoadingContainerProps) {
   if (loading) {
     return (
-      <div className={cn('flex items-center justify-center p-8', className)}>
+    <div className={cn('flex items-center justify-center p-8' className)}>
         {fallback || <BrandLoader />}</BrandLoader>
-    );
   }
 
-  return <>{children}</>;
+  return <>{children}</>
 }
 
 // Main Loading Component (combines all variants)
 export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
   switch (variant) {
     case 'dots':
-      return <LoadingDots {...props} />;
+      return <LoadingDots {...props} />
     case 'pulse':</LoadingDots>
-      return <LoadingPulse {...props} />;
+      return <LoadingPulse {...props} />
     case 'wave':</LoadingPulse>
-      return <LoadingWave {...props} />;
+      return <LoadingWave {...props} />
     case 'brand':</LoadingWave>
-      return <BrandLoader {...props} />;
+      return <BrandLoader {...props} />
     case 'spinner':
     default:</BrandLoader>
-      return <Spinner {...props} />;
+      return <Spinner {...props} />
   }
 }
 </Spinner>
 }
-    </div>
+
     </HTMLButtonElement>
-    </div>
-  );
-}
+  }

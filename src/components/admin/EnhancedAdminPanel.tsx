@@ -14,7 +14,8 @@ export default function EnhancedAdminPanel() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -40,7 +41,8 @@ export default function EnhancedAdminPanel() {
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Performance Status */}</div>
+              {/* Performance Status */}
+
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">
@@ -194,51 +196,16 @@ export default function EnhancedAdminPanel() {
             <div className="flex items-center space-x-4">
               <span>System, Status: ✅ Healthy</span>
               <span>•</span>
-              <span>Last, Updated: {new Date().toLocaleTimeString()}</span>
+              <span>Last,
+    Updated: {new Date().toLocaleTimeString()}</span>
             </div>
             <div className="flex items-center space-x-4">
               <Button size="sm" variant="ghost">
                 📚 Documentation</Button>
               <Button size="sm" variant="ghost">
                 🆘 Support</Button>
-    );
-}
+  }
 
-    </Alert>
-    </div>
-    </Card>
-    </div>
-    </Card>
-    </div>
-    </Card>
-    </div>
-    </Card>
-    </TabsContent>
-    </TabsList>
-    </Tabs>
-    </div>
-    </div>
-    </div>
+    
   );
-</Alert>
-</div>
-</Card>
-</div>
-</div>
-</Card>
-</div>
-</div>
-</Card>
-</div>
-</div>
-</Card>
-</TabsContent>
-</TabsList>
-</Tabs>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 }

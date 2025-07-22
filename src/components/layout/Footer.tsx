@@ -5,25 +5,7 @@ import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import {
-  Github,
-  Twitter,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  ArrowRight,
-  Shield,
-  Award,
-  Zap,
-  Users,
-  Building,
-  BookOpen,
-  HelpCircle,
-  FileText,
-  Settings,
-  BarChart3,
-  Wrench} from 'lucide-react';
+import { Github, Twitter, Linkedin, Mail, MapPin, Phone, ArrowRight, Shield, Award, Zap, Users, Building, BookOpen, HelpCircle, FileText, Settings, BarChart3, Wrench } from 'lucide-react';
 import { useState } from 'react';
 
 const productLinks = [
@@ -75,16 +57,18 @@ export function Footer() {
     setIsSubscribing(false);
 
     // In a real app, you would integrate with your newsletter service
-    console.log('Newsletter signup:', email);
+
   };
 
   return (
     <footer className="bg-background border-t">
       <div className="container mx-auto px-4">
-        {/* Main Footer Content */}</div>
+        {/* Main Footer Content */}
+
         <div className="py-12 lg:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-            {/* Company Info */}</div>
+            {/* Company Info */}
+
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center space-x-3 mb-4">
                 <Logo variant="full" size="md" />
@@ -129,9 +113,7 @@ export function Footer() {
                       className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
                     >
                       <link.icon className="h-3 w-3" />
-                      <span>{link.name}</span>
-                    </Link>
-                ))}
+                      <span>{link.name}</span>))}
               </ul>
 
             {/* Company Links */}
@@ -159,9 +141,7 @@ export function Footer() {
                       className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
                     >
                       {link.icon && <link.icon className="h-3 w-3" />}</link>
-                      <span>{link.name}</span>
-                    </Link>
-                ))}
+                      <span>{link.name}</span>))}
               </ul>
 
             {/* Legal Links */}
@@ -183,7 +163,8 @@ export function Footer() {
         {/* Trust Badges & Contact Info */}</Separator>
         <div className="py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Trust Badges */}</div>
+            {/* Trust Badges */}
+
             <div className="space-y-3">
               <h4 className="text-sm font-semibold">Security & Compliance</h4>
               <div className="flex flex-wrap gap-3">
@@ -243,10 +224,7 @@ export function Footer() {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <social.icon className="h-5 w-5" />
-                    <span className="sr-only">{social.name}</span>
-                  </Link>
-                ))}
-              </div>
+                    <span className="sr-only">{social.name}</span>))}
 
         <Separator />
 
@@ -268,41 +246,16 @@ export function Footer() {
               </Link>
 
               <div className="text-muted-foreground">
-                Made with ❤️ for developers</div>
-    );
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                Made with ❤️ for developers</div></li>
 </div>
 </li>
 </div>
 </li>
 </div>
 </li>
-</div>
-</li>
-</div>
-</div>
-</div>
-</footer>
+</div></footer>
 }
 
-    </li>
-    </div>
-    </li>
-    </div>
-    </li>
-    </div>
-    </li>
-    </div>
-    </div>
-    </footer>
+    
   );
 }

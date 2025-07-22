@@ -7,11 +7,10 @@ import { Palette, Sparkles, Wand2, Eye } from 'lucide-react';
 
 interface EnhancedUIGeneratorProps {
   projectConfig: ProjectConfig;
-  onUIGenerated: (ui: unknown) => void;
-}
+  onUIGenerated: (ui: unknown) => void,
+};
 
-export default function EnhancedUIGenerator({
-  projectConfig}: EnhancedUIGeneratorProps) {
+export default function EnhancedUIGenerator() {
   return (
     <div className="space-y-6">
       <Card>
@@ -58,8 +57,8 @@ export default function EnhancedUIGenerator({
           <p className="text-gray-600">
             Advanced UI generation features will be available in the next
             update.</p>
-    );
-}
+    )
+  );
 
     </CardContent>
     </CardHeader>
@@ -75,6 +74,4 @@ export default function EnhancedUIGenerator({
     </CardTitle>
     </CardHeader>
     </Card>
-    </div>
-  );
-}
+  }

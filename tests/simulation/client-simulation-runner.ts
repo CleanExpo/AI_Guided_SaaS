@@ -172,16 +172,14 @@ export class ClientSimulationRunner {
     let failed = 0
     
     for (const scenario of CLIENT_SCENARIOS) {
-      console.log(`\n🔄 Running scenario: ${scenario.name}`)
       const result = await this.runScenario(scenario)
       results.push(result)
       
       if (result.success) {
         passed++
-        console.log(`✅ Passed`)
       } else {
         failed++
-        console.log(`❌ Failed: ${result.errors.join(', ')}`)
+        }`)
       }
       
       // Add delay between scenarios to avoid rate limiting

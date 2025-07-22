@@ -1,28 +1,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import {
-  Zap,
-  Wrench,
-  BarChart3,
-  Users,
-  FileText,
-  ArrowRight,
-  CheckCircle,
-  Rocket,
-  Brain,
-  Code,
-  Palette,
-  Shield,
-  Globe,
-  Star} from 'lucide-react';
+import { Zap, Wrench, BarChart3, Users, FileText, ArrowRight, CheckCircle, Rocket, Brain, Code, Palette, Shield, Globe, Star } from 'lucide-react';
 import Link from 'next/link';
 
 const features = [
@@ -68,7 +49,8 @@ const benefits = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}</div>
+      {/* Hero Section */}
+
       <section className="relative py-20 px-4 text-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
         <div className="max-w-6xl mx-auto">
           <Badge variant="outline" className="mb-6">
@@ -133,7 +115,6 @@ export default function LandingPage() {
                   <CardDescription className="text-base">
                     {feature.description}</CardDescription>
             ))}
-          </div>
 
       {/* Benefits Section */}
       <section className="py-20 px-4 bg-muted/30">
@@ -151,7 +132,6 @@ export default function LandingPage() {
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
                     <span className="text-base">{benefit}</span>))}
-              </div>
 
               <div className="mt-8">
                 <Button size="lg" asChild>
@@ -220,63 +200,8 @@ export default function LandingPage() {
             ))}</Star>
             <span className="ml-2 text-sm text-muted-foreground">
               Trusted by 10,000+ developers</span>
-    );
-}
+  }
 
-    </Button>
-    </div>
-    </section>
-    </div>
-    </div>
-    </div>
-    </Card>
-    </div>
-    </Button>
-    </div>
-    </div>
-    </div>
-    </section>
-    </CardContent>
-    </CardHeader>
-    </div>
-    </div>
-    </section>
-    </div>
-    </div>
-    </Button>
-    </div>
-    </Badge>
-    </div>
-    </section>
+    
   );
-</div>
-</div>
-</div>
-</div>
-</div>
-</Card>
-</div>
-</Button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</CardContent>
-</CardHeader>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-</div>
-</div>
-</Button>
-</Button>
-</div>
-</Badge>
-</div>
-</section>
 }

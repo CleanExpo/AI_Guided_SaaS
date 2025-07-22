@@ -1,13 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Code, Key, Globe, Download } from 'lucide-react';
@@ -20,7 +14,7 @@ interface ApiDoc {
   content: string;
   category: string;
   version: string;
-}
+}}
 
 const apiDocs: Record<string, ApiDoc> = {
   auth: {
@@ -214,8 +208,8 @@ All endpoints return consistent error responses:
 ## Rate Limiting
 
 Authentication endpoints are rate limited:
-- Login: 5 attempts per minute per IP
-- Register: 3 attempts per minute per IP
+-, Login: 5 attempts per minute per IP
+-, Register: 3 attempts per minute per IP
 -, Refresh: 10 requests per minute per user
 
 ## Security Best Practices
@@ -227,7 +221,7 @@ Authentication endpoints are rate limited:
 5. **Implement logout** - Properly invalidate sessions on logout
     `
   },
-  endpoints: {
+    endpoints: {
     slug: 'endpoints',
     title: 'API Endpoints Reference',
     description: 'Complete reference for all available API endpoints',
@@ -545,7 +539,7 @@ All API responses follow this format:
 - \`500\` - Internal Server Error
     `
   },
-  sdks: {
+    sdks: {
     slug: 'sdks',
     title: 'SDKs and Libraries',
     description:
@@ -570,8 +564,7 @@ yarn add @aiguidedSaaS/sdk
 ### Quick Start
 
 \`\`\`typescript
-import { AiGuidedSaaS } from '@aiguidedSaaS/sdk'
-
+import { AiGuidedSaaS } from '@aiguidedSaaS/sdk';
 const client = new AiGuidedSaaS({
   apiKey: 'your_api_key_here',
   environment: 'production' // or 'development'
@@ -651,7 +644,7 @@ await client.components.update('proj_123', 'comp_456', {
 // Generate code
 const result = await client.ai.generate({
   prompt: 'Create a login form with validation',
-  context: {
+    context: {
     framework: 'react',
     styling: 'tailwindcss'
   }
@@ -683,20 +676,17 @@ pip install aiguidedSaaS-sdk
 from aiguidedSaaS import AiGuidedSaaS
 
 client = AiGuidedSaaS(
-    api_key="your_api_key_here",
-    environment="production"
+    api_key="your_api_key_here" environment="production"
 )
 
 # Create a project
 project = client.projects.create(
-    name="My Python Project",
-    framework="fastapi"
+    name="My Python Project" framework="fastapi"
 )
 
 # Generate code
 component = client.ai.generate_component(
-    prompt="Create a user authentication endpoint",
-    framework="fastapi"
+    prompt="Create a user authentication endpoint" framework="fastapi"
 )
 \`\`\`
 
@@ -934,7 +924,7 @@ export default function ApiDocPage() {
 
   if (!doc) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">
             API Documentation Not Found
@@ -948,8 +938,6 @@ export default function ApiDocPage() {
               Back to API Docs
             </Button>
           </Link>
-        </div>
-    );
   }
 
   return (
@@ -1032,10 +1020,8 @@ export default function ApiDocPage() {
                         {relatedDoc.description}
                       </CardDescription>
                     </CardHeader>
-                  </Card>
-                </Link>
-              ))}
-          </div>
+                  </Card>))}
+
         </CardContent>
       </Card>
 
@@ -1073,9 +1059,7 @@ export default function ApiDocPage() {
                 <div className="font-medium">Postman Collection</div>
                 <div className="text-sm text-muted-foreground">
                   Import our collection
-                </div>
-            </div>
-        </CardContent>
+                </div></CardContent>
       </Card>
 
       {/* Support Section */}
@@ -1098,7 +1082,4 @@ export default function ApiDocPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
-}
-</div>
+  }

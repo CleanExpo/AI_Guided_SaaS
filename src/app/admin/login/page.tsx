@@ -1,14 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { AlertTriangle, Shield, Eye, EyeOff } from 'lucide-react'
-
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { AlertTriangle, Shield, Eye, EyeOff } from 'lucide-react';
 export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -16,11 +15,6 @@ export default function AdminLoginPage() {
   const router = useRouter()
 
   // Debug: Log when component mounts
-  console.log('ADMIN LOGIN PAGE LOADED - NO REDIRECT!')
-  console.log('Environment:', process.env.NODE_ENV)
-  console.log('NextAuth URL:', process.env.NEXTAUTH_URL)
-  console.log('App URL:', process.env.NEXT_PUBLIC_APP_URL)
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
@@ -33,7 +27,7 @@ export default function AdminLoginPage() {
 
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
-        headers: {
+    headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email, password })
@@ -79,9 +73,7 @@ export default function AdminLoginPage() {
                   <AlertTriangle className="h-4 w-4" />
                   <AlertDescription className="text-red-400">
                     {error}
-                  </AlertDescription>
-                </Alert>
-              )}
+                  </AlertDescription>)}
 
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-slate-200">
@@ -159,15 +151,10 @@ export default function AdminLoginPage() {
           >
             ← Back to main site
           </button>
-        </div>
-    </div>
-  );
-</div>
-</form>
+        </div></form>
 </CardContent>
 </Card>
-</div>
-</div>
-</HTMLFormElement>
+</div></HTMLFormElement>
 }
 </HTMLFormElement>
+}

@@ -1,15 +1,14 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ProjectConfig } from '@/types'
-import { BookOpen } from 'lucide-react'
-
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProjectConfig } from '@/types';
+import { BookOpen } from 'lucide-react';
 interface AdvancedDocumentationDashboardProps {
   projectConfig: ProjectConfig;
   onDocumentationComplete: (result: unknown) => void
-}
+};
 
-export default function AdvancedDocumentationDashboard({ projectConfig }: AdvancedDocumentationDashboardProps) {
+export default function AdvancedDocumentationDashboard() {
   return (
     <Card></Card>
       <CardHeader></CardHeader>
@@ -19,5 +18,4 @@ export default function AdvancedDocumentationDashboard({ projectConfig }: Advanc
       <CardContent></CardContent>
         <p className="text-gray-600">
           Advanced documentation features for {projectConfig.name} coming soon...</p>
-    );
-}
+  }

@@ -1,25 +1,16 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { 
-  MessageSquare, 
-  ThumbsUp, 
-  ThumbsDown, 
-  AlertCircle,
-  X,
-  Send,
-  Loader2
-} from 'lucide-react'
-import { cn } from '@/utils/cn'
-
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { MessageSquare, ThumbsUp, ThumbsDown, AlertCircle, X, Send, Loader2 } from 'lucide-react';
+import { cn } from '@/utils/cn';
 interface FeedbackWidgetProps {
   projectId?: string
   feature?: string
   context?: Record<string, any>
-}
+};
 
 type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other'
 type FeedbackSentiment = 'positive' | 'negative' | 'neutral'
@@ -27,13 +18,12 @@ type FeedbackSentiment = 'positive' | 'negative' | 'neutral'
 export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetProps) {
       </string>
   const [isOpen, setIsOpen] = useState(false)
-  const [feedback, setFeedback] = useState('')</string>
-  const [type, setType] = useState<FeedbackType>('other')</FeedbackType>
-      </FeedbackSentiment>
+  const [feedback, setFeedback] = useState('')
+  const [type, setType] = useState<FeedbackType>('other')
   const [sentiment, setSentiment] = useState<FeedbackSentiment>('neutral')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showThankYou, setShowThankYou] = useState(false)</FeedbackSentiment>
-      </any>
+  const [showThankYou, setShowThankYou] = useState(false)
+      
   const [recentError, setRecentError] = useState<any>(null)
 
   // Capture errors for context
@@ -46,7 +36,7 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
         timestamp: new Date().toISOString()
       }
       )}
-    </div>
+
   );
     window.addEventListener('error', handleError)
     return () => window.removeEventListener('error', handleError)
@@ -59,14 +49,14 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
     try {
       const response = await fetch('/api/feedback', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           feedback,
           type,
           sentiment,
           projectId,
           feature,
-          context: {
+    context: {
             ...context,
             url: window.location.href,
             userAgent: navigator.userAgent,
@@ -98,12 +88,12 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
       try {
         await fetch('/api/feedback/quick', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             sentiment: quickSentiment,
             projectId,
             feature,
-            context: {
+    context: {
               url: window.location.href,
               timestamp: new Date().toISOString()
             }
@@ -154,8 +144,7 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                 onClick={() => setIsOpen(true)}
               ></Button>
                 <MessageSquare className="h-4 w-4 mr-2" />
-                Feedback</MessageSquare>
-              </Button>)}
+                Feedback</MessageSquare>)}
 
         {/* Feedback form */}
         {isOpen && (
@@ -193,7 +182,6 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                     >
                       {option.label}</Button>
                   ))}
-                </div>
 
                 {/* Sentiment selector */}
                 <div className="flex gap-2 mb-4"></div>
@@ -255,38 +243,36 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
             )}
           </Card>
         )}
-      </div>
 
       <style jsx>{`
         @keyframes slide-up {
           from {
             transform: translateY(100%),
             opacity: 0;
-          }
+          }}
           to {
             transform: translateY(0),
             opacity: 1;
-          }
+          }}
         }
 
         @keyframes fade-in {
           from {
             opacity: 0;
-          }
+          }}
           to {
             opacity: 1;
-          }
+          }}
         }
 
         .animate-slide-up {
           animation: slide-up 0.3s ease-out;
-        }
+        }}
 
         .animate-fade-in {
           animation: fade-in 0.3s ease-out;
-        }</style>
+        }}</style>
       `}</style>
     </>
   )
 }
-</any>

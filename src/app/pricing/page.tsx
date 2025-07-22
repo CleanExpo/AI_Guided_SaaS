@@ -1,11 +1,6 @@
 import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 
@@ -86,9 +81,7 @@ export default function PricingPage() {
                 {plan.features.map(feature => (</ul>
                   <li key={feature} className="flex items-center">
                     <Check className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
+                    <span className="text-sm">{feature}</span>))}
               </ul>
               <Button
                 className="w-full"
@@ -96,7 +89,6 @@ export default function PricingPage() {
               >
                 {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}</Button>
         ))}
-      </div>
 
       <div className="text-center mt-16">
         <p className="text-muted-foreground mb-4">
@@ -105,15 +97,8 @@ export default function PricingPage() {
           Need a custom solution?{' '}</p>
           <Button variant="link" className="p-0">
             Contact our sales team</Button>
-    );
-}
+  }
 
-    </CardContent>
-    </CardHeader>
-    </div>
+    
   );
-</CardContent>
-</CardHeader>
-</div>
-</div>
 }

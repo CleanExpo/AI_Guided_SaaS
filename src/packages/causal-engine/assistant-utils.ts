@@ -18,22 +18,23 @@ export interface EnhancedComponent {
  * Filter and enhance components based on causal scoring
  */
 export const filterComponentsByScore = (
-  components: any[], 
+  components: any[],
   page: string = 'ui-builder'
 ): EnhancedComponent[] => {
   const logs = logger.getLogs();
   const scorer = new CausalScorer(logs);
 
-  return components.map((comp) => {
+  return components.map(comp => {
     const score = scorer.scoreComponent(page, comp.id || comp.type);
     const confidence = scorer.getConfidence(page, comp.id || comp.type);
-    
+
     return {
       ...comp,
       causalScore: score,
       confidence,
       suggested: score >= 0.7 && confidence !== 'low',
-      deprioritize: score < 0.4 && confidence !== 'low'};
+      deprioritize: score < 0.4 && confidence !== 'low',
+    };
   });
 };
 
@@ -46,7 +47,7 @@ export const getSmartSuggestions = (
   limit: number = 3
 ): EnhancedComponent[] => {
   const enhanced = filterComponentsByScore(availableComponents, page);
-  
+
   return enhanced
     .filter(comp => comp.suggested)
     .sort((a, b) => (b.causalScore || 0) - (a.causalScore || 0))
@@ -61,7 +62,7 @@ export const getComponentsToAvoid = (
   page: string = 'ui-builder'
 ): EnhancedComponent[] => {
   const enhanced = filterComponentsByScore(availableComponents, page);
-  
+
   return enhanced
     .filter(comp => comp.deprioritize)
     .sort((a, b) => (a.causalScore || 0) - (b.causalScore || 0));
@@ -73,22 +74,22 @@ export const getComponentsToAvoid = (
 export const generateCausalContext = (page: string = 'ui-builder'): string => {
   const logs = logger.getLogs();
   const scorer = new CausalScorer(logs);
-  
+
   const topComponents = scorer.getTopComponents(3);
   const lowComponents = scorer.getLowPerformingComponents(0.3);
-  
+
   let context = '';
-  
+
   if (topComponents.length > 0) {
     const topTypes = topComponents.map(c => c.key.split(':')[1]).join(', ');
     context += `High-performing, components: ${topTypes}. `;
   }
-  
+
   if (lowComponents.length > 0) {
     const lowTypes = lowComponents.map(c => c.key.split(':')[1]).join(', ');
     context += `Avoid, suggesting: ${lowTypes} (poor user retention). `;
   }
-  
+
   return context;
 };
 

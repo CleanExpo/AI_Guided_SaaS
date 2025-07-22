@@ -1,33 +1,33 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Activity, Cpu, HardDrive, Users, Clock, AlertCircle } from 'lucide-react'
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Activity, Cpu, HardDrive, Users, Clock, AlertCircle } from 'lucide-react';
 interface AgentMetrics {
   agentId: string;
   isAvailable: boolean
-  executionCount: number;
+ ; executionCount: number;
   averageExecutionTime: number
  ;
   cooldownRemaining: number
-}
+};
 
 interface PulseStatus {
   pulse: {
     config: {
       maxConcurrentAgents: number;
   pulseInterval: number
-      cooldownPeriod: number;
+     ; cooldownPeriod: number;
   maxMemoryUsage: number
      ;
   maxCpuUsage: number
     }
     taskQueue: {
-      length: number, priorities: {
+      length: number,
+    priorities: {
         low?: number
         medium?: number
         high?: number
@@ -36,18 +36,17 @@ interface PulseStatus {
     }
     resources: {
       cpuUsage: number, memoryUsage: number
-      activeAgents: number
+     , activeAgents: number
      , queuedTasks: number
     }
     agentPool: AgentMetrics[]
   }
-}
+};
 
 export function AgentPulseMonitor() {
       </PulseStatus>
   const [status, setStatus] = useState<PulseStatus | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-      </string>
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -73,7 +72,7 @@ export function AgentPulseMonitor() {
     try {
       const response = await fetch('/api/agents/pulse-config', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
             </string>
         body: JSON.stringify(updates)
       })
@@ -85,14 +84,16 @@ export function AgentPulseMonitor() {
   }
 
   if (isLoading) return <div>Loading pulse monitor...</div>
-  if (error) return <div>Error: {error}</div>
+  if (error) return <div>Error: {error}
+
   if (!status) return <div>No status data available</div>
 
   const { pulse } = status
 
   return (
     <div className="space-y-4">
-      {/* Resource, Usage */}</div>
+      {/* Resource, Usage */}
+
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -150,9 +151,8 @@ export function AgentPulseMonitor() {
                     <div className="flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       <span>{(agent.cooldownRemaining / 1000).toFixed(1)}s</span>)}
-                </div>
+
             ))}
-          </div>
 
       {/* Task, Queue */}
       <Card>
@@ -166,11 +166,12 @@ export function AgentPulseMonitor() {
           <div className="grid grid-cols-4 gap-2">
             {['critical', 'high', 'medium', 'low'].map((priority) => (
               <div key={priority} className="text-center p-2 border rounded">
-                <div className="text-sm font-medium capitalize">{priority}</div>
+                <div className="text-sm font-medium capitalize">{priority}
+
                 <div className="text-2xl font-bold">
-                  {pulse.taskQueue.priorities[priority as keyof typeof pulse.taskQueue.priorities] || 0}</div>
+                  {pulse.taskQueue.priorities[priority as keyof typeof pulse.taskQueue.priorities] || 0}
+
             ))}
-          </div>
 
       {/* Configuration, Controls */}
       <Card>
@@ -183,7 +184,7 @@ export function AgentPulseMonitor() {
               variant="outline"
               onClick={() => updateConfig({ maxConcurrentAgents: Math.max(1, pulse.config.maxConcurrentAgents - 1)}
       )}
-    </div>
+
   );
             >
               Reduce Agents (-1)</Button>
@@ -191,27 +192,9 @@ export function AgentPulseMonitor() {
               variant="outline"
               onClick={() => updateConfig({ maxConcurrentAgents: pulse.config.maxConcurrentAgents + 1}
       )}
-    </div>
-      </Card>
-      </CardHeader>
-      </CardTitle>
-      </CardContent>
-      </div>
-      </div>
-      </Card>
-      </CardHeader>
-      </CardTitle>
-      </CardContent>
-      </div>
-      </Card>
-      </CardHeader>
-      </CardTitle>
-      </CardContent>
-      </div>
-      </Card>
-      </CardHeader>
-      </CardContent>
-  );
+
+      
+
             >
               Increase Agents (+1)</Button>
           
@@ -221,24 +204,17 @@ export function AgentPulseMonitor() {
             <div>Max: CPU: {pulse.config.maxCpuUsage}%</div>
             <div>Max: Memory: {pulse.config.maxMemoryUsage}%</div>
         </CardContent>
-          </div>
-      );
 </CardTitle>
 </CardHeader>
 </Card>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardTitle>
 </CardHeader>
 </Card>
-</div>
-</div>
-</div>
-</div>
-</CardContent>
+</div></CardContent>
 </CardTitle>
 </CardHeader>
 </Card>
 }
 </PulseStatus>
+}

@@ -6,43 +6,17 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import {
-  Users,
-  Shield,
-  Activity,
-  BarChart3,
-  AlertTriangle,
-  CheckCircle,
-  Search,
-  Eye,
-  Edit,
-  UserCheck,
-  UserX,
-  Flag,
-  ThumbsUp,
-  ThumbsDown} from 'lucide-react';
-import {
-  adminService,
-  SystemStats,
-  UserManagement,
-  ContentModeration,
-  SystemConfiguration,
-  AdminActivity} from '@/lib/admin';
+import { Users, Shield, Activity, BarChart3, AlertTriangle, CheckCircle, Search, Eye, Edit, UserCheck, UserX, Flag, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { adminService, SystemStats, UserManagement, ContentModeration, SystemConfiguration, AdminActivity } from '@/lib/admin';
 
 export default function AdminPanel() {
-      </any>
   const [adminUser, setAdminUser] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
-      </SystemStats>
   const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
-      </UserManagement>
   const [users, setUsers] = useState<UserManagement[]>([]);
-      </ContentModeration>
   const [content, setContent] = useState<ContentModeration[]>([]);
-      </SystemConfiguration>
   const [configuration, setConfiguration] = useState<SystemConfiguration[]>([]);
-      </AdminActivity>
   const [activities, setActivities] = useState<AdminActivity[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [userFilter, setUserFilter] = useState('all');
@@ -55,7 +29,7 @@ export default function AdminPanel() {
       try {
         setAdminUser(JSON.parse(adminUserData));
       } catch (error) {
-        console.error('Error parsing admin, user:', error);
+        console.error('Error parsing admin user:', error);
       }
     }
   }, []);
@@ -84,7 +58,7 @@ export default function AdminPanel() {
       setConfiguration(configData);
       setActivities(activityData.activities);
     } catch (error) {
-      console.error('Error loading admin, data:', error);
+      console.error('Error loading admin data:', error);
     } finally {
       setLoading(false);
     }
@@ -102,7 +76,7 @@ export default function AdminPanel() {
       );
       await loadAdminData(); // Refresh data
     } catch (error) {
-      console.error('Error updating user, status:', error);
+      console.error('Error updating user status:', error);
     }
   };
 
@@ -118,7 +92,7 @@ export default function AdminPanel() {
       );
       await loadAdminData(); // Refresh data
     } catch (error) {
-      console.error('Error moderating, content:', error);
+      console.error('Error moderating content:', error);
     }
   };
 
@@ -138,9 +112,8 @@ export default function AdminPanel() {
         return 'bg-red-100 text-red-800';
       case 'pending':
         return 'bg-blue-100 text-blue-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
+      default: return 'bg-gray-100 text-gray-800';
+    }}
   };
 
   const formatCurrency = (amount: number) => {
@@ -177,18 +150,16 @@ export default function AdminPanel() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading admin panel...</p>
-    
-        </div>
-    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -198,7 +169,8 @@ export default function AdminPanel() {
               <Badge variant="outline">System Management</Badge>
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
-                Welcome, {adminUser?.name || 'Admin'}</span>
+                Welcome, {adminUser?.name || 'Admin'}
+              
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -208,10 +180,11 @@ export default function AdminPanel() {
             <TabsTrigger value="content">Content</TabsTrigger>
             <TabsTrigger value="system">System</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
+          </TabsList>
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
-            {systemStats && (</TabsContent>
+            {systemStats && (
               <>
                 {/* System Health Alert */}
                 <Alert
@@ -225,61 +198,83 @@ export default function AdminPanel() {
                 >
                   <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
-                    System, Status:{' '}</AlertDescription>
+                    System Status: {' '}
                     <strong>{systemStats.systemHealth.toUpperCase()}</strong>
                     {systemStats.systemHealth !== 'healthy' &&
                       ' - Attention required'}
                   </AlertDescription>
+                </Alert>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Users</CardTitle>
+                        Total Users
+                      </CardTitle>
                       <Users className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.totalUsers.toLocaleString()}</div>
+                        {systemStats.totalUsers.toLocaleString()}
+                      </div>
                       <p className="text-xs text-muted-foreground">
-                        {systemStats.activeUsers} active users</p>
+                        {systemStats.activeUsers} active users
+                      </p>
+                    </CardContent>
+                  </Card>
 
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Projects</CardTitle>
+                        Total Projects
+                      </CardTitle>
                       <BarChart3 className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.totalProjects.toLocaleString()}</div>
+                        {systemStats.totalProjects.toLocaleString()}
+                      </div>
                       <p className="text-xs text-muted-foreground">
-                        {systemStats.totalTemplates} templates available</p>
+                        {systemStats.totalTemplates} templates available
+                      </p>
+                    </CardContent>
+                  </Card>
 
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Revenue</CardTitle>
+                        Total Revenue
+                      </CardTitle>
                       <Activity className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {formatCurrency(systemStats.totalRevenue)}</div>
+                        {formatCurrency(systemStats.totalRevenue)}
+                      </div>
                       <p className="text-xs text-muted-foreground">
-                        Monthly recurring revenue</p>
+                        Monthly recurring revenue
+                      </p>
+                    </CardContent>
+                  </Card>
 
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        System Uptime</CardTitle>
+                        System Uptime
+                      </CardTitle>
                       <CheckCircle className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.uptime}%</div>
+                        {systemStats.uptime}%
+                      </div>
                       <p className="text-xs text-muted-foreground">
-                        {systemStats.errorRate}% error rate</p>
+                        {systemStats.errorRate}% error rate
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
               </>
             )}
           </TabsContent>
@@ -331,9 +326,11 @@ export default function AdminPanel() {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div>
                               <div className="text-sm font-medium text-gray-900">
-                                {user.name}</div>
+                                {user.name}
+
                               <div className="text-sm text-gray-500">
-                                {user.email}</div>
+                                {user.email}
+
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge
                               className={
@@ -373,7 +370,7 @@ export default function AdminPanel() {
                                 )}</UserCheck>
                               <Button size="sm" variant="outline">
                                 <Eye className="h-4 w-4" />
-                              </Button>
+                              
                       ))}
                     </tbody>
 
@@ -457,7 +454,6 @@ export default function AdminPanel() {
                           <Eye className="h-4 w-4" />
                         </Button>
               ))}
-            </div>
 
           {/* System Tab */}
           <TabsContent value="system" className="space-y-6">
@@ -477,7 +473,7 @@ export default function AdminPanel() {
                             <Badge className="bg-red-100 text-red-800">
                               Secret</Badge>
                           )}
-                        </div>
+
                         <p className="text-sm text-gray-600 mb-2">
                           {config.description}</p>
                         <p className="text-sm text-gray-500">
@@ -485,14 +481,14 @@ export default function AdminPanel() {
                           <code className="bg-gray-100 px-2 py-1 rounded">
                             {config.value}</code>
                         <p className="text-xs text-gray-400 mt-2">
-                          Last, modified: {formatDate(config.lastModified)} by{' '}
+                          Last,
+    modified: {formatDate(config.lastModified)} by{' '}
                           {config.modifiedBy}</p>
                       <div className="flex items-center space-x-2">
                         <Button size="sm" variant="outline">
                           <Edit className="h-4 w-4" />
                         </Button>
               ))}
-            </div>
 
           {/* Activity Tab */}
           <TabsContent value="activity" className="space-y-6">
@@ -528,116 +524,7 @@ export default function AdminPanel() {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {activity.ipAddress}</td>
                       ))}
-                    </tbody>
-    );
-</td>
-</tr>
-</tr>
-</thead>
-</table>
-</div>
-</CardContent>
-</Card>
-</TabsContent>
-</div>
-</div>
-</CardContent>
-</Card>
-</TabsContent>
-</div>
-</div>
-</div>
-</CardContent>
-</Card>
-</div>
-</div>
-</div>
-</TabsContent>
-</div>
-</td>
-</td>
-</td>
-</div>
-</td>
-</tr>
-</tr>
-</thead>
-</table>
-</div>
-</CardContent>
-</Card>
-</div>
-</div>
-</div>
-</TabsContent>
-</CardContent>
-</Card>
-</CardContent>
-</Card>
-</CardContent>
-</Card>
-</CardContent>
-</Card>
-</div>
-</TabsList>
-</Tabs>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-}
-
-    </td>
-    </tr>
-    </thead>
-    </table>
-    </div>
-    </CardContent>
-    </Card>
-    </TabsContent>
-    </div>
-    </CardContent>
-    </Card>
-    </TabsContent>
-    </div>
-    </div>
-    </CardContent>
-    </Card>
-    </div>
-    </div>
-    </TabsContent>
-    </div>
-    </td>
-    </td>
-    </div>
-    </td>
-    </tr>
-    </thead>
-    </table>
-    </div>
-    </CardContent>
-    </Card>
-    </div>
-    </div>
-    </TabsContent>
-    </CardContent>
-    </Card>
-    </CardContent>
-    </Card>
-    </CardContent>
-    </Card>
-    </CardContent>
-    </Card>
-    </div>
-    </TabsList>
-    </Tabs>
-    </div>
-    </div>
-    </div>
+                    
   );
+  }
 }
-</SystemStats>
-</any>

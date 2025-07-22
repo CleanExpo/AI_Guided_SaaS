@@ -7,7 +7,7 @@ export interface TokenBudget {
   reserved: number;
   available: number;
   utilizationRate: number
-}
+};
 
 export interface TokenAllocation {
   coreMemory: number        // Essential project information;
@@ -16,7 +16,7 @@ export interface TokenAllocation {
   codeContext: number      // Current code being worked on;
   toolOutput: number       // Tool execution results;
   conversationHistory: number // Recent conversation context
-}
+};
 
 export interface OptimizationStrategy {
   name: string;
@@ -25,21 +25,21 @@ export interface OptimizationStrategy {
   compressionRatio: number;
   preservationRules: PreservationRule[];
   triggers: OptimizationTrigger[]
-}
+};
 
 export interface PreservationRule {
   type: 'always_preserve' | 'conditionally_preserve' | 'compressible' | 'archivable'
   pattern: string | RegExp;
   priority: number;
   reason: string
-}
+};
 
 export interface OptimizationTrigger {
   condition: 'token_threshold' | 'time_interval' | 'context_fragmentation' | 'manual'
   threshold?: number
   interval?: number
   parameters?: Record<string, any>
-}
+};
 
 export interface TokenAnalysis {
   currentUsage: number;
@@ -47,34 +47,34 @@ export interface TokenAnalysis {
   efficiency: EfficiencyMetrics;
   recommendations: OptimizationRecommendation[];
   fragmentation: FragmentationAnalysis
-}
+};
 
 export interface TokenDistribution {
   categories: Record<string, number>
   files: Record<string, number>
   agents: Record<string, number>
   temporalDistribution: TemporalDistribution
-}
+};
 
 export interface TemporalDistribution {
   recent: number      // Last hour;
   current: number     // Current session;
   historical: number  // Previous sessions
-}
+};
 
 export interface EfficiencyMetrics {
   utilizationScore: number;
   compressionPotential: number;
   redundancyLevel: number;
   accessPatterns: AccessPattern[]
-}
+};
 
 export interface AccessPattern {
   content: string;
   accessCount: number;
   lastAccessed: Date;
   importance: number
-}
+};
 
 export interface OptimizationRecommendation {
   type: 'compress' | 'archive' | 'split' | 'merge' | 'prioritize' | 'consolidate'
@@ -82,14 +82,14 @@ export interface OptimizationRecommendation {
   estimatedSavings: number;
   riskLevel: 'low' | 'medium' | 'high'
   description: string
-}
+};
 
 export interface FragmentationAnalysis {
   score: number;
   causes: string[];
   impactOnPerformance: number;
   defragmentationOpportunities: DefragmentationOpportunity[]
-}
+};
 
 export interface DefragmentationOpportunity {
   target: string;
@@ -116,11 +116,23 @@ export class TokenOptimizationEngine {
     const targetTokens = this.maxTokens * this.targetUtilization // 150K tokens
 
     return {
-      total: this.maxTokens,
-      allocated: {
-        coreMemory: Math.floor(targetTokens * 0.15),      // 22.5K - Essential project info, workingContext: Math.floor(targetTokens * 0.30),  // 45K - Active development, documentation: Math.floor(targetTokens * 0.25),   // 37.5K - Documentation, codeContext: Math.floor(targetTokens * 0.20),     // 30K - Current code, toolOutput: Math.floor(targetTokens * 0.07),      // 10.5K - Tool results, conversationHistory: Math.floor(targetTokens * 0.03) // 4.5K - Recent conversation
+      total: this.maxTokens
+   , allocated: {
+        coreMemory: Math.floor(targetTokens * 0.15),
+  // 22.5K - Essential project info
+  workingContext: Math.floor(targetTokens * 0.30),
+  // 45K - Active development
+  documentation: Math.floor(targetTokens * 0.25),
+  // 37.5K - Documentation
+  codeContext: Math.floor(targetTokens * 0.20),
+  // 30K - Current code
+  toolOutput: Math.floor(targetTokens * 0.07),
+  // 10.5K - Tool results
+  conversationHistory: Math.floor(targetTokens * 0.03) // 4.5K - Recent conversation
       },
-      reserved: this.maxTokens - targetTokens, // 50K reserved for safety, available: this.maxTokens,
+      reserved: this.maxTokens - targetTokens,
+  // 50K reserved for safety
+  available: this.maxTokens,
       utilizationRate: 0
     }
   }
@@ -233,8 +245,6 @@ export class TokenOptimizationEngine {
 
   // Main Optimization Methods
   async analyzeTokenUsage(content: Map<string, string>): Promise<TokenAnalysis> {
-    console.log('🔍 Analyzing token usage patterns...')
-
     const currentUsage = this.calculateTotalTokens(content)
     const distribution = this.analyzeTokenDistribution(content)
     const efficiency = this.calculateEfficiencyMetrics(content, distribution)
@@ -269,9 +279,6 @@ export class TokenOptimizationEngine {
     if (!strategy) {
       throw new Error(`Optimization strategy '${strategyName}' not found`)
     }
-
-    console.log(`🗜️ Applying ${strategy.name} optimization strategy...`)
-
     const analysis = await this.analyzeTokenUsage(content)
     const optimizedContent = new Map<string, string>()
     const optimizationLog: OptimizationOperation[] = []
@@ -357,7 +364,7 @@ export class TokenOptimizationEngine {
       strategy: strategyName,
       optimizedContent,
       operationLog: optimizationLog,
-      metrics: {
+    metrics: {
         efficiencyGain: finalAnalysis.efficiency.utilizationScore - analysis.efficiency.utilizationScore,
         fragmentationReduction: analysis.fragmentation.score - finalAnalysis.fragmentation.score,
         qualityRetention: this.calculateQualityRetention(optimizationLog)
@@ -519,7 +526,8 @@ export class TokenOptimizationEngine {
     return {
       categories,
       files,
-      agents: {}, // Would be populated with agent-specific token usage, temporalDistribution: {
+    agents: {}, // Would be populated with agent-specific token usage
+    temporalDistribution: {
         recent: categories['memory'] || 0,
         current: Object.values(categories).reduce((sum, val) => sum + val, 0) * 0.6,
         historical: Object.values(categories).reduce((sum, val) => sum + val, 0) * 0.4
@@ -565,7 +573,9 @@ export class TokenOptimizationEngine {
     return {
       score: fragmentationScore,
       causes: fragmentationScore > 0.5 ? ['Uneven file sizes', 'Content distribution imbalance'] : [],
-      impactOnPerformance: fragmentationScore * 0.3, // Fragmentation has moderate impact, defragmentationOpportunities: []
+      impactOnPerformance: fragmentationScore * 0.3,
+  // Fragmentation has moderate impact
+  defragmentationOpportunities: []
     }
   }
 
@@ -678,7 +688,7 @@ interface OptimizationResult {
   fragmentationReduction: number;
   qualityRetention: number
   }
-}
+};
 
 interface OptimizationOperation {
   filename: string;

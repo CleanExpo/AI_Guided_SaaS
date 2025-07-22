@@ -26,7 +26,7 @@ export interface KiroProject {
   settings?: KiroProjectSettings;
   createdAt: string;
   updatedAt: string
-}
+};
 
 export interface KiroFileTree {
   name: string;
@@ -40,7 +40,7 @@ export interface KiroFileTree {
     encoding?: string
     permissions?: string
   }
-}
+};
 
 export interface KiroProjectSettings {
   buildCommand?: string
@@ -58,7 +58,7 @@ export interface KiroFile {
   language?: string
   readOnly?: boolean
   markers?: KiroMarker[]
-}
+};
 
 export interface KiroMarker {
   severity: 'error' | 'warning' | 'info' | 'hint'
@@ -68,7 +68,7 @@ export interface KiroMarker {
   endLine: number;
   endColumn: number
   source?: string
-}
+};
 
 export interface KiroTerminal {
   id: string;
@@ -76,7 +76,7 @@ export interface KiroTerminal {
   shell?: string
   cwd?: string
   env?: Record<string, string>
-}
+};
 
 export interface KiroDebugSession {
   id: string;
@@ -89,10 +89,9 @@ export interface KiroDebugSession {
 // AI assistance types
 export interface KiroAIAssistance {
   suggestions: KiroSuggestion[];
-  diagnostics: KiroDiagnostic[]
-  refactorings: KiroRefactoring[];
+  diagnostics: KiroDiagnostic[]; refactorings: KiroRefactoring[];
   completions: KiroCompletion[]
-}
+};
 
 export interface KiroSuggestion {
   id: string;
@@ -101,7 +100,7 @@ export interface KiroSuggestion {
   description: string;
   priority: 'high' | 'medium' | 'low'
   changes?: KiroCodeChange[]
-}
+};
 
 export interface KiroDiagnostic {
   file: string;
@@ -111,7 +110,7 @@ export interface KiroDiagnostic {
   message: string
   code?: string
   fixes?: KiroQuickFix[]
-}
+};
 
 export interface KiroRefactoring {
   id: string;
@@ -119,7 +118,7 @@ export interface KiroRefactoring {
   description: string;
   scope: 'file' | 'function' | 'class' | 'project'
   preview: KiroCodeChange[]
-}
+};
 
 export interface KiroCompletion {
   label: string;
@@ -132,7 +131,7 @@ export interface KiroCompletion {
   character: number }
     end: { line: number, character: number }
   }
-}
+};
 
 export interface KiroCodeChange {
   file: string;
@@ -144,7 +143,7 @@ export interface KiroCodeChange {
     }
     newText: string
   }>
-}
+};
 
 export interface KiroQuickFix {
   title: string;
@@ -315,7 +314,8 @@ export class KiroClient {
     })
   }
 
-  async getCompletions(file: string, position: { line: number, character: number }): Promise<KiroCompletion[]> {
+  async getCompletions(file: string,
+    position: { line: number, character: number }): Promise<KiroCompletion[]> {
     return this.request('/api/ai/completions', {
       method: 'POST',
       body: JSON.stringify({ file, position })

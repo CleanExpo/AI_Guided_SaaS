@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useToast } from '@/hooks/use-toast'
+import { useState, useEffect, useCallback } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useToast } from '@/hooks/use-toast';
 import TemplateMarketplace from '@/components/marketplace/TemplateMarketplace'
 
 interface Template {
@@ -19,7 +19,7 @@ interface Template {
   author: string;
   tags: string[];
   featured: boolean
-}
+};
 
 export default function TemplatesPage() {
   const { toast } = useToast()
@@ -144,29 +144,27 @@ export default function TemplatesPage() {
       title: 'Download Started',
       description: 'Template download has been initiated'}
       )}
-    </div>
+
     );
   const handlePreview = () => {
     toast({
       title: 'Preview',
       description: 'Opening template preview...'}
       )}
-    </div>
+
     );
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]"></div>
+    <div className="flex items-center justify-center min-h-[400px]"></div>
         <div className="text-center"></div>
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading templates...</p>
-    
-        </div>
-    );
   }
 
   return (
     <div className="space-y-8">
-      {/* Header */}</div>
+      {/* Header */}
+
       <div className="flex items-center justify-between"></div>
         <div></div>
           <h1 className="text-3xl font-bold tracking-tight">Template Marketplace</h1>
@@ -183,7 +181,8 @@ export default function TemplatesPage() {
             <span className="text-muted-foreground">📦</span>
           </CardHeader>
           <CardContent></CardContent>
-            <div className="text-2xl font-bold">{templates.length}</div>
+            <div className="text-2xl font-bold">{templates.length}
+
             <p className="text-xs text-muted-foreground">
               Available for download</p>
 
@@ -194,7 +193,8 @@ export default function TemplatesPage() {
           </CardHeader>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">
-              {templates.reduce((sum, t) => sum + t.downloads, 0).toLocaleString()}</div>
+              {templates.reduce((sum, t) => sum + t.downloads, 0).toLocaleString()}
+
             <p className="text-xs text-muted-foreground">
               All time downloads</p>
 
@@ -205,7 +205,8 @@ export default function TemplatesPage() {
           </CardHeader>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">
-              {(templates.reduce((sum, t) => sum + t.rating, 0) / templates.length).toFixed(1)}</div>
+              {(templates.reduce((sum, t) => sum + t.rating, 0) / templates.length).toFixed(1)}
+
             <p className="text-xs text-muted-foreground">
               User satisfaction</p>
 
@@ -215,7 +216,8 @@ export default function TemplatesPage() {
             <span className="text-muted-foreground">🌟</span>
           </CardHeader>
           <CardContent></CardContent>
-            <div className="text-2xl font-bold">{featuredTemplates.length}</div>
+            <div className="text-2xl font-bold">{featuredTemplates.length}
+
             <p className="text-xs text-muted-foreground">
               Editor&apos;s choice</p>
 
@@ -237,7 +239,6 @@ export default function TemplatesPage() {
               >
                 {category.name} ({category.count})</Button>
             ))}
-          </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredTemplates.map((template) => (</div>
@@ -251,7 +252,7 @@ export default function TemplatesPage() {
                     {template.featured && (
                       <Badge className="bg-yellow-500">Featured</Badge>
                     )}
-                  </div>
+
                 <CardContent></CardContent>
                   <div className="space-y-4"></div>
                     <div className="flex items-center justify-between text-sm"></div>
@@ -281,7 +282,6 @@ export default function TemplatesPage() {
                         <Badge key={tag} variant="secondary" className="text-xs">
                           {tag}</Badge>
                   ))}
-                    </div>
 
                     <div className="flex space-x-2 pt-2"></div>
                       <Button 
@@ -297,7 +297,6 @@ export default function TemplatesPage() {
                       >
                         👁️ Preview</Button>
             ))}
-          </div>
 
         <TabsContent value="featured" className="space-y-4"></TabsContent>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -341,9 +340,7 @@ export default function TemplatesPage() {
                       >
                         👁️ Preview</Button>
             ))}
-          </div>
 
         <TabsContent value="marketplace" className="space-y-4"></TabsContent>
           <TemplateMarketplace /></TemplateMarketplace>
-    );
-}
+  }

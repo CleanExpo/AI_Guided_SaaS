@@ -18,6 +18,6 @@ export default function PreviewPane() {
               <ComponentRenderer type={c.type} props={c.props} /></ComponentRenderer>
           ))
         )}
-      </div>
+
     );
 }

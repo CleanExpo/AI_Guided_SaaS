@@ -7,13 +7,13 @@ export interface DataSource {
   config: Record<string, any>
   isActive: boolean
   lastSync?: Date
-}
+};
 
 export interface DataSchema {
   name: string;
   fields: SchemaField[]
   relationships?: Relationship[]
-}
+};
 
 export interface SchemaField {
   name: string;
@@ -25,14 +25,14 @@ export interface SchemaField {
   max?: number
   enum?: string[]
   reference?: string // For relationships
-}
+};
 
 export interface Relationship {
   from: string;
   to: string;
   type: 'one-to-one' | 'one-to-many' | 'many-to-many'
   field: string
-}
+};
 
 export class MockDataGenerator {
   private schemas: Map<string, DataSchema> = new Map()

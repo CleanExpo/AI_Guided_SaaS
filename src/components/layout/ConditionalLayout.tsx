@@ -6,12 +6,12 @@ import { Footer } from './Footer';
 import { ReactNode } from 'react';
 
 interface ConditionalLayoutProps {
-  children: ReactNode;
-}
+  children: ReactNode,
+};
 
 export function ConditionalLayout({ children }: ConditionalLayoutProps) {
   const pathname = usePathname();
-  
+
   // Routes that should NOT show the app header/footer
   const noLayoutRoutes = [
     '/', // Landing page has its own header
@@ -19,12 +19,12 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps) {
     '/auth/signup',
     '/admin/login', // Admin login has its own layout
   ];
-  
+
   // All admin routes should not use the main app header (which uses NextAuth)
   const isAdminRoute = pathname.startsWith('/admin');
-  
+
   const shouldShowLayout = !noLayoutRoutes.includes(pathname) && !isAdminRoute;
-  
+
   if (shouldShowLayout) {
     return (
       <>
@@ -33,8 +33,7 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps) {
         <Footer />
       </>
     );
-  }
-  
+}
   // For landing page and auth pages, just render children
-  return <>{children}</>;
+  return <>{children}</>
 }

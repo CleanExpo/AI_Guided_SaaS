@@ -5,32 +5,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Activity, 
-  Server, 
-  Zap, 
-  Settings, 
-  RefreshCw, 
-  CheckCircle, 
-  AlertCircle,
-  XCircle 
-} from 'lucide-react';
+import { Activity, Server, Zap, Settings, RefreshCw, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
 
 interface MCPStatus {
   status: string;
   timestamp: string;
   version: string;
-  services: {
+    services: {
     mcp_server: string;
   context_manager: string;
-    protocol_handler: string;
+    protocol_handler: string,
   };
   metrics: {
     active_connections: number,
-    total_requests: number;
-    uptime: number;
-  };
-}
+    total_requests: number,
+    uptime: number,
+  }
+};
 
 interface MCPServer {
   id: string;
@@ -39,8 +30,8 @@ interface MCPServer {
   url: string;
   description: string;
   tools: string[];
-  resources: string[];
-}
+  resources: string[]
+};
 
 export default function MCPPage() {
   const [mcpStatus, setMcpStatus] = useState<MCPStatus | null>(null);
@@ -104,15 +95,14 @@ export default function MCPPage() {
       const response = await fetch('/api/mcp/status');
       if (!response.ok) {
         throw new Error('Failed to fetch MCP status');
-      }
-      
+}
       const data = await response.json();
       setMcpStatus(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
-    }
+}
   };
 
   useEffect(() => {
@@ -127,12 +117,11 @@ export default function MCPPage() {
     switch (status) {
       case 'running':
       case 'operational':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-green-500" />
       case 'error':
-        return <XCircle className="h-4 w-4 text-red-500" />;
-      default:
-        return <AlertCircle className="h-4 w-4 text-yellow-500" />;
-    }
+        return <XCircle className="h-4 w-4 text-red-500" />
+      default: return <AlertCircle className="h-4 w-4 text-yellow-500" />
+    }}
   };
 
   const getStatusBadge = (status: string) => {
@@ -140,11 +129,10 @@ export default function MCPPage() {
                    status === 'error' ? 'destructive' : 'secondary';
     
     return (
-      <Badge variant={variant} className="flex items-center gap-1">
+    <Badge variant={variant} className="flex items-center gap-1">
         {getStatusIcon(status)}
         {status.charAt(0).toUpperCase() + status.slice(1)}
       </Badge>
-    );
   };
 
   const formatUptime = (seconds: number) => {
@@ -174,9 +162,7 @@ export default function MCPPage() {
               <XCircle className="h-4 w-4" />
               <span>Error: {error}</span>
             </div>
-          </CardContent>
-        </Card>
-      )}
+          </CardContent>)}
 
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
@@ -197,7 +183,7 @@ export default function MCPPage() {
               <CardContent>
                 <div className="flex items-center gap-2">
                   {mcpStatus ? getStatusBadge(mcpStatus.status) : <Badge variant="secondary">Loading...</Badge>}
-                </div>
+
                 {mcpStatus && (
                   <p className="text-xs text-muted-foreground mt-2">
                     Version {mcpStatus.version}
@@ -214,7 +200,7 @@ export default function MCPPage() {
               <CardContent>
                 <div className="text-2xl font-bold">
                   {mcpStatus?.metrics.active_connections ?? 0}
-                </div>
+
                 <p className="text-xs text-muted-foreground">
                   {mcpStatus?.metrics.total_requests ?? 0} total requests
                 </p>
@@ -229,13 +215,10 @@ export default function MCPPage() {
               <CardContent>
                 <div className="text-2xl font-bold">
                   {mcpStatus ? formatUptime(mcpStatus.metrics.uptime) : '0h 0m'}
-                </div>
+
                 <p className="text-xs text-muted-foreground">
                   Since {mcpStatus ? new Date(mcpStatus.timestamp).toLocaleString() : 'N/A'}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+                
 
           {/* Services Status */}
           {mcpStatus && (
@@ -249,12 +232,10 @@ export default function MCPPage() {
                     <div key={service} className="flex items-center justify-between p-3 border rounded-lg">
                       <span className="font-medium">{service.replace('_', ' ').toUpperCase()}</span>
                       {getStatusBadge(status)}
-                    </div>
+
                   ))}
-                </div>
-              </CardContent>
-            </Card>
-          )}
+
+              </CardContent>)}
         </TabsContent>
 
         <TabsContent value="servers" className="space-y-6">
@@ -265,7 +246,7 @@ export default function MCPPage() {
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{server.name}</CardTitle>
                     {getStatusBadge(server.status)}
-                  </div>
+
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-sm text-gray-600">{server.description}</p>
@@ -291,7 +272,6 @@ export default function MCPPage() {
                             +{server.tools.length - 3} more
                           </Badge>
                         )}
-                      </div>
 
                     <div>
                       <h4 className="font-medium mb-2">Resources</h4>
@@ -306,12 +286,10 @@ export default function MCPPage() {
                             +{server.resources.length - 3} more
                           </Badge>
                         )}
-                      </div>
+
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </CardContent>))}
+
         </TabsContent>
 
         <TabsContent value="tools" className="space-y-6">
@@ -332,11 +310,9 @@ export default function MCPPage() {
                       </div>
                       <p className="text-sm text-gray-600">
                         Tool provided by {server.name}
-                      </p>
-                    </div>
-                  ))
+                      </p>))
                 )}
-              </div>
+
             </CardContent>
           </Card>
         </TabsContent>
@@ -359,24 +335,11 @@ export default function MCPPage() {
                       </div>
                       <p className="text-sm text-gray-600">
                         Resource provided by {server.name}
-                      </p>
-                    </div>
-                  ))
+                      </p>))
                 )}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </div>
+
+            
   );
-</CardContent>
-</Card>
-</div>
-</TabsContent>
-</Tabs>
-</div>
-</div>
 }
-</string>
 </MCPStatus>
+}

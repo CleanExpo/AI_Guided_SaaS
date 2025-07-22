@@ -13,12 +13,13 @@ export async function GET(request: NextRequest) {
 
     // Return specific feature flag status
     if (feature) {
-      const enabled = await isFeatureEnabled(feature as keyof FeatureFlagsConfig);
-      return NextResponse.json({ 
-        feature, 
+      const enabled = await isFeatureEnabled(
+        feature as keyof FeatureFlagsConfig
+      );
+      return NextResponse.json({
+        feature,
         enabled,
-        timestamp: new Date().toISOString()
-      });
+        timestamp: new Date().toISOString()});
     }
 
     // Return specific configuration section
@@ -27,25 +28,27 @@ export async function GET(request: NextRequest) {
         case 'features':
           const features = await getFeatureFlags();
           return NextResponse.json({ section, data: features });
-        
+
         case 'ai-providers':
           const aiProviders = await getAIProviderConfig();
           return NextResponse.json({ section, data: aiProviders });
-        
+
         case 'all':
           const fullConfig = await getConfig();
           // Remove sensitive information before sending
           const sanitizedConfig = {
-            ...fullConfig,
-            openai: { ...fullConfig.openai, apiKey: '[REDACTED]' },
-            anthropic: { ...fullConfig.anthropic, apiKey: '[REDACTED]' },
-            google: { ...fullConfig.google, apiKey: '[REDACTED]' }
+            ...fullConfig
+    openai: { ...fullConfig.openai, apiKey: '[REDACTED]' },
+    anthropic: { ...fullConfig.anthropic, apiKey: '[REDACTED]' },
+    google: { ...fullConfig.google, apiKey: '[REDACTED]' },
           };
           return NextResponse.json({ section, data: sanitizedConfig });
-        
+
         default:
           return NextResponse.json(
-            { error: 'Invalid section., Available: features, ai-providers, all' },
+            {
+              error: 'Invalid section., Available: features, ai-providers, all',
+            },
             { status: 400 }
           );
       }
@@ -54,17 +57,17 @@ export async function GET(request: NextRequest) {
     // Return basic configuration info
     const features = await getFeatureFlags();
     const aiProviders = await getAIProviderConfig();
-    
+
     return NextResponse.json({
       status: 'active',
-      features: {
-        enabled: Object.entries(features).filter(([, enabled]) => enabled).map(([name]) => name),
-        total: Object.keys(features).length
-      },
+    features: {
+        enabled: Object.entries(features)
+          .filter(([, enabled]) => enabled)
+          .map(([name]) => name),
+        total: Object.keys(features).length;
+      }},
       aiProviders,
-      timestamp: new Date().toISOString()
-    });
-
+      timestamp: new Date().toISOString()});
   } catch (error) {
     console.error('Configuration API, error:', error);
     return NextResponse.json(
@@ -89,12 +92,10 @@ export async function POST() {
 
     const { configManager } = await import('@/lib/config');
     configManager.reloadConfig();
-    
+
     return NextResponse.json({
       message: 'Configuration reloaded successfully',
-      timestamp: new Date().toISOString()
-    });
-
+      timestamp: new Date().toISOString()});
   } catch (error) {
     console.error('Configuration reload, error:', error);
     return NextResponse.json(

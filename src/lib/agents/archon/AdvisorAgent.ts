@@ -1,69 +1,69 @@
-import { Agent, AgentConfig, AgentResult } from '../base/Agent'
-import { generateAIResponse } from '@/lib/ai'
+import { Agent, AgentConfig, AgentResult } from '../base/Agent';
+import { generateAIResponse } from '@/lib/ai';
 
 export interface AdvisoryReport {
   situation: SituationAnalysis;
   recommendations: Recommendation[];
-  strategies: Strategy[]
+  strategies: Strategy[];
   risks: RiskAssessment[];
-  alternatives: Alternative[]
+  alternatives: Alternative[];
   decisionMatrix: DecisionMatrix;
   actionPlan: ActionPlan;
   confidence: number
-}
+};
 
 export interface SituationAnalysis {
   summary: string;
   context: string[];
-  stakeholders: Stakeholder[]
+  stakeholders: Stakeholder[];
   constraints: string[];
-  opportunities: string[]
+  opportunities: string[];
   challenges: string[]
-}
+};
 
 export interface Stakeholder {
   name: string;
   role: string;
   interests: string[];
-  influence: 'high' | 'medium' | 'low'
+  influence: 'high' | 'medium' | 'low';
   impact: 'high' | 'medium' | 'low'
-}
+};
 
 export interface Recommendation {
   id: string;
   title: string;
   description: string;
-  priority: 'critical' | 'high' | 'medium' | 'low'
+  priority: 'critical' | 'high' | 'medium' | 'low';
   rationale: string;
   prerequisites: string[];
   expectedOutcome: string;
   timeframe: string;
   resources: ResourceRequirement[]
-}
+};
 
 export interface ResourceRequirement {
-  type: 'human' | 'technical' | 'financial' | 'time'
+  type: 'human' | 'technical' | 'financial' | 'time';
   description: string;
   quantity: string;
   availability: 'immediate' | 'short-term' | 'long-term'
-}
+};
 
 export interface Strategy {
   name: string;
   approach: string;
   phases: Phase[];
-  successCriteria: string[]
+  successCriteria: string[];
   keyPerformanceIndicators: KPI[];
   dependencies: string[]
-}
+};
 
 export interface Phase {
   name: string;
   duration: string;
   activities: string[];
-  deliverables: string[]
+  deliverables: string[];
   milestones: string[]
-}
+};
 
 export interface KPI {
   name: string;
@@ -71,62 +71,62 @@ export interface KPI {
   target: string;
   measurement: string;
   frequency: string
-}
+};
 
 export interface RiskAssessment {
   risk: string;
-  category: 'technical' | 'business' | 'operational' | 'strategic'
-  likelihood: number // 1-5;
-  impact: number // 1-5;
-  riskScore: number // likelihood * impact;
+  category: 'technical' | 'business' | 'operational' | 'strategic';
+  likelihood: number; // 1-5;
+  impact: number; // 1-5;
+  riskScore: number; // likelihood * impact;
   mitigation: string[];
   monitoring: string;
   owner: string
-}
+};
 
 export interface Alternative {
   name: string;
   description: string;
   pros: string[];
-  cons: string[]
-  feasibility: 'high' | 'medium' | 'low'
-  cost: 'high' | 'medium' | 'low'
+  cons: string[];
+  feasibility: 'high' | 'medium' | 'low';
+  cost: 'high' | 'medium' | 'low';
   timeToImplement: string;
   recommendation: string
-}
+};
 
 export interface DecisionMatrix {
   criteria: DecisionCriterion[];
-  options: DecisionOption[]
+  options: DecisionOption[];
   scores: Score[][];
-  weightedScores: number[]
+  weightedScores: number[];
   recommendation: string
-}
+};
 
 export interface DecisionCriterion {
   name: string;
-  weight: number // 0-1, sum to 1;
+  weight: number; // 0-1, sum to 1;
   description: string
-}
+};
 
 export interface DecisionOption {
   name: string;
   description: string
-}
+};
 
 export interface Score {
-  value: number // 1-10;
+  value: number; // 1-10;
   rationale: string
-}
+};
 
 export interface ActionPlan {
   immediateActions: Action[];
-  shortTermActions: Action[]
+  shortTermActions: Action[];
   longTermActions: Action[];
-  contingencyPlans: ContingencyPlan[]
+  contingencyPlans: ContingencyPlan[];
   successMetrics: string[];
   reviewSchedule: string
-}
+};
 
 export interface Action {
   id: string;
@@ -136,14 +136,14 @@ export interface Action {
   dependencies: string[];
   expectedResult: string;
   verificationMethod: string
-}
+};
 
 export interface ContingencyPlan {
   trigger: string;
   plan: string;
   actions: string[];
   escalation: string
-}
+};
 
 export class AdvisorAgent extends Agent {
   constructor() {
@@ -151,7 +151,8 @@ export class AdvisorAgent extends Agent {
       id: 'advisor-agent',
       name: 'Strategic Advisor',
       role: 'Provide strategic advice and decision support',
-      description: 'Expert in strategic analysis, decision-making, and advisory services. Provides comprehensive recommendations and action plans based on thorough analysis.',
+      description:
+        'Expert in strategic analysis, decision-making, and advisory services. Provides comprehensive recommendations and action plans based on thorough analysis.',
       capabilities: [
         'Situation analysis',
         'Strategic planning',
@@ -159,34 +160,34 @@ export class AdvisorAgent extends Agent {
         'Decision support',
         'Alternative evaluation',
         'Action planning',
-        'Stakeholder analysis'
+        'Stakeholder analysis',
       ],
       tools: [
         'situation-analyzer',
         'strategy-generator',
         'risk-assessor',
         'decision-matrix',
-        'action-planner'
+        'action-planner',
       ],
-      temperature: 0.5
-    })
+      temperature: 0.5;
+    }});
   }
 
   protected async execute(input: string): Promise<AgentResult> {
     try {
-      this.think('Beginning strategic advisory analysis...')
+      this.think('Beginning strategic advisory analysis...');
 
       // Get context from other agents if available
-      const projectContext = this.getSharedMemory('project-context') || {}
-      const requirements = this.getSharedMemory('requirements') || []
-      const constraints = this.getSharedMemory('constraints') || []
-      const currentChallenges = this.getSharedMemory('challenges') || []
+      const projectContext = this.getSharedMemory('project-context') || {};
+      const requirements = this.getSharedMemory('requirements') || [];
+      const constraints = this.getSharedMemory('constraints') || [];
+      const currentChallenges = this.getSharedMemory('challenges') || [];
 
       this.observe('Retrieved context', {
         hasProjectContext: Object.keys(projectContext).length > 0,
         requirementCount: requirements.length,
-        constraintCount: constraints.length
-      })
+        constraintCount: constraints.length;
+      }});
 
       // Step, 1: Analyze the situation
       const situation = await this.analyzeSituation(
@@ -195,48 +196,50 @@ export class AdvisorAgent extends Agent {
         requirements,
         constraints,
         currentChallenges
-      )
-      this.observe('Situation analysis complete', situation)
+      );
+      this.observe('Situation analysis complete', situation);
 
       // Step, 2: Generate strategic recommendations
       const recommendations = await this.generateRecommendations(
         situation,
         input,
         requirements
-      )
-      this.observe('Generated recommendations', { count: recommendations.length })
+      );
+      this.observe('Generated recommendations', {
+        count: recommendations.length;
+      }});
 
       // Step, 3: Develop strategies
       const strategies = await this.developStrategies(
         situation,
         recommendations,
         constraints
-      )
-      this.observe('Developed strategies', { count: strategies.length })
+      );
+      this.observe('Developed strategies', { count: strategies.length });
 
       // Step, 4: Assess risks
       const risks = await this.assessRisks(
         situation,
         recommendations,
         strategies
-      )
-      this.observe('Risk assessment complete', { riskCount: risks.length })
+      );
+      this.observe('Risk assessment complete', { riskCount: risks.length });
 
       // Step, 5: Evaluate alternatives
       const alternatives = await this.evaluateAlternatives(
         input,
         situation,
         recommendations
-      )
-      this.observe('Evaluated alternatives', { count: alternatives.length })
+      );
+      this.observe('Evaluated alternatives', { count: alternatives.length });
 
       // Step, 6: Create decision matrix
       const decisionMatrix = await this.createDecisionMatrix(
         recommendations,
         alternatives,
         situation
-      )
-      this.observe('Decision matrix created', decisionMatrix)
+      );
+      this.observe('Decision matrix created', decisionMatrix);
 
       // Step, 7: Develop action plan
       const actionPlan = await this.developActionPlan(
@@ -244,19 +247,19 @@ export class AdvisorAgent extends Agent {
         strategies,
         risks,
         decisionMatrix
-      )
+      );
       this.observe('Action plan developed', {
         immediateActions: actionPlan.immediateActions.length,
         shortTermActions: actionPlan.shortTermActions.length,
-        longTermActions: actionPlan.longTermActions.length
-      })
+        longTermActions: actionPlan.longTermActions.length;
+      }});
 
       // Calculate overall confidence
       const confidence = this.calculateConfidence(
         situation,
         recommendations,
         risks
-      )
+      );
 
       const result: AdvisoryReport = {
         situation,
@@ -266,16 +269,16 @@ export class AdvisorAgent extends Agent {
         alternatives,
         decisionMatrix,
         actionPlan,
-        confidence
-      }
+        confidence,
+      };
 
       // Store in artifacts
-      this.setArtifact('advisory-report', result)
-      
+      this.setArtifact('advisory-report', result);
+
       // Share key insights with other agents
-      this.setSharedMemory('strategic-recommendations', recommendations)
-      this.setSharedMemory('action-plan', actionPlan)
-      this.setSharedMemory('risk-assessment', risks)
+      this.setSharedMemory('strategic-recommendations', recommendations);
+      this.setSharedMemory('action-plan', actionPlan);
+      this.setSharedMemory('risk-assessment', risks);
 
       return {
         success: true,
@@ -287,14 +290,13 @@ export class AdvisorAgent extends Agent {
           'Prioritize actions based on resources',
           'Implement immediate actions',
           'Set up monitoring for KPIs',
-          'Schedule first review checkpoint'
+          'Schedule first review checkpoint',
         ],
-        confidence
-      }
-
+        confidence,
+      };
     } catch (error) {
-      this.think(`Error during advisory, analysis: ${error}`)
-      throw error
+      this.think(`Error during advisory, analysis: ${error}`);
+      throw error;
     }
   }
 
@@ -306,7 +308,8 @@ export class AdvisorAgent extends Agent {
     challenges: string[]
   ): Promise<SituationAnalysis> {
     const analysisPrompt = `Analyze the current situation based on this, input:
-,
+
+,
 Request:
 "${input}"
 
@@ -330,15 +333,15 @@ Provide a comprehensive situation analysis, including:
 5. Opportunities
 6. Challenges
 
-Format as JSON SituationAnalysis object.`
+Format as JSON SituationAnalysis object.`;
 
     const response = await generateAIResponse(analysisPrompt, {
       model: this.config.model,
       temperature: 0.4,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    return JSON.parse(response)
+    return JSON.parse(response);
   }
 
   private async generateRecommendations(
@@ -347,7 +350,8 @@ Format as JSON SituationAnalysis object.`
     requirements: string[]
   ): Promise<Recommendation[]> {
     const recommendPrompt = `Generate strategic recommendations based on this, analysis:
-,
+
+,
 Situation:
 ${JSON.stringify(situation, null, 2)}
 
@@ -372,19 +376,19 @@ For each recommendation, include:
 - Timeframe
 - Required resources
 
-Format as JSON array of Recommendation objects.`
+Format as JSON array of Recommendation objects.`;
 
     const response = await generateAIResponse(recommendPrompt, {
       model: this.config.model,
       temperature: 0.5,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    const recommendations = JSON.parse(response)
+    const recommendations = JSON.parse(response);
     return recommendations.map((r, index: number) => ({
       ...r,
-      id: `REC-${index + 1}`
-    }))
+      id: `REC-${index + 1}`;
+    }}));
   }
 
   private async developStrategies(
@@ -410,15 +414,15 @@ Create 2-3 comprehensive strategies, that:
 4. Specify KPIs
 5. Consider dependencies
 
-Format as JSON array of Strategy objects.`
+Format as JSON array of Strategy objects.`;
 
     const response = await generateAIResponse(strategyPrompt, {
       model: this.config.model,
       temperature: 0.4,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    return JSON.parse(response)
+    return JSON.parse(response);
   }
 
   private async assessRisks(
@@ -451,19 +455,19 @@ For each, risk:
 - Define monitoring approach
 - Assign ownership
 
-Format as JSON array of RiskAssessment objects.`
+Format as JSON array of RiskAssessment objects.`;
 
     const response = await generateAIResponse(riskPrompt, {
       model: this.config.model,
       temperature: 0.4,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    const risks = JSON.parse(response)
-    return risks.map((r) => ({
+    const risks = JSON.parse(response);
+    return risks.map(r => ({
       ...r,
-      riskScore: r.likelihood * r.impact
-    }))
+      riskScore: r.likelihood * r.impact;
+    }}));
   }
 
   private async evaluateAlternatives(
@@ -480,7 +484,10 @@ Current, Situation:
 ${situation.summary}
 
 Primary, Recommendations:
-${recommendations.slice(0, 3).map(r => r.title).join('\n')}
+${recommendations
+  .slice(0, 3)
+  .map(r => r.title)
+  .join('\n')}
 
 Identify 3-4 alternative approaches, that:
 1. Could achieve similar outcomes
@@ -495,15 +502,15 @@ For each, alternative:
 - Estimate implementation time
 - Provide recommendation on when to use
 
-Format as JSON array of Alternative objects.`
+Format as JSON array of Alternative objects.`;
 
     const response = await generateAIResponse(alternativePrompt, {
       model: this.config.model,
       temperature: 0.5,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    return JSON.parse(response)
+    return JSON.parse(response);
   }
 
   private async createDecisionMatrix(
@@ -514,13 +521,22 @@ Format as JSON array of Alternative objects.`
     const matrixPrompt = `Create a decision matrix to evaluate, options:
 
 Primary Options (from recommendations):
-${recommendations.slice(0, 3).map(r => r.title).join('\n')}
+${recommendations
+  .slice(0, 3)
+  .map(r => r.title)
+  .join('\n')}
 
 Alternative, Options:
-${alternatives.slice(0, 2).map(a => a.name).join('\n')}
+${alternatives
+  .slice(0, 2)
+  .map(a => a.name)
+  .join('\n')}
 
 Stakeholder, Priorities:
-${situation.stakeholders.filter(s => s.influence === 'high').map(s => `${s.name}: ${s.interests.join(', ')}`).join('\n')}
+${situation.stakeholders
+  .filter(s => s.influence === 'high')
+  .map(s => `${s.name}: ${s.interests.join(', ')}`)
+  .join('\n')}
 
 Create a decision matrix, with:
 1. 4-6 weighted criteria
@@ -529,27 +545,33 @@ Create a decision matrix, with:
 4. Weighted total scores
 5. Final recommendation
 
-Format as JSON DecisionMatrix object.`
+Format as JSON DecisionMatrix object.`;
 
     const response = await generateAIResponse(matrixPrompt, {
       model: this.config.model,
       temperature: 0.3,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    const matrix = JSON.parse(response)
-    
+    const matrix = JSON.parse(response);
+
     // Calculate weighted scores
     const weightedScores = matrix.options.map((_, optionIndex: number) => {
-      return matrix.criteria.reduce((total: number, criterion, criterionIndex: number) => {
-        return total + (matrix.scores[criterionIndex][optionIndex].value * criterion.weight)
-      }, 0)
-    })
+      return matrix.criteria.reduce(
+        (total: number, criterion, criterionIndex: number) => {
+          return (
+            total +
+            matrix.scores[criterionIndex][optionIndex].value * criterion.weight
+          );
+        },
+        0
+      );
+    });
 
     return {
       ...matrix,
-      weightedScores
-    }
+      weightedScores,
+    };
   }
 
   private async developActionPlan(
@@ -563,13 +585,19 @@ Format as JSON DecisionMatrix object.`
 Selected, Option: ${decisionMatrix.recommendation}
 
 Key, Recommendations:
-${recommendations.filter(r => r.priority === 'critical' || r.priority === 'high').map(r => r.title).join('\n')}
+${recommendations
+  .filter(r => r.priority === 'critical' || r.priority === 'high')
+  .map(r => r.title)
+  .join('\n')}
 
 Implementation, Strategies:
 ${strategies.map(s => `${s.name}: ${s.phases.map(p => p.name).join(' → ')}`).join('\n')}
 
 High Risks to, Mitigate:
-${risks.filter(r => r.riskScore >= 12).map(r => r.risk).join('\n')}
+${risks
+  .filter(r => r.riskScore >= 12)
+  .map(r => r.risk)
+  .join('\n')}
 
 Create an action plan, with:
 1. Immediate actions (within 1 week)
@@ -579,32 +607,32 @@ Create an action plan, with:
 5. Success metrics
 6. Review schedule
 
-Format as JSON ActionPlan object.`
+Format as JSON ActionPlan object.`;
 
     const response = await generateAIResponse(actionPrompt, {
       model: this.config.model,
       temperature: 0.4,
-      responseFormat: 'json'
-    })
+      responseFormat: 'json';
+    }});
 
-    const plan = JSON.parse(response)
-    
+    const plan = JSON.parse(response);
+
     // Add IDs to actions
-    let actionId = 1
-    plan.immediateActions = plan.immediateActions.map((a) => ({
+    let actionId = 1;
+    plan.immediateActions = plan.immediateActions.map(a => ({
       ...a,
-      id: `ACT-${actionId++}`
-    }))
-    plan.shortTermActions = plan.shortTermActions.map((a) => ({
+      id: `ACT-${actionId++}`;
+    }}));
+    plan.shortTermActions = plan.shortTermActions.map(a => ({
       ...a,
-      id: `ACT-${actionId++}`
-    }))
-    plan.longTermActions = plan.longTermActions.map((a) => ({
+      id: `ACT-${actionId++}`;
+    }}));
+    plan.longTermActions = plan.longTermActions.map(a => ({
       ...a,
-      id: `ACT-${actionId++}`
-    }))
+      id: `ACT-${actionId++}`;
+    }}));
 
-    return plan
+    return plan;
   }
 
   private calculateConfidence(
@@ -613,28 +641,28 @@ Format as JSON ActionPlan object.`
     risks: RiskAssessment[]
   ): number {
     // Base confidence from situation clarity
-    let confidence = 0.7
+    let confidence = 0.7;
 
     // Adjust based on constraint count
     if (situation.constraints.length > 5) {
-      confidence -= 0.1
+      confidence -= 0.1;
     }
 
     // Adjust based on high-priority recommendations
-    const highPriorityCount = recommendations.filter(r => 
-      r.priority === 'critical' || r.priority === 'high'
-    ).length
+    const highPriorityCount = recommendations.filter(
+      r => r.priority === 'critical' || r.priority === 'high'
+    ).length;
     if (highPriorityCount > 3) {
-      confidence -= 0.05
+      confidence -= 0.05;
     }
 
     // Adjust based on high risks
-    const highRiskCount = risks.filter(r => r.riskScore >= 15).length
-    confidence -= highRiskCount * 0.05
+    const highRiskCount = risks.filter(r => r.riskScore >= 15).length;
+    confidence -= highRiskCount * 0.05;
 
     // Ensure confidence stays within bounds
-    confidence = Math.max(0.5, Math.min(0.95, confidence))
+    confidence = Math.max(0.5, Math.min(0.95, confidence));
 
-    return Number(confidence.toFixed(2))
+    return Number(confidence.toFixed(2));
   }
 }

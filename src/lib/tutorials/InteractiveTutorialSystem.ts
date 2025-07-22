@@ -8,14 +8,14 @@ export interface Tutorial {
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   estimatedTime: string;
   prerequisites: string[];
-  steps: TutorialStep[]
-  completionRewards: {
+  steps: TutorialStep[];
+    completionRewards: {
     points: number
     badges?: string[]
     unlocks?: string[]
   }
   category: string, tags: string[]
-}
+};
 
 export interface TutorialStep {
   id: string;
@@ -34,14 +34,14 @@ export interface TutorialStep {
   }
   hints?: string[]
   skipAllowed: boolean
-}
+};
 
 export interface ValidationCriteria {
   type: 'element_exists' | 'value_equals' | 'api_call' | 'custom'
   target: string
   expected?: any;
   errorMessage: string
-}
+};
 
 export interface TutorialProgress {
   tutorialId: string;
@@ -53,14 +53,14 @@ export interface TutorialProgress {
   score: number;
   hints_used: number;
   attempts: Record<string, number>
-}
+};
 
 export interface TutorialHighlight {
   element: string;
   type: 'highlight' | 'tooltip' | 'arrow' | 'mask'
   content?: string
   position?: 'top' | 'bottom' | 'left' | 'right'
-}
+};
 
 export class InteractiveTutorialSystem extends EventEmitter {
   private tutorials: Map<string, Tutorial> = new Map()
@@ -99,7 +99,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       prerequisites: [],
       category: 'basics',
       tags: ['onboarding', 'introduction', 'basics'],
-      completionRewards: {
+    completionRewards: {
         points: 100,
         badges: ['first-steps'],
         unlocks: ['project-creation']
@@ -117,12 +117,12 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Navigate to Dashboard',
           content: 'Click on the Dashboard link in the navigation menu.',
           type: 'action',
-          action: {
+    action: {
             component: 'navigation',
             method: 'click',
-            parameters: { target: 'dashboard-link' }
+    parameters: { target: 'dashboard-link' }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -147,7 +147,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Quick Check',
           content: 'What is the main purpose of the dashboard?',
           type: 'quiz',
-          validation: {
+    validation: {
             type: 'quiz',
             criteria: [
               {
@@ -174,7 +174,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       prerequisites: ['getting-started'],
       category: 'projects',
       tags: ['projects', 'ai', 'creation'],
-      completionRewards: {
+    completionRewards: {
         points: 150,
         badges: ['project-creator'],
         unlocks: ['ai-assistant', 'deployment']
@@ -185,12 +185,12 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Start a New Project',
           content: 'Let\'s create your first project. Click the "New Project" button.',
           type: 'action',
-          action: {
+    action: {
             component: 'projects',
             method: 'click',
-            parameters: { target: 'new-project-button' }
+    parameters: { target: 'new-project-button' }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -208,21 +208,23 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Describe Your Project',
           content: 'In the text area, describe what kind of application you want to build. Be specific about features and functionality.',
           type: 'action',
-          action: {
+    action: {
             component: 'project-form',
             method: 'fill',
-            parameters: { 
+    parameters: { 
               field: 'requirements',
               exampleValue: 'I need a task management app with user authentication, project boards, and real-time collaboration'
             }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'value_equals',
                 target: 'requirements-field-length',
-                expected: 50, // Minimum characters, errorMessage: 'Please provide a detailed description (at least 50 characters)'
+                expected: 50,
+  // Minimum characters
+  errorMessage: 'Please provide a detailed description (at least 50 characters)'
               }
             ]
           },
@@ -240,12 +242,12 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Generate Project',
           content: 'Click "Generate Project" and watch as the AI creates your project structure, code, and documentation.',
           type: 'action',
-          action: {
+    action: {
             component: 'project-form',
             method: 'submit',
-            parameters: { action: 'generate' }
+    parameters: { action: 'generate' }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -271,7 +273,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       prerequisites: ['project-creation'],
       category: 'ai',
       tags: ['ai', 'chat', 'assistant', 'productivity'],
-      completionRewards: {
+    completionRewards: {
         points: 200,
         badges: ['ai-master'],
         unlocks: ['advanced-features']
@@ -282,12 +284,12 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Open AI Assistant',
           content: 'Click on the AI Assistant icon to open the chat interface.',
           type: 'action',
-          action: {
+    action: {
             component: 'ui',
             method: 'click',
-            parameters: { target: 'ai-chat-button' }
+    parameters: { target: 'ai-chat-button' }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -304,14 +306,14 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Ask a Question',
           content: 'Try asking the AI a question about your project. For, example: "How can I add user authentication to my app?"',
           type: 'action',
-          action: {
+    action: {
             component: 'ai-chat',
             method: 'send-message',
-            parameters: { 
+    parameters: { 
               exampleMessage: 'How can I add user authentication to my app?'
             }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -335,14 +337,14 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Generate Code',
           content: 'Ask the AI to generate specific code., Try: "Generate a React component for a user profile page"',
           type: 'action',
-          action: {
+    action: {
             component: 'ai-chat',
             method: 'send-message',
-            parameters: { 
+    parameters: { 
               messageType: 'code-generation'
             }
           },
-          validation: {
+    validation: {
             type: 'manual',
             criteria: [
               {
@@ -373,7 +375,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       prerequisites: ['project-creation'],
       category: 'deployment',
       tags: ['deployment', 'production', 'devops'],
-      completionRewards: {
+    completionRewards: {
         points: 250,
         badges: ['deployment-expert'],
         unlocks: ['advanced-monitoring']
@@ -384,12 +386,12 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Open Deployment Panel',
           content: 'Navigate to the deployment section of your project.',
           type: 'action',
-          action: {
+    action: {
             component: 'project',
             method: 'navigate',
-            parameters: { section: 'deployment' }
+    parameters: { section: 'deployment' }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -413,14 +415,14 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Select Deployment Provider',
           content: 'Choose where to deploy your application. We support Vercel, AWS, and Google Cloud.',
           type: 'action',
-          action: {
+    action: {
             component: 'deployment',
             method: 'select-provider',
-            parameters: { 
+    parameters: { 
               providers: ['vercel', 'aws', 'gcp']
             }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -438,14 +440,14 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Deploy Application',
           content: 'Click "Deploy" to start the deployment process. This may take a few minutes.',
           type: 'action',
-          action: {
+    action: {
             component: 'deployment',
             method: 'deploy',
-            parameters: { 
+    parameters: { 
               action: 'start-deployment'
             }
           },
-          validation: {
+    validation: {
             type: 'automatic',
             criteria: [
               {
@@ -478,7 +480,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       prerequisites: ['ai-assistant', 'deployment'],
       category: 'advanced',
       tags: ['advanced', 'monitoring', 'optimization', 'agents'],
-      completionRewards: {
+    completionRewards: {
         points: 300,
         badges: ['platform-expert', 'power-user'],
         unlocks: ['beta-features']
@@ -496,14 +498,14 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Set Up Monitoring',
           content: 'Configure monitoring alerts for your application\'s performance and errors.',
           type: 'action',
-          action: {
+    action: {
             component: 'monitoring',
             method: 'configure',
-            parameters: { 
+    parameters: { 
               metrics: ['response-time', 'error-rate', 'cpu-usage']
             }
           },
-          validation: {
+    validation: {
             type: 'manual',
             criteria: [
               {
@@ -527,13 +529,15 @@ export class InteractiveTutorialSystem extends EventEmitter {
           title: 'Advanced Features Quiz',
           content: 'Test your knowledge of advanced platform features.',
           type: 'quiz',
-          validation: {
+    validation: {
             type: 'quiz',
             criteria: [
               {
                 type: 'custom',
                 target: 'quiz-score',
-                expected: 70, // 70% pass rate, errorMessage: 'Please review the advanced features and try again'
+                expected: 70,
+  // 70% pass rate
+  errorMessage: 'Please review the advanced features and try again'
               }
             ]
           },
@@ -570,7 +574,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       startedAt: new Date(),
       score: 0,
       hints_used: 0,
-      attempts: {}
+    attempts: {}
     }
     
     this.activeProgress.set(`${userId}-${tutorialId}`, progress)
@@ -818,7 +822,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
     try {
       await fetch('/api/tutorials/progress', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(progress)
       })
     } catch (error) {
