@@ -53,7 +53,6 @@
     "health:check": "node scripts/health-check-exhaustive.cjs",
     "health:simple": "node scripts/health-check-simple.cjs",
     "health:full": "npm run health:check && npm run build",
-    "prepare": "husky install",
     "update:memory": "tsx scripts/update-claude-memory.ts",
     "docs:analyze": "ts-node scripts/autonomous-doc-finder.ts",
     "docs:mcp-agent": "ts-node scripts/mcp-doc-agent.ts",
