@@ -1,0 +1,315 @@
+name: Stack Guard - Technology Stack Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'yarn.lock'
+      - 'requirements.txt'
+      - 'pyproject.toml'
+      - 'Gemfile'
+      - 'composer.json'
+      - 'go.mod'
+      - 'Cargo.toml'
+      - '.agent-os/**'
+
+env:
+  AGENT_OS_HOME: ${{ github.workspace }}/.agent-os
+
+jobs:
+  stack-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2  # Need previous commit for comparison
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install jq
+
+    - name: Make detection script executable
+      run: chmod +x .agent-os/scripts/detect_stack.py
+
+    - name: Run Stack Detection
+      id: detect
+      run: |
+        echo "🔍 Running stack detection..."
+        python3 .agent-os/scripts/detect_stack.py --output stack-current.json --verbose
+        
+        # Check if detection was successful
+        if [ -f "stack-current.json" ]; then
+          echo "✅ Stack detection completed successfully"
+          echo "detection_success=true" >> $GITHUB_OUTPUT
+        else
+          echo "❌ Stack detection failed"
+          echo "detection_success=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+
+    - name: Load previous stack analysis
+      id: previous
+      run: |
+        if [ -f "reports/stack.json" ]; then
+          echo "📊 Previous stack analysis found"
+          echo "has_previous=true" >> $GITHUB_OUTPUT
+          cp reports/stack.json stack-previous.json
+        else
+          echo "📋 No previous stack analysis found - first run"
+          echo "has_previous=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Compare stack changes
+      if: steps.previous.outputs.has_previous == 'true'
+      id: compare
+      run: |
+        echo "🔄 Comparing stack changes..."
+        
+        # Extract key components for comparison
+        current_deps=$(cat stack-current.json | jq -r '.detectedComponents[] | "\(.name)@\(.version // "unknown")"' | sort)
+        previous_deps=$(cat stack-previous.json | jq -r '.detectedComponents[] | "\(.name)@\(.version // "unknown")"' | sort)
+        
+        # Find new dependencies
+        new_deps=$(comm -13 <(echo "$previous_deps") <(echo "$current_deps"))
+        removed_deps=$(comm -23 <(echo "$previous_deps") <(echo "$current_deps"))
+        
+        echo "### Stack Changes" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -n "$new_deps" ]; then
+          echo "#### ➕ New Dependencies" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "$new_deps" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "new_dependencies=true" >> $GITHUB_OUTPUT
+        else
+          echo "new_dependencies=false" >> $GITHUB_OUTPUT
+        fi
+        
+        if [ -n "$removed_deps" ]; then
+          echo "#### ➖ Removed Dependencies" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "$removed_deps" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "removed_dependencies=true" >> $GITHUB_OUTPUT
+        else
+          echo "removed_dependencies=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Validate Stack Security
+      id: security
+      run: |
+        echo "🔒 Validating stack security..."
+        
+        # Check for red flags in current stack
+        red_flags=$(cat stack-current.json | jq '.redFlags | length')
+        critical_flags=$(cat stack-current.json | jq '[.redFlags[] | select(.severity == "critical")] | length')
+        high_flags=$(cat stack-current.json | jq '[.redFlags[] | select(.severity == "high")] | length')
+        
+        echo "security_red_flags=$red_flags" >> $GITHUB_OUTPUT
+        echo "critical_flags=$critical_flags" >> $GITHUB_OUTPUT
+        echo "high_flags=$high_flags" >> $GITHUB_OUTPUT
+        
+        echo "### Security Analysis" >> $GITHUB_STEP_SUMMARY
+        echo "- **Total Issues**: $red_flags" >> $GITHUB_STEP_SUMMARY
+        echo "- **Critical**: $critical_flags" >> $GITHUB_STEP_SUMMARY  
+        echo "- **High**: $high_flags" >> $GITHUB_STEP_SUMMARY
+        
+        # List critical issues
+        if [ "$critical_flags" -gt 0 ]; then
+          echo "#### 🚨 Critical Security Issues" >> $GITHUB_STEP_SUMMARY
+          cat stack-current.json | jq -r '.redFlags[] | select(.severity == "critical") | "- **\(.issue)**: \(.description)"' >> $GITHUB_STEP_SUMMARY
+        fi
+
+    - name: Check Stack Confidence
+      id: confidence
+      run: |
+        echo "📈 Checking stack confidence..."
+        
+        confidence=$(cat stack-current.json | jq '.confidence')
+        echo "stack_confidence=$confidence" >> $GITHUB_OUTPUT
+        
+        echo "### Stack Confidence: ${confidence}%" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "$confidence" -lt 75 ]; then
+          echo "⚠️ Low stack confidence detected" >> $GITHUB_STEP_SUMMARY
+          echo "low_confidence=true" >> $GITHUB_OUTPUT
+        else
+          echo "✅ Stack confidence acceptable" >> $GITHUB_STEP_SUMMARY
+          echo "low_confidence=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Validate Dependencies
+      id: deps
+      run: |
+        echo "📦 Validating dependencies..."
+        
+        # Check if package.json exists and validate it
+        if [ -f "package.json" ]; then
+          # Check for security vulnerabilities
+          if command -v npm &> /dev/null; then
+            echo "Running npm audit..."
+            npm audit --audit-level high --json > npm-audit.json 2>/dev/null || true
+            
+            if [ -f "npm-audit.json" ]; then
+              critical_vulns=$(cat npm-audit.json | jq -r '.metadata.vulnerabilities.critical // 0')
+              high_vulns=$(cat npm-audit.json | jq -r '.metadata.vulnerabilities.high // 0')
+              
+              echo "critical_vulns=$critical_vulns" >> $GITHUB_OUTPUT
+              echo "high_vulns=$high_vulns" >> $GITHUB_OUTPUT
+              
+              if [ "$critical_vulns" -gt 0 ] || [ "$high_vulns" -gt 0 ]; then
+                echo "### 🔴 Dependency Vulnerabilities Found" >> $GITHUB_STEP_SUMMARY
+                echo "- Critical: $critical_vulns" >> $GITHUB_STEP_SUMMARY
+                echo "- High: $high_vulns" >> $GITHUB_STEP_SUMMARY
+                echo "vulnerability_found=true" >> $GITHUB_OUTPUT
+              else
+                echo "✅ No high or critical vulnerabilities found" >> $GITHUB_STEP_SUMMARY
+                echo "vulnerability_found=false" >> $GITHUB_OUTPUT
+              fi
+            fi
+          fi
+        fi
+
+    - name: Validate Stack Compatibility
+      id: compatibility
+      run: |
+        echo "🔗 Validating stack compatibility..."
+        
+        # Check framework and runtime compatibility
+        framework=$(cat stack-current.json | jq -r '.webFramework.name // "none"')
+        runtime_lang=$(cat stack-current.json | jq -r '.runtime.language // "unknown"')
+        
+        echo "Detected: $framework on $runtime_lang"
+        
+        # Basic compatibility checks
+        compatibility_issues=0
+        
+        # Next.js requires Node.js
+        if [ "$framework" = "next" ] && [ "$runtime_lang" != "typescript" ] && [ "$runtime_lang" != "javascript" ]; then
+          echo "❌ Next.js requires Node.js runtime" >> $GITHUB_STEP_SUMMARY
+          compatibility_issues=$((compatibility_issues + 1))
+        fi
+        
+        echo "compatibility_issues=$compatibility_issues" >> $GITHUB_OUTPUT
+
+    - name: Fail on Critical Issues
+      if: |
+        steps.security.outputs.critical_flags > 0 ||
+        steps.deps.outputs.vulnerability_found == 'true' ||
+        steps.confidence.outputs.low_confidence == 'true'
+      run: |
+        echo "❌ Build failed due to critical issues:"
+        echo "- Critical security flags: ${{ steps.security.outputs.critical_flags }}"
+        echo "- Vulnerabilities found: ${{ steps.deps.outputs.vulnerability_found }}"
+        echo "- Low confidence: ${{ steps.confidence.outputs.low_confidence }}"
+        exit 1
+
+    - name: Update Stack Analysis
+      if: success()
+      run: |
+        echo "💾 Updating stack analysis..."
+        mkdir -p reports
+        cp stack-current.json reports/stack.json
+        
+        echo "✅ Stack validation passed!" >> $GITHUB_STEP_SUMMARY
+        echo "- Confidence: ${{ steps.confidence.outputs.stack_confidence }}%" >> $GITHUB_STEP_SUMMARY
+        echo "- Security Issues: ${{ steps.security.outputs.security_red_flags }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Compatibility: ✅" >> $GITHUB_STEP_SUMMARY
+
+    - name: Generate Stack Report
+      if: always()
+      run: |
+        echo "📝 Generating detailed stack report..."
+        
+        # Create comprehensive report
+        cat > stack-guard-report.md << 'EOF'
+        # Stack Guard Report
+        
+        **Generated**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        **Commit**: ${{ github.sha }}
+        **Branch**: ${{ github.ref_name }}
+        
+        ## Summary
+        - **Stack Confidence**: ${{ steps.confidence.outputs.stack_confidence }}%
+        - **Security Issues**: ${{ steps.security.outputs.security_red_flags }}
+        - **Critical Issues**: ${{ steps.security.outputs.critical_flags }}
+        - **High Priority Issues**: ${{ steps.security.outputs.high_flags }}
+        
+        ## Analysis Details
+        $(cat stack-current.json | jq -r '
+          "### Detected Stack\n" +
+          "- **Runtime**: \(.runtime.language // "unknown")\n" +
+          "- **Framework**: \(.webFramework.name // "none") v\(.webFramework.version // "unknown")\n" +
+          "- **Database**: \(.database.primary // "none")\n" +
+          "- **Authentication**: \(.auth.system // "none")\n" +
+          "- **Deployment**: \(.deployment.platform // "none")"
+        ')
+        EOF
+        
+        echo "📤 Stack report generated"
+
+    - name: Upload Stack Analysis Artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: stack-analysis-${{ github.run_id }}
+        path: |
+          stack-current.json
+          stack-guard-report.md
+          npm-audit.json
+        retention-days: 30
+
+    - name: Comment on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          
+          // Read stack analysis
+          const stackData = JSON.parse(fs.readFileSync('stack-current.json', 'utf8'));
+          
+          const confidence = stackData.confidence;
+          const redFlags = stackData.redFlags.length;
+          const criticalFlags = stackData.redFlags.filter(flag => flag.severity === 'critical').length;
+          
+          const body = `## 🔍 Stack Guard Analysis
+          
+          **Stack Confidence**: ${confidence}%
+          **Issues Found**: ${redFlags}
+          **Critical Issues**: ${criticalFlags}
+          
+          ${criticalFlags > 0 ? '⚠️ **Critical issues detected** - Please review before merging' : '✅ **No critical issues found**'}
+          
+          ### Detected Stack
+          - **Framework**: ${stackData.webFramework?.name || 'None'} ${stackData.webFramework?.version || ''}
+          - **Runtime**: ${stackData.runtime?.language || 'Unknown'}
+          - **Database**: ${stackData.database?.primary || 'None'}
+          - **Authentication**: ${stackData.auth?.system || 'None'}
+          
+          ---
+          *Generated by Agent OS Stack Guard v1.0*`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: body
+          });

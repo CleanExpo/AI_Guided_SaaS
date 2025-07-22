@@ -13,14 +13,16 @@ import { Server, Settings, Play, StopCircle, ChevronDown, ChevronRight, Loader2,
 import { useMCP } from '@/hooks/useMCP';
 import { getAllServers, getServersByCategory, ServerCapabilities } from '@/lib/mcp/mcp-registry';
 import { MCPTool, MCPToolCall, MCPOrchestrationPlan } from '@/lib/mcp/mcp-orchestrator';
-import { useToast } from '@/hooks/use-toast';
-interface MCPOrchestratorProps {;
-  projectId?: string
-  onToolResult?: (result: any) => void
-};
-export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProps): void {;
+import { useToast } from '@/components/ui/use-toast';
+
+interface MCPOrchestratorProps {
+  projectId?: string;
+  onToolResult?: (result: any) => void;
+}
+
+export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProps) {
   const { toast } = useToast();
-  const { ; }
+  const {
     servers,
     tools,
     connectServer,
@@ -32,124 +34,145 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
     loading,
     initialized
   } = useMCP({
-    autoConnect: ['filesystem']; // Auto-connect filesystem by default
+    autoConnect: ['filesystem'], // Auto-connect filesystem by default
     debug: true
-  })
+  });
+
   const [selectedTool, setSelectedTool] = useState<MCPTool | null>(null);
   const [toolArguments, setToolArguments] = useState<Record<string, any>>({});
   const [executionResults, setExecutionResults] = useState<any[]>([]);
   const [planSteps, setPlanSteps] = useState<any[]>([]);
   const [planDescription, setPlanDescription] = useState('');
+
   // Server categories
   const categories = ['development', 'data', 'automation', 'ai', 'integration'] as const;
   const availableServers = getAllServers();
+
   // Get category icon
-  const getCategoryIcon = (category: string) => {;
+  const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'development':
-        return <Code className="h-4 w-4" />
+        return <Code className="h-4 w-4" />;
       case 'data':
-        return <Database className="h-4 w-4" />
+        return <Database className="h-4 w-4" />;
       case 'automation':
-        return <Zap className="h-4 w-4" />
+        return <Zap className="h-4 w-4" />;
       case 'ai':
-        return <Brain className="h-4 w-4" />
+        return <Brain className="h-4 w-4" />;
       case 'integration':
-        return <Globe className="h-4 w-4" />
+        return <Globe className="h-4 w-4" />;
       default:
-        return <Server className="h-4 w-4" />
+        return <Server className="h-4 w-4" />;
     }
-  }
+  };
+
   // Get server status
-  const getServerStatus = (serverId: string) => {;
+  const getServerStatus = (serverId: string) => {
     const server = servers.find(s => s.id === serverId);
-    return server?.status || 'disconnected'
-  }
+    return server?.status || 'disconnected';
+  };
+
   // Execute single tool
-  const handleExecuteTool = async () => {;
+  const handleExecuteTool = async () => {
     if (!selectedTool) {
       toast({
-        title: 'Error';
-        description: 'Please select a tool to execute';
+        title: 'Error',
+        description: 'Please select a tool to execute',
         variant: 'destructive'
-      })
-      return
+      });
+      return;
     }
+
     try {
-      const call: MCPToolCall = {;
-        tool: selectedTool.name;
-        server: selectedTool.server;
+      const call: MCPToolCall = {
+        tool: selectedTool.name,
+        server: selectedTool.server,
         arguments: toolArguments
-      }
+      };
+      
       const result = await callTool(call);
-      setExecutionResults(prev => [result, ...prev])
+      setExecutionResults(prev => [result, ...prev]);
+      
       if (onToolResult) {
-        onToolResult(result)
+        onToolResult(result);
       }
+      
       toast({
-        title: 'Tool Executed';
-        description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}``
-      })
+        title: 'Tool Executed',
+        description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}`
+      });
     } catch (error) {
-      console.error('Tool execution failed:', error)
+      console.error('Tool execution failed:', error);
     }
-  }
+  };
+
   // Add step to plan
-  const addPlanStep = () => {;
-    if (!selectedTool) return
-    const step = {;
-      id: `step_${planSteps.length + 1}`;`
-      type: 'tool' as const;
-      server: selectedTool.server;
-      operation: selectedTool.name;
-    arguments: { ...toolArguments }
-    }
-    setPlanSteps(prev => [...prev, step])
-    setToolArguments({})
+  const addPlanStep = () => {
+    if (!selectedTool) return;
+
+    const step = {
+      id: `step_${planSteps.length + 1}`,
+      type: 'tool' as const,
+      server: selectedTool.server,
+      operation: selectedTool.name,
+      arguments: { ...toolArguments }
+    };
+    
+    setPlanSteps(prev => [...prev, step]);
+    setToolArguments({});
+    
     toast({
-      title: 'Step Added';
-      description: `Added ${selectedTool.name} to orchestration plan``
-    })
-  }
+      title: 'Step Added',
+      description: `Added ${selectedTool.name} to orchestration plan`
+    });
+  };
+
   // Execute orchestration plan
-  const handleExecutePlan = async () => {;
+  const handleExecutePlan = async () => {
     if (planSteps.length === 0) {
       toast({
-        title: 'Error';
-        description: 'Plan has no steps to execute';
+        title: 'Error',
+        description: 'Plan has no steps to execute',
         variant: 'destructive'
-      })
-      return
+      });
+      return;
     }
+
     try {
       const plan = createPlan(planDescription || 'Custom orchestration plan', planSteps);
       const results = await executePlan(plan);
+      
       // Convert results to array for display
-      const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({;
+      const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({
         stepId,
         ...result
-      }))
-      setExecutionResults(prev => [...resultsArray, ...prev])
-      setPlanSteps([]) // Clear plan after execution
-      setPlanDescription('')
+      }));
+      
+      setExecutionResults(prev => [...resultsArray, ...prev]);
+      setPlanSteps([]); // Clear plan after execution
+      setPlanDescription('');
+      
       toast({
-        title: 'Plan Executed';
-        description: `Completed ${resultsArray.length} steps``
-      })
+        title: 'Plan Executed',
+        description: `Completed ${resultsArray.length} steps`
+      });
     } catch (error) {
-      console.error('Plan execution failed:', error)
+      console.error('Plan execution failed:', error);
     }
-  }
+  };
+
   // Parse tool input schema for UI
   const getToolInputFields = (tool: MCPTool): Array<{ name: string; type: string; required: boolean }> => {
-    if (!tool.inputSchema || !tool.inputSchema.properties) return []
+    if (!tool.inputSchema || !tool.inputSchema.properties) return [];
+    
     const required = tool.inputSchema.required || [];
     return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({
       name,
-      type: schema.type || 'string';
+      type: schema.type || 'string',
       required: required.includes(name)
-    }))
-  }
+    }));
+  };
+
   return (
     <div className="space-y-6">
       {/* Server Management */}
@@ -161,12 +184,14 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="development", className="w-full">
+          <Tabs defaultValue="development" className="w-full">
             <TabsList className="grid w-full grid-cols-5">
               {categories.map(category => (
                 <TabsTrigger key={category} value={category} className="flex items-center gap-2">
                   {getCategoryIcon(category)}
-                  <span className="hidden md:inline">{category}</span>))}
+                  <span className="hidden md:inline">{category}</span>
+                </TabsTrigger>
+              ))}
             </TabsList>
             {categories.map(category => (
               <TabsContent key={category} value={category} className="space-y-2">
@@ -174,8 +199,8 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                   const status = getServerStatus(server.id);
                   const isConnected = status === 'connected';
                   return (
-    <div
-                key={server.id}
+                    <div
+                      key={server.id}
                       className="flex items-center justify-between p-3 border rounded-lg"
                     >
                       <div className="flex items-center gap-3">
@@ -186,6 +211,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                             {server.description}
                           </p>
                         </div>
+                      </div>
                       <div className="flex items-center gap-2">
                         <Badge
                           variant={isConnected ? 'default' : 'secondary'}
@@ -200,17 +226,21 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                             isConnected
                               ? disconnectServer(server.id)
                               : connectServer(server.id)
-                         }
+                          }
                           disabled={loading}
                         >
                           {isConnected ? 'Disconnect' : 'Connect'}
-                        </Button>)
+                        </Button>
+                      </div>
+                    </div>
+                  );
                 })}
               </TabsContent>
             ))}
           </Tabs>
         </CardContent>
       </Card>
+
       {/* Tool Execution */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* Tool Selection */}
@@ -230,22 +260,22 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                       <ChevronRight className="h-4 w-4" />
                       <Server className="h-4 w-4" />
                       <span className="font-medium">{server.name}</span>
-                      <Badge variant="secondary", className="ml-auto">
+                      <Badge variant="secondary" className="ml-auto">
                         {server.tools.length} tools
                       </Badge>
                     </CollapsibleTrigger>
                     <CollapsibleContent className="pl-6 space-y-1">
                       {server.tools.map(tool => (
                         <div
-                          key={`${server.id}-${tool.name}`}`
-                          className={`p-2 rounded cursor-pointer transition-colors ${`
+                          key={`${server.id}-${tool.name}`}
+                          className={`p-2 rounded cursor-pointer transition-colors ${
                             selectedTool?.name === tool.name && selectedTool?.server === server.id
                               ? 'bg-primary text-primary-foreground'
                               : 'hover:bg-accent'
-                          }`}`
+                          }`}
                           onClick={() => {
-                            setSelectedTool(tool)
-                            setToolArguments({})
+                            setSelectedTool(tool);
+                            setToolArguments({});
                           }}
                         >
                           <div className="flex items-center gap-2">
@@ -254,17 +284,23 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           </div>
                           <p className="text-sm text-muted-foreground mt-1">
                             {tool.description}
-                          </p>))}
-                    </CollapsibleContent>))}
+                          </p>
+                        </div>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+                ))}
+              </div>
             </ScrollArea>
           </CardContent>
         </Card>
+
         {/* Tool Configuration */}
         <Card className="h-[600px]">
           <CardHeader>
             <CardTitle>Tool Configuration</CardTitle>
             <CardDescription>
-              {selectedTool ? `Configure ${selectedTool.name}` : 'Select a tool to configure'}`
+              {selectedTool ? `Configure ${selectedTool.name}` : 'Select a tool to configure'}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -285,8 +321,8 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           onChange={(e) => setToolArguments({
                             ...toolArguments,
                             [field.name]: e.target.value
-                         })}
-                          placeholder={`Enter ${field.name}`}`
+                          })}
+                          placeholder={`Enter ${field.name}`}
                         />
                       )}
                       {field.type === 'object' && (
@@ -296,12 +332,14 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           onChange={(e) => setToolArguments({
                             ...toolArguments,
                             [field.name]: e.target.value
-                         })}
+                          })}
                           placeholder="Enter JSON object"
                           rows={3}
                         />
                       )}
+                    </div>
                   ))}
+                </div>
                 <div className="flex gap-2">
                   <Button
                     onClick={handleExecuteTool}
@@ -317,12 +355,18 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                     disabled={loading}
                   >
                     Add to Plan
-                  </Button>) : (
+                  </Button>
+                </div>
+              </div>
+            ) : (
               <div className="flex items-center justify-center h-full text-muted-foreground">
-                <p>Select a tool from the left panel</p>)}
+                <p>Select a tool from the left panel</p>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
+
       {/* Orchestration Plan */}
       <Card>
         <CardHeader>
@@ -358,6 +402,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                           Server: {step.server}
                         </p>
                       </div>
+                    </div>
                     <Button
                       size="sm"
                       variant="ghost"
@@ -366,7 +411,11 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                       )}
                     >
                       <XCircle className="h-4 w-4" />
-                    </Button>))}
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
           <Button
             onClick={handleExecutePlan}
@@ -378,6 +427,7 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
           </Button>
         </CardContent>
       </Card>
+
       {/* Execution Results */}
       {executionResults.length > 0 && (
         <Card>
@@ -412,25 +462,22 @@ export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProp
                     {result.error && (
                       <div className="text-sm text-red-500">
                         Error: {result.error}
+                      </div>
                     )}
                     {result.result && (
                       <div className="text-sm bg-muted p-2 rounded">
                         <pre className="whitespace-pre-wrap">
                           {JSON.stringify(result.result, null, 2)}
-                        </pre>)}
+                        </pre>
+                      </div>
+                    )}
+                  </div>
                 ))}
+              </div>
             </ScrollArea>
-          </CardContent>)}
-  )
-</CardContent>
-</Card>
-</CardContent>
-</Card>
-</div></TabsContent>
-</Tabs>
-</CardContent>
-</Card>
-</div>
-}
-</MCPTool>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
 }

@@ -13,11 +13,11 @@ export interface AgentStatus {
 }
 
 export class AgentOrchestrator {
-  private loader: any;
-  private coordinator: any;
-  private registry: any;
-  private monitor: any;
-  private communication: any;
+  private loader: unknown;
+  private coordinator: unknown;
+  private registry: unknown;
+  private monitor: unknown;
+  private communication: unknown;
 
   constructor() {
     this.loader = null;
@@ -42,4 +42,14 @@ export class AgentOrchestrator {
   async shutdown(): Promise<void> {
     console.log('Shutting down Agent Orchestrator');
   }
+}
+
+// Global orchestrator instance
+let orchestratorInstance: AgentOrchestrator | null = null;
+
+export function getOrchestrator(): AgentOrchestrator {
+  if (!orchestratorInstance) {
+    orchestratorInstance = new AgentOrchestrator();
+  }
+  return orchestratorInstance;
 }

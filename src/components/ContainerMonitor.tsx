@@ -13,7 +13,7 @@ interface Container {
   uptime: string;
 }
 
-export default function ContainerMonitor() {
+export function ContainerMonitor() {
   const [containers, setContainers] = useState<Container[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
