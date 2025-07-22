@@ -4,37 +4,50 @@ import { ThemeProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-export function Providers({ children }: { children: React.ReactNode }): void {;
+
+export function Providers({ children }: { children: React.ReactNode }): JSX.Element {
   const pathname = usePathname();
-  const [queryClient] = useState(() => new QueryClient({;
+  const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 60 * 1000;
-  // 1 minute
-  refetchOnWindowFocus: false}}}))
+        staleTime: 60 * 1000, // 1 minute
+        refetchOnWindowFocus: false
+      }
+    }
+  }));
+
   // Exclude admin routes from NextAuth SessionProvider to prevent automatic redirects
   const isAdminRoute = pathname?.startsWith('/admin');
+  
   if (isAdminRoute) {
     // Admin routes don't use NextAuth - they have their own authentication system
     return (
-    <QueryClientProvider client={queryClient}></QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}</ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </QueryClientProvider>
+    );
   }
+
   // Regular routes use NextAuth SessionProvider
   return (
-    <SessionProvider></SessionProvider>
-      <QueryClientProvider client={queryClient}></QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}</ThemeProvider>
-  }
+          {children}
+        </ThemeProvider>
+      </QueryClientProvider>
+    </SessionProvider>
+  );
+}
