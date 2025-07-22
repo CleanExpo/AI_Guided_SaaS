@@ -133,7 +133,7 @@ export class ValidatedAnalystAgent extends ValidatedAgent {;
 /**
  * Decorator for validating agent configuration
  */
-export function ValidatedAgentConfig(schema: z.ZodSchema): void {;
+export function ValidatedAgentConfig(schema: z.ZodSchema): string {;
   return function <T extends { new(...args: any[]): {} }>(constructor: T) {
     return class extends constructor {
       constructor(...args: any[]) {

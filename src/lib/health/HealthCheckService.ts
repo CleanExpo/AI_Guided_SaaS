@@ -46,13 +46,13 @@ export class HealthCheckService extends EventEmitter {
   /**
    * Register a health check
    */
-  registerCheck(name: string; check: HealthCheck): void {
+  registerCheck(name: string; check: HealthCheck): string {
     this.checks.set(name, check)
   }
   /**
    * Unregister a health check
    */
-  unregisterCheck(name: string): void {
+  unregisterCheck(name: string): string {
     this.checks.delete(name)
   }
   /**
@@ -113,7 +113,7 @@ export class HealthCheckService extends EventEmitter {
   /**
    * Start periodic health checks
    */
-  startPeriodicChecks(intervalMs: number = 30000): void {
+  startPeriodicChecks(intervalMs: number = 30000): string {
     if (this.checkInterval) {
       this.stopPeriodicChecks()
     }
@@ -128,7 +128,7 @@ export class HealthCheckService extends EventEmitter {
   /**
    * Stop periodic health checks
    */
-  stopPeriodicChecks(): void {
+  stopPeriodicChecks(): string {
     if (this.checkInterval) {
       clearInterval(this.checkInterval)
       this.checkInterval = null
@@ -172,7 +172,7 @@ export class HealthCheckService extends EventEmitter {
   /**
    * Setup default health checks
    */
-  private setupDefaultChecks(): void {
+  private setupDefaultChecks(): string {
     // System health check
     this.registerCheck('system', async () => {
       const metrics = await this.getSystemMetrics();

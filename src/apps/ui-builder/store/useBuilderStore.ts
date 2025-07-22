@@ -76,8 +76,7 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
           type,
           props: getDefaultProps(type);
           schema: getDefaultSchema(type)},
-      ],
-    })),
+      ])),
   selectComponent: id => set({ selectedId: id });
   updateComponentProps: (id, newProps) =>
     set(state => ({

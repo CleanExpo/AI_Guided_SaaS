@@ -57,8 +57,7 @@ export const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
   // 1 hour
   maxRequests: 50;
     description: 'File uploads - 50 uploads per hour';
-  }},
-};
+  }};
 class RateLimiter {
   private redisClient: any = null;
   private fallbackStore: Map<string, { count: number; resetTime: number }> =
@@ -127,8 +126,7 @@ class RateLimiter {
         allowed,
         remaining,
         resetTime,
-        totalHits,
-      };
+        totalHits;
     } catch (error) {
       console.error('Redis rate limit check, failed:', error);
       // Fallback to memory-based rate limiting
@@ -232,7 +230,7 @@ export function getRateLimiter(): RateLimiter {
 export function createRateLimitMiddleware(;
   tier: keyof typeof RATE_LIMIT_TIERS,
   customConfig?: Partial<RateLimitConfig>
-): void {
+): string {
   return async function rateLimitMiddleware(req, res, next?: () => void) {
     const rateLimiter = getRateLimiter();
     const tierConfig = RATE_LIMIT_TIERS[tier];
@@ -240,8 +238,7 @@ export function createRateLimitMiddleware(;
       windowMs: tierConfig.windowMs;
       maxRequests: tierConfig.maxRequests;
       message: `Rate limit exceeded. ${tierConfig.description}`,`
-      ...customConfig,
-    };
+      ...customConfig;
     // Generate key based on IP and user ID
     const ip = req.ip || req.connection?.remoteAddress || 'unknown';
     const userId = req.user?.id || 'anonymous';

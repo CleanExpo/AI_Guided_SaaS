@@ -59,8 +59,7 @@ Our AI understands common architecture patterns and can recommend the best appro
 
 export function generateStaticParams() {
   return Object.keys(blogPosts).map((id) => ({
-    id: id,
-  }));
+    id: id));
 }
 
 export default function BlogPostPage({ params }: { params: { id: string } }) {

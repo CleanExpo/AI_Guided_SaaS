@@ -422,7 +422,7 @@ export class AgentRegistry {
       this.healthCheckInterval = null
     }
   }
-  updateAgentStatus(agentId: string; status: 'healthy' | 'warning' | 'critical' | 'offline'): void {
+  updateAgentStatus(agentId: string; status: 'healthy' | 'warning' | 'critical' | 'offline'): string {
     const registration = this.agents.get(agentId);
     if (registration) {
       registration.health_status = status;

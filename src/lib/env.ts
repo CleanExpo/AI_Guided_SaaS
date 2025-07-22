@@ -81,7 +81,7 @@ export function isServiceConfigured(service: string): boolean {;
   }
 }
 // Get service status for debugging
-export function getServiceStatus(): void {;
+export function getServiceStatus(): string {;
   return {
     supabase: isServiceConfigured('supabase');
     google: isServiceConfigured('google');

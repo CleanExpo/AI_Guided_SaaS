@@ -239,8 +239,7 @@ export class AdvisorAgent extends Agent {
         alternatives,
         decisionMatrix,
         actionPlan,
-        confidence,
-      };
+        confidence;
       // Store in artifacts
       this.setArtifact('advisory-report', result);
       // Share key insights with other agents
@@ -259,8 +258,7 @@ export class AdvisorAgent extends Agent {
           'Set up monitoring for KPIs',
           'Schedule first review checkpoint',
         ],
-        confidence,
-      };
+        confidence;
     } catch (error) {
       this.think(`Error during advisory, analysis: ${error}`);`
       throw error;
@@ -478,8 +476,7 @@ Format as JSON DecisionMatrix object.`;`
     });
     return {
       ...matrix,
-      weightedScores,
-    };
+      weightedScores;
   }
   private async developActionPlan(
     recommendations: Recommendation[];

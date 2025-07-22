@@ -46,8 +46,7 @@ export async function getServerSession(): Promise<AuthenticatedSession | null> {
         email: session.user.email || '';
         name: session.user.name || '';
         image: session.user.image || undefined;
-      }},
-    } as AuthenticatedSession;
+      }} as AuthenticatedSession;
   } catch (error) {
     console.error('Error getting server, session:', error);
     return null;
@@ -101,8 +100,7 @@ export async function authenticateApiRequest(): Promise<{
     }
     return {
       success: true,
-      session,
-    };
+      session;
   } catch {
     return {
       success: false;

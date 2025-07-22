@@ -13,6 +13,16 @@ export interface AgentStatus {
 }
 
 export class AgentOrchestrator {
+  private isClient = typeof window !== 'undefined';
+  
+  constructor() {
+    if (!this.isClient) {
+      // SSR mode - return mock methods
+      this.getSystemStatus = () => Promise.resolve({ status: 'loading', message: 'Initializing...' });
+      this.startMonitoring = () => Promise.resolve();
+      this.stopMonitoring = () => Promise.resolve();
+    }
+  }
   private loader: unknown;
   private coordinator: unknown;
   private registry: unknown;
@@ -28,18 +38,22 @@ export class AgentOrchestrator {
   }
 
   async initialize(): Promise<void> {
+    if (!this.isClient) return Promise.resolve({});
     console.log('Initializing Agent Orchestrator');
   }
 
   async loadAgent(config: AgentConfig): Promise<void> {
+    if (!this.isClient) return Promise.resolve({});
     console.log('Loading agent:', config.name);
   }
 
   async getStatus(): Promise<AgentStatus[]> {
+    if (!this.isClient) return Promise.resolve({});
     return [];
   }
 
   async shutdown(): Promise<void> {
+    if (!this.isClient) return Promise.resolve({});
     console.log('Shutting down Agent Orchestrator');
   }
 }

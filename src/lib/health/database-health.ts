@@ -218,7 +218,6 @@ export async function checkDatabasePerformance(;
           degraded: '500-1000ms';
           unhealthy: '>1000ms';
         }},
-      },
       timestamp: new Date()};
   } catch (error) {
     return {
@@ -234,7 +233,7 @@ export async function checkDatabasePerformance(;
  */
 export function createComprehensiveDatabaseHealthCheck(;
   supabase: SupabaseClient
-): void {
+): string {
   return async (): Promise<HealthCheckResult> => {
     const checks = await Promise.all([;
       checkSupabaseHealth(supabase),

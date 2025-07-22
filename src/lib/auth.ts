@@ -14,16 +14,13 @@ export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-    }),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''),
   ],
   adapter: supabase ? SupabaseAdapter({
     url: supabaseUrl!,
-    secret: supabaseKey!,
-  }) : undefined,
+    secret: supabaseKey!) : undefined,
   session: {
     strategy: 'jwt',
-  },
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account && profile) {
@@ -39,13 +36,10 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-  },
   pages: {
     signIn: '/auth/signin',
     signUp: '/auth/signup',
-  },
-  debug: process.env.NODE_ENV === 'development',
-};
+  debug: process.env.NODE_ENV === 'development';
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

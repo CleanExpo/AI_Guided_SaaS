@@ -80,3 +80,5 @@ export async function GET() {
     );
   }
 }
+
+export const dynamic = "force-dynamic";

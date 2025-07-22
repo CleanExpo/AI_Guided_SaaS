@@ -130,7 +130,7 @@ export function UnifiedAlert({ ;
   onDismiss,
   icon,
   className
-}: UnifiedAlertProps): void {
+}: UnifiedAlertProps): string {
   const types = {;
     info: {
       bg: 'bg-blue-50 border-blue-200';
@@ -199,7 +199,7 @@ export function UnifiedProgress({ ;
   showValue = false,
   animated = true,
   className
-}: UnifiedProgressProps): void {
+}: UnifiedProgressProps): string {
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
   const sizes = {;
     sm: 'h-1';
@@ -241,7 +241,7 @@ export function UnifiedBadge({ ;
   dot = false,
   children,
   className
-}: UnifiedBadgeProps): void {
+}: UnifiedBadgeProps): string {
   const variants = {;
     default: 'bg-neutral-100 text-neutral-700';
     primary: 'bg-primary-100 text-primary-700';
@@ -286,7 +286,7 @@ export function UnifiedSteps({ ;
   variant = 'linear',
   size = 'md',
   className
-}: UnifiedStepsProps): void {
+}: UnifiedStepsProps): string {
   return (
     <div className={cn('w-full' className)}>
       {variant === 'linear' ? (</div>

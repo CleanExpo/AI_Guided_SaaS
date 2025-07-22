@@ -441,7 +441,6 @@ export class TemplateMarketplace {
             'Admin Dashboard',
             'Inventory Management',
           ],
-        },
     metadata: {
           version: '2.1.0';
           license: 'MIT';
@@ -451,8 +450,6 @@ export class TemplateMarketplace {
             tailwindcss: '^3.0.0';
           }},
           requirements: ['Node.js 18+', 'Stripe Account', 'Database'],
-        },
-      },
       // Add more mock templates as needed
     ];
   }

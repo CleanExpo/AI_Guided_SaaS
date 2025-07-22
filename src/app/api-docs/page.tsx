@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Code, Key, Database, Webhook, ExternalLink } from 'lucide-react';
+import { Code, , , , ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {

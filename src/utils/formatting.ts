@@ -4,8 +4,7 @@
 export function formatCurrency(amount: number, currency = 'USD'): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency,
-  }).format(amount);
+    currency).format(amount);
 };
 export function formatNumber(;
   num: number,

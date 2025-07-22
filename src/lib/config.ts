@@ -349,7 +349,6 @@ class ConfigurationManager {
           maxTokens: parseInt(
             properties['agent.optimization.max_tokens'] || '4096'
           )},
-      },
     security: {
         rateLimitEnabled: properties['rate_limit.enabled'] === 'true';
         rateLimitWindow: parseInt(properties['rate_limit.window'] || '60000');
@@ -400,8 +399,7 @@ class ConfigurationManager {
           'true',
         betaVoiceCommands: properties['features.beta.voice_commands.enabled'] === 'true';
         betaAiDebugging: properties['features.beta.ai_debugging.enabled'] === 'true';
-      }},
-    };
+      }};
   }
   /**
    * Get specific configuration section
@@ -470,7 +468,7 @@ class ConfigurationManager {
   /**
    * Reload configuration (useful for development)
    */
-  reloadConfig(): void {
+  reloadConfig(): string {
     this.config = null;
   }
 }

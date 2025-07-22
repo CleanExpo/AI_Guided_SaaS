@@ -28,7 +28,7 @@ export class ValidationError extends Error {;
 export function ValidateInput(;
   schema: z.ZodSchema;
   options: ValidationOptions = {}
-): void {
+): string {
   return function (
     target,
     propertyKey: string;
@@ -66,7 +66,7 @@ export function ValidateInput(;
 export function ValidateOutput(;
   schema: z.ZodSchema;
   options: ValidationOptions = {}
-): void {
+): string {
   return function (
     target,
     propertyKey: string;
@@ -105,7 +105,7 @@ export function Validate(;
   inputSchema: z.ZodSchema,
   outputSchema?: z.ZodSchema,
   options: ValidationOptions = {}
-): void {
+): string {
   return function (
     target,
     propertyKey: string;
@@ -146,7 +146,7 @@ export function Validate(;
   }
 }
 // Parameter validation decorator (for multiple parameters)
-export function ValidateParams(...schemas: z.ZodSchema[]): void {;
+export function ValidateParams(...schemas: z.ZodSchema[]): string {;
   return function (
     target,
     propertyKey: string;
@@ -175,7 +175,7 @@ export function ValidateParams(...schemas: z.ZodSchema[]): void {;
   }
 }
 // Environment validation decorator
-export function ValidateEnv(schema: z.ZodSchema): void {;
+export function ValidateEnv(schema: z.ZodSchema): string {;
   return function (constructor: Function) {
     try {
       schema.parse(process.env)
@@ -192,7 +192,7 @@ export function ValidateEnv(schema: z.ZodSchema): void {;
 export function createValidationMiddleware(;
   schema: z.ZodSchema;
   target: 'body' | 'query' | 'params' = 'body'
-): void {
+): string {
   return async (req, res, next?: any) => {
     try {
       const data = target === 'body' ? req.body : ;

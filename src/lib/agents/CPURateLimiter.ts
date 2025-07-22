@@ -37,7 +37,7 @@ export class CPURateLimiter extends EventEmitter {;
     }
     this.startMonitoring()
   }
-  private startMonitoring(): void {
+  private startMonitoring(): string {
     this.checkTimer = setInterval(() => {
       this.checkResources()
     }, this.config.checkInterval)
@@ -106,7 +106,7 @@ export class CPURateLimiter extends EventEmitter {;
     return (avgCpu > this.config.maxCpuUsage && metrics.cpuUsage > cpuThreshold) ||
            (avgMem > this.config.maxMemoryUsage && metrics.memoryUsage > memThreshold)
   }
-  private applyThrottle(): void {
+  private applyThrottle(): string {
     if (!this.isThrottled) {
       this.isThrottled = true
       this.throttleUntil = new Date(Date.now() + this.config.cooldownPeriod)
@@ -129,14 +129,14 @@ export class CPURateLimiter extends EventEmitter {;
     )
     return allBelowLimit
   }
-  private releaseThrottle(): void {
+  private releaseThrottle(): string {
     this.isThrottled = false
     this.throttleUntil = undefined
     this.emit('release', {
       metrics: this.metrics[this.metrics.length - 1]
     })
   }
-  private recordMetrics(metrics: ResourceMetrics): void {
+  private recordMetrics(metrics: ResourceMetrics): string {
     this.metrics.push(metrics)
     // Keep only last 100 metrics
     if (this.metrics.length > 100) {
@@ -164,7 +164,7 @@ export class CPURateLimiter extends EventEmitter {;
       }
     }
   }
-  public updateConfig(newConfig: Partial<RateLimiterConfig>): void {
+  public updateConfig(newConfig: Partial<RateLimiterConfig>): string {
     this.config = {
       ...this.config,
       ...newConfig
@@ -218,7 +218,7 @@ export class CPURateLimiter extends EventEmitter {;
       throttleCount
     }
   }
-  public shutdown(): void {
+  public shutdown(): string {
     if (this.checkTimer) {
       clearInterval(this.checkTimer)
       this.checkTimer = undefined

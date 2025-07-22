@@ -61,7 +61,7 @@ export function withApiTracking(handler: ApiHandler): ApiHandler {;
 // Middleware for tracking specific resource usage
 export function trackResourceUsage(;
   resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use'
-): void {
+): string {
   return (handler: ApiHandler): ApiHandler => {
     return async (request: NextRequest, context?: any) => {
       const response = await handler(request, context);
@@ -126,7 +126,7 @@ export function trackResourceUsage(;
 export function withRateLimit(;
   maxRequests: number = 100;
   windowMs: number = 60000 // 1 minute
-): void {
+): string {
   const requestCounts = new Map<string, { count: number; resetTime: number }>()
   return (handler: ApiHandler): ApiHandler => {
     return async (request: NextRequest, context?: any) => {

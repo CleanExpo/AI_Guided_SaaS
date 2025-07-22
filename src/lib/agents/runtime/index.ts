@@ -6,20 +6,17 @@ export {
   analyzeProject,
   planProject,
   architectProject,
-  fullStackProject,
-} from './AgentOrchestrator';
+  fullStackProject from './AgentOrchestrator';
 // Types
 export type {
   RuntimeConfig,
   AgentTask,
   TaskResult,
   RuntimeMetrics,
-  ExecutionPlan,
-} from './AgentRuntime';
+  ExecutionPlan from './AgentRuntime';
 export type {
   OrchestratorConfig,
   ProjectRequest,
   ProjectResult,
   ProjectSummary,
-  Deliverable,
-} from './AgentOrchestrator';
+  Deliverable from './AgentOrchestrator';

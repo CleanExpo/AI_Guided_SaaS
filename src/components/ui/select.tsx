@@ -77,5 +77,4 @@ export {
   SelectValue,
   SelectTrigger,
   SelectContent,
-  SelectItem,
-};
+  SelectItem;

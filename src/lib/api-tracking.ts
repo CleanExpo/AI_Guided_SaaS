@@ -74,7 +74,6 @@ export class ApiTracking {
           method,
           statusCode,
           endpoint,
-        },
         created_at: new Date().toISOString()});
       if (error) {
         console.error('Error logging API, activity:', error);
@@ -180,8 +179,7 @@ export class ApiTracking {
         totalCalls,
         avgResponseTime: Math.round(avgResponseTime);
         errorRate: Math.round(errorRate * 100) / 100,
-        topEndpoints,
-      };
+        topEndpoints;
     } catch (error) {
       console.error('Error calculating API, performance:', error);
       return null;

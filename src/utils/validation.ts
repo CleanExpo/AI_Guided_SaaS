@@ -20,7 +20,7 @@ export function isValidPhone(phone: string): boolean {
 export function isStrongPassword(password: string): boolean {
   // At least 8 characters, one uppercase, one lowercase, one number, one special character
   const passwordRegex =;
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8$/;
   return passwordRegex.test(password);
 };
 export function validateRequired(value: any; fieldName: string): string | null {
@@ -102,8 +102,7 @@ export function validateForm(;
   }
   return {
     isValid: Object.keys(errors).length === 0,
-    errors,
-  };
+    errors;
 };
 export class ValidationError extends Error {
   constructor(

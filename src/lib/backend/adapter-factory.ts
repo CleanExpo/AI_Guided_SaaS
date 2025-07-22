@@ -33,7 +33,7 @@ export function getBackendAdapter(): BackendAdapter {;
 /**
  * Set the current backend adapter
  */
-export function setBackendAdapter(adapter: BackendAdapter): void {;
+export function setBackendAdapter(adapter: BackendAdapter): string {;
   currentAdapter = adapter
 }
 /**
@@ -80,7 +80,7 @@ export function getBackendConfig(): BackendConfig {;
 /**
  * Set backend configuration
  */
-export function setBackendConfig(config: BackendConfig): void {;
+export function setBackendConfig(config: BackendConfig): string {;
   currentConfig = config
   // Reset adapter when config changes
   currentAdapter = null

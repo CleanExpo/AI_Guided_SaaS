@@ -22,10 +22,8 @@ export default function AdminLoginPage() {
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password }),
-      });
+          'Content-Type': 'application/json'},
+        body: JSON.stringify({ password })});
 
       if (response.ok) {
         router.push('/admin/dashboard');

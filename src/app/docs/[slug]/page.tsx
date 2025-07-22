@@ -71,8 +71,7 @@ Delete a project.`,
 
 export function generateStaticParams() {
   return Object.keys(docPages).map((slug) => ({
-    slug: slug,
-  }));
+    slug: slug));
 }
 
 export default function DocPage({ params }: { params: { slug: string } }) {

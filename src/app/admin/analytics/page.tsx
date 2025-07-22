@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BarChart3, LogOut, RefreshCw, ArrowLeft, Download, Calendar, Filter } from 'lucide-react';
+import { BarChart3, ArrowLeft, Download } from 'lucide-react';
 import Link from 'next/link';
 
 interface AdminUser {

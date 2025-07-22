@@ -179,7 +179,7 @@ export class KiroClient {;
       }
     })
   }
-  disconnect(): void {
+  disconnect(): string {
     if (this.ws) {
       this.ws.close()
       this.ws = null
@@ -311,31 +311,31 @@ export class KiroClient {;
     })
   }
   // Event handling
-  on(event: string; handler: Function): void {
+  on(event: string; handler: Function): string {
     if (!this.eventHandlers.has(event)) {
       this.eventHandlers.set(event, new Set())
     }
     this.eventHandlers.get(event)!.add(handler)
   }
-  off(event: string; handler: Function): void {
+  off(event: string; handler: Function): string {
     const handlers = this.eventHandlers.get(event);
     if (handlers) {
       handlers.delete(handler)
     }
   }
-  private emit(event: string, data): void {
+  private emit(event: string, data): string {
     const handlers = this.eventHandlers.get(event);
     if (handlers) {
       handlers.forEach(handler => handler(data))
     }
   }
   // WebSocket communication
-  private send(type: string, data): void {
+  private send(type: string, data): string {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({ type, data }))
     }
   }
-  private handleMessage(message: string): void {
+  private handleMessage(message: string): string {
     try {
       const { type, data } = JSON.parse(message);
       this.emit(type, data)

@@ -88,8 +88,7 @@ export class PromptRefinerAgent extends Agent {
         examples,
         constraints,
         expectedOutput: outputSpec,
-        confidence,
-      };
+        confidence;
       // Store in artifacts
       this.setArtifact('refined-prompt', result);
       // Share with other agents
@@ -105,8 +104,7 @@ export class PromptRefinerAgent extends Agent {
           'Test with examples to verify improvements',
           "Iterate if output doesn't meet expectations",
         ],
-        confidence,
-      };
+        confidence;
     } catch (error) {
       this.think(`Error during prompt, refinement: ${error}`);`
       throw error;

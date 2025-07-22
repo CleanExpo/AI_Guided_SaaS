@@ -23,7 +23,7 @@ export class GracefulShutdownManager extends EventEmitter {
   /**
    * Register a shutdown handler
    */
-  registerHandler(handler: ShutdownHandler): void {
+  registerHandler(handler: ShutdownHandler): string {
     this.handlers.push(handler)
     // Sort by priority (lower number = higher priority)
     this.handlers.sort((a, b) => a.priority - b.priority)
@@ -32,7 +32,7 @@ export class GracefulShutdownManager extends EventEmitter {
   /**
    * Unregister a shutdown handler
    */
-  unregisterHandler(name: string): void {
+  unregisterHandler(name: string): string {
     this.handlers = this.handlers.filter(h => h.name !== name)
   }
   /**
@@ -93,7 +93,7 @@ export class GracefulShutdownManager extends EventEmitter {
   /**
    * Setup signal handlers for graceful shutdown
    */
-  private setupSignalHandlers(): void {
+  private setupSignalHandlers(): string {
     // Handle SIGTERM (Docker stop, Kubernetes termination)
     process.on('SIGTERM', () => {
       this.shutdown('SIGTERM signal').then(() => {
@@ -124,7 +124,7 @@ export class GracefulShutdownManager extends EventEmitter {
   /**
    * Set global shutdown timeout
    */
-  setShutdownTimeout(timeout: number): void {
+  setShutdownTimeout(timeout: number): string {
     this.shutdownTimeout = timeout
   }
 }

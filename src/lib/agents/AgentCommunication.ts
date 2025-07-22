@@ -396,7 +396,7 @@ export class AgentCommunication extends EventEmitter {
     queue.queue.push(message)
     this.emit('message_queued', { agentId, message })
   }
-  private startMessageProcessing(): void {
+  private startMessageProcessing(): string {
     // Process message queues every 5 seconds
     this.processingInterval = setInterval(() => {
       this.processMessageQueues()
@@ -478,7 +478,7 @@ export class AgentCommunication extends EventEmitter {
       this.registry.updateAgentStatus(agentId, 'healthy')
     }
   }
-  private setupHandoffProtocols(): void {
+  private setupHandoffProtocols(): string {
     const protocols: HandoffProtocol[] = [;
       {
         from_agent: 'ARCHITECT';
@@ -622,7 +622,7 @@ export class AgentCommunication extends EventEmitter {
   /**
    * Cleanup and shutdown
    */
-  shutdown(): void {
+  shutdown(): string {
     if (this.processingInterval) {
       clearInterval(this.processingInterval)
       this.processingInterval = null

@@ -211,8 +211,7 @@ export class EnvManager {
     return {
       isValid: errors.filter(e => e.severity === 'error').length === 0,
       errors,
-      summary,
-    };
+      summary;
   }
   public async sync(): Promise<void> {
     const env = this.loadEnvFile();

@@ -6,8 +6,7 @@ export enum LogLevel {
   ERROR = 0,
   WARN = 1,
   INFO = 2,
-  DEBUG = 3,
-};
+  DEBUG = 3;
 interface LogEntry {
   timestamp: string;
   level: LogLevel;
@@ -37,10 +36,9 @@ class ProductionLogger {
       timestamp: new Date().toISOString(),
       level,
       message,
-      context,
-    };
+      context;
   }
-  private writeLog(entry: LogEntry): void {
+  private writeLog(entry: LogEntry): string {
     // In development, still use console for immediate feedback
     if (this.isDevelopment) {
       const levelName = LogLevel[entry.level];
@@ -71,42 +69,42 @@ class ProductionLogger {
       // Fail silently to avoid logging loops
     }
   }
-  error(message: string, context?: Record<string, unknown>): void {
+  error(message: string, context?: Record<string, unknown>): string {
     if (this.shouldLog(LogLevel.ERROR)) {
       this.writeLog(this.createLogEntry(LogLevel.ERROR, message, context));
     }
   }
-  warn(message: string, context?: Record<string, unknown>): void {
+  warn(message: string, context?: Record<string, unknown>): string {
     if (this.shouldLog(LogLevel.WARN)) {
       this.writeLog(this.createLogEntry(LogLevel.WARN, message, context));
     }
   }
-  info(message: string, context?: Record<string, unknown>): void {
+  info(message: string, context?: Record<string, unknown>): string {
     if (this.shouldLog(LogLevel.INFO)) {
       this.writeLog(this.createLogEntry(LogLevel.INFO, message, context));
     }
   }
-  debug(message: string, context?: Record<string, unknown>): void {
+  debug(message: string, context?: Record<string, unknown>): string {
     if (this.shouldLog(LogLevel.DEBUG)) {
       this.writeLog(this.createLogEntry(LogLevel.DEBUG, message, context));
     }
   }
   // Security-focused logging methods
-  securityEvent(event: string, context?: Record<string, unknown>): void {
+  securityEvent(event: string, context?: Record<string, unknown>): string {
     this.warn(`SECURITY: ${event}`, context);`
   }
   adminActivity(
     activity: string;
     adminId: string,
     context?: Record<string, unknown>
-  ): void {
+  ): string {
     this.info(`ADMIN: ${activity}`, { adminId, ...context });`
   }
   userActivity(
     activity: string;
     userId: string,
     context?: Record<string, unknown>
-  ): void {
+  ): string {
     this.debug(`USER: ${activity}`, { userId, ...context });`
   }
   // Get logs for debugging (admin only)

@@ -1,0 +1,74 @@
+{
+  "stage1": {
+    "status": "issues",
+    "issues": [
+      "Missing: next.config.js"
+    ],
+    "fixes": [
+      "✓ Found: package.json",
+      "✓ Found: tsconfig.json",
+      "✓ Found: .env.example",
+      "✓ Node modules present"
+    ]
+  },
+  "stage2": {
+    "status": "passed",
+    "issues": [],
+    "fixes": [
+      "✓ Fixed syntax: src/app/api/auth/[...nextauth]/options.ts",
+      "✓ Cleaned imports: src/app/admin/analytics/page.tsx",
+      "✓ Cleaned imports: src/app/admin/dashboard/page.tsx",
+      "✓ Cleaned imports: src/app/admin/mcp/page.tsx",
+      "✓ Cleaned imports: src/components/Dashboard.tsx"
+    ]
+  },
+  "stage3": {
+    "status": "passed",
+    "issues": [],
+    "fixes": []
+  },
+  "stage4": {
+    "status": "passed",
+    "issues": [],
+    "fixes": [
+      "✓ Fixed API route: src\\app\\api\\admin\\auth\\login\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\admin\\direct-auth\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\admin\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\admin\\users\\[id]\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\agent-chat\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\agents\\pulse-config\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\auth\\register\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\auth\\[...nextauth]\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\backend-example\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\collaboration\\rooms\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\cycle-detection\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\email\\test\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\env\\status\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\feedback\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\mcp\\status\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\n8n\\webhook\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\n8n\\workflows\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\requirements\\process\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\validated-chat\\route.ts",
+      "✓ Fixed API route: src\\app\\api\\webhooks\\stripe\\route.ts"
+    ]
+  },
+  "stage5": {
+    "status": "passed",
+    "issues": [],
+    "fixes": [
+      "✓ Optimized tsconfig.json"
+    ]
+  },
+  "stage6": {
+    "status": "issues",
+    "issues": [
+      "Build test failed"
+    ],
+    "fixes": [
+      "✓ Applied emergency build fix",
+      "✓ Production file present: .env.production.template",
+      "✓ Production file present: vercel.json"
+    ]
+  }
+}

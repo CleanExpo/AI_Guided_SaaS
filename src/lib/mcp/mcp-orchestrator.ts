@@ -169,7 +169,7 @@ export class MCPOrchestrator {
   listTools(filter?: {
     server?: string;
     category?: string;
-    tags?: string[], }): MCPTool[] {
+    tags?: string[]}): MCPTool[] {
     const tools: MCPTool[] = [];
     for (const server of Array.from(this.servers.values())) {
       if (filter?.server && server.id !== filter.server) {
@@ -479,8 +479,7 @@ export class MCPOrchestrator {
       jsonrpc: '2.0',
       id,
       method,
-      params,
-    };
+      params;
     return new Promise((resolve, reject) => {
       const timeoutMs = timeout || this.config?.defaultTimeout || 30000;
       const timer = setTimeout(() => {
@@ -492,7 +491,7 @@ export class MCPOrchestrator {
     });
   }
   private handleMessage(serverId: string;
-  data: string): void {
+  data: string): string {
     try {
       const message = JSON.parse(data);
       if (message.id && this.pendingRequests.has(message.id)) {

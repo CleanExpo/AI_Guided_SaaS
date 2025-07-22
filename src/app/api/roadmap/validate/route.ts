@@ -1,3 +1,6 @@
+// Mark as dynamic to prevent static generation
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 

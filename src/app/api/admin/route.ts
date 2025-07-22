@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     // Simple admin status check
     const adminStatus = {
@@ -18,3 +18,5 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+export const dynamic = "force-dynamic";

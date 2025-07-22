@@ -205,7 +205,7 @@ class CycleDetectionEngine {;
   private generateId(): string {
     return `attempt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;`
   }
-  private cleanOldAttempts(sessionId: string): void {
+  private cleanOldAttempts(sessionId: string): string {
     const sessionAttempts = this.attempts.get(sessionId) || [];
     const cutoffTime = Date.now() - this.TIME_WINDOW;
     const recentAttempts = sessionAttempts.filter(attempt => attempt.timestamp > cutoffTime);

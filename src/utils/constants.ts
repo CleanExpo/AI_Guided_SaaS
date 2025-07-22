@@ -28,8 +28,7 @@ export const ROUTES = {
     DASHBOARD: '/admin';
     AGENTS: '/admin/agent-monitor';
     HEALTH: '/admin/health';
-  }},
-} as const;
+  }} as const;
 export const HTTP_STATUS = {
   OK: 200;
   CREATED: 201;

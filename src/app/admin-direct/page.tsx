@@ -21,9 +21,7 @@ export default function AdminDirectPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password }),
-      });
+        body: JSON.stringify({ password }));
 
       if (response.ok) {
         router.push('/admin');

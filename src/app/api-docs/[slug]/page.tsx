@@ -28,8 +28,7 @@ const apiDocs: Record<string, ApiDoc> = {
 
 export function generateStaticParams() {
   return Object.keys(apiDocs).map((slug) => ({
-    slug: slug,
-  }));
+    slug: slug));
 }
 
 export default function ApiDocPage({ params }: { params: { slug: string } }) {

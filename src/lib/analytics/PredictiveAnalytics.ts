@@ -84,8 +84,7 @@ export class PredictiveAnalytics extends EventEmitter {
     // Merge behavior data
     currentPattern.patterns = {
       ...currentPattern.patterns,
-      ...behavior,
-    };
+      ...behavior;
     // Update behavior history
     this.behaviorHistory.set(userId, [
       ...existingPatterns.slice(-9),
@@ -155,8 +154,7 @@ export class PredictiveAnalytics extends EventEmitter {
     metrics: {
           duration: pattern.patterns.sessionDuration;
           errors: pattern.patterns.errorFrequency;
-        }},
-      });
+        }});
     }
     pattern.anomalies = anomalies;
     // Calculate risk score
@@ -345,8 +343,7 @@ export class PredictiveAnalytics extends EventEmitter {
         return {
           issue: type;
           userCount: count,
-          severity,
-        };
+          severity;
       })
       .sort((a, b) => b.userCount - a.userCount);
   }

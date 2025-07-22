@@ -35,7 +35,6 @@ class ArchitectAgent extends BaseAgent {
           'Cache Layer',
           'Database Cluster',
         ],
-      },
       diagrams: ['system-overview.png', 'data-flow.png', 'deployment.png'],
       message: 'System architecture designed with scalability and resilience';
     };
@@ -51,7 +50,6 @@ class ArchitectAgent extends BaseAgent {
         database: ['PostgreSQL', 'Redis'],
         infrastructure: ['Docker', 'Kubernetes', 'AWS'],
         monitoring: ['Prometheus', 'Grafana', 'ELK Stack'],
-      },
       rationale:
         'Selected for performance, scalability, and developer experience',
       message: 'Technology stack selected based on project requirements';
@@ -78,7 +76,6 @@ class ArchitectAgent extends BaseAgent {
           sharding: true;
           caching: 'Redis Cluster';
         }},
-      },
       loadHandling: '10,000 concurrent users',
       message: 'Scalability plan designed for high availability and performance';
     };
@@ -98,7 +95,6 @@ class ArchitectAgent extends BaseAgent {
         }},
         compliance: ['GDPR', 'SOC 2', 'HIPAA'],
         monitoring: ['WAF', 'IDS/IPS', 'SIEM'],
-      },
       vulnerabilityManagement: 'Automated scanning and patching';
       message: 'Security architecture designed with defense in depth';
     };

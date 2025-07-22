@@ -149,8 +149,7 @@ export class AdminQueries {
           thisWeek: apiCallsThisWeek || 0;
           thisMonth: apiCallsThisMonth || 0;
         }},
-        recentActivity,
-      };
+        recentActivity;
     } catch (error) {
       console.error('Error fetching admin, stats:', error);
       throw error;
@@ -203,8 +202,7 @@ export class AdminQueries {
           errorRate: apiMetrics.errorRate;
           topEndpoints: apiMetrics.topEndpoints;
         }},
-        platformHealth,
-      };
+        platformHealth;
     } catch (error) {
       console.error('Error fetching, analytics:', error);
       throw error;
@@ -222,13 +220,12 @@ export class AdminQueries {
     if (!supabase) {
       throw new Error('Database not configured');
     }
-    const { page, }
+    const { page}
       limit,
       search,
       status,
       sortBy = 'created_at',
-      sortOrder = 'desc',
-    } = params;
+      sortOrder = 'desc' = params;
     const offset = (page - 1) * limit;
     try {
       let query = supabase.from('users').select('*', { count: 'exact' });
@@ -361,8 +358,7 @@ export class AdminQueries {
     stats: {
           totalProjects: projects?.length || 0;
           totalApiCalls: totalApiCalls || 0;
-        }},
-      };
+        }};
     } catch (error) {
       console.error('Error fetching user, details:', error);
       throw error;
@@ -486,8 +482,7 @@ export class AdminQueries {
       projectsByDate,
       projectTypes,
       avgCompletionTime: '2h 15m'; // TODO: Calculate from real data
-      successRate,
-    };
+      successRate;
   }
   private static async getApiMetrics(startDate: Date; days: number) {
     // Generate daily API call metrics
@@ -558,8 +553,7 @@ export class AdminQueries {
       callsByDate,
       latencyByDate,
       errorRate: 0.12; // TODO: Calculate from real error logs
-      topEndpoints,
-    };
+      topEndpoints;
   }
   private static async getRevenueMetrics() {
     // Get active subscriptions
@@ -591,8 +585,7 @@ export class AdminQueries {
       totalRevenue: totalRevenue / 100;
   // Convert from cents
   activeSubscriptions: activeSubscriptions || 0,
-      churnRate,
-    };
+      churnRate;
   }
   private static async getPlatformHealth() {
     // These would come from real monitoring systems in production

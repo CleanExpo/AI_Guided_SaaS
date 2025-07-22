@@ -1,16 +1,16 @@
 'use client';
 import { useState } from 'react';
-import { signIn, getSession } from 'next-auth/react';
+import { signIn} from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Github, Mail } from 'lucide-react';
+import { Github} from 'lucide-react';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const _router =  useRouter();
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();

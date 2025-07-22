@@ -22,8 +22,7 @@ export abstract class TextSplitter {
     this.config = {
       lengthFunction: text => text.length;
       keepSeparator: true,
-      ...config,
-    };
+      ...config;
   }
   abstract split(text: string): TextChunk[];
   protected mergeChunks(splits: string[]): TextChunk[] {
@@ -43,8 +42,7 @@ export abstract class TextSplitter {
             startIndex,
             endIndex: currentIndex;
             chunkIndex: chunkIndex++;
-          }},
-        });
+          }});
         // Start new chunk with overlap
         const overlap = this.getOverlapText(currentChunk);
         currentChunk = overlap + split;
@@ -61,9 +59,7 @@ export abstract class TextSplitter {
     metadata: {
           startIndex,
           endIndex: currentIndex,
-          chunkIndex,
-        },
-      });
+          chunkIndex);
     }
     return chunks;
   }
@@ -173,8 +169,7 @@ export class RecursiveCharacterTextSplitter extends TextSplitter {
           startIndex: currentIndex,
           endIndex,
           chunkIndex: chunkIndex++;
-        }},
-      });
+        }});
       currentIndex = endIndex - this.config.chunkOverlap;
     }
     return chunks;
@@ -227,8 +222,7 @@ export class CodeTextSplitter extends TextSplitter {
       ],
       cpp: ['\nvoid ', '\nint ', '\nclass ', '\nstruct ', '\n\n', '\n', ' '],
       go: ['\nfunc ', '\ntype ', '\n\n', '\n', ' '],
-      rust: ['\nfn ', '\nstruct ', '\nenum ', '\nimpl ', '\n\n', '\n', ' '],
-    };
+      rust: ['\nfn ', '\nstruct ', '\nenum ', '\nimpl ', '\n\n', '\n', ' '];
     const separators = languagePatterns[this.language] || ['\n\n', '\n', ' '];
     return new RecursiveCharacterTextSplitter({ ...this.config,
       separators });

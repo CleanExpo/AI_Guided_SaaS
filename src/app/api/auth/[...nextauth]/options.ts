@@ -6,7 +6,7 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '';
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '';
-    }}),
+    };}),
     CredentialsProvider({
       name: 'credentials';
     credentials: {
@@ -26,8 +26,7 @@ export const authOptions: NextAuthOptions = {
           };
         }
         return null;
-      },
-    }),
+      }),
   ],
     pages: {
     signIn: '/auth/signin';
@@ -46,6 +45,5 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-  },
   secret: process.env.NEXTAUTH_SECRET;
 };

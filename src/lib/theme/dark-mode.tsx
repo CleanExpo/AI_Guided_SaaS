@@ -17,7 +17,7 @@ interface ThemeProviderProps {;
 export function ThemeProvider({;
   children,
   defaultTheme = 'system',
-  storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps): void {</ThemeContextType>
+  storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps): string {</ThemeContextType>
       </Theme>
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
@@ -82,7 +82,7 @@ export function ThemeProvider({;
     </ThemeContext.Provider>
   );
 };
-export function useTheme(): void {;
+export function useTheme(): string {;
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
@@ -90,7 +90,7 @@ export function useTheme(): void {;
   return context;
 }
 // Theme toggle component
-export function ThemeToggle(): void {;
+export function ThemeToggle(): string {;
   const { theme, toggleTheme, resolvedTheme } = useTheme();
   return (
     <button
@@ -135,7 +135,7 @@ export function ThemeToggle(): void {;
     );
 }
 // Advanced theme toggle with dropdown
-export function ThemeSelector(): void {;
+export function ThemeSelector(): string {;
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const themes = [;
@@ -188,7 +188,7 @@ export function ThemeSelector(): void {;
     );
 }
 // Hook to detect if user prefers dark mode
-export function usePrefersDarkMode(): void {;
+export function usePrefersDarkMode(): string {;
   const [prefersDark, setPrefersDark] = useState(false);
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -202,7 +202,7 @@ export function usePrefersDarkMode(): void {;
   return prefersDark;
 }
 // Utility function to get theme-aware colors
-export function getThemeColor(lightColor: string; darkColor: string, theme?: 'light' | 'dark'): void {
+export function getThemeColor(lightColor: string; darkColor: string, theme?: 'light' | 'dark'): string {
   if (typeof window === 'undefined') return lightColor;
   const currentTheme = theme || (document.documentElement.classList.contains('dark') ? 'dark' : 'light');
   return currentTheme === 'dark' ? darkColor : lightColor;

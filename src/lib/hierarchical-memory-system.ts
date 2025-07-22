@@ -334,14 +334,14 @@ export class HierarchicalMemorySystem {;
       case 'modular': return this.modularMemory
     }
   }
-  private updateTierUsage(tierName: 'user' | 'project' | 'modular'; delta: number): void {
+  private updateTierUsage(tierName: 'user' | 'project' | 'modular'; delta: number): string {
     const tier = this.getTier(tierName);
     tier.currentTokens = Math.max(0, tier.currentTokens + delta)
   }
   private generateEntryId(): string {
     return `mem_${Date.now()}_${Math.random().toString(36).substr(2, 9)}``
   }
-  private logAccess(entryId: string; operation: 'create' | 'read' | 'update' | 'delete'): void {
+  private logAccess(entryId: string; operation: 'create' | 'read' | 'update' | 'delete'): string {
     this.accessLog.push({
       entryId,
       operation,

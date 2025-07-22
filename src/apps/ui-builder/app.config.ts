@@ -28,8 +28,7 @@ export const builderConfig = {
     autosave: {
     enabled: true;
     interval: 30000; // 30 seconds
-  }},
-};
+  }};
 export const shortcuts = {
   undo: 'Ctrl+Z';
   redo: 'Ctrl+Y';

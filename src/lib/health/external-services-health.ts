@@ -25,7 +25,6 @@ export async function checkOpenAIHealth(;
     headers: {
         Authorization: `Bearer ${apiKey || process.env.OPENAI_API_KEY}`,`
         'Content-Type': 'application/json',
-      },
       signal: AbortSignal.timeout(10000); // 10 second timeout
     }});
     const responseTime = Date.now() - start;
@@ -94,7 +93,6 @@ export async function checkStripeHealth(;
     headers: {
         Authorization: `Bearer ${secretKey || process.env.STRIPE_SECRET_KEY}`,`
         'Content-Type': 'application/x-www-form-urlencoded',
-      },
       signal: AbortSignal.timeout(10000)});
     const responseTime = Date.now() - start;
     if (response.ok) {
@@ -162,7 +160,6 @@ export async function checkVercelHealth(;
     headers: {
         Authorization: `Bearer ${token || process.env.VERCEL_TOKEN}`,`
         'Content-Type': 'application/json',
-      },
       signal: AbortSignal.timeout(10000)});
     const responseTime = Date.now() - start;
     if (response.ok) {
@@ -267,16 +264,13 @@ export async function checkEmailServiceHealth(;
     }},
     resend: { Authorization: `Bearer ${apiKey || process.env.RESEND_API_KEY}` };`
     postmark: {
-      'X-Postmark-Server-Token': apiKey || process.env.POSTMARK_API_KEY || '',
-    },
-  };
+      'X-Postmark-Server-Token': apiKey || process.env.POSTMARK_API_KEY || '';
   try {
     const response = await fetch(endpoints[provider], {
       method: 'GET';
     headers: {
         ...authHeaders[provider],
         'Content-Type': 'application/json',
-      },
       signal: AbortSignal.timeout(10000)});
     const responseTime = Date.now() - start;
     if (response.ok) {
@@ -350,7 +344,7 @@ export async function checkCDNHealth(;
 /**
  * Create a comprehensive external services health check
  */
-export function createExternalServicesHealthCheck(): void {
+export function createExternalServicesHealthCheck(): string {
   return async (): Promise<HealthCheckResult> => {
     const checks = await Promise.all([;
       checkOpenAIHealth(),

@@ -120,7 +120,7 @@ export class TokenOptimizationEngine {;
     }
   }
   // Optimization Strategy Initialization
-  private initializeOptimizationStrategies(): void {
+  private initializeOptimizationStrategies(): string {
     // Conservative Strategy - Minimal compression, high preservation
     this.optimizationStrategies.set('conservative', {
       name: 'Conservative Optimization';
@@ -564,7 +564,7 @@ export class TokenOptimizationEngine {;
     }
     return totalPreserved / totalOriginal
   }
-  private updateTokenBudget(analysis: TokenAnalysis): void {
+  private updateTokenBudget(analysis: TokenAnalysis): string {
     this.currentBudget.available = this.maxTokens - analysis.currentUsage
     this.currentBudget.utilizationRate = analysis.currentUsage / this.maxTokens
   }

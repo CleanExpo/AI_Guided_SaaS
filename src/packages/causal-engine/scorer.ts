@@ -80,8 +80,7 @@ export class CausalScorer {
       result[key] = {
         score: Math.min(Math.max(finalScore, 0), 1),
         confidence,
-        total,
-      };
+        total;
     }
     return result;
   }

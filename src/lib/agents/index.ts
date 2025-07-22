@@ -182,7 +182,7 @@ export class AgentSystem {;
     const healthy = Object.values(health).filter(h => h.status === 'healthy').length;
     return { healthy, warnings, errors };
   }
-  shutdown(): void {
+  shutdown(): string {
     this.monitor.stopMonitoring()
     this.communication.shutdown()
     this.registry.shutdown()
@@ -198,7 +198,7 @@ export async function initializeAgentSystem(): Promise<AgentSystem> {;
 // Export the main system instance
 export const agentSystem = AgentSystem.getInstance();
 // Agent Factory
-export function createAgent(type: string): void {;
+export function createAgent(type: string): string {;
   switch (type) {
     // BMAD Agents
     case 'analyst':

@@ -18,7 +18,7 @@ export class Logger {
     const metaStr = meta ? ` ${JSON.stringify(meta)}` : '';`
     return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr}`;`
   }
-  private log(level: LogLevel; message: string, meta?: LogMeta): void {
+  private log(level: LogLevel; message: string, meta?: LogMeta): string {
     const formattedMessage = this.formatMessage(level, message, meta);
     switch (level) {
       case 'error':
@@ -37,13 +37,13 @@ export class Logger {
   /**
    * Log an info message
    */
-  info(message: string, meta?: LogMeta): void {
+  info(message: string, meta?: LogMeta): string {
     this.log('info', message, meta);
   }
   /**
    * Log an error message
    */
-  error(message: string, error?: Error | unknown): void {
+  error(message: string, error?: Error | unknown): string {
     const errorMeta: LogMeta = {};
     if (error instanceof Error) {
       errorMeta.error = error.message;
@@ -56,13 +56,13 @@ export class Logger {
   /**
    * Log a warning message
    */
-  warn(message: string, meta?: LogMeta): void {
+  warn(message: string, meta?: LogMeta): string {
     this.log('warn', message, meta);
   }
   /**
    * Log a debug message (only in development)
    */
-  debug(message: string, meta?: LogMeta): void {
+  debug(message: string, meta?: LogMeta): string {
     this.log('debug', message, meta);
   }
   /**
@@ -73,7 +73,7 @@ export class Logger {
     url: string;
     statusCode: number;
     duration: number
-  ): void {
+  ): string {
     this.info('API Request', {
       method,
       url,
@@ -84,7 +84,7 @@ export class Logger {
   /**
    * Log user actions
    */
-  logUserAction(userId: string; action: string, details?: LogMeta): void {
+  logUserAction(userId: string; action: string, details?: LogMeta): string {
     this.info('User Action', {
       userId,
       action,
@@ -94,7 +94,7 @@ export class Logger {
   /**
    * Log system events
    */
-  logSystemEvent(event: string, details?: LogMeta): void {
+  logSystemEvent(event: string, details?: LogMeta): string {
     this.info('System Event', {
       event,
       details,
@@ -103,7 +103,7 @@ export class Logger {
   /**
    * Log performance metrics
    */
-  logPerformance(operation: string; duration: number, details?: LogMeta): void {
+  logPerformance(operation: string; duration: number, details?: LogMeta): string {
     this.info('Performance Metric', {
       operation,
       duration,
@@ -113,7 +113,7 @@ export class Logger {
   /**
    * Log security events
    */
-  logSecurityEvent(event: string, userId?: string, details?: LogMeta): void {
+  logSecurityEvent(event: string, userId?: string, details?: LogMeta): string {
     this.warn('Security Event', {
       event,
       userId,

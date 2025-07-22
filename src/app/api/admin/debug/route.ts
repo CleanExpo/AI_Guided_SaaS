@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Mark as dynamic to prevent static generation
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
-    const url = new URL(request.url);
-    const debugKey = url.searchParams.get('key');
+    const { searchParams } = new URL(request.url);
+    const debugKey = searchParams.get('key');
     
     // Simple access control
     if (debugKey !== 'debug123' && process.env.NODE_ENV === 'production') {

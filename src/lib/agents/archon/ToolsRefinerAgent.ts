@@ -180,8 +180,7 @@ export class ToolsRefinerAgent extends Agent {
         removals,
         integrations,
         performance,
-        recommendations,
-      };
+        recommendations;
       // Store in artifacts
       this.setArtifact('tool-refinement', result);
       // Share with other agents
@@ -231,7 +230,6 @@ export class ToolsRefinerAgent extends Agent {
           scalability: 'high';
     resourceUsage: { cpu: 'low'; memory: 'low'; network: 'low' };
         }},
-      },
       {
         id: 'api-tester';
         name: 'API Tester';
@@ -251,7 +249,6 @@ export class ToolsRefinerAgent extends Agent {
           scalability: 'high';
     resourceUsage: { cpu: 'low'; memory: 'low'; network: 'medium' };
         }},
-      },
       // Add more tools as needed
     ];
     commonTools.forEach(tool => library.set(tool.id, tool));
@@ -301,9 +298,7 @@ Format as JSON with arrays for each category.`;`
                 cpu: 'medium' as any;
                 memory: 'medium' as any;
                 network: 'medium' as any;
-              }},
-            },
-          }
+              }}
         );
       }) || [];
     return {
@@ -400,8 +395,7 @@ Format as JSON array of ToolAddition objects.`;`
           reliability: 80;
           scalability: 'medium';
     resourceUsage: { cpu: 'medium'; memory: 'medium'; network: 'medium' };
-        }},
-      };
+        }};
       return {
         tool,
         rationale: addition.rationale;
@@ -552,8 +546,7 @@ Provide 5-7 specific, actionable recommendations prioritized by impact.`;`
       if (index !== -1) {
         refined[index] = {
           ...refined[index],
-          ...mod.newConfig,
-        };
+          ...mod.newConfig;
       }
     });
     // Remove redundant tools

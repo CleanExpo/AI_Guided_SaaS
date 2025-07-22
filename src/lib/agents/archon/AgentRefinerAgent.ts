@@ -177,8 +177,7 @@ export class AgentRefinerAgent extends Agent {
         improvements,
         collaborationStrategy,
         performanceMetrics,
-        recommendations,
-      };
+        recommendations;
       // Store in artifacts
       this.setArtifact('agent-refinement', result);
       // Share with other agents

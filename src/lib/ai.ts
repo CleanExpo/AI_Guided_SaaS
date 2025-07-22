@@ -72,8 +72,7 @@ export async function generateCompletion(;
 ): Promise<AIResponse> {
   return generateChatCompletion({
     messages: [{ role: 'user'; content: prompt }],
-    ...options,
-  });
+    ...options);
 }
 /**
  * Analyze code with AI
@@ -115,5 +114,4 @@ export default {
   generateCompletion,
   generateAIResponse,
   analyzeCode,
-  generateCodeSuggestions,
-};
+  generateCodeSuggestions;

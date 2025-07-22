@@ -123,7 +123,7 @@ import React from 'react';
 interface ComponentProps {
   // Add your props here
 };
-export function Component({ }: ComponentProps): void {
+export function Component({ }: ComponentProps): string {
   return (
     <div>
       {/* Your component content */}

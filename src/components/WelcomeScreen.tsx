@@ -94,8 +94,7 @@ const getPersonaIcon = (personaId: string) => {
     case 'enterprise-consultant':</Rocket>
       return <Sparkles className="w-8 h-8" />
     default: </Sparkles>
-      return <Bot className="w-8 h-8" />,
-  }
+      return <Bot className="w-8 h-8" />
 };
 export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps): void {</Bot>;
       </string>

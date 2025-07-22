@@ -22,8 +22,7 @@ export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
       summary: 'No user interaction data to analyze.';
       recommendations: [
         'Encourage users to interact with the UI builder to collect data.',
-      ],
-    };
+      ];
   }
   const componentStats: Record<string, ComponentPattern> = {};
   // Analyze each log entry

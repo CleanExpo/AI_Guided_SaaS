@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
     // Simulate email configuration test
     const configTest = { success: true };
@@ -50,3 +50,5 @@ export async function GET() {
     );
   }
 }
+
+export const dynamic = "force-dynamic";

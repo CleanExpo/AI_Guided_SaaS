@@ -63,5 +63,4 @@ export default {
   createMCPClient,
   mcp__memory__create_entities,
   mcp__memory__add_observations,
-  mcp__memory__search_nodes,
-};
+  mcp__memory__search_nodes;

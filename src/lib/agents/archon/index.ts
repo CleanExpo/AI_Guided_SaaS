@@ -9,8 +9,7 @@ export type {
   PromptImprovement,
   PromptClarity,
   PromptExample,
-  OutputSpecification,
-} from './PromptRefinerAgent';
+  OutputSpecification from './PromptRefinerAgent';
 export type {
   ToolRefinement,
   Tool,
@@ -18,15 +17,13 @@ export type {
   ToolModification,
   ToolRemoval,
   ToolIntegration,
-  ToolPerformanceAnalysis,
-} from './ToolsRefinerAgent';
+  ToolPerformanceAnalysis from './ToolsRefinerAgent';
 export type {
   AgentRefinement,
   AgentConfiguration,
   RefinedAgent,
   CollaborationStrategy,
-  PerformanceMetrics,
-} from './AgentRefinerAgent';
+  PerformanceMetrics from './AgentRefinerAgent';
 export type {
   AdvisoryReport,
   Recommendation,
@@ -34,5 +31,4 @@ export type {
   RiskAssessment,
   Alternative,
   DecisionMatrix,
-  ActionPlan,
-} from './AdvisorAgent';
+  ActionPlan from './AdvisorAgent';

@@ -47,7 +47,6 @@ class EmailService {
     headers: {
           Authorization: `Bearer ${this.apiKey}`,`
           'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
           from: options.from || this.defaultFrom;
           to: Array.isArray(options.to) ? options.to : [options.to];
@@ -277,9 +276,7 @@ class EmailService {
         method: 'GET';
     headers: {
           Authorization: `Bearer ${this.apiKey}`,`
-          'Content-Type': 'application/json',
-        },
-      });
+          'Content-Type': 'application/json');
       if (response.ok) {
         return { success: true };
       } else {

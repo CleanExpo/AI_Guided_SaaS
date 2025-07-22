@@ -80,7 +80,6 @@ export class InferenceTelemetry {
           ...preflightResult.outdated.map(v => `outdated: ${v}`),`
           ...preflightResult.mismatched.map(v => `mismatched: ${v}`),`
         ],
-      },
     environmentSnapshot: {
         nodeEnv: process.env.NODE_ENV || 'development';
         activeServices: this.getActiveServices();

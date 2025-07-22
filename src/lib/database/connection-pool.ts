@@ -39,7 +39,7 @@ class DatabaseConnectionPool {
     // Start cleanup interval
     this.startCleanupInterval();
   }
-  private initializePool(): void {
+  private initializePool(): string {
     for (let i = 0; i < Math.min(3, this.config.maxConnections); i++) {
       this.createConnection();
     }
@@ -55,25 +55,21 @@ class DatabaseConnectionPool {
       }},
     global: {
         headers: {
-          'x-connection-id': connectionId,
-        },
-      },
-    });
+          'x-connection-id': connectionId);
     const connection: PooledConnection = {
       client,
       isActive: false;
       lastUsed: Date.now(),
-      connectionId,
-    };
+      connectionId;
     this.pool.push(connection);
     return connection;
   }
-  private startCleanupInterval(): void {
+  private startCleanupInterval(): string {
     setInterval(() => {
       this.cleanupIdleConnections();
     }, this.config.idleTimeout / 2);
   }
-  private cleanupIdleConnections(): void {
+  private cleanupIdleConnections(): string {
     const now = Date.now();
     const minConnections = 2;
     this.pool = this.pool.filter(connection => {
@@ -118,7 +114,7 @@ class DatabaseConnectionPool {
       checkForConnection();
     });
   }
-  releaseConnection(connection: PooledConnection): void {
+  releaseConnection(connection: PooledConnection): string {
     connection.isActive = false;
     connection.lastUsed = Date.now();
   }
@@ -155,8 +151,7 @@ class DatabaseConnectionPool {
       poolUtilization:
         (this.pool.filter(conn => conn.isActive).length /
           this.config.maxConnections) *
-        100,
-    };
+        100;
   }
   async healthCheck(): Promise<boolean> {
     try {
@@ -172,7 +167,7 @@ class DatabaseConnectionPool {
       return false;
     }
   }
-  destroy(): void {
+  destroy(): string {
     this.pool.forEach(() => {
       // Supabase client doesn't have explicit close method
       // but we can clear the pool

@@ -70,7 +70,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     await super.initialize()
     this.startPulseEngine()
   }
-  private startPulseEngine(): void {
+  private startPulseEngine(): string {
     if (this.isRunning) return
     this.isRunning = true
     this.pulseTimer = setInterval(() => {
@@ -180,7 +180,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       isAvailable: true
     }
   }
-  private recordResourceMetrics(metrics: ResourceMetrics): void {
+  private recordResourceMetrics(metrics: ResourceMetrics): string {
     this.resourceMetrics.push(metrics)
     // Keep only last 100 metrics
     if (this.resourceMetrics.length > 100) {
@@ -208,7 +208,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     this.taskQueue.sort((a, b) => b.priority - a.priority)
     return { status: 'queued'; position: this.taskQueue.length }
   }
-  private handleThrottleEvent(data): void {
+  private handleThrottleEvent(data): string {
     // Pause all non-critical tasks
     const criticalTasks = this.taskQueue.filter(item => item.priority >= 3);
     const nonCriticalTasks = this.taskQueue.filter(item => item.priority < 3);
@@ -258,7 +258,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       }
     }
   }
-  updatePulseConfig(config: Partial<PulseConfig>): void {
+  updatePulseConfig(config: Partial<PulseConfig>): string {
     this.pulseConfig = {
       ...this.pulseConfig,
       ...config

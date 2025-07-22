@@ -1,6 +1,5 @@
 export default function AdminLoginLayout({
-  children,
-}: {
+  children: {
   children: React.ReactNode;
 }) {
   return <>{children}</>;

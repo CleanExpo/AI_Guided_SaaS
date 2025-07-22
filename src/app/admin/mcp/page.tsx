@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Activity, Server, Zap, Settings, RefreshCw, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
+
+import { Settings, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
 
 interface MCPStatus {
   status: string;

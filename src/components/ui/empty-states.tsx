@@ -420,7 +420,7 @@ export function LoadingState({
   className}: {
   title?: string;
   description?: string;
-  className?: string, }): void {
+  className?: string}): void {
   return (
     <div, className={cn(
         'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4' className

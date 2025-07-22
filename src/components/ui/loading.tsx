@@ -179,7 +179,7 @@ export function TableSkeleton({
   className}: {
   rows?: number;
   columns?: number;
-  className?: string, }): void {
+  className?: string}): void {
   return (
     <div, className={cn('space-y-3' className)}>
       {/* Header */}

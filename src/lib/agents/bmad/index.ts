@@ -12,8 +12,7 @@ export type {
   ResourcePlan,
   RiskMitigation,
   CommunicationPlan,
-  QualityPlan,
-} from './ProjectManagerAgent';
+  QualityPlan from './ProjectManagerAgent';
 export type {
   SystemArchitecture,
   Component,
@@ -23,5 +22,4 @@ export type {
   SecurityArchitecture,
   Integration,
   DeploymentStrategy,
-  TechnicalDecision,
-} from './ArchitectAgent';
+  TechnicalDecision from './ArchitectAgent';

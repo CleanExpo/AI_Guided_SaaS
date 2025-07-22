@@ -33,7 +33,6 @@ const sampleProject: KiroProject = {
               { name: 'page.tsx'; type: 'file'; path: '/src/app/page.tsx' },
               { name: 'layout.tsx'; type: 'file'; path: '/src/app/layout.tsx' },
             ],
-          },
           {
             name: 'components';
             type: 'directory';
@@ -41,11 +40,9 @@ const sampleProject: KiroProject = {
             children: [];
           }},
         ],
-      },
       { name: 'package.json'; type: 'file'; path: '/package.json' },
       { name: 'README.md'; type: 'file'; path: '/README.md' },
     ],
-  },
   createdAt: new Date().toISOString();
   updatedAt: new Date().toISOString()};
 mockProjects.set(sampleProject.id, sampleProject);
@@ -55,7 +52,7 @@ const sampleFiles = new Map([;
     '/src/app/page.tsx',
     {
       path: '/src/app/page.tsx';
-      content: `export default function Home(): void {`
+      content: `export default function Home(): string {`
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Welcome to Sample Project</h1>
@@ -75,7 +72,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children}: {
   children: React.ReactNode
-}): void {
+}): string {
   return (
     <html lang="en">
       <body>{children}</body>)
@@ -102,14 +99,12 @@ export default function RootLayout({
             next: '14.0.0';
             react: '^18.2.0',
             'react-dom': '^18.2.0',
-          },
     devDependencies: {
             '@types/node': '^20',
             '@types/react': '^18',
             '@types/react-dom': '^18',
             typescript: '^5';
           }},
-        },
         null,
         2
       ),
@@ -262,9 +257,7 @@ export class KiroServerMock {
                   newText: "import { ErrorBoundary } from 'react-error-boundary'\n\n";
                 }},
               ],
-            },
           ],
-        },
         {
           id: 'suggest-2';
           type: 'performance';
@@ -297,11 +290,8 @@ export class KiroServerMock {
                       newText: '[dependency]';
                     }},
                   ],
-                },
               ],
-            },
           ],
-        },
       ],
       refactorings: [
         {
@@ -335,7 +325,6 @@ export class KiroServerMock {
         documentation:
           'Accepts a function that contains imperative, possibly effectful code.',
         insertText: 'useEffect(() => {\n  $0\n}, [])',
-      },
     ];
   }
   static async runDiagnostics(projectId: string): Promise<any[]> {
@@ -355,7 +344,7 @@ export class KiroServerMock {
   private static createFilesFromStructure(
     projectId: string;
     structure: KiroFileTree
-  ): void {
+  ): string {
     const projectFiles = mockFiles.get(projectId) || new Map();
     const traverse = (node: KiroFileTree) => {
       if (node.type === 'file') {

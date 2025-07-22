@@ -81,8 +81,7 @@ export class AnalystAgent extends Agent {
         risks,
         successCriteria,
         userStories,
-        technicalConsiderations,
-      };
+        technicalConsiderations;
       // Store analysis in artifacts
       this.setArtifact('requirement-analysis', analysis);
       // Share key insights with other agents

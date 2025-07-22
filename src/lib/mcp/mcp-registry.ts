@@ -36,7 +36,6 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-gitlab';
     category: 'development';
     requiredEnv: ['GITLAB_TOKEN', 'GITLAB_URL'],
-  },
   {
     id: 'filesystem';
     name: 'Filesystem';
@@ -140,7 +139,6 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-email';
     category: 'integration';
     requiredEnv: ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'],
-  },
   {
     id: 'aws';
     name: 'AWS';
@@ -148,7 +146,6 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-aws';
     category: 'integration';
     requiredEnv: ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY'],
-  },
   {
     id: 'gcp';
     name: 'Google Cloud';
@@ -186,8 +183,7 @@ export function checkServerEnvironment(server: MCPServerConfig): {
   const missing = server.requiredEnv.filter(envVar => !process.env[envVar]);
   return {
     configured: missing.length === 0,
-    missing,
-  };
+    missing;
 }
 /**
  * Custom MCP server configurations for the project
@@ -213,7 +209,6 @@ export const CustomMCPServers: MCPServerConfig[] = [;
     url: 'ws://localhost: 3002/mcp';
   category: 'ai';
     requiredEnv: ['OPENAI_API_KEY', 'ANTHROPIC_API_KEY'],
-  },
   {
     id: 'knowledge-base';
     name: 'Knowledge Base';
@@ -221,7 +216,6 @@ export const CustomMCPServers: MCPServerConfig[] = [;
     url: 'ws://localhost: 3003/mcp';
   category: 'data';
     requiredEnv: ['VECTOR_DB_URL', 'EMBEDDING_API_KEY'],
-  },
 ];
 /**
  * Get all available servers (registry + custom)
@@ -257,5 +251,4 @@ export const ServerCapabilities: Record<string, string[]> = {
     'browser.type',
   ],
   slack: ['message.send', 'channel.list', 'user.list'],
-  aws: ['s3.upload', 's3.download', 'lambda.invoke', 'ec2.list'],
-};
+  aws: ['s3.upload', 's3.download', 'lambda.invoke', 'ec2.list'];
