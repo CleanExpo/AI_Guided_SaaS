@@ -41,21 +41,31 @@ export async function middleware(request: NextRequest) {
 
   // Check authentication for protected paths
   if (PROTECTED_PATHS.some(path => pathname.startsWith(path))) {
+    
+    // Handle admin routes with separate authentication system
+    if (ADMIN_PATHS.some(path => pathname.startsWith(path))) {
+      // Admin routes use custom authentication, not NextAuth
+      const adminToken = request.cookies.get('admin-token');
+      
+      if (!adminToken) {
+        // Redirect admin routes to admin login page
+        const loginUrl = new URL('/admin/login', request.url);
+        loginUrl.searchParams.set('callbackUrl', pathname);
+        return NextResponse.redirect(loginUrl);
+      }
+      
+      // Admin routes bypass NextAuth validation
+      return NextResponse.next();
+    }
+    
+    // Handle regular user routes with NextAuth
     const token = await getToken({ req: request });
     
     if (!token) {
+      // Redirect regular routes to NextAuth login page
       const loginUrl = new URL('/auth/signin', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
-    }
-
-    // Check admin access
-    if (ADMIN_PATHS.some(path => pathname.startsWith(path))) {
-      const isAdmin = token.email === 'admin@aiinguidedsaas.com';
-      
-      if (!isAdmin) {
-        return NextResponse.redirect(new URL('/dashboard', request.url));
-      }
     }
   }
 
