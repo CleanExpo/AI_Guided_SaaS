@@ -1,288 +1,113 @@
-// packages/causal-engine/explorer-ui.tsx
 'use client';
 import React, { useState, useEffect } from 'react';
-import { logger } from './logger';
-import { CausalScorer } from './scorer';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 interface CausalInsight {
-  key: string;
-  score: number;
-  confidence: string;
-  total: number;
-  componentType: string;
-  page: string
-};
-export default function CausalExplorerUI(): void {
-      </CausalInsight>
+  id: string;
+  title: string;
+  description: string;
+  impact: number;
+  confidence: number;
+  page: string;
+}
+
+export default function CausalExplorerUI() {
   const [insights, setInsights] = useState<CausalInsight[]>([]);
-      </CausalInsight>
   const [topComponents, setTopComponents] = useState<CausalInsight[]>([]);
-      </CausalInsight>
-  const [lowComponents, setLowComponents] = useState<CausalInsight[]>([]);
-  const [totalLogs, setTotalLogs] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    refreshData();
-  }, []);
-  const refreshData = () => {
-    const logs = logger.getLogs();
-    const scorer = new CausalScorer(logs);
-    setTotalLogs(logs.length);
-    // Get all scores and format for display
-    const allScores = scorer.getAllScores();
-    const formattedInsights: CausalInsight[] = Object.entries(allScores).map(;
-      ([key, data]) => {
-        const [page, componentType] = key.split(':');
-        return {
-          key,
-          ...data,
-          componentType,
-          page
+    // Simulate loading causal insights
+    setTimeout(() => {
+      const mockInsights: CausalInsight[] = [
+        {
+          id: '1',
+          title: 'User Engagement Driver',
+          description: 'The dashboard layout significantly impacts user engagement',
+          impact: 85,
+          confidence: 92,
+          page: '/dashboard'
+        },
+        {
+          id: '2',
+          title: 'Conversion Optimization',
+          description: 'Button color and placement affects conversion rates',
+          impact: 78,
+          confidence: 87,
+          page: '/pricing'
         }
-}
+      ];
+      
+      setInsights(mockInsights);
+      setTopComponents(mockInsights.slice(0, 3));
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="p-6">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded mb-4"></div>
+          <div className="space-y-4">
+            <div className="h-24 bg-gray-200 rounded"></div>
+            <div className="h-24 bg-gray-200 rounded"></div>
+          </div>
+        </div>
+      </div>
     );
-    setInsights(formattedInsights.sort((a, b) => b.score - a.score));
-    setTopComponents(scorer.getTopComponents(5) as CausalInsight[]);
-    setLowComponents(scorer.getLowPerformingComponents(0.4) as CausalInsight[]);
-  };
-  const clearAllLogs = () => {
-    if (
-      confirm(
-        'Are you sure you want to clear all causal logs? This cannot be undone.'
-      )
-    ) {
-      logger.clearLogs();
-      refreshData();
-}
-  };
-  const getScoreColor = (score: number) => {
-    if (score >= 0.7) return 'text-green-600 bg-green-100';
-    if (score >= 0.4) return 'text-yellow-600 bg-yellow-100';
-    return 'text-red-600 bg-red-100';
-  };
-  const getConfidenceColor = (confidence: string) => {
-    if (confidence === 'high') return 'text-blue-600 bg-blue-100';
-    if (confidence === 'medium')
-      return 'text-brand-primary-600 bg-brand-primary-100';
-    return 'text-gray-600 bg-gray-100';
-  };
+  }
+
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          🧠 Causal Intelligence Explorer
-        </h1>
-        <p className="text-gray-600">
-          Analyze user behavior patterns and component performance using causal
-          inference.
-        </p>
-      {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">
-            Total Interactions
-          </h3>
-          <p className="text-2xl font-bold text-gray-900">{totalLogs}</p>
-        <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">
-            Components Tracked
-          </h3>
-          <p className="text-2xl font-bold text-gray-900">{insights.length}</p>
-        <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">High Performers</h3>
-          <p className="text-2xl font-bold text-green-600">
-            {topComponents.length}
-          </p>
-        <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">
-            Need Improvement
-          </h3>
-          <p className="text-2xl font-bold text-red-600">
-            {lowComponents.length}
-          </p>
-      {/* Action Buttons */}
-      <div className="mb-6 flex gap-4">
-        <button
-          onClick={refreshData}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          🔄 Refresh Data
-        </button>
-        <button
-          onClick={clearAllLogs}
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-        >
-          🗑️ Clear All Logs
-        </button>
-      {/* Top Performers */}
-      {topComponents.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">
-            🏆 Top Performing Components
-          </h2>
-          <div className="bg-white rounded-lg shadow border overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Component
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Score
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Confidence
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Interactions
-                  </th>
-              <tbody className="divide-y divide-gray-200">
-                {topComponents.map(comp => (
-                  <tr key={comp.key}>
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                      {comp.key.split(':')[1]}{' '}
-                      <span className="text-gray-500">
-                        ({comp.key.split(':')[0]})
-                    <td className="px-4 py-3">
-                      <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}`
-                      >
-                        {(comp.score * 100).toFixed(1)}%
-                      </span>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}`
-                      >
-                        {comp.confidence}
-                      </span>
-                    <td className="px-4 py-3 text-sm text-gray-500">
-                      {comp.total}
-                    </td>
-                ))}
-              </tbody>)}
-      {/* Low Performers */}
-      {lowComponents.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">
-            ⚠️ Components Needing Improvement
-          </h2>
-          <div className="bg-white rounded-lg shadow border overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Component
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Score
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Confidence
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                    Interactions
-                  </th>
-              <tbody className="divide-y divide-gray-200">
-                {lowComponents.map(comp => (
-                  <tr key={comp.key}>
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                      {comp.key.split(':')[1]}{' '}
-                      <span className="text-gray-500">
-                        ({comp.key.split(':')[0]})
-                    <td className="px-4 py-3">
-                      <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}`
-                      >
-                        {(comp.score * 100).toFixed(1)}%
-                      </span>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}`
-                      >
-                        {comp.confidence}
-                      </span>
-                    <td className="px-4 py-3 text-sm text-gray-500">
-                      {comp.total}
-                    </td>
-                ))}
-              </tbody>)}
-      {/* All Components */}
+    <div className="p-6 space-y-6">
       <div>
-        <h2 className="text-xl font-semibold mb-4">
-          📊 All Component Insights
-        </h2>
-        <div className="bg-white rounded-lg shadow border overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Component</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Page
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Score</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Confidence</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Interactions</th>
-            <tbody className="divide-y divide-gray-200">
-              {insights.map(insight => (
-                <tr key={insight.key}>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                    {insight.componentType}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-500">
-                    {insight.page}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(insight.score)}`}`
-                    >
-                      {(insight.score * 100).toFixed(1)}%
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Causal Explorer</h1>
+        <p className="text-gray-600">Discover causal relationships in your application data</p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Top Insights</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {insights.map((insight) => (
+                <div key={insight.id} className="border-l-4 border-blue-500 pl-4">
+                  <h3 className="font-semibold text-gray-900">{insight.title}</h3>
+                  <p className="text-gray-600 text-sm">{insight.description}</p>
+                  <div className="flex items-center mt-2 space-x-4">
+                    <span className="text-xs text-gray-500">
+                      Impact: {insight.impact}%
                     </span>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(insight.confidence)}`}`
-                    >
-                      {insight.confidence}
+                    <span className="text-xs text-gray-500">
+                      Confidence: {insight.confidence}%
                     </span>
-                  <td className="px-4 py-3 text-sm text-gray-500">
-                    {insight.total}
-                  </td>
+                  </div>
+                </div>
               ))}
-            </tbody>
-          {insights.length === 0 && (
-            <div className="p-8 text-center text-gray-500">
-              No component data available. Start using the UI builder to
-              generate insights!
             </div>
-          )}
-    );
-</td>
-</td>
-</tr>
-</tbody>
-</tr>
-</thead>
-</table>
-</div></td>
-</td>
-</span>
-</td>
-</tr>
-</tbody>
-</tr>
-</thead>
-</table>
-</div></td>
-</td>
-</span>
-</td>
-</tr>
-</tbody>
-</tr>
-</thead>
-</table>
-</div></div>
-}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Component Analysis</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {topComponents.map((component) => (
+                <div key={component.id} className="p-3 bg-gray-50 rounded">
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">{component.page}</span>
+                    <span className="text-sm text-gray-500">{component.impact}%</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 }

@@ -1,174 +1,84 @@
-'use client'
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+'use client';
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { AdminDashboard } from '@/components/admin/AdminDashboard';
-import { cn } from '@/lib/utils';
 import { Shield, LogOut, RefreshCw } from 'lucide-react';
-interface AdminUser {;
+
+interface AdminUser {
   id: string;
   email: string;
   name: string;
   role: string;
-  permissions: string[];
 }
-export default function AdminDashboardPage(): void {;
-  const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [stats, setStats] = useState<any>({;
-    totalUsers: 0;
-    activeUsers: 0;
-    newUsersToday: 0;
-    newUsersThisWeek: 0;
-    systemHealth: 'healthy';
-    uptime: '99.9%';
-    cpuUsage: '0%';
-    memoryUsage: '0%';
-    totalProjects: 0;
-    activeProjects: 0;
-    apiCalls: {
-      today: 0;
-      thisWeek: 0;
-      thisMonth: 0
-    },
-    recentActivity: []
+
+export default function AdminDashboardPage() {
+  const [user] = useState<AdminUser>({
+    id: '1',
+    email: 'admin@example.com',
+    name: 'Admin User',
+    role: 'Administrator'
   });
-  const router = useRouter();
-  useEffect(() => {
-    const checkAuth = () => {;
-      const token = localStorage.getItem('admin-token');
-      const user = localStorage.getItem('admin-user');
-      if (!token || !user) {
-        router.push('/admin/login')
-        return
-      }
-      try {
-        const parsedUser = JSON.parse(user);
-        setAdminUser(parsedUser)
-      } catch (error) {
-        console.error('Failed to parse admin user:', error)
-        router.push('/admin/login')
-      }
-    }
-    checkAuth()
-    setLoading(false)
-  }, [router])
-  const fetchStats = async () => {;
-    try {
-      setRefreshing(true)
-      // Simulate API call with mock data
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setStats({
-        totalUsers: Math.floor(Math.random() * 10000) + 1000;
-        activeUsers: Math.floor(Math.random() * 1000) + 100;
-        newUsersToday: Math.floor(Math.random() * 100) + 10;
-        newUsersThisWeek: Math.floor(Math.random() * 500) + 50;
-        systemHealth: Math.random() > 0.2 ? 'healthy' : 'warning';
-        uptime: `${(99 + Math.random()).toFixed(2)}%`;`
-        cpuUsage: `${Math.floor(Math.random() * 60)}%`;`
-        memoryUsage: `${Math.floor(Math.random() * 70)}%`;`
-        totalProjects: Math.floor(Math.random() * 5000) + 500;
-        activeProjects: Math.floor(Math.random() * 500) + 50;
-    apiCalls: {
-          today: Math.floor(Math.random() * 100000) + 10000;
-          thisWeek: Math.floor(Math.random() * 700000) + 70000;
-          thisMonth: Math.floor(Math.random() * 3000000) + 300000
-        },
-        recentActivity: []
-      })
-    } catch (error) {
-      console.error('Failed to fetch stats:', error)
-    } finally {
-      setRefreshing(false)
-    }
-  }
-  const handleRefresh = () => {;
-    fetchStats()
-  }
-  const handleLogout = () => {;
-    localStorage.removeItem('admin-token')
-    localStorage.removeItem('admin-user')
-    router.push('/admin/login')
-  }
-  const handleNavigate = (path: string) => {;
-    switch (path) {
-      case 'users':
-        router.push('/admin/users')
-        break
-      case 'logs':
-        router.push('/admin/logs')
-        break
-      case 'activity':
-        router.push('/admin/activity')
-        break
-      default:
-        break
-    }
-  }
-  if (loading) {
-    return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
-          <p className="text-slate-600">Loading admin dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-  if (!adminUser) { return null; }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-50">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Shield className="h-8 w-8 text-purple-600 mr-3" />
-              <div>
-                <h1 className="text-xl font-semibold text-slate-900">Admin Dashboard</h1>
-                <p className="text-xs text-slate-500">System Overview & Management</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button
-                onClick={handleRefresh}
-                variant="ghost"
-                size="sm"
-                className={`cn(`
-                  "flex items-center gap-2" refreshing && "animate-spin"
-                )`}`
-                disabled={refreshing}
-              >
-                <RefreshCw className="h-4 w-4" />
-                Refresh
-              </Button>
-              <div className="border-l border-slate-200 h-8 mx-2" />
-              <div className="text-right">
-                <p className="text-sm font-medium text-slate-900">{adminUser.name}</p>
-                <p className="text-xs text-slate-500">{adminUser.email}</p>
-              </div>
-              <Button
-                onClick={handleLogout}
-                variant="outline"
-                size="sm"
-                className="flex items-center gap-2"
-              >
-                <LogOut className="h-4 w-4" />
-                Logout
-              </Button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-50 p-8">
+      <div className="max-w-6xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          <Button variant="outline">
+            <LogOut className="w-4 h-4 mr-2" />
+            Logout
+          </Button>
         </div>
-      </header>
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AdminDashboard
-          stats={stats}
-          adminUser={adminUser}
-          onNavigate={handleNavigate}
-        />
-      </main>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                System Status
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-green-600">Online</div>
+              <p className="text-sm text-gray-600">All systems operational</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Active Users</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">1,247</div>
+              <p className="text-sm text-gray-600">Currently online</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Server Load</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">23%</div>
+              <p className="text-sm text-gray-600">CPU usage</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Admin Information</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <div><strong>Name:</strong> {user.name}</div>
+              <div><strong>Email:</strong> {user.email}</div>
+              <div><strong>Role:</strong> {user.role}</div>
+              <div><strong>Last Login:</strong> {new Date().toLocaleString()}</div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

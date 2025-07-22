@@ -1,60 +1,78 @@
 import { NextRequest, NextResponse } from 'next/server';
-export async function POST(request: NextRequest): void {
+
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { image, analysisType = 'general' } = body;
-    if (!image) {
+    const { imageUrl, analysisType = 'general' } = body;
+    
+    if (!imageUrl) {
       return NextResponse.json(
-        { error: 'Image data is required' },
+        { error: 'Image URL is required' },
         { status: 400 }
       );
     }
+    
     // Visual analysis logic would go here
     // This is a placeholder for actual image analysis
     const analysis = {
-      id: `analysis_${Date.now()}`;`
-      type: analysisType;
-      timestamp: new Date().toISOString();
-    results: {
-        confidence: 0.95;
-        categories: ['object', 'scene'],
-        description: 'Image analysis completed';
-    metadata: {
-          dimensions: { width: 0; height: 0 };
-          format: 'unknown';
-          size: 0;
-        }},
+      id: `analysis_${Date.now()}`,
+      type: analysisType,
+      timestamp: new Date().toISOString(),
+      results: {
+        objects: ['person', 'building', 'tree'],
+        colors: ['blue', 'green', 'brown'],
+        confidence: 0.92,
+        tags: ['outdoor', 'urban', 'daytime']
       },
-      processing_time: 150;
+      imageUrl,
+      processingTime: '1.2s'
     };
-    return NextResponse.json(analysis);
+    
+    return NextResponse.json({
+      success: true,
+      analysis
+    });
+    
   } catch (error) {
-    console.error('Visual analysis, error:', error);
+    console.error('Visual analysis error:', error);
     return NextResponse.json(
-      { error: 'Failed to analyze image' },
+      { error: 'Analysis failed' },
       { status: 500 }
     );
   }
-};
-export async function GET(): void {
+}
+
+export async function GET(request: NextRequest) {
   try {
-    // Return available analysis types and capabilities
-    const capabilities = {
-      supported_formats: ['jpg', 'jpeg', 'png', 'webp'],
-      analysis_types: [
-        'general',
-        'object_detection',
-        'scene_analysis',
-        'text_extraction',
-      ],
-      max_file_size: '10MB';
-      processing_time_estimate: '1-5 seconds';
+    const url = new URL(request.url);
+    const analysisId = url.searchParams.get('analysisId');
+    
+    if (!analysisId) {
+      return NextResponse.json(
+        { error: 'Analysis ID is required' },
+        { status: 400 }
+      );
+    }
+    
+    // Simulate getting analysis results
+    const analysis = {
+      id: analysisId,
+      status: 'completed',
+      results: {
+        objects: ['person', 'building'],
+        confidence: 0.89
+      },
+      timestamp: new Date().toISOString()
     };
-    return NextResponse.json(capabilities);
+    
+    return NextResponse.json({
+      success: true,
+      analysis
+    });
   } catch (error) {
-    console.error('Visual capabilities, error:', error);
+    console.error('Get analysis error:', error);
     return NextResponse.json(
-      { error: 'Failed to get capabilities' },
+      { error: 'Failed to get analysis' },
       { status: 500 }
     );
   }

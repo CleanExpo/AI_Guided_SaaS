@@ -1,323 +1,192 @@
 'use client';
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, Clock, CheckCircle, ArrowRight, BookOpen } from 'lucide-react';
-import Link from 'next/link';
+import { CheckCircle, Clock, Lock, Play } from 'lucide-react';
+
+interface Tutorial {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+}
+
 interface LearningPath {
   id: string;
   title: string;
   description: string;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
-  estimatedTime: string;
-  tutorials: Array<{
-    id: string;
-  title: string;
-    duration: string;
+  totalDuration: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  tutorials: Array<Tutorial & {
     completed?: boolean;
-  }>
+  }>;
 }
-const learningPaths: LearningPath[] = [;
+
+const learningPaths: LearningPath[] = [
   {
-    id: 'beginner';
-    title: 'Complete Beginner Path';
-    description: 'Start your journey with AI Guided SaaS from the very beginning';
-    difficulty: 'Beginner';
-    estimatedTime: '2-3 hours';
+    id: 'beginner',
+    title: 'Complete Beginner Path',
+    description: 'Perfect for developers new to AI-powered development platforms',
+    totalDuration: '2 hours',
+    difficulty: 'beginner',
     tutorials: [
       {
-        id: '1';
-        title: 'Getting Started with AI Guided SaaS';
-        duration: '15 min'},
-      { id: '2'; title: 'Advanced UI Builder Techniques'; duration: '25 min' },
+        id: '1',
+        title: 'Introduction to AI Guided SaaS',
+        description: 'Learn the basics of our platform',
+        duration: '15 min',
+        difficulty: 'beginner',
+        completed: true
+      },
       {
-        id: '5';
-        title: 'Collaboration and Team Workflows';
-        duration: '20 min'}]},
+        id: '2',
+        title: 'Your First Project',
+        description: 'Create and deploy your first application',
+        duration: '30 min',
+        difficulty: 'beginner',
+        completed: false
+      },
+      {
+        id: '3',
+        title: 'Understanding AI Features',
+        description: 'Explore AI-powered code generation',
+        duration: '45 min',
+        difficulty: 'beginner',
+        completed: false
+      }
+    ]
+  },
   {
-    id: 'developer';
-    title: 'Full-Stack Developer Path';
-    description: 'Master both frontend and backend development with our platform';
-    difficulty: 'Intermediate';
-    estimatedTime: '4-5 hours';
+    id: 'intermediate',
+    title: 'Intermediate Development',
+    description: 'Advanced features and best practices',
+    totalDuration: '4 hours',
+    difficulty: 'intermediate',
     tutorials: [
       {
-        id: '1';
-        title: 'Getting Started with AI Guided SaaS';
-        duration: '15 min'},
-      { id: '2'; title: 'Advanced UI Builder Techniques'; duration: '25 min' },
+        id: '4',
+        title: 'Advanced Project Configuration',
+        description: 'Configure complex project settings',
+        duration: '1 hour',
+        difficulty: 'intermediate',
+        completed: false
+      },
       {
-        id: '3';
-        title: 'API Integration and Data Management';
-        duration: '30 min'},
-      {
-        id: '4';
-        title: 'Deployment and Production Best Practices';
-        duration: '40 min'},
-      {
-        id: '6';
-        title: 'Performance Optimization and Scaling';
-        duration: '35 min'}]},
-  {
-    id: 'team-lead';
-    title: 'Team Lead & Project Manager Path';
-    description: 'Learn to manage teams and projects effectively using our collaboration tools';
-    difficulty: 'Intermediate';
-    estimatedTime: '3-4 hours';
-    tutorials: [
-      {
-        id: '1';
-        title: 'Getting Started with AI Guided SaaS';
-        duration: '15 min'},
-      {
-        id: '5';
-        title: 'Collaboration and Team Workflows';
-        duration: '20 min'},
-      {
-        id: '4';
-        title: 'Deployment and Production Best Practices';
-        duration: '40 min'},
-      {
-        id: '6';
-        title: 'Performance Optimization and Scaling';
-        duration: '35 min'}]},
-  {
-    id: 'enterprise';
-    title: 'Enterprise & DevOps Path';
-    description: 'Advanced topics for enterprise deployment and operations';
-    difficulty: 'Advanced';
-    estimatedTime: '5-6 hours';
-    tutorials: [
-      {
-        id: '3';
-        title: 'API Integration and Data Management';
-        duration: '30 min'},
-      {
-        id: '4';
-        title: 'Deployment and Production Best Practices';
-        duration: '40 min'},
-      {
-        id: '6';
-        title: 'Performance Optimization and Scaling';
-        duration: '35 min'},
-      {
-        id: '5';
-        title: 'Collaboration and Team Workflows';
-        duration: '20 min'}]}];
-export default function LearningPathPage(): void {
-      </string>
+        id: '5',
+        title: 'Team Collaboration',
+        description: 'Work with teams effectively',
+        duration: '45 min',
+        difficulty: 'intermediate',
+        completed: false
+      }
+    ]
+  }
+];
+
+export default function LearningPathPage() {
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
-  const [completedTutorials, setCompletedTutorials] = useState<Set<string>>(;
-        </Set>
-    new Set()
-  );
-  const handleTutorialComplete = (tutorialId: string) => {
-    const newCompleted = new Set(completedTutorials);
-    if (newCompleted.has(tutorialId)) {
-      newCompleted.delete(tutorialId);
-    } else {
-      newCompleted.add(tutorialId);
-}
-    setCompletedTutorials(newCompleted);
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case 'beginner':
+        return 'bg-green-100 text-green-800';
+      case 'intermediate':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'advanced':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
   };
-  const getPathProgress = (path: LearningPath) => {
-    const completed = path.tutorials.filter(t =>;
-      completedTutorials.has(t.id)
-    ).length;
+
+  const getProgressPercentage = (path: LearningPath) => {
+    const completed = path.tutorials.filter(t => t.completed).length;
     return (completed / path.tutorials.length) * 100;
   };
-  if (selectedPath) {
-    const path = learningPaths.find(p => p.id === selectedPath);
-    if (!path) return null;
-    const progress = getPathProgress(path);
-    return (
-    <div className="max-w-4xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="flex items-center gap-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setSelectedPath(null)}
-          ></Button>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Paths</ArrowLeft>
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold">{path.title}</h1>
-            <p className="text-muted-foreground">{path.description}</p>
-        {/* Path Info */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <Badge
-                  variant={
-                    path.difficulty === 'Beginner'
-                      ? 'default'
-                      : path.difficulty === 'Intermediate'
-                        ? 'secondary'
-                        : 'destructive'
-                  }
-                >
-                  {path.difficulty}</Badge>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <Clock className="h-4 w-4" />
-                  {path.estimatedTime}</Clock>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <BookOpen className="h-4 w-4" />
-                  {path.tutorials.length} tutorials</BookOpen>
-              <div className="text-right">
-                <div className="text-sm font-medium">Progress</div>
-                <div className="text-2xl font-bold">
-                  {Math.round(progress)}%</div>
-            <Progress value={progress} className="mt-4" />
-          </CardHeader>
-        {/* Tutorial List */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Learning Path Tutorials</h2>
-          {path.tutorials.map((tutorial, index) => (
-            <Card
-              key={tutorial.id}
-              className={``transition-all ${`
-                completedTutorials.has(tutorial.id)
-                  ? 'bg-green-50 dark:bg-green-950/20 border-green-200  dark:border-green-800'
-                  : ''
-              `}`}`
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold">
-                      {index + 1}</span>
-                    {tutorial.title}
-                  </CardTitle>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline">{tutorial.duration}</Badge>
-                    <Button
-                      variant={
-                        completedTutorials.has(tutorial.id)
-                          ? 'default'
-                          : 'outline'
-                      }
-                      size="sm"
-                      onClick={() => handleTutorialComplete(tutorial.id)}
-                    ></Button>
-                      <CheckCircle className="mr-2 h-4 w-4" />
-                      {completedTutorials.has(tutorial.id)
-                        ? 'Completed'
-                        : 'Mark Complete'}</CheckCircle>
-                    <Link href="/tutorials/${tutorial.id}">
-                      <Button size="sm">
-                        Start Tutorial</Button>
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-          ))}
-        {/* Completion */}
-        {progress === 100 && (
-          <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
-            <CardHeader>
-              <CardTitle className="text-green-700 dark:text-green-300">
-                🎉 Learning Path Completed!</CardTitle>
-              <CardDescription>
-                Congratulations! You&apos, ve completed the {path.title}. Ready
-                to explore more?</CardDescription>
-            <CardContent>
-              <div className="flex gap-2">
-                <Button onClick={() => setSelectedPath(null)}>
-                  Explore Other Paths</Button>
-                <Link href="/ui-builder">
-                  <Button variant="outline">Try UI Builder</Button>
-        )}
-    );
-}
+
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link href="/tutorials">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Tutorials</ArrowLeft>
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold">Learning Paths</h1>
-          <p className="text-muted-foreground">
-            Structured learning journeys to master AI Guided SaaS</p>
-      {/* Learning Paths Grid */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {learningPaths.map(path => {
-          const progress = getPathProgress(path);
-          return (
-    <Card
-              key={path.id}
-              className="cursor-pointer hover:shadow-lg transition-all"
-            >
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Learning Paths</h1>
+          <p className="text-gray-600">
+            Structured learning journeys to master AI Guided SaaS development.
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {learningPaths.map((path) => (
+            <Card key={path.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{path.title}</CardTitle>
-                  <Badge
-                    variant={
-                      path.difficulty === 'Beginner'
-                        ? 'default'
-                        : path.difficulty === 'Intermediate'
-                          ? 'secondary'
-                          : 'destructive'
-                    }
-                  >
-                    {path.difficulty}</Badge>
-                <CardDescription>{path.description}</CardDescription>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle className="text-xl mb-2">{path.title}</CardTitle>
+                    <p className="text-gray-600 mb-4">{path.description}</p>
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        {path.estimatedTime}</Clock>
-                      <div className="flex items-center gap-1">
-                        <BookOpen className="h-4 w-4" />
-                        {path.tutorials.length} tutorials</BookOpen>
-                    <div className="font-medium">
-                      {Math.round(progress)}% complete</div>
-                  <Progress value={progress} />
-                  <Button
-                    className="w-full"
-                    onClick={() => setSelectedPath(path.id)}
-                  >
-                    {progress > 0 ? 'Continue Path' : 'Start Path'}</Button>
-                    <ArrowRight className="ml-2 h-4 w-4" />
-  }
-      );}
-      {/* Quick Start */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Not sure where to start?</CardTitle>
-          <CardDescription>
-            Take our quick assessment to find the perfect learning path for you</CardDescription>
-        <CardContent>
-          <div className="flex gap-2">
-            <Button onClick={() => setSelectedPath('beginner')}>
-              Start with Beginner Path</Button>
-            <Link href="/tutorials">
-              <Button variant="outline">Browse All Tutorials</Button>
-          </Card>
-          </CardHeader>
-          </CardContent>
-          </div>
-</CardContent>
-</CardHeader>
-</Card>
-</Button>
-</div>
-</CardContent>
-</CardHeader>
-</Card>
-</div>
-</CardHeader>
-</div></CardHeader>
-</Card>
-</div>
-</div>
-}
-</string>
-</string>
+                      <Badge className={`${getDifficultyColor(path.difficulty)} border-0`}>
+                        {path.difficulty}
+                      </Badge>
+                      <div className="flex items-center text-gray-500">
+                        <Clock className="h-4 w-4 mr-1" />
+                        {path.totalDuration}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-blue-600">
+                      {Math.round(getProgressPercentage(path))}%
+                    </div>
+                    <div className="text-sm text-gray-500">Complete</div>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 mb-6">
+                  {path.tutorials.map((tutorial, index) => {
+                    const isCompleted = tutorial.completed;
+                    const isLocked = index > 0 && !path.tutorials[index - 1].completed;
+                    
+                    return (
+                      <div
+                        key={tutorial.id}
+                        className={`flex items-center p-3 rounded border ${
+                          isCompleted ? 'bg-green-50 border-green-200' :
+                          isLocked ? 'bg-gray-50 border-gray-200 opacity-50' :
+                          'bg-white border-gray-200 hover:bg-gray-50'
+                        }`}
+                      >
+                        <div className="flex-shrink-0 mr-3">
+                          {isCompleted ? (
+                            <CheckCircle className="h-5 w-5 text-green-600" />
+                          ) : isLocked ? (
+                            <Lock className="h-5 w-5 text-gray-400" />
+                          ) : (
+                            <Play className="h-5 w-5 text-blue-600" />
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">{tutorial.title}</div>
+                          <div className="text-sm text-gray-600">{tutorial.description}</div>
+                        </div>
+                        <div className="text-sm text-gray-500">{tutorial.duration}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                <Button 
+                  className="w-full"
+                  onClick={() => setSelectedPath(path.id)}
+                >
+                  {getProgressPercentage(path) > 0 ? 'Continue Path' : 'Start Learning Path'}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }

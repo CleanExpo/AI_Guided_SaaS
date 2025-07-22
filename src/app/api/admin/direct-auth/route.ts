@@ -1,53 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
-// Direct authentication endpoint that bypasses NextAuth
-export async function POST(request: NextRequest): void {
+
+export async function GET() {
   try {
-    const { email, password } = await request.json();
-    // Check admin credentials
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@aiguidedSaaS.com';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'AdminSecure2024!';
-    if (email === adminEmail && password === adminPassword) {
-      // Generate a simple token (in production, use proper JWT)
-      const token = Buffer.from(`${email}:${Date.now()}`).toString('base64');`
-      const response = NextResponse.json({
-        success: true,
-        token,
-    admin: { email: adminEmail };
-        message: 'Direct login successful';
-      }});
-      // Set cookie for authentication
-      response.cookies.set('admin-token', token, {
-        httpOnly: true;
-        secure: process.env.NODE_ENV === 'production';
-        sameSite: 'lax';
-        maxAge: 60 * 60 * 24 * 7; // 7 days
-      }});
-      return response;
-    }
-    return NextResponse.json(
-      {
-        success: false;
-        error: 'Invalid credentials';
-      }},
-      { status: 401 }
-    );
+    const authStatus = {
+      adminEnabled: process.env.ENABLE_ADMIN_PANEL === 'true',
+      hasAdminPassword: !!process.env.ADMIN_PASSWORD,
+      timestamp: new Date().toISOString()
+    };
+
+    return NextResponse.json(authStatus);
   } catch (error) {
-    console.error('Direct auth, error:', error);
+    console.error('Admin auth status error:', error);
     return NextResponse.json(
-      {
-        success: false;
-        error: 'Authentication failed';
-      }},
+      { error: 'Failed to get auth status' },
       { status: 500 }
     );
   }
 }
-// GET endpoint to check auth status
-export async function GET(): void {
-  return NextResponse.json({
-    status: 'Direct auth endpoint active';
-    loginUrl: '/admin-direct';
-    environment: process.env.NODE_ENV;
-    hasAdminPassword: !!process.env.ADMIN_PASSWORD;
-  }});
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { password } = body;
+
+    if (!password) {
+      return NextResponse.json(
+        { error: 'Password required' },
+        { status: 400 }
+      );
+    }
+
+    // Simple password check
+    const isValid = password === process.env.ADMIN_PASSWORD;
+
+    if (isValid) {
+      return NextResponse.json({
+        success: true,
+        message: 'Authentication successful'
+      });
+    } else {
+      return NextResponse.json(
+        { error: 'Invalid password' },
+        { status: 401 }
+      );
+    }
+  } catch (error) {
+    console.error('Direct auth error:', error);
+    return NextResponse.json(
+      { error: 'Authentication failed' },
+      { status: 500 }
+    );
+  }
 }

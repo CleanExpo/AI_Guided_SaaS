@@ -1,150 +1,68 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Building, Shield, Users, Zap, CheckCircle, ArrowRight } from 'lucide-react';
+
 export const metadata: Metadata = {
-  title: 'Enterprise Solutions - AI Guided SaaS Platform';
-  description:
-    'Enterprise-grade AI development platform for large organizations'};
-const enterpriseFeatures = [;
-  {
-    icon: Shield;
-    title: 'Advanced Security';
-    description:
-      'SOC 2 compliance, SSO integration, and enterprise-grade security controls'},
-  {
-    icon: Users;
-    title: 'Team Management';
-    description:
-      'Advanced user management, role-based access control, and team collaboration'},
-  {
-    icon: Zap;
-    title: 'Priority Support';
-    description:
-      '24/7 dedicated support with guaranteed response times and account management'},
-  {
-    icon: Building;
-    title: 'Custom Deployment';
-    description:
-      'On-premise, private cloud, or hybrid deployment options available'}];
-const benefits = [;
-  'Unlimited projects and team members',
-  'Advanced analytics and reporting',
-  'Custom AI model training',
-  'API rate limit increases',
-  'Dedicated account manager',
-  'Custom integrations and workflows',
-  'Priority feature requests',
-  'Training and onboarding support'];
-export default function EnterprisePage(): void {
+  title: 'Enterprise Solutions - AI Guided SaaS Platform',
+  description: 'Enterprise-grade AI development platform for large organizations'
+};
+
+export default function EnterprisePage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">Enterprise Solutions</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Scale your development with enterprise-grade AI tools and dedicated
-            support</p>
-        {/* Hero Section */}
-        <Card className="mb-16 overflow-hidden">
-          <div className="md:flex">
-            <div className="md:w-1/2 bg-gradient-to-br from-primary/10 to-primary/5 p-8 flex items-center justify-center">
-              <div className="text-center">
-                <Building className="h-16 w-16 text-primary mx-auto mb-4" />
-                <h2 className="text-2xl font-bold mb-2">
-                  Built for Enterprise</h2>
-                <p className="text-muted-foreground">
-                  Trusted by Fortune 500 companies</p>
-            <div className="md:w-1/2 p-8">
-              <h3 className="text-2xl font-bold mb-4">
-                Why Choose Enterprise?</h3>
-              <p className="text-muted-foreground mb-6">
-                Get the full power of AI-guided development with
-                enterprise-grade security, compliance, and support designed for
-                large organizations.</p>
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>99.9% SLA guarantee</span>
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Enterprise Solutions</h1>
+          <p className="text-xl text-gray-600">
+            Scale your AI development across your organization with enterprise-grade security and support.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Enterprise Features</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-4">
+              <div className="flex items-start">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Advanced Security</h3>
+                  <p className="text-gray-600 text-sm">SOC 2 compliance and enterprise-grade security.</p>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>SOC 2 Type II certified</span>
+              </div>
+              <div className="flex items-start">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Team Management</h3>
+                  <p className="text-gray-600 text-sm">Comprehensive tools for large development teams.</p>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>24/7 dedicated support</span>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-start">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Custom Integrations</h3>
+                  <p className="text-gray-600 text-sm">Integrate with your existing enterprise systems.</p>
                 </div>
-              <Button size="lg">
-                Contact Sales</Button>
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-        {/* Enterprise Features */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">
-            Enterprise Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {enterpriseFeatures.map(feature => {
-              const Icon = feature.icon, return (;
-    <Card key={feature.title}>
-                  <CardHeader>
-                    <Icon className="h-12 w-12 text-primary mb-4" />
-                    <CardTitle>{feature.title}</CardTitle>
-                    <CardDescription>{feature.description}</CardDescription>
-  }
-      );}
-        {/* Benefits */}
-        <Card className="mb-16">
-          <CardHeader>
-            <CardTitle>What&apos;s Included</CardTitle>
-            <CardDescription>
-              Everything you need to scale AI development across your
-              organization</CardDescription>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                  <span>{benefit}</span>))}
-        {/* Pricing */}
-        <Card className="mb-16">
-          <CardHeader className="text-center">
-            <CardTitle>Enterprise Pricing</CardTitle>
-            <CardDescription>
-              Custom pricing based on your organization&apos;s needs</CardDescription>
-          <CardContent className="text-center">
-            <div className="mb-6">
-              <div className="text-4xl font-bold mb-2">Custom</div>
-              <div className="text-muted-foreground">
-                Contact us for pricing</div>
-            <div className="space-y-2 mb-6">
-              <Badge variant="outline">Volume discounts available</Badge>
-              <Badge variant="outline">Flexible payment terms</Badge>
-              <Badge variant="outline">Multi-year agreements</Badge>
-            <Button size="lg", className="w-full md:w-auto">
-              Get Custom Quote</Button>
-        {/* Contact */}
-        <div className="text-center bg-muted rounded-lg p-8">
-          <h2 className="text-2xl font-semibold mb-4">Ready to Get Started?</h2>
-          <p className="text-muted-foreground mb-6">
-            Speak with our enterprise team to learn how we can help your
-            organization</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg">
-              <Link href="/contact">Contact Sales</Link>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/docs">View Documentation</Link>
-          <div className="mt-6 text-sm text-muted-foreground">
-            <p>Enterprise, sales: enterprise@aiguidedSaaS.com</p>
-            <p>Phone: +1 (555) 123-4567</p>
-          </Card>
-          </CardHeader>
-          </CardContent>
+              </div>
+              <div className="flex items-start">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">24/7 Support</h3>
+                  <p className="text-gray-600 text-sm">Dedicated support for mission-critical applications.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          </Card>
-          </CardHeader>
-          </CardContent>
-          </div></Button>
-  }
+        </div>
+
+        <div className="text-center">
+          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors mr-4">
+            Schedule Demo
+          </button>
+          <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+            Contact Sales
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

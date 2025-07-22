@@ -1,308 +1,163 @@
-'use client'
-import { useState, useEffect, useCallback } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+'use client';
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import TemplateMarketplace from '@/components/marketplace/TemplateMarketplace';
-interface Template {;
+
+interface Template {
   id: string;
   name: string;
   description: string;
   category: string;
-  framework: string;
+  tags: string[];
+  preview?: string;
+  author: string;
   downloads: number;
   rating: number;
-  author: string;
-  tags: string[];
-  featured: boolean
-};
-export default function TemplatesPage(): void {;
-  const { toast } = useToast();
-      </Template>
-  const [templates, setTemplates] = useState<Template[]>([]);
-  const [loading, setLoading] = useState(true);
+}
+
+export default function TemplatesPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const loadTemplates = useCallback(async () => {;
-    try {
-      setLoading(true)
-      // Try to get real data from API, fallback to demo data if needed
-      const response = await fetch('/api/templates');
-      let templates: Template[] = [];
-      if (response.ok) {
-        const apiData = await response.json();
-        templates = apiData.templates || [];
-      }
-      // If no real data available, use demo templates
-      if (templates.length === 0) {
-        templates = [
-        {
-          id: '1';
-          name: 'Modern Dashboard';
-          description: 'A sleek and responsive dashboard template with charts and analytics';
-          category: 'dashboard';
-          framework: 'react';
-          downloads: 1247;
-          rating: 4.8;
-          author: 'UI Team';
-          tags: ['dashboard', 'analytics', 'charts'],
-          featured: true
-        },
-        {
-          id: '2';
-          name: 'E-commerce Store';
-          description: 'Complete e-commerce solution with cart, checkout, and payment integration',
-          category: 'ecommerce';
-          framework: 'nextjs';
-          downloads: 892;
-          rating: 4.6;
-          author: 'Commerce Pro';
-          tags: ['ecommerce', 'shopping', 'payments'],
-          featured: true
-        },
-        {
-          id: '3';
-          name: 'Landing Page Pro';
-          description: 'High-converting landing page template with modern design';
-          category: 'marketing';
-          framework: 'react';
-          downloads: 2156;
-          rating: 4.9;
-          author: 'Marketing Team';
-          tags: ['landing', 'marketing', 'conversion'],
-          featured: false
-        },
-        {
-          id: '4';
-          name: 'Blog Platform';
-          description: 'Full-featured blog platform with CMS integration';
-          category: 'blog';
-          framework: 'nextjs';
-          downloads: 634;
-          rating: 4.5;
-          author: 'Content Creator';
-          tags: ['blog', 'cms', 'content'],
-          featured: false
-        },
-        {
-          id: '5';
-          name: 'SaaS Starter';
-          description: 'Complete SaaS application template with authentication and billing';
-          category: 'saas';
-          framework: 'nextjs';
-          downloads: 1789;
-          rating: 4.7;
-          author: 'SaaS Builder';
-          tags: ['saas', 'auth', 'billing'],
-          featured: true
-        }
-        ];
-      }
-      setTemplates(templates)
-      setLoading(false)
-    } catch (error) {
-      console.error('Failed to load, templates:', error)
-      toast({
-        title: 'Error';
-        description: 'Failed to load templates';
-        variant: 'destructive'
-      })
-      setLoading(false)
+  const { toast } = useToast();
+
+  const templates: Template[] = [
+    {
+      id: '1',
+      name: 'E-commerce Starter',
+      description: 'Complete e-commerce solution with product catalog, cart, and checkout.',
+      category: 'web',
+      tags: ['React', 'Next.js', 'Stripe'],
+      author: 'AI Guided SaaS',
+      downloads: 1250,
+      rating: 4.8
+    },
+    {
+      id: '2',
+      name: 'Blog Platform',
+      description: 'Modern blog platform with CMS integration and SEO optimization.',
+      category: 'web',
+      tags: ['React', 'CMS', 'SEO'],
+      author: 'Community',
+      downloads: 890,
+      rating: 4.6
+    },
+    {
+      id: '3',
+      name: 'Task Management',
+      description: 'Collaborative task management app with real-time updates.',
+      category: 'productivity',
+      tags: ['React', 'WebSocket', 'Charts'],
+      author: 'AI Guided SaaS',
+      downloads: 650,
+      rating: 4.7
     }
-  }, [toast])
-  useEffect(() => {
-    loadTemplates()
-  }, [loadTemplates])
-  const categories = [;
-    { id: 'all'; name: 'All Templates'; count: templates.length },
-    { id: 'dashboard'; name: 'Dashboards'; count: templates.filter(t => t.category === 'dashboard').length },
-    { id: 'ecommerce'; name: 'E-commerce'; count: templates.filter(t => t.category === 'ecommerce').length },
-    { id: 'marketing'; name: 'Marketing'; count: templates.filter(t => t.category === 'marketing').length },
-    { id: 'blog'; name: 'Blogs'; count: templates.filter(t => t.category === 'blog').length },
-    { id: 'saas'; name: 'SaaS'; count: templates.filter(t => t.category === 'saas').length }
-  ]
-  const filteredTemplates = selectedCategory === 'all' ;
-    ? templates
-    : templates.filter(template => template.category === selectedCategory)
-  const featuredTemplates = templates.filter(template => template.featured);
-  const handleDownload = () => {;
+  ];
+
+  const categories = [
+    { id: 'all', name: 'All Templates', count: templates.length },
+    { id: 'web', name: 'Web Apps', count: templates.filter(t => t.category === 'web').length },
+    { id: 'mobile', name: 'Mobile Apps', count: 0 },
+    { id: 'api', name: 'API Services', count: 0 },
+    { id: 'productivity', name: 'Productivity', count: templates.filter(t => t.category === 'productivity').length }
+  ];
+
+  const filteredTemplates = selectedCategory === 'all' 
+    ? templates 
+    : templates.filter(template => template.category === selectedCategory);
+
+  const handleUseTemplate = (template: Template) => {
     toast({
-      title: 'Download Started';
-      description: 'Template download has been initiated'}
-      )}
-    );
-  const handlePreview = () => {;
-    toast({
-      title: 'Preview';
-      description: 'Opening template preview...'}
-      )}
-    );
-  if (loading) {
-    return (
-    <div className="flex items-center justify-center min-h-[400px]"></div>
-        <div className="text-center"></div>
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading templates...</p>
-  }
+      title: "Template Selected",
+      description: `Using "${template.name}" template for your new project.`
+    });
+  };
+
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex items-center justify-between"></div>
-        <div></div>
-          <h1 className="text-3xl font-bold tracking-tight">Template Marketplace</h1>
-          <p className="text-muted-foreground">
-            Browse and download professional templates for your projects</p>
-        <Button>
-          📤 Upload Template</Button>
-      {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4"></div>
-        <Card></Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
-            <CardTitle className="text-sm font-medium">Total Templates</CardTitle>
-            <span className="text-muted-foreground">📦</span>
-          </CardHeader>
-          <CardContent></CardContent>
-            <div className="text-2xl font-bold">{templates.length}
-            <p className="text-xs text-muted-foreground">
-              Available for download</p>
-        <Card></Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
-            <CardTitle className="text-sm font-medium">Total Downloads</CardTitle>
-            <span className="text-muted-foreground">📥</span>
-          </CardHeader>
-          <CardContent></CardContent>
-            <div className="text-2xl font-bold">
-              {templates.reduce((sum, t) => sum + t.downloads, 0).toLocaleString()}
-            <p className="text-xs text-muted-foreground">
-              All time downloads</p>
-        <Card></Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
-            <CardTitle className="text-sm font-medium">Average Rating</CardTitle>
-            <span className="text-muted-foreground">⭐</span>
-          </CardHeader>
-          <CardContent></CardContent>
-            <div className="text-2xl font-bold">
-              {(templates.reduce((sum, t) => sum + t.rating, 0) / templates.length).toFixed(1)}
-            <p className="text-xs text-muted-foreground">
-              User satisfaction</p>
-        <Card></Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
-            <CardTitle className="text-sm font-medium">Featured</CardTitle>
-            <span className="text-muted-foreground">🌟</span>
-          </CardHeader>
-          <CardContent></CardContent>
-            <div className="text-2xl font-bold">{featuredTemplates.length}
-            <p className="text-xs text-muted-foreground">
-              Editor&apos;s choice</p>
-      {/* Template Tabs */}
-      <Tabs defaultValue="browse", className="space-y-4"></Tabs>
-        <TabsList></TabsList>
-          <TabsTrigger value="browse">Browse Templates</TabsTrigger>
-          <TabsTrigger value="featured">Featured</TabsTrigger>
-          <TabsTrigger value="marketplace">Marketplace</TabsTrigger>
-        <TabsContent value="browse", className="space-y-4"></TabsContent>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {categories.map((category) => (</div>
-              <Button
-                key={category.id}
-                variant={selectedCategory === category.id ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSelectedCategory(category.id)}
-              >
-                {category.name} ({category.count})</Button>
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Project Templates</h1>
+          <p className="text-gray-600">
+            Start your project with professionally designed templates.
+          </p>
+        </div>
+
+        <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-5">
+            {categories.map((category) => (
+              <TabsTrigger key={category.id} value={category.id} className="relative">
+                {category.name}
+                <Badge variant="secondary" className="ml-2 text-xs">
+                  {category.count}
+                </Badge>
+              </TabsTrigger>
             ))}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredTemplates.map((template) => (</div>
-              <Card key={template.id} className="hover:shadow-lg transition-shadow"></Card>
-                <CardHeader></CardHeader>
-                  <div className="flex items-start justify-between"></div>
-                    <div></div>
-                      <CardTitle className="text-lg">{template.name}</CardTitle>
-                      <CardDescription className="mt-1">
-                        {template.description}</CardDescription>
-                    {template.featured && (
-                      <Badge className="bg-yellow-500">Featured</Badge>
-                    )}
-                <CardContent></CardContent>
-                  <div className="space-y-4"></div>
-                    <div className="flex items-center justify-between text-sm"></div>
-                      <span className="text-muted-foreground">Framework:</span>
-                      <Badge variant="outline", className="capitalize">
-                        {template.framework}</Badge>
-                    <div className="flex items-center justify-between text-sm"></div>
-                      <span className="text-muted-foreground">Downloads:</span>
-                      <span className="font-medium">{template.downloads.toLocaleString()}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm"></div>
-                      <span className="text-muted-foreground">Rating:</span>
-                      <div className="flex items-center space-x-1"></div>
-                        <span className="font-medium">{template.rating}</span>
-                        <span className="text-yellow-500">⭐</span>
+          </TabsList>
+
+          <TabsContent value={selectedCategory}>
+            {filteredTemplates.length > 0 ? (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {filteredTemplates.map((template) => (
+                  <Card key={template.id} className="hover:shadow-lg transition-shadow">
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <CardTitle className="text-lg">{template.name}</CardTitle>
+                          <p className="text-sm text-gray-600">by {template.author}</p>
+                        </div>
+                        <div className="text-right text-sm text-gray-500">
+                          ★ {template.rating}
+                        </div>
                       </div>
-                    <div className="flex items-center justify-between text-sm"></div>
-                      <span className="text-muted-foreground">Author:</span>
-                      <span className="font-medium">{template.author}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                      {template.tags.map((tag) => (</div>
-                        <Badge key={tag} variant="secondary", className="text-xs">
-                          {tag}</Badge>
-                  ))}
-                    <div className="flex space-x-2 pt-2"></div>
-                      <Button
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => handleDownload()}
-                      >
-                        📥 Download</Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handlePreview()}
-                      >
-                        👁️ Preview</Button>
-            ))}
-        <TabsContent value="featured", className="space-y-4"></TabsContent>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredTemplates.map((template) => (</div>
-              <Card key={template.id} className="hover:shadow-lg transition-shadow border-yellow-200"></Card>
-                <CardHeader></CardHeader>
-                  <div className="flex items-start justify-between"></div>
-                    <div></div>
-                      <CardTitle className="text-lg flex items-center space-x-2"></CardTitle>
-                        <span>{template.name}</span>
-                        <span className="text-yellow-500">⭐</span>
-                      </CardTitle>
-                      <CardDescription className="mt-1">
-                        {template.description}</CardDescription>
-                    <Badge className="bg-yellow-500">Featured</Badge>
-                <CardContent></CardContent>
-                  <div className="space-y-4"></div>
-                    <div className="flex items-center justify-between text-sm"></div>
-                      <span className="text-muted-foreground">Downloads:</span>
-                      <span className="font-medium">{template.downloads.toLocaleString()}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm"></div>
-                      <span className="text-muted-foreground">Rating:</span>
-                      <div className="flex items-center space-x-1"></div>
-                        <span className="font-medium">{template.rating}</span>
-                        <span className="text-yellow-500">⭐</span>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 mb-4">{template.description}</p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {template.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
-                    <div className="flex space-x-2 pt-2"></div>
-                      <Button
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => handleDownload()}
-                      >
-                        📥 Download</Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handlePreview()}
-                      >
-                        👁️ Preview</Button>
-            ))}
-        <TabsContent value="marketplace", className="space-y-4"></TabsContent>
-          <TemplateMarketplace /></TemplateMarketplace>
-  }
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-500">
+                          {template.downloads} downloads
+                        </span>
+                        <Button 
+                          size="sm"
+                          onClick={() => handleUseTemplate(template)}
+                        >
+                          Use Template
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <Card>
+                <CardContent className="py-12 text-center">
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">No Templates Found</h3>
+                  <p className="text-gray-600">
+                    No templates available in this category yet. Check back soon!
+                  </p>
+                </CardContent>
+              </Card>
+            )}
+          </TabsContent>
+        </Tabs>
+
+        {/* Template Marketplace Component */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Template Marketplace</h2>
+          <TemplateMarketplace />
+        </div>
+      </div>
+    </div>
+  );
+}

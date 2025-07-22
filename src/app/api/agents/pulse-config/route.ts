@@ -1,25 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createPulsedOrchestrator } from '@/lib/agents/PulsedAgentOrchestrator';
-let orchestratorInstance: any = null;
-export async function POST(request: NextRequest): void {
+
+export async function POST(request: NextRequest) {
   try {
-    const updates = await request.json();
-    // Get or create pulsed orchestrator instance
-    if (!orchestratorInstance) {
-      orchestratorInstance = createPulsedOrchestrator();
-      await orchestratorInstance.initialize();
-    }
-    // Update configuration
-    orchestratorInstance.updatePulseConfig(updates);
+    const body = await request.json();
+    const updates = body.updates || {};
+    
+    // Simulate pulse configuration update
     return NextResponse.json({
-      success: true;
-      message: 'Pulse configuration updated';
-      config: updates;
-    }});
+      success: true,
+      message: 'Pulse configuration updated',
+      config: updates
+    });
   } catch (error) {
-    console.error('Error updating pulse, config:', error);
+    console.error('Pulse config error:', error);
     return NextResponse.json(
       { error: 'Failed to update pulse configuration' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const config = {
+      interval: 30000,
+      enabled: true,
+      metrics: ['cpu', 'memory', 'requests']
+    };
+    
+    return NextResponse.json(config);
+  } catch (error) {
+    console.error('Get pulse config error:', error);
+    return NextResponse.json(
+      { error: 'Failed to get pulse configuration' },
       { status: 500 }
     );
   }

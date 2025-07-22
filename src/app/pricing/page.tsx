@@ -1,97 +1,161 @@
 import { Metadata } from 'next';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
+
 export const metadata: Metadata = {
-  title: 'Pricing - AI Guided SaaS Platform';
-  description: 'Choose the perfect plan for your development needs'};
-const plans = [;
+  title: 'Pricing - AI Guided SaaS Platform',
+  description: 'Choose the perfect plan for your development needs'
+};
+
+const plans = [
   {
-    name: 'Starter';
-    price: '$29';
-    period: '/month';
-    description: 'Perfect for individual developers and small projects';
+    name: 'Starter',
+    price: '$0',
+    period: 'month',
+    description: 'Perfect for getting started',
     features: [
-      'Up to 5 projects',
+      '3 projects',
       'Basic AI assistance',
-      'Standard templates',
       'Community support',
-      '10GB storage'],
-    popular: false},
+      '1GB storage',
+      'Standard templates'
+    ],
+    popular: false,
+    cta: 'Get Started Free'
+  },
   {
-    name: 'Professional';
-    price: '$99';
-    period: '/month';
-    description: 'Ideal for growing teams and advanced development';
+    name: 'Professional',
+    price: '$29',
+    period: 'month',
+    description: 'For professional developers',
     features: [
       'Unlimited projects',
       'Advanced AI features',
-      'Premium templates',
       'Priority support',
-      '100GB storage',
-      'Team collaboration',
-      'Custom integrations'],
-    popular: true},
+      '50GB storage',
+      'Premium templates',
+      'Custom integrations',
+      'Team collaboration'
+    ],
+    popular: true,
+    cta: 'Start Free Trial'
+  },
   {
-    name: 'Enterprise';
-    price: 'Custom';
-    period: '';
-    description: 'Tailored solutions for large organizations';
+    name: 'Enterprise',
+    price: '$99',
+    period: 'month',
+    description: 'For large organizations',
     features: [
       'Everything in Professional',
-      'Custom AI models',
-      'White-label solutions',
+      'Advanced security',
       'Dedicated support',
       'Unlimited storage',
-      'Advanced security',
-      'SLA guarantee'],
-    popular: false}];
-export default function PricingPage(): void {
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Choose the perfect plan for your development needs. All plans include
-          our core AI-powered features.</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {plans.map(plan => (</div>
-          <Card
-            key={plan.name}
-            className={`relative ${plan.popular ? 'border-primary shadow-lg' : ''}`}`
-          >
-            {plan.popular && (</Card>
-              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                Most Popular</Badge>
-            )}
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl">{plan.name}</CardTitle>
-              <CardDescription>{plan.description}</CardDescription>
-              <div className="mt-4">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                <span className="text-muted-foreground">{plan.period}</span>
-              </div>
-            <CardContent>
-              <ul className="space-y-3 mb-6">
-                {plan.features.map(feature => (</ul>
-                  <li key={feature} className="flex items-center">
-                    <Check className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">{feature}</span>))}
-              </ul>
-              <Button
-                className="w-full"
-                variant={plan.popular ? 'default' : 'outline'}
-              >
-                {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}</Button>
-        ))}
-      <div className="text-center mt-16">
-        <p className="text-muted-foreground mb-4">
-          All plans include a 14-day free trial. No credit card required.</p>
-        <p className="text-sm text-muted-foreground">
-          Need a custom solution?{' '}</p>
-          <Button variant="link", className="p-0">
-            Contact our sales team</Button>
+      'Custom branding',
+      'SSO integration',
+      'Advanced analytics',
+      'SLA guarantee'
+    ],
+    popular: false,
+    cta: 'Contact Sales'
   }
+];
+
+const features = [
+  'AI-powered code generation',
+  'Visual development tools',
+  'One-click deployment',
+  'Built-in security',
+  'Version control integration',
+  'Performance monitoring'
+];
+
+export default function PricingPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h1>
+          <p className="text-xl text-gray-600">
+            Choose the perfect plan for your development needs. Upgrade or downgrade at any time.
+          </p>
+        </div>
+
+        {/* Pricing Plans */}
+        <div className="grid gap-8 lg:grid-cols-3 mb-12">
+          {plans.map((plan) => (
+            <Card key={plan.name} className={`relative ${plan.popular ? 'border-blue-500 shadow-lg' : ''}`}>
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <Badge className="bg-blue-500">Most Popular</Badge>
+                </div>
+              )}
+              <CardHeader className="text-center pb-2">
+                <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                  <span className="text-gray-600 ml-2">/{plan.period}</span>
+                </div>
+                <p className="text-gray-600 mt-2">{plan.description}</p>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center">
+                      <Check className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
+                      <span className="text-gray-600">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button className={`w-full ${plan.popular ? '' : 'variant-outline'}`}>
+                  {plan.cta}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* All Plans Include */}
+        <Card className="mb-12">
+          <CardHeader>
+            <CardTitle className="text-center text-2xl">All Plans Include</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {features.map((feature) => (
+                <div key={feature} className="flex items-center">
+                  <Check className="h-4 w-4 text-green-500 mr-3" />
+                  <span className="text-gray-600">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* FAQ */}
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+          <div className="grid gap-6 md:grid-cols-2 text-left">
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">Can I change plans anytime?</h3>
+              <p className="text-gray-600">Yes, you can upgrade or downgrade your plan at any time.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">Is there a free trial?</h3>
+              <p className="text-gray-600">Yes, all paid plans come with a 14-day free trial.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">What payment methods do you accept?</h3>
+              <p className="text-gray-600">We accept all major credit cards and PayPal.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">Do you offer discounts?</h3>
+              <p className="text-gray-600">Yes, we offer discounts for annual plans and educational institutions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

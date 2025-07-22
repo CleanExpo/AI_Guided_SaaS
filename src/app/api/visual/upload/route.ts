@@ -1,100 +1,89 @@
 import { NextRequest, NextResponse } from 'next/server';
-export async function POST(request: NextRequest): void {;
+
+export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File;
+    
     if (!file) {
       return NextResponse.json(
         { error: 'No file provided' },
         { status: 400 }
       );
     }
+    
     // Validate file type
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { error: 'Invalid file type. Only JPEG, PNG, and WebP are allowed.' },
+        { error: 'Invalid file type. Only JPEG, PNG, GIF, and WebP are allowed.' },
         { status: 400 }
       );
     }
+    
     // Validate file size (10MB limit)
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
       return NextResponse.json(
-        { error: 'File too large. Maximum size is 10MB.' },
+        { error: 'File size too large. Maximum 10MB allowed.' },
         { status: 400 }
       );
     }
+    
     // File upload logic would go here
     // This is a placeholder for actual file upload to storage
-    const upload = {;
-      id: `upload_${Date.now()}`;`
-      filename: file.name;
-      size: file.size:; type: file.type;
-      timestamp: new Date().toISOString();
-      status: 'completed';
-    urls: {
-        original: `/uploads/${file.name}`;`
-        thumbnail: `/uploads/thumbnails/${file.name}`;`
-        optimized: `/uploads/optimized/${file.name}``
-      },
-    metadata: {
-        dimensions: { width: 0; height: 0 };
-  // Would be extracted from actual image
-  format: file.type.split('/')[1];
-        processing_time: 250
-      }
+    const upload = {
+      id: `upload_${Date.now()}`,
+      filename: file.name,
+      size: file.size,
+      type: file.type,
+      url: `https://example.com/uploads/${Date.now()}_${file.name}`,
+      timestamp: new Date().toISOString(),
+      status: 'completed'
     };
-    return NextResponse.json(upload);
+    
+    return NextResponse.json({
+      success: true,
+      upload
+    });
+    
   } catch (error) {
-    console.error('Visual upload, error:', error);
+    console.error('Upload error:', error);
     return NextResponse.json(
-      { error: 'Failed to upload image' },
+      { error: 'Upload failed' },
       { status: 500 }
     );
   }
-};
-export async function GET(): void {;
+}
+
+export async function GET(request: NextRequest) {
   try {
-    // Return upload capabilities and limits
-    const capabilities = {;
-      supported_formats: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
-      max_file_size: '10MB';
-      max_files_per_request: 1;
-      processing_features: ['thumbnail_generation', 'format_optimization', 'metadata_extraction'],
-      storage_duration: '30 days for free users, unlimited for premium'
-    };
-    return NextResponse.json(capabilities);
-  } catch (error) {
-    console.error('Visual upload capabilities, error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get upload capabilities' },
-      { status: 500 }
-    );
-  }
-};
-export async function DELETE(request: NextRequest): void {;
-  try {
-    const { searchParams } = new URL(request.url);
-    const uploadId = searchParams.get('id');
+    const url = new URL(request.url);
+    const uploadId = url.searchParams.get('uploadId');
+    
     if (!uploadId) {
       return NextResponse.json(
         { error: 'Upload ID is required' },
         { status: 400 }
       );
     }
-    // File deletion logic would go here
-    const deletion = {;
-      id: uploadId;
-      status: 'deleted';
-      timestamp: new Date().toISOString();
-      message: 'File successfully deleted'
+    
+    // Simulate getting upload status
+    const upload = {
+      id: uploadId,
+      status: 'completed',
+      url: `https://example.com/uploads/${uploadId}.png`,
+      timestamp: new Date().toISOString()
     };
-    return NextResponse.json(deletion);
+    
+    return NextResponse.json({
+      success: true,
+      upload
+    });
   } catch (error) {
-    console.error('Visual upload deletion error:', error);
+    console.error('Get upload error:', error);
     return NextResponse.json(
-      { error: 'Failed to delete upload' },
+      { error: 'Failed to get upload' },
       { status: 500 }
     );
   }

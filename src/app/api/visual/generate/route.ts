@@ -1,73 +1,76 @@
 import { NextRequest, NextResponse } from 'next/server';
-export async function POST(request: NextRequest): void {
+
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { prompt, }
-      style = 'realistic',
-      dimensions = { width: 512; height: 512 };
-    }} = body;
+    const { 
+      prompt, 
+      style = 'realistic', 
+      dimensions = { width: 512, height: 512 }
+    } = body;
+    
     if (!prompt) {
       return NextResponse.json(
-        { error: 'Prompt is required for image generation' },
+        { error: 'Prompt is required' },
         { status: 400 }
       );
     }
-    // Image generation logic would go here
+    
+    // Visual generation logic would go here
     // This is a placeholder for actual image generation
     const generation = {
-      id: `gen_${Date.now()}`,`
+      id: `gen_${Date.now()}`,
       prompt,
       style,
       dimensions,
-      timestamp: new Date().toISOString();
-      status: 'completed';
-    result: {
-        image_url: '/placeholder-generated-image.jpg';
-        thumbnail_url: '/placeholder-thumbnail.jpg';
-    metadata: {
-          model: 'stable-diffusion-v2';
-          steps: 50;
-          guidance_scale: 7.5;
-          seed: Math.floor(Math.random() * 1000000)};
-      }},
-      processing_time: 3500;
+      status: 'completed',
+      imageUrl: `https://example.com/generated/${Date.now()}.png`,
+      timestamp: new Date().toISOString(),
+      processingTime: '3.5s'
     };
-    return NextResponse.json(generation);
+    
+    return NextResponse.json({
+      success: true,
+      generation
+    });
+    
   } catch (error) {
-    console.error('Visual generation, error:', error);
+    console.error('Visual generation error:', error);
     return NextResponse.json(
-      { error: 'Failed to generate image' },
+      { error: 'Generation failed' },
       { status: 500 }
     );
   }
-};
-export async function GET(): void {
+}
+
+export async function GET(request: NextRequest) {
   try {
-    // Return available generation options and capabilities
-    const capabilities = {
-      supported_styles: [
-        'realistic',
-        'artistic',
-        'cartoon',
-        'abstract',
-        'photographic',
-      ],
-      supported_dimensions: [
-        { width: 512; height: 512 },
-        { width: 768; height: 768 },
-        { width: 1024; height: 1024 },
-        { width: 512; height: 768 },
-        { width: 768; height: 512 },
-      ],
-      max_prompt_length: 500;
-      processing_time_estimate: '2-10 seconds';
-      models: ['stable-diffusion-v2', 'dalle-2', 'midjourney-v4'],
+    const url = new URL(request.url);
+    const generationId = url.searchParams.get('generationId');
+    
+    if (!generationId) {
+      return NextResponse.json(
+        { error: 'Generation ID is required' },
+        { status: 400 }
+      );
+    }
+    
+    // Simulate getting generation status
+    const generation = {
+      id: generationId,
+      status: 'completed',
+      imageUrl: `https://example.com/generated/${generationId}.png`,
+      timestamp: new Date().toISOString()
     };
-    return NextResponse.json(capabilities);
+    
+    return NextResponse.json({
+      success: true,
+      generation
+    });
   } catch (error) {
-    console.error('Visual generation capabilities, error:', error);
+    console.error('Get generation error:', error);
     return NextResponse.json(
-      { error: 'Failed to get generation capabilities' },
+      { error: 'Failed to get generation' },
       { status: 500 }
     );
   }

@@ -1,43 +1,118 @@
 import { Metadata } from 'next';
+
 export const metadata: Metadata = {
-  title: 'Terms of Service - AI Guided SaaS Platform';
-  description: 'Terms and conditions for using our platform'};
-export default function TermsPage(): void {
+  title: 'Terms of Service - AI Guided SaaS Platform',
+  description: 'Terms and conditions for using our platform'
+};
+
+export default function TermsPage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
-        <p className="text-muted-foreground mb-8">
-          Last,
-    updated: {new Date().toLocaleDateString()}</p>
-        <div className="prose prose-lg max-w-none space-y-6">
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Acceptance of Terms</h2>
-            <p>
-              By accessing and using AI Guided SaaS Platform, you accept and
-              agree to be bound by the terms and provision of this agreement.</p>
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Use License</h2>
-            <p>
-              Permission is granted to temporarily use AI Guided SaaS Platform
-              for personal, non-commercial transitory viewing only.</p>
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Disclaimer</h2>
-            <p>
-              The materials on AI Guided SaaS Platform are provided on an
-              &apos;as is&apos; basis. AI Guided SaaS Platform makes no
-              warranties, expressed or implied.</p>
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Limitations</h2>
-            <p>
-              In no event shall AI Guided SaaS Platform or its suppliers be
-              liable for any damages arising out of the use or inability to use
-              the materials on our platform.</p>
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
-            <p>
-              If you have any questions about these Terms of Service, please
-              contact us at legal@aiguidedSaaS.com.</p>
-  }
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="bg-white rounded-lg shadow-sm p-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">Terms of Service</h1>
+          
+          <div className="space-y-6 text-gray-600">
+            <p className="text-lg">
+              These Terms of Service ("Terms") govern your use of AI Guided SaaS platform and services.
+            </p>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
+              <p>
+                By accessing or using our service, you agree to be bound by these Terms. If you disagree 
+                with any part of these terms, then you may not access the service.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Description of Service</h2>
+              <p className="mb-4">
+                AI Guided SaaS provides an AI-powered development platform that enables users to:
+              </p>
+              <ul className="list-disc ml-6 space-y-2">
+                <li>Create and manage software projects</li>
+                <li>Generate code using artificial intelligence</li>
+                <li>Deploy applications to various platforms</li>
+                <li>Collaborate with team members</li>
+                <li>Access development tools and resources</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. User Accounts</h2>
+              <p className="mb-4">To use our service, you must:</p>
+              <ul className="list-disc ml-6 space-y-2">
+                <li>Provide accurate and complete registration information</li>
+                <li>Maintain the security of your password and account</li>
+                <li>Accept responsibility for all activities under your account</li>
+                <li>Notify us immediately of any unauthorized use</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Acceptable Use</h2>
+              <p className="mb-4">You agree not to use the service to:</p>
+              <ul className="list-disc ml-6 space-y-2">
+                <li>Violate any laws or regulations</li>
+                <li>Infringe on intellectual property rights</li>
+                <li>Transmit harmful or malicious code</li>
+                <li>Attempt to gain unauthorized access to systems</li>
+                <li>Use the service for any illegal or unauthorized purpose</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Intellectual Property</h2>
+              <p>
+                The service and its original content, features, and functionality are and will remain 
+                the exclusive property of AI Guided SaaS and its licensors. The service is protected 
+                by copyright, trademark, and other laws.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. User Content</h2>
+              <p>
+                You retain ownership of any intellectual property rights that you hold in content you 
+                create using our service. However, you grant us a license to use, modify, and display 
+                your content as necessary to provide the service.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Termination</h2>
+              <p>
+                We may terminate or suspend your account and bar access to the service immediately, 
+                without prior notice or liability, under our sole discretion, for any reason whatsoever 
+                and without limitation, including but not limited to a breach of the Terms.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Disclaimer</h2>
+              <p>
+                The information on this service is provided on an "as is" basis. To the fullest
+                extent permitted by law, we exclude all representations, warranties, and conditions
+                relating to our service and the use of this service.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Contact Information</h2>
+              <p>
+                If you have any questions about these Terms, please contact us at{' '}
+                <a href="mailto:legal@aiinguidedsaas.com" className="text-blue-600 hover:text-blue-700">
+                  legal@aiinguidedsaas.com
+                </a>
+              </p>
+              <p className="text-sm text-gray-500 mt-4">
+                Last updated: January 2025
+              </p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
