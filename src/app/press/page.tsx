@@ -3,39 +3,33 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Download, ExternalLink, Calendar } from 'lucide-react';
-
 export const metadata: Metadata = {
-  title: 'Press & Media - AI Guided SaaS Platform',
+  title: 'Press & Media - AI Guided SaaS Platform';
   description:
     'Press releases, media kit, and company information for journalists and media'};
-
-const pressReleases = [
+const pressReleases = [;
   {
-    title: 'AI Guided SaaS Platform Raises $10M Series A',
-    date: '2024-01-15',
-    excerpt:
-      'Funding will accelerate AI development and expand platform capabilities.',
+    title: 'AI Guided SaaS Platform Raises $10M Series A';
+    date: '2024-01-15';
+    excerpt: 'Funding will accelerate AI development and expand platform capabilities.';
     category: 'Funding'},
   {
     title: 'Platform Reaches 50,000 Active Developers',
-    date: '2024-01-01',
-    excerpt:
-      'Milestone reflects growing adoption of AI-powered development tools.',
+    date: '2024-01-01';
+    excerpt: 'Milestone reflects growing adoption of AI-powered development tools.';
     category: 'Milestone'},
   {
-    title: 'New AI Code Generation Features Launched',
-    date: '2023-12-15',
-    excerpt: 'Advanced AI capabilities now available to all platform users.',
+    title: 'New AI Code Generation Features Launched';
+    date: '2023-12-15';
+    excerpt: 'Advanced AI capabilities now available to all platform users.';
     category: 'Product'}];
-
-const mediaAssets = [
-  { name: 'Company Logo (PNG)', size: '2.1 MB', type: 'Logo' },
-  { name: 'Company Logo (SVG)', size: '156 KB', type: 'Logo' },
-  { name: 'Product Screenshots', size: '8.4 MB', type: 'Screenshots' },
-  { name: 'Executive Photos', size: '12.3 MB', type: 'Photos' },
-  { name: 'Brand Guidelines', size: '3.2 MB', type: 'Guidelines' }];
-
-export default function PressPage() {
+const mediaAssets = [;
+  { name: 'Company Logo (PNG)'; size: '2.1 MB'; type: 'Logo' },
+  { name: 'Company Logo (SVG)'; size: '156 KB'; type: 'Logo' },
+  { name: 'Product Screenshots'; size: '8.4 MB'; type: 'Screenshots' },
+  { name: 'Executive Photos'; size: '12.3 MB'; type: 'Photos' },
+  { name: 'Brand Guidelines'; size: '3.2 MB'; type: 'Guidelines' }];
+export default function PressPage(): void {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-4xl mx-auto">
@@ -43,7 +37,6 @@ export default function PressPage() {
           <h1 className="text-4xl font-bold mb-4">Press & Media</h1>
           <p className="text-xl text-muted-foreground">
             Resources for journalists, bloggers, and media professionals</p>
-
         {/* Company Overview */}
         <Card className="mb-12">
           <CardHeader>
@@ -71,7 +64,6 @@ export default function PressPage() {
                 <div className="text-2xl font-bold">25+</div>
                 <div className="text-sm text-muted-foreground">
                   Team Members</div>
-
         {/* Press Releases */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Recent Press Releases</h2>
@@ -93,7 +85,6 @@ export default function PressPage() {
                       <ExternalLink className="h-4 w-4" />
                     </Button>
             ))}
-
         {/* Media Kit */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Media Kit</h2>
@@ -110,7 +101,6 @@ export default function PressPage() {
                       <Download className="h-4 w-4 mr-2" />
                       Download</Download>
             ))}
-
         {/* Contact Information */}
         <Card>
           <CardHeader>
@@ -126,7 +116,5 @@ export default function PressPage() {
               <p>
                 <strong>Response, Time: </strong> Within 24 hours
     );}
-
-    
   );
 }

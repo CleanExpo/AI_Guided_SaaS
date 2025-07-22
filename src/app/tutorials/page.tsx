@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -16,29 +15,24 @@ interface TutorialCardProps {
   isLocked: boolean;
   onStart: () => void
 }
-
-function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
+function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps): void {
   const difficultyColors = {
-    beginner: 'bg-green-100 text-green-700',
-    intermediate: 'bg-yellow-100 text-yellow-700',
+    beginner: 'bg-green-100 text-green-700';
+    intermediate: 'bg-yellow-100 text-yellow-700';
     advanced: 'bg-red-100 text-red-700'
   }
-
   const categoryIcons = {
-    basics: BookOpen,
-    projects: Code,
-    ai: Zap,
-    deployment: Rocket,
+    basics: BookOpen;
+    projects: Code;
+    ai: Zap;
+    deployment: Rocket;
     advanced: Trophy
   }
-
-  const CategoryIcon = categoryIcons[tutorial.category as keyof typeof categoryIcons] || BookOpen
-
+  const CategoryIcon = categoryIcons[tutorial.category as keyof typeof categoryIcons] || BookOpen;
   return (
-    <Card className={cn(
-      "p-6 transition-all duration-200",
-      isLocked ? "opacity-60" : "hover:shadow-lg" isCompleted && "border-green-500"
-    )}>
+    <Card className={`cn(`
+      "p-6 transition-all duration-200" isLocked ? "opacity-60" : "hover:shadow-lg" isCompleted && "border-green-500"
+    )`}>`
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className={cn(
@@ -54,7 +48,7 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
           <div>
             <h3 className="font-semibold text-lg">{tutorial.title}</h3>
             <div className="flex items-center gap-2 mt-1">
-              <Badge variant="secondary" className={difficultyColors[tutorial.difficulty]}>
+              <Badge variant="secondary", className={difficultyColors[tutorial.difficulty]}>
                 {tutorial.difficulty}</Badge>
               <div className="flex items-center gap-1 text-sm text-muted-foreground">
                 <Clock className="h-3 w-3" />
@@ -67,12 +61,9 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
                 <Star className="h-4 w-4 text-yellow-600" />
               </div>
             ))}
-
         )}
-
       <p className="text-sm text-muted-foreground mb-4">
         {tutorial.description}</p>
-
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1 text-sm">
           <Trophy className="h-4 w-4 text-primary" />
@@ -102,58 +93,46 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
           )}
         </Button>
   };
-
-export default function TutorialsPage() {
-  const { data: session } = useSession()
-  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)
-  const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)
-  const [tutorials, setTutorials] = useState<Tutorial[]>([])
-  const [completedTutorials, setCompletedTutorials] = useState<string[]>([])
-  const [userProgress, setUserProgress] = useState<any>(null)
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
-
+export default function TutorialsPage(): void {
+  const { data: session } = useSession();
+  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null);
+  const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null);
+  const [tutorials, setTutorials] = useState<Tutorial[]>([]);
+  const [completedTutorials, setCompletedTutorials] = useState<string[]>([]);
+  const [userProgress, setUserProgress] = useState<any>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   useEffect(() => {
     // Initialize systems
-    const docs = new DynamicDocumentationSystem()
-    const tutorialSys = new InteractiveTutorialSystem(docs)
-    
+    const docs = new DynamicDocumentationSystem();
+    const tutorialSys = new InteractiveTutorialSystem(docs);
     setDocSystem(docs)
     setTutorialSystem(tutorialSys)
-    
     // Load tutorials
-    const allTutorials = tutorialSys.getAllTutorials()
+    const allTutorials = tutorialSys.getAllTutorials();
     setTutorials(allTutorials)
-    
     return () => {
       docs.destroy()
     }
-
       </div>
       </string>
   }, [])
-
   useEffect(() => {
     if (session?.user?.id && tutorialSystem) {
       // Load user progress
       loadUserProgress()
     }
   }, [session, tutorialSystem])
-
   const loadUserProgress = async () => {
     if (!session?.user?.id) return
-    
     try {
-      const response = await fetch(`/api/tutorials/progress?userId=${session.user.id}`)
-      const data = await response.json()
-      
-      const completed = data.progress
+      const response = await fetch(`/api/tutorials/progress?userId=${session.user.id}`);`
+      const data = await response.json();
+      const completed = data.progress;
         .filter((p) => p.completed_at)
         .map((p) => p.tutorial_id)
-      
       setCompletedTutorials(completed)
-      
       // Calculate overall progress
-      const totalPoints = data.progress.reduce((sum: number, p) => sum + (p.score || 0), 0)
+      const totalPoints = data.progress.reduce((sum: number, p) => sum + (p.score || 0), 0);
       setUserProgress({
         completedCount: completed.length,
         totalPoints,
@@ -163,41 +142,34 @@ export default function TutorialsPage() {
       console.error('Failed to load, progress:', error)
     }
   }
-
   const handleStartTutorial = async (tutorialId: string) => {
     if (!tutorialSystem || !session?.user?.id) return
-    
     try {
       await tutorialSystem.startTutorial(tutorialId, session.user.id)
       // In a real app, this would open the tutorial overlay
-      window.location.href = `/tutorials/${tutorialId}`
+      window.location.href = `/tutorials/${tutorialId}``
     } catch (error) {
       alert(error.message)
     }
   }
-
   const isLocked = (tutorial: Tutorial): boolean => {
     if (tutorial.prerequisites.length === 0) return false
     return !tutorial.prerequisites.every(prereq => completedTutorials.includes(prereq))
   }
-
-  const categories = [
-    { id: 'all', label: 'All Tutorials', icon: BookOpen },
-    { id: 'basics', label: 'Basics', icon: BookOpen },
-    { id: 'projects', label: 'Projects', icon: Code },
-    { id: 'ai', label: 'AI Features', icon: Zap },
-    { id: 'deployment', label: 'Deployment', icon: Rocket },
-    { id: 'advanced', label: 'Advanced', icon: Trophy }
+  const categories = [;
+    { id: 'all'; label: 'All Tutorials'; icon: BookOpen },
+    { id: 'basics'; label: 'Basics'; icon: BookOpen },
+    { id: 'projects'; label: 'Projects'; icon: Code },
+    { id: 'ai'; label: 'AI Features'; icon: Zap },
+    { id: 'deployment'; label: 'Deployment'; icon: Rocket },
+    { id: 'advanced'; label: 'Advanced'; icon: Trophy }
   ]
-
-  const filteredTutorials = selectedCategory === 'all' 
-    ? tutorials 
+  const filteredTutorials = selectedCategory === 'all' ;
+    ? tutorials
     : tutorials.filter(t => t.category === selectedCategory)
-
-  const completionPercentage = tutorials.length > 0 
-    ? (completedTutorials.length / tutorials.length) * 100 
+  const completionPercentage = tutorials.length > 0 ;
+    ? (completedTutorials.length / tutorials.length) * 100
     : 0
-
   if (!tutorialSystem) {
     return (
     <div className="flex items-center justify-center h-screen">
@@ -205,16 +177,13 @@ export default function TutorialsPage() {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading tutorials...</p>
   }
-
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
-
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Interactive Tutorials</h1>
         <p className="text-muted-foreground">
           Learn by doing with our step-by-step interactive tutorials</p>
-
       {/* Progress Overview */}
       {userProgress && (
         <Card className="p-6 mb-8">
@@ -229,24 +198,21 @@ export default function TutorialsPage() {
                     {completionPercentage.toFixed(0)}%</span>
                 <Progress value={completionPercentage} className="h-2" />
               </div>
-            
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Total Points</h3>
               <div className="flex items-center gap-2">
                 <Trophy className="h-6 w-6 text-yellow-500" />
                 <span className="text-2xl font-bold">{userProgress.totalPoints}</span>
               </div>
-            
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Current Level</h3>
               <div className="flex items-center gap-2">
                 <Star className="h-6 w-6 text-primary" />
                 <span className="text-2xl font-bold">Level {userProgress.level}</span>)}
-
       {/* Category Filter */}
       <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
         {categories.map((category) => {
-          const Icon = category.icon
+          const Icon = category.icon;
           return (
     <Button
               key={category.id}
@@ -259,11 +225,9 @@ export default function TutorialsPage() {
               {category.label}</Icon>
   }
       );}
-
         </Card>
         </div>
         </div>
-
       {/* Tutorials Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTutorials.map((tutorial) => (
@@ -275,7 +239,6 @@ export default function TutorialsPage() {
             onStart={() => handleStartTutorial(tutorial.id)}
           />
         ))}</TutorialCard>
-
       {filteredTutorials.length === 0 && (
         <div className="text-center py-12">
           <p className="text-muted-foreground">

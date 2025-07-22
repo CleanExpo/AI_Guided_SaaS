@@ -1,10 +1,8 @@
 // packages/causal-engine/explorer-ui.tsx
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { logger } from './logger';
 import { CausalScorer } from './scorer';
-
 interface CausalInsight {
   key: string;
   score: number;
@@ -13,8 +11,7 @@ interface CausalInsight {
   componentType: string;
   page: string
 };
-
-export default function CausalExplorerUI() {
+export default function CausalExplorerUI(): void {
       </CausalInsight>
   const [insights, setInsights] = useState<CausalInsight[]>([]);
       </CausalInsight>
@@ -22,20 +19,16 @@ export default function CausalExplorerUI() {
       </CausalInsight>
   const [lowComponents, setLowComponents] = useState<CausalInsight[]>([]);
   const [totalLogs, setTotalLogs] = useState(0);
-
   useEffect(() => {
     refreshData();
   }, []);
-
   const refreshData = () => {
     const logs = logger.getLogs();
     const scorer = new CausalScorer(logs);
-
     setTotalLogs(logs.length);
-
     // Get all scores and format for display
     const allScores = scorer.getAllScores();
-    const formattedInsights: CausalInsight[] = Object.entries(allScores).map(
+    const formattedInsights: CausalInsight[] = Object.entries(allScores).map(;
       ([key, data]) => {
         const [page, componentType] = key.split(':');
         return {
@@ -46,12 +39,10 @@ export default function CausalExplorerUI() {
         }
 }
     );
-
     setInsights(formattedInsights.sort((a, b) => b.score - a.score));
     setTopComponents(scorer.getTopComponents(5) as CausalInsight[]);
     setLowComponents(scorer.getLowPerformingComponents(0.4) as CausalInsight[]);
   };
-
   const clearAllLogs = () => {
     if (
       confirm(
@@ -62,20 +53,17 @@ export default function CausalExplorerUI() {
       refreshData();
 }
   };
-
   const getScoreColor = (score: number) => {
     if (score >= 0.7) return 'text-green-600 bg-green-100';
     if (score >= 0.4) return 'text-yellow-600 bg-yellow-100';
     return 'text-red-600 bg-red-100';
   };
-
   const getConfidenceColor = (confidence: string) => {
     if (confidence === 'high') return 'text-blue-600 bg-blue-100';
     if (confidence === 'medium')
       return 'text-brand-primary-600 bg-brand-primary-100';
     return 'text-gray-600 bg-gray-100';
   };
-
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="mb-6">
@@ -86,7 +74,6 @@ export default function CausalExplorerUI() {
           Analyze user behavior patterns and component performance using causal
           inference.
         </p>
-
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <div className="bg-white p-4 rounded-lg shadow border">
@@ -111,7 +98,6 @@ export default function CausalExplorerUI() {
           <p className="text-2xl font-bold text-red-600">
             {lowComponents.length}
           </p>
-
       {/* Action Buttons */}
       <div className="mb-6 flex gap-4">
         <button
@@ -126,7 +112,6 @@ export default function CausalExplorerUI() {
         >
           🗑️ Clear All Logs
         </button>
-
       {/* Top Performers */}
       {topComponents.length > 0 && (
         <div className="mb-8">
@@ -158,13 +143,13 @@ export default function CausalExplorerUI() {
                         ({comp.key.split(':')[0]})
                     <td className="px-4 py-3">
                       <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}
+                        className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}`
                       >
                         {(comp.score * 100).toFixed(1)}%
                       </span>
                     <td className="px-4 py-3">
                       <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}
+                        className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}`
                       >
                         {comp.confidence}
                       </span>
@@ -173,7 +158,6 @@ export default function CausalExplorerUI() {
                     </td>
                 ))}
               </tbody>)}
-
       {/* Low Performers */}
       {lowComponents.length > 0 && (
         <div className="mb-8">
@@ -205,13 +189,13 @@ export default function CausalExplorerUI() {
                         ({comp.key.split(':')[0]})
                     <td className="px-4 py-3">
                       <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}
+                        className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}`
                       >
                         {(comp.score * 100).toFixed(1)}%
                       </span>
                     <td className="px-4 py-3">
                       <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}
+                        className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}`
                       >
                         {comp.confidence}
                       </span>
@@ -220,7 +204,6 @@ export default function CausalExplorerUI() {
                     </td>
                 ))}
               </tbody>)}
-
       {/* All Components */}
       <div>
         <h2 className="text-xl font-semibold mb-4">
@@ -252,13 +235,13 @@ export default function CausalExplorerUI() {
                   </td>
                   <td className="px-4 py-3">
                     <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(insight.score)}`}
+                      className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(insight.score)}`}`
                     >
                       {(insight.score * 100).toFixed(1)}%
                     </span>
                   <td className="px-4 py-3">
                     <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(insight.confidence)}`}
+                      className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(insight.confidence)}`}`
                     >
                       {insight.confidence}
                     </span>
@@ -273,7 +256,6 @@ export default function CausalExplorerUI() {
               generate insights!
             </div>
           )}
-
     );
 </td>
 </td>
@@ -302,7 +284,5 @@ export default function CausalExplorerUI() {
 </table>
 </div></div>
 }
-
-    
   );
 }

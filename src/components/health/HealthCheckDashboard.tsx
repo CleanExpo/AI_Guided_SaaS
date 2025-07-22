@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,6 @@ interface HealthCheck {
   error?: string;
   timestamp: string
 };
-
 interface SystemMetrics {
   cpu: {
     usage: number;
@@ -23,14 +21,13 @@ interface SystemMetrics {
   loadAverage: number[]
   }
   memory: {
-    total: number, used: number, free: number, percentage: number
+    total: number; used: number; free: number; percentage: number
   }
   disk: {
-    total: number, used: number, free: number, percentage: number
+    total: number; used: number; free: number; percentage: number
   }
   uptime: number
 };
-
 interface HealthStatus {
   status: 'healthy' | 'unhealthy' | 'degraded'
   checks: HealthCheck[];
@@ -39,34 +36,28 @@ interface HealthStatus {
   environment: string;
   timestamp: string
 };
-
-export function HealthCheckDashboard() {
+export function HealthCheckDashboard(): void {
       </HealthStatus>
-  const [healthData, setHealthData] = useState<HealthStatus | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [isRefreshing, setIsRefreshing] = useState(false)
-  const [autoRefresh, setAutoRefresh] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
+  const [healthData, setHealthData] = useState<HealthStatus | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     fetchHealthData()
-    
     if (autoRefresh) {
-      const interval = setInterval(fetchHealthData, 30000) // 30 seconds
+      const interval = setInterval(fetchHealthData, 30000) // 30 seconds;
       return () => clearInterval(interval)
     }
   }, [autoRefresh])
-
   const fetchHealthData = async () => {
     try {
       setIsRefreshing(true)
-      const response = await fetch('/api/health')
-      
+      const response = await fetch('/api/health');
       if (!response.ok) {
-        throw new Error(`Health check, failed: ${response.status}`)
+        throw new Error(`Health check, failed: ${response.status}`)`
       }
-      
-      const data = await response.json()
+      const data = await response.json();
       setHealthData(data)
       setError(null)
     } catch (err) {
@@ -76,7 +67,6 @@ export function HealthCheckDashboard() {
       setIsRefreshing(false)
     }
   }
-
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'healthy':</string>
@@ -89,7 +79,6 @@ export function HealthCheckDashboard() {
         return <AlertCircle className="h-5 w-5 text-gray-500" />
     }
   }
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'healthy':
@@ -102,31 +91,26 @@ export function HealthCheckDashboard() {
         return 'bg-gray-100 text-gray-800'
     }
   }
-
   const formatBytes = (bytes: number) => {
-    const sizes = ['B', 'KB', 'MB', 'GB', 'TB']
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
     if (bytes === 0) return '0 B'
-    const i = Math.floor(Math.log(bytes) / Math.log(1024))
-    return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}``
   }
-
   const formatUptime = (seconds: number) => {
-    const days = Math.floor(seconds / 86400)
-    const hours = Math.floor((seconds % 86400) / 3600)
-    const minutes = Math.floor((seconds % 3600) / 60)
-    
-    if (days > 0) return `${days}d ${hours}h ${minutes}m`
-    if (hours > 0) return `${hours}h ${minutes}m`
-    return `${minutes}m`
+    const days = Math.floor(seconds / 86400);
+    const hours = Math.floor((seconds % 86400) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    if (days > 0) return `${days}d ${hours}h ${minutes}m``
+    if (hours > 0) return `${hours}h ${minutes}m``
+    return `${minutes}m``
   }
-
   if (isLoading) {
     return (
     <div className="flex items-center justify-center min-h-[400px]">
         <RefreshCw className="h-8 w-8 animate-spin text-primary" />
       </div>
   }
-
   if (error) {
     return (
     <Card className="border-red-200 bg-red-50">
@@ -134,29 +118,24 @@ export function HealthCheckDashboard() {
           <CardTitle className="text-red-800">Health Check Error</CardTitle>
         <CardContent>
           <p className="text-red-600">{error}</p>
-          <Button 
-            onClick={fetchHealthData} 
+          <Button
+            onClick={fetchHealthData}
             className="mt-4"
             variant="outline"
           >
             Retry</Button>
   }
-
   if (!healthData) return null
-
   return (
     <div className="space-y-6">
       {/* Header */}
-
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             {getStatusIcon(healthData.status)}
-
             <h2 className="text-2xl font-bold">System Health</h2>
           <Badge className={getStatusColor(healthData.status)}>
             {healthData.status.toUpperCase()}</Badge>
-        
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <input
@@ -166,9 +145,8 @@ export function HealthCheckDashboard() {
               onChange={(e) => setAutoRefresh(e.target.checked)}
               className="rounded"
             /></input>
-            <label htmlFor="autoRefresh" className="text-sm">
+            <label htmlFor="autoRefresh", className="text-sm">
               Auto-refresh</label>
-          
           <Button
             onClick={fetchHealthData}
             disabled={isRefreshing}
@@ -181,7 +159,6 @@ export function HealthCheckDashboard() {
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
             Refresh</RefreshCw>
-
       {/* System, Info */}
       <Card>
         <CardHeader>
@@ -201,15 +178,13 @@ export function HealthCheckDashboard() {
               <p className="text-sm text-muted-foreground">Last Check</p>
               <p className="font-medium">
                 {new Date(healthData.timestamp).toLocaleTimeString()}</p>
-
       {/* Tabs */}
-      <Tabs defaultValue="services" className="space-y-4">
+      <Tabs defaultValue="services", className="space-y-4">
         <TabsList>
           <TabsTrigger value="services">Services</TabsTrigger>
           <TabsTrigger value="metrics">System Metrics</TabsTrigger>
           <TabsTrigger value="details">Detailed Checks</TabsTrigger>
-
-        <TabsContent value="services" className="space-y-4">
+        <TabsContent value="services", className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {healthData.checks.map((check) => (
               <Card key={check.name} className="relative">
@@ -222,7 +197,6 @@ export function HealthCheckDashboard() {
                       {check.name.includes('external') && <Globe className="h-4 w-4" />}
                       {check.name}</Globe>
                     {getStatusIcon(check.status)}
-
                 <CardContent>
                   {check.error ? (</CardContent>
                     <p className="text-sm text-red-600">{check.error}</p>
@@ -241,15 +215,12 @@ export function HealthCheckDashboard() {
                               <span className="font-medium">
                                 {typeof value === 'object' ? JSON.stringify(value) : String(value)}</span>))}
                       )}
-
                   )}
                 </CardContent>
             ))}
-
-        <TabsContent value="metrics" className="space-y-4">
+        <TabsContent value="metrics", className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* CPU, Metrics */}
-
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
@@ -271,7 +242,6 @@ export function HealthCheckDashboard() {
                     <p className="text-muted-foreground">Load Average</p>
                     <p className="font-medium">
                       {healthData.metrics.cpu.loadAverage[0].toFixed(2)}</p>
-
             {/* Memory, Metrics */}
             <Card>
               <CardHeader>
@@ -295,7 +265,6 @@ export function HealthCheckDashboard() {
                     <p className="text-muted-foreground">Total</p>
                     <p className="font-medium">
                       {formatBytes(healthData.metrics.memory.total)}</p>
-
         <TabsContent value="details">
           <Card>
             <CardHeader>
@@ -315,16 +284,13 @@ export function HealthCheckDashboard() {
                         {check.name}</h4>
                       <Badge className={getStatusColor(check.status)}>
                         {check.status}</Badge>
-                    
                     {check.error && (
                       <p className="text-sm text-red-600 mt-2">{check.error}</p>
   }
-                    
                     {check.details && (
                       <pre className="text-xs bg-muted p-2 rounded overflow-x-auto">
                         {JSON.stringify(check.details, null, 2)}</pre>
                     )}
-                    
                     <p className="text-xs text-muted-foreground">
                       Last,
     checked: {new, Date(check.timestamp).toLocaleString()}</p>))}
@@ -358,6 +324,5 @@ export function HealthCheckDashboard() {
 </CardHeader>
 </Card>
 }
-    
   );
 }

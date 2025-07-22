@@ -1,7 +1,6 @@
 // Agent Runtime and Orchestrator
 export { AgentRuntime } from './AgentRuntime';
 export { AgentOrchestrator } from './AgentOrchestrator';
-
 // Convenience functions
 export {
   analyzeProject,
@@ -9,7 +8,6 @@ export {
   architectProject,
   fullStackProject,
 } from './AgentOrchestrator';
-
 // Types
 export type {
   RuntimeConfig,
@@ -18,7 +16,6 @@ export type {
   RuntimeMetrics,
   ExecutionPlan,
 } from './AgentRuntime';
-
 export type {
   OrchestratorConfig,
   ProjectRequest,

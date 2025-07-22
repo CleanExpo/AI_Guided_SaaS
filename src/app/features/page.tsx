@@ -1,15 +1,14 @@
 import { Metadata } from 'next';
-import Link from 'next/link'
+import Link from 'next/link';
 import { Brain, Zap, Shield, Users, Code2, Rocket, FileCode, GitBranch, Database, Cloud, Lock, BarChart } from 'lucide-react';
 export const metadata: Metadata = {
-  title: 'Features - AI Guided SaaS',
+  title: 'Features - AI Guided SaaS';
   description: 'Explore the powerful features of AI Guided SaaS platform for building production-ready applications.'}
-
-const features = [
+const features = [;
   {
-    title: 'Multi-Agent AI System',
+    title: 'Multi-Agent AI System';
     description: 'Leverage our advanced multi-agent architecture with specialized agents for frontend, backend, QA, and DevOps.',
-    icon: Brain,
+    icon: Brain;
     highlights: [
       'Architect Agent for system design',
       'Frontend Agent for UI/UX',
@@ -19,9 +18,9 @@ const features = [
     ]
   },
   {
-    title: 'Natural Language Development',
-    description: 'Build complete applications using simple English descriptions. No coding experience required.',
-    icon: Code2,
+    title: 'Natural Language Development';
+    description: 'Build complete applications using simple English descriptions. No coding experience required.';
+    icon: Code2;
     highlights: [
       'Describe your app in plain English',
       'AI generates production-ready code',
@@ -31,9 +30,9 @@ const features = [
     ]
   },
   {
-    title: 'Instant Deployment',
-    description: 'Deploy your applications with one click to production-ready infrastructure.',
-    icon: Rocket,
+    title: 'Instant Deployment';
+    description: 'Deploy your applications with one click to production-ready infrastructure.';
+    icon: Rocket;
     highlights: [
       'One-click deployment',
       'Automatic scaling',
@@ -43,9 +42,9 @@ const features = [
     ]
   },
   {
-    title: 'Enterprise Security',
-    description: 'Built with security best practices from day one. Your data and applications are always protected.',
-    icon: Shield,
+    title: 'Enterprise Security';
+    description: 'Built with security best practices from day one. Your data and applications are always protected.';
+    icon: Shield;
     highlights: [
       'OAuth 2.0 authentication',
       'Role-based access control',
@@ -55,9 +54,9 @@ const features = [
     ]
   },
   {
-    title: 'Real-time Collaboration',
-    description: 'Work together with your team in real-time with built-in collaboration features.',
-    icon: Users,
+    title: 'Real-time Collaboration';
+    description: 'Work together with your team in real-time with built-in collaboration features.';
+    icon: Users;
     highlights: [
       'Live code sharing',
       'Team workspaces',
@@ -67,9 +66,9 @@ const features = [
     ]
   },
   {
-    title: 'Performance Analytics',
-    description: 'Monitor and optimize your applications with built-in analytics and performance tracking.',
-    icon: BarChart,
+    title: 'Performance Analytics';
+    description: 'Monitor and optimize your applications with built-in analytics and performance tracking.';
+    icon: BarChart;
     highlights: [
       'Real-time metrics',
       'Performance monitoring',
@@ -79,21 +78,18 @@ const features = [
     ]
   }
 ]
-
-const additionalFeatures = [
-  { icon: FileCode, text: 'TypeScript & JavaScript support' },
-  { icon: GitBranch, text: 'Git version control integration' },
-  { icon: Database, text: 'Database management tools' },
-  { icon: Cloud, text: 'Cloud infrastructure automation' },
-  { icon: Lock, text: 'Secure environment variables' },
-  { icon: Zap, text: 'Lightning-fast build times' }
+const additionalFeatures = [;
+  { icon: FileCode; text: 'TypeScript & JavaScript support' },
+  { icon: GitBranch; text: 'Git version control integration' },
+  { icon: Database; text: 'Database management tools' },
+  { icon: Cloud; text: 'Cloud infrastructure automation' },
+  { icon: Lock; text: 'Secure environment variables' },
+  { icon: Zap; text: 'Lightning-fast build times' }
 ]
-
-export default function FeaturesPage() {
+export default function FeaturesPage(): void {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
       {/* Hero Section */}
-
       <section className="relative px-6 py-24 mx-auto max-w-7xl">
         <div className="text-center">
           <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
@@ -115,7 +111,6 @@ export default function FeaturesPage() {
             >
               View Pricing <span aria-hidden="true">→</span>
             </Link>
-
       {/* Main Features */}
       <section className="px-6 py-24 mx-auto max-w-7xl">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
@@ -137,7 +132,6 @@ export default function FeaturesPage() {
                     <span className="flex-shrink-0 w-1.5 h-1.5 mt-2 bg-purple-600 rounded-full" />
                     <span className="ml-3 text-sm text-gray-600">{highlight}</span>))}
               </ul>))}
-
       {/* Additional Features */}
       <section className="px-6 py-24 mx-auto max-w-7xl bg-gray-50 rounded-3xl">
         <div className="text-center mb-12">
@@ -153,7 +147,6 @@ export default function FeaturesPage() {
             >
               <feature.icon className="w-5 h-5 text-purple-600 flex-shrink-0" />
               <span className="ml-3 text-gray-700">{feature.text}</span>))}
-
       {/* CTA Section */}
       <section className="px-6 py-24 mx-auto max-w-7xl">
         <div className="relative overflow-hidden bg-purple-600 rounded-3xl">
@@ -175,6 +168,5 @@ export default function FeaturesPage() {
                 >
                   Read Documentation <span aria-hidden="true">→</span>
   }
-    
   );
 }

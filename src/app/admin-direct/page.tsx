@@ -1,31 +1,25 @@
 'use client';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-export default function AdminDirectLoginPage() {
+export default function AdminDirectLoginPage(): void {
   const [email, setEmail] = useState('admin@aiguidedSaaS.com');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
     try {
       const response = await fetch('/api/admin/auth/login', {
-        method: 'POST',
+        method: 'POST';
     headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password })
       });
-
       const data = await response.json();
-
       if (data.success) {
         localStorage.setItem('admin-token', data.token);
         localStorage.setItem('admin-user', JSON.stringify(data.admin));
@@ -39,7 +33,6 @@ export default function AdminDirectLoginPage() {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -50,14 +43,12 @@ export default function AdminDirectLoginPage() {
           <p className="text-slate-400 text-center mb-6">
             Alternative login endpoint - bypasses NextAuth
           </p>
-
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="bg-red-500/10 border border-red-500 rounded p-3">
                 <p className="text-red-400 text-sm">{error}</p>
               </div>
             )}
-
             <div>
               <label className="block text-slate-200 mb-2">Email</label>
               <input
@@ -68,7 +59,6 @@ export default function AdminDirectLoginPage() {
                 required
               />
             </div>
-
             <div>
               <label className="block text-slate-200 mb-2">Password</label>
               <input
@@ -80,7 +70,6 @@ export default function AdminDirectLoginPage() {
                 required
               />
             </div>
-
             <button
               type="submit"
               disabled={loading}
@@ -89,7 +78,6 @@ export default function AdminDirectLoginPage() {
               {loading ? 'Logging in...' : 'Sign In'}
             </button>
           </form>
-
           <div className="mt-6 text-center text-sm text-slate-400">
             <p>Use password: AdminSecure2024!</p>
             <p className="mt-2">

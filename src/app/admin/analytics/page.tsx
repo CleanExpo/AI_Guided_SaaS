@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -7,34 +6,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { cn } from '@/lib/utils';
 import { BarChart3, LogOut, RefreshCw, ArrowLeft, Download, Calendar, Filter } from 'lucide-react';
-interface AdminUser {
+interface AdminUser {;
   id: string;
   email: string;
   name: string;
   role: string;
   permissions: string[];
 }
-
-export default function AdminAnalyticsPage() {
-  const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [refreshing, setRefreshing] = useState(false)
-  const [timeRange, setTimeRange] = useState('7d')
-  const [analyticsData, setAnalyticsData] = useState<any>(null)
-  const router = useRouter()
-
+export default function AdminAnalyticsPage(): void {;
+  const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [timeRange, setTimeRange] = useState('7d');
+  const [analyticsData, setAnalyticsData] = useState<any>(null);
+  const router = useRouter();
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem('admin-token')
-      const user = localStorage.getItem('admin-user')
-      
+    const checkAuth = () => {;
+      const token = localStorage.getItem('admin-token');
+      const user = localStorage.getItem('admin-user');
       if (!token || !user) {
         router.push('/admin/login')
         return
       }
-
       try {
-        const parsedUser = JSON.parse(user)
+        const parsedUser = JSON.parse(user);
         setAdminUser(parsedUser)
         loadAnalyticsData()
       } catch (error) {
@@ -44,21 +39,18 @@ export default function AdminAnalyticsPage() {
         setLoading(false)
       }
     }
-
     checkAuth()
   }, [router, timeRange])
-
-  const loadAnalyticsData = async () => {
+  const loadAnalyticsData = async () => {;
     try {
-      const token = localStorage.getItem('admin-token')
-      const response = await fetch(`/api/admin/analytics?range=${timeRange}`, {
+      const token = localStorage.getItem('admin-token');
+      const response = await fetch(`/api/admin/analytics?range=${timeRange}`, {`;
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}``
         }
       })
-      
       if (response.ok) {
-        const result = await response.json()
+        const result = await response.json();
         if (result.success && result.data) {
           setAnalyticsData(result.data)
         }
@@ -67,23 +59,19 @@ export default function AdminAnalyticsPage() {
       console.error('Error loading analytics:', error)
     }
   }
-
-  const handleLogout = () => {
+  const handleLogout = () => {;
     localStorage.removeItem('admin-token')
     localStorage.removeItem('admin-user')
     router.push('/admin/login')
   }
-
-  const handleRefresh = async () => {
+  const handleRefresh = async () => {;
     setRefreshing(true)
     await loadAnalyticsData()
     setTimeout(() => setRefreshing(false), 500)
   }
-
-  const handleExport = () => {
+  const handleExport = () => {;
     // TODO: Implement export functionality
   }
-
   if (loading) {
     return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center">
@@ -94,9 +82,7 @@ export default function AdminAnalyticsPage() {
       </div>
     );
   }
-
   if (!adminUser) { return null; }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-50">
       {/* Header */}
@@ -143,7 +129,7 @@ export default function AdminAnalyticsPage() {
                 onClick={handleRefresh}
                 variant="ghost"
                 size="sm"
-                className={cn("flex items-center gap-2", refreshing && "animate-spin")}
+                className={`cn("flex items-center gap-2" refreshing && "animate-spin")`}`
                 disabled={refreshing}
               >
                 <RefreshCw className="h-4 w-4" />
@@ -163,11 +149,10 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
       </header>
-
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {analyticsData ? (
-          <AdminAnalytics 
+          <AdminAnalytics
             data={analyticsData}
             timeRange={timeRange}
           />

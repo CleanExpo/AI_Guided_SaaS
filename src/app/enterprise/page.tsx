@@ -4,35 +4,32 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Building, Shield, Users, Zap, CheckCircle, ArrowRight } from 'lucide-react';
-
 export const metadata: Metadata = {
-  title: 'Enterprise Solutions - AI Guided SaaS Platform',
+  title: 'Enterprise Solutions - AI Guided SaaS Platform';
   description:
     'Enterprise-grade AI development platform for large organizations'};
-
-const enterpriseFeatures = [
+const enterpriseFeatures = [;
   {
-    icon: Shield,
-    title: 'Advanced Security',
+    icon: Shield;
+    title: 'Advanced Security';
     description:
       'SOC 2 compliance, SSO integration, and enterprise-grade security controls'},
   {
-    icon: Users,
-    title: 'Team Management',
+    icon: Users;
+    title: 'Team Management';
     description:
       'Advanced user management, role-based access control, and team collaboration'},
   {
-    icon: Zap,
-    title: 'Priority Support',
+    icon: Zap;
+    title: 'Priority Support';
     description:
       '24/7 dedicated support with guaranteed response times and account management'},
   {
-    icon: Building,
-    title: 'Custom Deployment',
+    icon: Building;
+    title: 'Custom Deployment';
     description:
       'On-premise, private cloud, or hybrid deployment options available'}];
-
-const benefits = [
+const benefits = [;
   'Unlimited projects and team members',
   'Advanced analytics and reporting',
   'Custom AI model training',
@@ -41,8 +38,7 @@ const benefits = [
   'Custom integrations and workflows',
   'Priority feature requests',
   'Training and onboarding support'];
-
-export default function EnterprisePage() {
+export default function EnterprisePage(): void {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-6xl mx-auto">
@@ -51,7 +47,6 @@ export default function EnterprisePage() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Scale your development with enterprise-grade AI tools and dedicated
             support</p>
-
         {/* Hero Section */}
         <Card className="mb-16 overflow-hidden">
           <div className="md:flex">
@@ -86,14 +81,13 @@ export default function EnterprisePage() {
                 Contact Sales</Button>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-
         {/* Enterprise Features */}
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-center mb-8">
             Enterprise Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {enterpriseFeatures.map(feature => {
-              const Icon = feature.icon, return (
+              const Icon = feature.icon, return (;
     <Card key={feature.title}>
                   <CardHeader>
                     <Icon className="h-12 w-12 text-primary mb-4" />
@@ -101,9 +95,6 @@ export default function EnterprisePage() {
                     <CardDescription>{feature.description}</CardDescription>
   }
       );}
-
-        
-
         {/* Benefits */}
         <Card className="mb-16">
           <CardHeader>
@@ -117,7 +108,6 @@ export default function EnterprisePage() {
                 <div key={index} className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
                   <span>{benefit}</span>))}
-
         {/* Pricing */}
         <Card className="mb-16">
           <CardHeader className="text-center">
@@ -133,9 +123,8 @@ export default function EnterprisePage() {
               <Badge variant="outline">Volume discounts available</Badge>
               <Badge variant="outline">Flexible payment terms</Badge>
               <Badge variant="outline">Multi-year agreements</Badge>
-            <Button size="lg" className="w-full md:w-auto">
+            <Button size="lg", className="w-full md:w-auto">
               Get Custom Quote</Button>
-
         {/* Contact */}
         <div className="text-center bg-muted rounded-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">Ready to Get Started?</h2>

@@ -1,24 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createPulsedOrchestrator } from '@/lib/agents/PulsedAgentOrchestrator';
-
 let orchestratorInstance: any = null;
-
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): void {
   try {
     const updates = await request.json();
-
     // Get or create pulsed orchestrator instance
     if (!orchestratorInstance) {
       orchestratorInstance = createPulsedOrchestrator();
       await orchestratorInstance.initialize();
     }
-
     // Update configuration
     orchestratorInstance.updatePulseConfig(updates);
-
     return NextResponse.json({
-      success: true,
-      message: 'Pulse configuration updated',
+      success: true;
+      message: 'Pulse configuration updated';
       config: updates;
     }});
   } catch (error) {

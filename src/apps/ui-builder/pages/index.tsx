@@ -1,6 +1,5 @@
 // apps/ui-builder/pages/index.tsx
 'use client';
-
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import BuilderCanvas from '../components/BuilderCanvas';
@@ -10,8 +9,7 @@ import CodeViewer from '../components/CodeViewer';
 import Toolbar from '../components/Toolbar';
 import DeploymentPanel from '../components/DeploymentPanel';
 import AssistantPrompt from '../components/AssistantPrompt';
-
-export default function UIBuilderHome() {
+export default function UIBuilderHome(): void {
   return (
     <div className="flex h-screen w-screen overflow-hidden"></div>
       <div className="w-64 flex flex-col"></div>

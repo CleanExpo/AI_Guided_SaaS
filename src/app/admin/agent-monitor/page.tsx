@@ -1,6 +1,5 @@
 'use client'
-
-import React from 'react'
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AgentPulseMonitor } from '@/components/AgentPulseMonitor';
@@ -8,7 +7,7 @@ import { ContainerMonitor } from '@/components/ContainerMonitor';
 import { SystemMetrics } from '@/components/health/SystemMetrics';
 import { TaskQueueVisualizer } from '@/components/health/TaskQueueVisualizer';
 import { AlertsPanel } from '@/components/health/AlertsPanel';
-export default function AgentMonitorPage() {
+export default function AgentMonitorPage(): void {
   return (
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
@@ -19,7 +18,6 @@ export default function AgentMonitorPage() {
           </p>
         </div>
       </div>
-
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -28,7 +26,6 @@ export default function AgentMonitorPage() {
           <TabsTrigger value="metrics">Metrics</TabsTrigger>
           <TabsTrigger value="alerts">Alerts</TabsTrigger>
         </TabsList>
-
         <TabsContent value="overview" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Card>
@@ -40,7 +37,6 @@ export default function AgentMonitorPage() {
                 <p className="text-xs text-muted-foreground">2 throttled, 1 offline</p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium">Task Queue</CardTitle>
@@ -50,17 +46,15 @@ export default function AgentMonitorPage() {
                 <p className="text-xs text-muted-foreground">8 high priority</p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium">System Load</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">68%</div>
-                <p className="text-xs text-muted-foreground">CPU: 72%, Memory: 64%</p>
+                <p className="text-xs text-muted-foreground">CPU: 72%; Memory: 64%</p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium">Pulse Status</CardTitle>
@@ -71,21 +65,17 @@ export default function AgentMonitorPage() {
               </CardContent>
             </Card>
           </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <SystemMetrics />
             <TaskQueueVisualizer />
           </div>
         </TabsContent>
-
         <TabsContent value="pulse">
           <AgentPulseMonitor />
         </TabsContent>
-
         <TabsContent value="containers">
           <ContainerMonitor />
         </TabsContent>
-
         <TabsContent value="metrics">
           <div className="grid grid-cols-1 gap-4">
             <Card>
@@ -105,7 +95,6 @@ export default function AgentMonitorPage() {
             </Card>
           </div>
         </TabsContent>
-
         <TabsContent value="alerts">
           <AlertsPanel />
         </TabsContent>

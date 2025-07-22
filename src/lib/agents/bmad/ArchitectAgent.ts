@@ -2,7 +2,6 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
 import { RequirementAnalysis } from './AnalystAgent';
 import { ProjectPlan } from './ProjectManagerAgent';
-
 export interface SystemArchitecture {
   overview: ArchitectureOverview;
   components: Component[];
@@ -15,7 +14,6 @@ export interface SystemArchitecture {
   technicalDecisions: TechnicalDecision[];
   architecturalPatterns: string[]
 };
-
 export interface ArchitectureOverview {
   style: string; // e.g., 'microservices', 'monolithic', 'serverless'
   principles: string[];
@@ -23,14 +21,12 @@ export interface ArchitectureOverview {
   qualityAttributes: QualityAttribute[];
   diagram: string; // ASCII or description for now
 };
-
 export interface QualityAttribute {
   name: string;
   requirement: string;
   approach: string;
   tradeoffs: string[]
 };
-
 export interface Component {
   id: string;
   name: string;
@@ -41,14 +37,12 @@ export interface Component {
   dependencies: string[];
   scalability: string
 };
-
 export interface ComponentInterface {
   name: string;
   type: 'REST' | 'GraphQL' | 'WebSocket' | 'gRPC' | 'Event';
   description: string;
   methods: InterfaceMethod[]
 };
-
 export interface InterfaceMethod {
   name: string;
   httpMethod?: string;
@@ -57,21 +51,18 @@ export interface InterfaceMethod {
   output: string;
   description: string
 };
-
 export interface DataModel {
   entities: Entity[];
   relationships: Relationship[];
   dataFlow: DataFlow[];
   storageStrategy: StorageStrategy
 };
-
 export interface Entity {
   name: string;
   description: string;
   attributes: Attribute[];
   businessRules: string[]
 };
-
 export interface Attribute {
   name: string;
   type: string;
@@ -80,14 +71,12 @@ export interface Attribute {
   indexed?: boolean;
   description: string
 };
-
 export interface Relationship {
   from: string;
   to: string;
   type: 'one-to-one' | 'one-to-many' | 'many-to-many';
   description: string
 };
-
 export interface DataFlow {
   name: string;
   source: string;
@@ -96,13 +85,11 @@ export interface DataFlow {
   frequency: string;
   volume: string
 };
-
 export interface StorageStrategy {
   databases: Database[];
   caching: CachingStrategy;
   fileStorage: FileStorageStrategy
 };
-
 export interface Database {
   name: string;
   type: 'relational' | 'document' | 'key-value' | 'graph' | 'time-series';
@@ -110,19 +97,16 @@ export interface Database {
   purpose: string;
   entities: string[]
 };
-
 export interface CachingStrategy {
   levels: string[];
   technologies: string[];
   ttl: Record<string, number>;
 };
-
 export interface FileStorageStrategy {
   type: string;
   provider: string;
   structure: string
 };
-
 export interface APIDesign {
   style: 'REST' | 'GraphQL' | 'gRPC' | 'Mixed';
   versioning: string;
@@ -132,7 +116,6 @@ export interface APIDesign {
   documentation: string;
   endpoints: APIEndpoint[]
 };
-
 export interface APIEndpoint {
   path: string;
   method: string;
@@ -142,7 +125,6 @@ export interface APIEndpoint {
   responseSchema: any;
   errorHandling: string[]
 };
-
 export interface Infrastructure {
   hostingPlatform: string;
   computeResources: ComputeResource[];
@@ -150,7 +132,6 @@ export interface Infrastructure {
   monitoring: MonitoringStrategy;
   backup: BackupStrategy
 };
-
 export interface ComputeResource {
   name: string;
   type: string;
@@ -158,7 +139,6 @@ export interface ComputeResource {
   scalingPolicy: string;
   estimatedCost: string
 };
-
 export interface NetworkingConfig {
   vpc: boolean;
   subnets: string[];
@@ -166,28 +146,24 @@ export interface NetworkingConfig {
   cdn: string;
   dns: string
 };
-
 export interface MonitoringStrategy {
   tools: string[];
   metrics: string[];
   alerts: Alert[];
   dashboards: string[]
 };
-
 export interface Alert {
   name: string;
   condition: string;
   severity: 'critical' | 'warning' | 'info';
   action: string
 };
-
 export interface BackupStrategy {
   frequency: string;
   retention: string;
   type: string;
   location: string
 };
-
 export interface SecurityArchitecture {
   principles: string[];
   threats: ThreatModel[];
@@ -195,7 +171,6 @@ export interface SecurityArchitecture {
   compliance: string[];
   dataProtection: DataProtection
 };
-
 export interface ThreatModel {
   threat: string;
   category: string;
@@ -203,38 +178,32 @@ export interface ThreatModel {
   impact: 'high' | 'medium' | 'low';
   mitigation: string[]
 };
-
 export interface SecurityControl {
   name: string;
   type: string;
   implementation: string;
   scope: string[]
 };
-
 export interface DataProtection {
   encryption: EncryptionStrategy;
   privacy: PrivacyMeasure[];
   accessControl: AccessControlModel
 };
-
 export interface EncryptionStrategy {
   atRest: string;
   inTransit: string;
   keyManagement: string
 };
-
 export interface PrivacyMeasure {
   name: string;
   description: string;
   implementation: string
 };
-
 export interface AccessControlModel {
   type: string;
   implementation: string;
   roles: string[]
 };
-
 export interface Integration {
   name: string;
   type: 'API' | 'Webhook' | 'SDK' | 'Database' | 'Message Queue';
@@ -244,7 +213,6 @@ export interface Integration {
   dataFormat: string;
   errorHandling: string
 };
-
 export interface DeploymentStrategy {
   approach: string;
   environments: Environment[];
@@ -252,21 +220,18 @@ export interface DeploymentStrategy {
   rollbackStrategy: string;
   blueGreenDeployment: boolean
 };
-
 export interface Environment {
   name: string;
   purpose: string;
   configuration: Record<string, any>;
   resources: string[]
 };
-
 export interface PipelineStage {
   name: string;
   actions: string[];
   triggers: string[];
   approvals: string[]
 };
-
 export interface TechnicalDecision {
   decision: string;
   rationale: string;
@@ -274,13 +239,12 @@ export interface TechnicalDecision {
   tradeoffs: string[];
   risks: string[]
 };
-
 export class ArchitectAgent extends Agent {
   constructor() {
     super({
-      id: 'architect-agent',
-      name: 'System Architect',
-      role: 'Design system architecture and technical solutions',
+      id: 'architect-agent';
+      name: 'System Architect';
+      role: 'Design system architecture and technical solutions';
       description:
         'Expert in system design, architectural patterns, technology selection, and infrastructure planning. Creates comprehensive technical architectures.',
       capabilities: [
@@ -303,34 +267,29 @@ export class ArchitectAgent extends Agent {
       temperature: 0.4;
     }});
   }
-
   protected async execute(input: string): Promise<AgentResult> {
     try {
       this.think('Starting architecture design process...');
-
       // Get inputs from other agents
       const requirements = this.getSharedMemory('primary-requirements') || [];
       const userStories = this.getSharedMemory('user-stories') || [];
       const constraints = this.getSharedMemory('technical-constraints') || [];
       const timeline = this.getSharedMemory('project-timeline');
       const qualityStandards = this.getSharedMemory('quality-standards') || [];
-
       this.observe('Retrieved inputs from other agents', {
-        requirementCount: requirements.length,
+        requirementCount: requirements.length;
         constraintCount: constraints.length;
       }});
-
       // Step, 1: Define architecture overview and style
-      const overview = await this.defineArchitectureOverview(
+      const overview = await this.defineArchitectureOverview(;
         input,
         requirements,
         constraints,
         qualityStandards
       );
       this.observe('Defined architecture overview', overview);
-
       // Step, 2: Design system components
-      const components = await this.designComponents(
+      const components = await this.designComponents(;
         requirements,
         userStories,
         overview.style
@@ -338,9 +297,8 @@ export class ArchitectAgent extends Agent {
       this.observe('Designed system components', {
         componentCount: components.length;
       }});
-
       // Step, 3: Create data model
-      const dataModel = await this.createDataModel(
+      const dataModel = await this.createDataModel(;
         requirements,
         userStories,
         components
@@ -348,9 +306,8 @@ export class ArchitectAgent extends Agent {
       this.observe('Created data model', {
         entityCount: dataModel.entities.length;
       }});
-
       // Step, 4: Design APIs
-      const apiDesign = await this.designAPIs(
+      const apiDesign = await this.designAPIs(;
         components,
         dataModel,
         userStories
@@ -358,17 +315,15 @@ export class ArchitectAgent extends Agent {
       this.observe('Designed APIs', {
         endpointCount: apiDesign.endpoints.length;
       }});
-
       // Step, 5: Plan infrastructure
-      const infrastructure = await this.planInfrastructure(
+      const infrastructure = await this.planInfrastructure(;
         components,
         overview,
         timeline
       );
       this.observe('Planned infrastructure', infrastructure);
-
       // Step, 6: Design security architecture
-      const security = await this.designSecurity(
+      const security = await this.designSecurity(;
         requirements,
         components,
         dataModel
@@ -376,23 +331,20 @@ export class ArchitectAgent extends Agent {
       this.observe('Designed security architecture', {
         threatCount: security.threats.length;
       }});
-
       // Step, 7: Plan integrations
       const integrations = await this.planIntegrations(input, components);
       this.observe('Planned integrations', {
         integrationCount: integrations.length;
       }});
-
       // Step, 8: Define deployment strategy
-      const deploymentStrategy = await this.defineDeploymentStrategy(
+      const deploymentStrategy = await this.defineDeploymentStrategy(;
         infrastructure,
         components,
         timeline
       );
       this.observe('Defined deployment strategy', deploymentStrategy);
-
       // Step, 9: Document technical decisions
-      const technicalDecisions = await this.documentDecisions(
+      const technicalDecisions = await this.documentDecisions(;
         overview,
         components,
         infrastructure
@@ -400,7 +352,6 @@ export class ArchitectAgent extends Agent {
       this.observe('Documented technical decisions', {
         decisionCount: technicalDecisions.length;
       }});
-
       // Compile final architecture
       const architecture: SystemArchitecture = {
         overview,
@@ -413,240 +364,188 @@ export class ArchitectAgent extends Agent {
         deploymentStrategy,
         technicalDecisions,
         architecturalPatterns: this.identifyPatterns(components, overview)};
-
       // Store architecture in artifacts
       this.setArtifact('system-architecture', architecture);
-
       // Share key architectural decisions with other agents
       this.setSharedMemory('tech-stack', this.extractTechStack(components));
       this.setSharedMemory('api-endpoints', apiDesign.endpoints);
       this.setSharedMemory('data-entities', dataModel.entities);
       this.setSharedMemory('deployment-config', deploymentStrategy);
-
       return {
-        success: true,
-        output: architecture,
-        messages: this.messages,
-        artifacts: this.context.artifacts,
+        success: true;
+        output: architecture;
+        messages: this.messages;
+        artifacts: this.context.artifacts;
         nextSteps: [
           'Frontend team to implement UI components',
           'Backend team to implement services',
           'DevOps to set up infrastructure',
           'QA to create test strategies based on architecture',
         ],
-        confidence: 0.93,
+        confidence: 0.93;
       };
     } catch (error) {
-      this.think(`Error during architecture, design: ${error}`);
+      this.think(`Error during architecture, design: ${error}`);`
       throw error;
     }
   }
-
   private async defineArchitectureOverview(
-    input: string,
-    requirements: string[],
-    constraints: string[],
+    input: string;
+    requirements: string[];
+    constraints: string[];
     qualityStandards: string[]
   ): Promise<ArchitectureOverview> {
-    const prompt = `Design the high-level architecture for this, project:
-
-Project, Description:
+    const prompt = `Design the high-level architecture for this, project: Project; Description:`
 ${input}
-
 Key, Requirements:
 ${requirements.slice(0, 10).join('\n')}
-
 Constraints:
 ${constraints.join('\n')}
-
 Quality, Standards:
 ${qualityStandards.join('\n')}
-
 Provide:
 1. Architecture style (microservices, monolithic, serverless, etc.)
 2. Core architectural principles
 3. Key constraints to consider
 4. Quality attributes with approaches
 5. High-level architecture description
-
-Format as JSON ArchitectureOverview object.`;
-
+Format as JSON ArchitectureOverview object.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.4,
+      model: this.config.model;
+      temperature: 0.4;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private async designComponents(
-    requirements: string[],
-    userStories: any[],
+    requirements: string[];
+    userStories: any[];
     architectureStyle: string
   ): Promise<Component[]> {
-    const prompt = `Design system components based, on:
-
-Architecture, Style: ${architectureStyle}
+    const prompt = `Design system components based, on: Architecture; Style: ${architectureStyle}`
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
-
 User Stories, Summary:
 ${userStories
   .slice(0, 10)
   .map(s => s.title)
   .join('\n')}
-
 Create components, with:
 - Clear responsibilities
 - Technology choices
 - Interfaces
 - Dependencies
 - Scalability approach
-
 Include frontend, backend, services, and data components as needed.
-
-Format as JSON array of Component objects.`;
-
+Format as JSON array of Component objects.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.4,
+      model: this.config.model;
+      temperature: 0.4;
       responseFormat: 'json';
     }});
-
     const components = JSON.parse(response);
     return components.map((c, index: number) => ({
       ...c,
-      id: `comp-${index + 1}`;
+      id: `comp-${index + 1}`;`
     }}));
   }
-
   private async createDataModel(
-    requirements: string[],
-    userStories: any[],
+    requirements: string[];
+    userStories: any[];
     components: Component[]
   ): Promise<DataModel> {
-    const prompt = `Create a comprehensive data, model:
-
+    const prompt = `Create a comprehensive data, model:;`
 ,
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
-
 Components needing, data:
 ${components
   .filter(c => c.type === 'backend' || c.type === 'database')
   .map(c => c.name)
   .join(', ')}
-
 Design:
 1. Core entities with attributes
 2. Relationships between entities
 3. Data flow patterns
 4. Storage strategy (databases, caching, files)
-
 Consider scalability, performance, and data integrity.
-
-Format as JSON DataModel object.`;
-
+Format as JSON DataModel object.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.3,
+      model: this.config.model;
+      temperature: 0.3;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private async designAPIs(
-    components: Component[],
-    dataModel: DataModel,
+    components: Component[];
+    dataModel: DataModel;
     userStories: any[]
   ): Promise<APIDesign> {
-    const prompt = `Design comprehensive API, architecture:
-
-Components with, APIs:
+    const prompt = `Design comprehensive API, architecture: Components with; APIs:`
 ${JSON.stringify(
   components
     .filter(c => c.interfaces.length > 0)
     .map(c => ({
-      name: c.name,
+      name: c.name;
       interfaces: c.interfaces;
     }})),
   null,
   2
 )}
-
 Data, Entities:
 ${dataModel.entities.map(e => e.name).join(', ')}
-
 Key User, Stories:
 ${userStories
   .slice(0, 10)
   .map(s => s.title)
   .join('\n')}
-
 Design:
 1. API style and standards
 2. Authentication and authorization approach
 3. Key endpoints with schemas
 4. Versioning strategy
 5. Rate limiting approach
-
-Format as JSON APIDesign object.`;
-
+Format as JSON APIDesign object.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.4,
+      model: this.config.model;
+      temperature: 0.4;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private async planInfrastructure(
-    components: Component[],
+    components: Component[];
     overview: ArchitectureOverview,
     timeline
   ): Promise<Infrastructure> {
-    const prompt = `Plan infrastructure for the, system:
-
-Architecture, Style: ${overview.style}
+    const prompt = `Plan infrastructure for the, system: Architecture; Style: ${overview.style}`
 Components:
-${components.map(c => `${c.name} (${c.type})`).join('\n')}
-
+${components.map(c => `${c.name} (${c.type})`).join('\n')}`
 Quality, Attributes:
-${overview.qualityAttributes.map(q => `${q.name}: ${q.requirement}`).join('\n')}
-
+${overview.qualityAttributes.map(q => `${q.name}: ${q.requirement}`).join('\n')}`
 Timeline: ${timeline?.totalDuration || 'Not specified'}
-
 Design:
 1. Hosting platform choice
 2. Compute resources needed
 3. Networking configuration
 4. Monitoring strategy
 5. Backup approach
-
 Consider cost, scalability, and operational complexity.
-
-Format as JSON Infrastructure object.`;
-
+Format as JSON Infrastructure object.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.4,
+      model: this.config.model;
+      temperature: 0.4;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private async designSecurity(
-    requirements: string[],
-    components: Component[],
+    requirements: string[];
+    components: Component[];
     dataModel: DataModel
   ): Promise<SecurityArchitecture> {
-    const prompt = `Design comprehensive security, architecture:
-
-Security-related, Requirements:
+    const prompt = `Design comprehensive security, architecture: Security-related; Requirements:`
 ${requirements
   .filter(
     r =>
@@ -655,10 +554,8 @@ ${requirements
       r.toLowerCase().includes('privacy')
   )
   .join('\n')}
-
 Components:
 ${components.map(c => c.name).join(', ')}
-
 Sensitive, Data:
 ${dataModel.entities
   .filter(
@@ -669,37 +566,28 @@ ${dataModel.entities
   )
   .map(e => e.name)
   .join(', ')}
-
 Include:
 1. Security principles
 2. Threat modeling
 3. Security controls
 4. Compliance requirements
 5. Data protection strategy
-
-Format as JSON SecurityArchitecture object.`;
-
+Format as JSON SecurityArchitecture object.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.3,
+      model: this.config.model;
+      temperature: 0.3;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private async planIntegrations(
-    input: string,
+    input: string;
     components: Component[]
   ): Promise<Integration[]> {
-    const prompt = `Identify and plan external, integrations:
-
-Project, Description:
+    const prompt = `Identify and plan external, integrations: Project; Description:`
 ${input}
-
 System, Components:
-${components.map(c => `${c.name}: ${c.responsibility}`).join('\n')}
-
+${components.map(c => `${c.name}: ${c.responsibility}`).join('\n')}`
 Identify potential integrations, for:
 - Payment processing
 - Authentication providers
@@ -708,138 +596,108 @@ Identify potential integrations, for:
 - Storage services
 - Third-party APIs
 - Monitoring services
-
-Format as JSON array of Integration objects.`;
-
+Format as JSON array of Integration objects.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.4,
+      model: this.config.model;
+      temperature: 0.4;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private async defineDeploymentStrategy(
-    infrastructure: Infrastructure,
+    infrastructure: Infrastructure;
     components: Component[],
     timeline
   ): Promise<DeploymentStrategy> {
-    const prompt = `Define deployment, strategy:
-
+    const prompt = `Define deployment, strategy:;`
 ,
 Infrastructure:
 ${JSON.stringify(infrastructure.hostingPlatform)}
-
 Components to, Deploy:
-${components.map(c => `${c.name} (${c.type})`).join('\n')}
-
+${components.map(c => `${c.name} (${c.type})`).join('\n')}`
 Timeline, Constraints:
 ${timeline?.phases?.map(p => p.name).join(', ') || 'Not specified'}
-
 Design:
 1. Deployment approach (CI/CD, manual, hybrid)
 2. Environment setup (dev, staging, prod)
 3. Pipeline stages
 4. Rollback strategy
 5. Blue-green deployment feasibility
-
-Format as JSON DeploymentStrategy object.`;
-
+Format as JSON DeploymentStrategy object.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.4,
+      model: this.config.model;
+      temperature: 0.4;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private async documentDecisions(
-    overview: ArchitectureOverview,
-    components: Component[],
+    overview: ArchitectureOverview;
+    components: Component[];
     infrastructure: Infrastructure
   ): Promise<TechnicalDecision[]> {
-    const prompt = `Document key technical decisions, made:
-
-Architecture, Style: ${overview.style}
+    const prompt = `Document key technical decisions, made: Architecture; Style: ${overview.style}`
 Key, Technologies:
 ${[...new Set(components.flatMap(c => c.technology))].join(', ')}
-
 Infrastructure, Platform: ${infrastructure.hostingPlatform}
-
 For each major decision, document:
 1. The decision made
 2. Rationale
 3. Alternatives considered
 4. Tradeoffs
 5. Risks
-
 Focus on decisions that will significantly impact the project.
-
-Format as JSON array of TechnicalDecision objects.`;
-
+Format as JSON array of TechnicalDecision objects.`;`
     const response = await generateAIResponse(prompt, {
-      model: this.config.model,
-      temperature: 0.4,
+      model: this.config.model;
+      temperature: 0.4;
       responseFormat: 'json';
     }});
-
     return JSON.parse(response);
   }
-
   private identifyPatterns(
-    components: Component[],
+    components: Component[];
     overview: ArchitectureOverview
   ): string[] {
     const patterns = [];
-
     // Identify patterns based on architecture style
     if (overview.style.includes('microservices')) {
       patterns.push('Service Discovery', 'API Gateway', 'Circuit Breaker');
     }
-
     // Check for common patterns in components
     const hasDatabase = components.some(c => c.type === 'database');
-    const hasCache = components.some(c =>
+    const hasCache = components.some(c =>;
       c.technology.some(
         t =>
           t.toLowerCase().includes('redis') || t.toLowerCase().includes('cache')
       )
     );
-
     if (hasDatabase && hasCache) {
       patterns.push('Cache-Aside Pattern');
     }
-
     // Check for event-driven patterns
     if (components.some(c => c.interfaces.some(i => i.type === 'Event'))) {
       patterns.push('Event Sourcing', 'CQRS');
     }
-
     // Add more pattern detection logic as needed
     return [...new Set(patterns)];
   }
-
   private extractTechStack(components: Component[]): Record<string, string[]> {
     const techStack: Record<string, string[]> = {
-      frontend: [],
-      backend: [],
-      database: [],
-      services: [],
+      frontend: [];
+      backend: [];
+      database: [];
+      services: [];
     };
-
     components.forEach(component => {
       if (techStack[component.type]) {
         techStack[component.type].push(...component.technology);
       }
     });
-
     // Remove duplicates
     Object.keys(techStack).forEach(key => {
       techStack[key] = [...new Set(techStack[key])];
     });
-
     return techStack;
   }
 }

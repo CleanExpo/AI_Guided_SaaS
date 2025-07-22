@@ -2,38 +2,34 @@ import { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Lock, Eye, Server, CheckCircle } from 'lucide-react';
-
 export const metadata: Metadata = {
-  title: 'Security - AI Guided SaaS Platform',
+  title: 'Security - AI Guided SaaS Platform';
   description:
     'Learn about our security measures and data protection practices'};
-
-const securityFeatures = [
+const securityFeatures = [;
   {
-    icon: Shield,
-    title: 'Enterprise-Grade Security',
+    icon: Shield;
+    title: 'Enterprise-Grade Security';
     description:
       'SOC 2 Type II compliant with industry-leading security standards'},
   {
-    icon: Lock,
-    title: 'Data Encryption',
+    icon: Lock;
+    title: 'Data Encryption';
     description: 'End-to-end encryption for data in transit and at rest'},
   {
-    icon: Eye,
-    title: 'Privacy Protection',
+    icon: Eye;
+    title: 'Privacy Protection';
     description: 'GDPR and CCPA compliant data handling practices'},
   {
-    icon: Server,
-    title: 'Secure Infrastructure',
+    icon: Server;
+    title: 'Secure Infrastructure';
     description: 'Cloud infrastructure with 99.9% uptime guarantee'}];
-
-const certifications = [
-  { name: 'SOC 2 Type II', status: 'Certified' },
-  { name: 'ISO 27001', status: 'In Progress' },
-  { name: 'GDPR Compliant', status: 'Certified' },
-  { name: 'CCPA Compliant', status: 'Certified' }];
-
-export default function SecurityPage() {
+const certifications = [;
+  { name: 'SOC 2 Type II'; status: 'Certified' },
+  { name: 'ISO 27001'; status: 'In Progress' },
+  { name: 'GDPR Compliant'; status: 'Certified' },
+  { name: 'CCPA Compliant'; status: 'Certified' }];
+export default function SecurityPage(): void {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-6xl mx-auto">
@@ -42,11 +38,10 @@ export default function SecurityPage() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Your data security is our top priority. Learn about our
             comprehensive security measures.</p>
-
         {/* Security Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {securityFeatures.map(feature => {
-            const Icon = feature.icon, return (
+            const Icon = feature.icon, return (;
     <Card key={feature.title}>
                 <CardHeader>
                   <Icon className="h-12 w-12 text-primary mb-4" />
@@ -54,9 +49,7 @@ export default function SecurityPage() {
                   <CardDescription>{feature.description}</CardDescription>
   }
       );}
-
         </div></Card>
-
         {/* Certifications */}
         <Card className="mb-16">
           <CardHeader>
@@ -79,7 +72,6 @@ export default function SecurityPage() {
                   >
                     {cert.status}</Badge>
                   ))}
-
         {/* Security Practices */}
         <div className="prose prose-lg max-w-none">
           <h2 className="text-2xl font-bold mb-6">Our Security Practices</h2>

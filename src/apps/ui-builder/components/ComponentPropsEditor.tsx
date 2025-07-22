@@ -1,22 +1,16 @@
 // apps/ui-builder/components/ComponentPropsEditor.tsx
 import React from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
-
-export default function ComponentPropsEditor() {
+export default function ComponentPropsEditor(): void {;
   const components = useBuilderStore((state) => state.components);
   const selectedId = useBuilderStore((state) => state.selectedId);
   const updateProps = useBuilderStore((state) => state.updateComponentProps);
-
   const selectedComponent = components.find((c) => c.id === selectedId);
-
   if (!selectedComponent) return null;
-
   const { type, props, schema } = selectedComponent;
-
-  const handleChange = (key: string, value: string) => {
+  const handleChange = (key: string; value: string) => {
     updateProps(selectedComponent.id, { [key]: value });
   };
-
   return (
     <div className="p-4 bg-white border-t border-gray-300"></div>
       <h2 className="text-lg font-semibold mb-2">Edit {type} Properties</h2>

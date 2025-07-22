@@ -8,8 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Shield, Activity, BarChart3, AlertTriangle, CheckCircle, Search, Eye, Edit, UserCheck, UserX, Flag, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { adminService, SystemStats, UserManagement, ContentModeration, SystemConfiguration, AdminActivity } from '@/lib/admin';
-
-export default function AdminPanel() {
+export default function AdminPanel(): void {
   const [adminUser, setAdminUser] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
@@ -21,7 +20,6 @@ export default function AdminPanel() {
   const [searchTerm, setSearchTerm] = useState('');
   const [userFilter, setUserFilter] = useState('all');
   const [contentFilter, setContentFilter] = useState('all');
-
   useEffect(() => {
     // Load admin user from localStorage
     const adminUserData = localStorage.getItem('admin-user');
@@ -33,25 +31,21 @@ export default function AdminPanel() {
       }
     }
   }, []);
-
   useEffect(() => {
     loadAdminData();
   }, []);
-
   const loadAdminData = async () => {
     setLoading(true);
     try {
       await adminService.initialize();
-
       // Load all admin data
-      const [statsData, usersData, contentData, configData, activityData] =
+      const [statsData, usersData, contentData, configData, activityData] =;
         await Promise.all([
           adminService.getSystemStats(),
           adminService.getUsers(1, 50),
           adminService.getContentForModeration(1, 20),
           adminService.getSystemConfiguration(),
           adminService.getAdminActivity(1, 50)]);
-
       setSystemStats(statsData);
       setUsers(usersData.users);
       setContent(contentData.content);
@@ -63,9 +57,8 @@ export default function AdminPanel() {
       setLoading(false);
     }
   };
-
-  const handleUserStatusUpdate = async (
-    userId: string,
+  const handleUserStatusUpdate = async (;
+    userId: string;
     status: 'active' | 'suspended' | 'deleted'
   ) => {
     try {
@@ -79,9 +72,8 @@ export default function AdminPanel() {
       console.error('Error updating user status:', error);
     }
   };
-
-  const handleContentModeration = async (
-    contentId: string,
+  const handleContentModeration = async (;
+    contentId: string;
     action: 'approve' | 'reject' | 'flag'
   ) => {
     try {
@@ -95,7 +87,6 @@ export default function AdminPanel() {
       console.error('Error moderating content:', error);
     }
   };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
@@ -115,39 +106,34 @@ export default function AdminPanel() {
       default: return 'bg-gray-100 text-gray-800';
     }}
   };
-
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'}).format(amount);
+      style: 'currency';
+      currency: 'USD'}).format(amount)
   };
-
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'}).format(new Date(date));
+      year: 'numeric';
+      month: 'short';
+      day: 'numeric';
+      hour: '2-digit';
+      minute: '2-digit'}).format(new Date(date))
   };
-
   const filteredUsers = users.filter(user => {
-    const matchesSearch =
+    const matchesSearch =;
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = userFilter === 'all' || user.status === userFilter;
     return matchesSearch && matchesFilter;
   });
-
   const filteredContent = content.filter(item => {
-    const matchesSearch =
+    const matchesSearch =;
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.author.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter =
+    const matchesFilter =;
       contentFilter === 'all' || item.status === contentFilter;
     return matchesSearch && matchesFilter;
   });
-
   if (loading) {
     return (
     <div className="flex items-center justify-center min-h-screen">
@@ -155,11 +141,9 @@ export default function AdminPanel() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading admin panel...</p>
   }
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -170,8 +154,6 @@ export default function AdminPanel() {
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
                 Welcome, {adminUser?.name || 'Admin'}
-              
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-5">
@@ -181,9 +163,8 @@ export default function AdminPanel() {
             <TabsTrigger value="system">System</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
           </TabsList>
-
           {/* Overview Tab */}
-          <TabsContent value="overview" className="space-y-6">
+          <TabsContent value="overview", className="space-y-6">
             {systemStats && (
               <>
                 {/* System Health Alert */}
@@ -204,7 +185,6 @@ export default function AdminPanel() {
                       ' - Attention required'}
                   </AlertDescription>
                 </Alert>
-
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <Card>
@@ -223,7 +203,6 @@ export default function AdminPanel() {
                       </p>
                     </CardContent>
                   </Card>
-
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
@@ -240,7 +219,6 @@ export default function AdminPanel() {
                       </p>
                     </CardContent>
                   </Card>
-
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
@@ -257,7 +235,6 @@ export default function AdminPanel() {
                       </p>
                     </CardContent>
                   </Card>
-
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
@@ -278,9 +255,8 @@ export default function AdminPanel() {
               </>
             )}
           </TabsContent>
-
           {/* Users Tab */}
-          <TabsContent value="users" className="space-y-6">
+          <TabsContent value="users", className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">User Management</h2>
               <div className="flex items-center space-x-2">
@@ -301,7 +277,6 @@ export default function AdminPanel() {
                   <option value="active">Active</option>
                   <option value="suspended">Suspended</option>
                   <option value="deleted">Deleted</option>
-
             <Card>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
@@ -327,10 +302,8 @@ export default function AdminPanel() {
                             <div>
                               <div className="text-sm font-medium text-gray-900">
                                 {user.name}
-
                               <div className="text-sm text-gray-500">
                                 {user.email}
-
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge
                               className={
@@ -370,12 +343,10 @@ export default function AdminPanel() {
                                 )}</UserCheck>
                               <Button size="sm" variant="outline">
                                 <Eye className="h-4 w-4" />
-                              
                       ))}
                     </tbody>
-
           {/* Content Tab */}
-          <TabsContent value="content" className="space-y-6">
+          <TabsContent value="content", className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Content Moderation</h2>
               <div className="flex items-center space-x-2">
@@ -397,7 +368,6 @@ export default function AdminPanel() {
                   <option value="approved">Approved</option>
                   <option value="rejected">Rejected</option>
                   <option value="flagged">Flagged</option>
-
             <div className="grid gap-4">
               {filteredContent.map(item => (</div>
                 <Card key={item.id}>
@@ -454,11 +424,9 @@ export default function AdminPanel() {
                           <Eye className="h-4 w-4" />
                         </Button>
               ))}
-
           {/* System Tab */}
-          <TabsContent value="system" className="space-y-6">
+          <TabsContent value="system", className="space-y-6">
             <h2 className="text-2xl font-bold">System Configuration</h2>
-
             <div className="grid gap-4">
               {configuration.map(config => (</div>
                 <Card key={config.id}>
@@ -473,7 +441,6 @@ export default function AdminPanel() {
                             <Badge className="bg-red-100 text-red-800">
                               Secret</Badge>
                           )}
-
                         <p className="text-sm text-gray-600 mb-2">
                           {config.description}</p>
                         <p className="text-sm text-gray-500">
@@ -489,11 +456,9 @@ export default function AdminPanel() {
                           <Edit className="h-4 w-4" />
                         </Button>
               ))}
-
           {/* Activity Tab */}
-          <TabsContent value="activity" className="space-y-6">
+          <TabsContent value="activity", className="space-y-6">
             <h2 className="text-2xl font-bold">Admin Activity Log</h2>
-
             <Card>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
@@ -524,7 +489,6 @@ export default function AdminPanel() {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {activity.ipAddress}</td>
                       ))}
-                    
   );
   }
 }

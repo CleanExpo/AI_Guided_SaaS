@@ -2,10 +2,8 @@
 import React from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 import ComponentRenderer from './ComponentRenderer';
-
-export default function PreviewPane() {
+export default function PreviewPane(): void {;
   const components = useBuilderStore((state) => state.components);
-
   return (
     <footer className="bg-gray-50 p-6 overflow-y-auto"></footer>
       <h2 className="text-lg font-semibold mb-4 text-gray-700">Live Preview</h2>
@@ -18,6 +16,5 @@ export default function PreviewPane() {
               <ComponentRenderer type={c.type} props={c.props} /></ComponentRenderer>
           ))
         )}
-
     );
 }

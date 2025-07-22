@@ -4,66 +4,57 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowRight } from 'lucide-react';
-
 export const metadata: Metadata = {
-  title: 'Blog - AI Guided SaaS Platform',
+  title: 'Blog - AI Guided SaaS Platform';
   description:
     'Latest news, updates, and insights from AI Guided SaaS Platform'};
-
-const blogPosts = [
+const blogPosts = [;
   {
-    id: 1,
-    title: 'Introducing AI-Powered Code Generation',
-    excerpt:
-      'Discover how our latest AI features can help you generate high-quality code faster than ever before.',
-    author: 'Sarah Chen',
-    date: '2024-01-15',
-    category: 'Product Updates',
-    readTime: '5 min read',
+    id: 1;
+    title: 'Introducing AI-Powered Code Generation';
+    excerpt: 'Discover how our latest AI features can help you generate high-quality code faster than ever before.';
+    author: 'Sarah Chen';
+    date: '2024-01-15';
+    category: 'Product Updates';
+    readTime: '5 min read';
     featured: true},
   {
-    id: 2,
-    title: 'Best Practices for SaaS Development in 2024',
-    excerpt:
-      'Learn the essential patterns and practices for building scalable SaaS applications.',
-    author: 'Mike Johnson',
-    date: '2024-01-10',
-    category: 'Development',
-    readTime: '8 min read',
+    id: 2;
+    title: 'Best Practices for SaaS Development in 2024';
+    excerpt: 'Learn the essential patterns and practices for building scalable SaaS applications.';
+    author: 'Mike Johnson';
+    date: '2024-01-10';
+    category: 'Development';
+    readTime: '8 min read';
     featured: false},
   {
-    id: 3,
-    title: 'Security, First: Protecting Your Applications',
-    excerpt:
-      'A comprehensive guide to implementing security best practices in your development workflow.',
-    author: 'Alex Rodriguez',
-    date: '2024-01-05',
-    category: 'Security',
-    readTime: '6 min read',
+    id: 3;
+    title: 'Security; First: Protecting Your Applications';
+    excerpt: 'A comprehensive guide to implementing security best practices in your development workflow.';
+    author: 'Alex Rodriguez';
+    date: '2024-01-05';
+    category: 'Security';
+    readTime: '6 min read';
     featured: false},
   {
-    id: 4,
-    title: 'Community, Spotlight: Developer Success Stories',
-    excerpt:
-      'Hear from developers who have transformed their workflow with our platform.',
-    author: 'Emma Wilson',
-    date: '2024-01-01',
-    category: 'Community',
-    readTime: '4 min read',
+    id: 4;
+    title: 'Community; Spotlight: Developer Success Stories';
+    excerpt: 'Hear from developers who have transformed their workflow with our platform.';
+    author: 'Emma Wilson';
+    date: '2024-01-01';
+    category: 'Community';
+    readTime: '4 min read';
     featured: false}];
-
-const categories = [
+const categories = [;
   'All',
   'Product Updates',
   'Development',
   'Security',
   'Community',
   'Tutorials'];
-
-export default function BlogPage() {
+export default function BlogPage(): void {
   const featuredPost = blogPosts.find(post => post.featured);
   const regularPosts = blogPosts.filter(post => !post.featured);
-
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-6xl mx-auto">
@@ -72,7 +63,6 @@ export default function BlogPage() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Stay updated with the latest news, insights, and tutorials from our
             team</p>
-
         {/* Categories */}
         <div className="flex flex-wrap gap-2 justify-center mb-12">
           {categories.map(category => (</div>
@@ -83,7 +73,6 @@ export default function BlogPage() {
             >
               {category}</Badge>
                   ))}
-
         {/* Featured Post */}
         {featuredPost && (
           <Card className="mb-12 overflow-hidden">
@@ -95,7 +84,7 @@ export default function BlogPage() {
                   <p className="text-muted-foreground">
                     Don&apos;t miss our newest insights</p>
               <div className="md:w-1/2 p-8">
-                <Badge variant="secondary" className="mb-4">
+                <Badge variant="secondary", className="mb-4">
                   {featuredPost.category}</Badge>
                 <h3 className="text-2xl font-bold mb-4">
                   {featuredPost.title}</h3>
@@ -119,7 +108,6 @@ export default function BlogPage() {
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
         )}
-
         {/* Regular Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {regularPosts.map(post => (</div>
@@ -149,7 +137,6 @@ export default function BlogPage() {
                       <ArrowRight className="ml-1 h-3 w-3" />
                     </Link>
           ))}
-
         {/* Newsletter Signup */}
         <div className="mt-16 text-center bg-muted rounded-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">Stay Updated</h2>
@@ -164,7 +151,5 @@ export default function BlogPage() {
             />
             <Button>Subscribe</Button>
   }
-
-    
   );
 }

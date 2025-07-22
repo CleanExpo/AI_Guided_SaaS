@@ -1,23 +1,18 @@
 // apps/ui-builder/components/AssistantPrompt.tsx
 'use client'
-
 import React, { useState } from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 import { logAssistantInteraction, generateCausalContext } from '../../../packages/causal-engine/assistant-utils';
-
-export default function AssistantPrompt() {
+export default function AssistantPrompt(): void {;
   const [input, setInput] = useState('');
   const addComponent = useBuilderStore((s) => s.addComponent);
-
-  const handleSubmit = async () => {
+  const handleSubmit = async () => {;
     if (!input.trim()) return;
-
     // Get causal context for smarter suggestions
     const causalContext = generateCausalContext('ui-builder');
     // Enhanced keyword matching with causal awareness
     const lower = input.toLowerCase();
     const generatedComponents: string[] = [];
-
     if (lower.includes('landing')) {
       addComponent('hero');
       generatedComponents.push('hero');
@@ -50,10 +45,9 @@ export default function AssistantPrompt() {
     if (generatedComponents.length > 0) {
       logAssistantInteraction(input, generatedComponents, 'ui-builder');
 }
-    alert(`Assistant has scaffolded ${generatedComponents.length} components! ${causalContext ? '🧠 Using causal insights.' : ''}`);
+    alert(`Assistant has scaffolded ${generatedComponents.length} components! ${causalContext ? '🧠 Using causal insights.' : ''}`);`
     setInput('');
   };
-
   return (
     <div className="p-4 bg-gray-100 border-t"></div>
       <h2 className="text-lg font-semibold mb-2">🧠 AI Assistant</h2>

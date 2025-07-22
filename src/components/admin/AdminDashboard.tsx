@@ -1,12 +1,11 @@
 'use client'
-
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Users, Activity, BarChart3, Database, TrendingUp, TrendingDown, Clock, AlertCircle, CheckCircle2, XCircle, ArrowUpRight, Server, Cpu, HardDrive, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
-interface DashboardStats {
+interface DashboardStats {;
   totalUsers: number;
   activeUsers: number;
   newUsersToday: number;
@@ -23,20 +22,17 @@ interface DashboardStats {
   thisMonth: number
   }
   recentActivity: Array<{
-    type: string, message: string, timestamp: string
+    type: string; message: string; timestamp: string
   }>
 };
-
-interface AdminDashboardProps {
+interface AdminDashboardProps {;
   stats: DashboardStats;
   adminUser: any;
   onNavigate: (section: string) => void
 };
-
-export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardProps) {
-  const [refreshing, setRefreshing] = useState(false)
-
-  const formatNumber = (num: number) => {
+export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardProps): void {;
+  const [refreshing, setRefreshing] = useState(false);
+  const formatNumber = (num: number) => {;
     if (num >= 1000000) {
       return (num / 1000000).toFixed(1) + 'M'
     } else if (num >= 1000) {
@@ -44,8 +40,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
     }
     return num.toString()
   }
-
-  const getHealthColor = (health: string) => {
+  const getHealthColor = (health: string) => {;
     switch (health.toLowerCase()) {
       case 'healthy':
         return 'text-green-600'
@@ -57,8 +52,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
         return 'text-gray-600'
     }
   }
-
-  const getActivityIcon = (type: string) => {
+  const getActivityIcon = (type: string) => {;
     switch (type) {
       case 'user_signup':
         return <Users className="h-4 w-4 text-blue-500" />
@@ -70,21 +64,18 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
         return <AlertCircle className="h-4 w-4 text-gray-500" />
     }
   }
-
-  const timeAgo = (timestamp: string) => {
-    const seconds = Math.floor((new Date().getTime() - new Date(timestamp).getTime()) / 1000)</AlertCircle>
+  const timeAgo = (timestamp: string) => {;
+    const seconds = Math.floor((new Date().getTime() - new Date(timestamp).getTime()) / 1000);</AlertCircle>
     if (seconds < 60) return 'Just now'
-    const minutes = Math.floor(seconds / 60)
-    if (minutes < 60) return `${minutes}m ago`
-    const hours = Math.floor(minutes / 60)
-    if (hours < 24) return `${hours}h ago`
-    return `${Math.floor(hours / 24)}d ago`
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago``
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago``
+    return `${Math.floor(hours / 24)}d ago``
   }
-
   return (
     <div className="space-y-8">
       {/* Key Metrics */}
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
         <Card className="hover:shadow-lg transition-shadow"></Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
@@ -92,50 +83,42 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
             <Users className="h-4 w-4 text-muted-foreground" /></Users>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.totalUsers)}
-
             <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
               <TrendingUp className="h-3 w-3 text-green-500 mr-1" /></TrendingUp>
               <span className="text-green-600">+{stats.newUsersToday} today</span>
             </div>
-
         <Card className="hover:shadow-lg transition-shadow"></Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" /></Activity>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.activeUsers)}
-
             <div className="flex items-center mt-1"></div>
-              <Progress 
-                value={(stats.activeUsers / stats.totalUsers) * 100} 
+              <Progress
+                value={(stats.activeUsers / stats.totalUsers) * 100}
                 className="h-2"
               /></Progress>
               <span className="ml-2 text-xs text-muted-foreground">
                 {((stats.activeUsers / stats.totalUsers) * 100).toFixed(1)}%</span>
-
         <Card className="hover:shadow-lg transition-shadow"></Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground" /></BarChart3>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.totalProjects)}
-
             <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
               <span className="text-purple-600">{stats.activeProjects} active</span>
             </div>
-
         <Card className="hover:shadow-lg transition-shadow"></Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">API Calls Today</CardTitle>
             <Globe className="h-4 w-4 text-muted-foreground" /></Globe>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.apiCalls.today)}
-
             <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
               <TrendingUp className="h-3 w-3 text-green-500 mr-1" /></TrendingUp>
               <span>+12% from yesterday</span>
             </div>
-
       {/* System Health & Performance */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
         <Card></Card>
@@ -151,7 +134,6 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
                 <CheckCircle2 className="h-4 w-4" /></CheckCircle2>
                 <span className="font-semibold capitalize">{stats.systemHealth}</span>
               </div>
-            
             <div className="space-y-3"></div>
               <div></div>
                 <div className="flex items-center justify-between mb-1"></div>
@@ -161,7 +143,6 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
                   <span className="text-sm font-medium">{stats.cpuUsage}</span>
                 </div>
                 <Progress value={parseInt(stats.cpuUsage)} className="h-2" /></Progress>
-              
               <div></div>
                 <div className="flex items-center justify-between mb-1"></div>
                   <span className="text-sm text-muted-foreground flex items-center gap-1"></span>
@@ -170,12 +151,10 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
                   <span className="text-sm font-medium">{stats.memoryUsage}</span>
                 </div>
                 <Progress value={parseInt(stats.memoryUsage)} className="h-2" /></Progress>
-              
               <div className="flex items-center justify-between pt-2"></div>
                 <span className="text-sm text-muted-foreground">Uptime</span>
                 <span className="text-sm font-medium text-green-600">{stats.uptime}</span>
               </div>
-
         {/* Recent Activity */}
         <Card></Card>
           <CardHeader></CardHeader>
@@ -188,24 +167,21 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
               {stats.recentActivity.map((activity, index) => (</div>
                 <div key={index} className="flex items-start gap-3">
                   {getActivityIcon(activity.type)}
-
                   <div className="flex-1 space-y-1"></div>
                     <p className="text-sm font-medium leading-none">
                       {activity.message}</p>
                     <p className="text-xs text-muted-foreground">
                       {timeAgo(activity.timestamp)}</p>))}
-              
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 className="w-full mt-4"
                 onClick={() => onNavigate('activity')}
               >
                 View All Activity</Button>
                 <ArrowUpRight className="h-4 w-4 ml-2" /></ArrowUpRight>
-
       {/* Quick Actions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-        <Card 
+        <Card
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-blue-500"
           onClick={() => onNavigate('users')}
         ></Card>
@@ -215,8 +191,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
                 <p className="text-sm font-medium text-muted-foreground">Manage</p>
                 <p className="text-xl font-semibold">Users</p>
               <Users className="h-8 w-8 text-blue-500" /></Users>
-
-        <Card 
+        <Card
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-purple-500"
           onClick={() => onNavigate('analytics')}
         ></Card>
@@ -226,8 +201,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
                 <p className="text-sm font-medium text-muted-foreground">View</p>
                 <p className="text-xl font-semibold">Analytics</p>
               <BarChart3 className="h-8 w-8 text-purple-500" /></BarChart3>
-
-        <Card 
+        <Card
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-green-500"
           onClick={() => onNavigate('database')}
         ></Card>
@@ -237,8 +211,7 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
                 <p className="text-sm font-medium text-muted-foreground">Monitor</p>
                 <p className="text-xl font-semibold">Database</p>
               <Database className="h-8 w-8 text-green-500" /></Database>
-
-        <Card 
+        <Card
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-orange-500"
           onClick={() => onNavigate('logs')}
         ></Card>

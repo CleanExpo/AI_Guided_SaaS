@@ -1,21 +1,17 @@
 'use client';
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Shield, Heart, Users, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
-
-export default function CommunityGuidelinesPage() {
+export default function CommunityGuidelinesPage(): void {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Header */}
-
       <div className="flex items-center gap-4">
         <Link href="/community">
           <Button variant="outline" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Community</ArrowLeft>
-
       {/* Guidelines Header */}
       <div className="text-center space-y-4">
         <div className="flex justify-center">
@@ -27,7 +23,6 @@ export default function CommunityGuidelinesPage() {
           Our community guidelines help create a welcoming, inclusive, and
           productive environment for all members of the AI Guided SaaS
           community.</p>
-
       {/* Core Values */}
       <div className="grid gap-6 md:grid-cols-3">
         <Card>
@@ -39,7 +34,6 @@ export default function CommunityGuidelinesPage() {
             <CardDescription>
               Treat everyone with kindness and respect, regardless of their
               background or experience level.</CardDescription>
-
         <Card>
           <CardHeader className="text-center">
             <div className="mx-auto p-2 bg-green-100 dark:bg-green-900/20 rounded-full w-fit">
@@ -49,7 +43,6 @@ export default function CommunityGuidelinesPage() {
             <CardDescription>
               Work together to help each other learn, grow, and build amazing
               things.</CardDescription>
-
         <Card>
           <CardHeader className="text-center">
             <div className="mx-auto p-2 bg-purple-100 dark:bg-purple-900/20 rounded-full w-fit">
@@ -59,7 +52,6 @@ export default function CommunityGuidelinesPage() {
             <CardDescription>
               Maintain a safe environment where everyone feels comfortable
               participating.</CardDescription>
-
       {/* Detailed Guidelines */}
       <div className="space-y-6">
         <Card>
@@ -86,7 +78,6 @@ export default function CommunityGuidelinesPage() {
                 <li>• Share your knowledge and help others when you can</li>
                 <li>
                   • Use appropriate channels for different types of discussions</li>
-
             <div className="space-y-3">
               <h4 className="font-semibold text-red-700 dark: text-red-300">
                 ❌ Don&apos;t:</h4>
@@ -99,7 +90,6 @@ export default function CommunityGuidelinesPage() {
                 <li>• Post off-topic content in focused channels</li>
                 <li>• Share copyrighted material without permission</li>
                 <li>• Impersonate other users or organizations</li>
-
         <Card>
           <CardHeader>
             <CardTitle>Code of Conduct</CardTitle>
@@ -121,7 +111,6 @@ export default function CommunityGuidelinesPage() {
                 <li>Age</li>
                 <li>Nationality</li>
                 <li>Experience level</li>
-
               <h4>Unacceptable Behavior</h4>
               <p>The following behaviors are considered, unacceptable:</p>
               <ul>
@@ -131,7 +120,6 @@ export default function CommunityGuidelinesPage() {
                 <li>Sharing inappropriate content</li>
                 <li>Doxxing or sharing private information</li>
                 <li>Unwelcome sexual attention or advances</li>
-
               <h4>Reporting Issues</h4>
               <p>
                 If you experience or witness unacceptable behavior, please
@@ -140,7 +128,6 @@ export default function CommunityGuidelinesPage() {
                 <li>Email: community@aiguidedSaaS.com</li>
                 <li>Use the report function in our platforms</li>
                 <li>Contact any community moderator directly</li>
-
         <Card>
           <CardHeader>
             <CardTitle>Content Guidelines</CardTitle>
@@ -157,7 +144,6 @@ export default function CommunityGuidelinesPage() {
                   <li>• Feature requests and feedback</li>
                   <li>• Community events and meetups</li>
                   <li>• Open source contributions</li>
-
               <div>
                 <h4 className="font-semibold mb-2">Restricted Content</h4>
                 <ul className="space-y-1 text-sm">
@@ -167,7 +153,6 @@ export default function CommunityGuidelinesPage() {
                   <li>• Copyrighted material</li>
                   <li>• Spam or repetitive posts</li>
                   <li>• Off-topic discussions</li>
-
         <Card>
           <CardHeader>
             <CardTitle>Moderation and Enforcement</CardTitle>
@@ -180,25 +165,21 @@ export default function CommunityGuidelinesPage() {
                 <p className="text-sm text-muted-foreground">
                   First-time violations typically result in a friendly warning
                   and guidance on community standards.</p>
-
               <div>
                 <h4 className="font-semibold mb-2">Temporary Restrictions</h4>
                 <p className="text-sm text-muted-foreground">
                   Repeated violations may result in temporary restrictions on
                   posting or commenting.</p>
-
               <div>
                 <h4 className="font-semibold mb-2">Permanent Removal</h4>
                 <p className="text-sm text-muted-foreground">
                   Severe violations or continued disregard for guidelines may
                   result in permanent removal from the community.</p>
-
               <div>
                 <h4 className="font-semibold mb-2">Appeals Process</h4>
                 <p className="text-sm text-muted-foreground">
                   If you believe a moderation action was taken in error, you can
                   appeal by contacting our team at appeals@aiguidedSaaS.com.</p>
-
         <Card>
           <CardHeader>
             <CardTitle>Getting Help</CardTitle>
@@ -226,7 +207,6 @@ export default function CommunityGuidelinesPage() {
                       tutorials</Link>{' '}
                     to get started
                   </li>
-
               <div className="space-y-3">
                 <h4 className="font-semibold">Support Channels</h4>
                 <ul className="space-y-2 text-sm">
@@ -234,7 +214,6 @@ export default function CommunityGuidelinesPage() {
                   <li>• #help - Technical support</li>
                   <li>• #showcase - Share your projects</li>
                   <li>• #feedback - Platform feedback</li>
-
       {/* Footer */}
       <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
         <CardHeader>
@@ -248,7 +227,6 @@ export default function CommunityGuidelinesPage() {
               <Button>Contact Us</Button>
             <Link href="/community">
               <Button variant="outline">Join Community</Button>
-
       {/* Last Updated */}
       <div className="text-center text-sm text-muted-foreground">
         <p>Last, updated: January 15, 2024</p>
@@ -256,7 +234,5 @@ export default function CommunityGuidelinesPage() {
           These guidelines may be updated periodically. We&apos;ll notify the
           community of any significant changes.</p>
   }
-
-    
   );
 }

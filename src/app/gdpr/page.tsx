@@ -1,10 +1,8 @@
 import { Metadata } from 'next';
-
 export const metadata: Metadata = {
-  title: 'GDPR Compliance - AI Guided SaaS Platform',
+  title: 'GDPR Compliance - AI Guided SaaS Platform';
   description: 'Our commitment to GDPR compliance and data protection'};
-
-export default function GdprPage() {
+export default function GdprPage(): void {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-4xl mx-auto">
@@ -12,7 +10,6 @@ export default function GdprPage() {
         <p className="text-muted-foreground mb-8">
           Last,
     updated: {new Date().toLocaleDateString()}</p>
-
         <div className="prose prose-lg max-w-none space-y-6">
           <section>
             <h2 className="text-2xl font-semibold mb-4">
@@ -21,7 +18,6 @@ export default function GdprPage() {
               We are committed to protecting your personal data and respecting
               your privacy rights under the General Data Protection Regulation
               (GDPR).</p>
-
           <section>
             <h2 className="text-2xl font-semibold mb-4">
               Your Rights Under GDPR</h2>
@@ -34,7 +30,6 @@ export default function GdprPage() {
               <li>Right to data portability</li>
               <li>Right to object to processing</li>
               <li>Rights related to automated decision making</li>
-
           <section>
             <h2 className="text-2xl font-semibold mb-4">Data Processing</h2>
             <p>
@@ -44,7 +39,6 @@ export default function GdprPage() {
               <li>Contract performance for service delivery</li>
               <li>Legitimate interests for analytics and improvements</li>
               <li>Legal obligations for compliance requirements</li>
-
           <section>
             <h2 className="text-2xl font-semibold mb-4">
               Data Protection Measures</h2>
@@ -61,7 +55,6 @@ export default function GdprPage() {
                 <h3 className="font-semibold">Data Minimization</h3>
                 <p className="text-muted-foreground">
                   We only collect and process data necessary for our services</p>
-
           <section>
             <h2 className="text-2xl font-semibold mb-4">
               Exercising Your Rights</h2>
@@ -73,7 +66,6 @@ export default function GdprPage() {
                 <strong>Email:</strong> dpo@aiguidedSaaS.com
               <p>
                 <strong>Response, Time:</strong> Within 30 days
-
           <section>
             <h2 className="text-2xl font-semibold mb-4">Data Transfers</h2>
             <p>
@@ -83,7 +75,6 @@ export default function GdprPage() {
               <li>Standard Contractual Clauses (SCCs)</li>
               <li>Adequacy decisions by the European Commission</li>
               <li>Appropriate safeguards and security measures</li>
-
           <section>
             <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
             <p>
@@ -98,7 +89,5 @@ export default function GdprPage() {
                 your local data protection authority
               </p>
   }
-
-    
   );
 }

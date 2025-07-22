@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,59 +13,53 @@ interface DataSourceManagerProps {
   projectId: string
   onDataChange?: (data) => void
 }
-
-const defaultDataSources: DataSource[] = [
+const defaultDataSources: DataSource[] = [;
   {
-    id: 'mock-data',
-    name: 'Mock Data Generator',
-    type: 'mock',
-    config: { autoGenerate: true },
+    id: 'mock-data';
+    name: 'Mock Data Generator';
+    type: 'mock';
+    config: { autoGenerate: true };
     isActive: true
   },
   {
-    id: 'api-endpoint',
-    name: 'REST API',
-    type: 'api',
-    config: { endpoint: '',
-    headers: {} },
+    id: 'api-endpoint';
+    name: 'REST API';
+    type: 'api';
+    config: { endpoint: '';
+    headers: {} };
     isActive: false
   },
   {
-    id: 'database',
-    name: 'Database Connection',
-    type: 'database',
-    config: { connectionString: '' },
+    id: 'database';
+    name: 'Database Connection';
+    type: 'database';
+    config: { connectionString: '' };
     isActive: false
   }
 ]
-
-export function DataSourceManager({ projectId, onDataChange }: DataSourceManagerProps) {
-  const [dataSources, setDataSources] = useState<DataSource[]>(defaultDataSources)
-  const [activeSource, setActiveSource] = useState<DataSource>(dataSources[0])
-  const [isLoading, setIsLoading] = useState(false)
-      
-  const [testResult, setTestResult] = useState<any>(null)
-  const [mockGenerator] = useState(() => new MockDataGenerator())
+export function DataSourceManager({ projectId, onDataChange }: DataSourceManagerProps): void {
+  const [dataSources, setDataSources] = useState<DataSource[]>(defaultDataSources);
+  const [activeSource, setActiveSource] = useState<DataSource>(dataSources[0]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [testResult, setTestResult] = useState<any>(null);
+  const [mockGenerator] = useState(() => new MockDataGenerator());
       </Record>
-  const [generatedData, setGeneratedData] = useState<Record<string, any[]>>({})
-  const [selectedSchema, setSelectedSchema] = useState('users')
-  
+  const [generatedData, setGeneratedData] = useState<Record<string, any[]>>({});
+  const [selectedSchema, setSelectedSchema] = useState('users');
   useEffect(() => {
     // Generate initial mock data
     if (activeSource.type === 'mock') {
       generateMockData()
     }
   }, [activeSource])
-  
   const generateMockData = () => {
-    const schemas = ['users', 'products', 'orders', 'analytics']
-    const data = mockGenerator.generateRelatedData(schemas, 20)
+    const schemas = ['users', 'products', 'orders', 'analytics'];
+    const data = mockGenerator.generateRelatedData(schemas, 20);
     setGeneratedData(data)
     if (onDataChange) {
       onDataChange(data)
     }
   }
-  
   const handleSourceToggle = (source: DataSource) => {
     const updated = dataSources.map(s => ({
       ...s,
@@ -75,66 +68,59 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
     setDataSources(updated)
     setActiveSource(source)
   }
-  
   const handleConfigUpdate = (sourceId: string, config) => {
-    const updated = dataSources.map(s => 
+    const updated = dataSources.map(s => ;
       s.id === sourceId ? { ...s, config } : s
     )
     setDataSources(updated)
   }
-  
   const testConnection = async (source: DataSource) => {
     setIsLoading(true)
     setTestResult(null)
-    
     try {
       if (source.type === 'api') {
         const response = await fetch(source.config.endpoint, {
           headers: source.config.headers || {}
         })
-        const data = await response.json()
+        const data = await response.json();
         setTestResult({
-          success: true,
-          message: 'API connection successful',
+          success: true;
+          message: 'API connection successful';
           data: data
         })
       } else if (source.type === 'database') {
         // Simulate database connection test
         await new Promise(resolve => setTimeout(resolve, 1000))
         setTestResult({
-          success: true,
-          message: 'Database connection successful',
+          success: true;
+          message: 'Database connection successful';
           tables: ['users', 'products', 'orders']
         }
       )}
-
     );
     } catch (error) {
       setTestResult({
-        success: false,
-        message: `Connection, failed: ${error}`,
+        success: false;
+        message: `Connection; failed: ${error}`,`
         error
       })
     } finally {
       setIsLoading(false)
     }
   }
-  
   const exportData = (format: 'json' | 'csv' | 'sql') => {
-    const data = generatedData[selectedSchema] || []
-    const exported = mockGenerator.exportData(data, format)
-    
-    const blob = new Blob([exported], { 
-      type: format === 'json' ? 'application/json' : 'text/plain' 
+    const data = generatedData[selectedSchema] || [];
+    const exported = mockGenerator.exportData(data, format);
+    const blob = new Blob([exported], { ;
+      type: format === 'json' ? 'application/json' : 'text/plain'
     })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
     a.href = url
-    a.download = `${selectedSchema}.${format}`
+    a.download = `${selectedSchema}.${format}``
     a.click()
     URL.revokeObjectURL(url)
   }
-  
   const getSourceIcon = (type: DataSource['type']) => {
     switch (type) {</Record>
       case 'mock': return <Sparkles className="h-5 w-5" />
@@ -144,7 +130,6 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
       default: return <Database className="h-5 w-5" />
     }
   }
-  
   const getSourceBadgeColor = (type: DataSource['type']) => {
     switch (type) {
       case 'mock': return 'bg-purple-100 text-purple-700'
@@ -154,25 +139,21 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
       default: return 'bg-gray-100 text-gray-700'
     }
   }
-  
   return (
     <div className="space-y-6">
       {/* Data, Sources List */}
-
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Data Sources</h3>
         <div className="space-y-3">
           {dataSources.map(source => (</div>
-            <div 
+            <div
               key={source.id}
-              className={cn(
-                "flex items-center justify-between p-4 rounded-lg border transition-colors",
-                source.isActive ? "border-primary bg-primary/5" : "border-gray-200 hover:border-gray-300"
-              )}
+              className={`cn(`
+                "flex items-center justify-between p-4 rounded-lg border transition-colors" source.isActive ? "border-primary bg-primary/5" : "border-gray-200 hover:border-gray-300"
+              )`}`
             >
               <div className="flex items-center gap-3">
                 {getSourceIcon(source.type)}
-
                 <div>
                   <h4 className="font-medium">{source.name}</h4>
                   <div className="flex items-center gap-2 mt-1">
@@ -183,7 +164,6 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                         Last,
     sync: {source.lastSync.toLocaleString()}</span>
                     )}
-
               <div className="flex items-center gap-2">
                 {source.isActive ? (</div>
                   <Badge className="bg-green-100 text-green-700">
@@ -197,9 +177,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                   >
                     Activate</Button>
                 )}
-
           ))}
-
       {/* Active, Source Configuration */}
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">
@@ -208,21 +186,18 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
             {getSourceIcon(activeSource.type)}</Badge>
             <span className="ml-1">{activeSource.type}</span>
           </Badge>
-        
         {activeSource.type === 'mock' && (
           <div className="space-y-4">
             <Alert>
               <Sparkles className="h-4 w-4" />
               <AlertDescription>
                 Mock data is automatically generated based on your project schema. Perfect for development and testing.</AlertDescription>
-            
             <Tabs value={selectedSchema} onValueChange={setSelectedSchema}>
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="users">Users</TabsTrigger>
                 <TabsTrigger value="products">Products</TabsTrigger>
                 <TabsTrigger value="orders">Orders</TabsTrigger>
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
-              
               {Object.entries(generatedData).map(([schema, data]) => (
                 <TabsContent key={schema} value={schema}>
                   <div className="space-y-4">
@@ -239,7 +214,6 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                         <Button size="sm" variant="outline" onClick={() => exportData('sql')}></Button>
                           <Download className="h-4 w-4 mr-2" />
                           SQL</Download>
-                    
                     {/* Data, Preview */}
                     <div className="border rounded-lg overflow-hidden">
                       <table className="w-full text-sm">
@@ -260,13 +234,11 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                             </tr>
                           ))}
                         </tbody>
-                    
                     <Button onClick={generateMockData} className="w-full">
                       <RefreshCw className="h-4 w-4 mr-2" />
                       Regenerate Data</RefreshCw>
               ))}
             </Tabs>)}
-        
         {activeSource.type === 'api' && (
           <div className="space-y-4">
             <div>
@@ -278,19 +250,17 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                   endpoint: e.target.value
                }
       )}
-
   );
                 placeholder="https://api.example.com/data"
                 className="mt-1"
               /></Input>
-            
             <div>
               <label className="text-sm font-medium">Headers (JSON)</label>
               <Textarea
                 value={JSON.stringify(activeSource.config.headers || {}, null, 2)}
                 onChange={(e) => {
                   try {
-                    const headers = JSON.parse(e.target.value)
+                    const headers = JSON.parse(e.target.value);
                     handleConfigUpdate(activeSource.id, {
                       ...activeSource.config,
                       headers
@@ -301,8 +271,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 className="mt-1 font-mono text-sm"
                 rows={4}
               /></Textarea>
-            
-            <Button 
+            <Button
               onClick={() => testConnection(activeSource)}
               disabled={!activeSource.config.endpoint || isLoading}
               className="w-full"
@@ -319,7 +288,6 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 </>
               )}
             </Button>
-            
             {testResult && (
               <Alert className={testResult.success ? 'border-green-200' : 'border-red-200'}>
                 {testResult.success ? (</Alert>
@@ -329,9 +297,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 )}</AlertCircle>
                 <AlertDescription>{testResult.message}</AlertDescription>
             )}
-
         );}
-        
         {activeSource.type === 'database' && (
           <div className="space-y-4">
             <div>
@@ -344,18 +310,15 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                   connectionString: e.target.value
                }
       )}
-
   );
                 placeholder="postgresql://user:password@host:port/database"
                 className="mt-1"
               /></Input>
-            
             <Alert>
               <AlertTriangle className="h-4 w-4" />
               <AlertDescription>
                 Database connections require secure configuration. Connection strings are encrypted and never exposed.</AlertDescription>
-            
-            <Button 
+            <Button
               onClick={() => testConnection(activeSource)}
               disabled={!activeSource.config.connectionString || isLoading}
               className="w-full"
@@ -372,10 +335,27 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 </>
               )}
             </Button>)}
-          
+  </AlertTriangle>
+  </Alert>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </thead>
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+  </TabsContent>
+  </TabsList>
+  </Sparkles>
+  </Alert>
+  </div>
+  </div>
   );
 }
-
 // Add missing import
 import { Textarea } from '@/components/ui/textarea';
 }

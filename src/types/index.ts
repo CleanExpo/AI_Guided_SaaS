@@ -21,7 +21,6 @@ export interface ProjectConfig {
   timeline?: string;
   persona?: Persona;
 };
-
 export interface ProjectFile {
   name: string;
   path: string;
@@ -34,7 +33,6 @@ export interface ProjectFile {
     | 'test'
     | 'documentation'
 };
-
 export interface Persona {
   id: string;
   name: string;
@@ -45,7 +43,6 @@ export interface Persona {
   color: string;
   tone?: string;
 };
-
 export interface ChatMessage {
   id: string;
   content: string;
@@ -54,7 +51,6 @@ export interface ChatMessage {
   type?: 'text' | 'code' | 'file';
   role?: 'user' | 'assistant';
 }
-
 // Analytics types
 export interface RevenueMetrics {
   totalRevenue: number;
@@ -62,21 +58,18 @@ export interface RevenueMetrics {
   yearlyRevenue: number;
   growth: number
 };
-
 export interface UserMetrics {
   totalUsers: number;
   activeUsers: number;
   newUsers: number;
   retention: number
 };
-
 export interface SystemMetrics {
   uptime: number;
   responseTime: number;
   errorRate: number;
   throughput: number
 }
-
 // Admin types
 export interface SystemCheck {
   name: string;
@@ -84,7 +77,6 @@ export interface SystemCheck {
   message: string;
   details?: string;
 }
-
 // Collaboration types
 export interface CollaborationRoom {
   id: string;
@@ -93,7 +85,6 @@ export interface CollaborationRoom {
   createdAt: Date;
   updatedAt: Date
 };
-
 export interface CollaborationUser {
   id: string;
   name: string;

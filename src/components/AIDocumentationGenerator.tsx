@@ -1,14 +1,12 @@
 'use client'
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProjectConfig } from '@/types';
 import { FileText, BookOpen } from 'lucide-react';
-interface AIDocumentationGeneratorProps {
+interface AIDocumentationGeneratorProps {;
   projectConfig: ProjectConfig;
   onDocumentationGenerated: (docs: unknown) => void
 };
-
-export default function AIDocumentationGenerator() {
+export default function AIDocumentationGenerator(): void {
   return (
     <Card></Card>
       <CardHeader></CardHeader>

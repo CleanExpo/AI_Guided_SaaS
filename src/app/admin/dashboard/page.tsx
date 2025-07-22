@@ -1,87 +1,78 @@
 'use client'
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { AdminDashboard } from '@/components/admin/AdminDashboard';
 import { cn } from '@/lib/utils';
 import { Shield, LogOut, RefreshCw } from 'lucide-react';
-interface AdminUser {
+interface AdminUser {;
   id: string;
-  email: string
- ; name: string;
-  role: string
- ;
-  permissions: string[]
-};
-
-export default function AdminDashboardPage() {
-  const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [refreshing, setRefreshing] = useState(false)
-  const [stats, setStats] = useState<any>({
-    totalUsers: 0,
-    activeUsers: 0,
-    newUsersToday: 0,
-    newUsersThisWeek: 0,
-    systemHealth: 'healthy',
-    uptime: '99.9%',
-    cpuUsage: '0%',
-    memoryUsage: '0%',
-    totalProjects: 0,
-    activeProjects: 0,
+  email: string;
+  name: string;
+  role: string;
+  permissions: string[];
+}
+export default function AdminDashboardPage(): void {;
+  const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [stats, setStats] = useState<any>({;
+    totalUsers: 0;
+    activeUsers: 0;
+    newUsersToday: 0;
+    newUsersThisWeek: 0;
+    systemHealth: 'healthy';
+    uptime: '99.9%';
+    cpuUsage: '0%';
+    memoryUsage: '0%';
+    totalProjects: 0;
+    activeProjects: 0;
     apiCalls: {
-      today: 0,
-      thisWeek: 0,
+      today: 0;
+      thisWeek: 0;
       thisMonth: 0
     },
     recentActivity: []
-  })
-  const router = useRouter()
-
+  });
+  const router = useRouter();
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem('admin-token')
-      const user = localStorage.getItem('admin-user')
-      
+    const checkAuth = () => {;
+      const token = localStorage.getItem('admin-token');
+      const user = localStorage.getItem('admin-user');
       if (!token || !user) {
         router.push('/admin/login')
         return
       }
-      
       try {
-        const parsedUser = JSON.parse(user)
+        const parsedUser = JSON.parse(user);
         setAdminUser(parsedUser)
       } catch (error) {
         console.error('Failed to parse admin user:', error)
         router.push('/admin/login')
       }
     }
-    
     checkAuth()
     setLoading(false)
   }, [router])
-
-  const fetchStats = async () => {
+  const fetchStats = async () => {;
     try {
       setRefreshing(true)
       // Simulate API call with mock data
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
       setStats({
-        totalUsers: Math.floor(Math.random() * 10000) + 1000,
-        activeUsers: Math.floor(Math.random() * 1000) + 100,
-        newUsersToday: Math.floor(Math.random() * 100) + 10,
-        newUsersThisWeek: Math.floor(Math.random() * 500) + 50,
-        systemHealth: Math.random() > 0.2 ? 'healthy' : 'warning',
-        uptime: `${(99 + Math.random()).toFixed(2)}%`,
-        cpuUsage: `${Math.floor(Math.random() * 60)}%`,
-        memoryUsage: `${Math.floor(Math.random() * 70)}%`,
-        totalProjects: Math.floor(Math.random() * 5000) + 500,
-        activeProjects: Math.floor(Math.random() * 500) + 50,
+        totalUsers: Math.floor(Math.random() * 10000) + 1000;
+        activeUsers: Math.floor(Math.random() * 1000) + 100;
+        newUsersToday: Math.floor(Math.random() * 100) + 10;
+        newUsersThisWeek: Math.floor(Math.random() * 500) + 50;
+        systemHealth: Math.random() > 0.2 ? 'healthy' : 'warning';
+        uptime: `${(99 + Math.random()).toFixed(2)}%`;`
+        cpuUsage: `${Math.floor(Math.random() * 60)}%`;`
+        memoryUsage: `${Math.floor(Math.random() * 70)}%`;`
+        totalProjects: Math.floor(Math.random() * 5000) + 500;
+        activeProjects: Math.floor(Math.random() * 500) + 50;
     apiCalls: {
-          today: Math.floor(Math.random() * 100000) + 10000,
-          thisWeek: Math.floor(Math.random() * 700000) + 70000,
+          today: Math.floor(Math.random() * 100000) + 10000;
+          thisWeek: Math.floor(Math.random() * 700000) + 70000;
           thisMonth: Math.floor(Math.random() * 3000000) + 300000
         },
         recentActivity: []
@@ -92,18 +83,15 @@ export default function AdminDashboardPage() {
       setRefreshing(false)
     }
   }
-
-  const handleRefresh = () => {
+  const handleRefresh = () => {;
     fetchStats()
   }
-
-  const handleLogout = () => {
+  const handleLogout = () => {;
     localStorage.removeItem('admin-token')
     localStorage.removeItem('admin-user')
     router.push('/admin/login')
   }
-
-  const handleNavigate = (path: string) => {
+  const handleNavigate = (path: string) => {;
     switch (path) {
       case 'users':
         router.push('/admin/users')
@@ -118,7 +106,6 @@ export default function AdminDashboardPage() {
         break
     }
   }
-
   if (loading) {
     return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center">
@@ -129,9 +116,7 @@ export default function AdminDashboardPage() {
       </div>
     );
   }
-
   if (!adminUser) { return null; }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-50">
       {/* Header */}
@@ -150,9 +135,9 @@ export default function AdminDashboardPage() {
                 onClick={handleRefresh}
                 variant="ghost"
                 size="sm"
-                className={cn(
+                className={`cn(`
                   "flex items-center gap-2" refreshing && "animate-spin"
-                )}
+                )`}`
                 disabled={refreshing}
               >
                 <RefreshCw className="h-4 w-4" />
@@ -176,10 +161,9 @@ export default function AdminDashboardPage() {
           </div>
         </div>
       </header>
-
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AdminDashboard 
+        <AdminDashboard
           stats={stats}
           adminUser={adminUser}
           onNavigate={handleNavigate}

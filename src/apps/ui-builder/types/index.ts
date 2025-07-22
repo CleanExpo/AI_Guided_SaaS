@@ -2,12 +2,10 @@ export interface Position {
   x: number;
   y: number
 };
-
 export interface Size {
   width: number;
   height: number
 };
-
 export interface ComponentConfig {
   id: string;
   type: string;
@@ -19,7 +17,6 @@ export interface ComponentConfig {
   style?: Record<string, unknown>;
   className?: string;
 };
-
 export interface BuilderState {
   components: ComponentConfig[];
   selectedComponent: string | null;
@@ -29,7 +26,6 @@ export interface BuilderState {
   gridEnabled: boolean;
   previewMode: boolean
 };
-
 export interface MotiaComponent {
   type: string;
   name: string;
@@ -40,7 +36,6 @@ export interface MotiaComponent {
   propTypes: Record<string, PropType>;
   preview: string
 };
-
 export interface PropType {
   type:
     | 'string'
@@ -55,13 +50,11 @@ export interface PropType {
   required?: boolean;
   description?: string;
 };
-
 export interface DragItem {
   type: string;
   componentType: string;
   config?: ComponentConfig;
 };
-
 export interface DropResult {
   position: Position;
   targetId?: string;

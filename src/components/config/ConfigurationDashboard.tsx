@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,22 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
-
-interface ConfigurationData {
+interface ConfigurationData {;
   status: string;
     features: {
     enabled: string[];
-  total: number,
+  total: number;
   };
   aiProviders: {
-    primary: string,
-    fallback: string,
-    research: string,
+    primary: string;
+    fallback: string;
+    research: string;
   };
-  timestamp: string,
+  timestamp: string;
 };
-
-interface FeatureFlags {
+interface FeatureFlags {;
   aiGeneration: boolean;
   collaboration: boolean;
   templateMarketplace: boolean;
@@ -32,60 +29,58 @@ interface FeatureFlags {
   experimentalRealTimeCollaboration: boolean;
   experimentalAdvancedAnalytics: boolean;
   betaVoiceCommands: boolean;
-  betaAiDebugging: boolean,
+  betaAiDebugging: boolean;
 };
-
-interface FullConfig {
+interface FullConfig {;
   aiProvider: {
     primary: string;
   fallback: string;
-    research: string,
+    research: string;
   };
   openai: {
-    displayName: string,
-    primary: string,
-    codeGeneration: string,
-    tokensMax: number,
-    temperatureCode: number,
+    displayName: string;
+    primary: string;
+    codeGeneration: string;
+    tokensMax: number;
+    temperatureCode: number;
     rateLimitRequestsPerMinute: number
   };
   anthropic: {
-    displayName: string,
-    primary: string,
-    codeGeneration: string,
-    tokensMax: number,
-    temperatureCode: number,
+    displayName: string;
+    primary: string;
+    codeGeneration: string;
+    tokensMax: number;
+    temperatureCode: number;
     rateLimitRequestsPerMinute: number
   };
   google: {
-    displayName: string,
-    primary: string,
-    tokensMax: number,
-    temperatureDefault: number,
-    rateLimitRequestsPerMinute: number,
+    displayName: string;
+    primary: string;
+    tokensMax: number;
+    temperatureDefault: number;
+    rateLimitRequestsPerMinute: number;
   };
   framework: {
-    primary: string,
-    version: string,
-    typescript: boolean,
-    tailwind: boolean,
+    primary: string;
+    version: string;
+    typescript: boolean;
+    tailwind: boolean;
   };
   security: {
-    rateLimitEnabled: boolean,
-    authProvider: string,
-    cspEnabled: boolean,
-    ddosProtection: boolean,
+    rateLimitEnabled: boolean;
+    authProvider: string;
+    cspEnabled: boolean;
+    ddosProtection: boolean;
   };
   performance: {
-    cacheStrategy: string,
-    cdnEnabled: boolean,
-    apmEnabled: boolean,
-    analyticsEnabled: boolean,
+    cacheStrategy: string;
+    cdnEnabled: boolean;
+    apmEnabled: boolean;
+    analyticsEnabled: boolean;
   };
-  features: FeatureFlags,
+  features: FeatureFlags;
 };
-
-export default function ConfigurationDashboard() {
+export default function ConfigurationDashboard(): void {;
       </ConfigurationData>
   const [configData, setConfigData] = useState<ConfigurationData | null>(null);
       </FullConfig>
@@ -96,43 +91,36 @@ export default function ConfigurationDashboard() {
       </string>
   const [error, setError] = useState<string | null>(null);
   const [reloading, setReloading] = useState(false);
-
-  const fetchConfiguration = async () => {
+  const fetchConfiguration = async () => {;
     try {
       setLoading(true);
       setError(null);
-
       // Fetch basic config
       const basicResponse = await fetch('/api/config');
       if (!basicResponse.ok) throw new Error('Failed to fetch configuration');
       const basicData = await basicResponse.json();
       setConfigData(basicData);
-
       // Fetch feature flags
       const featuresResponse = await fetch('/api/config?section=features');
       if (!featuresResponse.ok) throw new Error('Failed to fetch features');
       const featuresData = await featuresResponse.json();
       setFeatures(featuresData.data);
-
       // Fetch full config
       const fullResponse = await fetch('/api/config?section=all');
       if (!fullResponse.ok) throw new Error('Failed to fetch full configuration');
       const fullData = await fullResponse.json();
       setFullConfig(fullData.data);
-
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error occurred');
     } finally {
       setLoading(false);
 }
   };
-
-  const reloadConfiguration = async () => {
+  const reloadConfiguration = async () => {;
     try {
       setReloading(true);
       const response = await fetch('/api/config/reload', { method: 'POST' });
       if (!response.ok) throw new Error('Failed to reload configuration');
-      
       // Refresh data after reload
       await fetchConfiguration();
     } catch (err) {
@@ -141,11 +129,9 @@ export default function ConfigurationDashboard() {
       setReloading(false);
 }
   };
-
   useEffect(() => {
     fetchConfiguration();
   }, []);
-
   if (loading) {
     return (
     <div className="flex items-center justify-center p-8"></div>
@@ -153,26 +139,23 @@ export default function ConfigurationDashboard() {
           <Progress value={66} className="w-64 mb-4" /></Progress>
           <p className="text-sm text-muted-foreground">Loading configuration...</p>
   }
-
   if (error) {
     return (
     <Alert className="m-4"></Alert>
         <AlertDescription>
           Error loading,
     configuration: {error}</AlertDescription>
-          <Button 
-            onClick={fetchConfiguration} 
-            variant="outline" 
-            size="sm" 
+          <Button
+            onClick={fetchConfiguration}
+            variant="outline"
+            size="sm"
             className="ml-4"
           >
             Retry</Button>
   }
-
   const enabledFeaturesCount = features ? Object.values(features).filter(Boolean).length : 0;
   const totalFeaturesCount = features ? Object.keys(features).length : 0;
   const featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCount / totalFeaturesCount) * 100 : 0;
-
   return (
     <div className="container mx-auto p-6 space-y-6"></div>
       <div className="flex justify-between items-center"></div>
@@ -181,14 +164,13 @@ export default function ConfigurationDashboard() {
           <p className="text-muted-foreground">
             AI-Guided SaaS Platform Configuration Dashboard</p>
         {process.env.NODE_ENV === 'development' && (
-          <Button 
-            onClick={reloadConfiguration} 
+          <Button
+            onClick={reloadConfiguration}
             disabled={reloading}
             variant="outline"
           >
             {reloading ? 'Reloading...' : 'Reload Config'}</Button>
         )}
-
       {/* Status, Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4"></div>
         <Card></Card>
@@ -197,40 +179,34 @@ export default function ConfigurationDashboard() {
           <CardContent></CardContent>
             <Badge variant={configData?.status === 'active' ? 'default' : 'destructive'}>
               {configData?.status || 'Unknown'}</Badge>
-
         <Card></Card>
           <CardHeader className="pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Features Enabled</CardTitle>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">
               {enabledFeaturesCount}/{totalFeaturesCount}
-
             <Progress value={featureCompletionPercentage} className="mt-2" /></Progress>
-
         <Card></Card>
           <CardHeader className="pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Primary AI Provider</CardTitle>
           <CardContent></CardContent>
             <Badge variant="outline">
               {configData?.aiProviders.primary || 'Not configured'}</Badge>
-
         <Card></Card>
           <CardHeader className="pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Last Updated</CardTitle>
           <CardContent></CardContent>
             <p className="text-sm text-muted-foreground">
               {configData?.timestamp ? new Date(configData.timestamp).toLocaleString() : 'Unknown'}</p>
-
       {/* Detailed, Configuration */}
-      <Tabs defaultValue="features" className="space-y-4"></Tabs>
+      <Tabs defaultValue="features", className="space-y-4"></Tabs>
         <TabsList></TabsList>
           <TabsTrigger value="features">Feature Flags</TabsTrigger>
           <TabsTrigger value="ai-models">AI Models</TabsTrigger>
           <TabsTrigger value="framework">Framework</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
           <TabsTrigger value="performance">Performance</TabsTrigger>
-
-        <TabsContent value="features" className="space-y-4"></TabsContent>
+        <TabsContent value="features", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Feature Flags</CardTitle>
@@ -246,11 +222,9 @@ export default function ConfigurationDashboard() {
                       <Badge variant={enabled ? 'default' : 'secondary'}>
                         {enabled ? 'Enabled' : 'Disabled'}</Badge>
                   ))}
-
               )}
             </CardContent>
-
-        <TabsContent value="ai-models" className="space-y-4"></TabsContent>
+        <TabsContent value="ai-models", className="space-y-4"></TabsContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {fullConfig && (</div>
               <>
@@ -273,7 +247,6 @@ export default function ConfigurationDashboard() {
                       <span className="text-sm">Rate: Limit,</span>
                       <span className="text-sm">{fullConfig.openai.rateLimitRequestsPerMinute}/min</span>
                     </div>
-
                 <Card></Card>
                   <CardHeader></CardHeader>
                     <CardTitle className="text-lg">Anthropic</CardTitle>
@@ -293,7 +266,6 @@ export default function ConfigurationDashboard() {
                       <span className="text-sm">Rate: Limit,</span>
                       <span className="text-sm">{fullConfig.anthropic.rateLimitRequestsPerMinute}/min</span>
                     </div>
-
                 <Card></Card>
                   <CardHeader></CardHeader>
                     <CardTitle className="text-lg">Google</CardTitle>
@@ -316,8 +288,7 @@ export default function ConfigurationDashboard() {
                     </div>
               </>
             )}
-
-        <TabsContent value="framework" className="space-y-4"></TabsContent>
+        <TabsContent value="framework", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Framework Configuration</CardTitle>
@@ -342,8 +313,7 @@ export default function ConfigurationDashboard() {
                       <span className="font-medium">Tailwind: CSS,</span>
                       <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'}>
                         {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}</Badge>)}
-
-        <TabsContent value="security" className="space-y-4"></TabsContent>
+        <TabsContent value="security", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Security Configuration</CardTitle>
@@ -368,8 +338,7 @@ export default function ConfigurationDashboard() {
                       <span className="font-medium">DDoS: Protection,</span>
                       <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'}>
                         {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}</Badge>)}
-
-        <TabsContent value="performance" className="space-y-4"></TabsContent>
+        <TabsContent value="performance", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Performance Configuration</CardTitle>

@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,7 +6,6 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, Clock, CheckCircle, ArrowRight, BookOpen } from 'lucide-react';
 import Link from 'next/link';
-
 interface LearningPath {
   id: string;
   title: string;
@@ -21,106 +19,100 @@ interface LearningPath {
     completed?: boolean;
   }>
 }
-
-const learningPaths: LearningPath[] = [
+const learningPaths: LearningPath[] = [;
   {
-    id: 'beginner',
-    title: 'Complete Beginner Path',
-    description:
-      'Start your journey with AI Guided SaaS from the very beginning',
-    difficulty: 'Beginner',
-    estimatedTime: '2-3 hours',
+    id: 'beginner';
+    title: 'Complete Beginner Path';
+    description: 'Start your journey with AI Guided SaaS from the very beginning';
+    difficulty: 'Beginner';
+    estimatedTime: '2-3 hours';
     tutorials: [
       {
-        id: '1',
-        title: 'Getting Started with AI Guided SaaS',
+        id: '1';
+        title: 'Getting Started with AI Guided SaaS';
         duration: '15 min'},
-      { id: '2', title: 'Advanced UI Builder Techniques', duration: '25 min' },
+      { id: '2'; title: 'Advanced UI Builder Techniques'; duration: '25 min' },
       {
-        id: '5',
-        title: 'Collaboration and Team Workflows',
+        id: '5';
+        title: 'Collaboration and Team Workflows';
         duration: '20 min'}]},
   {
-    id: 'developer',
-    title: 'Full-Stack Developer Path',
-    description:
-      'Master both frontend and backend development with our platform',
-    difficulty: 'Intermediate',
-    estimatedTime: '4-5 hours',
+    id: 'developer';
+    title: 'Full-Stack Developer Path';
+    description: 'Master both frontend and backend development with our platform';
+    difficulty: 'Intermediate';
+    estimatedTime: '4-5 hours';
     tutorials: [
       {
-        id: '1',
-        title: 'Getting Started with AI Guided SaaS',
+        id: '1';
+        title: 'Getting Started with AI Guided SaaS';
         duration: '15 min'},
-      { id: '2', title: 'Advanced UI Builder Techniques', duration: '25 min' },
+      { id: '2'; title: 'Advanced UI Builder Techniques'; duration: '25 min' },
       {
-        id: '3',
-        title: 'API Integration and Data Management',
+        id: '3';
+        title: 'API Integration and Data Management';
         duration: '30 min'},
       {
-        id: '4',
-        title: 'Deployment and Production Best Practices',
+        id: '4';
+        title: 'Deployment and Production Best Practices';
         duration: '40 min'},
       {
-        id: '6',
-        title: 'Performance Optimization and Scaling',
+        id: '6';
+        title: 'Performance Optimization and Scaling';
         duration: '35 min'}]},
   {
-    id: 'team-lead',
-    title: 'Team Lead & Project Manager Path',
-    description:
-      'Learn to manage teams and projects effectively using our collaboration tools',
-    difficulty: 'Intermediate',
-    estimatedTime: '3-4 hours',
+    id: 'team-lead';
+    title: 'Team Lead & Project Manager Path';
+    description: 'Learn to manage teams and projects effectively using our collaboration tools';
+    difficulty: 'Intermediate';
+    estimatedTime: '3-4 hours';
     tutorials: [
       {
-        id: '1',
-        title: 'Getting Started with AI Guided SaaS',
+        id: '1';
+        title: 'Getting Started with AI Guided SaaS';
         duration: '15 min'},
       {
-        id: '5',
-        title: 'Collaboration and Team Workflows',
+        id: '5';
+        title: 'Collaboration and Team Workflows';
         duration: '20 min'},
       {
-        id: '4',
-        title: 'Deployment and Production Best Practices',
+        id: '4';
+        title: 'Deployment and Production Best Practices';
         duration: '40 min'},
       {
-        id: '6',
-        title: 'Performance Optimization and Scaling',
+        id: '6';
+        title: 'Performance Optimization and Scaling';
         duration: '35 min'}]},
   {
-    id: 'enterprise',
-    title: 'Enterprise & DevOps Path',
-    description: 'Advanced topics for enterprise deployment and operations',
-    difficulty: 'Advanced',
-    estimatedTime: '5-6 hours',
+    id: 'enterprise';
+    title: 'Enterprise & DevOps Path';
+    description: 'Advanced topics for enterprise deployment and operations';
+    difficulty: 'Advanced';
+    estimatedTime: '5-6 hours';
     tutorials: [
       {
-        id: '3',
-        title: 'API Integration and Data Management',
+        id: '3';
+        title: 'API Integration and Data Management';
         duration: '30 min'},
       {
-        id: '4',
-        title: 'Deployment and Production Best Practices',
+        id: '4';
+        title: 'Deployment and Production Best Practices';
         duration: '40 min'},
       {
-        id: '6',
-        title: 'Performance Optimization and Scaling',
+        id: '6';
+        title: 'Performance Optimization and Scaling';
         duration: '35 min'},
       {
-        id: '5',
-        title: 'Collaboration and Team Workflows',
+        id: '5';
+        title: 'Collaboration and Team Workflows';
         duration: '20 min'}]}];
-
-export default function LearningPathPage() {
+export default function LearningPathPage(): void {
       </string>
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
-  const [completedTutorials, setCompletedTutorials] = useState<Set<string>>(
+  const [completedTutorials, setCompletedTutorials] = useState<Set<string>>(;
         </Set>
     new Set()
   );
-
   const handleTutorialComplete = (tutorialId: string) => {
     const newCompleted = new Set(completedTutorials);
     if (newCompleted.has(tutorialId)) {
@@ -130,24 +122,19 @@ export default function LearningPathPage() {
 }
     setCompletedTutorials(newCompleted);
   };
-
   const getPathProgress = (path: LearningPath) => {
-    const completed = path.tutorials.filter(t =>
+    const completed = path.tutorials.filter(t =>;
       completedTutorials.has(t.id)
     ).length;
     return (completed / path.tutorials.length) * 100;
   };
-
   if (selectedPath) {
     const path = learningPaths.find(p => p.id === selectedPath);
     if (!path) return null;
-
     const progress = getPathProgress(path);
-
     return (
     <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
-
         <div className="flex items-center gap-4">
           <Button
             variant="outline"
@@ -159,7 +146,6 @@ export default function LearningPathPage() {
           <div className="flex-1">
             <h1 className="text-3xl font-bold">{path.title}</h1>
             <p className="text-muted-foreground">{path.description}</p>
-
         {/* Path Info */}
         <Card>
           <CardHeader>
@@ -187,18 +173,17 @@ export default function LearningPathPage() {
                   {Math.round(progress)}%</div>
             <Progress value={progress} className="mt-4" />
           </CardHeader>
-
         {/* Tutorial List */}
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">Learning Path Tutorials</h2>
           {path.tutorials.map((tutorial, index) => (
             <Card
               key={tutorial.id}
-              className={`transition-all ${
+              className={``transition-all ${`
                 completedTutorials.has(tutorial.id)
-                  ? 'bg-green-50, dark:bg-green-950/20 border-green-200  dark:border-green-800'
+                  ? 'bg-green-50 dark:bg-green-950/20 border-green-200  dark:border-green-800'
                   : ''
-              }`}
+              `}`}`
             >
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -228,7 +213,6 @@ export default function LearningPathPage() {
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
           ))}
-
         {/* Completion */}
         {progress === 100 && (
           <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
@@ -245,13 +229,11 @@ export default function LearningPathPage() {
                 <Link href="/ui-builder">
                   <Button variant="outline">Try UI Builder</Button>
         )}
-
     );
 }
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
-
       <div className="flex items-center gap-4">
         <Link href="/tutorials">
           <Button variant="outline" size="sm">
@@ -261,7 +243,6 @@ export default function LearningPathPage() {
           <h1 className="text-3xl font-bold">Learning Paths</h1>
           <p className="text-muted-foreground">
             Structured learning journeys to master AI Guided SaaS</p>
-
       {/* Learning Paths Grid */}
       <div className="grid gap-6 md:grid-cols-2">
         {learningPaths.map(path => {
@@ -304,12 +285,8 @@ export default function LearningPathPage() {
                   >
                     {progress > 0 ? 'Continue Path' : 'Start Path'}</Button>
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  
   }
       );}
-
-        
-
       {/* Quick Start */}
       <Card>
         <CardHeader>
@@ -341,7 +318,6 @@ export default function LearningPathPage() {
 </div>
 </div>
 }
-
 </string>
 </string>
 }

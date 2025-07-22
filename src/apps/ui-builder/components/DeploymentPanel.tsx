@@ -2,17 +2,14 @@
 import React from 'react';
 import { exportProjectAsZip } from '../utils/exportProject';
 import { useBuilderStore } from '../store/useBuilderStore';
-
-export default function DeploymentPanel() {
+export default function DeploymentPanel(): void {
   const components = useBuilderStore(s => s.components);
-
   const deploy = () => {
     exportProjectAsZip(components);
     setTimeout(() => {
       window.open('https://vercel.com/new', '_blank');
     }, 1000);
   };
-
   return (
     <div className="p-4 border-t bg-white">
       <h2 className="text-lg font-semibold mb-2">🚀 Deploy Your Project</h2>
@@ -25,6 +22,5 @@ export default function DeploymentPanel() {
         Export & Deploy to Vercel</button>
 </div>
 }
-
   );
 }

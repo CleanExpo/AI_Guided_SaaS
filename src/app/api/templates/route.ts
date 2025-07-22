@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { authenticateApiRequest } from '@/lib/auth-helpers';
 import { TemplateMarketplace } from '@/lib/templates';
-
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest): void {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
@@ -10,15 +9,13 @@ export async function GET(request: NextRequest) {
     const framework = searchParams.get('framework');
     const pricing = searchParams.get('pricing');
     const difficulty = searchParams.get('difficulty');
-
     let templates;
-
     if (query) {
       // Search templates
       templates = await TemplateMarketplace.searchTemplates(query, {
-        category: category || undefined,
-        framework: framework || undefined,
-        pricing: pricing || undefined,
+        category: category || undefined;
+        framework: framework || undefined;
+        pricing: pricing || undefined;
         difficulty: difficulty || undefined;
       }});
     } else if (category) {
@@ -28,7 +25,6 @@ export async function GET(request: NextRequest) {
       // Get featured templates
       templates = await TemplateMarketplace.getFeaturedTemplates();
     }
-
     return NextResponse.json({
       success: true,
       templates,
@@ -41,8 +37,7 @@ export async function GET(request: NextRequest) {
     );
   }
 };
-
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): void {
   try {
     const authResult = await authenticateApiRequest();
     if (!authResult.success || !authResult.session) {
@@ -51,14 +46,11 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
-
     const templateData = await request.json();
-
-    const result = await TemplateMarketplace.submitTemplate(
+    const result = await TemplateMarketplace.submitTemplate(;
       authResult.session.user.id,
       templateData
     );
-
     return NextResponse.json(result);
   } catch (error) {
     console.error('Template submission, error:', error);

@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
@@ -8,14 +7,11 @@ import { Alert } from '../ui/alert';
 import SelfCheckTrigger from './SelfCheckTrigger';
 import SystemResourceMonitor from './SystemResourceMonitor';
 import SafeModeHealthCheck from './SafeModeHealthCheck';
-
-export default function EnhancedAdminPanel() {
+export default function EnhancedAdminPanel(): void {
   const [activeTab, setActiveTab] = useState('overview');
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -29,7 +25,6 @@ export default function EnhancedAdminPanel() {
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
                 System Management Dashboard</span>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-4">
@@ -37,12 +32,10 @@ export default function EnhancedAdminPanel() {
             <TabsTrigger value="performance">Performance Monitor</TabsTrigger>
             <TabsTrigger value="safe-mode">Safe Mode Health Check</TabsTrigger>
             <TabsTrigger value="system-check">System Health</TabsTrigger>
-
           {/* Overview Tab */}
-          <TabsContent value="overview" className="space-y-6">
+          <TabsContent value="overview", className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Performance Status */}
-
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">
@@ -67,7 +60,6 @@ export default function EnhancedAdminPanel() {
                   onClick={() => setActiveTab('performance')}
                 >
                   View Details</Button>
-
               {/* Safe Mode Status */}
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -93,7 +85,6 @@ export default function EnhancedAdminPanel() {
                   onClick={() => setActiveTab('safe-mode')}
                 >
                   Start Safe Check</Button>
-
               {/* System Health */}
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -118,7 +109,6 @@ export default function EnhancedAdminPanel() {
                   onClick={() => setActiveTab('system-check')}
                 >
                   Run Health Check</Button>
-
             {/* Quick Actions */}
             <Card className="p-6">
               <h3 className="text-lg font-semibold mb-4">⚡ Quick Actions</h3>
@@ -154,7 +144,6 @@ export default function EnhancedAdminPanel() {
                   <span className="text-2xl mb-1">📋</span>
                   <span className="text-sm">View Logs</span>
                 </Button>
-
             {/* Emergency Procedures */}
             <Alert className="border-orange-200 bg-orange-50">
               <div className="flex items-start space-x-3">
@@ -173,22 +162,18 @@ export default function EnhancedAdminPanel() {
                       className="text-orange-700 border-orange-300"
                     >
                       📖 View Emergency Guide</Button>
-
           {/* Performance Monitor Tab */}
-          <TabsContent value="performance" className="space-y-6">
+          <TabsContent value="performance", className="space-y-6">
             <SystemResourceMonitor />
           </TabsContent>
-
           {/* Safe Mode Health Check Tab */}
-          <TabsContent value="safe-mode" className="space-y-6">
+          <TabsContent value="safe-mode", className="space-y-6">
             <SafeModeHealthCheck />
           </TabsContent>
-
           {/* System Health Check Tab */}
-          <TabsContent value="system-check" className="space-y-6">
+          <TabsContent value="system-check", className="space-y-6">
             <SelfCheckTrigger />
           </TabsContent>
-
       {/* Footer */}
       <div className="bg-white border-t mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -205,7 +190,5 @@ export default function EnhancedAdminPanel() {
               <Button size="sm" variant="ghost">
                 🆘 Support</Button>
   }
-
-    
   );
 }

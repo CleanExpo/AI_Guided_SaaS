@@ -1,13 +1,11 @@
 'use client'
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Users, Activity, BarChart3, TrendingUp, TrendingDown, Clock, PieChart, LineChart, Globe, Zap, DollarSign, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-interface AnalyticsData {
+interface AnalyticsData {;
   overview: {
     totalUsers: number;
     totalProjects: number;
@@ -16,47 +14,43 @@ interface AnalyticsData {
     activeSubscriptions: number;
     churnRate: number;
     apiRateLimit: number;
-    activeProjects: number;
+    activeProjects: number
   };
   userMetrics: {
-    newUsers: Array<{ date: string, count: number }>;
-    activeUsers: Array<{ date: string, count: number }>;
+    newUsers: Array<{ date: string; count: number }>;
+    activeUsers: Array<{ date: string; count: number }>;
     retentionRate: number;
-    avgSessionDuration: string;
+    avgSessionDuration: string
   };
   projectMetrics: {
-    projectsCreated: Array<{ date: string, count: number }>;
-    projectTypes: Array<{ type: string, count: number, percentage: number }>;
+    projectsCreated: Array<{ date: string; count: number }>;
+    projectTypes: Array<{ type: string; count: number; percentage: number }>;
     avgCompletionTime: string;
-    successRate: number;
+    successRate: number
   };
   apiMetrics: {
-    apiCalls: Array<{ date: string, count: number }>;
-    apiLatency: Array<{ date: string, avg: number, p95: number, p99: number }>;
+    apiCalls: Array<{ date: string; count: number }>;
+    apiLatency: Array<{ date: string; avg: number; p95: number; p99: number }>;
     errorRate: number;
-    topEndpoints: Array<{ endpoint: string, calls: number, avgTime: number }>;
+    topEndpoints: Array<{ endpoint: string; calls: number; avgTime: number }>
   };
   platformHealth: {
     uptime: number;
     avgResponseTime: number;
     errorRate: number;
-    satisfaction: number;
+    satisfaction: number
   };
 }
-
-interface AdminAnalyticsProps {
+interface AdminAnalyticsProps {;
   data: AnalyticsData;
   timeRange: string;
 }
-
-export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
+export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {;
   const [selectedMetric, setSelectedMetric] = useState('users');
-
   // Simple chart component
-  const SimpleLineChart = ({ data, height = 200 }: { data: Array<{ date: string, count: number }>, height?: number }) => {
+  const SimpleLineChart = ({ data, height = 200 }: { data: Array<{ date: string; count: number }>, height?: number }) => {
     const maxValue = Math.max(...data.map(d => d.count));
     const width = 100 / data.length;
-
     return (
     <div className="relative" style={{ height }}>
         <div className="absolute inset-0 flex items-end justify-between gap-1">
@@ -66,7 +60,7 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
     <div
                 key={index}
                 className="bg-gradient-to-t from-purple-500 to-purple-400 rounded-t hover:from-purple-600 hover:to-purple-500 transition-colors relative group"
-                style={{ width: `${width}%`, height: `${heightPercent}%` }}
+                style={{ width: `${width}%`; height: `${heightPercent}%` }}`
               >
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                   {point.count.toLocaleString()}
@@ -85,8 +79,7 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
       </div>
     );
   };
-
-  const formatNumber = (num: number) => {
+  const formatNumber = (num: number) => {;
     if (num >= 1000000) {
       return (num / 1000000).toFixed(1) + 'M';
     } else if (num >= 1000) {
@@ -94,16 +87,14 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
     }
     return num.toString();
   };
-
-  const formatCurrency = (num: number) => {
+  const formatCurrency = (num: number) => {;
     return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
+      style: 'currency';
+      currency: 'USD';
+      minimumFractionDigits: 0;
       maximumFractionDigits: 0
     }).format(num);
   };
-
   return (
     <div className="space-y-8">
       {/* Overview Cards */}
@@ -121,7 +112,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
             </div>
           </CardContent>
         </Card>
-
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Subscriptions</CardTitle>
@@ -134,7 +124,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
             </div>
           </CardContent>
         </Card>
-
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total API Calls</CardTitle>
@@ -148,7 +137,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
             </div>
           </CardContent>
         </Card>
-
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Platform Health</CardTitle>
@@ -156,14 +144,13 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{data.platformHealth.uptime}%</div>
-            <Progress 
-              value={data.platformHealth.uptime} 
+            <Progress
+              value={data.platformHealth.uptime}
               className="h-2 mt-2"
             />
           </CardContent>
         </Card>
       </div>
-
       {/* Metric Selector */}
       <div className="flex gap-2 p-1 bg-slate-100 rounded-lg w-fit">
         {['users', 'projects', 'api', 'revenue'].map((metric) => (
@@ -178,7 +165,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
           </Button>
         ))}
       </div>
-
       {/* User Metrics */}
       {selectedMetric === 'users' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -206,7 +192,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
               </div>
             </CardContent>
           </Card>
-
           <Card>
             <CardHeader>
               <CardTitle>Active Users</CardTitle>
@@ -232,7 +217,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
           </Card>
         </div>
       )}
-
       {/* Project Metrics */}
       {selectedMetric === 'projects' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -255,7 +239,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
               </div>
             </CardContent>
           </Card>
-
           <Card>
             <CardHeader>
               <CardTitle>Project Types</CardTitle>
@@ -279,7 +262,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
           </Card>
         </div>
       )}
-
       {/* API Metrics */}
       {selectedMetric === 'api' && (
         <div className="space-y-6">
@@ -307,8 +289,8 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
                         </div>
                         <div className="text-right">
                           <div className="w-32">
-                            <Progress 
-                              value={(endpoint.calls / Math.max(...data.apiMetrics.topEndpoints.map(e => e.calls))) * 100} 
+                            <Progress
+                              value={(endpoint.calls / Math.max(...data.apiMetrics.topEndpoints.map(e => e.calls))) * 100}
                               className="h-2"
                             />
                           </div>
@@ -320,7 +302,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
               </div>
             </CardContent>
           </Card>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="pb-3">
@@ -333,7 +314,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
                 </p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm">Error Rate</CardTitle>
@@ -345,7 +325,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
                 </p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm">User Satisfaction</CardTitle>
@@ -358,7 +337,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
           </div>
         </div>
       )}
-
       {/* Revenue Metrics */}
       {selectedMetric === 'revenue' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -389,7 +367,6 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
               </div>
             </CardContent>
           </Card>
-
           <Card>
             <CardHeader>
               <CardTitle>Subscription Metrics</CardTitle>
@@ -432,5 +409,4 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps) {
     </div>
   );
 }
-
 export default AdminAnalytics;

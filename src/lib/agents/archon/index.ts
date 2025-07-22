@@ -3,7 +3,6 @@ export { PromptRefinerAgent } from './PromptRefinerAgent';
 export { ToolsRefinerAgent } from './ToolsRefinerAgent';
 export { AgentRefinerAgent } from './AgentRefinerAgent';
 export { AdvisorAgent } from './AdvisorAgent';
-
 // Export types
 export type {
   RefinedPrompt,

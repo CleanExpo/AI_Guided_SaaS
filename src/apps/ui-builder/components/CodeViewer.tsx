@@ -3,19 +3,15 @@ import React from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 import { generateCodeFromComponent } from '../utils/generateCode';
 import { exportProjectAsZip } from '../utils/exportProject';
-
-export default function CodeViewer() {
+export default function CodeViewer(): void {
   const components = useBuilderStore(state => state.components);
-
-  const code = components
+  const code = components;
     .map(c => generateCodeFromComponent(c.type, c.props))
     .join('\n\n');
-
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code);
     alert('Code copied to clipboard!');
   };
-
   const handleDownload = () => {
     const blob = new Blob([code], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -25,11 +21,9 @@ export default function CodeViewer() {
     link.click();
     URL.revokeObjectURL(url);
   };
-
   const handleExportProject = () => {
     exportProjectAsZip(components);
   };
-
   return (
     <section className="bg-black text-green-300 font-mono p-4 overflow-auto max-h-64">
       <div className="flex justify-between items-center mb-2">
@@ -54,6 +48,5 @@ export default function CodeViewer() {
         {code || '// Add components to generate code'}</pre>
 </div></section>
 }
-
     </section>
   }

@@ -1,21 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { authenticateApiRequest } from '@/lib/auth-helpers'
-import { AnalyticsService } from '@/lib/analytics'
-import { isDemoMode } from '@/lib/env'
-
-export async function GET(request: NextRequest) {
+import { NextRequest, NextResponse } from 'next/server';
+import { authenticateApiRequest } from '@/lib/auth-helpers';
+import { AnalyticsService } from '@/lib/analytics';
+import { isDemoMode } from '@/lib/env';
+export async function GET(request: NextRequest): void {;
   try {
-    const authResult = await authenticateApiRequest()
+    const authResult = await authenticateApiRequest();
     if (!authResult.success || !authResult.session) {
       return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
-
-    const { searchParams } = new URL(request.url)
-    const timeRange = searchParams.get('timeRange') || '30d'
-    const type = searchParams.get('type') || 'platform'
-
-    let data
-
+    const { searchParams } = new URL(request.url);
+    const timeRange = searchParams.get('timeRange') || '30d';
+    const type = searchParams.get('type') || 'platform';
+    let data;
     switch (type) {
       case 'platform':
         data = await AnalyticsService.getPlatformMetrics()
@@ -34,14 +30,12 @@ export async function GET(request: NextRequest) {
         break, default:
         return NextResponse.json({ error: 'Invalid analytics type' }, { status: 400 })
     }
-
     return NextResponse.json({
       success: true,
       data,
-      demoMode: isDemoMode(),
+      demoMode: isDemoMode();
       testMode: !AnalyticsService.isConfigured()
     })
-
   } catch (error) {
     console.error('Analytics API, error:', error)
     return NextResponse.json(
@@ -50,21 +44,16 @@ export async function GET(request: NextRequest) {
     )
   }
 };
-
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): void {;
   try {
-    const authResult = await authenticateApiRequest()
+    const authResult = await authenticateApiRequest();
     if (!authResult.success || !authResult.session) {
       return NextResponse.json({ error: authResult.error || 'Unauthorized' }, { status: 401 })
     }
-
     // Check if user has admin role (you might want to implement role checking)
     // For now, we'll allow any authenticated user to export analytics
-    
-    const { timeRange, types } = await request.json()
-
-    const analyticsData: Record<string, unknown> = {}
-
+    const { timeRange, types } = await request.json();
+    const analyticsData: Record<string, unknown> = {};
     // Fetch requested analytics types
     if (types.includes('platform')) {
       analyticsData.platform = await AnalyticsService.getPlatformMetrics()
@@ -81,21 +70,18 @@ export async function POST(request: NextRequest) {
     if (types.includes('content')) {
       analyticsData.content = await AnalyticsService.getContentMetrics()
     }
-
     // In a real implementation, you might want, to:
     // 1. Generate a CSV/Excel file
     // 2. Store it temporarily
     // 3. Return a download URL
     // For now, we'll just return the data
-
     return NextResponse.json({
-      success: true,
-      data: analyticsData,
+      success: true;
+      data: analyticsData;
       exportedAt: new Date().toISOString(),
       timeRange,
       testMode: !AnalyticsService.isConfigured()
     })
-
   } catch (error) {
     console.error('Analytics export, error:', error)
     return NextResponse.json(

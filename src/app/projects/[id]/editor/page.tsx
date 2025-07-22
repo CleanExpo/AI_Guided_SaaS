@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -21,26 +20,22 @@ interface ProjectData {
   envVariables: any[]
   deploymentUrl?: string
 };
-
-export default function ProjectEditorPage() {
-  const params = useParams()
-  const projectId = params.id as string
-  
+export default function ProjectEditorPage(): void {
+  const params = useParams();
+  const projectId = params.id as string;
       </ProjectData>
-  const [project, setProject] = useState<ProjectData | null>(null)
-  const [activeMode, setActiveMode] = useState<'simple' | 'advanced'>('simple')
-  const [isLoading, setIsLoading] = useState(true)
-  const [isSaving, setIsSaving] = useState(false)
-  const [hasChanges, setHasChanges] = useState(false)
-  
+  const [project, setProject] = useState<ProjectData | null>(null);
+  const [activeMode, setActiveMode] = useState<'simple' | 'advanced'>('simple');
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
   useEffect(() => {
     loadProject()
   }, [projectId])
-  
   const loadProject = async () => {
     try {
-      const response = await fetch(`/api/projects/${projectId}`)
-      const data = await response.json()
+      const response = await fetch(`/api/projects/${projectId}`);`
+      const data = await response.json();
       setProject(data)
     } catch (error) {
       console.error('Failed to load, project:', error)
@@ -48,16 +43,14 @@ export default function ProjectEditorPage() {
       setIsLoading(false)
     }
   }
-  
   const handleSaveFiles = async (files: any[]) => {
     setIsSaving(true)
     try {
-      const response = await fetch(`/api/projects/${projectId}/files`, {
-        method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+      const response = await fetch(`/api/projects/${projectId}/files`, {`
+        method: 'PUT';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify({ files })
       })
-      
       if (response.ok) {
         setHasChanges(false)
       }
@@ -67,16 +60,14 @@ export default function ProjectEditorPage() {
       setIsSaving(false)
     }
   }
-  
   const handleSaveEnvVariables = async (variables: any[]) => {
     setIsSaving(true)
     try {
-      const response = await fetch(`/api/projects/${projectId}/env`, {
-        method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+      const response = await fetch(`/api/projects/${projectId}/env`, {`
+        method: 'PUT';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify({ variables })
       })
-      
       if (response.ok) {
         setHasChanges(false)
       }
@@ -86,40 +77,34 @@ export default function ProjectEditorPage() {
       setIsSaving(false)
     }
   }
-  
   const handleDeploy = async () => {
     try {
-      const response = await fetch(`/api/projects/${projectId}/deploy`, {
+      const response = await fetch(`/api/projects/${projectId}/deploy`, {`
         method: 'POST'
       })
-      
-      const result = await response.json()
+      const result = await response.json();
       if (result.success) {
         setProject({ ...project!, deploymentUrl: result.url }
       )}
-
     );
     } catch (error) {
       console.error('Failed to, deploy:', error)
     }
   }
-  
   const handleExport = async () => {
     try {
-      const response = await fetch(`/api/projects/${projectId}/export`)
-      const blob = await response.blob()
-      
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
+      const response = await fetch(`/api/projects/${projectId}/export`);`
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
       a.href = url
-      a.download = `${project?.name || 'project'}.zip`
+      a.download = `${project?.name || 'project'}.zip``
       a.click()
       URL.revokeObjectURL(url)
     } catch (error) {
       console.error('Failed to export, project:', error)
     }
   }
-  
   if (isLoading) {
     return (
     <div className="flex items-center justify-center h-screen">
@@ -127,7 +112,6 @@ export default function ProjectEditorPage() {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading project...</p>
   }
-  
   if (!project) {
     return (
     <div className="flex items-center justify-center h-screen">
@@ -135,11 +119,9 @@ export default function ProjectEditorPage() {
           <h2 className="text-xl font-semibold mb-2">Project not found</h2>
           <p className="text-muted-foreground">The project you're looking for doesn't exist.</p>
   }
-  
   return (
     <div className="h-screen flex flex-col">
       {/* Header */}
-
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -147,25 +129,23 @@ export default function ProjectEditorPage() {
               <h1 className="text-xl font-semibold">{project.name}</h1>
               <div className="flex items-center gap-2 mt-1">
                 <Badge variant="outline">{project.type}</Badge>
-                <Badge 
+                <Badge
                   className={cn(
                     project.status === 'deployed' ? 'bg-green-100 text-green-700' : '' project.status === 'draft' ? 'bg-gray-100 text-gray-700' : ''
                   )}
                 >
                   {project.status}</Badge>
                 {project.deploymentUrl && (
-                  <a 
-                    href={project.deploymentUrl} 
-                    target="_blank" 
+                  <a
+                    href={project.deploymentUrl}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-primary hover:underline"
                   >
                     View Live →</a>
                 )}
-
           <div className="flex items-center gap-4">
             {/* Mode, Toggle */}
-
             <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-lg">
               <span className={cn(
                 "text-sm font-medium transition-colors" activeMode === 'simple' ? 'text-primary' : 'text-gray-500'
@@ -184,7 +164,6 @@ export default function ProjectEditorPage() {
                 "text-sm font-medium transition-colors" activeMode === 'advanced' ? 'text-primary' : 'text-gray-500'
               )}>
                 Advanced</span>
-            
             {/* Actions */}
             <Button variant="outline" size="sm" onClick={handleExport}>
               <Download className="h-4 w-4 mr-2" />
@@ -192,7 +171,6 @@ export default function ProjectEditorPage() {
             <Button size="sm" onClick={handleDeploy}>
               <Rocket className="h-4 w-4 mr-2" />
               Deploy</Rocket>
-      
       {/* Content */}
       <div className="flex-1 overflow-hidden">
         {activeMode === 'simple' ? (
@@ -213,23 +191,22 @@ export default function ProjectEditorPage() {
                   <TabsTrigger value="data">
                     <Database className="h-4 w-4 mr-2" />
                     Data Sources</Database>
-                
-                <TabsContent value="overview" className="mt-6">
+                <TabsContent value="overview", className="mt-6">
                   <Card className="p-6">
                     <h3 className="font-semibold mb-4">Project Overview</h3>
                     <div className="space-y-4">
                       <div>
                         <label className="text-sm font-medium">Project Name</label>
-                        <Input 
-                          value={project.name} 
+                        <Input
+                          value={project.name}
                           className="mt-1"
                           readOnly
                         />
                       </div>
                       <div>
                         <label className="text-sm font-medium">Description</label>
-                        <Textarea 
-                          value="Your AI-generated project with all the features you requested" 
+                        <Textarea
+                          value="Your AI-generated project with all the features you requested"
                           className="mt-1"
                           rows={3}
                           readOnly
@@ -242,8 +219,7 @@ export default function ProjectEditorPage() {
                             <Badge key={feature} variant="secondary">
                               {feature}</Badge>
                   ))}
-
-                <TabsContent value="settings" className="mt-6">
+                <TabsContent value="settings", className="mt-6">
                   <Card className="p-6">
                     <h3 className="font-semibold mb-4">Project Settings</h3>
                     <div className="space-y-4">
@@ -265,29 +241,25 @@ export default function ProjectEditorPage() {
                           <option>Vercel</option>
                           <option>AWS</option>
                           <option>Google Cloud</option>
-                
-                <TabsContent value="env" className="mt-6">
+                <TabsContent value="env", className="mt-6">
                   <EnvVariableEditor
                     variables={project.envVariables || []}
                     onChange={handleSaveEnvVariables}
                     projectType={project.type}
                   />
                 </TabsContent>
-                
-                <TabsContent value="data" className="mt-6">
+                <TabsContent value="data", className="mt-6">
                   <DataSourceManager
                     projectId={projectId}
                     onDataChange={(data) => {
                       // Handle data changes
-
                    }}
                   /></DataSourceManager>
-            
             <div className="h-full">
-              <LiveProjectPreview 
+              <LiveProjectPreview
                 projectData={{
-                  projectType: project.type,
-                  projectName: project.name,
+                  projectType: project.type;
+                  projectName: project.name;
                   features: ['auth', 'analytics', 'payments']
                 }}
               />
@@ -302,11 +274,9 @@ export default function ProjectEditorPage() {
         )}
   );
 }
-
 // Add missing imports
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 }
-    
   );
 }

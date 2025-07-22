@@ -8,47 +8,42 @@ import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, DollarSign, TrendingUp, Activity, Server, Database, BarChart3, Globe, Zap, Shield, Package } from 'lucide-react';
 import { AnalyticsService, PlatformMetrics, UserMetrics, RevenueMetrics, SystemMetrics, ContentMetrics } from '@/lib/analytics';
-
 interface EnterpriseDashboardProps {
   userRole?: 'admin' | 'user';
 };
-
 export default function EnterpriseDashboard({
-  userRole = 'user'}: EnterpriseDashboardProps) {
+  userRole = 'user'}: EnterpriseDashboardProps): void {
   const { data: session } = useSession();
   void session; // Mark as used for future auth implementation
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('30d');
-  const [platformMetrics, setPlatformMetrics] =
+  const [platformMetrics, setPlatformMetrics] =;
         </PlatformMetrics>
     useState<PlatformMetrics | null>(null);
       </UserMetrics>
   const [userMetrics, setUserMetrics] = useState<UserMetrics | null>(null);
-  const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(
+  const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(;
     null
       </RevenueMetrics>
-  const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(
+  const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(;
     null
       </SystemMetrics>
-  const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(
+  const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(;
     null
       </ContentMetrics>
   const [testMode, setTestMode] = useState(false);
-
   useEffect(() => {
     loadDashboardData();
   }, [timeRange]);
-
   const loadDashboardData = async () => {
     setLoading(true);
     try {
-      const [platform, users, revenue, system, content] = await Promise.all([
+      const [platform, users, revenue, system, content] = await Promise.all([;
         AnalyticsService.getPlatformMetrics(),
         AnalyticsService.getUserMetrics(timeRange),
         AnalyticsService.getRevenueMetrics(timeRange),
         AnalyticsService.getSystemMetrics(),
         AnalyticsService.getContentMetrics()]);
-
       setPlatformMetrics(platform);
       setUserMetrics(users);
       setRevenueMetrics(revenue);
@@ -61,27 +56,22 @@ export default function EnterpriseDashboard({
       setLoading(false);
 }
   };
-
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'}).format(amount);
+      style: 'currency';
+      currency: 'USD'}).format(amount)
   };
-
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat('en-US').format(num);
   };
-
   const formatPercentage = (num: number) => {
-    return `${num.toFixed(1)}%`;
+    return `${num.toFixed(1)}%`;`
   };
-
   // Utility function for future use
   // const formatTime = (seconds: number) => {
   //   const minutes = Math.floor(seconds / 60)
-  //   return `${minutes}m ${seconds % 60}s`
+  //   return `${minutes}m ${seconds % 60}s``
   // }
-
   if (loading) {
     return (
     <div className="flex items-center justify-center min-h-screen">
@@ -89,11 +79,9 @@ export default function EnterpriseDashboard({
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading enterprise dashboard...</p>
   }
-
   return (
     <div className="space-y-6">
       {/* Header */}
-
       <div className="flex flex-col space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -111,7 +99,6 @@ export default function EnterpriseDashboard({
               <option value="90d">Last 90 days</option>
             <Button onClick={loadDashboardData} variant="outline">
               Refresh</Button>
-
         {testMode && (
           <Alert>
             <AlertDescription>
@@ -119,7 +106,6 @@ export default function EnterpriseDashboard({
               production, this would display real-time analytics from your
               database and monitoring systems.</AlertDescription>
         )}
-
       {/* Platform Overview */}
       {platformMetrics && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -131,10 +117,8 @@ export default function EnterpriseDashboard({
             <CardContent>
               <div className="text-2xl font-bold">
                 {formatNumber(platformMetrics.totalUsers)}
-
               <p className="text-xs text-muted-foreground">
                 {formatNumber(platformMetrics.activeUsers)} active this month</p>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -144,10 +128,8 @@ export default function EnterpriseDashboard({
             <CardContent>
               <div className="text-2xl font-bold">
                 {formatCurrency(platformMetrics.totalRevenue)}
-
               <p className="text-xs text-muted-foreground">
                 {formatCurrency(platformMetrics.monthlyRevenue)} this month</p>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -157,10 +139,8 @@ export default function EnterpriseDashboard({
             <CardContent>
               <div className="text-2xl font-bold">
                 {formatNumber(platformMetrics.totalProjects)}
-
               <p className="text-xs text-muted-foreground">
                 AI-generated projects</p>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -170,10 +150,8 @@ export default function EnterpriseDashboard({
             <CardContent>
               <div className="text-2xl font-bold">
                 {formatPercentage(platformMetrics.conversionRate)}
-
               <p className="text-xs text-muted-foreground">
                 Free to paid conversion</p>)}
-
       {/* System Health */}
       {systemMetrics && (
         <Card>
@@ -196,7 +174,6 @@ export default function EnterpriseDashboard({
                     {formatPercentage(systemMetrics.uptime)}</Badge>
                 <Progress value={systemMetrics.uptime} className="h-2" />
               </div>
-
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Cache Hit Rate</span>
@@ -204,7 +181,6 @@ export default function EnterpriseDashboard({
                     {formatPercentage(systemMetrics.cacheHitRate)}</Badge>
                 <Progress value={systemMetrics.cacheHitRate} className="h-2" />
               </div>
-
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Error Rate</span>
@@ -218,7 +194,6 @@ export default function EnterpriseDashboard({
                   className="h-2"
                 />
               </div>
-
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Response Time</span>
@@ -226,7 +201,6 @@ export default function EnterpriseDashboard({
                     {systemMetrics.averageResponseTime}ms</Badge>
                 <div className="text-xs text-gray-500">
                   Average API response</div>
-
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-2">
                 <Server className="h-4 w-4 text-blue-500" />
@@ -243,7 +217,6 @@ export default function EnterpriseDashboard({
                 <span className="text-sm">
                   Storage: {systemMetrics.storageUsed}GB used</span>
       )}
-
       {/* Revenue Analytics */}
       {revenueMetrics && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -277,7 +250,6 @@ export default function EnterpriseDashboard({
                     className="bg-red-100 text-red-800"
                   >
                     {formatPercentage(revenueMetrics.churnRate)}</Badge>
-
           <Card>
             <CardHeader>
               <CardTitle>Subscription Tiers</CardTitle>
@@ -293,7 +265,6 @@ export default function EnterpriseDashboard({
                           {formatNumber(tier.count)} users</div>
                         <div className="text-xs text-gray-500">
                           {formatCurrency(tier.revenue)}
-
                     <Progress
                       value={
                         (tier.count /
@@ -306,7 +277,6 @@ export default function EnterpriseDashboard({
                       className="h-2"
                     /></Progress>))}
           </Card>)}
-
       {/* User Analytics */}
       {userMetrics && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -331,7 +301,6 @@ export default function EnterpriseDashboard({
                     className="h-2"
                   />
                 </div>
-
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium">Day 7 Retention</span>
@@ -345,7 +314,6 @@ export default function EnterpriseDashboard({
                     className="h-2"
                   />
                 </div>
-
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium">
@@ -360,7 +328,6 @@ export default function EnterpriseDashboard({
                     className="h-2"
                   />
                 </div>
-
           <Card>
             <CardHeader>
               <CardTitle>Top Countries</CardTitle>
@@ -378,7 +345,6 @@ export default function EnterpriseDashboard({
                     <div className="text-right">
                       <div className="text-sm font-bold">
                         {formatNumber(country.users)}
-
                       <div className="text-xs text-gray-500">
                         {formatPercentage(
                           (country.users /
@@ -388,10 +354,8 @@ export default function EnterpriseDashboard({
                             )) *
                             100
                         )}
-
                 ))}
               </div>)}
-
       {/* Content Analytics */}
       {contentMetrics && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -406,25 +370,20 @@ export default function EnterpriseDashboard({
                 <div className="text-center">
                   <div className="text-2xl font-bold">
                     {formatNumber(contentMetrics.totalTemplates)}
-
                   <div className="text-xs text-gray-500">Total Templates</div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
                     {formatNumber(contentMetrics.totalDownloads)}
-
                   <div className="text-xs text-gray-500">Total Downloads</div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
                     {contentMetrics.pendingReviews}
-
                   <div className="text-xs text-gray-500">Pending Reviews</div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
                     {contentMetrics.averageRating}
-
                   <div className="text-xs text-gray-500">Average Rating</div>
             </CardContent>
-
           <Card>
             <CardHeader>
               <CardTitle>Popular Frameworks</CardTitle>
@@ -449,7 +408,6 @@ export default function EnterpriseDashboard({
                       className="h-2"
                     /></Progress>))}
           </Card>)}
-
       {/* Admin Actions */}
       {userRole === 'admin' && (
         <Card>
@@ -462,17 +420,16 @@ export default function EnterpriseDashboard({
               Administrative tools and system management</CardDescription>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button variant="outline" className="justify-start">
+              <Button variant="outline", className="justify-start">
                 <Users className="h-4 w-4 mr-2" />
                 Manage Users</Users>
-              <Button variant="outline" className="justify-start">
+              <Button variant="outline", className="justify-start">
                 <Package className="h-4 w-4 mr-2" />
                 Review Templates</Package>
-              <Button variant="outline" className="justify-start">
+              <Button variant="outline", className="justify-start">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Export Analytics</BarChart3>
       )}
-
     );
 </Button>
 </Button>
@@ -514,8 +471,6 @@ export default function EnterpriseDashboard({
 </Alert>
 </div></div>
 }
-
-    
   );
 }
 </PlatformMetrics>

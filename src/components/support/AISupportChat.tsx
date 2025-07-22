@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,248 +18,221 @@ interface Message {
     suggestedTutorials?: string[]
     codeBlocks?: Array<{ language: string;
   code: string }>
-    actionButtons?: Array<{ label: string, action: string; data?: any }>
+    actionButtons?: Array<{ label: string; action: string; data?: any }>
   }
 };
-
 interface AISupportChatProps {
   documentationSystem: DynamicDocumentationSystem;
   tutorialSystem: InteractiveTutorialSystem;
   userId: string
   projectId?: string
 };
-
-export function AISupportChat({ 
-  documentationSystem, 
-  tutorialSystem, 
+export function AISupportChat({ ;
+  documentationSystem,
+  tutorialSystem,
   userId,
-  projectId 
-}: AISupportChatProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isMinimized, setIsMinimized] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([
+  projectId
+}: AISupportChatProps): void {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([;
     {
-      id: '1',
-      role: 'system',
+      id: '1';
+      role: 'system';
       content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?',
           </Message>
       timestamp: new Date()
     }
   ])
-  const [input, setInput] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [showQuickActions, setShowQuickActions] = useState(true)
-  const messagesEndRef = useRef<HTMLDivElement>(null)</HTMLDivElement>
-  const chatContainerRef = useRef<HTMLDivElement>(null)
-
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showQuickActions, setShowQuickActions] = useState(true);
+  const messagesEndRef = useRef<HTMLDivElement>(null)</HTMLDivElement>;
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     scrollToBottom()
   }, [messages])
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
       )}
-
     );
   const handleSendMessage = async () => {
     if (!input.trim() || isLoading) return
-
     const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: input,
+      id: Date.now().toString();
+      role: 'user';
+      content: input;
       timestamp: new Date()
     }
-
     setMessages(prev => [...prev, userMessage])
     setInput('')
     setIsLoading(true)
     setShowQuickActions(false)
-
     try {
       // Search documentation first
-      const docResults = await documentationSystem.searchDocumentation(input)
-      
+      const docResults = await documentationSystem.searchDocumentation(input);
       // Get recommended tutorials
-      const tutorials = await tutorialSystem.getRecommendedTutorials(userId)
-      
+      const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
       // Send to AI for enhanced response
       const response = await fetch('/api/support/chat', {
-        method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+        method: 'POST';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify({
-          message: input,
+          message: input;
     context: {
             userId,
             projectId,
             documentationResults: docResults.slice(0, 3),
-            availableTutorials: tutorials.map(t => ({ id: t.id, title: t.title })),
+            availableTutorials: tutorials.map(t => ({ id: t.id; title: t.title }));
             conversationHistory: messages.slice(-5)
           }
         })
       })
-
-      const data = await response.json()
-
+      const data = await response.json();
       const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: data.response,
-        timestamp: new Date(),
+        id: (Date.now() + 1).toString();
+        role: 'assistant';
+        content: data.response;
+        timestamp: new Date();
     metadata: {
-          suggestedDocs: data.suggestedDocs,
-          suggestedTutorials: data.suggestedTutorials,
-          codeBlocks: data.codeBlocks,
+          suggestedDocs: data.suggestedDocs;
+          suggestedTutorials: data.suggestedTutorials;
+          codeBlocks: data.codeBlocks;
           actionButtons: data.actionButtons
         }
       }
-
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
       console.error('Failed to get AI, response:', error)
-      
       const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
+        id: (Date.now() + 1).toString();
+        role: 'assistant';
         content: 'I apologize, but I encountered an error. Please try again or check the documentation.',
         timestamp: new Date()
       }
-      
       setMessages(prev => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
     }
   }
-
   const handleQuickAction = async (action: string) => {
     switch (action) {
       case 'browse-docs':
         setSearchQuery('')
         setShowQuickActions(false)
         // Show documentation categories
-        const categories = ['getting-started', 'api-reference', 'tutorials', 'troubleshooting']
+        const categories = ['getting-started', 'api-reference', 'tutorials', 'troubleshooting'];
         const docsMessage: Message = {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: 'Here are the main documentation, categories:',
-          timestamp: new Date(),
+          id: Date.now().toString();
+          role: 'assistant';
+          content: 'Here are the main documentation; categories: ';
+          timestamp: new Date();
     metadata: {
             actionButtons: categories.map(cat => ({
               label: cat.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()),
-              action: 'browse-category',
+              action: 'browse-category';
     data: { category: cat }
             }))
           }
         }
         setMessages(prev => [...prev, docsMessage])
         break
-
       case 'start-tutorial':
-        const tutorials = await tutorialSystem.getRecommendedTutorials(userId)
+        const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
         const tutorialMessage: Message = {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: 'Here are some recommended tutorials for, you:',
-          timestamp: new Date(),
+          id: Date.now().toString();
+          role: 'assistant';
+          content: 'Here are some recommended tutorials for; you: ';
+          timestamp: new Date();
     metadata: {
             suggestedTutorials: tutorials.slice(0, 3).map(t => t.id),
             actionButtons: tutorials.slice(0, 3).map(t => ({
-              label: `Start: ${t.title}`,
-              action: 'start-tutorial',
+              label: `Start: ${t.title}`;`
+              action: 'start-tutorial';
     data: { tutorialId: t.id }
             }))
           }
         }
         setMessages(prev => [...prev, tutorialMessage])
         break
-
       case 'report-issue':
         setInput('I\'m experiencing an issue with ')
         break
-
       case 'get-help':
         const helpMessage: Message = {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: 'I can help you, with:\n\n• Finding documentation\n• Starting tutorials\n• Troubleshooting errors\n• Understanding features\n• Getting code examples\n\nWhat would you like help with?',
+          id: Date.now().toString();
+          role: 'assistant';
+          content: 'I can help you; with: \n\n• Finding documentation\n• Starting tutorials\n• Troubleshooting errors\n• Understanding features\n• Getting code examples\n\nWhat would you like help with?';
           timestamp: new Date()
         }
         setMessages(prev => [...prev, helpMessage])
         break
     }
   }
-
   const handleActionButton = async (action: string, data?: any) => {
     switch (action) {
       case 'browse-category':
-        const sections = documentationSystem.getSectionsByCategory(data.category)
+        const sections = documentationSystem.getSectionsByCategory(data.category);
         const categoryMessage: Message = {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: `Here are the ${data.category} documentation, sections:`,
-          timestamp: new Date(),
+          id: Date.now().toString();
+          role: 'assistant';
+          content: `Here are the ${data.category} documentation; sections: `;`
+          timestamp: new Date();
     metadata: {
-            suggestedDocs: sections.map(s => s.id),
+            suggestedDocs: sections.map(s => s.id);
             actionButtons: sections.slice(0, 5).map(s => ({
-              label: s.title,
-              action: 'open-doc',
+              label: s.title;
+              action: 'open-doc';
     data: { sectionId: s.id }
             }))
           }
         }
         setMessages(prev => [...prev, categoryMessage])
         break
-
       case 'open-doc':
-        const section = documentationSystem.getSection(data.sectionId)
+        const section = documentationSystem.getSection(data.sectionId);
         if (section) {
           // In a real app, this would open the documentation viewer
-          window.open(`/docs/${data.sectionId}`, '_blank')
+          window.open(`/docs/${data.sectionId}`, '_blank')`
         }
         break
-
       case 'start-tutorial':
         try {
           await tutorialSystem.startTutorial(data.tutorialId, userId)
           // In a real app, this would start the tutorial overlay
-          window.location.href = `/tutorials/${data.tutorialId}`
+          window.location.href = `/tutorials/${data.tutorialId}``
         } catch (error) {
           console.error('Failed to start, tutorial:', error)
         }
         break
     }
   }
-
   const handleSearch = async () => {
     if (!searchQuery.trim()) return
-
-    const results = await documentationSystem.searchDocumentation(searchQuery)
+    const results = await documentationSystem.searchDocumentation(searchQuery);
     const searchMessage: Message = {
-      id: Date.now().toString(),
-      role: 'assistant',
-      content: `Found ${results.length} results for "${searchQuery}":`,
-      timestamp: new Date(),
+      id: Date.now().toString();
+      role: 'assistant';
+      content: `Found ${results.length} results for "${searchQuery}":`;`
+      timestamp: new Date();
     metadata: {
         suggestedDocs: results.slice(0, 5).map(r => r.sectionId),
         actionButtons: results.slice(0, 5).map(r => ({
-          label: r.title,
-          action: 'open-doc',
+          label: r.title;
+          action: 'open-doc';
     data: { sectionId: r.sectionId }
         }))
       }
     }
-    
     setMessages(prev => [...prev, searchMessage])
     setSearchQuery('')
   }
-
-  const quickActions = [
-    { icon: Book, label: 'Browse Docs', action: 'browse-docs' },
-    { icon: Play, label: 'Start Tutorial', action: 'start-tutorial' },
-    { icon: HelpCircle, label: 'Get Help', action: 'get-help' }
+  const quickActions = [;
+    { icon: Book; label: 'Browse Docs'; action: 'browse-docs' },
+    { icon: Play; label: 'Start Tutorial'; action: 'start-tutorial' },
+    { icon: HelpCircle; label: 'Get Help'; action: 'get-help' }
   ]
-
   if (!isOpen) {
     return (
     <Button
@@ -270,7 +242,6 @@ export function AISupportChat({
         <MessageCircle className="h-6 w-6" />
       </Button>
   }
-
   return (
     <div
       ref={chatContainerRef}
@@ -309,7 +280,6 @@ export function AISupportChat({
             ></Button>
               <X className="h-4 w-4" />
             </Button>
-
         {!isMinimized && (
           <>
             {/* Search Bar */}
@@ -323,11 +293,10 @@ export function AISupportChat({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none, focus:ring-2 focus:ring-primary/20"
+                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus: outline-none; focus:ring-2 focus:ring-primary/20"
                   /></input>
                 <Button size="sm" onClick={handleSearch}>
                   Search</Button>
-
             {/* Messages */}
             <ScrollArea className="flex-1 p-4">
               <div className="space-y-4">
@@ -355,25 +324,22 @@ export function AISupportChat({
                           : "bg-muted"
                       )}>
                         <p className="whitespace-pre-wrap">{message.content}</p>
-                      
                       {/* Code blocks */}
                       {message.metadata?.codeBlocks?.map((block, index) => (
                         <div key={index} className="max-w-[85%]">
                           <pre className="bg-zinc-900 text-zinc-100 p-3 rounded-lg overflow-x-auto text-xs">
                             <code>{block.code}</code>))}
-                      
                       {/* Suggested docs */}
                       {message.metadata?.suggestedDocs && message.metadata.suggestedDocs.length > 0 && (
                         <div className="max-w-[85%] space-y-1">
                           <p className="text-xs text-muted-foreground">Related, documentation:</p>
                           {message.metadata.suggestedDocs.map((docId) => {
-                            const doc = documentationSystem.getSection(docId)
+                            const doc = documentationSystem.getSection(docId);
                             return doc ? (
                               <button
                                 key={docId}
                                 onClick={() => handleActionButton('open-doc', { sectionId: docId}
       )}
-
   );
                                 className="text-xs text-primary hover:underline block text-left"
                               >
@@ -381,10 +347,8 @@ export function AISupportChat({
                             ) : null
                           }
       )}
-
   );
                       )}
-                      
                       {/* Action buttons */}
                       {message.metadata?.actionButtons && message.metadata.actionButtons.length > 0 && (
                         <div className="flex flex-wrap gap-2 max-w-[85%]">
@@ -398,11 +362,8 @@ export function AISupportChat({
                             >
                               {button.label}</Button>
                           ))}
-
                       )}
-
                 ))}
-                
                 {isLoading && (
                   <div className="flex gap-3">
                     <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
@@ -412,10 +373,8 @@ export function AISupportChat({
                       <Loader2 className="h-4 w-4 animate-spin" />
                     </div>
                 )}
-                
                 <div ref={messagesEndRef} />
               </div>
-
             {/* Quick Actions */}
             {showQuickActions && messages.length === 1 && (
               <div className="p-3 border-t">
@@ -431,9 +390,7 @@ export function AISupportChat({
                     ></Button>
                       <action.icon className="h-4 w-4" />
                       <span className="text-xs">{action.label}</span>))}
-
             )}
-
             {/* Input */}
             <div className="p-3 border-t">
               <div className="flex gap-2">
@@ -466,6 +423,5 @@ export function AISupportChat({
                   AI-powered support with real-time documentation</p>
           </>
         );}
-      
   );
 }

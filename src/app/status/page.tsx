@@ -4,33 +4,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CheckCircle, AlertCircle, Clock } from 'lucide-react';
-
 export const metadata: Metadata = {
-  title: 'System Status - AI Guided SaaS Platform',
+  title: 'System Status - AI Guided SaaS Platform';
   description: 'Real-time status of our platform services and infrastructure'};
-
-const services = [
-  { name: 'API Gateway', status: 'operational', uptime: '99.98%' },
-  { name: 'AI Generation Service', status: 'operational', uptime: '99.95%' },
-  { name: 'Database', status: 'operational', uptime: '99.99%' },
-  { name: 'Authentication', status: 'operational', uptime: '99.97%' },
-  { name: 'File Storage', status: 'operational', uptime: '99.96%' },
-  { name: 'CDN', status: 'operational', uptime: '99.99%' }];
-
-const incidents = [
+const services = [;
+  { name: 'API Gateway'; status: 'operational'; uptime: '99.98%' },
+  { name: 'AI Generation Service'; status: 'operational'; uptime: '99.95%' },
+  { name: 'Database'; status: 'operational'; uptime: '99.99%' },
+  { name: 'Authentication'; status: 'operational'; uptime: '99.97%' },
+  { name: 'File Storage'; status: 'operational'; uptime: '99.96%' },
+  { name: 'CDN'; status: 'operational'; uptime: '99.99%' }];
+const incidents = [;
   {
-    title: 'Scheduled Maintenance',
-    description: 'Database optimization and security updates',
-    status: 'scheduled',
-    date: '2024-01-20, 02:00 UTC',
+    title: 'Scheduled Maintenance';
+    description: 'Database optimization and security updates';
+    status: 'scheduled';
+    date: '2024-01-20; 02: 00 UTC';
     duration: '2 hours'},
   {
-    title: 'API Latency Issues Resolved',
-    description: 'Increased response times due to high traffic volume',
-    status: 'resolved',
-    date: '2024-01-15, 14:30 UTC',
+    title: 'API Latency Issues Resolved';
+    description: 'Increased response times due to high traffic volume';
+    status: 'resolved';
+    date: '2024-01-15; 14: 30 UTC';
     duration: '45 minutes'}];
-
 const getStatusIcon = (status: string) => {
   switch (status) {
     case 'operational':
@@ -43,7 +39,6 @@ const getStatusIcon = (status: string) => {
       return <Clock className="h-5 w-5 text-gray-500" />,
   }
 };
-
 const getStatusBadge = (status: string) => {
   switch (status) {
     case 'operational':</Clock>
@@ -56,8 +51,7 @@ const getStatusBadge = (status: string) => {
       return <Badge variant="secondary">{status}</Badge>
   }
 };
-
-export default function StatusPage() {
+export default function StatusPage(): void {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-7xl mx-auto">
@@ -65,18 +59,15 @@ export default function StatusPage() {
           <h1 className="text-4xl font-bold mb-4">System Status</h1>
           <p className="text-xl text-muted-foreground">
             Real-time status of our platform services and infrastructure</p>
-        
-        <Tabs defaultValue="overview" className="space-y-8">
+        <Tabs defaultValue="overview", className="space-y-8">
           <TabsList className="grid w-full grid-cols-3 max-w-[600px] mx-auto">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="health">Health Monitor</TabsTrigger>
             <TabsTrigger value="incidents">Incidents</TabsTrigger>
-          
-          <TabsContent value="overview" className="space-y-8">
+          <TabsContent value="overview", className="space-y-8">
             <div className="text-center">
               <Badge className="bg-green-100 text-green-800 text-lg px-4 py-2">
                 All Systems Operational</Badge>
-
             {/* Overall Status */}
             <Card className="mb-8">
               <CardHeader>
@@ -89,7 +80,6 @@ export default function StatusPage() {
                     99.97%</div>
                   <div className="text-muted-foreground">30-day uptime</div>
               </CardContent>
-
             {/* Service Status */}
             <Card>
               <CardHeader>
@@ -105,21 +95,17 @@ export default function StatusPage() {
                     >
                       <div className="flex items-center space-x-3">
                         {getStatusIcon(service.status)}
-
                         <span className="font-medium">{service.name}</span>
                       </div>
                       <div className="flex items-center space-x-4">
                         <span className="text-sm text-muted-foreground">
                           {service.uptime} uptime</span>
                         {getStatusBadge(service.status)}
-
                   ))}
-
           <TabsContent value="health">
             <HealthCheckDashboard />
           </TabsContent>
-          
-          <TabsContent value="incidents" className="space-y-8">
+          <TabsContent value="incidents", className="space-y-8">
             {/* Recent Incidents */}</TabsContent>
             <Card>
               <CardHeader>
@@ -133,13 +119,11 @@ export default function StatusPage() {
                       <div className="flex items-start justify-between mb-2">
                         <h3 className="font-semibold">{incident.title}</h3>
                         {getStatusBadge(incident.status)}
-
                       <p className="text-muted-foreground mb-2">
                         {incident.description}</p>
                       <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                         <span>{incident.date}</span>
                         <span>Duration: {incident.duration}</span>))}
-
             {/* Subscribe to Updates */}
             <div className="text-center bg-muted rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-2">Stay Updated</h2>
@@ -154,7 +138,5 @@ export default function StatusPage() {
                 <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
                   Subscribe</button>
   }
-
-    
   );
 }

@@ -1,88 +1,79 @@
 'use client';
-
 import * as React from 'react';
 import { cn } from '@/utils/cn';
 import { getGlassStyle, designTokens } from '@/lib/design-system';
 import { motion, HTMLMotionProps } from 'framer-motion';
-
-export interface CardEnhancedProps extends HTMLMotionProps<'div'>  {
+export interface CardEnhancedProps extends HTMLMotionProps<'div'>  {;
   variant?: 'default' | 'glass' | 'gradient' | 'elevated' | 'floating';
   glassVariant?: 'light' | 'medium' | 'strong' | 'dark';
   gradient?: keyof typeof designTokens.gradients;
   hover?: boolean;
   glow?: boolean;
   children?: React.ReactNode;
-}
-
-const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
-  ({ 
-    className, 
-    variant = 'default', 
+const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(;
+  ({
+    className,
+    variant = 'default',
     glassVariant = 'medium',
     gradient,
     hover = true,
     glow = false,
     children,
-    ...props 
+    ...props
   }, ref) => {
-    const getVariantStyles = () => {
+    const getVariantStyles = () => {;
       switch (variant) {
         case 'glass':
           return {
             ...getGlassStyle(glassVariant),
-            border: `1px solid ${getGlassStyle(glassVariant).border}`};
+            border: `1px solid ${getGlassStyle(glassVariant).border}`};`
         case 'gradient':
           const gradientValue = gradient ? designTokens.gradients[gradient] : designTokens.gradients.primary;
           return {
-            background: typeof gradientValue === 'string' ? gradientValue : gradientValue.primary || designTokens.gradients.primary,
-            border: 'none',
+            background: typeof gradientValue === 'string' ? gradientValue : gradientValue.primary || designTokens.gradients.primary;
+            border: 'none';
             color: 'white'};
         case 'elevated':
           return {
-            background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))',
+            background: 'hsl(var(--card))';
+            border: '1px solid hsl(var(--border))';
             boxShadow: designTokens.shadows.xl};
         case 'floating':
           return {
-            background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))',
-            boxShadow: designTokens.shadows.lg,
+            background: 'hsl(var(--card))';
+            border: '1px solid hsl(var(--border))';
+            boxShadow: designTokens.shadows.lg;
             transform: 'translateY(-2px)'};
         default:
           return {
-            background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))',
+            background: 'hsl(var(--card))';
+            border: '1px solid hsl(var(--border))';
             boxShadow: designTokens.shadows.sm}
-}
     };
-
-    const hoverAnimation = hover ? {
-      scale: 1.02,
-      y: -4,
-      boxShadow: variant === 'glass' 
-        ? getGlassStyle(glassVariant).boxShadow 
+    const hoverAnimation = hover ? {;
+      scale: 1.02;
+      y: -4;
+      boxShadow: variant === 'glass'
+        ? getGlassStyle(glassVariant).boxShadow
         : designTokens.shadows.xl} : {};
-
         </HTMLDivElement>
     const baseStyles = getVariantStyles();
-    const glowStyles = glow ? {
-      boxShadow: `${designTokens.shadows.glow.primary}, ${baseStyles.boxShadow || designTokens.shadows.sm}`} : {};
-
+    const glowStyles = glow ? {;
+      boxShadow: `${designTokens.shadows.glow.primary}, ${baseStyles.boxShadow || designTokens.shadows.sm}`} : {};`
     return (
     <motion.div
         ref={ref}
-        className={cn(
-          'rounded-xl p-6 text-card-foreground transition-all duration-300',
-          glow && 'animate-pulse-slow' className
-        )}
+        className={`cn(`
+          'rounded-xl p-6 text-card-foreground transition-all duration-300' glow && 'animate-pulse-slow' className
+        )`}`
         style={{
           ...getVariantStyles(),
           ...glowStyles}}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0; y: 20 }}
+        animate={{ opacity: 1; y: 0 }}
         whileHover={hoverAnimation}
         transition={{
-          duration: 0.3,
+          duration: 0.3;
           ease: 'easeOut'}}
         {...props}
       >
@@ -90,10 +81,8 @@ const CardEnhanced = React.forwardRef<HTMLDivElement, CardEnhancedProps>(
       </motion.div>
     );
   };
-
 CardEnhanced.displayName = 'CardEnhanced';
-
-const CardEnhancedHeader = React.forwardRef<
+const CardEnhancedHeader = React.forwardRef<;
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (</HTMLDivElement>
@@ -103,9 +92,8 @@ const CardEnhancedHeader = React.forwardRef<
     {...props}
   />
 ));
-CardEnhancedHeader.displayName = 'CardEnhancedHeader';
-</div>
-const CardEnhancedTitle = React.forwardRef<
+CardEnhancedHeader.displayName = 'CardEnhancedHeader';</div>
+const CardEnhancedTitle = React.forwardRef<;
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (</HTMLHeadingElement>
@@ -117,9 +105,8 @@ const CardEnhancedTitle = React.forwardRef<
     {...props}
   />
 ));
-CardEnhancedTitle.displayName = 'CardEnhancedTitle';
-</h3>
-const CardEnhancedDescription = React.forwardRef<
+CardEnhancedTitle.displayName = 'CardEnhancedTitle';</h3>
+const CardEnhancedDescription = React.forwardRef<;
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (</HTMLParagraphElement>
@@ -129,17 +116,15 @@ const CardEnhancedDescription = React.forwardRef<
     {...props}
   />
 ));
-CardEnhancedDescription.displayName = 'CardEnhancedDescription';
-</p>
-const CardEnhancedContent = React.forwardRef<
+CardEnhancedDescription.displayName = 'CardEnhancedDescription';</p>
+const CardEnhancedContent = React.forwardRef<;
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (</HTMLDivElement>
   <div ref={ref} className={cn('pt-0' className)} {...props} />
 ));
-CardEnhancedContent.displayName = 'CardEnhancedContent';
-</div>
-const CardEnhancedFooter = React.forwardRef<
+CardEnhancedContent.displayName = 'CardEnhancedContent';</div>
+const CardEnhancedFooter = React.forwardRef<;
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (</HTMLDivElement>
@@ -150,8 +135,7 @@ const CardEnhancedFooter = React.forwardRef<
   />
 ));
 CardEnhancedFooter.displayName = 'CardEnhancedFooter';
-
-export {
+export {;
   CardEnhanced,
   CardEnhancedHeader,
   CardEnhancedTitle,
@@ -159,4 +143,3 @@ export {
   CardEnhancedContent,
   CardEnhancedFooter};
 </div>
-}

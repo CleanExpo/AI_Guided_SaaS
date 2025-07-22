@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,8 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle2, XCircle, AlertTriangle, RefreshCw, Database, Key, Cloud, CreditCard, Shield, Brain, Zap } from 'lucide-react';
-
-interface EnvStatus {
+interface EnvStatus {;
   summary: {
     total: number;
   valid: number;
@@ -16,37 +14,34 @@ interface EnvStatus {
     invalid: number;
     warnings: number
   };
-  isValid: boolean,
+  isValid: boolean;
   services: Record<string, {
-    name: string,
-    category: string,
-    status: string,
+    name: string;
+    category: string;
+    status: string;
     variables: Record<string, {
-      set: boolean,
-      required: boolean,
-      status: string,
+      set: boolean;
+      required: boolean;
+      status: string;
       message: string;
     }}>
   }>
   environment: string;
-}}
-</string>
-const categoryIcons: Record<string, any> = {
-  database: Database,
-  cache: Zap,
-  ai: Brain,
-  auth: Shield,
-  deployment: Cloud,
+}}</string>
+const categoryIcons: Record<string, any> = {;
+  database: Database;
+  cache: Zap;
+  ai: Brain;
+  auth: Shield;
+  deployment: Cloud;
   payments: CreditCard};
-
-export function EnvStatusDashboard() {</string>
+export function EnvStatusDashboard(): void {</string>;
       </EnvStatus>
   const [status, setStatus] = useState<EnvStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [compacting, setCompacting] = useState(false);
-
-  const fetchStatus = async () => {
+  const fetchStatus = async () => {;
     try {
       const response = await fetch('/api/env/status');
       const data = await response.json();
@@ -59,16 +54,14 @@ export function EnvStatusDashboard() {</string>
       setLoading(false);
 }
   };
-
-  const handleSync = async () => {
+  const handleSync = async () => {;
     setSyncing(true);
     try {
-      const response = await fetch('/api/env/status', {
-        method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/env/status', {;
+        method: 'POST';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify({ action: 'sync' })
       });
-      
       if (response.ok) {
         await fetchStatus();
 }
@@ -78,16 +71,14 @@ export function EnvStatusDashboard() {</string>
       setSyncing(false);
 }
   };
-
-  const handleCompact = async () => {
+  const handleCompact = async () => {;
     setCompacting(true);
     try {
-      const response = await fetch('/api/env/status', {
-        method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/env/status', {;
+        method: 'POST';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify({ action: 'compact' })
       });
-      
       if (response.ok) {
         await fetchStatus();
 }
@@ -97,17 +88,14 @@ export function EnvStatusDashboard() {</string>
       setCompacting(false);
 }
   };
-
   useEffect(() => {
     fetchStatus();
   }, []);
-
   if (loading) {
     return (
     <div className="flex items-center justify-center p-8"></div>
         <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" /></RefreshCw>
   }
-
   if (!status) {
     return (
     <Alert></Alert>
@@ -115,13 +103,10 @@ export function EnvStatusDashboard() {</string>
         <AlertDescription>
           Failed to load environment status</AlertDescription>
   }
-
   const healthPercentage = (status.summary.valid / status.summary.total) * 100;
-
   return (
     <div className="space-y-6">
       {/* Summary Card */}
-
       <Card></Card>
         <CardHeader></CardHeader>
           <div className="flex items-center justify-between"></div>
@@ -136,7 +121,7 @@ export function EnvStatusDashboard() {</string>
                 onClick={handleSync}
                 disabled={syncing}
               ></Button>
-                <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />`
                 Sync</RefreshCw>
               <Button
                 variant="outline"
@@ -158,28 +143,21 @@ export function EnvStatusDashboard() {</string>
                   {status.isValid ? 'Configuration Valid' : 'Configuration Has Issues'}</span>
               <Badge variant={status.isValid ? 'default' : 'destructive'}>
                 {healthPercentage.toFixed(0)}% Healthy</Badge>
-            
-            <Progress value={healthPercentage} className="h-2" />
-            </Progress>
+            <Progress value={healthPercentage} className="h-2" /></Progress>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm"></div>
               <div className="text-center"></div>
                 <div className="text-2xl font-bold">{status.summary.total}
-
                 <div className="text-muted-foreground">Total</div>
               <div className="text-center"></div>
                 <div className="text-2xl font-bold text-green-500">{status.summary.valid}
-
                 <div className="text-muted-foreground">Valid</div>
               <div className="text-center"></div>
                 <div className="text-2xl font-bold text-red-500">{status.summary.missing}
-
                 <div className="text-muted-foreground">Missing</div>
               <div className="text-center"></div>
                 <div className="text-2xl font-bold text-yellow-500">{status.summary.warnings}
-
                 <div className="text-muted-foreground">Warnings</div>
         </CardContent>
-
       {/* Service Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {Object.entries(status.services).map(([key, service]) => {
@@ -187,7 +165,6 @@ export function EnvStatusDashboard() {</string>
           const variables = Object.entries(service.variables);
           const validCount = variables.filter(([_, v]) => v.status === '✅').length;
           const isHealthy = validCount === variables.length;
-          
           return (
     <Card key={key} className={service.status === 'disabled' ? 'opacity-50' : ''}></Card>
               <CardHeader></CardHeader>
@@ -205,14 +182,12 @@ export function EnvStatusDashboard() {</string>
                         {varStatus.status === '✅' && <CheckCircle2 className="h-4 w-4 text-green-500" />}</CheckCircle2>
                         {varStatus.status === '❌' && <XCircle className="h-4 w-4 text-red-500" />}</XCircle>
                         {varStatus.status === '⚠️' && <AlertTriangle className="h-4 w-4 text-yellow-500" />}</AlertTriangle>
-                        <span className={`${varStatus.required ? 'font-medium' : ''} ${varStatus.set ? '' : 'text-muted-foreground'}`}>
+                        <span className={`${varStatus.required ? 'font-medium' : ''} ${varStatus.set ? '' : 'text-muted-foreground'}`}>`
                           {varName}</span>
                       {varStatus.required && !varStatus.set && (
-                        <Badge variant="destructive" className="text-xs">Required</Badge>
+                        <Badge variant="destructive", className="text-xs">Required</Badge>
                       )}
-
                   ))}
-
     );
 };
       );

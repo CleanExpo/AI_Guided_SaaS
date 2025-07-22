@@ -1,0 +1,154 @@
+
+> ai-guided-saas@1.0.0 build
+> node scripts/validate-env-build.cjs && next build
+
+🔍 Validating environment configuration...
+
+Build environment: Local Development
+
+Environment Variables:
+NEXTAUTH_URL: NOT SET
+NEXT_PUBLIC_APP_URL: NOT SET
+APP_URL: NOT SET
+NODE_ENV: NOT SET
+VERCEL_URL: NOT SET
+
+⚠️  Local development build - skipping strict environment validation
+Make sure to set environment variables for production deployment
+
+==================================================
+✅ Local build proceeding without strict validation
+  ▲ Next.js 14.2.30
+  - Environments: .env.local, .env.production
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./src/components/admin/AdminDashboard.tsx
+Error: 
+  [31mx[0m Expression expected
+    ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/admin/AdminDashboard.tsx[0m:62:1]
+ [2m62[0m |     switch (type) {
+ [2m63[0m |       case 'user_signup':
+ [2m64[0m |         return <Users className="h-4 w-4 text-blue-500" />
+ [2m65[0m |       case 'project_created':</Users>
+    : [31;1m                               ^[0m
+ [2m66[0m |         return <BarChart3 className="h-4 w-4 text-purple-500" />
+ [2m67[0m |       case 'api_call':</BarChart3>
+ [2m67[0m |         return <Activity className="h-4 w-4 text-green-500" />
+    `----
+
+  [31mx[0m Expression expected
+    ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/admin/AdminDashboard.tsx[0m:62:1]
+ [2m62[0m |     switch (type) {
+ [2m63[0m |       case 'user_signup':
+ [2m64[0m |         return <Users className="h-4 w-4 text-blue-500" />
+ [2m65[0m |       case 'project_created':</Users>
+    : [31;1m                                ^^^^^[0m
+ [2m66[0m |         return <BarChart3 className="h-4 w-4 text-purple-500" />
+ [2m67[0m |       case 'api_call':</BarChart3>
+ [2m67[0m |         return <Activity className="h-4 w-4 text-green-500" />
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/admin/AdminDashboard.tsx
+./src/app/admin/dashboard/page.tsx
+
+./src/components/ui/badge.tsx
+Error: 
+  [31mx[0m Expected ',', got ')'
+    ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/badge.tsx[0m:20:1]
+ [2m20[0m |     defaultVariants: {
+ [2m21[0m |       variant: "default"
+ [2m22[0m |     }
+ [2m23[0m |   )
+    : [31;1m  ^[0m
+ [2m24[0m | 
+ [2m25[0m | export interface BadgeProps 
+ [2m25[0m |   extends React.HTMLAttributes<HTMLDivElement>,
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/ui/badge.tsx
+./src/components/AgentPulseMonitor.tsx
+./src/app/admin/agent-monitor/page.tsx
+
+./src/components/ui/button.tsx
+Error: 
+  [31mx[0m Expected ',', got ')'
+    ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/button.tsx[0m:26:1]
+ [2m26[0m |     defaultVariants: {
+ [2m27[0m |       variant: "default",
+ [2m28[0m |       size: "default"
+ [2m29[0m | )
+    : [31;1m^[0m
+ [2m30[0m | 
+ [2m31[0m | export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+ [2m31[0m |     VariantProps<typeof buttonVariants>  {
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/ui/button.tsx
+./src/app/admin/dashboard/page.tsx
+
+./src/components/ui/progress.tsx
+Error: 
+  [31mx[0m Unterminated string constant
+   ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/progress.tsx[0m:1:1]
+ [2m1[0m | import * as React from "react"
+ [2m2[0m | import * as ProgressPrimitive from "@radix-ui/react-progress""
+   : [31;1m                                                             ^[0m
+ [2m3[0m | 
+ [2m4[0m | import { cn } from '@/utils/cn';
+ [2m4[0m | 
+   `----
+
+  [31mx[0m Expected ';', got 'string literal (, ")'
+   ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/progress.tsx[0m:1:1]
+ [2m1[0m | import * as React from "react"
+ [2m2[0m | import * as ProgressPrimitive from "@radix-ui/react-progress""
+   : [31;1m                                                             ^[0m
+ [2m3[0m | 
+ [2m4[0m | import { cn } from '@/utils/cn';
+ [2m4[0m | 
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/ui/progress.tsx
+./src/components/admin/AdminAnalytics.tsx
+./src/app/admin/analytics/page.tsx
+
+./src/app/admin/debug/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+    ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/app/admin/debug/page.tsx[0m:21:1]
+ [2m21[0m |   }
+ [2m22[0m | 
+ [2m23[0m |   return (
+ [2m24[0m |     <div className="min-h-screen bg-slate-900 text-white p-8">
+    : [31;1m     ^^^[0m
+ [2m25[0m |       <div className="max-w-4xl mx-auto">
+ [2m26[0m |         <h1 className="text-3xl font-bold mb-8">Admin Debug Information</h1>
+ [2m26[0m |         
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/admin/debug/page.tsx
+
+
+> Build failed because of webpack errors

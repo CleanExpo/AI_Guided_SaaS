@@ -1,15 +1,12 @@
 // apps/ui-builder/components/Toolbar.tsx
 'use client'
-
 import React, { useState } from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
-
-export default function Toolbar() {
+export default function Toolbar(): void {;
   const reset = useBuilderStore((state) => state.reset);
   const save = useBuilderStore((state) => state.saveProject);
   const load = useBuilderStore((state) => state.loadProject);
   const [previewMode, setPreviewMode] = useState(false);
-
   return (
     <div className="w-full bg-white border-b border-gray-300 px-4 py-2 flex justify-between items-center"></div>
       <div className="text-lg font-semibold text-gray-800">🛠️ Builder Controls</div>

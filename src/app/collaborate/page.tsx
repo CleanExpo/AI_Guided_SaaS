@@ -9,51 +9,42 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Plus, Share2, MessageCircle, Clock, Globe, Lock, Zap } from 'lucide-react';
-
-export default function CollaboratePage() {
+export default function CollaboratePage(): void {
   const { data: session, status } = useSession();
       </string>
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const [projectName, setProjectName] = useState('');
   const [showWorkspace, setShowWorkspace] = useState(false);
-
   if (status === 'loading') {
     return (
     <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
   }
-
   if (!session) {
     redirect('/auth/signin');
 }
   const handleCreateProject = () => {
     if (!projectName.trim()) return;
-
-    const projectId = `project-${Date.now()}`;
+    const projectId = `project-${Date.now()}`;`
     setActiveProject(projectId);
     setShowWorkspace(true);
   };
-
   const handleJoinDemo = () => {
     setActiveProject('demo-project');
     setShowWorkspace(true);
   };
-
   if (showWorkspace && activeProject) {
     return (
     <div className="h-screen">
         <CollaborationWorkspace
           projectId={activeProject}
           onRoomCreated={roomId => {
-
          }}
         /></CollaborationWorkspace>
   }
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -70,10 +61,8 @@ export default function CollaboratePage() {
                 Dashboard</Button>
               <span className="text-sm text-gray-600">
                 Welcome, {session.user?.name}</span>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Collaborate in Real-time</h2>
@@ -81,7 +70,6 @@ export default function CollaboratePage() {
             Work together on projects with live cursors, synchronized editing,
             and instant comments. Experience the future of collaborative
             development.</p>
-
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Card>
@@ -94,7 +82,6 @@ export default function CollaboratePage() {
                 See team members&apos; cursors in real-time, track who&apos;s
                 working on what, and collaborate seamlessly across different
                 time zones.</CardDescription>
-
           <Card>
             <CardHeader>
               <div className="flex items-center space-x-2">
@@ -104,7 +91,6 @@ export default function CollaboratePage() {
               <CardDescription>
                 Add contextual comments anywhere in your project. Discuss ideas,
                 provide feedback, and resolve issues directly in the workspace.</CardDescription>
-
           <Card>
             <CardHeader>
               <div className="flex items-center space-x-2">
@@ -114,11 +100,9 @@ export default function CollaboratePage() {
               <CardDescription>
                 Monitor all project changes in real-time. See who made what
                 changes and when, with full version history.</CardDescription>
-
         {/* Action Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Create New Project */}
-
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -138,12 +122,10 @@ export default function CollaboratePage() {
                   onChange={e => setProjectName(e.target.value)}
                   onKeyPress={e => e.key === 'Enter' && handleCreateProject()}
                 /></Input>
-
               <div className="flex items-center space-x-2 text-sm text-gray-600">
                 <Globe className="h-4 w-4" />
                 <span>Public collaboration room</span>
               </div>
-
               <Button
                 onClick={handleCreateProject}
                 disabled={!projectName.trim()}
@@ -151,7 +133,6 @@ export default function CollaboratePage() {
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Create Project</Plus>
-
           {/* Join Demo */}
           <Card>
             <CardHeader>
@@ -176,12 +157,10 @@ export default function CollaboratePage() {
                   <Share2 className="h-4 w-4 text-brand-primary-600" />
                   <span>Instant sharing</span>
                 </div>
-
               <Alert>
                 <AlertDescription>
                   Demo mode uses simulated data to showcase collaboration
                   features.</AlertDescription>
-
               <Button
                 onClick={handleJoinDemo}
                 variant="outline"
@@ -189,12 +168,10 @@ export default function CollaboratePage() {
               >
                 <Zap className="h-4 w-4 mr-2" />
                 Launch Demo</Zap>
-
         {/* Technical Features */}
         <div className="mt-12">
           <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Powered by Modern Technology</h3>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
@@ -203,7 +180,6 @@ export default function CollaboratePage() {
               <h4 className="font-semibold mb-2">WebSocket Technology</h4>
               <p className="text-sm text-gray-600">
                 Real-time bidirectional communication</p>
-
             <div className="text-center">
               <div className="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
                 <Users className="h-6 w-6 text-green-600" />
@@ -211,7 +187,6 @@ export default function CollaboratePage() {
               <h4 className="font-semibold mb-2">Multi-user Support</h4>
               <p className="text-sm text-gray-600">
                 Unlimited concurrent collaborators</p>
-
             <div className="text-center">
               <div className="bg-brand-primary-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
                 <Lock className="h-6 w-6 text-brand-primary-600" />
@@ -219,7 +194,6 @@ export default function CollaboratePage() {
               <h4 className="font-semibold mb-2">Secure & Private</h4>
               <p className="text-sm text-gray-600">
                 End-to-end encrypted collaboration</p>
-
             <div className="text-center">
               <div className="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
                 <Clock className="h-6 w-6 text-orange-600" />
@@ -250,7 +224,5 @@ export default function CollaboratePage() {
 </Card>
 </div></div>
 }
-
-    
   );
 }

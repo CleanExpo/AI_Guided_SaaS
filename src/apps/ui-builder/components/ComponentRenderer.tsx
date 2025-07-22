@@ -1,12 +1,10 @@
 // apps/ui-builder/components/ComponentRenderer.tsx
 import React from 'react';
-
-type Props = {
+type Props = {;
   type: string;
   props?: { [key: string]: string }
 };
-
-export default function ComponentRenderer({ type, props = {} }: Props) {
+export default function ComponentRenderer({ type, props = {} }: Props): void {;
   switch (type) {
     case 'button':
       return (
@@ -25,7 +23,6 @@ export default function ComponentRenderer({ type, props = {} }: Props) {
           className="px-3 py-2 border rounded w-full max-w-sm"
         />
       );
-
     case 'hero':
       return (
     <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white p-8 rounded shadow-md w-full max-w-2xl"></div>
@@ -36,16 +33,13 @@ export default function ComponentRenderer({ type, props = {} }: Props) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"></div>
           <div className="p-4 border rounded bg-gray-50">
             {props.left || 'Left side content'}
-
           <div className="p-4 border rounded bg-gray-50">
             {props.right || 'Right side content'}
-
     );
     default:
       return (
     <div className="text-red-500 font-mono">Unknown,
     component: {type}
-
     );
 }
 }

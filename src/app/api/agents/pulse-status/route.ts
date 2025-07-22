@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getOrchestrator } from '@/lib/agents/AgentOrchestrator';
-
-export async function GET() {
+export async function GET(): void {
   try {
     const orchestrator = getOrchestrator();
     const status = await orchestrator.getSystemStatus();
-
     return NextResponse.json(status);
   } catch (error) {
     console.error('Error fetching pulse, status:', error);

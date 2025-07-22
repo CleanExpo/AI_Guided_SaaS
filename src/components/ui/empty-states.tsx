@@ -1,9 +1,7 @@
 'use client';
-
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { ButtonEnhanced } from './button-enhanced';
-
 interface EmptyStateProps {
   title: string;
   description?: string;
@@ -15,17 +13,15 @@ interface EmptyStateProps {
     variant?: 'default' | 'outline' | 'brand';
   };
   secondaryAction?: {
-    label: string,
-    onClick: () => void,
+    label: string;
+    onClick: () => void;
   };
   className?: string;
   size?: 'sm' | 'md' | 'lg';
-}
-
 // Built-in illustrations
 const illustrations = {
   search: (
-    <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
+    <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle
         cx="100"
         cy="100"
@@ -50,9 +46,8 @@ const illustrations = {
       />
       <circle cx="85" cy="85" r="8" fill="currentColor" opacity="0.5" />
     </svg>
-  }
   data: (
-    <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
+    <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <rect
         x="40"
         y="60"
@@ -110,9 +105,8 @@ const illustrations = {
         opacity="0.5"
       />
     </svg>
-  }
   error: (
-    <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
+    <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle
         cx="100"
         cy="100"
@@ -137,9 +131,8 @@ const illustrations = {
         opacity="0.2"
       />
     </svg>
-  }
   maintenance: (
-    <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
+    <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle
         cx="100"
         cy="100"
@@ -162,9 +155,8 @@ const illustrations = {
         opacity="0.4"
       />
     </svg>
-  }
   construction: (
-    <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
+    <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <rect
         x="60"
         y="120"
@@ -190,7 +182,6 @@ const illustrations = {
       />
     </svg>
   )};
-
 export function EmptyState({
   title,
   description,
@@ -199,58 +190,48 @@ export function EmptyState({
   action,
   secondaryAction,
   className,
-  size = 'md'}: EmptyStateProps) {
+  size = 'md'}: EmptyStateProps): void {
   const sizeClasses = {
     sm: {
-      container: 'py-8 px-4',
-      illustration: 'w-24 h-24 mb-4',
-      title: 'text-lg font-semibold',
-      description: 'text-sm',
-      spacing: 'space-y-3'},
+      container: 'py-8 px-4';
+      illustration: 'w-24 h-24 mb-4';
+      title: 'text-lg font-semibold';
+      description: 'text-sm';
+      spacing: 'space-y-3'};
     md: {
-      container: 'py-12 px-6',
-      illustration: 'w-32 h-32 mb-6',
-      title: 'text-xl font-semibold',
-      description: 'text-base',
-      spacing: 'space-y-4'},
+      container: 'py-12 px-6';
+      illustration: 'w-32 h-32 mb-6';
+      title: 'text-xl font-semibold';
+      description: 'text-base';
+      spacing: 'space-y-4'};
     lg: {
-      container: 'py-16 px-8',
-      illustration: 'w-40 h-40 mb-8',
-      title: 'text-2xl font-semibold',
-      description: 'text-lg',
+      container: 'py-16 px-8';
+      illustration: 'w-40 h-40 mb-8';
+      title: 'text-2xl font-semibold';
+      description: 'text-lg';
       spacing: 'space-y-6'}};
-
   const currentSize = sizeClasses[size];
-
   return (
-    <div
-      className={cn(
-        'flex flex-col items-center justify-center text-center',
-        currentSize.container,
-        currentSize.spacing className
-      )}
+    <div, className={`cn(`
+        'flex flex-col items-center justify-center text-center' currentSize.container,
+        currentSize.spacing, className
+      )`}`
     >
       {/* Illustration or Icon */}
-
-      <div className={cn('text-muted-foreground' currentSize.illustration)}>
+      <div, className={cn('text-muted-foreground' currentSize.illustration)}>
         {icon || illustrations[illustration as keyof typeof illustrations]}
-
       {/* Title */}
-      <h3 className={cn('text-foreground' currentSize.title)}>{title}</h3>
-
+      <h3, className={cn('text-foreground' currentSize.title)}>{title}</h3>
       {/* Description */}
       {description && (
-        <p
-          className={cn(
+        <p, className={cn(
             'text-muted-foreground max-w-md' currentSize.description
           )}
         >
           {description}</p>
-  }
-
       {/* Actions */}
       {(action || secondaryAction) && (
-        <div className="flex flex-col sm:flex-row gap-3 mt-2">
+        <div, className="flex flex-col sm:flex-row gap-3 mt-2">
           {action && (</div>
             <ButtonEnhanced
               onClick={action.onClick}
@@ -267,11 +248,8 @@ export function EmptyState({
             >
               {secondaryAction.label}</ButtonEnhanced>
           )}
-
       )}
-
     );
-}
 // Specialized Empty State Components
 export function NoDataFound({
   title = 'No data found',
@@ -292,23 +270,20 @@ export function NoDataFound({
       action={
         onCreate
           ? {
-              label: 'Create New',
-              onClick: onCreate,
+              label: 'Create New';
+              onClick: onCreate;
               variant: 'brand'}
           : undefined
-      }
       secondaryAction={
         onRefresh
           ? {
-              label: 'Refresh',
+              label: 'Refresh';
               onClick: onRefresh}
           : undefined
-      }
       className={className}
     />
   );
 };
-
 export function SearchNotFound({
   query,
   onClear,
@@ -323,30 +298,26 @@ export function SearchNotFound({
       title="No results found"
       description={
         query
-          ? `No results found for "${query}". Try adjusting your search terms.`
+          ? `No results found for "${query}". Try adjusting your search terms.``
           : 'No results found. Try adjusting your search terms.'
-      }
       illustration="search"
       action={
         onClear
           ? {
-              label: 'Clear Search',
-              onClick: onClear,
+              label: 'Clear Search';
+              onClick: onClear;
               variant: 'outline'}
           : undefined
-      }
       secondaryAction={
         onTryAgain
           ? {
-              label: 'Try Again',
+              label: 'Try Again';
               onClick: onTryAgain}
           : undefined
-      }
       className={className}
     />
   );
 };
-
 export function ErrorState({
   title = 'Something went wrong',
   description = 'We encountered an error while loading this content.',
@@ -366,23 +337,20 @@ export function ErrorState({
       action={
         onRetry
           ? {
-              label: 'Try Again',
-              onClick: onRetry,
+              label: 'Try Again';
+              onClick: onRetry;
               variant: 'brand'}
           : undefined
-      }
       secondaryAction={
         onGoBack
           ? {
-              label: 'Go Back',
+              label: 'Go Back';
               onClick: onGoBack}
           : undefined
-      }
       className={className}
     />
   );
 };
-
 export function MaintenanceMode({
   title = 'Under Maintenance',
   description = "We're currently performing maintenance. Please check back soon.",
@@ -399,23 +367,20 @@ export function MaintenanceMode({
       title={title}
       description={
         estimatedTime
-          ? `${description} Estimated, completion: ${estimatedTime}`
+          ? `${description} Estimated, completion: ${estimatedTime}``
           : description
-      }
       illustration="maintenance"
       action={
         onNotifyMe
           ? {
-              label: 'Notify Me',
-              onClick: onNotifyMe,
+              label: 'Notify Me';
+              onClick: onNotifyMe;
               variant: 'brand'}
           : undefined
-      }
       className={className}
     />
   );
 };
-
 export function ComingSoon({
   title = 'Coming Soon',
   description = 'This feature is currently under development.',
@@ -435,22 +400,19 @@ export function ComingSoon({
       action={
         onNotifyMe
           ? {
-              label: 'Notify Me',
-              onClick: onNotifyMe,
+              label: 'Notify Me';
+              onClick: onNotifyMe;
               variant: 'brand'}
           : undefined
-      }
       secondaryAction={
         onLearnMore
           ? {
-              label: 'Learn More',
+              label: 'Learn More';
               onClick: onLearnMore}
           : undefined
-      }
       className={className}
     />
   );
-}
 // Loading Empty State
 export function LoadingState({
   title = 'Loading...',
@@ -458,43 +420,34 @@ export function LoadingState({
   className}: {
   title?: string;
   description?: string;
-  className?: string, }) {
+  className?: string, }): void {
   return (
-    <div
-      className={cn(
+    <div, className={cn(
         'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4' className
       )}
     >
-      <div className="w-32 h-32 mb-6 text-muted-foreground">
-        <div className="relative w-full h-full">
-          <div className="absolute inset-0 border-4 border-brand-secondary-200 rounded-full"></div>
-          <div className="absolute inset-0 border-4 border-brand-primary-600 rounded-full border-t-transparent animate-spin"></div>
-
-      <h3 className="text-xl font-semibold text-foreground">{title}</h3>
-
+      <div, className="w-32 h-32 mb-6 text-muted-foreground">
+        <div, className="relative w-full h-full">
+          <div, className="absolute inset-0 border-4 border-brand-secondary-200 rounded-full"></div>
+          <div, className="absolute inset-0 border-4 border-brand-primary-600 rounded-full border-t-transparent animate-spin"></div>
+      <h3, className="text-xl font-semibold text-foreground">{title}</h3>
       {description && (
-        <p className="text-base text-muted-foreground max-w-md">
+        <p, className="text-base text-muted-foreground max-w-md">
           {description}</p>
-  }
     );
-}
 // Empty State with Custom Content
 interface EmptyStateCardProps {
   children: React.ReactNode;
   className?: string;
 };
-
-export function EmptyStateCard({ children, className }: EmptyStateCardProps) {
+export function EmptyStateCard({ children, className }: EmptyStateCardProps): void {
   return (
-    <div
-      className={cn(
-        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className
-      )}
+    <div, className={`cn(`
+        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50 dark:bg-brand-secondary-900/50 p-8' className
+      )`}`
     >
       {children}
-
     );
-}
 // Grid Empty State (for when showing empty grid/list items)
 export function GridEmptyState({
   title = 'No items yet',
@@ -506,7 +459,7 @@ export function GridEmptyState({
   className?: string;
 }) {
   return (
-    <EmptyStateCard className={className}>
+    <EmptyStateCard, className={className}>
       <EmptyState
         title={title}
         description={description}
@@ -515,11 +468,9 @@ export function GridEmptyState({
         action={
           onCreate
             ? {
-                label: 'Create First Item',
-                onClick: onCreate,
+                label: 'Create First Item';
+                onClick: onCreate;
                 variant: 'brand'}
             : undefined
-        }
       />
     </EmptyStateCard>
-  }

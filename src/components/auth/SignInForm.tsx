@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react';
 import { signIn, getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -9,32 +8,29 @@ import { Label } from '../ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Alert, AlertDescription } from '../ui/alert';
 import { Loader2, Mail, Lock, Chrome } from 'lucide-react';
-export default function SignInForm() {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [formData, setFormData] = useState({
-    email: '',
+export default function SignInForm(): void {;
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({;
+    email: '';
     password: ''
   })
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {;
     e.preventDefault()
     setIsLoading(true)
     setError(null)
-
     try {
-      const result = await signIn('credentials', {
-        email: formData.email,
-        password: formData.password,
+      const result = await signIn('credentials', {;
+        email: formData.email;
+        password: formData.password;
         redirect: false
       })
-
       if (result?.error) {
         setError('Invalid email or password')
       } else {
-        const session = await getSession()
+        const session = await getSession();
         if (session) {
           router.push('/dashboard')
         }
@@ -45,11 +41,9 @@ export default function SignInForm() {
       setIsLoading(false)
     }
   }
-
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async () => {;
     setIsGoogleLoading(true)
     setError(null)
-
     try {
       await signIn('google', { callbackUrl: '/dashboard' })
     } catch {
@@ -57,7 +51,6 @@ export default function SignInForm() {
       setIsGoogleLoading(false)
     }
   }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4"></div>
       <Card className="w-full max-w-md"></Card>
@@ -70,7 +63,6 @@ export default function SignInForm() {
             <Alert variant="destructive"></Alert>
               <AlertDescription>{error}</AlertDescription>
           )}
-
           <Button
             variant="outline"
             className="w-full"
@@ -83,7 +75,6 @@ export default function SignInForm() {
               <Chrome className="w-4 h-4 mr-2" />
             )}
             Continue with Google</Chrome>
-
           <div className="relative"></div>
             <div className="absolute inset-0 flex items-center"></div>
               <span className="w-full border-t" />
@@ -91,7 +82,6 @@ export default function SignInForm() {
             <div className="relative flex justify-center text-xs uppercase"></div>
               <span className="bg-background px-2 text-muted-foreground">
                 Or continue with email</span>
-
           <form onSubmit={handleSubmit} className="space-y-4"></form>
             <div className="space-y-2"></div>
               <Label htmlFor="email">Email</Label>
@@ -104,12 +94,10 @@ export default function SignInForm() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value}
       )}
-
   );
                   className="pl-10"
                   required
                 /></Input>
-
             <div className="space-y-2"></div>
               <Label htmlFor="password">Password</Label>
               <div className="relative"></div>
@@ -121,18 +109,15 @@ export default function SignInForm() {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value}
       )}
-
   );
                   className="pl-10"
                   required
                 /></Input>
-
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit", className="w-full" disabled={isLoading}>
               {isLoading ? (</Button>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
               ) : null}
               Sign In</Loader2>
-
           <div className="text-center text-sm"></div>
             <span className="text-gray-600">Don&apos;t have an account? </span>
             <Button
@@ -142,6 +127,5 @@ export default function SignInForm() {
             >
               Sign up</Button>
   }
-
 </string>
 }

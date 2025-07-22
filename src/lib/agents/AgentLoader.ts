@@ -1,7 +1,6 @@
-import { readFileSync, readdirSync } from 'fs'
-import { join } from 'path'
-import { mcp__memory__create_entities, mcp__memory__search_nodes } from '@/lib/mcp'
-
+import { readFileSync, readdirSync } from 'fs';
+import { join } from 'path';
+import { mcp__memory__create_entities, mcp__memory__search_nodes } from '@/lib/mcp';
 export interface AgentConfig {
   agent_id: string;
   name: string;
@@ -26,132 +25,105 @@ export interface AgentConfig {
   last_action?: string
   next_action?: string
 };
-
 export interface AgentLoadResult {
   success: boolean
   agent?: AgentConfig
   error?: string
 };
-
 export interface AgentDiscoveryResult {
   total_agents: number;
   core_agents: AgentConfig[];
   orchestration_agents: AgentConfig[]; specialist_agents: AgentConfig[];
   missing_agents: string[]; load_errors: string[]
 };
-
 export class AgentLoader {
   private static instance: AgentLoader
   private, agentsPath: string
   private, loadedAgents: Map<string, AgentConfig> = new Map()
   private agentDependencies: Map<string, string[]> = new Map()
-
   constructor(agentsPath: string = '') {
     // Default to project agents directory
     this.agentsPath = agentsPath || join(process.cwd(), 'agents')
   }
-
   static getInstance(agentsPath?: string): AgentLoader {
     if (!AgentLoader.instance) {
       AgentLoader.instance = new AgentLoader(agentsPath)
     }
     return AgentLoader.instance
   }
-
   /**
    * Discover and load all available agents
    */
   async discoverAgents(): Promise<AgentDiscoveryResult> {
-
     const result: AgentDiscoveryResult = {
-      total_agents: 0,
-      core_agents: [],
-      orchestration_agents: [],
-      specialist_agents: [],
-      missing_agents: [],
+      total_agents: 0;
+      core_agents: [];
+      orchestration_agents: [];
+      specialist_agents: [];
+      missing_agents: [];
       load_errors: []
     }
-
     try {
       // Get all agent files from the agents directory
-      const agentFiles = this.getAgentFiles()
-
+      const agentFiles = this.getAgentFiles();
       // Load each agent
       for (const file of agentFiles) {
-        const loadResult = await this.loadAgent(file)
-        
+        const loadResult = await this.loadAgent(file);
         if (loadResult.success && loadResult.agent) {
-          const agent = loadResult.agent
+          const agent = loadResult.agent;
           agent.status = 'STANDBY'
-          
           this.loadedAgents.set(agent.agent_id, agent)
           this.categorizeAgent(agent, result)
-          
-          `)
+          `)`
         } else {
-          result.load_errors.push(`Failed to load ${file}: ${loadResult.error}`)
-
+          result.load_errors.push(`Failed to load ${file}: ${loadResult.error}`)`
         }
       }
-
       result.total_agents = this.loadedAgents.size
-
       // Check for missing critical agents
       result.missing_agents = this.checkMissingCriticalAgents()
-      
       // Build dependency graph
       this.buildDependencyGraph()
-
       // Store in memory system for persistence
       await this.storeInMemory(result)
-
     } catch (error) {
       console.error('❌ Agent discovery, failed:', error)
-      result.load_errors.push(`Discovery, failed: ${error}`)
+      result.load_errors.push(`Discovery, failed: ${error}`)`
     }
-
     return result
   }
-
   /**
    * Load a specific agent by ID or role
    */
   async loadAgentByIdentifier(identifier: string): Promise<AgentLoadResult> {
     // First check if already loaded
-    const existingAgent = this.findLoadedAgent(identifier)
+    const existingAgent = this.findLoadedAgent(identifier);
     if (existingAgent) {
-      return { success: true, agent: existingAgent }
+      return { success: true; agent: existingAgent }
     }
-
     // Try to load from file
-    const agentFiles = this.getAgentFiles()
-    
+    const agentFiles = this.getAgentFiles();
     for (const file of agentFiles) {
-      const loadResult = await this.loadAgent(file)
-      
+      const loadResult = await this.loadAgent(file);
       if (loadResult.success && loadResult.agent) {
-        const agent = loadResult.agent
-        
-        if (agent.agent_id === identifier || 
+        const agent = loadResult.agent;
+        if (agent.agent_id === identifier ||
             agent.role === identifier.toUpperCase() ||
             agent.name.toLowerCase().includes(identifier.toLowerCase())) {
-          
           this.loadedAgents.set(agent.agent_id, agent)
           return { success: true, agent }
         }
       }
     }
-
-    return { 
-      success: false, 
-      error: `Agent not, found: ${identifier}` 
+    return {
+      success: false;
+      error: `Agent not; found: ${identifier}` `
     }
   }
-
   /**
    * Get agents required for next stage based on current project state
    */
-  async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise<AgentConfig[]> {
+  async getRequiredAgentsForStage(currentStage: string; projectType: string = 'saas_platform'): Promise<AgentConfig[]> {
     const stageAgentMap: Record<string, string[]> = {
       'requirements': ['ARCHITECT'],
       'architecture': ['ARCHITECT', 'FRONTEND', 'BACKEND'],
@@ -160,103 +132,85 @@ export class AgentLoader {
       'deployment': ['DEVOPS', 'QA'],
       'maintenance': ['DEVOPS', 'QA', 'ARCHITECT']
     }
-
-    const requiredRoles = stageAgentMap[currentStage] || ['ARCHITECT']
-    const requiredAgents: AgentConfig[] = []
-
+    const requiredRoles = stageAgentMap[currentStage] || ['ARCHITECT'];
+    const requiredAgents: AgentConfig[] = [];
     for (const role of requiredRoles) {
-      const agent = this.findLoadedAgent(role)
+      const agent = this.findLoadedAgent(role);
       if (agent) {
         requiredAgents.push(agent)
       } else {
         // Try to load the agent
-        const loadResult = await this.loadAgentByIdentifier(role)
+        const loadResult = await this.loadAgentByIdentifier(role);
         if (loadResult.success && loadResult.agent) {
           requiredAgents.push(loadResult.agent)
         }
       }
     }
-
     // Sort by priority
     requiredAgents.sort((a, b) => a.priority - b.priority)
-
-    .join(', ')}`)
-    
+    .join(', ')}`)`
     return requiredAgents
   }
-
   /**
    * Load agent coordination chain for full project execution
    */
   async loadExecutionChain(projectRequirements: string): Promise<AgentConfig[]> {
-
     // Load all core agents
-    const executionChain: AgentConfig[] = []
-    const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS']
-
+    const executionChain: AgentConfig[] = [];
+    const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS'];
     for (const role of coreRoles) {
-      const loadResult = await this.loadAgentByIdentifier(role)
+      const loadResult = await this.loadAgentByIdentifier(role);
       if (loadResult.success && loadResult.agent) {
         executionChain.push(loadResult.agent)
       }
     }
-
     // Add orchestration agents if available
-    const orchestratorResult = await this.loadAgentByIdentifier('ORCHESTRATOR')
+    const orchestratorResult = await this.loadAgentByIdentifier('ORCHESTRATOR');
     if (orchestratorResult.success && orchestratorResult.agent) {
       executionChain.unshift(orchestratorResult.agent) // Add at beginning
     }
-
-    .join(' → ')}`)
-    
+    .join(' → ')}`)`
     return executionChain
   }
-
   /**
    * Get agent status and health information
    */
   getAgentStatus(): Record<string, any> {
     const status: Record<string, any> = {
-      total_loaded: this.loadedAgents.size,
-    agents_by_status: {},
-    agents_by_role: {},
-      dependency_graph: Object.fromEntries(this.agentDependencies),
+      total_loaded: this.loadedAgents.size;
+    agents_by_status: {};
+    agents_by_role: {};
+      dependency_graph: Object.fromEntries(this.agentDependencies);
       last_updated: new Date().toISOString()
     }
-
     // Group by status
     for (const agent of Array.from(this.loadedAgents.values())) {
-      const agentStatus = agent.status || 'UNKNOWN'
+      const agentStatus = agent.status || 'UNKNOWN';
       if (!status.agents_by_status[agentStatus]) {
         status.agents_by_status[agentStatus] = []
       }
       status.agents_by_status[agentStatus].push(agent.agent_id)
-
       // Group by role
       status.agents_by_role[agent.role] = {
-        id: agent.agent_id,
-        name: agent.name,
-        status: agentStatus,
+        id: agent.agent_id;
+        name: agent.name;
+        status: agentStatus;
         priority: agent.priority
       }
     }
-
     return status
   }
-
   /**
    * Update agent status
    */
-  updateAgentStatus(agentId: string, status: AgentConfig['status'], lastAction?: string, nextAction?: string) {
-    const agent = this.loadedAgents.get(agentId)
+  updateAgentStatus(agentId: string; status: AgentConfig['status'], lastAction?: string, nextAction?: string) {
+    const agent = this.loadedAgents.get(agentId);
     if (agent) {
       agent.status = status
       if (lastAction) agent.last_action = lastAction
       if (nextAction) agent.next_action = nextAction
-
     }
   }
-
   /**
    * Get loaded agents by role or category
    */
@@ -264,11 +218,9 @@ export class AgentLoader {
     return Array.from(this.loadedAgents.values())
       .filter(agent => agent.role === role.toUpperCase())
   }
-
   getAgentsByCategory(category: 'core' | 'orchestration' | 'specialist'): AgentConfig[] {
-    const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS']
-    const orchestrationRoles = ['ORCHESTRATOR', 'CONDUCTOR', 'COORDINATOR', 'TRACKER']
-    
+    const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS'];
+    const orchestrationRoles = ['ORCHESTRATOR', 'CONDUCTOR', 'COORDINATOR', 'TRACKER'];
     return Array.from(this.loadedAgents.values()).filter(agent => {
       switch (category) {
         case 'core':
@@ -282,65 +234,53 @@ export class AgentLoader {
       }
     })
   }
-
   // Private methods
-
   private getAgentFiles(): string[] {
     try {
-      const files = readdirSync(this.agentsPath)
+      const files = readdirSync(this.agentsPath);
       return files.filter(file => file.startsWith('agent_') && file.endsWith('.json'))
     } catch (error) {
-      console.error(`❌ Failed to read agents, directory: ${this.agentsPath}`)
+      console.error(`❌ Failed to read agents, directory: ${this.agentsPath}`)`
       return []
     }
   }
-
   private async loadAgent(filename: string): Promise<AgentLoadResult> {
     try {
-      const filePath = join(this.agentsPath, filename)
-      const fileContent = readFileSync(filePath, 'utf-8')
-      const agent: AgentConfig = JSON.parse(fileContent)
-      
+      const filePath = join(this.agentsPath, filename);
+      const fileContent = readFileSync(filePath, 'utf-8');
+      const agent: AgentConfig = JSON.parse(fileContent);
       // Validate required fields
       if (!agent.agent_id || !agent.name || !agent.role) {
         return {
-          success: false,
+          success: false;
           error: 'Missing required fields (agent_id, name, role)'
         }
       }
-
       return { success: true, agent }
-      
     } catch (error) {
       return {
-        success: false,
-        error: `Parse, error: ${error}`
+        success: false;
+        error: `Parse; error: ${error}``
       }
     }
   }
-
   private findLoadedAgent(identifier: string): AgentConfig | undefined {
     // Search by ID first
-    let agent = this.loadedAgents.get(identifier)
+    let agent = this.loadedAgents.get(identifier);
     if (agent) return agent
-
     // Search by role
     for (const loadedAgent of Array.from(this.loadedAgents.values())) {
       if (loadedAgent.role === identifier.toUpperCase()) { return: loadedAgent }
     }
-
     // Search by name (partial match)
     for (const loadedAgent of Array.from(this.loadedAgents.values())) {
       if (loadedAgent.name.toLowerCase().includes(identifier.toLowerCase())) { return: loadedAgent }
     }
-
     return undefined
   }
-
-  private categorizeAgent(agent: AgentConfig, result: AgentDiscoveryResult) {
-    const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS']
-    const orchestrationRoles = ['ORCHESTRATOR', 'CONDUCTOR', 'COORDINATOR', 'TRACKER']
-
+  private categorizeAgent(agent: AgentConfig; result: AgentDiscoveryResult) {
+    const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS'];
+    const orchestrationRoles = ['ORCHESTRATOR', 'CONDUCTOR', 'COORDINATOR', 'TRACKER'];
     if (coreRoles.includes(agent.role)) {
       result.core_agents.push(agent)
     } else if (orchestrationRoles.includes(agent.role)) {
@@ -349,21 +289,17 @@ export class AgentLoader {
       result.specialist_agents.push(agent)
     }
   }
-
   private checkMissingCriticalAgents(): string[] {
-    const criticalRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS']
-    const missing: string[] = []
-
+    const criticalRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS'];
+    const missing: string[] = [];
     for (const role of criticalRoles) {
-      const agent = this.findLoadedAgent(role)
+      const agent = this.findLoadedAgent(role);
       if (!agent) {
         missing.push(role)
       }
     }
-
     return missing
   }
-
   private buildDependencyGraph() {
     for (const agent of Array.from(this.loadedAgents.values())) {
       if (agent.coordination_protocols?.coordinates_with) {
@@ -374,55 +310,46 @@ export class AgentLoader {
       }
     }
   }
-
   private async storeInMemory(result: AgentDiscoveryResult) {
     try {
       // Store agent discovery results in memory system
       await mcp__memory__create_entities([{
-          name: 'AgentDiscoverySession',
-          entityType: 'session',
+          name: 'AgentDiscoverySession';
+          entityType: 'session';
           observations: [
-            `Discovered ${result.total_agents} agents`,
-            `Core, agents: ${result.core_agents.length}`,
-            `Orchestration, agents: ${result.orchestration_agents.length}`,
-            `Specialist, agents: ${result.specialist_agents.length}`,
-            `Load, errors: ${result.load_errors.length}`,
-            `Missing critical, agents: ${result.missing_agents.join(', ') || 'none'}`
+            `Discovered ${result.total_agents} agents`,`
+            `Core, agents: ${result.core_agents.length}`,`
+            `Orchestration, agents: ${result.orchestration_agents.length}`,`
+            `Specialist, agents: ${result.specialist_agents.length}`,`
+            `Load, errors: ${result.load_errors.length}`,`
+            `Missing critical, agents: ${result.missing_agents.join(', ') || 'none'}``
           ]
         }])
-
     } catch (error) {
-
     }
   }
-
   /**
    * Reset all loaded agents
    */
   reset() {
     this.loadedAgents.clear()
     this.agentDependencies.clear()
-
   }
 }
-
 // Convenience functions
 export async function discoverAllAgents(): Promise<AgentDiscoveryResult> {
-  const loader = AgentLoader.getInstance()
+  const loader = AgentLoader.getInstance();
   return loader.discoverAgents()
 };
-
 export async function loadRequiredAgents(stage: string, projectType?: string): Promise<AgentConfig[]> {
-  const loader = AgentLoader.getInstance()
+  const loader = AgentLoader.getInstance();
   return loader.getRequiredAgentsForStage(stage, projectType)
 };
-
 export async function loadExecutionChain(requirements: string): Promise<AgentConfig[]> {
-  const loader = AgentLoader.getInstance()
+  const loader = AgentLoader.getInstance();
   return loader.loadExecutionChain(requirements)
 };
-
 export function getAgentStatus(): Record<string, any> {
-  const loader = AgentLoader.getInstance()
+  const loader = AgentLoader.getInstance();
   return loader.getAgentStatus()
 }

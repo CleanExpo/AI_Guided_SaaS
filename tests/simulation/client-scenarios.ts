@@ -1,4 +1,4 @@
-export interface ClientScenario {
+export interface ClientScenario {;
   id: string; name: string; description: string; projectType: 'crm' | 'ecommerce' | 'booking' | 'dashboard' | 'blog' | 'api'
   requirements: string; expectedAgents: string[]
   expectedDuration: string; criticalFeatures: string[]
@@ -6,14 +6,13 @@ export interface ClientScenario {
     metric: string; threshold: number; unit: string
   }[]
 }
-
-export const CLIENT_SCENARIOS: ClientScenario[] = [
+export const CLIENT_SCENARIOS: ClientScenario[] = [;
   {
-    id: 'scenario_crm_basic',
-    name: 'Basic CRM System',
-    description: 'Small business CRM with contact management',
-    projectType: 'crm',
-    requirements: `
+    id: 'scenario_crm_basic';
+    name: 'Basic CRM System';
+    description: 'Small business CRM with contact management';
+    projectType: 'crm';
+    requirements: ``
       I need a CRM system for my small business, with:
       - Contact management with full CRUD operations
       - Lead tracking and pipeline visualization
@@ -21,9 +20,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       - Basic reporting and analytics dashboard
       - User roles (admin, sales rep, viewer)
       - Mobile responsive design
-    `,
+    `,`
     expectedAgents: ['agent_architect', 'agent_frontend', 'agent_backend', 'agent_qa'],
-    expectedDuration: '4-6 weeks',
+    expectedDuration: '4-6 weeks';
     criticalFeatures: [
       'Contact CRUD operations',
       'Lead pipeline',
@@ -31,17 +30,17 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       'Dashboard'
     ],
     successCriteria: [
-      { metric: 'api_response_time', threshold: 200, unit: 'ms' },
-      { metric: 'page_load_time', threshold: 2, unit: 's' },
-      { metric: 'error_rate', threshold: 0.1, unit: '%' }
+      { metric: 'api_response_time'; threshold: 200; unit: 'ms' },
+      { metric: 'page_load_time'; threshold: 2; unit: 's' },
+      { metric: 'error_rate'; threshold: 0.1; unit: '%' }
     ]
   },
   {
-    id: 'scenario_ecommerce_advanced',
-    name: 'Advanced E-commerce Platform',
-    description: 'Full-featured online store with payments',
-    projectType: 'ecommerce',
-    requirements: `
+    id: 'scenario_ecommerce_advanced';
+    name: 'Advanced E-commerce Platform';
+    description: 'Full-featured online store with payments';
+    projectType: 'ecommerce';
+    requirements: ``
       Build a complete e-commerce platform, with:
       - Product catalog with categories and filters
       - Shopping cart with persistent storage
@@ -53,9 +52,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       - Product reviews and ratings
       - Wishlist functionality
       - SEO optimization
-    `,
+    `,`
     expectedAgents: ['agent_architect', 'agent_frontend', 'agent_backend', 'agent_qa', 'agent_devops'],
-    expectedDuration: '8-10 weeks',
+    expectedDuration: '8-10 weeks';
     criticalFeatures: [
       'Product catalog',
       'Shopping cart',
@@ -64,18 +63,18 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       'User authentication'
     ],
     successCriteria: [
-      { metric: 'checkout_completion_rate', threshold: 70, unit: '%' },
-      { metric: 'payment_success_rate', threshold: 98, unit: '%' },
-      { metric: 'page_load_time', threshold: 3, unit: 's' },
-      { metric: 'uptime', threshold: 99.9, unit: '%' }
+      { metric: 'checkout_completion_rate'; threshold: 70; unit: '%' },
+      { metric: 'payment_success_rate'; threshold: 98; unit: '%' },
+      { metric: 'page_load_time'; threshold: 3; unit: 's' },
+      { metric: 'uptime'; threshold: 99.9; unit: '%' }
     ]
   },
   {
-    id: 'scenario_booking_system',
-    name: 'Appointment Booking System',
-    description: 'Service booking platform with calendar integration',
-    projectType: 'booking',
-    requirements: `
+    id: 'scenario_booking_system';
+    name: 'Appointment Booking System';
+    description: 'Service booking platform with calendar integration';
+    projectType: 'booking';
+    requirements: ``
       Create an appointment booking system for a medical, clinic:
       - Service catalog with duration and pricing
       - Provider availability management
@@ -87,9 +86,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       - Integration with Google Calendar
       - Payment collection for appointments
       - Multi-location support
-    `,
+    `,`
     expectedAgents: ['agent_architect', 'agent_frontend', 'agent_backend', 'agent_qa'],
-    expectedDuration: '6-8 weeks',
+    expectedDuration: '6-8 weeks';
     criticalFeatures: [
       'Calendar integration',
       'Availability management',
@@ -98,17 +97,17 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       'Admin panel'
     ],
     successCriteria: [
-      { metric: 'booking_completion_rate', threshold: 80, unit: '%' },
-      { metric: 'notification_delivery_rate', threshold: 95, unit: '%' },
-      { metric: 'double_booking_rate', threshold: 0, unit: '%' }
+      { metric: 'booking_completion_rate'; threshold: 80; unit: '%' },
+      { metric: 'notification_delivery_rate'; threshold: 95; unit: '%' },
+      { metric: 'double_booking_rate'; threshold: 0; unit: '%' }
     ]
   },
   {
-    id: 'scenario_analytics_dashboard',
-    name: 'Real-time Analytics Dashboard',
-    description: 'Business intelligence dashboard with live data',
-    projectType: 'dashboard',
-    requirements: `
+    id: 'scenario_analytics_dashboard';
+    name: 'Real-time Analytics Dashboard';
+    description: 'Business intelligence dashboard with live data';
+    projectType: 'dashboard';
+    requirements: ``
       Develop a real-time analytics, dashboard:
       - Multiple data source connections (PostgreSQL, APIs)
       - Real-time data updates via WebSocket
@@ -120,9 +119,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       - Mobile responsive design
       - Data caching for performance
       - Drill-down capabilities
-    `,
+    `,`
     expectedAgents: ['agent_architect', 'agent_frontend', 'agent_backend', 'agent_qa'],
-    expectedDuration: '5-7 weeks',
+    expectedDuration: '5-7 weeks';
     criticalFeatures: [
       'Real-time updates',
       'Chart rendering',
@@ -131,17 +130,17 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       'Access control'
     ],
     successCriteria: [
-      { metric: 'data_latency', threshold: 1000, unit: 'ms' },
-      { metric: 'chart_render_time', threshold: 500, unit: 'ms' },
-      { metric: 'concurrent_users', threshold: 100, unit: 'users' }
+      { metric: 'data_latency'; threshold: 1000; unit: 'ms' },
+      { metric: 'chart_render_time'; threshold: 500; unit: 'ms' },
+      { metric: 'concurrent_users'; threshold: 100; unit: 'users' }
     ]
   },
   {
-    id: 'scenario_content_blog',
-    name: 'Content Management Blog',
-    description: 'Modern blog platform with CMS capabilities',
-    projectType: 'blog',
-    requirements: `
+    id: 'scenario_content_blog';
+    name: 'Content Management Blog';
+    description: 'Modern blog platform with CMS capabilities';
+    projectType: 'blog';
+    requirements: ``
       Build a modern blog platform, with:
       - Markdown editor with live preview
       - Category and tag management
@@ -153,9 +152,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       - Author profiles
       - Draft and scheduling system
       - Image optimization and CDN
-    `,
+    `,`
     expectedAgents: ['agent_frontend', 'agent_backend', 'agent_qa'],
-    expectedDuration: '3-4 weeks',
+    expectedDuration: '3-4 weeks';
     criticalFeatures: [
       'Content editor',
       'Publishing system',
@@ -164,17 +163,17 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       'Search'
     ],
     successCriteria: [
-      { metric: 'page_load_time', threshold: 1.5, unit: 's' },
-      { metric: 'seo_score', threshold: 90, unit: 'score' },
-      { metric: 'search_accuracy', threshold: 85, unit: '%' }
+      { metric: 'page_load_time'; threshold: 1.5; unit: 's' },
+      { metric: 'seo_score'; threshold: 90; unit: 'score' },
+      { metric: 'search_accuracy'; threshold: 85; unit: '%' }
     ]
   },
   {
-    id: 'scenario_api_platform',
-    name: 'API Management Platform',
-    description: 'RESTful API with developer portal',
-    projectType: 'api',
-    requirements: `
+    id: 'scenario_api_platform';
+    name: 'API Management Platform';
+    description: 'RESTful API with developer portal';
+    projectType: 'api';
+    requirements: ``
       Create a comprehensive API, platform:
       - RESTful API with versioning
       - API key management and authentication
@@ -186,9 +185,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       - SDKs for multiple languages
       - Billing integration for API usage
       - Admin dashboard for API management
-    `,
+    `,`
     expectedAgents: ['agent_architect', 'agent_backend', 'agent_frontend', 'agent_qa', 'agent_devops'],
-    expectedDuration: '6-8 weeks',
+    expectedDuration: '6-8 weeks';
     criticalFeatures: [
       'API endpoints',
       'Authentication',
@@ -197,43 +196,38 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [
       'Monitoring'
     ],
     successCriteria: [
-      { metric: 'api_response_time', threshold: 100, unit: 'ms' },
-      { metric: 'api_uptime', threshold: 99.95, unit: '%' },
-      { metric: 'rate_limit_accuracy', threshold: 100, unit: '%' }
+      { metric: 'api_response_time'; threshold: 100; unit: 'ms' },
+      { metric: 'api_uptime'; threshold: 99.95; unit: '%' },
+      { metric: 'rate_limit_accuracy'; threshold: 100; unit: '%' }
     ]
   }
 ]
-
-export function getScenarioByType(projectType: string): ClientScenario | undefined {
+export function getScenarioByType(projectType: string): ClientScenario | undefined {;
   return CLIENT_SCENARIOS.find(s => s.projectType === projectType)
 }
-
-export function getRandomScenario(): ClientScenario {
+export function getRandomScenario(): ClientScenario {;
   return CLIENT_SCENARIOS[Math.floor(Math.random() * CLIENT_SCENARIOS.length)]
 }
-
-export function validateScenarioCompletion(
-  scenario: ClientScenario,
+export function validateScenarioCompletion(;
+  scenario: ClientScenario;
   actualMetrics: Record<string, number>
 ): {
-  passed: boolean, results: Array<{
-    metric: string, expected: number, actual: number, passed: boolean
+  passed: boolean; results: Array<{
+    metric: string; expected: number; actual: number; passed: boolean
   }>
 } {
-  const results = scenario.successCriteria.map(criteria => {
-    const actual = actualMetrics[criteria.metric] || 0
-    const passed = criteria.metric.includes('rate') || criteria.metric.includes('uptime')
+  const results = scenario.successCriteria.map(criteria => {;
+    const actual = actualMetrics[criteria.metric] || 0;
+    const passed = criteria.metric.includes('rate') || criteria.metric.includes('uptime');
       ? actual >= criteria.threshold
       : actual <= criteria.threshold
-    
     return {
-      metric: criteria.metric,
+      metric: criteria.metric;
       expected: criteria.threshold,
       actual,
       passed
     }
   })
-  
   return {
     passed: results.every(r => r.passed),
     results

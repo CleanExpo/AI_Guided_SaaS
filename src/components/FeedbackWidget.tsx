@@ -1,55 +1,47 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { MessageSquare, ThumbsUp, ThumbsDown, AlertCircle, X, Send, Loader2 } from 'lucide-react';
 import { cn } from '@/utils/cn';
-interface FeedbackWidgetProps {
+interface FeedbackWidgetProps {;
   projectId?: string
   feature?: string
   context?: Record<string, any>
 };
-
-type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other'
-type FeedbackSentiment = 'positive' | 'negative' | 'neutral'
-
-export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetProps) {
+type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other';
+type FeedbackSentiment = 'positive' | 'negative' | 'neutral';
+export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetProps): void {;
       </string>
-  const [isOpen, setIsOpen] = useState(false)
-  const [feedback, setFeedback] = useState('')
-  const [type, setType] = useState<FeedbackType>('other')
-  const [sentiment, setSentiment] = useState<FeedbackSentiment>('neutral')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showThankYou, setShowThankYou] = useState(false)
-      
-  const [recentError, setRecentError] = useState<any>(null)
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [feedback, setFeedback] = useState('');
+  const [type, setType] = useState<FeedbackType>('other');
+  const [sentiment, setSentiment] = useState<FeedbackSentiment>('neutral');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [recentError, setRecentError] = useState<any>(null);
   // Capture errors for context
   useEffect(() => {
-    const handleError = (event: ErrorEvent) => {
+    const handleError = (event: ErrorEvent) => {;
       setRecentError({
-        message: event.message,
-        source: event.filename,
-        line: event.lineno,
+        message: event.message;
+        source: event.filename;
+        line: event.lineno;
         timestamp: new Date().toISOString()
       }
       )}
-
   );
     window.addEventListener('error', handleError)
     return () => window.removeEventListener('error', handleError)
   }, [])
-
-  const handleSubmit = async () => {
+  const handleSubmit = async () => {;
     if (!feedback.trim()) return
-
     setIsSubmitting(true)
     try {
-      const response = await fetch('/api/feedback', {
-        method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/feedback', {;
+        method: 'POST';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify({
           feedback,
           type,
@@ -58,14 +50,13 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
           feature,
     context: {
             ...context,
-            url: window.location.href,
-            userAgent: navigator.userAgent,
+            url: window.location.href;
+            userAgent: navigator.userAgent;
             timestamp: new Date().toISOString(),
             recentError
           }
         })
       })
-
       if (response.ok) {
         setShowThankYou(true)
         setFeedback('')
@@ -80,26 +71,24 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
       setIsSubmitting(false)
     }
   }
-
-  const handleQuickFeedback = async (quickSentiment: 'positive' | 'negative') => {
+  const handleQuickFeedback = async (quickSentiment: 'positive' | 'negative') => {;
     setSentiment(quickSentiment)
     if (!isOpen) {
       // Quick feedback without opening form
       try {
         await fetch('/api/feedback/quick', {
-          method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+          method: 'POST';
+    headers: { 'Content-Type': 'application/json' };
           body: JSON.stringify({
             sentiment: quickSentiment,
             projectId,
             feature,
     context: {
-              url: window.location.href,
+              url: window.location.href;
               timestamp: new Date().toISOString()
             }
           })
         })
-        
         // Show brief confirmation
         setShowThankYou(true)
         setTimeout(() => setShowThankYou(false), 1500)
@@ -110,7 +99,6 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
       setIsOpen(true)
     }
   }
-
   return (
     <>
       {/* Floating feedback button */}
@@ -121,7 +109,6 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
               <div className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in">
                 Thank you for your feedback!</div>
             )}
-            
             {/* Quick feedback buttons */}
             <div className="flex gap-2"></div>
               <Button
@@ -145,7 +132,6 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
               ></Button>
                 <MessageSquare className="h-4 w-4 mr-2" />
                 Feedback</MessageSquare>)}
-
         {/* Feedback form */}
         {isOpen && (
           <Card className="w-96 p-4 shadow-xl animate-slide-up"></Card>
@@ -157,7 +143,6 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                 onClick={() => setIsOpen(false)}
               ></Button>
                 <X className="h-4 w-4" /></X>
-
             {showThankYou ? (
               <div className="text-center py-8"></div>
                 <div className="text-green-500 mb-2"></div>
@@ -169,10 +154,10 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                 {/* Feedback type selector */}
                 <div className="flex gap-2 mb-4">
                   {[
-                    { value: 'bug', label: '🐛 Bug' },
-                    { value: 'feature', label: '✨ Feature' },
-                    { value: 'improvement', label: '💡 Improvement' },
-                    { value: 'praise', label: '🎉 Praise' }
+                    { value: 'bug'; label: '🐛 Bug' },
+                    { value: 'feature'; label: '✨ Feature' },
+                    { value: 'improvement'; label: '💡 Improvement' },
+                    { value: 'praise'; label: '🎉 Praise' }
                   ].map((option) => (</div>
                     <Button
                       key={option.value}
@@ -182,7 +167,6 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                     >
                       {option.label}</Button>
                   ))}
-
                 {/* Sentiment selector */}
                 <div className="flex gap-2 mb-4"></div>
                   <Button
@@ -205,7 +189,6 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                   ></Button>
                     <ThumbsUp className="h-4 w-4 mr-1" />
                     Positive</ThumbsUp>
-
                 {/* Feedback text */}
                 <Textarea
                   placeholder="What's on your mind? Your feedback helps us improve..."
@@ -214,13 +197,11 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                   className="mb-4"
                   rows={4}
                 />
-
                 {/* Context info */}
                 {(recentError || type === 'bug') && (</Textarea>
                   <div className="mb-4 p-3 bg-yellow-50 rounded-lg text-sm"></div>
                     <AlertCircle className="h-4 w-4 text-yellow-600 inline mr-2" />
                     We'll include technical details to help diagnose the issue.</AlertCircle>)}
-
                 {/* Submit button */}
                 <Button
                   className="w-full"
@@ -243,19 +224,17 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
             )}
           </Card>
         )}
-
-      <style jsx>{`
+      <style jsx>{``
         @keyframes slide-up {
           from {
-            transform: translateY(100%),
+            transform: translateY(100%);
             opacity: 0;
           }}
           to {
-            transform: translateY(0),
+            transform: translateY(0);
             opacity: 1;
           }}
         }
-
         @keyframes fade-in {
           from {
             opacity: 0;
@@ -264,15 +243,13 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
             opacity: 1;
           }}
         }
-
         .animate-slide-up {
           animation: slide-up 0.3s ease-out;
         }}
-
         .animate-fade-in {
           animation: fade-in 0.3s ease-out;
         }}</style>
-      `}</style>
+      `}</style>`
     </>
   )
 }

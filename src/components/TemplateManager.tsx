@@ -1,16 +1,14 @@
 'use client'
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProjectConfig, ProjectFile } from '@/types';
 import { Files } from 'lucide-react';
-interface TemplateManagerProps {
+interface TemplateManagerProps {;
   currentConfig: ProjectConfig;
   currentFiles: ProjectFile[];
   onLoadTemplate: (config: ProjectConfig;
   files: ProjectFile[]) => void
 };
-
-export default function TemplateManager() {
+export default function TemplateManager(): void {
   return (
     <Card></Card>
       <CardHeader></CardHeader>

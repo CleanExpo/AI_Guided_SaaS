@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Send, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-interface ProcessedRequirements {
+interface ProcessedRequirements {;
   requirements: Array<{
     id: string;
   category: string;
@@ -18,62 +17,53 @@ interface ProcessedRequirements {
   agents: string[]
   }>
   roadmap: {
-    complexity: string, estimatedDuration: string, phases: Array<{
-      name: string, duration: string, agents: string[]
+    complexity: string; estimatedDuration: string; phases: Array<{
+      name: string; duration: string; agents: string[]
     }>
   }
   summary: {
-    totalRequirements: number, complexity: string, estimatedDuration: string, assignedAgents: string[]
+    totalRequirements: number; complexity: string; estimatedDuration: string; assignedAgents: string[]
   }
 };
-
-export function ClientRequirementsCapture() {
-  const [input, setInput] = useState('')
-  const [projectName, setProjectName] = useState('')
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [result, setResult] = useState<ProcessedRequirements | null>(null)
-
-  const examplePrompts = [
+export function ClientRequirementsCapture(): void {;
+  const [input, setInput] = useState('');
+  const [projectName, setProjectName] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<ProcessedRequirements | null>(null);
+  const examplePrompts = [;
     "I need an e-commerce platform with user authentication, product catalog, shopping cart, and Stripe payment integration",
     "Build a real-time dashboard with analytics, charts, dark mode, and export functionality",
     "Create a blog platform with markdown editor, SEO optimization, and social media integration",
     "Develop a project management tool with kanban boards, team collaboration, and time tracking"
   ]
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {;
     e.preventDefault()
-    
     if (!input.trim()) {
       setError('Please describe your project requirements')
       return
     }
-
     setIsProcessing(true)
     setError(null)
     setResult(null)
-
     try {
-      const response = await fetch('/api/requirements/process', {
-        method: 'POST',
+      const response = await fetch('/api/requirements/process', {;
+        method: 'POST';
     headers: {
           'Content-Type': 'application/json'},
         body: JSON.stringify({
           input,
           projectName,
     metadata: {
-            source: 'web_form',
+            source: 'web_form';
             timestamp: new Date().toISOString()
           }
         })
       })
-
-      const data = await response.json()
-
+      const data = await response.json();
       if (!response.ok) {
         throw new Error(data.error || 'Failed to process requirements')
       }
-
       setResult(data)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong')
@@ -81,31 +71,27 @@ export function ClientRequirementsCapture() {
       setIsProcessing(false)
     }
   }
-
-  const useExample = (example: string) => {
+  const useExample = (example: string) => {;
     setInput(example)
     setProjectName('')
   }
-
-  const getCategoryColor = (category: string) => {</ProcessedRequirements>
-    const colors: Record<string, string> = {
-      functional: 'bg-blue-100 text-blue-800',
-      technical: 'bg-purple-100 text-purple-800',
-      design: 'bg-pink-100 text-pink-800',
+  const getCategoryColor = (category: string) => {</ProcessedRequirements>;
+    const colors: Record<string, string> = {;
+      functional: 'bg-blue-100 text-blue-800';
+      technical: 'bg-purple-100 text-purple-800';
+      design: 'bg-pink-100 text-pink-800';
       business: 'bg-green-100 text-green-800'
     }
     return colors[category] || 'bg-gray-100 text-gray-800'
   }
-
-  const getPriorityColor = (priority: string) => {</string>
-    const colors: Record<string, string> = {
-      high: 'bg-red-100 text-red-800',
-      medium: 'bg-yellow-100 text-yellow-800',
+  const getPriorityColor = (priority: string) => {</string>;
+    const colors: Record<string, string> = {;
+      high: 'bg-red-100 text-red-800';
+      medium: 'bg-yellow-100 text-yellow-800';
       low: 'bg-gray-100 text-gray-800'
     }
     return colors[priority] || 'bg-gray-100 text-gray-800'
   }
-
   return (
     <div className="max-w-4xl mx-auto space-y-6"></div>
       <Card></Card>
@@ -124,7 +110,6 @@ export function ClientRequirementsCapture() {
                 onChange={(e) => setProjectName(e.target.value)}
                 disabled={isProcessing}
               /></Input>
-
             <div className="space-y-2"></div>
               <Label htmlFor="requirements">Project Requirements</Label>
               <Textarea
@@ -136,15 +121,13 @@ export function ClientRequirementsCapture() {
                 rows={8}
                 className="resize-none"
               /></Textarea>
-
             {error && (
               <Alert variant="destructive"></Alert>
                 <AlertCircle className="h-4 w-4" /></AlertCircle>
                 <AlertDescription>{error}</AlertDescription>
             )}
-
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isProcessing || !input.trim()}
               className="w-full"
             >
@@ -160,7 +143,6 @@ export function ClientRequirementsCapture() {
                 </>
               )}
             </Button>
-
           <div className="mt-6 space-y-2"></div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground"></div>
               <Lightbulb className="h-4 w-4" /></Lightbulb>
@@ -176,7 +158,6 @@ export function ClientRequirementsCapture() {
                 >
                   {example}</button>
               ))}
-
       {result && (
         <>
           <Card></Card>
@@ -198,7 +179,6 @@ export function ClientRequirementsCapture() {
                 <div className="text-center"></div>
                   <p className="text-2xl font-bold">{result.summary.assignedAgents.length}</p>
                   <p className="text-sm text-muted-foreground">AI Agents</p>
-
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Extracted Requirements</CardTitle>
@@ -214,12 +194,10 @@ export function ClientRequirementsCapture() {
                       <Badge className={getCategoryColor(req.category)}>
                         {req.category}</Badge>
                       {req.agents.map((agent) => (
-                        <Badge key={agent} variant="outline" className="text-xs">
+                        <Badge key={agent} variant="outline", className="text-xs">
                           {agent.replace('agent_', '')}</Badge>
                   ))}
-
                 ))}
-
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Development Roadmap</CardTitle>
@@ -229,22 +207,18 @@ export function ClientRequirementsCapture() {
                   <div key={phase.name} className="flex items-start gap-4"></div>
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
                       {index + 1}
-
                     <div className="flex-1 space-y-1"></div>
                       <h4 className="font-medium">{phase.name}</h4>
                       <p className="text-sm text-muted-foreground">
                         Duration: {phase.duration}</p>
                       <div className="flex gap-1 mt-2">
                         {phase.agents.map((agent) => (</div>
-                          <Badge key={agent} variant="secondary" className="text-xs">
+                          <Badge key={agent} variant="secondary", className="text-xs">
                             {agent.replace('agent_', '')}</Badge>
                   ))}
-
                 ))}
-
         </>
       )}
-
     );
 }
   }

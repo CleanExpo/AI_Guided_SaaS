@@ -1,0 +1,141 @@
+
+> ai-guided-saas@1.0.0 build
+> node scripts/validate-env-build.cjs && next build
+
+🔍 Validating environment configuration...
+
+Build environment: Local Development
+
+Environment Variables:
+NEXTAUTH_URL: NOT SET
+NEXT_PUBLIC_APP_URL: NOT SET
+APP_URL: NOT SET
+NODE_ENV: NOT SET
+VERCEL_URL: NOT SET
+
+⚠️  Local development build - skipping strict environment validation
+Make sure to set environment variables for production deployment
+
+==================================================
+✅ Local build proceeding without strict validation
+  ▲ Next.js 14.2.30
+  - Environments: .env.local, .env.production
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./src/components/ui/badge.tsx
+Error: 
+  [31mx[0m Expected ',', got ')'
+    ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/badge.tsx[0m:20:1]
+ [2m20[0m |     defaultVariants: {
+ [2m21[0m |       variant: "default"
+ [2m22[0m |     }
+ [2m23[0m |   )
+    : [31;1m  ^[0m
+ [2m24[0m | 
+ [2m25[0m | export interface BadgeProps 
+ [2m25[0m |   extends React.HTMLAttributes<HTMLDivElement>,
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/ui/badge.tsx
+./src/components/AgentPulseMonitor.tsx
+./src/app/admin/agent-monitor/page.tsx
+
+./src/components/ui/button.tsx
+Error: 
+  [31mx[0m Expected ',', got ')'
+    ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/button.tsx[0m:26:1]
+ [2m26[0m |     defaultVariants: {
+ [2m27[0m |       variant: "default",
+ [2m28[0m |       size: "default"
+ [2m29[0m | )
+    : [31;1m^[0m
+ [2m30[0m | 
+ [2m31[0m | export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+ [2m31[0m |     VariantProps<typeof buttonVariants>  {
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/ui/button.tsx
+./src/app/admin/analytics/page.tsx
+
+./src/components/ui/progress.tsx
+Error: 
+  [31mx[0m Unterminated string constant
+   ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/progress.tsx[0m:1:1]
+ [2m1[0m | import * as React from "react"
+ [2m2[0m | import * as ProgressPrimitive from "@radix-ui/react-progress""
+   : [31;1m                                                             ^[0m
+ [2m3[0m | 
+ [2m4[0m | import { cn } from '@/utils/cn';
+ [2m4[0m | 
+   `----
+
+  [31mx[0m Expected ';', got 'string literal (, ")'
+   ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/components/ui/progress.tsx[0m:1:1]
+ [2m1[0m | import * as React from "react"
+ [2m2[0m | import * as ProgressPrimitive from "@radix-ui/react-progress""
+   : [31;1m                                                             ^[0m
+ [2m3[0m | 
+ [2m4[0m | import { cn } from '@/utils/cn';
+ [2m4[0m | 
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/ui/progress.tsx
+./src/components/admin/AdminAnalytics.tsx
+./src/app/admin/analytics/page.tsx
+
+./src/app/admin/causal/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+   ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/app/admin/causal/page.tsx[0m:4:1]
+ [2m4[0m | 
+ [2m5[0m | export default function CausalAnalyticsPage() {
+ [2m6[0m |   return (
+ [2m7[0m |     <div className="min-h-screen bg-gray-50 p-6">
+   : [31;1m     ^^^[0m
+ [2m8[0m |       <div className="max-w-7xl mx-auto space-y-8">
+ [2m9[0m |         <div>
+ [2m9[0m |           <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/admin/causal/page.tsx
+
+./src/app/admin/dashboard/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/mnt/d/AI Guided SaaS/src/app/admin/dashboard/page.tsx[0m:132:1]
+ [2m132[0m |   if (!adminUser) { return null; }
+ [2m133[0m | 
+ [2m134[0m |   return (
+ [2m135[0m |     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-50">
+     : [31;1m     ^^^[0m
+ [2m136[0m |       {/* Header */}
+ [2m137[0m |       <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
+ [2m137[0m |         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/admin/dashboard/page.tsx
+
+
+> Build failed because of webpack errors

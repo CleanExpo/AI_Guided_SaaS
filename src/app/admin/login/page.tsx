@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,38 +7,32 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertTriangle, Shield, Eye, EyeOff } from 'lucide-react';
-export default function AdminLoginPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const router = useRouter()
-
+export default function AdminLoginPage(): void {;
+  const [showPassword, setShowPassword] = useState;
+  const;$2 [loading, setLoading] = useState
+  const;$2 [error, setError] = useState
+  const;$2 router = useRouter()
   // Debug: Log when component mounts
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {;
     e.preventDefault()
     setLoading(true)
     setError('')
-
     try {
-      const formData = new FormData(e.currentTarget)
-      const email = formData.get('email') as string
-      const password = formData.get('password') as string
-
-      const response = await fetch('/api/admin/auth/login', {
-        method: 'POST',
+      const formData = new FormData(e.currentTarget);
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      const response = await fetch('/api/admin/auth/login', {;
+        method: 'POST';
     headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email, password })
       })
-
-      const data = await response.json()
-
+      const data = await response.json();
       if (data.success) {
         // Store admin token in localStorage for client-side access
         localStorage.setItem('admin-token', data.token)
         localStorage.setItem('admin-user', JSON.stringify(data.admin))
-        
         // Redirect to admin dashboard
         router.push('/admin/dashboard')
       } else {
@@ -52,7 +45,6 @@ export default function AdminLoginPage() {
       setLoading(false)
     }
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -74,9 +66,8 @@ export default function AdminLoginPage() {
                   <AlertDescription className="text-red-400">
                     {error}
                   </AlertDescription>)}
-
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-slate-200">
+                <Label htmlFor="email", className="text-slate-200">
                   Admin Email
                 </Label>
                 <Input
@@ -88,9 +79,8 @@ export default function AdminLoginPage() {
                   className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
                 />
               </div>
-
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-slate-200">
+                <Label htmlFor="password", className="text-slate-200">
                   Password
                 </Label>
                 <div className="relative">
@@ -113,7 +103,6 @@ export default function AdminLoginPage() {
                     )}
                   </button>
                 </div>
-
               <Button
                 type="submit"
                 disabled={loading}
@@ -129,7 +118,6 @@ export default function AdminLoginPage() {
                 )}
               </Button>
             </form>
-
             <div className="mt-6 text-center">
               <div className="text-sm text-slate-400">
                 <p className="mb-2">Default Admin Credentials:</p>
@@ -143,7 +131,6 @@ export default function AdminLoginPage() {
               </div>
           </CardContent>
         </Card>
-
         <div className="mt-4 text-center">
           <button
             onClick={() => router.push('/')}

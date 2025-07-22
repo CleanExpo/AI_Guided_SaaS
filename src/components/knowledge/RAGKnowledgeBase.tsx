@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -13,14 +12,13 @@ import { Progress } from '@/components/ui/progress';
 import { Search, Upload, Database, FileText, Code, BookOpen, Globe, Trash2, Download, RefreshCw, ChevronRight, FileCode, MessageSquare } from 'lucide-react';
 import { useRAG } from '@/hooks/useRAG';
 import { useToast } from '@/components/ui/use-toast';
-interface RAGKnowledgeBaseProps {
+interface RAGKnowledgeBaseProps {;
   projectId?: string
   onSourceSelected?: (source) => void
 };
-
-export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps) {
-  const { toast } = useToast()
-  const {
+export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps): void {;
+  const { toast } = useToast();
+  const { ; }
     query,
     addDocument,
     addFromUrl,
@@ -34,121 +32,102 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
     error,
     initialized
   } = useRAG({
-    provider: 'memory',
+    provider: 'memory';
   // Use memory provider for demo
   retrievalTopK: 5
   })
-
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<any[]>([])
-  const [stats, setStats] = useState<any>(null)
-  const [selectedSource, setSelectedSource] = useState<any>(null)
-  
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [stats, setStats] = useState<any>(null);
+  const [selectedSource, setSelectedSource] = useState<any>(null);
   // Document upload state
-  const [documentContent, setDocumentContent] = useState('')
-  const [documentTitle, setDocumentTitle] = useState('')
-  const [documentType, setDocumentType] = useState<string>('documentation')
-  const [documentTags, setDocumentTags] = useState('')
-  
+  const [documentContent, setDocumentContent] = useState('');
+  const [documentTitle, setDocumentTitle] = useState('');
+  const [documentType, setDocumentType] = useState<string>('documentation');
+  const [documentTags, setDocumentTags] = useState('');
   // URL input state
-  const [urlInput, setUrlInput] = useState('')
-  
+  const [urlInput, setUrlInput] = useState('');
   // Codebase input state
-  const [codebasePath, setCodebasePath] = useState('')
-
+  const [codebasePath, setCodebasePath] = useState('');
   // Load stats on mount
   useEffect(() => {
     if (initialized) {
       loadStats()
     }
   }, [initialized])
-
-  const loadStats = async () => {
+  const loadStats = async () => {;
     try {
-      const knowledgeStats = await getStats()
+      const knowledgeStats = await getStats();
       setStats(knowledgeStats)
     } catch (err) {
       console.error('Failed to load, stats:', err)
     }
   }
-
   // Search knowledge base
-  const handleSearch = async () => {
+  const handleSearch = async () => {;
     if (!searchQuery.trim()) return
-
     try {
-      const response = await query(searchQuery, {
-        filters: projectId ? { project: projectId } : undefined,
+      const response = await query(searchQuery, {;
+        filters: projectId ? { project: projectId } : undefined;
     options: {
-          topK: 10,
+          topK: 10;
           includeScores: true
         }
       })
-
       setSearchResults(response.sources)
-      
       if (response.sources.length === 0) {
         toast({
-          title: 'No Results',
+          title: 'No Results';
           description: 'No matching documents found in the knowledge base'
         }
       )}
-
     );
     } catch (err) {
       console.error('Search, failed:', err)
     }
   }
-
   // Add document manually
-  const handleAddDocument = async () => {
+  const handleAddDocument = async () => {;
     if (!documentContent.trim() || !documentTitle.trim()) {
       toast({
-        title: 'Error',
-        description: 'Please provide both title and content',
+        title: 'Error';
+        description: 'Please provide both title and content';
         variant: 'destructive'
       })
       return
     }
-
     try {
-      const tags = documentTags.split(',').map(t => t.trim()).filter(Boolean)
-      
+      const tags = documentTags.split(',').map(t => t.trim()).filter(Boolean);
       await addDocument(documentContent, {
-        source: 'manual',
-        title: documentTitle, type: documentType as any,
+        source: 'manual';
+        title: documentTitle; type: documentType as any,
         tags,
         project: projectId
       })
-
       // Clear form
       setDocumentContent('')
       setDocumentTitle('')
       setDocumentTags('')
-      
       // Reload stats
       await loadStats()
-      
       toast({
-        title: 'Success',
+        title: 'Success';
         description: 'Document added to knowledge base'
       })
     } catch (err) {
       console.error('Failed to add, document:', err)
     }
   }
-
   // Add from URL
-  const handleAddFromUrl = async () => {
+  const handleAddFromUrl = async () => {;
     if (!urlInput.trim()) {
       toast({
-        title: 'Error',
-        description: 'Please provide a URL',
+        title: 'Error';
+        description: 'Please provide a URL';
         variant: 'destructive'
       })
       return
     }
-
     try {
       await addFromUrl(urlInput)
       setUrlInput('')
@@ -157,12 +136,10 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       console.error('Failed to add, from: URL,', err)
     }
   }
-
   // Add from file</string>
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {;
+    const file = event.target.files?.[0];
     if (!file) return
-
     try {
           </HTMLInputElement>
       await addFromFile(file)
@@ -171,50 +148,43 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       console.error('Failed to add, file:', err)
     }
   }
-
   // Ingest codebase
-  const handleIngestCodebase = async () => {
+  const handleIngestCodebase = async () => {;
     if (!codebasePath.trim()) {
       toast({
-        title: 'Error',
-        description: 'Please provide a codebase path',
+        title: 'Error';
+        description: 'Please provide a codebase path';
         variant: 'destructive'
       })
       return
     }
-
     try {
-      const result = await ingestCodebase(codebasePath, {
-        project: projectId,
+      const result = await ingestCodebase(codebasePath, {;
+        project: projectId;
         include: ['**/*.{js,jsx,ts,tsx,py,java,go}'],
         exclude: ['**/node_modules/**', '**/dist/**']
       })
-
       setCodebasePath('')
       await loadStats()
-
       if (result.errors.length > 0) {
         toast({
-          title: 'Partial Success',
-          description: `Added ${result.documentsAdded} files with ${result.errors.length} errors`
+          title: 'Partial Success';
+          description: `Added ${result.documentsAdded} files with ${result.errors.length} errors``
         }
       )}
-
     );
     } catch (err) {
       console.error('Failed to ingest, codebase:', err)
     }
   }
-
   // Handle source selection
-  const handleSourceSelect = (source) => {
+  const handleSourceSelect = (source) => {;
     setSelectedSource(source)
     if (onSourceSelected) {
       onSourceSelected(source)
     }
   }
-
-  const getTypeIcon = (type: string) => {
+  const getTypeIcon = (type: string) => {;
     switch (type) {
       case 'code':</HTMLInputElement>
         return <FileCode className="h-4 w-4" />
@@ -228,11 +198,9 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         return <FileText className="h-4 w-4" />
     }
   }
-
   return (
     <div className="space-y-6">
       {/* Search, Bar */}
-
       <Card></Card>
         <CardContent className="pt-6"></CardContent>
           <div className="flex gap-2"></div>
@@ -247,11 +215,9 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
               /></Input>
             <Button onClick={handleSearch} disabled={loading}>
               Search</Button>
-
       {/* Main, Content */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* Knowledge, Management */}
-
         <div className="space-y-6"></div>
           <Card></Card>
             <CardHeader></CardHeader>
@@ -259,14 +225,13 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
               <CardDescription>
                 Manage your project's knowledge and documentation</CardDescription>
             <CardContent></CardContent>
-              <Tabs defaultValue="add" className="w-full"></Tabs>
+              <Tabs defaultValue="add", className="w-full"></Tabs>
                 <TabsList className="grid w-full grid-cols-4"></TabsList>
                   <TabsTrigger value="add">Add</TabsTrigger>
                   <TabsTrigger value="url">URL</TabsTrigger>
                   <TabsTrigger value="file">File</TabsTrigger>
                   <TabsTrigger value="code">Code</TabsTrigger>
-
-                <TabsContent value="add" className="space-y-4"></TabsContent>
+                <TabsContent value="add", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
                     <Label htmlFor="title">Title</Label>
                     <Input
@@ -275,7 +240,6 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       onChange={(e) => setDocumentTitle(e.target.value)}
                       placeholder="Document title"
                     /></Input>
-                  
                   <div className="space-y-2"></div>
                     <Label htmlFor="type">Type</Label>
                     <select
@@ -290,7 +254,6 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       <option value="api">API Reference</option>
                       <option value="article">Article</option>
                       <option value="other">Other</option>
-                  
                   <div className="space-y-2"></div>
                     <Label htmlFor="content">Content</Label>
                     <Textarea
@@ -300,7 +263,6 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       placeholder="Enter document content..."
                       rows={6}
                     /></Textarea>
-                  
                   <div className="space-y-2"></div>
                     <Label htmlFor="tags">Tags (comma-separated)</Label>
                     <Input
@@ -309,16 +271,14 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       onChange={(e) => setDocumentTags(e.target.value)}
                       placeholder="react, hooks, performance"
                     /></Input>
-                  
-                  <Button 
-                    onClick={handleAddDocument} 
+                  <Button
+                    onClick={handleAddDocument}
                     disabled={loading}
                     className="w-full"
                   ></Button>
                     <Upload className="h-4 w-4 mr-2" />
                     Add Document</Upload>
-
-                <TabsContent value="url" className="space-y-4"></TabsContent>
+                <TabsContent value="url", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
                     <Label htmlFor="url">URL</Label>
                     <Input
@@ -328,15 +288,14 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       onChange={(e) => setUrlInput(e.target.value)}
                       placeholder="https://example.com/docs"
                     /></Input>
-                  <Button 
-                    onClick={handleAddFromUrl} 
+                  <Button
+                    onClick={handleAddFromUrl}
                     disabled={loading}
                     className="w-full"
                   ></Button>
                     <Globe className="h-4 w-4 mr-2" />
                     Add from URL</Globe>
-
-                <TabsContent value="file" className="space-y-4"></TabsContent>
+                <TabsContent value="file", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
                     <Label htmlFor="file">Upload File</Label>
                     <Input
@@ -347,8 +306,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     /></Input>
                   <p className="text-sm text-muted-foreground">
                     Supported: Text, Markdown, Code files</p>
-
-                <TabsContent value="code" className="space-y-4"></TabsContent>
+                <TabsContent value="code", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
                     <Label htmlFor="path">Codebase Path</Label>
                     <Input
@@ -357,8 +315,8 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       onChange={(e) => setCodebasePath(e.target.value)}
                       placeholder="/path/to/codebase"
                     /></Input>
-                  <Button 
-                    onClick={handleIngestCodebase} 
+                  <Button
+                    onClick={handleIngestCodebase}
                     disabled={loading}
                     className="w-full"
                   ></Button>
@@ -366,7 +324,6 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     Ingest Codebase</Code>
                   <p className="text-sm text-muted-foreground">
                     Automatically indexes all code files in the directory</p>
-
           {/* Stats */}
           {stats && (
             <Card></Card>
@@ -380,13 +337,11 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                   <div></div>
                     <p className="text-sm text-muted-foreground">Chunks</p>
                     <p className="text-2xl font-bold">{stats.chunkCount}</p>
-                
                 <div></div>
                   <p className="text-sm text-muted-foreground mb-2">Storage Used</p>
                   <Progress value={(stats.size / 1048576) * 10} className="h-2" /></Progress>
                   <p className="text-xs text-muted-foreground mt-1">
                     {(stats.size / 1024).toFixed(2)} KB</p>
-
                 {stats.topics?.length > 0 && (
                   <div></div>
                     <p className="text-sm text-muted-foreground mb-2">Top Topics</p>
@@ -395,9 +350,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                         <Badge key={topic.topic} variant="secondary">
                           {topic.topic} ({topic.count})</Badge>
                   ))}
-
                 )}
-
                 <div className="flex gap-2 pt-4"></div>
                   <Button
                     size="sm"
@@ -421,15 +374,14 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <Trash2 className="h-4 w-4 mr-2" />
                     Clear</Trash2>
           )}
-
         {/* Search, Results */}
         <div className="space-y-6"></div>
           <Card className="h-[600px]"></Card>
             <CardHeader></CardHeader>
               <CardTitle>Search Results</CardTitle>
               <CardDescription>
-                {searchResults.length > 0 
-                  ? `Found ${searchResults.length} relevant documents`
+                {searchResults.length > 0
+                  ? `Found ${searchResults.length} relevant documents``
                   : 'Search to find relevant knowledge'
                 }</CardDescription>
             <CardContent></CardContent>
@@ -438,32 +390,28 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                   {searchResults.map((result, index) => (</div>
                     <div
                       key={result.id}
-                      className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                        selectedSource?.id === result.id 
-                          ? 'bg-accent border-primary' 
+                      className={`p-4 border rounded-lg cursor-pointer transition-colors ${`
+                        selectedSource?.id === result.id
+                          ? 'bg-accent border-primary'
                           : 'hover:bg-accent'
-                      }`}
+                      }`}`
                       onClick={() => handleSourceSelect(result)}
                     ></div>
                       <div className="flex items-start justify-between"></div>
                         <div className="flex-1"></div>
                           <div className="flex items-center gap-2 mb-2">
                             {getTypeIcon(result.metadata.type)}
-
                             <h4 className="font-medium">
                               {result.metadata.title || result.metadata.source}</h4>
-                          
                           <p className="text-sm text-muted-foreground line-clamp-2">
                             {result.highlights?.[0] || result.content.substring(0, 150)}...</p>
-                          
                           <div className="flex items-center gap-4 mt-2"></div>
-                            <Badge variant="outline" className="text-xs">
+                            <Badge variant="outline", className="text-xs">
                               {result.metadata.type}</Badge>
                             {result.score && (
                               <span className="text-xs text-muted-foreground">
                                 Score: {(result.score * 100).toFixed(0)}%</span>
                             )}
-
                         <ChevronRight className="h-4 w-4 text-muted-foreground" /></ChevronRight>))}
     );
 }

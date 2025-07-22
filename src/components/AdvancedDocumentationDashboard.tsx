@@ -1,14 +1,12 @@
 'use client'
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProjectConfig } from '@/types';
 import { BookOpen } from 'lucide-react';
-interface AdvancedDocumentationDashboardProps {
+interface AdvancedDocumentationDashboardProps {;
   projectConfig: ProjectConfig;
   onDocumentationComplete: (result: unknown) => void
 };
-
-export default function AdvancedDocumentationDashboard() {
+export default function AdvancedDocumentationDashboard(): void {
   return (
     <Card></Card>
       <CardHeader></CardHeader>

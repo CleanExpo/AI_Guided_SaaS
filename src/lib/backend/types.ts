@@ -1,6 +1,5 @@
 // Common types for backend adapters
-
-export interface User {
+export interface User {;
   id: string;
   email: string
   name?: string
@@ -9,8 +8,7 @@ export interface User {
   updatedAt: string
   metadata?: Record<string, any>
 };
-
-export interface Project {
+export interface Project {;
   id: string;
   userId: string;
   name: string;
@@ -21,20 +19,17 @@ export interface Project {
   createdAt: string;
   updatedAt: string
 };
-
-export interface QueryOptions {
+export interface QueryOptions {;
   limit?: number
   offset?: number
   orderBy?: string
   order?: 'asc' | 'desc'
   filters?: Record<string, any>
 };
-
-export interface PaginatedResponse<T> {
-  data: T[], total: number, page: number, pageSize: number, hasMore: boolean
+export interface PaginatedResponse<T> {;
+  data: T[]; total: number; page: number; pageSize: number; hasMore: boolean
 };
-
-export interface BackendAdapter {
+export interface BackendAdapter {;
   // Authentication
   signUp(email: string;
   password: string, metadata?: any): Promise<User>
@@ -42,41 +37,35 @@ export interface BackendAdapter {
   token: string }>
   signOut(): Promise<void>
   getCurrentUser(): Promise<User | null>
-  updateUser(id: string, data: Partial<User>): Promise<User>
-
+  updateUser(id: string; data: Partial<User>): Promise<User>
   // Projects
   createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project>
   getProject(id: string): Promise<Project | null>
-  updateProject(id: string, data: Partial<Project>): Promise<Project>
+  updateProject(id: string; data: Partial<Project>): Promise<Project>
   deleteProject(id: string): Promise<void>
   listProjects(userId: string, options?: QueryOptions): Promise<PaginatedResponse<Project>>
-
   // Generic CRUD operations
   create<T>(collection: string, data): Promise<T>
-  read<T>(collection: string, id: string): Promise<T | null>
-  update<T>(collection: string, id: string, data): Promise<T>
-  delete(collection: string, id: string): Promise<void>
+  read<T>(collection: string; id: string): Promise<T | null>
+  update<T>(collection: string; id: string, data): Promise<T>
+  delete(collection: string; id: string): Promise<void>
   list<T>(collection: string, options?: QueryOptions): Promise<PaginatedResponse<T>>
-
   // Query builder
   query<T>(collection: string): QueryBuilder<T>
-
   // Real-time subscriptions
   subscribe<T>(
-    collection: string,
+    collection: string;
     callback: (event: DatabaseEvent<T>) => void,
     filters?: Record<string, any>
   ): () => void
-
   // File storage
-  uploadFile(bucket: string, path: string, file: File): Promise<string>
-  deleteFile(bucket: string, path: string): Promise<void>
-  getFileUrl(bucket: string, path: string): string
+  uploadFile(bucket: string; path: string; file: File): Promise<string>
+  deleteFile(bucket: string; path: string): Promise<void>
+  getFileUrl(bucket: string; path: string): string
 };
-
-export interface QueryBuilder<T> {
+export interface QueryBuilder<T> {;
   select(fields: string[]): QueryBuilder<T>
-  where(field: string, operator: string, value): QueryBuilder<T>
+  where(field: string; operator: string, value): QueryBuilder<T>
   orderBy(field: string, direction?: 'asc' | 'desc'): QueryBuilder<T>
   limit(count: number): QueryBuilder<T>
   offset(count: number): QueryBuilder<T>
@@ -84,14 +73,12 @@ export interface QueryBuilder<T> {
   single(): Promise<T | null>
   count(): Promise<number>
 };
-
-export interface DatabaseEvent<T> {
+export interface DatabaseEvent<T> {;
   type: 'INSERT' | 'UPDATE' | 'DELETE'
-  table: string, record: T
+  table: string; record: T
   oldRecord?: T
 };
-
-export interface BackendConfig {
+export interface BackendConfig {;
   type: 'supabase' | 'strapi' | 'nocodb'
   url: string
   apiKey?: string
@@ -104,8 +91,7 @@ export interface BackendConfig {
   password: string
   }
 };
-
-export class BackendError extends Error {
+export class BackendError extends Error {;
   constructor(
     message: string,
     public code: string,

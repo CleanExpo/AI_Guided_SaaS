@@ -2,24 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
-
 // Handle missing environment variables gracefully for demo deployment
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-const supabase =
+const supabase =;
   supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
-
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  email: z.string().email('Invalid email address');
   password: z.string().min(8, 'Password must be at least 8 characters')});
-
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): void {
   try {
     const body = await request.json();
     const { name, email, password } = registerSchema.parse(body);
-
     // Return error if Supabase is not configured
     if (!supabase) {
       return NextResponse.json(
@@ -27,36 +22,31 @@ export async function POST(request: NextRequest) {
         { status: 503 }
       );
     }
-
     // Check if user already exists
-    const { data: existingUser } = await supabase
+    const { data: existingUser } = await supabase;
       .from('users')
       .select('id')
       .eq('email', email)
       .single();
-
     if (existingUser) {
       return NextResponse.json(
         { error: 'User with this email already exists' },
         { status: 400 }
       );
     }
-
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
-
     // Create user
-    const { data: user, error } = await supabase
+    const { data: user, error } = await supabase;
       .from('users')
       .insert({
         email,
-        full_name: name,
-        password_hash: hashedPassword,
+        full_name: name;
+        password_hash: hashedPassword;
         provider: 'credentials';
       }})
       .select()
       .single();
-
     if (error) {
       console.error('Database, error:', error);
       return NextResponse.json(
@@ -64,9 +54,8 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
     return NextResponse.json(
-      { message: 'User created successfully', userId: user.id },
+      { message: 'User created successfully'; userId: user.id },
       { status: 201 }
     );
   } catch (error) {
@@ -76,7 +65,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     console.error('Registration, error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },

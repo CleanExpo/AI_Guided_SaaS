@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -8,70 +7,66 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Bot, Code, Palette, Rocket, Sparkles, Brain, BarChart3, Users, ArrowRight, Play, Pause, RefreshCw, TrendingUp, Wrench } from 'lucide-react';
 import Link from 'next/link';
-
-const personas = [
+const personas = [;
   {
-    id: 'ai-architect',
-    name: 'AI Architect',
-    description: 'Expert in AI-powered development workflows',
-    avatar: '🤖',
-    color: 'from-blue-500 to-cyan-500',
+    id: 'ai-architect';
+    name: 'AI Architect';
+    description: 'Expert in AI-powered development workflows';
+    avatar: '🤖';
+    color: 'from-blue-500 to-cyan-500';
     icon: Bot},
   {
-    id: 'fullstack-wizard',
-    name: 'Fullstack Wizard',
-    description: 'Master of frontend and backend development',
-    avatar: '🧙‍♂️',
-    color: 'from-brand-primary-500 to-pink-500',
+    id: 'fullstack-wizard';
+    name: 'Fullstack Wizard';
+    description: 'Master of frontend and backend development';
+    avatar: '🧙‍♂️';
+    color: 'from-brand-primary-500 to-pink-500';
     icon: Code},
   {
-    id: 'ui-designer',
-    name: 'UI Designer',
+    id: 'ui-designer';
+    name: 'UI Designer';
     description: 'Creating beautiful, user-friendly interfaces',
-    avatar: '🎨',
-    color: 'from-pink-500 to-rose-500',
+    avatar: '🎨';
+    color: 'from-pink-500 to-rose-500';
     icon: Palette},
   {
-    id: 'startup-founder',
-    name: 'Startup Founder',
-    description: 'MVP development and rapid iteration',
-    avatar: '🚀',
-    color: 'from-orange-500 to-red-500',
+    id: 'startup-founder';
+    name: 'Startup Founder';
+    description: 'MVP development and rapid iteration';
+    avatar: '🚀';
+    color: 'from-orange-500 to-red-500';
     icon: Rocket}];
-
-const liveFeatures = [
+const liveFeatures = [;
   {
-    title: 'Claude Code Integration',
-    description: 'Advanced AI-powered development with token optimization',
-    icon: Brain,
-    demo: 'claude-dashboard',
+    title: 'Claude Code Integration';
+    description: 'Advanced AI-powered development with token optimization';
+    icon: Brain;
+    demo: 'claude-dashboard';
     color: 'bg-blue-500'},
   {
-    title: 'Visual UI Builder',
-    description: 'Drag-and-drop interface builder with real-time preview',
-    icon: Wrench,
-    demo: 'ui-builder',
+    title: 'Visual UI Builder';
+    description: 'Drag-and-drop interface builder with real-time preview';
+    icon: Wrench;
+    demo: 'ui-builder';
     color: 'bg-brand-primary-500'},
   {
-    title: 'Analytics Dashboard',
-    description: 'Real-time performance monitoring and insights',
-    icon: BarChart3,
-    demo: 'analytics',
+    title: 'Analytics Dashboard';
+    description: 'Real-time performance monitoring and insights';
+    icon: BarChart3;
+    demo: 'analytics';
     color: 'bg-green-500'},
   {
-    title: 'Collaboration Workspace',
-    description: 'Team collaboration with real-time synchronization',
-    icon: Users,
-    demo: 'collaboration',
+    title: 'Collaboration Workspace';
+    description: 'Team collaboration with real-time synchronization';
+    icon: Users;
+    demo: 'collaboration';
     color: 'bg-orange-500'}];
-
-const claudeCommands = [
-  { command: '/init-docs', status: 'completed', tokens: '+8K' },
-  { command: '/sync-docs', status: 'executing', tokens: '+2K' },
-  { command: '/compact-docs', status: 'pending', tokens: '-15K' },
-  { command: '/docs:status', status: 'pending', tokens: '+500' }];
-
-export default function ShowcaseLandingPage() {
+const claudeCommands = [;
+  { command: '/init-docs'; status: 'completed'; tokens: '+8K' },
+  { command: '/sync-docs'; status: 'executing'; tokens: '+2K' },
+  { command: '/compact-docs'; status: 'pending'; tokens: '-15K' },
+  { command: '/docs:status'; status: 'pending'; tokens: '+500' }];
+export default function ShowcaseLandingPage(): void {
       </string>
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
       </string>
@@ -79,36 +74,31 @@ export default function ShowcaseLandingPage() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [memoryUsage, setMemoryUsage] = useState(42);
   const [commandIndex, setCommandIndex] = useState(0);
-
   // Simulate live dashboard updates
   useEffect(() => {
     if (!isPlaying) return;
-
     const interval = setInterval(() => {
       setMemoryUsage(prev => {
         const newValue = prev + (Math.random() - 0.5) * 5;
         return Math.max(20, Math.min(80, newValue));
   };
-
       setCommandIndex(prev => (prev + 1) % claudeCommands.length);
     }, 2000);
-
     return () => clearInterval(interval);
   }, [isPlaying]);
-
-  const renderPersonaShowcase = () => (</string>
+  const renderPersonaShowcase = () => (</string>;
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const Icon = persona.icon;
         return (
     <motion.div
             key={persona.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0; y: 20 }}
+            animate={{ opacity: 1; y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={`cursor-pointer transition-all duration-300 ${
+            className={`cursor-pointer transition-all duration-300 ${`
               selectedPersona === persona.id ? 'scale-105' : 'hover:scale-105'
-            }`}
+            }`}`
             onClick={() =>
               setSelectedPersona(
                 selectedPersona === persona.id ? null : persona.id
@@ -116,11 +106,11 @@ export default function ShowcaseLandingPage() {
            }
           ></motion>
             <Card
-              className={`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}
+              className={`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}`
             >
               <CardHeader className="text-center">
                 <div
-                  className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}
+                  className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}`
                 >
                   <Icon className="w-8 h-8 text-white" />
                 </div>
@@ -131,9 +121,9 @@ export default function ShowcaseLandingPage() {
                 <AnimatePresence>
                   {selectedPersona === persona.id && (</AnimatePresence>
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
+                      initial={{ opacity: 0; height: 0 }}
+                      animate={{ opacity: 1; height: 'auto' }}
+                      exit={{ opacity: 0; height: 0 }}
                       className="space-y-2"
                     >
                       <Badge
@@ -141,22 +131,20 @@ export default function ShowcaseLandingPage() {
                         className="w-full justify-center"
                       >
                         Active Persona</Badge>
-                      <Button size="sm" className="w-full" asChild>
+                      <Button size="sm", className="w-full" asChild>
                         <Link href="/auth/signin">
                           Start with {persona.name}</Link>
                           <ArrowRight className="ml-2 h-3 w-3" />
-                        
                     </motion.div>
                   )}
                 </AnimatePresence>
           </motion.div>
         );
   }}
-
         </div>
   );
 }
-  const renderClaudeDashboard = () => (
+  const renderClaudeDashboard = () => (;
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center justify-between">
@@ -202,41 +190,37 @@ export default function ShowcaseLandingPage() {
             </div>
             <Progress value={78} className="h-2" />
           </div>
-
         <div className="space-y-2">
           <h4 className="text-sm font-medium text-white/90">Active Commands</h4>
           {claudeCommands.map((cmd, index) => (
             <motion.div
               key={cmd.command}
-              className={`flex items-center justify-between p-2 rounded-lg ${
+              className={`flex items-center justify-between p-2 rounded-lg ${`
                 index === commandIndex
                   ? 'bg-blue-500/20 border border-blue-400/30'
                   : 'bg-white/5'
-              }`}
+              }`}`
               animate={{
-                scale: index === commandIndex ? 1.02 : 1,
+                scale: index === commandIndex ? 1.02 : 1;
                 opacity: index === commandIndex ? 1 : 0.7}}
             >
               <div className="flex items-center gap-2">
                 <div
-                  className={`w-2 h-2 rounded-full ${
+                  className={`w-2 h-2 rounded-full ${`
                     cmd.status === 'completed'
                       ? 'bg-green-400'
                       : cmd.status === 'executing'
                         ? 'bg-blue-400 animate-pulse'
                         : 'bg-gray-400'
-                  }`}
+                  }`}`
                 />
                 <span className="font-mono text-sm text-white">
                   {cmd.command}</span>
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline", className="text-xs">
                 {cmd.tokens}</Badge>
             </motion.div>
           ))}
-
-        
-
-  const renderUIBuilder = () => (
+  const renderUIBuilder = () => (;
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
@@ -260,12 +244,11 @@ export default function ShowcaseLandingPage() {
                 </CardHeader>
                 </div>)
           )}
-
         <div className="h-32 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex items-center justify-center">
           <div className="text-center text-white/60">
             <Palette className="w-8 h-8 mx-auto mb-2" />
             <p className="text-sm">Drop components here</p>
-  const renderAnalytics = () => (
+  const renderAnalytics = () => (;
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
@@ -297,9 +280,8 @@ export default function ShowcaseLandingPage() {
         </div>
         </div>
           )}
-
     );
-  const renderCollaboration = () => (
+  const renderCollaboration = () => (;
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
@@ -311,30 +293,25 @@ export default function ShowcaseLandingPage() {
         <div className="space-y-3">
           {[
             {
-              name: 'Alex Chen',
-              status: 'online',
+              name: 'Alex Chen';
+              status: 'online';
               action: 'Editing Dashboard.tsx'},
-            { name: 'Sarah Kim', status: 'online', action: 'Reviewing PR #42' },
+            { name: 'Sarah Kim'; status: 'online'; action: 'Reviewing PR #42' },
             {
-              name: 'Mike Johnson',
-              status: 'away',
+              name: 'Mike Johnson';
+              status: 'away';
               action: 'Last seen 5m ago'}].map(user => (</div>
             <div key={user.name} className="flex items-center gap-3">
               <div
-                className={`w-3 h-3 rounded-full ${
+                className={`w-3 h-3 rounded-full ${`
                   user.status === 'online' ? 'bg-green-400' : 'bg-yellow-400'
-                }`}
+                }`}`
               />
               <div className="flex-1">
                 <div className="text-sm font-medium text-white">
                   {user.name}
-
                 <div className="text-xs text-white/60">{user.action}
-
           ))}
-
-        
-
   const renderDemo = () => {
     switch (activeDemo) {
       case 'claude-dashboard':
@@ -347,16 +324,14 @@ export default function ShowcaseLandingPage() {
         return renderCollaboration();
       default: return renderClaudeDashboard()}
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
       {/* Hero Section */}
-
       <section className="relative py-20 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0; y: 20 }}
+            animate={{ opacity: 1; y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <Badge
@@ -365,34 +340,30 @@ export default function ShowcaseLandingPage() {
             >
               <Sparkles className="w-3 h-3 mr-1" />
               AI-Powered SaaS Platform</Sparkles>
-
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
               AI-Guided SaaS Builder</h1>
-
             <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
               Experience the future of development with AI personas, intelligent
               code generation, and real-time collaboration - all in one
               sophisticated platform.</p>
           </motion.div>
-
           {/* Persona Selection Showcase */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0; y: 40 }}
+            animate={{ opacity: 1; y: 0 }}
+            transition={{ duration: 0.8; delay: 0.2 }}
             className="mb-16"
           >
             <h2 className="text-2xl font-bold text-white mb-8">
               Choose Your AI Development Persona</h2>
             {renderPersonaShowcase()}
           </motion.div>
-
       {/* Live Features Demo */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0; y: 20 }}
+            animate={{ opacity: 1; y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
@@ -401,27 +372,25 @@ export default function ShowcaseLandingPage() {
             <p className="text-xl text-white/80">
               See our actual components and features in action</p>
           </motion.div>
-
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Feature Tabs */}
-
             <div className="lg:col-span-1">
               <div className="space-y-3">
                 {liveFeatures.map(feature => {
-                  const Icon = feature.icon, return (
+                  const Icon = feature.icon, return (;
     <motion.button
                       key={feature.demo}
-                      className={`w-full p-4 rounded-lg text-left transition-all ${
+                      className={`w-full p-4 rounded-lg text-left transition-all ${`
                         activeDemo === feature.demo
                           ? 'bg-white/20 border border-white/30'
                           : 'bg-white/5  hover:bg-white/10'
-                      }`}
+                      }`}`
                       onClick={() => setActiveDemo(feature.demo)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     ></motion>
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${feature.color}`}>
+                        <div className={`p-2 rounded-lg ${feature.color}`}>`
                           <Icon className="w-5 h-5 text-white" />
                         </div>
                         <div>
@@ -432,35 +401,30 @@ export default function ShowcaseLandingPage() {
                     </motion.button>
                   );
   }}
-
-        
-
             {/* Live Demo */}
             <div className="lg:col-span-2">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeDemo}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0; x: 20 }}
+                  animate={{ opacity: 1; x: 0 }}
+                  exit={{ opacity: 0; x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
                   {renderDemo()}</motion>
                 </motion.div>
-
       {/* CTA Section */}
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0; y: 20 }}
+            animate={{ opacity: 1; y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Experience the Future?</h2>
             <p className="text-xl text-white/80 mb-8">
               Join the next generation of AI-powered development</p>
-
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
@@ -480,7 +444,6 @@ export default function ShowcaseLandingPage() {
                 <Link href="/ui-builder">
                   Try UI Builder</Link>
                   <Wrench className="ml-2 h-4 w-4" />
-                
           </motion.div>
           </div>
           </AnimatePresence>
@@ -489,5 +452,4 @@ export default function ShowcaseLandingPage() {
 </AnimatePresence>
 </div></section>
 </div>
-</section>
 }

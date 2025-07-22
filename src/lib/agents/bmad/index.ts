@@ -2,7 +2,6 @@
 export { AnalystAgent } from './AnalystAgent';
 export { ProjectManagerAgent } from './ProjectManagerAgent';
 export { ArchitectAgent } from './ArchitectAgent';
-
 // Export types
 export type { RequirementAnalysis, UserStory } from './AnalystAgent';
 export type {

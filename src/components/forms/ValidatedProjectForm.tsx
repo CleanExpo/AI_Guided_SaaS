@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateProjectSchema, ProjectTypeSchema, validateSafe, z } from '@/lib/validation';
@@ -11,97 +10,86 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, AlertCircle } from 'lucide-react';
-const ExtendedProjectSchema = CreateProjectSchema.extend({
+const ExtendedProjectSchema = CreateProjectSchema.extend({;
   config: z.object({
-    database: z.string().optional(),
-    hosting: z.string().optional(), 
-    authentication: z.string().optional(),
-    api_style: z.string().optional(),
-    framework: z.string().optional(),
-    language: z.string().optional(),
+    database: z.string().optional();
+    hosting: z.string().optional();
+    authentication: z.string().optional();
+    api_style: z.string().optional();
+    framework: z.string().optional();
+    language: z.string().optional();
     features: z.array(z.string()).optional()
   }).optional()
 });
-
 // Type-safe form data
-type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>
-
-export function ValidatedProjectForm() {
+type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>;
+export function ValidatedProjectForm(): void {;
       </typeof>
-  const router = useRouter()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [generalError, setGeneralError] = useState<string | null>(null)
-  const [formData, setFormData] = useState<CreateProjectForm>({
-    name: '',
-    description: '',
-    type: "fullstack",
-    status: 'planning',
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [generalError, setGeneralError] = useState<string | null>(null);
+  const [formData, setFormData] = useState<CreateProjectForm>({;
+    name: '';
+    description: '';
+    type: "fullstack";
+    status: 'planning';
     config: {
       features: []
     }
       </CreateProjectForm>
   })
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {;
     e.preventDefault()
     setErrors({})
     setGeneralError(null)
-
     // Validate form data
-    const validation = validateSafe(ExtendedProjectSchema, formData)
-    
+    const validation = validateSafe(ExtendedProjectSchema, formData);
     if (!validation.success) {
       // Map validation errors to form fields</CreateProjectForm>
-      const fieldErrors: Record<string, string> = {}
+      const fieldErrors: Record<string, string> = {};
       (validation.error.errors as any[]).forEach((err) => {
             </string>
-        const field = err.path.join('.')
+        const field = err.path.join('.');
         fieldErrors[field] = err.message
       })
       setErrors(fieldErrors)
       return
     }
-
     setIsSubmitting(true)
-
     try {
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/projects', {;
+        method: 'POST';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify(validation.data)
       })
-
       if (!response.ok) {
-        const error = await response.json()
+        const error = await response.json();
         throw new Error(error.message || 'Failed to create project')
       }
-
-      const project = await response.json()
-      router.push(`/projects/${project.id}`)
+      const project = await response.json();
+      router.push(`/projects/${project.id}`)`
     } catch (error) {
       setGeneralError(error instanceof Error ? error.message : 'An error occurred')
     } finally {
       setIsSubmitting(false)
     }
-  }
-</string>
-  const updateField = <K extends keyof CreateProjectForm>(
-    field: K,
+  }</string>
+  const updateField = <K extends keyof CreateProjectForm>(;
+    field: K;
     value: CreateProjectForm[K]
   ) => {
         </K>
     setFormData(prev => ({ ...prev, [field]: value }))
     // Clear error for this field
     setErrors(prev => {
-      const newErrors = { ...prev }
+      const newErrors = { ...prev };
       delete newErrors[field]
       return newErrors
     }
       )}
-
     );
-  const updateConfig = (key: string, value) => {
+  const updateConfig = (key: string, value) => {;
     setFormData(prev => ({
       ...prev,
     config: {
@@ -110,7 +98,6 @@ export function ValidatedProjectForm() {
       }
     }))
   }
-
   return (
     <Card className="w-full max-w-2xl"></Card>
       <CardHeader></CardHeader>
@@ -124,7 +111,6 @@ export function ValidatedProjectForm() {
               <AlertCircle className="h-4 w-4" /></AlertCircle>
               <AlertDescription>{generalError}</AlertDescription>
           )}
-
           <div className="space-y-2"></div>
             <Label htmlFor="name">Project Name *</Label>
             <Input
@@ -136,10 +122,9 @@ export function ValidatedProjectForm() {
               aria-describedby={errors.name ? 'name-error' : undefined}
             />
             {errors.name && (</Input>
-              <p id="name-error" className="text-sm text-destructive">
+              <p id="name-error", className="text-sm text-destructive">
                 {errors.name}</p>
   }
-
           <div className="space-y-2"></div>
             <Label htmlFor="description">Description *</Label>
             <Textarea
@@ -152,10 +137,9 @@ export function ValidatedProjectForm() {
               aria-describedby={errors.description ? 'description-error' : undefined}
             />
             {errors.description && (</Textarea>
-              <p id="description-error" className="text-sm text-destructive">
+              <p id="description-error", className="text-sm text-destructive">
                 {errors.description}</p>
   }
-
           <div className="grid grid-cols-2 gap-4"></div>
             <div className="space-y-2"></div>
               <Label htmlFor="type">Project Type *</Label>
@@ -174,7 +158,6 @@ export function ValidatedProjectForm() {
               {errors.type && (
                 <p className="text-sm text-destructive">{errors.type}</p>
   }
-
             <div className="space-y-2"></div>
               <Label htmlFor="framework">Framework (Optional)</Label>
               <Select
@@ -192,7 +175,6 @@ export function ValidatedProjectForm() {
                   <SelectItem value="express">Express</SelectItem>
                   <SelectItem value="fastapi">FastAPI</SelectItem>
                   <SelectItem value="django">Django</SelectItem>
-
           <div className="grid grid-cols-2 gap-4"></div>
             <div className="space-y-2"></div>
               <Label htmlFor="language">Language (Optional)</Label>
@@ -211,7 +193,6 @@ export function ValidatedProjectForm() {
                   <SelectItem value="go">Go</SelectItem>
                   <SelectItem value="rust">Rust</SelectItem>
                   <SelectItem value="php">PHP</SelectItem>
-
             <div className="space-y-2"></div>
               <Label htmlFor="database">Database (Optional)</Label>
               <Select
@@ -229,7 +210,6 @@ export function ValidatedProjectForm() {
                   <SelectItem value="supabase">Supabase</SelectItem>
                   <SelectItem value="firebase">Firebase</SelectItem>
                   <SelectItem value="dynamodb">DynamoDB</SelectItem>
-
           <div className="space-y-2"></div>
             <Label>Features (Optional)</Label>
             <div className="grid grid-cols-2 gap-2">
@@ -248,7 +228,7 @@ export function ValidatedProjectForm() {
                     type="checkbox"
                     checked={formData.config?.features?.includes(feature) || false}
                     onChange={(e) = /> {
-                      const features = formData.config?.features || []
+                      const features = formData.config?.features || [];
                       if (e.target.checked) {
                         updateConfig('features', [...features, feature])
                      } else {
@@ -258,7 +238,6 @@ export function ValidatedProjectForm() {
                     className="rounded border-gray-300"
                   /></input>
                   <span className="text-sm">{feature}</span>))}
-
           <div className="flex justify-end space-x-4"></div>
             <Button
               type="button"
@@ -278,23 +257,20 @@ export function ValidatedProjectForm() {
               )}
             </Button>
   }
-
 /**
  * Example of a custom hook for form validation
  */
-export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</T>
-  const [data, setData] = useState<T>(initialData)
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [touched, setTouched] = useState<Set<string>>(new Set())
-</Set>
-  const updateField = <K extends keyof T>(field: K, value: T[K]) => {
+export function useValidatedForm<T>(schema: z.ZodSchema<T>; initialData: T) {</T>
+  const [data, setData] = useState<T>(initialData);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Set<string>>(new Set());</Set>
+  const updateField = <K extends keyof T>(field: K; value: T[K]) => {
     setData(prev => ({ ...prev, [field]: value }))
     setTouched(prev => new Set(prev).add(String(field)))
-    
     // Validate single field
-    const fieldSchema = (schema as any).shape[field as string]
+    const fieldSchema = (schema as any).shape[field as string];
     if (fieldSchema) {
-      const result = fieldSchema.safeParse(value)
+      const result = fieldSchema.safeParse(value);
       if (!result.success) {
         setErrors(prev => ({
           ...prev,
@@ -302,23 +278,21 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</
         }))
       } else {
         setErrors(prev => {
-          const newErrors = { ...prev }
+          const newErrors = { ...prev };
           delete newErrors[String(field)]
           return newErrors
         }
       )}
-
       </T>
   }
   }
-
-  const validate = () => {
-    const result = schema.safeParse(data)
+  const validate = () => {;
+    const result = schema.safeParse(data);
     if (!result.success) {</K>
-      const fieldErrors: Record<string, string> = {}
+      const fieldErrors: Record<string, string> = {};
       (result.error.errors as any[]).forEach((err) => {
             </string>
-        const field = err.path.join('.')
+        const field = err.path.join('.');
         fieldErrors[field] = err.message
       })
       setErrors(fieldErrors)
@@ -327,13 +301,11 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</
     setErrors({})
     return true
   }
-
-  const reset = () => {
+  const reset = () => {;
     setData(initialData)
     setErrors({})
     setTouched(new Set())
   }
-
   return {
     data,
     errors,

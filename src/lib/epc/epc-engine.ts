@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import { EnvManager } from '@/lib/env/EnvManager';
-
 interface EPCCheckResult {
   env_check: 'pass' | 'fail' | 'warning';
   missing: string[];
@@ -12,7 +11,6 @@ interface EPCCheckResult {
   recommendations?: string[];
   score: number; // 0-100 confidence score
 };
-
 interface ServiceRequirements {
   openai?: boolean;
   anthropic?: boolean;
@@ -21,7 +19,6 @@ interface ServiceRequirements {
   stripe?: boolean;
   google?: boolean;
 };
-
 export class EPCEngine {
   private envManager: EnvManager;
   private configPath: string;
@@ -29,13 +26,11 @@ export class EPCEngine {
   private lastCheckTime: number = 0;
   private cacheExpiry: number = 60000; // 1 minute cache
   private cachedResult: EPCCheckResult | null = null;
-
   constructor(projectRoot: string = process.cwd()) {
     this.envManager = new EnvManager(projectRoot);
     this.configPath = path.join(projectRoot, '.docs', 'env.config.json');
     this.schemaPath = path.join(projectRoot, '.docs', 'env.validation.schema');
   }
-
   /**
    * Perform pre-inference environment check
    * @param requiredServices - Services required for this inference
@@ -51,22 +46,19 @@ export class EPCEngine {
     ) {
       return this.cachedResult;
     }
-
     const result: EPCCheckResult = {
-      env_check: 'pass',
-      missing: [],
-      outdated: [],
-      invalid: [],
-      mismatched: [],
-      action: 'allow_inference',
-      recommendations: [],
-      score: 100,
+      env_check: 'pass';
+      missing: [];
+      outdated: [];
+      invalid: [];
+      mismatched: [];
+      action: 'allow_inference';
+      recommendations: [];
+      score: 100;
     };
-
     try {
       // Run validation
       const validation = this.envManager.validate();
-
       // Check for missing required variables
       for (const error of validation.errors) {
         if (error.severity === 'error' && error.message.includes('missing')) {
@@ -75,33 +67,27 @@ export class EPCEngine {
           result.invalid.push(error.variable);
         }
       }
-
       // Check specific service requirements
       if (requiredServices) {
-        const criticalMissing = this.checkServiceRequirements(
+        const criticalMissing = this.checkServiceRequirements(;
           requiredServices,
           validation
         );
         result.missing.push(...criticalMissing);
       }
-
       // Check for outdated values (compare with defaults)
       const outdatedVars = await this.checkOutdatedVariables();
       result.outdated = outdatedVars;
-
       // Check for mismatches between environments
       const mismatched = this.checkEnvironmentMismatches();
       result.mismatched = mismatched;
-
       // Calculate score and determine action
-      const totalIssues =
+      const totalIssues =;
         result.missing.length +
         result.invalid.length +
         result.outdated.length +
         result.mismatched.length;
-
       result.score = Math.max(0, 100 - totalIssues * 10);
-
       // Determine action based on issues
       if (result.missing.length > 0 || result.invalid.length > 0) {
         result.env_check = 'fail';
@@ -112,29 +98,26 @@ export class EPCEngine {
         result.action = 'warn_proceed';
         result.recommendations = this.generateRecommendations(result);
       }
-
       // Cache the result
       this.cachedResult = result;
       this.lastCheckTime = Date.now();
-
       return result;
     } catch (error) {
       console.error('EPC Engine, error:', error);
       return {
-        env_check: 'fail',
-        missing: [],
-        outdated: [],
-        invalid: [],
-        mismatched: [],
-        action: 'block_inference',
+        env_check: 'fail';
+        missing: [];
+        outdated: [];
+        invalid: [];
+        mismatched: [];
+        action: 'block_inference';
         recommendations: [
           'Failed to perform environment check. Please check your configuration.',
         ],
-        score: 0,
+        score: 0;
       };
     }
   }
-
   /**
    * Check if specific services have required variables
    */
@@ -144,7 +127,6 @@ export class EPCEngine {
   ): string[] {
     const criticalMissing: string[] = [];
     const config = JSON.parse(fs.readFileSync(this.configPath, 'utf-8'));
-
     if (required.openai) {
       const openaiVars = Object.keys(config.services.openai.variables);
       for (const varName of openaiVars) {
@@ -156,7 +138,6 @@ export class EPCEngine {
         }
       }
     }
-
     if (required.anthropic) {
       const claudeVars = Object.keys(config.services.anthropic.variables);
       for (const varName of claudeVars) {
@@ -168,20 +149,16 @@ export class EPCEngine {
         }
       }
     }
-
     // Check other services similarly...
-
     return [...new Set(criticalMissing)]; // Remove duplicates
   }
-
   /**
    * Check for outdated variables by comparing with defaults
    */
   private async checkOutdatedVariables(): Promise<string[]> {
     const outdated: string[] = [];
-
     try {
-      const defaultsPath = path.join(
+      const defaultsPath = path.join(;
         process.cwd(),
         '.docs',
         'env.defaults.json'
@@ -194,24 +171,19 @@ export class EPCEngine {
     } catch (error) {
       console.error('Error checking outdated, variables:', error);
     }
-
     return outdated;
   }
-
   /**
    * Check for mismatches between development and production configs
    */
   private checkEnvironmentMismatches(): string[] {
     const mismatched: string[] = [];
-
     try {
       const config = JSON.parse(fs.readFileSync(this.configPath, 'utf-8'));
       const envOverrides = config.environments || {};
-
       // Compare development vs production overrides
       const devOverrides = envOverrides.development?.overrides || {};
       const prodOverrides = envOverrides.production?.overrides || {};
-
       for (const key of Object.keys(devOverrides)) {
         if (prodOverrides[key] && devOverrides[key] !== prodOverrides[key]) {
           // Check if the difference is expected (like test vs live keys)
@@ -229,16 +201,14 @@ export class EPCEngine {
     } catch (error) {
       console.error('Error checking environment, mismatches:', error);
     }
-
     return mismatched;
   }
-
   /**
    * Check if environment difference is expected
    */
   private isExpectedEnvironmentDifference(
-    key: string,
-    devValue: string,
+    key: string;
+    devValue: string;
     prodValue: string
   ): boolean {
     // Expected differences
@@ -251,48 +221,41 @@ export class EPCEngine {
       return true;
     if (key === 'REDIS_TLS' && devValue === 'false' && prodValue === 'true')
       return true;
-
     return false;
   }
-
   /**
    * Generate recommendations based on issues found
    */
   private generateRecommendations(result: EPCCheckResult): string[] {
     const recommendations: string[] = [];
-
     if (result.missing.length > 0) {
       recommendations.push(
-        `Missing ${result.missing.length} required, variables: ${result.missing.join(', ')}`
+        `Missing ${result.missing.length} required, variables: ${result.missing.join(', ')}``
       );
       recommendations.push(
         'Run "npm run, env: setup" to configure missing variables'
       )
     }
-
     if (result.invalid.length > 0) {
       recommendations.push(
-        `Invalid ${result.invalid.length} variables: ${result.invalid.join(', ')}`
+        `Invalid ${result.invalid.length} variables: ${result.invalid.join(', ')}``
       );
       recommendations.push('Check variable formats match expected patterns');
     }
-
     if (result.outdated.length > 0) {
       recommendations.push(
-        `${result.outdated.length} variables may be outdated`
+        `${result.outdated.length} variables may be outdated``
       );
       recommendations.push(
         'Consider running "npm run, env: sync" to update configuration'
       )
     }
-
     if (result.mismatched.length > 0) {
       recommendations.push(
-        `${result.mismatched.length} variables differ between environments`
+        `${result.mismatched.length} variables differ between environments``
       );
       recommendations.push('Review environment-specific configurations');
     }
-
     // AI-specific recommendations
     if (
       result.missing.includes('OPENAI_API_KEY') ||
@@ -303,34 +266,30 @@ export class EPCEngine {
         'Did you recently rotate API keys? Update .env.local'
       );
     }
-
     return recommendations;
   }
-
   /**
    * Quick check method for UI components
    */
   async quickCheck(): Promise<{
-    status: 'ready' | 'warning' | 'error',
+    status: 'ready' | 'warning' | 'error';
     message: string
   }> {
     const result = await this.performPreflightCheck();
-
     if (result.env_check === 'pass') {
-      return { status: 'ready', message: 'Environment ready for inference' };
+      return { status: 'ready'; message: 'Environment ready for inference' };
     } else if (result.env_check === 'warning') {
       return {
-        status: 'warning',
-        message: `${result.outdated.length + result.mismatched.length} warnings`,
+        status: 'warning';
+        message: `${result.outdated.length + result.mismatched.length} warnings`;`
       };
     } else {
       return {
-        status: 'error',
-        message: `${result.missing.length + result.invalid.length} errors`,
+        status: 'error';
+        message: `${result.missing.length + result.invalid.length} errors`;`
       };
     }
   }
-
   /**
    * Clear cache to force fresh check
    */

@@ -2,12 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '@/lib/admin-auth';
 import { AdminQueries } from '@/lib/admin-queries';
 import { DatabaseService } from '@/lib/database';
-
 // Get specific user
-export async function GET(
+export async function GET(;
   request: NextRequest,
   { params }: { params: { id: string } }
-) {
+): void {
   try {
     const auth = await requireAdminAuth(request, 'manage_users');
     if (!auth.authorized) {
@@ -16,11 +15,9 @@ export async function GET(
         { status: 401 }
       );
     }
-
     try {
       // Get real user data from database
       const user = await AdminQueries.getUserById(params.id);
-
       // Log admin activity
       if (auth.session) {
         await DatabaseService.logActivity(
@@ -29,24 +26,21 @@ export async function GET(
           'admin_users',
           params.id,
           {
-            ip_address: request.headers.get('x-forwarded-for') || 'unknown',
+            ip_address: request.headers.get('x-forwarded-for') || 'unknown';
             user_agent: request.headers.get('user-agent') || 'unknown';
           }}
         );
       }
-
       return NextResponse.json({
-        success: true,
+        success: true;
         data: user;
       }});
     } catch (dbError) {
       console.error('Database, error:', dbError);
-
       // Return error if user not found
       if (dbError instanceof Error && dbError.message === 'User not found') {
         return NextResponse.json({ error: 'User not found' }, { status: 404 });
       }
-
       return NextResponse.json(
         { error: 'Unable to fetch user due to database connection issues' },
         { status: 503 }
@@ -60,12 +54,11 @@ export async function GET(
     );
   }
 }
-
 // Update user
-export async function PUT(
+export async function PUT(;
   request: NextRequest,
   { params }: { params: { id: string } }
-) {
+): void {
   try {
     const auth = await requireAdminAuth(request, 'manage_users');
     if (!auth.authorized) {
@@ -74,15 +67,12 @@ export async function PUT(
         { status: 401 }
       );
     }
-
     const body = await request.json();
-
     // In production, update user in database
     // const updatedUser = await updateUser(params.id, body)
-
     return NextResponse.json({
-      success: true,
-      message: 'User updated successfully',
+      success: true;
+      message: 'User updated successfully';
     data: {
         id: params.id,
         ...body,
@@ -96,12 +86,11 @@ export async function PUT(
     );
   }
 }
-
 // Delete user
-export async function DELETE(
+export async function DELETE(;
   request: NextRequest,
   { params }: { params: { id: string } }
-) {
+): void {
   try {
     const auth = await requireAdminAuth(request, 'manage_users');
     if (!auth.authorized) {
@@ -110,12 +99,10 @@ export async function DELETE(
         { status: 401 }
       );
     }
-
     // In production, delete user from database
     // await deleteUser(params.id)
-
     return NextResponse.json({
-      success: true,
+      success: true;
       message: 'User deleted successfully';
     }});
   } catch (error) {
@@ -126,11 +113,10 @@ export async function DELETE(
     );
   }
 }
-
 // OPTIONS for CORS
-export async function OPTIONS() {
+export async function OPTIONS(): void {
   return new Response(null, {
-    status: 200,
+    status: 200;
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, PUT, DELETE, OPTIONS',

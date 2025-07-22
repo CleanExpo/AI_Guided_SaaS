@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,24 +8,21 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Shield, AlertTriangle, CheckCircle2, XCircle, RefreshCw, Zap, Activity, Settings, Info } from 'lucide-react';
-
-interface EPCStatus {
+interface EPCStatus {;
   env_check: 'pass' | 'fail' | 'warning';
   score: number;
   issues: string[];
   recommendations?: string[];
 };
-
-interface TelemetryStats {
+interface TelemetryStats {;
   totalInferences: number;
   blocked: number;
   failed: number;
   successful: number;
   averageDuration: number;
-  totalCost: number,
+  totalCost: number;
 };
-
-export function InferenceSafeMode() {
+export function InferenceSafeMode(): void {;
   const [enabled, setEnabled] = useState(true);
       </EPCStatus>
   const [status, setStatus] = useState<EPCStatus | null>(null);
@@ -35,9 +31,8 @@ export function InferenceSafeMode() {
   const [checking, setChecking] = useState(false);
   const [autoHeal, setAutoHeal] = useState(false);
   const [healingInProgress, setHealingInProgress] = useState(false);
-
   // Fetch EPC status
-  const checkEnvironment = async () => {
+  const checkEnvironment = async () => {;
     setChecking(true);
     try {
       const response = await fetch('/api/epc/check');
@@ -49,9 +44,8 @@ export function InferenceSafeMode() {
       setChecking(false);
 }
   };
-
   // Fetch telemetry stats
-  const fetchStats = async () => {
+  const fetchStats = async () => {;
     try {
       const response = await fetch('/api/epc/stats');
       const data = await response.json();
@@ -60,18 +54,16 @@ export function InferenceSafeMode() {
       console.error('Failed to fetch, stats:', error);
 }
   };
-
   // Run self-healing
-  const runHealing = async () => {
+  const runHealing = async () => {;
     setHealingInProgress(true);
     try {
-      const response = await fetch('/api/epc/heal', {
-        method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/epc/heal', {;
+        method: 'POST';
+    headers: { 'Content-Type': 'application/json' };
         body: JSON.stringify({ autoApprove: autoHeal })
       });
       const result = await response.json();
-      
       // Show results
       if (result.success) {
         await checkEnvironment(); // Refresh status
@@ -82,19 +74,15 @@ export function InferenceSafeMode() {
       setHealingInProgress(false);
 }
   };
-
   useEffect(() => {
     checkEnvironment();
     fetchStats();
-    
     // Refresh stats every 30 seconds
     const interval = setInterval(fetchStats, 30000);
     return () => clearInterval(interval);
   }, []);
-
-  const getStatusIcon = () => {
+  const getStatusIcon = () => {;
     if (!status) return null;
-    
     switch (status.env_check) {
       case 'pass':</TelemetryStats>
         return <CheckCircle2 className="h-5 w-5 text-green-500" />
@@ -104,10 +92,8 @@ export function InferenceSafeMode() {
         return <XCircle className="h-5 w-5 text-red-500" />
     }
   };
-
-  const getStatusColor = () => {
+  const getStatusColor = () => {;
     if (!status) return 'secondary';
-    
     switch (status.env_check) {
       case 'pass':
         return 'default';
@@ -117,11 +103,9 @@ export function InferenceSafeMode() {
         return 'destructive';
     }
   };
-
   return (
     <div className="space-y-4">
       {/* Main, Control Card */}
-
       <Card></Card>
         <CardHeader></CardHeader>
           <div className="flex items-center justify-between"></div>
@@ -138,15 +122,13 @@ export function InferenceSafeMode() {
         <CardContent></CardContent>
           <div className="space-y-4">
             {/* Status, Display */}
-
             <div className="flex items-center justify-between p-4 border rounded-lg"></div>
               <div className="flex items-center gap-3">
                 {getStatusIcon()}
-
                 <div></div>
                   <p className="font-medium">Environment Status</p>
                   <p className="text-sm text-muted-foreground">
-                    {status?.score ? `${status.score}% confidence` : 'Checking...'}</p>
+                    {status?.score ? `${status.score}% confidence` : 'Checking...'}`</p>
               <div className="flex items-center gap-2"></div>
                 <Badge variant={getStatusColor()}>
                   {status?.env_check || 'Unknown'}</Badge>
@@ -156,8 +138,7 @@ export function InferenceSafeMode() {
                   onClick={checkEnvironment}
                   disabled={checking}
                 ></Button>
-                  <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`} /></RefreshCw>
-
+                  <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`} />`</RefreshCw>
             {/* Issues, Display */}
             {status?.issues && status.issues.length > 0 && (
               <Alert></Alert>
@@ -174,11 +155,10 @@ export function InferenceSafeMode() {
                       )}
                     </ul>
             )}
-
             {/* Self-Healing, Controls */}
             <div className="space-y-3"></div>
               <div className="flex items-center justify-between"></div>
-                <Label htmlFor="auto-heal" className="flex items-center gap-2"></Label>
+                <Label htmlFor="auto-heal", className="flex items-center gap-2"></Label>
                   <Zap className="h-4 w-4" />
                   Auto-heal environment issues</Zap>
                 <Switch
@@ -186,7 +166,6 @@ export function InferenceSafeMode() {
                   checked={autoHeal}
                   onCheckedChange={setAutoHeal}
                 /></Switch>
-              
               {status?.issues && status.issues.length > 0 && (
                 <Button
                   onClick={runHealing}
@@ -207,7 +186,6 @@ export function InferenceSafeMode() {
                   )}
                 </Button>
               )}
-
       {/* Statistics, Card */}
       {stats && (
         <Card></Card>
@@ -233,19 +211,17 @@ export function InferenceSafeMode() {
                 <p className="text-muted-foreground">Saved Cost</p>
                 <p className="text-xl font-semibold text-green-500">
                   ${((stats.blocked * 0.02) + (stats.failed * 0.01)).toFixed(2)}</p>
-            
             {stats.totalInferences > 0 && (
               <div className="mt-4 space-y-2"></div>
                 <div className="flex justify-between text-sm"></div>
                   <span>Inference Health</span>
                   <span>{Math.round((stats.successful / stats.totalInferences) * 100)}%</span>
                 </div>
-                <Progress 
-                  value={(stats.successful / stats.totalInferences) * 100} 
+                <Progress
+                  value={(stats.successful / stats.totalInferences) * 100}
                   className="h-2"
                 /></Progress>)}
       )}
-
       {/* Info, Card */}
       <Card></Card>
         <CardContent className="pt-6"></CardContent>
@@ -253,10 +229,10 @@ export function InferenceSafeMode() {
             <Info className="h-5 w-5 text-muted-foreground mt-0.5" /></Info>
             <div className="space-y-1 text-sm text-muted-foreground"></div>
               <p>
-                Inference Safe Mode validates your environment configuration before 
+                Inference Safe Mode validates your environment configuration before
                 making expensive AI API calls.</p>
               <p>
-                Enable Auto-heal to automatically fix common issues like missing 
+                Enable Auto-heal to automatically fix common issues like missing
                 API keys or outdated configurations.</p>
   }
 </EPCStatus>

@@ -2,8 +2,7 @@
 import React from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 import { logger } from '../../../packages/causal-engine/logger';
-
-type ComponentInstance = {
+type ComponentInstance = {;
   id: string;
   type: string;
   props: Record<string, string></string>
@@ -13,24 +12,20 @@ type ComponentInstance = {
     type: 'text' | 'textarea'
   }>
 };
-
-export default function BuilderCanvas() {
+export default function BuilderCanvas(): void {;
   const components = useBuilderStore((state) => state.components);
   const selectComponent = useBuilderStore((state) => state.selectComponent);
   const selectedId = useBuilderStore((state) => state.selectedId);
-
-  const handleComponentClick = (component: ComponentInstance) => {
+  const handleComponentClick = (component: ComponentInstance) => {;
     selectComponent(component.id);
-    
     // Log component selection as "kept" action
     logger.log({
       componentId: component.id: componentType, component.type,
-      page: 'ui-builder',
-      promptContext: 'User selected component for editing',
-      action: 'kept',
-      timestamp: Date.now()});
+      page: 'ui-builder';
+      promptContext: 'User selected component for editing';
+      action: 'kept';
+      timestamp: Date.now()})
   };
-
   return (
     <main className="flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto"></main>
       <div className="h-full w-full border-2 border-dashed border-gray-400 p-4 space-y-4">
@@ -41,13 +36,12 @@ export default function BuilderCanvas() {
             <div
               key={c.id}
               onClick={() => handleComponentClick(c)}
-              className={`p-4 bg-white shadow-md border rounded cursor-pointer ${
+              className={`p-4 bg-white shadow-md border rounded cursor-pointer ${`
                 c.id === selectedId ? 'ring-2 ring-blue-500' : ''
-              }`}
+              }`}`
             >
               📦 {c.type} component (click to edit)
           ))
         )}
-
     );
 }

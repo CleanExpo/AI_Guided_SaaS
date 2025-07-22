@@ -1,12 +1,20 @@
 {
-  "timestamp": "2025-07-22T05:16:18.765Z",
+  "timestamp": "2025-07-22T05:48:36.350Z",
   "typescript": {
-    "errors": 10533,
+    "errors": 11159,
     "warnings": 0,
     "files": [
       {
+        "file": "src/components/ui/form-enhanced.tsx",
+        "count": 245
+      },
+      {
         "file": "src/lib/agents/archon/ToolsRefinerAgent.ts",
         "count": 243
+      },
+      {
+        "file": "src/components/ui/button-enhanced.tsx",
+        "count": 228
       },
       {
         "file": "src/lib/mcp/mcp-orchestrator.ts",
@@ -21,33 +29,25 @@
         "count": 208
       },
       {
+        "file": "src/components/ui/navigation.tsx",
+        "count": 184
+      },
+      {
+        "file": "src/components/LandingPageProduction.tsx",
+        "count": 182
+      },
+      {
         "file": "src/lib/agents/archon/AgentRefinerAgent.ts",
         "count": 175
       },
       {
         "file": "src/lib/agents/archon/AdvisorAgent.ts",
         "count": 173
-      },
-      {
-        "file": "src/lib/agents/bmad/ProjectManagerAgent.ts",
-        "count": 161
-      },
-      {
-        "file": "src/lib/admin-queries.ts",
-        "count": 158
-      },
-      {
-        "file": "src/lib/agents/bmad/AnalystAgent.ts",
-        "count": 146
-      },
-      {
-        "file": "src/components/ui/form-enhanced.tsx",
-        "count": 145
       }
     ]
   },
   "eslint": {
-    "errors": 398,
+    "errors": 387,
     "warnings": 2,
     "files": [
       {
@@ -79,11 +79,6 @@
         "file": "src/app/admin/analytics/page.tsx",
         "errors": 6,
         "warnings": 1
-      },
-      {
-        "file": "src/components/builder/ProCodeEditor.tsx",
-        "errors": 6,
-        "warnings": 0
       },
       {
         "file": "src/lib/agents/runners/backend-agent.ts",
@@ -232,11 +227,6 @@
       },
       {
         "file": "src/app/admin/dashboard/page.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
-        "file": "src/app/admin/debug/page.tsx",
         "errors": 1,
         "warnings": 0
       },
@@ -721,22 +711,12 @@
         "warnings": 0
       },
       {
-        "file": "src/components/AgentPulseMonitor.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
         "file": "src/components/ClaudeCodeDashboard.tsx",
         "errors": 1,
         "warnings": 0
       },
       {
         "file": "src/components/ClientRequirementsCapture.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
-        "file": "src/components/ContainerMonitor.tsx",
         "errors": 1,
         "warnings": 0
       },
@@ -901,6 +881,11 @@
         "warnings": 0
       },
       {
+        "file": "src/components/builder/ProCodeEditor.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
         "file": "src/components/collaboration/CollaborationDashboard.tsx",
         "errors": 1,
         "warnings": 0
@@ -936,22 +921,7 @@
         "warnings": 0
       },
       {
-        "file": "src/components/health/AlertsPanel.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
         "file": "src/components/health/HealthCheckDashboard.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
-        "file": "src/components/health/SystemMetrics.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
-        "file": "src/components/health/TaskQueueVisualizer.tsx",
         "errors": 1,
         "warnings": 0
       },
@@ -1016,6 +986,11 @@
         "warnings": 0
       },
       {
+        "file": "src/components/ui/badge.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
         "file": "src/components/ui/button-basic.tsx",
         "errors": 1,
         "warnings": 0
@@ -1027,6 +1002,11 @@
       },
       {
         "file": "src/components/ui/button-premium.tsx",
+        "errors": 1,
+        "warnings": 0
+      },
+      {
+        "file": "src/components/ui/button.tsx",
         "errors": 1,
         "warnings": 0
       },
@@ -1062,11 +1042,6 @@
       },
       {
         "file": "src/components/ui/input.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
-        "file": "src/components/ui/label.tsx",
         "errors": 1,
         "warnings": 0
       },
@@ -1127,11 +1102,6 @@
       },
       {
         "file": "src/components/ui/switch.tsx",
-        "errors": 1,
-        "warnings": 0
-      },
-      {
-        "file": "src/components/ui/tabs.tsx",
         "errors": 1,
         "warnings": 0
       },
@@ -1666,8 +1636,8 @@
     "success": false,
     "errors": [
       "Error: ",
-      " \u001b[2m50\u001b[0m |   const [error, setError] = useState<string | null>(null)",
-      " \u001b[2m50\u001b[0m |   const [error, setError] = useState<string | null>(null)",
+      "    Syntax Error",
+      "Error: ",
       "    Syntax Error",
       "Error: ",
       "    Syntax Error",
@@ -1694,7 +1664,7 @@
     "invalid": []
   },
   "performance": {
-    "buildTime": 14.292,
+    "buildTime": 16.448,
     "bundleSize": 0
   },
   "healthScore": 27

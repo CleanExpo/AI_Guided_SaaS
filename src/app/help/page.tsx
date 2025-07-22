@@ -4,61 +4,57 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MessageCircle, Book, Mail, Phone, Search, HelpCircle } from 'lucide-react';
-
 export const metadata: Metadata = {
-  title: 'Help & Support - AI Guided SaaS Platform',
+  title: 'Help & Support - AI Guided SaaS Platform';
   description:
     'Get help and support for AI Guided SaaS Platform - FAQs, guides, and contact options'};
-
-const supportOptions = [
+const supportOptions = [;
   {
-    title: 'Documentation',
-    description: 'Comprehensive guides and API reference',
-    icon: Book,
-    href: '/docs',
+    title: 'Documentation';
+    description: 'Comprehensive guides and API reference';
+    icon: Book;
+    href: '/docs';
     action: 'Browse Docs'},
   {
-    title: 'Community Forum',
-    description: 'Get help from the community',
-    icon: MessageCircle,
-    href: '/community',
+    title: 'Community Forum';
+    description: 'Get help from the community';
+    icon: MessageCircle;
+    href: '/community';
     action: 'Join Discussion'},
   {
-    title: 'Email Support',
-    description: 'Contact our support team directly',
-    icon: Mail,
-    href: 'mailto:support@aiguidedSaaS.com',
+    title: 'Email Support';
+    description: 'Contact our support team directly';
+    icon: Mail;
+    href: 'mailto:support@aiguidedSaaS.com';
     action: 'Send Email'},
   {
-    title: 'Phone Support',
-    description: 'Speak with our support team',
-    icon: Phone,
-    href: 'tel:+15551234567',
+    title: 'Phone Support';
+    description: 'Speak with our support team';
+    icon: Phone;
+    href: 'tel:+15551234567';
     action: 'Call Now'}];
-
-const faqs = [
+const faqs = [;
   {
-    question: 'How do I get started with the platform?',
+    question: 'How do I get started with the platform?';
     answer:
       'Visit our Getting Started guide in the documentation to set up your account and create your first project.'},
   {
-    question: 'What programming languages are supported?',
+    question: 'What programming languages are supported?';
     answer:
       'Our platform supports JavaScript, TypeScript, Python, and more. Check our documentation for the complete list.'},
   {
-    question: 'How can I integrate with my existing tools?',
+    question: 'How can I integrate with my existing tools?';
     answer:
       'We offer APIs and webhooks for seamless integration. Visit our API documentation for detailed instructions.'},
   {
-    question: 'Is there a free trial available?',
+    question: 'Is there a free trial available?';
     answer:
       'Yes! We offer a 14-day free trial with full access to all features. No credit card required.'},
   {
-    question: 'How do I upgrade my plan?',
+    question: 'How do I upgrade my plan?';
     answer:
       'You can upgrade your plan anytime from your account settings or contact our sales team for enterprise options.'}];
-
-export default function HelpPage() {
+export default function HelpPage(): void {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-6xl mx-auto">
@@ -66,7 +62,6 @@ export default function HelpPage() {
           <h1 className="text-4xl font-bold mb-4">Help & Support</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             We&apos;re here to help you succeed with AI Guided SaaS Platform</p>
-
         {/* Search Bar */}
         <div className="max-w-2xl mx-auto mb-16">
           <div className="relative">
@@ -76,11 +71,10 @@ export default function HelpPage() {
               className="pl-10 py-3 text-lg"
             />
           </div>
-
         {/* Support Options */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {supportOptions.map(option => {
-            const Icon = option.icon, return (
+            const Icon = option.icon, return (;
     <Card
                 key={option.title}
                 className="text-center hover:shadow-lg transition-shadow"
@@ -94,10 +88,8 @@ export default function HelpPage() {
                     <Link href={option.href}>{option.action}</Link>
   }
       );}
-
         </div></CardHeader>
         </CardContent>
-
         {/* FAQ Section */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">
@@ -113,7 +105,6 @@ export default function HelpPage() {
                 <CardContent>
                   <p className="text-muted-foreground">{faq.answer}</p>
             ))}
-
         {/* Contact Section */}
         <div className="text-center bg-muted rounded-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">Still Need Help?</h2>

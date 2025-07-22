@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -10,7 +9,7 @@ import { Book, Code, Play, Search, ChevronRight, ChevronLeft, BookOpen, Clock, H
 import { cn } from '@/utils/cn';
 import { DynamicDocumentationSystem, DocumentationSection } from '@/lib/docs/DynamicDocumentationSystem';
 import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 interface DocumentationViewerProps {
@@ -19,89 +18,77 @@ interface DocumentationViewerProps {
   userId: string;
   initialSectionId?: string;
 }
-
 export function DocumentationViewer({
   documentationSystem,
   tutorialSystem,
   userId,
   initialSectionId
-}: DocumentationViewerProps) {
-  const [selectedSection, setSelectedSection] = useState<DocumentationSection | null>(null)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<DocumentationSection[]>([])
-      
-  const [userProgress, setUserProgress] = useState<any>(null)
-  const [isSearching, setIsSearching] = useState(false)
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [activeTab, setActiveTab] = useState('content')
-
+}: DocumentationViewerProps): void {
+  const [selectedSection, setSelectedSection] = useState<DocumentationSection | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<DocumentationSection[]>([]);
+  const [userProgress, setUserProgress] = useState<any>(null);
+  const [isSearching, setIsSearching] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [activeTab, setActiveTab] = useState('content');
   useEffect(() => {
     // Load initial section or first available
     if (initialSectionId) {
-      const section = documentationSystem.getSection(initialSectionId)
+      const section = documentationSystem.getSection(initialSectionId);
       if (section) {
         setSelectedSection(section)
       }
     } else {
-      const sections = documentationSystem.getAllSections()
+      const sections = documentationSystem.getAllSections();
       if (sections.length > 0) {
         setSelectedSection(sections[0])
       }
     }
-
     // Load user progress
-    const progress = documentationSystem.getUserProgress(userId)
+    const progress = documentationSystem.getUserProgress(userId);
     setUserProgress(progress)
   }, [initialSectionId, documentationSystem, userId])
-
   useEffect(() => {
     // Track section view
     if (selectedSection) {
       documentationSystem.trackUserProgress(userId, selectedSection.id, false)
     }
   }, [selectedSection, documentationSystem, userId])
-
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
       setSearchResults([])
       return
     }
-
     setIsSearching(true)
-    const results = await documentationSystem.searchDocumentation(searchQuery)
-    const sections = results
+    const results = await documentationSystem.searchDocumentation(searchQuery);
+    const sections = results;
       .map(r => documentationSystem.getSection(r.sectionId))
       .filter(Boolean) as DocumentationSection[]
-    
     setSearchResults(sections)
     setIsSearching(false)
   }
-
   const handleSectionComplete = () => {
     if (selectedSection) {
       documentationSystem.trackUserProgress(userId, selectedSection.id, true)
       setUserProgress(documentationSystem.getUserProgress(userId))
     }
   }
-
   const startRelatedTutorial = async (tutorialId: string) => {
     try {
       await tutorialSystem.startTutorial(tutorialId, userId)
       // In a real app, this would start the tutorial overlay
-      window.location.href = `/tutorials/${tutorialId}`
+      window.location.href = `/tutorials/${tutorialId}``
     } catch (error) {
       console.error('Failed to start tutorial:', error)
     }
   }
-
-  const categories = [
-    { id: 'getting-started', label: 'Getting Started', icon: BookOpen },
-    { id: 'reference', label: 'Reference', icon: Book },
-    { id: 'guide', label: 'Guides', icon: ChevronRight },
-    { id: 'api', label: 'API', icon: Code },
-    { id: 'troubleshooting', label: 'Troubleshooting', icon: Hash }
+  const categories = [;
+    { id: 'getting-started'; label: 'Getting Started'; icon: BookOpen },
+    { id: 'reference'; label: 'Reference'; icon: Book },
+    { id: 'guide'; label: 'Guides'; icon: ChevronRight },
+    { id: 'api'; label: 'API'; icon: Code },
+    { id: 'troubleshooting'; label: 'Troubleshooting'; icon: Hash }
   ]
-
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner': return 'text-green-600 bg-green-100'
@@ -110,18 +97,15 @@ export function DocumentationViewer({
       default: return 'text-gray-600 bg-gray-100'
     }
   }
-
   const isCompleted = (sectionId: string) => {
     return userProgress?.sectionsCompleted?.includes(sectionId)
   }
-
   return (
     <div className="flex h-full">
       {/* Sidebar */}
-      <div className={cn(
-        "border-r transition-all duration-300 flex flex-col", 
-        sidebarCollapsed ? "w-16" : "w-80"
-      )}>
+      <div className={`cn(`
+        "border-r transition-all duration-300 flex flex-col" sidebarCollapsed ? "w-16" : "w-80"
+      )`}>`
         {/* Search */}
         <div className="p-4 border-b">
           {!sidebarCollapsed && (
@@ -140,13 +124,12 @@ export function DocumentationViewer({
           <Button
             variant="ghost"
             size="sm"
-            className={cn("mt-2", sidebarCollapsed && "w-full")}
+            className={`cn("mt-2" sidebarCollapsed && "w-full")`}`
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
           >
             {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
           </Button>
         </div>
-
         {/* Navigation */}
         <ScrollArea className="flex-1">
           <div className="p-4 space-y-6">
@@ -171,10 +154,9 @@ export function DocumentationViewer({
                         setSearchResults([])
                         setSearchQuery('')
                      }}
-                      className={cn(
-                        "w-full text-left p-2 rounded-md text-sm hover:bg-muted transition-colors", 
-                        selectedSection?.id === section.id && "bg-muted"
-                      )}
+                      className={`cn(`
+                        "w-full text-left p-2 rounded-md text-sm hover:bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted"
+                      )`}`
                     >
                       {sidebarCollapsed ? (
                         <div className="flex justify-center">
@@ -200,9 +182,8 @@ export function DocumentationViewer({
               </div>
             ) : (
               categories.map((category) => {
-                const sections = documentationSystem.getSectionsByCategory(category.id)
+                const sections = documentationSystem.getSectionsByCategory(category.id);
                 if (sections.length === 0) return null
-
                 return (
     <div
                 key={category.id}>
@@ -217,10 +198,9 @@ export function DocumentationViewer({
                         <button
                           key={section.id}
                           onClick={() => setSelectedSection(section)}
-                          className={cn(
-                            "w-full text-left p-2 rounded-md text-sm hover:bg-muted transition-colors", 
-                        selectedSection?.id === section.id && "bg-muted"
-                          )}
+                          className={`cn(`
+                            "w-full text-left p-2 rounded-md text-sm hover:bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted"
+                          )`}`
                         >
                           {sidebarCollapsed ? (
                             <div className="flex justify-center">
@@ -249,7 +229,6 @@ export function DocumentationViewer({
             )}
           </div>
         </ScrollArea>
-
         {/* Progress */}
         {!sidebarCollapsed && userProgress && (
           <div className="p-4 border-t">
@@ -261,10 +240,10 @@ export function DocumentationViewer({
                 </span>
               </div>
               <div className="w-full bg-muted rounded-full h-2">
-                <div 
+                <div
                   className="bg-primary rounded-full h-2 transition-all duration-300"
-                  style={{ 
-                    width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%` 
+                  style={{
+                    width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%` `
                   }}
                 />
               </div>
@@ -276,7 +255,6 @@ export function DocumentationViewer({
           </div>
         )}
       </div>
-
       {/* Content */}
       <div className="flex-1 overflow-hidden">
         {selectedSection ? (
@@ -297,7 +275,6 @@ export function DocumentationViewer({
                     <div className="flex items-center gap-1">
                       <Hash className="h-4 w-4" />
                       <span>{selectedSection.metadata.tags.join(', ')}
-
                 {!isCompleted(selectedSection.id) && (
                   <Button onClick={handleSectionComplete}>
                     Mark as Complete
@@ -305,7 +282,6 @@ export function DocumentationViewer({
                 )}
               </div>
             </div>
-
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
               <TabsList className="px-6">
@@ -320,14 +296,13 @@ export function DocumentationViewer({
                   <TabsTrigger value="system">System State</TabsTrigger>
                 )}
               </TabsList>
-
               <ScrollArea className="flex-1">
-                <TabsContent value="content" className="p-6 prose prose-sm max-w-none">
+                <TabsContent value="content", className="p-6 prose prose-sm max-w-none">
                   <ReactMarkdown
                     components={{
                       code({ node, className, children, ...props}: any) {
-                        const match = /language-(\w+)/.exec(className || '')
-                        const inline = node?.properties?.inline
+                        const match = /language-(\w+)/.exec(className || '');
+                        const inline = node?.properties?.inline;
                         return !inline && match ? (
                           <SyntaxHighlighter
                             style={vscDarkPlus}
@@ -347,14 +322,13 @@ export function DocumentationViewer({
                   >
                     {selectedSection.content}
                   </ReactMarkdown>
-
                   {/* Related sections */}
                   {selectedSection.relatedSections.length > 0 && (
                     <div className="mt-8 p-4 bg-muted rounded-lg">
                       <h3 className="text-sm font-semibold mb-2">Related Topics</h3>
                       <div className="space-y-1">
                         {selectedSection.relatedSections.map((relatedId) => {
-                          const related = documentationSystem.getSection(relatedId)
+                          const related = documentationSystem.getSection(relatedId);
                           return related ? (
                             <button
                               key={relatedId}
@@ -369,8 +343,7 @@ export function DocumentationViewer({
                     </div>
                   )}
                 </TabsContent>
-
-                <TabsContent value="examples" className="p-6">
+                <TabsContent value="examples", className="p-6">
                   <div className="space-y-6">
                     {selectedSection.codeExamples.map((example) => (
                       <Card key={example.id} className="p-4">
@@ -383,7 +356,7 @@ export function DocumentationViewer({
                           {example.code}
                         </SyntaxHighlighter>
                         {example.runnable && (
-                          <Button size="sm" className="mt-2">
+                          <Button size="sm", className="mt-2">
                             <Play className="h-4 w-4 mr-2" />
                             Run Example
                           </Button>
@@ -392,8 +365,7 @@ export function DocumentationViewer({
                     ))}
                   </div>
                 </TabsContent>
-
-                <TabsContent value="interactive" className="p-6">
+                <TabsContent value="interactive", className="p-6">
                   <div className="space-y-4">
                     {selectedSection.interactiveElements.map((element) => (
                       <Card key={element.id} className="p-4">
@@ -405,7 +377,7 @@ export function DocumentationViewer({
                           {element.description}
                         </p>
                         {element.type === 'tutorial' && (
-                          <Button 
+                          <Button
                             onClick={() => startRelatedTutorial(element.config.tutorialId)}
                           >
                             <Play className="h-4 w-4 mr-2" />
@@ -428,8 +400,7 @@ export function DocumentationViewer({
                     ))}
                   </div>
                 </TabsContent>
-
-                <TabsContent value="system" className="p-6">
+                <TabsContent value="system", className="p-6">
                   {selectedSection.systemState && (
                     <div className="space-y-6">
                       <Card className="p-4">
@@ -449,8 +420,6 @@ export function DocumentationViewer({
                               {selectedSection.systemState.featuresEnabled.map((feature) => (
                                 <Badge key={feature} variant="outline">{feature}</Badge>
                               ))}
-                            
-
                       <Card className="p-4">
                         <h3 className="font-semibold mb-3">Configuration Values</h3>
                         <div className="space-y-2 text-sm font-mono">
@@ -478,8 +447,6 @@ export function DocumentationViewer({
                       </p>
                     </div>
                   )}
-                
-
         ) : (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">

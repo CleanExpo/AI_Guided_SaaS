@@ -1,14 +1,12 @@
 'use client'
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProjectConfig, ProjectFile } from '@/types';
 import { Rocket } from 'lucide-react';
-interface DeploymentScreenProps {
+interface DeploymentScreenProps {;
   config: ProjectConfig;
   files: ProjectFile[]
 };
-
-export default function DeploymentScreen() {
+export default function DeploymentScreen(): void {
   return (
     <Card></Card>
       <CardHeader></CardHeader>

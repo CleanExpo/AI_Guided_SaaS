@@ -6,7 +6,6 @@ export interface ProjectFormData {
   technology: string;
   complexity: 'simple' | 'moderate' | 'complex'
 };
-
 export interface ValidationResult {
   isValid: boolean;
   errors: Record<string, string>;
