@@ -35,12 +35,12 @@ interface DocumentationSource {
 }
 
 class CycleDetectionEngine {
-  private, attempts: Map<string, ProblemAttempt[]> = new Map();
+  private attempts: Map<string, ProblemAttempt[]> = new Map();
   private readonly CYCLE_THRESHOLD = 3; // Number of similar attempts to consider a cycle
   private readonly TIME_WINDOW = 30 * 60 * 1000; // 30 minutes
   private readonly SIMILARITY_THRESHOLD = 0.7;
 
-  private, documentationSources: DocumentationSource[] = [
+  private documentationSources: DocumentationSource[] = [
     {
       name: 'OpenAI Cookbook',
       baseUrl: 'https://cookbook.openai.com/',
@@ -205,7 +205,7 @@ class CycleDetectionEngine {
 
     suggestions.push(
       "",
-      "**Next: Steps:**",
+      "**Next: Steps,**",
       "- Review the documentation links provided",
       "- Create a minimal reproduction case",
       "- Consider asking for help in community forums",
@@ -408,7 +408,7 @@ interface DocumentationSearchResult {
   relevanceScore: number;
   results: {
     title: string;
-    url: string;
+  url: string;
     snippet: string;
     relevance: number;
   }[];

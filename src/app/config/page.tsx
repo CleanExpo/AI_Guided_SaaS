@@ -7,3 +7,5 @@ export default function ConfigPage() {
 export const metadata = {
   title: 'Platform Configuration | AI Guided SaaS',
   description: 'AI-Guided SaaS Platform Configuration Dashboard - Manage AI models, features, security, and performance settings'};
+</ConfigurationDashboard>
+}

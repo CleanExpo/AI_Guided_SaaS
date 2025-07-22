@@ -1,16 +1,25 @@
 // Common types for backend adapters
 
 export interface User {
-  id: string, email: string
+  id: string;
+  email: string
   name?: string
-  role?: string, createdAt: string, updatedAt: string
+  role?: string;
+  createdAt: string;
+  updatedAt: string
   metadata?: Record<string, any>
 }
 
 export interface Project {
-  id: string, userId: string, name: string, description: string, type: string, status: string
+  id: string;
+  userId: string;
+  name: string;
+  description: string;
+  type: string;
+  status: string
   config?: Record<string, any>
-  createdAt: string, updatedAt: string
+  createdAt: string;
+  updatedAt: string
 }
 
 export interface QueryOptions {
@@ -22,14 +31,16 @@ export interface QueryOptions {
 }
 
 export interface PaginatedResponse<T> {
-  data: T[]
-  total: number, page: number, pageSize: number, hasMore: boolean
+  data: T[], total: number, page: number, pageSize: number, hasMore: boolean
 }
 
 export interface BackendAdapter {
   // Authentication
-  signUp(email: string, password: string, metadata?: any): Promise<User>
-  signIn(email: string, password: string): Promise<{ user: User; token: string }>
+  signUp(email: string;
+  password: string, metadata?: any): Promise<User>
+  signIn(email: string;
+  password: string): Promise<{ user: User;
+  token: string }>
   signOut(): Promise<void>
   getCurrentUser(): Promise<User | null>
   updateUser(id: string, data: Partial<User>): Promise<User>
@@ -87,15 +98,19 @@ export interface BackendConfig {
   apiKey?: string
   adminToken?: string
   database?: {
-    host: string, port: number, name: string, user: string, password: string
+    host: string;
+  port: number;
+  name: string;
+  user: string;
+  password: string
   }
 }
 
 export class BackendError extends Error {
   constructor(
     message: string,
-    public, code: string,
-    public, statusCode: number = 500,
+    public code: string,
+    public statusCode: number = 500,
     public details?: any
   ) {
     super(message)

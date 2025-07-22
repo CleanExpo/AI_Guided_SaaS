@@ -30,13 +30,19 @@ import {
   AdminActivity} from '@/lib/admin';
 
 export default function AdminPanel() {
+      </any>
   const [adminUser, setAdminUser] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
+      </SystemStats>
   const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
+      </UserManagement>
   const [users, setUsers] = useState<UserManagement[]>([]);
+      </ContentModeration>
   const [content, setContent] = useState<ContentModeration[]>([]);
+      </SystemConfiguration>
   const [configuration, setConfiguration] = useState<SystemConfiguration[]>([]);
+      </AdminActivity>
   const [activities, setActivities] = useState<AdminActivity[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [userFilter, setUserFilter] = useState('all');
@@ -175,32 +181,26 @@ export default function AdminPanel() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading admin panel...</p>
+    
         </div>
-      </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
               <Shield className="h-6 w-6 text-blue-600" />
               <h1 className="text-xl font-semibold">Admin Panel</h1>
               <Badge variant="outline">System Management</Badge>
-            </div>
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
-                Welcome, {adminUser?.name || 'Admin'}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+                Welcome, {adminUser?.name || 'Admin'}</span>
 
-      <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -208,11 +208,10 @@ export default function AdminPanel() {
             <TabsTrigger value="content">Content</TabsTrigger>
             <TabsTrigger value="system">System</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
-          </TabsList>
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
-            {systemStats && (
+            {systemStats && (</TabsContent>
               <>
                 {/* System Health Alert */}
                 <Alert
@@ -226,83 +225,61 @@ export default function AdminPanel() {
                 >
                   <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
-                    System, Status:{' '}
+                    System, Status:{' '}</AlertDescription>
                     <strong>{systemStats.systemHealth.toUpperCase()}</strong>
                     {systemStats.systemHealth !== 'healthy' &&
                       ' - Attention required'}
                   </AlertDescription>
-                </Alert>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Users
-                      </CardTitle>
+                        Total Users</CardTitle>
                       <Users className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.totalUsers.toLocaleString()}
-                      </div>
+                        {systemStats.totalUsers.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
-                        {systemStats.activeUsers} active users
-                      </p>
-                    </CardContent>
-                  </Card>
+                        {systemStats.activeUsers} active users</p>
 
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Projects
-                      </CardTitle>
+                        Total Projects</CardTitle>
                       <BarChart3 className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.totalProjects.toLocaleString()}
-                      </div>
+                        {systemStats.totalProjects.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
-                        {systemStats.totalTemplates} templates available
-                      </p>
-                    </CardContent>
-                  </Card>
+                        {systemStats.totalTemplates} templates available</p>
 
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Revenue
-                      </CardTitle>
+                        Total Revenue</CardTitle>
                       <Activity className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {formatCurrency(systemStats.totalRevenue)}
-                      </div>
+                        {formatCurrency(systemStats.totalRevenue)}</div>
                       <p className="text-xs text-muted-foreground">
-                        Monthly recurring revenue
-                      </p>
-                    </CardContent>
-                  </Card>
+                        Monthly recurring revenue</p>
 
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        System Uptime
-                      </CardTitle>
+                        System Uptime</CardTitle>
                       <CheckCircle className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.uptime}%
-                      </div>
+                        {systemStats.uptime}%</div>
                       <p className="text-xs text-muted-foreground">
-                        {systemStats.errorRate}% error rate
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
+                        {systemStats.errorRate}% error rate</p>
               </>
             )}
           </TabsContent>
@@ -319,20 +296,16 @@ export default function AdminPanel() {
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                     className="pl-10 w-64"
-                  />
-                </div>
+                  /></Input>
                 <select
                   value={userFilter}
                   onChange={e => setUserFilter(e.target.value)}
                   className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-                >
+                ></select>
                   <option value="all">All Status</option>
                   <option value="active">Active</option>
                   <option value="suspended">Suspended</option>
                   <option value="deleted">Deleted</option>
-                </select>
-              </div>
-            </div>
 
             <Card>
               <CardContent className="p-0">
@@ -341,38 +314,26 @@ export default function AdminPanel() {
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          User
-                        </th>
+                          User</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Subscription
-                        </th>
+                          Subscription</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Status
-                        </th>
+                          Status</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Projects
-                        </th>
+                          Projects</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Last Active
-                        </th>
+                          Last Active</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Actions
-                        </th>
-                      </tr>
-                    </thead>
+                          Actions</th>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {filteredUsers.map(user => (
+                      {filteredUsers.map(user => (</tbody>
                         <tr key={user.id}>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div>
                               <div className="text-sm font-medium text-gray-900">
-                                {user.name}
-                              </div>
+                                {user.name}</div>
                               <div className="text-sm text-gray-500">
-                                {user.email}
-                              </div>
-                            </div>
-                          </td>
+                                {user.email}</div>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge
                               className={
@@ -383,20 +344,14 @@ export default function AdminPanel() {
                                     : 'bg-gray-100 text-gray-800'
                               }
                             >
-                              {user.subscription}
-                            </Badge>
-                          </td>
+                              {user.subscription}</Badge>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge className={getStatusColor(user.status)}>
-                              {user.status}
-                            </Badge>
-                          </td>
+                              {user.status}</Badge>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {user.projectCount}
-                          </td>
+                            {user.projectCount}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {formatDate(user.lastActive)}
-                          </td>
+                            {formatDate(user.lastActive)}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div className="flex items-center space-x-2">
                               <Button
@@ -409,27 +364,18 @@ export default function AdminPanel() {
                                       ? 'suspended'
                                       : 'active'
                                   )
-                                }
+                               }
                               >
-                                {user.status === 'active' ? (
+                                {user.status === 'active' ? (</Button>
                                   <UserX className="h-4 w-4" />
-                                ) : (
+                                ) : (</UserX>
                                   <UserCheck className="h-4 w-4" />
-                                )}
-                              </Button>
+                                )}</UserCheck>
                               <Button size="sm" variant="outline">
                                 <Eye className="h-4 w-4" />
                               </Button>
-                            </div>
-                          </td>
-                        </tr>
                       ))}
                     </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
 
           {/* Content Tab */}
           <TabsContent value="content" className="space-y-6">
@@ -443,59 +389,49 @@ export default function AdminPanel() {
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                     className="pl-10 w-64"
-                  />
-                </div>
+                  /></Input>
                 <select
                   value={contentFilter}
                   onChange={e => setContentFilter(e.target.value)}
                   className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-                >
+                ></select>
                   <option value="all">All Status</option>
                   <option value="pending">Pending</option>
                   <option value="approved">Approved</option>
                   <option value="rejected">Rejected</option>
                   <option value="flagged">Flagged</option>
-                </select>
-              </div>
-            </div>
 
             <div className="grid gap-4">
-              {filteredContent.map(item => (
+              {filteredContent.map(item => (</div>
                 <Card key={item.id}>
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-3 mb-2">
                           <h3 className="text-lg font-semibold">
-                            {item.title}
-                          </h3>
+                            {item.title}</h3>
                           <Badge className={getStatusColor(item.status)}>
-                            {item.status}
-                          </Badge>
+                            {item.status}</Badge>
                           <Badge variant="outline">{item.type}</Badge>
-                        </div>
                         <p className="text-sm text-gray-600 mb-2">
-                          By: {item.author}
-                        </p>
+                          By: {item.author}</p>
                         <p className="text-sm text-gray-500">
                           Created: {formatDate(item.createdAt)}
-                          {item.reportCount > 0 && (
+                          {item.reportCount > 0 && (</p>
                             <span className="ml-4 text-red-600">
                               {item.reportCount} report
-                              {item.reportCount !== 1 ? 's' : ''}
-                            </span>
+                              {item.reportCount !== 1 ? 's' : ''}</span>
                           )}
                         </p>
-                      </div>
                       <div className="flex items-center space-x-2">
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() =>
                             handleContentModeration(item.id, 'approve')
-                          }
+                         }
                           disabled={item.status === 'approved'}
-                        >
+                        ></Button>
                           <ThumbsUp className="h-4 w-4" />
                         </Button>
                         <Button
@@ -503,9 +439,9 @@ export default function AdminPanel() {
                           variant="outline"
                           onClick={() =>
                             handleContentModeration(item.id, 'reject')
-                          }
+                         }
                           disabled={item.status === 'rejected'}
-                        >
+                        ></Button>
                           <ThumbsDown className="h-4 w-4" />
                         </Button>
                         <Button
@@ -513,67 +449,50 @@ export default function AdminPanel() {
                           variant="outline"
                           onClick={() =>
                             handleContentModeration(item.id, 'flag')
-                          }
-                        >
+                         }
+                        ></Button>
                           <Flag className="h-4 w-4" />
                         </Button>
                         <Button size="sm" variant="outline">
                           <Eye className="h-4 w-4" />
                         </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
               ))}
             </div>
-          </TabsContent>
 
           {/* System Tab */}
           <TabsContent value="system" className="space-y-6">
             <h2 className="text-2xl font-bold">System Configuration</h2>
 
             <div className="grid gap-4">
-              {configuration.map(config => (
+              {configuration.map(config => (</div>
                 <Card key={config.id}>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-3 mb-2">
                           <h3 className="text-lg font-semibold">
-                            {config.key}
-                          </h3>
+                            {config.key}</h3>
                           <Badge variant="outline">{config.category}</Badge>
                           {config.isSecret && (
                             <Badge className="bg-red-100 text-red-800">
-                              Secret
-                            </Badge>
+                              Secret</Badge>
                           )}
                         </div>
                         <p className="text-sm text-gray-600 mb-2">
-                          {config.description}
-                        </p>
+                          {config.description}</p>
                         <p className="text-sm text-gray-500">
-                          Value:{' '}
+                          Value:{' '}</p>
                           <code className="bg-gray-100 px-2 py-1 rounded">
-                            {config.value}
-                          </code>
-                        </p>
+                            {config.value}</code>
                         <p className="text-xs text-gray-400 mt-2">
                           Last, modified: {formatDate(config.lastModified)} by{' '}
-                          {config.modifiedBy}
-                        </p>
-                      </div>
+                          {config.modifiedBy}</p>
                       <div className="flex items-center space-x-2">
                         <Button size="sm" variant="outline">
                           <Edit className="h-4 w-4" />
                         </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
               ))}
             </div>
-          </TabsContent>
 
           {/* Activity Tab */}
           <TabsContent value="activity" className="space-y-6">
@@ -586,50 +505,139 @@ export default function AdminPanel() {
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Admin
-                        </th>
+                          Admin</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Action
-                        </th>
+                          Action</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Target
-                        </th>
+                          Target</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Timestamp
-                        </th>
+                          Timestamp</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          IP Address
-                        </th>
-                      </tr>
-                    </thead>
+                          IP Address</th>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {activities.map(activity => (
+                      {activities.map(activity => (</tbody>
                         <tr key={activity.id}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {activity.adminName}
-                          </td>
+                            {activity.adminName}</td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge variant="outline">{activity.action}</Badge>
-                          </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {activity.target}
-                          </td>
+                            {activity.target}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {formatDate(activity.timestamp)}
-                          </td>
+                            {formatDate(activity.timestamp)}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {activity.ipAddress}
-                          </td>
-                        </tr>
+                            {activity.ipAddress}</td>
                       ))}
                     </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
+    );
+</td>
+</tr>
+</tr>
+</thead>
+</table>
+</div>
+</CardContent>
+</Card>
+</TabsContent>
+</div>
+</div>
+</CardContent>
+</Card>
+</TabsContent>
+</div>
+</div>
+</div>
+</CardContent>
+</Card>
+</div>
+</div>
+</div>
+</TabsContent>
+</div>
+</td>
+</td>
+</td>
+</div>
+</td>
+</tr>
+</tr>
+</thead>
+</table>
+</div>
+</CardContent>
+</Card>
+</div>
+</div>
+</div>
+</TabsContent>
+</CardContent>
+</Card>
+</CardContent>
+</Card>
+</CardContent>
+</Card>
+</CardContent>
+</Card>
+</div>
+</TabsList>
+</Tabs>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+}
+
+    </td>
+    </tr>
+    </thead>
+    </table>
+    </div>
+    </CardContent>
+    </Card>
+    </TabsContent>
+    </div>
+    </CardContent>
+    </Card>
+    </TabsContent>
+    </div>
+    </div>
+    </CardContent>
+    </Card>
+    </div>
+    </div>
+    </TabsContent>
+    </div>
+    </td>
+    </td>
+    </div>
+    </td>
+    </tr>
+    </thead>
+    </table>
+    </div>
+    </CardContent>
+    </Card>
+    </div>
+    </div>
+    </TabsContent>
+    </CardContent>
+    </Card>
+    </CardContent>
+    </Card>
+    </CardContent>
+    </Card>
+    </CardContent>
+    </Card>
+    </div>
+    </TabsList>
+    </Tabs>
+    </div>
+    </div>
     </div>
   );
 }
+</SystemStats>
+</any>

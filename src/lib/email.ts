@@ -27,7 +27,7 @@ interface NotificationEmailData {
 }
 
 class EmailService {
-  private, apiKey: string;
+  private apiKey: string;
   private baseUrl = 'https://api.resend.com';
   private defaultFrom = 'AI Guided SaaS <noreply@ai-guided-saas.com>';
 
@@ -98,8 +98,8 @@ class EmailService {
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
             .header { text-align: center; margin-bottom: 30px; }
             .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
-            .content { background: #f8fafc; padding: 30px; border-radius: 8px; margin: 20px 0; }
-            .button { display: inline-block; background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0; }
+            .button { display: inline-block, background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
             .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
           </style>
         </head>
@@ -107,7 +107,6 @@ class EmailService {
           <div class="container">
             <div class="header">
               <div class="logo">🚀 AI Guided SaaS Builder</div>
-            </div>
             
             <div class="content">
               <h2>Welcome aboard, ${data.userName}! 🎉</h2>
@@ -131,7 +130,6 @@ class EmailService {
               <p>If you have any questions, feel free to reach out to our support team.</p>
               <p>Happy building! 🛠️</p>
             </div>
-          </div>
         </body>
       </html>
     `;
@@ -171,8 +169,8 @@ class EmailService {
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
             .header { text-align: center; margin-bottom: 30px; }
             .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
-            .content { background: #f8fafc; padding: 30px; border-radius: 8px; margin: 20px 0; }
-            .button { display: inline-block; background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0; }
+            .button { display: inline-block, background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
             .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
           </style>
         </head>
@@ -180,7 +178,6 @@ class EmailService {
           <div class="container">
             <div class="header">
               <div class="logo">🚀 AI Guided SaaS Builder</div>
-            </div>
             
             <div class="content">
               <h2>Hi ${data.userName}! 👋</h2>
@@ -196,7 +193,6 @@ class EmailService {
             <div class="footer">
               <p>Best regards,<br>The AI Guided SaaS Builder Team</p>
             </div>
-          </div>
         </body>
       </html>
     `;
@@ -236,17 +232,16 @@ class EmailService {
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
             .header { text-align: center; margin-bottom: 30px; }
             .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
-            .content { background: #f8fafc; padding: 30px; border-radius: 8px; margin: 20px 0; }
-            .button { display: inline-block; background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+            .content { background: #f8fafc, padding: 30px; border-radius: 8px; margin: 20px 0; }
+            .button { display: inline-block, background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
             .footer { text-align: center; margin-top: 30px; color: #6b7280; font-size: 14px; }
-            .warning { background: #fef3c7; border: 1px solid #f59e0b; padding: 15px; border-radius: 6px; margin: 15px 0; }
+            .warning { background: #fef3c7, border: 1px solid #f59e0b; padding: 15px; border-radius: 6px; margin: 15px 0; }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
               <div class="logo">🚀 AI Guided SaaS Builder</div>
-            </div>
             
             <div class="content">
               <h2>Password Reset Request 🔐</h2>
@@ -274,7 +269,6 @@ class EmailService {
               <p>If you didn't request this password reset, please contact our support team immediately.</p>
               <p>Stay secure! 🛡️</p>
             </div>
-          </div>
         </body>
       </html>
     `;

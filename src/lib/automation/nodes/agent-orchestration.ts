@@ -10,7 +10,8 @@ export interface AgentNodeConfig {
   parameters?: Record<string, any>
   timeout?: number
   retryConfig?: {
-    maxRetries: number, waitBetweenRetries: number
+    maxRetries: number;
+  waitBetweenRetries: number
   }
 }
 
@@ -35,7 +36,7 @@ export function createAgentNode(
       nodeCredentialType: 'httpBearerTokenAuth',
       sendBody: true,
       bodyParametersJson: JSON.stringify({
-        agentType: config.agentType: taskType: config.taskType,
+        agentType: config.agentType: taskType, config.taskType,
         parameters: config.parameters || {},
         executionId: '{{ $execution.id }}',
         workflowId: '{{ $workflow.id }}'
@@ -74,7 +75,7 @@ const workflowId = $workflow.id;
 
 // Create execution tasks for each agent
 const tasks = agents.map(agent => ({
-  agentType: agent.agentType: taskType: agent.taskType,
+  agentType: agent.agentType: taskType, agent.taskType,
   parameters: agent.parameters || {},
   executionId,
   workflowId,
@@ -91,7 +92,7 @@ return tasks;`
  * Create an agent coordination workflow
  */
 export function createAgentOrchestrationWorkflow(
-  projectName: string: workflowType: 'simple' | 'complex' | 'enterprise'
+  projectName: string, workflowType: 'simple' | 'complex' | 'enterprise'
 ): N8nWorkflow {
   const nodes: N8nNode[] = []
   const connections: N8nConnection = {}
@@ -365,7 +366,7 @@ items.forEach(item => {
 return [{
   json: {
     success: true,
-    projectId: items[0].json.projectId: workflowType: '${workflowType}',
+    projectId: items[0].json.projectId, workflowType: '${workflowType}',
     timestamp: new Date().toISOString(),
     agents: Object.keys(results),
     results,

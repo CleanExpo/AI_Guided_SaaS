@@ -28,17 +28,18 @@ interface KiroIDEProps {
 
 export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
   const { toast } = useToast()
-  const [client, setClient] = useState<KiroClient | null>(null)
-  const [fileTree, setFileTree] = useState<KiroFileTree | null>(null)
-  const [openFiles, setOpenFiles] = useState<KiroFile[]>([])
-  const [activeFile, setActiveFile] = useState<string | null>(null)
-  const [terminals, setTerminals] = useState<KiroTerminal[]>([])
-  const [activeTerminal, setActiveTerminal] = useState<string | null>(null)
+  const [client, setClient] = useState<KiroClient | null>(null)</KiroClient>
+  const [fileTree, setFileTree] = useState<KiroFileTree | null>(null)</KiroFileTree>
+  const [openFiles, setOpenFiles] = useState<KiroFile[]>([])</KiroFile>
+  const [activeFile, setActiveFile] = useState<string | null>(null)</string>
+  const [terminals, setTerminals] = useState<KiroTerminal[]>([])</KiroTerminal>
+  const [activeTerminal, setActiveTerminal] = useState<string | null>(null)</string>
+      </KiroAIAssistance>
   const [aiAssistance, setAiAssistance] = useState<KiroAIAssistance | null>(null)
   const [loading, setLoading] = useState(true)
   const [connected, setConnected] = useState(false)
-  
-  const editorRef = useRef<HTMLDivElement>(null)
+  </KiroAIAssistance>
+  const editorRef = useRef<HTMLDivElement>(null)</HTMLDivElement>
   const terminalRef = useRef<HTMLDivElement>(null)
 
   // Initialize Kiro client
@@ -68,7 +69,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
           description: `Project "${project.name}" opened successfully`
         })
       } catch (error) {
-        console.error('Failed to, initialize: Kiro:', error)
+        console.error('Failed to, initialize: Kiro,', error)
         toast({
           title: 'Connection Error',
           description: 'Failed to connect to Kiro IDE',
@@ -89,7 +90,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
   }, [projectId])
 
   // Event handlers
-  const handleFileChanged = (data: { path: string; content: string }) => {
+  const handleFileChanged = (data: { path: string, content: string }) => {
     setOpenFiles(prev => 
       prev.map(file => 
         file.path === data.path 
@@ -99,9 +100,9 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
     )
   }
 
-  const handleTerminalOutput = (data: { terminalId: string; output: string }) => {
+  const handleTerminalOutput = (data: { terminalId: string, output: string }) => {
     // Update terminal output
-    console.log('Terminal, output:', data)
+    console.log('Terminal output:', data)
   }
 
   const handleAISuggestion = (data: KiroAIAssistance) => {
@@ -114,9 +115,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
       title: 'Disconnected',
       description: 'Lost connection to Kiro IDE',
       variant: 'destructive'
-    })
-  }
-
+    }
+      )}
+    </div>
+    );
   // File operations
   const openFile = async (path: string) => {
     if (!client) return
@@ -135,8 +137,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         title: 'Error',
         description: 'Failed to open file',
         variant: 'destructive'
-      })
-    }
+      }
+      )}
+    </div>
+    );
   }
 
   const saveFile = async (path: string, content: string) => {
@@ -154,8 +158,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         title: 'Error',
         description: 'Failed to save file',
         variant: 'destructive'
-      })
-    }
+      }
+      )}
+    </div>
+    );
   }
 
   const closeFile = (path: string) => {
@@ -182,8 +188,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         title: 'Error',
         description: 'Failed to create terminal',
         variant: 'destructive'
-      })
-    }
+      }
+      )}
+    </div>
+    );
   }
 
   const executeCommand = async (command: string) => {
@@ -209,8 +217,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         title: 'Error',
         description: 'Failed to get AI suggestions',
         variant: 'destructive'
-      })
-    }
+      }
+      )}
+    </div>
+    );
   }
 
   const applySuggestion = async (suggestionId: string) => {
@@ -228,8 +238,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
         title: 'Error',
         description: 'Failed to apply suggestion',
         variant: 'destructive'
-      })
-    }
+      }
+      )}
+    </div>
+    );
   }
 
   // File tree rendering
@@ -241,205 +253,159 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps) {
     }
 
     return (
-      <div key={tree.path} style={{ paddingLeft: `${level * 16}px` }}>
+      <div key={tree.path} style={{ paddingLeft: `${level * 16}px` }}></div>
         <div
-          className="flex items-center gap-2 py-1 px-2, hover:bg-accent rounded cursor-pointer"
+          className="flex items-center gap-2 py-1 px-2 hover:bg-accent rounded cursor-pointer"
           onClick={handleClick}
         >
-          {tree.type === 'directory' ? (
+          {tree.type === 'directory' ? (</div>
             <FolderTree className="h-4 w-4" />
-          ) : (
+          ) : (</FolderTree>
             <FileCode2 className="h-4 w-4" />
-          )}
+          )}</FileCode2>
           <span className="text-sm">{tree.name}</span>
         </div>
         {tree.children && tree.children.map(child => renderFileTree(child, level + 1))}
       </div>
-    )
+    );
   }
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center">
-          <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" />
+      <div className="flex items-center justify-center h-screen"></div>
+        <div className="text-center"></div>
+          <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" /></RefreshCw>
           <p>Connecting to Kiro IDE...</p>
-        </div>
-      </div>
-    )
+    );
   }
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      {/* Header */}
-      <div className="border-b px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      {/* Header */}</div>
+      <div className="border-b px-4 py-2 flex items-center justify-between"></div>
+        <div className="flex items-center gap-4"></div>
           <h2 className="text-lg font-semibold">Kiro IDE</h2>
           <span className={`text-sm ${connected ? 'text-green-500' : 'text-red-500'}`}>
-            {connected ? '● Connected' : '● Disconnected'}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button size="sm" variant="ghost" onClick={() => getAISuggestions()}>
+            {connected ? '● Connected' : '● Disconnected'}</span>
+        <div className="flex items-center gap-2"></div>
+          <Button size="sm" variant="ghost" onClick={() => getAISuggestions()}></Button>
             <Lightbulb className="h-4 w-4 mr-2" />
-            AI Assist
-          </Button>
-          <Button size="sm" variant="ghost" onClick={onClose}>
-            <X className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+            AI Assist</Lightbulb>
+          <Button size="sm" variant="ghost" onClick={onClose}></Button>
+            <X className="h-4 w-4" /></X>
 
       {/* Main, content */}
       <ResizablePanelGroup direction="horizontal" className="flex-1">
-        {/* File, explorer */}
-        <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
-          <div className="h-full border-r">
-            <div className="p-2 border-b">
+        {/* File, explorer */}</ResizablePanelGroup>
+        <ResizablePanel defaultSize={20} minSize={15} maxSize={30}></ResizablePanel>
+          <div className="h-full border-r"></div>
+            <div className="p-2 border-b"></div>
               <h3 className="text-sm font-medium">Explorer</h3>
-            </div>
             <ScrollArea className="h-[calc(100%-48px)]">
-              {fileTree && renderFileTree(fileTree)}
-            </ScrollArea>
-          </div>
-        </ResizablePanel>
+              {fileTree && renderFileTree(fileTree)}</ScrollArea>
 
         <ResizableHandle />
 
-        {/* Editor */}
-        <ResizablePanel defaultSize={60}>
+        {/* Editor */}</ResizableHandle>
+        <ResizablePanel defaultSize={60}></ResizablePanel>
           <ResizablePanelGroup direction="vertical">
-            {/* Editor, tabs and content */}
-            <ResizablePanel defaultSize={70}>
+            {/* Editor, tabs and content */}</ResizablePanelGroup>
+            <ResizablePanel defaultSize={70}></ResizablePanel>
               <div className="h-full flex flex-col">
-                {/* Tabs */}
+                {/* Tabs */}</div>
                 <div className="flex border-b overflow-x-auto">
-                  {openFiles.map(file => (
+                  {openFiles.map(file => (</div>
                     <div
                       key={file.path}
-                      className={`flex items-center gap-2 px-3 py-2 border-r cursor-pointer, hover:bg-accent ${
+                      className={`flex items-center gap-2 px-3 py-2 border-r cursor-pointer  hover:bg-accent ${
                         activeFile === file.path ? 'bg-accent' : ''
                       }`}
                       onClick={() => setActiveFile(file.path)}
-                    >
-                      <FileCode2 className="h-3 w-3" />
+                    ></div>
+                      <FileCode2 className="h-3 w-3" /></FileCode2>
                       <span className="text-sm">{file.path.split('/').pop()}</span>
                       <button
-                        className="ml-2, hover:bg-destructive/20 rounded"
+                        className="ml-2 hover:bg-destructive/20 rounded"
                         onClick={(e) => {
                           e.stopPropagation()
                           closeFile(file.path)
-                        }}
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                       }}
+                      ></button>
+                        <X className="h-3 w-3" /></X>
+                      </button>))}
 
                 {/* Editor, content */}
                 <div className="flex-1 p-4 overflow-auto">
-                  {activeFile && openFiles.find(f => f.path === activeFile) ? (
+                  {activeFile && openFiles.find(f => f.path === activeFile) ? (</div>
                     <div ref={editorRef} className="font-mono text-sm">
-                      {/* This would be replaced with a proper code editor like Monaco */}
-                      <pre>{openFiles.find(f => f.path === activeFile)?.content}</pre>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-muted-foreground">
+                      {/* This would be replaced with a proper code editor like Monaco */}</div>
+                      <pre>{openFiles.find(f => f.path === activeFile)?.content}</pre>) : (
+                    <div className="flex items-center justify-center h-full text-muted-foreground"></div>
                       <p>No file selected</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </ResizablePanel>
+  );
+}
 
             <ResizableHandle />
 
-            {/* Terminal */}
-            <ResizablePanel defaultSize={30} minSize={20}>
-              <div className="h-full flex flex-col">
-                <div className="flex items-center justify-between p-2 border-b">
-                  <div className="flex items-center gap-2">
-                    <Terminal className="h-4 w-4" />
+            {/* Terminal */}</ResizableHandle>
+            <ResizablePanel defaultSize={30} minSize={20}></ResizablePanel>
+              <div className="h-full flex flex-col"></div>
+                <div className="flex items-center justify-between p-2 border-b"></div>
+                  <div className="flex items-center gap-2"></div>
+                    <Terminal className="h-4 w-4" /></Terminal>
                     <span className="text-sm font-medium">Terminal</span>
                   </div>
-                  <Button size="sm" variant="ghost" onClick={createTerminal}>
-                    <Play className="h-4 w-4" />
-                  </Button>
-                </div>
+                  <Button size="sm" variant="ghost" onClick={createTerminal}></Button>
+                    <Play className="h-4 w-4" /></Play>
                 <div ref={terminalRef} className="flex-1 bg-black text-white p-2 font-mono text-sm overflow-auto">
-                  {/* Terminal, content would go here */}
+                  {/* Terminal, content would go here */}</div>
                   <p>$ Ready for commands...</p>
-                </div>
-              </div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
-        </ResizablePanel>
 
         <ResizableHandle />
 
-        {/* AI, Assistant */}
-        <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
-          <div className="h-full border-l">
-            <Tabs defaultValue="suggestions" className="h-full">
-              <TabsList className="w-full">
-                <TabsTrigger value="suggestions" className="flex-1">
+        {/* AI, Assistant */}</ResizableHandle>
+        <ResizablePanel defaultSize={20} minSize={15} maxSize={30}></ResizablePanel>
+          <div className="h-full border-l"></div>
+            <Tabs defaultValue="suggestions" className="h-full"></Tabs>
+              <TabsList className="w-full"></TabsList>
+                <TabsTrigger value="suggestions" className="flex-1"></TabsTrigger>
                   <Lightbulb className="h-4 w-4 mr-2" />
-                  AI
-                </TabsTrigger>
-                <TabsTrigger value="diagnostics" className="flex-1">
+                  AI</Lightbulb>
+                <TabsTrigger value="diagnostics" className="flex-1"></TabsTrigger>
                   <Bug className="h-4 w-4 mr-2" />
-                  Issues
-                </TabsTrigger>
-              </TabsList>
+                  Issues</Bug>
 
               <TabsContent value="suggestions" className="h-[calc(100%-48px)] overflow-auto p-4">
-                {aiAssistance?.suggestions.map(suggestion => (
-                  <Card key={suggestion.id} className="mb-4">
-                    <CardHeader className="pb-3">
+                {aiAssistance?.suggestions.map(suggestion => (</TabsContent>
+                  <Card key={suggestion.id} className="mb-4"></Card>
+                    <CardHeader className="pb-3"></CardHeader>
                       <CardTitle className="text-sm">{suggestion.title}</CardTitle>
                       <CardDescription className="text-xs">
-                        {suggestion.type} • {suggestion.priority} priority
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
+                        {suggestion.type} • {suggestion.priority} priority</CardDescription>
+                    <CardContent></CardContent>
                       <p className="text-xs mb-3">{suggestion.description}</p>
                       <Button
                         size="sm"
                         onClick={() => applySuggestion(suggestion.id)}
                       >
-                        Apply
-                      </Button>
-                    </CardContent>
-                  </Card>
+                        Apply</Button>
                 ))}
               </TabsContent>
 
               <TabsContent value="diagnostics" className="h-[calc(100%-48px)] overflow-auto p-4">
-                {aiAssistance?.diagnostics.map((diagnostic, index) => (
-                  <div key={index} className="mb-3 p-3 border rounded">
-                    <div className="flex items-start gap-2">
+                {aiAssistance?.diagnostics.map((diagnostic, index) => (</TabsContent>
+                  <div key={index} className="mb-3 p-3 border rounded"></div>
+                    <div className="flex items-start gap-2"></div>
                       <Bug className={`h-4 w-4 mt-0.5 ${
                         diagnostic.severity === 'error' ? 'text-red-500' :
                         diagnostic.severity === 'warning' ? 'text-yellow-500' :
                         'text-blue-500'
-                      }`} />
-                      <div className="flex-1">
+                      }`} /></Bug>
+                      <div className="flex-1"></div>
                         <p className="text-sm font-medium">
-                          {diagnostic.file}:{diagnostic.line}:{diagnostic.column}
-                        </p>
+                          {diagnostic.file}:{diagnostic.line}:{diagnostic.column}</p>
                         <p className="text-xs text-muted-foreground mt-1">
-                          {diagnostic.message}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </TabsContent>
-            </Tabs>
-          </div>
-        </ResizablePanel>
-      </ResizablePanelGroup>
-    </div>
-  )
+                          {diagnostic.message}</p>))}
+    );
 }
+</HTMLDivElement>

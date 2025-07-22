@@ -1,14 +1,17 @@
 import { EventEmitter } from 'events'
 
 export interface ShutdownHandler {
-  name: string, priority: number // Lower number = higher priority, timeout: number // milliseconds, handler: () => Promise<void>
+  name: string;
+  priority: number // Lower number = higher priority;
+  timeout: number // milliseconds;
+  handler: () => Promise<void>
 }
 
 export class GracefulShutdownManager extends EventEmitter {
-  private static, instance: GracefulShutdownManager
+  private static instance: GracefulShutdownManager
   private, handlers: ShutdownHandler[] = []
-  private, isShuttingDown: boolean = false
-  private, shutdownTimeout: number = 30000 // 30 seconds default
+  private isShuttingDown: boolean = false
+  private shutdownTimeout: number = 30000 // 30 seconds default
   
   static getInstance(): GracefulShutdownManager {
     if (!GracefulShutdownManager.instance) {

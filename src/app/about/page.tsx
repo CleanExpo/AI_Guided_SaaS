@@ -3,7 +3,8 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'About - AI Guided SaaS Platform',
   description:
-    'Learn about our mission to revolutionize software development with AI'};
+    'Learn about our mission to revolutionize software development with AI'
+};
 
 export default function AboutPage() {
   return (
@@ -42,7 +43,7 @@ export default function AboutPage() {
             <li>Community-driven development</li>
           </ul>
         </div>
-      </div>
     </div>
   );
 }
+</div>

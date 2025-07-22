@@ -4,189 +4,273 @@ import { RequirementAnalysis } from './AnalystAgent'
 import { ProjectPlan } from './ProjectManagerAgent'
 
 export interface SystemArchitecture {
-  overview: ArchitectureOverview, components: Component[]
-  dataModel: DataModel, apiDesign: APIDesign, infrastructure: Infrastructure, security: SecurityArchitecture, integrations: Integration[]
-  deploymentStrategy: DeploymentStrategy, technicalDecisions: TechnicalDecision[]
+  overview: ArchitectureOverview;
+  components: Component[];
+  dataModel: DataModel;
+  apiDesign: APIDesign;
+  infrastructure: Infrastructure;
+  security: SecurityArchitecture;
+  integrations: Integration[];
+  deploymentStrategy: DeploymentStrategy;
+  technicalDecisions: TechnicalDecision[];
   architecturalPatterns: string[]
 }
 
 export interface ArchitectureOverview {
   style: string // e.g., 'microservices', 'monolithic', 'serverless'
-  principles: string[]
+  principles: string[];
   constraints: string[]
-  qualityAttributes: QualityAttribute[]
+  qualityAttributes: QualityAttribute[];
   diagram: string // ASCII or description for now
 }
 
 export interface QualityAttribute {
-  name: string, requirement: string, approach: string, tradeoffs: string[]
+  name: string;
+  requirement: string;
+  approach: string;
+  tradeoffs: string[]
 }
 
 export interface Component {
-  id: string, name: string, type: 'frontend' | 'backend' | 'service' | 'database' | 'external'
-  responsibility: string, technology: string[]
+  id: string;
+  name: string;
+  type: 'frontend' | 'backend' | 'service' | 'database' | 'external'
+  responsibility: string;
+  technology: string[];
   interfaces: ComponentInterface[]
-  dependencies: string[]
+  dependencies: string[];
   scalability: string
 }
 
 export interface ComponentInterface {
-  name: string, type: 'REST' | 'GraphQL' | 'WebSocket' | 'gRPC' | 'Event'
-  description: string, methods: InterfaceMethod[]
+  name: string;
+  type: 'REST' | 'GraphQL' | 'WebSocket' | 'gRPC' | 'Event'
+  description: string;
+  methods: InterfaceMethod[]
 }
 
 export interface InterfaceMethod {
   name: string
   httpMethod?: string
-  path?: string, input: string, output: string, description: string
+  path?: string;
+  input: string;
+  output: string;
+  description: string
 }
 
 export interface DataModel {
-  entities: Entity[]
+  entities: Entity[];
   relationships: Relationship[]
-  dataFlow: DataFlow[]
+  dataFlow: DataFlow[];
   storageStrategy: StorageStrategy
 }
 
 export interface Entity {
-  name: string, description: string, attributes: Attribute[]
+  name: string;
+  description: string;
+  attributes: Attribute[];
   businessRules: string[]
 }
 
 export interface Attribute {
-  name: string, type: string, required: boolean
+  name: string;
+  type: string;
+  required: boolean
   unique?: boolean
-  indexed?: boolean, description: string
+  indexed?: boolean;
+  description: string
 }
 
 export interface Relationship {
-  from: string, to: string, type: 'one-to-one' | 'one-to-many' | 'many-to-many'
+  from: string;
+  to: string;
+  type: 'one-to-one' | 'one-to-many' | 'many-to-many'
   description: string
 }
 
 export interface DataFlow {
-  name: string, source: string, destination: string, dataType: string, frequency: string, volume: string
+  name: string;
+  source: string;
+  destination: string;
+  dataType: string;
+  frequency: string;
+  volume: string
 }
 
 export interface StorageStrategy {
-  databases: Database[]
-  caching: CachingStrategy, fileStorage: FileStorageStrategy
+  databases: Database[];
+  caching: CachingStrategy;
+  fileStorage: FileStorageStrategy
 }
 
 export interface Database {
-  name: string, type: 'relational' | 'document' | 'key-value' | 'graph' | 'time-series'
-  technology: string, purpose: string, entities: string[]
+  name: string;
+  type: 'relational' | 'document' | 'key-value' | 'graph' | 'time-series'
+  technology: string;
+  purpose: string;
+  entities: string[]
 }
 
 export interface CachingStrategy {
-  levels: string[]
+  levels: string[];
   technologies: string[]
   ttl: Record<string, number>
 }
 
 export interface FileStorageStrategy {
-  type: string, provider: string, structure: string
+  type: string;
+  provider: string;
+  structure: string
 }
 
 export interface APIDesign {
   style: 'REST' | 'GraphQL' | 'gRPC' | 'Mixed'
-  versioning: string, authentication: string, authorization: string, rateLimiting: string, documentation: string, endpoints: APIEndpoint[]
+  versioning: string;
+  authentication: string;
+  authorization: string;
+  rateLimiting: string;
+  documentation: string;
+  endpoints: APIEndpoint[]
 }
 
 export interface APIEndpoint {
-  path: string, method: string, description: string, authentication: boolean, requestSchema: any, responseSchema: any, errorHandling: string[]
+  path: string;
+  method: string;
+  description: string;
+  authentication: boolean;
+  requestSchema: any;
+  responseSchema: any;
+  errorHandling: string[]
 }
 
 export interface Infrastructure {
-  hostingPlatform: string, computeResources: ComputeResource[]
-  networking: NetworkingConfig, monitoring: MonitoringStrategy, backup: BackupStrategy
+  hostingPlatform: string;
+  computeResources: ComputeResource[];
+  networking: NetworkingConfig;
+  monitoring: MonitoringStrategy;
+  backup: BackupStrategy
 }
 
 export interface ComputeResource {
-  name: string, type: string, specifications: Record<string, any>
-  scalingPolicy: string, estimatedCost: string
+  name: string;
+  type: string;
+  specifications: Record<string, any>
+  scalingPolicy: string;
+  estimatedCost: string
 }
 
 export interface NetworkingConfig {
-  vpc: boolean, subnets: string[]
-  loadBalancer: string, cdn: string, dns: string
+  vpc: boolean;
+  subnets: string[];
+  loadBalancer: string;
+  cdn: string;
+  dns: string
 }
 
 export interface MonitoringStrategy {
-  tools: string[]
+  tools: string[];
   metrics: string[]
-  alerts: Alert[]
+  alerts: Alert[];
   dashboards: string[]
 }
 
 export interface Alert {
-  name: string, condition: string, severity: 'critical' | 'warning' | 'info'
+  name: string;
+  condition: string;
+  severity: 'critical' | 'warning' | 'info'
   action: string
 }
 
 export interface BackupStrategy {
-  frequency: string, retention: string, type: string, location: string
+  frequency: string;
+  retention: string;
+  type: string;
+  location: string
 }
 
 export interface SecurityArchitecture {
-  principles: string[]
+  principles: string[];
   threats: ThreatModel[]
-  controls: SecurityControl[]
+  controls: SecurityControl[];
   compliance: string[]
   dataProtection: DataProtection
 }
 
 export interface ThreatModel {
-  threat: string, category: string, likelihood: 'high' | 'medium' | 'low'
+  threat: string;
+  category: string;
+  likelihood: 'high' | 'medium' | 'low'
   impact: 'high' | 'medium' | 'low'
   mitigation: string[]
 }
 
 export interface SecurityControl {
-  name: string, type: string, implementation: string, scope: string[]
+  name: string;
+  type: string;
+  implementation: string;
+  scope: string[]
 }
 
 export interface DataProtection {
-  encryption: EncryptionStrategy, privacy: PrivacyMeasure[]
+  encryption: EncryptionStrategy;
+  privacy: PrivacyMeasure[];
   accessControl: AccessControlModel
 }
 
 export interface EncryptionStrategy {
-  atRest: string, inTransit: string, keyManagement: string
+  atRest: string;
+  inTransit: string;
+  keyManagement: string
 }
 
 export interface PrivacyMeasure {
-  name: string, description: string, implementation: string
+  name: string;
+  description: string;
+  implementation: string
 }
 
 export interface AccessControlModel {
-  type: string, implementation: string, roles: string[]
+  type: string;
+  implementation: string;
+  roles: string[]
 }
 
 export interface Integration {
-  name: string, type: 'API' | 'Webhook' | 'SDK' | 'Database' | 'Message Queue'
-  purpose: string, protocol: string, authentication: string, dataFormat: string, errorHandling: string
+  name: string;
+  type: 'API' | 'Webhook' | 'SDK' | 'Database' | 'Message Queue'
+  purpose: string;
+  protocol: string;
+  authentication: string;
+  dataFormat: string;
+  errorHandling: string
 }
 
 export interface DeploymentStrategy {
-  approach: string, environments: Environment[]
+  approach: string;
+  environments: Environment[];
   pipeline: PipelineStage[]
-  rollbackStrategy: string, blueGreenDeployment: boolean
+  rollbackStrategy: string;
+  blueGreenDeployment: boolean
 }
 
 export interface Environment {
-  name: string, purpose: string, configuration: Record<string, any>
+  name: string;
+  purpose: string;
+  configuration: Record<string, any>
   resources: string[]
 }
 
 export interface PipelineStage {
-  name: string, actions: string[]
+  name: string;
+  actions: string[];
   triggers: string[]
   approvals: string[]
 }
 
 export interface TechnicalDecision {
-  decision: string, rationale: string, alternatives: string[]
+  decision: string;
+  rationale: string;
+  alternatives: string[];
   tradeoffs: string[]
   risks: string[]
 }
@@ -429,7 +513,7 @@ Format as JSON array of Component objects.`
     components: Component[]
   ): Promise<DataModel> {
     const prompt = `Create a comprehensive data, model:
-
+,
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
 
@@ -606,7 +690,7 @@ Format as JSON array of Integration objects.`
     components: Component[],
     timeline): Promise<DeploymentStrategy> {
     const prompt = `Define deployment, strategy:
-
+,
 Infrastructure:
 ${JSON.stringify(infrastructure.hostingPlatform)}
 

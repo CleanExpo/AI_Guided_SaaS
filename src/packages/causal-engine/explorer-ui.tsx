@@ -15,8 +15,11 @@ interface CausalInsight {
 }
 
 export default function CausalExplorerUI() {
+      </CausalInsight>
   const [insights, setInsights] = useState<CausalInsight[]>([]);
+      </CausalInsight>
   const [topComponents, setTopComponents] = useState<CausalInsight[]>([]);
+      </CausalInsight>
   const [lowComponents, setLowComponents] = useState<CausalInsight[]>([]);
   const [totalLogs, setTotalLogs] = useState(0);
 
@@ -39,7 +42,8 @@ export default function CausalExplorerUI() {
           key,
           ...data,
           componentType,
-          page};
+          page
+        };
       }
     );
 
@@ -82,28 +86,24 @@ export default function CausalExplorerUI() {
           Analyze user behavior patterns and component performance using causal
           inference.
         </p>
-      </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1, md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <div className="bg-white p-4 rounded-lg shadow border">
           <h3 className="text-sm font-medium text-gray-500">
             Total Interactions
           </h3>
           <p className="text-2xl font-bold text-gray-900">{totalLogs}</p>
-        </div>
         <div className="bg-white p-4 rounded-lg shadow border">
           <h3 className="text-sm font-medium text-gray-500">
             Components Tracked
           </h3>
           <p className="text-2xl font-bold text-gray-900">{insights.length}</p>
-        </div>
         <div className="bg-white p-4 rounded-lg shadow border">
           <h3 className="text-sm font-medium text-gray-500">High Performers</h3>
           <p className="text-2xl font-bold text-green-600">
             {topComponents.length}
           </p>
-        </div>
         <div className="bg-white p-4 rounded-lg shadow border">
           <h3 className="text-sm font-medium text-gray-500">
             Need Improvement
@@ -111,24 +111,21 @@ export default function CausalExplorerUI() {
           <p className="text-2xl font-bold text-red-600">
             {lowComponents.length}
           </p>
-        </div>
-      </div>
 
       {/* Action Buttons */}
       <div className="mb-6 flex gap-4">
         <button
           onClick={refreshData}
-          className="px-4 py-2 bg-blue-600 text-white rounded, hover:bg-blue-700"
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
           🔄 Refresh Data
         </button>
         <button
           onClick={clearAllLogs}
-          className="px-4 py-2 bg-red-600 text-white rounded, hover:bg-red-700"
+          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
         >
           🗑️ Clear All Logs
         </button>
-      </div>
 
       {/* Top Performers */}
       {topComponents.length > 0 && (
@@ -152,8 +149,6 @@ export default function CausalExplorerUI() {
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
                     Interactions
                   </th>
-                </tr>
-              </thead>
               <tbody className="divide-y divide-gray-200">
                 {topComponents.map(comp => (
                   <tr key={comp.key}>
@@ -161,32 +156,24 @@ export default function CausalExplorerUI() {
                       {comp.key.split(':')[1]}{' '}
                       <span className="text-gray-500">
                         ({comp.key.split(':')[0]})
-                      </span>
-                    </td>
                     <td className="px-4 py-3">
                       <span
                         className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}
                       >
                         {(comp.score * 100).toFixed(1)}%
                       </span>
-                    </td>
                     <td className="px-4 py-3">
                       <span
                         className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}
                       >
                         {comp.confidence}
                       </span>
-                    </td>
                     <td className="px-4 py-3 text-sm text-gray-500">
                       {comp.total}
                     </td>
-                  </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+            </table>)}
 
       {/* Low Performers */}
       {lowComponents.length > 0 && (
@@ -210,8 +197,6 @@ export default function CausalExplorerUI() {
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
                     Interactions
                   </th>
-                </tr>
-              </thead>
               <tbody className="divide-y divide-gray-200">
                 {lowComponents.map(comp => (
                   <tr key={comp.key}>
@@ -219,32 +204,24 @@ export default function CausalExplorerUI() {
                       {comp.key.split(':')[1]}{' '}
                       <span className="text-gray-500">
                         ({comp.key.split(':')[0]})
-                      </span>
-                    </td>
                     <td className="px-4 py-3">
                       <span
                         className={`px-2 py-1 rounded text-xs font-medium ${getScoreColor(comp.score)}`}
                       >
                         {(comp.score * 100).toFixed(1)}%
                       </span>
-                    </td>
                     <td className="px-4 py-3">
                       <span
                         className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(comp.confidence)}`}
                       >
                         {comp.confidence}
                       </span>
-                    </td>
                     <td className="px-4 py-3 text-sm text-gray-500">
                       {comp.total}
                     </td>
-                  </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+            </table>)}
 
       {/* All Components */}
       <div>
@@ -256,22 +233,16 @@ export default function CausalExplorerUI() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Component
-                </th>
+                  Component</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
                   Page
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Score
-                </th>
+                  Score</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Confidence
-                </th>
+                  Confidence</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                  Interactions
-                </th>
-              </tr>
-            </thead>
+                  Interactions</th>
             <tbody className="divide-y divide-gray-200">
               {insights.map(insight => (
                 <tr key={insight.key}>
@@ -287,21 +258,17 @@ export default function CausalExplorerUI() {
                     >
                       {(insight.score * 100).toFixed(1)}%
                     </span>
-                  </td>
                   <td className="px-4 py-3">
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${getConfidenceColor(insight.confidence)}`}
                     >
                       {insight.confidence}
                     </span>
-                  </td>
                   <td className="px-4 py-3 text-sm text-gray-500">
                     {insight.total}
                   </td>
-                </tr>
               ))}
             </tbody>
-          </table>
           {insights.length === 0 && (
             <div className="p-8 text-center text-gray-500">
               No component data available. Start using the UI builder to
@@ -309,7 +276,74 @@ export default function CausalExplorerUI() {
             </div>
           )}
         </div>
-      </div>
+    );
+</td>
+</td>
+</tr>
+</tbody>
+</tr>
+</thead>
+</table>
+</div>
+</div>
+</td>
+</td>
+</span>
+</td>
+</tr>
+</tbody>
+</tr>
+</thead>
+</table>
+</div>
+</div>
+</td>
+</td>
+</span>
+</td>
+</tr>
+</tbody>
+</tr>
+</thead>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+}
+
+    </td>
+    </tr>
+    </tbody>
+    </tr>
+    </thead>
+    </table>
+    </div>
+    </td>
+    </td>
+    </tr>
+    </tbody>
+    </tr>
+    </thead>
+    </table>
+    </div>
+    </td>
+    </td>
+    </tr>
+    </tbody>
+    </tr>
+    </thead>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
   );
 }

@@ -28,11 +28,13 @@ const ExtendedProjectSchema = CreateProjectSchema.extend({
 type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>
 
 export function ValidatedProjectForm() {
+      </typeof>
   const router = useRouter()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)</typeof>
+  const [errors, setErrors] = useState<Record<string, string>>({})</Record>
+      </string>
   const [generalError, setGeneralError] = useState<string | null>(null)
-
+</string>
   const [formData, setFormData] = useState<CreateProjectForm>({
     name: '',
     description: '',
@@ -41,6 +43,7 @@ export function ValidatedProjectForm() {
     config: {
       features: []
     }
+      </CreateProjectForm>
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,9 +55,10 @@ export function ValidatedProjectForm() {
     const validation = validateSafe(ExtendedProjectSchema, formData)
     
     if (!validation.success) {
-      // Map validation errors to form fields
+      // Map validation errors to form fields</CreateProjectForm>
       const fieldErrors: Record<string, string> = {}
       (validation.error.errors as any[]).forEach((err) => {
+            </string>
         const field = err.path.join('.')
         fieldErrors[field] = err.message
       })
@@ -84,20 +88,22 @@ export function ValidatedProjectForm() {
       setIsSubmitting(false)
     }
   }
-
+</string>
   const updateField = <K extends keyof CreateProjectForm>(
     field: K,
     value: CreateProjectForm[K]
   ) => {
+        </K>
     setFormData(prev => ({ ...prev, [field]: value }))
     // Clear error for this field
     setErrors(prev => {
       const newErrors = { ...prev }
       delete newErrors[field]
       return newErrors
-    })
-  }
-
+    }
+      )}
+    </div>
+    );
   const updateConfig = (key: string, value) => {
     setFormData(prev => ({
       ...prev,
@@ -109,23 +115,20 @@ export function ValidatedProjectForm() {
   }
 
   return (
-    <Card className="w-full max-w-2xl">
-      <CardHeader>
+    <Card className="w-full max-w-2xl"></Card>
+      <CardHeader></CardHeader>
         <CardTitle>Create New Project</CardTitle>
         <CardDescription>
-          Fill in the details to create a new project with validation
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+          Fill in the details to create a new project with validation</CardDescription>
+      <CardContent></CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {generalError && (
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
+          {generalError && (</form>
+            <Alert variant="destructive"></Alert>
+              <AlertCircle className="h-4 w-4" /></AlertCircle>
               <AlertDescription>{generalError}</AlertDescription>
-            </Alert>
           )}
 
-          <div className="space-y-2">
+          <div className="space-y-2"></div>
             <Label htmlFor="name">Project Name *</Label>
             <Input
               id="name"
@@ -135,14 +138,13 @@ export function ValidatedProjectForm() {
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined}
             />
-            {errors.name && (
+            {errors.name && (</Input>
               <p id="name-error" className="text-sm text-destructive">
-                {errors.name}
-              </p>
-            )}
-          </div>
+                {errors.name}</p>
+  );
+}
 
-          <div className="space-y-2">
+          <div className="space-y-2"></div>
             <Label htmlFor="description">Description *</Label>
             <Textarea
               id="description"
@@ -153,46 +155,41 @@ export function ValidatedProjectForm() {
               aria-invalid={!!errors.description}
               aria-describedby={errors.description ? 'description-error' : undefined}
             />
-            {errors.description && (
+            {errors.description && (</Textarea>
               <p id="description-error" className="text-sm text-destructive">
-                {errors.description}
-              </p>
-            )}
-          </div>
+                {errors.description}</p>
+  );
+}
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-4"></div>
+            <div className="space-y-2"></div>
               <Label htmlFor="type">Project Type *</Label>
               <Select
                 value={formData.type}
                 onValueChange={(value) => updateField('type', value as any)}
-              >
-                <SelectTrigger id="type">
-                  <SelectValue />
-                </SelectTrigger>
+              ></Select>
+                <SelectTrigger id="type"></SelectTrigger>
+                  <SelectValue /></SelectValue>
                 <SelectContent>
-                  {ProjectTypeSchema.options.map((type) => (
+                  {ProjectTypeSchema.options.map((type) => (</SelectContent>
                     <SelectItem key={type} value={type}>
-                      {type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                    </SelectItem>
+                      {type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
               {errors.type && (
                 <p className="text-sm text-destructive">{errors.type}</p>
-              )}
-            </div>
+  );
+}
 
-            <div className="space-y-2">
+            <div className="space-y-2"></div>
               <Label htmlFor="framework">Framework (Optional)</Label>
               <Select
                 value={formData.config?.framework || ''}
                 onValueChange={(value) => updateConfig('framework', value)}
-              >
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select framework" />
-                </SelectTrigger>
-                <SelectContent>
+              ></Select>
+                <SelectTrigger id="framework"></SelectTrigger>
+                  <SelectValue placeholder="Select framework" /></SelectValue>
+                <SelectContent></SelectContent>
                   <SelectItem value="nextjs">Next.js</SelectItem>
                   <SelectItem value="react">React</SelectItem>
                   <SelectItem value="vue">Vue</SelectItem>
@@ -201,22 +198,17 @@ export function ValidatedProjectForm() {
                   <SelectItem value="express">Express</SelectItem>
                   <SelectItem value="fastapi">FastAPI</SelectItem>
                   <SelectItem value="django">Django</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-4"></div>
+            <div className="space-y-2"></div>
               <Label htmlFor="language">Language (Optional)</Label>
               <Select
                 value={formData.config?.language || ''}
                 onValueChange={(value) => updateConfig('language', value)}
-              >
-                <SelectTrigger id="language">
-                  <SelectValue placeholder="Select language" />
-                </SelectTrigger>
-                <SelectContent>
+              ></Select>
+                <SelectTrigger id="language"></SelectTrigger>
+                  <SelectValue placeholder="Select language" /></SelectValue>
+                <SelectContent></SelectContent>
                   <SelectItem value="typescript">TypeScript</SelectItem>
                   <SelectItem value="javascript">JavaScript</SelectItem>
                   <SelectItem value="python">Python</SelectItem>
@@ -225,20 +217,16 @@ export function ValidatedProjectForm() {
                   <SelectItem value="go">Go</SelectItem>
                   <SelectItem value="rust">Rust</SelectItem>
                   <SelectItem value="php">PHP</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2"></div>
               <Label htmlFor="database">Database (Optional)</Label>
               <Select
                 value={formData.config?.database || ''}
                 onValueChange={(value) => updateConfig('database', value)}
-              >
-                <SelectTrigger id="database">
-                  <SelectValue placeholder="Select database" />
-                </SelectTrigger>
-                <SelectContent>
+              ></Select>
+                <SelectTrigger id="database"></SelectTrigger>
+                  <SelectValue placeholder="Select database" /></SelectValue>
+                <SelectContent></SelectContent>
                   <SelectItem value="postgresql">PostgreSQL</SelectItem>
                   <SelectItem value="mysql">MySQL</SelectItem>
                   <SelectItem value="mongodb">MongoDB</SelectItem>
@@ -247,12 +235,8 @@ export function ValidatedProjectForm() {
                   <SelectItem value="supabase">Supabase</SelectItem>
                   <SelectItem value="firebase">Firebase</SelectItem>
                   <SelectItem value="dynamodb">DynamoDB</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2"></div>
             <Label>Features (Optional)</Label>
             <div className="grid grid-cols-2 gap-2">
               {[
@@ -264,61 +248,55 @@ export function ValidatedProjectForm() {
                 'Payment',
                 'Email',
                 'Analytics'
-              ].map((feature) => (
-                <label key={feature} className="flex items-center space-x-2">
+              ].map((feature) => (</div>
+                <label key={feature} className="flex items-center space-x-2"></label>
                   <input
                     type="checkbox"
                     checked={formData.config?.features?.includes(feature) || false}
-                    onChange={(e) => {
+                    onChange={(e) = /> {
                       const features = formData.config?.features || []
                       if (e.target.checked) {
                         updateConfig('features', [...features, feature])
-                      } else {
+                     } else {
                         updateConfig('features', features.filter((f) => f !== feature))
                       }
                     }}
                     className="rounded border-gray-300"
-                  />
+                  /></input>
                   <span className="text-sm">{feature}</span>
                 </label>
               ))}
             </div>
-          </div>
 
-          <div className="flex justify-end space-x-4">
+          <div className="flex justify-end space-x-4"></div>
             <Button
               type="button"
               variant="outline"
               onClick={() => router.back()}
               disabled={isSubmitting}
             >
-              Cancel
-            </Button>
+              Cancel</Button>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? (
+              {isSubmitting ? (</Button>
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creating...
+                  Creating...</Loader2>
                 </>
               ) : (
                 'Create Project'
               )}
             </Button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
-  )
+    );
 }
 
 /**
  * Example of a custom hook for form validation
  */
-export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {
-  const [data, setData] = useState<T>(initialData)
-  const [errors, setErrors] = useState<Record<string, string>>({})
+export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</T>
+  const [data, setData] = useState<T>(initialData)</T>
+  const [errors, setErrors] = useState<Record<string, string>>({})</Record>
   const [touched, setTouched] = useState<Set<string>>(new Set())
-
+</Set>
   const updateField = <K extends keyof T>(field: K, value: T[K]) => {
     setData(prev => ({ ...prev, [field]: value }))
     setTouched(prev => new Set(prev).add(String(field)))
@@ -337,16 +315,21 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {
           const newErrors = { ...prev }
           delete newErrors[String(field)]
           return newErrors
-        })
-      }
+        }
+      )}
+    </div>
+      </T>
+      </K>
+  );
     }
   }
 
   const validate = () => {
     const result = schema.safeParse(data)
-    if (!result.success) {
+    if (!result.success) {</K>
       const fieldErrors: Record<string, string> = {}
       (result.error.errors as any[]).forEach((err) => {
+            </string>
         const field = err.path.join('.')
         fieldErrors[field] = err.message
       })
@@ -372,4 +355,5 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {
     reset,
     isValid: Object.keys(errors).length === 0
   }
+}</string>
 }

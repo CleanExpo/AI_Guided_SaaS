@@ -7,15 +7,17 @@ import type { AgentConfig } from './AgentLoader'
 
 export interface OrchestratorConfig {
   stage: 'planning' | 'development' | 'testing' | 'deployment' | 'production'
-  projectType: string, maxConcurrentAgents: number, enableMonitoring: boolean
+  projectType: string;
+  maxConcurrentAgents: number;
+  enableMonitoring: boolean
 }
 
 export class AgentOrchestrator {
-  private, loader: AgentLoader
-  private, coordinator: AgentCoordinator
-  private, registry: AgentRegistry
-  private, monitor: AgentMonitor
-  private, communication: AgentCommunication
+  private loader: AgentLoader
+  private coordinator: AgentCoordinator
+  private registry: AgentRegistry
+  private monitor: AgentMonitor
+  private communication: AgentCommunication
   private, config: OrchestratorConfig
   private initialized = false
   
@@ -94,7 +96,7 @@ export class AgentOrchestrator {
       await this.initialize()
     }
     
-    console.log('🎯 Executing, workflow:', requirements.type)
+    console.log('🎯 Executing workflow:', requirements.type)
     
     // Create coordination plan
     const plan = await this.coordinator.createCoordinationPlan(
@@ -111,14 +113,14 @@ export class AgentOrchestrator {
       const metrics = this.monitor.getAgentMetrics(
         this.registry.getActiveAgents().map(a => a.agent_id)
       )
-      console.log('📊 Execution, metrics:', metrics)
+      console.log('📊 Execution metrics:', metrics)
     }
     
     return result
   }
   
   async orchestrateTask(task: {
-    name: string: type: string, priority: 'low' | 'medium' | 'high' | 'critical'
+    name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical'
     requirements: Record<string, any>
   }): Promise<any> {
     console.log(`🎼 Orchestrating, task: ${task.name}`)
@@ -136,7 +138,7 @@ export class AgentOrchestrator {
     // Send task via communication channel
     const result = await this.communication.sendMessage({
       from: 'orchestrator',
-      to: selectedAgent.agent_id: type: "request" as const payload: {
+      to: selectedAgent.agent_id: type, "request" as const payload: {
         task,
         deadline: this.calculateDeadline(task.priority)
       }

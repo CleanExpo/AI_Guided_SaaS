@@ -129,7 +129,9 @@ const engineeringHighlights = [
     metrics: '100% Uptime Target'}];
 
 export default function ProductionShowcasePage() {
+      </string>
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
+      </string>
   const [activeDemo, setActiveDemo] = useState<string>('claude-dashboard');
   const [systemMetrics, setSystemMetrics] = useState({
     uptime: '99.9%',
@@ -156,8 +158,8 @@ export default function ProductionShowcasePage() {
     return () => clearInterval(interval);
   }, []);
 
-  const renderPersonaShowcase = () => (
-    <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+  const renderPersonaShowcase = () => (</string>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const Icon = persona.icon;
         return (
@@ -173,8 +175,8 @@ export default function ProductionShowcasePage() {
               setSelectedPersona(
                 selectedPersona === persona.id ? null : persona.id
               )
-            }
-          >
+           }
+          ></motion>
             <Card
               className={`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}
             >
@@ -186,12 +188,10 @@ export default function ProductionShowcasePage() {
                 </div>
                 <CardTitle className="text-white">{persona.name}</CardTitle>
                 <CardDescription className="text-white/80">
-                  {persona.description}
-                </CardDescription>
-              </CardHeader>
+                  {persona.description}</CardDescription>
               <CardContent>
                 <AnimatePresence>
-                  {selectedPersona === persona.id && (
+                  {selectedPersona === persona.id && (</AnimatePresence>
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
@@ -200,35 +200,34 @@ export default function ProductionShowcasePage() {
                     >
                       <div className="space-y-2">
                         <p className="text-sm text-white/90 font-medium">
-                          Core, Technologies:
-                        </p>
+                          Core, Technologies:</p>
                         {persona.features.map((feature, idx) => (
                           <Badge
                             key={idx}
                             variant="secondary"
                             className="text-xs mr-1 mb-1"
                           >
-                            {feature}
-                          </Badge>
-                        ))}
+                            {feature}</Badge>
+                  ))}
                       </div>
                       <Button size="sm" className="w-full" asChild>
                         <Link href="/auth/signin">
-                          Start with {persona.name}
+                          Start with {persona.name}</Link>
                           <ArrowRight className="ml-2 h-3 w-3" />
                         </Link>
-                      </Button>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </CardContent>
-            </Card>
           </motion.div>
         );
-      })}
+      }
+      )}
     </div>
-  );
-
+        </CardHeader>
+        </CardContent>
+        </Button>
+    );
+      );
   const renderProductionDemo = () => {
     switch (activeDemo) {
       case 'claude-dashboard':
@@ -236,12 +235,10 @@ export default function ProductionShowcasePage() {
           <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
             <ClaudeCodeDashboard
               onWorkflowComplete={(result: WorkflowResult) => {
-                console.log('Claude Code workflow, completed:', result);
-              }}
-            />
-          </div>
-        );
-
+                console.log('Claude Code workflow completed:', result);
+             }}
+            /></ClaudeCodeDashboard>
+    );
       case 'ui-builder':
         return (
           <Card className="glass border-0">
@@ -249,33 +246,23 @@ export default function ProductionShowcasePage() {
               <div className="flex items-center gap-2">
                 <Wrench className="w-5 h-5 text-brand-primary-400" />
                 <CardTitle className="text-white">
-                  Production UI Builder
-                </CardTitle>
-              </div>
+                  Production UI Builder</CardTitle>
               <CardDescription className="text-white/80">
-                Real drag-and-drop interface with live component library
-              </CardDescription>
-            </CardHeader>
+                Real drag-and-drop interface with live component library</CardDescription>
             <CardContent>
               <div className="text-center py-8">
                 <Button
                   asChild
-                  className="bg-brand-primary-600, hover:bg-brand-primary-700"
+                  className="bg-brand-primary-600 hover:bg-brand-primary-700"
                 >
                   <Link href="/ui-builder">
-                    Launch UI Builder
+                    Launch UI Builder</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
-                </Button>
                 <p className="text-white/60 text-sm mt-4">
                   Access the full production UI Builder with your component
-                  library
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        );
-
+                  library</p>
+    );
       case 'analytics':
         return (
           <Card className="glass border-0">
@@ -283,38 +270,25 @@ export default function ProductionShowcasePage() {
               <div className="flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-green-400" />
                 <CardTitle className="text-white">System Analytics</CardTitle>
-              </div>
               <CardDescription className="text-white/80">
-                Real-time system monitoring and performance metrics
-              </CardDescription>
-            </CardHeader>
+                Real-time system monitoring and performance metrics</CardDescription>
             <CardContent>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-white">
-                    {systemMetrics.uptime}
-                  </div>
+                    {systemMetrics.uptime}</div>
                   <div className="text-sm text-white/60">System Uptime</div>
-                </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-white">
-                    {systemMetrics.activeUsers}
-                  </div>
+                    {systemMetrics.activeUsers}</div>
                   <div className="text-sm text-white/60">Active Users</div>
-                </div>
-              </div>
               <div className="text-center">
-                <Button asChild className="bg-green-600, hover:bg-green-700">
+                <Button asChild className="bg-green-600 hover:bg-green-700">
                   <Link href="/analytics">
-                    View Full Analytics
+                    View Full Analytics</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        );
-
+    );
       case 'collaboration':
         return (
           <Card className="glass border-0">
@@ -322,34 +296,25 @@ export default function ProductionShowcasePage() {
               <div className="flex items-center gap-2">
                 <Users className="w-5 h-5 text-orange-400" />
                 <CardTitle className="text-white">Collaboration Hub</CardTitle>
-              </div>
               <CardDescription className="text-white/80">
-                Production team collaboration workspace
-              </CardDescription>
-            </CardHeader>
+                Production team collaboration workspace</CardDescription>
             <CardContent>
               <div className="text-center py-8">
-                <Button asChild className="bg-orange-600, hover:bg-orange-700">
+                <Button asChild className="bg-orange-600 hover:bg-orange-700">
                   <Link href="/collaborate">
-                    Enter Collaboration Hub
+                    Enter Collaboration Hub</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
-                </Button>
                 <p className="text-white/60 text-sm mt-4">
-                  Access real-time team collaboration features
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        );
-
+                  Access real-time team collaboration features</p>
+    );
       default:
         return null;
     }
   };
 
   const renderEngineeringHighlights = () => (
-    <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {engineeringHighlights.map((highlight, index) => {
         const Icon = highlight.icon;
         return (
@@ -365,27 +330,44 @@ export default function ProductionShowcasePage() {
                   <Icon className="w-6 h-6 text-white" />
                 </div>
                 <CardTitle className="text-white text-lg">
-                  {highlight.title}
-                </CardTitle>
+                  {highlight.title}</CardTitle>
                 <CardDescription className="text-white/80 text-sm">
-                  {highlight.description}
-                </CardDescription>
-              </CardHeader>
+                  {highlight.description}</CardDescription>
               <CardContent className="text-center">
                 <Badge variant="outline" className="text-white border-white/20">
-                  {highlight.metrics}
-                </Badge>
-              </CardContent>
-            </Card>
+                  {highlight.metrics}</Badge>
           </motion.div>
         );
-      })}
+      }
+      )}
     </div>
-  );
-
+        </Card>
+        </CardHeader>
+        </div>
+        </CardContent>
+        </div>
+        </Card>
+        </CardHeader>
+        </div>
+        </CardContent>
+        </div>
+        </div>
+        </Button>
+        </Card>
+        </CardHeader>
+        </div>
+        </CardContent>
+        </div>
+        </Button>
+        </div>
+        </Card>
+        </CardHeader>
+        </CardContent>
+    );
+      );
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50, dark:from-gray-950, dark:via-purple-950/20, dark:to-blue-950/20">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50 dark:from-gray-950 dark:via-purple-950/20 dark:to-blue-950/20">
+      {/* Hero Section */}</div>
       <section className="relative py-32 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -395,21 +377,18 @@ export default function ProductionShowcasePage() {
           >
             <Badge
               variant="outline"
-              className="mb-6 border-purple-200, dark:border-purple-800 text-purple-700, dark:text-purple-300 bg-purple-50/50, dark:bg-purple-950/50"
+              className="mb-6 border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
             >
               <Sparkles className="w-3 h-3 mr-1" />
-              Production-Ready AI Platform
-            </Badge>
+              Production-Ready AI Platform</Sparkles>
 
-            <h1 className="text-5xl, md:text-7xl font-bold text-gradient mb-6">
-              AI-Guided SaaS Platform
-            </h1>
+            <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
+              AI-Guided SaaS Platform</h1>
 
-            <p className="text-xl text-gray-600, dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
               Experience sophisticated engineering with multi-agent AI
               orchestration, advanced token optimization, and production-grade
-              system architecture.
-            </p>
+              system architecture.</p>
           </motion.div>
 
           {/* Engineering Highlights */}
@@ -419,9 +398,8 @@ export default function ProductionShowcasePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-16"
           >
-            <h2 className="text-2xl font-bold text-gray-900, dark:text-white mb-8">
-              Advanced Engineering Foundation
-            </h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+              Advanced Engineering Foundation</h2>
             {renderEngineeringHighlights()}
           </motion.div>
 
@@ -433,12 +411,9 @@ export default function ProductionShowcasePage() {
             className="mb-16"
           >
             <h2 className="text-2xl font-bold text-white mb-8">
-              Choose Your Development Persona
-            </h2>
+              Choose Your Development Persona</h2>
             {renderPersonaShowcase()}
           </motion.div>
-        </div>
-      </section>
 
       {/* Production Features Demo */}
       <section className="py-20 px-4">
@@ -450,15 +425,13 @@ export default function ProductionShowcasePage() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-white mb-4">
-              Live Production Systems
-            </h2>
+              Live Production Systems</h2>
             <p className="text-xl text-white/80">
-              Interact with our actual production components and systems
-            </p>
+              Interact with our actual production components and systems</p>
           </motion.div>
 
-          <div className="grid, lg:grid-cols-3 gap-8">
-            {/* Feature Tabs */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Feature Tabs */}</div>
             <div className="lg:col-span-1">
               <div className="space-y-3">
                 {productionFeatures.map(feature => {
@@ -469,30 +442,32 @@ export default function ProductionShowcasePage() {
                       className={`w-full p-4 rounded-lg text-left transition-all ${
                         activeDemo === feature.demo
                           ? 'bg-white/20 border border-white/30'
-                          : 'bg-white/5, hover:bg-white/10'
+                          : 'bg-white/5  hover:bg-white/10'
                       }`}
                       onClick={() => setActiveDemo(feature.demo)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                    >
+                    ></motion>
                       <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${feature.color}`}>
                           <Icon className="w-5 h-5 text-white" />
                         </div>
                         <div>
                           <h3 className="font-medium text-white">
-                            {feature.title}
-                          </h3>
+                            {feature.title}</h3>
                           <p className="text-sm text-white/60">
-                            {feature.description}
-                          </p>
-                        </div>
-                      </div>
+                            {feature.description}</p>
                     </motion.button>
                   );
-                })}
-              </div>
-            </div>
+                }
+      )}
+    </div>
+        </section>
+        </div>
+        </section>
+        </div>
+        </div>
+    );
 
             {/* Live Production Demo */}
             <div className="lg:col-span-2">
@@ -504,13 +479,8 @@ export default function ProductionShowcasePage() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {renderProductionDemo()}
+                  {renderProductionDemo()}</motion>
                 </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 px-4 text-center">
@@ -521,38 +491,59 @@ export default function ProductionShowcasePage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Experience Production-Grade AI?
-            </h2>
+              Ready to Experience Production-Grade AI?</h2>
             <p className="text-xl text-white/80 mb-8">
-              Join the next generation of sophisticated AI-powered development
-            </p>
+              Join the next generation of sophisticated AI-powered development</p>
 
-            <div className="flex flex-col, sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600, hover:to-brand-primary-600"
+                className="bg-gradient-to-r from-blue-500 to-brand-primary-500 hover:from-blue-600 hover:to-brand-primary-600"
                 asChild
               >
                 <Link href="/auth/signin">
-                  Access Production Platform
+                  Access Production Platform</Link>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-              </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/20 text-white, hover:bg-white/10"
+                className="border-white/20 text-white hover:bg-white/10"
                 asChild
               >
                 <Link href="/admin">
-                  View System Admin
+                  View System Admin</Link>
                   <Shield className="ml-2 h-4 w-4" />
                 </Link>
-              </Button>
-            </div>
           </motion.div>
-        </div>
-      </section>
-    </div>
-  );
+          </div>
+          </AnimatePresence>
+          </section>
+          </div>
+      );
+</section>
+</AnimatePresence>
+</div>
+</div>
+</section>
+</div>
+</section>
+</div>
+</CardHeader>
+</Card>
+</Button>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</div>
+</CardHeader>
+</Card>
+</div>
+</CardContent>
+</div>
+</CardHeader>
+</Card>
+</div>
 }

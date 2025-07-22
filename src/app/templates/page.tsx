@@ -9,12 +9,21 @@ import { useToast } from '@/hooks/use-toast'
 import TemplateMarketplace from '@/components/marketplace/TemplateMarketplace'
 
 interface Template {
-  id: string, name: string, description: string, category: string, framework: string, downloads: number, rating: number, author: string, tags: string[]
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  framework: string;
+  downloads: number;
+  rating: number;
+  author: string;
+  tags: string[];
   featured: boolean
 }
 
 export default function TemplatesPage() {
   const { toast } = useToast()
+      </Template>
   const [templates, setTemplates] = useState<Template[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -133,256 +142,208 @@ export default function TemplatesPage() {
   const handleDownload = () => {
     toast({
       title: 'Download Started',
-      description: 'Template download has been initiated'})
-  }
-
+      description: 'Template download has been initiated'}
+      )}
+    </div>
+    );
   const handlePreview = () => {
     toast({
       title: 'Preview',
-      description: 'Opening template preview...'})
-  }
-
+      description: 'Opening template preview...'}
+      )}
+    </div>
+    );
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center">
+      <div className="flex items-center justify-center min-h-[400px]"></div>
+        <div className="text-center"></div>
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading templates...</p>
+    
         </div>
-      </div>
-    )
+    );
   }
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
+      {/* Header */}</div>
+      <div className="flex items-center justify-between"></div>
+        <div></div>
           <h1 className="text-3xl font-bold tracking-tight">Template Marketplace</h1>
           <p className="text-muted-foreground">
-            Browse and download professional templates for your projects
-          </p>
-        </div>
+            Browse and download professional templates for your projects</p>
         <Button>
-          📤 Upload Template
-        </Button>
-      </div>
+          📤 Upload Template</Button>
 
       {/* Stats */}
-      <div className="grid gap-4, md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <div className="grid gap-4 md:grid-cols-4"></div>
+        <Card></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Total Templates</CardTitle>
             <span className="text-muted-foreground">📦</span>
           </CardHeader>
-          <CardContent>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">{templates.length}</div>
             <p className="text-xs text-muted-foreground">
-              Available for download
-            </p>
-          </CardContent>
-        </Card>
+              Available for download</p>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Total Downloads</CardTitle>
             <span className="text-muted-foreground">📥</span>
           </CardHeader>
-          <CardContent>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">
-              {templates.reduce((sum, t) => sum + t.downloads, 0).toLocaleString()}
-            </div>
+              {templates.reduce((sum, t) => sum + t.downloads, 0).toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">
-              All time downloads
-            </p>
-          </CardContent>
-        </Card>
+              All time downloads</p>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Average Rating</CardTitle>
             <span className="text-muted-foreground">⭐</span>
           </CardHeader>
-          <CardContent>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">
-              {(templates.reduce((sum, t) => sum + t.rating, 0) / templates.length).toFixed(1)}
-            </div>
+              {(templates.reduce((sum, t) => sum + t.rating, 0) / templates.length).toFixed(1)}</div>
             <p className="text-xs text-muted-foreground">
-              User satisfaction
-            </p>
-          </CardContent>
-        </Card>
+              User satisfaction</p>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Featured</CardTitle>
             <span className="text-muted-foreground">🌟</span>
           </CardHeader>
-          <CardContent>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">{featuredTemplates.length}</div>
             <p className="text-xs text-muted-foreground">
-              Editor&apos;s choice
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+              Editor&apos;s choice</p>
 
       {/* Template Tabs */}
-      <Tabs defaultValue="browse" className="space-y-4">
-        <TabsList>
+      <Tabs defaultValue="browse" className="space-y-4"></Tabs>
+        <TabsList></TabsList>
           <TabsTrigger value="browse">Browse Templates</TabsTrigger>
           <TabsTrigger value="featured">Featured</TabsTrigger>
           <TabsTrigger value="marketplace">Marketplace</TabsTrigger>
-        </TabsList>
 
-        <TabsContent value="browse" className="space-y-4">
+        <TabsContent value="browse" className="space-y-4"></TabsContent>
           <div className="flex flex-wrap gap-2 mb-6">
-            {categories.map((category) => (
+            {categories.map((category) => (</div>
               <Button
                 key={category.id}
                 variant={selectedCategory === category.id ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedCategory(category.id)}
               >
-                {category.name} ({category.count})
-              </Button>
+                {category.name} ({category.count})</Button>
             ))}
           </div>
 
-          <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
-            {filteredTemplates.map((template) => (
-              <Card key={template.id} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredTemplates.map((template) => (</div>
+              <Card key={template.id} className="hover:shadow-lg transition-shadow"></Card>
+                <CardHeader></CardHeader>
+                  <div className="flex items-start justify-between"></div>
+                    <div></div>
                       <CardTitle className="text-lg">{template.name}</CardTitle>
                       <CardDescription className="mt-1">
-                        {template.description}
-                      </CardDescription>
-                    </div>
+                        {template.description}</CardDescription>
                     {template.featured && (
                       <Badge className="bg-yellow-500">Featured</Badge>
                     )}
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between text-sm">
+                <CardContent></CardContent>
+                  <div className="space-y-4"></div>
+                    <div className="flex items-center justify-between text-sm"></div>
                       <span className="text-muted-foreground">Framework:</span>
                       <Badge variant="outline" className="capitalize">
-                        {template.framework}
-                      </Badge>
-                    </div>
+                        {template.framework}</Badge>
                     
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-sm"></div>
                       <span className="text-muted-foreground">Downloads:</span>
                       <span className="font-medium">{template.downloads.toLocaleString()}</span>
                     </div>
                     
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-sm"></div>
                       <span className="text-muted-foreground">Rating:</span>
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-1"></div>
                         <span className="font-medium">{template.rating}</span>
                         <span className="text-yellow-500">⭐</span>
                       </div>
-                    </div>
                     
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-sm"></div>
                       <span className="text-muted-foreground">Author:</span>
                       <span className="font-medium">{template.author}</span>
                     </div>
 
                     <div className="flex flex-wrap gap-1">
-                      {template.tags.map((tag) => (
+                      {template.tags.map((tag) => (</div>
                         <Badge key={tag} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
+                          {tag}</Badge>
+                  ))}
                     </div>
 
-                    <div className="flex space-x-2 pt-2">
+                    <div className="flex space-x-2 pt-2"></div>
                       <Button 
                         size="sm" 
                         className="flex-1"
                         onClick={() => handleDownload()}
                       >
-                        📥 Download
-                      </Button>
+                        📥 Download</Button>
                       <Button 
                         size="sm" 
                         variant="outline"
                         onClick={() => handlePreview()}
                       >
-                        👁️ Preview
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                        👁️ Preview</Button>
             ))}
           </div>
-        </TabsContent>
 
-        <TabsContent value="featured" className="space-y-4">
-          <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
-            {featuredTemplates.map((template) => (
-              <Card key={template.id} className="hover:shadow-lg transition-shadow border-yellow-200">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <CardTitle className="text-lg flex items-center space-x-2">
+        <TabsContent value="featured" className="space-y-4"></TabsContent>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredTemplates.map((template) => (</div>
+              <Card key={template.id} className="hover:shadow-lg transition-shadow border-yellow-200"></Card>
+                <CardHeader></CardHeader>
+                  <div className="flex items-start justify-between"></div>
+                    <div></div>
+                      <CardTitle className="text-lg flex items-center space-x-2"></CardTitle>
                         <span>{template.name}</span>
                         <span className="text-yellow-500">⭐</span>
                       </CardTitle>
                       <CardDescription className="mt-1">
-                        {template.description}
-                      </CardDescription>
-                    </div>
+                        {template.description}</CardDescription>
                     <Badge className="bg-yellow-500">Featured</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between text-sm">
+                <CardContent></CardContent>
+                  <div className="space-y-4"></div>
+                    <div className="flex items-center justify-between text-sm"></div>
                       <span className="text-muted-foreground">Downloads:</span>
                       <span className="font-medium">{template.downloads.toLocaleString()}</span>
                     </div>
                     
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-sm"></div>
                       <span className="text-muted-foreground">Rating:</span>
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-1"></div>
                         <span className="font-medium">{template.rating}</span>
                         <span className="text-yellow-500">⭐</span>
                       </div>
-                    </div>
 
-                    <div className="flex space-x-2 pt-2">
+                    <div className="flex space-x-2 pt-2"></div>
                       <Button 
                         size="sm" 
                         className="flex-1"
                         onClick={() => handleDownload()}
                       >
-                        📥 Download
-                      </Button>
+                        📥 Download</Button>
                       <Button 
                         size="sm" 
                         variant="outline"
                         onClick={() => handlePreview()}
                       >
-                        👁️ Preview
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                        👁️ Preview</Button>
             ))}
           </div>
-        </TabsContent>
 
-        <TabsContent value="marketplace" className="space-y-4">
-          <TemplateMarketplace />
-        </TabsContent>
-      </Tabs>
-    </div>
-  )
+        <TabsContent value="marketplace" className="space-y-4"></TabsContent>
+          <TemplateMarketplace /></TemplateMarketplace>
+    );
 }

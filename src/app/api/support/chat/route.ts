@@ -64,8 +64,8 @@ Be helpful, concise, and accurate. When possible, reference specific documentati
     // Analyze response for suggestions
     const suggestedDocs: string[] = []
     const suggestedTutorials: string[] = []
-    const codeBlocks: Array<{ language: string; code: string }> = []
-    const actionButtons: Array<{ label: string; action: string; data?: any }> = []
+    const codeBlocks: Array<{ language: string, code: string }> = []
+    const actionButtons: Array<{ label: string, action: string; data?: any }> = []
     
     // Extract documentation references
     if (context.documentationResults) {

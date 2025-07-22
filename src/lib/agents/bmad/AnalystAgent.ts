@@ -2,18 +2,23 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent'
 import { generateAIResponse } from '@/lib/ai'
 
 export interface RequirementAnalysis {
-  functionalRequirements: string[]
+  functionalRequirements: string[];
   nonFunctionalRequirements: string[]
-  constraints: string[]
+  constraints: string[];
   assumptions: string[]
-  risks: string[]
+  risks: string[];
   successCriteria: string[]
-  userStories: UserStory[]
+  userStories: UserStory[];
   technicalConsiderations: string[]
 }
 
 export interface UserStory {
-  id: string, title: string, asA: string, iWant: string, soThat: string, acceptanceCriteria: string[]
+  id: string;
+  title: string;
+  asA: string;
+  iWant: string;
+  soThat: string;
+  acceptanceCriteria: string[];
   priority: 'high' | 'medium' | 'low'
   estimatedEffort: 'small' | 'medium' | 'large'
 }
@@ -134,8 +139,7 @@ Provide a comprehensive list of all requirements found.`
   }
 
   private async categorizeRequirements(rawRequirements: string): Promise<{
-    functionalRequirements: string[]
-    nonFunctionalRequirements: string[]
+    functionalRequirements: string[], nonFunctionalRequirements: string[]
     assumptions: string[]
   }> {
     const prompt = `Categorize the following requirements, into:

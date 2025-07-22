@@ -18,11 +18,11 @@ export default function ComponentPropsEditor() {
   };
 
   return (
-    <div className="p-4 bg-white border-t border-gray-300">
+    <div className="p-4 bg-white border-t border-gray-300"></div>
       <h2 className="text-lg font-semibold mb-2">Edit {type} Properties</h2>
       <form className="space-y-3">
-        {schema?.map(({ key, label: type: inputType }) => (
-          <div key={key}>
+        {schema?.map(({ key, label: type, inputType }) => (</form>
+          <div key={key}></div>
             <label className="block text-sm font-medium text-gray-700">{label}</label>
             {inputType === 'textarea' ? (
               <textarea
@@ -31,16 +31,14 @@ export default function ComponentPropsEditor() {
                 onChange={(e) => handleChange(key, e.target.value)}
                 rows={3}
               />
-            ) : (
+            ) : (</textarea>
               <input
                 className="w-full px-3 py-1 border rounded text-sm"
                 value={props[key] || ''}
-                onChange={(e) => handleChange(key, e.target.value)}
+                onChange={(e) = /> handleChange(key, e.target.value)}
               />
-            )}
-          </div>
+            )}</input>
         ))}
       </form>
-    </div>
-  );
+    );
 }

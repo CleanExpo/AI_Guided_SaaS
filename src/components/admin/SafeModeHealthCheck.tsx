@@ -19,7 +19,9 @@ interface HealthIssue {
 
 interface BatchConfig {
   maxIssuesPerBatch: number;
-  maxTimePerBatch: number; // seconds, pauseBetweenBatches: number; // seconds, requireConfirmation: boolean;
+  maxTimePerBatch: number; // seconds;
+  pauseBetweenBatches: number; // seconds;
+  requireConfirmation: boolean;
 }
 
 interface CheckpointState {
@@ -31,17 +33,23 @@ interface CheckpointState {
 }
 
 export default function SafeModeHealthCheck() {
+      </HealthIssue>
   const [issues, setIssues] = useState<HealthIssue[]>([]);
   const [isScanning, setIsScanning] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+      </HealthIssue>
   const [currentBatch, setCurrentBatch] = useState<HealthIssue[]>([]);
+      </CheckpointState>
   const [checkpoint, setCheckpoint] = useState<CheckpointState | null>(null);
+      </string>
   const [processingLog, setProcessingLog] = useState<string[]>([]);
   const [batchConfig, setBatchConfig] = useState<BatchConfig>({
     maxIssuesPerBatch: 3,
+        </BatchConfig>
     maxTimePerBatch: 300, // 5 minutes, pauseBetweenBatches: 30, // 30 seconds, requireConfirmation: true});
-
+      </NodeJS>
   const pauseTimer = useRef<NodeJS.Timeout | null>(null);
+      </NodeJS>
   const batchTimer = useRef<NodeJS.Timeout | null>(null);
 
   // Mock health issues for demonstration
@@ -120,7 +128,7 @@ export default function SafeModeHealthCheck() {
 
     const batches: HealthIssue[][] = [];
     for (
-      let i = 0;
+      let i = 0;</NodeJS>
       i < sortedIssues.length;
       i += batchConfig.maxIssuesPerBatch
     ) {
@@ -232,6 +240,7 @@ export default function SafeModeHealthCheck() {
           `Issues to, fix:\n${batch.map(issue => `• ${issue.title}`).join('\n')}\n\n` +
           `Estimated, time: ${Math.round(batch.reduce((sum, issue) => sum + issue.estimatedTime, 0) / 60)} minutes\n\n` +
           `Click OK to continue or Cancel to pause.`
+          </boolean>
       );
       resolve(confirmed);
     });
@@ -312,75 +321,62 @@ export default function SafeModeHealthCheck() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
-            🛡️ Safe Mode Health Check
-          </h2>
+            🛡️ Safe Mode Health Check</h2>
           <p className="text-gray-600">
-            Process errors in small batches to prevent system overload
-          </p>
-        </div>
+            Process errors in small batches to prevent system overload</p>
         <div className="flex gap-3">
           <Button
             onClick={scanForIssues}
             disabled={isScanning || isProcessing}
-            className="bg-blue-600, hover:bg-blue-700"
+            className="bg-blue-600 hover:bg-blue-700"
           >
-            {isScanning ? '🔍 Scanning...' : '🔍 Scan for Issues'}
-          </Button>
+            {isScanning ? '🔍 Scanning...' : '🔍 Scan for Issues'}</Button>
           {issues.length > 0 && !isProcessing && (
             <Button
               onClick={startSafeProcessing}
-              className="bg-green-600, hover:bg-green-700"
+              className="bg-green-600 hover:bg-green-700"
             >
-              🚀 Start Safe Processing
-            </Button>
+              🚀 Start Safe Processing</Button>
           )}
           {isProcessing && (
             <>
               <Button onClick={pauseProcessing} variant="outline">
-                ⏸️ Pause
-              </Button>
+                ⏸️ Pause</Button>
               <Button
                 onClick={pauseProcessing}
-                className="bg-red-600, hover:bg-red-700"
+                className="bg-red-600 hover:bg-red-700"
               >
-                🛑 Stop
-              </Button>
+                🛑 Stop</Button>
             </>
           )}
           {checkpoint && !isProcessing && (
             <Button
               onClick={resumeProcessing}
-              className="bg-orange-600, hover:bg-orange-700"
+              className="bg-orange-600 hover:bg-orange-700"
             >
-              ▶️ Resume
-            </Button>
+              ▶️ Resume</Button>
           )}
           <Button onClick={resetProcessing} variant="outline">
-            🔄 Reset
-          </Button>
-        </div>
-      </div>
+            🔄 Reset</Button>
 
       {/* Configuration */}
       <Card className="p-4">
         <h3 className="font-medium text-gray-700 mb-3">
-          ⚙️ Batch Configuration
-        </h3>
-        <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
+          ⚙️ Batch Configuration</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Issues per batch
-            </label>
+              Issues per batch</label>
             <input
               type="number"
               min="1"
               max="10"
               value={batchConfig.maxIssuesPerBatch}
-              onChange={e =>
+              onChange={e = />
                 setBatchConfig(prev => ({
                   ...prev,
                   maxIssuesPerBatch: parseInt(e.target.value) || 3}))
@@ -389,18 +385,16 @@ export default function SafeModeHealthCheck() {
               disabled={isProcessing}
               aria-label="Issues per batch"
               title="Number of issues to process in each batch"
-            />
-          </div>
+            /></input>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Max time per batch (min)
-            </label>
+              Max time per batch (min)</label>
             <input
               type="number"
               min="1"
               max="30"
               value={Math.round(batchConfig.maxTimePerBatch / 60)}
-              onChange={e =>
+              onChange={e = />
                 setBatchConfig(prev => ({
                   ...prev,
                   maxTimePerBatch: (parseInt(e.target.value) || 5) * 60}))
@@ -409,18 +403,16 @@ export default function SafeModeHealthCheck() {
               disabled={isProcessing}
               aria-label="Max time per batch in minutes"
               title="Maximum time to spend on each batch in minutes"
-            />
-          </div>
+            /></input>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Pause between batches (s)
-            </label>
+              Pause between batches (s)</label>
             <input
               type="number"
               min="10"
               max="300"
               value={batchConfig.pauseBetweenBatches}
-              onChange={e =>
+              onChange={e = />
                 setBatchConfig(prev => ({
                   ...prev,
                   pauseBetweenBatches: parseInt(e.target.value) || 30}))
@@ -429,28 +421,22 @@ export default function SafeModeHealthCheck() {
               disabled={isProcessing}
               aria-label="Pause between batches in seconds"
               title="Time to pause between processing batches in seconds"
-            />
-          </div>
+            /></input>
           <div className="flex items-center">
             <label className="flex items-center">
               <input
                 type="checkbox"
                 checked={batchConfig.requireConfirmation}
-                onChange={e =>
+                onChange={e = />
                   setBatchConfig(prev => ({
                     ...prev,
                     requireConfirmation: e.target.checked}))
                 }
                 className="mr-2"
                 disabled={isProcessing}
-              />
+              /></input>
               <span className="text-sm font-medium text-gray-700">
-                Require confirmation
-              </span>
-            </label>
-          </div>
-        </div>
-      </Card>
+                Require confirmation</span>
 
       {/* Progress */}
       {checkpoint && (
@@ -459,16 +445,12 @@ export default function SafeModeHealthCheck() {
             <h3 className="font-medium text-gray-700">📊 Progress</h3>
             <span className="text-sm text-gray-600">
               {checkpoint.completedIssues.length} / {issues.length} issues
-              completed
-            </span>
-          </div>
+              completed</span>
           <Progress value={getProgressPercentage()} className="mb-2" />
           <div className="text-sm text-gray-600">
             Batch {checkpoint.currentBatch + 1} of {checkpoint.totalBatches} •
             {Math.round((Date.now() - checkpoint.startTime) / 60000)} minutes
-            elapsed
-          </div>
-        </Card>
+            elapsed</div>
       )}
 
       {/* Current Batch */}
@@ -476,39 +458,32 @@ export default function SafeModeHealthCheck() {
         <Card className="p-4">
           <h3 className="font-medium text-gray-700 mb-3">🔧 Current Batch</h3>
           <div className="space-y-2">
-            {currentBatch.map(issue => (
+            {currentBatch.map(issue => (</div>
               <div
                 key={issue.id}
                 className="flex items-center gap-3 p-2 bg-blue-50 rounded"
               >
                 <span className="text-lg">
-                  {getCategoryIcon(issue.category)}
-                </span>
+                  {getCategoryIcon(issue.category)}</span>
                 <div className="flex-1">
                   <div className="font-medium">{issue.title}</div>
                   <div className="text-sm text-gray-600">
-                    {issue.description}
-                  </div>
-                </div>
+                    {issue.description}</div>
                 <div
                   className={`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
                 >
-                  {issue.type.toUpperCase()}
-                </div>
-              </div>
+                  {issue.type.toUpperCase()}</div>
             ))}
           </div>
-        </Card>
       )}
 
       {/* Issues List */}
       {issues.length > 0 && (
         <Card className="p-4">
           <h3 className="font-medium text-gray-700 mb-3">
-            📋 Detected Issues ({issues.length})
-          </h3>
+            📋 Detected Issues ({issues.length})</h3>
           <div className="space-y-2 max-h-64 overflow-y-auto">
-            {issues.map(issue => (
+            {issues.map(issue => (</div>
               <div
                 key={issue.id}
                 className={`flex items-center gap-3 p-2 rounded ${
@@ -518,32 +493,27 @@ export default function SafeModeHealthCheck() {
                 }`}
               >
                 <span className="text-lg">
-                  {getCategoryIcon(issue.category)}
-                </span>
+                  {getCategoryIcon(issue.category)}</span>
                 <div className="flex-1">
                   <div className="font-medium">{issue.title}</div>
                   <div className="text-sm text-gray-600">
-                    {issue.description}
-                  </div>
+                    {issue.description}</div>
                   {issue.file && (
                     <div className="text-xs text-gray-500">
                       {issue.file}
-                      {issue.line ? `:${issue.line}` : ''}
-                    </div>
+                      {issue.line ? `:${issue.line}` : ''}</div>
                   )}
                 </div>
                 <div
                   className={`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
                 >
-                  {issue.type.toUpperCase()}
-                </div>
+                  {issue.type.toUpperCase()}</div>
                 {checkpoint?.completedIssues.includes(issue.id) && (
                   <span className="text-green-600">✅</span>
                 )}
               </div>
             ))}
           </div>
-        </Card>
       )}
 
       {/* Processing Log */}
@@ -553,11 +523,9 @@ export default function SafeModeHealthCheck() {
           <div className="bg-gray-900 text-green-200 p-4 rounded font-mono text-sm max-h-48 overflow-y-auto">
             {processingLog.map((log, index) => (
               <div key={index} className="mb-1">
-                [{new Date().toLocaleTimeString()}] {log}
-              </div>
+                [{new Date().toLocaleTimeString()}] {log}</div>
             ))}
           </div>
-        </Card>
       )}
 
       {/* Safety Guidelines */}
@@ -566,23 +534,55 @@ export default function SafeModeHealthCheck() {
         <ul className="text-sm text-blue-800 space-y-1">
           <li>
             • <strong>Small batches</strong>: Process only 3-5 issues at a time
-          </li>
           <li>
             • <strong>Regular breaks</strong>: 30-second pause between batches
-          </li>
           <li>
             • <strong>Manual confirmation</strong>: Review each batch before
             processing
           </li>
           <li>
             • <strong>Progress tracking</strong>: Resume from any checkpoint
-          </li>
           <li>
             • <strong>Emergency stop</strong>: Pause immediately if system
             becomes slow
           </li>
-        </ul>
-      </Card>
+    );
+</li>
+</li>
+</li>
+</ul>
+</Card>
+</Card>
+</Card>
+</Card>
+</div>
+</Card>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</Card>
+</div>
+</div>
+</div>
+}
+
+    </li>
+    </li>
+    </ul>
+    </Card>
+    </Card>
+    </div>
+    </Card>
+    </label>
+    </div>
+    </div>
+    </div>
+    </Card>
+    </div>
     </div>
   );
 }
+</CheckpointState>

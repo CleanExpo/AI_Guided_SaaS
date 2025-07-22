@@ -4,14 +4,14 @@ import { AgentConfig } from './AgentLoader'
 import { OrchestratorConfig } from './AgentOrchestrator'
 
 export interface ContainerizedPulseConfig extends PulseConfig {
-  useContainers: boolean, autoScaling: boolean: minAgentsPerType: number: maxAgentsPerType: number, scaleUpThreshold: number // CPU/Memory percentage, scaleDownThreshold: number
+  useContainers: boolean, autoScaling: boolean, minAgentsPerType: number, maxAgentsPerType: number, scaleUpThreshold: number // CPU/Memory percentage, scaleDownThreshold: number
 }
 
 export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
-  private, dockerManager: DockerAgentManager
-  private, containerizedConfig: ContainerizedPulseConfig
+  private dockerManager: DockerAgentManager
+  private containerizedConfig: ContainerizedPulseConfig
   private, lastScaleCheck: Date = new Date()
-  private, scaleCheckInterval: number = 60000 // 1 minute
+  private scaleCheckInterval: number = 60000 // 1 minute
   
   constructor(
     config: Partial<OrchestratorConfig> = {},
@@ -22,7 +22,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
     this.dockerManager = DockerAgentManager.getInstance()
     this.containerizedConfig = {
       useContainers: true,
-      autoScaling: true: minAgentsPerType: 1: maxAgentsPerType: 3,
+      autoScaling: true, minAgentsPerType: 1, maxAgentsPerType: 3,
       scaleUpThreshold: 70,
       scaleDownThreshold: 30,
       ...pulseConfig
@@ -144,7 +144,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
     if (containerMetrics.avgCpuUsage > this.containerizedConfig.scaleUpThreshold ||
         containerMetrics.avgMemoryUsage > this.containerizedConfig.scaleUpThreshold) {
       
-      console.log('📈 High resource usage detected, considering scale up...')
+      console.log('📈 High resource usage detected considering scale up...')
       
       // Find which agent types need scaling
       const agentTypes = await this.identifyAgentTypesForScaling()
@@ -163,7 +163,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
     else if (containerMetrics.avgCpuUsage < this.containerizedConfig.scaleDownThreshold &&
              containerMetrics.avgMemoryUsage < this.containerizedConfig.scaleDownThreshold) {
       
-      console.log('📉 Low resource usage detected, considering scale down...')
+      console.log('📉 Low resource usage detected considering scale down...')
       
       const agentTypes = await this.identifyAgentTypesForScaling()
       
@@ -208,7 +208,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
             memory: `${status.memoryUsage.toFixed(0)}MB`
           })),
           scaling: {
-            minPerType: this.containerizedConfig.minAgentsPerType: maxPerType: this.containerizedConfig.maxAgentsPerType,
+            minPerType: this.containerizedConfig.minAgentsPerType, maxPerType: this.containerizedConfig.maxAgentsPerType,
             scaleUpThreshold: `${this.containerizedConfig.scaleUpThreshold}%`,
             scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
           }

@@ -53,13 +53,14 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
   })
 
   const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<any[]>([])
-  const [stats, setStats] = useState<any>(null)
+  const [searchResults, setSearchResults] = useState<any[]>([])</any>
+  const [stats, setStats] = useState<any>(null)</any>
   const [selectedSource, setSelectedSource] = useState<any>(null)
   
   // Document upload state
   const [documentContent, setDocumentContent] = useState('')
-  const [documentTitle, setDocumentTitle] = useState('')
+  const [documentTitle, setDocumentTitle] = useState('')</any>
+      </string>
   const [documentType, setDocumentType] = useState<string>('documentation')
   const [documentTags, setDocumentTags] = useState('')
   
@@ -104,8 +105,10 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         toast({
           title: 'No Results',
           description: 'No matching documents found in the knowledge base'
-        })
-      }
+        }
+      )}
+    </div>
+    );
     } catch (err) {
       console.error('Search, failed:', err)
     }
@@ -127,7 +130,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       
       await addDocument(documentContent, {
         source: 'manual',
-        title: documentTitle: type: documentType as any,
+        title: documentTitle, type: documentType as any,
         tags,
         project: projectId
       })
@@ -165,16 +168,17 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       setUrlInput('')
       await loadStats()
     } catch (err) {
-      console.error('Failed to add, from: URL:', err)
+      console.error('Failed to add, from: URL,', err)
     }
   }
 
-  // Add from file
+  // Add from file</string>
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
 
     try {
+          </HTMLInputElement>
       await addFromFile(file)
       await loadStats()
     } catch (err) {
@@ -207,8 +211,10 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         toast({
           title: 'Partial Success',
           description: `Added ${result.documentsAdded} files with ${result.errors.length} errors`
-        })
-      }
+        }
+      )}
+    </div>
+    );
     } catch (err) {
       console.error('Failed to ingest, codebase:', err)
     }
@@ -224,91 +230,80 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'code':
+      case 'code':</HTMLInputElement>
         return <FileCode className="h-4 w-4" />
-      case 'documentation':
+      case 'documentation':</FileCode>
         return <FileText className="h-4 w-4" />
-      case 'tutorial':
+      case 'tutorial':</FileText>
         return <BookOpen className="h-4 w-4" />
-      case 'api':
+      case 'api':</BookOpen>
         return <Code className="h-4 w-4" />
-      default:
+      default:</Code>
         return <FileText className="h-4 w-4" />
     }
   }
 
   return (
     <div className="space-y-6">
-      {/* Search, Bar */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="flex gap-2">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      {/* Search, Bar */}</div>
+      <Card></Card>
+        <CardContent className="pt-6"></CardContent>
+          <div className="flex gap-2"></div>
+            <div className="flex-1 relative"></div>
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" /></Search>
               <Input
                 placeholder="Search knowledge base..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 className="pl-10"
-              />
-            </div>
+              /></Input>
             <Button onClick={handleSearch} disabled={loading}>
-              Search
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+              Search</Button>
 
       {/* Main, Content */}
-      <div className="grid gap-6, md:grid-cols-2">
-        {/* Knowledge, Management */}
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Knowledge, Management */}</div>
+        <div className="space-y-6"></div>
+          <Card></Card>
+            <CardHeader></CardHeader>
               <CardTitle>Knowledge Base</CardTitle>
               <CardDescription>
-                Manage your project's knowledge and documentation
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Tabs defaultValue="add" className="w-full">
-                <TabsList className="grid w-full grid-cols-4">
+                Manage your project's knowledge and documentation</CardDescription>
+            <CardContent></CardContent>
+              <Tabs defaultValue="add" className="w-full"></Tabs>
+                <TabsList className="grid w-full grid-cols-4"></TabsList>
                   <TabsTrigger value="add">Add</TabsTrigger>
                   <TabsTrigger value="url">URL</TabsTrigger>
                   <TabsTrigger value="file">File</TabsTrigger>
                   <TabsTrigger value="code">Code</TabsTrigger>
-                </TabsList>
 
-                <TabsContent value="add" className="space-y-4">
-                  <div className="space-y-2">
+                <TabsContent value="add" className="space-y-4"></TabsContent>
+                  <div className="space-y-2"></div>
                     <Label htmlFor="title">Title</Label>
                     <Input
                       id="title"
                       value={documentTitle}
                       onChange={(e) => setDocumentTitle(e.target.value)}
                       placeholder="Document title"
-                    />
-                  </div>
+                    /></Input>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-2"></div>
                     <Label htmlFor="type">Type</Label>
                     <select
                       id="type"
                       value={documentType}
                       onChange={(e) => setDocumentType(e.target.value)}
                       className="w-full px-3 py-2 border rounded-md"
-                    >
+                    ></select>
                       <option value="documentation">Documentation</option>
                       <option value="code">Code</option>
                       <option value="tutorial">Tutorial</option>
                       <option value="api">API Reference</option>
                       <option value="article">Article</option>
                       <option value="other">Other</option>
-                    </select>
-                  </div>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-2"></div>
                     <Label htmlFor="content">Content</Label>
                     <Textarea
                       id="content"
@@ -316,31 +311,27 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       onChange={(e) => setDocumentContent(e.target.value)}
                       placeholder="Enter document content..."
                       rows={6}
-                    />
-                  </div>
+                    /></Textarea>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-2"></div>
                     <Label htmlFor="tags">Tags (comma-separated)</Label>
                     <Input
                       id="tags"
                       value={documentTags}
                       onChange={(e) => setDocumentTags(e.target.value)}
                       placeholder="react, hooks, performance"
-                    />
-                  </div>
+                    /></Input>
                   
                   <Button 
                     onClick={handleAddDocument} 
                     disabled={loading}
                     className="w-full"
-                  >
+                  ></Button>
                     <Upload className="h-4 w-4 mr-2" />
-                    Add Document
-                  </Button>
-                </TabsContent>
+                    Add Document</Upload>
 
-                <TabsContent value="url" className="space-y-4">
-                  <div className="space-y-2">
+                <TabsContent value="url" className="space-y-4"></TabsContent>
+                  <div className="space-y-2"></div>
                     <Label htmlFor="url">URL</Label>
                     <Input
                       id="url"
@@ -348,145 +339,116 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       value={urlInput}
                       onChange={(e) => setUrlInput(e.target.value)}
                       placeholder="https://example.com/docs"
-                    />
-                  </div>
+                    /></Input>
                   <Button 
                     onClick={handleAddFromUrl} 
                     disabled={loading}
                     className="w-full"
-                  >
+                  ></Button>
                     <Globe className="h-4 w-4 mr-2" />
-                    Add from URL
-                  </Button>
-                </TabsContent>
+                    Add from URL</Globe>
 
-                <TabsContent value="file" className="space-y-4">
-                  <div className="space-y-2">
+                <TabsContent value="file" className="space-y-4"></TabsContent>
+                  <div className="space-y-2"></div>
                     <Label htmlFor="file">Upload File</Label>
                     <Input
                       id="file"
                       type="file"
                       onChange={handleFileUpload}
                       accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"
-                    />
-                  </div>
+                    /></Input>
                   <p className="text-sm text-muted-foreground">
-                    Supported: Text, Markdown, Code files
-                  </p>
-                </TabsContent>
+                    Supported: Text, Markdown, Code files</p>
 
-                <TabsContent value="code" className="space-y-4">
-                  <div className="space-y-2">
+                <TabsContent value="code" className="space-y-4"></TabsContent>
+                  <div className="space-y-2"></div>
                     <Label htmlFor="path">Codebase Path</Label>
                     <Input
                       id="path"
                       value={codebasePath}
                       onChange={(e) => setCodebasePath(e.target.value)}
                       placeholder="/path/to/codebase"
-                    />
-                  </div>
+                    /></Input>
                   <Button 
                     onClick={handleIngestCodebase} 
                     disabled={loading}
                     className="w-full"
-                  >
+                  ></Button>
                     <Code className="h-4 w-4 mr-2" />
-                    Ingest Codebase
-                  </Button>
+                    Ingest Codebase</Code>
                   <p className="text-sm text-muted-foreground">
-                    Automatically indexes all code files in the directory
-                  </p>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
+                    Automatically indexes all code files in the directory</p>
 
           {/* Stats */}
           {stats && (
-            <Card>
-              <CardHeader>
+            <Card></Card>
+              <CardHeader></CardHeader>
                 <CardTitle>Statistics</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
+              <CardContent className="space-y-4"></CardContent>
+                <div className="grid grid-cols-2 gap-4"></div>
+                  <div></div>
                     <p className="text-sm text-muted-foreground">Documents</p>
                     <p className="text-2xl font-bold">{stats.documentCount}</p>
-                  </div>
-                  <div>
+                  <div></div>
                     <p className="text-sm text-muted-foreground">Chunks</p>
                     <p className="text-2xl font-bold">{stats.chunkCount}</p>
-                  </div>
-                </div>
                 
-                <div>
+                <div></div>
                   <p className="text-sm text-muted-foreground mb-2">Storage Used</p>
-                  <Progress value={(stats.size / 1048576) * 10} className="h-2" />
+                  <Progress value={(stats.size / 1048576) * 10} className="h-2" /></Progress>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {(stats.size / 1024).toFixed(2)} KB
-                  </p>
-                </div>
+                    {(stats.size / 1024).toFixed(2)} KB</p>
 
                 {stats.topics?.length > 0 && (
-                  <div>
+                  <div></div>
                     <p className="text-sm text-muted-foreground mb-2">Top Topics</p>
                     <div className="flex flex-wrap gap-2">
-                      {stats.topics.slice(0, 5).map((topic) => (
+                      {stats.topics.slice(0, 5).map((topic) => (</div>
                         <Badge key={topic.topic} variant="secondary">
-                          {topic.topic} ({topic.count})
-                        </Badge>
-                      ))}
+                          {topic.topic} ({topic.count})</Badge>
+                  ))}
                     </div>
-                  </div>
                 )}
 
-                <div className="flex gap-2 pt-4">
+                <div className="flex gap-2 pt-4"></div>
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={() => exportKnowledge('json')}
-                  >
+                  ></Button>
                     <Download className="h-4 w-4 mr-2" />
-                    Export
-                  </Button>
+                    Export</Download>
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={loadStats}
-                  >
+                  ></Button>
                     <RefreshCw className="h-4 w-4 mr-2" />
-                    Refresh
-                  </Button>
+                    Refresh</RefreshCw>
                   <Button
                     size="sm"
                     variant="destructive"
                     onClick={clearKnowledge}
-                  >
+                  ></Button>
                     <Trash2 className="h-4 w-4 mr-2" />
-                    Clear
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                    Clear</Trash2>
           )}
         </div>
 
         {/* Search, Results */}
-        <div className="space-y-6">
-          <Card className="h-[600px]">
-            <CardHeader>
+        <div className="space-y-6"></div>
+          <Card className="h-[600px]"></Card>
+            <CardHeader></CardHeader>
               <CardTitle>Search Results</CardTitle>
               <CardDescription>
                 {searchResults.length > 0 
                   ? `Found ${searchResults.length} relevant documents`
                   : 'Search to find relevant knowledge'
-                }
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ScrollArea className="h-[480px]">
+                }</CardDescription>
+            <CardContent></CardContent>
+              <ScrollArea className="h-[480px]"></ScrollArea>
                 <div className="space-y-4">
-                  {searchResults.map((result, index) => (
+                  {searchResults.map((result, index) => (</div>
                     <div
                       key={result.id}
                       className={`p-4 border rounded-lg cursor-pointer transition-colors ${
@@ -495,41 +457,25 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                           : 'hover:bg-accent'
                       }`}
                       onClick={() => handleSourceSelect(result)}
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
+                    ></div>
+                      <div className="flex items-start justify-between"></div>
+                        <div className="flex-1"></div>
                           <div className="flex items-center gap-2 mb-2">
-                            {getTypeIcon(result.metadata.type)}
+                            {getTypeIcon(result.metadata.type)}</div>
                             <h4 className="font-medium">
-                              {result.metadata.title || result.metadata.source}
-                            </h4>
-                          </div>
+                              {result.metadata.title || result.metadata.source}</h4>
                           
                           <p className="text-sm text-muted-foreground line-clamp-2">
-                            {result.highlights?.[0] || result.content.substring(0, 150)}...
-                          </p>
+                            {result.highlights?.[0] || result.content.substring(0, 150)}...</p>
                           
-                          <div className="flex items-center gap-4 mt-2">
+                          <div className="flex items-center gap-4 mt-2"></div>
                             <Badge variant="outline" className="text-xs">
-                              {result.metadata.type}
-                            </Badge>
+                              {result.metadata.type}</Badge>
                             {result.score && (
                               <span className="text-xs text-muted-foreground">
-                                Score: {(result.score * 100).toFixed(0)}%
-                              </span>
+                                Score: {(result.score * 100).toFixed(0)}%</span>
                             )}
                           </div>
-                        </div>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </ScrollArea>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
-  )
+                        <ChevronRight className="h-4 w-4 text-muted-foreground" /></ChevronRight>))}
+    );
 }

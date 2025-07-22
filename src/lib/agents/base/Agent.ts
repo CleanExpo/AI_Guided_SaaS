@@ -2,7 +2,11 @@ import { EventEmitter } from 'events'
 import { v4 as uuidv4 } from 'uuid'
 
 export interface AgentConfig {
-  id: string, name: string, role: string, description: string, capabilities: string[]
+  id: string;
+  name: string;
+  role: string;
+  description: string;
+  capabilities: string[];
   tools: string[]
   model?: string
   temperature?: number
@@ -10,14 +14,20 @@ export interface AgentConfig {
 }
 
 export interface AgentMessage {
-  id: string, agentId: string, type: 'request' | 'response' | 'thought' | 'action' | 'observation'
+  id: string;
+  agentId: string;
+  type: 'request' | 'response' | 'thought' | 'action' | 'observation'
   content: string
   metadata?: Record<string, any>
   timestamp: Date
 }
 
 export interface AgentContext {
-  projectId: string, userId: string, sessionId: string, requirements: string, history: AgentMessage[]
+  projectId: string;
+  userId: string;
+  sessionId: string;
+  requirements: string;
+  history: AgentMessage[];
   sharedMemory: Map<string, any>
   artifacts: Map<string, any>
 }
@@ -31,17 +41,19 @@ export interface AgentArtifact {
 }
 
 export interface AgentResult {
-  success: boolean, output: any, messages: AgentMessage[]
+  success: boolean;
+  output: any;
+  messages: AgentMessage[]
   artifacts?: Map<string, any>
   nextSteps?: string[]
   confidence?: number
 }
 
 export abstract class Agent extends EventEmitter {
-  protected, config: AgentConfig
-  protected, context: AgentContext
+  protected config: AgentConfig
+  protected context: AgentContext
   protected, messages: AgentMessage[] = []
-  protected, isProcessing: boolean = false
+  protected isProcessing: boolean = false
 
   constructor(config: AgentConfig) {
     super()

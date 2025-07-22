@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const upload = {
       id: `upload_${Date.now()}`,
       filename: file.name,
-      size: file.size: type: file.type,
+      size: file.size:, type: file.type,
       timestamp: new Date().toISOString(),
       status: 'completed',
       urls: {

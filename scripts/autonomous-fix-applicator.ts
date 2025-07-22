@@ -14,7 +14,7 @@ interface TypeScriptFix {
 }
 
 class AutonomousFixApplicator {
-  private, fixes: TypeScriptFix[] = [
+  private fixes: TypeScriptFix[] = [
     {
       priority: 1,
       errorCode: 'TS2339',
@@ -73,8 +73,8 @@ declare module "next-auth/jwt" {
     }
   ];
 
-  private, appliedFixes: string[] = [];
-  private, failedFixes: string[] = [];
+  private appliedFixes: string[] = [];
+  private failedFixes: string[] = [];
 
   async applyFixes(): Promise<void> {
     console.log('🔧 Autonomous Fix Applicator\n');

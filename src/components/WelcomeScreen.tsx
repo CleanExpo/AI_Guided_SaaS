@@ -96,22 +96,23 @@ const getPersonaIcon = (personaId: string) => {
   switch (personaId) {
     case 'ai-architect':
       return <Bot className="w-8 h-8" />;
-    case 'fullstack-wizard':
+    case 'fullstack-wizard':</Bot>
       return <Code className="w-8 h-8" />;
-    case 'ui-designer':
+    case 'ui-designer':</Code>
       return <Palette className="w-8 h-8" />;
-    case 'devops-engineer':
+    case 'devops-engineer':</Palette>
       return <Zap className="w-8 h-8" />;
-    case 'startup-founder':
+    case 'startup-founder':</Zap>
       return <Rocket className="w-8 h-8" />;
-    case 'enterprise-consultant':
+    case 'enterprise-consultant':</Rocket>
       return <Sparkles className="w-8 h-8" />;
-    default:
+    default:</Sparkles>
       return <Bot className="w-8 h-8" />;
   }
 };
 
-export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
+export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {</Bot>
+      </string>
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
 
   const handlePersonaSelect = (persona: Persona) => {
@@ -126,60 +127,47 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
       <div className="max-w-6xl w-full">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-brand-primary-600 bg-clip-text text-transparent mb-4">
-            AI-Guided SaaS Builder
-          </h1>
+            AI-Guided SaaS Builder</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Choose your AI development persona to get started with intelligent
-            project guidance tailored to your expertise and goals.
-          </p>
-        </div>
+            project guidance tailored to your expertise and goals.</p>
 
-        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6">
-          {personas.map(persona => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {personas.map(persona => (</div>
             <Card
               key={persona.id}
-              className={`cursor-pointer transition-all duration-300, hover:shadow-lg, hover:scale-105 ${
+              className={`cursor-pointer transition-all duration-300, hover:shadow-lg  hover:scale-105 ${
                 selectedPersona === persona.id
                   ? 'ring-2 ring-blue-500 shadow-lg scale-105'
                   : 'hover:shadow-md'
               }`}
               onClick={() => handlePersonaSelect(persona)}
-            >
+            ></Card>
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-4 text-blue-600">
-                  {getPersonaIcon(persona.id)}
-                </div>
+                  {getPersonaIcon(persona.id)}</div>
                 <CardTitle className="text-xl font-semibold">
-                  {persona.name}
-                </CardTitle>
+                  {persona.name}</CardTitle>
                 <CardDescription className="text-sm text-gray-600">
-                  {persona.description}
-                </CardDescription>
-              </CardHeader>
+                  {persona.description}</CardDescription>
               <CardContent>
                 <div className="space-y-3">
                   <div>
                     <h4 className="font-medium text-sm text-gray-700 mb-2">
-                      Expertise:
-                    </h4>
+                      Expertise:</h4>
                     <div className="flex flex-wrap gap-1">
                       {persona.expertise.map((skill, index) => (
                         <span
                           key={index}
                           className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full"
                         >
-                          {skill}
-                        </span>
+                          {skill}</span>
                       ))}
                     </div>
-                  </div>
                   <div>
                     <h4 className="font-medium text-sm text-gray-700 mb-1">
-                      Tone:
-                    </h4>
+                      Tone:</h4>
                     <p className="text-xs text-gray-600">{persona.tone}</p>
-                  </div>
-                </div>
                 <Button
                   className="w-full mt-4"
                   variant={
@@ -188,20 +176,29 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
                 >
                   {selectedPersona === persona.id
                     ? 'Selected!'
-                    : 'Choose This Persona'}
-                </Button>
-              </CardContent>
-            </Card>
+                    : 'Choose This Persona'}</Button>
           ))}
         </div>
 
         <div className="text-center mt-12">
           <p className="text-sm text-gray-500">
             Each persona provides specialized guidance and recommendations based
-            on their expertise area.
-          </p>
-        </div>
-      </div>
+            on their expertise area.</p>
+    );
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</div>
+</div>
+</div>
+}
+
+    </CardContent>
+    </CardHeader>
+    </div>
     </div>
   );
 }
+</string>

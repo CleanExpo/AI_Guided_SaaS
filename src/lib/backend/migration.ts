@@ -11,23 +11,31 @@ export interface MigrationOptions {
 }
 
 export interface MigrationProgress {
-  totalRecords: number, processedRecords: number, currentCollection: string, errors: MigrationError[]
+  totalRecords: number;
+  processedRecords: number;
+  currentCollection: string;
+  errors: MigrationError[];
   status: 'running' | 'completed' | 'failed'
 }
 
 export interface MigrationError {
-  collection: string, recordId: string, error: string
+  collection: string;
+  recordId: string;
+  error: string
 }
 
 export interface MigrationResult {
-  success: boolean, totalRecords: number, migratedRecords: number, errors: MigrationError[]
+  success: boolean;
+  totalRecords: number;
+  migratedRecords: number;
+  errors: MigrationError[];
   duration: number
 }
 
 export class BackendMigrator {
-  private, sourceAdapter: BackendAdapter
-  private, targetAdapter: BackendAdapter
-  private, options: MigrationOptions
+  private sourceAdapter: BackendAdapter
+  private targetAdapter: BackendAdapter
+  private options: MigrationOptions
   private, progress: MigrationProgress
 
   constructor(
@@ -210,7 +218,7 @@ export class BackendMigrator {
  */
 export async function validateMigration(
   sourceConfig,
-  targetConfig): Promise<{ valid: boolean; issues: string[] }> {
+  targetConfig): Promise<{ valid: boolean, issues: string[] }> {
   const issues: string[] = []
   
   try {

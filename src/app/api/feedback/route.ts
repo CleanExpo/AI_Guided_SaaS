@@ -123,7 +123,7 @@ async function analyzeFeedback(feedback) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        text: feedback.feedback_text: type: 'feedback_analysis'
+        text: feedback.feedback_text: type, 'feedback_analysis'
       })
     }).then(r => r.json())
     
@@ -199,10 +199,10 @@ function extractCommonContext(feedbackList: any[]): any {
 
 async function getFeedbackAnalytics(feedback: any[]) {
   const analytics = {
-    total: feedback.length: byType: {} as Record<string, number>,
+    total: feedback.length, byType: {} as Record<string, number>,
     bySentiment: {} as Record<string, number>,
     recentTrend: 'stable' as 'improving' | 'stable' | 'declining',
-    topIssues: [] as Array<{ type: string; count: number }>,
+    topIssues: [] as Array<{ type: string, count: number }>,
     satisfactionScore: 0
   }
   

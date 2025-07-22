@@ -2,14 +2,19 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent'
 import { generateAIResponse } from '@/lib/ai'
 
 export interface AgentRefinement {
-  originalAgents: AgentConfiguration[]
+  originalAgents: AgentConfiguration[];
   refinedAgents: RefinedAgent[]
-  improvements: AgentImprovement[]
-  collaborationStrategy: CollaborationStrategy, performanceMetrics: PerformanceMetrics, recommendations: string[]
+  improvements: AgentImprovement[];
+  collaborationStrategy: CollaborationStrategy;
+  performanceMetrics: PerformanceMetrics;
+  recommendations: string[]
 }
 
 export interface AgentConfiguration {
-  id: string, name: string, role: string, capabilities: string[]
+  id: string;
+  name: string;
+  role: string;
+  capabilities: string[];
   tools: string[]
   model?: string
   temperature?: number
@@ -17,62 +22,82 @@ export interface AgentConfiguration {
 }
 
 export interface RefinedAgent extends AgentConfiguration {
-  refinements: Refinement[]
-  collaborationRoles: CollaborationRole[]
+  refinements: Refinement[], collaborationRoles: CollaborationRole[]
   performanceProfile: PerformanceProfile, specializations: string[]
 }
 
 export interface Refinement {
   type: 'capability' | 'prompt' | 'tool' | 'parameter' | 'collaboration'
-  original: string, refined: string, rationale: string, impact: 'high' | 'medium' | 'low'
+  original: string;
+  refined: string;
+  rationale: string;
+  impact: 'high' | 'medium' | 'low'
 }
 
 export interface CollaborationRole {
-  withAgent: string, interactionType: 'provider' | 'consumer' | 'peer'
-  dataExchange: string[]
+  withAgent: string;
+  interactionType: 'provider' | 'consumer' | 'peer'
+  dataExchange: string[];
   protocol: string
 }
 
 export interface PerformanceProfile {
   speed: 'fast' | 'moderate' | 'slow'
-  accuracy: number // 0-100, resourceUsage: 'low' | 'medium' | 'high'
-  specialtyAreas: string[]
+  accuracy: number // 0-100;
+  resourceUsage: 'low' | 'medium' | 'high'
+  specialtyAreas: string[];
   weaknesses: string[]
 }
 
 export interface AgentImprovement {
-  agentId: string, improvementType: string, description: string, implementation: string, expectedBenefit: string
+  agentId: string;
+  improvementType: string;
+  description: string;
+  implementation: string;
+  expectedBenefit: string
 }
 
 export interface CollaborationStrategy {
-  orchestration: OrchestrationPattern, communicationFlow: CommunicationFlow[]
+  orchestration: OrchestrationPattern;
+  communicationFlow: CommunicationFlow[];
   sharedResources: SharedResource[]
   conflictResolution: ConflictResolution
 }
 
 export interface OrchestrationPattern {
   type: 'hierarchical' | 'peer-to-peer' | 'hub-spoke' | 'pipeline'
-  coordinator?: string, description: string, benefits: string[]
+  coordinator?: string;
+  description: string;
+  benefits: string[]
 }
 
 export interface CommunicationFlow {
-  from: string, to: string, dataType: string, frequency: 'continuous' | 'on-demand' | 'scheduled'
+  from: string;
+  to: string;
+  dataType: string;
+  frequency: 'continuous' | 'on-demand' | 'scheduled'
   protocol: string
 }
 
 export interface SharedResource {
-  name: string, type: 'memory' | 'artifact' | 'model' | 'tool'
+  name: string;
+  type: 'memory' | 'artifact' | 'model' | 'tool'
   accessPattern: 'read-only' | 'read-write' | 'exclusive'
   owners: string[]
 }
 
 export interface ConflictResolution {
-  strategy: string, priorityRules: string[]
+  strategy: string;
+  priorityRules: string[];
   escalationPath: string[]
 }
 
 export interface PerformanceMetrics {
-  overallEfficiency: number // 0-100, collaborationScore: number // 0-100, redundancyReduction: number // percentage, specialization: number // 0-100, scalability: string
+  overallEfficiency: number // 0-100;
+  collaborationScore: number // 0-100;
+  redundancyReduction: number // percentage;
+  specialization: number // 0-100;
+  scalability: string
 }
 
 export class AgentRefinerAgent extends Agent {
@@ -199,12 +224,11 @@ export class AgentRefinerAgent extends Agent {
   }
 
   private async parseInput(input: string): Promise<{
-    currentAgents: AgentConfiguration[]
-    requirements: string[]
+    currentAgents: AgentConfiguration[], requirements: string[]
     constraints: string[]
   }> {
     const parsePrompt = `Parse this input to extract current agent configurations and, requirements:
-
+,
 Input:
 "${input}"
 
@@ -231,7 +255,7 @@ Format as JSON with arrays for each category.`
     requirements: string[]
   ): Promise<any> {
     const analysisPrompt = `Analyze this team of AI, agents:
-
+,
 Agents:
 ${JSON.stringify(agents, null, 2)}
 
@@ -264,7 +288,7 @@ Format as detailed JSON analysis.`
 
     for (const agent of agents) {
       const profilePrompt = `Profile the performance characteristics of this, agent:
-
+,
 Agent: ${JSON.stringify(agent, null, 2)}
 
 Context from, analysis:

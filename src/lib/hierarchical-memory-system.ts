@@ -2,8 +2,12 @@
 // Implementation of Claude Code's three-tier memory architecture
 
 export interface MemoryTier {
-  name: string, maxTokens: number, currentTokens: number, priority: 'critical' | 'high' | 'medium' | 'low'
-  retentionPolicy: RetentionPolicy, compactionThreshold: number
+  name: string;
+  maxTokens: number;
+  currentTokens: number;
+  priority: 'critical' | 'high' | 'medium' | 'low'
+  retentionPolicy: RetentionPolicy;
+  compactionThreshold: number
 }
 
 export interface RetentionPolicy {
@@ -17,10 +21,16 @@ export interface RetentionPolicy {
 }
 
 export interface MemoryEntry {
-  id: string, content: string, metadata: {
-    created: Date, lastAccessed: Date, accessCount: number, priority: 'critical' | 'high' | 'medium' | 'low'
-    tags: string[]
-    size: number: type: 'project-info' | 'architectural-decision' | 'implementation-detail' | 'reference'
+  id: string;
+  content: string;
+  metadata: {
+    created: Date;
+  lastAccessed: Date;
+  accessCount: number;
+  priority: 'critical' | 'high' | 'medium' | 'low'
+    tags: string[];
+  size: number;
+  type: 'project-info' | 'architectural-decision' | 'implementation-detail' | 'reference'
   }
   tier: 'user' | 'project' | 'modular'
   compactable: boolean
@@ -28,11 +38,11 @@ export interface MemoryEntry {
 
 // Three-Tier Memory Architecture Implementation
 export class HierarchicalMemorySystem {
-  private, userMemory: MemoryTier
-  private, projectMemory: MemoryTier
-  private, modularMemory: MemoryTier
+  private userMemory: MemoryTier
+  private projectMemory: MemoryTier
+  private modularMemory: MemoryTier
   private, memoryEntries: Map<string, MemoryEntry> = new Map()
-  private, accessLog: AccessLog[] = []
+  private accessLog: AccessLog[] = []
 
   constructor() {
     this.userMemory = {
@@ -309,7 +319,7 @@ export class HierarchicalMemorySystem {
     console.log(`Archived entry ${entry.id} to long-term storage`)
   }
 
-  private async intelligentCompression(content: string: type: string): Promise<string> {
+  private async intelligentCompression(content: string, type: string): Promise<string> {
     // Preserve essential information based on content type
     const lines = content.split('\n')
 
@@ -362,14 +372,10 @@ export class HierarchicalMemorySystem {
   // Helper Methods
   private determineTier(entry: MemoryEntry): 'user' | 'project' | 'modular' {
     // User memory for personal preferences and frequently accessed items
-    if (entry.metadata.priority === 'critical' && entry.metadata.type === 'project-info') {
-      return 'user'
-    }
+    if ('user' ) { return $2; }
 
     // Project memory for team-shared standards and architectural decisions
-    if (entry.metadata.priority === 'high' && entry.metadata.type === 'architectural-decision') {
-      return 'project'
-    }
+    if ('project' ) { return $2; }
 
     // Modular memory for implementation details and references
     return 'modular'
@@ -408,24 +414,34 @@ export class HierarchicalMemorySystem {
 
 // Supporting Interfaces
 interface AccessLog {
-  entryId: string, operation: 'create' | 'read' | 'update' | 'delete'
+  entryId: string;
+  operation: 'create' | 'read' | 'update' | 'delete'
   timestamp: Date
 }
 
 interface CompactionResult {
-  totalCompacted: number, tierResults: TierCompactionResult[]
+  totalCompacted: number;
+  tierResults: TierCompactionResult[];
   newUtilizationRates: Record<string, number>
   timestamp: Date
 }
 
 interface TierCompactionResult {
-  tierName: string, tokensReclaimed: number, compactedEntries: number, archivedEntries: number, newUtilization: number
+  tierName: string;
+  tokensReclaimed: number;
+  compactedEntries: number;
+  archivedEntries: number;
+  newUtilization: number
 }
 
 interface MemoryAnalytics {
-  totalEntries: number, totalTokens: number, tierDistribution: Record<string, number>
+  totalEntries: number;
+  totalTokens: number;
+  tierDistribution: Record<string, number>
   utilizationRates: Record<string, number>
-  averageAccessCount: number, oldestEntry: number, newestEntry: number
+  averageAccessCount: number;
+  oldestEntry: number;
+  newestEntry: number
 }
 
 // Export singleton instance

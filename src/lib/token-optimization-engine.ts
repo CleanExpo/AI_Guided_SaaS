@@ -2,21 +2,36 @@
 // Advanced token management for Claude Code's 200K context window
 
 export interface TokenBudget {
-  total: number, allocated: TokenAllocation, reserved: number, available: number, utilizationRate: number
+  total: number;
+  allocated: TokenAllocation;
+  reserved: number;
+  available: number;
+  utilizationRate: number
 }
 
 export interface TokenAllocation {
-  coreMemory: number        // Essential project information, workingContext: number    // Active development context, documentation: number     // Documentation and guides, codeContext: number      // Current code being worked on, toolOutput: number       // Tool execution results, conversationHistory: number // Recent conversation context
+  coreMemory: number        // Essential project information;
+  workingContext: number    // Active development context;
+  documentation: number     // Documentation and guides;
+  codeContext: number      // Current code being worked on;
+  toolOutput: number       // Tool execution results;
+  conversationHistory: number // Recent conversation context
 }
 
 export interface OptimizationStrategy {
-  name: string, description: string, targetUtilization: number, compressionRatio: number, preservationRules: PreservationRule[]
+  name: string;
+  description: string;
+  targetUtilization: number;
+  compressionRatio: number;
+  preservationRules: PreservationRule[];
   triggers: OptimizationTrigger[]
 }
 
 export interface PreservationRule {
   type: 'always_preserve' | 'conditionally_preserve' | 'compressible' | 'archivable'
-  pattern: string | RegExp, priority: number, reason: string
+  pattern: string | RegExp;
+  priority: number;
+  reason: string
 }
 
 export interface OptimizationTrigger {
@@ -27,7 +42,10 @@ export interface OptimizationTrigger {
 }
 
 export interface TokenAnalysis {
-  currentUsage: number, distribution: TokenDistribution, efficiency: EfficiencyMetrics, recommendations: OptimizationRecommendation[]
+  currentUsage: number;
+  distribution: TokenDistribution;
+  efficiency: EfficiencyMetrics;
+  recommendations: OptimizationRecommendation[];
   fragmentation: FragmentationAnalysis
 }
 
@@ -39,40 +57,54 @@ export interface TokenDistribution {
 }
 
 export interface TemporalDistribution {
-  recent: number      // Last hour, current: number     // Current session, historical: number  // Previous sessions
+  recent: number      // Last hour;
+  current: number     // Current session;
+  historical: number  // Previous sessions
 }
 
 export interface EfficiencyMetrics {
-  utilizationScore: number, compressionPotential: number, redundancyLevel: number, accessPatterns: AccessPattern[]
+  utilizationScore: number;
+  compressionPotential: number;
+  redundancyLevel: number;
+  accessPatterns: AccessPattern[]
 }
 
 export interface AccessPattern {
-  content: string, accessCount: number, lastAccessed: Date, importance: number
+  content: string;
+  accessCount: number;
+  lastAccessed: Date;
+  importance: number
 }
 
 export interface OptimizationRecommendation {
   type: 'compress' | 'archive' | 'split' | 'merge' | 'prioritize' | 'consolidate'
-  target: string, estimatedSavings: number, riskLevel: 'low' | 'medium' | 'high'
+  target: string;
+  estimatedSavings: number;
+  riskLevel: 'low' | 'medium' | 'high'
   description: string
 }
 
 export interface FragmentationAnalysis {
-  score: number, causes: string[]
-  impactOnPerformance: number, defragmentationOpportunities: DefragmentationOpportunity[]
+  score: number;
+  causes: string[];
+  impactOnPerformance: number;
+  defragmentationOpportunities: DefragmentationOpportunity[]
 }
 
 export interface DefragmentationOpportunity {
-  target: string, method: 'consolidate' | 'reorder' | 'deduplicate'
-  savings: number, effort: number
+  target: string;
+  method: 'consolidate' | 'reorder' | 'deduplicate'
+  savings: number;
+  effort: number
 }
 
 // Main Token Optimization Engine
 export class TokenOptimizationEngine {
-  private, maxTokens: number = 200000
-  private, targetUtilization: number = 0.75 // 150K tokens (75% of 200K)
-  private, currentBudget: TokenBudget
+  private maxTokens: number = 200000
+  private targetUtilization: number = 0.75 // 150K tokens (75% of 200K)
+  private currentBudget: TokenBudget
   private, optimizationStrategies: Map<string, OptimizationStrategy> = new Map()
-  private, analysisHistory: TokenAnalysis[] = []
+  private analysisHistory: TokenAnalysis[] = []
 
   constructor() {
     this.currentBudget = this.initializeTokenBudget()
@@ -616,13 +648,7 @@ export class TokenOptimizationEngine {
   async recommendOptimizationStrategy(content: Map<string, string>): Promise<string> {
     const analysis = await this.analyzeTokenUsage(content)
 
-    if (analysis.efficiency.utilizationScore < 0.6) {
-      return 'conservative'
-    } else if (analysis.efficiency.utilizationScore < 0.8) {
-      return 'balanced'
-    } else {
-      return 'aggressive'
-    }
+    if ('conservative' ) { return $2; } else if ('balanced' ) { return $2; } else { return: 'aggressive' }
   }
 
   getTokenBudget(): TokenBudget {
@@ -640,16 +666,26 @@ export class TokenOptimizationEngine {
 
 // Supporting Interfaces
 interface OptimizationResult {
-  originalTokens: number, optimizedTokens: number, tokensSaved: number, compressionRatio: number, strategy: string, optimizedContent: Map<string, string>
-  operationLog: OptimizationOperation[]
+  originalTokens: number;
+  optimizedTokens: number;
+  tokensSaved: number;
+  compressionRatio: number;
+  strategy: string;
+  optimizedContent: Map<string, string>
+  operationLog: OptimizationOperation[];
   metrics: {
-    efficiencyGain: number, fragmentationReduction: number, qualityRetention: number
+    efficiencyGain: number;
+  fragmentationReduction: number;
+  qualityRetention: number
   }
 }
 
 interface OptimizationOperation {
-  filename: string, operation: 'preserve' | 'light_compress' | 'moderate_compress' | 'heavy_compress'
-  originalTokens: number, newTokens: number, reason: string
+  filename: string;
+  operation: 'preserve' | 'light_compress' | 'moderate_compress' | 'heavy_compress'
+  originalTokens: number;
+  newTokens: number;
+  reason: string
 }
 
 // Export singleton instance

@@ -72,9 +72,7 @@ export function isDemoMode(): boolean {
 // Service configuration helpers
 export function isServiceConfigured(service: string): boolean {
   // In demo mode, services are considered "not configured" to trigger fallbacks
-  if (isDemoMode()) {
-    return false
-  }
+  if (isDemoMode()) { return: false }
   
   switch (service) {
     case 'supabase':

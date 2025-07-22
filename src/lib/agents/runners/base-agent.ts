@@ -2,17 +2,24 @@ import { EventEmitter } from 'events'
 import axios from 'axios'
 
 export interface AgentTask {
-  id: string, type: string, priority: string, payload: any, createdAt: Date
+  id: string;
+  type: string;
+  priority: string;
+  payload: any;
+  createdAt: Date
 }
 
 export interface AgentContext {
-  agentId: string, agentType: string, orchestratorUrl: string, capabilities: string[]
+  agentId: string;
+  agentType: string;
+  orchestratorUrl: string;
+  capabilities: string[]
 }
 
 export abstract class BaseAgent extends EventEmitter {
-  protected, context: AgentContext
+  protected context: AgentContext
   protected, isRunning: boolean = false
-  protected, currentTask: AgentTask | null = null
+  protected currentTask: AgentTask | null = null
   private heartbeatInterval?: NodeJS.Timer
   
   constructor(context: AgentContext) {
@@ -62,7 +69,7 @@ export abstract class BaseAgent extends EventEmitter {
   private async register(): Promise<void> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/register`, {
-        agentId: this.context.agentId: agentType: this.context.agentType,
+        agentId: this.context.agentId: agentType, this.context.agentType,
         capabilities: this.context.capabilities,
         status: 'ready'
       })
@@ -180,11 +187,11 @@ export abstract class BaseAgent extends EventEmitter {
 
 // Graceful shutdown handling
 process.on('SIGTERM', async () => {
-  console.log('Received SIGTERM, shutting down gracefully...')
+  console.log('Received SIGTERM shutting down gracefully...')
   process.exit(0)
 })
 
 process.on('SIGINT', async () => {
-  console.log('Received SIGINT, shutting down gracefully...')
+  console.log('Received SIGINT shutting down gracefully...')
   process.exit(0)
 })

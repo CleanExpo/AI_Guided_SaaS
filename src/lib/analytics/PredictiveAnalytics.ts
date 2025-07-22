@@ -1,36 +1,49 @@
 import { EventEmitter } from 'events'
 
 export interface UserBehaviorPattern {
-  userId: string, patterns: {
-    errorFrequency: number, featureUsage: Record<string, number>
-    sessionDuration: number, clickPatterns: Array<{ element: string; count: number }>
+  userId: string;
+  patterns: {
+    errorFrequency: number;
+  featureUsage: Record<string, number>
+    sessionDuration: number;
+  clickPatterns: Array<{ element: string;
+  count: number }>
     navigationFlow: string[]
   }
-  anomalies: AnomalyDetection[]
-  riskScore: number, predictedIssues: PredictedIssue[]
+  anomalies: AnomalyDetection[], riskScore: number, predictedIssues: PredictedIssue[]
 }
 
 export interface AnomalyDetection {
   type: 'error_spike' | 'unusual_navigation' | 'performance_degradation' | 'usage_drop'
   severity: 'low' | 'medium' | 'high' | 'critical'
-  timestamp: Date, description: string, metrics: Record<string, number>
+  timestamp: Date;
+  description: string;
+  metrics: Record<string, number>
 }
 
 export interface PredictedIssue {
   type: 'churn_risk' | 'performance_issue' | 'feature_confusion' | 'bug_encounter'
-  probability: number, timeframe: string, impact: string, suggestedAction: string
+  probability: number;
+  timeframe: string;
+  impact: string;
+  suggestedAction: string
 }
 
 export interface SystemHealthMetrics {
-  errorRate: number, responseTime: number, throughput: number, resourceUsage: {
-    cpu: number, memory: number, disk: number
+  errorRate: number;
+  responseTime: number;
+  throughput: number;
+  resourceUsage: {
+    cpu: number;
+  memory: number;
+  disk: number
   }
   userSatisfaction: number
 }
 
 export class PredictiveAnalytics extends EventEmitter {
-  private, behaviorHistory: Map<string, UserBehaviorPattern[]> = new Map()
-  private, systemMetrics: SystemHealthMetrics[] = []
+  private behaviorHistory: Map<string, UserBehaviorPattern[]> = new Map()
+  private systemMetrics: SystemHealthMetrics[] = []
   private anomalyThresholds = {
     errorRate: 0.05,        // 5% error rate, responseTime: 1000,     // 1 second, sessionDuration: 300,   // 5 minutes minimum, clickRate: 100,         // clicks per minute, navigationDepth: 20     // pages visited
   }
@@ -266,7 +279,7 @@ export class PredictiveAnalytics extends EventEmitter {
   }
   
   private checkSystemHealth(metrics: SystemHealthMetrics) {
-    const alerts: Array<{ type: string; severity: string; message: string }> = []
+    const alerts: Array<{ type: string, severity: string; message: string }> = []
     
     if (metrics.errorRate > this.anomalyThresholds.errorRate) {
       alerts.push({

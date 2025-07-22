@@ -78,12 +78,10 @@ export default function CommunityPage() {
           <h1 className="text-4xl font-bold mb-4">Join Our Community</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Connect with thousands of developers building amazing applications
-            with AI
-          </p>
-        </div>
+            with AI</p>
 
         {/* Community Stats */}
-        <div className="grid grid-cols-2, md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {communityStats.map(stat => {
             const Icon = stat.icon;
             return (
@@ -92,20 +90,22 @@ export default function CommunityPage() {
                   <Icon className="h-8 w-8 text-primary mx-auto mb-2" />
                   <div className="text-2xl font-bold">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+                    {stat.label}</div>
+    );
+          }
+      )}
+    </div>
         </div>
+        </div>
+        </Card>
+        </CardContent>
+    );
 
         {/* Community Platforms */}
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-center mb-8">
-            Where to Find Us
-          </h2>
-          <div className="grid grid-cols-1, md:grid-cols-3 gap-8">
+            Where to Find Us</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {platforms.map(platform => {
               const Icon = platform.icon;
               return (
@@ -118,28 +118,27 @@ export default function CommunityPage() {
                     <CardTitle className="text-xl">{platform.name}</CardTitle>
                     <CardDescription>{platform.description}</CardDescription>
                     <Badge className={platform.color}>
-                      {platform.members} members
-                    </Badge>
-                  </CardHeader>
+                      {platform.members} members</Badge>
                   <CardContent>
                     <Button asChild className="w-full">
                       <Link href={platform.link}>
-                        Join Now
+                        Join Now</Link>
                         <ExternalLink className="ml-2 h-4 w-4" />
                       </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+    );
+            }
+      )}
+    </div>
         </div>
+        </CardHeader>
+        </CardContent>
+        </Button>
+    );
 
         {/* Featured Discussions */}
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-center mb-8">
-            Featured Discussions
-          </h2>
+            Featured Discussions</h2>
           <div className="space-y-4">
             {featuredPosts.map((post, index) => (
               <Card key={index} className="hover:shadow-md transition-shadow">
@@ -149,58 +148,46 @@ export default function CommunityPage() {
                       <div className="flex items-center space-x-3 mb-2">
                         <Badge variant="secondary">{post.category}</Badge>
                         <span className="text-sm text-muted-foreground">
-                          by {post.author}
-                        </span>
-                      </div>
+                          by {post.author}</span>
                       <h3 className="text-lg font-semibold mb-2">
-                        {post.title}
-                      </h3>
+                        {post.title}</h3>
                       <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                         <span>{post.replies} replies</span>
                         <span>{post.likes} likes</span>
                       </div>
-                    </div>
                     <Button variant="ghost" size="sm">
                       <MessageSquare className="h-4 w-4" />
                     </Button>
-                  </div>
-                </CardContent>
-              </Card>
             ))}
           </div>
-        </div>
 
         {/* Community Guidelines */}
         <div className="text-center bg-muted rounded-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">Community Guidelines</h2>
           <p className="text-muted-foreground mb-6">
-            Help us maintain a welcoming and productive environment for everyone
-          </p>
-          <div className="grid grid-cols-1, md:grid-cols-3 gap-4 text-sm">
+            Help us maintain a welcoming and productive environment for everyone</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div>
               <h3 className="font-semibold mb-2">Be Respectful</h3>
               <p className="text-muted-foreground">
-                Treat all members with kindness and respect
-              </p>
-            </div>
+                Treat all members with kindness and respect</p>
             <div>
               <h3 className="font-semibold mb-2">Stay On Topic</h3>
               <p className="text-muted-foreground">
-                Keep discussions relevant to development and AI
-              </p>
-            </div>
+                Keep discussions relevant to development and AI</p>
             <div>
               <h3 className="font-semibold mb-2">Help Others</h3>
               <p className="text-muted-foreground">
-                Share knowledge and support fellow developers
-              </p>
-            </div>
-          </div>
+                Share knowledge and support fellow developers</p>
           <Button asChild className="mt-6">
             <Link href="/community/guidelines">Read Full Guidelines</Link>
+          </div>
+          </Card>
+          </CardContent>
+          </div>
+          </div>
+          </div>
+          </div>
           </Button>
-        </div>
-      </div>
-    </div>
-  );
+      );
 }

@@ -1,0 +1,51 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit health checks..."
+
+# TypeScript check
+echo "📘 TypeScript check..."
+npx tsc --noEmit || {
+  echo "❌ TypeScript errors found. Please fix before committing."
+  echo "   Run: npm run fix:typescript"
+  exit 1
+}
+
+# ESLint check
+echo "📙 ESLint check..."
+npx eslint . --max-warnings=0 || {
+  echo "❌ ESLint errors found. Please fix before committing."
+  echo "   Run: npm run fix:eslint"
+  exit 1
+}
+
+# Check for console.log statements
+echo "🔎 Checking for console.log statements..."
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx|js|jsx)$')
+if [ ! -z "$FILES" ]; then
+  CONSOLE_LOGS=$(echo "$FILES" | xargs grep -l "console\.log" || true)
+  if [ ! -z "$CONSOLE_LOGS" ]; then
+    echo "⚠️  Warning: console.log found in:"
+    echo "$CONSOLE_LOGS"
+    echo "   Consider removing or using proper logging."
+  fi
+fi
+
+# MCP integrity check
+echo "🔧 Checking MCP integrity..."
+npm run verify:mcp || {
+  echo "❌ MCP module integrity check failed."
+  echo "   Run: npm run fix:mcp"
+  exit 1
+}
+
+# Tests (if configured)
+if [ -f "jest.config.js" ] || [ -f "vitest.config.ts" ]; then
+  echo "🧪 Running tests..."
+  npm test -- --passWithNoTests || {
+    echo "❌ Tests failing. Please fix before committing."
+    exit 1
+  }
+fi
+
+echo "✅ All pre-commit checks passed!"

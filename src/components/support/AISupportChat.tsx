@@ -24,18 +24,23 @@ import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSyste
 import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem'
 
 interface Message {
-  id: string, role: 'user' | 'assistant' | 'system'
-  content: string, timestamp: Date
+  id: string;
+  role: 'user' | 'assistant' | 'system'
+  content: string;
+  timestamp: Date
   metadata?: {
     suggestedDocs?: string[]
     suggestedTutorials?: string[]
-    codeBlocks?: Array<{ language: string; code: string }>
-    actionButtons?: Array<{ label: string; action: string; data?: any }>
+    codeBlocks?: Array<{ language: string;
+  code: string }>
+    actionButtons?: Array<{ label: string, action: string; data?: any }>
   }
 }
 
 interface AISupportChatProps {
-  documentationSystem: DynamicDocumentationSystem, tutorialSystem: InteractiveTutorialSystem, userId: string
+  documentationSystem: DynamicDocumentationSystem;
+  tutorialSystem: InteractiveTutorialSystem;
+  userId: string
   projectId?: string
 }
 
@@ -52,14 +57,15 @@ export function AISupportChat({
       id: '1',
       role: 'system',
       content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?',
+          </Message>
       timestamp: new Date()
     }
   ])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [showQuickActions, setShowQuickActions] = useState(true)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [showQuickActions, setShowQuickActions] = useState(true)</Message>
+  const messagesEndRef = useRef<HTMLDivElement>(null)</HTMLDivElement>
   const chatContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -67,9 +73,10 @@ export function AISupportChat({
   }, [messages])
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
-
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
+      )}
+    </div>
+    );
   const handleSendMessage = async () => {
     if (!input.trim() || isLoading) return
 
@@ -273,10 +280,10 @@ export function AISupportChat({
       <Button
         className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
         onClick={() => setIsOpen(true)}
-      >
+      ></Button>
         <MessageCircle className="h-6 w-6" />
       </Button>
-    )
+    );
   }
 
   return (
@@ -291,7 +298,7 @@ export function AISupportChat({
         "w-[400px] flex flex-col shadow-xl",
         isMinimized ? "h-14" : "h-full"
       )}>
-        {/* Header */}
+        {/* Header */}</Card>
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -301,15 +308,14 @@ export function AISupportChat({
               <h3 className="font-semibold text-sm">AI Support</h3>
               {!isMinimized && (
                 <p className="text-xs text-muted-foreground">Always here to help</p>
-              )}
-            </div>
-          </div>
+  );
+}
           <div className="flex gap-1">
             <Button
               size="sm"
               variant="ghost"
               onClick={() => setIsMinimized(!isMinimized)}
-            >
+            ></Button>
               <ChevronDown className={cn(
                 "h-4 w-4 transition-transform",
                 isMinimized && "rotate-180"
@@ -319,11 +325,9 @@ export function AISupportChat({
               size="sm"
               variant="ghost"
               onClick={() => setIsOpen(false)}
-            >
+            ></Button>
               <X className="h-4 w-4" />
             </Button>
-          </div>
-        </div>
 
         {!isMinimized && (
           <>
@@ -338,14 +342,10 @@ export function AISupportChat({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md, focus:outline-none, focus:ring-2, focus:ring-primary/20"
-                  />
-                </div>
+                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  /></input>
                 <Button size="sm" onClick={handleSearch}>
-                  Search
-                </Button>
-              </div>
-            </div>
+                  Search</Button>
 
             {/* Messages */}
             <ScrollArea className="flex-1 p-4">
@@ -362,12 +362,11 @@ export function AISupportChat({
                       "h-8 w-8 rounded-full flex items-center justify-center shrink-0",
                       message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
                     )}>
-                      {message.role === 'user' ? (
+                      {message.role === 'user' ? (</div>
                         <User className="h-4 w-4" />
-                      ) : (
+                      ) : (</User>
                         <Bot className="h-4 w-4" />
-                      )}
-                    </div>
+                      )}</Bot>
                     <div className={cn(
                       "flex-1 space-y-2",
                       message.role === 'user' && "flex flex-col items-end"
@@ -379,16 +378,13 @@ export function AISupportChat({
                           : "bg-muted"
                       )}>
                         <p className="whitespace-pre-wrap">{message.content}</p>
-                      </div>
                       
                       {/* Code blocks */}
                       {message.metadata?.codeBlocks?.map((block, index) => (
                         <div key={index} className="max-w-[85%]">
                           <pre className="bg-zinc-900 text-zinc-100 p-3 rounded-lg overflow-x-auto text-xs">
                             <code>{block.code}</code>
-                          </pre>
-                        </div>
-                      ))}
+                          </pre>))}
                       
                       {/* Suggested docs */}
                       {message.metadata?.suggestedDocs && message.metadata.suggestedDocs.length > 0 && (
@@ -399,14 +395,18 @@ export function AISupportChat({
                             return doc ? (
                               <button
                                 key={docId}
-                                onClick={() => handleActionButton('open-doc', { sectionId: docId })}
-                                className="text-xs text-primary, hover:underline block text-left"
+                                onClick={() => handleActionButton('open-doc', { sectionId: docId}
+      )}
+    </div>
+  );
+                                className="text-xs text-primary hover:underline block text-left"
                               >
-                                📄 {doc.title}
-                              </button>
+                                📄 {doc.title}</button>
                             ) : null
-                          })}
-                        </div>
+                          }
+      )}
+    </div>
+  );
                       )}
                       
                       {/* Action buttons */}
@@ -420,13 +420,11 @@ export function AISupportChat({
                               onClick={() => handleActionButton(button.action, button.data)}
                               className="text-xs"
                             >
-                              {button.label}
-                            </Button>
+                              {button.label}</Button>
                           ))}
                         </div>
                       )}
                     </div>
-                  </div>
                 ))}
                 
                 {isLoading && (
@@ -437,12 +435,10 @@ export function AISupportChat({
                     <div className="bg-muted rounded-lg px-3 py-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
                     </div>
-                  </div>
                 )}
                 
                 <div ref={messagesEndRef} />
               </div>
-            </ScrollArea>
 
             {/* Quick Actions */}
             {showQuickActions && messages.length === 1 && (
@@ -456,13 +452,12 @@ export function AISupportChat({
                       size="sm"
                       className="flex flex-col gap-1 h-auto py-2"
                       onClick={() => handleQuickAction(action.action)}
-                    >
+                    ></Button>
                       <action.icon className="h-4 w-4" />
                       <span className="text-xs">{action.label}</span>
                     </Button>
                   ))}
                 </div>
-              </div>
             )}
 
             {/* Input */}
@@ -475,34 +470,43 @@ export function AISupportChat({
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault()
                       handleSendMessage()
-                    }
+                   }
                   }}
                   placeholder="Ask me anything..."
                   className="min-h-[40px] max-h-[120px] resize-none"
                   rows={1}
-                />
+                /></Textarea>
                 <Button
                   onClick={handleSendMessage}
                   disabled={!input.trim() || isLoading}
                   size="sm"
                 >
-                  {isLoading ? (
+                  {isLoading ? (</Button>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
+                  ) : (</Loader2>
                     <Send className="h-4 w-4" />
-                  )}
-                </Button>
-              </div>
+                  )}</Send>
               <div className="flex items-center gap-1 mt-2">
                 <Sparkles className="h-3 w-3 text-primary" />
                 <p className="text-xs text-muted-foreground">
-                  AI-powered support with real-time documentation
-                </p>
-              </div>
-            </div>
+                  AI-powered support with real-time documentation</p>
           </>
         )}
       </Card>
-    </div>
-  )
+          </div>
+          </div>
+          </div>
+          </ScrollArea>
+          </div>
+          </div>
+      );
+</ScrollArea>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 }
+</HTMLDivElement>

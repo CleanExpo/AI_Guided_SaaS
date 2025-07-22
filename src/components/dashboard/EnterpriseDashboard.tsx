@@ -42,16 +42,21 @@ export default function EnterpriseDashboard({
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('30d');
   const [platformMetrics, setPlatformMetrics] =
+        </PlatformMetrics>
     useState<PlatformMetrics | null>(null);
+      </UserMetrics>
   const [userMetrics, setUserMetrics] = useState<UserMetrics | null>(null);
   const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(
     null
+      </RevenueMetrics>
   );
   const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(
     null
+      </SystemMetrics>
   );
   const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(
     null
+      </ContentMetrics>
   );
   const [testMode, setTestMode] = useState(false);
 
@@ -108,52 +113,44 @@ export default function EnterpriseDashboard({
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading enterprise dashboard...</p>
+    
         </div>
-      </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex flex-col space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold">Enterprise Dashboard</h1>
             <p className="text-gray-600">
-              Comprehensive analytics and system monitoring
-            </p>
-          </div>
+              Comprehensive analytics and system monitoring</p>
           <div className="flex items-center space-x-2">
             <select
               value={timeRange}
               onChange={e => setTimeRange(e.target.value)}
               className="px-3 py-2 border rounded-md"
-            >
+            ></select>
               <option value="7d">Last 7 days</option>
               <option value="30d">Last 30 days</option>
               <option value="90d">Last 90 days</option>
-            </select>
             <Button onClick={loadDashboardData} variant="outline">
-              Refresh
-            </Button>
-          </div>
-        </div>
+              Refresh</Button>
 
         {testMode && (
           <Alert>
             <AlertDescription>
               Enterprise dashboard is running in demo mode with mock data. In
               production, this would display real-time analytics from your
-              database and monitoring systems.
-            </AlertDescription>
-          </Alert>
+              database and monitoring systems.</AlertDescription>
         )}
       </div>
 
       {/* Platform Overview */}
       {platformMetrics && (
-        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Users</CardTitle>
@@ -161,66 +158,46 @@ export default function EnterpriseDashboard({
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatNumber(platformMetrics.totalUsers)}
-              </div>
+                {formatNumber(platformMetrics.totalUsers)}</div>
               <p className="text-xs text-muted-foreground">
-                {formatNumber(platformMetrics.activeUsers)} active this month
-              </p>
-            </CardContent>
-          </Card>
+                {formatNumber(platformMetrics.activeUsers)} active this month</p>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Revenue
-              </CardTitle>
+                Total Revenue</CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatCurrency(platformMetrics.totalRevenue)}
-              </div>
+                {formatCurrency(platformMetrics.totalRevenue)}</div>
               <p className="text-xs text-muted-foreground">
-                {formatCurrency(platformMetrics.monthlyRevenue)} this month
-              </p>
-            </CardContent>
-          </Card>
+                {formatCurrency(platformMetrics.monthlyRevenue)} this month</p>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Projects Created
-              </CardTitle>
+                Projects Created</CardTitle>
               <Package className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatNumber(platformMetrics.totalProjects)}
-              </div>
+                {formatNumber(platformMetrics.totalProjects)}</div>
               <p className="text-xs text-muted-foreground">
-                AI-generated projects
-              </p>
-            </CardContent>
-          </Card>
+                AI-generated projects</p>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Conversion Rate
-              </CardTitle>
+                Conversion Rate</CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatPercentage(platformMetrics.conversionRate)}
-              </div>
+                {formatPercentage(platformMetrics.conversionRate)}</div>
               <p className="text-xs text-muted-foreground">
-                Free to paid conversion
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+                Free to paid conversion</p>
+          </Card>)}
 
       {/* System Health */}
       {systemMetrics && (
@@ -231,11 +208,9 @@ export default function EnterpriseDashboard({
               <span>System Health</span>
             </CardTitle>
             <CardDescription>
-              Real-time system performance and health metrics
-            </CardDescription>
-          </CardHeader>
+              Real-time system performance and health metrics</CardDescription>
           <CardContent>
-            <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Uptime</span>
@@ -243,9 +218,7 @@ export default function EnterpriseDashboard({
                     variant="secondary"
                     className="bg-green-100 text-green-800"
                   >
-                    {formatPercentage(systemMetrics.uptime)}
-                  </Badge>
-                </div>
+                    {formatPercentage(systemMetrics.uptime)}</Badge>
                 <Progress value={systemMetrics.uptime} className="h-2" />
               </div>
 
@@ -253,9 +226,7 @@ export default function EnterpriseDashboard({
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Cache Hit Rate</span>
                   <Badge variant="secondary">
-                    {formatPercentage(systemMetrics.cacheHitRate)}
-                  </Badge>
-                </div>
+                    {formatPercentage(systemMetrics.cacheHitRate)}</Badge>
                 <Progress value={systemMetrics.cacheHitRate} className="h-2" />
               </div>
 
@@ -266,9 +237,7 @@ export default function EnterpriseDashboard({
                     variant="secondary"
                     className="bg-yellow-100 text-yellow-800"
                   >
-                    {formatPercentage(systemMetrics.errorRate * 100)}
-                  </Badge>
-                </div>
+                    {formatPercentage(systemMetrics.errorRate * 100)}</Badge>
                 <Progress
                   value={systemMetrics.errorRate * 100}
                   className="h-2"
@@ -279,109 +248,74 @@ export default function EnterpriseDashboard({
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Response Time</span>
                   <Badge variant="secondary">
-                    {systemMetrics.averageResponseTime}ms
-                  </Badge>
-                </div>
+                    {systemMetrics.averageResponseTime}ms</Badge>
                 <div className="text-xs text-gray-500">
-                  Average API response
-                </div>
-              </div>
-            </div>
+                  Average API response</div>
 
-            <div className="mt-6 grid grid-cols-1, md:grid-cols-3 gap-4">
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-2">
                 <Server className="h-4 w-4 text-blue-500" />
                 <span className="text-sm">
-                  Active, Connections: {systemMetrics.activeConnections}
-                </span>
-              </div>
+                  Active, Connections: {systemMetrics.activeConnections}</span>
               <div className="flex items-center space-x-2">
                 <Database className="h-4 w-4 text-green-500" />
                 <span className="text-sm">
-                  DB, Connections: {systemMetrics.databaseConnections}
-                </span>
-              </div>
+                  DB, Connections: {systemMetrics.databaseConnections}</span>
               <div className="flex items-center space-x-2">
                 <Zap className="h-4 w-4 text-brand-primary-500" />
                 <span className="text-sm">
-                  Storage: {systemMetrics.storageUsed}GB used
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  Storage: {systemMetrics.storageUsed}GB used</span>
       )}
 
       {/* Revenue Analytics */}
       {revenueMetrics && (
-        <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <DollarSign className="h-5 w-5" />
                 <span>Revenue Breakdown</span>
               </CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium">
-                    Monthly Recurring Revenue
-                  </span>
+                    Monthly Recurring Revenue</span>
                   <span className="text-lg font-bold">
-                    {formatCurrency(revenueMetrics.monthlyRecurringRevenue)}
-                  </span>
-                </div>
+                    {formatCurrency(revenueMetrics.monthlyRecurringRevenue)}</span>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium">
-                    Average Revenue Per User
-                  </span>
+                    Average Revenue Per User</span>
                   <span className="text-lg font-bold">
-                    {formatCurrency(revenueMetrics.averageRevenuePerUser)}
-                  </span>
-                </div>
+                    {formatCurrency(revenueMetrics.averageRevenuePerUser)}</span>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium">
-                    Customer Lifetime Value
-                  </span>
+                    Customer Lifetime Value</span>
                   <span className="text-lg font-bold">
-                    {formatCurrency(revenueMetrics.lifetimeValue)}
-                  </span>
-                </div>
+                    {formatCurrency(revenueMetrics.lifetimeValue)}</span>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium">Churn Rate</span>
                   <Badge
                     variant="secondary"
                     className="bg-red-100 text-red-800"
                   >
-                    {formatPercentage(revenueMetrics.churnRate)}
-                  </Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                    {formatPercentage(revenueMetrics.churnRate)}</Badge>
 
           <Card>
             <CardHeader>
               <CardTitle>Subscription Tiers</CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {revenueMetrics.subscriptionBreakdown.map(tier => (
+                {revenueMetrics.subscriptionBreakdown.map(tier => (</div>
                   <div key={tier.tier} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium capitalize">
-                        {tier.tier}
-                      </span>
+                        {tier.tier}</span>
                       <div className="text-right">
                         <div className="text-sm font-bold">
-                          {formatNumber(tier.count)} users
-                        </div>
+                          {formatNumber(tier.count)} users</div>
                         <div className="text-xs text-gray-500">
-                          {formatCurrency(tier.revenue)}
-                        </div>
-                      </div>
-                    </div>
+                          {formatCurrency(tier.revenue)}</div>
                     <Progress
                       value={
                         (tier.count /
@@ -392,25 +326,18 @@ export default function EnterpriseDashboard({
                         100
                       }
                       className="h-2"
-                    />
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+                    /></Progress>))}
+          </Card>)}
 
       {/* User Analytics */}
       {userMetrics && (
-        <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Users className="h-5 w-5" />
                 <span>User Retention</span>
               </CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -420,9 +347,7 @@ export default function EnterpriseDashboard({
                       variant="secondary"
                       className="bg-green-100 text-green-800"
                     >
-                      {formatPercentage(userMetrics.retention.day1)}
-                    </Badge>
-                  </div>
+                      {formatPercentage(userMetrics.retention.day1)}</Badge>
                   <Progress
                     value={userMetrics.retention.day1}
                     className="h-2"
@@ -436,9 +361,7 @@ export default function EnterpriseDashboard({
                       variant="secondary"
                       className="bg-blue-100 text-blue-800"
                     >
-                      {formatPercentage(userMetrics.retention.day7)}
-                    </Badge>
-                  </div>
+                      {formatPercentage(userMetrics.retention.day7)}</Badge>
                   <Progress
                     value={userMetrics.retention.day7}
                     className="h-2"
@@ -448,31 +371,24 @@ export default function EnterpriseDashboard({
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium">
-                      Day 30 Retention
-                    </span>
+                      Day 30 Retention</span>
                     <Badge
                       variant="secondary"
                       className="bg-brand-primary-100 text-brand-primary-800"
                     >
-                      {formatPercentage(userMetrics.retention.day30)}
-                    </Badge>
-                  </div>
+                      {formatPercentage(userMetrics.retention.day30)}</Badge>
                   <Progress
                     value={userMetrics.retention.day30}
                     className="h-2"
                   />
                 </div>
-              </div>
-            </CardContent>
-          </Card>
 
           <Card>
             <CardHeader>
               <CardTitle>Top Countries</CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {userMetrics.topCountries.slice(0, 5).map(country => (
+                {userMetrics.topCountries.slice(0, 5).map(country => (</div>
                   <div
                     key={country.country}
                     className="flex items-center justify-between"
@@ -480,13 +396,10 @@ export default function EnterpriseDashboard({
                     <div className="flex items-center space-x-2">
                       <Globe className="h-4 w-4 text-gray-400" />
                       <span className="text-sm font-medium">
-                        {country.country}
-                      </span>
-                    </div>
+                        {country.country}</span>
                     <div className="text-right">
                       <div className="text-sm font-bold">
-                        {formatNumber(country.users)}
-                      </div>
+                        {formatNumber(country.users)}</div>
                       <div className="text-xs text-gray-500">
                         {formatPercentage(
                           (country.users /
@@ -495,73 +408,52 @@ export default function EnterpriseDashboard({
                               0
                             )) *
                             100
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                        )}</div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+          </Card>)}
 
       {/* Content Analytics */}
       {contentMetrics && (
-        <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Package className="h-5 w-5" />
                 <span>Template Marketplace</span>
               </CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {formatNumber(contentMetrics.totalTemplates)}
-                  </div>
+                    {formatNumber(contentMetrics.totalTemplates)}</div>
                   <div className="text-xs text-gray-500">Total Templates</div>
-                </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {formatNumber(contentMetrics.totalDownloads)}
-                  </div>
+                    {formatNumber(contentMetrics.totalDownloads)}</div>
                   <div className="text-xs text-gray-500">Total Downloads</div>
-                </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {contentMetrics.pendingReviews}
-                  </div>
+                    {contentMetrics.pendingReviews}</div>
                   <div className="text-xs text-gray-500">Pending Reviews</div>
-                </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">
-                    {contentMetrics.averageRating}
-                  </div>
+                    {contentMetrics.averageRating}</div>
                   <div className="text-xs text-gray-500">Average Rating</div>
-                </div>
-              </div>
             </CardContent>
-          </Card>
 
           <Card>
             <CardHeader>
               <CardTitle>Popular Frameworks</CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {contentMetrics.topFrameworks.slice(0, 5).map(framework => (
+                {contentMetrics.topFrameworks.slice(0, 5).map(framework => (</div>
                   <div key={framework.framework} className="space-y-1">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium capitalize">
-                        {framework.framework}
-                      </span>
+                        {framework.framework}</span>
                       <span className="text-sm font-bold">
-                        {framework.count}
-                      </span>
-                    </div>
+                        {framework.count}</span>
                     <Progress
                       value={
                         (framework.count /
@@ -572,14 +464,8 @@ export default function EnterpriseDashboard({
                         100
                       }
                       className="h-2"
-                    />
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+                    /></Progress>))}
+          </Card>)}
 
       {/* Admin Actions */}
       {userRole === 'admin' && (
@@ -590,27 +476,157 @@ export default function EnterpriseDashboard({
               <span>Admin Actions</span>
             </CardTitle>
             <CardDescription>
-              Administrative tools and system management
-            </CardDescription>
-          </CardHeader>
+              Administrative tools and system management</CardDescription>
           <CardContent>
-            <div className="grid grid-cols-1, md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button variant="outline" className="justify-start">
                 <Users className="h-4 w-4 mr-2" />
-                Manage Users
-              </Button>
+                Manage Users</Users>
               <Button variant="outline" className="justify-start">
                 <Package className="h-4 w-4 mr-2" />
-                Review Templates
-              </Button>
+                Review Templates</Package>
               <Button variant="outline" className="justify-start">
                 <BarChart3 className="h-4 w-4 mr-2" />
-                Export Analytics
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                Export Analytics</BarChart3>
       )}
+    </div>
+    );
+</Button>
+</Button>
+</Button>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</CardContent>
+</Card>
+</CardContent>
+</Card>
+</CardContent>
+</Card>
+</CardContent>
+</Card>
+</div>
+</Alert>
+</div>
+</div>
+</div>
+</div>
+</div>
+}
+
+    </Button>
+    </Button>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </CardContent>
+    </Card>
+    </CardContent>
+    </Card>
+    </CardContent>
+    </Card>
+    </CardContent>
+    </Card>
+    </div>
+    </Alert>
+    </div>
     </div>
   );
 }
+</UserMetrics>
+</PlatformMetrics>

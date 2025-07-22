@@ -25,12 +25,15 @@ type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other'
 type FeedbackSentiment = 'positive' | 'negative' | 'neutral'
 
 export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetProps) {
+      </string>
   const [isOpen, setIsOpen] = useState(false)
-  const [feedback, setFeedback] = useState('')
-  const [type, setType] = useState<FeedbackType>('other')
+  const [feedback, setFeedback] = useState('')</string>
+  const [type, setType] = useState<FeedbackType>('other')</FeedbackType>
+      </FeedbackSentiment>
   const [sentiment, setSentiment] = useState<FeedbackSentiment>('neutral')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showThankYou, setShowThankYou] = useState(false)
+  const [showThankYou, setShowThankYou] = useState(false)</FeedbackSentiment>
+      </any>
   const [recentError, setRecentError] = useState<any>(null)
 
   // Capture errors for context
@@ -41,9 +44,10 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
         source: event.filename,
         line: event.lineno,
         timestamp: new Date().toISOString()
-      })
-    }
-
+      }
+      )}
+    </div>
+  );
     window.addEventListener('error', handleError)
     return () => window.removeEventListener('error', handleError)
   }, [])
@@ -121,69 +125,57 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
     <>
       {/* Floating feedback button */}
       <div className="fixed bottom-6 right-6 z-50">
-        {!isOpen && (
+        {!isOpen && (</div>
           <div className="flex flex-col gap-2 items-end">
-            {showThankYou && (
+            {showThankYou && (</div>
               <div className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in">
-                Thank you for your feedback!
-              </div>
+                Thank you for your feedback!</div>
             )}
             
             {/* Quick feedback buttons */}
-            <div className="flex gap-2">
+            <div className="flex gap-2"></div>
               <Button
                 size="sm"
                 variant="outline"
                 className="bg-white shadow-md"
                 onClick={() => handleQuickFeedback('positive')}
-              >
-                <ThumbsUp className="h-4 w-4" />
-              </Button>
+              ></Button>
+                <ThumbsUp className="h-4 w-4" /></ThumbsUp>
               <Button
                 size="sm"
                 variant="outline"
                 className="bg-white shadow-md"
                 onClick={() => handleQuickFeedback('negative')}
-              >
-                <ThumbsDown className="h-4 w-4" />
-              </Button>
+              ></Button>
+                <ThumbsDown className="h-4 w-4" /></ThumbsDown>
               <Button
                 size="sm"
                 className="shadow-lg"
                 onClick={() => setIsOpen(true)}
-              >
+              ></Button>
                 <MessageSquare className="h-4 w-4 mr-2" />
-                Feedback
-              </Button>
-            </div>
-          </div>
-        )}
+                Feedback</MessageSquare>
+              </Button>)}
 
         {/* Feedback form */}
         {isOpen && (
-          <Card className="w-96 p-4 shadow-xl animate-slide-up">
-            <div className="flex justify-between items-center mb-4">
+          <Card className="w-96 p-4 shadow-xl animate-slide-up"></Card>
+            <div className="flex justify-between items-center mb-4"></div>
               <h3 className="font-semibold text-lg">Send Feedback</h3>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={() => setIsOpen(false)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
+              ></Button>
+                <X className="h-4 w-4" /></X>
 
             {showThankYou ? (
-              <div className="text-center py-8">
-                <div className="text-green-500 mb-2">
-                  <ThumbsUp className="h-12 w-12 mx-auto" />
-                </div>
+              <div className="text-center py-8"></div>
+                <div className="text-green-500 mb-2"></div>
+                  <ThumbsUp className="h-12 w-12 mx-auto" /></ThumbsUp>
                 <p className="font-medium">Thank you!</p>
                 <p className="text-sm text-muted-foreground">
-                  Your feedback helps us improve.
-                </p>
-              </div>
-            ) : (
+                  Your feedback helps us improve.</p>) : (
               <>
                 {/* Feedback type selector */}
                 <div className="flex gap-2 mb-4">
@@ -192,44 +184,39 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                     { value: 'feature', label: '✨ Feature' },
                     { value: 'improvement', label: '💡 Improvement' },
                     { value: 'praise', label: '🎉 Praise' }
-                  ].map((option) => (
+                  ].map((option) => (</div>
                     <Button
                       key={option.value}
                       size="sm"
                       variant={type === option.value ? 'default' : 'outline'}
                       onClick={() => setType(option.value as FeedbackType)}
                     >
-                      {option.label}
-                    </Button>
+                      {option.label}</Button>
                   ))}
                 </div>
 
                 {/* Sentiment selector */}
-                <div className="flex gap-2 mb-4">
+                <div className="flex gap-2 mb-4"></div>
                   <Button
                     size="sm"
                     variant={sentiment === 'negative' ? 'destructive' : 'outline'}
                     onClick={() => setSentiment('negative')}
-                  >
+                  ></Button>
                     <ThumbsDown className="h-4 w-4 mr-1" />
-                    Negative
-                  </Button>
+                    Negative</ThumbsDown>
                   <Button
                     size="sm"
                     variant={sentiment === 'neutral' ? 'secondary' : 'outline'}
                     onClick={() => setSentiment('neutral')}
                   >
-                    Neutral
-                  </Button>
+                    Neutral</Button>
                   <Button
                     size="sm"
                     variant={sentiment === 'positive' ? 'default' : 'outline'}
                     onClick={() => setSentiment('positive')}
-                  >
+                  ></Button>
                     <ThumbsUp className="h-4 w-4 mr-1" />
-                    Positive
-                  </Button>
-                </div>
+                    Positive</ThumbsUp>
 
                 {/* Feedback text */}
                 <Textarea
@@ -241,12 +228,10 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                 />
 
                 {/* Context info */}
-                {(recentError || type === 'bug') && (
-                  <div className="mb-4 p-3 bg-yellow-50 rounded-lg text-sm">
+                {(recentError || type === 'bug') && (</Textarea>
+                  <div className="mb-4 p-3 bg-yellow-50 rounded-lg text-sm"></div>
                     <AlertCircle className="h-4 w-4 text-yellow-600 inline mr-2" />
-                    We'll include technical details to help diagnose the issue.
-                  </div>
-                )}
+                    We'll include technical details to help diagnose the issue.</AlertCircle>)}
 
                 {/* Submit button */}
                 <Button
@@ -254,15 +239,15 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                   onClick={handleSubmit}
                   disabled={!feedback.trim() || isSubmitting}
                 >
-                  {isSubmitting ? (
+                  {isSubmitting ? (</Button>
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Sending...
+                      Sending...</Loader2>
                     </>
                   ) : (
                     <>
                       <Send className="h-4 w-4 mr-2" />
-                      Send Feedback
+                      Send Feedback</Send>
                     </>
                   )}
                 </Button>
@@ -275,11 +260,11 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
       <style jsx>{`
         @keyframes slide-up {
           from {
-            transform: translateY(100%);
+            transform: translateY(100%),
             opacity: 0;
           }
           to {
-            transform: translateY(0);
+            transform: translateY(0),
             opacity: 1;
           }
         }
@@ -299,8 +284,9 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
 
         .animate-fade-in {
           animation: fade-in 0.3s ease-out;
-        }
+        }</style>
       `}</style>
     </>
   )
 }
+</any>

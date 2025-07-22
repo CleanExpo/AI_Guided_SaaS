@@ -274,18 +274,18 @@ return [{
   <title>Test Report - {{ $json.projectId }}</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
-    .header { background: #28a745; color: white; padding: 20px; border-radius: 5px; }
+    .header { background: #28a745, color: white; padding: 20px; border-radius: 5px; }
     .failed { background: #dc3545; }
-    .summary { display: flex; gap: 20px; margin: 20px 0; }
-    .metric { background: #f8f9fa; padding: 15px; border-radius: 5px; flex: 1; }
+    .summary { display: flex, gap: 20px; margin: 20px 0; }
+    .metric { background: #f8f9fa, padding: 15px; border-radius: 5px; flex: 1; }
     .metric h3 { margin: 0 0 10px 0; }
-    .suite { margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 5px; }
+    .suite { margin: 20px 0, padding: 15px; background: #f8f9fa; border-radius: 5px; }
     table { width: 100%; border-collapse: collapse; margin: 10px 0; }
     th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
-    .coverage { display: flex; gap: 10px; margin: 10px 0; }
+    .coverage { display: flex, gap: 10px; margin: 10px 0; }
     .coverage-item { flex: 1; }
-    .bar { background: #e0e0e0; height: 20px; border-radius: 3px; overflow: hidden; }
-    .bar-fill { background: #28a745; height: 100%; }
+    .bar { background: #e0e0e0, height: 20px; border-radius: 3px; overflow: hidden; }
+    .bar-fill { background: #28a745, height: 100%; }
   </style>
 </head>
 <body>
@@ -311,29 +311,22 @@ return [{
       <h3>Pass Rate</h3>
       <h2>{{ $json.summary.passRate }}</h2>
     </div>
-  </div>
 
   <div class="suite">
     <h2>Code Coverage</h2>
     <div class="coverage">
       <div class="coverage-item">
         <div>Lines: {{ $json.coverage.lines }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.lines }}%"></div></div>
-      </div>
+        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.lines }}%"></div>
       <div class="coverage-item">
         <div>Statements: {{ $json.coverage.statements }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.statements }}%"></div></div>
-      </div>
+        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.statements }}%"></div>
       <div class="coverage-item">
         <div>Functions: {{ $json.coverage.functions }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.functions }}%"></div></div>
-      </div>
+        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.functions }}%"></div>
       <div class="coverage-item">
         <div>Branches: {{ $json.coverage.branches }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.branches }}%"></div></div>
-      </div>
-    </div>
-  </div>
+        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.branches }}%"></div>
 
   <div class="suite">
     <h2>Test Suites</h2>
@@ -389,7 +382,7 @@ return [{
         bodyParametersJson: `{{
           JSON.stringify({
             projectId: $node["Aggregate Results"].json.projectId,
-            runId: $node["Aggregate Results"].json.runId: type: 'test-report',
+            runId: $node["Aggregate Results"].json.runId: type, 'test-report',
             format: 'html',
             content: $json.html
           })

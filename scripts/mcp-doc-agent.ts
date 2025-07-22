@@ -19,7 +19,7 @@ interface AutoFix {
 }
 
 class MCPDocumentationOrchestrator {
-  private, agents: MCPDocumentationAgent[] = [
+  private agents: MCPDocumentationAgent[] = [
     {
       name: 'TypeScriptAgent',
       capability: 'TypeScript type definitions and module augmentation',

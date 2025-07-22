@@ -91,7 +91,9 @@ const claudeCommands = [
   { command: '/docs:status', status: 'pending', tokens: '+500' }];
 
 export default function ShowcaseLandingPage() {
+      </string>
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
+      </string>
   const [activeDemo, setActiveDemo] = useState<string>('claude-dashboard');
   const [isPlaying, setIsPlaying] = useState(true);
   const [memoryUsage, setMemoryUsage] = useState(42);
@@ -113,8 +115,8 @@ export default function ShowcaseLandingPage() {
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  const renderPersonaShowcase = () => (
-    <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+  const renderPersonaShowcase = () => (</string>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const Icon = persona.icon;
         return (
@@ -130,8 +132,8 @@ export default function ShowcaseLandingPage() {
               setSelectedPersona(
                 selectedPersona === persona.id ? null : persona.id
               )
-            }
-          >
+           }
+          ></motion>
             <Card
               className={`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}
             >
@@ -143,12 +145,10 @@ export default function ShowcaseLandingPage() {
                 </div>
                 <CardTitle className="text-white">{persona.name}</CardTitle>
                 <CardDescription className="text-white/80">
-                  {persona.description}
-                </CardDescription>
-              </CardHeader>
+                  {persona.description}</CardDescription>
               <CardContent>
                 <AnimatePresence>
-                  {selectedPersona === persona.id && (
+                  {selectedPersona === persona.id && (</AnimatePresence>
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
@@ -159,25 +159,25 @@ export default function ShowcaseLandingPage() {
                         variant="secondary"
                         className="w-full justify-center"
                       >
-                        Active Persona
-                      </Badge>
+                        Active Persona</Badge>
                       <Button size="sm" className="w-full" asChild>
                         <Link href="/auth/signin">
-                          Start with {persona.name}
+                          Start with {persona.name}</Link>
                           <ArrowRight className="ml-2 h-3 w-3" />
                         </Link>
-                      </Button>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </CardContent>
-            </Card>
           </motion.div>
         );
-      })}
+      }
+      )}
     </div>
-  );
-
+        </CardHeader>
+        </CardContent>
+        </Button>
+    );
+      );
   const renderClaudeDashboard = () => (
     <Card className="glass border-0">
       <CardHeader>
@@ -185,36 +185,29 @@ export default function ShowcaseLandingPage() {
           <div className="flex items-center gap-2">
             <Brain className="w-5 h-5 text-blue-400" />
             <CardTitle className="text-white">
-              Claude Code Integration
-            </CardTitle>
-          </div>
+              Claude Code Integration</CardTitle>
           <div className="flex items-center gap-2">
             <Button
               size="sm"
               variant="ghost"
               onClick={() => setIsPlaying(!isPlaying)}
-              className="text-white, hover:bg-white/10"
+              className="text-white hover:bg-white/10"
             >
-              {isPlaying ? (
+              {isPlaying ? (</Button>
                 <Pause className="w-4 h-4" />
-              ) : (
+              ) : (</Pause>
                 <Play className="w-4 h-4" />
-              )}
-            </Button>
+              )}</Play>
             <Button
               size="sm"
               variant="ghost"
               onClick={() => setMemoryUsage(42)}
-              className="text-white, hover:bg-white/10"
-            >
+              className="text-white hover:bg-white/10"
+            ></Button>
               <RefreshCw className="w-4 h-4" />
             </Button>
-          </div>
-        </div>
         <CardDescription className="text-white/80">
-          Live AI-powered development with intelligent memory optimization
-        </CardDescription>
-      </CardHeader>
+          Live AI-powered development with intelligent memory optimization</CardDescription>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -231,7 +224,6 @@ export default function ShowcaseLandingPage() {
             </div>
             <Progress value={78} className="h-2" />
           </div>
-        </div>
 
         <div className="space-y-2">
           <h4 className="text-sm font-medium text-white/90">Active Commands</h4>
@@ -258,42 +250,43 @@ export default function ShowcaseLandingPage() {
                   }`}
                 />
                 <span className="font-mono text-sm text-white">
-                  {cmd.command}
-                </span>
-              </div>
+                  {cmd.command}</span>
               <Badge variant="outline" className="text-xs">
-                {cmd.tokens}
-              </Badge>
+                {cmd.tokens}</Badge>
             </motion.div>
           ))}
         </div>
-      </CardContent>
-    </Card>
-  );
-
+        </Card>
+        </CardHeader>
+        </div>
+        </div>
+        </CardContent>
+        </div>
+    );
   const renderUIBuilder = () => (
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Wrench className="w-5 h-5 text-brand-primary-400" />
           <CardTitle className="text-white">Visual UI Builder</CardTitle>
-        </div>
         <CardDescription className="text-white/80">
-          Drag-and-drop interface with real-time preview
-        </CardDescription>
-      </CardHeader>
+          Drag-and-drop interface with real-time preview</CardDescription>
       <CardContent>
         <div className="grid grid-cols-3 gap-2 mb-4">
           {['Button', 'Card', 'Input', 'Modal', 'Chart', 'Table'].map(
-            component => (
+            component => (</div>
               <motion.div
                 key={component}
-                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer, hover:bg-white/20 transition-colors"
+                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer hover:bg-white/20 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {component}
+                {component}</motion>
               </motion.div>
+                </Card>
+                </CardHeader>
+                </div>
+                </CardContent>
             )
           )}
         </div>
@@ -301,34 +294,24 @@ export default function ShowcaseLandingPage() {
           <div className="text-center text-white/60">
             <Palette className="w-8 h-8 mx-auto mb-2" />
             <p className="text-sm">Drop components here</p>
-          </div>
         </div>
-      </CardContent>
-    </Card>
-  );
-
+    );
   const renderAnalytics = () => (
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-green-400" />
           <CardTitle className="text-white">Analytics Dashboard</CardTitle>
-        </div>
         <CardDescription className="text-white/80">
-          Real-time performance monitoring
-        </CardDescription>
-      </CardHeader>
+          Real-time performance monitoring</CardDescription>
       <CardContent>
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-white">12</div>
             <div className="text-sm text-white/60">Active Projects</div>
-          </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-white">98%</div>
             <div className="text-sm text-white/60">System Health</div>
-          </div>
-        </div>
         <div className="space-y-2">
           {['API Response Time', 'Memory Usage', 'Active Users'].map(
             (metric, index) => (
@@ -337,28 +320,26 @@ export default function ShowcaseLandingPage() {
                 <div className="flex items-center gap-2">
                   <TrendingUp className="w-3 h-3 text-green-400" />
                   <span className="text-sm text-green-400">
-                    +{5 + index * 2}%
-                  </span>
-                </div>
-              </div>
-            )
+                    +{5 + index * 2}%</span>
+        </Card>
+        </CardHeader>
+        </div>
+        </CardContent>
+        </div>
+        </div>
+        </div>
+    );
           )}
         </div>
-      </CardContent>
-    </Card>
-  );
-
+    );
   const renderCollaboration = () => (
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-orange-400" />
           <CardTitle className="text-white">Collaboration Workspace</CardTitle>
-        </div>
         <CardDescription className="text-white/80">
-          Real-time team collaboration
-        </CardDescription>
-      </CardHeader>
+          Real-time team collaboration</CardDescription>
       <CardContent>
         <div className="space-y-3">
           {[
@@ -370,7 +351,7 @@ export default function ShowcaseLandingPage() {
             {
               name: 'Mike Johnson',
               status: 'away',
-              action: 'Last seen 5m ago'}].map(user => (
+              action: 'Last seen 5m ago'}].map(user => (</div>
             <div key={user.name} className="flex items-center gap-3">
               <div
                 className={`w-3 h-3 rounded-full ${
@@ -379,17 +360,16 @@ export default function ShowcaseLandingPage() {
               />
               <div className="flex-1">
                 <div className="text-sm font-medium text-white">
-                  {user.name}
-                </div>
+                  {user.name}</div>
                 <div className="text-xs text-white/60">{user.action}</div>
-              </div>
-            </div>
           ))}
         </div>
-      </CardContent>
-    </Card>
-  );
-
+        </Card>
+        </CardHeader>
+        </div>
+        </CardContent>
+        </div>
+    );
   const renderDemo = () => {
     switch (activeDemo) {
       case 'claude-dashboard':
@@ -407,7 +387,7 @@ export default function ShowcaseLandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
-      {/* Hero Section */}
+      {/* Hero Section */}</div>
       <section className="relative py-20 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -420,18 +400,15 @@ export default function ShowcaseLandingPage() {
               className="mb-6 glass border-white/20 text-white"
             >
               <Sparkles className="w-3 h-3 mr-1" />
-              AI-Powered SaaS Platform
-            </Badge>
+              AI-Powered SaaS Platform</Sparkles>
 
-            <h1 className="text-5xl, md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
-              AI-Guided SaaS Builder
-            </h1>
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
+              AI-Guided SaaS Builder</h1>
 
             <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
               Experience the future of development with AI personas, intelligent
               code generation, and real-time collaboration - all in one
-              sophisticated platform.
-            </p>
+              sophisticated platform.</p>
           </motion.div>
 
           {/* Persona Selection Showcase */}
@@ -442,12 +419,9 @@ export default function ShowcaseLandingPage() {
             className="mb-16"
           >
             <h2 className="text-2xl font-bold text-white mb-8">
-              Choose Your AI Development Persona
-            </h2>
+              Choose Your AI Development Persona</h2>
             {renderPersonaShowcase()}
           </motion.div>
-        </div>
-      </section>
 
       {/* Live Features Demo */}
       <section className="py-20 px-4">
@@ -459,15 +433,13 @@ export default function ShowcaseLandingPage() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-white mb-4">
-              Live Platform Demo
-            </h2>
+              Live Platform Demo</h2>
             <p className="text-xl text-white/80">
-              See our actual components and features in action
-            </p>
+              See our actual components and features in action</p>
           </motion.div>
 
-          <div className="grid, lg:grid-cols-3 gap-8">
-            {/* Feature Tabs */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Feature Tabs */}</div>
             <div className="lg:col-span-1">
               <div className="space-y-3">
                 {liveFeatures.map(feature => {
@@ -478,30 +450,32 @@ export default function ShowcaseLandingPage() {
                       className={`w-full p-4 rounded-lg text-left transition-all ${
                         activeDemo === feature.demo
                           ? 'bg-white/20 border border-white/30'
-                          : 'bg-white/5, hover:bg-white/10'
+                          : 'bg-white/5  hover:bg-white/10'
                       }`}
                       onClick={() => setActiveDemo(feature.demo)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                    >
+                    ></motion>
                       <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${feature.color}`}>
                           <Icon className="w-5 h-5 text-white" />
                         </div>
                         <div>
                           <h3 className="font-medium text-white">
-                            {feature.title}
-                          </h3>
+                            {feature.title}</h3>
                           <p className="text-sm text-white/60">
-                            {feature.description}
-                          </p>
-                        </div>
-                      </div>
+                            {feature.description}</p>
                     </motion.button>
                   );
-                })}
-              </div>
-            </div>
+                }
+      )}
+    </div>
+        </section>
+        </div>
+        </section>
+        </div>
+        </div>
+    );
 
             {/* Live Demo */}
             <div className="lg:col-span-2">
@@ -513,13 +487,8 @@ export default function ShowcaseLandingPage() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {renderDemo()}
+                  {renderDemo()}</motion>
                 </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 px-4 text-center">
@@ -530,38 +499,41 @@ export default function ShowcaseLandingPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Experience the Future?
-            </h2>
+              Ready to Experience the Future?</h2>
             <p className="text-xl text-white/80 mb-8">
-              Join the next generation of AI-powered development
-            </p>
+              Join the next generation of AI-powered development</p>
 
-            <div className="flex flex-col, sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600, hover:to-brand-primary-600"
+                className="bg-gradient-to-r from-blue-500 to-brand-primary-500 hover:from-blue-600 hover:to-brand-primary-600"
                 asChild
               >
                 <Link href="/auth/signin">
-                  Start Building Now
+                  Start Building Now</Link>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-              </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/20 text-white, hover:bg-white/10"
+                className="border-white/20 text-white hover:bg-white/10"
                 asChild
               >
                 <Link href="/ui-builder">
-                  Try UI Builder
+                  Try UI Builder</Link>
                   <Wrench className="ml-2 h-4 w-4" />
                 </Link>
-              </Button>
-            </div>
           </motion.div>
-        </div>
-      </section>
-    </div>
-  );
+          </div>
+          </AnimatePresence>
+          </section>
+          </div>
+      );
+</section>
+</AnimatePresence>
+</div>
+</div>
+</section>
+</div>
+</section>
 }

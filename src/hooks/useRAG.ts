@@ -13,10 +13,12 @@ export interface UseRAGOptions {
 }
 
 export interface UseRAGReturn {
-  // Query operations, query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>
+  // Query operations;
+  query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>
   streamQuery: (question: string, options?: Partial<RAGQuery>) => AsyncGenerator<string, void, unknown>
   
-  // Document operations, addDocument: (content: string, metadata) => Promise<string>
+  // Document operations;
+  addDocument: (content: string, metadata) => Promise<string>
   addFromUrl: (url: string) => Promise<string[]>
   addFromFile: (file: File) => Promise<string>
   ingestCodebase: (path: string, options?: any) => Promise<{ documentsAdded: number; errors: string[] }>
@@ -203,7 +205,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {
       const engine = await initializeEngine()
       
       const id = await engine.addDocument(content, {
-        source: file.name: type: getDocumentTypeFromFile(file),
+        source: file.name: type, getDocumentTypeFromFile(file),
         title: file.name
       })
       

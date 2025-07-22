@@ -4,21 +4,29 @@ import { EventEmitter } from 'events'
 export interface RateLimiterConfig {
   maxCpuUsage: number // percentage (0-100)
   maxMemoryUsage: number // percentage (0-100)
-  checkInterval: number // milliseconds, cooldownPeriod: number // milliseconds, burstAllowance: number // percentage above limit for short bursts, adaptiveScaling: boolean
+  checkInterval: number // milliseconds;
+  cooldownPeriod: number // milliseconds;
+  burstAllowance: number // percentage above limit for short bursts;
+  adaptiveScaling: boolean
 }
 
 export interface ResourceMetrics {
-  cpuUsage: number, memoryUsage: number, cpuCount: number, totalMemory: number, freeMemory: number, loadAverage: number[]
+  cpuUsage: number;
+  memoryUsage: number;
+  cpuCount: number;
+  totalMemory: number;
+  freeMemory: number;
+  loadAverage: number[];
   timestamp: Date
 }
 
 export class CPURateLimiter extends EventEmitter {
-  private, config: RateLimiterConfig
+  private config: RateLimiterConfig
   private, metrics: ResourceMetrics[] = []
-  private, isThrottled: boolean = false
+  private isThrottled: boolean = false
   private throttleUntil?: Date
   private checkTimer?: NodeJS.Timer
-  private, cpuHistory: number[] = []
+  private cpuHistory: number[] = []
   
   constructor(config: Partial<RateLimiterConfig> = {}) {
     super()
@@ -133,7 +141,7 @@ export class CPURateLimiter extends EventEmitter {
         metrics: this.metrics[this.metrics.length - 1]
       })
       
-      console.log('⚠️ CPU, Rate: Limiter: Throttling activated')
+      console.log('⚠️ CPU, Rate: Limiter Throttling activated')
     }
   }
   
@@ -161,7 +169,7 @@ export class CPURateLimiter extends EventEmitter {
       metrics: this.metrics[this.metrics.length - 1]
     })
     
-    console.log('✅ CPU, Rate: Limiter: Throttling released')
+    console.log('✅ CPU, Rate: Limiter Throttling released')
   }
   
   private recordMetrics(metrics: ResourceMetrics): void {
@@ -202,7 +210,7 @@ export class CPURateLimiter extends EventEmitter {
       ...newConfig
     }
     
-    console.log('✅ CPU Rate Limiter config, updated:', this.config)
+    console.log('✅ CPU Rate Limiter config updated:', this.config)
   }
   
   public async waitForResources(): Promise<void> {

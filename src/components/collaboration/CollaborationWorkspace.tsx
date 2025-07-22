@@ -38,22 +38,24 @@ export default function CollaborationWorkspace({
   onRoomCreated
 }: CollaborationWorkspaceProps) {
   const { data: session } = useSession()
-  const [socket, setSocket] = useState<Socket | null>(null)
-  const [room, setRoom] = useState<CollaborationRoom | null>(null)
-  const [participants, setParticipants] = useState<CollaborationUser[]>([])
-  const [comments, setComments] = useState<Comment[]>([])
+  const [socket, setSocket] = useState<Socket | null>(null)</Socket>
+  const [room, setRoom] = useState<CollaborationRoom | null>(null)</CollaborationRoom>
+  const [participants, setParticipants] = useState<CollaborationUser[]>([])</CollaborationUser>
+  const [comments, setComments] = useState<Comment[]>([])</Comment>
+      </ProjectChange>
   const [changes, setChanges] = useState<ProjectChange[]>([])
   const [connected, setConnected] = useState(false)
   const [loading, setLoading] = useState(false)
   const [newComment, setNewComment] = useState('')
   const [showComments, setShowComments] = useState(false)
-  const [showParticipants, setShowParticipants] = useState(true)
-  const [cursors, setCursors] = useState<Map<string, { user: CollaborationUser; position: CursorPosition }>>(new Map())
+  const [showParticipants, setShowParticipants] = useState(true)</ProjectChange>
+      </Map>
+  const [cursors, setCursors] = useState<Map<string, { user: CollaborationUser, position: CursorPosition }>>(new Map())
   const [inviteLink, setInviteLink] = useState('')
   const [testMode, setTestMode] = useState(false)
-  
-  const workspaceRef = useRef<HTMLDivElement>(null)
-  const mousePosition = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
+  </Map>
+  const workspaceRef = useRef<HTMLDivElement>(null)</HTMLDivElement>
+  const mousePosition = useRef<{ x: number, y: number }>({ x: 0, y: 0 })
 
   const initializeCollaboration = useCallback(async () => {
     setLoading(true)
@@ -115,8 +117,8 @@ export default function CollaborationWorkspace({
       }
     })
 
-    socket.on('room_joined', (data: { room: CollaborationRoom; project: unknown }) => {
-      console.log('Joined, room:', data.room)
+    socket.on('room_joined', (data: { room: CollaborationRoom, project: unknown }) => {
+      console.log('Joined room:', data.room)
       setRoom(data.room)
       setParticipants(data.room.participants || [])
       setInviteLink(`${window.location.origin}/collaborate/${data.room.id}`)
@@ -127,13 +129,13 @@ export default function CollaborationWorkspace({
       }
     })
 
-    socket.on('user_joined', (data: { user: CollaborationUser; room: CollaborationRoom }) => {
-      console.log('User, joined:', data.user)
+    socket.on('user_joined', (data: { user: CollaborationUser, room: CollaborationRoom }) => {
+      console.log('User joined:', data.user)
       setParticipants(data.room.participants || [])
     })
 
-    socket.on('user_left', (data: { userId: string; user: CollaborationUser }) => {
-      console.log('User, left:', data.user)
+    socket.on('user_left', (data: { userId: string, user: CollaborationUser }) => {
+      console.log('User left:', data.user)
       setParticipants(prev => prev.filter(p => p.id !== data.userId))
       
       // Remove cursor
@@ -144,31 +146,34 @@ export default function CollaborationWorkspace({
       })
     })
 
-    socket.on('cursor_update', (data: { userId: string; user: CollaborationUser; position: CursorPosition }) => {
+    socket.on('cursor_update', (data: { userId: string, user: CollaborationUser; position: CursorPosition }) => {
       if (data.userId !== (session?.user as { id?: string })?.id) {
         setCursors(prev => {
           const newCursors = new Map(prev)
           newCursors.set(data.userId, { user: data.user, position: data.position })
           return newCursors
-        })
-      }
+        }
+      )}
+    </div>
+  );
     })
 
-    socket.on('project_updated', (data: { change: ProjectChange; user: CollaborationUser }) => {
-      console.log('Project, updated:', data.change)
+    socket.on('project_updated', (data: { change: ProjectChange, user: CollaborationUser }) => {
+      console.log('Project updated:', data.change)
       setChanges(prev => [data.change, ...prev.slice(0, 49)]) // Keep last 50 changes
     })
 
-    socket.on('comment_added', (data: { comment: Comment; user: CollaborationUser }) => {
-      console.log('Comment, added:', data.comment)
+    socket.on('comment_added', (data: { comment: Comment, user: CollaborationUser }) => {
+      console.log('Comment added:', data.comment)
       setComments(prev => [data.comment, ...prev])
     })
 
     socket.on('error', (data: { message: string }) => {
       console.error('Collaboration, error:', data.message)
-    })
-  }
-
+    }
+      )}
+    </div>
+    );
   const createNewRoom = async (socket: Socket) => {
     try {
       const response = await fetch('/api/collaboration/rooms', {
@@ -178,8 +183,7 @@ export default function CollaborationWorkspace({
           projectId,
           settings: {
             allowGuests: true,
-            maxParticipants: 10,
-            permissions: {
+            maxParticipants: 10; permissions: {
               canEdit: true,
               canComment: true,
               canInvite: true,
@@ -191,8 +195,10 @@ export default function CollaborationWorkspace({
 
       const data = await response.json()
       if (data.success) {
-        socket.emit('join_room', { roomId: data.roomId, projectId })
-      }
+        socket.emit('join_room', { roomId: data.roomId, projectId }
+      )}
+    </div>
+    );
     } catch (error) {
       console.error('Error creating, room:', error)
     }
@@ -216,8 +222,10 @@ export default function CollaborationWorkspace({
       socket.emit('cursor_move', {
         roomId: room.id,
         position
-      })
-    }
+      }
+      )}
+    </div>
+    );
   }
 
   const handleAddComment = () => {
@@ -256,9 +264,9 @@ export default function CollaborationWorkspace({
     switch (role) {
       case 'owner':
         return <Crown className="h-3 w-3" />
-      case 'editor':
+      case 'editor':</Crown>
         return <Edit3 className="h-3 w-3" />
-      case 'viewer':
+      case 'viewer':</Edit3>
         return <Eye className="h-3 w-3" />
       default:
         return null
@@ -267,83 +275,72 @@ export default function CollaborationWorkspace({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8">
-        <div className="text-center">
+      <div className="flex items-center justify-center p-8"></div>
+        <div className="text-center"></div>
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Initializing collaboration...</p>
-        </div>
-      </div>
-    )
+    );
   }
 
   return (
     <div className="h-full flex flex-col">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b">
-        <div className="flex items-center space-x-4">
+      {/* Header */}</div>
+      <div className="flex items-center justify-between p-4 border-b"></div>
+        <div className="flex items-center space-x-4"></div>
           <div className="flex items-center space-x-2">
-            {connected ? (
+            {connected ? (</div>
               <Wifi className="h-4 w-4 text-green-500" />
-            ) : (
+            ) : (</Wifi>
               <WifiOff className="h-4 w-4 text-red-500" />
-            )}
+            )}</WifiOff>
             <span className="text-sm font-medium">
-              {connected ? 'Connected' : 'Disconnected'}
-            </span>
-          </div>
+              {connected ? 'Connected' : 'Disconnected'}</span>
           
           {room && (
             <Badge variant="outline">
-              {participants.length} participant{participants.length !== 1 ? 's' : ''}
-            </Badge>
+              {participants.length} participant{participants.length !== 1 ? 's' : ''}</Badge>
           )}
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2"></div>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setShowParticipants(!showParticipants)}
-          >
+          ></Button>
             <Users className="h-4 w-4 mr-1" />
-            Participants
-          </Button>
+            Participants</Users>
           
           <Button
             variant="outline"
             size="sm"
             onClick={() => setShowComments(!showComments)}
-          >
+          ></Button>
             <MessageCircle className="h-4 w-4 mr-1" />
-            Comments ({comments.length})
-          </Button>
+            Comments ({comments.length})</MessageCircle>
 
           {inviteLink && (
-            <Button variant="outline" size="sm" onClick={copyInviteLink}>
+            <Button variant="outline" size="sm" onClick={copyInviteLink}></Button>
               <Copy className="h-4 w-4 mr-1" />
-              Copy Link
-            </Button>
+              Copy Link</Copy>
           )}
         </div>
-      </div>
 
       {testMode && (
-        <Alert className="m-4">
+        <Alert className="m-4"></Alert>
           <AlertDescription>
-            Collaboration is running in demo mode. In production, this would provide real-time collaboration with live cursors, synchronized editing, and persistent comments.
-          </AlertDescription>
-        </Alert>
+            Collaboration is running in demo mode. In production, this would provide real-time collaboration with live cursors, synchronized editing, and persistent comments.</AlertDescription>
       )}
 
       <div className="flex-1 flex">
-        {/* Main workspace */}
+        {/* Main workspace */}</div>
         <div 
           ref={workspaceRef}
           className="flex-1 relative bg-gray-50 overflow-hidden"
           onMouseMove={handleMouseMove}
         >
           {/* Collaboration cursors */}
-          {Array.from(cursors.entries()).map(([userId, { user, position }]) => (
+          {Array.from(cursors.entries()).map(([userId, { user, position }]) => (</div>
             <div
               key={userId}
               className="absolute pointer-events-none z-50"
@@ -352,14 +349,11 @@ export default function CollaborationWorkspace({
                 top: position.y,
                 transform: 'translate(-2px, -2px)'
               }}
-            >
-              <div className="flex items-center space-x-1">
+            ></div>
+              <div className="flex items-center space-x-1"></div>
                 <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg"></div>
                 <div className="bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-lg">
-                  {user.name}
-                </div>
-              </div>
-            </div>
+                  {user.name}</div>
           ))}
 
           {/* Comments overlay */}
@@ -371,169 +365,131 @@ export default function CollaborationWorkspace({
                 left: comment.position.x,
                 top: comment.position.y
               }}
-            >
-              <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-2 shadow-lg max-w-xs">
+            ></div>
+              <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-2 shadow-lg max-w-xs"></div>
                 <div className="text-xs font-medium text-yellow-800 mb-1">
-                  Comment
-                </div>
+                  Comment</div>
                 <div className="text-sm text-yellow-700">
-                  {comment.content}
-                </div>
-              </div>
-            </div>
+                  {comment.content}</div>
           ))}
 
           {/* Project workspace content */}
-          <div className="p-8">
-            <div className="max-w-4xl mx-auto">
+          <div className="p-8"></div>
+            <div className="max-w-4xl mx-auto"></div>
               <h1 className="text-2xl font-bold mb-6">Collaborative Project Workspace</h1>
               
-              <div className="grid grid-cols-1, md:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                <Card></Card>
+                  <CardHeader></CardHeader>
                     <CardTitle>Project Files</CardTitle>
                     <CardDescription>
-                      Collaborate on project files in real-time
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer">
+                      Collaborate on project files in real-time</CardDescription>
+                  <CardContent></CardContent>
+                    <div className="space-y-2"></div>
+                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer"></div>
                         <div className="font-medium">index.html</div>
                         <div className="text-sm text-gray-500">Main HTML file</div>
-                      </div>
-                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer">
+                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer"></div>
                         <div className="font-medium">styles.css</div>
                         <div className="text-sm text-gray-500">Stylesheet</div>
-                      </div>
-                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer">
+                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer"></div>
                         <div className="font-medium">script.js</div>
                         <div className="text-sm text-gray-500">JavaScript logic</div>
-                      </div>
-                    </div>
                   </CardContent>
-                </Card>
 
-                <Card>
-                  <CardHeader>
+                <Card></Card>
+                  <CardHeader></CardHeader>
                     <CardTitle>Recent Changes</CardTitle>
                     <CardDescription>
-                      Live project updates from collaborators
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
+                      Live project updates from collaborators</CardDescription>
+                  <CardContent></CardContent>
                     <div className="space-y-2">
-                      {changes.slice(0, 5).map((change) => (
-                        <div key={change.id} className="flex items-center space-x-2 text-sm">
-                          <Clock className="h-3 w-3 text-gray-400" />
+                      {changes.slice(0, 5).map((change) => (</div>
+                        <div key={change.id} className="flex items-center space-x-2 text-sm"></div>
+                          <Clock className="h-3 w-3 text-gray-400" /></Clock>
                           <span className="font-medium">{change.type}</span>
-                          <span className="text-gray-500">{change.path}</span>
-                        </div>
-                      ))}
+                          <span className="text-gray-500">{change.path}</span>))}
                       {changes.length === 0 && (
                         <div className="text-sm text-gray-500">No recent changes</div>
                       )}
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
 
               {/* Add comment section */}
-              <Card className="mt-6">
-                <CardHeader>
+              <Card className="mt-6"></Card>
+                <CardHeader></CardHeader>
                   <CardTitle>Add Comment</CardTitle>
                   <CardDescription>
-                    Click anywhere on the workspace and add a comment
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex space-x-2">
+                    Click anywhere on the workspace and add a comment</CardDescription>
+                <CardContent></CardContent>
+                  <div className="flex space-x-2"></div>
                     <Input
                       placeholder="Type your comment..."
                       value={newComment}
                       onChange={(e) => setNewComment(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleAddComment()}
-                    />
-                    <Button onClick={handleAddComment} disabled={!newComment.trim()}>
+                    /></Input>
+                    <Button onClick={handleAddComment} disabled={!newComment.trim()}></Button>
                       <MessageCircle className="h-4 w-4 mr-1" />
-                      Comment
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
+                      Comment</MessageCircle>
 
         {/* Participants sidebar */}
         {showParticipants && (
-          <div className="w-80 border-l bg-white">
-            <div className="p-4 border-b">
+          <div className="w-80 border-l bg-white"></div>
+            <div className="p-4 border-b"></div>
               <h3 className="font-semibold">Participants</h3>
-            </div>
             <div className="p-4 space-y-3">
-              {participants.map((participant) => (
-                <div key={participant.id} className="flex items-center space-x-3">
-                  <div className="relative">
+              {participants.map((participant) => (</div>
+                <div key={participant.id} className="flex items-center space-x-3"></div>
+                  <div className="relative"></div>
                     <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                      {participant.avatar ? (
+                      {participant.avatar ? (</div>
                         <img 
                           src={participant.avatar} 
                           alt={participant.name}
                           className="w-full h-full rounded-full"
                         />
-                      ) : (
+                      ) : (</img>
                         <span className="text-sm font-medium">
-                          {participant.name.charAt(0)}
-                        </span>
+                          {participant.name.charAt(0)}</span>
                       )}
                     </div>
                     <div 
                       className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`}
                     ></div>
-                  </div>
                   
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-1">
+                  <div className="flex-1"></div>
+                    <div className="flex items-center space-x-1"></div>
                       <span className="font-medium">{participant.name}</span>
                       {getRoleIcon(participant.role)}
                     </div>
                     <div className="text-sm text-gray-500">{participant.email}</div>
-                  </div>
-                </div>
               ))}
               
               {participants.length === 0 && (
                 <div className="text-sm text-gray-500">No participants yet</div>
               )}
             </div>
-          </div>
         )}
 
         {/* Comments sidebar */}
         {showComments && (
-          <div className="w-80 border-l bg-white">
-            <div className="p-4 border-b">
+          <div className="w-80 border-l bg-white"></div>
+            <div className="p-4 border-b"></div>
               <h3 className="font-semibold">Comments</h3>
-            </div>
             <div className="p-4 space-y-4 max-h-96 overflow-y-auto">
-              {comments.map((comment) => (
-                <div key={comment.id} className="border rounded-lg p-3">
+              {comments.map((comment) => (</div>
+                <div key={comment.id} className="border rounded-lg p-3"></div>
                   <div className="text-sm font-medium mb-1">Anonymous User</div>
                   <div className="text-sm text-gray-700 mb-2">{comment.content}</div>
                   <div className="text-xs text-gray-500">
-                    {new Date(comment.createdAt).toLocaleTimeString()}
-                  </div>
-                </div>
+                    {new Date(comment.createdAt).toLocaleTimeString()}</div>
               ))}
               
               {comments.length === 0 && (
                 <div className="text-sm text-gray-500">No comments yet</div>
               )}
             </div>
-          </div>
         )}
       </div>
-    </div>
-  )
+    );
 }

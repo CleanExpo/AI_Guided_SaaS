@@ -46,12 +46,10 @@ export default function SecurityPage() {
           <h1 className="text-4xl font-bold mb-4">Security & Compliance</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Your data security is our top priority. Learn about our
-            comprehensive security measures.
-          </p>
-        </div>
+            comprehensive security measures.</p>
 
         {/* Security Features */}
-        <div className="grid grid-cols-1, md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {securityFeatures.map(feature => {
             const Icon = feature.icon;
             return (
@@ -60,23 +58,25 @@ export default function SecurityPage() {
                   <Icon className="h-12 w-12 text-primary mb-4" />
                   <CardTitle>{feature.title}</CardTitle>
                   <CardDescription>{feature.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            );
-          })}
+    );
+          }
+      )}
+    </div>
         </div>
+        </div>
+        </Card>
+        </CardHeader>
+    );
 
         {/* Certifications */}
         <Card className="mb-16">
           <CardHeader>
             <CardTitle>Certifications & Compliance</CardTitle>
             <CardDescription>
-              We maintain the highest standards of security and compliance
-            </CardDescription>
-          </CardHeader>
+              We maintain the highest standards of security and compliance</CardDescription>
           <CardContent>
-            <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
-              {certifications.map(cert => (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {certifications.map(cert => (</div>
                 <div
                   key={cert.name}
                   className="text-center p-4 border rounded-lg"
@@ -88,18 +88,14 @@ export default function SecurityPage() {
                       cert.status === 'Certified' ? 'default' : 'secondary'
                     }
                   >
-                    {cert.status}
-                  </Badge>
-                </div>
-              ))}
+                    {cert.status}</Badge>
+                  ))}
             </div>
-          </CardContent>
-        </Card>
 
         {/* Security Practices */}
         <div className="prose prose-lg max-w-none">
           <h2 className="text-2xl font-bold mb-6">Our Security Practices</h2>
-          <div className="grid grid-cols-1, md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold mb-3">Data Protection</h3>
               <ul className="space-y-2 text-muted-foreground">
@@ -107,8 +103,6 @@ export default function SecurityPage() {
                 <li>• TLS 1.3 for data in transit</li>
                 <li>• Regular security audits</li>
                 <li>• Automated backup systems</li>
-              </ul>
-            </div>
             <div>
               <h3 className="text-lg font-semibold mb-3">Access Control</h3>
               <ul className="space-y-2 text-muted-foreground">
@@ -116,11 +110,13 @@ export default function SecurityPage() {
                 <li>• Role-based access control</li>
                 <li>• Regular access reviews</li>
                 <li>• Zero-trust architecture</li>
-              </ul>
-            </div>
+          </Card>
+          </CardHeader>
+          </CardContent>
           </div>
-        </div>
-      </div>
-    </div>
-  );
+          </div>
+          </ul>
+          </div>
+          </ul>
+      );
 }

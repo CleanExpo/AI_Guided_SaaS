@@ -22,15 +22,19 @@ import {
 } from 'lucide-react'
 
 interface HealthCheck {
-  name: string, status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown'
+  name: string;
+  status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown'
   responseTime?: number
   details?: any
-  error?: string, timestamp: string
+  error?: string;
+  timestamp: string
 }
 
 interface SystemMetrics {
   cpu: {
-    usage: number, cores: number, loadAverage: number[]
+    usage: number;
+  cores: number;
+  loadAverage: number[]
   }
   memory: {
     total: number, used: number, free: number, percentage: number
@@ -43,15 +47,20 @@ interface SystemMetrics {
 
 interface HealthStatus {
   status: 'healthy' | 'unhealthy' | 'degraded'
-  checks: HealthCheck[]
-  metrics: SystemMetrics, version: string, environment: string, timestamp: string
+  checks: HealthCheck[];
+  metrics: SystemMetrics;
+  version: string;
+  environment: string;
+  timestamp: string
 }
 
 export function HealthCheckDashboard() {
+      </HealthStatus>
   const [healthData, setHealthData] = useState<HealthStatus | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [autoRefresh, setAutoRefresh] = useState(true)
+  const [autoRefresh, setAutoRefresh] = useState(true)</HealthStatus>
+      </string>
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -85,13 +94,13 @@ export function HealthCheckDashboard() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'healthy':
+      case 'healthy':</string>
         return <CheckCircle className="h-5 w-5 text-green-500" />
-      case 'degraded':
+      case 'degraded':</CheckCircle>
         return <AlertCircle className="h-5 w-5 text-yellow-500" />
-      case 'unhealthy':
+      case 'unhealthy':</AlertCircle>
         return <XCircle className="h-5 w-5 text-red-500" />
-      default:
+      default:</XCircle>
         return <AlertCircle className="h-5 w-5 text-gray-500" />
     }
   }
@@ -131,7 +140,7 @@ export function HealthCheckDashboard() {
       <div className="flex items-center justify-center min-h-[400px]">
         <RefreshCw className="h-8 w-8 animate-spin text-primary" />
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -139,7 +148,6 @@ export function HealthCheckDashboard() {
       <Card className="border-red-200 bg-red-50">
         <CardHeader>
           <CardTitle className="text-red-800">Health Check Error</CardTitle>
-        </CardHeader>
         <CardContent>
           <p className="text-red-600">{error}</p>
           <Button 
@@ -147,28 +155,22 @@ export function HealthCheckDashboard() {
             className="mt-4"
             variant="outline"
           >
-            Retry
-          </Button>
-        </CardContent>
-      </Card>
-    )
+            Retry</Button>
+    );
   }
 
   if (!healthData) return null
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            {getStatusIcon(healthData.status)}
+            {getStatusIcon(healthData.status)}</div>
             <h2 className="text-2xl font-bold">System Health</h2>
-          </div>
           <Badge className={getStatusColor(healthData.status)}>
-            {healthData.status.toUpperCase()}
-          </Badge>
-        </div>
+            {healthData.status.toUpperCase()}</Badge>
         
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
@@ -178,11 +180,9 @@ export function HealthCheckDashboard() {
               checked={autoRefresh}
               onChange={(e) => setAutoRefresh(e.target.checked)}
               className="rounded"
-            />
+            /></input>
             <label htmlFor="autoRefresh" className="text-sm">
-              Auto-refresh
-            </label>
-          </div>
+              Auto-refresh</label>
           
           <Button
             onClick={fetchHealthData}
@@ -190,44 +190,32 @@ export function HealthCheckDashboard() {
             variant="outline"
             size="sm"
           >
-            {isRefreshing ? (
+            {isRefreshing ? (</Button>
               <RefreshCw className="h-4 w-4 animate-spin mr-2" />
-            ) : (
+            ) : (</RefreshCw>
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
-            Refresh
-          </Button>
-        </div>
-      </div>
+            Refresh</RefreshCw>
 
       {/* System, Info */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">System Information</CardTitle>
-        </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <p className="text-sm text-muted-foreground">Version</p>
               <p className="font-medium">{healthData.version}</p>
-            </div>
             <div>
               <p className="text-sm text-muted-foreground">Environment</p>
               <p className="font-medium capitalize">{healthData.environment}</p>
-            </div>
             <div>
               <p className="text-sm text-muted-foreground">Uptime</p>
               <p className="font-medium">{formatUptime(healthData.metrics.uptime)}</p>
-            </div>
             <div>
               <p className="text-sm text-muted-foreground">Last Check</p>
               <p className="font-medium">
-                {new Date(healthData.timestamp).toLocaleTimeString()}
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+                {new Date(healthData.timestamp).toLocaleTimeString()}</p>
 
       {/* Tabs */}
       <Tabs defaultValue="services" className="space-y-4">
@@ -235,137 +223,100 @@ export function HealthCheckDashboard() {
           <TabsTrigger value="services">Services</TabsTrigger>
           <TabsTrigger value="metrics">System Metrics</TabsTrigger>
           <TabsTrigger value="details">Detailed Checks</TabsTrigger>
-        </TabsList>
 
         <TabsContent value="services" className="space-y-4">
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {healthData.checks.map((check) => (
               <Card key={check.name} className="relative">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-base flex items-center gap-2">
-                      {check.name === 'database' && <Database className="h-4 w-4" />}
-                      {check.name === 'system' && <Server className="h-4 w-4" />}
-                      {check.name === 'process' && <Cpu className="h-4 w-4" />}
+                      {check.name === 'database' && <Database className="h-4 w-4" />}</Database>
+                      {check.name === 'system' && <Server className="h-4 w-4" />}</Server>
+                      {check.name === 'process' && <Cpu className="h-4 w-4" />}</Cpu>
                       {check.name.includes('external') && <Globe className="h-4 w-4" />}
-                      {check.name}
-                    </CardTitle>
+                      {check.name}</Globe>
                     {getStatusIcon(check.status)}
                   </div>
-                </CardHeader>
                 <CardContent>
-                  {check.error ? (
+                  {check.error ? (</CardContent>
                     <p className="text-sm text-red-600">{check.error}</p>
                   ) : (
                     <div className="space-y-2">
-                      {check.responseTime && (
+                      {check.responseTime && (</div>
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-muted-foreground">Response Time</span>
-                          <span className="font-medium">{check.responseTime}ms</span>
-                        </div>
-                      )}
+                          <span className="font-medium">{check.responseTime}ms</span>)}
                       {check.details && typeof check.details === 'object' && (
                         <div className="text-sm space-y-1">
                           {Object.entries(check.details).slice(0, 3).map(([key, value]) => (
                             <div key={key} className="flex items-center justify-between">
                               <span className="text-muted-foreground capitalize">
-                                {key.replace(/_/g, ' ')}
-                              </span>
+                                {key.replace(/_/g, ' ')}</span>
                               <span className="font-medium">
-                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
+                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}</span>))}
                       )}
                     </div>
                   )}
                 </CardContent>
-              </Card>
             ))}
           </div>
-        </TabsContent>
 
         <TabsContent value="metrics" className="space-y-4">
-          <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
-            {/* CPU, Metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* CPU, Metrics */}</div>
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
                   <Cpu className="h-4 w-4" />
-                  CPU Usage
-                </CardTitle>
-              </CardHeader>
+                  CPU Usage</Cpu>
               <CardContent className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
-                      {healthData.metrics.cpu.usage.toFixed(1)}%
-                    </span>
-                  </div>
+                      {healthData.metrics.cpu.usage.toFixed(1)}%</span>
                   <Progress value={healthData.metrics.cpu.usage} />
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="text-muted-foreground">Cores</p>
                     <p className="font-medium">{healthData.metrics.cpu.cores}</p>
-                  </div>
                   <div>
                     <p className="text-muted-foreground">Load Average</p>
                     <p className="font-medium">
-                      {healthData.metrics.cpu.loadAverage[0].toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                      {healthData.metrics.cpu.loadAverage[0].toFixed(2)}</p>
 
             {/* Memory, Metrics */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
                   <HardDrive className="h-4 w-4" />
-                  Memory Usage
-                </CardTitle>
-              </CardHeader>
+                  Memory Usage</HardDrive>
               <CardContent className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
-                      {healthData.metrics.memory.percentage.toFixed(1)}%
-                    </span>
-                  </div>
+                      {healthData.metrics.memory.percentage.toFixed(1)}%</span>
                   <Progress value={healthData.metrics.memory.percentage} />
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="text-muted-foreground">Used</p>
                     <p className="font-medium">
-                      {formatBytes(healthData.metrics.memory.used)}
-                    </p>
-                  </div>
+                      {formatBytes(healthData.metrics.memory.used)}</p>
                   <div>
                     <p className="text-muted-foreground">Total</p>
                     <p className="font-medium">
-                      {formatBytes(healthData.metrics.memory.total)}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
+                      {formatBytes(healthData.metrics.memory.total)}</p>
 
         <TabsContent value="details">
           <Card>
             <CardHeader>
               <CardTitle>All Health Checks</CardTitle>
               <CardDescription>
-                Detailed view of all system health checks
-              </CardDescription>
-            </CardHeader>
+                Detailed view of all system health checks</CardDescription>
             <CardContent>
               <div className="space-y-4">
                 {healthData.checks.map((check) => (
@@ -376,33 +327,107 @@ export function HealthCheckDashboard() {
                     <div className="flex items-center justify-between">
                       <h4 className="font-medium flex items-center gap-2">
                         {getStatusIcon(check.status)}
-                        {check.name}
-                      </h4>
+                        {check.name}</h4>
                       <Badge className={getStatusColor(check.status)}>
-                        {check.status}
-                      </Badge>
-                    </div>
+                        {check.status}</Badge>
                     
                     {check.error && (
                       <p className="text-sm text-red-600 mt-2">{check.error}</p>
-                    )}
+  );
+}
                     
                     {check.details && (
                       <pre className="text-xs bg-muted p-2 rounded overflow-x-auto">
-                        {JSON.stringify(check.details, null, 2)}
-                      </pre>
+                        {JSON.stringify(check.details, null, 2)}</pre>
                     )}
                     
                     <p className="text-xs text-muted-foreground">
-                      Last, checked: {new, Date(check.timestamp).toLocaleString()}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                      Last, checked: {new, Date(check.timestamp).toLocaleString()}</p>))}
+    );
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</TabsContent>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardTitle>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardTitle>
+</CardHeader>
+</Card>
+</TabsContent>
+</div>
+</CardTitle>
+</div>
+</CardHeader>
+</Card>
+</div>
+</TabsContent>
+</TabsList>
+</Tabs>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+}
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </TabsContent>
     </div>
-  )
+    </div>
+    </CardContent>
+    </CardTitle>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </CardContent>
+    </CardTitle>
+    </CardHeader>
+    </Card>
+    </TabsContent>
+    </div>
+    </CardTitle>
+    </div>
+    </CardHeader>
+    </Card>
+    </div>
+    </TabsContent>
+    </TabsList>
+    </Tabs>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+  );
 }

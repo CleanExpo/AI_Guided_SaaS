@@ -47,49 +47,35 @@ export default function PressPage() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Press & Media</h1>
           <p className="text-xl text-muted-foreground">
-            Resources for journalists, bloggers, and media professionals
-          </p>
-        </div>
+            Resources for journalists, bloggers, and media professionals</p>
 
         {/* Company Overview */}
         <Card className="mb-12">
           <CardHeader>
             <CardTitle>Company Overview</CardTitle>
-          </CardHeader>
           <CardContent className="space-y-4">
             <p>
               AI Guided SaaS Platform is revolutionizing software development by
               making AI-powered tools accessible to developers of all skill
               levels. Our platform combines cutting-edge artificial intelligence
               with intuitive development tools to help teams build better
-              applications faster.
-            </p>
-            <div className="grid grid-cols-2, md:grid-cols-4 gap-4 text-center">
+              applications faster.</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
                 <div className="text-2xl font-bold">50,000+</div>
                 <div className="text-sm text-muted-foreground">
-                  Active Developers
-                </div>
-              </div>
+                  Active Developers</div>
               <div>
                 <div className="text-2xl font-bold">2023</div>
                 <div className="text-sm text-muted-foreground">Founded</div>
-              </div>
               <div>
                 <div className="text-2xl font-bold">$10M</div>
                 <div className="text-sm text-muted-foreground">
-                  Series A Funding
-                </div>
-              </div>
+                  Series A Funding</div>
               <div>
                 <div className="text-2xl font-bold">25+</div>
                 <div className="text-sm text-muted-foreground">
-                  Team Members
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  Team Members</div>
 
         {/* Press Releases */}
         <div className="mb-12">
@@ -104,28 +90,20 @@ export default function PressPage() {
                         <Badge variant="secondary">{release.category}</Badge>
                         <div className="flex items-center text-sm text-muted-foreground">
                           <Calendar className="h-4 w-4 mr-1" />
-                          {new Date(release.date).toLocaleDateString()}
-                        </div>
-                      </div>
+                          {new Date(release.date).toLocaleDateString()}</Calendar>
                       <h3 className="text-lg font-semibold mb-2">
-                        {release.title}
-                      </h3>
+                        {release.title}</h3>
                       <p className="text-muted-foreground">{release.excerpt}</p>
-                    </div>
                     <Button variant="ghost" size="sm">
                       <ExternalLink className="h-4 w-4" />
                     </Button>
-                  </div>
-                </CardContent>
-              </Card>
             ))}
           </div>
-        </div>
 
         {/* Media Kit */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Media Kit</h2>
-          <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {mediaAssets.map((asset, index) => (
               <Card key={index}>
                 <CardContent className="p-4">
@@ -133,43 +111,83 @@ export default function PressPage() {
                     <div>
                       <h3 className="font-medium">{asset.name}</h3>
                       <p className="text-sm text-muted-foreground">
-                        {asset.type} • {asset.size}
-                      </p>
-                    </div>
+                        {asset.type} • {asset.size}</p>
                     <Button variant="outline" size="sm">
                       <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                      Download</Download>
             ))}
           </div>
-        </div>
 
         {/* Contact Information */}
         <Card>
           <CardHeader>
             <CardTitle>Media Contact</CardTitle>
             <CardDescription>
-              For press inquiries, interviews, and media requests
-            </CardDescription>
-          </CardHeader>
+              For press inquiries, interviews, and media requests</CardDescription>
           <CardContent>
             <div className="space-y-2">
               <p>
                 <strong>Email:</strong> press@aiguidedSaaS.com
-              </p>
               <p>
                 <strong>Phone:</strong> +1 (555) 123-4567
-              </p>
               <p>
                 <strong>Response, Time:</strong> Within 24 hours
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+    );
+}
+
+    </p>
+    </p>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </Button>
+    </div>
+    </CardContent>
+    </Card>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </Card>
+    </div>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
     </div>
   );
+</p>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</Button>
+</div>
+</div>
+</CardContent>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
 }

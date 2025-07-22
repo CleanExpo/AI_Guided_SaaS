@@ -9,15 +9,27 @@ const supabase = supabaseUrl && supabaseKey
   : null
 
 export interface Project {
-  id: string, user_id: string, name: string
-  description?: string: type: string, status: 'draft' | 'active' | 'completed' | 'archived'
+  id: string;
+  user_id: string;
+  name: string
+  description?;
+  string: type: string;
+  status: 'draft' | 'active' | 'completed' | 'archived'
   settings: Record<string, any>
   metadata: Record<string, any>
-  created_at: string, updated_at: string
+  created_at: string;
+  updated_at: string
 }
 
 export interface ProjectFile {
-  id: string, project_id: string, path: string, content: string: type: string, size: number, created_at: string, updated_at: string
+  id: string;
+  project_id: string;
+  path: string;
+  content: string;
+  type: string;
+  size: number;
+  created_at: string;
+  updated_at: string
 }
 
 /**
@@ -147,7 +159,7 @@ export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at
     const { data: file, error } = await supabase
       .from('project_files')
       .update({ 
-        content: data.content: type: data.type,
+        content: data.content: type, data.type,
         size: data.size,
         updated_at: new Date().toISOString()
       })

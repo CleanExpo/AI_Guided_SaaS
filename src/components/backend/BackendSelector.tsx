@@ -14,9 +14,10 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 
 export function BackendSelector() {
-  const [selectedBackend, setSelectedBackend] = useState<string>('supabase')
+  const [selectedBackend, setSelectedBackend] = useState<string>('supabase')</string>
+      </BackendConfig>
   const [config, setConfig] = useState<BackendConfig | null>(null)
-  const [testing, setTesting] = useState(false)
+  const [testing, setTesting] = useState(false)</BackendConfig>
   const [testResult, setTestResult] = useState<{
     success: boolean, message: string
   } | null>(null)
@@ -105,9 +106,10 @@ export function BackendSelector() {
     setTestResult({
       success: true,
       message: 'Backend configuration saved!'
-    })
-  }
-
+    }
+      )}
+    </div>
+    );
   const backendInfo = {
     supabase: {
       name: 'Supabase',
@@ -142,20 +144,18 @@ export function BackendSelector() {
   }
 
   return (
-    <div className="space-y-6">
-      <Card>
-        <CardHeader>
+    <div className="space-y-6"></div>
+      <Card></Card>
+        <CardHeader></CardHeader>
           <CardTitle>Backend Configuration</CardTitle>
           <CardDescription>
-            Choose and configure your preferred backend service
-          </CardDescription>
-        </CardHeader>
+            Choose and configure your preferred backend service</CardDescription>
         <CardContent className="space-y-6">
-          {/* Backend Selection */}
+          {/* Backend Selection */}</CardContent>
           <RadioGroup
             value={selectedBackend}
             onValueChange={setSelectedBackend}
-            className="grid grid-cols-1, md:grid-cols-3 gap-4"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
           >
             {Object.entries(backendInfo).map(([key, info]) => {
               const Icon = info.icon
@@ -163,33 +163,32 @@ export function BackendSelector() {
                 <Label
                   key={key}
                   htmlFor={key}
-                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer, hover:bg-accent"
-                >
-                  <RadioGroupItem value={key} id={key} className="sr-only" />
-                  <Icon className={`h-8 w-8 ${info.color}`} />
+                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer hover:bg-accent"
+                ></Label>
+                  <RadioGroupItem value={key} id={key} className="sr-only" /></RadioGroupItem>
+                  <Icon className={`h-8 w-8 ${info.color}`} /></Icon>
                   <span className="font-semibold">{info.name}</span>
                   <span className="text-sm text-muted-foreground text-center">
-                    {info.description}
-                  </span>
+                    {info.description}</span>
                   {config?.type === key && (
-                    <span className="text-xs text-green-600 flex items-center">
+                    <span className="text-xs text-green-600 flex items-center"></span>
                       <Check className="h-3 w-3 mr-1" />
-                      Current
-                    </span>
+                      Current</Check>
                   )}
                 </Label>
-              )
-            })}
-          </RadioGroup>
+    );
+            }
+      )}
+    </div>
+    );
 
           {/* Configuration Form */}
-          <div className="space-y-4">
+          <div className="space-y-4"></div>
             <h3 className="text-lg font-semibold">
-              Configure {backendInfo[selectedBackend as keyof typeof backendInfo].name}
-            </h3>
+              Configure {backendInfo[selectedBackend as keyof typeof backendInfo].name}</h3>
             
             {backendInfo[selectedBackend as keyof typeof backendInfo].fields.map(field => (
-              <div key={field.name} className="space-y-2">
+              <div key={field.name} className="space-y-2"></div>
                 <Label htmlFor={field.name}>{field.label}</Label>
                 <Input
                   id={field.name}
@@ -201,39 +200,34 @@ export function BackendSelector() {
                     [selectedBackend]: {
                       ...prev[selectedBackend as keyof typeof formData],
                       [field.name]: e.target.value
-                    }
+                   }
                   }))}
-                />
-              </div>
-            ))}
-          </div>
+                /></Input>))}
 
           {/* Test Result */}
           {testResult && (
             <Alert variant={testResult.success ? 'default' : 'destructive'}>
-              {testResult.success ? (
+              {testResult.success ? (</Alert>
                 <Check className="h-4 w-4" />
-              ) : (
+              ) : (</Check>
                 <X className="h-4 w-4" />
-              )}
+              )}</X>
               <AlertTitle>
-                {testResult.success ? 'Success' : 'Error'}
-              </AlertTitle>
+                {testResult.success ? 'Success' : 'Error'}</AlertTitle>
               <AlertDescription>{testResult.message}</AlertDescription>
-            </Alert>
           )}
 
           {/* Actions */}
-          <div className="flex space-x-4">
+          <div className="flex space-x-4"></div>
             <Button
               onClick={handleTest}
               disabled={testing || !formData[selectedBackend as keyof typeof formData].url}
               variant="outline"
             >
-              {testing ? (
+              {testing ? (</Button>
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Testing...
+                  Testing...</Loader2>
                 </>
               ) : (
                 'Test Connection'
@@ -244,69 +238,52 @@ export function BackendSelector() {
               onClick={handleSave}
               disabled={!formData[selectedBackend as keyof typeof formData].url}
             >
-              Save Configuration
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+              Save Configuration</Button>
 
       {/* Migration Warning */}
       {config && config.type !== selectedBackend && (
-        <Alert>
-          <AlertTriangle className="h-4 w-4" />
+        <Alert></Alert>
+          <AlertTriangle className="h-4 w-4" /></AlertTriangle>
           <AlertTitle>Migration Required</AlertTitle>
           <AlertDescription>
             Changing backends will require migrating your data. Make sure to backup 
-            your data before switching backends.
-          </AlertDescription>
-        </Alert>
+            your data before switching backends.</AlertDescription>
       )}
 
       {/* Setup Instructions */}
-      <Card>
-        <CardHeader>
+      <Card></Card>
+        <CardHeader></CardHeader>
           <CardTitle>Setup Instructions</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent></CardContent>
           <div className="space-y-4">
-            {selectedBackend === 'supabase' && (
-              <div className="space-y-2">
+            {selectedBackend === 'supabase' && (</div>
+              <div className="space-y-2"></div>
                 <h4 className="font-semibold">Supabase, Setup:</h4>
-                <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
+                <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground"></ol>
                   <li>Create a project at supabase.com</li>
                   <li>Copy your project URL from Settings → API</li>
                   <li>Copy your anon/public key from Settings → API</li>
                   <li>Run the database migrations in your Supabase project</li>
-                </ol>
-              </div>
-            )}
+                </ol>)}
             
             {selectedBackend === 'strapi' && (
-              <div className="space-y-2">
+              <div className="space-y-2"></div>
                 <h4 className="font-semibold">Strapi, Setup:</h4>
-                <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
+                <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground"></ol>
                   <li>Run: docker-compose -f docker/services/strapi.yml up</li>
                   <li>Access Strapi admin at, http://localhost:1337/admin</li>
                   <li>Create an admin user and configure content types</li>
                   <li>Generate an API token from Settings → API Tokens</li>
-                </ol>
-              </div>
-            )}
+                </ol>)}
             
             {selectedBackend === 'nocodb' && (
-              <div className="space-y-2">
+              <div className="space-y-2"></div>
                 <h4 className="font-semibold">NocoDB, Setup:</h4>
-                <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
+                <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground"></ol>
                   <li>Run: docker-compose -f docker/services/nocodb.yml up</li>
                   <li>Access NocoDB at, http://localhost:8080</li>
                   <li>Create your project and tables</li>
                   <li>Generate an API token from Account Settings</li>
-                </ol>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
+                </ol>)}
+      );
 }

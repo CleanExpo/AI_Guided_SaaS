@@ -1,15 +1,21 @@
 import { DevelopmentRoadmap, RoadmapPhase } from '@/lib/requirements/ClientRequirementsProcessor'
 
 export interface RoadmapMilestone {
-  id: string, phaseId: string, name: string, expectedDate: Date
-  actualDate?: Date, status: 'pending' | 'in_progress' | 'completed' | 'delayed' | 'blocked'
-  completionCriteria: CompletionCriterion[]
+  id: string;
+  phaseId: string;
+  name: string;
+  expectedDate: Date
+  actualDate?: Date;
+  status: 'pending' | 'in_progress' | 'completed' | 'delayed' | 'blocked'
+  completionCriteria: CompletionCriterion[];
   dependencies: string[]
   deliverables: string[]
 }
 
 export interface CompletionCriterion {
-  id: string, description: string: type: 'feature' | 'test' | 'performance' | 'documentation'
+  id: string;
+  description: string;
+  type: 'feature' | 'test' | 'performance' | 'documentation'
   validation: {
     method: 'automated' | 'manual' | 'hybrid'
     script?: string
@@ -21,26 +27,35 @@ export interface CompletionCriterion {
 }
 
 export interface RoadmapValidationResult {
-  roadmapId: string, validationDate: Date, overallStatus: 'on_track' | 'at_risk' | 'delayed' | 'blocked'
-  completionPercentage: number, milestones: {
-    total: number, completed: number, inProgress: number, delayed: number, blocked: number
+  roadmapId: string;
+  validationDate: Date;
+  overallStatus: 'on_track' | 'at_risk' | 'delayed' | 'blocked'
+  completionPercentage: number;
+  milestones: {
+    total: number;
+  completed: number;
+  inProgress: number;
+  delayed: number;
+  blocked: number
   }
-  deviations: RoadmapDeviation[]
-  recommendations: string[]
+  deviations: RoadmapDeviation[], recommendations: string[]
   nextMilestone?: RoadmapMilestone, estimatedCompletionDate: Date
 }
 
 export interface RoadmapDeviation {
   type: 'delay' | 'scope_change' | 'blocker' | 'resource_issue'
   severity: 'low' | 'medium' | 'high' | 'critical'
-  milestoneId: string, description: string, impact: string, suggestedAction: string
+  milestoneId: string;
+  description: string;
+  impact: string;
+  suggestedAction: string
 }
 
 export class RoadmapValidator {
-  private, milestones: Map<string, RoadmapMilestone> = new Map()
-  private, validationHistory: RoadmapValidationResult[] = []
+  private milestones: Map<string, RoadmapMilestone> = new Map()
+  private validationHistory: RoadmapValidationResult[] = []
   
-  constructor(private, roadmap: DevelopmentRoadmap) {
+  constructor(private roadmap: DevelopmentRoadmap) {
     this.initializeMilestones()
   }
   
@@ -94,7 +109,7 @@ export class RoadmapValidator {
     phase.tasks.forEach((task, index) => {
       criteria.push({
         id: `${phase.id}_feature_${index}`,
-        description: task: type: 'feature',
+        description: task, type: 'feature',
         validation: {
           method: 'automated',
           script: `validate_feature_${phase.id}_${index}`

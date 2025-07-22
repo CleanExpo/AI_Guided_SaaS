@@ -13,12 +13,14 @@ const CollapsibleContext = React.createContext<{
 interface CollapsibleProps {
   open?: boolean
   defaultOpen?: boolean
-  onOpenChange?: (open: boolean) => void, children: React.ReactNode
+  onOpenChange?: (open: boolean) => void;
+  children: React.ReactNode
   className?: string
 }
 
 const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
   ({ open = false, defaultOpen = false, onOpenChange, children, className }, ref) => {
+        </HTMLDivElement>
     const [internalOpen, setInternalOpen] = React.useState(defaultOpen || open)
     
     const isControlled = onOpenChange !== undefined
@@ -26,10 +28,9 @@ const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
     const setOpenState = isControlled ? onOpenChange : setInternalOpen
 
     return (
-      <CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState }}>
+      <CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState }}></CollapsibleContext>
         <div ref={ref} className={cn('', className)}>
-          {children}
-        </div>
+          {children}</div>
       </CollapsibleContext.Provider>
     )
   }
@@ -40,6 +41,7 @@ const CollapsibleTrigger = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, children, ...props }, ref) => {
+      </HTMLButtonElement>
   const { open, onOpenChange } = React.useContext(CollapsibleContext)
   
   return (
@@ -53,10 +55,9 @@ const CollapsibleTrigger = React.forwardRef<
       onClick={() => onOpenChange(!open)}
       {...props}
     >
-      {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
-    </button>
-  )
+      {children}</button>
+      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" /></ChevronDown>
+    );
 })
 CollapsibleTrigger.displayName = 'CollapsibleTrigger'
 
@@ -64,6 +65,7 @@ const CollapsibleContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
+      </HTMLDivElement>
   const { open } = React.useContext(CollapsibleContext)
   
   return (
@@ -74,10 +76,9 @@ const CollapsibleContent = React.forwardRef<
         open ? 'animate-in slide-in-from-top-1' : 'animate-out slide-out-to-top-1 hidden'
       )}
       {...props}
-    >
+    ></div>
       <div className={cn('pb-4 pt-0', className)}>{children}</div>
-    </div>
-  )
+    );
 })
 CollapsibleContent.displayName = 'CollapsibleContent'
 

@@ -9,7 +9,7 @@ interface ClientVision {
   core_features: string[];
   modules: Array<{
     name: string;
-    purpose: string;
+  purpose: string;
     priority: string;
   }>;
 }
@@ -34,10 +34,10 @@ interface ValidationResult {
 }
 
 export class BreadcrumbAgent {
-  private, visionPath: string;
-  private, indexPath: string;
-  private, vision: ClientVision | null = null;
-  private, index: any = null;
+  private visionPath: string;
+  private indexPath: string;
+  private vision: ClientVision | null = null;
+  private index: any = null;
 
   constructor(projectRoot: string = process.cwd()) {
     this.visionPath = path.join(projectRoot, 'breadcrumbs', 'client-vision.json');
@@ -317,7 +317,7 @@ export class BreadcrumbAgent {
    * Check if a specific feature is being fulfilled
    */
   async checkFeatureFulfillment(featureName: string): Promise<{
-    isFulfilled: boolean;
+    isFulfilled: boolean,
     implementedIn: string[];
     gaps: string[];
   }> {

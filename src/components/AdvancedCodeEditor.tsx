@@ -28,7 +28,9 @@ import { cn } from '@/utils/cn'
 import Editor from '@monaco-editor/react'
 
 interface FileNode {
-  name: string, path: string, type: 'file' | 'folder'
+  name: string;
+  path: string;
+  type: 'file' | 'folder'
   children?: FileNode[]
   content?: string
   language?: string
@@ -61,8 +63,7 @@ const defaultFiles: FileNode[] = [
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Welcome to your app</h1>
-    </main>
-  )
+    );
 }`
           }
         ]
@@ -109,16 +110,16 @@ export function AdvancedCodeEditor({
   onSave,
   readOnly = false 
 }: AdvancedCodeEditorProps) {
-  const [files, setFiles] = useState<FileNode[]>(initialFiles)
-  const [activeFile, setActiveFile] = useState<FileNode | null>(null)
-  const [openFiles, setOpenFiles] = useState<FileNode[]>([])
+  const [files, setFiles] = useState<FileNode[]>(initialFiles)</FileNode>
+  const [activeFile, setActiveFile] = useState<FileNode | null>(null)</FileNode>
+  const [openFiles, setOpenFiles] = useState<FileNode[]>([])</FileNode>
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['src']))
   const [searchQuery, setSearchQuery] = useState('')
-  const [isSearching, setIsSearching] = useState(false)
+  const [isSearching, setIsSearching] = useState(false)</Set>
   const [terminalOutput, setTerminalOutput] = useState<string[]>([])
   const [isSaving, setIsSaving] = useState(false)
   const [hasChanges, setHasChanges] = useState(false)
-  
+  </string>
   const editorRef = useRef<any>(null)
 
   useEffect(() => {
@@ -180,9 +181,12 @@ export function AdvancedCodeEditor({
           return { ...node, children: updateFileContent(node.children) }
         }
         return node
-      })
-    }
-    
+      }
+      )}
+    </div>
+      </main>
+      </any>
+  );
     setFiles(updateFileContent(files))
     setHasChanges(true)
   }
@@ -217,7 +221,7 @@ export function AdvancedCodeEditor({
   }
 
   const renderFileTree = (nodes: FileNode[], level = 0) => {
-    return nodes.map(node => (
+    return nodes.map(node => (</any>
       <div key={node.path}>
         <div
           className={cn(
@@ -227,13 +231,13 @@ export function AdvancedCodeEditor({
           style={{ paddingLeft: `${level * 16 + 8}px` }}
           onClick={() => handleFileClick(node)}
         >
-          {node.type === 'folder' ? (
+          {node.type === 'folder' ? (</div>
             <>
               {expandedFolders.has(node.path) ? (
                 <ChevronDown className="h-4 w-4" />
-              ) : (
+              ) : (</ChevronDown>
                 <ChevronRight className="h-4 w-4" />
-              )}
+              )}</ChevronRight>
               <FolderOpen className="h-4 w-4 text-blue-600" />
             </>
           ) : (
@@ -274,18 +278,16 @@ export function AdvancedCodeEditor({
 
   return (
     <div className="h-full flex flex-col bg-gray-50">
-      {/* Top Bar */}
+      {/* Top Bar */}</div>
       <div className="bg-white border-b px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h3 className="font-semibold flex items-center gap-2">
             <Code className="h-5 w-5" />
-            Advanced Editor
-          </h3>
+            Advanced Editor</Code>
           {hasChanges && (
             <Badge variant="secondary" className="text-xs">
               <AlertCircle className="h-3 w-3 mr-1" />
-              Unsaved changes
-            </Badge>
+              Unsaved changes</AlertCircle>
           )}
         </div>
         
@@ -296,27 +298,23 @@ export function AdvancedCodeEditor({
             onClick={handleRun}
           >
             <Play className="h-4 w-4 mr-2" />
-            Run
-          </Button>
+            Run</Play>
           <Button
             size="sm"
             onClick={handleSave}
             disabled={readOnly || !hasChanges || isSaving}
           >
-            {isSaving ? (
+            {isSaving ? (</Button>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
+            ) : (</Loader2>
               <Save className="h-4 w-4 mr-2" />
             )}
-            Save
-          </Button>
-        </div>
-      </div>
+            Save</Save>
       
       <div className="flex-1 flex overflow-hidden">
-        {/* Sidebar */}
+        {/* Sidebar */}</div>
         <div className="w-64 bg-white border-r flex flex-col">
-          {/* Search */}
+          {/* Search */}</div>
           <div className="p-3 border-b">
             <div className="relative">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
@@ -326,15 +324,12 @@ export function AdvancedCodeEditor({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-9 pr-3 py-2 text-sm border rounded-md"
-              />
-            </div>
-          </div>
+              /></input>
           
           {/* File Explorer */}
           <div className="flex-1 overflow-auto p-2">
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">
-              Explorer
-            </div>
+              Explorer</div>
             {renderFileTree(files)}
           </div>
           
@@ -345,19 +340,16 @@ export function AdvancedCodeEditor({
               <span>main</span>
               {hasChanges && (
                 <span className="text-xs bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded">
-                  {openFiles.filter(f => f.content !== initialFiles.find(iFile => iFile.path === f.path)?.content).length} modified
-                </span>
+                  {openFiles.filter(f => f.content !== initialFiles.find(iFile => iFile.path === f.path)?.content).length} modified</span>
               )}
             </div>
-          </div>
-        </div>
         
         {/* Main Editor Area */}
         <div className="flex-1 flex flex-col">
-          {/* Tabs */}
+          {/* Tabs */}</div>
           <div className="bg-white border-b">
             <div className="flex items-center gap-1 px-2 py-1 overflow-x-auto">
-              {openFiles.map(file => (
+              {openFiles.map(file => (</div>
                 <div
                   key={file.path}
                   className={cn(
@@ -367,7 +359,7 @@ export function AdvancedCodeEditor({
                       : "bg-gray-50, hover:bg-gray-100"
                   )}
                   onClick={() => setActiveFile(file)}
-                >
+                ></div>
                   <FileCode className="h-3 w-3" />
                   <span>{file.name}</span>
                   {!readOnly && (
@@ -375,20 +367,19 @@ export function AdvancedCodeEditor({
                       onClick={(e) => {
                         e.stopPropagation()
                         handleCloseFile(file)
-                      }}
-                      className="ml-2, hover:bg-gray-200 rounded p-0.5"
-                    >
+                     }}
+                      className="ml-2 hover:bg-gray-200 rounded p-0.5"
+                    ></button>
                       <X className="h-3 w-3" />
                     </button>
                   )}
                 </div>
               ))}
             </div>
-          </div>
           
           {/* Editor */}
           <div className="flex-1">
-            {activeFile ? (
+            {activeFile ? (</div>
               <Editor
                 height="100%"
                 language={getLanguageFromFile(activeFile)}
@@ -396,7 +387,7 @@ export function AdvancedCodeEditor({
                 onChange={handleEditorChange}
                 options={{
                   readOnly,
-                  minimap: { enabled: false },
+                  minimap: { enabled: false},
                   fontSize: 14,
                   wordWrap: 'on',
                   theme: 'vs-light',
@@ -404,18 +395,15 @@ export function AdvancedCodeEditor({
                 }}
                 onMount={(editor) => {
                   editorRef.current = editor
-                }}
+               }}
               />
-            ) : (
+            ) : (</Editor>
               <div className="h-full flex items-center justify-center text-gray-400">
                 <div className="text-center">
                   <FileCode className="h-12 w-12 mx-auto mb-2" />
                   <p>Select a file to edit</p>
-                </div>
-              </div>
-            )}
-          </div>
-          
+  );
+}
           {/* Terminal */}
           <div className="h-48 bg-gray-900 border-t">
             <div className="flex items-center gap-2 px-3 py-2 border-b border-gray-700">
@@ -429,11 +417,23 @@ export function AdvancedCodeEditor({
               <div className="flex items-center gap-1 mt-2">
                 <span className="text-green-400">$</span>
                 <span className="animate-pulse">_</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+    );
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</Badge>
+</h3>
+</div>
+</div>
 }
+    </Badge>
+    </h3>
+    </div>
+    </string>
+  );
+}
+</div>

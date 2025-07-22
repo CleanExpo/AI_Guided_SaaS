@@ -13,7 +13,9 @@ export interface AIMessage {
 export interface AIResponse {
   message: string
   usage?: {
-    total_tokens: number, prompt_tokens: number, completion_tokens: number
+    total_tokens: number;
+  prompt_tokens: number;
+  completion_tokens: number
   }
   model?: string
 }

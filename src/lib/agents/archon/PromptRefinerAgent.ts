@@ -2,28 +2,39 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent'
 import { generateAIResponse } from '@/lib/ai'
 
 export interface RefinedPrompt {
-  originalPrompt: string, refinedPrompt: string, improvements: PromptImprovement[]
-  clarity: PromptClarity, examples: PromptExample[]
+  originalPrompt: string;
+  refinedPrompt: string;
+  improvements: PromptImprovement[];
+  clarity: PromptClarity;
+  examples: PromptExample[];
   constraints: string[]
-  expectedOutput: OutputSpecification, confidence: number
+  expectedOutput: OutputSpecification;
+  confidence: number
 }
 
 export interface PromptImprovement {
   type: 'clarity' | 'specificity' | 'context' | 'structure' | 'examples'
-  original: string, improved: string, rationale: string
+  original: string;
+  improved: string;
+  rationale: string
 }
 
 export interface PromptClarity {
-  score: number // 0-100, issues: string[]
+  score: number // 0-100;
+  issues: string[];
   suggestions: string[]
 }
 
 export interface PromptExample {
-  input: string, expectedOutput: string, explanation: string
+  input: string;
+  expectedOutput: string;
+  explanation: string
 }
 
 export interface OutputSpecification {
-  format: string, structure: any, constraints: string[]
+  format: string;
+  structure: any;
+  constraints: string[];
   validationRules: string[]
 }
 

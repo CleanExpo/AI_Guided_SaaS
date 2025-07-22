@@ -76,21 +76,18 @@ export default function BlogPage() {
           <h1 className="text-4xl font-bold mb-4">Blog</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Stay updated with the latest news, insights, and tutorials from our
-            team
-          </p>
-        </div>
+            team</p>
 
         {/* Categories */}
         <div className="flex flex-wrap gap-2 justify-center mb-12">
-          {categories.map(category => (
+          {categories.map(category => (</div>
             <Badge
               key={category}
               variant={category === 'All' ? 'default' : 'secondary'}
-              className="cursor-pointer, hover:bg-primary, hover:text-primary-foreground transition-colors"
+              className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
             >
-              {category}
-            </Badge>
-          ))}
+              {category}</Badge>
+                  ))}
         </div>
 
         {/* Featured Post */}
@@ -102,20 +99,14 @@ export default function BlogPage() {
                   <Badge className="mb-4">Featured</Badge>
                   <h2 className="text-2xl font-bold mb-2">Latest Post</h2>
                   <p className="text-muted-foreground">
-                    Don&apos;t miss our newest insights
-                  </p>
-                </div>
-              </div>
+                    Don&apos;t miss our newest insights</p>
               <div className="md:w-1/2 p-8">
                 <Badge variant="secondary" className="mb-4">
-                  {featuredPost.category}
-                </Badge>
+                  {featuredPost.category}</Badge>
                 <h3 className="text-2xl font-bold mb-4">
-                  {featuredPost.title}
-                </h3>
+                  {featuredPost.title}</h3>
                 <p className="text-muted-foreground mb-6">
-                  {featuredPost.excerpt}
-                </p>
+                  {featuredPost.excerpt}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                     <div className="flex items-center space-x-1">
@@ -125,39 +116,28 @@ export default function BlogPage() {
                     <div className="flex items-center space-x-1">
                       <Calendar className="h-4 w-4" />
                       <span>
-                        {new Date(featuredPost.date).toLocaleDateString()}
-                      </span>
-                    </div>
+                        {new Date(featuredPost.date).toLocaleDateString()}</span>
                     <span>{featuredPost.readTime}</span>
                   </div>
                   <Button asChild>
-                    <Link href={`/blog/${featuredPost.id}`}>
-                      Read More
+                    <Link href="/blog/${featuredPost.id}">
+                      Read More</Link>
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </Card>
         )}
 
         {/* Regular Posts */}
-        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-8">
-          {regularPosts.map(post => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {regularPosts.map(post => (</div>
             <Card key={post.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <Badge variant="secondary">{post.category}</Badge>
                   <span className="text-sm text-muted-foreground">
-                    {post.readTime}
-                  </span>
-                </div>
+                    {post.readTime}</span>
                 <CardTitle className="line-clamp-2">{post.title}</CardTitle>
                 <CardDescription className="line-clamp-3">
-                  {post.excerpt}
-                </CardDescription>
-              </CardHeader>
+                  {post.excerpt}</CardDescription>
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 text-sm text-muted-foreground">
@@ -169,16 +149,11 @@ export default function BlogPage() {
                       <Calendar className="h-4 w-4" />
                       <span>{new Date(post.date).toLocaleDateString()}</span>
                     </div>
-                  </div>
                   <Button variant="ghost" size="sm" asChild>
-                    <Link href={`/blog/${post.id}`}>
-                      Read
+                    <Link href="/blog/${post.id}">
+                      Read</Link>
                       <ArrowRight className="ml-1 h-3 w-3" />
                     </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
           ))}
         </div>
 
@@ -187,18 +162,42 @@ export default function BlogPage() {
           <h2 className="text-2xl font-semibold mb-4">Stay Updated</h2>
           <p className="text-muted-foreground mb-6">
             Subscribe to our newsletter to get the latest posts delivered to
-            your inbox.
-          </p>
-          <div className="flex flex-col, sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            your inbox.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
               className="flex-1 px-4 py-2 rounded-md border border-input bg-background"
             />
             <Button>Subscribe</Button>
-          </div>
-        </div>
-      </div>
+    );
+}
+
+    </Button>
+    </div>
+    </CardContent>
+    </div>
+    </CardHeader>
+    </Card>
+    </Button>
+    </div>
+    </div>
+    </div>
+    </Card>
     </div>
   );
+</CardContent>
+</div>
+</CardHeader>
+</Card>
+</Button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</Card>
+</div>
+</div>
 }

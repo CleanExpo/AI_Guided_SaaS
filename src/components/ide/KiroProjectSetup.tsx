@@ -49,9 +49,10 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
       startCommand: '',
       testCommand: '',
       outputDirectory: '',
-      environment: {} as Record<string, string>,
+      environment: {} as Record<string, string>,</string>
       dependencies: {} as Record<string, string>
     }
+      </string>
   })
 
   const [features, setFeatures] = useState({
@@ -121,13 +122,15 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         title: 'Error',
         description: 'Failed to create project',
         variant: 'destructive'
-      })
-    }
+      }
+      )}
+    </div>
+    );
   }
 
   const generateProjectStructure = (data: typeof projectData, features) => {
     const structure = {
-      name: data.name: type: 'directory' as const path: '/',
+      name: data.name, type: 'directory' as const path: '/',
       children: [] as any[]
     }
 
@@ -154,9 +157,10 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
           },
           dependencies: data.settings.dependencies || {}
         }, null, 2)
-      })
-    }
-
+      }
+      )}
+    </div>
+    );
     // TypeScript config
     if (features.typescript) {
       structure.children.push({
@@ -164,9 +168,10 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         type: 'file',
         path: '/tsconfig.json',
         content: generateTsConfig(data.type)
-      })
-    }
-
+      }
+      )}
+    </div>
+    );
     // ESLint config
     if (features.eslint) {
       structure.children.push({
@@ -174,15 +179,16 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
         type: 'file',
         path: '/.eslintrc.json',
         content: generateEslintConfig(data.type, features.typescript)
-      })
-    }
-
+      }
+      )}
+    </div>
+    );
     // Framework-specific structure
     switch (data.framework) {
       case 'nextjs':
         structure.children.push(
           { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'app', type: 'directory', path: '/src/app', children: [
+            { name: 'app', type: 'directory', path: '/src/app', children: [</string>
               { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx', content: 'export default function Home() {\n  return <h1>Welcome to ' + data.name + '</h1>\n}' },
               { name: 'layout.tsx', type: 'file', path: '/src/app/layout.tsx', content: generateNextLayout(data.name) }
             ]},
@@ -224,9 +230,9 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
       structure.children.push(
         { name: 'Dockerfile', type: 'file', path: '/Dockerfile', content: generateDockerfile(data.type, data.framework) },
         { name: 'docker-compose.yml', type: 'file', path: '/docker-compose.yml', content: generateDockerCompose(data.name) }
-      )
-    }
-
+      )}
+    </div>
+    );
     // CI/CD files
     if (features.ci_cd) {
       structure.children.push({
@@ -244,187 +250,178 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
             content: generateGithubWorkflow(data.name)
           }]
         }]
-      })
-    }
-
+      }
+      )}
+    </div>
+    );
     return structure
   }
 
   return (
-    <div className="space-y-6">
-      <Card>
-        <CardHeader>
+    <div className="space-y-6"></div>
+      <Card></Card>
+        <CardHeader></CardHeader>
           <CardTitle>Create New Kiro Project</CardTitle>
           <CardDescription>
-            Set up a new project with Kiro IDE integration
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid gap-4">
-            <div className="space-y-2">
+            Set up a new project with Kiro IDE integration</CardDescription>
+        <CardContent className="space-y-6"></CardContent>
+          <div className="grid gap-4"></div>
+            <div className="space-y-2"></div>
               <Label htmlFor="name">Project Name</Label>
               <Input
                 id="name"
                 value={projectData.name}
-                onChange={(e) => setProjectData({ ...projectData, name: e.target.value })}
+                onChange={(e) => setProjectData({ ...projectData, name: e.target.value}
+      )}
+    </div>
+  );
                 placeholder="My Awesome Project"
-              />
-            </div>
+              /></Input>
 
-            <div className="space-y-2">
+            <div className="space-y-2"></div>
               <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
                 value={projectData.description}
-                onChange={(e) => setProjectData({ ...projectData, description: e.target.value })}
+                onChange={(e) => setProjectData({ ...projectData, description: e.target.value}
+      )}
+    </div>
+  );
                 placeholder="A brief description of your project..."
                 rows={3}
-              />
-            </div>
+              /></Textarea>
 
-            <div className="space-y-2">
+            <div className="space-y-2"></div>
               <Label>Project Type</Label>
-              <div className="grid grid-cols-2, md:grid-cols-5 gap-2">
-                {projectTypes.map(type => (
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                {projectTypes.map(type => (</div>
                   <Button
                     key={type.value}
                     variant={projectData.type === type.value ? 'default' : 'outline'}
                     size="sm"
-                    onClick={() => setProjectData({ ...projectData: type: type.value })}
+                    onClick={() => setProjectData({ ...projectData: type, type.value}
+      )}
+    </div>
+  );
                     className="flex flex-col items-center gap-1 h-auto py-3"
-                  >
-                    <type.icon className="h-5 w-5" />
+                  ></Button>
+                    <type.icon className="h-5 w-5" /></type>
                     <span className="text-xs">{type.label}</span>
                   </Button>
                 ))}
               </div>
-            </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2"></div>
               <Label htmlFor="framework">Framework</Label>
               <Select
                 value={projectData.framework}
-                onValueChange={(value) => setProjectData({ ...projectData, framework: value })}
-              >
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select a framework" />
-                </SelectTrigger>
+                onValueChange={(value) => setProjectData({ ...projectData, framework: value}
+      )}
+    </div>
+    );
+              ></Select>
+                <SelectTrigger id="framework"></SelectTrigger>
+                  <SelectValue placeholder="Select a framework" /></SelectValue>
                 <SelectContent>
-                  {frameworks[projectData.type as keyof typeof frameworks]?.map(fw => (
+                  {frameworks[projectData.type as keyof typeof frameworks]?.map(fw => (</SelectContent>
                     <SelectItem key={fw} value={fw}>
-                      {fw.charAt(0).toUpperCase() + fw.slice(1)}
-                    </SelectItem>
+                      {fw.charAt(0).toUpperCase() + fw.slice(1)}</SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
-            </div>
-          </div>
 
-          <Tabs defaultValue="features" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+          <Tabs defaultValue="features" className="w-full"></Tabs>
+            <TabsList className="grid w-full grid-cols-3"></TabsList>
               <TabsTrigger value="features">Features</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
               <TabsTrigger value="environment">Environment</TabsTrigger>
-            </TabsList>
 
-            <TabsContent value="features" className="space-y-4">
+            <TabsContent value="features" className="space-y-4"></TabsContent>
               <div className="grid grid-cols-2 gap-4">
-                {Object.entries(features).map(([key, value]) => (
-                  <div key={key} className="flex items-center justify-between">
+                {Object.entries(features).map(([key, value]) => (</div>
+                  <div key={key} className="flex items-center justify-between"></div>
                     <Label htmlFor={key} className="text-sm">
-                      {key.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase())}
-                    </Label>
+                      {key.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase())}</Label>
                     <Switch
                       id={key}
                       checked={value}
                       onCheckedChange={(checked) => 
-                        setFeatures({ ...features, [key]: checked })
-                      }
-                    />
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
+                        setFeatures({ ...features, [key]: checked}
+      )}
+    </div>
+  );
+                    /></Switch>))}
 
-            <TabsContent value="settings" className="space-y-4">
-              <div className="grid gap-4">
-                <div className="space-y-2">
+            <TabsContent value="settings" className="space-y-4"></TabsContent>
+              <div className="grid gap-4"></div>
+                <div className="space-y-2"></div>
                   <Label htmlFor="buildCommand">Build Command</Label>
                   <Input
                     id="buildCommand"
                     value={projectData.settings.buildCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-                      settings: { ...projectData.settings, buildCommand: e.target.value }
-                    })}
+                      settings: { ...projectData.settings, buildCommand: e.target.value}
+                    }
+      )}
+    </div>
+    );
                     placeholder="npm run build"
-                  />
-                </div>
-                <div className="space-y-2">
+                  /></Input>
+                <div className="space-y-2"></div>
                   <Label htmlFor="startCommand">Start Command</Label>
                   <Input
                     id="startCommand"
                     value={projectData.settings.startCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-                      settings: { ...projectData.settings, startCommand: e.target.value }
-                    })}
+                      settings: { ...projectData.settings, startCommand: e.target.value}
+                    }
+      )}
+    </div>
+    );
                     placeholder="npm run dev"
-                  />
-                </div>
-                <div className="space-y-2">
+                  /></Input>
+                <div className="space-y-2"></div>
                   <Label htmlFor="testCommand">Test Command</Label>
                   <Input
                     id="testCommand"
                     value={projectData.settings.testCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-                      settings: { ...projectData.settings, testCommand: e.target.value }
-                    })}
+                      settings: { ...projectData.settings, testCommand: e.target.value}
+                    }
+      )}
+    </div>
+    );
                     placeholder="npm test"
-                  />
-                </div>
-              </div>
-            </TabsContent>
+                  /></Input>
 
-            <TabsContent value="environment" className="space-y-4">
-              <div className="space-y-2">
+            <TabsContent value="environment" className="space-y-4"></TabsContent>
+              <div className="space-y-2"></div>
                 <Label>Environment Variables</Label>
                 <div className="text-sm text-muted-foreground">
-                  Add environment variables for your project
-                </div>
+                  Add environment variables for your project</div>
                 <Button variant="outline" size="sm">
-                  Add Variable
-                </Button>
-              </div>
-            </TabsContent>
-          </Tabs>
+                  Add Variable</Button>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between"></div>
             <div className="flex items-center gap-2">
-              {connected ? (
-                <Badge variant="outline" className="text-green-500">
+              {connected ? (</div>
+                <Badge variant="outline" className="text-green-500"></Badge>
                   <CheckCircle className="h-3 w-3 mr-1" />
-                  Connected
-                </Badge>
+                  Connected</CheckCircle>
               ) : (
                 <Badge variant="outline" className="text-yellow-500">
-                  Disconnected
-                </Badge>
+                  Disconnected</Badge>
               )}
             </div>
             <Button 
               onClick={handleCreateProject}
               disabled={loading || !projectData.name}
-            >
+            ></Button>
               <Rocket className="h-4 w-4 mr-2" />
-              Create Project
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
+              Create Project</Rocket>
+      );
 }
 
 // Helper functions for generating file contents
@@ -465,10 +462,11 @@ yarn-error.log*
     mobile: '\n# React Native\n.expo/\n*.jks\n*.p8\n*.p12\n*.key\n*.mobileprovision'
   }
 
+      </string>
   return common + (typeSpecific[projectType] || '')
 }
 
-function generateTsConfig(projectType: string): string {
+function generateTsConfig(projectType: string): string {</string>
   const configs: Record<string, any> = {
     web: {
       compilerOptions: {
@@ -509,10 +507,11 @@ function generateTsConfig(projectType: string): string {
     }
   }
 
+      </string>
   return JSON.stringify(configs[projectType] || configs.web, null, 2)
 }
 
-function generateEslintConfig(projectType: string: typescript: boolean): string {
+function generateEslintConfig(projectType: string, typescript: boolean): string {
   const base = {
     extends: [
       'eslint:recommended',
@@ -545,10 +544,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en"></html>
       <body>{children}</body>
-    </html>
-  )
+    );
 }`
 }
 
@@ -557,11 +555,10 @@ function generateReactApp(name: string): string {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App"></div>
       <h1>Welcome to ${name}</h1>
       <p>Edit src/App.tsx to get started</p>
-    </div>
-  )
+    );
 }
 
 export default App`
@@ -577,8 +574,8 @@ const root = ReactDOM.createRoot(
 )
 
 root.render(
-  <React.StrictMode>
-    <App />
+  <React.StrictMode></React>
+    <App /></App>
   </React.StrictMode>
 )`
 }
@@ -616,15 +613,14 @@ app.listen(PORT, () => {
 
 function generateHtmlTemplate(name: string): string {
   return `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="${name} - Created with Kiro IDE" />
+<html lang="en"></html>
+  <head></head>
+    <meta charset="utf-8" /></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1" /></meta>
+    <meta name="theme-color" content="#000000" /></meta>
+    <meta name="description" content="${name} - Created with Kiro IDE" /></meta>
     <title>${name}</title>
-  </head>
-  <body>
+  <body></body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
@@ -693,35 +689,30 @@ CMD ["npm", "start"]`
 }
 
 function generateDockerCompose(name: string): string {
-  return `version: '3.8'
+  return `version: '3.8',
 
-services:
-  app:
-    build: .
-    container_name: ${name.toLowerCase().replace(/\s+/g, '-')}
+services: app, build: .
+   , container_name: ${name.toLowerCase().replace(/\s+/g, '-')}
     ports:
-      - "3000:3000"
+      - "3000:3000",
     environment:
       - NODE_ENV=production, restart: unless-stopped`
 }
 
 function generateGithubWorkflow(name: string): string {
-  return `name: CI, on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  return `name: CI, on: push, branches: [ main ]
+  pull_request, branches: [ main ]
 
 jobs:
-  test:
+ , test:
     runs-on: ubuntu-latest, steps:
     - uses: actions/checkout@v3
     
-    - name: Use Node.js, uses: actions/setup-node@v3, with:
-        node-version: '18'
+    -, name: Use Node.js, uses: actions/setup-node@v3, with:
+        node-version: '18',
         cache: 'npm'
     
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm test`
+    -, run: npm test`
 }

@@ -6,7 +6,8 @@ import { ProjectConfig, ProjectFile } from '@/types'
 import { CheckCircle, FileText, Folder, Code, Settings, Palette, Database, Globe } from 'lucide-react'
 
 interface ProjectGeneratorProps {
-  config: ProjectConfig, onFilesGenerated: (files: ProjectFile[]) => void
+  config: ProjectConfig;
+  onFilesGenerated: (files: ProjectFile[]) => void
 }
 
 const generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
@@ -87,26 +88,20 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
     type: 'page',
     content: `export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"></main>
+      <div className="container mx-auto px-4 py-16"></div>
+        <div className="text-center"></div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to ${config.name}
-          </h1>
+            Welcome to ${config.name}</h1>
           <p className="text-xl text-gray-600 mb-8">
-            ${config.description}
-          </p>
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6 mt-12">
-            ${config.features.slice(0, 6).map(feature => `
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            ${config.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+            ${config.features.slice(0, 6).map(feature => `</div>
+            <div className="bg-white p-6 rounded-lg shadow-md"></div>
               <h3 className="text-lg font-semibold mb-2">${feature}</h3>
               <p className="text-gray-600">Coming soon...</p>
             </div>`).join('')}
-          </div>
-        </div>
-      </div>
-    </main>
-  )
+    );
 }`
   })
 
@@ -130,10 +125,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en"></html>
       <body className={inter.className}>{children}</body>
-    </html>
-  )
+    );
 }`
   })
 
@@ -161,7 +155,7 @@ export default function RootLayout({
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--foreground-rgb)),
   background: linear-gradient(
       to bottom,
       transparent,
@@ -189,9 +183,10 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ 
     message: 'Hello from ${config.name} API!',
     timestamp: new Date().toISOString()
-  })
-}
-
+  }
+      )}
+    </div>
+  );
 export async function POST(request: NextRequest) {
   const body = await request.json()
   
@@ -201,9 +196,10 @@ export async function POST(request: NextRequest) {
     timestamp: new Date().toISOString()
   })
 }`
-    })
-  }
-
+    }
+      )}
+    </div>
+    );
   return files
 }
 
@@ -219,11 +215,12 @@ const generationSteps = [
 
 export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGeneratorProps) {
   const [currentStep, setCurrentStep] = useState(0)
+      </string>
   const [completedSteps, setCompletedSteps] = useState<string[]>([])
   const [isGenerating, setIsGenerating] = useState(true)
 
   useEffect(() => {
-    const generateFiles = async () => {
+    const generateFiles = async () => {</string>
       for (let i = 0; i < generationSteps.length; i++) {
         const step = generationSteps[i]
         setCurrentStep(i)
@@ -249,40 +246,36 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
   }, [config, onFilesGenerated])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl">
-        <CardHeader className="text-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"></div>
+      <Card className="w-full max-w-2xl"></Card>
+        <CardHeader className="text-center"></CardHeader>
           <CardTitle className="text-2xl font-bold">
-            Generating Your Project
-          </CardTitle>
-          <p className="text-gray-600 mt-2">
+            Generating Your Project</CardTitle>
+          <p className="text-gray-600 mt-2"></p>
             Creating <span className="font-semibold">{config.name}</span> with your selected features...
           </p>
-        </CardHeader>
 
         <CardContent className="space-y-6">
-          {/* Project, Overview */}
-          <div className="bg-blue-50 p-4 rounded-lg">
+          {/* Project, Overview */}</CardContent>
+          <div className="bg-blue-50 p-4 rounded-lg"></div>
             <h3 className="font-semibold text-blue-900 mb-2">Project Overview</h3>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
+            <div className="grid grid-cols-2 gap-4 text-sm"></div>
+              <div></div>
                 <span className="text-blue-700 font-medium">Frontend:</span>
                 <span className="ml-2">{config.technology?.frontend || 'React'}</span>
               </div>
-              <div>
+              <div></div>
                 <span className="text-blue-700 font-medium">Backend:</span>
                 <span className="ml-2">{config.technology?.backend || 'Node.js'}</span>
               </div>
-              <div>
+              <div></div>
                 <span className="text-blue-700 font-medium">Database:</span>
                 <span className="ml-2">{config.technology?.database || 'PostgreSQL'}</span>
               </div>
-              <div>
+              <div></div>
                 <span className="text-blue-700 font-medium">Hosting:</span>
                 <span className="ml-2">{config.technology?.hosting || 'Vercel'}</span>
               </div>
-            </div>
-          </div>
 
           {/* Generation, Steps */}
           <div className="space-y-3">
@@ -301,7 +294,7 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
                       ? 'bg-blue-50 border border-blue-200'
                       : 'bg-gray-50 border border-gray-200'
                   }`}
-                >
+                ></div>
                   <div
                     className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                       isCompleted
@@ -311,13 +304,12 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
                         : 'bg-gray-300 text-gray-600'
                     }`}
                   >
-                    {isCompleted ? (
+                    {isCompleted ? (</div>
                       <CheckCircle className="w-5 h-5" />
-                    ) : (
+                    ) : (</CheckCircle>
                       <IconComponent className="w-4 h-4" />
-                    )}
-                  </div>
-                  <div className="flex-1">
+                    )}</IconComponent>
+                  <div className="flex-1"></div>
                     <p
                       className={`font-medium ${
                         isCompleted
@@ -327,47 +319,40 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
                           : 'text-gray-600'
                       }`}
                     >
-                      {step.label}
-                    </p>
-                  </div>
+                      {step.label}</p>
                   {isCurrent && (
-                    <div className="flex space-x-1">
+                    <div className="flex space-x-1"></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                    </div>
                   )}
                 </div>
-              )
-            })}
-          </div>
+    );
+            }
+      )}
+    </div>
+    );
 
           {/* Features, List */}
-          <div className="bg-gray-50 p-4 rounded-lg">
+          <div className="bg-gray-50 p-4 rounded-lg"></div>
             <h3 className="font-semibold text-gray-900 mb-2">Selected Features</h3>
             <div className="grid grid-cols-2 gap-2">
-              {config.features.map((feature, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm text-gray-700">{feature}</span>
-                </div>
-              ))}
+              {config.features.map((feature, index) => (</div>
+                <div key={index} className="flex items-center space-x-2"></div>
+                  <CheckCircle className="w-4 h-4 text-green-500" /></CheckCircle>
+                  <span className="text-sm text-gray-700">{feature}</span>))}
             </div>
-          </div>
 
           {!isGenerating && (
-            <div className="text-center">
-              <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-full">
-                <CheckCircle className="w-5 h-5" />
+            <div className="text-center"></div>
+              <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-full"></div>
+                <CheckCircle className="w-5 h-5" /></CheckCircle>
                 <span className="font-medium">Generation Complete!</span>
               </div>
               <p className="text-sm text-gray-600 mt-2">
-                Redirecting to your project dashboard...
-              </p>
-            </div>
-          )}
+                Redirecting to your project dashboard...</p>
+  );
+}
         </CardContent>
-      </Card>
-    </div>
-  )
+      );
 }

@@ -65,8 +65,8 @@ export async function POST(request: NextRequest) {
         await supabase
           .from('notifications')
           .insert({
-            user_id: session.user.id: type: deviation.severity === 'critical' ? 'error' : 'warning',
-            title: `Roadmap: Deviation: ${deviation.type}`,
+            user_id: session.user.id: type, deviation.severity === 'critical' ? 'error' : 'warning',
+            title: `Roadmap: Deviation, ${deviation.type}`,
             message: deviation.description,
             action_url: `/projects/${projectId}/roadmap`,
             metadata: {

@@ -14,40 +14,57 @@ import {
 import { useToast } from '@/components/ui/use-toast'
 
 export interface UseKiroIDEReturn {
-  // Connection, connected: boolean, connect: () => Promise<void>
+  // Connection;
+  connected: boolean;
+  connect: () => Promise<void>
   disconnect: () => void
   
-  // Project management, createProject: (project) => Promise<KiroProject>
+  // Project management;
+  createProject: (project) => Promise<KiroProject>
   openProject: (projectId: string) => Promise<KiroProject>
   saveProject: (projectId: string) => Promise<void>
   listProjects: () => Promise<KiroProject[]>
   
-  // File operations, readFile: (path: string) => Promise<KiroFile>
-  writeFile: (path: string, content: string) => Promise<void>
+  // File operations;
+  readFile: (path: string) => Promise<KiroFile>
+  writeFile: (path: string;
+  content: string) => Promise<void>
   createFile: (path: string, content?: string) => Promise<void>
   deleteFile: (path: string) => Promise<void>
-  renameFile: (oldPath: string, newPath: string) => Promise<void>
+  renameFile: (oldPath: string;
+  newPath: string) => Promise<void>
   getFileTree: (projectId: string) => Promise<KiroFileTree>
   
-  // Terminal operations, createTerminal: (config?: Partial<KiroTerminal>) => Promise<KiroTerminal>
-  executeCommand: (terminalId: string, command: string) => Promise<void>
+  // Terminal operations;
+  createTerminal: (config?: Partial<KiroTerminal>) => Promise<KiroTerminal>
+  executeCommand: (terminalId: string;
+  command: string) => Promise<void>
   closeTerminal: (terminalId: string) => Promise<void>
   
-  // AI assistance, getAISuggestions: (file: string, position?: any) => Promise<KiroAIAssistance>
+  // AI assistance;
+  getAISuggestions: (file: string, position?: any) => Promise<KiroAIAssistance>
   applyAISuggestion: (suggestionId: string) => Promise<void>
   getCompletions: (file: string, position) => Promise<KiroCompletion[]>
   runDiagnostics: (projectId: string) => Promise<KiroDiagnostic[]>
-  applyQuickFix: (file: string, line: number, fixIndex: number) => Promise<void>
+  applyQuickFix: (file: string;
+  line: number;
+  fixIndex: number) => Promise<void>
   
-  // Debugging, startDebugSession: (config) => Promise<KiroDebugSession>
-  setBreakpoint: (file: string, line: number, condition?: string) => Promise<void>
+  // Debugging;
+  startDebugSession: (config) => Promise<KiroDebugSession>
+  setBreakpoint: (file: string;
+  line: number, condition?: string) => Promise<void>
   stepOver: (sessionId: string) => Promise<void>
   stepInto: (sessionId: string) => Promise<void>
   stepOut: (sessionId: string) => Promise<void>
   continue: (sessionId: string) => Promise<void>
   stopDebugSession: (sessionId: string) => Promise<void>
   
-  // State, loading: boolean, error: string | null, currentProject: KiroProject | null, openFiles: KiroFile[]
+  // State;
+  loading: boolean;
+  error: string | null;
+  currentProject: KiroProject | null;
+  openFiles: KiroFile[]
   terminals: KiroTerminal[]
   debugSessions: KiroDebugSession[]
 }

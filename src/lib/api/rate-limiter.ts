@@ -56,8 +56,8 @@ export const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
 };
 
 class RateLimiter {
-  private, redisClient: any = null;
-  private, fallbackStore: Map<string, { count: number; resetTime: number }> = new Map();
+  private redisClient: any = null;
+  private fallbackStore: Map<string, { count: number, resetTime: number }> = new Map();
 
   constructor() {
     this.initializeRedis();
@@ -178,7 +178,7 @@ class RateLimiter {
   }
 
   async getRateLimitStatus(key: string, windowMs: number): Promise<{
-    requests: number;
+    requests: number,
     resetTime: number;
   }> {
     if (this.redisClient) {
@@ -195,7 +195,7 @@ class RateLimiter {
           resetTime: now + windowMs
         };
       } catch (error) {
-        console.error('Failed to get rate limit status, from: Redis:', error);
+        console.error('Failed to get rate limit status, from: Redis,', error);
       }
     }
 

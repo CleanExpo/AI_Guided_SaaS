@@ -3,15 +3,21 @@ import { join } from 'path'
 import { mcp__memory__create_entities, mcp__memory__search_nodes } from '@/lib/mcp'
 
 export interface AgentConfig {
-  agent_id: string, name: string, version: string, description: string, role: string, priority: number, capabilities: string[]
+  agent_id: string;
+  name: string;
+  version: string;
+  description: string;
+  role: string;
+  priority: number;
+  capabilities: string[];
   specializations: Record<string, any>
   coordination_protocols: {
-    initiates_with: string[]
-    coordinates_with: string[]
-    provides_to: string[]
-    depends_on: string[]
-    escalates_to: string[]
-    reports_to: string[]
+    initiates_with: string[];
+  coordinates_with: string[]
+    provides_to: string[];
+  depends_on: string[]
+    escalates_to: string[];
+  reports_to: string[]
   }
   workflow_patterns: Record<string, any>
   communication_templates: Record<string, any>
@@ -30,18 +36,19 @@ export interface AgentLoadResult {
 }
 
 export interface AgentDiscoveryResult {
-  total_agents: number, core_agents: AgentConfig[]
+  total_agents: number;
+  core_agents: AgentConfig[];
   orchestration_agents: AgentConfig[]
-  specialist_agents: AgentConfig[]
+  specialist_agents: AgentConfig[];
   missing_agents: string[]
   load_errors: string[]
 }
 
 export class AgentLoader {
-  private static, instance: AgentLoader
-  private, agentsPath: string
+  private static instance: AgentLoader
+  private agentsPath: string
   private, loadedAgents: Map<string, AgentConfig> = new Map()
-  private, agentDependencies: Map<string, string[]> = new Map()
+  private agentDependencies: Map<string, string[]> = new Map()
 
   constructor(agentsPath: string = '') {
     // Default to project agents directory
@@ -152,7 +159,7 @@ export class AgentLoader {
   /**
    * Get agents required for next stage based on current project state
    */
-  async getRequiredAgentsForStage(currentStage: string: projectType: string = 'saas_platform'): Promise<AgentConfig[]> {
+  async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise<AgentConfig[]> {
     const stageAgentMap: Record<string, string[]> = {
       'requirements': ['ARCHITECT'],
       'architecture': ['ARCHITECT', 'FRONTEND', 'BACKEND'],
@@ -329,16 +336,12 @@ export class AgentLoader {
 
     // Search by role
     for (const loadedAgent of Array.from(this.loadedAgents.values())) {
-      if (loadedAgent.role === identifier.toUpperCase()) {
-        return loadedAgent
-      }
+      if (loadedAgent.role === identifier.toUpperCase()) { return: loadedAgent }
     }
 
     // Search by name (partial match)
     for (const loadedAgent of Array.from(this.loadedAgents.values())) {
-      if (loadedAgent.name.toLowerCase().includes(identifier.toLowerCase())) {
-        return loadedAgent
-      }
+      if (loadedAgent.name.toLowerCase().includes(identifier.toLowerCase())) { return: loadedAgent }
     }
 
     return undefined
@@ -400,7 +403,7 @@ export class AgentLoader {
 
       console.log('💾 Agent discovery results stored in memory')
     } catch (error) {
-      console.log('⚠️ Failed to store in memory, system:', error)
+      console.log('⚠️ Failed to store in memory system:', error)
     }
   }
 

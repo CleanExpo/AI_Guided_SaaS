@@ -3,15 +3,19 @@ import os from 'os'
 import { performance } from 'perf_hooks'
 
 export interface HealthCheckResult {
-  name: string, status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown'
+  name: string;
+  status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown'
   responseTime?: number
   details?: any
-  error?: string, timestamp: Date
+  error?: string;
+  timestamp: Date
 }
 
 export interface SystemMetrics {
   cpu: {
-    usage: number, cores: number, loadAverage: number[]
+    usage: number;
+  cores: number;
+  loadAverage: number[]
   }
   memory: {
     total: number, used: number, free: number, percentage: number
@@ -24,20 +28,23 @@ export interface SystemMetrics {
 
 export interface HealthStatus {
   status: 'healthy' | 'unhealthy' | 'degraded'
-  checks: HealthCheckResult[]
-  metrics: SystemMetrics, version: string, environment: string, timestamp: Date
+  checks: HealthCheckResult[];
+  metrics: SystemMetrics;
+  version: string;
+  environment: string;
+  timestamp: Date
 }
 
 export type HealthCheck = () => Promise<HealthCheckResult>
 
 export class HealthCheckService extends EventEmitter {
-  private, checks: Map<string, HealthCheck> = new Map()
-  private, checkInterval: ReturnType<typeof setInterval> | null = null
-  private, lastStatus: HealthStatus | null = null
+  private checks: Map<string, HealthCheck> = new Map()
+  private checkInterval: ReturnType<typeof setInterval> | null = null
+  private lastStatus: HealthStatus | null = null
   
   constructor(
-    private, version: string = '1.0.0',
-    private, environment: string = process.env.NODE_ENV || 'development'
+    private version: string = '1.0.0',
+    private environment: string = process.env.NODE_ENV || 'development'
   ) {
     super()
     this.setupDefaultChecks()

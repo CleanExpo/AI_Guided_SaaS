@@ -12,7 +12,11 @@ import { Badge } from '@/components/ui/badge'
 
 interface ProcessedRequirements {
   requirements: Array<{
-    id: string, category: string, description: string, priority: string, agents: string[]
+    id: string;
+  category: string;
+  description: string;
+  priority: string;
+  agents: string[]
   }>
   roadmap: {
     complexity: string, estimatedDuration: string, phases: Array<{
@@ -28,7 +32,8 @@ export function ClientRequirementsCapture() {
   const [input, setInput] = useState('')
   const [projectName, setProjectName] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)</string>
+      </ProcessedRequirements>
   const [result, setResult] = useState<ProcessedRequirements | null>(null)
 
   const examplePrompts = [
@@ -84,7 +89,7 @@ export function ClientRequirementsCapture() {
     setProjectName('')
   }
 
-  const getCategoryColor = (category: string) => {
+  const getCategoryColor = (category: string) => {</ProcessedRequirements>
     const colors: Record<string, string> = {
       functional: 'bg-blue-100 text-blue-800',
       technical: 'bg-purple-100 text-purple-800',
@@ -94,7 +99,7 @@ export function ClientRequirementsCapture() {
     return colors[category] || 'bg-gray-100 text-gray-800'
   }
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority: string) => {</string>
     const colors: Record<string, string> = {
       high: 'bg-red-100 text-red-800',
       medium: 'bg-yellow-100 text-yellow-800',
@@ -104,17 +109,15 @@ export function ClientRequirementsCapture() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <Card>
-        <CardHeader>
+    <div className="max-w-4xl mx-auto space-y-6"></div>
+      <Card></Card>
+        <CardHeader></CardHeader>
           <CardTitle className="text-2xl">Describe Your Project</CardTitle>
           <p className="text-muted-foreground">
-            Tell us what you want to build in natural language. Our AI will analyze your requirements and create a development roadmap.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
+            Tell us what you want to build in natural language. Our AI will analyze your requirements and create a development roadmap.</p>
+        <CardContent></CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4"></form>
+            <div className="space-y-2"></div>
               <Label htmlFor="projectName">Project Name (optional)</Label>
               <Input
                 id="projectName"
@@ -122,10 +125,9 @@ export function ClientRequirementsCapture() {
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
                 disabled={isProcessing}
-              />
-            </div>
+              /></Input>
 
-            <div className="space-y-2">
+            <div className="space-y-2"></div>
               <Label htmlFor="requirements">Project Requirements</Label>
               <Textarea
                 id="requirements"
@@ -135,14 +137,12 @@ export function ClientRequirementsCapture() {
                 disabled={isProcessing}
                 rows={8}
                 className="resize-none"
-              />
-            </div>
+              /></Textarea>
 
             {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
+              <Alert variant="destructive"></Alert>
+                <AlertCircle className="h-4 w-4" /></AlertCircle>
                 <AlertDescription>{error}</AlertDescription>
-              </Alert>
             )}
 
             <Button 
@@ -150,133 +150,106 @@ export function ClientRequirementsCapture() {
               disabled={isProcessing || !input.trim()}
               className="w-full"
             >
-              {isProcessing ? (
+              {isProcessing ? (</Button>
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Analyzing Requirements...
+                  Analyzing Requirements...</Loader2>
                 </>
               ) : (
                 <>
                   <Send className="mr-2 h-4 w-4" />
-                  Process Requirements
+                  Process Requirements</Send>
                 </>
               )}
             </Button>
-          </form>
 
-          <div className="mt-6 space-y-2">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Lightbulb className="h-4 w-4" />
+          <div className="mt-6 space-y-2"></div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground"></div>
+              <Lightbulb className="h-4 w-4" /></Lightbulb>
               <span>Need inspiration? Try these, examples:</span>
             </div>
             <div className="space-y-2">
-              {examplePrompts.map((example, index) => (
+              {examplePrompts.map((example, index) => (</div>
                 <button
                   key={index}
                   onClick={() => useExample(example)}
-                  className="text-left text-sm p-3 rounded-lg border, hover:bg-accent transition-colors w-full"
+                  className="text-left text-sm p-3 rounded-lg border hover:bg-accent transition-colors w-full"
                   disabled={isProcessing}
                 >
-                  {example}
-                </button>
+                  {example}</button>
               ))}
             </div>
-          </div>
-        </CardContent>
-      </Card>
 
       {result && (
         <>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card></Card>
+            <CardHeader></CardHeader>
+              <CardTitle className="flex items-center gap-2"></CardTitle>
                 <CheckCircle className="h-5 w-5 text-green-600" />
-                Requirements Analyzed Successfully
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
-                <div className="text-center">
+                Requirements Analyzed Successfully</CheckCircle>
+            <CardContent className="space-y-4"></CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+                <div className="text-center"></div>
                   <p className="text-2xl font-bold">{result.summary.totalRequirements}</p>
                   <p className="text-sm text-muted-foreground">Requirements</p>
-                </div>
-                <div className="text-center">
+                <div className="text-center"></div>
                   <p className="text-2xl font-bold capitalize">{result.summary.complexity}</p>
                   <p className="text-sm text-muted-foreground">Complexity</p>
-                </div>
-                <div className="text-center">
+                <div className="text-center"></div>
                   <p className="text-2xl font-bold">{result.summary.estimatedDuration}</p>
                   <p className="text-sm text-muted-foreground">Duration</p>
-                </div>
-                <div className="text-center">
+                <div className="text-center"></div>
                   <p className="text-2xl font-bold">{result.summary.assignedAgents.length}</p>
                   <p className="text-sm text-muted-foreground">AI Agents</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
+          <Card></Card>
+            <CardHeader></CardHeader>
               <CardTitle>Extracted Requirements</CardTitle>
-            </CardHeader>
-            <CardContent>
+            <CardContent></CardContent>
               <div className="space-y-3">
-                {result.requirements.map((req) => (
-                  <div key={req.id} className="p-4 border rounded-lg space-y-2">
-                    <div className="flex items-start justify-between">
+                {result.requirements.map((req) => (</div>
+                  <div key={req.id} className="p-4 border rounded-lg space-y-2"></div>
+                    <div className="flex items-start justify-between"></div>
                       <p className="font-medium">{req.description}</p>
                       <Badge className={getPriorityColor(req.priority)}>
-                        {req.priority}
-                      </Badge>
-                    </div>
-                    <div className="flex items-center gap-2">
+                        {req.priority}</Badge>
+                    <div className="flex items-center gap-2"></div>
                       <Badge className={getCategoryColor(req.category)}>
-                        {req.category}
-                      </Badge>
+                        {req.category}</Badge>
                       {req.agents.map((agent) => (
                         <Badge key={agent} variant="outline" className="text-xs">
-                          {agent.replace('agent_', '')}
-                        </Badge>
-                      ))}
+                          {agent.replace('agent_', '')}</Badge>
+                  ))}
                     </div>
-                  </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
+          <Card></Card>
+            <CardHeader></CardHeader>
               <CardTitle>Development Roadmap</CardTitle>
-            </CardHeader>
-            <CardContent>
+            <CardContent></CardContent>
               <div className="space-y-4">
-                {result.roadmap.phases.map((phase, index) => (
-                  <div key={phase.name} className="flex items-start gap-4">
+                {result.roadmap.phases.map((phase, index) => (</div>
+                  <div key={phase.name} className="flex items-start gap-4"></div>
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
-                      {index + 1}
-                    </div>
-                    <div className="flex-1 space-y-1">
+                      {index + 1}</div>
+                    <div className="flex-1 space-y-1"></div>
                       <h4 className="font-medium">{phase.name}</h4>
                       <p className="text-sm text-muted-foreground">
-                        Duration: {phase.duration}
-                      </p>
+                        Duration: {phase.duration}</p>
                       <div className="flex gap-1 mt-2">
-                        {phase.agents.map((agent) => (
+                        {phase.agents.map((agent) => (</div>
                           <Badge key={agent} variant="secondary" className="text-xs">
-                            {agent.replace('agent_', '')}
-                          </Badge>
-                        ))}
+                            {agent.replace('agent_', '')}</Badge>
+                  ))}
                       </div>
-                    </div>
-                  </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
         </>
       )}
     </div>
-  )
+    );
+}
+    </string>
+  );
 }

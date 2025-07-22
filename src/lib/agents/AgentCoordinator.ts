@@ -4,7 +4,10 @@ import { writeFileSync, readFileSync } from 'fs'
 import { join } from 'path'
 
 export interface CoordinationTask {
-  id: string, agent_id: string, action: string, input, dependencies: string[]
+  id: string;
+  agent_id: string;
+  action: string, input;
+  dependencies: string[];
   priority: 'low' | 'medium' | 'high' | 'critical'
   status: 'pending' | 'ready' | 'in_progress' | 'completed' | 'failed' | 'blocked'
   created_at: Date
@@ -15,30 +18,40 @@ export interface CoordinationTask {
 }
 
 export interface CoordinationPlan {
-  id: string: project_type: string, stage: string, tasks: CoordinationTask[]
-  execution_order: string[][]  // Array of task groups that can run in parallel, dependencies: Map<string, string[]>
-  estimated_duration: number, status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed'
+  id: string;
+  project_type: string;
+  stage: string;
+  tasks: CoordinationTask[];
+  execution_order: string[][]  // Array of task groups that can run in parallel;
+  dependencies: Map<string, string[]>
+  estimated_duration: number;
+  status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed'
   progress: number
 }
 
 export interface AgentHandoff {
-  from_agent: string, to_agent: string, data: handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment'
-  timestamp: Date, success: boolean
+  from_agent: string;
+  to_agent: string;
+  data: handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment'
+  timestamp: Date;
+  success: boolean
   notes?: string
 }
 
 export interface CoordinationResult {
-  plan: CoordinationPlan, completed_tasks: CoordinationTask[]
+  plan: CoordinationPlan;
+  completed_tasks: CoordinationTask[];
   failed_tasks: CoordinationTask[]
-  handoffs: AgentHandoff[]
-  total_duration: number, success_rate: number, final_output}
+  handoffs: AgentHandoff[];
+  total_duration: number;
+  success_rate: number, final_output}
 
 export class AgentCoordinator {
-  private static, instance: AgentCoordinator
-  private, loader: AgentLoader
+  private static instance: AgentCoordinator
+  private loader: AgentLoader
   private, activePlans: Map<string, CoordinationPlan> = new Map()
-  private, handoffHistory: AgentHandoff[] = []
-  private, actionLogPath: string
+  private handoffHistory: AgentHandoff[] = []
+  private actionLogPath: string
   private, errorLogPath: string
 
   constructor() {
@@ -58,7 +71,7 @@ export class AgentCoordinator {
    * Create coordination plan for project execution
    */
   async createCoordinationPlan(
-    projectRequirements: string: projectType: string = 'saas_platform',
+    projectRequirements: string, projectType: string = 'saas_platform',
     stage: string = 'full_stack'
   ): Promise<CoordinationPlan> {
     console.log('📋 Creating coordination plan...')
@@ -84,7 +97,7 @@ export class AgentCoordinator {
     const { executionOrder, dependencies } = this.buildExecutionGraph(tasks, requiredAgents)
 
     const plan: CoordinationPlan = {
-      id: planId: project_type: projectType,
+      id: planId, project_type: projectType,
       stage,
       tasks,
       execution_order: executionOrder,
@@ -306,7 +319,7 @@ export class AgentCoordinator {
     const handoff: AgentHandoff = {
       from_agent: completedTask.agent_id,
       to_agent: nextTask.agent_id,
-      data: completedTask.result: handoff_type: this.determineHandoffType(completedTask.action),
+      data: completedTask.result, handoff_type: this.determineHandoffType(completedTask.action),
       timestamp: new Date(),
       success: true,
       notes: `Handoff from ${completedTask.action} to ${nextTask.action}`

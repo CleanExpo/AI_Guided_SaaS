@@ -1,0 +1,230 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+
+console.log('🔧 Comprehensive TSX Error Fixer\n');
+
+// Find all TypeScript files
+const files = glob.sync('**/*.tsx', {
+  ignore: ['node_modules/**', 'dist/**', '.next/**', 'mcp/node_modules/**'],
+  cwd: process.cwd()
+});
+
+let totalFixed = 0;
+let filesFixed = 0;
+
+function fixTSXFile(content, filePath) {
+  let fixed = content;
+  let changeCount = 0;
+  
+  // Fix 1: Common broken patterns
+  const patterns = [
+    // Fix lines ending with closing tag and semicolon after JSX
+    { from: /<\/(\w+)>\s*\)\s*;?\s*$/gm, to: '</$1>\n    );' },
+    
+    // Fix motion.div specific issues
+    { from: /<\/motion\.div>\s*<\/motion\.div>/g, to: '</motion.div>' },
+    
+    // Fix Button double closing
+    { from: /<\/Button>\s*<\/Button>/g, to: '</Button>' },
+    
+    // Fix Card components
+    { from: /<\/Card>\s*<\/Card>/g, to: '</Card>' },
+    { from: /<\/CardContent>\s*<\/CardContent>/g, to: '</CardContent>' },
+    { from: /<\/CardHeader>\s*<\/CardHeader>/g, to: '</CardHeader>' },
+    
+    // Fix fragments
+    { from: /<>\s*<>/g, to: '<>' },
+    { from: /<\/>\s*<\/>/g, to: '</>' },
+    
+    // Fix return statements
+    { from: /return\s*\(\s*<\/\w+>/g, to: 'return (' },
+    
+    // Fix className with trailing commas
+    { from: /className="([^"]+),\s*"/g, to: 'className="$1"' },
+    
+    // Fix JSX expressions ending abruptly
+    { from: /\}\s*\)\s*\}\s*$/gm, to: '}\n      )}\n    </div>\n  );' },
+    
+    // Fix common component endings
+    { from: /<\/p>\s*\)\s*}$/gm, to: '</p>\n      </div>\n    </div>\n  );\n}' },
+    
+    // Fix loading patterns
+    { from: /Loading\.\.\.<\/p>\s*\)\s*;/g, to: 'Loading...</p>\n        </div>\n      </div>\n    );' },
+    
+    // Fix error patterns
+    { from: /Error loading[^<]*<\/p>\s*\)\s*;/g, to: (match) => {
+      return match.replace(/\)\s*;/, '\n        </div>\n      </div>\n    );');
+    }},
+    
+    // Fix Badge patterns
+    { from: /<\/Badge>\s*\)\s*\)\s*\}/g, to: '</Badge>\n                      </div>\n                    </div>\n                  ))}' }
+  ];
+
+  // Apply all patterns
+  for (const pattern of patterns) {
+    const before = fixed;
+    fixed = fixed.replace(pattern.from, pattern.to);
+    if (before !== fixed) changeCount++;
+  }
+
+  // Fix 2: Analyze and fix JSX structure
+  const lines = fixed.split('\n');
+  const fixedLines = [];
+  let inJSX = false;
+  let jsxDepth = 0;
+  let lastOpenTag = null;
+  
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    
+    // Track JSX context
+    if (line.includes('return (')) {
+      inJSX = true;
+      jsxDepth = 1;
+    }
+    
+    // Count brackets
+    const openBrackets = (line.match(/\(/g) || []).length;
+    const closeBrackets = (line.match(/\)/g) || []).length;
+    jsxDepth += openBrackets - closeBrackets;
+    
+    // Fix lines that end with just );
+    if (line.trim() === ');' && jsxDepth < 0) {
+      // This is likely the end of a component
+      const indent = line.match(/^\s*/)[0];
+      fixedLines.push(indent + '  );');
+      inJSX = false;
+      jsxDepth = 0;
+      continue;
+    }
+    
+    // Fix lines with orphaned closing tags
+    if (line.match(/^\s*<\/\w+>\s*$/) && i > 0) {
+      const prevLine = fixedLines[fixedLines.length - 1];
+      if (prevLine && prevLine.includes('</') && !prevLine.includes('<div') && !prevLine.includes('<span')) {
+        // Skip this orphaned closing tag
+        changeCount++;
+        continue;
+      }
+    }
+    
+    fixedLines.push(line);
+  }
+  
+  fixed = fixedLines.join('\n');
+
+  // Fix 3: Ensure all components end properly
+  if (!fixed.match(/}\s*$/)) {
+    fixed += '\n}';
+    changeCount++;
+  }
+
+  // Fix 4: Common specific patterns for pages
+  fixed = fixed
+    // Fix admin page patterns
+    .replace(/Redirecting[^<]*<\/p>\s*\)\s*}/g, (match) => {
+      return match.replace(/\)\s*}/, '\n      </div>\n    </div>\n  );\n}');
+    })
+    // Fix loading patterns
+    .replace(/className="animate-spin[^"]*"[^>]*><\/div>\s*<p[^>]*>[^<]*<\/p>\s*\)\s*}/g, (match) => {
+      return match.replace(/\)\s*}/, '\n        </div>\n      </div>\n    );\n  }');
+    })
+    // Fix form patterns
+    .replace(/(<form[^>]*>)([\s\S]*?)(<\/form>)\s*\)\s*}/g, (match, open, content, close) => {
+      if (!match.includes('</div>')) {
+        return `${open}${content}${close}\n        </div>\n      </div>\n    );\n  }`;
+      }
+      return match;
+    })
+    // Fix header patterns
+    .replace(/(<header[^>]*>)([\s\S]*?)(<\/header>)(?!\s*<)/g, (match, open, content, close) => {
+      // Count divs in content
+      const openDivs = (content.match(/<div[^>]*>/g) || []).length;
+      const closeDivs = (content.match(/<\/div>/g) || []).length;
+      if (openDivs > closeDivs) {
+        let closingDivs = '';
+        for (let i = 0; i < openDivs - closeDivs; i++) {
+          closingDivs += '        </div>\n';
+        }
+        return `${open}${content}${closingDivs}      ${close}`;
+      }
+      return match;
+    });
+
+  return { fixed, changeCount };
+}
+
+// Process each file
+files.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  const content = fs.readFileSync(filePath, 'utf8');
+  
+  const { fixed, changeCount } = fixTSXFile(content, filePath);
+  
+  if (changeCount > 0) {
+    fs.writeFileSync(filePath, fixed);
+    console.log(`✅ Fixed ${changeCount} issues in ${file}`);
+    totalFixed += changeCount;
+    filesFixed++;
+  }
+});
+
+console.log(`\n📊 Summary:`);
+console.log(`Fixed ${totalFixed} issues in ${filesFixed} files`);
+
+// Run specific fixes for known problem patterns
+console.log('\n🔧 Running targeted fixes...\n');
+
+const problemPatterns = [
+  {
+    files: 'src/app/**/*.tsx',
+    name: 'App pages',
+    fix: (content) => {
+      // Ensure all page components end properly
+      if (!content.match(/}\s*$/)) {
+        return content + '\n}';
+      }
+      return content;
+    }
+  },
+  {
+    files: 'src/components/**/*.tsx',
+    name: 'Components',
+    fix: (content) => {
+      // Fix component export patterns
+      return content.replace(/export default .+?\s*\)\s*;?\s*$/gm, (match) => {
+        if (!match.includes('}')) {
+          return match.replace(/\)\s*;?\s*$/, ');\n}');
+        }
+        return match;
+      });
+    }
+  }
+];
+
+let targetedFixed = 0;
+
+problemPatterns.forEach(({ files: pattern, name, fix }) => {
+  const matchedFiles = glob.sync(pattern, {
+    ignore: ['node_modules/**', 'dist/**', '.next/**'],
+    cwd: process.cwd()
+  });
+  
+  matchedFiles.forEach(file => {
+    const filePath = path.join(process.cwd(), file);
+    const content = fs.readFileSync(filePath, 'utf8');
+    const fixed = fix(content);
+    
+    if (fixed !== content) {
+      fs.writeFileSync(filePath, fixed);
+      console.log(`✅ Fixed ${name} pattern in ${file}`);
+      targetedFixed++;
+    }
+  });
+});
+
+console.log(`\n📊 Targeted fixes: ${targetedFixed} files`);
+console.log(`\n✅ Total: Fixed ${totalFixed} issues across ${filesFixed + targetedFixed} files`);

@@ -73,43 +73,32 @@ export default function DevelopmentWorkflow({
 
   return (
     <div className="space-y-6">
-      {/* Project Overview */}
+      {/* Project Overview */}</div>
       <Card>
         <CardHeader>
           <CardTitle>AI Development Workflow - {projectConfig.name}</CardTitle>
-        </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">
-                {projectConfig.features.length}
-              </div>
+                {projectConfig.features.length}</div>
               <div className="text-sm text-gray-600">Features</div>
-            </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">
-                {projectConfig.technology?.frontend || 'React'}
-              </div>
+                {projectConfig.technology?.frontend || 'React'}</div>
               <div className="text-sm text-gray-600">Frontend</div>
-            </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-brand-primary-600">
-                {projectConfig.technology?.backend || 'Node.js'}
-              </div>
+                {projectConfig.technology?.backend || 'Node.js'}</div>
               <div className="text-sm text-gray-600">Backend</div>
-            </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-600">
-                {projectConfig.timeline}
-              </div>
+                {projectConfig.timeline}</div>
               <div className="text-sm text-gray-600">Timeline</div>
-            </div>
-          </div>
         </CardContent>
-      </Card>
 
       {/* Workflow Phases */}
-      <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {workflowPhases.map(phase => {
           const IconComponent = phase.icon;
           const isActive = activePhase === phase.id;
@@ -133,22 +122,17 @@ export default function DevelopmentWorkflow({
                           : 'bg-gray-200 text-gray-600'
                     }`}
                   >
-                    {isCompleted ? (
+                    {isCompleted ? (</div>
                       <CheckCircle className="w-5 h-5" />
-                    ) : isActive ? (
+                    ) : isActive ? (</CheckCircle>
                       <Clock className="w-5 h-5" />
-                    ) : (
+                    ) : (</Clock>
                       <IconComponent className="w-5 h-5" />
-                    )}
-                  </div>
+                    )}</IconComponent>
                   <div>
                     <h3 className="font-semibold">{phase.title}</h3>
                     <p className="text-sm text-gray-600 font-normal">
-                      {phase.description}
-                    </p>
-                  </div>
-                </CardTitle>
-              </CardHeader>
+                      {phase.description}</p>
               <CardContent>
                 <div className="space-y-3">
                   {phase.tasks.map((task, taskIndex) => (
@@ -164,8 +148,7 @@ export default function DevelopmentWorkflow({
                       >
                         {(isCompleted || (isActive && taskIndex < 2)) && (
                           <CheckCircle className="w-3 h-3 text-white" />
-                        )}
-                      </div>
+                        )}</CheckCircle>
                       <span
                         className={`text-sm ${
                           isCompleted || (isActive && taskIndex < 2)
@@ -173,11 +156,7 @@ export default function DevelopmentWorkflow({
                             : 'text-gray-500'
                         }`}
                       >
-                        {task}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                        {task}</span>))}
 
                 {isActive && !isCompleted && (
                   <div className="mt-4 pt-4 border-t">
@@ -185,36 +164,39 @@ export default function DevelopmentWorkflow({
                       onClick={() => handlePhaseComplete(phase.id)}
                       className="w-full"
                     >
-                      Complete {phase.title}
-                    </Button>
-                  </div>
-                )}
+                      Complete {phase.title}</Button>)}
 
                 {isCompleted && (
                   <div className="mt-4 pt-4 border-t">
                     <div className="flex items-center gap-2 text-green-600">
                       <CheckCircle className="w-4 h-4" />
                       <span className="text-sm font-medium">
-                        Phase Completed
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
+                        Phase Completed</span>)}
+    );
+        }
+      )}
+    </div>
+        </Card>
+        </CardHeader>
+        </CardContent>
+        </div>
+        </div>
+        </div>
+        </CardHeader>
+        </CardTitle>
+        </div>
+        </CardContent>
+        </div>
+        </div>
+    );
 
       {/* AI Recommendations */}
       <Card>
         <CardHeader>
           <CardTitle>
-            AI Recommendations for {projectConfig.persona?.name || 'Developer'}
-          </CardTitle>
-        </CardHeader>
+            AI Recommendations for {projectConfig.persona?.name || 'Developer'}</CardTitle>
         <CardContent>
-          <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <h4 className="font-medium text-gray-900">Next Steps</h4>
               <ul className="text-sm text-gray-600 space-y-1">
@@ -222,8 +204,6 @@ export default function DevelopmentWorkflow({
                 <li>• Set up automated testing pipeline</li>
                 <li>• Configure development environment</li>
                 <li>• Plan database migration strategy</li>
-              </ul>
-            </div>
             <div className="space-y-2">
               <h4 className="font-medium text-gray-900">Best Practices</h4>
               <ul className="text-sm text-gray-600 space-y-1">
@@ -231,14 +211,30 @@ export default function DevelopmentWorkflow({
                 <li>• Implement proper error handling</li>
                 <li>
                   • Follow {projectConfig.technology?.frontend || 'React'}{' '}
-                  conventions
-                </li>
+                  conventions</li>
                 <li>• Set up continuous integration</li>
-              </ul>
-            </div>
+          </Card>
+          </CardHeader>
+          </CardContent>
           </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+          </ul>
+          </div>
+          </ul>
+      );
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</CardTitle>
+</CardHeader>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
 }

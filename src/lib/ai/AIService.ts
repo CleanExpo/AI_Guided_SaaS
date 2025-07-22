@@ -12,7 +12,9 @@ export interface AIServiceConfig {
 export interface AIResponse {
   message: string
   usage?: {
-    promptTokens: number, completionTokens: number, totalTokens: number
+    promptTokens: number;
+  completionTokens: number;
+  totalTokens: number
   }
   model: string, provider: string
 }
@@ -20,7 +22,7 @@ export interface AIResponse {
 export class AIService {
   private openai?: OpenAI
   private anthropic?: Anthropic
-  private, config: AIServiceConfig
+  private config: AIServiceConfig
   
   constructor(config: AIServiceConfig) {
     this.config = config

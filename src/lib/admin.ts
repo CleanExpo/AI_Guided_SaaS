@@ -1,47 +1,84 @@
 // Admin panel service for system management
 
 export interface AdminUser {
-  id: string, email: string, name: string, role: 'super_admin' | 'admin' | 'moderator'
+  id: string;
+  email: string;
+  name: string;
+  role: 'super_admin' | 'admin' | 'moderator'
   status: 'active' | 'suspended' | 'pending'
-  lastLogin: Date, createdAt: Date, permissions: AdminPermission[]
+  lastLogin: Date;
+  createdAt: Date;
+  permissions: AdminPermission[]
 }
 
 export interface AdminPermission {
-  id: string, name: string, description: string, category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
+  id: string;
+  name: string;
+  description: string;
+  category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
 }
 
 export interface SystemStats {
-  totalUsers: number, activeUsers: number, totalProjects: number, totalTemplates: number, totalRevenue: number, systemHealth: 'healthy' | 'warning' | 'critical'
-  uptime: number, errorRate: number
+  totalUsers: number;
+  activeUsers: number;
+  totalProjects: number;
+  totalTemplates: number;
+  totalRevenue: number;
+  systemHealth: 'healthy' | 'warning' | 'critical'
+  uptime: number;
+  errorRate: number
 }
 
 export interface UserManagement {
-  id: string, email: string, name: string, subscription: 'free' | 'pro' | 'enterprise'
+  id: string;
+  email: string;
+  name: string;
+  subscription: 'free' | 'pro' | 'enterprise'
   status: 'active' | 'suspended' | 'deleted'
-  joinDate: Date, lastActive: Date, projectCount: number, billingStatus: 'current' | 'past_due' | 'canceled'
+  joinDate: Date;
+  lastActive: Date;
+  projectCount: number;
+  billingStatus: 'current' | 'past_due' | 'canceled'
 }
 
 export interface ContentModeration {
-  id: string, type: 'template' | 'project' | 'comment' | 'collaboration'
-  title: string, author: string, status: 'pending' | 'approved' | 'rejected' | 'flagged'
-  reportCount: number, createdAt: Date
+  id: string;
+  type: 'template' | 'project' | 'comment' | 'collaboration'
+  title: string;
+  author: string;
+  status: 'pending' | 'approved' | 'rejected' | 'flagged'
+  reportCount: number;
+  createdAt: Date
   reviewedAt?: Date
   reviewedBy?: string
 }
 
 export interface SystemConfiguration {
-  id: string, category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security'
-  key: string, value: string, description: string, type: 'string' | 'number' | 'boolean' | 'json'
-  isSecret: boolean, lastModified: Date, modifiedBy: string
+  id: string;
+  category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security'
+  key: string;
+  value: string;
+  description: string;
+  type: 'string' | 'number' | 'boolean' | 'json'
+  isSecret: boolean;
+  lastModified: Date;
+  modifiedBy: string
 }
 
 export interface AdminActivity {
-  id: string, adminId: string, adminName: string, action: string, target: string, details: Record<string, unknown>
-  timestamp: Date, ipAddress: string, userAgent: string
+  id: string;
+  adminId: string;
+  adminName: string;
+  action: string;
+  target: string;
+  details: Record<string, unknown>
+  timestamp: Date;
+  ipAddress: string;
+  userAgent: string
 }
 
 export class AdminService {
-  private static, instance: AdminService
+  private static instance: AdminService
   private initialized = false
 
   static getInstance(): AdminService {
@@ -73,7 +110,7 @@ export class AdminService {
       subscription?: string
       search?: string
     }
-  ): Promise<{ users: UserManagement[]; total: number; pages: number }> {
+  ): Promise<{ users: UserManagement[], total: number; pages: number }> {
     try {
       // In production, this would query the actual database
       const mockUsers: UserManagement[] = [
@@ -163,7 +200,7 @@ export class AdminService {
       type?: string
       status?: string
     }
-  ): Promise<{ content: ContentModeration[]; total: number; pages: number }> {
+  ): Promise<{ content: ContentModeration[], total: number; pages: number }> {
     try {
       const mockContent: ContentModeration[] = [
         {
@@ -348,7 +385,7 @@ export class AdminService {
       }
 
       // In production, save to database
-      console.log('Admin activity, logged:', activity)
+      console.log('Admin activity logged:', activity)
     } catch (error) {
       console.error('Error logging admin, activity:', error)
     }
@@ -363,7 +400,7 @@ export class AdminService {
       dateFrom?: Date
       dateTo?: Date
     }
-  ): Promise<{ activities: AdminActivity[]; total: number; pages: number }> {
+  ): Promise<{ activities: AdminActivity[], total: number; pages: number }> {
     try {
       const mockActivities: AdminActivity[] = [
         {
@@ -461,7 +498,7 @@ export class AdminService {
 
       return permissions
     } catch (error) {
-      console.error('Error fetching admin, permissions:', error)
+      console.error('Error fetching admin; permissions:', error)
       throw error
     }
   }

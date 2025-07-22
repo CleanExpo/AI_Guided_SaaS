@@ -24,8 +24,20 @@ import {
 import { cn } from '@/lib/utils'
 
 interface DashboardStats {
-  totalUsers: number, activeUsers: number, newUsersToday: number, newUsersThisWeek: number, systemHealth: string, uptime: string, cpuUsage: string, memoryUsage: string, totalProjects: number, activeProjects: number, apiCalls: {
-    today: number, thisWeek: number, thisMonth: number
+  totalUsers: number;
+  activeUsers: number;
+  newUsersToday: number;
+  newUsersThisWeek: number;
+  systemHealth: string;
+  uptime: string;
+  cpuUsage: string;
+  memoryUsage: string;
+  totalProjects: number;
+  activeProjects: number;
+  apiCalls: {
+    today: number;
+  thisWeek: number;
+  thisMonth: number
   }
   recentActivity: Array<{
     type: string, message: string, timestamp: string
@@ -33,7 +45,9 @@ interface DashboardStats {
 }
 
 interface AdminDashboardProps {
-  stats: DashboardStats, adminUser: any, onNavigate: (section: string) => void
+  stats: DashboardStats;
+  adminUser: any;
+  onNavigate: (section: string) => void
 }
 
 export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardProps) {
@@ -65,17 +79,17 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
     switch (type) {
       case 'user_signup':
         return <Users className="h-4 w-4 text-blue-500" />
-      case 'project_created':
+      case 'project_created':</Users>
         return <BarChart3 className="h-4 w-4 text-purple-500" />
-      case 'api_call':
+      case 'api_call':</BarChart3>
         return <Activity className="h-4 w-4 text-green-500" />
-      default:
+      default:</Activity>
         return <AlertCircle className="h-4 w-4 text-gray-500" />
     }
   }
 
   const timeAgo = (timestamp: string) => {
-    const seconds = Math.floor((new Date().getTime() - new Date(timestamp).getTime()) / 1000)
+    const seconds = Math.floor((new Date().getTime() - new Date(timestamp).getTime()) / 1000)</AlertCircle>
     if (seconds < 60) return 'Just now'
     const minutes = Math.floor(seconds / 60)
     if (minutes < 60) return `${minutes}m ago`
@@ -86,219 +100,164 @@ export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardP
 
   return (
     <div className="space-y-8">
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      {/* Key Metrics */}</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        <Card className="hover:shadow-lg transition-shadow"></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
+            <Users className="h-4 w-4 text-muted-foreground" /></Users>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.totalUsers)}</div>
-            <div className="flex items-center text-xs text-muted-foreground mt-1">
-              <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
+            <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
+              <TrendingUp className="h-3 w-3 text-green-500 mr-1" /></TrendingUp>
               <span className="text-green-600">+{stats.newUsersToday} today</span>
             </div>
-          </CardContent>
-        </Card>
 
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className="hover:shadow-lg transition-shadow"></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
+            <Activity className="h-4 w-4 text-muted-foreground" /></Activity>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.activeUsers)}</div>
-            <div className="flex items-center mt-1">
+            <div className="flex items-center mt-1"></div>
               <Progress 
                 value={(stats.activeUsers / stats.totalUsers) * 100} 
                 className="h-2"
-              />
+              /></Progress>
               <span className="ml-2 text-xs text-muted-foreground">
-                {((stats.activeUsers / stats.totalUsers) * 100).toFixed(1)}%
-              </span>
-            </div>
-          </CardContent>
-        </Card>
+                {((stats.activeUsers / stats.totalUsers) * 100).toFixed(1)}%</span>
 
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className="hover:shadow-lg transition-shadow"></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
+            <BarChart3 className="h-4 w-4 text-muted-foreground" /></BarChart3>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.totalProjects)}</div>
-            <div className="flex items-center text-xs text-muted-foreground mt-1">
+            <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
               <span className="text-purple-600">{stats.activeProjects} active</span>
             </div>
-          </CardContent>
-        </Card>
 
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className="hover:shadow-lg transition-shadow"></Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">API Calls Today</CardTitle>
-            <Globe className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
+            <Globe className="h-4 w-4 text-muted-foreground" /></Globe>
+          <CardContent></CardContent>
             <div className="text-2xl font-bold">{formatNumber(stats.apiCalls.today)}</div>
-            <div className="flex items-center text-xs text-muted-foreground mt-1">
-              <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
+            <div className="flex items-center text-xs text-muted-foreground mt-1"></div>
+              <TrendingUp className="h-3 w-3 text-green-500 mr-1" /></TrendingUp>
               <span>+12% from yesterday</span>
             </div>
-          </CardContent>
-        </Card>
-      </div>
 
       {/* System Health & Performance */}
-      <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+        <Card></Card>
+          <CardHeader></CardHeader>
+            <CardTitle className="flex items-center gap-2"></CardTitle>
               <Server className="h-5 w-5" />
-              System Health
-            </CardTitle>
+              System Health</Server>
             <CardDescription>Real-time system performance metrics</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
+          <CardContent className="space-y-4"></CardContent>
+            <div className="flex items-center justify-between"></div>
               <span className="text-sm font-medium">Status</span>
-              <div className={cn("flex items-center gap-2", getHealthColor(stats.systemHealth))}>
-                <CheckCircle2 className="h-4 w-4" />
+              <div className={cn("flex items-center gap-2", getHealthColor(stats.systemHealth))}></div>
+                <CheckCircle2 className="h-4 w-4" /></CheckCircle2>
                 <span className="font-semibold capitalize">{stats.systemHealth}</span>
               </div>
-            </div>
             
-            <div className="space-y-3">
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm text-muted-foreground flex items-center gap-1">
+            <div className="space-y-3"></div>
+              <div></div>
+                <div className="flex items-center justify-between mb-1"></div>
+                  <span className="text-sm text-muted-foreground flex items-center gap-1"></span>
                     <Cpu className="h-3 w-3" />
-                    CPU Usage
-                  </span>
+                    CPU Usage</Cpu>
                   <span className="text-sm font-medium">{stats.cpuUsage}</span>
                 </div>
-                <Progress value={parseInt(stats.cpuUsage)} className="h-2" />
-              </div>
+                <Progress value={parseInt(stats.cpuUsage)} className="h-2" /></Progress>
               
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm text-muted-foreground flex items-center gap-1">
+              <div></div>
+                <div className="flex items-center justify-between mb-1"></div>
+                  <span className="text-sm text-muted-foreground flex items-center gap-1"></span>
                     <HardDrive className="h-3 w-3" />
-                    Memory Usage
-                  </span>
+                    Memory Usage</HardDrive>
                   <span className="text-sm font-medium">{stats.memoryUsage}</span>
                 </div>
-                <Progress value={parseInt(stats.memoryUsage)} className="h-2" />
-              </div>
+                <Progress value={parseInt(stats.memoryUsage)} className="h-2" /></Progress>
               
-              <div className="flex items-center justify-between pt-2">
+              <div className="flex items-center justify-between pt-2"></div>
                 <span className="text-sm text-muted-foreground">Uptime</span>
                 <span className="text-sm font-medium text-green-600">{stats.uptime}</span>
               </div>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Recent Activity */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+        <Card></Card>
+          <CardHeader></CardHeader>
+            <CardTitle className="flex items-center gap-2"></CardTitle>
               <Clock className="h-5 w-5" />
-              Recent Activity
-            </CardTitle>
+              Recent Activity</Clock>
             <CardDescription>Latest platform events and actions</CardDescription>
-          </CardHeader>
-          <CardContent>
+          <CardContent></CardContent>
             <div className="space-y-4">
-              {stats.recentActivity.map((activity, index) => (
+              {stats.recentActivity.map((activity, index) => (</div>
                 <div key={index} className="flex items-start gap-3">
-                  {getActivityIcon(activity.type)}
-                  <div className="flex-1 space-y-1">
+                  {getActivityIcon(activity.type)}</div>
+                  <div className="flex-1 space-y-1"></div>
                     <p className="text-sm font-medium leading-none">
-                      {activity.message}
-                    </p>
+                      {activity.message}</p>
                     <p className="text-xs text-muted-foreground">
-                      {timeAgo(activity.timestamp)}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                      {timeAgo(activity.timestamp)}</p>))}
               
               <Button 
                 variant="ghost" 
                 className="w-full mt-4"
                 onClick={() => onNavigate('activity')}
               >
-                View All Activity
-                <ArrowUpRight className="h-4 w-4 ml-2" />
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+                View All Activity</Button>
+                <ArrowUpRight className="h-4 w-4 ml-2" /></ArrowUpRight>
 
       {/* Quick Actions Grid */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
         <Card 
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-blue-500"
           onClick={() => onNavigate('users')}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
+        ></Card>
+          <CardContent className="p-6"></CardContent>
+            <div className="flex items-center justify-between"></div>
+              <div></div>
                 <p className="text-sm font-medium text-muted-foreground">Manage</p>
                 <p className="text-xl font-semibold">Users</p>
-              </div>
-              <Users className="h-8 w-8 text-blue-500" />
-            </div>
-          </CardContent>
-        </Card>
+              <Users className="h-8 w-8 text-blue-500" /></Users>
 
         <Card 
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-purple-500"
           onClick={() => onNavigate('analytics')}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
+        ></Card>
+          <CardContent className="p-6"></CardContent>
+            <div className="flex items-center justify-between"></div>
+              <div></div>
                 <p className="text-sm font-medium text-muted-foreground">View</p>
                 <p className="text-xl font-semibold">Analytics</p>
-              </div>
-              <BarChart3 className="h-8 w-8 text-purple-500" />
-            </div>
-          </CardContent>
-        </Card>
+              <BarChart3 className="h-8 w-8 text-purple-500" /></BarChart3>
 
         <Card 
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-green-500"
           onClick={() => onNavigate('database')}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
+        ></Card>
+          <CardContent className="p-6"></CardContent>
+            <div className="flex items-center justify-between"></div>
+              <div></div>
                 <p className="text-sm font-medium text-muted-foreground">Monitor</p>
                 <p className="text-xl font-semibold">Database</p>
-              </div>
-              <Database className="h-8 w-8 text-green-500" />
-            </div>
-          </CardContent>
-        </Card>
+              <Database className="h-8 w-8 text-green-500" /></Database>
 
         <Card 
           className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-orange-500"
           onClick={() => onNavigate('logs')}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
+        ></Card>
+          <CardContent className="p-6"></CardContent>
+            <div className="flex items-center justify-between"></div>
+              <div></div>
                 <p className="text-sm font-medium text-muted-foreground">Check</p>
                 <p className="text-xl font-semibold">Logs</p>
-              </div>
-              <Activity className="h-8 w-8 text-orange-500" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  )
+              <Activity className="h-8 w-8 text-orange-500" /></Activity>
+    );
 }

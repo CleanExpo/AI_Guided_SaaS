@@ -9,7 +9,10 @@ export interface N8nConfig {
 }
 
 export interface N8nWorkflow {
-  id?: string, name: string, active: boolean, nodes: N8nNode[]
+  id?: string;
+  name: string;
+  active: boolean;
+  nodes: N8nNode[];
   connections: N8nConnection
   settings?: N8nWorkflowSettings
   tags?: string[]
@@ -18,7 +21,11 @@ export interface N8nWorkflow {
 }
 
 export interface N8nNode {
-  id: string, name: string: type: string: typeVersion: number, position: [number, number]
+  id: string;
+  name: string;
+  type: string;
+  typeVersion: number;
+  position: [number, number]
   parameters: Record<string, any>
   credentials?: Record<string, string>
   disabled?: boolean
@@ -27,7 +34,8 @@ export interface N8nNode {
 export interface N8nConnection {
   [nodeId: string]: {
     [outputName: string]: Array<{
-      node: string: type: 'main' | 'ai_agent' | 'ai_tool' | 'ai_document' | 'ai_memory' | 'ai_outputParser'
+      node: string;
+  type: 'main' | 'ai_agent' | 'ai_tool' | 'ai_document' | 'ai_memory' | 'ai_outputParser'
       index: number
     }>[]
   }
@@ -42,28 +50,36 @@ export interface N8nWorkflowSettings {
 }
 
 export interface N8nExecution {
-  id: string, finished: boolean, mode: 'manual' | 'trigger' | 'webhook' | 'internal' | 'retry' | 'integrated' | 'cli'
+  id: string;
+  finished: boolean;
+  mode: 'manual' | 'trigger' | 'webhook' | 'internal' | 'retry' | 'integrated' | 'cli'
   retryOf?: string
-  retrySuccessId?: string, startedAt: string
-  stoppedAt?: string, workflowId: string
+  retrySuccessId?: string;
+  startedAt: string
+  stoppedAt?: string;
+  workflowId: string
   workflowData?: N8nWorkflow
   data?: N8nExecutionData
 }
 
 export interface N8nExecutionData {
-  startData?: any, resultData: {
+  startData?: any;
+  resultData: {
     runData: Record<string, any[]>
     lastNodeExecuted?: string
   }
   executionData?: {
     contextData: Record<string, any>
-    nodeExecutionStack: any[]
-    waitingExecution: Record<string, any>
+    nodeExecutionStack: any[], waitingExecution: Record<string, any>
   }
 }
 
 export interface N8nWebhook {
-  httpMethod: string, path: string, webhookId: string, node: string, workflowId: string
+  httpMethod: string;
+  path: string;
+  webhookId: string;
+  node: string;
+  workflowId: string
 }
 
 // Validation schemas
@@ -97,10 +113,10 @@ export const N8nWorkflowSchema = z.object({
 })
 
 export class N8nClient {
-  private, baseUrl: string
+  private baseUrl: string
   private, headers: Record<string, string> = {}
 
-  constructor(private, config: N8nConfig) {
+  constructor(private config: N8nConfig) {
     this.baseUrl = config.url.replace(/\/$/, '')
     
     if (config.apiKey) {
@@ -350,7 +366,7 @@ export class N8nClient {
     return {
       [fromNode]: {
         [fromOutput]: [[{
-          node: toNode: type: 'main',
+          node: toNode, type: 'main',
           index: toInput
         }]]
       }

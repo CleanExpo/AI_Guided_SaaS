@@ -68,124 +68,97 @@ const benefits = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section */}</div>
       <section className="relative py-20 px-4 text-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
         <div className="max-w-6xl mx-auto">
           <Badge variant="outline" className="mb-6">
             <Zap className="w-3 h-3 mr-1" />
-            AI-Powered SaaS Platform
-          </Badge>
+            AI-Powered SaaS Platform</Zap>
 
-          <h1 className="text-4xl, md:text-6xl font-bold tracking-tight mb-6">
-            Build Better Software
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+            Build Better Software</h1>
             <span className="block text-primary">Faster Than Ever</span>
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
             Transform your development workflow with our AI-guided SaaS
             platform. Create, collaborate, and deploy applications with
-            unprecedented speed and intelligence.
-          </p>
+            unprecedented speed and intelligence.</p>
 
-          <div className="flex flex-col, sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button size="lg" asChild>
               <Link href="/auth/signin">
-                Get Started Free
+                Get Started Free</Link>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-            </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="/ui-builder">
-                Try UI Builder
+                Try UI Builder</Link>
                 <Palette className="ml-2 h-4 w-4" />
               </Link>
-            </Button>
-          </div>
 
           <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <CheckCircle className="h-4 w-4 text-green-500" />
-              No credit card required
-            </div>
+              No credit card required</CheckCircle>
             <div className="flex items-center gap-1">
               <CheckCircle className="h-4 w-4 text-green-500" />
-              Free forever plan
-            </div>
+              Free forever plan</CheckCircle>
             <div className="flex items-center gap-1">
               <CheckCircle className="h-4 w-4 text-green-500" />
-              Setup in minutes
-            </div>
-          </div>
-        </div>
-      </section>
+              Setup in minutes</CheckCircle>
 
       {/* Features Section */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl, md:text-4xl font-bold mb-4">
-              Everything You Need to Build Amazing Software
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Everything You Need to Build Amazing Software</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Our comprehensive platform provides all the tools and intelligence
-              you need to create, deploy, and scale your applications.
-            </p>
-          </div>
+              you need to create, deploy, and scale your applications.</p>
 
-          <div className="grid, md:grid-cols-2, lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="border-0 shadow-lg, hover:shadow-xl transition-shadow"
+                className="border-0 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <feature.icon className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+                    {feature.description}</CardDescription>
             ))}
           </div>
-        </div>
-      </section>
 
       {/* Benefits Section */}
       <section className="py-20 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <div className="grid, lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl, md:text-4xl font-bold mb-6">
-                Why Choose Our Platform?
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Why Choose Our Platform?</h2>
               <p className="text-lg text-muted-foreground mb-8">
                 Join thousands of developers and teams who have transformed
-                their development process with our AI-powered platform.
-              </p>
+                their development process with our AI-powered platform.</p>
 
               <div className="space-y-4">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-base">{benefit}</span>
-                  </div>
-                ))}
+                    <span className="text-base">{benefit}</span>))}
               </div>
 
               <div className="mt-8">
                 <Button size="lg" asChild>
                   <Link href="/auth/signin">
-                    Start Building Today
+                    Start Building Today</Link>
                     <Rocket className="ml-2 h-4 w-4" />
                   </Link>
-                </Button>
-              </div>
-            </div>
 
             <div className="relative">
               <Card className="p-8">
@@ -198,7 +171,6 @@ export default function LandingPage() {
                       <span className="font-medium">Project Created</span>
                     </div>
                     <Badge variant="secondary">2 min ago</Badge>
-                  </div>
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -208,7 +180,6 @@ export default function LandingPage() {
                       <span className="font-medium">AI Code Generated</span>
                     </div>
                     <Badge variant="secondary">1 min ago</Badge>
-                  </div>
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -216,43 +187,29 @@ export default function LandingPage() {
                         <Globe className="h-4 w-4 text-white" />
                       </div>
                       <span className="font-medium">
-                        Deployed to Production
-                      </span>
-                    </div>
+                        Deployed to Production</span>
                     <Badge variant="secondary">Just now</Badge>
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl, md:text-4xl font-bold mb-6">
-            Ready to Transform Your Development Process?
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Transform Your Development Process?</h2>
           <p className="text-xl text-muted-foreground mb-8">
             Join thousands of developers building the future with AI-powered
-            tools.
-          </p>
+            tools.</p>
 
-          <div className="flex flex-col, sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
               <Link href="/auth/signin">
-                Get Started Free
+                Get Started Free</Link>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-            </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="/templates">
-                Browse Templates
+                Browse Templates</Link>
                 <FileText className="ml-2 h-4 w-4" />
               </Link>
-            </Button>
-          </div>
 
           <div className="mt-8 flex items-center justify-center gap-1">
             {[...Array(5)].map((_, i) => (
@@ -260,13 +217,66 @@ export default function LandingPage() {
                 key={i}
                 className="h-5 w-5 fill-yellow-400 text-yellow-400"
               />
-            ))}
+            ))}</Star>
             <span className="ml-2 text-sm text-muted-foreground">
-              Trusted by 10,000+ developers
-            </span>
-          </div>
-        </div>
-      </section>
+              Trusted by 10,000+ developers</span>
+    );
+}
+
+    </Button>
     </div>
+    </section>
+    </div>
+    </div>
+    </div>
+    </Card>
+    </div>
+    </Button>
+    </div>
+    </div>
+    </div>
+    </section>
+    </CardContent>
+    </CardHeader>
+    </div>
+    </div>
+    </section>
+    </div>
+    </div>
+    </Button>
+    </div>
+    </Badge>
+    </div>
+    </section>
   );
+</div>
+</div>
+</div>
+</div>
+</div>
+</Card>
+</div>
+</Button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</CardContent>
+</CardHeader>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</Button>
+</Button>
+</div>
+</Badge>
+</div>
+</section>
 }

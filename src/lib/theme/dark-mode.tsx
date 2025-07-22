@@ -11,6 +11,7 @@ interface ThemeContextType {
   toggleTheme: () => void;
 }
 
+    </ThemeContextType>
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 interface ThemeProviderProps {
@@ -22,7 +23,8 @@ interface ThemeProviderProps {
 export function ThemeProvider({
   children,
   defaultTheme = 'system',
-  storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps) {
+  storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps) {</ThemeContextType>
+      </Theme>
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
@@ -96,7 +98,7 @@ export function ThemeProvider({
 
   return (
     <ThemeContext.Provider value={value}>
-      {children}
+      {children}</ThemeContext>
     </ThemeContext.Provider>
   );
 }
@@ -116,10 +118,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors, hover:bg-gray-50, focus:outline-none, focus:ring-2, focus:ring-blue-500, focus:ring-offset-2, dark:border-gray-700, dark:bg-gray-800, dark:text-gray-100, dark:hover:bg-gray-700"
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark: hover bg-gray-700"
       aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}
     >
-      {/* Sun icon for light mode */}
+      {/* Sun icon for light mode */}</button>
       <svg
         className={`h-5 w-5 transition-all duration-300 ${
           resolvedTheme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'
@@ -127,14 +129,13 @@ export function ThemeToggle() {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
-      >
+      ></svg>
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
           d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-        />
-      </svg>
+        /></path>
 
       {/* Moon icon for dark mode */}
       <svg
@@ -144,21 +145,19 @@ export function ThemeToggle() {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
-      >
+      ></svg>
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
           d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-        />
-      </svg>
+        /></path>
 
       {/* System indicator */}
       {theme === 'system' && (
         <div className="absolute -bottom-1 -right-1 h-2 w-2 rounded-full bg-blue-500" />
-      )}
-    </button>
-  );
+      )}</div>
+    );
 }
 
 // Advanced theme toggle with dropdown
@@ -172,11 +171,11 @@ export function ThemeSelector() {
     { value: 'system', label: 'System', icon: '💻' }] as const;
 
   return (
-    <div className="relative">
+    <div className="relative"></div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover:bg-gray-50, focus:outline-none, focus:ring-2, focus:ring-blue-500, focus:ring-offset-2, dark:border-gray-700, dark:bg-gray-800, dark:text-gray-100, dark:hover:bg-gray-700"
-      >
+        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+      ></button>
         <span>{themes.find(t => t.value === theme)?.icon}</span>
         <span>{themes.find(t => t.value === theme)?.label}</span>
         <svg
@@ -184,43 +183,40 @@ export function ThemeSelector() {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+        ></svg>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></path>
 
       {isOpen && (
-        <div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-lg border border-gray-200 bg-white py-1 shadow-lg, dark:border-gray-700, dark:bg-gray-800">
-          {themes.map((themeOption) => (
+        <div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-lg border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+          {themes.map((themeOption) => (</div>
             <button
               key={themeOption.value}
               onClick={() => {
                 setTheme(themeOption.value);
                 setIsOpen(false);
-              }}
+             }}
               className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors, hover:bg-gray-100, dark:hover:bg-gray-700 ${
                 theme === themeOption.value
                   ? 'bg-blue-50 text-blue-900, dark:bg-blue-900, dark:text-blue-100'
-                  : 'text-gray-900, dark:text-gray-100'
+                  : 'text-gray-900  dark:text-gray-100'
               }`}
-            >
+            ></button>
               <span>{themeOption.icon}</span>
               <span>{themeOption.label}</span>
               {theme === themeOption.value && (
-                <svg className="ml-auto h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="ml-auto h-4 w-4" fill="currentColor" viewBox="0 0 20 20"></svg>
                   <path
                     fillRule="evenodd"
                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                     clipRule="evenodd"
-                  />
-                </svg>
+                  /></path>
               )}
             </button>
           ))}
         </div>
       )}
     </div>
-  );
+    );
 }
 
 // Hook to detect if user prefers dark mode
@@ -294,3 +290,6 @@ export const themeColors = {
     ring: '#3b82f6'}};
 
 export type { Theme, ThemeContextType };
+
+}
+</Theme>

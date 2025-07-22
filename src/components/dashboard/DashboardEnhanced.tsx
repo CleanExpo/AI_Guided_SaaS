@@ -70,31 +70,27 @@ function MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCa
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay }}
-    >
-      <CardEnhanced variant="glass" hover className="relative overflow-hidden">
-        <CardEnhancedHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+    ></motion>
+      <CardEnhanced variant="glass" hover className="relative overflow-hidden"></CardEnhanced>
+        <CardEnhancedHeader className="flex flex-row items-center justify-between space-y-0 pb-2"></CardEnhancedHeader>
           <CardEnhancedTitle className="text-sm font-medium">
-            {title}
-          </CardEnhancedTitle>
-          <Icon className="h-4 w-4 text-muted-foreground" />
-        </CardEnhancedHeader>
-        <CardEnhancedContent>
+            {title}</CardEnhancedTitle>
+          <Icon className="h-4 w-4 text-muted-foreground" /></Icon>
+        <CardEnhancedContent></CardEnhancedContent>
           <div className="text-2xl font-bold">{value}</div>
           <div className="flex items-center text-xs text-muted-foreground">
-            {trend === 'up' ? (
+            {trend === 'up' ? (</div>
               <ArrowUpRight className="mr-1 h-3 w-3 text-green-500" />
-            ) : (
+            ) : (</ArrowUpRight>
               <ArrowDownRight className="mr-1 h-3 w-3 text-red-500" />
-            )}
+            )}</ArrowDownRight>
             <span className={trend === 'up' ? 'text-green-500' : 'text-red-500'}>
-              {change}
-            </span>
+              {change}</span>
             <span className="ml-1">from last month</span>
           </div>
-        </CardEnhancedContent>
         
         {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" /></div>
       </CardEnhanced>
     </motion.div>
   );
@@ -105,25 +101,25 @@ function SimpleChart({ data }: { data: any[] }) {
   
   return (
     <div className="flex items-end justify-between h-32 gap-2">
-      {data.map((item, index) => (
+      {data.map((item, index) => (</div>
         <motion.div
           key={item.day}
           className="flex flex-col items-center flex-1"
           initial={{ height: 0 }}
           animate={{ height: 'auto' }}
           transition={{ duration: 0.8, delay: index * 0.1 }}
-        >
+        ></motion>
           <motion.div
             className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-sm"
             initial={{ height: 0 }}
             animate={{ height: `${(item.users / maxValue) * 100}%` }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
-          />
+          /></motion>
           <span className="text-xs text-muted-foreground mt-2">{item.day}</span>
         </motion.div>
       ))}
     </div>
-  );
+    );
 }
 
 function ActivityFeed({ activities }: { activities: any[] }) {
@@ -150,7 +146,7 @@ function ActivityFeed({ activities }: { activities: any[] }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4"></div>
       <AnimatePresence>
         {activities.map((activity, index) => {
           const Icon = getActivityIcon(activity.type);
@@ -161,21 +157,21 @@ function ActivityFeed({ activities }: { activities: any[] }) {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="flex items-center space-x-3 p-3 rounded-lg bg-white/50, dark:bg-gray-800/50 backdrop-blur-sm"
-            >
-              <div className={`p-2 rounded-full bg-gray-100, dark:bg-gray-700 ${getActivityColor(activity.type)}`}>
-                <Icon className="h-4 w-4" />
-              </div>
-              <div className="flex-1">
+              className="flex items-center space-x-3 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
+            ></motion>
+              <div className={`p-2 rounded-full bg-gray-100  dark:bg-gray-700 ${getActivityColor(activity.type)}`}></div>
+                <Icon className="h-4 w-4" /></Icon>
+              <div className="flex-1"></div>
                 <p className="text-sm font-medium">{activity.action}</p>
                 <p className="text-xs text-muted-foreground">{activity.time}</p>
-              </div>
             </motion.div>
           );
-        })}
-      </AnimatePresence>
+        }
+      )}
     </div>
-  );
+        </AnimatePresence>
+    );
+      );
 }
 
 export default function DashboardEnhanced() {
@@ -229,20 +225,17 @@ export default function DashboardEnhanced() {
       icon: Target}];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark:from-slate-900, dark:via-slate-800, dark:to-slate-900 p-6">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
-              Dashboard
-            </h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6">
+      {/* Header */}</div>
+      <div className="mb-8"></div>
+        <div className="flex items-center justify-between"></div>
+          <div></div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300">
+              Dashboard</h1>
             <p className="text-muted-foreground mt-1">
-              Last, updated: {lastUpdated.toLocaleTimeString()}
-            </p>
-          </div>
+              Last, updated: {lastUpdated.toLocaleTimeString()}</p>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4"></div>
             <ButtonPremium
               variant="outline"
               size="sm"
@@ -251,8 +244,7 @@ export default function DashboardEnhanced() {
               icon={<RefreshCw className="h-4 w-4" />}
               iconPosition="left"
             >
-              Refresh
-            </ButtonPremium>
+              Refresh</ButtonPremium>
             
             <ButtonPremium
               variant="outline"
@@ -260,23 +252,19 @@ export default function DashboardEnhanced() {
               icon={<Download className="h-4 w-4" />}
               iconPosition="left"
             >
-              Export
-            </ButtonPremium>
+              Export</ButtonPremium>
             
             <ThemeToggle />
-            
+            </ThemeToggle>
             <ButtonPremium
               variant="outline"
               size="sm"
               icon={<Settings className="h-4 w-4" />}
-            />
-          </div>
-        </div>
-      </div>
+            /></ButtonPremium>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6 mb-8">
-        {metrics.map((metric, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {metrics.map((metric, index) => (</div>
           <MetricCard
             key={metric.title}
             title={metric.title}
@@ -286,112 +274,79 @@ export default function DashboardEnhanced() {
             icon={metric.icon}
             delay={index * 0.1}
           />
-        ))}
-      </div>
+        ))}</MetricCard>
 
       {/* Charts and Activity */}
-      <div className="grid grid-cols-1, lg:grid-cols-3 gap-6 mb-8">
-        {/* Chart */}
-        <div className="lg:col-span-2">
-          <CardEnhanced variant="glass">
-            <CardEnhancedHeader>
-              <div className="flex items-center justify-between">
-                <div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        {/* Chart */}</div>
+        <div className="lg:col-span-2"></div>
+          <CardEnhanced variant="glass"></CardEnhanced>
+            <CardEnhancedHeader></CardEnhancedHeader>
+              <div className="flex items-center justify-between"></div>
+                <div></div>
                   <CardEnhancedTitle>User Activity</CardEnhancedTitle>
                   <CardEnhancedDescription>
-                    Daily active users over the past week
-                  </CardEnhancedDescription>
-                </div>
-                <div className="flex items-center gap-2">
+                    Daily active users over the past week</CardEnhancedDescription>
+                <div className="flex items-center gap-2"></div>
                   <ButtonPremium
                     variant="outline"
                     size="sm"
                     icon={<Filter className="h-4 w-4" />}
-                  />
+                  /></ButtonPremium>
                   <ButtonPremium
                     variant="outline"
                     size="sm"
                     icon={<Calendar className="h-4 w-4" />}
-                  />
-                </div>
-              </div>
-            </CardEnhancedHeader>
-            <CardEnhancedContent>
-              <SimpleChart data={data.chartData} />
-            </CardEnhancedContent>
-          </CardEnhanced>
-        </div>
+                  /></ButtonPremium>
+            <CardEnhancedContent></CardEnhancedContent>
+              <SimpleChart data={data.chartData} /></SimpleChart>
 
         {/* Activity Feed */}
-        <div>
-          <CardEnhanced variant="glass">
-            <CardEnhancedHeader>
-              <div className="flex items-center justify-between">
+        <div></div>
+          <CardEnhanced variant="glass"></CardEnhanced>
+            <CardEnhancedHeader></CardEnhancedHeader>
+              <div className="flex items-center justify-between"></div>
                 <CardEnhancedTitle>Recent Activity</CardEnhancedTitle>
                 <ButtonPremium
                   variant="outline"
                   size="sm"
                   icon={<Bell className="h-4 w-4" />}
-                />
-              </div>
-            </CardEnhancedHeader>
-            <CardEnhancedContent>
-              <ActivityFeed activities={data.recentActivity} />
-            </CardEnhancedContent>
-          </CardEnhanced>
-        </div>
-      </div>
+                /></ButtonPremium>
+            <CardEnhancedContent></CardEnhancedContent>
+              <ActivityFeed activities={data.recentActivity} /></ActivityFeed>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
-        <CardEnhanced variant="glass" hover className="cursor-pointer">
-          <CardEnhancedContent className="flex items-center justify-center p-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Plus className="h-6 w-6 text-white" />
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        <CardEnhanced variant="glass" hover className="cursor-pointer"></CardEnhanced>
+          <CardEnhancedContent className="flex items-center justify-center p-6"></CardEnhancedContent>
+            <div className="text-center"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3"></div>
+                <Plus className="h-6 w-6 text-white" /></Plus>
               <h3 className="font-semibold">New Project</h3>
               <p className="text-sm text-muted-foreground">Create a new project</p>
-            </div>
-          </CardEnhancedContent>
-        </CardEnhanced>
 
-        <CardEnhanced variant="glass" hover className="cursor-pointer">
-          <CardEnhancedContent className="flex items-center justify-center p-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Users className="h-6 w-6 text-white" />
-              </div>
+        <CardEnhanced variant="glass" hover className="cursor-pointer"></CardEnhanced>
+          <CardEnhancedContent className="flex items-center justify-center p-6"></CardEnhancedContent>
+            <div className="text-center"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-3"></div>
+                <Users className="h-6 w-6 text-white" /></Users>
               <h3 className="font-semibold">Invite Team</h3>
               <p className="text-sm text-muted-foreground">Add team members</p>
-            </div>
-          </CardEnhancedContent>
-        </CardEnhanced>
 
-        <CardEnhanced variant="glass" hover className="cursor-pointer">
-          <CardEnhancedContent className="flex items-center justify-center p-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <BarChart3 className="h-6 w-6 text-white" />
-              </div>
+        <CardEnhanced variant="glass" hover className="cursor-pointer"></CardEnhanced>
+          <CardEnhancedContent className="flex items-center justify-center p-6"></CardEnhancedContent>
+            <div className="text-center"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mx-auto mb-3"></div>
+                <BarChart3 className="h-6 w-6 text-white" /></BarChart3>
               <h3 className="font-semibold">Analytics</h3>
               <p className="text-sm text-muted-foreground">View detailed reports</p>
-            </div>
-          </CardEnhancedContent>
-        </CardEnhanced>
 
-        <CardEnhanced variant="glass" hover className="cursor-pointer">
-          <CardEnhancedContent className="flex items-center justify-center p-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
+        <CardEnhanced variant="glass" hover className="cursor-pointer"></CardEnhanced>
+          <CardEnhancedContent className="flex items-center justify-center p-6"></CardEnhancedContent>
+            <div className="text-center"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-3"></div>
+                <Zap className="h-6 w-6 text-white" /></Zap>
               <h3 className="font-semibold">API Keys</h3>
               <p className="text-sm text-muted-foreground">Manage integrations</p>
-            </div>
-          </CardEnhancedContent>
-        </CardEnhanced>
-      </div>
-    </div>
-  );
+    );
 }

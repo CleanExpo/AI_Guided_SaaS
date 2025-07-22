@@ -3,13 +3,18 @@ import { env, isServiceConfigured } from './env'
 
 // Database type definitions
 export interface User {
-  id: string, email: string
+  id: string;
+  email: string
   full_name?: string
-  avatar_url?: string, provider: string
-  provider_id?: string, subscription_tier: 'free' | 'pro' | 'enterprise'
+  avatar_url?: string;
+  provider: string
+  provider_id?: string;
+  subscription_tier: 'free' | 'pro' | 'enterprise'
   subscription_status: 'active' | 'canceled' | 'past_due'
   password_hash?: string
-  stripe_customer_id?: string, created_at: string, updated_at: string
+  stripe_customer_id?: string;
+  created_at: string;
+  updated_at: string
 }
 
 export interface ProjectConfig {
@@ -29,16 +34,23 @@ export interface ProjectConfig {
 
 export interface ProjectFiles {
   [path: string]: {
-    content: string: type: 'file' | 'directory'
+    content: string;
+  type: 'file' | 'directory'
     size?: number
   }
 }
 
 export interface Project {
-  id: string, user_id: string, name: string
-  description?: string, framework: string, status: 'draft' | 'generating' | 'completed' | 'error'
+  id: string;
+  user_id: string;
+  name: string
+  description?: string;
+  framework: string;
+  status: 'draft' | 'generating' | 'completed' | 'error'
   config: ProjectConfig
-  files?: ProjectFiles, created_at: string, updated_at: string
+  files?: ProjectFiles;
+  created_at: string;
+  updated_at: string
 }
 
 export interface ActivityMetadata {
@@ -50,9 +62,13 @@ export interface ActivityMetadata {
 }
 
 export interface ActivityLog {
-  id: string, user_id: string, action: string: resource_type: string
+  id: string;
+  user_id: string;
+  action: string;
+  resource_type: string
   resource_id?: string
-  metadata?: ActivityMetadata, created_at: string
+  metadata?: ActivityMetadata;
+  created_at: string
 }
 
 export interface UsageMetadata {
@@ -63,14 +79,23 @@ export interface UsageMetadata {
 }
 
 export interface UsageRecord {
-  id: string, user_id: string: resource_type: string, quantity: number
-  metadata?: UsageMetadata, created_at: string
+  id: string;
+  user_id: string;
+  resource_type: string;
+  quantity: number
+  metadata?: UsageMetadata;
+  created_at: string
 }
 
 export interface FeatureFlag {
-  id: string, name: string, description: string, enabled: boolean, rollout_percentage: number
+  id: string;
+  name: string;
+  description: string;
+  enabled: boolean;
+  rollout_percentage: number
   target_users?: string[]
-  created_at: string, updated_at: string
+  created_at: string;
+  updated_at: string
 }
 
 export interface PaymentMetadata {
@@ -82,13 +107,22 @@ export interface PaymentMetadata {
 }
 
 export interface Subscription {
-  id: string, user_id: string, stripe_subscription_id: string, stripe_customer_id: string, status: 'active' | 'canceled' | 'past_due' | 'unpaid'
+  id: string;
+  user_id: string;
+  stripe_subscription_id: string;
+  stripe_customer_id: string;
+  status: 'active' | 'canceled' | 'past_due' | 'unpaid'
   tier: 'free' | 'pro' | 'enterprise'
-  current_period_start: string, current_period_end: string, cancel_at_period_end: boolean, created_at: string, updated_at: string
+  current_period_start: string;
+  current_period_end: string;
+  cancel_at_period_end: boolean;
+  created_at: string;
+  updated_at: string
 }
 
 export interface DatabaseRecord {
-  id: string, created_at: string
+  id: string;
+  created_at: string
   updated_at?: string
   [key: string]: unknown
 }
@@ -362,7 +396,7 @@ export class DatabaseService {
   // Activity logging
   static async logActivity(
     userId: string,
-    action: string: resourceType: string,
+    action: string, resourceType: string,
     resourceId?: string,
     metadata?: ActivityMetadata
   ): Promise<void> {
@@ -376,7 +410,7 @@ export class DatabaseService {
         .from('activity_logs')
         .insert({
           user_id: userId,
-          action: resource_type: resourceType,
+          action: resource_type, resourceType,
           resource_id: resourceId,
           metadata,
           created_at: new Date().toISOString()
@@ -391,7 +425,7 @@ export class DatabaseService {
   }
 
   // Usage tracking
-  static async recordUsage(userId: string: resourceType: string, quantity: number, metadata?: UsageMetadata): Promise<void> {
+  static async recordUsage(userId: string, resourceType: string, quantity: number, metadata?: UsageMetadata): Promise<void> {
     if (!this.checkDatabase()) {
       console.log('Usage recorded (mock):', { userId, resourceType, quantity, metadata })
       return
@@ -401,7 +435,7 @@ export class DatabaseService {
       const { error } = await supabase!
         .from('usage_records')
         .insert({
-          user_id: userId: resource_type: resourceType,
+          user_id: userId, resource_type: resourceType,
           quantity,
           metadata,
           created_at: new Date().toISOString()
@@ -472,7 +506,7 @@ export class DatabaseService {
     try {
       // This would use a proper SQL query method in production
       // For now, we'll use Supabase's query builder
-      console.log('Raw SQL query not implemented, using Supabase query builder')
+      console.log('Raw SQL query not implemented using Supabase query builder')
       return []
     } catch (error) {
       console.error('Database query, error:', error)
@@ -507,9 +541,7 @@ export class DatabaseService {
 
   // Billing-specific methods
   static async getUserByStripeCustomerId(customerId: string): Promise<User | null> {
-    if (!this.checkDatabase()) {
-      return null
-    }
+    if (!this.checkDatabase()) { return: null }
 
     try {
       const { data, error } = await supabase!
@@ -519,7 +551,7 @@ export class DatabaseService {
         .single()
 
       if (error) {
-        console.error('Error fetching user by Stripe, customer: ID:', error)
+        console.error('Error fetching user by Stripe, customer: ID,', error)
         return null
       }
 
@@ -659,7 +691,7 @@ export class DatabaseService {
         return { projects: 0, aiGenerations: 0, storage: '0MB' }
       }
 
-      const usage = (usageData || []).reduce((acc: Record<string, number>, record: { resource_type: string; quantity: number }) => {
+      const usage = (usageData || []).reduce((acc: Record<string, number>, record: { resource_type: string, quantity: number }) => {
         acc[record.resource_type] = (acc[record.resource_type] || 0) + record.quantity
         return acc
       }, {} as Record<string, number>)

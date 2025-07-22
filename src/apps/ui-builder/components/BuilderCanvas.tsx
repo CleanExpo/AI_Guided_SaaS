@@ -6,7 +6,7 @@ import { logger } from '../../../packages/causal-engine/logger';
 type ComponentInstance = {
   id: string;
   type: string;
-  props: Record<string, string>;
+  props: Record<string, string>;</string>
   schema?: Array<{
     key: string;
     label: string;
@@ -24,7 +24,7 @@ export default function BuilderCanvas() {
     
     // Log component selection as "kept" action
     logger.log({
-      componentId: component.id: componentType: component.type,
+      componentId: component.id: componentType, component.type,
       page: 'ui-builder',
       promptContext: 'User selected component for editing',
       action: 'kept',
@@ -32,9 +32,9 @@ export default function BuilderCanvas() {
   };
 
   return (
-    <main className="flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto">
+    <main className="flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto"></main>
       <div className="h-full w-full border-2 border-dashed border-gray-400 p-4 space-y-4">
-        {components.length === 0 ? (
+        {components.length === 0 ? (</div>
           <span className="text-gray-500">Click components to add them here.</span>
         ) : (
           components.map((c) => (
@@ -46,10 +46,8 @@ export default function BuilderCanvas() {
               }`}
             >
               📦 {c.type} component (click to edit)
-            </div>
           ))
         )}
       </div>
-    </main>
-  );
+    );
 }

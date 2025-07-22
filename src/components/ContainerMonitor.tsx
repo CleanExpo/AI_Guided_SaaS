@@ -17,14 +17,24 @@ import {
 } from 'lucide-react'
 
 interface ContainerInfo {
-  id: string, name: string, status: 'running' | 'stopped' | 'error'
+  id: string;
+  name: string
+ ;
+  status: 'running' | 'stopped' | 'error'
   health: 'healthy' | 'unhealthy' | 'unknown'
-  cpuUsage: number, memoryUsage: number, memoryLimit: number, uptime: number, restartCount: number
+  cpuUsage: number;
+  memoryUsage: number
+  memoryLimit: number;
+  uptime: number
+ ;
+  restartCount: number
 }
 
 export function ContainerMonitor() {
+      </ContainerInfo>
   const [containers, setContainers] = useState<ContainerInfo[]>([])
   const [isLoading, setIsLoading] = useState(true)
+      </string>
   const [selectedContainer, setSelectedContainer] = useState<string | null>(null)
 
   useEffect(() => {
@@ -80,9 +90,8 @@ export function ContainerMonitor() {
     
     return (
       <Badge variant={variants[health as keyof typeof variants] || 'secondary'}>
-        {health}
-      </Badge>
-    )
+        {health}</Badge>
+    );
   }
 
   const formatUptime = (seconds: number) => {
@@ -99,12 +108,9 @@ export function ContainerMonitor() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Container className="h-5 w-5" />
-            Docker Containers
-          </CardTitle>
+            Docker Containers</Container>
           <CardDescription>
-            Manage and monitor agent containers
-          </CardDescription>
-        </CardHeader>
+            Manage and monitor agent containers</CardDescription>
         <CardContent>
           <div className="space-y-4">
             {containers.map((container) => (
@@ -113,29 +119,26 @@ export function ContainerMonitor() {
                 className={`border rounded-lg p-4 space-y-3 cursor-pointer transition-colors
                   ${selectedContainer === container.id ? 'border-primary bg-accent' : ''}`}
                 onClick={() => setSelectedContainer(container.id)}
-              >
+              ></div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    {getStatusIcon(container.status)}
+                    {getStatusIcon(container.status)}</div>
                     <div>
                       <h3 className="font-medium">{container.name}</h3>
                       <p className="text-sm text-muted-foreground">
-                        ID: {container.id.substring(0, 12)}
-                      </p>
-                    </div>
-                  </div>
+                        ID: {container.id.substring(0, 12)}</p>
                   <div className="flex items-center gap-2">
-                    {getHealthBadge(container.health)}
+                    {getHealthBadge(container.health)}</div>
                     <div className="flex gap-1">
-                      {container.status === 'running' ? (
+                      {container.status === 'running' ? (</div>
                         <Button
                           size="icon"
                           variant="ghost"
                           onClick={(e) => {
                             e.stopPropagation()
                             handleContainerAction(container.id, 'stop')
-                          }}
-                        >
+                         }}
+                        ></Button>
                           <Square className="h-4 w-4" />
                         </Button>
                       ) : (
@@ -145,8 +148,8 @@ export function ContainerMonitor() {
                           onClick={(e) => {
                             e.stopPropagation()
                             handleContainerAction(container.id, 'start')
-                          }}
-                        >
+                         }}
+                        ></Button>
                           <Play className="h-4 w-4" />
                         </Button>
                       )}
@@ -156,8 +159,8 @@ export function ContainerMonitor() {
                         onClick={(e) => {
                           e.stopPropagation()
                           handleContainerAction(container.id, 'restart')
-                        }}
-                      >
+                       }}
+                      ></Button>
                         <RefreshCw className="h-4 w-4" />
                       </Button>
                       <Button
@@ -166,13 +169,10 @@ export function ContainerMonitor() {
                         onClick={(e) => {
                           e.stopPropagation()
                           handleContainerAction(container.id, 'remove')
-                        }}
-                      >
+                       }}
+                      ></Button>
                         <Trash2 className="h-4 w-4" />
                       </Button>
-                    </div>
-                  </div>
-                </div>
 
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
@@ -186,65 +186,74 @@ export function ContainerMonitor() {
                     <div className="flex justify-between mb-1">
                       <span>Memory</span>
                       <span className="font-medium">
-                        {container.memoryUsage}MB / {container.memoryLimit}MB
-                      </span>
-                    </div>
+                        {container.memoryUsage}MB / {container.memoryLimit}MB</span>
                     <Progress 
                       value={(container.memoryUsage / container.memoryLimit) * 100} 
                       className="h-2" 
                     />
                   </div>
-                </div>
 
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>Uptime: {formatUptime(container.uptime)}</span>
-                  <span>Restarts: {container.restartCount}</span>
-                </div>
-              </div>
-            ))}
+                  <span>Restarts: {container.restartCount}</span>))}
           </div>
 
           <div className="mt-6 flex gap-2">
             <Button onClick={() => handleContainerAction('all', 'start')}>
-              Start All
-            </Button>
+              Start All</Button>
             <Button 
               variant="outline" 
               onClick={() => handleContainerAction('all', 'stop')}
             >
-              Stop All
-            </Button>
+              Stop All</Button>
             <Button 
               variant="outline" 
               onClick={() => handleContainerAction('all', 'restart')}
             >
-              Restart All
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+              Restart All</Button>
 
       {selectedContainer && (
         <Card>
           <CardHeader>
             <CardTitle>Container Logs</CardTitle>
             <CardDescription>
-              Last 100 lines from {containers.find(c => c.id === selectedContainer)?.name}
-            </CardDescription>
-          </CardHeader>
+              Last 100 lines from {containers.find(c => c.id === selectedContainer)?.name}</CardDescription>
           <CardContent>
             <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-xs">
-              {/* Container logs would be fetched and displayed here */}
+              {/* Container logs would be fetched and displayed here */}</pre>
               <code>
                 [2024-01-20, 10:23:45] Agent initialized successfully
                 [2024-01-20, 10:23:46] Connected to orchestrator
                 [2024-01-20, 10:23:47] Health check server running on port 3001
-                [2024-01-20, 10:23:48] Ready to process tasks...
-              </code>
-            </pre>
-          </CardContent>
-        </Card>
+                [2024-01-20, 10:23:48] Ready to process tasks...</code>
       )}
     </div>
-  )
+    );
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</CardTitle>
+</CardHeader>
+</Card>
+</div>
 }
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </CardTitle>
+    </CardHeader>
+    </Card>
+    </div>
+  );
+}
+</string>

@@ -5,87 +5,142 @@ import { isServiceConfigured } from './env'
 
 // Database row interfaces
 interface DatabaseRecord {
-  id: string, created_at: string
+  id: string;
+  created_at: string
   updated_at?: string
   [key: string]: any
 }
 
 interface DatabaseUser {
-  id: string, name: string, email: string
-  avatar?: string, created_at: string
+  id: string;
+  name: string;
+  email: string
+  avatar?: string;
+  created_at: string
   updated_at?: string
 }
 
 interface DatabaseRoom {
-  id: string, project_id: string, name: string, owner_id: string, participants: string, settings: string, created_at: string, updated_at: string
+  id: string;
+  project_id: string;
+  name: string;
+  owner_id: string;
+  participants: string;
+  settings: string;
+  created_at: string;
+  updated_at: string
 }
 
 interface DatabaseProjectChange {
-  id: string, project_id: string, user_id: string, type: string, path: string, content: string
-  previous_content?: string, timestamp: string
+  id: string;
+  project_id: string;
+  user_id: string;
+  type: string;
+  path: string;
+  content: string
+  previous_content?: string;
+  timestamp: string
 }
 
 interface DatabaseComment {
-  id: string, project_id: string, user_id: string, content: string, position: string, resolved: boolean, created_at: string, updated_at: string
+  id: string;
+  project_id: string;
+  user_id: string;
+  content: string;
+  position: string;
+  resolved: boolean;
+  created_at: string;
+  updated_at: string
 }
 
 interface ProjectData {
-  id: string, name: string, description: string, files: unknown[]
+  id: string;
+  name: string;
+  description: string;
+  files: unknown[]
 }
 
 // Collaboration interfaces
 export interface CollaborationRoom {
-  id: string, projectId: string, name: string, ownerId: string, participants: CollaborationUser[]
-  settings: RoomSettings, createdAt: Date, updatedAt: Date
+  id: string;
+  projectId: string;
+  name: string;
+  ownerId: string;
+  participants: CollaborationUser[];
+  settings: RoomSettings;
+  createdAt: Date;
+  updatedAt: Date
 }
 
 export interface CollaborationUser {
-  id: string, name: string, email: string
-  avatar?: string, role: 'owner' | 'editor' | 'viewer'
-  cursor?: CursorPosition, isOnline: boolean, lastSeen: Date
+  id: string;
+  name: string;
+  email: string
+  avatar?: string;
+  role: 'owner' | 'editor' | 'viewer'
+  cursor?: CursorPosition;
+  isOnline: boolean;
+  lastSeen: Date
 }
 
 export interface CursorPosition {
-  x: number, y: number
+  x: number;
+  y: number
   elementId?: string
   selection?: {
-    start: number, end: number
+    start: number;
+  end: number
   }
 }
 
 export interface RoomSettings {
-  allowGuests: boolean, maxParticipants: number, permissions: {
-    canEdit: boolean, canComment: boolean, canInvite: boolean, canExport: boolean
+  allowGuests: boolean;
+  maxParticipants: number;
+  permissions: {
+    canEdit: boolean;
+  canComment: boolean;
+  canInvite: boolean;
+  canExport: boolean
   }
 }
 
 export interface CollaborationEvent {
   type: 'cursor' | 'edit' | 'comment' | 'join' | 'leave' | 'sync'
-  userId: string, roomId: string, data: Record<string, unknown>
+  userId: string;
+  roomId: string;
+  data: Record<string, unknown>
   timestamp: Date
 }
 
 export interface ProjectChange {
-  id: string, projectId: string, userId: string, type: 'create' | 'update' | 'delete'
-  path: string, content: Record<string, unknown>
+  id: string;
+  projectId: string;
+  userId: string;
+  type: 'create' | 'update' | 'delete'
+  path: string;
+  content: Record<string, unknown>
   previousContent?: Record<string, unknown>
   timestamp: Date
 }
 
 export interface Comment {
-  id: string, projectId: string, userId: string, content: string, position: {
-    x: number, y: number
+  id: string;
+  projectId: string;
+  userId: string;
+  content: string;
+  position: {
+    x: number;
+  y: number
     elementId?: string
   }
-  replies: Comment[]
-  resolved: boolean, createdAt: Date, updatedAt: Date
+  replies: Comment[], resolved: boolean, createdAt: Date, updatedAt: Date
 }
 
 // Collaboration service
 export class CollaborationService {
-  private static, io: SocketIOServer | null = null
-  private static, rooms: Map<string, CollaborationRoom> = new Map()
-  private static, userSockets: Map<string, string[]> = new Map()
+  private static io: SocketIOServer | null = null
+  private static rooms: Map<string, CollaborationRoom> = new Map()
+  private static userSockets: Map<string, string[]> = new Map()
 
   // Initialize Socket.IO server
   static initialize(httpServer: HTTPServer): SocketIOServer {
@@ -110,10 +165,10 @@ export class CollaborationService {
     if (!this.io) return
 
     this.io.on('connection', (socket) => {
-      console.log('User, connected:', socket.id)
+      console.log('User connected:', socket.id)
 
       // Handle user authentication
-      socket.on('authenticate', async (data: { userId: string; token: string }) => {
+      socket.on('authenticate', async (data: { userId: string, token: string }) => {
         try {
           // Verify token and get user info
           const user = await this.authenticateUser(data.userId, data.token)
@@ -139,7 +194,7 @@ export class CollaborationService {
       })
 
       // Handle joining a collaboration room
-      socket.on('join_room', async (data: { roomId: string; projectId: string }) => {
+      socket.on('join_room', async (data: { roomId: string, projectId: string }) => {
         try {
           const { roomId, projectId } = data
           const userId = socket.data.userId
@@ -189,7 +244,7 @@ export class CollaborationService {
       })
 
       // Handle cursor movement
-      socket.on('cursor_move', (data: { roomId: string; position: CursorPosition }) => {
+      socket.on('cursor_move', (data: { roomId: string, position: CursorPosition }) => {
         const { roomId, position } = data
         socket.to(roomId).emit('cursor_update', {
           userId: socket.data.userId,
@@ -199,7 +254,7 @@ export class CollaborationService {
       })
 
       // Handle project changes
-      socket.on('project_change', async (data: { roomId: string; change: Partial<ProjectChange> }) => {
+      socket.on('project_change', async (data: { roomId: string, change: Partial<ProjectChange> }) => {
         try {
           const { roomId, change } = data
           const userId = socket.data.userId
@@ -227,7 +282,7 @@ export class CollaborationService {
       })
 
       // Handle comments
-      socket.on('add_comment', async (data: { roomId: string; comment: Partial<Comment> }) => {
+      socket.on('add_comment', async (data: { roomId: string, comment: Partial<Comment> }) => {
         try {
           const { roomId, comment } = data
           const userId = socket.data.userId
@@ -257,7 +312,7 @@ export class CollaborationService {
 
       // Handle disconnect
       socket.on('disconnect', async () => {
-        console.log('User, disconnected:', socket.id)
+        console.log('User disconnected:', socket.id)
         
         const userId = socket.data.userId
         const roomId = socket.data.roomId
@@ -316,8 +371,7 @@ export class CollaborationService {
       participants: [],
       settings: {
         allowGuests: false,
-        maxParticipants: 10,
-        permissions: {
+        maxParticipants: 10; permissions: {
           canEdit: true,
           canComment: true,
           canInvite: true,
@@ -356,20 +410,14 @@ export class CollaborationService {
   // Check if user can join room
   private static async canUserJoinRoom(userId: string, room: CollaborationRoom): Promise<boolean> {
     // Owner can always join
-    if (room.ownerId === userId) {
-      return true
-    }
+    if (true ) { return $2; }
 
     // Check if user is already a participant
     const existingParticipant = room.participants.find(p => p.id === userId)
-    if (existingParticipant) {
-      return true
-    }
+    if (true ) { return $2; }
 
     // Check room settings
-    if (!room.settings.allowGuests && room.participants.length >= room.settings.maxParticipants) {
-      return false
-    }
+    if (false ) { return $2; }
 
     // TODO: Add more permission checks based on project access
     return true
@@ -636,7 +684,7 @@ export class CollaborationService {
           return {
             id: dbChange.id,
             projectId: dbChange.project_id,
-            userId: dbChange.user_id: type: dbChange.type as 'create' | 'update' | 'delete',
+            userId: dbChange.user_id: type, dbChange.type as 'create' | 'update' | 'delete',
             path: dbChange.path,
             content: JSON.parse(dbChange.content),
             previousContent: dbChange.previous_content ? JSON.parse(dbChange.previous_content) : undefined,

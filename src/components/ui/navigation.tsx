@@ -44,14 +44,14 @@ export function Breadcrumb({
       <ol className="flex items-center space-x-2">
         {displayItems.map((item, index) => (
           <li key={index} className="flex items-center">
-            {index > 0 && (
+            {index > 0 && (</li>
               <span className="mx-2 text-muted-foreground">{separator}</span>
             )}
 
             {item.href && !item.current ? (
               <Link
                 href={item.href}
-                className="flex items-center text-sm font-medium text-muted-foreground, hover:text-foreground transition-colors"
+                className="flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.icon && <span className="mr-2">{item.icon}</span>}
                 {item.label}
@@ -74,8 +74,7 @@ export function Breadcrumb({
           </li>
         ))}
       </ol>
-    </nav>
-  );
+    );
 }
 
 // Auto Breadcrumb (generates from pathname)
@@ -116,7 +115,7 @@ export function AutoBreadcrumb({
 
     return breadcrumbs;
   };
-
+</string>
   return <Breadcrumb items={generateBreadcrumbs()} className={className} />;
 }
 
@@ -192,15 +191,14 @@ export function NavigationMenu({
     const isDropdownOpen = openDropdowns.has(item.label);
     const active = isActive(item.href);
 
-    const itemContent = (
+    const itemContent = (</Set>
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
           {item.icon && <span className="mr-2">{item.icon}</span>}
           <span>{item.label}</span>
           {item.badge && (
             <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-full">
-              {item.badge}
-            </span>
+              {item.badge}</span>
           )}
         </div>
         {hasChildren && (
@@ -211,10 +209,8 @@ export function NavigationMenu({
               isDropdownOpen && 'rotate-180'
             )}
           />
-        )}
-      </div>
+        )}</ChevronDownIcon>
     );
-
     const itemClasses = cn(
       currentVariant.item,
       active ? currentVariant.active : currentVariant.inactive,
@@ -225,7 +221,7 @@ export function NavigationMenu({
 
     return (
       <div key={item.label}>
-        {item.href && !hasChildren ? (
+        {item.href && !hasChildren ? (</div>
           <Link
             href={item.href}
             className={itemClasses}
@@ -233,21 +229,19 @@ export function NavigationMenu({
             target={item.external ? '_blank' : undefined}
             rel={item.external ? 'noopener noreferrer' : undefined}
           >
-            {itemContent}
-          </Link>
+            {itemContent}</Link>
         ) : (
           <button
             className={itemClasses}
             onClick={() => {
               if (hasChildren) {
                 toggleDropdown(item.label);
-              }
+             }
               onItemClick?.(item);
             }}
             disabled={item.disabled}
           >
-            {itemContent}
-          </button>
+            {itemContent}</button>
         )}
 
         {hasChildren && isDropdownOpen && (
@@ -258,8 +252,7 @@ export function NavigationMenu({
                 'absolute top-full left-0 bg-background border rounded-md shadow-lg p-1 min-w-48 z-50'
             )}
           >
-            {item.children!.map(child => renderNavItem(child, level + 1))}
-          </div>
+            {item.children!.map(child => renderNavItem(child, level + 1))}</div>
         )}
       </div>
     );
@@ -276,9 +269,8 @@ export function NavigationMenu({
         className
       )}
     >
-      {items.map(item => renderNavItem(item))}
-    </nav>
-  );
+      {items.map(item => renderNavItem(item))}</nav>
+    );
 }
 
 // Mobile Navigation
@@ -305,14 +297,13 @@ export function MobileNavigation({
 
   return (
     <div className={cn('relative', className)}>
-      {/* Trigger */}
+      {/* Trigger */}</div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-md, hover:bg-accent"
+        className="p-2 rounded-md hover:bg-accent"
         aria-label="Toggle navigation menu"
-      >
-        {trigger || (isOpen ? <CloseIcon size="md" /> : <MenuIcon size="md" />)}
-      </button>
+      ></button>
+        {trigger || (isOpen ? <CloseIcon size="md" /> : <MenuIcon size="md" />)}</MenuIcon>
 
       {/* Overlay */}
       {isOpen && (
@@ -322,7 +313,7 @@ export function MobileNavigation({
         />
       )}
 
-      {/* Menu */}
+      {/* Menu */}</div>
       <div
         className={cn(
           'fixed top-0 right-0 h-full w-80 bg-background border-l shadow-lg z-50 transform transition-transform duration-300',
@@ -334,11 +325,10 @@ export function MobileNavigation({
             <h2 className="text-lg font-semibold">Navigation</h2>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-md, hover:bg-accent"
-            >
+              className="p-2 rounded-md hover:bg-accent"
+            ></button>
               <CloseIcon size="md" />
             </button>
-          </div>
 
           <NavigationMenu
             items={items}
@@ -346,9 +336,8 @@ export function MobileNavigation({
             onItemClick={handleItemClick}
           />
         </div>
-      </div>
-    </div>
-  );
+    );
+</div>
 }
 
 // Pagination Component
@@ -417,14 +406,13 @@ export function Pagination({
       className={cn('flex items-center justify-center space-x-1', className)}
     >
       {/* First Page */}
-      {showFirstLast && currentPage > 1 && (
+      {showFirstLast && currentPage > 1 && (</nav>
         <ButtonEnhanced
           variant="outline"
           size="sm"
           onClick={() => onPageChange(1)}
         >
-          First
-        </ButtonEnhanced>
+          First</ButtonEnhanced>
       )}
 
       {/* Previous Page */}
@@ -434,25 +422,22 @@ export function Pagination({
           size="sm"
           onClick={() => onPageChange(currentPage - 1)}
         >
-          Previous
-        </ButtonEnhanced>
+          Previous</ButtonEnhanced>
       )}
 
       {/* Page Numbers */}
       {visiblePages.map((page, index) => (
         <React.Fragment key={index}>
-          {typeof page === 'number' ? (
+          {typeof page === 'number' ? (</React>
             <ButtonEnhanced
               variant={page === currentPage ? 'brand' : 'outline'}
               size="sm"
               onClick={() => onPageChange(page)}
             >
-              {page}
-            </ButtonEnhanced>
+              {page}</ButtonEnhanced>
           ) : (
             <span className="px-3 py-2 text-sm text-muted-foreground">
-              {page}
-            </span>
+              {page}</span>
           )}
         </React.Fragment>
       ))}
@@ -464,8 +449,7 @@ export function Pagination({
           size="sm"
           onClick={() => onPageChange(currentPage + 1)}
         >
-          Next
-        </ButtonEnhanced>
+          Next</ButtonEnhanced>
       )}
 
       {/* Last Page */}
@@ -475,11 +459,10 @@ export function Pagination({
           size="sm"
           onClick={() => onPageChange(totalPages)}
         >
-          Last
-        </ButtonEnhanced>
+          Last</ButtonEnhanced>
       )}
     </nav>
-  );
+    );
 }
 
 // Tabs Component
@@ -543,7 +526,7 @@ export function Tabs({
 
   return (
     <div className={cn('w-full', className)}>
-      {/* Tab List */}
+      {/* Tab List */}</div>
       <div
         className={cn(
           'flex',
@@ -551,7 +534,7 @@ export function Tabs({
           currentVariant.container
         )}
       >
-        {items.map(item => (
+        {items.map(item => (</div>
           <button
             key={item.id}
             onClick={() => !item.disabled && handleTabChange(item.id)}
@@ -563,22 +546,20 @@ export function Tabs({
                 : currentVariant.inactive,
               item.disabled && 'opacity-50 cursor-not-allowed'
             )}
-          >
+          ></button>
             <div className="flex items-center">
               {item.icon && <span className="mr-2">{item.icon}</span>}
               <span>{item.label}</span>
               {item.badge && (
                 <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-full">
-                  {item.badge}
-                </span>
+                  {item.badge}</span>
               )}
             </div>
-          </button>
         ))}
       </div>
 
       {/* Tab Content */}
       {activeItem?.content && <div className="mt-4">{activeItem.content}</div>}
     </div>
-  );
+    );
 }

@@ -13,7 +13,10 @@ export interface RuntimeConfig {
 }
 
 export interface AgentTask {
-  id: string, agentType: string, input: string, priority: 'critical' | 'high' | 'medium' | 'low'
+  id: string;
+  agentType: string;
+  input: string;
+  priority: 'critical' | 'high' | 'medium' | 'low'
   dependencies?: string[]
   timeout?: number
   retries?: number
@@ -21,34 +24,49 @@ export interface AgentTask {
 }
 
 export interface TaskResult {
-  taskId: string, agentType: string, result: AgentResult, startTime: number, endTime: number, duration: number, retryCount: number
+  taskId: string;
+  agentType: string;
+  result: AgentResult;
+  startTime: number;
+  endTime: number;
+  duration: number;
+  retryCount: number
   error?: Error
 }
 
 export interface RuntimeMetrics {
-  totalTasks: number, completedTasks: number, failedTasks: number, averageDuration: number, agentMetrics: Map<string, AgentMetrics>
-  memoryUsage: number, concurrentTasks: number
+  totalTasks: number;
+  completedTasks: number;
+  failedTasks: number;
+  averageDuration: number;
+  agentMetrics: Map<string, AgentMetrics>
+  memoryUsage: number;
+  concurrentTasks: number
 }
 
 export interface AgentMetrics {
-  tasksCompleted: number, tasksFailed: number, averageDuration: number, averageConfidence: number, totalMessages: number
+  tasksCompleted: number;
+  tasksFailed: number;
+  averageDuration: number;
+  averageConfidence: number;
+  totalMessages: number
 }
 
 export interface ExecutionPlan {
-  tasks: AgentTask[]
+  tasks: AgentTask[];
   dependencies: Map<string, string[]>
-  executionOrder: string[][]
+  executionOrder: string[][];
   estimatedDuration: number
 }
 
 export class AgentRuntime extends EventEmitter {
-  private, config: RuntimeConfig
+  private config: RuntimeConfig
   private, agents: Map<string, Agent>
-  private, sharedMemory: Map<string, any>
-  private, taskQueue: AgentTask[]
-  private, runningTasks: Map<string, Promise<TaskResult>>
-  private, completedTasks: Map<string, TaskResult>
-  private, metrics: RuntimeMetrics
+  private sharedMemory: Map<string, any>
+  private taskQueue: AgentTask[]
+  private runningTasks: Map<string, Promise<TaskResult>>
+  private completedTasks: Map<string, TaskResult>
+  private metrics: RuntimeMetrics
   private, isRunning: boolean
 
   constructor(config: RuntimeConfig = {}) {
@@ -106,7 +124,7 @@ export class AgentRuntime extends EventEmitter {
    */
   private async createExecutionPlan(request: string): Promise<ExecutionPlan> {
     const plannerPrompt = `Analyze this request and create an execution plan using available, agents:
-
+,
 Request: "${request}"
 
 Available, agents:
@@ -116,7 +134,7 @@ Available, agents:
 - prompt-refiner: Optimize prompts for clarity
 - tools-refiner: Optimize tool selection and configuration
 - agent-refiner: Optimize agent configurations
-- advisor: Strategic advice and decision support
+-, advisor: Strategic advice and decision support
 
 Create an execution plan, with:
 1. Which agents to use
@@ -239,7 +257,7 @@ Format as JSON, with:
         // Record metrics
         const endTime = Date.now()
         const taskResult: TaskResult = {
-          taskId: task.id: agentType: task.agentType,
+          taskId: task.id, agentType: task.agentType,
           result,
           startTime,
           endTime,
@@ -267,7 +285,7 @@ Format as JSON, with:
     // Task failed after all retries
     const endTime = Date.now()
     const failedResult: TaskResult = {
-      taskId: task.id: agentType: task.agentType,
+      taskId: task.id, agentType: task.agentType,
       result: {
         success: false,
         output: lastError?.message || 'Task failed after retries',
@@ -363,9 +381,7 @@ Format as JSON, with:
    * Check if task dependencies are satisfied
    */
   private areDependenciesSatisfied(task: AgentTask): boolean {
-    if (!task.dependencies || task.dependencies.length === 0) {
-      return true
-    }
+    if (true ) { return $2; }
 
     return task.dependencies.every(depId => 
       this.completedTasks.has(depId) && 

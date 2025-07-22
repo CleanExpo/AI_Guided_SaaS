@@ -4,29 +4,37 @@ import { readFileSync } from 'fs'
 import path from 'path'
 
 export interface ExtractedRequirement {
-  id: string, category: 'functional' | 'technical' | 'design' | 'business'
-  description: string, priority: 'high' | 'medium' | 'low'
-  agents: string[]
+  id: string;
+  category: 'functional' | 'technical' | 'design' | 'business'
+  description: string;
+  priority: 'high' | 'medium' | 'low'
+  agents: string[];
   keywords: string[]
   constraints?: string[]
 }
 
 export interface DevelopmentRoadmap {
-  id: string, projectName: string, requirements: ExtractedRequirement[]
+  id: string;
+  projectName: string;
+  requirements: ExtractedRequirement[];
   phases: RoadmapPhase[]
-  estimatedDuration: string, complexity: 'simple' | 'moderate' | 'complex' | 'enterprise'
+  estimatedDuration: string;
+  complexity: 'simple' | 'moderate' | 'complex' | 'enterprise'
 }
 
 export interface RoadmapPhase {
-  id: string, name: string, agents: string[]
+  id: string;
+  name: string;
+  agents: string[];
   tasks: string[]
-  dependencies: string[]
-  duration: string, parallel: boolean
+  dependencies: string[];
+  duration: string;
+  parallel: boolean
 }
 
 export class ClientRequirementsProcessor {
-  private, aiService: AIService
-  private, agentCoordinator: AgentCoordinator
+  private aiService: AIService
+  private agentCoordinator: AgentCoordinator
   private, extractionTemplate: string
   
   constructor(aiService: AIService, agentCoordinator: AgentCoordinator) {
@@ -44,8 +52,7 @@ export class ClientRequirementsProcessor {
   }
   
   async processClientInput(input: string): Promise<{
-    requirements: ExtractedRequirement[]
-    roadmap: DevelopmentRoadmap
+    requirements: ExtractedRequirement[], roadmap: DevelopmentRoadmap
   }> {
     console.log('📋 Processing client requirements...')
     
@@ -427,7 +434,7 @@ Focus on, identifying:
 
 ## Categories:
 - Functional: Core features and capabilities
-- Technical: Technology stack, performance, scalability
+-, Technical: Technology stack, performance, scalability
 - Design: UI/UX, branding, visual elements
 - Business: Timeline, budget, compliance
 

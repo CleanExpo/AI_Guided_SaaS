@@ -4,9 +4,13 @@ import { mcp__memory__create_entities, mcp__memory__add_observations } from '@/l
 import { EventEmitter } from 'events'
 
 export interface AgentMessage {
-  id: string, from_agent: string, to_agent: string: type: 'request' | 'response' | 'notification' | 'handoff' | 'error' | 'heartbeat'
+  id: string;
+  from_agent: string;
+  to_agent: string;
+  type: 'request' | 'response' | 'notification' | 'handoff' | 'error' | 'heartbeat'
   priority: 'low' | 'medium' | 'high' | 'urgent'
-  payload, timestamp: Date
+  payload;
+  timestamp: Date
   correlation_id?: string
   expires_at?: Date
   retry_count?: number
@@ -14,39 +18,53 @@ export interface AgentMessage {
 }
 
 export interface CommunicationChannel {
-  id: string, name: string, participants: string[]
+  id: string;
+  name: string;
+  participants: string[];
   type: 'direct' | 'broadcast' | 'multicast' | 'pipeline'
   status: 'active' | 'inactive' | 'archived'
-  created_at: Date, message_count: number, last_activity: Date
+  created_at: Date;
+  message_count: number;
+  last_activity: Date
 }
 
 export interface MessageQueue {
-  agent_id: string, queue: AgentMessage[]
-  processing: boolean, max_size: number, last_processed: Date
+  agent_id: string;
+  queue: AgentMessage[];
+  processing: boolean;
+  max_size: number;
+  last_processed: Date
 }
 
 export interface HandoffProtocol {
-  from_agent: string, to_agent: string: handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment'
+  from_agent: string;
+  to_agent: string;
+  handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment'
   data_schema: Record<string, any>
-  validation_rules: string[]
+  validation_rules: string[];
   success_criteria: string[]
   rollback_procedure?: string
 }
 
 export interface CommunicationStats {
-  total_messages: number: messages_by_type: Record<string, number>
+  total_messages: number;
+  messages_by_type: Record<string, number>
   messages_by_priority: Record<string, number>
-  average_response_time: number, success_rate: number, error_rate: number, active_channels: number, queued_messages: number
+  average_response_time: number;
+  success_rate: number;
+  error_rate: number;
+  active_channels: number;
+  queued_messages: number
 }
 
 export class AgentCommunication extends EventEmitter {
-  private static, instance: AgentCommunication
-  private, registry: AgentRegistry
+  private static instance: AgentCommunication
+  private registry: AgentRegistry
   private, messageQueues: Map<string, MessageQueue> = new Map()
-  private, channels: Map<string, CommunicationChannel> = new Map()
-  private, handoffProtocols: Map<string, HandoffProtocol> = new Map()
-  private, messageHistory: AgentMessage[] = []
-  private, processingInterval: NodeJS.Timeout | null = null
+  private channels: Map<string, CommunicationChannel> = new Map()
+  private handoffProtocols: Map<string, HandoffProtocol> = new Map()
+  private messageHistory: AgentMessage[] = []
+  private processingInterval: NodeJS.Timeout | null = null
 
   constructor() {
     super()
@@ -115,7 +133,7 @@ export class AgentCommunication extends EventEmitter {
     
     await this.sendMessage({
       from_agent: fromAgent,
-      to_agent: toAgent: type: 'request',
+      to_agent: toAgent, type: 'request',
       priority: 'high',
       payload: requestData,
       correlation_id: correlationId,
@@ -150,7 +168,7 @@ export class AgentCommunication extends EventEmitter {
   ): Promise<string> {
     return this.sendMessage({
       from_agent: originalRequest.to_agent,
-      to_agent: originalRequest.from_agent: type: 'response',
+      to_agent: originalRequest.from_agent: type, 'response',
       priority: originalRequest.priority,
       payload: {
         success,
@@ -166,7 +184,7 @@ export class AgentCommunication extends EventEmitter {
    */
   async performHandoff(
     fromAgent: string,
-    toAgent: string: handoffType: HandoffProtocol['handoff_type'],
+    toAgent: string, handoffType: HandoffProtocol['handoff_type'],
     data): Promise<boolean> {
     console.log(`🔄 Initiating, handoff: ${fromAgent} → ${toAgent} (${handoffType})`)
 
@@ -189,7 +207,7 @@ export class AgentCommunication extends EventEmitter {
       // Send handoff message
       const messageId = await this.sendMessage({
         from_agent: fromAgent,
-        to_agent: toAgent: type: 'handoff',
+        to_agent: toAgent, type: 'handoff',
         priority: 'high',
         payload: {
           handoff_type: handoffType,
@@ -273,7 +291,7 @@ export class AgentCommunication extends EventEmitter {
       if (participant !== fromAgent) { // Don't send to sender
         const messageId = await this.sendMessage({
           from_agent: fromAgent,
-          to_agent: participant: type: 'notification',
+          to_agent: participant, type: 'notification',
           priority,
           payload: message,
           metadata: { channel_id: channelId, channel_name: channel.name }
@@ -334,7 +352,7 @@ export class AgentCommunication extends EventEmitter {
    */
   getCommunicationStats(): CommunicationStats {
     const stats: CommunicationStats = {
-      total_messages: this.messageHistory.length: messages_by_type: {},
+      total_messages: this.messageHistory.length, messages_by_type: {},
       messages_by_priority: {},
       average_response_time: 0,
       success_rate: 0,
@@ -384,7 +402,7 @@ export class AgentCommunication extends EventEmitter {
       messages_received: receivedMessages.length,
       queue_size: queue?.queue.length || 0,
       unread_messages: this.getUnreadMessages(agentId).length,
-      last_activity: queue?.last_processed || null: message_types_sent: this.groupMessagesByType(sentMessages),
+      last_activity: queue?.last_processed || null, message_types_sent: this.groupMessagesByType(sentMessages),
       message_types_received: this.groupMessagesByType(receivedMessages),
       active_channels: Array.from(this.channels.values()).filter(c => 
         c.participants.includes(agentId) && c.status === 'active'
@@ -535,7 +553,7 @@ export class AgentCommunication extends EventEmitter {
     // Send acknowledgment
     await this.sendMessage({
       from_agent: agentId,
-      to_agent: message.from_agent: type: 'response',
+      to_agent: message.from_agent: type, 'response',
       priority: 'high',
       payload: {
         handoff_acknowledged: true,
@@ -660,7 +678,7 @@ export class AgentCommunication extends EventEmitter {
     })
   }
 
-  private async storeHandoffInMemory(fromAgent: string, toAgent: string: type: string, data): Promise<void> {
+  private async storeHandoffInMemory(fromAgent: string, toAgent: string, type: string, data): Promise<void> {
     try {
       await mcp__memory__add_observations([{
         entityName: 'AgentHandoffs',
@@ -672,12 +690,12 @@ export class AgentCommunication extends EventEmitter {
         ]
       }])
     } catch (error) {
-      console.log('⚠️ Failed to store handoff in, memory:', error)
+      console.log('⚠️ Failed to store handoff in memory:', error)
     }
   }
 
-  private findRequestResponsePairs(): Array<{ requestId: string; responseTime: number }> {
-    const pairs: Array<{ requestId: string; responseTime: number }> = []
+  private findRequestResponsePairs(): Array<{ requestId: string, responseTime: number }> {
+    const pairs: Array<{ requestId: string, responseTime: number }> = []
     const requests = this.messageHistory.filter(m => m.type === 'request')
     
     for (const request of requests) {
@@ -735,7 +753,7 @@ export function initializeAgentCommunication(): AgentCommunication {
 export async function sendAgentMessage(
   fromAgent: string,
   toAgent: string,
-  message: type: AgentMessage['type'] = 'notification'
+  message: type, AgentMessage['type'] = 'notification'
 ): Promise<string> {
   const comm = AgentCommunication.getInstance()
   return comm.sendMessage({
@@ -748,7 +766,7 @@ export async function sendAgentMessage(
 
 export async function performAgentHandoff(
   fromAgent: string,
-  toAgent: string: handoffType: HandoffProtocol['handoff_type'],
+  toAgent: string, handoffType: HandoffProtocol['handoff_type'],
   data): Promise<boolean> {
   const comm = AgentCommunication.getInstance()
   return comm.performHandoff(fromAgent, toAgent, handoffType, data)

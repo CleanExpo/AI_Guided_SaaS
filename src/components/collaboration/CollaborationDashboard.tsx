@@ -34,6 +34,7 @@ interface CollaborationSession {
 }
 
 export default function CollaborationDashboard() {
+      </CollaborationSession>
   const [sessions, setSessions] = useState<CollaborationSession[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -146,46 +147,35 @@ export default function CollaborationDashboard() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading collaboration sessions...</p>
+    
         </div>
-      </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Collaboration Dashboard
-          </h1>
+            Collaboration Dashboard</h1>
           <p className="text-gray-600">
-            Manage your collaborative projects and sessions
-          </p>
-        </div>
+            Manage your collaborative projects and sessions</p>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
-          New Session
-        </Button>
-      </div>
+          New Session</Plus>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1, md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
               <Activity className="h-5 w-5 text-blue-600" />
               <div>
                 <p className="text-sm font-medium text-gray-600">
-                  Active Sessions
-                </p>
+                  Active Sessions</p>
                 <p className="text-2xl font-bold">
-                  {sessions.filter(s => s.isActive).length}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  {sessions.filter(s => s.isActive).length}</p>
 
         <Card>
           <CardContent className="p-4">
@@ -193,15 +183,9 @@ export default function CollaborationDashboard() {
               <Users className="h-5 w-5 text-green-600" />
               <div>
                 <p className="text-sm font-medium text-gray-600">
-                  Total Participants
-                </p>
+                  Total Participants</p>
                 <p className="text-2xl font-bold">
-                  {sessions.reduce((sum, s) => sum + s.participants, 0)}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  {sessions.reduce((sum, s) => sum + s.participants, 0)}</p>
 
         <Card>
           <CardContent className="p-4">
@@ -209,15 +193,9 @@ export default function CollaborationDashboard() {
               <MessageCircle className="h-5 w-5 text-brand-primary-600" />
               <div>
                 <p className="text-sm font-medium text-gray-600">
-                  Total Comments
-                </p>
+                  Total Comments</p>
                 <p className="text-2xl font-bold">
-                  {sessions.reduce((sum, s) => sum + s.comments, 0)}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  {sessions.reduce((sum, s) => sum + s.comments, 0)}</p>
 
         <Card>
           <CardContent className="p-4">
@@ -225,71 +203,53 @@ export default function CollaborationDashboard() {
               <Edit className="h-5 w-5 text-orange-600" />
               <div>
                 <p className="text-sm font-medium text-gray-600">
-                  Total Changes
-                </p>
+                  Total Changes</p>
                 <p className="text-2xl font-bold">
-                  {sessions.reduce((sum, s) => sum + s.changes, 0)}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+                  {sessions.reduce((sum, s) => sum + s.changes, 0)}</p>
 
       {/* Filters and Search */}
-      <div className="flex flex-col, sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <div className="flex-1">
           <Input
             placeholder="Search collaboration sessions..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-          />
-        </div>
+          /></Input>
         <div className="flex space-x-2">
           <Button
             variant={filter === 'all' ? 'default' : 'outline'}
             onClick={() => setFilter('all')}
             size="sm"
           >
-            All
-          </Button>
+            All</Button>
           <Button
             variant={filter === 'active' ? 'default' : 'outline'}
             onClick={() => setFilter('active')}
             size="sm"
           >
-            Active
-          </Button>
+            Active</Button>
           <Button
             variant={filter === 'recent' ? 'default' : 'outline'}
             onClick={() => setFilter('recent')}
             size="sm"
           >
-            Recent
-          </Button>
-        </div>
-      </div>
+            Recent</Button>
 
       {/* Sessions List */}
       <div className="space-y-4">
-        {filteredSessions.length === 0 ? (
+        {filteredSessions.length === 0 ? (</div>
           <Card>
             <CardContent className="p-8 text-center">
               <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">
-                No collaboration sessions found
-              </h3>
+                No collaboration sessions found</h3>
               <p className="text-gray-600 mb-4">
                 {searchTerm
                   ? 'Try adjusting your search terms.'
-                  : 'Create your first collaboration session to get started.'}
-              </p>
+                  : 'Create your first collaboration session to get started.'}</p>
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
-                Create Session
-              </Button>
-            </CardContent>
-          </Card>
+                Create Session</Plus>
         ) : (
           filteredSessions.map(session => {
             const activity = getActivityLevel(session);
@@ -304,23 +264,20 @@ export default function CollaborationDashboard() {
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
                         <h3 className="text-lg font-semibold text-gray-900">
-                          {session.name}
-                        </h3>
+                          {session.name}</h3>
                         {session.isActive && (
                           <Badge
                             variant="default"
                             className="bg-green-100 text-green-800"
                           >
                             <Activity className="h-3 w-3 mr-1" />
-                            Live
-                          </Badge>
+                            Live</Activity>
                         )}
                         {session.isPublic ? (
                           <Globe className="h-4 w-4 text-gray-400" />
-                        ) : (
+                        ) : (</Globe>
                           <Lock className="h-4 w-4 text-gray-400" />
-                        )}
-                      </div>
+                        )}</Lock>
 
                       <div className="flex items-center space-x-6 text-sm text-gray-600 mb-3">
                         <div className="flex items-center space-x-1">
@@ -338,10 +295,7 @@ export default function CollaborationDashboard() {
                         <div className="flex items-center space-x-1">
                           <Clock className="h-4 w-4" />
                           <span>
-                            Last active {formatTimeAgo(session.lastActivity)}
-                          </span>
-                        </div>
-                      </div>
+                            Last active {formatTimeAgo(session.lastActivity)}</span>
 
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2">
@@ -349,42 +303,56 @@ export default function CollaborationDashboard() {
                             className={`w-2 h-2 rounded-full ${activity.color}`}
                           ></div>
                           <span className="text-xs text-gray-500">
-                            {activity.level} Activity
-                          </span>
-                        </div>
+                            {activity.level} Activity</span>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
                           <Calendar className="h-3 w-3" />
                           <span>
-                            Created {formatTimeAgo(session.createdAt)}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                            Created {formatTimeAgo(session.createdAt)}</span>
 
                     <div className="flex items-center space-x-2 ml-4">
                       <Button variant="outline" size="sm">
                         <Eye className="h-4 w-4 mr-1" />
-                        View
-                      </Button>
+                        View</Eye>
                       <Button variant="outline" size="sm">
                         <Share2 className="h-4 w-4 mr-1" />
-                        Share
-                      </Button>
+                        Share</Share2>
                       <Button variant="outline" size="sm">
                         <Settings className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-red-600, hover:text-red-700"
+                        className="text-red-600 hover:text-red-700"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
-                    </div>
-                  </div>
-                </CardContent>
+    );
+              </div>
+              </Button>
+              </div>
               </Card>
-            );
+              </CardContent>
+              </div>
+              </Card>
+              </CardContent>
+              </div>
+              </Card>
+              </CardContent>
+              </div>
+              </Card>
+              </CardContent>
+              </div>
+              </div>
+              </div>
+              </Card>
+              </CardContent>
+              </Button>
+              </CardContent>
+              </div>
+              </div>
+              </div>
+              </div>
+              </Button>
           })
         )}
       </div>
@@ -395,9 +363,35 @@ export default function CollaborationDashboard() {
           This dashboard shows simulated collaboration sessions. In production,
           this would display real-time data from your collaboration rooms with
           live participant counts, activity metrics, and session management
-          capabilities.
-        </AlertDescription>
-      </Alert>
-    </div>
-  );
+          capabilities.</AlertDescription>
+          </Alert>
+      );
+</CardContent>
+</Button>
+</CardContent>
+</Card>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardContent>
+</Card>
+</div>
+</div>
+</CardContent>
+</Card>
+</div>
+</div>
+</CardContent>
+</Card>
+</div>
+</div>
+</CardContent>
+</Card>
+</div>
+</Button>
+</div>
+</div>
+</div>
 }

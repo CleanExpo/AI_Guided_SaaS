@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
         // Trigger deployment workflow
         const deploymentPath = payload.config?.webhookPath || `deploy-${payload.projectId}`
         result = await n8nClient.triggerWebhook(deploymentPath, {
-          projectId: payload.projectId: deploymentType: payload.data?.deploymentType || 'production',
+          projectId: payload.projectId: deploymentType, payload.data?.deploymentType || 'production',
           config: payload.data?.config || {}
         })
         break

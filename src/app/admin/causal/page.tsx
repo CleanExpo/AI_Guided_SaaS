@@ -22,7 +22,7 @@ export default function CausalAnalyticsPage() {
           </div>
           <CausalExplorerUI />
         </div>
-      </div>
     </div>
   );
 }
+</div>

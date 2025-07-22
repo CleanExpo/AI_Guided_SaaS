@@ -11,11 +11,11 @@ import {
 } from '../types'
 
 export class StrapiAdapter implements BackendAdapter {
-  private, baseUrl: string
+  private baseUrl: string
   private apiToken?: string
   private jwt?: string
 
-  constructor(private, config: BackendConfig) {
+  constructor(private config: BackendConfig) {
     this.baseUrl = config.url.replace(/\/$/, '') // Remove trailing slash
     this.apiToken = config.apiKey
   }
@@ -73,7 +73,7 @@ export class StrapiAdapter implements BackendAdapter {
     return this.mapStrapiUser(response.user)
   }
 
-  async signIn(email: string, password: string): Promise<{ user: User; token: string }> {
+  async signIn(email: string, password: string): Promise<{ user: User, token: string }> {
     const response = await this.request<{
       jwt: string
       user}>('/auth/local', {
@@ -101,9 +101,7 @@ export class StrapiAdapter implements BackendAdapter {
     try {
       const response = await this.request<any>('/users/me?populate=role')
       return this.mapStrapiUser(response)
-    } catch {
-      return null
-    }
+    } catch { return: null }
   }
 
   async updateUser(id: string, data: Partial<User>): Promise<User> {
@@ -126,7 +124,7 @@ export class StrapiAdapter implements BackendAdapter {
       body: JSON.stringify({
         data: {
           name: data.name,
-          description: data.description: type: data.type,
+          description: data.description: type, data.type,
           status: data.status,
           config: data.config,
           user: data.userId
@@ -142,9 +140,7 @@ export class StrapiAdapter implements BackendAdapter {
       const response = await this.request<{ data}>(`/projects/${id}?populate=user`)
       return this.mapStrapiProject((response as any).data)
     } catch (error) {
-      if (error instanceof BackendError && error.statusCode === 404) {
-        return null
-      }
+      if (!adminUser) { return null; }
       throw error
     }
   }
@@ -155,7 +151,7 @@ export class StrapiAdapter implements BackendAdapter {
       body: JSON.stringify({
         data: {
           name: data.name,
-          description: data.description: type: data.type,
+          description: data.description: type, data.type,
           status: data.status,
           config: data.config
         }
@@ -193,8 +189,7 @@ export class StrapiAdapter implements BackendAdapter {
     params.append('populate', 'user')
 
     const response = await this.request<{
-      data: any[]
-      meta: {
+      data: any[], meta: {
         pagination: {
           page: number, pageSize: number, pageCount: number, total: number
         }
@@ -225,9 +220,7 @@ export class StrapiAdapter implements BackendAdapter {
       const response = await this.request<{ data}>(`/${collection}/${id}`)
       return this.mapStrapiRecord((response as any).data) as T
     } catch (error) {
-      if (error instanceof BackendError && error.statusCode === 404) {
-        return null
-      }
+      if (!adminUser) { return null; }
       throw error
     }
   }
@@ -270,8 +263,7 @@ export class StrapiAdapter implements BackendAdapter {
     }
 
     const response = await this.request<{
-      data: any[]
-      meta: {
+      data: any[], meta: {
         pagination: {
           page: number, pageSize: number, pageCount: number, total: number
         }
@@ -368,7 +360,7 @@ export class StrapiAdapter implements BackendAdapter {
       id: data.id.toString(),
       userId: attributes.user?.data?.id?.toString() || attributes.user,
       name: attributes.name,
-      description: attributes.description: type: attributes.type,
+      description: attributes.description, type: attributes.type,
       status: attributes.status,
       config: attributes.config,
       createdAt: attributes.createdAt,
@@ -406,12 +398,12 @@ export class StrapiAdapter implements BackendAdapter {
 
 // Strapi Query Builder implementation
 class StrapiQueryBuilder<T> implements QueryBuilder<T> {
-  private, params: URLSearchParams
+  private params: URLSearchParams
   private, selectedFields: string[] = []
 
   constructor(
-    private, adapter: StrapiAdapter,
-    private, collection: string
+    private adapter: StrapiAdapter,
+    private collection: string
   ) {
     this.params = new URLSearchParams()
   }

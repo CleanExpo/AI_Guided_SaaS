@@ -53,13 +53,13 @@ interface BuildReport {
 }
 
 class BuildSyncAgent {
-  private, projectRoot: string;
-  private, tempDir: string;
-  private, reportsDir: string;
-  private, assetInventory: string[] = [];
-  private, buildOutput: string[] = [];
-  private, errors: string[] = [];
-  private, warnings: string[] = [];
+  private projectRoot: string;
+  private tempDir: string;
+  private reportsDir: string;
+  private assetInventory: string[] = [];
+  private buildOutput: string[] = [];
+  private errors: string[] = [];
+  private warnings: string[] = [];
 
   constructor() {
     this.projectRoot = process.cwd();
@@ -79,7 +79,7 @@ class BuildSyncAgent {
   }
 
   private log(
-    message: string: type: 'info' | 'success' | 'warning' | 'error' | 'debug' = 'info'
+    message: string, type: 'info' | 'success' | 'warning' | 'error' | 'debug' = 'info'
   ): void {
     const timestamp = new Date().toISOString();
     const prefix =
@@ -436,10 +436,13 @@ class BuildSyncAgent {
         totalAssets: this.assetInventory.length,
         buildFiles: this.buildOutput.length,
         errors: this.errors.length,
-        warnings: this.warnings.length},
+        warnings: this.warnings.length
+      },
       errors: this.errors,
       warnings: this.warnings,
-      assetInventory: this.assetInventory.slice(0, 50), // First 50 for brevity, buildOutput: this.buildOutput.slice(0, 50)};
+      assetInventory: this.assetInventory.slice(0, 50), // First 50 for brevity
+      buildOutput: this.buildOutput.slice(0, 50)
+    };
 
     // Generate HTML report
     const htmlReport = this.generateHTMLReport(report);
@@ -450,7 +453,7 @@ class BuildSyncAgent {
     const jsonReportPath = path.join(this.reportsDir, 'build_sync_report.json');
     fs.writeFileSync(jsonReportPath, JSON.stringify(report, null, 2));
 
-    this.log(`📋 Reports, generated: ${reportPath}`, 'success');
+    this.log(`📋 Reports generated: ${reportPath}`, 'success');
   }
 
   // Utility methods

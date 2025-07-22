@@ -3,12 +3,23 @@ import { AgentCoordinator } from './AgentCoordinator'
 import { mcp__memory__create_entities, mcp__memory__add_observations, mcp__memory__search_nodes } from '@/lib/mcp'
 
 export interface AgentMetrics {
-  total_tasks: number, completed_tasks: number, failed_tasks: number, success_rate: number, average_execution_time: number, last_active: Date, total_runtime: number, error_count: number
+  total_tasks: number;
+  completed_tasks: number;
+  failed_tasks: number;
+  success_rate: number;
+  average_execution_time: number;
+  last_active: Date;
+  total_runtime: number;
+  error_count: number
 }
 
 export interface AgentRegistration {
-  agent: AgentConfig, registered_at: Date, last_heartbeat: Date, metrics: AgentMetrics, health_status: 'healthy' | 'warning' | 'critical' | 'offline'
-  tags: string[]
+  agent: AgentConfig;
+  registered_at: Date;
+  last_heartbeat: Date;
+  metrics: AgentMetrics;
+  health_status: 'healthy' | 'warning' | 'critical' | 'offline'
+  tags: string[];
   capabilities_verified: boolean
 }
 
@@ -23,15 +34,17 @@ export interface RegistryQuery {
 
 export interface RegistryEvent {
   type: 'registration' | 'deregistration' | 'status_change' | 'metric_update' | 'health_check'
-  agent_id: string, timestamp: Date, data, severity: 'info' | 'warning' | 'error'
+  agent_id: string;
+  timestamp: Date, data;
+  severity: 'info' | 'warning' | 'error'
 }
 
 export class AgentRegistry {
-  private static, instance: AgentRegistry
+  private static instance: AgentRegistry
   private, registrations: Map<string, AgentRegistration> = new Map()
-  private, eventHistory: RegistryEvent[] = []
-  private, healthCheckInterval: NodeJS.Timeout | null = null
-  private, loader: AgentLoader
+  private eventHistory: RegistryEvent[] = []
+  private healthCheckInterval: NodeJS.Timeout | null = null
+  private loader: AgentLoader
   private, coordinator: AgentCoordinator
 
   constructor() {
@@ -451,7 +464,7 @@ export class AgentRegistry {
         }]
       })
     } catch (error) {
-      console.log('⚠️ Failed to store agent in, memory:', error)
+      console.log('⚠️ Failed to store agent in memory:', error)
     }
   }
 
@@ -465,7 +478,7 @@ export class AgentRegistry {
 
     // Log significant events to console
     if (event.severity === 'error' || event.type === 'registration') {
-      console.log(`📋 Registry: Event: [${event.type}] ${event.agent_id} - ${JSON.stringify(event.data)}`)
+      console.log(`📋 Registry: Event, [${event.type}] ${event.agent_id} - ${JSON.stringify(event.data)}`)
     }
   }
 

@@ -5,23 +5,34 @@ import { AgentCoordinator } from '@/lib/agents/AgentCoordinator'
 import { PulsedAgentOrchestrator } from '@/lib/agents/PulsedAgentOrchestrator'
 
 export interface SimulationResult {
-  scenarioId: string, scenarioName: string, startTime: Date, endTime: Date, duration: number, stages: {
-    requirementProcessing: StageResult, agentOrchestration: StageResult, execution: StageResult, validation: StageResult
+  scenarioId: string
+  scenarioName: string
+  startTime: Date
+  endTime: Date
+  duration: number
+  stages: {
+    requirementProcessing: StageResult
+    agentOrchestration: StageResult
+    execution: StageResult
+    validation: StageResult
   }
   metrics: Record<string, number>
-  success: boolean, errors: string[]
+  success: boolean
+  errors: string[]
   logs: string[]
 }
 
 interface StageResult {
-  name: string, status: 'success' | 'failure' | 'partial'
-  duration: number, details}
+  name: string
+  status: 'success' | 'failure' | 'partial'
+  duration: number
+  details: any
 
 export class ClientSimulationRunner {
-  private, aiService: AIService
-  private, agentCoordinator: AgentCoordinator
-  private, orchestrator: PulsedAgentOrchestrator
-  private, requirementsProcessor: ClientRequirementsProcessor
+  private aiService: AIService
+  private agentCoordinator: AgentCoordinator
+  private orchestrator: PulsedAgentOrchestrator
+  private requirementsProcessor: ClientRequirementsProcessor
   
   constructor() {
     this.aiService = new AIService()
@@ -53,8 +64,8 @@ export class ClientSimulationRunner {
     }
     
     try {
-      // Stage, 1: Process Requirements
-      result.logs.push(`Starting simulation, for: ${scenario.name}`)
+      // Stage 1: Process Requirements
+      result.logs.push(`Starting simulation for: ${scenario.name}`)
       const reqStart = Date.now()
       
       const processedReqs = await this.requirementsProcessor.processClientInput(
@@ -75,13 +86,13 @@ export class ClientSimulationRunner {
       
       if (missingAgents.length > 0) {
         result.stages.requirementProcessing.status = 'partial'
-        result.errors.push(`Missing expected, agents: ${missingAgents.join(', ')}`)
+        result.errors.push(`Missing expected agents: ${missingAgents.join(', ')}`)
       }
       
-      result.logs.push(`Requirements, processed: ${processedReqs.requirements.length}`)
+      result.logs.push(`Requirements processed: ${processedReqs.requirements.length}`)
       result.logs.push(`Complexity: ${processedReqs.roadmap.complexity}`)
       
-      // Stage, 2: Agent Orchestration
+      // Stage 2: Agent Orchestration
       const orchStart = Date.now()
       
       await this.orchestrator.initialize()
@@ -97,7 +108,7 @@ export class ClientSimulationRunner {
       
       result.logs.push(`Workflow created with ${workflow.phases?.length || 0} phases`)
       
-      // Stage, 3: Simulated Execution
+      // Stage 3: Simulated Execution
       const execStart = Date.now()
       
       // Simulate task execution
@@ -113,7 +124,7 @@ export class ClientSimulationRunner {
       
       result.logs.push(`Execution completed with ${executionResults.tasksCompleted} tasks`)
       
-      // Stage, 4: Validation
+      // Stage 4: Validation
       const valStart = Date.now()
       
       // Simulate metrics collection
@@ -129,7 +140,7 @@ export class ClientSimulationRunner {
         const failedMetrics = validation.results
           .filter(r => !r.passed)
           .map(r => `${r.metric}: expected ${r.expected}, got ${r.actual}`)
-        result.errors.push(`Validation, failed: ${failedMetrics.join(', ')}`)
+        result.errors.push(`Validation failed: ${failedMetrics.join(', ')}`)
       }
       
       result.logs.push(`Validation ${validation.passed ? 'passed' : 'failed'}`)
@@ -139,7 +150,7 @@ export class ClientSimulationRunner {
       
     } catch (error) {
       result.success = false
-      result.errors.push(`Simulation, error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+      result.errors.push(`Simulation error: ${error instanceof Error ? error.message : 'Unknown error'}`)
     } finally {
       result.endTime = new Date()
       result.duration = result.endTime.getTime() - result.startTime.getTime()
@@ -150,7 +161,10 @@ export class ClientSimulationRunner {
   }
   
   async runAllScenarios(): Promise<{
-    totalScenarios: number, passed: number, failed: number, results: SimulationResult[]
+    totalScenarios: number
+    passed: number
+    failed: number
+    results: SimulationResult[]
     summary: string
   }> {
     const results: SimulationResult[] = []
@@ -158,7 +172,7 @@ export class ClientSimulationRunner {
     let failed = 0
     
     for (const scenario of CLIENT_SCENARIOS) {
-      console.log(`\n🔄 Running, scenario: ${scenario.name}`)
+      console.log(`\n🔄 Running scenario: ${scenario.name}`)
       const result = await this.runScenario(scenario)
       results.push(result)
       
@@ -177,15 +191,14 @@ export class ClientSimulationRunner {
     const summary = `
 Client Simulation Test Results
 ==============================
-Total: Scenarios: ${CLIENT_SCENARIOS.length}
+Total Scenarios: ${CLIENT_SCENARIOS.length}
 Passed: ${passed}
 Failed: ${failed}
-Success: Rate: ${((passed / CLIENT_SCENARIOS.length) * 100).toFixed(1)}%
+Success Rate: ${((passed / CLIENT_SCENARIOS.length) * 100).toFixed(1)}%
 
-Detailed: Results:
+Detailed Results:
 ${results.map(r => `
-${r.scenarioName}:
-  Status: ${r.success ? '✅ PASS' : '❌ FAIL'}
+${r.scenarioName}: Status ${r.success ? '✅ PASS' : '❌ FAIL'}
   Duration: ${(r.duration / 1000).toFixed(1)}s
   ${r.errors.length > 0 ? `Errors: ${r.errors.join('; ')}` : ''}
 `).join('')}
@@ -202,8 +215,10 @@ ${r.scenarioName}:
   
   private async simulateExecution(
     scenario: ClientScenario,
-    processedReqs): Promise<{
-    tasksCompleted: number, errors: string[]
+    processedReqs: any
+  ): Promise<{
+    tasksCompleted: number
+    errors: string[]
     duration: number
   }> {
     // Simulate task execution based on scenario
@@ -276,7 +291,8 @@ ${r.scenarioName}:
         metrics.api_response_time = 50 + Math.random() * 100
         metrics.api_uptime = 99.9 + Math.random() * 0.1
         metrics.rate_limit_accuracy = 100
-        break, default:
+        break
+      default:
         metrics.api_response_time = 100 + Math.random() * 200
         metrics.error_rate = Math.random() * 1
     }

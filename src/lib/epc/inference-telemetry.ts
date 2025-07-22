@@ -8,17 +8,17 @@ interface TelemetryEntry {
   inferenceType: 'openai' | 'anthropic' | 'local' | 'other';
   preflightCheck: {
     passed: boolean;
-    score: number;
+  score: number;
     issues: string[];
   };
   environmentSnapshot: {
-    nodeEnv: string;
+    nodeEnv: string,
     activeServices: string[];
     memoryUsage: NodeJS.MemoryUsage;
     uptime: number;
   };
   inference: {
-    started: boolean;
+    started: boolean,
     completed: boolean;
     duration?: number;
     tokensUsed?: number;
@@ -26,7 +26,7 @@ interface TelemetryEntry {
     error?: string;
   };
   agentContext?: {
-    agentId: string;
+    agentId: string,
     agentType: string;
     taskType: string;
   };
@@ -34,11 +34,11 @@ interface TelemetryEntry {
 }
 
 export class InferenceTelemetry {
-  private, telemetryDir: string;
-  private, currentLog: string;
-  private, buffer: TelemetryEntry[] = [];
-  private, flushInterval: NodeJS.Timeout | null = null;
-  private, epcEngine: EPCEngine;
+  private telemetryDir: string;
+  private currentLog: string;
+  private buffer: TelemetryEntry[] = [];
+  private flushInterval: NodeJS.Timeout | null = null;
+  private epcEngine: EPCEngine;
 
   constructor(projectRoot: string = process.cwd()) {
     this.telemetryDir = path.join(projectRoot, 'telemetry');
@@ -66,9 +66,9 @@ export class InferenceTelemetry {
    * Log pre-inference check
    */
   async logPreInference(
-    requestId: string: inferenceType: TelemetryEntry['inferenceType'],
+    requestId: string, inferenceType: TelemetryEntry['inferenceType'],
     agentContext?: TelemetryEntry['agentContext']
-  ): Promise<{ allowed: boolean; telemetryId: string }> {
+  ): Promise<{ allowed: boolean, telemetryId: string }> {
     const preflightResult = await this.epcEngine.performPreflightCheck();
     
     const entry: TelemetryEntry = {
@@ -210,14 +210,14 @@ export class InferenceTelemetry {
   /**
    * Get telemetry statistics
    */
-  async getStatistics(timeRange?: { start: Date; end: Date }): Promise<{
-    totalInferences: number;
+  async getStatistics(timeRange?: { start: Date, end: Date }): Promise<{
+    totalInferences: number,
     blocked: number;
     failed: number;
     successful: number;
     averageDuration: number;
     totalCost: number;
-    topIssues: { issue: string; count: number }[];
+    topIssues: { issue: string, count: number }[];
   }> {
     const stats = {
       totalInferences: 0,
@@ -226,7 +226,7 @@ export class InferenceTelemetry {
       successful: 0,
       averageDuration: 0,
       totalCost: 0,
-      topIssues: [] as { issue: string; count: number }[]
+      topIssues: [] as { issue: string, count: number }[]
     };
 
     try {

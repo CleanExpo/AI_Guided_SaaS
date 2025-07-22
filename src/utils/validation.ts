@@ -12,7 +12,7 @@ export function isValidUrl(url: string): boolean {
     new URL(url)
     return true
   } catch {
-    return, false
+    return false
   }
 }
 
@@ -23,11 +23,11 @@ export function isValidPhone(phone: string): boolean {
 
 export function isStrongPassword(password: string): boolean {
   // At least 8 characters, one uppercase, one lowercase, one number, one special character
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8}$/
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
   return passwordRegex.test(password)
 }
 
-export function validateRequired(value, fieldName: string): string | null {
+export function validateRequired(value: any, fieldName: string): string | null {
   if (!value || (typeof value === 'string' && !value.trim())) {
     return `${fieldName} is required`
   }
@@ -56,7 +56,8 @@ export function validateRange(value: number, min: number, max: number, fieldName
 }
 
 export interface ValidationResult {
-  isValid: boolean, errors: Record<string, string>
+  isValid: boolean
+  errors: Record<string, string>
 }
 
 export function validateForm(data: Record<string, any>, rules: Record<string, any>): ValidationResult {
@@ -101,7 +102,8 @@ export function validateForm(data: Record<string, any>, rules: Record<string, an
   
   return {
     isValid: Object.keys(errors).length === 0,
-    errors}
+    errors
+  }
 }
 
 export class ValidationError extends Error {

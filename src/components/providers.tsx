@@ -19,32 +19,27 @@ export function Providers({ children }: { children: React.ReactNode }) {
   if (isAdminRoute) {
     // Admin routes don't use NextAuth - they have their own authentication system
     return (
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}></QueryClientProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-        </ThemeProvider>
-      </QueryClientProvider>
-    )
+          {children}</ThemeProvider>
+    );
   }
 
   // Regular routes use NextAuth SessionProvider
   return (
-    <SessionProvider>
-      <QueryClientProvider client={queryClient}>
+    <SessionProvider></SessionProvider>
+      <QueryClientProvider client={queryClient}></QueryClientProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-        </ThemeProvider>
-      </QueryClientProvider>
-    </SessionProvider>
-  )
+          {children}</ThemeProvider>
+    );
 }

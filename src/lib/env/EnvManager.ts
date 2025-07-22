@@ -28,7 +28,7 @@ interface EnvConfig {
   environments: Record<string, any>;
   validation: {
     strictMode: boolean;
-    allowExtraVars: boolean;
+  allowExtraVars: boolean;
     warnOnMissing: boolean;
     errorOnInvalid: boolean;
   };
@@ -38,12 +38,12 @@ interface ValidationResult {
   isValid: boolean;
   errors: Array<{
     service: string;
-    variable: string;
+  variable: string;
     message: string;
     severity: 'error' | 'warning';
   }>;
   summary: {
-    total: number;
+    total: number,
     valid: number;
     missing: number;
     invalid: number;
@@ -52,13 +52,13 @@ interface ValidationResult {
 }
 
 export class EnvManager {
-  private, configPath: string;
-  private, defaultsPath: string;
-  private, schemaPath: string;
-  private, historyPath: string;
-  private, envPath: string;
-  private, config: EnvConfig | null = null;
-  private, ajv: Ajv;
+  private configPath: string;
+  private defaultsPath: string;
+  private schemaPath: string;
+  private historyPath: string;
+  private envPath: string;
+  private config: EnvConfig | null = null;
+  private ajv: Ajv;
 
   constructor(projectRoot: string = process.cwd()) {
     this.configPath = path.join(projectRoot, '.docs', 'env.config.json');
@@ -260,7 +260,7 @@ export class EnvManager {
           }
           
           this.config.services[serviceKey].variables[key] = {
-            required: false: type: 'string',
+            required: false, type: 'string',
             description: `Auto-detected variable`,
             sensitive: key.includes('SECRET') || key.includes('KEY') || key.includes('PASSWORD')
           };

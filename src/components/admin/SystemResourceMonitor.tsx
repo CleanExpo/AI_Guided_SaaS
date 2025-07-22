@@ -30,8 +30,8 @@ export default function SystemResourceMonitor() {
     operationCount: 0,
     sessionDuration: 0,
     lastOperation: 'None',
+        </SystemMetrics>
     isHealthy: true});
-
   const [thresholds] = useState<PerformanceThresholds>({
     cpuWarning: 70,
     cpuCritical: 85,
@@ -39,26 +39,31 @@ export default function SystemResourceMonitor() {
     memoryCritical: 90,
     maxOperationsPerMinute: 10,
     maxSessionDuration: 5400, // 90 minutes
+      </PerformanceThresholds>
   });
 
   const [isMonitoring, setIsMonitoring] = useState(false);
+      </string>
   const [alerts, setAlerts] = useState<string[]>([]);
   const [operationHistory, setOperationHistory] = useState<
     Array<{
-      timestamp: number;
+      timestamp: number,
       operation: string;
       duration: number;
     }>
   >([]);
 
+      </number>
   const sessionStartTime = useRef<number>(Date.now());
+      </number>
   const operationCount = useRef<number>(0);
+      </NodeJS>
   const monitoringInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Simulate system metrics (in production, this would use actual system APIs)
   const updateMetrics = () => {
     // Simulate CPU usage based on recent operations
-    const recentOps = operationHistory.filter(
+    const recentOps = operationHistory.filter(</NodeJS>
       op => Date.now() - op.timestamp < 60000 // Last minute
     ).length;
 
@@ -202,39 +207,32 @@ export default function SystemResourceMonitor() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
-            🖥️ System Resource Monitor
-          </h2>
+            🖥️ System Resource Monitor</h2>
           <p className="text-gray-600">
-            Real-time monitoring to prevent system overload during operations
-          </p>
-        </div>
+            Real-time monitoring to prevent system overload during operations</p>
         <div className="flex gap-3">
-          {!isMonitoring ? (
+          {!isMonitoring ? (</div>
             <Button
               onClick={startMonitoring}
-              className="bg-green-600, hover:bg-green-700"
+              className="bg-green-600 hover:bg-green-700"
             >
-              ▶️ Start Monitoring
-            </Button>
+              ▶️ Start Monitoring</Button>
           ) : (
             <>
               <Button onClick={stopMonitoring} variant="outline">
-                ⏸️ Stop Monitoring
-              </Button>
+                ⏸️ Stop Monitoring</Button>
               <Button
                 onClick={emergencyStop}
-                className="bg-red-600, hover:bg-red-700"
+                className="bg-red-600 hover:bg-red-700"
               >
-                🚨 Emergency Stop
-              </Button>
+                🚨 Emergency Stop</Button>
             </>
           )}
         </div>
-      </div>
 
       {/* Alerts */}
       {alerts.length > 0 && (
@@ -257,17 +255,15 @@ export default function SystemResourceMonitor() {
       )}
 
       {/* Metrics Dashboard */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
-        {/* CPU Usage */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* CPU Usage */}</div>
         <Card className="p-4">
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">CPU Usage</h3>
             <div
-              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.cpuUsage, thresholds.cpuWarning, thresholds.cpuCritical)}`}
+              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.cpuUsage, thresholds.cpuWarning  thresholds.cpuCritical)}`}
             >
-              {metrics.cpuUsage}%
-            </div>
-          </div>
+              {metrics.cpuUsage}%</div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className={`h-2 rounded-full transition-all duration-300 ${
@@ -278,20 +274,16 @@ export default function SystemResourceMonitor() {
                     : 'bg-green-500'
               }`}
               style={{ width: `${Math.min(100, metrics.cpuUsage)}%` }}
-            />
-          </div>
-        </Card>
+            /></div>
 
         {/* Memory Usage */}
         <Card className="p-4">
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">Memory Usage</h3>
             <div
-              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.memoryUsage, thresholds.memoryWarning, thresholds.memoryCritical)}`}
+              className={`px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.memoryUsage, thresholds.memoryWarning  thresholds.memoryCritical)}`}
             >
-              {metrics.memoryUsage}%
-            </div>
-          </div>
+              {metrics.memoryUsage}%</div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className={`h-2 rounded-full transition-all duration-300 ${
@@ -302,22 +294,16 @@ export default function SystemResourceMonitor() {
                     : 'bg-green-500'
               }`}
               style={{ width: `${Math.min(100, metrics.memoryUsage)}%` }}
-            />
-          </div>
-        </Card>
+            /></div>
 
         {/* Operations Count */}
         <Card className="p-4">
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">Operations</h3>
             <div className="px-2 py-1 rounded text-sm font-bold bg-blue-100 text-blue-600">
-              {metrics.operationCount}
-            </div>
-          </div>
+              {metrics.operationCount}</div>
           <div className="text-xs text-gray-500">
-            Last: {metrics.lastOperation}
-          </div>
-        </Card>
+            Last: {metrics.lastOperation}</div>
 
         {/* Session Duration */}
         <Card className="p-4">
@@ -333,14 +319,9 @@ export default function SystemResourceMonitor() {
                     : 'bg-green-100 text-green-600'
               }`}
             >
-              {formatDuration(metrics.sessionDuration)}
-            </div>
-          </div>
+              {formatDuration(metrics.sessionDuration)}</div>
           <div className="text-xs text-gray-500">
-            Limit: {formatDuration(thresholds.maxSessionDuration)}
-          </div>
-        </Card>
-      </div>
+            Limit: {formatDuration(thresholds.maxSessionDuration)}</div>
 
       {/* Test Operations */}
       {isMonitoring && (
@@ -352,39 +333,32 @@ export default function SystemResourceMonitor() {
               variant="outline"
               onClick={() => logOperation('File Read')}
             >
-              📖 Simulate File Read
-            </Button>
+              📖 Simulate File Read</Button>
             <Button
               size="sm"
               variant="outline"
               onClick={() => logOperation('File Write')}
             >
-              ✏️ Simulate File Write
-            </Button>
+              ✏️ Simulate File Write</Button>
             <Button
               size="sm"
               variant="outline"
               onClick={() => logOperation('Analysis')}
             >
-              🔍 Simulate Analysis
-            </Button>
+              🔍 Simulate Analysis</Button>
             <Button
               size="sm"
               variant="outline"
               onClick={() => logOperation('Error Fix')}
             >
-              🔧 Simulate Error Fix
-            </Button>
-          </div>
-        </Card>
+              🔧 Simulate Error Fix</Button>
       )}
 
       {/* Recent Operations */}
       {operationHistory.length > 0 && (
         <Card className="p-4">
           <h3 className="font-medium text-gray-700 mb-3">
-            📊 Recent Operations
-          </h3>
+            📊 Recent Operations</h3>
           <div className="space-y-1 max-h-32 overflow-y-auto">
             {operationHistory
               .slice(-10)
@@ -393,12 +367,7 @@ export default function SystemResourceMonitor() {
                 <div key={index} className="flex justify-between text-sm">
                   <span>{op.operation}</span>
                   <span className="text-gray-500">
-                    {new Date(op.timestamp).toLocaleTimeString()}
-                  </span>
-                </div>
-              ))}
-          </div>
-        </Card>
+                    {new Date(op.timestamp).toLocaleTimeString()}</span>))}
       )}
 
       {/* System Health Status */}
@@ -408,15 +377,36 @@ export default function SystemResourceMonitor() {
             className={`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`}
           />
           <span className="font-medium">
-            System, Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}
-          </span>
+            System, Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}</span>
           {!metrics.isHealthy && (
             <span className="text-red-600 font-medium">
-              - REDUCE OPERATIONS IMMEDIATELY
-            </span>
+              - REDUCE OPERATIONS IMMEDIATELY</span>
           )}
         </div>
-      </Card>
+    );
+</Card>
+</div>
+</div>
+</Card>
+</div>
+</Card>
+</Card>
+</div>
+</Card>
+</Card>
+</Card>
+</div>
+}
+
+    </Card>
+    </div>
+    </Card>
+    </div>
+    </Card>
+    </div>
+    </Card>
+    </Card>
     </div>
   );
 }
+</number>

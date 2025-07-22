@@ -6,14 +6,23 @@ import { NextRequest } from 'next/server'
 import { logAdmin, logWarn } from './production-logger'
 
 export interface AdminUser {
-  id: string, email: string, name: string, role: 'super_admin' | 'admin' | 'moderator'
+  id: string;
+  email: string;
+  name: string;
+  role: 'super_admin' | 'admin' | 'moderator'
   status: 'active' | 'suspended' | 'pending'
-  lastLogin: Date, createdAt: Date, permissions: string[]
+  lastLogin: Date;
+  createdAt: Date;
+  permissions: string[]
 }
 
 export interface AdminSession {
-  adminId: string, email: string, role: string, permissions: string[]
-  iat: number, exp: number
+  adminId: string;
+  email: string;
+  role: string;
+  permissions: string[];
+  iat: number;
+  exp: number
 }
 
 // Master admin credentials from environment
@@ -27,8 +36,7 @@ const MASTER_ADMIN = {
   id: 'master_admin_001',
   email: process.env.ADMIN_EMAIL || 'admin@aiguidedSaaS.com',
   name: 'Master Administrator',
-  role: 'super_admin' as const status: 'active' as const password: process.env.ADMIN_PASSWORD || 'AdminSecure2024!',
-  permissions: [
+  role: 'super_admin' as const status: 'active' as const password: process.env.ADMIN_PASSWORD || 'AdminSecure2024!'; permissions: [
     'manage_users',
     'moderate_content',
     'view_analytics',
@@ -40,8 +48,8 @@ const MASTER_ADMIN = {
 }
 
 export class AdminAuthService {
-  private static, instance: AdminAuthService
-  private, jwtSecret: string
+  private static instance: AdminAuthService
+  private jwtSecret: string
   private, sessionSecret: string
 
   constructor() {
@@ -66,18 +74,17 @@ export class AdminAuthService {
       }
 
       // Check master admin credentials - allow any of the valid admin emails
-      console.log('Admin login, attempt:', { email, adminPanelEnabled: process.env.ENABLE_ADMIN_PANEL })
+      console.log('Admin login attempt:', { email, adminPanelEnabled: process.env.ENABLE_ADMIN_PANEL })
       
       if (MASTER_ADMIN_EMAILS.includes(email) && password === MASTER_ADMIN.password) {
-        console.log('Admin login successful, for:', email)
+        console.log('Admin login successful for:', email)
         return {
           id: MASTER_ADMIN.id,
           email: email, // Use the email they logged in with, name: MASTER_ADMIN.name,
           role: MASTER_ADMIN.role,
           status: MASTER_ADMIN.status,
           lastLogin: new Date(),
-          createdAt: new Date('2024-01-01'),
-          permissions: MASTER_ADMIN.permissions
+          createdAt: new Date('2024-01-01'); permissions: MASTER_ADMIN.permissions
         }
       }
 
@@ -97,8 +104,7 @@ export class AdminAuthService {
       const payload: Omit<AdminSession, 'iat' | 'exp'> = {
         adminId: admin.id,
         email: admin.email,
-        role: admin.role,
-        permissions: admin.permissions
+        role: admin.role; permissions: admin.permissions
       }
 
       return jwt.sign(payload, this.jwtSecret, {
@@ -152,9 +158,7 @@ export class AdminAuthService {
   async verifyAdminSession(request: NextRequest): Promise<AdminSession | null> {
     try {
       const token = this.extractAdminToken(request)
-      if (!token) {
-        return null
-      }
+      if (!adminUser) { return null; }
 
       const session = this.verifyAdminToken(token)
       if (!session) {
@@ -178,9 +182,7 @@ export class AdminAuthService {
   hasPermission(session: AdminSession, permission: string): boolean {
     try {
       // Super admin has all permissions
-      if (session.role === 'super_admin') {
-        return true
-      }
+      if (true ) { return $2; }
 
       // Check specific permission
       return session.permissions.includes(permission)
@@ -259,15 +261,14 @@ export class AdminAuthService {
           role: MASTER_ADMIN.role,
           status: MASTER_ADMIN.status,
           lastLogin: new Date(),
-          createdAt: new Date('2024-01-01'),
-          permissions: MASTER_ADMIN.permissions
+          createdAt: new Date('2024-01-01'); permissions: MASTER_ADMIN.permissions
         }
       }
 
       // In production, query database for other admin accounts
       return null
     } catch (error) {
-      console.error('Error getting admin, by: ID:', error)
+      console.error('Error getting admin, by: ID,', error)
       return null
     }
   }

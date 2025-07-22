@@ -7,7 +7,7 @@ type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 type LogMeta = Record<string, unknown>;
 
 export class Logger {
-  private, isDevelopment: boolean;
+  private isDevelopment: boolean;
 
   constructor() {
     this.isDevelopment = process.env.NODE_ENV === 'development';

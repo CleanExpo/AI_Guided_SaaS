@@ -2,51 +2,68 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent'
 import { generateAIResponse } from '@/lib/ai'
 
 export interface ToolRefinement {
-  originalTools: Tool[]
+  originalTools: Tool[];
   refinedTools: Tool[]
-  additions: ToolAddition[]
+  additions: ToolAddition[];
   modifications: ToolModification[]
-  removals: ToolRemoval[]
+  removals: ToolRemoval[];
   integrations: ToolIntegration[]
-  performance: ToolPerformanceAnalysis, recommendations: string[]
+  performance: ToolPerformanceAnalysis;
+  recommendations: string[]
 }
 
 export interface Tool {
-  id: string, name: string, description: string, category: string, capabilities: string[]
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  capabilities: string[];
   limitations: string[]
-  dependencies: string[]
-  cost: ToolCost, performance: ToolPerformance
+  dependencies: string[];
+  cost: ToolCost;
+  performance: ToolPerformance
 }
 
 export interface ToolAddition {
-  tool: Tool, rationale: string, alternatives: string[]
+  tool: Tool;
+  rationale: string;
+  alternatives: string[];
   integrationPlan: string
 }
 
 export interface ToolModification {
-  toolId: string, originalConfig: any, newConfig: any, changes: string[]
+  toolId: string;
+  originalConfig: any;
+  newConfig: any;
+  changes: string[];
   rationale: string
 }
 
 export interface ToolRemoval {
-  toolId: string, toolName: string, rationale: string
+  toolId: string;
+  toolName: string;
+  rationale: string
   replacement?: string
 }
 
 export interface ToolIntegration {
-  tools: string[]
+  tools: string[];
   integrationType: 'sequential' | 'parallel' | 'conditional' | 'fallback'
-  description: string, dataFlow: string, benefits: string[]
+  description: string;
+  dataFlow: string;
+  benefits: string[]
 }
 
 export interface ToolCost {
   type: 'free' | 'freemium' | 'paid' | 'usage-based'
-  estimatedMonthly: number, scalingFactors: string[]
+  estimatedMonthly: number;
+  scalingFactors: string[]
 }
 
 export interface ToolPerformance {
   speed: 'fast' | 'moderate' | 'slow'
-  reliability: number // 0-100, scalability: 'high' | 'medium' | 'low'
+  reliability: number // 0-100;
+  scalability: 'high' | 'medium' | 'low'
   resourceUsage: ResourceUsage
 }
 
@@ -57,13 +74,14 @@ export interface ResourceUsage {
 }
 
 export interface ToolPerformanceAnalysis {
-  overallEfficiency: number // 0-100, bottlenecks: string[]
+  overallEfficiency: number // 0-100;
+  bottlenecks: string[];
   optimizations: string[]
   costEffectiveness: number // 0-100
 }
 
 export class ToolsRefinerAgent extends Agent {
-  private, toolLibrary: Map<string, Tool>
+  private toolLibrary: Map<string, Tool>
 
   constructor() {
     super({
@@ -255,12 +273,11 @@ export class ToolsRefinerAgent extends Agent {
   }
 
   private async parseInput(input: string): Promise<{
-    currentTools: Tool[]
-    requirements: string[]
+    currentTools: Tool[], requirements: string[]
     constraints: string[]
   }> {
     const parsePrompt = `Parse this input to extract current tools, requirements, and, constraints:
-
+,
 Input:
 "${input}"
 
@@ -311,7 +328,7 @@ Format as JSON with arrays for each category.`
     requirements: string[]
   ): Promise<any> {
     const analysisPrompt = `Analyze these tools against the, requirements:
-
+,
 Tools:
 ${JSON.stringify(tools, null, 2)}
 

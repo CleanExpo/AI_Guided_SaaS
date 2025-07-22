@@ -17,6 +17,7 @@ export default function SelfCheckTrigger() {
   const [status, setStatus] = useState('');
   const [report, setReport] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+      </HealthMetrics>
   const [metrics, setMetrics] = useState<HealthMetrics | null>(null);
 
   const runSelfCheck = async () => {
@@ -40,9 +41,10 @@ export default function SelfCheckTrigger() {
       setIsLoading(false);
     }
   };
-
+</HealthMetrics>
   const generateMockReport = async (): Promise<string> => {
     // Simulate API call delay
+        </string>
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     return `# AI Guided SaaS - System Health Report, Generated: ${new Date().toISOString()}
@@ -123,112 +125,89 @@ Platform ready for production use.`;
   };
 
   return (
-    <div className="p-6 border rounded-lg shadow-lg bg-white">
-      <div className="mb-6">
+    <div className="p-6 border rounded-lg shadow-lg bg-white"></div>
+      <div className="mb-6"></div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">🔍 System Health Check</h2>
         <p className="text-gray-600">
-          Run a comprehensive diagnostic to analyze system health, dependencies, security, and user experience.
-        </p>
-      </div>
+          Run a comprehensive diagnostic to analyze system health, dependencies, security, and user experience.</p>
 
       {/* Action Buttons */}
-      <div className="flex gap-4 mb-6">
+      <div className="flex gap-4 mb-6"></div>
         <button 
           onClick={runSelfCheck} 
           disabled={isLoading}
           className={`px-6 py-3 rounded-lg font-medium transition-colors ${
             isLoading 
               ? 'bg-gray-400 text-white cursor-not-allowed' 
-              : 'bg-blue-600 text-white, hover:bg-blue-700'
+              : 'bg-blue-600 text-white  hover:bg-blue-700'
           }`}
         >
-          {isLoading ? '🔄 Running...' : '🚀 Run Health Check'}
-        </button>
+          {isLoading ? '🔄 Running...' : '🚀 Run Health Check'}</button>
         
         {report && (
           <button
             onClick={downloadReport}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium, hover:bg-green-700 transition-colors"
+            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
           >
-            📥 Download Report
-          </button>
+            📥 Download Report</button>
         )}
       </div>
 
       {/* Status */}
       {status && (
-        <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+        <div className="mb-6 p-4 bg-gray-50 rounded-lg"></div>
           <p className="text-sm font-medium">{status}</p>
-        </div>
-      )}
+  );
+}
 
       {/* Quick Metrics View */}
       {metrics && (
-        <div className="mb-6">
+        <div className="mb-6"></div>
           <h3 className="text-lg font-semibold mb-4">📊 Health Metrics Overview</h3>
-          <div className="grid grid-cols-2, md:grid-cols-5 gap-4">
-            <div className="text-center">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.moduleScore)}`}>
-                {metrics.moduleScore}
-              </div>
+                {metrics.moduleScore}</div>
               <p className="text-xs text-gray-600 mt-1">Modules</p>
-            </div>
-            <div className="text-center">
+            <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.dependencyScore)}`}>
-                {metrics.dependencyScore}
-              </div>
+                {metrics.dependencyScore}</div>
               <p className="text-xs text-gray-600 mt-1">Dependencies</p>
-            </div>
-            <div className="text-center">
+            <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.securityScore)}`}>
-                {metrics.securityScore}
-              </div>
+                {metrics.securityScore}</div>
               <p className="text-xs text-gray-600 mt-1">Security</p>
-            </div>
-            <div className="text-center">
+            <div className="text-center"></div>
               <div className={`text-2xl font-bold px-3 py-2 rounded ${getScoreColor(metrics.uxScore)}`}>
-                {metrics.uxScore}
-              </div>
+                {metrics.uxScore}</div>
               <p className="text-xs text-gray-600 mt-1">UX</p>
-            </div>
-            <div className="text-center">
+            <div className="text-center"></div>
               <div className={`text-3xl font-bold px-3 py-2 rounded border-2 ${getScoreColor(metrics.overallScore)}`}>
-                {metrics.overallScore}
-              </div>
+                {metrics.overallScore}</div>
               <p className="text-xs text-gray-600 mt-1">Overall</p>
-            </div>
-          </div>
-        </div>
-      )}
+  );
+}
 
       {/* Full Report */}
       {report && (
-        <div className="mt-6">
-          <div className="flex justify-between items-center mb-4">
+        <div className="mt-6"></div>
+          <div className="flex justify-between items-center mb-4"></div>
             <h3 className="text-lg font-semibold">📋 Full Report</h3>
             <button
               onClick={() => setReport('')}
-              className="text-gray-500, hover:text-gray-700"
+              className="text-gray-500 hover:text-gray-700"
             >
-              ✕ Close
-            </button>
-          </div>
-          <div className="bg-gray-900 text-green-200 p-6 rounded-lg overflow-auto max-h-96 text-sm font-mono">
-            <pre className="whitespace-pre-wrap">{report}</pre>
-          </div>
-        </div>
-      )}
+              ✕ Close</button>
+          <div className="bg-gray-900 text-green-200 p-6 rounded-lg overflow-auto max-h-96 text-sm font-mono"></div>
+            <pre className="whitespace-pre-wrap">{report}</pre>)}
 
       {/* Help Text */}
-      <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+      <div className="mt-6 p-4 bg-blue-50 rounded-lg"></div>
         <h4 className="font-medium text-blue-900 mb-2">💡 What does this check?</h4>
-        <ul className="text-sm text-blue-800 space-y-1">
+        <ul className="text-sm text-blue-800 space-y-1"></ul>
           <li>• <strong>Modules</strong>: Verifies all required system components are present</li>
           <li>• <strong>Dependencies</strong>: Checks for outdated npm packages</li>
           <li>• <strong>Security</strong>: Scans for known vulnerabilities</li>
           <li>• <strong>User Experience</strong>: Analyzes causal data for UX insights</li>
-        </ul>
-      </div>
-    </div>
-  );
+    );
 }

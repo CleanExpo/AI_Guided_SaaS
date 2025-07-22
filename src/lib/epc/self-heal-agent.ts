@@ -21,11 +21,11 @@ interface HealingPlan {
 }
 
 export class SelfHealingAgent {
-  private, epcEngine: EPCEngine;
-  private, envManager: EnvManager;
-  private, aiService: AIService;
-  private, healingHistory: any[] = [];
-  private, historyPath: string;
+  private epcEngine: EPCEngine;
+  private envManager: EnvManager;
+  private aiService: AIService;
+  private healingHistory: any[] = [];
+  private historyPath: string;
 
   constructor(projectRoot: string = process.cwd()) {
     this.epcEngine = new EPCEngine(projectRoot);
@@ -202,7 +202,7 @@ export class SelfHealingAgent {
    * Execute healing plan
    */
   async executeHealing(plan: HealingPlan, autoApprove: boolean = false): Promise<{
-    success: boolean;
+    success: boolean,
     applied: string[];
     failed: string[];
     manual: string[];

@@ -5,25 +5,33 @@ import { promisify } from 'util'
 const execAsync = promisify(exec)
 
 export interface ChaosScenario {
-  id: string, name: string, description: string, probability: number // 0-1, chance of occurring, severity: 'low' | 'medium' | 'high' | 'critical'
+  id: string
+  name: string
+  description: string
+  probability: number // 0-1, chance of occurring
+  severity: 'low' | 'medium' | 'high' | 'critical'
   category: 'network' | 'resource' | 'service' | 'database' | 'agent'
   action: () => Promise<void>
   recovery: () => Promise<void>
 }
 
 export interface ChaosResult {
-  scenario: ChaosScenario, timestamp: Date, triggered: boolean, recovered: boolean
+  scenario: ChaosScenario
+  timestamp: Date
+  triggered: boolean
+  recovered: boolean
   error?: string
-  recoveryTime?: number, systemResponse: {
+  recoveryTime?: number
+  systemResponse: {
     selfHealed: boolean, alertsTriggered: string[]
     servicesAffected: string[]
   }
 }
 
 export class ChaosMonkey extends EventEmitter {
-  private, scenarios: ChaosScenario[] = []
-  private, isRunning: boolean = false
-  private, results: ChaosResult[] = []
+  private scenarios: ChaosScenario[] = []
+  private isRunning: boolean = false
+  private results: ChaosResult[] = []
   private interval?: NodeJS.Timer
   
   constructor() {
@@ -163,7 +171,7 @@ export class ChaosMonkey extends EventEmitter {
           try {
             await execAsync(`docker stop ai-saas-agent-${target} || true`)
           } catch (error) {
-            console.error('Failed to stop, container:', error)
+            console.error('Failed to stop container:', error)
           }
         },
         recovery: async () => {
@@ -171,7 +179,7 @@ export class ChaosMonkey extends EventEmitter {
             await execAsync('docker-compose -f docker-compose.agents.yml up -d')
             console.log('✅ Container restarted')
           } catch (error) {
-            console.error('Failed to restart, container:', error)
+            console.error('Failed to restart container:', error)
           }
         }
       },
@@ -206,7 +214,7 @@ export class ChaosMonkey extends EventEmitter {
             // Terminate all connections except our own
             await execAsync(`docker exec ai-saas-postgres psql -U postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'ai_guided_saas';" || true`)
           } catch (error) {
-            console.error('Failed to drop, connections:', error)
+            console.error('Failed to drop connections:', error)
           }
         },
         recovery: async () => {
@@ -319,7 +327,7 @@ export class ChaosMonkey extends EventEmitter {
     }
     
     try {
-      console.log(`\n🎲 Chaos: Monkey: Executing "${scenario.name}"`)
+      console.log(`\n🎲 Chaos Monkey: Executing "${scenario.name}"`)
       this.emit('chaos:start', scenario)
       
       // Execute chaos
@@ -331,8 +339,8 @@ export class ChaosMonkey extends EventEmitter {
       result.systemResponse = await this.monitorSystemResponse(scenario)
       
       // Wait a bit before recovery
-      const chaossDuration = this.getChaossDuration(scenario.severity)
-      await new Promise(resolve => setTimeout(resolve, chaossDuration))
+      const chaosDuration = this.getChaossDuration(scenario.severity)
+      await new Promise(resolve => setTimeout(resolve, chaosDuration))
       
       // Attempt recovery
       console.log('🔧 Attempting recovery...')
@@ -344,14 +352,14 @@ export class ChaosMonkey extends EventEmitter {
       
     } catch (error) {
       result.error = error instanceof Error ? error.message : 'Unknown error'
-      console.error('❌ Chaos scenario, failed:', error)
+      console.error('❌ Chaos scenario failed:', error)
       
       // Always try to recover
       try {
         await scenario.recovery()
         result.recovered = true
       } catch (recoveryError) {
-        console.error('❌ Recovery also, failed:', recoveryError)
+        console.error('❌ Recovery also failed:', recoveryError)
       }
     }
     
@@ -370,13 +378,17 @@ export class ChaosMonkey extends EventEmitter {
   
   private getChaossDuration(severity: string): number {
     const durations = {
-      low: 5000,      // 5 seconds, medium: 15000,  // 15 seconds, high: 30000,    // 30 seconds, critical: 60000 // 1 minute
+      low: 5000,      // 5 seconds
+      medium: 15000,  // 15 seconds
+      high: 30000,    // 30 seconds
+      critical: 60000 // 1 minute
     }
     return durations[severity as keyof typeof durations] || 10000
   }
   
   private async monitorSystemResponse(scenario: ChaosScenario): Promise<{
-    selfHealed: boolean, alertsTriggered: string[]
+    selfHealed: boolean
+    alertsTriggered: string[]
     servicesAffected: string[]
   }> {
     const response = {
@@ -408,7 +420,7 @@ export class ChaosMonkey extends EventEmitter {
       response.servicesAffected = unhealthyServices
       
     } catch (error) {
-      console.error('Failed to monitor system, response:', error)
+      console.error('Failed to monitor system response:', error)
     }
     
     return response
@@ -427,7 +439,7 @@ export class ChaosMonkey extends EventEmitter {
   }
   
   getResults(): ChaosResult[] {
-    return, this.results
+    return this.results
   }
   
   generateReport(): string {
@@ -442,17 +454,19 @@ export class ChaosMonkey extends EventEmitter {
     return `
 Chaos Testing Report
 ===================
-Total, Chaos: Events: ${totalRuns}
-Successfully: Executed: ${successful}
+Total Chaos Events: ${totalRuns}
+Successfully Executed: ${successful}
 Self-Healed: ${selfHealed}
-Average, Recovery: Time: ${(avgRecoveryTime / 1000).toFixed(1)}s, Scenario: Breakdown:
+Average Recovery Time: ${(avgRecoveryTime / 1000).toFixed(1)}s
+
+Scenario Breakdown:
 ${this.scenarios.map(s => {
   const runs = this.results.filter(r => r.scenario.id === s.id)
   const success = runs.filter(r => r.triggered && r.recovered).length
   return `- ${s.name}: ${success}/${runs.length} successful`
 }).join('\n')}
 
-System, Resilience: Score: ${((selfHealed / totalRuns) * 100).toFixed(1)}%
+System Resilience Score: ${((selfHealed / totalRuns) * 100).toFixed(1)}%
 `
   }
 }

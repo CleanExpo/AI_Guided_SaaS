@@ -25,7 +25,7 @@ interface Tutorial {
   tags: string[];
   steps: Array<{
     title: string;
-    content: string;
+  content: string;
     completed?: boolean;
   }>;
 }
@@ -177,8 +177,10 @@ const tutorials: Record<string, Tutorial> = {
           'Design and implement scalable infrastructure patterns for growing applications.'}]}};
 
 export default function TutorialPage() {
+      </string>
   const params = useParams();
-  const tutorialId = params.id as string;
+  const tutorialId = params.id as string;</string>
+      </Set>
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
   const tutorial = tutorials[tutorialId];
@@ -189,16 +191,11 @@ export default function TutorialPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Tutorial Not Found</h1>
           <p className="text-muted-foreground mb-6">
-            The tutorial you&apos;re looking for doesn&apos;t exist.
-          </p>
+            The tutorial you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/tutorials">
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Tutorials
-            </Button>
-          </Link>
-        </div>
-      </div>
+              Back to Tutorials</ArrowLeft>
     );
   }
 
@@ -216,19 +213,15 @@ export default function TutorialPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex items-center gap-4">
         <Link href="/tutorials">
           <Button variant="outline" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back
-          </Button>
-        </Link>
+            Back</ArrowLeft>
         <div className="flex-1">
           <h1 className="text-3xl font-bold">{tutorial.title}</h1>
           <p className="text-muted-foreground">{tutorial.description}</p>
-        </div>
-      </div>
 
       {/* Tutorial Info */}
       <Card>
@@ -244,35 +237,26 @@ export default function TutorialPage() {
                       : 'destructive'
                 }
               >
-                {tutorial.difficulty}
-              </Badge>
+                {tutorial.difficulty}</Badge>
               <div className="flex items-center gap-1 text-sm text-muted-foreground">
                 <Clock className="h-4 w-4" />
-                {tutorial.duration}
-              </div>
+                {tutorial.duration}</Clock>
               <div className="flex items-center gap-1 text-sm text-muted-foreground">
                 <User className="h-4 w-4" />
-                {tutorial.author}
-              </div>
-            </div>
+                {tutorial.author}</User>
             <div className="text-right">
               <div className="text-sm font-medium">Progress</div>
               <div className="text-2xl font-bold">{Math.round(progress)}%</div>
-            </div>
-          </div>
           <Progress value={progress} className="mt-4" />
         </CardHeader>
         <CardContent>
           <p className="mb-4">{tutorial.content}</p>
           <div className="flex flex-wrap gap-2">
-            {tutorial.tags.map(tag => (
+            {tutorial.tags.map(tag => (</div>
               <Badge key={tag} variant="outline">
-                {tag}
-              </Badge>
-            ))}
+                {tag}</Badge>
+                  ))}
           </div>
-        </CardContent>
-      </Card>
 
       {/* Tutorial Steps */}
       <div className="space-y-4">
@@ -282,7 +266,7 @@ export default function TutorialPage() {
             key={index}
             className={`transition-all ${
               completedSteps.has(index)
-                ? 'bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800'
+                ? 'bg-green-50, dark:bg-green-950/20 border-green-200  dark:border-green-800'
                 : ''
             }`}
           >
@@ -290,51 +274,81 @@ export default function TutorialPage() {
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-3">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold">
-                    {index + 1}
-                  </span>
+                    {index + 1}</span>
                   {step.title}
                 </CardTitle>
                 <Button
                   variant={completedSteps.has(index) ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => handleStepComplete(index)}
-                >
+                ></Button>
                   <CheckCircle className="mr-2 h-4 w-4" />
-                  {completedSteps.has(index) ? 'Completed' : 'Mark Complete'}
-                </Button>
-              </div>
-            </CardHeader>
+                  {completedSteps.has(index) ? 'Completed' : 'Mark Complete'}</CheckCircle>
             <CardContent>
               <p className="text-muted-foreground">{step.content}</p>
-            </CardContent>
-          </Card>
         ))}
       </div>
 
       {/* Next Steps */}
       {progress === 100 && (
-        <Card className="bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800">
+        <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
           <CardHeader>
-            <CardTitle className="text-green-700, dark:text-green-300">
-              🎉 Tutorial Completed!
-            </CardTitle>
+            <CardTitle className="text-green-700 dark:text-green-300">
+              🎉 Tutorial Completed!</CardTitle>
             <CardDescription>
               Congratulations! You&apos;ve completed this tutorial. Ready for
-              the next challenge?
-            </CardDescription>
-          </CardHeader>
+              the next challenge?</CardDescription>
           <CardContent>
             <div className="flex gap-2">
               <Link href="/tutorials">
                 <Button>Browse More Tutorials</Button>
-              </Link>
               <Link href="/ui-builder">
                 <Button variant="outline">Try UI Builder</Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
       )}
+    </div>
+    );
+</CardContent>
+</CardHeader>
+</Card>
+</CardContent>
+</div>
+</CardHeader>
+</div>
+</CardContent>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardHeader>
+</Card>
+</div>
+</Button>
+</div>
+}
+
+    </Link>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </CardContent>
+    </div>
+    </CardHeader>
+    </div>
+    </CardContent>
+    </div>
+    </div>
+    </div>
+    </CardHeader>
+    </Card>
+    </div>
+    </Button>
+    </Link>
+    </div>
+    </Button>
+    </Link>
     </div>
   );
 }
+</number>

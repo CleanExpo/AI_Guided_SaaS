@@ -29,7 +29,7 @@ interface SystemHealth {
   uptime: number;
   memoryUsage: {
     used: number;
-    total: number;
+  total: number;
     percentage: number;
   };
   cpuUsage: number;
@@ -40,9 +40,9 @@ interface SystemHealth {
 }
 
 class AdvancedMonitoringSystem {
-  private, securityEvents: SecurityEvent[] = [];
-  private, performanceMetrics: PerformanceMetric[] = [];
-  private, systemHealth: SystemHealth[] = [];
+  private securityEvents: SecurityEvent[] = [];
+  private performanceMetrics: PerformanceMetric[] = [];
+  private systemHealth: SystemHealth[] = [];
   private alertThresholds = {
     errorRate: 0.01, // 1%
     responseTime: 2000, // 2 seconds, memoryUsage: 0.85, // 85%
@@ -126,10 +126,10 @@ class AdvancedMonitoringSystem {
    * Get security analytics
    */
   getSecurityAnalytics(): {
-    totalEvents: number;
+    totalEvents: number,
     criticalEvents: number;
     attackAttempts: number;
-    topAttackTypes: Array<{ type: string; count: number }>;
+    topAttackTypes: Array<{ type: string, count: number }>;
     recentEvents: SecurityEvent[];
   } {
     const last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -159,11 +159,11 @@ class AdvancedMonitoringSystem {
    * Get performance analytics
    */
   getPerformanceAnalytics(): {
-    averageResponseTime: number;
-    slowestEndpoints: Array<{ endpoint: string; avgTime: number }>;
+    averageResponseTime: number,
+    slowestEndpoints: Array<{ endpoint: string, avgTime: number }>;
     errorRate: number;
     throughput: number;
-    memoryTrend: Array<{ timestamp: Date; usage: number }>;
+    memoryTrend: Array<{ timestamp: Date, usage: number }>;
   } {
     const last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const recentMetrics = this.performanceMetrics.filter(
@@ -203,23 +203,23 @@ class AdvancedMonitoringSystem {
    * Generate comprehensive monitoring report
    */
   generateMonitoringReport(): {
-    timestamp: Date;
+    timestamp: Date,
     systemHealth: SystemHealth;
     securityAnalytics: {
-      totalEvents: number;
+      totalEvents: number,
       criticalEvents: number;
       attackAttempts: number;
-      topAttackTypes: Array<{ type: string; count: number }>;
+      topAttackTypes: Array<{ type: string, count: number }>;
       recentEvents: SecurityEvent[];
     };
     performanceAnalytics: {
-      averageResponseTime: number;
-      slowestEndpoints: Array<{ endpoint: string; avgTime: number }>;
+      averageResponseTime: number,
+      slowestEndpoints: Array<{ endpoint: string, avgTime: number }>;
       errorRate: number;
       throughput: number;
-      memoryTrend: Array<{ timestamp: Date; usage: number }>;
+      memoryTrend: Array<{ timestamp: Date, usage: number }>;
     };
-    alerts: Array<{ type: string; message: string; severity: string; timestamp: Date }>;
+    alerts: Array<{ type: string, message: string; severity: string; timestamp: Date }>;
     recommendations: string[];
   } {
     const currentHealth = this.monitorSystemHealth();
@@ -336,18 +336,18 @@ class AdvancedMonitoringSystem {
   private generateRecommendations(
     health: SystemHealth,
     security: {
-      totalEvents: number;
+      totalEvents: number,
       criticalEvents: number;
       attackAttempts: number;
-      topAttackTypes: Array<{ type: string; count: number }>;
+      topAttackTypes: Array<{ type: string, count: number }>;
       recentEvents: SecurityEvent[];
     },
     performance: {
-      averageResponseTime: number;
-      slowestEndpoints: Array<{ endpoint: string; avgTime: number }>;
+      averageResponseTime: number,
+      slowestEndpoints: Array<{ endpoint: string, avgTime: number }>;
       errorRate: number;
       throughput: number;
-      memoryTrend: Array<{ timestamp: Date; usage: number }>;
+      memoryTrend: Array<{ timestamp: Date, usage: number }>;
     }
   ): string[] {
     const recommendations: string[] = [];
@@ -375,7 +375,7 @@ class AdvancedMonitoringSystem {
     return recommendations;
   }
 
-  private getRecentAlerts(): Array<{ type: string; message: string; severity: string; timestamp: Date }> {
+  private getRecentAlerts(): Array<{ type: string, message: string; severity: string; timestamp: Date }> {
     // In a real implementation, this would return actual alerts
     return [];
   }

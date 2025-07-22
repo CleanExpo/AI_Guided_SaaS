@@ -13,7 +13,7 @@ export function withApiTracking(handler: ApiHandler): ApiHandler {
   return async (request: NextRequest, context?: any) => {
     const startTime = Date.now()
     let response: Response
-    let userId: string | undefined
+    let, userId: string | undefined
     let errorMessage: string | undefined
     
     try {
@@ -142,7 +142,7 @@ export function withRateLimit(
   maxRequests: number = 100,
   windowMs: number = 60000 // 1 minute
 ) {
-  const requestCounts = new Map<string, { count: number; resetTime: number }>()
+  const requestCounts = new Map<string, { count: number, resetTime: number }>()
   
   return (handler: ApiHandler): ApiHandler => {
     return async (request: NextRequest, context?: any) => {

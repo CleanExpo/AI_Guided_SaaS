@@ -19,10 +19,10 @@ interface PooledConnection {
 }
 
 class DatabaseConnectionPool {
-  private, pool: PooledConnection[] = [];
-  private, config: ConnectionPoolConfig;
-  private, supabaseUrl: string;
-  private, supabaseKey: string;
+  private pool: PooledConnection[] = [];
+  private config: ConnectionPoolConfig;
+  private supabaseUrl: string;
+  private supabaseKey: string;
 
   constructor(config: Partial<ConnectionPoolConfig> = {}) {
     this.config = {

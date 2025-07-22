@@ -60,11 +60,13 @@ const defaultDataSources: DataSource[] = [
 ]
 
 export function DataSourceManager({ projectId, onDataChange }: DataSourceManagerProps) {
-  const [dataSources, setDataSources] = useState<DataSource[]>(defaultDataSources)
+  const [dataSources, setDataSources] = useState<DataSource[]>(defaultDataSources)</DataSource>
   const [activeSource, setActiveSource] = useState<DataSource>(dataSources[0])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)</DataSource>
+      </any>
   const [testResult, setTestResult] = useState<any>(null)
-  const [mockGenerator] = useState(() => new MockDataGenerator())
+  const [mockGenerator] = useState(() => new MockDataGenerator())</any>
+      </Record>
   const [generatedData, setGeneratedData] = useState<Record<string, any[]>>({})
   const [selectedSchema, setSelectedSchema] = useState('users')
   
@@ -122,8 +124,10 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
           success: true,
           message: 'Database connection successful',
           tables: ['users', 'products', 'orders']
-        })
-      }
+        }
+      )}
+    </div>
+    );
     } catch (error) {
       setTestResult({
         success: false,
@@ -151,7 +155,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
   }
   
   const getSourceIcon = (type: DataSource['type']) => {
-    switch (type) {
+    switch (type) {</Record>
       case 'mock': return <Sparkles className="h-5 w-5" />
       case 'api': return <Cloud className="h-5 w-5" />
       case 'database': return <Database className="h-5 w-5" />
@@ -172,11 +176,11 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
   
   return (
     <div className="space-y-6">
-      {/* Data, Sources List */}
+      {/* Data, Sources List */}</div>
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Data Sources</h3>
         <div className="space-y-3">
-          {dataSources.map(source => (
+          {dataSources.map(source => (</div>
             <div 
               key={source.id}
               className={cn(
@@ -185,61 +189,50 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
               )}
             >
               <div className="flex items-center gap-3">
-                {getSourceIcon(source.type)}
+                {getSourceIcon(source.type)}</div>
                 <div>
                   <h4 className="font-medium">{source.name}</h4>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge className={cn("text-xs", getSourceBadgeColor(source.type))}>
-                      {source.type}
-                    </Badge>
+                      {source.type}</Badge>
                     {source.lastSync && (
                       <span className="text-xs text-muted-foreground">
-                        Last, sync: {source.lastSync.toLocaleString()}
-                      </span>
+                        Last, sync: {source.lastSync.toLocaleString()}</span>
                     )}
                   </div>
-                </div>
-              </div>
               
               <div className="flex items-center gap-2">
-                {source.isActive ? (
+                {source.isActive ? (</div>
                   <Badge className="bg-green-100 text-green-700">
                     <CheckCircle className="h-3 w-3 mr-1" />
-                    Active
-                  </Badge>
+                    Active</CheckCircle>
                 ) : (
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={() => handleSourceToggle(source)}
                   >
-                    Activate
-                  </Button>
+                    Activate</Button>
                 )}
               </div>
-            </div>
           ))}
         </div>
-      </Card>
       
       {/* Active, Source Configuration */}
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Configure {activeSource.name}</h3>
           <Badge className={getSourceBadgeColor(activeSource.type)}>
-            {getSourceIcon(activeSource.type)}
+            {getSourceIcon(activeSource.type)}</Badge>
             <span className="ml-1">{activeSource.type}</span>
           </Badge>
-        </div>
         
         {activeSource.type === 'mock' && (
           <div className="space-y-4">
             <Alert>
               <Sparkles className="h-4 w-4" />
               <AlertDescription>
-                Mock data is automatically generated based on your project schema. Perfect for development and testing.
-              </AlertDescription>
-            </Alert>
+                Mock data is automatically generated based on your project schema. Perfect for development and testing.</AlertDescription>
             
             <Tabs value={selectedSchema} onValueChange={setSelectedSchema}>
               <TabsList className="grid w-full grid-cols-4">
@@ -247,67 +240,50 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 <TabsTrigger value="products">Products</TabsTrigger>
                 <TabsTrigger value="orders">Orders</TabsTrigger>
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
-              </TabsList>
               
               {Object.entries(generatedData).map(([schema, data]) => (
                 <TabsContent key={schema} value={schema}>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <p className="text-sm text-muted-foreground">
-                        {data.length} records generated
-                      </p>
+                        {data.length} records generated</p>
                       <div className="flex gap-2">
-                        <Button size="sm" variant="outline" onClick={() => exportData('json')}>
+                        <Button size="sm" variant="outline" onClick={() => exportData('json')}></Button>
                           <Download className="h-4 w-4 mr-2" />
-                          JSON
-                        </Button>
-                        <Button size="sm" variant="outline" onClick={() => exportData('csv')}>
+                          JSON</Download>
+                        <Button size="sm" variant="outline" onClick={() => exportData('csv')}></Button>
                           <Download className="h-4 w-4 mr-2" />
-                          CSV
-                        </Button>
-                        <Button size="sm" variant="outline" onClick={() => exportData('sql')}>
+                          CSV</Download>
+                        <Button size="sm" variant="outline" onClick={() => exportData('sql')}></Button>
                           <Download className="h-4 w-4 mr-2" />
-                          SQL
-                        </Button>
-                      </div>
-                    </div>
+                          SQL</Download>
                     
                     {/* Data, Preview */}
                     <div className="border rounded-lg overflow-hidden">
                       <table className="w-full text-sm">
                         <thead className="bg-gray-50">
                           <tr>
-                            {data[0] && Object.keys(data[0]).slice(0, 5).map(key => (
+                            {data[0] && Object.keys(data[0]).slice(0, 5).map(key => (</tr>
                               <th key={key} className="text-left p-3 font-medium">
-                                {key}
-                              </th>
+                                {key}</th>
                             ))}
                           </tr>
-                        </thead>
                         <tbody>
                           {data.slice(0, 5).map((record, i) => (
                             <tr key={i} className="border-t">
                               {Object.values(record).slice(0, 5).map((value, j) => (
                                 <td key={j} className="p-3">
-                                  {typeof value === 'object' ? JSON.stringify(value) : String(value)}
-                                </td>
+                                  {typeof value === 'object' ? JSON.stringify(value) : String(value)}</td>
                               ))}
                             </tr>
                           ))}
                         </tbody>
-                      </table>
-                    </div>
                     
                     <Button onClick={generateMockData} className="w-full">
                       <RefreshCw className="h-4 w-4 mr-2" />
-                      Regenerate Data
-                    </Button>
-                  </div>
-                </TabsContent>
+                      Regenerate Data</RefreshCw>
               ))}
-            </Tabs>
-          </div>
-        )}
+            </Tabs>)}
         
         {activeSource.type === 'api' && (
           <div className="space-y-4">
@@ -318,11 +294,13 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 onChange={(e) => handleConfigUpdate(activeSource.id, {
                   ...activeSource.config,
                   endpoint: e.target.value
-                })}
+               }
+      )}
+    </div>
+  );
                 placeholder="https://api.example.com/data"
                 className="mt-1"
-              />
-            </div>
+              /></Input>
             
             <div>
               <label className="text-sm font-medium">Headers (JSON)</label>
@@ -334,42 +312,40 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                     handleConfigUpdate(activeSource.id, {
                       ...activeSource.config,
                       headers
-                    })
+                   })
                   } catch {}
                 }}
                 placeholder='{ "Authorization": "Bearer token" }'
                 className="mt-1 font-mono text-sm"
                 rows={4}
-              />
-            </div>
+              /></Textarea>
             
             <Button 
               onClick={() => testConnection(activeSource)}
               disabled={!activeSource.config.endpoint || isLoading}
               className="w-full"
             >
-              {isLoading ? (
+              {isLoading ? (</Button>
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Testing...
+                  Testing...</Loader2>
                 </>
               ) : (
                 <>
                   <Play className="h-4 w-4 mr-2" />
-                  Test Connection
+                  Test Connection</Play>
                 </>
               )}
             </Button>
             
             {testResult && (
               <Alert className={testResult.success ? 'border-green-200' : 'border-red-200'}>
-                {testResult.success ? (
+                {testResult.success ? (</Alert>
                   <CheckCircle className="h-4 w-4 text-green-600" />
-                ) : (
+                ) : (</CheckCircle>
                   <AlertCircle className="h-4 w-4 text-red-600" />
-                )}
+                )}</AlertCircle>
                 <AlertDescription>{testResult.message}</AlertDescription>
-              </Alert>
             )}
           </div>
         )}
@@ -384,42 +360,71 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
                 onChange={(e) => handleConfigUpdate(activeSource.id, {
                   ...activeSource.config,
                   connectionString: e.target.value
-                })}
+               }
+      )}
+    </div>
+  );
                 placeholder="postgresql://user:password@host:port/database"
                 className="mt-1"
-              />
-            </div>
+              /></Input>
             
             <Alert>
               <AlertTriangle className="h-4 w-4" />
               <AlertDescription>
-                Database connections require secure configuration. Connection strings are encrypted and never exposed.
-              </AlertDescription>
-            </Alert>
+                Database connections require secure configuration. Connection strings are encrypted and never exposed.</AlertDescription>
             
             <Button 
               onClick={() => testConnection(activeSource)}
               disabled={!activeSource.config.connectionString || isLoading}
               className="w-full"
             >
-              {isLoading ? (
+              {isLoading ? (</Button>
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Testing...
+                  Testing...</Loader2>
                 </>
               ) : (
                 <>
                   <Link className="h-4 w-4 mr-2" />
-                  Test Connection
+                  Test Connection</Link>
                 </>
               )}
-            </Button>
+            </Button>)}
+          </Card>
           </div>
-        )}
-      </Card>
-    </div>
-  )
+          </Badge>
+          </Card>
+          </div>
+          </Alert>
+          </Tabs>
+          </TabsList>
+          </TabsContent>
+          </div>
+          </div>
+          </table>
+          </thead>
+          </Button>
+          </div>
+          </Alert>
+      );
+</thead>
+</table>
+</div>
+</div>
+</div>
+</div>
+</TabsContent>
+</TabsList>
+</Tabs>
+</Alert>
+</div>
+</div>
+</Card>
+</Badge>
+</div>
+</Card>
 }
 
 // Add missing import
 import { Textarea } from '@/components/ui/textarea'
+}

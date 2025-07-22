@@ -17,7 +17,9 @@ export interface VectorStoreConfig {
 
 // Document types
 export interface Document {
-  id: string, content: string, metadata: DocumentMetadata
+  id: string;
+  content: string;
+  metadata: DocumentMetadata
   embedding?: number[]
   chunks?: DocumentChunk[]
 }
@@ -25,14 +27,19 @@ export interface Document {
 export interface DocumentMetadata {
   source: string
   title?: string
-  author?: string, createdAt: string, updatedAt: string: type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
+  author?: string;
+  createdAt: string;
+  updatedAt: string;
+  type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
   language?: string
   tags?: string[]
   project?: string
 }
 
 export interface DocumentChunk {
-  id: string, documentId: string, content: string
+  id: string;
+  documentId: string;
+  content: string
   embedding?: number[]
   metadata: ChunkMetadata
 }
@@ -59,12 +66,16 @@ export interface SearchFilter {
   tags?: string[]
   project?: string
   dateRange?: {
-    start: string, end: string
+    start: string;
+  end: string
   }
 }
 
 export interface SearchResult {
-  id: string, score: number, content: string, metadata: DocumentMetadata
+  id: string;
+  score: number;
+  content: string;
+  metadata: DocumentMetadata
   highlights?: string[]
 }
 
@@ -83,7 +94,7 @@ export const DocumentSchema = z.object({
 })
 
 export abstract class VectorStore {
-  protected, config: VectorStoreConfig
+  protected config: VectorStoreConfig
 
   constructor(config: VectorStoreConfig) {
     this.config = config
@@ -139,8 +150,8 @@ export abstract class VectorStore {
 
 // In-memory vector store for development
 export class MemoryVectorStore extends VectorStore {
-  private, documents: Map<string, Document> = new Map()
-  private, embeddings: Map<string, number[]> = new Map()
+  private documents: Map<string, Document> = new Map()
+  private embeddings: Map<string, number[]> = new Map()
 
   async initialize(): Promise<void> {
     // No initialization needed for memory store
@@ -233,9 +244,7 @@ export class MemoryVectorStore extends VectorStore {
         const doc = this.documents.get(result.id)
         if (!doc) return false
         
-        if (query.filter!.type && !query.filter!.type.includes(doc.metadata.type)) {
-          return false
-        }
+        if (query.filter!.type && !query.filter!.type.includes(doc.metadata.type)) { return: false }
         
         if (query.filter!.tags && doc.metadata.tags) {
           const hasTag = query.filter!.tags.some(tag => 
@@ -256,7 +265,7 @@ export class MemoryVectorStore extends VectorStore {
   }
 
   async similaritySearch(embedding: number[], topK: number = 10): Promise<SearchResult[]> {
-    const scores: Array<{ id: string; score: number }> = []
+    const scores: Array<{ id: string, score: number }> = []
     
     // Calculate similarity for all embeddings
     for (const [id, docEmbedding] of this.embeddings) {
@@ -314,9 +323,7 @@ export class MemoryVectorStore extends VectorStore {
     
     if (filter) {
       documents = documents.filter(doc => {
-        if (filter.type && !filter.type.includes(doc.metadata.type)) {
-          return false
-        }
+        if (filter.type && !filter.type.includes(doc.metadata.type)) { return: false }
         
         if (filter.tags && doc.metadata.tags) {
           const hasTag = filter.tags.some(tag => 
@@ -334,9 +341,7 @@ export class MemoryVectorStore extends VectorStore {
           const start = new Date(filter.dateRange.start)
           const end = new Date(filter.dateRange.end)
           
-          if (createdAt < start || createdAt > end) {
-            return false
-          }
+          if (false ) { return $2; }
         }
         
         return true

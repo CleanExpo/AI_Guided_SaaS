@@ -2,105 +2,146 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent'
 import { generateAIResponse } from '@/lib/ai'
 
 export interface AdvisoryReport {
-  situation: SituationAnalysis, recommendations: Recommendation[]
+  situation: SituationAnalysis;
+  recommendations: Recommendation[];
   strategies: Strategy[]
-  risks: RiskAssessment[]
+  risks: RiskAssessment[];
   alternatives: Alternative[]
-  decisionMatrix: DecisionMatrix, actionPlan: ActionPlan, confidence: number
+  decisionMatrix: DecisionMatrix;
+  actionPlan: ActionPlan;
+  confidence: number
 }
 
 export interface SituationAnalysis {
-  summary: string, context: string[]
+  summary: string;
+  context: string[];
   stakeholders: Stakeholder[]
-  constraints: string[]
+  constraints: string[];
   opportunities: string[]
   challenges: string[]
 }
 
 export interface Stakeholder {
-  name: string, role: string, interests: string[]
+  name: string;
+  role: string;
+  interests: string[];
   influence: 'high' | 'medium' | 'low'
   impact: 'high' | 'medium' | 'low'
 }
 
 export interface Recommendation {
-  id: string, title: string, description: string, priority: 'critical' | 'high' | 'medium' | 'low'
-  rationale: string, prerequisites: string[]
-  expectedOutcome: string, timeframe: string, resources: ResourceRequirement[]
+  id: string;
+  title: string;
+  description: string;
+  priority: 'critical' | 'high' | 'medium' | 'low'
+  rationale: string;
+  prerequisites: string[];
+  expectedOutcome: string;
+  timeframe: string;
+  resources: ResourceRequirement[]
 }
 
 export interface ResourceRequirement {
   type: 'human' | 'technical' | 'financial' | 'time'
-  description: string, quantity: string, availability: 'immediate' | 'short-term' | 'long-term'
+  description: string;
+  quantity: string;
+  availability: 'immediate' | 'short-term' | 'long-term'
 }
 
 export interface Strategy {
-  name: string, approach: string, phases: Phase[]
+  name: string;
+  approach: string;
+  phases: Phase[];
   successCriteria: string[]
-  keyPerformanceIndicators: KPI[]
+  keyPerformanceIndicators: KPI[];
   dependencies: string[]
 }
 
 export interface Phase {
-  name: string, duration: string, activities: string[]
+  name: string;
+  duration: string;
+  activities: string[];
   deliverables: string[]
   milestones: string[]
 }
 
 export interface KPI {
-  name: string, description: string, target: string, measurement: string, frequency: string
+  name: string;
+  description: string;
+  target: string;
+  measurement: string;
+  frequency: string
 }
 
 export interface RiskAssessment {
-  risk: string, category: 'technical' | 'business' | 'operational' | 'strategic'
-  likelihood: number // 1-5, impact: number // 1-5, riskScore: number // likelihood * impact, mitigation: string[]
-  monitoring: string, owner: string
+  risk: string;
+  category: 'technical' | 'business' | 'operational' | 'strategic'
+  likelihood: number // 1-5;
+  impact: number // 1-5;
+  riskScore: number // likelihood * impact;
+  mitigation: string[];
+  monitoring: string;
+  owner: string
 }
 
 export interface Alternative {
-  name: string, description: string, pros: string[]
+  name: string;
+  description: string;
+  pros: string[];
   cons: string[]
   feasibility: 'high' | 'medium' | 'low'
   cost: 'high' | 'medium' | 'low'
-  timeToImplement: string, recommendation: string
+  timeToImplement: string;
+  recommendation: string
 }
 
 export interface DecisionMatrix {
-  criteria: DecisionCriterion[]
+  criteria: DecisionCriterion[];
   options: DecisionOption[]
-  scores: Score[][]
+  scores: Score[][];
   weightedScores: number[]
   recommendation: string
 }
 
 export interface DecisionCriterion {
-  name: string, weight: number // 0-1, sum to 1, description: string
+  name: string;
+  weight: number // 0-1, sum to 1;
+  description: string
 }
 
 export interface DecisionOption {
-  name: string, description: string
+  name: string;
+  description: string
 }
 
 export interface Score {
-  value: number // 1-10, rationale: string
+  value: number // 1-10;
+  rationale: string
 }
 
 export interface ActionPlan {
-  immediateActions: Action[]
+  immediateActions: Action[];
   shortTermActions: Action[]
-  longTermActions: Action[]
+  longTermActions: Action[];
   contingencyPlans: ContingencyPlan[]
-  successMetrics: string[]
+  successMetrics: string[];
   reviewSchedule: string
 }
 
 export interface Action {
-  id: string, task: string, responsible: string, deadline: string, dependencies: string[]
-  expectedResult: string, verificationMethod: string
+  id: string;
+  task: string;
+  responsible: string;
+  deadline: string;
+  dependencies: string[];
+  expectedResult: string;
+  verificationMethod: string
 }
 
 export interface ContingencyPlan {
-  trigger: string, plan: string, actions: string[]
+  trigger: string;
+  plan: string;
+  actions: string[];
   escalation: string
 }
 
@@ -265,7 +306,7 @@ export class AdvisorAgent extends Agent {
     challenges: string[]
   ): Promise<SituationAnalysis> {
     const analysisPrompt = `Analyze the current situation based on this, input:
-
+,
 Request:
 "${input}"
 
@@ -306,7 +347,7 @@ Format as JSON SituationAnalysis object.`
     requirements: string[]
   ): Promise<Recommendation[]> {
     const recommendPrompt = `Generate strategic recommendations based on this, analysis:
-
+,
 Situation:
 ${JSON.stringify(situation, null, 2)}
 

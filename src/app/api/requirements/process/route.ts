@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     const processor = new ClientRequirementsProcessor(aiService, agentCoordinator)
 
     // Process client requirements
-    console.log('🚀 Processing client requirements for, user:', session.user.email)
+    console.log('🚀 Processing client requirements for user:', session.user.email)
     const result = await processor.processClientInput(input)
 
     // Store in database

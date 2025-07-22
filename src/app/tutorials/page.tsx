@@ -23,7 +23,10 @@ import { InteractiveTutorialSystem, Tutorial } from '@/lib/tutorials/Interactive
 import { useSession } from 'next-auth/react'
 
 interface TutorialCardProps {
-  tutorial: Tutorial, isCompleted: boolean, isLocked: boolean, onStart: () => void
+  tutorial: Tutorial;
+  isCompleted: boolean;
+  isLocked: boolean;
+  onStart: () => void
 }
 
 function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
@@ -55,27 +58,22 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
             "h-12 w-12 rounded-lg flex items-center justify-center",
             isCompleted ? "bg-green-100" : "bg-primary/10"
           )}>
-            {isCompleted ? (
+            {isCompleted ? (</div>
               <CheckCircle className="h-6 w-6 text-green-600" />
-            ) : isLocked ? (
+            ) : isLocked ? (</CheckCircle>
               <Lock className="h-6 w-6 text-muted-foreground" />
-            ) : (
+            ) : (</Lock>
               <CategoryIcon className="h-6 w-6 text-primary" />
-            )}
-          </div>
+            )}</CategoryIcon>
           <div>
             <h3 className="font-semibold text-lg">{tutorial.title}</h3>
             <div className="flex items-center gap-2 mt-1">
               <Badge variant="secondary" className={difficultyColors[tutorial.difficulty]}>
-                {tutorial.difficulty}
-              </Badge>
+                {tutorial.difficulty}</Badge>
               <div className="flex items-center gap-1 text-sm text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 <span>{tutorial.estimatedTime}</span>
               </div>
-            </div>
-          </div>
-        </div>
         {tutorial.completionRewards.badges && tutorial.completionRewards.badges.length > 0 && (
           <div className="flex gap-1">
             {tutorial.completionRewards.badges.map((badge) => (
@@ -88,8 +86,7 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
       </div>
 
       <p className="text-sm text-muted-foreground mb-4">
-        {tutorial.description}
-      </p>
+        {tutorial.description}</p>
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1 text-sm">
@@ -102,35 +99,33 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
           variant={isCompleted ? "outline" : "default"}
           size="sm"
         >
-          {isCompleted ? (
+          {isCompleted ? (</Button>
             <>
               <CheckCircle className="h-4 w-4 mr-2" />
-              Review
+              Review</CheckCircle>
             </>
           ) : isLocked ? (
             <>
               <Lock className="h-4 w-4 mr-2" />
-              Locked
+              Locked</Lock>
             </>
           ) : (
             <>
               <Play className="h-4 w-4 mr-2" />
-              Start
+              Start</Play>
             </>
           )}
         </Button>
-      </div>
-    </Card>
-  )
+    );
 }
 
 export default function TutorialsPage() {
   const { data: session } = useSession()
-  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)
-  const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)
-  const [tutorials, setTutorials] = useState<Tutorial[]>([])
-  const [completedTutorials, setCompletedTutorials] = useState<string[]>([])
-  const [userProgress, setUserProgress] = useState<any>(null)
+  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)</DynamicDocumentationSystem>
+  const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)</InteractiveTutorialSystem>
+  const [tutorials, setTutorials] = useState<Tutorial[]>([])</Tutorial>
+  const [completedTutorials, setCompletedTutorials] = useState<string[]>([])</string>
+  const [userProgress, setUserProgress] = useState<any>(null)</any>
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
   useEffect(() => {
@@ -148,6 +143,9 @@ export default function TutorialsPage() {
     return () => {
       docs.destroy()
     }
+      </div>
+      </div>
+      </string>
   }, [])
 
   useEffect(() => {
@@ -222,39 +220,33 @@ export default function TutorialsPage() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading tutorials...</p>
+    
         </div>
-      </div>
-    )
+    );
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Interactive Tutorials</h1>
         <p className="text-muted-foreground">
-          Learn by doing with our step-by-step interactive tutorials
-        </p>
-      </div>
+          Learn by doing with our step-by-step interactive tutorials</p>
 
       {/* Progress Overview */}
       {userProgress && (
         <Card className="p-6 mb-8">
-          <div className="grid grid-cols-1, md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Overall Progress</h3>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-bold">
-                    {completedTutorials.length}/{tutorials.length}
-                  </span>
+                    {completedTutorials.length}/{tutorials.length}</span>
                   <span className="text-sm text-muted-foreground">
-                    {completionPercentage.toFixed(0)}%
-                  </span>
-                </div>
+                    {completionPercentage.toFixed(0)}%</span>
                 <Progress value={completionPercentage} className="h-2" />
               </div>
-            </div>
             
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Total Points</h3>
@@ -262,7 +254,6 @@ export default function TutorialsPage() {
                 <Trophy className="h-6 w-6 text-yellow-500" />
                 <span className="text-2xl font-bold">{userProgress.totalPoints}</span>
               </div>
-            </div>
             
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2">Current Level</h3>
@@ -270,9 +261,6 @@ export default function TutorialsPage() {
                 <Star className="h-6 w-6 text-primary" />
                 <span className="text-2xl font-bold">Level {userProgress.level}</span>
               </div>
-            </div>
-          </div>
-        </Card>
       )}
 
       {/* Category Filter */}
@@ -286,16 +274,21 @@ export default function TutorialsPage() {
               size="sm"
               onClick={() => setSelectedCategory(category.id)}
               className="shrink-0"
-            >
+            ></Button>
               <Icon className="h-4 w-4 mr-2" />
-              {category.label}
-            </Button>
-          )
-        })}
-      </div>
+              {category.label}</Icon>
+    );
+        }
+      )}
+    </div>
+        </Card>
+        </div>
+        </div>
+        </div>
+    );
 
       {/* Tutorials Grid */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTutorials.map((tutorial) => (
           <TutorialCard
             key={tutorial.id}
@@ -304,16 +297,20 @@ export default function TutorialsPage() {
             isLocked={isLocked(tutorial)}
             onStart={() => handleStartTutorial(tutorial.id)}
           />
-        ))}
-      </div>
+        ))}</TutorialCard>
 
       {filteredTutorials.length === 0 && (
         <div className="text-center py-12">
           <p className="text-muted-foreground">
-            No tutorials found in this category.
-          </p>
-        </div>
-      )}
-    </div>
-  )
+            No tutorials found in this category.</p>
+      </div>
+  );
+}
+      );
+</div>
+</div>
+</div>
+</Card>
+</div>
+</div>
 }

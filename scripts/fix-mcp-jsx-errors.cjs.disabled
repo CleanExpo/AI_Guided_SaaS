@@ -1,0 +1,52 @@
+const fs = require('fs');
+const path = require('path');
+
+// File to fix
+const filePath = path.join(__dirname, '..', 'src', 'components', 'mcp', 'MCPOrchestrator.tsx');
+
+// Read the file
+let content = fs.readFileSync(filePath, 'utf8');
+
+// Fix incorrect JSX closing tags that should be TypeScript type annotations
+const fixes = [
+  // Fix useState type annotations
+  { from: '</MCPTool>', to: '' },
+  { from: '</Record>', to: '' },
+  { from: '</any>\n      </any>', to: '' },
+  { from: '</any>', to: '' },
+  
+  // Fix switch case statements
+  { from: ':</any>', to: ':' },
+  { from: ':</Code>', to: ':' },
+  { from: ':</Database>', to: ':' },
+  { from: ':</Zap>', to: ':' },
+  { from: ':</Brain>', to: ':' },
+  { from: ':</Globe>', to: ':' },
+  { from: ':</Server>', to: ':' }
+];
+
+// Apply fixes
+fixes.forEach(fix => {
+  content = content.replace(new RegExp(fix.from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), fix.to);
+});
+
+// Look for more complex patterns and fix them
+// Fix line 134 issue: "type: 'tool' as const server:"
+content = content.replace(
+  "type: 'tool' as const server:",
+  "type: 'tool' as const,\n      server:"
+);
+
+// Fix line 143-148 issue with misplaced closing braces
+content = content.replace(
+  /toast\(\{[\s\S]*?title: 'Step Added',[\s\S]*?description:.*?\n.*?\}\s*\)\}/,
+  (match) => {
+    // Extract the toast content and fix it
+    return match.replace(/\}\s*\)\}\s*\)\s*<\/div>\s*\);/, '})');
+  }
+);
+
+// Write the fixed content back
+fs.writeFileSync(filePath, content, 'utf8');
+
+console.log('Fixed MCP JSX errors in MCPOrchestrator.tsx');

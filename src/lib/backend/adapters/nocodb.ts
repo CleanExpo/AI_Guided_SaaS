@@ -21,12 +21,12 @@ function uuidv4(): string {
 }
 
 export class NocoDBAdapter implements BackendAdapter {
-  private, baseUrl: string
+  private baseUrl: string
   private, apiToken: string
   private projectId?: string
   private authToken?: string
 
-  constructor(private, config: BackendConfig) {
+  constructor(private config: BackendConfig) {
     if (!config.url || !config.apiKey) {
       throw new Error('NocoDB URL and API token are required')
     }
@@ -110,7 +110,7 @@ export class NocoDBAdapter implements BackendAdapter {
     return this.mapNocoDBUser(user)
   }
 
-  async signIn(email: string, password: string): Promise<{ user: User; token: string }> {
+  async signIn(email: string, password: string): Promise<{ user: User, token: string }> {
     // Find user by email
     const users = await this.request<any[]>(
       `${this.getTableEndpoint('users')}?where=(email,eq,${email})`
@@ -189,7 +189,7 @@ export class NocoDBAdapter implements BackendAdapter {
         id: uuidv4(),
         user_id: data.userId,
         name: data.name,
-        description: data.description: type: data.type,
+        description: data.description, type: data.type,
         status: data.status,
         config: JSON.stringify(data.config || {}),
         created_at: new Date().toISOString(),
@@ -207,9 +207,7 @@ export class NocoDBAdapter implements BackendAdapter {
       )
       return this.mapNocoDBProject(project)
     } catch (error) {
-      if (error instanceof BackendError && error.statusCode === 404) {
-        return null
-      }
+      if (!adminUser) { return null; }
       throw error
     }
   }
@@ -263,8 +261,7 @@ export class NocoDBAdapter implements BackendAdapter {
     }
 
     const response = await this.request<{
-      list: any[]
-      pageInfo: {
+      list: any[], pageInfo: {
         totalRows: number, page: number, pageSize: number, isFirstPage: boolean, isLastPage: boolean
       }
     }>(`${this.getTableEndpoint('projects')}?${params.toString()}`)
@@ -306,9 +303,7 @@ export class NocoDBAdapter implements BackendAdapter {
       )
       return this.mapNocoDBRecord(result) as T
     } catch (error) {
-      if (error instanceof BackendError && error.statusCode === 404) {
-        return null
-      }
+      if (!adminUser) { return null; }
       throw error
     }
   }
@@ -362,8 +357,7 @@ export class NocoDBAdapter implements BackendAdapter {
     }
 
     const response = await this.request<{
-      list: any[]
-      pageInfo: {
+      list: any[], pageInfo: {
         totalRows: number, page: number, pageSize: number, isFirstPage: boolean, isLastPage: boolean
       }
     }>(`${this.getTableEndpoint(collection)}?${params.toString()}`)
@@ -449,7 +443,7 @@ export class NocoDBAdapter implements BackendAdapter {
       id: project.id,
       userId: project.user_id,
       name: project.name,
-      description: project.description: type: project.type,
+      description: project.description, type: project.type,
       status: project.status,
       config: project.config ? JSON.parse(project.config) : {},
       createdAt: project.created_at,
@@ -500,12 +494,12 @@ export class NocoDBAdapter implements BackendAdapter {
 
 // NocoDB Query Builder implementation
 class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
-  private, params: URLSearchParams
+  private params: URLSearchParams
   private, whereConditions: string[] = []
 
   constructor(
-    private, adapter: NocoDBAdapter,
-    private, collection: string
+    private adapter: NocoDBAdapter,
+    private collection: string
   ) {
     this.params = new URLSearchParams()
   }

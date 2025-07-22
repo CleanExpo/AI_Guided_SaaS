@@ -1,0 +1,186 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+
+console.log('🔧 Final JSX Fix - Ensuring all components are properly closed\n');
+
+// Find all TypeScript files
+const files = glob.sync('**/*.{tsx,jsx}', {
+  ignore: ['node_modules/**', 'dist/**', '.next/**', 'mcp/node_modules/**'],
+  cwd: process.cwd()
+});
+
+let totalFixed = 0;
+let filesFixed = 0;
+
+function analyzeAndFixJSX(content, filePath) {
+  const lines = content.split('\n');
+  const fixedLines = [];
+  let changeCount = 0;
+  
+  // Stack to track JSX elements
+  const elementStack = [];
+  let inReturn = false;
+  let returnStartLine = -1;
+  let bracketDepth = 0;
+  
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    const trimmed = line.trim();
+    
+    // Track return statements
+    if (trimmed.includes('return (')) {
+      inReturn = true;
+      returnStartLine = i;
+      bracketDepth = 1;
+    }
+    
+    // Track brackets in return
+    if (inReturn) {
+      for (const char of line) {
+        if (char === '(') bracketDepth++;
+        if (char === ')') {
+          bracketDepth--;
+          if (bracketDepth === 0) {
+            inReturn = false;
+          }
+        }
+      }
+    }
+    
+    // Track JSX elements
+    const openingTags = line.match(/<([A-Za-z][A-Za-z0-9]*)\b[^>]*(?<!\/|%)>/g) || [];
+    for (const tag of openingTags) {
+      const tagName = tag.match(/<([A-Za-z][A-Za-z0-9]*)/)[1];
+      elementStack.push(tagName);
+    }
+    
+    // Track closing tags
+    const closingTags = line.match(/<\/([A-Za-z][A-Za-z0-9]*)>/g) || [];
+    for (const tag of closingTags) {
+      const tagName = tag.match(/<\/([A-Za-z][A-Za-z0-9]*)>/)[1];
+      if (elementStack[elementStack.length - 1] === tagName) {
+        elementStack.pop();
+      }
+    }
+    
+    // Fix lines that end with ); but have unclosed elements
+    if (line.match(/\)\s*;?\s*$/) && elementStack.length > 0 && !inReturn) {
+      // This is likely the end of a return statement with unclosed elements
+      const indent = line.match(/^\s*/)[0];
+      const closingTags = [];
+      
+      // Add closing tags for all unclosed elements
+      while (elementStack.length > 0) {
+        const tag = elementStack.pop();
+        closingTags.push(`${indent}    </${tag}>`);
+        changeCount++;
+      }
+      
+      if (closingTags.length > 0) {
+        // Insert closing tags before the );
+        fixedLines.push(...closingTags.reverse());
+        fixedLines.push(line);
+        continue;
+      }
+    }
+    
+    fixedLines.push(line);
+  }
+  
+  // If we reach end of file with unclosed elements, close them
+  if (elementStack.length > 0) {
+    while (elementStack.length > 0) {
+      const tag = elementStack.pop();
+      fixedLines.push(`    </${tag}>`);
+      changeCount++;
+    }
+    fixedLines.push('  );');
+    fixedLines.push('}');
+    changeCount++;
+  }
+  
+  return { fixed: fixedLines.join('\n'), changeCount };
+}
+
+// Process each file
+files.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  let content = fs.readFileSync(filePath, 'utf8');
+  
+  // First pass: Fix obvious issues
+  let originalContent = content;
+  
+  // Fix common patterns
+  content = content
+    // Fix return statements with immediate closing tags
+    .replace(/return\s*\(\s*<\/\w+>/g, 'return (')
+    // Fix double closing tags
+    .replace(/<\/(\w+)>\s*<\/\1>/g, '</$1>')
+    // Fix orphaned closing tags after );
+    .replace(/\)\s*;\s*<\/\w+>/g, ');')
+    // Fix broken loading patterns
+    .replace(/Loading[^<]*<\/p>\s*\)\s*;/g, (match) => {
+      return match.replace(/\)\s*;/, '\n        </div>\n      </div>\n    );');
+    })
+    // Fix broken error patterns
+    .replace(/Error[^<]*<\/p>\s*\)\s*;/g, (match) => {
+      return match.replace(/\)\s*;/, '\n        </div>\n      </div>\n    );');
+    });
+  
+  if (content !== originalContent) {
+    totalFixed++;
+  }
+  
+  // Second pass: Analyze and fix JSX structure
+  const { fixed, changeCount } = analyzeAndFixJSX(content, filePath);
+  
+  if (changeCount > 0 || content !== originalContent) {
+    fs.writeFileSync(filePath, fixed);
+    console.log(`✅ Fixed ${changeCount + (content !== originalContent ? 1 : 0)} issues in ${file}`);
+    filesFixed++;
+    totalFixed += changeCount;
+  }
+});
+
+console.log(`\n📊 Summary:`);
+console.log(`Fixed ${totalFixed} issues in ${filesFixed} files`);
+
+// Final pass: Fix specific known problem files
+const problemFiles = [
+  'src/app/admin/page.tsx',
+  'src/app/admin/dashboard/page.tsx',
+  'src/app/admin/analytics/page.tsx',
+  'src/app/admin/causal/page.tsx',
+  'src/app/admin/debug/page.tsx',
+  'src/app/admin/agent-monitor/page.tsx',
+  'src/app/analytics/page.tsx',
+  'src/app/about/page.tsx',
+  'src/app/admin-direct/page.tsx'
+];
+
+console.log('\n🔧 Final check on problem files...\n');
+
+problemFiles.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  if (fs.existsSync(filePath)) {
+    let content = fs.readFileSync(filePath, 'utf8');
+    
+    // Ensure file ends with proper closing
+    if (!content.trim().endsWith('}')) {
+      // Find the last occurrence of );
+      const lastIndex = content.lastIndexOf(');');
+      if (lastIndex !== -1) {
+        // Check if there's a closing brace after it
+        const afterReturn = content.substring(lastIndex + 2).trim();
+        if (!afterReturn.includes('}')) {
+          content = content.substring(0, lastIndex + 2) + '\n}';
+          fs.writeFileSync(filePath, content);
+          console.log(`✅ Fixed ending for ${file}`);
+        }
+      }
+    }
+  }
+});

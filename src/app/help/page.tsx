@@ -76,9 +76,7 @@ export default function HelpPage() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Help & Support</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We&apos;re here to help you succeed with AI Guided SaaS Platform
-          </p>
-        </div>
+            We&apos;re here to help you succeed with AI Guided SaaS Platform</p>
 
         {/* Search Bar */}
         <div className="max-w-2xl mx-auto mb-16">
@@ -89,37 +87,38 @@ export default function HelpPage() {
               className="pl-10 py-3 text-lg"
             />
           </div>
-        </div>
 
         {/* Support Options */}
-        <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {supportOptions.map(option => {
             const Icon = option.icon;
             return (
               <Card
                 key={option.title}
-                className="text-center, hover:shadow-lg transition-shadow"
+                className="text-center hover:shadow-lg transition-shadow"
               >
                 <CardHeader>
                   <Icon className="h-12 w-12 text-primary mx-auto mb-4" />
                   <CardTitle className="text-lg">{option.title}</CardTitle>
                   <CardDescription>{option.description}</CardDescription>
-                </CardHeader>
                 <CardContent>
                   <Button asChild className="w-full">
                     <Link href={option.href}>{option.action}</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+    );
+          }
+      )}
+    </div>
         </div>
+        </div>
+        </CardHeader>
+        </CardContent>
+        </Button>
+    );
 
         {/* FAQ Section */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">
-            Frequently Asked Questions
-          </h2>
+            Frequently Asked Questions</h2>
           <div className="space-y-6">
             {faqs.map((faq, index) => (
               <Card key={index}>
@@ -128,32 +127,27 @@ export default function HelpPage() {
                     <HelpCircle className="h-5 w-5 text-primary" />
                     <span>{faq.question}</span>
                   </CardTitle>
-                </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">{faq.answer}</p>
-                </CardContent>
-              </Card>
             ))}
           </div>
-        </div>
 
         {/* Contact Section */}
         <div className="text-center bg-muted rounded-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">Still Need Help?</h2>
           <p className="text-muted-foreground mb-6">
             Our support team is available 24/7 to assist you with any questions
-            or issues.
-          </p>
-          <div className="flex flex-col, sm:flex-row gap-4 justify-center">
+            or issues.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild>
               <Link href="/contact">Contact Support</Link>
-            </Button>
             <Button variant="outline" asChild>
               <Link href="/docs">Browse Documentation</Link>
-            </Button>
           </div>
-        </div>
-      </div>
-    </div>
-  );
+          </Card>
+          </CardHeader>
+          </CardContent>
+          </div>
+          </Button>
+      );
 }

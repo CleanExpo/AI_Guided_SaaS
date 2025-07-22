@@ -36,6 +36,7 @@ Welcome to AI Guided SaaS! This guide will help you get started with our platfor
 ## Prerequisites
 
 Before you begin, make sure you, have:
+    </string>
 - A modern web browser (Chrome, Firefox, Safari, or Edge)
 - An internet connection
 - Basic understanding of web development concepts
@@ -590,42 +591,31 @@ export default function DocPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Documentation Not Found</h1>
           <p className="text-muted-foreground mb-6">
-            The documentation page you&apos;re looking for doesn&apos;t exist.
-          </p>
+            The documentation page you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/docs">
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Documentation
-            </Button>
-          </Link>
-        </div>
-      </div>
+              Back to Documentation</ArrowLeft>
     );
   }
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex items-center gap-4">
         <Link href="/docs">
           <Button variant="outline" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Docs
-          </Button>
-        </Link>
-      </div>
+            Back to Docs</ArrowLeft>
 
       {/* Document Header */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Badge variant="secondary">{doc.category}</Badge>
           <span className="text-sm text-muted-foreground">
-            Last, updated: {new Date(doc.lastUpdated).toLocaleDateString()}
-          </span>
-        </div>
+            Last, updated: {new Date(doc.lastUpdated).toLocaleDateString()}</span>
         <h1 className="text-4xl font-bold">{doc.title}</h1>
         <p className="text-xl text-muted-foreground">{doc.description}</p>
-      </div>
 
       {/* Document Content */}
       <Card>
@@ -636,11 +626,11 @@ export default function DocPage() {
               __html: doc.content
                 .replace(/\n/g, '<br />')
                 .replace(/#{1,6}\s/g, match => {
-                  const level = match.trim().length;
+                  const level = match.trim().length;</div>
                   return `<h${level} class="text-${4 - level}xl font-bold mt-8 mb-4">`;
                 })
                 .replace(
-                  /\[([^\]]+)\]\(([^)]+)\)/g,
+                  /\[([^\]]+)\]\(([^)]+)\)/g,</h>
                   '<a href="$2" class="text-primary, hover:underline">$1</a>'
                 )
                 .replace(
@@ -653,42 +643,31 @@ export default function DocPage() {
                 )}}
           />
         </CardContent>
-      </Card>
 
       {/* Related Documentation */}
       <Card>
         <CardHeader>
           <CardTitle>Related Documentation</CardTitle>
           <CardDescription>
-            Continue exploring our documentation
-          </CardDescription>
-        </CardHeader>
+            Continue exploring our documentation</CardDescription>
         <CardContent>
-          <div className="grid gap-4, md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             {Object.values(docPages)
               .filter(d => d.slug !== doc.slug)
               .slice(0, 2)
-              .map(relatedDoc => (
-                <Link key={relatedDoc.slug} href={`/docs/${relatedDoc.slug}`}>
+              .map(relatedDoc => (</div>
+                <Link key={relatedDoc.slug} href="/docs/${relatedDoc.slug}">
                   <Card className="hover:shadow-md transition-shadow cursor-pointer">
                     <CardHeader>
                       <div className="flex items-center gap-2">
                         <BookOpen className="h-4 w-4" />
                         <Badge variant="outline">{relatedDoc.category}</Badge>
-                      </div>
                       <CardTitle className="text-lg">
-                        {relatedDoc.title}
-                      </CardTitle>
+                        {relatedDoc.title}</CardTitle>
                       <CardDescription>
-                        {relatedDoc.description}
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-                </Link>
+                        {relatedDoc.description}</CardDescription>
               ))}
           </div>
-        </CardContent>
-      </Card>
 
       {/* Help Section */}
       <Card>
@@ -696,29 +675,39 @@ export default function DocPage() {
           <CardTitle>Need More Help?</CardTitle>
           <CardDescription>
             Can&apos;t find what you&apos;re looking for? We&apos;re here to
-            help!
-          </CardDescription>
-        </CardHeader>
+            help!</CardDescription>
         <CardContent>
           <div className="flex gap-2">
             <Link href="/tutorials">
               <Button>
                 <BookOpen className="mr-2 h-4 w-4" />
-                View Tutorials
-              </Button>
-            </Link>
+                View Tutorials</BookOpen>
             <Link href="/community">
               <Button variant="outline">Join Community</Button>
-            </Link>
             <Link href="/contact">
               <Button variant="outline">
                 <ExternalLink className="mr-2 h-4 w-4" />
-                Contact Support
-              </Button>
-            </Link>
-          </div>
+                Contact Support</ExternalLink>
+        </div>
+        </Link>
+        </Button>
+        </div>
+        </Link>
+        </Button>
+        </div>
+        </Card>
+        </CardHeader>
         </CardContent>
-      </Card>
-    </div>
-  );
+        </Link>
+        </Card>
+        </CardHeader>
+        </Card>
+        </CardHeader>
+        </CardContent>
+        </div>
+        </Link>
+        </Button>
+        </Link>
+        </Button>
+    );
 }

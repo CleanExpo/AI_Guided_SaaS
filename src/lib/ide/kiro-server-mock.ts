@@ -294,7 +294,7 @@ export class KiroServerMock {
     }
   }
 
-  static async getCompletions(file: string, position: { line: number; character: number }): Promise<any[]> {
+  static async getCompletions(file: string, position: { line: number, character: number }): Promise<any[]> {
     // Mock code completions
     return [
       {

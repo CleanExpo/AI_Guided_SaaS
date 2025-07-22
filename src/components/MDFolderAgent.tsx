@@ -5,23 +5,19 @@ import { ProjectConfig } from '@/types'
 import { FolderOpen } from 'lucide-react'
 
 interface MDFolderAgentProps {
-  projectConfig: ProjectConfig, onMDGenerationComplete: (result: unknown) => void
+  projectConfig: ProjectConfig;
+  onMDGenerationComplete: (result: unknown) => void
 }
 
 export default function MDFolderAgent({ projectConfig }: MDFolderAgentProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <Card></Card>
+      <CardHeader></CardHeader>
+        <CardTitle className="flex items-center gap-2"></CardTitle>
           <FolderOpen className="w-5 h-5 text-orange-600" />
-          MD Folder Agent
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+          MD Folder Agent</FolderOpen>
+      <CardContent></CardContent>
         <p className="text-gray-600">
-          Markdown folder management for {projectConfig.name} coming soon...
-        </p>
-      </CardContent>
-    </Card>
-  )
+          Markdown folder management for {projectConfig.name} coming soon...</p>
+    );
 }

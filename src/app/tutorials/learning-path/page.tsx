@@ -26,7 +26,7 @@ interface LearningPath {
   estimatedTime: string;
   tutorials: Array<{
     id: string;
-    title: string;
+  title: string;
     duration: string;
     completed?: boolean;
   }>;
@@ -124,8 +124,10 @@ const learningPaths: LearningPath[] = [
         duration: '20 min'}]}];
 
 export default function LearningPathPage() {
+      </string>
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
   const [completedTutorials, setCompletedTutorials] = useState<Set<string>>(
+        </Set>
     new Set()
   );
 
@@ -154,21 +156,18 @@ export default function LearningPathPage() {
 
     return (
       <div className="max-w-4xl mx-auto space-y-8">
-        {/* Header */}
+        {/* Header */}</div>
         <div className="flex items-center gap-4">
           <Button
             variant="outline"
             size="sm"
             onClick={() => setSelectedPath(null)}
-          >
+          ></Button>
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Paths
-          </Button>
+            Back to Paths</ArrowLeft>
           <div className="flex-1">
             <h1 className="text-3xl font-bold">{path.title}</h1>
             <p className="text-muted-foreground">{path.description}</p>
-          </div>
-        </div>
 
         {/* Path Info */}
         <Card>
@@ -184,27 +183,19 @@ export default function LearningPathPage() {
                         : 'destructive'
                   }
                 >
-                  {path.difficulty}
-                </Badge>
+                  {path.difficulty}</Badge>
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
-                  {path.estimatedTime}
-                </div>
+                  {path.estimatedTime}</Clock>
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <BookOpen className="h-4 w-4" />
-                  {path.tutorials.length} tutorials
-                </div>
-              </div>
+                  {path.tutorials.length} tutorials</BookOpen>
               <div className="text-right">
                 <div className="text-sm font-medium">Progress</div>
                 <div className="text-2xl font-bold">
-                  {Math.round(progress)}%
-                </div>
-              </div>
-            </div>
+                  {Math.round(progress)}%</div>
             <Progress value={progress} className="mt-4" />
           </CardHeader>
-        </Card>
 
         {/* Tutorial List */}
         <div className="space-y-4">
@@ -214,7 +205,7 @@ export default function LearningPathPage() {
               key={tutorial.id}
               className={`transition-all ${
                 completedTutorials.has(tutorial.id)
-                  ? 'bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800'
+                  ? 'bg-green-50, dark:bg-green-950/20 border-green-200  dark:border-green-800'
                   : ''
               }`}
             >
@@ -222,8 +213,7 @@ export default function LearningPathPage() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-3">
                     <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold">
-                      {index + 1}
-                    </span>
+                      {index + 1}</span>
                     {tutorial.title}
                   </CardTitle>
                   <div className="flex items-center gap-2">
@@ -236,48 +226,34 @@ export default function LearningPathPage() {
                       }
                       size="sm"
                       onClick={() => handleTutorialComplete(tutorial.id)}
-                    >
+                    ></Button>
                       <CheckCircle className="mr-2 h-4 w-4" />
                       {completedTutorials.has(tutorial.id)
                         ? 'Completed'
-                        : 'Mark Complete'}
-                    </Button>
-                    <Link href={`/tutorials/${tutorial.id}`}>
+                        : 'Mark Complete'}</CheckCircle>
+                    <Link href="/tutorials/${tutorial.id}">
                       <Button size="sm">
-                        Start Tutorial
+                        Start Tutorial</Button>
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                    </Link>
-                  </div>
-                </div>
-              </CardHeader>
-            </Card>
           ))}
         </div>
 
         {/* Completion */}
         {progress === 100 && (
-          <Card className="bg-green-50, dark:bg-green-950/20 border-green-200, dark:border-green-800">
+          <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
             <CardHeader>
-              <CardTitle className="text-green-700, dark:text-green-300">
-                🎉 Learning Path Completed!
-              </CardTitle>
+              <CardTitle className="text-green-700 dark:text-green-300">
+                🎉 Learning Path Completed!</CardTitle>
               <CardDescription>
                 Congratulations! You&apos;ve completed the {path.title}. Ready
-                to explore more?
-              </CardDescription>
-            </CardHeader>
+                to explore more?</CardDescription>
             <CardContent>
               <div className="flex gap-2">
                 <Button onClick={() => setSelectedPath(null)}>
-                  Explore Other Paths
-                </Button>
+                  Explore Other Paths</Button>
                 <Link href="/ui-builder">
                   <Button variant="outline">Try UI Builder</Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
         )}
       </div>
     );
@@ -285,30 +261,25 @@ export default function LearningPathPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex items-center gap-4">
         <Link href="/tutorials">
           <Button variant="outline" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Tutorials
-          </Button>
-        </Link>
+            Back to Tutorials</ArrowLeft>
         <div className="flex-1">
           <h1 className="text-3xl font-bold">Learning Paths</h1>
           <p className="text-muted-foreground">
-            Structured learning journeys to master AI Guided SaaS
-          </p>
-        </div>
-      </div>
+            Structured learning journeys to master AI Guided SaaS</p>
 
       {/* Learning Paths Grid */}
-      <div className="grid gap-6, md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {learningPaths.map(path => {
           const progress = getPathProgress(path);
           return (
             <Card
               key={path.id}
-              className="cursor-pointer, hover:shadow-lg transition-all"
+              className="cursor-pointer hover:shadow-lg transition-all"
             >
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -322,62 +293,96 @@ export default function LearningPathPage() {
                           : 'destructive'
                     }
                   >
-                    {path.difficulty}
-                  </Badge>
-                </div>
+                    {path.difficulty}</Badge>
                 <CardDescription>{path.description}</CardDescription>
-              </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1">
                         <Clock className="h-4 w-4" />
-                        {path.estimatedTime}
-                      </div>
+                        {path.estimatedTime}</Clock>
                       <div className="flex items-center gap-1">
                         <BookOpen className="h-4 w-4" />
-                        {path.tutorials.length} tutorials
-                      </div>
-                    </div>
+                        {path.tutorials.length} tutorials</BookOpen>
                     <div className="font-medium">
-                      {Math.round(progress)}% complete
-                    </div>
-                  </div>
+                      {Math.round(progress)}% complete</div>
                   <Progress value={progress} />
                   <Button
                     className="w-full"
                     onClick={() => setSelectedPath(path.id)}
                   >
-                    {progress > 0 ? 'Continue Path' : 'Start Path'}
+                    {progress > 0 ? 'Continue Path' : 'Start Path'}</Button>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
+    );
+        }
+      )}
+    </div>
+        </div>
+        </Card>
+        </CardHeader>
+        </div>
+        </div>
+        </div>
+        </CardHeader>
+        </div>
+        </Link>
+        </Card>
+        </CardHeader>
+        </CardContent>
+        </div>
+        </Link>
+        </div>
+        </Link>
+        </Button>
+        </div>
+        </CardHeader>
+        </div>
+        </CardContent>
+        </div>
+        </div>
+    );
 
       {/* Quick Start */}
       <Card>
         <CardHeader>
           <CardTitle>Not sure where to start?</CardTitle>
           <CardDescription>
-            Take our quick assessment to find the perfect learning path for you
-          </CardDescription>
-        </CardHeader>
+            Take our quick assessment to find the perfect learning path for you</CardDescription>
         <CardContent>
           <div className="flex gap-2">
             <Button onClick={() => setSelectedPath('beginner')}>
-              Start with Beginner Path
-            </Button>
+              Start with Beginner Path</Button>
             <Link href="/tutorials">
               <Button variant="outline">Browse All Tutorials</Button>
-            </Link>
+          </Card>
+          </CardHeader>
+          </CardContent>
           </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+          </Link>
+      );
+</CardContent>
+</CardHeader>
+</Card>
+</Button>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
+</CardHeader>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</CardHeader>
+</Card>
+</div>
+</div>
 }
+
+</string>
+</string>

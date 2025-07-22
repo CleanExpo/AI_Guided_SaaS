@@ -2,31 +2,43 @@ import { EventEmitter } from 'events'
 import { HealthStatus, HealthCheckResult } from './HealthCheckService'
 
 export interface AlertConfig {
-  enabled: boolean, channels: AlertChannel[]
+  enabled: boolean;
+  channels: AlertChannel[];
   rules: AlertRule[]
-  cooldownPeriod: number // milliseconds, maxAlertsPerHour: number
+  cooldownPeriod: number // milliseconds;
+  maxAlertsPerHour: number
 }
 
 export interface AlertChannel {
   type: 'email' | 'slack' | 'webhook' | 'console'
-  config: any, enabled: boolean
+  config: any;
+  enabled: boolean
 }
 
 export interface AlertRule {
-  name: string, condition: (status: HealthStatus) => boolean, severity: 'low' | 'medium' | 'high' | 'critical'
-  message: string, channels: string[] // channel types to use
+  name: string;
+  condition: (status: HealthStatus) => boolean;
+  severity: 'low' | 'medium' | 'high' | 'critical'
+  message: string;
+  channels: string[] // channel types to use
 }
 
 export interface Alert {
-  id: string, timestamp: Date, severity: 'low' | 'medium' | 'high' | 'critical'
-  title: string, message: string, details: any, status: HealthStatus, acknowledged: boolean
+  id: string;
+  timestamp: Date;
+  severity: 'low' | 'medium' | 'high' | 'critical'
+  title: string;
+  message: string;
+  details: any;
+  status: HealthStatus;
+  acknowledged: boolean
 }
 
 export class AlertingService extends EventEmitter {
-  private, config: AlertConfig
+  private config: AlertConfig
   private, alerts: Alert[] = []
-  private, lastAlertTime: Map<string, Date> = new Map()
-  private, alertCounts: Map<string, number> = new Map()
+  private lastAlertTime: Map<string, Date> = new Map()
+  private alertCounts: Map<string, number> = new Map()
   
   constructor(config: Partial<AlertConfig> = {}) {
     super()
@@ -104,7 +116,7 @@ export class AlertingService extends EventEmitter {
   /**
    * Send alert to specified channels
    */
-  private async sendAlert(alert: Alert: channelTypes: string[]): Promise<void> {
+  private async sendAlert(alert: Alert, channelTypes: string[]): Promise<void> {
     const channels = this.config.channels.filter(
       ch => ch.enabled && channelTypes.includes(ch.type)
     )
@@ -168,7 +180,7 @@ export class AlertingService extends EventEmitter {
   private async sendEmail(alert: Alert, config): Promise<void> {
     // Implementation would depend on email service
     // Example with SendGrid, Resend, etc.
-    console.log('Email alert would be sent, to:', config.recipients)
+    console.log('Email alert would be sent to:', config.recipients)
   }
   
   /**

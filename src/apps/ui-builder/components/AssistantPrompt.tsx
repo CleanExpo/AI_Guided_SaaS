@@ -59,7 +59,7 @@ export default function AssistantPrompt() {
   };
 
   return (
-    <div className="p-4 bg-gray-100 border-t">
+    <div className="p-4 bg-gray-100 border-t"></div>
       <h2 className="text-lg font-semibold mb-2">🧠 AI Assistant</h2>
       <input
         value={input}
@@ -67,13 +67,11 @@ export default function AssistantPrompt() {
         placeholder="Describe your app idea..."
         className="w-full px-4 py-2 border rounded text-sm"
         onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
-      />
+      /></input>
       <button
         onClick={handleSubmit}
-        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded, hover:bg-blue-700"
+        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
       >
-        Generate Layout
-      </button>
-    </div>
-  );
+        Generate Layout</button>
+    );
 }

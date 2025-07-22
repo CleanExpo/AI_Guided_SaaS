@@ -9,9 +9,20 @@ import {
 } from './database'
 
 export interface AdminStats {
-  totalUsers: number, activeUsers: number, newUsersToday: number, newUsersThisWeek: number, systemHealth: 'healthy' | 'warning' | 'critical'
-  uptime: string, cpuUsage: string, memoryUsage: string, totalProjects: number, activeProjects: number, apiCalls: {
-    today: number, thisWeek: number, thisMonth: number
+  totalUsers: number;
+  activeUsers: number;
+  newUsersToday: number;
+  newUsersThisWeek: number;
+  systemHealth: 'healthy' | 'warning' | 'critical'
+  uptime: string;
+  cpuUsage: string;
+  memoryUsage: string;
+  totalProjects: number;
+  activeProjects: number;
+  apiCalls: {
+    today: number;
+  thisWeek: number;
+  thisMonth: number
   }
   recentActivity: Array<{
     type: string, message: string, timestamp: string
@@ -20,22 +31,27 @@ export interface AdminStats {
 
 export interface AnalyticsData {
   overview: {
-    totalUsers: number, totalProjects: number, totalApiCalls: number, revenue: number, activeSubscriptions: number, churnRate: number
+    totalUsers: number;
+  totalProjects: number;
+  totalApiCalls: number;
+  revenue: number;
+  activeSubscriptions: number;
+  churnRate: number
   }
   userMetrics: {
-    newUsers: Array<{ date: string; count: number }>
-    activeUsers: Array<{ date: string; count: number }>
+    newUsers: Array<{ date: string, count: number }>
+    activeUsers: Array<{ date: string, count: number }>
     retentionRate: number, avgSessionDuration: string
   }
   projectMetrics: {
-    projectsCreated: Array<{ date: string; count: number }>
-    projectTypes: Array<{ type: string; count: number; percentage: number }>
+    projectsCreated: Array<{ date: string, count: number }>
+    projectTypes: Array<{ type: string, count: number; percentage: number }>
     avgCompletionTime: string, successRate: number
   }
   apiMetrics: {
-    apiCalls: Array<{ date: string; count: number }>
-    apiLatency: Array<{ date: string; avg: number; p95: number; p99: number }>
-    errorRate: number, topEndpoints: Array<{ endpoint: string; calls: number; avgTime: number }>
+    apiCalls: Array<{ date: string, count: number }>
+    apiLatency: Array<{ date: string, avg: number; p95: number; p99: number }>
+    errorRate: number, topEndpoints: Array<{ endpoint: string, calls: number; avgTime: number }>
   }
   platformHealth: {
     uptime: number, avgResponseTime: number, errorRate: number, satisfaction: number
@@ -202,7 +218,7 @@ export class AdminQueries {
           avgSessionDuration: userMetrics.avgSessionDuration
         },
         projectMetrics: {
-          projectsCreated: projectMetrics.projectsByDate: projectTypes: projectMetrics.projectTypes,
+          projectsCreated: projectMetrics.projectsByDate, projectTypes: projectMetrics.projectTypes,
           avgCompletionTime: projectMetrics.avgCompletionTime,
           successRate: projectMetrics.successRate
         },
@@ -247,7 +263,7 @@ export class AdminQueries {
       if (status && status !== 'all') {
         // This is simplified - in production, you'd join with sessions table
         // For now, we'll use a placeholder
-        console.log('Status, filter:', status)
+        console.log('Status filter:', status)
       }
 
       // Apply sorting

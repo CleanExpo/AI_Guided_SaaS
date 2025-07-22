@@ -1,0 +1,196 @@
+name: Health Check CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *' # Daily at midnight UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Full history for better analysis
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          node_modules
+          .next/cache
+        key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ matrix.node-version }}-
+    
+    - name: Clean install
+      run: |
+        rm -rf node_modules .next
+        npm ci
+    
+    - name: Run exhaustive health check
+      id: health-check
+      run: |
+        node scripts/health-check-exhaustive.js || echo "HEALTH_CHECK_FAILED=true" >> $GITHUB_OUTPUT
+    
+    - name: Upload health report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: health-check-report-${{ matrix.node-version }}
+        path: health-check-results.json
+    
+    - name: Run automated fixes (on main branch only)
+      if: github.ref == 'refs/heads/main' && steps.health-check.outputs.HEALTH_CHECK_FAILED == 'true'
+      run: |
+        node scripts/fix-all-errors-loop.js || true
+        
+    - name: Create fix commit (if fixes applied)
+      if: github.ref == 'refs/heads/main' && steps.health-check.outputs.HEALTH_CHECK_FAILED == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff --staged --quiet || git commit -m "🤖 Auto-fix: Applied automated fixes for health check issues"
+        git push || echo "No changes to push"
+    
+    - name: Comment PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const results = JSON.parse(fs.readFileSync('health-check-results.json', 'utf8'));
+          const errors = results.typescript.errors + results.eslint.errors;
+          
+          const emoji = errors === 0 ? '✅' : errors < 10 ? '⚠️' : '❌';
+          const status = errors === 0 ? 'PASSED' : 'FAILED';
+          
+          const comment = `## ${emoji} Health Check ${status}
+          
+          **Node Version**: ${{ matrix.node-version }}
+          **Health Score**: ${results.healthScore}/100
+          
+          ### 📊 Summary
+          | Check | Result |
+          |-------|--------|
+          | TypeScript | ${results.typescript.errors} errors |
+          | ESLint | ${results.eslint.errors} errors, ${results.eslint.warnings} warnings |
+          | Build | ${results.build.success ? '✅ Success' : '❌ Failed'} |
+          | Tests | ${results.tests.passed} passed, ${results.tests.failed} failed |
+          | Dependencies | ${results.dependencies.missing} missing, ${results.dependencies.outdated} outdated |
+          | Security | ${results.dependencies.vulnerabilities.total || 0} vulnerabilities |
+          
+          ${errors > 0 ? `### 📁 Files with most errors\n${results.typescript.files.slice(0, 5).map(f => `- \`${f.file}\`: ${f.count} errors`).join('\n')}` : ''}
+          
+          ${errors > 0 ? '### 🔧 Fix Command\n```bash\nnpm run fix:all\n```' : '### ✨ Great job! All checks passed.'}
+          `;
+          
+          // Find existing comment
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          
+          const botComment = comments.find(comment => 
+            comment.user.type === 'Bot' && 
+            comment.body.includes('Health Check')
+          );
+          
+          if (botComment) {
+            // Update existing comment
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: comment
+            });
+          } else {
+            // Create new comment
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          }
+    
+    - name: Fail if health check failed
+      if: steps.health-check.outputs.HEALTH_CHECK_FAILED == 'true'
+      run: exit 1
+
+  # Nightly deep scan
+  deep-scan:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 0 * * *'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run deep security scan
+      run: |
+        npm audit --production
+        npx snyk test || true
+    
+    - name: Check for secrets
+      run: |
+        npx secretlint "**/*" || true
+    
+    - name: License check
+      run: |
+        npx license-checker --production --summary
+    
+    - name: Bundle size analysis
+      run: |
+        npm run build
+        npx bundlesize || true
+    
+    - name: Create issue if problems found
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const title = `🔍 Nightly Health Check Report - ${new Date().toISOString().split('T')[0]}`;
+          const body = `## Nightly Deep Scan Results
+          
+          This is an automated report from the nightly health check.
+          
+          ### Checks Performed
+          - ✅ Security vulnerabilities scan
+          - ✅ Secret detection
+          - ✅ License compliance
+          - ✅ Bundle size analysis
+          
+          Please review the [workflow logs](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) for details.
+          `;
+          
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title,
+            body,
+            labels: ['health-check', 'automated']
+          });

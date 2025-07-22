@@ -7,7 +7,7 @@ import { AgentResultSchema } from '@/lib/validation/agent-schemas'
  * Base class for agents with built-in validation
  */
 export abstract class ValidatedAgent extends Agent {
-  protected, inputSchema: z.ZodSchema
+  protected inputSchema: z.ZodSchema
   protected, outputSchema: z.ZodSchema
 
   constructor(config: AgentConfig, inputSchema: z.ZodSchema, outputSchema: z.ZodSchema) {

@@ -19,9 +19,9 @@ interface LogEntry {
 }
 
 class ProductionLogger {
-  private, isDevelopment: boolean;
-  private, logLevel: LogLevel;
-  private, logs: LogEntry[] = [];
+  private isDevelopment: boolean;
+  private logLevel: LogLevel;
+  private logs: LogEntry[] = [];
   private maxLogs = 1000; // Keep last 1000 logs in memory
 
   constructor() {

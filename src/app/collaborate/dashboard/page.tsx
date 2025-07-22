@@ -8,10 +8,9 @@ export default function CollaborationDashboardPage() {
 
   if (status === 'loading') {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen"></div>
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-      </div>
-    )
+    );
   }
 
   if (!session) {
@@ -19,10 +18,8 @@ export default function CollaborationDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8 py-8">
-        <CollaborationDashboard />
-      </div>
-    </div>
-  )
+    <div className="min-h-screen bg-gray-50"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"></div>
+        <CollaborationDashboard /></CollaborationDashboard>
+    );
 }

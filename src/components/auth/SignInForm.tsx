@@ -14,6 +14,7 @@ export default function SignInForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
+      </string>
   const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     email: '',
@@ -60,19 +61,16 @@ export default function SignInForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4"></div>
+      <Card className="w-full max-w-md"></Card>
+        <CardHeader className="text-center"></CardHeader>
           <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
           <CardDescription>
-            Sign in to your AI Guided SaaS account
-          </CardDescription>
-        </CardHeader>
+            Sign in to your AI Guided SaaS account</CardDescription>
         <CardContent className="space-y-4">
-          {error && (
-            <Alert variant="destructive">
+          {error && (</CardContent>
+            <Alert variant="destructive"></Alert>
               <AlertDescription>{error}</AlertDescription>
-            </Alert>
           )}
 
           <Button
@@ -81,78 +79,71 @@ export default function SignInForm() {
             onClick={handleGoogleSignIn}
             disabled={isGoogleLoading}
           >
-            {isGoogleLoading ? (
+            {isGoogleLoading ? (</Button>
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            ) : (
+            ) : (</Loader2>
               <Chrome className="w-4 h-4 mr-2" />
             )}
-            Continue with Google
-          </Button>
+            Continue with Google</Chrome>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
+          <div className="relative"></div>
+            <div className="absolute inset-0 flex items-center"></div>
+              <span className="w-full border-t" /></span>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
+            <div className="relative flex justify-center text-xs uppercase"></div>
               <span className="bg-background px-2 text-muted-foreground">
-                Or continue with email
-              </span>
-            </div>
-          </div>
+                Or continue with email</span>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
+          <form onSubmit={handleSubmit} className="space-y-4"></form>
+            <div className="space-y-2"></div>
               <Label htmlFor="email">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <div className="relative"></div>
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" /></Mail>
                 <Input
                   id="email"
                   type="email"
                   placeholder="Enter your email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value}
+      )}
+    </div>
+  );
                   className="pl-10"
                   required
-                />
-              </div>
-            </div>
+                /></Input>
 
-            <div className="space-y-2">
+            <div className="space-y-2"></div>
               <Label htmlFor="password">Password</Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <div className="relative"></div>
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" /></Lock>
                 <Input
                   id="password"
                   type="password"
                   placeholder="Enter your password"
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value}
+      )}
+    </div>
+  );
                   className="pl-10"
                   required
-                />
-              </div>
-            </div>
+                /></Input>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
+              {isLoading ? (</Button>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
               ) : null}
-              Sign In
-            </Button>
-          </form>
+              Sign In</Loader2>
 
-          <div className="text-center text-sm">
+          <div className="text-center text-sm"></div>
             <span className="text-gray-600">Don&apos;t have an account? </span>
             <Button
               variant="link"
               className="p-0 h-auto font-normal"
               onClick={() => router.push('/auth/signup')}
             >
-              Sign up
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
+              Sign up</Button>
+      );
 }
+
+</string>

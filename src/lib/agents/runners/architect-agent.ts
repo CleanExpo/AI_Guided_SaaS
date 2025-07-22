@@ -35,7 +35,7 @@ class ArchitectAgent extends BaseAgent {
   }
   
   private async designSystemArchitecture(payload): Promise<any> {
-    console.log('Designing system architecture, for:', payload.projectType)
+    console.log('Designing system architecture for:', payload.projectType)
     
     // Simulate architecture design
     await new Promise(resolve => setTimeout(resolve, 5000))
@@ -60,7 +60,7 @@ class ArchitectAgent extends BaseAgent {
   }
   
   private async selectTechnologies(payload): Promise<any> {
-    console.log('Selecting technologies, for:', payload.requirements)
+    console.log('Selecting technologies for:', payload.requirements)
     
     // Simulate technology selection
     await new Promise(resolve => setTimeout(resolve, 3000))
@@ -80,7 +80,7 @@ class ArchitectAgent extends BaseAgent {
   }
   
   private async planScalability(payload): Promise<any> {
-    console.log('Planning scalability, for:', payload.expectedLoad)
+    console.log('Planning scalability for:', payload.expectedLoad)
     
     // Simulate scalability planning
     await new Promise(resolve => setTimeout(resolve, 4000))
@@ -134,7 +134,7 @@ class ArchitectAgent extends BaseAgent {
   }
   
   private async designIntegrations(payload): Promise<any> {
-    console.log('Designing integrations, for:', payload.services)
+    console.log('Designing integrations for:', payload.services)
     
     // Simulate integration design
     await new Promise(resolve => setTimeout(resolve, 2500))

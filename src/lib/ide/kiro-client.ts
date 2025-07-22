@@ -16,14 +16,21 @@ export interface KiroConfig {
 
 // Project structure types
 export interface KiroProject {
-  id: string, name: string
-  description?: string: type: 'web' | 'mobile' | 'desktop' | 'api' | 'library'
-  framework?: string, language: string, structure: KiroFileTree
-  settings?: KiroProjectSettings, createdAt: string, updatedAt: string
+  id: string;
+  name: string
+  description?;
+  string: type: 'web' | 'mobile' | 'desktop' | 'api' | 'library'
+  framework?: string;
+  language: string;
+  structure: KiroFileTree
+  settings?: KiroProjectSettings;
+  createdAt: string;
+  updatedAt: string
 }
 
 export interface KiroFileTree {
-  name: string: type: 'file' | 'directory'
+  name: string;
+  type: 'file' | 'directory'
   path: string
   children?: KiroFileTree[]
   content?: string
@@ -46,7 +53,8 @@ export interface KiroProjectSettings {
 
 // IDE features
 export interface KiroFile {
-  path: string, content: string
+  path: string;
+  content: string
   language?: string
   readOnly?: boolean
   markers?: KiroMarker[]
@@ -54,70 +62,93 @@ export interface KiroFile {
 
 export interface KiroMarker {
   severity: 'error' | 'warning' | 'info' | 'hint'
-  message: string, startLine: number, startColumn: number, endLine: number, endColumn: number
+  message: string;
+  startLine: number;
+  startColumn: number;
+  endLine: number;
+  endColumn: number
   source?: string
 }
 
 export interface KiroTerminal {
-  id: string, name: string
+  id: string;
+  name: string
   shell?: string
   cwd?: string
   env?: Record<string, string>
 }
 
 export interface KiroDebugSession {
-  id: string, name: string: type: string, request: 'launch' | 'attach'
+  id: string;
+  name: string;
+  type: string;
+  request: 'launch' | 'attach'
   configuration: Record<string, any>
 }
 
 // AI assistance types
 export interface KiroAIAssistance {
-  suggestions: KiroSuggestion[]
+  suggestions: KiroSuggestion[];
   diagnostics: KiroDiagnostic[]
-  refactorings: KiroRefactoring[]
+  refactorings: KiroRefactoring[];
   completions: KiroCompletion[]
 }
 
 export interface KiroSuggestion {
-  id: string: type: 'code' | 'architecture' | 'performance' | 'security'
-  title: string, description: string, priority: 'high' | 'medium' | 'low'
+  id: string;
+  type: 'code' | 'architecture' | 'performance' | 'security'
+  title: string;
+  description: string;
+  priority: 'high' | 'medium' | 'low'
   changes?: KiroCodeChange[]
 }
 
 export interface KiroDiagnostic {
-  file: string, line: number, column: number, severity: 'error' | 'warning' | 'info'
+  file: string;
+  line: number;
+  column: number;
+  severity: 'error' | 'warning' | 'info'
   message: string
   code?: string
   fixes?: KiroQuickFix[]
 }
 
 export interface KiroRefactoring {
-  id: string, name: string, description: string, scope: 'file' | 'function' | 'class' | 'project'
+  id: string;
+  name: string;
+  description: string;
+  scope: 'file' | 'function' | 'class' | 'project'
   preview: KiroCodeChange[]
 }
 
 export interface KiroCompletion {
-  label: string, kind: 'text' | 'method' | 'function' | 'constructor' | 'field' | 'variable' | 'class' | 'interface' | 'module' | 'property'
+  label: string;
+  kind: 'text' | 'method' | 'function' | 'constructor' | 'field' | 'variable' | 'class' | 'interface' | 'module' | 'property'
   detail?: string
-  documentation?: string, insertText: string
+  documentation?: string;
+  insertText: string
   range?: {
-    start: { line: number; character: number }
-    end: { line: number; character: number }
+    start: { line: number;
+  character: number }
+    end: { line: number, character: number }
   }
 }
 
 export interface KiroCodeChange {
-  file: string, changes: Array<{
+  file: string;
+  changes: Array<{
     range: {
-      start: { line: number; character: number }
-      end: { line: number; character: number }
+      start: { line: number;
+  character: number }
+      end: { line: number, character: number }
     }
     newText: string
   }>
 }
 
 export interface KiroQuickFix {
-  title: string, changes: KiroCodeChange[]
+  title: string;
+  changes: KiroCodeChange[]
 }
 
 // Validation schemas
@@ -138,9 +169,9 @@ export const KiroProjectSchema = z.object({
 })
 
 export class KiroClient {
-  private, config: KiroConfig
+  private config: KiroConfig
   private, ws: WebSocket | null = null
-  private, eventHandlers: Map<string, Set<Function>> = new Map()
+  private eventHandlers: Map<string, Set<Function>> = new Map()
 
   constructor(config: KiroConfig) {
     this.config = config
@@ -271,7 +302,7 @@ export class KiroClient {
   }
 
   // AI assistance
-  async getAISuggestions(file: string, position?: { line: number; character: number }): Promise<KiroAIAssistance> {
+  async getAISuggestions(file: string, position?: { line: number, character: number }): Promise<KiroAIAssistance> {
     return this.request('/api/ai/assist', {
       method: 'POST',
       body: JSON.stringify({ file, position })
@@ -284,7 +315,7 @@ export class KiroClient {
     })
   }
 
-  async getCompletions(file: string, position: { line: number; character: number }): Promise<KiroCompletion[]> {
+  async getCompletions(file: string, position: { line: number, character: number }): Promise<KiroCompletion[]> {
     return this.request('/api/ai/completions', {
       method: 'POST',
       body: JSON.stringify({ file, position })

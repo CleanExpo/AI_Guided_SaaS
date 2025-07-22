@@ -6,7 +6,10 @@ import { ProjectConfig } from '@/types'
 // Type definitions for discovery and analysis results
 export interface DiscoveryResults {
   projectStructure: {
-    components: number, pages: number, apis: number, utilities: number
+    components: number;
+  pages: number;
+  apis: number;
+  utilities: number
   }
   dependencies: {
     production: number, development: number, critical: number
@@ -17,56 +20,89 @@ export interface DiscoveryResults {
 }
 
 export interface MemoryFile {
-  filename: string, content: string, tokens: number, priority: 'critical' | 'high' | 'medium' | 'low'
+  filename: string;
+  content: string;
+  tokens: number;
+  priority: 'critical' | 'high' | 'medium' | 'low'
 }
 
 export interface HierarchyResults {
-  coreMemory: MemoryFile[]
+  coreMemory: MemoryFile[];
   projectDocumentation: MemoryFile[]
-  supportingDocumentation: MemoryFile[]
+  supportingDocumentation: MemoryFile[];
   totalTokens: number
 }
 
 export interface CrossReferenceSystem {
-  crossReferences: number, linkedDocuments: number, navigationPaths: number, searchableTerms: number
+  crossReferences: number;
+  linkedDocuments: number;
+  navigationPaths: number;
+  searchableTerms: number
 }
 
 export interface MemoryAnalysis {
-  currentTokens: number, maxTokens: number, utilizationRate: number, fragmentationLevel: number, compressionOpportunities: string[]
+  currentTokens: number;
+  maxTokens: number;
+  utilizationRate: number;
+  fragmentationLevel: number;
+  compressionOpportunities: string[]
 }
 
 export interface CompactionResults {
-  compactedSections: number, preservedCriticalInfo: number, archivedContent: number, optimizedReferences: number, tokensReclaimed: number
+  compactedSections: number;
+  preservedCriticalInfo: number;
+  archivedContent: number;
+  optimizedReferences: number;
+  tokensReclaimed: number
 }
 
 export interface QualityReport {
-  retentionScore: number, criticalInfoPreserved: boolean, navigationIntegrity: boolean, searchabilityMaintained: boolean, recommendations: string[]
+  retentionScore: number;
+  criticalInfoPreserved: boolean;
+  navigationIntegrity: boolean;
+  searchabilityMaintained: boolean;
+  recommendations: string[]
 }
 
 export interface ClaudeCommand {
-  name: string, description: string, tokenImpact: number, memoryLevel: 'user' | 'project' | 'modular'
+  name: string;
+  description: string;
+  tokenImpact: number;
+  memoryLevel: 'user' | 'project' | 'modular'
   execute(projectContext: ProjectConfig): Promise<ClaudeCommandResult>
 }
 
 export interface ClaudeCommandResult {
-  success: boolean, message: string, tokenUsage: number
+  success: boolean;
+  message: string;
+  tokenUsage: number
   generatedFiles?: string[]
   optimizationReport?: OptimizationReport
   nextSteps?: string[]
 }
 
 export interface OptimizationReport {
-  originalTokens: number, optimizedTokens: number, compressionRatio: number, qualityRetention: number, recommendations: string[]
+  originalTokens: number;
+  optimizedTokens: number;
+  compressionRatio: number;
+  qualityRetention: number;
+  recommendations: string[]
 }
 
 export interface MultiAgentOrchestrationResult {
-  totalTokenUsage: number, utilizationRate: number, integrationCommands: string[]
+  totalTokenUsage: number;
+  utilizationRate: number;
+  integrationCommands: string[];
   nextSteps: string[]
   agentReports: AgentReport[]
 }
 
 export interface AgentReport {
-  agentName: string, tasksCompleted: number, tokensProcessed: number, qualityScore: number, recommendations: string[]
+  agentName: string;
+  tasksCompleted: number;
+  tokensProcessed: number;
+  qualityScore: number;
+  recommendations: string[]
 }
 
 // Enhanced /init-docs Command

@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
         
         default:
           return NextResponse.json(
-            { error: 'Invalid section. Available: features, ai-providers, all' },
+            { error: 'Invalid section., Available: features, ai-providers, all' },
             { status: 400 }
           );
       }

@@ -27,7 +27,11 @@ import {
 import { cn } from '@/utils/cn'
 
 interface ProjectData {
-  id: string, name: string: type: string, status: string, files: any[]
+  id: string;
+  name: string;
+  type: string;
+  status: string;
+  files: any[];
   envVariables: any[]
   deploymentUrl?: string
 }
@@ -36,6 +40,7 @@ export default function ProjectEditorPage() {
   const params = useParams()
   const projectId = params.id as string
   
+      </ProjectData>
   const [project, setProject] = useState<ProjectData | null>(null)
   const [activeMode, setActiveMode] = useState<'simple' | 'advanced'>('simple')
   const [isLoading, setIsLoading] = useState(true)
@@ -104,8 +109,10 @@ export default function ProjectEditorPage() {
       
       const result = await response.json()
       if (result.success) {
-        setProject({ ...project!, deploymentUrl: result.url })
-      }
+        setProject({ ...project!, deploymentUrl: result.url }
+      )}
+    </div>
+    );
     } catch (error) {
       console.error('Failed to, deploy:', error)
     }
@@ -133,9 +140,9 @@ export default function ProjectEditorPage() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading project...</p>
+    
         </div>
-      </div>
-    )
+    );
   }
   
   if (!project) {
@@ -144,14 +151,12 @@ export default function ProjectEditorPage() {
         <Card className="p-8 text-center">
           <h2 className="text-xl font-semibold mb-2">Project not found</h2>
           <p className="text-muted-foreground">The project you're looking for doesn't exist.</p>
-        </Card>
-      </div>
-    )
+    );
   }
   
   return (
     <div className="h-screen flex flex-col">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="bg-white border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -165,87 +170,69 @@ export default function ProjectEditorPage() {
                     project.status === 'draft' ? 'bg-gray-100 text-gray-700' : ''
                   )}
                 >
-                  {project.status}
-                </Badge>
+                  {project.status}</Badge>
                 {project.deploymentUrl && (
                   <a 
                     href={project.deploymentUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-primary, hover:underline"
+                    className="text-sm text-primary hover:underline"
                   >
-                    View Live →
-                  </a>
+                    View Live →</a>
                 )}
               </div>
-            </div>
-          </div>
           
           <div className="flex items-center gap-4">
-            {/* Mode, Toggle */}
+            {/* Mode, Toggle */}</div>
             <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-lg">
               <span className={cn(
                 "text-sm font-medium transition-colors",
                 activeMode === 'simple' ? 'text-primary' : 'text-gray-500'
               )}>
-                Simple
-              </span>
+                Simple</span>
               <button
                 onClick={() => setActiveMode(activeMode === 'simple' ? 'advanced' : 'simple')}
                 className="p-1"
               >
-                {activeMode === 'simple' ? (
+                {activeMode === 'simple' ? (</button>
                   <ToggleLeft className="h-6 w-6 text-primary" />
-                ) : (
+                ) : (</ToggleLeft>
                   <ToggleRight className="h-6 w-6 text-primary" />
-                )}
-              </button>
+                )}</ToggleRight>
               <span className={cn(
                 "text-sm font-medium transition-colors",
                 activeMode === 'advanced' ? 'text-primary' : 'text-gray-500'
               )}>
-                Advanced
-              </span>
-            </div>
+                Advanced</span>
             
             {/* Actions */}
             <Button variant="outline" size="sm" onClick={handleExport}>
               <Download className="h-4 w-4 mr-2" />
-              Export
-            </Button>
+              Export</Download>
             <Button size="sm" onClick={handleDeploy}>
               <Rocket className="h-4 w-4 mr-2" />
-              Deploy
-            </Button>
-          </div>
-        </div>
-      </div>
+              Deploy</Rocket>
       
       {/* Content */}
       <div className="flex-1 overflow-hidden">
         {activeMode === 'simple' ? (
-          /* Simple Mode - Visual Editor with Live Preview */
-          <div className="h-full grid, lg:grid-cols-2">
+          /* Simple Mode - Visual Editor with Live Preview */</div>
+          <div className="h-full grid lg:grid-cols-2">
             <div className="border-r overflow-auto p-6">
               <Tabs defaultValue="overview">
                 <TabsList className="grid w-full grid-cols-4">
                   <TabsTrigger value="overview">
                     <Sparkles className="h-4 w-4 mr-2" />
-                    Overview
-                  </TabsTrigger>
+                    Overview</Sparkles>
                   <TabsTrigger value="settings">
                     <Settings className="h-4 w-4 mr-2" />
-                    Settings
-                  </TabsTrigger>
+                    Settings</Settings>
                   <TabsTrigger value="env">
                     <Shield className="h-4 w-4 mr-2" />
-                    Environment
-                  </TabsTrigger>
+                    Environment</Shield>
                   <TabsTrigger value="data">
                     <Database className="h-4 w-4 mr-2" />
-                    Data Sources
-                  </TabsTrigger>
-                </TabsList>
+                    Data Sources</Database>
                 
                 <TabsContent value="overview" className="mt-6">
                   <Card className="p-6">
@@ -271,16 +258,11 @@ export default function ProjectEditorPage() {
                       <div>
                         <label className="text-sm font-medium">Features</label>
                         <div className="flex flex-wrap gap-2 mt-2">
-                          {['Authentication', 'Database', 'API', 'UI Components'].map(feature => (
+                          {['Authentication', 'Database', 'API', 'UI Components'].map(feature => (</div>
                             <Badge key={feature} variant="secondary">
-                              {feature}
-                            </Badge>
-                          ))}
+                              {feature}</Badge>
+                  ))}
                         </div>
-                      </div>
-                    </div>
-                  </Card>
-                </TabsContent>
                 
                 <TabsContent value="settings" className="mt-6">
                   <Card className="p-6">
@@ -292,27 +274,18 @@ export default function ProjectEditorPage() {
                           <option>Next.js 14</option>
                           <option>React + Vite</option>
                           <option>Vue 3</option>
-                        </select>
-                      </div>
                       <div>
                         <label className="text-sm font-medium">Database</label>
                         <select className="w-full mt-1 px-3 py-2 border rounded-md">
                           <option>PostgreSQL</option>
                           <option>MySQL</option>
                           <option>MongoDB</option>
-                        </select>
-                      </div>
                       <div>
                         <label className="text-sm font-medium">Deployment Target</label>
                         <select className="w-full mt-1 px-3 py-2 border rounded-md">
                           <option>Vercel</option>
                           <option>AWS</option>
                           <option>Google Cloud</option>
-                        </select>
-                      </div>
-                    </div>
-                  </Card>
-                </TabsContent>
                 
                 <TabsContent value="env" className="mt-6">
                   <EnvVariableEditor
@@ -327,12 +300,9 @@ export default function ProjectEditorPage() {
                     projectId={projectId}
                     onDataChange={(data) => {
                       // Handle data changes
-                      console.log('Data sources, updated:', data)
-                    }}
-                  />
-                </TabsContent>
-              </Tabs>
-            </div>
+                      console.log('Data sources updated:', data)
+                   }}
+                  /></DataSourceManager>
             
             <div className="h-full">
               <LiveProjectPreview 
@@ -343,7 +313,6 @@ export default function ProjectEditorPage() {
                 }}
               />
             </div>
-          </div>
         ) : (
           /* Advanced Mode - VS Code Style Editor */
           <AdvancedCodeEditor
@@ -351,12 +320,68 @@ export default function ProjectEditorPage() {
             initialFiles={project.files}
             onSave={handleSaveFiles}
           />
-        )}
-      </div>
-    </div>
-  )
+        )}</AdvancedCodeEditor>
+    );
+</TabsContent>
+</select>
+</div>
+</select>
+</div>
+</select>
+</div>
+</div>
+</Card>
+</TabsContent>
+</div>
+</Card>
+</TabsContent>
+</TabsTrigger>
+</TabsTrigger>
+</TabsTrigger>
+</TabsTrigger>
+</TabsList>
+</Tabs>
+</div>
+</div>
+</Button>
+</Button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</Card>
+</div>
+</div>
 }
 
 // Add missing imports
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+}
+    </TabsContent>
+    </select>
+    </div>
+    </select>
+    </div>
+    </select>
+    </div>
+    </Card>
+    </TabsContent>
+    </div>
+    </Card>
+    </TabsContent>
+    </TabsTrigger>
+    </TabsTrigger>
+    </TabsList>
+    </Tabs>
+    </div>
+    </Button>
+    </div>
+    </div>
+    </div>
+    </Card>
+    </div>
+  );
+}
+</ProjectData>

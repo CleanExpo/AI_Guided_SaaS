@@ -6,7 +6,8 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle} from '@/components/ui/card';
+  CardTitle
+} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -21,11 +22,11 @@ interface AnalyticsData {
   bounceRate: number;
   topPages: Array<{
     path: string;
-    views: number;
+  views: number;
     percentage: number;
   }>;
   userActivity: Array<{
-    date: string;
+    date: string,
     users: number;
     sessions: number;
   }>;
@@ -33,9 +34,7 @@ interface AnalyticsData {
 
 export default function AnalyticsPage() {
   const { toast } = useToast();
-  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(
-    null
-  );
+  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -49,7 +48,9 @@ export default function AnalyticsPage() {
         const response = await fetch('/api/analytics', {
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json'}});
+            'Content-Type': 'application/json'
+          }
+        });
 
         if (response.ok) {
           const result = await response.json();
@@ -58,7 +59,7 @@ export default function AnalyticsPage() {
           }
         }
       } catch (apiError) {
-        console.log('API not available, using demo, data:', apiError);
+        console.log('API not available using demo data:', apiError);
       }
 
       // Use API data if available, otherwise use demo data
@@ -72,7 +73,8 @@ export default function AnalyticsPage() {
           { path: '/ui-builder', views: 3102, percentage: 24.1 },
           { path: '/admin', views: 2134, percentage: 16.6 },
           { path: '/collaborate', views: 1876, percentage: 14.6 },
-          { path: '/analytics', views: 1214, percentage: 9.5 }],
+          { path: '/analytics', views: 1214, percentage: 9.5 }
+        ],
         userActivity: [
           { date: '2024-01-01', users: 245, sessions: 312 },
           { date: '2024-01-02', users: 289, sessions: 367 },
@@ -80,17 +82,20 @@ export default function AnalyticsPage() {
           { date: '2024-01-04', users: 298, sessions: 389 },
           { date: '2024-01-05', users: 356, sessions: 445 },
           { date: '2024-01-06', users: 412, sessions: 523 },
-          { date: '2024-01-07', users: 387, sessions: 498 }]};
+          { date: '2024-01-07', users: 387, sessions: 498 }
+        ]
+      };
 
       setAnalyticsData(mockData);
       setLoading(false);
       setRefreshing(false);
     } catch (error) {
-      console.error('Failed to load analytics, data:', error);
+      console.error('Failed to load analytics data:', error);
       toast({
         title: 'Error',
         description: 'Failed to load analytics data',
-        variant: 'destructive'});
+        variant: 'destructive'
+      });
       setLoading(false);
       setRefreshing(false);
     }
@@ -107,7 +112,8 @@ export default function AnalyticsPage() {
   const handleExport = () => {
     toast({
       title: 'Export Started',
-      description: 'Analytics data export has been initiated'});
+      description: 'Analytics data export has been initiated'
+    });
   };
 
   if (loading) {
@@ -117,7 +123,6 @@ export default function AnalyticsPage() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading analytics...</p>
         </div>
-      </div>
     );
   }
 
@@ -127,10 +132,9 @@ export default function AnalyticsPage() {
         <div className="text-center">
           <p className="text-muted-foreground">Failed to load analytics data</p>
           <Button onClick={handleRefresh} className="mt-4">
-            🔄 Retry
+            Retry
           </Button>
         </div>
-      </div>
     );
   }
 
@@ -152,25 +156,23 @@ export default function AnalyticsPage() {
             onClick={handleRefresh}
             disabled={refreshing}
           >
-            {refreshing ? '🔄' : '🔄'} Refresh
+            Refresh
           </Button>
-          <Button onClick={handleExport}>📥 Export</Button>
+          <Button onClick={handleExport}>Export</Button>
         </div>
-      </div>
 
       {/* Key Metrics */}
-      <div className="grid gap-4, md:grid-cols-2, lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Page Views</CardTitle>
-            <span className="text-muted-foreground">👁️</span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               {analyticsData.pageViews.toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">
-              📈 +12.5% from last month
+              +12.5% from last month
             </p>
           </CardContent>
         </Card>
@@ -180,14 +182,13 @@ export default function AnalyticsPage() {
             <CardTitle className="text-sm font-medium">
               Unique Visitors
             </CardTitle>
-            <span className="text-muted-foreground">👥</span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               {analyticsData.uniqueVisitors.toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">
-              📈 +8.2% from last month
+              +8.2% from last month
             </p>
           </CardContent>
         </Card>
@@ -197,14 +198,13 @@ export default function AnalyticsPage() {
             <CardTitle className="text-sm font-medium">
               Avg. Session Time
             </CardTitle>
-            <span className="text-muted-foreground">⏰</span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               {analyticsData.averageSessionTime}
             </div>
             <p className="text-xs text-muted-foreground">
-              📈 +15.3% from last month
+              +15.3% from last month
             </p>
           </CardContent>
         </Card>
@@ -212,7 +212,6 @@ export default function AnalyticsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Bounce Rate</CardTitle>
-            <span className="text-muted-foreground">📊</span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -232,7 +231,7 @@ export default function AnalyticsPage() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="grid gap-4, md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle>User Activity Trend</CardTitle>
@@ -254,7 +253,6 @@ export default function AnalyticsPage() {
                           {day.sessions} sessions
                         </Badge>
                       </div>
-                    </div>
                   ))}
                 </div>
               </CardContent>
@@ -273,17 +271,16 @@ export default function AnalyticsPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Response Time</span>
-                    <Badge variant="outline">142ms</Badge>
+                    <Badge variant="outline">125ms</Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Error Rate</span>
-                    <Badge className="bg-green-500">0.1%</Badge>
+                    <Badge variant="secondary">0.02%</Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">API Calls</span>
-                    <Badge variant="secondary">24.7K</Badge>
+                    <Badge>1.2M/day</Badge>
                   </div>
-                </div>
               </CardContent>
             </Card>
           </div>
@@ -292,33 +289,22 @@ export default function AnalyticsPage() {
         <TabsContent value="pages" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Top Performing Pages</CardTitle>
+              <CardTitle>Top Pages by Traffic</CardTitle>
               <CardDescription>
                 Most visited pages on your platform
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {analyticsData.topPages.map((page, index) => (
-                  <div
-                    key={page.path}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="text-sm font-medium">#{index + 1}</div>
-                      <div>
-                        <div className="text-sm font-medium">{page.path}</div>
-                        <div className="text-xs text-muted-foreground">
-                          {page.views.toLocaleString()} views
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Progress value={page.percentage} className="w-20" />
+                {analyticsData.topPages.map((page) => (
+                  <div key={page.path} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium">{page.path}</span>
                       <span className="text-sm text-muted-foreground">
-                        {page.percentage}%
+                        {page.views.toLocaleString()} views
                       </span>
                     </div>
+                    <Progress value={page.percentage} className="h-2" />
                   </div>
                 ))}
               </div>
@@ -326,10 +312,20 @@ export default function AnalyticsPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="enterprise" className="space-y-4">
+        <TabsContent value="enterprise">
           <EnterpriseDashboard />
         </TabsContent>
       </Tabs>
     </div>
   );
+</CardContent>
+</Card>
+</div>
+</TabsContent>
+</Tabs>
+</div>
+</div>
+</div>
+</div>
 }
+</AnalyticsData>

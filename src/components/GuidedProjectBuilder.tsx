@@ -25,14 +25,21 @@ import { cn } from '@/utils/cn'
 import { useChat } from 'ai/react'
 
 interface Step {
-  id: string, title: string, description: string, icon: React.ElementType, fields: Field[]
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  fields: Field[]
   helper?: string
 }
 
 interface Field {
-  name: string, label: string: type: 'text' | 'textarea' | 'select' | 'multiselect' | 'radio'
+  name: string;
+  label: string;
+  type: 'text' | 'textarea' | 'select' | 'multiselect' | 'radio'
   placeholder?: string
-  options?: { value: string; label: string }[]
+  options?: { value: string;
+  label: string }[]
   required?: boolean
   validation?: (value) => string | null
 }
@@ -213,8 +220,10 @@ const steps: Step[] = [
 export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedProjectBuilderProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState(initialData)
+      </Record>
   const [errors, setErrors] = useState<Record<string, string>>({})
-  const [isProcessing, setIsProcessing] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)</Record>
+      </string>
   const [aiSuggestions, setAiSuggestions] = useState<string[]>([])
   
   const { messages, append, isLoading } = useChat({
@@ -227,7 +236,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
   const step = steps[currentStep]
   const progress = ((currentStep + 1) / steps.length) * 100
 
-  const validateStep = () => {
+  const validateStep = () => {</string>
     const stepErrors: Record<string, string> = {}
     
     step.fields.forEach(field => {
@@ -236,6 +245,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
       }
       
       if (field.validation) {
+            </string>
         const error = field.validation(formData[field.name])
         if (error) stepErrors[field.name] = error
       }
@@ -262,8 +272,10 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
   const handleBack = () => {
     if (currentStep > 0) {
       setCurrentStep(prev => prev - 1)
-      setErrors({})
-    }
+      setErrors({}
+      )}
+    </div>
+    );
   }
 
   const handleFieldChange = (fieldName: string, value) => {
@@ -283,14 +295,15 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
     await append({
       role: 'user',
       content: `Based on the project data so, far: ${JSON.stringify(formData)}, suggest helpful tips, for: ${step.title}`
-    })
-  }
-
+    }
+      )}
+    </div>
+    );
   const processProjectData = async () => {
     try {
       // Transform guided data into project requirements
       const projectRequirements = {
-        name: formData.projectName: type: formData.projectType,
+        name: formData.projectName, type: formData.projectType,
         description: formData.description,
         targetAudience: formData.targetAudience,
         features: [...(formData.features || []), ...(formData.customFeatures ? [formData.customFeatures] : [])],
@@ -315,7 +328,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      {/* Progress, Bar */}
+      {/* Progress, Bar */}</div>
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>
@@ -341,8 +354,6 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
               <div>
                 <h2 className="text-2xl font-bold">{step.title}</h2>
                 <p className="text-muted-foreground">{step.description}</p>
-              </div>
-            </div>
 
             {/* AI, Helper */}
             {step.helper && (
@@ -350,16 +361,15 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                 <div className="flex items-start gap-3">
                   <Lightbulb className="h-5 w-5 text-primary mt-0.5" />
                   <p className="text-sm">{step.helper}</p>
-                </div>
-              </div>
-            )}
+  );
+}
 
             {/* Fields */}
             <div className="space-y-6">
-              {step.fields.map(field => (
+              {step.fields.map(field => (</div>
                 <div key={field.name}>
                   <label className="block text-sm font-medium mb-2">
-                    {field.label}
+                    {field.label}</label>
                     {field.required && <span className="text-red-500 ml-1">*</span>}
                   </label>
                   
@@ -372,7 +382,7 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                     />
                   )}
                   
-                  {field.type === 'textarea' && (
+                  {field.type === 'textarea' && (</Input>
                     <Textarea
                       value={formData[field.name] || ''}
                       onChange={(e) => handleFieldChange(field.name, e.target.value)}
@@ -382,9 +392,9 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                     />
                   )}
                   
-                  {field.type === 'radio' && (
+                  {field.type === 'radio' && (</Textarea>
                     <div className="grid grid-cols-2 gap-3">
-                      {field.options?.map(option => (
+                      {field.options?.map(option => (</div>
                         <label
                           key={option.value}
                           className={cn(
@@ -399,9 +409,9 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                             name={field.name}
                             value={option.value}
                             checked={formData[field.name] === option.value}
-                            onChange={() => handleFieldChange(field.name, option.value)}
+                            onChange={() = /> handleFieldChange(field.name, option.value)}
                             className="sr-only"
-                          />
+                          /></input>
                           <span className="text-sm font-medium">{option.label}</span>
                         </label>
                       ))}
@@ -416,19 +426,18 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                         "w-full p-2 border rounded-md",
                         errors[field.name] && 'border-red-500'
                       )}
-                    >
+                    ></select>
                       <option value="">Select an option</option>
                       {field.options?.map(option => (
                         <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
+                          {option.label}</option>
                       ))}
                     </select>
                   )}
                   
                   {field.type === 'multiselect' && (
                     <div className="grid grid-cols-2 gap-3">
-                      {field.options?.map(option => (
+                      {field.options?.map(option => (</div>
                         <label
                           key={option.value}
                           className={cn(
@@ -442,16 +451,16 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                             type="checkbox"
                             value={option.value}
                             checked={formData[field.name]?.includes(option.value) || false}
-                            onChange={(e) => {
+                            onChange={(e) = /> {
                               const values = formData[field.name] || []
                               if (e.target.checked) {
                                 handleFieldChange(field.name, [...values, option.value])
-                              } else {
+                             } else {
                                 handleFieldChange(field.name, values.filter((v: string) => v !== option.value))
                               }
                             }}
                             className="rounded border-gray-300"
-                          />
+                          /></input>
                           <span className="text-sm">{option.label}</span>
                         </label>
                       ))}
@@ -460,8 +469,8 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                   
                   {errors[field.name] && (
                     <p className="text-sm text-red-500 mt-1">{errors[field.name]}</p>
-                  )}
-                </div>
+  );
+}
               ))}
             </div>
 
@@ -470,17 +479,13 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
                   <Sparkles className="h-4 w-4" />
-                  AI Suggestions
-                </h4>
+                  AI Suggestions</Sparkles>
                 <ul className="space-y-1">
                   {aiSuggestions.map((suggestion, index) => (
                     <li key={index} className="text-sm text-muted-foreground">
-                      • {suggestion}
-                    </li>
+                      • {suggestion}</li>
                   ))}
-                </ul>
-              </div>
-            )}
+                </ul>)}
 
             {/* Navigation */}
             <div className="flex justify-between mt-8">
@@ -490,22 +495,21 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                 disabled={currentStep === 0}
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
-              </Button>
+                Back</ArrowLeft>
               
               <Button
                 onClick={handleNext}
                 disabled={isProcessing || isLoading}
               >
-                {isProcessing ? (
+                {isProcessing ? (</Button>
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Processing...
+                    Processing...</Loader2>
                   </>
                 ) : currentStep === steps.length - 1 ? (
                   <>
                     <Rocket className="h-4 w-4 mr-2" />
-                    Create Project
+                    Create Project</Rocket>
                   </>
                 ) : (
                   <>
@@ -514,10 +518,19 @@ export function GuidedProjectBuilder({ onComplete, initialData = {} }: GuidedPro
                   </>
                 )}
               </Button>
-            </div>
-          </Card>
         </motion.div>
-      </AnimatePresence>
+    );
+</div>
+</h4>
+</div>
+</div>
+</div>
+</Card>
+</AnimatePresence>
+}
+    </h4>
     </div>
-  )
+    </Card>
+    </AnimatePresence>
+  );
 }

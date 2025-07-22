@@ -23,20 +23,15 @@ export default function SignUpPage() {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Create Account</CardTitle>
           <CardDescription>
-            Get started with AI Guided SaaS Platform
-          </CardDescription>
-        </CardHeader>
+            Get started with AI Guided SaaS Platform</CardDescription>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <Button variant="outline" className="w-full">
               <Github className="mr-2 h-4 w-4" />
-              GitHub
-            </Button>
+              GitHub</Github>
             <Button variant="outline" className="w-full">
               <Mail className="mr-2 h-4 w-4" />
-              Google
-            </Button>
-          </div>
+              Google</Mail>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -44,10 +39,7 @@ export default function SignUpPage() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
-          </div>
+                Or continue with</span>
 
           <form className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -59,7 +51,6 @@ export default function SignUpPage() {
                 <Label htmlFor="lastName">Last name</Label>
                 <Input id="lastName" placeholder="Doe" required />
               </div>
-            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -78,31 +69,41 @@ export default function SignUpPage() {
               <Input id="confirmPassword" type="password" required />
             </div>
             <Button type="submit" className="w-full">
-              Create Account
-            </Button>
-          </form>
+              Create Account</Button>
 
           <div className="text-center text-sm">
             <span className="text-muted-foreground">
-              Already have an account?{' '}
-            </span>
-            <Link href="/auth/signin" className="text-primary, hover:underline">
-              Sign in
-            </Link>
-          </div>
+              Already have an account?{' '}</span>
+            <Link href="/auth/signin" className="text-primary hover:underline">
+              Sign in</Link>
 
           <div className="text-center text-xs text-muted-foreground">
-            By creating an account, you agree to our{' '}
+            By creating an account, you agree to our{' '}</div>
             <Link href="/terms" className="hover:underline">
-              Terms of Service
-            </Link>{' '}
+              Terms of Service</Link>{' '}
             and{' '}
             <Link href="/privacy" className="hover:underline">
-              Privacy Policy
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+              Privacy Policy</Link>
+    );
+}
+
+    </form>
+    </div>
+    </Button>
+    </div>
+    </CardContent>
+    </CardHeader>
+    </Card>
     </div>
   );
+</form>
+</div>
+</div>
+</Button>
+</Button>
+</div>
+</CardContent>
+</CardHeader>
+</Card>
+</div>
 }

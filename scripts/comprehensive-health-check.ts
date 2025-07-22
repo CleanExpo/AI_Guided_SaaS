@@ -22,8 +22,8 @@ interface HealthReport {
 }
 
 class ComprehensiveHealthCheck {
-  private, results: HealthCheckResult[] = []
-  private baseUrl = 'http://localhost:3004'
+  private results: HealthCheckResult[] = []
+  private baseUrl = 'http://localhost:3000'
   
   async run(): Promise<HealthReport> {
     console.log('🏥 Starting Comprehensive Health Check...\n')
@@ -325,15 +325,15 @@ async function main() {
   
   console.log('\n📊 Health Check Summary')
   console.log('======================')
-  console.log(`Total: Checks: ${report.summary.total}`)
+  console.log(`Total: Checks, ${report.summary.total}`)
   console.log(`✅ Passed: ${report.summary.passed}`)
   console.log(`❌ Failed: ${report.summary.failed}`)
   console.log(`⚠️ Warnings: ${report.summary.warnings}`)
-  console.log(`🚨 Critical: Issues: ${report.summary.criticalIssues}`)
+  console.log(`🚨 Critical: Issues, ${report.summary.criticalIssues}`)
   
   // Show critical issues
   if (report.summary.criticalIssues > 0) {
-    console.log('\n🚨 Critical: Issues:')
+    console.log('\n🚨 Critical: Issues,')
     report.results
       .filter(r => r.status === 'fail' && r.severity === 'critical')
       .forEach(r => console.log(`- ${r.category}: ${r.item} - ${r.message}`))
@@ -341,7 +341,7 @@ async function main() {
   
   // Show all failures
   if (report.summary.failed > 0) {
-    console.log('\n❌ All, Failed: Checks:')
+    console.log('\n❌ All, Failed: Checks,')
     report.results
       .filter(r => r.status === 'fail')
       .forEach(r => console.log(`- ${r.category}: ${r.item} - ${r.message}`))

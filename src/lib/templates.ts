@@ -3,11 +3,18 @@ import { DatabaseService } from './database'
 
 // Template type definitions
 export interface Template {
-  id: string, name: string, description: string, category: string, tags: string[]
-  framework: string, difficulty: 'beginner' | 'intermediate' | 'advanced'
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  tags: string[];
+  framework: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
   author: {
-    id: string, name: string
-    avatar?: string, verified: boolean
+    id: string;
+  name: string
+    avatar?: string;
+  verified: boolean
   }
   pricing: {
     type: 'free' | 'premium' | 'pro'
@@ -17,8 +24,7 @@ export interface Template {
   stats: {
     downloads: number, rating: number, reviews: number, lastUpdated: string
   }
-  files: TemplateFile[]
-  preview: {
+  files: TemplateFile[], preview: {
     images: string[]
     demoUrl?: string, features: string[]
   }
@@ -32,18 +38,26 @@ export interface Template {
 }
 
 export interface TemplateFile {
-  path: string, content: string, type: 'component' | 'page' | 'config' | 'style' | 'api' | 'util'
+  path: string;
+  content: string;
+  type: 'component' | 'page' | 'config' | 'style' | 'api' | 'util'
   description?: string
 }
 
 export interface TemplateCategory {
-  id: string, name: string, description: string, icon: string, templateCount: number
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  templateCount: number
 }
 
 export interface TemplateSubmission {
-  id: string, templateData: Partial<Template>
+  id: string;
+  templateData: Partial<Template>
   status: 'pending' | 'approved' | 'rejected' | 'needs_revision'
-  submittedBy: string, submittedAt: string
+  submittedBy: string;
+  submittedAt: string
   reviewedBy?: string
   reviewedAt?: string
   reviewNotes?: string

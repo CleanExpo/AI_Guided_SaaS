@@ -8,33 +8,50 @@ import { analyzeCausalLogs, generateCausalInsights } from './causal-feedback-rep
 
 // Type definitions for self-check report system
 export interface ModuleReport {
-  status: string, present: string[]
+  status: string;
+  present: string[]
   missing: string[]
 }
 
 export interface DependencyReport {
-  status: string, summary: string, outdated: string[]
+  status: string;
+  summary: string;
+  outdated: string[]
 }
 
 export interface SecurityReport {
-  status: string, summary: string, vulnerabilities: string[]
+  status: string;
+  summary: string;
+  vulnerabilities: string[]
 }
 
 export interface CausalAnalysis {
-  status: string, summary: string, patterns: string[]
+  status: string;
+  summary: string;
+  patterns: string[]
   recommendations: string[]
 }
 
 export interface CausalInsights {
-  totalInteractions: number, uniqueComponents: number, topIssues: string[]
+  totalInteractions: number;
+  uniqueComponents: number;
+  topIssues: string[]
 }
 
 export interface HealthMetrics {
-  moduleScore: number, dependencyScore: number, securityScore: number, uxScore: number, overallScore: number
+  moduleScore: number;
+  dependencyScore: number;
+  securityScore: number;
+  uxScore: number;
+  overallScore: number
 }
 
 export interface ReportData {
-  moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis, causalInsights: CausalInsights
+  moduleReport: ModuleReport;
+  depReport: DependencyReport;
+  securityReport: SecurityReport;
+  causalAnalysis: CausalAnalysis;
+  causalInsights: CausalInsights
 }
 
 export async function generateSelfCheckReport(): Promise<string> {

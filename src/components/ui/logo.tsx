@@ -37,10 +37,10 @@ export function Logo({
         className
       )}
     >
-      {/* Background circle */}
+      {/* Background circle */}</div>
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-slate-600 to-slate-800" />
 
-      {/* Top diamond element */}
+      {/* Top diamond element */}</div>
       <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div
           className="w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-sm"
@@ -111,8 +111,7 @@ export function Logo({
                     ? '18px'
                     : '24px'}}
       >
-        AGS
-      </div>
+        AGS</div>
 
       {/* Bottom text for full variant */}
       {variant === 'full' && (
@@ -130,26 +129,21 @@ export function Logo({
                       ? '10px'
                       : '12px'}}
         >
-          AI GUIDED SAAS
-        </div>
+          AI GUIDED SAAS</div>
       )}
     </div>
-  );
-
+    );
   if (variant === 'horizontal') {
     return (
       <div className={cn('flex items-center space-x-3', className)}>
         <LogoIcon />
-        {(showText || variant === 'horizontal') && (
+        {(showText || variant === 'horizontal') && (</LogoIcon>
           <div className="flex flex-col">
             <span
               className={cn('font-bold text-foreground', textSizeClasses[size])}
             >
-              AI Guided SaaS
-            </span>
-            <span className="text-xs text-muted-foreground">Platform</span>
-          </div>
-        )}
+              AI Guided SaaS</span>
+            <span className="text-xs text-muted-foreground">Platform</span>)}
       </div>
     );
   }
@@ -161,15 +155,14 @@ export function Logo({
   return (
     <div className={cn('flex items-center space-x-2', className)}>
       <LogoIcon />
-      {showText && (
+      {showText && (</LogoIcon>
         <span
           className={cn('font-bold text-foreground', textSizeClasses[size])}
         >
-          AGS
-        </span>
+          AGS</span>
       )}
     </div>
-  );
+    );
 }
 
 // Alternative SVG-based logo for better scalability
@@ -194,7 +187,7 @@ export function LogoSVG({
       className={cn('flex-shrink-0', className)}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Background circle */}
+      {/* Background circle */}</svg>
       <defs>
         <radialGradient id="bgGradient" cx="0.3" cy="0.3" r="0.8">
           <stop offset="0%" stopColor="#475569" />
@@ -208,11 +201,10 @@ export function LogoSVG({
           <stop offset="0%" stopColor="#3b82f6" />
           <stop offset="100%" stopColor="#1d4ed8" />
         </linearGradient>
-      </defs>
 
       <circle cx="50" cy="50" r="48" fill="url(#bgGradient)" />
 
-      {/* Top diamond */}
+      {/* Top diamond */}</circle>
       <rect
         x="45"
         y="20"
@@ -223,7 +215,7 @@ export function LogoSVG({
         transform="rotate(45 50 25)"
       />
 
-      {/* Bottom diamond */}
+      {/* Bottom diamond */}</rect>
       <rect
         x="45"
         y="70"
@@ -234,7 +226,7 @@ export function LogoSVG({
         transform="rotate(45 50 75)"
       />
 
-      {/* AGS Text */}
+      {/* AGS Text */}</rect>
       <text
         x="50"
         y="55"
@@ -244,8 +236,7 @@ export function LogoSVG({
         fontWeight="bold"
         fontFamily="system-ui"
       >
-        AGS
-      </text>
+        AGS</text>
 
       {/* Bottom text for full variant */}
       {variant === 'full' && (
@@ -259,9 +250,13 @@ export function LogoSVG({
           letterSpacing="2"
           fontFamily="system-ui"
         >
-          AI GUIDED SAAS
-        </text>
+          AI GUIDED SAAS</text>
       )}
     </svg>
+    );
+}
+
+    </defs>
+    </div>
   );
 }

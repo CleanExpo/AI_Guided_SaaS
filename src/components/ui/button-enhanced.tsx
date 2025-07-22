@@ -101,12 +101,12 @@ export function ButtonEnhanced({
       disabled={disabled || loading}
       {...props}
     >
-      {loading && <Spinner size="sm" className="mr-2" />}
+      {loading && <Spinner size="sm" className="mr-2" />}</Spinner>
       {!loading && leftIcon && <span className="mr-2">{leftIcon}</span>}
       {children}
       {!loading && rightIcon && <span className="ml-2">{rightIcon}</span>}
     </button>
-  );
+    );
 }
 
 // Floating Action Button
@@ -146,9 +146,8 @@ export function FloatingActionButton({
       animation="glow"
       {...props}
     >
-      {icon}
-    </ButtonEnhanced>
-  );
+      {icon}</ButtonEnhanced>
+    );
 }
 
 // Button Group
@@ -181,15 +180,14 @@ export function ButtonGroup({
       )}
     >
       {React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
+        if (React.isValidElement(child)) {</div>
           return React.cloneElement(child as React.ReactElement<ButtonProps>, {
             size: size || (child.props as ButtonProps)?.size,
             variant: variant || (child.props as ButtonProps)?.variant});
         }
         return child;
-      })}
-    </div>
-  );
+      })}</ButtonProps>
+    );
 }
 
 // Icon Button
@@ -201,9 +199,8 @@ interface IconButtonProps extends Omit<ButtonProps, 'leftIcon' | 'rightIcon'> {
 export function IconButton({ icon, className, ...props }: IconButtonProps) {
   return (
     <ButtonEnhanced className={cn('p-0', className)} size="icon" {...props}>
-      {icon}
-    </ButtonEnhanced>
-  );
+      {icon}</ButtonEnhanced>
+    );
 }
 
 // Toggle Button
@@ -227,15 +224,14 @@ export function ToggleButton({
       aria-pressed={pressed}
       {...props}
     >
-      {children}
-    </ButtonEnhanced>
-  );
+      {children}</ButtonEnhanced>
+    );
 }
 
 // Split Button
 interface SplitButtonProps extends ButtonProps {
   dropdownItems: Array<{
-    label: string;
+    label: string,
     onClick: () => void;
     icon?: React.ReactNode;
     disabled?: boolean;
@@ -258,15 +254,14 @@ export function SplitButton({
         className={cn('rounded-r-none border-r-0', className)}
         {...props}
       >
-        {children}
-      </ButtonEnhanced>
+        {children}</ButtonEnhanced>
       <ButtonEnhanced
         className="rounded-l-none px-2"
         variant={props.variant}
         size={props.size}
         onClick={() => onDropdownToggle?.(!dropdownOpen)}
         aria-expanded={dropdownOpen}
-      >
+      ></ButtonEnhanced>
         <svg
           className="h-4 w-4"
           fill="none"
@@ -280,14 +275,13 @@ export function SplitButton({
             d="M19 9l-7 7-7-7"
           />
         </svg>
-      </ButtonEnhanced>
 
       {dropdownOpen && (
         <div className="absolute top-full left-0 mt-1 w-full min-w-48 bg-background border rounded-md shadow-lg z-50">
           {dropdownItems.map((item, index) => (
             <button
               key={index}
-              className="w-full px-3 py-2 text-left text-sm, hover:bg-accent, hover:text-accent-foreground, disabled:opacity-50, disabled:cursor-not-allowed flex items-center"
+              className="w-full px-3 py-2 text-left text-sm hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               onClick={item.onClick}
               disabled={item.disabled}
             >
@@ -298,7 +292,7 @@ export function SplitButton({
         </div>
       )}
     </div>
-  );
+    );
 }
 
 // Copy Button
@@ -334,9 +328,8 @@ export function CopyButton({
       variant={copied ? 'success' : 'outline'}
       {...props}
     >
-      {copied ? successMessage : children}
-    </ButtonEnhanced>
-  );
+      {copied ? successMessage : children}</ButtonEnhanced>
+    );
 }
 
 // Social Login Buttons
@@ -352,7 +345,7 @@ export function SocialButton({
 }: SocialButtonProps) {
   const providerConfig = {
     google: {
-      icon: (
+      icon: (</ButtonProps>
         <svg className="w-5 h-5" viewBox="0 0 24 24">
           <path
             fill="currentColor"
@@ -412,7 +405,12 @@ export function SocialButton({
       {...props}
     >
       {children ||
-        `Continue with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`}
-    </ButtonEnhanced>
+        `Continue with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`}</ButtonEnhanced>
+    );
+}
+
+    </ButtonProps>
+    </ButtonProps>
+    </HTMLButtonElement>
   );
 }

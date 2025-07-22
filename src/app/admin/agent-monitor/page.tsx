@@ -19,7 +19,6 @@ export default function AgentMonitorPage() {
             Real-time monitoring of AI agents with pulse control and Docker containerization
           </p>
         </div>
-      </div>
 
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
@@ -31,7 +30,7 @@ export default function AgentMonitorPage() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium">Active Agents</CardTitle>
@@ -73,7 +72,7 @@ export default function AgentMonitorPage() {
             </Card>
           </div>
 
-          <div className="grid grid-cols-1, lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <SystemMetrics />
             <TaskQueueVisualizer />
           </div>
@@ -112,5 +111,6 @@ export default function AgentMonitorPage() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
+</div>

@@ -25,14 +25,16 @@ import {
 import { cn } from '@/utils/cn'
 
 interface EnvVariable {
-  key: string, value: string
-  description?: string, type: 'public' | 'secret' | 'api_key'
+  key: string;
+  value: string
+  description?: string;
+  type: 'public' | 'secret' | 'api_key'
   required: boolean
   validated?: boolean
 }
 
 interface EnvVariableEditorProps {
-  variables: EnvVariable[]
+  variables: EnvVariable[];
   onChange: (variables: EnvVariable[]) => void
   projectType?: string
   readOnly?: boolean
@@ -61,9 +63,9 @@ export function EnvVariableEditor({
   onChange, 
   projectType = 'default',
   readOnly = false 
-}: EnvVariableEditorProps) {
-  const [variables, setVariables] = useState<EnvVariable[]>(initialVariables)
-  const [showSecrets, setShowSecrets] = useState<Record<string, boolean>>({})
+}: EnvVariableEditorProps) {</string>
+  const [variables, setVariables] = useState<EnvVariable[]>(initialVariables)</EnvVariable>
+  const [showSecrets, setShowSecrets] = useState<Record<string, boolean>>({})</Record>
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
   const [isValidating, setIsValidating] = useState(false)
   
@@ -104,7 +106,7 @@ export function EnvVariableEditor({
   }
   
   const validateVariables = async () => {
-    setIsValidating(true)
+    setIsValidating(true)</Record>
     const errors: Record<string, string> = {}
     
     for (const variable of variables) {
@@ -127,6 +129,7 @@ export function EnvVariableEditor({
       }
     }
     
+        </string>
     setValidationErrors(errors)
     setIsValidating(false)
     
@@ -147,11 +150,12 @@ export function EnvVariableEditor({
     a.click()
     URL.revokeObjectURL(url)
   }
-  
+  </string>
   const importEnvFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
     
+        </HTMLInputElement>
     const reader = new FileReader()
     reader.onload = (e) => {
       const content = e.target?.result as string
@@ -165,12 +169,14 @@ export function EnvVariableEditor({
           const existing = variables.find(v => v.key === key)
           imported.push({
             key,
-            value: type: key.includes('SECRET') || key.includes('PRIVATE') ? 'secret' : 
+            value: type, key.includes('SECRET') || key.includes('PRIVATE') ? 'secret' : 
                   key.includes('API_KEY') || key.includes('TOKEN') ? 'api_key' : 'public',
             required: existing?.required || false,
             description: existing?.description
-          })
-        }
+          }
+      )}
+    </div>
+  );
       })
       
       setVariables(imported)
@@ -192,7 +198,7 @@ export function EnvVariableEditor({
   }
   
   const getTypeIcon = (type: EnvVariable['type']) => {
-    switch (type) {
+    switch (type) {</HTMLInputElement>
       case 'secret': return <Lock className="h-4 w-4" />
       case 'api_key': return <Key className="h-4 w-4" />
       default: return <Eye className="h-4 w-4" />
@@ -214,12 +220,9 @@ export function EnvVariableEditor({
           <div>
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <Shield className="h-5 w-5" />
-              Environment Variables
-            </h3>
+              Environment Variables</Shield>
             <p className="text-sm text-muted-foreground mt-1">
-              Configure secure environment variables for your project
-            </p>
-          </div>
+              Configure secure environment variables for your project</p>
           
           <div className="flex items-center gap-2">
             <Button
@@ -229,16 +232,14 @@ export function EnvVariableEditor({
               disabled={readOnly}
             >
               <Plus className="h-4 w-4 mr-2" />
-              Add Suggested
-            </Button>
+              Add Suggested</Plus>
             <Button
               size="sm"
               variant="outline"
               onClick={exportEnvFile}
             >
               <Download className="h-4 w-4 mr-2" />
-              Export
-            </Button>
+              Export</Download>
             <label>
               <Button
                 size="sm"
@@ -248,9 +249,7 @@ export function EnvVariableEditor({
               >
                 <span>
                   <Upload className="h-4 w-4 mr-2" />
-                  Import
-                </span>
-              </Button>
+                  Import</Upload>
               <input
                 type="file"
                 accept=".env,.env.local"
@@ -258,24 +257,19 @@ export function EnvVariableEditor({
                 className="hidden"
               />
             </label>
-          </div>
-        </div>
         
         {/* Security Notice */}
         <Alert className="mb-4">
           <AlertTriangle className="h-4 w-4" />
           <AlertDescription>
-            Environment variables marked as "secret" or "api_key" will be encrypted and never exposed in the UI after saving.
-          </AlertDescription>
-        </Alert>
-      </div>
+            Environment variables marked as "secret" or "api_key" will be encrypted and never exposed in the UI after saving.</AlertDescription>
       
       {/* Variables List */}
       <div className="space-y-4">
         {variables.map((variable, index) => (
           <div key={index} className="border rounded-lg p-4">
             <div className="grid grid-cols-12 gap-4">
-              {/* Key */}
+              {/* Key */}</div>
               <div className="col-span-4">
                 <label className="text-sm font-medium mb-1 block">Key</label>
                 <Input
@@ -286,8 +280,7 @@ export function EnvVariableEditor({
                   className={cn(
                     validationErrors[variable.key] && "border-red-500"
                   )}
-                />
-              </div>
+                /></Input>
               
               {/* Value */}
               <div className="col-span-6">
@@ -304,21 +297,19 @@ export function EnvVariableEditor({
                       validationErrors[variable.key] && "border-red-500"
                     )}
                   />
-                  {variable.type !== 'public' && (
+                  {variable.type !== 'public' && (</Input>
                     <button
                       type="button"
                       onClick={() => toggleShowSecret(variable.key)}
-                      className="absolute right-2 top-2.5 text-gray-400, hover:text-gray-600"
+                      className="absolute right-2 top-2.5 text-gray-400 hover:text-gray-600"
                     >
-                      {showSecrets[variable.key] ? (
+                      {showSecrets[variable.key] ? (</button>
                         <EyeOff className="h-4 w-4" />
-                      ) : (
+                      ) : (</EyeOff>
                         <Eye className="h-4 w-4" />
-                      )}
-                    </button>
+                      )}</Eye>
                   )}
                 </div>
-              </div>
               
               {/* Type & Actions */}
               <div className="col-span-2 flex items-end gap-2">
@@ -327,52 +318,47 @@ export function EnvVariableEditor({
                   onChange={(e) => handleUpdateVariable(index, 'type', e.target.value)}
                   disabled={readOnly}
                   className="flex-1 px-2 py-2 border rounded-md text-sm"
-                >
+                ></select>
                   <option value="public">Public</option>
                   <option value="secret">Secret</option>
                   <option value="api_key">API Key</option>
-                </select>
                 
                 {!readOnly && (
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={() => handleRemoveVariable(index)}
-                  >
+                  ></Button>
                     <Trash2 className="h-4 w-4 text-red-500" />
                   </Button>
                 )}
               </div>
-            </div>
             
             {/* Description & Metadata */}
             <div className="mt-3 flex items-start justify-between">
               <div className="flex-1">
-                {variable.description && (
+                {variable.description && (</div>
                   <p className="text-sm text-muted-foreground">{variable.description}</p>
-                )}
+  );
+}
                 {validationErrors[variable.key] && (
                   <p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}</p>
-                )}
-              </div>
-              
+  
+        </div>
+    );
+}
               <div className="flex items-center gap-2">
                 <Badge className={cn("text-xs", getTypeBadgeColor(variable.type))}>
-                  {getTypeIcon(variable.type)}
+                  {getTypeIcon(variable.type)}</Badge>
                   <span className="ml-1">{variable.type}</span>
                 </Badge>
                 {variable.required && (
                   <Badge variant="outline" className="text-xs">
-                    Required
-                  </Badge>
+                    Required</Badge>
                 )}
                 {variable.validated && (
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+                )}</CheckCircle>))}
         
         {/* Add Variable Button */}
         {!readOnly && (
@@ -382,8 +368,7 @@ export function EnvVariableEditor({
             onClick={handleAddVariable}
           >
             <Plus className="h-4 w-4 mr-2" />
-            Add Variable
-          </Button>
+            Add Variable</Plus>
         )}
       </div>
       
@@ -393,9 +378,30 @@ export function EnvVariableEditor({
           onClick={validateVariables}
           disabled={isValidating}
         >
-          {isValidating ? 'Validating...' : 'Validate All'}
-        </Button>
-      </div>
+          {isValidating ? 'Validating...' : 'Validate All'}</Button>
+    );
+</div>
+</div>
+</div>
+</div>
+</div>
+</Alert>
+</span>
+</label>
+</div>
+</h3>
+</div>
+</div>
+</div>
+</Card>
+}
+    </Alert>
+    </span>
+    </label>
+    </div>
+    </h3>
+    </div>
+    </div>
     </Card>
-  )
+  );
 }

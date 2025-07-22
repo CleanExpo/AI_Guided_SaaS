@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       default:
         return NextResponse.json({
           success: false,
-          error: 'Invalid test type. Use: configuration, simple, welcome, or notification'}, { status: 400 });
+          error: 'Invalid test type., Use: configuration, simple, welcome, or notification'}, { status: 400 });
     }
 
     return NextResponse.json({

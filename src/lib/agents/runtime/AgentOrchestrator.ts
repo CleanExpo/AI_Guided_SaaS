@@ -20,26 +20,32 @@ export interface ProjectRequest {
 }
 
 export interface ProjectResult {
-  request: ProjectRequest, plan: ExecutionPlan, results: TaskResult[]
-  summary: ProjectSummary, artifacts: Map<string, any>
+  request: ProjectRequest;
+  plan: ExecutionPlan;
+  results: TaskResult[];
+  summary: ProjectSummary;
+  artifacts: Map<string, any>
   recommendations: string[]
 }
 
 export interface ProjectSummary {
-  overview: string, keyFindings: string[]
+  overview: string;
+  keyFindings: string[];
   deliverables: Deliverable[]
-  nextSteps: string[]
+  nextSteps: string[];
   risks: string[]
   timeline?: string
 }
 
 export interface Deliverable {
-  name: string, type: string, description: string
+  name: string;
+  type: string;
+  description: string
   location?: string
 }
 
 export class AgentOrchestrator {
-  private, runtime: AgentRuntime
+  private runtime: AgentRuntime
   private, config: OrchestratorConfig
 
   constructor(config: OrchestratorConfig = {}) {
@@ -103,7 +109,7 @@ export class AgentOrchestrator {
   /**
    * Quick analysis using specific agents
    */
-  async quickAnalysis(input: string: agentTypes: string[]): Promise<any> {
+  async quickAnalysis(input: string, agentTypes: string[]): Promise<any> {
     const tasks = agentTypes.map((agentType, index) => ({
       id: `quick-${index}`,
       agentType,
@@ -294,14 +300,14 @@ Return as a simple array of recommendation strings.`
 export async function analyzeProject(description: string): Promise<ProjectResult> {
   const orchestrator = new AgentOrchestrator()
   return orchestrator.processProject({
-    description: type: 'analysis'
+    description: type, 'analysis'
   })
 }
 
 export async function planProject(description: string, constraints?: string[]): Promise<ProjectResult> {
   const orchestrator = new AgentOrchestrator()
   return orchestrator.processProject({
-    description: type: 'planning',
+    description: type, 'planning',
     constraints
   })
 }
@@ -309,7 +315,7 @@ export async function planProject(description: string, constraints?: string[]): 
 export async function architectProject(description: string, priorities?: string[]): Promise<ProjectResult> {
   const orchestrator = new AgentOrchestrator()
   return orchestrator.processProject({
-    description: type: 'architecture',
+    description: type, 'architecture',
     priorities
   })
 }
@@ -320,7 +326,7 @@ export async function fullStackProject(
 ): Promise<ProjectResult> {
   const orchestrator = new AgentOrchestrator()
   return orchestrator.processProject({
-    description: type: 'full-stack',
+    description: type, 'full-stack',
     ...options
   })
 }

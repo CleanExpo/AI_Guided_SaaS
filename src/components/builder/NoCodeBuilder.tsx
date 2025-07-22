@@ -50,8 +50,9 @@ interface Component {
   children?: Component[];
 }
 
-export default function NoCodeBuilder() {
+export default function NoCodeBuilder() {</string>
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
+      </Component>
   const [components, setComponents] = useState<Component[]>([]);
   const [showGrid, setShowGrid] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
@@ -71,7 +72,7 @@ export default function NoCodeBuilder() {
     mobile: 'max-w-sm'
   };
 
-  const handleDragStart = (e: React.DragEvent: type: string) => {
+  const handleDragStart = (e: React.DragEvent: type, string) => {
     e.dataTransfer.setData('componentType', type);
     setIsDragging(true);
   };
@@ -104,13 +105,12 @@ export default function NoCodeBuilder() {
   };
 
   return (
-    <div className="h-screen flex bg-gray-50, dark:bg-gray-950">
-      {/* Left Sidebar - Component Library */}
-      <div className="w-64 bg-white, dark:bg-gray-900 border-r p-4">
+    <div className="h-screen flex bg-gray-50 dark:bg-gray-950">
+      {/* Left Sidebar - Component Library */}</div>
+      <div className="w-64 bg-white dark:bg-gray-900 border-r p-4">
         <h3 className="font-semibold mb-4 flex items-center gap-2">
           <Layers className="w-4 h-4" />
-          Components
-        </h3>
+          Components</Layers>
         
         <ScrollArea className="h-[calc(100vh-200px)]">
           <div className="grid grid-cols-2 gap-2">
@@ -119,36 +119,30 @@ export default function NoCodeBuilder() {
                 key={comp.type}
                 draggable
                 onDragStart={(e) => handleDragStart(e, comp.type)}
-                className="p-4 cursor-move, hover:shadow-lg transition-all, hover:scale-105, hover:border-purple-500"
-              >
+                className="p-4 cursor-move hover:shadow-lg transition-all hover:scale-105 hover:border-purple-500"
+              ></Card>
                 <div className="flex flex-col items-center gap-2">
                   <comp.icon className="w-6 h-6 text-purple-500" />
                   <span className="text-xs">{comp.label}</span>
                 </div>
-              </Card>
             ))}
           </div>
-        </ScrollArea>
 
         <Separator className="my-4" />
         
-        {/* Quick Actions */}
+        {/* Quick Actions */}</Separator>
         <div className="space-y-2">
           <Button variant="outline" size="sm" className="w-full">
             <Upload className="w-4 h-4 mr-2" />
-            Import
-          </Button>
+            Import</Upload>
           <Button variant="outline" size="sm" className="w-full">
             <Download className="w-4 h-4 mr-2" />
-            Export
-          </Button>
-        </div>
-      </div>
+            Export</Download>
 
       {/* Center - Canvas */}
       <div className="flex-1 flex flex-col">
-        {/* Top Toolbar */}
-        <div className="bg-white, dark:bg-gray-900 border-b px-4 py-2">
+        {/* Top Toolbar */}</div>
+        <div className="bg-white dark:bg-gray-900 border-b px-4 py-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm">
@@ -159,14 +153,14 @@ export default function NoCodeBuilder() {
               </Button>
               <Separator orientation="vertical" className="h-6" />
               
-              {/* Viewport Switcher */}
-              <div className="flex items-center gap-1 bg-gray-100, dark:bg-gray-800 rounded-md p-1">
+              {/* Viewport Switcher */}</Separator>
+              <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-md p-1">
                 <Button
                   variant={currentView === 'desktop' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setCurrentView('desktop')}
                   className="h-7 px-2"
-                >
+                ></Button>
                   <Square className="w-4 h-4" />
                 </Button>
                 <Button
@@ -174,7 +168,7 @@ export default function NoCodeBuilder() {
                   size="sm"
                   onClick={() => setCurrentView('tablet')}
                   className="h-7 px-2"
-                >
+                ></Button>
                   <Square className="w-3 h-4" />
                 </Button>
                 <Button
@@ -182,39 +176,31 @@ export default function NoCodeBuilder() {
                   size="sm"
                   onClick={() => setCurrentView('mobile')}
                   className="h-7 px-2"
-                >
+                ></Button>
                   <Square className="w-2 h-4" />
                 </Button>
-              </div>
               
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowGrid(!showGrid)}
-              >
+              ></Button>
                 <Grid3X3 className={cn("w-4 h-4", showGrid && "text-purple-500")} />
               </Button>
-            </div>
 
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm">
                 <Eye className="w-4 h-4 mr-2" />
-                Preview
-              </Button>
-              <Button size="sm" className="bg-purple-500, hover:bg-purple-600">
+                Preview</Eye>
+              <Button size="sm" className="bg-purple-500 hover:bg-purple-600">
                 <Save className="w-4 h-4 mr-2" />
-                Save
-              </Button>
-              <Button size="sm" className="bg-green-500, hover:bg-green-600">
+                Save</Save>
+              <Button size="sm" className="bg-green-500 hover:bg-green-600">
                 <Play className="w-4 h-4 mr-2" />
-                Publish
-              </Button>
-            </div>
-          </div>
-        </div>
+                Publish</Play>
 
         {/* Canvas Area */}
-        <div className="flex-1 overflow-auto p-8 bg-gray-100, dark:bg-gray-950">
+        <div className="flex-1 overflow-auto p-8 bg-gray-100 dark:bg-gray-950">
           <div className={cn("mx-auto transition-all", viewportSizes[currentView])}>
             <div
               className={cn(
@@ -225,14 +211,13 @@ export default function NoCodeBuilder() {
               onDragOver={(e) => e.preventDefault()}
               onDrop={handleDrop}
             >
-              {components.length === 0 && (
+              {components.length === 0 && (</div>
                 <div className="h-full flex items-center justify-center text-gray-400">
                   <div className="text-center">
                     <MousePointer2 className="w-12 h-12 mx-auto mb-4" />
                     <p>Drag components here to start building</p>
-                  </div>
-                </div>
-              )}
+  );
+}
               
               {/* Render Components */}
               <div className="p-8">
@@ -245,7 +230,7 @@ export default function NoCodeBuilder() {
                     )}
                     onClick={() => setSelectedComponent(component.id)}
                   >
-                    {/* Component Actions */}
+                    {/* Component Actions */}</div>
                     <div className="absolute -top-8 right-0 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
                       <Button size="sm" variant="ghost" className="h-6 w-6 p-0">
                         <Copy className="w-3 h-3" />
@@ -253,51 +238,42 @@ export default function NoCodeBuilder() {
                       <Button size="sm" variant="ghost" className="h-6 w-6 p-0">
                         <Trash2 className="w-3 h-3" />
                       </Button>
-                    </div>
                     
                     {/* Render Component */}
                     {component.type === 'text' && (
                       <p style={{ fontSize: component.props.fontSize, color: component.props.color }}>
-                        {component.props.text}
-                      </p>
-                    )}
+                        {component.props.text}</p>
+  );
+}
                     {component.type === 'button' && (
                       <Button variant={component.props.variant} size={component.props.size}>
-                        {component.props.text}
-                      </Button>
+                        {component.props.text}</Button>
                     )}
                     {component.type === 'container' && (
                       <div
                         className="min-h-[100px] rounded"
                         style={{ padding: component.props.padding, backgroundColor: component.props.background }}
                       >
-                        Container
-                      </div>
+                        Container</div>
                     )}
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Right Sidebar - Properties Panel */}
-      <div className="w-80 bg-white, dark:bg-gray-900 border-l p-4">
+      <div className="w-80 bg-white dark:bg-gray-900 border-l p-4">
         <Tabs defaultValue="properties">
           <TabsList className="w-full">
             <TabsTrigger value="properties" className="flex-1">Properties</TabsTrigger>
             <TabsTrigger value="style" className="flex-1">Style</TabsTrigger>
             <TabsTrigger value="advanced" className="flex-1">Advanced</TabsTrigger>
-          </TabsList>
           
           <TabsContent value="properties" className="mt-4">
-            {selectedComponent ? (
+            {selectedComponent ? (</TabsContent>
               <div className="space-y-4">
                 <h4 className="font-semibold flex items-center gap-2">
                   <Settings className="w-4 h-4" />
-                  Component Properties
-                </h4>
+                  Component Properties</Settings>
                 
                 {/* Dynamic property inputs based on component type */}
                 <div className="space-y-3">
@@ -309,22 +285,19 @@ export default function NoCodeBuilder() {
                     <Label>Font Size</Label>
                     <Input type="number" placeholder="16" />
                   </div>
-                </div>
-              </div>
             ) : (
               <div className="text-center text-gray-400 mt-8">
                 <Settings className="w-12 h-12 mx-auto mb-4" />
                 <p>Select a component to edit properties</p>
-              </div>
-            )}
+  );
+}
           </TabsContent>
           
           <TabsContent value="style" className="mt-4">
             <div className="space-y-4">
               <h4 className="font-semibold flex items-center gap-2">
                 <Palette className="w-4 h-4" />
-                Style Editor
-              </h4>
+                Style Editor</Palette>
               
               {/* Style controls */}
               <div className="space-y-3">
@@ -334,28 +307,22 @@ export default function NoCodeBuilder() {
                     <Input type="color" className="w-12 h-10" />
                     <Input placeholder="#ffffff" />
                   </div>
-                </div>
                 <div>
                   <Label>Text Color</Label>
                   <div className="flex gap-2">
                     <Input type="color" className="w-12 h-10" />
                     <Input placeholder="#000000" />
                   </div>
-                </div>
                 <div>
                   <Label>Border Radius</Label>
                   <Input type="range" min="0" max="50" />
                 </div>
-              </div>
-            </div>
-          </TabsContent>
           
           <TabsContent value="advanced" className="mt-4">
             <div className="space-y-4">
               <h4 className="font-semibold flex items-center gap-2">
                 <Code className="w-4 h-4" />
-                Advanced Settings
-              </h4>
+                Advanced Settings</Code>
               
               <div className="space-y-3">
                 <div>
@@ -366,11 +333,64 @@ export default function NoCodeBuilder() {
                   <Label>Component ID</Label>
                   <Input placeholder="component-id" />
                 </div>
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
+    );
+</div>
+</h4>
+</div>
+</TabsContent>
+</div>
+</div>
+</div>
+</h4>
+</div>
+</TabsContent>
+</div>
+</div>
+</h4>
+</div>
+</TabsList>
+</Tabs>
+</div>
+</div>
+</Button>
+</Button>
+</Button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</Button>
+</Button>
+</div>
+</ScrollArea>
+</h3>
+</div>
+}
+    </h4>
+    </div>
+    </TabsContent>
+    </div>
+    </div>
+    </h4>
+    </div>
+    </TabsContent>
+    </div>
+    </h4>
+    </div>
+    </TabsList>
+    </Tabs>
+    </div>
+    </Button>
+    </Button>
+    </div>
+    </div>
+    </div>
+    </Button>
+    </div>
+    </ScrollArea>
+    </h3>
     </div>
   );
 }
+</string>

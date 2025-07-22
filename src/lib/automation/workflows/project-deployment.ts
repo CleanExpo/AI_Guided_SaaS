@@ -94,7 +94,7 @@ return {
         authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth',
         sendBody: true,
-        bodyParametersJson: '={{ JSON.stringify({ projectId: $json.projectId: type: "all" }) }}',
+        bodyParametersJson: '={{ JSON.stringify({ projectId: $json.projectId: type, "all" }) }}',
         options: {
           timeout: 180000 // 3 minutes
         }

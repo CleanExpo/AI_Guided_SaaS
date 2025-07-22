@@ -34,17 +34,17 @@ export function Navigation() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
+    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"></nav>
+      <div className="container mx-auto px-4"></div>
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Zap className="h-6 w-6 text-primary" />
+          {/* Logo */}</div>
+          <Link href="/" className="flex items-center space-x-2"></Link>
+            <Zap className="h-6 w-6 text-primary" /></Zap>
             <span className="font-bold text-xl">AI SaaS Platform</span>
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden, md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1">
             {navigation.map((item) => {
               const isActive = pathname === item.href || 
                 (item.href !== '/' && pathname.startsWith(item.href))
@@ -59,54 +59,47 @@ export function Navigation() {
                       ? 'bg-primary text-primary-foreground'
                       : 'text-muted-foreground, hover:text-foreground, hover:bg-accent'
                   )}
-                >
-                  <item.icon className="h-4 w-4" />
+                ></Link>
+                  <item.icon className="h-4 w-4" /></item>
                   <span>{item.name}</span>
                 </Link>
-              )
-            })}
-          </div>
+    );
+            }
+      )}
+    </div>
+    );
 
           {/* Right side actions */}
           <div className="flex items-center space-x-2">
-            {/* Theme toggle */}
+            {/* Theme toggle */}</div>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all, dark:-rotate-90, dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all, dark:rotate-0, dark:scale-100" />
+            ></Button>
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" /></Sun>
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" /></Moon>
               <span className="sr-only">Toggle theme</span>
             </Button>
 
             {/* User menu */}
             {session ? (
-              <div className="flex items-center space-x-2">
-                <div className="flex items-center space-x-2 px-3 py-1 rounded-md bg-accent">
-                  <User className="h-4 w-4" />
+              <div className="flex items-center space-x-2"></div>
+                <div className="flex items-center space-x-2 px-3 py-1 rounded-md bg-accent"></div>
+                  <User className="h-4 w-4" /></User>
                   <span className="text-sm font-medium">
-                    {session.user?.name || session.user?.email}
-                  </span>
-                </div>
+                    {session.user?.name || session.user?.email}</span>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => signOut()}
-                >
-                  <LogOut className="h-4 w-4" />
-                </Button>
-              </div>
-            ) : (
-              <Link href="/auth/signin">
+                ></Button>
+                  <LogOut className="h-4 w-4" /></LogOut>
+                </Button>) : (
+              <Link href="/auth/signin"></Link>
                 <Button variant="default" size="sm">
-                  Sign In
-                </Button>
-              </Link>
+                  Sign In</Button>
             )}
           </div>
-        </div>
-      </div>
-    </nav>
-  )
+      );
 }

@@ -20,7 +20,9 @@ import { Button } from '@/components/ui/button'
 import { Plus, Save, Download, Upload } from 'lucide-react'
 
 interface FlowchartBuilderProps {
-  projectName: string, onSaveFlow: (nodes: Node[], edges: Edge[]) => void
+  projectName: string;
+  onSaveFlow: (nodes: Node[];
+  edges: Edge[]) => void
 }
 
 const initialNodes: Node[] = [
@@ -93,6 +95,7 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
   const importFlow = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
+          </HTMLInputElement>
       const reader = new FileReader()
       reader.onload = (e) => {
         try {
@@ -111,50 +114,38 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
   }, [setNodes, setEdges])
 
   return (
-    <div className="h-full flex flex-col">
-      <Card className="mb-4">
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+    <div className="h-full flex flex-col"></div>
+      <Card className="mb-4"></Card>
+        <CardHeader></CardHeader>
+          <CardTitle className="flex items-center justify-between"></CardTitle>
             <span>Flowchart Builder - {projectName}</span>
-            <div className="flex gap-2">
-              <Button onClick={addNode} size="sm" variant="outline">
+            <div className="flex gap-2"></div>
+              <Button onClick={addNode} size="sm" variant="outline"></Button>
                 <Plus className="w-4 h-4 mr-1" />
-                Add Node
-              </Button>
-              <Button onClick={saveFlow} size="sm" variant="outline">
+                Add Node</Plus>
+              <Button onClick={saveFlow} size="sm" variant="outline"></Button>
                 <Save className="w-4 h-4 mr-1" />
-                Save
-              </Button>
-              <Button onClick={exportFlow} size="sm" variant="outline">
+                Save</Save>
+              <Button onClick={exportFlow} size="sm" variant="outline"></Button>
                 <Download className="w-4 h-4 mr-1" />
-                Export
-              </Button>
-              <label className="cursor-pointer">
-                <Button size="sm" variant="outline" asChild>
-                  <span>
+                Export</Download>
+              <label className="cursor-pointer"></label>
+                <Button size="sm" variant="outline" asChild></Button>
+                  <span></span>
                     <Upload className="w-4 h-4 mr-1" />
-                    Import
-                  </span>
-                </Button>
+                    Import</Upload>
                 <input
                   type="file"
                   accept=".json"
                   onChange={importFlow}
                   className="hidden"
-                />
-              </label>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+                /></input>
+        <CardContent></CardContent>
           <p className="text-sm text-gray-600">
             Create and visualize your project workflow. Drag nodes to reposition them, 
-            connect nodes by dragging from one node to another, and use the controls to navigate.
-          </p>
-        </CardContent>
-      </Card>
+            connect nodes by dragging from one node to another, and use the controls to navigate.</p>
 
-      <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden">
+      <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden"></div>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -163,31 +154,22 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
           onConnect={onConnect}
           fitView
           attributionPosition="bottom-left"
-        >
-          <Controls />
-          <MiniMap />
-          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        </ReactFlow>
-      </div>
+        ></ReactFlow>
+          <Controls /></Controls>
+          <MiniMap /></MiniMap>
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1} /></Background>
 
-      <Card className="mt-4">
-        <CardContent className="pt-4">
-          <div className="grid grid-cols-1, md:grid-cols-3 gap-4 text-sm">
-            <div>
+      <Card className="mt-4"></Card>
+        <CardContent className="pt-4"></CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"></div>
+            <div></div>
               <h4 className="font-medium text-gray-900 mb-1">Navigation</h4>
               <p className="text-gray-600">Use mouse wheel to zoom, drag to pan</p>
-            </div>
-            <div>
+            <div></div>
               <h4 className="font-medium text-gray-900 mb-1">Connections</h4>
               <p className="text-gray-600">Drag from node edge to create connections</p>
-            </div>
-            <div>
+            <div></div>
               <h4 className="font-medium text-gray-900 mb-1">Editing</h4>
               <p className="text-gray-600">Double-click nodes to edit labels</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
+    );
 }

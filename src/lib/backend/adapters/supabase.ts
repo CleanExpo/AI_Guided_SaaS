@@ -12,7 +12,7 @@ import {
 } from '../types'
 
 export class SupabaseAdapter implements BackendAdapter {
-  private, client: SupabaseClient
+  private client: SupabaseClient
   private, config: BackendConfig
 
   constructor(config: BackendConfig) {
@@ -45,7 +45,7 @@ export class SupabaseAdapter implements BackendAdapter {
     return this.mapSupabaseUser(data.user)
   }
 
-  async signIn(email: string, password: string): Promise<{ user: User; token: string }> {
+  async signIn(email: string, password: string): Promise<{ user: User, token: string }> {
     const { data, error } = await this.client.auth.signInWithPassword({
       email,
       password
@@ -375,9 +375,9 @@ export class SupabaseAdapter implements BackendAdapter {
 
 // Supabase Query Builder implementation
 class SupabaseQueryBuilder<T> implements QueryBuilder<T> {
-  private, query: any
+  private query: any
 
-  constructor(private, client: SupabaseClient, collection: string) {
+  constructor(private client: SupabaseClient, collection: string) {
     this.query = this.client.from(collection).select('*')
   }
 

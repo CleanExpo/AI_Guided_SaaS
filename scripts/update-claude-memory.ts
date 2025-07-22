@@ -21,7 +21,7 @@ interface MemorySection {
 
 class ClaudeMemoryUpdater {
   private claudeMdPath = path.join(process.cwd(), 'CLAUDE.md');
-  private, sections: MemorySection[] = [];
+  private sections: MemorySection[] = [];
 
   async updateMemory(): Promise<void> {
     console.log('🧠 Updating CLAUDE.md with latest project status...\n');

@@ -1,0 +1,203 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+
+console.log('🔧 Fixing JSX Unclosed Tags\n');
+
+// Find all TypeScript files
+const files = glob.sync('**/*.{tsx}', {
+  ignore: ['node_modules/**', 'dist/**', '.next/**', 'mcp/node_modules/**'],
+  cwd: process.cwd()
+});
+
+let totalFixed = 0;
+let filesFixed = 0;
+
+function analyzeJSXStructure(content) {
+  const lines = content.split('\n');
+  const tagStack = [];
+  const issues = [];
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    
+    // Find opening tags
+    const openingTags = line.match(/<([A-Za-z][A-Za-z0-9]*)\b[^>]*(?<!\/|%)>/g) || [];
+    for (const tag of openingTags) {
+      const tagName = tag.match(/<([A-Za-z][A-Za-z0-9]*)/)[1];
+      tagStack.push({ tag: tagName, line: i });
+    }
+    
+    // Find closing tags
+    const closingTags = line.match(/<\/([A-Za-z][A-Za-z0-9]*)>/g) || [];
+    for (const tag of closingTags) {
+      const tagName = tag.match(/<\/([A-Za-z][A-Za-z0-9]*)>/)[1];
+      
+      // Check if it matches the last opening tag
+      if (tagStack.length > 0 && tagStack[tagStack.length - 1].tag === tagName) {
+        tagStack.pop();
+      } else {
+        // Mismatched closing tag
+        issues.push({
+          type: 'mismatch',
+          line: i,
+          tag: tagName,
+          expected: tagStack.length > 0 ? tagStack[tagStack.length - 1].tag : null
+        });
+      }
+    }
+    
+    // Check for self-closing tags
+    const selfClosingTags = line.match(/<[A-Za-z][A-Za-z0-9]*[^>]*\/>/g) || [];
+    // These don't need closing tags
+  }
+  
+  // Remaining tags in stack are unclosed
+  for (const unclosed of tagStack) {
+    issues.push({
+      type: 'unclosed',
+      line: unclosed.line,
+      tag: unclosed.tag
+    });
+  }
+  
+  return issues;
+}
+
+function fixJSXFile(content, filePath) {
+  const lines = content.split('\n');
+  let fixed = [...lines];
+  let changeCount = 0;
+
+  // Fix pattern 1: Remove lines that are just closing tags with parentheses
+  for (let i = 0; i < fixed.length; i++) {
+    if (fixed[i].match(/^\s*<\/\w+>\s*\)\s*;?\s*$/)) {
+      fixed[i] = fixed[i].replace(/<\/\w+>\s*/, '');
+      changeCount++;
+    }
+  }
+
+  // Fix pattern 2: Fix return statements with broken JSX
+  for (let i = 0; i < fixed.length; i++) {
+    if (fixed[i].includes('return (') && i + 1 < fixed.length) {
+      if (fixed[i + 1].match(/^\s*<\/\w+>/)) {
+        fixed[i + 1] = fixed[i + 1].replace(/^\s*<\/\w+>\s*/, '');
+        changeCount++;
+      }
+    }
+  }
+
+  // Fix pattern 3: Fix lines ending with `)` but having JSX closing tags after
+  for (let i = 0; i < fixed.length; i++) {
+    if (fixed[i].match(/\)\s*;?\s*$/)) {
+      // Check if there's a closing tag on the same line after the parenthesis
+      fixed[i] = fixed[i].replace(/\)\s*<\/(\w+)>\s*;?\s*$/, ')');
+      if (fixed[i] !== lines[i]) changeCount++;
+    }
+  }
+
+  // Fix pattern 4: Common broken patterns in specific components
+  const fixedContent = fixed.join('\n')
+    // Fix loading states
+    .replace(/<p className="text-muted-foreground">Loading[^<]*<\/p>\);/g, 
+             '<p className="text-muted-foreground">Loading...</p>\n        </div>\n      </div>\n    );')
+    // Fix retry buttons
+    .replace(/🔄 Retry<\/Button>\);/g, '🔄 Retry</Button>\n        </div>\n      </div>\n    );')
+    // Fix analytics specific issues
+    .replace(/sessions<\/Badge>\)\)\}/g, 'sessions</Badge>\n                      </div>\n                    </div>\n                  ))}')
+    // Fix percentage spans
+    .replace(/{page\.percentage}%<\/span>\)\)\}/g, '{page.percentage}%</span>\n                    </div>\n                  </div>\n                ))}')
+    // Fix debug pages
+    .replace(/If you see this page, admin routes are accessible\.<\/p>\)/g, 
+             'If you see this page, admin routes are accessible.</p>\n        </div>\n      </div>\n    );')
+    // Fix admin pages
+    .replace(/Redirecting to admin panel\.\.\.<\/p>\)/g, 
+             'Redirecting to admin panel...</p>\n      </div>\n    </div>\n  );')
+    // Fix loading states for admin
+    .replace(/Loading admin dashboard\.\.\.<\/p>\)/g, 
+             'Loading admin dashboard...</p>\n        </div>\n      </div>\n    );');
+    
+  if (fixedContent !== content) {
+    changeCount++;
+    return { fixed: fixedContent, changeCount };
+  }
+
+  return { fixed: fixed.join('\n'), changeCount };
+}
+
+// Process each file
+files.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  const content = fs.readFileSync(filePath, 'utf8');
+  
+  // First analyze issues
+  const issues = analyzeJSXStructure(content);
+  
+  if (issues.length > 0) {
+    console.log(`\n📋 ${file}: Found ${issues.length} issues`);
+    
+    // Apply fixes
+    const { fixed, changeCount } = fixJSXFile(content, filePath);
+    
+    if (changeCount > 0) {
+      fs.writeFileSync(filePath, fixed);
+      console.log(`✅ Fixed ${changeCount} issues`);
+      totalFixed += changeCount;
+      filesFixed++;
+    }
+  }
+});
+
+console.log(`\n📊 Summary:`);
+console.log(`Fixed ${totalFixed} issues in ${filesFixed} files`);
+
+// Special handler for specific problem files
+const problemFiles = [
+  'src/app/about/page.tsx',
+  'src/app/admin-direct/page.tsx',
+  'src/app/admin/agent-monitor/page.tsx',
+  'src/app/admin/analytics/page.tsx',
+  'src/app/admin/causal/page.tsx',
+  'src/app/admin/dashboard/page.tsx',
+  'src/app/admin/debug/page.tsx',
+  'src/app/analytics/page.tsx'
+];
+
+console.log('\n🔧 Fixing known problem files...\n');
+
+problemFiles.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  if (fs.existsSync(filePath)) {
+    let content = fs.readFileSync(filePath, 'utf8');
+    let originalContent = content;
+    
+    // More aggressive fixes for these files
+    content = content
+      // Fix all patterns with closing tags after parentheses
+      .replace(/\)\s*<\/\w+>\s*;?\s*$/gm, ');')
+      // Fix all broken return statements
+      .replace(/return \(\s*<\/\w+>/g, 'return (')
+      // Fix unclosed divs in specific contexts
+      .replace(/(<div[^>]*>)\s*(<div[^>]*>)\s*(<div[^>]*>)([^<]*<\/div>)\s*\)\s*;/g, 
+               '$1\n      $2\n        $3$4\n        </div>\n      </div>\n    );')
+      // Fix header structures
+      .replace(/(<header[^>]*>)\s*(<div[^>]*>)\s*(<div[^>]*>)([\s\S]*?)(<\/div>)\s*(<\/header>)/g,
+               (match, h1, d1, d2, content, cd1, ch) => {
+                 const divCount = (content.match(/<div[^>]*>/g) || []).length;
+                 const closeDivCount = (content.match(/<\/div>/g) || []).length;
+                 const needsClosing = divCount - closeDivCount + 2;
+                 let closingTags = '';
+                 for (let i = 0; i < needsClosing; i++) {
+                   closingTags += '        </div>\n';
+                 }
+                 return `${h1}\n      ${d1}\n        ${d2}${content}${closingTags}      ${ch}`;
+               });
+    
+    if (content !== originalContent) {
+      fs.writeFileSync(filePath, content);
+      console.log(`✅ Fixed ${file}`);
+    }
+  }
+});

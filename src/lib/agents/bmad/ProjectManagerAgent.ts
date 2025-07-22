@@ -3,73 +3,100 @@ import { generateAIResponse } from '@/lib/ai'
 import { RequirementAnalysis, UserStory } from './AnalystAgent'
 
 export interface ProjectPlan {
-  projectName: string, projectDescription: string, timeline: Timeline, milestones: Milestone[]
+  projectName: string;
+  projectDescription: string;
+  timeline: Timeline;
+  milestones: Milestone[];
   workBreakdown: WorkPackage[]
-  resourceAllocation: ResourcePlan, riskMitigation: RiskMitigation[]
-  communicationPlan: CommunicationPlan, qualityAssurance: QualityPlan
+  resourceAllocation: ResourcePlan;
+  riskMitigation: RiskMitigation[];
+  communicationPlan: CommunicationPlan;
+  qualityAssurance: QualityPlan
 }
 
 export interface Timeline {
-  startDate: string, endDate: string, totalDuration: string, phases: Phase[]
+  startDate: string;
+  endDate: string;
+  totalDuration: string;
+  phases: Phase[]
 }
 
 export interface Phase {
-  name: string, startDate: string, endDate: string, deliverables: string[]
+  name: string;
+  startDate: string;
+  endDate: string;
+  deliverables: string[];
   dependencies: string[]
 }
 
 export interface Milestone {
-  id: string, name: string, date: string, criteria: string[]
+  id: string;
+  name: string;
+  date: string;
+  criteria: string[];
   deliverables: string[]
 }
 
 export interface WorkPackage {
-  id: string, name: string, description: string, assignedTo: string[]
-  estimatedHours: number, dependencies: string[]
+  id: string;
+  name: string;
+  description: string;
+  assignedTo: string[];
+  estimatedHours: number;
+  dependencies: string[];
   deliverables: string[]
   priority: 'critical' | 'high' | 'medium' | 'low'
 }
 
 export interface ResourcePlan {
-  teamStructure: TeamMember[]
+  teamStructure: TeamMember[];
   skillsRequired: string[]
-  toolsRequired: string[]
+  toolsRequired: string[];
   externalDependencies: string[]
 }
 
 export interface TeamMember {
-  role: string, responsibilities: string[]
+  role: string;
+  responsibilities: string[];
   skillsNeeded: string[]
   allocation: number // percentage
 }
 
 export interface RiskMitigation {
-  risk: string, probability: 'high' | 'medium' | 'low'
+  risk: string;
+  probability: 'high' | 'medium' | 'low'
   impact: 'high' | 'medium' | 'low'
-  mitigationStrategy: string, contingencyPlan: string, owner: string
+  mitigationStrategy: string;
+  contingencyPlan: string;
+  owner: string
 }
 
 export interface CommunicationPlan {
-  stakeholders: Stakeholder[]
+  stakeholders: Stakeholder[];
   meetings: Meeting[]
-  reportingSchedule: string, escalationPath: string[]
+  reportingSchedule: string;
+  escalationPath: string[]
 }
 
 export interface Stakeholder {
-  name: string, role: string, interest: 'high' | 'medium' | 'low'
+  name: string;
+  role: string;
+  interest: 'high' | 'medium' | 'low'
   influence: 'high' | 'medium' | 'low'
   communicationNeeds: string[]
 }
 
 export interface Meeting {
-  type: string, frequency: string, participants: string[]
+  type: string;
+  frequency: string;
+  participants: string[];
   purpose: string
 }
 
 export interface QualityPlan {
-  standards: string[]
+  standards: string[];
   reviewProcess: string[]
-  testingStrategy: string[]
+  testingStrategy: string[];
   acceptanceCriteria: string[]
   metrics: string[]
 }
@@ -192,7 +219,7 @@ export class ProjectManagerAgent extends Agent {
   private async defineProjectScope(
     input: string, 
     requirements: string[]
-  ): Promise<{ name: string; description: string; objectives: string[] }> {
+  ): Promise<{ name: string, description: string; objectives: string[] }> {
     const prompt = `Based on the project description and requirements, define the project, scope:
 
 Project, Description:
@@ -223,7 +250,7 @@ Format as JSON.`
     constraints: string[]
   ): Promise<Timeline> {
     const prompt = `Create a realistic project timeline based, on:
-
+,
 Project: ${projectScope.name}
 User, Stories: ${userStories.length} stories, Constraints: ${constraints.join(', ')}
 
@@ -351,7 +378,7 @@ Format as JSON ResourcePlan object.`
     risks: string[],
     projectScope): Promise<RiskMitigation[]> {
     const prompt = `Create risk mitigation plans for identified, risks:
-
+,
 Project: ${projectScope.name}
 Identified, Risks:
 ${risks.join('\n')}
@@ -379,7 +406,7 @@ Format as JSON array of RiskMitigation objects.`
     resourcePlan: ResourcePlan
   ): Promise<CommunicationPlan> {
     const prompt = `Create a communication plan for the, project:
-
+,
 Project: ${projectScope.name}
 Team, Structure:
 ${JSON.stringify(resourcePlan.teamStructure, null, 2)}

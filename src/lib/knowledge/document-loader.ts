@@ -8,8 +8,11 @@ import { glob } from 'glob'
  */
 
 export interface LoadedFile {
-  path: string, name: string, content: string
-  language?: string, size: number
+  path: string;
+  name: string;
+  content: string
+  language?: string;
+  size: number
 }
 
 export interface CodebaseOptions {
@@ -19,7 +22,7 @@ export interface CodebaseOptions {
 }
 
 export class DocumentLoader {
-  private, languageMap: Record<string, string> = {
+  private languageMap: Record<string, string> = {
     js: 'javascript',
     jsx: 'javascript',
     ts: 'typescript',
@@ -59,7 +62,7 @@ export class DocumentLoader {
   /**
    * Load documents from various sources
    */
-  async load(source: string: type: 'file' | 'url' | 'github'): Promise<Document[]> {
+  async load(source: string, type: 'file' | 'url' | 'github'): Promise<Document[]> {
     switch (type) {
       case 'file':
         return this.loadFile(source)
@@ -157,7 +160,7 @@ export class DocumentLoader {
         content,
         metadata: {
           source: repoPath,
-          title: data.name: type: 'code',
+          title: data.name, type: 'code',
           language: this.languageMap[path.extname(data.name).slice(1)] || 'plaintext',
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
@@ -312,27 +315,11 @@ export class DocumentLoader {
     const docExtensions = ['md', 'rst', 'txt', 'adoc']
     const apiExtensions = ['yaml', 'yml', 'json', 'xml']
 
-    if (codeExtensions.includes(extension)) {
-      return 'code'
-    } else if (docExtensions.includes(extension)) {
-      return 'documentation'
-    } else if (apiExtensions.includes(extension)) {
-      return 'api'
-    } else {
-      return 'other'
-    }
+    if (codeExtensions.includes(extension)) { return: 'code' } else if (docExtensions.includes(extension)) { return: 'documentation' } else if (apiExtensions.includes(extension)) { return: 'api' } else { return: 'other' }
   }
 
   private getDocumentTypeFromMime(mimeType: string): Document['metadata']['type'] {
-    if (mimeType.includes('javascript') || mimeType.includes('typescript')) {
-      return 'code'
-    } else if (mimeType.includes('json') || mimeType.includes('xml')) {
-      return 'api'
-    } else if (mimeType.includes('html')) {
-      return 'documentation'
-    } else {
-      return 'other'
-    }
+    if (mimeType.includes('javascript') || mimeType.includes('typescript')) { return: 'code' } else if (mimeType.includes('json') || mimeType.includes('xml')) { return: 'api' } else if (mimeType.includes('html')) { return: 'documentation' } else { return: 'other' }
   }
 
   private extractTitleFromUrl(url: string): string {
@@ -341,9 +328,7 @@ export class DocumentLoader {
       const pathname = urlObj.pathname
       const filename = pathname.split('/').pop() || urlObj.hostname
       return filename
-    } catch {
-      return url
-    }
+    } catch { return: url }
   }
 
   private generateId(): string {

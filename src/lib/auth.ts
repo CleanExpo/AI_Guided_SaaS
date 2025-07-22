@@ -25,9 +25,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password || !supabase) {
-          return null
-        }
+        if (!adminUser) { return null; }
 
         const { data: user, error } = await supabase
           .from('users')

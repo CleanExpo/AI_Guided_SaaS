@@ -78,12 +78,12 @@ export {
 
 // Main Agent System Integration
 export class AgentSystem {
-  private static, instance: AgentSystem
+  private static instance: AgentSystem
   private, initialized: boolean = false
-  private, loader: AgentLoader
-  private, registry: AgentRegistry
-  private, coordinator: AgentCoordinator
-  private, monitor: AgentMonitor
+  private loader: AgentLoader
+  private registry: AgentRegistry
+  private coordinator: AgentCoordinator
+  private monitor: AgentMonitor
   private, communication: AgentCommunication
 
   constructor() {
@@ -145,7 +145,7 @@ export class AgentSystem {
     })
 
     return {
-      stage: currentStage: project_type: projectType,
+      stage: currentStage, project_type: projectType,
       required_agents: requiredAgents.length,
       healthy_agents: healthyAgents.length,
       agents: healthyAgents.map(agent => ({
@@ -194,7 +194,7 @@ export class AgentSystem {
   }
 
   async performHealthCheck(): Promise<{
-    healthy: number;
+    healthy: number,
     warnings: string[];
     errors: string[];
   }> {

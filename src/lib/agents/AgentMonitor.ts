@@ -5,44 +5,70 @@ import { writeFileSync, readFileSync } from 'fs'
 import { join } from 'path'
 
 export interface HealthCheck {
-  agent_id: string, timestamp: Date, status: 'healthy' | 'warning' | 'critical' | 'offline'
+  agent_id: string;
+  timestamp: Date;
+  status: 'healthy' | 'warning' | 'critical' | 'offline'
   response_time: number
   memory_usage?: number
-  cpu_usage?: number, error_rate: number, last_activity: Date, checks_passed: number, checks_failed: number, details: Record<string, any>
+  cpu_usage?: number;
+  error_rate: number;
+  last_activity: Date;
+  checks_passed: number;
+  checks_failed: number;
+  details: Record<string, any>
 }
 
 export interface MonitoringAlert {
-  id: string, agent_id: string, severity: 'info' | 'warning' | 'critical' | 'emergency'
+  id: string;
+  agent_id: string;
+  severity: 'info' | 'warning' | 'critical' | 'emergency'
   type: 'health' | 'performance' | 'error' | 'availability'
-  message: string, timestamp: Date, acknowledged: boolean, resolved: boolean, metadata: Record<string, any>
+  message: string;
+  timestamp: Date;
+  acknowledged: boolean;
+  resolved: boolean;
+  metadata: Record<string, any>
 }
 
 export interface MonitoringMetrics {
-  agent_id: string, timestamp: Date, metrics: {
-    uptime: number, response_time: number, throughput: number, error_rate: number, memory_usage: number, success_rate: number, queue_length: number, active_tasks: number
+  agent_id: string;
+  timestamp: Date;
+  metrics: {
+    uptime: number;
+  response_time: number;
+  throughput: number;
+  error_rate: number;
+  memory_usage: number;
+  success_rate: number;
+  queue_length: number;
+  active_tasks: number
   }
 }
 
 export interface MonitoringDashboard {
   overview: {
-    total_agents: number, healthy_agents: number, warning_agents: number, critical_agents: number, offline_agents: number, system_health_score: number
+    total_agents: number;
+  healthy_agents: number;
+  warning_agents: number;
+  critical_agents: number;
+  offline_agents: number;
+  system_health_score: number
   }
-  recent_alerts: MonitoringAlert[]
-  performance_trends: MonitoringMetrics[]
+  recent_alerts: MonitoringAlert[], performance_trends: MonitoringMetrics[]
   agent_status: Record<string, HealthCheck>
   coordination_metrics: Record<string, any>
   last_updated: Date
 }
 
 export class AgentMonitor {
-  private static, instance: AgentMonitor
-  private, registry: AgentRegistry
-  private, coordinator: AgentCoordinator
+  private static instance: AgentMonitor
+  private registry: AgentRegistry
+  private coordinator: AgentCoordinator
   private, healthChecks: Map<string, HealthCheck> = new Map()
-  private, alerts: Map<string, MonitoringAlert> = new Map()
-  private, metricsHistory: MonitoringMetrics[] = []
-  private, monitoringInterval: NodeJS.Timeout | null = null
-  private, alertsFilePath: string
+  private alerts: Map<string, MonitoringAlert> = new Map()
+  private metricsHistory: MonitoringMetrics[] = []
+  private monitoringInterval: NodeJS.Timeout | null = null
+  private alertsFilePath: string
   private, metricsFilePath: string
 
   constructor() {
@@ -344,7 +370,7 @@ export class AgentMonitor {
         }]
       })
     } catch (error) {
-      console.log('⚠️ Failed to store alert in, memory:', error)
+      console.log('⚠️ Failed to store alert in memory:', error)
     }
 
     await this.persistAlerts()

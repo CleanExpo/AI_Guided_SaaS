@@ -1,0 +1,218 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+
+console.log('🔧 Comprehensive JSX/TypeScript Fixer\n');
+
+// Find all TypeScript files
+const files = glob.sync('**/*.{ts,tsx}', {
+  ignore: ['node_modules/**', 'dist/**', '.next/**', 'mcp/node_modules/**'],
+  cwd: process.cwd()
+});
+
+let totalFixed = 0;
+let filesFixed = 0;
+
+function fixJSXFile(content, filePath) {
+  let fixed = content;
+  let changeCount = 0;
+
+  // Fix 1: Remove duplicate closing tags
+  const tagPattern = /<\/(\w+)>\s*<\/\1>/g;
+  while (tagPattern.test(fixed)) {
+    fixed = fixed.replace(tagPattern, '</$1>');
+    changeCount++;
+  }
+
+  // Fix 2: Fix className with commas - more comprehensive
+  fixed = fixed.replace(/className="([^"]*?)"/g, (match, classes) => {
+    if (classes.includes(',')) {
+      const fixedClasses = classes
+        .split(',')
+        .map(c => c.trim())
+        .filter(c => c)
+        .join(' ');
+      changeCount++;
+      return `className="${fixedClasses}"`;
+    }
+    return match;
+  });
+
+  // Fix 3: Fix grid classes specifically
+  fixed = fixed.replace(/className="([^"]*grid[^"]*?)"/g, (match, classes) => {
+    const fixedClasses = classes
+      .replace(/gap-(\d+),\s*/g, 'gap-$1 ')
+      .replace(/,\s*md:/g, ' md:')
+      .replace(/,\s*lg:/g, ' lg:')
+      .replace(/,\s*xl:/g, ' xl:')
+      .replace(/,\s*sm:/g, ' sm:')
+      .replace(/,\s*hover:/g, ' hover:')
+      .replace(/,\s*focus:/g, ' focus:')
+      .trim();
+    if (fixedClasses !== classes) {
+      changeCount++;
+      return `className="${fixedClasses}"`;
+    }
+    return match;
+  });
+
+  // Fix 4: Fix broken JSX structure - remove stray closing divs after closing tags
+  fixed = fixed.replace(/<\/(\w+)>\s*<\/div>\s*\)/g, '</$1>)');
+  
+  // Fix 5: Fix broken return statements with extra closing tags
+  fixed = fixed.replace(/\);\s*<\/(\w+)>/g, ');');
+  
+  // Fix 6: Fix duplicate component closing tags in the middle of JSX
+  fixed = fixed.replace(/<\/(\w+)>\s*\n\s*<\/\1>/g, '</$1>');
+  
+  // Fix 7: Fix broken divs with immediate closing after text
+  fixed = fixed.replace(/>([^<]+)<\/div>\s*<\/div>/g, (match, text) => {
+    if (!text.includes('<')) {
+      changeCount++;
+      return `>${text}</div>`;
+    }
+    return match;
+  });
+
+  // Fix 8: Fix parameter syntax (: type: param:) in function definitions
+  fixed = fixed.replace(/(\w+):\s*(\w+(?:<[^>]+>)?(?:\[\])?)\s*:\s*(\w+):/g, (match, p1, p2, p3) => {
+    changeCount++;
+    return `${p1}: ${p2}, ${p3}:`;
+  });
+
+  // Fix 9: Fix object syntax issues
+  fixed = fixed.replace(/:\s*([^,:}\s]+)\s*:\s*(\w+)\s*:/g, ': $1, $2:');
+
+  // Fix 10: Remove </AnalyticsData> and similar incorrect closing tags
+  fixed = fixed.replace(/<\/[A-Z]\w+Data>/g, '');
+  
+  // Fix 11: Fix hover: syntax in classNames
+  fixed = fixed.replace(/(\w+):\s*(\w+),\s*hover:(\w+)/g, '$1:$2 hover:$3');
+
+  // Fix 12: Fix Button closing tag appearing twice
+  fixed = fixed.replace(/<\/Button>\s*<\/Button>/g, '</Button>');
+
+  // Fix 13: Fix specific patterns found in analytics page
+  fixed = fixed.replace(/return \(\s*<\/\w+>/g, 'return (');
+  
+  // Fix 14: Fix CardTitle/CardDescription double closing
+  fixed = fixed.replace(/<\/CardTitle>\s*<\/CardTitle>/g, '</CardTitle>');
+  fixed = fixed.replace(/<\/CardDescription>\s*<\/CardDescription>/g, '</CardDescription>');
+  
+  // Fix 15: Fix component opening after map
+  fixed = fixed.replace(/\.map\([^)]+\)\s*=>\s*\(<\/\w+>/g, (match) => {
+    return match.replace(/<\/\w+>/, '');
+  });
+
+  // Fix 16: Fix interface syntax on single line
+  const interfacePattern = /interface\s+\w+\s*{([^}]+)}/g;
+  fixed = fixed.replace(interfacePattern, (match, content) => {
+    if (!content.includes('\n') && content.includes(':')) {
+      const props = content.split(',').map(p => p.trim()).filter(p => p);
+      if (props.length > 1) {
+        changeCount++;
+        return match.replace(content, '\n  ' + props.join(';\n  ') + ';\n');
+      }
+    }
+    return match;
+  });
+
+  // Fix 17: Fix switch case with comma before case
+  fixed = fixed.replace(/,\s*case\s+(\d+):/g, '\n    case $1:');
+
+  // Fix 18: Fix typography in JSX
+  fixed = fixed.replace(/console\.log\('([^']+):\s*',\s*([^)]+)\)/g, (match, text, variable) => {
+    changeCount++;
+    return `console.log('${text}:', ${variable})`;
+  });
+
+  return { fixed, changeCount };
+}
+
+// Process each file
+files.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  const content = fs.readFileSync(filePath, 'utf8');
+  
+  const { fixed, changeCount } = fixJSXFile(content, filePath);
+  
+  if (changeCount > 0) {
+    fs.writeFileSync(filePath, fixed);
+    console.log(`✅ Fixed ${changeCount} issues in ${file}`);
+    totalFixed += changeCount;
+    filesFixed++;
+  }
+});
+
+console.log(`\n📊 Summary:`);
+console.log(`Fixed ${totalFixed} issues in ${filesFixed} files`);
+
+// Now run a second pass for more complex patterns
+console.log('\n🔄 Running second pass for complex patterns...\n');
+
+let secondPassFixed = 0;
+let secondPassFiles = 0;
+
+files.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  let content = fs.readFileSync(filePath, 'utf8');
+  let originalContent = content;
+  let localChanges = 0;
+
+  // Complex Fix 1: Fix JSX elements that span multiple lines with broken structure
+  const lines = content.split('\n');
+  const fixedLines = [];
+  let inJSX = false;
+  let jsxDepth = 0;
+  let componentStack = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    
+    // Track JSX depth
+    const openTags = line.match(/<(\w+)[^>]*>/g) || [];
+    const closeTags = line.match(/<\/(\w+)>/g) || [];
+    
+    openTags.forEach(tag => {
+      const tagName = tag.match(/<(\w+)/)[1];
+      if (tagName && tagName[0] === tagName[0].toUpperCase()) {
+        componentStack.push(tagName);
+      }
+    });
+    
+    closeTags.forEach(tag => {
+      const tagName = tag.match(/<\/(\w+)>/)[1];
+      if (componentStack[componentStack.length - 1] === tagName) {
+        componentStack.pop();
+      }
+    });
+    
+    // Fix duplicate closing tags on the same line
+    const uniqueClosingTags = {};
+    line = line.replace(/<\/(\w+)>/g, (match, tagName) => {
+      if (uniqueClosingTags[tagName]) {
+        localChanges++;
+        return '';
+      }
+      uniqueClosingTags[tagName] = true;
+      return match;
+    });
+    
+    fixedLines.push(line);
+  }
+
+  content = fixedLines.join('\n');
+
+  if (content !== originalContent) {
+    fs.writeFileSync(filePath, content);
+    console.log(`✅ Second pass: Fixed ${localChanges} issues in ${file}`);
+    secondPassFixed += localChanges;
+    secondPassFiles++;
+  }
+});
+
+console.log(`\n📊 Second Pass Summary:`);
+console.log(`Fixed ${secondPassFixed} additional issues in ${secondPassFiles} files`);
+console.log(`\n✅ Total: Fixed ${totalFixed + secondPassFixed} issues in ${filesFixed + secondPassFiles} files`);

@@ -23,18 +23,18 @@ import {
 interface EnvStatus {
   summary: {
     total: number;
-    valid: number;
+  valid: number;
     missing: number;
     invalid: number;
     warnings: number;
   };
   isValid: boolean;
   services: Record<string, {
-    name: string;
+    name: string,
     category: string;
     status: string;
     variables: Record<string, {
-      set: boolean;
+      set: boolean,
       required: boolean;
       status: string;
       message: string;
@@ -42,7 +42,7 @@ interface EnvStatus {
   }>;
   environment: string;
 }
-
+</string>
 const categoryIcons: Record<string, any> = {
   database: Database,
   cache: Zap,
@@ -51,7 +51,8 @@ const categoryIcons: Record<string, any> = {
   deployment: Cloud,
   payments: CreditCard};
 
-export function EnvStatusDashboard() {
+export function EnvStatusDashboard() {</string>
+      </EnvStatus>
   const [status, setStatus] = useState<EnvStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
@@ -115,20 +116,17 @@ export function EnvStatusDashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8">
-        <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
+      <div className="flex items-center justify-center p-8"></div>
+        <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" /></RefreshCw>
     );
   }
 
   if (!status) {
     return (
-      <Alert>
-        <AlertTriangle className="h-4 w-4" />
+      <Alert></Alert>
+        <AlertTriangle className="h-4 w-4" /></AlertTriangle>
         <AlertDescription>
-          Failed to load environment status
-        </AlertDescription>
-      </Alert>
+          Failed to load environment status</AlertDescription>
     );
   }
 
@@ -136,81 +134,63 @@ export function EnvStatusDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Summary Card */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
+      {/* Summary Card */}</div>
+      <Card></Card>
+        <CardHeader></CardHeader>
+          <div className="flex items-center justify-between"></div>
+            <div></div>
               <CardTitle>Environment Variables Status</CardTitle>
               <CardDescription>
-                {status.environment} environment
-              </CardDescription>
-            </div>
-            <div className="flex gap-2">
+                {status.environment} environment</CardDescription>
+            <div className="flex gap-2"></div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleSync}
                 disabled={syncing}
-              >
+              ></Button>
                 <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
-                Sync
-              </Button>
+                Sync</RefreshCw>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleCompact}
                 disabled={compacting}
               >
-                Compact
-              </Button>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
+                Compact</Button>
+        <CardContent></CardContent>
+          <div className="space-y-4"></div>
+            <div className="flex items-center justify-between"></div>
               <div className="flex items-center gap-2">
-                {status.isValid ? (
+                {status.isValid ? (</div>
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
-                ) : (
+                ) : (</CheckCircle2>
                   <XCircle className="h-5 w-5 text-red-500" />
-                )}
+                )}</XCircle>
                 <span className="font-medium">
-                  {status.isValid ? 'Configuration Valid' : 'Configuration Has Issues'}
-                </span>
-              </div>
+                  {status.isValid ? 'Configuration Valid' : 'Configuration Has Issues'}</span>
               <Badge variant={status.isValid ? 'default' : 'destructive'}>
-                {healthPercentage.toFixed(0)}% Healthy
-              </Badge>
-            </div>
+                {healthPercentage.toFixed(0)}% Healthy</Badge>
             
             <Progress value={healthPercentage} className="h-2" />
-            
-            <div className="grid grid-cols-2, md:grid-cols-4 gap-4 text-sm">
-              <div className="text-center">
+            </Progress>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm"></div>
+              <div className="text-center"></div>
                 <div className="text-2xl font-bold">{status.summary.total}</div>
                 <div className="text-muted-foreground">Total</div>
-              </div>
-              <div className="text-center">
+              <div className="text-center"></div>
                 <div className="text-2xl font-bold text-green-500">{status.summary.valid}</div>
                 <div className="text-muted-foreground">Valid</div>
-              </div>
-              <div className="text-center">
+              <div className="text-center"></div>
                 <div className="text-2xl font-bold text-red-500">{status.summary.missing}</div>
                 <div className="text-muted-foreground">Missing</div>
-              </div>
-              <div className="text-center">
+              <div className="text-center"></div>
                 <div className="text-2xl font-bold text-yellow-500">{status.summary.warnings}</div>
                 <div className="text-muted-foreground">Warnings</div>
-              </div>
-            </div>
-          </div>
         </CardContent>
-      </Card>
 
       {/* Service Cards */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {Object.entries(status.services).map(([key, service]) => {
           const Icon = categoryIcons[service.category] || Shield;
           const variables = Object.entries(service.variables);
@@ -218,41 +198,35 @@ export function EnvStatusDashboard() {
           const isHealthy = validCount === variables.length;
           
           return (
-            <Card key={key} className={service.status === 'disabled' ? 'opacity-50' : ''}>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Icon className="h-5 w-5 text-muted-foreground" />
+            <Card key={key} className={service.status === 'disabled' ? 'opacity-50' : ''}></Card>
+              <CardHeader></CardHeader>
+                <div className="flex items-center justify-between"></div>
+                  <div className="flex items-center gap-2"></div>
+                    <Icon className="h-5 w-5 text-muted-foreground" /></Icon>
                     <CardTitle className="text-base">{service.name}</CardTitle>
-                  </div>
                   <Badge variant={isHealthy ? 'default' : 'secondary'}>
-                    {validCount}/{variables.length}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
+                    {validCount}/{variables.length}</Badge>
+              <CardContent></CardContent>
                 <div className="space-y-2">
-                  {variables.map(([varName, varStatus]) => (
-                    <div key={varName} className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2">
-                        {varStatus.status === '✅' && <CheckCircle2 className="h-4 w-4 text-green-500" />}
-                        {varStatus.status === '❌' && <XCircle className="h-4 w-4 text-red-500" />}
-                        {varStatus.status === '⚠️' && <AlertTriangle className="h-4 w-4 text-yellow-500" />}
+                  {variables.map(([varName, varStatus]) => (</div>
+                    <div key={varName} className="flex items-center justify-between text-sm"></div>
+                      <div className="flex items-center gap-2"></div>
+                        {varStatus.status === '✅' && <CheckCircle2 className="h-4 w-4 text-green-500" />}</CheckCircle2>
+                        {varStatus.status === '❌' && <XCircle className="h-4 w-4 text-red-500" />}</XCircle>
+                        {varStatus.status === '⚠️' && <AlertTriangle className="h-4 w-4 text-yellow-500" />}</AlertTriangle>
                         <span className={`${varStatus.required ? 'font-medium' : ''} ${varStatus.set ? '' : 'text-muted-foreground'}`}>
-                          {varName}
-                        </span>
-                      </div>
+                          {varName}</span>
                       {varStatus.required && !varStatus.set && (
                         <Badge variant="destructive" className="text-xs">Required</Badge>
                       )}
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
+    );
+        }
+      )}
     </div>
-  );
+    );
+      );
 }
+</EnvStatus>

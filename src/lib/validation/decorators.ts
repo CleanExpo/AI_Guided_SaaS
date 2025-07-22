@@ -11,7 +11,7 @@ type ValidationOptions = {
 // Validation error class
 export class ValidationError extends Error {
   constructor(
-    public, errors: z.ZodError,
+    public errors: z.ZodError,
     message = 'Validation failed'
   ) {
     super(message)
@@ -294,7 +294,7 @@ export async function validateAsync<T>(
 export function safeParse<T>(
   schema: z.ZodSchema<T>,
   data: unknown
-): { success: true; data: T } | { success: false; error: ValidationError } {
+): { success: true, data: T } | { success: false, error: ValidationError } {
   const result = schema.safeParse(data)
   
   if (result.success) {

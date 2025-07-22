@@ -13,7 +13,7 @@ interface MCPIntegration {
 }
 
 class MCPAutonomousIntegration {
-  private, integrationSteps: MCPIntegration[] = [
+  private integrationSteps: MCPIntegration[] = [
     {
       step: 1,
       name: 'Analyze Current Errors',
@@ -70,19 +70,19 @@ class MCPAutonomousIntegration {
 
   private async executeStep(step: MCPIntegration): Promise<void> {
     switch (step.step) {
-      case, 1:
+      case 1:
         await this.runDocumentationFinder();
         break;
-      case, 2:
+      case 2:
         await this.simulateContext7Retrieval();
         break;
-      case, 3:
+      case 3:
         await this.simulateSequentialThinking();
         break;
-      case, 4:
+      case 4:
         await this.runFixApplicator();
         break;
-      case, 5:
+      case 5:
         await this.runHealthCheck();
         break;
     }

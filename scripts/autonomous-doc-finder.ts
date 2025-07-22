@@ -21,7 +21,7 @@ interface DocumentationMatch {
 }
 
 class AutonomousDocumentationFinder {
-  private, errors: TypeScriptError[] = [];
+  private errors: TypeScriptError[] = [];
   private documentationCache = new Map<string, string>();
   private fixStrategies = new Map<string, string>();
 

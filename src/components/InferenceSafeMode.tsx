@@ -38,7 +38,9 @@ interface TelemetryStats {
 
 export function InferenceSafeMode() {
   const [enabled, setEnabled] = useState(true);
+      </EPCStatus>
   const [status, setStatus] = useState<EPCStatus | null>(null);
+      </TelemetryStats>
   const [stats, setStats] = useState<TelemetryStats | null>(null);
   const [checking, setChecking] = useState(false);
   const [autoHeal, setAutoHeal] = useState(false);
@@ -104,11 +106,11 @@ export function InferenceSafeMode() {
     if (!status) return null;
     
     switch (status.env_check) {
-      case 'pass':
+      case 'pass':</TelemetryStats>
         return <CheckCircle2 className="h-5 w-5 text-green-500" />;
-      case 'warning':
+      case 'warning':</CheckCircle2>
         return <AlertTriangle className="h-5 w-5 text-yellow-500" />;
-      case 'fail':
+      case 'fail':</AlertTriangle>
         return <XCircle className="h-5 w-5 text-red-500" />;
     }
   };
@@ -128,85 +130,69 @@ export function InferenceSafeMode() {
 
   return (
     <div className="space-y-4">
-      {/* Main, Control Card */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-muted-foreground" />
+      {/* Main, Control Card */}</div>
+      <Card></Card>
+        <CardHeader></CardHeader>
+          <div className="flex items-center justify-between"></div>
+            <div className="flex items-center gap-2"></div>
+              <Shield className="h-5 w-5 text-muted-foreground" /></Shield>
               <CardTitle>Inference Safe Mode</CardTitle>
-            </div>
             <Switch
               checked={enabled}
               onCheckedChange={setEnabled}
               aria-label="Toggle inference safe mode"
-            />
-          </div>
+            /></Switch>
           <CardDescription>
-            Protect your AI credits by validating environment before inference
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+            Protect your AI credits by validating environment before inference</CardDescription>
+        <CardContent></CardContent>
           <div className="space-y-4">
-            {/* Status, Display */}
-            <div className="flex items-center justify-between p-4 border rounded-lg">
+            {/* Status, Display */}</div>
+            <div className="flex items-center justify-between p-4 border rounded-lg"></div>
               <div className="flex items-center gap-3">
-                {getStatusIcon()}
-                <div>
+                {getStatusIcon()}</div>
+                <div></div>
                   <p className="font-medium">Environment Status</p>
                   <p className="text-sm text-muted-foreground">
-                    {status?.score ? `${status.score}% confidence` : 'Checking...'}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
+                    {status?.score ? `${status.score}% confidence` : 'Checking...'}</p>
+              <div className="flex items-center gap-2"></div>
                 <Badge variant={getStatusColor()}>
-                  {status?.env_check || 'Unknown'}
-                </Badge>
+                  {status?.env_check || 'Unknown'}</Badge>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={checkEnvironment}
                   disabled={checking}
-                >
-                  <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`} />
-                </Button>
-              </div>
-            </div>
+                ></Button>
+                  <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`} /></RefreshCw>
 
             {/* Issues, Display */}
             {status?.issues && status.issues.length > 0 && (
-              <Alert>
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription>
-                  <div className="space-y-1">
-                    <p className="font-medium">Environment: Issues:</p>
+              <Alert></Alert>
+                <AlertTriangle className="h-4 w-4" /></AlertTriangle>
+                <AlertDescription></AlertDescription>
+                  <div className="space-y-1"></div>
+                    <p className="font-medium">Environment: Issues,</p>
                     <ul className="list-disc list-inside text-sm">
-                      {status.issues.slice(0, 3).map((issue, i) => (
+                      {status.issues.slice(0, 3).map((issue, i) => (</ul>
                         <li key={i}>{issue}</li>
                       ))}
                       {status.issues.length > 3 && (
                         <li>...and {status.issues.length - 3} more</li>
                       )}
                     </ul>
-                  </div>
-                </AlertDescription>
-              </Alert>
             )}
 
             {/* Self-Healing, Controls */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="auto-heal" className="flex items-center gap-2">
+            <div className="space-y-3"></div>
+              <div className="flex items-center justify-between"></div>
+                <Label htmlFor="auto-heal" className="flex items-center gap-2"></Label>
                   <Zap className="h-4 w-4" />
-                  Auto-heal environment issues
-                </Label>
+                  Auto-heal environment issues</Zap>
                 <Switch
                   id="auto-heal"
                   checked={autoHeal}
                   onCheckedChange={setAutoHeal}
-                />
-              </div>
+                /></Switch>
               
               {status?.issues && status.issues.length > 0 && (
                 <Button
@@ -215,93 +201,71 @@ export function InferenceSafeMode() {
                   className="w-full"
                   variant={autoHeal ? 'default' : 'outline'}
                 >
-                  {healingInProgress ? (
+                  {healingInProgress ? (</Button>
                     <>
                       <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                      Healing in progress...
+                      Healing in progress...</RefreshCw>
                     </>
                   ) : (
                     <>
                       <Zap className="h-4 w-4 mr-2" />
-                      Run Self-Healing
+                      Run Self-Healing</Zap>
                     </>
                   )}
                 </Button>
               )}
             </div>
-          </div>
-        </CardContent>
-      </Card>
 
       {/* Statistics, Card */}
       {stats && (
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-muted-foreground" />
+        <Card></Card>
+          <CardHeader></CardHeader>
+            <div className="flex items-center gap-2"></div>
+              <Activity className="h-5 w-5 text-muted-foreground" /></Activity>
               <CardTitle className="text-base">Inference Statistics</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
+          <CardContent></CardContent>
+            <div className="grid grid-cols-2 gap-4 text-sm"></div>
+              <div></div>
                 <p className="text-muted-foreground">Total Inferences</p>
                 <p className="text-2xl font-bold">{stats.totalInferences}</p>
-              </div>
-              <div>
+              <div></div>
                 <p className="text-muted-foreground">Success Rate</p>
                 <p className="text-2xl font-bold">
                   {stats.totalInferences > 0
                     ? Math.round((stats.successful / stats.totalInferences) * 100)
-                    : 0}%
-                </p>
-              </div>
-              <div>
+                    : 0}%</p>
+              <div></div>
                 <p className="text-muted-foreground">Blocked</p>
                 <p className="text-xl font-semibold text-red-500">{stats.blocked}</p>
-              </div>
-              <div>
+              <div></div>
                 <p className="text-muted-foreground">Saved Cost</p>
                 <p className="text-xl font-semibold text-green-500">
-                  ${((stats.blocked * 0.02) + (stats.failed * 0.01)).toFixed(2)}
-                </p>
-              </div>
-            </div>
+                  ${((stats.blocked * 0.02) + (stats.failed * 0.01)).toFixed(2)}</p>
             
             {stats.totalInferences > 0 && (
-              <div className="mt-4 space-y-2">
-                <div className="flex justify-between text-sm">
+              <div className="mt-4 space-y-2"></div>
+                <div className="flex justify-between text-sm"></div>
                   <span>Inference Health</span>
                   <span>{Math.round((stats.successful / stats.totalInferences) * 100)}%</span>
                 </div>
                 <Progress 
                   value={(stats.successful / stats.totalInferences) * 100} 
                   className="h-2"
-                />
-              </div>
-            )}
-          </CardContent>
-        </Card>
+                /></Progress>)}
       )}
 
       {/* Info, Card */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="flex gap-3">
-            <Info className="h-5 w-5 text-muted-foreground mt-0.5" />
-            <div className="space-y-1 text-sm text-muted-foreground">
+      <Card></Card>
+        <CardContent className="pt-6"></CardContent>
+          <div className="flex gap-3"></div>
+            <Info className="h-5 w-5 text-muted-foreground mt-0.5" /></Info>
+            <div className="space-y-1 text-sm text-muted-foreground"></div>
               <p>
                 Inference Safe Mode validates your environment configuration before 
-                making expensive AI API calls.
-              </p>
+                making expensive AI API calls.</p>
               <p>
                 Enable Auto-heal to automatically fix common issues like missing 
-                API keys or outdated configurations.
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+                API keys or outdated configurations.</p>
+    );
 }
+</EPCStatus>

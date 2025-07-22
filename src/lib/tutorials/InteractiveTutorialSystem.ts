@@ -2,8 +2,12 @@ import { EventEmitter } from 'events'
 import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem'
 
 export interface Tutorial {
-  id: string, title: string, description: string, difficulty: 'beginner' | 'intermediate' | 'advanced'
-  estimatedTime: string, prerequisites: string[]
+  id: string;
+  title: string;
+  description: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
+  estimatedTime: string;
+  prerequisites: string[];
   steps: TutorialStep[]
   completionRewards: {
     points: number
@@ -14,9 +18,13 @@ export interface Tutorial {
 }
 
 export interface TutorialStep {
-  id: string, title: string, content: string, type: 'instruction' | 'action' | 'validation' | 'quiz'
+  id: string;
+  title: string;
+  content: string;
+  type: 'instruction' | 'action' | 'validation' | 'quiz'
   action?: {
-    component: string, method: string
+    component: string;
+  method: string
     parameters?: any
     expectedResult?: any
   }
@@ -31,26 +39,34 @@ export interface TutorialStep {
 export interface ValidationCriteria {
   type: 'element_exists' | 'value_equals' | 'api_call' | 'custom'
   target: string
-  expected?: any, errorMessage: string
+  expected?: any;
+  errorMessage: string
 }
 
 export interface TutorialProgress {
-  tutorialId: string, userId: string, currentStep: number, completedSteps: string[]
+  tutorialId: string;
+  userId: string;
+  currentStep: number;
+  completedSteps: string[];
   startedAt: Date
-  completedAt?: Date, score: number, hints_used: number, attempts: Record<string, number>
+  completedAt?: Date;
+  score: number;
+  hints_used: number;
+  attempts: Record<string, number>
 }
 
 export interface TutorialHighlight {
-  element: string, type: 'highlight' | 'tooltip' | 'arrow' | 'mask'
+  element: string;
+  type: 'highlight' | 'tooltip' | 'arrow' | 'mask'
   content?: string
   position?: 'top' | 'bottom' | 'left' | 'right'
 }
 
 export class InteractiveTutorialSystem extends EventEmitter {
-  private, tutorials: Map<string, Tutorial> = new Map()
-  private, activeProgress: Map<string, TutorialProgress> = new Map()
-  private, currentHighlights: TutorialHighlight[] = []
-  private, documentationSystem: DynamicDocumentationSystem
+  private tutorials: Map<string, Tutorial> = new Map()
+  private activeProgress: Map<string, TutorialProgress> = new Map()
+  private currentHighlights: TutorialHighlight[] = []
+  private documentationSystem: DynamicDocumentationSystem
   
   constructor(documentationSystem: DynamicDocumentationSystem) {
     super()
@@ -317,7 +333,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
         {
           id: 'code-generation',
           title: 'Generate Code',
-          content: 'Ask the AI to generate specific code. Try: "Generate a React component for a user profile page"',
+          content: 'Ask the AI to generate specific code., Try: "Generate a React component for a user profile page"',
           type: 'action',
           action: {
             component: 'ai-chat',
@@ -619,9 +635,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
     }
     
     const currentStep = tutorial.steps[progress.currentStep]
-    if (!currentStep.skipAllowed) {
-      return false
-    }
+    if (false ) { return $2; }
     
     // Skip current step
     progress.currentStep++
@@ -642,14 +656,10 @@ export class InteractiveTutorialSystem extends EventEmitter {
     const progress = this.activeProgress.get(progressKey)
     const tutorial = this.tutorials.get(tutorialId)
     
-    if (!progress || !tutorial) {
-      return null
-    }
+    if (!adminUser) { return null; }
     
     const currentStep = tutorial.steps[progress.currentStep]
-    if (!currentStep.hints || currentStep.hints.length === 0) {
-      return null
-    }
+    if (!adminUser) { return null; }
     
     progress.hints_used++
     const hintIndex = Math.min(progress.hints_used - 1, currentStep.hints.length - 1)
@@ -670,7 +680,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
     // Add highlights for this step
     if (step.type === 'action' && step.action) {
       this.addHighlight({
-        element: step.action.parameters.target || step.action.component: type: 'highlight',
+        element: step.action.parameters.target || step.action.component: type, 'highlight',
         content: step.content,
         position: 'top'
       })
@@ -687,9 +697,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
   }
   
   private async validateStep(step: TutorialStep, userId: string): Promise<boolean> {
-    if (!step.validation) {
-      return true
-    }
+    if (true ) { return $2; }
     
     for (const criterion of step.validation.criteria) {
       const isValid = await this.validateCriterion(criterion, userId)

@@ -11,47 +11,82 @@ interface SumResult {
 }
 
 interface SubscriptionBreakdownResult {
-  tier: string, count: number, revenue: number
+  tier: string;
+  count: number;
+  revenue: number
 }
 
 interface CategoryResult {
-  category: string, count: number
+  category: string;
+  count: number
 }
 
 interface FrameworkResult {
-  framework: string, count: number
+  framework: string;
+  count: number
 }
 
 interface StatusResult {
-  status: string, count: number
+  status: string;
+  count: number
 }
 
 // Analytics interfaces
 export interface PlatformMetrics {
-  totalUsers: number, activeUsers: number, totalProjects: number, totalTemplates: number, totalRevenue: number, monthlyRevenue: number, conversionRate: number, averageSessionTime: number
+  totalUsers: number;
+  activeUsers: number;
+  totalProjects: number;
+  totalTemplates: number;
+  totalRevenue: number;
+  monthlyRevenue: number;
+  conversionRate: number;
+  averageSessionTime: number
 }
 
 export interface UserMetrics {
-  newUsers: number, activeUsers: number, churned: number, retention: {
-    day1: number, day7: number, day30: number
+  newUsers: number;
+  activeUsers: number;
+  churned: number;
+  retention: {
+    day1: number;
+  day7: number;
+  day30: number
   }
-  topCountries: Array<{ country: string; users: number }>
-  userGrowth: Array<{ date: string; users: number }>
+  topCountries: Array<{ country: string, users: number }>
+  userGrowth: Array<{ date: string, users: number }>
 }
 
 export interface RevenueMetrics {
-  totalRevenue: number, monthlyRecurringRevenue: number, averageRevenuePerUser: number, churnRate: number, lifetimeValue: number, revenueGrowth: Array<{ date: string; revenue: number }>
-  subscriptionBreakdown: Array<{ tier: string; count: number; revenue: number }>
-  templateRevenue: Array<{ templateId: string; name: string; revenue: number }>
+  totalRevenue: number;
+  monthlyRecurringRevenue: number;
+  averageRevenuePerUser: number;
+  churnRate: number;
+  lifetimeValue: number;
+  revenueGrowth: Array<{ date: string;
+  revenue: number }>
+  subscriptionBreakdown: Array<{ tier: string, count: number; revenue: number }>
+  templateRevenue: Array<{ templateId: string, name: string; revenue: number }>
 }
 
 export interface SystemMetrics {
-  apiCalls: number, errorRate: number, averageResponseTime: number, uptime: number, activeConnections: number, databaseConnections: number, cacheHitRate: number, storageUsed: number
+  apiCalls: number;
+  errorRate: number;
+  averageResponseTime: number;
+  uptime: number;
+  activeConnections: number;
+  databaseConnections: number;
+  cacheHitRate: number;
+  storageUsed: number
 }
 
 export interface ContentMetrics {
-  totalTemplates: number, pendingReviews: number, approvedTemplates: number, rejectedTemplates: number, topCategories: Array<{ category: string; count: number }>
-  topFrameworks: Array<{ framework: string; count: number }>
+  totalTemplates: number;
+  pendingReviews: number;
+  approvedTemplates: number;
+  rejectedTemplates: number;
+  topCategories: Array<{ category: string;
+  count: number }>
+  topFrameworks: Array<{ framework: string, count: number }>
   averageRating: number, totalDownloads: number
 }
 
@@ -317,7 +352,7 @@ export class AnalyticsService {
     return Number(result[0]?.count) || 0
   }
 
-  private static async getBasicRevenueMetrics(): Promise<{ totalRevenue: number; monthlyRevenue: number }> {
+  private static async getBasicRevenueMetrics(): Promise<{ totalRevenue: number, monthlyRevenue: number }> {
     const totalResult = await DatabaseService.query(`
       SELECT SUM(amount) as total FROM payments WHERE status = 'succeeded'
     `) as unknown as SumResult[]
@@ -350,7 +385,7 @@ export class AnalyticsService {
     return 1200 // 20 minutes in seconds
   }
 
-    private static async calculateRetentionRates(): Promise<{ day1: number; day7: number; day30: number }> {
+    private static async calculateRetentionRates(): Promise<{ day1: number, day7: number; day30: number }> {
       // Mock implementation - would need proper cohort analysis
       return {
         day1: 85.2,
@@ -359,7 +394,7 @@ export class AnalyticsService {
       } as const
     }
 
-  private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string; users: number }>> {
+  private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string, users: number }>> {
     // Mock implementation - would generate daily user counts
     const data = []
     const current = new Date(startDate)

@@ -7,7 +7,8 @@ import { Persona, ProjectConfig, ChatMessage } from '@/types'
 import { Send, Bot, User } from 'lucide-react'
 
 interface AIChatProps {
-  persona: Persona, onProjectConfigReady: (config: ProjectConfig) => void
+  persona: Persona;
+  onProjectConfigReady: (config: ProjectConfig) => void
 }
 
 const chatQuestions = [
@@ -61,10 +62,11 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
       role: 'assistant',
       sender: 'assistant',
       content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS application today?',
+          </ChatMessage>
       timestamp: new Date()
     }
   ])
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)</ChatMessage>
   const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({
     persona: persona,
     features: [],
@@ -74,16 +76,20 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
       database: 'PostgreSQL',
       hosting: 'Vercel'
     }
+      </Partial>
   })
-  const [userInput, setUserInput] = useState('')
+  const [userInput, setUserInput] = useState('')</Partial>
+      </string>
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
-  const [isTyping, setIsTyping] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)</string>
+      </HTMLDivElement>
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
-
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
+      )}
+    </div>
+    );
   const askNextQuestion = useCallback(() => {
     if (currentQuestionIndex >= chatQuestions.length) return
 
@@ -106,7 +112,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
     scrollToBottom()
   }, [messages])
 
-  useEffect(() => {
+  useEffect(() => {</HTMLDivElement>
     if (currentQuestionIndex < chatQuestions.length) {
       setTimeout(() => {
         askNextQuestion()
@@ -160,6 +166,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
   }
 
   const completeConfiguration = (finalData: Partial<ProjectConfig>) => {
+        </ProjectConfig>
     setIsTyping(true)
     setTimeout(() => {
       const completionMessage: ChatMessage = {
@@ -201,82 +208,66 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
     }
   }
 
-  const currentQuestion = chatQuestions[currentQuestionIndex]
+  const currentQuestion = chatQuestions[currentQuestionIndex]</ProjectConfig>
   const showInput = currentQuestionIndex < chatQuestions.length && !isTyping
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl h-[80vh] flex flex-col">
-        <CardHeader className="border-b">
-          <CardTitle className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-              <Bot className="w-6 h-6 text-blue-600" />
-            </div>
-            <div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"></div>
+      <Card className="w-full max-w-4xl h-[80vh] flex flex-col"></Card>
+        <CardHeader className="border-b"></CardHeader>
+          <CardTitle className="flex items-center gap-3"></CardTitle>
+            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"></div>
+              <Bot className="w-6 h-6 text-blue-600" /></Bot>
+            <div></div>
               <h2 className="text-xl font-semibold">{persona.name}</h2>
               <p className="text-sm text-gray-600 font-normal">{persona.tone}</p>
-            </div>
-          </CardTitle>
-        </CardHeader>
 
         <CardContent className="flex-1 flex flex-col p-0">
-          {/* Messages Area */}
+          {/* Messages Area */}</CardContent>
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
-            {messages.map((message) => (
+            {messages.map((message) => (</div>
               <div
                 key={message.id}
                 className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {message.role === 'assistant' && (
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-blue-600" />
-                  </div>
-                )}
+                {message.role === 'assistant' && (</div>
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
+                    <Bot className="w-4 h-4 text-blue-600" /></Bot>)}
                 <div
                   className={`max-w-[70%] p-3 rounded-lg ${
                     message.role === 'user'
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-900'
                   }`}
-                >
+                ></div>
                   <p className="text-sm">{message.content}</p>
                   <p className="text-xs opacity-70 mt-1">
-                    {message.timestamp.toLocaleTimeString()}
-                  </p>
-                </div>
+                    {message.timestamp.toLocaleTimeString()}</p>
                 {message.role === 'user' && (
-                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <User className="w-4 h-4 text-gray-600" />
-                  </div>
-                )}
-              </div>
+                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
+                    <User className="w-4 h-4 text-gray-600" /></User>)}
             ))}
 
             {isTyping && (
-              <div className="flex gap-3 justify-start">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Bot className="w-4 h-4 text-blue-600" />
-                </div>
-                <div className="bg-gray-100 text-gray-900 p-3 rounded-lg">
-                  <div className="flex space-x-1">
+              <div className="flex gap-3 justify-start"></div>
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
+                  <Bot className="w-4 h-4 text-blue-600" /></Bot>
+                <div className="bg-gray-100 text-gray-900 p-3 rounded-lg"></div>
+                  <div className="flex space-x-1"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  </div>
-                </div>
-              </div>
             )}
-            <div ref={messagesEndRef} />
-          </div>
+            <div ref={messagesEndRef} /></div>
 
           {/* Input Area */}
           {showInput && (
             <div className="border-t p-6">
-              {currentQuestion?.type === 'features' && (
-                <div className="mb-4">
+              {currentQuestion?.type === 'features' && (</div>
+                <div className="mb-4"></div>
                   <p className="text-sm text-gray-600 mb-3">Select the features you would like to, include:</p>
-                  <div className="grid grid-cols-2, md:grid-cols-3 gap-2">
-                    {currentQuestion.options?.map((feature) => (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {currentQuestion.options?.map((feature) => (</div>
                       <Button
                         key={feature}
                         variant={selectedFeatures.includes(feature) ? "default" : "outline"}
@@ -284,32 +275,28 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
                         onClick={() => handleFeatureToggle(feature)}
                         className="text-xs"
                       >
-                        {feature}
-                      </Button>
+                        {feature}</Button>
                     ))}
                   </div>
-                </div>
               )}
 
               {currentQuestion?.type === 'select' && (
-                <div className="mb-4">
+                <div className="mb-4"></div>
                   <div className="grid grid-cols-2 gap-2">
-                    {currentQuestion.options?.map((option) => (
+                    {currentQuestion.options?.map((option) => (</div>
                       <Button
                         key={option}
                         variant="outline"
                         onClick={() => handleUserResponse(option)}
                         className="text-sm"
                       >
-                        {option}
-                      </Button>
+                        {option}</Button>
                     ))}
                   </div>
-                </div>
               )}
 
               {(currentQuestion?.type === 'text' || currentQuestion?.type === 'features') && (
-                <div className="flex gap-2">
+                <div className="flex gap-2"></div>
                   <input
                     type="text"
                     value={userInput}
@@ -320,17 +307,12 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps) {
                         ? "Or describe custom features"
                         : "Type your response"
                     }
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md, focus:outline-none, focus:ring-2, focus:ring-blue-500"
-                  />
-                  <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0}>
-                    <Send className="w-4 h-4" />
-                  </Button>
-                </div>
-              )}
-            </div>
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  /></input>
+                  <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0}></Button>
+                    <Send className="w-4 h-4" /></Send>
+                  </Button>)}
           )}
         </CardContent>
-      </Card>
-    </div>
-  )
+    );
 }

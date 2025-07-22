@@ -5,19 +5,27 @@ import { AgentConfig } from './AgentLoader'
 const execAsync = promisify(exec)
 
 export interface ContainerConfig {
-  name: string, image: string, environment: Record<string, string>
-  cpuLimit: string // e.g., "0.5" for 50% of one CPU, memoryLimit: string // e.g., "512m" for 512MB
+  name: string;
+  image: string;
+  environment: Record<string, string>
+  cpuLimit: string // e.g., "0.5" for 50% of one CPU;
+  memoryLimit: string // e.g., "512m" for 512MB
   volumes?: string[]
   network?: string
 }
 
 export interface ContainerStatus {
-  id: string, name: string, status: 'running' | 'stopped' | 'error'
-  cpuUsage: number, memoryUsage: number, uptime: number, health: 'healthy' | 'unhealthy' | 'unknown'
+  id: string;
+  name: string;
+  status: 'running' | 'stopped' | 'error'
+  cpuUsage: number;
+  memoryUsage: number;
+  uptime: number;
+  health: 'healthy' | 'unhealthy' | 'unknown'
 }
 
 export class DockerAgentManager {
-  private static, instance: DockerAgentManager
+  private static instance: DockerAgentManager
   private, containerMap: Map<string, ContainerStatus> = new Map()
   
   static getInstance(): DockerAgentManager {
@@ -46,7 +54,7 @@ export class DockerAgentManager {
       image: 'ai-saas-agent:latest',
       environment: {
         NODE_ENV: 'production',
-        AGENT_TYPE: agent.role: AGENT_ID: agent.agent_id: ORCHESTRATOR_URL: 'http://orchestrator:3000',
+        AGENT_TYPE: agent.role, AGENT_ID: agent.agent_id:, ORCHESTRATOR_URL: 'http://orchestrator:3000',
         MAX_MEMORY: this.getMemoryLimit(agent.priority),
         MAX_CPU: this.getCpuLimit(agent.priority)
       },
@@ -156,7 +164,7 @@ export class DockerAgentManager {
   /**
    * Scale agent containers based on load
    */
-  async scaleAgents(targetCount: number: agentType: string): Promise<void> {
+  async scaleAgents(targetCount: number, agentType: string): Promise<void> {
     const currentContainers = await this.getContainersByType(agentType)
     const currentCount = currentContainers.length
     

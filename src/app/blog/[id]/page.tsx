@@ -55,6 +55,7 @@ At the core of AI Guided SaaS lies a sophisticated multi-agent AI system that or
 
 Ready to experience the future of development? Sign up for our beta program and join thousands of developers who are already building the next generation of applications with AI Guided SaaS.
 
+    </string>
 [Get Started Today](/auth/signup)
     `,
     author: 'AI Guided Team',
@@ -360,16 +361,11 @@ export default function BlogPostPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Blog Post Not Found</h1>
           <p className="text-muted-foreground mb-6">
-            The blog post you&apos;re looking for doesn&apos;t exist.
-          </p>
+            The blog post you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/blog">
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Blog
-            </Button>
-          </Link>
-        </div>
-      </div>
+              Back to Blog</ArrowLeft>
     );
   }
 
@@ -386,15 +382,12 @@ export default function BlogPostPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex items-center gap-4">
         <Link href="/blog">
           <Button variant="outline" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blog
-          </Button>
-        </Link>
-      </div>
+            Back to Blog</ArrowLeft>
 
       {/* Article Header */}
       <div className="space-y-6">
@@ -402,42 +395,33 @@ export default function BlogPostPage() {
           <Badge variant="secondary">{post.category}</Badge>
           <h1 className="text-4xl font-bold leading-tight">{post.title}</h1>
           <p className="text-xl text-muted-foreground">{post.excerpt}</p>
-        </div>
 
         {/* Meta Information */}
         <div className="flex items-center justify-between border-b pb-6">
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <User className="h-4 w-4" />
-              {post.author}
-            </div>
+              {post.author}</User>
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
               {new Date(post.publishedAt).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric'})}
-            </div>
+                day: 'numeric'})}</Calendar>
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
-              {post.readTime}
-            </div>
-          </div>
+              {post.readTime}</Clock>
           <Button variant="outline" size="sm" onClick={handleShare}>
             <Share2 className="mr-2 h-4 w-4" />
-            Share
-          </Button>
-        </div>
+            Share</Share2>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
-          {post.tags.map(tag => (
+          {post.tags.map(tag => (</div>
             <Badge key={tag} variant="outline">
-              {tag}
-            </Badge>
-          ))}
+              {tag}</Badge>
+                  ))}
         </div>
-      </div>
 
       {/* Article Content */}
       <Card>
@@ -448,74 +432,94 @@ export default function BlogPostPage() {
               __html: post.content
                 .replace(/\n/g, '<br />')
                 .replace(/#{1,6}\s/g, match => {
-                  const level = match.trim().length;
+                  const level = match.trim().length;</div>
                   return `<h${level} class="text-${4 - level}xl font-bold mt-8 mb-4">`;
                 })
                 .replace(
-                  /\[([^\]]+)\]\(([^)]+)\)/g,
+                  /\[([^\]]+)\]\(([^)]+)\)/g,</h>
                   '<a href="$2" class="text-primary, hover:underline">$1</a>'
                 )}}
           />
         </CardContent>
-      </Card>
 
       {/* Related Posts */}
       <Card>
         <CardHeader>
           <CardTitle>Related Posts</CardTitle>
           <CardDescription>
-            Continue reading about similar topics
-          </CardDescription>
-        </CardHeader>
+            Continue reading about similar topics</CardDescription>
         <CardContent>
-          <div className="grid gap-4, md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             {Object.values(blogPosts)
               .filter(p => p.id !== post.id)
               .slice(0, 2)
-              .map(relatedPost => (
-                <Link key={relatedPost.id} href={`/blog/${relatedPost.id}`}>
+              .map(relatedPost => (</div>
+                <Link key={relatedPost.id} href="/blog/${relatedPost.id}">
                   <Card className="hover:shadow-md transition-shadow cursor-pointer">
                     <CardHeader>
                       <Badge variant="outline" className="w-fit">
-                        {relatedPost.category}
-                      </Badge>
+                        {relatedPost.category}</Badge>
                       <CardTitle className="text-lg">
-                        {relatedPost.title}
-                      </CardTitle>
+                        {relatedPost.title}</CardTitle>
                       <CardDescription>{relatedPost.excerpt}</CardDescription>
-                    </CardHeader>
                     <CardContent>
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span>{relatedPost.author}</span>
                         <span>{relatedPost.readTime}</span>
                       </div>
-                    </CardContent>
-                  </Card>
-                </Link>
               ))}
           </div>
-        </CardContent>
-      </Card>
 
       {/* CTA */}
-      <Card className="bg-gradient-to-r from-purple-50 to-blue-50, dark:from-purple-950/20, dark:to-blue-950/20">
+      <Card className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20">
         <CardHeader>
           <CardTitle>Ready to Get Started?</CardTitle>
           <CardDescription>
-            Join thousands of developers building the future with AI Guided SaaS
-          </CardDescription>
-        </CardHeader>
+            Join thousands of developers building the future with AI Guided SaaS</CardDescription>
         <CardContent>
           <div className="flex gap-2">
             <Link href="/auth/signup">
               <Button>Start Building</Button>
-            </Link>
             <Link href="/tutorials">
               <Button variant="outline">View Tutorials</Button>
-            </Link>
-          </div>
+        </div>
+        </Link>
+        </Button>
+        </div>
+        </Link>
+        </Button>
+        </div>
+        </div>
+        </div>
+        </div>
+        </Button>
+        </Card>
+        </CardHeader>
         </CardContent>
-      </Card>
-    </div>
-  );
+        </Link>
+        </Card>
+        </CardHeader>
+        </CardContent>
+        </Card>
+        </CardHeader>
+        </CardContent>
+        </div>
+        </Link>
+    );
+</CardHeader>
+</Card>
+</CardContent>
+</CardHeader>
+</Card>
+</Card>
+</Button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</Button>
+</div>
 }

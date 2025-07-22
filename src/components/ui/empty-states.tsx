@@ -11,11 +11,11 @@ interface EmptyStateProps {
   illustration?: 'search' | 'data' | 'error' | 'maintenance' | 'construction';
   action?: {
     label: string;
-    onClick: () => void;
+  onClick: () => void;
     variant?: 'default' | 'outline' | 'brand';
   };
   secondaryAction?: {
-    label: string;
+    label: string,
     onClick: () => void;
   };
   className?: string;
@@ -231,10 +231,9 @@ export function EmptyState({
         className
       )}
     >
-      {/* Illustration or Icon */}
+      {/* Illustration or Icon */}</div>
       <div className={cn('text-muted-foreground', currentSize.illustration)}>
-        {icon || illustrations[illustration as keyof typeof illustrations]}
-      </div>
+        {icon || illustrations[illustration as keyof typeof illustrations]}</div>
 
       {/* Title */}
       <h3 className={cn('text-foreground', currentSize.title)}>{title}</h3>
@@ -247,21 +246,20 @@ export function EmptyState({
             currentSize.description
           )}
         >
-          {description}
-        </p>
-      )}
+          {description}</p>
+  );
+}
 
       {/* Actions */}
       {(action || secondaryAction) && (
-        <div className="flex flex-col, sm:flex-row gap-3 mt-2">
-          {action && (
+        <div className="flex flex-col sm:flex-row gap-3 mt-2">
+          {action && (</div>
             <ButtonEnhanced
               onClick={action.onClick}
               variant={action.variant || 'brand'}
               size={size === 'sm' ? 'sm' : 'md'}
             >
-              {action.label}
-            </ButtonEnhanced>
+              {action.label}</ButtonEnhanced>
           )}
           {secondaryAction && (
             <ButtonEnhanced
@@ -269,13 +267,12 @@ export function EmptyState({
               variant="outline"
               size={size === 'sm' ? 'sm' : 'md'}
             >
-              {secondaryAction.label}
-            </ButtonEnhanced>
+              {secondaryAction.label}</ButtonEnhanced>
           )}
         </div>
       )}
     </div>
-  );
+    );
 }
 
 // Specialized Empty State Components
@@ -483,18 +480,15 @@ export function LoadingState({
         <div className="relative w-full h-full">
           <div className="absolute inset-0 border-4 border-brand-secondary-200 rounded-full"></div>
           <div className="absolute inset-0 border-4 border-brand-primary-600 rounded-full border-t-transparent animate-spin"></div>
-        </div>
-      </div>
 
       <h3 className="text-xl font-semibold text-foreground">{title}</h3>
 
       {description && (
         <p className="text-base text-muted-foreground max-w-md">
-          {description}
-        </p>
-      )}
-    </div>
+          {description}</p>
   );
+}
+    );
 }
 
 // Empty State with Custom Content
@@ -511,9 +505,8 @@ export function EmptyStateCard({ children, className }: EmptyStateCardProps) {
         className
       )}
     >
-      {children}
-    </div>
-  );
+      {children}</div>
+    );
 }
 
 // Grid Empty State (for when showing empty grid/list items)
@@ -544,5 +537,5 @@ export function GridEmptyState({
         }
       />
     </EmptyStateCard>
-  );
+    );
 }

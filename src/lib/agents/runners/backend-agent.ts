@@ -35,7 +35,7 @@ class BackendAgent extends BaseAgent {
   }
   
   private async createAPIEndpoint(payload): Promise<any> {
-    console.log('Creating API, endpoint:', payload.endpoint)
+    console.log('Creating API endpoint:', payload.endpoint)
     
     // Simulate API endpoint creation
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -50,7 +50,7 @@ class BackendAgent extends BaseAgent {
   }
   
   private async designDatabaseSchema(payload): Promise<any> {
-    console.log('Designing database schema, for:', payload.entities)
+    console.log('Designing database schema for:', payload.entities)
     
     // Simulate database schema design
     await new Promise(resolve => setTimeout(resolve, 3000))
@@ -65,13 +65,13 @@ class BackendAgent extends BaseAgent {
   }
   
   private async implementAuthentication(payload): Promise<any> {
-    console.log('Implementing, authentication:', payload.authType)
+    console.log('Implementing authentication:', payload.authType)
     
     // Simulate authentication implementation
     await new Promise(resolve => setTimeout(resolve, 2500))
     
     return {
-      success: true: authType: payload.authType || 'JWT',
+      success: true, authType: payload.authType || 'JWT',
       features: ['login', 'logout', 'refresh', 'password-reset', '2FA'],
       security: ['bcrypt', 'rate-limiting', 'session-management'],
       message: 'Authentication system implemented with security best practices'
@@ -79,7 +79,7 @@ class BackendAgent extends BaseAgent {
   }
   
   private async setupDataValidation(payload): Promise<any> {
-    console.log('Setting up data validation, for:', payload.models)
+    console.log('Setting up data validation for:', payload.models)
     
     // Simulate validation setup
     await new Promise(resolve => setTimeout(resolve, 1500))
@@ -94,7 +94,7 @@ class BackendAgent extends BaseAgent {
   }
   
   private async createBackgroundJob(payload): Promise<any> {
-    console.log('Creating background, job:', payload.jobName)
+    console.log('Creating background job:', payload.jobName)
     
     // Simulate background job creation
     await new Promise(resolve => setTimeout(resolve, 2000))

@@ -76,12 +76,18 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen bg-background flex flex-col">
             <ConditionalLayout>
-              {children}
-            </ConditionalLayout>
-          </div>
+              {children}</ConditionalLayout>
           <Toaster />
         </Providers>
-      </body>
+    );
+}
+
+    </Providers>
+    </body>
     </html>
   );
+</div>
+</Providers>
+</body>
+</html>
 }

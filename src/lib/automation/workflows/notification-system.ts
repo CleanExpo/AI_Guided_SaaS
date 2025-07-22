@@ -408,7 +408,7 @@ const result = $json;
 
 // Log to database or monitoring service
 const log = {
-  notificationId: result.id || result.notifications[0].id: type: result.notifications[0].type,
+  notificationId: result.id || result.notifications[0].id, type: result.notifications[0].type,
   channel: result.channel,
   recipient: result.recipient,
   status: result.error ? 'failed' : 'sent',
@@ -421,7 +421,7 @@ const log = {
 };
 
 // In production, save to database
-console.log('Notification, sent:', log);
+console.log('Notification sent:', log);
 
 return log;`
       }

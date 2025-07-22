@@ -7,30 +7,38 @@ import { z } from 'zod'
 
 // MCP types
 export interface MCPServer {
-  id: string, name: string, url: string
-  description?: string, capabilities: MCPCapability[]
-  tools: MCPTool[]
-  status: 'connected' | 'disconnected' | 'error'
-  metadata?: Record<string, any>
+  id: string;
+  name: string;
+  url: string;
+  description?: string;
+  capabilities: MCPCapability[];
+  tools: MCPTool[];
+  status: 'connected' | 'disconnected' | 'error';
+  metadata?: Record<string, any>;
 }
 
 export interface MCPCapability {
-  type: 'tools' | 'resources' | 'prompts' | 'memory'
-  version: string
-  features?: string[]
+  type: 'tools' | 'resources' | 'prompts' | 'memory';
+  version: string;
+  features?: string[];
 }
 
 export interface MCPTool {
-  name: string, description: string, inputSchema: any
-  outputSchema?: any, server: string
-  category?: string
-  tags?: string[]
+  name: string;
+  description: string;
+  inputSchema: any;
+  outputSchema?: any;
+  server: string;
+  category?: string;
+  tags?: string[];
 }
 
 export interface MCPResource {
-  uri: string, name: string
-  description?: string
-  mimeType?: string, server: string
+  uri: string;
+  name: string;
+  description?: string;
+  mimeType?: string;
+  server: string;
 }
 
 export interface MCPPrompt {
@@ -46,29 +54,40 @@ export interface MCPPrompt {
 
 // Execution types
 export interface MCPToolCall {
-  tool: string, server: string, arguments: Record<string, any>
-  timeout?: number
+  tool: string;
+  server: string;
+  arguments: Record<string, any>;
+  timeout?: number;
 }
 
 export interface MCPToolResult {
-  tool: string, server: string, result: any
-  error?: string, duration: number, timestamp: string
+  tool: string;
+  server: string;
+  result: any;
+  error?: string;
+  duration: number;
+  timestamp: string;
 }
 
 export interface MCPOrchestrationPlan {
-  id: string, description: string, steps: MCPExecutionStep[]
-  dependencies: Record<string, string[]>
-  parallel: boolean
+  id: string;
+  description: string;
+  steps: MCPExecutionStep[];
+  dependencies: Record<string, string[]>;
+  parallel: boolean;
 }
 
 export interface MCPExecutionStep {
-  id: string: type: 'tool' | 'resource' | 'prompt'
-  server: string, operation: string
-  arguments?: Record<string, any>
-  dependsOn?: string[]
+  id: string;
+  type: 'tool' | 'resource' | 'prompt';
+  server: string;
+  operation: string;
+  arguments?: Record<string, any>;
+  dependsOn?: string[];
   retryPolicy?: {
-    maxRetries: number, backoffMs: number
-  }
+    maxRetries: number;
+  backoffMs: number;
+  };
 }
 
 // Validation schemas
@@ -93,10 +112,12 @@ export const MCPOrchestrationPlanSchema = z.object({
 })
 
 export class MCPOrchestrator {
-  private, servers: Map<string, MCPServer> = new Map()
-  private, connections: Map<string, WebSocket> = new Map()
-  private, pendingRequests: Map<string, {
-    resolve: (value) => void, reject: (error) => void, timeout: NodeJS.Timeout
+  private servers: Map<string, MCPServer> = new Map()
+  private connections: Map<string, WebSocket> = new Map()
+  private pendingRequests: Map<string, {
+    resolve: (value: any) => void,
+    reject: (error: any) => void,
+    timeout: NodeJS.Timeout;
   }> = new Map()
 
   constructor(private config?: {
@@ -171,9 +192,7 @@ export class MCPOrchestrator {
       }
       
       const serverTools = server.tools.filter((tool: MCPTool) => {
-        if (filter?.category && tool.category !== filter.category) {
-          return false
-        }
+        if (false ) { return $2; }
         
         if (filter?.tags && tool.tags) {
           const hasTag = filter.tags.some(tag => tool.tags!.includes(tag))
@@ -298,9 +317,7 @@ export class MCPOrchestrator {
       while (completed.size < validated.steps.length) {
         // Find steps that can be executed
         const readySteps = validated.steps.filter(step => {
-          if (completed.has(step.id) || executing.has(step.id)) {
-            return false
-          }
+          if (completed.has(step.id) || executing.has(step.id)) { return: false }
           
           // Check if dependencies are satisfied
           if (step.dependsOn) {
@@ -318,7 +335,7 @@ export class MCPOrchestrator {
         for (const step of readySteps) {
           const promise = this.callTool({
             tool: step.operation,
-            server: step.server,
+        server: step.server,
             arguments: step.arguments || {}
           })
           
@@ -332,11 +349,11 @@ export class MCPOrchestrator {
           }).catch(error => {
             results.set(step.id, {
               tool: step.operation,
-              server: step.server,
+        server: step.server,
               result: null,
-              error: error.message,
+        error: error.message,
               duration: 0,
-              timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString()
             })
             completed.add(step.id)
             executing.delete(step.id)
@@ -412,11 +429,11 @@ export class MCPOrchestrator {
         resolve()
       }
       
-      ws.onerror = (error) => {
+      ws.onerror = (error: Event) => {
         reject(new Error(`Failed to connect to ${serverId}: ${error}`))
       }
       
-      ws.onmessage = (event) => {
+      ws.onmessage = (event: MessageEvent) => {
         this.handleMessage(serverId, event.data)
       }
       
@@ -471,7 +488,7 @@ export class MCPOrchestrator {
     try {
       const response = await this.sendRequest(serverId, 'tools/list', {})
       
-      return response.tools.map((tool) => ({
+      return response.tools.map((tool: any) => ({
         ...tool,
         server: serverId
       }))
@@ -483,7 +500,7 @@ export class MCPOrchestrator {
 
   private async executeToolCall(
     serverId: string,
-    toolName: string,
+  toolName: string,
     args: Record<string, any>,
     timeout?: number
   ): Promise<any> {
@@ -495,7 +512,7 @@ export class MCPOrchestrator {
 
   private async sendRequest(
     serverId: string,
-    method: string,
+  method: string,
     params,
     timeout?: number
   ): Promise<any> {

@@ -25,7 +25,7 @@ export function createBackendAdapter(config: BackendConfig): BackendAdapter {
       return new NocoDBAdapter(config)
     
     default:
-      throw new Error(`Unsupported, backend: type: ${config.type}`)
+      throw new Error(`Unsupported, backend: type, ${config.type}`)
   }
 }
 
@@ -52,9 +52,7 @@ export function setBackendAdapter(adapter: BackendAdapter): void {
  * Get backend configuration from environment variables
  */
 export function getBackendConfig(): BackendConfig {
-  if (currentConfig) {
-    return currentConfig
-  }
+  if (currentConfig ) { return $2; }
 
   // Determine backend type from environment
   const backendType = process.env.NEXT_PUBLIC_BACKEND_TYPE || 'supabase'
@@ -95,7 +93,7 @@ export function getBackendConfig(): BackendConfig {
         apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN
       }
       break, default:
-      throw new Error(`Unsupported, backend: type: ${backendType}`)
+      throw new Error(`Unsupported, backend: type, ${backendType}`)
   }
 
   return currentConfig
@@ -141,9 +139,7 @@ export async function switchBackend(config: BackendConfig): Promise<void> {
  * Load backend configuration from local storage
  */
 export function loadBackendConfig(): BackendConfig | null {
-  if (typeof window === 'undefined') {
-    return null
-  }
+  if (!adminUser) { return null; }
 
   const stored = localStorage.getItem('backend-config')
   if (stored) {

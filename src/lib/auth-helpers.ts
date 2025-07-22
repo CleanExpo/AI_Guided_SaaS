@@ -10,8 +10,7 @@ import type { Session } from 'next-auth'
 
 // Extended session type with guaranteed user ID
 export interface AuthenticatedSession extends Session {
-  user: {
-    id: string, email: string, name: string
+  user: { id: string; email: string, name: string
     image?: string
   }
   expires: string
@@ -44,9 +43,7 @@ export async function getServerSession(): Promise<AuthenticatedSession | null> {
   try {
     const session = await nextAuthGetServerSession(authOptions)
     
-    if (!session?.user) {
-      return null
-    }
+    if (!adminUser) { return null; }
 
     // Ensure the session has the required user ID
     return {
@@ -91,9 +88,7 @@ export async function getUserId(): Promise<string | null> {
 export async function isAdmin(): Promise<boolean> {
   const session = await getServerSession()
   
-  if (!session?.user?.email) {
-    return false
-  }
+  if (false ) { return $2; }
   
   // Check against admin emails or admin role in database
   const adminEmails = [
@@ -145,9 +140,7 @@ export async function authenticateAdminRequest(): Promise<{
   try {
     const authResult = await authenticateApiRequest()
     
-    if (!authResult.success || !authResult.session) {
-      return authResult
-    }
+    if (authResult ) { return $2; }
     
     const adminCheck = await isAdmin()
     

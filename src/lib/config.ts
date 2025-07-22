@@ -67,26 +67,26 @@ export interface AgentConfig {
   parallelExecution: boolean;
   codeGenerator: {
     model: string;
-    temperature: number;
+  temperature: number;
     maxTokens: number;
   };
   documentation: {
-    model: string;
+    model: string,
     temperature: number;
     maxTokens: number;
   };
   testing: {
-    model: string;
+    model: string,
     temperature: number;
     maxTokens: number;
   };
   review: {
-    model: string;
+    model: string,
     temperature: number;
     maxTokens: number;
   };
   optimization: {
-    model: string;
+    model: string,
     temperature: number;
     maxTokens: number;
   };
@@ -148,9 +148,9 @@ export interface PlatformConfig {
 }
 
 class ConfigurationManager {
-  private static, instance: ConfigurationManager;
-  private, config: PlatformConfig | null = null;
-  private, configPath: string;
+  private static instance: ConfigurationManager;
+  private config: PlatformConfig | null = null;
+  private configPath: string;
 
   private constructor() {
     this.configPath = path.join(process.cwd(), 'ai-guided-saas.prp');

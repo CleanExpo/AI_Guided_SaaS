@@ -1,19 +1,23 @@
 import { faker } from '@faker-js/faker'
 
 export interface DataSource {
-  id: string, name: string: type: 'mock' | 'api' | 'database' | 'file'
+  id: string;
+  name: string;
+  type: 'mock' | 'api' | 'database' | 'file'
   config: Record<string, any>
   isActive: boolean
   lastSync?: Date
 }
 
 export interface DataSchema {
-  name: string, fields: SchemaField[]
+  name: string;
+  fields: SchemaField[]
   relationships?: Relationship[]
 }
 
 export interface SchemaField {
-  name: string: type: 'string' | 'number' | 'boolean' | 'date' | 'array' | 'object' | 'image' | 'email' | 'phone' | 'address'
+  name: string;
+  type: 'string' | 'number' | 'boolean' | 'date' | 'array' | 'object' | 'image' | 'email' | 'phone' | 'address'
   required: boolean
   unique?: boolean
   format?: string
@@ -24,13 +28,15 @@ export interface SchemaField {
 }
 
 export interface Relationship {
-  from: string, to: string: type: 'one-to-one' | 'one-to-many' | 'many-to-many'
+  from: string;
+  to: string;
+  type: 'one-to-one' | 'one-to-many' | 'many-to-many'
   field: string
 }
 
 export class MockDataGenerator {
-  private, schemas: Map<string, DataSchema> = new Map()
-  private, cache: Map<string, any[]> = new Map()
+  private schemas: Map<string, DataSchema> = new Map()
+  private cache: Map<string, any[]> = new Map()
   
   constructor() {
     this.initializeCommonSchemas()

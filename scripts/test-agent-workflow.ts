@@ -22,12 +22,12 @@ interface TestSuite {
 }
 
 class AgentWorkflowTester {
-  private, testResults: TestSuite[] = []
-  private, loader: AgentLoader
-  private, registry: AgentRegistry
-  private, coordinator: AgentCoordinator
-  private, monitor: AgentMonitor
-  private, communication: AgentCommunication
+  private testResults: TestSuite[] = []
+  private loader: AgentLoader
+  private registry: AgentRegistry
+  private coordinator: AgentCoordinator
+  private monitor: AgentMonitor
+  private communication: AgentCommunication
 
   constructor() {
     console.log('🧪 Initializing Agent Workflow Tester...')
@@ -354,7 +354,7 @@ class AgentWorkflowTester {
       }
 
       return {
-        handoff_successful: handoffSuccess: handoff_type: 'architecture'
+        handoff_successful: handoffSuccess, handoff_type: 'architecture'
       }
     })
 
@@ -392,7 +392,7 @@ class AgentWorkflowTester {
         plan_id: plan.id,
         task_count: plan.tasks.length,
         execution_phases: plan.execution_order.length,
-        estimated_duration: plan.estimated_duration: project_type: plan.project_type
+        estimated_duration: plan.estimated_duration, project_type: plan.project_type
       }
     })
 
@@ -597,7 +597,8 @@ class AgentWorkflowTester {
         
         await this.communication.sendMessage({
           from_agent: currentAgent.agent_id,
-          to_agent: nextAgent.agent_id: type: 'handoff',
+          to_agent: nextAgent.agent_id,
+          type: 'handoff',
           priority: 'high',
           payload: {
             stage: `${currentAgent.role}_to_${nextAgent.role}`,

@@ -81,10 +81,10 @@ export function Footer() {
   return (
     <footer className="bg-background border-t">
       <div className="container mx-auto px-4">
-        {/* Main Footer Content */}
-        <div className="py-12, lg:py-16">
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-6 gap-8">
-            {/* Company Info */}
+        {/* Main Footer Content */}</div>
+        <div className="py-12 lg:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+            {/* Company Info */}</div>
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center space-x-3 mb-4">
                 <Logo variant="full" size="md" />
@@ -92,8 +92,7 @@ export function Footer() {
               <p className="text-muted-foreground mb-6 max-w-sm">
                 AI Guided SaaS Platform empowers developers with intelligent
                 automation, streamlined workflows, and cutting-edge tools for
-                modern application development.
-              </p>
+                modern application development.</p>
 
               {/* Newsletter Signup */}
               <div className="space-y-3">
@@ -109,99 +108,82 @@ export function Footer() {
                     onChange={e => setEmail(e.target.value)}
                     required
                     className="flex-1"
-                  />
+                  /></Input>
                   <Button type="submit" size="sm" disabled={isSubscribing}>
-                    {isSubscribing ? (
+                    {isSubscribing ? (</Button>
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    ) : (
+                    ) : (</div>
                       <ArrowRight className="h-4 w-4" />
-                    )}
-                  </Button>
-                </form>
+                    )}</ArrowRight>
                 <p className="text-xs text-muted-foreground">
-                  Get the latest updates and insights delivered to your inbox.
-                </p>
-              </div>
-            </div>
+                  Get the latest updates and insights delivered to your inbox.</p>
 
             {/* Product Links */}
             <div>
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-3">
-                {productLinks.map(link => (
+                {productLinks.map(link => (</ul>
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground, hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
+                      className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
                     >
                       <link.icon className="h-3 w-3" />
                       <span>{link.name}</span>
                     </Link>
-                  </li>
                 ))}
               </ul>
-            </div>
 
             {/* Company Links */}
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-3">
-                {companyLinks.map(link => (
+                {companyLinks.map(link => (</ul>
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground, hover:text-foreground transition-colors text-sm"
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                     >
-                      {link.name}
-                    </Link>
-                  </li>
+                      {link.name}</Link>
                 ))}
               </ul>
-            </div>
 
             {/* Resources Links */}
             <div>
               <h3 className="font-semibold mb-4">Resources</h3>
               <ul className="space-y-3">
-                {resourcesLinks.map(link => (
+                {resourcesLinks.map(link => (</ul>
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground, hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
+                      className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2 text-sm"
                     >
-                      {link.icon && <link.icon className="h-3 w-3" />}
+                      {link.icon && <link.icon className="h-3 w-3" />}</link>
                       <span>{link.name}</span>
                     </Link>
-                  </li>
                 ))}
               </ul>
-            </div>
 
             {/* Legal Links */}
             <div>
               <h3 className="font-semibold mb-4">Legal</h3>
               <ul className="space-y-3">
-                {legalLinks.map(link => (
+                {legalLinks.map(link => (</ul>
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground, hover:text-foreground transition-colors text-sm"
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                     >
-                      {link.name}
-                    </Link>
-                  </li>
+                      {link.name}</Link>
                 ))}
               </ul>
-            </div>
-          </div>
-        </div>
 
         <Separator />
 
-        {/* Trust Badges & Contact Info */}
+        {/* Trust Badges & Contact Info */}</Separator>
         <div className="py-8">
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
-            {/* Trust Badges */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Trust Badges */}</div>
             <div className="space-y-3">
               <h4 className="text-sm font-semibold">Security & Compliance</h4>
               <div className="flex flex-wrap gap-3">
@@ -213,8 +195,6 @@ export function Footer() {
                   <Award className="h-4 w-4" />
                   <span>ISO 27001</span>
                 </div>
-              </div>
-            </div>
 
             {/* Performance Stats */}
             <div className="space-y-3">
@@ -232,8 +212,6 @@ export function Footer() {
                   <Building className="h-3 w-3" />
                   <span>500+ Companies</span>
                 </div>
-              </div>
-            </div>
 
             {/* Contact Info */}
             <div className="space-y-3">
@@ -251,58 +229,80 @@ export function Footer() {
                   <MapPin className="h-3 w-3" />
                   <span>San Francisco, CA</span>
                 </div>
-              </div>
-            </div>
 
             {/* Social Links */}
             <div className="space-y-3">
               <h4 className="text-sm font-semibold">Follow Us</h4>
               <div className="flex space-x-3">
-                {socialLinks.map(social => (
+                {socialLinks.map(social => (</div>
                   <Link
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground, hover:text-foreground transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <social.icon className="h-5 w-5" />
                     <span className="sr-only">{social.name}</span>
                   </Link>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
 
         <Separator />
 
-        {/* Bottom Footer */}
+        {/* Bottom Footer */}</Separator>
         <div className="py-6">
-          <div className="flex flex-col, md:flex-row justify-between items-center space-y-4, md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <span>
                 © {new Date().getFullYear()} AI Guided SaaS Platform. All
-                rights reserved.
-              </span>
-            </div>
+                rights reserved.</span>
 
             <div className="flex items-center space-x-6 text-sm">
               <Link
                 href="/status"
-                className="text-muted-foreground, hover:text-foreground transition-colors flex items-center space-x-1"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-1"
               >
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>All Systems Operational</span>
               </Link>
 
               <div className="text-muted-foreground">
-                Made with ❤️ for developers
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                Made with ❤️ for developers</div>
+    );
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+</div>
+</li>
+</div>
+</li>
+</div>
+</li>
+</div>
+</div>
+</div>
+</footer>
+}
+
+    </li>
+    </div>
+    </li>
+    </div>
+    </li>
+    </div>
+    </li>
+    </div>
+    </div>
     </footer>
   );
 }

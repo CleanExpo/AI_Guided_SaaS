@@ -60,8 +60,7 @@ export async function POST(request: NextRequest) {
         id: admin.id,
         email: admin.email,
         name: admin.name,
-        role: admin.role,
-        permissions: admin.permissions
+        role: admin.role; permissions: admin.permissions
       },
       token,
       expiresIn: '8h'

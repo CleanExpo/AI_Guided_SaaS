@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
         break;
 
       default:
-        console.log(`Unhandled, event: type: ${event.type}`);
+        console.log(`Unhandled, event: type, ${event.type}`);
     }
 
     return NextResponse.json({ received: true });
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
 
 // Event Handlers
 async function handleSubscriptionCreated(subscription) {
-  console.log('Subscription, created:', subscription.id);
+  console.log('Subscription created:', subscription.id);
   
   
   try {
@@ -155,7 +155,7 @@ async function handleSubscriptionCreated(subscription) {
 }
 
 async function handleSubscriptionUpdated(subscription) {
-  console.log('Subscription, updated:', subscription.id);
+  console.log('Subscription updated:', subscription.id);
   
   
   try {
@@ -182,7 +182,7 @@ async function handleSubscriptionUpdated(subscription) {
 }
 
 async function handleSubscriptionDeleted(subscription) {
-  console.log('Subscription, deleted:', subscription.id);
+  console.log('Subscription deleted:', subscription.id);
   
   
   try {
@@ -205,7 +205,7 @@ async function handleSubscriptionDeleted(subscription) {
 }
 
 async function handleTrialWillEnd(subscription) {
-  console.log('Trial will end for, subscription:', subscription.id);
+  console.log('Trial will end for subscription:', subscription.id);
   
   
   try {
@@ -225,7 +225,7 @@ async function handleTrialWillEnd(subscription) {
     await supabase
       .from('notifications')
       .insert({
-        user_id: sub.user_id: type: 'trial_ending',
+        user_id: sub.user_id: type, 'trial_ending',
         title: 'Your trial is ending soon',
         message: 'Your trial period will end in 3 days. Please update your payment method to continue using our services.',
         read: false});
@@ -237,7 +237,7 @@ async function handleTrialWillEnd(subscription) {
 }
 
 async function handlePaymentSucceeded(invoice) {
-  console.log('Payment succeeded for, invoice:', invoice.id);
+  console.log('Payment succeeded for invoice:', invoice.id);
   
   
   try {
@@ -263,7 +263,7 @@ async function handlePaymentSucceeded(invoice) {
 }
 
 async function handlePaymentFailed(invoice) {
-  console.log('Payment failed for, invoice:', invoice.id);
+  console.log('Payment failed for invoice:', invoice.id);
   
   
   try {
@@ -290,7 +290,7 @@ async function handlePaymentFailed(invoice) {
       await supabase
         .from('notifications')
         .insert({
-          user_id: sub.user_id: type: 'payment_failed',
+          user_id: sub.user_id: type, 'payment_failed',
           title: 'Payment Failed',
           message: 'Your payment could not be processed. Please update your payment method.',
           read: false});
@@ -303,7 +303,7 @@ async function handlePaymentFailed(invoice) {
 }
 
 async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent) {
-  console.log('Payment intent, succeeded:', paymentIntent.id);
+  console.log('Payment intent succeeded:', paymentIntent.id);
   
   
   try {
@@ -329,7 +329,7 @@ async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent)
 }
 
 async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
-  console.log('Payment intent, failed:', paymentIntent.id);
+  console.log('Payment intent failed:', paymentIntent.id);
   
   
   try {
@@ -356,7 +356,7 @@ async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
 }
 
 async function handleCustomerCreated(customer: Stripe.Customer) {
-  console.log('Customer, created:', customer.id);
+  console.log('Customer created:', customer.id);
   
   
   try {
@@ -372,7 +372,7 @@ async function handleCustomerCreated(customer: Stripe.Customer) {
       .eq('email', customer.email);
     
     if (error) {
-      console.error('Error updating user with, customer: ID:', error);
+      console.error('Error updating user with, customer: ID,', error);
     } else {
       console.log('User updated with Stripe customer ID');
     }
@@ -382,7 +382,7 @@ async function handleCustomerCreated(customer: Stripe.Customer) {
 }
 
 async function handleCustomerUpdated(customer: Stripe.Customer) {
-  console.log('Customer, updated:', customer.id);
+  console.log('Customer updated:', customer.id);
   
   
   try {
@@ -413,7 +413,7 @@ async function handleCustomerUpdated(customer: Stripe.Customer) {
 }
 
 async function handleCustomerDeleted(customer: Stripe.Customer) {
-  console.log('Customer, deleted:', customer.id);
+  console.log('Customer deleted:', customer.id);
   
   
   try {

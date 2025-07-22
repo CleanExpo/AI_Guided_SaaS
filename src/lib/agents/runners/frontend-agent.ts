@@ -35,7 +35,7 @@ class FrontendAgent extends BaseAgent {
   }
   
   private async createComponent(payload): Promise<any> {
-    console.log('Creating, component:', payload.componentName)
+    console.log('Creating component:', payload.componentName)
     
     // Simulate component creation
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -48,7 +48,7 @@ class FrontendAgent extends BaseAgent {
   }
   
   private async enhanceUI(payload): Promise<any> {
-    console.log('Enhancing, UI:', payload.targetComponent)
+    console.log('Enhancing UI:', payload.targetComponent)
     
     // Simulate UI enhancement
     await new Promise(resolve => setTimeout(resolve, 3000))
@@ -66,7 +66,7 @@ class FrontendAgent extends BaseAgent {
   }
   
   private async implementResponsiveDesign(payload): Promise<any> {
-    console.log('Implementing responsive design, for:', payload.pages)
+    console.log('Implementing responsive design for:', payload.pages)
     
     // Simulate responsive design implementation
     await new Promise(resolve => setTimeout(resolve, 2500))
@@ -79,7 +79,7 @@ class FrontendAgent extends BaseAgent {
   }
   
   private async setupStateManagement(payload): Promise<any> {
-    console.log('Setting up state, management:', payload.stateLibrary)
+    console.log('Setting up state management:', payload.stateLibrary)
     
     // Simulate state management setup
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -93,7 +93,7 @@ class FrontendAgent extends BaseAgent {
   }
   
   private async configureRouting(payload): Promise<any> {
-    console.log('Configuring routing, for:', payload.routes)
+    console.log('Configuring routing for:', payload.routes)
     
     // Simulate routing configuration
     await new Promise(resolve => setTimeout(resolve, 1500))

@@ -1,8 +1,12 @@
 import React from 'react'
 
 interface Alert {
-  id: string, type: 'error' | 'warning' | 'info'
-  message: string, timestamp: Date
+  id: string
+ ;
+  type: 'error' | 'warning' | 'info'
+  message: string
+ ;
+  timestamp: Date
 }
 
 interface AlertsPanelProps {
@@ -14,7 +18,6 @@ export function AlertsPanel({ alerts = [] }: AlertsPanelProps) {
     <div className="bg-white rounded-lg shadow">
       <div className="px-4 py-3 border-b">
         <h3 className="text-lg font-medium">System Alerts</h3>
-      </div>
       <div className="divide-y max-h-64 overflow-y-auto">
         {alerts.length === 0 ? (
           <p className="p-4 text-gray-500 text-center">No active alerts</p>
@@ -33,13 +36,15 @@ export function AlertsPanel({ alerts = [] }: AlertsPanelProps) {
                   <p className="text-sm">{alert.message}</p>
                   <p className="text-xs text-gray-500 mt-1">
                     {new Date(alert.timestamp).toLocaleString()}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))
+                  </p>))
         )}
       </div>
-    </div>
-  )
+    );
 }
+  );
+</div>
+</div>
+</div>
+</div>
+}
+</div>

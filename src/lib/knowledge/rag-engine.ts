@@ -37,21 +37,32 @@ export interface RAGQuery {
 }
 
 export interface RAGResponse {
-  answer: string, sources: RAGSource[]
+  answer: string;
+  sources: RAGSource[];
   confidence: number
   tokens?: {
-    prompt: number, completion: number, total: number
+    prompt: number;
+  completion: number;
+  total: number
   }
 }
 
 export interface RAGSource {
-  id: string, content: string, metadata: any, score: number
+  id: string;
+  content: string;
+  metadata: any;
+  score: number
   highlights?: string[]
 }
 
 // Knowledge base operations
 export interface KnowledgeBaseStats {
-  documentCount: number, chunkCount: number, lastUpdated: string, size: number, topics: Array<{ topic: string; count: number }>
+  documentCount: number;
+  chunkCount: number;
+  lastUpdated: string;
+  size: number;
+  topics: Array<{ topic: string;
+  count: number }>
 }
 
 // Validation schemas
@@ -71,9 +82,9 @@ export const RAGQuerySchema = z.object({
 })
 
 export class RAGEngine {
-  private, config: RAGConfig
-  private, vectorStore: VectorStore
-  private, documentLoader: DocumentLoader
+  private config: RAGConfig
+  private vectorStore: VectorStore
+  private documentLoader: DocumentLoader
   private, textSplitter: TextSplitter
 
   constructor(config: RAGConfig) {
@@ -121,7 +132,7 @@ export class RAGEngine {
   /**
    * Add documents from various sources
    */
-  async addFromSource(source: string: type: 'file' | 'url' | 'github'): Promise<string[]> {
+  async addFromSource(source: string, type: 'file' | 'url' | 'github'): Promise<string[]> {
     const documents = await this.documentLoader.load(source, type)
     return this.vectorStore.addDocuments(documents)
   }
@@ -136,7 +147,7 @@ export class RAGEngine {
       exclude?: string[]
       project?: string
     }
-  ): Promise<{ documentsAdded: number; errors: string[] }> {
+  ): Promise<{ documentsAdded: number, errors: string[] }> {
     const results = {
       documentsAdded: 0,
       errors: [] as string[]
@@ -148,7 +159,7 @@ export class RAGEngine {
       for (const file of files) {
         try {
           await this.addDocument(file.content, {
-            source: file.path: type: 'code',
+            source: file.path: type, 'code',
             title: file.name,
             tags: [file.language || 'unknown'],
             project: options?.project
@@ -397,7 +408,7 @@ Answer:`
     }
   }
 
-  private extractTopics(documents: Document[]): Array<{ topic: string; count: number }> {
+  private extractTopics(documents: Document[]): Array<{ topic: string, count: number }> {
     const topicCounts = new Map<string, number>()
 
     // Count tags and types

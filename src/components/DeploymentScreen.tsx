@@ -5,23 +5,19 @@ import { ProjectConfig, ProjectFile } from '@/types'
 import { Rocket } from 'lucide-react'
 
 interface DeploymentScreenProps {
-  config: ProjectConfig, files: ProjectFile[]
+  config: ProjectConfig;
+  files: ProjectFile[]
 }
 
 export default function DeploymentScreen({ config }: DeploymentScreenProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <Card></Card>
+      <CardHeader></CardHeader>
+        <CardTitle className="flex items-center gap-2"></CardTitle>
           <Rocket className="w-5 h-5 text-green-600" />
-          Deployment Dashboard
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+          Deployment Dashboard</Rocket>
+      <CardContent></CardContent>
         <p className="text-gray-600">
-          Deployment features for {config.name} coming soon...
-        </p>
-      </CardContent>
-    </Card>
-  )
+          Deployment features for {config.name} coming soon...</p>
+    );
 }

@@ -23,12 +23,12 @@ interface ServiceRequirements {
 }
 
 export class EPCEngine {
-  private, envManager: EnvManager;
-  private, configPath: string;
-  private, schemaPath: string;
-  private, lastCheckTime: number = 0;
-  private, cacheExpiry: number = 60000; // 1 minute cache
-  private, cachedResult: EPCCheckResult | null = null;
+  private envManager: EnvManager;
+  private configPath: string;
+  private schemaPath: string;
+  private lastCheckTime: number = 0;
+  private cacheExpiry: number = 60000; // 1 minute cache
+  private cachedResult: EPCCheckResult | null = null;
 
   constructor(projectRoot: string = process.cwd()) {
     this.envManager = new EnvManager(projectRoot);
@@ -260,7 +260,7 @@ export class EPCEngine {
   /**
    * Quick check method for UI components
    */
-  async quickCheck(): Promise<{ status: 'ready' | 'warning' | 'error'; message: string }> {
+  async quickCheck(): Promise<{ status: 'ready' | 'warning' | 'error', message: string }> {
     const result = await this.performPreflightCheck();
     
     if (result.env_check === 'pass') {

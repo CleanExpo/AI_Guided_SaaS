@@ -28,7 +28,9 @@ interface LiveProjectPreviewProps {
 }
 
 interface MockTemplate {
-  id: string, name: string, preview: React.ReactNode
+  id: string;
+  name: string;
+  preview: React.ReactNode
 }
 
 const colorMap: Record<string, string> = {
@@ -39,7 +41,7 @@ const colorMap: Record<string, string> = {
   orange: 'bg-orange-500',
   teal: 'bg-teal-500'
 }
-
+</string>
 const styleMap: Record<string, string> = {
   modern: 'rounded-lg shadow-lg',
   playful: 'rounded-2xl shadow-xl',
@@ -48,7 +50,7 @@ const styleMap: Record<string, string> = {
   dark: 'rounded-lg shadow-2xl bg-gray-900 text-white'
 }
 
-export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreviewProps) {
+export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreviewProps) {</string>
   const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
   const [isGenerating, setIsGenerating] = useState(false)
   const [previewHtml, setPreviewHtml] = useState('')
@@ -103,18 +105,13 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
               <a href="#" class="hover:opacity-80">About</a>
               <a href="#" class="hover:opacity-80">Services</a>
               <a href="#" class="hover:opacity-80">Contact</a>
-            </nav>
-          </div>
-        </header>
         
         <!-- Hero Section -->
         <section class="py-20 px-6 text-center">
           <h2 class="text-4xl font-bold mb-4">Welcome to ${projectName || 'Your Amazing Website'}</h2>
           <p class="text-xl text-gray-600 mb-8">Build something incredible with AI assistance</p>
           <button class="${primaryColor} text-white px-8 py-3 rounded-lg, hover:opacity-90">
-            Get Started
-          </button>
-        </section>
+            Get Started</button>
         
         <!-- Features -->
         ${features.includes('analytics') ? `
@@ -125,17 +122,12 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                 <div class="bg-white p-6 rounded-lg shadow">
                   <div class="text-3xl font-bold ${primaryColor.replace('bg-', 'text-')}">1,234</div>
                   <div class="text-gray-600">Total Visitors</div>
-                </div>
                 <div class="bg-white p-6 rounded-lg shadow">
                   <div class="text-3xl font-bold ${primaryColor.replace('bg-', 'text-')}">567</div>
                   <div class="text-gray-600">Active Users</div>
-                </div>
                 <div class="bg-white p-6 rounded-lg shadow">
                   <div class="text-3xl font-bold ${primaryColor.replace('bg-', 'text-')}">89%</div>
                   <div class="text-gray-600">Conversion Rate</div>
-                </div>
-              </div>
-            </div>
           </section>
         ` : ''}
       </div>
@@ -152,12 +144,9 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <div class="flex items-center gap-4">
             <div class="w-10 h-10 bg-white/20 rounded-lg"></div>
             <h1 class="text-xl font-semibold">${projectName || 'Your App'}</h1>
-          </div>
           <div class="flex items-center gap-4">
-            ${features.includes('notifications') ? '<div class="relative"><div class="w-8 h-8 bg-white/20 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div></div>' : ''}
+            ${features.includes('notifications') ? '<div class="relative"><div class="w-8 h-8 bg-white/20 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full">' : ''}
             <div class="w-8 h-8 bg-white/20 rounded-full"></div>
-          </div>
-        </div>
         
         <!-- Content -->
         <div class="flex h-full">
@@ -168,18 +157,15 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
               ${features.includes('analytics') ? '<a href="#" class="block px-4 py-2, hover:bg-gray-200 rounded">Analytics</a>' : ''}
               ${features.includes('chat') ? '<a href="#" class="block px-4 py-2, hover:bg-gray-200 rounded">Messages</a>' : ''}
               <a href="#" class="block px-4 py-2, hover:bg-gray-200 rounded">Settings</a>
-            </nav>
-          </div>
           
           <!-- Main Content -->
           <div class="flex-1 p-6">
-            ${features.includes('realtime') ? `
+            ${features.includes('realtime') ? `</div>
               <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <div class="flex items-center gap-2">
                   <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   <span class="text-sm text-green-700">Real-time updates enabled</span>
                 </div>
-              </div>
             ` : ''}
             
             <div class="grid grid-cols-2 gap-6">
@@ -191,10 +177,6 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                     <div>
                       <div class="text-sm font-medium">New user registered</div>
                       <div class="text-xs text-gray-500">2 minutes ago</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               
               ${features.includes('analytics') ? `
                 <div class="bg-white p-6 rounded-lg shadow">
@@ -208,13 +190,8 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                       <span class="text-gray-600">Revenue</span>
                       <span class="font-semibold">$12,345</span>
                     </div>
-                  </div>
-                </div>
               ` : ''}
             </div>
-          </div>
-        </div>
-      </div>
     `
   }
 
@@ -228,19 +205,16 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <h1 class="text-2xl font-bold">${projectName || 'Your Store'}</h1>
             <div class="flex items-center gap-6">
-              ${features.includes('search') ? '<input type="text" placeholder="Search products..." class="px-4 py-2 border rounded-lg" />' : ''}
+              ${features.includes('search') ? '<input type="text" placeholder="Search products..." class="px-4 py-2 border rounded-lg" />' : ''}</input>
               <div class="relative">
                 <div class="w-8 h-8 ${primaryColor} text-white rounded-full flex items-center justify-center text-sm">3</div>
-              </div>
-            </div>
-          </div>
         </header>
         
         <!-- Products Grid -->
         <div class="container mx-auto px-4 py-8">
           <h2 class="text-2xl font-bold mb-6">Featured Products</h2>
           <div class="grid grid-cols-3 gap-6">
-            ${[1, 2, 3].map(i => `
+            ${[1, 2, 3].map(i => `</div>
               <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <div class="h-48 bg-gray-200"></div>
                 <div class="p-4">
@@ -249,14 +223,9 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                   <div class="flex items-center justify-between">
                     <span class="text-xl font-bold">$${i * 29}.99</span>
                     <button class="${primaryColor} text-white px-4 py-2 rounded text-sm">
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </div>
+                      Add to Cart</button>
             `).join('')}
           </div>
-        </div>
         
         ${features.includes('payments') ? `
           <div class="container mx-auto px-4 py-4 border-t">
@@ -266,9 +235,6 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
                 <div class="w-12 h-8 bg-gray-200 rounded"></div>
                 <div class="w-12 h-8 bg-gray-200 rounded"></div>
                 <div class="w-12 h-8 bg-gray-200 rounded"></div>
-              </div>
-            </div>
-          </div>
         ` : ''}
       </div>
     `
@@ -284,23 +250,18 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <div class="flex items-center justify-between">
             <h1 class="text-xl font-bold">${projectName || 'Dashboard'}</h1>
             <div class="flex items-center gap-4">
-              ${features.includes('notifications') ? '<div class="relative"><div class="w-8 h-8 bg-gray-200 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div></div>' : ''}
+              ${features.includes('notifications') ? '<div class="relative"><div class="w-8 h-8 bg-gray-200 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full">' : ''}
               <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-            </div>
-          </div>
-        </div>
         
         <!-- Dashboard Content -->
         <div class="p-6">
           <!-- Stats Cards -->
           <div class="grid grid-cols-4 gap-6 mb-6">
-            ${['Total Revenue', 'Active Users', 'Conversion Rate', 'Growth'].map((label, i) => `
+            ${['Total Revenue', 'Active Users', 'Conversion Rate', 'Growth'].map((label, i) => `</div>
               <div class="bg-white p-6 rounded-lg shadow">
                 <div class="text-sm text-gray-600 mb-2">${label}</div>
                 <div class="text-2xl font-bold ${i === 0 ? primaryColor.replace('bg-', 'text-') : ''}">
-                  ${i === 0 ? '$123,456' : i === 1 ? '1,234' : i === 2 ? '12.3%' : '+23.5%'}
-                </div>
-              </div>
+                  ${i === 0 ? '$123,456' : i === 1 ? '1,234' : i === 2 ? '12.3%' : '+23.5%'}</div>
             `).join('')}
           </div>
           
@@ -309,21 +270,15 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
             <div class="bg-white p-6 rounded-lg shadow">
               <h3 class="text-lg font-semibold mb-4">Revenue Overview</h3>
               <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-400">
-                Chart Placeholder
-              </div>
-            </div>
+                Chart Placeholder</div>
             
             ${features.includes('analytics') ? `
               <div class="bg-white p-6 rounded-lg shadow">
                 <h3 class="text-lg font-semibold mb-4">User Analytics</h3>
                 <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-400">
-                  Analytics Chart
-                </div>
-              </div>
+                  Analytics Chart</div>
             ` : ''}
           </div>
-        </div>
-      </div>
     `
   }
 
@@ -334,8 +289,6 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           <div class="w-20 h-20 ${primaryColor} rounded-full mx-auto mb-4"></div>
           <h1 class="text-3xl font-bold mb-2">${projectData.projectName || 'Your Project'}</h1>
           <p class="text-gray-600">Start building something amazing</p>
-        </div>
-      </div>
     `
   }
 
@@ -355,18 +308,16 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
             {isGenerating && (
               <Badge variant="secondary" className="animate-pulse">
                 <Sparkles className="h-3 w-3 mr-1" />
-                Generating...
-              </Badge>
+                Generating...</Sparkles>
             )}
           </div>
           <button
             onClick={generatePreview}
-            className="p-2, hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             disabled={isGenerating}
           >
             <RefreshCw className={cn("h-4 w-4", isGenerating && "animate-spin")} />
           </button>
-        </div>
         
         {/* Device Selector */}
         <div className="flex gap-2">
@@ -376,7 +327,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
               "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors",
               device === 'desktop' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
-          >
+          ></button>
             <Monitor className="h-4 w-4" />
             <span className="text-sm">Desktop</span>
           </button>
@@ -386,7 +337,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
               "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors",
               device === 'tablet' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
-          >
+          ></button>
             <Tablet className="h-4 w-4" />
             <span className="text-sm">Tablet</span>
           </button>
@@ -396,12 +347,10 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
               "flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors",
               device === 'mobile' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
-          >
+          ></button>
             <Smartphone className="h-4 w-4" />
             <span className="text-sm">Mobile</span>
           </button>
-        </div>
-      </div>
       
       {/* Preview Area */}
       <div className="flex-1 bg-gray-100 p-4 overflow-auto">
@@ -412,34 +361,75 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
           device === 'tablet' && 'rounded-2xl',
           device === 'desktop' && 'rounded-lg'
         )}>
-          {isGenerating ? (
+          {isGenerating ? (</div>
             <div className="h-[600px] flex items-center justify-center">
               <div className="text-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
-                <p className="text-muted-foreground">Generating preview...</p>
-              </div>
-            </div>
-          ) : (
+                <p className="text-muted-foreground">Generating preview...</p>) : (
             <div 
               className="h-[600px] overflow-auto"
               dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
-          )}
-        </div>
-      </div>
+          )}</div>
       
       {/* Code View Tab */}
       <Tabs defaultValue="preview" className="border-t">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="preview">Preview</TabsTrigger>
           <TabsTrigger value="code">Code</TabsTrigger>
-        </TabsList>
         <TabsContent value="code" className="p-4">
           <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-auto text-sm">
             <code>{previewHtml}</code>
-          </pre>
-        </TabsContent>
-      </Tabs>
+    );
+</pre>
+</TabsContent>
+</TabsList>
+</Tabs>
+</div>
+</div>
+</Badge>
+</div>
+</div>
+</div>
+</Card>
+</div>
+</div>
+}
+    </pre>
+    </TabsContent>
+    </TabsList>
+    </Tabs>
+    </div>
+    </Badge>
+    </div>
+    </div>
     </Card>
-  )
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </header>
+    </div>
+    </div>
+    </div>
+    </div>
+    </nav>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    </nav>
+    </div>
+    </header>
+    </div>
+  );
 }

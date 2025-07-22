@@ -10,23 +10,34 @@ export interface UseMCPOptions {
 }
 
 export interface UseMCPReturn {
-  // Server management, servers: MCPServer[]
+  // Server management
+  servers: MCPServer[]
   connectServer: (serverId: string) => Promise<void>
   disconnectServer: (serverId: string) => Promise<void>
   registerCustomServer: (server: Omit<MCPServer, 'status' | 'tools'>) => Promise<void>
   
-  // Tool operations, tools: MCPTool[]
+  // Tool operations
+  tools: MCPTool[]
   callTool: (call: MCPToolCall) => Promise<MCPToolResult>
   callToolsParallel: (calls: MCPToolCall[]) => Promise<MCPToolResult[]>
   
-  // Orchestration, createPlan: (description: string, steps: any[]) => MCPOrchestrationPlan, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string, MCPToolResult>>
+  // Orchestration
+  createPlan: (description: string;
+  steps: any[]) => MCPOrchestrationPlan
+  executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string, MCPToolResult>>
   
-  // Resources & Prompts, listResources: (serverId: string) => Promise<any[]>
-  readResource: (serverId: string, uri: string) => Promise<any>
+  // Resources & Prompts
+  listResources: (serverId: string) => Promise<any[]>
+  readResource: (serverId: string;
+  uri: string) => Promise<any>
   listPrompts: (serverId: string) => Promise<any[]>
-  getPrompt: (serverId: string, name: string, args?: any) => Promise<string>
+  getPrompt: (serverId: string;
+  name: string, args?: any) => Promise<string>
   
-  // State, loading: boolean, error: string | null, initialized: boolean
+  // State
+  loading: boolean
+  error: string | null
+  initialized: boolean
 }
 
 export function useMCP(options: UseMCPOptions = {}): UseMCPReturn {

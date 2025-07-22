@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
     // Process project request
     const projectRequest: ProjectRequest = {
-      description: message: type: projectType || 'full-stack',
+      description: message, type: projectType || 'full-stack',
       context: {
         ...context,
         userId: user.id,
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
       priorities
     }
 
-    console.log('Processing agent, request:', projectRequest.type)
+    console.log('Processing agent request:', projectRequest.type)
     const result = await orchestrator.processProject(projectRequest)
 
     // Save artifacts if project ID provided

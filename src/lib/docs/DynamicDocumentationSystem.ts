@@ -9,33 +9,46 @@ const supabase = createClient(
 )
 
 export interface DocumentationSection {
-  id: string, title: string, content: string, metadata: {
-    category: string, tags: string[]
-    difficulty: 'beginner' | 'intermediate' | 'advanced'
-    estimatedTime: string, lastUpdated: Date, version: string
+  id: string;
+  title: string;
+  content: string;
+  metadata: {
+    category: string;
+  tags: string[];
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
+    estimatedTime: string;
+  lastUpdated: Date;
+  version: string
   }
-  relatedSections: string[]
-  interactiveElements: InteractiveElement[]
+  relatedSections: string[], interactiveElements: InteractiveElement[]
   codeExamples: CodeExample[]
   systemState?: SystemStateContext
 }
 
 export interface InteractiveElement {
-  id: string: type: 'tutorial' | 'demo' | 'playground' | 'quiz'
-  title: string, description: string, config: Record<string, any>
+  id: string;
+  type: 'tutorial' | 'demo' | 'playground' | 'quiz'
+  title: string;
+  description: string;
+  config: Record<string, any>
   completionTracking?: {
-    required: boolean, points: number
+    required: boolean;
+  points: number
   }
 }
 
 export interface CodeExample {
-  id: string, title: string, language: string, code: string, runnable: boolean
+  id: string;
+  title: string;
+  language: string;
+  code: string;
+  runnable: boolean
   expectedOutput?: string
   systemRequirements?: string[]
 }
 
 export interface SystemStateContext {
-  componentsActive: string[]
+  componentsActive: string[];
   featuresEnabled: string[]
   configurationValues: Record<string, any>
   performanceMetrics: Record<string, number>
@@ -43,10 +56,12 @@ export interface SystemStateContext {
 }
 
 export interface UserProgress {
-  userId: string, sectionsCompleted: string[]
+  userId: string;
+  sectionsCompleted: string[];
   interactiveElementsCompleted: string[]
   quizScores: Record<string, number>
-  totalPoints: number, currentPath: string[]
+  totalPoints: number;
+  currentPath: string[];
   preferences: {
     difficulty: 'beginner' | 'intermediate' | 'advanced'
     learningStyle: 'visual' | 'textual' | 'interactive'
@@ -55,15 +70,19 @@ export interface UserProgress {
 }
 
 export interface DocumentationSearchResult {
-  sectionId: string, title: string, snippet: string, relevanceScore: number, context: string[]
+  sectionId: string;
+  title: string;
+  snippet: string;
+  relevanceScore: number;
+  context: string[]
 }
 
 export class DynamicDocumentationSystem extends EventEmitter {
-  private, sections: Map<string, DocumentationSection> = new Map()
-  private, userProgress: Map<string, UserProgress> = new Map()
-  private, searchIndex: Map<string, string[]> = new Map()
-  private, systemState: SystemStateContext | null = null
-  private, updateInterval: NodeJS.Timeout | null = null
+  private sections: Map<string, DocumentationSection> = new Map()
+  private userProgress: Map<string, UserProgress> = new Map()
+  private searchIndex: Map<string, string[]> = new Map()
+  private systemState: SystemStateContext | null = null
+  private updateInterval: NodeJS.Timeout | null = null
   
   constructor() {
     super()
@@ -447,7 +466,7 @@ export async function getCachedData(key: string) {
         id: 'query-optimization',
         title: 'Optimized Database Query',
         language: 'sql',
-        code: `-- Before: Slow query
+        code: `--, Before: Slow query
 SELECT * FROM projects 
 WHERE user_id = $1 
 AND status = 'active'
@@ -865,8 +884,8 @@ LIMIT 50;`,
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-    pre { background: #f4f4f4; padding: 10px; overflow-x: auto; }
-    code { background: #f4f4f4; padding: 2px 4px; }
+    pre { background: #f4f4f4, padding: 10px; overflow-x: auto; }
+    code { background: #f4f4f4, padding: 2px 4px; }
   </style>
 </head>
 <body>

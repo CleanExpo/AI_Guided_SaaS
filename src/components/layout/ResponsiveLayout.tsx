@@ -42,10 +42,8 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
       )}
       data-viewport={viewport}
     >
-      {/* Mobile-first responsive container */}
+      {/* Mobile-first responsive container */}</div>
       <div className="mx-auto max-w-[1920px]">
-        {children}
-      </div>
-    </div>
-  );
+        {children}</div>
+    );
 }

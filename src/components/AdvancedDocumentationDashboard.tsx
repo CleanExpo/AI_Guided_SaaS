@@ -5,23 +5,19 @@ import { ProjectConfig } from '@/types'
 import { BookOpen } from 'lucide-react'
 
 interface AdvancedDocumentationDashboardProps {
-  projectConfig: ProjectConfig, onDocumentationComplete: (result: unknown) => void
+  projectConfig: ProjectConfig;
+  onDocumentationComplete: (result: unknown) => void
 }
 
 export default function AdvancedDocumentationDashboard({ projectConfig }: AdvancedDocumentationDashboardProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <Card></Card>
+      <CardHeader></CardHeader>
+        <CardTitle className="flex items-center gap-2"></CardTitle>
           <BookOpen className="w-5 h-5 text-green-600" />
-          Advanced Documentation Dashboard
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+          Advanced Documentation Dashboard</BookOpen>
+      <CardContent></CardContent>
         <p className="text-gray-600">
-          Advanced documentation features for {projectConfig.name} coming soon...
-        </p>
-      </CardContent>
-    </Card>
-  )
+          Advanced documentation features for {projectConfig.name} coming soon...</p>
+    );
 }

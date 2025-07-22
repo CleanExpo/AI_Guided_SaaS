@@ -40,8 +40,7 @@ export function Spinner({
       aria-label="Loading"
     >
       <span className="sr-only">Loading...</span>
-    </div>
-  );
+    );
 }
 
 // Dots Loading Component
@@ -62,7 +61,7 @@ export function LoadingDots({
       role="status"
       aria-label="Loading"
     >
-      {[0, 1, 2].map(i => (
+      {[0, 1, 2].map(i => (</div>
         <div
           key={i}
           className={cn(
@@ -75,10 +74,9 @@ export function LoadingDots({
             animationDelay: `${i * 0.2}s`,
             animationDuration: '1.4s'}}
         />
-      ))}
+      ))}</div>
       <span className="sr-only">Loading...</span>
-    </div>
-  );
+    );
 }
 
 // Pulse Loading Component
@@ -98,8 +96,7 @@ export function LoadingPulse({
       aria-label="Loading"
     >
       <span className="sr-only">Loading...</span>
-    </div>
-  );
+    );
 }
 
 // Skeleton Loading Component
@@ -139,8 +136,7 @@ export function Skeleton({
             )}
             style={{ width: i === lines - 1 ? '75%' : width, height }}
           />
-        ))}
-      </div>
+        ))}</div>
     );
   }
 
@@ -152,8 +148,7 @@ export function Skeleton({
       aria-label="Loading content"
     >
       <span className="sr-only">Loading...</span>
-    </div>
-  );
+    );
 }
 
 // Wave Loading Component
@@ -174,7 +169,7 @@ export function LoadingWave({
       role="status"
       aria-label="Loading"
     >
-      {[0, 1, 2, 3, 4].map(i => (
+      {[0, 1, 2, 3, 4].map(i => (</div>
         <div
           key={i}
           className={cn(
@@ -186,10 +181,9 @@ export function LoadingWave({
             animationDelay: `${i * 0.1}s`,
             animationDuration: '1.2s'}}
         />
-      ))}
+      ))}</div>
       <span className="sr-only">Loading...</span>
-    </div>
-  );
+    );
 }
 
 // Brand Loading Component with Logo
@@ -201,7 +195,7 @@ export function BrandLoader({ size = 'md', className }: LoadingProps) {
       aria-label="Loading"
     >
       <div className={cn('relative', sizeClasses[size])}>
-        {/* Brand Logo with Animation */}
+        {/* Brand Logo with Animation */}</div>
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary-600 to-brand-primary-800 animate-pulse-slow" />
         <div className="absolute inset-2 rounded-full bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center">
           <span className="text-white font-bold text-xs">AGS</span>
@@ -210,11 +204,9 @@ export function BrandLoader({ size = 'md', className }: LoadingProps) {
         <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-brand-primary-400 animate-spin" />
       </div>
       <div className="text-sm text-brand-secondary-600 animate-pulse">
-        Loading AI Guided SaaS...
-      </div>
+        Loading AI Guided SaaS...</div>
       <span className="sr-only">Loading AI Guided SaaS Platform...</span>
-    </div>
-  );
+    );
 }
 
 // Card Skeleton
@@ -227,8 +219,7 @@ export function CardSkeleton({ className }: { className?: string }) {
         <Skeleton variant="rectangular" height="32px" width="80px" />
         <Skeleton variant="rectangular" height="32px" width="80px" />
       </div>
-    </div>
-  );
+    );
 }
 
 // Table Skeleton
@@ -242,7 +233,7 @@ export function TableSkeleton({
 }) {
   return (
     <div className={cn('space-y-3', className)}>
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex space-x-4">
         {Array.from({ length: columns }).map((_, i) => (
           <Skeleton
@@ -251,8 +242,7 @@ export function TableSkeleton({
             height="20px"
             className="flex-1"
           />
-        ))}
-      </div>
+        ))}</Skeleton>
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <div key={rowIndex} className="flex space-x-4">
@@ -263,11 +253,8 @@ export function TableSkeleton({
               height="16px"
               className="flex-1"
             />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
+          ))}</Skeleton>))}
+    );
 }
 
 // Page Loading Component
@@ -278,7 +265,7 @@ export function PageLoader({ className }: { className?: string }) {
     >
       <BrandLoader size="xl" />
     </div>
-  );
+    );
 }
 
 // Button Loading State
@@ -308,14 +295,14 @@ export function ButtonLoading({
       disabled={disabled || loading}
       {...props}
     >
-      {loading && (
+      {loading && (</button>
         <div className="absolute inset-0 flex items-center justify-center">
           <Spinner size={size} color="primary" />
         </div>
       )}
       <span className={cn(loading && 'opacity-0')}>{children}</span>
     </button>
-  );
+    );
 }
 
 // Progress Bar Loading
@@ -345,12 +332,10 @@ export function ProgressLoading({
 
   return (
     <div className={cn('w-full', className)}>
-      {showPercentage && (
+      {showPercentage && (</div>
         <div className="flex justify-between text-sm text-brand-secondary-600 mb-1">
           <span>Progress</span>
-          <span>{Math.round(progress)}%</span>
-        </div>
-      )}
+          <span>{Math.round(progress)}%</span>)}
       <div
         className={cn(
           'w-full bg-brand-secondary-200 rounded-full overflow-hidden',
@@ -365,8 +350,7 @@ export function ProgressLoading({
           style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
         />
       </div>
-    </div>
-  );
+    );
 }
 
 // Shimmer Effect
@@ -380,7 +364,7 @@ export function ShimmerEffect({ className }: { className?: string }) {
     >
       <div className="absolute inset-0 -translate-x-full animate-shimmer bg-shimmer-gradient" />
     </div>
-  );
+    );
 }
 
 // Loading Container
@@ -399,8 +383,7 @@ export function LoadingContainer({
   if (loading) {
     return (
       <div className={cn('flex items-center justify-center p-8', className)}>
-        {fallback || <BrandLoader />}
-      </div>
+        {fallback || <BrandLoader />}</BrandLoader>
     );
   }
 
@@ -412,14 +395,21 @@ export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
   switch (variant) {
     case 'dots':
       return <LoadingDots {...props} />;
-    case 'pulse':
+    case 'pulse':</LoadingDots>
       return <LoadingPulse {...props} />;
-    case 'wave':
+    case 'wave':</LoadingPulse>
       return <LoadingWave {...props} />;
-    case 'brand':
+    case 'brand':</LoadingWave>
       return <BrandLoader {...props} />;
     case 'spinner':
-    default:
+    default:</BrandLoader>
       return <Spinner {...props} />;
   }
+}
+</Spinner>
+}
+    </div>
+    </HTMLButtonElement>
+    </div>
+  );
 }

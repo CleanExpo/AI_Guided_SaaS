@@ -9,7 +9,8 @@ import { useSession } from 'next-auth/react'
 
 export default function DocsPage() {
   const { data: session } = useSession()
-  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)
+  const [docSystem, setDocSystem] = useState<DynamicDocumentationSystem | null>(null)</DynamicDocumentationSystem>
+      </InteractiveTutorialSystem>
   const [tutorialSystem, setTutorialSystem] = useState<InteractiveTutorialSystem | null>(null)
   
   useEffect(() => {
@@ -31,9 +32,9 @@ export default function DocsPage() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading documentation...</p>
+    
         </div>
-      </div>
-    )
+    );
   }
   
   return (
@@ -43,17 +44,12 @@ export default function DocsPage() {
           <div>
             <h1 className="text-2xl font-bold">Documentation</h1>
             <p className="text-muted-foreground">Learn how to use AI Guided SaaS</p>
-          </div>
           <div className="flex items-center gap-4">
             <button
               onClick={() => window.location.href = '/tutorials'}
-              className="text-sm text-primary, hover:underline"
+              className="text-sm text-primary hover:underline"
             >
-              Interactive Tutorials →
-            </button>
-          </div>
-        </div>
-      </header>
+              Interactive Tutorials →</button>
       
       <div className="flex-1 overflow-hidden">
         <DocumentationViewer
@@ -71,5 +67,16 @@ export default function DocsPage() {
         userId={session?.user?.id || 'anonymous'}
       />
     </div>
-  )
+    );
 }
+
+    </header>
+    </div>
+  );
+</div>
+</header>
+</div>
+</div>
+</InteractiveTutorialSystem>
+}
+</InteractiveTutorialSystem>

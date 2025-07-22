@@ -180,7 +180,7 @@ export const AgentResultSchema = z.object({
 
 // Environment variable schemas
 export const EnvSchema = z.object({
-  // Database: DATABASE_URL: z.string().url(),
+  // Database: DATABASE_URL, z.string().url(),
   DIRECT_URL: z.string().url().optional(),
   
   // Authentication: NEXTAUTH_SECRET: z.string().min(32),
@@ -213,7 +213,7 @@ export const EnvSchema = z.object({
 export function validate<T>(
   schema: z.ZodSchema<T>,
   data: unknown
-): { success: true; data: T } | { success: false; error: z.ZodError } {
+): { success: true, data: T } | { success: false, error: z.ZodError } {
   try {
     const validated = schema.parse(data)
     return { success: true, data: validated }
@@ -228,7 +228,7 @@ export function validate<T>(
 export function validateAsync<T>(
   schema: z.ZodSchema<T>,
   data: unknown
-): Promise<{ success: true; data: T } | { success: false; error: z.ZodError }> {
+): Promise<{ success: true, data: T } | { success: false, error: z.ZodError }> {
   return new Promise((resolve) => {
     try {
       const validated = schema.parse(data)

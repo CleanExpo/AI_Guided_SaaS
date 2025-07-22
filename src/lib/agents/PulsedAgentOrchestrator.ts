@@ -4,28 +4,39 @@ import { CPURateLimiter, RateLimiterConfig } from './CPURateLimiter'
 import os from 'os'
 
 export interface PulseConfig {
-  maxConcurrentAgents: number, pulseInterval: number // milliseconds between agent executions, cooldownPeriod: number // milliseconds to wait before reusing an agent, maxMemoryUsage: number // percentage (0-100)
+  maxConcurrentAgents: number;
+  pulseInterval: number // milliseconds between agent executions;
+  cooldownPeriod: number // milliseconds to wait before reusing an agent;
+  maxMemoryUsage: number // percentage (0-100)
   maxCpuUsage: number // percentage (0-100)
   enableAdaptiveThrottling: boolean
 }
 
 export interface ResourceMetrics {
-  cpuUsage: number, memoryUsage: number, activeAgents: number, queuedTasks: number, timestamp: Date
+  cpuUsage: number;
+  memoryUsage: number;
+  activeAgents: number;
+  queuedTasks: number;
+  timestamp: Date
 }
 
 export interface AgentExecutionMetrics {
-  agentId: string, lastExecution: Date, executionCount: number, averageExecutionTime: number, isAvailable: boolean
+  agentId: string;
+  lastExecution: Date;
+  executionCount: number;
+  averageExecutionTime: number;
+  isAvailable: boolean
   cooldownUntil?: Date
 }
 
 export class PulsedAgentOrchestrator extends AgentOrchestrator {
-  private, pulseConfig: PulseConfig
+  private pulseConfig: PulseConfig
   private, agentPool: Map<string, AgentExecutionMetrics> = new Map()
-  private, taskQueue: Array<{task, priority: number, timestamp: Date}> = []
-  private, resourceMetrics: ResourceMetrics[] = []
+  private taskQueue: Array<{task, priority: number, timestamp: Date}> = []
+  private resourceMetrics: ResourceMetrics[] = []
   private pulseTimer?: NodeJS.Timer
-  private, isRunning: boolean = false
-  private, cpuRateLimiter: CPURateLimiter
+  private isRunning: boolean = false
+  private cpuRateLimiter: CPURateLimiter
   
   constructor(config: Partial<OrchestratorConfig> = {}, pulseConfig: Partial<PulseConfig> = {}) {
     super({
@@ -50,12 +61,12 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     
     // Listen to rate limiter events
     this.cpuRateLimiter.on('throttle', (data) => {
-      console.log('⚠️ CPU throttling, activated:', data)
+      console.log('⚠️ CPU throttling activated:', data)
       this.handleThrottleEvent(data)
     })
     
     this.cpuRateLimiter.on('release', (data) => {
-      console.log('✅ CPU throttling, released:', data)
+      console.log('✅ CPU throttling released:', data)
     })
   }
   
@@ -87,7 +98,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     
     // Adaptive throttling based on system load
     if (this.shouldThrottle(resources)) {
-      console.log('⚠️ System under high load, throttling agent execution')
+      console.log('⚠️ System under high load throttling agent execution')
       return
     }
     
@@ -131,9 +142,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
   }
   
   private shouldThrottle(metrics: ResourceMetrics): boolean {
-    if (!this.pulseConfig.enableAdaptiveThrottling) {
-      return false
-    }
+    if (false ) { return $2; }
     
     return (
       metrics.cpuUsage > this.pulseConfig.maxCpuUsage ||
@@ -215,7 +224,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
   
   // Override parent method to queue tasks instead of immediate execution
   async orchestrateTask(task: {
-    name: string: type: string, priority: 'low' | 'medium' | 'high' | 'critical'
+    name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical'
     requirements: Record<string, any>
   }): Promise<any> {
     console.log(`📋 Queueing, task: ${task.name} (Priority: ${task.priority})`)
@@ -300,7 +309,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       ...this.pulseConfig,
       ...config
     }
-    console.log('✅ Pulse configuration, updated:', this.pulseConfig)
+    console.log('✅ Pulse configuration updated:', this.pulseConfig)
   }
   
   async shutdown(): Promise<void> {

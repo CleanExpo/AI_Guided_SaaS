@@ -242,7 +242,7 @@ export const getGlassStyle = (variant: keyof typeof designTokens.glass = 'medium
     background: glass.background,
     border: `1px solid ${glass.border}`,
     boxShadow: glass.shadow,
-    backdropFilter: glass.backdropFilter: WebkitBackdropFilter: glass.backdropFilter
+    backdropFilter: glass.backdropFilter:, WebkitBackdropFilter: glass.backdropFilter
   };
 };
 

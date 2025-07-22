@@ -43,7 +43,7 @@ const buttonVariants = cva(
 export interface ButtonPremiumProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 
     'size' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' |
-    'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'transition'>,
+    'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'transition'>,</React>
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   glow?: boolean;
@@ -52,7 +52,7 @@ export interface ButtonPremiumProps
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
 }
-
+</typeof>
 const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
   ({ 
     className, 
@@ -67,14 +67,16 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
     iconPosition = 'left',
     children,
     ...props 
-  }, ref) => {
-    const [ripples, setRipples] = React.useState<Array<{ id: number; x: number; y: number }>>([]);
+  }, ref) => {</HTMLButtonElement>
+        </Array>
+    const [ripples, setRipples] = React.useState<Array<{ id: number, x: number; y: number }>>([]);
     const rippleId = React.useRef(0);
 
     const Comp = asChild ? Slot : motion.button;
-
+</Array>
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       if (ripple && !loading) {
+            </HTMLButtonElement>
         const rect = event.currentTarget.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
@@ -124,12 +126,12 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
         {...props}
       >
         {/* Shimmer effect for shimmer animation */}
-        {animation === 'shimmer' && (
+        {animation === 'shimmer' && (</Comp>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
         )}
         
         {/* Ripple effects */}
-        {ripples.map(ripple => (
+        {ripples.map(ripple => (</div>
           <span
             key={ripple.id}
             className="absolute rounded-full bg-white/30 animate-ping"
@@ -142,15 +144,14 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
         ))}
         
         {/* Loading spinner */}
-        {loading && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-          </div>
+        {loading && (</span>
+          <div className="absolute inset-0 flex items-center justify-center"></div>
+            <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" /></div>
         )}
         
         {/* Content */}
         <div className={cn('flex items-center gap-2', loading && 'opacity-0')}>
-          {icon && iconPosition === 'left' && (
+          {icon && iconPosition === 'left' && (</div>
             <span className="flex-shrink-0">{icon}</span>
           )}
           {children}
@@ -158,7 +159,6 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
             <span className="flex-shrink-0">{icon}</span>
           )}
         </div>
-      </Comp>
     );
   }
 );
@@ -166,3 +166,5 @@ const ButtonPremium = React.forwardRef<HTMLButtonElement, ButtonPremiumProps>(
 ButtonPremium.displayName = 'ButtonPremium';
 
 export { ButtonPremium, buttonVariants };
+
+}

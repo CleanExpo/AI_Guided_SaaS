@@ -2,7 +2,10 @@ import { NextRequest } from 'next/server'
 import { supabase } from './database'
 
 export interface ApiMetric {
-  endpoint: string, method: string, statusCode: number, responseTime: number
+  endpoint: string;
+  method: string;
+  statusCode: number;
+  responseTime: number
   userId?: string
   errorMessage?: string
   metadata?: Record<string, unknown>
@@ -102,7 +105,7 @@ export class ApiTracking {
   
   // Track specific resource usage
   static async trackResourceUsage(
-    userId: string: resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use',
+    userId: string, resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use',
     quantity: number = 1,
     metadata?: Record<string, unknown>
   ): Promise<void> {
@@ -115,7 +118,7 @@ export class ApiTracking {
       const { error } = await supabase
         .from('usage_records')
         .insert({
-          user_id: userId: resource_type: resourceType,
+          user_id: userId, resource_type: resourceType,
           quantity,
           metadata: {
             ...metadata,
@@ -136,7 +139,7 @@ export class ApiTracking {
   static async getApiPerformanceSummary(
     timeRange: '1h' | '24h' | '7d' | '30d' = '24h'
   ): Promise<{
-    totalCalls: number, avgResponseTime: number, errorRate: number, topEndpoints: Array<{ endpoint: string; calls: number; avgTime: number }>
+    totalCalls: number, avgResponseTime: number, errorRate: number, topEndpoints: Array<{ endpoint: string, calls: number; avgTime: number }>
   } | null> {
     if (!supabase) return null
     
@@ -177,7 +180,7 @@ export class ApiTracking {
       const errorRate = (errorCount / totalCalls) * 100
       
       // Group by endpoint
-      const endpointStats: Record<string, { calls: number; totalTime: number }> = {}
+      const endpointStats: Record<string, { calls: number, totalTime: number }> = {}
       metrics.forEach(metric => {
         if (!endpointStats[metric.endpoint]) {
           endpointStats[metric.endpoint] = { calls: 0, totalTime: 0 }
