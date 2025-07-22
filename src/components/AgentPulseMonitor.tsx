@@ -39,7 +39,7 @@ interface PulseStatus {
     agentPool: AgentMetrics[];
   }
 }
-export function AgentPulseMonitor(): void {
+export function AgentPulseMonitor(): JSX.Element {
   const [status, setStatus] = useState<PulseStatus | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -63,8 +63,8 @@ export function AgentPulseMonitor(): void {
   const updateConfig = async (updates: Record<string, number>) => {
     try {
       const response = await fetch('/api/agents/pulse-config', {
-        method: 'POST';
-        headers: { 'Content-Type': 'application/json' };
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
       })
       if (!response.ok) throw new Error('Failed to update config')

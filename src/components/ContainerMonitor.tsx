@@ -16,7 +16,7 @@ interface ContainerInfo {
   uptime: number;
   restartCount: number;
 }
-export function ContainerMonitor(): void {
+export function ContainerMonitor(): JSX.Element {
   const [containers, setContainers] = useState<ContainerInfo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedContainer, setSelectedContainer] = useState<string | null>(null);
@@ -37,15 +37,15 @@ export function ContainerMonitor(): void {
       setIsLoading(false)
     }
   }
-  const handleContainerAction = async (containerId: string; action: string) => {
+  const handleContainerAction = async (containerId: string, action: string) => {
     try {
-      const response = await fetch(`/api/agents/containers/${containerId}/${action}`, {`
+      const response = await fetch(`/api/agents/containers/${containerId}/${action}`, {
         method: 'POST'
       })
-      if (!response.ok) throw new Error(`Failed to ${action} container`)`
+      if (!response.ok) throw new Error(`Failed to ${action} container`)
       await fetchContainers()
     } catch (error) {
-      console.error(`Error performing ${action}:`, error)`
+      console.error(`Error performing ${action}:`, error)
     }
   }
   const getStatusIcon = (status: string) => {
@@ -62,8 +62,8 @@ export function ContainerMonitor(): void {
   }
   const getHealthBadge = (health: string) => {
     const variants = {
-      healthy: 'default';
-      unhealthy: 'destructive';
+      healthy: 'default',
+      unhealthy: 'destructive',
       unknown: 'secondary'
     } as const
     return (
@@ -75,7 +75,7 @@ export function ContainerMonitor(): void {
   const formatUptime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    return `${hours}h ${minutes}m``
+    return `${hours}h ${minutes}m`
   }
   if (isLoading) return <div>Loading container information...</div>
   return (
@@ -95,7 +95,7 @@ export function ContainerMonitor(): void {
             {containers.map((container) => (
               <div
                 key={container.id}
-                className={`border rounded-lg p-4 space-y-3 cursor-pointer transition-colors ${`
+                className={`border rounded-lg p-4 space-y-3 cursor-pointer transition-colors ${
                   selectedContainer === container.id ? 'border-primary bg-accent' : ''
                 }`}`
                 onClick={() => setSelectedContainer(container.id)}

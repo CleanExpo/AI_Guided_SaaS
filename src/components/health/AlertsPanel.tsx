@@ -1,14 +1,17 @@
 import React from 'react';
-interface Alert {;
+
+interface Alert {
   id: string;
   type: 'error' | 'warning' | 'info';
   message: string;
   timestamp: Date;
 }
-interface AlertsPanelProps {;
+
+interface AlertsPanelProps {
   alerts?: Alert[];
 }
-export function AlertsPanel({ alerts = [] }: AlertsPanelProps): void {;
+
+export function AlertsPanel({ alerts = [] }: AlertsPanelProps): JSX.Element {
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="px-4 py-3 border-b">
@@ -21,11 +24,11 @@ export function AlertsPanel({ alerts = [] }: AlertsPanelProps): void {;
           alerts.map((alert) => (
             <div key={alert.id} className="p-4">
               <div className="flex items-start">
-                <div className={`flex-shrink-0 ${`
+                <div className={`flex-shrink-0 ${
                   alert.type === 'error' ? 'text-red-500' :
                   alert.type === 'warning' ? 'text-yellow-500' :
                   'text-blue-500'
-                }`}>`
+                }`}>
                   {alert.type === 'error' ? '❌' : alert.type === 'warning' ? '⚠️' : 'ℹ️'}
                 </div>
                 <div className="ml-3 flex-1">

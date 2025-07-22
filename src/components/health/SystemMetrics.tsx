@@ -1,5 +1,6 @@
 import React from 'react';
-interface SystemMetricsProps {;
+
+interface SystemMetricsProps {
   metrics?: {
     cpu: number;
     memory: number;
@@ -7,10 +8,12 @@ interface SystemMetricsProps {;
     activeAgents: number;
   };
 }
-export function SystemMetrics({ metrics }: SystemMetricsProps): void {;
+
+export function SystemMetrics({ metrics }: SystemMetricsProps): JSX.Element {
   if (!metrics) {
     return <div>Loading metrics...</div>
   }
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div className="bg-white p-4 rounded-lg shadow">
