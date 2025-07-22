@@ -146,7 +146,7 @@
     "@types/inquirer": "^9.0.8",
     "@types/jest": "^29.5.14",
     "@types/next-auth": "^3.13.0",
-    "@types/node": "^20.19.9",
+    "@types/node": "^24.0.15",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/winston": "^2.4.4",
