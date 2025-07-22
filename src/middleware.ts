@@ -39,30 +39,30 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check authentication for protected paths
-  if (PROTECTED_PATHS.some(path => pathname.startsWith(path))) {
+  // CRITICAL FIX: Explicit route-based authentication to prevent Vercel conflicts
+  
+  // Handle admin routes FIRST (highest priority)
+  if (ADMIN_PATHS.some(path => pathname.startsWith(path))) {
+    // Admin routes use custom admin-token authentication, NOT NextAuth
+    const adminToken = request.cookies.get('admin-token');
     
-    // Handle admin routes with separate authentication system
-    if (ADMIN_PATHS.some(path => pathname.startsWith(path))) {
-      // Admin routes use custom authentication, not NextAuth
-      const adminToken = request.cookies.get('admin-token');
-      
-      if (!adminToken) {
-        // Redirect admin routes to admin login page
-        const loginUrl = new URL('/admin/login', request.url);
-        loginUrl.searchParams.set('callbackUrl', pathname);
-        return NextResponse.redirect(loginUrl);
-      }
-      
-      // Admin routes bypass NextAuth validation
-      return NextResponse.next();
+    if (!adminToken) {
+      // Admin routes ALWAYS redirect to /admin/login
+      const loginUrl = new URL('/admin/login', request.url);
+      loginUrl.searchParams.set('callbackUrl', pathname);
+      return NextResponse.redirect(loginUrl);
     }
     
-    // Handle regular user routes with NextAuth
+    // Admin authenticated - allow access
+    return NextResponse.next();
+  }
+  
+  // Handle regular protected routes with NextAuth
+  if (PROTECTED_PATHS.some(path => pathname.startsWith(path))) {
     const token = await getToken({ req: request });
     
     if (!token) {
-      // Redirect regular routes to NextAuth login page
+      // User routes ALWAYS redirect to /auth/signin
       const loginUrl = new URL('/auth/signin', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
