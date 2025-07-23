@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/validate-env-build.cjs && cross-env SKIP_ENV_VALIDATION=true next build",
+    "build": "next build",
+    "build:dev": "cross-env NODE_ENV=development next build",
+    "build:validate": "node scripts/validate-env-build.cjs && cross-env SKIP_ENV_VALIDATION=true next build",
     "build:esbuild": "node build.mjs",
     "start": "next start",
     "lint": "next lint",
@@ -184,6 +186,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=18.17.0"
+    "node": ">=20.0.0"
   }
 }
