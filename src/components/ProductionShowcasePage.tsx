@@ -1,7 +1,5 @@
 'use client';
-
 import React from 'react';
-
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -13,20 +11,19 @@ import Link from 'next/link';
 // Import your actual production components
 import ClaudeCodeDashboard from '@/components/ClaudeCodeDashboard';
 interface WorkflowResult {
-totalTokenUsage: number;
-    utilizationRate: number;
-    integrationCommands: string[];
-    nextSteps: string[]
-
+totalTokenUsage: number,
+  utilizationRate: number,
+  integrationCommands: string[],
+  nextSteps: string[]
 }}
 const personas = [
   {
   id: 'ai-architect',
     name: 'AI Architect',
     description: 'Expert in AI-powered development workflows',
-    avatar: '🤖',
+    avatar: '🤖'
     color: 'from-blue-500 to-cyan-500',
-    icon: AIIcon,
+  icon: AIIcon,
     features: [
       'Claude Code Integration',
       'Multi-Agent Orchestration',
@@ -35,112 +32,109 @@ const personas = [
     id: 'fullstack-wizard',
     name: 'Fullstack Wizard',
     description: 'Master of frontend and backend development',
-    avatar: '🧙‍♂️',
+    avatar: '🧙‍♂️'
     color: 'from-brand-primary-500 to-pink-500',
-    icon: CodeIcon,
+  icon: CodeIcon,
     features: ['Next.js 15', 'TypeScript', 'API Development']},
   {
     id: 'ui-designer',
     name: 'UI Designer',
     description: 'Creating beautiful, user-friendly interfaces',
-    avatar: '🎨',
+    avatar: '🎨'
     color: 'from-pink-500 to-rose-500',
-    icon: BrandIcon,
+  icon: BrandIcon,
     features: ['shadcn/ui', 'Tailwind CSS', 'Framer Motion']},
   {
     id: 'startup-founder',
     name: 'Startup Founder',
     description: 'MVP development and rapid iteration',
-    avatar: '🚀',
+    avatar: '🚀'
     color: 'from-orange-500 to-red-500',
-    icon: RocketIcon,
+  icon: RocketIcon,
     features: ['Rapid Prototyping', 'Deployment', 'Analytics']}];
 const productionFeatures = [
   {
   title: 'Claude Code Integration',
     description: 'Advanced AI-powered development with multi-agent orchestration',
-    icon: Brain,
+  icon: Brain,
     demo: 'claude-dashboard',
-    color: 'bg-blue-500',
+    color: 'bg-blue-500'
     component: 'ClaudeCodeDashboard'},
   {
     title: 'Visual UI Builder',
     description: 'Production drag-and-drop interface builder',
-    icon: Wrench,
+  icon: Wrench,
     demo: 'ui-builder',
-    color: 'bg-brand-primary-500',
+    color: 'bg-brand-primary-500'
     component: 'UIBuilder'},
   {
     title: 'System Analytics',
     description: 'Real-time system monitoring and performance analytics',
-    icon: BarChart3,
+  icon: BarChart3,
     demo: 'analytics',
-    color: 'bg-green-500',
+    color: 'bg-green-500'
     component: 'SystemResourceMonitor'},
   {
     title: 'Collaboration Hub',
     description: 'Production team collaboration workspace',
-    icon: Users,
+  icon: Users,
     demo: 'collaboration',
-    color: 'bg-orange-500',
+    color: 'bg-orange-500'
     component: 'CollaborationWorkspace'}];
 const engineeringHighlights = [
   {
   title: 'Multi-Agent Architecture',
     description:
       'Orchestrated AI agents for documentation, research, and optimization',
-    icon: AIIcon,
+    icon: AIIcon
     metrics: '5 Specialized Agents'},
   {
     title: 'Token Optimization Engine',
-    description: 'Strategic memory management with 150K context optimization',
-    icon: DatabaseIcon,
+  description: 'Strategic memory management with 150K context optimization',
+  icon: DatabaseIcon,
     metrics: '96% Quality Retention'},
   {
     title: 'Causal Engine System',
-    description: 'Advanced dependency tracking and cycle detection',
-    icon: Zap,
+  description: 'Advanced dependency tracking and cycle detection',
+  icon: Zap,
     metrics: 'Real-time Analysis'},
   {
     title: 'Self-Check Framework',
-    description: 'Automated system health monitoring and validation',
-    icon: Shield,
+  description: 'Automated system health monitoring and validation',
+  icon: Shield,
     metrics: '100% Uptime Target'}],
     export default function ProductionShowcasePage() {
-      </string>
+</string>
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
-      </string>
+</string>
   const [activeDemo, setActiveDemo] = useState<string>('claude-dashboard');
   const [systemMetrics, setSystemMetrics] = useState<any>({
     uptime: '99.9%',
     activeUsers: 12,
-    systemHealth: 98,
+    systemHealth: 98
     memoryOptimization: 78});
   // Simulate real-time system updates
   useEffect(() => {
     const _interval = setInterval(() => {
       setSystemMetrics(prev => ({
         ...prev,
-        activeUsers: prev.activeUsers + Math.floor(Math.random() * 3) - 1,
+        activeUsers: prev.activeUsers + Math.floor(Math.random() * 3) - 1
     systemHealth: Math.max(
           95,
-          Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2)
-        ),
+          Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2)),
         memoryOptimization: Math.max(
           70,
-          Math.min(85, prev.memoryOptimization + (Math.random() - 0.5) * 3)
-        )}));
-    }, 5000);
-    return () => clearInterval(interval);
+          Math.min(85, prev.memoryOptimization + (Math.random() - 0.5) * 3))}))}, 5000);
+    return () => clearInterval(interval)
   }, []);
-  const _renderPersonaShowcase = () => (</string>;
+  const _renderPersonaShowcase = () => (\n    </string>;
     <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
-        const _Icon = persona.icon;
-        return (<motion.div;
+        const _Icon = persona.icon;</div>
+        return (<motion.div
             key={persona.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 y: 20 }}
+            animate={{ opacity: 1 y: 0 }}
             transition={{ delay: index * 0.1 }}
             className={`cursor-pointer transition-all duration-300 ${``
               selectedPersona === persona.id ? 'scale-105' : 'hover:scale-105'
@@ -159,7 +153,7 @@ const engineeringHighlights = [
                   className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
                 >
                   <Icon className="w-8 h-8 text-white" />
-                </div>
+</div>
                 <CardTitle className="text-white">{persona.name}</CardTitle>
                 <CardDescription className="text-white/80">
                   {persona.description}</CardDescription>
@@ -167,16 +161,15 @@ const engineeringHighlights = [
                 <AnimatePresence>
                   {selectedPersona === persona.id  && (/AnimatePresence>
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
+                      initial={{ opacity: 0 height: 0 }}
+                      animate={{ opacity: 1 height: 'auto' }}
+                      exit={{ opacity: 0 height: 0 }}
                       className="space-y-3"
                     >
-                      <div className="space-y-2">
-                        <p className="text-sm text-white/90 font-medium">
+                      <div className="">
+        <p className="text-sm text-white/90 font-medium">
                           Core: Technologies:</p>
-                        {persona.features.map((feature, idx) => (
-                          <Badge
+                        {persona.features.map((feature, idx) => (\n    <Badge
                             key={idx}
                             variant="secondary"
                             className="text-xs mr-1 mb-1"
@@ -189,20 +182,16 @@ const engineeringHighlights = [
                           <ArrowRight className="ml-2 h-3 w-3" />
                     </motion.div>
                   )}
-                </AnimatePresence>
+</AnimatePresence>
           </motion.div>
-        );
+        )
   }}
-              </div>
-
-            );
-
-          }
+</div>
+      )}
   const _renderProductionDemo = (): void => { switch (activeDemo) {
       case 'claude-dashboard':
-    return (break;
-
-    break;
+    return (break
+    break
 }
     <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
             <ClaudeCodeDashboard
@@ -211,9 +200,6 @@ const engineeringHighlights = [
             /></ClaudeCodeDashboard>
       case 'ui-builder':
     return (break;
-
-    break;
-
     <Card className="glass border-0">
             <CardHeader>
               <div className="flex items-center gap-2">
@@ -231,16 +217,13 @@ const engineeringHighlights = [
                   <Link href="/ui-builder">
                     Launch UI Builder</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+</Link>
                 <p className="text-white/60 text-sm mt-4">
                   Access the full production UI Builder with your component
                   library</p>
       case 'analytics':
     return (
     break;
-
-    break;
-
     <Card className="glass border-0">
             <CardHeader>
               <div className="flex items-center gap-2">
@@ -250,26 +233,21 @@ const engineeringHighlights = [
                 Real-time system monitoring and performance metrics</CardDescription>
             <CardContent>
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white">
-                    {systemMetrics.uptime}
+                <div className="text-center text-3xl font-bold text-white">
+                    {systemMetrics.uptime}</div>
                   <div className="text-sm text-white/60">System Uptime</div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white">
-                    {systemMetrics.activeUsers}
+                <div className="text-center text-3xl font-bold text-white">
+                    {systemMetrics.activeUsers}</div>
                   <div className="text-sm text-white/60">Active Users</div>
               <div className="text-center">
                 <Button asChild className="bg-green-600 hover:bg-green-700">
                   <Link href="/analytics">
                     View Full Analytics</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+</Link>
       case 'collaboration':
     return (
     break;
-
-    break;
-
     <Card className="glass border-0">
             <CardHeader>
               <div className="flex items-center gap-2">
@@ -283,26 +261,26 @@ const engineeringHighlights = [
                   <Link href="/collaborate">
                     Enter Collaboration Hub</Link>
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+</Link>
                 <p className="text-white/60 text-sm mt-4">
                   Access real-time team collaboration features</p>
       default: return null}
-  const _renderEngineeringHighlights = () => (
+  const _renderEngineeringHighlights = () => (;
     <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {engineeringHighlights.map((highlight, index) => {
-        const _Icon = highlight.icon;
-        return (
+        const _Icon = highlight.icon
+        return (</div>
     <motion.div
             key={highlight.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 y: 20 }}
+            animate={{ opacity: 1 y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
             <Card className="glass border-0 h-full">
               <CardHeader className="text-center">
                 <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-brand-primary-500 flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6 text-white" />
-                </div>
+</div>
                 <CardTitle className="text-white text-lg">
                   {highlight.title}</CardTitle>
                 <CardDescription className="text-white/80 text-sm">
@@ -311,21 +289,18 @@ const engineeringHighlights = [
                 <Badge variant="outline", className="text-white border-white/20">
                   {highlight.metrics}</Badge>
           </motion.div>
-        );
+        )
   }}
-              </div>
-
-            );
-
-          }
+</div>
+      )}
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50, dark: from-gray-950, dark:via-purple-950/20 dark:to-blue-950/20">
-      {/* Hero, Section */}
+      {/* Hero, Section */}</div>
       <section className="relative py-32 px-4 text-center">
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 y: 20 }}
+            animate={{ opacity: 1 y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <Badge
@@ -343,9 +318,9 @@ const engineeringHighlights = [
           </motion.div>
           {/* Engineering, Highlights */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0 y: 40 }}
+            animate={{ opacity: 1 y: 0 }}
+            transition={{ duration: 0.8 delay: 0.2 }}
             className="mb-16"
           >
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
@@ -353,9 +328,9 @@ const engineeringHighlights = [
           </motion.div>
           {/* Persona, Selection */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            initial={{ opacity: 0 y: 40 }}
+            animate={{ opacity: 1 y: 0 }}
+            transition={{ duration: 0.8 delay: 0.4 }}
             className="mb-16"
           >
             <h2 className="text-2xl font-bold text-white mb-8">
@@ -365,8 +340,8 @@ const engineeringHighlights = [
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 y: 20 }}
+            animate={{ opacity: 1 y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
@@ -376,12 +351,11 @@ const engineeringHighlights = [
               Interact with our actual production components and systems</p>
           </motion.div>
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Feature, Tabs */}
-            <div className="lg:col-span-1">
-              <div className="space-y-3">
-                {productionFeatures.map((feature) => { const _Icon = feature.icon, return (
+            {/* Feature, Tabs */}</div>
+            <div className="lg:col-span-1 space-y-3">
+                {productionFeatures.map((feature) => { const _Icon = feature.icon, return (</div>
     <motion.button
-                      key={feature.demo; }
+                      key={feature.demo }
                       className={`w-full p-4 rounded-lg text-left transition-all ${``
                         activeDemo === feature.demo
                           ? 'bg-white/20 border border-white/30'
@@ -390,8 +364,7 @@ const engineeringHighlights = [
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2, rounded-lg ${feature.color}`}>``
+                      <div className="flex items-center gap-3" className={`p-2, rounded-lg ${feature.color}`}>``</div>
                           <Icon className="w-5 h-5 text-white" /></div>
                         <div>
                           <h3 className="font-medium text-white">
@@ -399,16 +372,16 @@ const engineeringHighlights = [
                           <p className="text-sm text-white/60">
                             {feature.description}</p>
                     </motion.button>
-                  );
+                  )
   },
     {/* Live, Production Demo */}
             <div className="lg:col-span-2">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeDemo}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0 x: 20 }}
+                  animate={{ opacity: 1 x: 0 }}
+                  exit={{ opacity: 0 x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
                   {renderProductionDemo()}
@@ -417,23 +390,34 @@ const engineeringHighlights = [
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 y: 20 }}
+            animate={{ opacity: 1 y: 0 }}
             transition={{ duration: 0.8 }
+</Button />
+</Button>
+</CardContent>
+</Button>
+</CardContent>
+</CardHeader>
+</div>
+</CardContent>
+</Card>
+    
     </Button>
+    </div>
+    </section>
     </h2>
     </h2>
     </Badge>
-          </div>
-</Button>
-          </div>
-</Button>
-          </div>
-</CardContent>
     </div>
+    </section>
+    </div>
+    </div>
+    </div>
+    </div>
+    </Card>
     </Button>
     </div>
-    </CardContent>
     </div>
     </CardHeader>
     </Card>
@@ -442,8 +426,8 @@ const engineeringHighlights = [
     </CardContent>
     </CardHeader>
     </Card>
-    </div>
-    }
+    </any>
+  }
           >
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Experience Production-Grade AI?</h2>
@@ -458,7 +442,7 @@ const engineeringHighlights = [
                 <Link href="/auth/signin">
                   Access Production Platform</Link>
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+</Link>
               <Button
                 size="lg"
                 variant="outline"
@@ -469,24 +453,10 @@ const engineeringHighlights = [
                   View System Admin</Link>
                   <Shield className="ml-2 h-4 w-4" />
           </motion.div>
-          </div>
-          </AnimatePresence>
-          </section>
-</AnimatePresence>
-</div></section>
 </div>
-</section>
-</div>
+</AnimatePresence></section>
 </CardHeader>
-</Card>
-</Button>
-</div></CardContent>
-</div>
+</Button></CardContent>
 </CardHeader>
+</div>
 </Card>
-</div>
-</CardContent>
-</div>
-</CardHeader>
-</Card>
-</div>

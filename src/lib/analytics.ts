@@ -9,86 +9,85 @@ interface SumResult {
 };
 interface SubscriptionBreakdownResult {
   tier: string,
-    count: number,
-    revenue: number
+  count: number,
+  revenue: number
 };
 interface CategoryResult {
   category: string,
-    count: number
+  count: number
 };
 interface FrameworkResult {
   framework: string,
-    count: number
+  count: number
 };
 interface StatusResult {
   status: string,
-    count: number
+  count: number
 }
 // Analytics interfaces
 export interface PlatformMetrics {
   totalUsers: number,
-    activeUsers: number,
-    totalProjects: number,
-    totalTemplates: number,
-    totalRevenue: number,
-    monthlyRevenue: number,
-    conversionRate: number,
-    averageSessionTime: number
+  activeUsers: number,
+  totalProjects: number,
+  totalTemplates: number,
+  totalRevenue: number,
+  monthlyRevenue: number,
+  conversionRate: number,
+  averageSessionTime: number
 };
 export interface UserMetrics {
-
   newUsers: number,
-    activeUsers: number,
-    churned: number,
-    retention: {
+  activeUsers: number,
+  churned: number,
+  retention: {
   day1: number,
-    day7: number,
-    day30: number
+  day7: number,
+  day30: number
 }
-  topCountries: Array<{ country: string, users: number }>,
+  topCountries: Array<{ country: string, users: number }>;
   userGrowth: Array<{ date: string, users: number }>
 };
 export interface RevenueMetrics {
   totalRevenue: number,
-    monthlyRecurringRevenue: number,
-    averageRevenuePerUser: number,
-    churnRate: number,
-    lifetimeValue: number,
-    revenueGrowth: Array<{ date: string,
-    revenue: number }>,
-  subscriptionBreakdown: Array<{ tier: string, count: number, revenue: number }>,
-  templateRevenue: Array<{ templateId: string, name: string, revenue: number }>
+  monthlyRecurringRevenue: number,
+  averageRevenuePerUser: number,
+  churnRate: number,
+  lifetimeValue: number,
+  revenueGrowth: Array<{ date: string,
+  revenue: number }>;
+  subscriptionBreakdown: Array<{ tier: string, count: number; revenue: number }>;
+  templateRevenue: Array<{ templateId: string, name: string; revenue: number }>
 };
 export interface SystemMetrics {
   apiCalls: number,
-    errorRate: number,
-    averageResponseTime: number,
-    uptime: number,
-    activeConnections: number,
-    databaseConnections: number,
-    cacheHitRate: number,
-    storageUsed: number
+  errorRate: number,
+  averageResponseTime: number,
+  uptime: number,
+  activeConnections: number,
+  databaseConnections: number,
+  cacheHitRate: number,
+  storageUsed: number
 };
 export interface ContentMetrics {
   totalTemplates: number,
-    pendingReviews: number,
-    approvedTemplates: number,
-    rejectedTemplates: number,
-    topCategories: Array<{ category: string,
-    count: number }>,
-  topFrameworks: Array<{ framework: string, count: number }>,
+  pendingReviews: number,
+  approvedTemplates: number,
+  rejectedTemplates: number,
+  topCategories: Array<{ category: string,
+  count: number }>;
+  topFrameworks: Array<{ framework: string, count: number }>;
   averageRating: number, totalDownloads: number
 }
 // Analytics service
 export class AnalyticsService {
   // Check if analytics is configured
   static isConfigured(): boolean {
-    return isServiceConfigured('database');
+    return isServiceConfigured('database')
 }
   // Get platform overview metrics
   static async getPlatformMetrics(): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockPlatformMetrics();
+      return this.getMockPlatformMetrics()
 }
     try {
       // Get user metrics
@@ -115,16 +114,14 @@ export class AnalyticsService {
         monthlyRevenue,
         conversionRate,
         // averageSessionTime
-}
-    } catch (error) {
+}} catch (error) {
       console.error('Error fetching platform, metrics:', error)
-      return this.getMockPlatformMetrics();
-}
-}
+      return this.getMockPlatformMetrics()
+}}
   // Get user analytics
   static async getUserMetrics(timeRange: string = '30d'): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockUserMetrics();
+      return this.getMockUserMetrics()
 }
     try { const endDate = new Date();
       const startDate = new Date();
@@ -132,22 +129,15 @@ export class AnalyticsService {
         case '7d':
     startDate.setDate(endDate.getDate() - 7)
     break;
-
-    break;
-
           // break
         case '30d':
     startDate.setDate(endDate.getDate() - 30)
     break;
-
-    break;
-
           // break
         case '90d':
     startDate.setDate(endDate.getDate() - 90)
     break;
-
-    break;
+    break
 }
           break,
 break;
@@ -175,16 +165,14 @@ break;
         retention,
         topCountries: []; // TODO: Implement geo analytics
         // userGrowth
-}
-    } catch (error) {
+}} catch (error) {
       console.error('Error fetching user, metrics:', error)
-      return this.getMockUserMetrics();
-}
-}
+      return this.getMockUserMetrics()
+}}
   // Get revenue analytics
   static async getRevenueMetrics(_timeRange: string = '30d'): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockRevenueMetrics();
+      return this.getMockRevenueMetrics()
 }
     try {
       // Get total revenue
@@ -221,16 +209,14 @@ break;
   // TODO: Get revenue growth data
  , subscriptionBreakdown: subscriptionBreakdown || [],
     templateRevenue: [] // TODO: Get template revenue data
-}
-    } catch (error) {
+}} catch (error) {
       console.error('Error fetching revenue, metrics:', error)
-      return this.getMockRevenueMetrics();
-}
-}
+      return this.getMockRevenueMetrics()
+}}
   // Get system health metrics
   static async getSystemMetrics(): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockSystemMetrics();
+      return this.getMockSystemMetrics()
 }
     try {
       // Get API call count
@@ -248,16 +234,14 @@ break;
     databaseConnections: 12,
     cacheHitRate: 85.5,
     storageUsed: 2.4 // GB
-}
-    } catch (error) {
+}} catch (error) {
       console.error('Error fetching system, metrics:', error)
-      return this.getMockSystemMetrics();
-}
-}
+      return this.getMockSystemMetrics()
+}}
   // Get content analytics
   static async getContentMetrics(): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockContentMetrics();
+      return this.getMockContentMetrics()
 }
     try {
       // Get template counts by status
@@ -303,31 +287,29 @@ break;
     topFrameworks: frameworkStats || [],
     averageRating: 4.2,
     totalDownloads: 15420
-}
-    } catch (error) {
+}} catch (error) {
       console.error('Error fetching content, metrics:', error)
-      return this.getMockContentMetrics();
-}
-}
+      return this.getMockContentMetrics()
+}}
   // Helper methods
   private static async getTotalUsers(): Promise<any> {
     const result = await DatabaseService.query('SELECT COUNT(*) as count FROM users') as unknown as CountResult[];
-    return Number(result[0]?.count) || 0;
+    return Number(result[0]?.count) || 0
 }
   private static async getActiveUsers(): Promise<any> {
     const result = await DatabaseService.query(`;``
       SELECT COUNT(DISTINCT user_id) as count FROM activity_logs
       WHERE created_at >= ?
     `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]``
-    return Number(result[0]?.count) || 0;
+    return Number(result[0]?.count) || 0
 }
   private static async getTotalProjects(): Promise<any> {
     const result = await DatabaseService.query('SELECT COUNT(*) as count FROM projects') as unknown as CountResult[];
-    return Number(result[0]?.count) || 0;
+    return Number(result[0]?.count) || 0
 }
   private static async getTotalTemplates(): Promise<any> {
     const result = await DatabaseService.query('SELECT COUNT(*) as count FROM templates WHERE status = "approved"') as unknown as CountResult[];
-    return Number(result[0]?.count) || 0;
+    return Number(result[0]?.count) || 0
 }
   private static async getBasicRevenueMetrics(): Promise<any> {
     const totalResult = await DatabaseService.query(`;``
@@ -340,8 +322,7 @@ break;
     return {
       totalRevenue: Number(totalResult[0]?.total) || 0,
     monthlyRevenue: Number(monthlyResult[0]?.total) || 0
-}
-}
+}}
   private static async getConversionRate(): Promise<any> {
     // Calculate conversion from free to paid users
     const _totalUsers = await this.getTotalUsers();
@@ -350,11 +331,11 @@ break;
       WHERE status = 'active' AND tier != 'free'
     `) as unknown as CountResult[]``
     const _paid = Number(paidUsers[0]?.count) || 0;
-    return totalUsers > 0 ? (paid / totalUsers) * 100 : 0;
+    return totalUsers > 0 ? (paid / totalUsers) * 100: 0
 }
   private static async getAverageSessionTime(): Promise<any> {
     // Mock implementation - would need session tracking
-    return 1200 // 20 minutes in seconds;
+    return 1200 // 20 minutes in seconds
 }
     private static async calculateRetentionRates(): Promise<any> {
       // Mock implementation - would need proper cohort analysis
@@ -366,7 +347,7 @@ break;
 }
   private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string, users: number }>> {
     // Mock implementation - would generate daily user counts
-    const data: any[] = [];
+    const data = [];
     const current = new Date(startDate);
     while(current <= endDate) {
       data.push({
@@ -375,7 +356,7 @@ break;
       })
       current.setDate(current.getDate() + 1)
 }
-    return data;
+    return data
 }
   // Mock data for testing
   private static getMockPlatformMetrics(): PlatformMetrics {
@@ -388,8 +369,7 @@ break;
     monthlyRevenue: 15680.25,
     conversionRate: 12.4,
     averageSessionTime: 1380
-}
-}
+}}
   private static getMockUserMetrics(): UserMetrics {
     return {
       newUsers: 234,
@@ -411,8 +391,7 @@ break;
         date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     users: Math.floor(Math.random() * 50) + 100
       }))
-}
-}
+}}
   private static getMockRevenueMetrics(): RevenueMetrics {
     return {
       totalRevenue: 89420.50,
@@ -425,17 +404,16 @@ break;
     revenue: Math.floor(Math.random() * 5000) + 10000
       })),
       subscriptionBreakdown: [
-        { tier: 'free', count: 8934, revenue: 0 },
-        { tier: 'pro', count: 1245, revenue: 36105 },
-        { tier: 'enterprise', count: 234, revenue: 23166 }
+        { tier: 'free', count: 8934; revenue: 0 },
+        { tier: 'pro', count: 1245; revenue: 36105 },
+        { tier: 'enterprise', count: 234; revenue: 23166 }
    ],
       templateRevenue: [
         { templateId: 'template-1', name: 'E-commerce Starter', revenue: 2450.00 },
         { templateId: 'template-2', name: 'SaaS Dashboard', revenue: 1890.50 },
         { templateId: 'template-3', name: 'Portfolio Pro', revenue: 1234.75 }
    ]
-}
-}
+}}
   private static getMockSystemMetrics(): SystemMetrics {
     return {
       apiCalls: 145623,
@@ -446,8 +424,7 @@ break;
     databaseConnections: 12,
     cacheHitRate: 85.5,
     storageUsed: 2.4
-}
-}
+}}
   private static getMockContentMetrics(): ContentMetrics {
     return {
       totalTemplates: 342,
@@ -470,5 +447,4 @@ break;
    ],
       averageRating: 4.2,
     totalDownloads: 15420
-}
-}
+}}

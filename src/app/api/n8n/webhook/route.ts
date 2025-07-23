@@ -39,31 +39,23 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         result = {
           action: validatedData.action,
           status: 'processed'
-        };
-    }
+        }}
     return NextResponse.json({
       success: true,
-      webhook: {
-        id: 'webhook_' + Math.random().toString(36).substr(2, 9),
-        projectId: validatedData.projectId,
-        ...result,
-        processedAt: new Date().toISOString()
-      }
-    });
+      webhook: { id: 'webhook_' + Math.random().toString(36).substr(2, 9), projectId: validatedData.projectId, ...result, processedAt: new Date().toISOString() }})
   } catch (error) {
     console.error('Webhook processing error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid webhook payload', details: error.errors },
         { status: 400 }
-      );
+      )
     }
     return NextResponse.json(
       { error: 'Webhook processing failed' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
 
 export async function GET(): Promise<NextResponse> {
   try {
@@ -75,14 +67,13 @@ export async function GET(): Promise<NextResponse> {
       contentType: 'application/json',
       status: 'active'
     };
-    return NextResponse.json(webhookInfo);
+    return NextResponse.json(webhookInfo)
   } catch (error) {
     console.error('Webhook info error:', error);
     return NextResponse.json(
       { error: 'Failed to get webhook info' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
 
 export const dynamic = "force-dynamic";

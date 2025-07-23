@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 import { z } from 'zod';
-
 // Request validation schema
 const searchSchema = z.object({
   query: z.string().min(1),
@@ -9,11 +8,9 @@ const searchSchema = z.object({
   size: z.number().min(1).max(100).optional().default(7),
   includeSource: z.boolean().optional().default(true)
 });
-
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
-    
     // Validate request
     const validatedData = searchSchema.parse(body);
     // Perform semantic search
@@ -23,34 +20,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       size: validatedData.size,
       includeSource: validatedData.includeSource
     });
-    
-    return NextResponse.json(results);
+    return NextResponse.json(results)
   } catch (error) {
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid request', details: error.errors },
         { status: 400 }
-      );
+      )
 }
     console.error('Semantic search error:', error);
     return NextResponse.json(
       { error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     // Health check
     const health = await semanticSearch.checkHealth();
-    return NextResponse.json(health);
+    return NextResponse.json(health)
   } catch (error) {
     return NextResponse.json(
-      { 
+      {
         status: 'unhealthy',
         error: error instanceof Error ? error.message : 'Health check failed'
       },
       { status: 503 }
-    );
-  }
-}
+    )
+  }}

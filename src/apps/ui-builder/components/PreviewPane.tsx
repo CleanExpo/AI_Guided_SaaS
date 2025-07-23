@@ -14,5 +14,5 @@ export default function PreviewPane() {const components = useBuilderStore((state
               <ComponentRenderer type={c.type} props={c.props} /></ComponentRenderer>
           ))
         )}
-    );
+    )
 }

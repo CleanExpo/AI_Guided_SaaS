@@ -21,19 +21,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       success: true,
       message: 'User registered successfully',
       user
-    }, { status: 201 });
+    }, { status: 201 })
   } catch (error) {
     console.error('Registration error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
-      );
+      )
 }
     return NextResponse.json(
       { error: 'Registration failed' },
       { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export const dynamic = "force-dynamic";

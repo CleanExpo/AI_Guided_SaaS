@@ -6,13 +6,13 @@ import { create } from 'zustand';type ComponentProps = {
 type PropSchema = {
   key: string,
     label: string,
-    type: 'text' | 'textarea',
+    type: 'text' | 'textarea'
 };
 type ComponentInstance = {
   id: string,
     type: string,
-    props: ComponentProps;
-  schema?: PropSchema[];
+    props: ComponentProps,
+  schema?: PropSchema[]
 };
 type BuilderStore = {
   components: ComponentInstance[],
@@ -22,7 +22,7 @@ type BuilderStore = {
     updateComponentProps: (id: string, newProps: ComponentProps) => void,
     saveProject: () => void,
     loadProject: () => void,
-    reset: () => void,
+    reset: () => void
 };
 function getDefaultProps(type: string): string): ComponentProps {
   switch (type) {
@@ -35,9 +35,9 @@ function getDefaultProps(type: string): string): ComponentProps {
     case 'hero':
       return { heading: 'Welcome!', subheading: 'Start building.' };
     case 'two-col':
-      return { left: 'Left side content', right: 'Right side content' },
+      return { left: 'Left side content', right: 'Right side content' };
     default:
-      return {};
+      return {}
     }
 }
 function getDefaultSchema(type: string): PropSchema[] {
@@ -46,8 +46,6 @@ function getDefaultSchema(type: string): PropSchema[] {
       return [{ key: 'label', label: 'Button Label', type: 'text' }];
     case 'card':
     return [break;
-
-    break;
 ,
   { key: 'title', label: 'Card Title', type: 'text' },
         { key: 'body', label: 'Card Body', type: 'textarea' }];
@@ -55,19 +53,16 @@ function getDefaultSchema(type: string): PropSchema[] {
       return [{ key: 'placeholder', label: 'Placeholder', type: 'text' }];
     case 'hero':
     return [break;
-
-    break;
 ,
   { key: 'heading', label: 'Heading', type: 'text' },
         { key: 'subheading', label: 'Subheading', type: 'text' }];
     case 'two-col':
     return [break;
-
-    break;
 ,
   { key: 'left', label: 'Left Column Text', type: 'textarea' },
-        { key: 'right', label: 'Right Column Text', type: 'textarea' }],
+        { key: 'right', label: 'Right Column Text', type: 'textarea' }];
     default: return []}
+
 export const useBuilderStore = create<BuilderStore>((set, get) => ({
   components: [],
     selectedId: null,
@@ -79,8 +74,8 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
   id: `${type}-${Date.now()}`,``,
   type,
           props: getDefaultProps(type),
-    schema: getDefaultSchema(type)}])),
-  selectComponent: id: any => set({ selectedId: id }),
+    schema: getDefaultSchema(type)}]));
+  selectComponent: id: any => set({ selectedId: id });
     updateComponentProps: (id, newProps) =>
     set(state => ({
       components: state.components.map((c) =>
@@ -91,7 +86,7 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
     const { components   }: any = get();
     if(typeof window !== 'undefined') {
       localStorage.setItem('ai_builder_project', JSON.stringify(components));
-      alert('Project saved successfully!');
+      alert('Project saved successfully!')
     },
   loadProject: () => {
     if(typeof window !== 'undefined') {
@@ -99,9 +94,9 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
       if (saved) {
         const parsed = JSON.parse(saved);
         set({ components: parsed, selectedId: null });
-        alert('Project loaded successfully!');
+        alert('Project loaded successfully!')
       } else {
-        alert('No saved project found!');
+        alert('No saved project found!')
       }
     },
   reset: () => set({ components: [], selectedId: null })}));

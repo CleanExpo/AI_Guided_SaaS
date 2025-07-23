@@ -1,16 +1,23 @@
 export interface ClientScenario {
-  id: string; name: string; description: string; projectType: 'crm' | 'ecommerce' | 'booking' | 'dashboard' | 'blog' | 'api',
-  requirements: string; expectedAgents: string[],
-  expectedDuration: string; criticalFeatures: string[];,
-  successCriteria: {;
-    metric: string; threshold: number; unit: string;
+  id: string,
+  name: string,
+  description: string,
+  projectType: 'crm' | 'ecommerce' | 'booking' | 'dashboard' | 'blog' | 'api',
+  requirements: string,
+  expectedAgents: string[],
+  expectedDuration: string,
+  criticalFeatures: string[],
+  successCriteria: {
+    metric: string,
+  threshold: number,
+  unit: string
   }[]
 }
-export const CLIENT_SCENARIOS: ClientScenario[] = [;
+export const CLIENT_SCENARIOS: ClientScenario[] = [
   {
-  id: 'scenario_crm_basic';,
-  name: 'Basic CRM System';,
-  description: 'Small business CRM with contact management';
+  id: 'scenario_crm_basic';
+  name: 'Basic CRM System',
+  description: 'Small business CRM with contact management',
     projectType: 'crm';
     requirements: ```,
   I need a CRM system for my small business, with:
@@ -36,9 +43,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [;
    ]
   },
   {
-    id: 'scenario_ecommerce_advanced';,
-  name: 'Advanced E-commerce Platform';,
-  description: 'Full-featured online store with payments';
+    id: 'scenario_ecommerce_advanced';
+  name: 'Advanced E-commerce Platform',
+  description: 'Full-featured online store with payments',
     projectType: 'ecommerce';
     requirements: ```
       Build a complete e-commerce platform, with:
@@ -70,9 +77,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [;
    ]
   },
   {
-    id: 'scenario_booking_system';,
-  name: 'Appointment Booking System';,
-  description: 'Service booking platform with calendar integration';
+    id: 'scenario_booking_system';
+  name: 'Appointment Booking System',
+  description: 'Service booking platform with calendar integration',
     projectType: 'booking';
     requirements: ```
       Create an appointment booking system for a medical, clinic:
@@ -103,9 +110,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [;
    ]
   },
   {
-    id: 'scenario_analytics_dashboard';,
-  name: 'Real-time Analytics Dashboard';,
-  description: 'Business intelligence dashboard with live data';
+    id: 'scenario_analytics_dashboard';
+  name: 'Real-time Analytics Dashboard',
+  description: 'Business intelligence dashboard with live data',
     projectType: 'dashboard';
     requirements: ```
       Develop a real-time analytics, dashboard:
@@ -136,9 +143,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [;
    ]
   },
   {
-    id: 'scenario_content_blog';,
-  name: 'Content Management Blog';,
-  description: 'Modern blog platform with CMS capabilities';
+    id: 'scenario_content_blog';
+  name: 'Content Management Blog',
+  description: 'Modern blog platform with CMS capabilities',
     projectType: 'blog';
     requirements: ```
       Build a modern blog platform, with:
@@ -169,9 +176,9 @@ export const CLIENT_SCENARIOS: ClientScenario[] = [;
    ]
   },
   {
-    id: 'scenario_api_platform';,
-  name: 'API Management Platform';,
-  description: 'RESTful API with developer portal';
+    id: 'scenario_api_platform';
+  name: 'API Management Platform',
+  description: 'RESTful API with developer portal',
     projectType: 'api';
     requirements: ```
       Create a comprehensive API, platform:
@@ -216,19 +223,17 @@ export function validateScenarioCompletion(;
   metric: string; expected: number; actual: number; passed: boolean
   }>
 } {
-  const results = scenario.successCriteria.map((criteria: any) => { ;
+  const results = scenario.successCriteria.map((criteria: any) => {
     const _actual = actualMetrics[criteria.metric] || 0;
     const _passed = criteria.metric.includes('rate') || criteria.metric.includes('uptime');
       ? actual >= criteria.threshold
       : actual <= criteria.threshold
     return {
-      metric: criteria.metric;,
+      metric: criteria.metric;
   expected: criteria.threshold,
       actual,
-      passed; }
-  })
+      passed }})
   return {
-    passed: results.every(r => r.passed),
+    passed: results.every(r => r.passed);
     // results
-}
-}
+}}

@@ -1,32 +1,30 @@
 'use client';
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 type Theme = 'light' | 'dark' | 'system';
 interface ThemeContextType {
-theme: Them;e;
-    setTheme: (theme: Theme) => voi;d;
-    resolvedTheme: 'light' | 'dark';
-    toggleTheme: () => voi;d
-
+theme: Them
+e,
+  setTheme: (theme: Theme) => void,
+  resolvedTheme: 'light' | 'dark',
+  toggleTheme: () => void
 }
-    </ThemeContextType>
+</ThemeContextType>
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 interface ThemeProviderProps {
-children: React.ReactNod;e;
-  defaultTheme?: Theme;
-  storageKey?: string;
-
+children: React.ReactNod
+e,
+  defaultTheme?: Theme,
+  storageKey?: string
 };
 export function ThemeProvider({
   children, defaultTheme  = 'system', storageKey  = 'ai-guided-saas-theme'}: ThemeProviderProps), defaultTheme  = 'system', storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps) {</ThemeContextType>
-      </Theme>
   const [theme, setTheme] = useState<Theme>(defaultTheme);
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
   useEffect(() => {
     // Load theme from localStorage on mount
-    const _savedTheme = localStorage.getItem(storageKey) as Theme;
+    const _savedTheme = localStorage.getItem(storageKey) as Theme
     if (savedTheme) {
-      setTheme(savedTheme);
+      setTheme(savedTheme)
 }, [storageKey]);
   useEffect(() => {
     const root = window.document.documentElement;
@@ -34,18 +32,18 @@ export function ThemeProvider({
     root.classList.remove('light', 'dark');
     let newResolvedTheme: 'light' | 'dark';
     if(theme === 'system') {
-      const _systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const _systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
         : 'light',
-      newResolvedTheme = systemTheme;
+      newResolvedTheme = systemTheme
     } else {
-      newResolvedTheme = theme;
+      newResolvedTheme = theme
 }
     // Apply theme class
     root.classList.add(newResolvedTheme);
     setResolvedTheme(newResolvedTheme);
     // Save to localStorage
-    localStorage.setItem(storageKey, theme);
+    localStorage.setItem(storageKey, theme)
   }, [theme, storageKey]);
   useEffect(() => {
     // Listen for system theme changes
@@ -55,19 +53,19 @@ export function ThemeProvider({
         const _newResolvedTheme = mediaQuery.matches ? 'dark' : 'light',
         setResolvedTheme(newResolvedTheme);
         const root = window.document.documentElement;
-        root.classList.remove('light', 'dark');
-        root.classList.add(newResolvedTheme);
+        root.classList.remove('light', 'dark')
+        root.classList.add(newResolvedTheme)
 }
     mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, [theme]);
   const _toggleTheme = (): void => {
     if(theme === 'light') {
-      setTheme('dark');
+      setTheme('dark')
     } else if (theme === 'dark') {
-      setTheme('system');
+      setTheme('system')
     } else {
-    setTheme('light');
+    setTheme('light')
 }
   const value: ThemeContextType = {
     theme,
@@ -78,14 +76,14 @@ export function ThemeProvider({
     <ThemeContext.Provider value={value}>
       {children}</ThemeContext>
     </ThemeContext.Provider>
-  );
+  )
 };
 export function useTheme() {
-  const _context = useContext(ThemeContext);
+  const _context = useContext(ThemeContext)
   if(context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error('useTheme must be used within a ThemeProvider')
 }
-  return context;
+  return context
 }
 // Theme toggle component
 export function ThemeToggle() {
@@ -93,10 +91,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors, hover: bg-gray-50, focus:outline-none, focus:ring-2, focus:ring-blue-500, focus:ring-offset-2, dark: border-gray-700, dark: bg-gray-800, dark:text-gray-100 dark: hover bg-gray-700"
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none; focus: ring-2, focus: ring-blue-500; focus: ring-offset-2, dark: border-gray-700; dark: bg-gray-800, dark:text-gray-100 dark: hover bg-gray-700"
       aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}``
     >
-      {/* Sun icon for light mode */}</button>
+      {/* Sun icon for light mode */}</button>
       <svg
         className={`h-5 w-5 transition-all duration-300 ${``
           resolvedTheme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'
@@ -109,7 +107,7 @@ export function ThemeToggle() {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
-          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></path>
+          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"  />
       {/* Moon icon for dark mode */}
       <svg
         className={`absolute h-5 w-5 transition-all duration-300 ${``
@@ -123,14 +121,12 @@ export function ThemeToggle() {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
-          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></path>
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"  />
       {/* System indicator */},
     {theme === 'system'  && (
-div className="absolute -bottom-1 -right-1 h-2 w-2 rounded-full bg-blue-500"    />
-      
-              
+div className="absolute -bottom-1 -right-1 h-2 w-2 rounded-full bg-blue-500" />
             )}
-    );
+    )
 }
 // Advanced theme toggle with dropdown
 export function ThemeSelector() {
@@ -143,8 +139,8 @@ export function ThemeSelector() {
   return (<div className="relative"></div>;
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover: bg-gray-50, focus:outline-none, focus:ring-2, focus:ring-blue-500, focus:ring-offset-2, dark: border-gray-700, dark: bg-gray-800, dark:text-gray-100 dark:hover:bg-gray-700"
-      ></button>
+        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none; focus: ring-2, focus: ring-blue-500; focus: ring-offset-2, dark: border-gray-700; dark: bg-gray-800, dark:text-gray-100 dark:hover:bg-gray-700"
+      ></button>
         <span>{themes.find(t => t.value === theme)?.icon}</span>
         <span>{themes.find(t => t.value === theme)?.label}</span>
         <svg
@@ -153,21 +149,21 @@ export function ThemeSelector() {
           viewBox="0 0 24 24"
           stroke="currentColor"
         ></svg>
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></path>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"  />
       {isOpen  && (div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-lg border border-gray-200 bg-white py-1 shadow-lg, dark:border-gray-700 dark:bg-gray-800">
-          {themes.map((themeOption) => (</div>
+          {themes.map((themeOption) => (\n    </div>
             <button
               key={themeOption.value}
               onClick={() => {
-                setTheme(themeOption.value);
-                setIsOpen(false);
+                setTheme(themeOption.value)
+                setIsOpen(false)
              }}
               className={```flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors, hover: bg-gray-100, dark:hover:bg-gray-700 ${``
                 theme === themeOption.value
-                  ? 'bg-blue-50 text-blue-900, dark:bg-blue-900, dark:text-blue-100'
+                  ? 'bg-blue-50 text-blue-900, dark: bg-blue-900 dark:text-blue-100'
                   : 'text-gray-900, dark:text-gray-100'
               `}`}
-            ></button>
+            ></button>
               <span>{themeOption.icon}</span>
               <span>{themeOption.label}</span>
               {theme === themeOption.value  && (
@@ -176,33 +172,28 @@ svg className="ml-auto h-4 w-4" fill="currentColor" viewBox="0 0 20 20"></svg>
                     fillRule="evenodd"
                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                     clipRule="evenodd" />
-              
-              
             )}
-            </button>
-          ))}
-      )}
-    );
-}
+</button>
+          ))})}}
 // Hook to detect if user prefers dark mode
 export function usePrefersDarkMode() {
   const [prefersDark, setPrefersDark] = useState(false);
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setPrefersDark(mediaQuery.matches);
+    setPrefersDark(mediaQuery.matches)
     const _handleChange = (e: MediaQueryListEvent) => {
-      setPrefersDark(e.matches);
+      setPrefersDark(e.matches)
     };
     mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, []);
-  return prefersDark;
+  return prefersDark
 }
 // Utility function to get theme-aware colors
 export function getThemeColor(lightColor: string, darkColor: string, theme?: 'light' | 'dark'): string; darkColor: string, theme?: 'light' | 'dark') {
   if (typeof window === 'undefined') return lightColor;
-  const _currentTheme = theme || (document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-  return currentTheme === 'dark' ? darkColor : lightColor;
+  const _currentTheme = theme || (document.documentElement.classList.contains('dark') ? 'dark' : 'light')
+  return currentTheme === 'dark' ? darkColor: lightColor
 }
 // CSS variables for theme colors
 export const _themeColors = {
@@ -224,7 +215,7 @@ export const _themeColors = {
     destructive: '#ef4444',
     destructiveForeground: '#ffffff',
     border: '#e2e8f0',
-    input: '#e2e8f0',
+    input: '#e2e8f0'
     ring: '#3b82f6'},
     dark: {
     background: '#0f172a',
@@ -244,10 +235,10 @@ export const _themeColors = {
     destructive: '#ef4444',
     destructiveForeground: '#ffffff',
     border: '#334155',
-    input: '#334155',
+    input: '#334155'
     ring: '#3b82f6'}
-export type { Theme, ThemeContextType }
 
-    </any>
+export type { Theme, ThemeContextType }
+</any>
     }
 </Theme>

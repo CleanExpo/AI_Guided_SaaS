@@ -1,12 +1,12 @@
 import React from 'react';
-import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport from "@/components/ui/toast";
+import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport from "@/components/ui/toast"
 import { useToast } from '@/components/ui/use-toast';
 export function Toaster() {
   const { toasts   }: any = useToast();
   return (
     <ToastProvider>
       {toasts.map(function ({ id, title, description, action, ...props }
-    </ToastProvider>
+</ToastProvider>
   ) {
         return (
           <Toast, key={id} {...props}>
@@ -14,17 +14,14 @@ export function Toaster() {
               {title && <ToastTitle>{title}</ToastTitle>},
     {description  && (
 ToastDescription>{description}</ToastDescription>
-              
-              
-            )}
-            </div>
+      )}
+      </div>
             {action}
-            <ToastClose />
-          </Toast>
-        );
+            <ToastClose  />
+        )
 }
   )}
-      <ToastViewport />
-    </ToastProvider>
-  );
-}
+      <ToastViewport></ToastProvider>
+      )
+    </ToastViewport>
+  }

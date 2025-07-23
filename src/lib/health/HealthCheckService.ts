@@ -3,43 +3,43 @@ import os from 'os';
 import { performance } from 'perf_hooks';
 export interface HealthCheckResult {
   name: string,
-    status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown';
-  responseTime?: number;
-  details?;
+  status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown',
+  responseTime?: number,
+  details?,
   error?: string,
     timestamp: Date
 };
 export interface SystemMetrics {
-
   cpu: {
   usage: number,
-    cores: number,
-    loadAverage: number[]
+  cores: number,
+  loadAverage: number[]
 }
   memory: {
-    total: number, used: number, free: number, percentage: number
+    total: number, used: number; free: number, percentage: number
   },
   disk: {
-    total: number, used: number, free: number, percentage: number
+    total: number, used: number; free: number, percentage: number
   },
   uptime: number
 };
 export interface HealthStatus {
   status: 'healthy' | 'unhealthy' | 'degraded',
   checks: HealthCheckResult[],
-    metrics: SystemMetric;s,
+  metrics: SystemMetric
+s,
     version: string,
-    environment: string,
-    timestamp: Date
+  environment: string,
+  timestamp: Date
 };
 export type HealthCheck = () => Promise<HealthCheckResult>;
 export class HealthCheckService extends EventEmitter {
-  private, checks: Map<string, HealthCheck> = new Map()
-  private, checkInterval: ReturnType<typeof setInterval> | null = null
-  private, lastStatus: HealthStatus | null = null
+  private checks: Map<string, HealthCheck> = new Map()
+  private checkInterval: ReturnType<typeof setInterval> | null = null
+  private lastStatus: HealthStatus | null = null
   constructor(
-    private, version: string = '1.0.0',
-    private, environment: string = process.env.NODE_ENV || 'development'
+    private version: string = '1.0.0',
+    private environment: string = process.env.NODE_ENV || 'development'
   ) {
     super()
     this.setupDefaultChecks()
@@ -77,8 +77,7 @@ export class HealthCheckService extends EventEmitter {
           responseTime: performance.now() - checkStart,
     timestamp: new Date()
         })
-}
-    })
+}})
     await Promise.all(checkPromises)
     // Get system metrics
     const metrics = await this.getSystemMetrics();
@@ -103,7 +102,7 @@ export class HealthCheckService extends EventEmitter {
     this.emit('health:checked', status)
     const _totalTime = performance.now() - startTime;
     }ms - Status: ${overallStatus}`)``
-    return status;
+    return status
 }
   /**
    * Get the last health status
@@ -132,8 +131,7 @@ export class HealthCheckService extends EventEmitter {
     if(this.checkInterval) {
       clearInterval(this.checkInterval)
       this.checkInterval = null
-}
-}
+}}
   /**
    * Get system metrics
    */
@@ -146,7 +144,7 @@ export class HealthCheckService extends EventEmitter {
     const _cpuUsage = cpus.reduce((acc, cpu) => {
       const _total = Object.values(cpu.times).reduce((a, b) => a + b, 0);
       const _idle = cpu.times.idle;
-      return acc + ((total - idle) / total) * 100;
+      return acc + ((total - idle) / total) * 100
     }, 0) / cpus.length
     return {
       cpu: {
@@ -167,8 +165,7 @@ export class HealthCheckService extends EventEmitter {
     percentage: 0
       },
       uptime: os.uptime()
-}
-}
+}}
   /**
    * Setup default health checks
    */
@@ -202,8 +199,7 @@ export class HealthCheckService extends EventEmitter {
           // issues
         },
         timestamp: new Date()
-}
-    })
+}})
     // Process health check
     this.registerCheck('process', async () => {
       const memoryUsage = process.memoryUsage();
@@ -228,10 +224,8 @@ export class HealthCheckService extends EventEmitter {
             percentage: `${heapPercentage.toFixed(1)}%`
 },
         timestamp: new Date()
-}
-    })
-}
-}
+}})
+}}
 // Pre-configured health checks for common services
 export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () => {
   const _start = performance.now();
@@ -243,16 +237,15 @@ export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () => 
       status: 'healthy',
       responseTime: performance.now() - start,
     timestamp: new Date()
-}
-  } catch (error) {
+}} catch (error) {
     return {
       name: 'database',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Database connection failed',
       responseTime: performance.now() - start,
     timestamp: new Date()
-}
-}
+}}
+
 export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => {
   const _start = performance.now();
   try {
@@ -262,16 +255,15 @@ export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => 
       status: 'healthy',
       responseTime: performance.now() - start,
     timestamp: new Date()
-}
-  } catch (error) {
+}} catch (error) {
     return {
       name: 'redis',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Redis connection failed',
       responseTime: performance.now() - start,
     timestamp: new Date()
-}
-}
+}}
+
 export const _createExternalServiceHealthCheck = (,
     name: string,
     url: string,
@@ -296,16 +288,14 @@ export const _createExternalServiceHealthCheck = (,
   statusCode: response.status
         },
         timestamp: new Date()
-}
-    } else if (response.status >= 500) {
+}} else if (response.status >= 500) {
       return {
         name,
         status: 'unhealthy',
         responseTime,
         error: `Service returned ${response.status}`
         timestamp: new Date()
-}
-    } else {
+}} else {
       return {
         name,
         status: 'degraded',
@@ -314,9 +304,7 @@ export const _createExternalServiceHealthCheck = (,
   statusCode: response.status
         },
         timestamp: new Date()
-}
-}
-  } catch (error) { return {
+}} catch (error) { return {
       name,
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Service unreachable',
@@ -325,10 +313,10 @@ export const _createExternalServiceHealthCheck = (,
 }
 // Singleton instance
 let healthCheckService: HealthCheckService | null = null;
-export function getHealthCheckService(
+export function getHealthCheckService(;
   version?: string, environment?: string): string, environment?: string): HealthCheckService {
   if(!healthCheckService) {
     healthCheckService = new HealthCheckService(version, environment)
 }
-  return healthCheckService;
+  return healthCheckService
 }

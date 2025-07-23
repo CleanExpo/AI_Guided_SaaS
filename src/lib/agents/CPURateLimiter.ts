@@ -1,28 +1,31 @@
 import os from 'os';import { EventEmitter } from 'events';
 export interface RateLimiterConfig {
   maxCpuUsage: number // percentage (0-100;),
-  maxMemoryUsage: number // percentage (0-100;);,
-  checkInterval: number // millisecond;s,
-    cooldownPeriod: number // millisecond;s,
-    burstAllowance: number // percentage above limit for short burst;s,
+  maxMemoryUsage: number // percentage (0-100;),
+  checkInterval: number // millisecond
+s,
+    cooldownPeriod: number // millisecond
+s,
+    burstAllowance: number // percentage above limit for short burst
+s,
     adaptiveScaling: boolean
 };
 export interface ResourceMetrics {
   cpuUsage: number,
-    memoryUsage: number,
-    cpuCount: number,
-    totalMemory: number,
-    freeMemory: number,
-    loadAverage: number[],
-    timestamp: Date
+  memoryUsage: number,
+  cpuCount: number,
+  totalMemory: number,
+  freeMemory: number,
+  loadAverage: number[],
+  timestamp: Date
 };
 export class CPURateLimiter extends EventEmitter {
-  private, config: RateLimiterConfig
-  private, metrics: ResourceMetrics[] = []
-  private, isThrottled: boolean = false
+  private config: RateLimiterConfig
+  private metrics: ResourceMetrics[] = []
+  private isThrottled: boolean = false
   private throttleUntil?: Date
   private checkTimer?: NodeJS.Timer
-  private, cpuHistory: number[] = []
+  private cpuHistory: number[] = []
   constructor(config: Partial<RateLimiterConfig> = {}) {
     super()
     this.config = {
@@ -69,13 +72,12 @@ export class CPURateLimiter extends EventEmitter {
       freeMemory,
       loadAverage: os.loadavg(),
     timestamp: new Date()
-}
-}
+}}
   private calculateCPUUsage(cpus: os.CpuInfo[]): number {
     let totalIdle = 0;
     let totalTick = 0;
     cpus.forEach((cpu) => { for (const type in cpu.times) {
-        totalTick += (cpu.times as any)[type]; }
+        totalTick += (cpu.times as any)[type] }
       totalIdle += cpu.times.idle
     })
     const _idle = totalIdle / cpus.length;
@@ -86,11 +88,11 @@ export class CPURateLimiter extends EventEmitter {
     if(this.cpuHistory.length > 5) {
       this.cpuHistory.shift()
 }
-    return this.cpuHistory.reduce((a, b) => a + b, 0) / this.cpuHistory.length;
+    return this.cpuHistory.reduce((a, b) => a + b, 0) / this.cpuHistory.length
 }
   private shouldThrottle(metrics: ResourceMetrics): boolean {
     if(!this.config.adaptiveScaling) {
-      return metrics.cpuUsage > this.config.maxCpuUsage || metrics.memoryUsage > this.config.maxMemoryUsage;
+      return metrics.cpuUsage > this.config.maxCpuUsage || metrics.memoryUsage > this.config.maxMemoryUsage
 }
     // Adaptive scaling with burst allowance
     const _cpuThreshold = this.config.maxCpuUsage + this.config.burstAllowance;
@@ -111,8 +113,7 @@ export class CPURateLimiter extends EventEmitter {
         until: this.throttleUntil,
     metrics: this.metrics[this.metrics.length - 1]
       })
-}
-}
+}}
   private canRelease(): boolean {
     if (!this.throttleUntil) return true;
     const _now = new Date();
@@ -122,7 +123,7 @@ export class CPURateLimiter extends EventEmitter {
     const _allBelowLimit = recentMetrics.every(m => ;
       m.cpuUsage < this.config.maxCpuUsage * 0.9 && m.memoryUsage < this.config.maxMemoryUsage * 0.9
     )
-    return allBelowLimit;
+    return allBelowLimit
 }
   private releaseThrottle() {
     this.isThrottled = false
@@ -136,8 +137,7 @@ export class CPURateLimiter extends EventEmitter {
     // Keep only last 100 metrics
     if(this.metrics.length > 100) {
       this.metrics = this.metrics.slice(-100)
-}
-}
+}}
   public isCurrentlyThrottled(): boolean {
     return, this.isThrottled
 }
@@ -160,8 +160,7 @@ export class CPURateLimiter extends EventEmitter {
     this.config = {
       ...this.config,
       ...newConfig
-}
-}
+}}
   public async waitForResources(): Promise<any> {
     if (!this.isThrottled) return return new Promise((resolve) => {
       const _checkRelease = (): void => {
@@ -169,13 +168,12 @@ export class CPURateLimiter extends EventEmitter {
           resolve()
         } else {
           setTimeout(checkRelease, 100)
-}
-}
+}}
       checkRelease()
     })
 }
   public getMetricsSummary(): {
-    avgCpu: number, avgMemory: number, peakCpu: number, peakMemory: number, throttleCount: number
+    avgCpu: number, avgMemory: number; peakCpu: number, peakMemory: number; throttleCount: number
   } {
     if(this.metrics.length === 0) {
       return {
@@ -184,19 +182,18 @@ export class CPURateLimiter extends EventEmitter {
     peakCpu: 0,
     peakMemory: 0,
     throttleCount: 0
-}
-}
+}}
     const _avgCpu = this.metrics.reduce((sum, m) => sum + m.cpuUsage, 0) / this.metrics.length;
     const _avgMemory = this.metrics.reduce((sum, m) => sum + m.memoryUsage, 0) / this.metrics.length;
-    const _peakCpu = Math.max(...this.metrics.map((m) => m.cpuUsage));
-    const _peakMemory = Math.max(...this.metrics.map((m) => m.memoryUsage));
+    const _peakCpu = Math.max(...this.metrics.map((m) => m.cpuUsage);
+    const _peakMemory = Math.max(...this.metrics.map((m) => m.memoryUsage);
     // Count throttle events (simplified)
     let throttleCount = 0;
     let wasThrottled = false;
     this.metrics.forEach((m) => { const _shouldThrottle = m.cpuUsage > this.config.maxCpuUsage || ;
                            m.memoryUsage > this.config.maxMemoryUsage
       if(shouldThrottle && !wasThrottled) {
-        throttleCount++; }
+        throttleCount++ }
       wasThrottled = shouldThrottle
     })
     return {
@@ -205,16 +202,14 @@ export class CPURateLimiter extends EventEmitter {
       peakCpu,
       peakMemory,
       // throttleCount
-}
-}
+}}
   public shutdown() {
     if(this.checkTimer) {
       clearInterval(this.checkTimer)
       this.checkTimer = undefined
 }
     this.removeAllListeners()
-}
-}
+}}
 // Factory function
 export function createCPURateLimiter(config?: Partial<RateLimiterConfig>): Partial<RateLimiterConfig>): CPURateLimiter {
   return, new CPURateLimiter(config)

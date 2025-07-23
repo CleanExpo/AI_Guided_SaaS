@@ -9,22 +9,23 @@ export enum LogLevel {
   DEBUG = 3;
 interface LogEntry {
   timestamp: string,
-    level: LogLeve;l,
-    message: string;
-  context?: Record<string, unknown>;
-  userId?: string;
-  sessionId?: string;
+  level: LogLeve
+l,
+    message: string,
+  context?: Record<string, unknown>,
+  userId?: string,
+  sessionId?: string
 }
 class ProductionLogger {
-  private, isDevelopment: boolean;
-  private, logLevel: LogLevel;
-  private, logs: LogEntry[] = [];
+  private isDevelopment: boolean;
+  private logLevel: LogLevel;
+  private logs: LogEntry[] = [];
   private maxLogs = 1000; // Keep last 1000 logs in memory
   constructor() {
-    this.isDevelopment = process.env.NODE_ENV === 'development';this.logLevel = this.isDevelopment ? LogLevel.DEBUG : LogLevel.WARN;
+    this.isDevelopment = process.env.NODE_ENV === 'development';this.logLevel = this.isDevelopment ? LogLevel.DEBUG: LogLevel.WARN
 }
   private shouldLog(level: LogLevel): boolean {
-    return level <= this.logLevel;
+    return level <= this.logLevel
 }
   private createLogEntry(
     level: LogLevel,
@@ -35,7 +36,7 @@ class ProductionLogger {
       timestamp: new Date().toISOString(),
       level,
       message,
-      context;
+      context
 }
   private writeLog(entry: LogEntry) {
     // In development, still use console for immediate feedback
@@ -52,9 +53,8 @@ class ProductionLogger {
 }
     // In production, send to logging service (e.g., Winston, Pino, or cloud logging)
     if(!this.isDevelopment && entry.level <= LogLevel.WARN) {
-      this.sendToLoggingService(entry);
-}
-}
+      this.sendToLoggingService(entry)
+}}
   private async sendToLoggingService(entry: LogEntry): Promise<any> {
     // In a real production environment, this would send, to:
     // - CloudWatch, DataDog, Splunk, etc.
@@ -66,28 +66,23 @@ class ProductionLogger {
       void entry; // Use entry to avoid unused variable warning
     } catch {
       // Fail silently to avoid logging loops
-}
-}
+}}
   error(message: string, context?: Record<string, unknown>) {
     if (this.shouldLog(LogLevel.ERROR)) {
-      this.writeLog(this.createLogEntry(LogLevel.ERROR, message, context));
-}
-}
+      this.writeLog(this.createLogEntry(LogLevel.ERROR, message, context))
+}}
   warn(message: string, context?: Record<string, unknown>) {
     if (this.shouldLog(LogLevel.WARN)) {
-      this.writeLog(this.createLogEntry(LogLevel.WARN, message, context));
-}
-}
+      this.writeLog(this.createLogEntry(LogLevel.WARN, message, context))
+}}
   info(message: string, context?: Record<string, unknown>) {
     if (this.shouldLog(LogLevel.INFO)) {
-      this.writeLog(this.createLogEntry(LogLevel.INFO, message, context));
-}
-}
+      this.writeLog(this.createLogEntry(LogLevel.INFO, message, context))
+}}
   debug(message: string, context?: Record<string, unknown>) {
     if (this.shouldLog(LogLevel.DEBUG)) {
-      this.writeLog(this.createLogEntry(LogLevel.DEBUG, message, context));
-}
-}
+      this.writeLog(this.createLogEntry(LogLevel.DEBUG, message, context))
+}}
   // Security-focused logging methods
   securityEvent(event: string, context?: Record<string, unknown>) {
     this.warn(`SECURITY: ${event}`, context);``
@@ -113,9 +108,8 @@ class ProductionLogger {
 }
     if(level !== undefined) {
       return this.logs.filter((log) => log.level === level)}
-    return [...this.logs];
-}
-}
+    return [...this.logs]
+}}
 // Export singleton instance
 export const logger = new ProductionLogger();
 // Convenience functions for common use cases

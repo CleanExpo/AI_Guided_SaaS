@@ -6,60 +6,65 @@ import fs from 'fs';import path from 'path';
 // Configuration interfaces
 export interface AIProviderConfig {
     primary: string,
-    fallback: string,
-    research: string
+  fallback: string,
+  research: string
 }
+
 export interface ModelConfig {
     apiKey: string,
-    baseUrl: string,
-    primary: string,
-    fallback: string,
-    codeGeneration: string;
-  documentation?: string;
+  baseUrl: string,
+  primary: string,
+  fallback: string,
+  codeGeneration: string,
+  documentation?: string,
   analysis?: string,
     tokensMax: number,
-    tokensContext: number,
-    temperatureDefault: number,
-    temperatureCode: number;
+  tokensContext: number,
+  temperatureDefault: number,
+  temperatureCode: number,
   temperatureCreative?: number,
     displayName: string,
-    rateLimitRequestsPerMinute: number,
-    rateLimitTokensPerMinute: number
+  rateLimitRequestsPerMinute: number,
+  rateLimitTokensPerMinute: number
 }
+
 export interface FrameworkConfig {
     primary: string,
-    version: string,
-    appDirectory: boolean,
-    typescript: boolean,
-    eslint: boolean,
-    tailwind: boolean
+  version: string,
+  appDirectory: boolean,
+  typescript: boolean,
+  eslint: boolean,
+  tailwind: boolean
 }
+
 export interface ReactConfig {
     version: string,
-    strictMode: boolean,
-    concurrentFeatures: boolean,
-    componentStyle: string,
-    hooksPreferred: boolean,
-    stateManagement: string,
-    testingLibrary: string
+  strictMode: boolean,
+  concurrentFeatures: boolean,
+  componentStyle: string,
+  hooksPreferred: boolean,
+  stateManagement: string,
+  testingLibrary: string
 }
+
 export interface DatabaseConfig {
     orm: string,
-    provider: string,
-    connectionPooling: boolean,
-    migrationsAuto: boolean,
-    schemaValidation: boolean,
-    queryLogging: string
+  provider: string,
+  connectionPooling: boolean,
+  migrationsAuto: boolean,
+  schemaValidation: boolean,
+  queryLogging: string
 }
+
 export interface AgentConfig { enabled: boolean,
-    maxConcurrent: number,
-    timeout: number,
-    retryAttempts: number,
-    parallelExecution: boolean,
-    codeGenerator: {
+  maxConcurrent: number,
+  timeout: number,
+  retryAttempts: number,
+  parallelExecution: boolean,
+  codeGenerator: {
   model: string,
-    temperature: number,
-    maxTokens: number
+  temperature: number,
+  maxTokens: number
 },
     documentation: {
     model: string,
@@ -81,87 +86,100 @@ export interface AgentConfig { enabled: boolean,
     temperature: number,
     maxTokens: number
 }
+
 export interface SecurityConfig {
     rateLimitEnabled: boolean,
-    rateLimitWindow: number,
-    rateLimitMaxRequests: number,
-    authProvider: string,
-    sessionStrategy: string,
-    sessionMaxAge: number,
-    cspEnabled: boolean,
-    hstsEnabled: boolean,
-    xssProtection: boolean,
-    ddosProtection: boolean,
-    suspiciousActivityDetection: boolean
+  rateLimitWindow: number,
+  rateLimitMaxRequests: number,
+  authProvider: string,
+  sessionStrategy: string,
+  sessionMaxAge: number,
+  cspEnabled: boolean,
+  hstsEnabled: boolean,
+  xssProtection: boolean,
+  ddosProtection: boolean,
+  suspiciousActivityDetection: boolean
 }
+
 export interface PerformanceConfig {
     cacheStrategy: string,
-    cacheTtlDefault: number,
-    cacheTtlStaticAssets: number,
-    cacheTtlApiResponses: number,
-    cdnEnabled: boolean,
-    cdnProvider: string,
-    apmEnabled: boolean,
-    apmProvider: string,
-    analyticsEnabled: boolean,
-    loggingLevel: string,
-    healthEnabled: boolean
+  cacheTtlDefault: number,
+  cacheTtlStaticAssets: number,
+  cacheTtlApiResponses: number,
+  cdnEnabled: boolean,
+  cdnProvider: string,
+  apmEnabled: boolean,
+  apmProvider: string,
+  analyticsEnabled: boolean,
+  loggingLevel: string,
+  healthEnabled: boolean
 }
+
 export interface FeatureFlagsConfig {
     aiGeneration: boolean,
-    collaboration: boolean,
-    templateMarketplace: boolean,
-    analyticsDashboard: boolean,
-    adminPanel: boolean,
-    experimentalAiAgents: boolean,
-    experimentalRealTimeCollaboration: boolean,
-    experimentalAdvancedAnalytics: boolean,
-    betaVoiceCommands: boolean,
-    betaAiDebugging: boolean
+  collaboration: boolean,
+  templateMarketplace: boolean,
+  analyticsDashboard: boolean,
+  adminPanel: boolean,
+  experimentalAiAgents: boolean,
+  experimentalRealTimeCollaboration: boolean,
+  experimentalAdvancedAnalytics: boolean,
+  betaVoiceCommands: boolean,
+  betaAiDebugging: boolean
 }
-export interface PlatformConfig { aiProvider: AIProviderConfi;g,
-    openai: ModelConfi;g,
-    anthropic: ModelConfi;g,
-    google: ModelConfi;g,
-    framework: FrameworkConfi;g,
-    react: ReactConfi;g,
-    database: DatabaseConfi;g,
-    agents: AgentConfi;g,
-    security: SecurityConfi;g,
-    performance: PerformanceConfi;g,
-    features: FeatureFlagsConfi;g
-}
-}
+
+export interface PlatformConfig { aiProvider: AIProviderConfi
+g,
+    openai: ModelConfi
+g,
+    anthropic: ModelConfi
+g,
+    google: ModelConfi
+g,
+    framework: FrameworkConfi
+g,
+    react: ReactConfi
+g,
+    database: DatabaseConfi
+g,
+    agents: AgentConfi
+g,
+    security: SecurityConfi
+g,
+    performance: PerformanceConfi
+g,
+    features: FeatureFlagsConfi
+g
+}}
 class ConfigurationManager {
-  private static, instance: ConfigurationManager;
-  private, config: PlatformConfig | null = null;
-  private, configPath: string;
+  private static instance: ConfigurationManager;
+  private config: PlatformConfig | null = null;
+  private configPath: string;
   private constructor() {
-    this.configPath = path.join(process.cwd(), 'ai-guided-saas.prp');
+    this.configPath = path.join(process.cwd(), 'ai-guided-saas.prp')
 }
   static getInstance(): ConfigurationManager {
     if(!ConfigurationManager.instance) {
-      ConfigurationManager.instance = new ConfigurationManager();
+      ConfigurationManager.instance = new ConfigurationManager()
 }
-    return ConfigurationManager.instance;
+    return ConfigurationManager.instance
 }
   /**
    * Load configuration from .prp file
    */
   async loadConfig(): Promise<any> {
     if(this.config) {
-      return this.config;
+      return this.config
 }
     try {
       const _configContent = fs.readFileSync(this.configPath, 'utf-8');
       const _parsedConfig = this.parsePropertiesFile(configContent);
       this.config = this.transformToTypedConfig(parsedConfig);
-      return this.config;
+      return this.config
     } catch (error) {
       console.error('Failed to load, configuration:', error);
-      throw new Error('Configuration file not found or invalid');
-}
-}
+      throw new Error('Configuration file not found or invalid')
+}}
   /**
    * Parse .properties file format
    */
@@ -172,7 +190,7 @@ class ConfigurationManager {
       const trimmedLine = line.trim();
       // Skip comments and empty lines
       if (trimmedLine.startsWith('#') || trimmedLine === '') {
-        continue;
+        continue
 }
       const _equalIndex = trimmedLine.indexOf('=');
       if(equalIndex > 0) {
@@ -180,18 +198,17 @@ class ConfigurationManager {
         let value = trimmedLine.substring(equalIndex + 1).trim();
         // Handle environment variable substitution
         value = this.substituteEnvironmentVariables(value);
-        properties[key] = value;
-}
-}
-    return properties;
+        properties[key] = value
+}}
+    return properties
 }
   /**
    * Substitute environment variables in configuration values
    */
   private substituteEnvironmentVariables(value: string) {
     return value.replace(/\$\{([^}]+)\}/g, (match, envVar) => {
-      return process.env[envVar] || match;
-    });
+      return process.env[envVar] || match
+    })
 }
   /**
    * Transform flat properties to typed configuration object
@@ -207,7 +224,7 @@ class ConfigurationManager {
     },
     openai: {
         apiKey: properties['openai.api.key'] || '',
-    baseUrl: properties['openai.api.base_url'] || 'https://api.openai.com/v1',
+    baseUrl: properties['openai.api.base_url'] || 'https: //api.openai.com/v1',
     primary: properties['openai.model.primary'] || 'gpt-4-turbo-preview',
     fallback: properties['openai.model.fallback'] || 'gpt-3.5-turbo',
     codeGeneration: properties['openai.model.code_generation'] || 'gpt-4',
@@ -233,7 +250,7 @@ class ConfigurationManager {
         )},
     anthropic: {
         apiKey: properties['anthropic.api.key'] || '',
-    baseUrl: properties['anthropic.api.base_url'] || 'https://api.anthropic.com',
+    baseUrl: properties['anthropic.api.base_url'] || 'https: //api.anthropic.com',
     primary: properties['anthropic.model.primary'] || 'claude-3-opus-20240229',
     fallback: properties['anthropic.model.fallback'] || 'claude-3-sonnet-20240229',
     codeGeneration:
@@ -337,7 +354,7 @@ class ConfigurationManager {
     temperature: parseFloat(
             properties['agent.review.temperature'] || '0.4'
           ),
-          maxTokens: parseInt(properties['agent.review.max_tokens'] || '2048')},
+          maxTokens: parseInt(properties['agent.review.max_tokens'] || '2048')};
     optimization: {
           model: properties['agent.optimization.model'] || 'openai.gpt-4',
     temperature: parseFloat(
@@ -402,52 +419,45 @@ class ConfigurationManager {
    */
   async getAIProviderConfig(): Promise<any> {
     const config = await this.loadConfig();
-    return config.aiProvider;
+    return config.aiProvider
 }
   async getModelConfig(provider: string): Promise { const config = await this.loadConfig();
     switch (provider.toLowerCase()) {
       case 'openai':
     return config.openai;
     break;
-
-    break;
-break;
-
-
       case 'anthropic':
     return config.anthropic;
     break;
-
       case 'google':
 return config.google,
     break;
-break;
+break
 }
     default: throw new Error(`Unknown AI, provider: ${provider}`);``
-}
-}
+}}
   async getAgentConfig(): Promise<any> {
     const config = await this.loadConfig();
-    return config.agents;
+    return config.agents
 }
   async getFeatureFlags(): Promise<any> {
     const config = await this.loadConfig();
-    return config.features;
+    return config.features
 }
   async getSecurityConfig(): Promise<any> {
     const config = await this.loadConfig();
-    return config.security;
+    return config.security
 }
   async getPerformanceConfig(): Promise<any> {
     const config = await this.loadConfig();
-    return config.performance;
+    return config.performance
 }
   /**
    * Check if a feature is enabled
    */
   async isFeatureEnabled(featureName: keyof FeatureFlagsConfig): Promise<any> {
     const features = await this.getFeatureFlags();
-    return features[featureName];
+    return features[featureName]
 }
   /**
    * Get the primary AI model for a specific task
@@ -458,34 +468,23 @@ break;
       case 'code_generation':
     return modelConfig.codeGeneration;
     break;
-
-    break;
-break;
-
-
       case 'documentation':
     return modelConfig.documentation || modelConfig.primary;
     break;
-
       case 'analysis':
 return modelConfig.analysis || modelConfig.primary;
     break;
-break;
-
-
       case 'review':
     return modelConfig.primary,
-    break;
+    break
 }
-    default: return modelConfig.primary}
-}
+    default: return modelConfig.primary}}
   /**
    * Reload configuration (useful for development)
    */
   reloadConfig() {
-    this.config = null;
-}
-}
+    this.config = null
+}}
 // Export singleton instance
 export const configManager = ConfigurationManager.getInstance();
 // Export convenience functions

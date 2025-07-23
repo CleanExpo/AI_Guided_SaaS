@@ -1,0 +1,157 @@
+{
+  "timestamp": "2025-07-23T15:18:42.669Z",
+  "overallScore": 41,
+  "deploymentReady": false,
+  "results": [
+    {
+      "category": "Build",
+      "check": "Production build",
+      "status": "fail",
+      "details": "Build failed with errors",
+      "recommendation": "Fix all TypeScript and build errors before deployment"
+    },
+    {
+      "category": "TypeScript",
+      "check": "Type checking",
+      "status": "fail",
+      "details": "18323 TypeScript errors found",
+      "recommendation": "Run \"npm run fix:typescript\" to fix errors systematically"
+    },
+    {
+      "category": "Tests",
+      "check": "Test suite",
+      "status": "warning",
+      "details": "Some tests failed",
+      "recommendation": "Fix failing tests before deployment"
+    },
+    {
+      "category": "Environment",
+      "check": "Required variables",
+      "status": "fail",
+      "details": "Missing variables: DATABASE_URL, NEXTAUTH_URL, NEXTAUTH_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET",
+      "recommendation": "Set all required environment variables in production"
+    },
+    {
+      "category": "Environment",
+      "check": "Production config",
+      "status": "pass",
+      "details": ".env.production file exists"
+    },
+    {
+      "category": "Authentication",
+      "check": "Google OAuth configured",
+      "status": "pass",
+      "details": "Configuration found"
+    },
+    {
+      "category": "Authentication",
+      "check": "Production URL configured",
+      "status": "fail",
+      "details": "Configuration missing",
+      "recommendation": "Add NEXTAUTH_URL to auth configuration"
+    },
+    {
+      "category": "Authentication",
+      "check": "Secret configured",
+      "status": "pass",
+      "details": "Configuration found"
+    },
+    {
+      "category": "API",
+      "check": "Endpoint /api/health",
+      "status": "fail",
+      "details": "Endpoint not accessible",
+      "recommendation": "Ensure endpoint is properly implemented"
+    },
+    {
+      "category": "API",
+      "check": "Endpoint /api/auth/session",
+      "status": "fail",
+      "details": "Endpoint not accessible",
+      "recommendation": "Ensure endpoint is properly implemented"
+    },
+    {
+      "category": "API",
+      "check": "Endpoint /api/mcp/status",
+      "status": "fail",
+      "details": "Endpoint not accessible",
+      "recommendation": "Ensure endpoint is properly implemented"
+    },
+    {
+      "category": "Database",
+      "check": "Connection string",
+      "status": "fail",
+      "details": "DATABASE_URL not configured",
+      "recommendation": "Set DATABASE_URL environment variable"
+    },
+    {
+      "category": "Routing",
+      "check": "Page routes",
+      "status": "pass",
+      "details": "Found 51 routes"
+    },
+    {
+      "category": "Routing",
+      "check": "Route /",
+      "status": "pass",
+      "details": "Route exists"
+    },
+    {
+      "category": "Routing",
+      "check": "Route /auth/signin",
+      "status": "pass",
+      "details": "Route exists"
+    },
+    {
+      "category": "Routing",
+      "check": "Route /dashboard",
+      "status": "pass",
+      "details": "Route exists"
+    },
+    {
+      "category": "Security",
+      "check": "Security headers",
+      "status": "warning",
+      "details": "No security headers configured",
+      "recommendation": "Add security headers to next.config.mjs"
+    },
+    {
+      "category": "Performance",
+      "check": "Image optimization",
+      "status": "warning",
+      "details": "Not configured",
+      "recommendation": "Configure image domains for optimization"
+    },
+    {
+      "category": "Performance",
+      "check": "Sharp for images",
+      "status": "warning",
+      "details": "Not configured",
+      "recommendation": "Install sharp for better image performance"
+    },
+    {
+      "category": "Monitoring",
+      "check": "Error tracking",
+      "status": "warning",
+      "details": "No error tracking found",
+      "recommendation": "Set up error tracking (Sentry, etc.)"
+    },
+    {
+      "category": "Monitoring",
+      "check": "Analytics",
+      "status": "pass",
+      "details": "Analytics configured"
+    },
+    {
+      "category": "Deployment",
+      "check": "Deployment config",
+      "status": "pass",
+      "details": "Found: .github/workflows/deploy.yml, vercel.json"
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 8,
+    "warnings": 5
+  }
+}

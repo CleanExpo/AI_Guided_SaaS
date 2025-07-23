@@ -1,17 +1,16 @@
 import React from 'react';
 
 interface BlogPost {
-id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  publishedAt: string;
-  category: string;
-  tags: string[];
-  readTime: string;
-  image: string;
-
+  id: string,
+  title: string,
+  excerpt: string,
+  content: string,
+  author: string,
+  publishedAt: string,
+  category: string,
+  tags: string[],
+  readTime: string,
+  image: string
 }
 
 const blogPosts: Record<string, BlogPost> = {
@@ -20,18 +19,13 @@ const blogPosts: Record<string, BlogPost> = {
     title: 'Introducing AI Guided SaaS: The Future of Development',
     excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.',
     content: `# Welcome to AI Guided SaaS
-
 AI Guided SaaS represents a paradigm shift in how we approach software development. Our platform combines the power of artificial intelligence with intuitive development tools to help you build production-ready applications faster than ever before.
-
 ## Key Features
-
 - **AI-Powered Code Generation**: Our intelligent system understands your requirements and generates high-quality code automatically.
 - **No-Code and Pro-Code Flexibility**: Whether you're a seasoned developer or just starting out, our platform adapts to your skill level.
 - **Enterprise-Grade Security**: Built-in security measures ensure your applications are protected from day one.
 - **One-Click Deployment**: Deploy to any cloud provider with a single click.
-
 ## Getting Started
-
 Getting started with AI Guided SaaS is simple. Just describe what you want to build, and our AI will guide you through the entire process.`,
     author: 'AI Guided SaaS Team',
     publishedAt: '2025-01-15',
@@ -45,11 +39,8 @@ Getting started with AI Guided SaaS is simple. Just describe what you want to bu
     title: 'Building Scalable Applications with AI Assistance',
     excerpt: 'Learn best practices for building scalable applications using our AI-powered development tools.',
     content: `# Building Scalable Applications
-
 Scalability is crucial for modern applications. In this post, we'll explore how AI Guided SaaS helps you build applications that can handle growth from day one.
-
 ## Architecture Patterns
-
 Our AI understands common architecture patterns and can recommend the best approach for your specific use case.`,
     author: 'Technical Team',
     publishedAt: '2025-01-10',
@@ -66,19 +57,20 @@ export function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: { params: { id: string } }) {
+export default function BlogPostPage({ params }: { params: { id: string }}) {
   const post = blogPosts[params.id];
   
   if (!post) {
     return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="text-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900">Post Not Found</h1>
           <p className="text-gray-600 mt-2">The requested blog post does not exist.</p>
-              </div>
-);
-
-        }
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -94,10 +86,10 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
                 <span>{post.publishedAt}</span>
                 <span className="mx-2">•</span>
                 <span>{post.readTime}</span>
-                    </div>
-<div className="prose max-w-none">
-              <div className="whitespace-pre-wrap">{post.content}      </div>
-<div className="flex flex-wrap gap-2 mt-8">
+              </div>
+            </div>
+            <div className="prose max-w-none whitespace-pre-wrap">{post.content}</div>
+            <div className="flex flex-wrap gap-2 mt-8">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
@@ -106,9 +98,10 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
                   {tag}
                 </span>
               ))}
-                  </div>
-</article>
             </div>
-);
-
-      }
+          </div>
+        </article>
+      </div>
+    </div>
+  );
+}

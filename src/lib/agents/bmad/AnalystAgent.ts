@@ -2,23 +2,23 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
 export interface RequirementAnalysis {
   functionalRequirements: string[],
-    nonFunctionalRequirements: string[],
-    constraints: string[],
-    assumptions: string[],
-    risks: string[],
-    successCriteria: string[],
-    userStories: UserStory[],
-    technicalConsiderations: string[]
+  nonFunctionalRequirements: string[],
+  constraints: string[],
+  assumptions: string[],
+  risks: string[],
+  successCriteria: string[],
+  userStories: UserStory[],
+  technicalConsiderations: string[]
 };
 export interface UserStory {
   id: string,
-    title: string,
-    asA: string,
-    iWant: string,
-    soThat: string,
-    acceptanceCriteria: string[],
-    priority: 'high' | 'medium' | 'low',
-    estimatedEffort: 'small' | 'medium' | 'large'
+  title: string,
+  asA: string,
+  iWant: string,
+  soThat: string,
+  acceptanceCriteria: string[],
+  priority: 'high' | 'medium' | 'low',
+  estimatedEffort: 'small' | 'medium' | 'large'
 };
 export class AnalystAgent extends Agent {
   constructor() {
@@ -36,8 +36,7 @@ export class AnalystAgent extends Agent {
         'Constraint identification'],
       tools: ['requirement-parser', 'user-story-generator', 'risk-analyzer'],
       temperature: 0.3; // Lower temperature for more consistent analysis
-    }};
-}
+    }}
   protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting requirement analysis process...');
@@ -49,7 +48,7 @@ export class AnalystAgent extends Agent {
         await this.categorizeRequirements(rawRequirements);
       this.observe('Categorized requirements', categorizedReqs);
       // Step, 3: Generate user stories
-      const _userStories = await this.generateUserStories(
+      const _userStories = await this.generateUserStories(;
         categorizedReqs.functionalRequirements,
         // input
       );
@@ -60,13 +59,13 @@ export class AnalystAgent extends Agent {
       this.observe('Identified risks', risks);
       this.observe('Identified constraints', constraints);
       // Step, 5: Define success criteria
-      const _successCriteria = await this.defineSuccessCriteria(
+      const _successCriteria = await this.defineSuccessCriteria(;
         categorizedReqs.functionalRequirements,
         // userStories
       );
       this.observe('Defined success criteria', successCriteria);
       // Step, 6: Technical considerations
-      const _technicalConsiderations = await this.analyzeTechnicalAspects(
+      const _technicalConsiderations = await this.analyzeTechnicalAspects(;
         input,
         // categorizedReqs
       );
@@ -100,24 +99,22 @@ export class AnalystAgent extends Agent {
           'Architect to design system architecture',
           'Review and validate requirements with stakeholder'],
         confidence: 0.95
-}
-    } catch (error) {
+}} catch (error) {
       this.think(`Error during, analysis: ${error}`);``
-      throw error;
-}
-}
+      throw error
+}}
   private async extractRequirements(input: string): Promise<any> {
-    const _prompt = `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions: Project, Description:``
+    const _prompt = `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions: Project, Description:``;
 ${input}
 Provide a comprehensive list of all requirements found.`
     const response = await generateAIResponse(prompt, {
       model: this.config.model,
     temperature: this.config.temperature
     }};
-    return response;
+    return response
 }
   private async categorizeRequirements(rawRequirements: string): Promise<any> {
-    const _prompt = `Categorize the following requirements, into: ``
+    const _prompt = `Categorize the following requirements, into: ``;
 1. Functional Requirements (what the system should do)
 2. Non-Functional Requirements (quality attributes like performance, security, usability)
 3. Assumptions (things we assume to be true)
@@ -129,7 +126,7 @@ Format the response as JSON with arrays for each category.`
     temperature: 0.1,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async generateUserStories(functionalReqs: string[], originalInput: string): Promise<any> {
     const _prompt = `Based on these functional requirements and the original project description, create user stories in the standard format.;``
@@ -156,7 +153,7 @@ Format as JSON array of user story objects.`
     return stories.map((story, index: number) => ({
       ...story,
       id: `US-${index + 1}`
-    }});
+    }})
 }
   private async identifyRisks(input: string, requirements): Promise<any> {
     const _prompt = `Identify potential risks for this project based on the requirements and description.;``
@@ -172,7 +169,7 @@ List technical risks, business risks, timeline risks, and any other concerns. Be
     // Parse response into array
     return response.split('\n').filter((line) => line.trim().length > 0)}
   private async identifyConstraints(input: string): Promise<any> {
-    const _prompt = `Identify all constraints mentioned or implied in this project, description: ``
+    const _prompt = `Identify all constraints mentioned or implied in this project, description: ``;
 ${input}
 Include:
 - Technical constraints (specific technologies, platforms, versions)
@@ -201,7 +198,7 @@ Provide specific, measurable, achievable, relevant, and time-bound (SMART) crite
     }};
     return response.split('\n').filter((line) => line.trim().length > 0)}
   private async analyzeTechnicalAspects(input: string, requirements): Promise<any> {
-    const _prompt = `Analyze the technical aspects and considerations for this, project: Project, Description:``
+    const _prompt = `Analyze the technical aspects and considerations for this, project: Project, Description:``;
 ${input}
 Requirements:
 ${JSON.stringify(requirements, null, 2)}

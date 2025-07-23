@@ -1,14 +1,12 @@
 'use client';
-
 import React from 'react';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProjectConfig } from '@/types';
 import { FolderOpen } from 'lucide-react';
 interface MDFolderAgentProps {
-projectConfig: ProjectConfi;g;
-    onMDGenerationComplete: (result: unknown) => voi;d
-
+projectConfig: ProjectConfi
+g,
+  onMDGenerationComplete: (result: unknown: any) => void
 };
 export default function MDFolderAgent() {
   return (

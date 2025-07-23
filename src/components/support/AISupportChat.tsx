@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,24 +9,25 @@ import { cn } from '@/utils/cn';
 import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
 import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
 interface Message {
-id: string;
-    role: 'user' | 'assistant' | 'system';
-  content: string;
-    timestamp: Date;
+id: string,
+  role: 'user' | 'assistant' | 'system',
+  content: string,
+  timestamp: Date,
   metadata?: {
-    suggestedDocs?: string[];
-    suggestedTutorials?: string[];
-    codeBlocks?: Array<{ language: string;
-    code: string 
+    suggestedDocs?: string[],
+  suggestedTutorials?: string[],
+  codeBlocks?: Array<{ language: string,
+  code: string
 }>
-    actionButtons?: Array<{ label: string, action: string; data?}>
+    actionButtons?: Array<{ label: string, action: string data?}>
 }
 interface AISupportChatProps {
-documentationSystem: DynamicDocumentationSyste;m;
-    tutorialSystem: InteractiveTutorialSyste;m;
-    userId: string;
-  projectId?: string;
-
+documentationSystem: DynamicDocumentationSyste
+m,
+  tutorialSystem: InteractiveTutorialSyste
+m,
+  userId: string,
+  projectId?: string
 };
 export function AISupportChat({
   documentationSystem, tutorialSystem, userId, projectId
@@ -38,9 +38,9 @@ export function AISupportChat({
   const [messages, setMessages] = useState<Message[]>([
   {
   id: '1',
-      role: 'system',
+      role: 'system'
       content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?',
-          </Message>
+</Message>
       timestamp: new Date()
 }
   ])
@@ -53,14 +53,12 @@ export function AISupportChat({
   useEffect(() => {
     scrollToBottom()
   }, [messages])
-  const _scrollToBottom = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
-      )}
-    );
+  const _scrollToBottom = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })};
   const _handleSendMessage = async () => {
     if (!input.trim() || isLoading) return const userMessage: Message = {
   id: Date.now().toString(),
     role: 'user',
-      content: input,
+      content: input
     timestamp: new Date()
 }
     setMessages(prev => [...prev, userMessage])
@@ -74,19 +72,13 @@ export function AISupportChat({
       const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
       // Send to AI for enhanced response
       const response = await fetch('/api/support/chat', {
-        method: 'POST',
+        method: 'POST'
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
           message: input,
-    context: {
-            userId,
-            projectId,
-            documentationResults: docResults.slice(0, 3),
-            availableTutorials: tutorials.map((t) => ({ id: t.id, title: t.title })),
+    context: { userId, projectId, documentationResults: docResults.slice(0, 3), availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title });
     conversationHistory: messages.slice(-5)
-}
-        })
-      })
+}})}
       const data = await response.json();
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -96,30 +88,27 @@ export function AISupportChat({
     metadata: {
   suggestedDocs: data.suggestedDocs,
     suggestedTutorials: data.suggestedTutorials,
-    codeBlocks: data.codeBlocks,
+    codeBlocks: data.codeBlocks
     actionButtons: data.actionButtons
-}
-}
+}}
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
       console.error('Failed to get AI, response:', error)
       const errorMessage: Message = {
   id: (Date.now() + 1).toString(),
-    role: 'assistant',
+    role: 'assistant'
         content: 'I apologize, but I encountered an error. Please try again or check the documentation.',
         timestamp: new Date()
 }
       setMessages(prev => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
-}
-}
+}}
   const _handleQuickAction = async (action: string) => { switch (action) {
       case 'browse-docs':
     setSearchQuery('')
-    break;
-
-    break;
+    break
+    break
 }
         setShowQuickActions(false)
         // Show documentation categories
@@ -129,94 +118,76 @@ export function AISupportChat({
     role: 'assistant',
           content: 'Here are the main documentation, categories: ',
           timestamp: new Date(),
-    metadata: {,
+    metadata: {
   actionButtons: categories.map((cat) => ({
-  label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase()),
-              action: 'browse-category',
-    data: { category: cat }
-            }))
-}
-}
+  label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase(),
+              action: 'browse-category'
+    data: { category: cat }}))
+}}
         setMessages(prev => [...prev, docsMessage])
         // break
       case 'start-tutorial':
     const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
     break;
-
-    break;
-
         const tutorialMessage: Message = {
           id: Date.now().toString(),
     role: 'assistant',
           content: 'Here are some recommended tutorials for, you: ',
-          timestamp: new Date(),
+          timestamp: new Date()
     metadata: {
   suggestedTutorials: tutorials.slice(0, 3).map((t) => t.id),
             actionButtons: tutorials.slice(0, 3).map((t) => ({
               label: `Start: ${t.title}`
               action: 'start-tutorial',
-    data: { tutorialId: t.id }
-            }))
-}
-}
+    data: { tutorialId: t.id }}))
+}}
         setMessages(prev => [...prev, tutorialMessage])
         // break
       case 'report-issue':
     setInput('I\'m experiencing an issue with ')
     break;
-
-    break;
-
         // break
       case 'get-help':
         const helpMessage: Message = {
           id: Date.now().toString(),
     role: 'assistant',
-          content: 'I can help you, with: \n\n• Finding documentation\n• Starting tutorials\n• Troubleshooting errors\n• Understanding features\n• Getting code examples\n\nWhat would you like help with?',
+          content: 'I can help you, with: \n\n• Finding documentation\n• Starting tutorials\n• Troubleshooting errors\n• Understanding features\n• Getting code examples\n\nWhat would you like help with?'
           timestamp: new Date()
 }
         setMessages(prev => [...prev, helpMessage])
         // break
-}
-}
+}}
   const _handleActionButton = async (action: string, data?) => { switch (action) {
       case 'browse-category':
     const sections = documentationSystem.getSectionsByCategory(data.category);
-    break;
-
-    break;
+    break
+    break
 }
         const categoryMessage: Message = {
   id: Date.now().toString(),
-    role: 'assistant',
+    role: 'assistant'
           content: `Here are the ${data.category} documentation; sections: `
           timestamp: new Date(),
     metadata: {
             suggestedDocs: sections.map((s) => s.id),
     actionButtons: sections.slice(0, 5).map((s) => ({
               label: s.title,
-    action: 'open-doc',
-    data: { sectionId: s.id }
-            }))
-}
-}
+    action: 'open-doc'
+    data: { sectionId: s.id }}))
+}}
         setMessages(prev => [...prev, categoryMessage])
         // break
       case 'open-doc':
     const _section = documentationSystem.getSection(data.sectionId);
     break;
-
-    break;
-
         if (section) {
           // In a real app, this would open the documentation viewer
           window.open(`/docs/${data.sectionId}`, '_blank')``
   }
         // break
       case 'start-tutorial':
-    try { break;
-
-    break;
+    try { break
+    break
 }
           await tutorialSystem.startTutorial(data.tutorialId, userId)
           // In a real app, this would start the tutorial overlay
@@ -225,40 +196,37 @@ export function AISupportChat({
           console.error('Failed to start, tutorial:', error)
 }
         // break
-}
-}
+}}
   const _handleSearch = async () => {
     if (!searchQuery.trim()) return
     const results = await documentationSystem.searchDocumentation(searchQuery);
     const searchMessage: Message = {
   id: Date.now().toString(),
-    role: 'assistant',
+    role: 'assistant'
       content: `Found ${results.length} results for "${searchQuery}":`
       timestamp: new Date(),
     metadata: {
         suggestedDocs: results.slice(0, 5).map((r) => r.sectionId),
         actionButtons: results.slice(0, 5).map((r) => ({
           label: r.title,
-    action: 'open-doc',
-    data: { sectionId: r.sectionId }
-        }))
-}
-}
+    action: 'open-doc'
+    data: { sectionId: r.sectionId }}))
+}}
     setMessages(prev => [...prev, searchMessage])
     setSearchQuery('')
 }
   const quickActions = [
-  { icon: Book, label: 'Browse Docs', action: 'browse-docs' },
-    { icon: Play, label: 'Start Tutorial', action: 'start-tutorial' },
-    { icon: HelpCircle, label: 'Get Help', action: 'get-help' }
+  { icon: Book, label: 'Browse Docs' action: 'browse-docs' },
+    { icon: Play, label: 'Start Tutorial' action: 'start-tutorial' },
+    { icon: HelpCircle, label: 'Get Help' action: 'get-help' }
    ]
   if(!isOpen) {
-    return (<Button;
+    return (<Button
         className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
         onClick={() => setIsOpen(true)}
       ></Button>
         <MessageCircle className="h-6 w-6" />
-      </Button>
+</Button>
   return (
     <div
       ref={chatContainerRef}
@@ -270,11 +238,10 @@ export function AISupportChat({
             'w-[400px] flex flex-col shadow-xl',isMinimized ? "h-14" : "h-full"
       )}>
         {/* Header */}</Card>
-        <div className="flex items-center justify-between p-4 border-b">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+        <div className="flex items-center justify-between p-4 border-b flex items-center gap-2">
+        <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
               <Bot className="h-5 w-5 text-primary" />
-            </div>
+</div>
             <div>
               <h3 className="font-semibold text-sm">AI Support {!isMinimized  && (p className="text-xs text-muted-foreground">Always here to help</p>
           <div className="flex gap-1">
@@ -286,18 +253,17 @@ export function AISupportChat({
               <ChevronDown className={cn(
             'h-4 w-4 transition-transform',isMinimized && "rotate-180"
               )} />
-            </Button>
+</Button>
             <Button
               size="sm"
               variant="ghost"
               onClick={() => setIsOpen(false)}
             ></Button>
               <X className="h-4 w-4" />
-            </Button>
+</Button>
         {!isMinimized  && (React.Fragment>{/* Search Bar */}
-            <div className="p-3 border-b">
-              <div className="flex gap-2">
-                <div className="flex-1 relative">
+            <div className="p-3 border-b flex gap-2">
+        <div className="flex-1 relative">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                   <input
                     type="text"
@@ -305,22 +271,20 @@ export function AISupportChat({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md, focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  /></input>
+                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md, focus:outline-none focus:ring-2 focus:ring-primary/20" /></input>
                 <Button size="sm" onClick={handleSearch}>
                   Search {/* Messages */}
             <ScrollArea className="flex-1 p-4">
               <div className="space-y-4">
-                {messages.map((message) => (
+                {messages.map((message) => (\n    </div>
                   <div
                     key={message.id}
                     className={cn(
             'flex gap-3',message.role === 'user' && "flex-row-reverse"
                     )}
-                  >
-                    <div className={cn(
+                   className={cn(
             'h-8 w-8 rounded-full flex items-center justify-center shrink-0',message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
-                    )}>
+                    )}></div>
                       {message.role === 'user' ? (</div>
                         <User className="h-4 w-4" />
                       ) : (</User>
@@ -328,16 +292,14 @@ export function AISupportChat({
                       )}</Bot>
                     <div className={cn(
             'flex-1 space-y-2',message.role === 'user' && "flex flex-col items-end"
-                    )}>
-                      <div className={cn(
+                    )} className={cn(
             'rounded-lg px-3 py-2 max-w-[85%] text-sm',message.role === 'user'
                           ? "bg-primary text-primary-foreground"
                           : "bg-muted"
-                      )}>
+                      )}></div>
                         <p className="whitespace-pre-wrap">{message.content}</p>
                       {/* Code, blocks */},
-    {message.metadata?.codeBlocks?.map((block, index) => (
-                        <div key={index} className="max-w-[85%]">
+    {message.metadata?.codeBlocks?.map((block, index) => (\n    <div key={index} className="max-w-[85%]">
                           <pre className="bg-zinc-900 text-zinc-100 p-3 rounded-lg overflow-x-auto text-xs">
                             <code>{block.code}</code>))},
     {/* Suggested, docs */},
@@ -345,22 +307,18 @@ export function AISupportChat({
                           <p className="text-xs text-muted-foreground">Related, documentation:</p>
                           {message.metadata.suggestedDocs.map((docId) => {
                             const doc = documentationSystem.getSection(docId);
-                            return doc ? (<button;
+                            return doc ? (<button
                                 key={docId}
-                                onClick={() => handleActionButton('open-doc', { sectionId: docId}
-      )}
-  );
+                                onClick={() => handleActionButton('open-doc', { sectionId: docId})};
                                 className="text-xs text-primary hover:underline block text-left"
-                              >
+                              ></button>
                                 📄 {doc.title}</button>
                             ) : null
-}
-      )}
-  );
+})};
                       )},
     {/* Action, buttons */},
     {message.metadata?.actionButtons && message.metadata.actionButtons.length > 0  && (div className="flex flex-wrap gap-2 max-w-[85%]">
-                          {message.metadata.actionButtons.map((button, index) => (<Button
+                          {message.metadata.actionButtons.map((button, index) => (\n    <Button
                               key={index}
                               size="sm"
                               variant="outline"
@@ -368,39 +326,32 @@ export function AISupportChat({
                               className="text-xs"
                             >
                               {button.label}</Button>
-                          ))}
-                      )}
-                ))},
+                          ))})})},
     {isLoading  && (
 div className="flex gap-3">
                     <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
                       <Bot className="h-4 w-4" />
-                    </div>
+</div>
                     <div className="bg-muted rounded-lg px-3 py-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
-                    </div>
-                
-              
-            )}
-                <div ref={messagesEndRef} />
-              </div>
-            {/* Quick, Actions */},
+</div>
+      )}
+                <div ref={messagesEndRef}  >{/* Quick, Actions */},
     {showQuickActions && messages.length === 1  && (div className="p-3 border-t">
                 <p className="text-xs text-muted-foreground mb-2">Quick, actions:</p>
                 <div className="grid grid-cols-3 gap-2">
-                  {quickActions.map((action) => (<Button
+                  {quickActions.map((action) => (\n    <Button
                       key={action.action}
                       variant="outline"
                       size="sm"
                       className="flex flex-col gap-1 h-auto py-2"
                       onClick={() => handleQuickAction(action.action)}
                     ></Button>
-                      <action.icon className="h-4 w-4"    />
+                      <action.icon className="h-4 w-4" />
                       <span className="text-xs">{action.label}</span>))}
             )},
     {/* Input */}
-            <div className="p-3 border-t">
-              <div className="flex gap-2">
+            <div className="p-3 border-t flex gap-2"></div>
                 <Textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
@@ -424,23 +375,30 @@ div className="flex gap-3">
                   )}</Send>
               <div className="flex items-center gap-1 mt-2">
                 <Sparkles className="h-3 w-3 text-primary" />
-                <p className="text-xs text-muted-foreground">
-                  AI-powered support with real-time documentation</p></React.Fragment>
-        );}
+          <p className="
+                  AI-powered support with real-time documentation"></p>
+        </div>
+    );
+}
   );
-
-          </div>
-</pre>
-          </div>
-</ScrollArea>
-    </Button>
-          </div>
+</div>
+</Button>
 </h3>
-          </div>
 </HTMLDivElement>
+    
+    </div>
+    </pre>
+    </div>
+    </ScrollArea>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </any>
     </any>
     </any>
     </any>
     </any>
-    }
+    </any>
+  }

@@ -4,49 +4,52 @@ import { writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
 export interface CoordinationTask {
   id: string,
-    agent_id: string,
-    action: string, input,
+  agent_id: string,
+  action: string, input,
   dependencies: string[],
-    priority: 'low' | 'medium' | 'high' | 'critical',
+  priority: 'low' | 'medium' | 'high' | 'critical',
   status: 'pending' | 'ready' | 'in_progress' | 'completed' | 'failed' | 'blocked',
-  created_at: Date;
-  started_at?: Date;
-  completed_at?: Date;
-  result?;
-  error?: string;
+  created_at: Date,
+  started_at?: Date,
+  completed_at?: Date,
+  result?,
+  error?: string
 };
 export interface CoordinationPlan {
   id: string,
-    project_type: string,
-    stage: string,
-    tasks: CoordinationTask[],
-    execution_order: string[][]  // Array of task groups that can run in paralle;l,
+  project_type: string,
+  stage: string,
+  tasks: CoordinationTask[],
+  execution_order: string[][]  // Array of task groups that can run in paralle
+l,
     dependencies: Map<string, string[]>,
   estimated_duration: number,
-    status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed',
+  status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed',
   progress: number
 };
 export interface AgentHandoff {
   from_agent: string,
-    to_agent: string,
-    data: handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment',
+  to_agent: string,
+  data: handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment',
   timestamp: Date,
-    success: boolean;
-  notes?: string;
+  success: boolean,
+  notes?: string
 };
 export interface CoordinationResult {
-  plan: CoordinationPla;n,
+  plan: CoordinationPla
+n,
     completed_tasks: CoordinationTask[],
-    failed_tasks: CoordinationTask[], handoffs: AgentHandoff[],
-    total_duration: number,
-    success_rate: number, final_output};
+  failed_tasks: CoordinationTask[],
+  handoffs: AgentHandoff[],
+  total_duration: number,
+  success_rate: number, final_output};
 export class AgentCoordinator {
-  private static, instance: AgentCoordinator
-  private, loader: AgentLoader
-  private, activePlans: Map<string, CoordinationPlan> = new Map()
-  private, handoffHistory: AgentHandoff[] = []
-  private, actionLogPath: string
-  private, errorLogPath: string
+  private static instance: AgentCoordinator
+  private loader: AgentLoader
+  private activePlans: Map<string, CoordinationPlan> = new Map()
+  private handoffHistory: AgentHandoff[] = []
+  private actionLogPath: string
+  private errorLogPath: string
   constructor() {
     this.loader = AgentLoader.getInstance()
     this.actionLogPath = join(process.cwd(), 'ACTION_LOG.md')
@@ -56,12 +59,12 @@ export class AgentCoordinator {
     if(!AgentCoordinator.instance) {
       AgentCoordinator.instance = new AgentCoordinator()
 }
-    return AgentCoordinator.instance;
+    return AgentCoordinator.instance
 }
   /**
    * Create coordination plan for project execution
    */
-  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform', stage: string = 'full_stack'): Promise<any> {
+  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform'; stage: string = 'full_stack'): Promise<any> {
     const, planId = `plan_${Date.now()}`
     const requiredAgents = await this.loader.getRequiredAgentsForStage(stage, projectType);
     if(requiredAgents.length === 0) {
@@ -89,7 +92,7 @@ export class AgentCoordinator {
 }
     this.activePlans.set(planId, plan)
     await this.logPlanCreation(plan)
-    return plan;
+    return plan
 }
   /**
    * Execute coordination plan with full agent orchestration
@@ -107,10 +110,10 @@ export class AgentCoordinator {
     try {
       // Execute tasks in phases (respecting dependencies)
       for(let phaseIndex = 0; phaseIndex < plan.execution_order.length; phaseIndex++) {
-        const phase = plan.execution_order[phaseIndex];
+        const phase = plan.execution_order[phaseIndex]
         }`)``
         // Execute tasks in this phase (can run in parallel)
-        const _phasePromises = phase.map((taskId) => this.executeTask(plan, taskId));
+        const _phasePromises = phase.map((taskId) => this.executeTask(plan, taskId);
         const phaseResults = await Promise.allSettled(phasePromises);
         // Process phase results
         for(let i = 0; i < phaseResults.length; i++) { const result = phaseResults[i];
@@ -139,8 +142,7 @@ export class AgentCoordinator {
         // Check if we should continue (fail fast on critical errors)
         if (this.shouldStopExecution(failedTasks)) {
           // break
-}
-}
+}}
       const _totalDuration = Date.now() - startTime;
       const _successRate = (completedTasks.length / plan.tasks.length) * 100;
       plan.status = successRate > 80 ? 'completed' : 'failed'
@@ -156,13 +158,12 @@ export class AgentCoordinator {
 }
       await this.logExecutionCompletion(result)
       }% success rate`)``
-      return result;
+      return result
     } catch (error) {
       plan.status = 'failed'
       console.error('❌ Coordination plan, failed:', error)
       throw error
-}
-}
+}}
   /**
    * Execute individual coordination task
    */
@@ -199,7 +200,7 @@ export class AgentCoordinator {
         task.action + ' completed',
         'Awaiting next task'
       )
-      return result;
+      return result
     } catch (error) {
       // Update agent status
       this.loader.updateAgentStatus(
@@ -209,15 +210,14 @@ export class AgentCoordinator {
         'Error resolution needed'
       )
       throw error
-}
-}
+}}
   /**
    * Get coordination status for active plans
    */
   getCoordinationStatus(): Record {
     const status: Record<string, any> = {
       active_plans: this.activePlans.size,
-    plans: {},
+    plans: {};
     agent_status: this.loader.getAgentStatus(),
     recent_handoffs: this.handoffHistory.slice(-10),
     coordination_metrics: this.calculateCoordinationMetrics()
@@ -230,9 +230,8 @@ export class AgentCoordinator {
     tasks_total: plan.tasks.length,
     tasks_completed: plan.tasks.filter((t) => t.status === 'completed').length,
     tasks_failed: plan.tasks.filter((t) => t.status === 'failed').length
-}
-}
-    return status;
+}}
+    return status
 }
   /**
    * Handle agent-to-agent handoffs
@@ -247,7 +246,7 @@ export class AgentCoordinator {
     // Find the next task that depends on this one
     const _nextTaskId = nextPhase.find((taskId) => {
       const task = plan.tasks.find(t => t.id === taskId);
-      return task?.dependencies.includes(completedTask.id);
+      return task?.dependencies.includes(completedTask.id)
     })
     if (!nextTaskId) return null;
     const nextTask = plan.tasks.find(t => t.id === nextTaskId)!;
@@ -260,7 +259,7 @@ export class AgentCoordinator {
     notes: `Handoff from ${completedTask.action} to ${nextTask.action}`
 }
     this.handoffHistory.push(handoff)
-    return handoff;
+    return handoff
 }
   // Private helper methods
   private createTasksForAgent(
@@ -285,7 +284,7 @@ export class AgentCoordinator {
         tasks.push(task)
       })
 }
-    return tasks;
+    return tasks
 }
   private buildExecutionGraph(
     tasks: CoordinationTask[],
@@ -294,8 +293,7 @@ export class AgentCoordinator {
     const dependencies = new Map<string, string[]>();
     // Build dependency map
     tasks.forEach((task) => { if (task.dependencies.length > 0) {
-        dependencies.set(task.id, task.dependencies); }
-    })
+        dependencies.set(task.id, task.dependencies) }})
     // Create execution phases based on agent priorities and dependencies
     const executionOrder: string[][] = [];
     const processedTasks = new Set<string>();
@@ -307,7 +305,7 @@ export class AgentCoordinator {
     const tasksByPriority = new Map<number, string[]>();
     tasks.forEach((task) => { const _priority = agentPriorityMap.get(task.agent_id) || 999;
       if (!tasksByPriority.has(priority)) {
-        tasksByPriority.set(priority, []); }
+        tasksByPriority.set(priority, []) }
       tasksByPriority.get(priority)!.push(task.id)
     })
     // Create phases respecting priorities and dependencies
@@ -316,25 +314,23 @@ export class AgentCoordinator {
       const priorityTasks = tasksByPriority.get(priority)!;
       const readyTasks = priorityTasks.filter((taskId) => {
         const task = tasks.find(t => t.id === taskId)!;
-        return task.dependencies.every(depId => processedTasks.has(depId));
+        return task.dependencies.every(depId => processedTasks.has(depId))
       })
       if(readyTasks.length > 0) {
         executionOrder.push(readyTasks)
         readyTasks.forEach((taskId) => processedTasks.add(taskId))
-}
-    })
-    return { executionOrder, dependencies };
-}
+}})
+    return { executionOrder, dependencies }}
   private estimateDuration(tasks: CoordinationTask[], executionOrder: string[][]): number {
     // Base, estimation: 30 seconds per task, with phases running in sequence
     const _baseTaskDuration = 30000 // 30 seconds;
     const phaseDurations = executionOrder.map((phase) => phase.length * baseTaskDuration);
-    return phaseDurations.reduce((total, duration) => total + duration, 0);
+    return phaseDurations.reduce((total, duration) => total + duration, 0)
 }
   private areTaskDependenciesMet(task: CoordinationTask, plan: CoordinationPlan): boolean {
     return task.dependencies.every((depId) => {
       const _depTask = plan.tasks.find(t => t.id === depId);
-      return depTask?.status === 'completed';
+      return depTask?.status === 'completed'
     })
 }
   private async simulateAgentExecution(agent: AgentConfig, task: CoordinationTask): Promise<any> {
@@ -349,11 +345,10 @@ export class AgentCoordinator {
       output: `${agent.role} completed ${task.action}`
       timestamp: new Date().toISOString(),
     artifacts: [`${task.action}_output.json`]``
-}
-}
+}}
   private shouldStopExecution(failedTasks: CoordinationTask[]): boolean {
     // Stop if any critical priority task fails
-    return failedTasks.some(task => task.priority === 'critical');
+    return failedTasks.some(task => task.priority === 'critical')
 }
   private aggregateFinalOutput(completedTasks: CoordinationTask[]) {
     return {
@@ -361,17 +356,16 @@ export class AgentCoordinator {
     outputs: completedTasks.map((task) => task.result),
     artifacts: completedTasks.flatMap(task => task.result?.artifacts || []),
     summary: `Completed ${completedTasks.length} coordination tasks successfully`
-}
-}
+}}
   private determineHandoffType(action: string): AgentHandoff['handoff_type'] {
     if (action.includes('architecture') || action.includes('design')) return 'architecture';
     if (action.includes('implementation') || action.includes('coding')) return 'implementation';
     if (action.includes('test') || action.includes('validation')) return 'validation';
     if (action.includes('deploy') || action.includes('release')) return 'deployment';
-    return 'implementation';
+    return 'implementation'
 }
   private calculateCoordinationMetrics(): Record {
-    const allPlans = Array.from(this.activePlans.values());
+    const allPlans = Array.from(this.activePlans.values()
     const completedPlans = allPlans.filter((p) => p.status === 'completed');
     return {
       total_plans: allPlans.length,
@@ -382,8 +376,7 @@ export class AgentCoordinator {
     average_plan_duration: completedPlans.length > 0
         ? completedPlans.reduce((sum, p) => sum + (p.estimated_duration || 0), 0) / completedPlans.length
         : 0
-}
-}
+}}
   // Logging methods
   private async logPlanCreation(plan: CoordinationPlan): Promise<any> {
     const _logEntry = `[${new Date().toISOString()}] [COORDINATOR] [PLAN_CREATED] [${plan.id}] [${plan.tasks.length} tasks, ${plan.execution_order.length} phases]`
@@ -407,8 +400,7 @@ export class AgentCoordinator {
       const _updatedContent = existingContent + '\n' + entry;
       writeFileSync(this.actionLogPath, updatedContent)
     } catch (error) {
-}
-}
+}}
   private async appendToErrorLog(entry: string): Promise<any> {
     try {
       const _existingContent = readFileSync(this.errorLogPath, 'utf-8');
@@ -422,13 +414,13 @@ export async function createProjectCoordination(,
   stage?: string;
 ): Promise<any> {
   const coordinator = AgentCoordinator.getInstance();
-  return coordinator.createCoordinationPlan(requirements, projectType, stage);
+  return coordinator.createCoordinationPlan(requirements, projectType, stage)
 };
 export async function executeProjectCoordination(planId: string): Promise<any> {
   const coordinator = AgentCoordinator.getInstance();
-  return coordinator.executeCoordinationPlan(planId);
+  return coordinator.executeCoordinationPlan(planId)
 };
 export function getCoordinationStatus(): Record {
   const coordinator = AgentCoordinator.getInstance();
-  return coordinator.getCoordinationStatus();
+  return coordinator.getCoordinationStatus()
 }

@@ -4,18 +4,18 @@
  */
 export interface MCPServerConfig {
   id: string,
-    name: string,
-    description: string,
-    url: string,
-    category:
-    | 'development'| 'data';
+  name: string,
+  description: string,
+  url: string,
+  category:
+    | 'development'| 'data'
     | 'automation'
     | 'ai'
     | 'integration'
-    | 'other';
-  requiredEnv?: string[];
-  setupInstructions?: string;
-  documentation?: string;
+    | 'other',
+  requiredEnv?: string[],
+  setupInstructions?: string,
+  documentation?: string
 };
 export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools,
   {
@@ -156,7 +156,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools,
  * Get server configuration by ID
  */
 export function getServerConfig(id: string): MCPServerConfig | undefined {
-  return MCPServerRegistry.find(server => server.id === id);
+  return MCPServerRegistry.find(server => server.id === id)
 }
 /**
  * Get servers by category
@@ -174,12 +174,11 @@ export function checkServerEnvironment(server: MCPServerConfig): {
 } {
   if(!server.requiredEnv || server.requiredEnv.length === 0) {
     return { configured: true,
-    missing: [] }
-}
+    missing: [] }}
   const missing = server.requiredEnv.filter((envVar) => !process.env[envVar]);
   return {
     configured: missing.length === 0,
-    missing;
+    missing
 }
 /**
  * Custom MCP server configurations for the project
@@ -216,7 +215,7 @@ export const CustomMCPServers: MCPServerConfig[] = [
  * Get all available servers (registry + custom)
  */
 export function getAllServers(): MCPServerConfig[] {
-  return [...MCPServerRegistry, ...CustomMCPServers];
+  return [...MCPServerRegistry, ...CustomMCPServers]
 }
 /**
  * Server capability mappings
@@ -242,5 +241,5 @@ export const ServerCapabilities: Record<string, string[]> = { github: [
     'browser.click',
     'browser.type'],
   slack: ['message.send', 'channel.list', 'user.list'],
-  aws: ['s3.upload', 's3.download', 'lambda.invoke', 'ec2.list'];
+  aws: ['s3.upload', 's3.download', 'lambda.invoke', 'ec2.list']
 }

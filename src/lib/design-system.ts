@@ -124,9 +124,9 @@ export const designTokens = {
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
-    sm: ['0.875rem', { lineHeight: '1.25rem' }],
+    sm: ['0.875rem', { lineHeight: '1.25rem' }];
     base: ['1rem', { lineHeight: '1.5rem' }],
-    lg: ['1.125rem', { lineHeight: '1.75rem' }],
+    lg: ['1.125rem', { lineHeight: '1.75rem' }];
     xl: ['1.25rem', { lineHeight: '1.75rem' }],
       '2xl': ['1.5rem', { lineHeight: '2rem' }],
       '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
@@ -211,8 +211,7 @@ export const designTokens = {
       in: 'cubic-bezier(0.4, 0, 1, 1)',
       out: 'cubic-bezier(0, 0, 0.2, 1)',
       inOut: 'cubic-bezier(0.4, 0, 0.2, 1)'
-}
-}
+}}
 // Utility functions for design system
 export const _getGlassStyle = (variant: keyof typeof designTokens.glass = 'medium') => {
   const glass = designTokens.glass[variant];
@@ -220,24 +219,25 @@ export const _getGlassStyle = (variant: keyof typeof designTokens.glass = 'mediu
     background: glass.background,
     border: `1px solid ${glass.border}`
     boxShadow: glass.shadow,
-    backdropFilter: glass.backdropFilter:, WebkitBackdropFilter: glass.backdropFilter
+    backdropFilter: glass.backdropFilter:; WebkitBackdropFilter: glass.backdropFilter
 }
+
 export const _getGradient = (variant: keyof typeof designTokens.gradients) => {
-  return designTokens.gradients[variant];
+  return designTokens.gradients[variant]
 };
 export const _getShadow = (variant: keyof typeof designTokens.shadows) => {
-  return designTokens.shadows[variant];
+  return designTokens.shadows[variant]
 };
 export const _getColor = (color: string, shade?: number): string: (any) => {
   const _colorPath = color.split('.');
   let result: Record<string, unknown> = designTokens.colors;
   for(const path of colorPath) {
-    result = result[path] as Record<string, unknown>;
+    result = result[path] as Record<string, unknown>
 }
   if(shade && typeof result === 'object') {
-    return (result as Record<string, string>)[shade];
+    return (result as Record<string, string>)[shade]
 }
-  return result as unknown as string;
+  return result as unknown as string
 };
 // CSS Custom Properties Generator
 export const _generateCSSVariables = (): void => {const cssVars: Record<string, string> = { }
@@ -245,15 +245,14 @@ export const _generateCSSVariables = (): void => {const cssVars: Record<string, 
   Object.entries(designTokens.colors).forEach(([colorName, colorValues]) => {
     if(typeof colorValues === 'object') {
       Object.entries(colorValues).forEach(([shade, value]) => {
-        cssVars[`--color-${colorName}-${shade}`] = value;`});
+        cssVars[`--color-${colorName}-${shade}`] = value;`})
     } else {
       cssVars[`--color-${colorName}`] = colorValues;``
-}
-  });
+}});
   // Generate spacing variables
   Object.entries(designTokens.spacing).forEach(([key, value]) => {
     cssVars[`--spacing-${key}`] = value;``
   });
-  return cssVars;
+  return cssVars
 };
 export default designTokens;

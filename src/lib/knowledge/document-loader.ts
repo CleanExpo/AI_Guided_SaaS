@@ -7,18 +7,20 @@ import { glob } from 'glob';
  */
 export interface LoadedFile {
     path: string,
-    name: string,
-    content: string;
+  name: string,
+  content: string,
   language?: string,
     size: number
 }
+
 export interface CodebaseOptions {
-    include?: string[];
-  exclude?: string[];
-  maxFileSize?: number;
+    include?: string[],
+  exclude?: string[],
+  maxFileSize?: number
 }
+
 export class DocumentLoader {
-  private, languageMap: Record<string, string> = {
+  private languageMap: Record<string, string> = {
     js: 'javascript',
     jsx: 'javascript',
     ts: 'typescript',
@@ -61,23 +63,16 @@ export class DocumentLoader {
       case 'file':
     return this.loadFile(source);
     break;
-
-    break;
-break;
-
-
       case 'url':
     return this.loadUrl(source);
     break;
-
       case 'github':
 return this.loadGithub(source);
     break;
-break;
+break
 }
       default: throw new Error(`Unsupported source, type: ${type}`)``
-}
-}
+}}
   /**
    * Load a single file
    */
@@ -97,12 +92,10 @@ break;
           language,
           createdAt: stats.birthtime.toISOString(),
     updatedAt: stats.mtime.toISOString()
-}
-  }]
+}}]
     } catch (error) {
       throw new Error(`Failed to load file ${filePath}: ${error}`)``
-}
-}
+}}
   /**
    * Load content from URL
    */
@@ -123,12 +116,10 @@ break;
     type: this.getDocumentTypeFromMime(contentType),
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
-}
-  }]
+}}]
     } catch (error) {
       throw new Error(`Failed to load URL ${url}: ${error}`)``
-}
-}
+}}
   /**
    * Load content from GitHub
    */
@@ -153,12 +144,11 @@ break;
         content,
     metadata: {
   source: repoPath,
-    title: data.name, type: 'code',
+    title: data.name; type: 'code',
           language: this.languageMap[path.extname(data.name).slice(1)] || 'plaintext',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
-}
-      }]
+}}]
     } else {
       // Load repository README
       const _apiUrl = `https://api.github.com/repos/${owner}/${repo}/readme`
@@ -178,10 +168,8 @@ break;
           language: 'markdown',
           createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
-}
-      }]
-}
-}
+}}]
+}}
   /**
    * Load an entire codebase
    */
@@ -227,10 +215,8 @@ break;
           })
         } catch (error) {
           console.error(`Failed to load file ${filePath}:`, error)``
-}
-}
-}
-    return files;
+}}
+    return files
 }
   /**
    * Load and parse structured data files
@@ -241,40 +227,25 @@ break;
       case 'json':
     return JSON.parse(content);
     break;
-
-    break;
-break;
-
-
       case 'yaml':
-    
     break;
 case 'yml':
 // Would use a YAML parser here
     break;
-
         throw new Error('YAML parsing not implemented')
 break;
-
       case 'csv':
     // Would use a CSV parser here
     break;
-
-    break;
-
         throw new Error('CSV parsing not implemented')
       case 'xml':
     // Would use an XML parser here
     break;
-
-    break;
-
         throw new Error('XML parsing not implemented')
-break;
+break
 }
       default: throw new Error(`Unsupported structured data, format: ${ext}`)``
-}
-}
+}}
   /**
    * Extract text from various document formats
    */
@@ -283,64 +254,47 @@ break;
       case 'pdf':
     // Would use a PDF parser here
     break;
-
-    break;
-
         throw new Error('PDF extraction not implemented')
 break;
-
       case 'docx':
-    
     break;
 case 'doc':
 // Would use a Word document parser here
         throw new Error('Word document extraction not implemented')
 break;
-break;
-
-
       case 'pptx':
-    
     break;
 case 'ppt':
 // Would use a PowerPoint parser here
         throw new Error('PowerPoint extraction not implemented')
 break;
-break;
-
-
       case 'xlsx':
-    
     break;
 case 'xls':
 // Would use an Excel parser here
         throw new Error('Excel extraction not implemented')
 break;
-break;
+break
 }
       default:
         // For text files, just read directly
-        return fs.readFile(filePath, 'utf-8');
-}
-}
+        return fs.readFile(filePath, 'utf-8')
+}}
   // Helper methods
   private getDocumentType(extension: string): Document['metadata']['type'] {
     const codeExtensions = Object.keys(this.languageMap);
     const docExtensions = ['md', 'rst', 'txt', 'adoc'];
     const apiExtensions = ['yaml', 'yml', 'json', 'xml'];
-    if (codeExtensions.includes(extension)) { return: 'code' } else if (docExtensions.includes(extension)) { return: 'documentation' } else if (apiExtensions.includes(extension)) { return: 'api' } else { return: 'other' }
-}
+    if (codeExtensions.includes(extension)) { return: 'code' } else if (docExtensions.includes(extension)) { return: 'documentation' } else if (apiExtensions.includes(extension)) { return: 'api' } else { return: 'other' }}
   private getDocumentTypeFromMime(mimeType: string): Document['metadata']['type'] {
-    if (mimeType.includes('javascript') || mimeType.includes('typescript')) { return: 'code' } else if (mimeType.includes('json') || mimeType.includes('xml')) { return: 'api' } else if (mimeType.includes('html')) { return: 'documentation' } else { return: 'other' }
-}
+    if (mimeType.includes('javascript') || mimeType.includes('typescript')) { return: 'code' } else if (mimeType.includes('json') || mimeType.includes('xml')) { return: 'api' } else if (mimeType.includes('html')) { return: 'documentation' } else { return: 'other' }}
   private extractTitleFromUrl(url: string) {
     try {
       const urlObj = new URL(url);
       const pathname = urlObj.pathname;
       const _filename = pathname.split('/').pop() || urlObj.hostname;
-      return filename;
-    } catch { return: url }
-}
+      return filename
+    } catch { return: url }}
   private generateId() {
-    return Math.random().toString(36).substring(2, 15);
+    return Math.random().toString(36).substring(2, 15)
 }

@@ -20,5 +20,5 @@ export type {
   SecurityArchitecture,
   Integration,
   DeploymentStrategy,
-  TechnicalDecision from './ArchitectAgent';
+  TechnicalDecision from './ArchitectAgent'
 }

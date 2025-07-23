@@ -13,25 +13,25 @@ export const metadata: Metadata = {
   icon: [
       {
     url: '/favicon.ico',
-        sizes: '16x16 32x32',
-        type: 'image/x-icon';
+        sizes: '16x16 32x32'
+        , type: 'image/x-icon'
   },
       {
         url: '/icon-192.png',
-        sizes: '192x192',
-        type: 'image/png'
+        sizes: '192x192'
+        , type: 'image/png'
       },
       {
         url: '/icon-512.png',
-        sizes: '512x512',
-        type: 'image/png'
+        sizes: '512x512'
+        , type: 'image/png'
 }
     ],
     apple: [
       {
   url: '/apple-icon-180.png',
-        sizes: '180x180',
-        type: 'image/png'
+        sizes: '180x180'
+        , type: 'image/png'
 }
    ],
     shortcut: '/favicon.ico'
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       {
     url: '/og-image.png',
         width: 1200,
-    height: 630,
+    height: 630
     alt: 'AI Guided SaaS Platform'
 }
    ]
@@ -62,29 +62,29 @@ export const metadata: Metadata = {
     site: '@aiguidedSaaS',
     creator: '@aiguidedSaaS',
     title: 'AI Guided SaaS Platform',
-    description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation',
+    description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation'
     images: ['/og-image.png']
 }
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-    themeColor: '#1e40af',
+    themeColor: '#1e40af'
   colorScheme: 'light dark'
 };
 export default function RootLayout({
-  children: { children?: React.ReactNode
-}) {
+  children: { children?: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning><body className={inter.className}>
         <Providers>
           <div className="min-h-screen bg-background flex flex-col">
             <ConditionalLayout>
               {children}
-            </ConditionalLayout>
+</ConditionalLayout>
             <Toaster />
-          </div>
-        </Providers>
-      </body>
+      )
+    </div>
+    </Providers>
+    </body>
     </html>
-  );
-}
+  }

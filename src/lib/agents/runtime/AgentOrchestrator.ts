@@ -1,44 +1,49 @@
 import { AgentRuntime, ExecutionPlan, TaskResult } from './AgentRuntime';
 import { generateAIResponse } from '@/lib/ai';
 export interface OrchestratorConfig {
-    enableLogging?: boolean;
-  maxConcurrentAgents?: number;
-  timeoutMs?: number;
+    enableLogging?: boolean,
+  maxConcurrentAgents?: number,
+  timeoutMs?: number,
   modelConfig?: {
-    model?: string;
-    temperature?: number;
+    model?: string,
+  temperature?: number
 }
+
 export interface ProjectRequest {
-  description: string;
-  type?: 'analysis' | 'planning' | 'architecture' | 'full-stack' | 'refinement' | 'advisory';
+  description: string,
+  type?: 'analysis' | 'planning' | 'architecture' | 'full-stack' | 'refinement' | 'advisory',
   context?: Record<string, any>
-  constraints?: string[];
-  priorities?: string[];
+  constraints?: string[],
+  priorities?: string[]
 };
 export interface ProjectResult {
-  request: ProjectReques;t,
-    plan: ExecutionPla;n,
+  request: ProjectReques
+t,
+    plan: ExecutionPla
+n,
     results: TaskResult[],
-    summary: ProjectSummar;y,
+  summary: ProjectSummar
+y,
     artifacts: Map<string, any>,
   recommendations: string[]
 };
 export interface ProjectSummary {
   overview: string,
-    keyFindings: string[],
-    deliverables: Deliverable[], nextSteps: string[],
-    risks: string[];
-  timeline?: string;
+  keyFindings: string[],
+  deliverables: Deliverable[],
+  nextSteps: string[],
+  risks: string[],
+  timeline?: string
 };
 export interface Deliverable {
   name: string,
-    type: string,
-    description: string;
-  location?: string;
+  type: string,
+  description: string,
+  location?: string
 };
 export class AgentOrchestrator {
-  private, runtime: AgentRuntime
-  private, config: OrchestratorConfig
+  private runtime: AgentRuntime
+  private config: OrchestratorConfig
   constructor(config: OrchestratorConfig = {}) {
     this.config = {
       enableLogging: true,
@@ -68,13 +73,13 @@ export class AgentOrchestrator {
     // Step, 3: Collect all artifacts
     const artifacts = this.collectArtifacts(executionResult.results);
     // Step, 4: Generate summary
-    const summary = await this.generateSummary(
+    const summary = await this.generateSummary(;
       request,
       executionResult,
       // artifacts
     )
     // Step, 5: Generate recommendations
-    const _recommendations = await this.generateRecommendations(
+    const _recommendations = await this.generateRecommendations(;
       request,
       executionResult,
       // summary
@@ -86,8 +91,7 @@ export class AgentOrchestrator {
       summary,
       artifacts,
       // recommendations
-}
-}
+}}
   /**
    * Quick analysis using specific agents
    */
@@ -102,13 +106,12 @@ export class AgentOrchestrator {
       tasks,
       dependencies: new Map(
         tasks.filter((t) => t.dependencies!.length > 0)
-          .map((t) => [t.id, t.dependencies!])
-      ),
+          .map((t) => [t.id, t.dependencies!])),
       executionOrder: tasks.map((t) => [t.id]),
     estimatedDuration: tasks.length * 30000
 }
     const results = await this.runtime.executePlan(plan);
-    return this.extractOutputs(results);
+    return this.extractOutputs(results)
 }
   /**
    * Enhance request based on type
@@ -134,7 +137,7 @@ export class AgentOrchestrator {
     if (request.context && Object.keys(request.context).length > 0) {
       enhancedRequest += `\n\nAdditional: Context:\n${JSON.stringify(request.context, null, 2)}`
 }
-    return enhancedRequest;
+    return enhancedRequest
 }
   /**
    * Collect artifacts from all task results
@@ -146,17 +149,16 @@ export class AgentOrchestrator {
         result.result.artifacts.forEach((value, key) => {
           artifacts.set(`${result.agentType}-${key}`, value)``
         })
-}
-    })
-    return artifacts;
+}})
+    return artifacts
 }
   /**
    * Generate project summary
    */
-  private async generateSummary(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, artifacts: Map<string, any>): Promise<any> {
+  private async generateSummary(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }; artifacts: Map<string, any>): Promise<any> {
     const _successfulResults = execution.results.filter((r) => r.result.success);
     const outputs = this.extractOutputs(successfulResults);
-    const _summaryPrompt = `Generate a comprehensive project summary based on these agent, outputs: Original, Request:``
+    const _summaryPrompt = `Generate a comprehensive project summary based on these agent, outputs: Original, Request:``;
 ${JSON.stringify(request, null, 2)}
 Agent: Outputs:
 ${JSON.stringify(outputs, null, 2)}
@@ -174,12 +176,12 @@ Format as JSON ProjectSummary object.`
     temperature: 0.3,
     responseFormat: 'json'
     })
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   /**
    * Generate recommendations
    */
-  private async generateRecommendations(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, summary: ProjectSummary): Promise<any> {
+  private async generateRecommendations(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }; summary: ProjectSummary): Promise<any> {
     const _recommendPrompt = `Based on the project analysis, generate actionable, recommendations: Project, Type: ${request.type}``
 Summary: ${summary.overview}
 Key: Findings:
@@ -197,7 +199,7 @@ Return as a simple array of recommendation strings.`
     model: this.config.modelConfig?.model,
     temperature: 0.4
     })
-    return response.message.split('\n').filter((line: string) => line.trim().length > 0);
+    return response.message.split('\n').filter((line: string) => line.trim().length > 0)
 }
   /**
    * Extract outputs from task results
@@ -205,9 +207,8 @@ Return as a simple array of recommendation strings.`
   private extractOutputs(results: TaskResult[]): Record {
     const outputs: Record<string, any> = {}
     results.forEach((result) => { if (result.result.success && result.result.output) {
-        outputs[result.agentType] = result.result.output; }
-    })
-    return outputs;
+        outputs[result.agentType] = result.result.output }})
+    return outputs
 }
   /**
    * Get runtime metrics
@@ -225,8 +226,7 @@ Return as a simple array of recommendation strings.`
    */
   reset() {
     this.runtime.reset()
-}
-}
+}}
 // Convenience functions for common patterns
 export async function analyzeProject(description: string): Promise<any> {
   const orchestrator = new AgentOrchestrator();
@@ -250,7 +250,7 @@ export async function architectProject(description: string, priorities?: string[
 };
 export async function fullStackProject(,
     description: string,
-  options?: Partial<ProjectRequest>;
+  options?: Partial<ProjectRequest>
 ): Promise<any> {
   const orchestrator = new AgentOrchestrator();
   return orchestrator.processProject({

@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 export async function GET(): Promise<NextResponse> {
   try {
     const healthStatus = {
@@ -19,9 +17,8 @@ export async function GET(): Promise<NextResponse> {
       memory: {
         used: process.memoryUsage().heapUsed,
         total: process.memoryUsage().heapTotal
-      }
-    };
-    return NextResponse.json(healthStatus);
+      }};
+    return NextResponse.json(healthStatus)
   } catch (error) {
     console.error('Health check error:', error);
     return NextResponse.json(
@@ -31,9 +28,8 @@ export async function GET(): Promise<NextResponse> {
         timestamp: new Date().toISOString()
       },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -44,12 +40,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       success: true,
       message: `Health check action ${action} performed on ${service}`,
       timestamp: new Date().toISOString()
-    });
+    })
   } catch (error) {
     console.error('Health action error:', error);
     return NextResponse.json(
       { error: 'Health action failed' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}

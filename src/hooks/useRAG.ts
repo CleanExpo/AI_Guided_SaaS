@@ -3,35 +3,36 @@ import { RAGEngine, RAGQuery, RAGResponse } from '@/lib/knowledge/rag-engine';
 import { createVectorStore } from '@/lib/knowledge/vector-store';
 import { useToast } from '@/components/ui/use-toast';
 export interface UseRAGOptions {
-  provider?: 'memory' | 'pinecone' | 'weaviate' | 'chroma' | 'qdrant';
-  apiKey?: string;
-  indexName?: string;
-  chunkSize?: number;
-  chunkOverlap?: number;
-  retrievalTopK?: number;
+  provider?: 'memory' | 'pinecone' | 'weaviate' | 'chroma' | 'qdrant',
+  apiKey?: string,
+  indexName?: string,
+  chunkSize?: number,
+  chunkOverlap?: number,
+  retrievalTopK?: number
 };
 export interface UseRAGReturn {
   // Query operations,
-    query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>;
+    query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>,
   streamQuery: (question: string, options?: Partial<RAGQuery>) => AsyncGenerator<string, void, unknown>
   // Document operations,
     addDocument: (content: string, metadata) => Promise<string>
   addFromUrl: (url: string) => Promise<string[];>,
-  addFromFile: (file: File) => Promise<string;>;,
-  ingestCodebase: (path: string, options?) => Promise<{ documentsAdded: number, errors: string[] }>
+  addFromFile: (file: File) => Promise<string;>,
+  ingestCodebase: (path: string, options?) => Promise<{ documentsAdded: number,
+  errors: string[] }>
   // Knowledge base management, updateDocument: (id: string, content?: string, metadata?) => Promise<any>
   deleteDocument: (id: string) => Promise<any>,
   getSimilar: (documentId: string, topK?: number) => Promise<any[]>
   getStats: () => Promise<any>,
   exportKnowledge: (format?: 'json' | 'markdown') => Promise<string>
   clearKnowledge: () => Promise<any>
-  // State, loading: boolean, error: string | null, initialized: boolean
+  // State, loading: boolean, error: string | null; initialized: boolean
 };
 export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAGReturn {
   const { toast   }: any = useToast();
-  const [loading, setLoading]: any[] = useState<any>(false);
-  const [error, setError]: any[] = useState<string | null>(null);
-  const [initialized, setInitialized]: any[] = useState<any>(false);
+  const [loading, setLoading] = useState<any>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [initialized, setInitialized] = useState<any>(false);
   const engineRef = useRef<RAGEngine | null>(null);
   // Initialize RAG engine
   const _initializeEngine = useCallback(async () => {
@@ -53,7 +54,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       await engine.initialize()
       engineRef.current = engine
       setInitialized(true)
-      return engine;
+      return engine
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to initialize RAG engine',
       setError(message)
@@ -77,7 +78,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         question,
         ...queryOptions
       })
-      return response;
+      return response
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Query failed',
       setError(message)
@@ -128,7 +129,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         title: 'Document Added',
         description: 'Document successfully added to knowledge base'
       })
-      return id;
+      return id
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to add document',
       setError(message)
@@ -152,7 +153,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         title: 'Success',
         description: `Added ${ids.length} document(s) from URL`
       })
-      return ids;
+      return ids
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to add from URL',
       setError(message)
@@ -180,7 +181,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         title: 'File Added',
         description: `${file.name} added to knowledge base`
       })
-      return id;
+      return id
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to add file',
       setError(message)
@@ -206,7 +207,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         title: 'Codebase Ingested',
         description: `Added ${result.documentsAdded} files${result.errors.length > 0 ? ` with ${result.errors.length} errors` : ''}```
       })
-      return result;
+      return result
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to ingest codebase',
       setError(message)
@@ -277,7 +278,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
     setError(null)
     try {
       const engine = await initializeEngine();
-      return await engine.getSimilar(documentId, topK);
+      return await engine.getSimilar(documentId, topK)
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to get similar documents',
       setError(message)
@@ -291,7 +292,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
     setError(null)
     try {
       const engine = await initializeEngine();
-      return await engine.getStats();
+      return await engine.getStats()
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to get stats',
       setError(message)
@@ -322,7 +323,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         title: 'Export Complete',
         description: 'Knowledge base exported successfully'
       })
-      return exported;
+      return exported
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to export',
       setError(message)
@@ -378,8 +379,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
     loading,
     error,
     // initialized
-}
-}
+}}
 // Helper function to determine document type from file
 function getDocumentTypeFromFile(file: File): 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other' {
   const _extension = file.name.split('.').pop()?.toLowerCase();
@@ -389,5 +389,5 @@ function getDocumentTypeFromFile(file: File): 'code' | 'documentation' | 'tutori
   if (codeExtensions.includes(extension || '')) return 'code';
   if (docExtensions.includes(extension || '')) return 'documentation';
   if (apiExtensions.includes(extension || '')) return 'api';
-  return 'other';
+  return 'other'
 }

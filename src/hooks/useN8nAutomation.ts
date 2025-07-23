@@ -3,38 +3,40 @@ import { toast } from '@/components/ui/use-toast';
 export interface N8nWorkflow {
   id?: string,
     name: string,
-    active: boolean;
-  tags?: string[];
+  active: boolean,
+  tags?: string[]
 };
 export interface N8nExecution {
   id: string,
-    workflowId: string,
-    mode: string,
-    startedAt: string;
+  workflowId: string,
+  mode: string,
+  startedAt: string,
   stoppedAt?: string,
     finished: boolean,
-    status: 'running' | 'success' | 'error'
+  status: 'running' | 'success' | 'error'
 };
 export interface UseN8nAutomationReturn {
   // Workflow management,
     listWorkflows: () => Promise<N8nWorkflow[];>,
   createWorkflow: (type: string, config) => Promise<N8nWorkflow>
-  deleteWorkflow: (id: string) => Promise<any;>;,
-  toggleWorkflow: (id: string active: boolean) => Promise<any;>;
+  deleteWorkflow: (id: string) => Promise<any;>,
+  toggleWorkflow: (id: string active: boolean) => Promise<any;>
   // Execution management,
-    executeWorkflow: (workflowId: string, data?) => Promise<N8nExecution>;
+    executeWorkflow: (workflowId: string, data?) => Promise<N8nExecution>,
   listExecutions: (workflowId?: string) => Promise<N8nExecution[];>,
   getExecutionStatus: (executionId: string) => Promise<N8nExecution;>,
-  retryExecution: (executionId: string) => Promise<N8nExecution;>;
+  retryExecution: (executionId: string) => Promise<N8nExecution;>
   // Webhook triggers,
-    triggerWebhook: (action: string, projectId: string, data?) => Promise<any>;
+    triggerWebhook: (action: string,
+  projectId: string, data?) => Promise<any>
   // State,
     loading: boolean,
-    error: string | nul;l
+  error: string | nul
+l
 };
 export function useN8nAutomation(): UseN8nAutomationReturn {
-  const [loading, setLoading]: any[] = useState<any>(false);
-  const [error, setError]: any[] = useState<string | null>(null);
+  const [loading, setLoading] = useState<any>(false);
+  const [error, setError] = useState<string | null>(null);
   // List all workflows
   const _listWorkflows = useCallback(async () => {
     setLoading(true)
@@ -43,7 +45,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const response = await fetch('/api/n8n/workflows');
       if (!response.ok) throw new Error('Failed to list workflows')
       const data = await response.json();
-      return data.workflows;
+      return data.workflows
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to list workflows',
       setError(message)
@@ -64,15 +66,14 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const response = await fetch('/api/n8n/workflows', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type, ...config })
-      })
+    body: JSON.stringify({ type, ...config })}
       if (!response.ok) throw new Error('Failed to create workflow')
       const data = await response.json();
       toast({
         title: 'Success',
         description: `Workflow "${data.workflow.name}" created successfully`
       })
-      return data.workflow;
+      return data.workflow
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to create workflow',
       setError(message)
@@ -118,8 +119,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const response = await fetch(`/api/n8n/workflows?id=${id}`, {`;`
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ active })
-      })
+    body: JSON.stringify({ active })}
       if (!response.ok) throw new Error('Failed to update workflow')
       toast({
         title: 'Success',
@@ -145,15 +145,14 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const response = await fetch('/api/n8n/execute', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ workflowId, data })
-      })
+    body: JSON.stringify({ workflowId, data })}
       if (!response.ok) throw new Error('Failed to execute workflow')
       const result = await response.json();
       toast({
         title: 'Success',
         description: 'Workflow execution started'
       })
-      return result.execution;
+      return result.execution
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to execute workflow',
       setError(message)
@@ -175,7 +174,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const response = await fetch(`/api/n8n/execute${params}`);``
       if (!response.ok) throw new Error('Failed to list executions')
       const data = await response.json();
-      return data.executions;
+      return data.executions
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to list executions',
       setError(message)
@@ -198,7 +197,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       })
       if (!response.ok) throw new Error('Failed to get execution status')
       const data = await response.json();
-      return data.execution;
+      return data.execution
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to get execution status',
       setError(message)
@@ -225,7 +224,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
         title: 'Success',
         description: 'Execution retry started'
       })
-      return data.execution;
+      return data.execution
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to retry execution',
       setError(message)
@@ -246,15 +245,14 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const response = await fetch('/api/n8n/webhook', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action, projectId, data })
-      })
+    body: JSON.stringify({ action, projectId, data })}
       if (!response.ok) throw new Error('Failed to trigger webhook')
       const result = await response.json();
       toast({
         title: 'Success',
         description: `${action} webhook triggered successfully`
       })
-      return result;
+      return result
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to trigger webhook',
       setError(message)

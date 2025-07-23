@@ -1,23 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import Stripe from 'stripe';
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2023-08-16'
 });
-
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.text();
     const signature = headers().get('stripe-signature');
-    
     if (!signature) {
       return NextResponse.json(
         { error: 'Missing stripe signature' },
         { status: 400 }
-      );
+      )
     }
-    
     // Simulate webhook event processing
     const event = {
       id: 'evt_' + Math.random().toString(36).substr(2, 9),
@@ -28,11 +24,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           amount: 2000,
           currency: 'usd',
           status: 'succeeded'
-        }
-      },
+        }},
       created: Math.floor(Date.now() / 1000)
     };
-    
     // Process the webhook event
     switch (event.type) {
       case 'payment_intent.succeeded':
@@ -42,17 +36,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         console.log('Invoice payment succeeded:', event.data.object.id);
         break;
       default:
-        console.log('Unhandled event type:', event.type);
+        console.log('Unhandled event type:', event.type)
     }
-    
-    return NextResponse.json({ received: true });
+    return NextResponse.json({ received: true })
   } catch (error) {
     console.error('Stripe webhook error:', error);
     return NextResponse.json(
       { error: 'Webhook processing failed' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
 
 export const dynamic = "force-dynamic";

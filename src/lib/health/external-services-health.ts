@@ -1,12 +1,12 @@
 import { HealthCheckResult } from './HealthCheckService';interface ServiceHealthOptions {
-  timeout?: number;
-  expectedStatusCodes?: number[];
-  headers?: Record<string, string>;
+  timeout?: number,
+  expectedStatusCodes?: number[],
+  headers?: Record<string, string>
 }
 /**
  * OpenAI API health check
  */
-export async function checkOpenAIHealth(
+export async function checkOpenAIHealth(;
   apiKey?: string
 ): Promise<any> {
   const _start = Date.now();
@@ -16,13 +16,11 @@ export async function checkOpenAIHealth(
       status: 'unhealthy',
       error: 'API key not configured',
       responseTime: 0,
-    timestamp: new Date()}
-}
+    timestamp: new Date()}}
   try {
     const response = await fetch('https://api.openai.com/v1/models', {
       method: 'GET',
-    headers: {
-  Authorization: `Bearer ${apiKey || process.env.OPENAI_API_KEY}`,``
+    headers: { Authorization: `Bearer ${apiKey || process.env.OPENAI_API_KEY }`,``
         'Content-Type': 'application/json',
       signal: AbortSignal.timeout(10000); // 10 second timeout
     }};
@@ -37,15 +35,13 @@ export async function checkOpenAIHealth(
   models: data.data?.length || 0,
     endpoint: 'models'
 },
-        timestamp: new Date()}
-    } else if (response.status === 401) {
+        timestamp: new Date()}} else if (response.status === 401) {
       return {
         name: 'openai',
         status: 'unhealthy',
         error: 'Invalid API key',
         responseTime,
-        timestamp: new Date()}
-    } else if (response.status === 429) {
+        timestamp: new Date()}} else if (response.status === 429) {
       return {
         name: 'openai',
         status: 'degraded',
@@ -53,16 +49,13 @@ export async function checkOpenAIHealth(
         responseTime,
     details: {
   retryAfter: response.headers.get('retry-after')},
-    timestamp: new Date()}
-    } else {
+    timestamp: new Date()}} else {
       return {
         name: 'openai',
         status: 'unhealthy',
         error: `API returned ${response.status}`,``
         responseTime,
-        timestamp: new Date()}
-}
-  } catch (error) { return {
+        timestamp: new Date()}} catch (error) { return {
       name: 'openai',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -71,7 +64,7 @@ export async function checkOpenAIHealth(
 /**
  * Stripe API health check
  */
-export async function checkStripeHealth(
+export async function checkStripeHealth(;
   secretKey?: string
 ): Promise<any> {
   const _start = Date.now();
@@ -81,13 +74,11 @@ export async function checkStripeHealth(
       status: 'unhealthy',
       error: 'API key not configured',
       responseTime: 0,
-    timestamp: new Date()}
-}
+    timestamp: new Date()}}
   try {
     const response = await fetch('https://api.stripe.com/v1/balance', {
       method: 'GET',
-    headers: {
-  Authorization: `Bearer ${secretKey || process.env.STRIPE_SECRET_KEY}`,``
+    headers: { Authorization: `Bearer ${secretKey || process.env.STRIPE_SECRET_KEY }`,``
         'Content-Type': 'application/x-www-form-urlencoded',
       signal: AbortSignal.timeout(10000)});
     const _responseTime = Date.now() - start;
@@ -100,30 +91,25 @@ export async function checkStripeHealth(
   endpoint: 'balance',
           mode: secretKey?.startsWith('sk_test_') ? 'test' : 'live'
 },
-        timestamp: new Date()}
-    } else if (response.status === 401) {
+        timestamp: new Date()}} else if (response.status === 401) {
       return {
         name: 'stripe',
         status: 'unhealthy',
         error: 'Invalid API key',
         responseTime,
-        timestamp: new Date()}
-    } else if (response.status === 429) {
+        timestamp: new Date()}} else if (response.status === 429) {
       return {
         name: 'stripe',
         status: 'degraded',
         error: 'Rate limited',
         responseTime,
-        timestamp: new Date()}
-    } else {
+        timestamp: new Date()}} else {
       return {
         name: 'stripe',
         status: 'unhealthy',
         error: `API returned ${response.status}`,``
         responseTime,
-        timestamp: new Date()}
-}
-  } catch (error) { return {
+        timestamp: new Date()}} catch (error) { return {
       name: 'stripe',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -132,7 +118,7 @@ export async function checkStripeHealth(
 /**
  * Vercel API health check
  */
-export async function checkVercelHealth(
+export async function checkVercelHealth(;
   token?: string
 ): Promise<any> {
   const _start = Date.now();
@@ -145,13 +131,11 @@ export async function checkVercelHealth(
     details: {
   message: 'Deployment features may be limited'
 },
-      timestamp: new Date()}
-}
+      timestamp: new Date()}}
   try {
     const response = await fetch('https://api.vercel.com/v2/user', {
       method: 'GET',
-    headers: {
-  Authorization: `Bearer ${token || process.env.VERCEL_TOKEN}`,``
+    headers: { Authorization: `Bearer ${token || process.env.VERCEL_TOKEN }`,``
         'Content-Type': 'application/json',
       signal: AbortSignal.timeout(10000)});
     const _responseTime = Date.now() - start;
@@ -165,16 +149,13 @@ export async function checkVercelHealth(
   user: data.user?.username,
     email: data.user?.email
         },
-        timestamp: new Date()}
-    } else {
+        timestamp: new Date()}} else {
       return {
         name: 'vercel',
         status: 'degraded',
         error: `API returned ${response.status}`,``
         responseTime,
-        timestamp: new Date()}
-}
-  } catch (error) { return {
+        timestamp: new Date()}} catch (error) { return {
       name: 'vercel',
       status: 'degraded',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -183,7 +164,7 @@ export async function checkVercelHealth(
 /**
  * GitHub API health check
  */
-export async function checkGitHubHealth(
+export async function checkGitHubHealth(;
   token?: string
 ): Promise<any> {
   const _start = Date.now();
@@ -209,16 +190,13 @@ export async function checkGitHubHealth(
   rateLimit: data.rate?.limit,
     remaining: data.rate?.remaining,
     authenticated: !!(token || process.env.GITHUB_TOKEN)},
-    timestamp: new Date()}
-    } else {
+    timestamp: new Date()}} else {
       return {
         name: 'github',
         status: 'degraded',
         error: `API returned ${response.status}`,``
         responseTime,
-        timestamp: new Date()}
-}
-  } catch (error) { return {
+        timestamp: new Date()}} catch (error) { return {
       name: 'github',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -238,11 +216,10 @@ export async function checkEmailServiceHealth(,
       status: 'unhealthy',
       error: 'API key not configured',
       responseTime: 0,
-    timestamp: new Date()}
-}
+    timestamp: new Date()}}
   const endpoints = {
     sendgrid: 'https://api.sendgrid.com/v3/user/profile',
-    resend: 'https://api.resend.com/domains',
+    resend: 'https: //api.resend.com/domains',
     postmark: 'https://api.postmarkapp.com/server'
 };
   const authHeaders = {
@@ -255,10 +232,7 @@ export async function checkEmailServiceHealth(,
   try {
     const response = await fetch(endpoints[provider], {
       method: 'GET',
-    headers: {
-        ...authHeaders[provider],
-        'Content-Type': 'application/json',
-      signal: AbortSignal.timeout(10000)});
+    headers: { ...authHeaders[provider], 'Content-Type': 'application/json', signal: AbortSignal.timeout(10000) });
     const _responseTime = Date.now() - start;
     if(response.ok) {
       return {
@@ -269,24 +243,19 @@ export async function checkEmailServiceHealth(,
           provider,
           configured: true
         },
-        timestamp: new Date()}
-    } else {
+        timestamp: new Date()}} else {
       return {
         name: `email_${provider}`
         status: response.status === 401 ? 'unhealthy' : 'degraded',
         error: `API returned ${response.status}`,``
         responseTime,
-        timestamp: new Date()}
-}
-  } catch (error) {
+        timestamp: new Date()}} catch (error) {
     return {
       name: `email_${provider}`
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
       responseTime: Date.now() - start,
-    timestamp: new Date()}
-}
-}
+    timestamp: new Date()}}
 /**
  * CDN health check
  */
@@ -310,16 +279,13 @@ export async function checkCDNHealth(,
   url: cdnUrl,
     cacheStatus: response.headers.get('x-cache') || 'unknown'
     },
-        timestamp: new Date()}
-    } else {
+        timestamp: new Date()}} else {
       return {
         name: 'cdn',
         status: 'degraded',
         error: `CDN returned ${response.status}`,``
         responseTime,
-        timestamp: new Date()}
-}
-  } catch (error) { return {
+        timestamp: new Date()}} catch (error) { return {
       name: 'cdn',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'CDN unreachable',
@@ -328,7 +294,7 @@ export async function checkCDNHealth(,
 /**
  * Create a comprehensive external services health check
  */
-export function createExternalServicesHealthCheck(): void {
+export function createExternalServicesHealthCheck() {
   return async (): Promise<HealthCheckResult> => {
     const checks = await Promise.all([
   checkOpenAIHealth(),
@@ -345,7 +311,7 @@ export function createExternalServicesHealthCheck(): void {
     } else if (degradedChecks.length > 0) {
       overallStatus = 'degraded'
 }
-    const _totalResponseTime = checks.reduce(
+    const _totalResponseTime = checks.reduce(;
       (sum, check) => sum + (check.responseTime || 0),
       0
     );
@@ -354,10 +320,9 @@ export function createExternalServicesHealthCheck(): void {
       status: overallStatus,
     responseTime: totalResponseTime,
     details: {
-  services: checks.map((c) => ({,
+  services: checks.map((c) => ({
   name: c.name,
     status: c.status,
     responseTime: c.responseTime
         }})},
-      timestamp: new Date()}
-}
+      timestamp: new Date()}}

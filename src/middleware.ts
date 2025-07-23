@@ -26,44 +26,44 @@ export async function middleware(request: NextRequest): Promise<any> {
   if (pathname.startsWith('/_next/') ||
       pathname.startsWith('/favicon.ico') ||
       pathname.startsWith('/api/health')) {
-    return NextResponse.next();
+    return NextResponse.next()
 }
   // Allow public paths
-  if (PUBLIC_PATHS.some(path => pathname.startsWith(path))) {
-    return NextResponse.next();
+  if (PUBLIC_PATHS.some(path => pathname.startsWith(path)) {
+    return NextResponse.next()
 }
   // CRITICAL, FIX: Explicit route-based authentication to prevent Vercel conflicts
   // Handle admin routes FIRST (highest priority)
-  if (ADMIN_PATHS.some(path => pathname.startsWith(path))) {
+  if (ADMIN_PATHS.some(path => pathname.startsWith(path)) {
     // Admin routes use custom admin-token authentication, NOT NextAuth
     const _adminToken = request.cookies.get('admin-token');
     if(!adminToken) {
       // Admin routes ALWAYS redirect to /admin/login
       const loginUrl = new URL('/admin/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(loginUrl);
+      return NextResponse.redirect(loginUrl)
 }
     // Admin authenticated - allow access
-    return NextResponse.next();
+    return NextResponse.next()
 }
   // Handle regular protected routes with NextAuth
-  if (PROTECTED_PATHS.some(path => pathname.startsWith(path))) {
+  if (PROTECTED_PATHS.some(path => pathname.startsWith(path)) {
     const _token = await getToken({ req: request });
     if(!token) {
       // User routes ALWAYS redirect to /auth/signin
       const loginUrl = new URL('/auth/signin', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(loginUrl);
-}
-}
+      return NextResponse.redirect(loginUrl)
+}}
   // Add security headers
   const response = NextResponse.next();
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  return response;
+  return response
 }
+
 export const _config = { matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)'];
+    '/((?!_next/static|_next/image|favicon.ico).*)']
 }

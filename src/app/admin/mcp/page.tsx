@@ -1,19 +1,17 @@
 'use client';
-
 import React from 'react';
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Settings, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
 interface MCPStatus {
-status: string;
-    name: string;
-    version: string;
-    connected: boolean
-
+  status: string,
+  name: string,
+  version: string,
+  connected: boolean
 }
+
 export default function AdminMCPPage() {
   const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);
   const [isLoading, setIsLoading] = useState<any>(true);
@@ -22,24 +20,24 @@ export default function AdminMCPPage() {
     setTimeout(() => {
       setMcpServers([
         {
-  name: 'Context7',
+          name: 'Context7',
           status: 'online',
           version: '1.0.6',
           connected: true
-},
+        },
         {
           name: 'Sequential Thinking',
           status: 'online',
           version: '1.0.0',
           connected: true
-}
+        }
       ]);
       setIsLoading(false);
-    }, 1000);
-  }, []);
+}, 1000);
+}, []);
   if (isLoading) {
     return <div className="p-8">Loading MCP servers...</div>;
-}
+  }
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -67,16 +65,18 @@ export default function AdminMCPPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex justify-between items-center"><span>Version: {server.version}</span>
+                <div className="flex justify-between items-center">
+                  <span>Version: {server.version}</span>
                   <Button variant="outline" size="sm">
                     <Settings className="h-4 w-4 mr-2" />
-                    {/* Configure */}
+                    Configure
                   </Button>
                 </div>
               </CardContent>
             </Card>
           ))}
-              </div>
-);
-
-      }
+        </div>
+      </div>
+    </div>
+  );
+}

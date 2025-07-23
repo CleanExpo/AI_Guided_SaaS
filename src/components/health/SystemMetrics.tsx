@@ -1,13 +1,20 @@
 import React from 'react';
-interface SystemMetricsProps {
-metrics?: { cpu: number;
-    memory: number;
-    uptime: number;
-    activeAgents: number 
-};
+
+export interface SystemMetricsData {
+  cpu: number,
+  memory: number,
+  uptime: number,
+  activeAgents: number
 }
-export function SystemMetrics({ metrics }: SystemMetricsProps) {
-  if(!metrics) { return <div>Loading metrics...</div> }
+
+interface SystemMetricsProps {
+  metrics?: SystemMetricsData;
+}
+
+export function SystemMetrics({ metrics }: SystemMetricsProps = {}) {
+  if(!metrics) { 
+    return <div>Loading metrics...</div>;
+  }
   
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -26,7 +33,7 @@ export function SystemMetrics({ metrics }: SystemMetricsProps) {
       <div className="bg-white p-4 rounded-lg shadow">
         <h3 className="text-sm font-medium text-gray-500">Active Agents</h3>
         <p className="mt-1 text-2xl font-semibold">{metrics.activeAgents}</p>
-            </div>
-);
-
-      }
+      </div>
+    </div>
+  );
+}

@@ -6,7 +6,7 @@ export function formatDate(date: Date | string): Date | string) {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-}}.format(d);
+}}.format(d)
 };
 export function formatDateTime(date: Date | string): Date | string) {
   const _d = typeof date === 'string' ? new Date(date) : date;
@@ -16,17 +16,17 @@ export function formatDateTime(date: Date | string): Date | string) {
     day: 'numeric',
     hour: 'numeric',
     minute: '2-digit'
-}}.format(d);
+}}.format(d)
 };
-export function truncate(str: string, maxLength: number): string, maxLength: number) {
+export function truncate(str: string, maxLength: number): string; maxLength: number) {
   if (str.length <= maxLength) return str;
-  return str.slice(0, maxLength - 3) + '...';
+  return str.slice(0, maxLength - 3) + '...'
     };
-export function generateId(): void {
-  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+export function generateId() {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 };
 export function sleep(ms: number): Promise<any> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms))
 };
 export function debounce<T extends (...args[]) => any>(,
     func: T,
@@ -36,13 +36,14 @@ export function debounce<T extends (...args[]) => any>(,
   return function executedFunction(...args: Parameters<T>): Parameters<T>) {
     const _later = (): void => {
       timeout = null;
-      func(...args);
+      func(...args)
     };
     if (timeout) {
-      clearTimeout(timeout);
+      clearTimeout(timeout)
 }
-    timeout = setTimeout(later, wait);
+    timeout = setTimeout(later, wait)
 }
+
 export function throttle<T extends (...args[]) => any>(,
     func: T,
     limit: number
@@ -53,10 +54,10 @@ export function throttle<T extends (...args[]) => any>(,
       func(...args);
       inThrottle = true;
       setTimeout(() => {
-        inThrottle = false;
-      }, limit);
-}
-}
+        inThrottle = false
+      }, limit)
+}}
+
 export function retry<T>(,
     fn: () => Promise<T>,
     options: {
@@ -70,19 +71,19 @@ export function retry<T>(,
     const _attempt = async (attemptNumber: number) => {
       try {
         const _result = await fn();
-        resolve(result);
+        resolve(result)
       } catch (error) {
         if(attemptNumber >= retries) {
           reject(error);
-          return;
+          return
 }
         if (onRetry) {
-          onRetry(error as Error, attemptNumber);
+          onRetry(error as Error, attemptNumber)
 }
         setTimeout(() => {
-          attempt(attemptNumber + 1);
-        }, delay * attemptNumber);
+          attempt(attemptNumber + 1)
+        }, delay * attemptNumber)
 }
-    attempt(1);
-  });
+    attempt(1)
+  })
 }

@@ -29,5 +29,5 @@ export type {
   RiskAssessment,
   Alternative,
   DecisionMatrix,
-  ActionPlan from './AdvisorAgent';
+  ActionPlan from './AdvisorAgent'
 }

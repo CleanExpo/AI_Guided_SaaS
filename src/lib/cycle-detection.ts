@@ -6,36 +6,36 @@
  */
 interface ProblemAttempt {
   id: string,
-    timestamp: number,
-    problemDescription: string,
-    attemptedSolution: string,
-    outcome: 'success' | 'failure' | 'partial',
-    errorMessages: string[],
-    contextHash: string;
+  timestamp: number,
+  problemDescription: string,
+  attemptedSolution: string,
+  outcome: 'success' | 'failure' | 'partial',
+  errorMessages: string[],
+  contextHash: string,
   userId?: string,
     sessionId: string
 };
 interface CycleDetectionResult {
   isCyclic: boolean,
-    cycleLength: number,
-    confidence: number,
-    repeatedPatterns: string[],
-    suggestedBreakpoint: string,
-    documentationSources: string[]
+  cycleLength: number,
+  confidence: number,
+  repeatedPatterns: string[],
+  suggestedBreakpoint: string,
+  documentationSources: string[]
 };
 interface DocumentationSource {
   name: string,
-    baseUrl: string;
+  baseUrl: string,
   searchEndpoint?: string,
     priority: number,
-    categories: string[]
+  categories: string[]
 }
 class CycleDetectionEngine {
-  private, attempts: Map<string, ProblemAttempt[]> = new Map();
+  private attempts: Map<string, ProblemAttempt[]> = new Map();
   private readonly CYCLE_THRESHOLD = 3; // Number of similar attempts to consider a cycle
   private readonly TIME_WINDOW = 30 * 60 * 1000; // 30 minutes
   private readonly SIMILARITY_THRESHOLD = 0.7;
-  private, documentationSources: DocumentationSource[] = [
+  private documentationSources: DocumentationSource[] = [
     {
   name: 'OpenAI Cookbook',
       baseUrl: 'https://cookbook.openai.com/',
@@ -94,7 +94,7 @@ class CycleDetectionEngine {
     const fullAttempt: ProblemAttempt = {
       ...attempt,
       id,
-      timestamp: Date.now(),
+      timestamp: Date.now();
       // contextHash
     };
     const sessionAttempts = this.attempts.get(attempt.sessionId) || [];
@@ -102,7 +102,7 @@ class CycleDetectionEngine {
     this.attempts.set(attempt.sessionId, sessionAttempts);
     // Clean old attempts outside time window
     this.cleanOldAttempts(attempt.sessionId);
-    return id;
+    return id
 }
   /**
    * Analyzes attempts to detect circular patterns
@@ -117,8 +117,7 @@ class CycleDetectionEngine {
     repeatedPatterns: [],
     suggestedBreakpoint: '',
     documentationSources: []
-}
-}
+}}
     const _recentAttempts = this.getRecentAttempts(sessionAttempts);
     const patterns = this.identifyPatterns(recentAttempts);
     const cycleAnalysis = this.analyzeCyclicBehavior(patterns);
@@ -128,18 +127,16 @@ class CycleDetectionEngine {
         ...cycleAnalysis,
         documentationSources: relevantSources,
     suggestedBreakpoint: this.generateBreakpointSuggestion(recentAttempts)
-}
-}
+}}
     return {
       ...cycleAnalysis,
       suggestedBreakpoint: '',
     documentationSources: []
-}
-}
+}}
   /**
    * Autonomously searches documentation sources for solutions
    */
-  async searchDocumentationSources(problemDescription: string, errorMessages: string[], relevantSources: string[]): Promise<any> {
+  async searchDocumentationSources(problemDescription: string, errorMessages: string[]; relevantSources: string[]): Promise<any> {
     const _searchQueries = this.generateSearchQueries(problemDescription, errorMessages);
     const results: DocumentationSearchResult[] = [];
     for(const sourceName of relevantSources) {
@@ -148,13 +145,11 @@ class CycleDetectionEngine {
       try {
         const _searchResult = await this.searchDocumentationSource(source, searchQueries);
         if (searchResult) {
-          results.push(searchResult);
-}
-      } catch (error) {
+          results.push(searchResult)
+}} catch (error) {
         console.warn(`Failed to search ${sourceName}:`, error);``
-}
-}
-    return results.sort((a, b) => b.relevanceScore - a.relevanceScore);
+}}
+    return results.sort((a, b) => b.relevanceScore - a.relevanceScore)
 }
   /**
    * Generates contextual breakpoint suggestions
@@ -183,11 +178,11 @@ class CycleDetectionEngine {
       "- Consider asking for help in community forums",
       "- Take a short break and return with fresh perspective";
     );
-    return suggestions.join('\n');
+    return suggestions.join('\n')
 }
   private generateContextHash(attempt: Omit<ProblemAttempt, 'id' | 'timestamp' | 'contextHash'>) {
     const _context = `${attempt.problemDescription}|${attempt.attemptedSolution}|${attempt.errorMessages.join('|')}`
-    return this.simpleHash(context);
+    return this.simpleHash(context)
 }
   private simpleHash(str: string) {
     let hash = 0;
@@ -196,16 +191,16 @@ class CycleDetectionEngine {
       hash = ((hash << 5) - hash) + char;
       hash = hash & hash; // Convert to 32-bit integer
 }
-    return Math.abs(hash).toString(36);
+    return Math.abs(hash).toString(36)
 }
   private generateId() {
-    return `attempt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `attempt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
 }
   private cleanOldAttempts(sessionId: string) {
     const sessionAttempts = this.attempts.get(sessionId) || [];
     const _cutoffTime = Date.now() - this.TIME_WINDOW;
     const _recentAttempts = sessionAttempts.filter((attempt) => attempt.timestamp > cutoffTime);
-    this.attempts.set(sessionId, recentAttempts);
+    this.attempts.set(sessionId, recentAttempts)
 }
   private getRecentAttempts(attempts: ProblemAttempt[]): ProblemAttempt[] {
     const _cutoffTime = Date.now() - this.TIME_WINDOW;
@@ -214,16 +209,16 @@ class CycleDetectionEngine {
     const patterns = new Map<string, number>();
     attempts.forEach((attempt) => {
       const _pattern = this.extractPattern(attempt);
-      patterns.set(pattern, (patterns.get(pattern) || 0) + 1);
+      patterns.set(pattern, (patterns.get(pattern) || 0) + 1)
     });
-    return patterns;
+    return patterns
 }
   private extractPattern(attempt: ProblemAttempt) {
     // Create a pattern based on problem type, solution type, and error type
     const _problemType = this.categorizeText(attempt.problemDescription);
     const _solutionType = this.categorizeText(attempt.attemptedSolution);
     const _errorType = attempt.errorMessages.map((err) => this.categorizeText(err)).join(',');
-    return `${problemType}:${solutionType}:${errorType}`;
+    return `${problemType}:${solutionType}:${errorType}`
 }
   private categorizeText(text: string) {
     const _keywords = {
@@ -237,55 +232,50 @@ class CycleDetectionEngine {
     };
     const lowerText = text.toLowerCase();
     for (const [category, words] of Object.entries(keywords)) {
-      if (words.some(word => lowerText.includes(word))) {
-        return category;
-}
-}
-    return 'general';
+      if (words.some(word => lowerText.includes(word)) {
+        return category
+}}
+    return 'general'
 }
   private analyzeCyclicBehavior(patterns: Map<string, number>): Omit {
-    const repeatedPatterns = Array.from(patterns.entries());
+    const repeatedPatterns = Array.from(patterns.entries()
       .filter(([ count]) => count >= this.CYCLE_THRESHOLD)
       .map(([pattern]) => pattern);
     const _isCyclic = repeatedPatterns.length > 0;
-    const _cycleLength = patterns.size > 0 ? Math.max(...Array.from(patterns.values())) : 0;
+    const _cycleLength = patterns.size > 0 ? Math.max(...Array.from(patterns.values()) : 0;
     const _confidence = isCyclic ? Math.min(cycleLength / this.CYCLE_THRESHOLD, 1) : 0;
     return {
       isCyclic,
       cycleLength,
       confidence,
       // repeatedPatterns
-}
-}
+}}
   private identifyRelevantDocumentation(attempts: ProblemAttempt[]): string[] {
     const categories = new Set<string>();
     attempts.forEach((attempt) => {
       const _problemCategory = this.categorizeText(attempt.problemDescription);
-      const errorCategories = attempt.errorMessages.map((err) => this.categorizeText(err));
+      const errorCategories = attempt.errorMessages.map((err) => this.categorizeText(err);
       categories.add(problemCategory);
       errorCategories.forEach((cat) => categories.add(cat))
     });
     const _relevantSources = this.documentationSources;
       .filter((source) => source.categories.some(cat => categories.has(cat)) ||
-        categories.has('general')
-      )
-      .sort((a, b) => a.priority - b.priority)
+        categories.has('general')).sort((a, b) => a.priority - b.priority)
       .slice(0, 5) // Limit to top 5 sources
       .map((source) => source.name);
-    return relevantSources;
+    return relevantSources
 }
   private generateSearchQueries(problemDescription: string, errorMessages: string[]): string[] {
     const queries = [problemDescription];
     // Add specific error messages as queries
     errorMessages.forEach((error) => {
       if(error.length > 10 && error.length < 200) {
-        queries.push(error);
-}
-    });
+        queries.push(error)
+}});
     // Extract key terms for additional queries
     const keyTerms = this.extractKeyTerms(problemDescription);
     if(keyTerms.length > 0) {
-      queries.push(keyTerms.join(', '));
+      queries.push(keyTerms.join(', '))
 }
     return queries.slice(0, 3); // Limit to 3 queries per source
 }
@@ -296,7 +286,7 @@ class CycleDetectionEngine {
       .replace(/[^\w\s]/g, ' ')
       .split(/\s+/)
       .filter((word) => word.length > 3 && !commonWords.has(word))
-      .slice(0, 5);
+      .slice(0, 5)
 }
   private async searchDocumentationSource(source: DocumentationSource, queries: string[]): Promise<any> {
     // This would integrate with actual search APIs or web scraping
@@ -314,33 +304,30 @@ class CycleDetectionEngine {
           relevance: 0.8
 }
       ]
-}
-}
+}}
   private extractCommonErrors(attempts: ProblemAttempt[]): string[] {
     const errorCounts = new Map<string, number>();
     attempts.forEach((attempt) => {
       attempt.errorMessages.forEach((error) => {
         const _normalizedError = error.substring(0, 100); // Truncate for grouping
-        errorCounts.set(normalizedError, (errorCounts.get(normalizedError) || 0) + 1);
-      });
-    });
-    return Array.from(errorCounts.entries());
-      .filter(([ count]) => count >= 2)
-      .sort((a, b) => b[1] - a[1])
+        errorCounts.set(normalizedError, (errorCounts.get(normalizedError) || 0) + 1)
+      })};
+    return Array.from(errorCounts.entries()
+      .filter(([ count]) => count >= 2).sort((a, b) => b[1] - a[1])
       .slice(0, 3)
-      .map(([error]) => error);
+      .map(([error]) => error)
 }
 interface DocumentationSearchResult {
   sourceName: string,
-    sourceUrl: string,
-    searchUrl: string,
-    relevanceScore: number,
-    results: {
+  sourceUrl: string,
+  searchUrl: string,
+  relevanceScore: number,
+  results: {
   title: string,
-    url: string,
-    snippet: string,
-    relevance: number
-  }[];
+  url: string,
+  snippet: string,
+  relevance: number
+  }[]
 }
 // Singleton instance
 export const _cycleDetectionEngine = new CycleDetectionEngine();

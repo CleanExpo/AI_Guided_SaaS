@@ -2,91 +2,93 @@
 // Enhanced /init-docs and /compact-docs commands with multi-agent orchestration
 import { ProjectConfig } from '@/types';// Type definitions for discovery and analysis results
 export interface DiscoveryResults {
-
   projectStructure: {
   components: number,
-    pages: number,
-    apis: number,
-    utilities: number
+  pages: number,
+  apis: number,
+  utilities: number
 }
   dependencies: {
-    production: number, development: number, critical: number
+    production: number, development: number; critical: number
   },
   codeComplexity: {
-    averageComplexity: number, highComplexityFiles: number, technicalDebt: string
+    averageComplexity: number, highComplexityFiles: number; technicalDebt: string
 }
+
 export interface MemoryFile {
   filename: string,
-    content: string,
-    tokens: number,
-    priority: 'critical' | 'high' | 'medium' | 'low'
+  content: string,
+  tokens: number,
+  priority: 'critical' | 'high' | 'medium' | 'low'
 };
 export interface HierarchyResults {
   coreMemory: MemoryFile[],
-    projectDocumentation: MemoryFile[], supportingDocumentation: MemoryFile[],
-    totalTokens: number
+  projectDocumentation: MemoryFile[],
+  supportingDocumentation: MemoryFile[],
+  totalTokens: number
 };
 export interface CrossReferenceSystem {
   crossReferences: number,
-    linkedDocuments: number,
-    navigationPaths: number,
-    searchableTerms: number
+  linkedDocuments: number,
+  navigationPaths: number,
+  searchableTerms: number
 };
 export interface MemoryAnalysis {
   currentTokens: number,
-    maxTokens: number,
-    utilizationRate: number,
-    fragmentationLevel: number,
-    compressionOpportunities: string[]
+  maxTokens: number,
+  utilizationRate: number,
+  fragmentationLevel: number,
+  compressionOpportunities: string[]
 };
 export interface CompactionResults {
   compactedSections: number,
-    preservedCriticalInfo: number,
-    archivedContent: number,
-    optimizedReferences: number,
-    tokensReclaimed: number
+  preservedCriticalInfo: number,
+  archivedContent: number,
+  optimizedReferences: number,
+  tokensReclaimed: number
 };
 export interface QualityReport {
   retentionScore: number,
-    criticalInfoPreserved: boolean,
-    navigationIntegrity: boolean,
-    searchabilityMaintained: boolean,
-    recommendations: string[]
+  criticalInfoPreserved: boolean,
+  navigationIntegrity: boolean,
+  searchabilityMaintained: boolean,
+  recommendations: string[]
 };
 export interface ClaudeCommand {
   name: string,
-    description: string,
-    tokenImpact: number,
-    memoryLevel: 'user' | 'project' | 'modular';
+  description: string,
+  tokenImpact: number,
+  memoryLevel: 'user' | 'project' | 'modular'
   execute(projectContext: ProjectConfig): Promise<ClaudeCommandResult;>
 };
 export interface ClaudeCommandResult {
   success: boolean,
-    message: string,
-    tokenUsage: number;
-  generatedFiles?: string[];
-  optimizationReport?: OptimizationReport;
-  nextSteps?: string[];
+  message: string,
+  tokenUsage: number,
+  generatedFiles?: string[],
+  optimizationReport?: OptimizationReport,
+  nextSteps?: string[]
 };
 export interface OptimizationReport {
   originalTokens: number,
-    optimizedTokens: number,
-    compressionRatio: number,
-    qualityRetention: number,
-    recommendations: string[]
+  optimizedTokens: number,
+  compressionRatio: number,
+  qualityRetention: number,
+  recommendations: string[]
 };
 export interface MultiAgentOrchestrationResult {
   totalTokenUsage: number,
-    utilizationRate: number,
-    integrationCommands: string[],
-    nextSteps: string[], agentReports: AgentReport[]
+  utilizationRate: number,
+  integrationCommands: string[],
+  nextSteps: string[],
+  agentReports: AgentReport[]
 };
 export interface AgentReport {
   agentName: string,
-    tasksCompleted: number,
-    tokensProcessed: number,
-    qualityScore: number,
-    recommendations: string[]
+  tasksCompleted: number,
+  tokensProcessed: number,
+  qualityScore: number,
+  recommendations: string[]
 }
 // Enhanced /init-docs Command
 export class InitDocsCommand implements ClaudeCommand {
@@ -113,8 +115,7 @@ export class InitDocsCommand implements ClaudeCommand {
         'Configure automated Git workflow integration',
         'Set up continuous memory optimization'
    ]
-}
-}
+}}
   private async performAutomatedDiscovery(projectContext: ProjectConfig): Promise<any> {
     // Simulate comprehensive project analysis
     await new Promise(resolve => setTimeout(resolve, 1000))
@@ -156,7 +157,7 @@ export class InitDocsCommand implements ClaudeCommand {
     priority: 'high' as const
 }
     ]
-    return memoryFiles;
+    return memoryFiles
 }
   private generateCoreMemoryFile(projectContext: ProjectConfig) {
     return `# CLAUDE.md - ${projectContext.name} Memory Core``;
@@ -242,8 +243,7 @@ ${projectContext.features.map((feature) => `- **${feature}**: ✅ Implemented`).
     projectDocumentation: memoryFiles.filter((f) => f.priority === 'high'),
     supportingDocumentation: memoryFiles.filter((f) => f.priority === 'medium'),
     totalTokens: memoryFiles.reduce((sum, f) => sum + f.tokens, 0)
-}
-}
+}}
   private async establishCrossReferences(hierarchyResults: HierarchyResults): Promise { // Simulate cross-reference system establishment
     await new Promise(resolve => setTimeout(resolve, 300))
     return {
@@ -281,8 +281,7 @@ export class CompactDocsCommand implements ClaudeCommand {
         'Schedule next optimization cycle',
         'Monitor memory utilization trends'
    ]
-}
-}
+}}
   private async analyzeCurrentMemoryUsage(): Promise<any> {
     await new Promise(resolve => setTimeout(resolve, 800))
     return {
@@ -295,8 +294,7 @@ export class CompactDocsCommand implements ClaudeCommand {
         'Verbose documentation sections',
         'Redundant cross-references'
    ]
-}
-}
+}}
   private async performStrategicCompaction(memoryAnalysis: MemoryAnalysis): Promise<any> {
     await new Promise(resolve => setTimeout(resolve, 1200))
     return {
@@ -305,8 +303,7 @@ export class CompactDocsCommand implements ClaudeCommand {
     archivedContent: 3,
     optimizedReferences: 12,
     tokensReclaimed: Math.abs(this.tokenImpact)
-}
-}
+}}
   private async validateQualityPreservation(compactionResults: CompactionResults): Promise { await new Promise(resolve => setTimeout(resolve, 400))
     return {
       retentionScore: 0.96,

@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,27 +10,26 @@ import { Loader2, Send, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react
 import { Badge } from '@/components/ui/badge';
 interface ProcessedRequirements {
 requirements: Array<{
-  id: string;
-    category: string;
-    description: string;
-    priority: string;
-    agents: string[]
-  
+  id: string,
+  category: string,
+  description: string,
+  priority: string,
+  agents: string[]
 }>,
   roadmap: {
-    complexity: string, estimatedDuration: string, phases: Array<{
-  name: string, duration: string, agents: string[]
+    complexity: string, estimatedDuration: string; phases: Array<{
+  name: string, duration: string agents: string[]
     }>
 }
   summary: {
-    totalRequirements: number, complexity: string, estimatedDuration: string, assignedAgents: string[]
+    totalRequirements: number, complexity: string; estimatedDuration: string assignedAgents: string[]
 },
     export function ClientRequirementsCapture() {
   const [input, setInput] = useState<any>('');
   const [projectName, setProjectName] = useState<any>('');
   const [isProcessing, setIsProcessing] = useState<any>(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<ProcessedRequirements | null>(null);
+  const [result, setResult] = useState<ProcessedRequirements | null>(null)
   const examplePrompts = [
   "I need an e-commerce platform with user authentication, product catalog, shopping cart, and Stripe payment integration",
     "Build a real-time dashboard with analytics, charts, dark mode, and export functionality",
@@ -48,18 +46,13 @@ requirements: Array<{
     setResult(null)
     try {
       const response = await fetch('/api/requirements/process', {
-    method: 'POST',
-    headers: {
-          'Content-Type': 'application/json'},
+    method: 'POST'
+    headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           input,
           projectName,
-    metadata: {
-  source: 'web_form',
-            timestamp: new Date().toISOString()
-}
-        })
-      })
+    metadata: { source: 'web_form'
+            timestamp: new Date().toISOString() }})}
       const data = await response.json();
       if(!response.ok) {
         throw new Error(data.error || 'Failed to process requirements')
@@ -69,8 +62,7 @@ requirements: Array<{
       setError(err instanceof Error ? err.message : 'Something went wrong')
     } finally {
       setIsProcessing(false)
-}
-}
+}}
   const _useExample = (example: string) => {
     setInput(example)
     setProjectName('')
@@ -79,18 +71,18 @@ requirements: Array<{
     const colors: Record<string, string> = {
     functional: 'bg-blue-100 text-blue-800',
       technical: 'bg-purple-100 text-purple-800',
-      design: 'bg-pink-100 text-pink-800',
+      design: 'bg-pink-100 text-pink-800'
       business: 'bg-green-100 text-green-800'
 }
-    return colors[category] || 'bg-gray-100 text-gray-800';
+    return colors[category] || 'bg-gray-100 text-gray-800'
 }
   const _getPriorityColor = (priority: string) => {</string>;
     const colors: Record<string, string> = {
     high: 'bg-red-100 text-red-800',
-      medium: 'bg-yellow-100 text-yellow-800',
+      medium: 'bg-yellow-100 text-yellow-800'
       low: 'bg-gray-100 text-gray-800'
 }
-    return colors[priority] || 'bg-gray-100 text-gray-800';
+    return colors[priority] || 'bg-gray-100 text-gray-800'
 }
   return (
     <div className="max-w-4xl mx-auto space-y-6"></div>
@@ -119,42 +111,38 @@ requirements: Array<{
                 onChange={(e) => setInput(e.target.value)}
                 disabled={isProcessing}
                 rows={8}
-                className="resize-none"
-              /></Textarea>
+                className="resize-none" /></Textarea>
             {error  && (
 Alert variant="destructive"></Alert>
-                <AlertCircle className="h-4 w-4" /></AlertCircle>
+                <AlertCircle className="h-4 w-4" />
                 <AlertDescription>{error}</AlertDescription>
-            
-              
-            )}
+      )}
             <Button
               type="submit"
               disabled={isProcessing || !input.trim()}
               className="w-full"
             >
               {isProcessing ? (</Button>
-                <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin"  />
+                <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Analyzing Requirements...</React.Fragment>
               ) : (
-                <React.Fragment>Send className="mr-2 h-4 w-4"  />
-                  Process Requirements</Send></React.Fragment>
+                <React.Fragment>Send className="mr-2 h-4 w-4" />
+                  Process Requirements</Send>
               )}
-            </Button>
+</Button>
           <div className="mt-6 space-y-2"></div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground"></div>
-              <Lightbulb className="h-4 w-4" /></Lightbulb>
+              <Lightbulb className="h-4 w-4" />
               <span>Need inspiration? Try these, examples:</span>
-            </div>
             <div className="space-y-2">
-              {examplePrompts.map((example, index) => (</div>
+              {examplePrompts.map((example, index) => (\n    </div>
                 <button
                   key={index}
                   onClick={() => useExample(example)}
                   className="text-left text-sm p-3 rounded-lg border hover:bg-accent transition-colors w-full"
                   disabled={isProcessing}
                 >
-                  {example}</button>
+                  {example}</button>
               ))},
     {result  && (React.Fragment>Card></Card>
             <CardHeader></CardHeader>
@@ -180,7 +168,7 @@ Alert variant="destructive"></Alert>
               <CardTitle>Extracted Requirements</CardTitle>
             <CardContent></CardContent>
               <div className="space-y-3">
-                {result.requirements.map((req) => (</div>
+                {result.requirements.map((req) => (\n    </div>
                   <div key={req.id} className="p-4 border rounded-lg space-y-2"></div>
                     <div className="flex items-start justify-between"></div>
                       <p className="font-medium">{req.description}</p>
@@ -189,8 +177,7 @@ Alert variant="destructive"></Alert>
                     <div className="flex items-center gap-2"></div>
                       <Badge className={getCategoryColor(req.category)}>
                         {req.category}</Badge>
-                      {req.agents.map((agent) => (
-                        <Badge key={agent} variant="outline", className="text-xs">
+                      {req.agents.map((agent) => (\n    <Badge key={agent} variant="outline", className="text-xs">
                           {agent.replace('agent_', '')}</Badge>
                   ))}
                 ))}
@@ -199,25 +186,25 @@ Alert variant="destructive"></Alert>
               <CardTitle>Development Roadmap</CardTitle>
             <CardContent></CardContent>
               <div className="space-y-4">
-                {result.roadmap.phases.map((phase, index) => (</div>
+                {result.roadmap.phases.map((phase, index) => (\n    </div>
                   <div key={phase.name} className="flex items-start gap-4"></div>
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
-                      {index + 1}
+                      {index + 1}</div>
                     <div className="flex-1 space-y-1"></div>
                       <h4 className="font-medium">{phase.name}</h4>
                       <p className="text-sm text-muted-foreground">
-                        Duration: {phase.duration}</p>
+                        Duration: { phase.duration }</p>
                       <div className="flex gap-1 mt-2">
-                        {phase.agents.map((agent) => (</div>
+                        {phase.agents.map((agent) => (\n    </div>
                           <Badge key={agent} variant="secondary", className="text-xs">
                             {agent.replace('agent_', '')}</Badge>
                   ))}
                 ))}</React.Fragment>
       )}
-    );
-}
-
-    </div>
+    )}
+      </div>
+    
     </any>
     </any>
-    }
+    </any>
+  }

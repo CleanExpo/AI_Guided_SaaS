@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 export async function GET(): Promise<NextResponse> {
   try {
     const status = {
@@ -15,15 +14,15 @@ export async function GET(): Promise<NextResponse> {
       success: true,
       data: status,
       timestamp: new Date().toISOString()
-    });
+    })
   } catch (error) {
     console.error('Env status error:', error);
     return NextResponse.json(
       { error: 'Failed to get environment status' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
@@ -34,13 +33,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       success: true,
       message: `Environment variable ${key} updated`,
       timestamp: new Date().toISOString()
-    });
+    })
   } catch (error) {
     console.error('Env update error:', error);
     return NextResponse.json(
       { error: 'Failed to update environment variable' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
+
 export const dynamic = "force-dynamic";

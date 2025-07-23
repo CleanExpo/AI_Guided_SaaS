@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,25 +7,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Code, FileCode, Settings, Terminal, GitBranch, Save, Play, Search, FolderOpen, ChevronRight, ChevronDown, File, AlertCircle, CheckCircle, X, Plus, Loader2 } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import Editor from '@monaco-editor/react';
-
 interface FileNode {
-name: string;
-  path: string;
-  type: 'file' | 'folder';
-  children?: FileNode[];
-  content?: string;
-  language?: string;
-
+name: string,
+  path: string,
+  type: 'file' | 'folder',
+  children?: FileNode[],
+  content?: string,
+  language?: string
 }
-
 interface AdvancedCodeEditorProps {
-projectId: string;
-  initialFiles?: FileNode[];
-  onSave?: (files: FileNode[]) => voi;d;
-  readOnly?: boolean;
-
+projectId: string,
+  initialFiles?: FileNode[],
+  onSave?: (files: FileNode[]) => void,
+  readOnly?: boolean
 }
-
 const defaultFiles: FileNode[] = [
   {
     name: 'src',
@@ -42,13 +36,12 @@ const defaultFiles: FileNode[] = [
             name: 'page.tsx',
             path: 'src/app/page.tsx',
             type: 'file',
-            language: 'typescript',
+            language: 'typescript'
             content: `export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Welcome to your app</h1>
-    </main>
-  );
+  )
 }`
   }
         ]
@@ -56,7 +49,7 @@ const defaultFiles: FileNode[] = [
       {
         name: 'components',
         path: 'src/components',
-        type: 'folder',
+        type: 'folder'
         children: []
       }
     ]
@@ -65,7 +58,7 @@ const defaultFiles: FileNode[] = [
     name: '.env.local',
     path: '.env.local',
     type: 'file',
-    language: 'plaintext',
+    language: 'plaintext'
     content: `# Environment Variables
 NEXT_PUBLIC_API_URL=
 DATABASE_URL=
@@ -75,7 +68,7 @@ AUTH_SECRET=`
     name: 'package.json',
     path: 'package.json',
     type: 'file',
-    language: 'json',
+    language: 'json'
     content: `{
   "name": "my-app",
   "version": "0.1.0",
@@ -84,11 +77,9 @@ AUTH_SECRET=`
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
-  }
-}`
+  }}`
   }
 ];
-
 export function AdvancedCodeEditor({
   projectId,
   initialFiles = defaultFiles,
@@ -98,156 +89,128 @@ export function AdvancedCodeEditor({
   const [files, setFiles] = useState<FileNode[]>(initialFiles);
   const [activeFile, setActiveFile] = useState<FileNode | null>(null);
   const [openFiles, setOpenFiles] = useState<FileNode[]>([]);
-  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['src']));
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['src']);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [terminalOutput, setTerminalOutput] = useState<string[]>([]);
   const [isSaving, setIsSaving] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
   const editorRef = useRef<any>(null);
-
   useEffect(() => {
     // Set first file as active
     const firstFile = findFirstFile(files);
     if (firstFile && !activeFile) {
-      setActiveFile(firstFile);
-      setOpenFiles([firstFile]);
+      setActiveFile(firstFile)
+      setOpenFiles([firstFile])
     }, [files]);
-
   const findFirstFile = (nodes: FileNode[]): FileNode | null => {
     for (const node of nodes) {
       if (node.type === 'file') return node;
       if (node.children) {
-        const file = findFirstFile(node.children);
-        if (file) return file;
-      }
-    }
-    return null;
+        const file = findFirstFile(node.children)
+        if (file) return file
+      }}
+    return null
   };
-
   const handleFileClick = (file: FileNode) => {
     if (file.type === 'file') {
-      setActiveFile(file);
+      setActiveFile(file)
       if (!openFiles.find(f => f.path === file.path)) {
-        setOpenFiles([...openFiles, file]);
-      }
-    } else {
+        setOpenFiles([...openFiles, file])
+      }} else {
       // Toggle folder
-      const newExpandedFolders = new Set(expandedFolders);
+      const newExpandedFolders = new Set(expandedFolders)
       if (newExpandedFolders.has(file.path)) {
-        newExpandedFolders.delete(file.path);
+        newExpandedFolders.delete(file.path)
       } else {
-        newExpandedFolders.add(file.path);
+        newExpandedFolders.add(file.path)
       }
-      setExpandedFolders(newExpandedFolders);
-    }
-  };
-
+      setExpandedFolders(newExpandedFolders)
+    }};
   const handleCloseFile = (file: FileNode) => {
     const newOpenFiles = openFiles.filter((f) => f.path !== file.path);
-    setOpenFiles(newOpenFiles);
+    setOpenFiles(newOpenFiles)
     if (activeFile?.path === file.path) {
-      setActiveFile(newOpenFiles[newOpenFiles.length - 1] || null);
-    }
-  };
-
+      setActiveFile(newOpenFiles[newOpenFiles.length - 1] || null)
+    }};
   const handleEditorChange = (value: string | undefined) => {
-    if (!activeFile || readOnly) return;
-    
+    if (!activeFile || readOnly) return
     // Update file content
     const updateFileContent = (nodes: FileNode[]): FileNode[] => {
       return nodes.map((node) => {
         if (node.path === activeFile.path) {
-          return { ...node, content: value || '' };
-        }
+          return { ...node, content: value || '' }}
         if (node.children) {
-          return { ...node, children: updateFileContent(node.children) };
-        }
-        return node;
-      });
+          return { ...node, children: updateFileContent(node.children) }}
+        return node
+      })
     };
-
-    setFiles(updateFileContent(files));
-    setHasChanges(true);
+    setFiles(updateFileContent(files);
+    setHasChanges(true)
   };
-
   const handleSave = async () => {
     if (readOnly || !hasChanges) return;
-    
-    setIsSaving(true);
+    setIsSaving(true)
     try {
       if (onSave) {
-        await onSave(files);
+        await onSave(files)
       }
       setHasChanges(false);
-      addTerminalOutput('Files saved successfully');
+      addTerminalOutput('Files saved successfully')
     } catch (error) {
-      addTerminalOutput('Error saving files: ' + error);
+      addTerminalOutput('Error saving files: ' + error)
     } finally {
-      setIsSaving(false);
-    }
-  };
-
+      setIsSaving(false)
+    }};
   const handleRun = () => {
     addTerminalOutput('> npm run dev');
-    addTerminalOutput('Starting development server...');
+    addTerminalOutput('Starting development server...')
     setTimeout(() => {
-      addTerminalOutput('Ready on http://localhost:3000');
-    }, 2000);
+      addTerminalOutput('Ready on http://localhost:3000')
+    }, 2000)
   };
-
   const addTerminalOutput = (line: string) => {
-    setTerminalOutput(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${line}`]);
+    setTerminalOutput(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${line}`])
   };
-
   const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
-    return nodes.map((node) => (
-      <div key={node.path}>
-        <div
-          className={cn(
+    return nodes.map((node) => (\n    <div key={node.path} className={cn(
             "flex items-center gap-2 px-2 py-1 hover:bg-gray-100 cursor-pointer text-sm",
             activeFile?.path === node.path && "bg-primary/10 text-primary"
           )}
           style={{ paddingLeft: `${level * 16 + 8}px` }}
           onClick={() => handleFileClick(node)}
         >
-          {node.type === 'folder' ? (
+          {node.type === 'folder' ? (</div>
             <>
               {expandedFolders.has(node.path) ? (
                 <ChevronDown className="h-4 w-4" />
               ) : (
                 <ChevronRight className="h-4 w-4" />
               )}
-              <FolderOpen className="h-4 w-4 text-blue-600" />
-            </>
+              <FolderOpen className="h-4 w-4 text-blue-600" / />
           ) : (
             <>
-              <div className="w-4" />
-              <FileCode className="h-4 w-4 text-gray-600" />
-            </>
+              <div className="w-4" > <FileCode className="h-4 w-4 text-gray-600" / />
           )}
           <span>{node.name}</span>
-        </div>
         {node.type === 'folder' && expandedFolders.has(node.path) && node.children && (
           <div>{renderFileTree(node.children, level + 1
-              
-            )}</div>
-        )}
+</div>
+      )}
       </div>
-    ));
+      )}
+      </div>
+    ))
   };
-
   return (
     <div className="h-full flex flex-col bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      {/* Header */}</div>
+      <div className="bg-white border-b px-4 py-2 flex items-center justify-between flex items-center gap-4"></div>
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <Code className="h-5 w-5" />
             Advanced Code Editor
-          </h2>
-          <Badge variant="outline">Project: {projectId}</Badge>
-        </div>
+</h2>
+          <Badge variant="outline">Project: { projectId }</Badge>
         <div className="flex items-center gap-2">
           <Button
             size="sm"
@@ -256,7 +219,7 @@ export function AdvancedCodeEditor({
           >
             <Play className="h-4 w-4 mr-1" />
             Run
-          </Button>
+</Button>
           <Button
             size="sm"
             variant={hasChanges ? 'default' : 'outline'}
@@ -269,14 +232,11 @@ export function AdvancedCodeEditor({
               <Save className="h-4 w-4 mr-1" />
             )}
             Save
-          </Button>
-        </div>
-
+</Button>
       <div className="flex-1 flex">
-        {/* Sidebar */}
-        <div className="w-64 bg-white border-r flex flex-col">
-          <div className="p-4 border-b">
-            <div className="relative">
+        {/* Sidebar */}</div>
+        <div className="w-64 bg-white border-r flex flex-col p-4 border-b">
+        <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
@@ -285,16 +245,14 @@ export function AdvancedCodeEditor({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
+</div>
           <div className="flex-1 overflow-y-auto">
-            {renderFileTree(files)}
-          </div>
-
+            {renderFileTree(files)}</div>
         {/* Editor Area */}
         <div className="flex-1 flex flex-col">
-          {/* Tabs */}
+          {/* Tabs */}</div>
           <div className="bg-white border-b flex items-center gap-1 px-2 py-1 overflow-x-auto">
-            {openFiles.map((file) => (
+            {openFiles.map((file) => (\n    </div>
               <div
                 key={file.path}
                 className={cn(
@@ -304,25 +262,22 @@ export function AdvancedCodeEditor({
                     : "bg-gray-100 hover:bg-gray-200"
                 )}
                 onClick={() => setActiveFile(file)}
-              >
+              ></div>
                 <FileCode className="h-3 w-3" />
                 <span>{file.name}</span>
                 <button
                   className="ml-2 hover:bg-gray-300 rounded p-0.5"
                   onClick={(e) => {
-                    e.stopPropagation();
-                    handleCloseFile(file);
+                    e.stopPropagation()
+                    handleCloseFile(file)
                   }}
-                >
+                ></button>
                   <X className="h-3 w-3" />
-                </button>
-              </div>
             ))}
-          </div>
-
+      </div>
           {/* Editor */}
           <div className="flex-1">
-            {activeFile ? (
+            {activeFile ? (</div>
               <Editor
                 height="100%"
                 language={activeFile.language || 'plaintext'}
@@ -338,22 +293,19 @@ export function AdvancedCodeEditor({
                   automaticLayout: true
                 }}
                 onMount={(editor) => {
-                  editorRef.current = editor;
+                  editorRef.current = editor
                 }}
               />
             ) : (
               <div className="h-full flex items-center justify-center text-gray-500">
-                Select a file to edit
-              </div>
-            )}
-                </div>
+                Select a file to edit</div>
+      )}
+      </div>
 {/* Terminal */}
-      <div className="h-48 bg-gray-900 text-gray-100 border-t">
-        <div className="flex items-center justify-between px-4 py-2 border-b border-gray-800">
-          <div className="flex items-center gap-2">
+      <div className="h-48 bg-gray-900 text-gray-100 border-t flex items-center justify-between px-4 py-2 border-b border-gray-800">
+        <div className="flex items-center gap-2">
             <Terminal className="h-4 w-4" />
             <span className="text-sm font-medium">Terminal</span>
-          </div>
           <Button
             size="sm"
             variant="ghost"
@@ -361,20 +313,19 @@ export function AdvancedCodeEditor({
             onClick={() => setTerminalOutput([])}
           >
             Clear
-          </Button>
-        </div>
+</Button>
         <div className="p-4 font-mono text-sm overflow-y-auto h-full">
-          {terminalOutput.map((line, index) => (
+          {terminalOutput.map((line, index) => (\n    </div>
             <div key={index} className="mb-1">
-              {line}
-            </div>
+              {line}</div>
           ))}
-              </div>
+      </div>
 );
-
-    </Editor>
-          </div>
+</Editor>
 </any>
+</FileNode>
+  
+    </div>
     </string>
-    </FileNode>
+    </main>
   }

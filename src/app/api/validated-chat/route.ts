@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 function validateOrThrow<T>(schema: z.ZodType<T>, data: unknown): T {
-  return schema.parse(data);
+  return schema.parse(data)
 }
 const chatRequestSchema = z.object({
   message: z.string().min(1, 'Message is required'),
@@ -31,19 +31,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       success: true,
     response: validatedResponse
-    });
+    })
   } catch (error) {
     console.error('Validated chat error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Validation failed', details: error.errors },
         { status: 400 }
-      );
+      )
 }
     return NextResponse.json(
       { error: 'Chat failed' },
       { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export const dynamic = "force-dynamic";

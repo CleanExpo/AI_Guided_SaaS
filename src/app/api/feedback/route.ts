@@ -21,19 +21,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       success: true,
       message: 'Feedback received successfully',
       feedback
-    }, { status: 201 });
+    }, { status: 201 })
   } catch (error) {
     console.error('Feedback error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid input', details: error.errors }, { status: 400 }
-      );
+      )
 }
     return NextResponse.json(
       { error: 'Failed to submit feedback' }, { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export async function GET(): Promise<NextResponse> {
   try {
     // Simulate getting feedback list
@@ -50,12 +50,12 @@ export async function GET(): Promise<NextResponse> {
       success: true,
       feedback: feedbackList,
       total: feedbackList.length
-    });
+    })
   } catch (error) {
     console.error('Get feedback error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch feedback' }, { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export const dynamic = "force-dynamic";

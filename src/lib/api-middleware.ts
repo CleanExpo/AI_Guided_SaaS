@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { ApiTracking } from './api-tracking';
-export type ApiHandler = (, request: NextRequest, context?) => Promise<Response> | Response
+export type ApiHandler = (, request: NextRequest, context?) => Promise<Response> | Response;
 // Middleware wrapper for API routes;
 export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
   return async (request: NextRequest, context?) => {
     const _startTime = Date.now();
     let response: Response;
-    let userId: string | undefined
+    let userId: string | undefined;
     let errorMessage: string | undefined;
     try {
       // Get user ID from session if authenticated
@@ -28,9 +28,7 @@ export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
           errorMessage = body.error || body.message || `HTTP ${response.status}`
         } catch {
           errorMessage = `HTTP ${response.status}`
-}
-}
-    } catch (error) {
+}} catch (error) {
       // Handler threw an error
       console.error('API handler, error:', error)
       errorMessage = error instanceof Error ? error.message : 'Unknown error'
@@ -49,9 +47,8 @@ export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
       // Don't fail the request if tracking fails
       console.error('API tracking, error:', trackingError)
 }
-    return response;
-}
-}
+    return response
+}}
 // Middleware for tracking specific resource usage
 export function trackResourceUsage(,
     resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use'): 'ai_generation' | 'project_creation' | 'export' | 'template_use') {
@@ -71,8 +68,7 @@ export function trackResourceUsage(,
                 case 'ai_generation':
     metadata = {
     break;
-
-    break;
+    break
 }
                     model: body.model,
     tokens: body.usage?.total_tokens,
@@ -81,8 +77,7 @@ export function trackResourceUsage(,
                   // break
                 case 'project_creation':
     metadata = { break;
-
-    break;
+    break
 }
                     projectId: body.data?.id,
     projectName: body.data?.name,
@@ -91,24 +86,22 @@ export function trackResourceUsage(,
                   // break
                 case 'export':
     metadata = { break;
-
-    break;
+    break
 }
-                    exportType: body.type,
+
+exportType: body.type,
     fileCount: body.files?.length
 }
                   // break
                 case 'template_use':
     metadata = { break;
-
-    break;
+    break
 }
                     templateId: body.templateId,
     templateName: body.templateName
 }
                   // break
-}
-            } catch {
+}} catch {
               // Ignore metadata extraction errors
 }
             await ApiTracking.trackResourceUsage(
@@ -117,18 +110,14 @@ export function trackResourceUsage(,
               1,
               // metadata
             )
-}
-        } catch (error) {
+}} catch (error) {
           console.error('Resource tracking, error:', error)
-}
-}
-      return response;
-}
-}
-}
+}}
+      return response
+}}
 // Rate limiting middleware
 export function withRateLimit(,
-    maxRequests: number = 100, windowMs: number = 60000 // 1 minute): number = 100, windowMs: number = 60000 // 1 minute) {
+    maxRequests: number = 100, windowMs: number = 60000 // 1 minute): number = 100; windowMs: number = 60000 // 1 minute) {
   const requestCounts = new Map<string, { count: number, resetTime: number }>()
   return (handler: ApiHandler): ApiHandler: (any) => {
     return async (request: NextRequest, context?) => {
@@ -158,12 +147,9 @@ export function withRateLimit(,
                   'X-RateLimit-Limit': maxRequests.toString(),
                   'X-RateLimit-Remaining': '0',
                   'X-RateLimit-Reset': new Date(userLimit.resetTime).toISOString()
-}
-}
+}}
             )
-}
-}
-      } else {
+}} else {
         requestCounts.set(identifier, {
           count: 1,
     resetTime: now + windowMs
@@ -171,7 +157,7 @@ export function withRateLimit(,
 }
       // Clean up old entries periodically
       if (Math.random() < 0.01) { // 1% chance
-        for (const [key, value] of Array.from(requestCounts.entries())) {
+        for (const [key, value] of Array.from(requestCounts.entries()) {
           if(now > value.resetTime) {
             requestCounts.delete(key)
 }
@@ -181,6 +167,5 @@ export function withRateLimit(,
       response.headers.set('X-RateLimit-Limit', maxRequests.toString())
       response.headers.set('X-RateLimit-Remaining', (maxRequests - limit.count).toString())
       response.headers.set('X-RateLimit-Reset', new Date(limit.resetTime).toISOString())
-      return response;
-}
-}
+      return response
+}}

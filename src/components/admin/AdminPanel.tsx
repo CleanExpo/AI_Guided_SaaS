@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -9,7 +8,6 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Shield, Activity, BarChart3, AlertTriangle, CheckCircle, Search, Eye, Edit, UserCheck, UserX, Flag, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { adminService, SystemStats, UserManagement, ContentModeration, SystemConfiguration, AdminActivity } from '@/lib/admin';
-
 export default function AdminPanel() {
   const [adminUser, setAdminUser] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('overview');
@@ -22,28 +20,24 @@ export default function AdminPanel() {
   const [searchTerm, setSearchTerm] = useState('');
   const [userFilter, setUserFilter] = useState('all');
   const [contentFilter, setContentFilter] = useState('all');
-
   useEffect(() => {
     // Load admin user from localStorage
-    const adminUserData = localStorage.getItem('admin-user');
+    const adminUserData = localStorage.getItem('admin-user')
     if (adminUserData) {
       try {
-        setAdminUser(JSON.parse(adminUserData));
+        setAdminUser(JSON.parse(adminUserData))
       } catch (error) {
-        console.error('Error parsing admin user:', error);
-      }
-    }, []);
-
+        console.error('Error parsing admin user:', error)
+      }}, []);
   useEffect(() => {
-    loadAdminData();
+    loadAdminData()
   }, []);
-
   const loadAdminData = async () => {
     setLoading(true);
     try {
       await adminService.initialize();
       // Load all admin data
-      const [statsData, usersData, contentData, configData, activityData] = 
+      const [statsData, usersData, contentData, configData, activityData] = ;
         await Promise.all([
           adminService.getSystemStats(),
           adminService.getUsers(1, 50),
@@ -51,21 +45,18 @@ export default function AdminPanel() {
           adminService.getSystemConfiguration(),
           adminService.getAdminActivity(1, 50)
         ]);
-      
       setSystemStats(statsData);
       setUsers(usersData.users);
       setContent(contentData.content);
-      setConfiguration(configData);
-      setActivities(activityData.activities);
+      setConfiguration(configData)
+      setActivities(activityData.activities)
     } catch (error) {
-      console.error('Error loading admin data:', error);
+      console.error('Error loading admin data:', error)
     } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleUserStatusUpdate = async (
-    userId: string, 
+      setLoading(false)
+    }};
+  const handleUserStatusUpdate = async (;
+    userId: string,
     status: 'active' | 'suspended' | 'deleted'
   ) => {
     try {
@@ -74,14 +65,12 @@ export default function AdminPanel() {
         status,
         adminUser?.email || 'admin'
       );
-      await loadAdminData(); // Refresh data
+      await loadAdminData() // Refresh data
     } catch (error) {
-      console.error('Error updating user status:', error);
-    }
-  };
-
-  const handleContentModeration = async (
-    contentId: string, 
+      console.error('Error updating user status:', error)
+    }};
+  const handleContentModeration = async (;
+    contentId: string,
     action: 'approve' | 'reject' | 'flag'
   ) => {
     try {
@@ -90,12 +79,10 @@ export default function AdminPanel() {
         action,
         adminUser?.email || 'admin'
       );
-      await loadAdminData(); // Refresh data
+      await loadAdminData() // Refresh data
     } catch (error) {
-      console.error('Error moderating content:', error);
-    }
-  };
-
+      console.error('Error moderating content:', error)
+    }};
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
@@ -111,73 +98,58 @@ export default function AdminPanel() {
       case 'critical':
         return 'bg-red-100 text-red-800';
       case 'pending':
-        return 'bg-blue-100 text-blue-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
+        return 'bg-blue-100 text-blue-800'
+      default: return 'bg-gray-100 text-gray-800'
+    }};
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
-      style: 'currency',
+      style: 'currency'
       currency: 'USD'
-    }).format(amount);
+    }).format(amount)
   };
-
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
-      hour: '2-digit',
+      hour: '2-digit'
       minute: '2-digit'
-    }).format(new Date(date));
+    }).format(new Date(date))
   };
-
   const filteredUsers = users.filter((user) => {
-    const matchesSearch = 
+    const matchesSearch = ;
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = userFilter === 'all' || user.status === userFilter;
-    return matchesSearch && matchesFilter;
+      user.email.toLowerCase().includes(searchTerm.toLowerCase();
+    const matchesFilter = userFilter === 'all' || user.status === userFilter
+    return matchesSearch && matchesFilter
   });
-
   const filteredContent = content.filter((item) => {
-    const matchesSearch = 
+    const matchesSearch = ;
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.author.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = 
-      contentFilter === 'all' || item.status === contentFilter;
-    return matchesSearch && matchesFilter;
+      item.author.toLowerCase().includes(searchTerm.toLowerCase();
+    const matchesFilter = ;
+      contentFilter === 'all' || item.status === contentFilter
+    return matchesSearch && matchesFilter
   });
-
   if (loading) {
     return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading admin panel...</p>
-              </div>
-
-            );
-
-          }
+    <div className="flex items-center justify-center min-h-screen text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="Loading admin panel..."></p>
+        </div>
+    );
+}
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
+      {/* Header */}</div>
+      <div className="bg-white border-b max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 flex items-center space-x-4"></div>
               <Shield className="h-6 w-6 text-blue-600" />
               <h1 className="text-xl font-semibold">Admin Panel</h1>
               <Badge variant="outline">System Management</Badge>
-            </div>
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
-                Welcome, {adminUser?.name || 'Admin'}
-              </span>
-                  </div>
+                Welcome, {adminUser?.name || 'Admin'}</span>
 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-5">
@@ -186,8 +158,6 @@ export default function AdminPanel() {
             <TabsTrigger value="content">Content</TabsTrigger>
             <TabsTrigger value="system">System</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
-          </TabsList>
-
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             {systemStats && (
@@ -204,103 +174,80 @@ export default function AdminPanel() {
                 >
                   <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
-                    System Status: {' '}
+                    System Status: { ' ' }
                     <strong>{systemStats.systemHealth.toUpperCase(
-              
             )}</strong>
                     {systemStats.systemHealth !== 'healthy' &&
                       ' - Attention required'}
-                  </AlertDescription>
-                </Alert>
-
+</AlertDescription>
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Users
-                      </CardTitle>
+                        Total Users</Card>
                       <Users className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
+</CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.totalUsers.toLocaleString()}
-                      </div>
+                        {systemStats.totalUsers.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.activeUsers} active users
-                      </p>
-                    </CardContent>
-                  </Card>
-
+</p>
+</Card>
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Projects
-                      </CardTitle>
+                        Total Projects</Card>
                       <BarChart3 className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
+</CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.totalProjects.toLocaleString()}
-                      </div>
+                        {systemStats.totalProjects.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.totalTemplates} templates available
-                      </p>
-                    </CardContent>
-                  </Card>
-
+</p>
+</Card>
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Revenue
-                      </CardTitle>
+                        Total Revenue</Card>
                       <Activity className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
+</CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {formatCurrency(systemStats.totalRevenue)}
-                      </div>
+                        {formatCurrency(systemStats.totalRevenue)}</div>
                       <p className="text-xs text-muted-foreground">
                         Monthly recurring revenue
-                      </p>
-                    </CardContent>
-                  </Card>
-
+</p>
+</Card>
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        System Uptime
-                      </CardTitle>
+                        System Uptime</Card>
                       <CheckCircle className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
+</CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {systemStats.uptime}%
-                      </div>
+                        {systemStats.uptime}%</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.errorRate}% error rate
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </>
+</p>
+</Card>
             )}
-          </TabsContent>
-
+</TabsContent>
           {/* Users Tab */}
           <TabsContent value="users" className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">User Management</h2>
-              <div className="flex items-center space-x-2">
-                <div className="relative">
+              <div className="flex items-center space-x-2 relative"></div>
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     placeholder="Search users..."
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
-                    className="pl-10 w-64"
-                  />
-                </div>
+                    className="pl-10 w-64" />
+</div>
                 <select
                   value={userFilter}
                   onChange={e => setUserFilter(e.target.value)}
@@ -310,9 +257,7 @@ export default function AdminPanel() {
                   <option value="active">Active</option>
                   <option value="suspended">Suspended</option>
                   <option value="deleted">Deleted</option>
-                </select>
-              </div>
-
+</div>
             <Card>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
@@ -321,45 +266,37 @@ export default function AdminPanel() {
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           User
-                        </th>
+</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Email
-                        </th>
+</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Status
-                        </th>
+</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Joined
-                        </th>
+</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Actions
-                        </th>
-                      </tr>
-                    </thead>
+</th>
+</thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {filteredUsers.map((user) => (
-                        <tr key={user.id}>
+                      {filteredUsers.map((user) => (\n    <tr key={user.id}>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex items-center">
-                              <div className="ml-4">
-                                <div className="text-sm font-medium text-gray-900">
-                                  {user.name}
-                                </div>
+                            <div className="flex items-center ml-4">
+        <div className="text-sm font-medium text-gray-900">
+                                  {user.name}</div>
                                 <div className="text-sm text-gray-500">
-                                  ID: {user.id}
-                                      </div>
-</td>
+                                  ID: { user.id }</div>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="text-sm text-gray-900">{user.email}</div>
-                          </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge className={getStatusColor(user.status)}>
                               {user.status}
-                            </Badge>
-                          </td>
+</Badge>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {formatDate(user.createdAt)}
-                          </td>
+</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div className="flex space-x-2">
                               <Button
@@ -368,14 +305,14 @@ export default function AdminPanel() {
                                 onClick={() => {/* View user details */}}
                               >
                                 <Eye className="h-4 w-4" />
-                              </Button>
+</Button>
                               <Button
                                 size="sm"
                                 variant="ghost"
                                 onClick={() => {/* Edit user */}}
                               >
                                 <Edit className="h-4 w-4" />
-                              </Button>
+</Button>
                               {user.status === 'active' ? (
                                 <Button
                                   size="sm"
@@ -383,7 +320,7 @@ export default function AdminPanel() {
                                   onClick={() => handleUserStatusUpdate(user.id, 'suspended')}
                                 >
                                   <UserX className="h-4 w-4 text-yellow-600" />
-                                </Button>
+</Button>
                               ) : (
                                 <Button
                                   size="sm"
@@ -391,19 +328,15 @@ export default function AdminPanel() {
                                   onClick={() => handleUserStatusUpdate(user.id, 'active')}
                                 >
                                   <UserCheck className="h-4 w-4 text-green-600" />
-                                </Button>
-                              )}
-                            </div>
-                          </td>
-                        </tr>
+</Button>
+      )}
+      </div>
+</tr>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
+</tbody>
+</div>
+</CardContent>
+              </Card>
           {/* Content Tab */}
           <TabsContent value="content" className="space-y-6">
             <div className="flex items-center justify-between">
@@ -418,23 +351,19 @@ export default function AdminPanel() {
                 <option value="approved">Approved</option>
                 <option value="rejected">Rejected</option>
                 <option value="flagged">Flagged</option>
-              </select>
-            </div>
-
+</div>
             <div className="grid gap-4">
-              {filteredContent.map((item) => (
+              {filteredContent.map((item) => (\n    </div>
                 <Card key={item.id}>
                   <CardContent className="p-6">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2">
+                    <div className="flex items-start justify-between space-y-2"></div>
                         <h3 className="text-lg font-medium">{item.title}</h3>
                         <p className="text-sm text-gray-600">
                           By {item.author} • {formatDate(item.createdAt)}
-                        </p>
+</p>
                         <Badge className={getStatusColor(item.status)}>
                           {item.status}
-                        </Badge>
-                      </div>
+</Badge>
                       <div className="flex space-x-2">
                         <Button
                           size="sm"
@@ -443,7 +372,7 @@ export default function AdminPanel() {
                         >
                           <ThumbsUp className="h-4 w-4 mr-1" />
                           Approve
-                        </Button>
+</Button>
                         <Button
                           size="sm"
                           variant="outline"
@@ -451,7 +380,7 @@ export default function AdminPanel() {
                         >
                           <ThumbsDown className="h-4 w-4 mr-1" />
                           Reject
-                        </Button>
+</Button>
                         <Button
                           size="sm"
                           variant="outline"
@@ -459,38 +388,29 @@ export default function AdminPanel() {
                         >
                           <Flag className="h-4 w-4 mr-1" />
                           Flag
-                        </Button>
-                      </div>
-                  </CardContent>
-                </Card>
+</Button>
+</CardContent>
               ))}
-            </div>
-          </TabsContent>
-
+      </div>
           {/* System Tab */}
           <TabsContent value="system" className="space-y-6">
             <h2 className="text-2xl font-bold">System Configuration</h2>
             <div className="grid gap-4">
-              {configuration.map((config) => (
+              {configuration.map((config) => (\n    </div>
                 <Card key={config.key}>
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
+                    <div className="flex items-center justify-between" >
+              </div>
                         <h3 className="text-lg font-medium">{config.key}</h3>
                         <p className="text-sm text-gray-600">{config.description}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-lg font-mono">{config.value}</p>
+                      <div className="">
+        <p className="text-lg font-mono">{config.value}</p>
                         <p className="text-xs text-gray-500">
-                          Last updated: {formatDate(config.lastUpdated)}
-                        </p>
-                      </div>
-                  </CardContent>
-                </Card>
+                          Last updated: { formatDate(config.lastUpdated) }
+</p>
+</CardContent>
               ))}
-            </div>
-          </TabsContent>
-
+      </div>
           {/* Activity Tab */}
           <TabsContent value="activity" className="space-y-6">
             <h2 className="text-2xl font-bold">Admin Activity Log</h2>
@@ -502,45 +422,70 @@ export default function AdminPanel() {
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Timestamp
-                        </th>
+</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Admin
-                        </th>
+</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Action
-                        </th>
+</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Details
-                        </th>
-                      </tr>
-                    </thead>
+</th>
+</thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {activities.map((activity) => (
-                        <tr key={activity.id}>
+                      {activities.map((activity) => (\n    <tr key={activity.id}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {formatDate(activity.timestamp)}
-                          </td>
+</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             {activity.adminName}
-                          </td>
+</td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge variant="outline">{activity.action}</Badge>
-                          </td>
                           <td className="px-6 py-4 text-sm text-gray-500">
                             {activity.details}
-                          </td>
-                        </tr>
+</td>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
-  );
-
-          </div>
-</SystemStats>
-    }
+</tbody>
+</div>
+</Card>
+</Tabs>
+  
+</div>
+    
+    </td>
+    </tr>
+    </tr>
+    </table>
+    </CardContent>
+    </TabsContent>
+    </Card>
+    </TabsContent>
+    </Card>
+    </select>
+    </TabsContent>
+    </td>
+    </td>
+    </td>
+    </td>
+    </tr>
+    </table>
+    </select>
+    </TabsContent>
+    </CardContent>
+    </CardTitle>
+    </CardContent>
+    </CardTitle>
+    </CardContent>
+    </CardTitle>
+    </CardContent>
+    </CardTitle>
+    </Alert>
+    </TabsList>
+    </div>
+    </div>
+    </div>
+    </SystemStats>
+    </any>
+  }

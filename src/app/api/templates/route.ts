@@ -1,6 +1,5 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
@@ -36,7 +35,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         template.name.toLowerCase().includes(query.toLowerCase()) ||
         template.description.toLowerCase().includes(query.toLowerCase())
       );
-    } else {
+} else {
       // Get all templates,
       templates = [
       {
@@ -75,35 +74,26 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       ];
       // Apply filters
       if (category) {
-        templates = templates.filter(t => t.category === category);
+        templates = templates.filter(t => t.category === category)
 }
       if (framework) {
-        templates = templates.filter(t => t.framework === framework);
+        templates = templates.filter(t => t.framework === framework)
 }
       if (pricing) {
-        templates = templates.filter(t => t.pricing === pricing);
+        templates = templates.filter(t => t.pricing === pricing)
 }
       if (difficulty) {
-        templates = templates.filter(t => t.difficulty === difficulty);
-}
-}
+        templates = templates.filter(t => t.difficulty === difficulty)
+}}
     return NextResponse.json({
       success: true,
       templates,
       total: templates.length,
-    filters: {
-        query,
-        category,
-        framework,
-        pricing,
-        difficulty
-      }
-    });
+    filters: { query, category, framework, pricing, difficulty }})
   } catch (error) {
     console.error('Templates API error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch templates' },
       { status: 500 }
-    );
-}
-}
+    )
+}}

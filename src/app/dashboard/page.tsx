@@ -1,12 +1,12 @@
 'use client';
-
 import React from 'react';
-
 import { lazy, Suspense } from 'react';
 import { SessionGuard } from '@/components/ClientOnlyAuth';
+
 // CRITICAL: Dynamic import to prevent SSR issues
-const Dashboard = lazy(() => import('@/components/Dashboard')),
-    propsexport default function DashboardPage(): void {
+const Dashboard = lazy(() => import('@/components/Dashboard'));
+
+export default function DashboardPage() {
   return (
     <SessionGuard>
       <Suspense fallback={
@@ -21,5 +21,6 @@ const Dashboard = lazy(() => import('@/components/Dashboard')),
     </SessionGuard>
   );
 }
+
 // Force dynamic rendering
-export const _dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';

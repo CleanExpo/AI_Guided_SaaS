@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-
 export const dynamic = 'force-dynamic';
-
 export async function GET(): Promise<NextResponse> {
     try {
         // CRITICAL: Mock response for build-time to prevent SSR errors
@@ -10,9 +8,8 @@ export async function GET(): Promise<NextResponse> {
                 status: 'building',
                 message: 'System initializing...',
                 timestamp: new Date().toISOString()
-            });
+            })
         }
-        
         // Simplified pulse status for production
         const status = {
             status: 'operational',
@@ -25,7 +22,7 @@ export async function GET(): Promise<NextResponse> {
             }
         };
         return NextResponse.json(status);
-    } catch (error) {
+} catch (error) {
         console.error('Pulse status error:', error);
         return NextResponse.json(
             {
@@ -34,5 +31,5 @@ export async function GET(): Promise<NextResponse> {
                 timestamp: new Date().toISOString()
             }, { status: 500 }
         );
-    }
+}
 }

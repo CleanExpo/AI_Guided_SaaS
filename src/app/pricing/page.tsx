@@ -21,7 +21,7 @@ const plans = [
       '1GB storage',
       'Standard templates'
    ],
-    popular: false,
+    popular: false
     cta: 'Get Started Free'
   },
   {
@@ -38,7 +38,7 @@ const plans = [
       'Custom integrations',
       'Team collaboration'
    ],
-    popular: true,
+    popular: true
     cta: 'Start Free Trial'
   },
   {
@@ -56,7 +56,7 @@ const plans = [
       'Advanced analytics',
       'SLA guarantee'
    ],
-    popular: false,
+    popular: false
     cta: 'Contact Sales'
 }
 ];
@@ -69,85 +69,77 @@ const features = [
   'Performance monitoring'
 ];
 export default function PricingPage() {
-  return (<div className="min-h-screen bg-gray-50 py-12">;
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-12">
+  return (<div className="min-h-screen bg-gray-50 py-12">
+        <div className="container mx-auto px-4 max-w-6xl text-center mb-12"></div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h1>
           <p className="text-xl text-gray-600">
             Choose the perfect plan for your development needs. Upgrade or downgrade at any time.
-          </p>
-        </div>
+</p>
         {/* Pricing Plans */}
         <div className="grid gap-8 lg:grid-cols-3 mb-12">
-          {plans.map((plan) => (
+          {plans.map((plan) => (\n    </div>
             <Card key={plan.name} className={`relative ${plan.popular ? 'border-blue-500 shadow-lg' : ''}`}>
               {plan.popular  && (
-div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+div className="absolute -top-3 left-1/2 transform -translate-x-1/2"></Card>
                   <Badge className="bg-blue-500">Most Popular</Badge>
-                </div>
-              
-              
-            )}
+      )}
               <CardHeader className="text-center pb-2">
                 <CardTitle className="text-2xl">{plan.name}</CardTitle>
                 <div className="mt-4">
                   <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
                   <span className="text-gray-600 ml-2">/{plan.period}</span>
-                </div>
                 <p className="text-gray-600 mt-2">{plan.description}</p>
-              </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center">
+                  {plan.features.map((feature) => (\n    <li key={feature} className="flex items-center">
                       <Check className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
                       <span className="text-gray-600">{feature}</span>
-                    </li>
                   ))}
-                </ul>
+</ul>
                 <Button className={`w-full ${plan.popular ? '' : 'variant-outline'}`}>
                   {plan.cta}
-                </Button>
-              </CardContent>
-            </Card>
+</Button>
+</Card>
           ))}
-        </div>
+      </div>
         {/* All, Plans Include */}
         <Card className="mb-12"><CardHeader>
             <CardTitle className="text-center text-2xl">All Plans Include</CardTitle>
-          </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature) => (
+              {features.map((feature) => (\n    </div>
                 <div key={feature} className="flex items-center">
                   <Check className="h-4 w-4 text-green-500 mr-3" />
                   <span className="text-gray-600">{feature}</span>
-                </div>
               ))}
-            </div>
-          </CardContent>
-        </Card>
+      </div>
+</CardContent>
+              </Card>
         {/* FAQ */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          <div className="grid gap-6 md:grid-cols-2 text-left">
-            <div>
+          <div className="grid gap-6 md:grid-cols-2 text-left" >
+              </div>
               <h3 className="font-semibold text-gray-900 mb-2">Can I change plans anytime?</h3>
               <p className="text-gray-600">Yes, you can upgrade or downgrade your plan at any time.</p>
-            </div>
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">Is there a free trial?</h3>
               <p className="text-gray-600">Yes, all paid plans come with a 14-day free trial.</p>
-            </div>
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">What payment methods do you accept?</h3>
               <p className="text-gray-600">We accept all major credit cards and PayPal.</p>
-            </div>
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">Do you offer discounts?</h3>
-              <p className="text-gray-600">Yes, we offer discounts for annual plans and educational institutions.</p>
-                  </div>
-);
-
+          <p className="Yes, we offer discounts for annual plans and educational institutions."></p>
+        </div>
+    );;
+</div>
+  
+    </div>
+    </div>
+    </CardHeader>
+    </li>
+    </CardContent>
+    </CardHeader>
     </div>
   }

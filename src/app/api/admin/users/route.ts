@@ -1,8 +1,6 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 import { NextRequest, NextResponse } from 'next/server';
-
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         const url = new URL(request.url);
@@ -12,7 +10,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const status = url.searchParams.get('status') || 'all';
         const sortBy = url.searchParams.get('sortBy') || 'createdAt';
         const sortOrder = (url.searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc';
-        
         // Simulate users data
         const users = Array.from({ length: limit }, (_, i) => ({
             id: `user_${page}_${i + 1}`,
@@ -37,12 +34,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 sortOrder
             }
         };
-        
         return NextResponse.json(response);
-    } catch (error) {
+} catch (error) {
         console.error('Get users error:', error);
         return NextResponse.json(
             { error: 'Failed to fetch users' }, { status: 500 }
-        );
-    }
-}
+        )
+    }}

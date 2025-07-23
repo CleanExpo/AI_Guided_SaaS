@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,12 +13,14 @@ import ReactMarkdown from 'react-markdown';
 import { Prism, as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 interface DocumentationViewerProps {
-documentationSystem: DynamicDocumentationSyste;m;
-    tutorialSystem: InteractiveTutorialSyste;m;
-    userId: string;
-  initialSectionId?: string;
-
+documentationSystem: DynamicDocumentationSyste
+m,
+  tutorialSystem: InteractiveTutorialSyste
+m,
+  userId: string,
+  initialSectionId?: string
 }
+
 export function DocumentationViewer({
   documentationSystem, tutorialSystem, userId, initialSectionId
 }: DocumentationViewerProps), tutorialSystem, userId, initialSectionId
@@ -34,16 +35,14 @@ export function DocumentationViewer({
   useEffect(() => {
     // Load initial section or first available
     if (initialSectionId) {
-      const section = documentationSystem.getSection(initialSectionId);
+      const section = documentationSystem.getSection(initialSectionId)
       if (section) {
         setSelectedSection(section)
-}
-    } else {
-      const sections = documentationSystem.getAllSections();
+}} else {
+      const sections = documentationSystem.getAllSections()
       if(sections.length > 0) {
         setSelectedSection(sections[0])
-}
-}
+}}
     // Load user progress
     const _progress = documentationSystem.getUserProgress(userId);
     setUserProgress(progress)
@@ -67,8 +66,7 @@ export function DocumentationViewer({
 }
   const _handleSectionComplete = (): void => { if (selectedSection) {
       documentationSystem.trackUserProgress(userId, selectedSection.id, true)
-      setUserProgress(documentationSystem.getUserProgress(userId)); }
-}
+      setUserProgress(documentationSystem.getUserProgress(userId)) }}
   const _startRelatedTutorial = async (tutorialId: string) => {
     try {
       await tutorialSystem.startTutorial(tutorialId, userId)
@@ -76,8 +74,7 @@ export function DocumentationViewer({
       window.location.href = `/tutorials/${tutorialId}`
   } catch (error) {
       console.error('Failed to start, tutorial:', error)
-}
-}
+}}
   const categories = [
   { id: 'getting-started', label: 'Getting Started', icon: BookOpen },
     { id: 'reference', label: 'Reference', icon: Book },
@@ -89,34 +86,27 @@ export function DocumentationViewer({
       case 'beginner':
     return 'text-green-600 bg-green-100';
     break;
-
-    break;
-break;
-
-
       case 'intermediate':
     return 'text-yellow-600 bg-yellow-100';
     break;
-
       case 'advanced':
 return 'text-red-600 bg-red-100';
-    break;
-break;
+    break
+break
 }
-      default: return 'text-gray-600 bg-gray-100'}
-}
+      default: return 'text-gray-600 bg-gray-100'}}
   const _isCompleted = (sectionId: string) => {
-    return userProgress?.sectionsCompleted?.includes(sectionId);
+    return userProgress?.sectionsCompleted?.includes(sectionId)
 }
   return (
     <div className="flex h-full">
-      {/* Sidebar */}
-      <div className={`cn(``
+      {/* Sidebar */}</div>
+      <div className={cn(`
         "border-r transition-all duration-300 flex flex-col" sidebarCollapsed ? "w-16" : "w-80"
       )`}>``
-        {/* Search */}
+        {/* Search */}</div>
         <div className="p-4 border-b">
-          {!sidebarCollapsed  && (div className="relative">
+          {!sidebarCollapsed  && (div className="relative"></div>
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
               <input
                 type="text"
@@ -124,10 +114,9 @@ break;
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
-              />
-            </div>
-          )}
+                className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20" />
+</div>
+      )}
           <Button
             variant="ghost"
             size="sm"
@@ -135,180 +124,150 @@ break;
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
           >
             {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-          </Button>
-        </div>
+</Button>
         {/* Navigation */}
         <ScrollArea className="flex-1">
           <div className="p-4 space-y-6">
-            {isSearching ? (
-              <div className="text-center py-8">
-                <div className="inline-flex items-center text-sm text-muted-foreground">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary mr-2" />
-                  Searching...
-                </div>
+            {isSearching ? (</div>
+              <div className="text-center py-8 inline-flex items-center text-sm text-muted-foreground">
+        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary mr-2" >Searching...</div>
             ) : searchResults.length > 0 ? (
               <div>
-                {!sidebarCollapsed  && (
+                {!sidebarCollapsed  && (</div>
 h3 className="text-sm font-semibold mb-2">Search Results</h3>
-                
-              
-            )}
+      )}
                 <div className="space-y-1">
-                  {searchResults.map((section) => (<button
+                  {searchResults.map((section) => (\n    <button
                       key={section.id}
                       onClick={() => {
                         setSelectedSection(section)
                         setSearchResults([])
                         setSearchQuery('')
                      }}
-                      className={`cn(``
+                      className={cn(`
                         "w-full text-left p-2 rounded-md text-sm, hover:bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted"
                       )}
                     >
-                      {sidebarCollapsed ? (
+                      {sidebarCollapsed ? (</button>
                         <div className="flex justify-center">
-                          {isCompleted(section.id) ? (
+                          {isCompleted(section.id) ? (</div>
                             <CheckCircle className="h-4 w-4 text-green-600" />
                           ) : (
                             <Circle className="h-4 w-4 text-muted-foreground" />
                           )}
-                        </div>
+      </div>
                       ) : (
                         <div className="flex items-center gap-2">
-                          {isCompleted(section.id) ? (
+                          {isCompleted(section.id) ? (</div>
                             <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
                           ) : (
                             <Circle className="h-4 w-4 text-muted-foreground shrink-0" />
                           )}
                           <span className="truncate">{section.title}</span>
-                        </div>
-                      )}
-                    </button>
+      )}
+</button>
                   ))}
-                </div>
+      </div>
             ) : (categories.map((category) => {
                 const sections = documentationSystem.getSectionsByCategory(category.id);
-                if (sections.length === 0) return null;
+                if (sections.length === 0) return null
                 return (
     <div
                 key={category.id}>
                     {!sidebarCollapsed  && (
-div className="flex items-center gap-2 mb-2">
-                        <category.icon className="h-4 w-4 text-muted-foreground"    />
+div className="flex items-center gap-2 mb-2"></div>
+                        <category.icon className="h-4 w-4 text-muted-foreground" />
                         <h3 className="text-sm font-semibold">{category.label}</h3>
-                      </div>
-                    
-              
-            )}
+      )}
                     <div className="space-y-1">
-                      {sections.map((section) => (<button
+                      {sections.map((section) => (\n    <button
                           key={section.id}
                           onClick={() => setSelectedSection(section)}
-                          className={`cn(``
+                          className={cn(`
                             "w-full text-left p-2 rounded-md text-sm, hover:bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted"
                           )}
                         >
-                          {sidebarCollapsed ? (
+                          {sidebarCollapsed ? (</button>
                             <div className="flex justify-center">
-                              {isCompleted(section.id) ? (
+                              {isCompleted(section.id) ? (</div>
                                 <CheckCircle className="h-4 w-4 text-green-600" />
                               ) : (
                                 <Circle className="h-4 w-4 text-muted-foreground" />
                               )}
-                            </div>
+      </div>
                           ) : (
                             <div className="flex items-center gap-2">
-                              {isCompleted(section.id) ? (
+                              {isCompleted(section.id) ? (</div>
                                 <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
                               ) : (
                                 <Circle className="h-4 w-4 text-muted-foreground shrink-0" />
                               )}
                               <span className="truncate">{section.title}</span>
-                            </div>
-                          )}
-                        </button>
+      )}
+</button>
                       ))}
-                    </div>
-                ) 
-}
+      </div>
+      )}
             )}
-          </div>
-        </ScrollArea>
+      </div>
         {/* Progress */},
     {!sidebarCollapsed && userProgress  && (div className="p-4 border-t">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
+            <div className="space-y-2 flex items-center justify-between text-sm"></div>
                 <span className="text-muted-foreground">Progress</span>
                 <span className="font-medium">
-                  {userProgress.sectionsCompleted?.length || 0} / {documentationSystem.getAllSections().length}
-                </span>
-              </div>
-              <div className="w-full bg-muted rounded-full h-2">
-                <div
-                  className="bg-primary rounded-full h-2 transition-all duration-300"
+                  {userProgress.sectionsCompleted?.length || 0} / {documentationSystem.getAllSections().length}</span>
+              <div className="w-full bg-muted rounded-full h-2 bg-primary rounded-full h-2 transition-all duration-300"
                   style={{
                     width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%`
-  }} />
-              </div>
+  }} /></div>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Star className="h-3 w-3" />
                 <span>{userProgress.totalPoints || 0} points</span>
-                    </div>
-)}
+      )}
       </div>
       {/* Content */}
       <div className="flex-1 overflow-hidden">
-        {selectedSection ? (
+        {selectedSection ? (</div>
           <div className="h-full flex flex-col">
-            {/* Header */}
-            <div className="p-6 border-b">
-              <div className="flex items-start justify-between">
+            {/* Header */}</div>
+            <div className="p-6 border-b flex items-start justify-between"></div>
                 <div>
                   <h1 className="text-2xl font-bold mb-2">{selectedSection.title}</h1>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)}>
                       {selectedSection.metadata.difficulty}
-                    </Badge>
+</Badge>
                     <div className="flex items-center gap-1">
                       <Clock className="h-4 w-4" />
                       <span>{selectedSection.metadata.estimatedTime}</span>
-                    </div>
                     <div className="flex items-center gap-1">
                       <Hash className="h-4 w-4" />
                       <span>{selectedSection.metadata.tags.join(', ')},
     {!isCompleted(selectedSection.id)  && (
-Button onClick={handleSectionComplete}>
+Button onClick={handleSectionComplete}></span>
                     Mark as Complete</Button>
-                
-              
-            )}
-              </div>
+      )}
+      </div>
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
               <TabsList className="px-6">
                 <TabsTrigger value="content">Content {selectedSection.codeExamples.length > 0  && (
 TabsTrigger value="examples">Code Examples</TabsTrigger>
-                
-              
             )},
     {selectedSection.interactiveElements.length > 0  && (
 TabsTrigger value="interactive">Interactive</TabsTrigger>
-                
-              
             )},
     {selectedSection.systemState  && (
 TabsTrigger value="system">System State</TabsTrigger>
-                
-              
-            )}
-              </TabsList>
+      )}
+</TabsList>
               <ScrollArea className="flex-1">
                 <TabsContent value="content", className="p-6 prose prose-sm max-w-none">
                   <ReactMarkdown
-                    components= { {
+                    components= {{
                       code({ node, className, children, ...props   }) {
                         const match = /language-(\w+)/.exec(className || '');
-                        const _inline = node?.properties?.inline;
+                        const _inline = node?.properties?.inline
                         return !inline && match ? (
                           <SyntaxHighlighter
                             style={vscDarkPlus}
@@ -317,38 +276,36 @@ TabsTrigger value="system">System State</TabsTrigger>
     {...props}
                           >
                             {String(children).replace(/\n$/, '')}
-                          </SyntaxHighlighter>
+</SyntaxHighlighter>
                         ) : (
                           <code className={className} {...props}>
                             {children}
-                          </code>
+</code>
                         )
-}
-                    }}
+}}
                   >
                     {selectedSection.content}
-                  </ReactMarkdown>
+</ReactMarkdown>
                   {/* Related, sections */},
     {selectedSection.relatedSections.length > 0  && (div className="mt-8 p-4 bg-muted rounded-lg">
                       <h3 className="text-sm font-semibold mb-2">Related Topics</h3>
                       <div className="space-y-1">
                         {selectedSection.relatedSections.map((relatedId) => {
-                          const related = documentationSystem.getSection(relatedId);
-                          return related ? (<button;
+                          const related = documentationSystem.getSection(relatedId);</div>
+                          return related ? (<button
                               key={relatedId}
                               onClick={() => setSelectedSection(related)}
                               className="text-sm text-primary hover:underline"
                             >
-                              {related.title}
-                            </button>
+                              {related.title}</button>
                           ) : null
                         })}
-                      </div>
-                  )}
-                </TabsContent>
+      </div>
+      )}
+</TabsContent>
                 <TabsContent value="examples", className="p-6">
                   <div className="space-y-6">
-                    {selectedSection.codeExamples.map((example) => (
+                    {selectedSection.codeExamples.map((example) => (\n    </div>
                       <Card key={example.id} className="p-4">
                         <h3 className="font-semibold mb-2">{example.title}</h3>
                         <SyntaxHighlighter
@@ -357,124 +314,115 @@ TabsTrigger value="system">System State</TabsTrigger>
                           PreTag="div"
                         >
                           {example.code}
-                        </SyntaxHighlighter>
+</SyntaxHighlighter>
                         {example.runnable  && (
 Button size="sm", className="mt-2">
                             <Play className="h-4 w-4 mr-2" />
                             Run Example
-                          </Button>
-                        
-              
-            )}
-                      </Card>
+</Button>
+      )}
+</Card>
                     ))}
-                  </div>
-                </TabsContent>
+      </div>
                 <TabsContent value="interactive", className="p-6">
                   <div className="space-y-4">
-                    {selectedSection.interactiveElements.map((element) => (<Card key={element.id} className="p-4">
+                    {selectedSection.interactiveElements.map((element) => (\n    <Card key={element.id} className="p-4">
                         <div className="flex items-center justify-between mb-2">
                           <h3 className="font-semibold">{element.title}</h3>
                           <Badge variant="outline">{element.type}</Badge>
-                        </div>
                         <p className="text-sm text-muted-foreground mb-4">
                           {element.description}
-                        </p>
+</p>
                         {element.type === 'tutorial'  && (Button
                             onClick={() => startRelatedTutorial(element.config.tutorialId)}
                           >
                             <Play className="h-4 w-4 mr-2" />
                             Start Tutorial
-                          </Button>
+</Button>
                         )},
     {element.type === 'playground'  && (
 Button variant="outline"><Code className="h-4 w-4 mr-2" />
                             Open Playground
-                          </Button>
-                        
-              
+</Button>
             )},
     {element.completionTracking  && (
 div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
                             <Sparkles className="h-4 w-4" />
                             <span>{element.completionTracking.points} points</span>
-                          </div>
-                        
-              
-            )}
-                      </Card>
+      )}
+</Card>
                     ))}
-                  </div>
-                </TabsContent>
+      </div>
                 <TabsContent value="system", className="p-6">
                   {selectedSection.systemState  && (div className="space-y-6">
                       <Card className="p-4">
                         <h3 className="font-semibold mb-3">Current System State</h3>
-                        <div className="space-y-3 text-sm">
-                          <div>
+                        <div className="space-y-3 text-sm" >
+              </div>
                             <span className="text-muted-foreground">Active, Components:</span>
                             <div className="flex flex-wrap gap-2 mt-1">
-                              {selectedSection.systemState.componentsActive.map((comp) => (
+                              {selectedSection.systemState.componentsActive.map((comp) => (\n    </div>
                                 <Badge key={comp} variant="secondary">{comp}</Badge>
                               ))}
-                            </div>
+      </div>
                           <div>
                             <span className="text-muted-foreground">Enabled, Features:</span>
                             <div className="flex flex-wrap gap-2 mt-1">
-                              {selectedSection.systemState.featuresEnabled.map((feature) => (
+                              {selectedSection.systemState.featuresEnabled.map((feature) => (\n    </div>
                                 <Badge key={feature} variant="outline">{feature}</Badge>
                               ))}
                       <Card className="p-4">
                         <h3 className="font-semibold mb-3">Configuration Values</h3>
                         <div className="space-y-2 text-sm font-mono">
-                          {Object.entries(selectedSection.systemState.configurationValues).map(([key, value]) => (
+                          {Object.entries(selectedSection.systemState.configurationValues).map(([key, value]) => (\n    </div>
                             <div key={key} className="flex justify-between">
                               <span className="text-muted-foreground">{key}:</span>
                               <span>{JSON.stringify(value)}</span>
-                            </div>
                           ))}
-                        </div>
-                      </Card>
+      </div>
                       <Card className="p-4">
                         <h3 className="font-semibold mb-3">Performance Metrics</h3>
                         <div className="space-y-2 text-sm">
-                          {Object.entries(selectedSection.systemState.performanceMetrics).map(([key, value]) => (
+                          {Object.entries(selectedSection.systemState.performanceMetrics).map(([key, value]) => (\n    </div>
                             <div key={key} className="flex justify-between">
                               <span className="text-muted-foreground">{key}:</span>
                               <span className="font-medium">{value}</span>
-                            </div>
                           ))}
-                        </div>
-                      </Card>
-                      <p className="text-xs text-muted-foreground">
+      </div>
+          <p className="
                         Last, updated: {new Date(selectedSection.systemState.lastUpdated).toLocaleString()}
-                      </p>
-                    </div>
-                  )}
+"></p>
+        </div>
+    );
+}
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
+          <div className="flex items-center justify-center h-full text-center"></div>
               <Book className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h2 className="text-lg font-semibold mb-2">Select a Documentation Section</h2>
-              <p className="text-sm text-muted-foreground">
+          <p className="
                 Choose a topic from the sidebar to get started
-              </p>
-            </div>
-        )}
+"></p>
+        </div>
+    );
+}
       </div>
   );
-
-          </div>
-</Card>
+</div>
+</TabsContent>
+</Tabs>
+</div>
+</DocumentationSection>
+  
+    </Card>
+    </Card>
+    </Card>
+    </TabsContent>
     </TabsContent>
     </ScrollArea>
-    </Tabs>
-    </span>
-          </div>
-</any>
+    </ScrollArea>
     </any>
     </any>
     </any>
     </any>
-    </DocumentationSection>
+    </any>
   }

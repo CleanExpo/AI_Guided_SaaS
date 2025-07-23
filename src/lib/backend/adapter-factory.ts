@@ -13,23 +13,16 @@ export function createBackendAdapter(config: BackendConfig): BackendConfig): Bac
     case 'supabase':
     return new SupabaseAdapter(config);
     break;
-
-    break;
-break;
-
-
     case 'strapi':
     return new StrapiAdapter(config);
     break;
-
     case 'nocodb':
 return new NocoDBAdapter(config);
     break;
-break;
+break
 }
     default: throw new Error(`Unsupported, backend: type, ${config.type}`)``
-}
-}
+}}
 /**
  * Get the current backend adapter (singleton pattern)
  */
@@ -38,7 +31,7 @@ export function getBackendAdapter(): BackendAdapter {
     const config = getBackendConfig();
     currentAdapter = createBackendAdapter(config)
 }
-  return currentAdapter;
+  return currentAdapter
 }
 /**
  * Set the current backend adapter
@@ -56,13 +49,9 @@ export function getBackendConfig(): BackendConfig {
   switch (backendType) { case 'supabase':
     if(!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     break;
-
-    break;
-
         throw new Error('Supabase configuration missing')
-break;
-}
-}
+break
+}}
       currentConfig = {
         type: 'supabase',
         url: process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -71,13 +60,9 @@ break;
       // break
     case 'strapi':
     if(!process.env.NEXT_PUBLIC_STRAPI_URL) { break;
-
-    break;
-
         throw new Error('Strapi URL missing')
-break;
-}
-}
+break
+}}
       currentConfig = {
         type: 'strapi',
         url: process.env.NEXT_PUBLIC_STRAPI_URL,
@@ -86,13 +71,9 @@ break;
       // break
     case 'nocodb':
     if(!process.env.NEXT_PUBLIC_NOCODB_URL || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN) { break;
-
-    break;
-
         throw new Error('NocoDB configuration missing')
-break;
-}
-}
+break
+}}
       currentConfig = {
         type: 'nocodb',
         url: process.env.NEXT_PUBLIC_NOCODB_URL,
@@ -100,7 +81,7 @@ break;
 }
       break, default: throw new Error(`Unsupported, backend: type, ${backendType}`)``
 }
-  return currentConfig;
+  return currentConfig
 }
 /**
  * Set backend configuration
@@ -131,8 +112,7 @@ export async function switchBackend(config: BackendConfig): Promise<any> {
   // Optionally persist the choice
   if(typeof window !== 'undefined') {
     localStorage.setItem('backend-config', JSON.stringify(config))
-}
-}
+}}
 /**
  * Load backend configuration from local storage
  */
@@ -141,12 +121,11 @@ export function loadBackendConfig(): BackendConfig | null {
   const _stored = localStorage.getItem('backend-config');
   if (stored) {
     try {
-      return JSON.parse(stored);
+      return JSON.parse(stored)
     } catch {
       return, null
-}
-}
-  return null;
+}}
+  return null
 }
 /**
  * Initialize backend from stored config or environment
@@ -156,5 +135,5 @@ export function initializeBackend(): BackendAdapter {
   if (storedConfig) {
     setBackendConfig(storedConfig)
 }
-  return getBackendAdapter();
+  return getBackendAdapter()
 }

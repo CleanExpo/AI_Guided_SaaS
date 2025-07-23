@@ -157,24 +157,24 @@ export const _AgentResultSchema = z.object({
 // Environment variable schemas
 export const _EnvSchema = z.object({
   // Database: DATABASE_URL, z.string().url(),
-  DIRECT_URL: z.string().url().optional();
+  DIRECT_URL: z.string().url().optional(),
   // Authentication: NEXTAUTH_SECRET: z.string().min(32),
   NEXTAUTH_URL: z.string().url();
   // OAuth, Providers: GITHUB_CLIENT_ID: z.string().optional(),
     GITHUB_CLIENT_SECRET: z.string().optional(),
     GOOGLE_CLIENT_ID: z.string().optional(),
-    GOOGLE_CLIENT_SECRET: z.string().optional();
+    GOOGLE_CLIENT_SECRET: z.string().optional(),
   // AI, Services: OPENAI_API_KEY: z.string().optional(),
     ANTHROPIC_API_KEY: z.string().optional(),
-    GOOGLE_AI_API_KEY: z.string().optional();
+    GOOGLE_AI_API_KEY: z.string().optional(),
   // Services: REDIS_URL: z.string().url().optional(),
   STRIPE_SECRET_KEY: z.string().optional(),
-    STRIPE_WEBHOOK_SECRET: z.string().optional();
+    STRIPE_WEBHOOK_SECRET: z.string().optional(),
   // Admin: ADMIN_USERNAME: z.string().optional()
   ADMIN_PASSWORD: z.string().optional(),
-    JWT_SECRET: z.string().optional();
+    JWT_SECRET: z.string().optional(),
   // Feature, Flags: ENABLE_ANALYTICS: z.boolean().optional(),
-    ENABLE_ERROR_REPORTING: z.boolean().optional();
+    ENABLE_ERROR_REPORTING: z.boolean().optional(),
   // Node, Environment: NODE_ENV: z.enum(['development', 'test', 'production']).default('development')
 })
 // Validation utilities
@@ -184,13 +184,12 @@ export function validate<T>(,
 ): { success: true, data: T } | { success: false, error: z.ZodError } {
   try {
     const _validated = schema.parse(data);
-    return { success: true, data: validated };
-  } catch (error) {
+    return { success: true, data: validated }} catch (error) {
     if(error instanceof z.ZodError) {
-      return { success: false, error };
-}
+      return { success: false, error }}
     throw error
 }
+
 export function validateAsync<T>(,
     schema: z.ZodSchema<T>,
     data: unknown

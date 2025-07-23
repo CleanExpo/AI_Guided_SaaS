@@ -5,7 +5,7 @@ import { generateCodeFromComponent } from './generateCode';
 type ComponentInstance = {
   id: string,
     type: string,
-    props: { [key: string]: string };
+    props: { [key: string]: string }
     };
 export const exportProjectAsZip = (components: ComponentInstance[]) => {
   const zip = new JSZip();
@@ -28,6 +28,6 @@ ${componentBlocks}
   zip.file('index.html', indexHTML);
   zip.file('style.css', styleCSS);
   zip.generateAsync({ type: 'blob' }).then((blob) => {
-    saveAs(blob, 'ai-builder-export.zip');
-  });
+    saveAs(blob, 'ai-builder-export.zip')
+  })
 };

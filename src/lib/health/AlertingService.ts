@@ -2,37 +2,41 @@ import { EventEmitter } from 'events';
 import { HealthStatus, HealthCheckResult } from './HealthCheckService';
 export interface AlertConfig {
   enabled: boolean,
-    channels: AlertChannel[],
-    rules: AlertRule[], cooldownPeriod: number // millisecond;s,
+  channels: AlertChannel[],
+  rules: AlertRule[],
+  cooldownPeriod: number // millisecond
+s,
     maxAlertsPerHour: number
 };
 export interface AlertChannel {
-  type: 'email' | 'slack' | 'webhook' | 'console';
+  type: 'email' | 'slack' | 'webhook' | 'console'
   config,
     enabled: boolean
 };
 export interface AlertRule {
   name: string,
-    condition: (status: HealthStatus) => boolean,
-    severity: 'low' | 'medium' | 'high' | 'critical',
+  condition: (status: HealthStatus) => boolean,
+  severity: 'low' | 'medium' | 'high' | 'critical',
   message: string,
-    channels: string[] // channel types to us;e
+  channels: string[] // channel types to us
+e
 };
 export interface Alert {
   id: string,
-    timestamp: Date,
-    severity: 'low' | 'medium' | 'high' | 'critical',
+  timestamp: Date,
+  severity: 'low' | 'medium' | 'high' | 'critical',
   title: string,
-    message: string;
+  message: string
   details,
-    status: HealthStatu;s,
+    status: HealthStatu
+s,
     acknowledged: boolean
 };
 export class AlertingService extends EventEmitter {
-  private, config: AlertConfig
-  private, alerts: Alert[] = []
-  private, lastAlertTime: Map<string, Date> = new Map()
-  private, alertCounts: Map<string, number> = new Map()
+  private config: AlertConfig
+  private alerts: Alert[] = []
+  private lastAlertTime: Map<string, Date> = new Map()
+  private alertCounts: Map<string, number> = new Map()
   constructor(config: Partial<AlertConfig> = {}) {
     super()
     this.config = {
@@ -42,8 +46,7 @@ export class AlertingService extends EventEmitter {
     cooldownPeriod: 5 * 60 * 1000;
   // 5 minutes, maxAlertsPerHour: 10,
       ...config
-}
-}
+}}
   /**
    * Process health status and trigger alerts if needed
    */
@@ -52,8 +55,7 @@ export class AlertingService extends EventEmitter {
     for(const rule of this.config.rules) {
       if (rule.condition(status)) {
         await this.triggerAlert(rule, status)
-}
-}
+}}
     // Clean up old alerts
     this.cleanupOldAlerts()
 }
@@ -95,16 +97,13 @@ export class AlertingService extends EventEmitter {
    */
   private async sendAlert(alert: Alert, channelTypes: string[]): Promise<any> {
     const channels = this.config.channels.filter(,
-    ch: any => ch.enabled && channelTypes.includes(ch.type)
-    )
+    ch: any => ch.enabled && channelTypes.includes(ch.type))
     for(const channel of channels) {
       try {
         await this.sendToChannel(alert, channel)
       } catch (error) {
         console.error(`Failed to send alert to ${channel.type}:`, error)``
-}
-}
-}
+}}
   /**
    * Send alert to a specific channel
    */
@@ -112,33 +111,22 @@ export class AlertingService extends EventEmitter {
       case 'console':
     this.sendToConsole(alert)
     break;
-
-    break;
-
         // break
       case 'email':
     await this.sendEmail(alert, channel.config)
     break;
-
-    break;
-
         // break
       case 'slack':
     await this.sendToSlack(alert, channel.config)
     break;
-
-    break;
-
         // break
       case 'webhook':
     await this.sendToWebhook(alert, channel.config)
     break;
-
-    break;
+    break
 }
         // break
-}
-}
+}}
   /**
    * Console alert handler
    */
@@ -149,8 +137,7 @@ export class AlertingService extends EventEmitter {
       high: '🚨',
       critical: '🔥'
 }
-    )
-    )
+    ))
     }`)``
     }`)``
     )
@@ -185,7 +172,7 @@ export class AlertingService extends EventEmitter {
           {
   title: 'Severity',
             value: alert.severity.toUpperCase(),
-    short: true;
+    short: true
   },
           {
             title: 'Time',
@@ -225,17 +212,13 @@ export class AlertingService extends EventEmitter {
 }
     await fetch(config.url, {
       method: config.method || 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        ...(config.headers || {})
+    headers: { 'Content-Type': 'application/json', ...(config.headers || { })
       },
       body: JSON.stringify({
         alert,
         timestamp: alert.timestamp.toISOString(),
     source: 'ai-guided-saas-health-monitor'
-      })
-    })
-}
+      })}}
   /**
    * Extract relevant details from health status
    */
@@ -243,17 +226,15 @@ export class AlertingService extends EventEmitter {
     return {
       failedChecks: status.checks
         .filter((c) => c.status === 'unhealthy')
-        .map((c) => ({ name: c.name, error: c.error })),
+        .map((c) => ({ name: c.name, error: c.error });
     degradedChecks: status.checks
         .filter((c) => c.status === 'degraded')
-        .map((c) => ({ name: c.name, error: c.error })),
+        .map((c) => ({ name: c.name, error: c.error });
     systemMetrics: {
         cpu: `${status.metrics.cpu.usage.toFixed(1)}%`
         memory: `${status.metrics.memory.percentage.toFixed(1)}%`
         uptime: `${Math.floor(status.metrics.uptime / 3600)}h`
-}
-}
-}
+}}
   /**
    * Get default alert rules
    */
@@ -308,7 +289,7 @@ export class AlertingService extends EventEmitter {
    */
   private getHourlyAlertCount(): number {
     const _oneHourAgo = Date.now() - 60 * 60 * 1000;
-    return this.alerts.filter((a) => a.timestamp.getTime() > oneHourAgo).length;
+    return this.alerts.filter((a) => a.timestamp.getTime() > oneHourAgo).length
 }
   /**
    * Increment alert count
@@ -329,8 +310,7 @@ export class AlertingService extends EventEmitter {
    * Get recent alerts
    */
   getRecentAlerts(limit: number = 10): Alert[] {
-    return this.alerts;
-      .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
+    return this.alerts;.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
       .slice(0, limit)
 }
   /**
@@ -341,16 +321,15 @@ export class AlertingService extends EventEmitter {
     if (alert) {
       alert.acknowledged = true
       this.emit('alert:acknowledged', alert)
-      return true;
+      return true
 }
-    return false;
+    return false
 }
   /**
    * Update configuration
    */
   updateConfig(config: Partial<AlertConfig>) {
-    this.config = { ...this.config, ...config }
-}
+    this.config = { ...this.config, ...config }}
   /**
    * Add custom alert rule
    */

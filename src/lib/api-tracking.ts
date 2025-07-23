@@ -2,18 +2,18 @@ import { NextRequest } from 'next/server';
 import { supabase } from './database';
 export interface ApiMetric {
   endpoint: string,
-    method: string,
-    statusCode: number,
-    responseTime: number;
-  userId?: string;
-  errorMessage?: string;
-  metadata?: Record<string, unknown>;
+  method: string,
+  statusCode: number,
+  responseTime: number,
+  userId?: string,
+  errorMessage?: string,
+  metadata?: Record<string, unknown>
 };
 export class ApiTracking {
   // Track API call metrics
-  static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage?: string): Promise<any> {
+  static async trackApiCall(request: NextRequest, response: Response; startTime: number, userId?: string, errorMessage?: string): Promise<any> {
     if(!supabase) {
-      return;
+      return
 }
     try {
       const _endTime = Date.now();
@@ -40,18 +40,16 @@ export class ApiTracking {
         metadata,
         created_at: new Date().toISOString()});
       if (error) {
-        console.error('Error tracking API, call:', error);
+        console.error('Error tracking API, call:', error)
 }
       // Also log as activity if user is authenticated
       if (userId) {
-        await this.logApiActivity(userId, endpoint, method, statusCode);
-}
-    } catch (error) {
-      console.error('Error in API, tracking:', error);
-}
-}
+        await this.logApiActivity(userId, endpoint, method, statusCode)
+}} catch (error) {
+      console.error('Error in API, tracking:', error)
+}}
   // Log API activity for user tracking
-  private static async logApiActivity(userId: string, endpoint: string, method: string, statusCode: number): Promise<any> {
+  private static async logApiActivity(userId: string, endpoint: string; method: string, statusCode: number): Promise<any> {
     if (!supabase) return;
     try {
       const { error    }: any = await supabase.from('activity_logs').insert({
@@ -59,18 +57,12 @@ export class ApiTracking {
     action: 'api_call',
         resource_type: 'api',
         resource_id: endpoint,
-    metadata: {
-          method,
-          statusCode,
-          endpoint,
-        created_at: new Date().toISOString()});
+    metadata: { method, statusCode, endpoint, created_at: new Date().toISOString() });
       if (error) {
-        console.error('Error logging API, activity:', error);
-}
-    } catch (error) {
-      console.error('Error in activity, logging:', error);
-}
-}
+        console.error('Error logging API, activity:', error)
+}} catch (error) {
+      console.error('Error in activity, logging:', error)
+}}
   // Track specific resource usage
   static async trackResourceUsage(userId: string, resourceType:
       | 'ai_generation'
@@ -78,24 +70,20 @@ export class ApiTracking {
       | 'export'
       | 'template_use', quantity: number = 1, metadata?: Record<string, unknown>): Promise<any> {
     if(!supabase) {
-      return;
+      return
 }
     try {
       const { error    }: any = await supabase.from('usage_records').insert({
         user_id: userId,
     resource_type: resourceType,
         quantity,
-    metadata: {
-          ...metadata,
-          timestamp: new Date().toISOString()},
+    metadata: { ...metadata, timestamp: new Date().toISOString() },
     created_at: new Date().toISOString()});
       if (error) {
-        console.error('Error tracking resource, usage:', error);
-}
-    } catch (error) {
-      console.error('Error in resource, tracking:', error);
-}
-}
+        console.error('Error tracking resource, usage:', error)
+}} catch (error) {
+      console.error('Error in resource, tracking:', error)
+}}
   // Get API performance summary
   static async getApiPerformanceSummary(
     timeRange: '1h' | '24h' | '7d' | '30d' = '24h'
@@ -103,7 +91,7 @@ export class ApiTracking {
     totalCalls: number,
     avgResponseTime: number,
     errorRate: number,
-    topEndpoints: Array<{ endpoint: string, calls: number, avgTime: number }>;
+    topEndpoints: Array<{ endpoint: string, calls: number; avgTime: number }>
   } | null> { if (!supabase) return null;
     try {
       // Calculate start time based on range
@@ -113,48 +101,31 @@ export class ApiTracking {
         case '1h':
     startTime.setHours(now.getHours() - 1);
     break;
-
-    break;
-
-          break;
-break;
-
         case '24h':
     startTime.setDate(now.getDate() - 1);
     break;
-
-    break;
-
-          break;
         case '7d':
     startTime.setDate(now.getDate() - 7);
     break;
-
-    break;
-
-          break;
-break;
-
         case '30d':
     startTime.setDate(now.getDate() - 30);
     break;
-
-    break;
+    break
 }
-          break;
+          break
 }
       // Get all metrics for the time range
       const { data: metrics, error   }: any = await supabase;
         .from('api_metrics')
         .select('*')
-        .gte('created_at', startTime.toISOString());
+        .gte('created_at', startTime.toISOString();
       if(error || !metrics) {
         console.error('Error fetching API, metrics:', error);
-        return null;
+        return null
 }
       // Calculate summary statistics
       const _totalCalls = metrics.length;
-      const avgResponseTime =
+      const avgResponseTime =;
         metrics.reduce((sum, m) => sum + m.response_time, 0) / totalCalls;
       const _errorCount = metrics.filter((m) => m.status_code >= 400).length;
       const _errorRate = (errorCount / totalCalls) * 100;
@@ -164,29 +135,26 @@ break;
         { calls: number, totalTime: number }
       > = {};
       metrics.forEach((metric) => { if (!endpointStats[metric.endpoint]) {
-          endpointStats[metric.endpoint] = { calls: 0, totalTime: 0 }
-}
+          endpointStats[metric.endpoint] = { calls: 0, totalTime: 0 }}
         endpointStats[metric.endpoint].calls++;
-        endpointStats[metric.endpoint].totalTime += metric.response_time;
+        endpointStats[metric.endpoint].totalTime += metric.response_time
       });
       // Get top endpoints
       const _topEndpoints = Object.entries(endpointStats);
         .map(([endpoint, stats]) => ({
           endpoint,
           calls: stats.calls,
-    avgTime: Math.round(stats.totalTime / stats.calls)}))
-        .sort((a, b) => b.calls - a.calls)
+    avgTime: Math.round(stats.totalTime / stats.calls)})).sort((a, b) => b.calls - a.calls)
         .slice(0, 10);
       return {
         totalCalls,
         avgResponseTime: Math.round(avgResponseTime),
     errorRate: Math.round(errorRate * 100) / 100,
-        topEndpoints;
+        topEndpoints
     } catch (error) {
       console.error('Error calculating API, performance:', error);
-      return null;
-}
-}
+      return null
+}}
   // Clean up old metrics (run periodically)
   static async cleanupOldMetrics(daysToKeep: number = 90): Promise<any> {
     if (!supabase) return;
@@ -196,10 +164,9 @@ break;
       const { error   }: any = await supabase;
         .from('api_metrics')
         .delete()
-        .lt('created_at', cutoffDate.toISOString());
+        .lt('created_at', cutoffDate.toISOString();
       if (error) {
-        console.error('Error cleaning up old, metrics:', error);
+        console.error('Error cleaning up old, metrics:', error)
       } else {
-}
-    } catch (error) { console.error('Error in metrics, cleanup:', error);
+}} catch (error) { console.error('Error in metrics, cleanup:', error)
 }

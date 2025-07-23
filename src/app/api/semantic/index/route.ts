@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 import { z } from 'zod';
-
 // Request validation schemas
 const indexSchema = z.object({
   id: z.string().min(1),
@@ -10,7 +9,6 @@ const indexSchema = z.object({
   type: z.enum(['document', 'code', 'log', 'config', 'memory', 'conversation']).optional()
 });
 const batchIndexSchema = z.array(indexSchema);
-
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
@@ -19,45 +17,42 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       // Batch indexing
       const validatedData = batchIndexSchema.parse(body);
       const results = await semanticSearch.indexBatch(validatedData);
-      return NextResponse.json(results);
+      return NextResponse.json(results)
     } else {
       // Single document indexing
       const validatedData = indexSchema.parse(body);
       const result = await semanticSearch.indexDocument(validatedData);
-      return NextResponse.json(result);
-    }
-  } catch (error) {
+      return NextResponse.json(result)
+    }} catch (error) {
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid request', details: error.errors },
         { status: 400 }
-      );
+      )
     }
     console.error('Indexing error:', error);
     return NextResponse.json(
       { error: 'Indexing failed', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
+
 export async function DELETE(request: NextRequest): Promise<NextResponse> {
   try {
     const { searchParams   }: any = new URL(request.url);
     const docId = searchParams.get('id');
-    
     if(!docId) {
       return NextResponse.json(
         { error: 'Document ID is required' },
         { status: 400 }
-      );
+      )
     }
     const result = await semanticSearch.deleteDocument(docId);
-    return NextResponse.json(result);
+    return NextResponse.json(result)
   } catch (error) {
     console.error('Delete error:', error);
     return NextResponse.json(
       { error: 'Delete failed', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}

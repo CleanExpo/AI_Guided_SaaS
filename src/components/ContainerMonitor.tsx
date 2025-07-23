@@ -1,31 +1,33 @@
 'use client';
-
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Activity, AlertCircle, CheckCircle } from 'lucide-react';
+
 interface Container {
-id: string;
-    name: string;
-    status: 'running' | 'stopped' | 'error';
-    cpu: number;
-    memory: number;
-    uptime: string 
+  id: string,
+  name: string,
+  status: 'running' | 'stopped' | 'error',
+  cpu: number,
+  memory: number,
+  uptime: string
 }
+
 export function ContainerMonitor() {
   const [containers, setContainers] = useState<Container[]>([]);
   const [isLoading, setIsLoading] = useState<any>(true);
+  
   useEffect(() => {
     // Simulate loading container data
     setTimeout(() => {
       setContainers([
         {
-  id: '1',
+          id: '1',
           name: 'web-server',
           status: 'running',
           cpu: 45,
-    memory: 512,
+          memory: 512,
           uptime: '2h 15m'
         },
         {
@@ -33,14 +35,17 @@ export function ContainerMonitor() {
           name: 'database',
           status: 'running',
           cpu: 23,
-    memory: 1024,
+          memory: 1024,
           uptime: '5h 32m'
         }
       ]);
       setIsLoading(false);
-    }, 1000);
-  }, []);
-  if (isLoading) { return <div>Loading container information...</div> }
+}, 1000);
+}, []);
+  
+  if (isLoading) {
+    return <div>Loading container information...</div>;
+  }
   
   return (
     <div className="space-y-4">
@@ -69,13 +74,12 @@ export function ContainerMonitor() {
                   <Badge variant={container.status === 'running' ? 'default' : 'destructive'}>
                     {container.status}
                   </Badge>
-                      </div>
-))}
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
-          </div>
-
-        );
-
-      }
+    </div>
+  );
+}

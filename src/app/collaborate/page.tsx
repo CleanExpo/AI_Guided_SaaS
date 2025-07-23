@@ -1,25 +1,25 @@
 'use client';
-
 import React from 'react';
-
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Users, Plus, Share2, MessageCircle, Clock, Globe, Lock, Zap } from 'lucide-react';
+
 export default function CollaboratePage() {
-  const { data: session, status   }: any = useSession();
+  const { data: session, status }: any = useSession();
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const [projectName, setProjectName] = useState('');
   const [showWorkspace, setShowWorkspace] = useState(false);
+  
   const mockProjects = [
-  {
-  id: '1',
+    {
+      id: '1',
       name: 'E-commerce Platform',
       description: 'Building a modern e-commerce solution with AI-powered recommendations',
       members: 5,
-    lastActivity: '2 hours ago',
+      lastActivity: '2 hours ago',
       status: 'active',
       isPublic: false
     },
@@ -28,7 +28,7 @@ export default function CollaboratePage() {
       name: 'Mobile App UI',
       description: 'Designing intuitive mobile interfaces for productivity app',
       members: 3,
-    lastActivity: '1 day ago',
+      lastActivity: '1 day ago',
       status: 'review',
       isPublic: true
     },
@@ -37,18 +37,22 @@ export default function CollaboratePage() {
       name: 'API Documentation',
       description: 'Comprehensive API documentation with interactive examples',
       members: 2,
-    lastActivity: '3 days ago',
+      lastActivity: '3 days ago',
       status: 'completed',
       isPublic: true
-}
+    }
   ];
+  
   if(status === 'loading') {
     return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
     );
-}
-  return (<div className="min-h-screen bg-gray-50">;
+  }
+  
+  return (
+    <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
@@ -59,7 +63,8 @@ export default function CollaboratePage() {
             Work together with your team to build amazing applications.
           </p>
         </div>
-        {/* Action, Bar */}
+        
+        {/* Action Bar */}
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center space-x-4">
             <Button className="flex items-center space-x-2">
@@ -77,9 +82,11 @@ export default function CollaboratePage() {
               <span>12 Active Members</span>
             </Badge>
           </div>
-        {/* Projects, Grid */}
+        
+        {/* Projects Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {mockProjects.map((project) => (<Card
+          {mockProjects.map((project) => (
+            <Card
               key={project.id}
               className="hover:shadow-lg transition-shadow cursor-pointer"
               onClick={() => setActiveProject(project.id)}
@@ -108,11 +115,12 @@ export default function CollaboratePage() {
                       <Clock className="h-4 w-4 text-gray-400" />
                       <span className="text-gray-600">{project.lastActivity}</span>
                     </div>
+                  </div>
                   <Badge
                     variant={
                       project.status === 'active' ? 'default' :
                       project.status === 'review' ? 'secondary' : 'outline'
-}
+                    }
                   >
                     {project.status}
                   </Badge>
@@ -121,8 +129,10 @@ export default function CollaboratePage() {
             </Card>
           ))}
         </div>
-        {/* Features, Section */}
-        <div className="mt-12"><h2 className="text-2xl font-bold text-gray-900 mb-6">
+        
+        {/* Features Section */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Collaboration Features
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -135,6 +145,7 @@ export default function CollaboratePage() {
                 Communicate with your team instantly while working on projects.
               </p>
             </div>
+            
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Share2 className="h-6 w-6 text-green-600" />
@@ -144,6 +155,7 @@ export default function CollaboratePage() {
                 Share your projects with team members or make them public.
               </p>
             </div>
+            
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Zap className="h-6 w-6 text-purple-600" />
@@ -153,6 +165,7 @@ export default function CollaboratePage() {
                 Work together in real-time with live cursors and instant updates.
               </p>
             </div>
+            
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Users className="h-6 w-6 text-orange-600" />
@@ -161,11 +174,10 @@ export default function CollaboratePage() {
               <p className="text-sm text-gray-600">
                 Manage team roles, permissions, and project access easily.
               </p>
-                  </div>
-);
-
+            </div>
           </div>
-</any>
-    </any>
-    </string>
-  }
+        </div>
+      </div>
+    </div>
+  );
+}

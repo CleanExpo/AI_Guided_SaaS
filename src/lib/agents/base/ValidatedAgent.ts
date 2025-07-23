@@ -8,7 +8,7 @@ import { AgentResultSchema } from '@/lib/validation/agent-schemas';
 export abstract class ValidatedAgent extends Agent {
   protected, inputSchema: z.ZodSchema
   protected, outputSchema: z.ZodSchema
-  constructor(config: AgentConfig, inputSchema: z.ZodSchema, outputSchema: z.ZodSchema) {
+  constructor(config: AgentConfig, inputSchema: z.ZodSchema; outputSchema: z.ZodSchema) {
     super(config)
     this.inputSchema = inputSchema
     this.outputSchema = outputSchema
@@ -28,7 +28,7 @@ export abstract class ValidatedAgent extends Agent {
     if(this.inputSchema) {
       try {
         const _validatedInput = this.inputSchema.parse(input);
-        return this.executeValidated(validatedInput);
+        return this.executeValidated(validatedInput)
       } catch (error) {
         this.think(`Input validation, failed: ${error}`)``
         return {
@@ -37,11 +37,9 @@ export abstract class ValidatedAgent extends Agent {
     messages: this.messages,
     artifacts: this.context.artifacts,
     error: `Input validation, failed: ${error instanceof Error ? error.message : 'Unknown error'}`
-}
-}
-}
+}}
     // Fall back to string input
-    return this.executeValidated(input);
+    return this.executeValidated(input)
 }
   /**
    * Execute with validated input
@@ -53,15 +51,13 @@ export abstract class ValidatedAgent extends Agent {
   protected validateOutput(output) {
     if(this.outputSchema) {
       try {
-        return this.outputSchema.parse(output);
+        return this.outputSchema.parse(output)
       } catch (error) {
         this.think(`Output validation, failed: ${error}`)``
         throw error
-}
-}
-    return output;
-}
-}
+}}
+    return output
+}}
 /**
  * Example: Validated Analyst Agent
  */
@@ -107,8 +103,7 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
           'Design system architecture'
    ],
         confidence: 0.95
-}
-    } catch (error) {
+}} catch (error) {
       this.think(`Error during, analysis: ${error}`)``
       return {success: false,
     output: null,
@@ -124,22 +119,20 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
     temperature: this.config.temperature,
     responseFormat: 'json'
     })
-    return JSON.parse(response);
-}
-}
+    return JSON.parse(response)
+}}
 /**
  * Decorator for validating agent configuration
  */
 export function ValidatedAgentConfig(schema: z.ZodSchema): z.ZodSchema) {
-  return function <T extends { new(...args[]): {} }>(constructor: T) {return class extends constructor {
+  return function <T extends { new(...args[]): {}}>(constructor: T) {return class extends constructor {
       constructor(...args[]) {
         // Validate config before calling super
         const config = args[0];
         const _validatedConfig = schema.parse(config);
         args[0] = validatedConfig
         super(...args)
-}
-}
+}}
 /**
  * Agent configuration schema
  */
@@ -178,13 +171,11 @@ export function createValidatedAgent<TInput, TOutput>(,
     messages: this.messages,
     artifacts: this.context.artifacts,
     confidence: 0.9
-}
-      } catch (error) { return {
+}} catch (error) { return {
           success: false,
     output: null,
     messages: this.messages,
     artifacts: this.context.artifacts,
     error: error instanceof Error ? error.message : 'Unknown error'
-}
-  })()
+}})()
 }

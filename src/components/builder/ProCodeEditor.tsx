@@ -4,14 +4,15 @@
 import React, { useState } from 'react';
 import { File, Folder, Settings, Play } from 'lucide-react';
 interface FileNode {
-name: string;
-    type: 'file' | 'folder';
-    path: string;
-  children?: FileNode[];
+name: string,
+    type: 'file' | 'folder',
+    path: string,
+  children?: FileNode[]
 
 }
+
 export default function ProCodeEditor() {
-  const [fileTree] = useState<FileNode[]>([
+  const [fileTree] = useState<FileNode[]>([;
   {,
   name: 'src',
       type: 'folder',
@@ -41,7 +42,7 @@ div className="ml-4">
           </div>
         )}
       </div>
-    ));
+    ))
   };
   return (
     <div className="h-screen flex flex-col bg-gray-900 text-white">
@@ -72,4 +73,9 @@ div className="ml-4">
 );
 
           </div>
-}
+
+    </div>
+    </div>
+    </div>
+    </div>
+  }

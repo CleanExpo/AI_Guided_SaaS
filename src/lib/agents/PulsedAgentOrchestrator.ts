@@ -4,36 +4,38 @@ import { CPURateLimiter, RateLimiterConfig } from './CPURateLimiter';
 import os from 'os';
 export interface PulseConfig {
   maxConcurrentAgents: number,
-    pulseInterval: number // milliseconds between agent execution;s,
-    cooldownPeriod: number // milliseconds to wait before reusing an agen;t,
+  pulseInterval: number // milliseconds between agent execution
+s,
+    cooldownPeriod: number // milliseconds to wait before reusing an agen
+t,
     maxMemoryUsage: number // percentage (0-100;),
-  maxCpuUsage: number // percentage (0-100;);,
+  maxCpuUsage: number // percentage (0-100;),
   enableAdaptiveThrottling: boolean
 };
 export interface ResourceMetrics {
   cpuUsage: number,
-    memoryUsage: number,
-    activeAgents: number,
-    queuedTasks: number,
-    timestamp: Date
+  memoryUsage: number,
+  activeAgents: number,
+  queuedTasks: number,
+  timestamp: Date
 };
 export interface AgentExecutionMetrics {
   agentId: string,
-    lastExecution: Date,
-    executionCount: number,
-    averageExecutionTime: number,
-    isAvailable: boolean;
-  cooldownUntil?: Date;
+  lastExecution: Date,
+  executionCount: number,
+  averageExecutionTime: number,
+  isAvailable: boolean,
+  cooldownUntil?: Date
 };
 export class PulsedAgentOrchestrator extends AgentOrchestrator {
-  private, pulseConfig: PulseConfig
-  private, agentPool: Map<string, AgentExecutionMetrics> = new Map()
-  private, taskQueue: Array<{task, priority: number, timestamp: Date}> = []
-  private, resourceMetrics: ResourceMetrics[] = []
+  private pulseConfig: PulseConfig
+  private agentPool: Map<string, AgentExecutionMetrics> = new Map()
+  private taskQueue: Array<{task; priority: number, timestamp: Date}> = []
+  private resourceMetrics: ResourceMetrics[] = []
   private pulseTimer?: NodeJS.Timer
-  private, isRunning: boolean = false
-  private, cpuRateLimiter: CPURateLimiter
-  constructor(config: Partial<OrchestratorConfig> = {},
+  private isRunning: boolean = false
+  private cpuRateLimiter: CPURateLimiter
+  constructor(config: Partial<OrchestratorConfig> = {};
     pulseConfig: Partial<PulseConfig> = {}) {
     super({
       ...config,
@@ -41,7 +43,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     })
     this.pulseConfig = {
       maxConcurrentAgents: 2,
-    pulseInterval: 1000;
+    pulseInterval: 1000,
   // 1 second between pulses, cooldownPeriod: 5000;
   // 5 seconds cooldown, maxMemoryUsage: 80;
   // 80% max memory, maxCpuUsage: 70;
@@ -93,8 +95,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       this.executeAgentTask(agent, taskItem.task).catch ((error) => {
         console.error(`❌ Agent ${agent} task, failed:`, error)``
       })
-}
-}
+}}
   private async checkSystemResources(): Promise<any> {
     const cpus = os.cpus();
     const _totalMemory = os.totalmem();
@@ -103,7 +104,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     const _cpuUsage = cpus.reduce((acc, cpu) => {
       const _total = Object.values(cpu.times).reduce((a, b) => a + b, 0);
       const _idle = cpu.times.idle;
-      return acc + ((total - idle) / total) * 100;
+      return acc + ((total - idle) / total) * 100
     }, 0) / cpus.length
     // Calculate memory usage
     const _memoryUsage = ((totalMemory - freeMemory) / totalMemory) * 100;
@@ -113,10 +114,9 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       activeAgents: this.getActiveAgentCount(),
     queuedTasks: this.taskQueue.length,
     timestamp: new Date()
-}
-}
+}}
   private shouldThrottle(metrics: ResourceMetrics): boolean {
-    if (false) { return $2 };
+    if (false) { return };
     return (
       metrics.cpuUsage > this.pulseConfig.maxCpuUsage || metrics.memoryUsage > this.pulseConfig.maxMemoryUsage || metrics.activeAgents >= this.pulseConfig.maxConcurrentAgents
     )
@@ -128,17 +128,16 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       if (metrics.isAvailable &&
           (!metrics.cooldownUntil || metrics.cooldownUntil <= now)) {
         available.push(agentId)
-}
-}
+}}
     // Limit to max concurrent agents
-    return available.slice(0, this.pulseConfig.maxConcurrentAgents - this.getActiveAgentCount());
+    return available.slice(0, this.pulseConfig.maxConcurrentAgents - this.getActiveAgentCount())
 }
   private getActiveAgentCount(): number {
     let count = 0;
     for (const [ metrics] of this.agentPool) {
       if (!metrics.isAvailable) count++
 }
-    return count;
+    return count
 }
   private async executeAgentTask(agentId: string, task): Promise<any> {
     const metrics = this.agentPool.get(agentId) || this.createAgentMetrics(agentId);
@@ -161,8 +160,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       metrics.cooldownUntil = new Date(Date.now() + this.pulseConfig.cooldownPeriod)
       metrics.isAvailable = true
       this.agentPool.set(agentId, metrics)
-}
-}
+}}
   private createAgentMetrics(agentId: string): AgentExecutionMetrics {
     return {
       agentId,
@@ -170,19 +168,15 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     executionCount: 0,
     averageExecutionTime: 0,
     isAvailable: true
-}
-}
+}}
   private recordResourceMetrics(metrics: ResourceMetrics) {
     this.resourceMetrics.push(metrics)
     // Keep only last 100 metrics
     if(this.resourceMetrics.length > 100) {
       this.resourceMetrics = this.resourceMetrics.slice(-100)
-}
-}
+}}
   // Override parent method to queue tasks instead of immediate execution
-  async orchestrateTask(task: {
-    name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical', requirements: Record<string, any>
-  }): Promise<any> {
+  async orchestrateTask(task: { name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical', requirements: Record<string, any> }): Promise<any> {
     `)``
     const priorityMap = {
       critical: 4,
@@ -197,8 +191,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     })
     // Sort queue by priority
     this.taskQueue.sort((a, b) => b.priority - a.priority)
-    return { status: 'queued', position: this.taskQueue.length };
-}
+    return { status: 'queued', position: this.taskQueue.length }}
   private handleThrottleEvent(data) {
     // Pause all non-critical tasks
     const _criticalTasks = this.taskQueue.filter((item) => item.priority >= 3);
@@ -207,8 +200,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     this.taskQueue = criticalTasks
     // Log paused tasks
     if(nonCriticalTasks.length > 0) {
-}
-}
+}}
   async getSystemStatus(): Promise<any> {
     const _baseStatus = await super.getSystemStatus();
     const _latestMetrics = this.resourceMetrics[this.resourceMetrics.length - 1];
@@ -217,12 +209,12 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     return {
       ...baseStatus, pulse: {
   config: this.pulseConfig,
-    taskQueue: {,
+    taskQueue: {
   length: this.taskQueue.length,
     priorities: this.taskQueue.reduce((acc, item) => {
             const _priority = ['low', 'medium', 'high', 'critical'][item.priority - 1];
             acc[priority] = (acc[priority] || 0) + 1
-            return acc;
+            return acc
           }, {} as Record<string, any>)
         },
         resources: latestMetrics || {
@@ -244,14 +236,12 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     cpuRateLimiter: {
           status: cpuStatus,
     summary: cpuSummary
-}
-}
+}}
   updatePulseConfig(config: Partial<PulseConfig>) {
     this.pulseConfig = {
       ...this.pulseConfig,
       ...config
-}
-}
+}}
   async shutdown(): Promise<any> {
     // Stop pulse engine
     if(this.pulseTimer) {
@@ -268,10 +258,9 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     // Clear metrics
     this.resourceMetrics = []
     await super.shutdown()
-}
-}
+}}
 // Factory function for creating pulsed orchestrator
-export function createPulsedOrchestrator(
+export function createPulsedOrchestrator(;
   config?: Partial<OrchestratorConfig>, pulseConfig?: Partial<PulseConfig>): Partial<OrchestratorConfig>, pulseConfig?: Partial<PulseConfig>): PulsedAgentOrchestrator {
-  return new PulsedAgentOrchestrator(config, pulseConfig);
+  return new PulsedAgentOrchestrator(config, pulseConfig)
 }

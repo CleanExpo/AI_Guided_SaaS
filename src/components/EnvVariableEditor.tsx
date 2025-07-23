@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,51 +9,49 @@ import { Badge } from '@/components/ui/badge';
 import { Key, Lock, Eye, EyeOff, Plus, Trash2, AlertTriangle, CheckCircle, Copy, Download, Upload, Shield, Info } from 'lucide-react';
 import { cn } from '@/utils/cn';
 interface EnvVariable {
-key: string;
-    value: string;
-  description?: string;
-    type: 'public' | 'secret' | 'api_key';
-  required: boolean;
-  validated?: boolean;
-
+key: string,
+  value: string,
+  description?: string,
+  type: 'public' | 'secret' | 'api_key',
+  required: boolean,
+  validated?: boolean
 };
 interface EnvVariableEditorProps {
-variables: EnvVariable[];
-    onChange: (variables: EnvVariable[]) => voi;d;
-  projectType?: string;
-  readOnly?: boolean;
-
+variables: EnvVariable[],
+  onChange: (variables: EnvVariable[]: any) => void,
+  projectType?: string,
+  readOnly?: boolean
 }
 const commonVariables: Record<string, EnvVariable[]> = {
   default: [
     { key: 'DATABASE_URL', value: '',
-    type: 'secret', required: true, description: 'PostgreSQL connection string' },
+    type: 'secret', required: true description: 'PostgreSQL connection string' },
     { key: 'NEXTAUTH_SECRET', value: '',
-    type: 'secret', required: true, description: 'Secret for NextAuth.js' },
-    { key: 'NEXTAUTH_URL', value: 'http://localhost:3000', type: 'public', required: true, description: 'App URL' }
+    type: 'secret', required: true description: 'Secret for NextAuth.js' },
+    { key: 'NEXTAUTH_URL', value: 'http: //localhost:3000', type: 'public', required: true description: 'App URL' }
    ],
   ecommerce: [
     { key: 'STRIPE_SECRET_KEY', value: '',
-    type: 'api_key', required: true, description: 'Stripe secret key' },
+    type: 'api_key', required: true description: 'Stripe secret key' },
     { key: 'STRIPE_WEBHOOK_SECRET', value: '',
-    type: 'secret', required: true, description: 'Stripe webhook secret' },
+    type: 'secret', required: true description: 'Stripe webhook secret' },
     { key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', value: '',
-    type: 'public', required: true, description: 'Stripe public key' }
+    type: 'public', required: true description: 'Stripe public key' }
    ],
   ai: [
     { key: 'OPENAI_API_KEY', value: '',
-    type: 'api_key', required: true, description: 'OpenAI API key' },
+    type: 'api_key', required: true description: 'OpenAI API key' },
     { key: 'ANTHROPIC_API_KEY', value: '',
-    type: 'api_key', required: false, description: 'Anthropic Claude API key' },
+    type: 'api_key', required: false description: 'Anthropic Claude API key' },
     { key: 'GOOGLE_AI_API_KEY', value: '',
-    type: 'api_key', required: false, description: 'Google AI API key' }
+    type: 'api_key', required: false description: 'Google AI API key' }
    ]
 };
 export function EnvVariableEditor({
   variables: initialVariables, onChange, projectType  = 'default', readOnly  = false
 }: EnvVariableEditorProps): initialVariables, onChange, projectType  = 'default', readOnly = false
 }: EnvVariableEditorProps) {</string>
-  const [variables, setVariables] = useState<EnvVariable[]>(initialVariables);
+  const [variables, setVariables] = useState<EnvVariable[]>(initialVariables)
   const [showSecrets, setShowSecrets] = useState<Record<string, boolean>>({});
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
   const [isValidating, setIsValidating] = useState<any>(false);
@@ -62,7 +59,7 @@ export function EnvVariableEditor({
     const newVar: EnvVariable = {
   key: '',
     value: '',
-    type: 'secret',
+    type: 'secret'
       required: false
 }
     const updated = [...variables, newVar];
@@ -70,12 +67,12 @@ export function EnvVariableEditor({
     onChange(updated)
 }
   const _handleRemoveVariable = (index: number) => {
-    const updated = variables.filter((_, i) => i !== index);
+    const updated = variables.filter((_, i) => i !== index)
     setVariables(updated)
     onChange(updated)
 }
   const _handleUpdateVariable = (index: number, field: keyof EnvVariable, value) => {
-    const updated = [...variables];
+    const updated = [...variables]
     updated[index] = { ...updated[index], [field]: value }
     setVariables(updated)
     onChange(updated)
@@ -84,8 +81,7 @@ export function EnvVariableEditor({
       const, newErrors = { ...validationErrors }
       delete newErrors[updated[index].key]
       setValidationErrors(newErrors)
-}
-}
+}}
   const _toggleShowSecret = (key: string) => {
     setShowSecrets(prev => ({ ...prev, [key]: !prev[key] }))
 }
@@ -103,19 +99,17 @@ export function EnvVariableEditor({
 }
         if (variable.key.includes('STRIPE') && !variable.value.startsWith('sk_')) {
           errors[variable.key] = 'Stripe secret key should start with "sk_"'
-}
-}
+}}
       if (variable.key === 'DATABASE_URL' && variable.value && !variable.value.includes('://')) {
         errors[variable.key] = 'Invalid database URL format'
-}
-}
-        </string>
+}}
+</string>
     setValidationErrors(errors)
     setIsValidating(false)
-    return Object.keys(errors).length === 0;
+    return Object.keys(errors).length === 0
 }
   const _exportEnvFile = (): void => {
-    const content = variables;
+    const content = variables
       .filter((v) => v.key && v.value)
       .map((v) => `${v.key}="${v.value}"`)``
       .join('\n')
@@ -127,7 +121,7 @@ export function EnvVariableEditor({
     a.click()
     URL.revokeObjectURL(url)
 }
-  </string>
+</string>
   const _importEnvFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const _file = event.target.files?.[0];
     if (!file) return </HTMLInputElement>;
@@ -144,58 +138,41 @@ export function EnvVariableEditor({
             key,
             value: type, key.includes('SECRET') || key.includes('PRIVATE') ? 'secret' :
                   key.includes('API_KEY') || key.includes('TOKEN') ? 'api_key' : 'public',
-            required: existing?.required || false,
-    description: existing?.description }
-      )}
-  );
-}
+            required: existing?.required || false
+    description: existing?.description })}}
       setVariables(imported)
       onChange(imported)
 }
     reader.readAsText(file)
 }
   const _addSuggestedVariables = (): void => { const suggested = commonVariables[projectType] || commonVariables.default;
-    const existingKeys = new Set(variables.map((v) => v.key));
-    const toAdd = suggested.filter((v) => !existingKeys.has(v.key));
+    const existingKeys = new Set(variables.map((v) => v.key);
+    const toAdd = suggested.filter((v) => !existingKeys.has(v.key);
     if(toAdd.length > 0) {
-      const updated = [...variables, ...toAdd];
+      const updated = [...variables, ...toAdd]
       setVariables(updated)
-      onChange(updated); }
-}
+      onChange(updated) }}
   const _getTypeIcon = (type: EnvVariable['type']) => { switch (type) {</HTMLInputElement>
       case 'secret':
     return <Lock className="h-4 w-4" />;
     break;
-
-    break;
-break;
-
-
       case 'api_key':
-    return <Key className="h-4 w-4" />;
-    break;
+    return <Key className="h-4 w-4" />
+    break
 }
       default: return<Eye className="h-4 w-4" />
-}
-}
+}}
   const _getTypeBadgeColor = (type: EnvVariable['type']) => { switch (type) {
       case 'secret':
     return 'bg-red-100 text-red-700';
     break;
-
-    break;
-break;
-
-
       case 'api_key':
-    return 'bg-yellow-100 text-yellow-700';
-    break;
+    return 'bg-yellow-100 text-yellow-700'
+    break
 }
-      default: return 'bg-green-100 text-green-700'}
-}
-  return (<Card className="p-6">;
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-4">
+      default: return 'bg-green-100 text-green-700'}}
+  return (<Card className="p-6">;</Card>
+      <div className="mb-6 flex items-center justify-between mb-4"></div>
           <div>
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <Shield className="h-5 w-5" />
@@ -233,7 +210,7 @@ break;
                 accept=".env, .env.local"
                 onChange={importEnvFile}
                 className="hidden" />
-            </label>
+</label>
         {/* Security, Notice */}
         <Alert className="mb-4">
           <AlertTriangle className="h-4 w-4" />
@@ -241,9 +218,8 @@ break;
             Environment variables marked as "secret" or "api_key" will be encrypted and never exposed in the UI after saving.</AlertDescription>
       {/* Variables, List */}
       <div className="space-y-4">
-        {variables.map((variable, index) => (<div key={index} className="border rounded-lg p-4">
-            <div className="grid grid-cols-12 gap-4">
-              {/* Key */}
+        {variables.map((variable, index) => (\n    <div key={index} className="border rounded-lg p-4 grid grid-cols-12 gap-4">
+              {/* Key */}</div>
               <div className="col-span-4">
                 <label className="text-sm font-medium mb-1 block">Key</label>
                 <Input
@@ -274,7 +250,7 @@ break;
                       type="button"
                       onClick={() => toggleShowSecret(variable.key)}
                       className="absolute right-2 top-2.5 text-gray-400 hover:text-gray-600"
-                    >
+                    ></button>
                       {showSecrets[variable.key] ? (</button>
                         <EyeOff className="h-4 w-4" />
                       ) : (</EyeOff>
@@ -297,12 +273,11 @@ break;
                     onClick={() => handleRemoveVariable(index)}
                   ></Button>
                     <Trash2 className="h-4 w-4 text-red-500" />
-                  </Button>
+</Button>
                 )},
     {/* Description & Metadata */}
-            <div className="mt-3 flex items-start justify-between">
-              <div className="flex-1">
-                {variable.description  && (/div>
+            <div className="mt-3 flex items-start justify-between flex-1">
+                {variable.description  && (/div></div>
                   <p className="text-sm text-muted-foreground">{variable.description}</p>
   },
     {validationErrors[variable.key]  && (p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}</p>
@@ -310,17 +285,12 @@ break;
                 <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))}>
                   {getTypeIcon(variable.type)}</Badge>
                   <span className="ml-1">{variable.type}</span>
-                </Badge>
                 {variable.required  && (
 Badge variant="outline", className="text-xs">
                     Required</Badge>
-                
-              
             )},
     {variable.validated  && (
-CheckCircle className="h-4 w-4 text-green-500"    />
-                
-              
+CheckCircle className="h-4 w-4 text-green-500" />
             )}))},
     {/* Add, Variable Button */},
     {!readOnly  && (
@@ -331,8 +301,6 @@ Button
           >
             <Plus className="h-4 w-4 mr-2" />
             Add Variable</Plus>
-        
-              
             )},
     {/* Validation */}
       <div className="mt-6 flex justify-end">
@@ -341,18 +309,24 @@ Button
           disabled={isValidating}
         >
           {isValidating ? 'Validating...' : 'Validate All'}
-  );
+  )
 }
-
-    </Button>
-          </div>
+</Button>
 </option>
-          </div>
 </Alert>
-    </span>
-    </Button>
-    </div>
-    </h3>
-          </div>
+</Button>
+</h3>
 </Card>
-    }
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </span>
+    </div>
+    </div>
+    </any>
+  }

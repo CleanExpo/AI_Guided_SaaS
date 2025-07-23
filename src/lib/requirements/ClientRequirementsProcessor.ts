@@ -4,32 +4,34 @@ import { readFileSync } from 'fs';
 import path from 'path';
 export interface ExtractedRequirement {
   id: string,
-    category: 'functional' | 'technical' | 'design' | 'business',
+  category: 'functional' | 'technical' | 'design' | 'business',
   description: string,
-    priority: 'high' | 'medium' | 'low',
+  priority: 'high' | 'medium' | 'low',
   agents: string[],
-    keywords: string[];
-  constraints?: string[];
+  keywords: string[],
+  constraints?: string[]
 };
 export interface DevelopmentRoadmap {
   id: string,
-    projectName: string,
-    requirements: ExtractedRequirement[],
-    phases: RoadmapPhase[], estimatedDuration: string,
-    complexity: 'simple' | 'moderate' | 'complex' | 'enterprise'
+  projectName: string,
+  requirements: ExtractedRequirement[],
+  phases: RoadmapPhase[],
+  estimatedDuration: string,
+  complexity: 'simple' | 'moderate' | 'complex' | 'enterprise'
 };
 export interface RoadmapPhase {
   id: string,
-    name: string,
-    agents: string[],
-    tasks: string[], dependencies: string[],
-    duration: string,
-    parallel: boolean
+  name: string,
+  agents: string[],
+  tasks: string[],
+  dependencies: string[],
+  duration: string,
+  parallel: boolean
 };
 export class ClientRequirementsProcessor {
-  private, aiService: AIService
-  private, agentCoordinator: AgentCoordinator
-  private, extractionTemplate: string
+  private aiService: AIService
+  private agentCoordinator: AgentCoordinator
+  private extractionTemplate: string
   constructor(aiService: AIService, agentCoordinator: AgentCoordinator) {
     this.aiService = aiService
     this.agentCoordinator = agentCoordinator
@@ -40,8 +42,7 @@ export class ClientRequirementsProcessor {
     } catch (error) {
       console.error('Failed to load ClientSpecExtraction.prp, template:', error)
       this.extractionTemplate = this.getDefaultTemplate()
-}
-}
+}}
   async processClientInput(input: string): Promise<any> {
     // Extract requirements using AI
     const requirements = await this.extractRequirements(input);
@@ -49,8 +50,7 @@ export class ClientRequirementsProcessor {
     const roadmap = await this.generateRoadmap(requirements, input);
     // Validate and optimize
     await this.validateRequirements(requirements)
-    return { requirements, roadmap };
-}
+    return { requirements, roadmap }}
   private async extractRequirements(input: string): Promise<any> {
     const _prompt = `;``
 Using the following template structure, extract and categorize requirements from the client, input:
@@ -86,12 +86,11 @@ Focus on, identifying:
     })
     try {
       const parsed = JSON.parse(response.message);
-      return this.enrichRequirements(parsed.requirements || []);
+      return this.enrichRequirements(parsed.requirements || [])
     } catch (error) {
       console.error('Failed to parse AI, response:', error)
-      return this.fallbackExtraction(input);
-}
-}
+      return this.fallbackExtraction(input)
+}}
   private enrichRequirements(requirements: any[]): ExtractedRequirement[] {
     return requirements.map((req, index) => ({
       id: req.id || `req_${String(index + 1).padStart(3, '0')}`,``
@@ -105,11 +104,11 @@ Focus on, identifying:
 }
   private validateCategory(category: string): ExtractedRequirement['category'] {
     const valid = ['functional', 'technical', 'design', 'business'];
-    return valid.includes(category) ? category as, any : 'functional';
+    return valid.includes(category) ? category as, any: 'functional'
 }
   private validatePriority(priority: string): ExtractedRequirement['priority'] {
     const valid = ['high', 'medium', 'low'];
-    return valid.includes(priority) ? priority as, any : 'medium';
+    return valid.includes(priority) ? priority as, any: 'medium'
 }
   private determineAgents(requirement): string[] {
     const agents = new Set<string>();
@@ -139,7 +138,7 @@ Focus on, identifying:
     if(agents.size === 0) {
       agents.add('agent_architect')
 }
-    return Array.from(agents);
+    return Array.from(agents)
 }
   private extractKeywords(description: string): string[] {
     // Simple keyword extraction
@@ -163,8 +162,7 @@ Focus on, identifying:
       phases,
       estimatedDuration,
       // complexity
-}
-}
+}}
   private determineComplexity(
     requirements: ExtractedRequirement[]
   ): DevelopmentRoadmap['complexity'] {
@@ -178,12 +176,12 @@ Focus on, identifying:
       points += req.agents.length
       // Technical requirements add complexity
       if (req.category === 'technical') points += 2
-      return total + points;
+      return total + points
     }, 0)
     if (score < 10) return 'simple';
     if (score < 25) return 'moderate';
     if (score < 50) return 'complex';
-    return 'enterprise';
+    return 'enterprise'
 }
   private createPhases(
     requirements: ExtractedRequirement[],
@@ -211,16 +209,16 @@ Focus on, identifying:
     const coreAgents = new Set<string>();
     // requirements
       .filter((req) => req.priority === 'high')
-      .forEach((req) => req.agents.forEach((agent) => coreAgents.add(agent)))
+      .forEach((req) => req.agents.forEach((agent) => coreAgents.add(agent))
     phases.push({
       id: 'phase_2',
       name: 'Core Development',
-      agents: Array.from(coreAgents),
+      agents: Array.from(coreAgents)
     tasks: requirements
         .filter((req) => req.priority === 'high')
         .map((req) => req.description),
       dependencies: complexity !== 'simple' ? ['phase_1'] : [],
-    duration: this.estimatePhaseDuration(requirements.filter((req) => req.priority === 'high')),
+    duration: this.estimatePhaseDuration(requirements.filter((req) => req.priority === 'high'),
     parallel: coreAgents.size > 1
     })
     // Phase, 3: Feature Development
@@ -229,7 +227,7 @@ Focus on, identifying:
       phases.push({
         id: 'phase_3',
         name: 'Feature Development',
-        agents: Array.from(new Set(featureReqs.flatMap(req => req.agents))),
+        agents: Array.from(new Set(featureReqs.flatMap(req => req.agents)),
     tasks: featureReqs.map((req) => req.description),
     dependencies: ['phase_2'],
     duration: this.estimatePhaseDuration(featureReqs),
@@ -266,19 +264,19 @@ Focus on, identifying:
     duration: '3-5 days',
       parallel: false
     })
-    return phases;
+    return phases
 }
   private estimatePhaseDuration(requirements: ExtractedRequirement[]) {
     const _points = requirements.reduce((total, req) => {
       let p = 1;
       if (req.priority === 'high') p = 3
       if (req.priority === 'medium') p = 2
-      return total + p;
+      return total + p
     }, 0)
     if (points < 5) return '1 week';
     if (points < 10) return '2 weeks';
     if (points < 20) return '3-4 weeks';
-    return '4-6 weeks';
+    return '4-6 weeks'
 }
   private estimateDuration(
     phases: RoadmapPhase[],
@@ -294,7 +292,7 @@ Focus on, identifying:
     const _weeks = baseWeeks[complexity];
     if (weeks <= 4) return `${weeks} weeks`;
     if (weeks <= 8) return `${weeks / 4} months`;
-    return `${weeks / 4}-${weeks / 4 + 1} months`;
+    return `${weeks / 4}-${weeks / 4 + 1} months`
 }
   private extractProjectName(input: string) {
     // Try to extract project name from input
@@ -303,7 +301,7 @@ Focus on, identifying:
     // Look for specific product types
     const typeMatch = input.match(/(?:e-commerce|dashboard|crm|cms|blog|portfolio|api|backend|frontend)\s+(?: site | platform|application|system)?/i);
     if (typeMatch) return typeMatch[0].trim();
-    return 'New Project';
+    return 'New Project'
 }
   private async validateRequirements(requirements: ExtractedRequirement[]): Promise<any> {
     // Check for conflicts
@@ -315,27 +313,25 @@ Focus on, identifying:
     const missing = this.findMissingDependencies(requirements);
     if(missing.length > 0) {
       console.warn('⚠️ Missing, dependencies:', missing)
-}
-}
+}}
   private findConflicts(requirements: ExtractedRequirement[]): string[] {
     const conflicts: string[] = [];
     // Example: Check for conflicting technical requirements
     const _techReqs = requirements.filter((r) => r.category === 'technical');
     // Add conflict detection logic here
-    return conflicts;
+    return conflicts
 }
   private findMissingDependencies(requirements: ExtractedRequirement[]): string[] {
     const missing: string[] = [];
     // Example: If API is required but no backend agent assigned
     const _hasAPI = requirements.some(r => ;
       r.keywords.some(k => k.includes('api')) ||
-      r.description.toLowerCase().includes('api')
-    )
-    const _hasBackend = requirements.some(r => r.agents.includes('agent_backend'));
+      r.description.toLowerCase().includes('api'))
+    const _hasBackend = requirements.some(r => r.agents.includes('agent_backend');
     if(hasAPI && !hasBackend) {
       missing.push('Backend development agent needed for API requirements')
 }
-    return missing;
+    return missing
 }
   private fallbackExtraction(input: string): ExtractedRequirement[] {
     // Simple fallback extraction if AI fails
@@ -368,6 +364,5 @@ Focus on, identifying:
   async convertToAgentWorkflow(roadmap: DevelopmentRoadmap): Promise<any> {
     // Convert roadmap to agent coordinator workflow
     return this.agentCoordinator.createCoordinationPlan(
-      JSON.stringify(roadmap.requirements)
-    )
+      JSON.stringify(roadmap.requirements))
 }

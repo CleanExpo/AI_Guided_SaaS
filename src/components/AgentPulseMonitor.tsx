@@ -1,56 +1,62 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Activity, Cpu, HardDrive, Users, Clock, AlertCircle } from 'lucide-react';
-interface AgentMetrics {
-agentId: string;
-    isAvailable: boolean;
-    executionCount: number;
-    averageExecutionTime: number;
-    cooldownRemaining: number 
-}
-interface PulseStatus {
-pulse: {
-  config: {
-  maxConcurrentAgents: number;
-    pulseInterval: number;
-    cooldownPeriod: number;
-    maxMemoryUsage: number;
-    maxCpuUsage: number
 
+interface AgentMetrics {
+  agentId: string;
+  isAvailable: boolean;
+  executionCount: number;
+  averageExecutionTime: number;
+  cooldownRemaining: number;
 }
-  taskQueue: {
+
+interface PulseStatus {
+  pulse: {
+    config: {
+      maxConcurrentAgents: number,
+      pulseInterval: number;
+      cooldownPeriod: number;
+      maxMemoryUsage: number;
+      maxCpuUsage: number;
+    },
+    taskQueue: {
       length: number,
-    priorities: { low?: number;
+      priorities: {
+        low?: number;
         medium?: number;
         high?: number;
-        critical?: number };
-}
-    resources: { cpuUsage: number,
-    memoryUsage: number,
-    activeAgents: number,
-    queuedTasks: number };
-  agentPool: AgentMetrics[];
+        critical?: number;
+      }};
+    resources: {
+      cpuUsage: number;
+      memoryUsage: number;
+    },
+    activeAgents: string[];
   };
+  agents: AgentMetrics[];
 }
+
 export function AgentPulseMonitor() {
-  const [status, setStatus] = useState<PulseStatus | null>(null);
-  const [isLoading, setIsLoading] = useState<any>(true);
+  const [pulseStatus, setPulseStatus] = useState<PulseStatus | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => { fetchStatus();
-    const interval = setInterval(fetchStatus, 2000); // Update every 2 seconds
-    return () => clearInterval(interval) }, []);
+
   const fetchStatus = async () => {
-    try { const response = await fetch('/api/agents/pulse-status');
+    try {
+      const response = await fetch('/api/agents/pulse-status');
       if (!response.ok) throw new Error('Failed to fetch status');
       const data = await response.json();
-      setStatus(data);
-      setIsLoading(false) } catch (err) { setError(err instanceof Error ? err.message : 'Unknown error');
-      setIsLoading(false) }
+      setPulseStatus(data);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load pulse status');
+    } finally {
+      setIsLoading(false);
+}
   };
 
   const updateConfig = async (updates: Record<string, any>) => {
@@ -62,16 +68,26 @@ export function AgentPulseMonitor() {
       });
       if (!response.ok) throw new Error('Failed to update config');
       await fetchStatus();
-    } catch (err) { setError(err instanceof Error ? err.message : 'Failed to update') }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update');
+    }
   };
 
+  useEffect(() => {
+    fetchStatus();
+    const interval = setInterval(fetchStatus, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   if (isLoading) return <div>Loading pulse monitor...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!status) return <div>No status data available</div>;
-  const { pulse   }: any = status;
+  if (error) return <div className="text-red-600">Error: {error}</div>;
+  if (!pulseStatus) return <div>No pulse data available</div>;
+
+  const { pulse, agents } = pulseStatus;
+
   return (
     <div className="space-y-4">
-      {/* Resource, Usage */}
+      {/* Resource Usage */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -96,6 +112,7 @@ export function AgentPulseMonitor() {
               className={pulse.resources.cpuUsage > pulse.config.maxCpuUsage ? 'bg-red-100' : ''}
             />
           </div>
+          
           <div>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
@@ -113,94 +130,97 @@ export function AgentPulseMonitor() {
           </div>
         </CardContent>
       </Card>
-      {/* Agent, Pool Status */}
+
+      {/* Agent Status */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Users className="h-5 w-5" />
-            Agent Pool
+            Agent Status
           </CardTitle>
           <CardDescription>
-            {pulse.resources.activeAgents} / {pulse.config.maxConcurrentAgents} agents active
+            {pulse.activeAgents.length}/{pulse.config.maxConcurrentAgents} agents active
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {pulse.agentPool.map((agent) => (
-              <div key={agent.agentId} className="flex items-center justify-between p-3 border rounded-lg">
-                <div className="flex items-center gap-3">
-                  <Badge variant={agent.isAvailable ? 'default' : 'secondary'}>
-                    {agent.isAvailable ? 'Available' : 'Busy'}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {agents.map((agent) => (
+              <div key={agent.agentId} className="border rounded-lg p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-medium">{agent.agentId}</span>
+                  <Badge variant={agent.isAvailable ? "success" : "secondary"}>
+                    {agent.isAvailable ? "Available" : "Busy"}
                   </Badge>
-                  <span className="text-sm font-medium">{agent.agentId}</span>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span>{agent.executionCount} runs</span>
-                  <span>{agent.averageExecutionTime}ms avg</span>
+                <div className="text-sm text-gray-600 space-y-1">
+                  <div>Executions: {agent.executionCount}</div>
+                  <div>Avg Time: {agent.averageExecutionTime.toFixed(0)}ms</div>
                   {agent.cooldownRemaining > 0 && (
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1 text-amber-600">
                       <Clock className="h-3 w-3" />
-                      <span>{(agent.cooldownRemaining / 1000).toFixed(1)}s</span>
+                      Cooldown: {agent.cooldownRemaining}ms
                     </div>
                   )}
-                      </div>
-))}
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
-      {/* Task, Queue */}
+
+      {/* Task Queue */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <AlertCircle className="h-5 w-5" />
-            Task Queue
-          </CardTitle>
+          <CardTitle>Task Queue</CardTitle>
           <CardDescription>
             {pulse.taskQueue.length} tasks pending
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-4 gap-2">
-            {['critical', 'high', 'medium', 'low'].map((priority) => (
-              <div key={priority} className="text-center p-2 border rounded">
-                <div className="text-sm font-medium capitalize">{priority}</div>
-                <div className="text-2xl font-bold">
-                  {pulse.taskQueue.priorities[priority as keyof typeof pulse.taskQueue.priorities] || 0}
-                      </div>
-))}
+          <div className="space-y-2">
+            {Object.entries(pulse.taskQueue.priorities).map(([priority, count]) => (
+              <div key={priority} className="flex items-center justify-between">
+                <span className="capitalize">{priority}</span>
+                <Badge>{count || 0}</Badge>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
-      {/* Configuration, Controls */}
+
+      {/* Configuration */}
       <Card>
         <CardHeader>
           <CardTitle>Pulse Configuration</CardTitle>
-          <CardDescription>Adjust agent execution parameters</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <Button
-              variant="outline"
-              onClick={() => updateConfig({ maxConcurrentAgents: Math.max(1, pulse.config.maxConcurrentAgents - 1) })}
-            >
-              Reduce Agents (-1)
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => updateConfig({ maxConcurrentAgents: pulse.config.maxConcurrentAgents + 1 })}
-            >
-              Increase Agents (+1)
-            </Button>
+        <CardContent className="space-y-3">
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span className="text-gray-600">Max Concurrent:</span>
+              <span className="ml-2 font-medium">{pulse.config.maxConcurrentAgents}</span>
+            </div>
+            <div>
+              <span className="text-gray-600">Pulse Interval:</span>
+              <span className="ml-2 font-medium">{pulse.config.pulseInterval}ms</span>
+            </div>
+            <div>
+              <span className="text-gray-600">Cooldown Period:</span>
+              <span className="ml-2 font-medium">{pulse.config.cooldownPeriod}ms</span>
+            </div>
+            <div>
+              <span className="text-gray-600">CPU Limit:</span>
+              <span className="ml-2 font-medium">{pulse.config.maxCpuUsage}%</span>
+            </div>
           </div>
-          <div className="text-sm text-muted-foreground">
-            <div>Pulse Interval: {pulse.config.pulseInterval}ms</div>
-            <div>Cooldown Period: {pulse.config.cooldownPeriod}ms</div>
-            <div>Max CPU: {pulse.config.maxCpuUsage}%</div>
-            <div>Max Memory: {pulse.config.maxMemoryUsage}%      </div>
-</CardContent>
+          <Button
+            onClick={() => updateConfig({ maxConcurrentAgents: pulse.config.maxConcurrentAgents + 1 })}
+            size="sm"
+            className="mt-4"
+          >
+            Increase Agent Limit
+          </Button>
+        </CardContent>
       </Card>
-          </div>
-
-        );
-
-      }
+    </div>
+  );
+}

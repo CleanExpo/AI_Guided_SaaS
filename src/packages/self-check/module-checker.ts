@@ -19,8 +19,7 @@ export function checkModules(): {
       presentModules.push(`apps/${dir}`);``
     } else {
       missingModules.push(`apps/${dir}`);``
-}
-  });
+}});
   // Check packages
   requiredPackages.forEach((dir) => {
     const _fullPath = path.join(packagesPath, dir);
@@ -28,8 +27,7 @@ export function checkModules(): {
       presentModules.push(`packages/${dir}`);``
     } else {
       missingModules.push(`packages/${dir}`);``
-}
-  });
+}});
   return {
     status:
       missingModules.length === 0

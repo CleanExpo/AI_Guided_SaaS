@@ -1,14 +1,16 @@
 import React from 'react';
 
-interface TaskQueueVisualizerProps {
-queue?: Array<{
-    id: string;
-    name: string;
-    priority: string;
-    status: string
-  
-}>;
+export interface QueueTask {
+  id: string;
+  name: string;
+  priority: 'high' | 'medium' | 'low';
+  status: 'pending' | 'processing' | 'completed';
 }
+
+interface TaskQueueVisualizerProps {
+  queue?: QueueTask[];
+}
+
 export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -35,7 +37,7 @@ export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
             </div>
           ))
         )}
-            </div>
-);
-
-      }
+      </div>
+    </div>
+  );
+}

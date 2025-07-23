@@ -1,14 +1,11 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 import { NextRequest, NextResponse } from 'next/server';
-
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         const url = new URL(request.url);
         const type = url.searchParams.get('type') || 'general';
         let data;
-        
         switch (type) {
             case 'general':
                 data = {
@@ -18,7 +15,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                     bounceRate: 23.4
                 };
                 break;
-                
             case 'traffic':
                 data = {
                     visits: 2341,
@@ -26,7 +22,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                     averageSession: '3m 45s'
                 };
                 break;
-                
             case 'content':
                 data = {
                     topPages: [
@@ -35,22 +30,19 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                     ]
                 };
                 break;
-                
             default:
                 return NextResponse.json(
                     { error: 'Invalid analytics type' }, { status: 400 }
-                );
+                )
         }
-        
         return NextResponse.json({
             type,
             data,
             timestamp: new Date().toISOString()
-        });
+        })
     } catch (error) {
         console.error('Analytics API error:', error);
         return NextResponse.json(
             { error: 'Failed to fetch analytics' }, { status: 500 }
-        );
-    }
-}
+        )
+    }}

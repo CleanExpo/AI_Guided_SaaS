@@ -1,39 +1,38 @@
 import { DevelopmentRoadmap, RoadmapPhase } from '@/lib/requirements/ClientRequirementsProcessor';export interface RoadmapMilestone {
   id: string,
-    phaseId: string,
-    name: string,
-    expectedDate: Date;
+  phaseId: string,
+  name: string,
+  expectedDate: Date,
   actualDate?: Date,
     status: 'pending' | 'in_progress' | 'completed' | 'delayed' | 'blocked',
   completionCriteria: CompletionCriterion[],
-    dependencies: string[], deliverables: string[]
+  dependencies: string[],
+  deliverables: string[]
 };
 export interface CompletionCriterion {
-
   id: string,
-    description: string,
-    type: 'feature' | 'test' | 'performance' | 'documentation',
+  description: string,
+  type: 'feature' | 'test' | 'performance' | 'documentation',
   validation: {
-  method: 'automated' | 'manual' | 'hybrid';
-    script?: string;
-    threshold?: number;
+  method: 'automated' | 'manual' | 'hybrid',
+  script?: string,
+  threshold?: number
 }
   status: 'pending' | 'passed' | 'failed';
   lastChecked?: Date
-  result?;
+  result?
 };
 export interface RoadmapValidationResult {
-
   roadmapId: string,
-    validationDate: Date,
-    overallStatus: 'on_track' | 'at_risk' | 'delayed' | 'blocked',
+  validationDate: Date,
+  overallStatus: 'on_track' | 'at_risk' | 'delayed' | 'blocked',
   completionPercentage: number,
-    milestones: {
+  milestones: {
   total: number,
-    completed: number,
-    inProgress: number,
-    delayed: number,
-    blocked: number
+  completed: number,
+  inProgress: number,
+  delayed: number,
+  blocked: number
 }
   deviations: RoadmapDeviation[], recommendations: string[]
   nextMilestone?: RoadmapMilestone, estimatedCompletionDate: Date
@@ -42,14 +41,14 @@ export interface RoadmapDeviation {
   type: 'delay' | 'scope_change' | 'blocker' | 'resource_issue',
   severity: 'low' | 'medium' | 'high' | 'critical',
   milestoneId: string,
-    description: string,
-    impact: string,
-    suggestedAction: string
+  description: string,
+  impact: string,
+  suggestedAction: string
 };
 export class RoadmapValidator {
-  private, milestones: Map<string, RoadmapMilestone> = new Map()
-  private, validationHistory: RoadmapValidationResult[] = []
-  constructor(private, roadmap: DevelopmentRoadmap) {
+  private milestones: Map<string, RoadmapMilestone> = new Map()
+  private validationHistory: RoadmapValidationResult[] = []
+  constructor(private roadmap: DevelopmentRoadmap) {
     this.initializeMilestones()
 }
   private initializeMilestones() {
@@ -81,22 +80,15 @@ export class RoadmapValidator {
       case 'day':
     return avg;
     break;
-
-    break;
-break;
-
-
       case 'week':
     return avg * 7;
     break;
-
       case 'month':
 return avg * 30,
     break;
-break;
+break
 }
-default: return 7}
-}
+default: return 7}}
   private generateCompletionCriteria(phase: RoadmapPhase): CompletionCriterion[] {
     const criteria: CompletionCriterion[] = [];
     // Feature completion criteria
@@ -104,23 +96,17 @@ default: return 7}
       criteria.push({
         id: `${phase.id}_feature_${index}`
         description: task, type: 'feature',
-    validation: {
-          method: 'automated',
-          script: `validate_feature_${phase.id}_${index}`
+    validation: { method: 'automated', script: `validate_feature_${phase.id }_${index}`
         },
         status: 'pending'
-      })
-    })
+      })}
     // Test criteria based on phase type
     if (phase.name.toLowerCase().includes('development')) {
       criteria.push({
         id: `${phase.id}_test_coverage`
         description: 'Unit test coverage > 80%',
         type: 'test',
-    validation: {
-          method: 'automated',
-          threshold: 80
-        },
+    validation: { method: 'automated', threshold: 80 },
         status: 'pending'
       })
 }
@@ -130,10 +116,7 @@ default: return 7}
         id: `${phase.id}_performance`
         description: 'API response time < 200ms',
         type: 'performance',
-    validation: {
-          method: 'automated',
-          threshold: 200
-        },
+    validation: { method: 'automated', threshold: 200 },
         status: 'pending'
       })
 }
@@ -142,12 +125,10 @@ default: return 7}
       id: `${phase.id}_documentation`
       description: 'Technical documentation complete',
       type: 'documentation',
-    validation: {
-        method: 'manual'
-      },
+    validation: { method: 'manual' },
       status: 'pending'
     })
-    return criteria;
+    return criteria
 }
   async validateRoadmap(): Promise<any> {
     const result: RoadmapValidationResult = {
@@ -173,38 +154,26 @@ default: return 7}
         case 'completed':
     result.milestones.completed++
     break;
-
-    break;
-
           // break
         case 'in_progress':
     result.milestones.inProgress++
     break;
-
-    break;
-
           // break
         case 'delayed':
     result.milestones.delayed++
     break;
-
-    break;
-
           result.deviations.push(this.createDelayDeviation(milestone))
           // break
         case 'blocked':
     result.milestones.blocked++
     break;
-
-    break;
+    break
 }
           result.deviations.push(this.createBlockedDeviation(milestone))
           // break
-}
-}
+}}
     // Calculate completion percentage
-    result.completionPercentage = Math.round(
-      (result.milestones.completed / result.milestones.total) * 100
+    result.completionPercentage = Math.round((result.milestones.completed / result.milestones.total) * 100
     )
     // Determine overall status
     if(result.milestones.blocked > 0) {
@@ -222,7 +191,7 @@ default: return 7}
     result.recommendations = this.generateRecommendations(result)
     // Store validation history
     this.validationHistory.push(result)
-    return result;
+    return result
 }
   private async validateMilestone(milestone: RoadmapMilestone): Promise<any> {
     const _now = new Date();
@@ -253,7 +222,7 @@ default: return 7}
     if(milestone.dependencies.length > 0) {
       const _blockedByIncomplete = milestone.dependencies.some((dep) => {
         const depMilestone = Array.from(this.milestones.values()).find(m => m.phaseId === dep);
-        return depMilestone && depMilestone.status !== 'completed';
+        return depMilestone && depMilestone.status !== 'completed'
       })
       if (blockedByIncomplete) { milestone.status = 'blocked'
 }
@@ -261,85 +230,65 @@ default: return 7}
       case 'automated':
     return this.runAutomatedValidation(criterion);
     break;
-
-    break;
-break;
-
-
       case 'manual':
     return this.checkManualValidation(criterion);
     break;
-
       case 'hybrid':
 const _auto = await this.runAutomatedValidation(criterion);
-    break;
+    break
 }
         const _manual = await this.checkManualValidation(criterion);
         return auto && manual,
 break;
- default:
-        return false;
-}
-}
+ default: return false
+}}
   private async runAutomatedValidation(criterion: CompletionCriterion): Promise { // Simulate automated validation
     try {
       switch (criterion.type) {
         case 'test':
     // Check test coverage
     break;
-
-    break;
-
           const _coverage = await this.getTestCoverage();
           return coverage >= (criterion.validation.threshold || 80);
 break;
-
         case 'performance':
     // Check performance metrics
     break;
-
-    break;
-
           const _responseTime = await this.getAverageResponseTime();
           return responseTime <= (criterion.validation.threshold || 200);
         case 'feature':
     // Check if feature endpoint exists and works
     break;
-
-    break;
+    break
 }
           const _featureWorks = await this.checkFeatureEndpoint(criterion.description);
           return featureWorks,
 break;
- default:
-          return true;
-}
-    } catch (error) {
+ default: return true
+}} catch (error) {
       console.error(`Validation error for ${criterion.id}:`, error)``
-      return false;
-}
-}
+      return false
+}}
   private async checkManualValidation(criterion: CompletionCriterion): Promise<any> {
     // In a real system, this would check a database or external system
     // For now, simulate manual validation
-    return Math.random() > 0.2 // 80% pass rate;
+    return Math.random() > 0.2 // 80% pass rate
 }
   private async getTestCoverage(): Promise<any> {
     // In reality, this would run coverage tools
-    return 75 + Math.random() * 20 // 75-95%;
+    return 75 + Math.random() * 20 // 75-95%
 }
   private async getAverageResponseTime(): Promise<any> {
     // In reality, this would query monitoring system
-    return 100 + Math.random() * 150 // 100-250ms;
+    return 100 + Math.random() * 150 // 100-250ms
 }
   private async checkFeatureEndpoint(feature: string): Promise<any> {
     // In reality, this would make actual API calls
-    return Math.random() > 0.1 // 90% success rate;
+    return Math.random() > 0.1 // 90% success rate
 }
   private createDelayDeviation(milestone: RoadmapMilestone): RoadmapDeviation {
-    const _delayDays = Math.ceil(
-      (new Date().getTime() - milestone.expectedDate.getTime()) / (24 * 60 * 60 * 1000)
-    )
+    const _delayDays = Math.ceil(;
+      (new Date().getTime() - milestone.expectedDate.getTime()) / (24 * 60 * 60 * 1000))
     return {
       type: 'delay',
       severity: delayDays > 14 ? 'high' : delayDays > 7 ? 'medium' : 'low',
@@ -347,8 +296,7 @@ break;
     description: `${milestone.name} is delayed by ${delayDays} days`
       impact: `Project completion may be delayed by approximately ${delayDays} days`
       suggestedAction: 'Allocate additional resources or adjust scope'
-}
-}
+}}
   private createBlockedDeviation(milestone: RoadmapMilestone): RoadmapDeviation {
     return {
       type: 'blocker',
@@ -357,8 +305,7 @@ break;
     description: `${milestone.name} is blocked by incomplete dependencies`
       impact: 'Cannot proceed until dependencies are resolved',
       suggestedAction: 'Prioritize completion of blocking dependencies'
-}
-}
+}}
   private findNextMilestone(): RoadmapMilestone | undefined {
     return Array.from(this.milestones.values()).find(
       m: any => m.status === 'pending' || m.status === 'in_progress'
@@ -369,7 +316,7 @@ break;
     m: any => m.status !== 'completed'
     )
     if(remainingMilestones.length === 0) {
-      return new Date();
+      return new Date()
 }
     // Calculate average delay factor
     const _delayFactor = this.calculateDelayFactor();
@@ -380,18 +327,18 @@ break;
     // Apply delay factor
     const estimatedDate = new Date(lastMilestone.expectedDate);
     estimatedDate.setDate(estimatedDate.getDate() + Math.ceil(delayFactor * 7)) // Add delay in days
-    return estimatedDate;
+    return estimatedDate
 }
   private calculateDelayFactor(): number {
-    const delayedMilestones = Array.from(this.milestones.values()).filter(
+    const delayedMilestones = Array.from(this.milestones.values()).filter(;
       m: any => m.status === 'delayed' && m.actualDate
     )
     if (delayedMilestones.length === 0) return 0;
     const _totalDelayDays = delayedMilestones.reduce((sum, m) => {
       const _delay = (m.actualDate!.getTime() - m.expectedDate.getTime()) / (24 * 60 * 60 * 1000);
-      return sum + delay;
+      return sum + delay
     }, 0)
-    return totalDelayDays / delayedMilestones.length / 7 // Convert to weeks;
+    return totalDelayDays / delayedMilestones.length / 7 // Convert to weeks
 }
   private generateRecommendations(result: RoadmapValidationResult): string[] {
     const recommendations: string[] = [];
@@ -416,13 +363,12 @@ break;
       )
       if (decliningPerformance) {
         recommendations.push('Performance trend is declining - consider team health check')
-}
-}
-    return recommendations;
+}}
+    return recommendations
 }
   getValidationHistory(): RoadmapValidationResult[] {
     return, this.validationHistory
 }
   getMilestoneDetails(milestoneId: string): RoadmapMilestone | undefined {
-    return this.milestones.get(milestoneId);
+    return this.milestones.get(milestoneId)
 }

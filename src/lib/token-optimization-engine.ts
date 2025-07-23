@@ -1,95 +1,110 @@
 // Token Optimization Engine with 150K Context Management
 // Advanced token management for Claude Code's 200K context windowexport interface TokenBudget {
   total: number,
-    allocated: TokenAllocatio;n,
+  allocated: TokenAllocatio
+n,
     reserved: number,
-    available: number,
-    utilizationRate: number
+  available: number,
+  utilizationRate: number
 };
 export interface TokenAllocation {
-  coreMemory: number        // Essential project informatio;n,
-    workingContext: number    // Active development contex;t,
-    documentation: number     // Documentation and guide;s,
-    codeContext: number      // Current code being worked o;n,
-    toolOutput: number       // Tool execution result;s,
-    conversationHistory: number // Recent conversation contex;t
+  coreMemory: number        // Essential project informatio
+n,
+    workingContext: number    // Active development contex
+t,
+    documentation: number     // Documentation and guide
+s,
+    codeContext: number      // Current code being worked o
+n,
+    toolOutput: number       // Tool execution result
+s,
+    conversationHistory: number // Recent conversation contex
+t
 };
 export interface OptimizationStrategy {
   name: string,
-    description: string,
-    targetUtilization: number,
-    compressionRatio: number,
-    preservationRules: PreservationRule[],
-    triggers: OptimizationTrigger[]
+  description: string,
+  targetUtilization: number,
+  compressionRatio: number,
+  preservationRules: PreservationRule[],
+  triggers: OptimizationTrigger[]
 };
 export interface PreservationRule {
   type: 'always_preserve' | 'conditionally_preserve' | 'compressible' | 'archivable',
-  pattern: string | RegEx;p,
+  pattern: string | RegEx
+p,
     priority: number,
-    reason: string
+  reason: string
 };
 export interface OptimizationTrigger {
-  condition: 'token_threshold' | 'time_interval' | 'context_fragmentation' | 'manual';
-  threshold?: number;
-  interval?: number;
+  condition: 'token_threshold' | 'time_interval' | 'context_fragmentation' | 'manual',
+  threshold?: number,
+  interval?: number,
   parameters?: Record<string, any>
 };
 export interface TokenAnalysis {
   currentUsage: number,
-    distribution: TokenDistributio;n,
-    efficiency: EfficiencyMetric;s,
+  distribution: TokenDistributio
+n,
+    efficiency: EfficiencyMetric
+s,
     recommendations: OptimizationRecommendation[],
-    fragmentation: FragmentationAnalysi;s
+  fragmentation: FragmentationAnalysi
+s
 };
 export interface TokenDistribution {
   categories: Record<string, any>,
   files: Record<string, any>,
   agents: Record<string, any>,
-  temporalDistribution: TemporalDistributio;n
+  temporalDistribution: TemporalDistributio
+n
 };
 export interface TemporalDistribution {
-  recent: number      // Last hou;r,
-    current: number     // Current sessio;n,
-    historical: number  // Previous session;s
+  recent: number      // Last hou
+r,
+    current: number     // Current sessio
+n,
+    historical: number  // Previous session
+s
 };
 export interface EfficiencyMetrics {
   utilizationScore: number,
-    compressionPotential: number,
-    redundancyLevel: number,
-    accessPatterns: AccessPattern[]
+  compressionPotential: number,
+  redundancyLevel: number,
+  accessPatterns: AccessPattern[]
 };
 export interface AccessPattern {
   content: string,
-    accessCount: number,
-    lastAccessed: Date,
-    importance: number
+  accessCount: number,
+  lastAccessed: Date,
+  importance: number
 };
 export interface OptimizationRecommendation {
   type: 'compress' | 'archive' | 'split' | 'merge' | 'prioritize' | 'consolidate',
   target: string,
-    estimatedSavings: number,
-    riskLevel: 'low' | 'medium' | 'high',
+  estimatedSavings: number,
+  riskLevel: 'low' | 'medium' | 'high',
   description: string
 };
 export interface FragmentationAnalysis {
   score: number,
-    causes: string[],
-    impactOnPerformance: number,
-    defragmentationOpportunities: DefragmentationOpportunity[]
+  causes: string[],
+  impactOnPerformance: number,
+  defragmentationOpportunities: DefragmentationOpportunity[]
 };
 export interface DefragmentationOpportunity {
   target: string,
-    method: 'consolidate' | 'reorder' | 'deduplicate',
+  method: 'consolidate' | 'reorder' | 'deduplicate',
   savings: number,
-    effort: number
+  effort: number
 }
 // Main Token Optimization Engine
 export class TokenOptimizationEngine {
-  private, maxTokens: number = 200000
-  private, targetUtilization: number = 0.75 // 150K tokens (75% of 200K)
-  private, currentBudget: TokenBudget
-  private, optimizationStrategies: Map<string, OptimizationStrategy> = new Map()
-  private, analysisHistory: TokenAnalysis[] = []
+  private maxTokens: number = 200000
+  private targetUtilization: number = 0.75 // 150K tokens (75% of 200K)
+  private currentBudget: TokenBudget
+  private optimizationStrategies: Map<string, OptimizationStrategy> = new Map()
+  private analysisHistory: TokenAnalysis[] = []
   constructor() {
     this.currentBudget = this.initializeTokenBudget()
     this.initializeOptimizationStrategies()
@@ -110,8 +125,7 @@ export class TokenOptimizationEngine {
       reserved: this.maxTokens - targetTokens;
   // 50K reserved for safety, available: this.maxTokens,
     utilizationRate: 0
-}
-}
+}}
   // Optimization Strategy Initialization
   private initializeOptimizationStrategies() {
     // Conservative Strategy - Minimal compression, high preservation
@@ -125,7 +139,7 @@ export class TokenOptimizationEngine {
   type: 'always_preserve',
           pattern: /CLAUDE\.md|PROJECT_CONTEXT\.md|DEVELOPMENT_STATUS\.md/,
     priority: 10,
-    reason: 'Core memory files essential for project continuity';
+    reason: 'Core memory files essential for project continuity'
   },
         {
           type: 'always_preserve',
@@ -156,7 +170,7 @@ export class TokenOptimizationEngine {
   type: 'always_preserve',
           pattern: /CLAUDE\.md|PROJECT_CONTEXT\.md/,
     priority: 10,
-    reason: 'Essential memory files';
+    reason: 'Essential memory files'
   },
         {
           type: 'conditionally_preserve',
@@ -194,7 +208,7 @@ export class TokenOptimizationEngine {
   type: 'always_preserve',
           pattern: /CLAUDE\.md/,
     priority: 10,
-    reason: 'Core memory file is absolutely essential';
+    reason: 'Core memory file is absolutely essential'
   },
         {
           type: 'always_preserve',
@@ -236,7 +250,7 @@ export class TokenOptimizationEngine {
 }
     // Update current budget
     this.updateTokenBudget(analysis)
-    return analysis;
+    return analysis
 }
   async optimizeTokenUsage(content: Map<string, string>, strategyName: string = 'balanced'): Promise<any> {
     const strategy = this.optimizationStrategies.get(strategyName);
@@ -248,7 +262,7 @@ export class TokenOptimizationEngine {
     const optimizationLog: OptimizationOperation[] = [];
     let totalTokensSaved = 0;
     // Process each content file according to strategy
-    for (const [filename, fileContent] of Array.from(content.entries())) { const _originalTokens = this.estimateTokens(fileContent);
+    for (const [filename, fileContent] of Array.from(content.entries()) { const _originalTokens = this.estimateTokens(fileContent);
       let processedContent = fileContent;
       // Apply preservation rules
       const _preservationLevel = this.determinePreservationLevel(filename, fileContent, strategy);
@@ -256,8 +270,7 @@ export class TokenOptimizationEngine {
         case 'always_preserve':
     // Keep content as-is
     break;
-
-    break;
+    break
 }
           optimizationLog.push({
             filename,
@@ -270,9 +283,6 @@ export class TokenOptimizationEngine {
         case 'conditionally_preserve':
     // Light compression while preserving structure
     break;
-
-    break;
-
           processedContent = this.applyLightCompression(fileContent)
           const _lightTokens = this.estimateTokens(processedContent);
           totalTokensSaved += (originalTokens - lightTokens)
@@ -287,9 +297,6 @@ export class TokenOptimizationEngine {
         case 'compressible':
     // Moderate compression preserving key information
     break;
-
-    break;
-
           processedContent = this.applyModerateCompression(fileContent)
           const _moderateTokens = this.estimateTokens(processedContent);
           totalTokensSaved += (originalTokens - moderateTokens)
@@ -304,9 +311,6 @@ export class TokenOptimizationEngine {
         case 'archivable':
     // Archive or heavily compress
     break;
-
-    break;
-
           processedContent = this.applyHeavyCompression(fileContent)
           const _heavyTokens = this.estimateTokens(processedContent);
           totalTokensSaved += (originalTokens - heavyTokens)
@@ -343,7 +347,7 @@ export class TokenOptimizationEngine {
       .replace(/(.{100}?)\s+(\.\.\.)/, '$1...') // Compress verbose text
     // Preserve important markers
     compressed = this.preserveImportantMarkers(compressed)
-    return compressed;
+    return compressed
 }
   private applyModerateCompression(content: string) {
     const _lines = content.split('\n');
@@ -360,9 +364,8 @@ export class TokenOptimizationEngine {
         compressedLines.push(compressed)
       } else {
         compressedLines.push(line)
-}
-}
-    return compressedLines.join('\n');
+}}
+    return compressedLines.join('\n')
 }
   private applyHeavyCompression(content: string) {
     const _lines = content.split('\n');
@@ -374,9 +377,8 @@ export class TokenOptimizationEngine {
       } else if (line.includes('#') || line.includes('✅') || line.includes('🚀')) {
         // Keep headers and status indicators in compressed form
         essentialLines.push(this.compressLine(line))
-}
-}
-    return essentialLines.join('\n');
+}}
+    return essentialLines.join('\n')
 }
   // Helper Methods
   private determinePreservationLevel(
@@ -387,10 +389,9 @@ export class TokenOptimizationEngine {
     for (const rule of strategy.preservationRules.sort((a, b) => b.priority - a.priority)) {
       const pattern = typeof rule.pattern === 'string' ? new RegExp(rule.pattern) : rule.pattern;
       if (pattern.test(filename) || pattern.test(content)) {
-        return rule.type;
-}
-}
-    return 'compressible' // Default fallback;
+        return rule.type
+}}
+    return 'compressible' // Default fallback
 }
   private isImportantLine(line: string): boolean {
     return line.includes('#') ||;
@@ -420,7 +421,7 @@ export class TokenOptimizationEngine {
 }
   private compressLine(line: string) {
     // Basic line compression
-    return line.replace(/\s+/g, ', ').trim();
+    return line.replace(/\s+/g, ', ').trim()
 }
   private preserveImportantMarkers(content: string) {
     // Ensure important markers are preserved during compression
@@ -428,7 +429,7 @@ export class TokenOptimizationEngine {
     for(const marker of markers) {
       content = content.replace(new RegExp(`\\s*${marker}\\s*`, 'g'), ` ${marker} `)``
 }
-    return content;
+    return content
 }
   // Token Calculation and Analysis
   private calculateTotalTokens(content: Map<string, string>): number {
@@ -436,11 +437,11 @@ export class TokenOptimizationEngine {
     for (const [ fileContent] of Array.from(content)) {
       total += this.estimateTokens(fileContent)
 }
-    return total;
+    return total
 }
   private estimateTokens(content: string): number {
     // Simple token, estimation: ~4 characters per token for English text
-    return Math.ceil(content.length / 4);
+    return Math.ceil(content.length / 4)
 }
   private analyzeTokenDistribution(content: Map<string, string>): TokenDistribution {
     const categories: Record<string, any> = {}
@@ -457,8 +458,7 @@ export class TokenOptimizationEngine {
         categories['documentation'] = (categories['documentation'] || 0) + tokens
       } else {
         categories['other'] = (categories['other'] || 0) + tokens
-}
-}
+}}
     return {
       categories,
       files,
@@ -478,18 +478,17 @@ export class TokenOptimizationEngine {
       compressionPotential,
       redundancyLevel,
       accessPatterns: [] // Would be populated with actual access pattern analysis
-}
-}
+}}
   private calculateRedundancy(content: Map<string, string>): number {
     // Simple redundancy calculation based on repeated content
     const allContent = Array.from(content.values()).join(', ');
     const words = allContent.split(/\s+/);
     const uniqueWords = new Set(words);
-    return 1 - (uniqueWords.size / words.length);
+    return 1 - (uniqueWords.size / words.length)
 }
   private analyzeFragmentation(content: Map<string, string>): FragmentationAnalysis {
     // Analyze how fragmented the content is across files
-    const fileSizes = Array.from(content.values()).map((c) => this.estimateTokens(c));
+    const fileSizes = Array.from(content.values()).map((c) => this.estimateTokens(c);
     const _averageSize = fileSizes.reduce((sum, size) => sum + size, 0) / fileSizes.length;
     const _variance = fileSizes.reduce((sum, size) => sum + Math.pow(size - averageSize, 2), 0) / fileSizes.length;
     const _fragmentationScore = Math.min(Math.sqrt(variance) / averageSize, 1.0);
@@ -498,8 +497,7 @@ export class TokenOptimizationEngine {
     causes: fragmentationScore > 0.5 ? ['Uneven file sizes', 'Content distribution imbalance'] : [],
       impactOnPerformance: fragmentationScore * 0.3;
   // Fragmentation has moderate impact, defragmentationOpportunities: []
-}
-}
+}}
   private generateOptimizationRecommendations(
     distribution: TokenDistribution,
     efficiency: EfficiencyMetrics,
@@ -536,7 +534,7 @@ export class TokenOptimizationEngine {
         description: 'Consolidate small files to reduce overhead and improve coherence'
       })
 }
-    return recommendations;
+    return recommendations
 }
   private calculateQualityRetention(operations: OptimizationOperation[]): number { // Calculate how much quality is retained after optimization
     let totalOriginal = 0;
@@ -547,34 +545,23 @@ export class TokenOptimizationEngine {
         case 'preserve':
     totalPreserved += op.originalTokens
     break;
-
-    break;
-
           // break
         case 'light_compress':
     totalPreserved += op.newTokens * 0.95 // 95% quality retention
     break;
-
-    break;
-
           // break
         case 'moderate_compress':
     totalPreserved += op.newTokens * 0.85 // 85% quality retention
     break;
-
-    break;
-
           // break
         case 'heavy_compress':
     totalPreserved += op.newTokens * 0.70 // 70% quality retention
     break;
-
-    break;
+    break
 }
           // break
-}
-}
-    return totalPreserved / totalOriginal;
+}}
+    return totalPreserved / totalOriginal
 }
   private updateTokenBudget(analysis: TokenAnalysis) {
     this.currentBudget.available = this.maxTokens - analysis.currentUsage
@@ -583,38 +570,35 @@ export class TokenOptimizationEngine {
   // Public API Methods
   async recommendOptimizationStrategy(content: Map<string, string>): Promise<any> {
     const analysis = await this.analyzeTokenUsage(content);
-    if('conservative') { return $2; } else if ('balanced' ) { return $2; } else { return: 'aggressive' }
-}
+    if('conservative') { return $2 } else if ('balanced' ) { return $2 } else { return: 'aggressive' }}
   getTokenBudget(): TokenBudget {
-    return { ...this.currentBudget };
-}
+    return { ...this.currentBudget }}
   getOptimizationStrategies(): string[] {
-    return Array.from(this.optimizationStrategies.keys());
+    return Array.from(this.optimizationStrategies.keys())
 }
   getAnalysisHistory(): TokenAnalysis[] {
-    return [...this.analysisHistory];
-}
-}
+    return [...this.analysisHistory]
+}}
 // Supporting Interfaces
 interface OptimizationResult {
     originalTokens: number,
-    optimizedTokens: number,
-    tokensSaved: number,
-    compressionRatio: number,
-    strategy: string,
-    optimizedContent: Map<string, string>,
+  optimizedTokens: number,
+  tokensSaved: number,
+  compressionRatio: number,
+  strategy: string,
+  optimizedContent: Map<string, string>,
   operationLog: OptimizationOperation[],
-    metrics: {
+  metrics: {
   efficiencyGain: number,
-    fragmentationReduction: number,
-    qualityRetention: number
+  fragmentationReduction: number,
+  qualityRetention: number
 }
 interface OptimizationOperation {
   filename: string,
-    operation: 'preserve' | 'light_compress' | 'moderate_compress' | 'heavy_compress',
+  operation: 'preserve' | 'light_compress' | 'moderate_compress' | 'heavy_compress',
   originalTokens: number,
-    newTokens: number,
-    reason: string
+  newTokens: number,
+  reason: string
 }
 // Export singleton instance
 export const _tokenOptimizationEngine = new TokenOptimizationEngine();

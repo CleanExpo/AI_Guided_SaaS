@@ -1,11 +1,11 @@
 // packages/self-check/causal-feedback-replayer.ts
 import { logger, CausalLogEntry } from '../causal-engine/logger';interface ComponentPattern {
   key: string,
-    deletions: number,
-    additions: number,
-    edits: number,
-    retentions: number,
-    pattern: string
+  deletions: number,
+  additions: number,
+  edits: number,
+  retentions: number,
+  pattern: string
 };
 export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
   status: string,
@@ -20,7 +20,7 @@ export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
       patterns: ['Start using the UI builder to generate causal insights.'],
     summary: 'No user interaction data to analyze.',
       recommendations: [
-        'Encourage users to interact with the UI builder to collect data.'];
+        'Encourage users to interact with the UI builder to collect data.']
 }
   const componentStats: Record<string, ComponentPattern> = {};
   // Analyze each log entry
@@ -34,52 +34,33 @@ export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
     edits: 0,
     retentions: 0,
     pattern: 'unknown'
-}
-}
+}}
     switch (log.action) { case 'added':
     componentStats[key].additions++;
     break;
-
-    break;
-
-        break;
-break;
-
       case 'deleted':
     componentStats[key].deletions++;
     break;
-
-    break;
-
-        break;
       case 'edited':
     componentStats[key].edits++;
     break;
-
-    break;
-
-        break;
-break;
-
       case 'kept':
     componentStats[key].retentions++;
     break;
-
-    break;
+    break
 }
-        break;
-}
-  });
+        break
+}});
   // Identify patterns
   const patterns: string[] = [];
   const recommendations: string[] = [];
   const problemComponents: ComponentPattern[] = [];
   Object.values(componentStats).forEach((stat) => {
-    const total =
+    const total =;
       stat.additions + stat.deletions + stat.edits + stat.retentions;
     if(total < 3) {
       stat.pattern = 'insufficient-data';
-      return;
+      return
 }
     const _deletionRate = stat.deletions / total;
     const _retentionRate = stat.retentions / total;
@@ -93,7 +74,7 @@ break;
       );
       recommendations.push(
         `Review ${stat.key.split('::')[1]} component design - users frequently delete it`
-      );
+      )
 }
     // Low retention with high edits suggests usability issues
     else if (retentionRate < 0.3 && editRate > 0.3) {
@@ -103,21 +84,20 @@ break;
       );
       recommendations.push(
         `Improve default properties for ${stat.key.split('::')[1]} component`
-      );
+      )
 }
     // High retention indicates good components
     else if (retentionRate > 0.6) {
       stat.pattern = 'high-retention';
       patterns.push(
         `✅ ${stat.key} → High retention (${(retentionRate * 100).toFixed(1)}%)`
-      );
+      )
 }
     // Balanced usage
     else {
       stat.pattern = 'balanced';
       patterns.push(`📊 ${stat.key} → Balanced usage pattern`);``
-}
-  });
+}});
   // Generate summary
   const _totalComponents = Object.keys(componentStats).length;
   const _problemCount = problemComponents.length;
@@ -130,12 +110,12 @@ break;
   if(problemComponents.length === 0 && patterns.length > 0) {
     recommendations.push(
       'Continue monitoring user interactions for emerging patterns'
-    );
+    )
 }
   if(patterns.length === 0) {
     patterns.push(
       'No significant patterns detected yet - need more user interaction data'
-    );
+    )
 }
   return {
     status,
@@ -143,7 +123,8 @@ break;
     summary,
     recommendations: recommendations.slice(0, 5), // Limit to top 5 recommendations
 }
-export function getTopProblematicComponents(
+
+export function getTopProblematicComponents(;
   logs?: CausalLogEntry[],
   limit: number = 5
 ): ComponentPattern[] {
@@ -159,55 +140,34 @@ export function getTopProblematicComponents(
     edits: 0,
     retentions: 0,
     pattern: 'unknown'
-}
-}
+}}
     switch (log.action) { case 'added':
     componentStats[key].additions++;
     break;
-
-    break;
-
-        break;
-break;
-
       case 'deleted':
     componentStats[key].deletions++;
     break;
-
-    break;
-
-        break;
       case 'edited':
     componentStats[key].edits++;
     break;
-
-    break;
-
-        break;
-break;
-
       case 'kept':
     componentStats[key].retentions++;
     break;
-
-    break;
+    break
 }
-        break;
-}
-  });
+        break
+}});
   return Object.values(componentStats);
     .filter((stat) => {
-      const total =
+      const total =;
         stat.additions + stat.deletions + stat.edits + stat.retentions;
       return total >= 3; // Only consider components with sufficient data
     })
     .map((stat) => { const total =
         stat.additions + stat.deletions + stat.edits + stat.retentions;
       const _deletionRate = stat.deletions / total;
-      return { ...stat, deletionRate; }
-    })
-    .sort((a, b) => (b as any).deletionRate - (a as any).deletionRate)
-    .slice(0, limit);
+      return { ...stat, deletionRate }}).sort((a, b) => (b as any).deletionRate - (a as any).deletionRate)
+    .slice(0, limit)
 };
 export function generateCausalInsights(): {
   totalInteractions: number,
@@ -218,14 +178,14 @@ export function generateCausalInsights(): {
   const logs = logger.getLogs();
   const analysis = analyzeCausalLogs(logs);
   const problematicComponents = getTopProblematicComponents(logs, 3);
-  const _uniqueComponents = new Set(
+  const _uniqueComponents = new Set(;
     logs.map((log) => `${log.page}::${log.componentType}`)``
   ).size;
   const topIssues = problematicComponents.map((comp) => {
-    const total =
+    const total =;
       comp.additions + comp.deletions + comp.edits + comp.retentions;
     const _deletionRate = comp.deletions / total;
-    return `${comp.key.split('::')[1]}: ${(deletionRate * 100).toFixed(1)}% deletion rate`;
+    return `${comp.key.split('::')[1]}: ${(deletionRate * 100).toFixed(1)}% deletion rate`
   });
   return {
     totalInteractions: logs.length,

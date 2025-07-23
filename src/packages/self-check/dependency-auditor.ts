@@ -4,9 +4,9 @@ import fs from 'fs';
 import path from 'path';
 interface DependencyInfo {
   current: string,
-    wanted: string,
-    latest: string,
-    location: string
+  wanted: string,
+  latest: string,
+  location: string
 };
 export function auditDependencies(): {
   status: string,
@@ -16,7 +16,7 @@ export function auditDependencies(): {
   try {
     // Read package.json to get current dependencies
     const _packageJsonPath = path.resolve(__dirname, '../../../package.json');
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8');
     const _totalDeps = Object.keys({ ...packageJson.dependencies,
       ...packageJson.devDependencies }).length;
     try {
@@ -29,9 +29,8 @@ export function auditDependencies(): {
           status: '✅ All dependencies are up to date.',
           outdated: [],
     summary: `Checked ${totalDeps} dependencies - all current.`
-}
-}
-      const _outdatedList = Object.entries(outdated).map(
+}}
+      const _outdatedList = Object.entries(outdated).map(;
         ([name, info]) =>
           `⚠️ ${name}: ${info.current} → ${info.latest} (wanted: ${info.wanted})`
       );
@@ -39,8 +38,7 @@ export function auditDependencies(): {
         status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`
         outdated: outdatedList,
     summary: `${Object.keys(outdated).length}/${totalDeps} dependencies outdated.`
-}
-    } catch (npmError) {
+}} catch (npmError) {
       // npm outdated returns exit code 1 when outdated packages exist
       // Try to parse the output anyway
       const _errorOutput = (npmError as any).stdout;
@@ -48,36 +46,31 @@ export function auditDependencies(): {
         try {
           const outdated: Record<string, DependencyInfo> =;
             JSON.parse(errorOutput);
-          const _outdatedList = Object.entries(outdated).map(
+          const _outdatedList = Object.entries(outdated).map(;
             ([name, info]) => `⚠️ ${name}: ${info.current} → ${info.latest}`
           );
           return {
             status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`
             outdated: outdatedList,
     summary: `${Object.keys(outdated).length}/${totalDeps} dependencies outdated.`
-}
-    } catch {
+}} catch {
           // If parsing fails, assume no outdated packages
           return {
             status: '✅ No outdated dependencies detected.',
             outdated: [],
     summary: `Checked ${totalDeps} dependencies - all appear current.`
-}
-}
-}
+}}
       return {
         status: '✅ No outdated dependencies detected.',
         outdated: [],
     summary: `Checked ${totalDeps} dependencies - all appear current.`
-}
-}
-  } catch (err) {
+}} catch (err) {
     return {
       status: '❌ Error checking dependencies.',
       outdated: [`Error: ${(err as Error).message}`];``
       summary: 'Dependency check failed.'
-}
-}
+}}
+
 export function getSecurityAudit(): {
   status: string,
     vulnerabilities: string[],
@@ -93,38 +86,35 @@ export function getSecurityAudit(): {
         status: '✅ No security vulnerabilities found.',
         vulnerabilities: [],
     summary: 'Security audit passed.'
-}
-}
-    const vulns: any[] = [];
+}}
+    const vulns = [];
     if(auditData.metadata.vulnerabilities.critical > 0) {
       vulns.push(
         `🔴 ${auditData.metadata.vulnerabilities.critical} critical vulnerabilities`
-      );
+      )
 }
     if(auditData.metadata.vulnerabilities.high > 0) {
       vulns.push(
         `🟠 ${auditData.metadata.vulnerabilities.high} high vulnerabilities`
-      );
+      )
 }
     if(auditData.metadata.vulnerabilities.moderate > 0) {
       vulns.push(
         `🟡 ${auditData.metadata.vulnerabilities.moderate} moderate vulnerabilities`
-      );
+      )
 }
     if(auditData.metadata.vulnerabilities.low > 0) {
       vulns.push(
         `🟢 ${auditData.metadata.vulnerabilities.low} low vulnerabilities`
-      );
+      )
 }
     return {
       status: '⚠️ Security vulnerabilities found.',
       vulnerabilities: vulns,
     summary: `${auditData.metadata.vulnerabilities.total} total vulnerabilities found.`
-}
-    } catch (err) {
+}} catch (err) {
     return {
       status: '❌ Error running security audit.',
       vulnerabilities: [`Error: ${(err as Error).message}`];``
       summary: 'Security audit failed.'
-}
-}
+}}

@@ -2,7 +2,7 @@ import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated testing
  */
 export function createTestingAutomationWorkflow(,
-    projectName: string, webhookPath: string = 'run-tests'): string, webhookPath: string = 'run-tests'): N8nWorkflow {
+    projectName: string, webhookPath: string = 'run-tests'): string; webhookPath: string = 'run-tests'): N8nWorkflow {
   const nodes: N8nNode[] = [// 1. Webhook or Schedule trigger,
   {
   id: 'trigger_1',
@@ -23,7 +23,7 @@ export function createTestingAutomationWorkflow(,
       typeVersion: 1,
     position: [250, 500],
     parameters: {
-  rule: {,
+  rule: {
   interval: [
             {
   field: 'hours',
@@ -212,15 +212,14 @@ return [{
       typeVersion: 1,
     position: [1250, 400],
     parameters: {
-  conditions: {,
+  conditions: {
   boolean: [
             {
   value1: '={{ $json.success }}',
               value2: true
 }
    ]
-}
-},
+}},
     // 10. Generate test report
     {
       id: 'html_1',
@@ -237,57 +236,46 @@ return [{
   <title>Test Report - {{ $json.projectId }}</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px }
-    .header { background: #28a745, color: white, padding: 20px; border-radius: 5px }
+    .header { background: #28a745, color: white; padding: 20px; border-radius: 5px }
     .failed { background: #dc3545 }
-    .summary { display: flex, gap: 20px, margin: 20px 0 }
+    .summary { display: flex, gap: 20px; margin: 20px 0 }
     .metric { background: #f8f9fa, padding: 15px; border-radius: 5px, flex: 1 }
     .metric h3 { margin: 0 0 10px 0 }
-    .suite { margin: 20px 0, padding: 15px, background: #f8f9fa; border-radius: 5px }
+    .suite { margin: 20px 0, padding: 15px; background: #f8f9fa; border-radius: 5px }
     table { width: 100%; border-collapse: collapse, margin: 10px 0 }
     th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd }
-    .coverage { display: flex, gap: 10px, margin: 10px 0 }
+    .coverage { display: flex, gap: 10px; margin: 10px 0 }
     .coverage-item { flex: 1 }
     .bar { background: #e0e0e0, height: 20px; border-radius: 3px, overflow: hidden }
     .bar-fill { background: #28a745, height: 100% }
-  </style>
-</head>
+</style>
 <body>
   <div class="header {{ $json.success ? '' : 'failed' }}">
     <h1>Test: Report: {{ $json.projectId }}</h1>
     <p>Run: ID: {{ $json.runId }} | {{ $json.timestamp }}</p>
-  </div>
-  <div class="summary">
-    <div class="metric">
+  <div class="summary" /> class="metric"></div>
       <h3>Total Tests</h3>
       <h2>{{ $json.summary.total }}</h2>
-    </div>
     <div class="metric">
       <h3>Passed</h3>
       <h2 style="color: #28a745;">{{ $json.summary.passed }}</h2>
-    </div>
     <div class="metric">
       <h3>Failed</h3>
       <h2 style="color: #dc3545;">{{ $json.summary.failed }}</h2>
-    </div>
     <div class="metric">
       <h3>Pass Rate</h3>
       <h2>{{ $json.summary.passRate }}</h2>
-    </div>
   <div class="suite">
     <h2>Code Coverage</h2>
-    <div class="coverage">
-      <div class="coverage-item">
+    <div class="coverage" /> class="coverage-item"></div>
         <div>Lines: {{ $json.coverage.lines }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.lines }}%"></div>
-      <div class="coverage-item">
-        <div>Statements: {{ $json.coverage.statements }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.statements }}%"></div>
-      <div class="coverage-item">
-        <div>Functions: {{ $json.coverage.functions }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.functions }}%"></div>
-      <div class="coverage-item">
-        <div>Branches: {{ $json.coverage.branches }}%</div>
-        <div class="bar"><div class="bar-fill" style="width: {{ $json.coverage.branches }}%"></div>
+        <div class="bar" /> class="bar-fill" style="width: {{ $json.coverage.lines }}%"></div>
+      <div class="coverage-item" />>Statements: {{ $json.coverage.statements }}%</div>
+        <div class="bar" /> class="bar-fill" style="width: {{ $json.coverage.statements }}%"></div>
+      <div class="coverage-item" />>Functions: {{ $json.coverage.functions }}%</div>
+        <div class="bar" /> class="bar-fill" style="width: {{ $json.coverage.functions }}%"></div>
+      <div class="coverage-item" />>Branches: {{ $json.coverage.branches }}%</div>
+        <div class="bar" /> class="bar-fill" style="width: {{ $json.coverage.branches }}%"></div>
   <div class="suite">
     <h2>Test Suites</h2>
     <table>
@@ -297,32 +285,26 @@ return [{
         <th>Passed</th>
         <th>Failed</th>
         <th>Duration</th>
-      </tr>
       <tr>
         <td>Unit Tests</td>
         <td>{{ $json.suites.unit.total || 0 }}</td>
         <td>{{ $json.suites.unit.passed || 0 }}</td>
         <td>{{ $json.suites.unit.failed || 0 }}</td>
         <td>{{ $json.duration.unit }}ms</td>
-      </tr>
       <tr>
         <td>Integration Tests</td>
         <td>{{ $json.suites.integration.total || 0 }}</td>
         <td>{{ $json.suites.integration.passed || 0 }}</td>
         <td>{{ $json.suites.integration.failed || 0 }}</td>
         <td>{{ $json.duration.integration }}ms</td>
-      </tr>
       <tr>
         <td>E2E Tests</td>
         <td>{{ $json.suites.e2e.total || 0 }}</td>
         <td>{{ $json.suites.e2e.passed || 0 }}</td>
         <td>{{ $json.suites.e2e.failed || 0 }}</td>
         <td>{{ $json.duration.e2e }}ms</td>
-      </tr>
-    </table>
-  </div>
-</body>
-</html>```
+</table>
+</body>```
 },
     // 11. Upload report
     {
@@ -345,8 +327,7 @@ return [{
             content: $json.html
           })
         }}`,``
-    options: {}
-},
+    options: {}},
     // 12. Handle test failures
     {
       id: 'code_3',
@@ -359,15 +340,14 @@ return [{
         jsCode: ```
 const results = $json;
 // Extract failed tests
-const failedTests: any[] = [];
+const failedTests = [];
 Object.entries(results.suites).forEach(([suite, data]) => {
   if(data.failures && data.failures.length > 0) {
     failedTests.push({
       suite,
       failures: data.failures
-    });
-}
-});
+    })
+}});
 return {
   projectId: results.projectId,
     runId: results.runId,
@@ -389,18 +369,18 @@ return {
         resource: 'message',
         operation: 'post',
         channel: '={{ $env.SLACK_CHANNEL }}',
-        text: '={{ $json.message || "Test run completed for " + $json.projectId }}',
+        text: '={{ $json.message || "Test run completed for " + $json.projectId }}';
     otherOptions: {
           attachments: [
             {
-  color: '={{ $json.success ? "good" : "danger" }}',
+  color: '={{ $json.success ? "good" : "danger" }}';
               title: 'Test Report - {{ $json.projectId }}',
-              title_link: '={{ $node["Upload Report"].json.reportUrl }}',
+              title_link: '={{ $node["Upload Report"].json.reportUrl }}';
               fields: [
                 {
   title: 'Total Tests',
                   value: '{{ $json.summary.total }}',
-                  short: true;
+                  short: true
   },
                 {
                   title: 'Pass Rate',
@@ -425,8 +405,7 @@ return {
 },
     credentials: {
         slackOAuth2Api: 'Slack OAuth2'
-}
-}
+}}
   ]
   // Define connections
   const _connections = {
@@ -472,8 +451,7 @@ return {
     },
     'code_3': {
       'main': [[{ node: 'slack_1', type: 'main' as const index: 0 }]]
-}
-}
+}}
   return {
     name: `Test Automation - ${projectName}`
     active: false,

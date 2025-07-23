@@ -1,37 +1,37 @@
 import { BackendAdapter, User, Project } from './types';
 import { createBackendAdapter } from './adapter-factory';
 export interface MigrationOptions {
-  batchSize?: number;
-  onProgress? (progress: MigrationProgress) => voi;d;
-  includeUsers?: boolean;
-  includeProjects?: boolean;
-  includeCustomCollections?: string[];
-  dryRun?: boolean;
+  batchSize?: number,
+  onProgress? (progress: MigrationProgress) => void,
+  includeUsers?: boolean,
+  includeProjects?: boolean,
+  includeCustomCollections?: string[],
+  dryRun?: boolean
 };
 export interface MigrationProgress {
   totalRecords: number,
-    processedRecords: number,
-    currentCollection: string,
-    errors: MigrationError[],
-    status: 'running' | 'completed' | 'failed'
+  processedRecords: number,
+  currentCollection: string,
+  errors: MigrationError[],
+  status: 'running' | 'completed' | 'failed'
 };
 export interface MigrationError {
   collection: string,
-    recordId: string,
-    error: string
+  recordId: string,
+  error: string
 };
 export interface MigrationResult {
   success: boolean,
-    totalRecords: number,
-    migratedRecords: number,
-    errors: MigrationError[],
-    duration: number
+  totalRecords: number,
+  migratedRecords: number,
+  errors: MigrationError[],
+  duration: number
 };
 export class BackendMigrator {
-  private, sourceAdapter: BackendAdapter
-  private, targetAdapter: BackendAdapter
-  private, options: MigrationOptions
-  private, progress: MigrationProgress
+  private sourceAdapter: BackendAdapter
+  private targetAdapter: BackendAdapter
+  private options: MigrationOptions
+  private progress: MigrationProgress
   constructor(
     sourceConfig,
     targetConfig,
@@ -53,8 +53,7 @@ export class BackendMigrator {
     currentCollection: '',
     errors: [],
     status: 'running'
-}
-}
+}}
   async migrate(): Promise<any> {
     const _startTime = Date.now();
     try {
@@ -79,8 +78,7 @@ export class BackendMigrator {
     migratedRecords: this.progress.processedRecords,
     errors: this.progress.errors,
     duration: Date.now() - startTime
-}
-    } catch (error) { this.progress.status = 'failed'
+}} catch (error) { this.progress.status = 'failed'
       return {
         success: false,
     totalRecords: this.progress.totalRecords,
@@ -115,7 +113,7 @@ export class BackendMigrator {
     while (hasMore) {
       // Fetch batch from source
       const batch = await this.sourceAdapter.list<T>(collection, {
-    limit: this.options.batchSize,
+    limit: this.options.batchSize;
         // offset
       })
       // Process each record
@@ -136,8 +134,7 @@ export class BackendMigrator {
 }
       offset += this.options.batchSize!
       hasMore = batch.hasMore
-}
-}
+}}
   private async migrateUser(user: User): Promise<any> {
     // Check if user already exists
     const existing = await this.targetAdapter;
@@ -146,38 +143,36 @@ export class BackendMigrator {
       .single()
     if (existing) {
       // Update existing user
-      return this.targetAdapter.updateUser(existing.id, user);
+      return this.targetAdapter.updateUser(existing.id, user)
 }
     // Create new user (without password for security)
     const _newUser = await this.targetAdapter.create<User>('users', {
       ...user,
   // Generate temporary password, password: this.generateTempPassword()
     })
-    return newUser;
+    return newUser
 }
   private async migrateProject(project: Project): Promise<any> {
     // Map user ID if needed
     const _mappedProject = { ...project }
     // Create project in target
-    return this.targetAdapter.create<Project>('projects', mappedProject);
+    return this.targetAdapter.create<Project>('projects', mappedProject)
 }
   private async migrateGenericRecord(record): Promise<any> {
     const _collection = this.progress.currentCollection;
-    return this.targetAdapter.create(collection, record);
+    return this.targetAdapter.create(collection, record)
 }
   private reportProgress() {
     if(this.options.onProgress) {
       this.options.onProgress({ ...this.progress })
-}
-}
+}}
   private generateTempPassword() {
-    return Math.random().toString(36).slice(-8) + 'Aa1!';
-}
-}
+    return Math.random().toString(36).slice(-8) + 'Aa1!'
+}}
 /**
  * Validate that source and target backends are compatible
  */
-export async function validateMigration(
+export async function validateMigration(;
   sourceConfig,
   targetConfig): Promise<any> {
   const issues: string[] = [];
@@ -199,31 +194,29 @@ export async function validateMigration(
     // Check if same backend type
     if(sourceConfig.type === targetConfig.type && sourceConfig.url === targetConfig.url) {
       issues.push('Source and target backends are the same')
-}
-  } catch (error) {
+}} catch (error) {
     issues.push(`Configuration, error: ${error}`)``
 }
   return {
-    valid: issues.length === 0,
+    valid: issues.length === 0;
     // issues
-}
-}
+}}
 /**
  * Export data from a backend
  */
-export async function exportBackendData(
+export async function exportBackendData(;
   config,
   collections: string[] = ['users', 'projects']
 ): Promise<Record<string, any[]>> {
   const adapter = createBackendAdapter(config);
   const data: Record<string, any[]> = {}
   for(const collection of collections) {
-    const records: any[] = [];
+    const records = [];
     let offset = 0;
     let hasMore = true;
     while (hasMore) {
       const batch = await adapter.list<any>(collection, {
-    limit: 100,
+    limit: 100;
         // offset
       })
       records.push(...batch.data)
@@ -232,12 +225,12 @@ export async function exportBackendData(
 }
     data[collection] = records
 }
-  return data;
+  return data
 }
 /**
  * Import data to a backend
  */
-export async function importBackendData(
+export async function importBackendData(;
   config,
   data: Record<string, any[]>,
     options: { overwrite?: boolean } = {}
@@ -258,8 +251,7 @@ export async function importBackendData(
             await adapter.update(collection, record.id, record)
           } else {
             await adapter.create(collection, record)
-}
-        } else {
+}} else {
           // Always create new record
           await adapter.create(collection, record)
 }
@@ -270,9 +262,7 @@ export async function importBackendData(
           recordId: record.id || 'unknown',
     error: error instanceof Error ? error.message : 'Unknown error'
         })
-}
-}
-}
+}}
   return {
     success: errors.length === 0,
     totalRecords,

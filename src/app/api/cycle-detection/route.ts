@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 interface DocumentationSearchResult {
-  id: string;
-  title: string;
-  content: string;
-  relevance: number;
+  id: string,
+  title: string,
+  content: string,
+  relevance: number
 }
 interface CycleDetectionResult {
-  hasCycle: boolean;
-  cycleLength?: number;
-  suggestions: string[];
+  hasCycle: boolean,
+  cycleLength?: number,
+  suggestions: string[]
 }
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if(!query) {
       return NextResponse.json(
         { error: 'Query is required' }, { status: 400 }
-      );
+      )
 }
     // Simulate cycle detection
     const result: CycleDetectionResult = {
@@ -43,12 +43,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       searchResults,
       query,
       timestamp: new Date().toISOString()
-    });
+    })
   } catch (error) {
     console.error('Cycle detection error:', error);
     return NextResponse.json(
       { error: 'Cycle detection failed' }, { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export const dynamic = "force-dynamic";

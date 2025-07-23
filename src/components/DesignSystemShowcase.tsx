@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { UnifiedButton, UnifiedCard, UnifiedAlert, UnifiedProgress, UnifiedBadge, UnifiedSteps } from '@/lib/design-system/components';
 import { theme } from '@/lib/design-system/theme';
@@ -15,7 +14,7 @@ export function DesignSystemShowcase() {
     { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4" /> }]
   return (
     <div className="max-w-7xl mx-auto p-8 space-y-12">
-      {/* Header */}
+      {/* Header */}</div>
       <div className="text-center"></div>
         <h1 className="text-4xl font-bold mb-4">Unified Design System</h1>
         <p className="text-xl text-muted-foreground">
@@ -25,27 +24,28 @@ export function DesignSystemShowcase() {
           <Palette className="h-6 w-6" />
           Color Palette</Palette>
         <div className="grid grid-cols-5 gap-6">
-          {Object.entries(theme.colors).map(([colorName, shades]) => (</div>
+          {Object.entries(theme.colors).map(([colorName, shades]) => (\n    </div>
             <div key={colorName}></div>
               <h3 className="text-sm font-medium capitalize mb-3">{colorName}</h3>
               <div className="space-y-2"></div>
-                {Object.entries(shades as Record<string, string>).slice(2, 7).map(([shade, value]) => (</string>
+                {Object.entries(shades as Record<string, string>).slice(2, 7).map(([shade, value]) => (\n    </string>
                   <div key={shade} className="flex items-center gap-2"></div>
                     <div
                       className="w-12 h-12 rounded-lg shadow-sm border"
-                      style={{ backgroundColor: value }} /></div>
-                    <div></div>
+                      style={{ backgroundColor: value }}  > <div></div>
                       <p className="text-xs font-medium">{shade}</p>
-                      <p className="text-xs text-muted-foreground">{value}</p>))}
+          <p className="{value}"></p>
+        </div>
+    );)}
           ))},
     {/* Buttons */}
       <UnifiedCard padding="lg"></UnifiedCard>
         <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"></h2>
           <Sparkles className="h-6 w-6" />
                     Buttons
-                  </Sparkles>
+</Sparkles>
         <div className="space-y-6">
-          {/* Button, Variants */}
+          {/* Button, Variants */}</div>
           <div></div>
             <h3 className="text-lg font-medium mb-3">Variants</h3>
             <div className="flex flex-wrap gap-3"></div>
@@ -70,16 +70,16 @@ export function DesignSystemShowcase() {
               <UnifiedButton icon={<Download className="h-4 w-4" />}>Download</UnifiedButton>
               <UnifiedButton icon={<ArrowRight className="h-4 w-4" />} iconPosition="right">
                     Continue
-                  </UnifiedButton>
+</UnifiedButton>
               <UnifiedButton variant="outline" icon={<Settings className="h-4 w-4" />}>
                     Settings
-                  </UnifiedButton>
+</UnifiedButton>
       {/* Cards */}
       <div></div>
         <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"></h2>
           <Layers className="h-6 w-6" />
                     Cards
-                  </Layers>
+</Layers>
         <div className="grid, md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
           <UnifiedCard variant="default"></UnifiedCard>
             <h3 className="font-semibold mb-2">Default Card</h3>
@@ -101,15 +101,15 @@ export function DesignSystemShowcase() {
           <UnifiedCard interactive className="cursor-pointer"></UnifiedCard>
             <div className="flex items-center gap-3 mb-3"></div>
               <div className="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center"></div>
-                <Zap className="h-6 w-6" /></Zap>
+                <Zap className="h-6 w-6" />
               <div></div>
                 <h3 className="font-semibold">Interactive Card</h3>
                 <p className="text-sm text-muted-foreground">Hover me!</p>
-            <UnifiedProgress value={75} variant="primary" showValue /></UnifiedProgress>
+            <UnifiedProgress value={75} variant="primary" showValue  />
           <UnifiedCard interactive className="cursor-pointer"></UnifiedCard>
             <div className="flex items-center gap-3 mb-3"></div>
               <div className="w-12 h-12 bg-secondary-100 text-secondary-600 rounded-lg flex items-center justify-center"></div>
-                <Heart className="h-6 w-6" /></Heart>
+                <Heart className="h-6 w-6" />
               <div></div>
                 <h3 className="font-semibold">Feature Card</h3>
                 <p className="text-sm text-muted-foreground">Click for details</p>
@@ -119,7 +119,7 @@ export function DesignSystemShowcase() {
           <UnifiedCard interactive className="cursor-pointer"></UnifiedCard>
             <div className="flex items-center gap-3 mb-3"></div>
               <div className="w-12 h-12 bg-success-100 text-success-600 rounded-lg flex items-center justify-center"></div>
-                <Star className="h-6 w-6" /></Star>
+                <Star className="h-6 w-6" />
               <div></div>
                 <h3 className="font-semibold">Premium Card</h3>
                 <p className="text-sm text-muted-foreground">Exclusive features</p>
@@ -132,7 +132,7 @@ export function DesignSystemShowcase() {
           <UnifiedAlert
             type="info"
             title="Information"
-            description="This is an informational message to keep users updated." /></UnifiedAlert>
+            description="This is an informational message to keep users updated."  />
           <UnifiedAlert
             type="success"
             title="Success!"
@@ -156,17 +156,17 @@ export function DesignSystemShowcase() {
       <UnifiedCard padding="lg"></UnifiedCard>
         <h2 className="text-2xl font-semibold mb-6">Progress Indicators</h2>
         <div className="space-y-8">
-          {/* Progress, Bars */}
+          {/* Progress, Bars */}</div>
           <div className="space-y-4"></div>
             <h3 className="text-lg font-medium mb-3">Progress Bars</h3>
-            <UnifiedProgress value={25} variant="primary" showValue /></UnifiedProgress>
-            <UnifiedProgress value={50} variant="secondary" showValue size="lg" /></UnifiedProgress>
-            <UnifiedProgress value={75} variant="success" showValue /></UnifiedProgress>
-            <UnifiedProgress value={90} variant="warning" size="sm" /></UnifiedProgress>
+            <UnifiedProgress value={25} variant="primary" showValue  />
+            <UnifiedProgress value={50} variant="secondary" showValue size="lg"  />
+            <UnifiedProgress value={75} variant="success" showValue  />
+            <UnifiedProgress value={90} variant="warning" size="sm"  />
           {/* Step, Indicator */}
           <div></div>
             <h3 className="text-lg font-medium mb-6">Step Progress</h3>
-            <UnifiedSteps steps={steps} currentStep={currentStep} /></UnifiedSteps>
+            <UnifiedSteps steps={steps} currentStep={currentStep}  />
             <div className="flex justify-center gap-4 mt-6"></div>
               <UnifiedButton
                 variant="outline"
@@ -175,7 +175,7 @@ export function DesignSystemShowcase() {
                 disabled={currentStep === 0}
               >
                     Previous
-                  </UnifiedButton>
+</UnifiedButton>
               <UnifiedButton
                 size="sm"
                 onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}
@@ -204,10 +204,10 @@ export function DesignSystemShowcase() {
               AI Powered</UnifiedBadge>
             <UnifiedBadge icon={<Zap className="h-3 w-3" />} variant="warning">
                     Performance
-                  </UnifiedBadge>
+</UnifiedBadge>
             <UnifiedBadge icon={<Check className="h-3 w-3" />} variant="success">
                     Verified
-                  </UnifiedBadge>
+</UnifiedBadge>
       {/* Typography, Showcase */}
       <UnifiedCard padding="lg"></UnifiedCard>
         <h2 className="text-2xl font-semibold mb-6">Typography</h2>
@@ -229,11 +229,11 @@ export function DesignSystemShowcase() {
           <div className="p-4 bg-neutral-100 rounded-lg"></div>
             <code className="font-mono text-sm">
               const _unifiedDesign = combineStrengths(lovable, vscode);
-    );
+    )
 }
-
-    </code>
-          </div>
+</code>
 </any>
+    
     </any>
-    }
+    </any>
+  }

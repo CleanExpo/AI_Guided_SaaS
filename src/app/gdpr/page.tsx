@@ -5,15 +5,14 @@ import { Metadata } from 'next';export const metadata: Metadata = {
 };
 export default function GdprPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <div className="min-h-screen bg-gray-50 py-12 container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">GDPR Compliance</h1>
-          <div className="space-y-6 text-gray-600">
-            <p className="text-lg">
+          <div className="">
+        <p className="text-lg">
               AI Guided SaaS is committed to protecting your privacy and ensuring compliance with the
               General Data Protection Regulation (GDPR).
-            </p>
+</p>
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Data Protection Principles</h2>
               <p className="mb-4">We adhere to the following GDPR, principles:</p>
@@ -24,8 +23,7 @@ export default function GdprPage() {
                 <li>Accuracy of personal data</li>
                 <li>Storage limitation - data is kept only as long as necessary</li>
                 <li>Integrity and confidentiality through appropriate security measures</li>
-              </ul>
-            </section>
+</section>
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your Rights</h2>
               <p className="mb-4">Under GDPR, you have the following, rights:</p>
@@ -37,24 +35,26 @@ export default function GdprPage() {
                 <li>Right to restrict processing</li>
                 <li>Right to data portability</li>
                 <li>Right to object to processing</li>
-              </ul>
-            </section>
+</section>
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contact Us</h2>
               <p>
                 If you have any questions about our GDPR compliance or wish to exercise your rights,
                 please contact us at{' '}
                 <a href="mailto:privacy@aiinguidedsaas.com" className="text-blue-600 hover:text-blue-700">privacy@aiinguidedsaas.com
-                </a>
-              </p>
-            </section>
+</a>
+</section>
             <section>
               <p className="text-sm text-gray-500 mt-8">
                 Last, updated: January 2025
-              </p>
-            </section>
-                </div>
+</p>
+</div>
 );
+</div>
 
-          </div>
-}
+    </section>
+    </p>
+    </ul>
+    </ul>
+    </div>
+  }

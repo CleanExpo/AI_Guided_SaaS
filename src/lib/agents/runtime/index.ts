@@ -17,5 +17,5 @@ export type {
   ProjectRequest,
   ProjectResult,
   ProjectSummary,
-  Deliverable from './AgentOrchestrator';
+  Deliverable from './AgentOrchestrator'
  };

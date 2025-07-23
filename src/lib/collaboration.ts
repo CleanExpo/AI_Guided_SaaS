@@ -3,141 +3,142 @@ import { Server as HTTPServer } from 'http';
 import { DatabaseService } from './database';
 import { isServiceConfigured } from './env';
 // Database row interfaces
-interface DatabaseRecord  {
+interface DatabaseRecord {
     id: string,
-    created_at: string;
-  updated_at?: string;
+  created_at: string,
+  updated_at?: string
   [key: string;]
 }
-interface DatabaseUser  {
+interface DatabaseUser {
     id: string,
-    name: string,
-    email: string;
-  avatar?: string;
-    created_at: string;
-  updated_at?: string;
+  name: string,
+  email: string,
+  avatar?: string,
+  created_at: string,
+  updated_at?: string
 }
-interface DatabaseRoom  {
+interface DatabaseRoom {
     id: string,
-    project_id: string,
-    name: string,
-    owner_id: string,
-    participants: string,
-    settings: string,
-    created_at: string,
-    updated_at: string
+  project_id: string,
+  name: string,
+  owner_id: string,
+  participants: string,
+  settings: string,
+  created_at: string,
+  updated_at: string
 }
-interface DatabaseProjectChange  {
+interface DatabaseProjectChange {
     id: string,
-    project_id: string,
-    user_id: string,
-    type: string,
-    path: string,
-    content: string;
-  previous_content?: string;
-    timestamp: string
+  project_id: string,
+  user_id: string,
+  type: string,
+  path: string,
+  content: string,
+  previous_content?: string,
+  timestamp: string
 }
-interface DatabaseComment  {
+interface DatabaseComment {
     id: string,
-    project_id: string,
-    user_id: string,
-    content: string,
-    position: string,
-    resolved: boolean,
-    created_at: string,
-    updated_at: string
+  project_id: string,
+  user_id: string,
+  content: string,
+  position: string,
+  resolved: boolean,
+  created_at: string,
+  updated_at: string
 }
-interface ProjectData  { id: string,
-    name: string,
-    description: string,
-    files: unknown[]
-}
-}
+interface ProjectData { id: string,
+  name: string,
+  description: string,
+  files: unknown[]
+}}
 // Collaboration interfaces
-export interface CollaborationRoom  {
+export interface CollaborationRoom {
     id: string,
-    projectId: string,
-    name: string,
-    ownerId: string,
-    participants: CollaborationUser[],
-    settings: RoomSetting;s,
+  projectId: string,
+  name: string,
+  ownerId: string,
+  participants: CollaborationUser[],
+  settings: RoomSetting
+s,
     createdAt: Date,
-    updatedAt: Date
+  updatedAt: Date
 }
-export interface CollaborationUser  {
+
+export interface CollaborationUser {
     id: string,
-    name: string,
-    email: string;
-  avatar?: string;
-    role: 'owner' | 'editor' | 'viewer';
-  cursor?: CursorPosition;
-    isOnline: boolean,
-    lastSeen: Date
+  name: string,
+  email: string,
+  avatar?: string,
+  role: 'owner' | 'editor' | 'viewer',
+  cursor?: CursorPosition,
+  isOnline: boolean,
+  lastSeen: Date
 }
-export interface CursorPosition  { x: number,
-    y: number;
-  elementId?: string;
+
+export interface CursorPosition { x: number,
+  y: number,
+  elementId?: string,
   selection?: {
     start: number,
-    end: number
-}
-}
-export interface RoomSettings  { allowGuests: boolean,
-    maxParticipants: number,
-    permissions: {
+  end: number
+}}
+
+export interface RoomSettings { allowGuests: boolean,
+  maxParticipants: number,
+  permissions: {
   canEdit: boolean,
-    canComment: boolean,
-    canInvite: boolean,
-    canExport: boolean
-}
-}
+  canComment: boolean,
+  canInvite: boolean,
+  canExport: boolean
+}}
+
 export interface CollaborationEvent {
     type: 'cursor' | 'edit' | 'comment' | 'join' | 'leave' | 'sync',
   userId: string,
-    roomId: string,
-    data: Record<string, unknown>;
+  roomId: string,
+  data: Record<string, unknown>,
   timestamp: Date
 }
+
 export interface ProjectChange {
     id: string,
-    projectId: string,
-    userId: string,
-    type: 'create' | 'update' | 'delete',
+  projectId: string,
+  userId: string,
+  type: 'create' | 'update' | 'delete',
   path: string,
-    content: Record<string, unknown>
+  content: Record<string, unknown>
   previousContent?: Record<string, unknown>
   timestamp: Date
 }
-export interface Comment  { id: string,
-    projectId: string,
-    userId: string,
-    content: string,
-    position: {
+
+export interface Comment { id: string,
+  projectId: string,
+  userId: string,
+  content: string,
+  position: {
   x: number,
-    y: number;
-    elementId?: string;
+  y: number,
+  elementId?: string
 },
-  replies: Comment[], resolved: boolean, createdAt: Date, updatedAt: Date
+  replies: Comment[], resolved: boolean; createdAt: Date, updatedAt: Date
 }
 // Collaboration service
 export class CollaborationService {
-  private static, io: SocketIOServer | null = null
-  private static, rooms: Map<string, CollaborationRoom> = new Map()
-  private static, userSockets: Map<string, string[]> = new Map()
+  private static io: SocketIOServer | null = null
+  private static rooms: Map<string, CollaborationRoom> = new Map()
+  private static userSockets: Map<string, string[]> = new Map()
   // Initialize Socket.IO server
   static initialize(httpServer: HTTPServer): SocketIOServer {
     if(this.io) {
-      return this.io;
+      return this.io
 }
     this.io = new SocketIOServer(httpServer, {
-      cors: {
-  origin: process.env.NEXTAUTH_URL || "http://localhost:3000",
-    methods: ["GET", "POST"]
-      },
+      cors: { origin: process.env.NEXTAUTH_URL || "http://localhost:3000", methods: ["GET", "POST"] },
       transports: ['websocket', 'polling']
     })
     this.setupEventHandlers()
-    return this.io;
+    return this.io
 }
   // Setup Socket.IO event handlers
   private static setupEventHandlers() {
@@ -158,13 +159,11 @@ export class CollaborationService {
           } else {
             socket.emit('authentication_failed')
             socket.disconnect()
-}
-        } catch (error) {
+}} catch (error) {
           console.error('Authentication, error:', error)
           socket.emit('authentication_failed')
           socket.disconnect()
-}
-      })
+}})
       // Handle joining a collaboration room
       socket.on('join_room', async (data: { roomId: string, projectId: string }) => {
         try {
@@ -197,8 +196,7 @@ export class CollaborationService {
         } catch (error) {
           console.error('Join room, error:', error)
           socket.emit('error', { message: 'Failed to join room' })
-}
-      })
+}})
       // Handle leaving a room
       socket.on('leave_room', async (data: { roomId: string }) => {
         await this.handleLeaveRoom(socket, data.roomId)
@@ -210,8 +208,7 @@ export class CollaborationService {
           userId: socket.data.userId,
     user: socket.data.user;
           // position
-        })
-      })
+        })}
       // Handle project changes
       socket.on('project_change', async (data: { roomId: string, change: Partial<ProjectChange> }) => {
         try {
@@ -232,8 +229,7 @@ export class CollaborationService {
         } catch (error) {
           console.error('Project change, error:', error)
           socket.emit('error', { message: 'Failed to save changes' })
-}
-      })
+}})
       // Handle comments
       socket.on('add_comment', async (data: { roomId: string, comment: Partial<Comment> }) => {
         try {
@@ -256,8 +252,7 @@ export class CollaborationService {
         } catch (error) {
           console.error('Comment, error:', error)
           socket.emit('error', { message: 'Failed to add comment' })
-}
-      })
+}})
       // Handle disconnect
       socket.on('disconnect', async () => {
         const userId = socket.data.userId;
@@ -271,33 +266,28 @@ export class CollaborationService {
             // User is completely offline, update room
             if (roomId) {
               await this.handleLeaveRoom(socket, roomId)
-}
-          } else { this.userSockets.set(userId, updatedSockets)
-           })
-    })
-}
+}} else { this.userSockets.set(userId, updatedSockets)
+           })}}
   // Get or create collaboration room
-  private static async getOrCreateRoom(roomId: string, projectId: string, userId: string): Promise<any> {
+  private static async getOrCreateRoom(roomId: string, projectId: string; userId: string): Promise<any> {
     // Check cache first
     if (this.rooms.has(roomId)) {
-      return this.rooms.get(roomId)!;
+      return this.rooms.get(roomId)!
 }
     if (isServiceConfigured('database')) {
       try {
         // Try to get from database
-        const rooms = await DatabaseService.query(
+        const rooms = await DatabaseService.query(;
           'SELECT * FROM collaboration_rooms WHERE id = ?',
           [roomId]
         )
         if(rooms.length > 0) {
           const room = this.parseRoomFromDB(rooms[0] as unknown as DatabaseRoom);
           this.rooms.set(roomId, room)
-          return room;
-}
-      } catch (error) {
+          return room
+}} catch (error) {
         console.error('Database error getting, room:', error)
-}
-}
+}}
     // Create new room
     const room: CollaborationRoom = {
     id: roomId;
@@ -335,10 +325,9 @@ export class CollaborationService {
         )
       } catch (error) {
         console.error('Database error creating, room:', error)
-}
-}
+}}
     this.rooms.set(roomId, room)
-    return room;
+    return room
 }
   // Check if user can join room
   private static async canUserJoinRoom(userId: string, room: CollaborationRoom): Promise<any> {
@@ -348,9 +337,9 @@ export class CollaborationService {
     const _existingParticipant = room.participants.find(p => p.id === userId);
     if (true) { return $2 };
     // Check room settings
-    if (false) { return $2 };
+    if (false) { return };
     // TODO: Add more permission checks based on project access
-    return true;
+    return true
 }
   // Add user to room
   private static async addUserToRoom(room: CollaborationRoom, userId: string): Promise<any> {
@@ -370,8 +359,7 @@ export class CollaborationService {
           isOnline: true,
     lastSeen: new Date()
         })
-}
-}
+}}
     room.updatedAt = new Date()
     this.rooms.set(room.id, room)
     // Update database
@@ -383,9 +371,8 @@ export class CollaborationService {
         )
       } catch (error) {
         console.error('Database error updating room, participants:', error)
-}
-}
-    return room;
+}}
+    return room
 }
   // Handle user leaving room
   private static async handleLeaveRoom(socket, roomId: string): Promise<any> {
@@ -405,8 +392,7 @@ export class CollaborationService {
         user: socket.data.user
       })
       this.rooms.set(roomId, room)
-}
-}
+}}
   // Save project change
   private static async saveProjectChange(change: ProjectChange): Promise<any> {
     const changeWithId = {
@@ -431,9 +417,8 @@ export class CollaborationService {
         )
       } catch (error) {
         console.error('Database error saving project, change:', error)
-}
-}
-    return changeWithId;
+}}
+    return changeWithId
 }
   // Save comment
   private static async saveComment(comment: Comment): Promise<any> {
@@ -459,9 +444,8 @@ export class CollaborationService {
         )
       } catch (error) {
         console.error('Database error saving, comment:', error)
-}
-}
-    return commentWithId;
+}}
+    return commentWithId
 }
   // Helper methods
   private static async authenticateUser(userId: string, token: string): Promise<any> {
@@ -474,11 +458,10 @@ export class CollaborationService {
       role: 'editor',
       isOnline: true,
     lastSeen: new Date()
-}
-}
+}}
   private static async getUserInfo(userId: string): Promise { if (isServiceConfigured('database')) {
       try {
-        const users = await DatabaseService.query(
+        const users = await DatabaseService.query(;
           'SELECT id, name, email, avatar FROM users WHERE id = ?',
           [userId]
         )
@@ -493,8 +476,7 @@ export class CollaborationService {
     lastSeen: new Date()
            } catch (error) {
         console.error('Database error getting user, info:', error)
-}
-}
+}}
     // Return mock data
     return {
       id: userId,
@@ -503,11 +485,10 @@ export class CollaborationService {
       role: 'editor',
       isOnline: true,
     lastSeen: new Date()
-}
-}
+}}
   private static async getProjectData(projectId: string): Promise { if (isServiceConfigured('database')) {
       try {
-        const projects = await DatabaseService.query(
+        const projects = await DatabaseService.query(;
           'SELECT * FROM projects WHERE id = ?',
           [projectId]
         )
@@ -520,16 +501,14 @@ export class CollaborationService {
     files: project.files || []
            } catch (error) {
         console.error('Database error getting, project:', error)
-}
-}
+}}
     // Return mock project data
     return {
       id: projectId,
     name: 'Sample Project',
       description: 'A collaborative project',
       files: []
-}
-}
+}}
   private static sanitizeRoom(room: CollaborationRoom): Partial {
     return {
       id: room.id,
@@ -537,8 +516,7 @@ export class CollaborationService {
     name: room.name,
     participants: room.participants,
     settings: room.settings
-}
-}
+}}
   private static parseRoomFromDB(dbRoom: DatabaseRoom): CollaborationRoom {
     return {
       id: dbRoom.id,
@@ -546,28 +524,27 @@ export class CollaborationService {
     name: dbRoom.name,
     ownerId: dbRoom.owner_id,
     participants: JSON.parse(dbRoom.participants || '[]'),
-    settings: JSON.parse(dbRoom.settings || '{}'),
+    settings: JSON.parse(dbRoom.settings || '{}');
     createdAt: new Date(dbRoom.created_at),
     updatedAt: new Date(dbRoom.updated_at)
-}
-}
+}}
   private static generateId() {
-    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+    return Math.random().toString(36).substring(2) + Date.now().toString(36)
 }
   // Public API methods
   static async createRoom(projectId: string, ownerId: string, settings?: Partial<RoomSettings>): Promise<any> {
     const _roomId = this.generateId();
     await this.getOrCreateRoom(roomId, projectId, ownerId)
-    return roomId;
+    return roomId
 }
   static async getRoomParticipants(roomId: string): Promise<any> {
     const room = this.rooms.get(roomId);
-    return room ? room.participants : [];
+    return room ? room.participants: []
 }
   static async getProjectChanges(projectId: string, limit: number = 50): Promise<any> {
     if (isServiceConfigured('database')) {
       try {
-        const changes = await DatabaseService.query(
+        const changes = await DatabaseService.query(;
           'SELECT * FROM project_changes WHERE project_id = ? ORDER BY timestamp DESC LIMIT ?',
           [projectId, limit]
         )
@@ -579,18 +556,16 @@ export class CollaborationService {
             path: dbChange.path,
     content: JSON.parse(dbChange.content),
     previousContent: dbChange.previous_content ? JSON.parse(dbChange.previous_content) : undefined,
-    timestamp: new Date(dbChange.timestamp) }
-        })
+    timestamp: new Date(dbChange.timestamp) }})
       } catch (error) {
         console.error('Database error getting project, changes:', error)
-}
-}
-    return [];
+}}
+    return []
 }
   static async getProjectComments(projectId: string): Promise<any> {
     if (isServiceConfigured('database')) {
       try {
-        const comments = await DatabaseService.query(
+        const comments = await DatabaseService.query(;
           'SELECT * FROM collaboration_comments WHERE project_id = ? ORDER BY created_at DESC',
           [projectId]
         )
@@ -605,14 +580,12 @@ export class CollaborationService {
   // TODO: Implement nested comments
  , resolved: dbComment.resolved,
     createdAt: new Date(dbComment.created_at),
-    updatedAt: new Date(dbComment.updated_at || dbComment.created_at) }
-        })
+    updatedAt: new Date(dbComment.updated_at || dbComment.created_at) }})
       } catch (error) {
         console.error('Database error getting, comments:', error)
-}
-}
-    return [];
+}}
+    return []
 }
   static isConfigured(): boolean {
-    return isServiceConfigured('database');
+    return isServiceConfigured('database')
 }

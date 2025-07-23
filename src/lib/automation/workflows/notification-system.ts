@@ -29,16 +29,16 @@ export function createNotificationSystemWorkflow(,
 const notification = $input.item.json;
 // Validate required fields
 if(!notification.type) {
-  throw new Error('Notification type is required');
+  throw new Error('Notification type is required')
 }
 if(!notification.recipient && !notification.recipients) {
-  throw new Error('At least one recipient is required');
+  throw new Error('At least one recipient is required')
 }
 // Default values
 const defaults = {
   priority: 'normal',
   channels: ['email'],
-    metadata: {},
+    metadata: {};
     timestamp: new Date().toISOString()
 };
 // Notification types configuration
@@ -93,7 +93,7 @@ const prepared = {
 prepared.channels = prepared.channels.filter((channel) => {
   // In production, check user preferences from database
   // For now, return all channels;
-  return true;
+  return true
 });
 return prepared;```
 },
@@ -110,7 +110,7 @@ return prepared;```
           string: [
             {
   value: 'urgent',
-              output: 0;
+              output: 0
   },
             {
               value: 'high',
@@ -157,7 +157,7 @@ return {
         jsCode: ```
 // Group notifications by recipient and channel
 const items = $input.all();
-const batched: any = {};
+const batched = {};
 items.forEach((item) => {
   const notification = item.json;
   notification.recipients.forEach((recipient) => {
@@ -168,14 +168,11 @@ items.forEach((item) => {
           recipient,
           channel,
           notifications: []
-}
-}
-      batched[key].notifications.push(notification);
-    });
-  });
-});
+}}
+      batched[key].notifications.push(notification)
+    })}});
 // Convert to array for processing
-return Object.values(batched).map((batch) => ({ json: batch }));```
+return Object.values(batched).map((batch) => ({ json: batch });```
 },
     // 6. Merge all notification streams
     {
@@ -203,8 +200,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
               value2: 'email'
 }
    ]
-}
-},
+}},
     {
       id: 'email_1',
       name: 'Send Email',
@@ -216,7 +212,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
         toEmail: '={{ $json.recipient }}',
         subject: '={{ $json.notifications[0].subject }}',
         emailFormat: 'html',
-        htmlBody: '={{ $json.notifications.length > 1 ? $json.notifications.map((n) => n.body || n.message).join("<hr>") : ($json.notifications[0].body || $json.notifications[0].message) }}',
+        htmlBody: '={{ $json.notifications.length > 1 ? $json.notifications.map((n) => n.body || n.message).join("<hr>") : ($json.notifications[0].body || $json.notifications[0].message) }}';
     options: {
           appendAttribution: false
 },
@@ -238,8 +234,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
               value2: 'slack'
 }
    ]
-}
-},
+}},
     {
       id: 'slack_1',
       name: 'Send Slack',
@@ -250,7 +245,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
   authentication: 'oAuth2',
         resource: 'message',
         operation: 'post',
-        channel: '={{ $json.recipient.startsWith("#") ? $json.recipient : "@" + $json.recipient }}',
+        channel: '={{ $json.recipient.startsWith("#") ? $json.recipient : "@" + $json.recipient }}';
         text: '={{ $json.notifications[0].subject }}',
     otherOptions: {
           blocks: [
@@ -259,8 +254,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
     text: {
   type: 'mrkdwn',
                 text: '{{ $json.notifications[0].message }}'
-}
-}
+}}
           ],
           thread_ts: '={{ $json.threadId }}'
 },
@@ -282,8 +276,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
               value2: 'sms'
 }
    ]
-}
-},
+}},
     {
       id: 'twilio_1',
       name: 'Send SMS',
@@ -314,8 +307,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
               value2: 'webhook'
 }
    ]
-}
-},
+}},
     {
       id: 'http_webhook',
       name: 'Send Webhook',
@@ -324,7 +316,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
     position: [1450, 800],
     parameters: {
   method: 'POST',
-        url: '={{ $json.recipient }}',
+        url: '={{ $json.recipient }}';
   // Webhook URL as recipient, sendBody: true,
     bodyParametersJson: '={{ JSON.stringify($json.notifications) }}',
     options: {
@@ -394,9 +386,7 @@ return log;```
               value: 'application/json'
 }
    ]
-}
-}
-}
+}}
   ]
   // Define connections
   const _connections = {
@@ -469,8 +459,7 @@ return log;```
     },
     'code_log': {
       'main': [[{ node: 'respond_1', type: 'main' as const index: 0 }]]
-}
-}
+}}
   return {
     name: 'Notification System',
     active: false,

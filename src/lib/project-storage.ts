@@ -6,25 +6,25 @@ const _supabase = supabaseUrl && supabaseKey ;
   : null
 export interface Project {
   id: string,
-    user_id: string,
-    name: string;
+  user_id: string,
+  name: string,
   description?,
     string: type: string,
-    status: 'draft' | 'active' | 'completed' | 'archived',
+  status: 'draft' | 'active' | 'completed' | 'archived',
   settings: Record<string, any>
   metadata: Record<string, any>,
   created_at: string,
-    updated_at: string
+  updated_at: string
 };
 export interface ProjectFile {
   id: string,
-    project_id: string,
-    path: string,
-    content: string,
-    type: string,
-    size: number,
-    created_at: string,
-    updated_at: string
+  project_id: string,
+  path: string,
+  content: string,
+  type: string,
+  size: number,
+  created_at: string,
+  updated_at: string
 }
 /**
  * Create a new project
@@ -41,7 +41,7 @@ export async function createProject(data: Omit<Project, 'id' | 'created_at' | 'u
   if (error) {
     throw new Error(`Failed to create, project: ${error.message}`)``
 }
-  return project;
+  return project
 }
 /**
  * Get project by ID
@@ -57,11 +57,11 @@ export async function getProject(id: string): Promise<any> {
     .single()
   if (error) {
     if(error.code === 'PGRST116') {
-      return null // Project not found;
+      return null // Project not found
 }
     throw new Error(`Failed to get, project: ${error.message}`)``
 }
-  return project;
+  return project
 }
 /**
  * Update project
@@ -79,7 +79,7 @@ export async function updateProject(id: string, updates: Partial<Project>): Prom
   if (error) {
     throw new Error(`Failed to update, project: ${error.message}`)``
 }
-  return project;
+  return project
 }
 /**
  * Delete project
@@ -94,8 +94,7 @@ export async function deleteProject(id: string): Promise<any> {
     .eq('id', id)
   if (error) {
     throw new Error(`Failed to delete, project: ${error.message}`)``
-}
-}
+}}
 /**
  * Get user projects
  */
@@ -111,7 +110,7 @@ export async function getUserProjects(userId: string): Promise<any> {
   if (error) {
     throw new Error(`Failed to get user, projects: ${error.message}`)``
 }
-  return projects || [];
+  return projects || []
 }
 /**
  * Save project file
@@ -142,7 +141,7 @@ export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at
     if (error) {
       throw new Error(`Failed to update project, file: ${error.message}`)``
 }
-    return file;
+    return file
   } else {
     // Create new file
     const { data: file, error   }: any = await supabase;
@@ -153,9 +152,8 @@ export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at
     if (error) {
       throw new Error(`Failed to save project, file: ${error.message}`)``
 }
-    return file;
-}
-}
+    return file
+}}
 /**
  * Get project files
  */
@@ -171,7 +169,7 @@ export async function getProjectFiles(projectId: string): Promise<any> {
   if (error) {
     throw new Error(`Failed to get project, files: ${error.message}`)``
 }
-  return files || [];
+  return files || []
 }
 /**
  * Delete project file
@@ -187,15 +185,14 @@ export async function deleteProjectFile(projectId: string, path: string): Promis
     .eq('path', path)
   if (error) {
     throw new Error(`Failed to delete project, file: ${error.message}`)``
-}
-}
+}}
 /**
  * Save project artifacts from agent processing
  */
 export async function saveProjectArtifacts(,
     projectId: string,
     userId: string,
-    artifacts: Map<string, any>;
+    artifacts: Map<string, any>
 ): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
@@ -221,6 +218,7 @@ export async function saveProjectArtifacts(,
       size: new Blob([typeof content === 'string' ? content : JSON.stringify(content)]).size
     })
 }
+
 export default {
   createProject,
   getProject,

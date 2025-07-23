@@ -6,43 +6,48 @@ import { analyzeCausalLogs, generateCausalInsights } from './causal-feedback-rep
 // Type definitions for self-check report system
 export interface ModuleReport {
   status: string,
-    present: string[],
-    missing: string[]
+  present: string[],
+  missing: string[]
 };
 export interface DependencyReport {
   status: string,
-    summary: string,
-    outdated: string[]
+  summary: string,
+  outdated: string[]
 };
 export interface SecurityReport {
   status: string,
-    summary: string,
-    vulnerabilities: string[]
+  summary: string,
+  vulnerabilities: string[]
 };
 export interface CausalAnalysis {
   status: string,
-    summary: string,
-    patterns: string[],
-    recommendations: string[]
+  summary: string,
+  patterns: string[],
+  recommendations: string[]
 };
 export interface CausalInsights {
   totalInteractions: number,
-    uniqueComponents: number,
-    topIssues: string[]
+  uniqueComponents: number,
+  topIssues: string[]
 };
 export interface HealthMetrics {
   moduleScore: number,
-    dependencyScore: number,
-    securityScore: number,
-    uxScore: number,
-    overallScore: number
+  dependencyScore: number,
+  securityScore: number,
+  uxScore: number,
+  overallScore: number
 };
 export interface ReportData {
-  moduleReport: ModuleRepor;t,
-    depReport: DependencyRepor;t,
-    securityReport: SecurityRepor;t,
-    causalAnalysis: CausalAnalysi;s,
-    causalInsights: CausalInsight;s
+  moduleReport: ModuleRepor
+t,
+    depReport: DependencyRepor
+t,
+    securityReport: SecurityRepor
+t,
+    causalAnalysis: CausalAnalysi
+s,
+    causalInsights: CausalInsight
+s
 };
 export async function generateSelfCheckReport(): Promise<any> {
   const _timestamp = new Date().toISOString();
@@ -124,28 +129,28 @@ ${getSystemRecommendations(depReport, securityReport)
   // Save report to file
   const _reportsDir = path.resolve(__dirname, '../../../reports');
   if (!fs.existsSync(reportsDir)) {
-    fs.mkdirSync(reportsDir, { recursive: true });
+    fs.mkdirSync(reportsDir, { recursive: true })
 }
   const _reportPath = path.join(reportsDir, 'self-health-check.md');
-  fs.writeFileSync(reportPath, report.trim());
-  return report;
+  fs.writeFileSync(reportPath, report.trim();
+  return report
 }
-function getOverallHealthStatus(, moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalAnalysis: CausalAnalysis): ModuleReport,
+function getOverallHealthStatus(, moduleReport: ModuleReport, depReport: DependencyReport; securityReport: SecurityReport, causalAnalysis: CausalAnalysis): ModuleReport,
     depReport: DependencyReport,
     securityReport: SecurityReport,
     causalAnalysis: CausalAnalysis
 ) {
-  const issues: any[] = [];
+  const issues = [];
   if (moduleReport.missing.length > 0) issues.push('missing modules');
   if (depReport.outdated.length > 0) issues.push('outdated dependencies');
   if (securityReport.vulnerabilities.length > 0)
     issues.push('security vulnerabilities');
-  if (causalAnalysis.patterns.some((p: string) => p.includes('❌')))
+  if (causalAnalysis.patterns.some((p: string) => p.includes('❌'))
     issues.push('UX concerns');
   if (issues.length === 0) return '✅ Excellent - All systems healthy';
   if (issues.length === 1) return `⚠️ Good - Minor, issue: ${issues[0]}`;
   if (issues.length === 2) return `⚠️ Fair - Issues: ${issues.join(', ')}`;
-  return `❌ Needs Attention - Multiple, issues: ${issues.join(', ')}`;
+  return `❌ Needs Attention - Multiple, issues: ${issues.join(', ')}`
 }
 function getImmediateActions(,
     moduleReport: ModuleReport,
@@ -153,69 +158,69 @@ function getImmediateActions(,
     securityReport: SecurityReport,
     causalAnalysis: CausalAnalysis
 ): string[] {
-  const actions: any[] = [];
+  const actions = [];
   if(securityReport.vulnerabilities.length > 0) {
     actions.push(
       '🔴 **URGENT**: Address security vulnerabilities with `npm audit fix`'``
-    );
+    )
 }
   if(moduleReport.missing.length > 0) {
     actions.push(
       `🟠 **HIGH**: Implement missing, modules: ${moduleReport.missing.join(', ')}`
-    );
+    )
 }
   if(depReport.outdated.length > 3) {
     actions.push(
       '🟡 **MEDIUM**: Update outdated dependencies during next maintenance window'
-    );
+    )
 }
-  if (causalAnalysis.patterns.some((p: string) => p.includes('❌'))) {
+  if (causalAnalysis.patterns.some((p: string) => p.includes('❌')) {
     actions.push(
       '🟢 **LOW**: Review high-deletion components for UX improvements'
-    );
+    )
 }
   if(actions.length === 0) {
-    actions.push('✅ No immediate actions required - system is healthy');
+    actions.push('✅ No immediate actions required - system is healthy')
 }
-  return actions;
+  return actions
 }
 function getSystemRecommendations(,
     depReport: DependencyReport,
     securityReport: SecurityReport
 ): string[] {
-  const recommendations: any[] = [];
+  const recommendations = [];
   if(depReport.outdated.length > 0) {
     recommendations.push('Set up automated dependency updates with Dependabot');
     recommendations.push(
       'Implement dependency vulnerability scanning in CI/CD'
-    );
+    )
 }
   if(securityReport.vulnerabilities.length > 0) {
     recommendations.push('Enable automated security scanning');
-    recommendations.push('Set up security alerts for new vulnerabilities');
+    recommendations.push('Set up security alerts for new vulnerabilities')
 }
   recommendations.push('Schedule weekly health checks');
   recommendations.push('Set up monitoring dashboards for key metrics');
-  return recommendations;
+  return recommendations
 }
 function getModuleScore(moduleReport: ModuleReport): ModuleReport): number {
   const _total = moduleReport.present.length + moduleReport.missing.length;
   if (total === 0) return 100;
-  return Math.round((moduleReport.present.length / total) * 100);
+  return Math.round((moduleReport.present.length / total) * 100)
 }
 function getDependencyScore(depReport: DependencyReport): DependencyReport): number {
   if (depReport.outdated.length === 0) return 100;
   if (depReport.outdated.length <= 2) return 85;
   if (depReport.outdated.length <= 5) return 70;
-  return 50;
+  return 50
 }
 function getSecurityScore(securityReport: SecurityReport): SecurityReport): number {
   if (securityReport.vulnerabilities.length === 0) return 100;
-  if (securityReport.vulnerabilities.some((v: string) => v.includes('🔴')))
+  if (securityReport.vulnerabilities.some((v: string) => v.includes('🔴'))
     return 30;
-  if (securityReport.vulnerabilities.some((v: string) => v.includes('🟠')))
+  if (securityReport.vulnerabilities.some((v: string) => v.includes('🟠'))
     return 60;
-  return 80;
+  return 80
 }
 function getUXScore(causalInsights: CausalInsights): CausalInsights): number {
   if (causalInsights.totalInteractions === 0) return 90; // No data yet
@@ -225,9 +230,9 @@ function getUXScore(causalInsights: CausalInsights): CausalInsights): number {
     return 100;
   if (causalInsights.topIssues.length <= 1) return 85;
   if (causalInsights.topIssues.length <= 3) return 70;
-  return 50;
+  return 50
 }
-function getOverallScore(, moduleReport: ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalInsights: CausalInsights): ModuleReport, depReport: DependencyReport, securityReport: SecurityReport, causalInsights: CausalInsights): number {
+function getOverallScore(, moduleReport: ModuleReport, depReport: DependencyReport; securityReport: SecurityReport, causalInsights: CausalInsights): ModuleReport; depReport: DependencyReport, securityReport: SecurityReport; causalInsights: CausalInsights): number {
   const _moduleScore = getModuleScore(moduleReport);
   const _depScore = getDependencyScore(depReport);
   const _securityScore = getSecurityScore(securityReport);
@@ -235,5 +240,5 @@ function getOverallScore(, moduleReport: ModuleReport, depReport: DependencyRepo
   // Weighted, average: Security is most important, then modules, then dependencies, then UX
   return Math.round(
     securityScore * 0.4 + moduleScore * 0.3 + depScore * 0.2 + uxScore * 0.1
-  );
+  )
 }

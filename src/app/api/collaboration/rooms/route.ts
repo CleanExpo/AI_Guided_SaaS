@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
@@ -8,7 +7,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json(
         { error: 'Project ID is required' },
         { status: 400 }
-      );
+      )
 }
     // Simulate room creation
     const roomId = 'room_' + Math.random().toString(36).substr(2, 9);
@@ -22,15 +21,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       success: true,
       room
-    }, { status: 201 });
+    }, { status: 201 })
   } catch (error) {
     console.error('Create room error:', error);
     return NextResponse.json(
       { error: 'Failed to create collaboration room' },
       { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export async function GET(): Promise<NextResponse> {
   try {
     // Simulate getting active rooms
@@ -46,13 +45,13 @@ export async function GET(): Promise<NextResponse> {
     return NextResponse.json({
       success: true,
       rooms
-    });
+    })
   } catch (error) {
     console.error('Get rooms error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch rooms' },
       { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export const dynamic = "force-dynamic";

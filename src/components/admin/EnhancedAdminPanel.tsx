@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
@@ -9,17 +8,14 @@ import SelfCheckTrigger from './SelfCheckTrigger';
 import SystemResourceMonitor from './SystemResourceMonitor';
 import SafeModeHealthCheck from './SafeModeHealthCheck';
 export default function EnhancedAdminPanel() {
-  const [activeTab, setActiveTab] = useState<any>('overview');
+  const [activeTab, setActiveTab] = useState<any>('overview')
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4, sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
+      {/* Header */}</div>
+      <div className="bg-white border-b max-w-7xl mx-auto px-4, sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 flex items-center space-x-4"></div>
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">🛡️</span>
-              </div>
               <h1 className="text-xl font-semibold">Enhanced Admin Panel</h1>
               <div className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
                 Performance Optimized</div>
@@ -35,25 +31,21 @@ export default function EnhancedAdminPanel() {
             <TabsTrigger value="system-check">System Health {/* Overview, Tab */}
           <TabsContent value="overview", className="space-y-6">
             <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Performance, Status */}
+              {/* Performance, Status */}</div>
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">
                     🖥️ Performance Status</h3>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
+                  <div className="w-3 h-3 bg-green-500 rounded-full">
+        <div className="space-y-2 flex justify-between text-sm"></div>
                     <span>System Load</span>
                     <span className="font-medium">Normal</span>
-                  </div>
                   <div className="flex justify-between text-sm">
                     <span>Memory Usage</span>
                     <span className="font-medium">45%</span>
-                  </div>
                   <div className="flex justify-between text-sm">
                     <span>Active Sessions</span>
                     <span className="font-medium">3</span>
-                  </div>
                 <Button
                   className="w-full mt-4"
                   variant="outline"
@@ -65,19 +57,15 @@ export default function EnhancedAdminPanel() {
                   <h3 className="text-lg font-semibold">🛡️ Safe Mode</h3>
                   <div className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
                     Ready</div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
+                <div className="space-y-2 flex justify-between text-sm"></div>
                     <span>Batch Processing</span>
                     <span className="font-medium">Enabled</span>
-                  </div>
                   <div className="flex justify-between text-sm">
                     <span>Max Batch Size</span>
                     <span className="font-medium">3 issues</span>
-                  </div>
                   <div className="flex justify-between text-sm">
                     <span>Safety Checks</span>
                     <span className="font-medium">Active</span>
-                  </div>
                 <Button
                   className="w-full mt-4"
                   variant="outline"
@@ -87,20 +75,16 @@ export default function EnhancedAdminPanel() {
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">🔍 System Health</h3>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
+                  <div className="w-3 h-3 bg-green-500 rounded-full">
+        <div className="space-y-2 flex justify-between text-sm"></div>
                     <span>Overall Score</span>
                     <span className="font-medium">92/100</span>
-                  </div>
                   <div className="flex justify-between text-sm">
                     <span>Last Check</span>
                     <span className="font-medium">2 hours ago</span>
-                  </div>
                   <div className="flex justify-between text-sm">
                     <span>Issues Found</span>
                     <span className="font-medium">3 minor</span>
-                  </div>
                 <Button
                   className="w-full mt-4"
                   variant="outline"
@@ -117,7 +101,6 @@ export default function EnhancedAdminPanel() {
                 ></Button>
                   <span className="text-2xl mb-1">📊</span>
                   <span className="text-sm">Monitor Resources</span>
-                </Button>
                 <Button
                   variant="outline"
                   className="h-20 flex flex-col items-center justify-center"
@@ -125,21 +108,18 @@ export default function EnhancedAdminPanel() {
                 ></Button>
                   <span className="text-2xl mb-1">🛡️</span>
                   <span className="text-sm">Safe Processing</span>
-                </Button>
                 <Button
                   variant="outline"
                   className="h-20 flex flex-col items-center justify-center"
                   onClick={() => setActiveTab('system-check')}
                 ></Button>
                   <span className="text-2xl mb-1">🔍</span><span className="text-sm">System Check</span>
-                </Button>
                 <Button
                   variant="outline"
                   className="h-20 flex flex-col items-center justify-center"
                 >
                   <span className="text-2xl mb-1">📋</span>
                   <span className="text-sm">View Logs</span>
-                </Button>
             {/* Emergency, Procedures */}
             <Alert className="border-orange-200 bg-orange-50">
               <div className="flex items-start space-x-3">
@@ -159,48 +139,63 @@ export default function EnhancedAdminPanel() {
                     >
                       📖 View Emergency Guide {/* Performance, Monitor Tab */}
           <TabsContent value="performance", className="space-y-6">
-            <SystemResourceMonitor />
-          </TabsContent>
+            <SystemResourceMonitor></TabsContent>
           {/* Safe, Mode Health Check Tab */}
           <TabsContent value="safe-mode", className="space-y-6">
-            <SafeModeHealthCheck />
-          </TabsContent>
+            <SafeModeHealthCheck></TabsContent>
           {/* System, Health Check Tab */}
           <TabsContent value="system-check", className="space-y-6">
-            <SelfCheckTrigger />
-          </TabsContent>
+            <SelfCheckTrigger></TabsContent>
       {/* Footer */}
-      <div className="bg-white border-t mt-12">
-        <div className="max-w-7xl mx-auto px-4, sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <div className="flex items-center space-x-4">
+      <div className="bg-white border-t mt-12 max-w-7xl mx-auto px-4, sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between text-sm text-gray-600 flex items-center space-x-4"></div>
               <span>System: Status: ✅ Healthy</span>
               <span>•</span>
               <span>Last: Updated: {new, Date().toLocaleTimeString()}</span>
-            </div>
             <div className="flex items-center space-x-4">
               <Button size="sm" variant="ghost">
                 📚 Documentation</Button>
               <Button size="sm" variant="ghost">
                 🆘 Support</Button>
-  );
+  
+</div>
+</div>
+</div>
+</div>
+</TabsTrigger>
+</Tabs>
 
-          </div>
-</Button>
-          </div>
-</Alert>
+    </SelfCheckTrigger>
+    </SafeModeHealthCheck>
+    </SystemResourceMonitor>
+    </Button>
+    </div>
+    </Alert>
+    </Button>
     </div>
     </Card>
-          </div>
-</Card>
-          </div>
-</Card>
-          </div>
-</Card>
+    </Button>
     </div>
+    </div>
+    </div>
+    </div>
+    </Card>
+    </Button>
+    </div>
+    </div>
+    </div>
+    </Card>
+    </Button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </Card>
     </TabsContent>
-    </TabsTrigger>
     </TabsList>
-    </Tabs>
-          </div>
-}
+    </div>
+    </div>
+    </div>
+    </div>
+    </any>
+  }

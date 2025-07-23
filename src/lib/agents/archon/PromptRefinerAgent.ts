@@ -2,35 +2,37 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
 export interface RefinedPrompt {
   originalPrompt: string,
-    refinedPrompt: string,
-    improvements: PromptImprovement[],
-    clarity: PromptClarit;y,
+  refinedPrompt: string,
+  improvements: PromptImprovement[],
+  clarity: PromptClarit
+y,
     examples: PromptExample[],
-    constraints: string[],
-    expectedOutput: OutputSpecificatio;n,
+  constraints: string[],
+  expectedOutput: OutputSpecificatio
+n,
     confidence: number
 };
 export interface PromptImprovement {
   type: 'clarity' | 'specificity' | 'context' | 'structure' | 'examples',
-    original: string,
-    improved: string,
-    rationale: string
+  original: string,
+  improved: string,
+  rationale: string
 };
 export interface PromptClarity {
   score: number; // 0-100,
     issues: string[],
-    suggestions: string[]
+  suggestions: string[]
 };
 export interface PromptExample {
   input: string,
-    expectedOutput: string,
-    explanation: string
+  expectedOutput: string,
+  explanation: string
 };
 export interface OutputSpecification {
-  format: string;
+  format: string
   structure,
     constraints: string[],
-    validationRules: string[]
+  validationRules: string[]
 };
 export class PromptRefinerAgent extends Agent {
   constructor() {
@@ -49,8 +51,7 @@ export class PromptRefinerAgent extends Agent {
         'Constraint definition'],
       tools: ['prompt-analyzer', 'clarity-scorer', 'example-generator'],
       temperature: 0.3
-    }};
-}
+    }}
   protected async execute(input: string): Promise<any> {
     try {
       this.think('Analyzing prompt for refinement opportunities...');
@@ -102,14 +103,13 @@ export class PromptRefinerAgent extends Agent {
           'Use refined prompt with AI model',
           'Test with examples to verify improvements',
           "Iterate if output doesn't meet expectations"],
-        confidence;
+        confidence
     } catch (error) {
       this.think(`Error during prompt, refinement: ${error}`);``
-      throw error;
-}
-}
+      throw error
+}}
   private async analyzePrompt(prompt: string): Promise<any> {
-    const _analysisPrompt = `Analyze this prompt for clarity, specificity, and, effectiveness: Prompt to, analyze:``
+    const _analysisPrompt = `Analyze this prompt for clarity, specificity, and, effectiveness: Prompt to, analyze:``;
 "${prompt}"
 Evaluate:
 1. Clarity (is the intent clear?)
@@ -124,10 +124,10 @@ Provide detailed analysis in JSON format.`
     temperature: 0.2,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async identifyImprovements(prompt: string, analysis): Promise<any> {
-    const _improvementPrompt = `Based on this analysis, identify specific improvements for the, prompt: Original, prompt:``
+    const _improvementPrompt = `Based on this analysis, identify specific improvements for the, prompt: Original, prompt:``;
 "${prompt}"
 Analysis:
 ${JSON.stringify(analysis, null, 2)}
@@ -142,10 +142,10 @@ Format as JSON array of improvements.`
     temperature: 0.3,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async refinePrompt(original: string, improvements: PromptImprovement[]): Promise<any> {
-    const _refinePrompt = `Create a refined version of this prompt incorporating all, improvements: Original, prompt:``
+    const _refinePrompt = `Create a refined version of this prompt incorporating all, improvements: Original, prompt:``;
 "${original}"
 Improvements to, apply:
 ${JSON.stringify(improvements, null, 2)}
@@ -159,10 +159,9 @@ Provide only the refined prompt text.`
     return await generateAIResponse(refinePrompt, {
       model: this.config.model,
     temperature: 0.2
-    }};
-}
+    }}
   private async generateExamples(refinedPrompt: string, analysis): Promise<any> {
-    const _examplePrompt = `Generate 2-3 examples that demonstrate the expected input and output for this, prompt: Refined, prompt:``
+    const _examplePrompt = `Generate 2-3 examples that demonstrate the expected input and output for this, prompt: Refined, prompt:``;
 "${refinedPrompt}"
 Context from, analysis:
 ${JSON.stringify(analysis, null, 2)}
@@ -176,10 +175,10 @@ Format as JSON array of examples.`
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async defineConstraints(refinedPrompt: string, analysis): Promise<any> {
-    const _constraintPrompt = `Define explicit constraints for this, prompt: Refined, prompt:``
+    const _constraintPrompt = `Define explicit constraints for this, prompt: Refined, prompt:``;
 "${refinedPrompt}"
 Consider:
 - Length constraints
@@ -194,7 +193,7 @@ List clear, actionable constraints.`
     }};
     return response.split('\n').filter((line) => line.trim().length > 0)}
   private async specifyOutput(refinedPrompt: string, analysis): Promise<any> {
-    const _outputPrompt = `Specify the expected output format and structure for this, prompt: Refined, prompt:``
+    const _outputPrompt = `Specify the expected output format and structure for this, prompt: Refined, prompt:``;
 "${refinedPrompt}"
 Define:
 1. Output format (text, JSON, markdown, etc.)
@@ -207,10 +206,10 @@ Format as JSON OutputSpecification.`
     temperature: 0.2,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async assessClarity(refinedPrompt: string): Promise<any> {
-    const _clarityPrompt = `Assess the clarity of this refined, prompt: ``
+    const _clarityPrompt = `Assess the clarity of this refined, prompt: ``;
 "${refinedPrompt}"
 Evaluate:
 1. Overall clarity score (0-100)
@@ -222,7 +221,7 @@ Format as JSON PromptClarity object.`
     temperature: 0.2,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private calculateConfidence(
     clarity: PromptClarity,
@@ -236,5 +235,5 @@ Format as JSON PromptClarity object.`
     // Reduce if there are remaining issues
     const _issuePenalty = clarity.issues.length * 0.05;
     confidence = Math.max(confidence - issuePenalty, 0.5);
-    return Number(confidence.toFixed(2));
+    return Number(confidence.toFixed(2))
 }

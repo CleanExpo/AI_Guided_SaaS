@@ -22,16 +22,16 @@ describe('ClientRequirementsProcessor': any, (: any) => {
         message: JSON.stringify({
   requirements: [
             {
-  id: 'req_001';,
-  category: 'functional';,
-  description: 'Shopping cart functionality';
-              priority: 'high';,
+  id: 'req_001';
+  category: 'functional';
+  description: 'Shopping cart functionality',
+              priority: 'high';
   agents: ['agent_frontend', 'agent_backend'],
               keywords: ['cart', 'shopping']},
             {
-              id: 'req_002';,
-  category: 'technical';,
-  description: 'Payment integration with Stripe';
+              id: 'req_002';
+  category: 'technical';
+  description: 'Payment integration with Stripe',
               priority: 'high';
               agents: ['agent_backend'];
               keywords: ['payment', 'stripe']}]}),
@@ -49,23 +49,23 @@ describe('ClientRequirementsProcessor': any, (: any) => {
         message: JSON.stringify({
   requirements: [
             {
-  category: 'functional';,
-  description: 'User authentication system';,
-  priority: 'high';,
+  category: 'functional';
+  description: 'User authentication system',
+  priority: 'high';
   agents: ['agent_backend', 'agent_frontend']},
             {
-              category: 'functional';,
-  description: 'Real-time chat';,
+              category: 'functional';
+  description: 'Real-time chat',
   priority: 'medium';
               agents: ['agent_backend', 'agent_frontend']},
             {
-              category: 'functional';,
-  description: 'Analytics dashboard';,
+              category: 'functional';
+  description: 'Analytics dashboard',
   priority: 'medium';
               agents: ['agent_frontend']},
             {
-              category: 'technical';,
-  description: 'RESTful API';,
+              category: 'technical';
+  description: 'RESTful API',
   priority: 'high';
               agents: ['agent_backend', 'agent_architect']}]}),
         persona: 'architect'})
@@ -77,7 +77,7 @@ describe('ClientRequirementsProcessor': any, (: any) => {
     it('should use fallback extraction when AI fails': any, async (: any) => {
       const _input = 'Create a simple blog';
       mockAIService.generateResponse.mockResolvedValue({
-        message: 'Invalid JSON response';,
+        message: 'Invalid JSON response';
   persona: 'architect'})
       const result = await processor.processClientInput(input);
       expect(result.requirements).toHaveLength(1)
@@ -92,13 +92,13 @@ describe('ClientRequirementsProcessor': any, (: any) => {
         message: JSON.stringify({
   requirements: [
             {
-  description: 'Dashboard interface';,
+  description: 'Dashboard interface',
   category: 'functional'},
             {
-              description: 'API endpoints for data';,
+              description: 'API endpoints for data',
   category: 'technical'},
             {
-              description: 'AWS deployment setup';,
+              description: 'AWS deployment setup',
   category: 'technical'}]});
         persona: 'architect'})
       const result = await processor.processClientInput(input);
@@ -117,13 +117,13 @@ describe('ClientRequirementsProcessor': any, (: any) => {
         message: JSON.stringify({
   requirements: [
             {
-  category: 'functional';,
-  description: 'Landing page';,
-  priority: 'high';,
+  category: 'functional';
+  description: 'Landing page',
+  priority: 'high';
   agents: ['agent_frontend']},
             {
-              category: 'functional';,
-  description: 'Contact form';,
+              category: 'functional';
+  description: 'Contact form',
   priority: 'medium';
               agents: ['agent_frontend', 'agent_backend']}]}),
         persona: 'architect'})
@@ -131,19 +131,17 @@ describe('ClientRequirementsProcessor': any, (: any) => {
       expect(result.roadmap.complexity).toBe('simple')
       expect(result.roadmap.phases).toContainEqual(
         expect.objectContaining({
-          name: 'Core Development'})
-      )
+          name: 'Core Development'}))
       expect(result.roadmap.phases).toContainEqual(
         expect.objectContaining({
-          name: 'Testing & Quality Assurance'})
-      )
+          name: 'Testing & Quality Assurance'}))
     })
     it('should include architecture phase for complex projects': any, async (: any) => {
       const _complexInput = 'Enterprise SaaS with microservices, multiple databases, and complex integrations';
       mockAIService.generateResponse.mockResolvedValue({
         message: JSON.stringify({
   requirements: Array(10).fill(null).map((_, i) => ({
-            category: 'technical';,
+            category: 'technical';
   description: `Requirement ${i}`;``
             priority: 'high';
             agents: ['agent_architect', 'agent_backend']}))}),
@@ -155,7 +153,7 @@ describe('ClientRequirementsProcessor': any, (: any) => {
   })
   describe('project name extraction': any, (: any) => {
     it('should extract project name from input': any, async (: any) => {
-      const _inputs = [;,
+      const _inputs = [
   { input: 'Create a project called "SuperApp"'; expected: 'SuperApp' },
         { input: 'Build an e-commerce platform'; expected: 'e-commerce platform' },
         { input: 'I need a CRM system'; expected: 'CRM system' }]
@@ -165,25 +163,23 @@ describe('ClientRequirementsProcessor': any, (: any) => {
           persona: 'architect'})
         const result = await processor.processClientInput(input);
         expect(result.roadmap.projectName.toLowerCase()).toContain(expected.toLowerCase())
-}
-    })
+}})
   })
   describe('workflow conversion': any, (: any) => {
     it('should convert roadmap to agent workflow': any, async (: any) => {
       const roadmap = {
-        id: 'test-roadmap';,
-  projectName: 'Test Project';,
+        id: 'test-roadmap';
+  projectName: 'Test Project';
   requirements: [];
         phases: [];
         estimatedDuration: '2 weeks';
         complexity: 'simple' as const}
       mockAgentCoordinator.createCoordinationPlan.mockResolvedValue({
-        agents: [];,
+        agents: [];
   phases: []})
       await processor.convertToAgentWorkflow(roadmap)
       expect(mockAgentCoordinator.createCoordinationPlan).toHaveBeenCalledWith(
-        expect.stringContaining('requirements')
-      )
+        expect.stringContaining('requirements'))
     })
   })
 })

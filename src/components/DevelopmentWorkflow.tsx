@@ -1,23 +1,21 @@
 'use client';
-
 import React from 'react';
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ProjectConfig } from '@/types';
 import { CheckCircle, Clock, Play, Code, TestTube, Rocket } from 'lucide-react';
 interface DevelopmentWorkflowProps {
-projectConfig: ProjectConfi;g;
-    onPhaseComplete: (phase: string) => voi;d
-
+projectConfig: ProjectConfi
+g,
+  onPhaseComplete: (phase: string) => void
 }}
 const workflowPhases = [
   {
   id: 'planning',
     title: 'Planning & Architecture',
-    description: 'Define project structure and technical requirements',
-    icon: Code,
+  description: 'Define project structure and technical requirements',
+  icon: Code,
     status: 'completed',
     tasks: [
       'Project structure defined',
@@ -27,8 +25,8 @@ const workflowPhases = [
   {
     id: 'development',
     title: 'Core Development',
-    description: 'Build the main application features',
-    icon: Play,
+  description: 'Build the main application features',
+  icon: Play,
     status: 'current',
     tasks: [
       'Set up development environment',
@@ -38,8 +36,8 @@ const workflowPhases = [
   {
     id: 'testing',
     title: 'Testing & Quality Assurance',
-    description: 'Ensure application reliability and performance',
-    icon: TestTube,
+  description: 'Ensure application reliability and performance',
+  icon: TestTube,
     status: 'pending',
     tasks: [
       'Write unit tests',
@@ -49,8 +47,8 @@ const workflowPhases = [
   {
     id: 'deployment',
     title: 'Deployment & Launch',
-    description: 'Deploy to production and monitor',
-    icon: Rocket,
+  description: 'Deploy to production and monitor',
+  icon: Rocket,
     status: 'pending',
     tasks: [
       'Set up production environment',
@@ -63,41 +61,36 @@ export default function DevelopmentWorkflow({
   const _handlePhaseComplete = (phaseId: string) => {
     onPhaseComplete(phaseId);
     // Move to next phase
-    const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId);
+    const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId)
     if(currentIndex < workflowPhases.length - 1) {
-      setActivePhase(workflowPhases[currentIndex + 1].id);
+      setActivePhase(workflowPhases[currentIndex + 1].id)
 }
   return (<div className="space-y-6">;
-      {/* Project, Overview */}
+      {/* Project, Overview */}</div>
       <Card>
         <CardHeader>
           <CardTitle>AI Development Workflow - {projectConfig.name}</CardTitle>
         <CardContent>
-          <div className ="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
-                {projectConfig.features.length}
+          <div className ="grid grid-cols-1, md: grid-cols-2, lg:grid-cols-4 gap-4">
+            <div className="text-center text-2xl font-bold text-blue-600">
+                {projectConfig.features.length}</div>
               <div className="text-sm text-gray-600">Features</div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">
-                {projectConfig.technology?.frontend || 'React'}
+            <div className="text-center text-2xl font-bold text-green-600">
+                {projectConfig.technology?.frontend || 'React'}</div>
               <div className="text-sm text-gray-600">Frontend</div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-brand-primary-600">
-                {projectConfig.technology?.backend || 'Node.js'}
+            <div className="text-center text-2xl font-bold text-brand-primary-600">
+                {projectConfig.technology?.backend || 'Node.js'}</div>
               <div className="text-sm text-gray-600">Backend</div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-orange-600">
-                {projectConfig.timeline}
+            <div className="text-center text-2xl font-bold text-orange-600">
+                {projectConfig.timeline}</div>
               <div className="text-sm text-gray-600">Timeline</div>
-        </CardContent>
       {/* Workflow, Phases */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {workflowPhases.map((phase) => { const _IconComponent = phase.icon;
           const _isActive = activePhase === phase.id;
-          const _isCompleted = phase.status === 'completed', return (
+          const _isCompleted = phase.status === 'completed', return (</div>
     <Card
-              key={phase.id; }
+              key={phase.id }
               className={`transition-all duration-200 ${``
                 isActive ? 'ring-2 ring-blue-500 shadow-lg' : ''
               }`}
@@ -126,21 +119,17 @@ export default function DevelopmentWorkflow({
                       {phase.description}</p>
               <CardContent>
                 <div className="space-y-3">
-                  {phase.tasks.map((task, taskIndex) => (
-                    <div key={taskIndex} className="flex items-center gap-2">
-                      <div
-                        className={`w-4 h-4 rounded-full flex items-center justify-center ${``
+                  {phase.tasks.map((task, taskIndex) => (\n    </div>
+                    <div key={taskIndex} className="flex items-center gap-2" className={`w-4 h-4 rounded-full flex items-center justify-center ${``
                           // isCompleted
-                            ? 'bg-green-500'
+                            ? 'bg-green-500'</div>
                             : isActive && taskIndex < 2
                               ? 'bg-blue-500'
                               : 'bg-gray-300'
                         }`}
                       >
                         {(isCompleted || (isActive && taskIndex < 2))  && (
-CheckCircle className="w-3 h-3 text-white"    />
-                        
-              
+CheckCircle className="w-3 h-3 text-white" />
             )}
                       <span
                         className={`text-sm ${``
@@ -162,9 +151,8 @@ div className="mt-4 pt-4 border-t">
                       <CheckCircle className="w-4 h-4" />
                       <span className="text-sm font-medium">
                         Phase Completed</span>
-              
-            )}
-    );
+      )}
+    )
   },
     {/* AI, Recommendations */}
       <Card>
@@ -187,21 +175,27 @@ div className="mt-4 pt-4 border-t">
                 <li>• Implement proper error handling</li>
                 <li>
                   • Follow {projectConfig.technology?.frontend || 'React'}{' '
+</ul>
+
     </ul>
-          </div>
-}
+    </div>
+    </CardContent>
+    </Card>
+    </div>
+    </div>
+    </CardContent>
+    </div>
+    </Card>
+    </div>
+    </CardContent>
+    </Card>
+    </any>
+  }
                   conventions</li>
                 <li>• Set up continuous integration</li>
-          </Card>
-          </CardHeader>
-          </CardContent>
-          </div>
-          </ul>
-          </div></CardContent>
 </CardHeader>
-</Card>
+</div>
+</CardHeader>
 </CardTitle>
+</div>
 </CardHeader>
-</div></CardContent>
-</CardHeader>
-</Card>

@@ -1,14 +1,12 @@
 'use client';
-
 import React from 'react';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProjectConfig, ProjectFile } from '@/types';
 import { Rocket } from 'lucide-react';
 interface DeploymentScreenProps {
-config: ProjectConfi;g;
-    files: ProjectFile[]
-
+config: ProjectConfi
+g,
+  files: ProjectFile[]
 };
 export default function DeploymentScreen() {
   return (

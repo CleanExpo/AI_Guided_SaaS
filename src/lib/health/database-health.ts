@@ -14,20 +14,19 @@ export async function checkSupabaseHealth(,
     try {
       const result = await supabase.from('_health_check').select('1').single();
       data = result.data;
-      error = result.error;
+      error = result.error
     } catch (e) {
       // If health check table doesn't exist, that's OK
-      error = null;
+      error = null
 }
     // Alternative: Check if we can at least reach the database
     if(!data && !error) {
       let pingError = null;
       try {
         const result = await supabase.rpc('version');
-        pingError = result.error;
+        pingError = result.error
       } catch (e) {
-        pingError = { message: 'RPC not available' }
-}
+        pingError = { message: 'RPC not available' }}
       if(!pingError) {
         return {
           name: 'supabase',
@@ -36,27 +35,23 @@ export async function checkSupabaseHealth(,
     details: {
   message: 'Database reachable'
 },
-          timestamp: new Date()}
-}
-}
+          timestamp: new Date()}}
     if (error) {
       return {
         name: 'supabase',
         status: 'unhealthy',
         responseTime: Date.now() - start,
     error: error.message,
-    timestamp: new Date()}
-}
+    timestamp: new Date()}}
     return {
       name: 'supabase',
       status: 'healthy',
       responseTime: Date.now() - start,
-    timestamp: new Date()}
-    } catch (error) { return {
+    timestamp: new Date()}} catch (error) { return {
       name: 'supabase',
       status: 'unhealthy',
       responseTime: Date.now() - start,
-    error: error instanceof Error ? error.message : 'Unknown error',
+    error: error instanceof Error ? error.message: 'Unknown error',
       timestamp: new Date() }
 // PostgreSQL direct connection health check
 // Commented out - requires 'pg' package to be installed
@@ -80,15 +75,14 @@ export async function checkPostgresHealth(,
     version: result.rows[0].version
       },
       timestamp: new Date()
-}
-  } catch (error) {
+}} catch (error) {
     if (pool) {
       await pool.end().catch (() => {})
 }
     return {name: 'postgres',
       status: 'unhealthy',
       responseTime: Date.now() - start,
-    error: error instanceof Error ? error.message : 'Connection failed',
+    error: error instanceof Error ? error.message: 'Connection failed',
       timestamp: new Date()
 }
 */
@@ -113,12 +107,11 @@ export async function checkConnectionPoolHealth(,
       responseTime: Date.now() - start,
     details: poolStats,
     timestamp: new Date()
-}
-  } catch (error) { return {
+}} catch (error) { return {
       name: 'connection_pool',
       status: 'unhealthy',
       responseTime: Date.now() - start,
-    error: error instanceof Error ? error.message : 'Pool check failed',
+    error: error instanceof Error ? error.message: 'Pool check failed',
       timestamp: new Date()
 }
 */
@@ -146,8 +139,7 @@ export async function checkMigrationHealth(,
     details: {
   message: 'Migrations table not found or inaccessible'
 },
-        timestamp: new Date()}
-}
+        timestamp: new Date()}}
     return {
       name: 'migrations',
       status: 'healthy',
@@ -156,12 +148,11 @@ export async function checkMigrationHealth(,
   latestVersion: data?.version,
     executedAt: data?.executed_at
       },
-      timestamp: new Date()}
-    } catch (error) { return {
+      timestamp: new Date()}} catch (error) { return {
       name: 'migrations',
       status: 'unhealthy',
       responseTime: Date.now() - start,
-    error: error instanceof Error ? error.message : 'Migration check failed',
+    error: error instanceof Error ? error.message: 'Migration check failed',
       timestamp: new Date() }
 /**
  * Check database performance metrics
@@ -185,8 +176,7 @@ export async function checkDatabasePerformance(,
         status: 'unhealthy',
         responseTime: Date.now() - start,
     error: error.message,
-    timestamp: new Date()}
-}
+    timestamp: new Date()}}
     // Determine health based on query time
     let status: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
     if(queryTime > 1000) {
@@ -205,12 +195,11 @@ export async function checkDatabasePerformance(,
           degraded: '500-1000ms',
           unhealthy: '>1000ms'
 },
-      timestamp: new Date()}
-    } catch (error) { return {
+      timestamp: new Date()}} catch (error) { return {
       name: 'db_performance',
       status: 'unhealthy',
       responseTime: Date.now() - start,
-    error: error instanceof Error ? error.message : 'Performance check failed',
+    error: error instanceof Error ? error.message: 'Performance check failed',
       timestamp: new Date() }
 /**
  * Create a comprehensive database health check
@@ -231,7 +220,7 @@ export function createComprehensiveDatabaseHealthCheck(,
     } else if (degradedChecks.length > 0) {
       overallStatus = 'degraded'
 }
-    const _totalResponseTime = checks.reduce(
+    const _totalResponseTime = checks.reduce(;
       (sum, check) => sum + (check.responseTime || 0),
       0
     );
@@ -240,10 +229,9 @@ export function createComprehensiveDatabaseHealthCheck(,
       status: overallStatus,
     responseTime: totalResponseTime,
     details: {
-  checks: checks.map((c) => ({,
+  checks: checks.map((c) => ({
   name: c.name,
     status: c.status,
     responseTime: c.responseTime
         }})},
-      timestamp: new Date()}
-}
+      timestamp: new Date()}}

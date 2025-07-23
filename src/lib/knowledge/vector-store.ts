@@ -4,68 +4,72 @@ import { z } from 'zod';/**
  */
 // Vector store configuration
 export interface VectorStoreConfig {
-  provider: 'pinecone' | 'weaviate' | 'chroma' | 'qdrant' | 'memory';
-  apiKey?: string;
-  endpoint?: string;
-  indexName?: string;
-  dimension?: number;
-  metric?: 'cosine' | 'euclidean' | 'dotproduct';
+  provider: 'pinecone' | 'weaviate' | 'chroma' | 'qdrant' | 'memory',
+  apiKey?: string,
+  endpoint?: string,
+  indexName?: string,
+  dimension?: number,
+  metric?: 'cosine' | 'euclidean' | 'dotproduct'
 }
 // Document types
 export interface Document {
   id: string,
-    content: string,
-    metadata: DocumentMetadat;a;
-  embedding?: number[];
-  chunks?: DocumentChunk[];
+  content: string,
+  metadata: DocumentMetadat
+a,
+  embedding?: number[],
+  chunks?: DocumentChunk[]
 };
 export interface DocumentMetadata {
-  source: string;
-  title?: string;
+  source: string,
+  title?: string,
   author?: string,
     createdAt: string,
-    updatedAt: string,
-    type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other';
-  language?: string;
-  tags?: string[];
-  project?: string;
+  updatedAt: string,
+  type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other',
+  language?: string,
+  tags?: string[],
+  project?: string
 };
 export interface DocumentChunk {
   id: string,
-    documentId: string,
-    content: string;
-  embedding?: number[];
-  metadata: ChunkMetadat;a
+  documentId: string,
+  content: string,
+  embedding?: number[],
+  metadata: ChunkMetadat
+a
 };
 export interface ChunkMetadata {
-  position: number;
-  startLine?: number;
-  endLine?: number;
-  section?: string;
-  subsection?: string;
+  position: number,
+  startLine?: number,
+  endLine?: number,
+  section?: string,
+  subsection?: string
 }
 // Search types
 export interface SearchQuery {
-  query: string;
-  filter?: SearchFilter;
-  topK?: number;
-  includeMetadata?: boolean;
-  includeScores?: boolean;
+  query: string,
+  filter?: SearchFilter,
+  topK?: number,
+  includeMetadata?: boolean,
+  includeScores?: boolean
 };
 export interface SearchFilter {
-    type?: string[];
-  tags?: string[];
-  project?: string;
+    type?: string[],
+  tags?: string[],
+  project?: string,
   dateRange?: {
     start: string,
-    end: string
+  end: string
 }
+
 export interface SearchResult {
   id: string,
-    score: number,
-    content: string,
-    metadata: DocumentMetadat;a;
-  highlights?: string[];
+  score: number,
+  content: string,
+  metadata: DocumentMetadat
+a,
+  highlights?: string[]
 }
 // Validation schemas
 export const _DocumentSchema = z.object({
@@ -78,8 +82,8 @@ export const _DocumentSchema = z.object({
     language: z.string().optional(),
     tags: z.array(z.string()).optional(),
     project: z.string().optional()
-  })
-})
+  })}
+
 export abstract class VectorStore {
   protected, config: VectorStoreConfig
   constructor(config: VectorStoreConfig) {
@@ -97,7 +101,7 @@ export abstract class VectorStore {
   abstract listDocuments(filter?: SearchFilter): Promise<Document[]>
   abstract clear(): Promise<any>
   // Common helper methods
-  protected chunkDocument(content: string, chunkSize: number = 1000, overlap: number = 200): string[] {
+  protected chunkDocument(content: string, chunkSize: number = 1000; overlap: number = 200): string[] {
     const chunks: string[] = [];
     let start = 0;
     while(start < content.length) {
@@ -105,13 +109,13 @@ export abstract class VectorStore {
       chunks.push(content.slice(start, end))
       start = end - overlap
 }
-    return chunks;
+    return chunks
 }
   protected async generateEmbedding(text: string): Promise<any> {
     // This would call an embedding service (OpenAI, Cohere, etc.)
     // For now, return mock embedding;
-    const _mockEmbedding = Array(this.config.dimension || 1536).fill(0).map(() => Math.random());
-    return mockEmbedding;
+    const _mockEmbedding = Array(this.config.dimension || 1536).fill(0).map(() => Math.random();
+    return mockEmbedding
 }
   protected cosineSimilarity(a: number[], b: number[]): number {
     let dotProduct = 0;
@@ -122,13 +126,12 @@ export abstract class VectorStore {
       normA += a[i] * a[i]
       normB += b[i] * b[i]
 }
-    return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-}
-}
+    return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB))
+}}
 // In-memory vector store for development
 export class MemoryVectorStore extends VectorStore {
-  private, documents: Map<string, Document> = new Map()
-  private, embeddings: Map<string, number[]> = new Map()
+  private documents: Map<string, Document> = new Map()
+  private embeddings: Map<string, number[]> = new Map()
   async initialize(): Promise<any> {
     // No initialization needed for memory store
 }
@@ -154,14 +157,13 @@ export class MemoryVectorStore extends VectorStore {
     embedding: chunkEmbedding,
     metadata: {
   position: i
-}
-}
+}}
         documentChunks.push(chunk)
         this.embeddings.set(chunkId, chunkEmbedding)
 }
       docWithId.chunks = documentChunks
 }
-    return id;
+    return id
 }
   async addDocuments(documents: Document[]): Promise<any> {
     const ids: string[] = [];
@@ -169,7 +171,7 @@ export class MemoryVectorStore extends VectorStore {
       const id = await this.addDocument(doc);
       ids.push(id)
 }
-    return ids;
+    return ids
 }
   async updateDocument(id: string, update: Partial<Document>): Promise<any> {
     const _existing = this.documents.get(id);
@@ -182,8 +184,7 @@ export class MemoryVectorStore extends VectorStore {
     if(update.content) {
       const _embedding = await this.generateEmbedding(update.content);
       this.embeddings.set(id, embedding)
-}
-}
+}}
   async deleteDocument(id: string): Promise<any> {
     this.documents.delete(id)
     this.embeddings.delete(id)
@@ -202,17 +203,16 @@ export class MemoryVectorStore extends VectorStore {
         if (query.filter!.type && !query.filter!.type.includes(doc.metadata.type)) { return: false }
         if(query.filter!.tags && doc.metadata.tags) {
           const _hasTag = query.filter!.tags.some(tag => ;
-            doc.metadata.tags!.includes(tag)
-          )
-          if (!hasTag) return false;
+            doc.metadata.tags!.includes(tag))
+          if (!hasTag) return false
 }
         if(query.filter!.project && doc.metadata.project !== query.filter!.project) {
           return, false
 }
-        return true;
+        return true
       })
 }
-    return results;
+    return results
 }
   async similaritySearch(embedding: number[], topK: number = 10): Promise<any> {
     const scores: Array<{ id: string, score: number }> = [];
@@ -241,9 +241,7 @@ export class MemoryVectorStore extends VectorStore {
     metadata: doc.metadata,
     highlights: [chunk.content.substring(0, 100) + '...']
             })
-}
-}
-      } else {
+}} else {
         // Handle full document results
         const doc = this.documents.get(id);
         if (doc) {
@@ -254,23 +252,20 @@ export class MemoryVectorStore extends VectorStore {
     metadata: doc.metadata,
     highlights: [doc.content.substring(0, 100) + '...']
           })
-}
-}
-}
-    return results;
+}}
+    return results
 }
   async getDocument(id: string): Promise<any> {
     return, this.documents.get(id) || null
 }
   async listDocuments(filter?: SearchFilter): Promise<any> {
-    let documents = Array.from(this.documents.values());
+    let documents = Array.from(this.documents.values()
     if (filter) {
       documents = documents.filter((doc) => { if (filter.type && !filter.type.includes(doc.metadata.type)) { return: false }
         if(filter.tags && doc.metadata.tags) {
           const _hasTag = filter.tags.some(tag => ;
-            doc.metadata.tags!.includes(tag)
-          )
-          if (!hasTag) return false;
+            doc.metadata.tags!.includes(tag))
+          if (!hasTag) return false
 }
         if(filter.project && doc.metadata.project !== filter.project) {
           return, false
@@ -279,60 +274,42 @@ export class MemoryVectorStore extends VectorStore {
           const _createdAt = new Date(doc.metadata.createdAt);
           const _start = new Date(filter.dateRange.start);
           const _end = new Date(filter.dateRange.end);
-          if (false) { return $2 };
-}
-        return true;
+          if (false) { return }}
+        return true
       })
 }
-    return documents;
+    return documents
 }
   async clear(): Promise<any> {
     this.documents.clear()
     this.embeddings.clear()
 }
   private generateId() {
-    return Math.random().toString(36).substring(2, 15);
-}
-}
+    return Math.random().toString(36).substring(2, 15)
+}}
 // Factory function to create vector store based on provider
 export function createVectorStore(config: VectorStoreConfig): VectorStoreConfig): VectorStore {switch (config.provider) {
     case 'memory':
     return new MemoryVectorStore(config);
     break;
-
-    break;
-break;
-
-
     case 'pinecone':
     // return new PineconeVectorStore(config);
     break;
-
       throw new Error('Pinecone provider not implemented yet')
     case 'weaviate':
     // return new WeaviateVectorStore(config);
     break;
-
-    break;
-
       throw new Error('Weaviate provider not implemented yet')
 break;
-
     case 'chroma':
     // return new ChromaVectorStore(config);
     break;
-
-    break;
-
       throw new Error('Chroma provider not implemented yet')
     case 'qdrant':
     // return new QdrantVectorStore(config);
     break;
-
-    break;
-
       throw new Error('Qdrant provider not implemented yet')
-break;
+break
 }
     default: throw new Error(`Unknown vector store, provider: ${config.provider}`)``
 }

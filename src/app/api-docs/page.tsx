@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 const apiEndpoints = [
   {
-  name: 'Authentication',
+    name: 'Authentication',
     slug: 'auth',
     description: 'User authentication and session management',
     version: 'v1',
@@ -30,9 +30,8 @@ const apiEndpoints = [
     description: 'Application analytics and metrics',
     version: 'v1',
     status: 'beta'
-}
+  }
 ];
-
 export default function ApiDocsPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -51,14 +50,15 @@ export default function ApiDocsPage() {
                   <CardTitle className="flex items-center gap-2">
                     <Code className="h-5 w-5" />
                     {endpoint.name}
-                  </CardTitle>
+</CardTitle>
                   <Badge variant={endpoint.status === 'stable' ? 'default' : 'secondary'}>
                     {endpoint.status}
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">{endpoint.description}</p><div className="flex items-center justify-between">
+                <p className="text-gray-600 mb-4">{endpoint.description}</p>
+                <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Version {endpoint.version}</span>
                   <Link href={`/api-docs/${endpoint.slug}`}>
                     <Button size="sm" variant="outline">
@@ -70,14 +70,14 @@ export default function ApiDocsPage() {
               </CardContent>
             </Card>
           ))}
-        </div>
+      </div>
         <div className="mt-12 bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-2xl font-bold mb-6">Getting Started</h2>
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold mb-2">Base URL</h3>
               <code className="bg-gray-100 px-3 py-1 rounded text-sm">
-                https://ai-guided-saa-s.vercel.app/api
+                https: //ai-guided-saa-s.vercel.app/api
               </code>
             </div>
             <div>
@@ -86,7 +86,10 @@ export default function ApiDocsPage() {
                 All API requests require authentication using JWT tokens.
                 Include your token in the Authorization header.
               </p>
-                  </div>
-);
-
-      }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

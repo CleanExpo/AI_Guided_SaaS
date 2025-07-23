@@ -23,15 +23,18 @@ export default function SignUpPage() {
             <Input
               type="text"
               placeholder="Full Name"
-              required />
+              required
+            />
             <Input
               type="email"
               placeholder="Email Address"
-              required />
+              required
+            />
             <Input
               type="password"
               placeholder="Password"
-              required />
+              required
+            />
             <Button type="submit" className="w-full">
               Create Account
             </Button>
@@ -43,8 +46,10 @@ export default function SignUpPage() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">or</span>
-                  </div>
-<Button variant="outline" className="w-full">
+            </div>
+          </div>
+          
+          <Button variant="outline" className="w-full">
             <Github className="mr-2 h-4 w-4" />
             Sign up with GitHub
           </Button>
@@ -57,8 +62,6 @@ export default function SignUpPage() {
           </p>
         </CardContent>
       </Card>
-          </div>
-
-        );
-
-      }
+    </div>
+  );
+}

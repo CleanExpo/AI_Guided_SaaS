@@ -23,21 +23,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       success: true,
       workflow
-    }, { status: 201 });
+    }, { status: 201 })
   } catch (error) {
     console.error('Create workflow error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
-      );
+      )
     }
     return NextResponse.json(
       { error: 'Failed to create workflow' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
 
 export async function GET(): Promise<NextResponse> {
   try {
@@ -62,14 +61,13 @@ export async function GET(): Promise<NextResponse> {
       success: true,
       workflows,
       total: workflows.length
-    });
+    })
   } catch (error) {
     console.error('Get workflows error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch workflows' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
 
 export const dynamic = "force-dynamic";

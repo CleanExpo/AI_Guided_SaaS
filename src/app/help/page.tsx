@@ -11,108 +11,103 @@ export const metadata: Metadata = {
 const supportOptions = [
   {
   title: 'Documentation',
-    description: 'Comprehensive guides and tutorials',
-    icon: Book,
+  description: 'Comprehensive guides and tutorials',
+  icon: Book,
     link: '/docs'
   },
   {
     title: 'Community Forum',
-    description: 'Get help from the community',
-    icon: MessageCircle,
+  description: 'Get help from the community',
+  icon: MessageCircle,
     link: '/community'
   },
   {
     title: 'Email Support',
-    description: 'Contact our support team',
-    icon: Mail,
+  description: 'Contact our support team',
+  icon: Mail,
     link: 'mailto:support@aiinguidedsaas.com'
   },
   {
     title: 'Live Chat',
-    description: 'Chat with our team',
-    icon: Phone,
+  description: 'Chat with our team',
+  icon: Phone,
     link: '#'
 }
 ];
 const faqs = [
   {
-  question: 'How do I get started with AI Guided SaaS?',
+  question: 'How do I get started with AI Guided SaaS?'
     answer: 'Simply sign up for an account and follow our quick start guide to create your first project.'
   },
   {
-    question: 'What programming languages are supported?',
+    question: 'What programming languages are supported?'
     answer: 'We support all major programming languages including JavaScript, Python, Java, C#, and more.'
   },
   {
-    question: 'Is there a free plan available?',
+    question: 'Is there a free plan available?'
     answer: 'Yes, we offer a free plan with basic features. You can upgrade anytime as your needs grow.'
   },
   {
-    question: 'How secure is my data?',
+    question: 'How secure is my data?'
     answer: 'We use enterprise-grade security measures including encryption, secure access controls, and regular security audits.'
 }
 ];
 export default function HelpPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-6xl">;
+    <div className="min-h-screen bg-gray-50 py-12 container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Help & Support</h1>
           <p className="text-xl text-gray-600">
             Find answers to your questions and get the help you need.
-          </p>
-        </div>
+</p>
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12">
-          <div className="relative">
+        <div className="max-w-2xl mx-auto mb-12 relative"></div>
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <Input
               type="text"
               placeholder="Search for help..."
               className="pl-10 py-3 text-lg" />
-          </div>
+</div>
         {/* Support, Options */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
-          {supportOptions.map((option) => (
+          {supportOptions.map((option) => (\n    </div>
             <Card key={option.title} className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader className="text-center">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <option.icon className="h-6 w-6 text-blue-600"    />
-                </div>
+                  <option.icon className="h-6 w-6 text-blue-600" />
+</div>
                 <CardTitle className="text-lg">{option.title}</CardTitle>
-              </CardHeader>
               <CardContent>
                 <p className="text-gray-600 text-center">{option.description}</p>
-              </CardContent>
-            </Card>
+</Card>
           ))}
-        </div>
+      </div>
         {/* FAQ, Section */}
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl">Frequently Asked Questions</CardTitle>
-          </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
-                  <div className="flex items-start">
+              {faqs.map((faq, index) => (\n    </div>
+                <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0 flex items-start"></div>
                     <HelpCircle className="h-5 w-5 text-blue-600 mr-3 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
-                      <p className="text-gray-600">{faq.answer}</p>
-                          </div>
-))}
-            </div>
-          </CardContent>
-        </Card>
+          <p className="{faq.answer}"></p>
+        </div>
+    );)}
+      </div>
+</CardContent>
+              </Card>
         {/* Contact, CTA */}
         <div className="text-center mt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Still need help?</h2>
           <p className="text-gray-600 mb-6">Our support team is here to assist you.</p>
           <Button size="lg">Contact Support</Button>
-              </div>
-);
 
-          </div>
-}
+</div>
+
+    </CardHeader>
+    </CardContent>
+    </CardHeader>
+  }

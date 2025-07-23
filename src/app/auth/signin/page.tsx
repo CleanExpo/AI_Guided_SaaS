@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -7,12 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Github } from 'lucide-react';
-
 export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -27,7 +24,6 @@ export default function SignInPage() {
       setIsLoading(false);
     }
   };
-  
   const handleGitHubSignIn = async () => {
     setIsLoading(true);
     try {
@@ -40,7 +36,6 @@ export default function SignInPage() {
       setIsLoading(false);
     }
   };
-  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
@@ -67,8 +62,10 @@ export default function SignInPage() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">or</span>
-                  </div>
-<Button
+            </div>
+          </div>
+          
+          <Button
             variant="outline"
             className="w-full"
             onClick={handleGitHubSignIn}
@@ -79,7 +76,6 @@ export default function SignInPage() {
           </Button>
         </CardContent>
       </Card>
-                </div>
-);
-
-      }
+    </div>
+  );
+}

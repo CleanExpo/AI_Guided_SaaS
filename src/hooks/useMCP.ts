@@ -3,32 +3,39 @@ import { MCPOrchestrator, MCPServer, MCPTool, MCPToolCall, MCPToolResult, MCPOrc
 import { getServerConfig, checkServerEnvironment, getAllServers } from '@/lib/mcp/mcp-registry';
 import { useToast } from '@/hooks/use-toast';
 export interface UseMCPOptions {
-  autoConnect?: string[] // Server IDs to auto-connect;
-  debug?: boolean;
-  defaultTimeout?: number;
+  autoConnect?: string[] // Server IDs to auto-connect,
+  debug?: boolean,
+  defaultTimeout?: number
 };
 export interface UseMCPReturn {
   // Server management, servers: MCPServer[],
-  connectServer: (serverId: string) => Promise<any;>;,
+  connectServer: (serverId: string) => Promise<any;>,
   disconnectServer: (serverId: string) => Promise<any;>,
-  registerCustomServer: (server: Omit<MCPServe;r, 'status' | 'tools'>) => Promise<any>
+  registerCustomServer: (server: Omit<MCPServe
+r, 'status' | 'tools'>) => Promise<any>
   // Tool operations, tools: MCPTool[],
   callTool: (call: MCPToolCall) => Promise<MCPToolResult;>,
-  callToolsParallel: (calls: MCPToolCall[]) => Promise<MCPToolResult[];>;
-  // Orchestration, createPlan: (description: string, steps: any[]) => MCPOrchestrationPla;n, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string, MCPToolResult>>
+  callToolsParallel: (calls: MCPToolCall[]) => Promise<MCPToolResult[];>
+  // Orchestration, createPlan: (description: string,
+  steps: any[]) => MCPOrchestrationPla
+n, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string, MCPToolResult>>
   // Resources & Prompts, listResources: (serverId: string) => Promise<any[];>,
-  readResource: (serverId: string, uri: string) => Promise<any;>,
+  readResource: (serverId: string,
+  uri: string) => Promise<any;>,
   listPrompts: (serverId: string) => Promise<any[];>,
-  getPrompt: (serverId: string, name: string, args?) => Promise<string>;
-  // State, loading: boolean, error: string | nul;l, initialized: boolean
+  getPrompt: (serverId: string,
+  name: string, args?) => Promise<string>
+  // State, loading: boolean,
+  error: string | nul
+l, initialized: boolean
 };
 export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCPReturn {
   const { toast   }: any = useToast();
-  const [servers, setServers]: any[] = useState<MCPServer[]>([]);
-  const [tools, setTools]: any[] = useState<MCPTool[]>([]);
-  const [loading, setLoading]: any[] = useState<any>(false);
-  const [error, setError]: any[] = useState<string | null>(null);
-  const [initialized, setInitialized]: any[] = useState<any>(false);
+  const [servers, setServers] = useState<MCPServer[]>([]);
+  const [tools, setTools] = useState<MCPTool[]>([]);
+  const [loading, setLoading] = useState<any>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [initialized, setInitialized] = useState<any>(false);
   const orchestratorRef = useRef<MCPOrchestrator | null>(null);
   // Initialize orchestrator
   useEffect(() => {
@@ -56,9 +63,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
         await connectServer(serverId)
       } catch (err) {
         console.error(`Failed to auto-connect ${serverId}:`, err)``
-}
-}
-}
+}}
   // Connect to a server
   const _connectServer = useCallback(async (serverId: string) => {
     if(!orchestratorRef.current) {
@@ -88,7 +93,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       // Update state
       const orchestrator = orchestratorRef.current as any;
       const serverMap = orchestrator.servers as Map<string, MCPServer>;
-      const _updatedServers = Array.from(serverMap.values());
+      const _updatedServers = Array.from(serverMap.values()
       setServers(updatedServers)
       // Update tools
       const _allTools = orchestrator.listTools();
@@ -152,7 +157,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       // Update state
       const orchestrator = orchestratorRef.current as any;
       const serverMap = orchestrator.servers as Map<string, MCPServer>;
-      const _updatedServers = Array.from(serverMap.values());
+      const _updatedServers = Array.from(serverMap.values()
       setServers(updatedServers)
       // Update tools
       const _allTools = orchestrator.listTools();
@@ -189,7 +194,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
     variant: 'destructive'
         })
 }
-      return result;
+      return result
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Tool call failed',
       setError(message)
@@ -220,7 +225,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
           variant: 'destructive'
         })
 }
-      return results;
+      return results
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Parallel tool calls failed',
       setError(message)
@@ -235,8 +240,8 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
 }, [])
   // Create an orchestration plan
   const _createPlan = useCallback((description: string, steps: any[]): MCPOrchestrationPlan: (any) => { if (!orchestratorRef.current) {
-      throw new Error('Orchestrator not initialized'); }
-    return orchestratorRef.current.createPlan(description, steps);
+      throw new Error('Orchestrator not initialized') }
+    return orchestratorRef.current.createPlan(description, steps)
   }, [])
   // Execute an orchestration plan
   const _executePlan = useCallback(async (plan: MCPOrchestrationPlan): Promise<Map<string, MCPToolResult>> => {
@@ -261,7 +266,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
           description: 'All steps completed successfully'
         })
 }
-      return results;
+      return results
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Plan execution failed',
       setError(message)
@@ -280,7 +285,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw new Error('Orchestrator not initialized')
 }
     try {
-      return await orchestratorRef.current.listResources(serverId);
+      return await orchestratorRef.current.listResources(serverId)
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to list resources',
       toast({
@@ -295,7 +300,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw new Error('Orchestrator not initialized')
 }
     try {
-      return await orchestratorRef.current.readResource(serverId, uri);
+      return await orchestratorRef.current.readResource(serverId, uri)
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to read resource',
       toast({
@@ -311,7 +316,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw new Error('Orchestrator not initialized')
 }
     try {
-      return await orchestratorRef.current.listPrompts(serverId);
+      return await orchestratorRef.current.listPrompts(serverId)
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to list prompts',
       toast({
@@ -326,7 +331,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw new Error('Orchestrator not initialized')
 }
     try {
-      return await orchestratorRef.current.getPrompt(serverId, name, args);
+      return await orchestratorRef.current.getPrompt(serverId, name, args)
     } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to get prompt',
       toast({

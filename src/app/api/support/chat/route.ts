@@ -1,6 +1,5 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 const chatSchema = z.object({
@@ -28,21 +27,21 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       success: true,
       response
-    });
+    })
   } catch (error) {
     console.error('Support chat error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
-      );
+      )
 }
     return NextResponse.json(
       { error: 'Support chat failed' },
       { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const url = new URL(request.url);
@@ -60,12 +59,11 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       success: true,
       chatHistory,
       sessionId: sessionId || 'session_new'
-    });
+    })
   } catch (error) {
     console.error('Get chat history error:', error);
     return NextResponse.json(
       { error: 'Failed to get chat history' },
       { status: 500 }
-    );
-}
-}
+    )
+}}

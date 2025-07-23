@@ -1,7 +1,5 @@
 'use client';
-
 import React from 'react';
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,26 +10,24 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Shield, AlertTriangle, CheckCircle2, XCircle, RefreshCw, Zap, Activity, Settings, Info } from 'lucide-react';
 interface EPCStatus {
-env_check: 'pass' | 'fail' | 'warning';
-    score: number;
-    issues: string[];
-  recommendations?: string[];
-
+env_check: 'pass' | 'fail' | 'warning',
+  score: number,
+  issues: string[],
+  recommendations?: string[]
 };
 interface TelemetryStats {
-totalInferences: number;
-    blocked: number;
-    failed: number;
-    successful: number;
-    averageDuration: number;
-    totalCost: number
-
+totalInferences: number,
+  blocked: number,
+  failed: number,
+  successful: number,
+  averageDuration: number,
+  totalCost: number
 };
 export function InferenceSafeMode() {
   const [enabled, setEnabled] = useState<any>(true);
-      </EPCStatus>
+</EPCStatus>
   const [status, setStatus] = useState<EPCStatus | null>(null);
-      </TelemetryStats>
+</TelemetryStats>
   const [stats, setStats] = useState<TelemetryStats | null>(null);
   const [checking, setChecking] = useState<any>(false);
   const [autoHeal, setAutoHeal] = useState<any>(false);
@@ -41,118 +37,98 @@ export function InferenceSafeMode() {
     setChecking(true);
     try {
       const response = await fetch('/api/epc/check');
-      const _data = await response.json();
-      setStatus(data);
+      const _data = await response.json()
+      setStatus(data)
     } catch (error) {
-      console.error('Failed to check, environment:', error);
+      console.error('Failed to check, environment:', error)
     } finally {
-    setChecking(false);
+    setChecking(false)
 }
   // Fetch telemetry stats
   const _fetchStats = async () => {
     try {
       const response = await fetch('/api/epc/stats');
-      const _data = await response.json();
-      setStats(data);
+      const _data = await response.json()
+      setStats(data)
     } catch (error) {
-    console.error('Failed to fetch, stats:', error);
+    console.error('Failed to fetch, stats:', error)
 }
   // Run self-healing
   const _runHealing = async () => {
     setHealingInProgress(true);
     try {
       const response = await fetch('/api/epc/heal', {
-    method: 'POST',
+    method: 'POST'
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ autoApprove: autoHeal })
-      });
+    body: JSON.stringify({ autoApprove: autoHeal })};
       const result = await response.json();
       // Show results
       if(result.success) {
-        await checkEnvironment(); // Refresh status
-}
-    } catch (error) {
-      console.error('Failed to run, healing:', error);
+        await checkEnvironment() // Refresh status
+}} catch (error) {
+      console.error('Failed to run, healing:', error)
     } finally {
-    setHealingInProgress(false);
+    setHealingInProgress(false)
 }
   useEffect(() => {
     checkEnvironment();
     fetchStats();
     // Refresh stats every 30 seconds
-    const _interval = setInterval(fetchStats, 30000);
-    return () => clearInterval(interval);
+    const _interval = setInterval(fetchStats, 30000)
+    return () => clearInterval(interval)
   }, []);
   const _getStatusIcon = (): void => {if (!status) return null;
     switch (status.env_check) {
       case 'pass':
-    </TelemetryStats>
+</TelemetryStats>
     break;
-
-    break;
-
         return <CheckCircle2 className="h-5 w-5 text-green-500" />;
 break;
-
       case 'warning':
-    </CheckCircle2>
+</CheckCircle2>
     break;
-
-    break;
-
         return <AlertTriangle className="h-5 w-5 text-yellow-500" />;
       case 'fail':
     return <XCircle className="h-5 w-5 text-red-500" />;
-    break;
-
-    break;
-break;
-}
-}
+    break
+break
+}}
   const _getStatusColor = (): void => {if (!status) return 'secondary';
     switch (status.env_check) {
       case 'pass':
     return ';
     break;
-
-break;
 default';
     break;
-
       case 'warning':
     return 'secondary';
     break;
-
-break;
-
       case 'fail':
     return 'destructive';
-    break;
-
-    break;
-}
-}
+    break
+    break
+}}
   return (
     <div className="space-y-4">
-      {/* Main, Control Card */}
+      {/* Main, Control Card */}</div>
       <Card></Card>
         <CardHeader></CardHeader>
           <div className="flex items-center justify-between"></div>
             <div className="flex items-center gap-2"></div>
-              <Shield className="h-5 w-5 text-muted-foreground" /></Shield>
+              <Shield className="h-5 w-5 text-muted-foreground" />
               <CardTitle>Inference Safe Mode</CardTitle>
             <Switch
               checked={enabled}
               onCheckedChange={setEnabled}
-              aria-label="Toggle inference safe mode" /></Switch>
+              aria-label="Toggle inference safe mode"  />
           <CardDescription>
-            Protect your AI credits by validating environment before inference</CardDescription>
+            Protect your AI credits by validating environment before inference</Card>
         <CardContent></CardContent>
           <div className="space-y-4">
-            {/* Status, Display */}
+            {/* Status, Display */}</div>
             <div className="flex items-center justify-between p-4 border rounded-lg"></div>
               <div className="flex items-center gap-3">
-                {getStatusIcon()}
+                {getStatusIcon()}</div>
                 <div></div>
                   <p className="font-medium">Environment Status</p>
                   <p className="text-sm text-muted-foreground">
@@ -174,15 +150,13 @@ break;
                   <div className="space-y-1"></div>
                     <p className="font-medium">Environment: Issues,</p>
                     <ul className="list-disc list-inside text-sm">
-                      {status.issues.slice(0, 3).map((issue, i) => (</ul>
+                      {status.issues.slice(0, 3).map((issue, i) => (\n    </ul>
                         <li key={i}>{issue}</li>
                       ))},
     {status.issues.length > 3  && (
 li>...and {status.issues.length - 3} more</li>
-                      
-              
-            )}
-                    </ul>
+      )}
+</ul>
             )},
     {/* Self-Healing, Controls */}
             <div className="space-y-3"></div>
@@ -193,7 +167,7 @@ li>...and {status.issues.length - 3} more</li>
                 <Switch
                   id="auto-heal"
                   checked={autoHeal}
-                  onCheckedChange={setAutoHeal} /></Switch>
+                  onCheckedChange={setAutoHeal}  />
               {status?.issues && status.issues.length > 0  && (Button
                   onClick={runHealing}
                   disabled={healingInProgress}
@@ -201,18 +175,18 @@ li>...and {status.issues.length - 3} more</li>
                   variant={autoHeal ? 'default' : 'outline'}
                 >
                   {healingInProgress ? (</Button>
-                    <React.Fragment>RefreshCw className="h-4 w-4 mr-2 animate-spin"  />Healing in progress...</RefreshCw></React.Fragment>
+                    <React.Fragment>RefreshCw className="h-4 w-4 mr-2 animate-spin" />Healing in progress...</RefreshCw>
                   ) : (
-                    <React.Fragment>Zap className="h-4 w-4 mr-2"  />
-                      Run Self-Healing</Zap></React.Fragment>
+                    <React.Fragment>Zap className="h-4 w-4 mr-2" />
+                      Run Self-Healing</Zap>
                   )}
-                </Button>
+</Button>
               )},
     {/* Statistics, Card */},
     {stats  && (Card></Card>
           <CardHeader></CardHeader>
             <div className="flex items-center gap-2"></div>
-              <Activity className="h-5 w-5 text-muted-foreground" /></Activity>
+              <Activity className="h-5 w-5 text-muted-foreground" />
               <CardTitle className="text-base">Inference Statistics</CardTitle>
           <CardContent></CardContent>
             <div className="grid grid-cols-2 gap-4 text-sm"></div>
@@ -236,17 +210,22 @@ li>...and {status.issues.length - 3} more</li>
                 <div className="flex justify-between text-sm"></div>
                   <span>Inference Health</span>
                   <span>{Math.round((stats.successful / stats.totalInferences) * 100)}%</span>
-                </div>
                 <Progress
                   value={(stats.successful / stats.totalInferences) * 100}
-                  className="h-2" /></Progress>)}
+                  className="h-2" />)}
       )},
     {/* Info, Card */
-    </div>
+</div>
+    
+    </React.Fragment>
+    </React.Fragment>
+    </CardDescription>
     </any>
     </any>
     </any>
-    }
+    </EPCStatus>
+    </any>
+  }
       <Card></Card>
         <CardContent className="pt-6"></CardContent>
           <div className="flex gap-3"></div>
@@ -258,4 +237,3 @@ li>...and {status.issues.length - 3} more</li>
               <p>
                 Enable Auto-heal to automatically fix common issues like missing
                 API keys or outdated configurations.</p>
-</EPCStatus>

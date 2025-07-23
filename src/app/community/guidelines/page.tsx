@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Shield, Users, Heart, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
+
 export default function CommunityGuidelinesPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
+      <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           {/* Header */}
           <div className="flex items-center gap-4 mb-6">
@@ -24,6 +25,7 @@ export default function CommunityGuidelinesPage() {
             Help us maintain a welcoming and productive community for everyone.
           </p>
         </div>
+
         <div className="space-y-8">
           {/* Overview */}
           <Card>
@@ -46,6 +48,7 @@ export default function CommunityGuidelinesPage() {
               </ul>
             </CardContent>
           </Card>
+
           {/* Code of Conduct */}
           <Card>
             <CardHeader>
@@ -76,8 +79,10 @@ export default function CommunityGuidelinesPage() {
                     <li>• Sharing copyrighted content without permission</li>
                   </ul>
                 </div>
+              </div>
             </CardContent>
           </Card>
+
           {/* Participation Guidelines */}
           <Card>
             <CardHeader>
@@ -106,8 +111,10 @@ export default function CommunityGuidelinesPage() {
                     <li>• Point to relevant documentation</li>
                   </ul>
                 </div>
+              </div>
             </CardContent>
           </Card>
+
           {/* Reporting */}
           <Card>
             <CardHeader>
@@ -130,17 +137,18 @@ export default function CommunityGuidelinesPage() {
               </div>
             </CardContent>
           </Card>
+
           {/* Footer */}
           <Card>
             <CardContent className="pt-6">
               <p className="text-center text-gray-600 text-sm">
                 These guidelines are subject to change as our community grows.
-                Last, updated: January 2025
+                Last updated: January 2025
               </p>
             </CardContent>
           </Card>
-              </div>
-);
-
-          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

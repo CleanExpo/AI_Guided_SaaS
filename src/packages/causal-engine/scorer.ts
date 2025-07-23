@@ -2,15 +2,16 @@
 import type {  CausalLogEntry  } from './logger';type ScoreMap = {
     [key: string]: {
   total: number,
-    kept: number,
-    edited: number,
-    deleted: number,
-    added: number
+  kept: number,
+  edited: number,
+  deleted: number,
+  added: number
 }
+
 export class CausalScorer {
-  private, logs: CausalLogEntry[];
+  private logs: CausalLogEntry[];
   constructor(logs: CausalLogEntry[]) {
-    this.logs = logs;
+    this.logs = logs
 }
   /**
    * Generate score, map: for each (page + componentType), track outcomes
@@ -20,12 +21,11 @@ export class CausalScorer {
     for(const log of this.logs) {
       const key = `${log.page}:${log.componentType}`
       if(!map[key]) {
-        map[key] = { total: 0, kept: 0, edited: 0, deleted: 0, added: 0 }
-}
+        map[key] = { total: 0, kept: 0; edited: 0, deleted: 0; added: 0 }}
       map[key].total += 1;
-      map[key][log.action]++;
+      map[key][log.action]++
 }
-    return map;
+    return map
 }
   /**
    * Score is based on retention + positive edits
@@ -56,18 +56,16 @@ export class CausalScorer {
     const stats = map[key];
     if (!stats || stats.total < 3) return 'low';
     if (stats.total < 10) return 'medium';
-    return 'high';
+    return 'high'
 }
   /**
    * Optional: return all scores for review;
    */
   getAllScores(): {
-    [key: string]: { score: number, confidence: string, total: number }
-    } {
+    [key: string]: { score: number, confidence: string; total: number }} {
     const map = this.getComponentScoreMap();
     const result: {
-      [key: string]: { score: number, confidence: string, total: number }
-    } = {};
+      [key: string]: { score: number, confidence: string; total: number }} = {};
     for(const key in map) {
       const { total, kept, edited, deleted   }: any = map[key];
       const _retainScore = (kept + 0.75 * edited) / total;
@@ -78,9 +76,9 @@ export class CausalScorer {
       result[key] = {
         score: Math.min(Math.max(finalScore, 0), 1),
         confidence,
-        total;
+        total
 }
-    return result;
+    return result
 }
   /**
    * Get top performing components
@@ -90,9 +88,8 @@ export class CausalScorer {
   ): Array {
     const _scores = this.getAllScores();
     return Object.entries(scores);
-      .map(([key, data]) => ({ key, ...data }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit);
+      .map(([key, data]) => ({ key, ...data })).sort((a, b) => b.score - a.score)
+      .slice(0, limit)
 }
   /**
    * Get components that need improvement
@@ -103,6 +100,5 @@ export class CausalScorer {
     const _scores = this.getAllScores();
     return Object.entries(scores);
       .map(([key, data]) => ({ key, ...data }))
-      .filter((item) => item.score < threshold && item.confidence !== 'low')
-      .sort((a, b) => a.score - b.score);
+      .filter((item) => item.score < threshold && item.confidence !== 'low').sort((a, b) => a.score - b.score)
 }

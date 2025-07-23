@@ -11,8 +11,7 @@ export const authOptions: NextAuthOptions = {
         }),
         CredentialsProvider({
             name: 'credentials',
-            credentials: {
-                email: { label: 'Email', type: 'email' },
+            credentials: { email: { label: 'Email', type: 'email' },
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
@@ -23,9 +22,9 @@ export const authOptions: NextAuthOptions = {
                         id: '1',
                         email: 'demo@example.com',
                         name: 'Demo User'
-                    };
+                    }
                 }
-                return null;
+                return null
             }
         })
     ],
@@ -36,15 +35,15 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.id = user.id;
+                token.id = user.id
             }
-            return token;
+            return token
         },
         async session({ session, token }) {
             if (session.user && token.id) {
-                session.user.id = token.id as string;
+                session.user.id = token.id as string
             }
-            return session;
+            return session
         }
     },
     secret: process.env.NEXTAUTH_SECRET

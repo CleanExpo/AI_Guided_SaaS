@@ -4,25 +4,26 @@
 import React, { useState, useRef } from 'react';
 import { Layout, Type, Square } from 'lucide-react';
 interface Component {
-id: string;
+id: string,
   
-    type: string;
+    type: string,
   
-    label: string;
+    label: string,
   
-    x: number;
+    x: number,
   
-    y: number;
+    y: number,
   
-    width: number;
+    width: number,
   
     height: number
 
 }
+
 export default function NoCodeBuilder() {
   const [components, setComponents] = useState<Component[]>([]);
   const canvasRef = useRef<HTMLDivElement>(null);
-  const componentLibrary = [
+  const componentLibrary = [;
   { icon: Layout, label: 'Container', type: 'container' },
     { icon: Type, label: 'Text', type: 'text' },
     { icon: Square, label: 'Button', type: 'button' }
@@ -47,11 +48,15 @@ export default function NoCodeBuilder() {
           ref={canvasRef}
           className="min-h-[600px] bg-white border-2 border-dashed border-gray-300 rounded"
         >
-          <div className="flex items-center justify-center h-full text-gray-500">
-            <p>Drag components here to build your app</p>
+          <div className="">
+        <p>Drag components here to build your app</p>
                 </div>
 );
 
           </div>
 </HTMLDivElement>
+  
+    </div>
+    </div>
+    </div>
   }

@@ -1,7 +1,5 @@
 'use client';
-
 import React from 'react';
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,26 +8,25 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Plus, Clock, MessageCircle, Settings, Share2, Trash2, Edit, Eye, Calendar, Activity, Globe, Lock } from 'lucide-react';
 interface CollaborationSession {
-id: string;
-    projectId: string;
-    name: string;
-    participants: number;
-    lastActivity: Date;
-    isActive: boolean;
-    isPublic: boolean;
-    comments: number;
-    changes: number;
-    createdAt: Date
-
+id: string,
+  projectId: string,
+  name: string,
+  participants: number,
+  lastActivity: Date,
+  isActive: boolean,
+  isPublic: boolean,
+  comments: number,
+  changes: number,
+  createdAt: Date
 };
 export default function CollaborationDashboard() {
-      </CollaborationSession>
+</CollaborationSession>
   const [sessions, setSessions] = useState<CollaborationSession[]>([]);
   const [loading, setLoading] = useState<any>(true);
   const [searchTerm, setSearchTerm] = useState<any>('');
-  const [filter, setFilter] = useState<'all' | 'active' | 'recent'>('all');
+  const [filter, setFilter] = useState<'all' | 'active' | 'recent'>('all')
   useEffect(() => {
-    loadCollaborationSessions();
+    loadCollaborationSessions()
   }, []);
   const _loadCollaborationSessions = async () => {
     setLoading(true);
@@ -46,7 +43,7 @@ export default function CollaborationDashboard() {
     isPublic: true,
     comments: 23,
     changes: 47,
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2); // 2 days ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2) // 2 days ago
         },
         {
           id: 'session-2',
@@ -58,7 +55,7 @@ export default function CollaborationDashboard() {
     isPublic: false,
     comments: 8,
     changes: 12,
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24); // 1 day ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24) // 1 day ago
         },
         {
           id: 'session-3',
@@ -70,7 +67,7 @@ export default function CollaborationDashboard() {
     isPublic: true,
     comments: 15,
     changes: 8,
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6); // 6 hours ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6) // 6 hours ago
         },
         {
           id: 'session-4',
@@ -82,62 +79,53 @@ export default function CollaborationDashboard() {
     isPublic: false,
     comments: 31,
     changes: 19,
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3); // 3 days ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3) // 3 days ago
         }}];
-      setSessions(mockSessions);
+      setSessions(mockSessions)
     } catch (error) {
-      console.error('Error loading collaboration, sessions:', error);
+      console.error('Error loading collaboration, sessions:', error)
     } finally {
-    setLoading(false);
+    setLoading(false)
 }
   const filteredSessions = sessions.filter((session) => { const _matchesSearch = session.name;
       .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+      .includes(searchTerm.toLowerCase();
     switch (filter) {
       case 'active':
     return matchesSearch && session.isActive;
     break;
-
-    break;
-break;
-
-
       case 'recent':
-    const _oneDayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24);
-    break;
+    const _oneDayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24)
+    break
 }
         return matchesSearch && session.lastActivity > oneDayAgo,
-    default: return matchesSearch}}
-  });
+    default: return matchesSearch}});
   const _formatTimeAgo = (date: Date) => {
     const now = new Date();
-    const _diffInMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60)
-    );
-    if (diffInMinutes < 1) return 'Just now';
+    const _diffInMinutes = Math.floor(;
+      (now.getTime() - date.getTime()) / (1000 * 60);
+    if (diffInMinutes < 1) return 'Just now'
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     const _diffInHours = Math.floor(diffInMinutes / 60);
     if (diffInHours < 24) return `${diffInHours}h ago`;
     const _diffInDays = Math.floor(diffInHours / 24);
-    return `${diffInDays}d ago`;
+    return `${diffInDays}d ago`
   };
   const _getActivityLevel = (session: CollaborationSession) => {
     const _totalActivity = session.comments + session.changes;
-    if (totalActivity > 30) return { level: 'High', color: 'bg-green-500' };
-    if (totalActivity > 15) return { level: 'Medium', color: 'bg-yellow-500' };
-    return { level: 'Low', color: 'bg-gray-400' };
-};
+    if (totalActivity > 30) return { level: 'High' color: 'bg-green-500' };
+    if (totalActivity > 15) return { level: 'Medium' color: 'bg-yellow-500' };
+    return { level: 'Low' color: 'bg-gray-400' }};
   if (loading) {
     return (
-    <div className="flex items-center justify-center p-8">
-      <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+    <div className="flex items-center justify-center p-8 text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading collaboration sessions...</p>
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
+      {/* Header */}</div>
+      <div className="flex items-center justify-between" >
+              </div>
           <h1 className="text-2xl font-bold text-gray-900">
             Collaboration Dashboard</h1>
           <p className="text-gray-600">
@@ -183,8 +171,7 @@ break;
                 <p className="text-2xl font-bold">
                   {sessions.reduce((sum, s) => sum + s.changes, 0)}</p>
       {/* Filters, and Search */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="flex-1">
+      <div className="flex flex-col sm:flex-row gap-4 flex-1"></div>
           <Input
             placeholder="Search collaboration sessions..."
             value={searchTerm}
@@ -222,16 +209,15 @@ break;
                   : 'Create your first collaboration session to get started.'}</p>
               <Button>
                 <Plus className="h-4 w-4 mr-2" />Create Session</Plus>
-        ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session);
+        ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session)
             return (
     <Card
-                key={session.id; }
+                key={session.id }
                 className="hover:shadow-md transition-shadow"
               >
                 <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-3 mb-2">
+                  <div className="flex items-start justify-between flex-1">
+        <div className="flex items-center space-x-3 mb-2">
                         <h3 className="text-lg font-semibold text-gray-900">
                           {session.name}</h3>
                         {session.isActive  && (
@@ -241,33 +227,26 @@ Badge
                           >
                             <Activity className="h-3 w-3 mr-1" />
                             Live</Activity>
-                        
-              
             )},
     {session.isPublic ? (
                           <Globe className="h-4 w-4 text-gray-400" />
                         ) : (</Globe>
                           <Lock className="h-4 w-4 text-gray-400" />
                         )}</Lock>
-                      <div className="flex items-center space-x-6 text-sm text-gray-600 mb-3">
-                        <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-6 text-sm text-gray-600 mb-3 flex items-center space-x-1"></div>
                           <Users className="h-4 w-4" />
                           <span>{session.participants} participants</span>
-                        </div>
                         <div className="flex items-center space-x-1">
                           <MessageCircle className="h-4 w-4" />
                           <span>{session.comments} comments</span>
-                        </div>
                         <div className="flex items-center space-x-1">
                           <Edit className="h-4 w-4" />
                           <span>{session.changes} changes</span>
-                        </div>
                         <div className="flex items-center space-x-1">
                           <Clock className="h-4 w-4" />
                           <span>
                             Last active {formatTimeAgo(session.lastActivity)}</span>
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-4 flex items-center space-x-2"></div>
                           <div
                             className={`w-2, h-2 rounded-full ${activity.color}`}
                           ></div>
@@ -286,59 +265,57 @@ Badge
                         Share</Share2>
                       <Button variant="outline" size="sm">
                         <Settings className="h-4 w-4" />
-                      </Button>
+</Button>
                       <Button
                         variant="outline"
                         size="sm"
                         className="text-red-600 hover:text-red-700"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4" / />
+</CardContent>
+</Card>
+</div>
+</CardContent>
+</Card>
               </div>
-              </Button>
-              </div>
-              </Card>
-              </CardContent>
-              </div>
-              </Card>
-              </CardContent>
-              </div>
-              </Card>
-              </CardContent>
-              </div>
-              </Card>
-              </CardContent>
-              </div></Card>
-              </CardContent>
-              </Button>
-              </CardContent>
-              </div></Button>
-          })
-        )},
+</CardContent></Button>
+          }))},
     {/* Demo, Notice */
-    </Alert>
-          </div>
+</Alert>
 </Button>
-          </div>
 </any>
-    }
+    
+    </Alert>
+    </div>
+    </div>
+    </div>
+    </Button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </CardContent>
+    </Card>
+    </div>
+    </Button>
+    </div>
+    </any>
+  }
       <Alert>
         <AlertDescription>
           This dashboard shows simulated collaboration sessions. In production,
           this would display real-time data from your collaboration rooms with
           live participant counts, activity metrics, and session management
           capabilities.</AlertDescription>
-</CardContent>
 </Button>
-</CardContent>
-</Card>
-</div></CardContent>
-</Card>
-</div></CardContent>
-</Card>
-</div></CardContent>
-</Card>
-</div></CardContent>
-</Card>
+</Card></CardContent>
 </div>
+</Card></CardContent>
+</div>
+</Card>
 </Button>
-</div>

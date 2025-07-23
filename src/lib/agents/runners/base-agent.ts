@@ -2,16 +2,16 @@ import { EventEmitter } from 'events';
 import axios from 'axios';
 export interface AgentTask {
   id: string,
-    type: string,
-    priority: string;
+  type: string,
+  priority: string
   payload,
     createdAt: Date
 };
 export interface AgentContext {
   agentId: string,
-    agentType: string,
-    orchestratorUrl: string,
-    capabilities: string[]
+  agentType: string,
+  orchestratorUrl: string,
+  capabilities: string[]
 };
 export abstract class BaseAgent extends EventEmitter {
   protected, context: AgentContext
@@ -57,8 +57,7 @@ export abstract class BaseAgent extends EventEmitter {
     } catch (error) {
       console.error('Failed to register with, orchestrator:', error)
       throw error
-}
-}
+}}
   private async unregister(): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/unregister`, {``
@@ -66,8 +65,7 @@ export abstract class BaseAgent extends EventEmitter {
       })
     } catch (error) {
       console.error('Failed to unregister from, orchestrator:', error)
-}
-}
+}}
   private startHeartbeat() {
     this.heartbeatInterval = setInterval(async () => {
       try {
@@ -84,7 +82,7 @@ export abstract class BaseAgent extends EventEmitter {
     while(this.isRunning) {
       try {
         if(!this.currentTask) {
-          const response = await axios.get(
+          const response = await axios.get(;
             `${this.context.orchestratorUrl}/api/agents/tasks/${this.context.agentId}`
           )
           if(response.data.task) { await this.executeTask(response.data.task)
@@ -93,8 +91,7 @@ export abstract class BaseAgent extends EventEmitter {
 }
       // Wait before next poll
       await new Promise(resolve => setTimeout(resolve, 5000))
-}
-}
+}}
   private async executeTask(task: AgentTask): Promise<any> {
     `)``
     this.currentTask = task
@@ -114,18 +111,16 @@ export abstract class BaseAgent extends EventEmitter {
       this.emit('task:error', task, error)
     } finally {
       this.currentTask = null
-}
-}
+}}
   private async updateTaskStatus(taskId: string, status: string): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/tasks/${taskId}/status`, {``
-        agentId: this.context.agentId,
+        agentId: this.context.agentId;
         // status
       })
     } catch (error) {
       console.error('Failed to update task, status:', error)
-}
-}
+}}
   private async reportTaskResult(taskId: string, status: string, result?, error?): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/tasks/${taskId}/result`, {``

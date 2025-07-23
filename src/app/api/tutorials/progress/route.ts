@@ -1,6 +1,5 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 const progressSchema = z.object({
@@ -23,22 +22,22 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     };
     return NextResponse.json({
       success: true,
-      // progress
-    });
+      progress
+    })
   } catch (error) {
     console.error('Tutorial progress error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
-      );
+      )
 }
     return NextResponse.json(
       { error: 'Failed to track progress' },
       { status: 500 }
-    );
-}
-}
+    )
+}}
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const url = new URL(request.url);
@@ -55,13 +54,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     };
     return NextResponse.json({
       success: true,
-      // progress
-    });
+      progress
+    })
   } catch (error) {
     console.error('Get progress error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch progress' },
       { status: 500 }
-    );
-}
-}
+    )
+}}

@@ -15,38 +15,38 @@ export default function AssistantPrompt() {const [input, setInput] = useState(''
     const generatedComponents: string[] = [];
     if (lower.includes('landing')) {
       addComponent('hero');
-      generatedComponents.push('hero');
+      generatedComponents.push('hero')
 }
     if (lower.includes('signup')) {
       addComponent('input');
-      generatedComponents.push('input');
+      generatedComponents.push('input')
 }
     if (lower.includes('features')) {
       addComponent('card');
-      generatedComponents.push('card');
+      generatedComponents.push('card')
 }
     if (lower.includes('form')) {
       addComponent('input');
-      generatedComponents.push('input');
+      generatedComponents.push('input')
 }
     if (lower.includes('cta') || lower.includes('button')) {
       addComponent('button');
-      generatedComponents.push('button');
+      generatedComponents.push('button')
 }
     if (lower.includes('columns') || lower.includes('layout')) {
       addComponent('two-col');
-      generatedComponents.push('two-col');
+      generatedComponents.push('two-col')
 }
     if (lower.includes('about') || lower.includes('content')) {
       addComponent('two-col');
-      generatedComponents.push('two-col');
+      generatedComponents.push('two-col')
 }
     // Log the AI interaction for future learning
     if(generatedComponents.length > 0) {
-      logAssistantInteraction(input, generatedComponents, 'ui-builder');
+      logAssistantInteraction(input, generatedComponents, 'ui-builder')
 }
     alert(`Assistant has scaffolded ${generatedComponents.length} components! ${causalContext ? '🧠 Using causal insights.' : ''}`);``
-    setInput('');
+    setInput('')
   };
   return (
     <div className="p-4 bg-gray-100 border-t"></div>

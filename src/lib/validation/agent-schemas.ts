@@ -15,5 +15,5 @@ export const _AgentConfigSchema = z.object({
     name: z.string(),
     version: z.string(),
     role: z.string(),
-    capabilities: z.array(z.string()),
+    capabilities: z.array(z.string(),
     priority: z.number()});

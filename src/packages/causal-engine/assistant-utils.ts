@@ -3,13 +3,13 @@ import { logger } from './logger';
 import { CausalScorer } from './scorer';
 export interface EnhancedComponent {
   id: string,
-    type: string,
-    name: string,
-    description: string;
-  causalScore?: number;
-  confidence?: 'low' | 'medium' | 'high';
-  suggested?: boolean;
-  deprioritize?: boolean;
+  type: string,
+  name: string,
+  description: string,
+  causalScore?: number,
+  confidence?: 'low' | 'medium' | 'high',
+  suggested?: boolean,
+  deprioritize?: boolean
 }
 /**
  * Filter and enhance components based on causal scoring
@@ -27,8 +27,7 @@ export const _filterComponentsByScore = (,
       causalScore: score,
       confidence,
       suggested: score >= 0.7 && confidence !== 'low',
-    deprioritize: score < 0.4 && confidence !== 'low' }
-});
+    deprioritize: score < 0.4 && confidence !== 'low' }})
 };
 /**
  * Get smart suggestions based on historical performance
@@ -40,9 +39,8 @@ export const _getSmartSuggestions = (,
 ): EnhancedComponent[] => {
   const _enhanced = filterComponentsByScore(availableComponents, page);
   return enhanced;
-    .filter((comp) => comp.suggested)
-    .sort((a, b) => (b.causalScore || 0) - (a.causalScore || 0))
-    .slice(0, limit);
+    .filter((comp) => comp.suggested).sort((a, b) => (b.causalScore || 0) - (a.causalScore || 0))
+    .slice(0, limit)
 };
 /**
  * Get components to avoid based on poor performance
@@ -53,8 +51,7 @@ export const _getComponentsToAvoid = (,
 ): EnhancedComponent[] => {
   const _enhanced = filterComponentsByScore(availableComponents, page);
   return enhanced;
-    .filter((comp) => comp.deprioritize)
-    .sort((a, b) => (a.causalScore || 0) - (b.causalScore || 0));
+    .filter((comp) => comp.deprioritize).sort((a, b) => (a.causalScore || 0) - (b.causalScore || 0))
 };
 /**
  * Generate AI prompt context based on causal insights
@@ -73,7 +70,7 @@ export const _generateCausalContext = (page: string = 'ui-builder'): string: (an
     const _lowTypes = lowComponents.map((c) => c.key.split(':')[1]).join(', ');
     context += `Avoid, suggesting: ${lowTypes} (poor user retention). `
 }
-  return context;
+  return context
 };
 /**
  * Log AI assistant interaction for future learning
@@ -90,6 +87,4 @@ export const _logAssistantInteraction = (,
       page,
       promptContext: prompt,
     action: 'added',
-      timestamp: Date.now()});
-  });
-};
+      timestamp: Date.now()})}};

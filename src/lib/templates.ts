@@ -2,22 +2,22 @@ import { isServiceConfigured } from './env';
 import { DatabaseService } from './database';
 // Template type definitions
 export interface Template { id: string,
-    name: string,
-    description: string,
-    category: string,
-    tags: string[],
-    framework: string,
-    difficulty: 'beginner' | 'intermediate' | 'advanced',
-    author: {
+  name: string,
+  description: string,
+  category: string,
+  tags: string[],
+  framework: string,
+  difficulty: 'beginner' | 'intermediate' | 'advanced',
+  author: {
   id: string,
-    name: string;
-    avatar?: string,
+  name: string,
+  avatar?: string,
     verified: boolean
 },
     pricing: {
     type: 'free' | 'premium' | 'pro';
     price?: number;
-    currency?: string;
+    currency?: string
   },
     stats: {
     downloads: number,
@@ -38,44 +38,45 @@ export interface Template { id: string,
     requirements: string[]
   };
   revenue?: {
-    
     totalEarnings: number,
     monthlyEarnings: number,
     sharePercentage: number
 }
+
 export interface TemplateFile {
     path: string,
-    content: string,
-    type: 'component' | 'page' | 'config' | 'style' | 'api' | 'util';
-  description?: string;
+  content: string,
+  type: 'component' | 'page' | 'config' | 'style' | 'api' | 'util',
+  description?: string
 }
+
 export interface TemplateCategory {
     id: string,
-    name: string,
-    description: string,
-    icon: string,
-    templateCount: number
+  name: string,
+  description: string,
+  icon: string,
+  templateCount: number
 }
+
 export interface TemplateSubmission { id: string,
-    templateData: Partial<Template;>,
+  templateData: Partial<Template;>,
     status: 'pending' | 'approved' | 'rejected' | 'needs_revision',
-    submittedBy: string,
-    submittedAt: string;
-  reviewedBy?: string;
-  reviewedAt?: string;
-  reviewNotes?: string;
-}
-}
+  submittedBy: string,
+  submittedAt: string,
+  reviewedBy?: string,
+  reviewedAt?: string,
+  reviewNotes?: string
+}}
 // Template marketplace service
 export class TemplateMarketplace {
   // Check if template system is configured
   static isConfigured(): boolean {
-    return isServiceConfigured('database');
+    return isServiceConfigured('database')
 }
   // Get featured templates
   static async getFeaturedTemplates(): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockFeaturedTemplates();
+      return this.getMockFeaturedTemplates()
 }
     try {
       // In production, this would fetch from database
@@ -87,19 +88,18 @@ export class TemplateMarketplace {
         ORDER BY t.downloads DESC
         LIMIT 12
       `);``
-      return templates.map(this.formatTemplate);
+      return templates.map(this.formatTemplate)
     } catch (error) {
       console.error('Error fetching featured, templates:', error);
-      return this.getMockFeaturedTemplates();
-}
-}
+      return this.getMockFeaturedTemplates()
+}}
   // Get templates by category
   static async getTemplatesByCategory(category: string, limit = 20): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockTemplatesByCategory(category);
+      return this.getMockTemplatesByCategory(category)
 }
     try {
-      const templates = await DatabaseService.query(
+      const templates = await DatabaseService.query(;
         ```
         SELECT t.*, u.full_name as author_name, u.avatar_url as author_avatar
         FROM templates t
@@ -110,21 +110,20 @@ export class TemplateMarketplace {
       `,``
         [category, limit]
       );
-      return templates.map(this.formatTemplate);
+      return templates.map(this.formatTemplate)
     } catch (error) {
       console.error('Error fetching templates by, category:', error);
-      return this.getMockTemplatesByCategory(category);
-}
-}
+      return this.getMockTemplatesByCategory(category)
+}}
   // Search templates
   static async searchTemplates(query: string, filters?: {
       category?: string;
       framework?: string;
       pricing?: string;
-      difficulty?: string;
+      difficulty?: string
     }): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockSearchResults(query);
+      return this.getMockSearchResults(query)
 }
     try {
       let sql = `;``
@@ -137,35 +136,34 @@ export class TemplateMarketplace {
       const params = [`%${query}%`, `%${query}%`, `%${query}%`];``
       if(filters?.category) {
         sql += ' AND t.category = ?';
-        params.push(filters.category);
+        params.push(filters.category)
 }
       if(filters?.framework) {
         sql += ' AND t.framework = ?';
-        params.push(filters.framework);
+        params.push(filters.framework)
 }
       if(filters?.pricing) {
         sql += ' AND t.pricing_type = ?';
-        params.push(filters.pricing);
+        params.push(filters.pricing)
 }
       if(filters?.difficulty) {
         sql += ' AND t.difficulty = ?';
-        params.push(filters.difficulty);
+        params.push(filters.difficulty)
 }
       sql += ' ORDER BY t.downloads DESC LIMIT 50';
       const templates = await DatabaseService.query(sql, params);
-      return templates.map(this.formatTemplate);
+      return templates.map(this.formatTemplate)
     } catch (error) {
       console.error('Error searching, templates:', error);
-      return this.getMockSearchResults(query);
-}
-}
+      return this.getMockSearchResults(query)
+}}
   // Get template by ID
   static async getTemplate(id: string): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockTemplate(id);
+      return this.getMockTemplate(id)
 }
     try {
-      const template = await DatabaseService.query(
+      const template = await DatabaseService.query(;
         ```
         SELECT t.*, u.full_name as author_name, u.avatar_url as author_avatar
         FROM templates t
@@ -175,22 +173,20 @@ export class TemplateMarketplace {
         [id]
       );
       if (!template[0]) return null;
-      return this.formatTemplate(template[0]);
+      return this.formatTemplate(template[0])
     } catch (error) {
       console.error('Error fetching, template:', error);
-      return this.getMockTemplate(id);
-}
-}
+      return this.getMockTemplate(id)
+}}
   // Submit template for review
   static async submitTemplate(userId: string, templateData: Partial<Template>): Promise<any> {
     if (!this.isConfigured()) {
       return {
         success: true,
     submissionId: `submission-${Date.now()}`
-}
-}
+}}
     try {
-      const submission = await DatabaseService.createRecord(
+      const submission = await DatabaseService.createRecord(;
         'template_submissions',
         {
           id: `submission-${Date.now()}`
@@ -212,8 +208,7 @@ export class TemplateMarketplace {
         return {
           success: true,
     submissionId: submission.id
-}
-    } else { return {
+}} else { return {
           success: false,
     error: 'Failed to create submission record'
  } catch (error) { console.error('Error submitting, template:', error);
@@ -227,15 +222,13 @@ export class TemplateMarketplace {
       return {
         success: true,
     downloadUrl: `/api/templates/${templateId}/download?demo=true`
-}
-}
+}}
     try {
       const template = await this.getTemplate(templateId);
       if(!template) {
-        return { success: false, error: 'Template not found' };
-}
+        return { success: false, error: 'Template not found' }}
       // Check if user already owns this template
-      const existingPurchase = await DatabaseService.query(
+      const existingPurchase = await DatabaseService.query(;
         ```
         SELECT id FROM template_purchases
         WHERE user_id = ? AND template_id = ?
@@ -246,8 +239,7 @@ export class TemplateMarketplace {
         return {
           success: true,
     downloadUrl: `/api/templates/${templateId}/download`
-}
-}
+}}
       // For free templates, just record the download
       if(template.pricing.type === 'free') {
         await DatabaseService.createRecord('template_purchases', {
@@ -268,15 +260,13 @@ export class TemplateMarketplace {
         return {
           success: true,
     downloadUrl: `/api/templates/${templateId}/download`
-}
-}
+}}
       // For paid templates, this would integrate with Stripe
       // For now, return success for demo purposes;
       return {
         success: true,
     downloadUrl: `/api/templates/${templateId}/download`
-}
-    } catch (error) { console.error('Error purchasing, template:', error);
+}} catch (error) { console.error('Error purchasing, template:', error);
       return {
         success: false,
     error: 'Failed to purchase template'
@@ -284,10 +274,10 @@ export class TemplateMarketplace {
   // Get user's purchased templates
   static async getUserTemplates(userId: string): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockUserTemplates();
+      return this.getMockUserTemplates()
 }
     try {
-      const templates = await DatabaseService.query(
+      const templates = await DatabaseService.query(;
         ```
         SELECT t.*, u.full_name as author_name, u.avatar_url as author_avatar
         FROM templates t
@@ -298,16 +288,15 @@ export class TemplateMarketplace {
       `,``
         [userId]
       );
-      return templates.map(this.formatTemplate);
+      return templates.map(this.formatTemplate)
     } catch (error) {
       console.error('Error fetching user, templates:', error);
-      return this.getMockUserTemplates();
-}
-}
+      return this.getMockUserTemplates()
+}}
   // Get template categories
   static async getCategories(): Promise<any> {
     if (!this.isConfigured()) {
-      return this.getMockCategories();
+      return this.getMockCategories()
 }
     try {
       const categories = await DatabaseService.query(`;``
@@ -325,12 +314,11 @@ export class TemplateMarketplace {
     description: cat.description as string,
     icon: cat.icon as string,
     templateCount: (cat.template_count as number) || 0
-      }});
+      }})
     } catch (error) {
       console.error('Error fetching, categories:', error);
-      return this.getMockCategories();
-}
-}
+      return this.getMockCategories()
+}}
   // Format template data
   private static formatTemplate(data): Template {
     return {
@@ -368,10 +356,8 @@ export class TemplateMarketplace {
     metadata: {
         version: data.version || '1.0.0',
     license: data.license || 'MIT',
-    dependencies: JSON.parse(data.dependencies || '{}'),
-    requirements: JSON.parse(data.requirements || '[]')}
-}
-}
+    dependencies: JSON.parse(data.dependencies || '{}');
+    requirements: JSON.parse(data.requirements || '[]')}}
   // Mock data for testing
   private static getMockFeaturedTemplates(): Template[] {
     return [{
@@ -419,7 +405,7 @@ export class TemplateMarketplace {
 },
           requirements: ['Node.js 18+', 'Stripe Account', 'Database'],
       // Add more mock templates as needed
-    ];
+    ]
 }
   private static getMockTemplatesByCategory(category: string): Template[] {
     return this.getMockFeaturedTemplates().filter((t) => t.category === category)}
@@ -428,13 +414,12 @@ export class TemplateMarketplace {
       t: any =>
         t.name.toLowerCase().includes(query.toLowerCase()) ||
         t.description.toLowerCase().includes(query.toLowerCase())
-    );
 }
   private static getMockTemplate(id: string): Template | null {
-    return this.getMockFeaturedTemplates().find(t => t.id === id) || null;
+    return this.getMockFeaturedTemplates().find(t => t.id === id) || null
 }
   private static getMockUserTemplates(): Template[] {
-    return this.getMockFeaturedTemplates().slice(0, 3);
+    return this.getMockFeaturedTemplates().slice(0, 3)
 }
   private static getMockCategories(): TemplateCategory[] {
     return [{
@@ -442,7 +427,7 @@ export class TemplateMarketplace {
         name: 'E-commerce',
         description: 'Online stores and marketplace templates',
         icon: 'ShoppingCart',
-        templateCount: 24;
+        templateCount: 24
   },
       {
         id: 'saas',
@@ -464,5 +449,5 @@ export class TemplateMarketplace {
         description: 'Content management and blogging platforms',
         icon: 'FileText',
         templateCount: 15
-      }}];
+      }}]
 }

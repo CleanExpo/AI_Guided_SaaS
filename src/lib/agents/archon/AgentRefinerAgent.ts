@@ -2,21 +2,23 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
 export interface AgentRefinement {
   originalAgents: AgentConfiguration[],
-    refinedAgents: RefinedAgent[],
-    improvements: AgentImprovement[],
-    collaborationStrategy: CollaborationStrateg;y,
-    performanceMetrics: PerformanceMetric;s,
+  refinedAgents: RefinedAgent[],
+  improvements: AgentImprovement[],
+  collaborationStrategy: CollaborationStrateg
+y,
+    performanceMetrics: PerformanceMetric
+s,
     recommendations: string[]
 };
 export interface AgentConfiguration {
   id: string,
-    name: string,
-    role: string,
-    capabilities: string[],
-    tools: string[];
-  model?: string;
-  temperature?: number;
-  systemPrompt?: string;
+  name: string,
+  role: string,
+  capabilities: string[],
+  tools: string[],
+  model?: string,
+  temperature?: number,
+  systemPrompt?: string
 };
 export interface RefinedAgent extends AgentConfiguration  {
   refinements: Refinement[],
@@ -26,60 +28,62 @@ export interface RefinedAgent extends AgentConfiguration  {
 };
 export interface Refinement {
   type: 'capability' | 'prompt' | 'tool' | 'parameter' | 'collaboration',
-    original: string,
-    refined: string,
-    rationale: string,
-    impact: 'high' | 'medium' | 'low'
+  original: string,
+  refined: string,
+  rationale: string,
+  impact: 'high' | 'medium' | 'low'
 };
 export interface CollaborationRole {
   withAgent: string,
-    interactionType: 'provider' | 'consumer' | 'peer',
-    dataExchange: string[],
-    protocol: string
+  interactionType: 'provider' | 'consumer' | 'peer',
+  dataExchange: string[],
+  protocol: string
 };
 export interface PerformanceProfile {
   speed: 'fast' | 'moderate' | 'slow',
-    accuracy: number; // 0-100,
+  accuracy: number; // 0-100,
     resourceUsage: 'low' | 'medium' | 'high',
-    specialtyAreas: string[],
-    weaknesses: string[]
+  specialtyAreas: string[],
+  weaknesses: string[]
 };
 export interface AgentImprovement {
   agentId: string,
-    improvementType: string,
-    description: string,
-    implementation: string,
-    expectedBenefit: string
+  improvementType: string,
+  description: string,
+  implementation: string,
+  expectedBenefit: string
 };
 export interface CollaborationStrategy {
-  orchestration: OrchestrationPatter;n,
+  orchestration: OrchestrationPatter
+n,
     communicationFlow: CommunicationFlow[],
-    sharedResources: SharedResource[],
-    conflictResolution: ConflictResolutio;n
+  sharedResources: SharedResource[],
+  conflictResolution: ConflictResolutio
+n
 };
 export interface OrchestrationPattern {
-  type: 'hierarchical' | 'peer-to-peer' | 'hub-spoke' | 'pipeline';
+  type: 'hierarchical' | 'peer-to-peer' | 'hub-spoke' | 'pipeline',
   coordinator?: string,
     description: string,
-    benefits: string[]
+  benefits: string[]
 };
 export interface CommunicationFlow {
   from: string,
-    to: string,
-    dataType: string,
-    frequency: 'continuous' | 'on-demand' | 'scheduled',
-    protocol: string
+  to: string,
+  dataType: string,
+  frequency: 'continuous' | 'on-demand' | 'scheduled',
+  protocol: string
 };
 export interface SharedResource {
   name: string,
-    type: 'memory' | 'artifact' | 'model' | 'tool',
-    accessPattern: 'read-only' | 'read-write' | 'exclusive',
-    owners: string[]
+  type: 'memory' | 'artifact' | 'model' | 'tool',
+  accessPattern: 'read-only' | 'read-write' | 'exclusive',
+  owners: string[]
 };
 export interface ConflictResolution {
   strategy: string,
-    priorityRules: string[],
-    escalationPath: string[]
+  priorityRules: string[],
+  escalationPath: string[]
 };
 export interface PerformanceMetrics {
   overallEfficiency: number; // 0-100,
@@ -109,8 +113,7 @@ export class AgentRefinerAgent extends Agent {
         'collaboration-designer',
         'orchestration-planner'],
       temperature: 0.4
-    }};
-}
+    }}
   protected async execute(input: string): Promise<any> {
     try {
       this.think(
@@ -127,13 +130,13 @@ export class AgentRefinerAgent extends Agent {
       const analysis = await this.analyzeAgentTeam(currentAgents, requirements);
       this.observe('Agent team analysis complete', analysis);
       // Step, 2: Profile agent performance
-      const performanceProfiles = await this.profileAgentPerformance(
+      const performanceProfiles = await this.profileAgentPerformance(;
         currentAgents,
         // analysis
       );
       this.observe('Performance profiling complete', performanceProfiles);
       // Step, 3: Identify improvement opportunities
-      const improvements = await this.identifyImprovements(
+      const improvements = await this.identifyImprovements(;
         currentAgents,
         analysis,
         performanceProfiles,
@@ -141,7 +144,7 @@ export class AgentRefinerAgent extends Agent {
       );
       this.observe('Identified improvements', { count: improvements.length });
       // Step, 4: Refine agent configurations
-      const refinedAgents = await this.refineAgents(
+      const refinedAgents = await this.refineAgents(;
         currentAgents,
         improvements,
         // performanceProfiles
@@ -150,21 +153,21 @@ export class AgentRefinerAgent extends Agent {
         count: refinedAgents.length
       }};
       // Step, 5: Design collaboration strategy
-      const collaborationStrategy = await this.designCollaboration(
+      const collaborationStrategy = await this.designCollaboration(;
         refinedAgents,
         requirements,
         // constraints
       );
       this.observe('Designed collaboration strategy', collaborationStrategy);
       // Step, 6: Calculate performance metrics
-      const _performanceMetrics = await this.calculateMetrics(
+      const _performanceMetrics = await this.calculateMetrics(;
         currentAgents,
         refinedAgents,
         // collaborationStrategy
       );
       this.observe('Calculated performance metrics', performanceMetrics);
       // Step, 7: Generate recommendations
-      const _recommendations = await this.generateRecommendations(
+      const _recommendations = await this.generateRecommendations(;
         refinedAgents,
         collaborationStrategy,
         // performanceMetrics
@@ -192,17 +195,13 @@ export class AgentRefinerAgent extends Agent {
           'Set up performance monitoring',
           'Test agent interactions'],
         confidence: 0.92
-}
-    } catch (error) {
+}} catch (error) {
       this.think(`Error during agent, refinement: ${error}`);``
-      throw error;
-}
-}
+      throw error
+}}
   private async parseInput(input: string): Promise<any> {
-    const _parsePrompt = `Parse this input to extract current agent configurations and, requirements: ``
-
-Input:
-"${input}",
+    const _parsePrompt = `Parse this input to extract current agent configurations and, requirements: ``,
+Input: "${input}",
   Extract:
 1. Current agents with their configurations
 2. Requirements for the agent system
@@ -214,11 +213,10 @@ Format as JSON with arrays for each category.`
     temperature: 0.2,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async analyzeAgentTeam(agents: AgentConfiguration[], requirements: string[]): Promise<any> {
-    const _analysisPrompt = `Analyze this team of AI, agents: ``
-
+    const _analysisPrompt = `Analyze this team of AI, agents: ``,
 Agents:
 ${JSON.stringify(agents, null, 2)}
 Requirements:
@@ -236,7 +234,7 @@ Format as detailed JSON analysis.`
     temperature: 0.3,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async profileAgentPerformance(
     agents: AgentConfiguration[],
@@ -244,8 +242,7 @@ Format as detailed JSON analysis.`
   ): Promise<Map<string, PerformanceProfile>> {
     const profiles = new Map<string, PerformanceProfile>();
     for(const agent of agents) {
-      const _profilePrompt = `Profile the performance characteristics of this, agent: ``
-
+      const _profilePrompt = `Profile the performance characteristics of this, agent: ``,
 Agent: ${JSON.stringify(agent, null, 2)}
 Context from, analysis:
 ${JSON.stringify(analysis, null, 2)}
@@ -262,12 +259,12 @@ Format as JSON PerformanceProfile.`
     temperature: 0.3,
     responseFormat: 'json'
 }};
-      profiles.set(agent.id, JSON.parse(response));
+      profiles.set(agent.id, JSON.parse(response))
 }
-    return profiles;
+    return profiles
 }
   private async identifyImprovements(agents: AgentConfiguration[], analysis, performanceProfiles: Map<string, PerformanceProfile>, requirements: string[]): Promise<any> {
-    const _improvementPrompt = `Identify improvements for this agent, team: Current, Agents:``
+    const _improvementPrompt = `Identify improvements for this agent, team: Current, Agents:``;
 ${JSON.stringify(agents, null, 2)}
 Analysis: Insights:
 ${JSON.stringify(analysis, null, 2)}
@@ -287,16 +284,16 @@ Format as JSON array of AgentImprovement objects.`
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async refineAgents(agents: AgentConfiguration[], improvements: AgentImprovement[], performanceProfiles: Map<string, PerformanceProfile>): Promise<any> {
+  private async refineAgents(agents: AgentConfiguration[], improvements: AgentImprovement[]; performanceProfiles: Map<string, PerformanceProfile>): Promise<any> {
     const refinedAgents: RefinedAgent[] = [];
     for(const agent of agents) {
       const _agentImprovements = improvements.filter(,
     i: any => i.agentId === agent.id
       );
       const _profile = performanceProfiles.get(agent.id)!;
-      const _refinePrompt = `Refine this agent, configuration: Original, Agent:``
+      const _refinePrompt = `Refine this agent, configuration: Original, Agent:``;
 ${JSON.stringify(agent, null, 2)}
 Improvements, to: Apply:
 ${JSON.stringify(agentImprovements, null, 2)}
@@ -314,12 +311,12 @@ Format as JSON RefinedAgent object.`
     temperature: 0.3,
     responseFormat: 'json'
 }};
-      refinedAgents.push(JSON.parse(response));
+      refinedAgents.push(JSON.parse(response))
 }
-    return refinedAgents;
+    return refinedAgents
 }
-  private async designCollaboration(agents: RefinedAgent[], requirements: string[], constraints: string[]): Promise<any> {
-    const _collaborationPrompt = `Design optimal collaboration strategy for these, agents: Refined, Agents:``
+  private async designCollaboration(agents: RefinedAgent[], requirements: string[]; constraints: string[]): Promise<any> {
+    const _collaborationPrompt = `Design optimal collaboration strategy for these, agents: Refined, Agents:``;
 ${JSON.stringify(
   agents.map((a) => ({
     id: a.id,
@@ -347,10 +344,10 @@ Format as JSON CollaborationStrategy object.`
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async calculateMetrics(originalAgents: AgentConfiguration[], refinedAgents: RefinedAgent[], collaborationStrategy: CollaborationStrategy): Promise<any> {
-    const _metricsPrompt = `Calculate performance metrics for the refined agent, system: Original, System: - Agent, count: ${originalAgents.length}``
+  private async calculateMetrics(originalAgents: AgentConfiguration[], refinedAgents: RefinedAgent[]; collaborationStrategy: CollaborationStrategy): Promise<any> {
+    const _metricsPrompt = `Calculate performance metrics for the refined agent, system: Original, System: - Agent; count: ${originalAgents.length}``
 - Total, capabilities: ${originalAgents.flatMap(a => a.capabilities).length}
 Refined: System: - Agent, count: ${refinedAgents.length}
 - Total, capabilities: ${refinedAgents.flatMap(a => a.capabilities).length}
@@ -369,10 +366,10 @@ Format as JSON PerformanceMetrics object.`
     temperature: 0.3,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async generateRecommendations(refinedAgents: RefinedAgent[], collaborationStrategy: CollaborationStrategy, performanceMetrics: PerformanceMetrics): Promise<any> {
-    const _recommendPrompt = `Generate actionable recommendations for implementing this refined agent, system: Refined Agents, Summary:``
+  private async generateRecommendations(refinedAgents: RefinedAgent[], collaborationStrategy: CollaborationStrategy; performanceMetrics: PerformanceMetrics): Promise<any> {
+    const _recommendPrompt = `Generate actionable recommendations for implementing this refined agent, system: Refined Agents, Summary:``;
 ${refinedAgents.map((a) => `${a.name}: ${a.specializations.join(', ')}`).join('\n')}``
 Collaboration: Strategy: ${collaborationStrategy.orchestration.type}
 Performance: Metrics:

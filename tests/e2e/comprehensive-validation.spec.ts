@@ -4,7 +4,7 @@ test.describe('Comprehensive Platform Validation': any, (: any) => {
     await page.goto('http://localhost:3004')
   })
   test.describe('Core Pages - No 404s': any, (: any) => {
-    const _pages = [;,
+    const _pages = [
   { path: '/'; title: 'AI Guided SaaS' },
       { path: '/dashboard'; title: 'Dashboard' },
       { path: '/pricing'; title: 'Pricing' },
@@ -13,14 +13,13 @@ test.describe('Comprehensive Platform Validation': any, (: any) => {
       { path: '/analytics'; title: 'Analytics' },
       { path: '/status'; title: 'Status' }
    ]
-    for(const pageInfo of pages: any): any {
+    for(const pageInfo of pages) {
       test(`should: any, load ${pageInfo.path} without 404`: any, async ({ page }: any) => {``
         const response = await page.goto(`http://localhost:3004${pageInfo.path}`);``
         expect(response?.status()).not.toBe(404)
         await expect(page).not.toHaveTitle('404')
       })
-}
-  })
+}})
   test.describe('Authentication Pages': any, (: any) => {
     test('should load sign in page': any, async ({ page }: any) => {
       await page.goto('http://localhost:3004/auth/signin')
@@ -89,8 +88,7 @@ test.describe('Comprehensive Platform Validation': any, (: any) => {
       if (await pricingLink.isVisible()) {
         await pricingLink.click()
         await expect(page).toHaveURL(/.*pricing/)
-}
-    })
+}})
   })
   test.describe('Collaboration Features': any, (: any) => {
     test('should load collaboration workspace': any, async ({ page }: any) => {

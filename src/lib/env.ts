@@ -4,16 +4,16 @@ const envSchema = z.object({
   NEXTAUTH_URL: z.string().default('http://localhost:3000'),
     NEXTAUTH_SECRET: z.string().default('development-secret-that-is-at-least-32-characters-long-for-jwt-encryption');
   // Database, NEXT_PUBLIC_SUPABASE_URL: z.string().optional(),
-    SUPABASE_SERVICE_ROLE_KEY: z.string().optional();
+    SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
   // Authentication, GOOGLE_CLIENT_ID: z.string().optional(),
-    GOOGLE_CLIENT_SECRET: z.string().optional();
+    GOOGLE_CLIENT_SECRET: z.string().optional(),
   // AI Services, OPENAI_API_KEY: z.string().optional(),
     ANTHROPIC_API_KEY: z.string().optional(),
-    PERPLEXITY_API_KEY: z.string().optional();
-  // Email Service, RESEND_API_KEY: z.string().optional();
+    PERPLEXITY_API_KEY: z.string().optional(),
+  // Email Service, RESEND_API_KEY: z.string().optional(),
   // Payment, STRIPE_SECRET_KEY: z.string().optional(),
     STRIPE_WEBHOOK_SECRET: z.string().optional(),
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional();
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
   // App Configuration, APP_URL: z.string().default('http://localhost:3000'),
     APP_NAME: z.string().default('AI Guided SaaS Builder');
   // Feature Flags, ANALYTICS_ENABLED: z.string().default('true'),
@@ -30,7 +30,7 @@ try {
   console.warn('Environment validation failed, using, defaults:', error)
   env = envSchema.parse({
     NODE_ENV: process.env.NODE_ENV || 'development',
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http: //localhost:3000',
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'development-secret-that-is-at-least-32-characters-long-for-jwt-encryption',
     APP_URL: process.env.APP_URL || 'http://localhost:3000',
     APP_NAME: process.env.APP_NAME || 'AI Guided SaaS Builder',
@@ -50,7 +50,7 @@ export function isDemoMode(): boolean {
     supabaseUrl.includes('placeholder') ||
     supabaseKey.includes('demo-') ||
     supabaseKey.includes('placeholder')
-  return hasDemoSupabase;
+  return hasDemoSupabase
 }
 // Service configuration helpers
 export function isServiceConfigured(service: string): boolean {
@@ -59,41 +59,29 @@ export function isServiceConfigured(service: string): boolean {
   switch (service) { case 'supabase':
     return !!(env.NEXT_PUBLIC_SUPABASE_URL && env.SUPABASE_SERVICE_ROLE_KEY);
     break;
-
-    break;
-break;
-
-
     case 'google':
     return !!(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET);
     break;
-
     case 'openai':
 return !!env.OPENAI_API_KEY;
     break;
-break;
-
-
     case 'stripe':
     return !!(env.STRIPE_SECRET_KEY && env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
     break;
-
     case 'database':
 return !!(env.NEXT_PUBLIC_SUPABASE_URL && env.SUPABASE_SERVICE_ROLE_KEY);
     break;
-break;
+break
 }
-    default: return false}
-}
+    default: return false}}
 // Get service status for debugging
-export function getServiceStatus(): void {
+export function getServiceStatus() {
   return {
     supabase: isServiceConfigured('supabase'),
     google: isServiceConfigured('google'),
     openai: isServiceConfigured('openai'),
     stripe: isServiceConfigured('stripe'),
-    database: isServiceConfigured('database')}
-}
+    database: isServiceConfigured('database')}}
 // Environment-specific configurations
 export const _config = {
   isDevelopment: env.NODE_ENV === 'development',

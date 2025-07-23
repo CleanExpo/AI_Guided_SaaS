@@ -4,27 +4,28 @@ import React from 'react';
 
 import { useState } from 'react';
 interface FormField {
-id: string;
+id: string,
   
-    type: 'text' | 'email' | 'textarea' | 'select';
+    type: 'text' | 'email' | 'textarea' | 'select',
   
-    label: string;
-  placeholder?: string;
+    label: string,
+  placeholder?: string,
   
     required: boolean
 
 }
+
 export default function FormBuilderPage() {
   const [fields, setFields] = useState<FormField[]>([]);
   const addField = (type: FormField['type']) => {
-    const newField: FormField = {,
+    const newField: FormField = {
   id: Math.random().toString(36).substr(2, 9),
       type,
-      label: `New ${type} field`;`
+      label: `New ${type} field`,`
       required: false,
-    placeholder: `Enter ${type}``
+    placeholder: `Enter ${type}`
   };
-    setFields([...fields, newField]);
+    setFields([...fields, newField])
   };
   const removeField = (id: string) => {
     setFields(fields.filter((field) => field.id !== id))
@@ -70,8 +71,8 @@ export default function FormBuilderPage() {
 <div className="lg:col-span-2">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Form Preview {fields.length === 0 ? (
-                <div className="text-center py-12 text-gray-500">
-                  <p>No fields added yet. Start by adding fields from the left panel.</p>
+                <div className="">
+        <p>No fields added yet. Start by adding fields from the left panel.</p>
                 </div>
               ) : (<div className="space-y-4">
                   {fields.map((field) => (<div key={field.id} className="border border-gray-200 rounded p-4">
@@ -111,4 +112,10 @@ export default function FormBuilderPage() {
 
     </h3>
           </div>
-}
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  }

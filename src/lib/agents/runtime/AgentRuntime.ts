@@ -3,69 +3,70 @@ import { Agent, AgentResult, AgentContext } from '../base/Agent';
 import { createAgent } from '../index';
 import { generateAIResponse } from '@/lib/ai';
 export interface RuntimeConfig {
-  maxConcurrentAgents?: number;
-  timeoutMs?: number;
-  retryAttempts?: number;
-  enableLogging?: boolean;
-  enableMetrics?: boolean;
-  sharedMemoryLimit?: number;
+  maxConcurrentAgents?: number,
+  timeoutMs?: number,
+  retryAttempts?: number,
+  enableLogging?: boolean,
+  enableMetrics?: boolean,
+  sharedMemoryLimit?: number
 };
 export interface AgentTask {
   id: string,
-    agentType: string,
-    input: string,
-    priority: 'critical' | 'high' | 'medium' | 'low';
-  dependencies?: string[];
-  timeout?: number;
-  retries?: number;
+  agentType: string,
+  input: string,
+  priority: 'critical' | 'high' | 'medium' | 'low',
+  dependencies?: string[],
+  timeout?: number,
+  retries?: number,
   metadata?: Record<string, any>
 };
 export interface TaskResult {
   taskId: string,
-    agentType: string,
-    result: AgentResul;t,
+  agentType: string,
+  result: AgentResul
+t,
     startTime: number,
-    endTime: number,
-    duration: number,
-    retryCount: number;
-  error?: Error;
+  endTime: number,
+  duration: number,
+  retryCount: number,
+  error?: Error
 };
 export interface RuntimeMetrics {
   totalTasks: number,
-    completedTasks: number,
-    failedTasks: number,
-    averageDuration: number,
-    agentMetrics: Map<string, AgentMetrics>,
+  completedTasks: number,
+  failedTasks: number,
+  averageDuration: number,
+  agentMetrics: Map<string, AgentMetrics>,
   memoryUsage: number,
-    concurrentTasks: number
+  concurrentTasks: number
 };
 export interface AgentMetrics {
   tasksCompleted: number,
-    tasksFailed: number,
-    averageDuration: number,
-    averageConfidence: number,
-    totalMessages: number
+  tasksFailed: number,
+  averageDuration: number,
+  averageConfidence: number,
+  totalMessages: number
 };
 export interface ExecutionPlan {
   tasks: AgentTask[],
-    dependencies: Map<string, string[]>,
+  dependencies: Map<string, string[]>,
   executionOrder: string[][],
-    estimatedDuration: number
+  estimatedDuration: number
 };
 export class AgentRuntime extends EventEmitter {
-  private, config: RuntimeConfig
-  private, agents: Map<string, Agent>
-  private, sharedMemory: Map<string, any>
-  private, taskQueue: AgentTask[]
-  private, runningTasks: Map<string, Promise<TaskResult>>
-  private, completedTasks: Map<string, TaskResult>
-  private, metrics: RuntimeMetrics
-  private, isRunning: boolean
+  private config: RuntimeConfig
+  private agents: Map<string, Agent>
+  private sharedMemory: Map<string, any>
+  private taskQueue: AgentTask[]
+  private runningTasks: Map<string, Promise<TaskResult>>
+  private completedTasks: Map<string, TaskResult>
+  private metrics: RuntimeMetrics
+  private isRunning: boolean
   constructor(config: RuntimeConfig = {}) {
     super()
     this.config = {
       maxConcurrentAgents: 5,
-    timeoutMs: 300000;
+    timeoutMs: 300000,
   // 5 minutes, retryAttempts: 2,
     enableLogging: true,
     enableMetrics: true,
@@ -86,8 +87,7 @@ export class AgentRuntime extends EventEmitter {
     agentMetrics: new Map(),
     memoryUsage: 0,
     concurrentTasks: 0
-}
-}
+}}
   /**
    * Execute a natural language request using intelligent agent orchestration
    */
@@ -102,13 +102,12 @@ export class AgentRuntime extends EventEmitter {
     return {
       ...plan,
       // results
-}
-}
+}}
   /**
    * Create an execution plan from a natural language request
    */
   private async createExecutionPlan(request: string): Promise<any> {
-    const _plannerPrompt = `Analyze this request and create an execution plan using available, agents: ``
+    const _plannerPrompt = `Analyze this request and create an execution plan using available, agents: ``,
     Request: "${request}"
 Available, agents: -, analyst: Requirements analysis and user story creation
 - project-manager: Project planning and resource allocation
@@ -139,8 +138,7 @@ Format as JSON,
     tasks.forEach((task) => {
       if(task.dependencies && task.dependencies.length > 0) {
         dependencies.set(task.id, task.dependencies)
-}
-    })
+}})
     const _executionOrder = this.calculateExecutionOrder(tasks, dependencies);
     const _estimatedDuration = this.estimateExecutionTime(tasks);
     return {
@@ -148,8 +146,7 @@ Format as JSON,
       dependencies,
       executionOrder,
       // estimatedDuration
-}
-}
+}}
   /**
    * Execute a plan
    */
@@ -161,16 +158,15 @@ Format as JSON,
       for(const batch of plan.executionOrder) {
         const _batchPromises = batch.map((taskId) => {
           const task = plan.tasks.find(t => t.id === taskId)!;
-          return this.executeTask(task);
+          return this.executeTask(task)
         })
         const _batchResults = await Promise.all(batchPromises);
         results.push(...batchResults)
 }
-      return results;
+      return results
     } finally {
       this.isRunning = false
-}
-}
+}}
   /**
    * Add a task to the queue
    */
@@ -180,8 +176,7 @@ Format as JSON,
     this.emit('task-added', task)
     if(!this.isRunning) {
       this.processQueue()
-}
-}
+}}
   /**
    * Execute a single task
    */
@@ -201,7 +196,7 @@ Format as JSON,
     artifacts: new Map()
         })
         // Execute with timeout
-        const result = await this.executeWithTimeout(
+        const result = await this.executeWithTimeout(;
           agent.process(task.input),
           task.timeout ?? this.config.timeoutMs ?? 30000
         )
@@ -220,22 +215,20 @@ Format as JSON,
           result,
           startTime,
           endTime,
-          duration: endTime - startTime,
+          duration: endTime - startTime;
           // retryCount
 }
         this.completedTasks.set(task.id, taskResult)
         this.updateMetrics(taskResult)
         this.emit('task-completed', taskResult)
-        return taskResult;
+        return taskResult
       } catch (error) {
         lastError = error as Error
         retryCount++
         if (retryCount <= (task.retries ?? this.config.retryAttempts)) {
           this.log('warn', `Task ${task.id} failed, retrying (${retryCount}/${task.retries ?? this.config.retryAttempts})`)``
           await this.delay(1000 * retryCount) // Exponential backoff
-}
-}
-}
+}}
     // Task failed after all retries
     const _endTime = Date.now();
     const failedResult: TaskResult = {
@@ -255,7 +248,7 @@ Format as JSON,
     this.completedTasks.set(task.id, failedResult)
     this.metrics.failedTasks++
     this.emit('task-failed', failedResult)
-    return failedResult;
+    return failedResult
 }
   /**
    * Get or create an agent instance
@@ -267,9 +260,8 @@ Format as JSON,
         this.agents.set(agentType, agent)
       } catch (error) {
         throw new Error(`Failed to create agent of type ${agentType}: ${error}`)``
-}
-}
-    return this.agents.get(agentType)!;
+}}
+    return this.agents.get(agentType)!
 }
   /**
    * Process the task queue
@@ -296,7 +288,7 @@ Format as JSON,
       })
 }
     // Wait for all running tasks to complete
-    await Promise.all(Array.from(this.runningTasks.values()))
+    await Promise.all(Array.from(this.runningTasks.values())
     this.isRunning = false
     this.emit('queue-completed')
 }
@@ -309,10 +301,9 @@ Format as JSON,
       // Check if dependencies are satisfied
       if (this.areDependenciesSatisfied(task)) {
         this.taskQueue.splice(i, 1)
-        return task;
-}
-}
-    return null;
+        return task
+}}
+    return null
 }
   /**
    * Check if task dependencies are satisfied
@@ -333,16 +324,15 @@ Format as JSON,
   ): string[][] {
     const order: string[][] = [];
     const executed = new Set<string>();
-    const _taskMap = new Map(tasks.map((t) => [t.id, t]));
+    const _taskMap = new Map(tasks.map((t) => [t.id, t]);
     while(executed.size < tasks.length) {
       const batch: string[] = [];
       for(const task of tasks) {
         if (executed.has(task.id)) continue
         const deps = dependencies.get(task.id) || [];
-        if (deps.every(d => executed.has(d))) {
+        if (deps.every(d => executed.has(d)) {
           batch.push(task.id)
-}
-}
+}}
       if(batch.length === 0) {
         // Circular dependency or invalid plan
         throw new Error('Invalid execution, plan: circular dependencies detected')
@@ -350,7 +340,7 @@ Format as JSON,
       batch.forEach((id) => executed.add(id))
       order.push(batch)
 }
-    return order;
+    return order
 }
   /**
    * Estimate execution time for a plan
@@ -359,7 +349,7 @@ Format as JSON,
     // Simple, estimation: 30 seconds per task, with parallelization considered
     const _baseTime = 30000 // 30 seconds;
     const _parallelFactor = Math.min(tasks.length, this.config.maxConcurrentAgents!);
-    return Math.ceil((tasks.length * baseTime) / parallelFactor);
+    return Math.ceil((tasks.length * baseTime) / parallelFactor)
 }
   /**
    * Execute with timeout
@@ -371,7 +361,7 @@ Format as JSON,
     const _timeout = new Promise<never>((_, reject) => {
       setTimeout(() => reject(new Error('Task timeout')), timeoutMs)
     })
-    return Promise.race([promise, timeout]);
+    return Promise.race([promise, timeout])
 }
   /**
    * Update shared memory from agent context
@@ -384,7 +374,7 @@ Format as JSON,
     // Check memory limit
     if(this.sharedMemory.size > this.config.sharedMemoryLimit!) {
       // Remove oldest entries
-      const entries = Array.from(this.sharedMemory.entries());
+      const entries = Array.from(this.sharedMemory.entries()
       const toRemove = entries.slice(0, entries.length - this.config.sharedMemoryLimit!);
       toRemove.forEach(([key]) => this.sharedMemory.delete(key))
 }
@@ -399,7 +389,7 @@ Format as JSON,
       this.metrics.completedTasks++
 }
     // Update average duration
-    const _totalDuration = Array.from(this.completedTasks.values());
+    const _totalDuration = Array.from(this.completedTasks.values()
       .reduce((sum, r) => sum + r.duration, 0)
     this.metrics.averageDuration = totalDuration / this.completedTasks.size
     // Update agent-specific metrics
@@ -431,13 +421,13 @@ Format as JSON,
    * Wait for at least one task to complete
    */
   private async waitForTaskCompletion(): Promise<any> {
-    if (this.runningTasks.size === 0) return await Promise.race(Array.from(this.runningTasks.values()));
+    if (this.runningTasks.size === 0) return await Promise.race(Array.from(this.runningTasks.values())
 }
   /**
    * Utility delay function
    */
   private delay(ms: number): Promise<any> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
   /**
    * Logging utility
@@ -445,7 +435,7 @@ Format as JSON,
   private log(level: 'info' | 'warn' | 'error',
     message: string) {
     if (!this.config.enableLogging) return
-    const _timestamp = new Date().toISOString();
+    const _timestamp = new Date().toISOString()
     }] ${message}`)``
     this.emit('log', { level, message, timestamp })
 }
@@ -453,8 +443,7 @@ Format as JSON,
    * Get runtime metrics
    */
   getMetrics(): RuntimeMetrics {
-    return { ...this.metrics };
-}
+    return { ...this.metrics }}
   /**
    * Get shared memory snapshot
    */

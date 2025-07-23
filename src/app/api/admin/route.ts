@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         // Simple admin status check
@@ -8,14 +7,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             timestamp: new Date().toISOString(),
             status: 'active'
         };
-        
-        return NextResponse.json(adminStatus);
+        return NextResponse.json(adminStatus)
     } catch (error) {
         console.error('Admin API error:', error);
         return NextResponse.json(
             { error: 'Admin service unavailable' }, { status: 500 }
-        );
-    }
-}
+        )
+    }}
 
 export const dynamic = "force-dynamic";

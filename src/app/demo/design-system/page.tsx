@@ -5,16 +5,16 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 export default function DesignSystemDemoPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <div className="min-h-screen bg-gray-50 py-8 container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Design System Showcase
-          </h1>
+</h1>
           <p className="text-gray-600">
             Explore our comprehensive design system and UI components.
           </p>
         </div>
+
         <div className="space-y-8">
           {/* Buttons */}
           <Card>
@@ -33,7 +33,8 @@ export default function DesignSystemDemoPage() {
                 <Button disabled>Disabled</Button>
               </div>
             </CardContent>
-          </Card>
+              </CardContent>
+              </Card>
           {/* Badges */}
           <Card>
             <CardHeader>
@@ -47,26 +48,25 @@ export default function DesignSystemDemoPage() {
                 <Badge variant="destructive">Destructive</Badge>
               </div>
             </CardContent>
-          </Card>
+              </CardContent>
+              </Card>
           {/* Inputs */}
           <Card>
             <CardHeader>
               <CardTitle>Form Inputs</CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="space-y-4 max-w-md">
                 <Input placeholder="Default input" />
                 <Input type="email" placeholder="Email input" />
                 <Input type="password" placeholder="Password input" />
                 <Input disabled placeholder="Disabled input" />
-              </div>
-            </CardContent>
-          </Card>
+</div>
+</CardContent>
+              </Card>
           {/* Typography */}
           <Card>
             <CardHeader>
               <CardTitle>Typography</CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <h1 className="text-4xl font-bold">Heading 1</h1>
@@ -75,40 +75,36 @@ export default function DesignSystemDemoPage() {
                 <h4 className="text-xl">Heading 4</h4>
                 <p className="text-base text-gray-600">
                   This is a paragraph with regular text. It demonstrates the default typography styles used throughout the application.
-                </p>
+</p>
                 <p className="text-sm text-gray-500">
                   This is smaller text that might be used for captions or secondary information.
-                </p>
+</p>
               </div>
             </CardContent>
-          </Card>
+              </CardContent>
+              </Card>
           {/* Colors */}
           <Card>
             <CardHeader>
               <CardTitle>Color Palette</CardTitle>
-            </CardHeader>
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <div className="space-y-2">
-                  <div className="w-full h-20 bg-blue-600 rounded"></div>
+                <div className="space-y-2 w-full h-20 bg-blue-600 rounded"></div>
                   <p className="text-sm font-medium">Primary</p>
-                </div>
-                <div className="space-y-2">
-                  <div className="w-full h-20 bg-gray-600 rounded"></div>
+                <div className="space-y-2 w-full h-20 bg-gray-600 rounded"></div>
                   <p className="text-sm font-medium">Secondary</p>
-                </div>
-                <div className="space-y-2">
-                  <div className="w-full h-20 bg-green-600 rounded"></div>
+                <div className="space-y-2 w-full h-20 bg-green-600 rounded"></div>
                   <p className="text-sm font-medium">Success</p>
-                </div>
-                <div className="space-y-2">
-                  <div className="w-full h-20 bg-red-600 rounded"></div>
+                <div className="space-y-2 w-full h-20 bg-red-600 rounded"></div>
                   <p className="text-sm font-medium">Destructive</p>
-                </div>
+              </div>
             </CardContent>
           </Card>
-              </div>
+</div>
 );
+</div>
 
-          </div>
-}
+    </CardHeader>
+    </CardHeader>
+    </CardHeader>
+  }

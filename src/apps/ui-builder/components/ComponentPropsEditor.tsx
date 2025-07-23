@@ -8,7 +8,7 @@ export default function ComponentPropsEditor() {const components = useBuilderSto
   if (!selectedComponent) return null;
   const { type, props, schema   }: any = selectedComponent;
   const handleChange = (key: string, value: string) => {
-    updateProps(selectedComponent.id, { [key]: value });
+    updateProps(selectedComponent.id, { [key]: value })
   };
   return (
     <div className="p-4 bg-white border-t border-gray-300"></div>

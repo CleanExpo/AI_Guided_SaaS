@@ -1,21 +1,20 @@
 'use client';
-
 import React from 'react';
-
 import { usePathname } from 'next/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ReactNode, useEffect, useState } from 'react';
 interface ConditionalLayoutProps {
-children: ReactNod;e
-
+children: ReactNod
+e
 }
+
 export function ConditionalLayout({ children }: ConditionalLayoutProps): ConditionalLayoutProps) {
   const pathname = usePathname();
-  const [isClient, setIsClient] = useState<any>(false);
+  const [isClient, setIsClient] = useState<any>(false)
   // Prevent hydration mismatch by ensuring client-side rendering consistency
   useEffect(() => {
-    setIsClient(true);
+    setIsClient(true)
   }, []);
   // Routes that should NOT show the app header/footer
   const noLayoutRoutes = [
@@ -33,8 +32,9 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps): Conditi
     <React.Fragment>{isClient && shouldShowLayout && <Header />}
       <main className={isClient && shouldShowLayout ? "flex-1 pt-20 pb-8" : "flex-1"}>
         {children}
-      </main>
+</main>
       {isClient && shouldShowLayout && <Footer />}</React.Fragment>
-  );
-
-    }
+  )
+    
+    </any>
+  }

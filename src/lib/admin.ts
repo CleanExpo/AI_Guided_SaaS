@@ -1,81 +1,81 @@
 // Admin panel service for system management
 export interface AdminUser {
   id: string,
-    email: string,
-    name: string,
-    role: 'super_admin' | 'admin' | 'moderator'status: 'active' | 'suspended' | 'pending',
+  email: string,
+  name: string,
+  role: 'super_admin' | 'admin' | 'moderator', status: 'active' | 'suspended' | 'pending',
   lastLogin: Date,
-    createdAt: Date,
-    permissions: AdminPermission[]
+  createdAt: Date,
+  permissions: AdminPermission[]
 };
 export interface AdminPermission {
   id: string,
-    name: string,
-    description: string,
-    category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
+  name: string,
+  description: string,
+  category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
 };
 export interface SystemStats {
   totalUsers: number,
-    activeUsers: number,
-    totalProjects: number,
-    totalTemplates: number,
-    totalRevenue: number,
-    systemHealth: 'healthy' | 'warning' | 'critical',
+  activeUsers: number,
+  totalProjects: number,
+  totalTemplates: number,
+  totalRevenue: number,
+  systemHealth: 'healthy' | 'warning' | 'critical',
   uptime: number,
-    errorRate: number
+  errorRate: number
 };
 export interface UserManagement {
   id: string,
-    email: string,
-    name: string,
-    subscription: 'free' | 'pro' | 'enterprise',
+  email: string,
+  name: string,
+  subscription: 'free' | 'pro' | 'enterprise',
   status: 'active' | 'suspended' | 'deleted',
   joinDate: Date,
-    lastActive: Date,
-    projectCount: number,
-    billingStatus: 'current' | 'past_due' | 'canceled'
+  lastActive: Date,
+  projectCount: number,
+  billingStatus: 'current' | 'past_due' | 'canceled'
 };
 export interface ContentModeration {
   id: string,
-    type: 'template' | 'project' | 'comment' | 'collaboration',
+  type: 'template' | 'project' | 'comment' | 'collaboration',
   title: string,
-    author: string,
-    status: 'pending' | 'approved' | 'rejected' | 'flagged',
+  author: string,
+  status: 'pending' | 'approved' | 'rejected' | 'flagged',
   reportCount: number,
-    createdAt: Date;
-  reviewedAt?: Date;
-  reviewedBy?: string;
+  createdAt: Date,
+  reviewedAt?: Date,
+  reviewedBy?: string
 };
 export interface SystemConfiguration {
   id: string,
-    category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security',
+  category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security',
   key: string,
-    value: string,
-    description: string,
-    type: 'string' | 'number' | 'boolean' | 'json',
+  value: string,
+  description: string,
+  type: 'string' | 'number' | 'boolean' | 'json',
   isSecret: boolean,
-    lastModified: Date,
-    modifiedBy: string
+  lastModified: Date,
+  modifiedBy: string
 };
 export interface AdminActivity {
   id: string,
-    adminId: string,
-    adminName: string,
-    action: string,
-    target: string,
-    details: Record<string, unknown>,
+  adminId: string,
+  adminName: string,
+  action: string,
+  target: string,
+  details: Record<string, unknown>,
   timestamp: Date,
-    ipAddress: string,
-    userAgent: string
+  ipAddress: string,
+  userAgent: string
 };
 export class AdminService {
-  private static, instance: AdminService
+  private static instance: AdminService
   private initialized = false
   static getInstance(): AdminService {
     if(!AdminService.instance) {
       AdminService.instance = new AdminService()
 }
-    return AdminService.instance;
+    return AdminService.instance
 }
   async initialize(): Promise<any> {
     if (this.initialized) return try {
@@ -84,8 +84,7 @@ export class AdminService {
     } catch (error) {
       console.error('Failed to initialize admin, service:', error)
       throw error
-}
-}
+}}
   // User Management
   async getUsers(page: number = 1, limit: number = 50, filters?: {
       status?: string
@@ -140,20 +139,17 @@ export class AdminService {
         const search = filters.search.toLowerCase();
         filteredUsers = filteredUsers.filter((user) =>
           user.name.toLowerCase().includes(search) ||
-          user.email.toLowerCase().includes(search)
-        )
+          user.email.toLowerCase().includes(search))
 }
       const _total = filteredUsers.length;
       const _pages = Math.ceil(total / limit);
       const _startIndex = (page - 1) * limit;
       const _users = filteredUsers.slice(startIndex, startIndex + limit);
-      return { users, total, pages };
-    } catch (error) {
+      return { users, total, pages }} catch (error) {
       console.error('Error fetching, users:', error)
       throw error
-}
-}
-  async updateUserStatus(userId: string, status: 'active' | 'suspended' | 'deleted', adminId: string): Promise<any> {
+}}
+  async updateUserStatus(userId: string, status: 'active' | 'suspended' | 'deleted'; adminId: string): Promise<any> {
     try {
       // Log admin activity
       await this.logAdminActivity(adminId, 'update_user_status', userId, { status })
@@ -161,12 +157,11 @@ export class AdminService {
     } catch (error) {
       console.error('Error updating user, status:', error)
       throw error
-}
-}
+}}
   // Content Moderation
   async getContentForModeration(page: number = 1, limit: number = 20, filters?: {
       type?: string
-      status?: string;
+      status?: string
     }): Promise<any> {
     try {
       const mockContent: ContentModeration[] = [
@@ -209,20 +204,17 @@ export class AdminService {
       const _pages = Math.ceil(total / limit);
       const _startIndex = (page - 1) * limit;
       const _content = filteredContent.slice(startIndex, startIndex + limit);
-      return { content, total, pages };
-    } catch (error) {
+      return { content, total, pages }} catch (error) {
       console.error('Error fetching content for, moderation:', error)
       throw error
-}
-}
-  async moderateContent(contentId: string, action: 'approve' | 'reject' | 'flag', adminId: string, reason?: string): Promise<any> {
+}}
+  async moderateContent(contentId: string, action: 'approve' | 'reject' | 'flag'; adminId: string, reason?: string): Promise<any> {
     try {
       await this.logAdminActivity(adminId, 'moderate_content', contentId, { action, reason })
     } catch (error) {
       console.error('Error moderating, content:', error)
       throw error
-}
-}
+}}
   // System Configuration
   async getSystemConfiguration(): Promise<any> {
     try {
@@ -272,20 +264,18 @@ export class AdminService {
     modifiedBy: 'admin@example.com'
 }
       ]
-      return mockConfig;
+      return mockConfig
     } catch (error) {
       console.error('Error fetching system, configuration:', error)
       throw error
-}
-}
-  async updateConfiguration(configId: string, value: string, adminId: string): Promise<any> {
+}}
+  async updateConfiguration(configId: string, value: string; adminId: string): Promise<any> {
     try {
       await this.logAdminActivity(adminId, 'update_configuration', configId, { value })
     } catch (error) {
       console.error('Error updating, configuration:', error)
       throw error
-}
-}
+}}
   // System Statistics
   async getSystemStats(): Promise<any> {
     try {
@@ -300,14 +290,13 @@ export class AdminService {
         uptime: 99.97,
     errorRate: 0.03
 }
-      return stats;
+      return stats
     } catch (error) {
       console.error('Error fetching system, stats:', error)
       throw error
-}
-}
+}}
   // Admin Activity Logging
-  async logAdminActivity(adminId: string, action: string, target: string, details: Record<string, unknown>, ipAddress: string = 'unknown', userAgent: string = 'unknown'): Promise<any> {
+  async logAdminActivity(adminId: string, action: string; target: string, details: Record<string, unknown>, ipAddress: string = 'unknown', userAgent: string = 'unknown'): Promise<any> {
     try {
       const activity: AdminActivity = {
     id: `activity_${Date.now()}`,``
@@ -323,13 +312,12 @@ export class AdminService {
       // In production, save to database
     } catch (error) {
       console.error('Error logging admin, activity:', error)
-}
-}
+}}
   async getAdminActivity(page: number = 1, limit: number = 50, filters?: {
       adminId?: string
       action?: string;
       dateFrom?: Date
-      dateTo?: Date;
+      dateTo?: Date
     }): Promise<any> {
     try {
       const mockActivities: AdminActivity[] = [
@@ -367,23 +355,20 @@ export class AdminService {
       const _pages = Math.ceil(total / limit);
       const _startIndex = (page - 1) * limit;
       const _activities = filteredActivities.slice(startIndex, startIndex + limit);
-      return { activities, total, pages };
-    } catch (error) {
+      return { activities, total, pages }} catch (error) {
       console.error('Error fetching admin, activity:', error)
       throw error
-}
-}
+}}
   // Permission Management
   async checkAdminPermission(_adminId: string, _permission: string): Promise<any> {
     try {
       // In production, check against database
       // For now, return true for demo purposes;
-      return true;
+      return true
     } catch (error) {
       console.error('Error checking admin, permission:', error)
-      return false;
-}
-}
+      return false
+}}
   async getAdminPermissions(): Promise<any> {
     try {
       const permissions: AdminPermission[] = [
@@ -418,12 +403,11 @@ export class AdminService {
           category: 'system'
 }
       ]
-      return permissions;
+      return permissions
     } catch (error) {
       console.error('Error fetching admin; permissions:', error)
       throw error
-}
-}
+}}
   // Health Checks
   async performSystemHealthCheck(): Promise<{
     status: 'healthy' | 'warning' | 'critical',
@@ -464,19 +448,15 @@ export class AdminService {
       const _hasFailures = checks.some(check => check.status === 'fail');
       const _hasWarnings = checks.some(check => check.status === 'warn');
       const _status = hasFailures ? 'critical' : hasWarnings ? 'warning' : 'healthy',
-      return { status, checks };
-    } catch (error) {
+      return { status, checks }} catch (error) {
       console.error('Error performing health, check:', error)
       return {
         status: 'critical',
         checks: [{
   name: 'System Health Check',
           status: 'fail',
-          message: 'Failed to perform health check';
+          message: 'Failed to perform health check'
   }]
-}
-}
-}
-}
+}}
 // Export singleton instance
 export const _adminService = AdminService.getInstance();

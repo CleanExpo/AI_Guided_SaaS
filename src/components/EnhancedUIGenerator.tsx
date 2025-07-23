@@ -1,15 +1,13 @@
 'use client';
-
 import React from 'react';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ProjectConfig } from '@/types';
 import { Palette, Sparkles, Wand2, Eye } from 'lucide-react';
 interface EnhancedUIGeneratorProps {
-projectConfig: ProjectConfi;g;
-    onUIGenerated: (ui: unknown) => voi;d
-
+projectConfig: ProjectConfi
+g,
+  onUIGenerated: (ui: unknown) => void
 };
 export default function EnhancedUIGenerator() {
   return (
@@ -23,7 +21,16 @@ export default function EnhancedUIGenerator() {
           <p className="text-gray-600 mb-4">
             Transform your UI with AI-powered enhancements tailored for{' '},
     {projectConfig.name
+</div>
+  
     </div>
+    </Card>
+    </div>
+    </Card>
+    </div>
+    </CardTitle>
+    </CardHeader>
+    </Card>
   }</p>
           <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4"><Card className="p-4">
               <div className="flex items-center gap-2 mb-2">
@@ -53,22 +60,13 @@ export default function EnhancedUIGenerator() {
         <CardHeader>
           <CardTitle>Coming Soon</CardTitle>
         <CardContent>
-          <p className="text-gray-600">
+          <p className="
             Advanced UI generation features will be available in the next
-            update.</p>
-    )
-  );
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </div>
-    </Card>
-    </div>
-    </Card>
-    </div>
-    </Card>
-    </div>
-    </CardContent>
-    </CardTitle>
-    </CardHeader>
-    </Card>
+            update."></p>
+        </div>
+    );;
+</CardContent>
+</Card>
+</Card>
+</CardContent>
+</CardHeader>

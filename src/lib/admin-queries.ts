@@ -1,83 +1,80 @@
 import { supabase } from './database';
 import { User, Project, Subscription, ActivityLog, UsageRecord, DatabaseService } from './database';
 export interface AdminStats {
-  totalUsers: number;
-  activeUsers: number;
-  newUsersToday: number;
-  newUsersThisWeek: number;
-  systemHealth: 'healthy' | 'warning' | 'critical';
-  uptime: string;
-  cpuUsage: string;
-  memoryUsage: string;
-  totalProjects: number;
-  activeProjects: number;
+  totalUsers: number,
+  activeUsers: number,
+  newUsersToday: number,
+  newUsersThisWeek: number,
+  systemHealth: 'healthy' | 'warning' | 'critical',
+  uptime: string,
+  cpuUsage: string,
+  memoryUsage: string,
+  totalProjects: number,
+  activeProjects: number,
   apiCalls: {
-    today: number;
-    thisWeek: number;
-    thisMonth: number;
-  };
+    today: number,
+  thisWeek: number,
+  thisMonth: number
+  },
   recentActivity: Array<{
-    type: string;
-    message: string;
-    timestamp: string;
-  }>;
+    type: string,
+    message: string,
+    timestamp: string
+  }>
 }
+
 export interface AnalyticsData {
   overview: {
-    totalUsers: number;
-    totalProjects: number;
-    totalApiCalls: number;
-    revenue: number;
-    activeSubscriptions: number;
-    churnRate: number;
-  };
+    totalUsers: number,
+  totalProjects: number,
+  totalApiCalls: number,
+  revenue: number,
+  activeSubscriptions: number,
+  churnRate: number
+  },
   userMetrics: {
-    newUsers: Array<{ date: string; count: number }>;
-    activeUsers: Array<{ date: string; count: number }>;
-    retentionRate: number;
-    avgSessionDuration: string;
+    newUsers: Array<{ date: string, count: number }>;
+    activeUsers: Array<{ date: string, count: number }>;
+    retentionRate: number,
+    avgSessionDuration: string
   };
   projectMetrics: {
-    projectsCreated: Array<{ date: string; count: number }>;
-    projectTypes: Array<{ type: string; count: number; percentage: number }>;
-    avgCompletionTime: string;
-    successRate: number;
+    projectsCreated: Array<{ date: string, count: number }>;
+    projectTypes: Array<{ type: string, count: number; percentage: number }>;
+    avgCompletionTime: string,
+    successRate: number
   };
   apiMetrics: {
-    apiCalls: Array<{ date: string; count: number }>;
-    apiLatency: Array<{ date: string; avg: number; p95: number; p99: number }>;
-    errorRate: number;
-    topEndpoints: Array<{ endpoint: string; calls: number; avgTime: number }>;
+    apiCalls: Array<{ date: string, count: number }>;
+    apiLatency: Array<{ date: string, avg: number; p95: number, p99: number }>;
+    errorRate: number,
+    topEndpoints: Array<{ endpoint: string, calls: number; avgTime: number }>
   };
   platformHealth: {
-    uptime: number;
-    avgResponseTime: number;
-    errorRate: number;
-    satisfaction: number;
-  };
-}
+    uptime: number,
+    avgResponseTime: number,
+    errorRate: number,
+    satisfaction: number
+  }}
+
 export class AdminQueries {
   // Get admin dashboard statistics
   static async getAdminStats(): Promise<AdminStats> {
     if(!supabase) {
-      throw new Error('Database not configured');
+      throw new Error('Database not configured')
     }
-    
     try {
       // Get total users
       const { count: totalUsers } = await supabase
         .from('users')
         .select('*', { count: 'exact', head: true });
-        
       // Get active users (logged in within last 30 days)
       const thirtyDaysAgo = new Date();
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-      
       const { data: activeSessions } = await supabase
         .from('sessions')
         .select('user_id')
-        .gte('expires', thirtyDaysAgo.toISOString());
-        
+        .gte('expires', thirtyDaysAgo.toISOString();
       const activeUsers = new Set(activeSessions?.map((s: any) => s.user_id) || []).size;
       // Get new users today
       const todayStart = new Date();
@@ -85,14 +82,14 @@ export class AdminQueries {
       const { count: newUsersToday } = await supabase
         .from('users')
         .select('*', { count: 'exact', head: true })
-        .gte('created_at', todayStart.toISOString());
+        .gte('created_at', todayStart.toISOString();
       // Get new users this week
       const weekStart = new Date();
       weekStart.setDate(weekStart.getDate() - 7);
       const { count: newUsersThisWeek } = await supabase
         .from('users')
         .select('*', { count: 'exact', head: true })
-        .gte('created_at', weekStart.toISOString());
+        .gte('created_at', weekStart.toISOString();
       // Get total projects
       const { count: totalProjects } = await supabase
         .from('projects')
@@ -101,25 +98,25 @@ export class AdminQueries {
       const { count: activeProjects } = await supabase
         .from('projects')
         .select('*', { count: 'exact', head: true })
-        .gte('updated_at', weekStart.toISOString());
+        .gte('updated_at', weekStart.toISOString();
       // Get API calls (from activity logs)
       const { count: apiCallsToday } = await supabase
         .from('activity_logs')
         .select('*', { count: 'exact', head: true })
         .eq('action', 'api_call')
-        .gte('created_at', todayStart.toISOString());
+        .gte('created_at', todayStart.toISOString();
       const { count: apiCallsThisWeek } = await supabase
         .from('activity_logs')
         .select('*', { count: 'exact', head: true })
         .eq('action', 'api_call')
-        .gte('created_at', weekStart.toISOString());
+        .gte('created_at', weekStart.toISOString();
       const monthStart = new Date();
       monthStart.setDate(monthStart.getDate() - 30);
       const { count: apiCallsThisMonth } = await supabase
         .from('activity_logs')
         .select('*', { count: 'exact', head: true })
         .eq('action', 'api_call')
-        .gte('created_at', monthStart.toISOString());
+        .gte('created_at', monthStart.toISOString();
       // Get recent activity
       const { data: recentActivityData } = await supabase
         .from('activity_logs')
@@ -130,7 +127,7 @@ export class AdminQueries {
         type: activity.action,
         message: this.formatActivityMessage(activity),
         timestamp: activity.created_at
-      }));
+      });
       // Calculate system health (simplified for now)
       const systemHealth = 'healthy' as const; // TODO: Implement real health checks
       const uptime = '99.9%'; // TODO: Calculate from monitoring data
@@ -153,18 +150,16 @@ export class AdminQueries {
           thisMonth: apiCallsThisMonth || 0
         },
         recentActivity
-      };
-    } catch (error) {
+      }} catch (error) {
       console.error('Error fetching admin stats:', error);
-      throw error;
-    }
-}
+      throw error
+    }}
   // Get analytics data for specified time range
   static async getAnalytics(range: string): Promise<any> {
     if(!supabase) {
-      throw new Error('Database not configured');
+      throw new Error('Database not configured')
 }
-    const days =
+    const days =;
       range === '24h' ? 1 : range === '7d' ? 7 : range === '30d' ? 30 : 90;
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
@@ -207,22 +202,14 @@ export class AdminQueries {
     topEndpoints: apiMetrics.topEndpoints
         },
         platformHealth
-      };
-    } catch (error) {
+      }} catch (error) {
       console.error('Error fetching, analytics:', error);
-      throw error;
-}
-}
+      throw error
+}}
   // Get paginated users list with filters
-  static async getUsers(params: {
-    page: number, limit: number;
-    search?: string;
-    status?: string;
-    sortBy?: string;
-    sortOrder?: 'asc' | 'desc';
-    }): Promise<any> {
+  static async getUsers(params: { page: number, limit: number, search?: string, status?: string, sortBy?: string, sortOrder?: 'asc' | 'desc' }): Promise<any> {
     if(!supabase) {
-      throw new Error('Database not configured');
+      throw new Error('Database not configured')
 }
     const { page,
       limit,
@@ -236,7 +223,7 @@ export class AdminQueries {
       let query = supabase.from('users').select('*', { count: 'exact' });
       // Apply search filter
       if (search) {
-        query = query.or(`email.ilike.%${search}%,name.ilike.%${search}%`);
+        query = query.or(`email.ilike.%${search}%,name.ilike.%${search}%`)
 }
       // Apply status filter (active = has valid session)
       if(status && status !== 'all') {
@@ -250,7 +237,7 @@ export class AdminQueries {
       const { data: users, count, error   }: any = await query;
       if (error) throw error;
       // Enrich user data with additional information
-      const enrichedUsers = await Promise.all(
+      const enrichedUsers = await Promise.all(;
         (users || []).map(async (user: any) => {
           // Get user's project count
           const { count: projectsCount   }: any = await supabase!
@@ -278,7 +265,7 @@ export class AdminQueries {
             .limit(1)
             .single();
           const sessionData = lastSession?.data;
-          const isActive =
+          const isActive =;
             sessionData?.expires && new Date(sessionData.expires) > new Date();
           return {
             id: user.id,
@@ -290,9 +277,7 @@ export class AdminQueries {
     lastLogin: sessionData?.expires || user.created_at,
     projectsCount: projectsCount || 0,
     apiCalls: apiCalls || 0
-          };
-        })
-      );
+          }});
       return {
         users: enrichedUsers,
             pagination: {
@@ -300,17 +285,14 @@ export class AdminQueries {
                     limit,
           total: count || 0,
               totalPages: Math.ceil((count || 0) / limit)
-        }
-      };
-    } catch (error) {
+        }} catch (error) {
       console.error('Error fetching, users:', error);
-      throw error;
-}
-}
+      throw error
+}}
   // Get single user details
   static async getUserById(userId: string): Promise<any> {
     if(!supabase) {
-      throw new Error('Database not configured');
+      throw new Error('Database not configured')
 }
     try {
       // Get user data
@@ -364,13 +346,10 @@ export class AdminQueries {
             stats: {
                     totalProjects: projects?.length || 0,
               totalApiCalls: totalApiCalls || 0
-                 }
-      };
-    } catch (error) {
+                 }} catch (error) {
       console.error('Error fetching user details:', error);
-      throw error;
-}
-}
+      throw error
+}}
   // Helper methods
   private static formatActivityMessage(activity: ActivityLog) {
     const messages: Record<string, string> = {
@@ -381,13 +360,13 @@ export class AdminQueries {
       project_exported: 'Exported a project',
       template_used: 'Used a template'
     };
-    return messages[activity.action] || activity.action;
+    return messages[activity.action] || activity.action
 }
   private static async getUserMetrics(startDate: Date, days: number): Promise<any> {
     // Generate daily user metrics
-    const dates: any[] = [];
-    const newUsersByDate: any[] = [];
-    const activeUsersByDate: any[] = [];
+    const dates = [];
+    const newUsersByDate = [];
+    const activeUsersByDate = [];
     for(let i = 0; i < days; i++) {
       const date = new Date(startDate);
       date.setDate(date.getDate() + i);
@@ -399,13 +378,13 @@ export class AdminQueries {
         .from('users')
         .select('*', { count: 'exact', head: true })
         .gte('created_at', date.toISOString())
-        .lt('created_at', nextDate.toISOString());
+        .lt('created_at', nextDate.toISOString();
       // Get active users for this date
       const { data: sessions }: any = await supabase!
         .from('sessions')
         .select('user_id')
         .gte('expires', date.toISOString())
-        .lt('expires', nextDate.toISOString());
+        .lt('expires', nextDate.toISOString();
       const activeCount = new Set(sessions?.map((s) => s.user_id) || []).size;
       dates.push(dateStr);
       newUsersByDate.push({
@@ -421,13 +400,12 @@ export class AdminQueries {
           day: 'numeric'
         }),
         count: activeCount
-      }};
-}
+      }}
     // Calculate retention rate (simplified)
     const { count: totalUsers }: any = await supabase!
       .from('users')
       .select('*', { count: 'exact', head: true });
-    const retentionRate = totalUsers
+    const retentionRate = totalUsers;
       ? (activeUsersByDate[activeUsersByDate.length - 1].count / totalUsers) *
         100
       : 0;
@@ -437,15 +415,14 @@ export class AdminQueries {
       activeUsersByDate,
       retentionRate: Math.round(retentionRate * 10) / 10,
     avgSessionDuration: '12m 34s' // TODO: Calculate from real session data
-}
-}
+}}
   private static async getProjectMetrics(startDate: Date, days: number): Promise<any> {
     // Get total projects
     const { count: totalProjects   }: any = await supabase!
       .from('projects')
       .select('*', { count: 'exact', head: true });
     // Generate daily project creation metrics
-    const projectsByDate: any[] = [];
+    const projectsByDate = [];
     for(let i = 0; i < days; i++) {
       const date = new Date(startDate);
       date.setDate(date.getDate() + i);
@@ -455,21 +432,21 @@ export class AdminQueries {
         .from('projects')
         .select('*', { count: 'exact', head: true })
         .gte('created_at', date.toISOString())
-        .lt('created_at', nextDate.toISOString());
+        .lt('created_at', nextDate.toISOString();
       projectsByDate.push({
         date: date.toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric'
         }),
         count: count || 0
-      });
+      })
 }
     // Get project types distribution
     const { data: projects   }: any = await supabase!.from('projects').select('type');
     const typeCounts: Record<string, any> = {};
     projects?.forEach((p) => {
       const type = p.type || 'web';
-      typeCounts[type] = (typeCounts[type] || 0) + 1;
+      typeCounts[type] = (typeCounts[type] || 0) + 1
     });
     const projectTypes = Object.entries(typeCounts).map(([type, count]) => ({
       type: type.charAt(0).toUpperCase() + type.slice(1);
@@ -481,21 +458,20 @@ export class AdminQueries {
       .from('projects')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'completed');
-    const successRate = totalProjects
+    const successRate = totalProjects;
       ? Math.round((completedProjects! / totalProjects) * 100)
       : 0;
     return {
             totalProjects: totalProjects || 0,
       projectsByDate,
       projectTypes,
-      avgCompletionTime: '2h 15m', // TODO: Calculate from real data
+      avgCompletionTime: '2h 15m'; // TODO: Calculate from real data
       successRate
-    };
-  }
+    }}
   private static async getApiMetrics(startDate: Date, days: number): Promise<any> {
     // Generate daily API call metrics
-    const callsByDate: any[] = [];
-    const latencyByDate: any[] = [];
+    const callsByDate = [];
+    const latencyByDate = [];
     let totalCalls = 0;
     for(let i = 0; i < days; i++) {
       const date = new Date(startDate);
@@ -507,7 +483,7 @@ export class AdminQueries {
         .select('*', { count: 'exact', head: true })
         .eq('action', 'api_call')
         .gte('created_at', date.toISOString())
-        .lt('created_at', nextDate.toISOString());
+        .lt('created_at', nextDate.toISOString();
       const callCount = count || 0;
       totalCalls += callCount;
       callsByDate.push({
@@ -526,7 +502,7 @@ export class AdminQueries {
         avg: Math.floor(Math.random() * 50) + 100,
     p95: Math.floor(Math.random() * 100) + 200,
     p99: Math.floor(Math.random() * 150) + 300
-      });
+      })
 }
     // Get top endpoints (mock for now)
     const topEndpoints = [
@@ -559,10 +535,9 @@ export class AdminQueries {
       totalCalls,
       callsByDate,
       latencyByDate,
-      errorRate: 0.12, // TODO: Calculate from real error logs
+      errorRate: 0.12; // TODO: Calculate from real error logs
       topEndpoints
-    };
-  }
+    }}
   private static async getRevenueMetrics(): Promise<any> {
     // Get active subscriptions
     const { count: activeSubscriptions   }: any = await supabase!
@@ -574,7 +549,7 @@ export class AdminQueries {
       .from('payments')
       .select('amount')
       .eq('status', 'succeeded');
-    const totalRevenue =
+    const totalRevenue =;
       payments?.reduce((sum, p) => sum + (p.amount || 0), 0) || 0;
     // Calculate churn rate (simplified)
     const { count: canceledSubscriptions   }: any = await supabase!
@@ -583,20 +558,17 @@ export class AdminQueries {
       .eq('status', 'canceled')
       .gte(
         'canceled_at',
-        new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
-      );
+        new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
     const totalSubs = (activeSubscriptions || 0) + (canceledSubscriptions || 0);
-    const churnRate = totalSubs
+    const churnRate = totalSubs;
       ? Math.round((canceledSubscriptions! / totalSubs) * 100 * 10) / 10
       : 0;
     return {
-            totalRevenue: totalRevenue / 100,
+            totalRevenue: totalRevenue / 100;
         // Convert from cents
       activeSubscriptions: activeSubscriptions || 0,
             churnRate
-    };
-  }
-
+    }}
   private static async getPlatformHealth(): Promise<any> {
     // These would come from real monitoring systems in production
     return {
@@ -604,6 +576,4 @@ export class AdminQueries {
     avgResponseTime: 178,
     errorRate: 0.12,
           satisfaction: 94.7
-    };
-  }
-}
+    }}

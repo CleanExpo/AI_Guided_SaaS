@@ -5,57 +5,52 @@ import fs from 'fs';
 import path from 'path';
 interface HealingAction {
   type:
-    | 'update_env';
+    | 'update_env'
     | 'rotate_key'
     | 'sync_config'
     | 'manual_fix'
     | 'suggest_fix',
     description: string,
-    automated: boolean,
-    risk: 'low' | 'medium' | 'high';
-  command?: string;
-  suggestedValue?: string;
+  automated: boolean,
+  risk: 'low' | 'medium' | 'high',
+  command?: string,
+  suggestedValue?: string
 };
 interface HealingPlan {
   issues: string[],
-    actions: HealingAction[],
-    estimatedTime: string,
-    confidence: number
+  actions: HealingAction[],
+  estimatedTime: string,
+  confidence: number
 };
 export class SelfHealingAgent {
-  private, epcEngine: EPCEngine;
-  private, envManager: EnvManager;
-  private, aiService: AIService;
-  private, healingHistory: any[] = [];
-  private, historyPath: string;
+  private epcEngine: EPCEngine;
+  private envManager: EnvManager;
+  private aiService: AIService;
+  private healingHistory: any[] = [];
+  private historyPath: string;
   constructor(projectRoot: string = process.cwd()) {
     this.epcEngine = new EPCEngine(projectRoot);
     this.envManager = new EnvManager(projectRoot);
     this.aiService = new AIService();
     this.historyPath = path.join(projectRoot, '.docs', 'healing-history.json');
-    this.loadHistory();
+    this.loadHistory()
 }
   private loadHistory() {
     try {
       if (fs.existsSync(this.historyPath)) {
         this.healingHistory = JSON.parse(
-          fs.readFileSync(this.historyPath, 'utf-8')
-        );
-}
-    } catch (error) {
-      console.error('Failed to load healing, history:', error);
-}
-}
+          fs.readFileSync(this.historyPath, 'utf-8'))
+}} catch (error) {
+      console.error('Failed to load healing, history:', error)
+}}
   private saveHistory() {
     try {
       fs.writeFileSync(
         this.historyPath,
-        JSON.stringify(this.healingHistory, null, 2)
-      );
+        JSON.stringify(this.healingHistory, null, 2))
     } catch (error) {
-      console.error('Failed to save healing, history:', error);
-}
-}
+      console.error('Failed to save healing, history:', error)
+}}
   /**
    * Analyze issues and create healing plan
    */
@@ -76,15 +71,15 @@ export class SelfHealingAgent {
     // Generate healing actions for each type of issue
     for(const missing of epcResult.missing) {
       const action = await this.generateMissingVarAction(missing);
-      if (action) plan.actions.push(action);
+      if (action) plan.actions.push(action)
 }
     for(const invalid of epcResult.invalid) {
       const action = await this.generateInvalidVarAction(invalid);
-      if (action) plan.actions.push(action);
+      if (action) plan.actions.push(action)
 }
     for(const outdated of epcResult.outdated) {
       const action = await this.generateOutdatedVarAction(outdated);
-      if (action) plan.actions.push(action);
+      if (action) plan.actions.push(action)
 }
     // Calculate confidence based on automated actions
     const _automatedCount = plan.actions.filter((a) => a.automated).length;
@@ -92,7 +87,7 @@ export class SelfHealingAgent {
       Math.round((automatedCount / plan.actions.length) * 100) || 0;
     // Estimate time based on actions
     plan.estimatedTime = this.estimateHealingTime(plan.actions);
-    return plan;
+    return plan
 }
   /**
    * Generate action for missing variable
@@ -113,8 +108,7 @@ export class SelfHealingAgent {
           automated: false,
     risk: 'medium',
           command: `npm run, env: setup`;``
-          suggestedValue: this.getDefaultValue(varName)}
-    } catch (error) {
+          suggestedValue: this.getDefaultValue(varName)}} catch (error) {
         // Fallback if AI fails
         return {
           type: 'manual_fix',
@@ -122,16 +116,13 @@ export class SelfHealingAgent {
           automated: false,
     risk: 'low',
           command: `echo "${varName}=your_value_here" >> .env.local`
-}
-}
-}
+}}
     return {
       type: 'manual_fix',
       description: `Configure ${varName}`
       automated: false,
     risk: 'low'
-}
-}
+}}
   /**
    * Generate action for invalid variable
    */
@@ -144,15 +135,13 @@ export class SelfHealingAgent {
         automated: false,
     risk: 'low',
         suggestedValue: config.example || 'Check documentation for correct format'
-}
-}
+}}
     return {
       type: 'manual_fix',
       description: `Validate and fix ${varName} value`
       automated: false,
     risk: 'low'
-}
-}
+}}
   /**
    * Generate action for outdated variable
    */
@@ -166,8 +155,7 @@ export class SelfHealingAgent {
         automated: true,
     risk: 'low',
         command: 'npm run, env: sync'
-}
-}
+}}
     // Suggest key rotation for sensitive vars
     if (varName.includes('SECRET') || varName.includes('KEY')) {
       return {
@@ -176,9 +164,8 @@ export class SelfHealingAgent {
         automated: false,
     risk: 'medium',
         command: `Visit provider dashboard to regenerate ${varName}`
-}
-}
-    return null;
+}}
+    return null
 }
   /**
    * Execute healing plan
@@ -194,15 +181,13 @@ export class SelfHealingAgent {
       if (action.automated && (autoApprove || action.risk === 'low')) {
         try {
           await this.applyAction(action);
-          result.applied.push(action.description);
+          result.applied.push(action.description)
         } catch (error) {
           result.failed.push(action.description);
-          result.success = false;
-}
-      } else {
-        result.manual.push(action.description);
-}
-}
+          result.success = false
+}} else {
+        result.manual.push(action.description)
+}}
     // Log healing attempt
     this.healingHistory.push({
       timestamp: new Date().toISOString(),
@@ -211,7 +196,7 @@ export class SelfHealingAgent {
       autoApproved: autoApprove
     }};
     this.saveHistory();
-    return result;
+    return result
 }
   /**
    * Apply a healing action
@@ -220,14 +205,10 @@ export class SelfHealingAgent {
       case 'sync_config':
         await this.envManager.sync();
         break;
-        break;
-break;
-
       case 'update_env':
     // Update env file with suggested value
     break;
-
-    break;
+    break
 }
         if(action.suggestedValue) {
           // Implementation for updating env file
@@ -236,9 +217,8 @@ break;
     default:
         throw new Error(
           `Cannot automatically apply, action: type: ${action.type}`
-        );
-}
-}
+        )
+}}
   /**
    * Identify service from variable name
    */
@@ -256,42 +236,41 @@ break;
 };
     for (const [pattern, service] of Object.entries(patterns)) {
       if (varName.includes(pattern)) {
-        return service;
-}
-}
-    return 'Unknown Service';
+        return service
+}}
+    return 'Unknown Service'
 }
   /**
    * Get variable configuration
    */
   private getVariableConfig(varName: string) { try {
       const _configPath = path.join(process.cwd(), '.docs', 'env.config.json');
-      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8');
       for (const service of Object.values(config.services)) {
         if ((service as any).variables[varName]) {
-          return (service as any).variables[varName];
+          return (service as any).variables[varName]
          } catch (error) {
-      console.error('Failed to get variable config:', error);
+      console.error('Failed to get variable config:', error)
 }
-    return null;
+    return null
 }
   /**
    * Get default value for variable
    */
   private getDefaultValue(varName: string) { try {
-      const _defaultsPath = path.join(
+      const _defaultsPath = path.join(;
         process.cwd(),
         '.docs',
         'env.defaults.json'
       );
-      const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8'));
+      const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8');
       for (const service of Object.values(defaults.defaults)) {
         if ((service as any)[varName]) {
-          return (service as any)[varName].value || '';
+          return (service as any)[varName].value || ''
      } catch (error) {
-      console.error('Failed to get default, value:', error);
+      console.error('Failed to get default, value:', error)
 }
-    return '';
+    return ''
 }
   /**
    * Check if variable had recent changes
@@ -302,10 +281,9 @@ break;
       .filter(
         h: any =>
           h.timestamp >
-          new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
-      )
-      .find(h => h.plan.issues.some((i: string) => i.includes(varName)));
-    return !!recentHealing;
+          new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
+      .find(h => h.plan.issues.some((i: string) => i.includes(varName));
+    return !!recentHealing
 }
   /**
    * Estimate time for healing actions
@@ -314,18 +292,17 @@ break;
     const _automated = actions.filter((a) => a.automated).length;
     const manual = actions.filter((a) => !a.automated).length;
     if(manual === 0) {
-      return 'Less than 1 minute';
+      return 'Less than 1 minute'
     } else if (manual <= 3) {
-      return '2-5 minutes';
+      return '2-5 minutes'
     } else {
-      return '5-10 minutes';
-}
-}
+      return '5-10 minutes'
+}}
   /**
    * Get healing suggestions using AI
    */
   async getAISuggestions(issues: string[]): Promise<any> {
-    const _prompt = `As a DevOps expert, analyze these environment configuration issues and suggest, fixes: ``
+    const _prompt = `As a DevOps expert, analyze these environment configuration issues and suggest, fixes: ``;
 ${issues.join('\n')}
 Provide concise, actionable suggestions for each issue. Focus, on:
 1. Most likely cause
@@ -334,5 +311,5 @@ Provide concise, actionable suggestions for each issue. Focus, on:
     try {
       const response = await this.aiService.generateResponse(prompt);
       return response.message.split('\n').filter((s) => s.trim())} catch (error) { console.error('Failed to get AI, suggestions:', error);
-      return ['Unable to get AI suggestions. Please check documentation.'];
+      return ['Unable to get AI suggestions. Please check documentation.']
 }

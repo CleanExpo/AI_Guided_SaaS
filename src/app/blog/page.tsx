@@ -54,6 +54,7 @@ export default function BlogPage() {
             Stay updated with the latest news, insights, and developments from AI Guided SaaS Platform.
           </p>
         </div>
+        
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
             <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -85,11 +86,13 @@ export default function BlogPage() {
             </Card>
           ))}
         </div>
+        
         <div className="text-center mt-12">
           <Button variant="outline" size="lg">
             Load More Posts
           </Button>
-              </div>
-);
-
-      }
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -11,19 +11,33 @@
       "description": "Sequential thinking server for WSL environment"
     },
     "context7": {
-      "command": "npx",
-      "args": ["-y", "--node-options=--experimental-vm-modules", "@upstash/context7-mcp@1.0.6"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "--node-options=--experimental-vm-modules", "@upstash/context7-mcp@1.0.6"],
       "env": {}
     },
     "memory": {
-      "command": "npx", 
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "command": "cmd", 
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-memory"],
       "env": {}
     },
     "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
       "env": {}
+    },
+    "puppeteer": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-puppeteer"],
+      "env": {},
+      "description": "Browser automation MCP server using Puppeteer"
+    },
+    "github": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+      },
+      "description": "GitHub integration MCP server - requires GITHUB_PERSONAL_ACCESS_TOKEN"
     }
   }
 }

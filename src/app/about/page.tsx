@@ -20,6 +20,7 @@ export default function AboutPage() {
               our platform empowers you to build production-ready applications faster than ever before.
             </p>
           </section>
+          
           <section>
             <h2 className="text-2xl font-semibold mb-4">What We Do</h2>
             <p className="text-gray-600 leading-relaxed">
@@ -28,6 +29,7 @@ export default function AboutPage() {
               automated deployment, we handle the complex parts so you can focus on what matters most.
             </p>
           </section>
+          
           <section>
             <h2 className="text-2xl font-semibold mb-4">Why Choose Us</h2>
             <ul className="list-disc list-inside text-gray-600 space-y-2">

@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -11,33 +10,31 @@ export default function AdminDirectPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-
+    
     try {
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
       });
-
+      
       if (response.ok) {
         router.push('/admin');
-      } else {
+} else {
         setError('Invalid admin password');
-      }
+}
     } catch (error) {
       setError('Authentication failed');
-    } finally {
+} finally {
       setIsLoading(false);
-    }
+}
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
@@ -58,8 +55,6 @@ export default function AdminDirectPage() {
             </div>
             {error && (
               <div className="text-red-600 text-sm">{error}</div>
-            
-              
             )}
             <Button
               type="submit"
@@ -71,8 +66,6 @@ export default function AdminDirectPage() {
           </form>
         </CardContent>
       </Card>
-          </div>
-
-        );
-
-      }
+    </div>
+  );
+}

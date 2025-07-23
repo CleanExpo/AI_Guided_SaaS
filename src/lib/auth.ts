@@ -14,22 +14,20 @@ export const authOptions: NextAuthOptions = { providers: [
   adapter: supabase ? SupabaseAdapter({
   url: supabaseUrl!,
     secret: supabaseKey!) : undefined,
-    session: {,
-  strategy: 'jwt',
-  callbacks: {
-    async jwt({ token, account, profile    }): Promise<any> {
+    session: { strategy: 'jwt', callbacks: {
+    async jwt({ token, account, profile }): Promise<any> {
       if(account && profile) {
         token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
+        token.refreshToken = account.refresh_token
 }
-      return token;
+      return token
     },
     async session({ session, token   }): Promise<any> {
       if (token) {
         session.accessToken = token.accessToken as string;
-        session.refreshToken = token.refreshToken as string;
+        session.refreshToken = token.refreshToken as string
 }
-      return session;
+      return session
     },
   pages: {
     signIn: '/auth/signin',

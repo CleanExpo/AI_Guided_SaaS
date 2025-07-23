@@ -10,7 +10,7 @@ export default function CodeViewer() {
     .join('\n\n');
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code);
-    alert('Code copied to clipboard!');
+    alert('Code copied to clipboard!')
   };
   const handleDownload = (): void => {
     const blob = new Blob([code], { type: 'text/plain' });
@@ -19,10 +19,10 @@ export default function CodeViewer() {
     link.download = 'exported-ui-builder-code.jsx';
     link.href = url;
     link.click();
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(url)
   };
   const handleExportProject = (): void => {
-    exportProjectAsZip(components);
+    exportProjectAsZip(components)
   };
   return (
     <section className="bg-black text-green-300 font-mono p-4 overflow-auto max-h-64">
@@ -47,5 +47,7 @@ export default function CodeViewer() {
       <pre className="text-sm whitespace-pre-wrap">
         {code || '// Add, components to generate code'
     </div>
+  
+    </section>
   }</pre>
-</div></section>
+</div>

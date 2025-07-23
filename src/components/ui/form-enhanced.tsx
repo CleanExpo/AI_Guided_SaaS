@@ -1,9 +1,7 @@
 'use client';
-
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { CheckIcon, AlertIcon, ErrorIcon } from './icons';
-
 // Enhanced Input Component
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: 'default' | 'filled' | 'underlined' | 'outlined';
@@ -16,32 +14,28 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   helperText?: string;
   errorText?: string;
   label?: string;
-  required?: boolean;
-  loading?: boolean;
+  required?: boolean
+  loading?: boolean
 }
-
 const inputVariants = {
   default: 'border border-input bg-background',
-  filled: 'border-0 bg-brand-secondary-100 dark:bg-brand-secondary-800',
-  underlined: 'border-0 border-b-2 border-input bg-transparent rounded-none',
+  filled: 'border-0 bg-brand-secondary-100 dark: bg-brand-secondary-800',
+  underlined: 'border-0 border-b-2 border-input bg-transparent rounded-none'
   outlined: 'border-2 border-input bg-background'
 };
-
 const inputSizes = {
   xs: 'h-7 px-2 text-xs',
   sm: 'h-8 px-3 text-sm',
   md: 'h-9 px-3 text-sm',
-  lg: 'h-10 px-4 text-base',
+  lg: 'h-10 px-4 text-base'
   xl: 'h-12 px-4 text-lg'
 };
-
 const inputStates = {
   default: '',
-  error: 'border-red-500 focus:border-red-500 focus:ring-red-500',
-  success: 'border-green-500 focus:border-green-500 focus:ring-green-500',
+  error: 'border-red-500 focus: border-red-500 focus:ring-red-500',
+  success: 'border-green-500 focus:border-green-500 focus:ring-green-500'
   warning: 'border-yellow-500 focus:border-yellow-500 focus:ring-yellow-500'
 };
-
 export function InputEnhanced({
   className,
   variant = 'default',
@@ -62,55 +56,42 @@ export function InputEnhanced({
   const generatedId = React.useId();
   const inputId = id || generatedId;
   const hasError = state === 'error' || !!errorText;
-  const displayText = hasError ? errorText : helperText;
-
+  const displayText = hasError ? errorText : helperText
   const StateIcon = () => {
     if (loading) {
       return (
-        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
-      );
+        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full" >)
     }
     switch (state) {
-      case 'error':
+      case 'error':</div>
         return <ErrorIcon size="sm" color="current" className="text-red-500" />;
       case 'success':
         return <CheckIcon size="sm" color="current" className="text-green-500" />;
       case 'warning':
-        return <AlertIcon size="sm" color="current" className="text-yellow-500" />;
-      default:
-        return rightIcon;
-    }
-  };
-
+        return <AlertIcon size="sm" color="current" className="text-yellow-500" />
+      default: return rightIcon
+    }};
   return (
     <div className="w-full">
-      {label && (
+      {label && (</div>
         <label
           htmlFor={inputId}
           className="block text-sm font-medium text-foreground mb-1"
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-      
-              
-            )}
+</label>
+      )}
       <div className="relative flex items-center">
-        {leftAddon && (
+        {leftAddon && (</div>
           <div className="flex items-center px-3 border border-r-0 border-input bg-brand-secondary-50 dark:bg-brand-secondary-900 rounded-l-md">
-            {leftAddon}
-          </div>
-        
-              
-            )}
+            {leftAddon}</div>
+      )}
         <div className="relative flex-1">
-          {leftIcon && (
+          {leftIcon && (</div>
             <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
-              {leftIcon}
-            </div>
-          
-              
-            )}
+              {leftIcon}</div>
+      )}
           <input
             id={inputId}
             className={cn(
@@ -127,35 +108,24 @@ export function InputEnhanced({
             {...props} />
           {(rightIcon || state !== 'default' || loading) && (
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
-              <StateIcon />
-            </div>
-          
-              
-            )}
-        </div>
+              <StateIcon></div>
+      )}
+      </div>
         {rightAddon && (
           <div className="flex items-center px-3 border border-l-0 border-input bg-brand-secondary-50 dark:bg-brand-secondary-900 rounded-r-md">
-            {rightAddon}
-          </div>
-        
-              
-            )}
+            {rightAddon}</div>
+      )}
       </div>
       {displayText && (
         <p className={cn(
           'mt-1 text-xs',
           hasError ? 'text-red-500' : 'text-muted-foreground'
-        
-              
             )}>
           {displayText}
-        </p>
+</p>
       )}
-          </div>
-
-        );
-
-      }
+      </div>
+      )}
 // Enhanced Textarea Component
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: 'default' | 'filled' | 'outlined';
@@ -166,8 +136,8 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
   label?: string;
   required?: boolean;
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
-  maxLength?: number;
-  showCount?: boolean;
+  maxLength?: number
+  showCount?: boolean
 }
 
 export function TextareaEnhanced({
@@ -191,33 +161,28 @@ export function TextareaEnhanced({
   const hasError = state === 'error' || !!errorText;
   const displayText = hasError ? errorText : helperText;
   const currentLength = typeof value === 'string' ? value.length : 0;
-
   const textareaSizes = {
     sm: 'min-h-[60px] px-3 py-2 text-sm',
-    md: 'min-h-[80px] px-3 py-2 text-sm',
+    md: 'min-h-[80px] px-3 py-2 text-sm'
     lg: 'min-h-[120px] px-4 py-3 text-base'
   };
-
   const resizeClasses = {
     none: 'resize-none',
     vertical: 'resize-y',
-    horizontal: 'resize-x',
+    horizontal: 'resize-x'
     both: 'resize'
   };
-
   return (
     <div className="w-full">
-      {label && (
+      {label && (</div>
         <label
           htmlFor={textareaId}
           className="block text-sm font-medium text-foreground mb-1"
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-      
-              
-            )}
+</label>
+      )}
       <textarea
         id={textareaId}
         className={cn(
@@ -232,28 +197,21 @@ export function TextareaEnhanced({
         value={value}
         {...props} />
       <div className="flex justify-between items-center mt-1">
-        {displayText && (
+        {displayText && (</div>
           <p className={cn(
             'text-xs',
             hasError ? 'text-red-500' : 'text-muted-foreground'
-          
-              
             )}>
             {displayText}
-          </p>
-        )}
+</p>
+      )}
         {showCount && maxLength && (
           <p className="text-xs text-muted-foreground ml-auto">
             {currentLength}/{maxLength}
-          </p>
-        
-              
-            )}
-            </div>
-
-          );
-
-        }
+</p>
+      )}
+      </div>
+      )}
 // Enhanced Select Component
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   variant?: 'default' | 'filled' | 'outlined';
@@ -266,9 +224,9 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string,
   options: Array<{
     value: string,
-    label: string;
-    disabled?: boolean;
-  }>;
+    label: string
+    disabled?: boolean
+  }>
 }
 
 export function SelectEnhanced({
@@ -288,21 +246,18 @@ export function SelectEnhanced({
   const generatedId = React.useId();
   const selectId = id || generatedId;
   const hasError = state === 'error' || !!errorText;
-  const displayText = hasError ? errorText : helperText;
-
+  const displayText = hasError ? errorText : helperText
   return (
     <div className="w-full">
-      {label && (
+      {label && (</div>
         <label
           htmlFor={selectId}
           className="block text-sm font-medium text-foreground mb-1"
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-      
-              
-            )}
+</label>
+      )}
       <div className="relative">
         <select
           id={selectId}
@@ -319,20 +274,17 @@ export function SelectEnhanced({
           {placeholder && (
             <option value="" disabled>
               {placeholder}
-            </option>
-          
-              
-            )}
-          {options.map((option) => (
-            <option
+</option>
+      )}
+          {options.map((option) => (\n    <option
               key={option.value}
               value={option.value}
               disabled={option.disabled}
             >
               {option.label}
-            </option>
+</option>
           ))}
-        </select>
+</select>
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
           <svg
             className="w-4 h-4 text-muted-foreground"
@@ -345,31 +297,24 @@ export function SelectEnhanced({
               strokeLinejoin="round"
               strokeWidth={2}
               d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
       {displayText && (
         <p className={cn(
           'mt-1 text-xs',
           hasError ? 'text-red-500' : 'text-muted-foreground'
-        
-              
             )}>
           {displayText}
-        </p>
+</p>
       )}
-          </div>
-
-        );
-
-      }
+      </div>
+      )}
 // Enhanced Checkbox Component
 interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   checkboxSize?: 'sm' | 'md' | 'lg';
   variant?: 'default' | 'filled' | 'outlined';
   state?: 'default' | 'error' | 'success' | 'warning';
   label?: string;
-  description?: string;
-  indeterminate?: boolean;
+  description?: string
+  indeterminate?: boolean
 }
 
 export function CheckboxEnhanced({
@@ -385,29 +330,24 @@ export function CheckboxEnhanced({
 }: CheckboxProps) {
   const generatedId = React.useId();
   const checkboxId = id || generatedId;
-  const checkboxRef = React.useRef<HTMLInputElement>(null);
-
+  const checkboxRef = React.useRef<HTMLInputElement>(null)
   React.useEffect(() => {
     if (checkboxRef.current) {
-      checkboxRef.current.indeterminate = indeterminate || false;
+      checkboxRef.current.indeterminate = indeterminate || false
     }, [indeterminate]);
-
   const checkboxSizes = {
     sm: 'w-4 h-4',
-    md: 'w-5 h-5',
+    md: 'w-5 h-5'
     lg: 'w-6 h-6'
   };
-
   const checkboxStates = {
     default: 'border-input',
     error: 'border-red-500',
-    success: 'border-green-500',
+    success: 'border-green-500'
     warning: 'border-yellow-500'
   };
-
   return (
-    <div className="flex items-start space-x-3">
-      <div className="flex items-center">
+    <div className="flex items-start space-x-3 flex items-center"></div>
         <input
           ref={checkboxRef}
           type="checkbox"
@@ -420,37 +360,30 @@ export function CheckboxEnhanced({
           )}
           checked={checked}
           {...props} />
-      </div>
+</div>
       {(label || description) && (
         <div className="flex-1">
-          {label && (
+          {label && (</div>
             <label
               htmlFor={checkboxId}
               className="block text-sm font-medium text-foreground cursor-pointer"
             >
               {label}
-            </label>
-          
-              
-            )}
+</label>
+      )}
           {description && (
             <p className="text-xs text-muted-foreground mt-1">{description}</p>
-          
-              
-            )}
-        </div>
       )}
-          </div>
-
-        );
-
-      }
+      </div>
+      )}
+      </div>
+      )}
 // Enhanced Radio Component
 interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   radioSize?: 'sm' | 'md' | 'lg';
   state?: 'default' | 'error' | 'success' | 'warning';
-  label?: string;
-  description?: string;
+  label?: string
+  description?: string
 }
 
 export function RadioEnhanced({
@@ -464,23 +397,19 @@ export function RadioEnhanced({
 }: RadioProps) {
   const generatedId = React.useId();
   const radioId = id || generatedId;
-
   const radioSizes = {
     sm: 'w-4 h-4',
-    md: 'w-5 h-5',
+    md: 'w-5 h-5'
     lg: 'w-6 h-6'
   };
-
   const radioStates = {
     default: 'border-input',
     error: 'border-red-500',
-    success: 'border-green-500',
+    success: 'border-green-500'
     warning: 'border-yellow-500'
   };
-
   return (
-    <div className="flex items-start space-x-3">
-      <div className="flex items-center">
+    <div className="flex items-start space-x-3 flex items-center"></div>
         <input
           type="radio"
           id={radioId}
@@ -491,42 +420,34 @@ export function RadioEnhanced({
             className
           )}
           {...props} />
-      </div>
+</div>
       {(label || description) && (
         <div className="flex-1">
-          {label && (
+          {label && (</div>
             <label
               htmlFor={radioId}
               className="block text-sm font-medium text-foreground cursor-pointer"
             >
               {label}
-            </label>
-          
-              
-            )}
+</label>
+      )}
           {description && (
             <p className="text-xs text-muted-foreground mt-1">{description}</p>
-          
-              
-            )}
-        </div>
       )}
-          </div>
-
-        );
-
-      }
+      </div>
+      )}
+      </div>
+      )}
 // Radio Group Component
 interface RadioGroupProps {
-name: string;
-  value?: string;
-  onChange?: (value: string) => voi;d;
+name: string,
+  value?: string,
+  onChange?: (value: string) => void,
   options: Array<{
-    value: string;
-    label: string;
-    description?: string;
-    disabled?: boolean;
-  
+    value: string,
+  label: string,
+  description?: string,
+  disabled?: boolean
 }>;
   orientation?: 'horizontal' | 'vertical';
   radioSize?: 'sm' | 'md' | 'lg';
@@ -534,7 +455,7 @@ name: string;
   label?: string;
   required?: boolean;
   helperText?: string;
-  errorText?: string;
+  errorText?: string
 }
 
 export function RadioGroup({
@@ -551,25 +472,22 @@ export function RadioGroup({
   errorText
 }: RadioGroupProps) {
   const hasError = state === 'error' || !!errorText;
-  const displayText = hasError ? errorText : helperText;
-
+  const displayText = hasError ? errorText : helperText
   return (
     <div className="w-full">
-      {label && (
+      {label && (</div>
         <div className="block text-sm font-medium text-foreground mb-3">
-          {label}
+          {label}</div>
           {required && <span className="text-red-500 ml-1">*</span>}
-        </div>
-      
-              
-            )}
+</div>
+      )}
       <div className={cn(
         'flex',
         orientation === 'horizontal'
           ? 'flex-row space-x-6'
           : 'flex-col space-y-3'
       )}>
-        {options.map((option) => (
+        {options.map((option) => (\n    </div>
           <RadioEnhanced
             key={option.value}
             name={name}
@@ -588,26 +506,21 @@ export function RadioGroup({
         <p className={cn(
           'mt-2 text-xs',
           hasError ? 'text-red-500' : 'text-muted-foreground'
-        
-              
             )}>
           {displayText}
-        </p>
+</p>
       )}
-          </div>
-
-        );
-
-      }
+      </div>
+      )}
 // Form Field Wrapper
 interface FormFieldProps {
-children: React.ReactNod;e;
-  label?: string;
-  required?: boolean;
-  helperText?: string;
-  errorText?: string;
-  className?: string;
-
+children: React.ReactNod
+e,
+  label?: string,
+  required?: boolean,
+  helperText?: string,
+  errorText?: string,
+  className?: string
 }
 
 export function FormField({
@@ -619,41 +532,33 @@ export function FormField({
   className
 }: FormFieldProps) {
   const hasError = !!errorText;
-  const displayText = hasError ? errorText : helperText;
-
+  const displayText = hasError ? errorText : helperText
   return (
     <div className={cn('w-full', className)}>
-      {label && (
+      {label && (</div>
         <div className="block text-sm font-medium text-foreground mb-1">
-          {label}
+          {label}</div>
           {required && <span className="text-red-500 ml-1">*</span>}
-        </div>
-      
-              
-            )}
+</div>
+      )}
       {children}
       {displayText && (
         <p className={cn(
           'mt-1 text-xs',
           hasError ? 'text-red-500' : 'text-muted-foreground'
-        
-              
             )}>
           {displayText}
-        </p>
+</p>
       )}
-          </div>
-
-        );
-
-      }
+      </div>
+      )}
 // Form Group Component
 interface FormGroupProps {
-children: React.ReactNod;e;
-  title?: string;
-  description?: string;
-  className?: string;
-
+children: React.ReactNod
+e,
+  title?: string,
+  description?: string,
+  className?: string
 }
 
 export function FormGroup({
@@ -664,31 +569,27 @@ export function FormGroup({
 }: FormGroupProps) {
   return (
     <div className={cn('space-y-4', className)}>
-      {(title || description) && (
+      {(title || description) && (</div>
         <div className="space-y-1">
-          {title && (
+          {title && (</div>
             <h3 className="text-lg font-medium text-foreground">{title}</h3>
-          
-              
-            )}
+      )}
           {description && (
             <p className="text-sm text-muted-foreground">{description}</p>
-          
-              
-            )}
-        </div>
+      )}
+      </div>
       )}
       <div className="space-y-4">{children}</div>
   );
-
-    </div>
+</div>
+</HTMLInputElement>
+</HTMLSelectElement>
+</HTMLTextAreaElement>
+  
     </RadioEnhanced>
     </HTMLInputElement>
     </HTMLInputElement>
-    </HTMLInputElement>
-    </div>
-    </HTMLSelectElement>
-    </div>
-    </HTMLTextAreaElement>
+    </svg>
+    </StateIcon>
     </HTMLInputElement>
   }

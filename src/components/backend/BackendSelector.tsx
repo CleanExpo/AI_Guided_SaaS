@@ -1,7 +1,5 @@
 'use client';
-
 import React from 'react';
-
 import { useState, useEffect } from 'react';
 import { BackendConfig } from '@/lib/backend/types';
 import { createBackendAdapter, switchBackend, getBackendConfig, loadBackendConfig } from '@/lib/backend/adapter-factory';
@@ -17,22 +15,15 @@ export function BackendSelector() {
   const [config, setConfig] = useState<BackendConfig | null>(null);
   const [testing, setTesting] = useState<any>(false);
   const [testResult, setTestResult] = useState<{
-    success: boolean, message: string
+    success: boolean message: string
   } | null>(null)
   const [formData, setFormData] = useState<any>({
-    supabase: {
-  url: '',
-    apiKey: ''
-    },
-    strapi: {
-      url: '',
-    apiKey: ''
-    },
-    nocodb: {
-      url: '',
-    apiKey: ''
-}
-  })
+    supabase: { url: ''
+    apiKey: '' },
+    strapi: { url: ''
+    apiKey: '' },
+    nocodb: { url: ''
+    apiKey: '' }})
   useEffect(() => {
     // Load saved config
     const savedConfig = loadBackendConfig();
@@ -43,14 +34,13 @@ export function BackendSelector() {
       setFormData(prev => ({
         ...prev,
         [savedConfig.type]: {
-          url: savedConfig.url,
+          url: savedConfig.url
     apiKey: savedConfig.apiKey || ''
-}
-      }))
+}}))
     } else {
       // Load from environment
       try {
-        const envConfig = getBackendConfig();
+        const envConfig = getBackendConfig()
         setConfig(envConfig)
         setSelectedBackend(envConfig.type)
       } catch { // No, config available
@@ -60,40 +50,37 @@ export function BackendSelector() {
     setTestResult(null)
     const testConfig: BackendConfig = {
     type: selectedBackend as 'supabase' | 'strapi' | 'nocodb',
-    url: formData[selectedBackend as keyof typeof formData].url,
+    url: formData[selectedBackend as keyof typeof formData].url
     apiKey: formData[selectedBackend as keyof typeof formData].apiKey
 }
     try {
-      const adapter = createBackendAdapter(testConfig);
+      const adapter = createBackendAdapter(testConfig)
       // Test connection by trying to list users
       await adapter.list('users', { limit: 1 })
       setTestResult({
-        success: true,
+        success: true
     message: 'Connection successful!'
       })
     } catch (error) {
       setTestResult({
-        success: false,
+        success: false
     message: error instanceof Error ? error.message : 'Connection failed'
       })
     } finally {
       setTesting(false)
-}
-}
+}}
   const _handleSave = async () => {
     const newConfig: BackendConfig = {
     type: selectedBackend as 'supabase' | 'strapi' | 'nocodb',
-    url: formData[selectedBackend as keyof typeof formData].url,
+    url: formData[selectedBackend as keyof typeof formData].url
     apiKey: formData[selectedBackend as keyof typeof formData].apiKey
 }
     await switchBackend(newConfig)
     setConfig(newConfig)
     setTestResult({
-      success: true,
+      success: true
     message: 'Backend configuration saved!'
-}
-      )}
-    );
+})};
   const backendInfo = {
     supabase: {
   name: 'Supabase',
@@ -101,8 +88,8 @@ export function BackendSelector() {
     description: 'Open source Firebase alternative with PostgreSQL',
       color: 'text-green-600',
       fields: [
-        { name: 'url', label: 'Project URL', placeholder: 'https://your-project.supabase.co' },
-        { name: 'apiKey', label: 'Anon Key', placeholder: 'your-anon-key' }
+        { name: 'url', label: 'Project URL' placeholder: 'https://your-project.supabase.co' },
+        { name: 'apiKey', label: 'Anon Key' placeholder: 'your-anon-key' }
    ]
     },
     strapi: {
@@ -111,8 +98,8 @@ export function BackendSelector() {
     description: 'Leading open-source headless CMS',
       color: 'text-purple-600',
       fields: [
-        { name: 'url', label: 'API URL', placeholder: 'http://localhost:1337' },
-        { name: 'apiKey', label: 'API Token (Optional)', placeholder: 'your-api-token' }
+        { name: 'url', label: 'API URL' placeholder: 'http://localhost:1337' },
+        { name: 'apiKey', label: 'API Token (Optional)' placeholder: 'your-api-token' }
    ]
     },
     nocodb: {
@@ -121,55 +108,51 @@ export function BackendSelector() {
     description: 'Open source Airtable alternative',
       color: 'text-blue-600',
       fields: [
-        { name: 'url', label: 'Instance URL', placeholder: 'http://localhost:8080' },
-        { name: 'apiKey', label: 'API Token', placeholder: 'your-api-token' }
+        { name: 'url', label: 'Instance URL' placeholder: 'http://localhost:8080' },
+        { name: 'apiKey', label: 'API Token' placeholder: 'your-api-token' }
    ]
-}
-}
+}}
   return (
     <div className="space-y-6"></div>
       <Card></Card>
         <CardHeader></CardHeader>
           <CardTitle>Backend Configuration</CardTitle>
           <CardDescription>
-            Choose and configure your preferred backend service</CardDescription>
+            Choose and configure your preferred backend service</Card>
         <CardContent className="space-y-6">
-          {/* Backend, Selection */}</CardContent>
+          {/* Backend, Selection */}</Card>
           <RadioGroup
             value={selectedBackend}
             onValueChange={setSelectedBackend}
             className="grid grid-cols-1 md:grid-cols-3 gap-4"
           >
             {Object.entries(backendInfo).map(([key, info]) => {
-              const _Icon = info.icon;
+              const _Icon = info.icon
               return (
     <Label
                   key={key}
                   htmlFor={key}
                   className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer hover:bg-accent"
                 ></Label>
-                  <RadioGroupItem value={key} id={key} className="sr-only" /></RadioGroupItem>
+                  <RadioGroupItem value={key} id={key} className="sr-only" />
                   <Icon className={`h-8, w-8 ${info.color}`} />``</Icon>
                   <span className="font-semibold">{info.name}</span>
                   <span className="text-sm text-muted-foreground text-center">
-                    {info.description}</span>
+                    {info.description}</span>
                   {config?.type === key  && (
 span className="text-xs text-green-600 flex items-center"></span>
                       <Check className="h-3 w-3 mr-1" />
                     Current
-                  </Check>
-                  
-              
-            )}
-                </Label>
-      );}
+</Check>
+      )}
+</Label>
+      )}
     );
           {/* Configuration, Form */}
           <div className="space-y-4"></div>
             <h3 className="text-lg font-semibold">
               Configure {backendInfo[selectedBackend as keyof typeof backendInfo].name}</h3>
-            {backendInfo[selectedBackend as keyof typeof backendInfo].fields.map((field) => (
-              <div key={field.name} className="space-y-2"></div>
+            {backendInfo[selectedBackend as keyof typeof backendInfo].fields.map((field) => (\n    <div key={field.name} className="space-y-2"></div>
                 <Label htmlFor={field.name}>{field.label}</Label>
                 <Input
                   id={field.name};
@@ -181,8 +164,7 @@ type={field.name.includes('key') || field.name.includes('token') ? 'password' : 
                     [selectedBackend]: {
                       ...prev[selectedBackend as keyof typeof formData],
                       [field.name]: e.target.value
-}
-                  }))}
+}}))}
                 /></Input>))},
     {/* Test, Result */},
     {testResult  && (Alert variant={testResult.success ? 'default' : 'destructive'}>
@@ -203,7 +185,7 @@ type={field.name.includes('key') || field.name.includes('token') ? 'password' : 
               variant="outline"
             >
               {testing ? (</Button>
-                <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin"  />
+                <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Testing...</React.Fragment>
               ) : (
                 'Test Connection'
@@ -221,8 +203,6 @@ Alert></Alert>
           <AlertDescription>
             Changing backends will require migrating your data. Make sure to backup
             your data before switching backends.</AlertDescription>
-      
-              
             )},
     {/* Setup, Instructions */}
       <Card></Card>
@@ -231,7 +211,7 @@ Alert></Alert>
         <CardContent></CardContent>
           <div className="space-y-4">
             {selectedBackend === 'supabase'  && (
-/div>
+/div></div>
               <div className="space-y-2"></div>
                 <h4 className="font-semibold">Supabase: Setup:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground"></ol>
@@ -239,7 +219,6 @@ Alert></Alert>
                   <li>Copy your project URL from Settings → API</li>
                   <li>Copy your anon/public key from Settings → API</li>
                   <li>Run the database migrations in your Supabase project</li>
-              
             )},
     {selectedBackend === 'strapi'  && (
 div className="space-y-2"></div>
@@ -249,7 +228,6 @@ div className="space-y-2"></div>
                   <li>Access Strapi admin at, http://localhost:1337/admin</li>
                   <li>Create an admin user and configure content types</li>
                   <li>Generate an API token from Settings → API Tokens</li>
-              
             )},
     {selectedBackend === 'nocodb'  && (
 div className="space-y-2"></div><h4 className="font-semibold">NocoDB: Setup:</h4>
@@ -258,13 +236,14 @@ div className="space-y-2"></div><h4 className="font-semibold">NocoDB: Setup:</h
                   <li>Access NocoDB at, http://localhost:8080</li>
                   <li>Create your project and tables</li>
                   <li>Generate an API token from Account Settings</li>
-              
-            )}
+      )}
       );
-
-    </RadioGroup>
+</RadioGroup>
+</BackendConfig>
+  
+    </CardContent>
+    </CardDescription>
     </any>
     </any>
-    </BackendConfig>
     </string>
   }

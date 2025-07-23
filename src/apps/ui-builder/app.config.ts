@@ -6,30 +6,31 @@ import { BuilderState } from './types';export const initialBuilderState: Builder
     historyIndex: -1,
     zoom: 100,
     gridEnabled: true,
-    previewMode: false,
+    previewMode: false
 };
 export const builderConfig = {
-  canvas: {,
+  canvas: {
   minZoom: 25,
     maxZoom: 200,
     zoomStep: 25,
     gridSize: 20,
-    snapToGrid: true,
+    snapToGrid: true
   },
-    components: {,
+    components: {
     minWidth: 50,
     minHeight: 30,
     defaultWidth: 200,
-    defaultHeight: 100,
+    defaultHeight: 100
   },
-    history: {,
-    maxSteps: 50,
+    history: {
+    maxSteps: 50
   },
     autosave: {
     ,
     enabled: true,
-    interval: 30000; // 30 seconds
+    interval: 30000, // 30 seconds
   }
+
 export const shortcuts = {
   undo: 'Ctrl+Z',
   redo: 'Ctrl+Y',
@@ -39,5 +40,5 @@ export const shortcuts = {
   selectAll: 'Ctrl+A',
   save: 'Ctrl+S',
   export: 'Ctrl+E',
-  preview: 'Ctrl+P',
+  preview: 'Ctrl+P'
 };

@@ -67,13 +67,13 @@ export {
  } from '$2';
 // Main Agent System Integration
 export class AgentSystem {
-  private static, instance: AgentSystem
-  private, initialized: boolean = false
-  private, loader: AgentLoader
-  private, registry: AgentRegistry
-  private, coordinator: AgentCoordinator
-  private, monitor: AgentMonitor
-  private, communication: AgentCommunication
+  private static instance: AgentSystem
+  private initialized: boolean = false
+  private loader: AgentLoader
+  private registry: AgentRegistry
+  private coordinator: AgentCoordinator
+  private monitor: AgentMonitor
+  private communication: AgentCommunication
   constructor() {
     this.loader = AgentLoader.getInstance()
     this.registry = AgentRegistry.getInstance()
@@ -85,7 +85,7 @@ export class AgentSystem {
     if(!AgentSystem.instance) {
       AgentSystem.instance = new AgentSystem()
 }
-    return AgentSystem.instance;
+    return AgentSystem.instance
 }
   async initialize(): Promise<any> {
     if(this.initialized) { return: true }
@@ -101,12 +101,11 @@ export class AgentSystem {
       this.monitor.startMonitoring()
       await new Promise(resolve => setTimeout(resolve, 1000))
       this.initialized = true
-      return true;
+      return true
     } catch (error) {
       console.error('❌ Agent system initialization, failed:', error)
-      return false;
-}
-}
+      return false
+}}
   async getAgentsForNextStage(currentStage: string, projectType?: string): Promise<any> {
     if(!this.initialized) {
       throw new Error('Agent system not initialized')
@@ -114,7 +113,7 @@ export class AgentSystem {
     const requiredAgents = await this.loader.getRequiredAgentsForStage(currentStage, projectType);
     const healthyAgents = requiredAgents.filter((agent) => {
       const _registration = this.registry.getAgentDetails(agent.agent_id);
-      return registration?.health_status === 'healthy';
+      return registration?.health_status === 'healthy'
     })
     return {
       stage: currentStage, project_type: projectType,
@@ -129,12 +128,10 @@ export class AgentSystem {
     status: agent.status
       })),
       readiness: healthyAgents.length >= requiredAgents.length * 0.8
-}
-}
+}}
   getSystemStatus() {
     if(!this.initialized) {
-      return { initialized: false, error: 'System not initialized' };
-}
+      return { initialized: false, error: 'System not initialized' }}
     const registryStatus = this.registry.getRegistryStatus();
     const dashboard = this.monitor.getMonitoringDashboard();
     const commStats = this.communication.getCommunicationStats();
@@ -169,23 +166,20 @@ export class AgentSystem {
         warnings.push(`${agentId}: ${check.details?.message || 'Warning'}`);``
       } else if (check.status === 'critical') {
         errors.push(`${agentId}: ${check.details?.message || 'Critical, error'}`);``
-}
-}
+}}
     const _healthy = Object.values(health).filter((h) => h.status === 'healthy').length;
-    return { healthy, warnings, errors };
-}
+    return { healthy, warnings, errors }}
   shutdown() {
     this.monitor.stopMonitoring()
     this.communication.shutdown()
     this.registry.shutdown()
     this.initialized = false
-}
-}
+}}
 // Convenience function for easy system initialization
 export async function initializeAgentSystem(): Promise<any> {
   const system = AgentSystem.getInstance();
   await system.initialize()
-  return system;
+  return system
 }
 // Export the main system instance
 export const _agentSystem = AgentSystem.getInstance();
@@ -195,49 +189,30 @@ export function createAgent(type: string): string) {switch (type) {
     case 'analyst':
     return new (require('./bmad/AnalystAgent').AnalystAgent)();
     break;
-
-    break;
-break;
-
-
     case 'project-manager':
     return new (require('./bmad/ProjectManagerAgent').ProjectManagerAgent)();
     break;
-
     case 'architect':
 return new (require('./bmad/ArchitectAgent').ArchitectAgent)();
     break;
-
     // Archon Agents
 break;
-
     case 'prompt-refiner':
     return new (require('./archon/PromptRefinerAgent').PromptRefinerAgent)();
     break;
-
-    break;
-
     case 'tools-refiner':
     return new (require('./archon/ToolsRefinerAgent').ToolsRefinerAgent)();
     break;
-
-break;
-
     case 'agent-refiner':
     return new (require('./archon/AgentRefinerAgent').AgentRefinerAgent)();
     break;
-
-    break;
-
     case 'advisor':
     return new (require('./archon/AdvisorAgent').AdvisorAgent)();
     break;
-
-break;
+break
 }
     default: throw new Error(`Unknown agent, type: ${type}`)``
-}
-}
+}}
 // Export all types
 export * from './bmad';
 export * from './archon';

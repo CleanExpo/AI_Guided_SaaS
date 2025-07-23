@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,14 +13,14 @@ import { Code2, Smartphone, Monitor, Server, Package, FileCode2, Settings, Rocke
 import { useKiroIDE } from '@/hooks/useKiroIDE';
 import { useToast } from '@/components/ui/use-toast';
 interface KiroProjectSetupProps {
-onProjectCreated? (projectId: string) => voi;d;
+onProjectCreated? (projectId: string) => void,
   initialData?: {
-    name?: string;
-    description?: string;
-    type?: string;
-    framework?: string;
-
+    name?: string,
+  description?: string,
+  type?: string,
+  framework?: string
 }
+
 export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectSetupProps), initialData }: KiroProjectSetupProps) {
   const { toast   }: any = useToast();
   const { createProject, connect, connected, loading   }: any = useKiroIDE();
@@ -31,15 +30,11 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     type: initialData?.type || 'web',
     framework: initialData?.framework || '',
     language: 'typescript',
-    settings: {
-  buildCommand: '',
-    startCommand: '',
-    testCommand: '',
-    outputDirectory: '',
-    environment: {} as Record<string, string></string>
+    settings: { buildCommand: '', startCommand: '', testCommand: '', outputDirectory: ''
+    environment: { } as Record<string, string></string>
       dependencies: {} as Record<string, string>
 }
-      </string>
+</string>
   })
   const [features, setFeatures] = useState<any>({
     typescript: true,
@@ -48,7 +43,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     testing: true,
     docker: false,
     ci_cd: false,
-    authentication: false,
+    authentication: false
     database: false
   })
   const projectTypes = [
@@ -69,7 +64,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     if(!projectData.name) {
       toast({
         title: 'Error',
-        description: 'Project name is required',
+        description: 'Project name is required'
         variant: 'destructive'
       })
       return };
@@ -87,31 +82,27 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
       })
       toast({
         title: 'Project Created',
-        description: `Successfully created project "${project.name}"`
+  description: `Successfully created project "${project.name}"`
   })
       // Callback with project ID
       if (onProjectCreated) {
         onProjectCreated(project.id)
-}
-    } catch (error) {
+}} catch (error) {
       console.error('Failed to create, project:', error)
       toast({
         title: 'Error',
-        description: 'Failed to create project',
+        description: 'Failed to create project'
         variant: 'destructive'
-}
-      )}
-    );
-}
+})}}
   const _generateProjectStructure = (data: typeof projectData, features) => {
     const structure = {
-      name: data.name, type: 'directory' as const path: '/',
+      name: data.name, type: 'directory' as const path: '/'
       children: [] as any[]
 }
     // Common files
     structure.children.push(
-      { name: 'README.md', type: 'file', path: '/README.md', content: `# ${data.name}\n\n${data.description}` },``
-      { name: '.gitignore', type: 'file', path: '/.gitignore', content: generateGitignore(data.type) }
+      { name: 'README.md', type: 'file', path: '/README.md' content: `# ${data.name}\n\n${data.description}` },``
+      { name: '.gitignore', type: 'file', path: '/.gitignore' content: generateGitignore(data.type) }
     )
     // Package.json for JS projects
     if (['web', 'mobile', 'api'].includes(data.type)) {
@@ -123,89 +114,72 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
   name: data.name.toLowerCase().replace(/\s+/g, '-'),
           version: '1.0.0',
           description: data.description,
-    scripts: {,
-  dev: data.settings.startCommand || 'npm run dev',
-    build: data.settings.buildCommand || 'npm run build',
-    test: data.settings.testCommand || 'npm test'
-          },
+    scripts: { dev: data.settings.startCommand || 'npm run dev', build: data.settings.buildCommand || 'npm run build'
+    test: data.settings.testCommand || 'npm test' },
           dependencies: data.settings.dependencies || {}, null, 2)
-}
-      )}
-    );
+})};
     // TypeScript config
     if(features.typescript) {
       structure.children.push({
         name: 'tsconfig.json',
         type: 'file',
-        path: '/tsconfig.json',
+        path: '/tsconfig.json'
         content: generateTsConfig(data.type)
-}
-      )}
-    );
+})};
     // ESLint config
     if(features.eslint) {
       structure.children.push({
         name: '.eslintrc.json',
         type: 'file',
-        path: '/.eslintrc.json',
+        path: '/.eslintrc.json'
         content: generateEslintConfig(data.type, features.typescript)
-}
-      )}
-    );
+})};
     // Framework-specific structure
     switch (data.framework) { case 'nextjs':
     structure.children.push(
-    break;
-
-    break;
+    break
+    break
 }
           { name: 'src', type: 'directory', path: '/src', children: [
             { name: 'app', type: 'directory', path: '/src/app', children: [</string>,
-  { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx', content: 'export default function Home() {\n  return <h1>Welcome to ' + data.name + '</h1>\n}' },
-              { name: 'layout.tsx', type: 'file', path: '/src/app/layout.tsx', content: generateNextLayout(data.name) }
+  { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx' content: 'export default function Home() {\n  return <h1>Welcome to ' + data.name + '</h1>\n}' },
+              { name: 'layout.tsx', type: 'file', path: '/src/app/layout.tsx' content: generateNextLayout(data.name) }
    ]},
-            { name: 'components', type: 'directory', path: '/src/components', children: [] },
-            { name: 'lib', type: 'directory', path: '/src/lib', children: [] }
+            { name: 'components', type: 'directory', path: '/src/components' children: [] },
+            { name: 'lib', type: 'directory', path: '/src/lib' children: [] }
           ]},
-          { name: 'public', type: 'directory', path: '/public', children: [] },
-          { name: 'next.config.js', type: 'file', path: '/next.config.js', content: '/** @type {import(\'next\').NextConfig} */\nconst nextConfig: any = {}\n\nmodule.exports = nextConfig' }
+          { name: 'public', type: 'directory', path: '/public' children: [] },
+          { name: 'next.config.js', type: 'file', path: '/next.config.js' content: '/** @type {import(\'next\').NextConfig} */\nconst nextConfig = {}\n\nmodule.exports = nextConfig' }
         )
         // break
       case 'react':
     structure.children.push(
     break;
-
-    break;
-
           { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'App.tsx', type: 'file', path: '/src/App.tsx', content: generateReactApp(data.name) },
-            { name: 'index.tsx', type: 'file', path: '/src/index.tsx', content: generateReactIndex() },
-            { name: 'components', type: 'directory', path: '/src/components', children: [] }
+            { name: 'App.tsx', type: 'file', path: '/src/App.tsx' content: generateReactApp(data.name) },
+            { name: 'index.tsx', type: 'file', path: '/src/index.tsx' content: generateReactIndex() },
+            { name: 'components', type: 'directory', path: '/src/components' children: [] }
           ]},
           { name: 'public', type: 'directory', path: '/public', children: [
-            { name: 'index.html', type: 'file', path: '/public/index.html', content: generateHtmlTemplate(data.name) }
+            { name: 'index.html', type: 'file', path: '/public/index.html' content: generateHtmlTemplate(data.name) }
    ]}
         )
         // break
       case 'express':
     structure.children.push(
     break;
-
-    break;
-
           { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'index.ts', type: 'file', path: '/src/index.ts', content: generateExpressServer() },
-            { name: 'routes', type: 'directory', path: '/src/routes', children: [] },
-            { name: 'middleware', type: 'directory', path: '/src/middleware', children: [] },
-            { name: 'models', type: 'directory', path: '/src/models', children: [] }
+            { name: 'index.ts', type: 'file', path: '/src/index.ts' content: generateExpressServer() },
+            { name: 'routes', type: 'directory', path: '/src/routes' children: [] },
+            { name: 'middleware', type: 'directory', path: '/src/middleware' children: [] },
+            { name: 'models', type: 'directory', path: '/src/models' children: [] }
           ]}
         )
         // break
 }
     // Docker files
     if(features.docker) {
-      structure.children.push({  name: 'Dockerfile', type: 'file', path: '/Dockerfile', content: generateDockerfile(data.type, data.framework) ,  name: 'docker-compose.yml', type: 'file', path: '/docker-compose.yml', content: generateDockerCompose(data.name)  })}
-    );
+      structure.children.push({  name: 'Dockerfile', type: 'file', path: '/Dockerfile', content: generateDockerfile(data.type, data.framework) ,  name: 'docker-compose.yml', type: 'file', path: '/docker-compose.yml' content: generateDockerCompose(data.name)  })};
     // CI/CD files
     if(features.ci_cd) {
       structure.children.push({
@@ -219,21 +193,19 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
           children: [{
   name: 'ci.yml',
             type: 'file',
-            path: '/.github/workflows/ci.yml',
-            content: generateGithubWorkflow(data.name);
+            path: '/.github/workflows/ci.yml'
+            content: generateGithubWorkflow(data.name)
   }]
         }]
-}
-      )}
-    );
-    return structure;
+})};
+    return structure
 }
   return (<div className="space-y-6"></div>;
       <Card></Card>
         <CardHeader></CardHeader>
           <CardTitle>Create New Kiro Project</CardTitle>
           <CardDescription>
-            Set up a new project with Kiro IDE integration</CardDescription>
+            Set up a new project with Kiro IDE integration</Card>
         <CardContent className="space-y-6"></CardContent>
           <div className="grid gap-4"></div>
             <div className="space-y-2"></div>
@@ -241,9 +213,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
               <Input
                 id="name"
                 value={projectData.name}
-                onChange={(e) => setProjectData({ ...projectData, name: e.target.value}
-      )}
-  );
+                onChange={(e) => setProjectData({ ...projectData, name: e.target.value})};
                 placeholder="My Awesome Project"
               /></Input>
             <div className="space-y-2"></div>
@@ -251,43 +221,37 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
               <Textarea
                 id="description"
                 value={projectData.description}
-                onChange={(e) => setProjectData({ ...projectData, description: e.target.value}
-      )}
-  );
+                onChange={(e) => setProjectData({ ...projectData, description: e.target.value})};
                 placeholder="A brief description of your project..."
                 rows={3}
               /></Textarea>
             <div className="space-y-2"></div>
               <Label>Project Type</Label>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                {projectTypes.map((type) => (</div>
+                {projectTypes.map((type) => (\n    </div>
                   <Button
                     key={type.value}
                     variant={projectData.type === type.value ? 'default' : 'outline'}
                     size="sm"
-                    onClick={() => setProjectData({ ...projectData: type, type.value}
-      )}
-  );
+                    onClick={() => setProjectData({ ...projectData: type, type.value})};
                     className="flex flex-col items-center gap-1 h-auto py-3"
                   ></Button>
-                    <type.icon className="h-5 w-5"    /></type>
+                    <type.icon className="h-5 w-5" />
                     <span className="text-xs">{type.label}</span>))}
             <div className="space-y-2"></div>
               <Label htmlFor="framework">Framework</Label>
               <Select
                 value={projectData.framework}
-                onValueChange={(value) => setProjectData({ ...projectData, framework: value}
-      )}
-    ) 
+                onValueChange={(value) => setProjectData({ ...projectData, framework: value})}
               ></Select>
                 <SelectTrigger id="framework"></SelectTrigger>
-                  <SelectValue placeholder="Select a framework" /></SelectValue>
+                  <SelectValue placeholder="Select a framework"  />
                 <SelectContent>
-                  {frameworks[projectData.type as keyof typeof frameworks]?.map((fw) => (</SelectContent>
+                  {frameworks[projectData.type as keyof typeof frameworks]?.map((fw) => (\n    </SelectContent>
                     <SelectItem key={fw} value={fw}>
                       {fw.charAt(0).toUpperCase() + fw.slice(1)}</SelectItem>
                   ))}
-                </SelectContent>
+</SelectContent>
           <Tabs defaultValue="features", className="w-full"></Tabs>
             <TabsList className="grid w-full grid-cols-3"></TabsList>
               <TabsTrigger value="features">Features</TabsTrigger>
@@ -295,7 +259,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
               <TabsTrigger value="environment">Environment</TabsTrigger>
             <TabsContent value="features", className="space-y-4"></TabsContent>
               <div className="grid grid-cols-2 gap-4">
-                {Object.entries(features).map(([key, value]) => (</div>
+                {Object.entries(features).map(([key, value]) => (\n    </div>
                   <div key={key} className="flex items-center justify-between"></div>
                     <Label htmlFor={key} className="text-sm">
                       {key.replace(/_/g, ', ').replace(/^\w/, c: any => c.toUpperCase())}</Label>
@@ -303,9 +267,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                       id={key}
                       checked={value}
                       onCheckedChange={(checked) =>
-                        setFeatures({ ...features, [key]: checked}
-      )}
-  );
+                        setFeatures({ ...features, [key]: checked})};
                     /></Switch>))}
             <TabsContent value="settings", className="space-y-4"></TabsContent>
               <div className="grid gap-4"></div>
@@ -316,10 +278,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                     value={projectData.settings.buildCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-    settings: { ...projectData.settings, buildCommand: e.target.value}
-}
-      )}
-    );
+    settings: { ...projectData.settings buildCommand: e.target.value }})};
                     placeholder="npm run build"
                   /></Input>
                 <div className="space-y-2"></div>
@@ -329,10 +288,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                     value={projectData.settings.startCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-    settings: { ...projectData.settings, startCommand: e.target.value}
-}
-      )}
-    );
+    settings: { ...projectData.settings startCommand: e.target.value }})};
                     placeholder="npm run dev"
                   /></Input>
                 <div className="space-y-2"></div>
@@ -342,30 +298,27 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                     value={projectData.settings.testCommand}
                     onChange={(e) => setProjectData({
                       ...projectData,
-    settings: { ...projectData.settings, testCommand: e.target.value}
-}
-      )}
-    );
+    settings: { ...projectData.settings testCommand: e.target.value }})};
                     placeholder="npm test"
                   /></Input>
             <TabsContent value="environment", className="space-y-4"></TabsContent>
               <div className="space-y-2"></div>
                 <Label>Environment Variables</Label>
                 <div className="text-sm text-muted-foreground">
-                  Add environment variables for your project</div>
+                  Add environment variables for your project</div>
                 <Button variant="outline" size="sm">
                   Add Variable</Button>
           <div className="flex items-center justify-between"></div>
             <div className="flex items-center gap-2">
-              {connected ? (</div>
+              {connected ? (</div>
                 <Badge variant="outline", className="text-green-500"></Badge>
                   <CheckCircle className="h-3 w-3 mr-1" />
                   // Connected
               ) : (
                 <Badge variant="outline", className="text-yellow-500">
                     Disconnected
-                  </Badge>
-              )}
+</Badge>
+      )}
             <Button
               onClick={handleCreateProject}
               disabled={loading || !projectData.name}
@@ -400,16 +353,16 @@ yarn-error.log*
 ```
   const typeSpecific: Record<string, string> = {
     web: '\n# Next.js\n.next/\n*.tsbuildinfo\nnext-env.d.ts',
-    api: '\n# Logs\nlogs/\n*.log',
+    api: '\n# Logs\nlogs/\n*.log'
     mobile: '\n# React Native\n.expo/\n*.jks\n*.p8\n*.p12\n*.key\n*.mobileprovision'
 }
-      </string>
-  return common + (typeSpecific[projectType] || '');
+</string>
+  return common + (typeSpecific[projectType] || '')
 }
 function generateTsConfig(projectType: string): string) {</string>;
   const configs: Record<string, any> = {
     web: {
-  compilerOptions: {,
+  compilerOptions: {
   target: 'es5',
         lib: ['dom', 'dom.iterable', 'esnext'],
         allowJs: true,
@@ -422,7 +375,7 @@ function generateTsConfig(projectType: string): string) {</string>;
         moduleResolution: 'node',
         resolveJsonModule: true,
     isolatedModules: true,
-    jsx: 'preserve',
+    jsx: 'preserve'
         incremental: true
       },
       include: ['src'],
@@ -439,33 +392,31 @@ function generateTsConfig(projectType: string): string) {</string>;
     esModuleInterop: true,
     skipLibCheck: true,
     forceConsistentCasingInFileNames: true,
-    resolveJsonModule: true,
+    resolveJsonModule: true
     moduleResolution: 'node'
       },
       include: ['src/**/*'],
     exclude: ['node_modules', 'dist']
+}}
+</string>
+  return JSON.stringify(configs[projectType] || configs.web, null, 2)
 }
-}
-      </string>
-  return JSON.stringify(configs[projectType] || configs.web, null, 2);
-}
-function generateEslintConfig(projectType: string, typescript: boolean): string, typescript: boolean) {
+function generateEslintConfig(projectType: string, typescript: boolean): string; typescript: boolean) {
   const base = {
     extends: [
       'eslint:recommended',
       typescript && 'plugin:@typescript-eslint/recommended'
    ].filter(Boolean),
     parser: typescript ? '@typescript-eslint/parser' : undefined,
-    plugins: typescript ? ['@typescript-eslint'] : [],
+    plugins: typescript ? ['@typescript-eslint'] : []
     rules: {
       'no-console': 'warn',
       'no-unused-vars': 'warn'
-}
-}
+}}
   if(projectType === 'web') {
     base.extends.push('plugin:react/recommended', 'plugin:react-hooks/recommended')
 }
-  return JSON.stringify(base, null, 2);
+  return JSON.stringify(base, null, 2)
 }
 function generateNextLayout(name: string): string) {
   return `import, type {  Metadata  } from 'next'``;
@@ -479,14 +430,14 @@ export const metadata: Metadata = {
   }`
   }
 function generateReactApp(name: string): string) {
-  return `import React from 'react'``;
+  return `import React from 'react'``
 function App() {
   return (
     <div className="App"></div>
       <h1>Welcome to ${name}</h1>
       <p>Edit src/App.tsx to get started</p>
   };
-export default App`
+export default App`;
   }
 function generateReactIndex() {
   return `import React from 'react'``;
@@ -497,8 +448,7 @@ const root = ReactDOM.createRoot(
 )
 root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <App></React.StrictMode>
 )```
   }
 function generateExpressServer() {
@@ -506,7 +456,7 @@ function generateExpressServer() {
 import cors from 'cors';
 import helmet from 'helmet';
 const app = express();
-const _PORT = process.env.PORT || 3000;
+const _PORT = process.env.PORT || 3000
 // Middleware
 app.use(helmet())
 app.use(cors())
@@ -514,10 +464,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 // Routes
 app.get('/', (req, res) => {
-  res.json({ message: 'API is running!' })
-})
+  res.json({ message: 'API is running!' })}
 // Error handling
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: Error, req: express.Request; res: express.Response, next: express.NextFunction) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
@@ -526,21 +475,19 @@ app.listen(PORT, () => {
 })```
   }
 function generateHtmlTemplate(name: string): string) {
-  return `<!DOCTYPE html>``;
+  return `<!DOCTYPE html>``
 <html lang="en"></html>
   <head></head>
-    <meta charset="utf-8" /></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1" /></meta>
-    <meta name="theme-color" content="#000000" /></meta>
-    <meta name="description" content="${name} - Created with Kiro IDE" /></meta>
+    <meta charset="utf-8"  />
+    <meta name="viewport" content="width=device-width, initial-scale=1"  />
+    <meta name="theme-color" content="#000000"  />
+    <meta name="description" content="${name} - Created with Kiro IDE"  />
     <title>${name}</title>
   <body></body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-  </body>
-</html>
 }
-function generateDockerfile(projectType: string, framework: string): string, framework: string) {
+function generateDockerfile(projectType: string, framework: string): string; framework: string) {
   if(projectType === 'web' && framework === 'nextjs') {
     return `FROM, node:18-alpine AS base``;
 # Install dependencies only when needed
@@ -548,7 +495,7 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \ if [ -f yarn.lock ]; then yarn --frozen-lockfile; \ elif [ -f package-lock.json ]; then npm ci; \ elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \ else echo "Lockfile not found." && exit 1; \ fi
+RUN \ if [ -f yarn.lock ]; then yarn --frozen-lockfile; \ elif [ -f package-lock.json ]; then npm ci; \ elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \ else echo "Lockfile not found." && exit 1 \ fi
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
@@ -579,21 +526,24 @@ CMD ["npm", "start"]```
   }
 function generateDockerCompose(name: string): string) {
   return `version: '3.8',``;
-services: app, build: .
+services: app build: .
    , container_name: ${name.toLowerCase().replace(/\s+/g, '-')}
     ports: - "3000:3000",
-    environment: - NODE_ENV=production, restart: unless-stopped`
+    environment: - NODE_ENV=production; restart: unless-stopped`
   }
 function generateGithubWorkflow(name: string): string) {
-  return `name: CI, on: push, branches: [ main ]``;
+  return `name: CI, on: push; branches: [ main ]``;
   pull_request, branches: [ main ],
-  jobs:  , test: runs-on: ubuntu-latest, steps: -, uses: actions/checkout@v3
-    -, name: Use Node.js, uses: actions/setup-node@v3, with: node-version: '18',
+  jobs:  ; test: runs-on: ubuntu-latest, steps: -; uses: actions/checkout@v3
+    -, name: Use Node.js, uses: actions/setup-node@v3; with: node-version: '18'
         cache: 'npm'
     - run: npm ci
     -, run: npm run build --if-present
     -, run: npm test```
-
-    </div>
+</div>
+    
+    </App>
+    </CardDescription>
     </any>
-    }
+    </any>
+  }

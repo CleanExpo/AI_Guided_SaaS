@@ -1,62 +1,67 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-interface CausalInsight {
-id: string;
-    title: string;
-    description: string;
-    impact: number;
-    confidence: number;
-    page: string
 
+interface CausalInsight {
+  id: string;
+  title: string;
+  description: string;
+  impact: number;
+  confidence: number;
+  page: string;
 }
+
 export default function CausalExplorerUI() {
   const [insights, setInsights] = useState<CausalInsight[]>([]);
   const [topComponents, setTopComponents] = useState<CausalInsight[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     // Simulate loading causal insights
     setTimeout(() => {
       const mockInsights: CausalInsight[] = [
-  {
-  id: '1',
+        {
+          id: '1',
           title: 'User Engagement Driver',
           description: 'The dashboard layout significantly impacts user engagement',
           impact: 85,
-    confidence: 92,
-    page: '/dashboard'
+          confidence: 92,
+          page: '/dashboard'
         },
         {
           id: '2',
           title: 'Conversion Optimization',
           description: 'Button color and placement affects conversion rates',
           impact: 78,
-    confidence: 87,
-    page: '/pricing'
-}
+          confidence: 87,
+          page: '/pricing'
+        }
       ];
       setInsights(mockInsights);
       setTopComponents(mockInsights.slice(0, 3));
       setIsLoading(false);
     }, 1000);
   }, []);
+  
   if (isLoading) {
     return (
-    <div className="p-6">
-      <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 rounded mb-4"></div>
-          <div className="space-y-4">
-            <div className="h-24 bg-gray-200 rounded"></div>
-            <div className="h-24 bg-gray-200 rounded">      </div>
-);
-
-          }
-  return (<div className="p-6 space-y-6">;
+      <div className="p-6 animate-pulse">
+        <div className="h-8 bg-gray-200 rounded mb-4"></div>
+        <div className="space-y-4">
+          <div className="h-24 bg-gray-200 rounded"></div>
+          <div className="h-24 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    );
+  }
+  
+  return (
+    <div className="p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Causal Explorer</h1>
         <p className="text-gray-600">Discover causal relationships in your application data</p>
       </div>
+      
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
@@ -76,10 +81,12 @@ export default function CausalExplorerUI() {
                       Confidence: {insight.confidence}%
                     </span>
                   </div>
+                </div>
               ))}
             </div>
           </CardContent>
         </Card>
+        
         <Card>
           <CardHeader>
             <CardTitle>Component Analysis</CardTitle>
@@ -87,17 +94,15 @@ export default function CausalExplorerUI() {
           <CardContent>
             <div className="space-y-4">
               {topComponents.map((component) => (
-                <div key={component.id} className="p-3 bg-gray-50 rounded">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">{component.page}</span>
-                    <span className="text-sm text-gray-500">{component.impact}%</span>
-                  </div>
+                <div key={component.id} className="p-3 bg-gray-50 rounded flex items-center justify-between">
+                  <span className="font-medium">{component.page}</span>
+                  <span className="text-sm text-gray-500">{component.impact}%</span>
+                </div>
               ))}
             </div>
           </CardContent>
         </Card>
       </div>
+    </div>
   );
-
-          </div>
 }

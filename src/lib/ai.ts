@@ -5,23 +5,23 @@ const openai = new OpenAI({
     }};
 export interface AIMessage {
   role: 'system' | 'user' | 'assistant',
-    content: string
+  content: string
 };
 export interface AIResponse {
-  message: string;
+  message: string,
   usage?: {
     total_tokens: number,
-    prompt_tokens: number,
-    completion_tokens: number
+  prompt_tokens: number,
+  completion_tokens: number
   };
-  model?: string;
+  model?: string
 };
 export interface ChatCompletionOptions {
-  messages: AIMessage[];
-  model?: string;
-  temperature?: number;
-  max_tokens?: number;
-  stream?: boolean;
+  messages: AIMessage[],
+  model?: string,
+  temperature?: number,
+  max_tokens?: number,
+  stream?: boolean
 }
 /**
  * Generate AI chat completion
@@ -49,15 +49,12 @@ export async function generateChatCompletion(,
             }}
           : undefined,
         model: response.model
-}
-    } else {
-      throw new Error('Unexpected streaming response');
-}
-  } catch (error) {
+}} else {
+      throw new Error('Unexpected streaming response')
+}} catch (error) {
     console.error('AI generation, error:', error);
-    throw new Error('Failed to generate AI response');
-}
-}
+    throw new Error('Failed to generate AI response')
+}}
 /**
  * Generate text completion
  */
@@ -66,12 +63,12 @@ export async function generateCompletion(,
   options?: {
     model?: string;
     temperature?: number;
-    max_tokens?: number;
+    max_tokens?: number
 }
 ): Promise<any> {
   return generateChatCompletion({
     messages: [{ role: 'user', content: prompt }],
-    ...options);
+    ...options)
 }
 /**
  * Analyze code with AI
@@ -90,7 +87,7 @@ Please, provide:
 3. Security considerations
 4. Performance optimizations`;``
   const response = await generateCompletion(prompt);
-  return response.message;
+  return response.message
 }
 /**
  * Generate code suggestions
@@ -101,15 +98,15 @@ export async function generateCodeSuggestions(,
 ): Promise<any> {
   const, prompt = `Generate ${language} code based on this, description: ${description}`;`Please provide clean, well-documented code following best practices.`;``
   const response = await generateCompletion(prompt);
-  return response.message;
+  return response.message
 }
 /**
  * Legacy alias for generateChatCompletion
  */
-export const generateAIResponse = generateChatCompletion
+export const generateAIResponse = generateChatCompletion;
 export default { generateChatCompletion,
   generateCompletion,
   generateAIResponse,
   analyzeCode,
-  generateCodeSuggestions;
+  generateCodeSuggestions
 }

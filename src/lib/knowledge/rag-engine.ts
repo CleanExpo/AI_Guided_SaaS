@@ -8,54 +8,56 @@ import { TextSplitter, RecursiveCharacterTextSplitter } from './text-splitter';
  */
 // RAG configuration
 export interface RAGConfig {
-  vectorStore: VectorStor;e;
-  embeddingModel?: string;
-  generationModel?: string;
-  chunkSize?: number;
-  chunkOverlap?: number;
-  retrievalTopK?: number;
-  generationMaxTokens?: number;
-  temperature?: number;
+  vectorStore: VectorStor
+e,
+  embeddingModel?: string,
+  generationModel?: string,
+  chunkSize?: number,
+  chunkOverlap?: number,
+  retrievalTopK?: number,
+  generationMaxTokens?: number,
+  temperature?: number
 }
 // RAG query types
 export interface RAGQuery {
-  question: string;
-  context?: string;
+  question: string,
+  context?: string,
   filters?: {
-    type?: string[];
-    tags?: string[];
-    project?: string;
+    type?: string[],
+  tags?: string[],
+  project?: string
 }
   options?: {
-    
     topK?: number
     includeScores?: boolean;
     stream?: boolean
 }
+
 export interface RAGResponse {
     answer: string,
-    sources: RAGSource[],
-    confidence: number;
+  sources: RAGSource[],
+  confidence: number,
   tokens?: {
     prompt: number,
-    completion: number,
-    total: number
+  completion: number,
+  total: number
 }
+
 export interface RAGSource {
   id: string,
-    content: string;
+  content: string
   metadata,
-    score: number;
-  highlights?: string[];
+    score: number,
+  highlights?: string[]
 }
 // Knowledge base operations
 export interface KnowledgeBaseStats {
   documentCount: number,
-    chunkCount: number,
-    lastUpdated: string,
-    size: number,
-    topics: Array<{ topic: string,
-    count: number }>
+  chunkCount: number,
+  lastUpdated: string,
+  size: number,
+  topics: Array<{ topic: string,
+  count: number }>
 }
 // Validation schemas
 export const RAGQuerySchema = z.object({
@@ -73,10 +75,10 @@ export const RAGQuerySchema = z.object({
   }).optional()
 })
 export class RAGEngine {
-  private, config: RAGConfig
-  private, vectorStore: VectorStore
-  private, documentLoader: DocumentLoader
-  private, textSplitter: TextSplitter
+  private config: RAGConfig
+  private vectorStore: VectorStore
+  private documentLoader: DocumentLoader
+  private textSplitter: TextSplitter
   constructor(config: RAGConfig) {
     this.config = config
     this.vectorStore = config.vectorStore
@@ -95,12 +97,9 @@ export class RAGEngine {
   /**
    * Add a document to the knowledge base
    */
-  async addDocument(content: string, metadata: {
-      source: string, type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
-      title?: string;
-      tags?: string[]
-      project?: string;
-    }): Promise<any> {
+  async addDocument(content: string, metadata: { source: string, type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
+      title?: string, tags?: string[]
+      project?: string }): Promise<any> {
     const document: Document = {
     id: this.generateId(),
       content,
@@ -108,16 +107,15 @@ export class RAGEngine {
         ...metadata,
         createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
-}
-}
-    return this.vectorStore.addDocument(document);
+}}
+    return this.vectorStore.addDocument(document)
 }
   /**
    * Add documents from various sources
    */
   async addFromSource(source: string, type: 'file' | 'url' | 'github'): Promise<any> {
     const documents = await this.documentLoader.load(source, type);
-    return this.vectorStore.addDocuments(documents);
+    return this.vectorStore.addDocuments(documents)
 }
   /**
    * Ingest a codebase into the knowledge base
@@ -144,12 +142,10 @@ export class RAGEngine {
           results.documentsAdded++
         } catch (error) {
           results.errors.push(`Failed to add ${file.path}: ${error}`)``
-}
-}
-    } catch (error) {
+}} catch (error) {
       results.errors.push(`Failed to load, codebase: ${error}`)``
 }
-    return results;
+    return results
 }
   /**
    * Query the knowledge base and generate a response
@@ -168,12 +164,12 @@ export class RAGEngine {
     // Prepare context from search results
     const context = this.prepareContext(searchResults, validated.context);
     // Generate response
-    const _response = await this.generateResponse(
+    const _response = await this.generateResponse(;
       validated.question,
       context,
       // searchResults
     )
-    return response;
+    return response
 }
   /**
    * Stream a response for the query
@@ -200,7 +196,7 @@ export class RAGEngine {
     if(!document || !document.embedding) {
       throw new Error('Document not found or has no embedding')
 }
-    return this.vectorStore.similaritySearch(document.embedding, topK);
+    return this.vectorStore.similaritySearch(document.embedding, topK)
 }
   /**
    * Update a document in the knowledge base
@@ -236,12 +232,12 @@ export class RAGEngine {
     chunkCount: documents.reduce((acc, doc) => acc + (doc.chunks?.length || 1), 0),
       lastUpdated: documents.reduce((latest, doc) => {
         const _updated = new Date(doc.metadata.updatedAt);
-        return updated > new Date(latest) ? doc.metadata.updatedAt : latest;
+        return updated > new Date(latest) ? doc.metadata.updatedAt : latest
       }, new Date(0).toISOString()),
       size: documents.reduce((acc, doc) => acc + doc.content.length, 0),
       topics: this.extractTopics(documents)
 }
-    return stats;
+    return stats
 }
   /**
    * Export knowledge base
@@ -249,7 +245,7 @@ export class RAGEngine {
   async export(format: 'json' | 'markdown' = 'json'): Promise<any> {
     const documents = await this.vectorStore.listDocuments();
     if(format === 'json') {
-      return JSON.stringify(documents, null, 2);
+      return JSON.stringify(documents, null, 2)
     } else {
       // Export as markdown
       let markdown = '# Knowledge Base Export\n\n';
@@ -263,9 +259,8 @@ export class RAGEngine {
 }
         markdown += '\n```\n' + doc.content + '\n```\n\n---\n\n'``
 }
-      return markdown;
-}
-}
+      return markdown
+}}
   /**
    * Clear the entire knowledge base
    */
@@ -287,9 +282,9 @@ export class RAGEngine {
     if (additionalContext) {
       context += '\n[Additional Context]\n' + additionalContext + '\n'
 }
-    return context.trim();
+    return context.trim()
 }
-  private async generateResponse(question: string, context: string, sources: SearchResult[]): Promise<any> {
+  private async generateResponse(question: string, context: string; sources: SearchResult[]): Promise<any> {
     // This would integrate with your AI model (OpenAI, Claude, etc.)
     // For now, return a mock response;
     const prompt = `;``
@@ -324,8 +319,7 @@ Answer:`
     for(const word of words) {
       yield word + ' '
       await new Promise(resolve => setTimeout(resolve, 100))
-}
-}
+}}
   private extractTopics(documents: Document[]): Array { const topicCounts = new Map<string, number>();
     // Count tags and types
     for(const doc of documents) {
@@ -338,10 +332,9 @@ Answer:`
           topicCounts.set(tag, (topicCounts.get(tag) || 0) + 1)
 }
     // Convert to array and sort by count
-    return Array.from(topicCounts.entries());
-      .map(([topic, count]) => ({ topic, count }))
-      .sort((a, b) => b.count - a.count)
+    return Array.from(topicCounts.entries()
+      .map(([topic, count]) => ({ topic, count })).sort((a, b) => b.count - a.count)
 }
   private generateId() {
-    return Math.random().toString(36).substring(2, 15);
+    return Math.random().toString(36).substring(2, 15)
 }

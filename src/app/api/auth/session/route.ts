@@ -8,21 +8,15 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({
         authenticated: false,
       user: null
-      });
+      })
 }
     // Simulate authenticated session
     return NextResponse.json({
       authenticated: true,
-      user: {
-        id: 'user_123',
-        name: 'John Doe',
-        email: 'john@example.com'
-      }
-    });
+      user: { id: 'user_123', name: 'John Doe', email: 'john@example.com' }})
   } catch (error) {
     console.error('Session check error:', error);
     return NextResponse.json(
       { error: 'Session check failed' }, { status: 500 }
-    );
-}
-}
+    )
+}}

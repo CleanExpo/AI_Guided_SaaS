@@ -1,7 +1,7 @@
 // Unified Design System Theme
 // Combines Lovable.dev's friendly aesthetics with VS Code's professional powerexport const theme = {
   // Brand Colors, colors: {
-  primary: {,
+  primary: {
   50: '#f0f9ff',
       100: '#e0f2fe',
       200: '#bae6fd',
@@ -22,7 +22,7 @@
       600: '#c026d3',
       700: '#a21caf',
       800: '#86198f',
-      900: '#701a75'},
+      900: '#701a75'};
     success: {
       50: '#f0fdf4',
       100: '#dcfce7',
@@ -44,7 +44,7 @@
       600: '#d97706',
       700: '#b45309',
       800: '#92400e',
-      900: '#78350f'},
+      900: '#78350f'};
     error: {
       50: '#fef2f2',
       100: '#fee2e2',
@@ -66,7 +66,7 @@
       600: '#525252',
       700: '#404040',
       800: '#262626',
-      900: '#171717'},
+      900: '#171717'};
   // Typography, typography: {
     fonts: {
   heading: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
@@ -93,7 +93,7 @@
     snug: 1.375,
     normal: 1.5,
     relaxed: 1.625,
-    loose: 2},
+    loose: 2};
   // Spacing, spacing: {
     0: '0px',
     1: '0.25rem',
@@ -159,7 +159,7 @@
     '2xl': '1536px'},
   // Component Variants, components: {
     button: {
-  primary: {,
+  primary: {
   bg: 'primary.600',
         color: 'white',
         hover: 'primary.700',
@@ -168,7 +168,7 @@
         bg: 'secondary.600',
         color: 'white',
         hover: 'secondary.700',
-        active: 'secondary.800'},
+        active: 'secondary.800'};
     outline: {
         bg: 'transparent',
         color: 'neutral.700',
@@ -179,7 +179,7 @@
         bg: 'transparent',
         color: 'neutral.700',
         hover: 'neutral.100',
-        active: 'neutral.200'},
+        active: 'neutral.200'};
     card: {
       default: {
   bg: 'white',
@@ -190,27 +190,29 @@
         bg: 'white',
         border: 'transparent',
         shadow: 'lg',
-        radius: 'xl'},
+        radius: 'xl'};
     input: {
       default: {
   bg: 'white',
         border: 'neutral.300',
         focus: 'primary.500',
-        radius: 'md' }
-}
+        radius: 'md' }}
 // Helper functions
 export const _getColor = (path: string): string: (any) => {const _keys = path.split('.');
-  let value: any = theme.colors;
+  let value = theme.colors;
   for(const key of keys) {
     value = value[key]
-    if (!value) return '#000000'; }
-  return value;
+    if (!value) return '#000000' }
+  return value
 };
-export const _getSpacing = (size: keyof typeof theme.spacing): string: (any) => {return theme.spacing[size]; }
-export const _getShadow = (size: keyof typeof theme.shadows): string: (any) => {return theme.shadows[size]; }
-export const _getRadius = (size: keyof typeof theme.borderRadius): string: (any) => {return theme.borderRadius[size]; }
+export const _getSpacing = (size: keyof typeof theme.spacing): string: (any) => {return theme.spacing[size] }
+
+export const _getShadow = (size: keyof typeof theme.shadows): string: (any) => {return theme.shadows[size] }
+
+export const _getRadius = (size: keyof typeof theme.borderRadius): string: (any) => {return theme.borderRadius[size] }
+
 export const _getTransition = (speed: keyof typeof theme.transitions): string: (any) => {
-  return `all ${theme.transitions[speed]} ease-in-out`;
+  return `all ${theme.transitions[speed]} ease-in-out`
 }
 // CSS Variables for runtime theming
 export const _generateCSSVariables = (): void => {const vars: Record<string, string> = { }
@@ -218,8 +220,7 @@ export const _generateCSSVariables = (): void => {const vars: Record<string, str
   Object.entries(theme.colors).forEach(([colorName, shades]) => {
     Object.entries(shades).forEach(([shade, value]) => {
       vars[`--color-${colorName}-${shade}`] = value``
-    })
-  })
+    })}
   // Spacing
   Object.entries(theme.spacing).forEach(([key, value]) => {
     vars[`--spacing-${key}`] = value``
@@ -228,5 +229,5 @@ export const _generateCSSVariables = (): void => {const vars: Record<string, str
   vars['--font-heading'] = theme.typography.fonts.heading
   vars['--font-body'] = theme.typography.fonts.body
   vars['--font-mono'] = theme.typography.fonts.mono
-  return vars;
+  return vars
 }

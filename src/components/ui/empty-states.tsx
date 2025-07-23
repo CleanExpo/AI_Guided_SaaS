@@ -1,21 +1,19 @@
 'use client';
-
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { ButtonEnhanced } from './button-enhanced';
 interface EmptyStateProps {
-title: string;
-  description?: string;
-  icon?: React.ReactNode;
-  illustration?: 'search' | 'data' | 'error' | 'maintenance' | 'construction';
+title: string,
+  description?: string,
+  icon?: React.ReactNode,
+  illustration?: 'search' | 'data' | 'error' | 'maintenance' | 'construction',
   action?: {
-    label: string;
-    onClick: () => voi;d;
-    variant?: 'default' | 'outline' | 'brand';
-
+    label: string,
+  onClick: () => void,
+  variant?: 'default' | 'outline' | 'brand'
 }
   secondaryAction?: {
-    label: string,
+    label: string
     onClick: () => void
   },
   className?: string;
@@ -44,7 +42,7 @@ const illustrations = {
         strokeWidth="3"
         strokeLinecap="round" />
       <circle cx="85" cy="85" r="8" fill="currentColor" opacity="0.5" />
-    </svg>
+</svg>
   data: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <rect
@@ -62,8 +60,7 @@ const illustrations = {
         width="80"
         height="4"
         fill="currentColor"
-        opacity="0.3" />
-      <rect
+        opacity="0.3" / />
         x="60"
         y="90"
         width="60"
@@ -76,8 +73,7 @@ const illustrations = {
         width="70"
         height="4"
         fill="currentColor"
-        opacity="0.3" />
-      <rect
+        opacity="0.3" / />
         x="60"
         y="110"
         width="50"
@@ -96,7 +92,7 @@ const illustrations = {
         stroke="currentColor"
         strokeWidth="2"
         opacity="0.5" />
-    </svg>
+</svg>
   error: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle
@@ -119,7 +115,7 @@ const illustrations = {
         stroke="currentColor"
         strokeWidth="1"
         opacity="0.2" />
-    </svg>
+</svg>
   maintenance: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle
@@ -140,7 +136,7 @@ const illustrations = {
         stroke="currentColor"
         strokeWidth="2"
         opacity="0.4" />
-    </svg>
+</svg>
   construction: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <rect
@@ -163,7 +159,7 @@ const illustrations = {
         stroke="currentColor"
         strokeWidth="2"
         opacity="0.4" />
-    </svg>
+</svg>
   )},
 export function EmptyState({
   title, description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps), description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps) {
@@ -172,19 +168,19 @@ export function EmptyState({
   container: 'py-8 px-4',
       illustration: 'w-24 h-24 mb-4',
       title: 'text-lg font-semibold',
-      description: 'text-sm',
+      description: 'text-sm'
       spacing: 'space-y-3'},
     md: {
       container: 'py-12 px-6',
       illustration: 'w-32 h-32 mb-6',
       title: 'text-xl font-semibold',
-      description: 'text-base',
-      spacing: 'space-y-4'},
+      description: 'text-base'
+      spacing: 'space-y-4'};
     lg: {
       container: 'py-16 px-8',
       illustration: 'w-40 h-40 mb-8',
       title: 'text-2xl font-semibold',
-      description: 'text-lg',
+      description: 'text-lg'
       spacing: 'space-y-6'},
   const currentSize = sizeClasses[size];
   return (
@@ -192,17 +188,15 @@ export function EmptyState({
             'flex flex-col items-center justify-center text-center',currentSize.container currentSize.spacing, className
       )}
     >
-      {/* Illustration, or Icon */}
+      {/* Illustration, or Icon */}</div>
       <div, className={cn('text-muted-foreground' currentSize.illustration)}>
         {icon || illustrations[illustration as keyof typeof illustrations]},
-    {/* Title */}
+    {/* Title */}</div>
       <h3, className={cn('text-foreground' currentSize.title)}>{title}</h3>
       {/* Description */},
     {description  && (
 p, className={cn(
             'text-muted-foreground max-w-md',currentSize.description
-          
-              
             )}
         >
           {description}</p>
@@ -216,8 +210,6 @@ p, className={cn(
               size={size === 'sm' ? 'sm' : 'md'}
             >
               {action.label}</ButtonEnhanced>
-          
-              
             )},
     {secondaryAction  && (
 ButtonEnhanced
@@ -226,11 +218,7 @@ ButtonEnhanced
               size={size === 'sm' ? 'sm' : 'md'}
             >
               {secondaryAction.label}</ButtonEnhanced>
-          
-              
-            )}
-      )}
-    );
+            )})};
 // Specialized Empty State Components
 export function NoDataFound({
   title = 'No data found',
@@ -238,10 +226,10 @@ export function NoDataFound({
   onRefresh,
   onCreate,
   className}: {
-  title?: string;
-  description?: string, onRefresh? () => void;
-  onCreate? () => void;
-  className?: string;
+  title?: string
+  description?: string, onRefresh? () => void
+  onCreate? () => void
+  className?: string
 }
   ) {
   return (
@@ -252,27 +240,27 @@ export function NoDataFound({
         // onCreate
           ? {
               label: 'Create New',
-              onClick: onCreate,
+              onClick: onCreate
     variant: 'brand'}
           : undefined
       secondaryAction={
         // onRefresh
           ? {
-              label: 'Refresh',
+              label: 'Refresh'
               onClick: onRefresh}
           : undefined
       className={className}
       />
-  );
+  )
 },
 export function SearchNotFound({
   query,
   onClear,
   onTryAgain,
   className}: {
-  query?: string, onClear? () => void;
-  onTryAgain? () => void;
-  className?: string;
+  query?: string, onClear? () => void
+  onTryAgain? () => void
+  className?: string
 }
   ) {
   return (
@@ -287,17 +275,17 @@ export function SearchNotFound({
         // onClear
           ? {
               label: 'Clear Search',
-              onClick: onClear,
+              onClick: onClear
     variant: 'outline'}
           : undefined
       secondaryAction={
         // onTryAgain
           ? {
-              label: 'Try Again',
+              label: 'Try Again'
               onClick: onTryAgain}
           : undefined
       className={className} />
-  );
+  )
 },
 export function ErrorState({
   title = 'Something went wrong',
@@ -305,10 +293,10 @@ export function ErrorState({
   onRetry,
   onGoBack,
   className}: {
-  title?: string;
-  description?: string, onRetry? () => void;
-  onGoBack? () => void;
-  className?: string;
+  title?: string
+  description?: string, onRetry? () => void
+  onGoBack? () => void
+  className?: string
 }
   ) {
   return (
@@ -319,18 +307,18 @@ export function ErrorState({
         // onRetry
           ? {
               label: 'Try Again',
-              onClick: onRetry,
+              onClick: onRetry
     variant: 'brand'}
           : undefined
       secondaryAction={
         // onGoBack
           ? {
-              label: 'Go Back',
+              label: 'Go Back'
               onClick: onGoBack}
           : undefined
       className={className}
       />
-  );
+  )
 },
 export function MaintenanceMode({
   title = 'Under Maintenance',
@@ -339,9 +327,9 @@ export function MaintenanceMode({
   onNotifyMe,
   className}: {
   title?: string;
-  description?: string;
-  estimatedTime?: string, onNotifyMe? () => void;
-  className?: string;
+  description?: string
+  estimatedTime?: string, onNotifyMe? () => void
+  className?: string
 }
   ) {
   return (
@@ -355,12 +343,12 @@ export function MaintenanceMode({
         // onNotifyMe
           ? {
               label: 'Notify Me',
-              onClick: onNotifyMe,
+              onClick: onNotifyMe
     variant: 'brand'}
           : undefined
       className={className}
       />
-  );
+  )
 },
 export function ComingSoon({
   title = 'Coming Soon',
@@ -368,10 +356,10 @@ export function ComingSoon({
   onNotifyMe,
   onLearnMore,
   className}: {
-  title?: string;
-  description?: string, onNotifyMe? () => void;
-  onLearnMore? () => void;
-  className?: string;
+  title?: string
+  description?: string, onNotifyMe? () => void
+  onLearnMore? () => void
+  className?: string
 }
   ) {
   return (
@@ -382,13 +370,13 @@ export function ComingSoon({
         // onNotifyMe
           ? {
               label: 'Notify Me',
-              onClick: onNotifyMe,
+              onClick: onNotifyMe
     variant: 'brand'}
           : undefined
       secondaryAction={
         // onLearnMore
           ? {
-              label: 'Learn More',
+              label: 'Learn More'
               onClick: onLearnMore}
           : undefined
       className={className}
@@ -398,38 +386,37 @@ export function ComingSoon({
 export function LoadingState({
   title = 'Loading...', description  = 'Please wait while we fetch your data.', className}: {
   title?: string;
-  description?: string;
+  description?: string
   className?: string}), description  = 'Please wait while we fetch your data.', className}: {
   title?: string;
-  description?: string;
+  description?: string
   className?: string}) {
   return (
     <div, className={cn(
             'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4',className
       )}
-    >
-      <div, className="w-32 h-32 mb-6 text-muted-foreground">
-        <div, className="relative w-full h-full">
-          <div, className="absolute inset-0 border-4 border-brand-secondary-200 rounded-full"></div>
+     >, className="w-32 h-32 mb-6 text-muted-foreground"></div>
+        <div, className="relative w-full h-full" >, className="absolute inset-0 border-4 border-brand-secondary-200 rounded-full"></div>
           <div, className="absolute inset-0 border-4 border-brand-primary-600 rounded-full border-t-transparent animate-spin"></div>
       <h3, className="text-xl font-semibold text-foreground">{title}</h3>
       {description  && (p, className="text-base text-muted-foreground max-w-md">
           {description}</p>
-    );
+    
 // Empty State with Custom Content
 interface EmptyStateCardProps {
-children: React.ReactNod;e;
-  className?: string;
-
+children: React.ReactNod
+e,
+  className?: string
 }
+
 export function EmptyStateCard({ children, className }: EmptyStateCardProps), className }: EmptyStateCardProps) {
   return (
-    <div, className={`cn(``
+    <div, className={cn(`
         'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className
       )}
     >
-      {children}
-    </div, className={`cn(``
+      {children}</div>
+    </div, className={cn(`
         'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className
       )}
     >
@@ -440,9 +427,9 @@ export function GridEmptyState({
   description = 'Get started by creating your first item.',
   onCreate,
   className}: {
-  title?: string;
-  description?: string, onCreate? () => void;
-  className?: string;
+  title?: string
+  description?: string, onCreate? () => void
+  className?: string
 }
   ) {
   return (
@@ -456,7 +443,7 @@ export function GridEmptyState({
           // onCreate
             ? {
                 label: 'Create First Item',
-                onClick: onCreate,
+                onClick: onCreate
     variant: 'brand'}
             : undefined />
-    </EmptyStateCard>
+</EmptyStateCard>

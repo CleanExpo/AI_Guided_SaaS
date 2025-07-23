@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-
 export async function GET(): Promise<NextResponse> {
   try {
     const status = {
@@ -15,7 +14,7 @@ export async function GET(): Promise<NextResponse> {
       connections: 5,
       lastUpdate: new Date().toISOString()
     };
-    return NextResponse.json(status);
+    return NextResponse.json(status)
   } catch (error) {
     console.error('MCP status error:', error);
     return NextResponse.json(
@@ -25,7 +24,7 @@ export async function GET(): Promise<NextResponse> {
         timestamp: new Date().toISOString()
       },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
+
 export const dynamic = "force-dynamic";

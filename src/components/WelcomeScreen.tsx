@@ -1,16 +1,12 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Persona } from '@/types';
 import { Bot, Code, Palette, Rocket, Sparkles, Zap } from 'lucide-react';
-
 interface WelcomeScreenProps {
-onSelectPersona: (persona: Persona) => voi;d;
-
+onSelectPersona: (persona: Persona) => void
 }
-
 const personas: Persona[] = [
   {
     id: 'ai-architect',
@@ -24,7 +20,7 @@ const personas: Persona[] = [
     ],
     tone: 'Technical and forward-thinking',
     avatar: '🤖',
-    role: 'architect',
+    role: 'architect'
     color: 'blue'
   },
   {
@@ -34,7 +30,7 @@ const personas: Persona[] = [
     expertise: ['React', 'Node.js', 'Database Design', 'API Development'],
     tone: 'Comprehensive and detail-oriented',
     avatar: '🧙‍♂️',
-    role: 'developer',
+    role: 'developer'
     color: 'purple'
   },
   {
@@ -49,7 +45,7 @@ const personas: Persona[] = [
     ],
     tone: 'Creative and user-focused',
     avatar: '🎨',
-    role: 'designer',
+    role: 'designer'
     color: 'pink'
   },
   {
@@ -59,7 +55,7 @@ const personas: Persona[] = [
     expertise: ['CI/CD', 'Cloud Platforms', 'Containerization', 'Monitoring'],
     tone: 'Systematic and reliability-focused',
     avatar: '⚙️',
-    role: 'devops',
+    role: 'devops'
     color: 'green'
   },
   {
@@ -74,7 +70,7 @@ const personas: Persona[] = [
     ],
     tone: 'Energetic and results-driven',
     avatar: '🚀',
-    role: 'founder',
+    role: 'founder'
     color: 'orange'
   },
   {
@@ -89,11 +85,10 @@ const personas: Persona[] = [
     ],
     tone: 'Professional and thorough',
     avatar: '🏢',
-    role: 'consultant',
+    role: 'consultant'
     color: 'gray'
   }
 ];
-
 const getPersonaIcon = (personaId: string) => {
   switch (personaId) {
     case 'ai-architect':
@@ -107,37 +102,29 @@ const getPersonaIcon = (personaId: string) => {
     case 'startup-founder':
       return <Rocket className="w-8 h-8" />;
     case 'enterprise-consultant':
-      return <Sparkles className="w-8 h-8" />;
-    default:
-      return <Bot className="w-8 h-8" />;
-  }
-};
-
+      return <Sparkles className="w-8 h-8" />
+    default: return <Bot className="w-8 h-8" />
+  }};
 export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
-
   const handlePersonaSelect = (persona: Persona) => {
-    setSelectedPersona(persona.id);
+    setSelectedPersona(persona.id)
     setTimeout(() => {
-      onSelectPersona(persona);
-    }, 300);
+      onSelectPersona(persona)
+    }, 300)
   };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-brand-primary-50 flex items-center justify-center p-4">
-      <div className="max-w-6xl w-full">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-brand-primary-50 flex items-center justify-center p-4 max-w-6xl w-full">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-brand-primary-600 bg-clip-text text-transparent mb-4">
             AI-Guided SaaS Builder
-          </h1>
+</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Choose your AI development persona to get started with intelligent
             project guidance tailored to your expertise and goals.
-          </p>
-        </div>
-
+</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {personas.map((persona) => (
+          {personas.map((persona) => (\n    </div>
             <Card
               key={persona.id}
               className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
@@ -146,40 +133,35 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
                   : 'hover:shadow-md'
               }`}
               onClick={() => handlePersonaSelect(persona)}
-            >
+            ></Card>
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-4 text-blue-600">
-                  {getPersonaIcon(persona.id)}
-                </div>
+                  {getPersonaIcon(persona.id)}</div>
                 <CardTitle className="text-xl font-semibold">
-                  {persona.name}
-                </CardTitle>
+                  {persona.name}</Card>
                 <CardDescription className="text-sm text-gray-600">
-                  {persona.description}
-                </CardDescription>
-              </CardHeader>
+                  {persona.description}</Card>
+</CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div>
                     <h4 className="font-medium text-sm text-gray-700 mb-2">
                       Expertise:
-                    </h4>
+</h4>
                     <div className="flex flex-wrap gap-1">
-                      {persona.expertise.map((skill, index) => (
+                      {persona.expertise.map((skill, index) => (\n    </div>
                         <span
                           key={index}
                           className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full"
                         >
-                          {skill}
-                        </span>
+                          {skill}</span>
                       ))}
-                    </div>
+      </div>
                   <div>
                     <h4 className="font-medium text-sm text-gray-700 mb-1">
                       Tone:
-                    </h4>
+</h4>
                     <p className="text-xs text-gray-600">{persona.tone}</p>
-                  </div>
                   <Button
                     className="w-full mt-4"
                     variant={
@@ -189,21 +171,22 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
                     {selectedPersona === persona.id
                       ? 'Selected!'
                       : 'Choose This Persona'}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+</Button>
+</CardContent>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="text-sm text-gray-500">
+      </div>
+        <div className="">
+        <p className="
             Each persona provides specialized guidance and recommendations based
             on their expertise area.
-          </p>
-              </div>
-);
-
-          </div>
-</string>
+"></p>
+        </div>
+    );;
+</div>
+  
+    </CardDescription>
+    </CardTitle>
+    </div>
+    </div>
+    </string>
   }

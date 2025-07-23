@@ -1,37 +1,33 @@
 'use client';
-
 import React from 'react';
-
 import { SessionProvider } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 interface ClientOnlyAuthProps {
-children: React.ReactNod;e
-
+  children: React.ReactNode;
 }
-export function ClientOnlyAuth({ children }: ClientOnlyAuthProps): ClientOnlyAuthProps) {
-  const [mounted, setMounted] = useState<any>(false);
+
+export function ClientOnlyAuth({ children }: ClientOnlyAuthProps) {
+  const [mounted, setMounted] = useState(false)
   useEffect(() => {
-    setMounted(true);
+    setMounted(true)
   }, []);
   if(!mounted) {
     return <React.Fragment>{children}</React.Fragment>;
-}
+  }
   return (
     <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
       {children}
     </SessionProvider>
-  );
+  
 }
 // Separate component for session-dependent features
-export function SessionGuard({ children }: { children: React.ReactNode }): { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState<any>(false);
+export function SessionGuard({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false)
   useEffect(() => {
-    setMounted(true);
+    setMounted(true)
   }, []);
   if(!mounted) {
-    return null;
+    return null
 }
   return <React.Fragment>{children}</React.Fragment>;
-
-    </any>
-    }
+}

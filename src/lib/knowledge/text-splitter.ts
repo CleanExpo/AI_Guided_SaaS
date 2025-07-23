@@ -4,24 +4,25 @@
  */
 export interface TextSplitterConfig {
   chunkSize: number,
-    chunkOverlap: number;
-  lengthFunction? (text: string) => number;
-  keepSeparator?: boolean;
+  chunkOverlap: number,
+  lengthFunction? (text: string) => number,
+  keepSeparator?: boolean
 };
 export interface TextChunk {
     text: string,
-    metadata: {
+  metadata: {
   startIndex: number,
-    endIndex: number,
-    chunkIndex: number
+  endIndex: number,
+  chunkIndex: number
 }
+
 export abstract class TextSplitter {
   protected, config: TextSplitterConfig;
   constructor(config: TextSplitterConfig) {
     this.config = {
       lengthFunction: text: any => text.length,
     keepSeparator: true,
-      ...config;
+      ...config
 }
   abstract split(text: string): TextChunk[];
   protected mergeChunks(splits: string[]): TextChunk[] {
@@ -36,35 +37,27 @@ export abstract class TextSplitter {
         // Save current chunk
         chunks.push({
           text: currentChunk.trim(),
-  metadata: {
-            startIndex,
-            endIndex: currentIndex,
-    chunkIndex: chunkIndex++
-          }};
+  metadata: { startIndex, endIndex: currentIndex, chunkIndex: chunkIndex++ }};
         // Start new chunk with overlap
         const _overlap = this.getOverlapText(currentChunk);
         currentChunk = overlap + split;
-        startIndex = currentIndex - this.config.lengthFunction!(overlap);
+        startIndex = currentIndex - this.config.lengthFunction!(overlap)
       } else {
-        currentChunk += split;
+        currentChunk += split
 }
-      currentIndex += splitLength;
+      currentIndex += splitLength
 }
     // Add remaining chunk
     if (currentChunk) {
       chunks.push({
         text: currentChunk.trim(),
-  metadata: {
-          startIndex,
-          endIndex: currentIndex,
-          chunkIndex);
-}
-    return chunks;
+  metadata: { startIndex, endIndex: currentIndex, chunkIndex) }
+    return chunks
 }
   protected getOverlapText(text: string) {
     const _length = this.config.lengthFunction!(text);
     if (text) {
-      return $2;
+      return $2
 }
     // Find a good break point for overlap
     const _targetStart = length - this.config.chunkOverlap;
@@ -75,18 +68,16 @@ export abstract class TextSplitter {
       currentLength += this.config.lengthFunction!(words[i]) + 1;
       if(currentLength >= targetStart) {
         overlapStart = i;
-        break;
-}
-}
-    return words.slice(overlapStart).join(', ');
-}
-}
+        break
+}}
+    return words.slice(overlapStart).join(', ')
+}}
 /**
  * Character-based text splitter
  * Splits text by a specified separator (default: double newline)
  */
 export class CharacterTextSplitter extends TextSplitter {
-  private, separator: string;
+  private separator: string;
   constructor(config: TextSplitterConfig & { separator?: string }) {
     super(config);
     this.separator = config.separator || '\n\n'
@@ -96,38 +87,36 @@ export class CharacterTextSplitter extends TextSplitter {
     if(this.config.keepSeparator) {
       // Re-add separator to splits
       for(let i = 0; i < splits.length - 1; i++) {
-        splits[i] += this.separator;
-}
-}
-    return this.mergeChunks(splits);
-}
-}
+        splits[i] += this.separator
+}}
+    return this.mergeChunks(splits)
+}}
 /**
  * Recursive character text splitter
  * Tries multiple separators in order of preference
  */
 export class RecursiveCharacterTextSplitter extends TextSplitter {
-  private, separators: string[];
+  private separators: string[];
   constructor(config: TextSplitterConfig & { separators?: string[] }) {
     super(config);
-    this.separators = config.separators || ['\n\n', '\n', '. ', ', ', ''];
+    this.separators = config.separators || ['\n\n', '\n', '. ', ', ', '']
 }
   split(text: string): TextChunk[] {
-    return this.recursiveSplit(text, this.separators);
+    return this.recursiveSplit(text, this.separators)
 }
   private recursiveSplit(text: string, separators: string[]): TextChunk[] {
     if(!separators.length) {
-      return this.mergeChunks([text]);
+      return this.mergeChunks([text])
 }
     const _separator = separators[0];
     const _remainingSeparators = separators.slice(1);
     if(!separator) {
       // Last, resort: split by character
-      return this.splitByCharacter(text);
+      return this.splitByCharacter(text)
 }
     const splits = text.split(separator);
     // Check if any split is too large
-    const _needsFurtherSplitting = splits.some(
+    const _needsFurtherSplitting = splits.some(;
       split: any => this.config.lengthFunction!(split) > this.config.chunkSize
     );
     if (needsFurtherSplitting) {
@@ -138,54 +127,47 @@ export class RecursiveCharacterTextSplitter extends TextSplitter {
           const subChunks = this.recursiveSplit(split, remainingSeparators);
           allSplits.push(...subChunks.map((c) => c.text))
         } else {
-          allSplits.push(split);
-}
-}
-      return this.mergeChunks(allSplits);
+          allSplits.push(split)
+}}
+      return this.mergeChunks(allSplits)
 }
     // Re-add separator if needed
     if(this.config.keepSeparator && separator) {
       for(let i = 0; i < splits.length - 1; i++) {
-        splits[i] += separator;
-}
-}
-    return this.mergeChunks(splits);
+        splits[i] += separator
+}}
+    return this.mergeChunks(splits)
 }
   private splitByCharacter(text: string): TextChunk[] {
     const chunks: TextChunk[] = [];
     let currentIndex = 0;
     let chunkIndex = 0;
     while(currentIndex < text.length) {
-      const _endIndex = Math.min(
+      const _endIndex = Math.min(;
         currentIndex + this.config.chunkSize,
         text.length
       );
       const _chunkText = text.slice(currentIndex, endIndex);
       chunks.push({
         text: chunkText,
-    metadata: {
-  startIndex: currentIndex,
-          endIndex,
-          chunkIndex: chunkIndex++
-        }};
-      currentIndex = endIndex - this.config.chunkOverlap;
+    metadata: { startIndex: currentIndex, endIndex, chunkIndex: chunkIndex++ }};
+      currentIndex = endIndex - this.config.chunkOverlap
 }
-    return chunks;
-}
-}
+    return chunks
+}}
 /**
  * Code text splitter
  * Splits code files intelligently by functions/classes
  */
 export class CodeTextSplitter extends TextSplitter {
-  private, language: string;
+  private language: string;
   constructor(config: TextSplitterConfig & { language: string }) {
     super(config);
-    this.language = config.language.toLowerCase();
+    this.language = config.language.toLowerCase()
 }
   split(text: string): TextChunk[] {
     const splitter = this.getSplitterForLanguage();
-    return splitter.split(text);
+    return splitter.split(text)
 }
   private getSplitterForLanguage(): TextSplitter {
     const languagePatterns: Record<string, string[]> = {
@@ -220,9 +202,8 @@ export class CodeTextSplitter extends TextSplitter {
       rust: ['\nfn ', '\nstruct ', '\nenum ', '\nimpl ', '\n\n', '\n', ', '];
     const separators = languagePatterns[this.language] || ['\n\n', '\n', ', '];
     return new RecursiveCharacterTextSplitter({ ...this.config,
-      separators });
-}
-}
+      separators })
+}}
 /**
  * Markdown text splitter
  * Splits markdown documents by headers and sections
@@ -236,15 +217,15 @@ export class MarkdownTextSplitter extends TextSplitter {
     let match: RegExpExecArray | null;
     while ((match = headerPattern.exec(text)) !== null) {
       if(lastIndex < match.index) {
-        sections.push(text.slice(lastIndex, match.index));
+        sections.push(text.slice(lastIndex, match.index))
 }
-      lastIndex = match.index;
+      lastIndex = match.index
 }
     if(lastIndex < text.length) {
-      sections.push(text.slice(lastIndex));
+      sections.push(text.slice(lastIndex))
 }
     // Further split by other markdown elements
-    const markdownSplitter = new RecursiveCharacterTextSplitter({ ...this.config,,
+    const markdownSplitter = new RecursiveCharacterTextSplitter({ ...this.config,
     separators: ['\n## ', '\n### ', '\n#### ', '\n\n', '\n', ', '] });
     const allChunks: TextChunk[] = [];
     let globalIndex = 0;
@@ -254,13 +235,12 @@ export class MarkdownTextSplitter extends TextSplitter {
       for(const chunk of sectionChunks) {
         chunk.metadata.startIndex += globalIndex;
         chunk.metadata.endIndex += globalIndex;
-        allChunks.push(chunk);
+        allChunks.push(chunk)
 }
-      globalIndex += section.length;
+      globalIndex += section.length
 }
-    return allChunks;
-}
-}
+    return allChunks
+}}
 /**
  * Factory function to create appropriate text splitter
  */
@@ -269,33 +249,20 @@ export function createTextSplitter(,
     case 'character':
     return new CharacterTextSplitter(config);
     break;
-
-    break;
-break;
-
-
     case 'recursive':
     return new RecursiveCharacterTextSplitter(config);
     break;
-
     case 'code':
 if(!config.language) {
     break;
-
         throw new Error('Language is required for code splitter');
-break;
-}
-}
+break
+}}
       return new CodeTextSplitter(
         config as TextSplitterConfig & { language: string }
       );
     case 'markdown':
     return new MarkdownTextSplitter(config),
     break;
-
-    break;
-break;
-
-
     default: throw new Error(`Unknown text, splitter: type, ${type}`);``
 }

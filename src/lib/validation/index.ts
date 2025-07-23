@@ -3,8 +3,7 @@ export const _ChatRequestSchema = z.object({
   messages: z.array(
     z.object({
       role: z.enum(['system', 'user', 'assistant']),
-      content: z.string()})
-  ),
+      content: z.string()})),
   model: z.string().optional(),
     maxTokens: z.number().optional(),
     temperature: z.number().optional(),
@@ -21,7 +20,7 @@ export const _CreateProjectSchema = z.object({
   name: z.string().min(3).max(50),
     type: z.enum(['web', 'mobile', 'desktop', 'api', 'fullstack']),
   framework: z.string(),
-    features: z.array(z.string()),
+    features: z.array(z.string(),
     description: z.string().optional(),
     requirements: z.string().optional()});
 // Basic validation schemas
@@ -43,7 +42,5 @@ export function validateSafe<T>(,
 ): { success: true, data: T } | { success: false, error: z.ZodError } {
   const result = schema.safeParse(data);
   if(result.success) {
-    return { success: true, data: result.data };
-    } else {
-    return { success: false, error: result.error };
-}
+    return { success: true, data: result.data }} else {
+    return { success: false, error: result.error }}

@@ -1,8 +1,6 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 import { NextRequest, NextResponse } from 'next/server';
-
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         // Simulate stats data
@@ -17,12 +15,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             },
             timestamp: new Date().toISOString()
         };
-        
-        return NextResponse.json(stats);
+        return NextResponse.json(stats)
     } catch (error) {
         console.error('Admin stats error:', error);
         return NextResponse.json(
             { error: 'Failed to fetch stats' }, { status: 500 }
-        );
-    }
-}
+        )
+    }}

@@ -1,31 +1,25 @@
 'use client';
-
 import React from 'react';
 import { cn } from '@/utils/cn';
-
 interface LoadingProps {
-size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'spinner' | 'dots' | 'pulse' | 'skeleton' | 'wave' | 'brand';
-  className?: string;
-  color?: 'primary' | 'secondary' | 'accent' | 'muted';
-
+size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  variant?: 'spinner' | 'dots' | 'pulse' | 'skeleton' | 'wave' | 'brand',
+  className?: string,
+  color?: 'primary' | 'secondary' | 'accent' | 'muted'
 }
-
 const sizeClasses = {
   xs: 'w-4 h-4',
   sm: 'w-6 h-6',
   md: 'w-8 h-8',
-  lg: 'w-12 h-12',
+  lg: 'w-12 h-12'
   xl: 'w-16 h-16'
 };
-
 const colorClasses = {
   primary: 'text-brand-primary-600',
   secondary: 'text-brand-secondary-600',
-  accent: 'text-brand-primary-500',
+  accent: 'text-brand-primary-500'
   muted: 'text-muted-foreground'
 };
-
 // Spinner Loading Component
 export function Spinner({
   size = 'md',
@@ -44,11 +38,7 @@ export function Spinner({
       aria-label="Loading"
     >
       <span className="sr-only">Loading...</span>
-          </div>
-
-        );
-
-      }
+      )}
 // Dots Loading Component
 export function LoadingDots({
   size = 'md',
@@ -59,17 +49,16 @@ export function LoadingDots({
     xs: 'w-1 h-1',
     sm: 'w-1.5 h-1.5',
     md: 'w-2 h-2',
-    lg: 'w-3 h-3',
+    lg: 'w-3 h-3'
     xl: 'w-4 h-4'
   };
-
   return (
     <div
       className={cn('flex space-x-1', className)}
       role="status"
       aria-label="Loading"
     >
-      {[0, 1, 2].map((i) => (
+      {[0, 1, 2].map((i) => (\n    </div>
         <div
           key={i}
           className={cn(
@@ -81,14 +70,9 @@ export function LoadingDots({
           style={{
             animationDelay: `${i * 0.2}s`,
             animationDuration: '1.4s'
-          }} />
-      ))}
+          }} >))}</div>
       <span className="sr-only">Loading...</span>
-          </div>
-
-        );
-
-      }
+      )}
 // Pulse Loading Component
 export function LoadingPulse({
   size = 'md',
@@ -107,19 +91,14 @@ export function LoadingPulse({
       aria-label="Loading"
     >
       <span className="sr-only">Loading...</span>
-          </div>
-
-        );
-
-      }
+      )}
 // Skeleton Loading Component
 interface SkeletonProps {
-className?: string;
-  variant?: 'text' | 'circular' | 'rectangular' | 'rounded';
-  width?: string | number;
-  height?: string | number;
-  lines?: number;
-
+className?: string,
+  variant?: 'text' | 'circular' | 'rectangular' | 'rounded',
+  width?: string | number,
+  height?: string | number,
+  lines?: number
 }
 
 export function Skeleton({
@@ -130,18 +109,16 @@ export function Skeleton({
   lines = 1
 }: SkeletonProps) {
   const baseClasses = 'animate-pulse bg-brand-secondary-200 dark:bg-brand-secondary-700';
-  
   const variantClasses = {
     text: 'h-4 rounded',
     circular: 'rounded-full',
-    rectangular: 'rounded',
+    rectangular: 'rounded'
     rounded: 'rounded-lg'
   };
-
   if (variant === 'text' && lines > 1) {
     return (
       <div className={cn('space-y-2', className)}>
-        {Array.from({ length: lines }).map((_, i) => (
+        {Array.from({ length: lines }).map((_, i) => (\n    </div>
           <div
             key={i}
             className={cn(
@@ -149,13 +126,8 @@ export function Skeleton({
               variantClasses.text,
               i === lines - 1 ? 'w-3/4' : 'w-full'
             )}
-            style={{ width: i === lines - 1 ? '75%' : width, height }} />
-        ))}
-            </div>
-
-          );
-
-        }
+            style={{ width: i === lines - 1 ? '75%' : width, height }} >))}</div>
+      )}
   return (
     <div
       className={cn(baseClasses, variantClasses[variant], className)}
@@ -164,11 +136,7 @@ export function Skeleton({
       aria-label="Loading content"
     >
       <span className="sr-only">Loading...</span>
-          </div>
-
-        );
-
-      }
+      )}
 // Wave Loading Component
 export function LoadingWave({
   size = 'md',
@@ -179,17 +147,16 @@ export function LoadingWave({
     xs: 'h-2',
     sm: 'h-3',
     md: 'h-4',
-    lg: 'h-6',
+    lg: 'h-6'
     xl: 'h-8'
   };
-
   return (
     <div
       className={cn('flex items-end space-x-1', className)}
       role="status"
       aria-label="Loading"
     >
-      {[0, 1, 2, 3, 4].map((i) => (
+      {[0, 1, 2, 3, 4].map((i) => (\n    </div>
         <div
           key={i}
           className={cn(
@@ -200,14 +167,9 @@ export function LoadingWave({
           style={{
             animationDelay: `${i * 0.1}s`,
             animationDuration: '1.2s'
-          }} />
-      ))}
+          }} >))}</div>
       <span className="sr-only">Loading...</span>
-          </div>
-
-        );
-
-      }
+      )}
 // Brand Loading Component with Logo
 export function BrandLoader({ size = 'md', className }: LoadingProps) {
   return (
@@ -215,25 +177,15 @@ export function BrandLoader({ size = 'md', className }: LoadingProps) {
       className={cn('flex flex-col items-center space-y-4', className)}
       role="status"
       aria-label="Loading"
-    >
-      <div className={cn('relative', sizeClasses[size])}>
-        {/* Brand Logo with Animation */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary-600 to-brand-primary-800 animate-pulse" />
-        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center">
+     className={cn('relative', sizeClasses[size])}>
+        {/* Brand Logo with Animation */}</div>
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary-600 to-brand-primary-800 animate-pulse" / className="absolute inset-2 rounded-full bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center"></div>
           <span className="text-white font-bold text-xs">AGS</span>
-        </div>
         {/* Rotating Ring */}
-        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-brand-primary-400 animate-spin" />
-      </div>
-      <div className="text-sm text-brand-secondary-600 animate-pulse">
-        Loading AI Guided SaaS...
-      </div>
+        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-brand-primary-400 animate-spin" > <div className="text-sm text-brand-secondary-600 animate-pulse">
+        Loading AI Guided SaaS...</div>
       <span className="sr-only">Loading AI Guided SaaS Platform...</span>
-          </div>
-
-        );
-
-      }
+      )}
 // Card Skeleton
 export function CardSkeleton({ className }: { className?: string }) {
   return (
@@ -241,13 +193,9 @@ export function CardSkeleton({ className }: { className?: string }) {
       <Skeleton variant="rectangular" height="20px" width="60%" />
       <Skeleton variant="text" lines={3} />
       <div className="flex space-x-2">
-        <Skeleton variant="rectangular" height="32px" width="80px" />
-        <Skeleton variant="rectangular" height="32px" width="80px" />
-            </div>
-
-          );
-
-        }
+        <Skeleton variant="rectangular" height="32px" width="80px" / /> variant="rectangular" height="32px" width="80px" />
+</div>
+      )}
 // Table Skeleton
 export function TableSkeleton({
   rows = 5,
@@ -255,14 +203,14 @@ export function TableSkeleton({
   className
 }: {
   rows?: number;
-  columns?: number;
-  className?: string;
+  columns?: number
+  className?: string
 }) {
   return (
     <div className={cn('space-y-3', className)}>
-      {/* Header */}
+      {/* Header */}</div>
       <div className="flex space-x-4">
-        {Array.from({ length: columns }).map((_, i) => (
+        {Array.from({ length: columns }).map((_, i) => (\n    </div>
           <Skeleton
             key={i}
             variant="rectangular"
@@ -271,40 +219,33 @@ export function TableSkeleton({
         ))}
       </div>
       {/* Rows */}
-      {Array.from({ length: rows }).map((_, rowIndex) => (
-        <div key={rowIndex} className="flex space-x-4">
-          {Array.from({ length: columns }).map((_, colIndex) => (
+      {Array.from({ length: rows }).map((_, rowIndex) => (\n    <div key={rowIndex} className="flex space-x-4">
+          {Array.from({ length: columns }).map((_, colIndex) => (\n    </div>
             <Skeleton
               key={colIndex}
               variant="rectangular"
               height="16px"
               className="flex-1" />
           ))}
-        </div>
+      </div>
       ))}
-          </div>
-
-        );
-
-      }
+      </div>
+      )}
 // Page Loading Component
 export function PageLoader({ className }: { className?: string }) {
   return (
     <div className={cn('min-h-screen flex items-center justify-center', className)}>
       <BrandLoader size="xl" />
-          </div>
-
-        );
-
-      }
+</div>
+      )}
 // Button Loading State
 interface ButtonLoadingProps {
-loading?: boolean;
-  children: React.ReactNod;e;
-  className?: string;
-  disabled?: boolean;
-  size?: 'xs' | 'sm' | 'md' | 'lg';
-
+loading?: boolean,
+  children: React.ReactNod
+e,
+  className?: string,
+  disabled?: boolean,
+  size?: 'xs' | 'sm' | 'md' | 'lg'
 }
 
 export function ButtonLoading({
@@ -325,26 +266,20 @@ export function ButtonLoading({
       disabled={disabled || loading}
       {...props}
     >
-      {loading && (
+      {loading && (</button>
         <div className="absolute inset-0 flex items-center justify-center">
           <Spinner size={size} color="primary" />
-        </div>
-      
-              
-            )}
+</div>
+      )}
       <span className={cn(loading && 'opacity-0')}>{children}</span>
-    </button>
-  );
-}
-
+      )}
 // Progress Bar Loading
 interface ProgressLoadingProps {
-progress?: number;
-  className?: string;
-  showPercentage?: boolean;
-  color?: 'primary' | 'secondary' | 'accent';
-  size?: 'sm' | 'md' | 'lg';
-
+progress?: number,
+  className?: string,
+  showPercentage?: boolean,
+  color?: 'primary' | 'secondary' | 'accent',
+  size?: 'sm' | 'md' | 'lg'
 }
 
 export function ProgressLoading({
@@ -356,61 +291,47 @@ export function ProgressLoading({
 }: ProgressLoadingProps) {
   const heightClasses = {
     sm: 'h-1',
-    md: 'h-2',
+    md: 'h-2'
     lg: 'h-3'
   };
-
   const progressColorClasses = {
     primary: 'bg-brand-primary-600',
-    secondary: 'bg-brand-secondary-600',
+    secondary: 'bg-brand-secondary-600'
     accent: 'bg-brand-primary-500'
   };
-
   return (
     <div className={cn('w-full', className)}>
-      {showPercentage && (
+      {showPercentage && (</div>
         <div className="flex justify-between text-sm text-brand-secondary-600 mb-1">
           <span>Progress</span>
           <span>{Math.round(progress
-              
+</span>
             )}%</span>
-        </div>
       )}
       <div className={cn(
         'w-full bg-brand-secondary-200 rounded-full overflow-hidden',
         heightClasses[size]
-      )}>
-        <div
-          className={cn(
+      )} className={cn(
             'h-full transition-all duration-300 ease-out rounded-full',
             progressColorClasses[color]
           )}
-          style={{ width: `${Math.min(100, Math.max(0, progress))}%` }} />
-            </div>
-
-          );
-
-        }
+          style={{ width: `${Math.min(100, Math.max(0, progress))}%` }} /></div>
+      )}
 // Shimmer Effect
 export function ShimmerEffect({ className }: { className?: string }) {
   return (
     <div className={cn(
       'relative overflow-hidden bg-brand-secondary-100 dark:bg-brand-secondary-800',
       className
-    )}>
-      <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-          </div>
-
-        );
-
-      }
+    )} className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" /></div>
+      )}
 // Loading Container
 interface LoadingContainerProps {
-loading: boolean;
-  children: React.ReactNod;e;
-  fallback?: React.ReactNode;
-  className?: string;
-
+loading: boolean,
+  children: React.ReactNod
+e,
+  fallback?: React.ReactNode,
+  className?: string
 }
 
 export function LoadingContainer({
@@ -423,14 +344,10 @@ export function LoadingContainer({
     return (
       <div className={cn('flex items-center justify-center p-8', className)}>
         {fallback || <BrandLoader />}
-            </div>
-
-          );
-
-        }
-  return <React.Fragment>{children}</React.Fragment>;
+</div>
+      )}
+  return <React.Fragment>{children}</React.Fragment>
 }
-
 // Main Loading Component (combines all variants)
 export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
   switch (variant) {
@@ -444,10 +361,8 @@ export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
       return <BrandLoader {...props} />;
     case 'spinner':
     default:
-      return <Spinner {...props} />;
-  }
-
-    </div>
+      return <Spinner {...props} />}
+</div>
+  
     </HTMLButtonElement>
-    </div>
   }

@@ -3,8 +3,8 @@ describe('CPURateLimiter': any, (: any) => {
   let rateLimiter: CPURateLimiter;
   beforeEach((: any) => {
     rateLimiter = new CPURateLimiter({
-      maxCpuUsage: 70;,
-  maxMemoryUsage: 80;,
+      maxCpuUsage: 70;
+  maxMemoryUsage: 80;
   checkInterval: 100;
       cooldownPeriod: 500})
   })
@@ -19,8 +19,8 @@ describe('CPURateLimiter': any, (: any) => {
     })
     it('should accept custom configuration': any, (: any) => {
       const _config = {
-        maxCpuUsage: 50;,
-  maxMemoryUsage: 60;,
+        maxCpuUsage: 50;
+  maxMemoryUsage: 60;
   checkInterval: 200;
         cooldownPeriod: 1000}
       const limiter = new CPURateLimiter(config);
@@ -50,7 +50,7 @@ describe('CPURateLimiter': any, (: any) => {
   describe('configuration updates': any, (: any) => {
     it('should update configuration': any, (: any) => {
       rateLimiter.updateConfig({
-        maxCpuUsage: 90;,
+        maxCpuUsage: 90;
   maxMemoryUsage: 95})
       // Config should be updated
       expect(rateLimiter.isCurrentlyThrottled()).toBe(false)

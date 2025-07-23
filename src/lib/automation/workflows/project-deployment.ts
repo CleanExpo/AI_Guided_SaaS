@@ -2,7 +2,7 @@ import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated project deployment
  */
 export function createProjectDeploymentWorkflow(,
-    projectName: string, webhookPath: string = 'deploy-project'): string, webhookPath: string = 'deploy-project'): N8nWorkflow {
+    projectName: string, webhookPath: string = 'deploy-project'): string; webhookPath: string = 'deploy-project'): N8nWorkflow {
   const nodes: N8nNode[] = [// 1. Webhook trigger,
   {
   id: 'webhook_1',
@@ -31,7 +31,7 @@ const _deploymentType = $input.item.json.deploymentType || 'production';
 const _config = $input.item.json.config || {};
 // Validate input
 if(!projectId) {
-  throw new Error('Project ID is required');
+  throw new Error('Project ID is required')
 }
 return {
   projectId,
@@ -107,9 +107,8 @@ return {
         },
         sendBody: true,
     bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
-    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" } }) }}',
-    options: {}
-},
+    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" }}) }}';
+    options: {}},
     // 6. Health check
     {
       id: 'wait_1',
@@ -129,7 +128,7 @@ return {
     position: [1450, 200],
     parameters: {
   method: 'GET',
-        url: '={{ $node["Deploy to Staging"].json.url }}/api/health',
+        url: '={{ $node["Deploy to Staging"].json.url }}/api/health';
     options: {
           timeout: 10000,
     retry: {
@@ -143,15 +142,14 @@ return {
       typeVersion: 1,
     position: [1650, 300],
     parameters: {
-  conditions: {,
+  conditions: {
   boolean: [
             {
   value1: '={{ $json.status }}',
               value2: 'healthy'
 }
    ]
-}
-},
+}},
     {
       id: 'http_5',
       name: 'Deploy to Production',
@@ -175,9 +173,8 @@ return {
         sendBody: true,
     bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
     gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" },
-    target: "production" }) }}',
-    options: {}
-},
+    target: "production" }) }}';
+    options: {}},
     // 8. Send notifications
     {
       id: 'code_2',
@@ -236,23 +233,22 @@ return {
     parameters: {
   fromEmail: '={{ $env.NOTIFICATION_EMAIL }}',
         toEmail: '={{ $env.ADMIN_EMAIL }}',
-        subject: 'Deployment {{ $json.success ? "Successful" : "Failed" }} - {{ $json.projectId }}',
+        subject: 'Deployment {{ $json.success ? "Successful" : "Failed" }} - {{ $json.projectId }}';
         emailFormat: 'html',
         htmlBody: ```
 <h2>Deployment {{ $json.success ? "Successful" : "Failed" }}</h2>
 <p><strong>Project:</strong> {{ $json.projectId }}</p>
 <p><strong>Time:</strong> {{ $json.timestamp }}</p>
 <p><strong>Message:</strong> {{ $json.message }}</p>
-{{ $json.success ? '<p><strong>Production: URL:</strong> <a href="' + $json.deploymentUrl + '">' + $json.deploymentUrl + '</a></p>' : '' }}
-<p><strong>Staging: URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}</a></p>
+{{ $json.success ? '<p><strong>Production: URL:</strong> <a href="' + $json.deploymentUrl + '">' + $json.deploymentUrl + '</a>' : '' }}
+<p><strong>Staging: URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}</a>
 <h3>Details</h3>
 <pre>{{ JSON.stringify($json.details, null, 2) }}</pre>
 `,``
-    options: {},
+    options: {};
     credentials: {
         smtp: 'SMTP Credentials'
-}
-}
+}}
   ]
   // Define connections
   const _connections = {
@@ -291,8 +287,7 @@ return {
     },
     'code_3': {
       'main': [[{ node: 'email_1', type: 'main' as const index: 0 }]]
-}
-}
+}}
   return {
     name: `Deploy ${projectName}`
     active: false,

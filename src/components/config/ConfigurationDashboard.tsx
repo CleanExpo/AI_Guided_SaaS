@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,45 +7,42 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 interface ConfigurationData {
-status: string;
-    features: {
-  enabled: string[];
-    total: number
-
+status: string,
+  features: {
+  enabled: string[],
+  total: number
 }
     aiProviders: {
     primary: string,
-    fallback: string,
+    fallback: string
     research: string
   },
     timestamp: string
 };
 interface FeatureFlags {
-aiGeneration: boolean;
-    collaboration: boolean;
-    templateMarketplace: boolean;
-    analyticsDashboard: boolean;
-    adminPanel: boolean;
-    experimentalAiAgents: boolean;
-    experimentalRealTimeCollaboration: boolean;
-    experimentalAdvancedAnalytics: boolean;
-    betaVoiceCommands: boolean;
-    betaAiDebugging: boolean
-
+aiGeneration: boolean,
+  collaboration: boolean,
+  templateMarketplace: boolean,
+  analyticsDashboard: boolean,
+  adminPanel: boolean,
+  experimentalAiAgents: boolean,
+  experimentalRealTimeCollaboration: boolean,
+  experimentalAdvancedAnalytics: boolean,
+  betaVoiceCommands: boolean,
+  betaAiDebugging: boolean
 };
 interface FullConfig {
 aiProvider: {
-  primary: string;
-    fallback: string;
-    research: string
-
+  primary: string,
+  fallback: string,
+  research: string
 }
     openai: {
     displayName: string,
     primary: string,
     codeGeneration: string,
     tokensMax: number,
-    temperatureCode: number,
+    temperatureCode: number
     rateLimitRequestsPerMinute: number
   },
     anthropic: {
@@ -54,45 +50,45 @@ aiProvider: {
     primary: string,
     codeGeneration: string,
     tokensMax: number,
-    temperatureCode: number,
+    temperatureCode: number
     rateLimitRequestsPerMinute: number
   },
     google: {
     displayName: string,
     primary: string,
     tokensMax: number,
-    temperatureDefault: number,
+    temperatureDefault: number
     rateLimitRequestsPerMinute: number
   },
     framework: {
     primary: string,
     version: string,
-    typescript: boolean,
+    typescript: boolean
     tailwind: boolean
   },
     security: {
     rateLimitEnabled: boolean,
     authProvider: string,
-    cspEnabled: boolean,
+    cspEnabled: boolean
     ddosProtection: boolean
   },
     performance: {
     cacheStrategy: string,
     cdnEnabled: boolean,
-    apmEnabled: boolean,
+    apmEnabled: boolean
     analyticsEnabled: boolean
   },
     features: FeatureFlags
 };
 export default function ConfigurationDashboard() {
-      </ConfigurationData>
+</ConfigurationData>
   const [configData, setConfigData] = useState<ConfigurationData | null>(null);
-      </FullConfig>
+</FullConfig>
   const [fullConfig, setFullConfig] = useState<FullConfig | null>(null);
-      </FeatureFlags>
+</FeatureFlags>
   const [features, setFeatures] = useState<FeatureFlags | null>(null);
   const [loading, setLoading] = useState<any>(true);
-      </string>
+</string>
   const [error, setError] = useState<string | null>(null);
   const [reloading, setReloading] = useState<any>(false);
   const _fetchConfiguration = async () => {
@@ -112,39 +108,39 @@ export default function ConfigurationDashboard() {
       // Fetch full config
       const fullResponse = await fetch('/api/config?section=all');
       if (!fullResponse.ok) throw new Error('Failed to fetch full configuration');
-      const fullData = await fullResponse.json();
-      setFullConfig(fullData.data);
+      const fullData = await fullResponse.json()
+      setFullConfig(fullData.data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error occurred');
+      setError(err instanceof Error ? err.message: 'Unknown error occurred')
     } finally {
-    setLoading(false);
+    setLoading(false)
 }
   const _reloadConfiguration = async () => {
     try {
-      setReloading(true);
+      setReloading(true)
       const response = await fetch('/api/config/reload', { method: 'POST' });
       if (!response.ok) throw new Error('Failed to reload configuration');
       // Refresh data after reload
-      await fetchConfiguration();
+      await fetchConfiguration()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to reload configuration');
+      setError(err instanceof Error ? err.message: 'Failed to reload configuration')
     } finally {
-    setReloading(false);
+    setReloading(false)
 }
   useEffect(() => {
-    fetchConfiguration();
+    fetchConfiguration()
   }, []);
   if (loading) {
     return (<div className="flex items-center justify-center p-8"></div>
         <div className="text-center"></div>
-          <Progress value={66} className="w-64 mb-4" /></Progress>
+          <Progress value={66} className="w-64 mb-4" />
           <p className="text-sm text-muted-foreground">Loading configuration...</p>
   if (error) {
     return (
     <Alert className="m-4"></Alert>
         <AlertDescription>
           Error loading,
-    configuration: {error}</AlertDescription>
+    configuration: { error }</AlertDescription>
           <Button
             onClick={fetchConfiguration}
             variant="outline"
@@ -152,7 +148,7 @@ export default function ConfigurationDashboard() {
             className="ml-4"
           >
                     Retry
-                  </Button>
+</Button>
   const _enabledFeaturesCount = features ? Object.values(features).filter(Boolean).length : 0;
   const _totalFeaturesCount = features ? Object.keys(features).length : 0;
   const _featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCount / totalFeaturesCount) * 100 : 0;
@@ -170,8 +166,6 @@ Button
             variant="outline"
           >
             {reloading ? 'Reloading...' : 'Reload Config'}</Button>
-        
-              
             )},
     {/* Status, Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4"></div>
@@ -186,8 +180,8 @@ Button
             <CardTitle className="text-sm font-medium">Features Enabled</CardTitle>
           <CardContent></CardContent>
             <div className="text-2xl font-bold">
-              {enabledFeaturesCount}/{totalFeaturesCount}
-            <Progress value={featureCompletionPercentage} className="mt-2" /></Progress>
+              {enabledFeaturesCount}/{totalFeaturesCount}</div>
+            <Progress value={featureCompletionPercentage} className="mt-2" />
         <Card></Card>
           <CardHeader className="pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Primary AI Provider</CardTitle>
@@ -213,23 +207,23 @@ Button
             <CardHeader></CardHeader>
               <CardTitle>Feature Flags</CardTitle>
               <CardDescription>
-                Current status of platform features and experimental capabilities</CardDescription>
+                Current status of platform features and experimental capabilities</Card>
             <CardContent>
-              {features  && (/CardContent>
+              {features  && (/CardContent></CardContent>
                 <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {Object.entries(features).map(([feature, enabled]) => (</div>
+                  {Object.entries(features).map(([feature, enabled]) => (\n    </div>
                     <div key={feature} className="flex items-center justify-between p-3 border rounded-lg"></div>
                       <span className="font-medium">
-                        {feature.replace(/([A-Z])/g, ' $1').replace(/^./, str: any => str.toUpperCase())}</span>
+                        {feature.replace(/([A-Z])/g, ' $1').replace(/^./, str: any => str.toUpperCase())}</span>
                       <Badge variant={enabled ? 'default' : 'secondary'}>
                         {enabled ? 'Enabled' : 'Disabled'}</Badge>
                   ))}
               )}
-            </CardContent>
+</CardContent>
         <TabsContent value="ai-models", className="space-y-4"></TabsContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {fullConfig  && (
-/div>
+/div></div>
               <React.Fragment>Card></Card>
                   <CardHeader></CardHeader>
                     <CardTitle className="text-lg">OpenAI</CardTitle>
@@ -244,11 +238,9 @@ Button
                     <div className="flex justify-between"></div>
                       <span className="text-sm">Max: Tokens,</span>
                       <span className="text-sm">{fullConfig.openai.tokensMax}</span>
-                    </div>
                     <div className="flex justify-between"></div>
                       <span className="text-sm">Rate: Limit,</span>
                       <span className="text-sm">{fullConfig.openai.rateLimitRequestsPerMinute}/min</span>
-                    </div>
                 <Card></Card>
                   <CardHeader></CardHeader>
                     <CardTitle className="text-lg">Anthropic</CardTitle>
@@ -263,11 +255,9 @@ Button
                     <div className="flex justify-between"></div>
                       <span className="text-sm">Max: Tokens,</span>
                       <span className="text-sm">{fullConfig.anthropic.tokensMax}</span>
-                    </div>
                     <div className="flex justify-between"></div>
                       <span className="text-sm">Rate: Limit,</span>
                       <span className="text-sm">{fullConfig.anthropic.rateLimitRequestsPerMinute}/min</span>
-                    </div>
                 <Card></Card>
                   <CardHeader></CardHeader>
                     <CardTitle className="text-lg">Google</CardTitle>
@@ -279,17 +269,12 @@ Button
                     <div className="flex justify-between"></div>
                       <span className="text-sm">Max: Tokens,</span>
                       <span className="text-sm">{fullConfig.google.tokensMax}</span>
-                    </div>
                     <div className="flex justify-between"></div>
                       <span className="text-sm">Temperature:</span>
                       <span className="text-sm">{fullConfig.google.temperatureDefault}</span>
-                    </div>
                     <div className="flex justify-between"></div>
                       <span className="text-sm">Rate: Limit,</span>
-                      <span className="text-sm">{fullConfig.google.rateLimitRequestsPerMinute}/min</span>
-                    </div></React.Fragment>
-            
-              
+                      <span className="text-sm">{fullConfig.google.rateLimitRequestsPerMinute}/min</span></React.Fragment>
             )}
         <TabsContent value="framework", className="space-y-4"></TabsContent>
           <Card></Card>
@@ -298,7 +283,7 @@ Button
               <CardDescription>Development framework and build settings</CardDescription>
             <CardContent>
               {fullConfig  && (
-/CardContent>
+/CardContent></CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                   <div className="space-y-3"></div>
                     <div className="flex justify-between"></div>
@@ -307,7 +292,6 @@ Button
                     <div className="flex justify-between"></div>
                       <span className="font-medium">Version:</span>
                       <span>{fullConfig.framework.version}</span>
-                    </div>
                   <div className="space-y-3"></div>
                     <div className="flex justify-between"></div>
                       <span className="font-medium">TypeScript:</span>
@@ -317,8 +301,7 @@ Button
                       <span className="font-medium">Tailwind: CSS,</span>
                       <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'}>
                         {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}</Badge>
-              
-            )}
+      )}
         <TabsContent value="security", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
@@ -326,7 +309,7 @@ Button
               <CardDescription>Security features and protection settings</CardDescription>
             <CardContent>
               {fullConfig  && (
-/CardContent>
+/CardContent></CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                   <div className="space-y-3"></div>
                     <div className="flex justify-between"></div>
@@ -345,8 +328,7 @@ Button
                       <span className="font-medium">DDoS: Protection,</span>
                       <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'}>
                         {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}</Badge>
-              
-            )}
+      )}
         <TabsContent value="performance", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
@@ -354,7 +336,7 @@ Button
               <CardDescription>Caching, monitoring, and optimization settings</CardDescription>
             <CardContent>
               {fullConfig  && (
-/CardContent>
+/CardContent></CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                   <div className="space-y-3"></div>
                     <div className="flex justify-between"></div>
@@ -373,16 +355,15 @@ Button
                       <span className="font-medium">Analytics:</span>
                       <Badge variant={fullConfig.performance.analyticsEnabled ? 'default' : 'secondary'}>
                         {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}</Badge>
-              
-            )}
+      )}
     );
-
-    </CardContent>
-    </CardContent>
-    </CardContent>
+</CardContent>
+</string>
+    
+    </CardDescription>
     </any>
-    </string>
-    }
+    </any>
+    </FullConfig>
+  }
 </FeatureFlags>
-</FullConfig>
 </ConfigurationData>

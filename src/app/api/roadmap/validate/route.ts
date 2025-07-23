@@ -1,6 +1,5 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
-
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 const validateSchema = z.object({
@@ -34,21 +33,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       success: true,
       validation
-    });
+    })
   } catch (error) {
     console.error('Validate roadmap error:', error);
     if(error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
-      );
+      )
     }
     return NextResponse.json(
       { error: 'Failed to validate roadmap' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
@@ -58,7 +56,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json(
         { error: 'Roadmap ID is required' },
         { status: 400 }
-      );
+      )
     }
     // Simulate getting validation status
     const validation = {
@@ -70,12 +68,11 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       success: true,
       validation
-    });
+    })
   } catch (error) {
     console.error('Get validation error:', error);
     return NextResponse.json(
       { error: 'Failed to get validation status' },
       { status: 500 }
-    );
-  }
-}
+    )
+  }}
