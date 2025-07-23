@@ -34,32 +34,33 @@ export function generateStaticParams() {
 
 export default function ApiDocPage({ params }: { params: { slug: string } }) {
   const doc = apiDocs[params.slug];
-  
+
   if (!doc) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900">Documentation Not Found</h1>
-          <p className="text-gray-600 mt-2">The requested API documentation does not exist.</p>
-        </div>
+      <div className="container mx-auto p-6">
+        <h1 className="text-2xl font-bold">API Documentation Not Found</h1>
+        <p>The requested API documentation could not be found.</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">{doc.title}</h1>
-          <p className="text-gray-600 mt-2">{doc.description}</p>
-          <div className="flex gap-4 mt-4 text-sm text-gray-500">
-            <span>Category: {doc.category}</span>
-            <span>Version: {doc.version}</span>
-          </div>
+    <div className="container mx-auto p-6">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold">{doc.title}</h1>
+        <p className="text-gray-600 mt-2">{doc.description}</p>
+        <div className="flex items-center gap-4 mt-4">
+          <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+            {doc.category}
+          </span>
+          <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm">
+            {doc.version}
+          </span>
         </div>
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <p>{doc.content}</p>
-        </div>
+      </div>
+      
+      <div className="bg-white rounded-lg border p-6">
+        <pre className="whitespace-pre-wrap text-sm">{doc.content}</pre>
       </div>
     </div>
   );

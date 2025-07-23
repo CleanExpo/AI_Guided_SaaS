@@ -15,26 +15,26 @@ export default function AdminDirectPage() {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    
+
     try {
-      const response = await fetch('/api/admin/auth/login', {
+      const response = await fetch('/api/admin/direct-auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
+        body: JSON.stringify({ password }),
       });
-      
+
       if (response.ok) {
-        router.push('/admin');
-} else {
-        setError('Invalid admin password');
-}
+        router.push('/admin/dashboard');
+      } else {
+        setError('Invalid password');
+      }
     } catch (error) {
       setError('Authentication failed');
-} finally {
+    } finally {
       setIsLoading(false);
-}
+    }
   };
-  
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
@@ -43,25 +43,16 @@ export default function AdminDirectPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Input
-                type="password"
-                placeholder="Enter admin password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
-                required
-              />
-            </div>
-            {error && (
-              <div className="text-red-600 text-sm">{error}</div>
-            )}
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Authenticating...' : 'Access Admin Panel'}
+            <Input
+              type="password"
+              placeholder="Admin Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {error && <p className="text-red-600 text-sm">{error}</p>}
+            <Button type="submit" disabled={isLoading} className="w-full">
+              {isLoading ? 'Authenticating...' : 'Access Admin'}
             </Button>
           </form>
         </CardContent>

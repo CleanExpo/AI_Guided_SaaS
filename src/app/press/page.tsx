@@ -6,27 +6,25 @@ import { Badge } from '@/components/ui/badge';
 import { Download, ExternalLink, Calendar } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Press & Media - AI Guided SaaS Platform',
-  description: 'Press releases, media kit, and company information for journalists and media'
-};
+  description: 'Press releases,
+  media kit,
+  and company information for journalists and media'
+};;
 const pressReleases = [
-  {
-  title: 'AI Guided SaaS Raises $50M Series B to Accelerate AI Development Platform',
+  {title: 'AI Guided SaaS Raises $50M Series B to Accelerate AI Development Platform',
     date: '2025-01-15',
     excerpt: 'Funding will expand AI capabilities and global market reach for revolutionary development platform.'
-    category: 'Funding'
+    category: 'Funding'}
   },
-  {
-    title: 'AI Guided SaaS Launches Enterprise Solutions for Large Organizations',
+  {title: 'AI Guided SaaS Launches Enterprise Solutions for Large Organizations',
     date: '2025-01-10'
     excerpt: 'New enterprise features include advanced security, team management, and custom integrations.',
-    category: 'Product'
+    category: 'Product'}
   },
-  {
-    title: 'AI Guided SaaS Wins Best AI Development Tool Award 2025',
+  {title: 'AI Guided SaaS Wins Best AI Development Tool Award 2025',
     date: '2025-01-05',
     excerpt: 'Recognition from TechCrunch highlights innovation in AI-powered application development.'
-    category: 'Awards'
-}
+    category: 'Awards'}
 ];
 const mediaKit = [
   { name: 'Company Logo (PNG)', size: '2.5 MB' , type: 'logo' },
@@ -39,103 +37,158 @@ const mediaKit = [
   return (
     <div className="min-h-screen bg-gray-50 py-12 container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Press & Media</h1>
-          <p className="text-xl text-gray-600">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Press & Media<
+              h1>
+                        <p className="text-xl text-gray-600">
             Latest news, press releases, and media resources for AI Guided SaaS.
-</p>
-        {/* Company Overview */}
-        <Card className="mb-12">
+<
+              p>}
+                      
+  return (
+              * Company Overview *
+              }/        <Card className="mb-12">
           <CardHeader>
-            <CardTitle className="text-2xl">About AI Guided SaaS</CardTitle>
-          <CardContent>
+            <CardTitle className="text-2xl">About AI Guided SaaS<
+              CardTitle>
+                        <CardContent>
             <div className="grid gap-8 lg:grid-cols-2">
               <div>
                 <p className="text-gray-600 mb-6">
                   AI Guided SaaS is a revolutionary development platform that combines artificial intelligence
                   with intuitive development tools to help developers build production-ready applications faster
                   than ever before.
-</p>
-                <p className="text-gray-600">
+<
+              p>
+                              <p className="text-gray-600">
                   Founded in 2024, the company has quickly become a leader in AI-powered development tools, serving thousands of developers and enterprises worldwide.
-</p>
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-gray-900 mb-4">Key Facts</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Founded: 2024</li>
-                  <li>• Headquarters: San Francisco, CA</li>
-                  <li>• Employees: 150+</li>
-                  <li>• Customers: 10, 000+</li>
-                  <li>• Funding: $50M Series B</li>
-</div>
-</CardContent>
-              </Card>
-        {/* Press, Releases */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Recent Press Releases</h2>
-          <div className="space-y-6">
-            {pressReleases.map((release, index) => (\n    </div>
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+<
+              p>
+                            <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="font-semibold text-gray-900 mb-4">Key Facts<
+              h3>
+                              <ul className="space-y-2 text-gray-600">
+                  <li>• Founded: 2024<
+              li>
+                                <li>• Headquarters: San Francisco, CA<
+              li>
+                                <li>• Employees: 150+<
+              li>
+                                <li>• Customers: 10, 000+<
+              li>
+                                <li>• Funding: $50M Series B<
+              li>
+              <
+              div>
+              <
+              CardContent>
+                            <
+              Card>
+                      {
+              * Press, Releases *
+              }/        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Recent Press Releases<
+              h2>
+                        <div className="space-y-6">
+            {pressReleases.map((release, index) => (\n    <
+              div>}
+                            <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between flex-1">
         <div className="flex items-center mb-2">
-                        <Badge variant="secondary" className="mr-3">{release.category}</Badge>
-                        <div className="flex items-center text-gray-500 text-sm">
-                          <Calendar className="h-4 w-4 mr-1" />
-                          {release.date}
-</div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3">{release.title}</h3>
-                      <p className="text-gray-600">{release.excerpt}</p>
-                    <Button variant="ghost" size="sm" className="ml-4">
-                      <ExternalLink className="h-4 w-4" / />
-            ))}
-      </div>
-        {/* Media, Kit */}
-        <Card>
+                        <Badge variant="secondary" className="mr-3">{release.category}<
+              Badge>
+                                      <div className="flex items-center text-gray-500 text-sm">
+                          <Calendar className="h-4 w-4 mr-1" 
+              >
+                                        {release.date}
+<
+              div>
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{release.title}<
+              h3>
+                                    <p className="text-gray-600">{release.excerpt}<
+              p>
+                                  <Button variant="ghost" size="sm" className="ml-4">
+                      <ExternalLink className="h-4 w-4" 
+               
+              >/            ))}
+      <
+              div>
+                      {
+              * Media, Kit *
+              }/        <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Media Kit</CardTitle>
-          <CardContent>
+            <CardTitle className="text-2xl">Media Kit<
+              CardTitle>
+                        <CardContent>
             <p className="text-gray-600 mb-6">
               Download our media kit for logos, brand guidelines, product screenshots, and executive photos.
-</p>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {mediaKit.map((item, index) => (\n    </div>
-                <div key={index} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg" >
-              </div>
-                    <div className="font-medium text-gray-900">{item.name}</div>
-                    <div className="text-sm text-gray-500">{item.size}</div>
-                  <Button variant="ghost" size="sm">
-                    <Download className="h-4 w-4" />
-              ))}
-      </div>
-            <div className="mt-6">
-              <Button size="lg">Download Full Media Kit</Button>
-</CardContent>
-        {/* Contact */}
-        <div className="text-center mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Media Contact</h2>
-          <p className="text-gray-600 mb-2">
+<
+              p>
+                          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {mediaKit.map((item, index) => (\n    <
+              div>}
+                              <div key={index} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg" >
+              <
+              div>
+                                  <div className="font-medium text-gray-900">{item.name}<
+              div>
+                                  <div className="text-sm text-gray-500">{item.size}<
+              div>
+                                <Button variant="ghost" size="sm">
+                    <Download className="h-4 w-4" 
+              >
+                            ))}
+      <
+              div>
+                          <div className="mt-6">
+              <Button size="lg">Download Full Media Kit<
+              Button>
+              <
+              CardContent>
+                      {
+              * Contact *
+              }/        <div className="text-center mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Media Contact<
+              h2>
+                        <p className="text-gray-600 mb-2">
             For press inquiries, please, contact:
-</p>
-          <p className="text-lg">
+<
+              p>
+                        <p className="text-lg">
             <a href="mailto:press@aiinguidedsaas.com" className="text-blue-600 hover:text-blue-700">
               press@aiinguidedsaas.com
-</a>
-</div>
-);
-</div>
-
-    </p>
-    </Button>
-    </CardHeader>
-    </Card>
-    </Button>
-    </CardContent>
-    </Card>
-    </div>
-    </ul>
-    </div>
-    </div>
-    </CardHeader>
-    </div>
-    </div>
-  }
+<
+              a>
+              <
+              div>
+              );
+< div>
+    <
+              p>
+                  <
+              Button>
+                  <
+              CardHeader>
+                  <
+              Card>
+                  <
+              Button>
+                  <
+              CardContent>
+                  <
+              Card>
+                  <
+              div>
+                  <
+              ul>
+                  <
+              div>
+                  <
+              div>
+                  <
+              CardHeader>
+                  <
+              div>
+                  <
+              div>
+                }

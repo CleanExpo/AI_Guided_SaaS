@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 interface DocumentationSearchResult {
-  id: string,
-  title: string,
-  content: string,
-  relevance: number
+  id: string;
+  title: string;
+  content: string;
+  relevance: number;
 }
 interface CycleDetectionResult {
-  hasCycle: boolean,
-  cycleLength?: number,
-  suggestions: string[]
+  hasCycle: boolean;
+  cycleLength?: number;
+  suggestions: string[];
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {

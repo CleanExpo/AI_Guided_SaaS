@@ -1,8 +1,9 @@
 import React from 'react';
+
 export default function AdminLoginLayout({
   children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <React.Fragment>{children}</React.Fragment>
+  return <React.Fragment>{children}</React.Fragment>;
 }

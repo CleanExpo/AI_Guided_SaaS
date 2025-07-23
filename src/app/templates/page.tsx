@@ -6,53 +6,56 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import TemplateMarketplace from '@/components/marketplace/TemplateMarketplace';
+import TemplateMarketplace from '@/components
+              marketplace
+              TemplateMarketplace';
+
 interface Template {
-id: string,
-  name: string,
-  description: string,
-  category: string,
-  tags: string[],
-  preview?: string,
-  author: string,
-  downloads: number,
-  rating: number
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  tags: string[];
+  preview?: string;
+  author: string;
+  downloads: number;
+  rating: number;
 }
 
 export default function TemplatesPage() {
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const { toast   }: any = useToast();
+  return (
+    <div>Loading...</div>
+  );
+}
+  const 
+  return ( toast   }: any = useToast();
   const templates: Template[] = [
-  {
-  id: '1',
+  {id: '1',
       name: 'E-commerce Starter',
       description: 'Complete e-commerce solution with product catalog, cart, and checkout.',
       category: 'web',
       tags: ['React', 'Next.js', 'Stripe'],
       author: 'AI Guided SaaS',
       downloads: 1250
-    rating: 4.8
+    rating: 4.8}
     },
-    {
-      id: '2',
+    {id: '2',
       name: 'Blog Platform',
       description: 'Modern blog platform with CMS integration and SEO optimization.',
       category: 'web',
       tags: ['React', 'CMS', 'SEO'],
       author: 'Community',
       downloads: 890
-    rating: 4.6
+    rating: 4.6}
     },
-    {
-      id: '3',
+    {id: '3',
       name: 'Task Management',
       description: 'Collaborative task management app with real-time updates.',
       category: 'productivity',
       tags: ['React', 'WebSocket', 'Charts'],
       author: 'AI Guided SaaS',
       downloads: 650
-    rating: 4.7
-}
+    rating: 4.7}
   ];
   const categories = [
   { id: 'all' , name: 'All Templates', count: templates.length },
@@ -64,77 +67,107 @@ export default function TemplatesPage() {
   const filteredTemplates = selectedCategory === 'all' ;
     ? templates
     : templates.filter((template) => template.category === selectedCategory);
-  const _handleUseTemplate = (template: Template) => {
-    toast({
+  const _handleUseTemplate = (template: Template) => {toast({}
       title: "Template Selected", description: `Using "${template.name}" template for your new project.``
   })
   };
-  return (<div className="min-h-screen bg-gray-50 py-8">;</div>
-      <div className="container mx-auto px-4 max-w-7xl mb-8"></div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Project Templates</h1>
-          <p className="text-gray-600">
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">;<
+              div>
+                    <div className="container mx-auto px-4 max-w-7xl mb-8"><
+              div>
+                        <h1 className="text-3xl font-bold text-gray-900 mb-2">Project Templates<
+              h1>
+                        <p className="text-gray-600">
             Start your project with professionally designed templates.
-</p>
-        <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="space-y-6">
+<
+              p>
+                      <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="space-y-6">
           <TabsList className="grid w-full grid-cols-5">
             {categories.map((category) => (\n    <TabsTrigger key={category.id} value={category.id} className="relative">
                 {category.name}
                 <Badge variant="secondary" className="ml-2 text-xs">
                   {category.count}
-</Badge>
-            ))}
-</TabsList>
-          <TabsContent value={selectedCategory}>
-            {filteredTemplates.length > 0 ? (<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+<
+              Badge>
+                          ))}
+<
+              TabsList>
+                        <TabsContent value={selectedCategory}>
+            {filteredTemplates.length > 0 ? (<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">}
                 {filteredTemplates.map((template) => (\n    <Card key={template.id} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
-                      <div className="flex items-start justify-between" >></div>
-                          <CardTitle className="text-lg">{template.name}</CardTitle>
-                          <p className="text-sm text-gray-600">by {template.author}</p>
-                        <div className="text-right text-sm text-gray-500">
-                          ★ {template.rating}</div>
-                    <CardContent>
-                      <p className="text-gray-600 mb-4">{template.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {template.tags.map((tag) => (\n    </div>
-                          <Badge key={tag} variant="secondary" className="text-xs">
+                      <div className="flex items-start justify-between" >><
+              div>
+                                        <CardTitle className="text-lg">{template.name}<
+              CardTitle>
+                                        <p className="text-sm text-gray-600">by {template.author}<
+              p>
+                                      <div className="text-right text-sm text-gray-500">
+                          ★ {template.rating}<
+              div>
+                                  <CardContent>
+                      <p className="text-gray-600 mb-4">{template.description}<
+              p>
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                        {template.tags.map((tag) => (\n    <
+              div>}
+                                        <Badge key={tag} variant="secondary" className="text-xs">
                             {tag}
-</Badge>
-                        ))}
-      </div>
-                      <div className="flex items-center justify-between">
+<
+              Badge>
+                                      ))}
+      <
+              div>
+                                    <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-500">
-                          {template.downloads} downloads</span>
-                        <Button
+                          {template.downloads} downloads<
+              span>
+                                      <Button
                           size="sm"
                           onClick={() => handleUseTemplate(template)}
                         >
                           Use Template
-</Button>
-</CardContent>
-                ))}
-      </div>
-            ) : (
+<
+              Button>
+              <
+              CardContent>
+                              ))}
+      <
+              div>
+                          ) : (
               <Card>
                 <CardContent className="py-12 text-center">
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No Templates Found</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">No Templates Found<
+              h3>
+                                <p className="text-gray-600">
                     No templates available in this category yet. Check back soon!
-</p>
-</Card>
-      )}
-</TabsContent>
-        {/* Template, Marketplace Component */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Template Marketplace</h2>
-          <TemplateMarketplace></div>
-);
-</div>
-
-    </TemplateMarketplace>
-    </CardContent>
-    </CardHeader>
-    </Card>
-    </TabsTrigger>
-    </Tabs>
-  }
+<
+              p>
+              <
+              Card>
+                    )}
+<
+              TabsContent>
+                      {
+              * Template, Marketplace Component *
+              }/        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Template Marketplace<
+              h2>
+                        <TemplateMarketplace><
+              div>
+              );
+< div>
+    <
+              TemplateMarketplace>
+                  <
+              CardContent>
+                  <
+              CardHeader>
+                  <
+              Card>
+                  <
+              TabsTrigger>
+                  <
+              Tabs>
+                }

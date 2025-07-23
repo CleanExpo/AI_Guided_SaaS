@@ -12,7 +12,7 @@
     },
     "wsl-sequential-thinking": {
       "command": "node",
-      "args": ["./mcp/wsl-sequential-thinking-server.js"],
+      "args": ["./mcp/wsl-sequential-thinking-server.cjs"],
       "description": "Sequential thinking server - Enables structured problem-solving through sequential reasoning"
     }
   }

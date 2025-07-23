@@ -1,20 +1,19 @@
 import React from 'react';
 
 interface BlogPost {
-  id: string,
-  title: string,
-  excerpt: string,
-  content: string,
-  author: string,
-  publishedAt: string,
-  category: string,
-  tags: string[],
-  readTime: string,
-  image: string
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  publishedAt: string;
+  category: string;
+  tags: string[];
+  readTime: string;
+  image: string;
 }
 
-const blogPosts: Record<string, BlogPost> = {
-  '1': {
+const blogPosts: Record<string, BlogPost> = {'1': {
     id: '1',
     title: 'Introducing AI Guided SaaS: The Future of Development',
     excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.',
@@ -34,8 +33,7 @@ Getting started with AI Guided SaaS is simple. Just describe what you want to bu
     readTime: '5 min read',
     image: '/images/blog/ai-guided-saas-intro.jpg'
   },
-  '2': {
-    id: '2',
+  '2': {id: '2',
     title: 'Building Scalable Applications with AI Assistance',
     excerpt: 'Learn best practices for building scalable applications using our AI-powered development tools.',
     content: `# Building Scalable Applications
@@ -47,61 +45,80 @@ Our AI understands common architecture patterns and can recommend the best appro
     category: 'Technical',
     tags: ['Scalability', 'Architecture', 'Best Practices'],
     readTime: '8 min read',
-    image: '/images/blog/scalable-apps.jpg'
-  }
+    image: '
+              images
+              blog/scalable-apps.jpg'}/  }
 };
 
-export function generateStaticParams() {
-  return Object.keys(blogPosts).map((id) => ({
-    id: id
+export function generateStaticParams() {return Object.keys(blogPosts).map((id) => ({
+    id: id}
   }));
 }
 
-export default function BlogPostPage({ params }: { params: { id: string }}) {
-  const post = blogPosts[params.id];
+export default function BlogPostPage({ params }: { params: { id: string }}) {const post = blogPosts[params.id];
   
   if (!post) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900">Post Not Found</h1>
-          <p className="text-gray-600 mt-2">The requested blog post does not exist.</p>
-        </div>
-      </div>
-    );
-  }
+          <h1 className="text-2xl font-bold text-gray-900">Post Not Found<
+              h1>
+                        <p className="text-gray-600 mt-2">The requested blog post does not exist.<
+              p>
+                      <
+              div>
+                    <
+              div>
+                  );}
   
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <article className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600"></div>
-          <div className="p-8">
+          <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600"><
+              div>
+                        <div className="p-8">
             <div className="mb-6">
-              <span className="text-sm text-blue-600 font-medium">{post.category}</span>
-              <h1 className="text-3xl font-bold text-gray-900 mt-2">{post.title}</h1>
-              <div className="flex items-center mt-4 text-sm text-gray-600">
-                <span>{post.author}</span>
-                <span className="mx-2">•</span>
-                <span>{post.publishedAt}</span>
-                <span className="mx-2">•</span>
-                <span>{post.readTime}</span>
-              </div>
-            </div>
-            <div className="prose max-w-none whitespace-pre-wrap">{post.content}</div>
-            <div className="flex flex-wrap gap-2 mt-8">
+              <span className="text-sm text-blue-600 font-medium">{post.category}<
+              span>
+                            <h1 className="text-3xl font-bold text-gray-900 mt-2">{post.title}<
+              h1>
+                            <div className="flex items-center mt-4 text-sm text-gray-600">
+                <span>{post.author}<
+              span>
+                              <span className="mx-2">•<
+              span>
+                              <span>{post.publishedAt}<
+              span>
+                              <span className="mx-2">•<
+              span>
+                              <span>{post.readTime}<
+              span>
+                            <
+              div>
+                          <
+              div>
+                          <div className="prose max-w-none whitespace-pre-wrap">{post.content}<
+              div>
+                          <div className="flex flex-wrap gap-2 mt-8">
               {post.tags.map((tag) => (
-                <span
+                <span}
                   key={tag}
                   className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
                 >
                   {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  );
+                <
+              span>
+                            ))}
+            <
+              div>
+                        <
+              div>
+                      <
+              article>
+                    <
+              div>
+                  <
+              div>
+                );
 }

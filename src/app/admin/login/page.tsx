@@ -5,64 +5,62 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertTriangle, Shield } from 'lucide-react';
+
 export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
     try {
-      const response = await fetch('/api/admin/auth/login', {
+      const response = await fetch('/api/admin/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
+        body: JSON.stringify({ password }),
       });
+
       if (response.ok) {
         router.push('/admin/dashboard');
-} else {
+      } else {
         setError('Invalid password');
-}
-    } catch (err) {
-      setError('Login failed');
-} finally {
+      }
+    } catch (error) {
+      setError('Authentication failed');
+    } finally {
       setLoading(false);
-}
+    }
   };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="flex items-center gap-2 text-2xl">
-            <Shield className="h-6 w-6 text-blue-600" />
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <Shield className="w-5 h-5 mr-2" />
             Admin Login
           </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Input
-                type="password"
-                placeholder="Enter admin password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={loading}
-                required
-              />
-</div>
+            <Input
+              type="password"
+              placeholder="Admin Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             {error && (
-              <div className="flex items-center gap-2 text-red-600 text-sm">
-                <AlertTriangle className="h-4 w-4" />
+              <div className="flex items-center text-red-600 text-sm">
+                <AlertTriangle className="w-4 h-4 mr-2" />
                 {error}
               </div>
             )}
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={loading}
-            >
+            <Button type="submit" disabled={loading} className="w-full">
               {loading ? 'Authenticating...' : 'Login'}
             </Button>
           </form>

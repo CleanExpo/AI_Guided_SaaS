@@ -2,14 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 export const runtime = 'nodejs';
 export const maxDuration = 300; // 5 minutes for agent processing
 interface AgentChatRequest {
-  message: string,
-  projectType?: string,
-  context?: Record<string, any>
+  message: string;
+  projectType?: string;
+  context?: Record<string,
+  any>;
 }
 interface AgentChatResponse {
-  response: string,
-  suggestions?: string[],
-  artifacts?: any[]
+  response: string;
+  suggestions?: string[];
+  artifacts?: any[];
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {

@@ -5,10 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Code, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+
 export const metadata: Metadata = {
   title: 'API Documentation - AI Guided SaaS Platform',
   description: 'Complete API reference and documentation for AI Guided SaaS Platform'
 };
+
 const apiEndpoints = [
   {
     name: 'Authentication',
@@ -25,32 +27,34 @@ const apiEndpoints = [
     status: 'stable'
   },
   {
-    name: 'Analytics',
-    slug: 'analytics',
-    description: 'Application analytics and metrics',
+    name: 'Projects',
+    slug: 'projects',
+    description: 'Project creation and management',
     version: 'v1',
     status: 'beta'
   }
 ];
+
 export default function ApiDocsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">API Documentation</h1>
-          <p className="text-xl text-gray-600">
-            Complete API reference for AI Guided SaaS Platform
+          <div className="flex items-center justify-center mb-4">
+            <Code className="w-8 h-8 text-blue-600 mr-3" />
+            <h1 className="text-4xl font-bold text-gray-900">API Documentation</h1>
+          </div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Complete reference for integrating with the AI Guided SaaS Platform API
           </p>
         </div>
+
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {apiEndpoints.map((endpoint) => (
             <Card key={endpoint.slug} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2">
-                    <Code className="h-5 w-5" />
-                    {endpoint.name}
-</CardTitle>
+                  <CardTitle className="text-lg">{endpoint.name}</CardTitle>
                   <Badge variant={endpoint.status === 'stable' ? 'default' : 'secondary'}>
                     {endpoint.status}
                   </Badge>
@@ -61,31 +65,27 @@ export default function ApiDocsPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Version {endpoint.version}</span>
                   <Link href={`/api-docs/${endpoint.slug}`}>
-                    <Button size="sm" variant="outline">
+                    <Button size="sm">
+                      <ExternalLink className="w-4 h-4 mr-2" />
                       View Docs
-                      <ExternalLink className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
                 </div>
               </CardContent>
             </Card>
           ))}
-      </div>
+        </div>
+
         <div className="mt-12 bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-bold mb-6">Getting Started</h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Base URL</h3>
-              <code className="bg-gray-100 px-3 py-1 rounded text-sm">
-                https: //ai-guided-saa-s.vercel.app/api
+          <h2 className="text-2xl font-semibold mb-4">Getting Started</h2>
+          <div className="space-y-4">
+            <p className="text-gray-600">
+              To get started with our API, you'll need to authenticate using your API key.
+            </p>
+            <div className="bg-gray-100 rounded-lg p-4">
+              <code className="text-sm">
+                curl -H "Authorization: Bearer YOUR_API_KEY" https://api.aiguidedsaas.com/v1/
               </code>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Authentication</h3>
-              <p className="text-gray-600">
-                All API requests require authentication using JWT tokens.
-                Include your token in the Authorization header.
-              </p>
             </div>
           </div>
         </div>
