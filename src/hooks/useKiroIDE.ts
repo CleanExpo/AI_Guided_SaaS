@@ -4,42 +4,42 @@ import { useToast } from '@/components/ui/use-toast';
 export interface UseKiroIDEReturn {
   // Connection,
     connected: boolean,
-    connect: () => Promise<any>,
-  disconnect: () => void;
+    connect: () => Promise<any;>,
+  disconnect: () => voi;d;
   // Project management,
-    createProject: (project) => Promise<KiroProject>;,
-  openProject: (projectId: string) => Promise<KiroProject>,
-  saveProject: (projectId: string) => Promise<any>,
-  listProjects: () => Promise<KiroProject[]>;
+    createProject: (project) => Promise<KiroProject;>;,
+  openProject: (projectId: string) => Promise<KiroProject;>,
+  saveProject: (projectId: string) => Promise<any;>,
+  listProjects: () => Promise<KiroProject[];>;
   // File operations,
-    readFile: (path: string) => Promise<KiroFile>,
-  writeFile: (path: string, content: string) => Promise<any>,
+    readFile: (path: string) => Promise<KiroFile;>,
+  writeFile: (path: string, content: string) => Promise<any;>,
   createFile: (path: string, content?: string) => Promise<any>;
-  deleteFile: (path: string) => Promise<any>,
-  renameFile: (oldPath: string, newPath: string) => Promise<any>,
-  getFileTree: (projectId: string) => Promise<KiroFileTree>;
+  deleteFile: (path: string) => Promise<any;>,
+  renameFile: (oldPath: string, newPath: string) => Promise<any;>,
+  getFileTree: (projectId: string) => Promise<KiroFileTree;>;
   // Terminal operations,
-    createTerminal: (config?: Partial<KiroTerminal>) => Promise<KiroTerminal>,
-  executeCommand: (terminalId: string, command: string) => Promise<any>,
-  closeTerminal: (terminalId: string) => Promise<any>;
+    createTerminal: (config?: Partial<KiroTerminal>) => Promise<KiroTerminal;>,
+  executeCommand: (terminalId: string, command: string) => Promise<any;>,
+  closeTerminal: (terminalId: string) => Promise<any;>;
   // AI assistance,
     getAISuggestions: (file: string, position?) => Promise<KiroAIAssistance>;
-  applyAISuggestion: (suggestionId: string) => Promise<any>,
+  applyAISuggestion: (suggestionId: string) => Promise<any;>,
   getCompletions: (file: string, position) => Promise<KiroCompletion[]>
-  runDiagnostics: (projectId: string) => Promise<KiroDiagnostic[]>,
-  applyQuickFix: (file: string, line: number, fixIndex: number) => Promise<any>;
+  runDiagnostics: (projectId: string) => Promise<KiroDiagnostic[];>,
+  applyQuickFix: (file: string, line: number, fixIndex: number) => Promise<any;>;
   // Debugging,
-    startDebugSession: (config) => Promise<KiroDebugSession>,
+    startDebugSession: (config) => Promise<KiroDebugSession;>,
   setBreakpoint: (file: string, line: number, condition?: string) => Promise<any>;
-  stepOver: (sessionId: string) => Promise<any>,
-  stepInto: (sessionId: string) => Promise<any>,
-  stepOut: (sessionId: string) => Promise<any>,
-  continue: (sessionId: string) => Promise<any>,
-  stopDebugSession: (sessionId: string) => Promise<any>;
+  stepOver: (sessionId: string) => Promise<any;>,
+  stepInto: (sessionId: string) => Promise<any;>,
+  stepOut: (sessionId: string) => Promise<any;>,
+  continue: (sessionId: string) => Promise<any;>,
+  stopDebugSession: (sessionId: string) => Promise<any;>;
   // State,
     loading: boolean,
-    error: string | null,
-    currentProject: KiroProject | null,
+    error: string | nul;l,
+    currentProject: KiroProject | nul;l,
     openFiles: KiroFile[],
   terminals: KiroTerminal[],
   debugSessions: KiroDebugSession[]
@@ -65,7 +65,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
     kiroClient.on('debug.sessionStarted', handleDebugSessionStarted)
     kiroClient.on('debug.sessionEnded', handleDebugSessionEnded)
     kiroClient.on('disconnected', handleDisconnected)
-    return () => {;
+    return () => {
       // Clean up event listeners
       kiroClient.off('fileChanged', handleFileChanged)
       kiroClient.off('terminal.created', handleTerminalCreated)
@@ -73,8 +73,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
       kiroClient.off('debug.sessionStarted', handleDebugSessionStarted)
       kiroClient.off('debug.sessionEnded', handleDebugSessionEnded)
       kiroClient.off('disconnected', handleDisconnected)
-}
-  }, [])
+}, [])
   // Event handlers
   const _handleFileChanged = (data: { path: string, content: string }) => {
     setOpenFiles(prev => prev.map((file) =>
@@ -96,7 +95,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
   const _handleDebugSessionEnded = (sessionId: string) => {
     setDebugSessions(prev => prev.filter((s) => s.id !== sessionId))
 }
-  const _handleDisconnected = (): void: (any) => {
+  const _handleDisconnected = (): void => {
     setConnected(false)
     toast({
       title: 'Disconnected',
@@ -116,7 +115,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
         description: 'Successfully connected to Kiro IDE'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to connect',;
+      const _message = err instanceof Error ? err.message : 'Failed to connect',
       setError(message)
       toast({
         title: 'Connection Error',
@@ -126,8 +125,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [client])
+}, [client])
   const _disconnect = useCallback(() => {
     if (!client) return client.disconnect();
     setConnected(false)
@@ -145,7 +143,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
       })
       return newProject;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to create project',;
+      const _message = err instanceof Error ? err.message : 'Failed to create project',
       setError(message)
       toast({
         title: 'Error',
@@ -155,8 +153,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [client])
+}, [client])
   const _openProject = useCallback(async (projectId: string) => {
     if (!client) throw new Error('Client not initialized')
     setLoading(true)
@@ -170,7 +167,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
       })
       return project;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to open project',;
+      const _message = err instanceof Error ? err.message : 'Failed to open project',
       setError(message)
       toast({
         title: 'Error',
@@ -180,8 +177,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [client])
+}, [client])
   const _saveProject = useCallback(async (projectId: string) => {
     if (!client) throw new Error('Client not initialized')
     setLoading(true)
@@ -193,7 +189,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
         description: 'Project saved successfully'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to save project',;
+      const _message = err instanceof Error ? err.message : 'Failed to save project',
       setError(message)
       toast({
         title: 'Error',
@@ -203,8 +199,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [client])
+}, [client])
   const _listProjects = useCallback(async () => {
     if (!client) throw new Error('Client not initialized')
     setLoading(true)
@@ -212,13 +207,12 @@ export function useKiroIDE(): UseKiroIDEReturn {
     try {
       return await client.listProjects();
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to list projects',;
+      const _message = err instanceof Error ? err.message : 'Failed to list projects',
       setError(message)
       throw err
     } finally {
       setLoading(false)
-}
-  }, [client])
+}, [client])
   // File operations
   const _readFile = useCallback(async (path: string) => {
     if (!client) throw new Error('Client not initialized')
@@ -231,15 +225,14 @@ export function useKiroIDE(): UseKiroIDEReturn {
       })
       return file;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to read file',;
+      const _message = err instanceof Error ? err.message : 'Failed to read file',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [client])
+}, [client])
   const _writeFile = useCallback(async (path: string, content: string) => {
     if (!client) throw new Error('Client not initialized')
     try {
@@ -251,15 +244,14 @@ export function useKiroIDE(): UseKiroIDEReturn {
         description: `${path} saved successfully`
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to write file',;
+      const _message = err instanceof Error ? err.message : 'Failed to write file',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [client])
+}, [client])
   const _createFile = useCallback(async (path: string, content?: string) => {
     if (!client) throw new Error('Client not initialized')
     try {
@@ -269,15 +261,14 @@ export function useKiroIDE(): UseKiroIDEReturn {
         description: `${path} created successfully`
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to create file',;
+      const _message = err instanceof Error ? err.message : 'Failed to create file',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [client])
+}, [client])
   const _deleteFile = useCallback(async (path: string) => {
     if (!client) throw new Error('Client not initialized')
     try {
@@ -288,15 +279,14 @@ export function useKiroIDE(): UseKiroIDEReturn {
         description: `${path} deleted successfully`
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to delete file',;
+      const _message = err instanceof Error ? err.message : 'Failed to delete file',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [client])
+}, [client])
   const _renameFile = useCallback(async (oldPath: string, newPath: string) => {
     if (!client) throw new Error('Client not initialized')
     try {
@@ -308,24 +298,22 @@ export function useKiroIDE(): UseKiroIDEReturn {
         description: 'File renamed successfully'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to rename file',;
+      const _message = err instanceof Error ? err.message : 'Failed to rename file',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [client])
+}, [client])
   const _getFileTree = useCallback(async (projectId: string) => {
     if (!client) throw new Error('Client not initialized')
     try {
       return await client.getFileTree(projectId);
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to get file tree',;
+      const _message = err instanceof Error ? err.message : 'Failed to get file tree',
       throw new Error(message)
-}
-  }, [client])
+}, [client])
   // Terminal operations
   const _createTerminal = useCallback(async (config?: Partial<KiroTerminal>) => {
     if (!client) throw new Error('Client not initialized')
@@ -334,34 +322,31 @@ export function useKiroIDE(): UseKiroIDEReturn {
       setTerminals(prev => [...prev, terminal])
       return terminal;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to create terminal',;
+      const _message = err instanceof Error ? err.message : 'Failed to create terminal',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [client])
+}, [client])
   const _executeCommand = useCallback(async (terminalId: string, command: string) => {
     if (!client) throw new Error('Client not initialized')
     try {
       await client.executeCommand(terminalId, command)
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to execute command',;
+      const _message = err instanceof Error ? err.message : 'Failed to execute command',
       throw new Error(message)
-}
-  }, [client])
+}, [client])
   const _closeTerminal = useCallback(async (terminalId: string) => {
     if (!client) throw new Error('Client not initialized')
     try {
       await client.closeTerminal(terminalId)
       setTerminals(prev => prev.filter((t) => t.id !== terminalId))
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to close terminal',;
+      const _message = err instanceof Error ? err.message : 'Failed to close terminal',
       throw new Error(message)
-}
-  }, [client])
+}, [client])
   // AI assistance methods (similar pattern for remaining methods)
   const _getAISuggestions = useCallback(async (file: string, position?) => {
     if (!client) throw new Error('Client not initialized')
@@ -376,15 +361,14 @@ export function useKiroIDE(): UseKiroIDEReturn {
         description: 'AI suggestion applied successfully'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to apply suggestion',;
+      const _message = err instanceof Error ? err.message : 'Failed to apply suggestion',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [client])
+}, [client])
   const _getCompletions = useCallback(async (file: string, position) => {
     if (!client) throw new Error('Client not initialized')
     return client.getCompletions(file, position);
@@ -429,7 +413,7 @@ export function useKiroIDE(): UseKiroIDEReturn {
     await client.stopDebugSession(sessionId)
     setDebugSessions(prev => prev.filter((s) => s.id !== sessionId))
   }, [client])
-  return {;
+  return {
     // Connection
     connected,
     connect,
@@ -471,5 +455,4 @@ export function useKiroIDE(): UseKiroIDEReturn {
     openFiles,
     terminals,
     // debugSessions
-}
 }

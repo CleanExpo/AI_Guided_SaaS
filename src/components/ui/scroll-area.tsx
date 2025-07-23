@@ -11,7 +11,7 @@ const ScrollArea = React.forwardRef<;
     <ScrollAreaPrimitive.Viewport, className="h-full w-full rounded-[inherit]">
       {children}</ScrollAreaPrimitive>
     </ScrollAreaPrimitive.Viewport>
-    <ScrollBar   />
+    <ScrollBar />
     <ScrollAreaPrimitive.Corner   />
   </ScrollAreaPrimitive.Root>
 ))
@@ -33,4 +33,9 @@ const ScrollBar = React.forwardRef<;
 ))
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName
 export {  ScrollArea, ScrollBar;
- };
+ 
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+  };

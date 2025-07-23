@@ -5,14 +5,16 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+
 export const metadata: Metadata = {
   title: 'Blog - AI Guided SaaS Platform',
   description: 'Latest news, updates, and insights from AI Guided SaaS Platform'
 };
-const blogPosts = [;,
+
+const blogPosts = [
   {
-  id: '1',
-    title: 'Introducing AI Guided, SaaS: The Future of Development',
+    id: '1',
+    title: 'Introducing AI Guided SaaS: The Future of Development',
     excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.',
     author: 'AI Guided SaaS Team',
     publishedAt: '2025-01-15',
@@ -39,41 +41,44 @@ const blogPosts = [;,
     category: 'Industry Insights',
     readTime: '6 min read',
     image: '/images/blog/no-code-ai.jpg'
-}
+  }
 ];
-props: anyexport default function BlogPage(): void {
-  return (<div className="min-h-screen bg-gray-50 py-12"><div className="container mx-auto px-4 max-w-6xl">;
+
+export default function BlogPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Blog</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Stay updated with the latest news, insights, and developments from AI Guided SaaS Platform.
           </p>
         </div>
-        <div className ="grid gap-8, md:grid-cols-2, lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
-            <Card key={post.id} className="overflow-hidden, hover:shadow-lg transition-shadow">
+            <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600"></div>
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <Badge variant="secondary">{post.category}</Badge>
                   <span className="text-sm text-gray-500">{post.readTime}</span>
                 </div>
-                <CardTitle className="line-clamp-2, hover:text-blue-600 transition-colors">
-                  <Link href={`/blog/${post.id}`}>{post.title}</Link>`
+                <CardTitle className="line-clamp-2 hover:text-blue-600 transition-colors">
+                  <Link href={`/blog/${post.id}`}>{post.title}</Link>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
                 <div className="flex items-center text-sm text-gray-500 mb-4">
-                  <User className="h-4 w-4 mr-1"    />
+                  <User className="h-4 w-4 mr-1" />
                   <span className="mr-3">{post.author}</span>
-                  <Calendar className="h-4 w-4 mr-1"    />
+                  <Calendar className="h-4 w-4 mr-1" />
                   <span>{post.publishedAt}</span>
                 </div>
-                <Link href={`/blog/${post.id}`}>`
+                <Link href={`/blog/${post.id}`}>
                   <Button variant="ghost" size="sm" className="p-0">
                     Read More
-                    <ArrowRight className="ml-1 h-4 w-4"    />
+                    <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
@@ -84,8 +89,7 @@ props: anyexport default function BlogPage(): void {
           <Button variant="outline" size="lg">
             Load More Posts
           </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
+              </div>
+);
+
+      }

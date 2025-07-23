@@ -1,11 +1,15 @@
 import React from 'react';
-import { Metadata } from 'next';export const metadata: Metadata = {
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
   title: 'About - AI Guided SaaS Platform',
   description: 'Learn about our mission to revolutionize software development with AI'
 };
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12"><div className="container mx-auto px-4 max-w-4xl">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
+      <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="text-4xl font-bold text-center mb-8">About AI Guided SaaS</h1>
         <div className="bg-white rounded-lg shadow-lg p-8 space-y-6">
           <section>

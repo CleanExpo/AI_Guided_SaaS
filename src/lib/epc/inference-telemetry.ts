@@ -24,7 +24,7 @@ interface TelemetryEntry {
     cost?: number;
     error?: string;
   };
-  agentContext?: {;
+  agentContext?: {
     agentId: string,
     agentType: string,
     taskType: string
@@ -61,13 +61,13 @@ export class InferenceTelemetry {
   /**
    * Log pre-inference check
    */
-  async logPreInference(requestId: string, inferenceType: TelemetryEntry['inferenceType'], agentContext?: TelemetryEntry['agentContext']): Promise {
+  async logPreInference(requestId: string, inferenceType: TelemetryEntry['inferenceType'], agentContext?: TelemetryEntry['agentContext']): Promise<any> {
     const preflightResult = await this.epcEngine.performPreflightCheck();
     const entry: TelemetryEntry = {
   timestamp: new Date().toISOString(),
       requestId,
       inferenceType,
-    preflightCheck: {;,
+    preflightCheck: {,
   passed: preflightResult.env_check === 'pass',
     score: preflightResult.score,
     issues: [
@@ -84,7 +84,7 @@ export class InferenceTelemetry {
     inference: {
         started: false,
     completed: false
-      }},
+      },
       agentContext,
       outcome: preflightResult.action === 'block_inference' ? 'blocked' : 'success'
 };
@@ -94,7 +94,7 @@ export class InferenceTelemetry {
         'Blocked, by: EPC: ' + preflightResult.recommendations?.join(', ');
       this.logEvent('inference_blocked', entry);
 }
-    return {;
+    return {
       allowed: preflightResult.action !== 'block_inference',
     telemetryId: requestId
 }
@@ -115,7 +115,7 @@ export class InferenceTelemetry {
   logInferenceComplete(
     requestId: string,
     success: boolean,
-    metadata?: {;
+    metadata?: {
       tokensUsed?: number;
       cost?: number;
       error?: string;
@@ -157,7 +157,7 @@ export class InferenceTelemetry {
     details: entry
     };
     // Write to event log
-    const _eventLog = path.join(;
+    const _eventLog = path.join(
       this.telemetryDir,
       `events-${new Date().toISOString().split('T')[0]}.log`
     );
@@ -186,7 +186,7 @@ export class InferenceTelemetry {
   /**
    * Get telemetry statistics
    */
-  async getStatistics(timeRange?: { start: Date, end: Date }): Promise {
+  async getStatistics(timeRange?: { start: Date, end: Date }): Promise<any> {
     const stats = {
       totalInferences: 0,
     blocked: 0,
@@ -197,14 +197,14 @@ export class InferenceTelemetry {
     topIssues: [] as any[]
     };
     try {
-      const _files = fs;
+      const files = fs
         .readdirSync(this.telemetryDir)
         .filter((f) => f.startsWith('inference-log-') && f.endsWith('.json'));
       const issueCount = new Map<string, number>();
       let totalDuration = 0;
       let durationCount = 0;
       for(const file of files) {
-        const data: TelemetryEntry[] = JSON.parse(;
+        const data: TelemetryEntry[] = JSON.parse(
           fs.readFileSync(path.join(this.telemetryDir, file), 'utf-8')
         );
         for(const entry of data) {
@@ -266,5 +266,4 @@ export class InferenceTelemetry {
       clearInterval(this.flushInterval);
 }
     this.flushBuffer();
-}
 }

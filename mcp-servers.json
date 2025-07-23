@@ -1,14 +1,19 @@
 {
   "servers": {
+    "context7": {
+      "command": "npx",
+      "args": ["@upstash/context7-mcp"],
+      "description": "Context7 MCP Server - Provides up-to-date documentation and code examples"
+    },
     "serena": {
       "command": "uv",
       "args": ["run", "--directory", "./serena", "serena-mcp-server", "--context", "agent", "--project", "."],
-      "description": "Serena Semantic Search MCP Server for context7 workflow and token optimization"
+      "description": "Serena Semantic Search MCP Server - A powerful coding agent toolkit with semantic code analysis"
     },
     "wsl-sequential-thinking": {
       "command": "node",
       "args": ["./mcp/wsl-sequential-thinking-server.js"],
-      "description": "Sequential thinking server for WSL environment"
+      "description": "Sequential thinking server - Enables structured problem-solving through sequential reasoning"
     }
   }
 }

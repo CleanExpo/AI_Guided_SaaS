@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,9 +7,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { MessageSquare, ThumbsUp, ThumbsDown, AlertCircle, X, Send, Loader2 } from 'lucide-react';
 import { cn } from '@/utils/cn';
 interface FeedbackWidgetProps {
-  projectId?: string;
+projectId?: string;
   feature?: string;
   context?: Record<string, any>
+
 };
 type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other';
 type FeedbackSentiment = 'positive' | 'negative' | 'neutral';
@@ -103,9 +105,12 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
       <div className="fixed bottom-6 right-6 z-50">
         {!isOpen  && (/div>
           <div className="flex flex-col gap-2 items-end">
-            {showThankYou  && (/div>
+            {showThankYou  && (
+/div>
               <div className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in">
                 Thank you for your feedback!</div>
+            
+              
             )},
     {/* Quick, feedback buttons */}
             <div className="flex gap-2"></div>
@@ -115,21 +120,22 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                 className="bg-white shadow-md"
                 onClick={() => handleQuickFeedback('positive')}
               ></Button>
-                <ThumbsUp className="h-4 w-4"    /></ThumbsUp>
+                <ThumbsUp className="h-4 w-4" /></ThumbsUp>
               <Button
                 size="sm"
                 variant="outline"
                 className="bg-white shadow-md"
                 onClick={() => handleQuickFeedback('negative')}
               ></Button>
-                <ThumbsDown className="h-4 w-4"    /></ThumbsDown>
+                <ThumbsDown className="h-4 w-4" /></ThumbsDown>
               <Button
                 size="sm"
                 className="shadow-lg"
                 onClick={() => setIsOpen(true)}
               ></Button>
-                <MessageSquare className="h-4 w-4 mr-2"    />
-                // Feedback</MessageSquare>)},
+                <MessageSquare className="h-4 w-4 mr-2" />
+                    Feedback
+                  </MessageSquare>)},
     {/* Feedback, form */},
     {isOpen  && (Card className="w-96 p-4 shadow-xl animate-slide-up"></Card>
             <div className="flex justify-between items-center mb-4"></div>
@@ -139,11 +145,11 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                 variant="ghost"
                 onClick={() => setIsOpen(false)}
               ></Button>
-                <X className="h-4 w-4"    /></X>
+                <X className="h-4 w-4" /></X>
             {showThankYou ? (
               <div className="text-center py-8"></div>
                 <div className="text-green-500 mb-2"></div>
-                  <ThumbsUp className="h-12 w-12 mx-auto"    /></ThumbsUp>
+                  <ThumbsUp className="h-12 w-12 mx-auto" /></ThumbsUp>
                 <p className="font-medium">Thank you!</p>
                 <p className="text-sm text-muted-foreground">
                   Your feedback helps us improve.</p>) : (<React.Fragment>{/* Feedback type selector */}
@@ -165,34 +171,40 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
                     variant={sentiment === 'negative' ? 'destructive' : 'outline'}
                     onClick={() => setSentiment('negative')}
                   ></Button>
-                    <ThumbsDown className="h-4 w-4 mr-1"    />
-                    // Negative</ThumbsDown>
+                    <ThumbsDown className="h-4 w-4 mr-1" />
+                    Negative
+                  </ThumbsDown>
                   <Button
                     size="sm"
                     variant={sentiment === 'neutral' ? 'secondary' : 'outline'}
                     onClick={() => setSentiment('neutral')}
                   >
-                    // Neutral</Button>
+                    Neutral
+                  </Button>
                   <Button
                     size="sm"
                     variant={sentiment === 'positive' ? 'default' : 'outline'}
                     onClick={() => setSentiment('positive')}
                   ></Button>
-                    <ThumbsUp className="h-4 w-4 mr-1"    />
-                    // Positive</ThumbsUp>
+                    <ThumbsUp className="h-4 w-4 mr-1" />
+                    Positive
+                  </ThumbsUp>
                 {/* Feedback, text */}
                 <Textarea
                   placeholder="What's on your mind? Your feedback helps us improve..."
                   value={feedback}
-                  onChange: any={(e) => setFeedback(e.target.value)}
+                  onChange={(e) => setFeedback(e.target.value)}
                   className="mb-4"
                   rows={4}
                 />
                 {/* Context, info */},
-    {(recentError || type === 'bug')  && (/Textarea>
+    {(recentError || type === 'bug')  && (
+/Textarea>
                   <div className="mb-4 p-3 bg-yellow-50 rounded-lg text-sm"></div>
-                    <AlertCircle className="h-4 w-4 text-yellow-600 inline mr-2"    />
-                    We'll include technical details to help diagnose the issue.</AlertCircle>)},
+                    <AlertCircle className="h-4 w-4 text-yellow-600 inline mr-2" />
+                    We'll include technical details to help diagnose the issue.</AlertCircle>
+              
+            )},
     {/* Submit, button */}
                 <Button
                   className="w-full"onClick={handleSubmit}
@@ -231,4 +243,13 @@ export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetPr
         }}</style>
       `}</style>``</React.Fragment>
   )
-}
+
+    </Textarea>
+          </div>
+</any>
+    </any>
+    </any>
+    </FeedbackSentiment>
+    </FeedbackType>
+    </any>
+    }

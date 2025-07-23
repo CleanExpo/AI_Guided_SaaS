@@ -3,8 +3,8 @@ import { Metadata } from 'next';export const metadata: Metadata = {
   title: 'Cookie Policy - AI Guided SaaS Platform',
   description: 'Our cookie policy and how we use cookies on our platform'
 };
-props: anyexport default function CookiesPage(): void {
-  return (;
+export default function CookiesPage() {
+  return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm p-8">
@@ -44,7 +44,6 @@ props: anyexport default function CookiesPage(): void {
                   <h3 className="font-semibold text-gray-900">Third-Party Cookies</h3>
                   <p>These are set by domains other than our website, such as analytics or advertising services.</p>
                 </div>
-              </div>
             </section>
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Managing Cookies</h2>
@@ -66,7 +65,7 @@ props: anyexport default function CookiesPage(): void {
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contact Us</h2>
               <p>
                 If you have any questions about our Cookie Policy, please contact us at{' '}
-                <a href="mailto:privacy@aiinguidedsaas.com" className="text-blue-600, hover:text-blue-700">privacy@aiinguidedsaas.com
+                <a href="mailto:privacy@aiinguidedsaas.com" className="text-blue-600 hover:text-blue-700">privacy@aiinguidedsaas.com
                 </a>
               </p>
             </section>
@@ -79,9 +78,8 @@ props: anyexport default function CookiesPage(): void {
                 Last, updated: January 2025
               </p>
             </section>
+                </div>
+);
+
           </div>
-        </div>
-      </div>
-    </div>
-  );
 }

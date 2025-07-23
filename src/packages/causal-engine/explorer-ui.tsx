@@ -1,21 +1,24 @@
-'use client';import React, { useState, useEffect } from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 interface CausalInsight {
-  id: string,
-    title: string,
-    description: string,
-    impact: number,
-    confidence: number,
+id: string;
+    title: string;
+    description: string;
+    impact: number;
+    confidence: number;
     page: string
+
 }
-props: anyexport default function CausalExplorerUI(): void {
-  const [insights, setInsights]: any[] = useState<CausalInsight[]>([]);
-  const [topComponents, setTopComponents]: any[] = useState<CausalInsight[]>([]);
-  const [isLoading, setIsLoading]: any[] = useState<any>(true);
+export default function CausalExplorerUI() {
+  const [insights, setInsights] = useState<CausalInsight[]>([]);
+  const [topComponents, setTopComponents] = useState<CausalInsight[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // Simulate loading causal insights
     setTimeout(() => {
-      const mockInsights: CausalInsight[] = [;,
+      const mockInsights: CausalInsight[] = [
   {
   id: '1',
           title: 'User Engagement Driver',
@@ -39,23 +42,22 @@ props: anyexport default function CausalExplorerUI(): void {
     }, 1000);
   }, []);
   if (isLoading) {
-    return (;
-      <div className="p-6"><div className="animate-pulse">
+    return (
+    <div className="p-6">
+      <div className="animate-pulse">
           <div className="h-8 bg-gray-200 rounded mb-4"></div>
           <div className="space-y-4">
             <div className="h-24 bg-gray-200 rounded"></div>
-            <div className="h-24 bg-gray-200 rounded"></div>
-          </div>
-        </div>
-      </div>
-    );
-}
+            <div className="h-24 bg-gray-200 rounded">      </div>
+);
+
+          }
   return (<div className="p-6 space-y-6">;
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Causal Explorer</h1>
         <p className="text-gray-600">Discover causal relationships in your application data</p>
       </div>
-      <div className="grid gap-6, md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Top Insights</CardTitle>
@@ -74,7 +76,6 @@ props: anyexport default function CausalExplorerUI(): void {
                       Confidence: {insight.confidence}%
                     </span>
                   </div>
-                </div>
               ))}
             </div>
           </CardContent>
@@ -91,12 +92,12 @@ props: anyexport default function CausalExplorerUI(): void {
                     <span className="font-medium">{component.page}</span>
                     <span className="text-sm text-gray-500">{component.impact}%</span>
                   </div>
-                </div>
               ))}
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
   );
+
+          </div>
 }

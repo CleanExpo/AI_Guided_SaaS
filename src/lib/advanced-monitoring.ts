@@ -117,7 +117,7 @@ class AdvancedMonitoringSystem {
     recentEvents: SecurityEvent[]
   } {
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const recentEvents = this.securityEvents.filter(;
+    const recentEvents = this.securityEvents.filter(
       event: any => event.timestamp > last24Hours
     );
     const _attackTypes = recentEvents.reduce((acc: Record<string, any>, event) => {
@@ -128,7 +128,7 @@ class AdvancedMonitoringSystem {
       .map(([type, count]) => ({ type, count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 5);
-    return {;
+    return {
       totalEvents: recentEvents.length,
     criticalEvents: recentEvents.filter((e) => e.severity === 'critical').length,
     attackAttempts: recentEvents.filter((e) => e.type === 'attack').length,
@@ -146,7 +146,7 @@ class AdvancedMonitoringSystem {
     memoryTrend: Array<{ timestamp: Date, usage: number }>;
   } {
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const recentMetrics = this.performanceMetrics.filter(;
+    const recentMetrics = this.performanceMetrics.filter(
       metric: any => metric.timestamp > last24Hours
     );
     const _endpointTimes = recentMetrics.reduce((acc: Record<string, number[]>, metric) => {
@@ -166,7 +166,7 @@ class AdvancedMonitoringSystem {
       .map((health) => ({
         timestamp: health.timestamp,
     usage: health.memoryUsage.percentage}));
-    return {;
+    return {
       averageResponseTime: this.calculateAverageResponseTime(),
       slowestEndpoints,
       errorRate: this.calculateErrorRate(),
@@ -199,12 +199,12 @@ class AdvancedMonitoringSystem {
     const _currentHealth = this.monitorSystemHealth();
     const _securityAnalytics = this.getSecurityAnalytics();
     const _performanceAnalytics = this.getPerformanceAnalytics();
-    const recommendations = this.generateRecommendations(;
+    const recommendations = this.generateRecommendations(
       currentHealth,
       securityAnalytics,
       // performanceAnalytics
     );
-    return {;
+    return {
       timestamp: new Date(),
     systemHealth: currentHealth,
       securityAnalytics,
@@ -232,22 +232,22 @@ class AdvancedMonitoringSystem {
 }
   private calculateErrorRate(): number {
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const recentMetrics = this.performanceMetrics.filter(;
+    const recentMetrics = this.performanceMetrics.filter(
       metric: any => metric.timestamp > last24Hours
     );
     if (recentMetrics.length === 0) return 0;
-    const _errorCount = recentMetrics.filter(;
+    const _errorCount = recentMetrics.filter(
       metric: any => metric.statusCode >= 400
     ).length;
     return errorCount / recentMetrics.length;
 }
   private calculateAverageResponseTime(): number {
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const recentMetrics = this.performanceMetrics.filter(;
+    const recentMetrics = this.performanceMetrics.filter(
       metric: any => metric.timestamp > last24Hours
     );
     if (recentMetrics.length === 0) return 0;
-    const _totalTime = recentMetrics.reduce(;
+    const _totalTime = recentMetrics.reduce(
       (sum, metric) => sum + metric.responseTime,
       0
     );

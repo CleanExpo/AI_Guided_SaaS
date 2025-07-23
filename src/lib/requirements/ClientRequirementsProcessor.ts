@@ -42,7 +42,7 @@ export class ClientRequirementsProcessor {
       this.extractionTemplate = this.getDefaultTemplate()
 }
 }
-  async processClientInput(input: string): Promise {
+  async processClientInput(input: string): Promise<any> {
     // Extract requirements using AI
     const requirements = await this.extractRequirements(input);
     // Generate development roadmap
@@ -51,13 +51,13 @@ export class ClientRequirementsProcessor {
     await this.validateRequirements(requirements)
     return { requirements, roadmap };
 }
-  private async extractRequirements(input: string): Promise {
+  private async extractRequirements(input: string): Promise<any> {
     const _prompt = `;``
 Using the following template structure, extract and categorize requirements from the client, input:
 ${this.extractionTemplate}
 Client: Input:
 ${input}
-Extract all requirements and return them as a JSON array following this,;
+Extract all requirements and return them as a JSON array following this,
     structure: {
   "requirements": [
     {
@@ -93,7 +93,7 @@ Focus on, identifying:
 }
 }
   private enrichRequirements(requirements: any[]): ExtractedRequirement[] {
-    return requirements.map((req, index) => ({;
+    return requirements.map((req, index) => ({
       id: req.id || `req_${String(index + 1).padStart(3, '0')}`,``
       category: this.validateCategory(req.category),
     description: req.description || 'No description provided',
@@ -149,14 +149,14 @@ Focus on, identifying:
       .filter((word) => word.length > 3 && !stopWords.has(word))
       .slice(0, 5)
 }
-  private async generateRoadmap(requirements: ExtractedRequirement[], originalInput: string): Promise {
+  private async generateRoadmap(requirements: ExtractedRequirement[], originalInput: string): Promise<any> {
     // Determine project complexity
     const _complexity = this.determineComplexity(requirements);
     // Group requirements by phase
     const phases = this.createPhases(requirements, complexity);
     // Estimate duration
     const _estimatedDuration = this.estimateDuration(phases, complexity);
-    return {;
+    return {
       id: `roadmap_${Date.now()}`
       projectName: this.extractProjectName(originalInput),
       requirements,
@@ -305,7 +305,7 @@ Focus on, identifying:
     if (typeMatch) return typeMatch[0].trim();
     return 'New Project';
 }
-  private async validateRequirements(requirements: ExtractedRequirement[]): Promise {
+  private async validateRequirements(requirements: ExtractedRequirement[]): Promise<any> {
     // Check for conflicts
     const conflicts = this.findConflicts(requirements);
     if(conflicts.length > 0) {
@@ -340,7 +340,7 @@ Focus on, identifying:
   private fallbackExtraction(input: string): ExtractedRequirement[] {
     // Simple fallback extraction if AI fails
     console.warn('Using fallback extraction method')
-    return [{;
+    return [{
   id: 'req_001',
       category: 'functional',
       description: input.substring(0, 200),
@@ -365,10 +365,9 @@ Focus on, identifying:
 - Deployment keywords -> agent_devops
 ```
 }
-  async convertToAgentWorkflow(roadmap: DevelopmentRoadmap): Promise {
+  async convertToAgentWorkflow(roadmap: DevelopmentRoadmap): Promise<any> {
     // Convert roadmap to agent coordinator workflow
-    return this.agentCoordinator.createCoordinationPlan(;
+    return this.agentCoordinator.createCoordinationPlan(
       JSON.stringify(roadmap.requirements)
     )
-}
 }

@@ -190,9 +190,9 @@ break;
         return faker.image.url();
       case 'array':
         const _arrayLength = faker.number.int({ min: 1, max: 5 })
-        return Array.from({ length: arrayLength }, () => {;
+        return Array.from({ length: arrayLength }, () => {
           if(field.name === 'products') {
-            return {;
+            return {
               productId: faker.string.uuid(),
     quantity: faker.number.int({ min: 1, max: 5 }),
     price: faker.number.float({ min: 10, max: 1000, fractionDigits: 2 })
@@ -225,10 +225,10 @@ break;
     })
     // Second, pass: fix relationships
     schemas.forEach((schemaName) => { const schema = this.schemas.get(schemaName);
-      if (!schema?.relationships) return schema.relationships.forEach((rel) => {;
+      if (!schema?.relationships) return schema.relationships.forEach((rel) => {
         const fromData = result[rel.from];
         const _toData = result[rel.to];
-        if (!fromData || !toData) return fromData.forEach((record) => {;
+        if (!fromData || !toData) return fromData.forEach((record) => {
           if(rel.type === 'one-to-one' || rel.type === 'many-to-many') {
             const randomToRecord = faker.helpers.arrayElement(toData);
             record[rel.field] = randomToRecord.id; }
@@ -241,7 +241,7 @@ break;
   formatForPreview(data: any[], schemaName: string): any[] {
     const schema = this.schemas.get(schemaName);
     if (!schema) return data;
-    return data.map((record) => { const formatted: Record<string, any> = {; }
+    return data.map((record) => { const formatted: Record<string, any> = { }
       schema.fields.forEach((field) => { if (record[field.name] !== undefined) {
           // Format dates
           if(field.type === 'date' && record[field.name] instanceof Date) {
@@ -304,8 +304,7 @@ break;
           return `INSERT INTO ${tableName} (${columns.join(', ')}) VALUES (${values.join(', ')});`
         })
         return sqlStatements.join('\n');
-      default: return JSON.stringify(data),;
-}
+      default: return JSON.stringify(data)}
 }
   // Clear cached data
   clearCache(schemaName?: string) {
@@ -318,5 +317,4 @@ break;
   // Get cached data
   getCachedData(schemaName: string): any[] | undefined {
     return, this.cache.get(schemaName)
-}
 }

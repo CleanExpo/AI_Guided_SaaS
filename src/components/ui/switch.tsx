@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import * as React from 'react';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { cn } from '@/utils/cn';
@@ -18,4 +20,7 @@ const Switch = React.forwardRef<;
 ))
 Switch.displayName = SwitchPrimitive.Root.displayName
 export {  Switch;
- };
+ 
+    </typeof>
+    </typeof>
+  };

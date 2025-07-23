@@ -12,10 +12,10 @@ export interface AgentMetrics {
     error_count: number
 };
 export interface AgentRegistration {
-  agent: AgentConfig,
+  agent: AgentConfi;g,
     registered_at: Date,
     last_heartbeat: Date,
-    metrics: AgentMetrics,
+    metrics: AgentMetric;s,
     health_status: 'healthy' | 'warning' | 'critical' | 'offline',
   tags: string[],
     capabilities_verified: boolean
@@ -55,7 +55,7 @@ export class AgentRegistry {
   /**
    * Register agent in the registry
    */
-  async registerAgent(agent: AgentConfig, tags: string[] = []): Promise {
+  async registerAgent(agent: AgentConfig, tags: string[] = []): Promise<any> {
     try {
       `)``
       const registration: AgentRegistration = {
@@ -89,7 +89,7 @@ export class AgentRegistry {
   /**
    * Auto-discover and register all available agents
    */
-  async autoRegisterAgents(): Promise {
+  async autoRegisterAgents(): Promise<any> {
     const discoveryResult = await this.loader.discoverAgents();
     let registeredCount = 0;
     // Register core agents
@@ -278,7 +278,7 @@ export class AgentRegistry {
   /**
    * Deregister agent
    */
-  async deregisterAgent(agentId: string): Promise {
+  async deregisterAgent(agentId: string): Promise<any> {
     const registration = this.registrations.get(agentId);
     if (!registration) return false;
     this.registrations.delete(agentId)
@@ -301,7 +301,7 @@ export class AgentRegistry {
    * Export registry data for backup/analysis
    */
   exportRegistryData() {
-    return {;
+    return {
       registrations: Array.from(this.registrations.entries()),
     events: this.eventHistory,
     exported_at: new Date().toISOString(),
@@ -310,7 +310,7 @@ export class AgentRegistry {
 }
   // Private methods
   private initializeMetrics(): AgentMetrics {
-    return {;
+    return {
       total_tasks: 0,
     completed_tasks: 0,
     failed_tasks: 0,
@@ -321,7 +321,7 @@ export class AgentRegistry {
     error_count: 0
 }
 }
-  private async verifyAgentCapabilities(agent: AgentConfig): Promise {
+  private async verifyAgentCapabilities(agent: AgentConfig): Promise<any> {
     // Simple verification - check if agent has required fields
     const requiredFields = ['agent_id', 'name', 'role', 'capabilities'];
     return requiredFields.every(field => agent[field as keyof AgentConfig]);
@@ -350,7 +350,7 @@ export class AgentRegistry {
     const _totalTasks = allMetrics.reduce((sum, m) => sum + m.total_tasks, 0);
     const _totalCompleted = allMetrics.reduce((sum, m) => sum + m.completed_tasks, 0);
     const _totalExecutionTime = allMetrics.reduce((sum, m) => sum + m.average_execution_time, 0);
-    return {;
+    return {
       total_tasks: totalTasks,
     success_rate: totalTasks > 0 ? (totalCompleted / totalTasks) * 100 : 0,
     average_execution_time: allMetrics.length > 0 ? totalExecutionTime / allMetrics.length : 0,
@@ -358,7 +358,7 @@ export class AgentRegistry {
     healthy_agents: Array.from(this.registrations.values()).filter((r) => r.health_status === 'healthy').length
 }
 }
-  private async storeAgentInMemory(registration: AgentRegistration): Promise {
+  private async storeAgentInMemory(registration: AgentRegistration): Promise<any> {
     try {
       await mcp__memory__create_entities({
         entities: [{
@@ -378,7 +378,7 @@ export class AgentRegistry {
     } catch (error) {
 }
 }
-  private async logEvent(event: RegistryEvent): Promise {
+  private async logEvent(event: RegistryEvent): Promise<any> {
     this.eventHistory.push(event)
     // Keep only last 1000 events
     if(this.eventHistory.length > 1000) {
@@ -429,7 +429,7 @@ export class AgentRegistry {
 }
 }
 // Convenience functions
-export async function initializeAgentRegistry(): Promise {
+export async function initializeAgentRegistry(): Promise<any> {
   const registry = AgentRegistry.getInstance();
   return registry.autoRegisterAgents();
 };

@@ -1,56 +1,58 @@
-import { NextRequest, NextResponse } from 'next/server';export async function POST(request: NextRequest): Promise {
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const _body = await request.json();
-    const { projectId, settings   }: any = body;
+    const body = await request.json();
+    const { projectId, settings }: any = body;
     if(!projectId) {
-      return NextResponse.json(;
+      return NextResponse.json(
         { error: 'Project ID is required' },
         { status: 400 }
       );
 }
     // Simulate room creation
-    const _roomId = 'room_' + Math.random().toString(36).substr(2, 9);
-    const _room = {
-      id: roomId;
+    const roomId = 'room_' + Math.random().toString(36).substr(2, 9);
+    const room = {
+      id: roomId,
       projectId,
       settings: settings || {},
-    createdAt: new Date().toISOString(),
-    active: true
+      createdAt: new Date().toISOString(),
+      active: true
     };
-    return NextResponse.json({ ;
-      success: true;
-      // room
-    ,  status: 201  });
+    return NextResponse.json({
+      success: true,
+      room
+    }, { status: 201 });
   } catch (error) {
-    console.error('Create room, error:', error);
-    return NextResponse.json(;
+    console.error('Create room error:', error);
+    return NextResponse.json(
       { error: 'Failed to create collaboration room' },
       { status: 500 }
     );
 }
 }
-export async function GET(): void {
+export async function GET(): Promise<NextResponse> {
   try {
     // Simulate getting active rooms
-    const _rooms = [;,
-  {
-  id: 'room_1',
+    const rooms = [
+      {
+        id: 'room_1',
         projectId: 'proj_1',
         participants: 3,
-    active: true,
-    createdAt: new Date().toISOString()
-}
+        active: true,
+        createdAt: new Date().toISOString()
+      }
     ];
-    return NextResponse.json({;
-      success: true;
-      // rooms
+    return NextResponse.json({
+      success: true,
+      rooms
     });
   } catch (error) {
-    console.error('Get rooms, error:', error);
-    return NextResponse.json(;
+    console.error('Get rooms error:', error);
+    return NextResponse.json(
       { error: 'Failed to fetch rooms' },
       { status: 500 }
     );
 }
 }
-export const _dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";

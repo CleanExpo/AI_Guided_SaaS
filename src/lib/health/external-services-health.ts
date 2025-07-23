@@ -6,12 +6,12 @@ import { HealthCheckResult } from './HealthCheckService';interface ServiceHealth
 /**
  * OpenAI API health check
  */
-export async function checkOpenAIHealth(;
+export async function checkOpenAIHealth(
   apiKey?: string
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   if(!apiKey && !process.env.OPENAI_API_KEY) {
-    return {;
+    return {
       name: 'openai',
       status: 'unhealthy',
       error: 'API key not configured',
@@ -29,24 +29,24 @@ export async function checkOpenAIHealth(;
     const _responseTime = Date.now() - start;
     if(response.ok) {
       const data = await response.json();
-      return {;
+      return {
         name: 'openai',
         status: 'healthy',
         responseTime,
     details: {
   models: data.data?.length || 0,
     endpoint: 'models'
-}},
+},
         timestamp: new Date()}
     } else if (response.status === 401) {
-      return {;
+      return {
         name: 'openai',
         status: 'unhealthy',
         error: 'Invalid API key',
         responseTime,
         timestamp: new Date()}
     } else if (response.status === 429) {
-      return {;
+      return {
         name: 'openai',
         status: 'degraded',
         error: 'Rate limited',
@@ -55,14 +55,14 @@ export async function checkOpenAIHealth(;
   retryAfter: response.headers.get('retry-after')},
     timestamp: new Date()}
     } else {
-      return {;
+      return {
         name: 'openai',
         status: 'unhealthy',
         error: `API returned ${response.status}`,``
         responseTime,
         timestamp: new Date()}
 }
-  } catch (error) { return {;
+  } catch (error) { return {
       name: 'openai',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -71,12 +71,12 @@ export async function checkOpenAIHealth(;
 /**
  * Stripe API health check
  */
-export async function checkStripeHealth(;
+export async function checkStripeHealth(
   secretKey?: string
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   if(!secretKey && !process.env.STRIPE_SECRET_KEY) {
-    return {;
+    return {
       name: 'stripe',
       status: 'unhealthy',
       error: 'API key not configured',
@@ -92,38 +92,38 @@ export async function checkStripeHealth(;
       signal: AbortSignal.timeout(10000)});
     const _responseTime = Date.now() - start;
     if(response.ok) {
-      return {;
+      return {
         name: 'stripe',
         status: 'healthy',
         responseTime,
     details: {
   endpoint: 'balance',
           mode: secretKey?.startsWith('sk_test_') ? 'test' : 'live'
-}},
+},
         timestamp: new Date()}
     } else if (response.status === 401) {
-      return {;
+      return {
         name: 'stripe',
         status: 'unhealthy',
         error: 'Invalid API key',
         responseTime,
         timestamp: new Date()}
     } else if (response.status === 429) {
-      return {;
+      return {
         name: 'stripe',
         status: 'degraded',
         error: 'Rate limited',
         responseTime,
         timestamp: new Date()}
     } else {
-      return {;
+      return {
         name: 'stripe',
         status: 'unhealthy',
         error: `API returned ${response.status}`,``
         responseTime,
         timestamp: new Date()}
 }
-  } catch (error) { return {;
+  } catch (error) { return {
       name: 'stripe',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -132,19 +132,19 @@ export async function checkStripeHealth(;
 /**
  * Vercel API health check
  */
-export async function checkVercelHealth(;
+export async function checkVercelHealth(
   token?: string
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   if(!token && !process.env.VERCEL_TOKEN) {
-    return {;
+    return {
       name: 'vercel',
       status: 'degraded',
       error: 'Token not configured',
       responseTime: 0,
     details: {
   message: 'Deployment features may be limited'
-}},
+},
       timestamp: new Date()}
 }
   try {
@@ -157,24 +157,24 @@ export async function checkVercelHealth(;
     const _responseTime = Date.now() - start;
     if(response.ok) {
       const data = await response.json();
-      return {;
+      return {
         name: 'vercel',
         status: 'healthy',
         responseTime,
     details: {
   user: data.user?.username,
     email: data.user?.email
-        }},
+        },
         timestamp: new Date()}
     } else {
-      return {;
+      return {
         name: 'vercel',
         status: 'degraded',
         error: `API returned ${response.status}`,``
         responseTime,
         timestamp: new Date()}
 }
-  } catch (error) { return {;
+  } catch (error) { return {
       name: 'vercel',
       status: 'degraded',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -183,9 +183,9 @@ export async function checkVercelHealth(;
 /**
  * GitHub API health check
  */
-export async function checkGitHubHealth(;
+export async function checkGitHubHealth(
   token?: string
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   try {
     const headers: Record<string, string> = {
@@ -201,7 +201,7 @@ export async function checkGitHubHealth(;
     const _responseTime = Date.now() - start;
     if(response.ok) {
       const data = await response.json();
-      return {;
+      return {
         name: 'github',
         status: 'healthy',
         responseTime,
@@ -211,14 +211,14 @@ export async function checkGitHubHealth(;
     authenticated: !!(token || process.env.GITHUB_TOKEN)},
     timestamp: new Date()}
     } else {
-      return {;
+      return {
         name: 'github',
         status: 'degraded',
         error: `API returned ${response.status}`,``
         responseTime,
         timestamp: new Date()}
 }
-  } catch (error) { return {;
+  } catch (error) { return {
       name: 'github',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -230,10 +230,10 @@ export async function checkGitHubHealth(;
 export async function checkEmailServiceHealth(,
     provider: 'sendgrid' | 'resend' | 'postmark',
   apiKey?: string;
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   if (!apiKey && !process.env[`${provider.toUpperCase()}_API_KEY`]) {``
-    return {;
+    return {
       name: `email_${provider}`
       status: 'unhealthy',
       error: 'API key not configured',
@@ -248,7 +248,7 @@ export async function checkEmailServiceHealth(,
   const authHeaders = {
     sendgrid: {
   Authorization: `Bearer ${apiKey || process.env.SENDGRID_API_KEY}`
-    }},
+    },
     resend: { Authorization: `Bearer ${apiKey || process.env.RESEND_API_KEY}` };``
     postmark: {
       'X-Postmark-Server-Token': apiKey || process.env.POSTMARK_API_KEY || '';
@@ -261,17 +261,17 @@ export async function checkEmailServiceHealth(,
       signal: AbortSignal.timeout(10000)});
     const _responseTime = Date.now() - start;
     if(response.ok) {
-      return {;
+      return {
         name: `email_${provider}`
         status: 'healthy',
         responseTime,
     details: {
           provider,
           configured: true
-        }},
+        },
         timestamp: new Date()}
     } else {
-      return {;
+      return {
         name: `email_${provider}`
         status: response.status === 401 ? 'unhealthy' : 'degraded',
         error: `API returned ${response.status}`,``
@@ -279,7 +279,7 @@ export async function checkEmailServiceHealth(,
         timestamp: new Date()}
 }
   } catch (error) {
-    return {;
+    return {
       name: `email_${provider}`
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Connection failed',
@@ -293,7 +293,7 @@ export async function checkEmailServiceHealth(,
 export async function checkCDNHealth(,
     cdnUrl: string,
     testPath: string = '/health';
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   try {
     const response = await fetch(`${cdnUrl}${testPath}`, {`;`
@@ -302,24 +302,24 @@ export async function checkCDNHealth(,
     const _responseTime = Date.now() - start;
     if(response.ok || response.status === 404) {
       // 404 is acceptable as it means CDN is responding
-      return {;
+      return {
         name: 'cdn',
         status: 'healthy',
         responseTime,
     details: {
   url: cdnUrl,
     cacheStatus: response.headers.get('x-cache') || 'unknown'
-    }},
+    },
         timestamp: new Date()}
     } else {
-      return {;
+      return {
         name: 'cdn',
         status: 'degraded',
         error: `CDN returned ${response.status}`,``
         responseTime,
         timestamp: new Date()}
 }
-  } catch (error) { return {;
+  } catch (error) { return {
       name: 'cdn',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'CDN unreachable',
@@ -329,8 +329,8 @@ export async function checkCDNHealth(,
  * Create a comprehensive external services health check
  */
 export function createExternalServicesHealthCheck(): void {
-  return async (): Promise<HealthCheckResult> => {;
-    const checks = await Promise.all([;,
+  return async (): Promise<HealthCheckResult> => {
+    const checks = await Promise.all([
   checkOpenAIHealth(),
       checkStripeHealth(),
       checkGitHubHealth(),
@@ -345,20 +345,19 @@ export function createExternalServicesHealthCheck(): void {
     } else if (degradedChecks.length > 0) {
       overallStatus = 'degraded'
 }
-    const _totalResponseTime = checks.reduce(;
+    const _totalResponseTime = checks.reduce(
       (sum, check) => sum + (check.responseTime || 0),
       0
     );
-    return {;
+    return {
       name: 'external_services',
       status: overallStatus,
     responseTime: totalResponseTime,
     details: {
-  services: checks.map((c) => ({;,
+  services: checks.map((c) => ({,
   name: c.name,
     status: c.status,
     responseTime: c.responseTime
         }})},
       timestamp: new Date()}
-}
 }

@@ -8,7 +8,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';interface C
     retryDelay: number
 };
 interface PooledConnection {
-  client: SupabaseClient,
+  client: SupabaseClien;t,
     isActive: boolean,
     lastUsed: number,
     connectionId: string
@@ -46,10 +46,10 @@ class DatabaseConnectionPool {
     const _client = createClient(this.supabaseUrl, this.supabaseKey, {
       auth: {
   persistSession: false
-      }},
+      },
     db: {
         schema: 'public'
-}},
+},
     global: {
         headers: {
           'x-connection-id': connectionId);
@@ -68,15 +68,15 @@ class DatabaseConnectionPool {
 }
   private cleanupIdleConnections() {
     const _now = Date.now();
-    const _minConnections = 2;
+    const minConnections = 2
     this.pool = this.pool.filter((connection) => { const _isIdle = now - connection.lastUsed > this.config.idleTimeout;
-      const _shouldRemove =;
+      const shouldRemove =
         isIdle && !connection.isActive && this.pool.length > minConnections;
       if (shouldRemove) { }
       return !shouldRemove;
     });
 }
-  async getConnection(): Promise {
+  async getConnection(): Promise<any> {
     // Try to find an available connection
     let connection = this.pool.find(conn => !conn.isActive);
     // If no available connection and we haven't reached max, create a new one
@@ -92,12 +92,12 @@ class DatabaseConnectionPool {
     connection.lastUsed = Date.now();
     return connection;
 }
-  private async waitForAvailableConnection(): Promise {
-    return new Promise((resolve, reject) => {;
+  private async waitForAvailableConnection(): Promise<any> {
+    return new Promise((resolve, reject) => {
       const _timeout = setTimeout(() => {
         reject(new Error('Connection, timeout: No available connections'))
       }, this.config.connectionTimeout);
-      const _checkForConnection = (): void: (any) => {
+      const _checkForConnection = (): void => {
         const connection = this.pool.find(conn => !conn.isActive);
         if (connection) {
           clearTimeout(timeout);
@@ -115,7 +115,7 @@ class DatabaseConnectionPool {
   async executeWithRetry<T>(
     operation: (client: SupabaseClient) => Promise<T>,
     retryCount = 0
-  ): Promise {
+  ): Promise<any> {
     const connection = await this.getConnection();
     try {
       const _result = await operation(connection.client);
@@ -137,7 +137,7 @@ class DatabaseConnectionPool {
 }
 }
   getPoolStats() {
-    return {;
+    return {
       totalConnections: this.pool.length,
     activeConnections: this.pool.filter((conn) => conn.isActive).length,
     idleConnections: this.pool.filter((conn) => !conn.isActive).length,
@@ -146,7 +146,7 @@ class DatabaseConnectionPool {
           this.config.maxConnections) *
         100;
 }
-  async healthCheck(): Promise {
+  async healthCheck(): Promise<any> {
     try {
       const connection = await this.getConnection();
       const { error   }: any = await connection.client;
@@ -176,7 +176,7 @@ export function getConnectionPool(): DatabaseConnectionPool {
 }
   return poolInstance;
 };
-export function createConnectionPool(;
+export function createConnectionPool(
   config?: Partial<ConnectionPoolConfig>): Partial<ConnectionPoolConfig>): DatabaseConnectionPool {
   return new DatabaseConnectionPool(config);
 };

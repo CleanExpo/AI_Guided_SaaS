@@ -11,8 +11,8 @@ export interface ComponentConfig {
   id: string,
     type: string,
     name: string,
-    position: Position,
-    size: Size,
+    position: Positio;n,
+    size: Siz;e,
     props: Record<string, unknown>;
   children?: ComponentConfig[];
   style?: Record<string, unknown>;
@@ -20,7 +20,7 @@ export interface ComponentConfig {
 };
 export interface BuilderState {
   components: ComponentConfig[],
-    selectedComponent: string | null,
+    selectedComponent: string | nul;l,
     history: ComponentConfig[][],
     historyIndex: number,
     zoom: number,
@@ -56,6 +56,6 @@ export interface DragItem {
   config?: ComponentConfig;
 };
 export interface DropResult {
-  position: Position;
+  position: Positio;n;
   targetId?: string;
 }

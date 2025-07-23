@@ -89,7 +89,7 @@ export class PredictiveAnalytics extends EventEmitter {
     this.detectAnomalies(userId, currentPattern);
 }
   private createNewPattern(userId: string): UserBehaviorPattern {
-    return {;
+    return {
       userId,
     patterns: {
   errorFrequency: 0,
@@ -97,7 +97,7 @@ export class PredictiveAnalytics extends EventEmitter {
     sessionDuration: 0,
     clickPatterns: [],
     navigationFlow: []
-      }},
+      },
       anomalies: [],
     riskScore: 0,
     predictedIssues: []
@@ -207,7 +207,7 @@ export class PredictiveAnalytics extends EventEmitter {
 }};
 }
     // Feature confusion prediction
-    const _navigationLoops = this.detectNavigationLoops(;
+    const _navigationLoops = this.detectNavigationLoops(
       pattern.patterns.navigationFlow
     );
     if(navigationLoops > 3) {
@@ -232,7 +232,7 @@ export class PredictiveAnalytics extends EventEmitter {
 }
     return issues;
 }
-  private async collectSystemMetrics(): Promise {
+  private async collectSystemMetrics(): Promise<any> {
     try {
       // In production, these would come from real monitoring
       const metrics: SystemHealthMetrics = {
@@ -315,7 +315,7 @@ export class PredictiveAnalytics extends EventEmitter {
       .filter(([_, count]) => count > 3) // Affecting multiple users
       .map(([key, count]) => {
         const [type, severity]: any[] = key.split(':');
-        return {;
+        return {
           issue: type,
     userCount: count;
           severity;
@@ -366,23 +366,23 @@ break;
     return [...new Set(recommendations)]; // Remove duplicates
 }
   // Mock methods for metrics (replace with real implementations)
-  private async getErrorRate(): Promise {
+  private async getErrorRate(): Promise<any> {
     return Math.random() * 0.1; // 0-10% error rate
 }
-  private async getAverageResponseTime(): Promise {
+  private async getAverageResponseTime(): Promise<any> {
     return 200 + Math.random() * 1000; // 200-1200ms
 }
-  private async getThroughput(): Promise {
+  private async getThroughput(): Promise<any> {
     return 100 + Math.random() * 900; // 100-1000 requests/min
 }
-  private async getResourceUsage(): Promise {
-    return {;
+  private async getResourceUsage(): Promise<any> {
+    return {
       cpu: Math.random() * 100,
     memory: Math.random() * 100,
     disk: Math.random() * 100
 }
 }
-  private async getUserSatisfaction(): Promise {
+  private async getUserSatisfaction(): Promise<any> {
     return 3 + Math.random() * 2; // 3-5 score
 }
   private getLatestSystemHealth(): SystemHealthMetrics | null {
@@ -403,9 +403,9 @@ break;
 }
     // Calculate trend
     const recent = this.systemMetrics.slice(-5);
-    const _avgResponseTime =;
+    const avgResponseTime =
       recent.reduce((sum, m) => sum + m.responseTime, 0) / recent.length;
-    const _avgErrorRate =;
+    const avgErrorRate =
       recent.reduce((sum, m) => sum + m.errorRate, 0) / recent.length;
     let trend: 'improving' | 'stable' | 'degrading' = 'stable';
     if(current.responseTime > avgResponseTime * 1.2 || current.errorRate > avgErrorRate * 1.2) {
@@ -427,5 +427,4 @@ break;
 }};
 }
     return { current, trend, forecast };
-}
 }

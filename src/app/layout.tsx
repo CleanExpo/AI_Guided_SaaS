@@ -74,14 +74,14 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children: { children?: React.ReactNode
 }) {
-  return (;
+  return (
     <html lang="en" suppressHydrationWarning><body className={inter.className}>
         <Providers>
           <div className="min-h-screen bg-background flex flex-col">
             <ConditionalLayout>
               {children}
             </ConditionalLayout>
-            <Toaster    />
+            <Toaster />
           </div>
         </Providers>
       </body>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Pricing - AI Guided SaaS Platform',
   description: 'Choose the perfect plan for your development needs'
 };
-const plans = [;,
+const plans = [
   {
   name: 'Starter',
     price: '$0',
@@ -60,7 +60,7 @@ const plans = [;,
     cta: 'Contact Sales'
 }
 ];
-const features = [;,
+const features = [
   'AI-powered code generation',
   'Visual development tools',
   'One-click deployment',
@@ -68,7 +68,7 @@ const features = [;,
   'Version control integration',
   'Performance monitoring'
 ];
-props: anyexport default function PricingPage(): void {
+export default function PricingPage() {
   return (<div className="min-h-screen bg-gray-50 py-12">;
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
@@ -78,13 +78,16 @@ props: anyexport default function PricingPage(): void {
           </p>
         </div>
         {/* Pricing Plans */}
-        <div className="grid gap-8, lg:grid-cols-3 mb-12">
+        <div className="grid gap-8 lg:grid-cols-3 mb-12">
           {plans.map((plan) => (
-            <Card key={plan.name} className={`relative ${plan.popular ? 'border-blue-500 shadow-lg' : ''}`}>`
-              {plan.popular  && (div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+            <Card key={plan.name} className={`relative ${plan.popular ? 'border-blue-500 shadow-lg' : ''}`}>
+              {plan.popular  && (
+div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <Badge className="bg-blue-500">Most Popular</Badge>
                 </div>
-              )}
+              
+              
+            )}
               <CardHeader className="text-center pb-2">
                 <CardTitle className="text-2xl">{plan.name}</CardTitle>
                 <div className="mt-4">
@@ -97,12 +100,12 @@ props: anyexport default function PricingPage(): void {
                 <ul className="space-y-3 mb-6">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center">
-                      <Check className="h-4 w-4 text-green-500 mr-3 flex-shrink-0"    />
+                      <Check className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
                       <span className="text-gray-600">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <Button className={`w-full ${plan.popular ? '' : 'variant-outline'}`}>`
+                <Button className={`w-full ${plan.popular ? '' : 'variant-outline'}`}>
                   {plan.cta}
                 </Button>
               </CardContent>
@@ -114,10 +117,10 @@ props: anyexport default function PricingPage(): void {
             <CardTitle className="text-center text-2xl">All Plans Include</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4, md:grid-cols-2, lg:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {features.map((feature) => (
                 <div key={feature} className="flex items-center">
-                  <Check className="h-4 w-4 text-green-500 mr-3"    />
+                  <Check className="h-4 w-4 text-green-500 mr-3" />
                   <span className="text-gray-600">{feature}</span>
                 </div>
               ))}
@@ -127,7 +130,7 @@ props: anyexport default function PricingPage(): void {
         {/* FAQ */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          <div className="grid gap-6, md:grid-cols-2 text-left">
+          <div className="grid gap-6 md:grid-cols-2 text-left">
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">Can I change plans anytime?</h3>
               <p className="text-gray-600">Yes, you can upgrade or downgrade your plan at any time.</p>
@@ -143,10 +146,8 @@ props: anyexport default function PricingPage(): void {
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">Do you offer discounts?</h3>
               <p className="text-gray-600">Yes, we offer discounts for annual plans and educational institutions.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+                  </div>
+);
+
     </div>
-  );
-}
+  }

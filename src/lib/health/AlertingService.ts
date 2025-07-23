@@ -3,7 +3,7 @@ import { HealthStatus, HealthCheckResult } from './HealthCheckService';
 export interface AlertConfig {
   enabled: boolean,
     channels: AlertChannel[],
-    rules: AlertRule[], cooldownPeriod: number // milliseconds,
+    rules: AlertRule[], cooldownPeriod: number // millisecond;s,
     maxAlertsPerHour: number
 };
 export interface AlertChannel {
@@ -16,7 +16,7 @@ export interface AlertRule {
     condition: (status: HealthStatus) => boolean,
     severity: 'low' | 'medium' | 'high' | 'critical',
   message: string,
-    channels: string[] // channel types to use
+    channels: string[] // channel types to us;e
 };
 export interface Alert {
   id: string,
@@ -25,7 +25,7 @@ export interface Alert {
   title: string,
     message: string;
   details,
-    status: HealthStatus,
+    status: HealthStatu;s,
     acknowledged: boolean
 };
 export class AlertingService extends EventEmitter {
@@ -47,7 +47,7 @@ export class AlertingService extends EventEmitter {
   /**
    * Process health status and trigger alerts if needed
    */
-  async processHealthStatus(status: HealthStatus): Promise {
+  async processHealthStatus(status: HealthStatus): Promise<any> {
     if (!this.config.enabled) return // Check each rule;
     for(const rule of this.config.rules) {
       if (rule.condition(status)) {
@@ -60,7 +60,7 @@ export class AlertingService extends EventEmitter {
   /**
    * Trigger an alert
    */
-  private async triggerAlert(rule: AlertRule, status: HealthStatus): Promise {
+  private async triggerAlert(rule: AlertRule, status: HealthStatus): Promise<any> {
     // Check cooldown
     const lastAlert = this.lastAlertTime.get(rule.name);
     if (lastAlert && Date.now() - lastAlert.getTime() < this.config.cooldownPeriod) {
@@ -93,7 +93,7 @@ export class AlertingService extends EventEmitter {
   /**
    * Send alert to specified channels
    */
-  private async sendAlert(alert: Alert, channelTypes: string[]): Promise {
+  private async sendAlert(alert: Alert, channelTypes: string[]): Promise<any> {
     const channels = this.config.channels.filter(,
     ch: any => ch.enabled && channelTypes.includes(ch.type)
     )
@@ -159,14 +159,14 @@ export class AlertingService extends EventEmitter {
   /**
    * Email alert handler
    */
-  private async sendEmail(alert: Alert, config): Promise {
+  private async sendEmail(alert: Alert, config): Promise<any> {
     // Implementation would depend on email service
     // Example with SendGrid, Resend, etc.
 }
   /**
    * Slack alert handler
    */
-  private async sendToSlack(alert: Alert, config): Promise {
+  private async sendToSlack(alert: Alert, config): Promise<any> {
     if(!config.webhookUrl) {
       throw new Error('Slack webhook URL not configured')
 }
@@ -219,7 +219,7 @@ export class AlertingService extends EventEmitter {
   /**
    * Generic webhook handler
    */
-  private async sendToWebhook(alert: Alert, config): Promise {
+  private async sendToWebhook(alert: Alert, config): Promise<any> {
     if(!config.url) {
       throw new Error('Webhook URL not configured')
 }
@@ -240,7 +240,7 @@ export class AlertingService extends EventEmitter {
    * Extract relevant details from health status
    */
   private extractAlertDetails(status: HealthStatus) {
-    return {;
+    return {
       failedChecks: status.checks
         .filter((c) => c.status === 'unhealthy')
         .map((c) => ({ name: c.name, error: c.error })),
@@ -258,8 +258,7 @@ export class AlertingService extends EventEmitter {
    * Get default alert rules
    */
   private getDefaultRules(): AlertRule[] {
-    return [;
-      {
+    return [{
   name: 'System Unhealthy',
         condition: (status) => status.status === 'unhealthy',
     severity: 'critical',
@@ -363,5 +362,4 @@ export class AlertingService extends EventEmitter {
    */
   removeRule(ruleName: string) {
     this.config.rules = this.config.rules.filter((r) => r.name !== ruleName)
-}
 }

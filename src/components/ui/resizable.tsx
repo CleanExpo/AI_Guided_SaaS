@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import * as React from 'react';
 import { GripVertical } from 'lucide-react';
 import * as ResizablePrimitive from 'react-resizable-panels';
@@ -20,10 +22,16 @@ const _ResizableHandle = ({
     )},
     {...props}
   >
-    {withHandle  && (/ResizablePrimitive>
+    {withHandle  && (
+/ResizablePrimitive>
       <div, className="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border"></div><GripVertical className="h-2.5 w-2.5" />
-    )}
+    
+              
+            )}
   </ResizablePrimitive.PanelResizeHandle>
 )
 export {  ResizablePanelGroup, ResizablePanel, ResizableHandle;
- };
+ 
+    </typeof>
+    </typeof>
+  };

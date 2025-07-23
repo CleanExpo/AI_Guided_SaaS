@@ -1,17 +1,17 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-props: anyexport default function DataFlexibilityPage(): void {
+export default function DataFlexibilityPage() {
   // Mock data to demonstrate flexibility
-  const users = [;,
+  const users = [
   { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'admin' },
     { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'user' }
    ];
-  const products = [;,
+  const products = [
   { id: 1, name: 'AI Assistant Pro', price: 99.99, category: 'Software' },
     { id: 2, name: 'Data Analytics Suite', price: 149.99, category: 'Analytics' }
    ];
-  const orders = [;,
+  const orders = [
   { id: 1, userId: 1, productId: 1, total: 99.99, status: 'completed' },
     { id: 2, userId: 2, productId: 2, total: 149.99, status: 'pending' }
    ];
@@ -32,7 +32,7 @@ props: anyexport default function DataFlexibilityPage(): void {
     totalOrders: orders.length,
     revenue: orders.reduce((sum: number, order) => sum + order.total, 0)
 }
-  return (;
+  return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
@@ -43,7 +43,7 @@ props: anyexport default function DataFlexibilityPage(): void {
             Demonstrating flexible data structures and real-time processing capabilities.
           </p>
         </div>
-        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-4 mb-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Users</CardTitle>
@@ -89,7 +89,7 @@ props: anyexport default function DataFlexibilityPage(): void {
             </CardContent>
           </Card>
         </div>
-        <div className="grid gap-6, lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>Recent Users</CardTitle>
@@ -101,7 +101,6 @@ props: anyexport default function DataFlexibilityPage(): void {
                     <div>
                       <div className="font-medium">{user.name}</div>
                       <div className="text-sm text-gray-600">{user.email}</div>
-                    </div>
                     <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
                       {user.role}
                     </Badge>
@@ -120,17 +119,15 @@ props: anyexport default function DataFlexibilityPage(): void {
                     <div>
                       <div className="font-medium">{product.name}</div>
                       <div className="text-sm text-gray-600">{product.category}</div>
-                    </div>
                     <div className="text-lg font-semibold text-green-600">
                       ${product.price}
                     </div>
-                  </div>
                 ))}
               </div>
             </CardContent>
           </Card>
-        </div>
-      </div>
-    </div>
-  );
+              </div>
+);
+
+          </div>
 }

@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,28 +11,31 @@ import { Sparkles, ArrowRight, ArrowLeft, CheckCircle, Target, Code, Palette, Da
 import { cn } from '@/utils/cn';
 import { useChat } from 'ai/react';
 interface Step {
-  id: string,
-    title: string,
-    description: string,
-    icon: React.ElementType,
+id: string;
+    title: string;
+    description: string;
+    icon: React.ElementTyp;e;
     fields: Field[];
   helper?: string;
+
 };
 interface Field {
-  name: string,
-    label: string,
+name: string;
+    label: string;
     type: 'text' | 'textarea' | 'select' | 'multiselect' | 'radio';
   placeholder?: string;
-  options?: { value: string,
-    label: string }[]
+  options?: { value: string;
+    label: string 
+}[]
   required?: boolean;
   validation? (value) => string | null
 };
 interface GuidedProjectBuilderProps {
-  onComplete: (projectData) => void;
+onComplete: (projectData) => voi;d;
   initialData?;
+
 }
-const steps: Step[] = [;,
+const steps: Step[] = [
   {
   id: 'project-type',
     title: 'What would you like to build?',
@@ -81,8 +85,7 @@ const steps: Step[] = [;,
     validation: (value) => {
           if (!value || value.length < 50) return 'Please provide at least 50 characters to describe your project';
           return null;
-}
-  },
+},
       {
         name: 'targetAudience',
         label: 'Who is this for?',
@@ -211,12 +214,12 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
   });
   const step = steps[currentStep];
   const _progress = ((currentStep + 1) / steps.length) * 100;
-  const _validateStep = (): void: (any) => { </string>;
-    const stepErrors: Record<string, string> = {; }
+  const _validateStep = (): void => { </string>;
+    const stepErrors: Record<string, string> = { }
     step.fields.forEach((field) => {
       if(field.required && !formData[field.name]) {
         stepErrors[field.name] = `${field.label} is required`
-}
+  }
       if(field.validation) {
             </string>
         const _error = field.validation(formData[field.name]);
@@ -227,7 +230,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
     return Object.keys(stepErrors).length === 0;
 }
   const _handleNext = async () => {
-    if (!validateStep()) return if(currentStep === steps.length - 1) {;
+    if (!validateStep()) return if(currentStep === steps.length - 1) {
       setIsProcessing(true)
       // Process and complete
       await processProjectData()
@@ -237,9 +240,9 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
       await getAiSuggestions()
 }
 }
-  const _handleBack = (): void: (any) => { if (currentStep > 0) {
+  const _handleBack = (): void => { if (currentStep > 0) {
       setCurrentStep(prev => prev - 1)
-      setErrors({; }
+      setErrors({ }
       )}
     );
 }
@@ -258,7 +261,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
     await append({
       role: 'user',
       content: `Based on the project data so, far: ${JSON.stringify(formData)}, suggest helpful tips, for: ${step.title}`
-}
+  }
       )}
     );
   const _processProjectData = async () => {
@@ -294,7 +297,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
           <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>
           <span className="text-sm font-medium">{Math.round(progress)}% Complete</span>
         </div>
-        <Progress value={progress} className="h-2"    />
+        <Progress value={progress} className="h-2" />
       </div>
       {/* Step, Content */}
       <AnimatePresence mode="wait">
@@ -316,7 +319,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
             {/* AI, Helper */},
     {step.helper  && (div className="mb-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
                 <div className="flex items-start gap-3">
-                  <Lightbulb className="h-5 w-5 text-primary mt-0.5"    />
+                  <Lightbulb className="h-5 w-5 text-primary mt-0.5" />
                   <p className="text-sm">{step.helper}</p>
   }, {/* Fields */}
             <div className="space-y-6">
@@ -328,7 +331,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
                   </label>
                   {field.type === 'text'  && (Input
                       value={formData[field.name] || ''}
-                      onChange: any={(e) => handleFieldChange(field.name, e.target.value)}
+                      onChange={(e) => handleFieldChange(field.name, e.target.value)}
                       placeholder={field.placeholder}
                       className={cn(errors[field.name] && 'border-red-500')}
                     />
@@ -336,7 +339,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
     {field.type === 'textarea'  && (/Input>
                     <Textarea
                       value={formData[field.name] || ''}
-                      onChange: any={(e) => handleFieldChange(field.name, e.target.value)}
+                      onChange={(e) => handleFieldChange(field.name, e.target.value)}
                       placeholder={field.placeholder}
                       rows={4}
                       className={cn(errors[field.name] && 'border-red-500')}
@@ -358,14 +361,14 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
                             name={field.name}
                             value={option.value}
                             checked={formData[field.name] === option.value}
-                            onChange={() =    /> handleFieldChange(field.name, option.value)}
+                            onChange={() = /> handleFieldChange(field.name, option.value)}
                             className="sr-only"
                           /></input>
                           <span className="text-sm font-medium">{option.label}</span>))}
                   )},
     {field.type === 'select'  && (select
                       value={formData[field.name] || ''}
-                      onChange: any={(e) => handleFieldChange(field.name, e.target.value)}
+                      onChange={(e) => handleFieldChange(field.name, e.target.value)}
                       className={cn(
             'w-full p-2 border rounded-md',errors[field.name] && 'border-red-500'
                       )}
@@ -389,7 +392,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
                             type="checkbox"
                             value={option.value}
                             checked={formData[field.name]?.includes(option.value) || false}
-                            onChange={(e) =    /> {
+                            onChange={(e) = /> {
                               const values = formData[field.name] || [];
                               if(e.target.checked) {
                                 handleFieldChange(field.name, [...values, option.value])
@@ -404,7 +407,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
     {/* AI, Suggestions */},
     {aiSuggestions.length > 0  && (div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
-                  <Sparkles className="h-4 w-4"    />
+                  <Sparkles className="h-4 w-4" />
                   AI Suggestions</Sparkles>
                 <ul className="space-y-1">
                   {aiSuggestions.map((suggestion, index) => (
@@ -419,7 +422,7 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
                 onClick={handleBack}
                 disabled={currentStep === 0}
               >
-                <ArrowLeft className="h-4 w-4 mr-2"    />
+                <ArrowLeft className="h-4 w-4 mr-2" />
                 Back</ArrowLeft>
               <Button
                 onClick={handleNext}
@@ -433,8 +436,16 @@ export function GuidedProjectBuilder({ onComplete, initialData  = {} }: GuidedPr
                     Create Project</Rocket></React.Fragment>
                 ) : (
                   <React.Fragment>Next
-                    <ArrowRight className="h-4 w-4 ml-2"    /></React.Fragment>
-                )}
+                    <ArrowRight className="h-4 w-4 ml-2" /></React.Fragment>
+                )
+    </label>
+    </option>
+    </label>
+    </Textarea>
+          </div>
+</any>
+    </any>
+    }
               </Button>
         </motion.div>
     );

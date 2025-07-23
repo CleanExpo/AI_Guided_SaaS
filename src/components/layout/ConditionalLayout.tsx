@@ -1,11 +1,14 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { usePathname } from 'next/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ReactNode, useEffect, useState } from 'react';
 interface ConditionalLayoutProps {
-  children: ReactNode
+children: ReactNod;e
+
 }
 export function ConditionalLayout({ children }: ConditionalLayoutProps): ConditionalLayoutProps) {
   const pathname = usePathname();
@@ -15,7 +18,7 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps): Conditi
     setIsClient(true);
   }, []);
   // Routes that should NOT show the app header/footer
-  const noLayoutRoutes = [;,
+  const noLayoutRoutes = [
   '/', // Landing page has its own header,
   '/auth/signin',
     '/auth/signup',
@@ -27,10 +30,11 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps): Conditi
   // UNIFIED STRUCTURE - Always return consistent JSX hierarchy;
   // Use CSS/conditional content instead of conditional JSX structure
   return (
-    <React.Fragment>{isClient && shouldShowLayout && <Header    />}
+    <React.Fragment>{isClient && shouldShowLayout && <Header />}
       <main className={isClient && shouldShowLayout ? "flex-1 pt-20 pb-8" : "flex-1"}>
         {children}
       </main>
-      {isClient && shouldShowLayout && <Footer    />}</React.Fragment>
+      {isClient && shouldShowLayout && <Footer />}</React.Fragment>
   );
-}
+
+    }

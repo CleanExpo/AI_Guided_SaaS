@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,18 +10,20 @@ import { Badge } from '@/components/ui/badge';
 import { Key, Lock, Eye, EyeOff, Plus, Trash2, AlertTriangle, CheckCircle, Copy, Download, Upload, Shield, Info } from 'lucide-react';
 import { cn } from '@/utils/cn';
 interface EnvVariable {
-  key: string,
+key: string;
     value: string;
-  description?: string,
-    type: 'public' | 'secret' | 'api_key',
+  description?: string;
+    type: 'public' | 'secret' | 'api_key';
   required: boolean;
   validated?: boolean;
+
 };
 interface EnvVariableEditorProps {
-  variables: EnvVariable[],
-    onChange: (variables: EnvVariable[]) => void;
+variables: EnvVariable[];
+    onChange: (variables: EnvVariable[]) => voi;d;
   projectType?: string;
   readOnly?: boolean;
+
 }
 const commonVariables: Record<string, EnvVariable[]> = {
   default: [
@@ -55,7 +58,7 @@ export function EnvVariableEditor({
   const [showSecrets, setShowSecrets] = useState<Record<string, boolean>>({});
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
   const [isValidating, setIsValidating] = useState<any>(false);
-  const _handleAddVariable = (): void: (any) => {
+  const _handleAddVariable = (): void => {
     const newVar: EnvVariable = {
   key: '',
     value: '',
@@ -111,7 +114,7 @@ export function EnvVariableEditor({
     setIsValidating(false)
     return Object.keys(errors).length === 0;
 }
-  const _exportEnvFile = (): void: (any) => {
+  const _exportEnvFile = (): void => {
     const content = variables;
       .filter((v) => v.key && v.value)
       .map((v) => `${v.key}="${v.value}"`)``
@@ -151,7 +154,7 @@ export function EnvVariableEditor({
 }
     reader.readAsText(file)
 }
-  const _addSuggestedVariables = (): void: (any) => { const suggested = commonVariables[projectType] || commonVariables.default;
+  const _addSuggestedVariables = (): void => { const suggested = commonVariables[projectType] || commonVariables.default;
     const existingKeys = new Set(variables.map((v) => v.key));
     const toAdd = suggested.filter((v) => !existingKeys.has(v.key));
     if(toAdd.length > 0) {
@@ -161,7 +164,7 @@ export function EnvVariableEditor({
 }
   const _getTypeIcon = (type: EnvVariable['type']) => { switch (type) {</HTMLInputElement>
       case 'secret':
-    return <Lock className="h-4 w-4"    />;
+    return <Lock className="h-4 w-4" />;
     break;
 
     break;
@@ -169,10 +172,10 @@ break;
 
 
       case 'api_key':
-    return <Key className="h-4 w-4"    />;
+    return <Key className="h-4 w-4" />;
     break;
 }
-      default: return<Eye className="h-4 w-4"    />
+      default: return<Eye className="h-4 w-4" />
 }
 }
   const _getTypeBadgeColor = (type: EnvVariable['type']) => { switch (type) {
@@ -188,15 +191,14 @@ break;
     return 'bg-yellow-100 text-yellow-700';
     break;
 }
-      default: return 'bg-green-100 text-green-700',;
-}
+      default: return 'bg-green-100 text-green-700'}
 }
   return (<Card className="p-6">;
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-lg font-semibold flex items-center gap-2">
-              <Shield className="h-5 w-5"    />
+              <Shield className="h-5 w-5" />
               Environment Variables</Shield>
             <p className="text-sm text-muted-foreground mt-1">
               Configure secure environment variables for your project</p>
@@ -207,14 +209,14 @@ break;
               onClick={addSuggestedVariables}
               disabled={readOnly}
             >
-              <Plus className="h-4 w-4 mr-2"    />
+              <Plus className="h-4 w-4 mr-2" />
               Add Suggested</Plus>
             <Button
               size="sm"
               variant="outline"
               onClick={exportEnvFile}
             >
-              <Download className="h-4 w-4 mr-2"    />
+              <Download className="h-4 w-4 mr-2" />
               Export</Download>
             <label>
               <Button
@@ -224,18 +226,17 @@ break;
                 // asChild
               >
                 <span>
-                  <Upload className="h-4 w-4 mr-2"    />
+                  <Upload className="h-4 w-4 mr-2" />
                   Import</Upload>
               <input
                 type="file"
                 accept=".env, .env.local"
                 onChange={importEnvFile}
-                className="hidden"
-                 />
+                className="hidden" />
             </label>
         {/* Security, Notice */}
         <Alert className="mb-4">
-          <AlertTriangle className="h-4 w-4"    />
+          <AlertTriangle className="h-4 w-4" />
           <AlertDescription>
             Environment variables marked as "secret" or "api_key" will be encrypted and never exposed in the UI after saving.</AlertDescription>
       {/* Variables, List */}
@@ -247,7 +248,7 @@ break;
                 <label className="text-sm font-medium mb-1 block">Key</label>
                 <Input
                   value={variable.key}
-                  onChange: any={(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))}
+                  onChange={(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))}
                   placeholder="VARIABLE_NAME"
                   disabled={readOnly}
                   className={cn(
@@ -261,7 +262,7 @@ break;
                   <Input
                     type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'password'}
                     value={variable.value}
-                    onChange: any={(e) => handleUpdateVariable(index, 'value', e.target.value)}
+                    onChange={(e) => handleUpdateVariable(index, 'value', e.target.value)}
                     placeholder={variable.type === 'api_key' ? 'sk-...' : 'Enter value'}
                     disabled={readOnly}
                     className={cn(
@@ -272,19 +273,19 @@ break;
                     <button
                       type="button"
                       onClick={() => toggleShowSecret(variable.key)}
-                      className="absolute right-2 top-2.5 text-gray-400, hover:text-gray-600"
+                      className="absolute right-2 top-2.5 text-gray-400 hover:text-gray-600"
                     >
                       {showSecrets[variable.key] ? (</button>
-                        <EyeOff className="h-4 w-4"    />
+                        <EyeOff className="h-4 w-4" />
                       ) : (</EyeOff>
-                        <Eye className="h-4 w-4"    />
+                        <Eye className="h-4 w-4" />
                       )}</Eye>
                   )},
     {/* Type & Actions */}
               <div className="col-span-2 flex items-end gap-2">
                 <select
                   value={variable.type}
-                  onChange: any={(e) => handleUpdateVariable(index, 'type', e.target.value)}
+                  onChange={(e) => handleUpdateVariable(index, 'type', e.target.value)}
                   disabled={readOnly}
                   className="flex-1 px-2 py-2 border rounded-md text-sm"
                 ></select>
@@ -295,7 +296,7 @@ break;
                     variant="ghost"
                     onClick={() => handleRemoveVariable(index)}
                   ></Button>
-                    <Trash2 className="h-4 w-4 text-red-500"    />
+                    <Trash2 className="h-4 w-4 text-red-500" />
                   </Button>
                 )},
     {/* Description & Metadata */}
@@ -310,20 +311,29 @@ break;
                   {getTypeIcon(variable.type)}</Badge>
                   <span className="ml-1">{variable.type}</span>
                 </Badge>
-                {variable.required  && (Badge variant="outline", className="text-xs">
+                {variable.required  && (
+Badge variant="outline", className="text-xs">
                     Required</Badge>
-                )},
-    {variable.validated  && (CheckCircle className="h-4 w-4 text-green-500"    />
-                )}))},
+                
+              
+            )},
+    {variable.validated  && (
+CheckCircle className="h-4 w-4 text-green-500"    />
+                
+              
+            )}))},
     {/* Add, Variable Button */},
-    {!readOnly  && (Button
+    {!readOnly  && (
+Button
             variant="outline"
             className="w-full"
             onClick={handleAddVariable}
           >
-            <Plus className="h-4 w-4 mr-2"    />
+            <Plus className="h-4 w-4 mr-2" />
             Add Variable</Plus>
-        )},
+        
+              
+            )},
     {/* Validation */}
       <div className="mt-6 flex justify-end">
         <Button
@@ -333,4 +343,16 @@ break;
           {isValidating ? 'Validating...' : 'Validate All'}
   );
 }
-}
+
+    </Button>
+          </div>
+</option>
+          </div>
+</Alert>
+    </span>
+    </Button>
+    </div>
+    </h3>
+          </div>
+</Card>
+    }

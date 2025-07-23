@@ -1,11 +1,13 @@
-import { NextResponse } from 'next/server';export async function GET(): void {
+import { NextResponse } from 'next/server';
+
+export async function GET(): Promise<NextResponse> {
   try {
-    const _status = {
+    const status = {
       status: 'operational',
       timestamp: new Date().toISOString(),
       version: '1.0.0',
       services: {
-  context7: 'connected',
+        context7: 'connected',
         sequentialThinking: 'connected',
         memory: 'operational',
         fetch: 'operational'
@@ -16,7 +18,7 @@ import { NextResponse } from 'next/server';export async function GET(): void {
     return NextResponse.json(status);
   } catch (error) {
     console.error('MCP status error:', error);
-    return NextResponse.json(;
+    return NextResponse.json(
       {
         status: 'error',
         error: 'Failed to get MCP status',
@@ -24,6 +26,6 @@ import { NextResponse } from 'next/server';export async function GET(): void {
       },
       { status: 500 }
     );
+  }
 }
-}
-export const _dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";

@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: 'Community - AI Guided SaaS Platform',
   description: 'Join our vibrant community of developers building the future with AI'
 };
-const communityStats = [;,
+const communityStats = [
   { label: 'Active Members', value: '12,453', icon: Users },
   { label: 'Monthly Posts', value: '3,892', icon: MessageSquare },
   { label: 'Projects Shared', value: '1,267', icon: Hash }
 ];
-const communityChannels = [;,
+const communityChannels = [
   {
   name: 'General Discussion',
     description: 'Chat about AI development, share ideas, and connect with fellow developers',
@@ -39,8 +39,10 @@ const communityChannels = [;,
     isActive: true
 }
 ];
-props: anyexport default function CommunityPage(): void {
-  return (<div className="min-h-screen bg-gray-50 py-8"><div className="container mx-auto px-4 max-w-6xl">;
+export default function CommunityPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto px-4 max-w-6xl">;
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -52,7 +54,7 @@ props: anyexport default function CommunityPage(): void {
           </p>
         </div>
         {/* Community, Stats */}
-        <div className="grid gap-6, md:grid-cols-3 mb-12">
+        <div className="grid gap-6 md:grid-cols-3 mb-12">
           {communityStats.map((stat) => (
             <Card key={stat.label}>
               <CardContent className="flex items-center p-6">
@@ -62,7 +64,6 @@ props: anyexport default function CommunityPage(): void {
                 <div>
                   <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
-                </div>
               </CardContent>
             </Card>
           ))}
@@ -70,21 +71,24 @@ props: anyexport default function CommunityPage(): void {
         {/* Community, Channels */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Community Channels</h2>
-          <div className="grid gap-6, md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {communityChannels.map((channel) => (
               <Card key={channel.name} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{channel.name}</CardTitle>
-                    {channel.isActive  && (Badge variant="secondary">Active</Badge>
-                    )}
+                    {channel.isActive  && (
+Badge variant="secondary">Active</Badge>
+                    
+              
+            )}
                   </div>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-4">{channel.description}</p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-sm text-gray-500">
-                      <Users className="h-4 w-4 mr-1"    />
+                      <Users className="h-4 w-4 mr-1" />
                       <span>{channel.members.toLocaleString()} members</span>
                     </div>
                     <Button variant="outline" size="sm">
@@ -95,28 +99,26 @@ props: anyexport default function CommunityPage(): void {
               </Card>
             ))}
           </div>
-        </div>
         {/* External, Links */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Connect With Us</h2>
           <div className="flex justify-center space-x-4">
             <Button variant="outline" className="flex items-center space-x-2">
-              <Github className="h-4 w-4"    />
+              <Github className="h-4 w-4" />
               <span>GitHub</span>
-              <ExternalLink className="h-3 w-3"    />
+              <ExternalLink className="h-3 w-3" />
             </Button>
             <Button variant="outline" className="flex items-center space-x-2">
-              <Twitter className="h-4 w-4"    />
+              <Twitter className="h-4 w-4" />
               <span>Twitter</span>
-              <ExternalLink className="h-3 w-3"    />
+              <ExternalLink className="h-3 w-3" />
             </Button>
             <Button className="flex items-center space-x-2">
-              <MessageSquare className="h-4 w-4"    />
+              <MessageSquare className="h-4 w-4" />
               <span>Join Discord</span>
             </Button>
+                </div>
+);
+
           </div>
-        </div>
-      </div>
-    </div>
-  );
 }

@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { Search, FileText, Code, MessageSquare, Loader2 } from 'lucide-react';
 import { useSemanticSearch } from '@/hooks/useSemanticSearch';
@@ -58,7 +59,7 @@ break,
             type="text"
             placeholder="Search for anything..."
             value={query}
-            onChange: any={(e) => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
             className="flex-1"
           />
@@ -67,34 +68,37 @@ break,
             disabled={isSearching || !query.trim()}
           >
             {isSearching ? (
-              <Loader2 className="h-4 w-4 animate-spin"    />
+              <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              <Search className="h-4 w-4"    />
+              <Search className="h-4 w-4" />
             )}
             // Search
           </Button>
-          {searchResults  && (Button variant="outline" onClick={clearResults}>
-              // Clear
-            </Button>
-          )}
+          {searchResults  && (
+Button variant="outline" onClick={clearResults}>
+                    Clear
+                  </Button>
+          
+              
+            )}
         </div>
 
         {/* Search Type Tabs */}
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="all" onClick={() => handleSearch()}>
-              // All
-            </TabsTrigger>
+                    All
+                  </TabsTrigger>
             <TabsTrigger value="code" onClick={() => handleSearch('code')}>
-              <Code className="h-4 w-4 mr-2"    />
-              // Code
-            </TabsTrigger>
+              <Code className="h-4 w-4 mr-2" />
+                    Code
+                  </TabsTrigger>
             <TabsTrigger value="docs" onClick={() => handleSearch('docs')}>
-              <FileText className="h-4 w-4 mr-2"    />
-              // Docs
-            </TabsTrigger>
+              <FileText className="h-4 w-4 mr-2" />
+                    Docs
+                  </TabsTrigger>
             <TabsTrigger value="conversations" onClick={() => handleSearch('conversations')}>
-              <MessageSquare className="h-4 w-4 mr-2"    />Chats
+              <MessageSquare className="h-4 w-4 mr-2" />Chats
             </TabsTrigger>
           </TabsList>
 
@@ -122,7 +126,6 @@ break,
                             <Badge variant="outline">{result.type}</Badge>
                             <Badge>{(result.score * 100).toFixed(1)}%</Badge>
                           </div>
-                        </div>
                         <p className="text-sm text-muted-foreground line-clamp-3">
                           {result.content}
                         </p>
@@ -164,12 +167,15 @@ break,
               </div>
             )},
     {/* Empty State */},
-    {!searchResults && !isSearching  && (div className="text-center py-12">
-                <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4"    />
+    {!searchResults && !isSearching  && (
+div className="text-center py-12">
+                <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                 <p className="text-muted-foreground">
                   Enter a search query to find relevant content using semantic search.
                 </p>
               </div>
+            
+              
             )}
           </TabsContent>
         </Tabs>
@@ -188,4 +194,5 @@ break,
       </Card>
     </div>
   );
-}
+
+    }

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'API Documentation - AI Guided SaaS Platform',
   description: 'Complete API reference and documentation for AI Guided SaaS Platform'
 };
-const apiEndpoints = [;,
+const apiEndpoints = [
   {
   name: 'Authentication',
     slug: 'auth',
@@ -32,8 +32,10 @@ const apiEndpoints = [;,
     status: 'beta'
 }
 ];
-props: anyexport default function ApiDocsPage(): void {
-  return (<div className="min-h-screen bg-gray-50 py-12">;
+
+export default function ApiDocsPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">API Documentation</h1>
@@ -41,13 +43,13 @@ props: anyexport default function ApiDocsPage(): void {
             Complete API reference for AI Guided SaaS Platform
           </p>
         </div>
-        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {apiEndpoints.map((endpoint) => (
             <Card key={endpoint.slug} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2">
-                    <Code className="h-5 w-5"    />
+                    <Code className="h-5 w-5" />
                     {endpoint.name}
                   </CardTitle>
                   <Badge variant={endpoint.status === 'stable' ? 'default' : 'secondary'}>
@@ -58,10 +60,10 @@ props: anyexport default function ApiDocsPage(): void {
               <CardContent>
                 <p className="text-gray-600 mb-4">{endpoint.description}</p><div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Version {endpoint.version}</span>
-                  <Link href={`/api-docs/${endpoint.slug}`}>`
+                  <Link href={`/api-docs/${endpoint.slug}`}>
                     <Button size="sm" variant="outline">
                       View Docs
-                      <ExternalLink className="ml-2 h-4 w-4"    />
+                      <ExternalLink className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
                 </div>
@@ -84,10 +86,7 @@ props: anyexport default function ApiDocsPage(): void {
                 All API requests require authentication using JWT tokens.
                 Include your token in the Authorization header.
               </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+                  </div>
+);
+
+      }

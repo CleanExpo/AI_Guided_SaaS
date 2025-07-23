@@ -1,78 +1,81 @@
 // Mark as dynamic to prevent static generation
-export const _dynamic = 'force-dynamic';import { NextRequest, NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
+
+import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 const validateSchema = z.object({
   roadmapId: z.string(),
-    milestones: z.array(z.object({
-  id: z.string(),
+  milestones: z.array(z.object({
+    id: z.string(),
     title: z.string(),
     description: z.string(),
     dueDate: z.string(),
     status: z.enum(['pending', 'in-progress', 'completed'])
   }))
 });
-export async function POST(request: NextRequest): Promise {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const _body = await request.json();
+    const body = await request.json();
     // Validate input
     const validatedData = validateSchema.parse(body);
     // Simulate roadmap validation
-    const _validation = {
+    const validation = {
       roadmapId: validatedData.roadmapId,
-    isValid: true,
-    issues: [],
-    suggestions: [
+      isValid: true,
+      issues: [],
+      suggestions: [
         'Consider adding more detailed milestones',
         'Set realistic deadlines',
         'Include dependency mapping'
-   ],
+      ],
       score: 85,
-    validatedAt: new Date().toISOString()
+      validatedAt: new Date().toISOString()
     };
-    return NextResponse.json({;
-      success: true;
-      // validation
+    return NextResponse.json({
+      success: true,
+      validation
     });
   } catch (error) {
-    console.error('Validate roadmap, error:', error);
+    console.error('Validate roadmap error:', error);
     if(error instanceof z.ZodError) {
-      return NextResponse.json(;
+      return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
       );
-}
-    return NextResponse.json(;
+    }
+    return NextResponse.json(
       { error: 'Failed to validate roadmap' },
       { status: 500 }
     );
+  }
 }
-}
-export async function GET(request: NextRequest): Promise {
+
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const url = new URL(request.url);
-    const _roadmapId = url.searchParams.get('roadmapId');
+    const roadmapId = url.searchParams.get('roadmapId');
     if(!roadmapId) {
-      return NextResponse.json(;
+      return NextResponse.json(
         { error: 'Roadmap ID is required' },
         { status: 400 }
       );
-}
+    }
     // Simulate getting validation status
-    const _validation = {
+    const validation = {
       roadmapId,
       isValid: true,
-    lastValidated: new Date().toISOString(),
-    score: 85
+      lastValidated: new Date().toISOString(),
+      score: 85
     };
-    return NextResponse.json({;
-      success: true;
-      // validation
+    return NextResponse.json({
+      success: true,
+      validation
     });
   } catch (error) {
-    console.error('Get validation, error:', error);
-    return NextResponse.json(;
+    console.error('Get validation error:', error);
+    return NextResponse.json(
       { error: 'Failed to get validation status' },
       { status: 500 }
     );
-}
+  }
 }

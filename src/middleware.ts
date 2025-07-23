@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
-const PROTECTED_PATHS = [;,
+const PROTECTED_PATHS = [
   '/dashboard',
   '/admin',
   '/api/admin',
   '/projects',
   '/settings'
 ];
-const ADMIN_PATHS = [;,
+const ADMIN_PATHS = [
   '/admin',
   '/api/admin'
 ];
-const PUBLIC_PATHS = [;,
+const PUBLIC_PATHS = [
   '/',
   '/auth',
   '/api/auth',
@@ -20,7 +20,7 @@ const PUBLIC_PATHS = [;,
   '/about',
   '/contact'
 ];
-export async function middleware(request: NextRequest): Promise {
+export async function middleware(request: NextRequest): Promise<any> {
   const { pathname   }: any = request.nextUrl;
   // Skip middleware for static files and API routes that don't need auth
   if (pathname.startsWith('/_next/') ||

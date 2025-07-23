@@ -27,25 +27,25 @@ export const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
     windowMs: 15 * 60 * 1000;
   // 15 minutes, maxRequests: 100,
     description: 'Anonymous users - 100 requests per 15 minutes'
-}},
+},
     authenticated: {
     name: 'Authenticated',
     windowMs: 15 * 60 * 1000;
   // 15 minutes, maxRequests: 1000,
     description: 'Authenticated users - 1000 requests per 15 minutes'
-}},
+},
     premium: {
     name: 'Premium',
     windowMs: 15 * 60 * 1000;
   // 15 minutes, maxRequests: 5000,
     description: 'Premium users - 5000 requests per 15 minutes'
-}},
+},
     api: {
     name: 'API',
     windowMs: 60 * 1000;
   // 1 minute, maxRequests: 100,
     description: 'API endpoints - 100 requests per minute'
-}},
+},
     upload: {
     name: 'Upload',
     windowMs: 60 * 60 * 1000;
@@ -59,7 +59,7 @@ class RateLimiter {
   constructor() {
     this.initializeRedis();
 }
-  private async initializeRedis(): Promise {
+  private async initializeRedis(): Promise<any> {
     try {
       // Try to initialize Redis if available
       if(process.env.REDIS_URL) {
@@ -81,7 +81,7 @@ class RateLimiter {
       this.redisClient = null;
 }
 }
-  async checkRateLimit(key: string, config: RateLimitConfig): Promise {
+  async checkRateLimit(key: string, config: RateLimitConfig): Promise<any> {
     const _now = Date.now();
     const _windowStart = now - config.windowMs;
     if(this.redisClient) {
@@ -90,7 +90,7 @@ class RateLimiter {
       return this.checkRateLimitMemory(key, config, now, windowStart);
 }
 }
-  private async checkRateLimitRedis(key: string, config: RateLimitConfig, now: number, windowStart: number): Promise {
+  private async checkRateLimitRedis(key: string, config: RateLimitConfig, now: number, windowStart: number): Promise<any> {
     const _redisKey = `rate_limit:${key}`
     try {
       // Use Redis sorted set for sliding window
@@ -108,7 +108,7 @@ class RateLimiter {
       const _allowed = totalHits <= config.maxRequests;
       const _remaining = Math.max(0, config.maxRequests - totalHits);
       const _resetTime = now + config.windowMs;
-      return {;
+      return {
         allowed,
         remaining,
         resetTime,
@@ -133,7 +133,7 @@ class RateLimiter {
     resetTime: now + config.windowMs
       };
       this.fallbackStore.set(key, newEntry);
-      return {;
+      return {
         allowed: true,
     remaining: config.maxRequests - 1,
     resetTime: newEntry.resetTime,
@@ -144,14 +144,14 @@ class RateLimiter {
     stored.count++;
     const _allowed = stored.count <= config.maxRequests;
     const _remaining = Math.max(0, config.maxRequests - stored.count);
-    return {;
+    return {
       allowed,
       remaining,
       resetTime: stored.resetTime,
     totalHits: stored.count
 }
 }
-  async getRateLimitStatus(key: string, windowMs: number): Promise {
+  async getRateLimitStatus(key: string, windowMs: number): Promise<any> {
     if(this.redisClient) {
       try {
         const _redisKey = `rate_limit:${key}`
@@ -159,7 +159,7 @@ class RateLimiter {
         const _windowStart = now - windowMs;
         await this.redisClient.zRemRangeByScore(redisKey, 0, windowStart);
         const _requests = await this.redisClient.zCard(redisKey);
-        return {;
+        return {
           requests,
           resetTime: now + windowMs
 }
@@ -169,7 +169,7 @@ class RateLimiter {
 }
     // Fallback to memory store
     const stored = this.fallbackStore.get(key);
-    return {;
+    return {
       requests: stored?.count || 0,
     resetTime: stored?.resetTime || Date.now() + windowMs
 }
@@ -201,9 +201,9 @@ export function getRateLimiter(): RateLimiter {
   return rateLimiterInstance;
 }
 // Middleware factory for Next.js API routes
-export function createRateLimitMiddleware(, ;
+export function createRateLimitMiddleware(,
     tier: keyof typeof RATE_LIMIT_TIERS, customConfig?: Partial<RateLimitConfig>): keyof typeof RATE_LIMIT_TIERS, customConfig?: Partial<RateLimitConfig>) {
-  return async function rateLimitMiddleware(req, res, next? () => void) {;
+  return async function rateLimitMiddleware(req, res, next? () => void) {
     const rateLimiter = getRateLimiter();
     const tierConfig = RATE_LIMIT_TIERS[tier];
     const config: RateLimitConfig = {
@@ -244,17 +244,17 @@ export function createRateLimitMiddleware(, ;
 }
 }
 // Helper function for API route protection
-export async function checkApiRateLimit(;
+export async function checkApiRateLimit(
   req,
   tier: keyof typeof RATE_LIMIT_TIERS = 'api'
-): Promise {
+): Promise<any> {
   const rateLimiter = getRateLimiter();
   const tierConfig = RATE_LIMIT_TIERS[tier];
   const _ip = req.ip || req.connection?.remoteAddress || 'unknown';
   const _userId = req.user?.id || 'anonymous';
   const _endpoint = req.url?.split('?')[0] || 'unknown';
   const _key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);``
-  return rateLimiter.checkRateLimit(key, {;
+  return rateLimiter.checkRateLimit(key, {
     windowMs: tierConfig.windowMs,
     maxRequests: tierConfig.maxRequests
   }};

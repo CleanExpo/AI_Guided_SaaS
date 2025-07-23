@@ -22,11 +22,11 @@ export interface ProjectConfig {
 framework?: string;
   template?: string;
   features?: string[];
-  styling?: {;
+  styling?: {
     theme?: string;
     colors?: Record<string, string>
 }
-  deployment?: {;
+  deployment?: {
     platform?: string
     domain?: string;
 }
@@ -47,7 +47,7 @@ export interface Project  {
     framework: string,
   
   status: 'draft' | 'generating' | 'completed' | 'error',
-  config: ProjectConfig;
+  config: ProjectConfi;g;
   files?: ProjectFiles;
     created_at: string,
   
@@ -58,7 +58,7 @@ export interface ActivityMetadata  {
   user_agent?: string;
   duration?: number;
   error_message?: string;
-  [key: string]: unknown
+  [key: string]: unknow;n
 }
 export interface ActivityLog  {
     id: string,
@@ -75,7 +75,7 @@ export interface UsageMetadata  {
     session_id?: string;
   feature_used?: string;
   processing_time?: number;
-  [key: string]: unknown
+  [key: string]: unknow;n
 }
 export interface UsageRecord  {
     id: string,
@@ -105,7 +105,7 @@ export interface PaymentMetadata  {
   subscription_id?: string;
   plan_name?: string;
   billing_cycle?: string;
-  [key: string]: unknown
+  [key: string]: unknow;n
 }
 export interface Subscription  {
     id: string,
@@ -151,10 +151,10 @@ export class DatabaseService {
     return true;
 }
   // User operations
-  static async createUser(userData: Partial<User>): Promise {
+  static async createUser(userData: Partial<User>): Promise<any> {
     if (!this.checkDatabase()) {
       // Return mock user for development
-      return {;
+      return {
         id: `user-${Date.now()}`
         email: userData.email || 'demo@example.com',
   
@@ -188,7 +188,7 @@ export class DatabaseService {
 }
 }
   static async getUserById(id: string): Promise { if (!this.checkDatabase()) {
-      return {;
+      return {
         id,
         email: 'demo@example.com',
   
@@ -221,7 +221,7 @@ export class DatabaseService {
   static async getUserByEmail(email: string): Promise { if (!this.checkDatabase()) {
       // For demo purposes, return a user for demo@example.com;
       if(email === 'demo@example.com') {
-        return {;
+        return {
           id: 'demo-user-id',
   
   email: 'demo@example.com',
@@ -254,7 +254,7 @@ export class DatabaseService {
       return null;
 }
 }
-  static async updateUser(id: string, updates: Partial<User>): Promise {
+  static async updateUser(id: string, updates: Partial<User>): Promise<any> {
     if (!this.checkDatabase()) {
       :', { id, updates })
       return null;
@@ -277,9 +277,9 @@ export class DatabaseService {
 }
 }
   // Project operations
-  static async createProject(projectData: Partial<Project>): Promise {
+  static async createProject(projectData: Partial<Project>): Promise<any> {
     if (!this.checkDatabase()) {
-      return {;
+      return {
         id: `project-${Date.now()}`
         user_id: projectData.user_id || 'demo-user',
   
@@ -312,8 +312,7 @@ export class DatabaseService {
 }
 }
   static async getUserProjects(userId: string): Promise { if (!this.checkDatabase()) {
-      return [;
-        {
+      return [{
   id: 'demo-project-1',
   
   user_id: userId,
@@ -358,7 +357,7 @@ export class DatabaseService {
       return [];
 }
 }
-  static async updateProject(id: string, updates: Partial<Project>): Promise {
+  static async updateProject(id: string, updates: Partial<Project>): Promise<any> {
     if (!this.checkDatabase()) {
       :', { id, updates })
       return null;
@@ -381,7 +380,7 @@ export class DatabaseService {
 }
 }
   // Activity logging
-  static async logActivity(userId: string, action: string, resourceType: string, resourceId?: string, metadata?: ActivityMetadata): Promise {
+  static async logActivity(userId: string, action: string, resourceType: string, resourceId?: string, metadata?: ActivityMetadata): Promise<any> {
     if (!this.checkDatabase()) {
       :', { userId, action, resourceType, resourceId, metadata })
       return };
@@ -403,7 +402,7 @@ export class DatabaseService {
 }
 }
   // Usage tracking
-  static async recordUsage(userId: string, resourceType: string, quantity: number, metadata?: UsageMetadata): Promise {
+  static async recordUsage(userId: string, resourceType: string, quantity: number, metadata?: UsageMetadata): Promise<any> {
     if (!this.checkDatabase()) {
       :', { userId, resourceType, quantity, metadata })
       return };
@@ -425,7 +424,7 @@ export class DatabaseService {
 }
 }
   // Feature flags
-  static async getFeatureFlag(name: string, userId?: string): Promise {
+  static async getFeatureFlag(name: string, userId?: string): Promise<any> {
     if (!this.checkDatabase()) {
       // Default feature flags for development
       const defaultFlags: Record<string, boolean> = {
@@ -465,7 +464,7 @@ export class DatabaseService {
 }
 }
   // Generic query method for complex operations
-  static async query(sql: string, params?: unknown[]): Promise {
+  static async query(sql: string, params?: unknown[]): Promise<any> {
     if (!this.checkDatabase()) {
       :', { sql, params })
       return [];
@@ -480,7 +479,7 @@ export class DatabaseService {
 }
 }
   // Generic record creation
-  static async createRecord(table: string, data: DatabaseRecord): Promise {
+  static async createRecord(table: string, data: DatabaseRecord): Promise<any> {
     if (!this.checkDatabase()) {
       return { ...data, id: `${table}-${Date.now()}` }``;
 }
@@ -501,7 +500,7 @@ export class DatabaseService {
 }
 }
   // Billing-specific methods
-  static async getUserByStripeCustomerId(customerId: string): Promise {
+  static async getUserByStripeCustomerId(customerId: string): Promise<any> {
     if (!this.checkDatabase()) { return: null }
     try {
       const { data, error   }: any = await supabase!;
@@ -523,7 +522,7 @@ export class DatabaseService {
     user_id: string, stripe_payment_intent_id: string, amount: number, currency: string, status: string
     description?: string;
     metadata?: PaymentMetadata
-  }): Promise {
+  }): Promise<any> {
     if (!this.checkDatabase()) {
       :', paymentData)
       return };
@@ -551,7 +550,7 @@ export class DatabaseService {
 }
 }
   static async getUserSubscription(userId: string): Promise { if (!this.checkDatabase()) {
-      return {;
+      return {
         id: 'mock-subscription',
   
   user_id: userId,
@@ -596,7 +595,7 @@ export class DatabaseService {
     current_period_start?: string
     current_period_end?: string;
     cancel_at_period_end?: boolean
-  }): Promise {
+  }): Promise<any> {
     if (!this.checkDatabase()) {
       :', subscriptionData)
       return };
@@ -617,7 +616,7 @@ export class DatabaseService {
 }
 }
   static async getUserUsage(userId: string, month?: Date): Promise { if (!this.checkDatabase()) {
-      return {;
+      return {
         projects: 2
 }
   aiGenerations: 15,
@@ -635,24 +634,23 @@ export class DatabaseService {
         .lte('created_at', endOfMonth.toISOString())
       if (error) {
         console.error('Error fetching, usage:', error)
-        return { projects: 0,;
+        return { projects: 0,
    aiGenerations: 0,
   storage: '0MB' }
 }
-      const usage = (usageData || []).reduce((acc: Record<string, any>, ;
+      const usage = (usageData || []).reduce((acc: Record<string, any>,
     record: { resource_type: string, quantity: number }) => {
         acc[record.resource_type] = (acc[record.resource_type] || 0) + record.quantity
         return acc;
       }, {} as Record<string, any>)
       // Get project count
       const projectCount = await this.getUserProjects(userId);
-      return { projects: projectCount.length,;
-}
+      return { projects: projectCount.length}
   aiGenerations: usage['ai_generations'] || 0,
     storage: '0MB' // TODO: Calculate actual storage usage
 }
     } catch (error) { console.error('Database, error:', error)
-      return { projects: 0,;
+      return { projects: 0,
    aiGenerations: 0,
   storage: '0MB'  }
   // Helper function to hash user ID for feature flag rollouts
@@ -664,5 +662,4 @@ export class DatabaseService {
       hash = hash & hash // Convert to 32-bit integer
 }
     return Math.abs(hash) % 100;
-}
 }

@@ -15,11 +15,10 @@ export { ToolsRefinerAgent } from './archon/ToolsRefinerAgent';
 export { AgentRefinerAgent } from './archon/AgentRefinerAgent';
 export { AdvisorAgent } from './archon/AdvisorAgent';
 // NEW: Agent Orchestration System
-export {  ;
-  AgentLoader,
-  type AgentConfig as OrchestratorAgentConfig, ;
-  type AgentLoadResult, ;
-  type AgentDiscoveryResult,;
+export {AgentLoader,
+  type AgentConfig as OrchestratorAgentConfig,
+  type AgentLoadResult,
+  type AgentDiscoveryResult,
   discoverAllAgents,
   loadRequiredAgents,
   loadExecutionChain,
@@ -27,41 +26,41 @@ export {  ;
  } from '$2';
 export {
   AgentRegistry,
-  type AgentRegistration,;
-  type AgentMetrics,;
-  type RegistryQuery,;
-  type RegistryEvent,;
+  type AgentRegistration,
+  type AgentMetrics,
+  type RegistryQuery,
+  type RegistryEvent,
   initializeAgentRegistry,
   findBestAgent,
   // getRegistryStatus
  } from '$2';
 export {
   AgentCoordinator,
-  type CoordinationTask,;
-  type CoordinationPlan,;
-  type AgentHandoff,;
-  type CoordinationResult,;
+  type CoordinationTask,
+  type CoordinationPlan,
+  type AgentHandoff,
+  type CoordinationResult,
   createProjectCoordination,
   executeProjectCoordination,
   // getCoordinationStatus
  } from '$2';
 export {
   AgentMonitor,
-  type HealthCheck,;
-  type MonitoringAlert,;
-  type MonitoringMetrics,;
-  type MonitoringDashboard,;
+  type HealthCheck,
+  type MonitoringAlert,
+  type MonitoringMetrics,
+  type MonitoringDashboard,
   startAgentMonitoring,
   getMonitoringDashboard,
   // getAgentHealth
  } from '$2';
 export {
   AgentCommunication,
-  type AgentMessage as CommunicationMessage,;
-  type CommunicationChannel,;
-  type MessageQueue,;
-  type HandoffProtocol,;
-  type CommunicationStats,;
+  type AgentMessage as CommunicationMessage,
+  type CommunicationChannel,
+  type MessageQueue,
+  type HandoffProtocol,
+  type CommunicationStats,
   initializeAgentCommunication,
   sendAgentMessage,
   // performAgentHandoff
@@ -88,7 +87,7 @@ export class AgentSystem {
 }
     return AgentSystem.instance;
 }
-  async initialize(): Promise {
+  async initialize(): Promise<any> {
     if(this.initialized) { return: true }
     try {
       const discovery = await this.loader.discoverAgents();
@@ -108,7 +107,7 @@ export class AgentSystem {
       return false;
 }
 }
-  async getAgentsForNextStage(currentStage: string, projectType?: string): Promise {
+  async getAgentsForNextStage(currentStage: string, projectType?: string): Promise<any> {
     if(!this.initialized) {
       throw new Error('Agent system not initialized')
 }
@@ -117,7 +116,7 @@ export class AgentSystem {
       const _registration = this.registry.getAgentDetails(agent.agent_id);
       return registration?.health_status === 'healthy';
     })
-    return {;
+    return {
       stage: currentStage, project_type: projectType,
     required_agents: requiredAgents.length,
     healthy_agents: healthyAgents.length,
@@ -139,7 +138,7 @@ export class AgentSystem {
     const registryStatus = this.registry.getRegistryStatus();
     const dashboard = this.monitor.getMonitoringDashboard();
     const commStats = this.communication.getCommunicationStats();
-    return {;
+    return {
       initialized: this.initialized,
     timestamp: new Date().toISOString(),
     agents: {
@@ -160,7 +159,7 @@ export class AgentSystem {
     success_rate: commStats.success_rate,
     active_channels: commStats.active_channels
 }
-  async performHealthCheck(): Promise {
+  async performHealthCheck(): Promise<any> {
     const _health = await this.monitor.performHealthCheck();
     const warnings: string[] = [];
     const errors: string[] = [];
@@ -183,7 +182,7 @@ export class AgentSystem {
 }
 }
 // Convenience function for easy system initialization
-export async function initializeAgentSystem(): Promise {
+export async function initializeAgentSystem(): Promise<any> {
   const system = AgentSystem.getInstance();
   await system.initialize()
   return system;
@@ -191,8 +190,7 @@ export async function initializeAgentSystem(): Promise {
 // Export the main system instance
 export const _agentSystem = AgentSystem.getInstance();
 // Agent Factory
-export function createAgent(type: string): string) { ;
-  switch (type) {
+export function createAgent(type: string): string) {switch (type) {
     // BMAD Agents
     case 'analyst':
     return new (require('./bmad/AnalystAgent').AnalystAgent)();

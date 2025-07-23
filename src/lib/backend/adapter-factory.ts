@@ -9,8 +9,7 @@ let currentConfig: BackendConfig | null = null;
 /**
  * Create a backend adapter based on configuration
  */
-export function createBackendAdapter(config: BackendConfig): BackendConfig): BackendAdapter { ;
-  switch (config.type) {
+export function createBackendAdapter(config: BackendConfig): BackendConfig): BackendAdapter {switch (config.type) {
     case 'supabase':
     return new SupabaseAdapter(config);
     break;
@@ -126,7 +125,7 @@ export function getCurrentBackend(): BackendAdapter | null {
 /**
  * Utility to switch backend at runtime
  */
-export async function switchBackend(config: BackendConfig): Promise {
+export async function switchBackend(config: BackendConfig): Promise<any> {
   setBackendConfig(config)
   currentAdapter = createBackendAdapter(config)
   // Optionally persist the choice

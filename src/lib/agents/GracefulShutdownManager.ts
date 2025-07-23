@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';export interface ShutdownHandler {
   name: string,
-    priority: number // Lower number = higher priority,
-    timeout: number // milliseconds,
-    handler: () => Promise<any>
+    priority: number // Lower number = higher priorit;y,
+    timeout: number // millisecond;s,
+    handler: () => Promise<any;>
 };
 export class GracefulShutdownManager extends EventEmitter {
   private static, instance: GracefulShutdownManager
@@ -37,7 +37,7 @@ export class GracefulShutdownManager extends EventEmitter {
   /**
    * Initiate graceful shutdown
    */
-  async shutdown(reason: string = 'Manual shutdown'): Promise {
+  async shutdown(reason: string = 'Manual shutdown'): Promise<any> {
     if(this.isShuttingDown) {
       return };
     this.isShuttingDown = true
@@ -67,7 +67,7 @@ export class GracefulShutdownManager extends EventEmitter {
   /**
    * Execute all shutdown handlers
    */
-  private async executeHandlers(): Promise {
+  private async executeHandlers(): Promise<any> {
     for(const handler of this.handlers) {
       const _startTime = Date.now();
       try {
@@ -139,7 +139,7 @@ export const _createRedisShutdownHandler = (redis): ShutdownHandler: any => ({
 })
 export const _createHttpServerShutdownHandler = (server): ShutdownHandler: any => ({
   name: 'http-server', priority: 30, timeout: 15000, handler: async () => {
-    return new Promise((resolve) => {;
+    return new Promise((resolve) => {
       server.close(() => {
         resolve()
       })

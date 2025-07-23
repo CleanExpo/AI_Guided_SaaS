@@ -4,7 +4,7 @@ export interface OrchestratorConfig {
     enableLogging?: boolean;
   maxConcurrentAgents?: number;
   timeoutMs?: number;
-  modelConfig?: {;
+  modelConfig?: {
     model?: string;
     temperature?: number;
 }
@@ -16,10 +16,10 @@ export interface ProjectRequest {
   priorities?: string[];
 };
 export interface ProjectResult {
-  request: ProjectRequest,
-    plan: ExecutionPlan,
+  request: ProjectReques;t,
+    plan: ExecutionPla;n,
     results: TaskResult[],
-    summary: ProjectSummary,
+    summary: ProjectSummar;y,
     artifacts: Map<string, any>,
   recommendations: string[]
 };
@@ -59,7 +59,7 @@ export class AgentOrchestrator {
   /**
    * Process a project request using intelligent agent orchestration
    */
-  async processProject(request: ProjectRequest): Promise {
+  async processProject(request: ProjectRequest): Promise<any> {
     this.log(`Processing project, request: ${request.type || 'auto-detect'}`)``
     // Step, 1: Enhance request based on type
     const _enhancedRequest = await this.enhanceRequest(request);
@@ -68,18 +68,18 @@ export class AgentOrchestrator {
     // Step, 3: Collect all artifacts
     const artifacts = this.collectArtifacts(executionResult.results);
     // Step, 4: Generate summary
-    const summary = await this.generateSummary(;
+    const summary = await this.generateSummary(
       request,
       executionResult,
       // artifacts
     )
     // Step, 5: Generate recommendations
-    const _recommendations = await this.generateRecommendations(;
+    const _recommendations = await this.generateRecommendations(
       request,
       executionResult,
       // summary
     )
-    return {;
+    return {
       request,
       plan: executionResult,
     results: executionResult.results,
@@ -91,7 +91,7 @@ export class AgentOrchestrator {
   /**
    * Quick analysis using specific agents
    */
-  async quickAnalysis(input: string, agentTypes: string[]): Promise {
+  async quickAnalysis(input: string, agentTypes: string[]): Promise<any> {
     const tasks = agentTypes.map((agentType, index) => ({
     id: `quick-${index}`,``
       agentType,
@@ -113,7 +113,7 @@ export class AgentOrchestrator {
   /**
    * Enhance request based on type
    */
-  private async enhanceRequest(request: ProjectRequest): Promise {
+  private async enhanceRequest(request: ProjectRequest): Promise<any> {
     const typePrompts: Record<string, string> = {
     analysis: "Analyze requirements, create user stories, identify risks and constraints",
       planning: "Create project plan with timeline, milestones, and resource allocation",
@@ -153,7 +153,7 @@ export class AgentOrchestrator {
   /**
    * Generate project summary
    */
-  private async generateSummary(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, artifacts: Map<string, any>): Promise {
+  private async generateSummary(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, artifacts: Map<string, any>): Promise<any> {
     const _successfulResults = execution.results.filter((r) => r.result.success);
     const outputs = this.extractOutputs(successfulResults);
     const _summaryPrompt = `Generate a comprehensive project summary based on these agent, outputs: Original, Request:``
@@ -179,7 +179,7 @@ Format as JSON ProjectSummary object.`
   /**
    * Generate recommendations
    */
-  private async generateRecommendations(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, summary: ProjectSummary): Promise {
+  private async generateRecommendations(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, summary: ProjectSummary): Promise<any> {
     const _recommendPrompt = `Based on the project analysis, generate actionable, recommendations: Project, Type: ${request.type}``
 Summary: ${summary.overview}
 Key: Findings:
@@ -228,22 +228,22 @@ Return as a simple array of recommendation strings.`
 }
 }
 // Convenience functions for common patterns
-export async function analyzeProject(description: string): Promise {
+export async function analyzeProject(description: string): Promise<any> {
   const orchestrator = new AgentOrchestrator();
-  return orchestrator.processProject({;
+  return orchestrator.processProject({
     description: type, 'analysis'
   })
 };
-export async function planProject(description: string, constraints?: string[]): Promise {
+export async function planProject(description: string, constraints?: string[]): Promise<any> {
   const orchestrator = new AgentOrchestrator();
-  return orchestrator.processProject({;
+  return orchestrator.processProject({
     description: type, 'planning',
     // constraints
   })
 };
-export async function architectProject(description: string, priorities?: string[]): Promise {
+export async function architectProject(description: string, priorities?: string[]): Promise<any> {
   const orchestrator = new AgentOrchestrator();
-  return orchestrator.processProject({;
+  return orchestrator.processProject({
     description: type, 'architecture',
     // priorities
   })
@@ -251,9 +251,9 @@ export async function architectProject(description: string, priorities?: string[
 export async function fullStackProject(,
     description: string,
   options?: Partial<ProjectRequest>;
-): Promise {
+): Promise<any> {
   const orchestrator = new AgentOrchestrator();
-  return orchestrator.processProject({;
+  return orchestrator.processProject({
     description: type, 'full-stack',
     ...options
   })

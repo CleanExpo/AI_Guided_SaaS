@@ -45,7 +45,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
 }
       return response;
     } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Search failed',;
+      const _errorMessage = err instanceof Error ? err.message : 'Search failed',
       setError(errorMessage);
       toast({
         title: 'Search Error',
@@ -55,8 +55,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       throw err;
     } finally {
       setIsSearching(false);
-}
-  }, [cache, options.cacheResults]);
+}, [cache, options.cacheResults]);
 
   /**
    * Search with context7 workflow
@@ -69,13 +68,12 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       setContext7(contextResults);
       return contextResults;
     } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Context search failed',;
+      const _errorMessage = err instanceof Error ? err.message : 'Context search failed',
       setError(errorMessage);
       throw err;
     } finally {
       setIsSearching(false);
-}
-  }, []);
+}, []);
 
   /**
    * Index a document
@@ -96,7 +94,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       
       return result;
     } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed',;
+      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed',
       setError(errorMessage);
       toast({
         title: 'Indexing Error',
@@ -106,8 +104,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       throw err;
     } finally {
       setIsIndexing(false);
-}
-  }, [cache]);
+}, [cache]);
 
   /**
    * Index multiple documents
@@ -128,7 +125,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       
       return result;
     } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed',;
+      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed',
       setError(errorMessage);
       toast({
         title: 'Indexing Error',
@@ -138,8 +135,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       throw err;
     } finally {
       setIsIndexing(false);
-}
-  }, [cache]);
+}, [cache]);
 
   /**
    * Clear search results and cache
@@ -176,8 +172,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       // Index after a short delay to ensure content is loaded
       const _timer = setTimeout(indexCurrentPage, 1000);
       return () => clearTimeout(timer);
-}
-  }, [options.autoIndex, indexDocument]);
+}, [options.autoIndex, indexDocument]);
 
   return { // State;
     isSearching,
@@ -200,5 +195,4 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
       semanticSearch.searchDocumentation(query), []),
     searchConversations: useCallback((query: string, userId?: string) => 
       semanticSearch.searchConversations(query, userId), [])
-}
 }

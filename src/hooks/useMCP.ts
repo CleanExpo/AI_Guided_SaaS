@@ -9,18 +9,18 @@ export interface UseMCPOptions {
 };
 export interface UseMCPReturn {
   // Server management, servers: MCPServer[],
-  connectServer: (serverId: string) => Promise<any>;,
-  disconnectServer: (serverId: string) => Promise<any>,
-  registerCustomServer: (server: Omit<MCPServer, 'status' | 'tools'>) => Promise<any>
+  connectServer: (serverId: string) => Promise<any;>;,
+  disconnectServer: (serverId: string) => Promise<any;>,
+  registerCustomServer: (server: Omit<MCPServe;r, 'status' | 'tools'>) => Promise<any>
   // Tool operations, tools: MCPTool[],
-  callTool: (call: MCPToolCall) => Promise<MCPToolResult>,
-  callToolsParallel: (calls: MCPToolCall[]) => Promise<MCPToolResult[]>;
-  // Orchestration, createPlan: (description: string, steps: any[]) => MCPOrchestrationPlan, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string, MCPToolResult>>
-  // Resources & Prompts, listResources: (serverId: string) => Promise<any[]>,
-  readResource: (serverId: string, uri: string) => Promise<any>,
-  listPrompts: (serverId: string) => Promise<any[]>,
+  callTool: (call: MCPToolCall) => Promise<MCPToolResult;>,
+  callToolsParallel: (calls: MCPToolCall[]) => Promise<MCPToolResult[];>;
+  // Orchestration, createPlan: (description: string, steps: any[]) => MCPOrchestrationPla;n, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string, MCPToolResult>>
+  // Resources & Prompts, listResources: (serverId: string) => Promise<any[];>,
+  readResource: (serverId: string, uri: string) => Promise<any;>,
+  listPrompts: (serverId: string) => Promise<any[];>,
   getPrompt: (serverId: string, name: string, args?) => Promise<string>;
-  // State, loading: boolean, error: string | null, initialized: boolean
+  // State, loading: boolean, error: string | nul;l, initialized: boolean
 };
 export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCPReturn {
   const { toast   }: any = useToast();
@@ -43,13 +43,12 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
     if(options.autoConnect && options.autoConnect.length > 0) {
       autoConnectServers(options.autoConnect)
 }
-    return () => {;
+    return () => {
       // Cleanup: disconnect all servers
       servers.forEach((server) => {
         orchestrator.disconnectServer(server.id).catch(console.error)
       })
-}
-  }, [])
+}, [])
   // Auto-connect servers on initialization
   const _autoConnectServers = async (serverIds: string[]) => {
     for(const serverId of serverIds) {
@@ -99,7 +98,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
         description: `Successfully connected to ${config.name}`
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to connect to server',;
+      const _message = err instanceof Error ? err.message : 'Failed to connect to server',
       setError(message)
       toast({
         title: 'Connection Error',
@@ -109,8 +108,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Disconnect from a server
   const _disconnectServer = useCallback(async (serverId: string) => {
     if(!orchestratorRef.current) {
@@ -131,7 +129,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
         description: `Disconnected from server ${serverId}`
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to disconnect',;
+      const _message = err instanceof Error ? err.message : 'Failed to disconnect',
       setError(message)
       toast({
         title: 'Error',
@@ -141,8 +139,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Register a custom server
   const _registerCustomServer = useCallback(async (server: Omit<MCPServer, 'status' | 'tools'>) => {
     if(!orchestratorRef.current) {
@@ -165,7 +162,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
         description: `Successfully registered ${server.name}`
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to register server',;
+      const _message = err instanceof Error ? err.message : 'Failed to register server',
       setError(message)
       toast({
         title: 'Error',
@@ -175,8 +172,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Call a tool
   const _callTool = useCallback(async (call: MCPToolCall): Promise<MCPToolResult> => {
     if(!orchestratorRef.current) {
@@ -195,7 +191,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
 }
       return result;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Tool call failed',;
+      const _message = err instanceof Error ? err.message : 'Tool call failed',
       setError(message)
       toast({
         title: 'Error',
@@ -205,8 +201,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Call multiple tools in parallel
   const _callToolsParallel = useCallback(async (calls: MCPToolCall[]): Promise<MCPToolResult[]> => {
     if(!orchestratorRef.current) {
@@ -227,7 +222,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
 }
       return results;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Parallel tool calls failed',;
+      const _message = err instanceof Error ? err.message : 'Parallel tool calls failed',
       setError(message)
       toast({
         title: 'Error',
@@ -237,8 +232,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Create an orchestration plan
   const _createPlan = useCallback((description: string, steps: any[]): MCPOrchestrationPlan: (any) => { if (!orchestratorRef.current) {
       throw new Error('Orchestrator not initialized'); }
@@ -269,7 +263,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
 }
       return results;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Plan execution failed',;
+      const _message = err instanceof Error ? err.message : 'Plan execution failed',
       setError(message)
       toast({
         title: 'Error',
@@ -279,8 +273,7 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Resource operations
   const _listResources = useCallback(async (serverId: string): Promise<any[]> => {
     if(!orchestratorRef.current) {
@@ -289,15 +282,14 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
     try {
       return await orchestratorRef.current.listResources(serverId);
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to list resources',;
+      const _message = err instanceof Error ? err.message : 'Failed to list resources',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [])
+}, [])
   const _readResource = useCallback(async (serverId: string, uri: string): Promise<any> => {
     if(!orchestratorRef.current) {
       throw new Error('Orchestrator not initialized')
@@ -305,15 +297,14 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
     try {
       return await orchestratorRef.current.readResource(serverId, uri);
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to read resource',;
+      const _message = err instanceof Error ? err.message : 'Failed to read resource',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [])
+}, [])
   // Prompt operations
   const _listPrompts = useCallback(async (serverId: string): Promise<any[]> => {
     if(!orchestratorRef.current) {
@@ -322,15 +313,14 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
     try {
       return await orchestratorRef.current.listPrompts(serverId);
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to list prompts',;
+      const _message = err instanceof Error ? err.message : 'Failed to list prompts',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [])
+}, [])
   const _getPrompt = useCallback(async (serverId: string, name: string, args?): Promise<string> => {
     if(!orchestratorRef.current) {
       throw new Error('Orchestrator not initialized')
@@ -338,16 +328,15 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
     try {
       return await orchestratorRef.current.getPrompt(serverId, name, args);
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to get prompt',;
+      const _message = err instanceof Error ? err.message : 'Failed to get prompt',
       toast({
         title: 'Error',
         description: message,
     variant: 'destructive'
       })
       throw err
-}
-  }, [])
-  return {;
+}, [])
+  return {
     // Server management
     servers,
     connectServer,
@@ -369,5 +358,4 @@ export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCP
     loading,
     error,
     // initialized
-}
 }

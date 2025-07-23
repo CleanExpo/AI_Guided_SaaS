@@ -1,8 +1,7 @@
 // @ts-nocheck
 // apps/ui-builder/components/ComponentPropsEditor.tsx
 import React from 'react';import { useBuilderStore } from '../store/useBuilderStore';
-props: anyexport default function ComponentPropsEditor(): void {;
-  const components = useBuilderStore((state) => state.components);
+export default function ComponentPropsEditor() {const components = useBuilderStore((state) => state.components);
   const selectedId = useBuilderStore((state) => state.selectedId);
   const updateProps = useBuilderStore((state) => state.updateComponentProps);
   const selectedComponent = components.find((c) => c.id === selectedId);
@@ -11,7 +10,7 @@ props: anyexport default function ComponentPropsEditor(): void {;
   const handleChange = (key: string, value: string) => {
     updateProps(selectedComponent.id, { [key]: value });
   };
-  return (;
+  return (
     <div className="p-4 bg-white border-t border-gray-300"></div>
       <h2 className="text-lg font-semibold mb-2">Edit {type} Properties</h2>
       <form className="space-y-3">
@@ -22,14 +21,14 @@ props: anyexport default function ComponentPropsEditor(): void {;
               <textarea
                 className="w-full px-3 py-1 border rounded text-sm"
                 value={props[key] || ''}
-                onChange: any={(e) => handleChange(key, e.target.value)}
+                onChange={(e) => handleChange(key, e.target.value)}
                 rows={3}
               />
             ) : (</textarea>
               <input
                 className="w-full px-3 py-1 border rounded text-sm"
                 value={props[key] || ''}
-                onChange={(e) =    /> handleChange(key, e.target.value)}
+                onChange={(e) = /> handleChange(key, e.target.value)}
               />
             )}</input>
         ))}

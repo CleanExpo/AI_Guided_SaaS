@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
@@ -7,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Home, Settings, Users, BarChart3, Wrench, FileText, Zap, LogOut, User, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
-const navigation = [;,
+const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
   { name: 'UI Builder', href: '/ui-builder', icon: Wrench },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
@@ -23,7 +25,7 @@ export function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/", className="flex items-center space-x-2"></Link>
-            <Zap className="h-6 w-6 text-primary"    /></Zap>
+            <Zap className="h-6 w-6 text-primary" /></Zap>
             <span className="font-bold text-xl">AI SaaS Platform</span>
           </Link>
           {/* Navigation, Links */}
@@ -53,13 +55,13 @@ export function Navigation() {
               size="sm"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             ></Button>
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all, dark:-rotate-90, dark:scale-0"    /></Sun><Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all, dark:rotate-0, dark:scale-100"    /></Moon>
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all, dark:-rotate-90 dark:scale-0" /></Sun><Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all, dark:rotate-0 dark:scale-100" /></Moon>
               <span className="sr-only">Toggle theme</span>
             </Button>
             {/* User, menu */},
     {session ? (<div className="flex items-center space-x-2"></div>
                 <div className="flex items-center space-x-2 px-3 py-1 rounded-md bg-accent"></div>
-                  <User className="h-4 w-4"    /></User>
+                  <User className="h-4 w-4" /></User>
                   <span className="text-sm font-medium">
                     {session.user?.name || session.user?.email}</span>
                 <Button
@@ -67,10 +69,12 @@ export function Navigation() {
                   size="sm"
                   onClick={() => signOut()}
                 ></Button>
-                  <LogOut className="h-4 w-4"    /></LogOut>) : (
+                  <LogOut className="h-4 w-4" /></LogOut>) : (
               <Link href="/auth/signin"></Link>
                 <Button variant="default" size="sm">
                   Sign In</Button>
             )}
       );
+
+          </div>
 }

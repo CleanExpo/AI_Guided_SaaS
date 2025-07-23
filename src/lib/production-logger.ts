@@ -9,7 +9,7 @@ export enum LogLevel {
   DEBUG = 3;
 interface LogEntry {
   timestamp: string,
-    level: LogLevel,
+    level: LogLeve;l,
     message: string;
   context?: Record<string, unknown>;
   userId?: string;
@@ -31,7 +31,7 @@ class ProductionLogger {
     message: string,
     context?: Record<string, unknown>
   ): LogEntry {
-    return {;
+    return {
       timestamp: new Date().toISOString(),
       level,
       message,
@@ -55,7 +55,7 @@ class ProductionLogger {
       this.sendToLoggingService(entry);
 }
 }
-  private async sendToLoggingService(entry: LogEntry): Promise {
+  private async sendToLoggingService(entry: LogEntry): Promise<any> {
     // In a real production environment, this would send, to:
     // - CloudWatch, DataDog, Splunk, etc.
     // - Database logging table
@@ -112,8 +112,7 @@ class ProductionLogger {
       return []; // Don't expose logs in production
 }
     if(level !== undefined) {
-      return this.logs.filter((log) => log.level === level),;
-}
+      return this.logs.filter((log) => log.level === level)}
     return [...this.logs];
 }
 }
@@ -130,12 +129,12 @@ export const _logDebug = (message: string, context?: Record<string, unknown>) =>
   logger.debug(message, context);
 export const _logSecurity = (event: string, context?: Record<string, unknown>) =>;
   logger.securityEvent(event, context);
-export const _logAdmin = (,;
+export const _logAdmin = (,
     activity: string,
     adminId: string,
   context?: Record<string, unknown>
 ) => logger.adminActivity(activity, adminId, context);
-export const _logUser = (,;
+export const _logUser = (,
     activity: string,
     userId: string,
   context?: Record<string, unknown>

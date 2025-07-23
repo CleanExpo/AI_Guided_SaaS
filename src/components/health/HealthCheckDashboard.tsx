@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,19 +8,20 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Activity, CheckCircle, AlertCircle, XCircle, RefreshCw, Clock, Database, Globe, Server, Cpu, HardDrive, Zap } from 'lucide-react';
 interface HealthCheck {
-  name: string,
+name: string;
     status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown';
   responseTime?: number;
   details?;
-  error?: string,
+  error?: string;
     timestamp: string
+
 };
 interface SystemMetrics {
-
-  cpu: {
-  usage: number,
-    cores: number,
+cpu: {
+  usage: number;
+    cores: number;
     loadAverage: number[]
+
 }
   memory: {
     total: number, used: number, free: number, percentage: number
@@ -30,12 +32,13 @@ interface SystemMetrics {
   uptime: number
 };
 interface HealthStatus {
-  status: 'healthy' | 'unhealthy' | 'degraded',
-  checks: HealthCheck[],
-    metrics: SystemMetrics,
-    version: string,
-    environment: string,
+status: 'healthy' | 'unhealthy' | 'degraded';
+  checks: HealthCheck[];
+    metrics: SystemMetric;s;
+    version: string;
+    environment: string;
     timestamp: string
+
 };
 export function HealthCheckDashboard() {
       </HealthStatus>
@@ -49,15 +52,14 @@ export function HealthCheckDashboard() {
     if (autoRefresh) {
       const _interval = setInterval(fetchHealthData, 30000) // 30 seconds;
       return () => clearInterval(interval);
-}
-  }, [autoRefresh])
+}, [autoRefresh])
   const _fetchHealthData = async () => {
     try {
       setIsRefreshing(true)
       const response = await fetch('/api/health');
       if(!response.ok) {
         throw new Error(`Health check, failed: ${response.status}`)``
-}
+  }
       const _data = await response.json();
       setHealthData(data)
       setError(null)
@@ -75,11 +77,11 @@ export function HealthCheckDashboard() {
 
     break;
 
-        return <CheckCircle className="h-5 w-5 text-green-500"    />;
+        return <CheckCircle className="h-5 w-5 text-green-500" />;
 break;
 
       case 'degraded':
-    return <AlertCircle className="h-5 w-5 text-yellow-500"    />;
+    return <AlertCircle className="h-5 w-5 text-yellow-500" />;
     break;
 
     break;
@@ -88,11 +90,11 @@ break;
     </AlertCircle>
     break;
 
-        return <XCircle className="h-5 w-5 text-red-500"    />;
+        return <XCircle className="h-5 w-5 text-red-500" />;
 break;
 }
       default:</XCircle>
-        return <AlertCircle className="h-5 w-5 text-gray-500"    />;
+        return <AlertCircle className="h-5 w-5 text-gray-500" />;
 }
 }
   const _getStatusColor = (status: string) => { switch (status) {
@@ -113,8 +115,7 @@ return 'bg-red-100 text-red-800';
     break;
 break;
 }
-      default: return 'bg-gray-100 text-gray-800',;
-}
+      default: return 'bg-gray-100 text-gray-800'}
 }
   const _formatBytes = (bytes: number) => {
     const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -132,7 +133,7 @@ break;
 }
   if (isLoading) {
     return (<div className="flex items-center justify-center min-h-[400px]">
-        <RefreshCw className="h-8 w-8 animate-spin text-primary"    />
+        <RefreshCw className="h-8 w-8 animate-spin text-primary" />
       </div>
   if (error) {
     return (
@@ -164,7 +165,7 @@ break;
               type="checkbox"
               id="autoRefresh"
               checked={autoRefresh}
-              onChange: any={(e) => setAutoRefresh(e.target.checked)}
+              onChange={(e) => setAutoRefresh(e.target.checked)}
               className="rounded"
             /></input>
             <label htmlFor="autoRefresh", className="text-sm">
@@ -176,16 +177,16 @@ break;
             size="sm"
           >
             {isRefreshing ? (</Button>
-              <RefreshCw className="h-4 w-4 animate-spin mr-2"    />
+              <RefreshCw className="h-4 w-4 animate-spin mr-2" />
             ) : (</RefreshCw>
-              <RefreshCw className="h-4 w-4 mr-2"    />
+              <RefreshCw className="h-4 w-4 mr-2" />
             )}
             Refresh {/* System, Info */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">System Information</CardTitle>
         <CardContent>
-          <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <p className="text-sm text-muted-foreground">Version</p>
               <p className="font-medium">{healthData.version}</p>
@@ -206,16 +207,16 @@ break;
           <TabsTrigger value="metrics">System Metrics</TabsTrigger>
           <TabsTrigger value="details">Detailed Checks</TabsTrigger>
         <TabsContent value="services", className="space-y-4">
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4">
             {healthData.checks.map((check) => (
               <Card key={check.name} className="relative">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-base flex items-center gap-2">
-                      {check.name === 'database' && <Database className="h-4 w-4"    />}</Database>
-                      {check.name === 'system' && <Server className="h-4 w-4"    />}</Server>
-                      {check.name === 'process' && <Cpu className="h-4 w-4"    />}</Cpu>
-                      {check.name.includes('external') && <Globe className="h-4 w-4"    />},
+                      {check.name === 'database' && <Database className="h-4 w-4" />}</Database>
+                      {check.name === 'system' && <Server className="h-4 w-4" />}</Server>
+                      {check.name === 'process' && <Cpu className="h-4 w-4" />}</Cpu>
+                      {check.name.includes('external') && <Globe className="h-4 w-4" />},
     {check.name}</Globe>
                     {getStatusIcon(check.status)}
                 <CardContent>
@@ -223,10 +224,13 @@ break;
                     <p className="text-sm text-red-600">{check.error}</p>
                   ) : (
                     <div className="space-y-2">
-                      {check.responseTime  && (/div>
+                      {check.responseTime  && (
+/div>
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-muted-foreground">Response Time</span>
-                          <span className="font-medium">{check.responseTime}ms</span>)},
+                          <span className="font-medium">{check.responseTime}ms</span>
+              
+            )},
     {check.details && typeof check.details === 'object'  && (div className="text-sm space-y-1">
                           {Object.entries(check.details).slice(0, 3).map(([key, value]) => (
                             <div key={key} className="flex items-center justify-between">
@@ -238,12 +242,12 @@ break;
                   )}
                 </CardContent>
             ))}
-        <TabsContent value="metrics", className="space-y-4"><div className="grid grid-cols-1, md:grid-cols-2 gap-4">
+        <TabsContent value="metrics", className="space-y-4"><div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* CPU, Metrics */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <Cpu className="h-4 w-4"    />
+                  <Cpu className="h-4 w-4" />
                   CPU Usage</Cpu>
               <CardContent className="space-y-4">
                 <div>
@@ -251,7 +255,7 @@ break;
                     <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
                       {healthData.metrics.cpu.usage.toFixed(1)}%</span>
-                  <Progress value={healthData.metrics.cpu.usage}    />
+                  <Progress value={healthData.metrics.cpu.usage} />
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
@@ -265,7 +269,7 @@ break;
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <HardDrive className="h-4 w-4"    />
+                  <HardDrive className="h-4 w-4" />
                   Memory Usage</HardDrive>
               <CardContent className="space-y-4">
                 <div>
@@ -273,7 +277,7 @@ break;
                     <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
                       {healthData.metrics.memory.percentage.toFixed(1)}%</span>
-                  <Progress value={healthData.metrics.memory.percentage}    />
+                  <Progress value={healthData.metrics.memory.percentage} />
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
@@ -303,10 +307,13 @@ break;
     {check.name}</h4>
                       <Badge className={getStatusColor(check.status)}>
                         {check.status}</Badge>
-                    {check.error  && (p className="text-sm text-red-600 mt-2">{check.error}</p>
+                    {check.error  && (
+p className="text-sm text-red-600 mt-2">{check.error}</p>
   },
     {check.details  && (pre className="text-xs bg-muted p-2 rounded overflow-x-auto">
-                        {JSON.stringify(check.details, null, 2)}</pre>
+                        {JSON.stringify(check.details, null, 2
+              
+            )}</pre>
                     )}
                     <p className="text-xs text-muted-foreground">
                       Last,
@@ -341,4 +348,10 @@ break;
 </CardHeader>
 </Card>
   );
-}
+
+          </div>
+</any>
+    </any>
+    </any>
+    </HealthStatus>
+  }

@@ -4,10 +4,10 @@ export interface RefinedPrompt {
   originalPrompt: string,
     refinedPrompt: string,
     improvements: PromptImprovement[],
-    clarity: PromptClarity,
+    clarity: PromptClarit;y,
     examples: PromptExample[],
     constraints: string[],
-    expectedOutput: OutputSpecification,
+    expectedOutput: OutputSpecificatio;n,
     confidence: number
 };
 export interface PromptImprovement {
@@ -51,7 +51,7 @@ export class PromptRefinerAgent extends Agent {
       temperature: 0.3
     }};
 }
-  protected async execute(input: string): Promise {
+  protected async execute(input: string): Promise<any> {
     try {
       this.think('Analyzing prompt for refinement opportunities...');
       // Step, 1: Analyze the original prompt
@@ -93,7 +93,7 @@ export class PromptRefinerAgent extends Agent {
       // Share with other agents
       this.setSharedMemory('optimized-prompt', refinedPrompt);
       this.setSharedMemory('prompt-examples', examples);
-      return {;
+      return {
         success: true,
     output: result,
     messages: this.messages,
@@ -108,7 +108,7 @@ export class PromptRefinerAgent extends Agent {
       throw error;
 }
 }
-  private async analyzePrompt(prompt: string): Promise {
+  private async analyzePrompt(prompt: string): Promise<any> {
     const _analysisPrompt = `Analyze this prompt for clarity, specificity, and, effectiveness: Prompt to, analyze:``
 "${prompt}"
 Evaluate:
@@ -126,7 +126,7 @@ Provide detailed analysis in JSON format.`
 }};
     return JSON.parse(response);
 }
-  private async identifyImprovements(prompt: string, analysis): Promise {
+  private async identifyImprovements(prompt: string, analysis): Promise<any> {
     const _improvementPrompt = `Based on this analysis, identify specific improvements for the, prompt: Original, prompt:``
 "${prompt}"
 Analysis:
@@ -144,7 +144,7 @@ Format as JSON array of improvements.`
 }};
     return JSON.parse(response);
 }
-  private async refinePrompt(original: string, improvements: PromptImprovement[]): Promise {
+  private async refinePrompt(original: string, improvements: PromptImprovement[]): Promise<any> {
     const _refinePrompt = `Create a refined version of this prompt incorporating all, improvements: Original, prompt:``
 "${original}"
 Improvements to, apply:
@@ -156,12 +156,12 @@ Create a clear, specific, well-structured prompt, that:
 - Includes relevant constraints
 - Maintains the original intent
 Provide only the refined prompt text.`
-    return await generateAIResponse(refinePrompt, {;
+    return await generateAIResponse(refinePrompt, {
       model: this.config.model,
     temperature: 0.2
     }};
 }
-  private async generateExamples(refinedPrompt: string, analysis): Promise {
+  private async generateExamples(refinedPrompt: string, analysis): Promise<any> {
     const _examplePrompt = `Generate 2-3 examples that demonstrate the expected input and output for this, prompt: Refined, prompt:``
 "${refinedPrompt}"
 Context from, analysis:
@@ -178,7 +178,7 @@ Format as JSON array of examples.`
 }};
     return JSON.parse(response);
 }
-  private async defineConstraints(refinedPrompt: string, analysis): Promise {
+  private async defineConstraints(refinedPrompt: string, analysis): Promise<any> {
     const _constraintPrompt = `Define explicit constraints for this, prompt: Refined, prompt:``
 "${refinedPrompt}"
 Consider:
@@ -192,9 +192,8 @@ List clear, actionable constraints.`
       model: this.config.model,
     temperature: 0.2
     }};
-    return response.split('\n').filter((line) => line.trim().length > 0),;
-}
-  private async specifyOutput(refinedPrompt: string, analysis): Promise {
+    return response.split('\n').filter((line) => line.trim().length > 0)}
+  private async specifyOutput(refinedPrompt: string, analysis): Promise<any> {
     const _outputPrompt = `Specify the expected output format and structure for this, prompt: Refined, prompt:``
 "${refinedPrompt}"
 Define:
@@ -210,8 +209,8 @@ Format as JSON OutputSpecification.`
 }};
     return JSON.parse(response);
 }
-  private async assessClarity(refinedPrompt: string): Promise {
-    const _clarityPrompt = `Assess the clarity of this refined, prompt:;``
+  private async assessClarity(refinedPrompt: string): Promise<any> {
+    const _clarityPrompt = `Assess the clarity of this refined, prompt: ``
 "${refinedPrompt}"
 Evaluate:
 1. Overall clarity score (0-100)
@@ -238,5 +237,4 @@ Format as JSON PromptClarity object.`
     const _issuePenalty = clarity.issues.length * 0.05;
     confidence = Math.max(confidence - issuePenalty, 0.5);
     return Number(confidence.toFixed(2));
-}
 }

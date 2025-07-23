@@ -1,23 +1,26 @@
 'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Alert } from '../ui/alert';
 interface SystemMetrics {
-  cpuUsage: number,
-    memoryUsage: number,
-    operationCount: number,
-    sessionDuration: number,
-    lastOperation: string,
+cpuUsage: number;
+    memoryUsage: number;
+    operationCount: number;
+    sessionDuration: number;
+    lastOperation: string;
     isHealthy: boolean
+
 };
 interface PerformanceThresholds {
-  cpuWarning: number,
-    cpuCritical: number,
-    memoryWarning: number,
-    memoryCritical: number,
-    maxOperationsPerMinute: number,
+cpuWarning: number;
+    cpuCritical: number;
+    memoryWarning: number;
+    memoryCritical: number;
+    maxOperationsPerMinute: number;
     maxSessionDuration: number
+
 };
 export default function SystemResourceMonitor() {
   const [metrics, setMetrics] = useState<SystemMetrics>({
@@ -54,17 +57,17 @@ export default function SystemResourceMonitor() {
       </NodeJS>
   const monitoringInterval = useRef<NodeJS.Timeout | null>(null);
   // Simulate system metrics (in production, this would use actual system APIs)
-  const _updateMetrics = (): void: (any) => { // Simulate CPU usage based on recent operations
+  const _updateMetrics = (): void => { // Simulate CPU usage based on recent operations
     const _recentOps = operationHistory.filter(</NodeJS>,
     op: any => Date.now() - op.timestamp < 60000 // Last minute
     ).length;
     const _simulatedCpu = Math.min(95, 15 + recentOps * 8 + Math.random() * 10);
-    const _simulatedMemory = Math.min(;
+    const _simulatedMemory = Math.min(
       95,
       25 + operationCount.current * 2 + Math.random() * 15
     );
     const _currentTime = Date.now();
-    const _sessionDuration = Math.floor(;
+    const _sessionDuration = Math.floor(
       (currentTime - sessionStartTime.current) / 1000
     );
     const newMetrics: SystemMetrics = {
@@ -106,7 +109,7 @@ export default function SystemResourceMonitor() {
       );
 }
     // Operation Rate Alert
-    const _recentOps = operationHistory.filter(;
+    const _recentOps = operationHistory.filter(
       op: any => Date.now() - op.timestamp < 60000
     ).length;
     if(recentOps >= thresholds.maxOperationsPerMinute) {
@@ -116,7 +119,7 @@ export default function SystemResourceMonitor() {
 }
     setAlerts(newAlerts);
   };
-  const _startMonitoring = (): void: (any) => {
+  const _startMonitoring = (): void => {
     setIsMonitoring(true);
     sessionStartTime.current = Date.now();
     operationCount.current = 0;
@@ -124,7 +127,7 @@ export default function SystemResourceMonitor() {
     setAlerts([]);
     monitoringInterval.current = setInterval(updateMetrics, 2000);
   };
-  const _stopMonitoring = (): void: (any) => {
+  const _stopMonitoring = (): void => {
     setIsMonitoring(false);
     if(monitoringInterval.current) {
       clearInterval(monitoringInterval.current);
@@ -141,7 +144,7 @@ export default function SystemResourceMonitor() {
         duration: Math.random() * 2000 + 500; // Simulated duration
   }}]);
   };
-  const _emergencyStop = (): void: (any) => { stopMonitoring();
+  const _emergencyStop = (): void => { stopMonitoring();
     setAlerts(['🚨 EMERGENCY STOP ACTIVATED - All operations halted']);
     // In a real implementation, this, would:
     // - Kill running processes
@@ -177,7 +180,7 @@ export default function SystemResourceMonitor() {
           {!isMonitoring ? (</div>
             <Button
               onClick={startMonitoring}
-              className="bg-green-600, hover:bg-green-700"
+              className="bg-green-600 hover:bg-green-700"
             >
               ▶️ Start Monitoring</Button>
           ) : (
@@ -185,7 +188,7 @@ export default function SystemResourceMonitor() {
                 ⏸️ Stop Monitoring</Button>
               <Button
                 onClick={emergencyStop}
-                className="bg-red-600, hover:bg-red-700"
+                className="bg-red-600 hover:bg-red-700"
               >
                 🚨 Emergency Stop</Button></React.Fragment>
           )},
@@ -205,7 +208,7 @@ export default function SystemResourceMonitor() {
               <div className="font-medium">{alert}</div>))}
       )},
     {/* Metrics, Dashboard */}
-      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* CPU, Usage */}
         <Card className="p-4">
           <div className="flex items-center justify-between mb-2">
@@ -316,14 +319,30 @@ export default function SystemResourceMonitor() {
       <Card className="p-4">
         <div className="flex items-center gap-3">
           <div
-            className={`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`}
-             />
+            className={`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`} />
           <span className="font-medium">
             System: Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}</span>
-          {!metrics.isHealthy  && (span className="text-red-600 font-medium">
+          {!metrics.isHealthy  && (
+span className="text-red-600 font-medium">
               - REDUCE OPERATIONS IMMEDIATELY</span>
-          )}
+          
+              
+            )}
     );
 </div></Card>
   );
-}
+
+          </div>
+</Card>
+          </div>
+</Card>
+          </div>
+</Card>
+          </div>
+</Card>
+    </div>
+    </Alert>
+          </div>
+</NodeJS.Timeout>
+    </number>
+    }

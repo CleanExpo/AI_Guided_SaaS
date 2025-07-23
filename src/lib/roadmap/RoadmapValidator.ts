@@ -91,12 +91,11 @@ break;
     break;
 
       case 'month':
-return avg * 30,;
+return avg * 30,
     break;
 break;
 }
-default: return 7,;
-}
+default: return 7}
 }
   private generateCompletionCriteria(phase: RoadmapPhase): CompletionCriterion[] {
     const criteria: CompletionCriterion[] = [];
@@ -150,7 +149,7 @@ default: return 7,;
     })
     return criteria;
 }
-  async validateRoadmap(): Promise {
+  async validateRoadmap(): Promise<any> {
     const result: RoadmapValidationResult = {
     roadmapId: this.roadmap.id,
     validationDate: new Date(),
@@ -225,7 +224,7 @@ default: return 7,;
     this.validationHistory.push(result)
     return result;
 }
-  private async validateMilestone(milestone: RoadmapMilestone): Promise {
+  private async validateMilestone(milestone: RoadmapMilestone): Promise<any> {
     const _now = new Date();
     // Check if milestone is overdue
     if(now > milestone.expectedDate && milestone.status !== 'completed') {
@@ -276,7 +275,7 @@ const _auto = await this.runAutomatedValidation(criterion);
     break;
 }
         const _manual = await this.checkManualValidation(criterion);
-        return auto && manual,;
+        return auto && manual,
 break;
  default:
         return false;
@@ -310,7 +309,7 @@ break;
     break;
 }
           const _featureWorks = await this.checkFeatureEndpoint(criterion.description);
-          return featureWorks,;
+          return featureWorks,
 break;
  default:
           return true;
@@ -320,28 +319,28 @@ break;
       return false;
 }
 }
-  private async checkManualValidation(criterion: CompletionCriterion): Promise {
+  private async checkManualValidation(criterion: CompletionCriterion): Promise<any> {
     // In a real system, this would check a database or external system
     // For now, simulate manual validation
     return Math.random() > 0.2 // 80% pass rate;
 }
-  private async getTestCoverage(): Promise {
+  private async getTestCoverage(): Promise<any> {
     // In reality, this would run coverage tools
     return 75 + Math.random() * 20 // 75-95%;
 }
-  private async getAverageResponseTime(): Promise {
+  private async getAverageResponseTime(): Promise<any> {
     // In reality, this would query monitoring system
     return 100 + Math.random() * 150 // 100-250ms;
 }
-  private async checkFeatureEndpoint(feature: string): Promise {
+  private async checkFeatureEndpoint(feature: string): Promise<any> {
     // In reality, this would make actual API calls
     return Math.random() > 0.1 // 90% success rate;
 }
   private createDelayDeviation(milestone: RoadmapMilestone): RoadmapDeviation {
-    const _delayDays = Math.ceil(;
+    const _delayDays = Math.ceil(
       (new Date().getTime() - milestone.expectedDate.getTime()) / (24 * 60 * 60 * 1000)
     )
-    return {;
+    return {
       type: 'delay',
       severity: delayDays > 14 ? 'high' : delayDays > 7 ? 'medium' : 'low',
       milestoneId: milestone.id,
@@ -351,7 +350,7 @@ break;
 }
 }
   private createBlockedDeviation(milestone: RoadmapMilestone): RoadmapDeviation {
-    return {;
+    return {
       type: 'blocker',
       severity: 'critical',
       milestoneId: milestone.id,
@@ -361,7 +360,7 @@ break;
 }
 }
   private findNextMilestone(): RoadmapMilestone | undefined {
-    return Array.from(this.milestones.values()).find(;
+    return Array.from(this.milestones.values()).find(
       m: any => m.status === 'pending' || m.status === 'in_progress'
     )
 }
@@ -384,7 +383,7 @@ break;
     return estimatedDate;
 }
   private calculateDelayFactor(): number {
-    const delayedMilestones = Array.from(this.milestones.values()).filter(;
+    const delayedMilestones = Array.from(this.milestones.values()).filter(
       m: any => m.status === 'delayed' && m.actualDate
     )
     if (delayedMilestones.length === 0) return 0;
@@ -426,5 +425,4 @@ break;
 }
   getMilestoneDetails(milestoneId: string): RoadmapMilestone | undefined {
     return this.milestones.get(milestoneId);
-}
 }

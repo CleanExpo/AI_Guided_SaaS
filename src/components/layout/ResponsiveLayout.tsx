@@ -1,15 +1,18 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 interface ResponsiveLayoutProps {
-  children: React.ReactNode;
+children: React.ReactNod;e;
   className?: string;
+
 };
 export default function ResponsiveLayout({ children, className }: ResponsiveLayoutProps), className }: ResponsiveLayoutProps) {
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'laptop' | 'desktop'>('desktop');
   useEffect(() => {
-    const _handleResize = (): void: (any) => {
+    const _handleResize = (): void => {
       const _width = window.innerWidth;
       if(width < 640) {
         setViewport('mobile');
@@ -36,4 +39,6 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
       <div className="mx-auto max-w-[1920px]">
         {children}
     );
+
+          </div>
 }

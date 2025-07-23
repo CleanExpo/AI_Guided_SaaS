@@ -1,7 +1,7 @@
 import { BaseAgent, AgentTask } from './base-agent';class ArchitectAgent extends BaseAgent {
-  protected async initialize(): Promise {
+  protected async initialize(): Promise<any> {
 }
-  protected async cleanup(): Promise {
+  protected async cleanup(): Promise<any> {
 }
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
       case 'system_design':
@@ -27,17 +27,17 @@ break;
     break;
 
       case 'integration_design':
-return this.designIntegrations(task.payload),;
+return this.designIntegrations(task.payload),
     break;
 break;
 }
     default: throw new Error(`Unknown task, type: ${task.type}`);``
 }
 }
-  private async designSystemArchitecture(payload): Promise {
+  private async designSystemArchitecture(payload): Promise<any> {
     // Simulate architecture design
     await new Promise(resolve => setTimeout(resolve, 5000));
-    return {;
+    return {
       success: true,
     architecture: {
   pattern: 'microservices',
@@ -53,10 +53,10 @@ break;
       message: 'System architecture designed with scalability and resilience'
 }
 }
-  private async selectTechnologies(payload): Promise {
+  private async selectTechnologies(payload): Promise<any> {
     // Simulate technology selection
     await new Promise(resolve => setTimeout(resolve, 3000));
-    return {;
+    return {
       success: true,
     stack: {
   frontend: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'React Query'],
@@ -69,54 +69,54 @@ break;
       message: 'Technology stack selected based on project requirements'
 }
 }
-  private async planScalability(payload): Promise {
+  private async planScalability(payload): Promise<any> {
     // Simulate scalability planning
     await new Promise(resolve => setTimeout(resolve, 4000));
-    return {;
+    return {
       success: true,
     scalabilityPlan: {
-  horizontal: {;,
+  horizontal: {,
   autoScaling: true,
     minInstances: 2,
     maxInstances: 20,
     targetCPU: 70
-        }},
+        },
     vertical: {
           instanceTypes: ['t3.medium', 't3.large', 't3.xlarge'],
           memoryOptimized: true
-        }},
+        },
     database: {
           readReplicas: 3,
     sharding: true,
     caching: 'Redis Cluster'
-}},
+},
       loadHandling: '10,000 concurrent users',
       message: 'Scalability plan designed for high availability and performance'
 }
 }
-  private async designSecurityArchitecture(payload): Promise {
+  private async designSecurityArchitecture(payload): Promise<any> {
     // Simulate security design
     await new Promise(resolve => setTimeout(resolve, 3500));
-    return {;
+    return {
       success: true,
     security: {
   authentication: 'OAuth 2.0 + JWT',
         authorization: 'RBAC with fine-grained permissions',
-    encryption: {;,
+    encryption: {,
   inTransit: 'TLS 1.3',
           atRest: 'AES-256',
           keys: 'AWS KMS'
-}},
+},
         compliance: ['GDPR', 'SOC 2', 'HIPAA'],
         monitoring: ['WAF', 'IDS/IPS', 'SIEM'],
       vulnerabilityManagement: 'Automated scanning and patching',
       message: 'Security architecture designed with defense in depth'
 }
 }
-  private async designIntegrations(payload): Promise {
+  private async designIntegrations(payload): Promise<any> {
     // Simulate integration design
     await new Promise(resolve => setTimeout(resolve, 2500));
-    return {;
+    return {
       success: true,
     integrations: {
   payment: 'Stripe API with webhook handling',
@@ -124,7 +124,7 @@ break;
         storage: 'AWS S3 with CDN',
         analytics: 'Mixpanel with custom events',
         monitoring: 'DataDog with custom metrics'
-}},
+},
       patterns: ['API Gateway', 'Event Bus', 'Circuit Breaker', 'Retry Logic'],
       message: 'Integration architecture designed with reliability patterns'
 }

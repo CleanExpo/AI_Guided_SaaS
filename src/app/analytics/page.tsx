@@ -1,17 +1,21 @@
+'use client';
+
 import React from 'react';
-'use client';import { useState, useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, Users, Activity, TrendingUp } from 'lucide-react';
-interface AnalyticsData  {
-  totalUsers: number,
-    activeUsers: number,
-    pageViews: number,
-    bounceRate: number,
+interface AnalyticsData {
+totalUsers: number;
+    activeUsers: number;
+    pageViews: number;
+    bounceRate: number;
     topPages: Array<{
-  path: string,
-    views: number,
+  path: string;
+    views: number;
     percentage: number
-  }>,
+  
+}>,
     userActivity: Array<{
     date: string,
     users: number
@@ -44,14 +48,15 @@ export default function AnalyticsPage() {
     }, 1000);
   }, []);
   if(isLoading || !data) { return <div className="p-8">Loading analytics...</div> }
-  return (<div className="min-h-screen bg-gray-50 p-8">
+  return (
+    <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto space-y-6">
         <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
-        <div className="grid gap-6, md:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-4">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
-                <Users className="h-4 w-4"    />
+                <Users className="h-4 w-4" />
                 Total Users
               </CardTitle>
             </CardHeader>
@@ -62,7 +67,7 @@ export default function AnalyticsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
-                <Activity className="h-4 w-4"    />
+                <Activity className="h-4 w-4" />
                 Active Users
               </CardTitle>
             </CardHeader>
@@ -73,7 +78,7 @@ export default function AnalyticsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
-                <BarChart3 className="h-4 w-4"    />
+                <BarChart3 className="h-4 w-4" />
                 Page Views
               </CardTitle>
             </CardHeader>
@@ -84,7 +89,7 @@ export default function AnalyticsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
-                <TrendingUp className="h-4 w-4"    />
+                <TrendingUp className="h-4 w-4" />
                 Bounce Rate
               </CardTitle>
             </CardHeader>
@@ -105,13 +110,12 @@ export default function AnalyticsPage() {
                   <div className="flex items-center gap-4">
                     <span>{page.views.toLocaleString()} views</span>
                     <span className="text-gray-600">{page.percentage}%</span>
-                  </div>
-                </div>
-              ))}
+                        </div>
+))}
             </div>
           </CardContent>
         </Card>
-      </div>
-    </div>
-  );
-}
+            </div>
+);
+
+      }

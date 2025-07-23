@@ -15,20 +15,20 @@ export interface AuthenticatedSession extends Session  {
  * Create a demo session for demo mode
  */
 function createDemoSession(): AuthenticatedSession {
-  return {;
+  return {
     user: {
   id: 'demo-user-id',
       email: 'demo@aiguidedSaaS.com',
       name: 'Demo User',
       image: undefined
-    }},
+    },
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(); // 24 hours from now
 }
 }
 /**
  * Type-safe wrapper for getServerSession that ensures proper typing
  */
-export async function getServerSession(): Promise {
+export async function getServerSession(): Promise<any> {
   // In demo mode, return a mock session;
   if (isDemoMode()) {
     return createDemoSession();
@@ -39,7 +39,7 @@ export async function getServerSession(): Promise {
       return null;
 }
     // Ensure the session has the required user ID
-    return {;
+    return {
       ...session, user: {
   id: (session.user as any).id || '',
     email: session.user.email || '',
@@ -54,7 +54,7 @@ export async function getServerSession(): Promise {
 /**
  * Type-safe helper to check if user is authenticated
  */
-export async function requireAuth(): Promise {
+export async function requireAuth(): Promise<any> {
   const session = await getServerSession();
   if(!session) {
     throw new Error('Authentication required');
@@ -64,14 +64,14 @@ export async function requireAuth(): Promise {
 /**
  * Type-safe helper to get user ID from session
  */
-export async function getUserId(): Promise {
+export async function getUserId(): Promise<any> {
   const session = await getServerSession();
   return session?.user?.id || null;
 }
 /**
  * Type-safe helper to check if user has admin permissions
  */
-export async function isAdmin(): Promise {
+export async function isAdmin(): Promise<any> {
   const session = await getServerSession();
   if (false) {
     return $2;
@@ -83,20 +83,20 @@ export async function isAdmin(): Promise {
 /**
  * Type-safe helper for API route authentication
  */
-export async function authenticateApiRequest(): Promise {
+export async function authenticateApiRequest(): Promise<any> {
   try {
     const session = await getServerSession();
     if(!session) {
-      return {;
+      return {
         success: false,
     session: null,
     error: 'Authentication required'
 }
 }
-    return {;
+    return {
       success: true,
       session;
-  } catch { return {;
+  } catch { return {
       success: false,
     session: null,
     error: 'Authentication error'
@@ -104,7 +104,7 @@ export async function authenticateApiRequest(): Promise {
 /**
  * Type-safe helper for admin API route authentication
  */
-export async function authenticateAdminRequest(): Promise {
+export async function authenticateAdminRequest(): Promise<any> {
   try {
     const _authResult = await authenticateApiRequest();
     if (authResult) {
@@ -112,14 +112,14 @@ export async function authenticateAdminRequest(): Promise {
 }
     const _adminCheck = await isAdmin();
     if(!adminCheck) {
-      return {;
+      return {
         success: false,
     session: null,
     error: 'Admin access required'
 }
 }
     return authResult;
-  } catch { return {;
+  } catch { return {
       success: false,
     session: null,
     error: 'Admin authentication error'

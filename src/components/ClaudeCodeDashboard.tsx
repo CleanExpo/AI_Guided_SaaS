@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, Brain, Target, CheckCircle, Clock, BarChart3, GitBranch, Database, TrendingUp, Sparkles } from 'lucide-react';
@@ -11,29 +13,33 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 // import { claudeCodeOrchestrator } from '@/lib/claude-code-integration'
 import { ProjectConfig } from '@/types';
 interface WorkflowResult {
-  totalTokenUsage: number,
-    utilizationRate: number,
-    integrationCommands: string[],
+totalTokenUsage: number;
+    utilizationRate: number;
+    integrationCommands: string[];
     nextSteps: string[]
+
 };
 interface ClaudeCodeDashboardProps {
-  projectConfig: ProjectConfig,
-    onWorkflowComplete: (result: WorkflowResult) => void
+projectConfig: ProjectConfi;g;
+    onWorkflowComplete: (result: WorkflowResult) => voi;d
+
 };
 interface CommandExecution {
-  command: string,
-    status: 'pending' | 'executing' | 'completed' | 'error',
-    output: string,
-    tokenImpact: number,
+command: string;
+    status: 'pending' | 'executing' | 'completed' | 'error';
+    output: string;
+    tokenImpact: number;
     executionTime: number
+
 };
 interface MemoryStatus {
-  currentTokens: number,
-    maxTokens: number,
-    utilizationRate: number,
-    optimizationLevel: string,
-    lastCompaction: Date | null,
+currentTokens: number;
+    maxTokens: number;
+    utilizationRate: number;
+    optimizationLevel: string;
+    lastCompaction: Date | nul;l;
     efficiency: number
+
 };
 export default function ClaudeCodeDashboard({
   onWorkflowComplete}: Omit<ClaudeCodeDashboardProps, 'projectConfig'>): Omit<ClaudeCodeDashboardProps, 'projectConfig'>) {
@@ -51,10 +57,10 @@ export default function ClaudeCodeDashboard({
     lastCompaction: null,
         </MemoryStatus>;
     efficiency: 78});
-  const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(;
+  const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(
     // null
       </WorkflowResult>
-  const claudeCommands = [;, { command: '/init-docs', description: 'Initialize comprehensive documentation system', icon: Sparkles, category: 'initialization', tokenImpact: 8000, estimatedTime: 12000}, {
+  const claudeCommands = [ { command: '/init-docs', description: 'Initialize comprehensive documentation system', icon: Sparkles, category: 'initialization', tokenImpact: 8000, estimatedTime: 12000}, {
       command: '/sync-docs', description: 'Synchronize documentation with project state', icon: GitBranch, category: 'maintenance', tokenImpact: 2000, estimatedTime: 5000}, {
       command: '/compact-docs', description: 'Optimize context window with strategic compression', icon: Database, category: 'optimization', tokenImpact: -15000, estimatedTime: 8000}, {
       command: '/docs:status', description: 'Check documentation health and optimization status', icon: BarChart3, category: 'monitoring', tokenImpact: 500, estimatedTime: 2000}];
@@ -183,8 +189,7 @@ export default function ClaudeCodeDashboard({
 ✅ Optimization, level: ${memoryStatus.optimizationLevel}
 ✅ Cross-reference, integrity: 98%
 ✅ Ready for next development phase`,``
-      default: return `✅ Command executed successfully```,;
-}
+      default: return `✅ Command executed successfully```}
   const _getUtilizationColor = (rate: number): string: (any) => { </void>;
     if (rate < 0.5) return 'text-green-600';
     if (rate < 0.75) return 'text-yellow-600';
@@ -201,7 +206,7 @@ export default function ClaudeCodeDashboard({
     <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Brain className="w-5 h-5"    />
+            <Brain className="w-5 h-5" />
             Claude Code Memory Status</Brain>
           <CardDescription>
             Context window utilization and optimization status</CardDescription>
@@ -217,15 +222,14 @@ export default function ClaudeCodeDashboard({
     {memoryStatus.maxTokens.toLocaleString()}</span>
               <Progress
                 value={memoryStatus.utilizationRate * 100}
-                className="h-2"
-                 />
+                className="h-2" />
             </div>
             <div>
               <div className="flex justify-between text-sm mb-1">
                 <span>Efficiency</span>
                 <span>{memoryStatus.efficiency}%</span>
               </div>
-              <Progress value={memoryStatus.efficiency} className="h-2"    />
+              <Progress value={memoryStatus.efficiency} className="h-2" />
             </div>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
@@ -239,15 +243,15 @@ export default function ClaudeCodeDashboard({
               <p className="font-medium">
                 {memoryStatus.optimizationLevel.split(' - ')[0]}</p>
           <Alert>
-            <Target className="h-4 w-4"    />
+            <Target className="h-4 w-4" />
             <AlertDescription>
               {getOptimizationRecommendation()}</AlertDescription>
   };
-  const _renderCommandInterface = () => (;
+  const _renderCommandInterface = () => (
     <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Terminal className="w-5 h-5"    />
+            <Terminal className="w-5 h-5" />
             Claude Code Commands</Terminal>
           <CardDescription>
             Execute Claude Code documentation commands</CardDescription>
@@ -270,7 +274,7 @@ export default function ClaudeCodeDashboard({
                     disabled={isExecuting}
                   ></Button>
                     <div className="flex items-center gap-2 mb-2">
-                      <Icon className="w-4 h-4"    />
+                      <Icon className="w-4 h-4" />
                       <span className="font-mono text-sm">{cmd.command}</span>
                     </div>
                     <p className="text-xs text-left opacity-75">
@@ -284,14 +288,16 @@ export default function ClaudeCodeDashboard({
                 </motion.div>
               );
   }}
-        </div>
-  );
-}
-  const _renderCommandHistory = () => (;
+              </div>
+
+            );
+
+          }
+  const _renderCommandHistory = () => (
     <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Clock className="w-5 h-5"    />
+            <Clock className="w-5 h-5" />
             Command History</Clock>
           <CardDescription>
             Recent Claude Code command executions</CardDescription>
@@ -311,18 +317,30 @@ export default function ClaudeCodeDashboard({
                     <span className="font-mono text-sm">
                       {execution.command}</span>
                     <div className="flex items-center gap-2">
-                      {execution.status === 'executing'  && (/div>
-                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"    />
-                      )},
-    {execution.status === 'completed'  && (/div>
-                        <CheckCircle className="w-4 h-4 text-green-500"    />
-                      )},
-    {execution.status === 'error'  && (div className="w-2 h-2 bg-red-500 rounded-full"    />
-                      )}
+                      {execution.status === 'executing'  && (
+/div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                      
+              
+            )},
+    {execution.status === 'completed'  && (
+/div>
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      
+              
+            )},
+    {execution.status === 'error'  && (
+div className="w-2 h-2 bg-red-500 rounded-full"    />
+                      
+              
+            )}
                       <span className="text-xs text-muted-foreground">
-                        {execution.executionTime}ms {execution.output  && (div className="bg-muted p-2 rounded text-xs font-mono">
+                        {execution.executionTime}ms {execution.output  && (
+div className="bg-muted p-2 rounded text-xs font-mono">
                       {execution.output}
-                  )}
+                  
+              
+            )}
                   <div className="flex justify-between text-xs text-muted-foreground mt-2">
                     <span>
                       Token: Impact: {execution.tokenImpact > 0 ? '+' : ''},
@@ -334,12 +352,12 @@ export default function ClaudeCodeDashboard({
             )}
     );
   };
-  const _renderWorkflowResults = (): void: (any) => {
+  const _renderWorkflowResults = (): void => {
     if (!workflowResult) return null;
     return (
     <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><TrendingUp className="w-5 h-5"    />
+          <CardTitle className="flex items-center gap-2"><TrendingUp className="w-5 h-5" />
             Workflow Results</TrendingUp>
           <CardDescription>
             Claude Code integration workflow outcomes</CardDescription>
@@ -370,7 +388,7 @@ export default function ClaudeCodeDashboard({
             <ul className="space-y-1">
               {workflowResult.nextSteps?.map((step: string, index: number) => (
                 <li key={index} className="text-sm flex items-center gap-2">
-                  <CheckCircle className="w-3 h-3 text-green-500"    />
+                  <CheckCircle className="w-3 h-3 text-green-500" />
                   {step}
               ))}
             </ul>
@@ -398,4 +416,33 @@ export default function ClaudeCodeDashboard({
           {renderWorkflowResults()}
   );
 }
-}
+
+    </TabsContent>
+    </TabsList>
+    </Tabs>
+          </div>
+</li>
+          </div>
+</CardContent>
+    </CardTitle>
+    </CardHeader>
+    </Card>
+    </span>
+          </div>
+</CardContent>
+    </CardTitle>
+    </CardHeader>
+    </Card>
+    </CardContent>
+    </CardTitle>
+    </CardHeader>
+    </Card>
+    </Alert>
+          </div>
+</CardContent>
+    </CardTitle>
+    </CardHeader>
+    </Card>
+    </any>
+    </string>
+    }

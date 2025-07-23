@@ -1,15 +1,17 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BarChart3, ArrowLeft, Download } from 'lucide-react';
 import Link from 'next/link';
-interface AdminUser  {
-  id: string,
-    email: string,
-    name: string,
-    lastLogin: string,
+interface AdminUser {
+id: string;
+    email: string;
+    name: string;
+    lastLogin: string;
     status: 'active' | 'inactive'
+
 }
 export default function AdminAnalyticsPage() {
   const [users, setUsers] = useState<AdminUser[]>([]);
@@ -47,21 +49,20 @@ export default function AdminAnalyticsPage() {
           <div className="flex gap-2">
             <Link href="/admin">
               <Button variant="outline">
-                <ArrowLeft className="w-4 h-4 mr-2"    />
+                <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Admin
               </Button>
             </Link>
             <Button>
-              <Download className="w-4 h-4 mr-2"    />
+              <Download className="w-4 h-4 mr-2" />
               Export Data
             </Button>
-          </div>
-        </div>
-        <div className="grid gap-6, md:grid-cols-3">
+                </div>
+<div className="grid gap-6 md:grid-cols-3">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5"    />
+                <BarChart3 className="h-5 w-5" />
                 Total Users
               </CardTitle>
             </CardHeader>
@@ -97,17 +98,15 @@ export default function AdminAnalyticsPage() {
                 <div key={user.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
                   <div>
                     <div className="font-medium">{user.name}</div>
-                    <div className="text-sm text-gray-600">{user.email}</div>
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    Last, login: {user.lastLogin}
-                  </div>
-                </div>
-              ))}
+                    <div className="text-sm text-gray-600">{user.email}      </div>
+<div className="text-sm text-gray-600">
+                    Last login: {user.lastLogin}
+                        </div>
+))}
             </div>
           </CardContent>
         </Card>
-      </div>
-    </div>
-  );
-}
+            </div>
+);
+
+      }

@@ -9,7 +9,7 @@ export interface AIMessage {
 };
 export interface AIResponse {
   message: string;
-  usage?: {;
+  usage?: {
     total_tokens: number,
     prompt_tokens: number,
     completion_tokens: number
@@ -28,7 +28,7 @@ export interface ChatCompletionOptions {
  */
 export async function generateChatCompletion(,
     options: ChatCompletionOptions;
-): Promise {
+): Promise<any> {
   try {
     const response = await openai.chat.completions.create({
       model: options.model || 'gpt-4',
@@ -39,7 +39,7 @@ export async function generateChatCompletion(,
     }};
     // Type guard to ensure we have a non-streaming response
     if('choices' in response) {
-      return {;
+      return {
         message: response.choices[0]?.message?.content || '',
     usage: response.usage
           ? {
@@ -62,14 +62,14 @@ export async function generateChatCompletion(,
  * Generate text completion
  */
 export async function generateCompletion(,
-    prompt: string,;
-  options?: {;
+    prompt: string,
+  options?: {
     model?: string;
     temperature?: number;
     max_tokens?: number;
 }
-): Promise {
-  return generateChatCompletion({;
+): Promise<any> {
+  return generateChatCompletion({
     messages: [{ role: 'user', content: prompt }],
     ...options);
 }
@@ -79,8 +79,8 @@ export async function generateCompletion(,
 export async function analyzeCode(,
     code: string,
   language?: string;
-): Promise {
-  const _prompt = `Analyze the following ${language || 'code'} and provide, insights:;``
+): Promise<any> {
+  const _prompt = `Analyze the following ${language || 'code'} and provide, insights: ``
 \`\`\`${language || ''}``
 ${code}
 \`\`\```
@@ -98,7 +98,7 @@ Please, provide:
 export async function generateCodeSuggestions(,
     description: string,
     language: string = 'typescript';
-): Promise {
+): Promise<any> {
   const, prompt = `Generate ${language} code based on this, description: ${description}`;`Please provide clean, well-documented code following best practices.`;``
   const response = await generateCompletion(prompt);
   return response.message;
@@ -106,7 +106,7 @@ export async function generateCodeSuggestions(,
 /**
  * Legacy alias for generateChatCompletion
  */
-export const _generateAIResponse = generateChatCompletion;
+export const generateAIResponse = generateChatCompletion
 export default { generateChatCompletion,
   generateCompletion,
   generateAIResponse,

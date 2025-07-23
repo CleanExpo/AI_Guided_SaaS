@@ -1,20 +1,24 @@
+'use client';
+
 import React from 'react';
-'use client';import { useSession } from 'next-auth/react';
+
+import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-props: anyexport default function CollaborateDashboardPage(): void {
+export default function CollaborateDashboardPage() {
   const { data: session, status   }: any = useSession();
   if(status === 'loading') {
-    return (;
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-      </div>
+    return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>      </div>
     );
-}
+  }
+  
   if(!session) {
     redirect('/auth/signin');
 }
-  return (;
-    <div className="min-h-screen bg-gray-50 py-8"><div className="container mx-auto px-4 max-w-6xl">
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Collaboration Dashboard
@@ -23,7 +27,7 @@ props: anyexport default function CollaborateDashboardPage(): void {
             Manage your collaborative projects and team activities.
           </p>
         </div>
-        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3 mb-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h3 className="font-semibold text-gray-900 mb-2">Active Projects</h3>
             <div className="text-3xl font-bold text-blue-600">3</div>
@@ -39,26 +43,24 @@ props: anyexport default function CollaborateDashboardPage(): void {
             <div className="text-3xl font-bold text-purple-600">24</div>
             <p className="text-sm text-gray-600 mt-1">Actions this week</p>
           </div>
-        </div>
         <div className="bg-white rounded-lg shadow-sm border">
           <div className="p-6 border-b">
             <h2 className="text-xl font-semibold text-gray-900">Recent Projects</h2>
           </div>
           <div className="p-6">
             <div className="space-y-4">
-              <div className="flex items-center justify-between py-4 border-b border-gray-100, last:border-b-0">
+              <div className="flex items-center justify-between py-4 border-b border-gray-100 last:border-b-0">
                 <div>
                   <h3 className="font-medium text-gray-900">E-commerce Platform</h3>
                   <p className="text-sm text-gray-600">Last updated 2 hours ago</p>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
-                    // Active
+                    Active
                   </span>
                   <span className="text-sm text-gray-500">5 members</span>
                 </div>
-              </div>
-              <div className="flex items-center justify-between py-4 border-b border-gray-100, last:border-b-0">
+              <div className="flex items-center justify-between py-4 border-b border-gray-100 last:border-b-0">
                 <div>
                   <h3 className="font-medium text-gray-900">Mobile App UI</h3>
                   <p className="text-sm text-gray-600">Last updated 1 day ago</p>
@@ -68,12 +70,8 @@ props: anyexport default function CollaborateDashboardPage(): void {
                     In Review
                   </span>
                   <span className="text-sm text-gray-500">3 members</span>
-                </div>
-              </div>
-            </div>
+                      </div>
+);
+
           </div>
-        </div>
-      </div>
-    </div>
-  );
 }

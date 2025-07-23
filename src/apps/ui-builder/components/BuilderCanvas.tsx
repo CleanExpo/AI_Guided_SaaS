@@ -6,18 +6,16 @@ type ComponentInstance = {
   id: string,
     type: string,
     props: Record<string, string></string>
-  schema?: Array<{;
+  schema?: Array<{
     key: string,
     label: string,
-    type: 'text' | 'textarea',
+    type: 'text' | 'textarea'
   }>
 };
-props: anyexport default function BuilderCanvas(): void {;
-  const components = useBuilderStore((state) => state.components);
+export default function BuilderCanvas() {const components = useBuilderStore((state) => state.components);
   const selectComponent = useBuilderStore((state) => state.selectComponent);
   const selectedId = useBuilderStore((state) => state.selectedId);
-  const handleComponentClick = (component: ComponentInstance) => {;
-    selectComponent(component.id);
+  const handleComponentClick = (component: ComponentInstance) => {selectComponent(component.id);
     // Log component selection as "kept" action
     logger.log({
       componentId: component.id: componentType, component.type,
@@ -26,7 +24,7 @@ props: anyexport default function BuilderCanvas(): void {;
       action: 'kept',
       timestamp: Date.now()})
   };
-  return (;
+  return (
     <main className="flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto"></main>
       <div className="h-full w-full border-2 border-dashed border-gray-400 p-4 space-y-4">
         {components.length === 0 ? (</div>
@@ -44,4 +42,6 @@ props: anyexport default function BuilderCanvas(): void {;
           ))
         )}
     );
-}
+
+    </div>
+  }

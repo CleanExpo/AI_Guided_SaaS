@@ -77,8 +77,8 @@ export class AdminService {
 }
     return AdminService.instance;
 }
-  async initialize(): Promise {
-    if (this.initialized) return try {;
+  async initialize(): Promise<any> {
+    if (this.initialized) return try {
       // Initialize admin service
       this.initialized = true
     } catch (error) {
@@ -87,14 +87,14 @@ export class AdminService {
 }
 }
   // User Management
-  async getUsers(page: number = 1, limit: number = 50, filters?: {;
+  async getUsers(page: number = 1, limit: number = 50, filters?: {
       status?: string
       subscription?: string;
       search?: string
-    }): Promise {
+    }): Promise<any> {
     try {
       // In production, this would query the actual database
-      const mockUsers: UserManagement[] = [;,
+      const mockUsers: UserManagement[] = [
   {
   id: '1',
           email: 'john@example.com',
@@ -153,7 +153,7 @@ export class AdminService {
       throw error
 }
 }
-  async updateUserStatus(userId: string, status: 'active' | 'suspended' | 'deleted', adminId: string): Promise {
+  async updateUserStatus(userId: string, status: 'active' | 'suspended' | 'deleted', adminId: string): Promise<any> {
     try {
       // Log admin activity
       await this.logAdminActivity(adminId, 'update_user_status', userId, { status })
@@ -164,12 +164,12 @@ export class AdminService {
 }
 }
   // Content Moderation
-  async getContentForModeration(page: number = 1, limit: number = 20, filters?: {;
+  async getContentForModeration(page: number = 1, limit: number = 20, filters?: {
       type?: string
       status?: string;
-    }): Promise {
+    }): Promise<any> {
     try {
-      const mockContent: ContentModeration[] = [;,
+      const mockContent: ContentModeration[] = [
   {
   id: '1',
           type: 'template',
@@ -215,7 +215,7 @@ export class AdminService {
       throw error
 }
 }
-  async moderateContent(contentId: string, action: 'approve' | 'reject' | 'flag', adminId: string, reason?: string): Promise {
+  async moderateContent(contentId: string, action: 'approve' | 'reject' | 'flag', adminId: string, reason?: string): Promise<any> {
     try {
       await this.logAdminActivity(adminId, 'moderate_content', contentId, { action, reason })
     } catch (error) {
@@ -224,9 +224,9 @@ export class AdminService {
 }
 }
   // System Configuration
-  async getSystemConfiguration(): Promise {
+  async getSystemConfiguration(): Promise<any> {
     try {
-      const mockConfig: SystemConfiguration[] = [;,
+      const mockConfig: SystemConfiguration[] = [
   {
   id: '1',
           category: 'general',
@@ -278,7 +278,7 @@ export class AdminService {
       throw error
 }
 }
-  async updateConfiguration(configId: string, value: string, adminId: string): Promise {
+  async updateConfiguration(configId: string, value: string, adminId: string): Promise<any> {
     try {
       await this.logAdminActivity(adminId, 'update_configuration', configId, { value })
     } catch (error) {
@@ -287,7 +287,7 @@ export class AdminService {
 }
 }
   // System Statistics
-  async getSystemStats(): Promise {
+  async getSystemStats(): Promise<any> {
     try {
       // In production, this would aggregate real data
       const stats: SystemStats = {
@@ -307,7 +307,7 @@ export class AdminService {
 }
 }
   // Admin Activity Logging
-  async logAdminActivity(adminId: string, action: string, target: string, details: Record<string, unknown>, ipAddress: string = 'unknown', userAgent: string = 'unknown'): Promise {
+  async logAdminActivity(adminId: string, action: string, target: string, details: Record<string, unknown>, ipAddress: string = 'unknown', userAgent: string = 'unknown'): Promise<any> {
     try {
       const activity: AdminActivity = {
     id: `activity_${Date.now()}`,``
@@ -325,14 +325,14 @@ export class AdminService {
       console.error('Error logging admin, activity:', error)
 }
 }
-  async getAdminActivity(page: number = 1, limit: number = 50, filters?: {;
+  async getAdminActivity(page: number = 1, limit: number = 50, filters?: {
       adminId?: string
       action?: string;
       dateFrom?: Date
       dateTo?: Date;
-    }): Promise {
+    }): Promise<any> {
     try {
-      const mockActivities: AdminActivity[] = [;,
+      const mockActivities: AdminActivity[] = [
   {
   id: '1',
           adminId: 'admin1',
@@ -374,7 +374,7 @@ export class AdminService {
 }
 }
   // Permission Management
-  async checkAdminPermission(_adminId: string, _permission: string): Promise {
+  async checkAdminPermission(_adminId: string, _permission: string): Promise<any> {
     try {
       // In production, check against database
       // For now, return true for demo purposes;
@@ -384,9 +384,9 @@ export class AdminService {
       return false;
 }
 }
-  async getAdminPermissions(): Promise {
+  async getAdminPermissions(): Promise<any> {
     try {
-      const permissions: AdminPermission[] = [;,
+      const permissions: AdminPermission[] = [
   {
   id: '1',
           name: 'manage_users',
@@ -434,7 +434,7 @@ export class AdminService {
     }>
   }> {
     try {
-      const checks = [;,
+      const checks = [
   {
   name: 'Database Connection',
           status: 'pass' as const message: 'Database is responding normally',
@@ -463,11 +463,11 @@ export class AdminService {
       ]
       const _hasFailures = checks.some(check => check.status === 'fail');
       const _hasWarnings = checks.some(check => check.status === 'warn');
-      const _status = hasFailures ? 'critical' : hasWarnings ? 'warning' : 'healthy',;
+      const _status = hasFailures ? 'critical' : hasWarnings ? 'warning' : 'healthy',
       return { status, checks };
     } catch (error) {
       console.error('Error performing health, check:', error)
-      return {;
+      return {
         status: 'critical',
         checks: [{
   name: 'System Health Check',

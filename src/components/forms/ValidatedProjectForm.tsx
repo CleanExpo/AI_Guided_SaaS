@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateProjectSchema, ProjectTypeSchema, validateSafe, z } from '@/lib/validation';
@@ -35,7 +37,7 @@ export function ValidatedProjectForm() {
     description: '',
     type: "fullstack",
     status: 'planning',
-    config: {;
+    config: {
   features: []
 }
       </CreateProjectForm>
@@ -69,13 +71,13 @@ export function ValidatedProjectForm() {
 }
       const project = await response.json();
       router.push(`/projects/${project.id}`)``
-    } catch (error) {
+  } catch (error) {
       setGeneralError(error instanceof Error ? error.message : 'An error occurred')
     } finally {
       setIsSubmitting(false)
 }
 }</string>
-  const _updateField = <K extends keyof CreateProjectForm>(, ;
+  const _updateField = <K extends keyof CreateProjectForm>(,
     field: K, value: CreateProjectForm[K]) => {
         </K>
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -103,17 +105,20 @@ export function ValidatedProjectForm() {
           Fill in the details to create a new project with validation</CardDescription>
       <CardContent></CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {generalError  && (/form>
+          {generalError  && (
+/form>
             <Alert variant="destructive"></Alert>
-              <AlertCircle className="h-4 w-4"    /></AlertCircle>
+              <AlertCircle className="h-4 w-4" /></AlertCircle>
               <AlertDescription>{generalError}</AlertDescription>
-          )}
+          
+              
+            )}
           <div className="space-y-2"></div>
             <Label htmlFor="name">Project Name *</Label>
             <Input
               id="name"
               value={formData.name}
-              onChange: any={(e) => updateField('name', e.target.value)}
+              onChange={(e) => updateField('name', e.target.value)}
               placeholder="My Awesome Project"
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined}
@@ -126,7 +131,7 @@ export function ValidatedProjectForm() {
             <Textarea
               id="description"
               value={formData.description}
-              onChange: any={(e) => updateField('description', e.target.value)}
+              onChange={(e) => updateField('description', e.target.value)}
               placeholder="Describe your project..."
               rows={4}
               aria-invalid={!!errors.description}
@@ -143,7 +148,7 @@ export function ValidatedProjectForm() {
                 onValueChange={(value) => updateField('type', value as any)}
               ></Select>
                 <SelectTrigger id="type"></SelectTrigger>
-                  <SelectValue    /></SelectValue>
+                  <SelectValue /></SelectValue>
                 <SelectContent>
                   {ProjectTypeSchema.options.map((type) => (</SelectContent>
                     <SelectItem key={type} value={type}>
@@ -158,7 +163,7 @@ export function ValidatedProjectForm() {
                 onValueChange={(value) => updateConfig('framework', value)}
               ></Select>
                 <SelectTrigger id="framework"></SelectTrigger>
-                  <SelectValue placeholder="Select framework"    /></SelectValue>
+                  <SelectValue placeholder="Select framework" /></SelectValue>
                 <SelectContent></SelectContent>
                   <SelectItem value="nextjs">Next.js</SelectItem>
                   <SelectItem value="react">React</SelectItem>
@@ -176,7 +181,7 @@ export function ValidatedProjectForm() {
                 onValueChange={(value) => updateConfig('language', value)}
               ></Select>
                 <SelectTrigger id="language"></SelectTrigger>
-                  <SelectValue placeholder="Select language"    /></SelectValue>
+                  <SelectValue placeholder="Select language" /></SelectValue>
                 <SelectContent></SelectContent>
                   <SelectItem value="typescript">TypeScript</SelectItem>
                   <SelectItem value="javascript">JavaScript</SelectItem>
@@ -193,7 +198,7 @@ export function ValidatedProjectForm() {
                 onValueChange={(value) => updateConfig('database', value)}
               ></Select>
                 <SelectTrigger id="database"></SelectTrigger>
-                  <SelectValue placeholder="Select database"    /></SelectValue>
+                  <SelectValue placeholder="Select database" /></SelectValue>
                 <SelectContent></SelectContent>
                   <SelectItem value="postgresql">PostgreSQL</SelectItem>
                   <SelectItem value="mysql">MySQL</SelectItem>
@@ -220,7 +225,7 @@ export function ValidatedProjectForm() {
                   <input
                     type="checkbox"
                     checked={formData.config?.features?.includes(feature) || false}
-                    onChange={(e) =    /> {
+                    onChange={(e) = /> {
                       const features = formData.config?.features || [];
                       if(e.target.checked) {
                         updateConfig('features', [...features, feature])
@@ -236,7 +241,8 @@ export function ValidatedProjectForm() {
               onClick={() => router.back()}
               disabled={isSubmitting}
             >
-              // Cancel</Button>
+                    Cancel
+                  </Button>
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? (</Button>
                 <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin"  />
@@ -272,10 +278,9 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</
       )}
       </T>
 }
-  const _validate = (): void: (any) => { ;
-    const result = schema.safeParse(data);
+  const _validate = (): void => {const result = schema.safeParse(data);
     if(!result.success) {</K>
-      const fieldErrors: Record<string, string> = {; }
+      const fieldErrors: Record<string, string> = { }
       (result.error.errors as any[]).forEach((err) => {
             </string>
         const _field = err.path.join('.');
@@ -287,12 +292,12 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</
     setErrors({})
     return true;
 }
-  const _reset = (): void: (any) => {
+  const _reset = (): void => {
     setData(initialData)
     setErrors({})
     setTouched(new Set())
 }
-  return {;
+  return {
     data,
     errors,
     touched,
@@ -301,4 +306,8 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</
     reset,
     isValid: Object.keys(errors).length === 0
 }
-}</string>
+
+    </T>
+    </Textarea>
+    </form>
+    }</string>

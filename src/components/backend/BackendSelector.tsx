@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useEffect } from 'react';
 import { BackendConfig } from '@/lib/backend/types';
 import { createBackendAdapter, switchBackend, getBackendConfig, loadBackendConfig } from '@/lib/backend/adapter-factory';
@@ -14,12 +16,12 @@ export function BackendSelector() {
   const [selectedBackend, setSelectedBackend] = useState<string>('supabase');
   const [config, setConfig] = useState<BackendConfig | null>(null);
   const [testing, setTesting] = useState<any>(false);
-  const [testResult, setTestResult] = useState<{;
+  const [testResult, setTestResult] = useState<{
     success: boolean, message: string
   } | null>(null)
   const [formData, setFormData] = useState<any>({
     supabase: {
-  url: '',;
+  url: '',
     apiKey: ''
     },
     strapi: {
@@ -136,7 +138,7 @@ export function BackendSelector() {
           <RadioGroup
             value={selectedBackend}
             onValueChange={setSelectedBackend}
-            className="grid grid-cols-1, md:grid-cols-3 gap-4"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
           >
             {Object.entries(backendInfo).map(([key, info]) => {
               const _Icon = info.icon;
@@ -144,17 +146,21 @@ export function BackendSelector() {
     <Label
                   key={key}
                   htmlFor={key}
-                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer, hover:bg-accent"
+                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer hover:bg-accent"
                 ></Label>
-                  <RadioGroupItem value={key} id={key} className="sr-only"    /></RadioGroupItem>
-                  <Icon className={`h-8, w-8 ${info.color}`}    />``</Icon>
+                  <RadioGroupItem value={key} id={key} className="sr-only" /></RadioGroupItem>
+                  <Icon className={`h-8, w-8 ${info.color}`} />``</Icon>
                   <span className="font-semibold">{info.name}</span>
                   <span className="text-sm text-muted-foreground text-center">
                     {info.description}</span>
-                  {config?.type === key  && (span className="text-xs text-green-600 flex items-center"></span>
-                      <Check className="h-3 w-3 mr-1"    />
-                      // Current</Check>
-                  )}
+                  {config?.type === key  && (
+span className="text-xs text-green-600 flex items-center"></span>
+                      <Check className="h-3 w-3 mr-1" />
+                    Current
+                  </Check>
+                  
+              
+            )}
                 </Label>
       );}
     );
@@ -170,7 +176,7 @@ export function BackendSelector() {
 type={field.name.includes('key') || field.name.includes('token') ? 'password' : 'text'}
                   placeholder={field.placeholder}
                   value={formData[selectedBackend as keyof typeof formData][field.name as 'url' | 'apiKey']}
-                  onChange: any={(e) => setFormData(prev => ({
+                  onChange={(e) => setFormData(prev => ({
                     ...prev,
                     [selectedBackend]: {
                       ...prev[selectedBackend as keyof typeof formData],
@@ -181,9 +187,9 @@ type={field.name.includes('key') || field.name.includes('token') ? 'password' : 
     {/* Test, Result */},
     {testResult  && (Alert variant={testResult.success ? 'default' : 'destructive'}>
               {testResult.success ? (</Alert>
-                <Check className="h-4 w-4"    />
+                <Check className="h-4 w-4" />
               ) : (</Check>
-                <X className="h-4 w-4"    />
+                <X className="h-4 w-4" />
               )}</X>
               <AlertTitle>
                 {testResult.success ? 'Success' : 'Error'}</AlertTitle>
@@ -208,39 +214,57 @@ type={field.name.includes('key') || field.name.includes('token') ? 'password' : 
             >
               Save Configuration</Button>
       {/* Migration, Warning */},
-    {config && config.type !== selectedBackend  && (Alert></Alert>
-          <AlertTriangle className="h-4 w-4"    />
+    {config && config.type !== selectedBackend  && (
+Alert></Alert>
+          <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Migration Required</AlertTitle>
           <AlertDescription>
             Changing backends will require migrating your data. Make sure to backup
             your data before switching backends.</AlertDescription>
-      )},
+      
+              
+            )},
     {/* Setup, Instructions */}
       <Card></Card>
         <CardHeader></CardHeader>
           <CardTitle>Setup Instructions</CardTitle>
         <CardContent></CardContent>
           <div className="space-y-4">
-            {selectedBackend === 'supabase'  && (/div>
+            {selectedBackend === 'supabase'  && (
+/div>
               <div className="space-y-2"></div>
                 <h4 className="font-semibold">Supabase: Setup:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground"></ol>
                   <li>Create a project at supabase.com</li>
                   <li>Copy your project URL from Settings → API</li>
                   <li>Copy your anon/public key from Settings → API</li>
-                  <li>Run the database migrations in your Supabase project</li>)},
-    {selectedBackend === 'strapi'  && (div className="space-y-2"></div>
+                  <li>Run the database migrations in your Supabase project</li>
+              
+            )},
+    {selectedBackend === 'strapi'  && (
+div className="space-y-2"></div>
                 <h4 className="font-semibold">Strapi: Setup:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground"></ol>
                   <li>Run: docker-compose -f docker/services/strapi.yml up</li>
                   <li>Access Strapi admin at, http://localhost:1337/admin</li>
                   <li>Create an admin user and configure content types</li>
-                  <li>Generate an API token from Settings → API Tokens</li>)},
-    {selectedBackend === 'nocodb'  && (div className="space-y-2"></div><h4 className="font-semibold">NocoDB: Setup:</h4>
+                  <li>Generate an API token from Settings → API Tokens</li>
+              
+            )},
+    {selectedBackend === 'nocodb'  && (
+div className="space-y-2"></div><h4 className="font-semibold">NocoDB: Setup:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground"></ol>
                   <li>Run: docker-compose -f docker/services/nocodb.yml up</li>
                   <li>Access NocoDB at, http://localhost:8080</li>
                   <li>Create your project and tables</li>
-                  <li>Generate an API token from Account Settings</li>)}
+                  <li>Generate an API token from Account Settings</li>
+              
+            )}
       );
-}
+
+    </RadioGroup>
+    </any>
+    </any>
+    </BackendConfig>
+    </string>
+  }

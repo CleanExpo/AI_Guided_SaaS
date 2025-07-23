@@ -22,7 +22,7 @@ export const _ROUTES = {
   SIGNIN: '/auth/signin',
     SIGNUP: '/auth/signup',
     SIGNOUT: '/auth/signout'
-}},
+},
     ADMIN: {
     DASHBOARD: '/admin',
     AGENTS: '/admin/agent-monitor',

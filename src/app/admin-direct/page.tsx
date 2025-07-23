@@ -1,28 +1,32 @@
-import React from 'react';
 'use client';
-import { useState } from 'react';
+
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 export default function AdminDirectPage() {
-  const [password, setPassword] = useState<any>('');
-  const [isLoading, setIsLoading] = useState<any>(false);
-  const [error, setError] = useState<any>('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+
     try {
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json'
-      },
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ password })
       });
-      if(response.ok) {
+
+      if (response.ok) {
         router.push('/admin');
       } else {
         setError('Invalid admin password');
@@ -54,16 +58,8 @@ export default function AdminDirectPage() {
             </div>
             {error && (
               <div className="text-red-600 text-sm">{error}</div>
-            )}
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Authenticating...' : 'Access Admin Panel'}
-            </Button>
-          </form>
-            {error && (<div className="text-red-600 text-sm">{error}</div>
+            
+              
             )}
             <Button
               type="submit"
@@ -75,6 +71,8 @@ export default function AdminDirectPage() {
           </form>
         </CardContent>
       </Card>
-    </div>
-  );
-}
+          </div>
+
+        );
+
+      }

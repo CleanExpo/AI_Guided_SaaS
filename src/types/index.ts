@@ -11,7 +11,7 @@ export interface ProjectConfig {
   deployment?: string;
   apiIntegration?: boolean;
   realTimeFeatures?: boolean;
-  technology?: {;
+  technology?: {
     frontend: string,
     backend: string,
     database: string,

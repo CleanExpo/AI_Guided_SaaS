@@ -1,5 +1,7 @@
 // Mark as dynamic to prevent static generation
-export const _dynamic = 'force-dynamic';import { NextRequest, NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
+
+import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 const progressSchema = z.object({
   tutorialId: z.string(),
@@ -7,43 +9,43 @@ const progressSchema = z.object({
     completed: z.boolean(),
     userId: z.string().optional()
 });
-export async function POST(request: NextRequest): Promise {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const _body = await request.json();
+    const body = await request.json();
     // Validate input
-    const _validatedData = progressSchema.parse(body);
+    const validatedData = progressSchema.parse(body);
     // Simulate progress tracking
-    const _progress = {
+    const progress = {
       id: 'progress_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,
       timestamp: new Date().toISOString(),
     progressPercentage: 75
     };
-    return NextResponse.json({;
-      success: true;
+    return NextResponse.json({
+      success: true,
       // progress
     });
   } catch (error) {
-    console.error('Tutorial progress, error:', error);
+    console.error('Tutorial progress error:', error);
     if(error instanceof z.ZodError) {
-      return NextResponse.json(;
+      return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
       );
 }
-    return NextResponse.json(;
+    return NextResponse.json(
       { error: 'Failed to track progress' },
       { status: 500 }
     );
 }
 }
-export async function GET(request: NextRequest): Promise {
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const url = new URL(request.url);
-    const _tutorialId = url.searchParams.get('tutorialId');
-    const _userId = url.searchParams.get('userId');
+    const tutorialId = url.searchParams.get('tutorialId');
+    const userId = url.searchParams.get('userId');
     // Simulate getting progress
-    const _progress = {
+    const progress = {
       tutorialId,
       userId,
       completedSteps: ['step1', 'step2'],
@@ -51,13 +53,13 @@ export async function GET(request: NextRequest): Promise {
     progressPercentage: 40,
     lastActivity: new Date().toISOString()
     };
-    return NextResponse.json({;
-      success: true;
+    return NextResponse.json({
+      success: true,
       // progress
     });
   } catch (error) {
-    console.error('Get progress, error:', error);
-    return NextResponse.json(;
+    console.error('Get progress error:', error);
+    return NextResponse.json(
       { error: 'Failed to fetch progress' },
       { status: 500 }
     );

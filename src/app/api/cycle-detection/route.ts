@@ -1,54 +1,54 @@
-import { NextRequest, NextResponse } from 'next/server';interface DocumentationSearchResult  {
-  id: string,
-    title: string,
-    content: string,
-    relevance: number
+import { NextRequest, NextResponse } from 'next/server';
+
+interface DocumentationSearchResult {
+  id: string;
+  title: string;
+  content: string;
+  relevance: number;
 }
-interface CycleDetectionResult  {
+interface CycleDetectionResult {
   hasCycle: boolean;
   cycleLength?: number;
-    suggestions: string[]
+  suggestions: string[];
 }
-export async function POST(request: NextRequest): Promise {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const _body = await request.json();
-    const { query, context   }: any = body;
+    const body = await request.json();
+    const { query, context }: any = body;
     if(!query) {
-      return NextResponse.json(;
-        { error: 'Query is required' },
-        { status: 400 }
+      return NextResponse.json(
+        { error: 'Query is required' }, { status: 400 }
       );
 }
     // Simulate cycle detection
     const result: CycleDetectionResult = {
       hasCycle: false,
-    suggestions: [
+      suggestions: [
         'Consider breaking down complex dependencies',
         'Use dependency injection patterns',
         'Implement lazy loading where appropriate'
-   ]
+      ]
     };
-    const searchResults: DocumentationSearchResult[] = [;,
-  {
-  id: 'doc_1',
+    const searchResults: DocumentationSearchResult[] = [
+      {
+        id: 'doc_1',
         title: 'Dependency Management',
         content: 'Best practices for managing dependencies...',
         relevance: 0.95
-}
+      }
     ];
-    return NextResponse.json({;
-      success: true;
+    return NextResponse.json({
+      success: true,
       result,
       searchResults,
       query,
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Cycle detection, error:', error);
-    return NextResponse.json(;
-      { error: 'Cycle detection failed' },
-      { status: 500 }
+    console.error('Cycle detection error:', error);
+    return NextResponse.json(
+      { error: 'Cycle detection failed' }, { status: 500 }
     );
 }
 }
-export const _dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";

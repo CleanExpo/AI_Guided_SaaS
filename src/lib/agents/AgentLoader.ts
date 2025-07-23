@@ -55,7 +55,7 @@ export class AgentLoader {
   /**
    * Discover and load all available agents
    */
-  async discoverAgents(): Promise {
+  async discoverAgents(): Promise<any> {
     const result: AgentDiscoveryResult = {
   total_agents: 0,
     core_agents: [],
@@ -96,7 +96,7 @@ export class AgentLoader {
   /**
    * Load a specific agent by ID or role
    */
-  async loadAgentByIdentifier(identifier: string): Promise {
+  async loadAgentByIdentifier(identifier: string): Promise<any> {
     // First check if already loaded
     const _existingAgent = this.findLoadedAgent(identifier);
     if (existingAgent) {
@@ -115,7 +115,7 @@ export class AgentLoader {
 }
 }
 }
-    return {;
+    return {
       success: false,
     error: `Agent not, found: ${identifier}`
 }
@@ -123,7 +123,7 @@ export class AgentLoader {
   /**
    * Get agents required for next stage based on current project state
    */
-  async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise {
+  async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise<any> {
     const stageAgentMap: Record<string, string[]> = {
       'requirements': ['ARCHITECT'],
       'architecture': ['ARCHITECT', 'FRONTEND', 'BACKEND'],
@@ -151,7 +151,7 @@ export class AgentLoader {
   /**
    * Load agent coordination chain for full project execution
    */
-  async loadExecutionChain(projectRequirements: string): Promise {
+  async loadExecutionChain(projectRequirements: string): Promise<any> {
     // Load all core agents
     const executionChain: AgentConfig[] = [];
     const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS'];
@@ -217,7 +217,7 @@ export class AgentLoader {
 }
   getAgentsByCategory(category: 'core' | 'orchestration' | 'specialist'): AgentConfig[] { const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS'];
     const orchestrationRoles = ['ORCHESTRATOR', 'CONDUCTOR', 'COORDINATOR', 'TRACKER'];
-    return Array.from(this.loadedAgents.values()).filter((agent) => { switch (category) {;
+    return Array.from(this.loadedAgents.values()).filter((agent) => { switch (category) {
         case 'core':
     return coreRoles.includes(agent.role);
     break;
@@ -248,21 +248,21 @@ break;
       return [];
 }
 }
-  private async loadAgent(filename: string): Promise {
+  private async loadAgent(filename: string): Promise<any> {
     try {
       const _filePath = join(this.agentsPath, filename);
       const _fileContent = readFileSync(filePath, 'utf-8');
       const agent: AgentConfig = JSON.parse(fileContent);
       // Validate required fields
       if(!agent.agent_id || !agent.name || !agent.role) {
-        return {;
+        return {
           success: false,
     error: 'Missing required fields (agent_id, name, role)'
 }
 }
       return { success: true, agent };
     } catch (error) {
-      return {;
+      return {
         success: false,
     error: `Parse, error: ${error}`
 }
@@ -311,7 +311,7 @@ break;
           agent.coordination_protocols.coordinates_with
         )
 }
-  private async storeInMemory(result: AgentDiscoveryResult): Promise {
+  private async storeInMemory(result: AgentDiscoveryResult): Promise<any> {
     try {
       // Store agent discovery results in memory system
       await mcp__memory__create_entities([{
@@ -338,15 +338,15 @@ break;
 }
 }
 // Convenience functions
-export async function discoverAllAgents(): Promise {
+export async function discoverAllAgents(): Promise<any> {
   const loader = AgentLoader.getInstance();
   return loader.discoverAgents();
 };
-export async function loadRequiredAgents(stage: string, projectType?: string): Promise {
+export async function loadRequiredAgents(stage: string, projectType?: string): Promise<any> {
   const loader = AgentLoader.getInstance();
   return loader.getRequiredAgentsForStage(stage, projectType);
 };
-export async function loadExecutionChain(requirements: string): Promise {
+export async function loadExecutionChain(requirements: string): Promise<any> {
   const loader = AgentLoader.getInstance();
   return loader.loadExecutionChain(requirements);
 };

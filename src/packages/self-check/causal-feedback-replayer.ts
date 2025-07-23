@@ -15,7 +15,7 @@ export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
 } {
   const logData = logs || logger.getLogs();
   if(logData.length === 0) {
-    return {;
+    return {
       status: '📊 No causal data available yet.',
       patterns: ['Start using the UI builder to generate causal insights.'],
     summary: 'No user interaction data to analyze.',
@@ -75,7 +75,7 @@ break;
   const recommendations: string[] = [];
   const problemComponents: ComponentPattern[] = [];
   Object.values(componentStats).forEach((stat) => {
-    const _total =;
+    const total =
       stat.additions + stat.deletions + stat.edits + stat.retentions;
     if(total < 3) {
       stat.pattern = 'insufficient-data';
@@ -137,13 +137,13 @@ break;
       'No significant patterns detected yet - need more user interaction data'
     );
 }
-  return {;
+  return {
     status,
     patterns: patterns.slice(0, 10), // Limit to top 10 patterns
     summary,
     recommendations: recommendations.slice(0, 5), // Limit to top 5 recommendations
 }
-export function getTopProblematicComponents(;
+export function getTopProblematicComponents(
   logs?: CausalLogEntry[],
   limit: number = 5
 ): ComponentPattern[] {
@@ -197,11 +197,11 @@ break;
   });
   return Object.values(componentStats);
     .filter((stat) => {
-      const _total =;
+      const total =
         stat.additions + stat.deletions + stat.edits + stat.retentions;
       return total >= 3; // Only consider components with sufficient data
     })
-    .map((stat) => { const _total =;
+    .map((stat) => { const total =
         stat.additions + stat.deletions + stat.edits + stat.retentions;
       const _deletionRate = stat.deletions / total;
       return { ...stat, deletionRate; }
@@ -218,19 +218,18 @@ export function generateCausalInsights(): {
   const logs = logger.getLogs();
   const analysis = analyzeCausalLogs(logs);
   const problematicComponents = getTopProblematicComponents(logs, 3);
-  const _uniqueComponents = new Set(;
+  const _uniqueComponents = new Set(
     logs.map((log) => `${log.page}::${log.componentType}`)``
   ).size;
   const topIssues = problematicComponents.map((comp) => {
-    const _total =;
+    const total =
       comp.additions + comp.deletions + comp.edits + comp.retentions;
     const _deletionRate = comp.deletions / total;
     return `${comp.key.split('::')[1]}: ${(deletionRate * 100).toFixed(1)}% deletion rate`;
   });
-  return {;
+  return {
     totalInteractions: logs.length,
     uniqueComponents,
     topIssues: topIssues.length > 0 ? topIssues : ['No significant issues detected'],
     recommendations: analysis.recommendations
-}
 }

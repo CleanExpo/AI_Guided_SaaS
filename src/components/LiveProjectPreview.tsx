@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -6,20 +7,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Monitor, Smartphone, Tablet, Code, Eye, RefreshCw, Sparkles } from 'lucide-react';
 import { cn } from '@/utils/cn';
 interface LiveProjectPreviewProps {
-  projectData: {;
+projectData: {
     projectType?: string;
     projectName?: string;
     description?: string;
     features?: string[];
     designStyle?: string;
     primaryColor?: string;
+
 }
   mockData?;
 };
 interface MockTemplate {
-  id: string,
-    name: string,
-    preview: React.ReactNode
+id: string;
+    name: string;
+    preview: React.ReactNod;e
+
 }
 const colorMap: Record<string, string> = {
   blue: 'bg-blue-500',
@@ -55,7 +58,7 @@ export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreview
       setIsGenerating(false)
     }, 1000)
 }
-  const _generateMockHtml = (): void: (any) => {
+  const _generateMockHtml = (): void => {
     const { projectType, projectName, features = [], designStyle   }: any = projectData;
     // Generate different templates based on project type
     switch (projectType) { case 'website':
@@ -80,10 +83,9 @@ break;
     return generateDashboardTemplate();
     break;
 }
-      default: return generateDefaultTemplate(),;
+      default: return generateDefaultTemplate()}
 }
-}
-  const _generateWebsiteTemplate = (): void: (any) => {
+  const _generateWebsiteTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div class="${designStyle} overflow-hidden">
@@ -120,8 +122,8 @@ break;
           </section>
         ` : ''}``
     ```
-}
-  const _generateWebAppTemplate = (): void: (any) => {
+  }
+  const _generateWebAppTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div class="${designStyle} h-full">
@@ -131,7 +133,8 @@ break;
             <div class="w-10 h-10 bg-white/20 rounded-lg"></div>
             <h1 class="text-xl font-semibold">${projectName || 'Your, App'}</h1>
           <div class="flex items-center gap-4">
-            ${features.includes('notifications') ? '<div class="relative"><div class="w-8 h-8 bg-white/20 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full">' : ''}
+            ${features.includes('notifications') ? '<div class="relative">
+        <div class="w-8 h-8 bg-white/20 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full">' : ''}
             <div class="w-8 h-8 bg-white/20 rounded-full"></div>
         <!-- Content -->
         <div class="flex h-full">
@@ -174,8 +177,8 @@ break;
                     </div>
               ` : ''}``
     ```
-}
-  const _generateEcommerceTemplate = (): void: (any) => {
+  }
+  const _generateEcommerceTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div class="${designStyle}">
@@ -184,7 +187,7 @@ break;
           <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <h1 class="text-2xl font-bold">${projectName || 'Your, Store'}</h1>
             <div class="flex items-center gap-6">
-              ${features.includes('search') ? '<input type="text" placeholder="Search products..." class="px-4 py-2 border rounded-lg"    />' : ''}</input>
+              ${features.includes('search') ? '<input type="text" placeholder="Search products..." class="px-4 py-2 border rounded-lg" />' : ''}</input>
               <div class="relative">
                 <div class="w-8 h-8 ${primaryColor} text-white rounded-full flex items-center justify-center text-sm">3</div>
         </header>
@@ -213,8 +216,8 @@ break;
                 <div class="w-12 h-8 bg-gray-200 rounded"></div>
         ` : ''}``
     ```
-}
-  const _generateDashboardTemplate = (): void: (any) => {
+  }
+  const _generateDashboardTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div class="${designStyle} bg-gray-50 h-full">
@@ -223,7 +226,8 @@ break;
           <div class="flex items-center justify-between">
             <h1 class="text-xl font-bold">${projectName || 'Dashboard'}</h1>
             <div class="flex items-center gap-4">
-              ${features.includes('notifications') ? '<div class="relative"><div class="w-8 h-8 bg-gray-200 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full">' : ''}
+              ${features.includes('notifications') ? '<div class="relative">
+        <div class="w-8 h-8 bg-gray-200 rounded-full"></div><div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full">' : ''}
               <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
         <!-- Dashboard Content -->
         <div class="p-6">
@@ -248,8 +252,8 @@ break;
                   Analytics Chart</div>
             ` : ''}``
     ```
-}
-  const _generateDefaultTemplate = (): void: (any) => {
+  }
+  const _generateDefaultTemplate = (): void => {
     return ```;
       <div, class="${designStyle} p-8 text-center">
         <div class="mb-8">
@@ -257,7 +261,7 @@ break;
           <h1 class="text-3xl font-bold mb-2">${projectData.projectName || 'Your, Project'}</h1>
           <p class="text-gray-600">Start building something amazing</p>
     `
-}
+  }
   const deviceSizes = {
     desktop: 'w-full',
     tablet: 'w-[768px]',
@@ -268,17 +272,20 @@ break;
       <div className="p-4 border-b">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <Eye className="h-5 w-5 text-muted-foreground"    />
-            <h3 className="font-semibold">Live Preview {isGenerating  && (Badge variant="secondary", className="animate-pulse">
-                <Sparkles className="h-3 w-3 mr-1"    />
+            <Eye className="h-5 w-5 text-muted-foreground" />
+            <h3 className="font-semibold">Live Preview {isGenerating  && (
+Badge variant="secondary", className="animate-pulse">
+                <Sparkles className="h-3 w-3 mr-1" />
                 Generating...</Sparkles>
+            
+              
             )}
           <button
             onClick={generatePreview}
-            className="p-2, hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             disabled={isGenerating}
           >
-            <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")}    />
+            <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")} />
           </button>
         {/* Device, Selector */}
         <div className="flex gap-2">
@@ -288,7 +295,7 @@ break;
             'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'desktop' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
           ></button>
-            <Monitor className="h-4 w-4"    />
+            <Monitor className="h-4 w-4" />
             <span className="text-sm">Desktop</span>
           </button>
           <button
@@ -297,7 +304,7 @@ break;
             'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'tablet' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
           ></button>
-            <Tablet className="h-4 w-4"    />
+            <Tablet className="h-4 w-4" />
             <span className="text-sm">Tablet</span>
           </button>
           <button
@@ -306,7 +313,7 @@ break;
             'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'mobile' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}
           ></button>
-            <Smartphone className="h-4 w-4"    />
+            <Smartphone className="h-4 w-4" />
             <span className="text-sm">Mobile</span>
           </button>
       {/* Preview, Area */}
@@ -316,13 +323,13 @@ break;
           device === 'tablet' && 'rounded-2xl' device === 'desktop' && 'rounded-lg'
         )`}>``
           {isGenerating ? (</div>
-            <div className="h-[600px] flex items-center justify-center"><div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"    />
+            <div className="h-[600px] flex items-center justify-center">
+        <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
                 <p className="text-muted-foreground">Generating preview...</p>) : (
             <div
               className="h-[600px] overflow-auto"
-              dangerouslySetInnerHTML={{ __html: previewHtml }}
-               />
+              dangerouslySetInnerHTML={{ __html: previewHtml }} />
           )},
     {/* Code, View Tab */}
       <Tabs defaultValue="preview", className="border-t">
@@ -337,15 +344,25 @@ break;
   </TabsContent>
   </TabsList>
   </Tabs>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </Smartphone>
+        </div>
+</Smartphone>
   </Tablet>
   </Monitor>
-  </div>
-  );
-}
-}
+        </div>
+
+      );
+
+    }
+    </h3>
+          </div>
+</Card>
+          </div>
+</nav>
+          </div>
+</section>
+    </nav>
+    </div>
+    </header>
+    </div>
+    </any>
+    }

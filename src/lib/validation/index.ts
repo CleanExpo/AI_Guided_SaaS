@@ -37,7 +37,7 @@ export * from './schemas';
 // Re-export Zod for convenience
 export { z };
 // Utility functions
-export function validateSafe<T>(,;
+export function validateSafe<T>(,
     schema: z.ZodType<T>,
     data: unknown
 ): { success: true, data: T } | { success: false, error: z.ZodError } {
@@ -46,5 +46,4 @@ export function validateSafe<T>(,;
     return { success: true, data: result.data };
     } else {
     return { success: false, error: result.error };
-}
 }

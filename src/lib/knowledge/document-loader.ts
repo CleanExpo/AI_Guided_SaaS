@@ -81,13 +81,13 @@ break;
   /**
    * Load a single file
    */
-  async loadFile(filePath: string): Promise {
+  async loadFile(filePath: string): Promise<any> {
     try {
       const _content = await fs.readFile(filePath, 'utf-8');
       const stats = await fs.stat(filePath);
       const _ext = path.extname(filePath).slice(1).toLowerCase();
       const _language = this.languageMap[ext] || 'plaintext';
-      return [{;
+      return [{
   id: this.generateId(),
         content,
     metadata: {
@@ -106,7 +106,7 @@ break;
   /**
    * Load content from URL
    */
-  async loadUrl(url: string): Promise {
+  async loadUrl(url: string): Promise<any> {
     try {
       const response = await fetch(url);
       if(!response.ok) {
@@ -114,7 +114,7 @@ break;
 }
       const _content = await response.text();
       const _contentType = response.headers.get('content-type') || 'text/plain';
-      return [{;
+      return [{
   id: this.generateId(),
         content,
     metadata: {
@@ -132,7 +132,7 @@ break;
   /**
    * Load content from GitHub
    */
-  async loadGithub(repoPath: string): Promise {
+  async loadGithub(repoPath: string): Promise<any> {
     // Parse GitHub URL or path
     const _match = repoPath.match(/github\.com\/([^\/]+)\/([^\/]+)(?:\/blob\/([^\/]+)\/(.+))?/);
     if(!match) {
@@ -148,7 +148,7 @@ break;
 }
       const data = await response.json();
       const _content = Buffer.from(data.content, 'base64').toString('utf-8');
-      return [{;
+      return [{
   id: this.generateId(),
         content,
     metadata: {
@@ -168,7 +168,7 @@ break;
 }
       const data = await response.json();
       const _content = Buffer.from(data.content, 'base64').toString('utf-8');
-      return [{;
+      return [{
   id: this.generateId(),
         content,
     metadata: {
@@ -185,12 +185,12 @@ break;
   /**
    * Load an entire codebase
    */
-  async loadCodebase(basePath: string, options?: CodebaseOptions): Promise {
+  async loadCodebase(basePath: string, options?: CodebaseOptions): Promise<any> {
     const files: LoadedFile[] = [];
     const _maxSize = options?.maxFileSize || 1024 * 1024 // 1MB default;
     // Default patterns
     const _defaultInclude = ['**/*.{js,jsx,ts,tsx,py,java,cpp,c,go,rs,rb,php,cs}'];
-    const _defaultExclude = [;,
+    const _defaultExclude = [
   '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
@@ -343,5 +343,4 @@ break;
 }
   private generateId() {
     return Math.random().toString(36).substring(2, 15);
-}
 }

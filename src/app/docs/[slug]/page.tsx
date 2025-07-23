@@ -1,11 +1,12 @@
 import React from 'react';
-interface DocPage  {
-  slug: string,
-    title: string,
-    description: string,
-    content: string,
-    category: string,
+interface DocPage {
+slug: string;
+    title: string;
+    description: string;
+    content: string;
+    category: string;
     lastUpdated: string
+
 }
 const docPages: Record<string, DocPage> = {
   'quick-start': {slug: 'quick-start',
@@ -54,22 +55,24 @@ Delete a project.`,`
     category: 'API',
     lastUpdated: '2025-01-14'
 }
-props: anyexport function generateStaticParams(): void {
-  return Object.keys(docPages).map((slug) => ({;
+export function generateStaticParams() {
+  return Object.keys(docPages).map((slug) => ({
   slug: slug))
 }
 export default function DocPage({ params }: { params: { slug: string } }): { params: { slug: string } }) {
   const doc = docPages[params.slug];
   if(!doc) {
-    return (;
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="text-center">
+    return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900">Documentation Not Found</h1>
           <p className="text-gray-600 mt-2">The requested documentation page does not exist.</p>
-        </div>
-      </div>
-    );
-}
-  return (;
+              </div>
+
+            );
+
+          }
+  return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm p-8">
@@ -82,10 +85,8 @@ export default function DocPage({ params }: { params: { slug: string } }): { par
             <p className="text-gray-600 mt-2">{doc.description}</p>
           </div>
           <div className="prose max-w-none">
-            <div className="whitespace-pre-wrap">{doc.content}</div>
+            <div className="whitespace-pre-wrap">{doc.content}      </div>
+);
+
           </div>
-        </div>
-      </div>
-    </div>
-  );
 }

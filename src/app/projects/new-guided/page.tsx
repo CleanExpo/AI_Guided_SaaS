@@ -1,13 +1,16 @@
+'use client';
+
 import React from 'react';
-'use client';import { useState } from 'react';
+
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-props: anyexport default function NewGuidedProjectPage(): void {
-  const [isLoading, setIsLoading]: any[] = useState<any>(false);
-  const [completedData, setCompletedData]: any[] = useState<any>({
+export default function NewGuidedProjectPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [completedData, setCompletedData] = useState({
     name: '',
-    description: '',;
+    description: '',
     type: 'web'
   });
   const _handleGenerateProject = async () => {
@@ -54,17 +57,17 @@ props: anyexport default function NewGuidedProjectPage(): void {
                 <Input
                   type="text"
                   value={completedData.name}
-                  onChange: any={(e) => setCompletedData(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={(e) => setCompletedData(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="Enter project name"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  // Description
-                </label>
+                    Description
+                  </label>
                 <textarea
                   value={completedData.description}
-                  onChange: any={(e) => setCompletedData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) => setCompletedData(prev => ({ ...prev, description: e.target.value }))}
                   placeholder="Describe your project"
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                   rows={3}
@@ -76,7 +79,7 @@ props: anyexport default function NewGuidedProjectPage(): void {
                 </label>
                 <select
                   value={completedData.type}
-                  onChange: any={(e) => setCompletedData(prev => ({ ...prev: type: e.target.value }))}
+                  onChange={(e) => setCompletedData(prev => ({ ...prev: type: e.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 >
                   <option value="web">Web Application</option>
@@ -95,6 +98,9 @@ props: anyexport default function NewGuidedProjectPage(): void {
           </CardContent>
         </Card>
       </div>
-    </div>
   );
-}
+
+    </textarea>
+    </div>
+    </any>
+    }

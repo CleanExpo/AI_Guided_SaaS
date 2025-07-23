@@ -1,12 +1,13 @@
 import React from 'react';
 
 interface TaskQueueVisualizerProps {
-  queue?: Array<{
-    id: string,
-    name: string,
-    priority: string,
+queue?: Array<{
+    id: string;
+    name: string;
+    priority: string;
     status: string
-  }>;
+  
+}>;
 }
 export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
   return (
@@ -34,7 +35,7 @@ export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
             </div>
           ))
         )}
-      </div>
-    </div>
-  );
-}
+            </div>
+);
+
+      }

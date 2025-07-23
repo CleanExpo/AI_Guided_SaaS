@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 export function Header() {
@@ -21,7 +23,8 @@ export function Header() {
             <Link href="/auth/signup">Sign Up</Link>
           </Button>
         </div>
-      </div>
     </header>
   );
-}
+
+    </div>
+  }

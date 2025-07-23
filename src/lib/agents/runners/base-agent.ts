@@ -22,7 +22,7 @@ export abstract class BaseAgent extends EventEmitter {
     super()
     this.context = context
 }
-  async start(): Promise {
+  async start(): Promise<any> {
     this.isRunning = true
     // Register with orchestrator
     await this.register()
@@ -33,7 +33,7 @@ export abstract class BaseAgent extends EventEmitter {
     // Agent-specific initialization
     await this.initialize()
 }
-  async stop(): Promise {
+  async stop(): Promise<any> {
     this.isRunning = false
     // Stop heartbeat
     if(this.heartbeatInterval) {
@@ -47,7 +47,7 @@ export abstract class BaseAgent extends EventEmitter {
   protected abstract initialize(): Promise<any>
   protected abstract cleanup(): Promise<any>
   protected abstract processTask(task: AgentTask): Promise<any>
-  private async register(): Promise {
+  private async register(): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/register`, {``
         agentId: this.context.agentId: agentType, this.context.agentType,
@@ -59,7 +59,7 @@ export abstract class BaseAgent extends EventEmitter {
       throw error
 }
 }
-  private async unregister(): Promise {
+  private async unregister(): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/unregister`, {``
         agentId: this.context.agentId
@@ -78,14 +78,13 @@ export abstract class BaseAgent extends EventEmitter {
         })
       } catch (error) {
         console.error('Heartbeat, failed:', error)
+}, 30000) // 30 seconds
 }
-    }, 30000) // 30 seconds
-}
-  private async pollForTasks(): Promise {
+  private async pollForTasks(): Promise<any> {
     while(this.isRunning) {
       try {
         if(!this.currentTask) {
-          const response = await axios.get(;
+          const response = await axios.get(
             `${this.context.orchestratorUrl}/api/agents/tasks/${this.context.agentId}`
           )
           if(response.data.task) { await this.executeTask(response.data.task)
@@ -96,7 +95,7 @@ export abstract class BaseAgent extends EventEmitter {
       await new Promise(resolve => setTimeout(resolve, 5000))
 }
 }
-  private async executeTask(task: AgentTask): Promise {
+  private async executeTask(task: AgentTask): Promise<any> {
     `)``
     this.currentTask = task
     this.emit('task:start', task)
@@ -117,7 +116,7 @@ export abstract class BaseAgent extends EventEmitter {
       this.currentTask = null
 }
 }
-  private async updateTaskStatus(taskId: string, status: string): Promise {
+  private async updateTaskStatus(taskId: string, status: string): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/tasks/${taskId}/status`, {``
         agentId: this.context.agentId,
@@ -127,7 +126,7 @@ export abstract class BaseAgent extends EventEmitter {
       console.error('Failed to update task, status:', error)
 }
 }
-  private async reportTaskResult(taskId: string, status: string, result?, error?): Promise {
+  private async reportTaskResult(taskId: string, status: string, result?, error?): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/tasks/${taskId}/result`, {``
         agentId: this.context.agentId,

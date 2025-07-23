@@ -34,7 +34,7 @@ class EmailService {
   /**
    * Send a generic email
    */
-  async sendEmail(options: EmailOptions): Promise {
+  async sendEmail(options: EmailOptions): Promise<any> {
     if(!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' };
 }
@@ -54,25 +54,25 @@ class EmailService {
          });
       if(!response.ok) {
         const errorData = await response.json();
-        return {;
+        return {
           success: false,
     error: errorData.message || `HTTP ${response.status}`
 }
 }
       const data = await response.json();
-      return {;
+      return {
         success: true,
     messageId: data.id
 }
     } catch (error) { console.error('Email sending, failed:', error);
-      return {;
+      return {
         success: false,
     error: error instanceof Error ? error.message : 'Unknown error'
 }
   /**
    * Send welcome email to new users
    */
-  async sendWelcomeEmail(data: WelcomeEmailData): Promise {
+  async sendWelcomeEmail(data: WelcomeEmailData): Promise<any> {
     const _html = `;``
       <!DOCTYPE html>
       <html>
@@ -122,7 +122,7 @@ class EmailService {
       If you have any questions, feel free to reach out to our support team.
       Happy building!
     `
-    return this.sendEmail({ to: data.userEmail,;
+    return this.sendEmail({ to: data.userEmail,
     subject: 'Welcome to AI Guided SaaS Builder! 🚀',
       html,
       text });
@@ -130,7 +130,7 @@ class EmailService {
   /**
    * Send notification email
    */
-  async sendNotificationEmail(data: NotificationEmailData): Promise {
+  async sendNotificationEmail(data: NotificationEmailData): Promise<any> {
     const _html = `;``
       <!DOCTYPE html>
       <html>
@@ -184,7 +184,7 @@ class EmailService {
   /**
    * Send password reset email
    */
-  async sendPasswordResetEmail(email: string, resetUrl: string, userName: string): Promise {
+  async sendPasswordResetEmail(email: string, resetUrl: string, userName: string): Promise<any> {
     const _html = `;``
       <!DOCTYPE html>
       <html>
@@ -242,7 +242,7 @@ class EmailService {
       If you didn't request this password reset, please contact our support team immediately.
       Stay secure!
     `
-    return this.sendEmail({ to: email,;
+    return this.sendEmail({ to: email,
     subject: 'Reset Your Password - AI Guided SaaS Builder',
       html,
       text });
@@ -250,7 +250,7 @@ class EmailService {
   /**
    * Test email configuration
    */
-  async testConfiguration(): Promise {
+  async testConfiguration(): Promise<any> {
     if(!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' };
 }
@@ -264,12 +264,12 @@ class EmailService {
       if(response.ok) {
         return { success: true };
     } else {
-        return {;
+        return {
           success: false,
     error: `API key validation, failed: ${response.status}`
 }
 }
-    } catch (error) { return {;
+    } catch (error) { return {
         success: false,
     error: error instanceof Error ? error.message : 'Unknown error'
 }
@@ -286,7 +286,7 @@ export const _sendWelcomeEmail = (data: WelcomeEmailData) =>;
   emailService.sendWelcomeEmail(data);
 export const _sendNotificationEmail = (data: NotificationEmailData) =>;
   emailService.sendNotificationEmail(data);
-export const _sendPasswordResetEmail = (,;
+export const _sendPasswordResetEmail = (,
     email: string,
     resetUrl: string,
     userName: string

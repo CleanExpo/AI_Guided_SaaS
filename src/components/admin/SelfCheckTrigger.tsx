@@ -1,14 +1,17 @@
 'use client';
+
 import React, { useState } from 'react';
 interface HealthMetrics {
-  moduleScore: number,
-    dependencyScore: number,
-    securityScore: number,
-    performanceScore: number,
+moduleScore: number;
+    dependencyScore: number;
+    securityScore: number;
+    performanceScore: number;
     overallHealth: number
+
 }
 interface SelfCheckTriggerProps {
-  onReportGenerated? (metrics: HealthMetrics) => void
+onReportGenerated? (metrics: HealthMetrics) => voi;d
+
 }
 const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated  }) => {
   const [isRunning, setIsRunning] = useState<any>(false);
@@ -40,11 +43,12 @@ const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated  
       <button
         onClick={runSelfCheck}
         disabled={isRunning}
-        className="px-4 py-2 bg-blue-600 text-white rounded, hover:bg-blue-700, disabled:opacity-50"
+        className="px-4 py-2 bg-blue-600 text-white rounded, hover:bg-blue-700 disabled:opacity-50"
       >
         {isRunning ? 'Running Check...' : 'Run Self Check'}
       </button>
-      {metrics  && (div className="mt-4 space-y-2"><div className="flex justify-between">
+      {metrics  && (
+div className="mt-4 space-y-2"><div className="flex justify-between">
             <span>Module, Health:</span>
             <span className="font-semibold">{metrics.moduleScore}%</span>
           </div>
@@ -64,9 +68,14 @@ const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated  
             <span>Overall, Health:</span>
             <span className="text-green-600">{metrics.overallHealth}%</span>
           </div>
-        </div>
-      )}
+      
+              
+            )}
     </div>
   );
-};
+
+    </HealthMetrics>
+    </any>
+    </SelfCheckTriggerProps>
+  };
 export default SelfCheckTrigger;

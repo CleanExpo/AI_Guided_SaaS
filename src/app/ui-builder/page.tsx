@@ -1,8 +1,10 @@
 // @ts-nocheck
 import React from 'react';
-'use client';import dynamic from 'next/dynamic';
+'use client';
+
+import dynamic from 'next/dynamic';
 // Dynamically import the UI Builder to avoid SSR issues with drag and drop
-const UIBuilderHomepage = dynamic(;
+const UIBuilderHomepage = dynamic(
   () => import('../../components/ui-builder/UIBuilderHomepage'),
   {
     ssr: false,
@@ -11,10 +13,11 @@ const UIBuilderHomepage = dynamic(;
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading UI Builder...</p>
         </div>
-      </div>
     )
   }
 ),
     propsexport default function UIBuilderPage(): void {
-  return <UIBuilderHomepage   />;
-}
+  return <UIBuilderHomepage />;
+
+    </div>
+  }

@@ -9,7 +9,7 @@ export interface AIServiceConfig {
 export interface AIResponse {
 
   message: string;
-  usage?: {;
+  usage?: {
     promptTokens: number,
     completionTokens: number,
     totalTokens: number
@@ -45,7 +45,7 @@ break;
     break;
 
         case 'fallback':
-return await this.generateFallbackResponse(prompt, systemPrompt),;
+return await this.generateFallbackResponse(prompt, systemPrompt),
     break;
 break;
 }
@@ -56,7 +56,7 @@ break;
       return await this.generateFallbackResponse(prompt, systemPrompt);
 }
 }
-  private async generateOpenAIResponse(prompt: string, systemPrompt?: string): Promise {
+  private async generateOpenAIResponse(prompt: string, systemPrompt?: string): Promise<any> {
     if(!this.openai) {
       throw new Error('OpenAI client not initialized');
 }
@@ -73,7 +73,7 @@ break;
     }};
     const choice = completion.choices[0];
     const usage = completion.usage;
-    return {;
+    return {
       message: choice.message.content || '',
     usage: usage
         ? {
@@ -86,7 +86,7 @@ break;
     provider: 'openai'
 }
 }
-  private async generateAnthropicResponse(prompt: string, systemPrompt?: string): Promise {
+  private async generateAnthropicResponse(prompt: string, systemPrompt?: string): Promise<any> {
     if(!this.anthropic) {
       throw new Error('Anthropic client not initialized');
 }
@@ -99,18 +99,18 @@ break;
     }};
     const content = response.content[0];
     const text = content.type === 'text' ? content.text : '';
-    return {;
+    return {
       message: text,
     usage: {
   promptTokens: response.usage.input_tokens,
     completionTokens: response.usage.output_tokens,
     totalTokens: response.usage.input_tokens + response.usage.output_tokens
-      }},
+      },
       model: response.model,
     provider: 'anthropic'
 }
 }
-  private async generateFallbackResponse(prompt: string, systemPrompt?: string): Promise {
+  private async generateFallbackResponse(prompt: string, systemPrompt?: string): Promise<any> {
     // Simple pattern-based responses for common requests
     const lowerPrompt = prompt.toLowerCase();
     let message = '';
@@ -122,7 +122,7 @@ interface ComponentProps {
   // Add your props here
 };
 export function Component({ }: ComponentProps): ComponentProps) {
-  return (;
+  return (
     <div>
       {/* Your component content */}
     </div>
@@ -145,19 +145,19 @@ For now, I can provide basic assistance, with: - Component templates
 - Code structure
 - General guidance```
 }
-    return {;
+    return {
       message,
     usage: {
   promptTokens: prompt.length / 4;
   // Rough estimate, completionTokens: message.length / 4,
     totalTokens: (prompt.length + message.length) / 4
-      }},
+      },
       model: 'fallback-v1',
       provider: 'fallback'
 }
 }
   // Utility method to switch providers dynamically
-  async switchProvider(provider: AIServiceConfig['provider'], apiKey?: string): Promise {
+  async switchProvider(provider: AIServiceConfig['provider'], apiKey?: string): Promise<any> {
     this.config.provider = provider;
     if(provider === 'openai' && apiKey) {
       this.config.apiKey = apiKey;
@@ -176,5 +176,4 @@ For now, I can provide basic assistance, with: - Component templates
   estimateTokens(text: string): number {
     // Rough, estimation: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
-}
 }

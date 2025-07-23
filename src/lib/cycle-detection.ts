@@ -110,7 +110,7 @@ class CycleDetectionEngine {
   detectCycle(sessionId: string): CycleDetectionResult {
     const sessionAttempts = this.attempts.get(sessionId) || [];
     if(sessionAttempts.length < this.CYCLE_THRESHOLD) {
-      return {;
+      return {
         isCyclic: false,
     cycleLength: 0,
     confidence: 0,
@@ -124,13 +124,13 @@ class CycleDetectionEngine {
     const cycleAnalysis = this.analyzeCyclicBehavior(patterns);
     if(cycleAnalysis.isCyclic) {
       const _relevantSources = this.identifyRelevantDocumentation(recentAttempts);
-      return {;
+      return {
         ...cycleAnalysis,
         documentationSources: relevantSources,
     suggestedBreakpoint: this.generateBreakpointSuggestion(recentAttempts)
 }
 }
-    return {;
+    return {
       ...cycleAnalysis,
       suggestedBreakpoint: '',
     documentationSources: []
@@ -139,7 +139,7 @@ class CycleDetectionEngine {
   /**
    * Autonomously searches documentation sources for solutions
    */
-  async searchDocumentationSources(problemDescription: string, errorMessages: string[], relevantSources: string[]): Promise {
+  async searchDocumentationSources(problemDescription: string, errorMessages: string[], relevantSources: string[]): Promise<any> {
     const _searchQueries = this.generateSearchQueries(problemDescription, errorMessages);
     const results: DocumentationSearchResult[] = [];
     for(const sourceName of relevantSources) {
@@ -161,7 +161,7 @@ class CycleDetectionEngine {
    */
   generateBreakpointSuggestion(attempts: ProblemAttempt[]) {
     const commonErrors = this.extractCommonErrors(attempts);
-    const suggestions = [;,
+    const suggestions = [
   "🔄 **Cycle Detected - Time to Break the Pattern!**",
       "",
       "**Recommended: Actions:**",
@@ -209,8 +209,7 @@ class CycleDetectionEngine {
 }
   private getRecentAttempts(attempts: ProblemAttempt[]): ProblemAttempt[] {
     const _cutoffTime = Date.now() - this.TIME_WINDOW;
-    return attempts.filter((attempt) => attempt.timestamp > cutoffTime),;
-}
+    return attempts.filter((attempt) => attempt.timestamp > cutoffTime)}
   private identifyPatterns(attempts: ProblemAttempt[]): Map {
     const patterns = new Map<string, number>();
     attempts.forEach((attempt) => {
@@ -251,7 +250,7 @@ class CycleDetectionEngine {
     const _isCyclic = repeatedPatterns.length > 0;
     const _cycleLength = patterns.size > 0 ? Math.max(...Array.from(patterns.values())) : 0;
     const _confidence = isCyclic ? Math.min(cycleLength / this.CYCLE_THRESHOLD, 1) : 0;
-    return {;
+    return {
       isCyclic,
       cycleLength,
       confidence,
@@ -299,10 +298,10 @@ class CycleDetectionEngine {
       .filter((word) => word.length > 3 && !commonWords.has(word))
       .slice(0, 5);
 }
-  private async searchDocumentationSource(source: DocumentationSource, queries: string[]): Promise {
+  private async searchDocumentationSource(source: DocumentationSource, queries: string[]): Promise<any> {
     // This would integrate with actual search APIs or web scraping
     // For now, return a structured result format;
-    const _searchUrl = `${source.baseUrl}?q=${encodeURIComponent(queries[0])}`return {;
+    const _searchUrl = `${source.baseUrl}?q=${encodeURIComponent(queries[0])}`return {
       sourceName: source.name,
     sourceUrl: source.baseUrl,
       searchUrl,

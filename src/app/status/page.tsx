@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'System Status - AI Guided SaaS Platform',
   description: 'Real-time status of our platform services and infrastructure'
 };
-const services = [;,
+const services = [
   { name: 'API Gateway', status: 'operational', uptime: '99.98%' },
   { name: 'Web Application', status: 'operational', uptime: '99.95%' },
   { name: 'Database', status: 'operational', uptime: '99.99%' },
@@ -16,7 +16,7 @@ const services = [;,
   { name: 'Authentication', status: 'operational', uptime: '99.96%' },
   { name: 'AI Processing', status: 'maintenance', uptime: '99.92%' }
 ];
-const incidents = [;,
+const incidents = [
   {
   id: 1,
     title: 'Scheduled Maintenance - AI Processing Services',
@@ -54,14 +54,13 @@ break;
 
 
     case 'outage':
-    return 'bg-red-100 text-red-800',;
+    return 'bg-red-100 text-red-800',
     break;
 }
-    default: return 'bg-gray-100 text-gray-800',;
-}
+    default: return 'bg-gray-100 text-gray-800'}
 const _getStatusIcon = (status: string) => { switch (status) {
     case 'operational':
-    return<CheckCircle className="h-4 w-4 text-green-600"    />;
+    return<CheckCircle className="h-4 w-4 text-green-600" />;
     break;
 
     break;
@@ -69,7 +68,7 @@ break;
 
 
     case 'maintenance':
-    return<Clock className="h-4 w-4 text-yellow-600"    />;
+    return<Clock className="h-4 w-4 text-yellow-600" />;
     break;
 
     case 'degraded':
@@ -77,16 +76,16 @@ break;
 break;
 
 case 'outage':
-    return<AlertCircle className="h-4 w-4 text-red-600"    />,
+    return<AlertCircle className="h-4 w-4 text-red-600" />,
     break;
 }
-    default: return<CheckCircle className="h-4 w-4 text-gray-600"    />
+    default: return<CheckCircle className="h-4 w-4 text-gray-600" />
 }
-props: anyexport default function StatusPage(): void {
+export default function StatusPage() {
   const _overallStatus = services.some(s => s.status === 'outage') ? 'outage' :;
                        services.some(s => s.status === 'degraded') ? 'degraded' :
                        services.some(s => s.status === 'maintenance') ? 'maintenance' : 'operational',
-  return (;
+  return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-8">
@@ -124,8 +123,7 @@ props: anyexport default function StatusPage(): void {
                           <h3 className="font-medium text-gray-900">{service.name}</h3>
                           <p className="text-sm text-gray-600">Uptime: {service.uptime}</p>
                         </div>
-                      </div>
-                      <Badge className={`${getStatusColor(service.status)} border-0`}>`
+                      <Badge className={`${getStatusColor(service.status)} border-0`}>
                         {service.status.charAt(0).toUpperCase() + service.status.slice(1)}
                       </Badge>
                     </div>
@@ -146,13 +144,12 @@ props: anyexport default function StatusPage(): void {
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="font-medium text-gray-900">{incident.title}</h3>
                         <div className="flex items-center space-x-2">
-                          <Badge className={`${getStatusColor(incident.status)} border-0`}>`
+                          <Badge className={`${getStatusColor(incident.status)} border-0`}>
                             {incident.status.replace('-', ' ')}
                           </Badge>
                           <Badge variant="outline">{incident.severity}
                           </Badge>
                         </div>
-                      </div>
                       <p className="text-gray-600 mb-2">{incident.description}</p>
                       <p className="text-sm text-gray-500">{incident.startTime}</p>
                     </div>
@@ -168,7 +165,7 @@ props: anyexport default function StatusPage(): void {
               </CardHeader>
               <CardContent>
                 <div className="text-center py-8">
-                  <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4"    />
+                  <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">No Scheduled Maintenance</h3>
                   <p className="text-gray-600">
                     There are no scheduled maintenance windows at this time.
@@ -179,6 +176,7 @@ props: anyexport default function StatusPage(): void {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
   );
+
+          </div>
 }

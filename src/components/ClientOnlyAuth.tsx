@@ -1,9 +1,12 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { SessionProvider } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 interface ClientOnlyAuthProps {
-  children: React.ReactNode
+children: React.ReactNod;e
+
 }
 export function ClientOnlyAuth({ children }: ClientOnlyAuthProps): ClientOnlyAuthProps) {
   const [mounted, setMounted] = useState<any>(false);
@@ -29,4 +32,6 @@ export function SessionGuard({ children }: { children: React.ReactNode }): { chi
     return null;
 }
   return <React.Fragment>{children}</React.Fragment>;
-}
+
+    </any>
+    }

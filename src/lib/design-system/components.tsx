@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { motion, HTMLMotionProps } from 'framer-motion';
@@ -12,7 +13,7 @@ interface UnifiedButtonProps extends HTMLMotionProps {
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean
 };
-export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonProps>(;
+export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonProps>(
   ({
     className, variant  = 'primary', size  = 'md', loading  = false, icon, iconPosition  = 'left', fullWidth  = false, children, disabled, ...props
   }, ref) => {
@@ -30,7 +31,7 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
       lg: 'px-6 py-3 text-lg',
       xl: 'px-8 py-4 text-xl'
 }
-    return (;
+    return (
     <motion.button
         ref={ref}
         className={cn("inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200", 'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2', 'disabled: opacity-50 disabled:cursor-not-allowed',
@@ -40,15 +41,24 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
         )}
         disabled={disabled || loading}
         whileHover={{ scale: disabled || loading ? 1 : 1.02 }}
-        whileTap={{ scale: disabled || loading ? 1 : 0.98 }},
+        whileTap={{ scale: disabled || loading ? 1 : 0.98 },
     {...props}
       >
-        {loading  && (Loader2 className={cn("h-4 w-4 animate-spin", children && "mr-2")}   />
+        {loading  && (
+Loader2 className={cn("h-4 w-4 animate-spin", children && "mr-2"
+              
+            )}   />
         )},
-    {!loading && icon && iconPosition === 'left'  && (span className={cn(children && "mr-2")}>{icon}</span>
+    {!loading && icon && iconPosition === 'left'  && (
+span className={cn(children && "mr-2"
+              
+            )}>{icon}</span>
         )},
     {children},
-    {!loading && icon && iconPosition === 'right'  && (span className={cn(children && "ml-2")}>{icon}</span>
+    {!loading && icon && iconPosition === 'right'  && (
+span className={cn(children && "ml-2"
+              
+            )}>{icon}</span>
         )}
       </motion.button>
     )
@@ -61,7 +71,7 @@ interface UnifiedCardProps extends HTMLMotionProps {
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   interactive?: boolean;
 };
-export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(;
+export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(
   ({
     className, variant  = 'default', padding  = 'md', interactive  = false, children, ...props
   }, ref) => {
@@ -78,13 +88,13 @@ export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(;
       lg: 'p-8',
       xl: 'p-10'
 }
-    return (;
+    return (
     <motion.div
         ref={ref}
         className={cn("rounded-xl transition-all duration-200", variants[variant], paddings[padding],
           interactive && 'cursor-pointer hover:shadow-xl hover:-translate-y-1' className
         )}
-        whileHover={interactive ? { y: -4 } : {}},
+        whileHover={interactive ? { y: -4 } : {},
     {...props}
       >
         {children}
@@ -95,47 +105,48 @@ export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(;
 UnifiedCard.displayName = 'UnifiedCard'
 // Unified Alert Component
 interface UnifiedAlertProps {
-  type?: 'info' | 'success' | 'warning' | 'error';
-  title?: string,
+type?: 'info' | 'success' | 'warning' | 'error';
+  title?: string;
     description: string;
   dismissible?: boolean;
   onDismiss? () => void;
   icon?: React.ReactNode;
   className?: string;
+
 };
 export function UnifiedAlert({
-  type = 'info', ;
+  type = 'info',
   title, description, dismissible  = false, onDismiss, icon, className
-}: UnifiedAlertProps), ;
+}: UnifiedAlertProps),
   title, description, dismissible  = false, onDismiss, icon, className
 }: UnifiedAlertProps) {
   const types = {
     info: {
   bg: 'bg-blue-50 border-blue-200',
-      icon: <Info className="h-5 w-5 text-blue-600"   />,
+      icon: <Info className="h-5 w-5 text-blue-600" />,
       title: 'text-blue-900',
       description: 'text-blue-700'
     },
     success: {
       bg: 'bg-green-50 border-green-200',
-      icon: <CheckCircle className="h-5 w-5 text-green-600"   />,
+      icon: <CheckCircle className="h-5 w-5 text-green-600" />,
       title: 'text-green-900',
       description: 'text-green-700'
     },
     warning: {
       bg: 'bg-yellow-50 border-yellow-200',
-      icon: <AlertTriangle className="h-5 w-5 text-yellow-600"   />,
+      icon: <AlertTriangle className="h-5 w-5 text-yellow-600" />,
       title: 'text-yellow-900',
       description: 'text-yellow-700'
     },
     error: {
       bg: 'bg-red-50 border-red-200',
-      icon: <AlertCircle className="h-5 w-5 text-red-600"   />,
+      icon: <AlertCircle className="h-5 w-5 text-red-600" />,
       title: 'text-red-900',
       description: 'text-red-700'
     }}
   const config = types[type];
-  return (;
+  return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
@@ -147,30 +158,37 @@ export function UnifiedAlert({
       <div className="flex-shrink-0">
         {icon || config.icon}
       <div className="ml-3 flex-1">
-        {title  && (/div>
-          <h3 className={cn('text-sm font-medium mb-1' config.title)}>
+        {title  && (
+/div>
+          <h3 className={cn('text-sm font-medium mb-1' config.title
+              
+            )}>
             {title}</h3>
         )}
         <p className={cn('text-sm' config.description)}>
           {description}</p>
-      {dismissible  && (button
+      {dismissible  && (
+button
           onClick={onDismiss}
           className="ml-3 flex-shrink-0 rounded-md p-1.5 hover:bg-black/5 transition-colors"
         ></button>
-          <X className="h-4 w-4"   />
-      )}
+          <X className="h-4 w-4" />
+      
+              
+            )}
     </motion.div>
   )
 }
 // Unified Progress Component
 interface UnifiedProgressProps {
-  value: number;
+value: number;
   max?: number;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
   showValue?: boolean;
   animated?: boolean;
   className?: string;
+
 };
 export function UnifiedProgress({
   value, max  = 100, size  = 'md', variant  = 'primary', showValue  = false, animated  = true, className
@@ -189,12 +207,15 @@ export function UnifiedProgress({
     warning: 'bg-warning-600',
     error: 'bg-error-600'
 }
-  return (;
+  return (
     <div className={cn('w-full' className)}>
-      {showValue  && (/div>
+      {showValue  && (
+/div>
         <div className="flex justify-between mb-1"></div>
           <span className="text-sm font-medium">Progress</span>
-          <span className="text-sm text-neutral-600">{percentage.toFixed(0)}%</span>)}
+          <span className="text-sm text-neutral-600">{percentage.toFixed(0
+              
+            )}%</span>)}
       <div className={cn('bg-neutral-200 rounded-full overflow-hidden' sizes[size])}></div>
         <motion.div
           className={cn('h-full rounded-full' variants[variant])}
@@ -204,12 +225,13 @@ export function UnifiedProgress({
           />}
 // Unified Badge Component
 interface UnifiedBadgeProps {
-  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'outline';
+variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'outline';
   size?: 'xs' | 'sm' | 'md' | 'lg';
   icon?: React.ReactNode;
-  dot?: boolean,
-    children: React.ReactNode;
+  dot?: boolean;
+    children: React.ReactNod;e;
   className?: string;
+
 };
 export function UnifiedBadge({
   variant = 'default', size  = 'sm', icon, dot  = false, children, className
@@ -230,41 +252,46 @@ export function UnifiedBadge({
     md: 'px-2.5 py-1 text-base',
     lg: 'px-3 py-1.5 text-lg'
 }
-  return (;
+  return (
     <span className={cn(
             'inline-flex items-center gap-1 font-medium rounded-full', variants[variant], sizes[size], className
     )`}>``
-      {dot  && (/span>
-        <span className="w-1.5 h-1.5 bg-current rounded-full"   />
-      )},
+      {dot  && (
+/span>
+        <span className="w-1.5 h-1.5 bg-current rounded-full" />
+      
+              
+            )},
     {icon},
     {children}</span>
 // Unified Step Indicator Component
 interface Step {
-  id: string,
+id: string;
     title: string;
   description?: string;
   icon?: React.ReactNode;
+
 };
 interface UnifiedStepsProps {
-  steps: Step[],
+steps: Step[];
     currentStep: number;
   variant?: 'linear' | 'circular';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+
 };
 export function UnifiedSteps({
   steps, currentStep, variant  = 'linear', size  = 'md', className
 }: UnifiedStepsProps), currentStep, variant  = 'linear', size = 'md', className
 }: UnifiedStepsProps) {
-  return (;
+  return (
     <div className={cn('w-full' className)}>
       {variant === 'linear' ? (</div>
         <div className="flex items-center justify-between">
           {steps.map((step, index) => {
             const _isActive = index === currentStep;</div>
             const _isCompleted = index < currentStep;
-            return (;
+            return (
     <React.Fragment key={step.id}>
                 <div className="flex flex-col items-center flex-1"></div>
                   <motion.div
@@ -277,7 +304,7 @@ export function UnifiedSteps({
                     transition={{ duration: 0.2 }}
                   >
                     {isCompleted ? (
-                      <CheckCircle className="h-5 w-5"   />
+                      <CheckCircle className="h-5 w-5" />
                     ) : step.icon ? (
                       step.icon
                     ) : (
@@ -288,7 +315,8 @@ export function UnifiedSteps({
                     <p className={cn("text-sm font-medium", isActive ? 'text-primary-700' : 'text-neutral-600'
                     )}>
                       {step.title}</p>
-                    {step.description  && (p className="text-xs text-neutral-500 mt-1">
+                    {step.description  && (
+p className="text-xs text-neutral-500 mt-1">
                         {step.description}</p>
   },
     {index < steps.length - 1  && (div className="flex-1 max-w-[100px]"></div>
@@ -298,7 +326,9 @@ export function UnifiedSteps({
                         initial={{ width: 0 }}
                         animate={{ width: isCompleted ? '100%' : '0%' }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        />)}
+                        />
+              
+            )}
               </React.Fragment>
             )
 }
@@ -318,4 +348,6 @@ export default {
   UnifiedAlert,
   UnifiedProgress,
   UnifiedBadge,
-  UnifiedSteps}
+  UnifiedSteps
+          </div>
+}

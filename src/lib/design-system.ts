@@ -63,8 +63,7 @@ export const designTokens = {
       800: '#1e293b',
       900: '#0f172a',
       950: '#020617'
-}
-  },
+},
   // Glassmorphism Effects, glass: {
     // Light glassmorphism, light: {
   background: 'rgba(255, 255, 255, 0.1)',
@@ -89,8 +88,7 @@ export const designTokens = {
       border: 'rgba(255, 255, 255, 0.1)',
       shadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
       backdropFilter: 'blur(8px)'
-}
-  },
+},
   // Modern Gradients, gradients: {
     primary: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #a855f7 100%)',
     secondary: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%)',
@@ -102,8 +100,7 @@ export const designTokens = {
   primary: 'linear-gradient(-45deg, #3b82f6, #8b5cf6, #a855f7, #06b6d4)',
       rainbow: 'linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57)',
       sunset: 'linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #fecfef)'
-}
-  },
+},
   // Enhanced Shadows, shadows: {
     // Subtle shadows, xs: '0 1px 2px rgba(0, 0, 0, 0.05)',
     sm: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
@@ -118,8 +115,7 @@ export const designTokens = {
       secondary: '0 0 20px rgba(168, 85, 247, 0.5)',
       success: '0 0 20px rgba(16, 185, 129, 0.5)',
       white: '0 0 20px rgba(255, 255, 255, 0.5)'
-}
-  },
+},
   // Typography Scale, typography: {
     fontFamily: {
   display: ['Inter Display', 'system-ui', 'sans-serif'],
@@ -151,8 +147,7 @@ export const designTokens = {
       bold: '700',
       extrabold: '800',
       black: '900'
-}
-  },
+},
   // Spacing Scale, spacing: {
     px: '1px',
     0: '0',
@@ -221,7 +216,7 @@ export const designTokens = {
 // Utility functions for design system
 export const _getGlassStyle = (variant: keyof typeof designTokens.glass = 'medium') => {
   const glass = designTokens.glass[variant];
-  return {;
+  return {
     background: glass.background,
     border: `1px solid ${glass.border}`
     boxShadow: glass.shadow,
@@ -245,8 +240,7 @@ export const _getColor = (color: string, shade?: number): string: (any) => {
   return result as unknown as string;
 };
 // CSS Custom Properties Generator
-export const _generateCSSVariables = (): void: (any) => { ;
-  const cssVars: Record<string, string> = {; }
+export const _generateCSSVariables = (): void => {const cssVars: Record<string, string> = { }
   // Generate color variables
   Object.entries(designTokens.colors).forEach(([colorName, colorValues]) => {
     if(typeof colorValues === 'object') {

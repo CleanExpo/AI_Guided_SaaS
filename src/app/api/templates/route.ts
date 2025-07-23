@@ -1,26 +1,28 @@
 // Mark as dynamic to prevent static generation
-export const _dynamic = 'force-dynamic';import { NextRequest, NextResponse } from 'next/server';
-export async function GET(request: NextRequest): Promise {
+export const dynamic = 'force-dynamic';
+
+import { NextRequest, NextResponse } from 'next/server';
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const url = new URL(request.url);
     const query = url.searchParams.get('query');
-    const _category = url.searchParams.get('category');
-    const _framework = url.searchParams.get('framework');
-    const _pricing = url.searchParams.get('pricing');
-    const _difficulty = url.searchParams.get('difficulty');
+    const category = url.searchParams.get('category');
+    const framework = url.searchParams.get('framework');
+    const pricing = url.searchParams.get('pricing');
+    const difficulty = url.searchParams.get('difficulty');
     let templates: any[] = [];
     if (query) {
       // Search templates,
       templates = [
-        {
-  id: 'template_1',
+      {
+        id: 'template_1',
           name: 'React Dashboard',
           description: 'Modern dashboard template with React',
           category: 'dashboard',
           framework: 'react',
           pricing: 'free',
           difficulty: 'medium'
-},
+        },
         {
           id: 'template_2',
           name: 'Next.js Blog',
@@ -37,8 +39,8 @@ export async function GET(request: NextRequest): Promise {
     } else {
       // Get all templates,
       templates = [
-        {
-  id: 'template_1',
+      {
+        id: 'template_1',
           name: 'React Dashboard',
           description: 'Modern dashboard template with React',
           category: 'dashboard',
@@ -47,7 +49,7 @@ export async function GET(request: NextRequest): Promise {
           difficulty: 'medium',
           downloads: 1250,
     rating: 4.8
-},
+        },
         {
           id: 'template_2',
           name: 'Next.js Blog',
@@ -69,7 +71,7 @@ export async function GET(request: NextRequest): Promise {
           difficulty: 'hard',
           downloads: 567,
     rating: 4.9
-}
+        }
       ];
       // Apply filters
       if (category) {
@@ -85,21 +87,21 @@ export async function GET(request: NextRequest): Promise {
         templates = templates.filter(t => t.difficulty === difficulty);
 }
 }
-    return NextResponse.json({;
-      success: true;
+    return NextResponse.json({
+      success: true,
       templates,
       total: templates.length,
     filters: {
-        query;
-        category;
-        framework;
-        pricing;
-        // difficulty
-}
+        query,
+        category,
+        framework,
+        pricing,
+        difficulty
+      }
     });
   } catch (error) {
-    console.error('Templates API, error:', error);
-    return NextResponse.json(;
+    console.error('Templates API error:', error);
+    return NextResponse.json(
       { error: 'Failed to fetch templates' },
       { status: 500 }
     );

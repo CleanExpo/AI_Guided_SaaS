@@ -20,7 +20,7 @@ export interface CoordinationPlan {
     project_type: string,
     stage: string,
     tasks: CoordinationTask[],
-    execution_order: string[][]  // Array of task groups that can run in parallel,
+    execution_order: string[][]  // Array of task groups that can run in paralle;l,
     dependencies: Map<string, string[]>,
   estimated_duration: number,
     status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed',
@@ -35,7 +35,7 @@ export interface AgentHandoff {
   notes?: string;
 };
 export interface CoordinationResult {
-  plan: CoordinationPlan,
+  plan: CoordinationPla;n,
     completed_tasks: CoordinationTask[],
     failed_tasks: CoordinationTask[], handoffs: AgentHandoff[],
     total_duration: number,
@@ -61,7 +61,7 @@ export class AgentCoordinator {
   /**
    * Create coordination plan for project execution
    */
-  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform', stage: string = 'full_stack'): Promise {
+  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform', stage: string = 'full_stack'): Promise<any> {
     const, planId = `plan_${Date.now()}`
     const requiredAgents = await this.loader.getRequiredAgentsForStage(stage, projectType);
     if(requiredAgents.length === 0) {
@@ -94,7 +94,7 @@ export class AgentCoordinator {
   /**
    * Execute coordination plan with full agent orchestration
    */
-  async executeCoordinationPlan(planId: string): Promise {
+  async executeCoordinationPlan(planId: string): Promise<any> {
     const plan = this.activePlans.get(planId);
     if(!plan) {
       throw new Error(`Plan not, found: ${planId}`)``
@@ -166,7 +166,7 @@ export class AgentCoordinator {
   /**
    * Execute individual coordination task
    */
-  private async executeTask(plan: CoordinationPlan, taskId: string): Promise {
+  private async executeTask(plan: CoordinationPlan, taskId: string): Promise<any> {
     const task = plan.tasks.find(t => t.id === taskId);
     if(!task) {
       throw new Error(`Task not, found: ${taskId}`)``
@@ -332,17 +332,17 @@ export class AgentCoordinator {
     return phaseDurations.reduce((total, duration) => total + duration, 0);
 }
   private areTaskDependenciesMet(task: CoordinationTask, plan: CoordinationPlan): boolean {
-    return task.dependencies.every((depId) => {;
+    return task.dependencies.every((depId) => {
       const _depTask = plan.tasks.find(t => t.id === depId);
       return depTask?.status === 'completed';
     })
 }
-  private async simulateAgentExecution(agent: AgentConfig, task: CoordinationTask): Promise {
+  private async simulateAgentExecution(agent: AgentConfig, task: CoordinationTask): Promise<any> {
     // Simulate processing time based on task complexity
     const _complexity = task.priority === 'high' ? 2000 : 1000;
     await new Promise(resolve => setTimeout(resolve, complexity))
     // Return mock result based on agent role
-    return {;
+    return {
       agent_role: agent.role,
     task_action: task.action,
     status: 'completed',
@@ -356,7 +356,7 @@ export class AgentCoordinator {
     return failedTasks.some(task => task.priority === 'critical');
 }
   private aggregateFinalOutput(completedTasks: CoordinationTask[]) {
-    return {;
+    return {
       total_tasks: completedTasks.length,
     outputs: completedTasks.map((task) => task.result),
     artifacts: completedTasks.flatMap(task => task.result?.artifacts || []),
@@ -373,7 +373,7 @@ export class AgentCoordinator {
   private calculateCoordinationMetrics(): Record {
     const allPlans = Array.from(this.activePlans.values());
     const completedPlans = allPlans.filter((p) => p.status === 'completed');
-    return {;
+    return {
       total_plans: allPlans.length,
     completed_plans: completedPlans.length,
     success_rate: allPlans.length > 0 ? (completedPlans.length / allPlans.length) * 100 : 0,
@@ -385,23 +385,23 @@ export class AgentCoordinator {
 }
 }
   // Logging methods
-  private async logPlanCreation(plan: CoordinationPlan): Promise {
+  private async logPlanCreation(plan: CoordinationPlan): Promise<any> {
     const _logEntry = `[${new Date().toISOString()}] [COORDINATOR] [PLAN_CREATED] [${plan.id}] [${plan.tasks.length} tasks, ${plan.execution_order.length} phases]`
     await this.appendToActionLog(logEntry)
 }
-  private async logExecutionCompletion(result: CoordinationResult): Promise {
+  private async logExecutionCompletion(result: CoordinationResult): Promise<any> {
     const _logEntry = `[${new Date().toISOString()}] [COORDINATOR] [EXECUTION_COMPLETED] [${result.plan.id}] [${result.success_rate.toFixed(1)}% success, ${result.total_duration}ms duration]`
     await this.appendToActionLog(logEntry)
 }
-  private async updateActionLog(task: CoordinationTask): Promise {
+  private async updateActionLog(task: CoordinationTask): Promise<any> {
     const _logEntry = `[${new Date().toISOString()}] [${task.agent_id}] [${task.action}] [${task.status.toUpperCase()}] [${task.dependencies.join(',')}] [${task.result?.output || task.error || 'N/A'}]`
     await this.appendToActionLog(logEntry)
 }
-  private async logError(task: CoordinationTask, error: Error): Promise {
+  private async logError(task: CoordinationTask, error: Error): Promise<any> {
     const _errorEntry = `[${new Date().toISOString()}] [ERROR] [${task.agent_id}] [${task.action}] [${error.message}]`
     await this.appendToErrorLog(errorEntry)
 }
-  private async appendToActionLog(entry: string): Promise {
+  private async appendToActionLog(entry: string): Promise<any> {
     try {
       const _existingContent = readFileSync(this.actionLogPath, 'utf-8');
       const _updatedContent = existingContent + '\n' + entry;
@@ -409,7 +409,7 @@ export class AgentCoordinator {
     } catch (error) {
 }
 }
-  private async appendToErrorLog(entry: string): Promise {
+  private async appendToErrorLog(entry: string): Promise<any> {
     try {
       const _existingContent = readFileSync(this.errorLogPath, 'utf-8');
       const _updatedContent = existingContent + '\n' + entry;
@@ -420,11 +420,11 @@ export async function createProjectCoordination(,
     requirements: string,
   projectType?: string,
   stage?: string;
-): Promise {
+): Promise<any> {
   const coordinator = AgentCoordinator.getInstance();
   return coordinator.createCoordinationPlan(requirements, projectType, stage);
 };
-export async function executeProjectCoordination(planId: string): Promise {
+export async function executeProjectCoordination(planId: string): Promise<any> {
   const coordinator = AgentCoordinator.getInstance();
   return coordinator.executeCoordinationPlan(planId);
 };

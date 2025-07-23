@@ -43,13 +43,13 @@ const sampleProject: KiroProject = {
     updatedAt: new Date().toISOString()};
 mockProjects.set(sampleProject.id, sampleProject);
 // Mock file contents
-const _sampleFiles = new Map([;,
+const _sampleFiles = new Map([
    [
     '/src/app/page.tsx',
     {
   path: '/src/app/page.tsx',
       content: `export default function Home(): void {``
-  return (;
+  return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Welcome to Sample Project</h1>
       <p>Edit src/app/page.tsx to get started</p>)
@@ -70,7 +70,7 @@ export default function RootLayout({
 }): {
   children: React.ReactNode
 }) {
-  return (;
+  return (
     <html lang="en">
       <body>{children}</body>)
 }`,``
@@ -90,7 +90,7 @@ export default function RootLayout({
             build: 'next build',
             start: 'next start',
             lint: 'next lint'
-}},
+},
     dependencies: {
             next: '14.0.0',
             react: '^18.2.0',
@@ -100,7 +100,7 @@ export default function RootLayout({
             '@types/react': '^18',
             '@types/react-dom': '^18',
             typescript: '^5'
-}},
+},
         null,
         2
       ),
@@ -109,7 +109,7 @@ export default function RootLayout({
 mockFiles.set(sampleProject.id, sampleFiles);
 export class KiroServerMock {
   // Project operations
-  static async createProject(project: Omit<KiroProject, 'id' | 'createdAt' | 'updatedAt'>): Promise {
+  static async createProject(project: Omit<KiroProject, 'id' | 'createdAt' | 'updatedAt'>): Promise<any> {
     const _id = Math.random().toString(36).substring(7);
     const newProject: KiroProject = {
       ...project,
@@ -122,17 +122,17 @@ export class KiroServerMock {
     this.createFilesFromStructure(id, newProject.structure);
     return newProject;
 }
-  static async getProject(projectId: string): Promise {
+  static async getProject(projectId: string): Promise<any> {
     const project = mockProjects.get(projectId);
     if(!project) {
       throw new Error('Project not found');
 }
     return project;
 }
-  static async listProjects(): Promise {
+  static async listProjects(): Promise<any> {
     return Array.from(mockProjects.values());
 }
-  static async saveProject(projectId: string): Promise {
+  static async saveProject(projectId: string): Promise<any> {
     const project = mockProjects.get(projectId);
     if(!project) {
       throw new Error('Project not found');
@@ -140,7 +140,7 @@ export class KiroServerMock {
     project.updatedAt = new Date().toISOString();
 }
   // File operations
-  static async readFile(projectId: string, path: string): Promise {
+  static async readFile(projectId: string, path: string): Promise<any> {
     const projectFiles = mockFiles.get(projectId);
     if(!projectFiles) {
       throw new Error('Project not found');
@@ -151,7 +151,7 @@ export class KiroServerMock {
 }
     return file;
 }
-  static async writeFile(projectId: string, path: string, content: string): Promise {
+  static async writeFile(projectId: string, path: string, content: string): Promise<any> {
     const projectFiles = mockFiles.get(projectId);
     if(!projectFiles) {
       throw new Error('Project not found');
@@ -163,7 +163,7 @@ export class KiroServerMock {
     file.content = content;
     projectFiles.set(path, file);
 }
-  static async createFile(projectId: string, path: string, content: string = ''): Promise {
+  static async createFile(projectId: string, path: string, content: string = ''): Promise<any> {
     const projectFiles = mockFiles.get(projectId);
     if(!projectFiles) {
       throw new Error('Project not found');
@@ -173,14 +173,14 @@ export class KiroServerMock {
       content,
       language: this.getLanguageFromPath(path)});
 }
-  static async deleteFile(projectId: string, path: string): Promise {
+  static async deleteFile(projectId: string, path: string): Promise<any> {
     const projectFiles = mockFiles.get(projectId);
     if(!projectFiles) {
       throw new Error('Project not found');
 }
     projectFiles.delete(path);
 }
-  static async renameFile(projectId: string, oldPath: string, newPath: string): Promise {
+  static async renameFile(projectId: string, oldPath: string, newPath: string): Promise<any> {
     const projectFiles = mockFiles.get(projectId);
     if(!projectFiles) {
       throw new Error('Project not found');
@@ -194,7 +194,7 @@ export class KiroServerMock {
     projectFiles.set(newPath, file);
 }
   // Terminal operations
-  static async createTerminal(config?: Partial<KiroTerminal>): Promise {
+  static async createTerminal(config?: Partial<KiroTerminal>): Promise<any> {
     const _id = Math.random().toString(36).substring(7);
     const terminal: KiroTerminal = {
       id,
@@ -205,13 +205,13 @@ export class KiroServerMock {
     mockTerminals.set(id, terminal);
     return terminal;
 }
-  static async closeTerminal(terminalId: string): Promise {
+  static async closeTerminal(terminalId: string): Promise<any> {
     mockTerminals.delete(terminalId);
 }
   // AI assistance
-  static async getAISuggestions(projectId: string, file: string): Promise {
+  static async getAISuggestions(projectId: string, file: string): Promise<any> {
     // Mock AI suggestions
-    return {;
+    return {
       suggestions: [
         {
   id: 'suggest-1',
@@ -269,16 +269,15 @@ export class KiroServerMock {
       completions: []
 }
 }
-  static async getCompletions(file: string, position: { line: number, character: number }): Promise {
+  static async getCompletions(file: string, position: { line: number, character: number }): Promise<any> {
     // Mock code completions
-    return [;
-      {
+    return [{
   label: 'useState',
         kind: 'function',
         detail: 'React Hook',
         documentation: 'Returns a stateful value, and a function to update it.',
         insertText: 'useState<any>(${1:initialState})'
-  }},
+  },
       {
         label: 'useEffect',
         kind: 'function',
@@ -287,10 +286,9 @@ export class KiroServerMock {
           'Accepts a function that contains imperative, possibly effectful code.',
         insertText: 'useEffect(() => {\n  $0\n}, [])'];
 }
-  static async runDiagnostics(projectId: string): Promise {
+  static async runDiagnostics(projectId: string): Promise<any> {
     // Mock diagnostics
-    return [;
-      {
+    return [{
   file: '/src/app/page.tsx',
         line: 5,
     column: 10,
@@ -340,5 +338,4 @@ export class KiroServerMock {
       xml: 'xml'
 };
     return languageMap[ext || ''] || 'plaintext';
-}
 }

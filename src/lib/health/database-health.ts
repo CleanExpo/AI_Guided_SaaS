@@ -5,11 +5,11 @@ import { HealthCheckResult } from './HealthCheckService';
  */
 export async function checkSupabaseHealth(,
     supabase: SupabaseClient;
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   try {
     // Try to execute a simple query
-    let data = null,;
+    let data = null,
       error = null;
     try {
       const result = await supabase.from('_health_check').select('1').single();
@@ -29,30 +29,30 @@ export async function checkSupabaseHealth(,
         pingError = { message: 'RPC not available' }
 }
       if(!pingError) {
-        return {;
+        return {
           name: 'supabase',
           status: 'healthy',
           responseTime: Date.now() - start,
     details: {
   message: 'Database reachable'
-}},
+},
           timestamp: new Date()}
 }
 }
     if (error) {
-      return {;
+      return {
         name: 'supabase',
         status: 'unhealthy',
         responseTime: Date.now() - start,
     error: error.message,
     timestamp: new Date()}
 }
-    return {;
+    return {
       name: 'supabase',
       status: 'healthy',
       responseTime: Date.now() - start,
     timestamp: new Date()}
-    } catch (error) { return {;
+    } catch (error) { return {
       name: 'supabase',
       status: 'unhealthy',
       responseTime: Date.now() - start,
@@ -63,7 +63,7 @@ export async function checkSupabaseHealth(,
 /*
 export async function checkPostgresHealth(,
     connectionString: string;
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   let pool: Pool | null = null;
   try {
@@ -71,7 +71,7 @@ export async function checkPostgresHealth(,
     // Execute a simple query
     const result = await pool.query('SELECT NOW() as current_time, version() as version');
     await pool.end()
-    return {;
+    return {
       name: 'postgres',
       status: 'healthy',
       responseTime: Date.now() - start,
@@ -85,8 +85,7 @@ export async function checkPostgresHealth(,
     if (pool) {
       await pool.end().catch (() => {})
 }
-    return { ;
-      name: 'postgres',
+    return {name: 'postgres',
       status: 'unhealthy',
       responseTime: Date.now() - start,
     error: error instanceof Error ? error.message : 'Connection failed',
@@ -98,7 +97,7 @@ export async function checkPostgresHealth(,
 /*
 export async function checkConnectionPoolHealth(,
     pool: Pool;
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   try {
     const poolStats = {
@@ -108,14 +107,14 @@ export async function checkConnectionPoolHealth(,
 }
     // Check if pool is healthy
     const _isHealthy = poolStats.idleCount > 0 || poolStats.totalCount < 10;
-    return {;
+    return {
       name: 'connection_pool',
       status: isHealthy ? 'healthy' : 'degraded',
       responseTime: Date.now() - start,
     details: poolStats,
     timestamp: new Date()
 }
-  } catch (error) { return {;
+  } catch (error) { return {
       name: 'connection_pool',
       status: 'unhealthy',
       responseTime: Date.now() - start,
@@ -128,7 +127,7 @@ export async function checkConnectionPoolHealth(,
  */
 export async function checkMigrationHealth(,
     supabase: SupabaseClient;
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   try {
     // Check if migrations table exists and get latest migration
@@ -140,25 +139,25 @@ export async function checkMigrationHealth(,
       .single();
     if (error) {
       // Migrations table might not exist
-      return {;
+      return {
         name: 'migrations',
         status: 'degraded',
         responseTime: Date.now() - start,
     details: {
   message: 'Migrations table not found or inaccessible'
-}},
+},
         timestamp: new Date()}
 }
-    return {;
+    return {
       name: 'migrations',
       status: 'healthy',
       responseTime: Date.now() - start,
     details: {
   latestVersion: data?.version,
     executedAt: data?.executed_at
-      }},
+      },
       timestamp: new Date()}
-    } catch (error) { return {;
+    } catch (error) { return {
       name: 'migrations',
       status: 'unhealthy',
       responseTime: Date.now() - start,
@@ -169,7 +168,7 @@ export async function checkMigrationHealth(,
  */
 export async function checkDatabasePerformance(,
     supabase: SupabaseClient;
-): Promise {
+): Promise<any> {
   const _start = Date.now();
   try {
     // Run a performance test query
@@ -181,7 +180,7 @@ export async function checkDatabasePerformance(,
     const _queryTime = Date.now() - testStart;
     if(error && error.code !== 'PGRST116') {
       // Table not found is ok
-      return {;
+      return {
         name: 'db_performance',
         status: 'unhealthy',
         responseTime: Date.now() - start,
@@ -195,7 +194,7 @@ export async function checkDatabasePerformance(,
     } else if (queryTime > 500) {
       status = 'degraded'
 }
-    return {;
+    return {
       name: 'db_performance',
       status,
       responseTime: Date.now() - start,
@@ -205,9 +204,9 @@ export async function checkDatabasePerformance(,
           healthy: '<500ms',
           degraded: '500-1000ms',
           unhealthy: '>1000ms'
-}},
+},
       timestamp: new Date()}
-    } catch (error) { return {;
+    } catch (error) { return {
       name: 'db_performance',
       status: 'unhealthy',
       responseTime: Date.now() - start,
@@ -216,10 +215,10 @@ export async function checkDatabasePerformance(,
 /**
  * Create a comprehensive database health check
  */
-export function createComprehensiveDatabaseHealthCheck(, ;
+export function createComprehensiveDatabaseHealthCheck(,
     supabase: SupabaseClient): SupabaseClient) {
-  return async (): Promise<HealthCheckResult> => {;
-    const checks = await Promise.all([;,
+  return async (): Promise<HealthCheckResult> => {
+    const checks = await Promise.all([
   checkSupabaseHealth(supabase),
       checkMigrationHealth(supabase),
       checkDatabasePerformance(supabase)]);
@@ -232,20 +231,19 @@ export function createComprehensiveDatabaseHealthCheck(, ;
     } else if (degradedChecks.length > 0) {
       overallStatus = 'degraded'
 }
-    const _totalResponseTime = checks.reduce(;
+    const _totalResponseTime = checks.reduce(
       (sum, check) => sum + (check.responseTime || 0),
       0
     );
-    return {;
+    return {
       name: 'database_comprehensive',
       status: overallStatus,
     responseTime: totalResponseTime,
     details: {
-  checks: checks.map((c) => ({;,
+  checks: checks.map((c) => ({,
   name: c.name,
     status: c.status,
     responseTime: c.responseTime
         }})},
       timestamp: new Date()}
-}
 }

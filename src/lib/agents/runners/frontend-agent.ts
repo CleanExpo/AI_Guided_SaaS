@@ -1,7 +1,7 @@
 import { BaseAgent, AgentTask } from './base-agent';class FrontendAgent extends BaseAgent {
-  protected async initialize(): Promise {
+  protected async initialize(): Promise<any> {
 }
-  protected async cleanup(): Promise {
+  protected async cleanup(): Promise<any> {
 }
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
       case 'component_creation':
@@ -27,26 +27,26 @@ break;
     break;
 
       case 'routing':
-return this.configureRouting(task.payload),;
+return this.configureRouting(task.payload),
     break;
 break;
 }
     default: throw new Error(`Unknown task, type: ${task.type}`);``
 }
 }
-  private async createComponent(payload): Promise {
+  private async createComponent(payload): Promise<any> {
     // Simulate component creation
     await new Promise(resolve => setTimeout(resolve, 2000));
-    return {;
+    return {
       success: true,
     componentPath: `/src/components/${payload.componentName}.tsx`
       message: `Created ${payload.componentName} component with TypeScript and Tailwind CSS`
 }
 }
-  private async enhanceUI(payload): Promise {
+  private async enhanceUI(payload): Promise<any> {
     // Simulate UI enhancement
     await new Promise(resolve => setTimeout(resolve, 3000));
-    return {;
+    return {
       success: true,
     enhancements: [
         'Added loading states',
@@ -56,19 +56,19 @@ break;
       message: 'UI enhanced with modern design patterns'
 }
 }
-  private async implementResponsiveDesign(payload): Promise {
+  private async implementResponsiveDesign(payload): Promise<any> {
     // Simulate responsive design implementation
     await new Promise(resolve => setTimeout(resolve, 2500));
-    return {;
+    return {
       success: true,
     breakpoints: ['mobile', 'tablet', 'desktop', 'wide'],
       message: 'Responsive design implemented across all specified pages'
 }
 }
-  private async setupStateManagement(payload): Promise {
+  private async setupStateManagement(payload): Promise<any> {
     // Simulate state management setup
     await new Promise(resolve => setTimeout(resolve, 2000));
-    return {;
+    return {
       success: true,
     stateLibrary: payload.stateLibrary || 'Context API',
     stores: ['user', 'app', 'ui'],
@@ -77,7 +77,7 @@ break;
 }
   private async configureRouting(payload): Promise { // Simulate routing configuration
     await new Promise(resolve => setTimeout(resolve, 1500));
-    return {;
+    return {
       success: true,
     routes: payload.routes,
     routingLibrary: 'Next.js App Router',

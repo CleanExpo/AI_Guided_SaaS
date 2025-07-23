@@ -5,60 +5,57 @@ const feedbackSchema = z.object({
   message: z.string().min(1, 'Message is required'),
   email: z.string().email().optional()
 });
-export async function POST(request: NextRequest): Promise {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const _body = await request.json();
+    const body = await request.json();
     // Validate input
-    const _validatedData = feedbackSchema.parse(body);
+    const validatedData = feedbackSchema.parse(body);
     // Simulate saving feedback
-    const _feedback = {
+    const feedback = {
       id: 'feedback_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,
       status: 'received',
       createdAt: new Date().toISOString()
     };
-    return NextResponse.json({ ;
+    return NextResponse.json({
       success: true,
-    message: 'Feedback received successfully';
-      // feedback
-    ,  status: 201  });
+      message: 'Feedback received successfully',
+      feedback
+    }, { status: 201 });
   } catch (error) {
-    console.error('Feedback, error:', error);
+    console.error('Feedback error:', error);
     if(error instanceof z.ZodError) {
-      return NextResponse.json(;
-        { error: 'Invalid input', details: error.errors },
-        { status: 400 }
+      return NextResponse.json(
+        { error: 'Invalid input', details: error.errors }, { status: 400 }
       );
 }
-    return NextResponse.json(;
-      { error: 'Failed to submit feedback' },
-      { status: 500 }
+    return NextResponse.json(
+      { error: 'Failed to submit feedback' }, { status: 500 }
     );
 }
 }
-export async function GET(): void {
+export async function GET(): Promise<NextResponse> {
   try {
     // Simulate getting feedback list
-    const feedbackList = [;,
-  {
-  id: 'feedback_1',
+    const feedbackList = [
+      {
+        id: 'feedback_1',
         type: 'feature',
         message: 'Please add dark mode',
         status: 'open',
         createdAt: new Date().toISOString()
-}
+      }
     ];
-    return NextResponse.json({;
+    return NextResponse.json({
       success: true,
-    feedback: feedbackList,
-    total: feedbackList.length
+      feedback: feedbackList,
+      total: feedbackList.length
     });
   } catch (error) {
-    console.error('Get feedback, error:', error);
-    return NextResponse.json(;
-      { error: 'Failed to fetch feedback' },
-      { status: 500 }
+    console.error('Get feedback error:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch feedback' }, { status: 500 }
     );
 }
 }
-export const _dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";

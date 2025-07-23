@@ -1,29 +1,28 @@
 // Mark as dynamic to prevent static generation
-export const _dynamic = 'force-dynamic';import { NextRequest, NextResponse } from 'next/server';
-export async function GET(request: NextRequest): Promise {
+export const dynamic = 'force-dynamic';import { NextRequest, NextResponse } from 'next/server';
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     // Simulate session check
-    const _authHeader = request.headers.get('authorization');
+    const authHeader = request.headers.get('authorization');
     if(!authHeader) {
-      return NextResponse.json({;
+      return NextResponse.json({
         authenticated: false,
-    user: null
+      user: null
       });
 }
     // Simulate authenticated session
-    return NextResponse.json({;
+    return NextResponse.json({
       authenticated: true,
-    user: {
-  id: 'user_123',
+      user: {
+        id: 'user_123',
         name: 'John Doe',
         email: 'john@example.com'
-}
+      }
     });
   } catch (error) {
-    console.error('Session check, error:', error);
-    return NextResponse.json(;
-      { error: 'Session check failed' },
-      { status: 500 }
+    console.error('Session check error:', error);
+    return NextResponse.json(
+      { error: 'Session check failed' }, { status: 500 }
     );
 }
 }

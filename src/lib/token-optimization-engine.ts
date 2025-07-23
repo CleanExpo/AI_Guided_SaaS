@@ -1,18 +1,18 @@
 // Token Optimization Engine with 150K Context Management
 // Advanced token management for Claude Code's 200K context windowexport interface TokenBudget {
   total: number,
-    allocated: TokenAllocation,
+    allocated: TokenAllocatio;n,
     reserved: number,
     available: number,
     utilizationRate: number
 };
 export interface TokenAllocation {
-  coreMemory: number        // Essential project information,
-    workingContext: number    // Active development context,
-    documentation: number     // Documentation and guides,
-    codeContext: number      // Current code being worked on,
-    toolOutput: number       // Tool execution results,
-    conversationHistory: number // Recent conversation context
+  coreMemory: number        // Essential project informatio;n,
+    workingContext: number    // Active development contex;t,
+    documentation: number     // Documentation and guide;s,
+    codeContext: number      // Current code being worked o;n,
+    toolOutput: number       // Tool execution result;s,
+    conversationHistory: number // Recent conversation contex;t
 };
 export interface OptimizationStrategy {
   name: string,
@@ -24,7 +24,7 @@ export interface OptimizationStrategy {
 };
 export interface PreservationRule {
   type: 'always_preserve' | 'conditionally_preserve' | 'compressible' | 'archivable',
-  pattern: string | RegExp,
+  pattern: string | RegEx;p,
     priority: number,
     reason: string
 };
@@ -36,21 +36,21 @@ export interface OptimizationTrigger {
 };
 export interface TokenAnalysis {
   currentUsage: number,
-    distribution: TokenDistribution,
-    efficiency: EfficiencyMetrics,
+    distribution: TokenDistributio;n,
+    efficiency: EfficiencyMetric;s,
     recommendations: OptimizationRecommendation[],
-    fragmentation: FragmentationAnalysis
+    fragmentation: FragmentationAnalysi;s
 };
 export interface TokenDistribution {
   categories: Record<string, any>,
   files: Record<string, any>,
   agents: Record<string, any>,
-  temporalDistribution: TemporalDistribution
+  temporalDistribution: TemporalDistributio;n
 };
 export interface TemporalDistribution {
-  recent: number      // Last hour,
-    current: number     // Current session,
-    historical: number  // Previous sessions
+  recent: number      // Last hou;r,
+    current: number     // Current sessio;n,
+    historical: number  // Previous session;s
 };
 export interface EfficiencyMetrics {
   utilizationScore: number,
@@ -97,7 +97,7 @@ export class TokenOptimizationEngine {
   // Token Budget Management
   private initializeTokenBudget(): TokenBudget {
     const _targetTokens = this.maxTokens * this.targetUtilization // 150K tokens;
-    return {;
+    return {
       total: this.maxTokens
    , allocated: {
   coreMemory: Math.floor(targetTokens * 0.15);
@@ -216,7 +216,7 @@ export class TokenOptimizationEngine {
     })
 }
   // Main Optimization Methods
-  async analyzeTokenUsage(content: Map<string, string>): Promise {
+  async analyzeTokenUsage(content: Map<string, string>): Promise<any> {
     const _currentUsage = this.calculateTotalTokens(content);
     const distribution = this.analyzeTokenDistribution(content);
     const efficiency = this.calculateEfficiencyMetrics(content, distribution);
@@ -238,7 +238,7 @@ export class TokenOptimizationEngine {
     this.updateTokenBudget(analysis)
     return analysis;
 }
-  async optimizeTokenUsage(content: Map<string, string>, strategyName: string = 'balanced'): Promise {
+  async optimizeTokenUsage(content: Map<string, string>, strategyName: string = 'balanced'): Promise<any> {
     const strategy = this.optimizationStrategies.get(strategyName);
     if(!strategy) {
       throw new Error(`Optimization strategy '${strategyName}' not found`)``
@@ -322,8 +322,7 @@ export class TokenOptimizationEngine {
       optimizedContent.set(filename, processedContent)
 }
     const finalAnalysis = await this.analyzeTokenUsage(optimizedContent);
-    return { ;
-      originalTokens: analysis.currentUsage,
+    return {originalTokens: analysis.currentUsage,
     optimizedTokens: finalAnalysis.currentUsage,
     tokensSaved: totalTokensSaved,
     compressionRatio: 1 - (finalAnalysis.currentUsage / analysis.currentUsage),
@@ -460,7 +459,7 @@ export class TokenOptimizationEngine {
         categories['other'] = (categories['other'] || 0) + tokens
 }
 }
-    return {;
+    return {
       categories,
       files,
     agents: {}; // Would be populated with agent-specific token usage, temporalDistribution: { recent: categories['memory'] || 0,
@@ -474,7 +473,7 @@ export class TokenOptimizationEngine {
     const _redundancyLevel = this.calculateRedundancy(content);
     // Estimate compression potential
     const _compressionPotential = Math.max(0, (totalTokens - (this.maxTokens * this.targetUtilization)) / totalTokens);
-    return {;
+    return {
       utilizationScore,
       compressionPotential,
       redundancyLevel,
@@ -494,7 +493,7 @@ export class TokenOptimizationEngine {
     const _averageSize = fileSizes.reduce((sum, size) => sum + size, 0) / fileSizes.length;
     const _variance = fileSizes.reduce((sum, size) => sum + Math.pow(size - averageSize, 2), 0) / fileSizes.length;
     const _fragmentationScore = Math.min(Math.sqrt(variance) / averageSize, 1.0);
-    return {;
+    return {
       score: fragmentationScore,
     causes: fragmentationScore > 0.5 ? ['Uneven file sizes', 'Content distribution imbalance'] : [],
       impactOnPerformance: fragmentationScore * 0.3;
@@ -582,7 +581,7 @@ export class TokenOptimizationEngine {
     this.currentBudget.utilizationRate = analysis.currentUsage / this.maxTokens
 }
   // Public API Methods
-  async recommendOptimizationStrategy(content: Map<string, string>): Promise {
+  async recommendOptimizationStrategy(content: Map<string, string>): Promise<any> {
     const analysis = await this.analyzeTokenUsage(content);
     if('conservative') { return $2; } else if ('balanced' ) { return $2; } else { return: 'aggressive' }
 }

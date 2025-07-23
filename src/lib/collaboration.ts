@@ -7,7 +7,7 @@ interface DatabaseRecord  {
     id: string,
     created_at: string;
   updated_at?: string;
-  [key: string]
+  [key: string;]
 }
 interface DatabaseUser  {
     id: string,
@@ -60,7 +60,7 @@ export interface CollaborationRoom  {
     name: string,
     ownerId: string,
     participants: CollaborationUser[],
-    settings: RoomSettings,
+    settings: RoomSetting;s,
     createdAt: Date,
     updatedAt: Date
 }
@@ -77,7 +77,7 @@ export interface CollaborationUser  {
 export interface CursorPosition  { x: number,
     y: number;
   elementId?: string;
-  selection?: {;
+  selection?: {
     start: number,
     end: number
 }
@@ -116,7 +116,6 @@ export interface Comment  { id: string,
   x: number,
     y: number;
     elementId?: string;
-}
 },
   replies: Comment[], resolved: boolean, createdAt: Date, updatedAt: Date
 }
@@ -142,7 +141,7 @@ export class CollaborationService {
 }
   // Setup Socket.IO event handlers
   private static setupEventHandlers() {
-    if (!this.io) return this.io.on('connection', (socket) => {;
+    if (!this.io) return this.io.on('connection', (socket) => {
       // Handle user authentication
       socket.on('authenticate', async (data: { userId: string, token: string }) => {
         try {
@@ -278,7 +277,7 @@ export class CollaborationService {
     })
 }
   // Get or create collaboration room
-  private static async getOrCreateRoom(roomId: string, projectId: string, userId: string): Promise {
+  private static async getOrCreateRoom(roomId: string, projectId: string, userId: string): Promise<any> {
     // Check cache first
     if (this.rooms.has(roomId)) {
       return this.rooms.get(roomId)!;
@@ -286,7 +285,7 @@ export class CollaborationService {
     if (isServiceConfigured('database')) {
       try {
         // Try to get from database
-        const rooms = await DatabaseService.query(;
+        const rooms = await DatabaseService.query(
           'SELECT * FROM collaboration_rooms WHERE id = ?',
           [roomId]
         )
@@ -314,8 +313,7 @@ export class CollaborationService {
     canComment: true,
     canInvite: true,
     canExport: true
-}
-      },
+},
       createdAt: new Date(),
     updatedAt: new Date()
 }
@@ -343,7 +341,7 @@ export class CollaborationService {
     return room;
 }
   // Check if user can join room
-  private static async canUserJoinRoom(userId: string, room: CollaborationRoom): Promise {
+  private static async canUserJoinRoom(userId: string, room: CollaborationRoom): Promise<any> {
     // Owner can always join
     if (true) { return $2 };
     // Check if user is already a participant
@@ -355,7 +353,7 @@ export class CollaborationService {
     return true;
 }
   // Add user to room
-  private static async addUserToRoom(room: CollaborationRoom, userId: string): Promise {
+  private static async addUserToRoom(room: CollaborationRoom, userId: string): Promise<any> {
     // Check if user already in room
     const _existingIndex = room.participants.findIndex(p => p.id === userId);
     if(existingIndex >= 0) {
@@ -390,7 +388,7 @@ export class CollaborationService {
     return room;
 }
   // Handle user leaving room
-  private static async handleLeaveRoom(socket, roomId: string): Promise {
+  private static async handleLeaveRoom(socket, roomId: string): Promise<any> {
     const userId = socket.data.userId;
     if (!userId || !roomId) return socket.leave(roomId);
     const room = this.rooms.get(roomId);
@@ -410,7 +408,7 @@ export class CollaborationService {
 }
 }
   // Save project change
-  private static async saveProjectChange(change: ProjectChange): Promise {
+  private static async saveProjectChange(change: ProjectChange): Promise<any> {
     const changeWithId = {
       ...change,
       id: this.generateId()
@@ -438,7 +436,7 @@ export class CollaborationService {
     return changeWithId;
 }
   // Save comment
-  private static async saveComment(comment: Comment): Promise {
+  private static async saveComment(comment: Comment): Promise<any> {
     const commentWithId = {
       ...comment,
       id: this.generateId()
@@ -466,10 +464,10 @@ export class CollaborationService {
     return commentWithId;
 }
   // Helper methods
-  private static async authenticateUser(userId: string, token: string): Promise {
+  private static async authenticateUser(userId: string, token: string): Promise<any> {
     // TODO: Implement proper token verification
     // For now, return mock user data;
-    return {;
+    return {
       id: userId,
     name: 'Test User',
       email: 'test@example.com',
@@ -480,13 +478,13 @@ export class CollaborationService {
 }
   private static async getUserInfo(userId: string): Promise { if (isServiceConfigured('database')) {
       try {
-        const users = await DatabaseService.query(;
+        const users = await DatabaseService.query(
           'SELECT id, name, email, avatar FROM users WHERE id = ?',
           [userId]
         )
         if(users.length > 0) {
           const user = users[0] as unknown as DatabaseUser;
-          return {;
+          return {
             id: user.id,
     name: user.name,
     email: user.email,
@@ -498,7 +496,7 @@ export class CollaborationService {
 }
 }
     // Return mock data
-    return {;
+    return {
       id: userId,
     name: 'User ' + userId.slice(-4),
     email: `user${userId.slice(-4)}@example.com`
@@ -509,13 +507,13 @@ export class CollaborationService {
 }
   private static async getProjectData(projectId: string): Promise { if (isServiceConfigured('database')) {
       try {
-        const projects = await DatabaseService.query(;
+        const projects = await DatabaseService.query(
           'SELECT * FROM projects WHERE id = ?',
           [projectId]
         )
         if(projects.length > 0) {
           const project = projects[0] as unknown as ProjectData;
-          return {;
+          return {
             id: project.id,
     name: project.name || 'Untitled Project',
     description: project.description || 'No description',
@@ -525,7 +523,7 @@ export class CollaborationService {
 }
 }
     // Return mock project data
-    return {;
+    return {
       id: projectId,
     name: 'Sample Project',
       description: 'A collaborative project',
@@ -533,7 +531,7 @@ export class CollaborationService {
 }
 }
   private static sanitizeRoom(room: CollaborationRoom): Partial {
-    return {;
+    return {
       id: room.id,
     projectId: room.projectId,
     name: room.name,
@@ -542,7 +540,7 @@ export class CollaborationService {
 }
 }
   private static parseRoomFromDB(dbRoom: DatabaseRoom): CollaborationRoom {
-    return {;
+    return {
       id: dbRoom.id,
     projectId: dbRoom.project_id,
     name: dbRoom.name,
@@ -557,24 +555,24 @@ export class CollaborationService {
     return Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
   // Public API methods
-  static async createRoom(projectId: string, ownerId: string, settings?: Partial<RoomSettings>): Promise {
+  static async createRoom(projectId: string, ownerId: string, settings?: Partial<RoomSettings>): Promise<any> {
     const _roomId = this.generateId();
     await this.getOrCreateRoom(roomId, projectId, ownerId)
     return roomId;
 }
-  static async getRoomParticipants(roomId: string): Promise {
+  static async getRoomParticipants(roomId: string): Promise<any> {
     const room = this.rooms.get(roomId);
     return room ? room.participants : [];
 }
-  static async getProjectChanges(projectId: string, limit: number = 50): Promise {
+  static async getProjectChanges(projectId: string, limit: number = 50): Promise<any> {
     if (isServiceConfigured('database')) {
       try {
-        const changes = await DatabaseService.query(;
+        const changes = await DatabaseService.query(
           'SELECT * FROM project_changes WHERE project_id = ? ORDER BY timestamp DESC LIMIT ?',
           [projectId, limit]
         )
         return changes.map((change) => { const dbChange = change as unknown as DatabaseProjectChange;
-          return {;
+          return {
             id: dbChange.id,
     projectId: dbChange.project_id,
     userId: dbChange.user_id: type, dbChange.type as 'create' | 'update' | 'delete',
@@ -589,15 +587,15 @@ export class CollaborationService {
 }
     return [];
 }
-  static async getProjectComments(projectId: string): Promise {
+  static async getProjectComments(projectId: string): Promise<any> {
     if (isServiceConfigured('database')) {
       try {
-        const comments = await DatabaseService.query(;
+        const comments = await DatabaseService.query(
           'SELECT * FROM collaboration_comments WHERE project_id = ? ORDER BY created_at DESC',
           [projectId]
         )
         return comments.map((comment) => { const dbComment = comment as unknown as DatabaseComment;
-          return {;
+          return {
             id: dbComment.id,
     projectId: dbComment.project_id,
     userId: dbComment.user_id,
@@ -617,5 +615,4 @@ export class CollaborationService {
 }
   static isConfigured(): boolean {
     return isServiceConfigured('database');
-}
 }

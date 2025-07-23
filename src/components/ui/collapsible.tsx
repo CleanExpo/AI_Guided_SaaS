@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import * as React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/utils/cn';
@@ -8,13 +10,13 @@ const CollapsibleContext = React.createContext<{
 }>({
   open: false, onOpenChange: () => {}}
 interface CollapsibleProps {
-
-  open?: boolean;
+open?: boolean;
   defaultOpen?: boolean;
-  onOpenChange? (open: boolean) => void,
-    children: React.ReactNode, className?: string;
-const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(;
+  onOpenChange? (open: boolean) => voi;d;
+    children: React.ReactNod;e, className?: string;
+const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
   ({ open = false, defaultOpen  = false, onOpenChange, children, className 
+
 } ref) => {
         </HTMLDivElement>
     const [internalOpen, setInternalOpen] = React.useState<any>(defaultOpen || open);
@@ -67,4 +69,6 @@ const CollapsibleContent = React.forwardRef<;
       <div, className={cn('pb-4, pt-0' className)}>{children}
     );
 CollapsibleContent.displayName = 'CollapsibleContent'
-export {  Collapsible, CollapsibleTrigger, CollapsibleContent  };
+export {  Collapsible, CollapsibleTrigger, CollapsibleContent  
+    </div>
+    };

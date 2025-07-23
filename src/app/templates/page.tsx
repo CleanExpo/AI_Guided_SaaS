@@ -1,26 +1,30 @@
+'use client';
+
 import React from 'react';
-'use client';import { useState } from 'react';
+
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import TemplateMarketplace from '@/components/marketplace/TemplateMarketplace';
-interface Template  {
-  id: string,
-    name: string,
-    description: string,
-    category: string,
+interface Template {
+id: string;
+    name: string;
+    description: string;
+    category: string;
     tags: string[];
   preview?: string;
-    author: string,
-    downloads: number,
+    author: string;
+    downloads: number;
     rating: number
+
 }
-props: anyexport default function TemplatesPage(): void {
-  const [selectedCategory, setSelectedCategory]: any[] = useState<any>('all');
+export default function TemplatesPage() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const { toast   }: any = useToast();
-  const templates: Template[] = [;,
+  const templates: Template[] = [
   {
   id: '1',
       name: 'E-commerce Starter',
@@ -52,7 +56,7 @@ props: anyexport default function TemplatesPage(): void {
     rating: 4.7
 }
   ];
-  const categories = [;,
+  const categories = [
   { id: 'all', name: 'All Templates', count: templates.length },
     { id: 'web', name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length },
     { id: 'mobile', name: 'Mobile Apps', count: 0 },
@@ -65,7 +69,7 @@ props: anyexport default function TemplatesPage(): void {
   const _handleUseTemplate = (template: Template) => {
     toast({
       title: "Template Selected",description: `Using "${template.name}" template for your new project.``
-    });
+  });
   };
   return (<div className="min-h-screen bg-gray-50 py-8">;
       <div className="container mx-auto px-4 max-w-7xl">
@@ -87,7 +91,7 @@ props: anyexport default function TemplatesPage(): void {
             ))}
           </TabsList>
           <TabsContent value={selectedCategory}>
-            {filteredTemplates.length > 0 ? (<div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
+            {filteredTemplates.length > 0 ? (<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {filteredTemplates.map((template) => (<Card key={template.id} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <div className="flex items-start justify-between">
@@ -98,7 +102,6 @@ props: anyexport default function TemplatesPage(): void {
                         <div className="text-right text-sm text-gray-500">
                           ★ {template.rating}
                         </div>
-                      </div>
                     </CardHeader>
                     <CardContent>
                       <p className="text-gray-600 mb-4">{template.description}</p>
@@ -139,9 +142,9 @@ props: anyexport default function TemplatesPage(): void {
         {/* Template, Marketplace Component */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Template Marketplace</h2>
-          <TemplateMarketplace    />
-        </div>
-      </div>
-    </div>
-  );
+          <TemplateMarketplace />
+              </div>
+);
+
+          </div>
 }

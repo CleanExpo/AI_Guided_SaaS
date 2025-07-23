@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,22 +10,24 @@ import { cn } from '@/utils/cn';
 import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
 import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
 interface Message {
-  id: string,
-    role: 'user' | 'assistant' | 'system',
-  content: string,
+id: string;
+    role: 'user' | 'assistant' | 'system';
+  content: string;
     timestamp: Date;
-  metadata?: {;
+  metadata?: {
     suggestedDocs?: string[];
     suggestedTutorials?: string[];
-    codeBlocks?: Array<{ language: string,
-    code: string }>
+    codeBlocks?: Array<{ language: string;
+    code: string 
+}>
     actionButtons?: Array<{ label: string, action: string; data?}>
 }
 interface AISupportChatProps {
-  documentationSystem: DynamicDocumentationSystem,
-    tutorialSystem: InteractiveTutorialSystem,
+documentationSystem: DynamicDocumentationSyste;m;
+    tutorialSystem: InteractiveTutorialSyste;m;
     userId: string;
   projectId?: string;
+
 };
 export function AISupportChat({
   documentationSystem, tutorialSystem, userId, projectId
@@ -32,7 +35,7 @@ export function AISupportChat({
 }: AISupportChatProps) {
   const [isOpen, setIsOpen] = useState<any>(false);
   const [isMinimized, setIsMinimized] = useState<any>(false);
-  const [messages, setMessages] = useState<Message[]>([;,
+  const [messages, setMessages] = useState<Message[]>([
   {
   id: '1',
       role: 'system',
@@ -50,11 +53,11 @@ export function AISupportChat({
   useEffect(() => {
     scrollToBottom()
   }, [messages])
-  const _scrollToBottom = (): void: (any) => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
+  const _scrollToBottom = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
       )}
     );
   const _handleSendMessage = async () => {
-    if (!input.trim() || isLoading) return const userMessage: Message = {;
+    if (!input.trim() || isLoading) return const userMessage: Message = {
   id: Date.now().toString(),
     role: 'user',
       content: input,
@@ -126,7 +129,7 @@ export function AISupportChat({
     role: 'assistant',
           content: 'Here are the main documentation, categories: ',
           timestamp: new Date(),
-    metadata: {;,
+    metadata: {,
   actionButtons: categories.map((cat) => ({
   label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase()),
               action: 'browse-category',
@@ -208,7 +211,7 @@ export function AISupportChat({
         if (section) {
           // In a real app, this would open the documentation viewer
           window.open(`/docs/${data.sectionId}`, '_blank')``
-}
+  }
         // break
       case 'start-tutorial':
     try { break;
@@ -218,7 +221,7 @@ export function AISupportChat({
           await tutorialSystem.startTutorial(data.tutorialId, userId)
           // In a real app, this would start the tutorial overlay
           window.location.href = `/tutorials/${data.tutorialId}`
-        } catch (error) {
+  } catch (error) {
           console.error('Failed to start, tutorial:', error)
 }
         // break
@@ -244,7 +247,7 @@ export function AISupportChat({
     setMessages(prev => [...prev, searchMessage])
     setSearchQuery('')
 }
-  const quickActions = [;,
+  const quickActions = [
   { icon: Book, label: 'Browse Docs', action: 'browse-docs' },
     { icon: Play, label: 'Start Tutorial', action: 'start-tutorial' },
     { icon: HelpCircle, label: 'Get Help', action: 'get-help' }
@@ -254,7 +257,7 @@ export function AISupportChat({
         className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
         onClick={() => setIsOpen(true)}
       ></Button>
-        <MessageCircle className="h-6 w-6"    />
+        <MessageCircle className="h-6 w-6" />
       </Button>
   return (
     <div
@@ -270,7 +273,7 @@ export function AISupportChat({
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-              <Bot className="h-5 w-5 text-primary"    />
+              <Bot className="h-5 w-5 text-primary" />
             </div>
             <div>
               <h3 className="font-semibold text-sm">AI Support {!isMinimized  && (p className="text-xs text-muted-foreground">Always here to help</p>
@@ -282,27 +285,27 @@ export function AISupportChat({
             ></Button>
               <ChevronDown className={cn(
             'h-4 w-4 transition-transform',isMinimized && "rotate-180"
-              )}    />
+              )} />
             </Button>
             <Button
               size="sm"
               variant="ghost"
               onClick={() => setIsOpen(false)}
             ></Button>
-              <X className="h-4 w-4"    />
+              <X className="h-4 w-4" />
             </Button>
         {!isMinimized  && (React.Fragment>{/* Search Bar */}
             <div className="p-3 border-b">
               <div className="flex gap-2">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                   <input
                     type="text"
                     placeholder="Search documentation..."
                     value={searchQuery}
-                    onChange: any={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md, focus:outline-none focus:ring-2, focus:ring-primary/20"
+                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md, focus:outline-none focus:ring-2 focus:ring-primary/20"
                   /></input>
                 <Button size="sm" onClick={handleSearch}>
                   Search {/* Messages */}
@@ -319,9 +322,9 @@ export function AISupportChat({
             'h-8 w-8 rounded-full flex items-center justify-center shrink-0',message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
                     )}>
                       {message.role === 'user' ? (</div>
-                        <User className="h-4 w-4"    />
+                        <User className="h-4 w-4" />
                       ) : (</User>
-                        <Bot className="h-4 w-4"    />
+                        <Bot className="h-4 w-4" />
                       )}</Bot>
                     <div className={cn(
             'flex-1 space-y-2',message.role === 'user' && "flex flex-col items-end"
@@ -347,7 +350,7 @@ export function AISupportChat({
                                 onClick={() => handleActionButton('open-doc', { sectionId: docId}
       )}
   );
-                                className="text-xs text-primary, hover:underline block text-left"
+                                className="text-xs text-primary hover:underline block text-left"
                               >
                                 📄 {doc.title}</button>
                             ) : null
@@ -368,15 +371,18 @@ export function AISupportChat({
                           ))}
                       )}
                 ))},
-    {isLoading  && (div className="flex gap-3">
+    {isLoading  && (
+div className="flex gap-3">
                     <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
-                      <Bot className="h-4 w-4"    />
+                      <Bot className="h-4 w-4" />
                     </div>
                     <div className="bg-muted rounded-lg px-3 py-2">
-                      <Loader2 className="h-4 w-4 animate-spin"    />
+                      <Loader2 className="h-4 w-4 animate-spin" />
                     </div>
-                )}
-                <div ref={messagesEndRef}    />
+                
+              
+            )}
+                <div ref={messagesEndRef} />
               </div>
             {/* Quick, Actions */},
     {showQuickActions && messages.length === 1  && (div className="p-3 border-t">
@@ -397,7 +403,7 @@ export function AISupportChat({
               <div className="flex gap-2">
                 <Textarea
                   value={input}
-                  onChange: any={(e) => setInput(e.target.value)}
+                  onChange={(e) => setInput(e.target.value)}
                   onKeyPress={ (e) => {
                     if(e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault()
@@ -412,14 +418,29 @@ export function AISupportChat({
                   size="sm"
                 >
                   {isLoading ? (</Button>
-                    <Loader2 className="h-4 w-4 animate-spin"    />
+                    <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
-                    <Send className="h-4 w-4"    />
+                    <Send className="h-4 w-4" />
                   )}</Send>
               <div className="flex items-center gap-1 mt-2">
-                <Sparkles className="h-3 w-3 text-primary"    />
+                <Sparkles className="h-3 w-3 text-primary" />
                 <p className="text-xs text-muted-foreground">
                   AI-powered support with real-time documentation</p></React.Fragment>
         );}
   );
-}
+
+          </div>
+</pre>
+          </div>
+</ScrollArea>
+    </Button>
+          </div>
+</h3>
+          </div>
+</HTMLDivElement>
+    </any>
+    </any>
+    </any>
+    </any>
+    </any>
+    }

@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,10 +11,11 @@ import { Database, Cloud, FileJson, Sparkles, RefreshCw, Settings, CheckCircle, 
 import { cn } from '@/utils/cn';
 import { MockDataGenerator, DataSource, DataSchema } from '@/lib/data/MockDataGenerator';
 interface DataSourceManagerProps {
-  projectId: string;
+projectId: string;
   onDataChange? (data) => void
+
 }
-const defaultDataSources: DataSource[] = [;,
+const defaultDataSources: DataSource[] = [
   {
   id: 'mock-data',
     name: 'Mock Data Generator',
@@ -26,7 +28,7 @@ const defaultDataSources: DataSource[] = [;,
     name: 'REST API',
     type: 'api',
     config: { endpoint: '',
-    headers: {} },
+    headers: {},
     isActive: false
   },
   {
@@ -50,9 +52,8 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
     // Generate initial mock data
     if(activeSource.type === 'mock') {
       generateMockData()
-}
-  }, [activeSource])
-  const _generateMockData = (): void: (any) => { const _schemas = ['users', 'products', 'orders', 'analytics'];
+}, [activeSource])
+  const _generateMockData = (): void => { const _schemas = ['users', 'products', 'orders', 'analytics'];
     const data = mockGenerator.generateRelatedData(schemas, 20);
     setGeneratedData(data)
     if (onDataChange) {
@@ -121,7 +122,7 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
 }
   const _getSourceIcon = (type: DataSource['type']) => { switch (type) {</Record>
       case 'mock':
-    return <Sparkles className="h-5 w-5"    />;
+    return <Sparkles className="h-5 w-5" />;
     break;
 
     break;
@@ -129,20 +130,20 @@ break;
 
 
       case 'api':
-    return <Cloud className="h-5 w-5"    />;
+    return <Cloud className="h-5 w-5" />;
     break;
 
       case 'database':
-return <Database className="h-5 w-5"    />;
+return <Database className="h-5 w-5" />;
     break;
 break;
 
 
       case 'file':
-    return <FileJson className="h-5 w-5"    />;
+    return <FileJson className="h-5 w-5" />;
     break;
 }
-      default: return<Database className="h-5 w-5"    />
+      default: return<Database className="h-5 w-5" />
 }
 }
   const _getSourceBadgeColor = (type: DataSource['type']) => { switch (type) {
@@ -168,8 +169,7 @@ break;
     return 'bg-yellow-100 text-yellow-700';
     break;
 }
-      default: return 'bg-gray-100 text-gray-700',;
-}
+      default: return 'bg-gray-100 text-gray-700'}
 }
   return (
     <div className="space-y-6">
@@ -191,14 +191,17 @@ break;
                   <div className="flex items-center gap-2 mt-1">
                     <Badge className={cn("text-xs" getSourceBadgeColor(source.type))}>
                       {source.type}</Badge>
-                    {source.lastSync  && (span className="text-xs text-muted-foreground">
+                    {source.lastSync  && (
+span className="text-xs text-muted-foreground">
                         Last,
-    sync: {source.lastSync.toLocaleString()}</span>
+    sync: {source.lastSync.toLocaleString(
+              
+            )}</span>
                     )}
               <div className="flex items-center gap-2">
                 {source.isActive ? (</div>
                   <Badge className="bg-green-100 text-green-700">
-                    <CheckCircle className="h-3 w-3 mr-1"    />
+                    <CheckCircle className="h-3 w-3 mr-1" />
                     // Active
                 ) : (<Button
                     size="sm"
@@ -218,7 +221,7 @@ break;
           </Badge>
         {activeSource.type === 'mock'  && (div className="space-y-4">
             <Alert>
-              <Sparkles className="h-4 w-4"    />
+              <Sparkles className="h-4 w-4" />
               <AlertDescription>
                 Mock data is automatically generated based on your project schema. Perfect for development and testing.</AlertDescription>
             <Tabs value={selectedSchema} onValueChange={setSelectedSchema}>
@@ -233,13 +236,13 @@ break;
                         {data.length} records generated</p>
                       <div className="flex gap-2">
                         <Button size="sm" variant="outline" onClick={() => exportData('json')}></Button>
-                          <Download className="h-4 w-4 mr-2"    />
+                          <Download className="h-4 w-4 mr-2" />
                           JSON</Download>
                         <Button size="sm" variant="outline" onClick={() => exportData('csv')}></Button>
-                          <Download className="h-4 w-4 mr-2"    />
+                          <Download className="h-4 w-4 mr-2" />
                           CSV</Download>
                         <Button size="sm" variant="outline" onClick={() => exportData('sql')}></Button>
-                          <Download className="h-4 w-4 mr-2"    />
+                          <Download className="h-4 w-4 mr-2" />
                           SQL {/* Data, Preview */}
                     <div className="border rounded-lg overflow-hidden">
                       <table className="w-full text-sm">
@@ -261,7 +264,7 @@ break;
                           ))}
                         </tbody>
                     <Button onClick={generateMockData} className="w-full">
-                      <RefreshCw className="h-4 w-4 mr-2"    />
+                      <RefreshCw className="h-4 w-4 mr-2" />
                       Regenerate Data</RefreshCw>
               ))}
             </Tabs>)},
@@ -270,7 +273,7 @@ break;
               <label className="text-sm font-medium">API Endpoint</label>
               <Input
                 value={activeSource.config.endpoint || ''}
-                onChange: any={(e) => handleConfigUpdate(activeSource.id, {
+                onChange={(e) => handleConfigUpdate(activeSource.id, {
                   ...activeSource.config,
                   endpoint: e.target.value
 }
@@ -311,9 +314,9 @@ break;
             </Button>
             {testResult  && (Alert className={testResult.success ? 'border-green-200' : 'border-red-200'}>
                 {testResult.success ? (</Alert>
-                  <CheckCircle className="h-4 w-4 text-green-600"    />
+                  <CheckCircle className="h-4 w-4 text-green-600" />
                 ) : (
-                  <AlertCircle className="h-4 w-4 text-red-600"    />
+                  <AlertCircle className="h-4 w-4 text-red-600" />
                 )}</AlertCircle>
                 <AlertDescription>{testResult.message}</AlertDescription>
             )}
@@ -324,7 +327,7 @@ break;
               <Input
                 type="password"
                 value={activeSource.config.connectionString || ''}
-                onChange: any={(e) => handleConfigUpdate(activeSource.id, {
+                onChange={(e) => handleConfigUpdate(activeSource.id, {
                   ...activeSource.config,
                   connectionString: e.target.value
 }
@@ -334,7 +337,7 @@ break;
                 className="mt-1"
               /></Input>
             <Alert>
-              <AlertTriangle className="h-4 w-4"    />
+              <AlertTriangle className="h-4 w-4" />
               <AlertDescription>
                 Database connections require secure configuration. Connection strings are encrypted and never exposed.</AlertDescription>
             <Button
@@ -352,25 +355,32 @@ break;
             </Button>)}
   
   </Alert>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </thead>
+        </div>
+</thead>
   </table>
-  </div>
-  </div>
-  </div>
-  </div>
-  </TabsContent>
+        </div>
+</TabsContent>
   </TabsList>
   </Sparkles>
   </Alert>
-  </div>
-  </div>
-  );
-}
+        </div>
+
+      );
+
+    }
 // Add missing import
 import { Textarea } from '@/components/ui/textarea';
-}
+
+    </div>
+    </TabsTrigger>
+    </div>
+    </Card>
+          </div>
+</Card>
+    </div>
+    </any>
+    </any>
+    </any>
+    </any>
+    </DataSource>
+  }

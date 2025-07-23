@@ -60,7 +60,6 @@ export interface AgentConfig { enabled: boolean,
   model: string,
     temperature: number,
     maxTokens: number
-}
 },
     documentation: {
     model: string,
@@ -120,17 +119,17 @@ export interface FeatureFlagsConfig {
     betaVoiceCommands: boolean,
     betaAiDebugging: boolean
 }
-export interface PlatformConfig { aiProvider: AIProviderConfig,
-    openai: ModelConfig,
-    anthropic: ModelConfig,
-    google: ModelConfig,
-    framework: FrameworkConfig,
-    react: ReactConfig,
-    database: DatabaseConfig,
-    agents: AgentConfig,
-    security: SecurityConfig,
-    performance: PerformanceConfig,
-    features: FeatureFlagsConfig
+export interface PlatformConfig { aiProvider: AIProviderConfi;g,
+    openai: ModelConfi;g,
+    anthropic: ModelConfi;g,
+    google: ModelConfi;g,
+    framework: FrameworkConfi;g,
+    react: ReactConfi;g,
+    database: DatabaseConfi;g,
+    agents: AgentConfi;g,
+    security: SecurityConfi;g,
+    performance: PerformanceConfi;g,
+    features: FeatureFlagsConfi;g
 }
 }
 class ConfigurationManager {
@@ -149,7 +148,7 @@ class ConfigurationManager {
   /**
    * Load configuration from .prp file
    */
-  async loadConfig(): Promise {
+  async loadConfig(): Promise<any> {
     if(this.config) {
       return this.config;
 }
@@ -190,7 +189,7 @@ class ConfigurationManager {
    * Substitute environment variables in configuration values
    */
   private substituteEnvironmentVariables(value: string) {
-    return value.replace(/\$\{([^}]+)\}/g, (match, envVar) => {;
+    return value.replace(/\$\{([^}]+)\}/g, (match, envVar) => {
       return process.env[envVar] || match;
     });
 }
@@ -200,12 +199,12 @@ class ConfigurationManager {
   private transformToTypedConfig(
     properties: Record<string, string>
   ): PlatformConfig {
-    return {;
+    return {
       aiProvider: {
   primary: properties['ai.provider.primary'] || 'openai',
     fallback: properties['ai.provider.fallback'] || 'anthropic',
     research: properties['ai.provider.research'] || 'google'
-    }},
+    },
     openai: {
         apiKey: properties['openai.api.key'] || '',
     baseUrl: properties['openai.api.base_url'] || 'https://api.openai.com/v1',
@@ -287,7 +286,7 @@ class ConfigurationManager {
     typescript: properties['framework.typescript'] === 'true',
     eslint: properties['framework.eslint'] === 'true',
     tailwind: properties['framework.tailwind'] === 'true'
-    }},
+    },
     react: {
         version: properties['react.version'] || '18',
     strictMode: properties['react.strict_mode'] === 'true',
@@ -296,7 +295,7 @@ class ConfigurationManager {
     hooksPreferred: properties['react.hooks.preferred'] === 'true',
     stateManagement: properties['react.state_management'] || 'zustand',
     testingLibrary: properties['react.testing_library'] || '@testing-library/react'
-    }},
+    },
     database: {
         orm: properties['database.orm'] || 'prisma',
     provider: properties['database.provider'] || 'postgresql',
@@ -304,7 +303,7 @@ class ConfigurationManager {
     migrationsAuto: properties['database.migrations.auto'] === 'true',
     schemaValidation: properties['database.schema_validation'] === 'true',
     queryLogging: properties['database.query_logging'] || 'development'
-    }},
+    },
     agents: {
         enabled: properties['agents.enabled'] === 'true',
     maxConcurrent: parseInt(properties['agents.max_concurrent'] || '5'),
@@ -363,7 +362,7 @@ class ConfigurationManager {
     xssProtection: properties['security.xss_protection'] === 'true',
     ddosProtection: properties['security.ddos_protection'] === 'true',
     suspiciousActivityDetection: properties['security.suspicious_activity_detection'] === 'true'
-    }},
+    },
     performance: {
         cacheStrategy: properties['cache.strategy'] || 'redis',
     cacheTtlDefault: parseInt(properties['cache.ttl.default'] || '3600'),
@@ -380,7 +379,7 @@ class ConfigurationManager {
     analyticsEnabled: properties['analytics.enabled'] === 'true',
     loggingLevel: properties['logging.level'] || 'info',
     healthEnabled: properties['health.enabled'] === 'true'
-    }},
+    },
     features: {
         aiGeneration: properties['features.ai_generation.enabled'] === 'true',
     collaboration: properties['features.collaboration.enabled'] === 'true',
@@ -401,7 +400,7 @@ class ConfigurationManager {
   /**
    * Get specific configuration section
    */
-  async getAIProviderConfig(): Promise {
+  async getAIProviderConfig(): Promise<any> {
     const config = await this.loadConfig();
     return config.aiProvider;
 }
@@ -420,33 +419,33 @@ break;
     break;
 
       case 'google':
-return config.google,;
+return config.google,
     break;
 break;
 }
     default: throw new Error(`Unknown AI, provider: ${provider}`);``
 }
 }
-  async getAgentConfig(): Promise {
+  async getAgentConfig(): Promise<any> {
     const config = await this.loadConfig();
     return config.agents;
 }
-  async getFeatureFlags(): Promise {
+  async getFeatureFlags(): Promise<any> {
     const config = await this.loadConfig();
     return config.features;
 }
-  async getSecurityConfig(): Promise {
+  async getSecurityConfig(): Promise<any> {
     const config = await this.loadConfig();
     return config.security;
 }
-  async getPerformanceConfig(): Promise {
+  async getPerformanceConfig(): Promise<any> {
     const config = await this.loadConfig();
     return config.performance;
 }
   /**
    * Check if a feature is enabled
    */
-  async isFeatureEnabled(featureName: keyof FeatureFlagsConfig): Promise {
+  async isFeatureEnabled(featureName: keyof FeatureFlagsConfig): Promise<any> {
     const features = await this.getFeatureFlags();
     return features[featureName];
 }
@@ -475,11 +474,10 @@ break;
 
 
       case 'review':
-    return modelConfig.primary,;
+    return modelConfig.primary,
     break;
 }
-    default: return modelConfig.primary,;
-}
+    default: return modelConfig.primary}
 }
   /**
    * Reload configuration (useful for development)
@@ -499,5 +497,5 @@ export const _getAgentConfig = () => configManager.getAgentConfig();
 export const _getFeatureFlags = () => configManager.getFeatureFlags();
 export const _isFeatureEnabled = (feature: keyof FeatureFlagsConfig) =>;
   configManager.isFeatureEnabled(feature);
-export const _getPrimaryModelForTask = (, ;
+export const _getPrimaryModelForTask = (,
     task: 'code_generation' | 'documentation' | 'analysis' | 'review') => configManager.getPrimaryModelForTask(task);

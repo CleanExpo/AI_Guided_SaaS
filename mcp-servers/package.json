@@ -1,0 +1,15 @@
+{
+  "name": "mcp-servers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@upstash/context7-mcp": "^1.0.14"
+  }
+}

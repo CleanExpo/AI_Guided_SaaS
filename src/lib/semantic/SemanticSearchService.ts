@@ -42,7 +42,7 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Index a document with semantic embeddings
    */
-  async indexDocument(request: IndexRequest): Promise {
+  async indexDocument(request: IndexRequest): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/index`, {
         method: 'POST',
@@ -67,7 +67,7 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Index multiple documents in batch
    */
-  async indexBatch(requests: IndexRequest[]): Promise {
+  async indexBatch(requests: IndexRequest[]): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/index/batch`, {
         method: 'POST',
@@ -87,7 +87,7 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Perform semantic search with context7 workflow
    */
-  async search(request: SearchRequest): Promise {
+  async search(request: SearchRequest): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/search`, {
         method: 'POST',
@@ -112,7 +112,7 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Delete a document from the index
    */
-  async deleteDocument(docId: string): Promise {
+  async deleteDocument(docId: string): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/index/${docId}`, {
         method: 'DELETE',
@@ -131,7 +131,7 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Check service health
    */
-  async checkHealth(): Promise {
+  async checkHealth(): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/health`);
       
@@ -147,7 +147,7 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Helper method to index project files for semantic search
    */
-  async indexProjectFiles(files: Array<{ path: string, content: string, type: string }>): Promise {
+  async indexProjectFiles(files: Array<{ path: string, content: string, type: string }>): Promise<any> {
     const requests: IndexRequest[] = files.map((file) => ({
   id: file.path,
       content: file.content,
@@ -165,7 +165,7 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Context7 search - returns only the most relevant context
    */
-  async searchContext7(query: string, type?: string): Promise {
+  async searchContext7(query: string, type?: string): Promise<any> {
     const searchRequest: SearchRequest = {
       query,
       size: 7,
@@ -177,12 +177,12 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Search for code symbols and definitions
    */
-  async searchCode(query: string, language?: string): Promise {
+  async searchCode(query: string, language?: string): Promise<any> {
     const filters: Record<string, any> = { type: 'code' };
     if (language) {
       filters['metadata.language'] = language
 }
-    return this.search({;
+    return this.search({
       query,
       filters,
       size: 10
@@ -191,8 +191,8 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Search project documentation and memories
    */
-  async searchDocumentation(query: string): Promise {
-    return this.search({;
+  async searchDocumentation(query: string): Promise<any> {
+    return this.search({
       query,
       filters: { type: 'document' },
       size: 5
@@ -201,12 +201,12 @@ export class SemanticSearchService { private baseUrl: string;
   /**
    * Search conversation history
    */
-  async searchConversations(query: string, userId?: string): Promise {
+  async searchConversations(query: string, userId?: string): Promise<any> {
     const filters: Record<string, any> = { type: 'conversation' };
     if (userId) {
       filters['metadata.userId'] = userId
 }
-    return this.search({;
+    return this.search({
       query,
       filters,
       size: 5

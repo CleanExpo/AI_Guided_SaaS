@@ -4,13 +4,13 @@ import { RequirementAnalysis, UserStory } from './AnalystAgent';
 export interface ProjectPlan {
   projectName: string,
     projectDescription: string,
-    timeline: Timeline,
+    timeline: Timelin;e,
     milestones: Milestone[],
     workBreakdown: WorkPackage[],
-    resourceAllocation: ResourcePlan,
+    resourceAllocation: ResourcePla;n,
     riskMitigation: RiskMitigation[],
-    communicationPlan: CommunicationPlan,
-    qualityAssurance: QualityPlan
+    communicationPlan: CommunicationPla;n,
+    qualityAssurance: QualityPla;n
 };
 export interface Timeline {
   startDate: string,
@@ -112,7 +112,7 @@ export class ProjectManagerAgent extends Agent {
       temperature: 0.4
     }};
 }
-  protected async execute(input: string): Promise {
+  protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting project planning process...');
       // Get requirements from shared memory or artifacts
@@ -127,7 +127,7 @@ export class ProjectManagerAgent extends Agent {
       const projectScope = await this.defineProjectScope(input, requirements);
       this.observe('Defined project scope', projectScope);
       // Step, 2: Create timeline and phases
-      const timeline = await this.createTimeline(;
+      const timeline = await this.createTimeline(
         projectScope,
         userStories,
         // constraints
@@ -137,7 +137,7 @@ export class ProjectManagerAgent extends Agent {
       const milestones = await this.defineMilestones(timeline, userStories);
       this.observe('Defined project milestones', milestones);
       // Step, 4: Create work breakdown structure
-      const workBreakdown = await this.createWorkBreakdown(;
+      const workBreakdown = await this.createWorkBreakdown(
         userStories,
         // milestones
       );
@@ -154,13 +154,13 @@ export class ProjectManagerAgent extends Agent {
         riskCount: riskMitigation.length
       }};
       // Step, 7: Create communication plan
-      const _communicationPlan = await this.createCommunicationPlan(;
+      const _communicationPlan = await this.createCommunicationPlan(
         projectScope,
         // resourcePlan
       );
       this.observe('Created communication plan', communicationPlan);
       // Step, 8: Define quality assurance plan
-      const qualityPlan = await this.defineQualityPlan(;
+      const qualityPlan = await this.defineQualityPlan(
         requirements,
         // userStories
       );
@@ -184,7 +184,7 @@ export class ProjectManagerAgent extends Agent {
       this.setSharedMemory('work-packages', workBreakdown);
       this.setSharedMemory('team-structure', resourcePlan.teamStructure);
       this.setSharedMemory('quality-standards', qualityPlan.standards);
-      return {;
+      return {
         success: true,
     output: projectPlan,
     messages: this.messages,
@@ -201,7 +201,7 @@ export class ProjectManagerAgent extends Agent {
       throw error;
 }
 }
-  private async defineProjectScope(input: string, requirements: string[]): Promise {
+  private async defineProjectScope(input: string, requirements: string[]): Promise<any> {
     const _prompt = `Based on the project description and requirements, define the project, scope: Project, Description:``
 ${input}
 Key: Requirements:
@@ -218,8 +218,8 @@ Format as JSON.`
 }};
     return JSON.parse(response);
 }
-  private async createTimeline(projectScope, userStories: UserStory[], constraints: string[]): Promise {
-    const _prompt = `Create a realistic project timeline based, on:;``
+  private async createTimeline(projectScope, userStories: UserStory[], constraints: string[]): Promise<any> {
+    const _prompt = `Create a realistic project timeline based, on: ``
 
 Project: ${projectScope.name}
 User: Stories: ${userStories.length} stories; Constraints: ${constraints.join(', ')}
@@ -239,7 +239,7 @@ Format as JSON with a Timeline structure.`
 }};
     return JSON.parse(response);
 }
-  private async defineMilestones(timeline: Timeline, userStories: UserStory[]): Promise {
+  private async defineMilestones(timeline: Timeline, userStories: UserStory[]): Promise<any> {
     const _prompt = `Define project milestones based on the timeline and user, stories: Timeline, Phases:``
 ${JSON.stringify(timeline.phases, null, 2)}
 High-Priority, User: Stories:
@@ -258,12 +258,12 @@ Format as JSON array of Milestone objects.`
     responseFormat: 'json'
 }};
     const milestones = JSON.parse(response);
-    return milestones.map((m, index: number) => ({;
+    return milestones.map((m, index: number) => ({
       ...m,
       id: `M${index + 1}`
     }});
 }
-  private async createWorkBreakdown(userStories: UserStory[], milestones: Milestone[]): Promise {
+  private async createWorkBreakdown(userStories: UserStory[], milestones: Milestone[]): Promise<any> {
     const _prompt = `Create a work breakdown structure for the, project: User, Stories:``
 ${JSON.stringify(userStories, null, 2)}
 Milestones:
@@ -281,12 +281,12 @@ Format as JSON array of WorkPackage objects.`
     responseFormat: 'json'
 }};
     const packages = JSON.parse(response);
-    return packages.map((p, index: number) => ({;
+    return packages.map((p, index: number) => ({
       ...p,
       id: `WP-${index + 1}`
     }});
 }
-  private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise {
+  private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise<any> {
     const _prompt = `Plan resource allocation for the, project: Work, Packages:``
 ${JSON.stringify(
   workPackages.map((wp) => ({
@@ -312,8 +312,8 @@ Format as JSON ResourcePlan object.`
 }};
     return JSON.parse(response);
 }
-  private async planRiskMitigation(risks: string[], projectScope): Promise {
-    const _prompt = `Create risk mitigation plans for identified, risks:;``
+  private async planRiskMitigation(risks: string[], projectScope): Promise<any> {
+    const _prompt = `Create risk mitigation plans for identified, risks: ``
 
 Project: ${projectScope.name}
 Identified: Risks:
@@ -332,8 +332,8 @@ Format as JSON array of RiskMitigation objects.`
 }};
     return JSON.parse(response);
 }
-  private async createCommunicationPlan(projectScope, resourcePlan: ResourcePlan): Promise {
-    const _prompt = `Create a communication plan for the, project:;``
+  private async createCommunicationPlan(projectScope, resourcePlan: ResourcePlan): Promise<any> {
+    const _prompt = `Create a communication plan for the, project: ``
 
 Project: ${projectScope.name}
 Team: Structure:
@@ -351,7 +351,7 @@ Format as JSON CommunicationPlan object.`
 }};
     return JSON.parse(response);
 }
-  private async defineQualityPlan(requirements: string[], userStories: UserStory[]): Promise {
+  private async defineQualityPlan(requirements: string[], userStories: UserStory[]): Promise<any> {
     const _prompt = `Define a quality assurance, plan: Key, Requirements:``
 ${requirements.slice(0, 10).join('\n')}
 Acceptance Criteria from, User: Stories:
@@ -372,5 +372,4 @@ Format as JSON QualityPlan object.`
     responseFormat: 'json'
 }};
     return JSON.parse(response);
-}
 }

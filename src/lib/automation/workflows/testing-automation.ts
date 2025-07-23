@@ -1,10 +1,9 @@
 import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated testing
  */
-export function createTestingAutomationWorkflow(, ;
+export function createTestingAutomationWorkflow(,
     projectName: string, webhookPath: string = 'run-tests'): string, webhookPath: string = 'run-tests'): N8nWorkflow {
-  const nodes: N8nNode[] = [;
-    // 1. Webhook or Schedule trigger,
+  const nodes: N8nNode[] = [// 1. Webhook or Schedule trigger,
   {
   id: 'trigger_1',
       name: 'Test Trigger',
@@ -16,8 +15,7 @@ export function createTestingAutomationWorkflow(, ;
         path: webhookPath,
     responseMode: 'lastNode',
         responseData: 'allEntries'
-}
-    },
+},
     // 2. Schedule trigger (alternative) {
       id: 'schedule_1',
       name: 'Scheduled Tests',
@@ -25,15 +23,14 @@ export function createTestingAutomationWorkflow(, ;
       typeVersion: 1,
     position: [250, 500],
     parameters: {
-  rule: {;,
+  rule: {,
   interval: [
             {
   field: 'hours',
               hoursInterval: 6 // Run every 6 hours
 }
    ]
-}
-      },
+},
       disabled: true // Disabled by default, user can enable
     },
     // 3. Merge triggers
@@ -46,8 +43,7 @@ export function createTestingAutomationWorkflow(, ;
     parameters: {
   mode: 'combine',
         combinationMode: 'multiplex'
-}
-    },
+},
     // 4. Prepare test configuration
     {
       id: 'code_1',
@@ -74,14 +70,13 @@ const config = isScheduled ? defaultConfig : {
   ...input,
   projectId: input.projectId || defaultConfig.projectId
 };
-return {;
+return {
   ...config,
   timestamp: new Date().toISOString(),
     triggeredBy: isScheduled ? 'schedule' : 'webhook',
   runId: Math.random().toString(36).substring(7)
 };`
-}
-    },
+},
     // 5. Run unit tests
     {
       id: 'http_unit',
@@ -183,7 +178,7 @@ const coverage = unitTests.coverage || {
     functions: 0,
     branches: 0
 };
-return [{;
+return [{
   json: {
   projectId: config.projectId,
     runId: config.runId,
@@ -208,8 +203,7 @@ return [{;
     e2e: e2eTests.duration || 0,
     total: (unitTests.duration || 0) + (integrationTests.duration || 0) + (e2eTests.duration || 0)
      }];```
-}
-    },
+},
     // 9. Check if tests passed
     {
       id: 'if_1',
@@ -218,7 +212,7 @@ return [{;
       typeVersion: 1,
     position: [1250, 400],
     parameters: {
-  conditions: {;,
+  conditions: {,
   boolean: [
             {
   value1: '={{ $json.success }}',
@@ -226,8 +220,7 @@ return [{;
 }
    ]
 }
-}
-    },
+},
     // 10. Generate test report
     {
       id: 'html_1',
@@ -330,8 +323,7 @@ return [{;
   </div>
 </body>
 </html>```
-}
-    },
+},
     // 11. Upload report
     {
       id: 'http_upload',
@@ -354,8 +346,7 @@ return [{;
           })
         }}`,``
     options: {}
-}
-    },
+},
     // 12. Handle test failures
     {
       id: 'code_3',
@@ -377,7 +368,7 @@ Object.entries(results.suites).forEach(([suite, data]) => {
     });
 }
 });
-return {;
+return {
   projectId: results.projectId,
     runId: results.runId,
     timestamp: results.timestamp,
@@ -385,8 +376,7 @@ return {;
   summary: results.summary,
     message: \`Tests failed for \${results.projectId}: \${results.summary.failed} tests failed out of \${results.summary.total}\`
 };```
-}
-    },
+},
     // 13. Send notifications
     {
       id: 'slack_1',
@@ -432,8 +422,7 @@ return {;
               ts: '={{ Math.floor(Date.now() / 1000) }}'
 }
           ]
-}
-      },
+},
     credentials: {
         slackOAuth2Api: 'Slack OAuth2'
 }
@@ -485,7 +474,7 @@ return {;
       'main': [[{ node: 'slack_1', type: 'main' as const index: 0 }]]
 }
 }
-  return {;
+  return {
     name: `Test Automation - ${projectName}`
     active: false,
     nodes,
@@ -496,5 +485,4 @@ return {;
     callerPolicy: 'workflowsFromSameOwner'
     },
     tags: ['testing', 'automation', 'ci-cd', 'quality']
-}
 }

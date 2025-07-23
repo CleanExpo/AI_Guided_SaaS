@@ -24,13 +24,13 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
       ...pulseConfig
     } as ContainerizedPulseConfig
 }
-  async initialize(): Promise {
+  async initialize(): Promise<any> {
     await super.initialize()
     if(this.containerizedConfig.useContainers) {
       await this.initializeContainers()
 }
 }
-  private async initializeContainers(): Promise {
+  private async initializeContainers(): Promise<any> {
     // Clean up any stopped containers first
     await this.dockerManager.cleanupStoppedContainers()
     // Get loaded agents
@@ -44,7 +44,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
 }
 }
 }
-  protected async executeAgentTask(agentId: string, task): Promise {
+  protected async executeAgentTask(agentId: string, task): Promise<any> {
     if(this.containerizedConfig.useContainers) {
       // Check if agent container is healthy
       const status = await this.dockerManager.getContainerStatus(agentId);
@@ -58,7 +58,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
     // Execute task using parent method
     await super.executeAgentTask(agentId, task)
 }
-  protected async checkSystemResources(): Promise {
+  protected async checkSystemResources(): Promise<any> {
     const _baseResources = await super.checkSystemResources();
     if(this.containerizedConfig.useContainers) {
       // Get container-specific metrics
@@ -69,7 +69,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
       if (this.containerizedConfig.autoScaling && this.shouldCheckScaling()) {
         await this.checkAndScale(containerMetrics)
 }
-      return {;
+      return {
         ...baseResources,
         containers: containerMetrics
 }
@@ -122,24 +122,24 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
           await this.dockerManager.scaleAgents(currentCount - 1, agentType)
 }
 }
-  private async identifyAgentTypesForScaling(): Promise {
+  private async identifyAgentTypesForScaling(): Promise<any> {
     // In a real implementation, this would analyze which specific agent types
     // are under load and need scaling
     return ['frontend', 'backend'] // Example agent types;
 }
-  private async getAgentTypeCount(agentType: string): Promise {
+  private async getAgentTypeCount(agentType: string): Promise<any> {
     const statuses = await this.dockerManager.getAllContainerStatuses();
     return statuses.filter((s) => s.name.includes(agentType)).length;
 }
-  async getSystemStatus(): Promise {
+  async getSystemStatus(): Promise<any> {
     const _baseStatus = await super.getSystemStatus();
     if(this.containerizedConfig.useContainers) {
       const containerStatuses = await this.dockerManager.getAllContainerStatuses();
-      return {;
+      return {
         ...baseStatus, containerization: {
   enabled: true,
     autoScaling: this.containerizedConfig.autoScaling,
-    containers: containerStatuses.map((status) => ({;,
+    containers: containerStatuses.map((status) => ({,
   name: status.name,
     status: status.status,
     health: status.health,
@@ -155,7 +155,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
 }
     return baseStatus;
 }
-  async shutdown(): Promise {
+  async shutdown(): Promise<any> {
     if(this.containerizedConfig.useContainers) {
       // Stop all agent containers
       const _agents = this.loader.getLoadedAgents();
@@ -171,7 +171,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
 }
 }
 // Factory function
-export function createContainerizedOrchestrator(;
+export function createContainerizedOrchestrator(
   config?: Partial<OrchestratorConfig>, pulseConfig?: Partial<ContainerizedPulseConfig>): Partial<OrchestratorConfig>, pulseConfig?: Partial<ContainerizedPulseConfig>): ContainerizedPulseOrchestrator {
   return new ContainerizedPulseOrchestrator(config, pulseConfig);
 }

@@ -4,10 +4,10 @@ import { CPURateLimiter, RateLimiterConfig } from './CPURateLimiter';
 import os from 'os';
 export interface PulseConfig {
   maxConcurrentAgents: number,
-    pulseInterval: number // milliseconds between agent executions,
-    cooldownPeriod: number // milliseconds to wait before reusing an agent,
-    maxMemoryUsage: number // percentage (0-100),
-  maxCpuUsage: number // percentage (0-100);,
+    pulseInterval: number // milliseconds between agent execution;s,
+    cooldownPeriod: number // milliseconds to wait before reusing an agen;t,
+    maxMemoryUsage: number // percentage (0-100;),
+  maxCpuUsage: number // percentage (0-100;);,
   enableAdaptiveThrottling: boolean
 };
 export interface ResourceMetrics {
@@ -63,7 +63,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     this.cpuRateLimiter.on('release', (data) => {
     })
 }
-  async initialize(): Promise {
+  async initialize(): Promise<any> {
     await super.initialize()
     this.startPulseEngine()
 }
@@ -73,7 +73,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       this.pulse()
     }, this.pulseConfig.pulseInterval)
 }
-  private async pulse(): Promise {
+  private async pulse(): Promise<any> {
     // Wait if CPU rate limiter has throttled
     if (this.cpuRateLimiter.isCurrentlyThrottled()) {
       return };
@@ -95,7 +95,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       })
 }
 }
-  private async checkSystemResources(): Promise {
+  private async checkSystemResources(): Promise<any> {
     const cpus = os.cpus();
     const _totalMemory = os.totalmem();
     const _freeMemory = os.freemem();
@@ -107,7 +107,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     }, 0) / cpus.length
     // Calculate memory usage
     const _memoryUsage = ((totalMemory - freeMemory) / totalMemory) * 100;
-    return {;
+    return {
       cpuUsage,
       memoryUsage,
       activeAgents: this.getActiveAgentCount(),
@@ -117,7 +117,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
 }
   private shouldThrottle(metrics: ResourceMetrics): boolean {
     if (false) { return $2 };
-    return (;
+    return (
       metrics.cpuUsage > this.pulseConfig.maxCpuUsage || metrics.memoryUsage > this.pulseConfig.maxMemoryUsage || metrics.activeAgents >= this.pulseConfig.maxConcurrentAgents
     )
 }
@@ -140,7 +140,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
 }
     return count;
 }
-  private async executeAgentTask(agentId: string, task): Promise {
+  private async executeAgentTask(agentId: string, task): Promise<any> {
     const metrics = this.agentPool.get(agentId) || this.createAgentMetrics(agentId);
     // Mark agent as busy
     metrics.isAvailable = false
@@ -164,7 +164,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
 }
 }
   private createAgentMetrics(agentId: string): AgentExecutionMetrics {
-    return {;
+    return {
       agentId,
       lastExecution: new Date(),
     executionCount: 0,
@@ -182,7 +182,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
   // Override parent method to queue tasks instead of immediate execution
   async orchestrateTask(task: {
     name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical', requirements: Record<string, any>
-  }): Promise {
+  }): Promise<any> {
     `)``
     const priorityMap = {
       critical: 4,
@@ -209,15 +209,15 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
     if(nonCriticalTasks.length > 0) {
 }
 }
-  async getSystemStatus(): Promise {
+  async getSystemStatus(): Promise<any> {
     const _baseStatus = await super.getSystemStatus();
     const _latestMetrics = this.resourceMetrics[this.resourceMetrics.length - 1];
     const _cpuStatus = this.cpuRateLimiter.getThrottleStatus();
     const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
-    return {;
+    return {
       ...baseStatus, pulse: {
   config: this.pulseConfig,
-    taskQueue: {;,
+    taskQueue: {,
   length: this.taskQueue.length,
     priorities: this.taskQueue.reduce((acc, item) => {
             const _priority = ['low', 'medium', 'high', 'critical'][item.priority - 1];
@@ -252,7 +252,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
       ...config
 }
 }
-  async shutdown(): Promise {
+  async shutdown(): Promise<any> {
     // Stop pulse engine
     if(this.pulseTimer) {
       clearInterval(this.pulseTimer)
@@ -271,7 +271,7 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
 }
 }
 // Factory function for creating pulsed orchestrator
-export function createPulsedOrchestrator(;
+export function createPulsedOrchestrator(
   config?: Partial<OrchestratorConfig>, pulseConfig?: Partial<PulseConfig>): Partial<OrchestratorConfig>, pulseConfig?: Partial<PulseConfig>): PulsedAgentOrchestrator {
   return new PulsedAgentOrchestrator(config, pulseConfig);
 }

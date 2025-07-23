@@ -17,11 +17,11 @@ const ToastViewport = React.forwardRef<;
      />
 ));
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
-const _toastVariants = cva(;
+const _toastVariants = cva(
   "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
   {
     variants: {
-  variant: {;,
+  variant: {,
   default: "border bg-background text-foreground",
         destructive: "destructive group border-destructive bg-destructive text-destructive-foreground",
     defaultVariants: {
@@ -67,7 +67,7 @@ const ToastClose = React.forwardRef<;
     toast-close="",
     {...props}
   >
-    <X className="h-4 w-4"    />
+    <X className="h-4 w-4" />
   </ToastPrimitives.Close>
 ));
 ToastClose.displayName = ToastPrimitives.Close.displayName;
@@ -95,8 +95,8 @@ const ToastDescription = React.forwardRef<;
 ToastDescription.displayName = ToastPrimitives.Description.displayName;
 type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;
 type ToastActionElement = React.ReactElement<typeof ToastAction>;
-export {  type ToastProps,;
-  type ToastActionElement,;
+export {  type ToastProps,
+  type ToastActionElement,
   ToastProvider,
   ToastViewport,
   Toast,
@@ -104,4 +104,20 @@ export {  type ToastProps,;
   ToastDescription,
   ToastClose,
   ToastAction;
- };
+ 
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+  };

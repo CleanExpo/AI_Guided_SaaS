@@ -1,6 +1,6 @@
-import React from 'react';
 'use client';
-import { useState, useEffect } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -9,53 +9,65 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Shield, Activity, BarChart3, AlertTriangle, CheckCircle, Search, Eye, Edit, UserCheck, UserX, Flag, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { adminService, SystemStats, UserManagement, ContentModeration, SystemConfiguration, AdminActivity } from '@/lib/admin';
+
 export default function AdminPanel() {
   const [adminUser, setAdminUser] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState<any>('overview');
-  const [loading, setLoading] = useState<any>(true);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [loading, setLoading] = useState(true);
   const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
   const [users, setUsers] = useState<UserManagement[]>([]);
   const [content, setContent] = useState<ContentModeration[]>([]);
   const [configuration, setConfiguration] = useState<SystemConfiguration[]>([]);
   const [activities, setActivities] = useState<AdminActivity[]>([]);
-  const [searchTerm, setSearchTerm] = useState<any>('');
-  const [userFilter, setUserFilter] = useState<any>('all');
-  const [contentFilter, setContentFilter] = useState<any>('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [userFilter, setUserFilter] = useState('all');
+  const [contentFilter, setContentFilter] = useState('all');
+
   useEffect(() => {
     // Load admin user from localStorage
-    const _adminUserData = localStorage.getItem('admin-user');
+    const adminUserData = localStorage.getItem('admin-user');
     if (adminUserData) {
       try {
         setAdminUser(JSON.parse(adminUserData));
-      } catch (error) { console.error('Error parsing admin, user:', error);
-       }, []);
+      } catch (error) {
+        console.error('Error parsing admin user:', error);
+      }
+    }, []);
+
   useEffect(() => {
     loadAdminData();
   }, []);
-  const _loadAdminData = async () => {
+
+  const loadAdminData = async () => {
     setLoading(true);
     try {
       await adminService.initialize();
       // Load all admin data
-      const [statsData, usersData, contentData, configData, activityData] =;
+      const [statsData, usersData, contentData, configData, activityData] = 
         await Promise.all([
           adminService.getSystemStats(),
           adminService.getUsers(1, 50),
           adminService.getContentForModeration(1, 20),
           adminService.getSystemConfiguration(),
-          adminService.getAdminActivity(1, 50)]);
+          adminService.getAdminActivity(1, 50)
+        ]);
+      
       setSystemStats(statsData);
       setUsers(usersData.users);
       setContent(contentData.content);
       setConfiguration(configData);
       setActivities(activityData.activities);
     } catch (error) {
-      console.error('Error loading admin, data:', error);
+      console.error('Error loading admin data:', error);
     } finally {
-    setLoading(false);
-}
-  const _handleUserStatusUpdate = async (, ;
-    userId: string, status: 'active' | 'suspended' | 'deleted') => {
+      setLoading(false);
+    }
+  };
+
+  const handleUserStatusUpdate = async (
+    userId: string, 
+    status: 'active' | 'suspended' | 'deleted'
+  ) => {
     try {
       await adminService.updateUserStatus(
         userId,
@@ -64,10 +76,14 @@ export default function AdminPanel() {
       );
       await loadAdminData(); // Refresh data
     } catch (error) {
-    console.error('Error updating user, status:', error);
-}
-  const _handleContentModeration = async (, ;
-    contentId: string, action: 'approve' | 'reject' | 'flag') => {
+      console.error('Error updating user status:', error);
+    }
+  };
+
+  const handleContentModeration = async (
+    contentId: string, 
+    action: 'approve' | 'reject' | 'flag'
+  ) => {
     try {
       await adminService.moderateContent(
         contentId,
@@ -76,100 +92,93 @@ export default function AdminPanel() {
       );
       await loadAdminData(); // Refresh data
     } catch (error) {
-    console.error('Error moderating, content:', error);
-}
-  const _getStatusColor = (status: string) => { switch (status) {
-      case 'active':
-break;
-break;
-
-case 'approved':
-    
-    break;
-case 'healthy':
-return 'bg-green-100 text-green-800';
-    break;
-break;
-
-
-      case 'suspended':
-    
-    break;
-case 'flagged':
-break;
-break;
-
-case 'warning':
-    return 'bg-yellow-100 text-yellow-800';
-    break;
-
-      case 'deleted':
-break;
-break;
-
-case 'rejected':
-    
-    break;
-case 'critical':
-return 'bg-red-100 text-red-800';
-    break;
-break;
-
-
-      case 'pending':
-    return 'bg-blue-100 text-blue-800',;
-    break;
-}
-    default: return 'bg-gray-100 text-gray-800',;
-    }}
-  const _formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {;
-      style: 'currency',
-      currency: 'USD'}).format(amount)
+      console.error('Error moderating content:', error);
+    }
   };
-  const _formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {;
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active':
+      case 'approved':
+      case 'healthy':
+        return 'bg-green-100 text-green-800';
+      case 'suspended':
+      case 'flagged':
+      case 'warning':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'deleted':
+      case 'rejected':
+      case 'critical':
+        return 'bg-red-100 text-red-800';
+      case 'pending':
+        return 'bg-blue-100 text-blue-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(amount);
+  };
+
+  const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'}).format(new Date(date))
+      minute: '2-digit'
+    }).format(new Date(date));
   };
+
   const filteredUsers = users.filter((user) => {
-    const _matchesSearch =;
+    const matchesSearch = 
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const _matchesFilter = userFilter === 'all' || user.status === userFilter;
+    const matchesFilter = userFilter === 'all' || user.status === userFilter;
     return matchesSearch && matchesFilter;
   });
+
   const filteredContent = content.filter((item) => {
-    const _matchesSearch =;
+    const matchesSearch = 
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.author.toLowerCase().includes(searchTerm.toLowerCase());
-    const _matchesFilter =;
+    const matchesFilter = 
       contentFilter === 'all' || item.status === contentFilter;
     return matchesSearch && matchesFilter;
   });
+
   if (loading) {
     return (
     <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
+      <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading admin panel...</p>
+              </div>
+
+            );
+
+          }
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Shield className="h-6 w-6 text-blue-600"    />
+              <Shield className="h-6 w-6 text-blue-600" />
               <h1 className="text-xl font-semibold">Admin Panel</h1>
               <Badge variant="outline">System Management</Badge>
+            </div>
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
                 Welcome, {adminUser?.name || 'Admin'}
-      <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8 py-8">
+              </span>
+                  </div>
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -178,9 +187,12 @@ break;
             <TabsTrigger value="system">System</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
           </TabsList>
-          {/* Overview, Tab */}
-          <TabsContent value="overview", className="space-y-6">
-            {systemStats  && (React.Fragment>{/* System Health Alert */}
+
+          {/* Overview Tab */}
+          <TabsContent value="overview" className="space-y-6">
+            {systemStats && (
+              <>
+                {/* System Health Alert */}
                 <Alert
                   className={
                     systemStats.systemHealth === 'healthy'
@@ -188,24 +200,27 @@ break;
                       : systemStats.systemHealth === 'warning'
                         ? 'border-yellow-200 bg-yellow-50'
                         : 'border-red-200 bg-red-50'
-}
+                  }
                 >
-                  <AlertTriangle className="h-4 w-4"    />
+                  <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
-                    System, Status: {', '}
-                    <strong>{systemStats.systemHealth.toUpperCase()}</strong>
+                    System Status: {' '}
+                    <strong>{systemStats.systemHealth.toUpperCase(
+              
+            )}</strong>
                     {systemStats.systemHealth !== 'healthy' &&
                       ' - Attention required'}
                   </AlertDescription>
                 </Alert>
-                {/* Stats, Grid */}
-                <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         Total Users
                       </CardTitle>
-                      <Users className="h-4 w-4 text-muted-foreground"    />
+                      <Users className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -216,12 +231,13 @@ break;
                       </p>
                     </CardContent>
                   </Card>
+
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         Total Projects
                       </CardTitle>
-                      <BarChart3 className="h-4 w-4 text-muted-foreground"    />
+                      <BarChart3 className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -232,12 +248,13 @@ break;
                       </p>
                     </CardContent>
                   </Card>
+
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         Total Revenue
                       </CardTitle>
-                      <Activity className="h-4 w-4 text-muted-foreground"    />
+                      <Activity className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -248,12 +265,13 @@ break;
                       </p>
                     </CardContent>
                   </Card>
+
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         System Uptime
                       </CardTitle>
-                      <CheckCircle className="h-4 w-4 text-muted-foreground"    />
+                      <CheckCircle className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -264,31 +282,37 @@ break;
                       </p>
                     </CardContent>
                   </Card>
-                </div></React.Fragment>
+                </div>
+              </>
             )}
           </TabsContent>
-          {/* Users, Tab */}
-          <TabsContent value="users", className="space-y-6">
+
+          {/* Users Tab */}
+          <TabsContent value="users" className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">User Management</h2>
               <div className="flex items-center space-x-2">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     placeholder="Search users..."
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                     className="pl-10 w-64"
-                  /></Input>
+                  />
+                </div>
                 <select
                   value={userFilter}
                   onChange={e => setUserFilter(e.target.value)}
                   className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-                ></select>
+                >
                   <option value="all">All Status</option>
                   <option value="active">Active</option>
                   <option value="suspended">Suspended</option>
                   <option value="deleted">Deleted</option>
+                </select>
+              </div>
+
             <Card>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
@@ -296,178 +320,179 @@ break;
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          User</th>
+                          User
+                        </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Subscription</th>
+                          Email
+                        </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Status</th>
+                          Status
+                        </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Projects</th>
+                          Joined
+                        </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Last Active</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Actions</th>
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {filteredUsers.map((user) => (</tbody>
+                      {filteredUsers.map((user) => (
                         <tr key={user.id}>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div>
-                              <div className="text-sm font-medium text-gray-900">
-                                {user.name}
-                              <div className="text-sm text-gray-500">
-                                {user.email}
+                            <div className="flex items-center">
+                              <div className="ml-4">
+                                <div className="text-sm font-medium text-gray-900">
+                                  {user.name}
+                                </div>
+                                <div className="text-sm text-gray-500">
+                                  ID: {user.id}
+                                      </div>
+</td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <Badge
-                              className={
-                                user.subscription === 'enterprise'
-                                  ? 'bg-brand-primary-100 text-brand-primary-800'
-                                  : user.subscription === 'pro'
-                                    ? 'bg-blue-100 text-blue-800'
-                                    : 'bg-gray-100 text-gray-800'
-}
-                            >
-                              {user.subscription}</Badge>
+                            <div className="text-sm text-gray-900">{user.email}</div>
+                          </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge className={getStatusColor(user.status)}>
-                              {user.status}</Badge>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {user.projectCount}</td>
+                              {user.status}
+                            </Badge>
+                          </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {formatDate(user.lastActive)}</td>
+                            {formatDate(user.createdAt)}
+                          </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <div className="flex items-center space-x-2">
+                            <div className="flex space-x-2">
                               <Button
                                 size="sm"
-                                variant="outline"
-                                onClick={() =>
-                                  handleUserStatusUpdate(
-                                    user.id,
-                                    user.status === 'active'
-                                      ? 'suspended'
-                                      : 'active'
-                                  )
-}
+                                variant="ghost"
+                                onClick={() => {/* View user details */}}
                               >
-                                {user.status === 'active' ? (</Button>
-                                  <UserX className="h-4 w-4"    />
-                                ) : (</UserX>
-                                  <UserCheck className="h-4 w-4"    />
-                                )}</UserCheck>
-                              <Button size="sm" variant="outline">
-                                <Eye className="h-4 w-4"    />
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => {/* Edit user */}}
+                              >
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                              {user.status === 'active' ? (
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  onClick={() => handleUserStatusUpdate(user.id, 'suspended')}
+                                >
+                                  <UserX className="h-4 w-4 text-yellow-600" />
+                                </Button>
+                              ) : (
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  onClick={() => handleUserStatusUpdate(user.id, 'active')}
+                                >
+                                  <UserCheck className="h-4 w-4 text-green-600" />
+                                </Button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
                       ))}
                     </tbody>
-          {/* Content, Tab */}
-          <TabsContent value="content", className="space-y-6">
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Content Tab */}
+          <TabsContent value="content" className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Content Moderation</h2>
-              <div className="flex items-center space-x-2">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
-                  <Input
-                    placeholder="Search content..."
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                    className="pl-10 w-64"
-                  /></Input>
-                <select
-                  value={contentFilter}
-                  onChange={e => setContentFilter(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-                ></select>
-                  <option value="all">All Status</option>
-                  <option value="pending">Pending</option>
-                  <option value="approved">Approved</option>
-                  <option value="rejected">Rejected</option>
-                  <option value="flagged">Flagged</option>
+              <select
+                value={contentFilter}
+                onChange={e => setContentFilter(e.target.value)}
+                className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="all">All Content</option>
+                <option value="pending">Pending Review</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="flagged">Flagged</option>
+              </select>
+            </div>
+
             <div className="grid gap-4">
-              {filteredContent.map((item) => (</div>
+              {filteredContent.map((item) => (
                 <Card key={item.id}>
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <h3 className="text-lg font-semibold">
-                            {item.title}</h3>
-                          <Badge className={getStatusColor(item.status)}>
-                            {item.status}</Badge>
-                          <Badge variant="outline">{item.type}</Badge>
-                        <p className="text-sm text-gray-600 mb-2">
-                          By: {item.author}</p>
-                        <p className="text-sm text-gray-500">
-                          Created: {formatDate(item.createdAt)},
-    {item.reportCount > 0  && (/p>
-                            <span className="ml-4 text-red-600">
-                              {item.reportCount} report
-                              {item.reportCount !== 1 ? 's' : ''}</span>
-                          )}
+                      <div className="space-y-2">
+                        <h3 className="text-lg font-medium">{item.title}</h3>
+                        <p className="text-sm text-gray-600">
+                          By {item.author} • {formatDate(item.createdAt)}
                         </p>
-                      <div className="flex items-center space-x-2">
+                        <Badge className={getStatusColor(item.status)}>
+                          {item.status}
+                        </Badge>
+                      </div>
+                      <div className="flex space-x-2">
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() =>
-                            handleContentModeration(item.id, 'approve')
-}
-                          disabled={item.status === 'approved'}
-                        ></Button>
-                          <ThumbsUp className="h-4 w-4"    />
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() =>
-                            handleContentModeration(item.id, 'reject')
-}
-                          disabled={item.status === 'rejected'}
-                        ></Button>
-                          <ThumbsDown className="h-4 w-4"    />
+                          onClick={() => handleContentModeration(item.id, 'approve')}
+                        >
+                          <ThumbsUp className="h-4 w-4 mr-1" />
+                          Approve
                         </Button>
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() =>
-                            handleContentModeration(item.id, 'flag')
-}
-                        ></Button>
-                          <Flag className="h-4 w-4"    />
+                          onClick={() => handleContentModeration(item.id, 'reject')}
+                        >
+                          <ThumbsDown className="h-4 w-4 mr-1" />
+                          Reject
                         </Button>
-                        <Button size="sm" variant="outline">
-                          <Eye className="h-4 w-4"    />
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleContentModeration(item.id, 'flag')}
+                        >
+                          <Flag className="h-4 w-4 mr-1" />
+                          Flag
                         </Button>
-              ))},
-    {/* System, Tab */}
-          <TabsContent value="system", className="space-y-6">
+                      </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          {/* System Tab */}
+          <TabsContent value="system" className="space-y-6">
             <h2 className="text-2xl font-bold">System Configuration</h2>
             <div className="grid gap-4">
-              {configuration.map((config) => (</div>
-                <Card key={config.id}>
+              {configuration.map((config) => (
+                <Card key={config.key}>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <h3 className="text-lg font-semibold">
-                            {config.key}</h3>
-                          <Badge variant="outline">{config.category}</Badge>
-                          {config.isSecret  && (Badge className="bg-red-100 text-red-800">
-                              Secret</Badge>
-                          )}
-                        <p className="text-sm text-gray-600 mb-2">
-                          {config.description}</p>
-                        <p className="text-sm text-gray-500">
-                          Value:{', '}</p>
-                          <code className="bg-gray-100 px-2 py-1 rounded">
-                            {config.value}</code>
-                        <p className="text-xs text-gray-400 mt-2">
-                          Last,
-    modified: {formatDate(config.lastModified)} by{' '},
-    {config.modifiedBy}</p>
-                      <div className="flex items-center space-x-2"><Button size="sm" variant="outline">
-                          <Edit className="h-4 w-4"    />
-                        </Button>
-              ))},
-    {/* Activity, Tab */}
-          <TabsContent value="activity", className="space-y-6">
+                      <div>
+                        <h3 className="text-lg font-medium">{config.key}</h3>
+                        <p className="text-sm text-gray-600">{config.description}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-mono">{config.value}</p>
+                        <p className="text-xs text-gray-500">
+                          Last updated: {formatDate(config.lastUpdated)}
+                        </p>
+                      </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          {/* Activity Tab */}
+          <TabsContent value="activity" className="space-y-6">
             <h2 className="text-2xl font-bold">Admin Activity Log</h2>
             <Card>
               <CardContent className="p-0">
@@ -476,29 +501,46 @@ break;
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Admin</th>
+                          Timestamp
+                        </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Action</th>
+                          Admin
+                        </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Target</th>
+                          Action
+                        </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Timestamp</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          IP Address</th>
+                          Details
+                        </th>
+                      </tr>
+                    </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {activities.map((activity) => (</tbody>
+                      {activities.map((activity) => (
                         <tr key={activity.id}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {activity.adminName}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {formatDate(activity.timestamp)}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {activity.adminName}
+                          </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <Badge variant="outline">{activity.action}</Badge>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {activity.target}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {formatDate(activity.timestamp)}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {activity.ipAddress}</td>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-500">
+                            {activity.details}
+                          </td>
+                        </tr>
                       ))}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
   );
-}
-}
+
+          </div>
+</SystemStats>
+    }

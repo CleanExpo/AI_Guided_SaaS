@@ -1,10 +1,9 @@
 import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for multi-channel notification system
  */
-export function createNotificationSystemWorkflow(, ;
+export function createNotificationSystemWorkflow(,
     webhookPath: string = 'send-notification'): string = 'send-notification'): N8nWorkflow {
-  const nodes: N8nNode[] = [;
-    // 1. Webhook trigger for notifications,
+  const nodes: N8nNode[] = [// 1. Webhook trigger for notifications,
   {
   id: 'webhook_1',
       name: 'Notification Webhook',
@@ -16,8 +15,7 @@ export function createNotificationSystemWorkflow(, ;
         path: webhookPath,
     responseMode: 'responseNode',
         responseData: 'allEntries'
-}
-    },
+},
     // 2. Validate and prepare notification
     {
       id: 'code_1',
@@ -98,8 +96,7 @@ prepared.channels = prepared.channels.filter((channel) => {
   return true;
 });
 return prepared;```
-}
-    },
+},
     // 3. Route to appropriate channels
     {
       id: 'switch_1',
@@ -130,8 +127,7 @@ return prepared;```
           ]
         },
         fallbackOutput: 2 // Default to normal
-}
-    },
+},
     // 4. Process urgent notifications immediately
     {
       id: 'code_urgent',
@@ -143,13 +139,12 @@ return prepared;```
   mode: 'runOnceForEachItem',
         jsCode: ```
 // For urgent notifications, send to all channels immediately
-return {;
+return {
   ...$json,
   processImmediately: true,
     skipBatching: true
 };```
-}
-    },
+},
     // 5. Batch normal/low priority notifications
     {
       id: 'code_batch',
@@ -181,8 +176,7 @@ items.forEach((item) => {
 });
 // Convert to array for processing
 return Object.values(batched).map((batch) => ({ json: batch }));```
-}
-    },
+},
     // 6. Merge all notification streams
     {
       id: 'merge_1',
@@ -193,8 +187,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
     parameters: {
   mode: 'combine',
         combinationMode: 'multiplex'
-}
-    },
+},
     // 7. Send Email notifications
     {
       id: 'if_email',
@@ -211,8 +204,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
 }
    ]
 }
-}
-    },
+},
     {
       id: 'email_1',
       name: 'Send Email',
@@ -227,12 +219,10 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
         htmlBody: '={{ $json.notifications.length > 1 ? $json.notifications.map((n) => n.body || n.message).join("<hr>") : ($json.notifications[0].body || $json.notifications[0].message) }}',
     options: {
           appendAttribution: false
-}
-      },
+},
     credentials: {
         smtp: 'SMTP Credentials'
-}
-    },
+},
     // 8. Send Slack notifications
     {
       id: 'if_slack',
@@ -249,8 +239,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
 }
    ]
 }
-}
-    },
+},
     {
       id: 'slack_1',
       name: 'Send Slack',
@@ -274,12 +263,10 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
 }
           ],
           thread_ts: '={{ $json.threadId }}'
-}
-      },
+},
     credentials: {
         slackOAuth2Api: 'Slack OAuth2'
-}
-    },
+},
     // 9. Send SMS notifications
     {
       id: 'if_sms',
@@ -296,8 +283,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
 }
    ]
 }
-}
-    },
+},
     {
       id: 'twilio_1',
       name: 'Send SMS',
@@ -312,8 +298,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
       },
     credentials: {
         twilioApi: 'Twilio API'
-}
-    },
+},
     // 10. Send webhook notifications
     {
       id: 'if_webhook',
@@ -330,8 +315,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
 }
    ]
 }
-}
-    },
+},
     {
       id: 'http_webhook',
       name: 'Send Webhook',
@@ -348,8 +332,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
     retry: {
   maxRetries: 3,
     waitBetweenRetries: 1000
-}
-    },
+},
     // 11. Log notifications
     {
       id: 'merge_2',
@@ -360,8 +343,7 @@ return Object.values(batched).map((batch) => ({ json: batch }));```
     parameters: {
   mode: 'combine',
         combinationMode: 'multiplex'
-}
-    },
+},
     {
     id: 'code_log',
       name: 'Log Notification',
@@ -386,8 +368,7 @@ const _log = {
 }
 // In production, save to database
 return log;```
-}
-    },
+},
     // 12. Send response back to webhook
     {
       id: 'respond_1',
@@ -490,7 +471,7 @@ return log;```
       'main': [[{ node: 'respond_1', type: 'main' as const index: 0 }]]
 }
 }
-  return {;
+  return {
     name: 'Notification System',
     active: false,
     nodes,
@@ -502,5 +483,4 @@ return log;```
       errorWorkflow: '{{ $env.ERROR_WORKFLOW_ID }}'
     },
     tags: ['notifications', 'communication', 'alerts']
-}
 }

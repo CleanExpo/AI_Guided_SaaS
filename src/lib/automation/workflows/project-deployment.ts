@@ -1,10 +1,9 @@
 import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated project deployment
  */
-export function createProjectDeploymentWorkflow(, ;
+export function createProjectDeploymentWorkflow(,
     projectName: string, webhookPath: string = 'deploy-project'): string, webhookPath: string = 'deploy-project'): N8nWorkflow {
-  const nodes: N8nNode[] = [;
-    // 1. Webhook trigger,
+  const nodes: N8nNode[] = [// 1. Webhook trigger,
   {
   id: 'webhook_1',
       name: 'Deploy Webhook',
@@ -16,8 +15,7 @@ export function createProjectDeploymentWorkflow(, ;
         path: webhookPath,
     responseMode: 'lastNode',
         responseData: 'allEntries'
-}
-    },
+},
     // 2. Extract project data
     {
       id: 'code_1',
@@ -35,15 +33,14 @@ const _config = $input.item.json.config || {};
 if(!projectId) {
   throw new Error('Project ID is required');
 }
-return {;
+return {
   projectId,
   deploymentType,
   config,
   timestamp: new Date().toISOString(),
     webhookData: $input.item.json
 };```
-}
-    },
+},
     // 3. Build project
     {
       id: 'http_1',
@@ -112,8 +109,7 @@ return {;
     bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
     gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" } }) }}',
     options: {}
-}
-    },
+},
     // 6. Health check
     {
       id: 'wait_1',
@@ -124,8 +120,7 @@ return {;
     parameters: {
   amount: 30,
     unit: 'seconds'
-}
-    },
+},
     {
       id: 'http_4',
       name: 'Health Check',
@@ -140,8 +135,7 @@ return {;
     retry: {
   maxRetries: 3,
     waitBetweenRetries: 5000
-}
-    },
+},
     // 7. Deploy to production (if health check passes) {
       id: 'if_1',
       name: 'Check Health Status',
@@ -149,7 +143,7 @@ return {;
       typeVersion: 1,
     position: [1650, 300],
     parameters: {
-  conditions: {;,
+  conditions: {,
   boolean: [
             {
   value1: '={{ $json.status }}',
@@ -157,8 +151,7 @@ return {;
 }
    ]
 }
-}
-    },
+},
     {
       id: 'http_5',
       name: 'Deploy to Production',
@@ -184,8 +177,7 @@ return {;
     gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" },
     target: "production" }) }}',
     options: {}
-}
-    },
+},
     // 8. Send notifications
     {
       id: 'code_2',
@@ -198,7 +190,7 @@ return {;
         jsCode: ```
 const _deploymentUrl = $node["Deploy to Production"].json.url;
 const _projectId = $node["Extract Project Data"].json.projectId;
-return {;
+return {
   success: true,
   projectId,
   deploymentUrl,
@@ -210,8 +202,7 @@ return {;
     testsPassed: $node["Run Tests"].json.passed,
     healthCheckStatus: $node["Health Check"].json.status
   }```
-}
-    },
+},
     {
       id: 'code_3',
       name: 'Prepare Failure Notification',
@@ -223,7 +214,7 @@ return {;
         jsCode: ```
 const _projectId = $node["Extract Project Data"].json.projectId;
 const healthStatus = $node["Health Check"].json;
-return {;
+return {
   success: false,
   projectId,
   timestamp: new Date().toISOString(),
@@ -234,8 +225,7 @@ return {;
     healthCheckStatus: healthStatus.status,
     healthCheckMessage: healthStatus.message
   }```
-}
-    },
+},
     // 9. Send email/Slack notification
     {
       id: 'email_1',
@@ -258,8 +248,7 @@ return {;
 <h3>Details</h3>
 <pre>{{ JSON.stringify($json.details, null, 2) }}</pre>
 `,``
-    options: {}
-      },
+    options: {},
     credentials: {
         smtp: 'SMTP Credentials'
 }
@@ -304,7 +293,7 @@ return {;
       'main': [[{ node: 'email_1', type: 'main' as const index: 0 }]]
 }
 }
-  return {;
+  return {
     name: `Deploy ${projectName}`
     active: false,
     nodes,
@@ -316,5 +305,4 @@ return {;
       errorWorkflow: '{{ $env.ERROR_WORKFLOW_ID }}'
     },
     tags: ['deployment', 'automation', 'ci-cd']
-}
 }

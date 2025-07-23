@@ -1,24 +1,27 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Activity, Cpu, HardDrive, Users, Clock, AlertCircle } from 'lucide-react';
-interface AgentMetrics { agentId: string,
-    isAvailable: boolean,
-    executionCount: number,
-    averageExecutionTime: number,
-    cooldownRemaining: number }
+interface AgentMetrics {
+agentId: string;
+    isAvailable: boolean;
+    executionCount: number;
+    averageExecutionTime: number;
+    cooldownRemaining: number 
+}
 interface PulseStatus {
-
-  pulse: {
+pulse: {
   config: {
-  maxConcurrentAgents: number,
-    pulseInterval: number,
-    cooldownPeriod: number,
-    maxMemoryUsage: number,
+  maxConcurrentAgents: number;
+    pulseInterval: number;
+    cooldownPeriod: number;
+    maxMemoryUsage: number;
     maxCpuUsage: number
+
 }
   taskQueue: {
       length: number,
@@ -72,7 +75,7 @@ export function AgentPulseMonitor() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Activity className="h-5 w-5"    />
+            <Activity className="h-5 w-5" />
             System Resources
           </CardTitle>
           <CardDescription>Real-time resource utilization</CardDescription>
@@ -81,7 +84,7 @@ export function AgentPulseMonitor() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <Cpu className="h-4 w-4"    />
+                <Cpu className="h-4 w-4" />
                 <span className="text-sm">CPU Usage</span>
               </div>
               <span className="text-sm font-medium">
@@ -96,7 +99,7 @@ export function AgentPulseMonitor() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <HardDrive className="h-4 w-4"    />
+                <HardDrive className="h-4 w-4" />
                 <span className="text-sm">Memory Usage</span>
               </div>
               <span className="text-sm font-medium">
@@ -114,7 +117,7 @@ export function AgentPulseMonitor() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Users className="h-5 w-5"    />
+            <Users className="h-5 w-5" />
             Agent Pool
           </CardTitle>
           <CardDescription>
@@ -133,14 +136,15 @@ export function AgentPulseMonitor() {
                 </div>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <span>{agent.executionCount} runs</span>
-                  <span>{agent.averageExecutionTime}ms avg {agent.cooldownRemaining > 0  && (div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3"    />
+                  <span>{agent.averageExecutionTime}ms avg</span>
+                  {agent.cooldownRemaining > 0 && (
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
                       <span>{(agent.cooldownRemaining / 1000).toFixed(1)}s</span>
                     </div>
                   )}
-                </div>
-              </div>
-            ))}
+                      </div>
+))}
           </div>
         </CardContent>
       </Card>
@@ -148,7 +152,7 @@ export function AgentPulseMonitor() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <AlertCircle className="h-5 w-5"    />
+            <AlertCircle className="h-5 w-5" />
             Task Queue
           </CardTitle>
           <CardDescription>
@@ -158,12 +162,12 @@ export function AgentPulseMonitor() {
         <CardContent>
           <div className="grid grid-cols-4 gap-2">
             {['critical', 'high', 'medium', 'low'].map((priority) => (
-              <div key={priority} className="text-center p-2 border rounded"><div className="text-sm font-medium capitalize">{priority}</div>
+              <div key={priority} className="text-center p-2 border rounded">
+                <div className="text-sm font-medium capitalize">{priority}</div>
                 <div className="text-2xl font-bold">
                   {pulse.taskQueue.priorities[priority as keyof typeof pulse.taskQueue.priorities] || 0}
-                </div>
-              </div>
-            ))}
+                      </div>
+))}
           </div>
         </CardContent>
       </Card>
@@ -189,12 +193,14 @@ export function AgentPulseMonitor() {
             </Button>
           </div>
           <div className="text-sm text-muted-foreground">
-            <div>Pulse, Interval: {pulse.config.pulseInterval}ms</div>
-            <div>Cooldown, Period: {pulse.config.cooldownPeriod}ms</div>
-            <div>Max, CPU: {pulse.config.maxCpuUsage}%</div>
-            <div>Max, Memory: {pulse.config.maxMemoryUsage}%</div>
-          </div>
-        </CardContent>
+            <div>Pulse Interval: {pulse.config.pulseInterval}ms</div>
+            <div>Cooldown Period: {pulse.config.cooldownPeriod}ms</div>
+            <div>Max CPU: {pulse.config.maxCpuUsage}%</div>
+            <div>Max Memory: {pulse.config.maxMemoryUsage}%      </div>
+</CardContent>
       </Card>
-    </div>
-  )}
+          </div>
+
+        );
+
+      }

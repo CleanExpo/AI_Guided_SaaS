@@ -1,14 +1,15 @@
 import React from 'react';
-import { notFound } from 'next/navigation';interface Tutorial  {
-  id: string,
-    title: string,
-    description: string,
-    content: string,
-    duration: string,
-    difficulty: 'beginner' | 'intermediate' | 'advanced',
-    tags: string[],
+import { notFound } from 'next/navigation';interface Tutorial {
+id: string;
+    title: string;
+    description: string;
+    content: string;
+    duration: string;
+    difficulty: 'beginner' | 'intermediate' | 'advanced';
+    tags: string[];
     prerequisites: string[];
   nextTutorial?: string;
+
 }
 const tutorials: Record<string, Tutorial> = {
   '1': {
@@ -18,7 +19,7 @@ const tutorials: Record<string, Tutorial> = {
     content: 'Welcome to AI Guided SaaS! This tutorial will walk you through the fundamental concepts and features of our platform.',
     duration: '15 min',
     difficulty: 'beginner',
-    tags: ['basics', 'getting-started'];
+    tags: ['basics', 'getting-started'],
     prerequisites: []
   },
   '2': {
@@ -28,11 +29,11 @@ const tutorials: Record<string, Tutorial> = {
     content: 'In this tutorial, you will learn how to create, configure, and deploy your first project using AI Guided SaaS.',
     duration: '30 min',
     difficulty: 'beginner',
-    tags: ['project', 'deployment'];
+    tags: ['project', 'deployment'],
     prerequisites: ['Getting Started with AI Guided SaaS'],
     nextTutorial: '3'
 }
-props: anyexport function generateStaticParams(): void {
+export function generateStaticParams() {
   return Object.keys(tutorials).map((id) => ({ id }));
 }
 export default function TutorialPage({ params }: { params: { id: string } }): { params: { id: string } }) {
@@ -40,7 +41,9 @@ export default function TutorialPage({ params }: { params: { id: string } }): { 
   if(!tutorial) {
     notFound();
 }
-  return (<div className="min-h-screen bg-gray-50 py-8"><div className="container mx-auto px-4 max-w-4xl">;
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto px-4 max-w-4xl">;
         <div className="bg-white rounded-lg shadow-sm p-8">
           {/* Header */}
           <div className="mb-8">
@@ -66,7 +69,6 @@ export default function TutorialPage({ params }: { params: { id: string } }): { 
     {/* Content */}
           <div className="prose max-w-none mb-8">
             <div className="whitespace-pre-wrap">{tutorial.content}</div>
-          </div>
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-8">
             {tutorial.tags.map((tag) => (
@@ -80,16 +82,18 @@ export default function TutorialPage({ params }: { params: { id: string } }): { 
           </div>
           {/* Navigation */}
           <div className="flex justify-between">
-            <button className="px-4 py-2 text-gray-600, hover:text-gray-800">
+            <button className="px-4 py-2 text-gray-600 hover:text-gray-800">
               ← Back to Tutorials
             </button>
-            {tutorial.nextTutorial  && (button className="px-4 py-2 bg-blue-600 text-white rounded, hover:bg-blue-700">
+            {tutorial.nextTutorial  && (
+button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                 Next Tutorial →
               </button>
+            
+              
             )}
+                </div>
+);
+
           </div>
-        </div>
-      </div>
-    </div>
-  );
 }

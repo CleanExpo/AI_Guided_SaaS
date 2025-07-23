@@ -33,13 +33,13 @@ export class MCPError extends Error {
 }
 export class MCPClient {
   private, channels: Map<string, MCPChannel> = new Map();
-  async connect(channelId: string): Promise {
+  async connect(channelId: string): Promise<any> {
     // Implementation
 }
-  async send(message: MCPMessage): Promise {
+  async send(message: MCPMessage): Promise<any> {
     // Implementation
 }
-  async receive(channelId: string): Promise {
+  async receive(channelId: string): Promise<any> {
     // Implementation
     return null;
 }

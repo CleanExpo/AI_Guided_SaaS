@@ -1,6 +1,6 @@
 // @ts-nocheck
 // apps/ui-builder/utils/generateCode.ts
-export const generateCodeFromComponent = (,;
+export const generateCodeFromComponent = (,
     type: string,
     props: Record<string, string>
 ): string: (any) => { switch (type) {

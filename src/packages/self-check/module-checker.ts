@@ -30,12 +30,11 @@ export function checkModules(): {
       missingModules.push(`packages/${dir}`);``
 }
   });
-  return {;
+  return {
     status:
       missingModules.length === 0
         ? '✅ All required modules present.'
         : '⚠️ Some modules are missing.',
     missing: missingModules,
     present: presentModules
-}
 }

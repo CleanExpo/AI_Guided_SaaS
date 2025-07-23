@@ -1,14 +1,17 @@
+'use client';
+
 import React from 'react';
-'use client';import { useState, useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Book, Code, Users, Zap } from 'lucide-react';
 import Link from 'next/link';
-props: anyexport default function DocsPage(): void {
-  const [searchTerm, setSearchTerm]: any[] = useState<any>('');
-  const [docSystem, setDocSystem]: any[] = useState<any>(null);
-  const [tutorialSystem, setTutorialSystem]: any[] = useState<any>(null);
+export default function DocsPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [docSystem, setDocSystem] = useState(null);
+  const [tutorialSystem, setTutorialSystem] = useState(null);
   useEffect(() => {
     // Simulate loading documentation systems
     setTimeout(() => {
@@ -17,16 +20,17 @@ props: anyexport default function DocsPage(): void {
     }, 1000);
   }, []);
   if(!docSystem || !tutorialSystem) {
-    return (;
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"    />
+    return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading documentation...</p>
-        </div>
-      </div>
-    );
-}
-  const docCategories = [;,
+              </div>
+
+            );
+
+          }
+  const docCategories = [
   {
   title: 'Getting Started',
       icon: Book,
@@ -84,16 +88,15 @@ props: anyexport default function DocsPage(): void {
           </p>
           {/* Search */}
           <div className="max-w-md mx-auto relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               type="text"
               placeholder="Search documentation..."
               value={searchTerm}
-              onChange: any={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
             />
           </div>
-        </div>
         {/* Documentation, Categories */}
         <div className="space-y-12">
           {filteredCategories.map((category) => (<div key={category.title}>
@@ -103,14 +106,13 @@ props: anyexport default function DocsPage(): void {
                   <h2 className="text-2xl font-bold text-gray-900">{category.title}</h2>
                   <p className="text-gray-600">{category.description}</p>
                 </div>
-              </div>
-              <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {category.docs.map((doc) => (
                   <Card key={doc.slug} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <CardTitle className="text-lg">
                         <Link
-                          href={`/docs/${doc.slug}`}`
+                          href={`/docs/${doc.slug}`}
                           className="hover:text-blue-600 transition-colors"
                         >
                           {doc.title}
@@ -119,7 +121,7 @@ props: anyexport default function DocsPage(): void {
                     </CardHeader>
                     <CardContent>
                       <p className="text-gray-600 mb-4">{doc.description}</p>
-                      <Link href={`/docs/${doc.slug}`}>`
+                      <Link href={`/docs/${doc.slug}`}>
                         <Button variant="ghost" size="sm" className="p-0">
                           Read More →
                         </Button>
@@ -128,16 +130,18 @@ props: anyexport default function DocsPage(): void {
                   </Card>
                 ))}
               </div>
-            </div>
           ))}
         </div>
-        {searchTerm && filteredCategories.length === 0  && (div className="text-center py-12">
+        {searchTerm && filteredCategories.length === 0  && (
+div className="text-center py-12">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No results found</h3>
             <p className="text-gray-600">
               Try adjusting your search terms or browse the categories above.
             </p>
           </div>
-        )},
+        
+              
+            )},
     {/* CTA, Section */}
         <div className="mt-16 text-center">
           <Card className="bg-blue-50 border-blue-200">
@@ -153,8 +157,10 @@ props: anyexport default function DocsPage(): void {
               </div>
             </CardContent>
           </Card>
-        </div>
-      </div>
-    </div>
-  );
-}
+              </div>
+);
+
+          </div>
+</any>
+    </any>
+    }

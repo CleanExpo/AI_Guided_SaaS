@@ -1,7 +1,7 @@
 export interface MonitoringDashboard {
   agents: Agent[],
     recent_activity: ActivityLog[],
-    performance_metrics: PerformanceMetrics,
+    performance_metrics: PerformanceMetric;s,
     error_logs: ErrorLog[]
 };
 export interface Agent {

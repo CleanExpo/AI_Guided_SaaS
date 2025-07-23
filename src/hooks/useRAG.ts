@@ -16,8 +16,8 @@ export interface UseRAGReturn {
   streamQuery: (question: string, options?: Partial<RAGQuery>) => AsyncGenerator<string, void, unknown>
   // Document operations,
     addDocument: (content: string, metadata) => Promise<string>
-  addFromUrl: (url: string) => Promise<string[]>,
-  addFromFile: (file: File) => Promise<string>;,
+  addFromUrl: (url: string) => Promise<string[];>,
+  addFromFile: (file: File) => Promise<string;>;,
   ingestCodebase: (path: string, options?) => Promise<{ documentsAdded: number, errors: string[] }>
   // Knowledge base management, updateDocument: (id: string, content?: string, metadata?) => Promise<any>
   deleteDocument: (id: string) => Promise<any>,
@@ -55,7 +55,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       setInitialized(true)
       return engine;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to initialize RAG engine',;
+      const _message = err instanceof Error ? err.message : 'Failed to initialize RAG engine',
       setError(message)
       toast({
         title: 'Initialization Error',
@@ -63,10 +63,9 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
     variant: 'destructive'
       })
       throw err
-}
-  }, [options])
+}, [options])
   // Query the knowledge base
-  const _query = useCallback(async (,;
+  const _query = useCallback(async (,
     question: string,
     queryOptions?: Partial<RAGQuery>
   ): Promise<RAGResponse> => {
@@ -80,7 +79,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       })
       return response;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Query failed',;
+      const _message = err instanceof Error ? err.message : 'Query failed',
       setError(message)
       toast({
         title: 'Query Error',
@@ -90,10 +89,9 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Stream query response
-  const _streamQuery = useCallback(async function* (,;
+  const _streamQuery = useCallback(async function* (,
     question: string,
     queryOptions?: Partial<RAGQuery>
   ): AsyncGenerator {
@@ -106,7 +104,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         ...queryOptions
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Stream query failed',;
+      const _message = err instanceof Error ? err.message : 'Stream query failed',
       setError(message)
       toast({
         title: 'Stream Error',
@@ -116,10 +114,9 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Add document to knowledge base
-  const _addDocument = useCallback(async (,;
+  const _addDocument = useCallback(async (,
     content: string,
     metadata): Promise<string> => {
     setLoading(true)
@@ -133,7 +130,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       })
       return id;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to add document',;
+      const _message = err instanceof Error ? err.message : 'Failed to add document',
       setError(message)
       toast({
         title: 'Error',
@@ -143,8 +140,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Add document from URL
   const _addFromUrl = useCallback(async (url: string): Promise<string[]> => {
     setLoading(true)
@@ -158,7 +154,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       })
       return ids;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to add from URL',;
+      const _message = err instanceof Error ? err.message : 'Failed to add from URL',
       setError(message)
       toast({
         title: 'Error',
@@ -168,8 +164,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Add document from file
   const _addFromFile = useCallback(async (file: File): Promise<string> => {
     setLoading(true)
@@ -187,7 +182,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       })
       return id;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to add file',;
+      const _message = err instanceof Error ? err.message : 'Failed to add file',
       setError(message)
       toast({
         title: 'Error',
@@ -197,10 +192,9 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Ingest entire codebase
-  const _ingestCodebase = useCallback(async (,;
+  const _ingestCodebase = useCallback(async (,
     path: string,
     ingestOptions?): Promise<{ documentsAdded: number, errors: string[] }> => {
     setLoading(true)
@@ -214,7 +208,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       })
       return result;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to ingest codebase',;
+      const _message = err instanceof Error ? err.message : 'Failed to ingest codebase',
       setError(message)
       toast({
         title: 'Error',
@@ -224,10 +218,9 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Update document
-  const _updateDocument = useCallback(async (,;
+  const _updateDocument = useCallback(async (,
     id: string,
     content?: string,
     metadata?): Promise<any> => {
@@ -241,7 +234,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         description: 'Document successfully updated'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to update document',;
+      const _message = err instanceof Error ? err.message : 'Failed to update document',
       setError(message)
       toast({
         title: 'Error',
@@ -251,8 +244,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Delete document
   const _deleteDocument = useCallback(async (id: string): Promise<any> => {
     setLoading(true)
@@ -265,7 +257,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         description: 'Document removed from knowledge base'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to delete document',;
+      const _message = err instanceof Error ? err.message : 'Failed to delete document',
       setError(message)
       toast({
         title: 'Error',
@@ -275,10 +267,9 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Get similar documents
-  const _getSimilar = useCallback(async (,;
+  const _getSimilar = useCallback(async (,
     documentId: string,
     topK?: number
   ): Promise<any[]> => {
@@ -288,13 +279,12 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       const engine = await initializeEngine();
       return await engine.getSimilar(documentId, topK);
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to get similar documents',;
+      const _message = err instanceof Error ? err.message : 'Failed to get similar documents',
       setError(message)
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Get knowledge base statistics
   const _getStats = useCallback(async (): Promise<any> => {
     setLoading(true)
@@ -303,15 +293,14 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       const engine = await initializeEngine();
       return await engine.getStats();
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to get stats',;
+      const _message = err instanceof Error ? err.message : 'Failed to get stats',
       setError(message)
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Export knowledge base
-  const _exportKnowledge = useCallback(async (,;
+  const _exportKnowledge = useCallback(async (,
     format: 'json' | 'markdown' = 'json'
   ): Promise<string> => {
     setLoading(true)
@@ -335,7 +324,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       })
       return exported;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to export',;
+      const _message = err instanceof Error ? err.message : 'Failed to export',
       setError(message)
       toast({
         title: 'Error',
@@ -345,8 +334,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
+}, [initializeEngine])
   // Clear knowledge base
   const _clearKnowledge = useCallback(async (): Promise<any> => {
     setLoading(true)
@@ -359,7 +347,7 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
         description: 'All documents have been removed'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to clear knowledge base',;
+      const _message = err instanceof Error ? err.message : 'Failed to clear knowledge base',
       setError(message)
       toast({
         title: 'Error',
@@ -369,9 +357,8 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAG
       throw err
     } finally {
       setLoading(false)
-}
-  }, [initializeEngine])
-  return {;
+}, [initializeEngine])
+  return {
     // Query operations
     query,
     streamQuery,

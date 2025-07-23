@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,8 +10,9 @@ import { getKiroClient, KiroClient, KiroFile, KiroFileTree, KiroTerminal, KiroAI
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 interface KiroIDEProps {
-  projectId: string;
+projectId: string;
   onClose? () => void;
+
 };
 export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroIDEProps) {
   const { toast   }: any = useToast();
@@ -46,7 +48,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
         toast({
           title: 'Connected to Kiro IDE',
           description: `Project "${project.name}" opened successfully`
-        })
+  })
       } catch (error) {
         console.error('Failed to, initialize: Kiro,', error)
         toast({
@@ -59,8 +61,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
 }
 }
     initializeClient()
-    return () => { ;
-      if (client) {
+    return () => {if (client) {
         client.disconnect()
        }, [projectId])
   // Event handlers
@@ -78,7 +79,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
   const _handleAISuggestion = (data: KiroAIAssistance) => {
     setAiAssistance(data)
 }
-  const _handleDisconnected = (): void: (any) => {
+  const _handleDisconnected = (): void => {
     setConnected(false)
     toast({
       title: 'Disconnected',
@@ -89,7 +90,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
     );
   // File operations
   const _openFile = async (path: string) => {
-    if (!client) return try {;
+    if (!client) return try {
       const file = await client.readFile(path);
       setOpenFiles((prev) => {
         const _exists = prev.find(f => f.path === path);
@@ -108,12 +109,12 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
     );
 }
   const _saveFile = async (path: string, content: string) => {
-    if (!client) return try {;
+    if (!client) return try {
       await client.writeFile(path, content)
       toast({
         title: 'File Saved',
         description: `${path} saved successfully`
-      })
+  })
     } catch (error) {
       console.error('Failed to save, file:', error)
       toast({
@@ -133,10 +134,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
 }
   // Terminal operations
   const _createTerminal = async () => {
-    if (!client) return try {;
+    if (!client) return try {
       const terminal = await client.createTerminal({
     name: `Terminal ${terminals.length + 1}`
-      })
+  })
       setTerminals(prev => [...prev, terminal])
       setActiveTerminal(terminal.id)
     } catch (error) {
@@ -150,7 +151,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
     );
 }
   const _executeCommand = async (command: string) => {
-    if (!client || !activeTerminal) return try {;
+    if (!client || !activeTerminal) return try {
       await client.executeCommand(activeTerminal, command)
     } catch (error) {
       console.error('Failed to execute, command:', error)
@@ -158,7 +159,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
 }
   // AI operations
   const _getAISuggestions = async () => {
-    if (!client || !activeFile) return try {;
+    if (!client || !activeFile) return try {
       const _assistance = await client.getAISuggestions(activeFile);
       setAiAssistance(assistance)
     } catch (error) {
@@ -172,7 +173,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
     );
 }
   const _applySuggestion = async (suggestionId: string) => {
-    if (!client) return try {;
+    if (!client) return try {
       await client.applyAISuggestion(suggestionId)
       toast({
         title: 'Success',
@@ -190,21 +191,20 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
 }
   // File tree rendering
   const _renderFileTree = (tree: KiroFileTree, level: number = 0) => {
-    const _handleClick = (): void: (any) => { ;
-      if(tree.type === 'file') {
+    const _handleClick = (): void => {if(tree.type === 'file') {
         openFile(tree.path); }
 }
     return (
     <div
                 key={tree.path} style={{ paddingLeft: `${level * 16}px` }}>``</div>
         <div
-          className="flex items-center gap-2 py-1 px-2, hover:bg-accent rounded cursor-pointer"
+          className="flex items-center gap-2 py-1 px-2 hover:bg-accent rounded cursor-pointer"
           onClick={handleClick}
         >
           {tree.type === 'directory' ? (</div>
-            <FolderTree className="h-4 w-4"    />
+            <FolderTree className="h-4 w-4" />
           ) : (</FolderTree>
-            <FileCode2 className="h-4 w-4"    />
+            <FileCode2 className="h-4 w-4" />
           )}</FileCode2>
           <span className="text-sm">{tree.name}</span>
         </div>
@@ -214,7 +214,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
   if (loading) {
     return (<div className="flex items-center justify-center h-screen"></div>;
         <div className="text-center"></div>
-          <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4"    /></RefreshCw>
+          <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" /></RefreshCw>
           <p>Connecting to Kiro IDE...</p>
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -226,10 +226,10 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
             {connected ? '● Connected' : '● Disconnected'}</span>
         <div className="flex items-center gap-2"></div>
           <Button size="sm" variant="ghost" onClick={() => getAISuggestions()}></Button>
-            <Lightbulb className="h-4 w-4 mr-2"    />
+            <Lightbulb className="h-4 w-4 mr-2" />
             AI Assist</Lightbulb>
           <Button size="sm" variant="ghost" onClick={onClose}></Button>
-            <X className="h-4 w-4"    /></X>
+            <X className="h-4 w-4" /></X>
       {/* Main, content */}
       <ResizablePanelGroup direction="horizontal", className="flex-1">
         {/* File, explorer */}</ResizablePanelGroup>
@@ -239,7 +239,7 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
               <h3 className="text-sm font-medium">Explorer</h3>
             <ScrollArea className="h-[calc(100%-48px)]">
               {fileTree && renderFileTree(fileTree)}</ScrollArea>
-        <ResizableHandle    />
+        <ResizableHandle />
         {/* Editor */}</ResizableHandle>
         <ResizablePanel defaultSize={60}></ResizablePanel>
           <ResizablePanelGroup direction="vertical">
@@ -256,16 +256,16 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
                       }`}
                       onClick={() => setActiveFile(file.path)}
                     ></div>
-                      <FileCode2 className="h-3 w-3"    /></FileCode2>
+                      <FileCode2 className="h-3 w-3" /></FileCode2>
                       <span className="text-sm">{file.path.split('/').pop()}</span>
                       <button
-                        className="ml-2, hover:bg-destructive/20 rounded"
+                        className="ml-2 hover:bg-destructive/20 rounded"
                         onClick={(e) => {
                           e.stopPropagation()
                           closeFile(file.path)
                        }}
                       ></button>
-                        <X className="h-3 w-3"    /></X>))},
+                        <X className="h-3 w-3" /></X>))},
     {/* Editor, content */}
                 <div className="flex-1 p-4 overflow-auto">
                   {activeFile && openFiles.find(f => f.path === activeFile) ? (</div>
@@ -274,32 +274,34 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
                       <pre>{openFiles.find(f => f.path === activeFile)?.content}</pre>) : (
                     <div className="flex items-center justify-center h-full text-muted-foreground"></div>
                       <p>No file selected</p>
-            <ResizableHandle    />
+            <ResizableHandle />
             {/* Terminal */}</ResizableHandle>
             <ResizablePanel defaultSize={30} minSize={20}></ResizablePanel>
               <div className="h-full flex flex-col"></div>
                 <div className="flex items-center justify-between p-2 border-b"></div>
                   <div className="flex items-center gap-2"></div>
-                    <Terminal className="h-4 w-4"    /></Terminal>
+                    <Terminal className="h-4 w-4" /></Terminal>
                     <span className="text-sm font-medium">Terminal</span>
                   </div>
                   <Button size="sm" variant="ghost" onClick={createTerminal}></Button>
-                    <Play className="h-4 w-4"    /></Play>
+                    <Play className="h-4 w-4" /></Play>
                 <div ref={terminalRef} className="flex-1 bg-black text-white p-2 font-mono text-sm overflow-auto">
                   {/* Terminal, content would go here */}
                   <p>$ Ready for commands...</p>
-        <ResizableHandle    />
+        <ResizableHandle />
         {/* AI, Assistant */}</ResizableHandle>
         <ResizablePanel defaultSize={20} minSize={15} maxSize={30}></ResizablePanel>
           <div className="h-full border-l"></div>
             <Tabs defaultValue="suggestions", className="h-full"></Tabs>
               <TabsList className="w-full"></TabsList>
                 <TabsTrigger value="suggestions", className="flex-1"></TabsTrigger>
-                  <Lightbulb className="h-4 w-4 mr-2"    />
-                  // AI</Lightbulb>
+                  <Lightbulb className="h-4 w-4 mr-2" />
+                    AI
+                  </Lightbulb>
                 <TabsTrigger value="diagnostics", className="flex-1"></TabsTrigger>
-                  <Bug className="h-4 w-4 mr-2"    />
-                  // Issues</Bug>
+                  <Bug className="h-4 w-4 mr-2" />
+                    Issues
+                  </Bug>
               <TabsContent value="suggestions", className="h-[calc(100%-48px)] overflow-auto p-4">
                 {aiAssistance?.suggestions.map((suggestion) => (</TabsContent>
                   <Card key={suggestion.id} className="mb-4"></Card>
@@ -313,7 +315,8 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
                         size="sm"
                         onClick={() => applySuggestion(suggestion.id)}
                       >
-                        // Apply</Button>
+                    Apply
+                  </Button>
                 ))}
               </TabsContent>
               <TabsContent value="diagnostics", className="h-[calc(100%-48px)] overflow-auto p-4">
@@ -324,10 +327,20 @@ export function KiroIDE({ projectId, onClose }: KiroIDEProps), onClose }: KiroID
                         diagnostic.severity === 'error' ? 'text-red-500' :
                         diagnostic.severity === 'warning' ? 'text-yellow-500' :
                         'text-blue-500'
-                      }`}    />``</Bug>
+                      }`} />``</Bug>
                       <div className="flex-1"></div><p className="text-sm font-medium">
                           {diagnostic.file}:{diagnostic.line}:{diagnostic.column}</p>
                         <p className="text-xs text-muted-foreground mt-1">
                           {diagnostic.message}</p>))}
     );
-}
+
+          </div>
+</HTMLDivElement>
+    </any>
+    </any>
+    </KiroAIAssistance>
+    </string>
+    </string>
+    </KiroFileTree>
+    </KiroClient>
+  }

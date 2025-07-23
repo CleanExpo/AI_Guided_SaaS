@@ -15,7 +15,7 @@ export interface VectorStoreConfig {
 export interface Document {
   id: string,
     content: string,
-    metadata: DocumentMetadata;
+    metadata: DocumentMetadat;a;
   embedding?: number[];
   chunks?: DocumentChunk[];
 };
@@ -35,7 +35,7 @@ export interface DocumentChunk {
     documentId: string,
     content: string;
   embedding?: number[];
-  metadata: ChunkMetadata
+  metadata: ChunkMetadat;a
 };
 export interface ChunkMetadata {
   position: number;
@@ -56,7 +56,7 @@ export interface SearchFilter {
     type?: string[];
   tags?: string[];
   project?: string;
-  dateRange?: {;
+  dateRange?: {
     start: string,
     end: string
 }
@@ -64,7 +64,7 @@ export interface SearchResult {
   id: string,
     score: number,
     content: string,
-    metadata: DocumentMetadata;
+    metadata: DocumentMetadat;a;
   highlights?: string[];
 }
 // Validation schemas
@@ -107,7 +107,7 @@ export abstract class VectorStore {
 }
     return chunks;
 }
-  protected async generateEmbedding(text: string): Promise {
+  protected async generateEmbedding(text: string): Promise<any> {
     // This would call an embedding service (OpenAI, Cohere, etc.)
     // For now, return mock embedding;
     const _mockEmbedding = Array(this.config.dimension || 1536).fill(0).map(() => Math.random());
@@ -129,10 +129,10 @@ export abstract class VectorStore {
 export class MemoryVectorStore extends VectorStore {
   private, documents: Map<string, Document> = new Map()
   private, embeddings: Map<string, number[]> = new Map()
-  async initialize(): Promise {
+  async initialize(): Promise<any> {
     // No initialization needed for memory store
 }
-  async addDocument(document: Document): Promise {
+  async addDocument(document: Document): Promise<any> {
     const id = document.id || this.generateId();
     // Generate embedding for document
     const _embedding = await this.generateEmbedding(document.content);
@@ -163,7 +163,7 @@ export class MemoryVectorStore extends VectorStore {
 }
     return id;
 }
-  async addDocuments(documents: Document[]): Promise {
+  async addDocuments(documents: Document[]): Promise<any> {
     const ids: string[] = [];
     for(const doc of documents) {
       const id = await this.addDocument(doc);
@@ -171,7 +171,7 @@ export class MemoryVectorStore extends VectorStore {
 }
     return ids;
 }
-  async updateDocument(id: string, update: Partial<Document>): Promise {
+  async updateDocument(id: string, update: Partial<Document>): Promise<any> {
     const _existing = this.documents.get(id);
     if(!existing) {
       throw new Error(`Document ${id} not found`)``
@@ -184,7 +184,7 @@ export class MemoryVectorStore extends VectorStore {
       this.embeddings.set(id, embedding)
 }
 }
-  async deleteDocument(id: string): Promise {
+  async deleteDocument(id: string): Promise<any> {
     this.documents.delete(id)
     this.embeddings.delete(id)
     // Also delete chunks
@@ -192,7 +192,7 @@ export class MemoryVectorStore extends VectorStore {
       if (chunkId.startsWith(`${id}_chunk_`)) { ``
         this.embeddings.delete(chunkId)
 }
-  async search(query: SearchQuery): Promise {
+  async search(query: SearchQuery): Promise<any> {
     const _queryEmbedding = await this.generateEmbedding(query.query);
     let results = await this.similaritySearch(queryEmbedding, query.topK);
     // Apply filters
@@ -214,7 +214,7 @@ export class MemoryVectorStore extends VectorStore {
 }
     return results;
 }
-  async similaritySearch(embedding: number[], topK: number = 10): Promise {
+  async similaritySearch(embedding: number[], topK: number = 10): Promise<any> {
     const scores: Array<{ id: string, score: number }> = [];
     // Calculate similarity for all embeddings
     for (const [id, docEmbedding] of this.embeddings) {
@@ -259,10 +259,10 @@ export class MemoryVectorStore extends VectorStore {
 }
     return results;
 }
-  async getDocument(id: string): Promise {
+  async getDocument(id: string): Promise<any> {
     return, this.documents.get(id) || null
 }
-  async listDocuments(filter?: SearchFilter): Promise {
+  async listDocuments(filter?: SearchFilter): Promise<any> {
     let documents = Array.from(this.documents.values());
     if (filter) {
       documents = documents.filter((doc) => { if (filter.type && !filter.type.includes(doc.metadata.type)) { return: false }
@@ -286,7 +286,7 @@ export class MemoryVectorStore extends VectorStore {
 }
     return documents;
 }
-  async clear(): Promise {
+  async clear(): Promise<any> {
     this.documents.clear()
     this.embeddings.clear()
 }
@@ -295,8 +295,7 @@ export class MemoryVectorStore extends VectorStore {
 }
 }
 // Factory function to create vector store based on provider
-export function createVectorStore(config: VectorStoreConfig): VectorStoreConfig): VectorStore { ;
-  switch (config.provider) {
+export function createVectorStore(config: VectorStoreConfig): VectorStoreConfig): VectorStore {switch (config.provider) {
     case 'memory':
     return new MemoryVectorStore(config);
     break;
@@ -336,5 +335,4 @@ break;
 break;
 }
     default: throw new Error(`Unknown vector store, provider: ${config.provider}`)``
-}
 }

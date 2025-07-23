@@ -1,27 +1,32 @@
+'use client';
+
 import React from 'react';
-'use client';import { useState } from 'react';
+
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Clock, Lock, Play } from 'lucide-react';
-interface Tutorial  {
-  id: string,
-    title: string,
-    description: string,
-    duration: string,
+interface Tutorial {
+id: string;
+    title: string;
+    description: string;
+    duration: string;
     difficulty: 'beginner' | 'intermediate' | 'advanced'
+
 }
-interface LearningPath  {
-  id: string,
-    title: string,
-    description: string,
-    totalDuration: string,
-    difficulty: 'beginner' | 'intermediate' | 'advanced',
-    tutorials: Array<Tutorial & {;
+interface LearningPath {
+id: string;
+    title: string;
+    description: string;
+    totalDuration: string;
+    difficulty: 'beginner' | 'intermediate' | 'advanced';
+    tutorials: Array<Tutorial & {
     completed?: boolean;
-  }>;
+  
+}>;
 }
-const learningPaths: LearningPath[] = [;,
+const learningPaths: LearningPath[] = [
   {
   id: 'beginner',
     title: 'Complete Beginner Path',
@@ -61,8 +66,7 @@ const learningPaths: LearningPath[] = [;,
     description: 'Advanced features and best practices',
     totalDuration: '4 hours',
     difficulty: 'intermediate',
-    tutorials: [;
-      {
+    tutorials: [{
   id: '4',
         title: 'Advanced Project Configuration',
         description: 'Configure complex project settings',
@@ -81,7 +85,7 @@ const learningPaths: LearningPath[] = [;,
     ]
 }
 ];
-props: anyexport default function LearningPathPage(): void { const [selectedPath, setSelectedPath]: any[] = useState<string | null>(null);
+export default function LearningPathPage() { const [selectedPath, setSelectedPath] = useState<string | null>(null);
   const _getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner':
@@ -97,12 +101,11 @@ break;
     break;
 
       case 'advanced':
-return 'bg-red-100 text-red-800',;
+return 'bg-red-100 text-red-800',
     break;
 break;
 }
-    default: return 'bg-gray-100 text-gray-800',;
-}
+    default: return 'bg-gray-100 text-gray-800'}
   const _getProgressPercentage = (path: LearningPath) => {
     const _completed = path.tutorials.filter((t) => t.completed).length;
     return (completed / path.tutorials.length) * 100;
@@ -115,7 +118,7 @@ break;
             Structured learning journeys to master AI Guided SaaS development.
           </p>
         </div>
-        <div className="grid gap-6, lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2">
           {learningPaths.map((path) => (
             <Card key={path.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -124,30 +127,26 @@ break;
                     <CardTitle className="text-xl mb-2">{path.title}</CardTitle>
                     <p className="text-gray-600 mb-4">{path.description}</p>
                     <div className="flex items-center gap-4">
-                      <Badge className={`${getDifficultyColor(path.difficulty)} border-0`}>`
+                      <Badge className={`${getDifficultyColor(path.difficulty)} border-0`}>
                         {path.difficulty}
                       </Badge>
                       <div className="flex items-center text-gray-500">
-                        <Clock className="h-4 w-4 mr-1"    />
+                        <Clock className="h-4 w-4 mr-1" />
                         {path.totalDuration}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
+                            </div>
+<div className="text-right">
                     <div className="text-2xl font-bold text-blue-600">
                       {Math.round(getProgressPercentage(path))}%
                     </div>
-                    <div className="text-sm text-gray-500">Complete</div>
-                  </div>
-                </div>
-              </CardHeader>
+                    <div className="text-sm text-gray-500">Complete      </div>
+</CardHeader>
               <CardContent>
                 <div className="space-y-3 mb-6">
                   {path.tutorials.map((tutorial, index) => {
                     const _isCompleted = tutorial.completed;
                     const _isLocked = index > 0 && !path.tutorials[index - 1].completed;
-                    return (;
-                      <div
+                    return (
+    <div
                         key={tutorial.id}
                         className={`flex items-center p-3 rounded border ${`
                           isCompleted ? 'bg-green-50 border-green-200' :
@@ -155,21 +154,19 @@ break;
                           'bg-white border-gray-200, hover:bg-gray-50'
                         }`}`
                       >
-                        <div className="flex-shrink-0 mr-3">
+      <div className="flex-shrink-0 mr-3">
                           {isCompleted ? (
-                            <CheckCircle className="h-5 w-5 text-green-600"    />
+                            <CheckCircle className="h-5 w-5 text-green-600" />
                           ) : isLocked ? (
-                            <Lock className="h-5 w-5 text-gray-400"    />
+                            <Lock className="h-5 w-5 text-gray-400" />
                           ) : (
-                            <Play className="h-5 w-5 text-blue-600"    />
+                            <Play className="h-5 w-5 text-blue-600" />
                           )}
                         </div>
                         <div className="flex-1">
                           <div className="font-medium text-gray-900">{tutorial.title}</div>
                           <div className="text-sm text-gray-600">{tutorial.description}</div>
-                        </div>
                         <div className="text-sm text-gray-500">{tutorial.duration}</div>
-                      </div>
                     );
                   })}
                 </div>
@@ -182,8 +179,10 @@ break;
               </CardContent>
             </Card>
           ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+              </div>
+);
+
+          </div>
+</string>
+    </Tutorial>
+  }

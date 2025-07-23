@@ -1,13 +1,13 @@
 // @ts-nocheck
 // apps/ui-builder/components/AssistantPrompt.tsx
-'use client'import React, { useState } from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
 import { logAssistantInteraction, generateCausalContext } from '../../../packages/causal-engine/assistant-utils';
-props: anyexport default function AssistantPrompt(): void {;
-  const [input, setInput]: any[] = useState<any>('');
+export default function AssistantPrompt() {const [input, setInput] = useState('');
   const addComponent = useBuilderStore((s) => s.addComponent);
-  const handleSubmit = async () => {;
-    if (!input.trim()) return;
+  const handleSubmit = async () => {if (!input.trim()) return;
     // Get causal context for smarter suggestions
     const causalContext = generateCausalContext('ui-builder');
     // Enhanced keyword matching with causal awareness
@@ -48,20 +48,21 @@ props: anyexport default function AssistantPrompt(): void {;
     alert(`Assistant has scaffolded ${generatedComponents.length} components! ${causalContext ? '🧠 Using causal insights.' : ''}`);``
     setInput('');
   };
-  return (;
+  return (
     <div className="p-4 bg-gray-100 border-t"></div>
       <h2 className="text-lg font-semibold mb-2">🧠 AI Assistant</h2>
       <input
         value={input}
-        onChange: any={(e) => setInput(e.target.value)}
+        onChange={(e) => setInput(e.target.value)}
         placeholder="Describe your app idea..."
         className="w-full px-4 py-2 border rounded text-sm"
         onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
       /></input>
       <button
         onClick={handleSubmit}
-        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded, hover: bg-blue-700"
+        className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover: bg-blue-700"
       >
         Generate Layout</button>
     )
-}
+
+    }

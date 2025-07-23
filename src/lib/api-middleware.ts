@@ -5,7 +5,7 @@ import { ApiTracking } from './api-tracking';
 export type ApiHandler = (, request: NextRequest, context?) => Promise<Response> | Response
 // Middleware wrapper for API routes;
 export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
-  return async (request: NextRequest, context?) => {;
+  return async (request: NextRequest, context?) => {
     const _startTime = Date.now();
     let response: Response;
     let userId: string | undefined
@@ -53,9 +53,9 @@ export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
 }
 }
 // Middleware for tracking specific resource usage
-export function trackResourceUsage(, ;
+export function trackResourceUsage(,
     resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use'): 'ai_generation' | 'project_creation' | 'export' | 'template_use') {
-  return (handler: ApiHandler): ApiHandler: (any) => { return async (request: NextRequest, context?) => {;
+  return (handler: ApiHandler): ApiHandler: (any) => { return async (request: NextRequest, context?) => {
       const response = await handler(request, context);
       // Only track successful operations
       if(response.status === 200 || response.status === 201) {
@@ -63,7 +63,7 @@ export function trackResourceUsage(, ;
           const session = await getServerSession(authOptions);
           if(session?.user?.id) {
             // Extract additional metadata from response if available
-            let metadata: Record<string, unknown> = {; }
+            let metadata: Record<string, unknown> = { }
             try { const responseClone = response.clone();
               const body = await responseClone.json();
               // Extract relevant metadata based on resource type
@@ -127,11 +127,11 @@ export function trackResourceUsage(, ;
 }
 }
 // Rate limiting middleware
-export function withRateLimit(, ;
+export function withRateLimit(,
     maxRequests: number = 100, windowMs: number = 60000 // 1 minute): number = 100, windowMs: number = 60000 // 1 minute) {
   const requestCounts = new Map<string, { count: number, resetTime: number }>()
-  return (handler: ApiHandler): ApiHandler: (any) => {;
-    return async (request: NextRequest, context?) => {;
+  return (handler: ApiHandler): ApiHandler: (any) => {
+    return async (request: NextRequest, context?) => {
       // Get client identifier (IP or user ID)
       const session = await getServerSession(authOptions);
       const _identifier = session?.user?.id || ;
@@ -147,7 +147,7 @@ export function withRateLimit(, ;
         } else {
           userLimit.count++
           if(userLimit.count > maxRequests) {
-            return NextResponse.json(;
+            return NextResponse.json(
               {
                 error: 'Too many requests',
                 retryAfter: Math.ceil((userLimit.resetTime - now) / 1000)
@@ -182,6 +182,5 @@ export function withRateLimit(, ;
       response.headers.set('X-RateLimit-Remaining', (maxRequests - limit.count).toString())
       response.headers.set('X-RateLimit-Reset', new Date(limit.resetTime).toISOString())
       return response;
-}
 }
 }

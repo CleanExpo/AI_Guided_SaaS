@@ -1,12 +1,15 @@
+'use client';
+
 import React from 'react';
-'use client';import { useState } from 'react';
+
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Settings, Database, Shield, Zap, Globe, Users } from 'lucide-react';
-props: anyexport default function ConfigPage(): void {
-  const [activeSection, setActiveSection]: any[] = useState<any>('overview');
-  const configSections = [;,
+export default function ConfigPage() {
+  const [activeSection, setActiveSection] = useState('overview');
+  const configSections = [
   { id: 'overview', label: 'Overview', icon: Settings },
     { id: 'database', label: 'Database', icon: Database },
     { id: 'security', label: 'Security', icon: Shield },
@@ -24,7 +27,7 @@ props: anyexport default function ConfigPage(): void {
             Manage your AI Guided SaaS platform settings and configurations.
           </p>
         </div>
-        <div className="grid gap-6, lg:grid-cols-4">
+        <div className="grid gap-6 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <Card>
               <CardHeader>
@@ -50,13 +53,14 @@ props: anyexport default function ConfigPage(): void {
             </Card>
           </div>
           <div className="lg:col-span-3 space-y-6">
-            {activeSection === 'overview'  && (div className="space-y-6">
+            {activeSection === 'overview'  && (
+div className="space-y-6">
                 <Card>
                   <CardHeader>
                     <CardTitle>System Status</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid gap-4, md:grid-cols-3">
+                    <div className="grid gap-4 md:grid-cols-3">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                         <span className="text-sm text-gray-600">Database Connected</span>
@@ -69,7 +73,6 @@ props: anyexport default function ConfigPage(): void {
                         <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                         <span className="text-sm text-gray-600">Maintenance Mode</span>
                       </div>
-                    </div>
                   </CardContent>
                 </Card>
                 <Card>
@@ -86,10 +89,13 @@ props: anyexport default function ConfigPage(): void {
                   </CardContent>
                 </Card>
               </div>
+            
+              
             )},
-    {activeSection !== 'overview'  && (Card>
+    {activeSection !== 'overview'  && (
+Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center capitalize"><Settings className="h-5 w-5 mr-2"    />
+                  <CardTitle className="flex items-center capitalize"><Settings className="h-5 w-5 mr-2" />
                     {activeSection} Configuration
                   </CardTitle>
                 </CardHeader>
@@ -100,10 +106,11 @@ props: anyexport default function ConfigPage(): void {
                   <Badge variant="secondary">Coming Soon</Badge>
                 </CardContent>
               </Card>
+            
+              
             )}
+                </div>
+);
+
           </div>
-        </div>
-      </div>
-    </div>
-  );
 }

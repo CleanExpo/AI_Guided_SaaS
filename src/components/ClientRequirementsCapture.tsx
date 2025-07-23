@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,13 +10,14 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Send, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 interface ProcessedRequirements {
-  requirements: Array<{
-  id: string,
-    category: string,
-    description: string,
-    priority: string,
+requirements: Array<{
+  id: string;
+    category: string;
+    description: string;
+    priority: string;
     agents: string[]
-  }>,
+  
+}>,
   roadmap: {
     complexity: string, estimatedDuration: string, phases: Array<{
   name: string, duration: string, agents: string[]
@@ -23,7 +25,6 @@ interface ProcessedRequirements {
 }
   summary: {
     totalRequirements: number, complexity: string, estimatedDuration: string, assignedAgents: string[]
-}
 },
     export function ClientRequirementsCapture() {
   const [input, setInput] = useState<any>('');
@@ -31,7 +32,7 @@ interface ProcessedRequirements {
   const [isProcessing, setIsProcessing] = useState<any>(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<ProcessedRequirements | null>(null);
-  const examplePrompts = [;,
+  const examplePrompts = [
   "I need an e-commerce platform with user authentication, product catalog, shopping cart, and Stripe payment integration",
     "Build a real-time dashboard with analytics, charts, dark mode, and export functionality",
     "Create a blog platform with markdown editor, SEO optimization, and social media integration",
@@ -106,7 +107,7 @@ interface ProcessedRequirements {
                 id="projectName"
                 placeholder="My Awesome Project"
                 value={projectName}
-                onChange: any={(e) => setProjectName(e.target.value)}
+                onChange={(e) => setProjectName(e.target.value)}
                 disabled={isProcessing}
               /></Input>
             <div className="space-y-2"></div>
@@ -115,14 +116,17 @@ interface ProcessedRequirements {
                 id="requirements"
                 placeholder="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints..."
                 value={input}
-                onChange: any={(e) => setInput(e.target.value)}
+                onChange={(e) => setInput(e.target.value)}
                 disabled={isProcessing}
                 rows={8}
                 className="resize-none"
               /></Textarea>
-            {error  && (Alert variant="destructive"></Alert>
-                <AlertCircle className="h-4 w-4"    /></AlertCircle>
+            {error  && (
+Alert variant="destructive"></Alert>
+                <AlertCircle className="h-4 w-4" /></AlertCircle>
                 <AlertDescription>{error}</AlertDescription>
+            
+              
             )}
             <Button
               type="submit"
@@ -139,7 +143,7 @@ interface ProcessedRequirements {
             </Button>
           <div className="mt-6 space-y-2"></div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground"></div>
-              <Lightbulb className="h-4 w-4"    /></Lightbulb>
+              <Lightbulb className="h-4 w-4" /></Lightbulb>
               <span>Need inspiration? Try these, examples:</span>
             </div>
             <div className="space-y-2">
@@ -147,7 +151,7 @@ interface ProcessedRequirements {
                 <button
                   key={index}
                   onClick={() => useExample(example)}
-                  className="text-left text-sm p-3 rounded-lg border, hover:bg-accent transition-colors w-full"
+                  className="text-left text-sm p-3 rounded-lg border hover:bg-accent transition-colors w-full"
                   disabled={isProcessing}
                 >
                   {example}</button>
@@ -155,10 +159,10 @@ interface ProcessedRequirements {
     {result  && (React.Fragment>Card></Card>
             <CardHeader></CardHeader>
               <CardTitle className="flex items-center gap-2"></CardTitle>
-                <CheckCircle className="h-5 w-5 text-green-600"    />
+                <CheckCircle className="h-5 w-5 text-green-600" />
                 Requirements Analyzed Successfully
             <CardContent className="space-y-4"></CardContent>
-              <div className="grid grid-cols-2, md:grid-cols-4 gap-4"></div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
                 <div className="text-center"></div>
                   <p className="text-2xl font-bold">{result.summary.totalRequirements}</p>
                   <p className="text-sm text-muted-foreground">Requirements</p>
@@ -212,4 +216,8 @@ interface ProcessedRequirements {
       )}
     );
 }
-}
+
+    </div>
+    </any>
+    </any>
+    }

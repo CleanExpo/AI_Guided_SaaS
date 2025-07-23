@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useCallback } from 'react';
 import { ReactFlow, MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge, Node, Edge, Connection, BackgroundVariant } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
@@ -7,29 +9,30 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Save, Download, Upload } from 'lucide-react';
 interface FlowchartBuilderProps {
-  projectName: string,
-    onSaveFlow: (nodes: Node[], edges: Edge[]) => void
+projectName: string;
+    onSaveFlow: (nodes: Node[], edges: Edge[]) => voi;d
+
 }
-const initialNodes: Node[] = [;,
+const initialNodes: Node[] = [
   {
   id: '1',
     type: 'input',
     position: { x: 250, y: 25 },
-    data: { label: 'Start' }},
+    data: { label: 'Start' },
   {
     id: '2',
     position: { x: 100, y: 125 },
-    data: { label: 'User Input' }},
+    data: { label: 'User Input' },
   {
     id: '3',
     position: { x: 400, y: 125 },
-    data: { label: 'Process Data' }},
+    data: { label: 'Process Data' },
   {
     id: '4',
     type: 'output',
     position: { x: 250, y: 250 },
     data: { label: 'End' }}]
-const initialEdges: Edge[] = [;,
+const initialEdges: Edge[] = [
   { id: 'e1-2', source: '1', target: '2' },
   { id: 'e1-3', source: '1', target: '3' },
   { id: 'e2-4', source: '2', target: '4' },
@@ -38,7 +41,7 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [nodeId, setNodeId] = useState<any>(5);
-  const _onConnect = useCallback(;
+  const _onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   )
@@ -86,8 +89,7 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
 }
 }
       reader.readAsText(file)
-}
-  }, [setNodes, setEdges])
+}, [setNodes, setEdges])
   return (
     <div className="h-full flex flex-col"></div><Card className="mb-4"></Card>
         <CardHeader></CardHeader>
@@ -95,25 +97,27 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
             <span>Flowchart Builder - {projectName}</span>
             <div className="flex gap-2"></div>
               <Button onClick={addNode} size="sm" variant="outline"></Button>
-                <Plus className="w-4 h-4 mr-1"    />
+                <Plus className="w-4 h-4 mr-1" />
                 Add Node</Plus>
               <Button onClick={saveFlow} size="sm" variant="outline"></Button>
-                <Save className="w-4 h-4 mr-1"    />
-                // Save</Save>
+                <Save className="w-4 h-4 mr-1" />
+                    Save
+                  </Save>
               <Button onClick={exportFlow} size="sm" variant="outline"></Button>
-                <Download className="w-4 h-4 mr-1"    />
-                // Export</Download>
+                <Download className="w-4 h-4 mr-1" />
+                    Export
+                  </Download>
               <label className="cursor-pointer"></label>
                 <Button size="sm" variant="outline" asChild></Button>
                   <span></span>
-                    <Upload className="w-4 h-4 mr-1"    />
-                    // Import</Upload>
+                    <Upload className="w-4 h-4 mr-1" />
+                    Import
+                  </Upload>
                 <input
                   type="file"
                   accept=".json"
                   onChange={importFlow}
-                  className="hidden"
-                   /></input>
+                  className="hidden" /></input>
         <CardContent></CardContent>
           <p className="text-sm text-gray-600">
             Create and visualize your project workflow. Drag nodes to reposition them,
@@ -128,12 +132,13 @@ export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartB
           // fitView
           attributionPosition="bottom-left"
         ></ReactFlow>
-          <Controls    /></Controls>
-          <MiniMap    /></MiniMap>
-          <Background variant={BackgroundVariant.Dots} gap={12} size={1}    /></Background>
+          <Controls /></Controls>
+          <MiniMap /></MiniMap>
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1
+    }    /></Background>
       <Card className="mt-4"></Card>
         <CardContent className="pt-4"></CardContent>
-          <div className="grid grid-cols-1, md:grid-cols-3 gap-4 text-sm"></div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"></div>
             <div></div>
               <h4 className="font-medium text-gray-900 mb-1">Navigation</h4>
               <p className="text-gray-600">Use mouse wheel to zoom, drag to pan</p>

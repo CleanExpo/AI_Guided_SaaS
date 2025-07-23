@@ -1,15 +1,18 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Persona, ProjectConfig, ChatMessage } from '@/types';
 import { Send, Bot, User } from 'lucide-react';
 interface AIChatProps {
-  persona: Persona,
-    onProjectConfigReady: (config: ProjectConfig) => void
+persona: Person;a;
+    onProjectConfigReady: (config: ProjectConfig) => voi;d
+
 }
-const chatQuestions = [;,
+const chatQuestions = [
   {
   id: 'project-name',
     question: "What would you like to name your project?",
@@ -53,7 +56,7 @@ const chatQuestions = [;,
 }
 ]
 export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), onProjectConfigReady }: AIChatProps) {
-  const [messages, setMessages]: any[] = useState<ChatMessage[]>([;,
+  const [messages, setMessages] = useState<ChatMessage[]>([
   {
   id: '1',
       role: 'assistant',
@@ -63,24 +66,23 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), 
       timestamp: new Date()
 }
   ])
-  const [currentQuestionIndex, setCurrentQuestionIndex]: any[] = useState<any>(0);
-  const [projectData, setProjectData]: any[] = useState<Partial<ProjectConfig>>({
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({
     persona: persona,
     features: [],
     technology: {
   frontend: 'React',
       backend: 'Node.js',
-      database: 'PostgreSQL',;
+      database: 'PostgreSQL',
       hosting: 'Vercel'
 }
       </Partial>
   })
-  const [userInput, setUserInput]: any[] = useState<any>('');
-  const [selectedFeatures, setSelectedFeatures]: any[] = useState<string[]>([]);
-  const [isTyping, setIsTyping]: any[] = useState<any>(false);
+  const [userInput, setUserInput] = useState('');
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const _scrollToBottom = (): void: (any) => { ;
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
+  const _scrollToBottom = (): void => {messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }
       )}
     );
   const _askNextQuestion = useCallback(() => {
@@ -106,8 +108,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), 
       setTimeout(() => {
         askNextQuestion()
       }, 1000)
-}
-  }, [currentQuestionIndex, askNextQuestion])
+}, [currentQuestionIndex, askNextQuestion])
   const _handleUserResponse = (response: string) => {
     // Add user message
     const userMessage: ChatMessage = {
@@ -191,7 +192,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), 
         : [...prev, feature]
     )
 }
-  const _handleSendMessage = (): void: (any) => {
+  const _handleSendMessage = (): void => {
     if (!userInput.trim()) return
     const currentQuestion = chatQuestions[currentQuestionIndex];
     if(currentQuestion?.type === 'features') {
@@ -210,7 +211,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), 
         <CardHeader className="border-b"></CardHeader>
           <CardTitle className="flex items-center gap-3"></CardTitle>
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"></div>
-              <Bot className="w-6 h-6 text-blue-600"    /></Bot>
+              <Bot className="w-6 h-6 text-blue-600" /></Bot>
             <div></div>
               <h2 className="text-xl font-semibold">{persona.name}</h2>
               <p className="text-sm text-gray-600 font-normal">{persona.tone}</p>
@@ -222,9 +223,12 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), 
                 key={message.id}
                 className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {message.role === 'assistant'  && (/div>
+                {message.role === 'assistant'  && (
+/div>
                   <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                    <Bot className="w-4 h-4 text-blue-600"    /></Bot>)}
+                    <Bot className="w-4 h-4 text-blue-600" /></Bot>
+              
+            )}
                 <div
                   className={`max-w-[70%] p-3 rounded-lg ${``
                     message.role === 'user'
@@ -235,25 +239,31 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), 
                   <p className="text-sm">{message.content}</p>
                   <p className="text-xs opacity-70 mt-1">
                     {message.timestamp.toLocaleTimeString()}</p>
-                {message.role === 'user'  && (div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                    <User className="w-4 h-4 text-gray-600"    /></User>)}
+                {message.role === 'user'  && (
+div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
+                    <User className="w-4 h-4 text-gray-600" /></User>
+              
+            )}
             ))},
-    {isTyping  && (div className="flex gap-3 justify-start"></div>
+    {isTyping  && (
+div className="flex gap-3 justify-start"></div>
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                  <Bot className="w-4 h-4 text-blue-600"    /></Bot>
+                  <Bot className="w-4 h-4 text-blue-600" /></Bot>
                 <div className="bg-gray-100 text-gray-900 p-3 rounded-lg"></div>
                   <div className="flex space-x-1"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            
+              
             )}
-            <div ref={messagesEndRef}    /></div>
+            <div ref={messagesEndRef} /></div>
           {/* Input, Area */},
     {showInput  && (div className="border-t p-6">
               {currentQuestion?.type === 'features'  && (/div>
                 <div className="mb-4"></div>
                   <p className="text-sm text-gray-600 mb-3">Select the features you would like to, include:</p>
-                  <div className="grid grid-cols-2, md:grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                     {currentQuestion.options?.map((feature) => (</div>
                       <Button
                         key={feature}
@@ -281,15 +291,18 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), 
                   <input
                     type="text"
                     value={userInput}
-                    onChange: any={(e) => setUserInput(e.target.value)}
+                    onChange={(e) => setUserInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                     placeholder={
                       currentQuestion?.type === 'features'
                         ? "Or describe custom features": "Type your response"
 }
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md, focus:outline-none focus:ring-2, focus:ring-blue-500"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md, focus:outline-none focus:ring-2 focus:ring-blue-500"
                   /></input>
                   <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0}></Button>
-                    <Send className="w-4 h-4"    />)}
-          )}
+                    <Send className="w-4 h-4" />)}
+          )
+    </any>
+    </any>
+    }
         </CardContent>

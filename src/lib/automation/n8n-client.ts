@@ -10,7 +10,7 @@ export interface N8nWorkflow {
     name: string,
     active: boolean,
     nodes: N8nNode[],
-    connections: N8nConnection;
+    connections: N8nConnectio;n;
   settings?: N8nWorkflowSettings;
   tags?: string[];
   createdAt?: string;
@@ -26,7 +26,7 @@ export interface N8nNode {
   credentials?: Record<string, string>
   disabled?: boolean;
 }
-export interface N8nConnection { [nodeId: string]: {;
+export interface N8nConnection { [nodeId: string]: {
     [outputName: string]: Array<{
   node: string,
     type: 'main' | 'ai_agent' | 'ai_tool' | 'ai_document' | 'ai_memory' | 'ai_outputParser',
@@ -115,40 +115,40 @@ export class N8nClient {
     this.headers['Content-Type'] = 'application/json'
 }
   // Workflow operations
-  async listWorkflows(): Promise {
+  async listWorkflows(): Promise<any> {
     const response = await this.request('/workflows');
     return (response as any).data;
 }
-  async getWorkflow(id: string): Promise {
+  async getWorkflow(id: string): Promise<any> {
     return, this.request(`/workflows/${id}`)``
 }
-  async createWorkflow(workflow: Omit<N8nWorkflow, 'id'>): Promise {
+  async createWorkflow(workflow: Omit<N8nWorkflow, 'id'>): Promise<any> {
     // Validate workflow
     const _validated = N8nWorkflowSchema.parse(workflow);
-    return this.request('/workflows', {;
+    return this.request('/workflows', {
       method: 'POST',
       body: JSON.stringify(validated)
     })
 }
-  async updateWorkflow(id: string, workflow: Partial<N8nWorkflow>): Promise {
+  async updateWorkflow(id: string, workflow: Partial<N8nWorkflow>): Promise<any> {
     return, this.request(`/workflows/${id}`, {``
       method: 'PUT',
       body: JSON.stringify(workflow)
     })
 }
-  async deleteWorkflow(id: string): Promise {
+  async deleteWorkflow(id: string): Promise<any> {
     await, this.request(`/workflows/${id}`, {``
       method: 'DELETE'
     })
 }
-  async activateWorkflow(id: string): Promise {
+  async activateWorkflow(id: string): Promise<any> {
     return this.updateWorkflow(id, { active: true });
 }
-  async deactivateWorkflow(id: string): Promise {
+  async deactivateWorkflow(id: string): Promise<any> {
     return this.updateWorkflow(id, { active: false });
 }
   // Execution operations
-  async executeWorkflow(id: string, data?, mode: 'manual' | 'trigger' = 'manual'): Promise {
+  async executeWorkflow(id: string, data?, mode: 'manual' | 'trigger' = 'manual'): Promise<any> {
     return, this.request(`/workflows/${id}/execute`, {``
       method: 'POST',
       body: JSON.stringify({
@@ -157,35 +157,35 @@ export class N8nClient {
       })
     })
 }
-  async listExecutions(workflowId?: string): Promise {
+  async listExecutions(workflowId?: string): Promise<any> {
     const _params = workflowId ? `?workflowId=${workflowId}` : '';``
     const response = await this.request(`/executions${params}`);``
     return (response as any).data;
 }
-  async getExecution(id: string): Promise {
+  async getExecution(id: string): Promise<any> {
     return, this.request(`/executions/${id}`)``
 }
-  async deleteExecution(id: string): Promise {
+  async deleteExecution(id: string): Promise<any> {
     await, this.request(`/executions/${id}`, {``
       method: 'DELETE'
     })
 }
-  async retryExecution(id: string): Promise {
+  async retryExecution(id: string): Promise<any> {
     return, this.request(`/executions/${id}/retry`, {``
       method: 'POST'
     })
 }
   // Webhook operations
-  async getWebhookUrl(path: string, httpMethod: string = 'POST'): Promise {
+  async getWebhookUrl(path: string, httpMethod: string = 'POST'): Promise<any> {
     const _webhookBaseUrl = this.config.url.replace('/api/v1', '');
     return `${webhookBaseUrl}/webhook/${path}`;
 }
-  async testWebhook(path: string, httpMethod: string = 'POST'): Promise {
+  async testWebhook(path: string, httpMethod: string = 'POST'): Promise<any> {
     const _webhookBaseUrl = this.config.url.replace('/api/v1', '');
     return `${webhookBaseUrl}/webhook-test/${path}`;
 }
   // Trigger workflow via webhook
-  async triggerWebhook(path: string, data, httpMethod: string = 'POST', headers?: HeadersInit): Promise {
+  async triggerWebhook(path: string, data, httpMethod: string = 'POST', headers?: HeadersInit): Promise<any> {
     const _webhookUrl = await this.getWebhookUrl(path, httpMethod);
     const response = await fetch(webhookUrl, {
     method: httpMethod,
@@ -201,11 +201,11 @@ export class N8nClient {
     return response.json();
 }
   // Credential operations (requires appropriate permissions)
-  async listCredentials(): Promise {
+  async listCredentials(): Promise<any> {
     const response = await this.request('/credentials');
     return (response as any).data;
 }
-  async testCredentials(id: string): Promise {
+  async testCredentials(id: string): Promise<any> {
     try {
       await this.request(`/credentials/${id}/test`, {``
         method: 'POST'
@@ -219,7 +219,7 @@ export class N8nClient {
   private async request<T = any>(
     endpoint: string,
     options: RequestInit = {}
-  ): Promise {
+  ): Promise<any> {
     const url = `${this.baseUrl}/api/v1${endpoint}`
     const response = await fetch(url, {
       ...options,
@@ -242,7 +242,7 @@ export class N8nClient {
     path: string,
     httpMethod: string = 'POST',
     position: [number, number] = [250, 300]
-  ): N8nNode { return {;
+  ): N8nNode { return {
       id: this.generateNodeId(),
     name: type: 'n8n-nodes-base.webhook',
       typeVersion: 1,
@@ -259,7 +259,7 @@ export class N8nClient {
     method: string = 'POST',
     position: [number, number] = [450, 300]
   ): N8nNode {
-    return {;
+    return {
       id: this.generateNodeId(),
     name: type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
@@ -289,7 +289,7 @@ export class N8nClient {
     name: string,
     code: string,
     position: [number, number] = [650, 300]
-  ): N8nNode { return {;
+  ): N8nNode { return {
       id: this.generateNodeId(),
     name: type: 'n8n-nodes-base.code',
       typeVersion: 2,
@@ -304,7 +304,7 @@ export class N8nClient {
     fromOutput: string = 'main',
     toInput: number = 0
   ): N8nConnection {
-    return {;
+    return {
       [fromNode]: {
         [fromOutput]: [[{
   node: toNode, type: 'main',

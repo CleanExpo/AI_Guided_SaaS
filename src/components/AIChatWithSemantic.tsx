@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,16 +13,18 @@ import { useSemanticSearch } from '@/hooks/useSemanticSearch';
 import { toast } from '@/components/ui/use-toast';
 
 interface ChatMessage {
-  id: string,
-    role: 'user' | 'assistant' | 'system',
+id: string;
+    role: 'user' | 'assistant' | 'system';
     content: string;
-  context?: string[],
+  context?: string[];
     timestamp: Date
+
 }
 interface AIChatWithSemanticProps {
-  enableSemanticSearch?: boolean;
+enableSemanticSearch?: boolean;
   maxContextSize?: number;
-  onContextRetrieved? (context: string[]) => void
+  onContextRetrieved? (context: string[]) => voi;d
+
 }
 export function AIChatWithSemantic({
   enableSemanticSearch = true, maxContextSize  = 7, onContextRetrieved
@@ -57,8 +61,7 @@ export function AIChatWithSemantic({
 });
     } catch (error) {
       console.error('Failed to index message:', error);
-}
-  }, [enableSemanticSearch, indexDocument]);
+}, [enableSemanticSearch, indexDocument]);
 
   const _sendMessage = async () => { if (!input.trim() || isLoading) return;
 }
@@ -138,14 +141,17 @@ export function AIChatWithSemantic({
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5"   />
+            <Sparkles className="h-5 w-5" />
             AI Assistant with Semantic Search
           </span>
-          {enableSemanticSearch  && (Badge variant="secondary" className="flex items-center gap-1">
-              <Search className="h-3 w-3"   />
+          {enableSemanticSearch  && (
+Badge variant="secondary" className="flex items-center gap-1">
+              <Search className="h-3 w-3" />
               Context7 Active
             </Badge>
-          )}
+          
+              
+            )}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -167,11 +173,11 @@ export function AIChatWithSemantic({
                 >
                   <div className="flex items-center gap-2 mb-1">
                     {message.role === 'user' ? (
-                      <User className="h-4 w-4"   />
+                      <User className="h-4 w-4" />
                     ) : message.role === 'system' ? (
-                      <Search className="h-4 w-4"   />
+                      <Search className="h-4 w-4" />
                     ) : (
-                      <Bot className="h-4 w-4"   />
+                      <Bot className="h-4 w-4" />
                     )}
                     <span className="text-xs opacity-70">
                       {message.timestamp.toLocaleTimeString()}
@@ -194,22 +200,23 @@ export function AIChatWithSemantic({
                     </details>
                   )}
                 </div>
-              </div>
             ))},
-    {isLoading  && (div className="flex justify-start">
+    {isLoading  && (
+div className="flex justify-start">
                 <div className="bg-secondary p-3 rounded-lg">
-                  <Bot className="h-4 w-4 animate-pulse"   />
+                  <Bot className="h-4 w-4 animate-pulse" />
                 </div>
-              </div>
+            
+              
             )}
-            <div ref={messagesEndRef}   />
+            <div ref={messagesEndRef} />
           </div>
         </ScrollArea>
 
         <div className="flex gap-2">
           <Input
             value={input}
-            onChange: any={(e) => setInput(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
             placeholder={
               // isSearching
@@ -223,7 +230,7 @@ export function AIChatWithSemantic({
             disabled={isLoading || isSearching || !input.trim()}
             size="icon"
           >
-            <Send className="h-4 w-4"   />
+            <Send className="h-4 w-4" />
           </Button>
         </div>
 
@@ -238,9 +245,12 @@ export function AIChatWithSemantic({
                 </Badge>
               ))}
             </div>
-          </div>
         )}
       </CardContent>
     </Card>
   );
-}
+
+    </div>
+    </HTMLDivElement>
+    </any>
+    }

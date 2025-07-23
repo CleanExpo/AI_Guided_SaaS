@@ -36,7 +36,7 @@ export interface MCPResource  { uri: string,
 }
 export interface MCPPrompt  { name: string;
   description?: string;
-  arguments?: Array<{;
+  arguments?: Array<{
     name: string;
     description?: string;
     required?: boolean;
@@ -72,7 +72,7 @@ export interface MCPExecutionStep { id: string,
     operation: string;
   arguments?: Record<string, any>;
   dependsOn?: string[];
-  retryPolicy?: {;
+  retryPolicy?: {
     maxRetries: number,
     backoffMs: number
 }
@@ -118,7 +118,7 @@ export class MCPOrchestrator {
   /**
    * Register a new MCP server
    */
-  async registerServer(server: Omit<MCPServer, 'status' | 'tools'>): Promise {
+  async registerServer(server: Omit<MCPServer, 'status' | 'tools'>): Promise<any> {
     try {
       // Connect to server
       await this.connectToServer(server.id, server.url);
@@ -147,7 +147,7 @@ export class MCPOrchestrator {
   /**
    * Disconnect from a server
    */
-  async disconnectServer(serverId: string): Promise {
+  async disconnectServer(serverId: string): Promise<any> {
     const connection = this.connections.get(serverId);
     if (connection) {
       connection.close();
@@ -185,7 +185,7 @@ export class MCPOrchestrator {
   /**
    * Call a tool on a specific server
    */
-  async callTool(call: MCPToolCall): Promise {
+  async callTool(call: MCPToolCall): Promise<any> {
     const validated = MCPToolCallSchema.parse(call);
     const _startTime = Date.now();
     try {
@@ -205,20 +205,20 @@ export class MCPOrchestrator {
         );
 }
       // Execute tool
-      const _result = await this.executeToolCall(;
+      const _result = await this.executeToolCall(
         validated.server,
         validated.tool,
         validated.arguments,
         validated.timeout
       );
-      return {;
+      return {
         tool: validated.tool,
     server: validated.server;
         result,
         duration: Date.now() - startTime,
     timestamp: new Date().toISOString()
 }
-    } catch (error) { return {;
+    } catch (error) { return {
         tool: validated.tool,
     server: validated.server,
     result: null,
@@ -229,7 +229,7 @@ export class MCPOrchestrator {
   /**
    * Execute multiple tools in parallel
    */
-  async callToolsParallel(calls: MCPToolCall[]): Promise {
+  async callToolsParallel(calls: MCPToolCall[]): Promise<any> {
     const _promises = calls.map((call) => this.callTool(call));
     return Promise.all(promises);
 }
@@ -324,7 +324,7 @@ export class MCPOrchestrator {
   /**
    * Get resources from a server
    */
-  async listResources(serverId: string): Promise {
+  async listResources(serverId: string): Promise<any> {
     const server = this.servers.get(serverId);
     if(!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`);``
@@ -334,7 +334,7 @@ export class MCPOrchestrator {
   /**
    * Read a resource
    */
-  async readResource(serverId: string, uri: string): Promise {
+  async readResource(serverId: string, uri: string): Promise<any> {
     const server = this.servers.get(serverId);
     if(!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`);``
@@ -344,7 +344,7 @@ export class MCPOrchestrator {
   /**
    * List prompts from a server
    */
-  async listPrompts(serverId: string): Promise {
+  async listPrompts(serverId: string): Promise<any> {
     const server = this.servers.get(serverId);
     if(!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`);``
@@ -354,7 +354,7 @@ export class MCPOrchestrator {
   /**
    * Get a prompt
    */
-  async getPrompt(serverId: string, name: string, args?: Record<string, any>): Promise {
+  async getPrompt(serverId: string, name: string, args?: Record<string, any>): Promise<any> {
     const server = this.servers.get(serverId);
     if(!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`);``
@@ -362,8 +362,8 @@ export class MCPOrchestrator {
     return this.sendRequest(serverId, 'prompts/get', { name, arguments: args });
 }
   // Private methods
-  private async connectToServer(serverId: string, url: string): Promise {
-    return new Promise((resolve, reject) => {;
+  private async connectToServer(serverId: string, url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
       const ws = new WebSocket(url);
       ws.onopen = () => {
         this.connections.set(serverId, ws);
@@ -410,10 +410,10 @@ export class MCPOrchestrator {
       return [];
 }
 }
-  private async discoverTools(serverId: string): Promise {
+  private async discoverTools(serverId: string): Promise<any> {
     try {
       const response = await this.sendRequest(serverId, 'tools/list', {});
-      return response.tools.map((tool) => ({;
+      return response.tools.map((tool) => ({
         ...tool,
         server: serverId
       }});
@@ -422,18 +422,18 @@ export class MCPOrchestrator {
       return [];
 }
 }
-  private async executeToolCall(serverId: string, toolName: string, args: Record<string, any>, timeout?: number): Promise {
-    return this.sendRequest(;
+  private async executeToolCall(serverId: string, toolName: string, args: Record<string, any>, timeout?: number): Promise<any> {
+    return this.sendRequest(
       serverId,
       'tools/call',
       {
         name: toolName,
     arguments: args
-      }},
+      },
       // timeout
     );
 }
-  private async sendRequest(serverId: string, method: string; params, timeout?: number): Promise {
+  private async sendRequest(serverId: string, method: string; params, timeout?: number): Promise<any> {
     const connection = this.connections.get(serverId);
     if(!connection || connection.readyState !== WebSocket.OPEN) {
       throw new Error(`Not connected to server ${serverId}`);``
@@ -444,7 +444,7 @@ export class MCPOrchestrator {
       id,
       method,
       params;
-    return new Promise((resolve, reject) => {;
+    return new Promise((resolve, reject) => {
       const _timeoutMs = timeout || this.config?.defaultTimeout || 30000;
       const _timer = setTimeout(() => {
         this.pendingRequests.delete(id);
@@ -459,7 +459,7 @@ export class MCPOrchestrator {
     try {
       const message = JSON.parse(data);
       if (message.id && this.pendingRequests.has(message.id)) {
-        const { resolve, reject, timeout   }: any = this.pendingRequests.get(;
+        const { resolve, reject, timeout   }: any = this.pendingRequests.get(
           message.id
         )!;
         clearTimeout(timeout);
@@ -473,5 +473,4 @@ export class MCPOrchestrator {
 }
   private generateId() {
     return Math.random().toString(36).substring(2, 15);
-}
 }

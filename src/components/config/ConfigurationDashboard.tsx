@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,11 +8,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 interface ConfigurationData {
-
-  status: string,
+status: string;
     features: {
-  enabled: string[],
+  enabled: string[];
     total: number
+
 }
     aiProviders: {
     primary: string,
@@ -21,23 +22,24 @@ interface ConfigurationData {
     timestamp: string
 };
 interface FeatureFlags {
-  aiGeneration: boolean,
-    collaboration: boolean,
-    templateMarketplace: boolean,
-    analyticsDashboard: boolean,
-    adminPanel: boolean,
-    experimentalAiAgents: boolean,
-    experimentalRealTimeCollaboration: boolean,
-    experimentalAdvancedAnalytics: boolean,
-    betaVoiceCommands: boolean,
+aiGeneration: boolean;
+    collaboration: boolean;
+    templateMarketplace: boolean;
+    analyticsDashboard: boolean;
+    adminPanel: boolean;
+    experimentalAiAgents: boolean;
+    experimentalRealTimeCollaboration: boolean;
+    experimentalAdvancedAnalytics: boolean;
+    betaVoiceCommands: boolean;
     betaAiDebugging: boolean
+
 };
 interface FullConfig {
-
-  aiProvider: {
-  primary: string,
-    fallback: string,
+aiProvider: {
+  primary: string;
+    fallback: string;
     research: string
+
 }
     openai: {
     displayName: string,
@@ -135,7 +137,7 @@ export default function ConfigurationDashboard() {
   if (loading) {
     return (<div className="flex items-center justify-center p-8"></div>
         <div className="text-center"></div>
-          <Progress value={66} className="w-64 mb-4"    /></Progress>
+          <Progress value={66} className="w-64 mb-4" /></Progress>
           <p className="text-sm text-muted-foreground">Loading configuration...</p>
   if (error) {
     return (
@@ -149,7 +151,8 @@ export default function ConfigurationDashboard() {
             size="sm"
             className="ml-4"
           >
-            // Retry</Button>
+                    Retry
+                  </Button>
   const _enabledFeaturesCount = features ? Object.values(features).filter(Boolean).length : 0;
   const _totalFeaturesCount = features ? Object.keys(features).length : 0;
   const _featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCount / totalFeaturesCount) * 100 : 0;
@@ -160,15 +163,18 @@ export default function ConfigurationDashboard() {
           <h1 className="text-3xl font-bold">Platform Configuration</h1>
           <p className="text-muted-foreground">
             AI-Guided SaaS Platform Configuration Dashboard</p>
-        {process.env.NODE_ENV === 'development'  && (Button
+        {process.env.NODE_ENV === 'development'  && (
+Button
             onClick={reloadConfiguration}
             disabled={reloading}
             variant="outline"
           >
             {reloading ? 'Reloading...' : 'Reload Config'}</Button>
-        )},
+        
+              
+            )},
     {/* Status, Overview */}
-      <div className="grid grid-cols-1, md:grid-cols-4 gap-4"></div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4"></div>
         <Card></Card>
           <CardHeader className="pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Status</CardTitle>
@@ -181,7 +187,7 @@ export default function ConfigurationDashboard() {
           <CardContent></CardContent>
             <div className="text-2xl font-bold">
               {enabledFeaturesCount}/{totalFeaturesCount}
-            <Progress value={featureCompletionPercentage} className="mt-2"    /></Progress>
+            <Progress value={featureCompletionPercentage} className="mt-2" /></Progress>
         <Card></Card>
           <CardHeader className="pb-2"></CardHeader>
             <CardTitle className="text-sm font-medium">Primary AI Provider</CardTitle>
@@ -210,7 +216,7 @@ export default function ConfigurationDashboard() {
                 Current status of platform features and experimental capabilities</CardDescription>
             <CardContent>
               {features  && (/CardContent>
-                <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {Object.entries(features).map(([feature, enabled]) => (</div>
                     <div key={feature} className="flex items-center justify-between p-3 border rounded-lg"></div>
                       <span className="font-medium">
@@ -221,8 +227,9 @@ export default function ConfigurationDashboard() {
               )}
             </CardContent>
         <TabsContent value="ai-models", className="space-y-4"></TabsContent>
-          <div className="grid grid-cols-1, md:grid-cols-3 gap-4">
-            {fullConfig  && (/div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {fullConfig  && (
+/div>
               <React.Fragment>Card></Card>
                   <CardHeader></CardHeader>
                     <CardTitle className="text-lg">OpenAI</CardTitle>
@@ -281,6 +288,8 @@ export default function ConfigurationDashboard() {
                       <span className="text-sm">Rate: Limit,</span>
                       <span className="text-sm">{fullConfig.google.rateLimitRequestsPerMinute}/min</span>
                     </div></React.Fragment>
+            
+              
             )}
         <TabsContent value="framework", className="space-y-4"></TabsContent>
           <Card></Card>
@@ -288,8 +297,9 @@ export default function ConfigurationDashboard() {
               <CardTitle>Framework Configuration</CardTitle>
               <CardDescription>Development framework and build settings</CardDescription>
             <CardContent>
-              {fullConfig  && (/CardContent>
-                <div className="grid grid-cols-1, md:grid-cols-2 gap-4"></div>
+              {fullConfig  && (
+/CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                   <div className="space-y-3"></div>
                     <div className="flex justify-between"></div>
                       <span className="font-medium">Framework:</span>
@@ -306,15 +316,18 @@ export default function ConfigurationDashboard() {
                     <div className="flex justify-between"></div>
                       <span className="font-medium">Tailwind: CSS,</span>
                       <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'}>
-                        {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}</Badge>)}
+                        {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}</Badge>
+              
+            )}
         <TabsContent value="security", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Security Configuration</CardTitle>
               <CardDescription>Security features and protection settings</CardDescription>
             <CardContent>
-              {fullConfig  && (/CardContent>
-                <div className="grid grid-cols-1, md:grid-cols-2 gap-4"></div>
+              {fullConfig  && (
+/CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                   <div className="space-y-3"></div>
                     <div className="flex justify-between"></div>
                       <span className="font-medium">Rate: Limiting,</span>
@@ -331,15 +344,18 @@ export default function ConfigurationDashboard() {
                     <div className="flex justify-between"></div>
                       <span className="font-medium">DDoS: Protection,</span>
                       <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'}>
-                        {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}</Badge>)}
+                        {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}</Badge>
+              
+            )}
         <TabsContent value="performance", className="space-y-4"></TabsContent>
           <Card></Card>
             <CardHeader></CardHeader>
               <CardTitle>Performance Configuration</CardTitle>
               <CardDescription>Caching, monitoring, and optimization settings</CardDescription>
             <CardContent>
-              {fullConfig  && (/CardContent>
-                <div className="grid grid-cols-1, md:grid-cols-2 gap-4"></div>
+              {fullConfig  && (
+/CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                   <div className="space-y-3"></div>
                     <div className="flex justify-between"></div>
                       <span className="font-medium">Cache: Strategy,</span>
@@ -356,9 +372,17 @@ export default function ConfigurationDashboard() {
                     <div className="flex justify-between"></div>
                       <span className="font-medium">Analytics:</span>
                       <Badge variant={fullConfig.performance.analyticsEnabled ? 'default' : 'secondary'}>
-                        {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}</Badge>)}
+                        {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}</Badge>
+              
+            )}
     );
-}
+
+    </CardContent>
+    </CardContent>
+    </CardContent>
+    </any>
+    </string>
+    }
 </FeatureFlags>
 </FullConfig>
 </ConfigurationData>

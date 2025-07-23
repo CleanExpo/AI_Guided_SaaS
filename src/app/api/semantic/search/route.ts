@@ -10,14 +10,14 @@ const searchSchema = z.object({
   includeSource: z.boolean().optional().default(true)
 });
 
-export async function POST(request: NextRequest): Promise { try {
-    const _body = await request.json();
+export async function POST(request: NextRequest): Promise<NextResponse> {
+  try {
+    const body = await request.json();
     
     // Validate request
     const validatedData = searchSchema.parse(body);
-}
     // Perform semantic search
-    const _results = await semanticSearch.search({
+    const results = await semanticSearch.search({
       query: validatedData.query,
       filters: validatedData.filters,
       size: validatedData.size,
@@ -27,30 +27,30 @@ export async function POST(request: NextRequest): Promise { try {
     return NextResponse.json(results);
   } catch (error) {
     if(error instanceof z.ZodError) {
-      return NextResponse.json(;
+      return NextResponse.json(
         { error: 'Invalid request', details: error.errors },
         { status: 400 }
       );
 }
     console.error('Semantic search error:', error);
-    return NextResponse.json(;
+    return NextResponse.json(
       { error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
+  }
 }
-}
-export async function GET(request: NextRequest): Promise {
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     // Health check
-    const _health = await semanticSearch.checkHealth();
+    const health = await semanticSearch.checkHealth();
     return NextResponse.json(health);
   } catch (error) {
-    return NextResponse.json(;
+    return NextResponse.json(
       { 
         status: 'unhealthy',
         error: error instanceof Error ? error.message : 'Health check failed'
       },
       { status: 503 }
     );
-}
+  }
 }

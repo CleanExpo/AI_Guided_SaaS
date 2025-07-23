@@ -97,7 +97,7 @@ export class EnvManager {
 }
   public validate(environment: string = 'development'): ValidationResult {
     if(!this.config) {
-      return {;
+      return {
         isValid: false,
     errors: [
           {
@@ -194,12 +194,12 @@ export class EnvManager {
 }
 }
 }
-    return {;
+    return {
       isValid: errors.filter((e) => e.severity === 'error').length === 0,
       errors,
       summary;
 }
-  public async sync(): Promise {
+  public async sync(): Promise<any> {
     const env = this.loadEnvFile();
     const _timestamp = new Date().toISOString();
     const changes: string[] = [];
@@ -256,7 +256,7 @@ export class EnvManager {
 }
     return 'custom';
 }
-  private logChange(action: string, message: string) { const history = JSON.parse(;
+  private logChange(action: string, message: string) { const history = JSON.parse(
       fs.readFileSync(this.historyPath, 'utf-8') || '[]'
     );
     history.push({
@@ -298,7 +298,7 @@ export class EnvManager {
                 : '',
             message: error?.message || (value ? 'Valid' : 'Not set') }
 }
-    return {;
+    return {
       summary: validation.summary,
     isValid: validation.isValid,
     services: status,
@@ -322,7 +322,7 @@ export class EnvManager {
       report += chalk.bold(`\n${service.name} (${service.category}):\n`);``
       for (const [varName, varStatus] of Object.entries(service.variables)) {
         const _icon = varStatus.status || ', ';
-        const _required = varStatus.required ? chalk.red('*') : ', ',;
+        const _required = varStatus.required ? chalk.red('*') : ', ',
         report += `  ${icon} ${varName}${required}: ${varStatus.message}\n`
 }
 }
@@ -343,6 +343,5 @@ export class EnvManager {
       this.config.lastUpdated = new Date().toISOString();
       fs.writeFileSync(this.configPath, JSON.stringify(this.config, null, 2));
       this.logChange('COMPACT', `Removed ${removed} unused variables`);``
-}
 }
 }

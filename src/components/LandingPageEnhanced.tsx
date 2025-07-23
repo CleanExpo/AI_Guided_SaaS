@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { ButtonPremium } from '@/components/ui/button-premium';
 import { CardEnhanced, CardEnhancedContent, CardEnhancedDescription, CardEnhancedHeader, CardEnhancedTitle } from '@/components/ui/card-enhanced';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +9,7 @@ import { Wrench, BarChart3, Users, FileText, ArrowRight, CheckCircle, Rocket, Br
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-const features = [;,
+const features = [
   {
   icon: Brain,
     title: 'AI-Powered Development',
@@ -38,14 +40,14 @@ const features = [;,
     title: 'Enterprise Security',
     description: 'Built with security-first principles and enterprise-grade protection for your applications.',
     gradient: 'error'}];
-const benefits = [;,
+const benefits = [
   { text: 'Reduce development time by 70%', icon: Clock },
   { text: 'AI-assisted code generation', icon: Brain },
   { text: 'Real-time team collaboration', icon: Users },
   { text: 'Enterprise-grade security', icon: Shield },
   { text: 'Scalable cloud infrastructure', icon: Globe },
   { text: 'Comprehensive analytics dashboard', icon: BarChart3 }];
-const stats = [;,
+const stats = [
   { value: '10,000+', label: 'Developers', icon: Users },
   { value: '99.9%', label: 'Uptime', icon: TrendingUp },
   { value: '70%', label: 'Faster Development', icon: Rocket },
@@ -55,12 +57,12 @@ const stats = [;,
   const [featuresRef, featuresInView] = useInView({ threshold: 0.1, triggerOnce: true });
   const [benefitsRef, benefitsInView] = useInView({ threshold: 0.1, triggerOnce: true });
   const [statsRef, statsInView] = useInView({ threshold: 0.1, triggerOnce: true });
-  return (<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800, dark:to-slate-900">;
+  return (<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900">;
       {/* Animated, Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none"></div>
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float"    /></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}    /></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse-slow"    /></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float" /></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} /></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse-slow" /></div>
       {/* Hero, Section */}
       <section ref={heroRef} className="relative py-20 px-4 text-center overflow-hidden"></section>
         <div className="max-w-6xl mx-auto relative z-10"></div>
@@ -70,13 +72,13 @@ const stats = [;,
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <Badge variant="outline", className="mb-6 bg-white/50 backdrop-blur-sm border-white/20"></Badge>
-              <Sparkles className="w-3 h-3 mr-1"    />
+              <Sparkles className="w-3 h-3 mr-1" />
               AI-Powered SaaS Platform</Sparkles>
-            <h1 className="text-4xl, md: text-6xl, lg: text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent, dark: from-white, dark:via-blue-100, dark:to-purple-100">
+            <h1 className="text-4xl, md: text-6xl, lg: text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent, dark: from-white, dark:via-blue-100 dark:to-purple-100">
               Build Better Software</h1>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Faster Than Ever</span>
-            <p className="text-xl, md:text-2xl text-gray-600, dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl, md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
               Transform your development workflow with our AI-guided SaaS platform.
               Create, collaborate, and deploy applications with unprecedented speed and intelligence.</p>
             <div className ="flex flex-col, sm:flex-row gap-4 justify-center mb-12"></div>
@@ -100,15 +102,15 @@ const stats = [;,
               ></ButtonPremium>
                 <Link href="/ui-builder">
                   Try UI Builder</Link>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500, dark:text-gray-400"></div>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400"></div>
               <div className="flex items-center gap-2"></div>
-                <CheckCircle className="h-4 w-4 text-green-500"    />
+                <CheckCircle className="h-4 w-4 text-green-500" />
                 No credit card required
               <div className="flex items-center gap-2"></div>
-                <CheckCircle className="h-4 w-4 text-green-500"    />
+                <CheckCircle className="h-4 w-4 text-green-500" />
                 Free forever plan
               <div className="flex items-center gap-2"></div>
-                <CheckCircle className="h-4 w-4 text-green-500"    />
+                <CheckCircle className="h-4 w-4 text-green-500" />
                 Setup in minutes
           </motion.div>
       {/* Stats, Section */}
@@ -118,7 +120,7 @@ const stats = [;,
             initial={{ opacity: 0, y: 30 }}
             animate={statsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="grid grid-cols-2, md:grid-cols-4 gap-6"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -129,9 +131,9 @@ const stats = [;,
               >
                 <CardEnhanced variant="glass", className="text-center p-6"></CardEnhanced>
                   <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-600"    /></stat>
-                  <div className="text-3xl font-bold text-gray-900, dark:text-white mb-1">
+                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                     {stat.value}
-                  <div className="text-sm text-gray-600, dark:text-gray-400">
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     {stat.label}
               </motion.div>
             ))}
@@ -145,13 +147,13 @@ const stats = [;,
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
+            <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
               Everything You Need to Build Amazing Software</h2>
-            <p className="text-xl text-gray-600, dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Our comprehensive platform provides all the tools and intelligence
               you need to create, deploy, and scale your applications.</p>
           </motion.div>
-          <div className="grid, md:grid-cols-2, lg:grid-cols-3 gap-8">
+          <div className="grid, md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (</div>
               <motion.div
                 key={index}
@@ -173,15 +175,15 @@ const stats = [;,
     {/* Benefits, Section */}
       <section ref={benefitsRef} className="py-20 px-4"></section>
         <div className="max-w-6xl mx-auto"></div>
-          <div className="grid, lg:grid-cols-2 gap-12 items-center"></div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center"></div>
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={benefitsInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">
+              <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
                 Why Choose Our Platform?</h2>
-              <p className="text-lg text-gray-600, dark:text-gray-300 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
                 Join thousands of developers and teams who have transformed
                 their development process with our AI-powered platform.</p>
               <div className="space-y-4 mb-8">
@@ -191,11 +193,11 @@ const stats = [;,
                     initial={{ opacity: 0, x: -20 }}
                     animate={benefitsInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50, dark:bg-gray-800/50 backdrop-blur-sm"
+                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0"></div>
                       <benefit.icon className="h-4 w-4 text-white"    /></benefit>
-                    <span className="text-base font-medium text-gray-900, dark:text-white">
+                    <span className="text-base font-medium text-gray-900 dark:text-white">
                       {benefit.text}</span>
                   </motion.div>
                 ))}
@@ -225,8 +227,8 @@ const stats = [;,
                   >
                     <div className="flex items-center gap-3"></div>
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"></div>
-                        <CheckCircle className="h-5 w-5 text-white"    />
-                      <span className="font-semibold text-gray-900, dark:text-white">Project Created</span>
+                        <CheckCircle className="h-5 w-5 text-white" />
+                      <span className="font-semibold text-gray-900 dark:text-white">Project Created</span>
                     </div>
                     <Badge variant="secondary">2 min ago</Badge>
                   </motion.div>
@@ -238,8 +240,8 @@ const stats = [;,
                   >
                     <div className="flex items-center gap-3"></div>
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center"></div>
-                        <Code className="h-5 w-5 text-white"    /></Code>
-                      <span className="font-semibold text-gray-900, dark:text-white">AI Code Generated</span>
+                        <Code className="h-5 w-5 text-white" /></Code>
+                      <span className="font-semibold text-gray-900 dark:text-white">AI Code Generated</span>
                     </div>
                     <Badge variant="secondary">1 min ago</Badge>
                   </motion.div>
@@ -251,8 +253,8 @@ const stats = [;,
                   >
                     <div className="flex items-center gap-3"></div>
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center"></div>
-                        <Globe className="h-5 w-5 text-white"    /></Globe>
-                      <span className="font-semibold text-gray-900, dark:text-white">
+                        <Globe className="h-5 w-5 text-white" /></Globe>
+                      <span className="font-semibold text-gray-900 dark:text-white">
                         Deployed to Production</span>
                     <Badge variant="secondary">Just now</Badge>
                   </motion.div>
@@ -266,10 +268,10 @@ const stats = [;,
             transition={{ duration: 0.8, ease: 'easeOut' }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white, dark:to-gray-300">Ready to Transform Your Development Process?</h2>
-            <p className="text-xl text-gray-600, dark:text-gray-300 mb-8">
+            <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">Ready to Transform Your Development Process?</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
               Join thousands of developers building the future with AI-powered tools.</p>
-            <div className="flex flex-col, sm:flex-row gap-4 justify-center mb-8"></div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8"></div>
               <ButtonPremium
                 size="xl"
                 variant="gradient"
@@ -293,11 +295,12 @@ const stats = [;,
               {[...Array(5)].map((_, i) => (</div>
                 <Star
                   key={i}
-                  className="h-5 w-5 fill-yellow-400 text-yellow-400"
-                   />
+                  className="h-5 w-5 fill-yellow-400 text-yellow-400" />
               ))}</Star>
-              <span className="ml-2 text-sm text-gray-500, dark:text-gray-400">
+              <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
                 Trusted by 10,000+ developers</span>
           </motion.div>
+    </div>
+
     );
 }

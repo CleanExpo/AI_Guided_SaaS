@@ -1,15 +1,18 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ProjectConfig } from '@/types';
 import { CheckCircle, Clock, Play, Code, TestTube, Rocket } from 'lucide-react';
 interface DevelopmentWorkflowProps {
-  projectConfig: ProjectConfig,
-    onPhaseComplete: (phase: string) => void
+projectConfig: ProjectConfi;g;
+    onPhaseComplete: (phase: string) => voi;d
+
 }}
-const workflowPhases = [;,
+const workflowPhases = [
   {
   id: 'planning',
     title: 'Planning & Architecture',
@@ -89,7 +92,7 @@ export default function DevelopmentWorkflow({
               <div className="text-sm text-gray-600">Timeline</div>
         </CardContent>
       {/* Workflow, Phases */}
-      <div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {workflowPhases.map((phase) => { const _IconComponent = phase.icon;
           const _isActive = activePhase === phase.id;
           const _isCompleted = phase.status === 'completed', return (
@@ -111,11 +114,11 @@ export default function DevelopmentWorkflow({
                     }`}
                   >
                     {isCompleted ? (</div>
-                      <CheckCircle className="w-5 h-5"    />
+                      <CheckCircle className="w-5 h-5" />
                     ) : isActive ? (
-                      <Clock className="w-5 h-5"    />
+                      <Clock className="w-5 h-5" />
                     ) : (</Clock>
-                      <IconComponent className="w-5 h-5"    />
+                      <IconComponent className="w-5 h-5" />
                     )}</IconComponent>
                   <div>
                     <h3 className="font-semibold">{phase.title}</h3>
@@ -134,8 +137,11 @@ export default function DevelopmentWorkflow({
                               : 'bg-gray-300'
                         }`}
                       >
-                        {(isCompleted || (isActive && taskIndex < 2))  && (CheckCircle className="w-3 h-3 text-white"    />
-                        )}
+                        {(isCompleted || (isActive && taskIndex < 2))  && (
+CheckCircle className="w-3 h-3 text-white"    />
+                        
+              
+            )}
                       <span
                         className={`text-sm ${``
                           isCompleted || (isActive && taskIndex < 2)
@@ -150,20 +156,23 @@ export default function DevelopmentWorkflow({
                       className="w-full"
                     >
                       Complete {phase.title}</Button>)},
-    {isCompleted  && (div className="mt-4 pt-4 border-t">
+    {isCompleted  && (
+div className="mt-4 pt-4 border-t">
                     <div className="flex items-center gap-2 text-green-600">
-                      <CheckCircle className="w-4 h-4"    />
+                      <CheckCircle className="w-4 h-4" />
                       <span className="text-sm font-medium">
-                        Phase Completed</span>)}
+                        Phase Completed</span>
+              
+            )}
     );
-  }},
+  },
     {/* AI, Recommendations */}
       <Card>
         <CardHeader>
           <CardTitle>
             AI Recommendations for {projectConfig.persona?.name || 'Developer'}</CardTitle>
         <CardContent>
-          <div className="grid grid-cols-1, md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <h4 className="font-medium text-gray-900">Next Steps</h4>
               <ul className="text-sm text-gray-600 space-y-1">
@@ -177,7 +186,10 @@ export default function DevelopmentWorkflow({
                 <li>• Use TypeScript for better code quality</li>
                 <li>• Implement proper error handling</li>
                 <li>
-                  • Follow {projectConfig.technology?.frontend || 'React'}{' '}
+                  • Follow {projectConfig.technology?.frontend || 'React'}{' '
+    </ul>
+          </div>
+}
                   conventions</li>
                 <li>• Set up continuous integration</li>
           </Card>

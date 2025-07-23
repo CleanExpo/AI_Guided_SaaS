@@ -148,6 +148,24 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   // DropdownMenuRadioGroup
-};
+
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </DropdownMenuPrimitive.Item>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+    </typeof>
+  };
 </span>
     </HTMLSpanElement>

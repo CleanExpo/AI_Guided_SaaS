@@ -1,16 +1,18 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/cn';
 import { designTokens } from '@/lib/design-system';
-const _buttonVariants = cva(;
+const _buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-300 focus-visible: outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden',
   {
     variants: {
-  variant: {;,
+  variant: {,
   default: 'bg-primary text-primary-foreground hover: bg-primary/90 shadow-lg hover: shadow-xl',
         destructive: 'bg-destructive text-destructive-foreground hover: bg-destructive/90 shadow-lg hover: shadow-xl',
         outline: 'border border-input bg-background hover: bg-accent hover: text-accent-foreground shadow-sm hover: shadow-md',
@@ -32,12 +34,12 @@ const _buttonVariants = cva(;
     pulse: 'animate-pulse-slow',
         bounce: 'animate-bounce-subtle',
         float: 'animate-float',
-        shimmer: 'relative, before: absolute, before: inset-0, before: bg-shimmer-gradient, before: animate-shimmer'}},
+        shimmer: 'relative, before: absolute, before: inset-0, before: bg-shimmer-gradient, before: animate-shimmer'},
     defaultVariants: {
       variant: 'default',
       size: 'default',
       animation: 'none'}};
-export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, ;
+export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>,
     'size' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' |
     'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'transition'>,
     VariantProps {
@@ -65,8 +67,8 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
       if(props.onClick) {
         props.onClick(event);
     },
-    const _getGlowStyles = (): void: (any) => {
-      if (!glow) return {},;
+    const _getGlowStyles = (): void => {
+      if (!glow) return {},
       switch (variant) {
         case 'gradient':
           return { boxShadow: `${designTokens.shadows.glow.primary}, 0 0 30px rgba(59, 130, 246, 0.3)` },``;
@@ -77,7 +79,7 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
     },
     const _motionProps = asChild ? {} : {
     whileHover: { scale: variant === 'floating' ? 1.05 : 1.02 },
-    whileTap: { scale: 0.98 }},
+    whileTap: { scale: 0.98 },
     return (
     <Comp, className={cn(
           buttonVariants({ variant size animation, , className `}
@@ -93,8 +95,11 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
     {...props}
       >
         {/* Shimmer, effect for shimmer animation */},
-    {animation === 'shimmer'  && (div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
-        )},
+    {animation === 'shimmer'  && (
+div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+        
+              
+            )},
     {/* Ripple, effects */},
     {ripples.map((ripple) => (</div>
           <span
@@ -103,23 +108,37 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
             style={{ left: ripple.x - 10,
     top: ripple.y - 10,
     width: 20,
-    height: 20 }}
-             />
+    height: 20 }} />
         ))},
     {/* Loading, spinner */},
-    {loading  && (/span>
+    {loading  && (
+/span>
           <div, className="absolute inset-0 flex items-center justify-center"></div>
             <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" /></div>
-        )},
+        
+              
+            )},
     {/* Content */}
         <div, className={cn('flex items-center gap-2' loading && 'opacity-0')}>
-          {icon && iconPosition === 'left'  && (/div>
+          {icon && iconPosition === 'left'  && (
+/div>
             <span, className="flex-shrink-0">{icon}</span>
-          )},
+          
+              
+            )},
     {children},
-    {icon && iconPosition === 'right'  && (span, className="flex-shrink-0">{icon}</span>
-          )}
+    {icon && iconPosition === 'right'  && (
+span, className="flex-shrink-0">{icon}</span>
+          
+              
+            )}
     );
   },
 ButtonPremium.displayName = 'ButtonPremium';
-export {  ButtonPremium, buttonVariants  };
+export {  ButtonPremium, buttonVariants  
+    </HTMLButtonElement>
+    </any>
+    </any>
+    </any>
+    </HTMLButtonElement>
+  };

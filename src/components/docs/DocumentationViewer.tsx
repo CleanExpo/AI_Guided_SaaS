@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,10 +14,11 @@ import ReactMarkdown from 'react-markdown';
 import { Prism, as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 interface DocumentationViewerProps {
-  documentationSystem: DynamicDocumentationSystem,
-    tutorialSystem: InteractiveTutorialSystem,
+documentationSystem: DynamicDocumentationSyste;m;
+    tutorialSystem: InteractiveTutorialSyste;m;
     userId: string;
   initialSectionId?: string;
+
 }
 export function DocumentationViewer({
   documentationSystem, tutorialSystem, userId, initialSectionId
@@ -50,8 +52,7 @@ export function DocumentationViewer({
     // Track section view
     if (selectedSection) {
       documentationSystem.trackUserProgress(userId, selectedSection.id, false)
-}
-  }, [selectedSection, documentationSystem, userId])
+}, [selectedSection, documentationSystem, userId])
   const _handleSearch = async () => {
     if (!searchQuery.trim()) {
       setSearchResults([])
@@ -64,7 +65,7 @@ export function DocumentationViewer({
     setSearchResults(sections)
     setIsSearching(false)
 }
-  const _handleSectionComplete = (): void: (any) => { if (selectedSection) {
+  const _handleSectionComplete = (): void => { if (selectedSection) {
       documentationSystem.trackUserProgress(userId, selectedSection.id, true)
       setUserProgress(documentationSystem.getUserProgress(userId)); }
 }
@@ -73,11 +74,11 @@ export function DocumentationViewer({
       await tutorialSystem.startTutorial(tutorialId, userId)
       // In a real app, this would start the tutorial overlay
       window.location.href = `/tutorials/${tutorialId}`
-    } catch (error) {
+  } catch (error) {
       console.error('Failed to start, tutorial:', error)
 }
 }
-  const categories = [;,
+  const categories = [
   { id: 'getting-started', label: 'Getting Started', icon: BookOpen },
     { id: 'reference', label: 'Reference', icon: Book },
     { id: 'guide', label: 'Guides', icon: ChevronRight },
@@ -102,8 +103,7 @@ return 'text-red-600 bg-red-100';
     break;
 break;
 }
-      default: return 'text-gray-600 bg-gray-100',;
-}
+      default: return 'text-gray-600 bg-gray-100'}
 }
   const _isCompleted = (sectionId: string) => {
     return userProgress?.sectionsCompleted?.includes(sectionId);
@@ -117,14 +117,14 @@ break;
         {/* Search */}
         <div className="p-4 border-b">
           {!sidebarCollapsed  && (div className="relative">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
               <input
                 type="text"
                 placeholder="Search documentation..."
                 value={searchQuery}
-                onChange: any={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                className="w-full pl-9 pr-3 py-2 text-sm border rounded-md, focus:outline-none, focus:ring-2, focus:ring-primary/20"
+                className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </div>
           )}
@@ -134,7 +134,7 @@ break;
             className={`cn("mt-2" sidebarCollapsed && "w-full")}
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
           >
-            {sidebarCollapsed ? <ChevronRight className="h-4 w-4"    /> : <ChevronLeft className="h-4 w-4"    />}
+            {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
           </Button>
         </div>
         {/* Navigation */}
@@ -143,14 +143,16 @@ break;
             {isSearching ? (
               <div className="text-center py-8">
                 <div className="inline-flex items-center text-sm text-muted-foreground">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary mr-2"    />
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary mr-2" />
                   Searching...
                 </div>
-              </div>
             ) : searchResults.length > 0 ? (
               <div>
-                {!sidebarCollapsed  && (h3 className="text-sm font-semibold mb-2">Search Results</h3>
-                )}
+                {!sidebarCollapsed  && (
+h3 className="text-sm font-semibold mb-2">Search Results</h3>
+                
+              
+            )}
                 <div className="space-y-1">
                   {searchResults.map((section) => (<button
                       key={section.id}
@@ -166,17 +168,17 @@ break;
                       {sidebarCollapsed ? (
                         <div className="flex justify-center">
                           {isCompleted(section.id) ? (
-                            <CheckCircle className="h-4 w-4 text-green-600"    />
+                            <CheckCircle className="h-4 w-4 text-green-600" />
                           ) : (
-                            <Circle className="h-4 w-4 text-muted-foreground"    />
+                            <Circle className="h-4 w-4 text-muted-foreground" />
                           )}
                         </div>
                       ) : (
                         <div className="flex items-center gap-2">
                           {isCompleted(section.id) ? (
-                            <CheckCircle className="h-4 w-4 text-green-600 shrink-0"    />
+                            <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
                           ) : (
-                            <Circle className="h-4 w-4 text-muted-foreground shrink-0"    />
+                            <Circle className="h-4 w-4 text-muted-foreground shrink-0" />
                           )}
                           <span className="truncate">{section.title}</span>
                         </div>
@@ -184,18 +186,20 @@ break;
                     </button>
                   ))}
                 </div>
-              </div>
             ) : (categories.map((category) => {
                 const sections = documentationSystem.getSectionsByCategory(category.id);
                 if (sections.length === 0) return null;
                 return (
     <div
                 key={category.id}>
-                    {!sidebarCollapsed  && (div className="flex items-center gap-2 mb-2">
+                    {!sidebarCollapsed  && (
+div className="flex items-center gap-2 mb-2">
                         <category.icon className="h-4 w-4 text-muted-foreground"    />
                         <h3 className="text-sm font-semibold">{category.label}</h3>
                       </div>
-                    )}
+                    
+              
+            )}
                     <div className="space-y-1">
                       {sections.map((section) => (<button
                           key={section.id}
@@ -207,17 +211,17 @@ break;
                           {sidebarCollapsed ? (
                             <div className="flex justify-center">
                               {isCompleted(section.id) ? (
-                                <CheckCircle className="h-4 w-4 text-green-600"    />
+                                <CheckCircle className="h-4 w-4 text-green-600" />
                               ) : (
-                                <Circle className="h-4 w-4 text-muted-foreground"    />
+                                <Circle className="h-4 w-4 text-muted-foreground" />
                               )}
                             </div>
                           ) : (
                             <div className="flex items-center gap-2">
                               {isCompleted(section.id) ? (
-                                <CheckCircle className="h-4 w-4 text-green-600 shrink-0"    />
+                                <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
                               ) : (
-                                <Circle className="h-4 w-4 text-muted-foreground shrink-0"    />
+                                <Circle className="h-4 w-4 text-muted-foreground shrink-0" />
                               )}
                               <span className="truncate">{section.title}</span>
                             </div>
@@ -225,7 +229,6 @@ break;
                         </button>
                       ))}
                     </div>
-                  </div>
                 ) 
 }
             )}
@@ -245,16 +248,13 @@ break;
                   className="bg-primary rounded-full h-2 transition-all duration-300"
                   style={{
                     width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%`
-                  }}
-                   />
+  }} />
               </div>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Star className="h-3 w-3"    />
+                <Star className="h-3 w-3" />
                 <span>{userProgress.totalPoints || 0} points</span>
-              </div>
-            </div>
-          </div>
-        )}
+                    </div>
+)}
       </div>
       {/* Content */}
       <div className="flex-1 overflow-hidden">
@@ -270,26 +270,37 @@ break;
                       {selectedSection.metadata.difficulty}
                     </Badge>
                     <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4"    />
+                      <Clock className="h-4 w-4" />
                       <span>{selectedSection.metadata.estimatedTime}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Hash className="h-4 w-4"    />
+                      <Hash className="h-4 w-4" />
                       <span>{selectedSection.metadata.tags.join(', ')},
-    {!isCompleted(selectedSection.id)  && (Button onClick={handleSectionComplete}>
+    {!isCompleted(selectedSection.id)  && (
+Button onClick={handleSectionComplete}>
                     Mark as Complete</Button>
-                )}
+                
+              
+            )}
               </div>
-            </div>
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
               <TabsList className="px-6">
-                <TabsTrigger value="content">Content {selectedSection.codeExamples.length > 0  && (TabsTrigger value="examples">Code Examples</TabsTrigger>
-                )},
-    {selectedSection.interactiveElements.length > 0  && (TabsTrigger value="interactive">Interactive</TabsTrigger>
-                )},
-    {selectedSection.systemState  && (TabsTrigger value="system">System State</TabsTrigger>
-                )}
+                <TabsTrigger value="content">Content {selectedSection.codeExamples.length > 0  && (
+TabsTrigger value="examples">Code Examples</TabsTrigger>
+                
+              
+            )},
+    {selectedSection.interactiveElements.length > 0  && (
+TabsTrigger value="interactive">Interactive</TabsTrigger>
+                
+              
+            )},
+    {selectedSection.systemState  && (
+TabsTrigger value="system">System State</TabsTrigger>
+                
+              
+            )}
               </TabsList>
               <ScrollArea className="flex-1">
                 <TabsContent value="content", className="p-6 prose prose-sm max-w-none">
@@ -298,7 +309,7 @@ break;
                       code({ node, className, children, ...props   }) {
                         const match = /language-(\w+)/.exec(className || '');
                         const _inline = node?.properties?.inline;
-                        return !inline && match ? (;
+                        return !inline && match ? (
                           <SyntaxHighlighter
                             style={vscDarkPlus}
                             language={match[1]}
@@ -326,14 +337,13 @@ break;
                           return related ? (<button;
                               key={relatedId}
                               onClick={() => setSelectedSection(related)}
-                              className="text-sm text-primary, hover:underline"
+                              className="text-sm text-primary hover:underline"
                             >
                               {related.title}
                             </button>
                           ) : null
                         })}
                       </div>
-                    </div>
                   )}
                 </TabsContent>
                 <TabsContent value="examples", className="p-6">
@@ -348,11 +358,14 @@ break;
                         >
                           {example.code}
                         </SyntaxHighlighter>
-                        {example.runnable  && (Button size="sm", className="mt-2">
-                            <Play className="h-4 w-4 mr-2"    />
+                        {example.runnable  && (
+Button size="sm", className="mt-2">
+                            <Play className="h-4 w-4 mr-2" />
                             Run Example
                           </Button>
-                        )}
+                        
+              
+            )}
                       </Card>
                     ))}
                   </div>
@@ -370,19 +383,25 @@ break;
                         {element.type === 'tutorial'  && (Button
                             onClick={() => startRelatedTutorial(element.config.tutorialId)}
                           >
-                            <Play className="h-4 w-4 mr-2"    />
+                            <Play className="h-4 w-4 mr-2" />
                             Start Tutorial
                           </Button>
                         )},
-    {element.type === 'playground'  && (Button variant="outline"><Code className="h-4 w-4 mr-2"    />
+    {element.type === 'playground'  && (
+Button variant="outline"><Code className="h-4 w-4 mr-2" />
                             Open Playground
                           </Button>
-                        )},
-    {element.completionTracking  && (div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-                            <Sparkles className="h-4 w-4"    />
+                        
+              
+            )},
+    {element.completionTracking  && (
+div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+                            <Sparkles className="h-4 w-4" />
                             <span>{element.completionTracking.points} points</span>
                           </div>
-                        )}
+                        
+              
+            )}
                       </Card>
                     ))}
                   </div>
@@ -399,7 +418,6 @@ break;
                                 <Badge key={comp} variant="secondary">{comp}</Badge>
                               ))}
                             </div>
-                          </div>
                           <div>
                             <span className="text-muted-foreground">Enabled, Features:</span>
                             <div className="flex flex-wrap gap-2 mt-1">
@@ -436,15 +454,27 @@ break;
         ) : (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
-              <Book className="h-12 w-12 text-muted-foreground mx-auto mb-4"    />
+              <Book className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h2 className="text-lg font-semibold mb-2">Select a Documentation Section</h2>
               <p className="text-sm text-muted-foreground">
                 Choose a topic from the sidebar to get started
               </p>
             </div>
-          </div>
         )}
       </div>
-    </div>
   );
-}
+
+          </div>
+</Card>
+    </TabsContent>
+    </ScrollArea>
+    </Tabs>
+    </span>
+          </div>
+</any>
+    </any>
+    </any>
+    </any>
+    </any>
+    </DocumentationSection>
+  }

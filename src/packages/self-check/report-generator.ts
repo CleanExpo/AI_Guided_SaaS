@@ -38,13 +38,13 @@ export interface HealthMetrics {
     overallScore: number
 };
 export interface ReportData {
-  moduleReport: ModuleReport,
-    depReport: DependencyReport,
-    securityReport: SecurityReport,
-    causalAnalysis: CausalAnalysis,
-    causalInsights: CausalInsights
+  moduleReport: ModuleRepor;t,
+    depReport: DependencyRepor;t,
+    securityReport: SecurityRepor;t,
+    causalAnalysis: CausalAnalysi;s,
+    causalInsights: CausalInsight;s
 };
-export async function generateSelfCheckReport(): Promise {
+export async function generateSelfCheckReport(): Promise<any> {
   const _timestamp = new Date().toISOString();
   // Gather all diagnostic data
   const moduleReport = checkModules();
@@ -233,7 +233,7 @@ function getOverallScore(, moduleReport: ModuleReport, depReport: DependencyRepo
   const _securityScore = getSecurityScore(securityReport);
   const _uxScore = getUXScore(causalInsights);
   // Weighted, average: Security is most important, then modules, then dependencies, then UX
-  return Math.round(;
+  return Math.round(
     securityScore * 0.4 + moduleScore * 0.3 + depScore * 0.2 + uxScore * 0.1
   );
 }

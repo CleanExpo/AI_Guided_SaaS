@@ -17,13 +17,13 @@ export abstract class ValidatedAgent extends Agent {
    * Process input with validation
    */
   @Validate(z.string(), AgentResultSchema)
-  async process(input: string): Promise {
+  async process(input: string): Promise<any> {
     return, super.process(input)
 }
   /**
    * Execute with input validation
    */
-  protected async execute(input: string): Promise {
+  protected async execute(input: string): Promise<any> {
     // Validate specific input if schema is provided
     if(this.inputSchema) {
       try {
@@ -31,7 +31,7 @@ export abstract class ValidatedAgent extends Agent {
         return this.executeValidated(validatedInput);
       } catch (error) {
         this.think(`Input validation, failed: ${error}`)``
-        return {;
+        return {
           success: false,
     output: null,
     messages: this.messages,
@@ -89,14 +89,14 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
     )
 }
   @ValidateOutput(RequirementAnalysisSchema)
-  protected async executeValidated(input: string): Promise {
+  protected async executeValidated(input: string): Promise<any> {
     try {
       this.think('Starting validated requirement analysis...')
       // Your analysis logic here
       const analysis = await this.analyzeRequirements(input);
       // Validate output
       const _validatedAnalysis = this.validateOutput(analysis);
-      return {;
+      return {
         success: true,
     output: validatedAnalysis,
     messages: this.messages,
@@ -110,14 +110,13 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
 }
     } catch (error) {
       this.think(`Error during, analysis: ${error}`)``
-      return { ;
-        success: false,
+      return {success: false,
     output: null,
     messages: this.messages,
     artifacts: this.context.artifacts,
     error: error instanceof Error ? error.message : 'Unknown error'
 }
-  private async analyzeRequirements(input: string): Promise {
+  private async analyzeRequirements(input: string): Promise<any> {
     // Simplified for example - implement your actual logic
     const _prompt = `Analyze these requirements and provide a structured, analysis: ${input}`
     const _response = await generateAIResponse(prompt, {
@@ -132,8 +131,7 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
  * Decorator for validating agent configuration
  */
 export function ValidatedAgentConfig(schema: z.ZodSchema): z.ZodSchema) {
-  return function <T extends { new(...args[]): {} }>(constructor: T) { ;
-    return class extends constructor {;
+  return function <T extends { new(...args[]): {} }>(constructor: T) {return class extends constructor {
       constructor(...args[]) {
         // Validate config before calling super
         const config = args[0];
@@ -160,28 +158,28 @@ export const _AgentConfigSchema = z.object({
 /**
  * Create a validated agent factory
  */
-export function createValidatedAgent<TInput, TOutput>(,;
+export function createValidatedAgent<TInput, TOutput>(,
     config: AgentConfig,
     inputSchema: z.ZodSchema<TInput>,
     outputSchema: z.ZodSchema<TOutput>,
     executeFunction: (input: TInput) => Promise<TOutput>
 ): ValidatedAgent {
-  return new (class extends ValidatedAgent {;
+  return new (class extends ValidatedAgent {
     constructor() {
       super(config, inputSchema, outputSchema)
 }
-    protected async executeValidated(input: TInput): Promise {
+    protected async executeValidated(input: TInput): Promise<any> {
       try {
         const _output = await executeFunction(input);
         const _validatedOutput = this.validateOutput(output);
-        return {;
+        return {
           success: true,
     output: validatedOutput,
     messages: this.messages,
     artifacts: this.context.artifacts,
     confidence: 0.9
 }
-      } catch (error) { return {;
+      } catch (error) { return {
           success: false,
     output: null,
     messages: this.messages,

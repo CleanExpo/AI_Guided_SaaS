@@ -1,12 +1,15 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProjectConfig, ProjectFile } from '@/types';
 import { CheckCircle, FileText, Folder, Code, Settings, Palette, Database, Globe } from 'lucide-react';
 interface ProjectGeneratorProps {
-  config: ProjectConfig,
-    onFilesGenerated: (files: ProjectFile[]) => void
+config: ProjectConfi;g;
+    onFilesGenerated: (files: ProjectFile[]) => voi;d
+
 }
 const _generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
   const files: ProjectFile[] = [];
@@ -20,7 +23,7 @@ const _generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
       version: '1.0.0',
       description: config.description,
     main: 'index.js',
-    scripts: {;,
+    scripts: {,
   dev: 'next dev',
         build: 'next build',
         start: 'next start',
@@ -33,8 +36,7 @@ const _generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
         'typescript': '^5.0.0',
         '@types/react': '^18.0.0',
         '@types/node': '^20.0.0'
-}
-    }, null, 2)
+}, null, 2)
   })
   // Generate README.md
   files.push({
@@ -77,7 +79,7 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
             Welcome to ${config.name}</h1>
           <p className="text-xl text-gray-600 mb-8">
             ${config.description}</p>
-          <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6 mt-12">
+          <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             ${config.features.slice(0, 6).map((feature) => `</div>
             <div className="bg-white p-6 rounded-lg shadow-md"></div>
               <h3 className="text-lg font-semibold mb-2">${feature}</h3>
@@ -143,27 +145,27 @@ body {
       path: 'app/api/hello/route.ts',
       type: 'api',
       content: `import { NextRequest, NextResponse } from 'next/server'``
-export async function GET(request: NextRequest): Promise {
-  return NextResponse.json({;
+export async function GET(request: NextRequest): Promise<any> {
+  return NextResponse.json({
     message: 'Hello from ${config.name} API!',
     timestamp: new Date().toISOString()
 }
       )}
   );
-export async function POST(request: NextRequest): Promise {
+export async function POST(request: NextRequest): Promise<any> {
   const _body = await request.json();
-  return NextResponse.json({;
+  return NextResponse.json({
     message: 'Data received successfully',
     data: body,
     timestamp: new Date().toISOString()
   })
 }`
-}
+  }
       )}
     );
   return files;
 }
-const generationSteps = [;,
+const generationSteps = [
   { id: 'structure', label: 'Creating project structure', icon: Folder },
   { id: 'config', label: 'Generating configuration files', icon: Settings },
   { id: 'components', label: 'Building React components', icon: Code },
@@ -251,9 +253,9 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
                     }`}
                   >
                     {isCompleted ? (</div>
-                      <CheckCircle className="w-5 h-5"    />
+                      <CheckCircle className="w-5 h-5" />
                     ) : (
-                      <IconComponent className="w-4 h-4"    />
+                      <IconComponent className="w-4 h-4" />
                     )}</IconComponent>
                   <div className="flex-1"></div>
                     <p
@@ -266,11 +268,14 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
                       }`}
                     >
                       {step.label}</p>
-                  {isCurrent  && (div className="flex space-x-1"></div>
+                  {isCurrent  && (
+div className="flex space-x-1"></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  )}
+                  
+              
+            )}
     );
 };
           {/* Features, List */}
@@ -278,11 +283,13 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
             <div className="grid grid-cols-2 gap-2">
               {config.features.map((feature, index) => (</div>
                 <div key={index} className="flex items-center space-x-2"></div>
-                  <CheckCircle className="w-4 h-4 text-green-500"    />
-                  <span className="text-sm text-gray-700">{feature}</span>))},
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-700">{feature}</span>))
+    </any>
+    },
     {!isGenerating  && (div className="text-center"></div>
               <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-full"></div>
-                <CheckCircle className="w-5 h-5"    />
+                <CheckCircle className="w-5 h-5" />
                 <span className="font-medium">Generation Complete!</span>
               </div>
               <p className="text-sm text-gray-600 mt-2">

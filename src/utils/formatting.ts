@@ -1,17 +1,17 @@
 /**
  * Formatting utility functions
  */
-export function formatCurrency(amount: number, currency = 'USD'): number, currency = 'USD') {return new Intl.NumberFormat('en-US', {;
+export function formatCurrency(amount: number, currency = 'USD'): number, currency = 'USD') {return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency).format(amount);
 };
-export function formatNumber(, ;
+export function formatNumber(,
     num: number, options?: Intl.NumberFormatOptions): number, options?: Intl.NumberFormatOptions) {
   return new Intl.NumberFormat('en-US', options).format(num);
 };
 export function formatBytes(bytes: number, decimals = 2): number, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
-  const _k = 1024;
+  const k = 1024
   const _dm = decimals < 0 ? 0 : decimals;
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
   const _i = Math.floor(Math.log(bytes) / Math.log(k));
@@ -38,7 +38,7 @@ export function capitalize(str: string): string) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 export function titleCase(str: string): string) {
-  return str.replace(/\w\S*/g, txt: (any) => {;
+  return str.replace(/\w\S*/g, txt: (any) => {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 };
@@ -50,7 +50,7 @@ export function slugify(str: string): string) {
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '');
 };
-export function pluralize(, ;
+export function pluralize(,
     count: number, singular: string, plural?: string): number, singular: string, plural?: string) {
   if (count === 1) return singular;
   return plural || `${singular}s`;
@@ -73,5 +73,4 @@ export function formatRelativeTime(date: Date | string): Date | string) {
     return `${diffMins} ${pluralize(diffMins, 'minute')} ago`;
   } else {
     return 'just now';
-}
 }

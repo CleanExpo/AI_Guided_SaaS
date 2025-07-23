@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,18 +12,20 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Shield, AlertTriangle, CheckCircle2, XCircle, RefreshCw, Zap, Activity, Settings, Info } from 'lucide-react';
 interface EPCStatus {
-  env_check: 'pass' | 'fail' | 'warning',
-    score: number,
+env_check: 'pass' | 'fail' | 'warning';
+    score: number;
     issues: string[];
   recommendations?: string[];
+
 };
 interface TelemetryStats {
-  totalInferences: number,
-    blocked: number,
-    failed: number,
-    successful: number,
-    averageDuration: number,
+totalInferences: number;
+    blocked: number;
+    failed: number;
+    successful: number;
+    averageDuration: number;
     totalCost: number
+
 };
 export function InferenceSafeMode() {
   const [enabled, setEnabled] = useState<any>(true);
@@ -79,8 +83,7 @@ export function InferenceSafeMode() {
     const _interval = setInterval(fetchStats, 30000);
     return () => clearInterval(interval);
   }, []);
-  const _getStatusIcon = (): void: (any) => { ;
-    if (!status) return null;
+  const _getStatusIcon = (): void => {if (!status) return null;
     switch (status.env_check) {
       case 'pass':
     </TelemetryStats>
@@ -88,7 +91,7 @@ export function InferenceSafeMode() {
 
     break;
 
-        return <CheckCircle2 className="h-5 w-5 text-green-500"    />;
+        return <CheckCircle2 className="h-5 w-5 text-green-500" />;
 break;
 
       case 'warning':
@@ -97,17 +100,16 @@ break;
 
     break;
 
-        return <AlertTriangle className="h-5 w-5 text-yellow-500"    />;
+        return <AlertTriangle className="h-5 w-5 text-yellow-500" />;
       case 'fail':
-    return <XCircle className="h-5 w-5 text-red-500"    />;
+    return <XCircle className="h-5 w-5 text-red-500" />;
     break;
 
     break;
 break;
 }
 }
-  const _getStatusColor = (): void: (any) => { ;
-    if (!status) return 'secondary';
+  const _getStatusColor = (): void => {if (!status) return 'secondary';
     switch (status.env_check) {
       case 'pass':
     return ';
@@ -137,13 +139,12 @@ break;
         <CardHeader></CardHeader>
           <div className="flex items-center justify-between"></div>
             <div className="flex items-center gap-2"></div>
-              <Shield className="h-5 w-5 text-muted-foreground"    /></Shield>
+              <Shield className="h-5 w-5 text-muted-foreground" /></Shield>
               <CardTitle>Inference Safe Mode</CardTitle>
             <Switch
               checked={enabled}
               onCheckedChange={setEnabled}
-              aria-label="Toggle inference safe mode"
-               /></Switch>
+              aria-label="Toggle inference safe mode" /></Switch>
           <CardDescription>
             Protect your AI credits by validating environment before inference</CardDescription>
         <CardContent></CardContent>
@@ -165,10 +166,10 @@ break;
                   onClick={checkEnvironment}
                   disabled={checking}
                 ></Button>
-                  <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`}    />``</RefreshCw>
+                  <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`} />``</RefreshCw>
             {/* Issues, Display */},
     {status?.issues && status.issues.length > 0  && (Alert></Alert>
-                <AlertTriangle className="h-4 w-4"    />
+                <AlertTriangle className="h-4 w-4" />
                 <AlertDescription></AlertDescription>
                   <div className="space-y-1"></div>
                     <p className="font-medium">Environment: Issues,</p>
@@ -176,21 +177,23 @@ break;
                       {status.issues.slice(0, 3).map((issue, i) => (</ul>
                         <li key={i}>{issue}</li>
                       ))},
-    {status.issues.length > 3  && (li>...and {status.issues.length - 3} more</li>
-                      )}
+    {status.issues.length > 3  && (
+li>...and {status.issues.length - 3} more</li>
+                      
+              
+            )}
                     </ul>
             )},
     {/* Self-Healing, Controls */}
             <div className="space-y-3"></div>
               <div className="flex items-center justify-between"></div>
                 <Label htmlFor="auto-heal", className="flex items-center gap-2"></Label>
-                  <Zap className="h-4 w-4"    />
+                  <Zap className="h-4 w-4" />
                   Auto-heal environment issues</Zap>
                 <Switch
                   id="auto-heal"
                   checked={autoHeal}
-                  onCheckedChange={setAutoHeal}
-                   /></Switch>
+                  onCheckedChange={setAutoHeal} /></Switch>
               {status?.issues && status.issues.length > 0  && (Button
                   onClick={runHealing}
                   disabled={healingInProgress}
@@ -209,7 +212,7 @@ break;
     {stats  && (Card></Card>
           <CardHeader></CardHeader>
             <div className="flex items-center gap-2"></div>
-              <Activity className="h-5 w-5 text-muted-foreground"    /></Activity>
+              <Activity className="h-5 w-5 text-muted-foreground" /></Activity>
               <CardTitle className="text-base">Inference Statistics</CardTitle>
           <CardContent></CardContent>
             <div className="grid grid-cols-2 gap-4 text-sm"></div>
@@ -236,14 +239,18 @@ break;
                 </div>
                 <Progress
                   value={(stats.successful / stats.totalInferences) * 100}
-                  className="h-2"
-                   /></Progress>)}
+                  className="h-2" /></Progress>)}
       )},
-    {/* Info, Card */}
+    {/* Info, Card */
+    </div>
+    </any>
+    </any>
+    </any>
+    }
       <Card></Card>
         <CardContent className="pt-6"></CardContent>
           <div className="flex gap-3"></div>
-            <Info className="h-5 w-5 text-muted-foreground mt-0.5"    />
+            <Info className="h-5 w-5 text-muted-foreground mt-0.5" />
             <div className="space-y-1 text-sm text-muted-foreground"></div>
               <p>
                 Inference Safe Mode validates your environment configuration before

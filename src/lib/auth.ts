@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = { providers: [
   adapter: supabase ? SupabaseAdapter({
   url: supabaseUrl!,
     secret: supabaseKey!) : undefined,
-    session: {;,
+    session: {,
   strategy: 'jwt',
   callbacks: {
     async jwt({ token, account, profile    }): Promise<any> {

@@ -5,69 +5,71 @@ const processSchema = z.object({
   projectType: z.enum(['web-app', 'api', 'mobile', 'desktop']),
   priority: z.enum(['low', 'medium', 'high']).optional()
 });
-export async function POST(request: NextRequest): Promise {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const _body = await request.json();
+    const body = await request.json();
     // Validate input
-    const _validatedData = processSchema.parse(body);
+    const validatedData = processSchema.parse(body);
     // Simulate requirements processing
-    const _processed = {
+    const processed = {
       id: 'req_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,
       status: 'processed',
       analysisResult: {
-  feasibility: 'high',
+        feasibility: 'high',
         estimatedHours: 40,
-    complexity: 'medium',
+        complexity: 'medium',
         recommendations: [
-          'Use React for frontend';
-          'Implement proper authentication';
-          'Consider using a database';
-   ]
+          'Use React for frontend',
+          'Implement proper authentication',
+          'Consider using a database'
+        ]
       },
       createdAt: new Date().toISOString()
     };
-    return NextResponse.json({ ;
-      success: true;
-      // processed
-    ,  status: 201  });
+    return NextResponse.json({
+      success: true,
+      processed
+    }, { status: 201 });
   } catch (error) {
-    console.error('Process requirements, error:', error);
+    console.error('Process requirements error:', error);
     if(error instanceof z.ZodError) {
-      return NextResponse.json(;
+      return NextResponse.json(
         { error: 'Invalid input', details: error.errors },
         { status: 400 }
       );
-}
-    return NextResponse.json(;
+    }
+    return NextResponse.json(
       { error: 'Failed to process requirements' },
       { status: 500 }
     );
+  }
 }
-}
-export async function GET(): void {
+
+export async function GET(): Promise<NextResponse> {
   try {
     // Simulate getting processed requirements
-    const requirements = [;,
-  {
-  id: 'req_1',
+    const requirements = [
+      {
+        id: 'req_1',
         requirements: 'Build a todo app',
         projectType: 'web-app',
         status: 'processed',
         createdAt: new Date().toISOString()
-}
+      }
     ];
-    return NextResponse.json({;
-      success: true;
+    return NextResponse.json({
+      success: true,
       requirements,
       total: requirements.length
     });
   } catch (error) {
-    console.error('Get requirements, error:', error);
-    return NextResponse.json(;
+    console.error('Get requirements error:', error);
+    return NextResponse.json(
       { error: 'Failed to fetch requirements' },
       { status: 500 }
     );
+  }
 }
-}
-export const _dynamic = "force-dynamic";
+
+export const dynamic = "force-dynamic";

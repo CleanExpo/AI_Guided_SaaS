@@ -21,7 +21,7 @@ export const CreateUserSchema = UserSchema.omit({
 })
 export const _UpdateUserSchema = CreateUserSchema.partial();
 // Project schemas
-export const _ProjectTypeSchema = z.enum([;,
+export const _ProjectTypeSchema = z.enum([
   'web-app',
   'mobile-app',
   'api',
@@ -30,7 +30,7 @@ export const _ProjectTypeSchema = z.enum([;,
   'automation',
   'other'
 ])
-export const _ProjectStatusSchema = z.enum([;,
+export const _ProjectStatusSchema = z.enum([
   'planning',
   'in-progress',
   'testing',
@@ -120,7 +120,7 @@ export const _ListRequestSchema = z.object({
     filters: z.array(FilterSchema).optional()
 })
 // Agent-specific schemas
-export const _AgentTypeSchema = z.enum([;,
+export const _AgentTypeSchema = z.enum([
   'analyst',
   'project-manager',
   'architect',
@@ -178,7 +178,7 @@ export const _EnvSchema = z.object({
   // Node, Environment: NODE_ENV: z.enum(['development', 'test', 'production']).default('development')
 })
 // Validation utilities
-export function validate<T>(,;
+export function validate<T>(,
     schema: z.ZodSchema<T>,
     data: unknown
 ): { success: true, data: T } | { success: false, error: z.ZodError } {
@@ -191,11 +191,11 @@ export function validate<T>(,;
 }
     throw error
 }
-export function validateAsync<T>(,;
+export function validateAsync<T>(,
     schema: z.ZodSchema<T>,
     data: unknown
-): Promise {
-  return new Promise((resolve) => {;
+): Promise<any> {
+  return new Promise((resolve) => {
     try {
       const _validated = schema.parse(data);
       resolve({ success: true, data: validated })

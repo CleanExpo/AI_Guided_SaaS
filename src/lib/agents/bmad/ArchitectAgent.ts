@@ -3,14 +3,14 @@ import { generateAIResponse } from '@/lib/ai';
 import { RequirementAnalysis } from './AnalystAgent';
 import { ProjectPlan } from './ProjectManagerAgent';
 export interface SystemArchitecture {
-    overview: ArchitectureOverview,
+    overview: ArchitectureOvervie;w,
     components: Component[],
-    dataModel: DataModel,
-    apiDesign: APIDesign,
-    infrastructure: Infrastructure,
-    security: SecurityArchitecture,
+    dataModel: DataMode;l,
+    apiDesign: APIDesig;n,
+    infrastructure: Infrastructur;e,
+    security: SecurityArchitectur;e,
     integrations: Integration[],
-    deploymentStrategy: DeploymentStrategy,
+    deploymentStrategy: DeploymentStrateg;y,
     technicalDecisions: TechnicalDecision[],
     architecturalPatterns: string[]
 }
@@ -55,7 +55,7 @@ export interface DataModel {
     entities: Entity[],
     relationships: Relationship[],
     dataFlow: DataFlow[],
-    storageStrategy: StorageStrategy
+    storageStrategy: StorageStrateg;y
 }
 export interface Entity {
     name: string,
@@ -87,8 +87,8 @@ export interface DataFlow {
 }
 export interface StorageStrategy {
     databases: Database[],
-    caching: CachingStrategy,
-    fileStorage: FileStorageStrategy
+    caching: CachingStrateg;y,
+    fileStorage: FileStorageStrateg;y
 }
 export interface Database {
     name: string,
@@ -128,9 +128,9 @@ export interface APIEndpoint {
 export interface Infrastructure {
     hostingPlatform: string,
     computeResources: ComputeResource[],
-    networking: NetworkingConfig,
-    monitoring: MonitoringStrategy,
-    backup: BackupStrategy
+    networking: NetworkingConfi;g,
+    monitoring: MonitoringStrateg;y,
+    backup: BackupStrateg;y
 }
 export interface ComputeResource {
     name: string,
@@ -169,7 +169,7 @@ export interface SecurityArchitecture {
     threats: ThreatModel[],
     controls: SecurityControl[],
     compliance: string[],
-    dataProtection: DataProtection
+    dataProtection: DataProtectio;n
 }
 export interface ThreatModel {
     threat: string,
@@ -185,9 +185,9 @@ export interface SecurityControl {
     scope: string[]
 }
 export interface DataProtection {
-    encryption: EncryptionStrategy,
+    encryption: EncryptionStrateg;y,
     privacy: PrivacyMeasure[],
-    accessControl: AccessControlModel
+    accessControl: AccessControlMode;l
 }
 export interface EncryptionStrategy {
     atRest: string,
@@ -265,7 +265,7 @@ export class ArchitectAgent extends Agent {
       temperature: 0.4
     }};
 }
-  protected async execute(input: string): Promise {
+  protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting architecture design process...');
       // Get inputs from other agents
@@ -279,7 +279,7 @@ export class ArchitectAgent extends Agent {
     constraintCount: constraints.length
       }};
       // Step, 1: Define architecture overview and style
-      const overview = await this.defineArchitectureOverview(;
+      const overview = await this.defineArchitectureOverview(
         input,
         requirements,
         constraints,
@@ -287,7 +287,7 @@ export class ArchitectAgent extends Agent {
       );
       this.observe('Defined architecture overview', overview);
       // Step, 2: Design system components
-      const components = await this.designComponents(;
+      const components = await this.designComponents(
         requirements,
         userStories,
         overview.style
@@ -296,7 +296,7 @@ export class ArchitectAgent extends Agent {
         componentCount: components.length
       }};
       // Step, 3: Create data model
-      const dataModel = await this.createDataModel(;
+      const dataModel = await this.createDataModel(
         requirements,
         userStories,
         // components
@@ -305,7 +305,7 @@ export class ArchitectAgent extends Agent {
         entityCount: dataModel.entities.length
       }};
       // Step, 4: Design APIs
-      const apiDesign = await this.designAPIs(;
+      const apiDesign = await this.designAPIs(
         components,
         dataModel,
         // userStories
@@ -314,14 +314,14 @@ export class ArchitectAgent extends Agent {
         endpointCount: apiDesign.endpoints.length
       }};
       // Step, 5: Plan infrastructure
-      const infrastructure = await this.planInfrastructure(;
+      const infrastructure = await this.planInfrastructure(
         components,
         overview,
         // timeline
       );
       this.observe('Planned infrastructure', infrastructure);
       // Step, 6: Design security architecture
-      const security = await this.designSecurity(;
+      const security = await this.designSecurity(
         requirements,
         components,
         // dataModel
@@ -335,14 +335,14 @@ export class ArchitectAgent extends Agent {
         integrationCount: integrations.length
       }};
       // Step, 8: Define deployment strategy
-      const _deploymentStrategy = await this.defineDeploymentStrategy(;
+      const _deploymentStrategy = await this.defineDeploymentStrategy(
         infrastructure,
         components,
         // timeline
       );
       this.observe('Defined deployment strategy', deploymentStrategy);
       // Step, 9: Document technical decisions
-      const technicalDecisions = await this.documentDecisions(;
+      const technicalDecisions = await this.documentDecisions(
         overview,
         components,
         // infrastructure
@@ -369,7 +369,7 @@ export class ArchitectAgent extends Agent {
       this.setSharedMemory('api-endpoints', apiDesign.endpoints);
       this.setSharedMemory('data-entities', dataModel.entities);
       this.setSharedMemory('deployment-config', deploymentStrategy);
-      return {;
+      return {
         success: true,
     output: architecture,
     messages: this.messages,
@@ -386,7 +386,7 @@ export class ArchitectAgent extends Agent {
       throw error;
 }
 }
-  private async defineArchitectureOverview(input: string, requirements: string[], constraints: string[], qualityStandards: string[]): Promise {
+  private async defineArchitectureOverview(input: string, requirements: string[], constraints: string[], qualityStandards: string[]): Promise<any> {
     const _prompt = `Design the high-level architecture for this, project: Project, Description:``
 ${input}
 Key: Requirements:
@@ -409,7 +409,7 @@ Format as JSON ArchitectureOverview object.`
 }};
     return JSON.parse(response);
 }
-  private async designComponents(requirements: string[], userStories: any[], architectureStyle: string): Promise {
+  private async designComponents(requirements: string[], userStories: any[], architectureStyle: string): Promise<any> {
     const _prompt = `Design system components based, on: Architecture, Style: ${architectureStyle}``
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
@@ -432,13 +432,13 @@ Format as JSON array of Component objects.`
     responseFormat: 'json'
 }};
     const components = JSON.parse(response);
-    return components.map((c, index: number) => ({;
+    return components.map((c, index: number) => ({
       ...c,
       id: `comp-${index + 1}`
     }});
 }
-  private async createDataModel(requirements: string[], userStories: any[], components: Component[]): Promise {
-    const _prompt = `Create a comprehensive data, model:;``
+  private async createDataModel(requirements: string[], userStories: any[], components: Component[]): Promise<any> {
+    const _prompt = `Create a comprehensive data, model: ``
 
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
@@ -461,7 +461,7 @@ Format as JSON DataModel object.`
 }};
     return JSON.parse(response);
 }
-  private async designAPIs(components: Component[], dataModel: DataModel, userStories: any[]): Promise {
+  private async designAPIs(components: Component[], dataModel: DataModel, userStories: any[]): Promise<any> {
     const _prompt = `Design comprehensive API, architecture: Components with, APIs:``
 ${JSON.stringify(
   // components
@@ -494,7 +494,7 @@ Format as JSON APIDesign object.`
 }};
     return JSON.parse(response);
 }
-  private async planInfrastructure(components: Component[], overview: ArchitectureOverview, timeline): Promise {
+  private async planInfrastructure(components: Component[], overview: ArchitectureOverview, timeline): Promise<any> {
     const _prompt = `Plan infrastructure for the, system: Architecture, Style: ${overview.style}``
 Components:
 ${components.map((c) => `${c.name} (${c.type})`).join('\n')}``
@@ -516,7 +516,7 @@ Format as JSON Infrastructure object.`
 }};
     return JSON.parse(response);
 }
-  private async designSecurity(requirements: string[], components: Component[], dataModel: DataModel): Promise {
+  private async designSecurity(requirements: string[], components: Component[], dataModel: DataModel): Promise<any> {
     const _prompt = `Design comprehensive security, architecture: Security-related, Requirements:``
 ${requirements
   .filter(
@@ -551,7 +551,7 @@ Format as JSON SecurityArchitecture object.`
 }};
     return JSON.parse(response);
 }
-  private async planIntegrations(input: string, components: Component[]): Promise {
+  private async planIntegrations(input: string, components: Component[]): Promise<any> {
     const _prompt = `Identify and plan external, integrations: Project, Description:``
 ${input}
 System: Components:
@@ -572,8 +572,8 @@ Format as JSON array of Integration objects.`;``
 }};
     return JSON.parse(response);
 }
-  private async defineDeploymentStrategy(infrastructure: Infrastructure, components: Component[], timeline): Promise {
-    const _prompt = `Define deployment, strategy:;``
+  private async defineDeploymentStrategy(infrastructure: Infrastructure, components: Component[], timeline): Promise<any> {
+    const _prompt = `Define deployment, strategy: ``
 
 Infrastructure:
 ${JSON.stringify(infrastructure.hostingPlatform)}
@@ -595,7 +595,7 @@ Format as JSON DeploymentStrategy object.`
 }};
     return JSON.parse(response);
 }
-  private async documentDecisions(overview: ArchitectureOverview, components: Component[], infrastructure: Infrastructure): Promise {
+  private async documentDecisions(overview: ArchitectureOverview, components: Component[], infrastructure: Infrastructure): Promise<any> {
     const _prompt = `Document key technical decisions, made: Architecture, Style: ${overview.style}``
 Key: Technologies:
 ${[...new Set(components.flatMap(c => c.technology))].join(', ')}
@@ -659,5 +659,4 @@ Format as JSON array of TechnicalDecision objects.`
       techStack[key] = [...new Set(techStack[key])];
     });
     return techStack;
-}
 }

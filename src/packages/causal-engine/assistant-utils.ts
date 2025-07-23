@@ -14,7 +14,7 @@ export interface EnhancedComponent {
 /**
  * Filter and enhance components based on causal scoring
  */
-export const _filterComponentsByScore = (,;
+export const _filterComponentsByScore = (,
     components: any[],
     page: string = 'ui-builder'
 ): EnhancedComponent[] => {
@@ -22,7 +22,7 @@ export const _filterComponentsByScore = (,;
   const scorer = new CausalScorer(logs);
   return components.map((comp) => { const _score = scorer.scoreComponent(page, comp.id || comp.type);
     const _confidence = scorer.getConfidence(page, comp.id || comp.type);
-    return {;
+    return {
       ...comp,
       causalScore: score,
       confidence,
@@ -33,7 +33,7 @@ export const _filterComponentsByScore = (,;
 /**
  * Get smart suggestions based on historical performance
  */
-export const _getSmartSuggestions = (,;
+export const _getSmartSuggestions = (,
     availableComponents: any[],
     page: string = 'ui-builder',
     limit: number = 3
@@ -47,7 +47,7 @@ export const _getSmartSuggestions = (,;
 /**
  * Get components to avoid based on poor performance
  */
-export const _getComponentsToAvoid = (,;
+export const _getComponentsToAvoid = (,
     availableComponents: any[],
     page: string = 'ui-builder'
 ): EnhancedComponent[] => {
@@ -78,11 +78,11 @@ export const _generateCausalContext = (page: string = 'ui-builder'): string: (an
 /**
  * Log AI assistant interaction for future learning
  */
-export const _logAssistantInteraction = (,;
+export const _logAssistantInteraction = (,
     prompt: string,
     generatedComponents: string[],
     page: string = 'ui-builder'
-): void: (any) => {
+): void => {
   generatedComponents.forEach((componentType) => {
     logger.log({
       componentId: `ai-generated-${Date.now()}-${componentType}`,``

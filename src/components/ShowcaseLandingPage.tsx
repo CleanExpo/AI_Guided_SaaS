@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -8,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Bot, Code, Palette, Rocket, Sparkles, Brain, BarChart3, Users, ArrowRight, Play, Pause, RefreshCw, TrendingUp, Wrench } from 'lucide-react';
 import Link from 'next/link';
-const personas = [;,
+const personas = [
   {
   id: 'ai-architect',
     name: 'AI Architect',
@@ -37,7 +39,7 @@ const personas = [;,
     avatar: '🚀',
     color: 'from-orange-500 to-red-500',
     icon: Rocket}];
-const liveFeatures = [;,
+const liveFeatures = [
   {
   title: 'Claude Code Integration',
     description: 'Advanced AI-powered development with token optimization',
@@ -62,7 +64,7 @@ const liveFeatures = [;,
     icon: Users,
     demo: 'collaboration',
     color: 'bg-orange-500'}];
-const claudeCommands = [;,
+const claudeCommands = [
   { command: '/init-docs', status: 'completed', tokens: '+8K' },
   { command: '/sync-docs', status: 'executing', tokens: '+2K' },
   { command: '/compact-docs', status: 'pending', tokens: '-15K' },
@@ -88,7 +90,7 @@ const claudeCommands = [;,
     return () => clearInterval(interval);
   }, [isPlaying]);
   const _renderPersonaShowcase = () => (</string>;
-    <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const _Icon = persona.icon;
         return (<motion.div;
@@ -112,14 +114,15 @@ const claudeCommands = [;,
                 <div
                   className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
                 >
-                  <Icon className="w-8 h-8 text-white"    />
+                  <Icon className="w-8 h-8 text-white" />
                 </div>
                 <CardTitle className="text-white">{persona.name}</CardTitle>
                 <CardDescription className="text-white/80">
                   {persona.description}</CardDescription>
               <CardContent>
                 <AnimatePresence>
-                  {selectedPersona === persona.id  && (/AnimatePresence>
+                  {selectedPersona === persona.id  && (
+/AnimatePresence>
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
@@ -134,22 +137,26 @@ const claudeCommands = [;,
                       <Button size="sm", className="w-full" asChild>
                         <Link href="/auth/signin">
                           Start with {persona.name}</Link>
-                          <ArrowRight className="ml-2 h-3 w-3"    />
+                          <ArrowRight className="ml-2 h-3 w-3" />
                     </motion.div>
-                  )}
+                  
+              
+            )}
                 </AnimatePresence>
           </motion.div>
         );
   }}
-        </div>
-  );
-}
-  const _renderClaudeDashboard = () => (;
+              </div>
+
+            );
+
+          }
+  const _renderClaudeDashboard = () => (
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Brain className="w-5 h-5 text-blue-400"    />
+            <Brain className="w-5 h-5 text-blue-400" />
             <CardTitle className="text-white">
               Claude Code Integration</CardTitle>
           <div className="flex items-center gap-2">
@@ -157,20 +164,20 @@ const claudeCommands = [;,
               size="sm"
               variant="ghost"
               onClick={() => setIsPlaying(!isPlaying)}
-              className="text-white, hover:bg-white/10"
+              className="text-white hover:bg-white/10"
             >
               {isPlaying ? (</Button>
-                <Pause className="w-4 h-4"    />
+                <Pause className="w-4 h-4" />
               ) : (</Pause>
-                <Play className="w-4 h-4"    />
+                <Play className="w-4 h-4" />
               )}</Play>
             <Button
               size="sm"
               variant="ghost"
               onClick={() => setMemoryUsage(42)}
-              className="text-white, hover:bg-white/10"
+              className="text-white hover:bg-white/10"
             ></Button>
-              <RefreshCw className="w-4 h-4"    />
+              <RefreshCw className="w-4 h-4" />
             </Button>
         <CardDescription className="text-white/80">
           Live AI-powered development with intelligent memory optimization</CardDescription>
@@ -181,14 +188,14 @@ const claudeCommands = [;,
               <span>Memory Usage</span>
               <span>{Math.round(memoryUsage)}K / 200K</span>
             </div>
-            <Progress value={memoryUsage} className="h-2"    />
+            <Progress value={memoryUsage} className="h-2" />
           </div>
           <div>
             <div className="flex justify-between text-sm mb-2 text-white/80">
               <span>Optimization</span>
               <span>78%</span>
             </div>
-            <Progress value={78} className="h-2"    />
+            <Progress value={78} className="h-2" />
           </div>
         <div className="space-y-2">
           <h4 className="text-sm font-medium text-white/90">Active Commands {claudeCommands.map((cmd, index) => (
@@ -210,19 +217,18 @@ const claudeCommands = [;,
                       : cmd.status === 'executing'
                         ? 'bg-blue-400 animate-pulse'
                         : 'bg-gray-400'
-                  }`}
-                   />
+                  }`} />
                 <span className="font-mono text-sm text-white">
                   {cmd.command}</span>
               <Badge variant="outline", className="text-xs">
                 {cmd.tokens}</Badge>
             </motion.div>
           ))}
-  const _renderUIBuilder = () => (;
+  const _renderUIBuilder = () => (
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
-          <Wrench className="w-5 h-5 text-brand-primary-400"    />
+          <Wrench className="w-5 h-5 text-brand-primary-400" />
           <CardTitle className="text-white">Visual UI Builder</CardTitle>
         <CardDescription className="text-white/80">
           Drag-and-drop interface with real-time preview</CardDescription>
@@ -232,7 +238,7 @@ const claudeCommands = [;,
             component: any => (</div>
               <motion.div
                 key={component}
-                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer, hover:bg-white/20 transition-colors"
+                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer hover:bg-white/20 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -244,13 +250,13 @@ const claudeCommands = [;,
           )}
         <div className="h-32 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex items-center justify-center">
           <div className="text-center text-white/60">
-            <Palette className="w-8 h-8 mx-auto mb-2"    />
+            <Palette className="w-8 h-8 mx-auto mb-2" />
             <p className="text-sm">Drop components here</p>
-  const _renderAnalytics = () => (;
+  const _renderAnalytics = () => (
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
-          <BarChart3 className="w-5 h-5 text-green-400"    />
+          <BarChart3 className="w-5 h-5 text-green-400" />
           <CardTitle className="text-white">Analytics Dashboard</CardTitle>
         <CardDescription className="text-white/80">
           Real-time performance monitoring</CardDescription>
@@ -267,7 +273,7 @@ const claudeCommands = [;,
               <div key={metric} className="flex items-center justify-between">
                 <span className="text-sm text-white/80">{metric}</span>
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="w-3 h-3 text-green-400"    />
+                  <TrendingUp className="w-3 h-3 text-green-400" />
                   <span className="text-sm text-green-400">
                     +{5 + index * 2}%</span>
         </Card>
@@ -275,14 +281,13 @@ const claudeCommands = [;,
         </div>
         </CardContent>
         </div>
-        </div>
           )}
     );
-  const _renderCollaboration = () => (;
+  const _renderCollaboration = () => (
     <Card className="glass border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-orange-400"    />
+          <Users className="w-5 h-5 text-orange-400" />
           <CardTitle className="text-white">Collaboration Workspace</CardTitle>
         <CardDescription className="text-white/80">
           Real-time team collaboration</CardDescription>
@@ -302,14 +307,13 @@ const claudeCommands = [;,
               <div
                 className={`w-3 h-3 rounded-full ${``
                   user.status === 'online' ? 'bg-green-400' : 'bg-yellow-400'
-                }`}
-                 />
+                }`} />
               <div className="flex-1">
                 <div className="text-sm font-medium text-white">
                   {user.name}
                 <div className="text-xs text-white/60">{user.action}
           ))}
-  const _renderDemo = (): void: (any) => { switch (activeDemo) {
+  const _renderDemo = (): void => { switch (activeDemo) {
       case 'claude-dashboard':
     return renderClaudeDashboard();
     break;
@@ -329,7 +333,7 @@ break;
 
 
       case 'collaboration':
-    return renderCollaboration(),;
+    return renderCollaboration(),
     break;
 }
     default: return renderClaudeDashboard() };
@@ -348,9 +352,9 @@ break;
               variant="outline"
               className="mb-6 glass border-white/20 text-white"
             >
-              <Sparkles className="w-3 h-3 mr-1"    />
+              <Sparkles className="w-3 h-3 mr-1" />
               AI-Powered SaaS Platform</Sparkles>
-            <h1 className="text-5xl, md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
               AI-Guided SaaS Builder</h1>
             <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
               Experience the future of development with AI personas, intelligent
@@ -381,7 +385,7 @@ break;
             <p className="text-xl text-white/80">
               See our actual components and features in action</p>
           </motion.div>
-          <div className="grid, lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             {/* Feature, Tabs */}
             <div className="lg:col-span-1">
               <div className="space-y-3">
@@ -398,7 +402,7 @@ break;
                     >
                       <div className="flex items-center gap-3">
                         <div className={`p-2, rounded-lg ${feature.color}`}>``
-                          <Icon className="w-5 h-5 text-white"    /></div>
+                          <Icon className="w-5 h-5 text-white" /></div>
                         <div>
                           <h3 className="font-medium text-white">
                             {feature.title}</h3>
@@ -406,7 +410,7 @@ break;
                             {feature.description}</p>
                     </motion.button>
                   );
-  }},
+  },
     {/* Live, Demo */}
             <div className="lg:col-span-2">
               <AnimatePresence mode="wait">
@@ -425,36 +429,62 @@ break;
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8 }
+    </Button>
+    </Button>
+          </div>
+</h2>
+    </Badge>
+    </div>
+    </section>
+          </div>
+</CardContent>
+    </div>
+    </CardHeader>
+    </Card>
+          </div>
+</CardContent>
+    </div>
+    </h4>
+          </div>
+</CardContent>
+          </div>
+</CardHeader>
+    </Card>
+    </CardContent>
+    </CardHeader>
+    </Card>
+    </any>
+    </any>
+    }
           >
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Experience the Future?</h2>
             <p className="text-xl text-white/80 mb-8">
               Join the next generation of AI-powered development</p>
-            <div className="flex flex-col, sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600, hover:to-brand-primary-600"
+                className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600 hover:to-brand-primary-600"
                 // asChild
               >
                 <Link href="/auth/signin">
                   Start Building Now</Link>
-                  <ArrowRight className="ml-2 h-4 w-4"    />
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/20 text-white, hover:bg-white/10"
+                className="border-white/20 text-white hover:bg-white/10"
                 // asChild
               >
                 <Link href="/ui-builder">
                   Try UI Builder</Link>
-                  <Wrench className="ml-2 h-4 w-4"    />
+                  <Wrench className="ml-2 h-4 w-4" />
           </motion.div>
           </div>
           </AnimatePresence>
           </section>
-</section>
 </AnimatePresence>
 </div></section>
 </div>

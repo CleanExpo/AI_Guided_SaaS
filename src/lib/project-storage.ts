@@ -29,7 +29,7 @@ export interface ProjectFile {
 /**
  * Create a new project
  */
-export async function createProject(data: Omit<Project, 'id' | 'created_at' | 'updated_at'>): Promise {
+export async function createProject(data: Omit<Project, 'id' | 'created_at' | 'updated_at'>): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -46,7 +46,7 @@ export async function createProject(data: Omit<Project, 'id' | 'created_at' | 'u
 /**
  * Get project by ID
  */
-export async function getProject(id: string): Promise {
+export async function getProject(id: string): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -66,7 +66,7 @@ export async function getProject(id: string): Promise {
 /**
  * Update project
  */
-export async function updateProject(id: string, updates: Partial<Project>): Promise {
+export async function updateProject(id: string, updates: Partial<Project>): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -84,7 +84,7 @@ export async function updateProject(id: string, updates: Partial<Project>): Prom
 /**
  * Delete project
  */
-export async function deleteProject(id: string): Promise {
+export async function deleteProject(id: string): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -99,7 +99,7 @@ export async function deleteProject(id: string): Promise {
 /**
  * Get user projects
  */
-export async function getUserProjects(userId: string): Promise {
+export async function getUserProjects(userId: string): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -116,7 +116,7 @@ export async function getUserProjects(userId: string): Promise {
 /**
  * Save project file
  */
-export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at' | 'updated_at'>): Promise {
+export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at' | 'updated_at'>): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -159,7 +159,7 @@ export async function saveProjectFile(data: Omit<ProjectFile, 'id' | 'created_at
 /**
  * Get project files
  */
-export async function getProjectFiles(projectId: string): Promise {
+export async function getProjectFiles(projectId: string): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -176,7 +176,7 @@ export async function getProjectFiles(projectId: string): Promise {
 /**
  * Delete project file
  */
-export async function deleteProjectFile(projectId: string, path: string): Promise {
+export async function deleteProjectFile(projectId: string, path: string): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }
@@ -196,7 +196,7 @@ export async function saveProjectArtifacts(,
     projectId: string,
     userId: string,
     artifacts: Map<string, any>;
-): Promise {
+): Promise<any> {
   if(!supabase) {
     throw new Error('Database not available')
 }

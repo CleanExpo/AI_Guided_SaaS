@@ -86,7 +86,7 @@ export class AnalyticsService {
     return isServiceConfigured('database');
 }
   // Get platform overview metrics
-  static async getPlatformMetrics(): Promise {
+  static async getPlatformMetrics(): Promise<any> {
     if (!this.isConfigured()) {
       return this.getMockPlatformMetrics();
 }
@@ -106,7 +106,7 @@ export class AnalyticsService {
       const _conversionRate = await this.getConversionRate();
       // Get session metrics
       const _averageSessionTime = await this.getAverageSessionTime();
-      return {;
+      return {
         totalUsers,
         activeUsers,
         totalProjects,
@@ -122,7 +122,7 @@ export class AnalyticsService {
 }
 }
   // Get user analytics
-  static async getUserMetrics(timeRange: string = '30d'): Promise {
+  static async getUserMetrics(timeRange: string = '30d'): Promise<any> {
     if (!this.isConfigured()) {
       return this.getMockUserMetrics();
 }
@@ -168,7 +168,7 @@ break;
       const _retention = await this.calculateRetentionRates();
       // Get user growth data
       const _userGrowth = await this.getUserGrowthData(startDate, endDate);
-      return {;
+      return {
         newUsers: newUsers[0]?.count || 0,
     activeUsers: activeUsers[0]?.count || 0,
     churned: 0; // TODO: Calculate churned users
@@ -182,7 +182,7 @@ break;
 }
 }
   // Get revenue analytics
-  static async getRevenueMetrics(_timeRange: string = '30d'): Promise {
+  static async getRevenueMetrics(_timeRange: string = '30d'): Promise<any> {
     if (!this.isConfigured()) {
       return this.getMockRevenueMetrics();
 }
@@ -208,7 +208,7 @@ break;
         WHERE status = 'active'
         GROUP BY tier
       `) as unknown as SubscriptionBreakdownResult[]``
-      return {;
+      return {
         totalRevenue: Number(totalRevenue[0]?.total) || 0,
     monthlyRecurringRevenue: Number(monthlyRevenue[0]?.total) || 0,
     averageRevenuePerUser: 0;
@@ -228,7 +228,7 @@ break;
 }
 }
   // Get system health metrics
-  static async getSystemMetrics(): Promise {
+  static async getSystemMetrics(): Promise<any> {
     if (!this.isConfigured()) {
       return this.getMockSystemMetrics();
 }
@@ -239,7 +239,7 @@ break;
         WHERE action LIKE '%api%'
         AND created_at >= ?
       `, [new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]``
-      return {;
+      return {
         apiCalls: Number(apiCalls[0]?.count) || 0,
     errorRate: 0.02;
   // 2% error rate, averageResponseTime: 150;
@@ -255,7 +255,7 @@ break;
 }
 }
   // Get content analytics
-  static async getContentMetrics(): Promise {
+  static async getContentMetrics(): Promise<any> {
     if (!this.isConfigured()) {
       return this.getMockContentMetrics();
 }
@@ -294,7 +294,7 @@ break;
       const _pendingReviews = Number(templateStats.find(s => s.status === 'pending')?.count) || 0;
       const _approvedTemplates = Number(templateStats.find(s => s.status === 'approved')?.count) || 0;
       const _rejectedTemplates = Number(templateStats.find(s => s.status === 'rejected')?.count) || 0;
-      return {;
+      return {
         totalTemplates,
         pendingReviews,
         approvedTemplates,
@@ -310,26 +310,26 @@ break;
 }
 }
   // Helper methods
-  private static async getTotalUsers(): Promise {
+  private static async getTotalUsers(): Promise<any> {
     const result = await DatabaseService.query('SELECT COUNT(*) as count FROM users') as unknown as CountResult[];
     return Number(result[0]?.count) || 0;
 }
-  private static async getActiveUsers(): Promise {
+  private static async getActiveUsers(): Promise<any> {
     const result = await DatabaseService.query(`;``
       SELECT COUNT(DISTINCT user_id) as count FROM activity_logs
       WHERE created_at >= ?
     `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]``
     return Number(result[0]?.count) || 0;
 }
-  private static async getTotalProjects(): Promise {
+  private static async getTotalProjects(): Promise<any> {
     const result = await DatabaseService.query('SELECT COUNT(*) as count FROM projects') as unknown as CountResult[];
     return Number(result[0]?.count) || 0;
 }
-  private static async getTotalTemplates(): Promise {
+  private static async getTotalTemplates(): Promise<any> {
     const result = await DatabaseService.query('SELECT COUNT(*) as count FROM templates WHERE status = "approved"') as unknown as CountResult[];
     return Number(result[0]?.count) || 0;
 }
-  private static async getBasicRevenueMetrics(): Promise {
+  private static async getBasicRevenueMetrics(): Promise<any> {
     const totalResult = await DatabaseService.query(`;``
       SELECT SUM(amount) as total FROM payments WHERE status = 'succeeded'
     `) as unknown as SumResult[]``
@@ -337,12 +337,12 @@ break;
       SELECT SUM(amount) as total FROM payments
       WHERE status = 'succeeded' AND created_at >= ?
     `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as SumResult[]``
-    return {;
+    return {
       totalRevenue: Number(totalResult[0]?.total) || 0,
     monthlyRevenue: Number(monthlyResult[0]?.total) || 0
 }
 }
-  private static async getConversionRate(): Promise {
+  private static async getConversionRate(): Promise<any> {
     // Calculate conversion from free to paid users
     const _totalUsers = await this.getTotalUsers();
     const paidUsers = await DatabaseService.query(`;``
@@ -352,13 +352,13 @@ break;
     const _paid = Number(paidUsers[0]?.count) || 0;
     return totalUsers > 0 ? (paid / totalUsers) * 100 : 0;
 }
-  private static async getAverageSessionTime(): Promise {
+  private static async getAverageSessionTime(): Promise<any> {
     // Mock implementation - would need session tracking
     return 1200 // 20 minutes in seconds;
 }
-    private static async calculateRetentionRates(): Promise {
+    private static async calculateRetentionRates(): Promise<any> {
       // Mock implementation - would need proper cohort analysis
-      return {;
+      return {
         day1: 85.2,
     day7: 62.8,
     day30: 45.1
@@ -379,7 +379,7 @@ break;
 }
   // Mock data for testing
   private static getMockPlatformMetrics(): PlatformMetrics {
-    return {;
+    return {
       totalUsers: 12847,
     activeUsers: 8934,
     totalProjects: 45621,
@@ -391,7 +391,7 @@ break;
 }
 }
   private static getMockUserMetrics(): UserMetrics {
-    return {;
+    return {
       newUsers: 234,
     activeUsers: 8934,
     churned: 45,
@@ -414,7 +414,7 @@ break;
 }
 }
   private static getMockRevenueMetrics(): RevenueMetrics {
-    return {;
+    return {
       totalRevenue: 89420.50,
     monthlyRecurringRevenue: 15680.25,
     averageRevenuePerUser: 28.50,
@@ -437,7 +437,7 @@ break;
 }
 }
   private static getMockSystemMetrics(): SystemMetrics {
-    return {;
+    return {
       apiCalls: 145623,
     errorRate: 0.02,
     averageResponseTime: 150,
@@ -449,7 +449,7 @@ break;
 }
 }
   private static getMockContentMetrics(): ContentMetrics {
-    return {;
+    return {
       totalTemplates: 342,
     pendingReviews: 23,
     approvedTemplates: 298,
@@ -470,6 +470,5 @@ break;
    ],
       averageRating: 4.2,
     totalDownloads: 15420
-}
 }
 }

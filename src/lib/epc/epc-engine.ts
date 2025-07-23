@@ -35,7 +35,7 @@ export class EPCEngine {
    * @param requiredServices - Services required for this inference
    * @returns EPCCheckResult with detailed status
    */
-  async performPreflightCheck(requiredServices?: ServiceRequirements): Promise {
+  async performPreflightCheck(requiredServices?: ServiceRequirements): Promise<any> {
     // Check cache
     if (
       this.cachedResult &&
@@ -66,7 +66,7 @@ export class EPCEngine {
 }
       // Check specific service requirements
       if (requiredServices) {
-        const criticalMissing = this.checkServiceRequirements(;
+        const criticalMissing = this.checkServiceRequirements(
           requiredServices,
           // validation
         );
@@ -79,7 +79,7 @@ export class EPCEngine {
       const mismatched = this.checkEnvironmentMismatches();
       result.mismatched = mismatched;
       // Calculate score and determine action
-      const _totalIssues =;
+      const totalIssues =
         result.missing.length +
         result.invalid.length +
         result.outdated.length +
@@ -100,7 +100,7 @@ export class EPCEngine {
       this.lastCheckTime = Date.now();
       return result;
     } catch (error) { console.error('EPC Engine, error:', error);
-      return {;
+      return {
         env_check: 'fail',
         missing: [],
     outdated: [],
@@ -142,10 +142,10 @@ export class EPCEngine {
   /**
    * Check for outdated variables by comparing with defaults
    */
-  private async checkOutdatedVariables(): Promise {
+  private async checkOutdatedVariables(): Promise<any> {
     const outdated: string[] = [];
     try {
-      const _defaultsPath = path.join(;
+      const _defaultsPath = path.join(
         process.cwd(),
         '.docs',
         'env.defaults.json'
@@ -255,17 +255,17 @@ export class EPCEngine {
   /**
    * Quick check method for UI components
    */
-  async quickCheck(): Promise {
+  async quickCheck(): Promise<any> {
     const result = await this.performPreflightCheck();
     if(result.env_check === 'pass') {
       return { status: 'ready', message: 'Environment ready for inference' };
     } else if (result.env_check === 'warning') {
-      return {;
+      return {
         status: 'warning',
         message: `${result.outdated.length + result.mismatched.length} warnings`
 }
     } else {
-      return {;
+      return {
         status: 'error',
         message: `${result.missing.length + result.invalid.length} errors`
 }
@@ -277,5 +277,4 @@ export class EPCEngine {
   clearCache() {
     this.cachedResult = null;
     this.lastCheckTime = 0;
-}
 }

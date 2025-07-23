@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,12 +14,13 @@ import { Code2, Smartphone, Monitor, Server, Package, FileCode2, Settings, Rocke
 import { useKiroIDE } from '@/hooks/useKiroIDE';
 import { useToast } from '@/components/ui/use-toast';
 interface KiroProjectSetupProps {
-    onProjectCreated? (projectId: string) => void;
-  initialData?: {;
+onProjectCreated? (projectId: string) => voi;d;
+  initialData?: {
     name?: string;
     description?: string;
     type?: string;
     framework?: string;
+
 }
 export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectSetupProps), initialData }: KiroProjectSetupProps) {
   const { toast   }: any = useToast();
@@ -46,10 +48,10 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     testing: true,
     docker: false,
     ci_cd: false,
-    authentication: false,;
+    authentication: false,
     database: false
   })
-  const projectTypes = [;,
+  const projectTypes = [
   { value: 'web', label: 'Web Application', icon: Monitor },
     { value: 'mobile', label: 'Mobile App', icon: Smartphone },
     { value: 'desktop', label: 'Desktop Application', icon: Monitor },
@@ -86,7 +88,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
       toast({
         title: 'Project Created',
         description: `Successfully created project "${project.name}"`
-      })
+  })
       // Callback with project ID
       if (onProjectCreated) {
         onProjectCreated(project.id)
@@ -121,13 +123,12 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
   name: data.name.toLowerCase().replace(/\s+/g, '-'),
           version: '1.0.0',
           description: data.description,
-    scripts: {;,
+    scripts: {,
   dev: data.settings.startCommand || 'npm run dev',
     build: data.settings.buildCommand || 'npm run build',
     test: data.settings.testCommand || 'npm test'
           },
-          dependencies: data.settings.dependencies || {}
-        }, null, 2)
+          dependencies: data.settings.dependencies || {}, null, 2)
 }
       )}
     );
@@ -160,7 +161,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
 }
           { name: 'src', type: 'directory', path: '/src', children: [
             { name: 'app', type: 'directory', path: '/src/app', children: [</string>,
-  { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx', content: 'export default function Home() {\n  return <h1>Welcome to ' + data.name + '</h1>\n}' },;
+  { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx', content: 'export default function Home() {\n  return <h1>Welcome to ' + data.name + '</h1>\n}' },
               { name: 'layout.tsx', type: 'file', path: '/src/app/layout.tsx', content: generateNextLayout(data.name) }
    ]},
             { name: 'components', type: 'directory', path: '/src/components', children: [] },
@@ -240,7 +241,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
               <Input
                 id="name"
                 value={projectData.name}
-                onChange: any={(e) => setProjectData({ ...projectData, name: e.target.value}
+                onChange={(e) => setProjectData({ ...projectData, name: e.target.value}
       )}
   );
                 placeholder="My Awesome Project"
@@ -250,7 +251,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
               <Textarea
                 id="description"
                 value={projectData.description}
-                onChange: any={(e) => setProjectData({ ...projectData, description: e.target.value}
+                onChange={(e) => setProjectData({ ...projectData, description: e.target.value}
       )}
   );
                 placeholder="A brief description of your project..."
@@ -258,7 +259,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
               /></Textarea>
             <div className="space-y-2"></div>
               <Label>Project Type</Label>
-              <div className="grid grid-cols-2, md:grid-cols-5 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                 {projectTypes.map((type) => (</div>
                   <Button
                     key={type.value}
@@ -280,7 +281,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     ) 
               ></Select>
                 <SelectTrigger id="framework"></SelectTrigger>
-                  <SelectValue placeholder="Select a framework"    /></SelectValue>
+                  <SelectValue placeholder="Select a framework" /></SelectValue>
                 <SelectContent>
                   {frameworks[projectData.type as keyof typeof frameworks]?.map((fw) => (</SelectContent>
                     <SelectItem key={fw} value={fw}>
@@ -313,7 +314,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                   <Input
                     id="buildCommand"
                     value={projectData.settings.buildCommand}
-                    onChange: any={(e) => setProjectData({
+                    onChange={(e) => setProjectData({
                       ...projectData,
     settings: { ...projectData.settings, buildCommand: e.target.value}
 }
@@ -326,7 +327,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                   <Input
                     id="startCommand"
                     value={projectData.settings.startCommand}
-                    onChange: any={(e) => setProjectData({
+                    onChange={(e) => setProjectData({
                       ...projectData,
     settings: { ...projectData.settings, startCommand: e.target.value}
 }
@@ -339,7 +340,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                   <Input
                     id="testCommand"
                     value={projectData.settings.testCommand}
-                    onChange: any={(e) => setProjectData({
+                    onChange={(e) => setProjectData({
                       ...projectData,
     settings: { ...projectData.settings, testCommand: e.target.value}
 }
@@ -358,17 +359,18 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
             <div className="flex items-center gap-2">
               {connected ? (</div>
                 <Badge variant="outline", className="text-green-500"></Badge>
-                  <CheckCircle className="h-3 w-3 mr-1"    />
+                  <CheckCircle className="h-3 w-3 mr-1" />
                   // Connected
               ) : (
                 <Badge variant="outline", className="text-yellow-500">
-                  // Disconnected</Badge>
+                    Disconnected
+                  </Badge>
               )}
             <Button
               onClick={handleCreateProject}
               disabled={loading || !projectData.name}
             ></Button>
-              <Rocket className="h-4 w-4 mr-2"    />
+              <Rocket className="h-4 w-4 mr-2" />
               Create Project</Rocket>
 // Helper functions for generating file contents
 function generateGitignore(projectType: string): string) {
@@ -407,7 +409,7 @@ yarn-error.log*
 function generateTsConfig(projectType: string): string) {</string>;
   const configs: Record<string, any> = {
     web: {
-  compilerOptions: {;,
+  compilerOptions: {,
   target: 'es5',
         lib: ['dom', 'dom.iterable', 'esnext'],
         allowJs: true,
@@ -475,7 +477,7 @@ export const metadata: Metadata = {
     <html lang="en"></html>
       <body>{children}</body>
   }`
-}
+  }
 function generateReactApp(name: string): string) {
   return `import React from 'react'``;
 function App() {
@@ -485,20 +487,20 @@ function App() {
       <p>Edit src/App.tsx to get started</p>
   };
 export default App`
-}
+  }
 function generateReactIndex() {
   return `import React from 'react'``;
 import ReactDOM from 'react-dom/client';
 import App from './App';
-const root = ReactDOM.createRoot(;
+const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 )
 root.render(
   <React.StrictMode>
-    <App    />
+    <App />
   </React.StrictMode>
 )```
-}
+  }
 function generateExpressServer() {
   return `import express from 'express'``;
 import cors from 'cors';
@@ -522,21 +524,21 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 // Start server
 app.listen(PORT, () => {
 })```
-}
+  }
 function generateHtmlTemplate(name: string): string) {
   return `<!DOCTYPE html>``;
 <html lang="en"></html>
   <head></head>
-    <meta charset="utf-8"    /></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1"    /></meta>
-    <meta name="theme-color" content="#000000"    /></meta>
-    <meta name="description" content="${name} - Created with Kiro IDE"    /></meta>
+    <meta charset="utf-8" /></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1" /></meta>
+    <meta name="theme-color" content="#000000" /></meta>
+    <meta name="description" content="${name} - Created with Kiro IDE" /></meta>
     <title>${name}</title>
   <body></body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
   </body>
-</html>`
+</html>
 }
 function generateDockerfile(projectType: string, framework: string): string, framework: string) {
   if(projectType === 'web' && framework === 'nextjs') {
@@ -566,7 +568,7 @@ USER nextjs
 EXPOSE 3000
 ENV PORT 3000
 CMD ["node", "server.js"]```
-}
+  }
   return `FROM, node:18-alpine``;
 WORKDIR /app
 COPY package*.json ./
@@ -574,14 +576,14 @@ RUN npm ci --only=production
 COPY . .
 EXPOSE 3000
 CMD ["npm", "start"]```
-}
+  }
 function generateDockerCompose(name: string): string) {
   return `version: '3.8',``;
 services: app, build: .
    , container_name: ${name.toLowerCase().replace(/\s+/g, '-')}
     ports: - "3000:3000",
     environment: - NODE_ENV=production, restart: unless-stopped`
-}
+  }
 function generateGithubWorkflow(name: string): string) {
   return `name: CI, on: push, branches: [ main ]``;
   pull_request, branches: [ main ],
@@ -591,4 +593,7 @@ function generateGithubWorkflow(name: string): string) {
     - run: npm ci
     -, run: npm run build --if-present
     -, run: npm test```
-}
+
+    </div>
+    </any>
+    }

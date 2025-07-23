@@ -1,5 +1,7 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { io, Socket } from 'socket.io-client';
@@ -11,9 +13,10 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, MessageCircle, Copy, Crown, Eye, Edit3, Clock, Wifi, WifiOff } from 'lucide-react';
 import { CollaborationRoom, CollaborationUser, CursorPosition, Comment, ProjectChange } from '@/lib/collaboration';
 interface CollaborationWorkspaceProps {
-  projectId: string;
+projectId: string;
   roomId?: string;
-  onRoomCreated? (roomId: string) => void
+  onRoomCreated? (roomId: string) => voi;d
+
 };
 export default function CollaborationWorkspace({
   projectId, roomId, onRoomCreated
@@ -54,14 +57,12 @@ export default function CollaborationWorkspace({
       console.error('Error initializing, collaboration:', error)
     } finally {
       setLoading(false)
-}
-  }, [session?.user?.email, projectId, roomId, onRoomCreated])
+}, [session?.user?.email, projectId, roomId, onRoomCreated])
   useEffect(() => {
     if(session?.user) {
       initializeCollaboration()
 }
-    return () => { ;
-      if (socket) {
+    return () => {if (socket) {
         socket.disconnect()
        }, [session, projectId, roomId, initializeCollaboration, socket])
   const _setupSocketListeners = (socket: Socket) => {
@@ -131,7 +132,7 @@ export default function CollaborationWorkspace({
     settings: {
   allowGuests: true,
     maxParticipants: 10,
-    permissions: {;,
+    permissions: {,
   canEdit: true,
     canComment: true,
     canInvite: true,
@@ -150,7 +151,7 @@ export default function CollaborationWorkspace({
   const _handleMouseMove = (e: React.MouseEvent) => {
     if (!socket || !room) return
     const rect = workspaceRef.current?.getBoundingClientRect();
-    if (!rect) return const position: CursorPosition = {;
+    if (!rect) return const position: CursorPosition = {
     x: e.clientX - rect.left,
     y: e.clientY - rect.top
 }
@@ -164,8 +165,8 @@ export default function CollaborationWorkspace({
       )}
     );
 }
-  const _handleAddComment = (): void: (any) => {
-    if (!socket || !room || !newComment.trim()) return const comment = {;
+  const _handleAddComment = (): void => {
+    if (!socket || !room || !newComment.trim()) return const comment = {
       projectId,
       content: newComment,
     position: {
@@ -179,18 +180,16 @@ export default function CollaborationWorkspace({
     })
     setNewComment('')
 }
-  const _copyInviteLink = (): void: (any) => { ;
-    navigator.clipboard.writeText(inviteLink); }
+  const _copyInviteLink = (): void => {navigator.clipboard.writeText(inviteLink); }
   const _getParticipantStatusColor = (participant: CollaborationUser) => {
     if(participant.isOnline) {
       return 'bg-green-500';
 }
     return 'bg-gray-400';
 }
-  const _getRoleIcon = (role: string) => { ;
-    switch (role) {
+  const _getRoleIcon = (role: string) => {switch (role) {
       case 'owner':
-    return <Crown className="h-3 w-3"    />;
+    return <Crown className="h-3 w-3" />;
     break;
 
     break;
@@ -201,18 +200,17 @@ break;
     </Crown>
     break;
 
-        return <Edit3 className="h-3 w-3"    />;
+        return <Edit3 className="h-3 w-3" />;
       case 'viewer':
     </Edit3>
     break;
 
     break;
 
-        return <Eye className="h-3 w-3"    />;
+        return <Eye className="h-3 w-3" />;
 break;
 }
-      default: return null,;
-}
+      default: return null}
 }
   if (loading) {
     return (
@@ -227,38 +225,48 @@ break;
         <div className="flex items-center space-x-4"></div>
           <div className="flex items-center space-x-2">
             {connected ? (</div>
-              <Wifi className="h-4 w-4 text-green-500"    />
+              <Wifi className="h-4 w-4 text-green-500" />
             ) : (</Wifi>
-              <WifiOff className="h-4 w-4 text-red-500"    />
+              <WifiOff className="h-4 w-4 text-red-500" />
             )}</WifiOff>
             <span className="text-sm font-medium">
               {connected ? 'Connected' : 'Disconnected'}</span>
-          {room  && (Badge variant="outline">
+          {room  && (
+Badge variant="outline">
               {participants.length} participant{participants.length !== 1 ? 's' : ''}</Badge>
-          )}
+          
+              
+            )}
         <div className="flex items-center space-x-2"></div>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setShowParticipants(!showParticipants)}
           ></Button>
-            <Users className="h-4 w-4 mr-1"    />
-            // Participants</Users>
+            <Users className="h-4 w-4 mr-1" />
+                    Participants
+                  </Users>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setShowComments(!showComments)}
           ></Button>
-            <MessageCircle className="h-4 w-4 mr-1"    />
+            <MessageCircle className="h-4 w-4 mr-1" />
             Comments ({comments.length})</MessageCircle>
-          {inviteLink  && (Button variant="outline" size="sm" onClick={copyInviteLink}></Button>
-              <Copy className="h-4 w-4 mr-1"    />
+          {inviteLink  && (
+Button variant="outline" size="sm" onClick={copyInviteLink}></Button>
+              <Copy className="h-4 w-4 mr-1" />
               Copy Link</Copy>
-          )},
-    {testMode  && (Alert className="m-4"></Alert>
+          
+              
+            )},
+    {testMode  && (
+Alert className="m-4"></Alert>
           <AlertDescription>
             Collaboration is running in demo mode. In production, this would provide real-time collaboration with live cursors, synchronized editing, and persistent comments.</AlertDescription>
-      )}
+      
+              
+            )}
       <div className="flex-1 flex">
         {/* Main, workspace */}
         <div
@@ -290,7 +298,8 @@ break;
             ></div>
               <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-2 shadow-lg max-w-xs"></div>
                 <div className="text-xs font-medium text-yellow-800 mb-1">
-                  // Comment</div>
+                    Comment
+                  </div>
                 <div className="text-sm text-yellow-700">
                   {comment.content}
           ))},
@@ -298,7 +307,7 @@ break;
           <div className="p-8"></div>
             <div className="max-w-4xl mx-auto"></div>
               <h1 className="text-2xl font-bold mb-6">Collaborative Project Workspace</h1>
-              <div className="grid grid-cols-1, md:grid-cols-2 gap-6"></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
                 <Card></Card>
                   <CardHeader></CardHeader>
                     <CardTitle>Project Files</CardTitle>
@@ -306,13 +315,13 @@ break;
                       Collaborate on project files in real-time</CardDescription>
                   <CardContent></CardContent>
                     <div className="space-y-2"></div>
-                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer"></div>
+                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer"></div>
                         <div className="font-medium">index.html</div>
                         <div className="text-sm text-gray-500">Main HTML file</div>
-                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer"></div>
+                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer"></div>
                         <div className="font-medium">styles.css</div>
                         <div className="text-sm text-gray-500">Stylesheet</div>
-                      <div className="p-3 border rounded, hover:bg-gray-50 cursor-pointer"></div>
+                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer"></div>
                         <div className="font-medium">script.js</div>
                         <div className="text-sm text-gray-500">JavaScript logic</div>
                   </CardContent>
@@ -325,11 +334,14 @@ break;
                     <div className="space-y-2">
                       {changes.slice(0, 5).map((change) => (</div>
                         <div key={change.id} className="flex items-center space-x-2 text-sm"></div>
-                          <Clock className="h-3 w-3 text-gray-400"    /></Clock>
+                          <Clock className="h-3 w-3 text-gray-400" /></Clock>
                           <span className="font-medium">{change.type}</span>
                           <span className="text-gray-500">{change.path}</span>))},
-    {changes.length === 0  && (div className="text-sm text-gray-500">No recent changes</div>
-                      )},
+    {changes.length === 0  && (
+div className="text-sm text-gray-500">No recent changes</div>
+                      
+              
+            )},
     {/* Add, comment section */}
               <Card className="mt-6"></Card>
                 <CardHeader></CardHeader>
@@ -341,11 +353,11 @@ break;
                     <Input
                       placeholder="Type your comment..."
                       value={newComment}
-                      onChange: any={(e) => setNewComment(e.target.value)}
+                      onChange={(e) => setNewComment(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleAddComment()}
                     /></Input>
                     <Button onClick={handleAddComment} disabled={!newComment.trim()}></Button>
-                      <MessageCircle className="h-4 w-4 mr-1"    />Comment</MessageCircle>
+                      <MessageCircle className="h-4 w-4 mr-1" />Comment</MessageCircle>
         {/* Participants, sidebar */},
     {showParticipants  && (div className="w-80 border-l bg-white"></div>
             <div className="p-4 border-b"></div>
@@ -359,8 +371,7 @@ break;
                         <img
                           src={participant.avatar}
                           alt={participant.name}
-                          className="w-full h-full rounded-full"
-                           />
+                          className="w-full h-full rounded-full" />
                       ) : (</img>
                         <span className="text-sm font-medium">
                           {participant.name.charAt(0)}</span>
@@ -374,8 +385,11 @@ break;
                       {getRoleIcon(participant.role)}
                     <div className="text-sm text-gray-500">{participant.email}
               ))},
-    {participants.length === 0  && (div className="text-sm text-gray-500">No participants yet</div>
-              )}
+    {participants.length === 0  && (
+div className="text-sm text-gray-500">No participants yet</div>
+              
+              
+            )}
         )},
     {/* Comments, sidebar */},
     {showComments  && (div className="w-80 border-l bg-white"></div>
@@ -389,8 +403,22 @@ break;
                   <div className="text-xs text-gray-500">
                     {new Date(comment.createdAt).toLocaleTimeString()}
               ))},
-    {comments.length === 0  && (div className="text-sm text-gray-500">No comments yet</div>
-              )}
+    {comments.length === 0  && (
+div className="text-sm text-gray-500">No comments yet</div>
+              
+              
+            )}
         )}
     );
-}
+
+          </div>
+</any>
+    </any>
+    </any>
+    </any>
+    </any>
+    </any>
+    </any>
+    </CollaborationRoom>
+    </Socket>
+  }

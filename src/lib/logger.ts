@@ -149,13 +149,13 @@ export const _logWarn = (message: string, meta?: LogMeta) =>;
   logger.warn(message, meta);
 export const _logDebug = (message: string, meta?: LogMeta) =>;
   logger.debug(message, meta);
-export const _logApiRequest = (, ;
+export const _logApiRequest = (,
     method: string, url: string, statusCode: number, duration: number) => logger.logApiRequest(method, url, statusCode, duration);
-export const _logUserAction = (, ;
+export const _logUserAction = (,
     userId: string, action: string, details?: LogMeta) => logger.logUserAction(userId, action, details);
 export const _logSystemEvent = (event: string, details?: LogMeta) =>;
   logger.logSystemEvent(event, details);
-export const _logPerformance = (, ;
+export const _logPerformance = (,
     operation: string, duration: number, details?: LogMeta) => logger.logPerformance(operation, duration, details);
-export const _logSecurityEvent = (, ;
+export const _logSecurityEvent = (,
     event: string, userId?: string, details?: LogMeta) => logger.logSecurityEvent(event, userId, details);

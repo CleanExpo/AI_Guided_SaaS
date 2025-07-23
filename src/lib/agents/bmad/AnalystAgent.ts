@@ -38,7 +38,7 @@ export class AnalystAgent extends Agent {
       temperature: 0.3; // Lower temperature for more consistent analysis
     }};
 }
-  protected async execute(input: string): Promise {
+  protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting requirement analysis process...');
       // Step, 1: Extract raw requirements
@@ -49,7 +49,7 @@ export class AnalystAgent extends Agent {
         await this.categorizeRequirements(rawRequirements);
       this.observe('Categorized requirements', categorizedReqs);
       // Step, 3: Generate user stories
-      const _userStories = await this.generateUserStories(;
+      const _userStories = await this.generateUserStories(
         categorizedReqs.functionalRequirements,
         // input
       );
@@ -60,13 +60,13 @@ export class AnalystAgent extends Agent {
       this.observe('Identified risks', risks);
       this.observe('Identified constraints', constraints);
       // Step, 5: Define success criteria
-      const _successCriteria = await this.defineSuccessCriteria(;
+      const _successCriteria = await this.defineSuccessCriteria(
         categorizedReqs.functionalRequirements,
         // userStories
       );
       this.observe('Defined success criteria', successCriteria);
       // Step, 6: Technical considerations
-      const _technicalConsiderations = await this.analyzeTechnicalAspects(;
+      const _technicalConsiderations = await this.analyzeTechnicalAspects(
         input,
         // categorizedReqs
       );
@@ -90,7 +90,7 @@ export class AnalystAgent extends Agent {
       );
       this.setSharedMemory('user-stories', userStories);
       this.setSharedMemory('technical-constraints', constraints);
-      return {;
+      return {
         success: true,
     output: analysis,
     messages: this.messages,
@@ -106,7 +106,7 @@ export class AnalystAgent extends Agent {
       throw error;
 }
 }
-  private async extractRequirements(input: string): Promise {
+  private async extractRequirements(input: string): Promise<any> {
     const _prompt = `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions: Project, Description:``
 ${input}
 Provide a comprehensive list of all requirements found.`
@@ -116,8 +116,8 @@ Provide a comprehensive list of all requirements found.`
     }};
     return response;
 }
-  private async categorizeRequirements(rawRequirements: string): Promise {
-    const _prompt = `Categorize the following requirements, into:;``
+  private async categorizeRequirements(rawRequirements: string): Promise<any> {
+    const _prompt = `Categorize the following requirements, into: ``
 1. Functional Requirements (what the system should do)
 2. Non-Functional Requirements (quality attributes like performance, security, usability)
 3. Assumptions (things we assume to be true)
@@ -131,7 +131,7 @@ Format the response as JSON with arrays for each category.`
 }};
     return JSON.parse(response);
 }
-  private async generateUserStories(functionalReqs: string[], originalInput: string): Promise {
+  private async generateUserStories(functionalReqs: string[], originalInput: string): Promise<any> {
     const _prompt = `Based on these functional requirements and the original project description, create user stories in the standard format.;``
 Functional: Requirements:
 ${functionalReqs.join('\n')}
@@ -153,12 +153,12 @@ Format as JSON array of user story objects.`
 }};
     const stories = JSON.parse(response);
     // Add IDs to stories
-    return stories.map((story, index: number) => ({;
+    return stories.map((story, index: number) => ({
       ...story,
       id: `US-${index + 1}`
     }});
 }
-  private async identifyRisks(input: string, requirements): Promise {
+  private async identifyRisks(input: string, requirements): Promise<any> {
     const _prompt = `Identify potential risks for this project based on the requirements and description.;``
 Project: Description:
 ${input}
@@ -170,10 +170,9 @@ List technical risks, business risks, timeline risks, and any other concerns. Be
     temperature: 0.4
     }};
     // Parse response into array
-    return response.split('\n').filter((line) => line.trim().length > 0),;
-}
-  private async identifyConstraints(input: string): Promise {
-    const _prompt = `Identify all constraints mentioned or implied in this project, description:;``
+    return response.split('\n').filter((line) => line.trim().length > 0)}
+  private async identifyConstraints(input: string): Promise<any> {
+    const _prompt = `Identify all constraints mentioned or implied in this project, description: ``
 ${input}
 Include:
 - Technical constraints (specific technologies, platforms, versions)
@@ -185,9 +184,8 @@ List each constraint clearly.`
       model: this.config.model,
     temperature: 0.2
     }};
-    return response.split('\n').filter((line) => line.trim().length > 0),;
-}
-  private async defineSuccessCriteria(functionalReqs: string[], userStories: UserStory[]): Promise {
+    return response.split('\n').filter((line) => line.trim().length > 0)}
+  private async defineSuccessCriteria(functionalReqs: string[], userStories: UserStory[]): Promise<any> {
     const _prompt = `Define measurable success criteria for this project based on the requirements and user stories.;``
 Functional: Requirements:
 ${functionalReqs.join('\n')}
@@ -201,9 +199,8 @@ Provide specific, measurable, achievable, relevant, and time-bound (SMART) crite
       model: this.config.model,
     temperature: 0.3
     }};
-    return response.split('\n').filter((line) => line.trim().length > 0),;
-}
-  private async analyzeTechnicalAspects(input: string, requirements): Promise {
+    return response.split('\n').filter((line) => line.trim().length > 0)}
+  private async analyzeTechnicalAspects(input: string, requirements): Promise<any> {
     const _prompt = `Analyze the technical aspects and considerations for this, project: Project, Description:``
 ${input}
 Requirements:
@@ -220,6 +217,4 @@ Identify:
       model: this.config.model,
     temperature: 0.3
     }};
-    return response.split('\n').filter((line) => line.trim().length > 0),;
-}
-}
+    return response.split('\n').filter((line) => line.trim().length > 0)}

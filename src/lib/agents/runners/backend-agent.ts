@@ -1,7 +1,7 @@
 import { BaseAgent, AgentTask } from './base-agent';class BackendAgent extends BaseAgent {
-  protected async initialize(): Promise {
+  protected async initialize(): Promise<any> {
 }
-  protected async cleanup(): Promise {
+  protected async cleanup(): Promise<any> {
 }
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
       case 'api_endpoint':
@@ -27,17 +27,17 @@ break;
     break;
 
       case 'background_job':
-return this.createBackgroundJob(task.payload),;
+return this.createBackgroundJob(task.payload),
     break;
 break;
 }
     default: throw new Error(`Unknown task, type: ${task.type}`);``
 }
 }
-  private async createAPIEndpoint(payload): Promise {
+  private async createAPIEndpoint(payload): Promise<any> {
     // Simulate API endpoint creation
     await new Promise(resolve => setTimeout(resolve, 2000));
-    return {;
+    return {
       success: true,
     endpoint: payload.endpoint,
     methods: payload.methods || ['GET', 'POST', 'PUT', 'DELETE'],
@@ -45,10 +45,10 @@ break;
       message: `Created ${payload.endpoint} API endpoint with full CRUD operations`
 }
 }
-  private async designDatabaseSchema(payload): Promise {
+  private async designDatabaseSchema(payload): Promise<any> {
     // Simulate database schema design
     await new Promise(resolve => setTimeout(resolve, 3000));
-    return {;
+    return {
       success: true,
     tables: payload.entities,
     relationships: ['one-to-many', 'many-to-many'],
@@ -56,10 +56,10 @@ break;
       message: 'Database schema designed with optimized indexes and relations'
 }
 }
-  private async implementAuthentication(payload): Promise {
+  private async implementAuthentication(payload): Promise<any> {
     // Simulate authentication implementation
     await new Promise(resolve => setTimeout(resolve, 2500));
-    return {;
+    return {
       success: true,
     authType: payload.authType || 'JWT',
     features: ['login', 'logout', 'refresh', 'password-reset', '2FA'],
@@ -67,10 +67,10 @@ break;
       message: 'Authentication system implemented with security best practices'
 }
 }
-  private async setupDataValidation(payload): Promise {
+  private async setupDataValidation(payload): Promise<any> {
     // Simulate validation setup
     await new Promise(resolve => setTimeout(resolve, 1500));
-    return {;
+    return {
       success: true,
     validationLibrary: 'zod',
       models: payload.models,
@@ -80,7 +80,7 @@ break;
 }
   private async createBackgroundJob(payload): Promise { // Simulate background job creation
     await new Promise(resolve => setTimeout(resolve, 2000));
-    return {;
+    return {
       success: true,
     jobName: payload.jobName,
     schedule: payload.schedule || 'on-demand',

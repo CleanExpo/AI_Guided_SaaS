@@ -1,19 +1,20 @@
 'use client';
+
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { ButtonEnhanced } from './button-enhanced';
 interface EmptyStateProps {
-
-  title: string;
+title: string;
   description?: string;
   icon?: React.ReactNode;
   illustration?: 'search' | 'data' | 'error' | 'maintenance' | 'construction';
-  action?: {;
-    label: string,
-    onClick: () => void;
+  action?: {
+    label: string;
+    onClick: () => voi;d;
     variant?: 'default' | 'outline' | 'brand';
+
 }
-  secondaryAction?: {;
+  secondaryAction?: {
     label: string,
     onClick: () => void
   },
@@ -29,23 +30,20 @@ const illustrations = {
         r="80"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <circle
         cx="85"
         cy="85"
         r="25"
         stroke="currentColor"
         strokeWidth="3"
-        fill="none"
-        />
+        fill="none" />
       <path
         d="m105 105 15 15"
         stroke="currentColor"
         strokeWidth="3"
-        strokeLinecap="round"
-        />
-      <circle cx="85" cy="85" r="8" fill="currentColor" opacity="0.5"   />
+        strokeLinecap="round" />
+      <circle cx="85" cy="85" r="8" fill="currentColor" opacity="0.5" />
     </svg>
   data: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
@@ -57,54 +55,47 @@ const illustrations = {
         rx="8"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <rect
         x="60"
         y="80"
         width="80"
         height="4"
         fill="currentColor"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <rect
         x="60"
         y="90"
         width="60"
         height="4"
         fill="currentColor"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <rect
         x="60"
         y="100"
         width="70"
         height="4"
         fill="currentColor"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <rect
         x="60"
         y="110"
         width="50"
         height="4"
         fill="currentColor"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <circle
         cx="100"
         cy="40"
         r="15"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.5"
-        />
+        opacity="0.5" />
       <path
         d="M100 30v20M90 40h20"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.5"
-        />
+        opacity="0.5" />
     </svg>
   error: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
@@ -114,23 +105,20 @@ const illustrations = {
         r="60"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <path
         d="M80 80l40 40M120 80l-40 40"
         stroke="currentColor"
         strokeWidth="3"
         strokeLinecap="round"
-        opacity="0.6"
-        />
+        opacity="0.6" />
       <circle
         cx="100"
         cy="100"
         r="80"
         stroke="currentColor"
         strokeWidth="1"
-        opacity="0.2"
-        />
+        opacity="0.2" />
     </svg>
   maintenance: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
@@ -140,21 +128,18 @@ const illustrations = {
         r="70"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <path
         d="M70 100h60M100 70v60"
         stroke="currentColor"
         strokeWidth="3"
-        opacity="0.5"
-        />
-      <circle cx="100" cy="100" r="8" fill="currentColor" opacity="0.6"   />
+        opacity="0.5" />
+      <circle cx="100" cy="100" r="8" fill="currentColor" opacity="0.6" />
       <path
         d="M85 85l30 30M115 85l-30 30"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.4"
-        />
+        opacity="0.4" />
     </svg>
   construction: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
@@ -166,21 +151,18 @@ const illustrations = {
         rx="4"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.3"
-        />
+        opacity="0.3" />
       <path
         d="M80 120V80l20-20 20 20v40"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.5"
-        />
-      <circle cx="100" cy="70" r="8" fill="currentColor" opacity="0.4"   />
+        opacity="0.5" />
+      <circle cx="100" cy="70" r="8" fill="currentColor" opacity="0.4" />
       <path
         d="M90 140h20M95 150h10"
         stroke="currentColor"
         strokeWidth="2"
-        opacity="0.4"
-        />
+        opacity="0.4" />
     </svg>
   )},
 export function EmptyState({
@@ -203,7 +185,7 @@ export function EmptyState({
       illustration: 'w-40 h-40 mb-8',
       title: 'text-2xl font-semibold',
       description: 'text-lg',
-      spacing: 'space-y-6'}},
+      spacing: 'space-y-6'},
   const currentSize = sizeClasses[size];
   return (
     <div, className={cn(
@@ -216,28 +198,37 @@ export function EmptyState({
     {/* Title */}
       <h3, className={cn('text-foreground' currentSize.title)}>{title}</h3>
       {/* Description */},
-    {description  && (p, className={cn(
+    {description  && (
+p, className={cn(
             'text-muted-foreground max-w-md',currentSize.description
-          )}
+          
+              
+            )}
         >
           {description}</p>
       {/* Actions */},
-    {(action || secondaryAction)  && (div, className="flex flex-col, sm:flex-row gap-3 mt-2">
-          {action  && (/div>
+    {(action || secondaryAction)  && (div, className="flex flex-col sm:flex-row gap-3 mt-2">
+          {action  && (
+/div>
             <ButtonEnhanced
               onClick={action.onClick}
               variant={action.variant || 'brand'}
               size={size === 'sm' ? 'sm' : 'md'}
             >
               {action.label}</ButtonEnhanced>
-          )},
-    {secondaryAction  && (ButtonEnhanced
+          
+              
+            )},
+    {secondaryAction  && (
+ButtonEnhanced
               onClick={secondaryAction.onClick}
               variant="outline"
               size={size === 'sm' ? 'sm' : 'md'}
             >
               {secondaryAction.label}</ButtonEnhanced>
-          )}
+          
+              
+            )}
       )}
     );
 // Specialized Empty State Components
@@ -305,8 +296,7 @@ export function SearchNotFound({
               label: 'Try Again',
               onClick: onTryAgain}
           : undefined
-      className={className}
-      />
+      className={className} />
   );
 },
 export function ErrorState({
@@ -428,9 +418,9 @@ export function LoadingState({
     );
 // Empty State with Custom Content
 interface EmptyStateCardProps {
-
-  children: React.ReactNode;
+children: React.ReactNod;e;
   className?: string;
+
 }
 export function EmptyStateCard({ children, className }: EmptyStateCardProps), className }: EmptyStateCardProps) {
   return (
@@ -468,6 +458,5 @@ export function GridEmptyState({
                 label: 'Create First Item',
                 onClick: onCreate,
     variant: 'brand'}
-            : undefined
-        />
+            : undefined />
     </EmptyStateCard>

@@ -1,10 +1,10 @@
 import os from 'os';import { EventEmitter } from 'events';
 export interface RateLimiterConfig {
-  maxCpuUsage: number // percentage (0-100),
-  maxMemoryUsage: number // percentage (0-100);,
-  checkInterval: number // milliseconds,
-    cooldownPeriod: number // milliseconds,
-    burstAllowance: number // percentage above limit for short bursts,
+  maxCpuUsage: number // percentage (0-100;),
+  maxMemoryUsage: number // percentage (0-100;);,
+  checkInterval: number // millisecond;s,
+    cooldownPeriod: number // millisecond;s,
+    burstAllowance: number // percentage above limit for short burst;s,
     adaptiveScaling: boolean
 };
 export interface ResourceMetrics {
@@ -41,7 +41,7 @@ export class CPURateLimiter extends EventEmitter {
       this.checkResources()
     }, this.config.checkInterval)
 }
-  private async checkResources(): Promise {
+  private async checkResources(): Promise<any> {
     const metrics = await this.collectMetrics();
     this.recordMetrics(metrics)
     // Check if we should throttle
@@ -53,7 +53,7 @@ export class CPURateLimiter extends EventEmitter {
     // Emit metrics for monitoring
     this.emit('metrics', metrics)
 }
-  private async collectMetrics(): Promise {
+  private async collectMetrics(): Promise<any> {
     const cpus = os.cpus();
     const _totalMemory = os.totalmem();
     const _freeMemory = os.freemem();
@@ -61,7 +61,7 @@ export class CPURateLimiter extends EventEmitter {
     const _cpuUsage = this.calculateCPUUsage(cpus);
     // Calculate memory usage
     const _memoryUsage = ((totalMemory - freeMemory) / totalMemory) * 100;
-    return {;
+    return {
       cpuUsage,
       memoryUsage,
       cpuCount: cpus.length,
@@ -144,7 +144,7 @@ export class CPURateLimiter extends EventEmitter {
   public getThrottleStatus(): {
     throttled: boolean;
     until?: Date, currentMetrics: ResourceMetrics
-  } { return {;
+  } { return {
       throttled: this.isThrottled,
     until: this.throttleUntil,
     currentMetrics: this.metrics[this.metrics.length - 1] || {
@@ -162,9 +162,9 @@ export class CPURateLimiter extends EventEmitter {
       ...newConfig
 }
 }
-  public async waitForResources(): Promise {
-    if (!this.isThrottled) return return new Promise((resolve) => {;
-      const _checkRelease = (): void: (any) => {
+  public async waitForResources(): Promise<any> {
+    if (!this.isThrottled) return return new Promise((resolve) => {
+      const _checkRelease = (): void => {
         if(!this.isThrottled) {
           resolve()
         } else {
@@ -178,7 +178,7 @@ export class CPURateLimiter extends EventEmitter {
     avgCpu: number, avgMemory: number, peakCpu: number, peakMemory: number, throttleCount: number
   } {
     if(this.metrics.length === 0) {
-      return {;
+      return {
         avgCpu: 0,
     avgMemory: 0,
     peakCpu: 0,
@@ -199,7 +199,7 @@ export class CPURateLimiter extends EventEmitter {
         throttleCount++; }
       wasThrottled = shouldThrottle
     })
-    return {;
+    return {
       avgCpu,
       avgMemory,
       peakCpu,

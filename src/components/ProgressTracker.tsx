@@ -1,11 +1,14 @@
-import React from 'react';
 'use client';
+
+import React from 'react';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, Circle, Clock, Sparkles } from 'lucide-react';
 interface ProgressTrackerProps {
-  currentStep: string
+currentStep: string
+
 }
-const steps = [;,
+const steps = [
   {
   id: 'welcome',
     title: 'Choose Persona',
@@ -49,7 +52,7 @@ export default function ProgressTracker() {
   return (<Card className="h-fit"></Card>;
       <CardHeader></CardHeader>
         <CardTitle className="flex items-center gap-2"></CardTitle>
-          <Sparkles className="w-5 h-5 text-blue-600"    />
+          <Sparkles className="w-5 h-5 text-blue-600" />
           Progress Tracker</Sparkles>
       <CardContent className="space-y-4">
         {steps.map((step, index) => {
@@ -58,12 +61,15 @@ export default function ProgressTracker() {
     <div
                 key={step.id} className="relative">
               {/* Connector, Line */},
-    {index < steps.length - 1  && (div
+    {index < steps.length - 1  && (
+div
                   className={`absolute left-4 top-8 w-0.5 h-12 ${``
                     status === 'completed' ? 'bg-green-300' : 'bg-gray-200'
                   }`}
                    />
-              )},
+              
+              
+            )},
     {/* Step, Content */}
               <div className="flex items-start space-x-3">
                 {/* Step, Icon */}
@@ -77,11 +83,11 @@ export default function ProgressTracker() {
                   }`}
                 >
                   {status === 'completed' ? (</div>
-                    <CheckCircle className="w-5 h-5"    />
+                    <CheckCircle className="w-5 h-5" />
                   ) : status === 'current' ? (
-                    <Clock className="w-4 h-4"    />
+                    <Clock className="w-4 h-4" />
                   ) : (</Clock>
-                    <Circle className="w-4 h-4"    />
+                    <Circle className="w-4 h-4" />
                   )}</Circle>
                 {/* Step, Details */}
                 <div className="flex-1 min-w-0"></div>
@@ -118,10 +124,13 @@ export default function ProgressTracker() {
               className="bg-blue-600 h-2 rounded-full transition-all duration-300"
               style={{
                 width: `${(steps.findIndex(s => getStepStatus(s.id, currentStep) === 'current') / (steps.length - 1)) * 100}%`
-              }}
+  }}
             /></div>
         {/* Current, Phase Info */}
         <div className="mt-4 p-3 bg-blue-50 rounded-lg"></div>
           <h4 className="font-medium text-blue-900 text-sm">Current Phase</h4>
           <p className="text-blue-700 text-xs mt-1">
-            {steps.find(s => getStepStatus(s.id, currentStep) === 'current')?.description}</p>
+            {steps.find(s => getStepStatus(s.id, currentStep) === 'current')?.description
+    </div>
+    </CardContent>
+  }</p>

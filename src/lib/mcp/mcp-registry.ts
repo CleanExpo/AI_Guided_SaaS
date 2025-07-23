@@ -17,8 +17,7 @@ export interface MCPServerConfig {
   setupInstructions?: string;
   documentation?: string;
 };
-export const MCPServerRegistry: MCPServerConfig[] = [;
-  // Development Tools,
+export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools,
   {
   id: 'github',
     name: 'GitHub',
@@ -27,7 +26,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     category: 'development',
     requiredEnv: ['GITHUB_TOKEN'],
     documentation: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github'
-}},
+},
   {
     id: 'gitlab',
     name: 'GitLab',
@@ -42,7 +41,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-filesystem',
     category: 'development',
     documentation: 'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem'
-}},
+},
   // Data Tools
   {
     id: 'postgres',
@@ -51,14 +50,14 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-postgres',
     category: 'data',
     requiredEnv: ['POSTGRES_URL']
-  }},
+  },
   {
     id: 'sqlite',
     name: 'SQLite',
     description: 'SQLite database operations',
     url: 'npx -y @modelcontextprotocol/server-sqlite',
     category: 'data'
-}},
+},
   {
     id: 'mysql',
     name: 'MySQL',
@@ -66,7 +65,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-mysql',
     category: 'data',
     requiredEnv: ['MYSQL_URL']
-  }},
+  },
   // AI & ML Tools
   {
     id: 'brave-search',
@@ -75,7 +74,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-brave-search',
     category: 'ai',
     requiredEnv: ['BRAVE_API_KEY']
-  }},
+  },
   {
     id: 'anthropic',
     name: 'Anthropic',
@@ -83,7 +82,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-anthropic',
     category: 'ai',
     requiredEnv: ['ANTHROPIC_API_KEY']
-  }},
+  },
   {
     id: 'openai',
     name: 'OpenAI',
@@ -91,7 +90,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-openai',
     category: 'ai',
     requiredEnv: ['OPENAI_API_KEY']
-  }},
+  },
   // Automation Tools
   {
     id: 'puppeteer',
@@ -99,21 +98,21 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     description: 'Browser automation with Puppeteer',
     url: 'npx -y @modelcontextprotocol/server-puppeteer',
     category: 'automation'
-}},
+},
   {
     id: 'playwright',
     name: 'Playwright',
     description: 'Cross-browser automation',
     url: 'npx -y @modelcontextprotocol/server-playwright',
     category: 'automation'
-}},
+},
   {
     id: 'selenium',
     name: 'Selenium',
     description: 'Web browser automation',
     url: 'npx -y @modelcontextprotocol/server-selenium',
     category: 'automation'
-}},
+},
   // Integration Tools
   {
     id: 'slack',
@@ -122,7 +121,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-slack',
     category: 'integration',
     requiredEnv: ['SLACK_TOKEN']
-  }},
+  },
   {
     id: 'discord',
     name: 'Discord',
@@ -130,7 +129,7 @@ export const MCPServerRegistry: MCPServerConfig[] = [;
     url: 'npx -y @modelcontextprotocol/server-discord',
     category: 'integration',
     requiredEnv: ['DISCORD_TOKEN']
-  }},
+  },
   {
     id: 'email',
     name: 'Email',
@@ -162,11 +161,10 @@ export function getServerConfig(id: string): MCPServerConfig | undefined {
 /**
  * Get servers by category
  */
-export function getServersByCategory(,;
+export function getServersByCategory(,
     category: MCPServerConfig['category']
 ): MCPServerConfig[] {
-  return MCPServerRegistry.filter((server) => server.category === category),;
-}
+  return MCPServerRegistry.filter((server) => server.category === category)}
 /**
  * Check if server environment is configured
  */
@@ -175,18 +173,18 @@ export function checkServerEnvironment(server: MCPServerConfig): {
     missing: string[]
 } {
   if(!server.requiredEnv || server.requiredEnv.length === 0) {
-    return { configured: true,;
+    return { configured: true,
     missing: [] }
 }
   const missing = server.requiredEnv.filter((envVar) => !process.env[envVar]);
-  return {;
+  return {
     configured: missing.length === 0,
     missing;
 }
 /**
  * Custom MCP server configurations for the project
  */
-export const CustomMCPServers: MCPServerConfig[] = [;,
+export const CustomMCPServers: MCPServerConfig[] = [
   {
   id: 'ai-guided-saas',
     name: 'AI Guided SaaS',

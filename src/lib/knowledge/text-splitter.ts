@@ -127,7 +127,7 @@ export class RecursiveCharacterTextSplitter extends TextSplitter {
 }
     const splits = text.split(separator);
     // Check if any split is too large
-    const _needsFurtherSplitting = splits.some(;
+    const _needsFurtherSplitting = splits.some(
       split: any => this.config.lengthFunction!(split) > this.config.chunkSize
     );
     if (needsFurtherSplitting) {
@@ -156,7 +156,7 @@ export class RecursiveCharacterTextSplitter extends TextSplitter {
     let currentIndex = 0;
     let chunkIndex = 0;
     while(currentIndex < text.length) {
-      const _endIndex = Math.min(;
+      const _endIndex = Math.min(
         currentIndex + this.config.chunkSize,
         text.length
       );
@@ -219,7 +219,7 @@ export class CodeTextSplitter extends TextSplitter {
       go: ['\nfunc ', '\ntype ', '\n\n', '\n', ', '],
       rust: ['\nfn ', '\nstruct ', '\nenum ', '\nimpl ', '\n\n', '\n', ', '];
     const separators = languagePatterns[this.language] || ['\n\n', '\n', ', '];
-    return new RecursiveCharacterTextSplitter({ ...this.config,;
+    return new RecursiveCharacterTextSplitter({ ...this.config,
       separators });
 }
 }
@@ -264,7 +264,7 @@ export class MarkdownTextSplitter extends TextSplitter {
 /**
  * Factory function to create appropriate text splitter
  */
-export function createTextSplitter(, ;
+export function createTextSplitter(,
     type: 'character' | 'recursive' | 'code' | 'markdown', config: TextSplitterConfig & { language?: string; separator?: string }): 'character' | 'recursive' | 'code' | 'markdown', config: TextSplitterConfig & { language?: string; separator?: string }): TextSplitter { switch (type) {
     case 'character':
     return new CharacterTextSplitter(config);
@@ -286,11 +286,11 @@ if(!config.language) {
 break;
 }
 }
-      return new CodeTextSplitter(;
+      return new CodeTextSplitter(
         config as TextSplitterConfig & { language: string }
       );
     case 'markdown':
-    return new MarkdownTextSplitter(config),;
+    return new MarkdownTextSplitter(config),
     break;
 
     break;
@@ -298,5 +298,4 @@ break;
 
 
     default: throw new Error(`Unknown text, splitter: type, ${type}`);``
-}
 }

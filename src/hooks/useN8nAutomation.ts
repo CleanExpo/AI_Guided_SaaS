@@ -17,20 +17,20 @@ export interface N8nExecution {
 };
 export interface UseN8nAutomationReturn {
   // Workflow management,
-    listWorkflows: () => Promise<N8nWorkflow[]>,
+    listWorkflows: () => Promise<N8nWorkflow[];>,
   createWorkflow: (type: string, config) => Promise<N8nWorkflow>
-  deleteWorkflow: (id: string) => Promise<any>;,
-  toggleWorkflow: (id: string active: boolean) => Promise<any>;
+  deleteWorkflow: (id: string) => Promise<any;>;,
+  toggleWorkflow: (id: string active: boolean) => Promise<any;>;
   // Execution management,
     executeWorkflow: (workflowId: string, data?) => Promise<N8nExecution>;
-  listExecutions: (workflowId?: string) => Promise<N8nExecution[]>,
-  getExecutionStatus: (executionId: string) => Promise<N8nExecution>,
-  retryExecution: (executionId: string) => Promise<N8nExecution>;
+  listExecutions: (workflowId?: string) => Promise<N8nExecution[];>,
+  getExecutionStatus: (executionId: string) => Promise<N8nExecution;>,
+  retryExecution: (executionId: string) => Promise<N8nExecution;>;
   // Webhook triggers,
     triggerWebhook: (action: string, projectId: string, data?) => Promise<any>;
   // State,
     loading: boolean,
-    error: string | null
+    error: string | nul;l
 };
 export function useN8nAutomation(): UseN8nAutomationReturn {
   const [loading, setLoading]: any[] = useState<any>(false);
@@ -45,7 +45,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const data = await response.json();
       return data.workflows;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to list workflows',;
+      const _message = err instanceof Error ? err.message : 'Failed to list workflows',
       setError(message)
       toast({
         title: 'Error',
@@ -55,8 +55,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Create a new workflow
   const _createWorkflow = useCallback(async (type: string, config) => {
     setLoading(true)
@@ -75,7 +74,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       })
       return data.workflow;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to create workflow',;
+      const _message = err instanceof Error ? err.message : 'Failed to create workflow',
       setError(message)
       toast({
         title: 'Error',
@@ -85,8 +84,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Delete a workflow
   const _deleteWorkflow = useCallback(async (id: string) => {
     setLoading(true)
@@ -101,7 +99,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
         description: 'Workflow deleted successfully'
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to delete workflow',;
+      const _message = err instanceof Error ? err.message : 'Failed to delete workflow',
       setError(message)
       toast({
         title: 'Error',
@@ -111,8 +109,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Toggle workflow active state
   const _toggleWorkflow = useCallback(async (id: string active: boolean) => {
     setLoading(true)
@@ -129,7 +126,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
         description: `Workflow ${active ? 'activated' : 'deactivated'} successfully`
       })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to update workflow',;
+      const _message = err instanceof Error ? err.message : 'Failed to update workflow',
       setError(message)
       toast({
         title: 'Error',
@@ -139,8 +136,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Execute a workflow
   const _executeWorkflow = useCallback(async (workflowId: string, data?) => {
     setLoading(true)
@@ -159,7 +155,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       })
       return result.execution;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to execute workflow',;
+      const _message = err instanceof Error ? err.message : 'Failed to execute workflow',
       setError(message)
       toast({
         title: 'Error',
@@ -169,8 +165,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // List executions
   const _listExecutions = useCallback(async (workflowId?: string) => {
     setLoading(true)
@@ -182,7 +177,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const data = await response.json();
       return data.executions;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to list executions',;
+      const _message = err instanceof Error ? err.message : 'Failed to list executions',
       setError(message)
       toast({
         title: 'Error',
@@ -192,8 +187,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Get execution status
   const _getExecutionStatus = useCallback(async (executionId: string) => {
     setLoading(true)
@@ -206,7 +200,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       const data = await response.json();
       return data.execution;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to get execution status',;
+      const _message = err instanceof Error ? err.message : 'Failed to get execution status',
       setError(message)
       toast({
         title: 'Error',
@@ -216,8 +210,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Retry execution
   const _retryExecution = useCallback(async (executionId: string) => {
     setLoading(true)
@@ -234,7 +227,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       })
       return data.execution;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to retry execution',;
+      const _message = err instanceof Error ? err.message : 'Failed to retry execution',
       setError(message)
       toast({
         title: 'Error',
@@ -244,8 +237,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
+}, [])
   // Trigger webhook
   const _triggerWebhook = useCallback(async (action: string, projectId: string, data?) => {
     setLoading(true)
@@ -264,7 +256,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       })
       return result;
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to trigger webhook',;
+      const _message = err instanceof Error ? err.message : 'Failed to trigger webhook',
       setError(message)
       toast({
         title: 'Error',
@@ -274,9 +266,8 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
       throw err
     } finally {
       setLoading(false)
-}
-  }, [])
-  return {;
+}, [])
+  return {
     listWorkflows,
     createWorkflow,
     deleteWorkflow,
@@ -288,5 +279,4 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
     triggerWebhook,
     loading,
     // error
-}
 }

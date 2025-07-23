@@ -4,13 +4,13 @@
     maxTokens: number,
     currentTokens: number,
     priority: 'critical' | 'high' | 'medium' | 'low',
-  retentionPolicy: RetentionPolicy,
+  retentionPolicy: RetentionPolic;y,
     compactionThreshold: number
 };
 export interface RetentionPolicy {
     type: 'temporal' | 'frequency' | 'priority' | 'hybrid',
-  parameters: {;
-    maxAge?: number // in days;
+  parameters: {
+    maxAge?: number // in day;s;
     minAccessCount?: number;
     priorityWeight?: number;
     temporalWeight?: number;
@@ -46,12 +46,11 @@ export class HierarchicalMemorySystem {
     priority: 'critical',
     retentionPolicy: {
   type: 'hybrid',
-    parameters: {;,
+    parameters: {,
   maxAge: 30;
   // 30 days retention, priorityWeight: 0.7,
     temporalWeight: 0.3
-}
-      },
+},
       compactionThreshold: 0.9
 }
     this.projectMemory = {
@@ -61,11 +60,10 @@ export class HierarchicalMemorySystem {
     priority: 'high',
     retentionPolicy: {
   type: 'priority',
-    parameters: {;,
+    parameters: {,
   priorityWeight: 0.8,
     minAccessCount: 2
-}
-      },
+},
       compactionThreshold: 0.85
 }
     this.modularMemory = {
@@ -75,17 +73,16 @@ export class HierarchicalMemorySystem {
     priority: 'medium',
     retentionPolicy: {
   type: 'frequency',
-    parameters: {;,
+    parameters: {,
   minAccessCount: 1,
     maxAge: 60,
     temporalWeight: 0.4
-}
-      },
+},
       compactionThreshold: 0.8
 }
 }
   // Core Memory Management Operations
-  async addMemoryEntry(entry: Omit<MemoryEntry, 'id'>): Promise {
+  async addMemoryEntry(entry: Omit<MemoryEntry, 'id'>): Promise<any> {
     const _id = this.generateEntryId();
     const fullEntry: MemoryEntry = {
       ...entry,
@@ -112,7 +109,7 @@ export class HierarchicalMemorySystem {
     this.logAccess(id, 'create')
     return id;
 }
-  async accessMemoryEntry(id: string): Promise {
+  async accessMemoryEntry(id: string): Promise<any> {
     const entry = this.memoryEntries.get(id);
     if (!entry) return null;
     // Update access metadata
@@ -122,7 +119,7 @@ export class HierarchicalMemorySystem {
     this.logAccess(id, 'read')
     return entry;
 }
-  async updateMemoryEntry(id: string, updates: Partial<MemoryEntry>): Promise {
+  async updateMemoryEntry(id: string, updates: Partial<MemoryEntry>): Promise<any> {
     const entry = this.memoryEntries.get(id);
     if (!entry) return false;
     const _oldSize = entry.metadata.size;
@@ -144,7 +141,7 @@ export class HierarchicalMemorySystem {
     return true;
 }
   // Strategic Compaction Implementation
-  async performStrategicCompaction(): Promise {
+  async performStrategicCompaction(): Promise<any> {
     const compactionResults: TierCompactionResult[] = [];
     // Check each tier for compaction needs
     for(const tierName of ['user', 'project', 'modular'] as const) {
@@ -155,14 +152,14 @@ export class HierarchicalMemorySystem {
         compactionResults.push(result)
 }
 }
-    return {;
+    return {
       totalCompacted: compactionResults.reduce((sum, result) => sum + result.tokensReclaimed, 0),
       tierResults: compactionResults,
     newUtilizationRates: this.getUtilizationRates(),
     timestamp: new Date()
 }
 }
-  private async performTierCompaction(tierName: 'user' | 'project' | 'modular'): Promise {
+  private async performTierCompaction(tierName: 'user' | 'project' | 'modular'): Promise<any> {
     const tier = this.getTier(tierName);
     const entries = Array.from(this.memoryEntries.values()).filter((entry) => entry.tier === tierName);
     // Sort entries by retention score (lower score = more likely to be compacted)
@@ -192,7 +189,7 @@ export class HierarchicalMemorySystem {
 }
     // Update tier usage
     this.updateTierUsage(tierName, -tokensReclaimed)
-    return {;
+    return {
       tierName,
       tokensReclaimed,
       compactedEntries: compactedEntries.length,
@@ -264,7 +261,7 @@ export class HierarchicalMemorySystem {
   private async compactEntry(entry: MemoryEntry): Promise { // Intelligent content compression while preserving key information
     const _originalContent = entry.content;
     const _compactedContent = await this.intelligentCompression(originalContent, entry.metadata.type);
-    return {;
+    return {
       ...entry,
       content: compactedContent,
     metadata: {
@@ -272,7 +269,7 @@ export class HierarchicalMemorySystem {
         size: Math.floor(entry.metadata.size * 0.6);
   // 40% compression, lastAccessed: new Date()
 }
-  private async archiveEntry(entry: MemoryEntry): Promise {
+  private async archiveEntry(entry: MemoryEntry): Promise<any> {
     // Store in archive system for potential future retrieval
     const _archiveEntry = {
       ...entry,
@@ -281,7 +278,7 @@ export class HierarchicalMemorySystem {
 }
     // In a real implementation, this would write to persistent storage
 }
-  private async intelligentCompression(content: string, type: string): Promise {
+  private async intelligentCompression(content: string, type: string): Promise<any> {
     // Preserve essential information based on content type
     const lines = content.split('\n');
     const essentialLines = lines.filter((line) => {
@@ -301,7 +298,7 @@ export class HierarchicalMemorySystem {
   // Memory Analytics and Optimization
   getMemoryAnalytics(): MemoryAnalytics {
     const entries = Array.from(this.memoryEntries.values());
-    return {;
+    return {
       totalEntries: entries.length,
     totalTokens: entries.reduce((sum, entry) => sum + entry.metadata.size, 0),
     tierDistribution: {
@@ -316,7 +313,7 @@ export class HierarchicalMemorySystem {
 }
 }
   private getUtilizationRates(): Record {
-    return {;
+    return {
       user: this.userMemory.currentTokens / this.userMemory.maxTokens,
     project: this.projectMemory.currentTokens / this.projectMemory.maxTokens,
     modular: this.modularMemory.currentTokens / this.modularMemory.maxTokens,

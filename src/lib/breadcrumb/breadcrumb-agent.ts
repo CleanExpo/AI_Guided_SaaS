@@ -66,7 +66,7 @@ export class BreadcrumbAgent {
   /**
    * Validate alignment between current state and client vision
    */
-  async validateAlignment(): Promise {
+  async validateAlignment(): Promise<any> {
     const result: ValidationResult = {
   isValid: true,
     issues: [],
@@ -100,7 +100,7 @@ export class BreadcrumbAgent {
   /**
    * Validate individual file mapping
    */
-  private async validateFile(filePath: string, mapping: FileMapping, result: ValidationResult): Promise {
+  private async validateFile(filePath: string, mapping: FileMapping, result: ValidationResult): Promise<any> {
     // Check if file exists
     const _absolutePath = path.join(process.cwd(), filePath);
     if (!fs.existsSync(absolutePath)) {
@@ -187,25 +187,24 @@ break;
     break;
 
       case 'constraint':
-return this.vision.constraints.some(c => value.includes(c)),;
+return this.vision.constraints.some(c => value.includes(c)),
     break;
 break;
 }
-    default: return false,;
-}
+    default: return false}
 }
   /**
    * Check for files not in the index
    */
-  private async checkOrphanedFiles(result: ValidationResult): Promise {
-    const _srcPattern = path.join(;
+  private async checkOrphanedFiles(result: ValidationResult): Promise<any> {
+    const _srcPattern = path.join(
       process.cwd(),
       'src',
       '**',
       '*.{ts,tsx,js,jsx}'
     );
     const files = await glob(srcPattern);
-    const indexedFiles = new Set(;
+    const indexedFiles = new Set(
       Object.keys(this.index.files).map((f) => path.join(process.cwd(), f))
     );
     for(const file of files) {
@@ -259,7 +258,7 @@ break;
    */
   private calculateAlignmentScore(result: ValidationResult): number {
     const _errorCount = result.issues.filter((i) => i.severity === 'error').length;
-    const _warningCount = result.issues.filter(;
+    const _warningCount = result.issues.filter(
       i: any => i.severity === 'warning'
     ).length;
     let score = 100;
@@ -306,7 +305,7 @@ break;
   /**
    * Check if a specific feature is being fulfilled
    */
-  async checkFeatureFulfillment(featureName: string): Promise {
+  async checkFeatureFulfillment(featureName: string): Promise<any> {
     const result = {
       isFulfilled: false,
     implementedIn: [] as string[],
@@ -330,9 +329,9 @@ break;
   /**
    * Update the scaffold index with new files
    */
-  async updateIndex(): Promise {
+  async updateIndex(): Promise<any> {
     if (!this.index) return;
-    const _srcPattern = path.join(;
+    const _srcPattern = path.join(
       process.cwd(),
       'src',
       '**',
@@ -382,5 +381,4 @@ break;
 }
     trail.push(`  📄 ${filePath}: ${mapping.purpose}`);``
     return trail;
-}
 }

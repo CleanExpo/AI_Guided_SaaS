@@ -59,7 +59,7 @@ export class SelfHealingAgent {
   /**
    * Analyze issues and create healing plan
    */
-  async analyzeAndHeal(epcResult): Promise {
+  async analyzeAndHeal(epcResult): Promise<any> {
     const plan: HealingPlan = {
   issues: [],
     actions: [],
@@ -97,7 +97,7 @@ export class SelfHealingAgent {
   /**
    * Generate action for missing variable
    */
-  private async generateMissingVarAction(varName: string): Promise {
+  private async generateMissingVarAction(varName: string): Promise<any> {
     // Check if it's a known pattern
     if (varName.includes('API_KEY')) {
       const _service = this.identifyService(varName);
@@ -107,7 +107,7 @@ export class SelfHealingAgent {
       try {
         const response = await this.aiService.generateResponse(prompt);
         const _suggestion = response.message;
-        return {;
+        return {
           type: 'suggest_fix',
           description: `${varName}: ${suggestion}`
           automated: false,
@@ -116,7 +116,7 @@ export class SelfHealingAgent {
           suggestedValue: this.getDefaultValue(varName)}
     } catch (error) {
         // Fallback if AI fails
-        return {;
+        return {
           type: 'manual_fix',
           description: `Add ${varName} to .env.local file`
           automated: false,
@@ -125,7 +125,7 @@ export class SelfHealingAgent {
 }
 }
 }
-    return {;
+    return {
       type: 'manual_fix',
       description: `Configure ${varName}`
       automated: false,
@@ -135,10 +135,10 @@ export class SelfHealingAgent {
   /**
    * Generate action for invalid variable
    */
-  private async generateInvalidVarAction(varName: string): Promise {
+  private async generateInvalidVarAction(varName: string): Promise<any> {
     const config = this.getVariableConfig(varName);
     if(config?.pattern) {
-      return {;
+      return {
         type: 'suggest_fix',
         description: `Fix ${varName} format to match; pattern: ${config.pattern}`
         automated: false,
@@ -146,7 +146,7 @@ export class SelfHealingAgent {
         suggestedValue: config.example || 'Check documentation for correct format'
 }
 }
-    return {;
+    return {
       type: 'manual_fix',
       description: `Validate and fix ${varName} value`
       automated: false,
@@ -156,11 +156,11 @@ export class SelfHealingAgent {
   /**
    * Generate action for outdated variable
    */
-  private async generateOutdatedVarAction(varName: string): Promise {
+  private async generateOutdatedVarAction(varName: string): Promise<any> {
     // Check recent changes
     const _recentChange = this.checkRecentChanges(varName);
     if (recentChange) {
-      return {;
+      return {
         type: 'sync_config',
         description: `Sync ${varName} with latest configuration`
         automated: true,
@@ -170,7 +170,7 @@ export class SelfHealingAgent {
 }
     // Suggest key rotation for sensitive vars
     if (varName.includes('SECRET') || varName.includes('KEY')) {
-      return {;
+      return {
         type: 'rotate_key',
         description: `Consider rotating ${varName} for security`
         automated: false,
@@ -183,7 +183,7 @@ export class SelfHealingAgent {
   /**
    * Execute healing plan
    */
-  async executeHealing(plan: HealingPlan, autoApprove: boolean = false): Promise {
+  async executeHealing(plan: HealingPlan, autoApprove: boolean = false): Promise<any> {
     const result = {
       success: true,
     applied: [] as string[],
@@ -279,7 +279,7 @@ break;
    * Get default value for variable
    */
   private getDefaultValue(varName: string) { try {
-      const _defaultsPath = path.join(;
+      const _defaultsPath = path.join(
         process.cwd(),
         '.docs',
         'env.defaults.json'
@@ -324,8 +324,8 @@ break;
   /**
    * Get healing suggestions using AI
    */
-  async getAISuggestions(issues: string[]): Promise {
-    const _prompt = `As a DevOps expert, analyze these environment configuration issues and suggest, fixes:;``
+  async getAISuggestions(issues: string[]): Promise<any> {
+    const _prompt = `As a DevOps expert, analyze these environment configuration issues and suggest, fixes: ``
 ${issues.join('\n')}
 Provide concise, actionable suggestions for each issue. Focus, on:
 1. Most likely cause
@@ -333,7 +333,6 @@ Provide concise, actionable suggestions for each issue. Focus, on:
 3. Prevention tip`
     try {
       const response = await this.aiService.generateResponse(prompt);
-      return response.message.split('\n').filter((s) => s.trim()),;
-    } catch (error) { console.error('Failed to get AI, suggestions:', error);
+      return response.message.split('\n').filter((s) => s.trim())} catch (error) { console.error('Failed to get AI, suggestions:', error);
       return ['Unable to get AI suggestions. Please check documentation.'];
 }

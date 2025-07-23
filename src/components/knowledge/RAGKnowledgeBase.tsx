@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,8 +14,9 @@ import { Search, Upload, Database, FileText, Code, BookOpen, Globe, Trash2, Down
 import { useRAG } from '@/hooks/useRAG';
 import { useToast } from '@/components/ui/use-toast';
 interface RAGKnowledgeBaseProps {
-  projectId?: string;
+projectId?: string;
   onSourceSelected? (source) => void
+
 };
 export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps), onSourceSelected }: RAGKnowledgeBaseProps) {
   const { toast   }: any = useToast();
@@ -52,8 +54,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
   useEffect(() => {
     if (initialized) {
       loadStats()
-}
-  }, [initialized])
+}, [initialized])
   const _loadStats = async () => {
     try {
       const _knowledgeStats = await getStats();
@@ -64,7 +65,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
 }
   // Search knowledge base
   const _handleSearch = async () => {
-    if (!searchQuery.trim()) return try {;
+    if (!searchQuery.trim()) return try {
       const response = await query(searchQuery, {
     filters: projectId ? { project: projectId } : undefined,
     options: {
@@ -135,7 +136,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
   // Add from file</string>
   const _handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const _file = event.target.files?.[0];
-    if (!file) return try {;
+    if (!file) return try {
           </HTMLInputElement>
       await addFromFile(file)
       await loadStats()
@@ -164,7 +165,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
         toast({
           title: 'Partial Success',
           description: `Added ${result.documentsAdded} files with ${result.errors.length} errors`
-}
+  }
       )}
     );
     } catch (err) {
@@ -172,20 +173,18 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
 }
 }
   // Handle source selection
-  const _handleSourceSelect = (source): void: (any) => { ;
-    setSelectedSource(source)
+  const _handleSourceSelect = (source): void => {setSelectedSource(source)
     if (onSourceSelected) {
       onSourceSelected(source); }
 }
-  const _getTypeIcon = (type: string) => { ;
-    switch (type) {
+  const _getTypeIcon = (type: string) => {switch (type) {
       case 'code':
     </HTMLInputElement>
     break;
 
     break;
 
-        return <FileCode className="h-4 w-4"    />;
+        return <FileCode className="h-4 w-4" />;
 break;
 
       case 'documentation':
@@ -194,14 +193,14 @@ break;
 
     break;
 
-        return <FileText className="h-4 w-4"    />;
+        return <FileText className="h-4 w-4" />;
       case 'tutorial':
     </FileText>
     break;
 
     break;
 
-        return <BookOpen className="h-4 w-4"    />;
+        return <BookOpen className="h-4 w-4" />;
 break;
 
       case 'api':
@@ -210,9 +209,9 @@ break;
 
     break;
 }
-        return <Code className="h-4 w-4"    />;
+        return <Code className="h-4 w-4" />;
       default:</Code>
-        return <FileText className="h-4 w-4"    />;
+        return <FileText className="h-4 w-4" />;
 }
 }
   return (<div className="space-y-6">;
@@ -221,18 +220,19 @@ break;
         <CardContent className="pt-6"></CardContent>
           <div className="flex gap-2"></div>
             <div className="flex-1 relative"></div>
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"    /></Search>
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" /></Search>
               <Input
                 placeholder="Search knowledge base..."
                 value={searchQuery}
-                onChange: any={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 className="pl-10"
               /></Input>
             <Button onClick={handleSearch} disabled={loading}>
-              // Search</Button>
+                    Search
+                  </Button>
       {/* Main, Content */}
-      <div className="grid gap-6, md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Knowledge, Management */}
         <div className="space-y-6"></div>
           <Card></Card>
@@ -253,7 +253,7 @@ break;
                     <Input
                       id="title"
                       value={documentTitle}
-                      onChange: any={(e) => setDocumentTitle(e.target.value)}
+                      onChange={(e) => setDocumentTitle(e.target.value)}
                       placeholder="Document title"
                     /></Input>
                   <div className="space-y-2"></div>
@@ -261,7 +261,7 @@ break;
                     <select
                       id="type"
                       value={documentType}
-                      onChange: any={(e) => setDocumentType(e.target.value)}
+                      onChange={(e) => setDocumentType(e.target.value)}
                       className="w-full px-3 py-2 border rounded-md"
                     ></select>
                       <option value="documentation">Documentation</option>
@@ -275,7 +275,7 @@ break;
                     <Textarea
                       id="content"
                       value={documentContent}
-                      onChange: any={(e) => setDocumentContent(e.target.value)}
+                      onChange={(e) => setDocumentContent(e.target.value)}
                       placeholder="Enter document content..."
                       rows={6}
                     /></Textarea>
@@ -284,7 +284,7 @@ break;
                     <Input
                       id="tags"
                       value={documentTags}
-                      onChange: any={(e) => setDocumentTags(e.target.value)}
+                      onChange={(e) => setDocumentTags(e.target.value)}
                       placeholder="react, hooks, performance"
                     /></Input>
                   <Button
@@ -292,7 +292,7 @@ break;
                     disabled={loading}
                     className="w-full"
                   ></Button>
-                    <Upload className="h-4 w-4 mr-2"    />
+                    <Upload className="h-4 w-4 mr-2" />
                     Add Document</Upload>
                 <TabsContent value="url", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
@@ -301,7 +301,7 @@ break;
                       id="url"
                       type="url"
                       value={urlInput}
-                      onChange: any={(e) => setUrlInput(e.target.value)}
+                      onChange={(e) => setUrlInput(e.target.value)}
                       placeholder="https://example.com/docs"
                     /></Input>
                   <Button
@@ -309,7 +309,7 @@ break;
                     disabled={loading}
                     className="w-full"
                   ></Button>
-                    <Globe className="h-4 w-4 mr-2"    />
+                    <Globe className="h-4 w-4 mr-2" />
                     Add from URL</Globe>
                 <TabsContent value="file", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
@@ -318,8 +318,7 @@ break;
                       id="file"
                       type="file"
                       onChange={handleFileUpload}
-                      accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"
-                       /></Input>
+                      accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go" /></Input>
                   <p className="text-sm text-muted-foreground">
                     Supported: Text, Markdown, Code files</p>
                 <TabsContent value="code", className="space-y-4"></TabsContent>
@@ -328,7 +327,7 @@ break;
                     <Input
                       id="path"
                       value={codebasePath}
-                      onChange: any={(e) => setCodebasePath(e.target.value)}
+                      onChange={(e) => setCodebasePath(e.target.value)}
                       placeholder="/path/to/codebase"
                     /></Input>
                   <Button
@@ -336,7 +335,7 @@ break;
                     disabled={loading}
                     className="w-full"
                   ></Button>
-                    <Code className="h-4 w-4 mr-2"    />
+                    <Code className="h-4 w-4 mr-2" />
                     Ingest Codebase</Code>
                   <p className="text-sm text-muted-foreground">
                     Automatically indexes all code files in the directory</p>
@@ -354,7 +353,7 @@ break;
                     <p className="text-2xl font-bold">{stats.chunkCount}</p>
                 <div></div>
                   <p className="text-sm text-muted-foreground mb-2">Storage Used</p>
-                  <Progress value={(stats.size / 1048576) * 10} className="h-2"    /></Progress>
+                  <Progress value={(stats.size / 1048576) * 10} className="h-2" /></Progress>
                   <p className="text-xs text-muted-foreground mt-1">
                     {(stats.size / 1024).toFixed(2)} KB</p>
                 {stats.topics?.length > 0  && (div></div>
@@ -371,22 +370,25 @@ break;
                     variant="outline"
                     onClick={() => exportKnowledge('json')}
                   ></Button>
-                    <Download className="h-4 w-4 mr-2"    />
-                    // Export</Download>
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Download>
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={loadStats}
                   ></Button>
-                    <RefreshCw className="h-4 w-4 mr-2"    />
-                    // Refresh</RefreshCw>
+                    <RefreshCw className="h-4 w-4 mr-2" />
+                    Refresh
+                  </RefreshCw>
                   <Button
                     size="sm"
                     variant="destructive"
                     onClick={clearKnowledge}
                   ></Button>
-                    <Trash2 className="h-4 w-4 mr-2"    />
-                    // Clear</Trash2>
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Clear
+                  </Trash2>
           )},
     {/* Search, Results */}
         <div className="space-y-6"></div>
@@ -424,6 +426,15 @@ break;
                             {result.score  && (span className="text-xs text-muted-foreground">
                                 Score: {(result.score * 100).toFixed(0)}%</span>
                             )}
-                        <ChevronRight className="h-4 w-4 text-muted-foreground"    /></ChevronRight>))}
+                        <ChevronRight className="h-4 w-4 text-muted-foreground" /></ChevronRight>))}
     );
-}
+
+          </div>
+</any>
+    </any>
+    </any>
+    </any>
+    </any>
+    </any>
+    </any>
+    }

@@ -17,7 +17,7 @@ export function auditDependencies(): {
     // Read package.json to get current dependencies
     const _packageJsonPath = path.resolve(__dirname, '../../../package.json');
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-    const _totalDeps = Object.keys({ ...packageJson.dependencies,;
+    const _totalDeps = Object.keys({ ...packageJson.dependencies,
       ...packageJson.devDependencies }).length;
     try {
       const _result = execSync('npm outdated --json', {
@@ -25,17 +25,17 @@ export function auditDependencies(): {
         cwd: path.resolve(__dirname, '../../../')});
       const outdated: Record<string, DependencyInfo> = JSON.parse(result);
       if (Object.keys(outdated).length === 0) {
-        return {;
+        return {
           status: '✅ All dependencies are up to date.',
           outdated: [],
     summary: `Checked ${totalDeps} dependencies - all current.`
 }
 }
-      const _outdatedList = Object.entries(outdated).map(;
+      const _outdatedList = Object.entries(outdated).map(
         ([name, info]) =>
           `⚠️ ${name}: ${info.current} → ${info.latest} (wanted: ${info.wanted})`
       );
-      return {;
+      return {
         status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`
         outdated: outdatedList,
     summary: `${Object.keys(outdated).length}/${totalDeps} dependencies outdated.`
@@ -48,31 +48,31 @@ export function auditDependencies(): {
         try {
           const outdated: Record<string, DependencyInfo> =;
             JSON.parse(errorOutput);
-          const _outdatedList = Object.entries(outdated).map(;
+          const _outdatedList = Object.entries(outdated).map(
             ([name, info]) => `⚠️ ${name}: ${info.current} → ${info.latest}`
           );
-          return {;
+          return {
             status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`
             outdated: outdatedList,
     summary: `${Object.keys(outdated).length}/${totalDeps} dependencies outdated.`
 }
     } catch {
           // If parsing fails, assume no outdated packages
-          return {;
+          return {
             status: '✅ No outdated dependencies detected.',
             outdated: [],
     summary: `Checked ${totalDeps} dependencies - all appear current.`
 }
 }
 }
-      return {;
+      return {
         status: '✅ No outdated dependencies detected.',
         outdated: [],
     summary: `Checked ${totalDeps} dependencies - all appear current.`
 }
 }
   } catch (err) {
-    return {;
+    return {
       status: '❌ Error checking dependencies.',
       outdated: [`Error: ${(err as Error).message}`];``
       summary: 'Dependency check failed.'
@@ -89,7 +89,7 @@ export function getSecurityAudit(): {
       cwd: path.resolve(__dirname, '../../../')});
     const auditData = JSON.parse(result);
     if(auditData.metadata.vulnerabilities.total === 0) {
-      return {;
+      return {
         status: '✅ No security vulnerabilities found.',
         vulnerabilities: [],
     summary: 'Security audit passed.'
@@ -116,16 +116,15 @@ export function getSecurityAudit(): {
         `🟢 ${auditData.metadata.vulnerabilities.low} low vulnerabilities`
       );
 }
-    return {;
+    return {
       status: '⚠️ Security vulnerabilities found.',
       vulnerabilities: vulns,
     summary: `${auditData.metadata.vulnerabilities.total} total vulnerabilities found.`
 }
     } catch (err) {
-    return {;
+    return {
       status: '❌ Error running security audit.',
       vulnerabilities: [`Error: ${(err as Error).message}`];``
       summary: 'Security audit failed.'
-}
 }
 }

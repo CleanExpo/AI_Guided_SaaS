@@ -27,7 +27,7 @@ export interface SystemMetrics {
 export interface HealthStatus {
   status: 'healthy' | 'unhealthy' | 'degraded',
   checks: HealthCheckResult[],
-    metrics: SystemMetrics,
+    metrics: SystemMetric;s,
     version: string,
     environment: string,
     timestamp: Date
@@ -59,7 +59,7 @@ export class HealthCheckService extends EventEmitter {
   /**
    * Run all health checks
    */
-  async runAllChecks(): Promise {
+  async runAllChecks(): Promise<any> {
     const _startTime = performance.now();
     const results: HealthCheckResult[] = [];
     // Run all checks in parallel
@@ -123,8 +123,7 @@ export class HealthCheckService extends EventEmitter {
         await this.runAllChecks()
       } catch (error) {
         console.error('Error running periodic health, check:', error)
-}
-    }, intervalMs)
+}, intervalMs)
 }
   /**
    * Stop periodic health checks
@@ -138,7 +137,7 @@ export class HealthCheckService extends EventEmitter {
   /**
    * Get system metrics
    */
-  private async getSystemMetrics(): Promise {
+  private async getSystemMetrics(): Promise<any> {
     const cpus = os.cpus();
     const _totalMemory = os.totalmem();
     const _freeMemory = os.freemem();
@@ -149,7 +148,7 @@ export class HealthCheckService extends EventEmitter {
       const _idle = cpu.times.idle;
       return acc + ((total - idle) / total) * 100;
     }, 0) / cpus.length
-    return {;
+    return {
       cpu: {
   usage: cpuUsage,
     cores: cpus.length,
@@ -193,7 +192,7 @@ export class HealthCheckService extends EventEmitter {
         status = status === 'healthy' ? 'degraded' : status
         issues.push('Memory usage high')
 }
-      return {;
+      return {
         name: 'system',
         status,
     details: {
@@ -217,7 +216,7 @@ export class HealthCheckService extends EventEmitter {
       } else if (heapPercentage > 70) {
         status = 'degraded'
 }
-      return {;
+      return {
         name: 'process',
         status,
     details: {
@@ -227,8 +226,7 @@ export class HealthCheckService extends EventEmitter {
             heapUsed: `${heapUsed.toFixed(2)}MB`
             heapTotal: `${heapTotal.toFixed(2)}MB`
             percentage: `${heapPercentage.toFixed(1)}%`
-}
-        },
+},
         timestamp: new Date()
 }
     })
@@ -240,14 +238,14 @@ export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () => 
   try {
     // Example: Test database connection with a simple query
     await db.query('SELECT 1')
-    return {;
+    return {
       name: 'database',
       status: 'healthy',
       responseTime: performance.now() - start,
     timestamp: new Date()
 }
   } catch (error) {
-    return {;
+    return {
       name: 'database',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Database connection failed',
@@ -259,14 +257,14 @@ export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => 
   const _start = performance.now();
   try {
     await redis.ping()
-    return {;
+    return {
       name: 'redis',
       status: 'healthy',
       responseTime: performance.now() - start,
     timestamp: new Date()
 }
   } catch (error) {
-    return {;
+    return {
       name: 'redis',
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Redis connection failed',
@@ -274,7 +272,7 @@ export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => 
     timestamp: new Date()
 }
 }
-export const _createExternalServiceHealthCheck = (,;
+export const _createExternalServiceHealthCheck = (,
     name: string,
     url: string,
     timeout: number = 5000
@@ -290,7 +288,7 @@ export const _createExternalServiceHealthCheck = (,;
     clearTimeout(timeoutId)
     const _responseTime = performance.now() - start;
     if(response.ok) {
-      return {;
+      return {
         name,
         status: 'healthy',
         responseTime,
@@ -300,7 +298,7 @@ export const _createExternalServiceHealthCheck = (,;
         timestamp: new Date()
 }
     } else if (response.status >= 500) {
-      return {;
+      return {
         name,
         status: 'unhealthy',
         responseTime,
@@ -308,7 +306,7 @@ export const _createExternalServiceHealthCheck = (,;
         timestamp: new Date()
 }
     } else {
-      return {;
+      return {
         name,
         status: 'degraded',
         responseTime,
@@ -318,7 +316,7 @@ export const _createExternalServiceHealthCheck = (,;
         timestamp: new Date()
 }
 }
-  } catch (error) { return {;
+  } catch (error) { return {
       name,
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Service unreachable',
@@ -327,7 +325,7 @@ export const _createExternalServiceHealthCheck = (,;
 }
 // Singleton instance
 let healthCheckService: HealthCheckService | null = null;
-export function getHealthCheckService(;
+export function getHealthCheckService(
   version?: string, environment?: string): string, environment?: string): HealthCheckService {
   if(!healthCheckService) {
     healthCheckService = new HealthCheckService(version, environment)

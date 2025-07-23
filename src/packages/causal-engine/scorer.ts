@@ -106,4 +106,3 @@ export class CausalScorer {
       .filter((item) => item.score < threshold && item.confidence !== 'low')
       .sort((a, b) => a.score - b.score);
 }
-}

@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
@@ -13,7 +14,7 @@ export default function EnhancedAdminPanel() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8">
+        <div className="max-w-7xl mx-auto px-4, sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -25,7 +26,7 @@ export default function EnhancedAdminPanel() {
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">
                 System Management Dashboard</span>
-      <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4, sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -33,7 +34,7 @@ export default function EnhancedAdminPanel() {
             <TabsTrigger value="safe-mode">Safe Mode Health Check</TabsTrigger>
             <TabsTrigger value="system-check">System Health {/* Overview, Tab */}
           <TabsContent value="overview", className="space-y-6">
-            <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Performance, Status */}
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -108,7 +109,7 @@ export default function EnhancedAdminPanel() {
                   Run Health Check {/* Quick, Actions */}
             <Card className="p-6">
               <h3 className="text-lg font-semibold mb-4">⚡ Quick Actions</h3>
-              <div className="grid grid-cols-2, md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <Button
                   variant="outline"
                   className="h-20 flex flex-col items-center justify-center"
@@ -158,19 +159,19 @@ export default function EnhancedAdminPanel() {
                     >
                       📖 View Emergency Guide {/* Performance, Monitor Tab */}
           <TabsContent value="performance", className="space-y-6">
-            <SystemResourceMonitor   />
+            <SystemResourceMonitor />
           </TabsContent>
           {/* Safe, Mode Health Check Tab */}
           <TabsContent value="safe-mode", className="space-y-6">
-            <SafeModeHealthCheck   />
+            <SafeModeHealthCheck />
           </TabsContent>
           {/* System, Health Check Tab */}
           <TabsContent value="system-check", className="space-y-6">
-            <SelfCheckTrigger   />
+            <SelfCheckTrigger />
           </TabsContent>
       {/* Footer */}
       <div className="bg-white border-t mt-12">
-        <div className="max-w-7xl mx-auto px-4, sm:px-6, lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4, sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between text-sm text-gray-600">
             <div className="flex items-center space-x-4">
               <span>System: Status: ✅ Healthy</span>
@@ -183,4 +184,23 @@ export default function EnhancedAdminPanel() {
               <Button size="sm" variant="ghost">
                 🆘 Support</Button>
   );
+
+          </div>
+</Button>
+          </div>
+</Alert>
+    </div>
+    </Card>
+          </div>
+</Card>
+          </div>
+</Card>
+          </div>
+</Card>
+    </div>
+    </TabsContent>
+    </TabsTrigger>
+    </TabsList>
+    </Tabs>
+          </div>
 }

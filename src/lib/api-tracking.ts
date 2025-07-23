@@ -11,7 +11,7 @@ export interface ApiMetric {
 };
 export class ApiTracking {
   // Track API call metrics
-  static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage?: string): Promise {
+  static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage?: string): Promise<any> {
     if(!supabase) {
       return;
 }
@@ -37,7 +37,7 @@ export class ApiTracking {
     response_time: responseTime,
     user_id: userId,
     error_message: errorMessage,
-        metadata,;
+        metadata,
         created_at: new Date().toISOString()});
       if (error) {
         console.error('Error tracking API, call:', error);
@@ -51,7 +51,7 @@ export class ApiTracking {
 }
 }
   // Log API activity for user tracking
-  private static async logApiActivity(userId: string, endpoint: string, method: string, statusCode: number): Promise {
+  private static async logApiActivity(userId: string, endpoint: string, method: string, statusCode: number): Promise<any> {
     if (!supabase) return;
     try {
       const { error    }: any = await supabase.from('activity_logs').insert({
@@ -62,7 +62,7 @@ export class ApiTracking {
     metadata: {
           method,
           statusCode,
-          endpoint,;
+          endpoint,
         created_at: new Date().toISOString()});
       if (error) {
         console.error('Error logging API, activity:', error);
@@ -76,7 +76,7 @@ export class ApiTracking {
       | 'ai_generation'
       | 'project_creation'
       | 'export'
-      | 'template_use', quantity: number = 1, metadata?: Record<string, unknown>): Promise {
+      | 'template_use', quantity: number = 1, metadata?: Record<string, unknown>): Promise<any> {
     if(!supabase) {
       return;
 }
@@ -87,7 +87,7 @@ export class ApiTracking {
         quantity,
     metadata: {
           ...metadata,
-          timestamp: new Date().toISOString()},;
+          timestamp: new Date().toISOString()},
     created_at: new Date().toISOString()});
       if (error) {
         console.error('Error tracking resource, usage:', error);
@@ -154,7 +154,7 @@ break;
 }
       // Calculate summary statistics
       const _totalCalls = metrics.length;
-      const _avgResponseTime =;
+      const avgResponseTime =
         metrics.reduce((sum, m) => sum + m.response_time, 0) / totalCalls;
       const _errorCount = metrics.filter((m) => m.status_code >= 400).length;
       const _errorRate = (errorCount / totalCalls) * 100;
@@ -177,7 +177,7 @@ break;
     avgTime: Math.round(stats.totalTime / stats.calls)}))
         .sort((a, b) => b.calls - a.calls)
         .slice(0, 10);
-      return {;
+      return {
         totalCalls,
         avgResponseTime: Math.round(avgResponseTime),
     errorRate: Math.round(errorRate * 100) / 100,
@@ -188,7 +188,7 @@ break;
 }
 }
   // Clean up old metrics (run periodically)
-  static async cleanupOldMetrics(daysToKeep: number = 90): Promise {
+  static async cleanupOldMetrics(daysToKeep: number = 90): Promise<any> {
     if (!supabase) return;
     try {
       const cutoffDate = new Date();

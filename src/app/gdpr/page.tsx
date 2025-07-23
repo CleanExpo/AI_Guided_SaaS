@@ -3,8 +3,8 @@ import { Metadata } from 'next';export const metadata: Metadata = {
   title: 'GDPR Compliance - AI Guided SaaS Platform',
   description: 'Our commitment to GDPR compliance and data protection'
 };
-props: anyexport default function GdprPage(): void {
-  return (;
+export default function GdprPage() {
+  return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm p-8">
@@ -44,7 +44,7 @@ props: anyexport default function GdprPage(): void {
               <p>
                 If you have any questions about our GDPR compliance or wish to exercise your rights,
                 please contact us at{' '}
-                <a href="mailto:privacy@aiinguidedsaas.com" className="text-blue-600, hover:text-blue-700">privacy@aiinguidedsaas.com
+                <a href="mailto:privacy@aiinguidedsaas.com" className="text-blue-600 hover:text-blue-700">privacy@aiinguidedsaas.com
                 </a>
               </p>
             </section>
@@ -53,9 +53,8 @@ props: anyexport default function GdprPage(): void {
                 Last, updated: January 2025
               </p>
             </section>
+                </div>
+);
+
           </div>
-        </div>
-      </div>
-    </div>
-  );
 }

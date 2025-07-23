@@ -134,7 +134,7 @@ export class AgentMonitor {
   /**
    * Perform health check on single agent
    */
-  private async performSingleHealthCheck(registration: AgentRegistration): Promise {
+  private async performSingleHealthCheck(registration: AgentRegistration): Promise<any> {
     const _startTime = Date.now();
     const agent = registration.agent;
     const metrics = registration.metrics;
@@ -210,7 +210,7 @@ export class AgentMonitor {
   /**
    * Collect performance metrics from agents
    */
-  async collectMetrics(): Promise {
+  async collectMetrics(): Promise<any> {
     const _coordinationStatus = this.coordinator.getCoordinationStatus();
     const registryStatus = this.registry.getRegistryStatus();
     for (const [agentId, healthCheck] of this.healthChecks) {
@@ -219,7 +219,7 @@ export class AgentMonitor {
       const metrics: MonitoringMetrics = {
   agent_id: agentId,
     timestamp: new Date(),
-    metrics: {;,
+    metrics: {,
   uptime: Date.now() - agentDetails.registered_at.getTime(),
     response_time: healthCheck.response_time,
     throughput: agentDetails.metrics.total_tasks / Math.max(1, (Date.now() - agentDetails.registered_at.getTime()) / (1000 * 60 * 60)),
@@ -242,7 +242,7 @@ export class AgentMonitor {
   /**
    * Check for alert conditions and create alerts
    */
-  async checkAlertConditions(): Promise {
+  async checkAlertConditions(): Promise<any> {
     for (const [agentId, healthCheck] of this.healthChecks) {
       // Critical response time
       if(healthCheck.response_time > 2000) {
@@ -289,7 +289,7 @@ export class AgentMonitor {
   /**
    * Create monitoring alert
    */
-  async createAlert(alertData: Partial<MonitoringAlert>): Promise {
+  async createAlert(alertData: Partial<MonitoringAlert>): Promise<any> {
     const, alertId = `alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     const alert: MonitoringAlert = {
       id: alertId,
@@ -375,7 +375,7 @@ export class AgentMonitor {
     for (const [agentId, healthCheck] of this.healthChecks) {
       agentStatus[agentId] = healthCheck
 }
-    return {;
+    return {
       overview,
       recent_alerts: recentAlerts,
     performance_trends: this.metricsHistory.slice(-100);
@@ -391,7 +391,7 @@ export class AgentMonitor {
     const healthCheck = this.healthChecks.get(agentId);
     const _agentMetrics = this.metricsHistory.filter((m) => m.agent_id === agentId).slice(-50);
     const _agentAlerts = Array.from(this.alerts.values()).filter((a) => a.agent_id === agentId).slice(-20);
-    return {;
+    return {
       health_check: healthCheck,
     metrics_history: agentMetrics,
     recent_alerts: agentAlerts,
@@ -412,7 +412,7 @@ export class AgentMonitor {
     const _avgThroughput = recentMetrics.reduce((sum, m) => sum + m.metrics.throughput, 0) / recentMetrics.length;
     const _avgErrorRate = recentMetrics.reduce((sum, m) => sum + m.metrics.error_rate, 0) / recentMetrics.length;
     const _avgSuccessRate = recentMetrics.reduce((sum, m) => sum + m.metrics.success_rate, 0) / recentMetrics.length;
-    return {;
+    return {
       time_range: timeRange,
     metrics_count: recentMetrics.length,
     averages: {
@@ -451,8 +451,7 @@ break;
     return 'info';
     break;
 }
-      default: return 'info',;
-}
+      default: return 'info'}
 }
   private calculateTrend(values: number[]): 'improving' | 'stable' | 'degrading' {
     if (values.length < 2) return 'stable';
@@ -465,7 +464,7 @@ break;
     if (percentChange < -5) return 'improving';
     return 'stable';
 }
-  private async persistAlerts(): Promise {
+  private async persistAlerts(): Promise<any> {
     try {
       const _alertsData = Array.from(this.alerts.values());
       writeFileSync(this.alertsFilePath, JSON.stringify(alertsData, null, 2))
@@ -473,7 +472,7 @@ break;
       console.error('❌ Failed to persist, alerts:', error)
 }
 }
-  private async persistMetrics(): Promise {
+  private async persistMetrics(): Promise<any> {
     try {
       writeFileSync(this.metricsFilePath, JSON.stringify(this.metricsHistory, null, 2))
     } catch (error) {

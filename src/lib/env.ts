@@ -83,12 +83,11 @@ return !!(env.NEXT_PUBLIC_SUPABASE_URL && env.SUPABASE_SERVICE_ROLE_KEY);
     break;
 break;
 }
-    default: return false,;
-}
+    default: return false}
 }
 // Get service status for debugging
 export function getServiceStatus(): void {
-  return {;
+  return {
     supabase: isServiceConfigured('supabase'),
     google: isServiceConfigured('google'),
     openai: isServiceConfigured('openai'),

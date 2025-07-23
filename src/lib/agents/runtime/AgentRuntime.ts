@@ -23,7 +23,7 @@ export interface AgentTask {
 export interface TaskResult {
   taskId: string,
     agentType: string,
-    result: AgentResult,
+    result: AgentResul;t,
     startTime: number,
     endTime: number,
     duration: number,
@@ -91,7 +91,7 @@ export class AgentRuntime extends EventEmitter {
   /**
    * Execute a natural language request using intelligent agent orchestration
    */
-  async executeRequest(request: string): Promise {
+  async executeRequest(request: string): Promise<any> {
     this.log('info', `Executing, request: ${request}`)``
     // Step, 1: Analyze request and create execution plan
     const plan = await this.createExecutionPlan(request);
@@ -99,7 +99,7 @@ export class AgentRuntime extends EventEmitter {
     // Step, 2: Execute the plan
     const results = await this.executePlan(plan);
     // Step, 3: Return plan and results
-    return {;
+    return {
       ...plan,
       // results
 }
@@ -107,8 +107,8 @@ export class AgentRuntime extends EventEmitter {
   /**
    * Create an execution plan from a natural language request
    */
-  private async createExecutionPlan(request: string): Promise {
-    const _plannerPrompt = `Analyze this request and create an execution plan using available, agents: ;``
+  private async createExecutionPlan(request: string): Promise<any> {
+    const _plannerPrompt = `Analyze this request and create an execution plan using available, agents: ``
     Request: "${request}"
 Available, agents: -, analyst: Requirements analysis and user story creation
 - project-manager: Project planning and resource allocation
@@ -143,7 +143,7 @@ Format as JSON,
     })
     const _executionOrder = this.calculateExecutionOrder(tasks, dependencies);
     const _estimatedDuration = this.estimateExecutionTime(tasks);
-    return {;
+    return {
       tasks,
       dependencies,
       executionOrder,
@@ -153,7 +153,7 @@ Format as JSON,
   /**
    * Execute a plan
    */
-  async executePlan(plan: ExecutionPlan): Promise {
+  async executePlan(plan: ExecutionPlan): Promise<any> {
     this.isRunning = true
     const results: TaskResult[] = [];
     try {
@@ -174,7 +174,7 @@ Format as JSON,
   /**
    * Add a task to the queue
    */
-  async addTask(task: AgentTask): Promise {
+  async addTask(task: AgentTask): Promise<any> {
     this.taskQueue.push(task)
     this.metrics.totalTasks++
     this.emit('task-added', task)
@@ -185,7 +185,7 @@ Format as JSON,
   /**
    * Execute a single task
    */
-  private async executeTask(task: AgentTask): Promise {
+  private async executeTask(task: AgentTask): Promise<any> {
     const _startTime = Date.now();
     let retryCount = 0;
     let lastError: Error | undefined;
@@ -201,7 +201,7 @@ Format as JSON,
     artifacts: new Map()
         })
         // Execute with timeout
-        const result = await this.executeWithTimeout(;
+        const result = await this.executeWithTimeout(
           agent.process(task.input),
           task.timeout ?? this.config.timeoutMs ?? 30000
         )
@@ -260,7 +260,7 @@ Format as JSON,
   /**
    * Get or create an agent instance
    */
-  private async getOrCreateAgent(agentType: string): Promise {
+  private async getOrCreateAgent(agentType: string): Promise<any> {
     if (!this.agents.has(agentType)) {
       try {
         const agent = createAgent(agentType);
@@ -274,7 +274,7 @@ Format as JSON,
   /**
    * Process the task queue
    */
-  private async processQueue(): Promise {
+  private async processQueue(): Promise<any> {
     if (this.isRunning) return this.isRunning = true;
     while(this.taskQueue.length > 0) {
       // Check concurrent limit
@@ -367,7 +367,7 @@ Format as JSON,
   private async executeWithTimeout<T>(
     promise: Promise<T>,
     timeoutMs: number
-  ): Promise {
+  ): Promise<any> {
     const _timeout = new Promise<never>((_, reject) => {
       setTimeout(() => reject(new Error('Task timeout')), timeoutMs)
     })
@@ -430,13 +430,13 @@ Format as JSON,
   /**
    * Wait for at least one task to complete
    */
-  private async waitForTaskCompletion(): Promise {
+  private async waitForTaskCompletion(): Promise<any> {
     if (this.runningTasks.size === 0) return await Promise.race(Array.from(this.runningTasks.values()));
 }
   /**
    * Utility delay function
    */
-  private delay(ms: number): Promise {
+  private delay(ms: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
   /**

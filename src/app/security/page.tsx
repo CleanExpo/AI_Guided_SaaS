@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Security - AI Guided SaaS Platform',
   description: 'Learn about our security measures and data protection practices'
 };
-const securityFeatures = [;,
+const securityFeatures = [
   {
   icon: Shield,
     title: 'End-to-End Encryption',
@@ -33,14 +33,16 @@ const securityFeatures = [;,
     status: 'Active'
 }
 ];
-const certifications = [;,
+const certifications = [
   { name: 'SOC 2 Type II', status: 'Certified', year: '2024' },
   { name: 'ISO 27001', status: 'Certified', year: '2024' },
   { name: 'GDPR Compliant', status: 'Compliant', year: '2024' },
   { name: 'HIPAA Ready', status: 'Available', year: '2024' }
 ],
-    props: anyexport default function SecurityPage(): void {
-  return (<div className="min-h-screen bg-gray-50 py-12"><div className="container mx-auto px-4 max-w-6xl">;
+    export default function SecurityPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-6xl">;
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Security & Compliance</h1>
           <p className="text-xl text-gray-600">
@@ -48,7 +50,7 @@ const certifications = [;,
           </p>
         </div>
         {/* Security Features */}
-        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-4 mb-12">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
           {securityFeatures.map((feature) => (
             <Card key={feature.title}>
               <CardHeader className="text-center">
@@ -61,7 +63,7 @@ const certifications = [;,
                 <p className="text-gray-600 text-center mb-3">{feature.description}</p>
                 <div className="flex justify-center">
                   <Badge variant="secondary" className="bg-green-100 text-green-800">
-                    <CheckCircle className="h-3 w-3 mr-1"    />
+                    <CheckCircle className="h-3 w-3 mr-1" />
                     {feature.status}
                   </Badge>
                 </div>
@@ -75,7 +77,7 @@ const certifications = [;,
             <CardTitle className="text-2xl">Security Certifications & Compliance</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-4">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {certifications.map((cert) => (
                 <div key={cert.name} className="text-center p-4 border border-gray-200 rounded-lg">
                   <h3 className="font-semibold text-gray-900 mb-2">{cert.name}</h3>
@@ -92,24 +94,24 @@ const certifications = [;,
             <CardTitle className="text-2xl">Security Practices</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-6, md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Data Protection</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     AES-256 encryption for data at rest
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     TLS 1.3 encryption for data in transit
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     Regular security vulnerability assessments
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     Automated backup and disaster recovery
                   </li>
                 </ul>
@@ -118,24 +120,23 @@ const certifications = [;,
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Access Control</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     Role-based access control (RBAC)
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     Single sign-on (SSO) integration
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     Multi-factor authentication (MFA)
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2"    />
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     Comprehensive audit logging
                   </li>
                 </ul>
               </div>
-            </div>
           </CardContent>
         </Card>
         {/* Contact */}
@@ -146,12 +147,12 @@ const certifications = [;,
           </p>
           <a
             href="mailto:security@aiinguidedsaas.com"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg, hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
           >
             Contact Security Team
           </a>
-        </div>
-      </div>
-    </div>
-  );
+              </div>
+);
+
+          </div>
 }

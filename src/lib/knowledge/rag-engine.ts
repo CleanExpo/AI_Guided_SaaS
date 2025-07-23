@@ -8,7 +8,7 @@ import { TextSplitter, RecursiveCharacterTextSplitter } from './text-splitter';
  */
 // RAG configuration
 export interface RAGConfig {
-  vectorStore: VectorStore;
+  vectorStore: VectorStor;e;
   embeddingModel?: string;
   generationModel?: string;
   chunkSize?: number;
@@ -21,7 +21,7 @@ export interface RAGConfig {
 export interface RAGQuery {
   question: string;
   context?: string;
-  filters?: {;
+  filters?: {
     type?: string[];
     tags?: string[];
     project?: string;
@@ -36,7 +36,7 @@ export interface RAGResponse {
     answer: string,
     sources: RAGSource[],
     confidence: number;
-  tokens?: {;
+  tokens?: {
     prompt: number,
     completion: number,
     total: number
@@ -89,7 +89,7 @@ export class RAGEngine {
   /**
    * Initialize the RAG engine
    */
-  async initialize(): Promise {
+  async initialize(): Promise<any> {
     await this.vectorStore.initialize()
 }
   /**
@@ -100,7 +100,7 @@ export class RAGEngine {
       title?: string;
       tags?: string[]
       project?: string;
-    }): Promise {
+    }): Promise<any> {
     const document: Document = {
     id: this.generateId(),
       content,
@@ -115,18 +115,18 @@ export class RAGEngine {
   /**
    * Add documents from various sources
    */
-  async addFromSource(source: string, type: 'file' | 'url' | 'github'): Promise {
+  async addFromSource(source: string, type: 'file' | 'url' | 'github'): Promise<any> {
     const documents = await this.documentLoader.load(source, type);
     return this.vectorStore.addDocuments(documents);
 }
   /**
    * Ingest a codebase into the knowledge base
    */
-  async ingestCodebase(path: string, options?: {;
+  async ingestCodebase(path: string, options?: {
       include?: string[]
       exclude?: string[];
       project?: string
-    }): Promise {
+    }): Promise<any> {
     const results = {
       documentsAdded: 0,
     errors: [] as string[]
@@ -154,7 +154,7 @@ export class RAGEngine {
   /**
    * Query the knowledge base and generate a response
    */
-  async query(query: RAGQuery): Promise {
+  async query(query: RAGQuery): Promise<any> {
     // Validate query
     const validated = RAGQuerySchema.parse(query);
     // Retrieve relevant documents
@@ -168,7 +168,7 @@ export class RAGEngine {
     // Prepare context from search results
     const context = this.prepareContext(searchResults, validated.context);
     // Generate response
-    const _response = await this.generateResponse(;
+    const _response = await this.generateResponse(
       validated.question,
       context,
       // searchResults
@@ -195,7 +195,7 @@ export class RAGEngine {
   /**
    * Get similar documents
    */
-  async getSimilar(documentId: string, topK: number = 5): Promise {
+  async getSimilar(documentId: string, topK: number = 5): Promise<any> {
     const document = await this.vectorStore.getDocument(documentId);
     if(!document || !document.embedding) {
       throw new Error('Document not found or has no embedding')
@@ -205,7 +205,7 @@ export class RAGEngine {
   /**
    * Update a document in the knowledge base
    */
-  async updateDocument(id: string, content?: string, metadata?: Partial<Document['metadata']>): Promise {
+  async updateDocument(id: string, content?: string, metadata?: Partial<Document['metadata']>): Promise<any> {
     const update: Partial<Document> = {}
     if (content) {
       update.content = content
@@ -222,13 +222,13 @@ export class RAGEngine {
   /**
    * Delete a document from the knowledge base
    */
-  async deleteDocument(id: string): Promise {
+  async deleteDocument(id: string): Promise<any> {
     await this.vectorStore.deleteDocument(id)
 }
   /**
    * Get knowledge base statistics
    */
-  async getStats(): Promise {
+  async getStats(): Promise<any> {
     const documents = await this.vectorStore.listDocuments();
     // Calculate statistics
     const stats: KnowledgeBaseStats = {
@@ -246,7 +246,7 @@ export class RAGEngine {
   /**
    * Export knowledge base
    */
-  async export(format: 'json' | 'markdown' = 'json'): Promise {
+  async export(format: 'json' | 'markdown' = 'json'): Promise<any> {
     const documents = await this.vectorStore.listDocuments();
     if(format === 'json') {
       return JSON.stringify(documents, null, 2);
@@ -269,7 +269,7 @@ export class RAGEngine {
   /**
    * Clear the entire knowledge base
    */
-  async clear(): Promise {
+  async clear(): Promise<any> {
     await this.vectorStore.clear()
 }
   // Private helper methods
@@ -289,7 +289,7 @@ export class RAGEngine {
 }
     return context.trim();
 }
-  private async generateResponse(question: string, context: string, sources: SearchResult[]): Promise {
+  private async generateResponse(question: string, context: string, sources: SearchResult[]): Promise<any> {
     // This would integrate with your AI model (OpenAI, Claude, etc.)
     // For now, return a mock response;
     const prompt = `;``
@@ -300,7 +300,7 @@ Question: ${question}
 Answer:`
     // Mock response generation
     const answer = `Based on the provided context, here's the answer to your question...`;``
-    return {;
+    return {
       answer,
       sources: sources.map((s) => ({
   id: s.id,
@@ -344,5 +344,4 @@ Answer:`
 }
   private generateId() {
     return Math.random().toString(36).substring(2, 15);
-}
 }

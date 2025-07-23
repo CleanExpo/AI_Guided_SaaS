@@ -2,7 +2,7 @@ import { BackendAdapter, User, Project } from './types';
 import { createBackendAdapter } from './adapter-factory';
 export interface MigrationOptions {
   batchSize?: number;
-  onProgress? (progress: MigrationProgress) => void;
+  onProgress? (progress: MigrationProgress) => voi;d;
   includeUsers?: boolean;
   includeProjects?: boolean;
   includeCustomCollections?: string[];
@@ -55,7 +55,7 @@ export class BackendMigrator {
     status: 'running'
 }
 }
-  async migrate(): Promise {
+  async migrate(): Promise<any> {
     const _startTime = Date.now();
     try {
       // Count total records
@@ -73,7 +73,7 @@ export class BackendMigrator {
         await this.migrateCollection(collection, this.migrateGenericRecord.bind(this))
 }
       this.progress.status = 'completed'
-      return {;
+      return {
         success: true,
     totalRecords: this.progress.totalRecords,
     migratedRecords: this.progress.processedRecords,
@@ -81,14 +81,14 @@ export class BackendMigrator {
     duration: Date.now() - startTime
 }
     } catch (error) { this.progress.status = 'failed'
-      return {;
+      return {
         success: false,
     totalRecords: this.progress.totalRecords,
     migratedRecords: this.progress.processedRecords,
     errors: this.progress.errors,
     duration: Date.now() - startTime
 }
-  private async countRecords(): Promise {
+  private async countRecords(): Promise<any> {
     let total = 0;
     if(this.options.includeUsers) {
       const users = await this.sourceAdapter.list<User>('users', { limit: 1 });
@@ -107,7 +107,7 @@ export class BackendMigrator {
   private async migrateCollection<T>(
     collection: string,
     migrator: (record: T) => Promise<T>
-  ): Promise {
+  ): Promise<any> {
     this.progress.currentCollection = collection
     this.reportProgress()
     let offset = 0;
@@ -138,7 +138,7 @@ export class BackendMigrator {
       hasMore = batch.hasMore
 }
 }
-  private async migrateUser(user: User): Promise {
+  private async migrateUser(user: User): Promise<any> {
     // Check if user already exists
     const existing = await this.targetAdapter;
       .query<User>('users')
@@ -155,13 +155,13 @@ export class BackendMigrator {
     })
     return newUser;
 }
-  private async migrateProject(project: Project): Promise {
+  private async migrateProject(project: Project): Promise<any> {
     // Map user ID if needed
     const _mappedProject = { ...project }
     // Create project in target
     return this.targetAdapter.create<Project>('projects', mappedProject);
 }
-  private async migrateGenericRecord(record): Promise {
+  private async migrateGenericRecord(record): Promise<any> {
     const _collection = this.progress.currentCollection;
     return this.targetAdapter.create(collection, record);
 }
@@ -177,9 +177,9 @@ export class BackendMigrator {
 /**
  * Validate that source and target backends are compatible
  */
-export async function validateMigration(;
+export async function validateMigration(
   sourceConfig,
-  targetConfig): Promise {
+  targetConfig): Promise<any> {
   const issues: string[] = [];
   try {
     const source = createBackendAdapter(sourceConfig);
@@ -203,7 +203,7 @@ export async function validateMigration(;
   } catch (error) {
     issues.push(`Configuration, error: ${error}`)``
 }
-  return {;
+  return {
     valid: issues.length === 0,
     // issues
 }
@@ -211,7 +211,7 @@ export async function validateMigration(;
 /**
  * Export data from a backend
  */
-export async function exportBackendData(;
+export async function exportBackendData(
   config,
   collections: string[] = ['users', 'projects']
 ): Promise<Record<string, any[]>> {
@@ -237,11 +237,11 @@ export async function exportBackendData(;
 /**
  * Import data to a backend
  */
-export async function importBackendData(;
+export async function importBackendData(
   config,
   data: Record<string, any[]>,
     options: { overwrite?: boolean } = {}
-): Promise {
+): Promise<any> {
   const adapter = createBackendAdapter(config);
   const _startTime = Date.now();
   let totalRecords = 0;
@@ -273,11 +273,10 @@ export async function importBackendData(;
 }
 }
 }
-  return {;
+  return {
     success: errors.length === 0,
     totalRecords,
     migratedRecords,
     errors,
     duration: Date.now() - startTime
-}
 }

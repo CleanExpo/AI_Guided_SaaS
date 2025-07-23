@@ -27,7 +27,7 @@ export function validateRequired(value; fieldName: string): string | null {
 }
   return null;
 };
-export function validateMinLength(,;
+export function validateMinLength(,
     value: string,
     minLength: number,
     fieldName: string
@@ -37,7 +37,7 @@ export function validateMinLength(,;
 }
   return null;
 };
-export function validateMaxLength(,;
+export function validateMaxLength(,
     value: string,
     maxLength: number,
     fieldName: string
@@ -47,7 +47,7 @@ export function validateMaxLength(,;
 }
   return null;
 };
-export function validateRange(,;
+export function validateRange(,
     value: number,
     min: number,
     max: number,
@@ -62,7 +62,7 @@ export interface ValidationResult {
   isValid: boolean,
     errors: Record<string, string>;
 };
-export function validateForm(, ;
+export function validateForm(,
     data: Record<string, any>, rules: Record<string, any>): Record<string, any>, rules: Record<string, any>): ValidationResult {
   const errors: Record<string, string> = {};
   for (const [field, rule] of Object.entries(rules)) {
@@ -93,7 +93,7 @@ export function validateForm(, ;
       if (error) {
         errors[field] = error;
 }
-  return {;
+  return {
     isValid: Object.keys(errors).length === 0,
     errors;
 };
@@ -105,5 +105,4 @@ export class ValidationError extends Error {
   ) {
     super(message);
     this.name = 'ValidationError'
-}
 }

@@ -35,7 +35,7 @@ function getDefaultProps(type: string): string): ComponentProps {
     case 'hero':
       return { heading: 'Welcome!', subheading: 'Start building.' };
     case 'two-col':
-      return { left: 'Left side content', right: 'Right side content' },;
+      return { left: 'Left side content', right: 'Right side content' },
     default:
       return {};
     }
@@ -45,8 +45,7 @@ function getDefaultSchema(type: string): PropSchema[] {
     case 'button':
       return [{ key: 'label', label: 'Button Label', type: 'text' }];
     case 'card':
-    return [;
-    break;
+    return [break;
 
     break;
 ,
@@ -55,23 +54,20 @@ function getDefaultSchema(type: string): PropSchema[] {
     case 'input':
       return [{ key: 'placeholder', label: 'Placeholder', type: 'text' }];
     case 'hero':
-    return [;
-    break;
+    return [break;
 
     break;
 ,
   { key: 'heading', label: 'Heading', type: 'text' },
         { key: 'subheading', label: 'Subheading', type: 'text' }];
     case 'two-col':
-    return [;
-    break;
+    return [break;
 
     break;
 ,
   { key: 'left', label: 'Left Column Text', type: 'textarea' },
         { key: 'right', label: 'Right Column Text', type: 'textarea' }],
-    default: return [],;
-  }
+    default: return []}
 export const useBuilderStore = create<BuilderStore>((set, get) => ({
   components: [],
     selectedId: null,
@@ -96,8 +92,7 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
     if(typeof window !== 'undefined') {
       localStorage.setItem('ai_builder_project', JSON.stringify(components));
       alert('Project saved successfully!');
-    }
-  },
+    },
   loadProject: () => {
     if(typeof window !== 'undefined') {
       const saved = localStorage.getItem('ai_builder_project');
@@ -108,6 +103,5 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
       } else {
         alert('No saved project found!');
       }
-    }
-  },
+    },
   reset: () => set({ components: [], selectedId: null })}));
