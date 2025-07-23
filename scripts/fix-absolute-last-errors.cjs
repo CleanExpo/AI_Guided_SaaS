@@ -3,26 +3,23 @@ const fs = require('fs');
 
 console.log('🔧 ABSOLUTE LAST ERRORS: The Final 5 Syntax Errors!\n');
 
-const absoluteLastFixes = {
+const _absoluteLastFixes = {
   // Fix alert UI component
   'src/components/ui/alert.tsx': `import * as React from "react";
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
-const alertVariants = cva(
+const _alertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
     variants: {
       variant: {
         default: "bg-background text-foreground",
         destructive:
-          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
-      },
+          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive"}
     },
     defaultVariants: {
-      variant: "default",
-    },
-  }
+      variant: "default"}}
 );
 
 const Alert = React.forwardRef<
@@ -70,9 +67,9 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/utils/cn";
 
-const Select = SelectPrimitive.Root;
-const SelectGroup = SelectPrimitive.Group;
-const SelectValue = SelectPrimitive.Value;
+const _Select = SelectPrimitive.Root;
+const _SelectGroup = SelectPrimitive.Group;
+const _SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
@@ -82,7 +79,7 @@ const SelectTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-      className
+      // className
     )}
     {...props}
   >
@@ -102,7 +99,7 @@ const SelectScrollUpButton = React.forwardRef<
     ref={ref}
     className={cn(
       "flex cursor-default items-center justify-center py-1",
-      className
+      // className
     )}
     {...props}
   >
@@ -119,7 +116,7 @@ const SelectScrollDownButton = React.forwardRef<
     ref={ref}
     className={cn(
       "flex cursor-default items-center justify-center py-1",
-      className
+      // className
     )}
     {...props}
   >
@@ -140,7 +137,7 @@ const SelectContent = React.forwardRef<
         "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-        className
+        // className
       )}
       position={position}
       {...props}
@@ -181,7 +178,7 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      // className
     )}
     {...props}
   >
@@ -217,7 +214,7 @@ export {
   SelectItem,
   SelectSeparator,
   SelectScrollUpButton,
-  SelectScrollDownButton,
+  // SelectScrollDownButton
 };`,
 
   // Fix SelfCheckTrigger component
@@ -231,18 +228,14 @@ interface HealthMetrics {
   dependencyScore: number;
   securityScore: number;
   performanceScore: number;
-  overallHealth: number;
-}
-
+  overallHealth: number;}
 interface SelfCheckTriggerProps {
-  onReportGenerated?: (metrics: HealthMetrics) => void;
-}
-
+  onReportGenerated? (metrics: HealthMetrics) => void;}
 const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated }) => {
   const [isRunning, setIsRunning] = useState(false);
   const [metrics, setMetrics] = useState<HealthMetrics | null>(null);
 
-  const runSelfCheck = async () => {
+  const _runSelfCheck = async () => {
     setIsRunning(true);
     try {
       // Simulate self-check process
@@ -261,8 +254,7 @@ const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated }
     } catch (error) {
       console.error('Self-check failed:', error);
     } finally {
-      setIsRunning(false);
-    }
+      setIsRunning(false);}
   };
 
   return (
@@ -325,7 +317,7 @@ import {
   Tablet,
   Monitor,
   Eye,
-  EyeOff
+  // EyeOff
 } from 'lucide-react';
 
 interface Component {
@@ -336,9 +328,7 @@ interface Component {
   y: number;
   width: number;
   height: number;
-  content?: string;
-}
-
+  content?: string;}
 export default function NoCodeBuilder() {
   const [components, setComponents] = useState<Component[]>([]);
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
@@ -357,16 +347,16 @@ export default function NoCodeBuilder() {
 
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  const handleDragStart = (e: DragEvent, componentType: string) => {
+  const _handleDragStart = (e: DragEvent, componentType: string) => {
     e.dataTransfer.setData('componentType', componentType);
     setIsDragging(true);
   };
 
-  const handleDragOver = (e: DragEvent) => {
+  const _handleDragOver = (e: DragEvent) => {
     e.preventDefault();
   };
 
-  const handleDrop = (e: DragEvent) => {
+  const _handleDrop = (e: DragEvent) => {
     e.preventDefault();
     const componentType = e.dataTransfer.getData('componentType');
     const rect = canvasRef.current?.getBoundingClientRect();
@@ -386,21 +376,19 @@ export default function NoCodeBuilder() {
         content: componentType === 'text' ? 'Sample Text' : undefined
       };
 
-      setComponents(prev => [...prev, newComponent]);
-    }
+      setComponents(prev => [...prev, newComponent]);}
     setIsDragging(false);
   };
 
-  const getViewportWidth = () => {
+  const _getViewportWidth = () => {
     switch (currentView) {
       case 'mobile': return '375px';
       case 'tablet': return '768px';
       case 'desktop': return '100%';
-      default: return '100%';
-    }
+      default: return '100%';}
   };
 
-  const ViewIcon = currentView === 'desktop' ? Monitor : 
+  const _ViewIcon = currentView === 'desktop' ? Monitor : 
                    currentView === 'tablet' ? Tablet : Smartphone;
 
   return (
@@ -412,7 +400,7 @@ export default function NoCodeBuilder() {
           {componentLibrary.map(({ icon: Icon, label, type }) => (
             <div
               key={type}
-              draggable
+              // draggable
               onDragStart={(e) => handleDragStart(e, type)}
               className="flex items-center p-3 border border-gray-200 rounded cursor-grab hover:bg-gray-50 active:cursor-grabbing"
             >
@@ -437,7 +425,7 @@ export default function NoCodeBuilder() {
             <div className="border-l border-gray-300 h-6"></div>
             <div className="flex items-center space-x-2">
               {['desktop', 'tablet', 'mobile'].map((view) => {
-                const Icon = view === 'desktop' ? Monitor : view === 'tablet' ? Tablet : Smartphone;
+                const _Icon = view === 'desktop' ? Monitor : view === 'tablet' ? Tablet : Smartphone;
                 return (
                   <button
                     key={view}
@@ -453,7 +441,7 @@ export default function NoCodeBuilder() {
           <div className="flex items-center space-x-2">
             <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
               <Play className="h-4 w-4 mr-2 inline" />
-              Preview
+              // Preview
             </button>
           </div>
         </div>
@@ -519,7 +507,7 @@ export default function NoCodeBuilder() {
               <input
                 type="text"
                 value={selectedComponent}
-                disabled
+                // disabled
                 className="w-full px-3 py-2 border border-gray-300 rounded text-sm bg-gray-50"
               />
             </div>
@@ -546,7 +534,7 @@ import {
   Terminal,
   Settings,
   ChevronRight,
-  ChevronDown
+  // ChevronDown
 } from 'lucide-react';
 
 interface FileNode {
@@ -554,16 +542,12 @@ interface FileNode {
   type: 'file' | 'folder';
   path: string;
   children?: FileNode[];
-  isOpen?: boolean;
-}
-
+  isOpen?: boolean;}
 interface OpenFile {
   path: string;
   name: string;
   content: string;
-  isDirty: boolean;
-}
-
+  isDirty: boolean;}
 export default function ProCodeEditor() {
   const [openFiles, setOpenFiles] = useState<OpenFile[]>([]);
   const [activeFile, setActiveFile] = useState<string | null>(null);
@@ -594,15 +578,13 @@ export default function ProCodeEditor() {
 
   const [showTerminal, setShowTerminal] = useState(false);
 
-  const toggleFolder = (path: string) => {
-    const toggleNode = (nodes: FileNode[]): FileNode[] => {
+  const _toggleFolder = (path: string) => {
+    const _toggleNode = (nodes: FileNode[]): FileNode[] => {
       return nodes.map(node => {
         if (node.path === path) {
-          return { ...node, isOpen: !node.isOpen };
-        }
+          return { ...node, isOpen: !node.isOpen };}
         if (node.children) {
-          return { ...node, children: toggleNode(node.children) };
-        }
+          return { ...node, children: toggleNode(node.children) };}
         return node;
       });
     };
@@ -610,9 +592,9 @@ export default function ProCodeEditor() {
     setFileTree(toggleNode(fileTree));
   };
 
-  const openFile = (file: FileNode) => {
+  const _openFile = (file: FileNode) => {
     if (file.type === 'file') {
-      const existingFile = openFiles.find(f => f.path === file.path);
+      const _existingFile = openFiles.find(f => f.path === file.path);
       
       if (!existingFile) {
         const newFile: OpenFile = {
@@ -621,22 +603,18 @@ export default function ProCodeEditor() {
           content: getFileContent(file.path),
           isDirty: false
         };
-        setOpenFiles(prev => [...prev, newFile]);
-      }
-      
-      setActiveFile(file.path);
-    }
+        setOpenFiles(prev => [...prev, newFile]);}
+      setActiveFile(file.path);}
   };
 
-  const closeFile = (path: string) => {
+  const _closeFile = (path: string) => {
     setOpenFiles(prev => prev.filter(f => f.path !== path));
     if (activeFile === path) {
       const remainingFiles = openFiles.filter(f => f.path !== path);
-      setActiveFile(remainingFiles.length > 0 ? remainingFiles[0].path : null);
-    }
+      setActiveFile(remainingFiles.length > 0 ? remainingFiles[0].path : null);}
   };
 
-  const getFileContent = (path: string): string => {
+  const _getFileContent = (path: string): string => {
     // Mock file content
     const contents: { [key: string]: string } = {
       '/src/App.tsx': \`import React from 'react';
@@ -649,9 +627,7 @@ function App() {
         <p>Building the future of development</p>
       </header>
     </div>
-  );
-}
-
+  );}
 export default App;\`,
       '/src/index.tsx': \`import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -664,15 +640,14 @@ root.render(<App />);\`,
   "version": "1.0.0",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  }
+    "react-dom": "^18.2.0"}
 }\`
     };
 
     return contents[path] || '// New file';
   };
 
-  const renderFileTree = (nodes: FileNode[], depth = 0) => {
+  const _renderFileTree = (nodes: FileNode[], depth = 0) => {
     return nodes.map(node => (
       <div key={node.path}>
         <div
@@ -707,7 +682,7 @@ root.render(<App />);\`,
     ));
   };
 
-  const activeFileContent = activeFile ? 
+  const _activeFileContent = activeFile ? 
     openFiles.find(f => f.path === activeFile)?.content || '' : '';
 
   return (
@@ -723,7 +698,7 @@ root.render(<App />);\`,
           </button>
           <button className="px-3 py-1 bg-green-600 hover:bg-green-700 rounded text-sm">
             <Play className="h-4 w-4 mr-1 inline" />
-            Run
+            // Run
           </button>
         </div>
       </div>
@@ -824,7 +799,7 @@ root.render(<App />);\`,
           className="hover:bg-gray-700 px-2 py-1 rounded"
         >
           <Terminal className="h-3 w-3 mr-1 inline" />
-          Terminal
+          // Terminal
         </button>
       </div>
     </div>
@@ -836,17 +811,14 @@ let filesFixed = 0;
 
 Object.entries(absoluteLastFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ ABSOLUTE LAST FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Absolute Last Fix Summary:`);

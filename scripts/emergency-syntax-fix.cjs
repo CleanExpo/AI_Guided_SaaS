@@ -15,8 +15,7 @@ const criticalFixes = [
     fixes: [
       {
         search: /defaultVariants:\s*{\s*variant:\s*"default"\s*\);/,
-        replace: 'defaultVariants: {\n      variant: "default"\n    }\n  });'
-      }
+        replace: 'defaultVariants: {\n      variant: "default"\n    }\n  });'}
     ]
   },
   {
@@ -24,8 +23,7 @@ const criticalFixes = [
     fixes: [
       {
         search: /defaultVariants:\s*{\s*variant:\s*"default",\s*size:\s*"default"\s*\);/,
-        replace: 'defaultVariants: {\n      variant: "default",\n      size: "default"\n    }\n  });'
-      }
+        replace: 'defaultVariants: {\n      variant: "default",\n      size: "default"\n    }\n  });'}
     ]
   },
   {
@@ -37,8 +35,7 @@ const criticalFixes = [
       },
       {
         search: /export\s*{\s*Select,\s*SelectGroup,\s*SelectValue,\s*SelectTrigger,\s*SelectContent,\s*SelectItem;\s*}/,
-        replace: 'export {\n  Select,\n  SelectGroup,\n  SelectValue,\n  SelectTrigger,\n  SelectContent,\n  SelectItem\n};'
-      }
+        replace: 'export {\n  Select,\n  SelectGroup,\n  SelectValue,\n  SelectTrigger,\n  SelectContent,\n  SelectItem\n};'}
     ]
   },
   {
@@ -46,8 +43,7 @@ const criticalFixes = [
     fixes: [
       {
         search: /ToastProps from "@\/components\/ui\/toast";/,
-        replace: 'ToastProps\n} from "@/components/ui/toast";'
-      }
+        replace: 'ToastProps\n} from "@/components/ui/toast";'}
     ]
   },
   {
@@ -55,10 +51,8 @@ const criticalFixes = [
     fixes: [
       {
         search: /'Content-Type':\s*'application\/json',\s*}\s*body:\s*JSON\.stringify\(\{\s*password\s*}\)\);/,
-        replace: '\'Content-Type\': \'application/json\'\n        },\n        body: JSON.stringify({ password })\n      });'
-      }
-    ]
-  }
+        replace: '\'Content-Type\': \'application/json\'\n        },\n        body: JSON.stringify({ password })\n      });'}
+    ]}
 ];
 
 let fixedCount = 0;
@@ -76,14 +70,11 @@ criticalFixes.forEach(({ file, fixes }) => {
       if (content !== originalContent) {
         fs.writeFileSync(file, content);
         console.log(`✅ Fixed critical syntax in: ${file}`);
-        fixedCount++;
-      }
+        fixedCount++;}
     } catch (error) {
-      console.log(`❌ Failed to fix: ${file} - ${error.message}`);
-    }
+      console.log(`❌ Failed to fix: ${file} - ${error.message}`);}
   } else {
-    console.log(`⚠️  File not found: ${file}`);
-  }
+    console.log(`⚠️  File not found: ${file}`);}
 });
 
 console.log(`\n📊 EMERGENCY FIX SUMMARY:`);
@@ -93,7 +84,5 @@ if (fixedCount > 0) {
   console.log('\n🎯 Critical syntax errors resolved!');
   console.log('✅ Ready for build attempt');
 } else {
-  console.log('\n⚠️  No critical syntax errors found');
-}
-
+  console.log('\n⚠️  No critical syntax errors found');}
 console.log('\n🚀 NEXT: Run npm run build');

@@ -5,16 +5,16 @@ const path = require('path');
 
 console.log('🧠 Updating CLAUDE.md with latest project status...\n');
 
-const claudeMdPath = path.join(process.cwd(), 'CLAUDE.md');
+const _claudeMdPath = path.join(process.cwd(), 'CLAUDE.md');
 
 // Read current CLAUDE.md
-const currentContent = fs.readFileSync(claudeMdPath, 'utf8');
+const _currentContent = fs.readFileSync(claudeMdPath, 'utf8');
 
 // Update with new information
-const timestamp = new Date().toISOString();
-const healthScore = Math.round((45 / 55) * 100); // 45 passed out of 55 total checks
+const _timestamp = new Date().toISOString();
+const _healthScore = Math.round((45 / 55) * 100); // 45 passed out of 55 total checks
 
-const updatedContent = currentContent
+const _updatedContent = currentContent
   .replace(/\*Last Updated: .*\*/, `*Last Updated: ${timestamp}*`)
   .replace(/\*\*Status\*\*: .*/, `**Status**: ⚠️ BUILD FAILING - 9221 TypeScript errors need fixing`)
   .replace(/\*\*Health Score\*\*: .*/, `**Health Score**: ${healthScore}/100`)

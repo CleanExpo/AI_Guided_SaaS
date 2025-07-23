@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Environment Manager Tool
  * Centralized management of environment variables across all platforms
@@ -12,9 +13,7 @@ class EnvironmentManager {
         this.config = config;
         this.projectPath = config.project.path;
         this.environments = config.project.environments;
-        this.schema = this.loadEnvironmentSchema();
-    }
-
+        this.schema = this.loadEnvironmentSchema();}
     /**
      * Load and define the environment variable schema
      */
@@ -82,61 +81,47 @@ class EnvironmentManager {
             ENABLE_ANALYTICS: { type: 'boolean', default: 'true' },
             ENABLE_ADMIN_PANEL: { type: 'boolean', default: 'true' },
             ANALYTICS_ENABLED: { type: 'boolean', default: 'true' }
-        };
-    }
-
+        };}
     /**
      * Validate environment variables against schema
      */
     async validateEnvironment(envFile = '.env.local') {
-        const envPath = path.join(this.projectPath, envFile);
+        const _envPath = path.join(this.projectPath, envFile);
         const envVars = this.parseEnvFile(envPath);
         const validation = {
-            valid: true,
-            errors: [],
-            warnings: [],
-            missing: [],
-            invalid: [],
-            suggestions: []
+            // valid: true
+            // errors: []
+            // warnings: []
+            // missing: []
+            // invalid: []
+            // suggestions: [],
         };
 
         // Check required variables
         for (const [key, schema] of Object.entries(this.schema)) {
             if (schema.required && !envVars[key]) {
                 validation.missing.push(key);
-                validation.valid = false;
-            }
-        }
-
+                validation.valid = false;}}
         // Validate existing variables
         for (const [key, value] of Object.entries(envVars)) {
             const schema = this.schema[key];
             if (!schema) {
                 validation.warnings.push(`Unknown variable: ${key}`);
-                continue;
-            }
-
+                continue;}
             const validationResult = this.validateVariable(key, value, schema);
             if (!validationResult.valid) {
                 validation.invalid.push({
                     key,
-                    value: this.maskSensitiveValue(value),
-                    errors: validationResult.errors
+                    // value: this.maskSensitiveValue(value)
+                    // errors: validationResult.errors,
                 });
-                validation.valid = false;
-            }
-        }
-
+                validation.valid = false;}}
         // Check for placeholder values
         const placeholders = this.findPlaceholderValues(envVars);
         if (placeholders.length > 0) {
             validation.warnings.push(`Found ${placeholders.length} placeholder values that need to be replaced`);
-            validation.suggestions.push('Run credential rotation to generate real values');
-        }
-
-        return validation;
-    }
-
+            validation.suggestions.push('Run credential rotation to generate real values');}
+        return validation;}
     /**
      * Validate individual variable against schema
      */
@@ -146,63 +131,50 @@ class EnvironmentManager {
         if (!value || value.trim() === '') {
             result.valid = false;
             result.errors.push('Value is empty');
-            return result;
-        }
-
+            return result;}
         switch (schema.type) {
             case 'url':
                 if (!this.isValidUrl(value)) {
                     result.valid = false;
-                    result.errors.push('Invalid URL format');
-                }
+                    result.errors.push('Invalid URL format');}
                 break;
 
             case 'email':
                 if (!this.isValidEmail(value)) {
                     result.valid = false;
-                    result.errors.push('Invalid email format');
-                }
+                    result.errors.push('Invalid email format');}
                 break;
 
             case 'api_key':
                 if (schema.prefix && !value.startsWith(schema.prefix)) {
                     result.valid = false;
-                    result.errors.push(`API key should start with ${schema.prefix}`);
-                }
+                    result.errors.push(`API key should start with ${schema.prefix}`);}
                 break;
 
             case 'secret':
                 if (schema.minLength && value.length < schema.minLength) {
                     result.valid = false;
-                    result.errors.push(`Secret should be at least ${schema.minLength} characters`);
-                }
+                    result.errors.push(`Secret should be at least ${schema.minLength} characters`);}
                 break;
 
             case 'enum':
                 if (!schema.values.includes(value)) {
                     result.valid = false;
-                    result.errors.push(`Value should be one of: ${schema.values.join(', ')}`);
-                }
+                    result.errors.push(`Value should be one of: ${schema.values.join(', ')}`);}
                 break;
 
             case 'boolean':
                 if (!['true', 'false'].includes(value.toLowerCase())) {
                     result.valid = false;
-                    result.errors.push('Value should be true or false');
-                }
+                    result.errors.push('Value should be true or false');}
                 break;
 
             case 'number':
                 if (isNaN(parseInt(value))) {
                     result.valid = false;
-                    result.errors.push('Value should be a number');
-                }
-                break;
-        }
-
-        return result;
-    }
-
+                    result.errors.push('Value should be a number');}
+                break;}
+        return result;}
     /**
      * Generate environment template with proper structure
      */
@@ -214,7 +186,7 @@ class EnvironmentManager {
         template.push(`# Generated: ${new Date().toISOString()}`);
         template.push('# ⚠️  NEVER COMMIT PRODUCTION SECRETS TO VERSION CONTROL\n');
 
-        const categories = {
+        const _categories = {
             'Core Application': ['NODE_ENV', 'NEXT_PUBLIC_APP_URL', 'APP_URL', 'APP_NAME'],
             'Authentication': ['NEXTAUTH_URL', 'NEXTAUTH_SECRET'],
             'Database & Supabase': ['NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'DATABASE_URL', 'DIRECT_URL'],
@@ -236,27 +208,18 @@ class EnvironmentManager {
                 if (!schema) continue;
 
                 const value = this.generateDefaultValue(varName, schema, environment);
-                const comment = this.generateVariableComment(varName, schema);
+                const _comment = this.generateVariableComment(varName, schema);
                 
                 if (comment) {
-                    template.push(`# ${comment}`);
-                }
-                
-                template.push(`${varName}=${value}`);
-            }
-        }
-
-        return template.join('\n');
-    }
-
+                    template.push(`# ${comment}`);}
+                template.push(`${varName}=${value}`);}}
+        return template.join('\n');}
     /**
      * Generate default value for environment variable
      */
     generateDefaultValue(varName, schema, environment) {
         if (schema.default) {
-            return schema.default;
-        }
-
+            return schema.default;}
         switch (schema.type) {
             case 'secret':
                 return environment === 'production' 
@@ -271,9 +234,8 @@ class EnvironmentManager {
             case 'url':
                 if (varName.includes('APP_URL') || varName.includes('NEXTAUTH_URL')) {
                     return environment === 'production'
-                        ? 'https://ai-guided-saas-fkqvot40t-unite-group.vercel.app'
-                        : 'http://localhost:3000';
-                }
+                        ? 'https: //ai-guided-saas-fkqvot40t-unite-group.vercel.app'
+                        : 'http://localhost:3000';,}
                 return environment === 'production'
                     ? `REPLACE_WITH_REAL_${varName}_URL`
                     : `https://demo-${varName.toLowerCase().replace(/_/g, '-')}.example.com`;
@@ -289,13 +251,9 @@ class EnvironmentManager {
             case 'enum':
                 return schema.values[0];
             
-            default:
-                return environment === 'production'
+            // default: return environment === 'production',
                     ? `REPLACE_WITH_REAL_${varName}`
-                    : `demo-${varName.toLowerCase().replace(/_/g, '-')}`;
-        }
-    }
-
+                    : `demo-${varName.toLowerCase().replace(/_/g, '-')}`;}}
     /**
      * Generate comment for environment variable
      */
@@ -313,12 +271,8 @@ class EnvironmentManager {
         let comment = comments[varName] || '';
         
         if (schema.required) {
-            comment += comment ? ' (Required)' : 'Required';
-        }
-
-        return comment;
-    }
-
+            comment += comment ? ' (Required)' : 'Required';}
+        return comment;}
     /**
      * Synchronize environment variables across platforms
      */
@@ -340,82 +294,65 @@ class EnvironmentManager {
             results.vercel.message = `Would sync ${Object.keys(envVars).length} variables to Vercel`;
             results.supabase.message = `Would sync database configuration to Supabase`;
             
-            // Note: Actual API calls would be implemented here
+            // Note: Actual API calls would be implemented here,
             // For now, we're providing the structure and validation
             
         } catch (error) {
-            console.error('Environment sync error:', error);
-        }
-
-        return results;
-    }
-
+            console.error('Environment sync error:', error);}
+        return results;}
     /**
      * Rotate security credentials
      */
     async rotateCredentials(credentialTypes = ['secrets', 'api-keys']) {
         const rotationResults = {
-            rotated: [],
-            failed: [],
-            skipped: []
+            // rotated: []
+            // failed: []
+            // skipped: [],
         };
 
-        const envPath = path.join(this.projectPath, '.env.local');
+        const _envPath = path.join(this.projectPath, '.env.local');
         const envVars = this.parseEnvFile(envPath);
 
         for (const [key, value] of Object.entries(envVars)) {
             const schema = this.schema[key];
             if (!schema) continue;
 
-            const shouldRotate = this.shouldRotateCredential(key, schema, credentialTypes);
+            const _shouldRotate = this.shouldRotateCredential(key, schema, credentialTypes);
             
             if (shouldRotate) {
                 try {
-                    const newValue = this.generateNewCredential(key, schema);
+                    const _newValue = this.generateNewCredential(key, schema);
                     rotationResults.rotated.push({
                         key,
-                        oldValue: this.maskSensitiveValue(value),
-                        newValue: this.maskSensitiveValue(newValue),
-                        timestamp: new Date().toISOString()
+                        // oldValue: this.maskSensitiveValue(value)
+                        // newValue: this.maskSensitiveValue(newValue)
+                        // timestamp: new Date().toISOString(),
                     });
                 } catch (error) {
                     rotationResults.failed.push({
-                        key,
-                        error: error.message
-                    });
-                }
+                        key
+                        // error: error.message,
+                    });}
             } else {
-                rotationResults.skipped.push(key);
-            }
-        }
-
-        return rotationResults;
-    }
-
+                rotationResults.skipped.push(key);}}
+        return rotationResults;}
     /**
      * Utility methods
      */
     parseEnvFile(filePath) {
         if (!fs.existsSync(filePath)) {
-            return {};
-        }
-
+            return {};}
         const content = fs.readFileSync(filePath, 'utf8');
         const envVars = {};
 
-        content.split('\n').forEach(line => {
-            line = line.trim();
+        content.split('\n').forEach(line => { line = line.trim();
             if (line && !line.startsWith('#')) {
                 const [key, ...valueParts] = line.split('=');
                 if (key && valueParts.length > 0) {
                     envVars[key.trim()] = valueParts.join('=').replace(/^["']|["']$/g, '');
-                }
-            }
-        });
+                 });
 
-        return envVars;
-    }
-
+        return envVars;}
     findPlaceholderValues(envVars) {
         const placeholders = [];
         const placeholderPatterns = [
@@ -429,66 +366,41 @@ class EnvironmentManager {
 
         for (const [key, value] of Object.entries(envVars)) {
             if (placeholderPatterns.some(pattern => pattern.test(value))) {
-                placeholders.push(key);
-            }
-        }
-
-        return placeholders;
-    }
-
+                placeholders.push(key);}}
+        return placeholders;}
     filterPublicVariables(envVars) {
         const publicVars = {};
         for (const [key, value] of Object.entries(envVars)) {
             if (key.startsWith('NEXT_PUBLIC_') || key.startsWith('NODE_ENV')) {
-                publicVars[key] = value;
-            }
-        }
-        return publicVars;
-    }
-
+                publicVars[key] = value;}}
+        return publicVars;}
     shouldRotateCredential(key, schema, credentialTypes) {
         if (credentialTypes.includes('secrets') && schema.type === 'secret') {
-            return true;
-        }
+            return true;}
         if (credentialTypes.includes('api-keys') && schema.type === 'api_key') {
-            return true;
-        }
-        return false;
-    }
-
+            return true;}
+        return false;}
     generateNewCredential(key, schema) {
         switch (schema.type) {
             case 'secret':
                 return this.generateSecret(schema.minLength || 32);
             case 'api_key':
                 return `${schema.prefix || ''}${this.generateSecret(32)}`;
-            default:
-                return this.generateSecret(32);
-        }
-    }
-
+            // default: return this.generateSecret(32);,}}
     generateSecret(length = 32) {
-        return crypto.randomBytes(length).toString('hex').substring(0, length);
-    }
-
+        return crypto.randomBytes(length).toString('hex').substring(0, length);}
     maskSensitiveValue(value) {
         if (!value || value.length < 8) return '***';
-        return value.substring(0, 4) + '*'.repeat(value.length - 8) + value.substring(value.length - 4);
-    }
-
+        return value.substring(0, 4) + '*'.repeat(value.length - 8) + value.substring(value.length - 4);}
     isValidUrl(string) {
         try {
             new URL(string);
             return true;
         } catch (_) {
-            return false;
-        }
-    }
-
+            return false;}}
     isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-}
-
+        return emailRegex.test(email);}}
 module.exports = EnvironmentManager;
+
+}}

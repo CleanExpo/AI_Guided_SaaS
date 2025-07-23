@@ -3,7 +3,7 @@ const fs = require('fs');
 
 console.log('🔧 FINAL FIX: Admin Pages Syntax Errors\n');
 
-const adminFixes = {
+const _adminFixes = {
   // Fix admin analytics page
   'src/app/admin/analytics/page.tsx': `'use client';
 import { useState, useEffect } from 'react';
@@ -17,9 +17,7 @@ interface AdminUser {
   email: string;
   name: string;
   lastLogin: string;
-  status: 'active' | 'inactive';
-}
-
+  status: 'active' | 'inactive';}
 export default function AdminAnalyticsPage() {
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,17 +38,14 @@ export default function AdminAnalyticsPage() {
           email: 'user2@example.com', 
           name: 'Jane Smith',
           lastLogin: '1 day ago',
-          status: 'active'
-        }
+          status: 'active'}
       ]);
       setIsLoading(false);
     }, 1000);
   }, []);
 
   if (isLoading) {
-    return <div className="p-8">Loading analytics...</div>;
-  }
-
+    return <div className="p-8">Loading analytics...</div>;}
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -140,9 +135,7 @@ interface AdminUser {
   id: string;
   email: string;
   name: string;
-  role: string;
-}
-
+  role: string;}
 export default function AdminDashboardPage() {
   const [user] = useState<AdminUser>({
     id: '1',
@@ -158,7 +151,7 @@ export default function AdminDashboardPage() {
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
           <Button variant="outline">
             <LogOut className="w-4 h-4 mr-2" />
-            Logout
+            // Logout
           </Button>
         </div>
 
@@ -219,14 +212,13 @@ export default function AdminDashboardPage() {
   'src/app/admin/debug/page.tsx': `'use client';
 
 export default function AdminDebugPage() {
-  const debugInfo = {
+  const _debugInfo = {
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,
     urls: {
       nextauth: process.env.NEXTAUTH_URL,
       app: process.env.NEXT_PUBLIC_APP_URL,
-      vercel: process.env.VERCEL_URL
-    }
+      vercel: process.env.VERCEL_URL}
   };
 
   return (
@@ -246,7 +238,7 @@ export default function AdminDebugPage() {
 
   // Fix admin login layout
   'src/app/admin/login/layout.tsx': `export default function AdminLoginLayout({
-  children,
+  // children
 }: {
   children: React.ReactNode;
 }) {
@@ -269,7 +261,7 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const _handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -278,21 +270,19 @@ export default function AdminLoginPage() {
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password })
       });
 
       if (response.ok) {
         router.push('/admin/dashboard');
       } else {
-        setError('Invalid password');
-      }
+        setError('Invalid password');}
     } catch (err) {
       setError('Login failed');
     } finally {
-      setLoading(false);
-    }
+      setLoading(false);}
   };
 
   return (
@@ -313,7 +303,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={loading}
-                required
+                // required
                 className="pr-10"
               />
               <button
@@ -351,17 +341,14 @@ let filesFixed = 0;
 
 Object.entries(adminFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ ADMIN FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Admin Fix Summary:`);

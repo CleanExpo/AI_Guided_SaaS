@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const adminPagesPath = '/mnt/d/AI Guided SaaS/src/app/admin';
+const _adminPagesPath = '/mnt/d/AI Guided SaaS/src/app/admin';
 
 function fixAdminPageJSX(filePath) {
   try {
@@ -29,39 +29,27 @@ function fixAdminPageJSX(filePath) {
     // Ensure proper file ending
     content = content.trim();
     if (!content.endsWith('}')) {
-      content += '\n}';
-    }
+      content += '\n}';}
     if (!content.endsWith('\n')) {
-      content += '\n';
-    }
-    
+      content += '\n';}
     fs.writeFileSync(filePath, content);
     console.log(`✅ Fixed ${path.basename(filePath)}`);
     return true;
   } catch (error) {
     console.error(`❌ Error fixing ${path.basename(filePath)}:`, error.message);
-    return false;
-  }
-}
-
+    return false;}}
 function getAllTsxFiles(dir) {
   const files = [];
   try {
-    const items = fs.readdirSync(dir, { withFileTypes: true });
+    const _items = fs.readdirSync(dir, { withFileTypes: true });
     for (const item of items) {
-      const fullPath = path.join(dir, item.name);
+      const _fullPath = path.join(dir, item.name);
       if (item.isDirectory()) {
         files.push(...getAllTsxFiles(fullPath));
-      } else if (item.name.endsWith('.tsx')) {
-        files.push(fullPath);
-      }
-    }
-  } catch (error) {
-    console.error(`Error reading directory ${dir}:`, error.message);
-  }
-  return files;
-}
-
+      } else if (item.name.endsWith('.tsx')) { files.push(fullPath);
+       } catch (error) {
+    console.error(`Error reading directory ${dir}:`, error.message);}
+  return files;}
 function main() {
   console.log('🚀 Fixing JSX syntax errors in admin pages...\n');
   
@@ -72,12 +60,7 @@ function main() {
   
   for (const filePath of allFiles) {
     if (fixAdminPageJSX(filePath)) {
-      successCount++;
-    }
-  }
-  
+      successCount++;}}
   console.log(`\n📊 Results: ${successCount}/${allFiles.length} admin pages fixed`);
-  console.log('✨ Admin pages JSX fixes complete!');
-}
-
+  console.log('✨ Admin pages JSX fixes complete!');}
 main();

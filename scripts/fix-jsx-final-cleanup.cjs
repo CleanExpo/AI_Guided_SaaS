@@ -27,8 +27,7 @@ const fixes = [
       },
       {
         find: /"relative h-4 w-full overflow-hidden rounded-full bg-secondary" className/,
-        replace: `"relative h-4 w-full overflow-hidden rounded-full bg-secondary", className`
-      }
+        replace: `"relative h-4 w-full overflow-hidden rounded-full bg-secondary", className`}
     ]
   },
   {
@@ -37,8 +36,7 @@ const fixes = [
     fixes: [
       {
         find: /  <\/AlertsPanel>\n  <\/ContainerMonitor>\n  <\/AgentPulseMonitor>\n  <\/TaskQueueVisualizer>\n  <\/SystemMetrics>\n  \);\n}\n$/,
-        replace: `  );\n}`
-      }
+        replace: `  );\n}`}
     ]
   },
   {
@@ -47,8 +45,7 @@ const fixes = [
     fixes: [
       {
         find: /  <\/CausalExplorerUI>\n  <\/SelfCheckTrigger>\n  \);\n}\n$/,
-        replace: `  );\n}`
-      }
+        replace: `  );\n}`}
     ]
   },
   {
@@ -65,8 +62,7 @@ const fixes = [
       },
       {
         find: /className=\{\`px-2 py-1 rounded text-sm font-bold \$\{getStatusColor\(metrics\.memoryUsage thresholds\.memoryWarning  thresholds\.memoryCritical\)\}\`\}/,
-        replace: `className={\`px-2 py-1 rounded text-sm font-bold \${getStatusColor(metrics.memoryUsage, thresholds.memoryWarning, thresholds.memoryCritical)}\`}`
-      }
+        replace: `className={\`px-2 py-1 rounded text-sm font-bold \${getStatusColor(metrics.memoryUsage, thresholds.memoryWarning, thresholds.memoryCritical)}\`}`}
     ]
   },
   {
@@ -79,8 +75,7 @@ const fixes = [
       },
       {
         find: />\s*{testing \? \(<\/Button>/,
-        replace: `>\n              {testing ? (`
-      }
+        replace: `>\n              {testing ? (`}
     ]
   },
   {
@@ -100,25 +95,22 @@ const fixes = [
         replace: `  props: Record<string, any>;\n  children?: Component[];\n}`
       },
       {
-        find: /const handleDragStart = \(e: React\.DragEvent: type, string\) => \{/,
-        replace: `const handleDragStart = (e: React.DragEvent, type: string) => {`
-      }
-    ]
-  }
+        find: /const _handleDragStart = \(e: React\.DragEvent: type, string\) => \{/,
+        replace: `const _handleDragStart = (e: React.DragEvent, type: string) => {`}
+    ]}
 ];
 
 function applyFixes(filePath, fixList) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    const original = content;
+    const _original = content;
     let fixCount = 0;
     
     fixList.forEach(fix => {
-      const before = content;
+      const _before = content;
       content = content.replace(fix.find, fix.replace);
       if (before !== content) {
-        fixCount++;
-      }
+        fixCount++;}
     });
     
     if (content !== original) {
@@ -127,19 +119,15 @@ function applyFixes(filePath, fixList) {
       return true;
     } else {
       console.log(`ℹ️  No changes needed for ${filePath}`);
-      return false;
-    }
+      return false;}
   } catch (error) {
     console.error(`❌ Error processing ${filePath}:`, error.message);
-    return false;
-  }
-}
-
+    return false;}}
 // Also run a generic cleanup on all TSX files
 function genericCleanup(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    const original = content;
+    const _original = content;
     
     // Fix common JSX issues
     // Fix comma in className concatenations
@@ -150,32 +138,24 @@ function genericCleanup(filePath) {
     
     // Ensure file ends with newline
     if (!content.endsWith('\n')) {
-      content += '\n';
-    }
-    
+      content += '\n';}
     if (content !== original) {
       fs.writeFileSync(filePath, content, 'utf8');
-      return true;
-    }
+      return true;}
     return false;
   } catch (error) {
-    return false;
-  }
-}
-
+    return false;}}
 // Process targeted fixes
 console.log('🎯 Applying targeted fixes...\n');
 let fixedCount = 0;
 
 fixes.forEach(({ file, fixes: fixList }) => {
-  const fullPath = path.join(process.cwd(), file);
+  const _fullPath = path.join(process.cwd(), file);
   if (fs.existsSync(fullPath)) {
     if (applyFixes(fullPath, fixList)) {
-      fixedCount++;
-    }
+      fixedCount++;}
   } else {
-    console.log(`⚠️  File not found: ${file}`);
-  }
+    console.log(`⚠️  File not found: ${file}`);}
 });
 
 // Generic cleanup on other TSX files  
@@ -185,13 +165,10 @@ const tsxFiles = glob.sync('src/**/*.tsx', {
 });
 
 let genericFixed = 0;
-tsxFiles.forEach(file => {
-  if (!targetFiles.includes(file)) {
+tsxFiles.forEach(file => { if (!targetFiles.includes(file)) {
     if (genericCleanup(file)) {
       genericFixed++;
-    }
-  }
-});
+     });
 
 console.log(`\n✅ Final cleanup completed!`);
 console.log(`   - ${fixedCount} targeted fixes applied`);

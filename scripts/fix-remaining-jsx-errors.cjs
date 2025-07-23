@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const uiPath = '/mnt/d/AI Guided SaaS/src/components/ui';
+const _uiPath = '/mnt/d/AI Guided SaaS/src/components/ui';
 
 function fixComplexJSXErrors(filePath) {
   try {
@@ -43,14 +43,10 @@ function fixComplexJSXErrors(filePath) {
       return true;
     } else {
       console.log(`ℹ️ No changes needed for ${filePath}`);
-      return true;
-    }
+      return true;}
   } catch (error) {
     console.error(`❌ Error fixing ${filePath}:`, error.message);
-    return false;
-  }
-}
-
+    return false;}}
 // Get all tsx files in ui directory
 function getAllTsxFiles() {
   try {
@@ -59,10 +55,7 @@ function getAllTsxFiles() {
       .map(file => path.join(uiPath, file));
   } catch (error) {
     console.error('Error reading UI directory:', error.message);
-    return [];
-  }
-}
-
+    return [];}}
 function main() {
   console.log('🔧 Fixing remaining JSX syntax errors in UI components...\n');
   
@@ -71,12 +64,7 @@ function main() {
   
   for (const filePath of allFiles) {
     if (fixComplexJSXErrors(filePath)) {
-      fixedCount++;
-    }
-  }
-  
+      fixedCount++;}}
   console.log(`\n📊 Results: ${fixedCount}/${allFiles.length} files processed`);
-  console.log('✅ Complex JSX error fixing complete!');
-}
-
+  console.log('✅ Complex JSX error fixing complete!');}
 main();

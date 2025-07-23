@@ -1,17 +1,13 @@
 import React from 'react';
 
 interface Alert {
-  id: string;
-  type: 'error' | 'warning' | 'info';
-  message: string;
-  timestamp: Date;
+  id: string,
+    type: 'error' | 'warning' | 'info',
+    message: string,
+    timestamp: Date
 }
-
-interface AlertsPanelProps {
-  alerts?: Alert[];
-}
-
-export function AlertsPanel({ alerts = [] }: AlertsPanelProps): JSX.Element {
+interface AlertsPanelProps { alerts?: Alert[] }
+export function AlertsPanel({ alerts = [] }: AlertsPanelProps) {
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="px-4 py-3 border-b">
@@ -31,8 +27,7 @@ export function AlertsPanel({ alerts = [] }: AlertsPanelProps): JSX.Element {
                 }`}>
                   {alert.type === 'error' ? '❌' : alert.type === 'warning' ? '⚠️' : 'ℹ️'}
                 </div>
-                <div className="ml-3 flex-1">
-                  <p className="text-sm">{alert.message}</p>
+                <div className="ml-3 flex-1"><p className="text-sm">{alert.message}</p>
                   <p className="text-xs text-gray-500 mt-1">
                     {new Date(alert.timestamp).toLocaleString()}
                   </p>

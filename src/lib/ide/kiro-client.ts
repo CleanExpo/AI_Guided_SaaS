@@ -1,383 +1,383 @@
-import { z } from 'zod';
-/**
+import { z } from 'zod';/**
  * Kiro IDE Integration Client
  * Provides visual IDE capabilities for AI-guided development
  */
 // Kiro IDE configuration
-export interface KiroConfig {;
-  apiUrl: string
-  apiKey?: string
-  workspace?: string
-  theme?: 'light' | 'dark' | 'auto'
-  language?: string
+export interface KiroConfig  { apiUrl: string;
+  apiKey?: string;
+  workspace?: string;
+  theme?: 'light' | 'dark' | 'auto';
+  language?: string;
+}
 }
 // Project structure types
-export interface KiroProject {;
-  id: string;
-  name: string
+export interface KiroProject  {
+    id: string,
+    name: string;
   description?;
-  string: type: 'web' | 'mobile' | 'desktop' | 'api' | 'library'
+    string: type: 'web' | 'mobile' | 'desktop' | 'api' | 'library';
   framework?: string;
-  language: string;
-  structure: KiroFileTree
+    language: string,
+    structure: KiroFileTree;
   settings?: KiroProjectSettings;
-  createdAt: string;
-  updatedAt: string
-};
-export interface KiroFileTree {;
-  name: string;
-  type: 'file' | 'directory'
-  path: string
-  children?: KiroFileTree[]
-  content?: string
-  metadata?: {
-    size?: number
-    mimeType?: string
-    encoding?: string
-    permissions?: string
-  }
-};
-export interface KiroProjectSettings {;
-  buildCommand?: string
-  startCommand?: string
-  testCommand?: string
-  outputDirectory?: string
+    createdAt: string,
+    updatedAt: string
+}
+export interface KiroFileTree  { name: string,
+    type: 'file' | 'directory',
+  path: string;
+  children?: KiroFileTree[];
+  content?: string;
+  metadata?: {;
+    size?: number;
+    mimeType?: string;
+    encoding?: string;
+    permissions?: string;
+}
+}
+export interface KiroProjectSettings { buildCommand?: string;
+  startCommand?: string;
+  testCommand?: string;
+  outputDirectory?: string;
   environment?: Record<string, string>
   dependencies?: Record<string, string>
 }
+}
 // IDE features
-export interface KiroFile {;
-  path: string;
-  content: string
-  language?: string
-  readOnly?: boolean
-  markers?: KiroMarker[]
-};
-export interface KiroMarker {;
-  severity: 'error' | 'warning' | 'info' | 'hint'
-  message: string;
-  startLine: number;
-  startColumn: number;
-  endLine: number;
-  endColumn: number
-  source?: string
-};
-export interface KiroTerminal {;
-  id: string;
-  name: string
-  shell?: string
-  cwd?: string
+export interface KiroFile  {
+    path: string,
+    content: string;
+  language?: string;
+  readOnly?: boolean;
+  markers?: KiroMarker[];
+}
+export interface KiroMarker  {
+    severity: 'error' | 'warning' | 'info' | 'hint',
+  message: string,
+    startLine: number,
+    startColumn: number,
+    endLine: number,
+    endColumn: number;
+  source?: string;
+}
+export interface KiroTerminal {
+    id: string,
+    name: string;
+  shell?: string;
+  cwd?: string;
   env?: Record<string, string>
-};
-export interface KiroDebugSession {;
-  id: string;
-  name: string;
-  type: string;
-  request: 'launch' | 'attach'
+}
+export interface KiroDebugSession { id: string,
+    name: string,
+    type: string,
+    request: 'launch' | 'attach',
   configuration: Record<string, any>
 }
+}
 // AI assistance types
-export interface KiroAIAssistance {;
-  suggestions: KiroSuggestion[];
-  diagnostics: KiroDiagnostic[]; refactorings: KiroRefactoring[];
-  completions: KiroCompletion[]
-};
-export interface KiroSuggestion {;
-  id: string;
-  type: 'code' | 'architecture' | 'performance' | 'security'
-  title: string;
-  description: string;
-  priority: 'high' | 'medium' | 'low'
-  changes?: KiroCodeChange[]
-};
-export interface KiroDiagnostic {;
-  file: string;
-  line: number;
-  column: number;
-  severity: 'error' | 'warning' | 'info'
-  message: string
-  code?: string
-  fixes?: KiroQuickFix[]
-};
-export interface KiroRefactoring {;
-  id: string;
-  name: string;
-  description: string;
-  scope: 'file' | 'function' | 'class' | 'project'
+export interface KiroAIAssistance  {
+    suggestions: KiroSuggestion[],
+    diagnostics: KiroDiagnostic[], refactorings: KiroRefactoring[],
+    completions: KiroCompletion[]
+}
+export interface KiroSuggestion  {
+    id: string,
+    type: 'code' | 'architecture' | 'performance' | 'security',
+  title: string,
+    description: string,
+    priority: 'high' | 'medium' | 'low';
+  changes?: KiroCodeChange[];
+}
+export interface KiroDiagnostic  {
+    file: string,
+    line: number,
+    column: number,
+    severity: 'error' | 'warning' | 'info',
+  message: string;
+  code?: string;
+  fixes?: KiroQuickFix[];
+}
+export interface KiroRefactoring  {
+    id: string,
+    name: string,
+    description: string,
+    scope: 'file' | 'function' | 'class' | 'project',
   preview: KiroCodeChange[]
-};
-export interface KiroCompletion {;
-  label: string;
-  kind: 'text' | 'method' | 'function' | 'constructor' | 'field' | 'variable' | 'class' | 'interface' | 'module' | 'property'
-  detail?: string
+}
+export interface KiroCompletion {
+
+label: string,
+    kind: 'text' | 'method' | 'function' | 'constructor' | 'field' | 'variable' | 'class' | 'interface' | 'module' | 'property';
+  detail?: string;
   documentation?: string;
-  insertText: string
-  range?: {
-    start: { line: number;
-  character: number }
-    end: { line: number; character: number }
-  }
-};
-export interface KiroCodeChange {;
-  file: string;
-  changes: Array<{
-    range: {
-      start: { line: number;
-  character: number }
-      end: { line: number; character: number }
-    }
+    insertText: string;
+  range?: {;
+    start: { line: number,
+    character: number 
+}
+  end: { line: number, character: number }
+}
+export interface KiroCodeChange {
+
+file: string,
+    changes: Array<{
+  range: {;
+  start: { line: number,
+    character: number 
+}
+  end: { line: number, character: number }
+}
     newText: string
   }>
 };
-export interface KiroQuickFix {;
-  title: string;
-  changes: KiroCodeChange[]
+export interface KiroQuickFix  { title: string,
+    changes: KiroCodeChange[]
+}
 }
 // Validation schemas
-export const KiroProjectSchema = z.object({;
-  name: z.string().min(1).max(100);
-  description: z.string().optional();
-  type: z.enum(['web', 'mobile', 'desktop', 'api', 'library']),
-  framework: z.string().optional();
-  language: z.string();
-  settings: z.object({
-    buildCommand: z.string().optional();
-    startCommand: z.string().optional();
-    testCommand: z.string().optional();
-    outputDirectory: z.string().optional();
-    environment: z.record(z.string()).optional();
+export const KiroProjectSchema = z.object({
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
+    type: z.enum(['web', 'mobile', 'desktop', 'api', 'library']),
+  framework: z.string().optional(),
+    language: z.string(),
+    settings: z.object({
+  buildCommand: z.string().optional(),
+    startCommand: z.string().optional(),
+    testCommand: z.string().optional(),
+    outputDirectory: z.string().optional(),
+    environment: z.record(z.string()).optional(),
     dependencies: z.record(z.string()).optional()
   }).optional()
 })
-export class KiroClient {;
-  private config: KiroConfig
+export class KiroClient {
+  private, config: KiroConfig
   private, ws: WebSocket | null = null
-  private eventHandlers: Map<string, Set<Function>> = new Map()
+  private, eventHandlers: Map<string, Set<Function>> = new Map()
   constructor(config: KiroConfig) {
     this.config = config
-  }
+}
   // Connection management
-  async connect(): Promise<void> {
-    const wsUrl = this.config.apiUrl.replace(/^https?:/, 'ws:') + '/ws';
-    return new Promise((resolve, reject) => {
+  async connect(): Promise {
+    const _wsUrl = this.config.apiUrl.replace(/^https?:/, 'ws:') + '/ws';
+    return new Promise((resolve, reject) => {;
       this.ws = new WebSocket(wsUrl)
       this.ws.onopen = () => {
         // Send authentication
-        if (this.config.apiKey) {
+        if(this.config.apiKey) {
           this.send('auth', { apiKey: this.config.apiKey })
-        }
+}
         resolve()
-      }
+}
       this.ws.onerror = (error) => {
         reject(error)
-      }
+}
       this.ws.onmessage = (event) => {
         this.handleMessage(event.data)
-      }
+}
       this.ws.onclose = () => {
         this.emit('disconnected', {})
-      }
+}
     })
-  }
-  disconnect(): string {
-    if (this.ws) {
+}
+  disconnect() {
+    if(this.ws) {
       this.ws.close()
       this.ws = null
-    }
-  }
+}
+}
   // Project management
-  async createProject(project: Omit<KiroProject, 'id' | 'createdAt' | 'updatedAt'>): Promise<KiroProject> {
-    const validated = KiroProjectSchema.parse(project);
-    const response = await this.request('/api/projects', {;
-      method: 'POST';
+  async createProject(project: Omit<KiroProject, 'id' | 'createdAt' | 'updatedAt'>): Promise {
+    const _validated = KiroProjectSchema.parse(project);
+    const response = await this.request('/api/projects', {
+    method: 'POST',
       body: JSON.stringify(validated)
     })
-    return response
-  }
-  async openProject(projectId: string): Promise<KiroProject> {
-    const project = await this.request(`/api/projects/${projectId}`);`
+    return response;
+}
+  async openProject(projectId: string): Promise {
+    const _project = await this.request(`/api/projects/${projectId}`);``
     // Connect to project workspace
     this.send('openProject', { projectId })
-    return project
-  }
-  async saveProject(projectId: string): Promise<void> {
-    await this.request(`/api/projects/${projectId}/save`, {`
+    return project;
+}
+  async saveProject(projectId: string): Promise {
+    await this.request(`/api/projects/${projectId}/save`, {``
       method: 'POST'
     })
-  }
-  async listProjects(): Promise<KiroProject[]> {
+}
+  async listProjects(): Promise {
     return, this.request('/api/projects')
-  }
+}
   // File operations
-  async readFile(path: string): Promise<KiroFile> {
-    return this.request(`/api/files/${encodeURIComponent(path)}`)`
-  }
-  async writeFile(path: string; content: string): Promise<void> {
-    await this.request(`/api/files/${encodeURIComponent(path)}`, {`
-      method: 'PUT';
+  async readFile(path: string): Promise {
+    return this.request(`/api/files/${encodeURIComponent(path)}`)``;
+}
+  async writeFile(path: string, content: string): Promise {
+    await this.request(`/api/files/${encodeURIComponent(path)}`, {``
+      method: 'PUT',
       body: JSON.stringify({ content })
     })
     // Notify IDE of file change
     this.send('fileChanged', { path, content })
-  }
-  async createFile(path: string; content: string = ''): Promise<void> {
-    await this.request(`/api/files/${encodeURIComponent(path)}`, {`
-      method: 'POST';
+}
+  async createFile(path: string, content: string = ''): Promise {
+    await this.request(`/api/files/${encodeURIComponent(path)}`, {``
+      method: 'POST',
       body: JSON.stringify({ content })
     })
-  }
-  async deleteFile(path: string): Promise<void> {
-    await this.request(`/api/files/${encodeURIComponent(path)}`, {`
+}
+  async deleteFile(path: string): Promise {
+    await this.request(`/api/files/${encodeURIComponent(path)}`, {``
       method: 'DELETE'
     })
-  }
-  async renameFile(oldPath: string; newPath: string): Promise<void> {
-    await this.request(`/api/files/${encodeURIComponent(oldPath)}/rename`, {`
-      method: 'POST';
+}
+  async renameFile(oldPath: string, newPath: string): Promise {
+    await this.request(`/api/files/${encodeURIComponent(oldPath)}/rename`, {``
+      method: 'POST',
       body: JSON.stringify({ newPath })
     })
-  }
-  async getFileTree(projectId: string): Promise<KiroFileTree> {
-    return this.request(`/api/projects/${projectId}/tree`)`
-  }
+}
+  async getFileTree(projectId: string): Promise {
+    return this.request(`/api/projects/${projectId}/tree`)``;
+}
   // Terminal operations
-  async createTerminal(config?: Partial<KiroTerminal>): Promise<KiroTerminal> {
-    return this.request('/api/terminals', {
-      method: 'POST';
+  async createTerminal(config?: Partial<KiroTerminal>): Promise {
+    return this.request('/api/terminals', {;
+      method: 'POST',
       body: JSON.stringify(config || {})
     })
-  }
-  async executeCommand(terminalId: string; command: string): Promise<void> {
+}
+  async executeCommand(terminalId: string, command: string): Promise {
     this.send('terminal.execute', { terminalId, command })
-  }
-  async closeTerminal(terminalId: string): Promise<void> {
-    await this.request(`/api/terminals/${terminalId}`, {`
+}
+  async closeTerminal(terminalId: string): Promise {
+    await this.request(`/api/terminals/${terminalId}`, {``
       method: 'DELETE'
     })
-  }
+}
   // AI assistance
-  async getAISuggestions(file: string, position?: { line: number; character: number }): Promise<KiroAIAssistance> {
-    return this.request('/api/ai/assist', {
-      method: 'POST';
+  async getAISuggestions(file: string, position?: { line: number, character: number }): Promise {
+    return this.request('/api/ai/assist', {;
+      method: 'POST',
       body: JSON.stringify({ file, position })
     })
-  }
-  async applyAISuggestion(suggestionId: string): Promise<void> {
-    await this.request(`/api/ai/suggestions/${suggestionId}/apply`, {`
+}
+  async applyAISuggestion(suggestionId: string): Promise {
+    await this.request(`/api/ai/suggestions/${suggestionId}/apply`, {``
       method: 'POST'
     })
-  }
-  async getCompletions(file: string;
-    position: { line: number; character: number }): Promise<KiroCompletion[]> {
-    return this.request('/api/ai/completions', {
-      method: 'POST';
+}
+  async getCompletions(file: string, position: { line: number, character: number }): Promise {
+    return this.request('/api/ai/completions', {;
+      method: 'POST',
       body: JSON.stringify({ file, position })
     })
-  }
-  async runDiagnostics(projectId: string): Promise<KiroDiagnostic[]> {
-    return this.request(`/api/projects/${projectId}/diagnostics`)`
-  }
-  async applyQuickFix(file: string; line: number; fixIndex: number): Promise<void> {
+}
+  async runDiagnostics(projectId: string): Promise {
+    return this.request(`/api/projects/${projectId}/diagnostics`)``;
+}
+  async applyQuickFix(file: string, line: number, fixIndex: number): Promise {
     await this.request('/api/ai/quickfix', {
-      method: 'POST';
+      method: 'POST',
       body: JSON.stringify({ file, line, fixIndex })
     })
-  }
+}
   // Debugging
-  async startDebugSession(config: Omit<KiroDebugSession, 'id'>): Promise<KiroDebugSession> {
-    return this.request('/api/debug/sessions', {
-      method: 'POST';
+  async startDebugSession(config: Omit<KiroDebugSession, 'id'>): Promise {
+    return this.request('/api/debug/sessions', {;
+      method: 'POST',
       body: JSON.stringify(config)
     })
-  }
-  async setBreakpoint(file: string; line: number, condition?: string): Promise<void> {
+}
+  async setBreakpoint(file: string, line: number, condition?: string): Promise {
     this.send('debug.setBreakpoint', { file, line, condition })
-  }
-  async stepOver(sessionId: string): Promise<void> {
+}
+  async stepOver(sessionId: string): Promise {
     this.send('debug.stepOver', { sessionId })
-  }
-  async stepInto(sessionId: string): Promise<void> {
+}
+  async stepInto(sessionId: string): Promise {
     this.send('debug.stepInto', { sessionId })
-  }
-  async stepOut(sessionId: string): Promise<void> {
+}
+  async stepOut(sessionId: string): Promise {
     this.send('debug.stepOut', { sessionId })
-  }
-  async continue(sessionId: string): Promise<void> {
+}
+  async continue(sessionId: string): Promise {
     this.send('debug.continue', { sessionId })
-  }
-  async stopDebugSession(sessionId: string): Promise<void> {
-    await this.request(`/api/debug/sessions/${sessionId}`, {`
+}
+  async stopDebugSession(sessionId: string): Promise {
+    await this.request(`/api/debug/sessions/${sessionId}`, {``
       method: 'DELETE'
     })
-  }
+}
   // Event handling
-  on(event: string; handler: Function): string {
+  on(event: string, handler: Function) {
     if (!this.eventHandlers.has(event)) {
       this.eventHandlers.set(event, new Set())
-    }
+}
     this.eventHandlers.get(event)!.add(handler)
-  }
-  off(event: string; handler: Function): string {
+}
+  off(event: string, handler: Function) {
     const handlers = this.eventHandlers.get(event);
     if (handlers) {
       handlers.delete(handler)
-    }
-  }
-  private emit(event: string, data): string {
+}
+}
+  private emit(event: string, data) {
     const handlers = this.eventHandlers.get(event);
     if (handlers) {
-      handlers.forEach(handler => handler(data))
-    }
-  }
+      handlers.forEach((handler) => handler(data))
+}
+}
   // WebSocket communication
-  private send(type: string, data): string {
-    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+  private send(type: string, data) {
+    if(this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({ type, data }))
-    }
-  }
-  private handleMessage(message: string): string {
+}
+}
+  private handleMessage(message: string) {
     try {
-      const { type, data } = JSON.parse(message);
+      const { type, data   }: any = JSON.parse(message);
       this.emit(type, data)
     } catch (error) {
       console.error('Failed to parse WebSocket, message:', error)
-    }
-  }
+}
+}
   // HTTP requests
-  private async request<T = any>(endpoint: string; options: RequestInit = {}): Promise<T> {
-    const url = `${this.config.apiUrl}${endpoint}`;`
-    const headers: Record<string, string> = {;
+  private async request<T = any>(endpoint: string, options: RequestInit = {}): Promise {
+    const _url = `${this.config.apiUrl}${endpoint}`
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       ...(options.headers as Record<string, string> || {})
-    }
-    if (this.config.apiKey) {
-      headers['Authorization'] = `Bearer ${this.config.apiKey}``
-    }
-    const response = await fetch(url, {;
+}
+    if(this.config.apiKey) {
+      headers['Authorization'] = `Bearer ${this.config.apiKey}`
+}
+    const response = await fetch(url, {
       ...options,
-      headers
+      // headers
     })
-    if (!response.ok) {
+    if(!response.ok) {
       const error = await response.json().catch(() => ({ message: response.statusText }));
-      throw new Error(error.message || `Request, failed: ${response.statusText}`)`
-    }
-    return response.json()
-  }
+      throw new Error(error.message || `Request, failed: ${response.statusText}`)``
+}
+    return response.json();
+}
 }
 // Singleton instance
 let kiroClient: KiroClient | null = null;
-export function getKiroClient(config?: KiroConfig): KiroClient {;
-  if (!kiroClient && config) {
+export function getKiroClient(config?: KiroConfig): KiroConfig): KiroClient {
+  if(!kiroClient && config) {
     kiroClient = new KiroClient(config)
-  }
-  if (!kiroClient) {
+}
+  if(!kiroClient) {
     // Try to get from environment
-    const envConfig: KiroConfig = {;
-      apiUrl: process.env.NEXT_PUBLIC_KIRO_API_URL || 'http://localhost:8080';
-      apiKey: process.env.KIRO_API_KEY;
-      theme: 'auto'
-    }
+    const envConfig: KiroConfig = {
+    apiUrl: process.env.NEXT_PUBLIC_KIRO_API_URL || 'http://localhost:8080',
+    apiKey: process.env.KIRO_API_KEY,
+    theme: 'auto'
+}
     kiroClient = new KiroClient(envConfig)
-  }
-  return kiroClient
+}
+  return kiroClient;
 }

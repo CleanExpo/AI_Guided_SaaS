@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  # Embedding Service using SentenceTransformers
+  embeddings:
+    build:
+      context: ./docker/semantic
+      dockerfile: Dockerfile.embeddings
+    container_name: ai-saas-embeddings
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=all-MiniLM-L6-v2
+      - BATCH_SIZE=32
+      - MAX_LENGTH=512
+    volumes:
+      - ./data/embeddings:/app/cache
+    networks:
+      - semantic-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Vector Database - Elasticsearch for semantic search
+  vectordb:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: ai-saas-vectordb
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.name=ai-saas-semantic
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - semantic-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=30s || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Semantic Search API Gateway
+  semantic-api:
+    build:
+      context: ./docker/semantic
+      dockerfile: Dockerfile.api
+    container_name: ai-saas-semantic-api
+    ports:
+      - "8080:8080"
+    environment:
+      - EMBEDDINGS_URL=http://embeddings:8000
+      - ELASTICSEARCH_URL=http://vectordb:9200
+      - INDEX_NAME=ai-saas-context
+      - CONTEXT7_SIZE=7  # Top 7 most relevant results
+      - CACHE_TTL=3600   # 1 hour cache
+    depends_on:
+      embeddings:
+        condition: service_healthy
+      vectordb:
+        condition: service_healthy
+    networks:
+      - semantic-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Serena MCP Server for semantic operations
+  serena-mcp:
+    build:
+      context: ./serena
+      dockerfile: Dockerfile
+    container_name: ai-saas-serena-mcp
+    ports:
+      - "9121:9121"
+    environment:
+      - SERENA_TRANSPORT=sse
+      - SERENA_PORT=9121
+      - SERENA_CONTEXT=agent
+      - SERENA_PROJECT=/workspaces/project
+      - SEMANTIC_API_URL=http://semantic-api:8080
+    volumes:
+      - .:/workspaces/project:ro
+      - ./serena/.serena:/root/.serena
+    networks:
+      - semantic-network
+    depends_on:
+      semantic-api:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9121/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  elasticsearch-data:
+    driver: local
+
+networks:
+  semantic-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16

@@ -5,21 +5,19 @@
  * Comprehensive environment variable and workflow management
  */
 
-const EnvironmentManager = require('../tools/environment-manager.js');
-const PlatformSync = require('../tools/platform-sync.js');
+const _EnvironmentManager = require('../tools/environment-manager.js');
+const _PlatformSync = require('../tools/platform-sync.js');
 const fs = require('fs');
 const path = require('path');
 
 // Load MCP configuration
-const configPath = path.join(__dirname, '..', 'config', 'mcp-config.json');
-const mcpConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+const _configPath = path.join(__dirname, '..', 'config', 'mcp-config.json');
+const _mcpConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 class EnvironmentManagerCLI {
     constructor() {
         this.envManager = new EnvironmentManager(mcpConfig);
-        this.platformSync = new PlatformSync(mcpConfig);
-    }
-
+        this.platformSync = new PlatformSync(mcpConfig);}
     async validateEnvironment(envFile = '.env.local') {
         console.log(`🔍 Validating environment: ${envFile}`);
         console.log('=' .repeat(50));
@@ -34,57 +32,40 @@ class EnvironmentManagerCLI {
                 
                 if (validation.missing.length > 0) {
                     console.log('\n📋 Missing required variables:');
-                    validation.missing.forEach(key => console.log(`  - ${key}`));
-                }
-                
+                    validation.missing.forEach(key => console.log(`  - ${key}`));}
                 if (validation.invalid.length > 0) {
                     console.log('\n⚠️  Invalid variables:');
                     validation.invalid.forEach(item => {
                         console.log(`  - ${item.key}: ${item.errors.join(', ')}`);
-                    });
-                }
-            }
-            
+                    });}}
             if (validation.warnings.length > 0) {
                 console.log('\n⚠️  Warnings:');
-                validation.warnings.forEach(warning => console.log(`  - ${warning}`));
-            }
-            
+                validation.warnings.forEach(warning => console.log(`  - ${warning}`));}
             if (validation.suggestions.length > 0) {
                 console.log('\n💡 Suggestions:');
-                validation.suggestions.forEach(suggestion => console.log(`  - ${suggestion}`));
-            }
-            
+                validation.suggestions.forEach(suggestion => console.log(`  - ${suggestion}`));}
             return validation;
         } catch (error) {
             console.error('❌ Validation failed:', error.message);
-            throw error;
-        }
-    }
-
+            throw error;}}
     async generateTemplate(environment = 'development') {
         console.log(`📝 Generating environment template for: ${environment}`);
         console.log('=' .repeat(50));
 
         try {
             const template = await this.envManager.generateEnvironmentTemplate(environment);
-            const outputFile = `.env.${environment}.template`;
+            const _outputFile = `.env.${environment}.template`;
             
             fs.writeFileSync(outputFile, template);
             console.log(`✅ Template generated: ${outputFile}`);
             console.log('\n📋 Template preview:');
             console.log(template.split('\n').slice(0, 20).join('\n'));
             if (template.split('\n').length > 20) {
-                console.log('... (truncated)');
-            }
-            
+                console.log('...(truncated)');}
             return outputFile;
         } catch (error) {
             console.error('❌ Template generation failed:', error.message);
-            throw error;
-        }
-    }
-
+            throw error;}}
     async syncPlatforms() {
         console.log('🔄 Synchronizing platforms...');
         console.log('=' .repeat(50));
@@ -99,22 +80,16 @@ class EnvironmentManagerCLI {
             
             console.log('\n📋 Platform Results:');
             for (const [platform, result] of Object.entries(results.platforms)) {
-                const status = result.status === 'success' ? '✅' : 
+                const _status = result.status === 'success' ? '✅' : 
                               result.status === 'error' ? '❌' : '⏭️';
                 console.log(`  ${status} ${platform}: ${result.message || result.reason || result.error}`);
                 
                 if (result.details) {
-                    console.log(`    Details: ${JSON.stringify(result.details, null, 2)}`);
-                }
-            }
-            
+                    console.log(`    Details: ${JSON.stringify(result.details, null, 2)}`);}}
             return results;
         } catch (error) {
             console.error('❌ Platform sync failed:', error.message);
-            throw error;
-        }
-    }
-
+            throw error;}}
     async generateReport() {
         console.log('📊 Generating comprehensive environment report...');
         console.log('=' .repeat(50));
@@ -134,45 +109,34 @@ class EnvironmentManagerCLI {
             
             console.log('\n🌐 Platform Status:');
             for (const [platform, config] of Object.entries(report.platforms)) {
-                const status = config.valid ? '✅' : '❌';
-                const enabled = config.enabled ? 'Enabled' : 'Disabled';
+                const _status = config.valid ? '✅' : '❌';
+                const _enabled = config.enabled ? 'Enabled' : 'Disabled';
                 console.log(`  ${status} ${platform}: ${enabled}`);
                 
                 if (config.errors.length > 0) {
-                    console.log(`    Errors: ${config.errors.join(', ')}`);
-                }
+                    console.log(`    Errors: ${config.errors.join(', ')}`);}
                 if (config.warnings.length > 0) {
-                    console.log(`    Warnings: ${config.warnings.join(', ')}`);
-                }
-            }
-            
+                    console.log(`    Warnings: ${config.warnings.join(', ')}`);}}
             if (report.recommendations.length > 0) {
                 console.log('\n💡 Recommendations:');
                 report.recommendations.forEach(rec => {
-                    const priority = rec.priority === 'high' ? '🔴' : 
+                    const _priority = rec.priority === 'high' ? '🔴' : 
                                    rec.priority === 'medium' ? '🟡' : '🟢';
                     console.log(`  ${priority} ${rec.message}`);
                     console.log(`    Action: ${rec.action}`);
-                });
-            }
-            
+                });}
             if (report.nextSteps.length > 0) {
                 console.log('\n📋 Next Steps:');
-                report.nextSteps.forEach(step => console.log(`  - ${step}`));
-            }
-            
+                report.nextSteps.forEach(step => console.log(`  - ${step}`));}
             // Save detailed report
-            const reportFile = `environment-report-${new Date().toISOString().split('T')[0]}.json`;
+            const _reportFile = `environment-report-${new Date().toISOString().split('T')[0]}.json`;
             fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
             console.log(`\n💾 Detailed report saved: ${reportFile}`);
             
             return report;
         } catch (error) {
             console.error('❌ Report generation failed:', error.message);
-            throw error;
-        }
-    }
-
+            throw error;}}
     async rotateCredentials(types = ['secrets']) {
         console.log(`🔄 Rotating credentials: ${types.join(', ')}`);
         console.log('=' .repeat(50));
@@ -189,25 +153,18 @@ class EnvironmentManagerCLI {
                 results.rotated.forEach(item => {
                     console.log(`  ✅ ${item.key}: ${item.oldValue} → ${item.newValue}`);
                     console.log(`    Timestamp: ${item.timestamp}`);
-                });
-            }
-            
+                });}
             if (results.failed.length > 0) {
                 console.log('\n❌ Failed Rotations:');
                 results.failed.forEach(item => {
                     console.log(`  ❌ ${item.key}: ${item.error}`);
-                });
-            }
-            
+                });}
             console.log('\n⚠️  Important: Update these credentials in your platform dashboards!');
             
             return results;
         } catch (error) {
             console.error('❌ Credential rotation failed:', error.message);
-            throw error;
-        }
-    }
-
+            throw error;}}
     async setupWorkflow() {
         console.log('🚀 Running complete environment setup workflow...');
         console.log('=' .repeat(60));
@@ -221,9 +178,7 @@ class EnvironmentManagerCLI {
             if (!validation.valid) {
                 console.log('\n📝 Step 2: Generating environment templates...');
                 await this.generateTemplate('development');
-                await this.generateTemplate('production');
-            }
-            
+                await this.generateTemplate('production');}
             // Step 3: Platform sync
             console.log('\n🔄 Step 3: Synchronizing platforms...');
             await this.syncPlatforms();
@@ -242,10 +197,7 @@ class EnvironmentManagerCLI {
             };
         } catch (error) {
             console.error('❌ Workflow failed:', error.message);
-            throw error;
-        }
-    }
-
+            throw error;}}
     printHelp() {
         console.log(`
 🎯 AI Guided SaaS Environment Manager CLI
@@ -275,19 +227,16 @@ Environment Files:
   .env.production.template      Production template
 
 For more information, visit: https://github.com/CleanExpo/AI_Guided_SaaS
-        `);
-    }
-}
-
+        `);}}
 // CLI Command Handler
 async function handleCommand(args) {
     const cli = new EnvironmentManagerCLI();
-    const command = args[0];
+    const _command = args[0];
 
     try {
         switch (command) {
             case 'validate':
-                const envFile = args[1] || '.env.local';
+                const _envFile = args[1] || '.env.local';
                 await cli.validateEnvironment(envFile);
                 break;
 
@@ -322,15 +271,10 @@ async function handleCommand(args) {
             default:
                 console.error(`❌ Unknown command: ${command}`);
                 cli.printHelp();
-                process.exit(1);
-        }
-
+                process.exit(1);}
     } catch (error) {
         console.error(`❌ Command failed: ${error.message}`);
-        process.exit(1);
-    }
-}
-
+        process.exit(1);}}
 // Main execution
 if (require.main === module) {
     const args = process.argv.slice(2);
@@ -338,10 +282,6 @@ if (require.main === module) {
     if (args.length === 0) {
         console.log('🎯 AI Guided SaaS Environment Manager');
         console.log('Use "help" command for usage information');
-        process.exit(0);
-    }
-
-    handleCommand(args);
-}
-
+        process.exit(0);}
+    handleCommand(args);}
 module.exports = EnvironmentManagerCLI;

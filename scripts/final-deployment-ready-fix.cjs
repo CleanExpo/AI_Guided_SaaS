@@ -17,8 +17,7 @@ const filesToFix = [
     fixes: [
       {
         search: /import { BarChart3, \/\* LogOut \*\/, \/\* RefreshCw \*\/, ArrowLeft, Download, \/\* Calendar \*\/, \/\* Filter \*\/ } from 'lucide-react';/,
-        replace: "import { BarChart3, ArrowLeft, Download } from 'lucide-react';"
-      }
+        replace: "import { BarChart3, ArrowLeft, Download } from 'lucide-react';"}
     ]
   },
   {
@@ -30,8 +29,7 @@ const filesToFix = [
       },
       {
         search: /import { \/\* Activity \*\/, \/\* Server \*\/, \/\* Zap \*\/, Settings, RefreshCw, CheckCircle, \/\* AlertCircle \*\/, XCircle } from 'lucide-react';/,
-        replace: "import { Settings, RefreshCw, CheckCircle, XCircle } from 'lucide-react';"
-      }
+        replace: "import { Settings, RefreshCw, CheckCircle, XCircle } from 'lucide-react';"}
     ]
   },
   {
@@ -39,8 +37,7 @@ const filesToFix = [
     fixes: [
       {
         search: /import { .*\/\* RefreshCw \*\/.*} from 'lucide-react';/,
-        replace: (match) => match.replace(/, \/\* RefreshCw \*\//, '').replace(/\/\* RefreshCw \*\/, /, '').replace(/\/\* RefreshCw \*\//, '')
-      }
+        replace: (match) => match.replace(/, \/\* RefreshCw \*\//, '').replace(/\/\* RefreshCw \*\/, /, '').replace(/\/\* RefreshCw \*\//, '')}
     ]
   },
   {
@@ -52,10 +49,8 @@ const filesToFix = [
       },
       {
         search: /\/\* useState \*\//g,
-        replace: ""
-      }
-    ]
-  }
+        replace: ""}
+    ]}
 ];
 
 let totalFixes = 0;
@@ -70,8 +65,7 @@ filesToFix.forEach(({ file, fixes }) => {
         if (typeof replace === 'function') {
           content = content.replace(search, replace);
         } else {
-          content = content.replace(search, replace);
-        }
+          content = content.replace(search, replace);}
       });
       
       // Additional cleanup: remove empty import lines
@@ -81,12 +75,9 @@ filesToFix.forEach(({ file, fixes }) => {
       if (content !== originalContent) {
         fs.writeFileSync(file, content);
         console.log(`✅ Fixed imports in: ${file}`);
-        totalFixes++;
-      }
+        totalFixes++;}
     } catch (error) {
-      console.log(`❌ Failed to fix: ${file} - ${error.message}`);
-    }
-  }
+      console.log(`❌ Failed to fix: ${file} - ${error.message}`);}}
 });
 
 // Clean up any remaining files with import issues
@@ -109,21 +100,19 @@ additionalFiles.forEach(file => {
       
       // Remove unused variable assignments with underscore prefix
       content = content.replace(/const\s+(\w+)\s*=\s*[^;]+;\s*$/gm, (match, varName) => {
-        const regex = new RegExp(`\\b${varName}\\b`, 'g');
+        const _regex = new RegExp(`\\b${varName}\\b`, 'g');
         const matches = content.match(regex);
         if (matches && matches.length <= 1) {
-          return `const _${varName} = ${match.split('=')[1]}`;
-        }
+          return `const _${varName} = ${match.split('=')[1]}`;}
         return match;
       });
       
       // Clean up unused imports
       const unusedImports = ['getSession', 'Mail', 'Key', 'Database', 'Webhook', 'Badge', 'Input'];
       unusedImports.forEach(importName => {
-        const importRegex = new RegExp(`\\b${importName}\\b(?=\\s*[,}])`, 'g');
+        const _importRegex = new RegExp(`\\b${importName}\\b(?=\\s*[}])`, 'g');
         if (content.includes(importName) && !content.includes(`<${importName}`) && !content.includes(`${importName}(`)) {
-          content = content.replace(importRegex, '');
-        }
+          content = content.replace(importRegex, '');}
       });
       
       // Clean up empty import braces
@@ -135,12 +124,9 @@ additionalFiles.forEach(file => {
       if (content !== originalContent) {
         fs.writeFileSync(file, content);
         console.log(`✅ Cleaned up: ${file}`);
-        totalFixes++;
-      }
+        totalFixes++;}
     } catch (error) {
-      console.log(`❌ Failed to clean: ${file} - ${error.message}`);
-    }
-  }
+      console.log(`❌ Failed to clean: ${file} - ${error.message}`);}}
 });
 
 // Final validation - check for common syntax issues
@@ -159,8 +145,7 @@ const syntaxIssues = [
   },
   {
     pattern: /,\s*}/g,
-    description: 'Import braces ending with comma'
-  }
+    description: 'Import braces ending with comma'}
 ];
 
 let syntaxIssuesFound = 0;
@@ -169,7 +154,7 @@ function scanForSyntaxIssues(dir) {
   const files = fs.readdirSync(dir, { withFileTypes: true });
   
   files.forEach(file => {
-    const fullPath = path.join(dir, file.name);
+    const _fullPath = path.join(dir, file.name);
     
     if (file.isDirectory() && !file.name.startsWith('.') && file.name !== 'node_modules') {
       scanForSyntaxIssues(fullPath);
@@ -183,28 +168,20 @@ function scanForSyntaxIssues(dir) {
             syntaxIssuesFound++;
             
             // Attempt to fix
-            const fixedContent = content.replace(pattern, (match) => {
+            const _fixedContent = content.replace(pattern, (match) => {
               if (match.includes('/*') && match.includes(',')) {
-                return match.replace(/\/\*[^*]*\*\/\s*,?/g, '').replace(/,\s*$/, '');
-              }
-              if (match === '{ ,') return '{';
-              if (match === ', }') return '}';
+                return match.replace(/\/\*[^*]*\*\/\s*,?/g, '').replace(/,\s*$/, '');}
+              if (match === '{') return '{';
+              if (match === ' }') return '}';
               return '';
             });
             
             if (fixedContent !== content) {
               fs.writeFileSync(fullPath, fixedContent);
-              console.log(`✅ Auto-fixed syntax in: ${fullPath}`);
-            }
-          }
+              console.log(`✅ Auto-fixed syntax in: ${fullPath}`);}}
         });
-      } catch (error) {
-        // Ignore read errors
-      }
-    }
-  });
-}
-
+      } catch (error) { // Ignore read errors
+       });}
 console.log('\n🔍 Scanning for remaining syntax issues...');
 scanForSyntaxIssues('src');
 
@@ -216,9 +193,7 @@ if (totalFixes > 0 || syntaxIssuesFound > 0) {
   console.log('\n🎯 All critical build issues resolved!');
   console.log('✅ Project is now deployment ready');
 } else {
-  console.log('\n✅ No critical issues found - project already deployment ready');
-}
-
+  console.log('\n✅ No critical issues found - project already deployment ready');}
 console.log('\n🚀 NEXT STEPS:');
 console.log('1. Run: npm run build');
 console.log('2. If successful, deploy: vercel --prod');

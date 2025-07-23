@@ -1,6 +1,5 @@
 // Base Agent Classes
-export { Agent, AgentContext } from './base/Agent';
-import { AgentLoader } from './AgentLoader';
+export { Agent, AgentContext } from './base/Agent';import { AgentLoader } from './AgentLoader';
 import { AgentRegistry } from './AgentRegistry';
 import { AgentCoordinator } from './AgentCoordinator';
 import { AgentMonitor } from './AgentMonitor';
@@ -24,9 +23,9 @@ export {  ;
   discoverAllAgents,
   loadRequiredAgents,
   loadExecutionChain,
-  getAgentStatus
+  // getAgentStatus
  } from '$2';
-export {;
+export {
   AgentRegistry,
   type AgentRegistration,;
   type AgentMetrics,;
@@ -34,9 +33,9 @@ export {;
   type RegistryEvent,;
   initializeAgentRegistry,
   findBestAgent,
-  getRegistryStatus
+  // getRegistryStatus
  } from '$2';
-export {;
+export {
   AgentCoordinator,
   type CoordinationTask,;
   type CoordinationPlan,;
@@ -44,9 +43,9 @@ export {;
   type CoordinationResult,;
   createProjectCoordination,
   executeProjectCoordination,
-  getCoordinationStatus
+  // getCoordinationStatus
  } from '$2';
-export {;
+export {
   AgentMonitor,
   type HealthCheck,;
   type MonitoringAlert,;
@@ -54,9 +53,9 @@ export {;
   type MonitoringDashboard,;
   startAgentMonitoring,
   getMonitoringDashboard,
-  getAgentHealth
+  // getAgentHealth
  } from '$2';
-export {;
+export {
   AgentCommunication,
   type AgentMessage as CommunicationMessage,;
   type CommunicationChannel,;
@@ -65,13 +64,13 @@ export {;
   type CommunicationStats,;
   initializeAgentCommunication,
   sendAgentMessage,
-  performAgentHandoff
+  // performAgentHandoff
  } from '$2';
 // Main Agent System Integration
-export class AgentSystem {;
-  private static instance: AgentSystem
+export class AgentSystem {
+  private static, instance: AgentSystem
   private, initialized: boolean = false
-  private loader: AgentLoader
+  private, loader: AgentLoader
   private, registry: AgentRegistry
   private, coordinator: AgentCoordinator
   private, monitor: AgentMonitor
@@ -82,142 +81,164 @@ export class AgentSystem {;
     this.coordinator = AgentCoordinator.getInstance()
     this.monitor = AgentMonitor.getInstance()
     this.communication = AgentCommunication.getInstance()
-  }
+}
   static getInstance(): AgentSystem {
-    if (!AgentSystem.instance) {
+    if(!AgentSystem.instance) {
       AgentSystem.instance = new AgentSystem()
-    }
-    return AgentSystem.instance
-  }
-  async initialize(): Promise<boolean> {
-    if (this.initialized) { return: true }
+}
+    return AgentSystem.instance;
+}
+  async initialize(): Promise {
+    if(this.initialized) { return: true }
     try {
       const discovery = await this.loader.discoverAgents();
-      if (discovery.total_agents === 0) {
+      if(discovery.total_agents === 0) {
         throw new Error('No agents discovered - check agents directory')
-      }
-      const registeredCount = await this.registry.autoRegisterAgents();
-      if (registeredCount === 0) {
+}
+      const _registeredCount = await this.registry.autoRegisterAgents();
+      if(registeredCount === 0) {
         throw new Error('No agents registered')
-      }
+}
       this.monitor.startMonitoring()
       await new Promise(resolve => setTimeout(resolve, 1000))
       this.initialized = true
-      return true
+      return true;
     } catch (error) {
       console.error('❌ Agent system initialization, failed:', error)
-      return false
-    }
-  }
-  async getAgentsForNextStage(currentStage: string, projectType?: string): Promise<any> {
-    if (!this.initialized) {
+      return false;
+}
+}
+  async getAgentsForNextStage(currentStage: string, projectType?: string): Promise {
+    if(!this.initialized) {
       throw new Error('Agent system not initialized')
-    }
+}
     const requiredAgents = await this.loader.getRequiredAgentsForStage(currentStage, projectType);
-    const healthyAgents = requiredAgents.filter(agent => {;
-      const registration = this.registry.getAgentDetails(agent.agent_id);
-      return registration?.health_status === 'healthy'
+    const healthyAgents = requiredAgents.filter((agent) => {
+      const _registration = this.registry.getAgentDetails(agent.agent_id);
+      return registration?.health_status === 'healthy';
     })
-    return {
-      stage: currentStage; project_type: projectType;
-      required_agents: requiredAgents.length;
-      healthy_agents: healthyAgents.length;
-      agents: healthyAgents.map(agent => ({
-        id: agent.agent_id;
-        name: agent.name;
-        role: agent.role;
-        priority: agent.priority;
-        capabilities: agent.capabilities;
-        status: agent.status
+    return {;
+      stage: currentStage, project_type: projectType,
+    required_agents: requiredAgents.length,
+    healthy_agents: healthyAgents.length,
+    agents: healthyAgents.map((agent) => ({
+  id: agent.agent_id,
+    name: agent.name,
+    role: agent.role,
+    priority: agent.priority,
+    capabilities: agent.capabilities,
+    status: agent.status
       })),
       readiness: healthyAgents.length >= requiredAgents.length * 0.8
-    }
-  }
-  getSystemStatus(): any {
-    if (!this.initialized) {
-      return { initialized: false; error: 'System not initialized' }
-    }
+}
+}
+  getSystemStatus() {
+    if(!this.initialized) {
+      return { initialized: false, error: 'System not initialized' };
+}
     const registryStatus = this.registry.getRegistryStatus();
     const dashboard = this.monitor.getMonitoringDashboard();
     const commStats = this.communication.getCommunicationStats();
-    return {
-      initialized: this.initialized;
-      timestamp: new Date().toISOString();
+    return {;
+      initialized: this.initialized,
+    timestamp: new Date().toISOString(),
     agents: {
-        total: registryStatus.total_agents;
-        healthy: dashboard.overview.healthy_agents;
-        warning: dashboard.overview.warning_agents;
-        critical: dashboard.overview.critical_agents;
-        offline: dashboard.overview.offline_agents
+  total: registryStatus.total_agents,
+    healthy: dashboard.overview.healthy_agents,
+    warning: dashboard.overview.warning_agents,
+    critical: dashboard.overview.critical_agents,
+    offline: dashboard.overview.offline_agents
       },
     system_health: {
-        overall_score: dashboard.overview.system_health_score;
-        status: dashboard.overview.system_health_score >= 90 ? 'excellent' :
+        overall_score: dashboard.overview.system_health_score,
+    status: dashboard.overview.system_health_score >= 90 ? 'excellent' :
                 dashboard.overview.system_health_score >= 75 ? 'good' :
                 dashboard.overview.system_health_score >= 50 ? 'fair' : 'poor'
       },
     communication: {
-        total_messages: commStats.total_messages;
-        success_rate: commStats.success_rate;
-        active_channels: commStats.active_channels
-      }
-    }
-  }
-  async performHealthCheck(): Promise<{
-    healthy: number;
-    warnings: string[];
-    errors: string[]
-  }> {
-    const health = await this.monitor.performHealthCheck();
+        total_messages: commStats.total_messages,
+    success_rate: commStats.success_rate,
+    active_channels: commStats.active_channels
+}
+  async performHealthCheck(): Promise {
+    const _health = await this.monitor.performHealthCheck();
     const warnings: string[] = [];
     const errors: string[] = [];
     // Collect warnings and errors from health checks
     for (const [agentId, check] of Object.entries(health)) {
-      if (check.status === 'warning') {
-        warnings.push(`${agentId}: ${check.details?.message || 'Warning'}`);`
+      if(check.status === 'warning') {
+        warnings.push(`${agentId}: ${check.details?.message || 'Warning'}`);``
       } else if (check.status === 'critical') {
-        errors.push(`${agentId}: ${check.details?.message || 'Critical error'}`);`
-      }
-    }
-    const healthy = Object.values(health).filter(h => h.status === 'healthy').length;
+        errors.push(`${agentId}: ${check.details?.message || 'Critical, error'}`);``
+}
+}
+    const _healthy = Object.values(health).filter((h) => h.status === 'healthy').length;
     return { healthy, warnings, errors };
-  }
-  shutdown(): string {
+}
+  shutdown() {
     this.monitor.stopMonitoring()
     this.communication.shutdown()
     this.registry.shutdown()
     this.initialized = false
-  }
+}
 }
 // Convenience function for easy system initialization
-export async function initializeAgentSystem(): Promise<AgentSystem> {;
+export async function initializeAgentSystem(): Promise {
   const system = AgentSystem.getInstance();
   await system.initialize()
-  return system
+  return system;
 }
 // Export the main system instance
-export const agentSystem = AgentSystem.getInstance();
+export const _agentSystem = AgentSystem.getInstance();
 // Agent Factory
-export function createAgent(type: string): string {;
+export function createAgent(type: string): string) { ;
   switch (type) {
     // BMAD Agents
     case 'analyst':
-      return new (require('./bmad/AnalystAgent').AnalystAgent)()
+    return new (require('./bmad/AnalystAgent').AnalystAgent)();
+    break;
+
+    break;
+break;
+
+
     case 'project-manager':
-      return new (require('./bmad/ProjectManagerAgent').ProjectManagerAgent)()
+    return new (require('./bmad/ProjectManagerAgent').ProjectManagerAgent)();
+    break;
+
     case 'architect':
-      return new (require('./bmad/ArchitectAgent').ArchitectAgent)()
+return new (require('./bmad/ArchitectAgent').ArchitectAgent)();
+    break;
+
     // Archon Agents
+break;
+
     case 'prompt-refiner':
-      return new (require('./archon/PromptRefinerAgent').PromptRefinerAgent)()
+    return new (require('./archon/PromptRefinerAgent').PromptRefinerAgent)();
+    break;
+
+    break;
+
     case 'tools-refiner':
-      return new (require('./archon/ToolsRefinerAgent').ToolsRefinerAgent)()
+    return new (require('./archon/ToolsRefinerAgent').ToolsRefinerAgent)();
+    break;
+
+break;
+
     case 'agent-refiner':
-      return new (require('./archon/AgentRefinerAgent').AgentRefinerAgent)()
+    return new (require('./archon/AgentRefinerAgent').AgentRefinerAgent)();
+    break;
+
+    break;
+
     case 'advisor':
-      return new (require('./archon/AdvisorAgent').AdvisorAgent)()
-    default: throw new Error(`Unknown agent; type: ${type}`)`
-  }
+    return new (require('./archon/AdvisorAgent').AdvisorAgent)();
+    break;
+
+break;
+}
+    default: throw new Error(`Unknown agent, type: ${type}`)``
+}
 }
 // Export all types
 export * from './bmad';

@@ -1,6 +1,5 @@
 // Types
-export * from './types';
-// Adapters
+export * from './types';// Adapters
 export { SupabaseAdapter } from './adapters/supabase';
 export { StrapiAdapter } from './adapters/strapi';
 export { NocoDBAdapter } from './adapters/nocodb';

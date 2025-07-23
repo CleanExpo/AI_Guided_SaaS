@@ -3,7 +3,7 @@ const fs = require('fs');
 
 console.log('🔧 ULTIMATE FINAL: Last 5 API Route Syntax Errors\n');
 
-const ultimateFinalFixes = {
+const _ultimateFinalFixes = {
   // Fix tutorials progress API route
   'src/app/api/tutorials/progress/route.ts': `import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -17,13 +17,13 @@ const progressSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     
     // Validate input
-    const validatedData = progressSchema.parse(body);
+    const _validatedData = progressSchema.parse(body);
     
     // Simulate progress tracking
-    const progress = {
+    const _progress = {
       id: 'progress_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,
       timestamp: new Date().toISOString(),
@@ -32,34 +32,23 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      progress
+      // progress
     });
     
   } catch (error) {
     console.error('Tutorial progress error:', error);
     
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid input', details: error.errors },
-        { status: 400 }
-      );
-    }
-    
-    return NextResponse.json(
-      { error: 'Failed to track progress' },
-      { status: 500 }
-    );
-  }
-}
-
+      return NextResponse.json({  error: 'Invalid input', details: error.errors ,  status: 400  });}
+    return NextResponse.json({  error: 'Failed to track progress' ,  status: 500  });}}
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const tutorialId = url.searchParams.get('tutorialId');
-    const userId = url.searchParams.get('userId');
+    const _tutorialId = url.searchParams.get('tutorialId');
+    const _userId = url.searchParams.get('userId');
     
     // Simulate getting progress
-    const progress = {
+    const _progress = {
       tutorialId,
       userId,
       completedSteps: ['step1', 'step2'],
@@ -70,15 +59,11 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      progress
+      // progress
     });
   } catch (error) {
     console.error('Get progress error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch progress' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to fetch progress' ,  status: 500  });}
 }`,
 
   // Fix validated chat API route
@@ -86,16 +71,14 @@ export async function GET(request: NextRequest) {
 import { z } from 'zod';
 
 function validateOrThrow<T>(schema: z.ZodType<T>, data: unknown): T {
-  return schema.parse(data);
-}
-
-const chatRequestSchema = z.object({
+  return schema.parse(data);}
+const _chatRequestSchema = z.object({
   message: z.string().min(1, 'Message is required'),
   conversationId: z.string().optional(),
   context: z.record(z.any()).optional()
 });
 
-const chatResponseSchema = z.object({
+const _chatResponseSchema = z.object({
   id: z.string(),
   message: z.string(),
   conversationId: z.string(),
@@ -104,7 +87,7 @@ const chatResponseSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     
     // Validate input using type-safe validation
     const validatedRequest = validateOrThrow(chatRequestSchema, body);
@@ -118,7 +101,7 @@ export async function POST(request: NextRequest) {
     };
     
     // Validate output using type-safe validation
-    const validatedResponse = validateOrThrow(chatResponseSchema, response);
+    const _validatedResponse = validateOrThrow(chatResponseSchema, response);
     
     return NextResponse.json({
       success: true,
@@ -129,17 +112,8 @@ export async function POST(request: NextRequest) {
     console.error('Validated chat error:', error);
     
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Validation failed', details: error.errors },
-        { status: 400 }
-      );
-    }
-    
-    return NextResponse.json(
-      { error: 'Chat failed' },
-      { status: 500 }
-    );
-  }
+      return NextResponse.json({  error: 'Validation failed', details: error.errors ,  status: 400  });}
+    return NextResponse.json({  error: 'Chat failed' ,  status: 500  });}
 }`,
 
   // Fix visual analyze API route
@@ -147,19 +121,14 @@ export async function POST(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { imageUrl, analysisType = 'general' } = body;
     
     if (!imageUrl) {
-      return NextResponse.json(
-        { error: 'Image URL is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Image URL is required' ,  status: 400  });}
     // Visual analysis logic would go here
     // This is a placeholder for actual image analysis
-    const analysis = {
+    const _analysis = {
       id: \`analysis_\$\{Date.now()\}\`,
       type: analysisType,
       timestamp: new Date().toISOString(),
@@ -175,32 +144,21 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      analysis
+      // analysis
     });
     
   } catch (error) {
     console.error('Visual analysis error:', error);
-    return NextResponse.json(
-      { error: 'Analysis failed' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Analysis failed' ,  status: 500  });}}
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const analysisId = url.searchParams.get('analysisId');
+    const _analysisId = url.searchParams.get('analysisId');
     
     if (!analysisId) {
-      return NextResponse.json(
-        { error: 'Analysis ID is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Analysis ID is required' ,  status: 400  });}
     // Simulate getting analysis results
-    const analysis = {
+    const _analysis = {
       id: analysisId,
       status: 'completed',
       results: {
@@ -212,15 +170,11 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      analysis
+      // analysis
     });
   } catch (error) {
     console.error('Get analysis error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get analysis' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to get analysis' ,  status: 500  });}
 }`,
 
   // Fix visual generate API route
@@ -228,7 +182,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { 
       prompt, 
       style = 'realistic', 
@@ -236,15 +190,10 @@ export async function POST(request: NextRequest) {
     } = body;
     
     if (!prompt) {
-      return NextResponse.json(
-        { error: 'Prompt is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Prompt is required' ,  status: 400  });}
     // Visual generation logic would go here
     // This is a placeholder for actual image generation
-    const generation = {
+    const _generation = {
       id: \`gen_\$\{Date.now()\}\`,
       prompt,
       style,
@@ -257,32 +206,21 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      generation
+      // generation
     });
     
   } catch (error) {
     console.error('Visual generation error:', error);
-    return NextResponse.json(
-      { error: 'Generation failed' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Generation failed' ,  status: 500  });}}
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const generationId = url.searchParams.get('generationId');
+    const _generationId = url.searchParams.get('generationId');
     
     if (!generationId) {
-      return NextResponse.json(
-        { error: 'Generation ID is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Generation ID is required' ,  status: 400  });}
     // Simulate getting generation status
-    const generation = {
+    const _generation = {
       id: generationId,
       status: 'completed',
       imageUrl: \`https://example.com/generated/\$\{generationId\}.png\`,
@@ -291,15 +229,11 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      generation
+      // generation
     });
   } catch (error) {
     console.error('Get generation error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get generation' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to get generation' ,  status: 500  });}
 }`,
 
   // Fix visual upload API route
@@ -311,33 +245,18 @@ export async function POST(request: NextRequest) {
     const file = formData.get('file') as File;
     
     if (!file) {
-      return NextResponse.json(
-        { error: 'No file provided' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'No file provided' ,  status: 400  });}
     // Validate file type
     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json(
-        { error: 'Invalid file type. Only JPEG, PNG, GIF, and WebP are allowed.' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Invalid file type. Only JPEG, PNG, GIF, and WebP are allowed.' ,  status: 400  });}
     // Validate file size (10MB limit)
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    const _maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
-      return NextResponse.json(
-        { error: 'File size too large. Maximum 10MB allowed.' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'File size too large. Maximum 10MB allowed.' ,  status: 400  });}
     // File upload logic would go here
     // This is a placeholder for actual file upload to storage
-    const upload = {
+    const _upload = {
       id: \`upload_\$\{Date.now()\}\`,
       filename: file.name,
       size: file.size,
@@ -349,32 +268,21 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      upload
+      // upload
     });
     
   } catch (error) {
     console.error('Upload error:', error);
-    return NextResponse.json(
-      { error: 'Upload failed' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Upload failed' ,  status: 500  });}}
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const uploadId = url.searchParams.get('uploadId');
+    const _uploadId = url.searchParams.get('uploadId');
     
     if (!uploadId) {
-      return NextResponse.json(
-        { error: 'Upload ID is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Upload ID is required' ,  status: 400  });}
     // Simulate getting upload status
-    const upload = {
+    const _upload = {
       id: uploadId,
       status: 'completed',
       url: \`https://example.com/uploads/\$\{uploadId}.png\`,
@@ -383,15 +291,11 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      upload
+      // upload
     });
   } catch (error) {
     console.error('Get upload error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get upload' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to get upload' ,  status: 500  });}
 }`
 };
 
@@ -399,17 +303,14 @@ let filesFixed = 0;
 
 Object.entries(ultimateFinalFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ ULTIMATE FINAL FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Ultimate Final Fix Summary:`);

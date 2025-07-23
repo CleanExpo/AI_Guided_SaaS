@@ -16,14 +16,12 @@ let hasErrors = false;
 
 // Check each MCP file
 mcpFiles.forEach(file => {
-  const filePath = path.join(__dirname, '..', file);
+  const _filePath = path.join(__dirname, '..', file);
   
   if (!fs.existsSync(filePath)) {
     console.error(`❌ Missing file: ${file}`);
     hasErrors = true;
-    return;
-  }
-  
+    return;}
   const content = fs.readFileSync(filePath, 'utf8');
   
   // Check for common syntax errors
@@ -31,31 +29,23 @@ mcpFiles.forEach(file => {
   
   // Check for malformed interface properties (comma instead of semicolon)
   if (content.match(/^\s*\w+:\s*\w+.*,\s*\w+:/gm)) {
-    syntaxIssues.push('Interface properties using commas instead of semicolons');
-  }
-  
+    syntaxIssues.push('Interface properties using commas instead of semicolons');}
   // Check for missing type annotations
   if (content.match(/\(([\w\s]*)\)\s*=>/g)) {
     const matches = content.match(/\(([\w\s]*)\)\s*=>/g);
     matches.forEach(match => {
       if (!match.includes(':') && !match.includes('()')) {
-        syntaxIssues.push(`Missing type annotation in: ${match}`);
-      }
-    });
-  }
-  
+        syntaxIssues.push(`Missing type annotation in: ${match}`);}
+    });}
   // Check for malformed console.log with embedded commas
   if (content.match(/console\.log\(['"][\w\s]+,\s+[\w\s]+:/g)) {
-    syntaxIssues.push('Malformed console.log statements with embedded commas');
-  }
-  
+    syntaxIssues.push('Malformed console.log statements with embedded commas');}
   if (syntaxIssues.length > 0) {
     console.error(`❌ ${file} has syntax issues:`);
     syntaxIssues.forEach(issue => console.error(`   - ${issue}`));
     hasErrors = true;
   } else {
-    console.log(`✅ ${file} - OK`);
-  }
+    console.log(`✅ ${file} - OK`);}
 });
 
 // Run TypeScript compiler check on MCP files
@@ -72,13 +62,10 @@ try {
     console.error(tscOutput);
     hasErrors = true;
   } else {
-    console.log('✅ No TypeScript errors in MCP modules');
-  }
+    console.log('✅ No TypeScript errors in MCP modules');}
 } catch (error) {
   console.error('❌ Failed to run TypeScript check');
-  hasErrors = true;
-}
-
+  hasErrors = true;}
 // Check for problematic fix scripts
 console.log('\n🔍 Checking for problematic fix scripts...\n');
 
@@ -89,12 +76,11 @@ const problematicScripts = [
 ];
 
 problematicScripts.forEach(script => {
-  const scriptPath = path.join(__dirname, '..', script);
+  const _scriptPath = path.join(__dirname, '..', script);
   if (fs.existsSync(scriptPath)) {
     console.warn(`⚠️  Found active problematic script: ${script}`);
     console.warn('   This script may corrupt MCP TypeScript files');
-    hasErrors = true;
-  }
+    hasErrors = true;}
 });
 
 // Summary
@@ -108,5 +94,4 @@ if (hasErrors) {
   process.exit(1);
 } else {
   console.log('✅ MCP module integrity check PASSED');
-  console.log('All MCP files are properly formatted and error-free');
-}
+  console.log('All MCP files are properly formatted and error-free');}

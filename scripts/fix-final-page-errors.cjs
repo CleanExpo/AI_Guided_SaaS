@@ -3,7 +3,7 @@ const fs = require('fs');
 
 console.log('🔧 FINAL PAGE ERRORS: Last 5 Page Component Syntax Errors\n');
 
-const finalPageFixes = {
+const _finalPageFixes = {
   // Fix no-code builder page
   'src/app/builder/no-code/page.tsx': `import NoCodeBuilder from '@/components/builder/NoCodeBuilder';
 
@@ -31,13 +31,9 @@ export default function CollaborateDashboardPage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
       </div>
-    );
-  }
-
+    );}
   if (!session) {
-    redirect('/auth/signin');
-  }
-
+    redirect('/auth/signin');}
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -83,7 +79,7 @@ export default function CollaborateDashboardPage() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
-                    Active
+                    // Active
                   </span>
                   <span className="text-sm text-gray-500">5 members</span>
                 </div>
@@ -151,8 +147,7 @@ export default function CollaboratePage() {
       members: 2,
       lastActivity: '3 days ago',
       status: 'completed',
-      isPublic: true
-    }
+      isPublic: true}
   ];
 
   if (status === 'loading') {
@@ -160,9 +155,7 @@ export default function CollaboratePage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
       </div>
-    );
-  }
-
+    );}
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -235,8 +228,7 @@ export default function CollaboratePage() {
                   <Badge 
                     variant={
                       project.status === 'active' ? 'default' :
-                      project.status === 'review' ? 'secondary' : 'outline'
-                    }
+                      project.status === 'review' ? 'secondary' : 'outline'}
                   >
                     {project.status}
                   </Badge>
@@ -462,17 +454,14 @@ let filesFixed = 0;
 
 Object.entries(finalPageFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ FINAL PAGE FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Final Page Fix Summary:`);

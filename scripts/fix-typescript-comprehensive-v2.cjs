@@ -8,10 +8,10 @@ console.log('🔧 Comprehensive TypeScript Fix Script v2\n');
 
 function fixCommonTypeScriptIssues(content, filePath) {
   let fixCount = 0;
-  const original = content;
+  const _original = content;
   
   // Fix interface property separators (commas to semicolons)
-  const beforeInterfaceFix = content;
+  const _beforeInterfaceFix = content;
   content = content.replace(/(\w+):\s*([^;,\n]+),(\s*(?:\/\/[^\n]*)?\s*(?=\w+\s*:|}))/g, '$1: $2;$3');
   if (content !== beforeInterfaceFix) fixCount++;
   
@@ -26,8 +26,7 @@ function fixCommonTypeScriptIssues(content, filePath) {
   // Fix unterminated strings in imports
   content = content.replace(/import\s+[^'"\n]*?from\s+['"][^'"]*?$/gm, (match) => {
     if (!match.includes("';") && !match.includes('";')) {
-      return match.includes("'") ? match + "'" : match + '"';
-    }
+      return match.includes("'") ? match + "'" : match + '"';}
     return match;
   });
   
@@ -61,17 +60,13 @@ function fixCommonTypeScriptIssues(content, filePath) {
   content = content.replace(/(function\s+\w+\s*\([^)]*\))\s*\{/g, '$1: void {');
   
   // Clean up extra whitespace and ensure consistent formatting
-  content = content.replace(/\n{3,}/g, '\n\n');
+  content = content.replace(/\n{3}/g, '\n\n');
   content = content.replace(/\s+$/gm, '');
   
   // Ensure file ends with newline
   if (!content.endsWith('\n')) {
-    content += '\n';
-  }
-  
-  return { content, fixed: content !== original, fixCount };
-}
-
+    content += '\n';}
+  return { content, fixed: content !== original, fixCount };}
 function processFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
@@ -80,19 +75,15 @@ function processFile(filePath) {
     if (result.fixed) {
       fs.writeFileSync(filePath, result.content, 'utf8');
       console.log(`✅ ${filePath} (${result.fixCount} fixes)`);
-      return 1;
-    }
+      return 1;}
     return 0;
   } catch (error) {
     console.error(`❌ ${filePath}: ${error.message}`);
-    return 0;
-  }
-}
-
+    return 0;}}
 // Get all TypeScript and JavaScript files
 const files = [
   ...glob.sync('src/**/*.{ts,tsx,js,jsx}', { ignore: ['**/node_modules/**'] }),
-  ...glob.sync('tests/**/*.{ts,tsx,js,jsx}', { ignore: ['**/node_modules/**'] }),
+  ...glob.sync('tests/**/*.{ts,tsx,js,jsx}', { ignore: ['**/node_modules/**'] })
 ];
 
 console.log(`🎯 Processing ${files.length} files...\n`);
@@ -102,9 +93,7 @@ let totalFiles = 0;
 
 for (const file of files) {
   totalFiles++;
-  fixedFiles += processFile(file);
-}
-
+  fixedFiles += processFile(file);}
 console.log(`\n✅ TypeScript fixes completed!`);
 console.log(`   Files processed: ${totalFiles}`);
 console.log(`   Files fixed: ${fixedFiles}`);
@@ -130,31 +119,27 @@ const specificFixes = [
       { find: /\(\s*\{[^}]*?$/, replace: '()' },
       // Fix incomplete function definitions
       { find: /function\s+\w+\s*\([^)]*?\s*$/, replace: 'export function helper() {}' }
-    ]
-  }
+    ]}
 ];
 
 specificFixes.forEach(({ file, fixes }) => {
-  const fullPath = path.join(process.cwd(), file);
+  const _fullPath = path.join(process.cwd(), file);
   if (fs.existsSync(fullPath)) {
     try {
       let content = fs.readFileSync(fullPath, 'utf8');
       let changed = false;
       
       fixes.forEach(fix => {
-        const before = content;
+        const _before = content;
         content = content.replace(fix.find, fix.replace);
         if (before !== content) changed = true;
       });
       
       if (changed) {
         fs.writeFileSync(fullPath, content, 'utf8');
-        console.log(`✅ Applied specific fixes to ${file}`);
-      }
+        console.log(`✅ Applied specific fixes to ${file}`);}
     } catch (error) {
-      console.error(`❌ Error fixing ${file}: ${error.message}`);
-    }
-  }
+      console.error(`❌ Error fixing ${file}: ${error.message}`);}}
 });
 
 console.log(`\n🎉 Comprehensive TypeScript fix completed!`);

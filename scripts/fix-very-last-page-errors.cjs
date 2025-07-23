@@ -3,7 +3,7 @@ const fs = require('fs');
 
 console.log('🔧 VERY LAST PAGE ERRORS: Final 5 Page Component Syntax Errors\n');
 
-const veryLastPageFixes = {
+const _veryLastPageFixes = {
   // Fix community page
   'src/app/community/page.tsx': `import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
@@ -45,8 +45,7 @@ const communityChannels = [
     name: 'Feature Requests',
     description: 'Suggest new features and improvements for the platform',
     members: 2156,
-    isActive: true
-  }
+    isActive: true}
 ];
 
 export default function CommunityPage() {
@@ -140,7 +139,7 @@ export default function CommunityPage() {
   // Fix config page
   'src/app/config/page.tsx': `import ConfigurationDashboard from '@/components/ConfigurationDashboard';
 
-export const metadata = {
+export const _metadata = {
   title: 'Platform Configuration | AI Guided SaaS',
   description: 'AI-Guided SaaS Platform Configuration Dashboard - Manage AI models, features, security, and performance settings'
 };
@@ -174,7 +173,7 @@ export default function ContactPage() {
             <form className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Name
+                  // Name
                 </label>
                 <input
                   type="text"
@@ -186,7 +185,7 @@ export default function ContactPage() {
               
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email
+                  // Email
                 </label>
                 <input
                   type="email"
@@ -198,7 +197,7 @@ export default function ContactPage() {
               
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject
+                  // Subject
                 </label>
                 <input
                   type="text"
@@ -210,7 +209,7 @@ export default function ContactPage() {
               
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message
+                  // Message
                 </label>
                 <textarea
                   id="message"
@@ -382,17 +381,14 @@ let filesFixed = 0;
 
 Object.entries(veryLastPageFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ VERY LAST PAGE FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Very Last Page Fix Summary:`);

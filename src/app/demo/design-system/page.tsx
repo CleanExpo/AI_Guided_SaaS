@@ -1,12 +1,11 @@
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-
-export default function DesignSystemDemoPage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-6xl">
+props: anyexport default function DesignSystemDemoPage(): void {
+  return (;
+    <div className="min-h-screen bg-gray-50 py-8"><div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Design System Showcase
@@ -15,7 +14,6 @@ export default function DesignSystemDemoPage() {
             Explore our comprehensive design system and UI components.
           </p>
         </div>
-
         <div className="space-y-8">
           {/* Buttons */}
           <Card>
@@ -35,7 +33,6 @@ export default function DesignSystemDemoPage() {
               </div>
             </CardContent>
           </Card>
-
           {/* Badges */}
           <Card>
             <CardHeader>
@@ -50,7 +47,6 @@ export default function DesignSystemDemoPage() {
               </div>
             </CardContent>
           </Card>
-
           {/* Inputs */}
           <Card>
             <CardHeader>
@@ -58,14 +54,13 @@ export default function DesignSystemDemoPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4 max-w-md">
-                <Input placeholder="Default input" />
-                <Input type="email" placeholder="Email input" />
-                <Input type="password" placeholder="Password input" />
-                <Input disabled placeholder="Disabled input" />
+                <Input placeholder="Default input"   />
+                <Input type="email" placeholder="Email input"   />
+                <Input type="password" placeholder="Password input"   />
+                <Input disabled placeholder="Disabled input"   />
               </div>
             </CardContent>
           </Card>
-
           {/* Typography */}
           <Card>
             <CardHeader>
@@ -86,14 +81,13 @@ export default function DesignSystemDemoPage() {
               </div>
             </CardContent>
           </Card>
-
           {/* Colors */}
           <Card>
             <CardHeader>
               <CardTitle>Color Palette</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-4, md:grid-cols-2, lg:grid-cols-4">
                 <div className="space-y-2">
                   <div className="w-full h-20 bg-blue-600 rounded"></div>
                   <p className="text-sm font-medium">Primary</p>

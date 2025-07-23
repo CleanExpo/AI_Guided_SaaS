@@ -1,3 +1,4 @@
+import React from 'react';
 'use client';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -5,36 +6,33 @@ interface ResponsiveLayoutProps {
   children: React.ReactNode;
   className?: string;
 };
-export default function ResponsiveLayout({ children, className }: ResponsiveLayoutProps): void {
+export default function ResponsiveLayout({ children, className }: ResponsiveLayoutProps), className }: ResponsiveLayoutProps) {
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'laptop' | 'desktop'>('desktop');
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
+    const _handleResize = (): void: (any) => {
+      const _width = window.innerWidth;
+      if(width < 640) {
         setViewport('mobile');
       } else if (width < 1024) {
         setViewport('tablet');
       } else if (width < 1536) {
         setViewport('laptop');
       } else {
-        setViewport('desktop');
+    setViewport('desktop');
 }
-    };
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   return (
     <div
-      className={`cn(`
-        "min-h-screen transition-all duration-300" viewport === 'mobile' && "px-4",
-        viewport === 'tablet' && "px-6",
+      className={cn(``
+        "min-h-screen transition-all duration-300" viewport === 'mobile' && "px-4" viewport === 'tablet' && "px-6",
         viewport === 'laptop' && "px-8",
-        viewport === 'desktop' && "px-12", className
-      )`}`
+        viewport === 'desktop' && "px-12", className)}
       data-viewport={viewport}
     >
-      {/* Mobile-first responsive container */}
+      {/* Mobile-first, responsive container */}
       <div className="mx-auto max-w-[1920px]">
         {children}
     );

@@ -3,7 +3,7 @@ const fs = require('fs');
 
 console.log('🔧 ULTIMATE FIX: API Routes and Final Syntax Errors\n');
 
-const apiFixes = {
+const _apiFixes = {
   // Fix API docs main page
   'src/app/api-docs/page.tsx': `import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -37,8 +37,7 @@ const apiEndpoints = [
     slug: 'analytics',
     description: 'Application analytics and metrics',
     version: 'v1',
-    status: 'beta'
-  }
+    status: 'beta'}
 ];
 
 export default function ApiDocsPage() {
@@ -113,10 +112,10 @@ export default function ApiDocsPage() {
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const range = url.searchParams.get('range') || '7d';
+    const _range = url.searchParams.get('range') || '7d';
 
     // Simulate analytics data
-    const analyticsData = {
+    const _analyticsData = {
       totalUsers: 1247,
       activeUsers: 89,
       pageViews: 5643,
@@ -124,18 +123,13 @@ export async function GET(request: NextRequest) {
       range,
       metadata: {
         ip_address: request.headers.get('x-forwarded-for') || 'unknown',
-        user_agent: request.headers.get('user-agent') || 'unknown'
-      }
+        user_agent: request.headers.get('user-agent') || 'unknown'}
     };
 
     return NextResponse.json(analyticsData);
   } catch (error) {
     console.error('Analytics API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch analytics data' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to fetch analytics data' ,  status: 500  });}
 }`,
 
   // Fix admin auth login API route
@@ -149,13 +143,13 @@ const loginSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     
     // Validate request body
     const validatedData = loginSchema.parse(body);
     
     // Simple password check (in production, use proper hashing)
-    const isValid = validatedData.password === process.env.ADMIN_PASSWORD;
+    const _isValid = validatedData.password === process.env.ADMIN_PASSWORD;
     
     if (isValid) {
       return NextResponse.json({ 
@@ -163,18 +157,10 @@ export async function POST(request: NextRequest) {
         message: 'Login successful'
       });
     } else {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      );
-    }
+      return NextResponse.json({  error: 'Invalid credentials' ,  status: 401  });}
   } catch (error) {
     console.error('Admin login error:', error);
-    return NextResponse.json(
-      { error: 'Authentication failed' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Authentication failed' ,  status: 500  });}
 }`,
 
   // Fix admin debug API route
@@ -183,14 +169,12 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const debugKey = url.searchParams.get('key');
+    const _debugKey = url.searchParams.get('key');
     
     // Simple access control
     if (debugKey !== 'debug123' && process.env.NODE_ENV === 'production') {
-      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
-    }
-    
-    const debugInfo = {
+      return NextResponse.json({  error: 'Access denied' ,  status: 403  });}
+    const _debugInfo = {
       environment: {
         NODE_ENV: process.env.NODE_ENV,
         ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL,
@@ -208,11 +192,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(debugInfo);
   } catch (error) {
     console.error('Debug API error:', error);
-    return NextResponse.json(
-      { error: 'Debug information unavailable' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Debug information unavailable' ,  status: 500  });}
 }`,
 
   // Fix admin direct auth API route
@@ -220,7 +200,7 @@ export async function GET(request: NextRequest) {
 
 export async function GET() {
   try {
-    const authStatus = {
+    const _authStatus = {
       adminEnabled: process.env.ENABLE_ADMIN_PANEL === 'true',
       hasAdminPassword: !!process.env.ADMIN_PASSWORD,
       timestamp: new Date().toISOString()
@@ -229,27 +209,16 @@ export async function GET() {
     return NextResponse.json(authStatus);
   } catch (error) {
     console.error('Admin auth status error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get auth status' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Failed to get auth status' ,  status: 500  });}}
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { password } = body;
 
     if (!password) {
-      return NextResponse.json(
-        { error: 'Password required' },
-        { status: 400 }
-      );
-    }
-
+      return NextResponse.json({  error: 'Password required' ,  status: 400  });}
     // Simple password check
-    const isValid = password === process.env.ADMIN_PASSWORD;
+    const _isValid = password === process.env.ADMIN_PASSWORD;
 
     if (isValid) {
       return NextResponse.json({
@@ -257,18 +226,10 @@ export async function POST(request: NextRequest) {
         message: 'Authentication successful'
       });
     } else {
-      return NextResponse.json(
-        { error: 'Invalid password' },
-        { status: 401 }
-      );
-    }
+      return NextResponse.json({  error: 'Invalid password' ,  status: 401  });}
   } catch (error) {
     console.error('Direct auth error:', error);
-    return NextResponse.json(
-      { error: 'Authentication failed' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Authentication failed' ,  status: 500  });}
 }`
 };
 
@@ -276,17 +237,14 @@ let filesFixed = 0;
 
 Object.entries(apiFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ API FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 API Routes Fix Summary:`);

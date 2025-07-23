@@ -21,21 +21,19 @@ uiComponentsToFix.forEach(filePath => {
     if (!content.startsWith("'use client'") && !content.startsWith('"use client"')) {
       console.log(`✅ Adding 'use client' to ${filePath}`);
       content = "'use client';\n" + content;
-      fs.writeFileSync(filePath, content);
-    }
-  }
+      fs.writeFileSync(filePath, content);}}
 });
 
 // Fix 2: Create missing UI component exports
-const uiDir = 'src/components/ui';
+const _uiDir = 'src/components/ui';
 
 // Fix label.tsx if it exists
-const labelPath = path.join(uiDir, 'label.tsx');
+const _labelPath = path.join(uiDir, 'label.tsx');
 if (fs.existsSync(labelPath)) {
   let content = fs.readFileSync(labelPath, 'utf8');
   if (!content.includes('export')) {
     console.log('✅ Fixing label.tsx exports');
-    const labelFix = `'use client';
+    const _labelFix = `'use client';
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
@@ -47,7 +45,7 @@ const Label = React.forwardRef<
     ref={ref}
     className={cn(
       "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-      className
+      // className
     )}
     {...props}
   />
@@ -56,17 +54,14 @@ Label.displayName = "Label";
 
 export { Label };
 `;
-    fs.writeFileSync(labelPath, labelFix);
-  }
-}
-
+    fs.writeFileSync(labelPath, labelFix);}}
 // Fix scroll-area.tsx if it exists
-const scrollAreaPath = path.join(uiDir, 'scroll-area.tsx');
+const _scrollAreaPath = path.join(uiDir, 'scroll-area.tsx');
 if (fs.existsSync(scrollAreaPath)) {
   let content = fs.readFileSync(scrollAreaPath, 'utf8');
   if (!content.includes('export')) {
     console.log('✅ Fixing scroll-area.tsx exports');
-    const scrollAreaFix = `'use client';
+    const _scrollAreaFix = `'use client';
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
@@ -88,12 +83,9 @@ ScrollArea.displayName = "ScrollArea";
 
 export { ScrollArea };
 `;
-    fs.writeFileSync(scrollAreaPath, scrollAreaFix);
-  }
-}
-
+    fs.writeFileSync(scrollAreaPath, scrollAreaFix);}}
 // Fix collapsible.tsx exports 
-const collapsiblePath = path.join(uiDir, 'collapsible.tsx');
+const _collapsiblePath = path.join(uiDir, 'collapsible.tsx');
 if (fs.existsSync(collapsiblePath)) {
   let content = fs.readFileSync(collapsiblePath, 'utf8');
   if (!content.includes('CollapsibleTrigger')) {
@@ -106,7 +98,7 @@ if (fs.existsSync(collapsiblePath)) {
     
     // Add CollapsibleTrigger component if missing
     if (!content.includes('const CollapsibleTrigger')) {
-      const triggerComponent = `
+      const _triggerComponent = `
 const CollapsibleTrigger = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
@@ -125,13 +117,8 @@ CollapsibleTrigger.displayName = "CollapsibleTrigger";
       content = content.replace(
         'export { Collapsible, CollapsibleContent, CollapsibleTrigger }',
         triggerComponent + '\nexport { Collapsible, CollapsibleContent, CollapsibleTrigger }'
-      );
-    }
-    
-    fs.writeFileSync(collapsiblePath, content);
-  }
-}
-
+      );}
+    fs.writeFileSync(collapsiblePath, content);}}
 // Fix 3: Add missing React imports to components that need them
 const filesToCheckReactImports = [
   'src/components/ui/use-toast.tsx',
@@ -144,9 +131,7 @@ filesToCheckReactImports.forEach(filePath => {
     if (content.includes('React.useState') && !content.includes('import React')) {
       console.log(`✅ Adding React import to ${filePath}`);
       content = "import React from 'react';\n" + content;
-      fs.writeFileSync(filePath, content);
-    }
-  }
+      fs.writeFileSync(filePath, content);}}
 });
 
 // Fix 4: Ensure all hooks are properly imported
@@ -164,13 +149,11 @@ hooksToFix.forEach(filePath => {
     if (content.includes('useState') && !content.includes('import') && !content.includes('React')) {
       console.log(`✅ Adding React import to hook ${filePath}`);
       content = "import { useState, useEffect } from 'react';\n" + content;
-      fs.writeFileSync(filePath, content);
-    }
-  }
+      fs.writeFileSync(filePath, content);}}
 });
 
 // Fix 5: Update package.json to ensure proper React version
-const packageJsonPath = 'package.json';
+const _packageJsonPath = 'package.json';
 if (fs.existsSync(packageJsonPath)) {
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
   let updated = false;
@@ -182,15 +165,9 @@ if (fs.existsSync(packageJsonPath)) {
       console.log('✅ Updating React version for better SSR support');
       packageJson.dependencies.react = '^18.2.0';
       packageJson.dependencies['react-dom'] = '^18.2.0';
-      updated = true;
-    }
-  }
-  
+      updated = true;}}
   if (updated) {
-    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-  }
-}
-
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));}}
 console.log('\n🎉 HYDRATION CRISIS FIX COMPLETE!');
 console.log('================================');
 console.log('✅ All client directives added');

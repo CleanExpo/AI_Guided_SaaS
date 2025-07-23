@@ -22,9 +22,7 @@ class AgentOSHealthCheck {
     this.issues = [];
     this.fixes = [];
     this.stage = 1;
-    this.totalStages = 6;
-  }
-
+    this.totalStages = 6;}
   log(message, type = 'info') {
     const colors = {
       info: '\x1b[36m',
@@ -34,24 +32,20 @@ class AgentOSHealthCheck {
       stage: '\x1b[35m',
       fix: '\x1b[32m'
     };
-    const reset = '\x1b[0m';
-    console.log(`${colors[type]}${message}${reset}`);
-  }
-
+    const _reset = '\x1b[0m';
+    console.log(`${colors[type]}${message}${reset}`);}
   stageHeader(stageNum, title) {
     this.log('\n' + '='.repeat(80), 'stage');
     this.log(`🎯 STAGE ${stageNum}/${this.totalStages}: ${title}`, 'stage');
-    this.log('='.repeat(80), 'stage');
-  }
-
+    this.log('='.repeat(80), 'stage');}
   // STAGE 1: Critical Core Fixes
   async stage1_criticalCoreFixes() {
     this.stageHeader(1, 'CRITICAL CORE FIXES');
     
     // FIX 1: Fix the cn utility function that's causing "TypeError: S is not a function"
     this.log('🔧 FIXING: cn utility function return type...', 'fix');
-    const utilsPath = 'src/lib/utils.ts';
-    const correctUtilsContent = `import { type ClassValue, clsx } from 'clsx';
+    const _utilsPath = 'src/lib/utils.ts';
+    const _correctUtilsContent = `import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]): string {
@@ -63,23 +57,20 @@ export function cn(...inputs: ClassValue[]): string {
 
     // FIX 2: Ensure providers.tsx is properly configured for SSR
     this.log('🔧 FIXING: Providers configuration for SSR...', 'fix');
-    const providersPath = 'src/components/providers.tsx';
-    const providersContent = `'use client'
+    const _providersPath = 'src/components/providers.tsx';
+    const _providersContent = `'use client'
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
-export function Providers({ children }: { children: React.ReactNode }): JSX.Element {
-  const [queryClient] = useState(() => new QueryClient({
+export function Providers({ children }: { children: React.ReactNode }): JSX.Element { const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000, // 1 minute
         refetchOnWindowFocus: false
-      }
-    }
-  }));
+       }));
 
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
@@ -90,9 +81,7 @@ export function Providers({ children }: { children: React.ReactNode }): JSX.Elem
   }, []);
 
   if (!mounted) {
-    return <>{children}</>;
-  }
-
+    return <>{children}</>;}
   // CRITICAL FIX: Exclude admin routes from SessionProvider to prevent auth conflicts
   // Admin routes use custom admin-token authentication, NOT NextAuth
   if (pathname?.startsWith('/admin')) {
@@ -101,15 +90,13 @@ export function Providers({ children }: { children: React.ReactNode }): JSX.Elem
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+          // enableSystem
+          // disableTransitionOnChange
         >
           {children}
         </ThemeProvider>
       </QueryClientProvider>
-    );
-  }
-
+    );}
   // Regular user routes use NextAuth SessionProvider
   return (
     <SessionProvider>
@@ -117,8 +104,8 @@ export function Providers({ children }: { children: React.ReactNode }): JSX.Elem
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+          // enableSystem
+          // disableTransitionOnChange
         >
           {children}
         </ThemeProvider>
@@ -130,32 +117,28 @@ export function Providers({ children }: { children: React.ReactNode }): JSX.Elem
     fs.writeFileSync(providersPath, providersContent);
     this.fixes.push('✅ Fixed Providers SSR configuration and hydration mismatches');
 
-    this.log(`✅ STAGE 1 COMPLETE: ${this.fixes.length} critical fixes applied`, 'success');
-  }
-
+    this.log(`✅ STAGE 1 COMPLETE: ${this.fixes.length} critical fixes applied`, 'success');}
   // STAGE 2: API Route Dynamic Server Usage Fixes
   async stage2_apiRouteFixes() {
     this.stageHeader(2, 'API ROUTE DYNAMIC SERVER USAGE FIXES');
     
     // FIX 3: Fix admin debug route
     this.log('🔧 FIXING: Admin debug API route...', 'fix');
-    const debugRoutePath = 'src/app/api/admin/debug/route.ts';
-    const debugRouteContent = `import { NextRequest, NextResponse } from 'next/server';
+    const _debugRoutePath = 'src/app/api/admin/debug/route.ts';
+    const _debugRouteContent = `import { NextRequest, NextResponse } from 'next/server';
 
 // Mark as dynamic to prevent static generation
-export const dynamic = 'force-dynamic';
+export const _dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const debugKey = searchParams.get('key');
+    const _debugKey = searchParams.get('key');
     
     // Simple access control
     if (debugKey !== 'debug123' && process.env.NODE_ENV === 'production') {
-      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
-    }
-    
-    const debugInfo = {
+      return NextResponse.json({  error: 'Access denied' ,  status: 403  });}
+    const _debugInfo = {
       environment: {
         NODE_ENV: process.env.NODE_ENV,
         ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL,
@@ -173,11 +156,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(debugInfo);
   } catch (error) {
     console.error('Debug API error:', error);
-    return NextResponse.json(
-      { error: 'Debug information unavailable' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Debug information unavailable' ,  status: 500  });}
 }`;
     
     fs.writeFileSync(debugRoutePath, debugRouteContent);
@@ -185,15 +164,15 @@ export async function GET(request: NextRequest) {
 
     // FIX 4: Fix health route  
     this.log('🔧 FIXING: Health API route...', 'fix');
-    const healthRoutePath = 'src/app/api/health/route.ts';
-    const healthRouteContent = `import { NextRequest, NextResponse } from 'next/server';
+    const _healthRoutePath = 'src/app/api/health/route.ts';
+    const _healthRouteContent = `import { NextRequest, NextResponse } from 'next/server';
 
 // Mark as dynamic to prevent static generation
-export const dynamic = 'force-dynamic';
+export const _dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const healthStatus = {
+    const _healthStatus = {
       status: 'healthy',
       timestamp: new Date().toISOString(),
       version: process.env.npm_package_version || '1.0.0',
@@ -206,27 +185,20 @@ export async function GET() {
       uptime: process.uptime(),
       memory: {
         used: process.memoryUsage().heapUsed,
-        total: process.memoryUsage().heapTotal
-      }
+        total: process.memoryUsage().heapTotal}
     };
     
     return NextResponse.json(healthStatus);
   } catch (error) {
     console.error('Health check error:', error);
-    return NextResponse.json(
-      {
+    return NextResponse.json({ 
         status: 'unhealthy',
         error: 'Health check failed',
         timestamp: new Date().toISOString()
-      },
-      { status: 500 }
-    );
-  }
-}
-
+      ,  status: 500  });}}
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { service, action } = body;
     
     // Simulate service health action
@@ -237,11 +209,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Health action error:', error);
-    return NextResponse.json(
-      { error: 'Health action failed' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Health action failed' ,  status: 500  });}
 }`;
     
     fs.writeFileSync(healthRoutePath, healthRouteContent);
@@ -250,7 +218,7 @@ export async function POST(request: NextRequest) {
     this.log('🔧 Bulk fixing remaining API routes with dynamic usage...', 'fix');
     
     // Get all API route files
-    const apiDir = 'src/app/api';
+    const _apiDir = 'src/app/api';
     const apiRoutes = this.getAllApiRoutes(apiDir);
     
     let fixedRoutes = 0;
@@ -258,53 +226,44 @@ export async function POST(request: NextRequest) {
       const content = fs.readFileSync(routePath, 'utf8');
       if (content.includes('request.url') || content.includes('request.headers')) {
         if (!content.includes('export const dynamic')) {
-          const fixedContent = `// Mark as dynamic to prevent static generation\nexport const dynamic = 'force-dynamic';\n\n${content}`;
+          const _fixedContent = `// Mark as dynamic to prevent static generation\nexport const _dynamic = 'force-dynamic';\n\n${content}`;
           fs.writeFileSync(routePath, fixedContent);
-          fixedRoutes++;
-        }
-      }
+          fixedRoutes++;}}
     });
     
     this.fixes.push(`✅ Fixed ${fixedRoutes} API routes with dynamic server usage`);
-    this.log(`✅ STAGE 2 COMPLETE: Fixed dynamic server usage in ${fixedRoutes + 2} API routes`, 'success');
-  }
-
+    this.log(`✅ STAGE 2 COMPLETE: Fixed dynamic server usage in ${fixedRoutes + 2} API routes`, 'success');}
   // Helper function to get all API routes recursively
   getAllApiRoutes(dir) {
     let routes = [];
     const files = fs.readdirSync(dir);
     
     files.forEach(file => {
-      const filePath = path.join(dir, file);
+      const _filePath = path.join(dir, file);
       const stat = fs.statSync(filePath);
       
       if (stat.isDirectory()) {
         routes = routes.concat(this.getAllApiRoutes(filePath));
       } else if (file === 'route.ts' || file === 'route.js') {
-        routes.push(filePath);
-      }
+        routes.push(filePath);}
     });
     
-    return routes;
-  }
-
+    return routes;}
   // STAGE 3: Hydration and SSR Issues Resolution
   async stage3_hydrationFixes() {
     this.stageHeader(3, 'HYDRATION AND SSR ISSUES RESOLUTION');
     
     // FIX 5: Improve ConditionalLayout for better SSR compatibility
     this.log('🔧 FIXING: ConditionalLayout hydration issues...', 'fix');
-    const layoutPath = 'src/components/layout/ConditionalLayout.tsx';
-    const layoutContent = `'use client';
+    const _layoutPath = 'src/components/layout/ConditionalLayout.tsx';
+    const _layoutContent = `'use client';
 import { usePathname } from 'next/navigation';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ReactNode, useEffect, useState } from 'react';
 
 interface ConditionalLayoutProps {
-  children: ReactNode;
-}
-
+  children: ReactNode;}
 export function ConditionalLayout({ children }: ConditionalLayoutProps): JSX.Element {
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
@@ -323,8 +282,8 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps): JSX.Ele
   ];
   
   // All admin routes should not use the main app header (which uses NextAuth)
-  const isAdminRoute = pathname.startsWith('/admin');
-  const shouldShowLayout = !noLayoutRoutes.includes(pathname) && !isAdminRoute;
+  const _isAdminRoute = pathname.startsWith('/admin');
+  const _shouldShowLayout = !noLayoutRoutes.includes(pathname) && !isAdminRoute;
   
   // UNIFIED STRUCTURE - Always return consistent JSX hierarchy
   // Use CSS/conditional content instead of conditional JSX structure
@@ -344,8 +303,8 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps): JSX.Ele
 
     // FIX 6: Ensure main page is properly configured for SSR
     this.log('🔧 FIXING: Main page SSR configuration...', 'fix');
-    const mainPagePath = 'src/app/page.tsx';
-    const mainPageContent = `'use client';
+    const _mainPagePath = 'src/app/page.tsx';
+    const _mainPageContent = `'use client';
 import { useSession } from 'next-auth/react';
 import LandingPageProduction from '@/components/LandingPageProduction';
 import Dashboard from '@/components/Dashboard';
@@ -367,18 +326,14 @@ export default function HomePage() {
           <p className="text-muted-foreground">Loading...</p>
         </div>
       </div>
-    );
-  }
-  
+    );}
   return session ? <Dashboard /> : <LandingPageProduction />;
 }`;
     
     fs.writeFileSync(mainPagePath, mainPageContent);
     this.fixes.push('✅ Fixed main page SSR and hydration compatibility');
 
-    this.log('✅ STAGE 3 COMPLETE: Hydration and SSR issues resolved', 'success');
-  }
-
+    this.log('✅ STAGE 3 COMPLETE: Hydration and SSR issues resolved', 'success');}
   // STAGE 4: Security and Environment Configuration
   async stage4_securityConfig() {
     this.stageHeader(4, 'SECURITY AND ENVIRONMENT CONFIGURATION');
@@ -394,13 +349,12 @@ export default function HomePage() {
         this.log(`⚠️  Missing: ${file}`, 'warning');
         envIssues++;
       } else {
-        this.log(`✅ Found: ${file}`, 'success');
-      }
+        this.log(`✅ Found: ${file}`, 'success');}
     });
     
     // Create basic .env.example if missing
     if (!fs.existsSync('.env.example')) {
-      const envExample = `# Core Application
+      const _envExample = `# Core Application
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your-secret-here
 
@@ -423,18 +377,16 @@ STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
 ANALYTICS_ENABLED=true
 `;
       fs.writeFileSync('.env.example', envExample);
-      this.fixes.push('✅ Created .env.example template');
-    }
-
+      this.fixes.push('✅ Created .env.example template');}
     // FIX 7: Ensure middleware.ts is properly configured
     this.log('🔧 CHECKING: Middleware configuration...', 'fix');
-    const middlewarePath = 'src/middleware.ts';
+    const _middlewarePath = 'src/middleware.ts';
     if (fs.existsSync(middlewarePath)) {
-      const middlewareContent = fs.readFileSync(middlewarePath, 'utf8');
+      const _middlewareContent = fs.readFileSync(middlewarePath, 'utf8');
       this.log('✅ Middleware configuration exists', 'success');
     } else {
       this.log('⚠️  No middleware found - creating basic middleware...', 'warning');
-      const basicMiddleware = `import { NextResponse } from 'next/server';
+      const _basicMiddleware = `import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
@@ -445,70 +397,58 @@ export function middleware(request: NextRequest) {
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   
-  return response;
-}
-
+  return response;}
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
-  ],
+    '/((?!api|_next/static|_next/image|favicon.ico).*)'
+  ]
 };`;
       fs.writeFileSync(middlewarePath, basicMiddleware);
-      this.fixes.push('✅ Created basic security middleware');
-    }
-
-    this.log('✅ STAGE 4 COMPLETE: Security and environment validation completed', 'success');
-  }
-
+      this.fixes.push('✅ Created basic security middleware');}
+    this.log('✅ STAGE 4 COMPLETE: Security and environment validation completed', 'success');}
   // STAGE 5: Performance and Build Optimization
   async stage5_performanceOptimization() {
     this.stageHeader(5, 'PERFORMANCE AND BUILD OPTIMIZATION');
     
     // FIX 8: Ensure next.config.js is optimized
     this.log('🔧 OPTIMIZING: Next.js configuration...', 'fix');
-    const nextConfigPath = 'next.config.js';
+    const _nextConfigPath = 'next.config.js';
     
     if (fs.existsSync(nextConfigPath)) {
       this.log('✅ next.config.js exists', 'success');
     } else {
-      const optimizedConfig = `/** @type {import('next').NextConfig} */
-const nextConfig = {
+      const _optimizedConfig = `/** @type {import('next').NextConfig} */
+const _nextConfig = {
   experimental: {
-    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react']
   },
   images: {
     domains: ['localhost'],
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/webp', 'image/avif']
   },
   env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
+    CUSTOM_KEY: process.env.CUSTOM_KEY
   },
   // Optimize bundle
   compress: true,
   poweredByHeader: false,
   // Performance optimizations
   swcMinify: true,
-  output: 'standalone',
+  output: 'standalone'
 };
 
 module.exports = nextConfig;`;
       fs.writeFileSync(nextConfigPath, optimizedConfig);
-      this.fixes.push('✅ Created optimized Next.js configuration');
-    }
-
+      this.fixes.push('✅ Created optimized Next.js configuration');}
     // FIX 9: Check for unused dependencies
     this.log('🔧 ANALYZING: Package dependencies...', 'fix');
     if (fs.existsSync('package.json')) {
       const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-      const depCount = Object.keys(packageJson.dependencies || {}).length;
-      const devDepCount = Object.keys(packageJson.devDependencies || {}).length;
+      const _depCount = Object.keys(packageJson.dependencies || {}).length;
+      const _devDepCount = Object.keys(packageJson.devDependencies || {}).length;
       this.log(`📦 Found ${depCount} dependencies and ${devDepCount} dev dependencies`, 'info');
-      this.fixes.push(`✅ Validated ${depCount + devDepCount} package dependencies`);
-    }
-
-    this.log('✅ STAGE 5 COMPLETE: Performance optimization completed', 'success');
-  }
-
+      this.fixes.push(`✅ Validated ${depCount + devDepCount} package dependencies`);}
+    this.log('✅ STAGE 5 COMPLETE: Performance optimization completed', 'success');}
   // STAGE 6: Production Deployment Validation
   async stage6_deploymentValidation() {
     this.stageHeader(6, 'PRODUCTION DEPLOYMENT VALIDATION');
@@ -516,7 +456,7 @@ module.exports = nextConfig;`;
     // FIX 10: Create deployment checklist
     this.log('🔧 CREATING: Deployment validation checklist...', 'fix');
     
-    const deploymentChecklist = `# 🚀 AGENT-OS DEPLOYMENT VALIDATION CHECKLIST
+    const _deploymentChecklist = `# 🚀 AGENT-OS DEPLOYMENT VALIDATION CHECKLIST
 
 ## ✅ Core Issues Fixed
 - [x] Fixed cn utility function return type (TypeError: S is not a function)
@@ -590,7 +530,7 @@ ${new Date().toISOString()}
     this.fixes.push('✅ Created comprehensive deployment checklist');
 
     // Create a deployment validation script
-    const deployValidationScript = `#!/bin/bash
+    const _deployValidationScript = `#!/bin/bash
 
 echo "🚀 AGENT-OS DEPLOYMENT VALIDATION"
 echo "=================================="
@@ -602,22 +542,19 @@ npm run build
 if [ $? -ne 0 ]; then
     echo "❌ Build failed"
     exit 1
-fi
-
+// fi
 echo "2️⃣  Type checking..."
 npx tsc --noEmit
 if [ $? -ne 0 ]; then
     echo "❌ Type check failed"
     exit 1
-fi
-
+// fi
 echo "3️⃣  Linting code..."
 npm run lint
 if [ $? -ne 0 ]; then
     echo "❌ Lint check failed"
     exit 1
-fi
-
+// fi
 echo "✅ All pre-deployment checks passed!"
 echo "🚀 Ready for production deployment"
 `;
@@ -626,9 +563,7 @@ echo "🚀 Ready for production deployment"
     fs.chmodSync('scripts/validate-deployment.sh', '755');
     this.fixes.push('✅ Created deployment validation script');
 
-    this.log('✅ STAGE 6 COMPLETE: Deployment validation ready', 'success');
-  }
-
+    this.log('✅ STAGE 6 COMPLETE: Deployment validation ready', 'success');}
   // Generate comprehensive report
   generateReport() {
     this.log('\n' + '='.repeat(80), 'stage');
@@ -660,9 +595,7 @@ echo "🚀 Ready for production deployment"
     this.log('\n🏆 DEPLOYMENT READY!', 'success');
     this.log('📄 Report saved to: agent-os-health-check-report.json', 'info');
     this.log('📋 Checklist saved to: AGENT-OS-DEPLOYMENT-CHECKLIST.md', 'info');
-    this.log('\n🚀 Next: Run "npm run build" to verify, then deploy to Vercel!', 'success');
-  }
-
+    this.log('\n🚀 Next: Run "npm run build" to verify, then deploy to Vercel!', 'success');}
   // Main execution
   async run() {
     this.log('🤖 AGENT-OS COMPREHENSIVE HEALTH CHECK INITIATED', 'stage');
@@ -680,11 +613,7 @@ echo "🚀 Ready for production deployment"
     } catch (error) {
       this.log(`❌ ERROR: ${error.message}`, 'error');
       console.error(error);
-      process.exit(1);
-    }
-  }
-}
-
+      process.exit(1);}}}
 // Execute the health check
 const healthCheck = new AgentOSHealthCheck();
 healthCheck.run();

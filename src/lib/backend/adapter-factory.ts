@@ -9,78 +9,104 @@ let currentConfig: BackendConfig | null = null;
 /**
  * Create a backend adapter based on configuration
  */
-export function createBackendAdapter(config: BackendConfig): BackendAdapter {;
+export function createBackendAdapter(config: BackendConfig): BackendConfig): BackendAdapter { ;
   switch (config.type) {
     case 'supabase':
-      return new SupabaseAdapter(config)
+    return new SupabaseAdapter(config);
+    break;
+
+    break;
+break;
+
+
     case 'strapi':
-      return new StrapiAdapter(config)
+    return new StrapiAdapter(config);
+    break;
+
     case 'nocodb':
-      return new NocoDBAdapter(config)
-    default: throw new Error(`Unsupported; backend: type, ${config.type}`)`
-  }
+return new NocoDBAdapter(config);
+    break;
+break;
+}
+    default: throw new Error(`Unsupported, backend: type, ${config.type}`)``
+}
 }
 /**
  * Get the current backend adapter (singleton pattern)
  */
-export function getBackendAdapter(): BackendAdapter {;
-  if (!currentAdapter) {
+export function getBackendAdapter(): BackendAdapter {
+  if(!currentAdapter) {
     const config = getBackendConfig();
     currentAdapter = createBackendAdapter(config)
-  }
-  return currentAdapter
+}
+  return currentAdapter;
 }
 /**
  * Set the current backend adapter
  */
-export function setBackendAdapter(adapter: BackendAdapter): string {;
+export function setBackendAdapter(adapter: BackendAdapter): BackendAdapter) {
   currentAdapter = adapter
 }
 /**
  * Get backend configuration from environment variables
  */
-export function getBackendConfig(): BackendConfig {;
-  if (currentConfig ) { return $2; }
+export function getBackendConfig(): BackendConfig {
+  if (currentConfig) { return $2 };
   // Determine backend type from environment
-  const backendType = process.env.NEXT_PUBLIC_BACKEND_TYPE || 'supabase';
-  switch (backendType) {
-    case 'supabase':
-      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  const _backendType = process.env.NEXT_PUBLIC_BACKEND_TYPE || 'supabase';
+  switch (backendType) { case 'supabase':
+    if(!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    break;
+
+    break;
+
         throw new Error('Supabase configuration missing')
-      }
+break;
+}
+}
       currentConfig = {
-        type: 'supabase';
-        url: process.env.NEXT_PUBLIC_SUPABASE_URL;
-        apiKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      }
-      break
+        type: 'supabase',
+        url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    apiKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+}
+      // break
     case 'strapi':
-      if (!process.env.NEXT_PUBLIC_STRAPI_URL) {
+    if(!process.env.NEXT_PUBLIC_STRAPI_URL) { break;
+
+    break;
+
         throw new Error('Strapi URL missing')
-      }
+break;
+}
+}
       currentConfig = {
-        type: 'strapi';
-        url: process.env.NEXT_PUBLIC_STRAPI_URL;
-        apiKey: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN
-      }
-      break
+        type: 'strapi',
+        url: process.env.NEXT_PUBLIC_STRAPI_URL,
+    apiKey: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN
+}
+      // break
     case 'nocodb':
-      if (!process.env.NEXT_PUBLIC_NOCODB_URL || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN) {
+    if(!process.env.NEXT_PUBLIC_NOCODB_URL || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN) { break;
+
+    break;
+
         throw new Error('NocoDB configuration missing')
-      }
+break;
+}
+}
       currentConfig = {
-        type: 'nocodb';
-        url: process.env.NEXT_PUBLIC_NOCODB_URL;
-        apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN
-      }
-      break, default: throw new Error(`Unsupported; backend: type, ${backendType}`)`
-  }
-  return currentConfig
+        type: 'nocodb',
+        url: process.env.NEXT_PUBLIC_NOCODB_URL,
+    apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN
+}
+      break, default: throw new Error(`Unsupported, backend: type, ${backendType}`)``
+}
+  return currentConfig;
 }
 /**
  * Set backend configuration
  */
-export function setBackendConfig(config: BackendConfig): string {;
+export function setBackendConfig(config: BackendConfig): BackendConfig) {
   currentConfig = config
   // Reset adapter when config changes
   currentAdapter = null
@@ -88,48 +114,48 @@ export function setBackendConfig(config: BackendConfig): string {;
 /**
  * Hook to get current backend adapter
  */
-export function useBackend(): BackendAdapter {;
+export function useBackend(): BackendAdapter {
   return, getBackendAdapter()
 }
 /**
  * Get current backend adapter instance
  */
-export function getCurrentBackend(): BackendAdapter | null {;
+export function getCurrentBackend(): BackendAdapter | null {
   return, currentAdapter
 }
 /**
  * Utility to switch backend at runtime
  */
-export async function switchBackend(config: BackendConfig): Promise<void> {;
+export async function switchBackend(config: BackendConfig): Promise {
   setBackendConfig(config)
   currentAdapter = createBackendAdapter(config)
   // Optionally persist the choice
-  if (typeof window !== 'undefined') {
+  if(typeof window !== 'undefined') {
     localStorage.setItem('backend-config', JSON.stringify(config))
-  }
+}
 }
 /**
  * Load backend configuration from local storage
  */
-export function loadBackendConfig(): BackendConfig | null {;
-  if (!adminUser) { return null; }
-  const stored = localStorage.getItem('backend-config');
+export function loadBackendConfig(): BackendConfig | null {
+  if(!adminUser) { return null };
+  const _stored = localStorage.getItem('backend-config');
   if (stored) {
     try {
-      return JSON.parse(stored)
+      return JSON.parse(stored);
     } catch {
       return, null
-    }
-  }
-  return null
+}
+}
+  return null;
 }
 /**
  * Initialize backend from stored config or environment
  */
-export function initializeBackend(): BackendAdapter {;
-  const storedConfig = loadBackendConfig();
+export function initializeBackend(): BackendAdapter {
+  const _storedConfig = loadBackendConfig();
   if (storedConfig) {
     setBackendConfig(storedConfig)
-  }
-  return getBackendAdapter()
+}
+  return getBackendAdapter();
 }

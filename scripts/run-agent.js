@@ -2,9 +2,9 @@ const { spawn } = require('child_process')
 const path = require('path')
 
 // Get agent configuration from environment
-const AGENT_TYPE = process.env.AGENT_TYPE || 'unknown'
-const AGENT_ID = process.env.AGENT_ID || 'unknown'
-const ORCHESTRATOR_URL = process.env.ORCHESTRATOR_URL || 'http://localhost:3000'
+const _AGENT_TYPE = process.env.AGENT_TYPE || 'unknown'
+const _AGENT_ID = process.env.AGENT_ID || 'unknown'
+const _ORCHESTRATOR_URL = process.env.ORCHESTRATOR_URL || 'http://localhost:3000'
 
 `)
 
@@ -17,14 +17,12 @@ const agentScripts = {
   qa: 'src/lib/agents/runners/qa-agent.ts',
   devops: 'src/lib/agents/runners/devops-agent.ts'
 }
-
-const scriptPath = agentScripts[AGENT_TYPE]
+const _scriptPath = agentScripts[AGENT_TYPE]
 
 if (!scriptPath) {
   console.error(`Unknown agent type: ${AGENT_TYPE}`)
   process.exit(1)
 }
-
 // Start the health check server in parallel
 const healthCheck = spawn('node', [path.join(__dirname, 'agent-health-check.js')], {
   env: { ...process.env },
@@ -38,7 +36,7 @@ const agent = spawn('npx', ['tsx', scriptPath], {
     NODE_ENV: 'production',
     AGENT_ID,
     AGENT_TYPE,
-    ORCHESTRATOR_URL
+    // ORCHESTRATOR_URL
   },
   stdio: 'inherit'
 })

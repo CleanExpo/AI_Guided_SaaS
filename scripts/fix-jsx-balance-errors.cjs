@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
+const _path = require('path');
+const _glob = require('glob');
 
 console.log('🔨 Aggressive JSX Balance Fix Script\n');
 
@@ -13,7 +13,7 @@ const criticalFiles = [
   'src/app/admin/dashboard/page.tsx',
   'src/app/about/page.tsx',
   'src/app/admin/causal/page.tsx',
-  'src/app/admin/agent-monitor/page.tsx',
+  'src/app/admin/agent-monitor/page.tsx'
 ];
 
 // Common component patterns that need balancing
@@ -24,7 +24,7 @@ function balanceJSXTags(content, filePath) {
   let fixedContent = content;
   
   // Track if this is a React component file
-  const isComponent = filePath.endsWith('.tsx') && (
+  const _isComponent = filePath.endsWith('.tsx') && (
     content.includes('export default function') ||
     content.includes('export function') ||
     content.includes('const') && content.includes('= () =>') ||
@@ -39,14 +39,10 @@ function balanceJSXTags(content, filePath) {
   
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].includes('return (') && returnLineIndex === -1) {
-      returnLineIndex = i;
-    }
+      returnLineIndex = i;}
     if (returnLineIndex > -1 && lines[i].match(/^}\s*$/)) {
       componentEndIndex = i;
-      break;
-    }
-  }
-  
+      break;}}
   if (returnLineIndex === -1) return content;
   
   // Extract the JSX portion
@@ -64,8 +60,7 @@ function balanceJSXTags(content, filePath) {
       const tagName = tag.match(/<(\w+)/)[1];
       if (!selfClosingTags.includes(tagName.toLowerCase())) {
         tagStack.push(tagName);
-        openCount++;
-      }
+        openCount++;}
     });
     
     // Find closing tags
@@ -75,10 +70,9 @@ function balanceJSXTags(content, filePath) {
       closeCount++;
       
       // Try to match with stack
-      const lastIndex = tagStack.lastIndexOf(tagName);
+      const _lastIndex = tagStack.lastIndexOf(tagName);
       if (lastIndex >= 0) {
-        tagStack.splice(lastIndex, 1);
-      }
+        tagStack.splice(lastIndex, 1);}
     });
   });
   
@@ -88,7 +82,7 @@ function balanceJSXTags(content, filePath) {
     
     // Common fix: Add missing closing tags before the final return closing
     if (openCount > closeCount && componentEndIndex > 0) {
-      const missingCount = openCount - closeCount;
+      const _missingCount = openCount - closeCount;
       const missingTags = tagStack.slice(-missingCount);
       
       // Find the line with );
@@ -96,81 +90,60 @@ function balanceJSXTags(content, filePath) {
       for (let i = componentEndIndex - 1; i >= returnLineIndex; i--) {
         if (lines[i].includes(');')) {
           insertIndex = i;
-          break;
-        }
-      }
-      
+          break;}}
       // Insert missing closing tags
-      const indent = lines[insertIndex].match(/^\s*/)[0];
+      const _indent = lines[insertIndex].match(/^\s*/)[0];
       const closingTags = missingTags.reverse().map(tag => `${indent}</${tag}>`).join('\n');
       
       lines[insertIndex] = closingTags + '\n' + lines[insertIndex];
       fixedContent = lines.join('\n');
       
-      console.log(`  ✅ Added ${missingCount} missing closing tags`);
-    }
-    
+      console.log(`  ✅ Added ${missingCount} missing closing tags`);}
     // Common fix: Remove extra closing tags
     if (closeCount > openCount) {
-      const extraCount = closeCount - openCount;
+      const _extraCount = closeCount - openCount;
       console.log(`  ✅ Attempting to remove ${extraCount} extra closing tags`);
       
       // Remove extra closing tags from the end
       let removed = 0;
       for (let i = lines.length - 1; i >= 0 && removed < extraCount; i--) {
-        const match = lines[i].match(/<\/(\w+)>/);
+        const _match = lines[i].match(/<\/(\w+)>/);
         if (match) {
           lines[i] = lines[i].replace(/<\/\w+>/, '');
-          removed++;
-        }
-      }
-      
-      fixedContent = lines.join('\n');
-    }
-  }
-  
-  return fixedContent;
-}
-
+          removed++;}}
+      fixedContent = lines.join('\n');}}
+  return fixedContent;}
 function fixFile(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    const original = content;
+    const _original = content;
     
     // Balance JSX tags
     content = balanceJSXTags(content, filePath);
     
     // Additional fixes
     // Remove duplicate closing divs at component end
-    content = content.replace(/(}\s*)((?:<\/div>\s*){4,})(\s*}\s*$)/gm, '$1\n  );\n$3');
+    content = content.replace(/(}\s*)((?:<\/div>\s*){4})(\s*}\s*$)/gm, '$1\n  );\n$3');
     
     // Fix return statement indentation
     content = content.replace(/return\s*\(\s*<(\w+)/gm, 'return (\n    <$1');
     
     // Ensure newline at end
     if (!content.endsWith('\n')) {
-      content += '\n';
-    }
-    
+      content += '\n';}
     if (content !== original) {
       fs.writeFileSync(filePath, content, 'utf8');
       console.log(`✅ Fixed: ${filePath}`);
-      return true;
-    }
-    
+      return true;}
     return false;
   } catch (error) {
     console.error(`❌ Error processing ${filePath}:`, error.message);
-    return false;
-  }
-}
-
+    return false;}}
 // Fix critical files first
 console.log('🎯 Fixing critical files...\n');
 criticalFiles.forEach(file => {
   if (fs.existsSync(file)) {
-    fixFile(file);
-  }
+    fixFile(file);}
 });
 
 // Then fix other problematic files
@@ -185,13 +158,12 @@ const problemFiles = [
   'src/components/DataSourceManager.tsx',
   'src/components/ui/form-enhanced.tsx',
   'src/components/layout/Header.tsx',
-  'src/components/layout/Footer.tsx',
+  'src/components/layout/Footer.tsx'
 ];
 
 problemFiles.forEach(file => {
   if (fs.existsSync(file)) {
-    fixFile(file);
-  }
+    fixFile(file);}
 });
 
 console.log('\n✅ JSX balance fixes completed!');

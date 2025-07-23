@@ -3,7 +3,7 @@ const fs = require('fs');
 
 console.log('🔧 TRULY FINAL: Last 5 API Route Syntax Errors\n');
 
-const trulyFinalFixes = {
+const _trulyFinalFixes = {
   // Fix N8N workflows API route
   'src/app/api/n8n/workflows/route.ts': `import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -18,13 +18,13 @@ const CreateWorkflowSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     
     // Validate input
     const validatedData = CreateWorkflowSchema.parse(body);
     
     // Simulate workflow creation
-    const workflow = {
+    const _workflow = {
       id: 'workflow_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,
       status: 'created',
@@ -32,28 +32,17 @@ export async function POST(request: NextRequest) {
       active: true
     };
     
-    return NextResponse.json({
+    return NextResponse.json({ 
       success: true,
-      workflow
-    }, { status: 201 });
+      // workflow
+    ,  status: 201  });
     
   } catch (error) {
     console.error('Create workflow error:', error);
     
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid input', details: error.errors },
-        { status: 400 }
-      );
-    }
-    
-    return NextResponse.json(
-      { error: 'Failed to create workflow' },
-      { status: 500 }
-    );
-  }
-}
-
+      return NextResponse.json({  error: 'Invalid input', details: error.errors ,  status: 400  });}
+    return NextResponse.json({  error: 'Failed to create workflow' ,  status: 500  });}}
 export async function GET() {
   try {
     // Simulate getting workflows
@@ -70,8 +59,7 @@ export async function GET() {
         type: 'testing',
         name: 'Test Suite',
         status: 'active',
-        createdAt: new Date().toISOString()
-      }
+        createdAt: new Date().toISOString()}
     ];
     
     return NextResponse.json({
@@ -81,11 +69,7 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Get workflows error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch workflows' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to fetch workflows' ,  status: 500  });}
 }`,
 
   // Fix requirements process API route
@@ -100,13 +84,13 @@ const processSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     
     // Validate input
     const validatedData = processSchema.parse(body);
     
     // Simulate requirements processing
-    const processed = {
+    const _processed = {
       id: 'req_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,
       status: 'processed',
@@ -123,28 +107,17 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().toISOString()
     };
     
-    return NextResponse.json({
+    return NextResponse.json({ 
       success: true,
-      processed
-    }, { status: 201 });
+      // processed
+    ,  status: 201  });
     
   } catch (error) {
     console.error('Process requirements error:', error);
     
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid input', details: error.errors },
-        { status: 400 }
-      );
-    }
-    
-    return NextResponse.json(
-      { error: 'Failed to process requirements' },
-      { status: 500 }
-    );
-  }
-}
-
+      return NextResponse.json({  error: 'Invalid input', details: error.errors ,  status: 400  });}
+    return NextResponse.json({  error: 'Failed to process requirements' ,  status: 500  });}}
 export async function GET() {
   try {
     // Simulate getting processed requirements
@@ -154,8 +127,7 @@ export async function GET() {
         requirements: 'Build a todo app',
         projectType: 'web-app',
         status: 'processed',
-        createdAt: new Date().toISOString()
-      }
+        createdAt: new Date().toISOString()}
     ];
     
     return NextResponse.json({
@@ -165,11 +137,7 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Get requirements error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch requirements' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to fetch requirements' ,  status: 500  });}
 }`,
 
   // Fix roadmap validate API route
@@ -189,13 +157,13 @@ const validateSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     
     // Validate input
     const validatedData = validateSchema.parse(body);
     
     // Simulate roadmap validation
-    const validation = {
+    const _validation = {
       roadmapId: validatedData.roadmapId,
       isValid: true,
       issues: [],
@@ -210,40 +178,24 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      validation
+      // validation
     });
     
   } catch (error) {
     console.error('Validate roadmap error:', error);
     
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid input', details: error.errors },
-        { status: 400 }
-      );
-    }
-    
-    return NextResponse.json(
-      { error: 'Failed to validate roadmap' },
-      { status: 500 }
-    );
-  }
-}
-
+      return NextResponse.json({  error: 'Invalid input', details: error.errors ,  status: 400  });}
+    return NextResponse.json({  error: 'Failed to validate roadmap' ,  status: 500  });}}
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const roadmapId = url.searchParams.get('roadmapId');
+    const _roadmapId = url.searchParams.get('roadmapId');
     
     if (!roadmapId) {
-      return NextResponse.json(
-        { error: 'Roadmap ID is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Roadmap ID is required' ,  status: 400  });}
     // Simulate getting validation status
-    const validation = {
+    const _validation = {
       roadmapId,
       isValid: true,
       lastValidated: new Date().toISOString(),
@@ -252,15 +204,11 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      validation
+      // validation
     });
   } catch (error) {
     console.error('Get validation error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get validation status' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to get validation status' ,  status: 500  });}
 }`,
 
   // Fix support chat API route
@@ -275,13 +223,13 @@ const chatSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     
     // Validate input
     const validatedData = chatSchema.parse(body);
     
     // Simulate AI support response
-    const response = {
+    const _response = {
       id: 'msg_' + Math.random().toString(36).substr(2, 9),
       message: \`I understand you're asking about: "\$\{validatedData.message\}". Here's how I can help...\`,
       suggestions: [
@@ -295,39 +243,27 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      response
+      // response
     });
     
   } catch (error) {
     console.error('Support chat error:', error);
     
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid input', details: error.errors },
-        { status: 400 }
-      );
-    }
-    
-    return NextResponse.json(
-      { error: 'Support chat failed' },
-      { status: 500 }
-    );
-  }
-}
-
+      return NextResponse.json({  error: 'Invalid input', details: error.errors ,  status: 400  });}
+    return NextResponse.json({  error: 'Support chat failed' ,  status: 500  });}}
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const sessionId = url.searchParams.get('sessionId');
+    const _sessionId = url.searchParams.get('sessionId');
     
     // Simulate getting chat history
-    const chatHistory = [
+    const _chatHistory = [
       {
         id: 'msg_1',
         message: 'Hello! How can I help you today?',
         type: 'bot',
-        timestamp: new Date().toISOString()
-      }
+        timestamp: new Date().toISOString()}
     ];
     
     return NextResponse.json({
@@ -337,11 +273,7 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Get chat history error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get chat history' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to get chat history' ,  status: 500  });}
 }`,
 
   // Fix templates API route
@@ -351,10 +283,10 @@ export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
     const query = url.searchParams.get('query');
-    const category = url.searchParams.get('category');
-    const framework = url.searchParams.get('framework');
-    const pricing = url.searchParams.get('pricing');
-    const difficulty = url.searchParams.get('difficulty');
+    const _category = url.searchParams.get('category');
+    const _framework = url.searchParams.get('framework');
+    const _pricing = url.searchParams.get('pricing');
+    const _difficulty = url.searchParams.get('difficulty');
     
     let templates = [];
     
@@ -377,8 +309,7 @@ export async function GET(request: NextRequest) {
           category: 'blog',
           framework: 'nextjs',
           pricing: 'premium',
-          difficulty: 'easy'
-        }
+          difficulty: 'easy'}
       ].filter(template => 
         template.name.toLowerCase().includes(query.toLowerCase()) ||
         template.description.toLowerCase().includes(query.toLowerCase())
@@ -417,25 +348,18 @@ export async function GET(request: NextRequest) {
           pricing: 'premium',
           difficulty: 'hard',
           downloads: 567,
-          rating: 4.9
-        }
+          rating: 4.9}
       ];
       
       // Apply filters
       if (category) {
-        templates = templates.filter(t => t.category === category);
-      }
+        templates = templates.filter(t => t.category === category);}
       if (framework) {
-        templates = templates.filter(t => t.framework === framework);
-      }
+        templates = templates.filter(t => t.framework === framework);}
       if (pricing) {
-        templates = templates.filter(t => t.pricing === pricing);
-      }
+        templates = templates.filter(t => t.pricing === pricing);}
       if (difficulty) {
-        templates = templates.filter(t => t.difficulty === difficulty);
-      }
-    }
-    
+        templates = templates.filter(t => t.difficulty === difficulty);}}
     return NextResponse.json({
       success: true,
       templates,
@@ -445,16 +369,11 @@ export async function GET(request: NextRequest) {
         category,
         framework,
         pricing,
-        difficulty
-      }
+        // difficulty}
     });
   } catch (error) {
     console.error('Templates API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch templates' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to fetch templates' ,  status: 500  });}
 }`
 };
 
@@ -462,17 +381,14 @@ let filesFixed = 0;
 
 Object.entries(trulyFinalFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ TRULY FINAL FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Truly Final Fix Summary:`);

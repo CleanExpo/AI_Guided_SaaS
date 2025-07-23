@@ -1,0 +1,32 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    fastapi==0.109.0 \
+    uvicorn==0.27.0 \
+    sentence-transformers==2.3.1 \
+    numpy==1.26.3 \
+    torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
+
+# Copy embedding service code
+COPY embeddings_service.py .
+
+# Create cache directory
+RUN mkdir -p /app/cache
+
+# Expose port
+EXPOSE 8000
+
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Run the service
+CMD ["uvicorn", "embeddings_service:app", "--host", "0.0.0.0", "--port", "8000"]

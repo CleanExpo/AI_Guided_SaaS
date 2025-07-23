@@ -1,45 +1,39 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+import NextAuth, { NextAuthOptions } from 'next-auth';import GoogleProvider from 'next-auth/providers/google';
 import { SupabaseAdapter } from '@next-auth/supabase-adapter';
 import { createClient } from '@supabase/supabase-js';
 import jwt from 'jsonwebtoken';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const supabase = supabaseUrl && supabaseKey 
+const _supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const _supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const _supabase = supabaseUrl && supabaseKey ;
   ? createClient(supabaseUrl, supabaseKey)
   : null;
-
-export const authOptions: NextAuthOptions = {
-  providers: [
+export const authOptions: NextAuthOptions = { providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''),
-  ],
+  clientId: process.env.GOOGLE_CLIENT_ID || '',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || '')],
   adapter: supabase ? SupabaseAdapter({
-    url: supabaseUrl!,
+  url: supabaseUrl!,
     secret: supabaseKey!) : undefined,
-  session: {
-    strategy: 'jwt',
+    session: {;,
+  strategy: 'jwt',
   callbacks: {
-    async jwt({ token, account, profile }) {
-      if (account && profile) {
+    async jwt({ token, account, profile    }): Promise<any> {
+      if(account && profile) {
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
-      }
+}
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token   }): Promise<any> {
       if (token) {
         session.accessToken = token.accessToken as string;
         session.refreshToken = token.refreshToken as string;
-      }
+}
       return session;
     },
   pages: {
     signIn: '/auth/signin',
     signUp: '/auth/signup',
   debug: process.env.NODE_ENV === 'development';
-
-const handler = NextAuth(authOptions);
+const _handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

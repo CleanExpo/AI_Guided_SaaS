@@ -1,17 +1,16 @@
+import React from 'react';
 import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
-
 export const metadata: Metadata = {
   title: 'Pricing - AI Guided SaaS Platform',
   description: 'Choose the perfect plan for your development needs'
 };
-
-const plans = [
+const plans = [;,
   {
-    name: 'Starter',
+  name: 'Starter',
     price: '$0',
     period: 'month',
     description: 'Perfect for getting started',
@@ -21,7 +20,7 @@ const plans = [
       'Community support',
       '1GB storage',
       'Standard templates'
-    ],
+   ],
     popular: false,
     cta: 'Get Started Free'
   },
@@ -38,7 +37,7 @@ const plans = [
       'Premium templates',
       'Custom integrations',
       'Team collaboration'
-    ],
+   ],
     popular: true,
     cta: 'Start Free Trial'
   },
@@ -56,13 +55,12 @@ const plans = [
       'SSO integration',
       'Advanced analytics',
       'SLA guarantee'
-    ],
+   ],
     popular: false,
     cta: 'Contact Sales'
-  }
+}
 ];
-
-const features = [
+const features = [;,
   'AI-powered code generation',
   'Visual development tools',
   'One-click deployment',
@@ -70,10 +68,8 @@ const features = [
   'Version control integration',
   'Performance monitoring'
 ];
-
-export default function PricingPage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-12">
+props: anyexport default function PricingPage(): void {
+  return (<div className="min-h-screen bg-gray-50 py-12">;
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h1>
@@ -81,13 +77,11 @@ export default function PricingPage() {
             Choose the perfect plan for your development needs. Upgrade or downgrade at any time.
           </p>
         </div>
-
         {/* Pricing Plans */}
-        <div className="grid gap-8 lg:grid-cols-3 mb-12">
+        <div className="grid gap-8, lg:grid-cols-3 mb-12">
           {plans.map((plan) => (
-            <Card key={plan.name} className={`relative ${plan.popular ? 'border-blue-500 shadow-lg' : ''}`}>
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+            <Card key={plan.name} className={`relative ${plan.popular ? 'border-blue-500 shadow-lg' : ''}`}>`
+              {plan.popular  && (div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <Badge className="bg-blue-500">Most Popular</Badge>
                 </div>
               )}
@@ -103,40 +97,37 @@ export default function PricingPage() {
                 <ul className="space-y-3 mb-6">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center">
-                      <Check className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
+                      <Check className="h-4 w-4 text-green-500 mr-3 flex-shrink-0"    />
                       <span className="text-gray-600">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <Button className={`w-full ${plan.popular ? '' : 'variant-outline'}`}>
+                <Button className={`w-full ${plan.popular ? '' : 'variant-outline'}`}>`
                   {plan.cta}
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
-
-        {/* All Plans Include */}
-        <Card className="mb-12">
-          <CardHeader>
+        {/* All, Plans Include */}
+        <Card className="mb-12"><CardHeader>
             <CardTitle className="text-center text-2xl">All Plans Include</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4, md:grid-cols-2, lg:grid-cols-3">
               {features.map((feature) => (
                 <div key={feature} className="flex items-center">
-                  <Check className="h-4 w-4 text-green-500 mr-3" />
+                  <Check className="h-4 w-4 text-green-500 mr-3"    />
                   <span className="text-gray-600">{feature}</span>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
-
         {/* FAQ */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          <div className="grid gap-6 md:grid-cols-2 text-left">
+          <div className="grid gap-6, md:grid-cols-2 text-left">
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">Can I change plans anytime?</h3>
               <p className="text-gray-600">Yes, you can upgrade or downgrade your plan at any time.</p>

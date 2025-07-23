@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "serena": {
+      "command": "uv",
+      "args": ["run", "--directory", "./serena", "serena-mcp-server", "--context", "agent", "--project", "."],
+      "description": "Serena Semantic Search MCP Server for context7 workflow and token optimization"
+    },
+    "wsl-sequential-thinking": {
+      "command": "node",
+      "args": ["./mcp/wsl-sequential-thinking-server.js"],
+      "description": "Sequential thinking server for WSL environment"
+    }
+  }
+}

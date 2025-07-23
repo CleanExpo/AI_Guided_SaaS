@@ -1,38 +1,35 @@
-'use client';
-import { useState } from 'react';
+import React from 'react';
+'use client';import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import TemplateMarketplace from '@/components/marketplace/TemplateMarketplace';
-
-interface Template {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  tags: string[];
+interface Template  {
+  id: string,
+    name: string,
+    description: string,
+    category: string,
+    tags: string[];
   preview?: string;
-  author: string;
-  downloads: number;
-  rating: number;
+    author: string,
+    downloads: number,
+    rating: number
 }
-
-export default function TemplatesPage() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const { toast } = useToast();
-
-  const templates: Template[] = [
-    {
-      id: '1',
+props: anyexport default function TemplatesPage(): void {
+  const [selectedCategory, setSelectedCategory]: any[] = useState<any>('all');
+  const { toast   }: any = useToast();
+  const templates: Template[] = [;,
+  {
+  id: '1',
       name: 'E-commerce Starter',
       description: 'Complete e-commerce solution with product catalog, cart, and checkout.',
       category: 'web',
       tags: ['React', 'Next.js', 'Stripe'],
       author: 'AI Guided SaaS',
       downloads: 1250,
-      rating: 4.8
+    rating: 4.8
     },
     {
       id: '2',
@@ -42,7 +39,7 @@ export default function TemplatesPage() {
       tags: ['React', 'CMS', 'SEO'],
       author: 'Community',
       downloads: 890,
-      rating: 4.6
+    rating: 4.6
     },
     {
       id: '3',
@@ -52,31 +49,25 @@ export default function TemplatesPage() {
       tags: ['React', 'WebSocket', 'Charts'],
       author: 'AI Guided SaaS',
       downloads: 650,
-      rating: 4.7
-    }
+    rating: 4.7
+}
   ];
-
-  const categories = [
-    { id: 'all', name: 'All Templates', count: templates.length },
-    { id: 'web', name: 'Web Apps', count: templates.filter(t => t.category === 'web').length },
+  const categories = [;,
+  { id: 'all', name: 'All Templates', count: templates.length },
+    { id: 'web', name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length },
     { id: 'mobile', name: 'Mobile Apps', count: 0 },
     { id: 'api', name: 'API Services', count: 0 },
-    { id: 'productivity', name: 'Productivity', count: templates.filter(t => t.category === 'productivity').length }
-  ];
-
-  const filteredTemplates = selectedCategory === 'all' 
-    ? templates 
-    : templates.filter(template => template.category === selectedCategory);
-
-  const handleUseTemplate = (template: Template) => {
+    { id: 'productivity', name: 'Productivity', count: templates.filter((t) => t.category === 'productivity').length }
+   ];
+  const filteredTemplates = selectedCategory === 'all' ;
+    ? templates
+    : templates.filter((template) => template.category === selectedCategory);
+  const _handleUseTemplate = (template: Template) => {
     toast({
-      title: "Template Selected",
-      description: `Using "${template.name}" template for your new project.`
+      title: "Template Selected",description: `Using "${template.name}" template for your new project.``
     });
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
+  return (<div className="min-h-screen bg-gray-50 py-8">;
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Project Templates</h1>
@@ -84,7 +75,6 @@ export default function TemplatesPage() {
             Start your project with professionally designed templates.
           </p>
         </div>
-
         <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="space-y-6">
           <TabsList className="grid w-full grid-cols-5">
             {categories.map((category) => (
@@ -96,12 +86,9 @@ export default function TemplatesPage() {
               </TabsTrigger>
             ))}
           </TabsList>
-
           <TabsContent value={selectedCategory}>
-            {filteredTemplates.length > 0 ? (
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {filteredTemplates.map((template) => (
-                  <Card key={template.id} className="hover:shadow-lg transition-shadow">
+            {filteredTemplates.length > 0 ? (<div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
+                {filteredTemplates.map((template) => (<Card key={template.id} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div>
@@ -115,7 +102,6 @@ export default function TemplatesPage() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-gray-600 mb-4">{template.description}</p>
-                      
                       <div className="flex flex-wrap gap-2 mb-4">
                         {template.tags.map((tag) => (
                           <Badge key={tag} variant="secondary" className="text-xs">
@@ -123,12 +109,11 @@ export default function TemplatesPage() {
                           </Badge>
                         ))}
                       </div>
-
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-500">
                           {template.downloads} downloads
                         </span>
-                        <Button 
+                        <Button
                           size="sm"
                           onClick={() => handleUseTemplate(template)}
                         >
@@ -151,11 +136,10 @@ export default function TemplatesPage() {
             )}
           </TabsContent>
         </Tabs>
-
-        {/* Template Marketplace Component */}
+        {/* Template, Marketplace Component */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Template Marketplace</h2>
-          <TemplateMarketplace />
+          <TemplateMarketplace    />
         </div>
       </div>
     </div>

@@ -1,57 +1,53 @@
-'use client';
-import { useState } from 'react';
+import React from 'react';
+'use client';import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Clock, Play, CheckCircle, Lock, Search, BookOpen } from 'lucide-react';
-
-interface Tutorial {
-  id: string;
-  title: string;
-  description: string;
-  duration: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+interface Tutorial  {
+  id: string,
+    title: string,
+    description: string,
+    duration: string,
+    difficulty: 'beginner' | 'intermediate' | 'advanced';
   completed?: boolean;
   locked?: boolean;
 }
-
-interface TutorialCardProps {
-  tutorial: Tutorial;
-  isCompleted: boolean;
-  isLocked: boolean;
-  onStart: (id: string) => void;
+interface TutorialCardProps  {
+  tutorial: Tutorial,
+    isCompleted: boolean,
+    isLocked: boolean,
+    onStart: (id: string) => void
 }
-
-function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
+function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps), isCompleted, isLocked, onStart }: TutorialCardProps) {
   const difficultyColors = {
     beginner: 'bg-green-100 text-green-700',
     intermediate: 'bg-yellow-100 text-yellow-700',
     advanced: 'bg-red-100 text-red-700'
   };
-
-  return (
-    <Card className={`hover:shadow-md transition-shadow ${isLocked ? 'opacity-50' : ''}`}>
+  return (;
+    <Card className={`hover:shadow-md transition-shadow ${isLocked ? 'opacity-50' : ''}`}>`
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg mb-2 flex items-center">
               {isCompleted ? (
-                <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                <CheckCircle className="h-5 w-5 text-green-600 mr-2"    />
               ) : isLocked ? (
-                <Lock className="h-5 w-5 text-gray-400 mr-2" />
+                <Lock className="h-5 w-5 text-gray-400 mr-2"    />
               ) : (
-                <Play className="h-5 w-5 text-blue-600 mr-2" />
-              )}
-              {tutorial.title}
+                <Play className="h-5 w-5 text-blue-600 mr-2"    />
+              )},
+    {tutorial.title}
             </CardTitle>
             <p className="text-gray-600 text-sm mb-3">{tutorial.description}</p>
             <div className="flex items-center gap-2">
-              <Badge className={`${difficultyColors[tutorial.difficulty]} border-0`}>
+              <Badge className={`${difficultyColors[tutorial.difficulty]} border-0`}>`
                 {tutorial.difficulty}
               </Badge>
               <div className="flex items-center text-gray-500 text-sm">
-                <Clock className="h-4 w-4 mr-1" />
+                <Clock className="h-4 w-4 mr-1"    />
                 {tutorial.duration}
               </div>
             </div>
@@ -71,14 +67,12 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
     </Card>
   );
 }
-
-export default function TutorialsPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('all');
-
-  const tutorials: Tutorial[] = [
-    {
-      id: '1',
+props: anyexport default function TutorialsPage(): void {
+  const [searchQuery, setSearchQuery]: any[] = useState<any>('');
+  const [selectedDifficulty, setSelectedDifficulty]: any[] = useState<any>('all');
+  const tutorials: Tutorial[] = [;,
+  {
+  id: '1',
       title: 'Getting Started with AI Guided SaaS',
       description: 'Learn the basics of our AI-powered development platform and create your first project.',
       duration: '15 min',
@@ -116,62 +110,55 @@ export default function TutorialsPage() {
       duration: '1 hour',
       difficulty: 'advanced',
       locked: true
-    }
+}
   ];
-
-  const filteredTutorials = tutorials.filter(tutorial => {
-    const matchesSearch = tutorial.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const filteredTutorials = tutorials.filter((tutorial) => {
+    const _matchesSearch = tutorial.title.toLowerCase().includes(searchQuery.toLowerCase()) ||;
                          tutorial.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDifficulty = selectedDifficulty === 'all' || tutorial.difficulty === selectedDifficulty;
+    const _matchesDifficulty = selectedDifficulty === 'all' || tutorial.difficulty === selectedDifficulty;
     return matchesSearch && matchesDifficulty;
   });
-
-  const handleStartTutorial = (id: string) => {
-    console.log('Starting tutorial:', id);
+  const _handleStartTutorial = (id: string) => {
+    console.log('Starting, tutorial:', id);
     // Navigation logic would go here
   };
-
-  const completedCount = tutorials.filter(t => t.completed).length;
-  const progressPercentage = (completedCount / tutorials.length) * 100;
-
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
+  const _completedCount = tutorials.filter((t) => t.completed).length;
+  const _progressPercentage = (completedCount / tutorials.length) * 100;
+  return (<div className="min-h-screen bg-gray-50 py-8">;
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Tutorials</h1>
           <p className="text-gray-600 mb-6">
             Learn to build amazing applications with our step-by-step tutorials.
           </p>
-
-          {/* Progress Overview */}
+          {/* Progress, Overview */}
           <div className="bg-white rounded-lg p-6 mb-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Your Progress</h2>
               <span className="text-sm text-gray-600">{completedCount} of {tutorials.length} completed</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
+              <div
                 className="bg-blue-600 h-2 rounded-full transition-all"
-                style={{ width: `${progressPercentage}%` }}
+                style={{ width: `${progressPercentage}%` }}`
               ></div>
             </div>
           </div>
-
-          {/* Search and Filters */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          {/* Search, and Filters */}
+          <div className="flex flex-col, sm:flex-row gap-4 mb-6">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
               <Input
                 type="text"
                 placeholder="Search tutorials..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange: any={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
               />
             </div>
             <select
               value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
+              onChange: any={(e) => setSelectedDifficulty(e.target.value)}
               className="px-3 py-2 border border-gray-300 rounded-md"
             >
               <option value="all">All Levels</option>
@@ -181,9 +168,8 @@ export default function TutorialsPage() {
             </select>
           </div>
         </div>
-
-        {/* Tutorials Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Tutorials, Grid */}
+        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-3">
           {filteredTutorials.map((tutorial) => (
             <TutorialCard
               key={tutorial.id}
@@ -191,13 +177,11 @@ export default function TutorialsPage() {
               isCompleted={tutorial.completed || false}
               isLocked={tutorial.locked || false}
               onStart={handleStartTutorial}
-            />
+               />
           ))}
         </div>
-
-        {filteredTutorials.length === 0 && (
-          <div className="text-center py-12">
-            <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+        {filteredTutorials.length === 0  && (div className="text-center py-12">
+            <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4"    />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No tutorials found</h3>
             <p className="text-gray-600">
               Try adjusting your search terms or filters to find the tutorials you're looking for.

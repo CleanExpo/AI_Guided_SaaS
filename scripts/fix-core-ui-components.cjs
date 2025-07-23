@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const uiPath = '/mnt/d/AI Guided SaaS/src/components/ui';
+const _uiPath = '/mnt/d/AI Guided SaaS/src/components/ui';
 
 // Most problematic files that need careful fixes
 const priorityFiles = [
@@ -46,36 +46,25 @@ function fixUIComponentCarefully(filePath) {
     // Ensure proper file endings
     content = content.trim();
     if (!content.endsWith('\n')) {
-      content += '\n';
-    }
-    
+      content += '\n';}
     fs.writeFileSync(filePath, content);
     console.log(`✅ Successfully fixed ${path.basename(filePath)}`);
     return true;
   } catch (error) {
     console.error(`❌ Error fixing ${path.basename(filePath)}:`, error.message);
-    return false;
-  }
-}
-
+    return false;}}
 function main() {
   console.log('🚀 Starting careful UI component fixes...\n');
   
   let successCount = 0;
   
   for (const fileName of priorityFiles) {
-    const filePath = path.join(uiPath, fileName);
+    const _filePath = path.join(uiPath, fileName);
     if (fs.existsSync(filePath)) {
       if (fixUIComponentCarefully(filePath)) {
-        successCount++;
-      }
+        successCount++;}
     } else {
-      console.log(`⚠️ File not found: ${fileName}`);
-    }
-  }
-  
+      console.log(`⚠️ File not found: ${fileName}`);}}
   console.log(`\n📊 Results: ${successCount}/${priorityFiles.length} priority files fixed`);
-  console.log('✨ UI component fixes complete!');
-}
-
+  console.log('✨ UI component fixes complete!');}
 main();

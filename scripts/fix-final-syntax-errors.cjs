@@ -3,7 +3,7 @@ const fs = require('fs');
 
 console.log('🔧 FINAL: Fixing Last Remaining Syntax Errors\n');
 
-const finalFixes = {
+const _finalFixes = {
   // Fix admin MCP page
   'src/app/admin/mcp/page.tsx': `'use client';
 import { useState, useEffect } from 'react';
@@ -17,9 +17,7 @@ interface MCPStatus {
   status: string;
   name: string;
   version: string;
-  connected: boolean;
-}
-
+  connected: boolean;}
 export default function AdminMCPPage() {
   const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,17 +36,14 @@ export default function AdminMCPPage() {
           name: 'Sequential Thinking',
           status: 'online',
           version: '1.0.0',
-          connected: true
-        }
+          connected: true}
       ]);
       setIsLoading(false);
     }, 1000);
   }, []);
 
   if (isLoading) {
-    return <div className="p-8">Loading MCP servers...</div>;
-  }
-
+    return <div className="p-8">Loading MCP servers...</div>;}
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -81,7 +76,7 @@ export default function AdminMCPPage() {
                   <span>Version: {server.version}</span>
                   <Button variant="outline" size="sm">
                     <Settings className="h-4 w-4 mr-2" />
-                    Configure
+                    // Configure
                   </Button>
                 </div>
               </CardContent>
@@ -174,9 +169,7 @@ interface AnalyticsData {
   userActivity: Array<{
     date: string;
     users: number;
-  }>;
-}
-
+  }>;}
 export default function AnalyticsPage() {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -205,9 +198,7 @@ export default function AnalyticsPage() {
   }, []);
 
   if (isLoading || !data) {
-    return <div className="p-8">Loading analytics...</div>;
-  }
-
+    return <div className="p-8">Loading analytics...</div>;}
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -293,9 +284,7 @@ export default function AnalyticsPage() {
   description: string;
   content: string;
   category: string;
-  version: string;
-}
-
+  version: string;}
 const apiDocs: Record<string, ApiDoc> = {
   auth: {
     slug: 'auth',
@@ -311,16 +300,13 @@ const apiDocs: Record<string, ApiDoc> = {
     description: 'User management endpoints',
     content: 'Users API documentation content...',
     category: 'User Management',
-    version: '1.0.0'
-  }
+    version: '1.0.0'}
 };
 
 export function generateStaticParams() {
   return Object.keys(apiDocs).map((slug) => ({
-    slug: slug,
-  }));
-}
-
+    slug: slug
+  }));}
 export default function ApiDocPage({ params }: { params: { slug: string } }) {
   const doc = apiDocs[params.slug];
 
@@ -332,9 +318,7 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {
           <p className="text-gray-600 mt-2">The requested API documentation does not exist.</p>
         </div>
       </div>
-    );
-  }
-
+    );}
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -364,17 +348,14 @@ let filesFixed = 0;
 
 Object.entries(finalFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ FINAL FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Final Fix Summary:`);

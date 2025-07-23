@@ -1,26 +1,24 @@
 const fs = require('fs');
 
-const nextConfig = `/** @type {import('next').NextConfig} */
-const nextConfig = {
+const _nextConfig = `/** @type {import('next').NextConfig} */
+const _nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
   experimental: {
     forceSwcTransforms: true,
-    esmExternals: true,
+    esmExternals: true
   },
   webpack: (config, { isServer, dev }) => {
     if (!dev) {
       config.optimization.minimize = false;
-      config.optimization.usedExports = false;
-    }
-    
+      config.optimization.usedExports = false;}
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': require('path').resolve(__dirname, 'src'),
+      '@': require('path').resolve(__dirname, 'src')
     };
     
     return config;
@@ -28,7 +26,7 @@ const nextConfig = {
   output: 'standalone',
   poweredByHeader: false,
   reactStrictMode: true,
-  swcMinify: false,
+  swcMinify: false
 };
 
 module.exports = nextConfig;`;

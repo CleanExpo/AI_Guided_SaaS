@@ -45,8 +45,7 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] }
-    }
-
+}
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
@@ -74,5 +73,5 @@ export default defineConfig({
     url: 'http://localhost:3004',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000
-  }
+}
 })

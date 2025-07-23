@@ -1,23 +1,21 @@
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Shield, Users, Heart, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
-
-export default function CommunityGuidelinesPage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
+props: anyexport default function CommunityGuidelinesPage(): void {
+  return (;
+    <div className="min-h-screen bg-gray-50 py-8"><div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           {/* Header */}
           <div className="flex items-center gap-4 mb-6">
             <Link href="/community">
               <Button variant="ghost" size="sm">
-                <ArrowLeft className="h-4 w-4 mr-2" />
+                <ArrowLeft className="h-4 w-4 mr-2"   />
                 Back to Community
               </Button>
             </Link>
           </div>
-          
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Community Guidelines
           </h1>
@@ -25,19 +23,18 @@ export default function CommunityGuidelinesPage() {
             Help us maintain a welcoming and productive community for everyone.
           </p>
         </div>
-
         <div className="space-y-8">
           {/* Overview */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Heart className="h-5 w-5 text-red-500" />
+                <Heart className="h-5 w-5 text-red-500"   />
                 Our Community Values
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-4">
-                AI Guided SaaS is built on the principles of collaboration, innovation, and mutual respect. 
+                AI Guided SaaS is built on the principles of collaboration, innovation, and mutual respect.
                 Our community guidelines ensure everyone can participate in a safe and productive environment.
               </p>
               <ul className="space-y-2 text-gray-600">
@@ -48,12 +45,11 @@ export default function CommunityGuidelinesPage() {
               </ul>
             </CardContent>
           </Card>
-
           {/* Code of Conduct */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-blue-500" />
+                <Shield className="h-5 w-5 text-blue-500"   />
                 Code of Conduct
               </CardTitle>
             </CardHeader>
@@ -69,7 +65,6 @@ export default function CommunityGuidelinesPage() {
                     <li>• Welcoming newcomers to the community</li>
                   </ul>
                 </div>
-                
                 <div>
                   <h3 className="font-semibold text-red-700 mb-2">❌ Prohibited Behavior</h3>
                   <ul className="space-y-1 text-gray-600 ml-4">
@@ -83,17 +78,16 @@ export default function CommunityGuidelinesPage() {
               </div>
             </CardContent>
           </Card>
-
           {/* Participation Guidelines */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-green-500" />
+                <Users className="h-5 w-5 text-green-500"   />
                 How to Participate
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid gap-6, md:grid-cols-2">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3">Asking Questions</h3>
                   <ul className="space-y-2 text-gray-600 text-sm">
@@ -103,7 +97,6 @@ export default function CommunityGuidelinesPage() {
                     <li>• Use descriptive titles for your posts</li>
                   </ul>
                 </div>
-                
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3">Providing Answers</h3>
                   <ul className="space-y-2 text-gray-600 text-sm">
@@ -116,12 +109,11 @@ export default function CommunityGuidelinesPage() {
               </div>
             </CardContent>
           </Card>
-
           {/* Reporting */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-yellow-500" />
+                <AlertTriangle className="h-5 w-5 text-yellow-500"   />
                 Reporting Issues
               </CardTitle>
             </CardHeader>
@@ -139,13 +131,12 @@ export default function CommunityGuidelinesPage() {
               </div>
             </CardContent>
           </Card>
-
           {/* Footer */}
           <Card>
             <CardContent className="pt-6">
               <p className="text-center text-gray-600 text-sm">
-                These guidelines are subject to change as our community grows. 
-                Last updated: January 2025
+                These guidelines are subject to change as our community grows.
+                Last, updated: January 2025
               </p>
             </CardContent>
           </Card>

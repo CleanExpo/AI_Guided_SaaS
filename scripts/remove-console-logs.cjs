@@ -14,17 +14,14 @@ function removeConsoleLogs(content) {
   fixed = fixed.replace(/console\.log\s*\([^)]*\)\s*;?/g, (match) => {
     // Only remove if it's not console.error or console.warn
     if (!match.includes('console.error') && !match.includes('console.warn')) {
-      return '';
-    }
+      return '';}
     return match;
   });
   
   // Clean up empty lines left behind
   fixed = fixed.replace(/\n\s*\n\s*\n/g, '\n\n');
   
-  return fixed;
-}
-
+  return fixed;}
 function processFile(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
@@ -37,20 +34,15 @@ function processFile(filePath) {
       // Count removed console.logs
       const originalMatches = originalContent.match(/console\.log/g) || [];
       const newMatches = content.match(/console\.log/g) || [];
-      const removed = originalMatches.length - newMatches.length;
+      const _removed = originalMatches.length - newMatches.length;
       
       if (removed > 0) {
         console.log(`✅ Removed ${removed} console.log statements from ${path.relative(process.cwd(), filePath)}`);
-        return removed;
-      }
-    }
+        return removed;}}
     return 0;
   } catch (error) {
     console.error(`❌ Error processing ${filePath}:`, error.message);
-    return 0;
-  }
-}
-
+    return 0;}}
 function main() {
   console.log('🧹 Removing console.log statements...\n');
   
@@ -70,17 +62,14 @@ function main() {
   patterns.forEach(pattern => {
     const files = glob.sync(pattern);
     files.forEach(file => {
-      const removed = processFile(file);
+      const _removed = processFile(file);
       if (removed > 0) {
         totalRemoved += removed;
-        filesProcessed++;
-      }
+        filesProcessed++;}
     });
   });
   
   console.log(`\n✨ Summary:`);
   console.log(`   Files processed: ${filesProcessed}`);
-  console.log(`   Console.logs removed: ${totalRemoved}`);
-}
-
+  console.log(`   Console.logs removed: ${totalRemoved}`);}
 main();

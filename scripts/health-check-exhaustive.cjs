@@ -19,25 +19,22 @@ const results = {
 
 // Helper function to run commands
 function runCommand(command, silent = false) {
-  const start = Date.now();
+  const _start = Date.now();
   try {
     const output = execSync(command, { 
       encoding: 'utf8',
       stdio: silent ? 'pipe' : 'inherit',
       maxBuffer: 1024 * 1024 * 10 // 10MB buffer
     });
-    const duration = Date.now() - start;
+    const _duration = Date.now() - start;
     return { success: true, output, duration };
   } catch (error) {
-    const duration = Date.now() - start;
+    const _duration = Date.now() - start;
     return { 
       success: false, 
       output: error.stdout || error.stderr || error.message,
-      duration 
-    };
-  }
-}
-
+      // duration
+    };}}
 // 1. Check TypeScript
 console.log('📘 TypeScript Check...');
 const tsResult = runCommand('npx tsc --noEmit 2>&1', true);
@@ -52,8 +49,7 @@ if (!tsResult.success) {
     if (match) {
       const file = match[1];
       if (!errorsByFile[file]) errorsByFile[file] = 0;
-      errorsByFile[file]++;
-    }
+      errorsByFile[file]++;}
   });
   
   // Get top 10 files with most errors
@@ -68,9 +64,7 @@ if (!tsResult.success) {
     console.log(`   - ${path.relative(process.cwd(), file)}: ${count} errors`);
   });
 } else {
-  console.log('✅ TypeScript: Clean');
-}
-
+  console.log('✅ TypeScript: Clean');}
 // 2. Check ESLint
 console.log('\n📙 ESLint Check...');
 const eslintResult = runCommand('npx eslint . --ext .ts,.tsx,.js,.jsx --format json', true);
@@ -85,8 +79,7 @@ if (eslintResult.output) {
           file: path.relative(process.cwd(), file.filePath),
           errors: file.errorCount,
           warnings: file.warningCount
-        });
-      }
+        });}
     });
     
     if (results.eslint.errors > 0) {
@@ -101,13 +94,9 @@ if (eslintResult.output) {
     } else if (results.eslint.warnings > 0) {
       console.log(`⚠️  ESLint: ${results.eslint.warnings} warnings`);
     } else {
-      console.log('✅ ESLint: Clean');
-    }
+      console.log('✅ ESLint: Clean');}
   } catch (e) {
-    console.log('❌ ESLint: Failed to parse results');
-  }
-}
-
+    console.log('❌ ESLint: Failed to parse results');}}
 // 3. Check Dependencies
 console.log('\n📦 Dependency Check...');
 const depsResult = runCommand('npm list --depth=0 2>&1', true);
@@ -115,23 +104,17 @@ if (depsResult.output.includes('missing')) {
   results.dependencies.missing = (depsResult.output.match(/missing/g) || []).length;
   console.log(`❌ Dependencies: ${results.dependencies.missing} missing`);
 } else {
-  console.log('✅ Dependencies: All installed');
-}
-
+  console.log('✅ Dependencies: All installed');}
 // Check for outdated dependencies
 const outdatedResult = runCommand('npm outdated --json', true);
 if (outdatedResult.output) {
   try {
-    const outdated = JSON.parse(outdatedResult.output);
+    const _outdated = JSON.parse(outdatedResult.output);
     results.dependencies.outdated = Object.keys(outdated).length;
     if (results.dependencies.outdated > 0) {
-      console.log(`⚠️  Dependencies: ${results.dependencies.outdated} outdated packages`);
-    }
+      console.log(`⚠️  Dependencies: ${results.dependencies.outdated} outdated packages`);}
   } catch (e) {
-    // No outdated packages returns empty string
-  }
-}
-
+    // No outdated packages returns empty string}}
 // 4. Check for security vulnerabilities
 console.log('\n🔒 Security Check...');
 const auditResult = runCommand('npm audit --json', true);
@@ -144,12 +127,9 @@ try {
     console.log(`⚠️  Security: ${vulns.total} vulnerabilities`);
     console.log(`   Critical: ${vulns.critical}, High: ${vulns.high}, Moderate: ${vulns.moderate}, Low: ${vulns.low}`);
   } else {
-    console.log('✅ Security: No vulnerabilities');
-  }
+    console.log('✅ Security: No vulnerabilities');}
 } catch (e) {
-  console.log('⚠️  Security: Check failed');
-}
-
+  console.log('⚠️  Security: Check failed');}
 // 5. Check tests (if available)
 console.log('\n🧪 Test Suite Check...');
 if (fs.existsSync('jest.config.js') || fs.existsSync('vitest.config.ts')) {
@@ -160,17 +140,12 @@ if (fs.existsSync('jest.config.js') || fs.existsSync('vitest.config.ts')) {
       results.tests.passed = testData.numPassedTests || 0;
       results.tests.failed = testData.numFailedTests || 0;
       console.log(`Tests: ${results.tests.passed} passed, ${results.tests.failed} failed`);
-    } catch (e) {
-      console.log('⚠️  Tests: Could not parse results');
-    }
-  }
-} else {
-  console.log('⚠️  Tests: No test configuration found');
-}
-
+    } catch (e) { console.log('⚠️  Tests: Could not parse results');
+     } else {
+  console.log('⚠️  Tests: No test configuration found');}
 // 6. Build check
 console.log('\n🏗️  Build Check...');
-const buildStart = Date.now();
+const _buildStart = Date.now();
 const buildResult = runCommand('npm run build 2>&1', true);
 results.performance.buildTime = (Date.now() - buildStart) / 1000; // seconds
 
@@ -183,18 +158,14 @@ if (buildResult.success) {
     const sizeResult = runCommand('du -sh .next', true);
     if (sizeResult.success) {
       results.performance.bundleSize = sizeResult.output.split('\t')[0];
-      console.log(`   Bundle size: ${results.performance.bundleSize}`);
-    }
-  }
+      console.log(`   Bundle size: ${results.performance.bundleSize}`);}}
 } else {
   console.log(`❌ Build: Failed (${results.performance.buildTime.toFixed(1)}s)`);
   // Extract build errors
-  const buildErrors = buildResult.output.split('\n')
+  const _buildErrors = buildResult.output.split('\n')
     .filter(line => line.includes('error') || line.includes('Error'))
     .slice(0, 10);
-  results.build.errors = buildErrors;
-}
-
+  results.build.errors = buildErrors;}
 // 7. File system checks
 console.log('\n📁 File System Check...');
 const requiredDirs = ['src', 'public', 'scripts', 'src/components', 'src/lib', 'src/app'];
@@ -202,22 +173,18 @@ const requiredFiles = ['package.json', 'tsconfig.json', 'next.config.js', '.env.
 
 requiredDirs.forEach(dir => {
   if (!fs.existsSync(dir)) {
-    results.fileSystem.missing.push(dir);
-  }
+    results.fileSystem.missing.push(dir);}
 });
 
 requiredFiles.forEach(file => {
   if (!fs.existsSync(file)) {
-    results.fileSystem.missing.push(file);
-  }
+    results.fileSystem.missing.push(file);}
 });
 
 if (results.fileSystem.missing.length > 0) {
   console.log(`❌ Missing: ${results.fileSystem.missing.join(', ')}`);
 } else {
-  console.log('✅ File structure: Complete');
-}
-
+  console.log('✅ File structure: Complete');}
 // 8. Check for common issues
 console.log('\n🔎 Common Issues Check...');
 const commonIssues = [];
@@ -225,37 +192,29 @@ const commonIssues = [];
 // Check for console.log statements
 const consoleLogResult = runCommand('grep -r "console.log" src/ --include="*.ts" --include="*.tsx" | wc -l', true);
 if (consoleLogResult.success) {
-  const count = parseInt(consoleLogResult.output.trim());
+  const _count = parseInt(consoleLogResult.output.trim());
   if (count > 0) {
-    commonIssues.push(`${count} console.log statements found`);
-  }
-}
-
+    commonIssues.push(`${count} console.log statements found`);}}
 // Check for TODO comments
 const todoResult = runCommand('grep -r "TODO\\|FIXME\\|HACK" src/ --include="*.ts" --include="*.tsx" | wc -l', true);
 if (todoResult.success) {
-  const count = parseInt(todoResult.output.trim());
+  const _count = parseInt(todoResult.output.trim());
   if (count > 0) {
-    commonIssues.push(`${count} TODO/FIXME comments found`);
-  }
-}
-
+    commonIssues.push(`${count} TODO/FIXME comments found`);}}
 if (commonIssues.length > 0) {
   console.log('⚠️  Common issues:');
   commonIssues.forEach(issue => console.log(`   - ${issue}`));
 } else {
-  console.log('✅ No common issues found');
-}
-
+  console.log('✅ No common issues found');}
 // Summary and scoring
 console.log('\n📊 HEALTH CHECK SUMMARY');
 console.log('═══════════════════════════════');
 
-const score = calculateHealthScore(results);
+const _score = calculateHealthScore(results);
 results.healthScore = score;
 
-const totalErrors = results.typescript.errors + results.eslint.errors;
-const totalWarnings = results.eslint.warnings;
+const _totalErrors = results.typescript.errors + results.eslint.errors;
+const _totalWarnings = results.eslint.warnings;
 
 console.log(`Health Score: ${score}/100`);
 console.log(`Total Errors: ${totalErrors}`);
@@ -267,9 +226,7 @@ if (score >= 90) {
 } else if (score >= 70) {
   console.log('\n⚠️  SYSTEM NEEDS ATTENTION - Several issues to address');
 } else {
-  console.log('\n❌ SYSTEM UNHEALTHY - Critical issues require immediate attention');
-}
-
+  console.log('\n❌ SYSTEM UNHEALTHY - Critical issues require immediate attention');}
 // Export results
 fs.writeFileSync('health-check-results.json', JSON.stringify(results, null, 2));
 console.log('\nDetailed results saved to health-check-results.json');
@@ -309,39 +266,22 @@ function calculateHealthScore(results) {
   // Deduct for failed tests
   if (results.tests.failed > 0) score -= Math.min(results.tests.failed * 2, 10);
   
-  return Math.max(0, Math.round(score));
-}
-
+  return Math.max(0, Math.round(score));}
 function generateRecommendations(results) {
   const recs = [];
   
   if (results.typescript.errors > 0) {
-    recs.push(`Fix ${results.typescript.errors} TypeScript errors - Run: npm run fix:typescript`);
-  }
-  
+    recs.push(`Fix ${results.typescript.errors} TypeScript errors - Run: npm run fix:typescript`);}
   if (results.eslint.errors > 0) {
-    recs.push(`Fix ${results.eslint.errors} ESLint errors - Run: npm run fix:eslint`);
-  }
-  
+    recs.push(`Fix ${results.eslint.errors} ESLint errors - Run: npm run fix:eslint`);}
   if (!results.build.success) {
-    recs.push('Fix build errors - Check build output for details');
-  }
-  
+    recs.push('Fix build errors - Check build output for details');}
   if (results.dependencies.missing > 0) {
-    recs.push('Install missing dependencies - Run: npm install');
-  }
-  
+    recs.push('Install missing dependencies - Run: npm install');}
   if (results.dependencies.vulnerabilities.total > 0) {
-    recs.push(`Fix ${results.dependencies.vulnerabilities.total} security vulnerabilities - Run: npm audit fix`);
-  }
-  
+    recs.push(`Fix ${results.dependencies.vulnerabilities.total} security vulnerabilities - Run: npm audit fix`);}
   if (results.tests.failed > 0) {
-    recs.push(`Fix ${results.tests.failed} failing tests - Run: npm test`);
-  }
-  
+    recs.push(`Fix ${results.tests.failed} failing tests - Run: npm test`);}
   if (recs.length === 0) {
-    recs.push('Keep up the good work! Consider adding more tests for better coverage.');
-  }
-  
-  return recs;
-}
+    recs.push('Keep up the good work! Consider adding more tests for better coverage.');}
+  return recs;}

@@ -7,9 +7,7 @@ const { execSync } = require('child_process');
 class FinalSyntaxFixer {
   constructor() {
     this.fixesApplied = 0;
-    this.filesProcessed = 0;
-  }
-
+    this.filesProcessed = 0;}
   async fixRemainingErrors() {
     console.log('🔧 Final Syntax Error Fixer\n');
     console.log('===========================\n');
@@ -21,9 +19,7 @@ class FinalSyntaxFixer {
 
       // Apply targeted fixes
       for (const file of files) {
-        await this.fixFile(file);
-      }
-
+        await this.fixFile(file);}
       console.log(`\n✅ Processing complete!`);
       console.log(`📊 Files processed: ${this.filesProcessed}`);
       console.log(`🔧 Fixes applied: ${this.fixesApplied}`);
@@ -32,23 +28,18 @@ class FinalSyntaxFixer {
       await this.verifyFixes();
 
     } catch (error) {
-      console.error('❌ Error during fixing:', error);
-    }
-  }
-
+      console.error('❌ Error during fixing:', error);}}
   async fixFile(filePath) {
     try {
       if (!fs.existsSync(filePath)) {
-        return;
-      }
-
+        return;}
       let content = fs.readFileSync(filePath, 'utf-8');
-      const originalContent = content;
+      const _originalContent = content;
       let fileFixCount = 0;
 
       // Fix 1: Remove erroneous commas from variable declarations
       // Pattern: const, variableName → const variableName
-      const wrongCommaInDeclaration = /\b(const|let|var),\s+(\w+)/g;
+      const _wrongCommaInDeclaration = /\b(const|let|var),\s+(\w+)/g;
       content = content.replace(wrongCommaInDeclaration, (match, keyword, variable) => {
         fileFixCount++;
         return `${keyword} ${variable}`;
@@ -56,7 +47,7 @@ class FinalSyntaxFixer {
 
       // Fix 2: Remove commas before object properties in destructuring
       // Pattern: const { prop1, prop2 } but sometimes it becomes const, { prop1, prop2 }
-      const wrongCommaBeforeBrace = /\b(const|let|var),\s*{/g;
+      const _wrongCommaBeforeBrace = /\b(const|let|var),\s*{/g;
       content = content.replace(wrongCommaBeforeBrace, (match, keyword) => {
         fileFixCount++;
         return `${keyword} {`;
@@ -73,13 +64,12 @@ class FinalSyntaxFixer {
 
       // Fix 5: Fix specific pattern seen in errors
       // Pattern: "word, word:" should be "word: word:"
-      const wrongCommaBeforeColon = /(\w+),\s*(\w+):/g;
+      const _wrongCommaBeforeColon = /(\w+),\s*(\w+):/g;
       content = content.replace(wrongCommaBeforeColon, (match, word1, word2) => {
         // Only fix if it looks like a type annotation
         if (word2.includes('type') || word2.includes('Type') || /^[A-Z]/.test(word2)) {
           fileFixCount++;
-          return `${word1}: ${word2}:`;
-        }
+          return `${word1}: ${word2}:`;}
         return match;
       });
 
@@ -90,13 +80,12 @@ class FinalSyntaxFixer {
 
       // Fix 7: Fix missing commas that should exist (reverse of overcorrection)
       // This pattern finds cases where we might have removed legitimate commas
-      const needsCommaPattern = /(\w+)\s+(\w+\s*:)/g;
+      const _needsCommaPattern = /(\w+)\s+(\w+\s*:)/g;
       content = content.replace(needsCommaPattern, (match, word1, word2) => {
         // Only add comma if it looks like object properties
         if (word2.includes(':') && !word1.includes('const') && !word1.includes('let') && !word1.includes('var')) {
           fileFixCount++;
-          return `${word1}, ${word2}`;
-        }
+          return `${word1}, ${word2}`;}
         return match;
       });
 
@@ -105,39 +94,26 @@ class FinalSyntaxFixer {
         fs.writeFileSync(filePath, content);
         this.filesProcessed++;
         this.fixesApplied += fileFixCount;
-        console.log(`📝 Fixed ${filePath} (${fileFixCount} fixes)`);
-      }
-
+        console.log(`📝 Fixed ${filePath} (${fileFixCount} fixes)`);}
     } catch (error) {
-      console.log(`⚠️  Error processing ${filePath}: ${error.message}`);
-    }
-  }
-
+      console.log(`⚠️  Error processing ${filePath}: ${error.message}`);}}
   getAllTypeScriptFiles() {
     const files = [];
     
     function walkDir(dir) {
       try {
-        const items = fs.readdirSync(dir);
+        const _items = fs.readdirSync(dir);
         for (const item of items) {
-          const fullPath = path.join(dir, item);
+          const _fullPath = path.join(dir, item);
           const stat = fs.statSync(fullPath);
           
           if (stat.isDirectory() && !item.includes('node_modules') && !item.includes('.git') && !item.includes('.next')) {
             walkDir(fullPath);
-          } else if (item.endsWith('.ts') || item.endsWith('.tsx')) {
-            files.push(fullPath);
-          }
-        }
-      } catch (error) {
-        // Skip directories we can't read
-      }
-    }
-    
+          } else if (item.endsWith('.ts') || item.endsWith('.tsx')) { files.push(fullPath);
+           } catch (error) {
+        // Skip directories we can't read}}
     walkDir(process.cwd());
-    return files;
-  }
-
+    return files;}
   async verifyFixes() {
     console.log('\n🔍 Verifying fixes...');
     
@@ -146,16 +122,13 @@ class FinalSyntaxFixer {
       console.log('✅ No TypeScript errors found!');
     } catch (error) {
       const output = error.stdout?.toString() || '';
-      const errorCount = (output.match(/error TS/g) || []).length;
+      const _errorCount = (output.match(/error TS/g) || []).length;
       console.log(`📊 TypeScript errors remaining: ${errorCount}`);
       
       if (errorCount > 0) {
         console.log('\nFirst 10 remaining errors:');
         const lines = output.split('\n').filter(line => line.includes('error TS')).slice(0, 10);
-        lines.forEach(line => console.log(`  ${line}`));
-      }
-    }
-    
+        lines.forEach(line => console.log(`  ${line}`));}}
     // Generate report
     const report = {
       timestamp: new Date().toISOString(),
@@ -169,14 +142,9 @@ class FinalSyntaxFixer {
       JSON.stringify(report, null, 2)
     );
     
-    console.log('\n📄 Report saved to final-syntax-fix-report.json');
-  }
-}
-
+    console.log('\n📄 Report saved to final-syntax-fix-report.json');}}
 // Run the fixer
 async function main() {
   const fixer = new FinalSyntaxFixer();
-  await fixer.fixRemainingErrors();
-}
-
+  await fixer.fixRemainingErrors();}
 main().catch(console.error);

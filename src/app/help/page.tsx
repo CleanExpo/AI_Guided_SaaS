@@ -1,17 +1,16 @@
+import React from 'react';
 import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MessageCircle, Book, Mail, Phone, Search, HelpCircle } from 'lucide-react';
-
 export const metadata: Metadata = {
   title: 'Help & Support - AI Guided SaaS Platform',
   description: 'Get help and support for AI Guided SaaS Platform - FAQs, guides, and contact options'
 };
-
-const supportOptions = [
+const supportOptions = [;,
   {
-    title: 'Documentation',
+  title: 'Documentation',
     description: 'Comprehensive guides and tutorials',
     icon: Book,
     link: '/docs'
@@ -33,12 +32,11 @@ const supportOptions = [
     description: 'Chat with our team',
     icon: Phone,
     link: '#'
-  }
+}
 ];
-
-const faqs = [
+const faqs = [;,
   {
-    question: 'How do I get started with AI Guided SaaS?',
+  question: 'How do I get started with AI Guided SaaS?',
     answer: 'Simply sign up for an account and follow our quick start guide to create your first project.'
   },
   {
@@ -52,39 +50,34 @@ const faqs = [
   {
     question: 'How secure is my data?',
     answer: 'We use enterprise-grade security measures including encryption, secure access controls, and regular security audits.'
-  }
+}
 ];
-
-export default function HelpPage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-6xl">
+props: anyexport default function HelpPage(): void {
+  return (<div className="min-h-screen bg-gray-50 py-12"><div className="container mx-auto px-4 max-w-6xl">;
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Help & Support</h1>
           <p className="text-xl text-gray-600">
             Find answers to your questions and get the help you need.
           </p>
         </div>
-
         {/* Search Bar */}
         <div className="max-w-2xl mx-auto mb-12">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"    />
             <Input
               type="text"
               placeholder="Search for help..."
               className="pl-10 py-3 text-lg"
-            />
+               />
           </div>
         </div>
-
-        {/* Support Options */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
+        {/* Support, Options */}
+        <div className="grid gap-6, md:grid-cols-2, lg:grid-cols-4 mb-12">
           {supportOptions.map((option) => (
             <Card key={option.title} className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader className="text-center">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <option.icon className="h-6 w-6 text-blue-600" />
+                  <option.icon className="h-6 w-6 text-blue-600"    />
                 </div>
                 <CardTitle className="text-lg">{option.title}</CardTitle>
               </CardHeader>
@@ -94,8 +87,7 @@ export default function HelpPage() {
             </Card>
           ))}
         </div>
-
-        {/* FAQ Section */}
+        {/* FAQ, Section */}
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl">Frequently Asked Questions</CardTitle>
@@ -103,9 +95,9 @@ export default function HelpPage() {
           <CardContent>
             <div className="space-y-6">
               {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
+                <div key={index} className="border-b border-gray-200 pb-4, last:border-b-0">
                   <div className="flex items-start">
-                    <HelpCircle className="h-5 w-5 text-blue-600 mr-3 mt-1 flex-shrink-0" />
+                    <HelpCircle className="h-5 w-5 text-blue-600 mr-3 mt-1 flex-shrink-0"    />
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
                       <p className="text-gray-600">{faq.answer}</p>
@@ -116,8 +108,7 @@ export default function HelpPage() {
             </div>
           </CardContent>
         </Card>
-
-        {/* Contact CTA */}
+        {/* Contact, CTA */}
         <div className="text-center mt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Still need help?</h2>
           <p className="text-gray-600 mb-6">Our support team is here to assist you.</p>

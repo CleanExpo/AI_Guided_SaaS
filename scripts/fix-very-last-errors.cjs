@@ -9,20 +9,17 @@ fs.writeFileSync('src/components/ui/alert.tsx', `import * as React from "react";
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
-const alertVariants = cva(
+const _alertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
     variants: {
       variant: {
         default: "bg-background text-foreground",
         destructive:
-          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
-      },
+          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive"}
     },
     defaultVariants: {
-      variant: "default",
-    },
-  }
+      variant: "default"}}
 );
 
 const Alert = React.forwardRef<
@@ -71,9 +68,9 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/utils/cn";
 
-const Select = SelectPrimitive.Root;
-const SelectGroup = SelectPrimitive.Group;
-const SelectValue = SelectPrimitive.Value;
+const _Select = SelectPrimitive.Root;
+const _SelectGroup = SelectPrimitive.Group;
+const _SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
@@ -83,7 +80,7 @@ const SelectTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-      className
+      // className
     )}
     {...props}
   >
@@ -104,7 +101,7 @@ const SelectContent = React.forwardRef<
       ref={ref}
       className={cn(
         "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md",
-        className
+        // className
       )}
       position={position}
       {...props}
@@ -125,7 +122,7 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      // className
     )}
     {...props}
   >
@@ -145,7 +142,7 @@ export {
   SelectValue,
   SelectTrigger,
   SelectContent,
-  SelectItem,
+  // SelectItem
 };`);
 
 // Fix SelfCheckTrigger
@@ -158,18 +155,14 @@ interface HealthMetrics {
   dependencyScore: number;
   securityScore: number;
   performanceScore: number;
-  overallHealth: number;
-}
-
+  overallHealth: number;}
 interface SelfCheckTriggerProps {
-  onReportGenerated?: (metrics: HealthMetrics) => void;
-}
-
+  onReportGenerated? (metrics: HealthMetrics) => void;}
 const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated }) => {
   const [isRunning, setIsRunning] = useState(false);
   const [metrics, setMetrics] = useState<HealthMetrics | null>(null);
 
-  const runSelfCheck = async () => {
+  const _runSelfCheck = async () => {
     setIsRunning(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -187,8 +180,7 @@ const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated }
     } catch (error) {
       console.error('Self-check failed:', error);
     } finally {
-      setIsRunning(false);
-    }
+      setIsRunning(false);}
   };
 
   return (
@@ -249,12 +241,10 @@ interface Component {
   x: number;
   y: number;
   width: number;
-  height: number;
-}
-
+  height: number;}
 export default function NoCodeBuilder() {
   const [components, setComponents] = useState<Component[]>([]);
-  const canvasRef = useRef<HTMLDivElement>(null);
+  const _canvasRef = useRef<HTMLDivElement>(null);
 
   const componentLibrary = [
     { icon: Layout, label: 'Container', type: 'container' },
@@ -303,9 +293,7 @@ interface FileNode {
   name: string;
   type: 'file' | 'folder';
   path: string;
-  children?: FileNode[];
-}
-
+  children?: FileNode[];}
 export default function ProCodeEditor() {
   const [fileTree] = useState<FileNode[]>([
     {
@@ -320,7 +308,7 @@ export default function ProCodeEditor() {
     { name: 'package.json', type: 'file', path: '/package.json' }
   ]);
 
-  const renderFileTree = (nodes: FileNode[]) => {
+  const _renderFileTree = (nodes: FileNode[]) => {
     return nodes.map(node => (
       <div key={node.path} className="py-1">
         <div className="flex items-center px-2 hover:bg-gray-700 cursor-pointer text-sm">
@@ -350,7 +338,7 @@ export default function ProCodeEditor() {
           </button>
           <button className="px-3 py-1 bg-green-600 hover:bg-green-700 rounded text-sm">
             <Play className="h-4 w-4 mr-1 inline" />
-            Run
+            // Run
           </button>
         </div>
       </div>

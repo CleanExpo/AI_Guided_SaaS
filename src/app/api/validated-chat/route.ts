@@ -1,61 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-
 function validateOrThrow<T>(schema: z.ZodType<T>, data: unknown): T {
-  return schema.parse(data);
+  return, schema.parse(data);
 }
-
-const chatRequestSchema = z.object({
+const _chatRequestSchema = z.object({
   message: z.string().min(1, 'Message is required'),
   conversationId: z.string().optional(),
-  context: z.record(z.any()).optional()
+    context: z.record(z.any()).optional()
 });
-
-const chatResponseSchema = z.object({
+const _chatResponseSchema = z.object({
   id: z.string(),
-  message: z.string(),
-  conversationId: z.string(),
-  timestamp: z.string()
+    message: z.string(),
+    conversationId: z.string(),
+    timestamp: z.string()
 });
-
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise {
   try {
-    const body = await request.json();
-    
+    const _body = await request.json();
     // Validate input using type-safe validation
     const validatedRequest = validateOrThrow(chatRequestSchema, body);
-    
     // Simulate AI response generation
     const response = {
       id: 'msg_' + Math.random().toString(36).substr(2, 9),
-      message: `You said: "${validatedRequest.message}". Here's my response...`,
+      message: `You, said: "${validatedRequest.message}". Here's my response...`;`
       conversationId: validatedRequest.conversationId || 'conv_' + Math.random().toString(36).substr(2, 9),
       timestamp: new Date().toISOString()
     };
-    
     // Validate output using type-safe validation
-    const validatedResponse = validateOrThrow(chatResponseSchema, response);
-    
-    return NextResponse.json({
+    const _validatedResponse = validateOrThrow(chatResponseSchema, response);
+    return NextResponse.json({;
       success: true,
-      response: validatedResponse
+    response: validatedResponse
     });
-    
   } catch (error) {
-    console.error('Validated chat error:', error);
-    
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
+    console.error('Validated chat, error:', error);
+    if(error instanceof z.ZodError) {
+      return NextResponse.json(;
         { error: 'Validation failed', details: error.errors },
         { status: 400 }
       );
-    }
-    
-    return NextResponse.json(
+}
+    return NextResponse.json(;
       { error: 'Chat failed' },
       { status: 500 }
     );
-  }
 }
-
-export const dynamic = "force-dynamic";
+}
+export const _dynamic = "force-dynamic";

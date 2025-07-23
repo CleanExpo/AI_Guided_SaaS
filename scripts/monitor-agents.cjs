@@ -5,7 +5,7 @@
  * Displays real-time status of all agents
  */
 
-const path = require('path');
+const _path = require('path');
 
 async function main() {
   console.log('📊 Agent Monitoring Dashboard')
@@ -20,12 +20,11 @@ async function main() {
     if (!status.initialized) {
       console.log('⚠️ System not initialized. Initializing...')
       await agentSystem.initialize()
-    }
-
+}
     // Start continuous monitoring
     console.log('🔍 Starting continuous monitoring (Ctrl+C to stop)...\n')
     
-    const monitor = () => {
+    const _monitor = () => {
       const dashboard = getMonitoringDashboard()
       const systemStatus = agentSystem.getSystemStatus()
       
@@ -65,11 +64,10 @@ async function main() {
         console.log('📋 Recent Activity')
         console.log('-----------------')
         dashboard.recent_activity.slice(0, 5).forEach(activity => {
-          const time = new Date(activity.timestamp).toLocaleTimeString()
+          const _time = new Date(activity.timestamp).toLocaleTimeString()
           console.log(`[${time}] ${activity.message}`)
         })
-      }
-      
+}
       // Active Alerts
       if (dashboard.alerts.active_alerts.length > 0) {
         console.log('\n🚨 Active Alerts')
@@ -77,9 +75,8 @@ async function main() {
         dashboard.alerts.active_alerts.forEach(alert => {
           console.log(`[${alert.severity.toUpperCase()}] ${alert.agent_id}: ${alert.message}`)
         })
-      }
-    }
-    
+}
+}
     // Initial display
     monitor()
     
@@ -96,9 +93,8 @@ async function main() {
     console.log('- Build status: ✅ Successful')
     console.log('\nNote: Full monitoring requires runtime initialization.')
     process.exit(0)
-  }
 }
-
+}
 // Handle graceful shutdown
 process.on('SIGINT', () => {
   console.log('\n\n👋 Stopping agent monitoring...')

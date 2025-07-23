@@ -18,7 +18,7 @@ module.exports = {
         'revert',   // Reverting changes
         'security', // Security fixes
         'deps',     // Dependency updates
-      ],
+      ]
     ],
     'type-case': [2, 'always', 'lower-case'],
     'type-empty': [2, 'never'],
@@ -30,6 +30,5 @@ module.exports = {
     'body-leading-blank': [1, 'always'],
     'body-max-line-length': [2, 'always', 100],
     'footer-leading-blank': [1, 'always'],
-    'footer-max-line-length': [2, 'always', 100],
-  },
+    'footer-max-line-length': [2, 'always', 100]}
 };

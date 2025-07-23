@@ -2,72 +2,71 @@ import { useState, useCallback, useRef } from 'react';
 import { RAGEngine, RAGQuery, RAGResponse } from '@/lib/knowledge/rag-engine';
 import { createVectorStore } from '@/lib/knowledge/vector-store';
 import { useToast } from '@/components/ui/use-toast';
-export interface UseRAGOptions {;
-  provider?: 'memory' | 'pinecone' | 'weaviate' | 'chroma' | 'qdrant'
-  apiKey?: string
-  indexName?: string
-  chunkSize?: number
-  chunkOverlap?: number
-  retrievalTopK?: number
+export interface UseRAGOptions {
+  provider?: 'memory' | 'pinecone' | 'weaviate' | 'chroma' | 'qdrant';
+  apiKey?: string;
+  indexName?: string;
+  chunkSize?: number;
+  chunkOverlap?: number;
+  retrievalTopK?: number;
 };
-export interface UseRAGReturn {;
-  // Query operations;
-  query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>
+export interface UseRAGReturn {
+  // Query operations,
+    query: (question: string, options?: Partial<RAGQuery>) => Promise<RAGResponse>;
   streamQuery: (question: string, options?: Partial<RAGQuery>) => AsyncGenerator<string, void, unknown>
-  // Document operations;
-  addDocument: (content: string, metadata) => Promise<string>
-  addFromUrl: (url: string) => Promise<string[]>
-  addFromFile: (file: File) => Promise<string>
-  ingestCodebase: (path: string, options?: any) => Promise<{ documentsAdded: number; errors: string[] }>
-  // Knowledge base management, updateDocument: (id: string, content?: string, metadata?: any) => Promise<void>
-  deleteDocument: (id: string) => Promise<void>
+  // Document operations,
+    addDocument: (content: string, metadata) => Promise<string>
+  addFromUrl: (url: string) => Promise<string[]>,
+  addFromFile: (file: File) => Promise<string>;,
+  ingestCodebase: (path: string, options?) => Promise<{ documentsAdded: number, errors: string[] }>
+  // Knowledge base management, updateDocument: (id: string, content?: string, metadata?) => Promise<any>
+  deleteDocument: (id: string) => Promise<any>,
   getSimilar: (documentId: string, topK?: number) => Promise<any[]>
-  getStats: () => Promise<any>
+  getStats: () => Promise<any>,
   exportKnowledge: (format?: 'json' | 'markdown') => Promise<string>
-  clearKnowledge: () => Promise<void>
-  // State, loading: boolean; error: string | null; initialized: boolean
+  clearKnowledge: () => Promise<any>
+  // State, loading: boolean, error: string | null, initialized: boolean
 };
-export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {;
-  const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [initialized, setInitialized] = useState(false);
+export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAGReturn {
+  const { toast   }: any = useToast();
+  const [loading, setLoading]: any[] = useState<any>(false);
+  const [error, setError]: any[] = useState<string | null>(null);
+  const [initialized, setInitialized]: any[] = useState<any>(false);
   const engineRef = useRef<RAGEngine | null>(null);
   // Initialize RAG engine
-  const initializeEngine = useCallback(async () => {;
-    if (engineRef.current) return engineRef.current
+  const _initializeEngine = useCallback(async () => {
+    if (engineRef.current) return engineRef.current;
     try {
-      const vectorStore = createVectorStore({;
-        provider: options.provider || 'memory';
-        apiKey: options.apiKey;
-        indexName: options.indexName;
-        dimension: 1536;
-  // OpenAI embedding dimension
-  metric: 'cosine'
+      const _vectorStore = createVectorStore({
+    provider: options.provider || 'memory',
+    apiKey: options.apiKey,
+    indexName: options.indexName,
+    dimension: 1536;
+  // OpenAI embedding dimension, metric: 'cosine'
       })
-      const engine = new RAGEngine({;
+      const engine = new RAGEngine({
         vectorStore,
-        chunkSize: options.chunkSize || 1000;
-        chunkOverlap: options.chunkOverlap || 200;
-        retrievalTopK: options.retrievalTopK || 5
+        chunkSize: options.chunkSize || 1000,
+    chunkOverlap: options.chunkOverlap || 200,
+    retrievalTopK: options.retrievalTopK || 5
       })
       await engine.initialize()
       engineRef.current = engine
       setInitialized(true)
-      return engine
+      return engine;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to initialize RAG engine';
+      const _message = err instanceof Error ? err.message : 'Failed to initialize RAG engine',;
       setError(message)
       toast({
-        title: 'Initialization Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Initialization Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
-    }
+}
   }, [options])
   // Query the knowledge base
-  const query = useCallback(async (;
+  const _query = useCallback(async (,;
     question: string,
     queryOptions?: Partial<RAGQuery>
   ): Promise<RAGResponse> => {
@@ -75,29 +74,29 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {;
     setError(null)
     try {
       const engine = await initializeEngine();
-      const response = await engine.query({;
+      const _response = await engine.query({
         question,
         ...queryOptions
       })
-      return response
+      return response;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Query failed';
+      const _message = err instanceof Error ? err.message : 'Query failed',;
       setError(message)
       toast({
-        title: 'Query Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Query Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Stream query response
-  const streamQuery = useCallback(async function* (;
+  const _streamQuery = useCallback(async function* (,;
     question: string,
     queryOptions?: Partial<RAGQuery>
-  ): AsyncGenerator<string, void, unknown> {
+  ): AsyncGenerator {
     setLoading(true)
     setError(null)
     try {
@@ -107,181 +106,179 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {;
         ...queryOptions
       })
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Stream query failed';
+      const _message = err instanceof Error ? err.message : 'Stream query failed',;
       setError(message)
       toast({
-        title: 'Stream Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Stream Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Add document to knowledge base
-  const addDocument = useCallback(async (;
+  const _addDocument = useCallback(async (,;
     content: string,
     metadata): Promise<string> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
-      const id = await engine.addDocument(content, metadata);
+      const _id = await engine.addDocument(content, metadata);
       toast({
-        title: 'Document Added';
+        title: 'Document Added',
         description: 'Document successfully added to knowledge base'
       })
-      return id
+      return id;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to add document';
+      const _message = err instanceof Error ? err.message : 'Failed to add document',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Add document from URL
-  const addFromUrl = useCallback(async (url: string): Promise<string[]> => {;
+  const _addFromUrl = useCallback(async (url: string): Promise<string[]> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
       const ids = await engine.addFromSource(url, 'url');
       toast({
-        title: 'Success';
-        description: `Added ${ids.length} document(s) from URL``
+        title: 'Success',
+        description: `Added ${ids.length} document(s) from URL`
       })
-      return ids
+      return ids;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to add from URL';
+      const _message = err instanceof Error ? err.message : 'Failed to add from URL',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Add document from file
-  const addFromFile = useCallback(async (file: File): Promise<string> => {;
+  const _addFromFile = useCallback(async (file: File): Promise<string> => {
     setLoading(true)
     setError(null)
     try {
-      const content = await file.text();
+      const _content = await file.text();
       const engine = await initializeEngine();
-      const id = await engine.addDocument(content, {;
-        source: file.name: type, getDocumentTypeFromFile(file),
+      const _id = await engine.addDocument(content, {
+    source: file.name: type, getDocumentTypeFromFile(file),
         title: file.name
       })
       toast({
-        title: 'File Added';
-        description: `${file.name} added to knowledge base``
+        title: 'File Added',
+        description: `${file.name} added to knowledge base`
       })
-      return id
+      return id;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to add file';
+      const _message = err instanceof Error ? err.message : 'Failed to add file',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Ingest entire codebase
-  const ingestCodebase = useCallback(async (;
+  const _ingestCodebase = useCallback(async (,;
     path: string,
-    ingestOptions?: any
-  ): Promise<{ documentsAdded: number; errors: string[] }> => {
+    ingestOptions?): Promise<{ documentsAdded: number, errors: string[] }> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
       const result = await engine.ingestCodebase(path, ingestOptions);
       toast({
-        title: 'Codebase Ingested';
-        description: `Added ${result.documentsAdded} files${result.errors.length > 0 ? ` with ${result.errors.length} errors` : ''}``
+        title: 'Codebase Ingested',
+        description: `Added ${result.documentsAdded} files${result.errors.length > 0 ? ` with ${result.errors.length} errors` : ''}```
       })
-      return result
+      return result;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to ingest codebase';
+      const _message = err instanceof Error ? err.message : 'Failed to ingest codebase',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Update document
-  const updateDocument = useCallback(async (;
+  const _updateDocument = useCallback(async (,;
     id: string,
     content?: string,
-    metadata?: any
-  ): Promise<void> => {
+    metadata?): Promise<any> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
       await engine.updateDocument(id, content, metadata)
       toast({
-        title: 'Document Updated';
+        title: 'Document Updated',
         description: 'Document successfully updated'
       })
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to update document';
+      const _message = err instanceof Error ? err.message : 'Failed to update document',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Delete document
-  const deleteDocument = useCallback(async (id: string): Promise<void> => {;
+  const _deleteDocument = useCallback(async (id: string): Promise<any> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
       await engine.deleteDocument(id)
       toast({
-        title: 'Document Deleted';
+        title: 'Document Deleted',
         description: 'Document removed from knowledge base'
       })
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to delete document';
+      const _message = err instanceof Error ? err.message : 'Failed to delete document',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Get similar documents
-  const getSimilar = useCallback(async (;
+  const _getSimilar = useCallback(async (,;
     documentId: string,
     topK?: number
   ): Promise<any[]> => {
@@ -289,92 +286,92 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {;
     setError(null)
     try {
       const engine = await initializeEngine();
-      return await engine.getSimilar(documentId, topK)
+      return await engine.getSimilar(documentId, topK);
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to get similar documents';
+      const _message = err instanceof Error ? err.message : 'Failed to get similar documents',;
       setError(message)
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Get knowledge base statistics
-  const getStats = useCallback(async (): Promise<any> => {;
+  const _getStats = useCallback(async (): Promise<any> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
-      return await engine.getStats()
+      return await engine.getStats();
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to get stats';
+      const _message = err instanceof Error ? err.message : 'Failed to get stats',;
       setError(message)
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Export knowledge base
-  const exportKnowledge = useCallback(async (;
+  const _exportKnowledge = useCallback(async (,;
     format: 'json' | 'markdown' = 'json'
   ): Promise<string> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
-      const exported = await engine.export(format);
+      const _exported = await engine.export(format);
       // Create download link
-      const blob = new Blob([exported], { ;
-        type: format === 'json' ? 'application/json' : 'text/markdown'
+      const _blob = new Blob([exported], {
+    type: format === 'json' ? 'application/json' : 'text/markdown'
       })
-      const url = URL.createObjectURL(blob);
+      const _url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url
-      a.download = `knowledge-base.${format === 'json' ? 'json' : 'md'}``
+      a.download = `knowledge-base.${format === 'json' ? 'json' : 'md'}`
       a.click()
       URL.revokeObjectURL(url)
       toast({
-        title: 'Export Complete';
+        title: 'Export Complete',
         description: 'Knowledge base exported successfully'
       })
-      return exported
+      return exported;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to export';
+      const _message = err instanceof Error ? err.message : 'Failed to export',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
   // Clear knowledge base
-  const clearKnowledge = useCallback(async (): Promise<void> => {;
+  const _clearKnowledge = useCallback(async (): Promise<any> => {
     setLoading(true)
     setError(null)
     try {
       const engine = await initializeEngine();
       await engine.clear()
       toast({
-        title: 'Knowledge Base Cleared';
+        title: 'Knowledge Base Cleared',
         description: 'All documents have been removed'
       })
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to clear knowledge base';
+      const _message = err instanceof Error ? err.message : 'Failed to clear knowledge base',;
       setError(message)
       toast({
-        title: 'Error';
-        description: message;
-        variant: 'destructive'
+        title: 'Error',
+        description: message,
+    variant: 'destructive'
       })
       throw err
     } finally {
       setLoading(false)
-    }
+}
   }, [initializeEngine])
-  return {
+  return {;
     // Query operations
     query,
     streamQuery,
@@ -393,17 +390,17 @@ export function useRAG(options: UseRAGOptions = {}): UseRAGReturn {;
     // State
     loading,
     error,
-    initialized
-  }
+    // initialized
+}
 }
 // Helper function to determine document type from file
-function getDocumentTypeFromFile(file: File): 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other' {;
-  const extension = file.name.split('.').pop()?.toLowerCase();
+function getDocumentTypeFromFile(file: File): 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other' {
+  const _extension = file.name.split('.').pop()?.toLowerCase();
   const codeExtensions = ['js', 'jsx', 'ts', 'tsx', 'py', 'java', 'cpp', 'c', 'go', 'rs', 'rb', 'php'];
   const docExtensions = ['md', 'rst', 'txt'];
   const apiExtensions = ['yaml', 'yml', 'json', 'xml'];
-  if (codeExtensions.includes(extension || '')) return 'code'
-  if (docExtensions.includes(extension || '')) return 'documentation'
-  if (apiExtensions.includes(extension || '')) return 'api'
-  return 'other'
+  if (codeExtensions.includes(extension || '')) return 'code';
+  if (docExtensions.includes(extension || '')) return 'documentation';
+  if (apiExtensions.includes(extension || '')) return 'api';
+  return 'other';
 }

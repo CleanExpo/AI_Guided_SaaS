@@ -1,50 +1,44 @@
-import { NextRequest, NextResponse } from 'next/server';
-
-export async function GET() {
+import { NextRequest, NextResponse } from 'next/server';export async function GET(): void {
   try {
-    const status = {
+    const _status = {
       NODE_ENV: process.env.NODE_ENV || 'development',
-      DATABASE_URL: !!process.env.DATABASE_URL,
-      NEXTAUTH_URL: !!process.env.NEXTAUTH_URL,
-      NEXTAUTH_SECRET: !!process.env.NEXTAUTH_SECRET,
-      EMAIL_CONFIGURED: !!process.env.SMTP_HOST,
-      STRIPE_CONFIGURED: !!process.env.STRIPE_SECRET_KEY,
-      timestamp: new Date().toISOString()
+    DATABASE_URL: !!process.env.DATABASE_URL,
+    NEXTAUTH_URL: !!process.env.NEXTAUTH_URL,
+    NEXTAUTH_SECRET: !!process.env.NEXTAUTH_SECRET,
+    EMAIL_CONFIGURED: !!process.env.SMTP_HOST,
+    STRIPE_CONFIGURED: !!process.env.STRIPE_SECRET_KEY,
+    timestamp: new Date().toISOString()
     };
-    
-    return NextResponse.json({
+    return NextResponse.json({;
       success: true,
-      data: status,
-      timestamp: new Date().toISOString()
+    data: status,
+    timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Env status error:', error);
-    return NextResponse.json(
+    console.error('Env status, error:', error);
+    return NextResponse.json(;
       { error: 'Failed to get environment status' },
       { status: 500 }
     );
-  }
 }
-
-export async function POST(request: NextRequest) {
+}
+export async function POST(request: NextRequest): Promise {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { key, value } = body;
-    
     // In a real implementation, you'd validate and update environment variables
     // For now, we'll just simulate success
-    return NextResponse.json({
+    return NextResponse.json({;
       success: true,
-      message: `Environment variable ${key} updated`,
+    message: `Environment variable ${key} updated`;`
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Env update error:', error);
-    return NextResponse.json(
+    console.error('Env update, error:', error);
+    return NextResponse.json(;
       { error: 'Failed to update environment variable' },
       { status: 500 }
     );
-  }
 }
-
-export const dynamic = "force-dynamic";
+}
+export const _dynamic = "force-dynamic";

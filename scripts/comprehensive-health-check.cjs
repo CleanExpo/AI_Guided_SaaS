@@ -12,8 +12,7 @@ class ComprehensiveHealthCheck {
   constructor() {
     this.results = []
     this.baseUrl = 'http://localhost:3004'
-  }
-  
+}
   async run() {
     console.log('🏥 Starting Comprehensive Health Check...\n')
     
@@ -46,12 +45,11 @@ class ComprehensiveHealthCheck {
     
     // 10. Generate report
     return this.generateReport()
-  }
-  
+}
   async checkProjectStructure() {
     console.log('📁 Checking Project Structure...')
     
-    const requiredDirs = [
+    const _requiredDirs = [
       'src/app',
       'src/components',
       'src/lib',
@@ -64,7 +62,7 @@ class ComprehensiveHealthCheck {
     ]
     
     for (const dir of requiredDirs) {
-      const exists = existsSync(join(process.cwd(), dir))
+      const _exists = existsSync(join(process.cwd(), dir))
       this.addResult({
         category: 'Project Structure',
         item: dir,
@@ -72,13 +70,12 @@ class ComprehensiveHealthCheck {
         message: exists ? 'Directory exists' : 'Directory missing',
         severity: exists ? 'low' : 'high'
       })
-    }
-  }
-  
+}
+}
   async checkConfiguration() {
     console.log('⚙️ Checking Configuration Files...')
     
-    const configs = [
+    const _configs = [
       { file: 'package.json', severity: 'critical' },
       { file: 'tsconfig.json', severity: 'critical' },
       { file: 'next.config.mjs', severity: 'critical' },
@@ -87,7 +84,7 @@ class ComprehensiveHealthCheck {
     ]
     
     for (const config of configs) {
-      const exists = existsSync(join(process.cwd(), config.file))
+      const _exists = existsSync(join(process.cwd(), config.file))
       this.addResult({
         category: 'Configuration',
         item: config.file,
@@ -95,13 +92,12 @@ class ComprehensiveHealthCheck {
         message: exists ? 'Configuration file exists' : 'Configuration file missing',
         severity: config.severity
       })
-    }
-  }
-  
+}
+}
   async checkAPIEndpoints() {
     console.log('🔌 Checking API Endpoints...')
     
-    const endpoints = [
+    const _endpoints = [
       '/api/health',
       '/api/auth/session',
       '/api/admin',
@@ -114,9 +110,9 @@ class ComprehensiveHealthCheck {
     
     for (const endpoint of endpoints) {
       try {
-        const fetch = require('node-fetch')
+        const _fetch = require('node-fetch')
         const response = await fetch(`${this.baseUrl}${endpoint}`)
-        const isSuccess = response.status < 400
+        const _isSuccess = response.status < 400
         
         this.addResult({
           category: 'API Endpoints',
@@ -127,8 +123,8 @@ class ComprehensiveHealthCheck {
         })
       } catch (error) {
         // If fetch is not available, check if route file exists
-        const routePath = join(process.cwd(), 'src', 'app', endpoint, 'route.ts')
-        const exists = existsSync(routePath)
+        const _routePath = join(process.cwd(), 'src', 'app', endpoint, 'route.ts')
+        const _exists = existsSync(routePath)
         
         this.addResult({
           category: 'API Endpoints',
@@ -137,14 +133,13 @@ class ComprehensiveHealthCheck {
           message: exists ? 'Route file exists (server not running)' : 'Route file missing',
           severity: 'high'
         })
-      }
-    }
-  }
-  
+}
+}
+}
   async checkPages() {
     console.log('📄 Checking Pages (No 404s)...')
     
-    const pages = [
+    const _pages = [
       { path: '/', file: 'src/app/page.tsx' },
       { path: '/dashboard', file: 'src/app/dashboard/page.tsx' },
       { path: '/auth/signin', file: 'src/app/auth/signin/page.tsx' },
@@ -162,7 +157,7 @@ class ComprehensiveHealthCheck {
     ]
     
     for (const page of pages) {
-      const exists = existsSync(join(process.cwd(), page.file))
+      const _exists = existsSync(join(process.cwd(), page.file))
       
       this.addResult({
         category: 'Pages',
@@ -171,27 +166,25 @@ class ComprehensiveHealthCheck {
         message: exists ? 'Page file exists' : 'Page file missing - will cause 404',
         severity: page.path === '/' || page.path === '/dashboard' ? 'critical' : 'high'
       })
-    }
-  }
-  
+}
+}
   async checkDatabaseConnections() {
     console.log('🗄️ Checking Database Connections...')
     
     // Read .env.local if it exists
     let envVars = {}
-    const envPath = join(process.cwd(), '.env.local')
+    const _envPath = join(process.cwd(), '.env.local')
     if (existsSync(envPath)) {
       const envContent = readFileSync(envPath, 'utf-8')
       envContent.split('\n').forEach(line => {
         const [key, value] = line.split('=')
         if (key && value) {
           envVars[key.trim()] = value.trim()
-        }
+}
       })
-    }
-    
-    const hasSupabaseUrl = envVars.NEXT_PUBLIC_SUPABASE_URL || envVars.SUPABASE_URL
-    const hasSupabaseKey = envVars.NEXT_PUBLIC_SUPABASE_ANON_KEY || envVars.SUPABASE_ANON_KEY
+}
+    const _hasSupabaseUrl = envVars.NEXT_PUBLIC_SUPABASE_URL || envVars.SUPABASE_URL
+    const _hasSupabaseKey = envVars.NEXT_PUBLIC_SUPABASE_ANON_KEY || envVars.SUPABASE_ANON_KEY
     
     this.addResult({
       category: 'Database',
@@ -200,20 +193,19 @@ class ComprehensiveHealthCheck {
       message: hasSupabaseUrl && hasSupabaseKey ? 'Configured' : 'Missing environment variables',
       severity: 'critical'
     })
-  }
-  
+}
   async checkAuthentication() {
     console.log('🔐 Checking Authentication...')
     
     // Check for auth files
-    const authFiles = [
+    const _authFiles = [
       'src/app/api/auth/[...nextauth]/route.ts',
       'src/lib/auth.ts',
       'src/middleware.ts'
     ]
     
     for (const file of authFiles) {
-      const exists = existsSync(join(process.cwd(), file))
+      const _exists = existsSync(join(process.cwd(), file))
       this.addResult({
         category: 'Authentication',
         item: file.split('/').pop(),
@@ -221,13 +213,12 @@ class ComprehensiveHealthCheck {
         message: exists ? 'Auth file exists' : 'Auth file missing',
         severity: 'high'
       })
-    }
-  }
-  
+}
+}
   async checkAgentSystem() {
     console.log('🤖 Checking Agent System...')
     
-    const agentFiles = [
+    const _agentFiles = [
       'src/lib/agents/AgentOrchestrator.ts',
       'src/lib/agents/AgentLoader.ts',
       'src/lib/agents/AgentCoordinator.ts',
@@ -237,7 +228,7 @@ class ComprehensiveHealthCheck {
     ]
     
     for (const file of agentFiles) {
-      const exists = existsSync(join(process.cwd(), file))
+      const _exists = existsSync(join(process.cwd(), file))
       this.addResult({
         category: 'Agent System',
         item: file.split('/').pop(),
@@ -245,13 +236,12 @@ class ComprehensiveHealthCheck {
         message: exists ? 'Component exists' : 'Component missing',
         severity: 'high'
       })
-    }
-  }
-  
+}
+}
   async checkAdminDashboard() {
     console.log('👨‍💼 Checking Admin Dashboard...')
     
-    const adminComponents = [
+    const _adminComponents = [
       'src/components/admin/AdminDashboard.tsx',
       'src/components/admin/AdminPanel.tsx',
       'src/components/admin/AdminAnalytics.tsx',
@@ -260,7 +250,7 @@ class ComprehensiveHealthCheck {
     ]
     
     for (const component of adminComponents) {
-      const exists = existsSync(join(process.cwd(), component))
+      const _exists = existsSync(join(process.cwd(), component))
       this.addResult({
         category: 'Admin Dashboard',
         item: component.split('/').pop(),
@@ -268,13 +258,12 @@ class ComprehensiveHealthCheck {
         message: exists ? 'Component exists' : 'Component missing',
         severity: 'high'
       })
-    }
-  }
-  
+}
+}
   async checkMissingComponents() {
     console.log('🔍 Checking for Missing Components...')
     
-    const criticalComponents = [
+    const _criticalComponents = [
       'src/components/Dashboard.tsx',
       'src/components/AIChat.tsx',
       'src/components/ProjectGenerator.tsx',
@@ -285,7 +274,7 @@ class ComprehensiveHealthCheck {
     ]
     
     for (const component of criticalComponents) {
-      const exists = existsSync(join(process.cwd(), component))
+      const _exists = existsSync(join(process.cwd(), component))
       this.addResult({
         category: 'Core Components',
         item: component.split('/').pop(),
@@ -293,16 +282,14 @@ class ComprehensiveHealthCheck {
         message: exists ? 'Component exists' : 'Component missing - needs to be created',
         severity: 'critical'
       })
-    }
-  }
-  
+}
+}
   addResult(result) {
     this.results.push(result)
     
-    const icon = result.status === 'pass' ? '✅' : result.status === 'warning' ? '⚠️' : '❌'
+    const _icon = result.status === 'pass' ? '✅' : result.status === 'warning' ? '⚠️' : '❌'
     console.log(`${icon} ${result.item}: ${result.message}`)
-  }
-  
+}
   generateReport() {
     const summary = {
       total: this.results.length,
@@ -310,16 +297,11 @@ class ComprehensiveHealthCheck {
       failed: this.results.filter(r => r.status === 'fail').length,
       warnings: this.results.filter(r => r.status === 'warning').length,
       criticalIssues: this.results.filter(r => r.status === 'fail' && r.severity === 'critical').length
-    }
-    
-    return {
-      timestamp: new Date(),
-      results: this.results,
-      summary
-    }
-  }
 }
-
+    return { timestamp: new Date(),
+      results: this.results,
+      // summary
+}
 // Run the health check
 async function main() {
   const healthCheck = new ComprehensiveHealthCheck()
@@ -339,25 +321,22 @@ async function main() {
     report.results
       .filter(r => r.status === 'fail' && r.severity === 'critical')
       .forEach(r => console.log(`- ${r.category}: ${r.item} - ${r.message}`))
-  }
-  
+}
   // Show all failures
   if (report.summary.failed > 0) {
     console.log('\n❌ All Failed Checks:')
     report.results
       .filter(r => r.status === 'fail')
       .forEach(r => console.log(`- ${r.category}: ${r.item} - ${r.message}`))
-  }
-  
+}
   // Save report
-  const reportPath = join(process.cwd(), 'health-check-report.json')
+  const _reportPath = join(process.cwd(), 'health-check-report.json')
   writeFileSync(reportPath, JSON.stringify(report, null, 2))
   
   console.log(`\n📄 Full report saved to: ${reportPath}`)
   
   return report
 }
-
 // Export for use in other scripts
 module.exports = { ComprehensiveHealthCheck, main }
 

@@ -1,0 +1,1217 @@
+{
+  "timestamp": "2025-07-22T23:14:39.813Z",
+  "summary": {
+    "total": 100,
+    "critical": 3,
+    "high": 3,
+    "medium": 94,
+    "low": 0
+  },
+  "gaps": [
+    {
+      "category": "Dependencies",
+      "issue": "Package @anthropic-ai/sdk uses flexible versioning: ^0.57.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^0.57.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @faker-js/faker uses flexible versioning: ^9.9.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^9.9.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @monaco-editor/react uses flexible versioning: ^4.7.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^4.7.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @next-auth/supabase-adapter uses flexible versioning: ^0.2.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^0.2.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-dialog uses flexible versioning: ^1.1.14",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.1.14",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-dropdown-menu uses flexible versioning: ^2.1.15",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.1.15",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-label uses flexible versioning: ^2.1.7",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.1.7",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-navigation-menu uses flexible versioning: ^1.2.13",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.2.13",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-progress uses flexible versioning: ^1.1.7",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.1.7",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-radio-group uses flexible versioning: ^1.3.7",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.3.7",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-scroll-area uses flexible versioning: ^1.2.9",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.2.9",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-select uses flexible versioning: ^2.2.5",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.2.5",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-separator uses flexible versioning: ^1.1.7",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.1.7",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-slot uses flexible versioning: ^1.2.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.2.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-switch uses flexible versioning: ^1.2.5",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.2.5",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-tabs uses flexible versioning: ^1.1.12",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.1.12",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @radix-ui/react-toast uses flexible versioning: ^1.2.14",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.2.14",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @supabase/auth-helpers-nextjs uses flexible versioning: ^0.10.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^0.10.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @tanstack/react-query uses flexible versioning: ^5.81.5",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5.81.5",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/jsonwebtoken uses flexible versioning: ^9.0.10",
+      "severity": "medium",
+      "currentState": "Flexible version: ^9.0.10",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/react-syntax-highlighter uses flexible versioning: ^15.5.13",
+      "severity": "medium",
+      "currentState": "Flexible version: ^15.5.13",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/redis uses flexible versioning: ^4.0.10",
+      "severity": "medium",
+      "currentState": "Flexible version: ^4.0.10",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/stripe uses flexible versioning: ^8.0.416",
+      "severity": "medium",
+      "currentState": "Flexible version: ^8.0.416",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/uuid uses flexible versioning: ^10.0.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^10.0.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @vercel/analytics uses flexible versioning: ^1.5.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.5.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @xyflow/react uses flexible versioning: ^12.8.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^12.8.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package ai uses flexible versioning: ^4.3.19",
+      "severity": "medium",
+      "currentState": "Flexible version: ^4.3.19",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package bcryptjs uses flexible versioning: ^3.0.2",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.0.2",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package class-variance-authority uses flexible versioning: ^0.7.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^0.7.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package clsx uses flexible versioning: ^2.1.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.1.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package file-saver uses flexible versioning: ^2.0.5",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.0.5",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package framer-motion uses flexible versioning: ^12.23.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^12.23.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package gray-matter uses flexible versioning: ^4.0.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^4.0.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package jsonwebtoken uses flexible versioning: ^9.0.2",
+      "severity": "medium",
+      "currentState": "Flexible version: ^9.0.2",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package jszip uses flexible versioning: ^3.10.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.10.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package lottie-react uses flexible versioning: ^2.4.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.4.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package lucide-react uses flexible versioning: ^0.525.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^0.525.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package marked uses flexible versioning: ^16.1.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^16.1.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package next uses flexible versioning: ^14.2.30",
+      "severity": "medium",
+      "currentState": "Flexible version: ^14.2.30",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package next-auth uses flexible versioning: ^4.24.11",
+      "severity": "medium",
+      "currentState": "Flexible version: ^4.24.11",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package next-themes uses flexible versioning: ^0.4.6",
+      "severity": "medium",
+      "currentState": "Flexible version: ^0.4.6",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package openai uses flexible versioning: ^5.10.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5.10.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react uses flexible versioning: ^18",
+      "severity": "medium",
+      "currentState": "Flexible version: ^18",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react-dnd uses flexible versioning: ^16.0.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^16.0.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react-dnd-html5-backend uses flexible versioning: ^16.0.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^16.0.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react-dom uses flexible versioning: ^18",
+      "severity": "medium",
+      "currentState": "Flexible version: ^18",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react-intersection-observer uses flexible versioning: ^9.16.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^9.16.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react-markdown uses flexible versioning: ^10.1.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^10.1.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react-resizable-panels uses flexible versioning: ^3.0.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.0.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package react-syntax-highlighter uses flexible versioning: ^5.8.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5.8.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package redis uses flexible versioning: ^5.6.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5.6.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package socket.io uses flexible versioning: ^4.8.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^4.8.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package socket.io-client uses flexible versioning: ^4.8.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^4.8.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package stripe uses flexible versioning: ^18.3.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^18.3.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package tailwind-merge uses flexible versioning: ^3.3.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.3.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package tailwindcss-animate uses flexible versioning: ^1.0.7",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.0.7",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package uuid uses flexible versioning: ^11.1.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^11.1.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package web-vitals uses flexible versioning: ^5.0.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5.0.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package winston uses flexible versioning: ^3.14.2",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.14.2",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package zod uses flexible versioning: ^3.25.74",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.25.74",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package zustand uses flexible versioning: ^5.0.6",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5.0.6",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @commitlint/cli uses flexible versioning: ^19.8.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^19.8.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @commitlint/config-conventional uses flexible versioning: ^19.8.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^19.8.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @lhci/cli uses flexible versioning: ^0.15.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^0.15.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @playwright/test uses flexible versioning: ^1.54.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.54.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @testing-library/jest-dom uses flexible versioning: ^6.6.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^6.6.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @testing-library/react uses flexible versioning: ^16.3.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^16.3.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @testing-library/user-event uses flexible versioning: ^14.6.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^14.6.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/bcryptjs uses flexible versioning: ^2.4.6",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.4.6",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/file-saver uses flexible versioning: ^2.0.7",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.0.7",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/inquirer uses flexible versioning: ^9.0.8",
+      "severity": "medium",
+      "currentState": "Flexible version: ^9.0.8",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/jest uses flexible versioning: ^29.5.14",
+      "severity": "medium",
+      "currentState": "Flexible version: ^29.5.14",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/next-auth uses flexible versioning: ^3.13.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.13.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/node uses flexible versioning: ^20.19.9",
+      "severity": "medium",
+      "currentState": "Flexible version: ^20.19.9",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/react uses flexible versioning: ^18",
+      "severity": "medium",
+      "currentState": "Flexible version: ^18",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/react-dom uses flexible versioning: ^18",
+      "severity": "medium",
+      "currentState": "Flexible version: ^18",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package @types/winston uses flexible versioning: ^2.4.4",
+      "severity": "medium",
+      "currentState": "Flexible version: ^2.4.4",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package ajv uses flexible versioning: ^8.17.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^8.17.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package axios uses flexible versioning: ^1.10.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.10.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package chalk uses flexible versioning: ^5.4.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5.4.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package commander uses flexible versioning: ^14.0.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^14.0.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package cross-env uses flexible versioning: ^7.0.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^7.0.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package eslint uses flexible versioning: ^8",
+      "severity": "medium",
+      "currentState": "Flexible version: ^8",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package glob uses flexible versioning: ^11.0.3",
+      "severity": "medium",
+      "currentState": "Flexible version: ^11.0.3",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package jest uses flexible versioning: ^29.7.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^29.7.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package jest-environment-jsdom uses flexible versioning: ^29.7.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^29.7.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package ora uses flexible versioning: ^8.2.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^8.2.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package playwright uses flexible versioning: ^1.54.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^1.54.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package postcss uses flexible versioning: ^8",
+      "severity": "medium",
+      "currentState": "Flexible version: ^8",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package prettier uses flexible versioning: ^3.6.2",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.6.2",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package tailwindcss uses flexible versioning: ^3.4.1",
+      "severity": "medium",
+      "currentState": "Flexible version: ^3.4.1",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package ts-jest uses flexible versioning: ^29.4.0",
+      "severity": "medium",
+      "currentState": "Flexible version: ^29.4.0",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package ts-node uses flexible versioning: ^10.9.2",
+      "severity": "medium",
+      "currentState": "Flexible version: ^10.9.2",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Dependencies",
+      "issue": "Package typescript uses flexible versioning: ^5",
+      "severity": "medium",
+      "currentState": "Flexible version: ^5",
+      "requiredState": "Exact version for production stability",
+      "fixSteps": [
+        "Consider using exact versions in production",
+        "Run npm ci instead of npm install",
+        "Use package-lock.json for consistency"
+      ]
+    },
+    {
+      "category": "Authentication",
+      "issue": "NEXTAUTH_URL not referenced in auth configuration",
+      "severity": "high",
+      "currentState": "Hardcoded or missing URL",
+      "requiredState": "Dynamic production URL from environment",
+      "fixSteps": [
+        "Use process.env.NEXTAUTH_URL in configuration",
+        "Set correct production URL in environment",
+        "Test OAuth callbacks with production URL"
+      ]
+    },
+    {
+      "category": "API Integration",
+      "issue": "Found 66 API integration points to verify",
+      "severity": "high",
+      "currentState": "Unchecked API endpoints",
+      "requiredState": "All endpoints verified for production",
+      "fixSteps": [
+        "Test each API endpoint with production credentials",
+        "Verify CORS settings for production domain",
+        "Ensure proper error handling for API failures",
+        "Configure retry logic and timeouts"
+      ]
+    },
+    {
+      "category": "Build Process",
+      "issue": "Production build fails",
+      "severity": "critical",
+      "currentState": "Build errors present",
+      "requiredState": "Clean production build",
+      "fixSteps": [
+        "Fix all TypeScript errors",
+        "Resolve module import issues",
+        "Ensure all dependencies are installed",
+        "Check for missing environment variables"
+      ]
+    },
+    {
+      "category": "TypeScript",
+      "issue": "21262 TypeScript errors found",
+      "severity": "critical",
+      "currentState": "21262 compile errors",
+      "requiredState": "0 errors",
+      "fixSteps": [
+        "Run npx tsc --noEmit to see all errors",
+        "Fix errors systematically by dependency order",
+        "Use strict TypeScript configuration",
+        "Add proper type definitions"
+      ]
+    },
+    {
+      "category": "Security",
+      "issue": "HTTPS not configured in Next.js config",
+      "severity": "high",
+      "currentState": "HTTP only",
+      "requiredState": "HTTPS enforced",
+      "fixSteps": [
+        "Configure HTTPS in production",
+        "Set up SSL certificates",
+        "Enforce secure headers",
+        "Configure HSTS"
+      ]
+    },
+    {
+      "category": "Security",
+      "issue": "Potential hardcoded secret in src\\lib\\admin-auth.ts",
+      "severity": "critical",
+      "currentState": "Secret exposed in code",
+      "requiredState": "Secret in environment variable",
+      "fixSteps": [
+        "Move secret to environment variable",
+        "Remove from source code",
+        "Rotate the exposed secret",
+        "Audit git history for exposure"
+      ]
+    }
+  ]
+}

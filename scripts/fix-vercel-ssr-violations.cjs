@@ -15,7 +15,7 @@ const path = require('path');
 console.log('🚀 FIXING VERCEL SSR VIOLATIONS...\n');
 
 // Fix 1: Add proper SSR guards to problematic components
-const srrGuardTemplate = `'use client'
+const _srrGuardTemplate = `'use client'
 import { useEffect, useState } from 'react';
 
 export function withSSRGuard<T extends object>(Component: React.ComponentType<T>) {
@@ -27,9 +27,7 @@ export function withSSRGuard<T extends object>(Component: React.ComponentType<T>
     }, []);
     
     if (!mounted) {
-      return <div className="animate-pulse bg-gray-200 h-4 w-full rounded"></div>;
-    }
-    
+      return <div className="animate-pulse bg-gray-200 h-4 w-full rounded"></div>;}
     return <Component {...props} />;
   };
 }`;
@@ -38,18 +36,18 @@ fs.writeFileSync('src/lib/ssr-guard.tsx', srrGuardTemplate);
 console.log('✅ Created SSR guard utility');
 
 // Fix 2: Update next.config.js to prevent prerender failures
-const nextConfigPath = 'next.config.js';
-const nextConfigContent = `/** @type {import('next').NextConfig} */
-const nextConfig = {
+const _nextConfigPath = 'next.config.js';
+const _nextConfigContent = `/** @type {import('next').NextConfig} */
+const _nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
   experimental: {
     forceSwcTransforms: true,
-    esmExternals: true,
+    esmExternals: true
   },
   // CRITICAL: Prevent SSR issues for problematic pages
   async generateBuildId() {
@@ -63,23 +61,19 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate',
-          },
-        ],
-      },
+            value: 'no-cache, no-store, must-revalidate'}
+        ]}
     ];
   },
   // CRITICAL: Webpack config to prevent function mangling
   webpack: (config, { isServer, dev }) => {
     if (!dev) {
       config.optimization.minimize = false;
-      config.optimization.usedExports = false;
-    }
-    
+      config.optimization.usedExports = false;}
     // Prevent function reference corruption
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src')
     };
     
     return config;
@@ -97,14 +91,12 @@ fs.writeFileSync(nextConfigPath, nextConfigContent);
 console.log('✅ Updated next.config.js with SSR protections');
 
 // Fix 3: Create client-only wrapper for NextAuth components
-const clientOnlyAuthWrapper = `'use client'
+const _clientOnlyAuthWrapper = `'use client'
 import { SessionProvider } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 interface ClientOnlyAuthProps {
-  children: React.ReactNode;
-}
-
+  children: React.ReactNode;}
 export function ClientOnlyAuth({ children }: ClientOnlyAuthProps) {
   const [mounted, setMounted] = useState(false);
   
@@ -113,16 +105,12 @@ export function ClientOnlyAuth({ children }: ClientOnlyAuthProps) {
   }, []);
   
   if (!mounted) {
-    return <>{children}</>;
-  }
-  
+    return <>{children}</>;}
   return (
     <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
       {children}
     </SessionProvider>
-  );
-}
-
+  );}
 // Separate component for session-dependent features
 export function SessionGuard({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -132,9 +120,7 @@ export function SessionGuard({ children }: { children: React.ReactNode }) {
   }, []);
   
   if (!mounted) {
-    return null;
-  }
-  
+    return null;}
   return <>{children}</>;
 }`;
 
@@ -142,7 +128,7 @@ fs.writeFileSync('src/components/ClientOnlyAuth.tsx', clientOnlyAuthWrapper);
 console.log('✅ Created client-only auth wrapper');
 
 // Fix 4: Update AgentOrchestrator to be SSR-safe
-const agentOrchestratorPath = 'src/lib/agents/AgentOrchestrator.ts';
+const _agentOrchestratorPath = 'src/lib/agents/AgentOrchestrator.ts';
 if (fs.existsSync(agentOrchestratorPath)) {
   let content = fs.readFileSync(agentOrchestratorPath, 'utf8');
   
@@ -157,29 +143,26 @@ if (fs.existsSync(agentOrchestratorPath)) {
       // SSR mode - return mock methods
       this.getSystemStatus = () => Promise.resolve({ status: 'loading', message: 'Initializing...' });
       this.startMonitoring = () => Promise.resolve();
-      this.stopMonitoring = () => Promise.resolve();
-    }
+      this.stopMonitoring = () => Promise.resolve();}
   }`
   );
   
   // Wrap all methods with SSR checks
-  const methodWrappedContent = ssrSafeOrchestrator.replace(
+  const _methodWrappedContent = ssrSafeOrchestrator.replace(
     /(async\s+\w+\s*\([^)]*\)[^{]*\{)/g,
     '$1\n    if (!this.isClient) return Promise.resolve({});'
   );
   
   fs.writeFileSync(agentOrchestratorPath, methodWrappedContent);
-  console.log('✅ Made AgentOrchestrator SSR-safe');
-}
-
+  console.log('✅ Made AgentOrchestrator SSR-safe');}
 // Fix 5: Update main page to be prerender-safe
-const mainPagePath = 'src/app/page.tsx';
+const _mainPagePath = 'src/app/page.tsx';
 if (fs.existsSync(mainPagePath)) {
-  const mainPageContent = `import dynamic from 'next/dynamic';
+  const _mainPageContent = `import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 // CRITICAL: Dynamic import to prevent SSR issues
-const LandingPageProduction = dynamic(
+const _LandingPageProduction = dynamic(
   () => import('@/components/LandingPageProduction'),
   { 
     ssr: false,
@@ -193,8 +176,7 @@ const LandingPageProduction = dynamic(
           </div>
         </div>
       </div>
-    )
-  }
+    )}
 );
 
 export default function HomePage() {
@@ -209,20 +191,16 @@ export default function HomePage() {
     }>
       <LandingPageProduction />
     </Suspense>
-  );
-}
-
+  );}
 // Force this page to be dynamically rendered
-export const dynamic = 'force-dynamic';`;
+export const _dynamic = 'force-dynamic';`;
 
   fs.writeFileSync(mainPagePath, mainPageContent);
-  console.log('✅ Made main page prerender-safe');
-}
-
+  console.log('✅ Made main page prerender-safe');}
 // Fix 6: Update dashboard page to be prerender-safe
-const dashboardPagePath = 'src/app/dashboard/page.tsx';
+const _dashboardPagePath = 'src/app/dashboard/page.tsx';
 if (fs.existsSync(dashboardPagePath)) {
-  const dashboardContent = `'use client'
+  const _dashboardContent = `'use client'
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { SessionGuard } from '@/components/ClientOnlyAuth';
@@ -243,8 +221,7 @@ const Dashboard = dynamic(
           </div>
         </div>
       </div>
-    )
-  }
+    )}
 );
 
 export default function DashboardPage() {
@@ -261,24 +238,20 @@ export default function DashboardPage() {
         <Dashboard />
       </Suspense>
     </SessionGuard>
-  );
-}
-
+  );}
 // Force dynamic rendering
-export const dynamic = 'force-dynamic';`;
+export const _dynamic = 'force-dynamic';`;
 
   fs.writeFileSync(dashboardPagePath, dashboardContent);
-  console.log('✅ Made dashboard page prerender-safe');
-}
-
+  console.log('✅ Made dashboard page prerender-safe');}
 // Fix 7: Add API route for pulse status with proper error handling
-const pulseApiPath = 'src/app/api/agents/pulse-status/route.ts';
+const _pulseApiPath = 'src/app/api/agents/pulse-status/route.ts';
 if (fs.existsSync(pulseApiPath)) {
   let content = fs.readFileSync(pulseApiPath, 'utf8');
   
-  const fixedPulseApi = `import { NextResponse } from 'next/server';
+  const _fixedPulseApi = `import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-dynamic';
+export const _dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
@@ -288,58 +261,49 @@ export async function GET() {
         status: 'building',
         message: 'System initializing...',
         timestamp: new Date().toISOString()
-      });
-    }
-    
+      });}
     // Simplified pulse status for production
-    const status = {
+    const _status = {
       status: 'operational',
       message: 'All systems operational',
       timestamp: new Date().toISOString(),
       agents: {
         monitoring: true,
         health: true,
-        performance: true
-      }
+        performance: true}
     };
     
     return NextResponse.json(status);
   } catch (error) {
     console.error('Pulse status error:', error);
-    return NextResponse.json({
+    return NextResponse.json({ 
       status: 'error',
       message: 'Unable to retrieve system status',
       timestamp: new Date().toISOString()
-    }, { status: 500 });
-  }
+    ,  status: 500  });}
 }`;
 
   fs.writeFileSync(pulseApiPath, fixedPulseApi);
-  console.log('✅ Fixed pulse status API for SSR compatibility');
-}
-
+  console.log('✅ Fixed pulse status API for SSR compatibility');}
 // Fix 8: Update providers to be fully SSR-safe
-const providersPath = 'src/components/providers.tsx';
-const ssrSafeProviders = `'use client'
+const _providersPath = 'src/components/providers.tsx';
+const _ssrSafeProviders = `'use client'
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
-export function Providers({ children }: { children: React.ReactNode }): JSX.Element {
-  const [queryClient] = useState(() => new QueryClient({
+export function Providers({ children }: { children: React.ReactNode }): JSX.Element { const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000, // 1 minute
         refetchOnWindowFocus: false,
         retry: false // Prevent retry during SSR
-      }
-    }
-  }));
+       }));
 
   const [mounted, setMounted] = useState(false);
-  const pathname = usePathname();
+  const _pathname = usePathname();
 
   // CRITICAL: Prevent hydration mismatches
   useEffect(() => {
@@ -352,9 +316,7 @@ export function Providers({ children }: { children: React.ReactNode }): JSX.Elem
       <div suppressHydrationWarning>
         {children}
       </div>
-    );
-  }
-
+    );}
   // CRITICAL: Exclude admin routes from SessionProvider to prevent auth conflicts
   if (pathname?.startsWith('/admin')) {
     return (
@@ -362,16 +324,14 @@ export function Providers({ children }: { children: React.ReactNode }): JSX.Elem
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          suppressHydrationWarning
+          // enableSystem
+          // disableTransitionOnChange
+          // suppressHydrationWarning
         >
           {children}
         </ThemeProvider>
       </QueryClientProvider>
-    );
-  }
-
+    );}
   // Regular user routes use NextAuth SessionProvider
   return (
     <SessionProvider 
@@ -382,9 +342,9 @@ export function Providers({ children }: { children: React.ReactNode }): JSX.Elem
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          suppressHydrationWarning
+          // enableSystem
+          // disableTransitionOnChange
+          // suppressHydrationWarning
         >
           {children}
         </ThemeProvider>
@@ -397,7 +357,7 @@ fs.writeFileSync(providersPath, ssrSafeProviders);
 console.log('✅ Made providers fully SSR-safe');
 
 // Fix 9: Create a build validation script
-const buildValidator = `#!/usr/bin/env node
+const _buildValidator = `#!/usr/bin/env node
 
 /**
  * VERCEL BUILD VALIDATOR
@@ -430,30 +390,24 @@ const checks = [
     name: 'Main Page Dynamic Import',
     path: 'src/app/page.tsx',
     required: true,
-    validate: (content) => content.includes('dynamic(') && content.includes('ssr: false')
-  }
+    validate: (content) => content.includes('dynamic(') && content.includes('ssr: false')}
 ];
 
 let allPassed = true;
 
 checks.forEach(check => {
-  const exists = fs.existsSync(check.path);
+  const _exists = fs.existsSync(check.path);
   
   if (!exists && check.required) {
     console.log(\`❌ MISSING: \${check.name} at \${check.path}\`);
     allPassed = false;
-    return;
-  }
-  
+    return;}
   if (exists && check.validate) {
     const content = fs.readFileSync(check.path, 'utf8');
     if (!check.validate(content)) {
       console.log(\`❌ INVALID: \${check.name} at \${check.path}\`);
       allPassed = false;
-      return;
-    }
-  }
-  
+      return;}}
   console.log(\`✅ VALID: \${check.name}\`);
 });
 

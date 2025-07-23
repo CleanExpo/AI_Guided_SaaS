@@ -1,11 +1,10 @@
+import React from 'react';
 'use client';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-
-export function Header(): JSX.Element {
+export function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-      <div className="container flex h-16 items-center">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b"><div className="container flex h-16 items-center">
         <Link href="/" className="flex items-center space-x-2">
           <span className="font-bold text-xl">AI Guided SaaS</span>
         </Link>

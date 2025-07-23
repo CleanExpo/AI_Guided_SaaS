@@ -1,418 +1,69 @@
 {
-  "timestamp": "2025-07-22T01:46:47.212Z",
+  "timestamp": "2025-07-23T01:31:08.534Z",
   "results": [
     {
-      "category": "Project Structure",
-      "item": "src/app",
+      "category": "TypeScript",
+      "status": "fail",
+      "errors": 12040,
+      "errorTypes": {
+        "TS1435": 102,
+        "TS1005": 4398,
+        "TS1109": 1264,
+        "TS1128": 2720,
+        "TS1382": 216,
+        "TS17002": 443,
+        "TS1381": 258,
+        "TS1136": 404,
+        "TS1137": 102,
+        "TS1138": 55,
+        "TS1180": 6,
+        "TS1131": 79,
+        "TS1434": 470,
+        "TS1144": 106,
+        "TS1472": 81,
+        "TS1146": 1,
+        "TS1160": 38,
+        "TS1003": 322,
+        "TS1135": 30,
+        "TS2809": 2,
+        "TS1389": 7,
+        "TS1127": 41,
+        "TS1002": 42,
+        "TS1228": 2,
+        "TS2657": 261,
+        "TS17008": 260,
+        "TS1134": 61,
+        "TS1161": 67,
+        "TS1129": 19,
+        "TS1011": 84,
+        "TS1110": 1,
+        "TS1359": 2,
+        "TS1130": 4,
+        "TS1145": 2,
+        "TS1443": 29,
+        "TS1068": 60,
+        "TS1181": 1
+      }
+    },
+    {
+      "category": "Dependencies",
       "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
+      "errors": 0
     },
     {
-      "category": "Project Structure",
-      "item": "src/components",
+      "category": "Build",
+      "status": "fail",
+      "errors": 1
+    },
+    {
+      "category": "File Structure",
       "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Project Structure",
-      "item": "src/lib",
-      "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Project Structure",
-      "item": "src/hooks",
-      "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Project Structure",
-      "item": "src/types",
-      "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Project Structure",
-      "item": "src/utils",
-      "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Project Structure",
-      "item": "public",
-      "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Project Structure",
-      "item": "agents",
-      "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Project Structure",
-      "item": "docs",
-      "status": "pass",
-      "message": "Directory exists",
-      "severity": "low"
-    },
-    {
-      "category": "Configuration",
-      "item": "package.json",
-      "status": "pass",
-      "message": "Configuration file exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Configuration",
-      "item": "tsconfig.json",
-      "status": "pass",
-      "message": "Configuration file exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Configuration",
-      "item": "next.config.mjs",
-      "status": "pass",
-      "message": "Configuration file exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Configuration",
-      "item": ".env.local",
-      "status": "pass",
-      "message": "Configuration file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Configuration",
-      "item": "tailwind.config.ts",
-      "status": "pass",
-      "message": "Configuration file exists",
-      "severity": "medium"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/health",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/auth/session",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/admin",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/analytics",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/templates",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/agent-chat",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/config",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "API Endpoints",
-      "item": "/api/mcp/status",
-      "status": "warning",
-      "message": "Route file exists (server not running)",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Pages",
-      "item": "/dashboard",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Pages",
-      "item": "/auth/signin",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/auth/signup",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/admin",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/admin/dashboard",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/analytics",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/templates",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/pricing",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/features",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/builder/no-code",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/builder/pro-code",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/collaborate",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Pages",
-      "item": "/status",
-      "status": "pass",
-      "message": "Page file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Database",
-      "item": "Supabase Configuration",
-      "status": "pass",
-      "message": "Configured",
-      "severity": "critical"
-    },
-    {
-      "category": "Authentication",
-      "item": "route.ts",
-      "status": "pass",
-      "message": "Auth file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Authentication",
-      "item": "auth.ts",
-      "status": "pass",
-      "message": "Auth file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Authentication",
-      "item": "middleware.ts",
-      "status": "pass",
-      "message": "Auth file exists",
-      "severity": "high"
-    },
-    {
-      "category": "Agent System",
-      "item": "AgentOrchestrator.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Agent System",
-      "item": "AgentLoader.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Agent System",
-      "item": "AgentCoordinator.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Agent System",
-      "item": "AgentRegistry.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Agent System",
-      "item": "AgentMonitor.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Agent System",
-      "item": "AgentCommunication.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Admin Dashboard",
-      "item": "AdminDashboard.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Admin Dashboard",
-      "item": "AdminPanel.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Admin Dashboard",
-      "item": "AdminAnalytics.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Admin Dashboard",
-      "item": "page.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Admin Dashboard",
-      "item": "page.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "high"
-    },
-    {
-      "category": "Core Components",
-      "item": "Dashboard.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Core Components",
-      "item": "AIChat.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Core Components",
-      "item": "ProjectGenerator.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Core Components",
-      "item": "TemplateManager.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Core Components",
-      "item": "DeploymentScreen.tsx",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Core Components",
-      "item": "use-toast.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "critical"
-    },
-    {
-      "category": "Core Components",
-      "item": "index.ts",
-      "status": "pass",
-      "message": "Component exists",
-      "severity": "critical"
+      "errors": 0
     }
   ],
   "summary": {
-    "total": 58,
-    "passed": 50,
-    "failed": 0,
-    "warnings": 8,
-    "criticalIssues": 0
+    "totalErrors": 12041,
+    "failedChecks": 2,
+    "totalChecks": 4
   }
 }

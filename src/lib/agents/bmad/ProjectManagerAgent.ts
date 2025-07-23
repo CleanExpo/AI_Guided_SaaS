@@ -2,98 +2,98 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
 import { RequirementAnalysis, UserStory } from './AnalystAgent';
 export interface ProjectPlan {
-  projectName: string;
-  projectDescription: string;
-  timeline: Timeline;
-  milestones: Milestone[];
-  workBreakdown: WorkPackage[];
-  resourceAllocation: ResourcePlan;
-  riskMitigation: RiskMitigation[];
-  communicationPlan: CommunicationPlan;
-  qualityAssurance: QualityPlan
+  projectName: string,
+    projectDescription: string,
+    timeline: Timeline,
+    milestones: Milestone[],
+    workBreakdown: WorkPackage[],
+    resourceAllocation: ResourcePlan,
+    riskMitigation: RiskMitigation[],
+    communicationPlan: CommunicationPlan,
+    qualityAssurance: QualityPlan
 };
 export interface Timeline {
-  startDate: string;
-  endDate: string;
-  totalDuration: string;
-  phases: Phase[]
+  startDate: string,
+    endDate: string,
+    totalDuration: string,
+    phases: Phase[]
 };
 export interface Phase {
-  name: string;
-  startDate: string;
-  endDate: string;
-  deliverables: string[];
-  dependencies: string[]
+  name: string,
+    startDate: string,
+    endDate: string,
+    deliverables: string[],
+    dependencies: string[]
 };
 export interface Milestone {
-  id: string;
-  name: string;
-  date: string;
-  criteria: string[];
-  deliverables: string[]
+  id: string,
+    name: string,
+    date: string,
+    criteria: string[],
+    deliverables: string[]
 };
 export interface WorkPackage {
-  id: string;
-  name: string;
-  description: string;
-  assignedTo: string[];
-  estimatedHours: number;
-  dependencies: string[];
-  deliverables: string[];
-  priority: 'critical' | 'high' | 'medium' | 'low'
+  id: string,
+    name: string,
+    description: string,
+    assignedTo: string[],
+    estimatedHours: number,
+    dependencies: string[],
+    deliverables: string[],
+    priority: 'critical' | 'high' | 'medium' | 'low'
 };
 export interface ResourcePlan {
-  teamStructure: TeamMember[];
-  skillsRequired: string[];
-  toolsRequired: string[];
-  externalDependencies: string[]
+  teamStructure: TeamMember[],
+    skillsRequired: string[],
+    toolsRequired: string[],
+    externalDependencies: string[]
 };
 export interface TeamMember {
-  role: string;
-  responsibilities: string[];
-  skillsNeeded: string[];
-  allocation: number; // percentage
+  role: string,
+    responsibilities: string[],
+    skillsNeeded: string[],
+    allocation: number; // percentage
 };
 export interface RiskMitigation {
-  risk: string;
-  probability: 'high' | 'medium' | 'low';
-  impact: 'high' | 'medium' | 'low';
-  mitigationStrategy: string;
-  contingencyPlan: string;
-  owner: string
+  risk: string,
+    probability: 'high' | 'medium' | 'low',
+    impact: 'high' | 'medium' | 'low',
+    mitigationStrategy: string,
+    contingencyPlan: string,
+    owner: string
 };
 export interface CommunicationPlan {
-  stakeholders: Stakeholder[];
-  meetings: Meeting[];
-  reportingSchedule: string;
-  escalationPath: string[]
+  stakeholders: Stakeholder[],
+    meetings: Meeting[],
+    reportingSchedule: string,
+    escalationPath: string[]
 };
 export interface Stakeholder {
-  name: string;
-  role: string;
-  interest: 'high' | 'medium' | 'low';
-  influence: 'high' | 'medium' | 'low';
-  communicationNeeds: string[]
+  name: string,
+    role: string,
+    interest: 'high' | 'medium' | 'low',
+    influence: 'high' | 'medium' | 'low',
+    communicationNeeds: string[]
 };
 export interface Meeting {
-  type: string;
-  frequency: string;
-  participants: string[];
-  purpose: string
+  type: string,
+    frequency: string,
+    participants: string[],
+    purpose: string
 };
 export interface QualityPlan {
-  standards: string[];
-  reviewProcess: string[];
-  testingStrategy: string[];
-  acceptanceCriteria: string[];
-  metrics: string[]
+  standards: string[],
+    reviewProcess: string[],
+    testingStrategy: string[],
+    acceptanceCriteria: string[],
+    metrics: string[]
 };
 export class ProjectManagerAgent extends Agent {
   constructor() {
     super({
-      id: 'project-manager-agent';
-      name: 'Project Manager';
-      role: 'Create and manage project plans';
+      id: 'project-manager-agent',
+      name: 'Project Manager',
+      role: 'Create and manage project plans',
       description:
         'Expert in project planning, resource allocation, timeline management, and risk mitigation. Creates comprehensive project plans from requirements.',
       capabilities: [
@@ -103,18 +103,16 @@ export class ProjectManagerAgent extends Agent {
         'Risk management',
         'Milestone definition',
         'Work breakdown structure',
-        'Quality planning',
-      ],
+        'Quality planning'],
       tools: [
         'gantt-generator',
         'resource-optimizer',
         'risk-matrix',
-        'milestone-tracker',
-      ],
-      temperature: 0.4;
-    }});
-  }
-  protected async execute(input: string): Promise<AgentResult> {
+        'milestone-tracker'],
+      temperature: 0.4
+    }};
+}
+  protected async execute(input: string): Promise {
     try {
       this.think('Starting project planning process...');
       // Get requirements from shared memory or artifacts
@@ -122,9 +120,9 @@ export class ProjectManagerAgent extends Agent {
       const userStories = this.getSharedMemory('user-stories') || [];
       const constraints = this.getSharedMemory('technical-constraints') || [];
       this.observe('Retrieved requirements from Analyst', {
-        requirementCount: requirements.length;
-        userStoryCount: userStories.length;
-      }});
+        requirementCount: requirements.length,
+    userStoryCount: userStories.length
+      }};
       // Step, 1: Define project scope and objectives
       const projectScope = await this.defineProjectScope(input, requirements);
       this.observe('Defined project scope', projectScope);
@@ -132,7 +130,7 @@ export class ProjectManagerAgent extends Agent {
       const timeline = await this.createTimeline(;
         projectScope,
         userStories,
-        constraints
+        // constraints
       );
       this.observe('Created project timeline', timeline);
       // Step, 3: Define milestones
@@ -141,11 +139,11 @@ export class ProjectManagerAgent extends Agent {
       // Step, 4: Create work breakdown structure
       const workBreakdown = await this.createWorkBreakdown(;
         userStories,
-        milestones
+        // milestones
       );
       this.observe('Created work breakdown structure', {
-        packageCount: workBreakdown.length;
-      }});
+        packageCount: workBreakdown.length
+      }};
       // Step, 5: Plan resource allocation
       const resourcePlan = await this.planResources(workBreakdown, timeline);
       this.observe('Planned resource allocation', resourcePlan);
@@ -153,31 +151,31 @@ export class ProjectManagerAgent extends Agent {
       const risks = this.getSharedMemory('identified-risks') || [];
       const riskMitigation = await this.planRiskMitigation(risks, projectScope);
       this.observe('Developed risk mitigation plans', {
-        riskCount: riskMitigation.length;
-      }});
+        riskCount: riskMitigation.length
+      }};
       // Step, 7: Create communication plan
-      const communicationPlan = await this.createCommunicationPlan(;
+      const _communicationPlan = await this.createCommunicationPlan(;
         projectScope,
-        resourcePlan
+        // resourcePlan
       );
       this.observe('Created communication plan', communicationPlan);
       // Step, 8: Define quality assurance plan
       const qualityPlan = await this.defineQualityPlan(;
         requirements,
-        userStories
+        // userStories
       );
       this.observe('Defined quality assurance plan', qualityPlan);
       // Compile final project plan
       const projectPlan: ProjectPlan = {
-        projectName: projectScope.name;
-        projectDescription: projectScope.description,
+        projectName: projectScope.name,
+    projectDescription: projectScope.description,
         timeline,
         milestones,
         workBreakdown,
         resourceAllocation: resourcePlan,
         riskMitigation,
         communicationPlan,
-        qualityAssurance: qualityPlan;
+        qualityAssurance: qualityPlan
       };
       // Store plan in artifacts
       this.setArtifact('project-plan', projectPlan);
@@ -186,101 +184,87 @@ export class ProjectManagerAgent extends Agent {
       this.setSharedMemory('work-packages', workBreakdown);
       this.setSharedMemory('team-structure', resourcePlan.teamStructure);
       this.setSharedMemory('quality-standards', qualityPlan.standards);
-      return {
-        success: true;
-        output: projectPlan;
-        messages: this.messages;
-        artifacts: this.context.artifacts;
-        nextSteps: [
+      return {;
+        success: true,
+    output: projectPlan,
+    messages: this.messages,
+    artifacts: this.context.artifacts,
+    nextSteps: [
           'Architect to design technical architecture',
           'Development team to start implementation',
           'Set up project tracking and monitoring',
-          'Schedule kick-off meeting with stakeholders',
-        ],
-        confidence: 0.92;
-      };
+          'Schedule kick-off meeting with stakeholders'],
+        confidence: 0.92
+}
     } catch (error) {
-      this.think(`Error during project, planning: ${error}`);`
+      this.think(`Error during project, planning: ${error}`);``
       throw error;
-    }
-  }
-  private async defineProjectScope(
-    input: string;
-    requirements: string[]
-  ): Promise<{ name: string; description: string; objectives: string[] }> {
-    const prompt = `Based on the project description and requirements, define the project, scope: Project; Description:`
+}
+}
+  private async defineProjectScope(input: string, requirements: string[]): Promise {
+    const _prompt = `Based on the project description and requirements, define the project, scope: Project, Description:``
 ${input}
-Key, Requirements:
+Key: Requirements:
 ${requirements.join('\n')}
 Provide:
 1. A concise project name
 2. A clear project description (2-3 sentences)
 3. 3-5 specific, measurable objectives
-Format as JSON.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.3;
-      responseFormat: 'json';
-    }});
+Format as JSON.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
+    responseFormat: 'json'
+}};
     return JSON.parse(response);
-  }
-  private async createTimeline(
-    projectScope,
-    userStories: UserStory[];
-    constraints: string[]
-  ): Promise<Timeline> {
-    const prompt = `Create a realistic project timeline based, on:;`
-,
+}
+  private async createTimeline(projectScope, userStories: UserStory[], constraints: string[]): Promise {
+    const _prompt = `Create a realistic project timeline based, on:;``
+
 Project: ${projectScope.name}
-User, Stories: ${userStories.length} stories; Constraints: ${constraints.join(', ')}
+User: Stories: ${userStories.length} stories; Constraints: ${constraints.join(', ')}
 Consider:
 - Complexity of user stories
 - Dependencies between features
 - Testing and deployment time
-- Buffer for unexpected issues, Provide:
+- Buffer for unexpected, issues: Provide:
 - Start and end dates
 - Total duration
 - Project phases with dates and deliverables
-Format as JSON with a Timeline structure.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.3;
-      responseFormat: 'json';
-    }});
+Format as JSON with a Timeline structure.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
+    responseFormat: 'json'
+}};
     return JSON.parse(response);
-  }
-  private async defineMilestones(
-    timeline: Timeline;
-    userStories: UserStory[]
-  ): Promise<Milestone[]> {
-    const prompt = `Define project milestones based on the timeline and user, stories: Timeline; Phases:`
+}
+  private async defineMilestones(timeline: Timeline, userStories: UserStory[]): Promise {
+    const _prompt = `Define project milestones based on the timeline and user, stories: Timeline, Phases:``
 ${JSON.stringify(timeline.phases, null, 2)}
-High-Priority User, Stories:
+High-Priority, User: Stories:
 ${userStories
-  .filter(s => s.priority === 'high')
-  .map(s => s.title)
+  .filter((s) => s.priority === 'high')
+  .map((s) => s.title)
   .join('\n')}
 Create 4-6 major milestones, with:
 - Clear success criteria
 - Specific deliverables
 - Target dates aligned with phases
-Format as JSON array of Milestone objects.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.3;
-      responseFormat: 'json';
-    }});
+Format as JSON array of Milestone objects.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
+    responseFormat: 'json'
+}};
     const milestones = JSON.parse(response);
-    return milestones.map((m, index: number) => ({
+    return milestones.map((m, index: number) => ({;
       ...m,
-      id: `M${index + 1}`;`
-    }}));
-  }
-  private async createWorkBreakdown(
-    userStories: UserStory[];
-    milestones: Milestone[]
-  ): Promise<WorkPackage[]> {
-    const prompt = `Create a work breakdown structure for the, project: User; Stories:`
+      id: `M${index + 1}`
+    }});
+}
+  private async createWorkBreakdown(userStories: UserStory[], milestones: Milestone[]): Promise {
+    const _prompt = `Create a work breakdown structure for the, project: User, Stories:``
 ${JSON.stringify(userStories, null, 2)}
 Milestones:
 ${JSON.stringify(milestones, null, 2)}
@@ -290,29 +274,26 @@ Break down the work into packages, that:
 - Include effort estimates in hours
 - Show dependencies
 - Assign to appropriate team roles
-Format as JSON array of WorkPackage objects.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.3;
-      responseFormat: 'json';
-    }});
+Format as JSON array of WorkPackage objects.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
+    responseFormat: 'json'
+}};
     const packages = JSON.parse(response);
-    return packages.map((p, index: number) => ({
+    return packages.map((p, index: number) => ({;
       ...p,
-      id: `WP-${index + 1}`;`
-    }}));
-  }
-  private async planResources(
-    workPackages: WorkPackage[];
-    timeline: Timeline
-  ): Promise<ResourcePlan> {
-    const prompt = `Plan resource allocation for the, project: Work; Packages:`
+      id: `WP-${index + 1}`
+    }});
+}
+  private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise {
+    const _prompt = `Plan resource allocation for the, project: Work, Packages:``
 ${JSON.stringify(
-  workPackages.map(wp => ({
-    name: wp.name;
-    estimatedHours: wp.estimatedHours;
-    skills: wp.assignedTo;
-  }})),
+  workPackages.map((wp) => ({
+    name: wp.name,
+    estimatedHours: wp.estimatedHours,
+    skills: wp.assignedTo
+  }}),
   null,
   2
 )}
@@ -323,22 +304,19 @@ Define:
 3. Required tools and technologies
 4. External dependencies
 Consider optimal team size and skill distribution.
-Format as JSON ResourcePlan object.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.4;
-      responseFormat: 'json';
-    }});
+Format as JSON ResourcePlan object.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.4,
+    responseFormat: 'json'
+}};
     return JSON.parse(response);
-  }
-  private async planRiskMitigation(
-    risks: string[],
-    projectScope
-  ): Promise<RiskMitigation[]> {
-    const prompt = `Create risk mitigation plans for identified, risks:;`
-,
+}
+  private async planRiskMitigation(risks: string[], projectScope): Promise {
+    const _prompt = `Create risk mitigation plans for identified, risks:;``
+
 Project: ${projectScope.name}
-Identified, Risks:
+Identified: Risks:
 ${risks.join('\n')}
 For each risk, provide:
 - Probability assessment (high/medium/low)
@@ -346,46 +324,40 @@ For each risk, provide:
 - Mitigation strategy
 - Contingency plan
 - Owner (role responsible)
-Format as JSON array of RiskMitigation objects.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.4;
-      responseFormat: 'json';
-    }});
+Format as JSON array of RiskMitigation objects.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.4,
+    responseFormat: 'json'
+}};
     return JSON.parse(response);
-  }
-  private async createCommunicationPlan(
-    projectScope,
-    resourcePlan: ResourcePlan
-  ): Promise<CommunicationPlan> {
-    const prompt = `Create a communication plan for the, project:;`
-,
+}
+  private async createCommunicationPlan(projectScope, resourcePlan: ResourcePlan): Promise {
+    const _prompt = `Create a communication plan for the, project:;``
+
 Project: ${projectScope.name}
-Team, Structure:
+Team: Structure:
 ${JSON.stringify(resourcePlan.teamStructure, null, 2)}
 Define:
 1. Key stakeholders with interest/influence levels
 2. Regular meeting schedule
 3. Reporting cadence
 4. Escalation path
-Format as JSON CommunicationPlan object.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.3;
-      responseFormat: 'json';
-    }});
+Format as JSON CommunicationPlan object.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
+    responseFormat: 'json'
+}};
     return JSON.parse(response);
-  }
-  private async defineQualityPlan(
-    requirements: string[];
-    userStories: UserStory[]
-  ): Promise<QualityPlan> {
-    const prompt = `Define a quality assurance, plan: Key; Requirements:`
+}
+  private async defineQualityPlan(requirements: string[], userStories: UserStory[]): Promise {
+    const _prompt = `Define a quality assurance, plan: Key, Requirements:``
 ${requirements.slice(0, 10).join('\n')}
-Acceptance Criteria from User, Stories:
+Acceptance Criteria from, User: Stories:
 ${userStories
   .slice(0, 5)
-  .map(s => s.acceptanceCriteria.join(', '))
+  .map((s) => s.acceptanceCriteria.join(', '))
   .join('\n')}
 Include:
 1. Quality standards to follow
@@ -393,12 +365,12 @@ Include:
 3. Testing strategy
 4. Acceptance criteria
 5. Quality metrics to track
-Format as JSON QualityPlan object.`;`
-    const response = await generateAIResponse(prompt, {
-      model: this.config.model;
-      temperature: 0.3;
-      responseFormat: 'json';
-    }});
+Format as JSON QualityPlan object.`
+    const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
+    responseFormat: 'json'
+}};
     return JSON.parse(response);
-  }
+}
 }

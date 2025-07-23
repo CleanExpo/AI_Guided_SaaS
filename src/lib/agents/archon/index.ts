@@ -1,11 +1,9 @@
 // Archon Refinement Agents
-export { PromptRefinerAgent } from './PromptRefinerAgent';
-export { ToolsRefinerAgent } from './ToolsRefinerAgent';
+export { PromptRefinerAgent } from './PromptRefinerAgent';export { ToolsRefinerAgent } from './ToolsRefinerAgent';
 export { AgentRefinerAgent } from './AgentRefinerAgent';
 export { AdvisorAgent } from './AdvisorAgent';
 // Export types
-export type {
-  RefinedPrompt,
+export type { RefinedPrompt,
   PromptImprovement,
   PromptClarity,
   PromptExample,
@@ -32,3 +30,4 @@ export type {
   Alternative,
   DecisionMatrix,
   ActionPlan from './AdvisorAgent';
+}

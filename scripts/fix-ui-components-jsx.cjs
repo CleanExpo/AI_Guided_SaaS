@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const uiPath = '/mnt/d/AI Guided SaaS/src/components/ui';
+const _uiPath = '/mnt/d/AI Guided SaaS/src/components/ui';
 
 // Files that need fixing based on grep results
-const filesToFix = [
+const _filesToFix = [
   'scroll-area.tsx',
   'toast.tsx',
   'button-basic.tsx',
@@ -51,10 +51,7 @@ function fixUIComponent(filePath) {
     return true;
   } catch (error) {
     console.error(`❌ Error fixing ${filePath}:`, error.message);
-    return false;
-  }
-}
-
+    return false;}}
 function main() {
   console.log('🔧 Fixing UI component JSX syntax errors...\n');
   
@@ -62,24 +59,17 @@ function main() {
   let totalCount = 0;
   
   for (const fileName of filesToFix) {
-    const filePath = path.join(uiPath, fileName);
+    const _filePath = path.join(uiPath, fileName);
     if (fs.existsSync(filePath)) {
       totalCount++;
       if (fixUIComponent(filePath)) {
-        fixedCount++;
-      }
+        fixedCount++;}
     } else {
-      console.log(`⚠️ File not found: ${filePath}`);
-    }
-  }
-  
+      console.log(`⚠️ File not found: ${filePath}`);}}
   console.log(`\n📊 Results: ${fixedCount}/${totalCount} files fixed`);
   
   if (fixedCount === totalCount) {
     console.log('✅ All UI components fixed successfully!');
   } else {
-    console.log('⚠️ Some files may need manual review');
-  }
-}
-
+    console.log('⚠️ Some files may need manual review');}}
 main();

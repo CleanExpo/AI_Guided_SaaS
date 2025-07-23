@@ -1,42 +1,43 @@
-import { BuilderState } from './types';
-export const initialBuilderState: BuilderState = {
-  components: [];
-  selectedComponent: null;
-  history: [];
-  historyIndex: -1;
-  zoom: 100;
-  gridEnabled: true;
-  previewMode: false;
+// @ts-nocheck
+import { BuilderState } from './types';export const initialBuilderState: BuilderState = {
+  components: [],
+    selectedComponent: null,
+    history: [],
+    historyIndex: -1,
+    zoom: 100,
+    gridEnabled: true,
+    previewMode: false,
 };
 export const builderConfig = {
-  canvas: {
-    minZoom: 25;
-    maxZoom: 200;
-    zoomStep: 25;
-    gridSize: 20;
-    snapToGrid: true;
+  canvas: {,
+  minZoom: 25,
+    maxZoom: 200,
+    zoomStep: 25,
+    gridSize: 20,
+    snapToGrid: true,
   }},
-    components: {
-    minWidth: 50;
-    minHeight: 30;
-    defaultWidth: 200;
-    defaultHeight: 100;
+    components: {,
+    minWidth: 50,
+    minHeight: 30,
+    defaultWidth: 200,
+    defaultHeight: 100,
   }},
-    history: {
-    maxSteps: 50;
+    history: {,
+    maxSteps: 50,
   }},
     autosave: {
-    enabled: true;
+    ,
+    enabled: true,
     interval: 30000; // 30 seconds
-  }};
+  }
 export const shortcuts = {
-  undo: 'Ctrl+Z';
-  redo: 'Ctrl+Y';
-  copy: 'Ctrl+C';
-  paste: 'Ctrl+V';
-  delete: 'Delete';
-  selectAll: 'Ctrl+A';
-  save: 'Ctrl+S';
-  export: 'Ctrl+E';
-  preview: 'Ctrl+P';
+  undo: 'Ctrl+Z',
+  redo: 'Ctrl+Y',
+  copy: 'Ctrl+C',
+  paste: 'Ctrl+V',
+  delete: 'Delete',
+  selectAll: 'Ctrl+A',
+  save: 'Ctrl+S',
+  export: 'Ctrl+E',
+  preview: 'Ctrl+P',
 };

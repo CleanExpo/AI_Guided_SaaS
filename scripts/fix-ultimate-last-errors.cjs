@@ -21,7 +21,7 @@ const Separator = React.forwardRef<
       className={cn(
         "shrink-0 bg-border",
         orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
-        className
+        // className
       )}
       {...props}
     />
@@ -38,15 +38,11 @@ fs.writeFileSync('src/lib/agents/AgentOrchestrator.ts', `export interface AgentC
   name: string;
   type: string;
   enabled: boolean;
-  priority: number;
-}
-
+  priority: number;}
 export interface AgentStatus {
   id: string;
   status: 'active' | 'idle' | 'error';
-  lastActivity: Date;
-}
-
+  lastActivity: Date;}
 export class AgentOrchestrator {
   private loader: any;
   private coordinator: any;
@@ -59,24 +55,15 @@ export class AgentOrchestrator {
     this.coordinator = null;
     this.registry = null;
     this.monitor = null;
-    this.communication = null;
-  }
-
+    this.communication = null;}
   async initialize(): Promise<void> {
-    console.log('Initializing Agent Orchestrator');
-  }
-
+    console.log('Initializing Agent Orchestrator');}
   async loadAgent(config: AgentConfig): Promise<void> {
-    console.log('Loading agent:', config.name);
-  }
-
+    console.log('Loading agent:', config.name);}
   async getStatus(): Promise<AgentStatus[]> {
-    return [];
-  }
-
+    return [];}
   async shutdown(): Promise<void> {
-    console.log('Shutting down Agent Orchestrator');
-  }
+    console.log('Shutting down Agent Orchestrator');}
 }`);
 
 // Fix auth
@@ -87,9 +74,9 @@ import { SupabaseAdapter } from '@next-auth/supabase-adapter';
 import { createClient } from '@supabase/supabase-js';
 import jwt from 'jsonwebtoken';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const supabase = supabaseUrl && supabaseKey 
+const _supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const _supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const _supabase = supabaseUrl && supabaseKey 
   ? createClient(supabaseUrl, supabaseKey)
   : null;
 
@@ -97,40 +84,37 @@ export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-    }),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+    })
   ],
   adapter: supabase ? SupabaseAdapter({
     url: supabaseUrl!,
-    secret: supabaseKey!,
+    secret: supabaseKey!
   }) : undefined,
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt'
   },
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account && profile) {
         token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
-      }
+        token.refreshToken = account.refresh_token;}
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.accessToken = token.accessToken as string;
-        session.refreshToken = token.refreshToken as string;
-      }
-      return session;
-    },
+        session.refreshToken = token.refreshToken as string;}
+      return session;}
   },
   pages: {
     signIn: '/auth/signin',
-    signUp: '/auth/signup',
+    signUp: '/auth/signup'
   },
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === 'development'
 };
 
-const handler = NextAuth(authOptions);
+const _handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };`);
 
 // Fix causal explorer UI
@@ -145,9 +129,7 @@ interface CausalInsight {
   description: string;
   impact: number;
   confidence: number;
-  page: string;
-}
-
+  page: string;}
 export default function CausalExplorerUI() {
   const [insights, setInsights] = useState<CausalInsight[]>([]);
   const [topComponents, setTopComponents] = useState<CausalInsight[]>([]);
@@ -171,8 +153,7 @@ export default function CausalExplorerUI() {
           description: 'Button color and placement affects conversion rates',
           impact: 78,
           confidence: 87,
-          page: '/pricing'
-        }
+          page: '/pricing'}
       ];
       
       setInsights(mockInsights);
@@ -192,9 +173,7 @@ export default function CausalExplorerUI() {
           </div>
         </div>
       </div>
-    );
-  }
-
+    );}
   return (
     <div className="p-6 space-y-6">
       <div>
@@ -284,14 +263,10 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith('/_next/') || 
       pathname.startsWith('/favicon.ico') ||
       pathname.startsWith('/api/health')) {
-    return NextResponse.next();
-  }
-
+    return NextResponse.next();}
   // Allow public paths
   if (PUBLIC_PATHS.some(path => pathname.startsWith(path))) {
-    return NextResponse.next();
-  }
-
+    return NextResponse.next();}
   // Check authentication for protected paths
   if (PROTECTED_PATHS.some(path => pathname.startsWith(path))) {
     const token = await getToken({ req: request });
@@ -299,19 +274,12 @@ export async function middleware(request: NextRequest) {
     if (!token) {
       const loginUrl = new URL('/auth/signin', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(loginUrl);
-    }
-
+      return NextResponse.redirect(loginUrl);}
     // Check admin access
-    if (ADMIN_PATHS.some(path => pathname.startsWith(path))) {
-      const isAdmin = token.email === 'admin@aiinguidedsaas.com';
+    if (ADMIN_PATHS.some(path => pathname.startsWith(path))) { const _isAdmin = token.email === 'admin@aiinguidedsaas.com';
       
       if (!isAdmin) {
-        return NextResponse.redirect(new URL('/dashboard', request.url));
-      }
-    }
-  }
-
+        return NextResponse.redirect(new URL('/dashboard', request.url));}
   // Add security headers
   const response = NextResponse.next();
   
@@ -320,13 +288,11 @@ export async function middleware(request: NextRequest) {
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
-  return response;
-}
-
+  return response;}
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+    '/((?!_next/static|_next/image|favicon.ico).*)'
+  ]
 };`);
 
 console.log('\n🔧 Ultimate Last Fix Summary:');

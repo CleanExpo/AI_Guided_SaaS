@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,13 +12,13 @@ import { Progress } from '@/components/ui/progress';
 import { Search, Upload, Database, FileText, Code, BookOpen, Globe, Trash2, Download, RefreshCw, ChevronRight, FileCode, MessageSquare } from 'lucide-react';
 import { useRAG } from '@/hooks/useRAG';
 import { useToast } from '@/components/ui/use-toast';
-interface RAGKnowledgeBaseProps {;
-  projectId?: string
-  onSourceSelected?: (source) => void
+interface RAGKnowledgeBaseProps {
+  projectId?: string;
+  onSourceSelected? (source) => void
 };
-export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps): void {;
-  const { toast } = useToast();
-  const { ; }
+export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps), onSourceSelected }: RAGKnowledgeBaseProps) {
+  const { toast   }: any = useToast();
+  const {}
     query,
     addDocument,
     addFromUrl,
@@ -30,77 +30,74 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
     clearKnowledge,
     loading,
     error,
-    initialized
+    // initialized
   } = useRAG({
-    provider: 'memory';
-  // Use memory provider for demo
-  retrievalTopK: 5
+    provider: 'memory',
+  // Use memory provider for demo, retrievalTopK: 5
   })
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<any>('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [stats, setStats] = useState<any>(null);
   const [selectedSource, setSelectedSource] = useState<any>(null);
   // Document upload state
-  const [documentContent, setDocumentContent] = useState('');
-  const [documentTitle, setDocumentTitle] = useState('');
+  const [documentContent, setDocumentContent] = useState<any>('');
+  const [documentTitle, setDocumentTitle] = useState<any>('');
   const [documentType, setDocumentType] = useState<string>('documentation');
-  const [documentTags, setDocumentTags] = useState('');
+  const [documentTags, setDocumentTags] = useState<any>('');
   // URL input state
-  const [urlInput, setUrlInput] = useState('');
+  const [urlInput, setUrlInput] = useState<any>('');
   // Codebase input state
-  const [codebasePath, setCodebasePath] = useState('');
+  const [codebasePath, setCodebasePath] = useState<any>('');
   // Load stats on mount
   useEffect(() => {
     if (initialized) {
       loadStats()
-    }
+}
   }, [initialized])
-  const loadStats = async () => {;
+  const _loadStats = async () => {
     try {
-      const knowledgeStats = await getStats();
+      const _knowledgeStats = await getStats();
       setStats(knowledgeStats)
     } catch (err) {
       console.error('Failed to load, stats:', err)
-    }
-  }
+}
+}
   // Search knowledge base
-  const handleSearch = async () => {;
-    if (!searchQuery.trim()) return
-    try {
-      const response = await query(searchQuery, {;
-        filters: projectId ? { project: projectId } : undefined;
+  const _handleSearch = async () => {
+    if (!searchQuery.trim()) return try {;
+      const response = await query(searchQuery, {
+    filters: projectId ? { project: projectId } : undefined,
     options: {
-          topK: 10;
-          includeScores: true
-        }
+          topK: 10,
+    includeScores: true
+}
       })
       setSearchResults(response.sources)
-      if (response.sources.length === 0) {
+      if(response.sources.length === 0) {
         toast({
-          title: 'No Results';
+          title: 'No Results',
           description: 'No matching documents found in the knowledge base'
-        }
+}
       )}
     );
     } catch (err) {
       console.error('Search, failed:', err)
-    }
-  }
+}
+}
   // Add document manually
-  const handleAddDocument = async () => {;
+  const _handleAddDocument = async () => {
     if (!documentContent.trim() || !documentTitle.trim()) {
       toast({
-        title: 'Error';
-        description: 'Please provide both title and content';
+        title: 'Error',
+        description: 'Please provide both title and content',
         variant: 'destructive'
       })
-      return
-    }
+      return };
     try {
-      const tags = documentTags.split(',').map(t => t.trim()).filter(Boolean);
+      const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean);
       await addDocument(documentContent, {
-        source: 'manual';
-        title: documentTitle; type: documentType as any,
+        source: 'manual',
+        title: documentTitle, type: documentType as any,
         tags,
         project: projectId
       })
@@ -111,112 +108,131 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
       // Reload stats
       await loadStats()
       toast({
-        title: 'Success';
+        title: 'Success',
         description: 'Document added to knowledge base'
       })
     } catch (err) {
       console.error('Failed to add, document:', err)
-    }
-  }
+}
+}
   // Add from URL
-  const handleAddFromUrl = async () => {;
+  const _handleAddFromUrl = async () => {
     if (!urlInput.trim()) {
       toast({
-        title: 'Error';
-        description: 'Please provide a URL';
+        title: 'Error',
+        description: 'Please provide a URL',
         variant: 'destructive'
       })
-      return
-    }
+      return };
     try {
       await addFromUrl(urlInput)
       setUrlInput('')
       await loadStats()
     } catch (err) {
       console.error('Failed to add, from: URL,', err)
-    }
-  }
+}
+}
   // Add from file</string>
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {;
-    const file = event.target.files?.[0];
-    if (!file) return
-    try {
+  const _handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const _file = event.target.files?.[0];
+    if (!file) return try {;
           </HTMLInputElement>
       await addFromFile(file)
       await loadStats()
     } catch (err) {
       console.error('Failed to add, file:', err)
-    }
-  }
+}
+}
   // Ingest codebase
-  const handleIngestCodebase = async () => {;
+  const _handleIngestCodebase = async () => {
     if (!codebasePath.trim()) {
       toast({
-        title: 'Error';
-        description: 'Please provide a codebase path';
+        title: 'Error',
+        description: 'Please provide a codebase path',
         variant: 'destructive'
       })
-      return
-    }
+      return };
     try {
-      const result = await ingestCodebase(codebasePath, {;
-        project: projectId;
-        include: ['**/*.{js,jsx,ts,tsx,py,java,go}'],
+      const result = await ingestCodebase(codebasePath, {
+    project: projectId,
+    include: ['**/*.{js,jsx,ts,tsx,py,java,go}'],
         exclude: ['**/node_modules/**', '**/dist/**']
       })
       setCodebasePath('')
       await loadStats()
-      if (result.errors.length > 0) {
+      if(result.errors.length > 0) {
         toast({
-          title: 'Partial Success';
-          description: `Added ${result.documentsAdded} files with ${result.errors.length} errors``
-        }
+          title: 'Partial Success',
+          description: `Added ${result.documentsAdded} files with ${result.errors.length} errors`
+}
       )}
     );
     } catch (err) {
       console.error('Failed to ingest, codebase:', err)
-    }
-  }
+}
+}
   // Handle source selection
-  const handleSourceSelect = (source) => {;
+  const _handleSourceSelect = (source): void: (any) => { ;
     setSelectedSource(source)
     if (onSourceSelected) {
-      onSourceSelected(source)
-    }
-  }
-  const getTypeIcon = (type: string) => {;
+      onSourceSelected(source); }
+}
+  const _getTypeIcon = (type: string) => { ;
     switch (type) {
-      case 'code':</HTMLInputElement>
-        return <FileCode className="h-4 w-4" />
-      case 'documentation':</FileCode>
-        return <FileText className="h-4 w-4" />
-      case 'tutorial':</FileText>
-        return <BookOpen className="h-4 w-4" />
-      case 'api':</BookOpen>
-        return <Code className="h-4 w-4" />
+      case 'code':
+    </HTMLInputElement>
+    break;
+
+    break;
+
+        return <FileCode className="h-4 w-4"    />;
+break;
+
+      case 'documentation':
+    </FileCode>
+    break;
+
+    break;
+
+        return <FileText className="h-4 w-4"    />;
+      case 'tutorial':
+    </FileText>
+    break;
+
+    break;
+
+        return <BookOpen className="h-4 w-4"    />;
+break;
+
+      case 'api':
+    </BookOpen>
+    break;
+
+    break;
+}
+        return <Code className="h-4 w-4"    />;
       default:</Code>
-        return <FileText className="h-4 w-4" />
-    }
-  }
-  return (
-    <div className="space-y-6">
+        return <FileText className="h-4 w-4"    />;
+}
+}
+  return (<div className="space-y-6">;
       {/* Search, Bar */}
       <Card></Card>
         <CardContent className="pt-6"></CardContent>
           <div className="flex gap-2"></div>
             <div className="flex-1 relative"></div>
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" /></Search>
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"    /></Search>
               <Input
                 placeholder="Search knowledge base..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange: any={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 className="pl-10"
               /></Input>
             <Button onClick={handleSearch} disabled={loading}>
-              Search</Button>
+              // Search</Button>
       {/* Main, Content */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6, md:grid-cols-2">
         {/* Knowledge, Management */}
         <div className="space-y-6"></div>
           <Card></Card>
@@ -237,7 +253,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <Input
                       id="title"
                       value={documentTitle}
-                      onChange={(e) => setDocumentTitle(e.target.value)}
+                      onChange: any={(e) => setDocumentTitle(e.target.value)}
                       placeholder="Document title"
                     /></Input>
                   <div className="space-y-2"></div>
@@ -245,7 +261,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <select
                       id="type"
                       value={documentType}
-                      onChange={(e) => setDocumentType(e.target.value)}
+                      onChange: any={(e) => setDocumentType(e.target.value)}
                       className="w-full px-3 py-2 border rounded-md"
                     ></select>
                       <option value="documentation">Documentation</option>
@@ -259,7 +275,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <Textarea
                       id="content"
                       value={documentContent}
-                      onChange={(e) => setDocumentContent(e.target.value)}
+                      onChange: any={(e) => setDocumentContent(e.target.value)}
                       placeholder="Enter document content..."
                       rows={6}
                     /></Textarea>
@@ -268,7 +284,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <Input
                       id="tags"
                       value={documentTags}
-                      onChange={(e) => setDocumentTags(e.target.value)}
+                      onChange: any={(e) => setDocumentTags(e.target.value)}
                       placeholder="react, hooks, performance"
                     /></Input>
                   <Button
@@ -276,7 +292,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     disabled={loading}
                     className="w-full"
                   ></Button>
-                    <Upload className="h-4 w-4 mr-2" />
+                    <Upload className="h-4 w-4 mr-2"    />
                     Add Document</Upload>
                 <TabsContent value="url", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
@@ -285,7 +301,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       id="url"
                       type="url"
                       value={urlInput}
-                      onChange={(e) => setUrlInput(e.target.value)}
+                      onChange: any={(e) => setUrlInput(e.target.value)}
                       placeholder="https://example.com/docs"
                     /></Input>
                   <Button
@@ -293,7 +309,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     disabled={loading}
                     className="w-full"
                   ></Button>
-                    <Globe className="h-4 w-4 mr-2" />
+                    <Globe className="h-4 w-4 mr-2"    />
                     Add from URL</Globe>
                 <TabsContent value="file", className="space-y-4"></TabsContent>
                   <div className="space-y-2"></div>
@@ -303,7 +319,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                       type="file"
                       onChange={handleFileUpload}
                       accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"
-                    /></Input>
+                       /></Input>
                   <p className="text-sm text-muted-foreground">
                     Supported: Text, Markdown, Code files</p>
                 <TabsContent value="code", className="space-y-4"></TabsContent>
@@ -312,7 +328,7 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <Input
                       id="path"
                       value={codebasePath}
-                      onChange={(e) => setCodebasePath(e.target.value)}
+                      onChange: any={(e) => setCodebasePath(e.target.value)}
                       placeholder="/path/to/codebase"
                     /></Input>
                   <Button
@@ -320,13 +336,12 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     disabled={loading}
                     className="w-full"
                   ></Button>
-                    <Code className="h-4 w-4 mr-2" />
+                    <Code className="h-4 w-4 mr-2"    />
                     Ingest Codebase</Code>
                   <p className="text-sm text-muted-foreground">
                     Automatically indexes all code files in the directory</p>
-          {/* Stats */}
-          {stats && (
-            <Card></Card>
+          {/* Stats */},
+    {stats  && (Card></Card>
               <CardHeader></CardHeader>
                 <CardTitle>Statistics</CardTitle>
               <CardContent className="space-y-4"></CardContent>
@@ -339,11 +354,10 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     <p className="text-2xl font-bold">{stats.chunkCount}</p>
                 <div></div>
                   <p className="text-sm text-muted-foreground mb-2">Storage Used</p>
-                  <Progress value={(stats.size / 1048576) * 10} className="h-2" /></Progress>
+                  <Progress value={(stats.size / 1048576) * 10} className="h-2"    /></Progress>
                   <p className="text-xs text-muted-foreground mt-1">
                     {(stats.size / 1024).toFixed(2)} KB</p>
-                {stats.topics?.length > 0 && (
-                  <div></div>
+                {stats.topics?.length > 0  && (div></div>
                     <p className="text-sm text-muted-foreground mb-2">Top Topics</p>
                     <div className="flex flex-wrap gap-2">
                       {stats.topics.slice(0, 5).map((topic) => (</div>
@@ -357,48 +371,47 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                     variant="outline"
                     onClick={() => exportKnowledge('json')}
                   ></Button>
-                    <Download className="h-4 w-4 mr-2" />
-                    Export</Download>
+                    <Download className="h-4 w-4 mr-2"    />
+                    // Export</Download>
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={loadStats}
                   ></Button>
-                    <RefreshCw className="h-4 w-4 mr-2" />
-                    Refresh</RefreshCw>
+                    <RefreshCw className="h-4 w-4 mr-2"    />
+                    // Refresh</RefreshCw>
                   <Button
                     size="sm"
                     variant="destructive"
                     onClick={clearKnowledge}
                   ></Button>
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Clear</Trash2>
-          )}
-        {/* Search, Results */}
+                    <Trash2 className="h-4 w-4 mr-2"    />
+                    // Clear</Trash2>
+          )},
+    {/* Search, Results */}
         <div className="space-y-6"></div>
           <Card className="h-[600px]"></Card>
             <CardHeader></CardHeader>
               <CardTitle>Search Results</CardTitle>
               <CardDescription>
                 {searchResults.length > 0
-                  ? `Found ${searchResults.length} relevant documents``
+                  ? `Found ${searchResults.length} relevant documents`
                   : 'Search to find relevant knowledge'
-                }</CardDescription>
+}</CardDescription>
             <CardContent></CardContent>
               <ScrollArea className="h-[480px]"></ScrollArea>
                 <div className="space-y-4">
-                  {searchResults.map((result, index) => (</div>
+                  {searchResults.map((result, index) => (</div>
                     <div
                       key={result.id}
-                      className={`p-4 border rounded-lg cursor-pointer transition-colors ${`
+                      className={`p-4 border rounded-lg cursor-pointer transition-colors ${``
                         selectedSource?.id === result.id
                           ? 'bg-accent border-primary'
                           : 'hover:bg-accent'
-                      }`}`
+                      }`}
                       onClick={() => handleSourceSelect(result)}
                     ></div>
-                      <div className="flex items-start justify-between"></div>
-                        <div className="flex-1"></div>
+                      <div className="flex items-start justify-between"></div><div className="flex-1"></div>
                           <div className="flex items-center gap-2 mb-2">
                             {getTypeIcon(result.metadata.type)}
                             <h4 className="font-medium">
@@ -408,10 +421,9 @@ export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBa
                           <div className="flex items-center gap-4 mt-2"></div>
                             <Badge variant="outline", className="text-xs">
                               {result.metadata.type}</Badge>
-                            {result.score && (
-                              <span className="text-xs text-muted-foreground">
+                            {result.score  && (span className="text-xs text-muted-foreground">
                                 Score: {(result.score * 100).toFixed(0)}%</span>
                             )}
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" /></ChevronRight>))}
+                        <ChevronRight className="h-4 w-4 text-muted-foreground"    /></ChevronRight>))}
     );
 }

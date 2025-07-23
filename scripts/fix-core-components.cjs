@@ -3,14 +3,14 @@ const fs = require('fs');
 
 console.log('🚀 Fixing Core Layout Components for Vercel Build\n');
 
-const coreComponents = {
+const _coreComponents = {
   'src/components/ui/toaster.tsx': `import {
   Toast,
   ToastClose,
   ToastDescription,
   ToastProvider,
   ToastTitle,
-  ToastViewport,
+  // ToastViewport
 } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -116,7 +116,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const ToastProvider = ToastPrimitives.Provider;
+const _ToastProvider = ToastPrimitives.Provider;
 
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Viewport>,
@@ -126,27 +126,24 @@ const ToastViewport = React.forwardRef<
     ref={ref}
     className={cn(
       "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-      className
+      // className
     )}
     {...props}
   />
 ));
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
 
-const toastVariants = cva(
+const _toastVariants = cva(
   "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
   {
     variants: {
       variant: {
         default: "border bg-background text-foreground",
         destructive:
-          "destructive group border-destructive bg-destructive text-destructive-foreground",
-      },
+          "destructive group border-destructive bg-destructive text-destructive-foreground"}
     },
     defaultVariants: {
-      variant: "default",
-    },
-  }
+      variant: "default"}}
 );
 
 const Toast = React.forwardRef<
@@ -172,7 +169,7 @@ const ToastAction = React.forwardRef<
     ref={ref}
     className={cn(
       "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
-      className
+      // className
     )}
     {...props}
   />
@@ -187,7 +184,7 @@ const ToastClose = React.forwardRef<
     ref={ref}
     className={cn(
       "absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600",
-      className
+      // className
     )}
     toast-close=""
     {...props}
@@ -234,17 +231,17 @@ export {
   ToastTitle,
   ToastDescription,
   ToastClose,
-  ToastAction,
+  // ToastAction
 };`,
 
   'src/components/ui/use-toast.tsx': `import * as React from "react";
 import type {
   ToastActionElement,
-  ToastProps,
+  // ToastProps
 } from "@/components/ui/toast";
 
-const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1000000;
+const _TOAST_LIMIT = 1;
+const _TOAST_REMOVE_DELAY = 1000000;
 
 type ToasterToast = ToastProps & {
   id: string;
@@ -253,68 +250,59 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement;
 };
 
-const actionTypes = {
+const _actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
   DISMISS_TOAST: "DISMISS_TOAST",
-  REMOVE_TOAST: "REMOVE_TOAST",
+  REMOVE_TOAST: "REMOVE_TOAST"
 } as const;
 
 let count = 0;
 
 function genId() {
   count = (count + 1) % Number.MAX_SAFE_INTEGER;
-  return count.toString();
-}
-
+  return count.toString();}
 type ActionType = typeof actionTypes;
 
 type Action =
   | {
       type: ActionType["ADD_TOAST"];
-      toast: ToasterToast;
-    }
+      toast: ToasterToast;}
   | {
       type: ActionType["UPDATE_TOAST"];
-      toast: Partial<ToasterToast>;
-    }
+      toast: Partial<ToasterToast>;}
   | {
       type: ActionType["DISMISS_TOAST"];
-      toastId?: ToasterToast["id"];
-    }
+      toastId?: ToasterToast["id"];}
   | {
       type: ActionType["REMOVE_TOAST"];
       toastId?: ToasterToast["id"];
     };
 
 interface State {
-  toasts: ToasterToast[];
-}
-
+  toasts: ToasterToast[];}
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
-const addToRemoveQueue = (toastId: string) => {
+const _addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
-    return;
-  }
-
-  const timeout = setTimeout(() => {
+    return;}
+  const _timeout = setTimeout(() => {
     toastTimeouts.delete(toastId);
     dispatch({
       type: "REMOVE_TOAST",
-      toastId: toastId,
+      toastId: toastId
     });
   }, TOAST_REMOVE_DELAY);
 
   toastTimeouts.set(toastId, timeout);
 };
 
-export const reducer = (state: State, action: Action): State => {
+export const _reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
       return {
         ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT)
       };
 
     case "UPDATE_TOAST":
@@ -322,7 +310,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         toasts: state.toasts.map((t) =>
           t.id === action.toast.id ? { ...t, ...action.toast } : t
-        ),
+        )
       };
 
     case "DISMISS_TOAST": {
@@ -333,33 +321,27 @@ export const reducer = (state: State, action: Action): State => {
       } else {
         state.toasts.forEach((toast) => {
           addToRemoveQueue(toast.id);
-        });
-      }
-
+        });}
       return {
         ...state,
         toasts: state.toasts.map((t) =>
           t.id === toastId || toastId === undefined
             ? {
                 ...t,
-                open: false,
-              }
+                open: false}
             : t
-        ),
-      };
-    }
+        )
+      };}
     case "REMOVE_TOAST":
       if (action.toastId === undefined) {
         return {
           ...state,
-          toasts: [],
-        };
-      }
+          toasts: []
+        };}
       return {
         ...state,
-        toasts: state.toasts.filter((t) => t.id !== action.toastId),
-      };
-  }
+        toasts: state.toasts.filter((t) => t.id !== action.toastId)
+      };}
 };
 
 const listeners: Array<(state: State) => void> = [];
@@ -370,20 +352,18 @@ function dispatch(action: Action) {
   memoryState = reducer(memoryState, action);
   listeners.forEach((listener) => {
     listener(memoryState);
-  });
-}
-
+  });}
 type Toast = Omit<ToasterToast, "id">;
 
 function toast({ ...props }: Toast) {
-  const id = genId();
+  const _id = genId();
 
-  const update = (props: ToasterToast) =>
+  const _update = (props: ToasterToast) =>
     dispatch({
       type: "UPDATE_TOAST",
-      toast: { ...props, id },
+      toast: { ...props, id }
     });
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id });
+  const _dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id });
 
   dispatch({
     type: "ADD_TOAST",
@@ -392,38 +372,31 @@ function toast({ ...props }: Toast) {
       id,
       open: true,
       onOpenChange: (open) => {
-        if (!open) dismiss();
-      },
-    },
+        if (!open) dismiss();}}
   });
 
   return {
     id: id,
     dismiss,
-    update,
-  };
-}
-
+    // update
+  };}
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
 
   React.useEffect(() => {
     listeners.push(setState);
     return () => {
-      const index = listeners.indexOf(setState);
+      const _index = listeners.indexOf(setState);
       if (index > -1) {
-        listeners.splice(index, 1);
-      }
+        listeners.splice(index, 1);}
     };
   }, [state]);
 
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
-  };
-}
-
+    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId })
+  };}
 export { useToast, toast };`
 };
 
@@ -432,17 +405,14 @@ let filesFixed = 0;
 Object.entries(coreComponents).forEach(([filePath, content]) => {
   try {
     // Create directory if it doesn't exist
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ Fixed: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🎉 Summary:`);

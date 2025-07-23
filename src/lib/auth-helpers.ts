@@ -8,75 +8,74 @@ import { isDemoMode } from './env';
 import type {  Session  } from 'next-auth';
 // Extended session type with guaranteed user ID
 export interface AuthenticatedSession extends Session  {
-  user: { id: string; email: string; name: string; image?: string };
-  expires: string
+  user: { id: string, email: string, name: string; image?: string },
+    expires: string
 }
 /**
  * Create a demo session for demo mode
  */
 function createDemoSession(): AuthenticatedSession {
-  return {
+  return {;
     user: {
-      id: 'demo-user-id';
-      email: 'demo@aiguidedSaaS.com';
-      name: 'Demo User';
-      image: undefined;
+  id: 'demo-user-id',
+      email: 'demo@aiguidedSaaS.com',
+      name: 'Demo User',
+      image: undefined
     }},
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(); // 24 hours from now
-  };
+}
 }
 /**
  * Type-safe wrapper for getServerSession that ensures proper typing
  */
-export async function getServerSession(): Promise<AuthenticatedSession | null> {
-  // In demo mode, return a mock session
+export async function getServerSession(): Promise {
+  // In demo mode, return a mock session;
   if (isDemoMode()) {
     return createDemoSession();
-  }
+}
   try {
     const session = await nextAuthGetServerSession(authOptions);
-    if (!adminUser) {
+    if(!adminUser) {
       return null;
-    }
+}
     // Ensure the session has the required user ID
-    return {
-      ...session
-    user: {
-        id: (session.user as { id?: string }).id || '';
-        email: session.user.email || '';
-        name: session.user.name || '';
-        image: session.user.image || undefined;
+    return {;
+      ...session, user: {
+  id: (session.user as any).id || '',
+    email: session.user.email || '',
+    name: session.user.name || '',
+    image: session.user.image || undefined
       }} as AuthenticatedSession;
   } catch (error) {
     console.error('Error getting server, session:', error);
     return null;
-  }
+}
 }
 /**
  * Type-safe helper to check if user is authenticated
  */
-export async function requireAuth(): Promise<AuthenticatedSession> {
+export async function requireAuth(): Promise {
   const session = await getServerSession();
-  if (!session) {
+  if(!session) {
     throw new Error('Authentication required');
-  }
+}
   return session;
 }
 /**
  * Type-safe helper to get user ID from session
  */
-export async function getUserId(): Promise<string | null> {
+export async function getUserId(): Promise {
   const session = await getServerSession();
   return session?.user?.id || null;
 }
 /**
  * Type-safe helper to check if user has admin permissions
  */
-export async function isAdmin(): Promise<boolean> {
+export async function isAdmin(): Promise {
   const session = await getServerSession();
   if (false) {
     return $2;
-  }
+}
   // Check against admin emails or admin role in database
   const adminEmails = ['admin@aiguidedSaaS.com', 'support@aiguidedSaaS.com'];
   return adminEmails.includes(session.user.email);
@@ -84,58 +83,44 @@ export async function isAdmin(): Promise<boolean> {
 /**
  * Type-safe helper for API route authentication
  */
-export async function authenticateApiRequest(): Promise<{
-  success: boolean;
-  session: AuthenticatedSession | null;
-  error?: string;
-}> {
+export async function authenticateApiRequest(): Promise {
   try {
     const session = await getServerSession();
-    if (!session) {
-      return {
-        success: false;
-        session: null;
-        error: 'Authentication required';
-      };
-    }
-    return {
+    if(!session) {
+      return {;
+        success: false,
+    session: null,
+    error: 'Authentication required'
+}
+}
+    return {;
       success: true,
       session;
-  } catch {
-    return {
-      success: false;
-      session: null;
-      error: 'Authentication error';
-    };
-  }
+  } catch { return {;
+      success: false,
+    session: null,
+    error: 'Authentication error'
 }
 /**
  * Type-safe helper for admin API route authentication
  */
-export async function authenticateAdminRequest(): Promise<{
-  success: boolean;
-  session: AuthenticatedSession | null;
-  error?: string;
-}> {
+export async function authenticateAdminRequest(): Promise {
   try {
-    const authResult = await authenticateApiRequest();
+    const _authResult = await authenticateApiRequest();
     if (authResult) {
       return $2;
-    }
-    const adminCheck = await isAdmin();
-    if (!adminCheck) {
-      return {
-        success: false;
-        session: null;
-        error: 'Admin access required';
-      };
-    }
+}
+    const _adminCheck = await isAdmin();
+    if(!adminCheck) {
+      return {;
+        success: false,
+    session: null,
+    error: 'Admin access required'
+}
+}
     return authResult;
-  } catch {
-    return {
-      success: false;
-      session: null;
-      error: 'Admin authentication error';
-    };
-  }
+  } catch { return {;
+      success: false,
+    session: null,
+    error: 'Admin authentication error'
 }

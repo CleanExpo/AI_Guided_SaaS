@@ -29,14 +29,11 @@ class MCPDocumentationOrchestrator {
         name: 'NextJSAgent',
         capability: 'Next.js app router and API routes',
         documentationFocus: ['nextjs', 'app-router', 'api-routes'],
-        errorPatterns: ['TS2345', 'TS2740']
-      }
+        errorPatterns: ['TS2345', 'TS2740']}
     ];
 
     this.documentationStrategies = new Map();
-    this.initializeStrategies();
-  }
-
+    this.initializeStrategies();}
   initializeStrategies() {
     // NextAuth session type fixes
     this.documentationStrategies.set('session.user.id', `
@@ -47,15 +44,14 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string
-    } & DefaultSession["user"]
-  }
-}
+    } & DefaultSession["user"]}}
 `);
 
     // Import fixes
     this.documentationStrategies.set('import-next-auth', `
 // Update imports from 'next-auth' to 'next-auth/next'
 import { getServerSession } from 'next-auth/next'
+;
 import { NextAuthOptions } from 'next-auth'
 `);
 
@@ -64,43 +60,31 @@ import { NextAuthOptions } from 'next-auth'
 // Add explicit type annotations
 // Before: function example(param) { }
 // After: function example(param: string) { }
-`);
-  }
-
+`);}
   async analyzeAndPlan() {
     console.log('🎯 MCP Documentation Agent Orchestrator\n');
     console.log('=====================================\n');
 
     // Read the autonomous doc report
-    const reportPath = path.join(process.cwd(), 'autonomous-doc-report.json');
+    const _reportPath = path.join(process.cwd(), 'autonomous-doc-report.json');
     if (!fs.existsSync(reportPath)) {
       console.log('❌ No autonomous doc report found. Run autonomous-doc-finder.cjs first.');
-      return;
-    }
-
+      return;}
     const report = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
     console.log(`📊 Found ${report.totalErrors} errors to fix\n`);
 
     // Assign agents to error categories
-    this.assignAgentsToErrors(report);
-  }
-
+    this.assignAgentsToErrors(report);}
   assignAgentsToErrors(report) {
     console.log('🤖 Assigning specialized agents:\n');
 
     for (const [errorCode, count] of Object.entries(report.errorsByCode)) {
       const agent = this.findBestAgent(errorCode);
       if (agent) {
-        console.log(`  ${errorCode} (${count} errors) → ${agent.name}`);
-      }
-    }
-    console.log('');
-  }
-
+        console.log(`  ${errorCode} (${count} errors) → ${agent.name}`);}}
+    console.log('');}
   findBestAgent(errorCode) {
-    return this.agents.find(agent => agent.errorPatterns.includes(errorCode));
-  }
-
+    return this.agents.find(agent => agent.errorPatterns.includes(errorCode));}
   async createAutonomousFixPlan() {
     const fixPlan = {
       timestamp: new Date().toISOString(),
@@ -147,8 +131,7 @@ import { NextAuthOptions } from 'next-auth'
             'Add parameter types',
             'Fix return type annotations',
             'Update function overloads'
-          ]
-        }
+          ]}
       ],
       estimatedTime: '10-15 minutes',
       automationLevel: 'Semi-autonomous with verification'
@@ -165,10 +148,7 @@ import { NextAuthOptions } from 'next-auth'
       console.log(`  Agent: ${phase.agent}`);
       console.log(`  Actions:`);
       phase.actions.forEach(action => console.log(`    - ${action}`));
-      console.log('');
-    }
-  }
-
+      console.log('');}}
   async generateMCPCommands() {
     console.log('🔧 MCP Commands for Documentation Retrieval:\n');
 
@@ -191,17 +171,14 @@ import { NextAuthOptions } from 'next-auth'
       {
         description: 'Sequential thinking for systematic fixes',
         mcp: 'sequentialthinking',
-        command: 'Plan and execute TypeScript error fixes with documentation context'
-      }
+        command: 'Plan and execute TypeScript error fixes with documentation context'}
     ];
 
     commands.forEach(cmd => {
       console.log(`📌 ${cmd.description}`);
       console.log(`   MCP: ${cmd.mcp}`);
       console.log(`   Command: ${cmd.command}\n`);
-    });
-  }
-
+    });}
   async run() {
     await this.analyzeAndPlan();
     await this.createAutonomousFixPlan();
@@ -211,10 +188,7 @@ import { NextAuthOptions } from 'next-auth'
     console.log('\nNext steps:');
     console.log('1. Use Context7 MCP to fetch relevant documentation');
     console.log('2. Apply fixes based on documentation patterns');
-    console.log('3. Re-run health check to verify improvements');
-  }
-}
-
+    console.log('3. Re-run health check to verify improvements');}}
 // Run the MCP documentation orchestrator
 const orchestrator = new MCPDocumentationOrchestrator();
 orchestrator.run().catch(console.error);

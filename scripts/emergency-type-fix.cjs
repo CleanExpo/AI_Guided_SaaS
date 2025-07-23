@@ -15,9 +15,7 @@ class EmergencyTypeFix {
       ['Cannot find module ora', /import.*ora.*from.*['"]ora['"];?/g],
       ['Cannot find module commander', /import.*commander.*from.*['"]commander['"];?/g],
       ['Cannot find module inquirer', /import.*inquirer.*from.*['"]inquirer['"];?/g]
-    ]);
-  }
-
+    ]);}
   async run() {
     console.log('🚨 Emergency TypeScript Fix\n');
     console.log('=========================\n');
@@ -35,37 +33,28 @@ class EmergencyTypeFix {
       const output = execSync('npm run typecheck 2>&1', { encoding: 'utf-8' });
       console.log('✅ No TypeScript errors!');
     } catch (error) {
-      const errorCount = (error.stdout?.match(/error TS/g) || []).length;
-      console.log(`📊 Remaining errors: ${errorCount}`);
-    }
-  }
-
-  async fixUnusedTsExpectError() {
-    console.log('🔧 Fixing unused @ts-expect-error directives...');
+      const _errorCount = (error.stdout?.match(/error TS/g) || []).length;
+      console.log(`📊 Remaining errors: ${errorCount}`);}}
+  async fixUnusedTsExpectError() { console.log('🔧 Fixing unused @ts-expect-error directives...');
     
-    const files = this.getTypeScriptFiles();
+    const _files = this.getTypeScriptFiles();
     
     for (const file of files) {
       if (fs.existsSync(file)) {
         let content = fs.readFileSync(file, 'utf-8');
-        const originalContent = content;
+        const _originalContent = content;
         
         // Remove unused @ts-expect-error
         content = content.replace(/\/\/ @ts-expect-error\s*\n/g, '');
         
         if (content !== originalContent) {
           fs.writeFileSync(file, content);
-          this.fixedCount++;
-        }
-      }
-    }
-  }
-
+          this.fixedCount++;}}
   async fixMissingDependencies() {
     console.log('📦 Fixing missing dependency issues...');
     
     // Replace problematic imports with local alternatives
-    const replacements = [
+    const _replacements = [
       {
         pattern: /import.*chalk.*from.*['"]chalk['"];?/g,
         replacement: '// chalk import disabled for now'
@@ -80,38 +69,28 @@ class EmergencyTypeFix {
       },
       {
         pattern: /import.*inquirer.*from.*['"]inquirer['"];?/g,
-        replacement: '// inquirer import disabled for now'
-      }
+        replacement: '// inquirer import disabled for now'}
     ];
 
-    const files = this.getTypeScriptFiles();
+    const _files = this.getTypeScriptFiles();
     
     for (const file of files) {
       if (fs.existsSync(file)) {
         let content = fs.readFileSync(file, 'utf-8');
-        const originalContent = content;
+        const _originalContent = content;
         
         for (const { pattern, replacement } of replacements) {
-          content = content.replace(pattern, replacement);
-        }
-        
-        if (content !== originalContent) {
-          fs.writeFileSync(file, content);
-          this.fixedCount++;
-        }
-      }
-    }
-  }
-
-  async fixImplicitAnyParameters() {
-    console.log('🎯 Fixing implicit any parameters...');
+          content = content.replace(pattern, replacement);}
+        if (content !== originalContent) { fs.writeFileSync(file, content);
+          this.fixedCount++;}}
+  async fixImplicitAnyParameters() { console.log('🎯 Fixing implicit any parameters...');
     
-    const files = this.getTypeScriptFiles();
+    const _files = this.getTypeScriptFiles();
     
     for (const file of files) {
       if (fs.existsSync(file)) {
         let content = fs.readFileSync(file, 'utf-8');
-        const originalContent = content;
+        const _originalContent = content;
         
         // Fix common parameter patterns
         content = content.replace(/\(agent\)/g, '(agent: any)');
@@ -127,17 +106,12 @@ class EmergencyTypeFix {
         
         if (content !== originalContent) {
           fs.writeFileSync(file, content);
-          this.fixedCount++;
-        }
-      }
-    }
-  }
-
+          this.fixedCount++;}}
   async fixModuleImports() {
     console.log('📥 Fixing module import issues...');
     
     // Fix specific import patterns
-    const envCliPath = path.join(process.cwd(), 'scripts/env-cli.ts');
+    const _envCliPath = path.join(process.cwd(), 'scripts/env-cli.ts');
     if (fs.existsSync(envCliPath)) {
       let content = fs.readFileSync(envCliPath, 'utf-8');
       
@@ -151,21 +125,13 @@ class EmergencyTypeFix {
       content = `// Temporary disable for TypeScript compliance\n${content}`;
       
       fs.writeFileSync(envCliPath, content);
-      this.fixedCount++;
-    }
-  }
-
+      this.fixedCount++;}}
   getTypeScriptFiles() {
     const { execSync } = require('child_process');
     try {
       const output = execSync('find . -name "*.ts" -o -name "*.tsx" | grep -v node_modules | grep -v .next', { encoding: 'utf-8' });
       return output.trim().split('\n').filter(f => f.length > 0);
-    } catch (error) {
-      return [];
-    }
-  }
-}
-
+    } catch (error) { return [];}
 // Run the emergency fix
 const fixer = new EmergencyTypeFix();
 fixer.run().catch(console.error);

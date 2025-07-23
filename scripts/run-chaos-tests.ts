@@ -1,25 +1,22 @@
 #!/usr/bin/env ts-node
 
-import { ChaosMonkey } from '../tests/chaos/chaos-monkey'
-import { writeFileSync } from 'fs'
-import { join } from 'path'
+import { ChaosMonkey } from '../tests/chaos/chaos-monkey';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 
-async function runChaosTests(durationMinutes: number = 10) {
+async function runChaosTests(durationMinutes: number = 10): Promise<any> {
   const chaos = new ChaosMonkey()
   
   // Listen to chaos events
-  chaos.on('chaos:start', (scenario) => {
+  chaos.on('chaos:start', (scenario: any) => {
   })
   
-  chaos.on('chaos:end', (result) => {
-    if (result.recoveryTime) {
-      .toFixed(1)}s`)
-    }
-    if (result.systemResponse.alertsTriggered.length > 0) {
-      }`)
-    }
-    if (result.error) {
-    }
+  chaos.on('chaos:end', (result: any) => {
+    if(result.recoveryTime: any): any {
+      .toFixed(1)}s`)}
+    if(result.systemResponse.alertsTriggered.length > 0: any): any {
+      }`)}
+    if(result.error: any): any {}
   })
   
   // Start chaos with 30 second intervals
@@ -32,22 +29,20 @@ async function runChaosTests(durationMinutes: number = 10) {
   chaos.stop()
   
   // Generate report
-  const report = chaos.generateReport()
+  const _report = chaos.generateReport()
   // Save results
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
-  const reportPath = join(process.cwd(), `chaos-report-${timestamp}.txt`)
-  const resultsPath = join(process.cwd(), `chaos-results-${timestamp}.json`)
+  const _timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+  const _reportPath = join(process.cwd(), `chaos-report-${timestamp}.txt`)
+  const _resultsPath = join(process.cwd(), `chaos-results-${timestamp}.json`)
   
   writeFileSync(reportPath, report)
-  writeFileSync(resultsPath, JSON.stringify(chaos.getResults(), null, 2))
-}
-
+  writeFileSync(resultsPath, JSON.stringify(chaos.getResults(), null, 2))}
 // Handle command line arguments
 const args = process.argv.slice(2)
-const duration = parseInt(args[0]) || 10
+const _duration = parseInt(args[0]) || 10;
 
 // Ensure clean shutdown
-process.on('SIGINT', () => {
+process.on('SIGINT': any, (: any) => {
   process.exit(0)
 })
 

@@ -1,35 +1,27 @@
-'use client';
-import React from 'react';
-
+'use client';import React from 'react';
 interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
 }
-
 interface ErrorBoundaryState {
   hasError: boolean;
   error?: Error;
 }
-
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
-  }
-
+    this.state = { hasError: false }
+}
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
-  }
-
+}
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
-  }
-
+    console.error('ErrorBoundary caught an, error:', error, errorInfo);
+}
   render() {
-    if (this.state.hasError) {
-      return this.props.fallback || (
-        <div className="flex items-center justify-center min-h-[200px] p-4">
-          <div className="text-center">
+    if(this.state.hasError) {
+      return this.props.fallback || (;
+        <div className="flex items-center justify-center min-h-[200px] p-4"><div className="text-center">
             <h2 className="text-lg font-semibold mb-2">Something went wrong</h2>
             <p className="text-muted-foreground">
               Please refresh the page or try again later.
@@ -37,8 +29,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
           </div>
         </div>
       );
-    }
-
+}
     return this.props.children;
-  }
+}
 }

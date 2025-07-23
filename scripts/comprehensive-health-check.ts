@@ -5,24 +5,21 @@
  * Validates all aspects of the AI Guided SaaS platform
  */
 
-import { existsSync, readFileSync } from 'fs'
-import { join } from 'path'
-import { pathToFileURL } from 'url'
+import { existsSync, readFileSync } from 'fs'import { join } from 'path';
+import { pathToFileURL } from 'url';
 
 interface HealthCheckResult {
-  category: string; item: string; status: 'pass' | 'fail' | 'warning'
-  message: string; severity: 'critical' | 'high' | 'medium' | 'low'
-}
-
+  category: string; item: string; status: 'pass' | 'fail' | 'warning',
+  message: string; severity: 'critical' | 'high' | 'medium' | 'low';
+,}
 interface HealthReport {
-  timestamp: Date; results: HealthCheckResult[]
-  summary: {
-    total: number; passed: number; failed: number; warnings: number; criticalIssues: number
-  }
+  timestamp: Date; results: HealthCheckResult[],
+  summary: {;,
+  total: number; passed: number; failed: number; warnings: number; criticalIssues: number;
+,}
 }
-
 class ComprehensiveHealthCheck {
-  private results: HealthCheckResult[] = []
+  private, results: HealthCheckResult[] = []
   private baseUrl = 'http://localhost:3000'
   
   async run(): Promise<HealthReport> {
@@ -56,12 +53,11 @@ class ComprehensiveHealthCheck {
     
     // 10. Generate report
     return this.generateReport()
-  }
-  
-  private async checkProjectStructure() {
+,}
+  private async checkProjectStructure(): Promise<void> {
 
-    const requiredDirs = [
-      'src/app',
+    const _requiredDirs = [;,
+  'src/app',
       'src/components',
       'src/lib',
       'src/hooks',
@@ -70,46 +66,44 @@ class ComprehensiveHealthCheck {
       'public',
       'agents',
       'docs'
-    ]
+   ]
     
-    for (const dir of requiredDirs) {
-      const exists = existsSync(join(process.cwd(), dir))
+    for(const dir of requiredDirs: any): any {
+      const _exists = existsSync(join(process.cwd(), dir))
       this.addResult({
         category: 'Project Structure',
         item: dir,
         status: exists ? 'pass' : 'fail',
-        message: exists ? 'Directory exists' : 'Directory missing',
-        severity: exists ? 'low' : 'high'
-      })
-    }
-  }
-  
-  private async checkConfiguration() {
+        message: exists ? 'Directory exists' : 'Directory missing',;
+        severity: exists ? 'low' : 'high';)
+      ,})
+}
+}
+  private async checkConfiguration(): Promise<void> {
 
-    const configs = [
-      { file: 'package.json', severity: 'critical' as const },
-      { file: 'tsconfig.json', severity: 'critical' as const },
-      { file: 'next.config.mjs', severity: 'critical' as const },
-      { file: '.env.local', severity: 'high' as const },
-      { file: 'tailwind.config.ts', severity: 'medium' as const }
-    ]
+    const _configs = [;,
+  { file: 'package.json', severity: 'critical' as const ,},
+      { file: 'tsconfig.json', severity: 'critical' as const ,},
+      { file: 'next.config.mjs', severity: 'critical' as const ,},
+      { file: '.env.local', severity: 'high' as const ,},
+      { file: 'tailwind.config.ts', severity: 'medium' as const ,}
+   ]
     
-    for (const config of configs) {
-      const exists = existsSync(join(process.cwd(), config.file))
+    for(const config of configs: any): any {
+      const _exists = existsSync(join(process.cwd(), config.file))
       this.addResult({
         category: 'Configuration',
         item: config.file,
         status: exists ? 'pass' : 'fail',
-        message: exists ? 'Configuration file exists' : 'Configuration file missing',
-        severity: config.severity
-      })
-    }
-  }
-  
-  private async checkAPIEndpoints() {
+        message: exists ? 'Configuration file exists' : 'Configuration file missing',;
+        severity: config.severity;)
+      ,})
+}
+}
+  private async checkAPIEndpoints(): Promise<void> {
 
-    const endpoints = [
-      '/api/health',
+    const _endpoints = [;,
+  '/api/health',
       '/api/auth/session',
       '/api/admin',
       '/api/analytics',
@@ -117,37 +111,36 @@ class ComprehensiveHealthCheck {
       '/api/agent-chat',
       '/api/config',
       '/api/mcp/status'
-    ]
+   ]
     
-    for (const endpoint of endpoints) {
+    for(const endpoint of endpoints: any): any {
       try {
-        const response = await fetch(`${this.baseUrl}${endpoint}`)
-        const isSuccess = response.status < 400
+        const response = await fetch(`${this.baseUrl,}${endpoint}`)
+        const _isSuccess = response.status < 400;
         
         this.addResult({
           category: 'API Endpoints',
           item: endpoint,
           status: isSuccess ? 'pass' : 'fail',
-          message: `Status: ${response.status}`,
-          severity: endpoint.includes('health') ? 'critical' : 'high'
-        })
-      } catch (error) {
+          message: `Status: ${response.status,}`,;)
+          severity: endpoint.includes('health') ? 'critical' : 'high';
+        ,})
+      } catch (error: any) {
         this.addResult({
           category: 'API Endpoints',
           item: endpoint,
           status: 'fail',
-          message: `Connection, failed: ${error}`,
-          severity: 'high'
-        })
-      }
-    }
-  }
-  
-  private async checkPages() {
+          message: `Connection, failed: ${error,}`,;
+          severity: 'high';)
+        ,})
+}
+}
+}
+  private async checkPages(): Promise<void> {
     ...')
     
-    const pages = [
-      '/',
+    const _pages = [;,
+  '/',
       '/dashboard',
       '/auth/signin',
       '/auth/signup',
@@ -161,188 +154,170 @@ class ComprehensiveHealthCheck {
       '/builder/pro-code',
       '/collaborate',
       '/status'
-    ]
+   ]
     
-    for (const page of pages) {
+    for(const page of pages: any): any {
       try {
-        const response = await fetch(`${this.baseUrl}${page}`)
-        const is404 = response.status === 404
+        const response = await fetch(`${this.baseUrl,}${page}`)
+        const _is404 = response.status === 404;
         
         this.addResult({
           category: 'Pages',
           item: page,
           status: !is404 ? 'pass' : 'fail',
-          message: `Status: ${response.status}`,
-          severity: page === '/' || page === '/dashboard' ? 'critical' : 'high'
-        })
-      } catch (error) {
+          message: `Status: ${response.status,}`,;
+          severity: page === '/' || page === '/dashboard' ? 'critical' : 'high';)
+        ,})
+      } catch (error: any) {
         this.addResult({
           category: 'Pages',
           item: page,
           status: 'fail',
-          message: `Page check, failed: ${error}`,
-          severity: 'high'
-        })
-      }
-    }
-  }
-  
-  private async checkDatabaseConnections() {
+          message: `Page check, failed: ${error,}`,;
+          severity: 'high';)
+        ,})
+}
+}
+}
+  private async checkDatabaseConnections(): Promise<void> {
 
     // Check for database configuration
-    const hasSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
-    const hasSupabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
+    const _hasSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+    const _hasSupabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
     
     this.addResult({
       category: 'Database',
       item: 'Supabase Configuration',
       status: hasSupabaseUrl && hasSupabaseKey ? 'pass' : 'fail',
-      message: hasSupabaseUrl && hasSupabaseKey ? 'Configured' : 'Missing environment variables',
-      severity: 'critical'
-    })
-  }
-  
-  private async checkAuthentication() {
+      message: hasSupabaseUrl && hasSupabaseKey ? 'Configured' : 'Missing environment variables',;
+      severity: 'critical';)
+    ,})
+}
+  private async checkAuthentication(): Promise<void> {
 
     // Check NextAuth configuration
-    const hasAuthSecret = process.env.NEXTAUTH_SECRET
-    const hasAuthUrl = process.env.NEXTAUTH_URL
+    const _hasAuthSecret = process.env.NEXTAUTH_SECRET;
+    const _hasAuthUrl = process.env.NEXTAUTH_URL;
     
     this.addResult({
       category: 'Authentication',
       item: 'NextAuth Configuration',
       status: hasAuthSecret && hasAuthUrl ? 'pass' : 'warning',
-      message: hasAuthSecret && hasAuthUrl ? 'Configured' : 'Missing environment variables',
-      severity: 'high'
-    })
-  }
-  
-  private async checkAgentSystem() {
+      message: hasAuthSecret && hasAuthUrl ? 'Configured' : 'Missing environment variables',;
+      severity: 'high';)
+    ,})
+}
+  private async checkAgentSystem(): Promise<void> {
 
-    const agentFiles = [
-      'src/lib/agents/AgentOrchestrator.ts',
+    const _agentFiles = [;,
+  'src/lib/agents/AgentOrchestrator.ts',
       'src/lib/agents/AgentLoader.ts',
       'src/lib/agents/AgentCoordinator.ts',
       'src/lib/agents/AgentRegistry.ts',
       'src/lib/agents/AgentMonitor.ts'
-    ]
+   ]
     
-    for (const file of agentFiles) {
-      const exists = existsSync(join(process.cwd(), file))
+    for(const file of agentFiles: any): any {
+      const _exists = existsSync(join(process.cwd(), file))
       this.addResult({
-        category: 'Agent System',
+        category: 'Agent System',)
         item: file.split('/').pop()!,
         status: exists ? 'pass' : 'fail',
-        message: exists ? 'Component exists' : 'Component missing',
-        severity: 'high'
-      })
-    }
-  }
-  
-  private async checkAdminDashboard() {
+        message: exists ? 'Component exists' : 'Component missing',;
+        severity: 'high';
+      ,})
+}
+}
+  private async checkAdminDashboard(): Promise<void> {
 
-    const adminComponents = [
-      'src/components/admin/AdminDashboard.tsx',
+    const _adminComponents = [;,
+  'src/components/admin/AdminDashboard.tsx',
       'src/components/admin/AdminPanel.tsx',
       'src/components/admin/AdminAnalytics.tsx',
       'src/app/admin/page.tsx',
       'src/app/admin/dashboard/page.tsx'
-    ]
+   ]
     
-    for (const component of adminComponents) {
-      const exists = existsSync(join(process.cwd(), component))
+    for(const component of adminComponents: any): any {
+      const _exists = existsSync(join(process.cwd(), component))
       this.addResult({
-        category: 'Admin Dashboard',
+        category: 'Admin Dashboard',)
         item: component.split('/').pop()!,
         status: exists ? 'pass' : 'fail',
-        message: exists ? 'Component exists' : 'Component missing',
-        severity: 'high'
-      })
-    }
-  }
-  
-  private async checkMissingComponents() {
+        message: exists ? 'Component exists' : 'Component missing',;
+        severity: 'high';
+      ,})
+}
+}
+  private async checkMissingComponents(): Promise<void> {
 
-    const criticalComponents = [
-      'src/components/Dashboard.tsx',
+    const _criticalComponents = [;,
+  'src/components/Dashboard.tsx',
       'src/components/AIChat.tsx',
       'src/components/ProjectGenerator.tsx',
       'src/components/TemplateManager.tsx',
       'src/components/DeploymentScreen.tsx',
       'src/hooks/use-toast.ts',
       'src/lib/mcp/index.ts'
-    ]
+   ]
     
-    for (const component of criticalComponents) {
-      const exists = existsSync(join(process.cwd(), component))
+    for(const component of criticalComponents: any): any {
+      const _exists = existsSync(join(process.cwd(), component))
       this.addResult({
-        category: 'Core Components',
+        category: 'Core Components',)
         item: component.split('/').pop()!,
         status: exists ? 'pass' : 'fail',
-        message: exists ? 'Component exists' : 'Component missing - needs to be created',
-        severity: 'critical'
-      })
-    }
-  }
-  
+        message: exists ? 'Component exists' : 'Component missing - needs to be created',;
+        severity: 'critical';
+      ,})
+}
+}
   private addResult(result: HealthCheckResult) {
     this.results.push(result)
     
-    const icon = result.status === 'pass' ? '✅' : result.status === 'warning' ? '⚠️' : '❌'
-
-  }
-  
+    const _icon = result.status === 'pass' ? '✅' : result.status === 'warning' ? '⚠️' : '❌';
+,}
   private generateReport(): HealthReport {
     const summary = {
       total: this.results.length,
-      passed: this.results.filter(r => r.status === 'pass').length,
-      failed: this.results.filter(r => r.status === 'fail').length,
-      warnings: this.results.filter(r => r.status === 'warning').length,
-      criticalIssues: this.results.filter(r => r.status === 'fail' && r.severity === 'critical').length
-    }
-    
-    return {
-      timestamp: new Date(),
+      passed: this.results.filter((r: any) => r.status === 'pass').length,
+      failed: this.results.filter((r: any) => r.status === 'fail').length,
+      warnings: this.results.filter((r: any) => r.status === 'warning').length,;
+      criticalIssues: this.results.filter((r: any) => r.status === 'fail' && r.severity === 'critical').length;
+,}
+    return { timestamp: new Date(),
       results: this.results,
-      summary
-    }
-  }
+      // summary
 }
-
 // Run the health check
-async function main() {
+async function main(): void {
   const healthCheck = new ComprehensiveHealthCheck()
   const report = await healthCheck.run()
 
   // Show critical issues
-  if (report.summary.criticalIssues > 0) {
+  if(report.summary.criticalIssues > 0: any): any {
 
     report.results
-      .filter(r => r.status === 'fail' && r.severity === 'critical')
-      .forEach(r => )
-  }
-  
+      .filter((r: any) => r.status === 'fail' && r.severity === 'critical')
+      .forEach((r: any) => )
+,}
   // Show all failures
-  if (report.summary.failed > 0) {
+  if(report.summary.failed > 0: any): any {
 
     report.results
-      .filter(r => r.status === 'fail')
-      .forEach(r => )
-  }
-  
+      .filter((r: any) => r.status === 'fail')
+      .forEach((r: any) => )
+,}
   // Save report
-  const reportPath = join(process.cwd(), 'health-check-report.json')
-  await import('fs').then(fs => 
+  const _reportPath = join(process.cwd(), 'health-check-report.json')
+  await import('fs').then((fs: any) => 
     fs.promises.writeFile(reportPath, JSON.stringify(report, null, 2))
   )
 
   return report
 }
-
-// Export for use in other scripts
-export { ComprehensiveHealthCheck, main }
-
-// Run if called directly
+// Export for use in other scripts;
+export {  ComprehensiveHealthCheck, main  };// Run if called directly
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(console.error)
 }

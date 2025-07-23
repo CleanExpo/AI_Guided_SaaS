@@ -1,12 +1,11 @@
 // packages/causal-engine/logger.ts
-export type LogActionType = 'added' | 'edited' | 'deleted' | 'kept';
-export interface CausalLogEntry {
-  componentId: string;
-  componentType: string;
-  page: string;
-  promptContext: string;
-  action: LogActionType;
-  timestamp: number
+export type LogActionType = 'added' | 'edited' | 'deleted' | 'kept';export interface CausalLogEntry {
+  componentId: string,
+    componentType: string,
+    page: string,
+    promptContext: string,
+    action: LogActionType,
+    timestamp: number
 }
 /**
  * Write log entry to localStorage or Supabase.
@@ -14,26 +13,26 @@ export interface CausalLogEntry {
  */
 export class CausalLogger {
   private key = 'causal_logs';
-  log(entry: CausalLogEntry): void {
+  log(entry: CausalLogEntry) {
     const logs = this.getLogs();
     logs.push(entry);
     localStorage.setItem(this.key, JSON.stringify(logs));
-  }
+}
   getLogs(): CausalLogEntry[] {
-    const raw = localStorage.getItem(this.key);
+    const _raw = localStorage.getItem(this.key);
     return raw ? JSON.parse(raw) : [];
-  }
-  clearLogs(): void {
+}
+  clearLogs() {
     localStorage.removeItem(this.key);
-  }
+}
   /**
    * (Optional) Save to Supabase DB instead of localStorage
-   * Requires `causal_logs` table in Supabase`
+   * Requires `causal_logs` table in Supabase``
    */
-  async logToSupabase(entry: CausalLogEntry): Promise<void> {
+  async logToSupabase(entry: CausalLogEntry): Promise {
     try {
-      const { createClient } = await import('@supabase/supabase-js');
-      const supabase = createClient(;
+      const { createClient   }: any = await import('@supabase/supabase-js');
+      const supabase = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
       );
@@ -41,10 +40,9 @@ export class CausalLogger {
     } catch (error) {
       console.warn(
         '[🧠 Logger] Supabase logging failed, falling back to, localStorage:',
-        error
+        // error
       );
       this.log(entry);
-    }
-  }
-};
+}
+}
 export const logger = new CausalLogger();

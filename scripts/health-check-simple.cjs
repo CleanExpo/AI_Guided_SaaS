@@ -7,9 +7,7 @@ const path = require('path');
 class SimpleHealthCheck {
   constructor() {
     this.results = [];
-    this.errorPatterns = new Map();
-  }
-
+    this.errorPatterns = new Map();}
   run() {
     console.log('🏥 Running Health Check...\n');
     
@@ -17,9 +15,7 @@ class SimpleHealthCheck {
     this.checkDependencies();
     this.checkBuild();
     this.checkFileStructure();
-    this.generateReport();
-  }
-
+    this.generateReport();}
   checkTypeScript() {
     console.log('📘 Checking TypeScript...');
     
@@ -33,32 +29,27 @@ class SimpleHealthCheck {
       });
     } catch (error) {
       const output = error.stdout?.toString() || '';
-      const errors = (output.match(/error TS/g) || []).length;
+      const _errors = (output.match(/error TS/g) || []).length;
       console.log(`❌ TypeScript: ${errors} errors`);
       
       // Count error types
       const errorTypes = {};
-      const matches = output.matchAll(/error (TS\d+):/g);
+      const _matches = output.matchAll(/error (TS\d+):/g);
       for (const match of matches) {
-        const code = match[1];
-        errorTypes[code] = (errorTypes[code] || 0) + 1;
-      }
-      
+        const _code = match[1];
+        errorTypes[code] = (errorTypes[code] || 0) + 1;}
       this.results.push({
         category: 'TypeScript',
         status: 'fail',
         errors: errors,
         errorTypes: errorTypes
-      });
-    }
-  }
-
+      });}}
   checkDependencies() {
     console.log('\n📦 Checking Dependencies...');
     
     try {
       const output = execSync('npm ls --depth=0 2>&1', { encoding: 'utf-8' });
-      const hasIssues = output.includes('missing') || output.includes('UNMET');
+      const _hasIssues = output.includes('missing') || output.includes('UNMET');
       
       if (!hasIssues) {
         console.log('✅ Dependencies: All installed');
@@ -73,18 +64,14 @@ class SimpleHealthCheck {
           category: 'Dependencies',
           status: 'fail',
           errors: 1
-        });
-      }
+        });}
     } catch (error) {
       console.log('❌ Dependencies: Check failed');
       this.results.push({
         category: 'Dependencies',
         status: 'fail',
         errors: 1
-      });
-    }
-  }
-
+      });}}
   checkBuild() {
     console.log('\n🏗️  Checking Build...');
     
@@ -104,14 +91,11 @@ class SimpleHealthCheck {
         category: 'Build',
         status: 'fail',
         errors: 1
-      });
-    }
-  }
-
+      });}}
   checkFileStructure() {
     console.log('\n📁 Checking Critical Files...');
     
-    const criticalFiles = [
+    const _criticalFiles = [
       'package.json',
       'tsconfig.json',
       'next.config.mjs',
@@ -125,21 +109,14 @@ class SimpleHealthCheck {
     for (const file of criticalFiles) {
       if (!fs.existsSync(path.join(process.cwd(), file))) {
         console.log(`❌ Missing: ${file}`);
-        missing++;
-      }
-    }
-    
+        missing++;}}
     if (missing === 0) {
-      console.log('✅ All critical files present');
-    }
-    
+      console.log('✅ All critical files present');}
     this.results.push({
       category: 'File Structure',
       status: missing === 0 ? 'pass' : 'fail',
       errors: missing
-    });
-  }
-
+    });}
   generateReport() {
     console.log('\n📊 Summary\n==========');
     
@@ -150,10 +127,8 @@ class SimpleHealthCheck {
       totalErrors += result.errors || 0;
       if (result.status === 'fail') failedChecks++;
       
-      const icon = result.status === 'pass' ? '✅' : '❌';
-      console.log(`${icon} ${result.category}: ${result.status === 'pass' ? 'PASSED' : 'FAILED'}`);
-    }
-    
+      const _icon = result.status === 'pass' ? '✅' : '❌';
+      console.log(`${icon} ${result.category}: ${result.status === 'pass' ? 'PASSED' : 'FAILED'}`);}
     console.log(`\nTotal Errors: ${totalErrors}`);
     console.log(`Failed Checks: ${failedChecks}/${this.results.length}`);
     
@@ -161,15 +136,12 @@ class SimpleHealthCheck {
     const tsResult = this.results.find(r => r.category === 'TypeScript');
     if (tsResult && tsResult.errorTypes) {
       console.log('\nTypeScript Error Breakdown:');
-      const sorted = Object.entries(tsResult.errorTypes)
+      const _sorted = Object.entries(tsResult.errorTypes)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
       
       for (const [code, count] of sorted) {
-        console.log(`  ${code}: ${count} occurrences`);
-      }
-    }
-    
+        console.log(`  ${code}: ${count} occurrences`);}}
     // Generate report file
     const report = {
       timestamp: new Date().toISOString(),
@@ -177,14 +149,10 @@ class SimpleHealthCheck {
       summary: {
         totalErrors,
         failedChecks,
-        totalChecks: this.results.length
-      }
+        totalChecks: this.results.length}
     };
     
     fs.writeFileSync('health-check-report.json', JSON.stringify(report, null, 2));
-    console.log('\n📄 Report saved to health-check-report.json');
-  }
-}
-
+    console.log('\n📄 Report saved to health-check-report.json');}}
 // Run it
 new SimpleHealthCheck().run();

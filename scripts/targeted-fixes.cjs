@@ -6,9 +6,7 @@ const { execSync } = require('child_process');
 
 class TargetedFixes {
   constructor() {
-    this.fixedCount = 0;
-  }
-
+    this.fixedCount = 0;}
   async run() {
     console.log('🎯 Targeted TypeScript Fixes\n');
     console.log('===========================\n');
@@ -32,51 +30,41 @@ class TargetedFixes {
     console.log('\nRunning health check...');
     
     try {
-      const output = execSync('npm run typecheck 2>&1', { encoding: 'utf-8' });
+      const _output = execSync('npm run typecheck 2>&1', { encoding: 'utf-8' });
       console.log('✅ No TypeScript errors!');
     } catch (error) {
-      const errorCount = (error.stdout?.match(/error TS/g) || []).length;
-      console.log(`📊 Remaining errors: ${errorCount}`);
-    }
-  }
-
+      const _errorCount = (error.stdout?.match(/error TS/g) || []).length;
+      console.log(`📊 Remaining errors: ${errorCount}`);}}
   fixMonitoringTypes() {
     console.log('📝 Fixing monitoring types...');
     
     // Update the monitoring dashboard interface
-    const monitoringPath = path.join(process.cwd(), 'scripts/monitor-agents.ts');
+    const _monitoringPath = path.join(process.cwd(), 'scripts/monitor-agents.ts');
     if (fs.existsSync(monitoringPath)) {
       let content = fs.readFileSync(monitoringPath, 'utf-8');
       
       // Add interface definition at the top
-      const interfaceDef = `interface MonitoringDashboard {
+      const _interfaceDef = `interface MonitoringDashboard {
   agents: any[];
   recent_activity: any[];
   performance_metrics: any;
   error_logs: any[];
-  alerts?: any[];
-}
-
+  alerts?: any[];}
 `;
       
       if (!content.includes('interface MonitoringDashboard')) {
-        content = interfaceDef + content;
-      }
-      
+        content = interfaceDef + content;}
       // Fix parameter types
       content = content.replace(/\(activity\)/g, '(activity: any)');
       content = content.replace(/\(alert\)/g, '(alert: any)');
       
       fs.writeFileSync(monitoringPath, content);
       console.log('   ✅ Fixed monitor-agents.ts');
-      this.fixedCount++;
-    }
-  }
-
+      this.fixedCount++;}}
   fixProjectFormTypes() {
     console.log('\n📝 Fixing project form types...');
     
-    const formPath = path.join(process.cwd(), 'src/components/forms/ValidatedProjectForm.tsx');
+    const _formPath = path.join(process.cwd(), 'src/components/forms/ValidatedProjectForm.tsx');
     if (fs.existsSync(formPath)) {
       let content = fs.readFileSync(formPath, 'utf-8');
       
@@ -112,14 +100,11 @@ class TargetedFixes {
       
       fs.writeFileSync(formPath, content);
       console.log('   ✅ Fixed ValidatedProjectForm.tsx');
-      this.fixedCount++;
-    }
-  }
-
+      this.fixedCount++;}}
   fixAgentOrchestrator() {
     console.log('\n📝 Fixing agent orchestrator...');
     
-    const orchestratorPath = path.join(process.cwd(), 'src/lib/agents/AgentOrchestrator.ts');
+    const _orchestratorPath = path.join(process.cwd(), 'src/lib/agents/AgentOrchestrator.ts');
     if (fs.existsSync(orchestratorPath)) {
       let content = fs.readFileSync(orchestratorPath, 'utf-8');
       
@@ -142,7 +127,7 @@ class TargetedFixes {
       );
       
       // Add missing methods as stubs
-      const stubMethods = `
+      const _stubMethods = `
   // Stub methods - implement as needed
   private getLoadedAgents() { return this.registry.agents; }
   private getAgent(id: string) { return this.registry.agents.find((a: any) => a.id === id); }
@@ -155,9 +140,7 @@ class TargetedFixes {
         content = content.replace(
           /^}$/m,
           stubMethods + '\n}'
-        );
-      }
-      
+        );}
       // Fix parameter types
       content = content.replace(/\(agent\)/g, '(agent: any)');
       content = content.replace(/\(a\)/g, '(a: any)');
@@ -165,15 +148,12 @@ class TargetedFixes {
       
       fs.writeFileSync(orchestratorPath, content);
       console.log('   ✅ Fixed AgentOrchestrator.ts');
-      this.fixedCount++;
-    }
-  }
-
+      this.fixedCount++;}}
   fixAPIRoutes() {
     console.log('\n📝 Fixing API routes...');
     
     // Fix NextAuth route
-    const authRoutePath = path.join(process.cwd(), 'src/app/api/auth/[...nextauth]/route.ts');
+    const _authRoutePath = path.join(process.cwd(), 'src/app/api/auth/[...nextauth]/route.ts');
     if (fs.existsSync(authRoutePath)) {
       let content = fs.readFileSync(authRoutePath, 'utf-8');
       
@@ -182,30 +162,25 @@ class TargetedFixes {
       
       fs.writeFileSync(authRoutePath, content);
       console.log('   ✅ Fixed auth route');
-      this.fixedCount++;
-    }
-    
+      this.fixedCount++;}
     // Fix requirements route
-    const reqRoutePath = path.join(process.cwd(), 'src/app/api/requirements/process/route.ts');
+    const _reqRoutePath = path.join(process.cwd(), 'src/app/api/requirements/process/route.ts');
     if (fs.existsSync(reqRoutePath)) {
       let content = fs.readFileSync(reqRoutePath, 'utf-8');
       
       // Fix NextResponse.json() calls
       content = content.replace(
         /NextResponse\.json\(\)/g,
-        'NextResponse.json({ error: "Internal server error" }, { status: 500 })'
+        'NextResponse.json({  error: "Internal server error" ,  status: 500  })'
       );
       
       fs.writeFileSync(reqRoutePath, content);
       console.log('   ✅ Fixed requirements route');
-      this.fixedCount++;
-    }
-  }
-
+      this.fixedCount++;}}
   fixScripts() {
     console.log('\n📝 Fixing scripts...');
     
-    const scriptsToFix = [
+    const _scriptsToFix = [
       'scripts/initialize-agent-system.ts',
       'scripts/load-deployment-agents.ts',
       'scripts/execute-deployment-fixes.ts',
@@ -213,7 +188,7 @@ class TargetedFixes {
     ];
 
     for (const scriptPath of scriptsToFix) {
-      const fullPath = path.join(process.cwd(), scriptPath);
+      const _fullPath = path.join(process.cwd(), scriptPath);
       if (fs.existsSync(fullPath)) {
         let content = fs.readFileSync(fullPath, 'utf-8');
         
@@ -226,14 +201,10 @@ class TargetedFixes {
         
         fs.writeFileSync(fullPath, content);
         console.log(`   ✅ Fixed ${path.basename(scriptPath)}`);
-        this.fixedCount++;
-      }
-    }
-    
+        this.fixedCount++;}}
     // Fix AgentMonitor
-    const monitorPath = path.join(process.cwd(), 'src/lib/agents/AgentMonitor.ts');
-    if (fs.existsSync(monitorPath)) {
-      let content = fs.readFileSync(monitorPath, 'utf-8');
+    const _monitorPath = path.join(process.cwd(), 'src/lib/agents/AgentMonitor.ts');
+    if (fs.existsSync(monitorPath)) { let content = fs.readFileSync(monitorPath, 'utf-8');
       
       // Fix error type
       content = content.replace(
@@ -249,11 +220,7 @@ class TargetedFixes {
       
       fs.writeFileSync(monitorPath, content);
       console.log('   ✅ Fixed AgentMonitor.ts');
-      this.fixedCount++;
-    }
-  }
-}
-
+      this.fixedCount++;}
 // Run the targeted fixes
 const fixer = new TargetedFixes();
 fixer.run().catch(console.error);

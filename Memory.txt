@@ -1,0 +1,166 @@
+
+
+/ CLAUDE.md – Project Memory
+Authoritative project-level memory for Claude Code CLI (MCP-enabled)
+
+IMPORTANT: Claude must load this file (and all @imports) in every session. These instructions override any default behaviour.
+
+📜 Project Snapshot (2025-07-23)
+Health Score 27/100 (Critical)
+
+TypeScript Errors 21,293
+
+Build Status Failing
+
+Security Vulnerabilities 3 moderate
+
+Test Coverage 0%
+
+Top Blockers
+Rank	File / Area	Errors	Notes
+1	src/backend/adapters/nocodb.ts	400 +	TS2322, schema mismatches
+2	src/backend/adapters/strapi.ts	480 +	Mixed ES/CJS modules
+3	src/ui/components/**	~3,200	JSX/TSX syntax errors
+🥅 North-Star Goals
+Resolve ≥ 95% TypeScript errors → 1-week target.
+
+Pass Agent OS 6-Stage Health Check → Health Score ≥ 80.
+
+Achieve green production build on Vercel main branch.
+
+Fix all npm vulnerabilities (npm audit --production).
+
+Reach 30% test coverage (unit + integration) baseline.
+
+🛠️ Available Tools & MCPs
+Tool	Purpose	Invocation
+basic-memory MCP	Persistent project notes	/memory, # shortcut
+fs	Read/Write files	automatic
+shell	Run commands	/run <cmd>
+npm-tool	Install/upgrade packages	/npm <cmd>
+test-runner	Jest/Vitest execution	/test <pattern>
+agent-os	6-Stage health check & scaffolding	/agentos <subcmd>
+Check with /tools if any tool is missing before proceeding.
+
+🐾 6-Stage Health-Check Workflow
+(Adapted from DevArchitectOS standards and Anthropic best-practice)
+
+Static Scan – agentos scan
+
+Runs detect_stack.py, ESLint, TypeScript --noEmit.
+
+Config Validation – agentos config-lint
+
+Checks next.config.js, webpack, tsconfig paths.
+
+Dependency Audit – npm audit --json → auto-patch.
+
+Build Simulation – next build in CI-like env.
+
+Test Harness – Generate minimal Vitest suite (/scaffold tests).
+
+Coverage & Report – vitest run --coverage.
+
+The script aborts on first red status. Always rerun from Stage 1 after fixes.
+
+📋 Claude Code Session Checklist
+Pre-Flight
+
+git switch -c fix/<ticket>
+
+/memory → skim for outdated rules & update.
+
+Focus File Fix
+
+/open src/backend/adapters/nocodb.ts
+
+Ask: “Refactor to strict ES modules; fix TS errors only.”
+
+Iterative Type Fix (ts-batch.sh)
+
+Run /run ./scripts/ts-batch.sh src/backend/adapters.
+
+Security Patch
+
+/npm audit-fix --force then /npm dedupe.
+
+Build Verify
+
+/run npm run build – must exit 0.
+
+Stage Commit
+
+git add -u && git commit -m "fix: adapter TS errors"
+
+Repeat for next top-error file until Stage 4 passes.
+
+Trigger Health Check
+
+/agentos health-check --full.
+
+🔑 Critical Coding Rules
+DO NOT create new frameworks; stay within detected stack (Next.js 14, TypeScript 5, Prisma 5, Vitest) .
+
+Prefer ES modules; eliminate all require() & CommonJS wrappers.
+
+All new/edited files must compile with strict TypeScript.
+
+Add a unit test for every bug-fix PR (Vitest).
+
+Keep file-scope token count < 3,000 tokens — split large refactors.
+
+No silent any types; use unknown + type-guards.
+
+Follow project folder schema (domain/, application/, infrastructure/, presentation/).
+
+Document decisions in docs/architecture/decisions/ as ADRs.
+
+Commit message style: Conventional Commits (fix: ..., feat:).
+
+🏃‍♂️ Primary Commands Cheat-Sheet
+bash
+# List TS errors by file desc
+npx tsc --noEmit | npx ts-error-translator --top 50
+
+# Autofix obvious JSX / invalid TSX
+npx @devarchitectos/tsx-autofix "src/**/*.{tsx,jsx}"
+
+# Bulk renamer: .js → .ts
+find src -name "*.js" -exec bash -c 'mv "$0" "${0%.js}.ts"' {} \;
+
+# Init minimal Vitest config
+npx vitest init --ui
+
+# Minimal e2e test scaffold (Playwright)
+npx playwright install
+npm run e2e:scaffold
+📂 Memory Imports
+@standards/application-architecture.md
+
+@standards/stack-identification.md
+
+@instructions/generate-project-structure.md
+
+@instructions/identify-tech-stack.md
+
+@docs/architecture/decisions/README.md
+
+💡 Tips for Effective Memory Use
+Keep each bullet concise & actionable .
+
+Use # shortcut mid-session to add new permanent rules quickly .
+
+Review /memory after major refactors; remove obsolete guidance.
+
+Compact rarely; prefer /clear when context is noisy .
+
+🆘 Emergency Rollback Procedure
+If Health Score < 20 after fixes →
+git reset --hard origin/main.
+
+Re-run agentos health-check --quick.
+
+Open incident ticket with last failing commit hash.
+
+End of CLAUDE.md
+(Loaded recursively by Claude Code per Anthropic memory rules__ and must remain < 5,000 tokens.)

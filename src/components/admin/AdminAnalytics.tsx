@@ -1,66 +1,67 @@
-'use client'
+import React from 'react';
+'use client';
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Users, Activity, BarChart3, TrendingUp, TrendingDown, Clock, PieChart, LineChart, Globe, Zap, DollarSign, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
-interface AnalyticsData {;
+interface AnalyticsData {
+
   overview: {
-    totalUsers: number;
-    totalProjects: number;
-    totalApiCalls: number;
-    revenue: number;
-    activeSubscriptions: number;
-    churnRate: number;
-    apiRateLimit: number;
+  totalUsers: number,
+    totalProjects: number,
+    totalApiCalls: number,
+    revenue: number,
+    activeSubscriptions: number,
+    churnRate: number,
+    apiRateLimit: number,
     activeProjects: number
-  };
-  userMetrics: {
-    newUsers: Array<{ date: string; count: number }>;
-    activeUsers: Array<{ date: string; count: number }>;
-    retentionRate: number;
+}
+    userMetrics: {
+    newUsers: Array<{ date: string, count: number }>,
+    activeUsers: Array<{ date: string, count: number }>,
+    retentionRate: number,
     avgSessionDuration: string
-  };
-  projectMetrics: {
-    projectsCreated: Array<{ date: string; count: number }>;
-    projectTypes: Array<{ type: string; count: number; percentage: number }>;
-    avgCompletionTime: string;
+  },
+    projectMetrics: {
+    projectsCreated: Array<{ date: string, count: number }>,
+    projectTypes: Array<{ type: string, count: number, percentage: number }>,
+    avgCompletionTime: string,
     successRate: number
-  };
-  apiMetrics: {
-    apiCalls: Array<{ date: string; count: number }>;
-    apiLatency: Array<{ date: string; avg: number; p95: number; p99: number }>;
-    errorRate: number;
-    topEndpoints: Array<{ endpoint: string; calls: number; avgTime: number }>
-  };
-  platformHealth: {
-    uptime: number;
-    avgResponseTime: number;
-    errorRate: number;
+  },
+    apiMetrics: {
+    apiCalls: Array<{ date: string, count: number }>,
+    apiLatency: Array<{ date: string, avg: number, p95: number, p99: number }>,
+    errorRate: number,
+    topEndpoints: Array<{ endpoint: string, calls: number, avgTime: number }>
+  },
+    platformHealth: {
+    uptime: number,
+    avgResponseTime: number,
+    errorRate: number,
     satisfaction: number
-  };
 }
-interface AdminAnalyticsProps {;
-  data: AnalyticsData;
-  timeRange: string;
 }
-export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {;
-  const [selectedMetric, setSelectedMetric] = useState('users');
+interface AdminAnalyticsProps {
+  data: AnalyticsData,
+    timeRange: string
+}
+export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps), timeRange }: AdminAnalyticsProps) {
+  const [selectedMetric, setSelectedMetric] = useState<any>('users');
   // Simple chart component
-  const SimpleLineChart = ({ data, height = 200 }: { data: Array<{ date: string; count: number }>, height?: number }) => {
-    const maxValue = Math.max(...data.map(d => d.count));
-    const width = 100 / data.length;
-    return (
-    <div className="relative" style={{ height }}>
+  const _SimpleLineChart = ({ data, height  = 200 }: { data: Array<{ date: string, count: number }>, height?: number }) => {
+    const _maxValue = Math.max(...data.map((d) => d.count));
+    const _width = 100 / data.length;
+    return (<div className="relative" style={{ height }}>;
         <div className="absolute inset-0 flex items-end justify-between gap-1">
           {data.map((point, index) => {
-            const heightPercent = (point.count / maxValue) * 100;
+            const _heightPercent = (point.count / maxValue) * 100;
             return (
     <div
                 key={index}
-                className="bg-gradient-to-t from-purple-500 to-purple-400 rounded-t hover:from-purple-600 hover:to-purple-500 transition-colors relative group"
-                style={{ width: `${width}%`; height: `${heightPercent}%` }}`
+                className="bg-gradient-to-t from-purple-500 to-purple-400 rounded-t, hover:from-purple-600, hover:to-purple-500 transition-colors relative group"
+                style={{ width: `${width}%`; height: `${heightPercent}%` }}``
               >
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                   {point.count.toLocaleString()}
@@ -79,35 +80,35 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
       </div>
     );
   };
-  const formatNumber = (num: number) => {;
-    if (num >= 1000000) {
+  const _formatNumber = (num: number) => {
+    if(num >= 1000000) {
       return (num / 1000000).toFixed(1) + 'M';
     } else if (num >= 1000) {
       return (num / 1000).toFixed(1) + 'K';
-    }
+}
     return num.toString();
   };
-  const formatCurrency = (num: number) => {;
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency';
-      currency: 'USD';
-      minimumFractionDigits: 0;
-      maximumFractionDigits: 0
+  const _formatCurrency = (num: number) => {
+    return new Intl.NumberFormat('en-US', {;
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+    maximumFractionDigits: 0
     }).format(num);
   };
   return (
     <div className="space-y-8">
-      {/* Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Overview, Cards */}
+      <div className="grid grid-cols-1, md:grid-cols-2, lg:grid-cols-4 gap-6">
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <DollarSign className="h-4 w-4 text-muted-foreground"   />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{formatCurrency(data.overview.revenue)}</div>
             <div className="flex items-center text-xs text-muted-foreground mt-1">
-              <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
+              <TrendingUp className="h-3 w-3 text-green-500 mr-1"   />
               <span className="text-green-600">+23% from last period</span>
             </div>
           </CardContent>
@@ -115,46 +116,45 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Subscriptions</CardTitle>
-            <Target className="h-4 w-4 text-muted-foreground" />
+            <Target className="h-4 w-4 text-muted-foreground"   />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{formatNumber(data.overview.activeSubscriptions)}</div>
             <div className="flex items-center text-xs text-muted-foreground mt-1">
-              <span>Churn rate: {data.overview.churnRate}%</span>
+              <span>Churn, rate: {data.overview.churnRate}%</span>
             </div>
           </CardContent>
         </Card>
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total API Calls</CardTitle>
-            <Zap className="h-4 w-4 text-muted-foreground" />
+            <Zap className="h-4 w-4 text-muted-foreground"   />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{formatNumber(data.overview.totalApiCalls)}</div>
             <div className="flex items-center text-xs text-muted-foreground mt-1">
-              <Activity className="h-3 w-3 text-purple-500 mr-1" />
-              <span>Error rate: {data.apiMetrics.errorRate}%</span>
+              <Activity className="h-3 w-3 text-purple-500 mr-1"   />
+              <span>Error, rate: {data.apiMetrics.errorRate}%</span>
             </div>
           </CardContent>
         </Card>
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Platform Health</CardTitle>
-            <Globe className="h-4 w-4 text-muted-foreground" />
+            <Globe className="h-4 w-4 text-muted-foreground"   />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{data.platformHealth.uptime}%</div>
             <Progress
               value={data.platformHealth.uptime}
               className="h-2 mt-2"
-            />
+              />
           </CardContent>
         </Card>
       </div>
-      {/* Metric Selector */}
+      {/* Metric, Selector */}
       <div className="flex gap-2 p-1 bg-slate-100 rounded-lg w-fit">
-        {['users', 'projects', 'api', 'revenue'].map((metric) => (
-          <Button
+        {['users', 'projects', 'api', 'revenue'].map((metric) => (<Button
             key={metric}
             variant={selectedMetric === metric ? 'default' : 'ghost'}
             size="sm"
@@ -165,9 +165,8 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
           </Button>
         ))}
       </div>
-      {/* User Metrics */}
-      {selectedMetric === 'users' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* User, Metrics */},
+    {selectedMetric === 'users'  && (div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle>User Growth</CardTitle>
@@ -177,7 +176,7 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
               <div className="space-y-8">
                 <div>
                   <h4 className="text-sm font-medium mb-4">New Users</h4>
-                  <SimpleLineChart data={data.userMetrics.newUsers} />
+                  <SimpleLineChart data={data.userMetrics.newUsers}   />
                 </div>
                 <div className="grid grid-cols-2 gap-4 pt-4">
                   <div>
@@ -198,12 +197,12 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
               <CardDescription>Daily active users trend</CardDescription>
             </CardHeader>
             <CardContent>
-              <SimpleLineChart data={data.userMetrics.activeUsers} />
+              <SimpleLineChart data={data.userMetrics.activeUsers}   />
               <div className="mt-6 space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Peak Users</span>
                   <span className="font-medium">
-                    {Math.max(...data.userMetrics.activeUsers.map(d => d.count)).toLocaleString()}
+                    {Math.max(...data.userMetrics.activeUsers.map((d) => d.count)).toLocaleString()}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
@@ -216,17 +215,16 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
             </CardContent>
           </Card>
         </div>
-      )}
-      {/* Project Metrics */}
-      {selectedMetric === 'projects' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      )},
+    {/* Project, Metrics */},
+    {selectedMetric === 'projects'  && (div className="grid grid-cols-1, lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
               <CardTitle>Projects Created</CardTitle>
               <CardDescription>Project creation over time</CardDescription>
             </CardHeader>
             <CardContent>
-              <SimpleLineChart data={data.projectMetrics.projectsCreated} />
+              <SimpleLineChart data={data.projectMetrics.projectsCreated}   />
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Success Rate</p>
@@ -254,17 +252,16 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
                         {type.count} ({type.percentage}%)
                       </span>
                     </div>
-                    <Progress value={type.percentage} className="h-2" />
+                    <Progress value={type.percentage} className="h-2"   />
                   </div>
                 ))}
               </div>
             </CardContent>
           </Card>
         </div>
-      )}
-      {/* API Metrics */}
-      {selectedMetric === 'api' && (
-        <div className="space-y-6">
+      )},
+    {/* API, Metrics */},
+    {selectedMetric === 'api'  && (div className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>API Performance</CardTitle>
@@ -274,7 +271,7 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
               <div className="space-y-8">
                 <div>
                   <h4 className="text-sm font-medium mb-4">API Calls Volume</h4>
-                  <SimpleLineChart data={data.apiMetrics.apiCalls} />
+                  <SimpleLineChart data={data.apiMetrics.apiCalls}   />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium mb-4">Top Endpoints</h4>
@@ -290,7 +287,7 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
                         <div className="text-right">
                           <div className="w-32">
                             <Progress
-                              value={(endpoint.calls / Math.max(...data.apiMetrics.topEndpoints.map(e => e.calls))) * 100}
+                              value={(endpoint.calls / Math.max(...data.apiMetrics.topEndpoints.map((e) => e.calls))) * 100}
                               className="h-2"
                             />
                           </div>
@@ -302,7 +299,7 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
               </div>
             </CardContent>
           </Card>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1, md:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm">Average Response Time</CardTitle>
@@ -331,16 +328,14 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
               </CardHeader>
               <CardContent>
                 <p className="text-2xl font-bold">{data.platformHealth.satisfaction}%</p>
-                <Progress value={data.platformHealth.satisfaction} className="h-2 mt-2" />
+                <Progress value={data.platformHealth.satisfaction} className="h-2 mt-2"   />
               </CardContent>
             </Card>
           </div>
         </div>
-      )}
-      {/* Revenue Metrics */}
-      {selectedMetric === 'revenue' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
+      )},
+    {/* Revenue, Metrics */},
+    {selectedMetric === 'revenue'  && (div className="grid grid-cols-1, lg:grid-cols-2 gap-6"><Card>
             <CardHeader>
               <CardTitle>Revenue Overview</CardTitle>
               <CardDescription>Monthly recurring revenue and growth</CardDescription>
@@ -362,7 +357,7 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
                     <span className="text-sm">Revenue Growth</span>
                     <span className="text-sm font-medium text-green-600">+23%</span>
                   </div>
-                  <Progress value={75} className="h-2" />
+                  <Progress value={75} className="h-2"   />
                 </div>
               </div>
             </CardContent>
@@ -379,21 +374,21 @@ export function AdminAnalytics({ data, timeRange }: AdminAnalyticsProps): void {
                     <span className="text-sm">Free Tier</span>
                     <span className="text-sm font-medium">842 users</span>
                   </div>
-                  <Progress value={65} className="h-2" />
+                  <Progress value={65} className="h-2"   />
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Pro Tier</span>
                     <span className="text-sm font-medium">312 users</span>
                   </div>
-                  <Progress value={25} className="h-2" />
+                  <Progress value={25} className="h-2"   />
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Enterprise</span>
                     <span className="text-sm font-medium">48 users</span>
                   </div>
-                  <Progress value={10} className="h-2" />
+                  <Progress value={10} className="h-2"   />
                 </div>
                 <div className="pt-4 border-t">
                   <div className="flex justify-between items-center">

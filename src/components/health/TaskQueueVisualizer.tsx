@@ -2,14 +2,13 @@ import React from 'react';
 
 interface TaskQueueVisualizerProps {
   queue?: Array<{
-    id: string;
-    name: string;
-    priority: string;
-    status: string;
+    id: string,
+    name: string,
+    priority: string,
+    status: string
   }>;
 }
-
-export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps): JSX.Element {
+export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <div className="px-4 py-3 border-b">

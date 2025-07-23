@@ -3,26 +3,21 @@ const fs = require('fs');
 
 console.log('🔧 VERY FINAL: Last Remaining API Route Syntax Errors\n');
 
-const veryLastFixes = {
+const _veryLastFixes = {
   // Fix collaboration rooms API route
   'src/app/api/collaboration/rooms/route.ts': `import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { projectId, settings } = body;
     
     if (!projectId) {
-      return NextResponse.json(
-        { error: 'Project ID is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Project ID is required' ,  status: 400  });}
     // Simulate room creation
-    const roomId = 'room_' + Math.random().toString(36).substr(2, 9);
+    const _roomId = 'room_' + Math.random().toString(36).substr(2, 9);
     
-    const room = {
+    const _room = {
       id: roomId,
       projectId,
       settings: settings || {},
@@ -30,44 +25,33 @@ export async function POST(request: NextRequest) {
       active: true
     };
     
-    return NextResponse.json({
+    return NextResponse.json({ 
       success: true,
-      room
-    }, { status: 201 });
+      // room
+    ,  status: 201  });
     
   } catch (error) {
     console.error('Create room error:', error);
-    return NextResponse.json(
-      { error: 'Failed to create collaboration room' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Failed to create collaboration room' ,  status: 500  });}}
 export async function GET() {
   try {
     // Simulate getting active rooms
-    const rooms = [
+    const _rooms = [
       {
         id: 'room_1',
         projectId: 'proj_1',
         participants: 3,
         active: true,
-        createdAt: new Date().toISOString()
-      }
+        createdAt: new Date().toISOString()}
     ];
     
     return NextResponse.json({
       success: true,
-      rooms
+      // rooms
     });
   } catch (error) {
     console.error('Get rooms error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch rooms' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to fetch rooms' ,  status: 500  });}
 }`,
 
   // Fix config API route
@@ -76,19 +60,17 @@ export async function GET() {
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const feature = url.searchParams.get('feature');
+    const _feature = url.searchParams.get('feature');
     
     // Return specific feature flag status
     if (feature) {
-      const enabled = getFeatureStatus(feature);
+      const _enabled = getFeatureStatus(feature);
       return NextResponse.json({
         feature,
-        enabled
-      });
-    }
-    
+        // enabled
+      });}
     // Return all configuration
-    const config = {
+    const _config = {
       features: {
         authentication: true,
         collaboration: true,
@@ -102,13 +84,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(config);
   } catch (error) {
     console.error('Config API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch configuration' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Failed to fetch configuration' ,  status: 500  });}}
 function getFeatureStatus(feature: string): boolean {
   const features: Record<string, boolean> = {
     authentication: true,
@@ -127,27 +103,18 @@ interface DocumentationSearchResult {
   id: string;
   title: string;
   content: string;
-  relevance: number;
-}
-
+  relevance: number;}
 interface CycleDetectionResult {
   hasCycle: boolean;
   cycleLength?: number;
-  suggestions: string[];
-}
-
+  suggestions: string[];}
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { query, context } = body;
     
     if (!query) {
-      return NextResponse.json(
-        { error: 'Query is required' },
-        { status: 400 }
-      );
-    }
-    
+      return NextResponse.json({  error: 'Query is required' ,  status: 400  });}
     // Simulate cycle detection
     const result: CycleDetectionResult = {
       hasCycle: false,
@@ -163,8 +130,7 @@ export async function POST(request: NextRequest) {
         id: 'doc_1',
         title: 'Dependency Management',
         content: 'Best practices for managing dependencies...',
-        relevance: 0.95
-      }
+        relevance: 0.95}
     ];
     
     return NextResponse.json({
@@ -177,11 +143,7 @@ export async function POST(request: NextRequest) {
     
   } catch (error) {
     console.error('Cycle detection error:', error);
-    return NextResponse.json(
-      { error: 'Cycle detection failed' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Cycle detection failed' ,  status: 500  });}
 }`,
 
   // Fix email test API route
@@ -193,15 +155,10 @@ export async function POST(request: NextRequest) {
     const configTest = { success: true };
     
     if (!configTest.success) {
-      return NextResponse.json(
-        {
+      return NextResponse.json({ 
           success: false,
           error: 'Email configuration test failed'
-        },
-        { status: 500 }
-      );
-    }
-    
+        ,  status: 500  });}
     return NextResponse.json({
       success: true,
       message: 'Email configuration test passed',
@@ -210,16 +167,10 @@ export async function POST(request: NextRequest) {
     
   } catch (error) {
     console.error('Email test error:', error);
-    return NextResponse.json(
-      { error: 'Email test failed' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Email test failed' ,  status: 500  });}}
 export async function GET() {
   try {
-    const status = {
+    const _status = {
       configured: !!process.env.SMTP_HOST,
       provider: process.env.EMAIL_PROVIDER || 'none',
       lastTest: new Date().toISOString()
@@ -227,15 +178,11 @@ export async function GET() {
     
     return NextResponse.json({
       success: true,
-      status
+      // status
     });
   } catch (error) {
     console.error('Email status error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get email status' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to get email status' ,  status: 500  });}
 }`,
 
   // Fix env status API route
@@ -243,7 +190,7 @@ export async function GET() {
 
 export async function GET() {
   try {
-    const status = {
+    const _status = {
       NODE_ENV: process.env.NODE_ENV || 'development',
       DATABASE_URL: !!process.env.DATABASE_URL,
       NEXTAUTH_URL: !!process.env.NEXTAUTH_URL,
@@ -260,16 +207,10 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Env status error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get environment status' },
-      { status: 500 }
-    );
-  }
-}
-
+    return NextResponse.json({  error: 'Failed to get environment status' ,  status: 500  });}}
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const _body = await request.json();
     const { key, value } = body;
     
     // In a real implementation, you'd validate and update environment variables
@@ -281,11 +222,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Env update error:', error);
-    return NextResponse.json(
-      { error: 'Failed to update environment variable' },
-      { status: 500 }
-    );
-  }
+    return NextResponse.json({  error: 'Failed to update environment variable' ,  status: 500  });}
 }`
 };
 
@@ -293,17 +230,14 @@ let filesFixed = 0;
 
 Object.entries(veryLastFixes).forEach(([filePath, content]) => {
   try {
-    const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+    const _dir = filePath.substring(0, filePath.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    
+      fs.mkdirSync(dir, { recursive: true });}
     fs.writeFileSync(filePath, content);
     console.log(`✅ VERY LAST FIX: ${filePath}`);
     filesFixed++;
   } catch (error) {
-    console.error(`❌ Error fixing ${filePath}:`, error.message);
-  }
+    console.error(`❌ Error fixing ${filePath}:`, error.message);}
 });
 
 console.log(`\n🔧 Very Final Fix Summary:`);
