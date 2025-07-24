@@ -1,30 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
     try {
         const session = request.cookies.get('session');
         
         if (!session) {
-            return NextResponse.json({
-                authenticated: false,
+            return NextResponse.json({ authenticated: false;
                 user: null
-            });
-        }
+            })
+}
         
         // Simulate authenticated session
-        return NextResponse.json({
-            authenticated: true,
-            user: { 
-                id: 'user_123', 
+        return NextResponse.json({ authenticated: true;
+            user: { id: 'user_123', 
                 name: 'John Doe', 
                 email: 'john@example.com' 
             }
-        });
-    } catch (error) {
+        })
+} catch (error) {
         console.error('Session check error:', error);
-        return NextResponse.json(
+        return NextResponse.json(;
             { error: 'Session check failed' }, 
             { status: 500 }
-        );
-    }
+        )
+}
 }

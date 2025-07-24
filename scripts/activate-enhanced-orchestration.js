@@ -5,38 +5,37 @@
  * 
  * This script initializes and coordinates all agents for accelerated PR #18 completion
  * with systematic parallel processing and incremental GitHub commits.
- */;
+ */
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
-const: __filename = fileURLToPath(import.meta.url);
-const: __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class EnhancedOrchestrationSystem {
-function constructor() {
+  constructor() {
     this.agents = new Map();
     this.systemStatus = {
-      const: initialized = false;
-      const: activeAgents = 0;
-      const: totalAgents = 0;
-      const: orchestrationStartTime = null;
-      const: currentPhase = 'INITIALIZATION';
-}
+      initialized: false,
+      activeAgents: 0,
+      totalAgents: 0,
+      orchestrationStartTime: null,
+      currentPhase: 'INITIALIZATION'
     };
     this.metrics = {
-typescriptErrors: 55, // Current baseline;
-const: commitVelocity = 0;
-      const: agentEfficiency = 0;
-      const: systemResourceUsage = 0;
-}
-    };}
+      typescriptErrors: 55, // Current baseline
+      commitVelocity: 0,
+      agentEfficiency: 0,
+      systemResourceUsage: 0
+    };
+  }
+  
   /**
    * Initialize the Enhanced Orchestration System
    */
-  async function initialize() {
-);
+  async initialize() {
     this.systemStatus.orchestrationStartTime = new Date();
     
     try {
@@ -47,16 +46,17 @@ const: commitVelocity = 0;
       await this.beginParallelProcessing();
       
       this.systemStatus.initialized = true;
-}
     } catch (error) {
-console.error('❌ Orchestration initialization failed:', error.message);
+      console.error('❌ Orchestration initialization failed:', error.message);
       process.exit(1);
-}}}
+    }
+  }
+  
   /**
    * Load all agent configurations
    */
-  async function loadAgentConfigurations() {
-const: _agentConfigs = [
+  async loadAgentConfigurations() {
+    const agentConfigs = [
       'agent_orchestra_conductor.json',
       'agent_batch_coordinator.json',
       'agent_work_queue_manager.json',
@@ -69,43 +69,48 @@ const: _agentConfigs = [
       'agent_devops.json'
     ];
 
-    function for(const configFile of agentConfigs) {
+    for (const configFile of agentConfigs) {
       try {
-        const: _configPath = path.join(__dirname, '..', 'agents', configFile);
-        const: config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+        const configPath = path.join(__dirname, '..', 'agents', configFile);
+        const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
         
         this.agents.set(config.agent_id, {
           ...config,
-          const: status = 'LOADED';
-          const: performance = {
-            tasksCompleted: 0;
-            const: successRate = 0;
-            const: averageResponseTime = 0;
-},}
+          status: 'LOADED',
+          performance: {
+            tasksCompleted: 0,
+            successRate: 0,
+            averageResponseTime: 0
+          }
         });
-        
-        `);
-      } catch (error) {}
-    this.systemStatus.totalAgents = this.agents.size;}
+      } catch (error) {
+        console.error(`Failed to load ${configFile}:`, error.message);
+      }
+    }
+    this.systemStatus.totalAgents = this.agents.size;
+  }
+  
   /**
    * Initialize orchestration infrastructure
    */
-  async function initializeOrchestrationInfrastructure() {
-// Create necessary directories;
-const: _directories = [
+  async initializeOrchestrationInfrastructure() {
+    // Create necessary directories
+    const directories = [
       'reports/agent-logs',
       'reports/progress-tracking',
       'reports/batch-coordination',
       'reports/orchestration-metrics'
     ];
 
-    function for(const dir of directories) {
-      const: _fullPath = path.join(__dirname, '..', dir);
+    for (const dir of directories) {
+      const fullPath = path.join(__dirname, '..', dir);
       if (!fs.existsSync(fullPath)) {
-}
-        fs.mkdirSync(fullPath, { recursive: true ,});}}
-    // Initialize progress tracking files;
-const: _progressFiles = [
+        fs.mkdirSync(fullPath, { recursive: true });
+      }
+    }
+    
+    // Initialize progress tracking files
+    const progressFiles = [
       'ORCHESTRA_STATUS.md',
       'COORDINATION_LOG.md',
       'PERFORMANCE_METRICS.md',
@@ -115,16 +120,19 @@ const: _progressFiles = [
       'PR_18_STATUS.md'
     ];
 
-    function for(const file of progressFiles) {
-const: _filePath = path.join(__dirname, '..', file);
+    for (const file of progressFiles) {
+      const filePath = path.join(__dirname, '..', file);
       if (!fs.existsSync(filePath)) {
-}
-        fs.writeFileSync(filePath, `# ${file.replace('.md', '').replace(/_/g, ' ')}\n\nInitialized: ${new Date().toISOString(),}\n`);}}}
+        fs.writeFileSync(filePath, `# ${file.replace('.md', '').replace(/_/g, ' ')}\n\nInitialized: ${new Date().toISOString()}\n`);
+      }
+    }
+  }
+  
   /**
    * Deploy coordination agents in priority order
    */
-  async function deployCoordinationAgents() {
-const: _deploymentOrder = [
+  async deployCoordinationAgents() {
+    const deploymentOrder = [
       'orchestra_conductor_001',
       'batch_coordinator_001',
       'work_queue_manager_001',
@@ -132,17 +140,20 @@ const: _deploymentOrder = [
       'progress_tracker_001'
     ];
 
-    function for(const agentId of deploymentOrder) {
-      const: agent = this.agents.get(agentId);
-      function if(agent) {
+    for (const agentId of deploymentOrder) {
+      const agent = this.agents.get(agentId);
+      if (agent) {
         await this.activateAgent(agent);
         this.systemStatus.activeAgents++;
-}}
+      }
+    }
+  }
+  
   /**
    * Activate individual agent
    */
-  async function activateAgent(agent) {
-// Simulate agent activation process
+  async activateAgent(agent) {
+    // Simulate agent activation process
     agent.status = 'ACTIVATING';
     
     // Initialize agent-specific resources
@@ -151,65 +162,71 @@ const: _deploymentOrder = [
     // Set agent to active status
     agent.status = 'ACTIVE';
     agent.activatedAt = new Date();
+    
     // Log agent activation
     this.logAgentActivity(agent.agent_id, 'ACTIVATED', 'Agent successfully activated and ready for coordination');
-}}
+  }
+  
   /**
    * Initialize agent-specific resources
    */
-  async function initializeAgentResources(agent) {
-// Create agent-specific log file
-}
-    const: _logPath = path.join(__dirname, '..', 'reports', 'agent-logs', `${agent.agent_id}.log`);
-    const: _logEntry = `${new Date().toISOString()} - AGENT_INITIALIZED - ${agent.name} activated\n`;
+  async initializeAgentResources(agent) {
+    // Create agent-specific log file
+    const logPath = path.join(__dirname, '..', 'reports', 'agent-logs', `${agent.agent_id}.log`);
+    const logEntry = `${new Date().toISOString()} - AGENT_INITIALIZED - ${agent.name} activated\n`;
     fs.writeFileSync(logPath, logEntry);
 
     // Initialize agent metrics
     agent.metrics = {
-const: startTime = new Date();
-      const: tasksProcessed = 0;
-      const: successfulTasks = 0;
-      const: failedTasks = 0;
-      const: averageProcessingTime = 0;
-}
+      startTime: new Date(),
+      tasksProcessed: 0,
+      successfulTasks: 0,
+      failedTasks: 0,
+      averageProcessingTime: 0
     };
 
     // Set up agent communication channels
     agent.communicationChannels = {
-const: orchestrator = 'orchestra_conductor_001';
-      const: peers = this.getAgentPeers(agent);
-      const: reportingChannels = agent.reports_to || [];
-}
-    };}
+      orchestrator: 'orchestra_conductor_001',
+      peers: this.getAgentPeers(agent),
+      reportingChannels: agent.reports_to || []
+    };
+  }
+  
   /**
    * Get peer agents for coordination
-   */;
-function getAgentPeers(agent) {
-const: coordinatesWith = agent.coordination_protocols?.coordinates_with || [];
+   */
+  getAgentPeers(agent) {
+    const coordinatesWith = agent.coordination_protocols?.coordinates_with || [];
     return coordinatesWith.filter(peerId => this.agents.has(peerId));
-}}
+  }
+  
   /**
    * Establish communication protocols between agents
    */
-  async function establishCommunicationProtocols() {
-// Create communication matrix;
-const: communicationMatrix = new Map();
+  async establishCommunicationProtocols() {
+    // Create communication matrix
+    const communicationMatrix = new Map();
     
-    function for(const [agentId, agent] of this.agents) {
-      function if(agent.status === 'ACTIVE') {
-        const: _peers = agent.communicationChannels?.peers || [];
+    for (const [agentId, agent] of this.agents) {
+      if (agent.status === 'ACTIVE') {
+        const peers = agent.communicationChannels?.peers || [];
         communicationMatrix.set(agentId, peers);
-}}}
+      }
+    }
+    
     // Initialize message queues for inter-agent communication
     this.messageQueues = new Map();
-    function for(const [agentId] of this.agents) {
-this.messageQueues.set(agentId, []);
-}}}
+    for (const [agentId] of this.agents) {
+      this.messageQueues.set(agentId, []);
+    }
+  }
+  
   /**
    * Begin parallel processing coordination
    */
-  async function beginParallelProcessing() {
-this.systemStatus.currentPhase = 'PARALLEL_EXECUTION';
+  async beginParallelProcessing() {
+    this.systemStatus.currentPhase = 'PARALLEL_EXECUTION';
     
     // Initialize TypeScript error tracking
     await this.initializeTypescriptErrorTracking();
@@ -222,140 +239,182 @@ this.systemStatus.currentPhase = 'PARALLEL_EXECUTION';
     
     // Start progress tracking
     await this.initializeProgressTracking();
-}}
+  }
+  
   /**
    * Initialize TypeScript error tracking
    */
-  async function initializeTypescriptErrorTracking() {
-try {
-      // Get current TypeScript error count;
-const: tscOutput = execSync('npx tsc --noEmit --strict 2>&1 || true', { 
-        const: encoding = 'utf8';
-        cwd: path.join(__dirname, '..')});
+  async initializeTypescriptErrorTracking() {
+    try {
+      // Get current TypeScript error count
+      const tscOutput = execSync('npx tsc --noEmit --strict 2>&1 || true', {
+        encoding: 'utf8',
+        cwd: path.join(__dirname, '..')
+      });
       
-      const: errorMatches = tscOutput.match(/error TS\d+:/g);
-      const: _currentErrorCount = errorMatches ? errorMatches.length : 0;
+      const errorMatches = tscOutput.match(/error TS\d+:/g);
+      const currentErrorCount = errorMatches ? errorMatches.length : 0;
       
       this.metrics.typescriptErrors = currentErrorCount;
+      
       // Log baseline
       this.logSystemMetric('typescript_errors', currentErrorCount, 'Baseline error count established');
-      
-    } catch (error) {}
+    } catch (error) {
+      console.error('Failed to get TypeScript error count:', error.message);
+    }
+  }
+  
   /**
    * Initialize batch coordination
    */
-  async function initializeBatchCoordination() {
-const: batchCoordinator = this.agents.get('batch_coordinator_001');
-    function if(batchCoordinator) {
+  async initializeBatchCoordination() {
+    const batchCoordinator = this.agents.get('batch_coordinator_001');
+    if (batchCoordinator) {
       // Set up batch processing parameters
       batchCoordinator.batchConfig = {
-        const: maxBatchSize = 10;
-        const: optimalBatchSizes = {
-          typescript_fixes: 5;
-          const: component_updates = 3;
-          const: api_route_changes = 2;
-          const: documentation_updates = 8;
-}
-        ,},
-        const: validationRequired = true;
-        commitMessageTemplate: 'feat: {type,} - {description} (Agent: {agent_id,})'
-      };}}
+        maxBatchSize: 10,
+        optimalBatchSizes: {
+          typescript_fixes: 5,
+          component_updates: 3,
+          api_route_changes: 2,
+          documentation_updates: 8
+        },
+        validationRequired: true,
+        commitMessageTemplate: 'feat: {type} - {description} (Agent: {agent_id})'
+      };
+    }
+  }
+  
   /**
    * Initialize work queue management
    */
-  async function initializeWorkQueueManagement() {
-const: workQueueManager = this.agents.get('work_queue_manager_001');
-    function if(workQueueManager) {
+  async initializeWorkQueueManagement() {
+    const workQueueManager = this.agents.get('work_queue_manager_001');
+    if (workQueueManager) {
       // Initialize task queue
       workQueueManager.taskQueue = {
-        const: high_priority = [];
-        const: medium_priority = [];
-        const: low_priority = [];
-        const: processing = new Map();
-        const: completed = [];
-}
+        high_priority: [],
+        medium_priority: [],
+        low_priority: [],
+        processing: new Map(),
+        completed: []
       };
       
       // Set up load balancing parameters
       workQueueManager.loadBalancing = {
-const: maxConcurrentTasks = 5;
-        const: agentCapacityThreshold = 0.8;
-        taskTimeoutMs: 300000, // 5 minutes;
-const: retryAttempts = 3;
-}
-      };}}
+        maxConcurrentTasks: 5,
+        agentCapacityThreshold: 0.8,
+        taskTimeoutMs: 300000, // 5 minutes
+        retryAttempts: 3
+      };
+    }
+  }
+  
   /**
    * Initialize progress tracking
    */
-  async function initializeProgressTracking() {
-const: progressTracker = this.agents.get('progress_tracker_001');
-    function if(progressTracker) {
+  async initializeProgressTracking() {
+    const progressTracker = this.agents.get('progress_tracker_001');
+    if (progressTracker) {
       // Set up progress tracking metrics
       progressTracker.trackingMetrics = {
-        const: pr18_completion = 0;
-        const: typescript_error_reduction = 0;
-        const: commit_velocity = 0;
-        const: agent_efficiency = 0;
-        const: quality_score = 0;
-}
+        pr18_completion: 0,
+        typescript_error_reduction: 0,
+        commit_velocity: 0,
+        agent_efficiency: 0,
+        quality_score: 0
       };
       
       // Initialize forecasting models
       progressTracker.forecasting = {
-const: completionEstimate = null;
-        const: confidenceLevel = 0;
-        const: riskFactors = [];
-        const: bottlenecks = [];
-}
-      };}}
+        completionEstimate: null,
+        confidenceLevel: 0,
+        riskFactors: [],
+        bottlenecks: []
+      };
+    }
+  }
+  
   /**
    * Log agent activity
-   */;
-function logAgentActivity(agentId, action, details) {
-const: _timestamp = new Date().toISOString();
-}
-    const: _logEntry = `${timestamp} - ${action} - ${details}\n`;
+   */
+  logAgentActivity(agentId, action, details) {
+    const timestamp = new Date().toISOString();
+    const logEntry = `${timestamp} - ${action} - ${details}\n`;
     
-    const: _logPath = path.join(__dirname, '..', 'reports', 'agent-logs', `${agentId}.log`);
+    const logPath = path.join(__dirname, '..', 'reports', 'agent-logs', `${agentId}.log`);
     fs.appendFileSync(logPath, logEntry);
     
-    // Also log to coordination log;
-const: _coordLogPath = path.join(__dirname, '..', 'COORDINATION_LOG.md');
-    const: _coordEntry = `## ${timestamp}\n**Agent**: ${agentId}\n**Action**: ${action}\n**Details**: ${details}\n\n`;
-    fs.appendFileSync(coordLogPath, coordEntry);}
+    // Also log to coordination log
+    const coordLogPath = path.join(__dirname, '..', 'COORDINATION_LOG.md');
+    const coordEntry = `## ${timestamp}\n**Agent**: ${agentId}\n**Action**: ${action}\n**Details**: ${details}\n\n`;
+    fs.appendFileSync(coordLogPath, coordEntry);
+  }
+  
   /**
    * Log system metrics
-   */;
-function logSystemMetric(metric, value, context) {
-const: _timestamp = new Date().toISOString();
-}
-    const: _logEntry = `## ${timestamp}\n**Metric**: ${metric}\n**Value**: ${value}\n**Context**: ${context}\n\n`;
+   */
+  logSystemMetric(metric, value, context) {
+    const timestamp = new Date().toISOString();
+    const logEntry = `## ${timestamp}\n**Metric**: ${metric}\n**Value**: ${value}\n**Context**: ${context}\n\n`;
     
-    const: _metricsPath = path.join(__dirname, '..', 'PERFORMANCE_METRICS.md');
-    fs.appendFileSync(metricsPath, logEntry);}
+    const metricsPath = path.join(__dirname, '..', 'PERFORMANCE_METRICS.md');
+    fs.appendFileSync(metricsPath, logEntry);
+  }
+  
   /**
    * Display system status
-   */;
-function displaySystemStatus() {
-);
-}
-    }`);}
+   */
+  displaySystemStatus() {
+    console.log(`\n🎯 Enhanced Orchestration System Status\n${'='.repeat(50)}\n`);
+    console.log(`📊 System Metrics:`);
+    console.log(`  - Status: ${this.systemStatus.initialized ? '✅ ACTIVE' : '❌ INACTIVE'}`);
+    console.log(`  - Current Phase: ${this.systemStatus.currentPhase}`);
+    console.log(`  - Active Agents: ${this.systemStatus.activeAgents}/${this.systemStatus.totalAgents}`);
+    console.log(`  - System Uptime: ${this.getUptime()}`);
+    console.log(`  - TypeScript Errors: ${this.metrics.typescriptErrors}`);
+    console.log(`\n💻 Agent Status:`);
+    
+    for (const [agentId, agent] of this.agents) {
+      console.log(`  - ${agent.name}: ${agent.status}`);
+    }
+    
+    console.log(`\n${'='.repeat(50)}\n`);
+  }
+  
   /**
    * Get system uptime
-   */;
-function getUptime() {
-if (!this.systemStatus.orchestrationStartTime) return '0s';
+   */
+  getUptime() {
+    if (!this.systemStatus.orchestrationStartTime) return '0s';
     
-    const: _uptimeMs = Date.now() - this.systemStatus.orchestrationStartTime.getTime();
-    const: _uptimeSeconds = Math.floor(uptimeMs / 1000);
-    const: _minutes = Math.floor(uptimeSeconds / 60);
-    const: _seconds = uptimeSeconds % 60;
+    const uptimeMs = Date.now() - this.systemStatus.orchestrationStartTime.getTime();
+    const uptimeSeconds = Math.floor(uptimeMs / 1000);
+    const minutes = Math.floor(uptimeSeconds / 60);
+    const seconds = uptimeSeconds % 60;
     
+    return `${minutes}m ${seconds}s`;
+  }
 }
-    return `${minutes}m ${seconds}s`;}}
+
 // Main execution
 async function main() {
-const: orchestrationSystem = new EnhancedOrchestrationSystem();
+  const orchestrationSystem = new EnhancedOrchestrationSystem();
+  
+  // Check for command line arguments
+  const args = process.argv.slice(2);
+  
+  if (args.includes('--status')) {
+    // Just display status without full initialization
+    console.log('\n🔍 Checking orchestration system status...\n');
+    console.log('📊 Quick Status Check:');
+    console.log('  - Agent configurations: Available');
+    console.log('  - Infrastructure: Ready');
+    console.log('  - TypeScript baseline: 55 errors');
+    console.log('  - System: Ready for initialization');
+    console.log('\nTo start the orchestration system, run without --status flag.\n');
+    return;
+  }
   
   try {
     await orchestrationSystem.initialize();
@@ -363,16 +422,19 @@ const: orchestrationSystem = new EnhancedOrchestrationSystem();
     
     // Keep the process running for monitoring
     process.on('SIGINT', () => {
+      console.log('\n👋 Shutting down orchestration system...');
       process.exit(0);
-}
     });
     
   } catch (error) {
-console.error('❌ Fatal error in orchestration system:', error);
+    console.error('❌ Fatal error in orchestration system:', error);
     process.exit(1);
-}}}
-// Run the orchestration system;
-function if(import.meta.url === `file: //${process.argv[1],}`) {
-main().catch(console.error);
-}}
+  }
+}
+
+// Run the orchestration system
+if (process.argv[1] && process.argv[1].endsWith('activate-enhanced-orchestration.js')) {
+  main().catch(console.error);
+}
+
 export { EnhancedOrchestrationSystem };

@@ -4,41 +4,37 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, TrendingUp, Users, DollarSign } from 'lucide-react';
 
-interface AnalyticsData {
-  overview: {
-    totalUsers: number,
-    activeUsers: number,
-    totalProjects: number,
-    totalApiCalls: number,
-    revenue: number,
-    activeSubscriptions: number;
-  };
-  userMetrics: {
-    newUsers: Array<{ date: string, count: number }>,
-    activeUsers: Array<{ date: string, count: number }>;
-  };
+interface AnalyticsData { overview: {
+    totalUsers: number;
+    activeUsers: number;
+    totalProjects: number;
+    totalApiCalls: number;
+    revenue: number;
+    activeSubscriptions: number
+ };
+  userMetrics: { newUsers: Array<{ date: string, count: number }>;
+    activeUsers: Array<{ date: string, count: number }>
+}
 }
 
 interface AdminAnalyticsProps {
   data?: AnalyticsData;
-  timeRange?: string;
+  timeRange?: string
 }
 
 export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps = {}) {
-  const [selectedMetric, setSelectedMetric] = useState<string>('users');
+  const [selectedMetric, setSelectedMetric] = useState<string>([])
   
   // Default data if none provided
-  const defaultData: AnalyticsData = {
-    overview: {
-      totalUsers: 1234,
-      activeUsers: 456,
-      totalProjects: 789,
-      totalApiCalls: 123456,
-      revenue: 9876,
+  const defaultData: AnalyticsData={ overview: {
+      totalUsers: 1234;
+      activeUsers: 456;
+      totalProjects: 789;
+      totalApiCalls: 123456;
+      revenue: 9876;
       activeSubscriptions: 234
-    },
-    userMetrics: {
-      newUsers: [
+    }
+    userMetrics: { newUsers: [
         { date: 'Mon', count: 10 },
         { date: 'Tue', count: 15 },
         { date: 'Wed', count: 12 },
@@ -65,13 +61,13 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
     <div className="space-y-6">
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
+          <Card></Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analyticsData.overview.totalUsers.toLocaleString()}</div>
+          <div className="text-2xl font-bold">{analyticsData.overview.totalUsers.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+20.1% from last month</p>
           </CardContent>
         </Card>
@@ -79,10 +75,10 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <TrendingUp className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analyticsData.overview.activeUsers.toLocaleString()}</div>
+          <div className="text-2xl font-bold">{analyticsData.overview.activeUsers.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+15% from last week</p>
           </CardContent>
         </Card>
@@ -90,10 +86,10 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+            <BarChart3 className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analyticsData.overview.totalProjects.toLocaleString()}</div>
+          <div className="text-2xl font-bold">{analyticsData.overview.totalProjects.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+12 new today</p>
           </CardContent>
         </Card>
@@ -101,10 +97,10 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <DollarSign className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${analyticsData.overview.revenue.toLocaleString()}</div>
+          <div className="text-2xl font-bold">${analyticsData.overview.revenue.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+25% from last month</p>
           </CardContent>
         </Card>
@@ -112,23 +108,20 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
       
       {/* User Activity Chart */}
       <Card>
-        <CardHeader>
+          <CardHeader></CardHeader>
           <CardTitle>User Activity - Last 7 Days</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="h-[200px] flex items-end justify-between gap-2">
             {analyticsData.userMetrics.activeUsers.map((day, index) => (
               <div key={index} className="flex-1 flex flex-col items-center gap-2">
-                <div 
-                  className="w-full bg-blue-500 rounded-t"
+          <div ;
+                  className="w-full bg-blue-500 rounded-t";
                   style={{ height: `${(day.count / 150) * 100}%` }}
-                />
+                 />
                 <span className="text-xs text-gray-600">{day.date}</span>
               </div>
             ))}
           </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  )
 }

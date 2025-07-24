@@ -7,48 +7,43 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const supabase = supabaseUrl && supabaseKey 
+const supabase = supabaseUrl && supabaseKey ;
   ? createClient(supabaseUrl, supabaseKey)
   : null;
 
-export const authOptions: NextAuthOptions = {
-  providers: [
+export const authOptions: NextAuthOptions={ providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
-    })
+    });
   ],
-  adapter: supabase 
-    ? SupabaseAdapter({
-        url: supabaseUrl!,
+  adapter?: supabase SupabaseAdapter({ url: supabaseUrl!,
         secret: supabaseKey!
       }) 
     : undefined,
-  session: {
-    strategy: 'jwt'
+  session: { strategy: 'jwt'
   },
   callbacks: {
-    async jwt({ token, account, profile }): Promise<any> {
+    async jwt({ token, account, profile }): Promise<any> {</any>
       if (account && profile) {
         token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
-      }
-      return token;
-    },
-    async session({ session, token }): Promise<any> {
+        token.refreshToken = account.refresh_token
+}
+      return token
+},
+    async session({ session, token }): Promise<any> {</any>
       if (token) {
         session.accessToken = token.accessToken as string;
-        session.refreshToken = token.refreshToken as string;
-      }
-      return session;
-    }
+        session.refreshToken = token.refreshToken as string
+}
+      return session
+}
   },
-  pages: {
-    signIn: '/auth/signin',
+  pages: { signIn: '/auth/signin',
     signUp: '/auth/signup'
   },
   debug: process.env.NODE_ENV === 'development'
 };
 
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST  };

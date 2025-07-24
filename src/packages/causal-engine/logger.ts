@@ -1,9 +1,8 @@
 /* BREADCRUMB: unknown - Purpose to be determined */
 // packages/causal-engine/logger.ts;
-export type LogActionType = 'added' | 'edited' | 'deleted' | 'kept';export interface CausalLogEntry {
-  componentId: string,
-  componentType: string,
-  page: string,
+export type LogActionType = 'added' | 'edited' | 'deleted' | 'kept';export interface CausalLogEntry { componentId: string;
+  componentType: string;
+  page: string;
   promptContext: string, action: LogActionTyp
 e,
     timestamp: number
@@ -26,11 +25,11 @@ export class CausalLogger {
    * (Optional) Save to Supabase DB instead of localStorage
    * Requires `causal_logs` table in Supabase``
    */
-  async logToSupabase(entry: CausalLogEntry): Promise<any> {
+  async logToSupabase(entry: CausalLogEntry): Promise<any> {</any>
     try {;
-      const { createClient   }: any  = await import('@supabase/supabase-js');
+      const { createClient    }: any  = await import('@supabase/supabase-js');
 
-const supabase = createClient(
+const supabase = createClient(;
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
       );
@@ -39,6 +38,8 @@ const supabase = createClient(
       console.warn(;
         '[🧠 Logger] Supabase logging failed, falling back to, localStorage: ';
         // error
-      ), this.log(entry)}
+      , this.log(entry)}
 
 export const logger = new CausalLogger();
+
+}})

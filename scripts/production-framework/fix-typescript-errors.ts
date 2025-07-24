@@ -22,11 +22,11 @@ class TypeScriptErrorFixer {
   private projectRoot = process.cwd();
   private fixedCount = 0;
   private totalErrors = 0;
-  async function fix(options: { systematicMode?: boolean; criticalPathFirst?: boolean } = {}): Promise<void> {
+  async fix(options: { systematicMode?: boolean; criticalPathFirst?: boolean } = {}): Promise<void> {
     console.log('🔧 TypeScript Error Fixing System\n');
     // Collect all errors
     await this.collectErrors();
-    function if(this.errors.length === 0) {
+    if(this.errors.length === 0) {
       console.log('✅ No TypeScript errors found!');
       return
 }
@@ -35,7 +35,7 @@ class TypeScriptErrorFixer {
     // Display error summary
     this.displayErrorSummary();
     // Apply fixes based on mode;
-function if(options.criticalPathFirst) {
+if(options.criticalPathFirst) {
       await this.fixCriticalPathFirst()
     } else if (options.systematicMode) {
       await this.fixSystematically()
@@ -45,7 +45,7 @@ function if(options.criticalPathFirst) {
     // Final report
     this.generateFixReport()
 }
-  private async function collectErrors(): Promise<void> {
+  private async collectErrors(): Promise<void> {
     console.log('📊 Collecting TypeScript errors...');
     try {
       const _tscOutput = execSync('npx tsc --noEmit --pretty false 2>&1', {
@@ -58,7 +58,7 @@ const output = error.stdout || error.output?.join('') || '';
       const lines = output.split('\n');
       lines.forEach((line: any) => {
         const match = line.match(/^(.+?)\((\d+),(\d+)\): error (TS\d+): (.+)$/);
-        function if(match) {
+        if(match) {
           this.errors.push({
             file: match[1];
             line: parseInt(match[2]);
@@ -134,18 +134,18 @@ const output = error.stdout || error.output?.join('') || '';
       console.log(`   Strategy: ${category.fixStrategy}\n`)
     })
 }
-  private async function fixCriticalPathFirst(): Promise<void> {
+  private async fixCriticalPathFirst(): Promise<void> {
     console.log('🎯 Fixing Critical Path First...\n');
     // Find files that are imported by many others;
 const importMap = await this.buildImportMap();
     const criticalFiles = this.identifyCriticalFiles(importMap);
     console.log(`Identified ${criticalFiles.length} critical files\n`);
-    function for(const file of criticalFiles) {
+    for(const file of criticalFiles) {
       const fileErrors = this.errors.filter((e) => e.file === file);
-      function if(fileErrors.length > 0) {
+      if(fileErrors.length > 0) {
         console.log(`Fixing ${fileErrors.length} errors in critical file: ${path.relative(this.projectRoot, file)}`);
         await this.fixFileErrors(file, fileErrors)}
-  private async function fixSystematically(): Promise<void> {
+  private async fixSystematically(): Promise<void> {
     console.log('⚙️ Fixing Errors Systematically...\n');
     // Fix in this order:
     // 1. Import/Export issues (TS2304, TS2305)
@@ -153,21 +153,21 @@ const importMap = await this.buildImportMap();
     // 3. Function signatures (TS2554)
     // 4. Type compatibility (TS2345, TS2322);
 const _fixOrder = ['TS2304', 'TS2305', 'TS2339', 'TS7006', 'TS2554', 'TS2345', 'TS2322'];
-    function for(const errorCode of fixOrder) {
+    for(const errorCode of fixOrder) {
       const category = this.errorCategories.get(errorCode);
-      function if(category && category.count > 0) {
+      if(category && category.count > 0) {
         console.log(`\n🔧 Fixing ${category.description} (${errorCode}): ${category.count} errors`);
         const errors = this.errors.filter((e) => e.code === errorCode);
         await this.fixErrorsByType(errorCode, errors)}
-  private async function fixByCategory(): Promise<void> {
+  private async fixByCategory(): Promise<void> {
     console.log('📦 Fixing Errors by Category...\n');
     for(const [code: any, category] of this.errorCategories: any): any {
-      function if(category.autoFixable && category.count > 0) {
+      if(category.autoFixable && category.count > 0) {
         console.log(`\n🔧 Auto-fixing ${category.description} (${code}): ${category.count} errors`);
         const errors = this.errors.filter((e) => e.code === code);
         await this.fixErrorsByType(code, errors)}
-  private async function fixErrorsByType(errorCode: string; errors: TypeScriptError[]): Promise<void> {
-    function switch(errorCode: any) {
+  private async fixErrorsByType(errorCode: string; errors: TypeScriptError[]): Promise<void> {
+    switch(errorCode: any) {
       case 'TS2304':
       // Cannot find name
     break;
@@ -200,11 +200,11 @@ const _fixOrder = ['TS2304', 'TS2305', 'TS2339', 'TS7006', 'TS2554', 'TS2345', '
         break,
     default:
       console.log(`  Manual fix required for ${errorCode}`)}
-  private async function fixCannotFindName(errors: TypeScriptError[]): Promise<void> {
+  private async fixCannotFindName(errors: TypeScriptError[]): Promise<void> {
     const missingImports = new Map<string, Set<string>>();
     errors.forEach((error: any) => {
       const match = error.message.match(/Cannot find name '(.+?)'/);
-      function if(match) {
+      if(match) {
         const name = match[1];
         if (!missingImports.has(error.file)) {
           missingImports.set(error.file, new Set())
@@ -215,15 +215,15 @@ const _fixOrder = ['TS2304', 'TS2305', 'TS2339', 'TS7006', 'TS2554', 'TS2345', '
       // Common React imports;
 const reactImports = Array.from(names).filter((n: any) => ;
         ['useState', 'useEffect', 'useCallback', 'useMemo', 'useRef'].includes(n);
-      function if(reactImports.length > 0) {
+      if(reactImports.length > 0) {
         await this.addImportToFile(file, `import { ${reactImports.join(', ')} from 'react';`);
         this.fixedCount += reactImports.length
 }}
-  private async function fixPropertyNotExist(errors: TypeScriptError[]): Promise<void> {
+  private async fixPropertyNotExist(errors: TypeScriptError[]): Promise<void> {
     const _typeAdditions = new Map<string, string[]>();
     errors.forEach((error: any) => {
       const match = error.message.match(/Property '(.+?)' does not exist on type '(.+?)'/);
-      function if(match) {
+      if(match) {
         const [ property, type]: any[] = match;
         // For 'any' type issues
         if (type.includes('any')) {
@@ -232,14 +232,14 @@ const reactImports = Array.from(names).filter((n: any) => ;
           this.fixedCount++
 }})
 }
-  private async function fixImplicitAny(errors: TypeScriptError[]): Promise<void> {
-    function for(const error of errors) {
+  private async fixImplicitAny(errors: TypeScriptError[]): Promise<void> {
+    for(const error of errors) {
       const content = fs.readFileSync(error.file, 'utf-8');
       const lines = content.split('\n');
       const line = lines[error.line - 1];
       // Simple parameter type fix;
 const paramMatch = line.match(/\(([^)]+)\)/);
-      function if(paramMatch) {
+      if(paramMatch) {
         const params = paramMatch[1];
         const _fixedParams = params.split(',').map((p: any) => {
           if (!p.includes(':')) {
@@ -251,7 +251,7 @@ const paramMatch = line.match(/\(([^)]+)\)/);
         fs.writeFileSync(error.file, lines.join('\n');
         this.fixedCount++
 }}
-  private async function fixSyntaxErrors(errors: TypeScriptError[]): Promise<void> { for(const error of errors) {
+  private async fixSyntaxErrors(errors: TypeScriptError[]): Promise<void> { for(const error of errors) {
       // Fix common syntax errors like semicolons vs commas
       if (error.message.includes("',' expected")) {
         const content = fs.readFileSync(error.file, 'utf-8');
@@ -263,17 +263,17 @@ const paramMatch = line.match(/\(([^)]+)\)/);
           fs.writeFileSync(error.file, lines.join('\n');
           this.fixedCount++
 }}
-  private async function fixModuleExports(errors: TypeScriptError[]): Promise<void> {
+  private async fixModuleExports(errors: TypeScriptError[]): Promise<void> {
     console.log(`  Fixing module export issues...`);
     // Implementation would fix import/export mismatches
     this.fixedCount += errors.length
 }
-  private async function fixWrongArguments(errors: TypeScriptError[]): Promise<void> {
+  private async fixWrongArguments(errors: TypeScriptError[]): Promise<void> {
     console.log(`  Fixing function argument issues...`);
     // Implementation would fix function calls with wrong arguments
     this.fixedCount += errors.length
 }
-  private async function fixFileErrors(file: string; errors: TypeScriptError[]): Promise<void> {
+  private async fixFileErrors(file: string; errors: TypeScriptError[]): Promise<void> {
     // Group errors by type and fix;
 const errorsByType = new Map<string, TypeScriptError[]>();
     errors.forEach((error: any) => {
@@ -284,15 +284,15 @@ const errorsByType = new Map<string, TypeScriptError[]>();
     });
     for(const [code: any, typeErrors] of errorsByType: any): any {
       await this.fixErrorsByType(code, typeErrors)}
-  private async function buildImportMap(): Promise<Map<string, Set<string>>> {
+  private async buildImportMap(): Promise<Map<string, Set<string>>> {
     const importMap = new Map<string, Set<string>>();
     const files = this.findTypeScriptFiles();
-    function for(const file of files) {
+    for(const file of files) {
       const content = fs.readFileSync(file, 'utf-8');
       const imports = content.match(/import .* from ['"](.+?)['"]/g) || [];
       imports.forEach((imp: any) => {
         const match = imp.match(/from ['"](.+?)['"]/);
-        function if(match) {
+        if(match) {
           const importPath = match[1];
           const _resolvedPath = this.resolveImportPath(file, importPath);
           if (!importMap.has(resolvedPath)) {
@@ -311,7 +311,7 @@ const errorsByType = new Map<string, TypeScriptError[]>();
     const files: string[] = [];
     const _walk = (dir: string) => {
       const _entries = fs.readdirSync(dir, { withFileTypes: true });
-      function for(const entry of entries) {
+      for(const entry of entries) {
         const _fullPath = path.join(dir, entry.name);
         if (entry.isDirectory() && !entry.name.includes('node_modules') && entry.name !== '.next') {
           walk(fullPath)
@@ -329,17 +329,17 @@ const errorsByType = new Map<string, TypeScriptError[]>();
 }
     return importPath
 }
-  private async function addImportToFile(file: string; importStatement: string): Promise<void> {
+  private async addImportToFile(file: string; importStatement: string): Promise<void> {
     const content = fs.readFileSync(file, 'utf-8');
     const lines = content.split('\n');
     // Find the last import statement;
 let lastImportIndex = -1;
-    function for(let i = 0; i < lines.length; i++) {
+    for(let i = 0; i < lines.length; i++) {
       if (lines[i].startsWith('import ')) {
         lastImportIndex = i
 }}
     // Insert after last import or at the beginning;
-function if(lastImportIndex >= 0) {
+if(lastImportIndex >= 0) {
       lines.splice(lastImportIndex + 1, 0, importStatement)
     } else {
       lines.unshift(importStatement)
@@ -353,7 +353,7 @@ function if(lastImportIndex >= 0) {
     console.log(`Total Errors: ${this.totalErrors}`);
     console.log(`Fixed: ${this.fixedCount} (${fixRate}%)`);
     console.log(`Remaining: ${remainingErrors}`);
-    function if(remainingErrors > 0) {
+    if(remainingErrors > 0) {
       console.log('\n🔍 Next Steps:');
       console.log('1. Run "npm run build" to see remaining errors');
       console.log('2. Focus on type compatibility issues');

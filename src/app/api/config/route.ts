@@ -2,17 +2,17 @@
 export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 
-function getFeatureStatus(feature: string): boolean {
-    const features: Record<string, boolean> = {
-        authentication: true,
-        collaboration: true,
-        analytics: false,
+getFeatureStatus(feature: string): boolean {
+    const features: Record<string boolean> = {</string>
+        authentication: true;
+        collaboration: true;
+        analytics: false;
         notifications: true
-    };
-    return features[feature] || false;
+     };
+    return features[feature] || false
 }
 
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
     try {
         const url = new URL(request.url);
         const feature = url.searchParams.get('feature');
@@ -23,24 +23,23 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({
                 feature,
                 enabled
-            });
-        }
+            })
+}
         
         // Return all configuration
-        const config = {
-            features: {
-                authentication: true,
-                collaboration: true,
-                analytics: false,
+        const config={ features: {
+                authentication: true;
+                collaboration: true;
+                analytics: false;
                 notifications: true
-            },
+            }
             version: '1.0.0',
             environment: process.env.NODE_ENV || 'development'
         };
         
-        return NextResponse.json(config);
-    } catch (error) {
+        return NextResponse.json(config)
+} catch (error) {
         console.error('Config API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch configuration' }, { status: 500 });
-    }
+        return NextResponse.json({ error: 'Failed to fetch configuration' }, { status: 500 })
+}
 }

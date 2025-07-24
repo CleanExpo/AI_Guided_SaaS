@@ -17,110 +17,103 @@ export abstract class BaseAgent extends EventEmitter {
   protected logger: AgentLogger;
   protected communication?: AgentCommunicationChannel;
   
-  constructor(config: Partial<AgentConfig>) {
+  constructor(config: Partial<AgentConfig>) {</AgentConfig>
     super();
     
-    this.config = {
-      id: config.id || `agent-${uuidv4()}`,
+    this.config={ id: config.id || `agent-${uuidv4()}`,
       name: config.name || 'Unnamed Agent',
       type: config.type || 'core',
       version: config.version || '1.0.0',
       description: config.description,
       capabilities: config.capabilities || [],
-      resources: config.resources || {
-        cpu: 1024,
+      resources: config.resources || { cpu: 1024;
         memory: '512MB',
         timeout: 300000
       },
       dependencies: config.dependencies || []
     };
     
-    this.state = {
-      id: this.config.id,
+    this.state={ id: this.config.id,
       status: 'initializing',
       taskQueue: [],
-      metrics: this.initializeMetrics(),
-      startTime: new Date()
+      metrics: this.initializeMetrics(, startTime: new Date()
     };
     
-    this.logger = this.createLogger();
-  }
+    this.logger = this.createLogger()
+}
   
   private initializeMetrics(): AgentMetrics {
-    return {
-      agentId: this.config.id,
+    return { agentId: this.config.id,
       status: 'offline',
-      tasksCompleted: 0,
-      tasksFailed: 0,
-      averageResponseTime: 0,
-      successRate: 0,
-      cpuUsage: 0,
-      memoryUsage: 0,
-      lastHeartbeat: new Date(),
-      uptime: 0 }
+      tasksCompleted: 0;
+      tasksFailed: 0;
+      averageResponseTime: 0;
+      successRate: 0;
+      cpuUsage: 0;
+      memoryUsage: 0;
+      lastHeartbeat: new Date(), uptime: 0 }
   }
   
   private createLogger(): AgentLogger {
     const prefix = `[${this.config.name}]`;
     
-    return {
-      info: (message: string, data?: any) => {
-        console.log(`${prefix} INFO: ${message}`, data || '');
-        this.emit('log:info', { message, data });
-      },
-      warn: (message: string, data?: any) => {
-        console.warn(`${prefix} WARN: ${message}`, data || '');
-        this.emit('log:warn', { message, data });
-      },
-      error: (message: string, error?: any) => {
-        console.error(`${prefix} ERROR: ${message}`, error || '');
-        this.emit('log:error', { message, error });
-      },
-      debug: (message: string, data?: any) => {
-        if (process.env.DEBUG) {
-          console.debug(`${prefix} DEBUG: ${message}`, data || '');
-        }
-        this.emit('log:debug', { message, data });
-      }
-    };
-  }
+    return { info: (message: string, data? null : any) => {
+        console.log(`${prefix}; INFO: ${message}`, data || '');
+        this.emit('log:info', { message, data })
+},
+      warn: (message: string, data? null : any) => {
+        console.warn(`${prefix}; WARN: ${message}`, data || '');
+        this.emit('log:warn', { message, data })
+},
+      error: (message: string, error? null : any) => {
+        console.error(`${prefix}; ERROR: ${message}`, error || '');
+        this.emit('log:error', { message, error })
+},
+      debug: (message: string, data? null : any) =>  {
+        if (process.env.DEBUG) {;
+          console.debug(`${prefix}; DEBUG: ${message}`, data || '')
+}
+        this.emit('log:debug', { message, data })
+}
+    }
+}
   
-  public async initialize(): Promise<void> {
+  public async initialize(): Promise<void> {</void>
     this.logger.info('Initializing agent');
     
     try {
       await this.onInitialize();
       this.state.status = 'ready';
-      this.emit('agent:ready', { agentId: this.config.id });
-    } catch (error) {
+      this.emit('agent:ready', { agentId: this.config.id })
+} catch (error) {
       this.state.status = 'error';
       this.state.lastError = error instanceof Error ? error.message : 'Unknown error';
       this.logger.error('Failed to initialize agent', error);
-      throw error;
-    }
+      throw error
+}
   }
   
-  protected abstract onInitialize(): Promise<void>;
+  protected abstract onInitialize(): Promise<void></void>
   
-  public async processMessage(message: AgentMessage): Promise<any> {
+  public async processMessage(message: AgentMessage): Promise<any> {</any>
     this.logger.debug('Processing message', message);
     
     try {
       const result = await this.onMessage(message);
       this.emit('message:processed', { message, result });
-      return result;
-    } catch (error) {
+      return result
+} catch (error) {
       this.logger.error('Failed to process message', error);
-      throw error;
-    }
+      throw error
+}
   }
   
-  protected abstract onMessage(message: AgentMessage): Promise<any>;
+  protected abstract onMessage(message: AgentMessage): Promise<any></any>
   
-  public async executeTask(task: AgentTask): Promise<void> {
+  public async executeTask(task: AgentTask): Promise<void> {</void>
     if (this.state.status !== 'ready') {
-      throw new Error(`Agent is not ready (status: ${this.state.status})`);
-    }
+      throw new Error(`Agent is not ready (status: ${this.state.status})`)
+}
     
     this.state.currentTask = task;
     this.state.status = 'busy';
@@ -138,9 +131,8 @@ export abstract class BaseAgent extends EventEmitter {
       
       this.updateTaskMetrics(task, true);
       
-      this.emit('task:complete', { task, result });
-      
-    } catch (error) {
+      this.emit('task:complete', { task, result })
+} catch (error) {
       task.status = 'failed';
       task.error = error instanceof Error ? error.message : 'Unknown error';
       task.completedAt = new Date();
@@ -150,23 +142,23 @@ export abstract class BaseAgent extends EventEmitter {
       this.logger.error(`Task ${task.id} failed`, error);
       this.emit('task:failed', { task, error });
       
-      throw error;
-    } finally {
+      throw error
+} finally {
       this.state.currentTask = undefined;
-      this.state.status = 'ready';
-    }
+      this.state.status = 'ready'
+}
   }
   
-  protected abstract onTask(task: AgentTask): Promise<any>;
+  protected abstract onTask(task: AgentTask): Promise<any></any>
   
   private updateTaskMetrics(task: AgentTask, success: boolean): void {
     const duration = task.completedAt!.getTime() - task.startedAt!.getTime();
     
     if (success) {
-      this.state.metrics.tasksCompleted++;
-    } else {
-      this.state.metrics.tasksFailed++;
-    }
+      this.state.metrics.tasksCompleted++
+} else {
+      this.state.metrics.tasksFailed++
+}
     
     // Update average response time
     const totalTasks = this.state.metrics.tasksCompleted + this.state.metrics.tasksFailed;
@@ -179,10 +171,10 @@ export abstract class BaseAgent extends EventEmitter {
     
     // Update status
     this.state.metrics.status = this.state.status as any;
-    this.state.metrics.currentTask = task.type;
-  }
+    this.state.metrics.currentTask = task.type
+}
   
-  public async stop(): Promise<void> {
+  public async stop(): Promise<void> {</void>
     this.state.status = 'shutting_down';
     this.emit('agent:stopping', { agentId: this.config.id });
     
@@ -198,43 +190,42 @@ export abstract class BaseAgent extends EventEmitter {
     await this.onStop();
     
     this.state.status = 'offline';
-    this.emit('agent:stopped', { agentId: this.config.id });
-  }
+    this.emit('agent:stopped', { agentId: this.config.id })
+}
   
-  protected abstract onStop(): Promise<void>;
+  protected abstract onStop(): Promise<void></void>
   
   /**
    * Execute a pulse - used by PulsedExecutor
    */
-  public async pulse(): Promise<void> {
+  public async pulse(): Promise<void> {</void>
     if (this.state.status !== 'ready' && this.state.status !== 'busy') {
-      return;
-    }
+      return
+}
     
     // Process one task from the queue
     if (this.state.taskQueue.length > 0 && this.state.status === 'ready') {
       const task = this.state.taskQueue.shift()!;
-      await this.executeTask(task);
-    }
+      await this.executeTask(task)
+}
     
     // Update heartbeat
-    this.updateMetrics({
-      lastHeartbeat: new Date()
-    });
-  }
+    this.updateMetrics({ lastHeartbeat: new Date()
+    })
+}
   
   /**
    * Interrupt current execution - used by PulsedExecutor
    */
-  public async interrupt(): Promise<void> {
+  public async interrupt(): Promise<void> {</void>
     if (this.state.currentTask) {
       this.logger.warn(`Interrupting task ${this.state.currentTask.id}`);
       // Implementation depends on specific agent type
-      await this.onInterrupt();
-    }
+      await this.onInterrupt()
+}
   }
   
-  protected async onInterrupt(): Promise<void> {
+  protected async onInterrupt(): Promise<void> {</void>
     // Override in specific agents
   }
   
@@ -243,90 +234,88 @@ export abstract class BaseAgent extends EventEmitter {
    */
   public queueTask(task: AgentTask): void {
     this.state.taskQueue.push(task);
-    this.emit('task:queued', { task });
-  }
+    this.emit('task:queued', { task })
+}
   
   /**
    * Check if agent has pending tasks
    */
   public hasPendingTasks(): boolean {
-    return this.state.taskQueue.length > 0 || this.state.currentTask !== undefined;
-  }
+    return this.state.taskQueue.length > 0 || this.state.currentTask !== undefined
+}
   
   /**
    * Get task queue depth
    */
   public getTaskQueueDepth(): number {
-    return this.state.taskQueue.length;
-  }
+    return this.state.taskQueue.length
+}
   
   /**
    * Get agent priority
    */
   public getPriority(): 'low' | 'medium' | 'high' {
     // Can be overridden by specific agents
-    return 'medium';
-  }
+    return 'medium'
+}
   
   /**
    * Update agent metrics
    */
-  public updateMetrics(updates: Partial<AgentMetrics>): void {
-    this.state.metrics = {
+  public updateMetrics(updates: Partial<AgentMetrics>): void {</AgentMetrics>
+    this.state.metrics={
       ...this.state.metrics,
       ...updates,
-      lastHeartbeat: new Date(),
-      uptime: Date.now() - this.state.startTime.getTime()
-    };
-  }
+      lastHeartbeat: new Date(), uptime: Date.now() - this.state.startTime.getTime()
+    }
+}
   
   /**
    * Set communication channel
    */
   public setCommunication(channel: AgentCommunicationChannel): void {
-    this.communication = channel;
-  }
+    this.communication = channel
+}
   
   /**
    * Send message via communication channel
    */
-  protected async sendMessage(to: string | string[], type: string, payload: any): Promise<void> {
+  protected async sendMessage(to: string | string[], type: string, payload: any): Promise<void> {</void>
     if (!this.communication) {
-      throw new Error('Communication channel not set');
-    }
+      throw new Error('Communication channel not set')
+}
     
-    const message: AgentMessage = {
-      from: this.config.id,
+    const message: AgentMessage={ from: this.config.id,
       to,
       type,
       payload,
       timestamp: new Date()
     };
     
-    await this.communication.send(message);
-  }
+    await this.communication.send(message)
+}
   
   // Getters
   public getConfig(): AgentConfig {
-    return { ...this.config };
-  }
+    return { ...this.config }
+}
   
   public getStatus(): AgentStatus {
-    return this.state.status;
-  }
+    return this.state.status
+}
   
   public getMetrics(): AgentMetrics {
-    return { ...this.state.metrics };
-  }
+    return { ...this.state.metrics }
+}
   
   public getCurrentTask(): AgentTask | undefined {
-    return this.state.currentTask;
-  }
+    return this.state.currentTask
+}
   
   public getState(): AgentState {
     return {
       ...this.state,
       taskQueue: [...this.state.taskQueue]
-    };
-  }
+    }
 }
+})))

@@ -8,18 +8,16 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Clock, User } from 'lucide-react';
 import Link from 'next/link';
 
-interface DocPage {
-  slug: string;
+interface DocPage { slug: string;
   title: string;
   description: string;
   content: string;
   category: string;
-  lastUpdated: string;
+  lastUpdated: string
 }
 
-const docPages: Record<string, DocPage> = {
-  'quick-start': {
-    slug: 'quick-start',
+const docPages: Record<string DocPage> = {</string>
+  'quick-start': { slug: 'quick-start',
     title: 'Quick Start Guide',
     description: 'Get up and running with AI Guided SaaS in minutes',
     content: `
@@ -38,8 +36,7 @@ const docPages: Record<string, DocPage> = {
     category: 'Getting Started',
     lastUpdated: '2025-01-15'
   },
-  'api-reference': {
-    slug: 'api-reference',
+  'api-reference': { slug: 'api-reference',
     title: 'API Reference',
     description: 'Complete API documentation for developers',
     content: `
@@ -58,8 +55,7 @@ const docPages: Record<string, DocPage> = {
     category: 'API',
     lastUpdated: '2025-01-12'
   },
-  'deployment': {
-    slug: 'deployment',
+  'deployment': { slug: 'deployment',
     title: 'Deployment Guide',
     description: 'Learn how to deploy your applications to production',
     content: `
@@ -80,68 +76,63 @@ const docPages: Record<string, DocPage> = {
   }
 };
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const doc = docPages[params.slug];
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {</Metadata>
+{ docPages[params.slug];
   
   if (!doc) {
-    return {
-      title: 'Documentation Not Found',
+    return { title: 'Documentation Not Found',
       description: 'The requested documentation page could not be found.'
-    };
-  }
+    }
+}
   
-  return {
-    title: `${doc.title} - AI Guided SaaS Documentation`,
+  return { title: `${doc.title} - AI Guided SaaS Documentation`,
     description: doc.description
-  };
+  }
 }
 
 export default function DocPage({ params }: { params: { slug: string } }) {
   const doc = docPages[params.slug];
   
   if (!doc) {
-    notFound();
-  }
+    notFound()
+}
   
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
-          <Link href="/docs">
+          <Link href="/docs"></Link>
             <Button variant="ghost" className="mb-4">
-              <ArrowLeft className="mr-2 h-4 w-4" />
+          <ArrowLeft className="mr-2 h-4 w-4"   />
               Back to Documentation
             </Button>
           </Link>
           
           <div className="flex items-center gap-4 mb-4">
-            <Badge variant="secondary">{doc.category}</Badge>
+          <Badge variant="secondary">{doc.category}</Badge>
             <div className="flex items-center text-sm text-gray-500">
-              <Clock className="h-4 w-4 mr-1" />
+          <Clock className="h-4 w-4 mr-1"   />
               Updated {doc.lastUpdated}
             </div>
-          </div>
           
           <h1 className="text-4xl font-bold text-gray-900 mb-2">{doc.title}</h1>
           <p className="text-xl text-gray-600">{doc.description}</p>
-        </div>
         
         <Card>
           <CardContent className="prose prose-lg max-w-none p-8">
-            <div dangerouslySetInnerHTML={{ __html: doc.content }} />
+            <div dangerouslySetInnerHTML={{ __html: doc.content }}  />
           </CardContent>
         </Card>
         
         <div className="mt-8 pt-6 border-t">
           <div className="flex items-center justify-between">
             <div className="flex items-center text-sm text-gray-500">
-              <User className="h-4 w-4 mr-1" />
+          <User className="h-4 w-4 mr-1"   />
               Last updated by AI Guided SaaS Team
             </div>
             <Button variant="outline">Edit this page</Button>
           </div>
-        </div>
-      </div>
-    </div>
-  );
+  )
+}
+
 }

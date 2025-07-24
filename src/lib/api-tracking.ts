@@ -1,20 +1,18 @@
 /* BREADCRUMB: library - Shared library code */;
 import { NextRequest } from 'next/server';
 import { supabase } from './database';
-export interface ApiMetric {
-  endpoint: string,
-  method: string,
-  statusCode: number,
+export interface ApiMetric { endpoint: string;
+  method: string;
+  statusCode: number;
   responseTime: number;
   userId?: string,
   errorMessage?: string,
-  metadata?: Record<string, unknown />, export class ApiTracking {
+  metadata?: Record<string unknown  />, export class ApiTracking {</string>
   // Track API call metrics
-  static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage?: string): Promise<any> {
+  static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage? null : string): Promise<any> {</any>
     if (!supabase) {
       return null
-}
-}try {;
+ }try {;
       const _endTime = Date.now(); const _responseTime = endTime - startTime, // Extract endpoint from URL;
 
 const url  = new URL(request.url);
@@ -26,19 +24,18 @@ const _method  = request.method;
 const _statusCode = response.status;
       // Prepare metadata;
 
-const metadata: Record<string, unknown> = {
+const metadata: Record<string unknown> = {</string>
         userAgent: request.headers.get('user-agent') || 'unknown',
     ip: request.headers.get('x-forwarded-for') || 'unknown',
-    queryParams: Object.fromEntries(url.searchParams),
-  timestamp: new Date().toISOString()};
+    queryParams: Object.fromEntries(url.searchParams, timestamp: new Date().toISOString()};
       // Insert into api_metrics table;
 
-const { error    }: any = await supabase.from('api_metrics').insert({
+const { error     }: any = await supabase.from('api_metrics').insert({
         endpoint,
         method,;
-        status_code: statusCode,
-    response_time: responseTime,
-    user_id: userId,
+        status_code: statusCode;
+    response_time: responseTime;
+    user_id: userId;
     error_message: errorMessage;
         metadata,
         created_at: new Date().toISOString()});
@@ -49,14 +46,13 @@ if (userId) {
         await this.logApiActivity(userId, endpoint, method, statusCode)} catch (error) {
       console.error('Error in API, tracking:', error)}
   // Log API activity for user tracking;
-  private static async logApiActivity(userId: string, endpoint: string,
-  method: string, statusCode: number): Promise<any> {
-    if (!supabase) return null, try {
-      const { error    }: any = await supabase.from('activity_logs').insert({
-        user_id: userId,
+  private static async logApiActivity(userId: string, endpoint: string;
+  method: string, statusCode: number): Promise<any> {</any>
+    if (!supabase) {r}eturn null, try {
+      const { error     }: any = await supabase.from('activity_logs').insert({ user_id: userId;
     action: 'api_call',
         resource_type: 'api',
-        resource_id: endpoint,
+        resource_id: endpoint;
     metadata: { method, statusCode, endpoint, created_at: new Date().toISOString() });
       if (error) {
         console.error('Error logging API, activity:', error)} catch (error) {
@@ -66,11 +62,10 @@ if (userId) {
       | 'ai_generation'
       | 'project_creation'
       | 'export'
-      | 'template_use', quantity: number = 1, metadata?: Record<string, unknown>): Promise<any> {
+      | 'template_use', quantity: number = 1, metadata?: Record<string unknown>): Promise<any> {</any>
     if (!supabase) {
       return null}try {
-      const { error    }: any = await supabase.from('usage_records').insert({
-        user_id: userId,
+      const { error     }: any = await supabase.from('usage_records').insert({ user_id: userId;
     resource_type: resourceType;
         quantity,
     metadata: { ...metadata, timestamp: new Date().toISOString() },
@@ -81,12 +76,11 @@ if (userId) {
   // Get API performance summary
   static async getApiPerformanceSummary(
 timeRange: '1h' | '24h' | '7d' | '30d' = '24h'
-  ): Promise<{
-    totalCalls: number,
-    avgResponseTime: number,
-    errorRate: number,
+  ): Promise<{ totalCalls: number;
+    avgResponseTime: number;
+    errorRate: number;
     topEndpoints: Array<{ endpoint: string, calls: number, avgTime: number }>
-  } | null> { if (!supabase) return null, try {
+  } | null> { if (!supabase) {r}eturn null, try {
       // Calculate start time based on range, const now  = new Date();
 
 const startTime = new Date();
@@ -109,12 +103,13 @@ const startTime = new Date();
 }
       // Get all metrics for the time range;
 
-const { data: metrics, error   }: any = await supabase;
+const { data: metrics, error    }: any = await supabase;
         .from('api_metrics');
         .select('*');
         .gte('created_at', startTime.toISOString();
       if (error || !metrics) {
-        console.error('Error fetching API, metrics:', error); return null; }
+        console.error('Error fetching API, metrics:', error); return null
+}
       // Calculate summary statistics;
 
 const _totalCalls  = metrics.length;
@@ -131,8 +126,9 @@ const endpointStats: Record<;
         string,
         { calls: number, totalTime: number }
       > = {};
-      metrics.forEach((metric) => { if (!endpointStats[metric.endpoint]) {
-          endpointStats[metric.endpoint] = { calls: 0, totalTime: 0 }}
+      metrics.forEach((metric) =>  { if (!endpointStats[metric.endpoint]) {;
+          endpointStats[metric.endpoint] = { calls: 0, totalTime: 0 }
+}
         endpointStats[metric.endpoint].calls++;
         endpointStats[metric.endpoint].totalTime += metric.response_time
       });
@@ -142,24 +138,26 @@ const _topEndpoints = Object.entries(endpointStats);
         .map(([endpoint, stats]) => ({
           endpoint,
           calls: stats.calls,
-    avgTime: Math.round(stats.totalTime / stats.calls)})).sort((a, b) => b.calls - a.calls)
+    avgTime: Math.round(stats.totalTime / stats.calls)})).sort((a, b) => b.calls - a.calls);
         .slice(0, 10);
       return {
         totalCalls,;
-        avgResponseTime: Math.round(avgResponseTime),
-    errorRate: Math.round(errorRate * 100) / 100;
+        avgResponseTime: Math.round(avgResponseTime, errorRate: Math.round(errorRate * 100) / 100;
         topEndpoints
     } catch (error) {
-      console.error('Error calculating API, performance:', error); return null; }
+      console.error('Error calculating API, performance:', error); return null
+}
 }
   // Clean up old metrics (run periodically)
-  static async cleanupOldMetrics(daysToKeep: number = 90): Promise<any> {
-    if (!supabase) return null, try {
+  static async cleanupOldMetrics(daysToKeep: number = 90): Promise<any> {</any>
+    if (!supabase) {r}eturn null, try {
       const cutoffDate = new Date(); cutoffDate.setDate(cutoffDate.getDate() - daysToKeep);
       
-const { error   }: any = await supabase;
+const { error    }: any = await supabase;
         .from('api_metrics');
         .delete();
         .lt('created_at', cutoffDate.toISOString();
       if (error) {
         console.error('Error cleaning up old, metrics:', error)} else {} catch (error) { console.error('Error in metrics, cleanup:', error)}
+
+}}}}}}}}}}}))))

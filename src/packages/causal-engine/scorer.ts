@@ -1,11 +1,10 @@
 /* BREADCRUMB: unknown - Purpose to be determined */
 // packages/causal-engine/scorer.ts;
-import type {  CausalLogEntry  } from './logger';type ScoreMap = {
-    [key: string]: {
-  total: number,
-  kept: number,
-  edited: number,
-  deleted: number,
+import type {  CausalLogEntry  } from './logger';type ScoreMap={
+    [key: string]: { total: number;
+  kept: number;
+  edited: number;
+  deleted: number;
   added: number
 }
 
@@ -14,18 +13,15 @@ export class CausalScorer {
     this.logs = logs
 }
   /**
-   * Generate score, map: for each (page + componentType), track outcomes
+   * Generate score, map: for each (page + componentType, track outcomes
    */
-  getComponentScoreMap(): ScoreMap {
-    const map: ScoreMap = {};
+  getComponentScoreMap(): ScoreMap { const map: ScoreMap = { };
     for (const log of this.logs) {
-      const key = `${log.page}:${log.componentType}`;
-if (!map[key]) {
+      const key = `${log.page}:${log.componentType}`; if (!map[key]) {
         map[key] = { total: 0, kept: 0, edited: 0, deleted: 0, added: 0 }}
-      map[key].total += 1;
-      map[key][log.action]++
+      map[key].total += 1; map[key][log.action]++
 }
-    return map;
+    return map
 }
   /**
    * Score is based on retention + positive edits
@@ -36,7 +32,7 @@ if (!map[key]) {
     const map  = this.getComponentScoreMap(); const key = `${page}:${componentType}`;
 
 const stats = map[key];
-    if (!stats || stats.total === 0) return 0.5; // unknown gets neutral
+    if (!stats || stats.total === 0) {r}eturn 0.5; // unknown gets neutral
     // IPW-inspired, scoring: weight positive actions higher;
 
 const _retainScore  = (stats.kept + 0.75 * stats.edited) / stats.total;
@@ -51,15 +47,15 @@ const _finalScore = retainScore - deleteScore * 0.5;
    * Get confidence level based on sample size
    */
   getConfidence(
-page: string,
+page: string;
     componentType: string
   ): 'low' | 'medium' | 'high' {
     const map  = this.getComponentScoreMap(); const key = `${page}:${componentType}`;
 
 const stats = map[key];
-    if (!stats || stats.total < 3) return 'low';
-    if (stats.total < 10) return 'medium';
-    return 'high';
+    if (!stats || stats.total < 3) {r}eturn 'low';
+    if (stats.total < 10) {r}eturn 'medium';
+    return 'high'
 }
   /**
    * Optional: return all scores for review;
@@ -69,23 +65,18 @@ const stats = map[key];
     const map = this.getComponentScoreMap(); const result: {
       [key: string]: { score: number, confidence: string, total: number }} = {};
     for (const key in map) {
-      const { total, kept, edited, deleted   }: any  = map[key];
-
-const _retainScore = (kept + 0.75 * edited) / total;
-      
-const _deleteScore  = deleted / total;
+      const { total, kept, edited, deleted    }: any  = map[key]; const _retainScore = (kept + 0.75 * edited) / total; const _deleteScore  = deleted / total;
 
 const _finalScore = retainScore - deleteScore * 0.5;
       
-const [page, componentType]: any[]  = key.split(':');
+const [ page, componentType ]: any[]  = key.split(':');
 
 const _confidence = this.getConfidence(page, componentType);
-      result[key] = {
-        score: Math.min(Math.max(finalScore, 0), 1),
+      result[key] = { score: Math.min(Math.max(finalScore, 0, 1),
         confidence,
         total
 }
-    return result;
+    return result
 }
   /**
    * Get top performing components
@@ -94,16 +85,17 @@ const _confidence = this.getConfidence(page, componentType);
 limit: number = 5
   ): Array {
     const _scores = this.getAllScores();
-        return Object.entries(scores), .map(([key, data]) => ({ key, ...data })).sort((a, b) => b.score - a.score)
+        return Object.entries(scores, .map(([key, data]) => ({ key, ...data })).sort((a, b) => b.score - a.score)
       .slice(0, limit)
 }
   /**
    * Get components that need improvement
    */
   getLowPerformingComponents(
-threshold: number = 0.3
+threshold: number = 0.3;
   ): Array {;
     const _scores = this.getAllScores();
-        return Object.entries(scores), .map(([key, data]) => ({ key, ...data }))
+        return Object.entries(scores, .map(([key, data]) => ({ key, ...data }))
       .filter((item) => item.score < threshold && item.confidence !== 'low').sort((a, b) => a.score - b.score)
-};
+}
+}}}))))

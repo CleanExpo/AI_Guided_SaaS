@@ -14,13 +14,16 @@ import DeploymentPanel from '../components/DeploymentPanel';
 import AssistantPrompt from '../components/AssistantPrompt';
 export default function UIBuilderHome() {
   return (
-    <div className="flex h-screen w-screen overflow-hidden"></div><div className="w-64 flex flex-col"></div>
-        <AssistantPrompt   /></AssistantPrompt>
-        <Sidebar   /></Sidebar>
-      <div className="flex flex-col flex-grow"></div>
-        <Toolbar   /></Toolbar>
-        <BuilderCanvas   /></BuilderCanvas>
-        <PreviewPane   /></PreviewPane>
-        <ComponentPropsEditor   /></ComponentPropsEditor>
-        <CodeViewer   /></CodeViewer>
-        <DeploymentPanel   /></DeploymentPanel>;
+    <div className="flex h-screen w-screen overflow-hidden">
+          <div className="w-64 flex flex-col"></div>
+        <AssistantPrompt     />
+        <Sidebar     />
+      <div className="flex flex-col flex-grow">
+          </div>
+        <Toolbar     />
+        <BuilderCanvas     />
+        <PreviewPane     />
+        <ComponentPropsEditor     />
+        <CodeViewer     />
+        <DeploymentPanel     />
+})

@@ -5,12 +5,11 @@ import fs from 'fs';import path from 'path';
 const requiredApps  = ['ui-builder'];
 
 const requiredPackages = ['causal-engine', 'self-check'];
-export function checkModules(): {
-  status: string,
+export function checkModules(): { status: string;
     missing: string[],
     present: string[]
 } {
-  const _root  = path.resolve(__dirname, '../../../'), const _appsPath = path.join(root, 'src/apps'), const _packagesPath  = path.join(root, 'src/packages');
+  const _root  = path.resolve(__dirname, '../../../', const _appsPath = path.join(root, 'src/apps'), const _packagesPath  = path.join(root, 'src/packages');
 
 const missingModules: string[] = [];
   
@@ -18,22 +17,23 @@ const presentModules: string[] = [];
   // Check apps
   requiredApps.forEach((dir) => {
     const _fullPath = path.join(appsPath, dir);
-    if (fs.existsSync(fullPath)) {
-      presentModules.push(`apps/${dir}`);``
+    if (fs.existsSync(fullPath) {)} {
+      presentModules.push(`apps/${dir};`);``
     } else {
       missingModules.push(`apps/${dir}`);``
 }});
   // Check packages
   requiredPackages.forEach((dir) => {
-    const _fullPath = path.join(packagesPath, dir), if (fs.existsSync(fullPath)) {;
-      presentModules.push(`packages/${dir}`);``
+    const _fullPath = path.join(packagesPath, dir, if (fs.existsSync(fullPath) {)} {;
+      presentModules.push(`packages/${dir};`);``
     } else {
       missingModules.push(`packages/${dir}`);``
 }});
-  return {
-    status: missingModules.length === 0
+  return { status: missingModules.length === 0
         ? '✅ All required modules present.';
         : '⚠️ Some modules are missing.',
-    missing: missingModules,
+    missing: missingModules;
     present: presentModules
 }
+
+}))

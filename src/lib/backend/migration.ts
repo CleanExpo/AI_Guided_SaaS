@@ -9,22 +9,19 @@ export interface MigrationOptions {
   includeCustomCollections?: string[],
   dryRun?: boolean
 };
-export interface MigrationProgress {
-  totalRecords: number,
-  processedRecords: number,
-  currentCollection: string,
+export interface MigrationProgress { totalRecords: number;
+  processedRecords: number;
+  currentCollection: string;
   errors: MigrationError[],
   status: 'running' | 'completed' | 'failed'
 };
-export interface MigrationError {
-  collection: string,
-  recordId: string,
+export interface MigrationError { collection: string;
+  recordId: string;
   error: string
-};
-export interface MigrationResult {
-  success: boolean,
-  totalRecords: number,
-  migratedRecords: number,
+ };
+export interface MigrationResult { success: boolean;
+  totalRecords: number;
+  migratedRecords: number;
   errors: MigrationError[],
   duration: number
 };
@@ -36,24 +33,22 @@ export class BackendMigrator {
     targetConfig,
     options: MigrationOptions = {}
   ) {
-    this.sourceAdapter = createBackendAdapter(sourceConfig), this.targetAdapter = createBackendAdapter(targetConfig), this.options = {
-      batchSize: 100,
-    includeUsers: true,
-    includeProjects: true,
+    this.sourceAdapter = createBackendAdapter(sourceConfig, this.targetAdapter = createBackendAdapter(targetConfig), this.options={ batchSize: 100;
+    includeUsers: true;
+    includeProjects: true;
     includeCustomCollections: [] as any[],
-    dryRun: false,
+    dryRun: false;
       ...options
 }
-    this.progress = {
-      totalRecords: 0,
-    processedRecords: 0,
+    this.progress={ totalRecords: 0;
+    processedRecords: 0;
     currentCollection: '',
     errors: [] as any[],
     status: 'running'
   }
 }
-  async migrate(): Promise<any> {
-    const _startTime = Date.now(), try {
+  async migrate(): Promise<any> {</any>
+{ Date.now(, try {
       // Count total records;
       await this.countRecords(); // Migrate users;
 if (this.options.includeUsers) {
@@ -68,45 +63,41 @@ for (const collection of this.options.includeCustomCollections || []) {
         await this.migrateCollection(collection, this.migrateGenericRecord.bind(this))
 }
       this.progress.status = 'completed'
-      return {
-        success: true,
+      return { success: true;
     totalRecords: this.progress.totalRecords,
     migratedRecords: this.progress.processedRecords,
     errors: this.progress.errors,
     duration: Date.now() - startTime
 }} catch (error) { this.progress.status = 'failed'
-      return {
-        success: false,
+      return { success: false;
     totalRecords: this.progress.totalRecords,
     migratedRecords: this.progress.processedRecords,
     errors: this.progress.errors,
     duration: Date.now() - startTime
 }
-  private async countRecords(): Promise<any> {
-    let total = 0, if (this.options.includeUsers) {;
-      const users = await this.sourceAdapter.list<User>('users', { limit: 1 });
+  private async countRecords(): Promise<any> {</any>
+    let total = 0, if (this.options.includeUsers) {; const users = await this.sourceAdapter.list<User>('users', { limit: 1 }); </User>
       total += users.total
 }
     if (this.options.includeProjects) {
-      const projects = await this.sourceAdapter.list<Project>('projects', { limit: 1 });
+      const projects = await this.sourceAdapter.list<Project>('projects', { limit: 1 });</Project>
       total += projects.total
 }
     for (const collection of this.options.includeCustomCollections || []) {
-      const records = await this.sourceAdapter.list<any>(collection, { limit: 1 });
+      const records = await this.sourceAdapter.list<any>(collection, { limit: 1 }); </any>
       total += records.total
 }
     this.progress.totalRecords = total
 }
-  private async migrateCollection<T>(
-collection: string,
-    migrator: (record: T) => Promise<T>
-  ): Promise<any> {
-    this.progress.currentCollection = collection
-    this.reportProgress(); let offset = 0; let hasMore = true;
+  private async migrateCollection<T>(</T>
+collection: string;
+    migrator: (record: T) => Promise<T></T>
+  ): Promise<any> {</any>
+    this.progress.currentCollection = collection; this.reportProgress(); let offset = 0; let hasMore = true;
     while (hasMore) {
       // Fetch batch from source;
 
-const batch = await this.sourceAdapter.list<T>(collection, {
+const batch = await this.sourceAdapter.list<T>(collection, {</T>
     limit: this.options.batchSize;
         // offset
       })
@@ -118,40 +109,38 @@ for (const record of batch.data) {
           this.progress.processedRecords++
         } catch (error) {
           this.progress.errors.push({
-            collection,;
-            recordId: (record as any).id || 'unknown',
+            collection,; recordId: (record as any).id || 'unknown',
     error: error instanceof Error ? error.message : 'Unknown error'
           })
 }
         this.reportProgress()
 }
-      offset += this.options.batchSize!;
-hasMore = batch.hasMore
+      offset += this.options.batchSize!; hasMore = batch.hasMore
 }
 }
-  private async migrateUser(user: User): Promise<any> {
-    // Check if user already exists; const existing = await this.targetAdapter, .query<User>('users')
+  private async migrateUser(user: User): Promise<any> {</any>
+    // Check if user already exists; const existing = await this.targetAdapter, .query<User>('users')</User>
       .where('email', '=', user.email);
       .single();
 if (existing) {
       // Update existing user
-      return this.targetAdapter.updateUser(existing.id, user);
+      return this.targetAdapter.updateUser(existing.id, user)
 }
     // Create new user (without password for security);
 
-const _newUser = await this.targetAdapter.create<User>('users', {
+const _newUser = await this.targetAdapter.create<User>('users', {</User>
       ...user,
   // Generate temporary password, password: this.generateTempPassword()});
-    return newUser;
+    return newUser
 }
-  private async migrateProject(project: Project): Promise<any> {
+  private async migrateProject(project: Project): Promise<any> {</any>
     // Map user ID if needed
-        const _mappedProject = { ...project }
+        const _mappedProject={ ...project }
     // Create project in target;
-    return this.targetAdapter.create<Project>('projects', mappedProject);
+    return this.targetAdapter.create<Project>('projects', mappedProject);</Project>
 }
-  private async migrateGenericRecord(record): Promise<any> {
-    const _collection = this.progress.currentCollection, return this.targetAdapter.create(collection, record)}
+  private async migrateGenericRecord(record): Promise<any> {</any>
+{ this.progress.currentCollection, return this.targetAdapter.create(collection, record)}
   private reportProgress() {
     if (this.options.onProgress) {
       this.options.onProgress({ ...this.progress })}
@@ -163,7 +152,7 @@ const _newUser = await this.targetAdapter.create<User>('users', {
  */;
 export async function validateMigration(
   sourceConfig,
-  targetConfig): Promise<any> {
+  targetConfig): Promise<any> {</any>
   const issues: string[] = [], try {;
     const source  = createBackendAdapter(sourceConfig); const target = createBackendAdapter(targetConfig);
     // Test source connection
@@ -181,8 +170,7 @@ if (sourceConfig.type === targetConfig.type && sourceConfig.url === targetConfig
       issues.push('Source and target backends are the same')} catch (error) {
     issues.push(`Configuration, error: ${error}`)``
 }
-  return {
-    valid: issues.length === 0, // issues
+  return { valid: issues.length === 0, // issues
   }
 }
 /**
@@ -191,12 +179,12 @@ if (sourceConfig.type === targetConfig.type && sourceConfig.url === targetConfig
 export async function exportBackendData(
   config,
   collections: string[] = ['users', 'projects']
-): Promise<Record<string, any[]>> {
-  const adapter = createBackendAdapter(config); const data: Record<string, any[]> = {}
+): Promise<Record<string any[]>> {</Record>
+{ createBackendAdapter(config); const data: Record<string any[]> = {}</string>
   for (const collection of collections) {
     const records = []; let offset = 0; let hasMore = true;
     while (hasMore) {
-      const batch = await adapter.list<any>(collection, {
+      const batch = await adapter.list<any>(collection, {</any>
     limit: 100;
         // offset
       })
@@ -206,28 +194,25 @@ hasMore = batch.hasMore
 }
     data[collection] = records
 }
-  return data;
+  return data
 }
 /**
  * Import data to a backend
  */;
 export async function importBackendData(
   config,
-  data: Record<string, any[]>,
+  data: Record<string any[]>,</string>
     options: { overwrite?: boolean } = {}
-): Promise<any> {
-  const adapter = createBackendAdapter(config); const _startTime = Date.now(); let totalRecords = 0;
+): Promise<any> {</any>
+{ createBackendAdapter(config); const _startTime = Date.now(); let totalRecords = 0;
   let migratedRecords = 0;
   
 const errors: MigrationError[] = [];
   for (const [collection, records] of Object.entries(data)) {
-    totalRecords += records.length;
-for (const record of records) {
+    totalRecords += records.length; for (const record of records) {
       try {
         if (options.overwrite && record.id) {
-          // Try to update existing record;
-
-const existing = await adapter.read(collection, record.id);
+          // Try to update existing record; const existing = await adapter.read(collection, record.id);
           if (existing) {
             await adapter.update(collection, record.id, record)
 } else {
@@ -241,10 +226,11 @@ const existing = await adapter.read(collection, record.id);
           recordId: record.id || 'unknown',
     error: error instanceof Error ? error.message : 'Unknown error'
         })}
-  return {
-    success: errors.length === 0;
+  return { success: errors.length === 0;
     totalRecords,
     migratedRecords,
     errors,
     duration: Date.now() - startTime
 }
+
+}}}}}}}}}}}}))

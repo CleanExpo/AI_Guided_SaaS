@@ -2,7 +2,7 @@
 export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
     try {
         const url = new URL(request.url);
         const query = url.searchParams.get('query');
@@ -12,38 +12,35 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const difficulty = url.searchParams.get('difficulty');
         
         // Define all templates
-        const allTemplates = [
-            {
-                id: 'template_1',
+        const allTemplates = [;
+            { id: 'template_1',
                 name: 'React Dashboard',
                 description: 'Modern dashboard template with React',
                 category: 'dashboard',
                 framework: 'react',
                 pricing: 'free',
                 difficulty: 'medium',
-                downloads: 1250,
+                downloads: 1250;
                 rating: 4.8
             },
-            {
-                id: 'template_2',
+            { id: 'template_2',
                 name: 'Next.js Blog',
                 description: 'Blog template built with Next.js',
                 category: 'blog',
                 framework: 'nextjs',
                 pricing: 'premium',
                 difficulty: 'easy',
-                downloads: 890,
+                downloads: 890;
                 rating: 4.6
             },
-            {
-                id: 'template_3',
+            { id: 'template_3',
                 name: 'Vue.js E-commerce',
                 description: 'E-commerce template with Vue.js',
                 category: 'ecommerce',
                 framework: 'vue',
                 pricing: 'premium',
                 difficulty: 'hard',
-                downloads: 567,
+                downloads: 567;
                 rating: 4.9
             }
         ];
@@ -55,31 +52,30 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             templates = templates.filter(template =>
                 template.name.toLowerCase().includes(query.toLowerCase()) ||
                 template.description.toLowerCase().includes(query.toLowerCase())
-            );
-        }
+            )
+}
         
         // Apply filters
         if (category) {
-            templates = templates.filter(t => t.category === category);
-        }
+            templates = templates.filter(t => t.category === category)
+}
         if (framework) {
-            templates = templates.filter(t => t.framework === framework);
-        }
+            templates = templates.filter(t => t.framework === framework)
+}
         if (pricing) {
-            templates = templates.filter(t => t.pricing === pricing);
-        }
+            templates = templates.filter(t => t.pricing === pricing)
+}
         if (difficulty) {
-            templates = templates.filter(t => t.difficulty === difficulty);
-        }
+            templates = templates.filter(t => t.difficulty === difficulty)
+}
         
-        return NextResponse.json({ 
-            success: true, 
+        return NextResponse.json({ success: true;
             templates,
             total: templates.length,
             filters: { query, category, framework, pricing, difficulty }
-        });
-    } catch (error) {
+        })
+} catch (error) {
         console.error('Templates API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500 });
-    }
+        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500 })
+}
 }

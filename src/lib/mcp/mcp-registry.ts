@@ -3,11 +3,10 @@
  * MCP Server Registry
  * Pre-configured MCP servers for common use cases
  */;
-export interface MCPServerConfig {
-  id: string,
-  name: string,
-  description: string,
-  url: string,
+export interface MCPServerConfig { id: string;
+  name: string;
+  description: string;
+  url: string;
   category: | 'development'| 'data'
     | 'automation'
     | 'ai'
@@ -18,8 +17,7 @@ export interface MCPServerConfig {
   documentation?: string
 };
 export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools;
-  {
-  id: 'github',
+  { id: 'github',
     name: 'GitHub',
     description: 'GitHub API integration for repository management',
     url: 'npx -y @modelcontextprotocol/server-github',
@@ -27,15 +25,13 @@ export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools;
     requiredEnv: ['GITHUB_TOKEN'],
     documentation: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github'
 },
-  {
-    id: 'gitlab',
+  { id: 'gitlab',
     name: 'GitLab',
     description: 'GitLab API integration for project management',
     url: 'npx -y @modelcontextprotocol/server-gitlab',
     category: 'development',
     requiredEnv: ['GITLAB_TOKEN', 'GITLAB_URL'],
-  {
-    id: 'filesystem',
+  { id: 'filesystem',
     name: 'Filesystem',
     description: 'Local filesystem operations',
     url: 'npx -y @modelcontextprotocol/server-filesystem',
@@ -43,23 +39,19 @@ export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools;
     documentation: 'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem'
 };
   // Data Tools
-  {
-    id: 'postgres',
+  { id: 'postgres',
     name: 'PostgreSQL',
     description: 'PostgreSQL database operations',
     url: 'npx -y @modelcontextprotocol/server-postgres',
     category: 'data',
     requiredEnv: ['POSTGRES_URL']
   },
-  {
-    id: 'sqlite',
+  { id: 'sqlite',
     name: 'SQLite',
     description: 'SQLite database operations',
     url: 'npx -y @modelcontextprotocol/server-sqlite',
     category: 'data'
-};
-  {
-    id: 'mysql',
+} { id: 'mysql',
     name: 'MySQL',
     description: 'MySQL database operations',
     url: 'npx -y @modelcontextprotocol/server-mysql',
@@ -67,24 +59,20 @@ export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools;
     requiredEnv: ['MYSQL_URL']
   };
   // AI & ML Tools
-  {
-    id: 'brave-search',
+  { id: 'brave-search',
     name: 'Brave Search',
     description: 'Web search using Brave Search API',
     url: 'npx -y @modelcontextprotocol/server-brave-search',
     category: 'ai',
     requiredEnv: ['BRAVE_API_KEY']
   },
-  {
-    id: 'anthropic',
+  { id: 'anthropic',
     name: 'Anthropic',
     description: 'Anthropic Claude API integration',
     url: 'npx -y @modelcontextprotocol/server-anthropic',
     category: 'ai',
     requiredEnv: ['ANTHROPIC_API_KEY']
-  };
-  {
-    id: 'openai',
+  } { id: 'openai',
     name: 'OpenAI',
     description: 'OpenAI API integration',
     url: 'npx -y @modelcontextprotocol/server-openai',
@@ -92,60 +80,50 @@ export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools;
     requiredEnv: ['OPENAI_API_KEY']
   };
   // Automation Tools
-  {
-    id: 'puppeteer',
+  { id: 'puppeteer',
     name: 'Puppeteer',
     description: 'Browser automation with Puppeteer',
     url: 'npx -y @modelcontextprotocol/server-puppeteer',
     category: 'automation'
 },
-  {
-    id: 'playwright',
+  { id: 'playwright',
     name: 'Playwright',
     description: 'Cross-browser automation',
     url: 'npx -y @modelcontextprotocol/server-playwright',
     category: 'automation'
-};
-  {
-    id: 'selenium',
+} { id: 'selenium',
     name: 'Selenium',
     description: 'Web browser automation',
     url: 'npx -y @modelcontextprotocol/server-selenium',
     category: 'automation'
 };
   // Integration Tools
-  {
-    id: 'slack',
+  { id: 'slack',
     name: 'Slack',
     description: 'Slack messaging integration',
     url: 'npx -y @modelcontextprotocol/server-slack',
     category: 'integration',
     requiredEnv: ['SLACK_TOKEN']
   },
-  {
-    id: 'discord',
+  { id: 'discord',
     name: 'Discord',
     description: 'Discord bot integration',
     url: 'npx -y @modelcontextprotocol/server-discord',
     category: 'integration',
     requiredEnv: ['DISCORD_TOKEN']
-  };
-  {
-    id: 'email',
+  } { id: 'email',
     name: 'Email',
     description: 'Email sending and receiving',
     url: 'npx -y @modelcontextprotocol/server-email',
     category: 'integration',
     requiredEnv: ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'],
-  {
-    id: 'aws',
+  { id: 'aws',
     name: 'AWS',
     description: 'Amazon Web Services integration',
     url: 'npx -y @modelcontextprotocol/server-aws',
     category: 'integration',
     requiredEnv: ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY'],
-  {
-    id: 'gcp',
+  { id: 'gcp',
     name: 'Google Cloud',
     description: 'Google Cloud Platform integration',
     url: 'npx -y @modelcontextprotocol/server-gcp',
@@ -164,27 +142,24 @@ export function getServersByCategory(
     category: MCPServerConfig['category']
 ): MCPServerConfig[] {
   return MCPServerRegistry.filter((server) => server.category === category)}
-/**
+/**;
  * Check if server environment is configured;
  */;
-export function checkServerEnvironment(server: MCPServerConfig): {
-  configured: boolean,
+export function checkServerEnvironment(server: MCPServerConfig): { configured: boolean;
     missing: string[]
 } {
   if (!server.requiredEnv || server.requiredEnv.length === 0) {
-    return { configured: true,
+    return { configured: true;
     missing: any[] }}
   const missing = server.requiredEnv.filter((envVar) => !process.env[envVar]);
-  return {
-    configured: missing.length === 0;
+  return { configured: missing.length === 0;
     missing
 }
 /**
  * Custom MCP server configurations for the project
  */;
 export const CustomMCPServers: MCPServerConfig[] = [
-  {
-  id: 'ai-guided-saas',
+  { id: 'ai-guided-saas',
     name: 'AI Guided SaaS',
     description: 'Custom MCP server for AI Guided SaaS platform',
     url: 'ws://localhost: 3001/mcp',
@@ -196,15 +171,13 @@ export const CustomMCPServers: MCPServerConfig[] = [
 3. The server will be available at, ws://localhost:3001/mcp
     `,``
   },
-  {
-    id: 'agent-orchestrator',
+  { id: 'agent-orchestrator',
     name: 'Agent Orchestrator',
     description: 'MCP server for multi-agent coordination',
     url: 'ws://localhost: 3002/mcp',
   category: 'ai',
     requiredEnv: ['OPENAI_API_KEY', 'ANTHROPIC_API_KEY'],
-  {
-    id: 'knowledge-base',
+  { id: 'knowledge-base',
     name: 'Knowledge Base',
     description: 'RAG knowledge system MCP server',
     url: 'ws://localhost: 3003/mcp',
@@ -212,12 +185,12 @@ export const CustomMCPServers: MCPServerConfig[] = [
     requiredEnv: ['VECTOR_DB_URL', 'EMBEDDING_API_KEY']], /**
  * Get all available servers (registry + custom)
  */, export function getAllServers(): MCPServerConfig[] {
-  return [...MCPServerRegistry, ...CustomMCPServers];
+  return [...MCPServerRegistry, ...CustomMCPServers]
 }
 /**
  * Server capability mappings
  */;
-export const ServerCapabilities: Record<string, string[]> = { github: [
+export const ServerCapabilities: Record<string string[]> = { github: [</string>
     'repository.create';
     'repository.read',
     'repository.update',
@@ -240,3 +213,5 @@ export const ServerCapabilities: Record<string, string[]> = { github: [
   slack: ['message.send', 'channel.list', 'user.list'],
   aws: ['s3.upload', 's3.download', 'lambda.invoke', 'ec2.list']
 }
+
+}}}}}

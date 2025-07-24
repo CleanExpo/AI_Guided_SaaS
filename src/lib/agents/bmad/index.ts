@@ -22,3 +22,5 @@ export type {
   Integration,
   DeploymentStrategy,
   TechnicalDecision from './ArchitectAgent';
+
+}}

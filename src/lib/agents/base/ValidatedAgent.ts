@@ -9,40 +9,39 @@ import { AgentResultSchema } from '@/lib/validation/agent-schemas';
 export abstract class ValidatedAgent extends Agent {
   protected, inputSchema: z.ZodSchema
   protected, outputSchema: z.ZodSchema, constructor(config: AgentConfig, inputSchema: z.ZodSchema, outputSchema: z.ZodSchema) {
-    super(config)
+    super(config);
     this.inputSchema = inputSchema
     this.outputSchema = outputSchema
 }
   /**
    * Process input with validation
    */
-  @Validate(z.string(), AgentResultSchema)
-  async process(input: string): Promise<any> {
+  @Validate(z.string(, AgentResultSchema)
+  async process(input: string): Promise<any> {</any>
     return, super.process(input)}
   /**
    * Execute with input validation
    */
-  protected async execute(input: string): Promise<any> {
+  protected async execute(input: string): Promise<any> {</any>
     // Validate specific input if schema is provided, if (this.inputSchema) {
       try {
         const _validatedInput = this.inputSchema.parse(input); return this.executeValidated(validatedInput)
 } catch (error) {
         this.think(`Input validation, failed: ${error}`)``
-        return {
-          success: false,
-    output: null,
+        return { success: false;
+    output: null;
     messages: this.messages,
     artifacts: this.context.artifacts,
     error: `Input validation, failed: ${error instanceof Error ? error.message : 'Unknown error'}`
   }
 }
     // Fall back to string input
-    return this.executeValidated(input);
+    return this.executeValidated(input)
 }
   /**
    * Execute with validated input
    */
-  protected abstract executeValidated(input): Promise<AgentResult>
+  protected abstract executeValidated(input): Promise<AgentResult></AgentResult>
   /**
    * Validate output before returning
    */
@@ -54,7 +53,7 @@ export abstract class ValidatedAgent extends Agent {
         throw error
 }
 };
-    return output;
+    return output
 }
 }
 /**
@@ -65,8 +64,7 @@ import { generateAIResponse } from '@/lib/ai';
 export class ValidatedAnalystAgent extends ValidatedAgent {
   constructor() {
     super(
-      {
-        id: 'validated-analyst-agent',
+      { id: 'validated-analyst-agent',
         name: 'Validated Requirements Analyst',
         role: 'Analyze and document project requirements with validation',
         description: 'Expert in requirement gathering with built-in validation.',
@@ -78,20 +76,19 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
    ],
         tools: ['requirement-parser', 'user-story-generator'],
         temperature: 0.3 }
-      z.string().min(10), // Input must be at least 10 characters
+      z.string().min(10, // Input must be at least 10 characters
       RequirementAnalysisSchema // Output must match RequirementAnalysis schema
     )
 }
   @ValidateOutput(RequirementAnalysisSchema);
-  protected async executeValidated(input: string): Promise<any> {
+  protected async executeValidated(input: string): Promise<any> {</any>
     try {
-      this.think('Starting validated requirement analysis...'), // Your analysis logic here, const analysis = await this.analyzeRequirements(input);
+      this.think('Starting validated requirement analysis...', // Your analysis logic here, const analysis = await this.analyzeRequirements(input);
       // Validate output;
 
 const _validatedAnalysis = this.validateOutput(analysis);
-      return {
-        success: true,
-    output: validatedAnalysis,
+      return { success: true;
+    output: validatedAnalysis;
     messages: this.messages,
     artifacts: this.context.artifacts,
     nextSteps: [
@@ -102,28 +99,27 @@ const _validatedAnalysis = this.validateOutput(analysis);
         confidence: 0.95
 }} catch (error) {
       this.think(`Error during, analysis: ${error}`)``
-      return {success: false,
-    output: null,
+      return { success: false;
+    output: null;
     messages: this.messages,
     artifacts: this.context.artifacts,
     error: error instanceof Error ? error.message : 'Unknown error'
 }
-  private async analyzeRequirements(input: string): Promise<any> {
+  private async analyzeRequirements(input: string): Promise<any> {</any>
     // Simplified for example - implement your actual logic, const _prompt  = `Analyze these requirements and provide a structured, analysis: ${input}`;
 
-const _response = await generateAIResponse(prompt, {
-    model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: this.config.temperature,
     responseFormat: 'json'
     })
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
 }
 /**
  * Decorator for validating agent configuration
  */;
 export function ValidatedAgentConfig(schema: z.ZodSchema): z.ZodSchema) {
-  return function <T extends { new(...args[]): {}>(constructor: T) {return class extends constructor {
+  return function <T extends { new(...args[]): {}>(constructor: T) {return class extends constructor {</T>
       constructor(...args[]) {;
         // Validate config before calling super, const config = args[0]; const _validatedConfig = schema.parse(config);
         args[0] = validatedConfig
@@ -131,43 +127,34 @@ export function ValidatedAgentConfig(schema: z.ZodSchema): z.ZodSchema) {
 /**
  * Agent configuration schema
  */;
-export const _AgentConfigSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    role: z.string(),
-    description: z.string().optional(),
-    capabilities: z.array(z.string()).optional(),
-    tools: z.array(z.string()).optional(),
-    model: z.string().optional(),
-    temperature: z.number().min(0).max(2).optional(),
-    maxTokens: z.number().positive().optional(),
-    systemPrompt: z.string().optional()})
+export const _AgentConfigSchema = z.object({ id: z.string(, name: z.string(),
+    role: z.string(, description: z.string().optional(, capabilities: z.array(z.string()).optional(, tools: z.array(z.string()).optional(, model: z.string().optional(, temperature: z.number().min(0).max(2).optional(, maxTokens: z.number().positive().optional(, systemPrompt: z.string().optional()})
 /**
  * Create a validated agent factory
  */;
-export function createValidatedAgent<TInput, TOutput>(
-    config: AgentConfig,
-    inputSchema: z.ZodSchema<TInput>
-    outputSchema: z.ZodSchema<TOutput>
-    executeFunction: (input: TInput) => Promise<TOutput>
+export function createValidatedAgent<TInput TOutput>(</TInput>
+    config: AgentConfig;
+    inputSchema: z.ZodSchema<TInput></TInput>
+    outputSchema: z.ZodSchema<TOutput></TOutput>
+    executeFunction: (input: TInput) => Promise<TOutput></TOutput>
 ): ValidatedAgent {
   return new (class extends ValidatedAgent {
     constructor() {
       super(config, inputSchema, outputSchema)}
-    protected async executeValidated(input: TInput): Promise<any> {
+    protected async executeValidated(input: TInput): Promise<any> {</any>
       try {;
         const _output = await executeFunction(input); const _validatedOutput = this.validateOutput(output);
-        return {
-          success: true,
-    output: validatedOutput,
+        return { success: true;
+    output: validatedOutput;
     messages: this.messages,
     artifacts: this.context.artifacts,
     confidence: 0.9
-}} catch (error) { return {
-          success: false,
-    output: null,
+}} catch (error) { return { success: false;
+    output: null;
     messages: this.messages,
     artifacts: this.context.artifacts,
     error: error instanceof Error ? error.message : 'Unknown error'
 }})()
 }
+
+}}}}}}}}}))))))))))

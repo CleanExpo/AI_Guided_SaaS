@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-      <div className="container flex h-16 items-center">
+          <div className="container flex h-16 items-center">
         <Link href="/" className="flex items-center space-x-2">
           <span className="font-bold text-xl">AI Guided SaaS</span>
         </Link>
@@ -24,14 +24,12 @@ export function Header() {
         </nav>
         
         <div className="ml-auto flex items-center space-x-4">
-          <Button variant="ghost" asChild>
+          <Button variant="ghost" asChild></Button>
             <Link href="/auth/signin">Sign In</Link>
           </Button>
           <Button asChild>
-            <Link href="/auth/signup">Sign Up</Link>
+          <Link href="/auth/signup">Sign Up</Link>
           </Button>
         </div>
-      </div>
-    </header>
-  );
+  )
 }

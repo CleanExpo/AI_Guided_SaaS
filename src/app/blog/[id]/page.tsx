@@ -9,9 +9,8 @@ import { Calendar, User, ArrowLeft, Share2, Bookmark } from 'lucide-react';
 import Link from 'next/link';
 
 // Mock blog posts data
-const blogPosts = [
-  {
-    id: '1',
+const blogPosts = [;
+  { id: '1',
     title: 'Introducing AI Guided SaaS: The Future of Development',
     content: `
       <p>We're excited to announce the launch of AI Guided SaaS, a revolutionary platform that combines the power of artificial intelligence with intuitive development tools to help you build applications faster than ever before.</p>
@@ -21,7 +20,7 @@ const blogPosts = [
       
       <h2>Key Features</h2>
       <ul>
-        <li>AI-powered code generation and completion</li>
+          <li>AI-powered code generation and completion</li>
         <li>Intelligent project scaffolding</li>
         <li>Automated testing and debugging</li>
         <li>Real-time performance optimization</li>
@@ -38,8 +37,7 @@ const blogPosts = [
     readTime: '5 min read',
     image: '/images/blog/ai-guided-saas-intro.jpg'
   },
-  {
-    id: '2',
+  { id: '2',
     title: 'Building Scalable Applications with AI Assistance',
     content: `
       <p>Scalability is a critical consideration for modern applications. With AI Guided SaaS, building scalable applications has never been easier.</p>
@@ -50,7 +48,7 @@ const blogPosts = [
       <h2>AI-Driven Scalability Solutions</h2>
       <p>Our AI analyzes your application architecture and provides recommendations for improving scalability, including: </p>
       <ul>
-        <li>Optimal database indexing strategies</li>
+          <li>Optimal database indexing strategies</li>
         <li>Caching layer implementation</li>
         <li>Load balancing configurations</li>
         <li>Microservices architecture suggestions</li>
@@ -63,8 +61,7 @@ const blogPosts = [
     readTime: '8 min read',
     image: '/images/blog/scalable-apps.jpg'
   },
-  {
-    id: '3',
+  { id: '3',
     title: 'The Rise of No-Code AI Development',
     content: `
       <p>The no-code movement is transforming how we think about software development, and AI is accelerating this transformation.</p>
@@ -74,7 +71,7 @@ const blogPosts = [
       
       <h2>Benefits of No-Code AI Development</h2>
       <ul>
-        <li>Faster time to market</li>
+          <li>Faster time to market</li>
         <li>Reduced development costs</li>
         <li>Increased accessibility for non-developers</li>
         <li>Rapid prototyping and iteration</li>
@@ -89,33 +86,31 @@ const blogPosts = [
   }
 ];
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const post = blogPosts.find(p => p.id === params.id);
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {</Metadata>
+{ blogPosts.find(p => p.id === params.id);
   if (!post) {
-    return {
-      title: 'Post Not Found',
+    return { title: 'Post Not Found',
       description: 'The requested blog post could not be found.'
-    };
-  }
+    }
+}
   
-  return {
-    title: `${post.title} - AI Guided SaaS Blog`,
+  return { title: `${post.title} - AI Guided SaaS Blog`,
     description: post.excerpt
-  };
+  }
 }
 
 export default function BlogPostPage({ params }: { params: { id: string } }) {
   const post = blogPosts.find(p => p.id === params.id);
   if (!post) {
-    notFound();
-  }
+    notFound()
+}
   
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container mx-auto px-4 max-w-4xl">
         <Link href="/blog">
           <Button variant="ghost" className="mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeft className="mr-2 h-4 w-4"   />
             Back to Blog
           </Button>
         </Link>
@@ -123,49 +118,45 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
         <article>
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-4">
-              <Badge variant="secondary">{post.category}</Badge>
+          <Badge variant="secondary">{post.category}</Badge>
               <span className="text-sm text-gray-500">{post.readTime}</span>
             </div>
             
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
             
             <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center text-sm text-gray-500">
-                <User className="h-4 w-4 mr-1" />
-                <span className="mr-3">{post.author}</span>
-                <Calendar className="h-4 w-4 mr-1" />
-                <span>{post.publishedAt}</span>
+          <div className="flex items-center text-sm text-gray-500">
+                <User className="h-4 w-4 mr-1"  />
+          <span className="mr-3">{post.author}</span>
+                <Calendar className="h-4 w-4 mr-1"  />
+          <span>{post.publishedAt}</span>
               </div>
               
               <div className="flex gap-2">
+          <Button variant="outline" size="icon"></Button>
+                  <Share2 className="h-4 w-4"  />
+          </Button>
                 <Button variant="outline" size="icon">
-                  <Share2 className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" size="icon">
-                  <Bookmark className="h-4 w-4" />
+          <Bookmark className="h-4 w-4"   />
                 </Button>
               </div>
-            </div>
-            
-            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mb-8"></div>
+        <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mb-8">
           </div>
           
           <Card>
-            <CardContent className="prose prose-lg max-w-none p-8">
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            </CardContent>
+          <CardContent className="prose prose-lg max-w-none p-8">
+              <div dangerouslySetInnerHTML={{ __html: post.content }}  />
+          </CardContent>
           </Card>
           
           <div className="mt-12 pt-8 border-t">
-            <h3 className="text-2xl font-bold mb-4">Share this article</h3>
+          <h3 className="text-2xl font-bold mb-4">Share this article</h3>
             <div className="flex gap-4">
-              <Button variant="outline">Share on Twitter</Button>
+          <Button variant="outline">Share on Twitter</Button>
               <Button variant="outline">Share on LinkedIn</Button>
               <Button variant="outline">Copy Link</Button>
             </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  );
+  )
+}
+
 }

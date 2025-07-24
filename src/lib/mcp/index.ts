@@ -3,25 +3,22 @@
  * MCP (Model Context Protocol) Module
  * Provides interfaces and utilities for multi-agent coordination
  */;
-export interface MCPMessage {
-id: string,
+export interface MCPMessage { id: string;
   type: 'request' | 'response' | 'notification' | 'error',
-  from: string,
+  from: string;
   to: string
   payload,
     timestamp: Date;
-  metadata?: Record<string, any />, export
+  metadata?: Record<string any  />, export</string>
 }
 
-interface MCPChannel {
-  id: string,
-  name: string,
+interface MCPChannel { id: string;
+  name: string;
   agents: string[],
-  created: Date,
+  created: Date;
   lastActivity: Date
 };
-export interface MCPProtocol {
-  version: string,
+export interface MCPProtocol { version: string;
   capabilities: string[],
   encoding: 'json' | 'msgpack'
 };
@@ -29,28 +26,31 @@ export class MCPError extends Error {
     constructor(message: string;
     public code: string;
     public details?) {
-    super(message), this.name = 'MCPError'
+    super(message, this.name = 'MCPError'
 }
 
 export class MCPClient {
-  private channels: Map<string, MCPChannel> = new Map(), async connect(channelId: string): Promise<any> {
+  private channels: Map<string MCPChannel> = new Map(), async connect(channelId: string): Promise<any> {</any>
     // Implementation
 }
-  async send(message: MCPMessage): Promise<any> {
+  async send(message: MCPMessage): Promise<any> {</any>
     // Implementation
 }
-  async receive(channelId: string): Promise<any> {
+  async receive(channelId: string): Promise<any> {</any>
     // Implementation
     return null}
 };
 // Memory management exports for agent coordination;
 export const _mcp__memory__create_entities = async (entities: any[]) => {
-  return { success: true, entities }};
+  return { success: true, entities }
+};
 export const _mcp__memory__add_observations = async (observations: any[]) => {
-  return { success: true, observations }};
+  return { success: true, observations }
+};
 export const _createMCPClient = () => new MCPClient();
 export const _mcp__memory__search_nodes = async (query: string) => {
-  return { success: true, nodes: any[] }};
+  return { success: true, nodes: any[] }
+};
 export default { MCPClient,
   MCPError,
   createMCPClient,
@@ -58,3 +58,5 @@ export default { MCPClient,
   mcp__memory__add_observations,
   mcp__memory__search_nodes
 }
+
+})

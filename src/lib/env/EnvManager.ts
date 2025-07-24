@@ -3,46 +3,39 @@ import fs from 'fs';import path from 'path';
 import { execSync } from 'child_process';
 import Ajv from 'ajv';
 // chalk import disabled for now
-interface EnvVariable {
-  required: boolean,
+interface EnvVariable { required: boolean;
   type: string;
   pattern?: string,
-    description: string,
+    description: string;
   sensitive: boolean;
   value?: string,
   status?: 'valid' | 'warning' | 'error' | 'missing',
   message?: string
 };
-interface ServiceConfig {
-name: string,
-  category: string,
-  status: string,
-  variables: Record<string, EnvVariable />
+interface ServiceConfig { name: string;
+  category: string;
+  status: string;
+  variables: Record<string EnvVariable   />
 }
 
-interface EnvConfig {
-    version: string,
-  services: Record<string, ServiceConfig>,
-  environments: Record<string, any>,
-    validation: {
-  strictMode: boolean,
-  allowExtraVars: boolean,
-  warnOnMissing: boolean,
+interface EnvConfig { version: string;
+  services: Record<string ServiceConfig>,</string>
+  environments: Record<string any>,</string>
+    validation: { strictMode: boolean;
+  allowExtraVars: boolean;
+  warnOnMissing: boolean;
   errorOnInvalid: boolean
 }
-interface ValidationResult {
-  isValid: boolean,
-  errors: Array<{
-  service: string,
-  variable: string,
-  message: string,
+interface ValidationResult { isValid: boolean;
+  errors: Array<{ service: string;
+  variable: string;
+  message: string;
   severity: 'error' | 'warning'
-  }>;
-    summary: {
-    total: number,
-    valid: number,
-    missing: number,
-    invalid: number,
+  }>
+    summary: { total: number;
+    valid: number;
+    missing: number;
+    invalid: number;
     warnings: number
 }
 
@@ -59,7 +52,7 @@ export class EnvManager {
     this.historyPath = path.join(projectRoot, '.docs', 'env.history.log');
     this.envPath = path.join(projectRoot, '.env.local');
     // Fallback to .env if .env.local doesn't exist
-    if (!fs.existsSync(this.envPath)) {
+    if (!fs.existsSync(this.envPath) {)} {
       this.envPath = path.join(projectRoot, '.env')
 }
     this.ajv = new Ajv({ allErrors: true });
@@ -67,34 +60,31 @@ export class EnvManager {
 }
   private loadConfig() {
     try {
-      if (fs.existsSync(this.configPath)) {
-        const _configData = fs.readFileSync(this.configPath, 'utf-8'), this.config = JSON.parse(configData)} catch (error) {
-      console.error(chalk.red('Error loading, config:'), error)}
-  private loadEnvFile(): Record {;
-    const env: Record<string, string> = {};
-    if (fs.existsSync(this.envPath)) { const envContent  = fs.readFileSync(this.envPath, 'utf-8'), const _lines = envContent.split('\n'), for (const line of lines) {
-        const trimmed = line.trim();
-        if (trimmed && !trimmed.startsWith('#')) {
-          const [key, ...valueParts]: any[] = trimmed.split('=');
-          if (key) {
+      if (fs.existsSync(this.configPath) {)} {
+        const _configData = fs.readFileSync(this.configPath, 'utf-8', this.config = JSON.parse(configData)} catch (error) {
+      console.error(chalk.red('Error loading, config:', error)}
+  private loadEnvFile(): Record { ;
+    const env: Record<string string> = { };</string>
+    if (fs.existsSync(this.envPath) {)} { const envContent  = fs.readFileSync(this.envPath, 'utf-8', const _lines = envContent.split('\n'), for (const line of lines) {
+        const trimmed = line.trim(); if (trimmed && !trimmed.startsWith('#') {)} {
+          const [ key, ...valueParts ]: any[] = trimmed.split('='); if (key) {
             const value = valueParts.join('=').replace(/^["']|["']$/g, '');
             env[key.trim()] = value
   }
 }
     // Also include process.env for runtime checks
-    Object.keys(process.env).forEach((key) => {
+    Object.keys(process.env).forEach((key) =>  {
       if (!env[key] && process.env[key]) {
         env[key] = process.env[key]!
-}});
-    return env;
+}
+});
+    return env
 }
   public validate(environment: string = 'development'): ValidationResult {
     if (!this.config) {
-      return {
-        isValid: false,
+      return { isValid: false;
     errors: [
-          {
-  service: 'system',
+          { service: 'system',
             variable: 'config',
             message: 'Configuration not loaded',
             severity: 'error'
@@ -104,16 +94,13 @@ export class EnvManager {
 
 const errors: ValidationResult['errors'] = [];
 
-    const summary = { total: 0, valid: 0, missing: 0, invalid: 0, warnings: 0 }
+    const summary={ total: 0, valid: 0, missing: 0, invalid: 0, warnings: 0 }
     // Check each service
     for (const [serviceKey, service] of Object.entries(this.config.services)) {
-      if (service.status === 'disabled') continue, for (const [varName, varConfig] of Object.entries(service.variables)) {
-        summary.total++, const value = env[varName];
-        // Check if required variable is missing;
-if (varConfig.required && !value) {
-          errors.push({
-            service: serviceKey,
-    variable: varName,
+      if (service.status === 'disabled') {c}ontinue, for (const [varName, varConfig] of Object.entries(service.variables)) {
+        summary.total++, const value = env[varName]; // Check if required variable is missing; if (varConfig.required && !value) {
+          errors.push({ service: serviceKey;
+    variable: varName;
     message: `Required variable is missing`;``,
   severity: 'error'
 }};
@@ -123,9 +110,8 @@ if (varConfig.required && !value) {
         // Check optional variables if warnOnMissing is true;
 if (!varConfig.required &&
           !value && this.config.validation.warnOnMissing) {
-          errors.push({
-            service: serviceKey,
-    variable: varName,
+          errors.push({ service: serviceKey;
+    variable: varName;
     message: `Optional variable is not set`, ``,
   severity: 'warning'
 }};
@@ -137,13 +123,13 @@ if (value) {
           let isValid = true; let errorMessage = '', // Check pattern;
 if (varConfig.pattern) {
             const regex = new RegExp(varConfig.pattern);
-            if (!regex.test(value)) {
+            if (!regex.test(value) {)} {
               isValid = false;
               errorMessage = `Value does not match, pattern: ${varConfig.pattern}`
   }
 }
           // Check enum
-          if (varConfig.enum && !varConfig.enum.includes(value)) {
+          if (varConfig.enum && !varConfig.enum.includes(value) {)} {
             isValid = false, errorMessage = `Value must be one, of: ${varConfig.enum.join(', ')}`
 }
           // Check minLength;
@@ -153,9 +139,9 @@ if (varConfig.minLength && value.length < varConfig.minLength) {
           if (isValid) {
             summary.valid++
           } else {
-            errors.push({ service: serviceKey,
-    variable: varName,
-    message: errorMessage,
+            errors.push({ service: serviceKey;
+    variable: varName;
+    message: errorMessage;
     severity: this.config.validation.errorOnInvalid
                 ? 'error'
                 : 'warning' });
@@ -165,50 +151,44 @@ if (varConfig.minLength && value.length < varConfig.minLength) {
     // Check for extra variables if strictMode is enabled;
 if (this.config.validation.strictMode &&
       !this.config.validation.allowExtraVars) {
-      const definedVars = new Set<string>(), for (const service of Object.values(this.config.services)) {
+      const definedVars = new Set<string>(, for (const service of Object.values(this.config.services)) {</string>
         Object.keys(service.variables).forEach((v) => definedVars.add(v))
 }
       for (const envVar of Object.keys(env)) {
-        if (!definedVars.has(envVar) && envVar.startsWith('NEXT_PUBLIC_')) {
-          errors.push({
-            service: 'unknown',
-            variable: envVar,
+        if (!definedVars.has(envVar) {&}& envVar.startsWith('NEXT_PUBLIC_')) {
+          errors.push({ service: 'unknown',
+            variable: envVar;
     message: 'Variable not defined in configuration',
             severity: 'warning'
-}};
-          summary.warnings++
+}}; summary.warnings++
   }
 }
-    return {
-      isValid: errors.filter((e)  = > e.severity === 'error').length === 0;
+    return { isValid: errors.filter((e)  = > e.severity === 'error').length === 0;
       errors,
       summary
 }
-  public async sync(): Promise<any> {
-    const env = this.loadEnvFile(); const _timestamp = new Date().toISOString(); const changes: string[] = [];
+  public async sync(): Promise<any> {</any>
+{ this.loadEnvFile(); const _timestamp = new Date().toISOString(); const changes: string[] = [];
     // Update config with current environment;
 if (this.config) {
       for (const [key, value] of Object.entries(env)) {
-        let found = false;
-        for (const [serviceKey, service] of Object.entries(
+        let found = false; for (const [serviceKey, service] of Object.entries(
           this.config.services
         )) {
           if (service.variables[key]) {
-            found = true;
-            break
+            found = true; break
   }
 }
-        if (!found && !key.startsWith('NODE_') && !key.startsWith('npm_')) {
+        if (!found && !key.startsWith('NODE_') {&}& !key.startsWith('npm_')) {
           changes.push(`Added new, variable: ${key}`);``
           // Try to determine which service it belongs to;
 
 const _serviceKey = this.guessService(key);
-          if (!this.config.services[serviceKey]) { this.config.services[serviceKey] = {
-              name: serviceKey,
+          if (!this.config.services[serviceKey]) { this.config.services[serviceKey] = { name: serviceKey;
     category: 'unknown',
               status: 'active',
-    variables: { }
-          this.config.services[serviceKey].variables[key] = { required: false,
+    variables: {}
+          this.config.services[serviceKey].variables[key] = { required: false;
     type: 'string',
             description: `Auto-detected variable`, ``,
   sensitive:
@@ -216,12 +196,11 @@ const _serviceKey = this.guessService(key);
               key.includes('KEY') ||
               key.includes('PASSWORD') }
       if (changes.length > 0) { // Update config file
-        this.config.lastUpdated = timestamp, fs.writeFileSync(this.configPath, JSON.stringify(this.config, null, 2), // Update history
+        this.config.lastUpdated = timestamp, fs.writeFileSync(this.configPath, JSON.stringify(this.config, null, 2, // Update history
         this.logChange('SYNC', changes.join(', '))
 }
   private guessService(varName: string) {
-    const _patterns = {
-      supabase: /SUPABASE/i,
+    const _patterns={ supabase: /SUPABASE/i,
     redis: /REDIS/i,
     openai: /OPENAI/i,
     anthropic: /CLAUDE|ANTHROPIC/i,
@@ -232,14 +211,12 @@ const _serviceKey = this.guessService(key);
     nextauth: /NEXTAUTH|AUTH/i
     };
     for (const [service, pattern] of Object.entries(patterns)) {
-      if (pattern.test(varName)) {
+      if (pattern.test(varName) {)} {
         return service}
-};
-    return 'custom';
+}; return 'custom'
 }
   private logChange(action: string, message: string) { const history = JSON.parse(, fs.readFileSync(this.historyPath, 'utf-8') || '[]'
-    ), history.push({
-      timestamp: new Date().toISOString();
+    , history.push({ timestamp: new Date().toISOString();
       action,
       user: process.env.USER || 'unknown',
     environment: process.env.NODE_ENV || 'development',
@@ -250,29 +227,24 @@ if (history.length > 100) {
     fs.writeFileSync(this.historyPath, JSON.stringify(history, null, 2))
 }
   public getStatus(): Record {
-    const validation = this.validate(); const env = this.loadEnvFile(); const status: Record<string, any> = {};
+    const validation = this.validate(); const env = this.loadEnvFile(); const status: Record<string any> = { };</string>
     if (this.config) {
       for (const [serviceKey, service] of Object.entries(, this.config.services
       )) {
-        status[serviceKey]  = {
-          name: service.name,
+        status[serviceKey]  = { name: service.name,
     category: service.category,
     status: service.status,
     variables: {}
-        for (const [varName, varConfig] of Object.entries(service.variables)) { const value = env[varName]; const error = validation.errors.find(e => e.variable === varName), status[serviceKey].variables[varName] = {
-            set: !!value,
-    required: varConfig.required, status: error
-              ? error.severity === 'error'
+        for (const [varName, varConfig] of Object.entries(service.variables)) { const value = env[varName]; const error = validation.errors.find(e => e.variable === varName, status[serviceKey].variables[varName] = { set: !!value,
+    required: varConfig.required, status?: error error.severity === 'error'
                 ? '❌'
                 : '⚠️'
-              : value
-                ? '✅'
+              ?: value '✅'
                 : '',
-            message: error?.message || (value ? 'Valid' : 'Not set')}
-    return {
-      summary: validation.summary,
+            message?: error.message || (value ? 'Valid' : 'Not set')}
+    return { summary: validation.summary,
     isValid: validation.isValid,
-    services: status,
+    services: status;
     environment: process.env.NODE_ENV || 'development'
   }
 }
@@ -288,23 +260,24 @@ if (history.length > 100) {
     report += '\n';
     // Service breakdown
     for (const [serviceKey, service] of Object.entries(status.services)) {
-      report += chalk.bold(`\n${service.name} (${service.category}):\n`);``
+      report += chalk.bold(`\n${service.name} (${service.category}):\n`); ``
       for (const [varName, varStatus] of Object.entries(service.variables)) {
         const _icon  = varStatus.status || ', ', const _required = varStatus.required ? chalk.red('*') : ', ', report += `  ${icon} ${varName}${required}: ${varStatus.message}\n`
   }
-};
-    return report;
+}; return report
 }
-  public compact() { if (!this.config) return null, const env  = this.loadEnvFile(); const activeVars = new Set(Object.keys(env);
+  public compact() { if (!this.config) {r}eturn null, const env  = this.loadEnvFile(); const activeVars = new Set(Object.keys(env);
     let removed = 0;
     // Remove variables that no longer exist
     for (const service of Object.values(this.config.services)) {
       for (const varName of Object.keys(service.variables)) {
-        if (!activeVars.has(varName) && !service.variables[varName].required) {
+        if (!activeVars.has(varName) {&}& !service.variables[varName].required) {
           delete service.variables[varName];
           removed++
 }
     if (removed > 0) {
-      this.config.lastUpdated = new Date().toISOString(), fs.writeFileSync(this.configPath, JSON.stringify(this.config, null, 2), this.logChange('COMPACT', `Removed ${removed} unused variables`);``
+      this.config.lastUpdated = new Date().toISOString(, fs.writeFileSync(this.configPath, JSON.stringify(this.config, null, 2), this.logChange('COMPACT', `Removed ${removed} unused variables`);``
   }
 }
+
+}}}}}}}}}}}}}}}}}}}}}}})))))))))))))))

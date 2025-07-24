@@ -1,8 +1,7 @@
 /* BREADCRUMB: agent.orchestration - Multi-agent system coordination */;
 import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
-export interface RequirementAnalysis {
-  functionalRequirements: string[],
+export interface RequirementAnalysis { functionalRequirements: string[],
   nonFunctionalRequirements: string[],
   constraints: string[],
   assumptions: string[],
@@ -11,20 +10,18 @@ export interface RequirementAnalysis {
   userStories: UserStory[],
   technicalConsiderations: string[]
 };
-export interface UserStory {
-  id: string,
-  title: string,
-  asA: string,
-  iWant: string,
-  soThat: string,
+export interface UserStory { id: string;
+  title: string;
+  asA: string;
+  iWant: string;
+  soThat: string;
   acceptanceCriteria: string[],
   priority: 'high' | 'medium' | 'low',
   estimatedEffort: 'small' | 'medium' | 'large'
 };
 export class AnalystAgent extends Agent {
   constructor() {
-    super({
-      id: 'analyst-agent',
+    super({ id: 'analyst-agent',
       name: 'Requirements Analyst',
       role: 'Analyze and document project requirements',
       description:
@@ -39,9 +36,9 @@ export class AnalystAgent extends Agent {
       temperature: 0.3, // Lower temperature for more consistent analysis
   }
 }
-  protected async execute(input: string): Promise<any> {
+  protected async execute(input: string): Promise<any> {</any>
     try {
-      this.think('Starting requirement analysis process...'), // Step, 1: Extract raw requirements, const _rawRequirements = await this.extractRequirements(input);
+      this.think('Starting requirement analysis process...', // Step, 1: Extract raw requirements, const _rawRequirements = await this.extractRequirements(input);
       this.observe('Extracted raw requirements', rawRequirements);
       // Step, 2: Categorize requirements;
 
@@ -50,7 +47,7 @@ const categorizedReqs =;
       this.observe('Categorized requirements', categorizedReqs);
       // Step, 3: Generate user stories;
 
-const _userStories = await this.generateUserStories(
+const _userStories = await this.generateUserStories(;
         categorizedReqs.functionalRequirements,
         // input;
       );
@@ -64,22 +61,21 @@ const _constraints = await this.identifyConstraints(input);
       this.observe('Identified constraints', constraints);
       // Step, 5: Define success criteria;
 
-const _successCriteria = await this.defineSuccessCriteria(
+const _successCriteria = await this.defineSuccessCriteria(;
         categorizedReqs.functionalRequirements,
         // userStories;
       );
       this.observe('Defined success criteria', successCriteria);
       // Step, 6: Technical considerations;
 
-const _technicalConsiderations = await this.analyzeTechnicalAspects(
+const _technicalConsiderations = await this.analyzeTechnicalAspects(;
         input,
         // categorizedReqs;
       );
       this.observe('Technical considerations', technicalConsiderations);
       // Compile final analysis;
 
-const analysis: RequirementAnalysis = {
-  functionalRequirements: categorizedReqs.functionalRequirements,
+const analysis: RequirementAnalysis={ functionalRequirements: categorizedReqs.functionalRequirements,
     nonFunctionalRequirements: categorizedReqs.nonFunctionalRequirements;
         constraints,
         assumptions: categorizedReqs.assumptions;
@@ -96,9 +92,8 @@ const analysis: RequirementAnalysis = {
       );
       this.setSharedMemory('user-stories', userStories);
       this.setSharedMemory('technical-constraints', constraints);
-      return {
-        success: true,
-    output: analysis,
+      return { success: true;
+    output: analysis;
     messages: this.messages,
     artifacts: this.context.artifacts,
     nextSteps: [
@@ -111,32 +106,30 @@ const analysis: RequirementAnalysis = {
       throw error
 }
 }
-  private async extractRequirements(input: string): Promise<any> {
-    const _prompt = `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions: Project, Description:``, ${input};
+  private async extractRequirements(input: string): Promise<any> {</any>
+{ `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions: Project, Description:``, ${input};
 Provide a comprehensive list of all requirements found.`;
 
-const response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: this.config.temperature
     }};
-    return response;
+    return response
 }
-  private async categorizeRequirements(rawRequirements: string): Promise<any> {
-    const _prompt = `Categorize the following requirements, into: ``, 1. Functional Requirements (what the system should do), 2. Non-Functional Requirements (quality attributes like performance, security, usability);
+  private async categorizeRequirements(rawRequirements: string): Promise<any> {</any>
+{ `Categorize the following requirements, into: ``, 1. Functional Requirements (what the system should do, 2. Non-Functional Requirements (quality attributes like performance, security, usability);
 3. Assumptions (things we assume to be true);
 Requirements:
 ${rawRequirements}
 Format the response as JSON with arrays for each category.`;
 
-const response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.1,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async generateUserStories(functionalReqs: string[], originalInput: string): Promise<any> {
-    const _prompt = `Based on these functional requirements and the original project description, create user stories in the standard format., ``, Functional: Requirements:;
+  private async generateUserStories(functionalReqs: string[], originalInput: string): Promise<any> {</any>
+{ `Based on these functional requirements and the original project description, create user stories in the standard format., ``, Functional: Requirements:;
 ${functionalReqs.join('\n')}
 Original: Description:
 ${originalInput}
@@ -150,8 +143,7 @@ For each user story, provide:
 - Estimated effort (small/medium/large)
 Format as JSON array of user story objects.`;
 
-const response  = await generateAIResponse(prompt, {
-      model: this.config.model,
+const response  = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.3,
     responseFormat: 'json'
 }};
@@ -163,49 +155,46 @@ const stories = JSON.parse(response);
       id: `US-${index + 1}`
     }})
 }
-  private async identifyRisks(input: string, requirements): Promise<any> {
-    const _prompt = `Identify potential risks for this project based on the requirements and description., ``, Project: Description:;
+  private async identifyRisks(input: string, requirements): Promise<any> {</any>
+{ `Identify potential risks for this project based on the requirements and description., ``, Project: Description:;
 ${input}
 Requirements: Summary:
 ${JSON.stringify(requirements, null, 2)}
 List technical risks, business risks, timeline risks, and any other concerns. Be specific and actionable.`;
 
-const response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4
     }};
     // Parse response into array
     return response.split('\n').filter((line) => line.trim().length > 0)}
-  private async identifyConstraints(input: string): Promise<any> {
-    const _prompt = `Identify all constraints mentioned or implied in this project, description: ``, ${input}
+  private async identifyConstraints(input: string): Promise<any> {</any>
+{ `Identify all constraints mentioned or implied in this project, description: ``, ${input}
 Include:
 - Technical constraints (specific technologies, platforms, versions)
 - Business constraints (budget, timeline, resources)
-- Regulatory constraints (compliance, security requirements)
+- Regulatory constraints (compliance, security requirements);
 - Operational constraints (performance, scalability needs);
 List each constraint clearly.`;
 
-const response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.2
     }};
-    return response.split('\n').filter((line) => line.trim().length > 0)}
-  private async defineSuccessCriteria(functionalReqs: string[], userStories: UserStory[]): Promise<any> {;
-    const _prompt = `Define measurable success criteria for this project based on the requirements and user stories., ``, Functional: Requirements:;
+    return response.split('\n').filter((line) => line.trim().length > 0)};
+  private async defineSuccessCriteria(functionalReqs: string[], userStories: UserStory[]): Promise<any> {;</any>
+{ `Define measurable success criteria for this project based on the requirements and user stories., ``, Functional: Requirements:;
 ${functionalReqs.join('\n')}
 Key, User: Stories:
 ${userStories
-  .slice(0, 5), .map((s) => s.title)
-  .join('\n')}
+  .slice(0, 5, .map((s) => s.title)
+  .join('\n')};
 Provide specific, measurable, achievable, relevant, and time-bound (SMART) criteria.`;
 
-const response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.3
     }};
     return response.split('\n').filter((line) => line.trim().length > 0)}
-  private async analyzeTechnicalAspects(input: string, requirements): Promise<any> {
-    const _prompt = `Analyze the technical aspects and considerations for this, project: Project, Description:``, ${input}
+  private async analyzeTechnicalAspects(input: string, requirements): Promise<any> {</any>
+{ `Analyze the technical aspects and considerations for this, project: Project, Description:``, ${input}
 Requirements:
 ${JSON.stringify(requirements, null, 2)}
 Identify:
@@ -213,12 +202,12 @@ Identify:
 - Integration points
 - Data storage needs
 - Security considerations
-- Performance requirements
+- Performance requirements;
 - Scalability needs;
 - Development complexity areas`;
 
-const response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.3
     }};
-    return response.split('\n').filter((line) => line.trim().length > 0)};
+    return response.split('\n').filter((line) => line.trim().length > 0)}
+}))))))))))))

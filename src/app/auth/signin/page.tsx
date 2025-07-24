@@ -14,26 +14,24 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleEmailSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleEmailSignIn = async (e: React.FormEvent) => { e.preventDefault();
     setIsLoading(true);
     try {
       await signIn('email', {
         email,
         callbackUrl: '/dashboard'
-      });
-    } finally {
-      setIsLoading(false);
-    }
+       };)
+} finally { setIsLoading(false)
+}
   };
 
   const handleGithubSignIn = () => {
-    signIn('github', { callbackUrl: '/dashboard' });
-  };
+    signIn('github', { callbackUrl: '/dashboard'  };)
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
+          <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Welcome Back</CardTitle>
           <p className="text-center text-gray-600">Sign in to your account</p>
@@ -41,10 +39,10 @@ export default function SignInPage() {
         <CardContent className="space-y-4">
           <form onSubmit={handleEmailSignIn} className="space-y-4">
             <Input
-              type="email"
-              placeholder="Enter your email"
+              type="email";
+              placeholder="Enter your email";
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}</Input>
               required
             />
             <Button type="submit" disabled={isLoading} className="w-full">
@@ -53,21 +51,19 @@ export default function SignInPage() {
           </form>
           
           <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t"   />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-gray-50 px-2 text-gray-500">Or continue with</span>
-            </div>
+          <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t"    />
           </div>
+            <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-gray-50 px-2 text-gray-500">Or continue with</span>
+            </div>
           
-          <Button
-            type="button"
-            variant="outline"
+          <Button type="button";
+            variant="outline";
             onClick={handleGithubSignIn}
-            className="w-full"
+            className="w-full";
           >
-            <Github className="w-4 h-4 mr-2"   />
+          <Github className="w-4 h-4 mr-2"     />
             GitHub
           </Button>
           
@@ -77,8 +73,5 @@ export default function SignInPage() {
               Sign up
             </a>
           </p>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  )
 }

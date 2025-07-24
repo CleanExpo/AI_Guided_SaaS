@@ -21,45 +21,44 @@ const handleSubmit = async (e: React.FormEvent) => {
     setError('');
 
     try {
-      const response = await fetch('/api/admin/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/admin/auth', { method: 'POST',
+        headers: { 'Content-Type': 'application/json'  },
         body: JSON.stringify({ password })
       });
 
       if (response.ok) {
-        router.push('/admin/dashboard');
-      } else {
-        setError('Invalid password');
-      }
+        router.push('/admin/dashboard')
+} else {
+        setError('Invalid password')
+}
     } catch (error) {
-      setError('Authentication failed');
-    } finally {
-      setLoading(false);
-    }
+      setError('Authentication failed')
+} finally {
+      setLoading(false)
+}
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
+          <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="flex items-center">
-            <Shield className="w-5 h-5 mr-2"   />
+            <Shield className="w-5 h-5 mr-2"     />
             Admin Login
           </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              type="password"
-              placeholder="Admin Password"
+              type="password";
+              placeholder="Admin Password";
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}</Input>
               required
             />
             {error && (
               <div className="flex items-center text-red-600 text-sm">
-                <AlertTriangle className="w-4 h-4 mr-2"   />
+          <AlertTriangle className="w-4 h-4 mr-2"     />
                 {error}
               </div>
             )}

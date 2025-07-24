@@ -12,7 +12,7 @@ let currentConfig: BackendConfig | null = null;
  */;
 export function createBackendAdapter(config: BackendConfig): BackendConfig): BackendAdapter {switch (config.type) {
     case 'supabase':
-      return new SupabaseAdapter(config), break, case 'strapi':;
+      return new SupabaseAdapter(config, break, case 'strapi':;
       return new StrapiAdapter(config);
     break;
     case 'nocodb':
@@ -28,19 +28,18 @@ break
  */;
 export function getBackendAdapter(): BackendAdapter {
   if (!currentAdapter) {
-    const config = getBackendConfig(), currentAdapter = createBackendAdapter(config)};
-  return currentAdapter;
+    const config = getBackendConfig(, currentAdapter = createBackendAdapter(config)};
+  return currentAdapter
 }
 /**
  * Set the current backend adapter
  */;
-export function setBackendAdapter(adapter: BackendAdapter): BackendAdapter) {
-  currentAdapter = adapter}
+export function setBackendAdapter(adapter: BackendAdapter): BackendAdapter) { currentAdapter = adapter}
 /**
  * Get backend configuration from environment variables
  */;
 export function getBackendConfig(): BackendConfig {
-  if (currentConfig) { return $2 };
+  if (currentConfig) { return $2  };
   // Determine backend type from environment;
 
 const _backendType = process.env.NEXT_PUBLIC_BACKEND_TYPE || 'supabase';
@@ -49,34 +48,31 @@ const _backendType = process.env.NEXT_PUBLIC_BACKEND_TYPE || 'supabase';
 break
   }
 }
-      const currentConfig = {
-        type: 'supabase',
+      const currentConfig={ type: 'supabase',
         url: process.env.NEXT_PUBLIC_SUPABASE_URL,
     apiKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 }
       // break
     case 'strapi':;
-if (!process.env.NEXT_PUBLIC_STRAPI_URL) { break, throw new Error('Strapi URL missing'), break
+if (!process.env.NEXT_PUBLIC_STRAPI_URL) { break, throw new Error('Strapi URL missing', break
   }
 }
-      const currentConfig = {
-        type: 'strapi',
+      const currentConfig={ type: 'strapi',
         url: process.env.NEXT_PUBLIC_STRAPI_URL,
     apiKey: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN
 }
       // break
     case 'nocodb':;
-if (!process.env.NEXT_PUBLIC_NOCODB_URL || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN) { break, throw new Error('NocoDB configuration missing'), break
+if (!process.env.NEXT_PUBLIC_NOCODB_URL || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN) { break, throw new Error('NocoDB configuration missing', break
   }
 }
-      const currentConfig = {
-        type: 'nocodb',
+      const currentConfig={ type: 'nocodb',
         url: process.env.NEXT_PUBLIC_NOCODB_URL,
     apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN
 }
       break, default: throw new Error(`Unsupported, backend: type, ${backendType}`)``
 }
-  return currentConfig;
+  return currentConfig
 }
 /**
  * Set backend configuration
@@ -98,15 +94,15 @@ export function getCurrentBackend(): BackendAdapter | null {
 /**
  * Utility to switch backend at runtime
  */;
-export async function switchBackend(config: BackendConfig): Promise<any> {
-  setBackendConfig(config), currentAdapter = createBackendAdapter(config); // Optionally persist the choice;
+export async function switchBackend(config: BackendConfig): Promise<any> { </any>
+  setBackendConfig(config, currentAdapter = createBackendAdapter(config); // Optionally persist the choice;
 if (typeof window !== 'undefined') {
     localStorage.setItem('backend-config', JSON.stringify(config))}
 /**
  * Load backend configuration from local storage
  */;
 export function loadBackendConfig(): BackendConfig | null {
-  if (!adminUser) { return null };
+  if (!adminUser) { return null  };
   
 const _stored = localStorage.getItem('backend-config');
   if (stored) {
@@ -115,13 +111,14 @@ const _stored = localStorage.getItem('backend-config');
       return, null
   }
 };
-  return null;
+  return null
 }
 /**
  * Initialize backend from stored config or environment
  */;
 export function initializeBackend(): BackendAdapter {
-  const _storedConfig = loadBackendConfig(), if (storedConfig) {
+  const _storedConfig = loadBackendConfig(, if (storedConfig) {
     setBackendConfig(storedConfig)};
-  return getBackendAdapter();
+  return getBackendAdapter()
 }
+)))

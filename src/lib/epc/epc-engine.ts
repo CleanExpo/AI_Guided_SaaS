@@ -1,8 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import fs from 'fs';import path from 'path';
 import { EnvManager } from '@/lib/env/EnvManager';
-interface EPCCheckResult {
-  env_check: 'pass' | 'fail' | 'warning',
+interface EPCCheckResult { env_check: 'pass' | 'fail' | 'warning',
   missing: string[],
   outdated: string[],
   invalid: string[],
@@ -34,15 +33,13 @@ export class EPCEngine {
    * @param requiredServices - Services required for this inference
    * @returns EPCCheckResult with detailed status
    */
-  async performPreflightCheck(requiredServices?: ServiceRequirements): Promise<any> {
+  async performPreflightCheck(requiredServices? null : ServiceRequirements): Promise<any> {</any>
     // Check cache
-    if (
-      this.cachedResult &&
-      Date.now() - this.lastCheckTime < this.cacheExpiry
+    if (this.cachedResult &&
+      Date.now() {-} this.lastCheckTime < this.cacheExpiry
     ) {
       return this.cachedResult}
-    const result: EPCCheckResult = {
-      env_check: 'pass',
+    const result: EPCCheckResult={ env_check: 'pass',
       missing: [] as any[],
     outdated: [] as any[],
     invalid: [] as any[],
@@ -53,14 +50,12 @@ export class EPCEngine {
     try {
       // Run validation, const validation = this.envManager.validate(); // Check for missing required variables;
 for (const error of validation.errors) {
-        if (error.severity === 'error' && error.message.includes('missing')) {
+        if (error.severity === 'error' && error.message.includes('missing') {)} {
           result.missing.push(error.variable)
-} else if (error.message.includes('match pattern')) {
+} else if (error.message.includes('match pattern') {)} {
           result.invalid.push(error.variable)}
-      // Check specific service requirements;
-if (requiredServices) {
-        const criticalMissing = this.checkServiceRequirements(, requiredServices, // validation;
-        );
+      // Check specific service requirements; if (requiredServices) {
+        const criticalMissing = this.checkServiceRequirements(, requiredServices, // validation;  );
         result.missing.push(...criticalMissing)
 }
       // Check for outdated values (compare with defaults);
@@ -88,10 +83,9 @@ if (result.missing.length > 0 || result.invalid.length > 0) {
       // Cache the result
       this.cachedResult = result;
       this.lastCheckTime = Date.now();
-      return result;
+      return result
 } catch (error) { console.error('EPC Engine, error:', error);
-        return {
-        env_check: 'fail',
+        return { env_check: 'fail',
         missing: [] as any[],
     outdated: [] as any[],
     invalid: [] as any[],
@@ -107,36 +101,34 @@ if (result.missing.length > 0 || result.invalid.length > 0) {
   private checkServiceRequirements(
 required: ServiceRequirements;
     // validation
-  ): string[] { const criticalMissing: string[]  = [], const config = JSON.parse(fs.readFileSync(this.configPath, 'utf-8'), if (required.openai) {
+  ): string[] { const criticalMissing: string[]  = [], const config = JSON.parse(fs.readFileSync(this.configPath, 'utf-8', if (required.openai) {
       const _openaiVars = Object.keys(config.services.openai.variables);
       for (const varName of openaiVars) {
         if (config.services.openai.variables[varName].required) {
-          const error = validation.errors.find(e => e.variable === varName);
-          if (error && error.severity === 'error') {
+          const error = validation.errors.find(e => e.variable === varName); if (error && error.severity === 'error') {
             criticalMissing.push(varName)}
-    if (required.anthropic) { const _claudeVars = Object.keys(config.services.anthropic.variables), for (const varName of claudeVars) {
+    if (required.anthropic) { const _claudeVars = Object.keys(config.services.anthropic.variables, for (const varName of claudeVars) {
         if (config.services.anthropic.variables[varName].required) {
-          const error = validation.errors.find(e => e.variable === varName), if (error && error.severity === 'error') {
+          const error = validation.errors.find(e => e.variable === varName, if (error && error.severity === 'error') {
             criticalMissing.push(varName)}
-    // Check other services similarly...;
-    return [...new Set(criticalMissing)]; // Remove duplicates
+    // Check other services similarly...; return [...new Set(criticalMissing)]; // Remove duplicates
 }
   /**
    * Check for outdated variables by comparing with defaults
    */
-  private async checkOutdatedVariables(): Promise<any> {
+  private async checkOutdatedVariables(): Promise<any> {</any>
     const outdated: string[] = [], try {;
       const _defaultsPath = path.join(, process.cwd();
         '.docs',
         'env.defaults.json'
       );
-      if (fs.existsSync(defaultsPath)) {
+      if (fs.existsSync(defaultsPath) {)} {
         const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8');
         // Logic to compare current values with defaults
         // This is a placeholder - implement actual comparison logic
 }} catch (error) {
       console.error('Error checking outdated, variables:', error)}
-    return outdated;
+    return outdated
 }
   /**
    * Check for mismatches between development and production configs
@@ -149,34 +141,33 @@ required: ServiceRequirements;
 const devOverrides  = envOverrides.development?.overrides || {};
 
 const prodOverrides = envOverrides.production?.overrides || {};
-      for (const key of Object.keys(devOverrides)) { if(prodOverrides[key] && devOverrides[key] !== prodOverrides[key]) {
+      for (const key of Object.keys(devOverrides)) { if (prodOverrides[key] && devOverrides[key] !== prodOverrides[key]) {
           // Check if the difference is expected (like test vs live keys)
-          if (
-            !this.isExpectedEnvironmentDifference(
+          if (!this.isExpectedEnvironmentDifference(
               key,
               devOverrides[key],
               prodOverrides[key]
-            )) {
+            ) {)} {
             mismatched.push(key)} catch (error) {
       console.error('Error checking environment, mismatches:', error)}
-    return mismatched;
+    return mismatched
 }
   /**
    * Check if environment difference is expected
    */
   private isExpectedEnvironmentDifference(
-key: string,
-    devValue: string,
+key: string;
+    devValue: string;
     prodValue: string
   ): boolean {
     // Expected differences
-    if (key === 'NEXTAUTH_URL') return true, if (
-      key.includes('STRIPE') &&
+    if (key === 'NEXTAUTH_URL') {r}eturn true, if (key.includes('STRIPE') {&}&
       devValue.includes('test') &&
       prodValue.includes('live'))
-      return true, if (key === 'REDIS_TLS' && devValue === 'false' && prodValue === 'true');
+      return true, if (key === 'REDIS_TLS' && devValue === 'false' && prodValue === 'true') {
+}
       return true;
-    return false;
+    return false
 }
   /**
    * Generate recommendations based on issues found
@@ -211,26 +202,23 @@ key: string,
       recommendations.push('Review environment-specific configurations')
 }
     // AI-specific recommendations
-    if (
-      result.missing.includes('OPENAI_API_KEY') ||
+    if (result.missing.includes('OPENAI_API_KEY') {|}|
       result.missing.includes('CLAUDE_API_KEY')) {
-      recommendations.push('AI service keys are missing - inference will fail'), recommendations.push(
+      recommendations.push('AI service keys are missing - inference will fail', recommendations.push(
         'Did you recently rotate API keys? Update .env.local'
       )}
-    return recommendations;
+    return recommendations
 }
   /**
    * Quick check method for UI components
    */
-  async quickCheck(): Promise<any> {
-    const result = await this.performPreflightCheck(), if (result.env_check === 'pass') {
+  async quickCheck(): Promise<any> {</any>
+{ await this.performPreflightCheck(, if (result.env_check === 'pass') {
       return { status: 'ready', message: 'Environment ready for inference' }} else if (result.env_check === 'warning') {
-      return {
-        status: 'warning',
+      return { status: 'warning',
         message: `${result.outdated.length + result.mismatched.length} warnings`
 }} else {
-      return {
-        status: 'error',
+      return { status: 'error',
         message: `${result.missing.length + result.invalid.length} errors`
   }
 }
@@ -240,3 +228,5 @@ key: string,
 clearCache() {
     this.cachedResult = null, this.lastCheckTime = 0
 }
+
+}}}}}}}}}}}}}}}))))))))

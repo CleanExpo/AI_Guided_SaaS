@@ -1,13 +1,11 @@
 /* BREADCRUMB: unknown - Purpose to be determined */
-export interface ProjectFormData {
-  projectType: 'api' | 'web' | 'mobile' | 'desktop' | 'fullstack' | 'web-app',
+export interface ProjectFormData { projectType: 'api' | 'web' | 'mobile' | 'desktop' | 'fullstack' | 'web-app',
   name: string,
   description: string,
   features: string[],
   technology: string,
   complexity: 'simple' | 'moderate' | 'complex'
 };
-export interface ValidationResult {
-  isValid: boolean,
-  errors: Record<string, string>
+export interface ValidationResult { isValid: boolean,
+  errors: Record<string, string></string>
 }

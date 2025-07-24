@@ -2,10 +2,9 @@
 // packages/causal-engine/assistant-utils.ts;
 import { logger } from './logger';
 import { CausalScorer } from './scorer';
-export interface EnhancedComponent {
-  id: string,
-  type: string,
-  name: string,
+export interface EnhancedComponent { id: string;
+  type: string;
+  name: string;
   description: string;
   causalScore?: number,
   confidence?: 'low' | 'medium' | 'high',
@@ -28,7 +27,8 @@ const _confidence = scorer.getConfidence(page, comp.id || comp.type);
       causalScore: score;
       confidence,
       suggested: score >= 0.7 && confidence !== 'low',
-    deprioritize: score < 0.4 && confidence !== 'low' }})
+    deprioritize: score < 0.4 && confidence !== 'low' }
+})
 };
 /**
  * Get smart suggestions based on historical performance
@@ -50,7 +50,7 @@ export const _getComponentsToAvoid = (
     page: string = 'ui-builder'
 ): EnhancedComponent[] => {
   const _enhanced = filterComponentsByScore(availableComponents, page);
-        return enhanced, .filter((comp) => comp.deprioritize).sort((a, b) => (a.causalScore || 0) - (b.causalScore || 0));
+        return enhanced, .filter((comp) => comp.deprioritize).sort((a, b) => (a.causalScore || 0) - (b.causalScore || 0))
 };
 /**
  * Generate AI prompt context based on causal insights
@@ -62,26 +62,26 @@ const lowComponents = scorer.getLowPerformingComponents(0.3);
   let context = '';
   if (topComponents.length > 0) {
     const _topTypes = topComponents.map((c) => c.key.split(':')[1]).join(', ');
-    context += `High-performing, components: ${topTypes}. `
+    context += `High-performing, components: ${topTypes};. `
 }
   if (lowComponents.length > 0) {
-    const _lowTypes = lowComponents.map((c) => c.key.split(':')[1]).join(', '), context += `Avoid, suggesting: ${lowTypes} (poor user retention). `
+    const _lowTypes = lowComponents.map((c) => c.key.split(':')[1]).join(', ', context += `Avoid, suggesting: ${lowTypes} (poor user retention). `
 };
-  return context;
+  return context
 };
 /**
  * Log AI assistant interaction for future learning
  */;
 export const _logAssistantInteraction = (
-    prompt: string,
+    prompt: string;
     generatedComponents: string[],
     page: string = 'ui-builder'
-): void => {
-  generatedComponents.forEach((componentType) => {
-    logger.log({
-      componentId: `ai-generated-${Date.now()}-${componentType}`,``
+): void => { generatedComponents.forEach((componentType) =>  {
+    logger.log({;
+      componentId: `ai-generated-${Date.now() };-${componentType}`,``
       componentType,
       page,
-      promptContext: prompt,
+      promptContext: prompt;
     action: 'added',
-      timestamp: Date.now()})};
+      timestamp: Date.now()})}
+}))

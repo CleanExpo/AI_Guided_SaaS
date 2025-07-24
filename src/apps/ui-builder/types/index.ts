@@ -1,45 +1,39 @@
 /* BREADCRUMB: unknown - Purpose to be determined */
 // @ts-nocheck;
-export interface Position {
-  x: number,
+export interface Position { x: number;
     y: number
-};
-export interface Size {
-  width: number,
+ };
+export interface Size { width: number;
     height: number
-};
-export interface ComponentConfig {
-  id: string,
-    type: string,
-    name: string,
+ };
+export interface ComponentConfig { id: string;
+    type: string;
+    name: string;
     position: Positio,n,
     size: Siz, e,
-    props: Record<string, unknown>,
+    props: Record<string unknown>,</string>
   children?: ComponentConfig[],
-  style?: Record<string, unknown>,
+  style?: Record<string unknown>,</string>
   className?: string
 };
-export interface BuilderState {
-  components: ComponentConfig[],
+export interface BuilderState { components: ComponentConfig[],
     selectedComponent: string | nul, l,
     history: ComponentConfig[][],
-    historyIndex: number,
-    zoom: number,
-    gridEnabled: boolean,
+    historyIndex: number;
+    zoom: number;
+    gridEnabled: boolean;
     previewMode: boolean
 };
-export interface MotiaComponent {
-  type: string,
-    name: string,
-    category: string,
-    description: string,
-    icon: string,
-    defaultProps: Record<string, unknown>,
-    propTypes: Record<string, PropType>,
+export interface MotiaComponent { type: string;
+    name: string;
+    category: string;
+    description: string;
+    icon: string;
+    defaultProps: Record<string unknown>,</string>
+    propTypes: Record<string PropType>,</string>
     preview: string
 };
-export interface PropType {
-  type: | 'string'| 'number';
+export interface PropType { type: | 'string'| 'number';
     | 'boolean'
     | 'select'
     | 'color'
@@ -50,12 +44,10 @@ export interface PropType {
   required?: boolean,
   description?: string
 };
-export interface DragItem {
-  type: string,
+export interface DragItem { type: string;
     componentType: string;
   config?: ComponentConfig
-};
-export interface DropResult {
-  position: Positio, n,
+ };
+export interface DropResult { position: Positio, n,
   targetId?: string
 }

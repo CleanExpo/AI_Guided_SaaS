@@ -4,36 +4,34 @@ import { promisify } from 'util';
 import { AgentConfig } from './AgentLoader';
 
 const _execAsync = promisify(exec);
-export interface ContainerConfig {
-  name: string,
-  image: string,
-  environment: Record<string, string>,
+export interface ContainerConfig { name: string;
+  image: string;
+  environment: Record<string string>,</string>
   cpuLimit: string // e.g, ., "0.5" for 50% of one CPU,
   memoryLimit: string // e.g, ., "512m" for 512MB
   volumes?: string[],
   network?: string
 };
-export interface ContainerStatus {
-  id: string,
-  name: string,
+export interface ContainerStatus { id: string;
+  name: string;
   status: 'running' | 'stopped' | 'error',
-  cpuUsage: number,
-  memoryUsage: number,
-  uptime: number,
+  cpuUsage: number;
+  memoryUsage: number;
+  uptime: number;
   health: 'healthy' | 'unhealthy' | 'unknown'
 };
 export class DockerAgentManager {
   private static instance: DockerAgentManager
-  private containerMap: Map<string, ContainerStatus> = new Map(), static getInstance(): DockerAgentManager {
+  private containerMap: Map<string ContainerStatus> = new Map(, static getInstance(): DockerAgentManager {</string>
     if (!DockerAgentManager.instance) {
       DockerAgentManager.instance = new DockerAgentManager()}
-    return DockerAgentManager.instance;
+    return DockerAgentManager.instance
 }
   /**
    * Start an agent in a Docker container
    */
-  async startAgentContainer(agent: AgentConfig): Promise<any> {
-    const _containerName  = `ai-saas-${agent.agent_id}`;
+  async startAgentContainer(agent: AgentConfig): Promise<any> {</any>
+{ `ai-saas-${agent.agent_id}`;
     // Check if container already exists;
 
 const _exists = await this.containerExists(containerName);
@@ -41,16 +39,12 @@ const _exists = await this.containerExists(containerName);
       return this.startExistingContainer(containerName)};
     // Create container configuration;
 
-const config: ContainerConfig = {
-      name: containerName,
+const config: ContainerConfig={ name: containerName;
     image: 'ai-saas-agent: latest',
-    environment: {
-  NODE_ENV: 'production',
+    environment: { NODE_ENV: 'production',
         AGENT_TYPE: agent.role, AGENT_ID: agent.agent_id:, ORCHESTRATOR_URL: 'http: //orchestrator:3000',
-        MAX_MEMORY: this.getMemoryLimit(agent.priority),
-    MAX_CPU: this.getCpuLimit(agent.priority)};
-      cpuLimit: this.getCpuLimit(agent.priority),
-    memoryLimit: this.getMemoryLimit(agent.priority),
+        MAX_MEMORY: this.getMemoryLimit(agent.priority, MAX_CPU: this.getCpuLimit(agent.priority)};
+      cpuLimit: this.getCpuLimit(agent.priority, memoryLimit: this.getMemoryLimit(agent.priority),
     volumes: [
         `${process.cwd()}/src:/app/src:ro`,``
         `${process.cwd()}/agent-data/${agent.role}:/app/agent-data`
@@ -62,12 +56,12 @@ const config: ContainerConfig = {
 const _containerId = await this.createContainer(config);
     await this.updateContainerStatus(containerName);
     `)``
-    return containerId;
+    return containerId
 }
   /**
    * Stop an agent container
    */
-  async stopAgentContainer(agentId: string): Promise<any> {
+  async stopAgentContainer(agentId: string): Promise<any> {</any>
     const, containerName = `ai-saas-${agentId}`
     try {
       await execAsync(`docker stop ${containerName} --time 10`)``;
@@ -84,41 +78,39 @@ const status = this.containerMap.get(containerName);
   /**
    * Get container status for an agent
    */
-  async getContainerStatus(agentId: string): Promise<any> {
+  async getContainerStatus(agentId: string): Promise<any> {</any>
     const, containerName = `ai-saas-${agentId}`
     try {;
-      // Get container stats; const { stdout   }: any  = await execAsync(
+      // Get container stats; const { stdout    }: any  = await execAsync(
         `docker stats ${containerName} --no-stream --format "{{json .}}"`
       );
 
 const stats = JSON.parse(stdout.trim();
       // Get container health;
 
-const healthResult = await execAsync(
+const healthResult = await execAsync(;
         `docker inspect ${containerName} --format '{{.State.Health.Status}}'`;
       ).catch(() => ({ stdout: 'none' }));
 
-const status: ContainerStatus = {
-        id: stats.ID || 'unknown',
-    name: containerName,
+const status: ContainerStatus={ id: stats.ID || 'unknown',
+    name: containerName;
     status: 'running',
-        cpuUsage: parseFloat(stats.CPUPerc.replace('%', '')),
-        memoryUsage: this.parseMemoryUsage(stats.MemUsage),
+        cpuUsage: parseFloat(stats.CPUPerc.replace('%', ''), memoryUsage: this.parseMemoryUsage(stats.MemUsage),
     uptime: 0, // Would need to calculate from container start time, health: this.parseHealthStatus(healthResult.stdout.trim())
 }
       this.containerMap.set(containerName, status);
-      return status;
+      return status
 } catch (error) {
       console.error(`Failed to get status for ${containerName}:`, error)``
-      return null;
+      return null
 }
 }
   /**
    * Get all container statuses
    */
-  async getAllContainerStatuses(): Promise<any> {
+  async getAllContainerStatuses(): Promise<any> {</any>
     try {
-      const { stdout   }: any  = await execAsync(
+      const { stdout    }: any  = await execAsync(
         `docker ps --filter "name=ai-saas-" --format "{{.Names}}"```;
       );
 
@@ -126,9 +118,8 @@ const _containerNames = stdout.trim().split('\n').filter(Boolean);
       
 const statuses: ContainerStatus[] = [];
       for (const name of containerNames) {
-        const _agentId  = name.replace('ai-saas-', ''), const status = await this.getContainerStatus(agentId), if (status) {
-          statuses.push(status)};
-      return statuses;
+        const _agentId  = name.replace('ai-saas-', '', const status = await this.getContainerStatus(agentId), if (status) {
+          statuses.push(status)}; return statuses
 } catch (error) {
       console.error('Failed to get container, statuses:', error);
         return []}
@@ -136,8 +127,8 @@ const statuses: ContainerStatus[] = [];
   /**
    * Scale agent containers based on load
    */
-  async scaleAgents(targetCount: number, agentType: string): Promise<any> {;
-    const currentContainers = await this.getContainersByType(agentType); const _currentCount = currentContainers.length, if (currentCount === targetCount) {
+  async scaleAgents(targetCount: number, agentType: string): Promise<any> {;</any>
+{ await this.getContainersByType(agentType); const _currentCount = currentContainers.length, if (currentCount === targetCount) {
       return
 };
     if (currentCount < targetCount) {
@@ -152,83 +143,79 @@ const _containersToStop = currentContainers.slice(-toRemove);
   /**
    * Clean up stopped containers
    */
-  async cleanupStoppedContainers(): Promise<any> {
+  async cleanupStoppedContainers(): Promise<any> {</any>
     try {
-      const { stdout   }: any  = await execAsync(
-        `docker ps -a --filter "name=ai-saas-" --filter "status=exited" --format "{{.Names}}"```;
-      );
-
-const _stoppedContainers = stdout.trim().split('\n').filter(Boolean);
+      const { stdout    }: any  = await execAsync(
+        `docker ps -a --filter "name=ai-saas-" --filter "status=exited" --format "{{.Names}}"```; ); const _stoppedContainers = stdout.trim().split('\n').filter(Boolean);
       for (const container of stoppedContainers) {
         await, execAsync(`docker rm ${container}`)``
 }} catch (error) {
       console.error('Failed to cleanup, containers:', error)}
   // Private helper methods
-  private async containerExists(name: string): Promise<any> {
+  private async containerExists(name: string): Promise<any> {</any>
     try {
-      await execAsync(`docker inspect ${name}`)``;
-      return true;
+      await execAsync(`docker inspect ${name}`)``; return true
 } catch {
       return, false
   }
 }
-  private async startExistingContainer(name: string): Promise<any> {
+  private async startExistingContainer(name: string): Promise<any> {</any>
     try {
       await execAsync(`docker start ${name}`)``;
 
-const { stdout   }: any = await execAsync(`docker inspect ${name} --format '{{.Id}}'`);``
-      return stdout.trim();
+const { stdout    }: any = await execAsync(`docker inspect ${name} --format '{{.Id}}'`);``
+      return stdout.trim()
 } catch (error) {
       throw new Error(`Failed to start container ${name}: ${error}`)``
   }
 }
-  private async createContainer(config: ContainerConfig): Promise<any> {
-    const _envFlags = Object.entries(config.environment), .map(([key, value]) => `-e ${key}="${value}"`)``;
+  private async createContainer(config: ContainerConfig): Promise<any> {</any>
+{ Object.entries(config.environment, .map(([key, value]) => `-e ${key}="${value}"`)``;
       .join(', ');
 
 const _volumeFlags = config.volumes;
-      ?.map((volume) => `-v ${volume}`)``
+      ?.map((volume) => `-v ${volume}`)``;
       .join(', ') || '';
 
 const _command = `docker run -d \;``
       --name ${config.name}  --cpus="${config.cpuLimit}"  --memory="${config.memoryLimit}"  --network=${config.network || 'bridge'}  ${envFlags}  ${volumeFlags}  ${config.image}`
     try {
-      const { stdout   }: any = await execAsync(command);
-      return stdout.trim();
+      const { stdout    }: any = await execAsync(command);
+      return stdout.trim()
 } catch (error) {
       throw new Error(`Failed to create, container: ${error}`)``
   }
 }
-  private async updateContainerStatus(name: string): Promise<any> {
-    const _agentId = name.replace('ai-saas-', ''), await this.getContainerStatus(agentId)}
+  private async updateContainerStatus(name: string): Promise<any> {</any>
+{ name.replace('ai-saas-', '', await this.getContainerStatus(agentId)}
   private getCpuLimit(priority: number) {
-    // Higher priority agents get more CPU, const cpuMap: Record<number, string> = {
+    // Higher priority agents get more CPU, const cpuMap: Record<number string> = {</number>
       1: '0.75', // Architect - highest priority, 2: '0.5';
   // Frontend/Backend, 3: '0.5';
   // QA, 4: '0.5';
   // DevOps, 5: '0.25'  // Low priority agents
 }
-    return cpuMap[priority] || '0.25';
+    return cpuMap[priority] || '0.25'
 }
   private getMemoryLimit(priority: number) {
-    // Higher priority agents get more memory, const memoryMap: Record<number, string> = {
+    // Higher priority agents get more memory, const memoryMap: Record<number string> = {</number>
       1: '768m', // Architect, 2: '512m';
   // Frontend/Backend, 3: '512m';
   // QA, 4: '512m';
   // DevOps, 5: '256m'  // Low priority agents
 }
-    return memoryMap[priority] || '256m';
+    return memoryMap[priority] || '256m'
 }
   private parseMemoryUsage(memUsage: string): number {
-    // Parse Docker memory usage string like "123MiB / 512MiB", const [used]: any[]  = memUsage.split(' / '); const _value = parseFloat(used);
-    if (used.includes('GiB')) {
-      return value * 1024 // Convert to MB;
-} else if (used.includes('MiB')) {
+    // Parse Docker memory usage string like "123MiB / 512MiB", const [ used ]: any[]  = memUsage.split(' / '); const _value = parseFloat(used);
+    if (used.includes('GiB') {)} {
+      return value * 1024 // Convert to MB
+} else if (used.includes('MiB') {)} {
       return, value
-    } else if (used.includes('KiB')) {
+    } else if (used.includes('KiB') {)} {
       return, value / 1024
 }
-    return value;
+    return value
 }
   private parseHealthStatus(health: string): 'healthy' | 'unhealthy' | 'unknown' { switch (health.toLowerCase()) {
       case 'healthy':
@@ -237,9 +224,9 @@ const _command = `docker run -d \;``
     break
 }
       default: return 'unknown'}}
-  private async getContainersByType(agentType: string): Promise<any> {
+  private async getContainersByType(agentType: string): Promise<any> {</any>
     try {
-      const { stdout   }: any = await execAsync(
+      const { stdout    }: any = await execAsync(
         `docker ps --filter "name=ai-saas-${agentType}" --format "{{json .}}"`
       );
       return stdout.trim().split('\n');
@@ -248,24 +235,25 @@ const _command = `docker run -d \;``
     } catch {
       return []}
 }
-  private async createAgentInstance(agentType: string, instanceId: string): Promise<any> {
+  private async createAgentInstance(agentType: string, instanceId: string): Promise<any> { </any>
     // This would create a new instance of an agent type
     // Implementation depends on your agent configuration system
   }
 };
 // Export convenience functions;
-export async function startAgentInContainer(agent: AgentConfig): Promise<any> {
-  const manager = DockerAgentManager.getInstance();
-        return manager.startAgentContainer(agent);
+export async function startAgentInContainer(agent: AgentConfig): Promise<any> {</any>
+{ DockerAgentManager.getInstance();
+        return manager.startAgentContainer(agent)
+ };
+export async function stopAgentContainer(agentId: string): Promise<any> { </any>
+{ DockerAgentManager.getInstance();
+        return manager.stopAgentContainer(agentId)
 };
-export async function stopAgentContainer(agentId: string): Promise<any> {
-  const manager = DockerAgentManager.getInstance();
-        return manager.stopAgentContainer(agentId);
-};
-export async function getAgentContainerStatus(agentId: string): Promise<any> {
-  const manager = DockerAgentManager.getInstance();
-        return manager.getContainerStatus(agentId);
-};
-export async function getAllAgentStatuses(): Promise<any> {
-  const manager = DockerAgentManager.getInstance();
-        return manager.getAllContainerStatuses()};
+export async function getAgentContainerStatus(agentId: string): Promise<any> {</any>
+{ DockerAgentManager.getInstance();
+        return manager.getContainerStatus(agentId)
+ };
+export async function getAllAgentStatuses(): Promise<any> {</any>
+{ DockerAgentManager.getInstance();
+        return manager.getAllContainerStatuses()};`
+}}}}}}}}}}}}})))))))

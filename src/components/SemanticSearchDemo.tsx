@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 export function SemanticSearchDemo() {
-  const [query, setQuery] = useState<any>('');
+  const [query, setQuery] = useState<any>([])
   const { isSearching,
     searchResults,
     context7,
@@ -17,10 +17,10 @@ export function SemanticSearchDemo() {
     searchCode,
     searchDocumentation,
     searchConversations,
-    // clearResults;
-  }: any = useSemanticSearch({ cacheResults: true });
+    // clearResults
+}: any = useSemanticSearch({ cacheResults: true });
   
-const _handleSearch = async (type?: string) => { if (!query.trim()) return null, switch (type) {
+const _handleSearch = async (type? null : string) =>  { if (!query.trim() {)} return null, switch (type) {;
       case 'code':;
       await searchCode(query); break;
       case 'docs':
@@ -32,11 +32,12 @@ const _handleSearch = async (type?: string) => { if (!query.trim()) return null,
         break;
 break,
   default: await search({ query
-}
+};
   size: 10 })
 }
-  return (<div className="w-full max-w-6xl mx-auto p-6 space-y-6"></div>
-      <Card className="p-6">
+  return (
+    <div className="w-full max-w-6xl mx-auto p-6 space-y-6">
+          <Card className="p-6">
         <h2 className="text-2xl font-bold mb-4">Semantic Search Demo</h2>
         <p className="text-muted-foreground mb-6">
           Experience the power of semantic search with context7 workflow for token optimization.
@@ -47,19 +48,18 @@ break,
 type="text";
 placeholder="Search for anything...";
 
-const value  = {query}
-            const onChange = {(e) => setQuery(e.target.value)}
-            const onKeyPress = {(e) => e.key === 'Enter' && handleSearch()}
+value={query} onChange={(e) => setQuery(e.target.value)}</Input>
+{{(e) => e.key === 'Enter' && handleSearch()};
             className="flex-1" />
         <Button
 
-const onClick = {() => handleSearch()}
-            const disabled = {isSearching || !query.trim()}
+const onClick={() => handleSearch()}</Button>
+{{isSearching || !query.trim()}
           >
             {isSearching ? (
-              <Loader2 className="h-4 w-4 animate-spin"   />
+              <Loader2 className="h-4 w-4 animate-spin"     />
             ) : (
-              <Search className="h-4 w-4"   />
+              <Search className="h-4 w-4"     />
             )}
             // Search
 </Button>
@@ -72,40 +72,40 @@ Button variant="outline" onClick={clearResults}>
         {/* Search Type Tabs */}
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="all" onClick={() => handleSearch()}>
+            <TabsTrigger value="all" onClick={() => handleSearch()}></TabsTrigger>
                     All
 </TabsTrigger>
-            <TabsTrigger value="code" onClick={() => handleSearch('code')}>
-              <Code className="h-4 w-4 mr-2"   />
+            <TabsTrigger value="code" onClick={() => handleSearch('code')}></TabsTrigger>
+              <Code className="h-4 w-4 mr-2"     />
                     Code
 </TabsTrigger>
-            <TabsTrigger value="docs" onClick={() => handleSearch('docs')}>
-              <FileText className="h-4 w-4 mr-2"   />
+            <TabsTrigger value="docs" onClick={() => handleSearch('docs')}></TabsTrigger>
+              <FileText className="h-4 w-4 mr-2"     />
                     Docs
 </TabsTrigger>
-            <TabsTrigger value="conversations" onClick={() => handleSearch('conversations')}>
-              <MessageSquare className="h-4 w-4 mr-2"   />Chats
+            <TabsTrigger value="conversations" onClick={() => handleSearch('conversations')}></TabsTrigger>
+              <MessageSquare className="h-4 w-4 mr-2"    />Chats</MessageSquare>
 </TabsTrigger>
           <TabsContent value="all" className="mt-6">
             {/* Search Results */},
     {searchResults && (div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">
-                    Results ({searchResults.total})
-</h3>;
-                  <Badge variant="secondary">
+          <h3 className="text-lg font-semibold">
+                    Results ({searchResults.total});
+</h3>
+                  <Badge variant="secondary"></Badge>
 Context7: {context7.length} chunks
 </Badge>
                 <ScrollArea className="h-[400px] rounded-md border p-4">
-                  <div className="space-y-4">
+          <div className="space-y-4">
                     {searchResults.results.map((result) => (\n    </div>
                       <Card key={result.id} className="p-4">
-                        <div className="flex items-start justify-between mb-2">
+          <div className="flex items-start justify-between mb-2">
                           <h4 className="font-medium truncate flex-1">
                             {result.id}
 </h4>
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline">{result.type}</Badge>
+          <Badge variant="outline">{result.type}</Badge>
                             <Badge>{(result.score * 100).toFixed(1)}%</Badge>
                         <p className="text-sm text-muted-foreground line-clamp-3">
                           {result.content}
@@ -126,18 +126,17 @@ Context7: {context7.length} chunks
                       Context7 - Most Relevant Content
 </h4>
                     <Card className="p-4 bg-muted/50">
-                      <ScrollArea className="h-[200px]">
+          <ScrollArea className="h-[200px]">
                         <div className="space-y-2">
                           {context7.map((chunk, index) => (\n    </div>
-                            <div, const key = {index}
+                            <div const key={index};
                               className="pb-2 border-b last:border-0";
                             >
-                              <Badge className="mb-1">Chunk {index + 1}</Badge>
-          <p className="{chunk}"   />
-        </div>
+          <Badge className="mb-1">Chunk {index + 1}</Badge>
+          <p className="{chunk}"    />
+          </div>
     ))}
       </div>
-</Card>
       )}
       </div>
       )}
@@ -145,16 +144,15 @@ Context7: {context7.length} chunks
     {/* Empty State */},
     {!searchResults && !isSearching  && (
 div className="text-center py-12">
-                <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4"   />
-          <p className="Enter a search query to find relevant content using semantic search."   />
-        </div>
+                <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4"    />
+          <p className="Enter a search query to find relevant content using semantic search."     />
     )}
 </TabsContent>
 </CardContent>
               </Card>
       {/* Information Card */}
       <Card className="p-6 bg-blue-50 dark:bg-blue-950">
-        <h3 className="text-lg font-semibold mb-2">How Context7 Works</h3>
+          <h3 className="text-lg font-semibold mb-2">How Context7 Works</h3>
         <ul className="space-y-2 text-sm">
           <li>• Semantic search understands meaning, not just keywords</li>
           <li>• Context7 returns only the 7 most relevant content chunks</li>
@@ -165,8 +163,9 @@ div className="text-center py-12">
       )
     </ul>
     </ScrollArea>
-    </ScrollArea>
     </TabsList>
     </Tabs>
     </any>
   }
+
+}}

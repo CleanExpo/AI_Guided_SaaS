@@ -5,81 +5,73 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Clock, Play } from 'lucide-react';
 
-interface Tutorial {
-  id: string;
+interface Tutorial { id: string;
   title: string;
   description: string;
   duration: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
-  completed?: boolean;
+  completed?: boolean
 }
 
-interface TutorialCardProps {
-  tutorial: Tutorial;
+interface TutorialCardProps { tutorial: Tutorial;
   isCompleted: boolean;
   isLocked: boolean;
-  onStart: (id: string) => void;
+  onStart: (id: string) => void
 }
 
-function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
-  const difficultyColors = {
-    beginner: 'bg-green-100 text-green-700',
+TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
+  const difficultyColors={ beginner: 'bg-green-100 text-green-700',
     intermediate: 'bg-yellow-100 text-yellow-700',
     advanced: 'bg-red-100 text-red-700'
   };
 
   return (
     <Card className="h-full">
-      <CardHeader>
+          <CardHeader></CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">{tutorial.title}</CardTitle>
           {isCompleted ? (
-            <CheckCircle className="w-5 h-5 text-green-600" />
-          ) : isLocked ? (
-            <Clock className="w-5 h-5 text-gray-400" />
+            <CheckCircle className="w-5 h-5 text-green-600"   />
+          ) ?: isLocked (
+            <Clock className="w-5 h-5 text-gray-400"   />
           ) : (
-            <Play className="w-5 h-5 text-orange-500" />
+            <Play className="w-5 h-5 text-orange-500"   />
           )}
         </div>
-        <Badge className={difficultyColors[tutorial.difficulty]}>
+        <Badge className={difficultyColors[tutorial.difficulty]}></Badge>
           {tutorial.difficulty}
         </Badge>
       </CardHeader>
       <CardContent>
-        <p className="text-gray-600 mb-4">{tutorial.description}</p>
+          <p className="text-gray-600 mb-4">{tutorial.description}</p>
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">{tutorial.duration}</span>
           <Button 
-            onClick={() => onStart(tutorial.id)}
+            onClick={() => onStart(tutorial.id)}</Button>
             disabled={isLocked}
             variant={isCompleted ? "outline" : "default"}
           >
-            {isCompleted ? 'Review' : isLocked ? 'Locked' : 'Start'}
+            {isCompleted ? 'Review' ?: isLocked 'Locked' : 'Start'}
           </Button>
         </div>
-      </CardContent>
-    </Card>
-  );
+  )
 }
 
-const tutorials: Tutorial[] = [
-  {
-    id: '1',
+const tutorials: Tutorial[] = [;
+  { id: '1',
     title: 'Getting Started with AI Guided SaaS',
     description: 'Learn the fundamentals of our platform and how to build your first application.',
     duration: '15 min',
     difficulty: 'beginner',
     completed: true
   },
-  {
-    id: '2',
+  { id: '2',
     title: 'Advanced Project Management',
     description: 'Master advanced features for managing complex development projects.',
     duration: '25 min',
     difficulty: 'intermediate'
   },
-  {
-    id: '3',
+  { id: '3',
     title: 'Custom Integrations',
     description: 'Build custom integrations with third-party services and APIs.',
     duration: '35 min',
@@ -88,8 +80,7 @@ const tutorials: Tutorial[] = [
 ];
 
 export default function TutorialsPage() {
-  const [userProgress] = useState({
-    completedTutorials: ['1'],
+  const [userProgress] = useState({ completedTutorials: ['1'],
     unlockedTutorials: ['1', '2']
   });
 
@@ -100,7 +91,7 @@ export default function TutorialsPage() {
 
   return (
     <div className="container mx-auto max-w-6xl py-12 px-4">
-      <div className="text-center mb-12">
+          <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Learn & Master</h1>
         <p className="text-xl text-gray-600">Interactive tutorials to help you master AI-guided development</p>
       </div>
@@ -111,16 +102,15 @@ export default function TutorialsPage() {
           const isLocked = !userProgress.unlockedTutorials.includes(tutorial.id);
           
           return (
-            <TutorialCard
-              key={tutorial.id}
+    <TutorialCard
+              key={tutorial.id};
               tutorial={tutorial}
               isCompleted={isCompleted}
               isLocked={isLocked}
               onStart={handleStartTutorial}
-            />
-          );
-        })}
+              />
+          )
+})}
       </div>
-    </div>
-  );
+  )
 }

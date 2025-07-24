@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-07-23T15:18:42.669Z",
-  "overallScore": 41,
+  "timestamp": "2025-07-24T12:18:48.984Z",
+  "overallScore": 45,
   "deploymentReady": false,
   "results": [
     {
@@ -14,7 +14,7 @@
       "category": "TypeScript",
       "check": "Type checking",
       "status": "fail",
-      "details": "18323 TypeScript errors found",
+      "details": "17483 TypeScript errors found",
       "recommendation": "Run \"npm run fix:typescript\" to fix errors systematically"
     },
     {
@@ -58,24 +58,10 @@
     },
     {
       "category": "API",
-      "check": "Endpoint /api/health",
-      "status": "fail",
-      "details": "Endpoint not accessible",
-      "recommendation": "Ensure endpoint is properly implemented"
-    },
-    {
-      "category": "API",
-      "check": "Endpoint /api/auth/session",
-      "status": "fail",
-      "details": "Endpoint not accessible",
-      "recommendation": "Ensure endpoint is properly implemented"
-    },
-    {
-      "category": "API",
-      "check": "Endpoint /api/mcp/status",
-      "status": "fail",
-      "details": "Endpoint not accessible",
-      "recommendation": "Ensure endpoint is properly implemented"
+      "check": "Endpoint testing",
+      "status": "warning",
+      "details": "Dev server not running - skipping endpoint tests",
+      "recommendation": "Run \"npm run dev\" and re-run this check"
     },
     {
       "category": "Database",
@@ -88,7 +74,7 @@
       "category": "Routing",
       "check": "Page routes",
       "status": "pass",
-      "details": "Found 51 routes"
+      "details": "Found 50 routes"
     },
     {
       "category": "Routing",
@@ -151,7 +137,7 @@
   ],
   "summary": {
     "passed": 9,
-    "failed": 8,
-    "warnings": 5
+    "failed": 5,
+    "warnings": 6
   }
 }

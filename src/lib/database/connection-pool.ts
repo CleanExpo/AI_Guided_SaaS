@@ -1,26 +1,23 @@
 /* BREADCRUMB: library - Shared library code */
 // Database Connection Pooling for AI Guided SaaS
 // Optimizes database connections and implements retry logic;
-import { createClient, SupabaseClient } from '@supabase/supabase-js';interface ConnectionPoolConfig {
-  maxConnections: number,
-  idleTimeout: number,
-  connectionTimeout: number,
-  retryAttempts: number,
+import { createClient, SupabaseClient } from '@supabase/supabase-js';interface ConnectionPoolConfig { maxConnections: number;
+  idleTimeout: number;
+  connectionTimeout: number;
+  retryAttempts: number;
   retryDelay: number
-};
-interface PooledConnection {
-  client: SupabaseClien
+ };
+interface PooledConnection { client: SupabaseClien
 t,
-    isActive: boolean,
-  lastUsed: number,
+    isActive: boolean;
+  lastUsed: number;
   connectionId: string
 }
 class DatabaseConnectionPool {
   private pool: PooledConnection[] = [], private config: ConnectionPoolConfig, private supabaseUrl: string;
   private supabaseKey: string;
-  constructor(config: Partial<ConnectionPoolConfig> = {}) {
-    this.config = {
-      maxConnections: config.maxConnections || 10,
+  constructor(config: Partial<ConnectionPoolConfig> = {}) {</ConnectionPoolConfig>
+    this.config={ maxConnections: config.maxConnections || 10,
     idleTimeout: config.idleTimeout || 30000, // 30 seconds, connectionTimeout: config.connectionTimeout || 5000, // 5 seconds, retryAttempts: config.retryAttempts || 3,
     retryDelay: config.retryDelay || 1000; // 1 second
     };
@@ -34,18 +31,14 @@ class DatabaseConnectionPool {
     this.startCleanupInterval()
 }
   private initializePool() {
-    for (let i = 0, i < Math.min(3, this.config.maxConnections), i++) {
+    for (let i = 0, i < Math.min(3, this.config.maxConnections, i++) {
       this.createConnection()}
   private createConnection(): PooledConnection {
-    const _connectionId  = `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-
-const _client = createClient(this.supabaseUrl, this.supabaseKey, {
-      auth: { persistSession: false },
+    const _connectionId  = `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`; const _client = createClient(this.supabaseUrl, this.supabaseKey, { auth: { persistSession: false },
     db: { schema: 'public' },
     global: { headers: {
-          'x-connection-id': connectionId), const connection: PooledConnection  = {
-      client, isActive: false, lastUsed: Date.now(), connectionId, this.pool.push(connection);
-        return connection }
+          'x-connection-id': connectionId, const connection: PooledConnection={
+      client, isActive: false, lastUsed: Date.now(), connectionId, this.pool.push(connection); return connection }
   private startCleanupInterval() {
     setInterval(() => {
       this.cleanupIdleConnections()}, this.config.idleTimeout / 2)
@@ -55,12 +48,12 @@ const _client = createClient(this.supabaseUrl, this.supabaseKey, {
 
 const shouldRemove =;
         isIdle && !connection.isActive && this.pool.length > minConnections;
-      if (shouldRemove) { }
-      return !shouldRemove;
+      if (shouldRemove) {};
+      return !shouldRemove
 })
 }
-  async getConnection(): Promise<any> {
-    // Try to find an available connection; let connection = this.pool.find(conn => !conn.isActive), // If no available connection and we haven't reached max, create a new one;
+  async getConnection(): Promise<any> {</any>
+    // Try to find an available connection; let connection = this.pool.find(conn => !conn.isActive, // If no available connection and we haven't reached max, create a new one;
 if (!connection && this.pool.length < this.config.maxConnections) {
       connection = this.createConnection()
 }
@@ -70,33 +63,33 @@ if (!connection) {
     // Mark as active and update last used time
     connection.isActive = true;
     connection.lastUsed = Date.now();
-    return connection;
+    return connection
 }
-  private async waitForAvailableConnection(): Promise<any> {
-    return new Promise((resolve, reject) => {
+  private async waitForAvailableConnection(): Promise<any> { </any>
+    return new Promise((resolve, reject) =>  {
       const _timeout  = setTimeout(() => {
-        reject(new Error('Connection, timeout: No available connections'));
-      }, this.config.connectionTimeout);
+        reject(new Error('Connection, timeout: No available connections'))
+ }, this.config.connectionTimeout);
 
 const _checkForConnection = (): void => {
-        const connection = this.pool.find(conn => !conn.isActive), if (connection) {;
+        const connection = this.pool.find(conn => !conn.isActive, if (connection) {;
           clearTimeout(timeout); resolve(connection)
-} else {
+}; else {
     setTimeout(checkForConnection, 100)}
       checkForConnection()
 })
 }
   releaseConnection(connection: PooledConnection) {
     connection.isActive = false, connection.lastUsed = Date.now()}
-  async executeWithRetry<T>(
-operation: (client: SupabaseClient) => Promise<T>
+  async executeWithRetry<T>(</T>
+operation: (client: SupabaseClient) => Promise<T></T>
     retryCount = 0;
-  ): Promise<any> {
-    const connection = await this.getConnection(), try {;
+  ): Promise<any> {</any>
+{ await this.getConnection(, try {;
       const _result = await operation(connection.client); this.releaseConnection(connection);
-      return result;
+      return result
 } catch (error) {
-      this.releaseConnection(connection), if (retryCount < this.config.retryAttempts) {
+      this.releaseConnection(connection, if (retryCount < this.config.retryAttempts) {
         console.warn(
           `Operation failed, retrying (${retryCount + 1}/${this.config.retryAttempts}):`,``
           // error
@@ -105,14 +98,13 @@ operation: (client: SupabaseClient) => Promise<T>
 
 const _delay = this.config.retryDelay * Math.pow(2, retryCount);
         await new Promise(resolve => setTimeout(resolve, delay);
-        return this.executeWithRetry(operation, retryCount + 1);
+        return this.executeWithRetry(operation, retryCount + 1)
 }
       throw error
 }
 }
   getPoolStats() {
-    return {
-      totalConnections: this.pool.length,
+    return { totalConnections: this.pool.length,
     activeConnections: this.pool.filter((conn) => conn.isActive).length,
     idleConnections: this.pool.filter((conn) => !conn.isActive).length,
     maxConnections: this.config.maxConnections,
@@ -120,36 +112,36 @@ const _delay = this.config.retryDelay * Math.pow(2, retryCount);
           this.config.maxConnections) *
         100
 }
-  async healthCheck(): Promise<any> {
-    try {
-      const connection  = await this.getConnection(); const { error   }: any = await connection.client;
+  async healthCheck(): Promise<any> {</any>
+    try {;
+      const connection  = await this.getConnection(); const { error    }: any = await connection.client;
         .from('research_projects');
         .select('count');
         .limit(1);
       this.releaseConnection(connection);
-      return !error;
+      return !error
 } catch (error) {
       console.error('Database health check, failed:', error);
         return false}
 }
   destroy() {
-    this.pool.forEach(() => {
-      // Supabase client doesn't have explicit close method
-      // but we can clear the pool;
-    });
+    this.pool.forEach(() =>  {
+      // Supabase client doesn't have explicit close method;
+      // but we can clear the pool
+};);
     this.pool = []
   }
 }
 // Singleton instance;
 let poolInstance: DatabaseConnectionPool | null = null;
-export function getConnectionPool(): DatabaseConnectionPool {
-  if (!poolInstance) {
+export function getConnectionPool(): DatabaseConnectionPool { if (!poolInstance) {
     poolInstance = new DatabaseConnectionPool()}
-  return poolInstance;
+  return poolInstance
 };
 export function createConnectionPool(
-  config?: Partial<ConnectionPoolConfig>): Partial<ConnectionPoolConfig>): DatabaseConnectionPool {
-  return new DatabaseConnectionPool(config);
-};
+  config? null : Partial<ConnectionPoolConfig>): Partial<ConnectionPoolConfig>): DatabaseConnectionPool {</ConnectionPoolConfig>
+  return new DatabaseConnectionPool(config)
+ };
 export type { ConnectionPoolConfig, PooledConnection };
-export { DatabaseConnectionPool };
+export { DatabaseConnectionPool }
+}}}}}}}}))))))

@@ -1,0 +1,882 @@
+{
+  "totalErrors": 29927,
+  "errorsByCode": {
+    "TS17008": {
+      "code": "TS17008",
+      "count": 198,
+      "files": {},
+      "examples": [
+        "src/app/about/page.tsx: JSX element 'div' has no corresponding closing tag.",
+        "src/app/about/page.tsx: JSX element 'div' has no corresponding closing tag.",
+        "src/app/about/page.tsx: JSX element 'div' has no corresponding closing tag."
+      ]
+    },
+    "TS1381": {
+      "code": "TS1381",
+      "count": 243,
+      "files": {},
+      "examples": [
+        "src/app/about/page.tsx: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+        "src/app/admin/causal/page.tsx: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?",
+        "src/app/admin/page.tsx: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
+      ]
+    },
+    "TS1005": {
+      "code": "TS1005",
+      "count": 12889,
+      "files": {},
+      "examples": [
+        "src/app/about/page.tsx: '</' expected.",
+        "src/app/admin-direct/page.tsx: ',' expected.",
+        "src/app/admin-direct/page.tsx: ')' expected."
+      ]
+    },
+    "TS1136": {
+      "code": "TS1136",
+      "count": 1027,
+      "files": {},
+      "examples": [
+        "src/app/admin-direct/page.tsx: Property assignment expected.",
+        "src/app/admin/dashboard/page.tsx: Property assignment expected.",
+        "src/app/admin/login/page.tsx: Property assignment expected."
+      ]
+    },
+    "TS1003": {
+      "code": "TS1003",
+      "count": 1043,
+      "files": {},
+      "examples": [
+        "src/app/admin-direct/page.tsx: Identifier expected.",
+        "src/app/admin-direct/page.tsx: Identifier expected.",
+        "src/app/admin/login/page.tsx: Identifier expected."
+      ]
+    },
+    "TS17002": {
+      "code": "TS17002",
+      "count": 895,
+      "files": {},
+      "examples": [
+        "src/app/admin-direct/page.tsx: Expected corresponding JSX closing tag for 'div'.",
+        "src/app/admin-direct/page.tsx: Expected corresponding JSX closing tag for 'form'.",
+        "src/app/admin-direct/page.tsx: Expected corresponding JSX closing tag for 'CardContent'."
+      ]
+    },
+    "TS1382": {
+      "code": "TS1382",
+      "count": 356,
+      "files": {},
+      "examples": [
+        "src/app/admin-direct/page.tsx: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+        "src/app/admin-direct/page.tsx: Unexpected token. Did you mean `{'>'}` or `&gt;`?",
+        "src/app/admin/login/page.tsx: Unexpected token. Did you mean `{'>'}` or `&gt;`?"
+      ]
+    },
+    "TS1109": {
+      "code": "TS1109",
+      "count": 2767,
+      "files": {},
+      "examples": [
+        "src/app/admin-direct/page.tsx: Expression expected.",
+        "src/app/admin-direct/page.tsx: Expression expected.",
+        "src/app/admin-direct/page.tsx: Expression expected."
+      ]
+    },
+    "TS2657": {
+      "code": "TS2657",
+      "count": 485,
+      "files": {},
+      "examples": [
+        "src/app/admin/agent-monitor/page.tsx: JSX expressions must have one parent element.",
+        "src/app/admin/analytics/page.tsx: JSX expressions must have one parent element.",
+        "src/app/admin/mcp/page.tsx: JSX expressions must have one parent element."
+      ]
+    },
+    "TS1128": {
+      "code": "TS1128",
+      "count": 4910,
+      "files": {},
+      "examples": [
+        "src/app/admin/agent-monitor/page.tsx: Declaration or statement expected.",
+        "src/app/admin/agent-monitor/page.tsx: Declaration or statement expected.",
+        "src/app/admin/agent-monitor/page.tsx: Declaration or statement expected."
+      ]
+    },
+    "TS1135": {
+      "code": "TS1135",
+      "count": 789,
+      "files": {},
+      "examples": [
+        "src/app/admin/analytics/page.tsx: Argument expression expected.",
+        "src/app/admin/debug/page.tsx: Argument expression expected.",
+        "src/app/api/admin/route.ts: Argument expression expected."
+      ]
+    },
+    "TS1137": {
+      "code": "TS1137",
+      "count": 111,
+      "files": {},
+      "examples": [
+        "src/app/admin/mcp/page.tsx: Expression or comma expected.",
+        "src/app/analytics/page.tsx: Expression or comma expected.",
+        "src/app/api-docs/page.tsx: Expression or comma expected."
+      ]
+    },
+    "TS1110": {
+      "code": "TS1110",
+      "count": 705,
+      "files": {},
+      "examples": [
+        "src/app/api/admin/analytics/route.ts: Type expected.",
+        "src/app/api/admin/auth/login/route.ts: Type expected.",
+        "src/app/api/admin/debug/route.ts: Type expected."
+      ]
+    },
+    "TS1434": {
+      "code": "TS1434",
+      "count": 1350,
+      "files": {},
+      "examples": [
+        "src/app/api/auth/[...nextauth]/options.ts: Unexpected keyword or identifier.",
+        "src/app/api/auth/[...nextauth]/options.ts: Unexpected keyword or identifier.",
+        "src/app/api/config/route.ts: Unexpected keyword or identifier."
+      ]
+    },
+    "TS1180": {
+      "code": "TS1180",
+      "count": 31,
+      "files": {},
+      "examples": [
+        "src/app/api/visual/generate/route.ts: Property destructuring pattern expected.",
+        "src/components/AdvancedCodeEditor.tsx: Property destructuring pattern expected.",
+        "src/components/ui/button-enhanced.tsx: Property destructuring pattern expected."
+      ]
+    },
+    "TS2809": {
+      "code": "TS2809",
+      "count": 8,
+      "files": {},
+      "examples": [
+        "src/app/api/visual/generate/route.ts: Declaration or statement expected. This '=' follows a block of statements, so if you intended to write a destructuring assignment, you might need to wrap the whole assignment in parentheses.",
+        "src/components/knowledge/RAGKnowledgeBase.tsx: Declaration or statement expected. This '=' follows a block of statements, so if you intended to write a destructuring assignment, you might need to wrap the whole assignment in parentheses.",
+        "src/lib/admin-queries.ts: Declaration or statement expected. This '=' follows a block of statements, so if you intended to write a destructuring assignment, you might need to wrap the whole assignment in parentheses."
+      ]
+    },
+    "TS1472": {
+      "code": "TS1472",
+      "count": 119,
+      "files": {},
+      "examples": [
+        "src/app/api/visual/generate/route.ts: 'catch' or 'finally' expected.",
+        "src/components/admin/AdminPanel.tsx: 'catch' or 'finally' expected.",
+        "src/components/admin/AdminPanel.tsx: 'catch' or 'finally' expected."
+      ]
+    },
+    "TS1134": {
+      "code": "TS1134",
+      "count": 37,
+      "files": {},
+      "examples": [
+        "src/app/projects/[id]/editor/page.tsx: Variable declaration expected.",
+        "src/apps/ui-builder/components/CodeViewer.tsx: Variable declaration expected.",
+        "src/apps/ui-builder/utils/exportProject.ts: Variable declaration expected."
+      ]
+    },
+    "TS1130": {
+      "code": "TS1130",
+      "count": 22,
+      "files": {},
+      "examples": [
+        "src/app/status/page.tsx: 'case' or 'default' expected.",
+        "src/apps/ui-builder/utils/generateCode.ts: 'case' or 'default' expected.",
+        "src/components/admin/AdminDashboard.tsx: 'case' or 'default' expected."
+      ]
+    },
+    "TS1435": {
+      "code": "TS1435",
+      "count": 214,
+      "files": {},
+      "examples": [
+        "src/apps/ui-builder/components/CodeViewer.tsx: Unknown keyword or identifier. Did you mean 'export'?",
+        "src/apps/ui-builder/components/ComponentPropsEditor.tsx: Unknown keyword or identifier. Did you mean 'return'?",
+        "src/components/admin/AdminDashboard.tsx: Unknown keyword or identifier. Did you mean 'return'?"
+      ]
+    },
+    "TS1161": {
+      "code": "TS1161",
+      "count": 604,
+      "files": {},
+      "examples": [
+        "src/apps/ui-builder/components/ComponentPropsEditor.tsx: Unterminated regular expression literal.",
+        "src/apps/ui-builder/store/useBuilderStore.ts: Unterminated regular expression literal.",
+        "src/apps/ui-builder/utils/generateCode.ts: Unterminated regular expression literal."
+      ]
+    },
+    "TS1131": {
+      "code": "TS1131",
+      "count": 44,
+      "files": {},
+      "examples": [
+        "src/apps/ui-builder/components/ComponentRenderer.tsx: Property or signature expected.",
+        "src/apps/ui-builder/types/index.ts: Property or signature expected.",
+        "src/components/ClientRequirementsCapture.tsx: Property or signature expected."
+      ]
+    },
+    "TS1011": {
+      "code": "TS1011",
+      "count": 359,
+      "files": {},
+      "examples": [
+        "src/apps/ui-builder/store/useBuilderStore.ts: An element access expression should take an argument.",
+        "src/apps/ui-builder/types/index.ts: An element access expression should take an argument.",
+        "src/apps/ui-builder/types/index.ts: An element access expression should take an argument."
+      ]
+    },
+    "TS1129": {
+      "code": "TS1129",
+      "count": 21,
+      "files": {},
+      "examples": [
+        "src/apps/ui-builder/store/useBuilderStore.ts: Statement expected.",
+        "src/apps/ui-builder/store/useBuilderStore.ts: Statement expected.",
+        "src/apps/ui-builder/store/useBuilderStore.ts: Statement expected."
+      ]
+    },
+    "TS1127": {
+      "code": "TS1127",
+      "count": 153,
+      "files": {},
+      "examples": [
+        "src/components/admin/AdminDashboard.tsx: Invalid character.",
+        "src/components/admin/AdminPanel.tsx: Invalid character.",
+        "src/components/admin/AdminPanel.tsx: Invalid character."
+      ]
+    },
+    "TS1138": {
+      "code": "TS1138",
+      "count": 135,
+      "files": {},
+      "examples": [
+        "src/components/admin/SystemResourceMonitor.tsx: Parameter declaration expected.",
+        "src/components/AdvancedCodeEditor.tsx: Parameter declaration expected.",
+        "src/components/AdvancedCodeEditor.tsx: Parameter declaration expected."
+      ]
+    },
+    "TS1160": {
+      "code": "TS1160",
+      "count": 16,
+      "files": {},
+      "examples": [
+        "src/components/admin/SystemResourceMonitor.tsx: Unterminated template literal.",
+        "src/components/AIChat.tsx: Unterminated template literal.",
+        "src/components/DevelopmentWorkflow.tsx: Unterminated template literal."
+      ]
+    },
+    "TS1389": {
+      "code": "TS1389",
+      "count": 100,
+      "files": {},
+      "examples": [
+        "src/components/AIChat.tsx: 'if' is not allowed as a variable declaration name.",
+        "src/components/backend/BackendSelector.tsx: 'return' is not allowed as a variable declaration name.",
+        "src/components/collaboration/CollaborationDashboard.tsx: 'if' is not allowed as a variable declaration name."
+      ]
+    },
+    "TS1359": {
+      "code": "TS1359",
+      "count": 14,
+      "files": {},
+      "examples": [
+        "src/components/AIChatWithSemantic.tsx: Identifier expected. 'null' is a reserved word that cannot be used here.",
+        "src/components/builder/NoCodeBuilder.tsx: Identifier expected. 'null' is a reserved word that cannot be used here.",
+        "src/components/collaboration/CollaborationWorkspace.tsx: Identifier expected. 'null' is a reserved word that cannot be used here."
+      ]
+    },
+    "TS1228": {
+      "code": "TS1228",
+      "count": 2,
+      "files": {},
+      "examples": [
+        "src/components/collaboration/CollaborationWorkspace.tsx: A type predicate is only allowed in return type position for functions and methods.",
+        "src/components/dashboard/EnterpriseDashboard.tsx: A type predicate is only allowed in return type position for functions and methods."
+      ]
+    },
+    "TS1144": {
+      "code": "TS1144",
+      "count": 42,
+      "files": {},
+      "examples": [
+        "src/components/dashboard/EnterpriseDashboard.tsx: '{' or ';' expected.",
+        "src/components/EnvVariableEditor.tsx: '{' or ';' expected.",
+        "src/hooks/useMCP.ts: '{' or ';' expected."
+      ]
+    },
+    "TS1351": {
+      "code": "TS1351",
+      "count": 1,
+      "files": {},
+      "examples": [
+        "src/components/EnhancedUIGenerator.tsx: An identifier or keyword cannot immediately follow a numeric literal."
+      ]
+    },
+    "TS1068": {
+      "code": "TS1068",
+      "count": 88,
+      "files": {},
+      "examples": [
+        "src/components/ErrorBoundary.tsx: Unexpected token. A constructor, method, accessor, or property was expected.",
+        "src/components/ErrorBoundary.tsx: Unexpected token. A constructor, method, accessor, or property was expected.",
+        "src/lib/admin-queries.ts: Unexpected token. A constructor, method, accessor, or property was expected."
+      ]
+    },
+    "TS1002": {
+      "code": "TS1002",
+      "count": 20,
+      "files": {},
+      "examples": [
+        "src/components/FeedbackWidget.tsx: Unterminated string literal.",
+        "src/components/InferenceSafeMode.tsx: Unterminated string literal.",
+        "src/components/InferenceSafeMode.tsx: Unterminated string literal."
+      ]
+    },
+    "TS1443": {
+      "code": "TS1443",
+      "count": 54,
+      "files": {},
+      "examples": [
+        "src/components/ide/KiroProjectSetup.tsx: Module declaration names may only use ' or \" quoted strings.",
+        "src/components/ide/KiroProjectSetup.tsx: Module declaration names may only use ' or \" quoted strings.",
+        "src/lib/agents/AgentCoordinator.ts: Module declaration names may only use ' or \" quoted strings."
+      ]
+    },
+    "TS1146": {
+      "code": "TS1146",
+      "count": 3,
+      "files": {},
+      "examples": [
+        "src/components/ide/KiroProjectSetup.tsx: Declaration expected.",
+        "src/components/ide/KiroProjectSetup.tsx: Declaration expected.",
+        "src/lib/agents/base/ValidatedAgent.ts: Declaration expected."
+      ]
+    },
+    "TS1145": {
+      "code": "TS1145",
+      "count": 2,
+      "files": {},
+      "examples": [
+        "src/components/ui/toast.tsx: '{' or JSX element expected.",
+        "src/components/ui/toast.tsx: '{' or JSX element expected."
+      ]
+    },
+    "TS1139": {
+      "code": "TS1139",
+      "count": 14,
+      "files": {},
+      "examples": [
+        "src/hooks/useKiroIDE.ts: Type parameter declaration expected.",
+        "src/hooks/useMCP.ts: Type parameter declaration expected.",
+        "src/hooks/useN8nAutomation.ts: Type parameter declaration expected."
+      ]
+    },
+    "TS1442": {
+      "code": "TS1442",
+      "count": 47,
+      "files": {},
+      "examples": [
+        "src/lib/admin-auth.ts: Expected '=' for property initializer.",
+        "src/lib/admin-auth.ts: Expected '=' for property initializer.",
+        "src/lib/agents/AgentCommunication.ts: Expected '=' for property initializer."
+      ]
+    },
+    "TS1441": {
+      "code": "TS1441",
+      "count": 1,
+      "files": {},
+      "examples": [
+        "src/lib/analytics.ts: Cannot start a function call in a type annotation."
+      ]
+    },
+    "TS1181": {
+      "code": "TS1181",
+      "count": 2,
+      "files": {},
+      "examples": [
+        "src/lib/epc/inference-telemetry.ts: Array element destructuring pattern expected.",
+        "src/lib/roadmap/RoadmapValidator.ts: Array element destructuring pattern expected."
+      ]
+    },
+    "TS2427": {
+      "code": "TS2427",
+      "count": 1,
+      "files": {},
+      "examples": [
+        "src/lib/ide/kiro-client.ts: Interface name cannot be ' | '."
+      ]
+    },
+    "TS1357": {
+      "code": "TS1357",
+      "count": 4,
+      "files": {},
+      "examples": [
+        "src/lib/production-logger.ts: An enum member name must be followed by a ',', '=', or '}'.",
+        "src/lib/production-logger.ts: An enum member name must be followed by a ',', '=', or '}'.",
+        "src/lib/production-logger.ts: An enum member name must be followed by a ',', '=', or '}'."
+      ]
+    },
+    "TS1185": {
+      "code": "TS1185",
+      "count": 1,
+      "files": {},
+      "examples": [
+        "tests/simulation/client-simulation-runner.ts: Merge conflict marker encountered."
+      ]
+    }
+  },
+  "errorsByFile": {
+    "src/app/about/page.tsx": 7,
+    "src/app/admin-direct/page.tsx": 15,
+    "src/app/admin/agent-monitor/page.tsx": 18,
+    "src/app/admin/analytics/page.tsx": 16,
+    "src/app/admin/causal/page.tsx": 3,
+    "src/app/admin/dashboard/page.tsx": 18,
+    "src/app/admin/debug/page.tsx": 4,
+    "src/app/admin/login/page.tsx": 17,
+    "src/app/admin/mcp/page.tsx": 36,
+    "src/app/admin/page.tsx": 7,
+    "src/app/admin/performance/page.tsx": 3,
+    "src/app/analytics/page.tsx": 20,
+    "src/app/api-docs/[slug]/page.tsx": 21,
+    "src/app/api-docs/page.tsx": 30,
+    "src/app/api/admin/analytics/route.ts": 1,
+    "src/app/api/admin/auth/login/route.ts": 3,
+    "src/app/api/admin/debug/route.ts": 2,
+    "src/app/api/admin/direct-auth/route.ts": 2,
+    "src/app/api/admin/route.ts": 4,
+    "src/app/api/admin/stats/route.ts": 2,
+    "src/app/api/admin/users/[id]/route.ts": 5,
+    "src/app/api/admin/users/route.ts": 5,
+    "src/app/api/agent-chat/route.ts": 4,
+    "src/app/api/agents/pulse-config/route.ts": 2,
+    "src/app/api/agents/pulse-status/route.ts": 4,
+    "src/app/api/analytics/route.ts": 2,
+    "src/app/api/auth/[...nextauth]/options.ts": 26,
+    "src/app/api/auth/register/route.ts": 8,
+    "src/app/api/auth/session/route.ts": 4,
+    "src/app/api/backend-example/route.ts": 22,
+    "src/app/api/collaboration/rooms/route.ts": 12,
+    "src/app/api/config/route.ts": 12,
+    "src/app/api/cycle-detection/route.ts": 6,
+    "src/app/api/email/test/route.ts": 2,
+    "src/app/api/env/status/route.ts": 2,
+    "src/app/api/feedback/route.ts": 14,
+    "src/app/api/health/route.ts": 10,
+    "src/app/api/mcp/status/route.ts": 8,
+    "src/app/api/n8n/execute/route.ts": 20,
+    "src/app/api/n8n/webhook/route.ts": 10,
+    "src/app/api/n8n/workflows/route.ts": 26,
+    "src/app/api/requirements/process/route.ts": 16,
+    "src/app/api/roadmap/validate/route.ts": 14,
+    "src/app/api/semantic/index/route.ts": 10,
+    "src/app/api/semantic/search/route.ts": 7,
+    "src/app/api/support/chat/route.ts": 16,
+    "src/app/api/templates/route.ts": 29,
+    "src/app/api/tutorials/progress/route.ts": 12,
+    "src/app/api/validated-chat/route.ts": 16,
+    "src/app/api/visual/analyze/route.ts": 7,
+    "src/app/api/visual/generate/route.ts": 10,
+    "src/app/api/visual/upload/route.ts": 7,
+    "src/app/api/webhooks/stripe/route.ts": 9,
+    "src/app/auth/signin/page.tsx": 15,
+    "src/app/auth/signup/page.tsx": 18,
+    "src/app/blog/[id]/page.tsx": 45,
+    "src/app/blog/page.tsx": 32,
+    "src/app/builder/no-code/page.tsx": 2,
+    "src/app/builder/pro-code/page.tsx": 2,
+    "src/app/collaborate/dashboard/page.tsx": 13,
+    "src/app/collaborate/page.tsx": 66,
+    "src/app/community/guidelines/page.tsx": 22,
+    "src/app/community/page.tsx": 48,
+    "src/app/config/page.tsx": 47,
+    "src/app/contact/page.tsx": 25,
+    "src/app/cookies/page.tsx": 16,
+    "src/app/dashboard/page.tsx": 8,
+    "src/app/demo/data-flexibility/page.tsx": 48,
+    "src/app/demo/design-system/page.tsx": 31,
+    "src/app/docs/[slug]/page.tsx": 38,
+    "src/app/docs/page.tsx": 59,
+    "src/app/enterprise/page.tsx": 54,
+    "src/app/features/page.tsx": 28,
+    "src/app/form-builder/page.tsx": 43,
+    "src/app/gdpr/page.tsx": 21,
+    "src/app/help/page.tsx": 43,
+    "src/app/layout.tsx": 6,
+    "src/app/page.tsx": 13,
+    "src/app/press/page.tsx": 43,
+    "src/app/pricing/page.tsx": 50,
+    "src/app/privacy/page.tsx": 3,
+    "src/app/projects/[id]/editor/page.tsx": 13,
+    "src/app/projects/new-guided/page.tsx": 17,
+    "src/app/security/page.tsx": 23,
+    "src/app/status/page.tsx": 38,
+    "src/app/templates/page.tsx": 34,
+    "src/app/terms/page.tsx": 7,
+    "src/app/tutorials/[id]/page.tsx": 20,
+    "src/app/tutorials/page.tsx": 44,
+    "src/app/ui-builder/page.tsx": 7,
+    "src/apps/ui-builder/app.config.ts": 7,
+    "src/apps/ui-builder/components/AssistantPrompt.tsx": 42,
+    "src/apps/ui-builder/components/BuilderCanvas.tsx": 19,
+    "src/apps/ui-builder/components/CodeViewer.tsx": 29,
+    "src/apps/ui-builder/components/ComponentPropsEditor.tsx": 22,
+    "src/apps/ui-builder/components/ComponentRenderer.tsx": 28,
+    "src/apps/ui-builder/components/DeploymentPanel.tsx": 12,
+    "src/apps/ui-builder/components/PreviewPane.tsx": 9,
+    "src/apps/ui-builder/components/Sidebar.tsx": 16,
+    "src/apps/ui-builder/components/Toolbar.tsx": 8,
+    "src/apps/ui-builder/lib/componentList.ts": 2,
+    "src/apps/ui-builder/pages/index.tsx": 11,
+    "src/apps/ui-builder/store/useBuilderStore.ts": 64,
+    "src/apps/ui-builder/types/index.ts": 27,
+    "src/apps/ui-builder/utils/exportProject.ts": 6,
+    "src/apps/ui-builder/utils/generateCode.ts": 9,
+    "src/components/admin/AdminAnalytics.tsx": 14,
+    "src/components/admin/AdminDashboard.tsx": 75,
+    "src/components/admin/AdminPanel.tsx": 180,
+    "src/components/admin/EnhancedAdminPanel.tsx": 56,
+    "src/components/admin/SafeModeHealthCheck.tsx": 292,
+    "src/components/admin/SelfCheckTrigger.tsx": 13,
+    "src/components/admin/SystemResourceMonitor.tsx": 169,
+    "src/components/AdvancedCodeEditor.tsx": 159,
+    "src/components/AdvancedDocumentationDashboard.tsx": 9,
+    "src/components/AgentPulseMonitor.tsx": 73,
+    "src/components/agents/AgentMonitoringDashboard.tsx": 90,
+    "src/components/AIChat.tsx": 134,
+    "src/components/AIChatWithSemantic.tsx": 117,
+    "src/components/AIDocumentationGenerator.tsx": 8,
+    "src/components/auth/SignInForm.tsx": 58,
+    "src/components/backend/BackendSelector.tsx": 164,
+    "src/components/builder/NoCodeBuilder.tsx": 29,
+    "src/components/builder/ProCodeEditor.tsx": 23,
+    "src/components/ClaudeCodeDashboard.tsx": 234,
+    "src/components/ClientOnlyAuth.tsx": 18,
+    "src/components/ClientRequirementsCapture.tsx": 145,
+    "src/components/collaboration/CollaborationDashboard.tsx": 154,
+    "src/components/collaboration/CollaborationWorkspace.tsx": 323,
+    "src/components/config/ConfigurationDashboard.tsx": 173,
+    "src/components/ContainerMonitor.tsx": 23,
+    "src/components/Dashboard.tsx": 65,
+    "src/components/dashboard/DashboardEnhanced.tsx": 262,
+    "src/components/dashboard/EnterpriseDashboard.tsx": 189,
+    "src/components/DataSourceManager.tsx": 109,
+    "src/components/DeploymentScreen.tsx": 8,
+    "src/components/DesignSystemShowcase.tsx": 134,
+    "src/components/DevelopmentWorkflow.tsx": 72,
+    "src/components/docs/DocumentationViewer.tsx": 136,
+    "src/components/EnhancedUIGenerator.tsx": 24,
+    "src/components/EnvStatusDashboard.tsx": 130,
+    "src/components/EnvVariableEditor.tsx": 251,
+    "src/components/ErrorBoundary.tsx": 7,
+    "src/components/FeedbackWidget.tsx": 185,
+    "src/components/FlowchartBuilder.tsx": 102,
+    "src/components/forms/ValidatedProjectForm.tsx": 208,
+    "src/components/GuidedProjectBuilder.tsx": 239,
+    "src/components/health/AlertsPanel.tsx": 20,
+    "src/components/health/HealthCheckDashboard.tsx": 136,
+    "src/components/health/SystemMetrics.tsx": 3,
+    "src/components/health/TaskQueueVisualizer.tsx": 29,
+    "src/components/ide/KiroIDE.tsx": 178,
+    "src/components/ide/KiroProjectSetup.tsx": 484,
+    "src/components/InferenceSafeMode.tsx": 176,
+    "src/components/knowledge/RAGKnowledgeBase.tsx": 231,
+    "src/components/LandingPage.tsx": 68,
+    "src/components/LandingPageEnhanced.tsx": 289,
+    "src/components/LandingPageProduction.tsx": 40,
+    "src/components/layout/ConditionalLayout.tsx": 3,
+    "src/components/layout/Footer.tsx": 12,
+    "src/components/layout/Header.tsx": 4,
+    "src/components/layout/ResponsiveLayout.tsx": 11,
+    "src/components/LiveProjectPreview.tsx": 93,
+    "src/components/marketplace/TemplateMarketplace.tsx": 116,
+    "src/components/mcp/MCPOrchestrator.tsx": 244,
+    "src/components/MDFolderAgent.tsx": 9,
+    "src/components/navigation.tsx": 57,
+    "src/components/ProductionShowcasePage.tsx": 279,
+    "src/components/ProgressTracker.tsx": 82,
+    "src/components/ProjectGenerator.tsx": 106,
+    "src/components/providers.tsx": 20,
+    "src/components/SemanticSearchDemo.tsx": 89,
+    "src/components/ShowcaseLandingPage.tsx": 268,
+    "src/components/support/AISupportChat.tsx": 290,
+    "src/components/TemplateManager.tsx": 9,
+    "src/components/ui-builder/UIBuilderHomepage.tsx": 3,
+    "src/components/ui/alert.tsx": 44,
+    "src/components/ui/badge.tsx": 11,
+    "src/components/ui/button-basic.tsx": 106,
+    "src/components/ui/button-enhanced.tsx": 213,
+    "src/components/ui/button-premium.tsx": 81,
+    "src/components/ui/button.tsx": 20,
+    "src/components/ui/card-enhanced.tsx": 45,
+    "src/components/ui/card.tsx": 36,
+    "src/components/ui/collapsible.tsx": 39,
+    "src/components/ui/dropdown-menu.tsx": 120,
+    "src/components/ui/empty-states.tsx": 242,
+    "src/components/ui/form-enhanced.tsx": 285,
+    "src/components/ui/icons.tsx": 253,
+    "src/components/ui/input.tsx": 11,
+    "src/components/ui/label.tsx": 13,
+    "src/components/ui/loading.tsx": 150,
+    "src/components/ui/logo.tsx": 6,
+    "src/components/ui/navigation-menu.tsx": 49,
+    "src/components/ui/navigation.tsx": 227,
+    "src/components/ui/progress.tsx": 12,
+    "src/components/ui/radio-group.tsx": 28,
+    "src/components/ui/resizable.tsx": 35,
+    "src/components/ui/scroll-area.tsx": 6,
+    "src/components/ui/select.tsx": 78,
+    "src/components/ui/separator.tsx": 14,
+    "src/components/ui/sheet.tsx": 91,
+    "src/components/ui/switch.tsx": 15,
+    "src/components/ui/tabs.tsx": 27,
+    "src/components/ui/textarea.tsx": 11,
+    "src/components/ui/toast.tsx": 79,
+    "src/components/ui/toaster.tsx": 3,
+    "src/components/ui/use-toast.tsx": 36,
+    "src/components/WelcomeScreen.tsx": 106,
+    "src/config/pulse.config.ts": 5,
+    "src/hooks/useKiroIDE.ts": 278,
+    "src/hooks/useMCP.ts": 121,
+    "src/hooks/useN8nAutomation.ts": 118,
+    "src/hooks/useRAG.ts": 173,
+    "src/hooks/useSemanticSearch.ts": 55,
+    "src/lib/admin-auth.ts": 42,
+    "src/lib/admin-queries.ts": 254,
+    "src/lib/admin.ts": 192,
+    "src/lib/advanced-monitoring.ts": 187,
+    "src/lib/agents/AgentCommunication.ts": 336,
+    "src/lib/agents/AgentCoordinator.ts": 140,
+    "src/lib/agents/AgentLoader.ts": 113,
+    "src/lib/agents/AgentMonitor.ts": 151,
+    "src/lib/agents/AgentOrchestrator.ts": 28,
+    "src/lib/agents/AgentRegistry.ts": 135,
+    "src/lib/agents/AgentSystem.ts": 227,
+    "src/lib/agents/archon/AdvisorAgent.ts": 194,
+    "src/lib/agents/archon/AgentRefinerAgent.ts": 191,
+    "src/lib/agents/archon/index.ts": 4,
+    "src/lib/agents/archon/PromptRefinerAgent.ts": 41,
+    "src/lib/agents/archon/ToolsRefinerAgent.ts": 242,
+    "src/lib/agents/base/Agent.ts": 215,
+    "src/lib/agents/base/BaseAgent.ts": 150,
+    "src/lib/agents/base/ValidatedAgent.ts": 82,
+    "src/lib/agents/bmad/AnalystAgent.ts": 82,
+    "src/lib/agents/bmad/ArchitectAgent.ts": 275,
+    "src/lib/agents/bmad/index.ts": 2,
+    "src/lib/agents/bmad/ProjectManagerAgent.ts": 182,
+    "src/lib/agents/ContainerizedPulseOrchestrator.ts": 89,
+    "src/lib/agents/CPURateLimiter.ts": 71,
+    "src/lib/agents/docker/AgentContainer.ts": 132,
+    "src/lib/agents/docker/ContainerOrchestrator.ts": 205,
+    "src/lib/agents/DockerAgentManager.ts": 123,
+    "src/lib/agents/EnhancedAgentOrchestrator.ts": 210,
+    "src/lib/agents/GracefulShutdownManager.ts": 35,
+    "src/lib/agents/index.ts": 56,
+    "src/lib/agents/mcp/AgentMCPBridge.ts": 164,
+    "src/lib/agents/mcp/MCPIntegration.ts": 172,
+    "src/lib/agents/PulsedAgentOrchestrator.ts": 119,
+    "src/lib/agents/runners/architect-agent.ts": 56,
+    "src/lib/agents/runners/backend-agent.ts": 57,
+    "src/lib/agents/runners/base-agent.ts": 109,
+    "src/lib/agents/runners/frontend-agent.ts": 57,
+    "src/lib/agents/runtime/AgentOrchestrator.ts": 125,
+    "src/lib/agents/runtime/AgentRuntime.ts": 205,
+    "src/lib/agents/runtime/index.ts": 3,
+    "src/lib/agents/runtime/PulsedExecutor.ts": 73,
+    "src/lib/agents/runtime/ResourceMonitor.ts": 41,
+    "src/lib/agents/specialized/DevOpsAgent.ts": 58,
+    "src/lib/agents/specialized/QAAgent.ts": 68,
+    "src/lib/agents/specialized/SelfHealingAgent.ts": 329,
+    "src/lib/agents/specialized/TypeScriptAgent.ts": 148,
+    "src/lib/agents/test/agent-os-integration.test.ts": 37,
+    "src/lib/agents/types.ts": 27,
+    "src/lib/ai.ts": 27,
+    "src/lib/ai/AIService.ts": 71,
+    "src/lib/analytics.ts": 114,
+    "src/lib/analytics/PredictiveAnalytics.ts": 210,
+    "src/lib/api-middleware.ts": 66,
+    "src/lib/api-tracking.ts": 123,
+    "src/lib/api/rate-limiter.ts": 110,
+    "src/lib/auth-helpers.ts": 22,
+    "src/lib/auth.ts": 25,
+    "src/lib/automation/n8n-client.ts": 306,
+    "src/lib/automation/nodes/agent-orchestration.ts": 105,
+    "src/lib/automation/workflows/notification-system.ts": 185,
+    "src/lib/automation/workflows/project-deployment.ts": 143,
+    "src/lib/automation/workflows/testing-automation.ts": 140,
+    "src/lib/backend/adapter-factory.ts": 37,
+    "src/lib/backend/adapters/nocodb.ts": 372,
+    "src/lib/backend/adapters/strapi.ts": 342,
+    "src/lib/backend/adapters/supabase.ts": 292,
+    "src/lib/backend/migration.ts": 101,
+    "src/lib/backend/types.ts": 151,
+    "src/lib/breadcrumb/breadcrumb-agent.ts": 116,
+    "src/lib/claude-code-integration.ts": 65,
+    "src/lib/collaboration.ts": 290,
+    "src/lib/config.ts": 128,
+    "src/lib/cycle-detection.ts": 167,
+    "src/lib/data/MockDataGenerator.ts": 212,
+    "src/lib/database.ts": 325,
+    "src/lib/database/connection-pool.ts": 64,
+    "src/lib/design-system.ts": 183,
+    "src/lib/design-system/components.tsx": 164,
+    "src/lib/design-system/theme.ts": 187,
+    "src/lib/docs/DynamicDocumentationSystem.ts": 434,
+    "src/lib/email.ts": 45,
+    "src/lib/env-config.ts": 55,
+    "src/lib/env.ts": 35,
+    "src/lib/env/EnvManager.ts": 142,
+    "src/lib/epc/epc-engine.ts": 59,
+    "src/lib/epc/inference-telemetry.ts": 93,
+    "src/lib/epc/self-heal-agent.ts": 128,
+    "src/lib/health/AlertingService.ts": 59,
+    "src/lib/health/database-health.ts": 41,
+    "src/lib/health/external-services-health.ts": 91,
+    "src/lib/health/HealthCheckService.ts": 52,
+    "src/lib/hierarchical-memory-system.ts": 154,
+    "src/lib/ide/kiro-client.ts": 327,
+    "src/lib/ide/kiro-server-mock.ts": 218,
+    "src/lib/knowledge/document-loader.ts": 162,
+    "src/lib/knowledge/rag-engine.ts": 165,
+    "src/lib/knowledge/text-splitter.ts": 85,
+    "src/lib/knowledge/vector-store.ts": 208,
+    "src/lib/logger.ts": 14,
+    "src/lib/mcp/index.ts": 33,
+    "src/lib/mcp/mcp-orchestrator.ts": 245,
+    "src/lib/mcp/mcp-registry.ts": 109,
+    "src/lib/production-logger.ts": 130,
+    "src/lib/project-storage.ts": 100,
+    "src/lib/requirements/ClientRequirementsProcessor.ts": 183,
+    "src/lib/roadmap/RoadmapValidator.ts": 201,
+    "src/lib/semantic/SemanticSearchService.ts": 54,
+    "src/lib/ssr-guard.tsx": 13,
+    "src/lib/templates.ts": 162,
+    "src/lib/theme/dark-mode.tsx": 89,
+    "src/lib/token-optimization-engine.ts": 274,
+    "src/lib/tutorials/InteractiveTutorialSystem.ts": 233,
+    "src/lib/validation/agent-schemas.ts": 24,
+    "src/lib/validation/decorators.ts": 52,
+    "src/lib/validation/index.ts": 34,
+    "src/lib/validation/schemas.ts": 154,
+    "src/middleware.ts": 25,
+    "src/packages/causal-engine/assistant-utils.ts": 26,
+    "src/packages/causal-engine/explorer-ui.tsx": 31,
+    "src/packages/causal-engine/logger.ts": 8,
+    "src/packages/causal-engine/scorer.ts": 21,
+    "src/packages/self-check/causal-feedback-replayer.ts": 50,
+    "src/packages/self-check/dependency-auditor.ts": 26,
+    "src/packages/self-check/module-checker.ts": 17,
+    "src/packages/self-check/report-generator.ts": 114,
+    "src/types/index.ts": 1,
+    "src/types/monitoring.d.ts": 2,
+    "src/types/next-auth.d.ts": 3,
+    "src/types/project.d.ts": 3,
+    "src/utils/constants.ts": 17,
+    "src/utils/formatting.ts": 30,
+    "src/utils/helpers.ts": 63,
+    "src/utils/validation.ts": 39,
+    "tailwind.config.ts": 5,
+    "tests/chaos/chaos-monkey.ts": 111,
+    "tests/e2e/basic-flow.test.ts": 16,
+    "tests/e2e/comprehensive-validation.spec.ts": 26,
+    "tests/integration/api/health.test.ts": 11,
+    "tests/setup.ts": 8,
+    "tests/simulation/client-scenarios.ts": 70,
+    "tests/simulation/client-simulation-runner.ts": 70,
+    "tests/unit/lib/agents/CPURateLimiter.test.ts": 5,
+    "tests/unit/lib/requirements/ClientRequirementsProcessor.test.ts": 11
+  },
+  "topFiles": [
+    {
+      "file": "src/components/ide/KiroProjectSetup.tsx",
+      "errors": 484
+    },
+    {
+      "file": "src/lib/docs/DynamicDocumentationSystem.ts",
+      "errors": 434
+    },
+    {
+      "file": "src/lib/backend/adapters/nocodb.ts",
+      "errors": 372
+    },
+    {
+      "file": "src/lib/backend/adapters/strapi.ts",
+      "errors": 342
+    },
+    {
+      "file": "src/lib/agents/AgentCommunication.ts",
+      "errors": 336
+    },
+    {
+      "file": "src/lib/agents/specialized/SelfHealingAgent.ts",
+      "errors": 329
+    },
+    {
+      "file": "src/lib/ide/kiro-client.ts",
+      "errors": 327
+    },
+    {
+      "file": "src/lib/database.ts",
+      "errors": 325
+    },
+    {
+      "file": "src/components/collaboration/CollaborationWorkspace.tsx",
+      "errors": 323
+    },
+    {
+      "file": "src/lib/automation/n8n-client.ts",
+      "errors": 306
+    },
+    {
+      "file": "src/components/admin/SafeModeHealthCheck.tsx",
+      "errors": 292
+    },
+    {
+      "file": "src/lib/backend/adapters/supabase.ts",
+      "errors": 292
+    },
+    {
+      "file": "src/components/support/AISupportChat.tsx",
+      "errors": 290
+    },
+    {
+      "file": "src/lib/collaboration.ts",
+      "errors": 290
+    },
+    {
+      "file": "src/components/LandingPageEnhanced.tsx",
+      "errors": 289
+    },
+    {
+      "file": "src/components/ui/form-enhanced.tsx",
+      "errors": 285
+    },
+    {
+      "file": "src/components/ProductionShowcasePage.tsx",
+      "errors": 279
+    },
+    {
+      "file": "src/hooks/useKiroIDE.ts",
+      "errors": 278
+    },
+    {
+      "file": "src/lib/agents/bmad/ArchitectAgent.ts",
+      "errors": 275
+    },
+    {
+      "file": "src/lib/token-optimization-engine.ts",
+      "errors": 274
+    }
+  ],
+  "summary": {
+    "syntaxErrors": 22959,
+    "typeErrors": 0,
+    "otherErrors": 6968
+  }
+}

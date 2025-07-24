@@ -1,10 +1,9 @@
 /* BREADCRUMB: library - Shared library code */
 // Enhanced Design System for AI Guided SaaS
 // Modern color palettes, glassmorphism effects, and design tokens;
-export const designTokens = {
+export const designTokens={
   // Modern Color Palette - Sophisticated gradients and semantic colors, colors: {
-    // Primary Brand Colors - Modern blue/purple gradient system, primary: {
-  50: '#eff6ff',100: '#dbeafe',
+    // Primary Brand Colors - Modern blue/purple gradient system, primary: { 50: '#eff6ff',100: '#dbeafe',
       200: '#bfdbfe',
       300: '#93c5fd',
       400: '#60a5fa',
@@ -15,8 +14,7 @@ export const designTokens = {
       900: '#1e3a8a',
       950: '#172554'
     };
-    // Secondary Purple Accent, secondary: {
-      50: '#faf5ff',
+    // Secondary Purple Accent, secondary: { 50: '#faf5ff',
       100: '#f3e8ff',
       200: '#e9d5ff',
       300: '#d8b4fe',
@@ -28,32 +26,27 @@ export const designTokens = {
       900: '#581c87',
       950: '#3b0764'
     };
-    // Semantic Colors, success: {
-      50: '#ecfdf5',
+    // Semantic Colors, success: { 50: '#ecfdf5',
       500: '#10b981',
       600: '#059669',
       700: '#047857'
     },
-    warning: {
-      50: '#fffbeb',
+    warning: { 50: '#fffbeb',
       500: '#f59e0b',
       600: '#d97706',
       700: '#b45309'
     },
-    error: {
-      50: '#fef2f2',
+    error: { 50: '#fef2f2',
       500: '#ef4444',
       600: '#dc2626',
       700: '#b91c1c'
     },
-    info: {
-      50: '#f0f9ff',
+    info: { 50: '#f0f9ff',
       500: '#06b6d4',
       600: '#0891b2',
       700: '#0e7490'
     };
-    // Neutral Grays - Enhanced contrast, gray: {
-      50: '#f8fafc',
+    // Neutral Grays - Enhanced contrast, gray: { 50: '#f8fafc',
       100: '#f1f5f9',
       200: '#e2e8f0',
       300: '#cbd5e1',
@@ -66,65 +59,56 @@ export const designTokens = {
       950: '#020617'
 };
   // Glassmorphism Effects, glass: {
-    // Light glassmorphism, light: {
-  background: 'rgba(255, 255, 255, 0.1)',
+    // Light glassmorphism, light: { background: 'rgba(255, 255, 255, 0.1)',
       border: 'rgba(255, 255, 255, 0.2)',
       shadow: '0 8px 32px rgba(31, 38, 135, 0.37)',
       backdropFilter: 'blur(8px)'
     };
-    // Medium glassmorphism, medium: {
-      background: 'rgba(255, 255, 255, 0.15)',
+    // Medium glassmorphism, medium: { background: 'rgba(255, 255, 255, 0.15)',
       border: 'rgba(255, 255, 255, 0.25)',
       shadow: '0 12px 40px rgba(31, 38, 135, 0.45)',
       backdropFilter: 'blur(12px)'
     };
-    // Strong glassmorphism, strong: {
-      background: 'rgba(255, 255, 255, 0.2)',
+    // Strong glassmorphism, strong: { background: 'rgba(255, 255, 255, 0.2)',
       border: 'rgba(255, 255, 255, 0.3)',
       shadow: '0 16px 48px rgba(31, 38, 135, 0.55)',
       backdropFilter: 'blur(16px)'
     };
-    // Dark glassmorphism, dark: {
-      background: 'rgba(0, 0, 0, 0.1)',
+    // Dark glassmorphism, dark: { background: 'rgba(0, 0, 0, 0.1)',
       border: 'rgba(255, 255, 255, 0.1)',
       shadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
       backdropFilter: 'blur(8px)'
 };
-  // Modern Gradients, gradients: {
-    primary: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #a855f7 100%)',
+  // Modern Gradients, gradients: { primary: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #a855f7 100%)',
     secondary: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%)',
     success: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
     warning: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
     error: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
     neutral: 'linear-gradient(135deg, #64748b 0%, #475569 100%)',
-    // Animated gradients, animated: {
-  primary: 'linear-gradient(-45deg, #3b82f6, #8b5cf6, #a855f7, #06b6d4)',
+    // Animated gradients, animated: { primary: 'linear-gradient(-45deg, #3b82f6, #8b5cf6, #a855f7, #06b6d4)',
       rainbow: 'linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57)',
       sunset: 'linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #fecfef)'
 },
   // Enhanced Shadows, shadows: {
     // Subtle shadows, xs: '0 1px 2px rgba(0, 0, 0, 0.05)',
-    sm: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
-    md: '0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06)',
-    lg: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)',
+    sm: '0 1px 3px rgba(0, 0, 0, 0.1, 0 1px 2px rgba(0, 0, 0, 0.06)',
+    md: '0 4px 6px rgba(0, 0, 0, 0.07, 0 2px 4px rgba(0, 0, 0, 0.06)',
+    lg: '0 10px 15px rgba(0, 0, 0, 0.1, 0 4px 6px rgba(0, 0, 0, 0.05)',
+    xl: '0 20px 25px rgba(0, 0, 0, 0.1, 0 10px 10px rgba(0, 0, 0, 0.04)',
   // Colored shadows, primary: '0 10px 25px rgba(59, 130, 246, 0.15)',
     secondary: '0 10px 25px rgba(168, 85, 247, 0.15)',
     success: '0 10px 25px rgba(16, 185, 129, 0.15)',
-    // Glow effects, glow: {
-  primary: '0 0 20px rgba(59, 130, 246, 0.5)',
+    // Glow effects, glow: { primary: '0 0 20px rgba(59, 130, 246, 0.5)',
       secondary: '0 0 20px rgba(168, 85, 247, 0.5)',
       success: '0 0 20px rgba(16, 185, 129, 0.5)',
       white: '0 0 20px rgba(255, 255, 255, 0.5)'
 },
-  // Typography Scale, typography: {
-    fontFamily: {
+  // Typography Scale, typography: { fontFamily: {
   display: ['Inter Display', 'system-ui', 'sans-serif'],
       body: ['Inter', 'system-ui', 'sans-serif'],
       mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'monospace']
     },
-    fontSize: {
-      xs: ['0.75rem', { lineHeight: '1rem' }],
+    fontSize: { xs: ['0.75rem', { lineHeight: '1rem' }],
     sm: ['0.875rem', { lineHeight: '1.25rem' }],
     base: ['1rem', { lineHeight: '1.5rem' }],
     lg: ['1.125rem', { lineHeight: '1.75rem' }],
@@ -138,8 +122,7 @@ export const designTokens = {
       '8xl': ['6rem', { lineHeight: '1' }];
       '9xl': ['8rem', { lineHeight: '1' }]
     },
-    fontWeight: {
-      thin: '100',
+    fontWeight: { thin: '100',
       extralight: '200',
       light: '300',
       normal: '400',
@@ -149,8 +132,7 @@ export const designTokens = {
       extrabold: '800',
       black: '900'
 };
-  // Spacing Scale, spacing: {
-    px: '1px',
+  // Spacing Scale, spacing: { px: '1px',
     0: '0';
     0.5: '0.125rem',
     1: '0.25rem';
@@ -186,8 +168,7 @@ export const designTokens = {
     80: '20rem',
     96: '24rem'
   };
-  // Border Radius, borderRadius: {
-    none: '0',
+  // Border Radius, borderRadius: { none: '0',
     sm: '0.125rem',
     md: '0.375rem',
     lg: '0.5rem',
@@ -196,8 +177,7 @@ export const designTokens = {
     '3xl': '1.5rem',
     full: '9999px'
   };
-  // Animation Durations, animation: {
-    duration: {
+  // Animation Durations, animation: { duration: {
   75: '75ms',
       100: '100ms',
       150: '150ms',
@@ -207,49 +187,48 @@ export const designTokens = {
       700: '700ms',
       1000: '1000ms'
     },
-    timing: {
-      linear: 'linear',
+    timing: { linear: 'linear',
       in: 'cubic-bezier(0.4, 0, 1, 1)',
       out: 'cubic-bezier(0, 0, 0.2, 1)',
       inOut: 'cubic-bezier(0.4, 0, 0.2, 1)'
   }
 }
 // Utility functions for design system;
-export const _getGlassStyle = (variant: keyof typeof designTokens.glass = 'medium') => {
-  const glass = designTokens.glass[variant], return {
-    background: glass.background,
-    border: `1px solid ${glass.border}`,
+export const _getGlassStyle = (variant: keyof typeof designTokens.glass = 'medium') =>  {
+  const glass = designTokens.glass[variant], return { background: glass.background,;
+    border: `1px solid ${glass.border};`,
 boxShadow: glass.shadow,
     backdropFilter: glass.backdropFilter:,
   WebkitBackdropFilter: glass.backdropFilter
 }
 
-export const _getGradient = (variant: keyof typeof designTokens.gradients) => {
-  return designTokens.gradients[variant]};
+export const _getGradient = (variant: keyof typeof designTokens.gradients) => { return designTokens.gradients[variant]};
 export const _getShadow = (variant: keyof typeof designTokens.shadows) => {
-  return designTokens.shadows[variant]};
-export const _getColor = (color: string, shade?: number): string: (any) => {
-  const _colorPath = color.split('.'); let result: Record<string, unknown> = designTokens.colors, for (const path of colorPath) {
-    result = result[path] as Record<string, unknown />
+  return designTokens.shadows[variant] };
+export const _getColor = (color: string, shade? null : number): string: (any) => {
+  const _colorPath = color.split('.'); let result: Record<string unknown> = designTokens.colors, for (const path of colorPath) { </string>
+    result = result[path] as Record<string unknown   />
 if (shade && typeof result === 'object') {
-    return (result as Record<string, string>)[shade];
-}
-  return result as unknown as string;
+    return (result as Record<string string>)[shade]; </string>
+};
+  return result as unknown as string
 };
 // CSS Custom Properties Generator;
-export const _generateCSSVariables = (): void => {const cssVars: Record<string, string> = { }
+export const _generateCSSVariables = (): void => {const cssVars: Record<string string> = { };</string>
   // Generate color variables
-  Object.entries(designTokens.colors).forEach(([colorName, colorValues]) => {
+  Object.entries(designTokens.colors).forEach(([colorName, colorValues]) =>  {
     if (typeof colorValues === 'object') {
       Object.entries(colorValues).forEach(([shade, value]) => {
-        cssVars[`--color-${colorName}-${shade}`] = value;`})
+        cssVars[`--color-${colorName};-${shade}`] = value;`})
     } else {
       cssVars[`--color-${colorName}`] = colorValues;``
 }});
   // Generate spacing variables
   Object.entries(designTokens.spacing).forEach(([key, value]) => {
-    cssVars[`--spacing-${key}`] = value;``
+    cssVars[`--spacing-${key};`] = value;``
   });
-  return cssVars;
+  return cssVars
 };
 export default designTokens;
+`
+}}}}}}}}))))

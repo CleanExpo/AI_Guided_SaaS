@@ -29,14 +29,14 @@ class SimpleHealthCheck {
       });
     } catch (error) {
       const output = error.stdout?.toString() || '';
-      const _errors = (output.match(/error TS/g) || []).length;
+      const errors = (output.match(/error TS/g) || []).length;
       console.log(`❌ TypeScript: ${errors} errors`);
       
       // Count error types
       const errorTypes = {};
-      const _matches = output.matchAll(/error (TS\d+):/g);
+      const matches = output.matchAll(/error (TS\d+):/g);
       for (const match of matches) {
-        const _code = match[1];
+        const code = match[1];
         errorTypes[code] = (errorTypes[code] || 0) + 1;}
       this.results.push({
         category: 'TypeScript',
@@ -95,7 +95,7 @@ class SimpleHealthCheck {
   checkFileStructure() {
     console.log('\n📁 Checking Critical Files...');
     
-    const _criticalFiles = [
+    const criticalFiles = [
       'package.json',
       'tsconfig.json',
       'next.config.mjs',
@@ -127,7 +127,7 @@ class SimpleHealthCheck {
       totalErrors += result.errors || 0;
       if (result.status === 'fail') failedChecks++;
       
-      const _icon = result.status === 'pass' ? '✅' : '❌';
+      const icon = result.status === 'pass' ? '✅' : '❌';
       console.log(`${icon} ${result.category}: ${result.status === 'pass' ? 'PASSED' : 'FAILED'}`);}
     console.log(`\nTotal Errors: ${totalErrors}`);
     console.log(`Failed Checks: ${failedChecks}/${this.results.length}`);
@@ -136,7 +136,7 @@ class SimpleHealthCheck {
     const tsResult = this.results.find(r => r.category === 'TypeScript');
     if (tsResult && tsResult.errorTypes) {
       console.log('\nTypeScript Error Breakdown:');
-      const _sorted = Object.entries(tsResult.errorTypes)
+      const sorted = Object.entries(tsResult.errorTypes)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
       

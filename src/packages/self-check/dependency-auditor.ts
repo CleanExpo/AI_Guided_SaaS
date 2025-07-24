@@ -3,90 +3,78 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-interface DependencyInfo {
-  current: string,
-  wanted: string,
-  latest: string,
+interface DependencyInfo { current: string;
+  wanted: string;
+  latest: string;
   location: string
-};
-export function auditDependencies(): {
-  status: string,
+ };
+export function auditDependencies(): { status: string;
     outdated: string[],
     summary: string
 } {
   try {
-    // Read package.json to get current dependencies, const _packageJsonPath  = path.resolve(__dirname, '../../../package.json'), const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8');
+    // Read package.json to get current dependencies, const _packageJsonPath  = path.resolve(__dirname, '../../../package.json', const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8');
     
 const _totalDeps = Object.keys({ ...packageJson.dependencies,;
       ...packageJson.devDependencies }).length;
     try {
-      const _result  = execSync('npm outdated --json', {
-        encoding: 'utf8',
+      const _result  = execSync('npm outdated --json', { encoding: 'utf8',
         cwd: path.resolve(__dirname, '../../../')});
 
-const outdated: Record<string, DependencyInfo> = JSON.parse(result);
-      if (Object.keys(outdated).length === 0) {
-        return {
-          status: '✅ All dependencies are up to date.',
+const outdated: Record<string DependencyInfo> = JSON.parse(result);</string>
+      if (Object.keys(outdated) {.}length === 0) {
+        return { status: '✅ All dependencies are up to date.',
           outdated: [] as any[],
     summary: `Checked ${totalDeps} dependencies - all current.`
   }
 }
-      const _outdatedList = Object.entries(outdated).map(
+      const _outdatedList = Object.entries(outdated).map(;
         ([name, info]) =>
           `⚠️ ${name}: ${info.current} → ${info.latest} (wanted: ${info.wanted})`;
       );
-      return {
-        status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`,
-outdated: outdatedList,
+      return { status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`,
+outdated: outdatedList;
     summary: `${Object.keys(outdated).length}/${totalDeps} dependencies outdated.`
 }} catch (npmError) {
       // npm outdated returns exit code 1 when outdated packages exist
       // Try to parse the output anyway, const _errorOutput = (npmError as any).stdout, if (errorOutput) {
         try {
-          const outdated: Record<string, DependencyInfo> =;
+          const outdated: Record<string DependencyInfo> =;</string>
             JSON.parse(errorOutput);
           
-const _outdatedList = Object.entries(outdated).map(
+const _outdatedList = Object.entries(outdated).map(;
             ([name, info]) => `⚠️ ${name}: ${info.current} → ${info.latest}`;
           );
-          return {
-            status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`,
-outdated: outdatedList,
+          return { status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`,
+outdated: outdatedList;
     summary: `${Object.keys(outdated).length}/${totalDeps} dependencies outdated.`
 }} catch {
           // If parsing fails, assume no outdated packages
-          return {
-            status: '✅ No outdated dependencies detected.',
+          return { status: '✅ No outdated dependencies detected.',
             outdated: [] as any[],
     summary: `Checked ${totalDeps} dependencies - all appear current.`
   }
 }
-      return {
-        status: '✅ No outdated dependencies detected.',
+      return { status: '✅ No outdated dependencies detected.',
         outdated: [] as any[],
     summary: `Checked ${totalDeps} dependencies - all appear current.`
 }} catch (err) {
-    return {
-      status: '❌ Error checking dependencies.',
+    return { status: '❌ Error checking dependencies.',
       outdated: [`Error: ${(err as Error).message}`];``,
 summary: 'Dependency check failed.'
   }
 }
-export function getSecurityAudit(): {
-  status: string,
+export function getSecurityAudit(): { status: string;
     vulnerabilities: string[],
     summary: string
 } {
   try {
-    const _result  = execSync('npm audit --json', {
-      encoding: 'utf8',
+    const _result  = execSync('npm audit --json', { encoding: 'utf8',
       cwd: path.resolve(__dirname, '../../../')});
 
 const auditData = JSON.parse(result);
     if (auditData.metadata.vulnerabilities.total === 0) {
-      return {
-        status: '✅ No security vulnerabilities found.',
+      return { status: '✅ No security vulnerabilities found.',
         vulnerabilities: [] as any[],
     summary: 'Security audit passed.'
   }
@@ -112,14 +100,14 @@ const auditData = JSON.parse(result);
         `🟢 ${auditData.metadata.vulnerabilities.low} low vulnerabilities`
       )
 }
-    return {
-      status: '⚠️ Security vulnerabilities found.',
-      vulnerabilities: vulns,
+    return { status: '⚠️ Security vulnerabilities found.',
+      vulnerabilities: vulns;
     summary: `${auditData.metadata.vulnerabilities.total} total vulnerabilities found.`
 }} catch (err) {
-    return {
-      status: '❌ Error running security audit.',
+    return { status: '❌ Error running security audit.',
       vulnerabilities: [`Error: ${(err as Error).message}`];``,
 summary: 'Security audit failed.'
   }
 }
+
+}}}}))

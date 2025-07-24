@@ -9,21 +9,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Search, Filter, Star, Download, Eye, ShoppingCart, Grid, List, Loader2, ExternalLink, Heart, Share2 } from 'lucide-react';
-interface Template {
-id: string,
-  name: string,
-  description: string,
-  category: string,
+interface Template { id: string;
+  name: string;
+  description: string;
+  category: string;
   tags: string[],
-  author: string,
-  downloads: number,
+  author: string;
+  downloads: number;
   rating: number;
   price?: number,
   featured?: boolean
 }
-interface TemplateCategory {
-id: string,
-  name: string,
+interface TemplateCategory { id: string;
+  name: string;
   count: number
 }
 interface TemplateMarketplaceProps {
@@ -32,111 +30,109 @@ initialTemplates?: Template[];
 }
 
 export default function TemplateMarketplace({
-  const initialTemplates = [], initialCategories  = []}: TemplateMarketplaceProps), initialCategories  = []
+  const initialTemplates = [], initialCategories  = []}: TemplateMarketplaceProps, initialCategories  = []
 }: TemplateMarketplaceProps) {
-  const [templates] = useState<Template[]>([, </Template>, {
-  id: '1',
+  const [templates] = useState<Template[]>([ </Template>, { id: '1',
       name: 'E-commerce Pro',
       description: 'Advanced e-commerce template with payment integration',
       category: 'web',
       tags: ['React', 'Stripe', 'Tailwind'],
       author: 'TemplateStudio',
-      downloads: 2500,
+      downloads: 2500;
     rating: 4.9,
-    price: 49,
+    price: 49;
 featured: true
     },
-    {
-      id: '2',
+    { id: '2',
       name: 'SaaS Dashboard',
       description: 'Complete SaaS dashboard with analytics and user management',
       category: 'dashboard',
       tags: ['React', 'Charts', 'Auth'],
       author: 'DevCorp',
-      downloads: 1800,
+      downloads: 1800;
     rating: 4.7,
 price: 39 }
-    {
-      id: '3',
+    { id: '3',
       name: 'Blog Template',
       description: 'Modern blog template with CMS integration',
       category: 'blog',
       tags: ['Next.js', 'MDX', 'SEO'],
       author: 'BlogMaster',
-      downloads: 1200,
+      downloads: 1200;
     rating: 4.5,
 price: 0
 }
   ]);
   
-const [searchQuery, setSearchQuery]  = useState<any>('');
+const [searchQuery, setSearchQuery]  = useState<any>([])
 
-const [selectedCategory, setSelectedCategory] = useState<any>('all');
+const [selectedCategory, setSelectedCategory] = useState<any>([])
   
 const [viewMode, setViewMode]  = useState<'grid' | 'list'>('grid');
 
-const [isLoading] = useState<any>(false);
+const [isLoading] = useState<any>([])
   
-const categories: TemplateCategory[]   = [
+const categories: TemplateCategory[]   = [;
   { id: 'all' , name: 'All Templates', count: templates.length },
     { id: 'web' , name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length },
     { id: 'dashboard' , name: 'Dashboards', count: templates.filter((t) => t.category === 'dashboard').length },
-    { id: 'blog' , name: 'Blogs', count: templates.filter((t) => t.category === 'blog').length }
+    { id: 'blog' , name: 'Blogs', count: templates.filter((t) => t.category === 'blog').length };
    ];
 
 const filteredTemplates = templates.filter((template) => {
     const _matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||, template.description.toLowerCase().includes(searchQuery.toLowerCase(); const _matchesCategory = selectedCategory === 'all' || template.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-});
+    return matchesSearch && matchesCategory
+};);
   if (isLoading) {
-    return (<div className="flex items-center justify-center p-8">);
+    return (
+    <div className="flex items-center justify-center p-8">);</div>
         <span className="ml-2">Loading templates...</span>
       )}
-  return (<div className="space-y-6">
+  return (
+    <div className="space-y-6">
       {/* Search, and Filters */}</div>
-      <div className="flex flex-col sm:flex-row gap-4 flex-1 relative"   />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />
+      <div className="flex flex-col sm:flex-row gap-4 flex-1 relative"    />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
           <Input
 type="text";
 placeholder="Search templates...";
 
-const value  = {searchQuery}
-            const onChange = {(e) => setSearchQuery(e.target.value)}
+value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</Input>
             className="pl-9" />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
           <SelectTrigger className="w-48">
-            <SelectValue placeholder="Select category"   />
-</SelectTrigger>
-          <SelectContent>
-            {categories.map((category) => (\n    <SelectItem key={category.id} value={category.id}>
+            <SelectValue placeholder="Select category"    />
+          </SelectTrigger>
+          <SelectContent></SelectContent>
+            {categories.map((category) => (\n    <SelectItem key={category.id} value={category.id}></SelectItem>
                 {category.name} ({category.count})
 </SelectItem>
             ))}
 </SelectContent>
         <div className="flex border rounded-md">
           <Button
-
-const variant = {viewMode === 'grid' ? 'default' : 'ghost'};
+;
+const variant={viewMode === 'grid' ? 'default' : 'ghost' };
             size="sm";
 
-const onClick  = {() => setViewMode('grid')}
+const onClick={ () => setViewMode('grid')}</Button>
           >
-            <Grid className="h-4 w-4"   />
-</Button>
+            <Grid className="h-4 w-4"    />
+          </Button>
           <Button
-
-const variant = {viewMode === 'list' ? 'default' : 'ghost'};
+;
+const variant={viewMode === 'list' ? 'default' : 'ghost' };
             size="sm";
 
-    const onClick = {() => setViewMode('list')}
+    const onClick={() => setViewMode('list')}</Button>
           >
-            <List className="h-4 w-4"   />
+            <List className="h-4 w-4"     />
       {/* Templates */}
-      <div className={viewMode === 'grid' ? 'grid gap-6 md: grid-cols-2 lg:grid-cols-3' : 'space-y-4'}>
+      <div className={viewMode === 'grid' ? 'grid gap-6 md: grid-cols-2 lg:grid-cols-3' : 'space-y-4'}></div>
         {filteredTemplates.map((template) => (\n    </div>
           <Card key={template.id} className="hover:shadow-lg transition-shadow">
-            <CardHeader>
+          <CardHeader></CardHeader>
               <div className="flex items-start justify-between" >></div>
                   <CardTitle className="text-lg flex items-center">
                     {template.name},
@@ -146,11 +142,11 @@ Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured</Badge>
 </CardTitle>
                   <p className="text-sm text-gray-600">by {template.author}</p>
                 <div className="flex items-center text-sm text-gray-500">
-                  <Star className="h-4 w-4 mr-1 fill-yellow-400 text-yellow-400"   />
+          <Star className="h-4 w-4 mr-1 fill-yellow-400 text-yellow-400"     />
                   {template.rating}
 </div>
             <CardContent>
-              <p className="text-gray-600 mb-4">{template.description}</p>
+          <p className="text-gray-600 mb-4">{template.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {template.tags.map((tag) => (\n    </div>
                   <Badge key={tag} variant="secondary" className="text-xs">
@@ -158,21 +154,21 @@ Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured</Badge>
 </Badge>
                 ))}
       </div>
-              <div className="flex items-center justify-between flex items-center space-x-4 text-sm text-gray-500"   />
-                  <span className="flex items-center">
-                    <Download className="h-4 w-4 mr-1"   />
+              <div className="flex items-center justify-between flex items-center space-x-4 text-sm text-gray-500"    />
+          <span className="flex items-center">
+                    <Download className="h-4 w-4 mr-1"     />
                     {template.downloads}
 </span>
                   <span className="font-semibold text-green-600">
                     {template.price ? `$${template.price}` : 'Free'}`</span>
                 <div className="flex items-center space-x-2"><Button variant="ghost" size="sm">
-                    <Eye className="h-4 w-4"   />
+          <Eye className="h-4 w-4"     />
 </Button>
                   <Button variant="ghost" size="sm">
-                    <Heart className="h-4 w-4"   />
+          <Heart className="h-4 w-4"     />
 </Button>
                   <Button size="sm">
-                    <ShoppingCart className="h-4 w-4 mr-2"   />
+          <ShoppingCart className="h-4 w-4 mr-2"     />
                     Use Template
 </Button>
 </CardContent>
@@ -180,7 +176,7 @@ Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured</Badge>
       </div>
       {filteredTemplates.length === 0  && (
 Alert>
-          <AlertDescription>
+          <AlertDescription></AlertDescription>
             No templates found matching your criteria. Try adjusting your search or filters.
 </AlertDescription>
       )}
@@ -193,5 +189,5 @@ Alert>
     </Select>
     </any>
     </any>
-    </any>
   }
+`

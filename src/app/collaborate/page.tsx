@@ -11,37 +11,34 @@ import { Users, Plus, Share2, MessageCircle, Clock, Globe, Lock, Zap } from 'luc
 export default function CollaboratePage() {
   const { data: session, status }  = useSession();
 
-const [activeProject, setActiveProject] = useState<string | null>(null);
+const [activeProject, setActiveProject] = useState<string | null>(null);</string>
   
 const [projectName, setProjectName]  = useState('');
 
 const [showWorkspace, setShowWorkspace] = useState(false);
   
   
-const mockProjects = [
-    {
-      id: '1',
+const mockProjects = [;
+    { id: '1',
       name: 'E-commerce Platform',
       description: 'Building a modern e-commerce solution with AI-powered recommendations',
-      members: 5,
+      members: 5;
       lastActivity: '2 hours ago',
       status: 'active',
       isPublic: false
     },
-    {
-      id: '2',
+    { id: '2',
       name: 'Mobile App UI',
       description: 'Designing intuitive mobile interfaces for productivity app',
-      members: 3,
+      members: 3;
       lastActivity: '1 day ago',
       status: 'review',
       isPublic: true
     },
-    {
-      id: '3',
+    { id: '3',
       name: 'API Documentation',
       description: 'Comprehensive API documentation with interactive examples',
-      members: 2,
+      members: 2;
       lastActivity: '3 days ago',
       status: 'completed',
       isPublic: true
@@ -49,16 +46,17 @@ const mockProjects = [
   ];
   
   if (status === 'loading') {
-    return (<div className="flex items-center justify-center min-h-screen">, <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-    </div>
-  );
+    return (
+    <div className="flex items-center justify-center min-h-screen">, <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600">
+          </div>
+  )
 }
   
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-        <div className="absolute inset-0 bg-grid-gray-100 bg-grid opacity-50"></div>
+          <div className="absolute inset-0 bg-grid-gray-100 bg-grid opacity-50">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="text-center max-w-3xl mx-auto">
             <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-200">
@@ -72,153 +70,143 @@ const mockProjects = [
             </p>
             {session ? (
               <Button size="lg" onClick={() => setShowWorkspace(true)} className="gap-2">
-                <Plus className="h-5 w-5"   /> Create New Project
+                <Plus className="h-5 w-5"    /> Create New Project</Plus>
               </Button>
             ) : (
-              <Button size="lg" onClick={() => window.location.href = '/auth/signin'}>
+              <Button size="lg" onClick={() => window.location.href = '/auth/signin'}></Button>
                 Get Started Free
               </Button>
             )}
           </div>
-        </div>
-      </section>
 
       {/* Features Section */}
       <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Powerful Collaboration Features
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Everything you need to collaborate effectively with your team
             </p>
-          </div>
           
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="hover:shadow-lg transition-shadow">
+          <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
-                <Share2 className="h-12 w-12 text-blue-600 mb-4"   />
+          <Share2 className="h-12 w-12 text-blue-600 mb-4"     />
                 <CardTitle>Real-time Sync</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">
+          <p className="text-gray-600">
                   See changes instantly as your team works. No more merge conflicts or outdated versions.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Users className="h-12 w-12 text-green-600 mb-4"   />
-                <CardTitle>Team Management</CardTitle>
+          <CardHeader></CardHeader>
+                <Users className="h-12 w-12 text-green-600 mb-4"    />
+          <CardTitle>Team Management</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">
+          <p className="text-gray-600">
                   Invite team members, manage permissions, and track contributions all in one place.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <MessageCircle className="h-12 w-12 text-purple-600 mb-4"   />
-                <CardTitle>Built-in Chat</CardTitle>
+          <CardHeader></CardHeader>
+                <MessageCircle className="h-12 w-12 text-purple-600 mb-4"    />
+          <CardTitle>Built-in Chat</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">
+          <p className="text-gray-600">
                   Discuss ideas and solve problems together with integrated team chat and comments.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Clock className="h-12 w-12 text-orange-600 mb-4"   />
-                <CardTitle>Version History</CardTitle>
+          <CardHeader></CardHeader>
+                <Clock className="h-12 w-12 text-orange-600 mb-4"    />
+          <CardTitle>Version History</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">
+          <p className="text-gray-600">
                   Track every change and revert to any previous version with complete history.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Lock className="h-12 w-12 text-red-600 mb-4"   />
-                <CardTitle>Secure & Private</CardTitle>
+          <CardHeader></CardHeader>
+                <Lock className="h-12 w-12 text-red-600 mb-4"    />
+          <CardTitle>Secure & Private</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">
+          <p className="text-gray-600">
                   Enterprise-grade security with end-to-end encryption and access controls.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Zap className="h-12 w-12 text-yellow-600 mb-4"   />
-                <CardTitle>AI-Powered</CardTitle>
+          <CardHeader></CardHeader>
+                <Zap className="h-12 w-12 text-yellow-600 mb-4"    />
+          <CardTitle>AI-Powered</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">
+          <p className="text-gray-600">
                   Get intelligent suggestions, auto-completion, and code reviews powered by AI.
                 </p>
               </CardContent>
             </Card>
           </div>
-        </div>
-      </section>
 
       {/* Projects Section (for logged-in users) */}
       {session && (
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900">Your Projects</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Your Projects</h2>
               <Button onClick={() => setShowWorkspace(true)} className="gap-2">
-                <Plus className="h-4 w-4"   /> New Project
+                <Plus className="h-4 w-4"    /> New Project</Plus>
               </Button>
             </div>
             
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {mockProjects.map((project) => (
                 <Card key={project.id} className="hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => setActiveProject(project.id)}>
+                  onClick={() => setActiveProject(project.id)}></Card>
                   <CardHeader>
-                    <div className="flex justify-between items-start">
+          <div className="flex justify-between items-start">
                       <CardTitle className="text-lg">{project.name}</CardTitle>
                       {project.isPublic ? (
-                        <Globe className="h-4 w-4 text-gray-400"   />
+                        <Globe className="h-4 w-4 text-gray-400"     />
                       ) : (
-                        <Lock className="h-4 w-4 text-gray-400"   />
+                        <Lock className="h-4 w-4 text-gray-400"     />
                       )}
                     </div>
-                  </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 text-sm mb-4">{project.description}</p>
+          <p className="text-gray-600 text-sm mb-4">{project.description}</p>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <Users className="h-4 w-4"   />
-                        <span>{project.members} members</span>
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <Users className="h-4 w-4"    />
+          <span>{project.members} members</span>
                       </div>
                       <Badge variant={
-                        project.status === 'active' ? 'default' :
+                        project.status === 'active' ? 'default'  : null
                         project.status === 'review' ? 'secondary' : 'outline'
-                      }>
+                      }></Badge>
                         {project.status}
                       </Badge>
                     </div>
                     <p className="text-xs text-gray-400 mt-2">
                       Last activity: {project.lastActivity}
                     </p>
-                  </CardContent>
-                </Card>
               ))}
             </div>
-          </div>
-        </section>
       )}
 
       {/* CTA Section */}
@@ -231,11 +219,10 @@ const mockProjects = [
             <p className="text-xl text-blue-100 mb-8">
               Join thousands of teams building amazing products together
             </p>
-            <Button size="lg" variant="secondary" onClick={() => window.location.href = '/auth/signin'}>
+            <Button size="lg" variant="secondary" onClick={() => window.location.href = '/auth/signin'}></Button>
               Start Free Trial
             </Button>
           </div>
-        </section>
       )}
     </div>
   )

@@ -83,12 +83,12 @@ export class AgentSystem {
   static getInstance(): AgentSystem {
     if (!AgentSystem.instance) {
       AgentSystem.instance = new AgentSystem()}
-    return AgentSystem.instance;
+    return AgentSystem.instance
 }
-  async initialize(): Promise<any> {
-    if (this.initialized) { return: true }
+  async initialize(): Promise<any> {</any>
+    if (this.initialized) { return true }
     try {
-      const discovery = await this.loader.discoverAgents(), if (discovery.total_agents === 0) {
+      const discovery = await this.loader.discoverAgents(, if (discovery.total_agents === 0) {
         throw new Error('No agents discovered - check agents directory')};
       const _registeredCount = await this.registry.autoRegisterAgents();
       if (registeredCount === 0) {
@@ -96,31 +96,29 @@ export class AgentSystem {
       this.monitor.startMonitoring();
       await new Promise(resolve => setTimeout(resolve, 1000))
       this.initialized = true;
-      return true;
+      return true
 } catch (error) {
       console.error('❌ Agent system initialization, failed:', error);
         return false}
 }
-  async getAgentsForNextStage(currentStage: string, projectType?: string): Promise<any> {
+  async getAgentsForNextStage(currentStage: string, projectType? null : string): Promise<any> {</any>
     if (!this.initialized) {
       throw new Error('Agent system not initialized')};
     const requiredAgents  = await this.loader.getRequiredAgentsForStage(currentStage, projectType);
 
 const healthyAgents = requiredAgents.filter((agent) => {
       const _registration = this.registry.getAgentDetails(agent.agent_id);
-        return registration?.health_status === 'healthy'})
-    return {
-      stage: currentStage, project_type: projectType,
+        return registration?.health_status === 'healthy'};)
+    return { stage: currentStage, project_type: projectType;
     required_agents: requiredAgents.length,
     healthy_agents: healthyAgents.length,
-    agents: healthyAgents.map((agent) => ({
-  id: agent.agent_id,
+    agents: healthyAgents.map((agent) => ({ id: agent.agent_id,
     name: agent.name,
     role: agent.role,
     priority: agent.priority,
     capabilities: agent.capabilities,
     status: agent.status
-      }));
+}));
       readiness: healthyAgents.length >= requiredAgents.length * 0.8
   }
 }
@@ -132,47 +130,42 @@ const healthyAgents = requiredAgents.filter((agent) => {
 const dashboard = this.monitor.getMonitoringDashboard();
     
 const commStats = this.communication.getCommunicationStats();
-    return {
-      initialized: this.initialized,
-    timestamp: new Date().toISOString(),
-    agents: {
-  total: registryStatus.total_agents,
+    return { initialized: this.initialized,
+    timestamp: new Date().toISOString(, agents: { total: registryStatus.total_agents,
     healthy: dashboard.overview.healthy_agents,
     warning: dashboard.overview.warning_agents,
     critical: dashboard.overview.critical_agents,
     offline: dashboard.overview.offline_agents
       },
-    system_health: {
-        overall_score: dashboard.overview.system_health_score,
-    status: dashboard.overview.system_health_score >= 90 ? 'excellent' :
-                dashboard.overview.system_health_score >= 75 ? 'good' :
+    system_health: { overall_score: dashboard.overview.system_health_score,
+    status: dashboard.overview.system_health_score >= 90 ? 'excellent'  : null
+                dashboard.overview.system_health_score >= 75 ? 'good'  : null
                 dashboard.overview.system_health_score >= 50 ? 'fair' : 'poor'
       },
-    communication: {
-        total_messages: commStats.total_messages,
+    communication: { total_messages: commStats.total_messages,
     success_rate: commStats.success_rate,
     active_channels: commStats.active_channels
 }
-  async performHealthCheck(): Promise<any> {
-    const _health = await this.monitor.performHealthCheck(); const warnings: string[] = [], const errors: string[] = [];
+  async performHealthCheck(): Promise<any> {</any>
+{ await this.monitor.performHealthCheck(); const warnings: string[] = [], const errors: string[] = [];
     // Collect warnings and errors from health checks
     for (const [agentId, check] of Object.entries(health)) {
       if (check.status === 'warning') {
-        warnings.push(`${agentId}: ${check.details?.message || 'Warning'}`);``
+        warnings.push(`${agentId}: ${check.details?.message || 'Warning'}`); ``
       } else if (check.status === 'critical') {
-        errors.push(`${agentId}: ${check.details?.message || 'Critical, error'}`);``
+        errors.push(`${agentId}: ${check.details?.message || 'Critical, error'}`); ``
   }
 }
     const _healthy = Object.values(health).filter((h) => h.status === 'healthy').length;
     return { healthy, warnings, errors }}
   shutdown() {;
-    this.monitor.stopMonitoring(), this.communication.shutdown(); this.registry.shutdown();
+    this.monitor.stopMonitoring(, this.communication.shutdown(); this.registry.shutdown();
     this.initialized = false
   }
 }
 // Convenience function for easy system initialization;
-export async function initializeAgentSystem(): Promise<any> {
-  const system = AgentSystem.getInstance(), await system.initialize(); return system
+export async function initializeAgentSystem(): Promise<any> {</any>
+{ AgentSystem.getInstance(, await system.initialize(); return system
 }
 // Export the main system instance;
 export const _agentSystem = AgentSystem.getInstance();
@@ -180,7 +173,7 @@ export const _agentSystem = AgentSystem.getInstance();
 export function createAgent(type: string): string) {switch (type) {
     // BMAD Agents
     case 'analyst':
-      return new (require('./bmad/AnalystAgent').AnalystAgent)(), break, case 'project-manager':;
+      return new (require('./bmad/AnalystAgent').AnalystAgent)(, break, case 'project-manager':;
       return new (require('./bmad/ProjectManagerAgent').ProjectManagerAgent)();
     break;
     case 'architect':
@@ -208,3 +201,5 @@ break
 // Export all types;
 export * from './bmad';
 export * from './archon';
+
+}}}))))

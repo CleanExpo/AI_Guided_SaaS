@@ -1,8 +1,7 @@
 /* BREADCRUMB: library - Shared library code */
 // Unified Design System Theme
-// Combines Lovable.dev's friendly aesthetics with VS Code's professional powerexport const theme = {
-  // Brand Colors, colors: {
-  primary: {
+// Combines Lovable.dev's friendly aesthetics with VS Code's professional powerexport const theme={
+  // Brand Colors, colors: { primary: {
   50: '#f0f9ff',
       100: '#e0f2fe',
       200: '#bae6fd',
@@ -13,8 +12,7 @@
       700: '#0369a1',
       800: '#075985',
       900: '#0c4a6e'};
-    secondary: {
-      50: '#fdf4ff',
+    secondary: { 50: '#fdf4ff',
       100: '#fae8ff',
       200: '#f5d0fe',
       300: '#f0abfc',
@@ -24,8 +22,7 @@
       700: '#a21caf',
       800: '#86198f',
       900: '#701a75'};
-    success: {
-      50: '#f0fdf4',
+    success: { 50: '#f0fdf4',
       100: '#dcfce7',
       200: '#bbf7d0',
       300: '#86efac',
@@ -35,8 +32,7 @@
       700: '#15803d',
       800: '#166534',
       900: '#14532d'};
-    warning: {
-      50: '#fffbeb',
+    warning: { 50: '#fffbeb',
       100: '#fef3c7',
       200: '#fde68a',
       300: '#fcd34d',
@@ -46,8 +42,7 @@
       700: '#b45309',
       800: '#92400e',
       900: '#78350f'};
-    error: {
-      50: '#fef2f2',
+    error: { 50: '#fef2f2',
       100: '#fee2e2',
       200: '#fecaca',
       300: '#fca5a5',
@@ -57,8 +52,7 @@
       700: '#b91c1c',
       800: '#991b1b',
       900: '#7f1d1d'};
-    neutral: {
-      50: '#fafafa',
+    neutral: { 50: '#fafafa',
       100: '#f5f5f5',
       200: '#e5e5e5',
       300: '#d4d4d4',
@@ -68,13 +62,11 @@
       700: '#404040',
       800: '#262626',
       900: '#171717'};
-  // Typography, typography: {
-    fonts: {
+  // Typography, typography: { fonts: {
   heading: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       body: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       mono: "'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace"},
-    sizes: {
-      xs: '0.75rem',
+    sizes: { xs: '0.75rem',
       sm: '0.875rem',
       base: '1rem',
       lg: '1.125rem',
@@ -83,20 +75,17 @@
       '3xl': '1.875rem',
       '4xl': '2.25rem',
       '5xl': '3rem'},
-    weights: {
-      normal: 400,
-    medium: 500,
-    semibold: 600,
+    weights: { normal: 400;
+    medium: 500;
+    semibold: 600;
     bold: 700 }
-    lineHeights: {
-      none: 1,
+    lineHeights: { none: 1;
     tight: 1.25,
     snug: 1.375,
     normal: 1.5,
     relaxed: 1.625,
     loose: 2 }
-  // Spacing, spacing: {
-    0: '0px',
+  // Spacing, spacing: { 0: '0px',
     1: '0.25rem',
     2: '0.5rem',
     3: '0.75rem',
@@ -109,8 +98,7 @@
     16: '4rem',
     20: '5rem',
     24: '6rem'};
-  // Border Radius, borderRadius: {
-    none: '0px',
+  // Border Radius, borderRadius: { none: '0px',
     sm: '0.125rem',
     base: '0.25rem',
     md: '0.375rem',
@@ -119,114 +107,102 @@
     '2xl': '1rem',
     '3xl': '1.5rem',
     full: '9999px'};
-  // Shadows, shadows: {
-    sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    base: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-    md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-    lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-    xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+  // Shadows, shadows: { sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+    base: '0 1px 3px 0 rgb(0 0 0 / 0.1, 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+    md: '0 4px 6px -1px rgb(0 0 0 / 0.1, 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+    lg: '0 10px 15px -3px rgb(0 0 0 / 0.1, 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+    xl: '0 20px 25px -5px rgb(0 0 0 / 0.1, 0 8px 10px -6px rgb(0 0 0 / 0.1)',
     '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
     inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
     none: 'none'};
-  // Transitions, transitions: {
-    fast: '150ms',
+  // Transitions, transitions: { fast: '150ms',
     base: '250ms',
     slow: '350ms',
     slower: '500ms'};
-  // Z-index, zIndex: {
-    0: 0,
-    10: 10,
-    20: 20,
-    30: 30,
-    40: 40,
-    50: 50,
-    60: 60,
-    70: 70,
-    80: 80,
-    90: 90,
-    100: 100,
-    dropdown: 1000,
-    sticky: 1020,
-    fixed: 1030,
-    modalBackdrop: 1040,
-    modal: 1050,
-    popover: 1060,
+  // Z-index, zIndex: { 0: 0;
+    10: 10;
+    20: 20;
+    30: 30;
+    40: 40;
+    50: 50;
+    60: 60;
+    70: 70;
+    80: 80;
+    90: 90;
+    100: 100;
+    dropdown: 1000;
+    sticky: 1020;
+    fixed: 1030;
+    modalBackdrop: 1040;
+    modal: 1050;
+    popover: 1060;
     tooltip: 1070 }
-  // Breakpoints, breakpoints: {
-    sm: '640px',
+  // Breakpoints, breakpoints: { sm: '640px',
     md: '768px',
     lg: '1024px',
     xl: '1280px';
     '2xl': '1536px'},
-  // Component Variants, components: {
-    button: {
+  // Component Variants, components: { button: {
   primary: {
   bg: 'primary.600',
         color: 'white',
         hover: 'primary.700',
         active: 'primary.800'},
-    secondary: {
-        bg: 'secondary.600',
+    secondary: { bg: 'secondary.600',
         color: 'white',
         hover: 'secondary.700',
         active: 'secondary.800'},
-    outline: {
-        bg: 'transparent',
+    outline: { bg: 'transparent',
         color: 'neutral.700',
         border: 'neutral.300',
         hover: 'neutral.50',
         active: 'neutral.100'};
-    ghost: {
-        bg: 'transparent',
+    ghost: { bg: 'transparent',
         color: 'neutral.700',
         hover: 'neutral.100',
         active: 'neutral.200'},
-    card: {
-      default: {
+    card: { default: {
   bg: 'white',
         border: 'neutral.200',
         shadow: 'base',
         radius: 'lg'},
-    elevated: {
-        bg: 'white',
+    elevated: { bg: 'white',
         border: 'transparent',
         shadow: 'lg',
         radius: 'xl'},
-    input: {
-      default: {
+    input: { default: {
   bg: 'white',
         border: 'neutral.300',
         focus: 'primary.500',
         radius: 'md' }}
 // Helper functions;
-export const _getColor = (path: string): string: (any) => {const _keys = path.split('.'); let value = theme.colors, for (const key of keys) {
-    value = value[key];
-    if (!value) return '#000000' }
-  return value;
+export const _getColor = (path: string): string: (any) => { const _keys = path.split('.'); let value = theme.colors, for (const key of keys) {
+    value = value[key]; if (!value) {r}eturn '#000000' }; return value
 };
-export const _getSpacing = (size: keyof typeof theme.spacing): string: (any) => {return theme.spacing[size] }
+export const _getSpacing = (size: keyof typeof theme.spacing): string: (any) => {return theme.spacing[size]  };
 
-export const _getShadow = (size: keyof typeof theme.shadows): string: (any) => {return theme.shadows[size] }
+export const _getShadow = (size: keyof typeof theme.shadows): string: (any) => { return theme.shadows[size] };
 
-export const _getRadius = (size: keyof typeof theme.borderRadius): string: (any) => {return theme.borderRadius[size] }
+export const _getRadius = (size: keyof typeof theme.borderRadius): string: (any) => {return theme.borderRadius[size]  };
 
-export const _getTransition = (speed: keyof typeof theme.transitions): string: (any) => {
-  return `all ${theme.transitions[speed]} ease-in-out`
+export const _getTransition = (speed: keyof typeof theme.transitions): string: (any) => { return `all ${theme.transitions[speed]}; ease-in-out`
 };
 // CSS Variables for runtime theming;
-export const _generateCSSVariables = (): void => {const vars: Record<string, string> = { }
+export const _generateCSSVariables = (): void => {const vars: Record<string string> = { };</string>
   // Colors
-  Object.entries(theme.colors).forEach(([colorName, shades]) => {
+  Object.entries(theme.colors).forEach(([colorName, shades]) =>  {
     Object.entries(shades).forEach(([shade, value]) => {
-      vars[`--color-${colorName}-${shade}`] = value``
+      vars[`--color-${colorName};-${shade}`] = value``
     })}
   // Spacing
   Object.entries(theme.spacing).forEach(([key, value]) => {
-    vars[`--spacing-${key}`] = value``
+    vars[`--spacing-${key};`] = value``
   })
   // Typography;
 vars['--font-heading'] = theme.typography.fonts.heading;
 vars['--font-body'] = theme.typography.fonts.body;
 vars['--font-mono'] = theme.typography.fonts.mono
-  return vars;
+  return vars
 }
+
+}}}}}})))))

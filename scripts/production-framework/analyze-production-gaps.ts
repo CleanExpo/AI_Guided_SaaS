@@ -12,7 +12,7 @@ interface ProductionGap {
 class ProductionGapAnalyzer {
   private gaps: ProductionGap[] = [];
   private projectRoot = process.cwd();
-  async function analyze(): Promise<void> {
+  async analyze(): Promise<void> {
     console.log('🔍 Starting Production Gap Analysis...\n');
     await this.checkEnvironmentParity();
     await this.checkExternalDependencies();
@@ -22,7 +22,7 @@ class ProductionGapAnalyzer {
     await this.checkSecurityCompliance();
     this.generateReport()
 }
-  private async function checkEnvironmentParity(): Promise<void> {
+  private async checkEnvironmentParity(): Promise<void> {
     console.log('📋 Checking Environment Parity...');
     // Check for .env files;
 const envFiles = ['.env', '.env.local', '.env.production'];
@@ -57,7 +57,7 @@ const requiredVars = [
    ]
         })})
 }
-  private async function checkExternalDependencies(): Promise<void> {
+  private async checkExternalDependencies(): Promise<void> {
     console.log('📦 Checking External Dependencies...');
     // Check package.json for production readiness;
 const packageJson = JSON.parse(;
@@ -82,7 +82,7 @@ const _deps = { ...packageJson.dependencies, ...packageJson.devDependencies };
     try {
       const _auditResult = execSync('npm audit --json', { encoding: 'utf-8' });
       const audit = JSON.parse(auditResult);
-      function if(audit.metadata.vulnerabilities.total > 0) {
+      if(audit.metadata.vulnerabilities.total > 0) {
         this.gaps.push({
           category: 'Security';
           issue: `Found ${audit.metadata.vulnerabilities.total} npm vulnerabilities`;
@@ -97,7 +97,7 @@ const _deps = { ...packageJson.dependencies, ...packageJson.devDependencies };
         })} catch (error) {
       // npm audit returns non-zero exit code when vulnerabilities found
 }}
-  private async function checkAuthenticationSetup(): Promise<void> {
+  private async checkAuthenticationSetup(): Promise<void> {
     console.log('🔐 Checking Authentication Setup...');
     // Check NextAuth configuration;
 const _authConfigPath = path.join(this.projectRoot, 'src/app/api/auth/[...nextauth]/options.ts');
@@ -130,7 +130,7 @@ const _authConfigPath = path.join(this.projectRoot, 'src/app/api/auth/[...nextau
             'Test OAuth callbacks with production URL'
    ]
         })}
-  private async function checkAPIIntegrations(): Promise<void> {
+  private async checkAPIIntegrations(): Promise<void> {
     console.log('🔌 Checking API Integrations...');
     // Search for API calls;
 const apiFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
@@ -143,7 +143,7 @@ const apiFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
         if (pattern.test(content)) {
           apiCallsFound++
 }})};
-    function if(apiCallsFound > 0) {
+    if(apiCallsFound > 0) {
       this.gaps.push({
         category: 'API Integration';
         issue: `Found ${apiCallsFound} API integration points to verify`;
@@ -157,7 +157,7 @@ const apiFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
           'Configure retry logic and timeouts'
    ]
       })}
-  private async function checkBuildProcess(): Promise<void> {
+  private async checkBuildProcess(): Promise<void> {
     console.log('🏗️ Checking Build Process...');
     try {
       // Test production build
@@ -186,7 +186,7 @@ const apiFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
         shell: true
       });
       const _errorCount = parseInt(tscOutput.trim();
-      function if(errorCount > 0) {
+      if(errorCount > 0) {
         this.gaps.push({
           category: 'TypeScript';
           issue: `${errorCount} TypeScript errors found`;
@@ -202,7 +202,7 @@ const apiFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
         })} catch (error) {
       // TypeScript check failed
 }}
-  private async function checkSecurityCompliance(): Promise<void> {
+  private async checkSecurityCompliance(): Promise<void> {
     console.log('🔒 Checking Security Compliance...');
     // Check for HTTPS configuration;
 const _nextConfig = path.join(this.projectRoot, 'next.config.mjs');
@@ -252,7 +252,7 @@ const srcFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
     if (!fs.existsSync(fullPath)) return files;
     const _walk = (currentPath: string) => {
       const _entries = fs.readdirSync(currentPath, { withFileTypes: true });
-      function for(const entry of entries) {
+      for(const entry of entries) {
         const _entryPath = path.join(currentPath, entry.name);
         if (entry.isDirectory() && !entry.name.includes('node_modules')) {
           walk(entryPath)
@@ -283,7 +283,7 @@ const srcFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
     console.log(`  🟢 Low: ${report.summary.low}`);
     console.log(`\nDetailed report saved to: ${reportPath}`);
     // Display critical issues;
-function if(report.summary.critical > 0) {
+if(report.summary.critical > 0) {
       console.log('\n⚠️  Critical Issues Requiring Immediate Attention:');
       this.gaps
         .filter((g: any) => g.severity === 'critical')

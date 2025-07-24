@@ -1,14 +1,12 @@
 /* BREADCRUMB: library - Shared library code */;
-export interface AgentConfig {
-  id: string,
-  name: string,
-  type: string,
-  enabled: boolean,
+export interface AgentConfig { id: string;
+  name: string;
+  type: string;
+  enabled: boolean;
   priority: number
 }
 
-export interface AgentStatus {
-  id: string,
+export interface AgentStatus { id: string;
   status: 'active' | 'idle' | 'error',
   lastActivity: Date
 }
@@ -29,32 +27,34 @@ export class AgentOrchestrator {
       this.getSystemStatus = () => Promise.resolve({ status: 'loading', message: 'Initializing...' });
       this.startMonitoring = () => Promise.resolve();
       this.stopMonitoring = () => Promise.resolve()}
-  async initialize(): Promise<any> {
-    if (!this.isClient) return Promise.resolve({});
+  async initialize(): Promise<any> {</any>
+    if (!this.isClient) {r}eturn Promise.resolve({});
     console.log('Initializing Agent Orchestrator');
     return {}
-  async loadAgent(config: AgentConfig): Promise<any> {;
-    if (!this.isClient) return Promise.resolve({});
+  async loadAgent(config: AgentConfig): Promise<any> {;</any>
+    if (!this.isClient) {r}eturn Promise.resolve({});
     console.log('Loading agent:', config.name);
     return {}
-  async getStatus(): Promise<AgentStatus[]> {;
-    if (!this.isClient) return Promise.resolve([]);
+  async getStatus(): Promise<AgentStatus[]> {;</AgentStatus>
+    if (!this.isClient) {r}eturn Promise.resolve([]);
         return []}
-  async shutdown(): Promise<any> {;
-    if (!this.isClient) return Promise.resolve({});
+  async shutdown(): Promise<any> {;</any>
+    if (!this.isClient) {r}eturn Promise.resolve({});
     console.log('Shutting down Agent Orchestrator');
     return {}
-  getSystemStatus(): Promise<any> {
+  getSystemStatus(): Promise<any> {</any>
     return Promise.resolve({ status: 'active', message: 'System operational' })
   }
-  startMonitoring(): Promise<any> {
+  startMonitoring(): Promise<any> {</any>
     return Promise.resolve()}
-  stopMonitoring(): Promise<any> {
+  stopMonitoring(): Promise<any> {</any>
     return Promise.resolve()}};
 // Global orchestrator instance;
 let orchestratorInstance: AgentOrchestrator | null = null;
 export function getOrchestrator(): AgentOrchestrator {
   if (!orchestratorInstance) {
     orchestratorInstance = new AgentOrchestrator()}
-  return orchestratorInstance;
+  return orchestratorInstance
 }
+
+}}}}

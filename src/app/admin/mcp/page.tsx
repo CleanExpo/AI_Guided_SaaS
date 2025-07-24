@@ -7,21 +7,20 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Settings, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
 
-interface MCPStatus {
-  status: string,
-  name: string,
-  version: string,
+interface MCPStatus { status: string;
+  name: string;
+  version: string;
   lastHealthCheck: string
 }
 
 export default function AdminMCPPage() {
-  const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);
+  const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);</MCPStatus>
   const [loading, setLoading] = useState(true);
   
-  useEffect(() => {
+  useEffect(() =>  {
     // Simulate loading MCP server status
     setTimeout(() => {
-      setMcpServers([
+      setMcpServers([;
         { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'sequential-thinking', version: '1.2.0', lastHealthCheck: new Date().toISOString() }
@@ -32,10 +31,10 @@ export default function AdminMCPPage() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">MCP Server Management</h1>
         <Button>
-          <RefreshCw className="w-4 h-4 mr-2"   />
+          <RefreshCw className="w-4 h-4 mr-2"     />
           Refresh Status
         </Button>
       </div>
@@ -46,27 +45,26 @@ export default function AdminMCPPage() {
         ) : (
           mcpServers.map(server => (
             <Card key={server.name}>
-              <CardHeader>
+          <CardHeader></CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  <span>{server.name}</span>
-                  <Badge variant={server.status === 'running' ? 'default' : 'destructive'}>
+          <span>{server.name}</span>
+                  <Badge variant={server.status === 'running' ? 'default' : 'destructive'}></Badge>
                     {server.status === 'running' ? (
-                      <CheckCircle className="w-3 h-3 mr-1"   />
+                      <CheckCircle className="w-3 h-3 mr-1"     />
                     ) : (
-                      <XCircle className="w-3 h-3 mr-1"   />
+                      <XCircle className="w-3 h-3 mr-1"     />
                     )}
                     {server.status}
                   </Badge>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p>Version: {server.version}</p>
+          <p>Version: {server.version}</p>
                 <p>Last Check: {new Date(server.lastHealthCheck).toLocaleString()}</p>
               </CardContent>
             </Card>
           ))
         )}
       </div>
-    </div>
-  );
+  )
 }

@@ -3,8 +3,7 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
 import { RequirementAnalysis } from './AnalystAgent';
 import { ProjectPlan } from './ProjectManagerAgent';
-export interface SystemArchitecture {
-    overview: ArchitectureOvervie
+export interface SystemArchitecture { overview: ArchitectureOvervie
 w,
     components: Component[],
   dataModel: DataMode
@@ -21,26 +20,23 @@ y,
   architecturalPatterns: string[]
 }
 
-export interface ArchitectureOverview {
-    style: string, // e.g., 'microservices', 'monolithic', 'serverless', principles: string[],
+export interface ArchitectureOverview { style: string, // e.g., 'microservices', 'monolithic', 'serverless', principles: string[],
   constraints: string[],
   qualityAttributes: QualityAttribute[],
   diagram: string; // ASCII or description for now
 }
 
-export interface QualityAttribute {
-    name: string,
-  requirement: string,
-  approach: string,
+export interface QualityAttribute { name: string;
+  requirement: string;
+  approach: string;
   tradeoffs: string[]
 }
 
-export interface Component {
-id: string,
-  name: string,
+export interface Component { id: string;
+  name: string;
   type: 'frontend' | 'backend' | 'service' | 'database' | 'external',
-  responsibility: string,
-  technology: string[];
+  responsibility: string;
+  technology: string[]
 }
 
 interfaces: ComponentInterface[],
@@ -48,112 +44,98 @@ interfaces: ComponentInterface[],
   scalability: string
 }
 
-export interface ComponentInterface {
-    name: string,
+export interface ComponentInterface { name: string;
   type: 'REST' | 'GraphQL' | 'WebSocket' | 'gRPC' | 'Event',
-  description: string,
+  description: string;
   methods: InterfaceMethod[]
 }
 
-export interface InterfaceMethod {
-    name: string;
+export interface InterfaceMethod { name: string;
   httpMethod?: string,
   path?: string,
-    input: string,
-  output: string,
+    input: string;
+  output: string;
   description: string
 }
 
-export interface DataModel {
-    entities: Entity[],
+export interface DataModel { entities: Entity[],
   relationships: Relationship[],
   dataFlow: DataFlow[],
   storageStrategy: StorageStrateg
 y
 }
 
-export interface Entity {
-    name: string,
-  description: string,
+export interface Entity { name: string;
+  description: string;
   attributes: Attribute[],
   businessRules: string[]
 }
 
-export interface Attribute {
-    name: string,
-  type: string,
+export interface Attribute { name: string;
+  type: string;
   required: boolean;
   unique?: boolean,
   indexed?: boolean,
     description: string
 }
 
-export interface Relationship {
-    from: string,
-  to: string,
+export interface Relationship { from: string;
+  to: string;
   type: 'one-to-one' | 'one-to-many' | 'many-to-many',
   description: string
 }
 
-export interface DataFlow {
-    name: string,
-  source: string,
-  destination: string,
-  dataType: string,
-  frequency: string,
+export interface DataFlow { name: string;
+  source: string;
+  destination: string;
+  dataType: string;
+  frequency: string;
   volume: string
 }
 
-export interface StorageStrategy {
-    databases: Database[],
+export interface StorageStrategy { databases: Database[],
   caching: CachingStrateg
 y,
     fileStorage: FileStorageStrateg
 y
 }
 
-export interface Database {
-    name: string,
+export interface Database { name: string;
   type: 'relational' | 'document' | 'key-value' | 'graph' | 'time-series',
-  technology: string,
-  purpose: string,
+  technology: string;
+  purpose: string;
   entities: string[]
 }
 
-export interface CachingStrategy {
-levels: string[],
+export interface CachingStrategy { levels: string[],
   technologies: string[],
-  ttl: Record<string, any />, export
+  ttl: Record<string any  />, export</string>
 }
 
-interface FileStorageStrategy {
-    type: string,
-  provider: string,
+interface FileStorageStrategy { type: string;
+  provider: string;
   structure: string
 }
 
-export interface APIDesign {
-    style: 'REST' | 'GraphQL' | 'gRPC' | 'Mixed',
-  versioning: string,
-  authentication: string,
-  authorization: string,
-  rateLimiting: string,
-  documentation: string,
+export interface APIDesign { style: 'REST' | 'GraphQL' | 'gRPC' | 'Mixed',
+  versioning: string;
+  authentication: string;
+  authorization: string;
+  rateLimiting: string;
+  documentation: string;
   endpoints: APIEndpoint[]
 }
 
-export interface APIEndpoint {
-    path: string,
-  method: string,
-  description: string,
+export interface APIEndpoint { path: string;
+  method: string;
+  description: string;
   authentication: boolean
   requestSchema
   responseSchema,
     errorHandling: string[]
 }
 
-export interface Infrastructure {
-    hostingPlatform: string,
+export interface Infrastructure { hostingPlatform: string;
   computeResources: ComputeResource[], networking: NetworkingConfi
 g,
     monitoring: MonitoringStrateg
@@ -162,45 +144,39 @@ y;
 y
 }
 
-export interface ComputeResource {
-    name: string,
-  type: string,
-  specifications: Record<string, any>,
-    scalingPolicy: string,
+export interface ComputeResource { name: string;
+  type: string;
+  specifications: Record<string any>,</string>
+    scalingPolicy: string;
   estimatedCost: string
 }
 
-export interface NetworkingConfig {
-    vpc: boolean,
+export interface NetworkingConfig { vpc: boolean;
   subnets: string[],
-  loadBalancer: string,
-  cdn: string,
+  loadBalancer: string;
+  cdn: string;
   dns: string
 }
 
-export interface MonitoringStrategy {
-    tools: string[],
+export interface MonitoringStrategy { tools: string[],
   metrics: string[],
   alerts: Alert[],
   dashboards: string[]
 }
 
-export interface Alert {
-    name: string,
-  condition: string,
+export interface Alert { name: string;
+  condition: string;
   severity: 'critical' | 'warning' | 'info',
   action: string
 }
 
-export interface BackupStrategy {
-    frequency: string,
-  retention: string,
-  type: string,
+export interface BackupStrategy { frequency: string;
+  retention: string;
+  type: string;
   location: string
 }
 
-export interface SecurityArchitecture {
-    principles: string[],
+export interface SecurityArchitecture { principles: string[],
   threats: ThreatModel[],
   controls: SecurityControl[],
   compliance: string[],
@@ -208,82 +184,71 @@ export interface SecurityArchitecture {
 n
 }
 
-export interface ThreatModel {
-    threat: string,
-  category: string,
+export interface ThreatModel { threat: string;
+  category: string;
   likelihood: 'high' | 'medium' | 'low',
   impact: 'high' | 'medium' | 'low',
   mitigation: string[]
 }
 
-export interface SecurityControl {
-    name: string,
-  type: string,
-  implementation: string,
+export interface SecurityControl { name: string;
+  type: string;
+  implementation: string;
   scope: string[]
 }
 
-export interface DataProtection {
-    encryption: EncryptionStrateg
+export interface DataProtection { encryption: EncryptionStrateg
 y,
     privacy: PrivacyMeasure[],
   accessControl: AccessControlMode
 l
 }
 
-export interface EncryptionStrategy {
-    atRest: string,
-  inTransit: string,
+export interface EncryptionStrategy { atRest: string;
+  inTransit: string;
   keyManagement: string
 }
 
-export interface PrivacyMeasure {
-    name: string,
-  description: string,
+export interface PrivacyMeasure { name: string;
+  description: string;
   implementation: string
 }
 
-export interface AccessControlModel {
-    type: string,
-  implementation: string,
+export interface AccessControlModel { type: string;
+  implementation: string;
   roles: string[]
 }
 
-export interface Integration {
-    name: string,
+export interface Integration { name: string;
   type: 'API' | 'Webhook' | 'SDK' | 'Database' | 'Message Queue',
-  purpose: string,
-  protocol: string,
-  authentication: string,
-  dataFormat: string,
+  purpose: string;
+  protocol: string;
+  authentication: string;
+  dataFormat: string;
   errorHandling: string
 }
 
-export interface DeploymentStrategy {
-    approach: string,
+export interface DeploymentStrategy { approach: string;
   environments: Environment[],
   pipeline: PipelineStage[],
-  rollbackStrategy: string,
+  rollbackStrategy: string;
   blueGreenDeployment: boolean
 }
 
-export interface Environment {
-    name: string,
-  purpose: string,
-  configuration: Record<string, any>,
+export interface Environment { name: string;
+  purpose: string;
+  configuration: Record<string any>,</string>
     resources: string[]
 }
 
-export interface PipelineStage {
-    name: string,
+export interface PipelineStage { name: string;
   actions: string[],
   triggers: string[],
   approvals: string[]
 }
 
-export interface TechnicalDecision {
-    decision: string,
-  rationale: string,
+export interface TechnicalDecision { decision: string;
+  rationale: string;
   alternatives: string[],
   tradeoffs: string[],
   risks: string[]
@@ -291,8 +256,7 @@ export interface TechnicalDecision {
 
 export class ArchitectAgent extends Agent {
   constructor() {
-    super({
-      id: 'architect-agent',
+    super({ id: 'architect-agent',
       name: 'System Architect',
       role: 'Design system architecture and technical solutions',
       description:
@@ -315,24 +279,23 @@ export class ArchitectAgent extends Agent {
       temperature: 0.4
   }
 }
-  protected async execute(input: string): Promise<any> {
+  protected async execute(input: string): Promise<any> {</any>
     try {
-      this.think('Starting architecture design process...'), // Get inputs from other agents, const requirements  = this.getSharedMemory('primary-requirements') || [];
+      this.think('Starting architecture design process...', // Get inputs from other agents, const requirements  = this.getSharedMemory('primary-requirements') || [];
 
 const _userStories = this.getSharedMemory('user-stories') || [];
       
-const constraints  = this.getSharedMemory('technical-constraints') || [];
+constraints  = this.getSharedMemory('technical-constraints') || [];
 
 const _timeline = this.getSharedMemory('project-timeline');
       
 const qualityStandards = this.getSharedMemory('quality-standards') || [];
-      this.observe('Retrieved inputs from other agents', {
-        requirementCount: requirements.length,
+      this.observe('Retrieved inputs from other agents', { requirementCount: requirements.length,
     constraintCount: constraints.length
       }};
       // Step, 1: Define architecture overview and style;
 
-const overview = await this.defineArchitectureOverview(
+const overview = await this.defineArchitectureOverview(;
         input,
         requirements,
         constraints,
@@ -341,37 +304,34 @@ const overview = await this.defineArchitectureOverview(
       this.observe('Defined architecture overview', overview);
       // Step, 2: Design system components;
 
-const components = await this.designComponents(
+const components = await this.designComponents(;
         requirements,
         userStories,
         overview.style;
       );
-      this.observe('Designed system components', {
-        componentCount: components.length
+      this.observe('Designed system components', { componentCount: components.length
       }};
       // Step, 3: Create data model;
 
-const dataModel = await this.createDataModel(
+const dataModel = await this.createDataModel(;
         requirements,
         userStories,
         // components;
       );
-      this.observe('Created data model', {
-        entityCount: dataModel.entities.length
+      this.observe('Created data model', { entityCount: dataModel.entities.length
       }};
       // Step, 4: Design APIs;
 
-const apiDesign = await this.designAPIs(
+const apiDesign = await this.designAPIs(;
         components,
         dataModel,
         // userStories;
       );
-      this.observe('Designed APIs', {
-        endpointCount: apiDesign.endpoints.length
+      this.observe('Designed APIs', { endpointCount: apiDesign.endpoints.length
       }};
       // Step, 5: Plan infrastructure;
 
-const infrastructure = await this.planInfrastructure(
+const infrastructure = await this.planInfrastructure(;
         components,
         overview,
         // timeline;
@@ -379,23 +339,21 @@ const infrastructure = await this.planInfrastructure(
       this.observe('Planned infrastructure', infrastructure);
       // Step, 6: Design security architecture;
 
-const security = await this.designSecurity(
+const security = await this.designSecurity(;
         requirements,
         components,
         // dataModel;
       );
-      this.observe('Designed security architecture', {
-        threatCount: security.threats.length
+      this.observe('Designed security architecture', { threatCount: security.threats.length
       }};
       // Step, 7: Plan integrations;
 
 const integrations = await this.planIntegrations(input, components);
-      this.observe('Planned integrations', {
-        integrationCount: integrations.length
+      this.observe('Planned integrations', { integrationCount: integrations.length
       }};
       // Step, 8: Define deployment strategy;
 
-const _deploymentStrategy = await this.defineDeploymentStrategy(
+const _deploymentStrategy = await this.defineDeploymentStrategy(;
         infrastructure,
         components,
         // timeline;
@@ -403,17 +361,16 @@ const _deploymentStrategy = await this.defineDeploymentStrategy(
       this.observe('Defined deployment strategy', deploymentStrategy);
       // Step, 9: Document technical decisions;
 
-const technicalDecisions = await this.documentDecisions(
+const technicalDecisions = await this.documentDecisions(;
         overview,
         components,
         // infrastructure;
       );
-      this.observe('Documented technical decisions', {
-        decisionCount: technicalDecisions.length
+      this.observe('Documented technical decisions', { decisionCount: technicalDecisions.length
       }};
       // Compile final architecture;
 
-const architecture: SystemArchitecture = {;
+const architecture: SystemArchitecture={;
         overview;
         components,
         dataModel,
@@ -431,9 +388,8 @@ const architecture: SystemArchitecture = {;
       this.setSharedMemory('api-endpoints', apiDesign.endpoints);
       this.setSharedMemory('data-entities', dataModel.entities);
       this.setSharedMemory('deployment-config', deploymentStrategy);
-      return {
-        success: true,
-    output: architecture,
+      return { success: true;
+    output: architecture;
     messages: this.messages,
     artifacts: this.context.artifacts,
     nextSteps: [
@@ -448,8 +404,8 @@ const architecture: SystemArchitecture = {;
 }
 };
   private async defineArchitectureOverview(input: string, requirements: string[],
-  constraints: string[], qualityStandards: string[]): Promise<any> {
-    const _prompt = `Design the high-level architecture for this, project: Project, Description:``, ${input}
+  constraints: string[], qualityStandards: string[]): Promise<any> {</any>
+{ `Design the high-level architecture for this, project: Project, Description:``, ${input}
 Key: Requirements:
 ${requirements.slice(0, 10).join('\n')}
 Constraints:
@@ -464,21 +420,20 @@ Provide:
 5. High-level architecture description;
 Format as JSON ArchitectureOverview object.`;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async designComponents(requirements: string[], userStories: [] as any[],
-  architectureStyle: string): Promise<any> {
-    const _prompt = `Design system components based, on: Architecture, Style: ${architectureStyle}``,
+  architectureStyle: string): Promise<any> {</any>
+{ `Design system components based, on: Architecture, Style: ${architectureStyle}``,
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
 User, Stories: Summary:
 ${userStories
-  .slice(0, 10), .map((s) => s.title)
+  .slice(0, 10, .map((s) => s.title)
   .join('\n')}
 Create components, with:
 - Clear responsibilities
@@ -486,11 +441,10 @@ Create components, with:
 - Interfaces
 - Dependencies
 - Scalability approach
-Include frontend, backend, services, and data components as needed.
+Include frontend, backend, services, and data components as needed.;
 Format as JSON array of Component objects.`;
 
-const _response  = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response  = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4,
     responseFormat: 'json'
 }};
@@ -502,8 +456,8 @@ const components = JSON.parse(response);
     }})
 }
   private async createDataModel(requirements: string[], userStories: [] as any[],
-  components: Component[]): Promise<any> {
-    const _prompt = `Create a comprehensive data, model: ``, Requirements:, ${requirements.slice(0, 15).join('\n')}
+  components: Component[]): Promise<any> {</any>
+{ `Create a comprehensive data, model: ``, Requirements:, ${requirements.slice(0, 15).join('\n')}
 Components needing, data:
 ${components
   .filter((c) => c.type === 'backend' || c.type === 'database')
@@ -513,26 +467,24 @@ Design:
 1. Core entities with attributes
 2. Relationships between entities
 3. Data flow patterns
-4. Storage strategy (databases, caching, files)
+4. Storage strategy (databases, caching, files);
 Consider scalability, performance, and data integrity.;
 Format as JSON DataModel object.`;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.3,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async designAPIs(components: Component[], dataModel: DataModel,
-  userStories: any[]): Promise<any> {
-    const _prompt = `Design comprehensive API, architecture: Components with, APIs:``, ${JSON.stringify(
+  private async designAPIs(components: Component[], dataModel: DataModel;
+  userStories: any[]): Promise<any> {</any>
+{ `Design comprehensive API, architecture: Components with, APIs:``, ${JSON.stringify(
   // components
     .filter((c) => c.interfaces.length > 0)
-    .map((c) => ({
-      name: c.name,
+    .map((c) => ({ name: c.name,
     interfaces: c.interfaces
-    });
+});
   null,
   2
 )}
@@ -540,49 +492,47 @@ Data: Entities:
 ${dataModel.entities.map((e) => e.name).join(', ')}
 Key, User: Stories:
 ${userStories
-  .slice(0, 10), .map((s) => s.title)
+  .slice(0, 10, .map((s) => s.title)
   .join('\n')}
 Design:
 1. API style and standards
 2. Authentication and authorization approach
 3. Key endpoints with schemas
 4. Versioning strategy
-5. Rate limiting approach
+5. Rate limiting approach;
 Format as JSON APIDesign object.`;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async planInfrastructure(components: Component[], overview: ArchitectureOverview, timeline): Promise<any> {
-    const _prompt = `Plan infrastructure for the, system: Architecture, Style: ${overview.style}``,
+  private async planInfrastructure(components: Component[], overview: ArchitectureOverview, timeline): Promise<any> {</any>
+{ `Plan infrastructure for the, system: Architecture, Style: ${overview.style}``,
 Components:
 ${components.map((c) => `${c.name} (${c.type})`).join('\n')}``;
 Quality: Attributes:
 ${overview.qualityAttributes.map((q) => `${q.name}: ${q.requirement}`).join('\n')}``,
-Timeline: ${timeline?.totalDuration || 'Not, specified'}
-Design:
+Timeline: ${timeline? .totalDuration || 'Not, specified'}
+Design : null
 1. Hosting platform choice
 2. Compute resources needed
 3. Networking configuration
 4. Monitoring strategy
 5. Backup approach
-Consider cost, scalability, and operational complexity.
+Consider cost, scalability, and operational complexity.;
 Format as JSON Infrastructure object.`;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async designSecurity(requirements: string[], components: Component[],
-  dataModel: DataModel): Promise<any> {
-    const _prompt = `Design comprehensive security, architecture: Security-related, Requirements:``, ${requirements
+  dataModel: DataModel): Promise<any> {</any>
+{ `Design comprehensive security, architecture: Security-related, Requirements:``, ${requirements
   .filter(, r: any =>
       r.toLowerCase().includes('security') ||
       r.toLowerCase().includes('auth') ||
@@ -601,19 +551,18 @@ Include:
 1. Security principles
 2. Threat modeling
 3. Security controls
-4. Compliance requirements
+4. Compliance requirements;
 5. Data protection strategy;
 Format as JSON SecurityArchitecture object.`;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.3,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async planIntegrations(input: string, components: Component[]): Promise<any> {
-    const _prompt = `Identify and plan external, integrations: Project, Description:``, ${input}
+  private async planIntegrations(input: string, components: Component[]): Promise<any> {</any>
+{ `Identify and plan external, integrations: Project, Description:``, ${input}
 System: Components:
 ${components.map((c) => `${c.name}: ${c.responsibility}`).join('\n')}``
 Identify potential integrations, for:
@@ -622,41 +571,39 @@ Identify potential integrations, for:
 - Email/SMS services
 - Analytics
 - Storage services
-- Third-party APIs
+- Third-party APIs;
 - Monitoring services;
 Format as JSON array of Integration objects.`;``;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
-  private async defineDeploymentStrategy(infrastructure: Infrastructure, components: Component[], timeline): Promise<any> {
-    const _prompt = `Define deployment, strategy: ``, Infrastructure:, ${JSON.stringify(infrastructure.hostingPlatform)}
+  private async defineDeploymentStrategy(infrastructure: Infrastructure, components: Component[], timeline): Promise<any> {</any>
+{ `Define deployment, strategy: ``, Infrastructure:, ${JSON.stringify(infrastructure.hostingPlatform)}
 Components, to: Deploy:;
 ${components.map((c) => `${c.name} (${c.type})`).join('\n')}``;
 Timeline: Constraints:
-${timeline?.phases?.map((p) => p.name).join(', ') || 'Not specified'}
-Design:
+${timeline? .phases?.map((p) => p.name).join(', ') || 'Not specified'}
+Design : null
 1. Deployment approach (CI/CD, manual, hybrid)
 2. Environment setup (dev, staging, prod)
 3. Pipeline stages
 4. Rollback strategy
-5. Blue-green deployment feasibility
+5. Blue-green deployment feasibility;
 Format as JSON DeploymentStrategy object.`;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private async documentDecisions(overview: ArchitectureOverview, components: Component[],
-  infrastructure: Infrastructure): Promise<any> {
-    const _prompt = `Document key technical decisions, made: Architecture, Style: ${overview.style}``,
+  infrastructure: Infrastructure): Promise<any> {</any>
+{ `Document key technical decisions, made: Architecture, Style: ${overview.style}``,
 Key: Technologies:
 ${[...new Set(components.flatMap(c => c.technology))].join(', ')}
 Infrastructure: Platform: ${infrastructure.hostingPlatform}
@@ -669,49 +616,49 @@ For each major decision, document:
 Focus on decisions that will significantly impact the project.
 Format as JSON array of TechnicalDecision objects.`;
 
-const _response = await generateAIResponse(prompt, {
-      model: this.config.model,
+const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: 0.4,
     responseFormat: 'json'
 }};
-    return JSON.parse(response);
+    return JSON.parse(response)
 }
   private identifyPatterns(
 components: Component[],
     overview: ArchitectureOverview
   ): string[] {
-    const patterns = [], // Identify patterns based on architecture style, if (overview.style.includes('microservices')) {
+    const patterns = [], // Identify patterns based on architecture style, if (overview.style.includes('microservices') {)} {
       patterns.push('Service Discovery', 'API Gateway', 'Circuit Breaker')
 };
     // Check for common patterns in components;
 
 const _hasDatabase  = components.some(c => c.type === 'database');
 
-const _hasCache = components.some(c => ;
+const _hasCache = components.some(c =>
       c.technology.some(
 t: any =>
           t.toLowerCase().includes('redis') || t.toLowerCase().includes('cache'));
     if (hasDatabase && hasCache) {
       patterns.push('Cache-Aside Pattern')}
     // Check for event-driven patterns
-    if (components.some(c => c.interfaces.some(i => i.type === 'Event')) {
+    if (components.some(c => c.interfaces.some(i => i.type === 'Event') {)} {
       patterns.push('Event Sourcing', 'CQRS')}
     // Add more pattern detection logic as needed
-    return [...new Set(patterns)];
+    return [...new Set(patterns)]
 }
   private extractTechStack(components: Component[]): Record {
-    const techStack: Record<string, string[]> = {
+    const techStack: Record<string string[]> = {</string>
       frontend: [] as any[],
     backend: [] as any[],
     database: [] as any[],
     services: any[]
     };
-    components.forEach((component) => {
-      if (techStack[component.type]) {
-        techStack[component.type].push(...component.technology)});
+    components.forEach((component) =>  {
+      if (techStack[component.type]) {;
+        techStack[component.type].push(...component.technology)};);
     // Remove duplicates
-    Object.keys(techStack).forEach((key) => {
+    Object.keys(techStack).forEach((key) =>  {
       techStack[key] = [...new Set(techStack[key])]
-    });
-    return techStack;
+};);
+    return techStack
 }
+)))))))))))))))))))))))))

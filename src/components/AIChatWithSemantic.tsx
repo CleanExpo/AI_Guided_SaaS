@@ -10,8 +10,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Send, Bot, User, Search, Sparkles } from 'lucide-react';
 import { useSemanticSearch } from '@/hooks/useSemanticSearch';
 import { toast } from '@/components/ui/use-toast';
-interface ChatMessage {
-id: string,
+interface ChatMessage { id: string;
   role: 'user' | 'assistant' | 'system',
   content: string;
   context?: string[],
@@ -24,39 +23,33 @@ enableSemanticSearch?: boolean;
 }
 
 export function AIChatWithSemantic({
-  enableSemanticSearch = true, maxContextSize  = 7, onContextRetrieved}: AIChatWithSemanticProps), maxContextSize  = 7, onContextRetrieved
-}: AIChatWithSemanticProps) { const [messages, setMessages]  = useState<ChatMessage[]>([])
-
-const [input, setInput] = useState<any>('');
-  const [isLoading, setIsLoading]  = useState<any>(false);
-
-const messagesEndRef = useRef<HTMLDivElement>(null);
+  enableSemanticSearch = true, maxContextSize  = 7, onContextRetrieved}: AIChatWithSemanticProps, maxContextSize  = 7, onContextRetrieved
+}: AIChatWithSemanticProps) { const [messages, setMessages]  = useState<ChatMessage[]>([])</ChatMessage>
+const [input, setInput] = useState<any>([])
+  const [isLoading, setIsLoading]  = useState<any>([])
+{ useRef<HTMLDivElement>(null);</HTMLDivElement>
 }
   const { searchContext7,
     isSearching,
     context7,
-    // indexDocument;
-  }: any = useSemanticSearch({ cacheResults: true });
+    // indexDocument
+}: any = useSemanticSearch({ cacheResults: true });
   // Scroll to bottom when new messages arrive
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'  };)
   }, [messages]);
   // Index conversation for future retrieval;
 
-const _indexConversation = useCallback(async (message: ChatMessage) => { if (!enableSemanticSearch) return null}try {
-      await indexDocument({
-        id: `conversation-${message.id}`,
+const _indexConversation = useCallback(async (message: ChatMessage) => { if (!enableSemanticSearch) {r}eturn null};try {
+      await indexDocument({ id: `conversation-${message.id}`,
         content: message.content,
-        metadata: { role: message.role, timestamp: message.timestamp.toISOString(), conversationId: 'current' // In production, use actual conversation ID },
+        metadata: { role: message.role, timestamp: message.timestamp.toISOString(, conversationId: 'current' // In production, use actual conversation ID },
         type: 'conversation'
 })
     } catch (error) {
       console.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
   
-const _sendMessage = async () => { if (!input.trim() || isLoading) return null}const userMessage: ChatMessage = {
-  id: Date.now().toString(),
-      role: 'user',
-      content: input,
+const _sendMessage = async () => { if (!input.trim() {|}| isLoading) return null};const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user',
+      content: input;
 timestamp: new Date()
 };
     setMessages(prev => [...prev, userMessage]);
@@ -71,30 +64,25 @@ if (relevantContext.length > 0) {
 }
           // Add system message showing context retrieval;
 
-const contextMessage: ChatMessage = {
-  id: `context-${Date.now()}`,
+const contextMessage: ChatMessage={ id: `context-${Date.now()}`,
             role: 'system',
-            content: `Retrieved ${relevantContext.length} relevant context chunks`,
-            context: relevantContext,
+            content: `Retrieved ${ relevantContext.length} relevant context chunks`,
+            context: relevantContext;
             timestamp: new Date()
-};
+ };
           setMessages(prev => [...prev, contextMessage])}
       // Send to AI with context;
 
-const response = await fetch('/api/admin/auth', {
-        method: 'POST',
+const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: input,
-          context: relevantContext.slice(0, maxContextSize), // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
+        body: JSON.stringify({ message: input;
+          context: relevantContext.slice(0, maxContextSize, // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
         })};
-      if (!response.ok) throw new Error('Failed to get AI response');
+      if (!response.ok) {t}hrow new Error('Failed to get AI response');
       
 const data  = await response.json();
 
-const assistantMessage: ChatMessage = {
-        id: Date.now().toString(),
-        role: 'assistant',
+const assistantMessage: ChatMessage={ id: Date.now().toString(, role: 'assistant',
         content: data.response,
 timestamp: new Date()
 };
@@ -102,8 +90,7 @@ timestamp: new Date()
       // Index assistant response
       await indexConversation(assistantMessage)
 } catch (error) {
-      console.error('Chat error:', error), toast({
-        title: 'Error',
+      console.error('Chat error:', error, toast({ title: 'Error',
         description: 'Failed to send message. Please try again.',
 variant: 'destructive'
 })
@@ -111,40 +98,39 @@ variant: 'destructive'
     setIsLoading(false)}
   return (
     <Card className = "w-full max-w-4xl mx-auto">
-      <CardHeader>
+          <CardHeader></CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5"   />
+            <Sparkles className="h-5 w-5"     />
             AI Assistant with Semantic Search
 </span>
           {enableSemanticSearch && (
 Badge variant="secondary" className="flex items-center gap-1">
-              <Search className="h-3 w-3"   />
+              <Search className="h-3 w-3"     />
               Context7 Active
 </Badge>
       )}
 </CardTitle>
       <CardContent>
-        <ScrollArea className="h-[500px] pr-4 mb-4">
+          <ScrollArea className="h-[500px] pr-4 mb-4">
           <div className="space-y-4">
-            {messages.map((message) => (\n    </div>;
-              <div; const key  = {message.id}
-                const className = {`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'
+            {messages.map((message) => (\n    </div>
+              <div; key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'
                 }`}
-               const className = {`max-w-[80%] p-3 rounded-lg ${message.role === 'user'
+               const className={`max-w-[80%] p-3 rounded-lg ${message.role === 'user'
                       ? 'bg-primary text-primary-foreground'
                       : message.role === 'system'
                       ? 'bg-muted text-muted-foreground'
                       : 'bg-secondary'
                   }`}
-                   />
-                  <div className="flex items-center gap-2 mb-1">
+                    />
+          <div className="flex items-center gap-2 mb-1">
                     {message.role === 'user' ? (</div>
-                      <User className="h-4 w-4"   />
+                      <User className="h-4 w-4"     />
                     ) : message.role === 'system' ? (
-                      <Search className="h-4 w-4"   />
+                      <Search className="h-4 w-4"     />
                     ) : (
-                      <Bot className="h-4 w-4"   />
+                      <Bot className="h-4 w-4"     />
                     )}
                     <span className="text-xs opacity-70">
                       {message.timestamp.toLocaleTimeString()}</span>
@@ -166,34 +152,30 @@ Badge variant="secondary" className="flex items-center gap-1">
     {isLoading && (
 div className="flex justify-start">
                 <div className="bg-secondary p-3 rounded-lg">
-                  <Bot className="h-4 w-4 animate-pulse"   />
+          <Bot className="h-4 w-4 animate-pulse"     />
 </div>
       )}
             <div ref={messagesEndRef}  >
-</ScrollArea>
+          </ScrollArea>
         <div className="flex gap-2">
           <Input
 
-const value = {input}
-            const onChange  = {(e) => setInput(e.target.value)}
-            const onKeyPress = {(e) => e.key === 'Enter' && sendMessage()}
-            const placeholder = {
+value={input} onChange={(e) => setInput(e.target.value)}</Input>
+{{(e) => e.key === 'Enter' && sendMessage()}
+            placeholder={
               // isSearching
                 ? 'Searching for context...'
                 : 'Type your message...'
-}
-            const disabled = {isLoading || isSearching}
+} disabled={isLoading || isSearching};
             className="flex-1" />
         <Button
 
-const onClick = {sendMessage}
-            const disabled = {isLoading || isSearching || !input.trim()};
+onClick={sendMessage} disabled={isLoading || isSearching || !input.trim()};
             size="icon";
           >
-            <Send className="h-4 w-4"   />
+          <Send className="h-4 w-4"     />
         {enableSemanticSearch && context7.length > 0  && (div className="mt-4 p-3 bg-muted rounded-lg">
-            <p className="text-xs text-muted-foreground mb-1">, Context7: { context7.length } relevant chunks loaded
-</p>
+            <p className="text-xs text-muted-foreground mb-1">, Context7: { context7.length } relevant chunks loaded</p>
             <div className="flex gap-1 flex-wrap">
               {context7.map((_, idx) => (\n    </div>
                 <Badge key={idx} variant="outline" className="text-xs">
@@ -205,7 +187,6 @@ const onClick = {sendMessage}
 </CardContent>
   
 </div>
-</any>
     
     </Button>
     </CardHeader>
@@ -213,3 +194,4 @@ const onClick = {sendMessage}
     </HTMLDivElement>
     </any>
   }
+;)))))))

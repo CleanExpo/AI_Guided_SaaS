@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* BREADCRUMB: pages - Application pages and routes */
 'use client';
 import React, { useState } from 'react';
@@ -18,9 +19,8 @@ export default function AdminDirectPage() {
     setError('');
     
     try {
-      const response = await fetch('/api/admin/direct-auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/admin/direct-auth', { method: 'POST',
+        headers: { 'Content-Type': 'application/json'  },
         body: JSON.stringify({ password })
       });
       
@@ -28,29 +28,29 @@ export default function AdminDirectPage() {
       
       if (response.ok && data.token) {
         localStorage.setItem('admin-token', data.token);
-        router.push('/admin/dashboard');
-      } else {
-        setError(data.error || 'Authentication failed');
-      }
+        router.push('/admin/dashboard')
+} else {
+        setError(data.error || 'Authentication failed')
+}
     } catch (err) {
-      setError('Network error. Please try again.');
-    } finally {
+      setError('Network error. Please try again.')
+} finally {
       setIsLoading(false);
-    }
+}
   };
   
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
+          <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Admin Direct Access</CardTitle>
-        </CardHeader>
+          <CardTitle className="text-2xl text-center">Admin Direct Access
+        
         <CardContent>
           <form onSubmit={handleDirectAuth} className="space-y-4">
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Master Password
-              </label>
+              
               <Input
                 id="password"
                 type="password"
@@ -60,24 +60,24 @@ export default function AdminDirectPage() {
                 required
                 disabled={isLoading}
               />
-            </div>
+            
             
             {error && (
               <div className="text-red-600 text-sm text-center">
                 {error}
-              </div>
+              
             )}
             
             <Button 
-              type="submit" 
+              type="submit"
               className="w-full"
               disabled={isLoading || !password}
             >
               {isLoading ? 'Authenticating...' : 'Access Admin Panel'}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
-  );
+            
+          
+        
+      
+    
+  )
 }

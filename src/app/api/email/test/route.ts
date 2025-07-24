@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest): Promise<NextResponse> {
+export async function POST(request: NextRequest): Promise<NextResponse> {</NextResponse>
   try {
     // Simulate email configuration test
-        const configTest = { success: true };
+        const configTest={ success: true  };
     if (!configTest.success) {
-      return NextResponse.json({
-          success: false,
+      return NextResponse.json({ success: false;
           error: 'Email configuration test failed'
         }, { status: 500 })
 }
@@ -17,10 +16,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ error: 'Email test failed' }, { status: 500 })
 }}
 
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
   try {
-    const status = {
-      configured: !!process.env.SMTP_HOST,
+    const status={ configured: !!process.env.SMTP_HOST,
       provider: process.env.EMAIL_PROVIDER || 'none',
       lastTest: new Date().toISOString()
 };

@@ -5,34 +5,30 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, Users, Activity, TrendingUp } from 'lucide-react';
 
-interface AnalyticsData {
-  totalUsers: number,
-  activeUsers: number,
-  pageViews: number,
-  bounceRate: number,
-  topPages: Array<{
-    path: string,
-    views: number,
+interface AnalyticsData { totalUsers: number;
+  activeUsers: number;
+  pageViews: number;
+  bounceRate: number;
+  topPages: Array<{ path: string;
+    views: number;
     percentage: number
-  }>;
-  userActivity: Array<{
-    date: string,
+  }>
+  userActivity: Array<{ date: string;
     users: number}>
 }
 
 export default function AnalyticsPage() {
-  const [data, setData] = useState<AnalyticsData | null>(null);
+  const [data, setData] = useState<AnalyticsData | null>(null);</AnalyticsData>
   const [isLoading, setIsLoading] = useState(true);
   
-  useEffect(() => {
+  useEffect(() =>  {
     // Simulate loading analytics data
     setTimeout(() => {
-      setData({
-        totalUsers: 1247,
-        activeUsers: 89,
-        pageViews: 5643,
+      setData({ totalUsers: 1247;
+        activeUsers: 89;
+        pageViews: 5643;
         bounceRate: 34.2,
-        topPages: [
+        topPages: [;
           { path: '/', views: 1543, percentage: 27.3 },
           { path: '/features', views: 987, percentage: 17.5 },
           { path: '/pricing', views: 543, percentage: 9.6 }
@@ -48,24 +44,24 @@ export default function AnalyticsPage() {
 }, []);
 
   if (isLoading) {
-    return (<div className="container mx-auto p-6">, <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
+    return (
+    <div className="container mx-auto p-6">, <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
         <div>Loading analytics data...</div>
-    </div>
-  );
+  )
 }
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
+          <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
+          <Card></Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground"   />
+          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data?.totalUsers}</div>
+          <div className="text-2xl font-bold">{data?.totalUsers}</div>
             <p className="text-xs text-muted-foreground">Total registered users</p>
           </CardContent>
         </Card>
@@ -73,14 +69,13 @@ export default function AnalyticsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground"   />
+            <Activity className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data?.activeUsers}</div>
+          <div className="text-2xl font-bold">{data?.activeUsers}</div>
             <p className="text-xs text-muted-foreground">Active in last 24h</p>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+  )
 }

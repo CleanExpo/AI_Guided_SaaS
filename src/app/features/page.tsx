@@ -4,40 +4,33 @@ import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
-export const metadata: Metadata = {
-  title: 'Features - AI Guided SaaS',
+export const metadata: Metadata = { title: 'Features - AI Guided SaaS',
   description: 'Explore the powerful features of AI Guided SaaS platform for building production-ready applications.'
 };
 
 export default function FeaturesPage() {
-  const features = [
-    {
-      title: 'AI-Powered Code Generation',
+  const features = [;
+    { title: 'AI-Powered Code Generation',
       description: 'Generate production-ready code from natural language descriptions.',
       icon: '🤖'
     },
-    {
-      title: 'Visual Development',
+    { title: 'Visual Development',
       description: 'Build applications with our intuitive visual development tools.',
       icon: '🎨'
     },
-    {
-      title: 'Smart Templates',
+    { title: 'Smart Templates',
       description: 'Start with pre-built templates optimized for different use cases.',
       icon: '📋'
     },
-    {
-      title: 'Real-time Collaboration',
+    { title: 'Real-time Collaboration',
       description: 'Work together with your team in real-time.',
       icon: '👥'
     },
-    {
-      title: 'Automated Testing',
+    { title: 'Automated Testing',
       description: 'AI-generated tests ensure your code quality.',
       icon: '🧪'
     },
-    {
-      title: 'One-Click Deployment',
+    { title: 'One-Click Deployment',
       description: 'Deploy to production with a single click.',
       icon: '🚀'
     }
@@ -45,7 +38,7 @@ export default function FeaturesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-6xl">
+          <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <Badge className="mb-4">Platform Features</Badge>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -55,24 +48,21 @@ export default function FeaturesPage() {
             Our comprehensive platform provides all the tools and features you need 
             to build, test, and deploy production-ready applications.
           </p>
-        </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
             <Card key={feature.title} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
+          <CardHeader></CardHeader>
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">{feature.icon}</span>
+          <span className="text-3xl mr-4">{feature.icon}</span>
                   <CardTitle className="text-lg">{feature.title}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">{feature.description}</p>
+          <p className="text-gray-600">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
-      </div>
-    </div>
-  );
+  )
 }
