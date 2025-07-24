@@ -1,3 +1,4 @@
+/* BREADCRUMB: app - Application page or route */;
 import React from 'react';
 
 interface ApiDoc {
@@ -6,43 +7,41 @@ interface ApiDoc {
   description: string;
   content: string;
   category: string;
-  version: string;
+  version: string
 }
 
 const apiDocs: Record<string, ApiDoc> = {
-  auth: {
-    slug: 'auth',
-    title: 'Authentication API',
-    description: 'User authentication and authorization endpoints',
-    content: 'Authentication API documentation content...',
-    category: 'Security',
+  auth: {;
+    slug: 'auth';
+    title: 'Authentication API';
+    description: 'User authentication and authorization endpoints';
+    content: 'Authentication API documentation content...';
+    category: 'Security';
     version: '1.0.0'
-  },
+  };
   users: {
-    slug: 'users',
-    title: 'Users API',
-    description: 'User management endpoints',
-    content: 'Users API documentation content...',
-    category: 'User Management',
+    slug: 'users';
+    title: 'Users API';
+    description: 'User management endpoints';
+    content: 'Users API documentation content...';
+    category: 'User Management';
     version: '1.0.0'
   }
 };
 
 export function generateStaticParams() {
-  return Object.keys(apiDocs).map((slug) => ({ slug: slug }));
+  return Object.keys(apiDocs).map((slug) => ({ slug: slug }))
 }
 
-export default function ApiDocPage({ params }: { params: { slug: string } }) {
+export default function ApiDocPage({ params }: { params: { slug: string } }) {;
   const doc = apiDocs[params.slug];
-
   if (!doc) {
-    return (
-      <div className="container mx-auto p-6">
+    return (<div className="container mx-auto p-6">
         <h1 className="text-2xl font-bold">API Documentation Not Found</h1>
         <p>The requested API documentation could not be found.</p>
       </div>
-    );
-  }
+    )
+}
 
   return (
     <div className="container mx-auto p-6">
@@ -62,6 +61,6 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {
       <div className="bg-white rounded-lg border p-6">
         <pre className="whitespace-pre-wrap text-sm">{doc.content}</pre>
       </div>
-    </div>
-  );
+      </div>;
+    );
 }

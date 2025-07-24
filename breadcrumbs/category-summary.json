@@ -1,0 +1,18 @@
+{
+  "unknown": 31,
+  "library": 83,
+  "data.layer": 1,
+  "auth.backend": 2,
+  "config": 1,
+  "ui.component": 107,
+  "lovable.style": 1,
+  "ai.integration": 3,
+  "vscode.style": 1,
+  "app": 26,
+  "pages": 27,
+  "agent.orchestration": 18,
+  "api": 29,
+  "api.auth": 4,
+  "api.agents": 2,
+  "api.admin": 5
+}

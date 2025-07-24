@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-07-23T19:18:34.578Z",
+  "projectPath": "D:\\AI Guided SaaS",
+  "metrics": {
+    "typeScriptErrors": 11612,
+    "totalFiles": 17080,
+    "srcFiles": 341,
+    "testFiles": 552,
+    "mdFiles": 789,
+    "buildStatus": "failing",
+    "nodeVersion": "v18.20.8",
+    "breadcrumbFiles": 2
+  }
+}

@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env tsx;
 import fs from 'fs';import path from 'path';
 import { execSync } from 'child_process';
 interface MCPDocumentationAgent {
@@ -38,12 +38,12 @@ class MCPDocumentationOrchestrator {
       errorPatterns: ['TS2345', 'TS2740']}
   ];
   private documentationStrategies = new Map<string, string>();
-  constructor() {
+  function constructor() {
     this.initializeStrategies()}
   private initializeStrategies() {
     // NextAuth session type fixes
     this.documentationStrategies.set('session.user.id', `
-// Add to src/types/next-auth.d.ts
+// Add to src/types/next-auth.d.ts;
 import { DefaultSession } from 'next-auth';
 declare module "next-auth" {
   interface Session {
@@ -53,7 +53,7 @@ declare module "next-auth" {
 `);
     // Import fixes
     this.documentationStrategies.set('import-next-auth', `
-// Update imports from 'next-auth' to 'next-auth/next'
+// Update imports from 'next-auth' to 'next-auth/next';
 import { getServerSession } from 'next-auth/next';
 import { NextAuthOptions } from 'next-auth';
 `);
@@ -63,9 +63,9 @@ import { NextAuthOptions } from 'next-auth';
 // Before: function example() { }
 // After: function example(param: string): string) { }
 `)}
-  async analyzeAndPlan(): Promise<void> {
-    // Read the autonomous doc report
-    const _reportPath = path.join(process.cwd(), 'autonomous-doc-report.json');
+  async function analyzeAndPlan(): Promise<void> {
+    // Read the autonomous doc report;
+const _reportPath = path.join(process.cwd(), 'autonomous-doc-report.json');
     if (!fs.existsSync(reportPath)) {
       return}
     const report = JSON.parse(fs.readFileSync(reportPath, 'utf-8');
@@ -74,11 +74,11 @@ import { NextAuthOptions } from 'next-auth';
   private assignAgentsToErrors(report) {
     for (const [errorCode, count] of Object.entries(report.errorsByCode)) {
       const agent = this.findBestAgent(errorCode as string);
-      if (agent) {
-        console.log(`${errorCode} → ${agent.name}`)}}
+      function if(agent) {
+        console.log(`${errorCode} → ${agent.name}`)}
   private findBestAgent(errorCode: string): MCPDocumentationAgent | undefined {
     return this.agents.find(agent => agent.errorPatterns.includes(errorCode))}
-  async createAutonomousFixPlan(): Promise<void> {
+  async function createAutonomousFixPlan(): Promise<void> {
     const fixPlan = {
       timestamp: new Date().toISOString();
       phases: [
@@ -132,9 +132,11 @@ import { NextAuthOptions } from 'next-auth';
     fs.writeFileSync(
       path.join(process.cwd(), 'autonomous-fix-plan.json'),
       JSON.stringify(fixPlan, null, 2);
-    for(const phase of fixPlan.phases) {
-      phase.actions.forEach((action: any) => )}}
-  async generateMCPCommands(): Promise<void> {
+    function for(const phase of fixPlan.phases) {
+      phase.actions.forEach((action: any) =>
+  );
+}
+  async function generateMCPCommands(): Promise<void> {
     const commands = [
   {
   description: 'Get NextAuth TypeScript documentation',
@@ -158,10 +160,10 @@ import { NextAuthOptions } from 'next-auth';
     ];
     commands.forEach((cmd: any) => {
     })}
-  async run(): Promise<void> {
+  async function run(): Promise<void> {
     await this.analyzeAndPlan();
     await this.createAutonomousFixPlan();
-    await this.generateMCPCommands()}}
-// Run the MCP documentation orchestrator
+    await this.generateMCPCommands()}
+// Run the MCP documentation orchestrator;
 const orchestrator = new MCPDocumentationOrchestrator();
 orchestrator.run().catch(console.error);

@@ -5,14 +5,12 @@ import { ProjectConfig } from '@/types';
 import { BookOpen } from 'lucide-react';
 interface AdvancedDocumentationDashboardProps {
 projectConfig: ProjectConfi
-g,
+g;
   onDocumentationComplete: (result: unknown: any) => void
 };
 export default function AdvancedDocumentationDashboard() {
-  return (
-    <Card></Card>
-      <CardHeader></CardHeader>
-        <CardTitle className="flex items-center gap-2"></CardTitle><BookOpen className="w-5 h-5 text-green-600" />
+  return (Card></Card>, <CardHeader>;</CardHeader>;
+        <CardTitle className="flex items-center gap-2"></CardTitle><BookOpen className="w-5 h-5 text-green-600"   />
           Advanced Documentation Dashboard</BookOpen>
       <CardContent></CardContent>
         <p className="text-gray-600">

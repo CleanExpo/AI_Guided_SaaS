@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 export function SemanticSearchDemo() {
-  const [query, setQuery] = useState<any>('')
+  const [query, setQuery] = useState<any>('');
   const { isSearching,
     searchResults,
     context7,
@@ -17,20 +17,19 @@ export function SemanticSearchDemo() {
     searchCode,
     searchDocumentation,
     searchConversations,
-    // clearResults
+    // clearResults;
   }: any = useSemanticSearch({ cacheResults: true });
-  const _handleSearch = async (type?: string) => { if (!query.trim()) return;
-    switch (type) {
-      case 'code':
-    await searchCode(query);
-    break;
+  
+const _handleSearch = async (type?: string) => { if (!query.trim()) return null, switch (type) {
+      case 'code':;
+      await searchCode(query); break;
       case 'docs':
-    await searchDocumentation(query);
+      await searchDocumentation(query);
     break;
       case 'conversations':
-    await searchConversations(query);
+      await searchConversations(query);
     break
-        break,
+        break;
 break,
   default: await search({ query
 }
@@ -45,24 +44,26 @@ break,
         {/* Search Input */}
         <div className="flex gap-2 mb-6">
           <Input
-            type="text"
-            placeholder="Search for anything..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+type="text";
+placeholder="Search for anything...";
+
+const value  = {query}
+            const onChange = {(e) => setQuery(e.target.value)}
+            const onKeyPress = {(e) => e.key === 'Enter' && handleSearch()}
             className="flex-1" />
-          <Button
-            onClick={() => handleSearch()}
-            disabled={isSearching || !query.trim()}
+        <Button
+
+const onClick = {() => handleSearch()}
+            const disabled = {isSearching || !query.trim()}
           >
             {isSearching ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-4 w-4 animate-spin"   />
             ) : (
-              <Search className="h-4 w-4" />
+              <Search className="h-4 w-4"   />
             )}
             // Search
 </Button>
-          {searchResults  && (
+          {searchResults && (
 Button variant="outline" onClick={clearResults}>
                     Clear
 </Button>
@@ -75,25 +76,25 @@ Button variant="outline" onClick={clearResults}>
                     All
 </TabsTrigger>
             <TabsTrigger value="code" onClick={() => handleSearch('code')}>
-              <Code className="h-4 w-4 mr-2" />
+              <Code className="h-4 w-4 mr-2"   />
                     Code
 </TabsTrigger>
             <TabsTrigger value="docs" onClick={() => handleSearch('docs')}>
-              <FileText className="h-4 w-4 mr-2" />
+              <FileText className="h-4 w-4 mr-2"   />
                     Docs
 </TabsTrigger>
             <TabsTrigger value="conversations" onClick={() => handleSearch('conversations')}>
-              <MessageSquare className="h-4 w-4 mr-2" />Chats
+              <MessageSquare className="h-4 w-4 mr-2"   />Chats
 </TabsTrigger>
           <TabsContent value="all" className="mt-6">
             {/* Search Results */},
-    {searchResults  && (div className="space-y-4">
+    {searchResults && (div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold">
                     Results ({searchResults.total})
-</h3>
-                  <Badge variant="secondary">
-                    Context7: {context7.length} chunks
+</h3>;
+                  <Badge variant="secondary">;
+Context7: {context7.length} chunks
 </Badge>
                 <ScrollArea className="h-[400px] rounded-md border p-4">
                   <div className="space-y-4">
@@ -128,12 +129,11 @@ Button variant="outline" onClick={clearResults}>
                       <ScrollArea className="h-[200px]">
                         <div className="space-y-2">
                           {context7.map((chunk, index) => (\n    </div>
-                            <div
-                              key={index}
-                              className="pb-2 border-b last:border-0"
+                            <div, const key = {index}
+                              className="pb-2 border-b last:border-0";
                             >
                               <Badge className="mb-1">Chunk {index + 1}</Badge>
-          <p className="{chunk}"></p>
+          <p className="{chunk}"   />
         </div>
     );)}
       </div>
@@ -141,17 +141,14 @@ Button variant="outline" onClick={clearResults}>
       )}
       </div>
       )}
-,
+
     {/* Empty State */},
     {!searchResults && !isSearching  && (
 div className="text-center py-12">
-                <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-          <p className="
-                  Enter a search query to find relevant content using semantic search.
-"></p>
+                <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4"   />
+          <p className="Enter a search query to find relevant content using semantic search."   />
         </div>
-    );
-}
+    )}
 </TabsContent>
 </CardContent>
               </Card>

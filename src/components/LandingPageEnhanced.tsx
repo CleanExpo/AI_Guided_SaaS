@@ -7,124 +7,134 @@ import { Wrench, BarChart3, Users, FileText, ArrowRight, CheckCircle, Rocket, Br
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+
 const features = [
+  {;
+  icon: Brain;
+    title: 'AI-Powered Development';
+    description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions with intelligent code generation.';
+gradient: 'primary'};
   {
-  icon: Brain,
-    title: 'AI-Powered Development',
-    description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions with intelligent code generation.'
-    gradient: 'primary'},
+    icon: Wrench;
+    title: 'Visual UI Builder';
+    description: 'Create stunning interfaces with our drag-and-drop UI builder and comprehensive component library.';
+gradient: 'secondary'};
   {
-    icon: Wrench,
-    title: 'Visual UI Builder',
-    description: 'Create stunning interfaces with our drag-and-drop UI builder and comprehensive component library.'
-    gradient: 'secondary'},
+    icon: BarChart3;
+    title: 'Advanced Analytics';
+    description: 'Get deep insights into your application performance and user behavior with real-time dashboards.';
+gradient: 'success'};
   {
-    icon: BarChart3,
-    title: 'Advanced Analytics',
-    description: 'Get deep insights into your application performance and user behavior with real-time dashboards.'
-    gradient: 'success'},
+    icon: Users;
+    title: 'Team Collaboration';
+    description: 'Work seamlessly with your team using real-time collaboration tools and shared workspaces.';
+gradient: 'warning'};
   {
-    icon: Users,
-    title: 'Team Collaboration',
-    description: 'Work seamlessly with your team using real-time collaboration tools and shared workspaces.'
-    gradient: 'warning'},
+    icon: Code;
+    title: 'Code Generation';
+    description: 'Generate production-ready code automatically from your designs and specifications with AI assistance.';
+gradient: 'primary'};
   {
-    icon: Code,
-    title: 'Code Generation',
-    description: 'Generate production-ready code automatically from your designs and specifications with AI assistance.'
-    gradient: 'primary'},
-  {
-    icon: Shield,
-    title: 'Enterprise Security',
-    description: 'Built with security-first principles and enterprise-grade protection for your applications.'
-    gradient: 'error'}];
-const benefits = [
-  { text: 'Reduce development time by 70%' , icon: Clock },
-  { text: 'AI-assisted code generation' , icon: Brain },
-  { text: 'Real-time team collaboration' , icon: Users },
-  { text: 'Enterprise-grade security' , icon: Shield },
-  { text: 'Scalable cloud infrastructure' , icon: Globe },
+    icon: Shield;
+    title: 'Enterprise Security';
+    description: 'Built with security-first principles and enterprise-grade protection for your applications.';
+gradient: 'error'}];
+
+const benefits  = [;
+  { text: 'Reduce development time by 70%' , icon: Clock };
+  { text: 'AI-assisted code generation' , icon: Brain };
+  { text: 'Real-time team collaboration' , icon: Users };
+  { text: 'Enterprise-grade security' , icon: Shield };
+  { text: 'Scalable cloud infrastructure' , icon: Globe };
   { text: 'Comprehensive analytics dashboard' , icon: BarChart3 }];
-const stats = [
-  { value: '10,000+', label: 'Developers', icon: Users },
-  { value: '99.9%', label: 'Uptime', icon: TrendingUp },
-  { value: '70%', label: 'Faster Development', icon: Rocket },
-  { value: '24/7', label: 'Support', icon: Shield }],
+
+const stats = [;
+  { value: '10,000+', label: 'Developers', icon: Users };
+  { value: '99.9%', label: 'Uptime', icon: TrendingUp };
+  { value: '70%', label: 'Faster Development', icon: Rocket };
+  { value: '24/7', label: 'Support', icon: Shield }];
     export default function LandingPageEnhanced() {
-  const [heroRef, heroInView] = useInView({ threshold: 0.1 triggerOnce: true });
-  const [featuresRef, featuresInView] = useInView({ threshold: 0.1 triggerOnce: true });
-  const [benefitsRef, benefitsInView] = useInView({ threshold: 0.1 triggerOnce: true });
-  const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true });
+  const [heroRef, heroInView]  = useInView({ threshold: 0.1 triggerOnce: true });
+
+const [featuresRef, featuresInView] = useInView({ threshold: 0.1 triggerOnce: true });
+  
+const [benefitsRef, benefitsInView]  = useInView({ threshold: 0.1 triggerOnce: true });
+
+const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true });
   return (<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900">;
       {/* Animated, Background Elements */}</div>
-      <div className="fixed inset-0 overflow-hidden pointer-events-none"></div>
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float" > <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}  > <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse-slow" >{/* Hero, Section */}
-      <section ref={heroRef} className="relative py-20 px-4 text-center overflow-hidden"></section>
-        <div className="max-w-6xl mx-auto relative z-10"></div>
-          <motion.div
-            initial={{ opacity: 0 y: 30 }}
-            animate={heroInView ? { opacity: 1 y: 0 } : {}}
-            transition={{ duration: 0.8 ease: 'easeOut' }}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none"   />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float" > <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }  > <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse-slow" >{/* Hero, Section */}
+      <section ref={heroRef} className="relative py-20 px-4 text-center overflow-hidden"   />
+        <div className="max-w-6xl mx-auto relative z-10"   />
+          <motion.div;
+
+const initial = {{ opacity: 0 y: 30 }
+            const animate = {heroInView ? { opacity: 1 y: 0 } : {}
+            const transition = {{ duration: 0.8 ease: 'easeOut' }
           >
-            <Badge variant="outline", className="mb-6 bg-white/50 backdrop-blur-sm border-white/20"></Badge>
-              <Sparkles className="w-3 h-3 mr-1" />
-              AI-Powered SaaS Platform</Sparkles>
-            <h1 className="text-4xl, md: text-6xl, lg: text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent; dark: from-white, dark:via-blue-100 dark:to-purple-100">
+            <Badge variant="outline", className="mb-6 bg-white/50 backdrop-blur-sm border-white/20"   />
+              <Sparkles className="w-3 h-3 mr-1"   />
+              AI-Powered SaaS Platform</Sparkles>;
+            <h1 className="text-4xl, md: text-6xl, lg: text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent;
+  dark: from-white, dark:via-blue-100 dark:to-purple-100">
               Build Better Software</h1>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Faster Than Ever</span>
             <p className="text-xl, md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
               Transform your development workflow with our AI-guided SaaS platform.
               Create, collaborate, and deploy applications with unprecedented speed and intelligence.</p>
-            <div className ="flex flex-col, sm:flex-row gap-4 justify-center mb-12"></div>
+            <div className ="flex flex-col, sm:flex-row gap-4 justify-center mb-12"   />
               <ButtonPremium
-                size="xl"
-                variant="gradient"
-                // glow
-                animation="shimmer"
-                icon={<ArrowRight className="w-5 h-5" />}
-                iconPosition="right"
+size="xl";
+variant="gradient";
+                // glow;
+animation="shimmer";
+
+const icon = {<ArrowRight className="w-5 h-5"   />};
+                iconPosition="right";
                 // asChild
               ></ButtonPremium>
                 <Link href="/auth/signin">
                   Get Started Free</Link>
               <ButtonPremium
-                size="xl"
-                variant="glass"
-                icon={<Palette className="w-5 h-5" />}
-                iconPosition="left"
+size="xl";
+variant="glass";
+
+const icon  = {<Palette className="w-5 h-5"   />};
+                iconPosition="left";
                 // asChild
               ></ButtonPremium>
                 <Link href="/ui-builder">
                   Try UI Builder</Link>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400"></div>
-              <div className="flex items-center gap-2"></div>
-                <CheckCircle className="h-4 w-4 text-green-500" />
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400"   />
+              <div className="flex items-center gap-2"   />
+                <CheckCircle className="h-4 w-4 text-green-500"   />
                 No credit card required
-              <div className="flex items-center gap-2"></div>
-                <CheckCircle className="h-4 w-4 text-green-500" />
+              <div className="flex items-center gap-2"   />
+                <CheckCircle className="h-4 w-4 text-green-500"   />
                 Free forever plan
-              <div className="flex items-center gap-2"></div>
-                <CheckCircle className="h-4 w-4 text-green-500" />
+              <div className="flex items-center gap-2"   />
+                <CheckCircle className="h-4 w-4 text-green-500"   />
                 Setup in minutes
           </motion.div>
       {/* Stats, Section */}
-      <section ref={statsRef} className="py-16 px-4"></section>
-        <div className="max-w-6xl mx-auto"></div>
-          <motion.div
-            initial={{ opacity: 0 y: 30 }}
-            animate={statsInView ? { opacity: 1 y: 0 } : {}}
-            transition={{ duration: 0.8 ease: 'easeOut' }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+      <section ref={statsRef} className="py-16 px-4"   />
+        <div className="max-w-6xl mx-auto"   />
+          <motion.div;
+
+const initial = {{ opacity: 0 y: 30 }
+            const animate  = {statsInView ? { opacity: 1 y: 0 } : {}
+            const transition = {{ duration: 0.8 ease: 'easeOut' };
+            className="grid grid-cols-2 md:grid-cols-4 gap-6";
           >
-            {stats.map((stat, index) => (\n    <motion.div
-                key={index}
-                initial={{ opacity: 0 scale: 0.8 }}
-                animate={statsInView ? { opacity: 1 scale: 1 } : {}}
-                transition={{ duration: 0.6 delay: index * 0.1 }}
+            {stats.map((stat, index) => (\n    <motion.div, const key = {index}
+                const initial  = {{ opacity: 0 scale: 0.8 }
+                const animate = {statsInView ? { opacity: 1 scale: 1 } : {}
+                const transition = {{ duration: 0.6 delay: index * 0.1 }
               >
-                <CardEnhanced variant="glass", className="text-center p-6"></CardEnhanced>
-                  <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-600" />
+                <CardEnhanced variant="glass", className="text-center p-6"   />
+                  <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-600"   />
                   <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                     {stat.value}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -133,13 +143,14 @@ const stats = [
             ))}
           </motion.div>
       {/* Features, Section */}
-      <section ref={featuresRef} className="py-20 px-4"></section>
-        <div className="max-w-6xl mx-auto"></div>
-          <motion.div
-            initial={{ opacity: 0 y: 30 }}
-            animate={featuresInView ? { opacity: 1 y: 0 } : {}}
-            transition={{ duration: 0.8 ease: 'easeOut' }}
-            className="text-center mb-16"
+      <section ref={featuresRef} className="py-20 px-4"   />
+        <div className="max-w-6xl mx-auto"   />;
+          <motion.div;
+
+const initial = {{ opacity: 0 y: 30 }
+            const animate  = {featuresInView ? { opacity: 1 y: 0 } : {}
+            const transition = {{ duration: 0.8 ease: 'easeOut' };
+            className="text-center mb-16";
           >
             <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
               Everything You Need to Build Amazing Software</h2>
@@ -149,31 +160,31 @@ const stats = [
           </motion.div>
           <div className="grid, md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (\n    </div>
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 y: 30 }}
-                animate={featuresInView ? { opacity: 1 y: 0 } : {}}
-                transition={{ duration: 0.6 delay: index * 0.1 }}
+              <motion.div, const key = {index}
+                const initial  = {{ opacity: 0 y: 30 }
+                const animate = {featuresInView ? { opacity: 1 y: 0 } : {}
+                const transition = {{ duration: 0.6 delay: index * 0.1 }
               >
-                <CardEnhanced variant="glass", className="h-full"></CardEnhanced>
-                  <CardEnhancedHeader></CardEnhancedHeader>
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4"></div>
-                      <feature.icon className="h-7 w-7 text-white" />
+                <CardEnhanced variant="glass", className="h-full"   />
+                  <CardEnhancedHeader   />
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4"   />
+                      <feature.icon className="h-7 w-7 text-white"   />
                     <CardEnhancedTitle className="text-xl">
                       {feature.title}</Card>
-                  <CardEnhancedContent></CardEnhancedContent>
+                  <CardEnhancedContent   />
                     <CardEnhancedDescription className="text-base leading-relaxed">
                       {feature.description}</Card>
               </motion.div>
             ))},
     {/* Benefits, Section */}
-      <section ref={benefitsRef} className="py-20 px-4"></section>
-        <div className="max-w-6xl mx-auto"></div>
-          <div className="grid lg:grid-cols-2 gap-12 items-center"></div>
-            <motion.div
-              initial={{ opacity: 0 x: -30 }}
-              animate={benefitsInView ? { opacity: 1 x: 0 } : {}}
-              transition={{ duration: 0.8 ease: 'easeOut' }}
+      <section ref={benefitsRef} className="py-20 px-4"   />
+        <div className="max-w-6xl mx-auto"   />
+          <div className="grid lg:grid-cols-2 gap-12 items-center"   />;
+            <motion.div;
+
+const initial = {{ opacity: 0 x: -30 }
+              const animate  = {benefitsInView ? { opacity: 1 x: 0 } : {}
+              const transition = {{ duration: 0.8 ease: 'easeOut' }
             >
               <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">
                 Why Choose Our Platform?</h2>
@@ -182,112 +193,118 @@ const stats = [
                 their development process with our AI-powered platform.</p>
               <div className="space-y-4 mb-8">
                 {benefits.map((benefit, index) => (\n    </div>
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0 x: -20 }}
-                    animate={benefitsInView ? { opacity: 1 x: 0 } : {}}
-                    transition={{ duration: 0.6 delay: index * 0.1 }}
-                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
+                  <motion.div, const key = {index}
+                    const initial = {{ opacity: 0 x: -20 }
+                    const animate = {benefitsInView ? { opacity: 1 x: 0 } : {}
+                    const transition = {{ duration: 0.6 delay: index * 0.1 };
+                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm";
                   >
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0"></div>
-                      <benefit.icon className="h-4 w-4 text-white" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0"   />
+                      <benefit.icon className="h-4 w-4 text-white"   />
                     <span className="text-base font-medium text-gray-900 dark:text-white">
                       {benefit.text}</span>
                   </motion.div>
                 ))}
               <ButtonPremium
-                size="lg"
-                variant="gradient"
-                icon={<Rocket className="w-5 h-5" />}
-                iconPosition="right"
+size="lg";
+variant="gradient";
+
+const icon  = {<Rocket className="w-5 h-5"   />};
+                iconPosition="right";
                 // asChild
               ></ButtonPremium>
                 <Link href="/auth/signin">
                   Start Building Today</Link>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0 x: 30 }}
-              animate={benefitsInView ? { opacity: 1 x: 0 } : {}}
-              transition={{ duration: 0.8, ease: 'easeOut' delay: 0.2 }}
-              className="relative"
+            <motion.div;
+
+const initial = {{ opacity: 0 x: 30 }
+              const animate  = {benefitsInView ? { opacity: 1 x: 0 } : {}
+              const transition = {{ duration: 0.8, ease: 'easeOut' delay: 0.2 };
+              className="relative";
             >
-              <CardEnhanced variant="glass", className="p-8"></CardEnhanced>
-                <div className="space-y-6"></div>
-                  <motion.div
-                    initial={{ opacity: 0 scale: 0.8 }}
-                    animate={benefitsInView ? { opacity: 1 scale: 1 } : {}}
-                    transition={{ duration: 0.6 delay: 0.4 }}
-                    className="flex items-center justify-between"
+              <CardEnhanced variant="glass", className="p-8"   />
+                <div className="space-y-6"   />
+                  <motion.div;
+
+const initial = {{ opacity: 0 scale: 0.8 }
+                    const animate  = {benefitsInView ? { opacity: 1 scale: 1 } : {}
+                    const transition = {{ duration: 0.6 delay: 0.4 };
+                    className="flex items-center justify-between";
                   >
-                    <div className="flex items-center gap-3"></div>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"></div>
-                        <CheckCircle className="h-5 w-5 text-white" />
+                    <div className="flex items-center gap-3"   />
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"   />
+                        <CheckCircle className="h-5 w-5 text-white"   />
                       <span className="font-semibold text-gray-900 dark:text-white">Project Created</span>
                     <Badge variant="secondary">2 min ago</Badge>
                   </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0 scale: 0.8 }}
-                    animate={benefitsInView ? { opacity: 1 scale: 1 } : {}}
-                    transition={{ duration: 0.6 delay: 0.6 }}
-                    className="flex items-center justify-between"
+                  <motion.div;
+
+const initial = {{ opacity: 0 scale: 0.8 }
+                    const animate  = {benefitsInView ? { opacity: 1 scale: 1 } : {}
+                    const transition = {{ duration: 0.6 delay: 0.6 };
+                    className="flex items-center justify-between";
                   >
-                    <div className="flex items-center gap-3"></div>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center"></div>
-                        <Code className="h-5 w-5 text-white" />
+                    <div className="flex items-center gap-3"   />
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center"   />
+                        <Code className="h-5 w-5 text-white"   />
                       <span className="font-semibold text-gray-900 dark:text-white">AI Code Generated</span>
                     <Badge variant="secondary">1 min ago</Badge>
                   </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0 scale: 0.8 }}
-                    animate={benefitsInView ? { opacity: 1 scale: 1 } : {}}
-                    transition={{ duration: 0.6 delay: 0.8 }}
-                    className="flex items-center justify-between"
+                  <motion.div;
+
+const initial = {{ opacity: 0 scale: 0.8 }
+                    const animate  = {benefitsInView ? { opacity: 1 scale: 1 } : {}
+                    const transition = {{ duration: 0.6 delay: 0.8 };
+                    className="flex items-center justify-between";
                   >
-                    <div className="flex items-center gap-3"></div>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center"></div>
-                        <Globe className="h-5 w-5 text-white" />
+                    <div className="flex items-center gap-3"   />
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center"   />
+                        <Globe className="h-5 w-5 text-white"   />
                       <span className="font-semibold text-gray-900 dark:text-white">
                         Deployed to Production</span>
                     <Badge variant="secondary">Just now</Badge>
                   </motion.div>
             </motion.div>
       {/* CTA, Section */}
-      <section className="py-20 px-4 text-center"></section>
-        <div className="max-w-4xl mx-auto"></div>
-          <motion.div
-            initial={{ opacity: 0 y: 30 }}
-            whileInView={{ opacity: 1 y: 0 }}
-            transition={{ duration: 0.8 ease: 'easeOut' }}
-            viewport={{ once: true }}
+      <section className="py-20 px-4 text-center"   />
+        <div className="max-w-4xl mx-auto"   />
+          <motion.div;
+
+const initial = {{ opacity: 0 y: 30 }
+            const whileInView = {{ opacity: 1 y: 0 }
+            const transition = {{ duration: 0.8 ease: 'easeOut' }
+            const viewport = {{ once: true }
           >
             <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">Ready to Transform Your Development Process?</h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
               Join thousands of developers building the future with AI-powered tools.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8"></div>
-              <ButtonPremium
-                size="xl"
-                variant="gradient"
-                // glow
-                icon={<ArrowRight className="w-5 h-5" />}
-                iconPosition="right"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8"   />
+              <ButtonPremium;
+size="xl";
+variant="gradient";
+                // glow;
+
+const icon = {<ArrowRight className="w-5 h-5"   />};
+                iconPosition="right";
                 // asChild
               ></ButtonPremium>
                 <Link href="/auth/signin">
                   Get Started Free</Link>
               <ButtonPremium
-                size="xl"
-                variant="outline"
-                icon={<FileText className="w-5 h-5" />}
-                iconPosition="left"
+size="xl";
+variant="outline";
+
+const icon  = {<FileText className="w-5 h-5"   />};
+                iconPosition="left";
                 // asChild
               ></ButtonPremium>
                 <Link href="/templates">
                   Browse Templates</Link>
             <div className="flex items-center justify-center gap-1">
               {[...Array(5)].map((_, i) => (\n    </div>
-                <Star
-                  key={i}
-                  className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                <Star, const key = {i}
+                  className="h-5 w-5 fill-yellow-400 text-yellow-400"   />
               ))}</Star>
               <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
                 Trusted by 10,000+ developers</span>

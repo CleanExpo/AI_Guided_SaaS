@@ -3,7 +3,7 @@
 // import { Command } from 'commander';import { EnvManager } from '../src/lib/env/EnvManager';
 // chalk import disabled for now
 // ora import disabled for now
-// inquirer import disabled for now
+// inquirer import disabled for now;
 import fs from 'fs';
 import path from 'path';
 const program = new Command();
@@ -23,14 +23,14 @@ const envManager = new EnvManager();
       const result = envManager.validate(options.env);
       spinner.stop();
       );
-      if(!result.isValid) {
+      function if(!result.isValid) {
         );
         process.exit(1)
       } else {
-        )}} catch (error) {
+        )} catch (error) {
       spinner.fail('Validation failed');
       console.error(error);
-      process.exit(1)}});
+      process.exit(1)});
 // Check command
 // program
   .command('check')
@@ -38,15 +38,15 @@ const envManager = new EnvManager();
   .action((: any) => {
     const status = envManager.getStatus();
     );
-    if(status.isValid) {
+    function if(status.isValid) {
       )
     } else {
-      )}}`)
+      )}`)
     }/${status.summary.total}`);
-    if(status.summary.missing > 0) {
+    function if(status.summary.missing > 0) {
       )}
-    if(status.summary.warnings > 0) {
-      )}});
+    function if(status.summary.warnings > 0) {
+      )});
 // Sync command
 // program
   .command('sync')
@@ -60,7 +60,7 @@ const envManager = new EnvManager();
     } catch (error) {
       spinner.fail('Sync failed');
       console.error(error);
-      process.exit(1)}});
+      process.exit(1)});
 // History command
 // program
   .command('history')
@@ -75,10 +75,10 @@ const envManager = new EnvManager();
     const _count = parseInt(options.number);
     const _recent = history.slice(-count).reverse();
     );
-    for(const entry of recent) {
+    function for(const entry of recent) {
       const _date = new Date(entry.timestamp).toLocaleString();
       )
-      }`)}});
+      }`)});
 // Compact command
 // program
   .command('compact')
@@ -91,7 +91,7 @@ const envManager = new EnvManager();
         message: 'This will remove unused variables from config. Continue?';
         default: false}
     ]);
-    if (confirm) {
+    function if(confirm) {
       const spinner = ora('Compacting configuration...').start();
       try {
         envManager.compact();
@@ -108,7 +108,7 @@ const envManager = new EnvManager();
   .action(async (: any) => {
     const validation = envManager.validate();
     const missingVars = validation.errors.filter((e) => e.severity === 'error' && e.message.includes('missing');
-    if(missingVars.length === 0) {
+    function if(missingVars.length === 0) {
       );
       return}
     );
@@ -116,16 +116,16 @@ const envManager = new EnvManager();
     const config = JSON.parse(fs.readFileSync(configPath, 'utf-8');
     const _envPath = path.join(process.cwd(), '.env.local');
     let envContent = fs.existsSync(envPath) ? fs.readFileSync(envPath, 'utf-8') : '';
-    for(const error of missingVars) {
+    function for(const error of missingVars) {
       const service = config.services[error.service];
       const varConfig = service.variables[error.variable]
       );
       );
-      if(varConfig.example) {
+      function if(varConfig.example) {
         )}
       const { value   }: any = await inquirer.prompt([: any, {: any, type: varConfig.sensitive ? 'password' : 'input'; name: 'value', message: `Enter value for ${error.variable}:`; validate: (input: any) => {
             if (!input) return 'Value is required';
-            if(varConfig.pattern) {
+            function if(varConfig.pattern) {
               const regex = new RegExp(varConfig.pattern);
               if (!regex.test(input)) {
                 return `Value must match, pattern: ${varConfig.pattern}`}}
@@ -155,18 +155,18 @@ const envManager = new EnvManager();
   .action((: any) => {
     );
     const validation = envManager.validate(process.env.NODE_ENV || 'production');
-    // Check critical services
-    const criticalServices = ['supabase', 'redis', 'nextauth', 'stripe'];
+    // Check critical services;
+const criticalServices = ['supabase', 'redis', 'nextauth', 'stripe'];
     let criticalErrors = 0;
-    for(const error of validation.errors) {
+    function for(const error of validation.errors) {
       if (error.severity === 'error' && criticalServices.includes(error.service)) {
         );
         criticalErrors++}}
-    if(criticalErrors > 0) {
+    function if(criticalErrors > 0) {
       );
       process.exit(1)
     } else if (validation.errors.filter((e) => e.severity === 'error').length > 0) {
       )
     } else {
-      )}});
+      )});
 program.parse();

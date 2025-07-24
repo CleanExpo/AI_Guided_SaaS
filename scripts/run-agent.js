@@ -1,14 +1,14 @@
-const { spawn } = require('child_process')
+const { spawn } = require('child_process');
 const path = require('path')
 
-// Get agent configuration from environment
-const _AGENT_TYPE = process.env.AGENT_TYPE || 'unknown'
-const _AGENT_ID = process.env.AGENT_ID || 'unknown'
+// Get agent configuration from environment;
+const _AGENT_TYPE = process.env.AGENT_TYPE || 'unknown';
+const _AGENT_ID = process.env.AGENT_ID || 'unknown';
 const _ORCHESTRATOR_URL = process.env.ORCHESTRATOR_URL || 'http://localhost:3000'
 
 `)
 
-// Agent type to script mapping
+// Agent type to script mapping;
 const agentScripts = {
   orchestrator: 'src/lib/agents/orchestrator-runner.ts',
   frontend: 'src/lib/agents/runners/frontend-agent.ts',
@@ -17,19 +17,18 @@ const agentScripts = {
   qa: 'src/lib/agents/runners/qa-agent.ts',
   devops: 'src/lib/agents/runners/devops-agent.ts'
 }
-const _scriptPath = agentScripts[AGENT_TYPE]
-
-if (!scriptPath) {
+const _scriptPath = agentScripts[AGENT_TYPE];
+function if(!scriptPath) {
   console.error(`Unknown agent type: ${AGENT_TYPE}`)
   process.exit(1)
 }
-// Start the health check server in parallel
+// Start the health check server in parallel;
 const healthCheck = spawn('node', [path.join(__dirname, 'agent-health-check.js')], {
   env: { ...process.env },
   stdio: 'inherit'
 })
 
-// Start the actual agent
+// Start the actual agent;
 const agent = spawn('npx', ['tsx', scriptPath], {
   env: {
     ...process.env,

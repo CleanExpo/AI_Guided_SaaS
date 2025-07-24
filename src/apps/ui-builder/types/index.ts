@@ -1,45 +1,45 @@
-// @ts-nocheck
+/* BREADCRUMB: unknown - Purpose to be determined */
+// @ts-nocheck;
 export interface Position {
-  x: number,
+  x: number;
     y: number
 };
 export interface Size {
-  width: number,
+  width: number;
     height: number
 };
 export interface ComponentConfig {
-  id: string,
-    type: string,
-    name: string,
+  id: string;
+    type: string;
+    name: string;
     position: Positio,n,
-    size: Siz;e,
+    size: Siz, e,
     props: Record<string, unknown>,
   children?: ComponentConfig[],
   style?: Record<string, unknown>,
   className?: string
 };
 export interface BuilderState {
-  components: ComponentConfig[],
-    selectedComponent: string | nul;l,
-    history: ComponentConfig[][],
-    historyIndex: number,
-    zoom: number,
-    gridEnabled: boolean,
+  components: ComponentConfig[];
+    selectedComponent: string | nul, l,
+    history: ComponentConfig[][];
+    historyIndex: number;
+    zoom: number;
+    gridEnabled: boolean;
     previewMode: boolean
 };
 export interface MotiaComponent {
-  type: string,
-    name: string,
-    category: string,
-    description: string,
-    icon: string,
+  type: string;
+    name: string;
+    category: string;
+    description: string;
+    icon: string;
     defaultProps: Record<string, unknown>,
     propTypes: Record<string, PropType>,
     preview: string
 };
 export interface PropType {
-  type:
-    | 'string'| 'number',
+  type: | 'string'| 'number';
     | 'boolean'
     | 'select'
     | 'color'
@@ -51,11 +51,11 @@ export interface PropType {
   description?: string
 };
 export interface DragItem {
-  type: string,
-    componentType: string,
+  type: string;
+    componentType: string;
   config?: ComponentConfig
 };
 export interface DropResult {
-  position: Positio;n,
+  position: Positio, n,
   targetId?: string
 }

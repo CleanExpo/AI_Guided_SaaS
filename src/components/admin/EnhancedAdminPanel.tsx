@@ -8,12 +8,11 @@ import SelfCheckTrigger from './SelfCheckTrigger';
 import SystemResourceMonitor from './SystemResourceMonitor';
 import SafeModeHealthCheck from './SafeModeHealthCheck';
 export default function EnhancedAdminPanel() {
-  const [activeTab, setActiveTab] = useState<any>('overview')
-  return (
-    <div className="min-h-screen bg-gray-50">
+  const [activeTab, setActiveTab] = useState<any>('overview');
+        return (<div className="min-h-screen bg-gray-50">;
       {/* Header */}</div>
       <div className="bg-white border-b max-w-7xl mx-auto px-4, sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 flex items-center space-x-4"></div>
+        <div className="flex items-center justify-between h-16 flex items-center space-x-4"   />
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">🛡️</span>
               <h1 className="text-xl font-semibold">Enhanced Admin Panel</h1>
@@ -37,7 +36,7 @@ export default function EnhancedAdminPanel() {
                   <h3 className="text-lg font-semibold">
                     🖥️ Performance Status</h3>
                   <div className="w-3 h-3 bg-green-500 rounded-full">
-        <div className="space-y-2 flex justify-between text-sm"></div>
+        <div className="space-y-2 flex justify-between text-sm"   />
                     <span>System Load</span>
                     <span className="font-medium">Normal</span>
                   <div className="flex justify-between text-sm">
@@ -47,9 +46,10 @@ export default function EnhancedAdminPanel() {
                     <span>Active Sessions</span>
                     <span className="font-medium">3</span>
                 <Button
-                  className="w-full mt-4"
-                  variant="outline"
-                  onClick={() => setActiveTab('performance')}
+className="w-full mt-4";
+variant="outline";
+
+const onClick = {() => setActiveTab('performance')}
                 >
                   View Details {/* Safe, Mode Status */}
               <Card className="p-6">
@@ -57,7 +57,7 @@ export default function EnhancedAdminPanel() {
                   <h3 className="text-lg font-semibold">🛡️ Safe Mode</h3>
                   <div className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
                     Ready</div>
-                <div className="space-y-2 flex justify-between text-sm"></div>
+                <div className="space-y-2 flex justify-between text-sm"   />
                     <span>Batch Processing</span>
                     <span className="font-medium">Enabled</span>
                   <div className="flex justify-between text-sm">
@@ -66,17 +66,18 @@ export default function EnhancedAdminPanel() {
                   <div className="flex justify-between text-sm">
                     <span>Safety Checks</span>
                     <span className="font-medium">Active</span>
-                <Button
-                  className="w-full mt-4"
-                  variant="outline"
-                  onClick={() => setActiveTab('safe-mode')}
+                <Button;
+className="w-full mt-4";
+variant="outline";
+
+const onClick = {() => setActiveTab('safe-mode')}
                 >
                   Start Safe Check {/* System, Health */}
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">🔍 System Health</h3>
                   <div className="w-3 h-3 bg-green-500 rounded-full">
-        <div className="space-y-2 flex justify-between text-sm"></div>
+        <div className="space-y-2 flex justify-between text-sm"   />
                     <span>Overall Score</span>
                     <span className="font-medium">92/100</span>
                   <div className="flex justify-between text-sm">
@@ -85,38 +86,42 @@ export default function EnhancedAdminPanel() {
                   <div className="flex justify-between text-sm">
                     <span>Issues Found</span>
                     <span className="font-medium">3 minor</span>
-                <Button
-                  className="w-full mt-4"
-                  variant="outline"
-                  onClick={() => setActiveTab('system-check')}
+                <Button;
+className="w-full mt-4";
+variant="outline";
+
+const onClick = {() => setActiveTab('system-check')}
                 >
                   Run Health Check {/* Quick, Actions */}
             <Card className="p-6">
               <h3 className="text-lg font-semibold mb-4">⚡ Quick Actions</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button
-                  variant="outline"
-                  className="h-20 flex flex-col items-center justify-center"
-                  onClick={() => setActiveTab('performance')}
+                <Button;
+variant="outline";
+className="h-20 flex flex-col items-center justify-center";
+
+const onClick = {() => setActiveTab('performance')}
                 ></Button>
                   <span className="text-2xl mb-1">📊</span>
                   <span className="text-sm">Monitor Resources</span>
-                <Button
-                  variant="outline"
-                  className="h-20 flex flex-col items-center justify-center"
-                  onClick={() => setActiveTab('safe-mode')}
+                <Button;
+variant="outline";
+className="h-20 flex flex-col items-center justify-center";
+
+const onClick = {() => setActiveTab('safe-mode')}
                 ></Button>
                   <span className="text-2xl mb-1">🛡️</span>
                   <span className="text-sm">Safe Processing</span>
-                <Button
-                  variant="outline"
-                  className="h-20 flex flex-col items-center justify-center"
-                  onClick={() => setActiveTab('system-check')}
+                <Button;
+variant="outline";
+className="h-20 flex flex-col items-center justify-center";
+
+const onClick = {() => setActiveTab('system-check')}
                 ></Button>
                   <span className="text-2xl mb-1">🔍</span><span className="text-sm">System Check</span>
-                <Button
-                  variant="outline"
-                  className="h-20 flex flex-col items-center justify-center"
+                <Button;
+variant="outline";
+className="h-20 flex flex-col items-center justify-center";
                 >
                   <span className="text-2xl mb-1">📋</span>
                   <span className="text-sm">View Logs</span>
@@ -133,9 +138,9 @@ export default function EnhancedAdminPanel() {
                     Safe Mode for processing large numbers of issues.</p>
                   <div className="mt-2">
                     <Button
-                      size="sm"
-                      variant="outline"
-                      className="text-orange-700 border-orange-300"
+size="sm";
+variant="outline";
+className="text-orange-700 border-orange-300";
                     >
                       📖 View Emergency Guide {/* Performance, Monitor Tab */}
           <TabsContent value="performance", className="space-y-6">
@@ -148,7 +153,7 @@ export default function EnhancedAdminPanel() {
             <SelfCheckTrigger></TabsContent>
       {/* Footer */}
       <div className="bg-white border-t mt-12 max-w-7xl mx-auto px-4, sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center justify-between text-sm text-gray-600 flex items-center space-x-4"></div>
+        <div className="flex items-center justify-between text-sm text-gray-600 flex items-center space-x-4"   />
               <span>System: Status: ✅ Healthy</span>
               <span>•</span>
               <span>Last: Updated: {new, Date().toLocaleTimeString()}</span>

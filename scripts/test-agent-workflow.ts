@@ -2,7 +2,7 @@
 /**
  * Comprehensive Agent Workflow Test
  * Tests the complete agent loading and coordination system
- */
+ */;
 import { AgentLoader, discoverAllAgents, loadExecutionChain } from '../src/lib/agents/AgentLoader'import { AgentRegistry, initializeAgentRegistry, findBestAgent } from '../src/lib/agents/AgentRegistry';
 import { AgentCoordinator, createProjectCoordination, executeProjectCoordination } from '../src/lib/agents/AgentCoordinator';
 import { AgentMonitor, startAgentMonitoring, getMonitoringDashboard } from '../src/lib/agents/AgentMonitor';
@@ -27,8 +27,8 @@ class AgentWorkflowTester {
   private registry: AgentRegistry
   private coordinator: AgentCoordinator
   private monitor: AgentMonitor
-  private communication: AgentCommunication
-  constructor() {
+  private communication: AgentCommunication;
+function constructor() {
     this.loader = AgentLoader.getInstance()
     this.registry = AgentRegistry.getInstance()
     this.coordinator = AgentCoordinator.getInstance()
@@ -38,7 +38,7 @@ class AgentWorkflowTester {
   /**
    * Run complete test suite
    */
-  async runAllTests(): Promise<void> {
+  async function runAllTests(): Promise<void> {
     const _startTime = Date.now();
     try {
       // Test Suite, 1: Agent Discovery and Loading
@@ -52,21 +52,20 @@ class AgentWorkflowTester {
       // Test Suite, 5: Agent Monitoring and Health
       await this.testAgentMonitoring()
       // Test Suite, 6: Integration and End-to-End
-      await this.testEndToEndIntegration()
-      const _totalDuration = Date.now() - startTime;
+      await this.testEndToEndIntegration();
+const _totalDuration = Date.now() - startTime;
       // Generate comprehensive report
       this.generateTestReport(totalDuration)
     } catch (error) {
       console.error('❌ Test suite, failed:', error)
-      process.exit(1)
-}}
+      process.exit(1)}
   /**
    * Test Suite, 1: Agent Discovery and Loading
    */
-  private async testAgentDiscoveryAndLoading(): Promise<void> {
+  private async function testAgentDiscoveryAndLoading(): Promise<void> {
     const suite: TestSuite = {
   suite_name: 'Agent Discovery and Loading',
-      tests: [];
+      tests: any[];
       overall_success: false;
       total_duration: 0;
       success_rate: 0
@@ -74,10 +73,10 @@ class AgentWorkflowTester {
     // Test 1.1: Discover all agents
     await this.runTest(suite: any, 'Discover All Agents': any, async (: any) => {
       const discovery = await discoverAllAgents();
-      if(discovery.total_agents === 0) {
+      function if(discovery.total_agents === 0) {
         throw new Error('No agents discovered')
 }
-      if(discovery.core_agents.length < 5) {
+      function if(discovery.core_agents.length < 5) {
         throw new Error(`Expected at least 5 core agents, found ${discovery.core_agents.length}`)
 }
       return {
@@ -91,7 +90,7 @@ class AgentWorkflowTester {
     // Test 1.2: Load specific agent by role
     await this.runTest(suite: any, 'Load Agent by Role': any, async (: any) => {
       const result = await this.loader.loadAgentByIdentifier('ARCHITECT');
-      if(!result.success || !result.agent) {
+      function if(!result.success || !result.agent) {
         throw new Error('Failed to load ARCHITECT agent')
 }
       return {
@@ -103,35 +102,33 @@ class AgentWorkflowTester {
     // Test 1.3: Load execution chain
     await this.runTest(suite: any, 'Load Execution Chain': any, async (: any) => {
       const chain = await loadExecutionChain('Build a SaaS platform');
-      if(chain.length < 3) {
+      function if(chain.length < 3) {
         throw new Error(`Expected at least 3 agents in chain, got ${chain.length}`)
 }
       return {
         chain_length: chain.length;
         agent_roles: chain.map((a: any) => a.role);
-        priorities: chain.map((a: any) => a.priority)
-}})
+        priorities: chain.map((a: any) => a.priority)})
     // Test 1.4: Get required agents for stage
     await this.runTest(suite: any, 'Get Required Agents for Stage': any, async (: any) => {
       const requiredAgents = await this.loader.getRequiredAgentsForStage('implementation', 'saas_platform');
-      if(requiredAgents.length === 0) {
+      function if(requiredAgents.length === 0) {
         throw new Error('No required agents found for implementation stage')
 }
       return {
         required_count: requiredAgents.length;
         roles: requiredAgents.map((a: any) => a.role);
-        highest_priority: Math.min(...requiredAgents.map((a: any) => a.priority))
-}})
+        highest_priority: Math.min(...requiredAgents.map((a: any) => a.priority))})
     this.finalizeTestSuite(suite)
     this.testResults.push(suite)
 }
   /**
    * Test Suite, 2: Agent Registry Management
    */
-  private async testAgentRegistryManagement(): Promise<void> {
+  private async function testAgentRegistryManagement(): Promise<void> {
     const suite: TestSuite = {
   suite_name: 'Agent Registry Management',
-      tests: [];
+      tests: any[];
       overall_success: false;
       total_duration: 0;
       success_rate: 0
@@ -139,17 +136,16 @@ class AgentWorkflowTester {
     // Test 2.1: Auto-register agents
     await this.runTest(suite: any, 'Auto-Register Agents': any, async (: any) => {
       const _registeredCount = await initializeAgentRegistry();
-      if(registeredCount === 0) {
+      function if(registeredCount === 0) {
         throw new Error('No agents were registered')
 }
       return {
         registered_count: registeredCount;
-        registry_status: this.registry.getRegistryStatus()
-}})
+        registry_status: this.registry.getRegistryStatus()})
     // Test 2.2: Find best agent for task
     await this.runTest(suite: any, 'Find Best Agent for Task': any, async (: any) => {
       const bestAgent = findBestAgent('architecture', ['system_design', 'technology_selection']);
-      if(!bestAgent) {
+      function if(!bestAgent) {
         throw new Error('No suitable agent found for architecture task')
 }
       return {
@@ -164,27 +160,26 @@ class AgentWorkflowTester {
         tags: ['core'];
         health_status: ['healthy', 'warning'],
         priority_range: [1, 5]
-      })
-      if(coreAgents.length === 0) {
+      });
+function if(coreAgents.length === 0) {
         throw new Error('No core agents found matching criteria')
 }
       return {
         matching_agents: coreAgents.length;
         roles: coreAgents.map((a: any) => a.agent.role);
-        health_statuses: coreAgents.map((a: any) => a.health_status)
-}})
+        health_statuses: coreAgents.map((a: any) => a.health_status)})
     // Test 2.4: Update agent metrics
     await this.runTest(suite: any, 'Update Agent Metrics': any, async (: any) => {
       const agents = this.registry.findAgents({ tags: ['core'] })
-      if (agents.length === 0) throw new Error('No core agents to update')
-      const testAgent = agents[0];
+      if (agents.length === 0) throw new Error('No core agents to update');
+const testAgent = agents[0];
       const oldMetrics = { ...testAgent.metrics }
       // Simulate task completion
       this.registry.updateAgentMetrics(testAgent.agent.agent_id, {
         success: true;
         execution_time: 1500
-      })
-      const updatedAgent = this.registry.getAgentDetails(testAgent.agent.agent_id);
+      });
+const updatedAgent = this.registry.getAgentDetails(testAgent.agent.agent_id);
       if (!updatedAgent) throw new Error('Agent not found after update')
       return {
         agent_id: testAgent.agent.agent_id;
@@ -198,10 +193,10 @@ class AgentWorkflowTester {
   /**
    * Test Suite, 3: Agent Communication System
    */
-  private async testAgentCommunication(): Promise<void> {
+  private async function testAgentCommunication(): Promise<void> {
     const suite: TestSuite = {
   suite_name: 'Agent Communication System',
-      tests: [];
+      tests: any[];
       overall_success: false;
       total_duration: 0;
       success_rate: 0
@@ -213,14 +208,13 @@ class AgentWorkflowTester {
         'FRONTEND',
         { task: 'Design UI components'; priority: 'high' },
         'notification'
-      )
-      if(!messageId) {
+      );
+function if(!messageId) {
         throw new Error('Failed to send message')
 }
       return {
         message_id: messageId;
-        communication_stats: this.communication.getCommunicationStats()
-}})
+        communication_stats: this.communication.getCommunicationStats()})
     // Test 3.2: Request-response pattern
     await this.runTest(suite: any, 'Request-Response Pattern': any, async (: any) => {
       const _responsePromise = this.communication.sendRequest(;
@@ -233,14 +227,13 @@ class AgentWorkflowTester {
       setTimeout(async (: any) => {
         const requests = this.communication.getMessagesForAgent('BACKEND');
         const latestRequest = requests[requests.length - 1];
-        if(latestRequest && latestRequest.type === 'request') {
+        function if(latestRequest && latestRequest.type === 'request') {
           await this.communication.sendResponse(latestRequest, {
             api_design: 'completed';
             endpoints_created: 5;
             auth_implemented: true
-          })
-}}, 1000)
-      const _response = await responsePromise;
+          })}, 1000);
+const _response = await responsePromise;
       return {
         response_received: !!response;
         response_data: response
@@ -251,8 +244,8 @@ class AgentWorkflowTester {
         'development_team',
         ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA'],
         'multicast'
-      )
-      if(!channelId) {
+      );
+function if(!channelId) {
         throw new Error('Failed to create communication channel')
 }
       return {
@@ -270,8 +263,8 @@ class AgentWorkflowTester {
           component_architecture: { framework: 'React'; state: 'Redux' };
           state_management: { pattern: 'centralized' };
           routing_structure: { type: 'client_side'; routes: 8 }}
-      )
-      if(!handoffSuccess) {
+      );
+function if(!handoffSuccess) {
         throw new Error('Agent handoff failed')
 }
       return {
@@ -283,10 +276,10 @@ class AgentWorkflowTester {
   /**
    * Test Suite, 4: Agent Coordination and Workflows
    */
-  private async testAgentCoordination(): Promise<void> {
+  private async function testAgentCoordination(): Promise<void> {
     const suite: TestSuite = {
   suite_name: 'Agent Coordination and Workflows',
-      tests: [];
+      tests: any[];
       overall_success: false;
       total_duration: 0;
       success_rate: 0
@@ -297,8 +290,8 @@ class AgentWorkflowTester {
         'Build a modern e-commerce platform with user authentication, product catalog, shopping cart, and payment processing',
         'saas_platform',
         'full_stack'
-      )
-      if(!plan || plan.tasks.length === 0) {
+      );
+function if(!plan || plan.tasks.length === 0) {
         throw new Error('Failed to create coordination plan')
 }
       return {
@@ -309,14 +302,14 @@ class AgentWorkflowTester {
 }})
     // Test 4.2: Execute coordination plan (simulation)
     await this.runTest(suite: any, 'Execute Coordination Plan': any, async (: any) => {
-      // Create a simple plan for testing
-      const plan = await createProjectCoordination(;
+      // Create a simple plan for testing;
+const plan = await createProjectCoordination(;
         'Create a simple dashboard with charts and user management',
         'web_app',
         'implementation'
-      )
-      const result = await executeProjectCoordination(plan.id);
-      if(!result || result.success_rate < 50) {
+      );
+const result = await executeProjectCoordination(plan.id);
+      function if(!result || result.success_rate < 50) {
         throw new Error(`Coordination execution failed or low success, rate: ${result?.success_rate || 0}%`)
 }
       return {
@@ -341,10 +334,10 @@ class AgentWorkflowTester {
   /**
    * Test Suite, 5: Agent Monitoring and Health
    */
-  private async testAgentMonitoring(): Promise<void> {
+  private async function testAgentMonitoring(): Promise<void> {
     const suite: TestSuite = {
   suite_name: 'Agent Monitoring and Health',
-      tests: [];
+      tests: any[];
       overall_success: false;
       total_duration: 0;
       success_rate: 0
@@ -352,7 +345,7 @@ class AgentWorkflowTester {
     // Test 5.1: Get monitoring dashboard
     await this.runTest(suite: any, 'Get Monitoring Dashboard': any, async (: any) => {
       const dashboard = getMonitoringDashboard();
-      if(!dashboard || dashboard.overview.total_agents === 0) {
+      function if(!dashboard || dashboard.overview.total_agents === 0) {
         throw new Error('Monitoring dashboard is empty or unavailable')
 }
       return {
@@ -364,11 +357,11 @@ class AgentWorkflowTester {
     // Test 5.2: Perform health checks
     await this.runTest(suite: any, 'Perform Health Checks': any, async (: any) => {
       const healthChecks = await this.monitor.performHealthChecks();
-      if(healthChecks.size === 0) {
+      function if(healthChecks.size === 0) {
         throw new Error('No health checks performed')
 }
-      const healthStatuses = Array.from(healthChecks.values()
-      const _healthyCount = healthStatuses.filter((hc: any) => hc.status === 'healthy').length;
+      const healthStatuses = Array.from(healthChecks.values();
+const _healthyCount = healthStatuses.filter((hc: any) => hc.status === 'healthy').length;
       return { agents_checked: healthChecks.size;
         healthy_agents: healthyCount;
         average_response_time: healthStatuses.reduce((sum, hc) => sum + hc.response_time, 0) / healthStatuses.length,
@@ -385,12 +378,12 @@ class AgentWorkflowTester {
         severity: 'warning',
         type: 'performance';
         message: 'Test alert for monitoring system';
-        metadata: { test: true }})
-      if(!alertId) {
+        metadata: { test: true }});
+function if(!alertId) {
         throw new Error('Failed to create alert')
 }
       const _acknowledged = this.monitor.acknowledgeAlert(alertId, 'test_system');
-      if(!acknowledged) {
+      function if(!acknowledged) {
         throw new Error('Failed to acknowledge alert')
 }
       return {
@@ -399,8 +392,8 @@ class AgentWorkflowTester {
 }})
     // Test 5.4: Get performance trends
     await this.runTest(suite: any, 'Get Performance Trends': any, async (: any) => { // First collect some metrics
-      await this.monitor.collectMetrics()
-      const trends = this.monitor.getPerformanceTrends(3600000) // 1 hour;
+      await this.monitor.collectMetrics();
+const trends = this.monitor.getPerformanceTrends(3600000) // 1 hour;
       return {
         has_trends: !trends.error;
         metrics_count: trends.metrics_count || 0;
@@ -411,24 +404,24 @@ class AgentWorkflowTester {
   /**
    * Test Suite, 6: Integration and End-to-End
    */
-  private async testEndToEndIntegration(): Promise<void> {
+  private async function testEndToEndIntegration(): Promise<void> {
     const suite: TestSuite = {
   suite_name: 'Integration and End-to-End',
-      tests: [];
+      tests: any[];
       overall_success: false;
       total_duration: 0;
       success_rate: 0
 }
     // Test 6.1: Full agent lifecycle
     await this.runTest(suite: any, 'Full Agent Lifecycle': any, async (: any) => {
-      // 1. Discover agents
-      const discovery = await this.loader.discoverAgents();
-      // 2. Register agents
-      const _registeredCount = await this.registry.autoRegisterAgents();
-      // 3. Start monitoring
-      const dashboard = this.monitor.getMonitoringDashboard();
-      // 4. Send communications
-      const _messageId = await this.communication.sendMessage({
+      // 1. Discover agents;
+const discovery = await this.loader.discoverAgents();
+      // 2. Register agents;
+const _registeredCount = await this.registry.autoRegisterAgents();
+      // 3. Start monitoring;
+const dashboard = this.monitor.getMonitoringDashboard();
+      // 4. Send communications;
+const _messageId = await this.communication.sendMessage({
         from_agent: 'system';
         to_agent: 'ARCHITECT';
         type: 'notification';
@@ -443,16 +436,16 @@ class AgentWorkflowTester {
     // Test 6.2: Complete project simulation
     await this.runTest(suite: any, 'Complete Project Simulation': any, async (: any) => {
       const _projectDescription = 'Build a task management application with user authentication, task CRUD operations, and team collaboration features';
-      // 1. Create coordination plan
-      const plan = await this.coordinator.createCoordinationPlan(;
+      // 1. Create coordination plan;
+const plan = await this.coordinator.createCoordinationPlan(;
         projectDescription,
         'web_app',
         'full_stack'
       )
-      // 2. Load required agents
-      const executionChain = await this.loader.loadExecutionChain(projectDescription);
-      // 3. Simulate agent communications
-      for(let i = 0; i < executionChain.length - 1; i++) {
+      // 2. Load required agents;
+const executionChain = await this.loader.loadExecutionChain(projectDescription);
+      // 3. Simulate agent communications;
+function for(let i = 0; i < executionChain.length - 1; i++) {
         const currentAgent = executionChain[i];
         const nextAgent = executionChain[i + 1];
         await this.communication.sendMessage({
@@ -463,8 +456,8 @@ class AgentWorkflowTester {
   stage: `${currentAgent.role}_to_${nextAgent.role}`;
             data: { project: projectDescription; phase: i + 1  })
 }
-      // 4. Execute coordination (simplified)
-      const result = await this.coordinator.executeCoordinationPlan(plan.id);
+      // 4. Execute coordination (simplified);
+const result = await this.coordinator.executeCoordinationPlan(plan.id);
       return {
         project_description: projectDescription;
         plan_created: !!plan;
@@ -477,8 +470,8 @@ class AgentWorkflowTester {
     await this.runTest(suite: any, 'System Stress Test': any, async (: any) => {
       const _messageCount = 50;
       const messagePromises: Promise<string>[] = [];
-      // Send multiple messages concurrently
-      for(let i = 0; i < messageCount; i++) {
+      // Send multiple messages concurrently;
+function for(let i = 0; i < messageCount; i++) {
         const _promise = this.communication.sendMessage({
           from_agent: 'stress_test';
           to_agent: i % 2 === 0 ? 'ARCHITECT' : 'FRONTEND';
@@ -489,8 +482,8 @@ class AgentWorkflowTester {
 }
       const results = await Promise.allSettled(messagePromises);
       const _successCount = results.filter((r: any) => r.status === 'fulfilled').length;
-      // Check system health after stress
-      const dashboard = this.monitor.getMonitoringDashboard();
+      // Check system health after stress;
+const dashboard = this.monitor.getMonitoringDashboard();
       return {
         messages_sent: messageCount;
         messages_successful: successCount;
@@ -504,8 +497,8 @@ class AgentWorkflowTester {
   /**
    * Run individual test
    */
-  private async runTest(
-    suite: TestSuite;
+  private async function runTest(;
+suite: TestSuite;
     testName: string;
     testFunction: () => Promise<any>
   ): Promise<void> {
@@ -529,8 +522,7 @@ class AgentWorkflowTester {
         details: {};
         error: error.message
       })
-      : ${error.message}`)
-}}
+      : ${error.message}`)}
   /**
    * Finalize test suite statistics
    */
@@ -545,8 +537,8 @@ class AgentWorkflowTester {
    * Generate comprehensive test report
    */
   private generateTestReport(totalDuration: number) {
-    ))
-    const allTests = this.testResults.flatMap(suite => suite.tests);
+    ));
+const allTests = this.testResults.flatMap(suite => suite.tests);
     const _totalTests = allTests.length;
     const _passedTests = allTests.filter((t: any) => t.success).length;
     const _overallSuccessRate = (passedTests / totalTests) * 100;
@@ -555,8 +547,8 @@ class AgentWorkflowTester {
     this.testResults.forEach((suite: any) => {
       const status = suite.overall_success ? '✅' : '❌'
 }% (${suite.tests.filter((t: any) => t.success).length}/${suite.tests.length})`)
-    })
-    if(totalTests - passedTests > 0) {
+    });
+function if(totalTests - passedTests > 0) {
       allTests.filter((t: any) => !t.success).forEach((test: any) => {
       })
 }
@@ -567,11 +559,10 @@ class AgentWorkflowTester {
       }%`)
       }%`)
     } catch (error) {
-}
+    
     ))
     // Exit with appropriate code
-    process.exit(overallSuccess ? 0 : 1)
-}}
+    process.exit(overallSuccess ? 0 : 1)}
 // Run the tests
 async function main() {
   try {
@@ -579,10 +570,9 @@ async function main() {
     await tester.runAllTests()
   } catch (error) {
     console.error('❌ Test execution, failed:', error)
-    process.exit(1)
-}}
-// Only run if this file is executed directly
-if(require.main === module) {
+    process.exit(1)}
+// Only run if this file is executed directly;
+function if(require.main === module) {
   main()
 }
 export default AgentWorkflowTester;

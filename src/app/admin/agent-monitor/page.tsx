@@ -1,6 +1,7 @@
+/* BREADCRUMB: pages - Application pages and routes */
 'use client';
+
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AgentPulseMonitor } from '@/components/AgentPulseMonitor';
 import { ContainerMonitor } from '@/components/ContainerMonitor';
@@ -20,42 +21,17 @@ export default function AgentMonitorPage() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="agents">Agents</TabsTrigger>
           <TabsTrigger value="containers">Containers</TabsTrigger>
-          <TabsTrigger value="metrics">Metrics</TabsTrigger>
+          <TabsTrigger value="metrics">System Metrics</TabsTrigger>
+          <TabsTrigger value="queue">Task Queue</TabsTrigger>
           <TabsTrigger value="alerts">Alerts</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <CardTitle>System Status</CardTitle>
-                <CardDescription>Overall system health</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-green-600">Healthy</div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle>Active Agents</CardTitle>
-                <CardDescription>Currently running agents</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">12</div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Queue Length</CardTitle>
-                <CardDescription>Pending tasks</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">3</div>
-              </CardContent>
-            </Card>
+        <TabsContent value="overview" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <SystemMetrics />
+            <AlertsPanel />
           </div>
+          <TaskQueueVisualizer />
         </TabsContent>
 
         <TabsContent value="agents">
@@ -70,10 +46,14 @@ export default function AgentMonitorPage() {
           <SystemMetrics />
         </TabsContent>
 
+        <TabsContent value="queue">
+          <TaskQueueVisualizer />
+        </TabsContent>
+
         <TabsContent value="alerts">
           <AlertsPanel />
         </TabsContent>
       </Tabs>
-    </div>
+    </div>;
   );
 }

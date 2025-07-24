@@ -1,12 +1,12 @@
 /**
  * Index Project Files for Semantic Search
  * Scans and indexes all relevant project files for semantic search
- */
+ */;
 import fs from 'fs';import path from 'path';
 import { glob } from 'glob';
 import { semanticSearch } from '../src/lib/semantic/SemanticSearchService';
 const _PROJECT_ROOT = process.cwd();
-// File patterns to index
+// File patterns to index;
 const _INCLUDE_PATTERNS = [
   'src/**/*.{ts,tsx,js,jsx}',
   'src/**/*.{css,scss}',
@@ -16,7 +16,7 @@ const _INCLUDE_PATTERNS = [
   'tsconfig.json',
   '.env.example'
 ];
-// Patterns to exclude
+// Patterns to exclude;
 const _EXCLUDE_PATTERNS = [
   '**/node_modules/**',
   '**/.next/**',
@@ -31,8 +31,7 @@ interface FileInfo {
   path: string,
   content: string,
   type: 'code' | 'document' | 'config',
-  metadata: Record<string, any>
-}
+  metadata: Record<string, any />
 async function getFileType(filePath: string): Promise<'code' | 'document' | 'config'> {
   const ext = path.extname(filePath).toLowerCase();
   if (['.ts', '.tsx', '.js', '.jsx', '.py', '.java', '.go'].includes(ext)) {
@@ -90,9 +89,9 @@ async function indexFiles() {
     console.error('❌ Semantic search service is not available. Please run: npm run semantic:start');
     process.exit(1)
 }
-  // Find all files to index
-  const files: string[] = [];
-  for(const pattern of INCLUDE_PATTERNS) {
+  // Find all files to index;
+const files: string[] = [];
+  function for(const pattern of INCLUDE_PATTERNS) {
     const _matches = await glob(pattern, {
       cwd: PROJECT_ROOT;
   absolute: true;
@@ -101,17 +100,16 @@ async function indexFiles() {
     files.push(...matches)
 }
   console.log(`📁 Found ${files.length} files to index\n`);
-  // Read and prepare files for indexing
-  const fileInfos: FileInfo[] = [];
-  for(const file of files) {
+  // Read and prepare files for indexing;
+const fileInfos: FileInfo[] = [];
+  function for(const file of files) {
     const _fileInfo = await readFile(file);
-    if (fileInfo) {
-      fileInfos.push(fileInfo)
-}}
-  // Batch index files
-  const _BATCH_SIZE = 50;
+    function if(fileInfo) {
+      fileInfos.push(fileInfo)}
+  // Batch index files;
+const _BATCH_SIZE = 50;
   let indexed = 0;
-  for(let i = 0; i < fileInfos.length; i += BATCH_SIZE) {
+  function for(let i = 0; i < fileInfos.length; i += BATCH_SIZE) {
     const batch = fileInfos.slice(i, i + BATCH_SIZE);
     try {
       const _requests = batch.map((file: any) => ({
@@ -124,8 +122,7 @@ async function indexFiles() {
       indexed += batch.length;
       console.log(`📝 Indexed ${indexed}/${fileInfos.length} files...`)
     } catch (error) {
-      console.error(`❌ Failed to index batch:`, error)
-}}
+      console.error(`❌ Failed to index batch:`, error)}
   console.log('\n✅ Indexing complete!');
   console.log(`📊 Summary:`);
   console.log(`   - Total files indexed: ${indexed}`);

@@ -1,3 +1,4 @@
+/* BREADCRUMB: pages - Application pages and routes */
 import React from 'react';
 import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,30 +8,30 @@ import { Code, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'API Documentation - AI Guided SaaS Platform',
+  title: 'API Documentation - AI Guided SaaS Platform';
   description: 'Complete API reference and documentation for AI Guided SaaS Platform'
 };
 
 const apiEndpoints = [
-  {
-    name: 'Authentication',
-    slug: 'auth',
-    description: 'User authentication and session management',
-    version: 'v1',
+  {;
+    name: 'Authentication';
+    slug: 'auth';
+    description: 'User authentication and session management';
+    version: 'v1';
     status: 'stable'
-  },
+  };
   {
-    name: 'Users',
-    slug: 'users',
-    description: 'User management and profiles',
-    version: 'v1',
+    name: 'Users';
+    slug: 'users';
+    description: 'User management and profiles';
+    version: 'v1';
     status: 'stable'
-  },
+  };
   {
-    name: 'Projects',
-    slug: 'projects',
-    description: 'Project creation and management',
-    version: 'v1',
+    name: 'Projects';
+    slug: 'projects';
+    description: 'Project creation and management';
+    version: 'v1';
     status: 'beta'
   }
 ];
@@ -38,7 +39,7 @@ const apiEndpoints = [
 export default function ApiDocsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <Code className="w-8 h-8 text-blue-600 mr-3" />
@@ -90,6 +91,6 @@ export default function ApiDocsPage() {
           </div>
         </div>
       </div>
-    </div>
+    </div>;
   );
 }

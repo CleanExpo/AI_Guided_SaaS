@@ -1,11 +1,12 @@
-// Agent Runtime and Orchestrator
+/* BREADCRUMB: agent.orchestration - Multi-agent system coordination */
+// Agent Runtime and Orchestrator;
 export { AgentRuntime } from './AgentRuntime';export { AgentOrchestrator } from './AgentOrchestrator';
-// Convenience functions
+// Convenience functions;
 export {  analyzeProject,
   planProject,
   architectProject,
   fullStackProject from './AgentOrchestrator';
-// Types
+// Types;
 export type {
   RuntimeConfig,
   AgentTask,
@@ -17,5 +18,4 @@ export type {
   ProjectRequest,
   ProjectResult,
   ProjectSummary,
-  Deliverable from './AgentOrchestrator'
- };
+  Deliverable from './AgentOrchestrator'; 

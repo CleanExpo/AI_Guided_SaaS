@@ -5,25 +5,25 @@ import { ThemeProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-export function Providers({ children }: { children: React.ReactNode }): { children: React.ReactNode }) { const [queryClient] = useState<any>(() => new QueryClient({
+export function Providers({ children }: { children: React.ReactNode }): { children: React.ReactNode }) { const [queryClient]  = useState<any>(() => new QueryClient({
     defaultOptions: { queries: {
   staleTime: 60 * 1000 // 1 minute, refetchOnWindowFocus: false });
-  const [mounted, setMounted] = useState<any>(false);
-  const _pathname = usePathname();
+
+const [mounted, setMounted] = useState<any>(false);
+  
+const _pathname = usePathname();
   // Prevent hydration mismatches
   useEffect(() => {
-    setMounted(true)
-  }, []);
-  if(!mounted) {
-    return <React.Fragment>{children}</React.Fragment>
+    setMounted(true)}, []);
+  if (!mounted) {
+    return <React.Fragment>{children}</React.Fragment></React>
 }
   // CRITICAL, FIX: Exclude admin routes from SessionProvider to prevent auth conflicts
   // Admin routes use custom admin-token authentication, NOT NextAuth
   if (pathname?.startsWith('/admin')) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          attribute="class"defaultTheme="system"
+    return (QueryClientProvider client={queryClient}>
+        <ThemeProvider;
+attribute="class"defaultTheme="system";
           // enableSystem
           // disableTransitionOnChange
         >
@@ -34,9 +34,9 @@ export function Providers({ children }: { children: React.ReactNode }): { childr
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
+        <ThemeProvider;
+attribute="class";
+defaultTheme="system";
           // enableSystem
           // disableTransitionOnChange
         >

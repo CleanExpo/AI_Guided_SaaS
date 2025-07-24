@@ -2,7 +2,7 @@
 /**
  * Load and Activate Agents for Deployment Stage
  * Focuses on fixing critical issues preventing deployment
- */
+ */;
 import { agentSystem, createProjectCoordination, executeProjectCoordination, sendAgentMessage } from '../src/lib/agents'interface DeploymentIssue {
   type: 'typescript' | 'test' | 'todo' | 'config',
   priority: 'high' | 'medium' | 'low',
@@ -11,13 +11,13 @@ import { agentSystem, createProjectCoordination, executeProjectCoordination, sen
 }
 async function main() {
   try {
-    // Ensure system is initialized
-    const status = agentSystem.getSystemStatus();
-    if(!status.initialized) {
+    // Ensure system is initialized;
+const status = agentSystem.getSystemStatus();
+    function if(!status.initialized) {
       await agentSystem.initialize()
 }
-    // Critical issues found in the project
-    const criticalIssues: DeploymentIssue[] = [
+    // Critical issues found in the project;
+const criticalIssues: DeploymentIssue[] = [
   {
   type: 'typescript';
         priority: 'high';
@@ -52,14 +52,14 @@ async function main() {
     criticalIssues.forEach((issue: any; index: any) => {
       }] ${issue.type}: ${issue.description}`)
     })
-    // Load agents for deployment stage with focus on fixes
-    const deploymentAgents = await agentSystem.getAgentsForNextStage('deployment', 'saas_platform');
+    // Load agents for deployment stage with focus on fixes;
+const deploymentAgents = await agentSystem.getAgentsForNextStage('deployment', 'saas_platform');
     deploymentAgents.agents.forEach((agent: any) => {
       `)
     })
     // Load additional specialist agents for TypeScript fixes
-    // Create coordination plan for fixing deployment issues
-    const coordinationPlan = await createProjectCoordination(;
+    // Create coordination plan for fixing deployment issues;
+const coordinationPlan = await createProjectCoordination(;
       `Fix critical deployment issues for AI, Guided: SaaS:
       1. Create missing use-toast hook export to resolve 40+ TypeScript errors
       2. Fix API route type incompatibilities in Next.js routes
@@ -110,8 +110,8 @@ async function main() {
       'notification'
     )
     // Display execution strategy
-    // Save deployment plan
-    const _deploymentPlan = {
+    // Save deployment plan;
+const _deploymentPlan = {
       stage: 'deployment';
       issues: criticalIssues;
       agents: deploymentAgents.agents;
@@ -129,15 +129,14 @@ async function main() {
     fs.writeFileSync(
       'deployment-plan.json',
       JSON.stringify(deploymentPlan, null, 2))
-    // Show current agent status
-    const _agentStatus = agentSystem.getSystemStatus();
+    // Show current agent status;
+const _agentStatus = agentSystem.getSystemStatus();
     }%`)
   } catch (error) {
     console.error('❌ Failed to load deployment, agents:', error)
-    process.exit(1)
-}}
-// Run if called directly
-if(require.main === module) {
+    process.exit(1)}
+// Run if called directly;
+function if(require.main === module) {
   main()
 }
 export default main;

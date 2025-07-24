@@ -1,3 +1,4 @@
+/* BREADCRUMB: unknown - Purpose to be determined */
 // @ts-nocheck
 // apps/ui-builder/pages/index.tsx
 'use client';
@@ -14,12 +15,12 @@ import AssistantPrompt from '../components/AssistantPrompt';
 export default function UIBuilderHome() {
   return (
     <div className="flex h-screen w-screen overflow-hidden"></div><div className="w-64 flex flex-col"></div>
-        <AssistantPrompt /></AssistantPrompt>
-        <Sidebar /></Sidebar>
+        <AssistantPrompt   /></AssistantPrompt>
+        <Sidebar   /></Sidebar>
       <div className="flex flex-col flex-grow"></div>
-        <Toolbar /></Toolbar>
-        <BuilderCanvas /></BuilderCanvas>
-        <PreviewPane /></PreviewPane>
-        <ComponentPropsEditor /></ComponentPropsEditor>
-        <CodeViewer /></CodeViewer>
-        <DeploymentPanel /></DeploymentPanel>
+        <Toolbar   /></Toolbar>
+        <BuilderCanvas   /></BuilderCanvas>
+        <PreviewPane   /></PreviewPane>
+        <ComponentPropsEditor   /></ComponentPropsEditor>
+        <CodeViewer   /></CodeViewer>
+        <DeploymentPanel   /></DeploymentPanel>;

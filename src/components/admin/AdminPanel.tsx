@@ -11,140 +11,141 @@ import { adminService, SystemStats, UserManagement, ContentModeration, SystemCon
 export default function AdminPanel() {
   const [adminUser, setAdminUser] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('overview');
-  const [loading, setLoading] = useState(true);
-  const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
-  const [users, setUsers] = useState<UserManagement[]>([]);
-  const [content, setContent] = useState<ContentModeration[]>([]);
-  const [configuration, setConfiguration] = useState<SystemConfiguration[]>([]);
-  const [activities, setActivities] = useState<AdminActivity[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [userFilter, setUserFilter] = useState('all');
-  const [contentFilter, setContentFilter] = useState('all');
+  const [loading, setLoading]  = useState(true);
+
+const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
+  
+const [users, setUsers]  = useState<UserManagement[]>([]);</UserManagement>
+
+const [content, setContent] = useState<ContentModeration[]>([]);</ContentModeration>
+  
+const [configuration, setConfiguration]  = useState<SystemConfiguration[]>([]);</SystemConfiguration>
+
+const [activities, setActivities] = useState<AdminActivity[]>([]);</AdminActivity>
+  
+const [searchTerm, setSearchTerm]  = useState('');
+
+const [userFilter, setUserFilter] = useState('all');
+  
+const [contentFilter, setContentFilter] = useState('all');
   useEffect(() => {
-    // Load admin user from localStorage
-    const adminUserData = localStorage.getItem('admin-user')
+    // Load admin user from localStorage;
+
+const adminUserData = localStorage.getItem('admin-user');
     if (adminUserData) {
       try {
         setAdminUser(JSON.parse(adminUserData))
       } catch (error) {
-        console.error('Error parsing admin user:', error)
-      }}, []);
+        console.error('Error parsing admin user:', error)}, []);
   useEffect(() => {
-    loadAdminData()
-  }, []);
-  const loadAdminData = async () => {
-    setLoading(true);
-    try {
-      await adminService.initialize();
-      // Load all admin data
-      const [statsData, usersData, contentData, configData, activityData] = ;
+    loadAdminData()}, []);
+  
+const loadAdminData = async () => {
+    setLoading(true), try {;
+      await adminService.initialize(); // Load all admin data;
+
+const [statsData, usersData, contentData, configData, activityData] = ;
         await Promise.all([
           adminService.getSystemStats(),
           adminService.getUsers(1, 50),
           adminService.getContentForModeration(1, 20),
-          adminService.getSystemConfiguration(),
-          adminService.getAdminActivity(1, 50)
+          adminService.getSystemConfiguration(),;
+          adminService.getAdminActivity(1, 50);
         ]);
       setSystemStats(statsData);
       setUsers(usersData.users);
       setContent(contentData.content);
-      setConfiguration(configData)
+      setConfiguration(configData);
       setActivities(activityData.activities)
-    } catch (error) {
-      console.error('Error loading admin data:', error)
-    } finally {
-      setLoading(false)
-    }};
-  const handleUserStatusUpdate = async (;
-    userId: string,
+} catch (error) {
+      console.error('Error loading admin data:', error)} finally {
+      setLoading(false)};
+  
+const handleUserStatusUpdate = async (;
+    userId: string;
     status: 'active' | 'suspended' | 'deleted'
   ) => {
     try {
-      await adminService.updateUserStatus(
-        userId,
+      await adminService.updateUserStatus(;
+        userId;
         status,
         adminUser?.email || 'admin'
-      );
-      await loadAdminData() // Refresh data
+      ), await loadAdminData() // Refresh data
     } catch (error) {
-      console.error('Error updating user status:', error)
-    }};
-  const handleContentModeration = async (;
-    contentId: string,
+      console.error('Error updating user status:', error)};
+  
+const handleContentModeration = async (;
+    contentId: string;
     action: 'approve' | 'reject' | 'flag'
   ) => {
     try {
-      await adminService.moderateContent(
-        contentId,
+      await adminService.moderateContent(;
+        contentId;
         action,
         adminUser?.email || 'admin'
-      );
-      await loadAdminData() // Refresh data
+      ), await loadAdminData() // Refresh data
     } catch (error) {
-      console.error('Error moderating content:', error)
-    }};
-  const getStatusColor = (status: string) => {
+      console.error('Error moderating content:', error)};
+  
+const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
       case 'approved':
-      case 'healthy':
-        return 'bg-green-100 text-green-800';
-      case 'suspended':
-      case 'flagged':
+      case 'healthy':;
+      return 'bg-green-100 text-green-800', case 'suspended':, case 'flagged':;
       case 'warning':
-        return 'bg-yellow-100 text-yellow-800';
+      return 'bg-yellow-100 text-yellow-800';
       case 'deleted':
       case 'rejected':
       case 'critical':
-        return 'bg-red-100 text-red-800';
+      return 'bg-red-100 text-red-800';
       case 'pending':
-        return 'bg-blue-100 text-blue-800'
-      default: return 'bg-gray-100 text-gray-800'
-    }};
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency'
-      currency: 'USD'
+      return 'bg-blue-100 text-blue-800';
+      default: return 'bg-gray-100 text-gray-800'}};
+  
+const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {;
+      style: 'currency';
+currency: 'USD'
     }).format(amount)
-  };
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit'
-      minute: '2-digit'
+};
+  
+const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('en-US', {;
+      year: 'numeric';
+      month: 'short';
+      day: 'numeric';
+      hour: '2-digit';
+minute: '2-digit'
     }).format(new Date(date))
   };
-  const filteredUsers = users.filter((user) => {
-    const matchesSearch = ;
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase();
-    const matchesFilter = userFilter === 'all' || user.status === userFilter
-    return matchesSearch && matchesFilter
-  });
-  const filteredContent = content.filter((item) => {
-    const matchesSearch = ;
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.author.toLowerCase().includes(searchTerm.toLowerCase();
-    const matchesFilter = ;
-      contentFilter === 'all' || item.status === contentFilter
-    return matchesSearch && matchesFilter
-  });
+  
+const filteredUsers = users.filter((user) => {;
+    const matchesSearch = , user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||, user.email.toLowerCase().includes(searchTerm.toLowerCase();
+    
+const matchesFilter = userFilter === 'all' || user.status === userFilter;
+    return matchesSearch && matchesFilter;
+});
+  
+const filteredContent = content.filter((item) => {;
+    const matchesSearch = , item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||, item.author.toLowerCase().includes(searchTerm.toLowerCase();
+    
+const matchesFilter = ;
+      contentFilter === 'all' || item.status === contentFilter;
+    return matchesSearch && matchesFilter;
+});
   if (loading) {
-    return (
-    <div className="flex items-center justify-center min-h-screen text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="Loading admin panel..."></p>
+    return (<div className="flex items-center justify-center min-h-screen text-center">);
+          <p className="Loading admin panel..."   />
         </div>
-    );
+    )
 }
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}</div>
       <div className="bg-white border-b max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 flex items-center space-x-4"></div>
-              <Shield className="h-6 w-6 text-blue-600" />
+        <div className="flex items-center justify-between h-16 flex items-center space-x-4"   />
+              <Shield className="h-6 w-6 text-blue-600"   />
               <h1 className="text-xl font-semibold">Admin Panel</h1>
               <Badge variant="outline">System Management</Badge>
             <div className="flex items-center space-x-2">
@@ -164,7 +165,8 @@ export default function AdminPanel() {
               <>
                 {/* System Health Alert */}
                 <Alert
-                  className={
+
+const className = {
                     systemStats.systemHealth === 'healthy'
                       ? 'border-green-200 bg-green-50'
                       : systemStats.systemHealth === 'warning'
@@ -172,7 +174,7 @@ export default function AdminPanel() {
                         : 'border-red-200 bg-red-50'
                   }
                 >
-                  <AlertTriangle className="h-4 w-4" />
+                  <AlertTriangle className="h-4 w-4"   />
                   <AlertDescription>
                     System Status: { ' ' }
                     <strong>{systemStats.systemHealth.toUpperCase(
@@ -186,7 +188,7 @@ export default function AdminPanel() {
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         Total Users</Card>
-                      <Users className="h-4 w-4 text-muted-foreground" />
+                      <Users className="h-4 w-4 text-muted-foreground"   />
 </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -199,7 +201,7 @@ export default function AdminPanel() {
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         Total Projects</Card>
-                      <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                      <BarChart3 className="h-4 w-4 text-muted-foreground"   />
 </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -212,7 +214,7 @@ export default function AdminPanel() {
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         Total Revenue</Card>
-                      <Activity className="h-4 w-4 text-muted-foreground" />
+                      <Activity className="h-4 w-4 text-muted-foreground"   />
 </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -225,7 +227,7 @@ export default function AdminPanel() {
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
                         System Uptime</Card>
-                      <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                      <CheckCircle className="h-4 w-4 text-muted-foreground"   />
 </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
@@ -240,18 +242,20 @@ export default function AdminPanel() {
           <TabsContent value="users" className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">User Management</h2>
-              <div className="flex items-center space-x-2 relative"></div>
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input
-                    placeholder="Search users..."
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
+              <div className="flex items-center space-x-2 relative"   />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />
+                  <Input;
+placeholder="Search users...";
+
+const value  = {searchTerm}
+                    const onChange = {e => setSearchTerm(e.target.value)}
                     className="pl-10 w-64" />
-</div>
-                <select
-                  value={userFilter}
-                  onChange={e => setUserFilter(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+        </div>;
+                <select;
+
+const value = {userFilter}
+                  const onChange = {e => setUserFilter(e.target.value)};
+                  className="px-3 py-2 border border-gray-300 rounded-md text-sm";
                 >
                   <option value="all">All Status</option>
                   <option value="active">Active</option>
@@ -286,8 +290,8 @@ export default function AdminPanel() {
                             <div className="flex items-center ml-4">
         <div className="text-sm font-medium text-gray-900">
                                   {user.name}</div>
-                                <div className="text-sm text-gray-500">
-                                  ID: { user.id }</div>
+                                <div className="text-sm text-gray-500">;
+ID: { user.id }</div>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="text-sm text-gray-900">{user.email}</div>
                           <td className="px-6 py-4 whitespace-nowrap">
@@ -300,34 +304,36 @@ export default function AdminPanel() {
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div className="flex space-x-2">
                               <Button
-                                size="sm"
-                                variant="ghost"
-                                onClick={() => {/* View user details */}}
+size="sm";
+variant="ghost";
+
+const onClick = {() => {/* View user details */}
                               >
-                                <Eye className="h-4 w-4" />
+                                <Eye className="h-4 w-4"   />
 </Button>
-                              <Button
-                                size="sm"
-                                variant="ghost"
-                                onClick={() => {/* Edit user */}}
+                              <Button;
+size="sm";
+variant="ghost";
+
+const onClick = {() => {/* Edit user */}
                               >
-                                <Edit className="h-4 w-4" />
+                                <Edit className="h-4 w-4"   />
 </Button>
-                              {user.status === 'active' ? (
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  onClick={() => handleUserStatusUpdate(user.id, 'suspended')}
+                              {user.status === 'active' ? (;
+                                <Button, size="sm", variant="ghost";
+
+const onClick = {() => handleUserStatusUpdate(user.id, 'suspended')}
                                 >
-                                  <UserX className="h-4 w-4 text-yellow-600" />
+                                  <UserX className="h-4 w-4 text-yellow-600"   />
 </Button>
                               ) : (
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  onClick={() => handleUserStatusUpdate(user.id, 'active')}
+                                <Button;
+size="sm";
+variant="ghost";
+
+const onClick  = {() => handleUserStatusUpdate(user.id, 'active')}
                                 >
-                                  <UserCheck className="h-4 w-4 text-green-600" />
+                                  <UserCheck className="h-4 w-4 text-green-600"   />
 </Button>
       )}
       </div>
@@ -340,11 +346,12 @@ export default function AdminPanel() {
           {/* Content Tab */}
           <TabsContent value="content" className="space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">Content Moderation</h2>
-              <select
-                value={contentFilter}
-                onChange={e => setContentFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+              <h2 className="text-2xl font-bold">Content Moderation</h2>;
+              <select;
+
+const value = {contentFilter}
+                const onChange = {e => setContentFilter(e.target.value)};
+                className="px-3 py-2 border border-gray-300 rounded-md text-sm";
               >
                 <option value="all">All Content</option>
                 <option value="pending">Pending Review</option>
@@ -356,7 +363,7 @@ export default function AdminPanel() {
               {filteredContent.map((item) => (\n    </div>
                 <Card key={item.id}>
                   <CardContent className="p-6">
-                    <div className="flex items-start justify-between space-y-2"></div>
+                    <div className="flex items-start justify-between space-y-2"   />
                         <h3 className="text-lg font-medium">{item.title}</h3>
                         <p className="text-sm text-gray-600">
                           By {item.author} • {formatDate(item.createdAt)}
@@ -366,27 +373,30 @@ export default function AdminPanel() {
 </Badge>
                       <div className="flex space-x-2">
                         <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleContentModeration(item.id, 'approve')}
+size="sm";
+variant="outline";
+
+const onClick = {() => handleContentModeration(item.id, 'approve')}
                         >
-                          <ThumbsUp className="h-4 w-4 mr-1" />
+                          <ThumbsUp className="h-4 w-4 mr-1"   />
                           Approve
 </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleContentModeration(item.id, 'reject')}
+                        <Button;
+size="sm";
+variant="outline";
+
+const onClick = {() => handleContentModeration(item.id, 'reject')}
                         >
-                          <ThumbsDown className="h-4 w-4 mr-1" />
+                          <ThumbsDown className="h-4 w-4 mr-1"   />
                           Reject
 </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleContentModeration(item.id, 'flag')}
+                        <Button;
+size="sm";
+variant="outline";
+
+const onClick = {() => handleContentModeration(item.id, 'flag')}
                         >
-                          <Flag className="h-4 w-4 mr-1" />
+                          <Flag className="h-4 w-4 mr-1"   />
                           Flag
 </Button>
 </CardContent>
@@ -399,8 +409,7 @@ export default function AdminPanel() {
               {configuration.map((config) => (\n    </div>
                 <Card key={config.key}>
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between" >
-              </div>
+                    <div className="flex items-center justify-between"    />
                         <h3 className="text-lg font-medium">{config.key}</h3>
                         <p className="text-sm text-gray-600">{config.description}</p>
                       <div className="">
@@ -488,4 +497,4 @@ export default function AdminPanel() {
     </div>
     </SystemStats>
     </any>
-  }
+  };

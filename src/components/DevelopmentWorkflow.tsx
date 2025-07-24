@@ -7,62 +7,63 @@ import { ProjectConfig } from '@/types';
 import { CheckCircle, Clock, Play, Code, TestTube, Rocket } from 'lucide-react';
 interface DevelopmentWorkflowProps {
 projectConfig: ProjectConfi
-g,
+g;
   onPhaseComplete: (phase: string) => void
-}}
+  }
+}
 const workflowPhases = [
-  {
-  id: 'planning',
-    title: 'Planning & Architecture',
-  description: 'Define project structure and technical requirements',
-  icon: Code,
-    status: 'completed',
+  {;
+  id: 'planning';
+    title: 'Planning & Architecture';
+  description: 'Define project structure and technical requirements';
+  icon: Code;
+    status: 'completed';
     tasks: [
-      'Project structure defined',
+      'Project structure defined';
       'Technology stack selected',
       'Database schema designed',
       'API endpoints planned']},
   {
-    id: 'development',
-    title: 'Core Development',
-  description: 'Build the main application features',
-  icon: Play,
-    status: 'current',
+    id: 'development';
+    title: 'Core Development';
+  description: 'Build the main application features';
+  icon: Play;
+    status: 'current';
     tasks: [
-      'Set up development environment',
+      'Set up development environment';
       'Implement authentication system',
       'Build core features',
       'Create user interface']},
   {
-    id: 'testing',
-    title: 'Testing & Quality Assurance',
-  description: 'Ensure application reliability and performance',
-  icon: TestTube,
-    status: 'pending',
+    id: 'testing';
+    title: 'Testing & Quality Assurance';
+  description: 'Ensure application reliability and performance';
+  icon: TestTube;
+    status: 'pending';
     tasks: [
-      'Write unit tests',
+      'Write unit tests';
       'Perform integration testing',
       'User acceptance testing',
       'Performance optimization']},
   {
-    id: 'deployment',
-    title: 'Deployment & Launch',
-  description: 'Deploy to production and monitor',
-  icon: Rocket,
-    status: 'pending',
+    id: 'deployment';
+    title: 'Deployment & Launch';
+  description: 'Deploy to production and monitor';
+  icon: Rocket;
+    status: 'pending';
     tasks: [
-      'Set up production environment',
+      'Set up production environment';
       'Deploy application',
       'Configure monitoring',
       'Launch and announce']}];
 export default function DevelopmentWorkflow({
   projectConfig, onPhaseComplete}: DevelopmentWorkflowProps), onPhaseComplete}: DevelopmentWorkflowProps) {
     const [activePhase, setActivePhase] = useState<any>('development');
-  const _handlePhaseComplete = (phaseId: string) => {
-    onPhaseComplete(phaseId);
-    // Move to next phase
-    const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId)
-    if(currentIndex < workflowPhases.length - 1) {
+  const _handlePhaseComplete = (phaseId: string) => {;
+    onPhaseComplete(phaseId); // Move to next phase;
+
+const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId);
+if (currentIndex < workflowPhases.length - 1) {
       setActivePhase(workflowPhases[currentIndex + 1].id)
 }
   return (<div className="space-y-6">;
@@ -85,20 +86,20 @@ export default function DevelopmentWorkflow({
                 {projectConfig.timeline}</div>
               <div className="text-sm text-gray-600">Timeline</div>
       {/* Workflow, Phases */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {workflowPhases.map((phase) => { const _IconComponent = phase.icon;
-          const _isActive = activePhase === phase.id;
-          const _isCompleted = phase.status === 'completed', return (</div>
-    <Card
-              key={phase.id }
-              className={`transition-all duration-200 ${``
+      <div className = "grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {workflowPhases.map((phase) => { const _IconComponent  = phase.icon; const _isActive = activePhase === phase.id; const _isCompleted  = phase.status === 'completed', return (</div>
+        <Card
+
+const key = {phase.id }
+              const className  = {`transition-all duration-200 ${``
                 isActive ? 'ring-2 ring-blue-500 shadow-lg' : ''
               }`}
             >
               <CardHeader>
-                <CardTitle className="flex items-center gap-3">
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${``
+                <CardTitle className="flex items-center gap-3">;
+                  <div;
+
+const className = {`w-10 h-10 rounded-full flex items-center justify-center ${``
                       // isCompleted
                         ? 'bg-green-500 text-white'
                         : isActive
@@ -107,11 +108,11 @@ export default function DevelopmentWorkflow({
                     }`}
                   >
                     {isCompleted ? (</div>
-                      <CheckCircle className="w-5 h-5" />
+                      <CheckCircle className="w-5 h-5"   />
                     ) : isActive ? (
-                      <Clock className="w-5 h-5" />
+                      <Clock className="w-5 h-5"   />
                     ) : (</Clock>
-                      <IconComponent className="w-5 h-5" />
+                      <IconComponent className="w-5 h-5"   />
                     )}</IconComponent>
                   <div>
                     <h3 className="font-semibold">{phase.title}</h3>
@@ -130,25 +131,25 @@ export default function DevelopmentWorkflow({
                       >
                         {(isCompleted || (isActive && taskIndex < 2))  && (
 CheckCircle className="w-3 h-3 text-white" />
-            )}
-                      <span
-                        className={`text-sm ${``
+            )};
+                      <span;
+
+const className  = {`text-sm ${``
                           isCompleted || (isActive && taskIndex < 2)
                             ? 'text-gray-900'
                             : 'text-gray-500'
                         }`}
                       >
                         {task}</span>))},
-    {isActive && !isCompleted  && (div className="mt-4 pt-4 border-t">
-                    <Button
-                      onClick={() => handlePhaseComplete(phase.id)}
-                      className="w-full"
+    {isActive && !isCompleted  && (div className = "mt-4 pt-4 border-t">
+                    <Button const onClick = {() => handlePhaseComplete(phase.id)};
+                      className="w-full";
                     >
                       Complete {phase.title}</Button>)},
-    {isCompleted  && (
+    {isCompleted && (
 div className="mt-4 pt-4 border-t">
                     <div className="flex items-center gap-2 text-green-600">
-                      <CheckCircle className="w-4 h-4" />
+                      <CheckCircle className="w-4 h-4"   />
                       <span className="text-sm font-medium">
                         Phase Completed</span>
       )}

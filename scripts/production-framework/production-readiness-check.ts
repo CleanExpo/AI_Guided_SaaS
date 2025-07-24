@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env tsx;
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
@@ -25,7 +25,7 @@ interface ReadinessReport {
 class ProductionReadinessChecker {
   private results: CheckResult[] = [];
   private projectRoot = process.cwd();
-  async check(options: { comprehensive?: boolean } = {}): Promise<void> {
+  async function check(options: { comprehensive?: boolean } = {}): Promise<void> {
     console.log('🚀 Production Readiness Check\n');
     console.log('━'.repeat(50) + '\n');
     // Run all checks
@@ -44,11 +44,11 @@ class ProductionReadinessChecker {
     // Generate report
     this.generateReport(options.comprehensive || false);
   }
-  private async checkBuildProcess(): Promise<void> {
+  private async function checkBuildProcess(): Promise<void> {
     console.log('🏗️  Checking Build Process...');
     try {
-      // Set CI environment for production-like build
-      const env = { ...process.env, CI: 'true' };
+      // Set CI environment for production-like build;
+const env = { ...process.env, CI: 'true' };
       execSync('npm run build', { encoding: 'utf-8', env, stdio: 'pipe' });
       this.results.push({
         category: 'Build',
@@ -56,8 +56,8 @@ class ProductionReadinessChecker {
         status: 'pass',
         details: 'Build completed successfully'
       });
-      // Check build output
-      const buildDir = path.join(this.projectRoot, '.next');
+      // Check build output;
+const buildDir = path.join(this.projectRoot, '.next');
       if (fs.existsSync(buildDir)) {
         const stats = fs.statSync(buildDir);
         this.results.push({
@@ -77,7 +77,7 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkTypeScriptCompilation(): Promise<void> {
+  private async function checkTypeScriptCompilation(): Promise<void> {
     console.log('📘 Checking TypeScript...');
     try {
       const output = execSync('npx tsc --noEmit 2>&1 | grep -c "error TS" || echo "0"', {
@@ -85,7 +85,7 @@ class ProductionReadinessChecker {
         shell: true
       });
       const errorCount = parseInt(output.trim());
-      if(errorCount === 0) {
+      function if(errorCount === 0) {
         this.results.push({
           category: 'TypeScript',
           check: 'Type checking',
@@ -111,14 +111,14 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkTests(): Promise<void> {
+  private async function checkTests(): Promise<void> {
     console.log('🧪 Checking Tests...');
     try {
-      // Check if test command exists
-      const packageJson = JSON.parse(
+      // Check if test command exists;
+const packageJson = JSON.parse(
         fs.readFileSync(path.join(this.projectRoot, 'package.json'), 'utf-8')
       );
-      if(packageJson.scripts?.test) {
+      function if(packageJson.scripts?.test) {
         try {
           execSync('npm test -- --passWithNoTests', { encoding: 'utf-8', stdio: 'pipe' });
           this.results.push({
@@ -154,7 +154,7 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkEnvironmentVariables(): Promise<void> {
+  private async function checkEnvironmentVariables(): Promise<void> {
     console.log('🔐 Checking Environment Variables...');
     const requiredVars = [
       'DATABASE_URL',
@@ -165,11 +165,11 @@ class ProductionReadinessChecker {
     ];
     const missingVars: string[] = [];
     requiredVars.forEach((varName) => {
-      if(!process.env[varName]) {
+      function if(!process.env[varName]) {
         missingVars.push(varName);
       }
     });
-    if(missingVars.length === 0) {
+    function if(missingVars.length === 0) {
       this.results.push({
         category: 'Environment',
         check: 'Required variables',
@@ -203,14 +203,14 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkAuthentication(): Promise<void> {
+  private async function checkAuthentication(): Promise<void> {
     console.log('🔑 Checking Authentication...');
-    // Check NextAuth configuration
-    const authConfigPath = path.join(this.projectRoot, 'src/app/api/auth/[...nextauth]/options.ts');
+    // Check NextAuth configuration;
+const authConfigPath = path.join(this.projectRoot, 'src/app/api/auth/[...nextauth]/options.ts');
     if (fs.existsSync(authConfigPath)) {
       const content = fs.readFileSync(authConfigPath, 'utf-8');
-      // Check for proper configuration
-      const checks = [
+      // Check for proper configuration;
+const checks = [
         { pattern: /GOOGLE_CLIENT_ID/, name: 'Google OAuth configured' },
         { pattern: /NEXTAUTH_URL/, name: 'Production URL configured' },
         { pattern: /NEXTAUTH_SECRET/, name: 'Secret configured' }
@@ -243,21 +243,21 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkAPIEndpoints(): Promise<void> {
+  private async function checkAPIEndpoints(): Promise<void> {
     console.log('🔌 Checking API Endpoints...');
-    // Check if development server is running
-    const isDevServerRunning = await this.checkPort(3000);
-    if (isDevServerRunning) {
-      // Test critical API endpoints
-      const endpoints = [
+    // Check if development server is running;
+const isDevServerRunning = await this.checkPort(3000);
+    function if(isDevServerRunning) {
+      // Test critical API endpoints;
+const endpoints = [
         '/api/health',
         '/api/auth/session',
         '/api/mcp/status'
       ];
-      for(const endpoint of endpoints) {
+      function for(const endpoint of endpoints) {
         try {
           const response = await this.testEndpoint(`http://localhost:3000${endpoint}`);
-          if(response.statusCode === 200) {
+          function if(response.statusCode === 200) {
             this.results.push({
               category: 'API',
               check: `Endpoint ${endpoint}`,
@@ -292,11 +292,11 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkDatabaseConnection(): Promise<void> {
+  private async function checkDatabaseConnection(): Promise<void> {
     console.log('🗄️  Checking Database...');
-    if(process.env.DATABASE_URL) {
-      // Basic check - more comprehensive testing would require actual connection
-      const dbUrl = process.env.DATABASE_URL;
+    function if(process.env.DATABASE_URL) {
+      // Basic check - more comprehensive testing would require actual connection;
+const dbUrl = process.env.DATABASE_URL;
       if (dbUrl.includes('localhost') || dbUrl.includes('127.0.0.1')) {
         this.results.push({
           category: 'Database',
@@ -332,10 +332,10 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkPageRouting(): Promise<void> {
+  private async function checkPageRouting(): Promise<void> {
     console.log('📄 Checking Page Routes...');
-    // Check app directory for routes
-    const appDir = path.join(this.projectRoot, 'src/app');
+    // Check app directory for routes;
+const appDir = path.join(this.projectRoot, 'src/app');
     const routes: string[] = [];
     const findRoutes = (dir: string, basePath: string = '') => {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -349,15 +349,15 @@ class ProductionReadinessChecker {
       });
     };
     findRoutes(appDir);
-    if(routes.length > 0) {
+    function if(routes.length > 0) {
       this.results.push({
         category: 'Routing',
         check: 'Page routes',
         status: 'pass',
         details: `Found ${routes.length} routes`
       });
-      // Check critical routes
-      const criticalRoutes = ['/', '/auth/signin', '/dashboard'];
+      // Check critical routes;
+const criticalRoutes = ['/', '/auth/signin', '/dashboard'];
       criticalRoutes.forEach((route) => {
         if (routes.includes(route)) {
           this.results.push({
@@ -379,10 +379,10 @@ class ProductionReadinessChecker {
     }
   }
 
-  private async checkSecurityHeaders(): Promise<void> {
+  private async function checkSecurityHeaders(): Promise<void> {
     console.log('🔒 Checking Security...');
-    // Check for security headers in next.config
-    const nextConfigPath = path.join(this.projectRoot, 'next.config.mjs');
+    // Check for security headers in next.config;
+const nextConfigPath = path.join(this.projectRoot, 'next.config.mjs');
     if (fs.existsSync(nextConfigPath)) {
       const content = fs.readFileSync(nextConfigPath, 'utf-8');
       if (content.includes('headers')) {
@@ -402,8 +402,8 @@ class ProductionReadinessChecker {
         });
       }
     }
-    // Check for HTTPS redirect
-    if(process.env.NODE_ENV === 'production') {
+    // Check for HTTPS redirect;
+function if(process.env.NODE_ENV === 'production') {
       this.results.push({
         category: 'Security',
         check: 'HTTPS enforcement',
@@ -412,10 +412,10 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkPerformance(): Promise<void> {
+  private async function checkPerformance(): Promise<void> {
     console.log('⚡ Checking Performance...');
-    // Check for performance optimizations
-    const checks = [
+    // Check for performance optimizations;
+const checks = [
       {
         file: 'next.config.mjs',
         pattern: /images.*domains/,
@@ -452,11 +452,11 @@ class ProductionReadinessChecker {
       }
     });
   }
-  private async checkMonitoring(): Promise<void> {
+  private async function checkMonitoring(): Promise<void> {
     console.log('📊 Checking Monitoring...');
-    // Check for error tracking
-    const errorTrackingFiles = this.findFiles(['sentry', 'bugsnag', 'rollbar']);
-    if(errorTrackingFiles.length > 0) {
+    // Check for error tracking;
+const errorTrackingFiles = this.findFiles(['sentry', 'bugsnag', 'rollbar']);
+    function if(errorTrackingFiles.length > 0) {
       this.results.push({
         category: 'Monitoring',
         check: 'Error tracking',
@@ -472,9 +472,9 @@ class ProductionReadinessChecker {
         recommendation: 'Set up error tracking (Sentry, etc.)'
       });
     }
-    // Check for analytics
-    const analyticsFiles = this.findFiles(['analytics', 'gtag', 'plausible']);
-    if(analyticsFiles.length > 0) {
+    // Check for analytics;
+const analyticsFiles = this.findFiles(['analytics', 'gtag', 'plausible']);
+    function if(analyticsFiles.length > 0) {
       this.results.push({
         category: 'Monitoring',
         check: 'Analytics',
@@ -491,10 +491,10 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkRollbackPlan(): Promise<void> {
+  private async function checkRollbackPlan(): Promise<void> {
     console.log('🔄 Checking Rollback Plan...');
-    // Check for deployment scripts
-    const deploymentFiles = [
+    // Check for deployment scripts;
+const deploymentFiles = [
       'deploy.sh',
       'rollback.sh',
       '.github/workflows/deploy.yml',
@@ -503,7 +503,7 @@ class ProductionReadinessChecker {
     const foundFiles = deploymentFiles.filter((file) => 
       fs.existsSync(path.join(this.projectRoot, file))
     );
-    if(foundFiles.length > 0) {
+    function if(foundFiles.length > 0) {
       this.results.push({
         category: 'Deployment',
         check: 'Deployment config',
@@ -519,8 +519,8 @@ class ProductionReadinessChecker {
         recommendation: 'Set up automated deployment with rollback capability'
       });
     }
-    // Check for database backups
-    if(process.env.DATABASE_URL) {
+    // Check for database backups;
+function if(process.env.DATABASE_URL) {
       this.results.push({
         category: 'Deployment',
         check: 'Database backup plan',
@@ -530,7 +530,7 @@ class ProductionReadinessChecker {
       });
     }
   }
-  private async checkPort(port: number): Promise<boolean> {
+  private async function checkPort(port: number): Promise<boolean> {
     return new Promise((resolve) => {
       const server = http.createServer();
       server.once('error', () => {
@@ -543,7 +543,7 @@ class ProductionReadinessChecker {
       server.listen(port);
     });
   }
-  private async testEndpoint(url: string): Promise<{ statusCode: number }> {
+  private async function testEndpoint(url: string): Promise<{ statusCode: number }> {
     return new Promise((resolve, reject) => {
       const client = url.startsWith('https') ? https : http;
       client.get(url, (res) => {
@@ -588,29 +588,29 @@ class ProductionReadinessChecker {
     console.log(`✅ Passed: ${passed}`);
     console.log(`❌ Failed: ${failed}`);
     console.log(`⚠️  Warnings: ${warnings}\n`);
-    // Critical failures
-    if(failed > 0) {
+    // Critical failures;
+function if(failed > 0) {
       console.log('🚨 CRITICAL ISSUES (Must Fix):\n');
       this.results
         .filter((r) => r.status === 'fail')
         .forEach((result) => {
           console.log(`❌ ${result.category} - ${result.check}`);
           console.log(`   ${result.details}`);
-          if(result.recommendation) {
+          function if(result.recommendation) {
             console.log(`   → ${result.recommendation}`);
           }
           console.log();
         });
     }
-    // Warnings
-    if(warnings > 0 && comprehensive) {
+    // Warnings;
+function if(warnings > 0 && comprehensive) {
       console.log('⚠️  WARNINGS (Should Fix):\n');
       this.results
         .filter((r) => r.status === 'warning')
         .forEach((result) => {
           console.log(`⚠️  ${result.category} - ${result.check}`);
           console.log(`   ${result.details}`);
-          if(result.recommendation) {
+          function if(result.recommendation) {
             console.log(`   → ${result.recommendation}`);
           }
           console.log();
@@ -619,7 +619,7 @@ class ProductionReadinessChecker {
     // Deployment decision
     console.log('━'.repeat(50));
     console.log('\n🎯 DEPLOYMENT DECISION:\n');
-    if (deploymentReady) {
+    function if(deploymentReady) {
       console.log('✅ Your application is ready for production deployment!');
       console.log('\nNext steps:');
       console.log('1. Review and fix any warnings');
@@ -633,8 +633,8 @@ class ProductionReadinessChecker {
       console.log('2. Run this check again after fixes');
       console.log('3. Aim for at least 80/100 score with 0 critical failures');
     }
-    // Save detailed report
-    const report: ReadinessReport = {
+    // Save detailed report;
+const report: ReadinessReport = {
       timestamp: new Date().toISOString(),
       overallScore: score,
       deploymentReady,
@@ -652,11 +652,11 @@ class ProductionReadinessChecker {
     console.log('\n📄 Detailed report saved to: production-readiness-report.json\n');
   }
 }
-// Parse command line arguments
+// Parse command line arguments;
 const args = process.argv.slice(2);
 const options = {
   comprehensive: args.includes('--comprehensive')
 };
-// Run the checker
+// Run the checker;
 const checker = new ProductionReadinessChecker();
 checker.check(options).catch(console.error);

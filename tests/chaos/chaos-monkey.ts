@@ -10,9 +10,7 @@ export interface ChaosScenario {
   probability: number // 0-1, chance of occurring, severity: 'low' | 'medium' | 'high' | 'critical',
   category: 'network' | 'resource' | 'service' | 'database' | 'agent',
   action: () => Promise<void>,
-  recovery: () => Promise<void>
-}
-export interface ChaosResult {
+  recovery: () => Promise<void />, export interface ChaosResult {
   scenario: ChaosScenario,
   timestamp: Date,
   triggered: boolean,
@@ -22,26 +20,25 @@ export interface ChaosResult {
   selfHealed: boolean,
   alertsTriggered: string[],
   servicesAffected: string[]
-}}
+  }
+}
 export class ChaosMonkey extends EventEmitter {
   private scenarios: ChaosScenario[] = []
   private isRunning: boolean = false
   private results: ChaosResult[] = []
-  private interval?: NodeJS.Timer
-  constructor() {
-    super()
-    this.initializeScenarios()
+  private interval?: NodeJS.Timer, function constructor() {
+    super(); this.initializeScenarios()
 }
   private initializeScenarios() {
     this.scenarios = [
       // Network Chaos
       {
-  id: 'network_latency';
+  id: 'network_latency',
   name: 'Network Latency Spike',
   description: 'Introduce 500ms latency to all network calls',
-        probability: 0.3;
+        probability: 0.3,
         severity: 'medium',
-        category: 'network';
+        category: 'network',
         action: async () => {
           // Simulate network latency (would use tc command in real Linux)
           process.env.CHAOS_NETWORK_LATENCY = '500'
@@ -50,44 +47,39 @@ export class ChaosMonkey extends EventEmitter {
           delete process.env.CHAOS_NETWORK_LATENCY
 }},
       {
-        id: 'network_partition';
+        id: 'network_partition',
   name: 'Network Partition',
   description: 'Simulate network partition between services',
-        probability: 0.1;
+        probability: 0.1,
         severity: 'high',
-        category: 'network';
+        category: 'network',
         action: async () => {
           // In Docker, this would block communication between containers
-          await execAsync('docker network disconnect agent-network ai-saas-agent-backend || true')
-        },
+          await execAsync('docker network disconnect agent-network ai-saas-agent-backend || true'), },
         recovery: async () => {
-          await execAsync('docker network connect agent-network ai-saas-agent-backend || true')
-}},
+          await execAsync('docker network connect agent-network ai-saas-agent-backend || true')},
       // Resource Chaos
       {
-        id: 'cpu_spike';
+        id: 'cpu_spike',
   name: 'CPU Spike',
   description: 'Consume 90% CPU for 30 seconds',
-        probability: 0.2;
+        probability: 0.2,
         severity: 'high',
-        category: 'resource';
+        category: 'resource',
         action: async () => {
-          // CPU stress test
-          const workers = [];
-          import cores from 'os';.cpus().length;
-          for(let i = 0; i < cores; i++) {
-            const _worker = setInterval((: any) => {
-              // CPU intensive operation
-              let result = 0;
-              for(let j = 0; j < 1000000; j++) {
-                result += Math.sqrt(j)
-}}, 0)
+          // CPU stress test, const workers = [], import cores from 'os';.cpus().length;
+          for (let i = 0; i < cores; i++) {
+            const _worker = setInterval(() => {
+              // CPU intensive operation;
+let result = 0;
+              for (let j = 0; j < 1000000; j++) {
+                result += Math.sqrt(j)}, 0)
             workers.push(worker)
 }
           // Store workers for cleanup
           (global as any).chaosWorkers = workers
           // Auto-cleanup after 30 seconds
-          setTimeout((: any) => {
+          setTimeout(() => {
             workers.forEach((w: any) => clearInterval(w))
             delete (global as any).chaosWorkers
           }, 30000)
@@ -96,59 +88,50 @@ export class ChaosMonkey extends EventEmitter {
             delete (global as any).chaosWorkers
            },
       {
-        id: 'memory_leak';
+        id: 'memory_leak',
   name: 'Memory Leak Simulation',
   description: 'Gradually consume memory',
-        probability: 0.15;
+        probability: 0.15,
         severity: 'high',
-        category: 'resource';
+        category: 'resource',
         action: async () => {
-          const leaks = [];
-          const _leakInterval = setInterval((: any) => {
-            // Allocate 50MB
-            const _leak = Buffer.alloc(50 * 1024 * 1024);
-            leaks.push(leak)
-            // Stop at 500MB to avoid crashing
-            if(leaks.length >= 10) {
-              clearInterval(leakInterval)
-}}, 1000)
+          const leaks = [], const _leakInterval = setInterval(() => {
+            // Allocate 50MB, const _leak = Buffer.alloc(50 * 1024 * 1024);
+            leaks.push(leak);
+            // Stop at 500MB to avoid crashing;
+if (leaks.length >= 10) {
+              clearInterval(leakInterval)}, 1000)
           (global as any).memoryLeaks = { leaks, interval: leakInterval }},
         recovery: async () => {
           if ((global as any).memoryLeaks) {
             clearInterval((global as any).memoryLeaks.interval)
             delete (global as any).memoryLeaks
 }
-          // Force garbage collection if available
-          if(global.gc) { global.gc()
-           },
+          // Force garbage collection if available;
+if (global.gc) { global.gc()},
       // Service Chaos
       {
-        id: 'container_kill';
+        id: 'container_kill',
   name: 'Random Container Kill',
   description: 'Kill a random agent container',
-        probability: 0.1;
+        probability: 0.1,
         severity: 'critical',
-        category: 'service';
+        category: 'service',
         action: async () => {
-          const agents = ['frontend', 'backend', 'qa'];
-          const _target = agents[Math.floor(Math.random() * agents.length)];
-          try {
+          const agents = ['frontend', 'backend', 'qa'], const _target = agents[Math.floor(Math.random() * agents.length)], try {
             await execAsync(`docker stop ai-saas-agent-${target} || true`)``
           } catch (error) {
-            console.error('Failed to stop, container:', error)
-}},
+            console.error('Failed to stop, container:', error)},
         recovery: async () => {
           try {
-            await execAsync('docker-compose -f docker-compose.agents.yml up -d')
-          } catch (error) { console.error('Failed to restart, container:', error)
-           },
+            await execAsync('docker-compose -f docker-compose.agents.yml up -d'), } catch (error) { console.error('Failed to restart, container:', error)},
       {
-        id: 'service_timeout';
+        id: 'service_timeout',
   name: 'Service Timeout',
   description: 'Make a service unresponsive',
-        probability: 0.2;
+        probability: 0.2,
         severity: 'medium',
-        category: 'service';
+        category: 'service',
         action: async () => {
           process.env.CHAOS_SERVICE_TIMEOUT = 'true'
         },
@@ -157,29 +140,28 @@ export class ChaosMonkey extends EventEmitter {
 }},
       // Database Chaos
       {
-        id: 'db_connection_drop';
+        id: 'db_connection_drop',
   name: 'Database Connection Drop',
   description: 'Drop database connections',
-        probability: 0.15;
+        probability: 0.15,
         severity: 'high',
-        category: 'database';
+        category: 'database',
         action: async () => {
           try {
             // Terminate all connections except our own
-            await execAsync(`docker exec ai-saas-postgres psql -U postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <React.Fragment>pg_backend_pid() AND datname = 'ai_guided_saas';" || true`)``
+            await execAsync(`docker exec ai-saas-postgres psql -U postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <React.Fragment>pg_backend_pid() AND datname = 'ai_guided_saas', " || true`)``
           } catch (error) {
-            console.error('Failed to drop, connections:', error)
-}},
+            console.error('Failed to drop, connections:', error)},
         recovery: async () => {
           // Connections should auto-reconnect
 }},
       {
-        id: 'db_slow_queries';
+        id: 'db_slow_queries',
   name: 'Database Slow Queries',
   description: 'Introduce artificial query delays',
-        probability: 0.25;
+        probability: 0.25,
         severity: 'low',
-        category: 'database';
+        category: 'database',
         action: async () => {
           process.env.CHAOS_DB_SLOW_QUERIES = '2000' // 2 second delay
         },
@@ -188,12 +170,12 @@ export class ChaosMonkey extends EventEmitter {
 }},
       // Agent Chaos
       {
-        id: 'agent_task_failure';
+        id: 'agent_task_failure',
   name: 'Agent Task Failure',
   description: 'Force agent tasks to fail randomly',
-        probability: 0.3;
+        probability: 0.3,
         severity: 'medium',
-        category: 'agent';
+        category: 'agent',
         action: async () => {
           process.env.CHAOS_AGENT_FAILURE_RATE = '0.5' // 50% failure rate
         },
@@ -201,147 +183,127 @@ export class ChaosMonkey extends EventEmitter {
           delete process.env.CHAOS_AGENT_FAILURE_RATE
 }},
       {
-        id: 'agent_communication_failure';
+        id: 'agent_communication_failure',
   name: 'Agent Communication Failure',
   description: 'Break inter-agent communication',
-        probability: 0.1;
+        probability: 0.1,
         severity: 'high',
-        category: 'agent';
+        category: 'agent',
         action: async () => {
           process.env.CHAOS_AGENT_COMM_FAILURE = 'true'
         },
         recovery: async () => {
           delete process.env.CHAOS_AGENT_COMM_FAILURE
-}}
+  }
+}
     ]
 }
-  start(intervalMs: number = 60000) {
-    if(this.isRunning) {
-      // return
-}
-    this.isRunning = true
-    this.interval = setInterval((: any) => {
-      this.maybeExecuteScenario()
-    }, intervalMs)
+  function start(intervalMs: number = 60000) {
+    if (this.isRunning) {
+      // return null, }this.isRunning = true
+    this.interval = setInterval(() => {
+      this.maybeExecuteScenario(), }, intervalMs)
     // Initial chaos
     this.maybeExecuteScenario()
 }
   stop(): any {
     if (!this.isRunning) return
-    this.isRunning = false
-    if(this.interval) {
-      clearInterval(this.interval)
-      this.interval = undefined
+    this.isRunning = false, if (this.interval) {
+      clearInterval(this.interval), this.interval = undefined
 }
     // Clean up any active chaos
     this.cleanupAllScenarios()
 }
   private async maybeExecuteScenario(): Promise<void> {
     if (!this.isRunning) return
-    // Select a random scenario based on probability
-    const scenario = this.selectScenario();
-    if (!scenario) return
-    const result: ChaosResult = {
+    // Select a random scenario based on probability, const scenario = this.selectScenario(); if (!scenario) return null;
+const result: ChaosResult = {
       scenario,
-      timestamp: new Date();
-  triggered: false;
-  recovered: false;
+      timestamp: new Date(),
+  triggered: false,
+  recovered: false,
       systemResponse: {
-        selfHealed: false;
-  alertsTriggered: [];
-  servicesAffected: []
-}}
+        selfHealed: false,
+  alertsTriggered: any[],
+  servicesAffected: any[]
+  }
+}
     try {
-      this.emit('chaos:start', scenario)
-      // Execute chaos
-      await scenario.action()
-      result.triggered = true
-      // Monitor system response
-      const _monitorStart = Date.now();
-      result.systemResponse = await this.monitorSystemResponse(scenario)
-      // Wait a bit before recovery
-      const _chaosDuration = this.getChaossDuration(scenario.severity);
+      this.emit('chaos:start', scenario), // Execute chaos
+      await scenario.action(), result.triggered = true
+      // Monitor system response;
+const _monitorStart = Date.now();
+      result.systemResponse = await this.monitorSystemResponse(scenario);
+      // Wait a bit before recovery;
+const _chaosDuration = this.getChaossDuration(scenario.severity);
       await new Promise(resolve => setTimeout(resolve, chaosDuration))
       // Attempt recovery
-      await scenario.recovery()
+      await scenario.recovery();
       result.recovered = true
       result.recoveryTime = Date.now() - monitorStart
       this.emit('chaos:end', result)
-    } catch (error) {
+} catch (error) {
       result.error = error instanceof Error ? error.message : 'Unknown error'
-      console.error('❌ Chaos scenario, failed:', error)
-      // Always try to recover
+      console.error('❌ Chaos scenario, failed:', error), // Always try to recover
       try {
-        await scenario.recovery()
-        result.recovered = true
+        await scenario.recovery(), result.recovered = true
       } catch (recoveryError) {
-        console.error('❌ Recovery also, failed:', recoveryError)
-}}
+        console.error('❌ Recovery also, failed:', recoveryError)}
     this.results.push(result)
 }
   private selectScenario(): ChaosScenario | null {
-    // Filter scenarios by probability
-    const candidates = this.scenarios.filter((s: any) => Math.random() < s.probability);
-    if (candidates.length === 0) return null
+    // Filter scenarios by probability, const candidates = this.scenarios.filter((s: any) => Math.random() < s.probability), if (candidates.length === 0) return null
     // Select random from candidates
     return candidates[Math.floor(Math.random() * candidates.length)]
 }
   private getChaossDuration(severity: string): number {
     const durations = {
-      low: 5000;      // 5 seconds, medium: 15000;  // 15 seconds, high: 30000;    // 30 seconds, critical: 60000 // 1 minute
+      low: 5000, // 5 seconds, medium: 15000, // 15 seconds, high: 30000;    // 30 seconds, critical: 60000 // 1 minute
 }
     return durations[severity as keyof typeof durations] || 10000
 }
   private async monitorSystemResponse(scenario: ChaosScenario): Promise<{
-    selfHealed: boolean; alertsTriggered: string[];
-  servicesAffected: string[]
+    selfHealed: boolean, alertsTriggered: string[], servicesAffected: string[]
   }> {
     const response = {
-      selfHealed: false;
-  alertsTriggered: [] as string[];
-  servicesAffected: [] as string[]
+      selfHealed: false,
+  alertsTriggered: any[] as string[], servicesAffected: any[] as string[]
 }
     // Check if system self-healed
     try {
-      // Check health endpoints
-      const healthCheck = await fetch('http://localhost:3000/api/health');
-      if(healthCheck.ok) {
+      // Check health endpoints, const healthCheck = await fetch('http://localhost:3000/api/health'), if (healthCheck.ok) {
         response.selfHealed = true
 }
-      // Check for triggered alerts (would query Prometheus/Alertmanager in reality)
-      if(scenario.severity === 'critical' || scenario.severity === 'high') {
+      // Check for triggered alerts (would query Prometheus/Alertmanager in reality);
+if (scenario.severity === 'critical' || scenario.severity === 'high') {
         response.alertsTriggered.push(`${scenario.category}_alert`)``
 }
-      // Check affected services
-      const { stdout  }: any = await execAsync('docker ps --format "{{.Names}}\\t{{.Status}}"');
+      // Check affected services;
+const { stdout  }: any = await execAsync('docker ps --format "{{.Names}}\\t{{.Status}}"');
       const _unhealthyServices = stdout;
-        .split('\n')
+        .split('\n');
         .filter((line: any) => line.includes('unhealthy') || line.includes('Restarting'))
         .map((line: any) => line.split('\t')[0])
       response.servicesAffected = unhealthyServices
     } catch (error) {
-      console.error('Failed to monitor system, response:', error)
-}
+      console.error('Failed to monitor system, response:', error), }
     return response
 }
   private async cleanupAllScenarios(): Promise<void> {
-    for(const scenario of this.scenarios) {
+    for (const scenario of this.scenarios) {
       try {
-        await scenario.recovery()
-      } catch (error) {
+        await scenario.recovery(), } catch (error) {
         console.error(`Failed to cleanup ${scenario.name}:`, error)``
-}}
-  getResults(): ChaosResult[] {
-    return this.results
+  }
 }
+  getResults(): ChaosResult[] {
+    return this.results, }
   generateReport(): string {
-    const _totalRuns = this.results.length;
-    const _successful = this.results.filter((r: any) => r.triggered && r.recovered).length;
-    const _selfHealed = this.results.filter((r: any) => r.systemResponse.selfHealed).length;
+    const _totalRuns = this.results.length, const _successful = this.results.filter((r: any) => r.triggered && r.recovered).length, const _selfHealed = this.results.filter((r: any) => r.systemResponse.selfHealed).length;
     const _avgRecoveryTime = this.results;
       .filter((r: any) => r.recoveryTime)
       .reduce((sum, r) => sum + (r.recoveryTime || 0), 0) / successful || 0
-    return ```
+    return ```;
 Chaos Testing Report
 ===================
 Total Chaos, Events: ${totalRuns}
@@ -350,10 +312,9 @@ Self-Healed: ${selfHealed}
 Average Recovery, Time: ${(avgRecoveryTime / 1000).toFixed(1)}s
 Scenario, Breakdown:
 ${this.scenarios.map((s: any) => {
-  const runs = this.results.filter((r: any) => r.scenario.id === s.id);
-  const _success = runs.filter((r: any) => r.triggered && r.recovered).length;
-  return `- ${s.name}: ${success}/${runs.length} successful```
+  const runs = this.results.filter((r: any) => r.scenario.id === s.id), const _success = runs.filter((r: any) => r.triggered && r.recovered).length, return `- ${s.name}: ${success}/${runs.length} successful```
 }).join('\n')}
 System Resilience, Score: ${((selfHealed / totalRuns) * 100).toFixed(1)}%
 ```
-}}
+  }
+}

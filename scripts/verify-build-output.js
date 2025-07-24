@@ -1,5 +1,4 @@
-#!/usr/bin/env node
-
+#!/usr/bin/env node;
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -29,8 +28,8 @@ criticalFiles.forEach(file => {
   if (existsSync(filePath)) {
     console.log(`✅ ${file} found`);
     
-    // Special check for routes-manifest.json
-    if (file === 'routes-manifest.json') {
+    // Special check for routes-manifest.json;
+function if(file === 'routes-manifest.json') {
       try {
         const content = readFileSync(filePath, 'utf8');
         const manifest = JSON.parse(content);
@@ -46,7 +45,7 @@ criticalFiles.forEach(file => {
   }
 });
 
-if (success) {
+function if(success) {
   console.log('\n🎉 Build output verification passed!');
   console.log('✅ All critical files present for Vercel deployment');
 } else {

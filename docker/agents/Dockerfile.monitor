@@ -1,0 +1,36 @@
+# Agent Monitor Dashboard
+FROM node:18-alpine
+
+# Install system dependencies
+RUN apk add --no-cache \
+    curl \
+    bash \
+    python3 \
+    py3-pip
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --only=production
+
+# Copy monitoring application
+COPY scripts/monitor-agents.* ./
+COPY src/components/admin/SystemResourceMonitor.tsx ./components/
+COPY src/lib/agents ./lib/agents/
+
+# Create monitoring directories
+RUN mkdir -p /app/logs /app/reports /app/state
+
+# Expose monitor dashboard port
+EXPOSE 3100
+
+# Health check for monitor
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3100/health || exit 1
+
+# Start agent monitor dashboard
+CMD ["node", "monitor-agents.cjs"]

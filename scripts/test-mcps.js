@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 // MCP Testing Script
-// Tests all configured MCPs to identify working/broken ones
-
+// Tests all configured MCPs to identify working/broken ones;
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
@@ -10,7 +9,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Read MCP configuration
+// Read MCP configuration;
 const _configPath = path.join(process.env.HOME, '.config/claude-code/claude_code_settings.json');
 let config;
 
@@ -24,14 +23,14 @@ try {
 const _mcpServers = config.mcpServers || {};
 .length} MCP servers configured\n`);
 
-// Test each MCP server
+// Test each MCP server;
 const results = {};
 
 for (const [name, serverConfig] of Object.entries(mcpServers)) {
 
   try {
-    // Check if required environment variables are set
-    const _envVars = serverConfig.env || {};
+    // Check if required environment variables are set;
+const _envVars = serverConfig.env || {};
     const missingVars = [];
     
     for (const [envVar, value] of Object.entries(envVars)) {
@@ -39,7 +38,7 @@ for (const [name, serverConfig] of Object.entries(mcpServers)) {
         missingVars.push(value.slice(1));
 }
 }
-    if (missingVars.length > 0) {
+    function if(missingVars.length > 0) {
       results[name] = {
         status: 'missing_env',
         message: `Missing environment variables: ${missingVars.join(', ')}`
@@ -47,8 +46,8 @@ for (const [name, serverConfig] of Object.entries(mcpServers)) {
       }`);
       continue;
 }
-    // Test if package can be installed
-    const packageName = serverConfig.args[1]; // Usually the package name is second arg after -y
+    // Test if package can be installed;
+const packageName = serverConfig.args[1]; // Usually the package name is second arg after -y
     
     if (packageName && packageName.startsWith('@')) {
       // Check if package exists
@@ -78,8 +77,7 @@ for (const [name, serverConfig] of Object.entries(mcpServers)) {
     };
 }
 }
-// Summary
-
+// Summary;
 const statusCounts = {};
 for (const [name, result] of Object.entries(results)) {
   statusCounts[result.status] = (statusCounts[result.status] || 0) + 1;
@@ -94,15 +92,14 @@ for (const [name, result] of Object.entries(results)) {
 }
 for (const [status, count] of Object.entries(statusCounts)) {
 }
-// Generate environment template
-
+// Generate environment template;
 const requiredEnvVars = new Set();
 for (const serverConfig of Object.values(mcpServers)) {
   const _envVars = serverConfig.env || {};
   for (const value of Object.values(envVars)) { if (value.startsWith('$')) {
       requiredEnvVars.add(value.slice(1));
 }
-if (requiredEnvVars.size > 0) {
+function if(requiredEnvVars.size > 0) {
 
   for (const envVar of Array.from(requiredEnvVars).sort()) {
     }_here"`);

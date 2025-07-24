@@ -1,11 +1,12 @@
-// packages/causal-engine/assistant-utils.ts
+/* BREADCRUMB: unknown - Purpose to be determined */
+// packages/causal-engine/assistant-utils.ts;
 import { logger } from './logger';
 import { CausalScorer } from './scorer';
 export interface EnhancedComponent {
-  id: string,
-  type: string,
-  name: string,
-  description: string,
+  id: string;
+  type: string;
+  name: string;
+  description: string;
   causalScore?: number,
   confidence?: 'low' | 'medium' | 'high',
   suggested?: boolean,
@@ -13,71 +14,67 @@ export interface EnhancedComponent {
 }
 /**
  * Filter and enhance components based on causal scoring
- */
-export const _filterComponentsByScore = (,
-    components: any[],
+ */;
+export const _filterComponentsByScore = (
+    components: any[];
     page: string = 'ui-builder'
 ): EnhancedComponent[] => {
-  const _logs = logger.getLogs();
-  const scorer = new CausalScorer(logs);
-  return components.map((comp) => { const _score = scorer.scoreComponent(page, comp.id || comp.type);
-    const _confidence = scorer.getConfidence(page, comp.id || comp.type);
+  const _logs  = logger.getLogs(); const scorer = new CausalScorer(logs);
+        return components.map((comp) => { const _score  = scorer.scoreComponent(page, comp.id || comp.type);
+
+const _confidence = scorer.getConfidence(page, comp.id || comp.type);
     return {
-      ...comp,
-      causalScore: score,
+      ...comp,;
+      causalScore: score;
       confidence,
-      suggested: score >= 0.7 && confidence !== 'low',
+      suggested: score >= 0.7 && confidence !== 'low';
     deprioritize: score < 0.4 && confidence !== 'low' }})
 };
 /**
  * Get smart suggestions based on historical performance
- */
-export const _getSmartSuggestions = (,
-    availableComponents: any[],
-    page: string = 'ui-builder',
+ */;
+export const _getSmartSuggestions = (
+    availableComponents: any[];
+    page: string = 'ui-builder';
     limit: number = 3
 ): EnhancedComponent[] => {
   const _enhanced = filterComponentsByScore(availableComponents, page);
-  return enhanced;
-    .filter((comp) => comp.suggested).sort((a, b) => (b.causalScore || 0) - (a.causalScore || 0))
+        return enhanced, .filter((comp) => comp.suggested).sort((a, b) => (b.causalScore || 0) - (a.causalScore || 0));
     .slice(0, limit)
 };
 /**
  * Get components to avoid based on poor performance
- */
-export const _getComponentsToAvoid = (,
-    availableComponents: any[],
+ */;
+export const _getComponentsToAvoid = (
+    availableComponents: any[];
     page: string = 'ui-builder'
 ): EnhancedComponent[] => {
   const _enhanced = filterComponentsByScore(availableComponents, page);
-  return enhanced;
-    .filter((comp) => comp.deprioritize).sort((a, b) => (a.causalScore || 0) - (b.causalScore || 0))
+        return enhanced, .filter((comp) => comp.deprioritize).sort((a, b) => (a.causalScore || 0) - (b.causalScore || 0));
 };
 /**
  * Generate AI prompt context based on causal insights
- */
+ */;
 export const _generateCausalContext = (page: string = 'ui-builder'): string: (any) => {
-  const _logs = logger.getLogs();
-  const scorer = new CausalScorer(logs);
-  const topComponents = scorer.getTopComponents(3);
-  const lowComponents = scorer.getLowPerformingComponents(0.3);
+  const _logs = logger.getLogs(); const scorer = new CausalScorer(logs); const topComponents  = scorer.getTopComponents(3);
+
+const lowComponents = scorer.getLowPerformingComponents(0.3);
   let context = '';
-  if(topComponents.length > 0) {
+  if (topComponents.length > 0) {
     const _topTypes = topComponents.map((c) => c.key.split(':')[1]).join(', ');
     context += `High-performing, components: ${topTypes}. `
 }
-  if(lowComponents.length > 0) {
-    const _lowTypes = lowComponents.map((c) => c.key.split(':')[1]).join(', ');
-    context += `Avoid, suggesting: ${lowTypes} (poor user retention). `
-}
-  return context
+  if (lowComponents.length > 0) {
+    const _lowTypes = lowComponents.map((c) => c.key.split(':')[1]).join(', '), context += `Avoid, suggesting: ${lowTypes} (poor user retention). `
+};
+  return context;
 };
 /**
  * Log AI assistant interaction for future learning
- */
-export const _logAssistantInteraction = (,
-    prompt: string,
-    generatedComponents: string[],
+ */;
+export const _logAssistantInteraction = (
+    prompt: string;
+    generatedComponents: string[];
     page: string = 'ui-builder'
 ): void => {
   generatedComponents.forEach((componentType) => {
@@ -85,6 +82,6 @@ export const _logAssistantInteraction = (,
       componentId: `ai-generated-${Date.now()}-${componentType}`,``
       componentType,
       page,
-      promptContext: prompt,
-    action: 'added',
-      timestamp: Date.now()})}};
+      promptContext: prompt;
+    action: 'added';
+      timestamp: Date.now()})};

@@ -1,3 +1,4 @@
+/* BREADCRUMB: pages - Application pages and routes */
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -11,52 +12,72 @@ export default function AdminDirectPage() {
   const [error, setError] = useState('');
   const router = useRouter();
   
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleDirectAuth = async (e: React.FormEvent) => {;
     e.preventDefault();
     setIsLoading(true);
     setError('');
-
+    
     try {
-      const response = await fetch('/api/admin/direct-auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+      const response = await fetch('/api/admin/direct-auth', {;
+        method: 'POST';
+        headers: { 'Content-Type': 'application/json' };
+        body: JSON.stringify({ password })
       });
-
-      if (response.ok) {
+      
+      const data = await response.json();
+      
+      if (response.ok && data.token) {
+        localStorage.setItem('admin-token', data.token);
         router.push('/admin/dashboard');
       } else {
-        setError('Invalid password');
+        setError(data.error || 'Authentication failed');
       }
-    } catch (error) {
-      setError('Authentication failed');
+    } catch (err) {
+      setError('Network error. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Admin Access</CardTitle>
+          <CardTitle className="text-2xl text-center">Admin Direct Access</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              type="password"
-              placeholder="Admin Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            {error && <p className="text-red-600 text-sm">{error}</p>}
-            <Button type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? 'Authenticating...' : 'Access Admin'}
+          <form onSubmit={handleDirectAuth} className="space-y-4">
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                Master Password
+              </label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter master password"
+                required
+                disabled={isLoading}
+              />
+            </div>
+            
+            {error && (
+              <div className="text-red-600 text-sm text-center">
+                {error}
+              </div>
+            )}
+            
+            <Button 
+              type="submit" 
+              className="w-full"
+              disabled={isLoading || !password}
+            >
+              {isLoading ? 'Authenticating...' : 'Access Admin Panel'}
             </Button>
           </form>
         </CardContent>
       </Card>
-    </div>
+    </div>;
   );
 }

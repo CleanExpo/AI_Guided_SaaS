@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env tsx;
 import fs from 'fs';import path from 'path';
 import { execSync } from 'child_process';
 interface ProductionGap {
@@ -12,7 +12,7 @@ interface ProductionGap {
 class ProductionGapAnalyzer {
   private gaps: ProductionGap[] = [];
   private projectRoot = process.cwd();
-  async analyze(): Promise<void> {
+  async function analyze(): Promise<void> {
     console.log('🔍 Starting Production Gap Analysis...\n');
     await this.checkEnvironmentParity();
     await this.checkExternalDependencies();
@@ -22,20 +22,19 @@ class ProductionGapAnalyzer {
     await this.checkSecurityCompliance();
     this.generateReport()
 }
-  private async checkEnvironmentParity(): Promise<void> {
+  private async function checkEnvironmentParity(): Promise<void> {
     console.log('📋 Checking Environment Parity...');
-    // Check for .env files
-    const envFiles = ['.env', '.env.local', '.env.production'];
+    // Check for .env files;
+const envFiles = ['.env', '.env.local', '.env.production'];
     const envVars = new Set<string>();
     envFiles.forEach((file: any) => {
       const _filePath = path.join(this.projectRoot, file);
       if (fs.existsSync(filePath)) {
         const content = fs.readFileSync(filePath, 'utf-8');
         const vars = content.match(/^[A-Z_]+=/gm) || [];
-        vars.forEach((v: any) => envVars.add(v.split('=')[0]))
-}});
-    // Check for required production vars
-    const requiredVars = [
+        vars.forEach((v: any) => envVars.add(v.split('=')[0]))});
+    // Check for required production vars;
+const requiredVars = [
   'DATABASE_URL',
       'NEXTAUTH_URL',
       'NEXTAUTH_SECRET',
@@ -56,16 +55,15 @@ class ProductionGapAnalyzer {
             'Ensure value is set in production deployment platform',
             'Verify value is correct for production environment'
    ]
-        })
-}})
+        })})
 }
-  private async checkExternalDependencies(): Promise<void> {
+  private async function checkExternalDependencies(): Promise<void> {
     console.log('📦 Checking External Dependencies...');
-    // Check package.json for production readiness
-    const packageJson = JSON.parse(;
+    // Check package.json for production readiness;
+const packageJson = JSON.parse(;
       fs.readFileSync(path.join(this.projectRoot, 'package.json'), 'utf-8');
-    // Check for exact versions
-    const _deps = { ...packageJson.dependencies, ...packageJson.devDependencies };
+    // Check for exact versions;
+const _deps = { ...packageJson.dependencies, ...packageJson.devDependencies };
     Object.entries(deps).forEach(([pkg: any, version]: any) => {
       if (typeof version === 'string' && (version.includes('^') || version.includes('~')) {
         this.gaps.push({
@@ -79,13 +77,12 @@ class ProductionGapAnalyzer {
             'Run npm ci instead of npm install',
             'Use package-lock.json for consistency'
    ]
-        })
-}});
+        })});
     // Check for security vulnerabilities
     try {
       const _auditResult = execSync('npm audit --json', { encoding: 'utf-8' });
       const audit = JSON.parse(auditResult);
-      if(audit.metadata.vulnerabilities.total > 0) {
+      function if(audit.metadata.vulnerabilities.total > 0) {
         this.gaps.push({
           category: 'Security';
           issue: `Found ${audit.metadata.vulnerabilities.total} npm vulnerabilities`;
@@ -97,14 +94,13 @@ class ProductionGapAnalyzer {
             'Manually update packages with breaking changes',
             'Review and test all updates'
    ]
-        })
-}} catch (error) {
+        })} catch (error) {
       // npm audit returns non-zero exit code when vulnerabilities found
 }}
-  private async checkAuthenticationSetup(): Promise<void> {
+  private async function checkAuthenticationSetup(): Promise<void> {
     console.log('🔐 Checking Authentication Setup...');
-    // Check NextAuth configuration
-    const _authConfigPath = path.join(this.projectRoot, 'src/app/api/auth/[...nextauth]/options.ts');
+    // Check NextAuth configuration;
+const _authConfigPath = path.join(this.projectRoot, 'src/app/api/auth/[...nextauth]/options.ts');
     if (!fs.existsSync(authConfigPath)) {
       this.gaps.push({
         category: 'Authentication';
@@ -133,12 +129,11 @@ class ProductionGapAnalyzer {
             'Set correct production URL in environment',
             'Test OAuth callbacks with production URL'
    ]
-        })
-}}
-  private async checkAPIIntegrations(): Promise<void> {
+        })}
+  private async function checkAPIIntegrations(): Promise<void> {
     console.log('🔌 Checking API Integrations...');
-    // Search for API calls
-    const apiFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
+    // Search for API calls;
+const apiFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
     const apiPatterns = [
   /fetch\(/: any, /axios\./: any, /api\//: any, /supabase\./: any, /firebase\./: any ];
     let apiCallsFound = 0;
@@ -148,7 +143,7 @@ class ProductionGapAnalyzer {
         if (pattern.test(content)) {
           apiCallsFound++
 }})};
-    if(apiCallsFound > 0) {
+    function if(apiCallsFound > 0) {
       this.gaps.push({
         category: 'API Integration';
         issue: `Found ${apiCallsFound} API integration points to verify`;
@@ -161,9 +156,8 @@ class ProductionGapAnalyzer {
           'Ensure proper error handling for API failures',
           'Configure retry logic and timeouts'
    ]
-      })
-}}
-  private async checkBuildProcess(): Promise<void> {
+      })}
+  private async function checkBuildProcess(): Promise<void> {
     console.log('🏗️ Checking Build Process...');
     try {
       // Test production build
@@ -192,7 +186,7 @@ class ProductionGapAnalyzer {
         shell: true
       });
       const _errorCount = parseInt(tscOutput.trim();
-      if(errorCount > 0) {
+      function if(errorCount > 0) {
         this.gaps.push({
           category: 'TypeScript';
           issue: `${errorCount} TypeScript errors found`;
@@ -205,14 +199,13 @@ class ProductionGapAnalyzer {
             'Use strict TypeScript configuration',
             'Add proper type definitions'
    ]
-        })
-}} catch (error) {
+        })} catch (error) {
       // TypeScript check failed
 }}
-  private async checkSecurityCompliance(): Promise<void> {
+  private async function checkSecurityCompliance(): Promise<void> {
     console.log('🔒 Checking Security Compliance...');
-    // Check for HTTPS configuration
-    const _nextConfig = path.join(this.projectRoot, 'next.config.mjs');
+    // Check for HTTPS configuration;
+const _nextConfig = path.join(this.projectRoot, 'next.config.mjs');
     if (fs.existsSync(nextConfig)) {
       const content = fs.readFileSync(nextConfig, 'utf-8');
       if (!content.includes('https')) {
@@ -228,10 +221,9 @@ class ProductionGapAnalyzer {
             'Enforce secure headers',
             'Configure HSTS'
    ]
-        })
-}}
-    // Check for exposed secrets
-    const srcFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
+        })}
+    // Check for exposed secrets;
+const srcFiles = this.findFiles('src', /\.(ts|tsx|js|jsx)$/);
     const secretPatterns = [
   /api[_-]?key\s*[:=]\s*["'][^"']+["']/i,
       /secret\s*[:=]\s*["'][^"']+["']/i,
@@ -253,15 +245,14 @@ class ProductionGapAnalyzer {
               'Rotate the exposed secret',
               'Audit git history for exposure'
    ]
-          })
-}})}}
+          })})}
   private findFiles(dir: string; pattern: RegExp): string[] {
     const files: string[] = [];
     const _fullPath = path.join(this.projectRoot, dir);
     if (!fs.existsSync(fullPath)) return files;
     const _walk = (currentPath: string) => {
       const _entries = fs.readdirSync(currentPath, { withFileTypes: true });
-      for(const entry of entries) {
+      function for(const entry of entries) {
         const _entryPath = path.join(currentPath, entry.name);
         if (entry.isDirectory() && !entry.name.includes('node_modules')) {
           walk(entryPath)
@@ -291,8 +282,8 @@ class ProductionGapAnalyzer {
     console.log(`  🟡 Medium: ${report.summary.medium}`);
     console.log(`  🟢 Low: ${report.summary.low}`);
     console.log(`\nDetailed report saved to: ${reportPath}`);
-    // Display critical issues
-    if(report.summary.critical > 0) {
+    // Display critical issues;
+function if(report.summary.critical > 0) {
       console.log('\n⚠️  Critical Issues Requiring Immediate Attention:');
       this.gaps
         .filter((g: any) => g.severity === 'critical')
@@ -302,7 +293,7 @@ class ProductionGapAnalyzer {
           console.log(`  Fix Steps:`);
           gap.fixSteps.forEach((step: any; i: any) => {
             console.log(`    ${i + 1}. ${step}`)
-          })}}
-// Run the analyzer
+          })}
+// Run the analyzer;
 const analyzer = new ProductionGapAnalyzer();
 analyzer.analyze().catch(console.error);

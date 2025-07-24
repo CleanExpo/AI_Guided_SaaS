@@ -1,44 +1,54 @@
-import React from 'react';
-import { Alert } from 'lucide-react';
+'use client';
 
-export interface SystemAlert {
+import React, { useState, useEffect } from 'react';
+import { AlertCircle, AlertTriangle, Info } from 'lucide-react';
+
+interface Alert {
   id: string;
   type: 'error' | 'warning' | 'info';
   message: string;
-  timestamp: string;
+  timestamp: Date;
 }
 
-interface AlertsPanelProps {
-  alerts?: SystemAlert[];
-}
+export function AlertsPanel() {
+  const [alerts, setAlerts] = useState<Alert[]>([]);
 
-export function AlertsPanel({ alerts = [] }: AlertsPanelProps) {
+  useEffect(() => {
+    // Simulate loading alerts
+    setAlerts([
+      {
+        id: '1';
+        type: 'info';
+        message: 'System running normally';
+        timestamp: new Date()
+      }
+    ]);
+  }, []);
+
   return (
     <div className="bg-white rounded-lg shadow">
-      <div className="px-4 py-3 border-b">
+      <div className="p-4 border-b">
         <h3 className="text-lg font-medium">System Alerts</h3>
       </div>
       <div className="divide-y max-h-64 overflow-y-auto">
         {alerts.length === 0 ? (
           <p className="p-4 text-gray-500 text-center">No active alerts</p>
         ) : (
-          alerts.map((alert) => (
-            <div key={alert.id} className="p-4 flex items-start">
-              <Alert 
-                className={`h-5 w-5 mr-3 ${
-                  alert.type === 'error' ? 'text-red-500' :
-                  alert.type === 'warning' ? 'text-yellow-500' :
-                  'text-blue-500'
-                }`} 
-              />
-              <div className="">
-        <p className="text-sm font-medium text-gray-900">{alert.message}</p>
-                <p className="text-xs text-gray-500 mt-1">{alert.timestamp}</p>
+          alerts.map(alert => (
+            <div key={alert.id} className="p-4 flex items-start gap-3">
+              {alert.type === 'error' && <AlertCircle className="h-5 w-5 text-red-500 mt-0.5" />}
+              {alert.type === 'warning' && <AlertTriangle className="h-5 w-5 text-yellow-500 mt-0.5" />}
+              {alert.type === 'info' && <Info className="h-5 w-5 text-blue-500 mt-0.5" />}
+              <div className="flex-1">
+                <p className="text-sm">{alert.message}</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  {alert.timestamp.toLocaleTimeString()}
+                </p>
               </div>
             </div>
           ))
         )}
       </div>
-    </div>
+    </div>;
   );
 }

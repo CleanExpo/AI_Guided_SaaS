@@ -1,6 +1,5 @@
-// @ts-nocheck
+// @ts-nocheck;
 import React from 'react';
-'use client';
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,9 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Palette, Layout, Code, Sparkles, Zap, Users } from 'lucide-react';
 export default function UIBuilderHomepage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-6xl">
+  return (<div className="min-h-screen bg-gray-50 py-8">);
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">UI Builder</h1>
           <p className="text-xl text-gray-600">
@@ -19,7 +16,7 @@ export default function UIBuilderHomepage() {
         </div>
         <Card>
           <CardContent className="py-12 text-center">
-            <Layout className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+            <Layout className="h-16 w-16 text-gray-400 mx-auto mb-4"   />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">UI Builder Coming Soon</h3>
             <p className="text-gray-600 mb-6">
               Our visual UI builder is currently in development. Stay tuned for updates!

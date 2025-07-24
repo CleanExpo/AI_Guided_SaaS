@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Plus, BarChart3, Users } from 'lucide-react';
 import Link from 'next/link';
 export default function Dashboard() {
-  const { data: session   }: any = useSession()
+  const { data: session   }: any = useSession();
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-100 p-8">
       <div className="container mx-auto space-y-8">
@@ -19,7 +19,7 @@ export default function Dashboard() {
           </div>
           <Button asChild>
             <Link href="/analyze">
-              <Plus className="mr-2 h-5 w-5" />
+              <Plus className="mr-2 h-5 w-5"   />
               New Project
             </Link>
           </Button>
@@ -29,7 +29,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5" />
+                <BarChart3 className="h-5 w-5"   />
                 Projects
               </CardTitle>
             </CardHeader>
@@ -41,7 +41,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
+                <Users className="h-5 w-5"   />
                 Components
               </CardTitle>
             </CardHeader>
@@ -61,7 +61,7 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         </div>
-    </div>
+    </div>;
   );
 
     </div>

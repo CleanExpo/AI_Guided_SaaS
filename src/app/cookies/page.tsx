@@ -1,15 +1,14 @@
+/* BREADCRUMB: pages - Application pages and routes */;
 import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - AI Guided SaaS Platform',
+  title: 'Cookie Policy - AI Guided SaaS Platform';
   description: 'Our cookie policy and how we use cookies on our platform'
 };
 
 export default function CookiesPage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-4xl">
+  return (<div className="min-h-screen bg-gray-50 py-8">);
         <div className="bg-white rounded-lg shadow-sm p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Cookie Policy</h1>
           

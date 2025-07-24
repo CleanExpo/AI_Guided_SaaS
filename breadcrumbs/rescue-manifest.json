@@ -1,0 +1,4094 @@
+{
+  "src/middleware.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "middleware",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/utils/validation.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "validation",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/utils/index.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/utils/helpers.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "helpers",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/utils/formatting.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "formatting",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/utils/constants.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "constants",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/utils/cn.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "cn",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/types/project.d.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "project.d",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/types/next-auth.d.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "next-auth.d",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/types/monitoring.d.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "monitoring.d",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/types/index.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.906Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/lib/utils.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "utils",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/token-optimization-engine.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "token-optimization-engine",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/templates.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "templates",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/ssr-guard.tsx": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "ssr-guard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/project-storage.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "project-storage",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/production-logger.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "production-logger",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/logger.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "logger",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/hierarchical-memory-system.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "hierarchical-memory-system",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/env.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "env",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/email.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "email",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/design-system.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "design-system",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/database.ts": {
+    "purpose": "Database connections and queries",
+    "category": "data.layer",
+    "componentName": "database",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/cycle-detection.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "cycle-detection",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/config.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "config",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/collaboration.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "collaboration",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/claude-code-integration.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "claude-code-integration",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/auth.ts": {
+    "purpose": "Authentication and authorization",
+    "category": "auth.backend",
+    "componentName": "auth",
+    "linkedGoals": [
+      "Enable user authentication"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/auth-helpers.ts": {
+    "purpose": "Authentication and authorization",
+    "category": "auth.backend",
+    "componentName": "auth-helpers",
+    "linkedGoals": [
+      "Enable user authentication"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/api-tracking.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "api-tracking",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/api-middleware.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "api-middleware",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/analytics.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "analytics",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/ai.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "ai",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/advanced-monitoring.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "advanced-monitoring",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/admin.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "admin",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/admin-queries.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "admin-queries",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/admin-auth.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "admin-auth",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/hooks/useSemanticSearch.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "use Semantic Search",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/hooks/useRAG.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "use R A G",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/hooks/useN8nAutomation.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "use N8n Automation",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/hooks/useMCP.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "use M C P",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/hooks/useKiroIDE.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "use Kiro I D E",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/hooks/use-toast.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "use-toast",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/config/pulse.config.ts": {
+    "purpose": "Configuration files",
+    "category": "config",
+    "componentName": "pulse.config",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/WelcomeScreen.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Welcome Screen",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/TemplateManager.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Template Manager",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.907Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ShowcaseLandingPage.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Showcase Landing Page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/SemanticSearchDemo.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Semantic Search Demo",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/providers.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "providers",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ProjectGenerator.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Project Generator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ProgressTracker.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Progress Tracker",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ProductionShowcasePage.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Production Showcase Page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/navigation.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "navigation",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/MDFolderAgent.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "M D Folder Agent",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/LiveProjectPreview.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Live Project Preview",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/LandingPageProduction.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Landing Page Production",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/LandingPageEnhanced.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Landing Page Enhanced",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/LandingPage.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Landing Page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/InferenceSafeMode.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Inference Safe Mode",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/GuidedProjectBuilder.tsx": {
+    "purpose": "Guided project creation (Lovable.dev style)",
+    "category": "lovable.style",
+    "componentName": "Guided Project Builder",
+    "linkedGoals": [
+      "Provide guided interface for non-technical users"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/FlowchartBuilder.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Flowchart Builder",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/FeedbackWidget.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Feedback Widget",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ErrorBoundary.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Error Boundary",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/EnvVariableEditor.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Env Variable Editor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/EnvStatusDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Env Status Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/EnhancedUIGenerator.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Enhanced U I Generator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/DevelopmentWorkflow.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Development Workflow",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/DesignSystemShowcase.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Design System Showcase",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/DeploymentScreen.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Deployment Screen",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/DataSourceManager.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Data Source Manager",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/Dashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ContainerMonitor.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Container Monitor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ClientRequirementsCapture.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Client Requirements Capture",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ClientOnlyAuth.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Client Only Auth",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ClaudeCodeDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Claude Code Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/AIDocumentationGenerator.tsx": {
+    "purpose": "AI chat and assistance features",
+    "category": "ai.integration",
+    "componentName": "A I Documentation Generator",
+    "linkedGoals": [
+      "Integrate AI capabilities"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/AIChatWithSemantic.tsx": {
+    "purpose": "AI chat and assistance features",
+    "category": "ai.integration",
+    "componentName": "A I Chat With Semantic",
+    "linkedGoals": [
+      "Integrate AI capabilities"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/AIChat.tsx": {
+    "purpose": "AI chat and assistance features",
+    "category": "ai.integration",
+    "componentName": "A I Chat",
+    "linkedGoals": [
+      "Integrate AI capabilities"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/AgentPulseMonitor.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Agent Pulse Monitor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/AdvancedDocumentationDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Advanced Documentation Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.908Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/AdvancedCodeEditor.tsx": {
+    "purpose": "Advanced code editing (VS Code style)",
+    "category": "vscode.style",
+    "componentName": "Advanced Code Editor",
+    "linkedGoals": [
+      "Provide advanced interface for developers"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/layout.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "layout",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/packages/self-check/report-generator.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "report-generator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/packages/self-check/module-checker.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "module-checker",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/packages/self-check/dependency-auditor.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "dependency-auditor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/packages/self-check/causal-feedback-replayer.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "causal-feedback-replayer",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/packages/causal-engine/scorer.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "scorer",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/packages/causal-engine/logger.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "logger",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/packages/causal-engine/explorer-ui.tsx": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "explorer-ui",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/packages/causal-engine/assistant-utils.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "assistant-utils",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/lib/validation/schemas.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "schemas",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/validation/index.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/validation/decorators.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "decorators",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/validation/agent-schemas.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "agent-schemas",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/tutorials/InteractiveTutorialSystem.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Interactive Tutorial System",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/theme/dark-mode.tsx": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "dark-mode",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/semantic/SemanticSearchService.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Semantic Search Service",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/roadmap/RoadmapValidator.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Roadmap Validator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/requirements/ClientRequirementsProcessor.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Client Requirements Processor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/mcp/mcp-registry.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "mcp-registry",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/mcp/mcp-orchestrator.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "mcp-orchestrator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/mcp/index.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/knowledge/vector-store.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "vector-store",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/knowledge/text-splitter.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "text-splitter",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/knowledge/rag-engine.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "rag-engine",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/knowledge/document-loader.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "document-loader",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/ide/kiro-server-mock.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "kiro-server-mock",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/ide/kiro-client.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "kiro-client",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/health/HealthCheckService.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Health Check Service",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/health/external-services-health.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "external-services-health",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/health/database-health.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "database-health",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/health/AlertingService.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Alerting Service",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/env/EnvManager.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Env Manager",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/docs/DynamicDocumentationSystem.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Dynamic Documentation System",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/design-system/theme.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "theme",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/design-system/components.tsx": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "components",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/epc/self-heal-agent.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "self-heal-agent",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/epc/inference-telemetry.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "inference-telemetry",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/epc/epc-engine.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "epc-engine",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/database/connection-pool.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "connection-pool",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/data/MockDataGenerator.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Mock Data Generator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.909Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/breadcrumb/breadcrumb-agent.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "breadcrumb-agent",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/backend/types.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "types",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/backend/migration.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "migration",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/backend/index.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/backend/adapter-factory.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "adapter-factory",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/automation/n8n-client.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "n8n-client",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/api/rate-limiter.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "rate-limiter",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/analytics/PredictiveAnalytics.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Predictive Analytics",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/ai/AIService.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "A I Service",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/PulsedAgentOrchestrator.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Pulsed Agent Orchestrator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/index.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/GracefulShutdownManager.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Graceful Shutdown Manager",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/DockerAgentManager.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Docker Agent Manager",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/CPURateLimiter.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "C P U Rate Limiter",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/ContainerizedPulseOrchestrator.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Containerized Pulse Orchestrator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/AgentRegistry.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Agent Registry",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/AgentOrchestrator.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Agent Orchestrator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/AgentMonitor.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Agent Monitor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/AgentLoader.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Agent Loader",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/AgentCoordinator.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Agent Coordinator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/AgentCommunication.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "Agent Communication",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui-builder/UIBuilderHomepage.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "U I Builder Homepage",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/support/AISupportChat.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "A I Support Chat",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/use-toast.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "use-toast",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/toaster.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "toaster",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/toast.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "toast",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/textarea.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "textarea",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/tabs.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "tabs",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/switch.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "switch",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/sheet.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "sheet",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/separator.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "separator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/select.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "select",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/scroll-area.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "scroll-area",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/resizable.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "resizable",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/radio-group.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "radio-group",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.910Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/progress.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "progress",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/navigation.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "navigation",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/navigation-menu.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "navigation-menu",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/logo.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "logo",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/loading.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "loading",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/label.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "label",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/input.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "input",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/icons.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "icons",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/form-enhanced.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "form-enhanced",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/empty-states.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "empty-states",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/dropdown-menu.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "dropdown-menu",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/collapsible.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "collapsible",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/card.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "card",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/card-enhanced.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "card-enhanced",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/button.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "button",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/button-premium.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "button-premium",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/button-enhanced.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "button-enhanced",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/button-basic.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "button-basic",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/badge.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "badge",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ui/alert.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "alert",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/mcp/MCPOrchestrator.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "M C P Orchestrator",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/marketplace/TemplateMarketplace.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Template Marketplace",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/layout/ResponsiveLayout.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Responsive Layout",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/layout/Header.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Header",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/layout/Footer.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Footer",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/layout/ConditionalLayout.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Conditional Layout",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/knowledge/RAGKnowledgeBase.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "R A G Knowledge Base",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ide/KiroProjectSetup.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Kiro Project Setup",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/ide/KiroIDE.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Kiro I D E",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/health/TaskQueueVisualizer.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Task Queue Visualizer",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/health/SystemMetrics.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "System Metrics",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/health/index.ts": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/health/HealthCheckDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Health Check Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/health/AlertsPanel.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Alerts Panel",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/forms/ValidatedProjectForm.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Validated Project Form",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/docs/DocumentationViewer.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Documentation Viewer",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.911Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/config/ConfigurationDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Configuration Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/collaboration/CollaborationWorkspace.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Collaboration Workspace",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/collaboration/CollaborationDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Collaboration Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/dashboard/EnterpriseDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Enterprise Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/dashboard/DashboardEnhanced.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Dashboard Enhanced",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/backend/BackendSelector.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Backend Selector",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/builder/ProCodeEditor.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Pro Code Editor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/builder/NoCodeBuilder.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "No Code Builder",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/admin/SystemResourceMonitor.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "System Resource Monitor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/admin/SelfCheckTrigger.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Self Check Trigger",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/admin/SafeModeHealthCheck.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Safe Mode Health Check",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/admin/EnhancedAdminPanel.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Enhanced Admin Panel",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/admin/AdminPanel.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Admin Panel",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/admin/AdminDashboard.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Admin Dashboard",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/admin/AdminAnalytics.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Admin Analytics",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/components/auth/SignInForm.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Sign In Form",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/app.config.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "app.config",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/app/ui-builder/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/tutorials/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/terms/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/templates/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/security/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/privacy/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/pricing/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/status/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/press/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/help/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/gdpr/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/form-builder/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/features/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/enterprise/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/docs/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/dashboard/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/cookies/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/contact/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/config/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/community/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/collaborate/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/blog/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api-docs/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/analytics/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin-direct/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/about/page.tsx": {
+    "purpose": "Application pages and routes",
+    "category": "pages",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/backend/adapters/supabase.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "supabase",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/backend/adapters/strapi.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "strapi",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.912Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/backend/adapters/nocodb.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "nocodb",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/automation/workflows/testing-automation.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "testing-automation",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/automation/workflows/project-deployment.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "project-deployment",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/automation/workflows/notification-system.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "notification-system",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/automation/nodes/agent-orchestration.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "agent-orchestration",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/runtime/index.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "index",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/runtime/AgentRuntime.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Agent Runtime",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/runtime/AgentOrchestrator.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Agent Orchestrator",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/runners/frontend-agent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "frontend-agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/runners/base-agent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "base-agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/runners/backend-agent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "backend-agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/runners/architect-agent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "architect-agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/bmad/ProjectManagerAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Project Manager Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/bmad/index.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "index",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/bmad/ArchitectAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Architect Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/bmad/AnalystAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Analyst Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/base/ValidatedAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Validated Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/base/Agent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/archon/ToolsRefinerAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Tools Refiner Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/archon/PromptRefinerAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Prompt Refiner Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/archon/index.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "index",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/archon/AgentRefinerAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Agent Refiner Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/lib/agents/archon/AdvisorAgent.ts": {
+    "purpose": "Multi-agent system coordination",
+    "category": "agent.orchestration",
+    "componentName": "Advisor Agent",
+    "linkedGoals": [
+      "Enable autonomous development"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/utils/generateCode.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "generate Code",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/apps/ui-builder/utils/exportProject.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "export Project",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/apps/ui-builder/types/index.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/apps/ui-builder/store/useBuilderStore.ts": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "use Builder Store",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/apps/ui-builder/lib/componentList.ts": {
+    "purpose": "Shared library code",
+    "category": "library",
+    "componentName": "component List",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/pages/index.tsx": {
+    "purpose": "Purpose to be determined",
+    "category": "unknown",
+    "componentName": "index",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.3,
+    "needsReview": true
+  },
+  "src/apps/ui-builder/components/Toolbar.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Toolbar",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/Sidebar.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Sidebar",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/PreviewPane.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Preview Pane",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/DeploymentPanel.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Deployment Panel",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/ComponentRenderer.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Component Renderer",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/ComponentPropsEditor.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Component Props Editor",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/CodeViewer.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Code Viewer",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/BuilderCanvas.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Builder Canvas",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/apps/ui-builder/components/AssistantPrompt.tsx": {
+    "purpose": "User interface component",
+    "category": "ui.component",
+    "componentName": "Assistant Prompt",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/tutorials/[id]/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/tutorials/learning-path/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.913Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/projects/new-guided/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/docs/[slug]/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/demo/design-system/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/demo/data-flexibility/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/community/guidelines/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/collaborate/dashboard/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/builder/pro-code/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/builder/no-code/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/blog/[id]/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/auth/signup/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/auth/signin/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api-docs/[slug]/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/validated-chat/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/templates/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/health/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/feedback/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/cycle-detection/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/config/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/backend-example/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/analytics/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/agent-chat/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/performance/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/mcp/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/login/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/login/layout.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "layout",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/debug/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/causal/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/dashboard/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/analytics/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/admin/agent-monitor/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/projects/[id]/editor/page.tsx": {
+    "purpose": "Application page or route",
+    "category": "app",
+    "componentName": "page",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/webhooks/stripe/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/visual/upload/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/visual/analyze/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/visual/generate/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/tutorials/progress/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/support/chat/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/semantic/search/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/semantic/index/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/roadmap/validate/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/requirements/process/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/n8n/workflows/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/n8n/webhook/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.914Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/n8n/execute/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/mcp/status/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/env/status/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/email/test/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/collaboration/rooms/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/auth/[...nextauth]/route.ts": {
+    "purpose": "Authentication endpoints",
+    "category": "api.auth",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/auth/[...nextauth]/options.ts": {
+    "purpose": "Authentication endpoints",
+    "category": "api.auth",
+    "componentName": "options",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/auth/session/route.ts": {
+    "purpose": "Authentication endpoints",
+    "category": "api.auth",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/auth/register/route.ts": {
+    "purpose": "Authentication endpoints",
+    "category": "api.auth",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/agents/pulse-status/route.ts": {
+    "purpose": "Agent control endpoints",
+    "category": "api.agents",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/agents/pulse-config/route.ts": {
+    "purpose": "Agent control endpoints",
+    "category": "api.agents",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/users/route.ts": {
+    "purpose": "Admin management endpoints",
+    "category": "api.admin",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/stats/route.ts": {
+    "purpose": "Admin management endpoints",
+    "category": "api.admin",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/direct-auth/route.ts": {
+    "purpose": "Admin management endpoints",
+    "category": "api.admin",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/debug/route.ts": {
+    "purpose": "Admin management endpoints",
+    "category": "api.admin",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/analytics/route.ts": {
+    "purpose": "Admin management endpoints",
+    "category": "api.admin",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/users/[id]/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  },
+  "src/app/api/admin/auth/login/route.ts": {
+    "purpose": "API endpoint",
+    "category": "api",
+    "componentName": "route",
+    "linkedGoals": [
+      "Support platform functionality"
+    ],
+    "createdBy": "MCAS-Rescue",
+    "timestamp": "2025-07-23T19:21:13.915Z",
+    "confidence": 0.8,
+    "needsReview": false
+  }
+}

@@ -2,7 +2,7 @@
 /**
  * Comprehensive TypeScript Error Fix Script
  * Targets all common error patterns identified in the codebase
- */
+ */;
 import * as fs from 'fs';
 import * as path from 'path';
 import { glob } from 'glob';
@@ -130,41 +130,41 @@ class TypeScriptFixer {
     totalFixes: 0,
     fixesByPattern: new Map<string, number>()
   };
-  async fixAllFiles(): Promise<void> {
+  async function fixAllFiles(): Promise<void> {
     console.log('🔧 Starting Comprehensive TypeScript Error Fix...\n');
-    // Find all TypeScript and TSX files
-    const files = await glob('src/**/*.{ts,tsx}', {
+    // Find all TypeScript and TSX files;
+const files = await glob('src/**/*.{ts,tsx}', {
       cwd: process.cwd(),
       absolute: true
     });
     console.log(`📁 Found ${files.length} TypeScript files to process\n`);
-    for (const filePath of files) {
+    function for(const filePath of files) {
       await this.fixFile(filePath);
     }
     this.printSummary();
   }
-  private async fixFile(filePath: string): Promise<void> {
+  private async function fixFile(filePath: string): Promise<void> {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
       let modifiedContent = content;
       let fileFixCount = 0;
       const fileExtension = path.extname(filePath);
-      for (const pattern of this.fixPatterns) {
+      function for(const pattern of this.fixPatterns) {
         if (!pattern.fileExtensions.includes(fileExtension)) {
           continue;
         }
         const beforeLength = modifiedContent.length;
-        if (typeof pattern.replacement === 'string') {
+        function if(typeof pattern.replacement === 'string') {
           modifiedContent = modifiedContent.replace(pattern.regex, pattern.replacement);
         } else {
           modifiedContent = modifiedContent.replace(pattern.regex, pattern.replacement);
         }
         const afterLength = modifiedContent.length;
-        // Count fixes by checking if content changed
-        if (beforeLength !== afterLength || content !== modifiedContent) {
+        // Count fixes by checking if content changed;
+function if(beforeLength !== afterLength || content !== modifiedContent) {
           const matches = content.match(pattern.regex);
           const fixCount = matches ? matches.length : 0;
-          if (fixCount > 0) {
+          function if(fixCount > 0) {
             fileFixCount += fixCount;
             this.stats.fixesByPattern.set(
               pattern.name,
@@ -173,8 +173,8 @@ class TypeScriptFixer {
           }
         }
       }
-      // Write file only if changes were made
-      if (content !== modifiedContent) {
+      // Write file only if changes were made;
+function if(content !== modifiedContent) {
         fs.writeFileSync(filePath, modifiedContent);
         this.stats.filesProcessed++;
         this.stats.totalFixes += fileFixCount;
@@ -204,8 +204,8 @@ class TypeScriptFixer {
     console.log('\n✨ Fix script completed!');
   }
 }
-// Run the fixer
-if (require.main === module) {
+// Run the fixer;
+function if(require.main === module) {
   const fixer = new TypeScriptFixer();
   fixer.fixAllFiles().catch(console.error);
 }

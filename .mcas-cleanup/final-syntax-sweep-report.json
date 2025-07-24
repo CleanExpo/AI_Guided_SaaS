@@ -1,0 +1,229 @@
+{
+  "timestamp": "2025-07-23T20:01:44.637Z",
+  "filesProcessed": 350,
+  "filesFixed": 55,
+  "totalFixes": 108,
+  "duration": "0.50s",
+  "fixedFiles": [
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\admin\\login\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\admin-direct\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\users\\[id]\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\agents\\pulse-config\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\agents\\pulse-status\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\auth\\[...nextauth]\\options.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\blog\\[id]\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\community\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\contact\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\demo\\data-flexibility\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\docs\\[slug]\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\enterprise\\page.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\features\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\gdpr\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\help\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\press\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\pricing\\page.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\privacy\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\security\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\status\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\terms\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\apps\\ui-builder\\store\\useBuilderStore.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\admin\\SafeModeHealthCheck.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\AIChatWithSemantic.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\ClientRequirementsCapture.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\docs\\DocumentationViewer.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\EnhancedUIGenerator.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\forms\\ValidatedProjectForm.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\ide\\KiroProjectSetup.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\knowledge\\RAGKnowledgeBase.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\mcp\\MCPOrchestrator.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\ui\\badge.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\ui\\button.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\ui\\use-toast.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\components\\WelcomeScreen.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\admin-auth.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\agents\\AgentCommunication.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\agents\\DockerAgentManager.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\agents\\GracefulShutdownManager.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\agents\\PulsedAgentOrchestrator.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\agents\\runtime\\AgentOrchestrator.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\api\\rate-limiter.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\api-tracking.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\auth-helpers.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\breadcrumb\\breadcrumb-agent.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\collaboration.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\database.ts",
+      "fixes": 5
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\health\\AlertingService.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\knowledge\\vector-store.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\lib\\mcp\\mcp-orchestrator.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\packages\\self-check\\causal-feedback-replayer.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\utils\\helpers.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\utils\\validation.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\tests\\chaos\\chaos-monkey.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\tests\\setup.ts",
+      "fixes": 2
+    }
+  ]
+}

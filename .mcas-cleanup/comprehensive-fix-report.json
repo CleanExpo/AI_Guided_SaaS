@@ -1,0 +1,1398 @@
+{
+  "timestamp": "2025-07-23T20:07:27.895Z",
+  "filesProcessed": 373,
+  "filesFixed": 347,
+  "totalFixes": 33437,
+  "duration": "3.18s",
+  "fixesPerSecond": "10514.8",
+  "allFixedFiles": [
+    {
+      "file": "src\\lib\\tutorials\\InteractiveTutorialSystem.ts",
+      "fixes": 742
+    },
+    {
+      "file": "src\\lib\\docs\\DynamicDocumentationSystem.ts",
+      "fixes": 636
+    },
+    {
+      "file": "src\\lib\\agents\\AgentCommunication.ts",
+      "fixes": 600
+    },
+    {
+      "file": "src\\lib\\agents\\bmad\\ArchitectAgent.ts",
+      "fixes": 581
+    },
+    {
+      "file": "src\\lib\\database.ts",
+      "fixes": 576
+    },
+    {
+      "file": "src\\lib\\token-optimization-engine.ts",
+      "fixes": 562
+    },
+    {
+      "file": "scripts\\test-agent-workflow.ts",
+      "fixes": 534
+    },
+    {
+      "file": "src\\components\\ide\\KiroProjectSetup.tsx",
+      "fixes": 517
+    },
+    {
+      "file": "src\\lib\\mcp\\mcp-orchestrator.ts",
+      "fixes": 487
+    },
+    {
+      "file": "src\\lib\\backend\\adapters\\nocodb.ts",
+      "fixes": 477
+    },
+    {
+      "file": "scripts\\build-sync-agent.ts",
+      "fixes": 461
+    },
+    {
+      "file": "src\\components\\admin\\AdminPanel.tsx",
+      "fixes": 460
+    },
+    {
+      "file": "src\\lib\\agents\\AgentMonitor.ts",
+      "fixes": 454
+    },
+    {
+      "file": "src\\lib\\agents\\runtime\\AgentRuntime.ts",
+      "fixes": 448
+    },
+    {
+      "file": "src\\lib\\collaboration.ts",
+      "fixes": 445
+    },
+    {
+      "file": "src\\components\\ui\\navigation.tsx",
+      "fixes": 432
+    },
+    {
+      "file": "src\\components\\docs\\DocumentationViewer.tsx",
+      "fixes": 382
+    },
+    {
+      "file": "scripts\\activate-enhanced-orchestration.js",
+      "fixes": 373
+    },
+    {
+      "file": "src\\lib\\analytics\\PredictiveAnalytics.ts",
+      "fixes": 365
+    },
+    {
+      "file": "src\\lib\\automation\\workflows\\testing-automation.ts",
+      "fixes": 364
+    },
+    {
+      "file": "src\\components\\knowledge\\RAGKnowledgeBase.tsx",
+      "fixes": 363
+    },
+    {
+      "file": "src\\components\\admin\\SafeModeHealthCheck.tsx",
+      "fixes": 362
+    },
+    {
+      "file": "src\\lib\\claude-code-integration.ts",
+      "fixes": 361
+    },
+    {
+      "file": "src\\lib\\admin-queries.ts",
+      "fixes": 349
+    },
+    {
+      "file": "tests\\chaos\\chaos-monkey.ts",
+      "fixes": 344
+    },
+    {
+      "file": "scripts\\production-framework\\fix-typescript-errors.ts",
+      "fixes": 342
+    },
+    {
+      "file": "src\\components\\support\\AISupportChat.tsx",
+      "fixes": 340
+    },
+    {
+      "file": "src\\lib\\requirements\\ClientRequirementsProcessor.ts",
+      "fixes": 327
+    },
+    {
+      "file": "src\\lib\\config.ts",
+      "fixes": 325
+    },
+    {
+      "file": "src\\lib\\health\\external-services-health.ts",
+      "fixes": 324
+    },
+    {
+      "file": "src\\lib\\ide\\kiro-client.ts",
+      "fixes": 320
+    },
+    {
+      "file": "src\\lib\\env\\EnvManager.ts",
+      "fixes": 315
+    },
+    {
+      "file": "src\\components\\ProductionShowcasePage.tsx",
+      "fixes": 314
+    },
+    {
+      "file": "src\\components\\ClaudeCodeDashboard.tsx",
+      "fixes": 310
+    },
+    {
+      "file": "src\\lib\\backend\\adapters\\supabase.ts",
+      "fixes": 310
+    },
+    {
+      "file": "src\\components\\collaboration\\CollaborationWorkspace.tsx",
+      "fixes": 307
+    },
+    {
+      "file": "src\\lib\\agents\\AgentRegistry.ts",
+      "fixes": 295
+    },
+    {
+      "file": "src\\lib\\health\\AlertingService.ts",
+      "fixes": 295
+    },
+    {
+      "file": "src\\lib\\health\\HealthCheckService.ts",
+      "fixes": 284
+    },
+    {
+      "file": "scripts\\production-framework\\analyze-production-gaps.ts",
+      "fixes": 279
+    },
+    {
+      "file": "src\\lib\\epc\\self-heal-agent.ts",
+      "fixes": 275
+    },
+    {
+      "file": "src\\components\\ide\\KiroIDE.tsx",
+      "fixes": 272
+    },
+    {
+      "file": "src\\lib\\advanced-monitoring.ts",
+      "fixes": 269
+    },
+    {
+      "file": "src\\components\\health\\HealthCheckDashboard.tsx",
+      "fixes": 268
+    },
+    {
+      "file": "src\\components\\DataSourceManager.tsx",
+      "fixes": 264
+    },
+    {
+      "file": "src\\lib\\automation\\n8n-client.ts",
+      "fixes": 252
+    },
+    {
+      "file": "src\\components\\EnvVariableEditor.tsx",
+      "fixes": 249
+    },
+    {
+      "file": "src\\components\\forms\\ValidatedProjectForm.tsx",
+      "fixes": 247
+    },
+    {
+      "file": "src\\lib\\hierarchical-memory-system.ts",
+      "fixes": 242
+    },
+    {
+      "file": "src\\lib\\knowledge\\rag-engine.ts",
+      "fixes": 242
+    },
+    {
+      "file": "scripts\\execute-deployment-fixes.ts",
+      "fixes": 242
+    },
+    {
+      "file": "src\\lib\\backend\\migration.ts",
+      "fixes": 240
+    },
+    {
+      "file": "src\\lib\\email.ts",
+      "fixes": 236
+    },
+    {
+      "file": "src\\components\\ui\\empty-states.tsx",
+      "fixes": 233
+    },
+    {
+      "file": "src\\components\\mcp\\MCPOrchestrator.tsx",
+      "fixes": 229
+    },
+    {
+      "file": "src\\components\\FeedbackWidget.tsx",
+      "fixes": 228
+    },
+    {
+      "file": "src\\components\\AdvancedCodeEditor.tsx",
+      "fixes": 227
+    },
+    {
+      "file": "src\\lib\\admin-auth.ts",
+      "fixes": 225
+    },
+    {
+      "file": "src\\lib\\validation\\decorators.ts",
+      "fixes": 222
+    },
+    {
+      "file": "scripts\\comprehensive-health-check.ts",
+      "fixes": 219
+    },
+    {
+      "file": "src\\components\\GuidedProjectBuilder.tsx",
+      "fixes": 218
+    },
+    {
+      "file": "src\\lib\\cycle-detection.ts",
+      "fixes": 215
+    },
+    {
+      "file": "src\\lib\\epc\\epc-engine.ts",
+      "fixes": 215
+    },
+    {
+      "file": "src\\lib\\knowledge\\document-loader.ts",
+      "fixes": 213
+    },
+    {
+      "file": "src\\lib\\agents\\DockerAgentManager.ts",
+      "fixes": 211
+    },
+    {
+      "file": "src\\lib\\agents\\AgentLoader.ts",
+      "fixes": 209
+    },
+    {
+      "file": "src\\lib\\epc\\inference-telemetry.ts",
+      "fixes": 207
+    },
+    {
+      "file": "src\\components\\backend\\BackendSelector.tsx",
+      "fixes": 202
+    },
+    {
+      "file": "src\\components\\ui\\icons.tsx",
+      "fixes": 197
+    },
+    {
+      "file": "src\\lib\\agents\\PulsedAgentOrchestrator.ts",
+      "fixes": 182
+    },
+    {
+      "file": "src\\lib\\api\\rate-limiter.ts",
+      "fixes": 181
+    },
+    {
+      "file": "src\\lib\\health\\database-health.ts",
+      "fixes": 179
+    },
+    {
+      "file": "scripts\\production-framework\\daily-health-check.ts",
+      "fixes": 177
+    },
+    {
+      "file": "src\\lib\\admin.ts",
+      "fixes": 173
+    },
+    {
+      "file": "src\\lib\\agents\\AgentCoordinator.ts",
+      "fixes": 167
+    },
+    {
+      "file": "src\\lib\\knowledge\\text-splitter.ts",
+      "fixes": 165
+    },
+    {
+      "file": "src\\components\\AIChat.tsx",
+      "fixes": 164
+    },
+    {
+      "file": "src\\components\\EnvStatusDashboard.tsx",
+      "fixes": 162
+    },
+    {
+      "file": "src\\lib\\api-tracking.ts",
+      "fixes": 162
+    },
+    {
+      "file": "src\\lib\\knowledge\\vector-store.ts",
+      "fixes": 158
+    },
+    {
+      "file": "src\\lib\\agents\\ContainerizedPulseOrchestrator.ts",
+      "fixes": 154
+    },
+    {
+      "file": "src\\components\\ClientRequirementsCapture.tsx",
+      "fixes": 152
+    },
+    {
+      "file": "src\\lib\\agents\\CPURateLimiter.ts",
+      "fixes": 152
+    },
+    {
+      "file": "src\\app\\tutorials\\learning-path\\page.tsx",
+      "fixes": 147
+    },
+    {
+      "file": "src\\components\\AIChatWithSemantic.tsx",
+      "fixes": 146
+    },
+    {
+      "file": "src\\lib\\agents\\GracefulShutdownManager.ts",
+      "fixes": 143
+    },
+    {
+      "file": "src\\app\\docs\\page.tsx",
+      "fixes": 140
+    },
+    {
+      "file": "src\\components\\ui\\button-enhanced.tsx",
+      "fixes": 137
+    },
+    {
+      "file": "src\\lib\\agents\\runtime\\AgentOrchestrator.ts",
+      "fixes": 136
+    },
+    {
+      "file": "src\\lib\\agents\\base\\Agent.ts",
+      "fixes": 135
+    },
+    {
+      "file": "src\\lib\\ai\\AIService.ts",
+      "fixes": 134
+    },
+    {
+      "file": "src\\components\\ui\\use-toast.tsx",
+      "fixes": 133
+    },
+    {
+      "file": "src\\lib\\database\\connection-pool.ts",
+      "fixes": 131
+    },
+    {
+      "file": "src\\components\\LiveProjectPreview.tsx",
+      "fixes": 130
+    },
+    {
+      "file": "src\\lib\\analytics.ts",
+      "fixes": 128
+    },
+    {
+      "file": "src\\lib\\data\\MockDataGenerator.ts",
+      "fixes": 128
+    },
+    {
+      "file": "scripts\\index-project-semantic.ts",
+      "fixes": 118
+    },
+    {
+      "file": "src\\lib\\automation\\workflows\\notification-system.ts",
+      "fixes": 113
+    },
+    {
+      "file": "src\\lib\\backend\\types.ts",
+      "fixes": 112
+    },
+    {
+      "file": "tests\\e2e\\comprehensive-validation.spec.ts",
+      "fixes": 111
+    },
+    {
+      "file": "src\\components\\auth\\SignInForm.tsx",
+      "fixes": 109
+    },
+    {
+      "file": "scripts\\test-mcps.js",
+      "fixes": 105
+    },
+    {
+      "file": "src\\components\\ShowcaseLandingPage.tsx",
+      "fixes": 104
+    },
+    {
+      "file": "scripts\\autonomous-doc-finder.ts",
+      "fixes": 102
+    },
+    {
+      "file": "src\\app\\status\\page.tsx",
+      "fixes": 100
+    },
+    {
+      "file": "src\\lib\\backend\\adapters\\strapi.ts",
+      "fixes": 99
+    },
+    {
+      "file": "src\\app\\demo\\data-flexibility\\page.tsx",
+      "fixes": 98
+    },
+    {
+      "file": "src\\app\\form-builder\\page.tsx",
+      "fixes": 97
+    },
+    {
+      "file": "src\\lib\\logger.ts",
+      "fixes": 95
+    },
+    {
+      "file": "src\\app\\projects\\[id]\\editor\\page.tsx",
+      "fixes": 93
+    },
+    {
+      "file": "src\\components\\LandingPageEnhanced.tsx",
+      "fixes": 90
+    },
+    {
+      "file": "src\\lib\\roadmap\\RoadmapValidator.ts",
+      "fixes": 90
+    },
+    {
+      "file": "src\\utils\\validation.ts",
+      "fixes": 89
+    },
+    {
+      "file": "src\\lib\\production-logger.ts",
+      "fixes": 87
+    },
+    {
+      "file": "src\\components\\dashboard\\DashboardEnhanced.tsx",
+      "fixes": 86
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\base-agent.ts",
+      "fixes": 85
+    },
+    {
+      "file": "src\\components\\FlowchartBuilder.tsx",
+      "fixes": 84
+    },
+    {
+      "file": "src\\lib\\api-middleware.ts",
+      "fixes": 83
+    },
+    {
+      "file": "scripts\\autonomous-fix-applicator.ts",
+      "fixes": 80
+    },
+    {
+      "file": "src\\components\\ui\\form-enhanced.tsx",
+      "fixes": 79
+    },
+    {
+      "file": "src\\app\\projects\\new-guided\\page.tsx",
+      "fixes": 77
+    },
+    {
+      "file": "src\\components\\ui\\loading.tsx",
+      "fixes": 74
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\ToolsRefinerAgent.ts",
+      "fixes": 73
+    },
+    {
+      "file": "src\\lib\\agents\\base\\ValidatedAgent.ts",
+      "fixes": 73
+    },
+    {
+      "file": "scripts\\production-framework\\production-readiness-check.ts",
+      "fixes": 73
+    },
+    {
+      "file": "src\\components\\admin\\SystemResourceMonitor.tsx",
+      "fixes": 68
+    },
+    {
+      "file": "src\\apps\\ui-builder\\store\\useBuilderStore.ts",
+      "fixes": 66
+    },
+    {
+      "file": "src\\components\\ui\\logo.tsx",
+      "fixes": 66
+    },
+    {
+      "file": "src\\lib\\ai.ts",
+      "fixes": 65
+    },
+    {
+      "file": "src\\hooks\\useMCP.ts",
+      "fixes": 64
+    },
+    {
+      "file": "src\\lib\\theme\\dark-mode.tsx",
+      "fixes": 64
+    },
+    {
+      "file": "scripts\\run-agent.js",
+      "fixes": 64
+    },
+    {
+      "file": "src\\hooks\\useKiroIDE.ts",
+      "fixes": 63
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\AdvisorAgent.ts",
+      "fixes": 62
+    },
+    {
+      "file": "src\\components\\dashboard\\EnterpriseDashboard.tsx",
+      "fixes": 60
+    },
+    {
+      "file": "src\\lib\\backend\\adapter-factory.ts",
+      "fixes": 58
+    },
+    {
+      "file": "tests\\simulation\\client-simulation-runner.ts",
+      "fixes": 58
+    },
+    {
+      "file": "src\\lib\\design-system\\components.tsx",
+      "fixes": 57
+    },
+    {
+      "file": "scripts\\verify-build-output.js",
+      "fixes": 57
+    },
+    {
+      "file": "src\\lib\\project-storage.ts",
+      "fixes": 54
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\PromptRefinerAgent.ts",
+      "fixes": 51
+    },
+    {
+      "file": "src\\lib\\mcp\\index.ts",
+      "fixes": 51
+    },
+    {
+      "file": "src\\lib\\automation\\nodes\\agent-orchestration.ts",
+      "fixes": 49
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\AgentRefinerAgent.ts",
+      "fixes": 48
+    },
+    {
+      "file": "src\\lib\\agents\\bmad\\ProjectManagerAgent.ts",
+      "fixes": 48
+    },
+    {
+      "file": "src\\components\\config\\ConfigurationDashboard.tsx",
+      "fixes": 47
+    },
+    {
+      "file": "src\\hooks\\useN8nAutomation.ts",
+      "fixes": 45
+    },
+    {
+      "file": "src\\lib\\breadcrumb\\breadcrumb-agent.ts",
+      "fixes": 45
+    },
+    {
+      "file": "scripts\\initialize-agent-system.ts",
+      "fixes": 45
+    },
+    {
+      "file": "scripts\\mcp-doc-agent.ts",
+      "fixes": 45
+    },
+    {
+      "file": "src\\components\\InferenceSafeMode.tsx",
+      "fixes": 44
+    },
+    {
+      "file": "src\\hooks\\useRAG.ts",
+      "fixes": 42
+    },
+    {
+      "file": "src\\lib\\agents\\bmad\\AnalystAgent.ts",
+      "fixes": 42
+    },
+    {
+      "file": "src\\lib\\ide\\kiro-server-mock.ts",
+      "fixes": 41
+    },
+    {
+      "file": "src\\components\\ui\\card-enhanced.tsx",
+      "fixes": 40
+    },
+    {
+      "file": "src\\lib\\agents\\AgentOrchestrator.ts",
+      "fixes": 38
+    },
+    {
+      "file": "src\\app\\tutorials\\page.tsx",
+      "fixes": 35
+    },
+    {
+      "file": "src\\components\\DesignSystemShowcase.tsx",
+      "fixes": 34
+    },
+    {
+      "file": "src\\utils\\helpers.ts",
+      "fixes": 34
+    },
+    {
+      "file": "src\\app\\api\\agent-chat\\route.ts",
+      "fixes": 33
+    },
+    {
+      "file": "src\\components\\collaboration\\CollaborationDashboard.tsx",
+      "fixes": 33
+    },
+    {
+      "file": "src\\lib\\templates.ts",
+      "fixes": 33
+    },
+    {
+      "file": "src\\components\\admin\\EnhancedAdminPanel.tsx",
+      "fixes": 31
+    },
+    {
+      "file": "src\\lib\\agents\\index.ts",
+      "fixes": 30
+    },
+    {
+      "file": "src\\components\\ui\\dropdown-menu.tsx",
+      "fixes": 29
+    },
+    {
+      "file": "src\\lib\\design-system.ts",
+      "fixes": 29
+    },
+    {
+      "file": "scripts\\monitor-agents.ts",
+      "fixes": 29
+    },
+    {
+      "file": "src\\components\\admin\\AdminDashboard.tsx",
+      "fixes": 28
+    },
+    {
+      "file": "src\\components\\ProjectGenerator.tsx",
+      "fixes": 28
+    },
+    {
+      "file": "src\\lib\\validation\\schemas.ts",
+      "fixes": 28
+    },
+    {
+      "file": "src\\packages\\self-check\\causal-feedback-replayer.ts",
+      "fixes": 27
+    },
+    {
+      "file": "scripts\\mcp-autonomous-integration.ts",
+      "fixes": 27
+    },
+    {
+      "file": "src\\components\\WelcomeScreen.tsx",
+      "fixes": 26
+    },
+    {
+      "file": "src\\components\\ui\\button-premium.tsx",
+      "fixes": 25
+    },
+    {
+      "file": "src\\lib\\automation\\workflows\\project-deployment.ts",
+      "fixes": 24
+    },
+    {
+      "file": "scripts\\update-claude-memory.ts",
+      "fixes": 24
+    },
+    {
+      "file": "src\\components\\ui\\toaster.tsx",
+      "fixes": 23
+    },
+    {
+      "file": "src\\lib\\semantic\\SemanticSearchService.ts",
+      "fixes": 23
+    },
+    {
+      "file": "src\\packages\\self-check\\dependency-auditor.ts",
+      "fixes": 23
+    },
+    {
+      "file": "src\\components\\marketplace\\TemplateMarketplace.tsx",
+      "fixes": 22
+    },
+    {
+      "file": "scripts\\env-cli.ts",
+      "fixes": 22
+    },
+    {
+      "file": "src\\components\\admin\\AdminAnalytics.tsx",
+      "fixes": 21
+    },
+    {
+      "file": "src\\hooks\\useSemanticSearch.ts",
+      "fixes": 21
+    },
+    {
+      "file": "scripts\\load-deployment-agents.ts",
+      "fixes": 21
+    },
+    {
+      "file": "src\\packages\\causal-engine\\scorer.ts",
+      "fixes": 20
+    },
+    {
+      "file": "tests\\setup.ts",
+      "fixes": 20
+    },
+    {
+      "file": "src\\components\\SemanticSearchDemo.tsx",
+      "fixes": 19
+    },
+    {
+      "file": "src\\app\\api\\templates\\route.ts",
+      "fixes": 18
+    },
+    {
+      "file": "src\\app\\auth\\signup\\page.tsx",
+      "fixes": 18
+    },
+    {
+      "file": "src\\components\\ClientOnlyAuth.tsx",
+      "fixes": 18
+    },
+    {
+      "file": "src\\components\\ProgressTracker.tsx",
+      "fixes": 18
+    },
+    {
+      "file": "src\\components\\ui\\toast.tsx",
+      "fixes": 18
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\frontend-agent.ts",
+      "fixes": 18
+    },
+    {
+      "file": "src\\lib\\env.ts",
+      "fixes": 18
+    },
+    {
+      "file": "src\\app\\api\\n8n\\webhook\\route.ts",
+      "fixes": 17
+    },
+    {
+      "file": "src\\app\\contact\\page.tsx",
+      "fixes": 17
+    },
+    {
+      "file": "src\\components\\ui\\collapsible.tsx",
+      "fixes": 17
+    },
+    {
+      "file": "src\\components\\ui\\navigation-menu.tsx",
+      "fixes": 17
+    },
+    {
+      "file": "src\\lib\\auth-helpers.ts",
+      "fixes": 17
+    },
+    {
+      "file": "src\\app\\api\\health\\route.ts",
+      "fixes": 16
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\architect-agent.ts",
+      "fixes": 16
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\backend-agent.ts",
+      "fixes": 16
+    },
+    {
+      "file": "src\\components\\ui\\card.tsx",
+      "fixes": 15
+    },
+    {
+      "file": "scripts\\comprehensive-typescript-fix.ts",
+      "fixes": 15
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\AssistantPrompt.tsx",
+      "fixes": 14
+    },
+    {
+      "file": "src\\packages\\self-check\\report-generator.ts",
+      "fixes": 14
+    },
+    {
+      "file": "src\\app\\help\\page.tsx",
+      "fixes": 13
+    },
+    {
+      "file": "src\\components\\DevelopmentWorkflow.tsx",
+      "fixes": 13
+    },
+    {
+      "file": "src\\components\\navigation.tsx",
+      "fixes": 13
+    },
+    {
+      "file": "src\\components\\ui\\alert.tsx",
+      "fixes": 13
+    },
+    {
+      "file": "tests\\simulation\\client-scenarios.ts",
+      "fixes": 13
+    },
+    {
+      "file": "src\\app\\api\\visual\\upload\\route.ts",
+      "fixes": 12
+    },
+    {
+      "file": "src\\app\\page.tsx",
+      "fixes": 12
+    },
+    {
+      "file": "src\\components\\AgentPulseMonitor.tsx",
+      "fixes": 12
+    },
+    {
+      "file": "src\\components\\ui\\sheet.tsx",
+      "fixes": 12
+    },
+    {
+      "file": "scripts\\agent-health-check.js",
+      "fixes": 12
+    },
+    {
+      "file": "src\\components\\ui\\select.tsx",
+      "fixes": 11
+    },
+    {
+      "file": "src\\middleware.ts",
+      "fixes": 11
+    },
+    {
+      "file": "scripts\\run-chaos-tests.ts",
+      "fixes": 11
+    },
+    {
+      "file": "src\\app\\api\\n8n\\execute\\route.ts",
+      "fixes": 10
+    },
+    {
+      "file": "src\\app\\api\\roadmap\\validate\\route.ts",
+      "fixes": 10
+    },
+    {
+      "file": "src\\app\\templates\\page.tsx",
+      "fixes": 10
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\ComponentPropsEditor.tsx",
+      "fixes": 10
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\ComponentRenderer.tsx",
+      "fixes": 10
+    },
+    {
+      "file": "src\\components\\LandingPageProduction.tsx",
+      "fixes": 10
+    },
+    {
+      "file": "src\\packages\\causal-engine\\logger.ts",
+      "fixes": 10
+    },
+    {
+      "file": "scripts\\run-client-simulations.ts",
+      "fixes": 10
+    },
+    {
+      "file": "src\\app\\api\\analytics\\route.ts",
+      "fixes": 9
+    },
+    {
+      "file": "src\\app\\api\\auth\\[...nextauth]\\options.ts",
+      "fixes": 9
+    },
+    {
+      "file": "src\\app\\auth\\signin\\page.tsx",
+      "fixes": 9
+    },
+    {
+      "file": "src\\app\\docs\\[slug]\\page.tsx",
+      "fixes": 9
+    },
+    {
+      "file": "src\\app\\tutorials\\[id]\\page.tsx",
+      "fixes": 9
+    },
+    {
+      "file": "src\\components\\ui\\scroll-area.tsx",
+      "fixes": 9
+    },
+    {
+      "file": "src\\components\\ui\\tabs.tsx",
+      "fixes": 9
+    },
+    {
+      "file": "src\\lib\\mcp\\mcp-registry.ts",
+      "fixes": 9
+    },
+    {
+      "file": "src\\lib\\validation\\index.ts",
+      "fixes": 9
+    },
+    {
+      "file": "src\\packages\\causal-engine\\assistant-utils.ts",
+      "fixes": 9
+    },
+    {
+      "file": "src\\app\\api\\semantic\\search\\route.ts",
+      "fixes": 8
+    },
+    {
+      "file": "src\\app\\api\\support\\chat\\route.ts",
+      "fixes": 8
+    },
+    {
+      "file": "src\\app\\api\\tutorials\\progress\\route.ts",
+      "fixes": 8
+    },
+    {
+      "file": "src\\app\\api\\visual\\generate\\route.ts",
+      "fixes": 8
+    },
+    {
+      "file": "src\\app\\api\\webhooks\\stripe\\route.ts",
+      "fixes": 8
+    },
+    {
+      "file": "tests\\e2e\\basic-flow.test.ts",
+      "fixes": 8
+    },
+    {
+      "file": "src\\app\\api\\backend-example\\route.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\api\\feedback\\route.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\api\\n8n\\workflows\\route.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\api\\requirements\\process\\route.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\api\\semantic\\index\\route.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\api\\validated-chat\\route.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\api\\visual\\analyze\\route.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\layout.tsx",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\press\\page.tsx",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\pricing\\page.tsx",
+      "fixes": 7
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\CodeViewer.tsx",
+      "fixes": 7
+    },
+    {
+      "file": "src\\apps\\ui-builder\\utils\\generateCode.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\components\\providers.tsx",
+      "fixes": 7
+    },
+    {
+      "file": "src\\lib\\design-system\\theme.ts",
+      "fixes": 7
+    },
+    {
+      "file": "src\\app\\admin\\login\\page.tsx",
+      "fixes": 6
+    },
+    {
+      "file": "src\\app\\admin-direct\\page.tsx",
+      "fixes": 6
+    },
+    {
+      "file": "src\\app\\config\\page.tsx",
+      "fixes": 6
+    },
+    {
+      "file": "src\\app\\dashboard\\page.tsx",
+      "fixes": 6
+    },
+    {
+      "file": "src\\components\\ui\\progress.tsx",
+      "fixes": 6
+    },
+    {
+      "file": "src\\components\\ui\\radio-group.tsx",
+      "fixes": 6
+    },
+    {
+      "file": "src\\packages\\causal-engine\\explorer-ui.tsx",
+      "fixes": 6
+    },
+    {
+      "file": "src\\app\\api\\admin\\auth\\login\\route.ts",
+      "fixes": 5
+    },
+    {
+      "file": "src\\app\\api\\auth\\register\\route.ts",
+      "fixes": 5
+    },
+    {
+      "file": "src\\app\\api\\collaboration\\rooms\\route.ts",
+      "fixes": 5
+    },
+    {
+      "file": "src\\app\\api\\config\\route.ts",
+      "fixes": 5
+    },
+    {
+      "file": "src\\app\\blog\\[id]\\page.tsx",
+      "fixes": 5
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\BuilderCanvas.tsx",
+      "fixes": 5
+    },
+    {
+      "file": "src\\apps\\ui-builder\\utils\\exportProject.ts",
+      "fixes": 5
+    },
+    {
+      "file": "src\\components\\ui\\button-basic.tsx",
+      "fixes": 5
+    },
+    {
+      "file": "src\\components\\ui\\label.tsx",
+      "fixes": 5
+    },
+    {
+      "file": "src\\components\\ui\\separator.tsx",
+      "fixes": 5
+    },
+    {
+      "file": "src\\lib\\agents\\runtime\\index.ts",
+      "fixes": 5
+    },
+    {
+      "file": "src\\app\\api\\admin\\direct-auth\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\app\\api\\admin\\users\\[id]\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\app\\api\\agents\\pulse-status\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\app\\api\\auth\\session\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\app\\api\\mcp\\status\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\app\\collaborate\\page.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\app\\security\\page.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\Sidebar.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\components\\builder\\NoCodeBuilder.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\components\\ErrorBoundary.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\components\\LandingPage.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\components\\layout\\ConditionalLayout.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\components\\ui\\input.tsx",
+      "fixes": 4
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\index.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\lib\\agents\\bmad\\index.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\lib\\auth.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\lib\\backend\\index.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\types\\index.ts",
+      "fixes": 4
+    },
+    {
+      "file": "src\\app\\api\\admin\\analytics\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\api\\admin\\debug\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\api\\admin\\stats\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\api\\admin\\users\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\api\\cycle-detection\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\api\\email\\test\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\api-docs\\[slug]\\page.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\collaborate\\dashboard\\page.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\community\\page.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\features\\page.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\apps\\ui-builder\\app.config.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\DeploymentPanel.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\components\\admin\\SelfCheckTrigger.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\components\\layout\\ResponsiveLayout.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\components\\ui\\button.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\components\\ui\\resizable.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\components\\ui\\textarea.tsx",
+      "fixes": 3
+    },
+    {
+      "file": "src\\config\\pulse.config.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\utils\\formatting.ts",
+      "fixes": 3
+    },
+    {
+      "file": "src\\app\\analytics\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "src\\app\\api\\admin\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "src\\app\\api\\auth\\[...nextauth]\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "src\\app\\community\\guidelines\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "src\\app\\demo\\design-system\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "src\\app\\ui-builder\\page.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\Toolbar.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "src\\components\\health\\AlertsPanel.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "src\\components\\ui\\switch.tsx",
+      "fixes": 2
+    },
+    {
+      "file": "src\\hooks\\use-toast.ts",
+      "fixes": 2
+    },
+    {
+      "file": "src\\utils\\cn.ts",
+      "fixes": 2
+    },
+    {
+      "file": "src\\app\\about\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\admin\\login\\layout.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\admin\\performance\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\api-docs\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\blog\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\builder\\no-code\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\builder\\pro-code\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\cookies\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\enterprise\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\gdpr\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\privacy\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\app\\terms\\page.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\PreviewPane.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\apps\\ui-builder\\lib\\componentList.ts",
+      "fixes": 1
+    },
+    {
+      "file": "src\\apps\\ui-builder\\types\\index.ts",
+      "fixes": 1
+    },
+    {
+      "file": "src\\components\\ContainerMonitor.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\components\\health\\SystemMetrics.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\components\\ui-builder\\UIBuilderHomepage.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\lib\\ssr-guard.tsx",
+      "fixes": 1
+    },
+    {
+      "file": "src\\lib\\utils.ts",
+      "fixes": 1
+    },
+    {
+      "file": "src\\lib\\validation\\agent-schemas.ts",
+      "fixes": 1
+    },
+    {
+      "file": "src\\packages\\self-check\\module-checker.ts",
+      "fixes": 1
+    },
+    {
+      "file": "src\\utils\\constants.ts",
+      "fixes": 1
+    },
+    {
+      "file": "src\\utils\\index.ts",
+      "fixes": 1
+    }
+  ]
+}

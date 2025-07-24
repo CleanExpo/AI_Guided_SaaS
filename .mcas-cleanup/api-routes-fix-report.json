@@ -1,0 +1,161 @@
+{
+  "timestamp": "2025-07-23T19:57:10.474Z",
+  "filesProcessed": 41,
+  "filesFixed": 38,
+  "totalFixes": 94,
+  "duration": "0.26s",
+  "fixedFiles": [
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\analytics\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\auth\\login\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\debug\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\direct-auth\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\stats\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\users\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\admin\\users\\[id]\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\agent-chat\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\agents\\pulse-config\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\agents\\pulse-status\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\analytics\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\auth\\register\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\auth\\session\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\backend-example\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\collaboration\\rooms\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\config\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\cycle-detection\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\email\\test\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\env\\status\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\feedback\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\health\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\mcp\\status\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\n8n\\execute\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\n8n\\webhook\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\n8n\\workflows\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\requirements\\process\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\roadmap\\validate\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\semantic\\index\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\semantic\\search\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\support\\chat\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\templates\\route.ts",
+      "fixes": 1
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\tutorials\\progress\\route.ts",
+      "fixes": 3
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\validated-chat\\route.ts",
+      "fixes": 2
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\visual\\analyze\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\visual\\generate\\route.ts",
+      "fixes": 4
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\visual\\upload\\route.ts",
+      "fixes": 6
+    },
+    {
+      "file": "D:\\AI Guided SaaS\\src\\app\\api\\webhooks\\stripe\\route.ts",
+      "fixes": 2
+    }
+  ]
+}

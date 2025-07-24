@@ -1,3 +1,4 @@
+/* BREADCRUMB: app - Application page or route */
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
@@ -10,31 +11,31 @@ interface MCPStatus {
   status: string;
   name: string;
   version: string;
-  lastHealthCheck: string;
+  lastHealthCheck: string
 }
 
 export default function AdminMCPPage() {
   const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     // Simulate loading MCP server status
     setTimeout(() => {
       setMcpServers([
-        { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() },
-        { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() },
+        { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() };
+        { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() };
         { status: 'running', name: 'sequential-thinking', version: '1.2.0', lastHealthCheck: new Date().toISOString() }
       ]);
-      setLoading(false);
-    }, 1000);
-  }, []);
+      setLoading(false)
+}, 1000)
+}, []);
 
   return (
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">MCP Server Management</h1>
         <Button>
-          <RefreshCw className="w-4 h-4 mr-2" />
+          <RefreshCw className="w-4 h-4 mr-2"   />
           Refresh Status
         </Button>
       </div>
@@ -50,9 +51,9 @@ export default function AdminMCPPage() {
                   <span>{server.name}</span>
                   <Badge variant={server.status === 'running' ? 'default' : 'destructive'}>
                     {server.status === 'running' ? (
-                      <CheckCircle className="w-3 h-3 mr-1" />
+                      <CheckCircle className="w-3 h-3 mr-1"   />
                     ) : (
-                      <XCircle className="w-3 h-3 mr-1" />
+                      <XCircle className="w-3 h-3 mr-1"   />
                     )}
                     {server.status}
                   </Badge>
@@ -66,6 +67,6 @@ export default function AdminMCPPage() {
           ))
         )}
       </div>
-    </div>
+    </div>;
   );
 }

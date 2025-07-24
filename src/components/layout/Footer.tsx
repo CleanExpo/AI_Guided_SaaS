@@ -1,9 +1,8 @@
 import React from 'react';
+
 export function Footer() {
-  return (
-    <footer className="border-t bg-background"><div className="container py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8" >></div>
-            <h3 className="font-bold text-lg mb-4">AI Guided SaaS</h3>
+  return (<footer className="border-t bg-background"><div className="container py-8">, <div className="grid grid-cols-1 md:grid-cols-4 gap-8" >></div>;
+        <h3 className="font-bold text-lg mb-4">AI Guided SaaS</h3>
             <p className="text-sm text-muted-foreground">
               Complete AI-powered SaaS development platform
 </p>

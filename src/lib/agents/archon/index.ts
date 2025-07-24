@@ -1,8 +1,9 @@
-// Archon Refinement Agents
+/* BREADCRUMB: agent.orchestration - Multi-agent system coordination */
+// Archon Refinement Agents;
 export { PromptRefinerAgent } from './PromptRefinerAgent';export { ToolsRefinerAgent } from './ToolsRefinerAgent';
 export { AgentRefinerAgent } from './AgentRefinerAgent';
 export { AdvisorAgent } from './AdvisorAgent';
-// Export types
+// Export types;
 export type { RefinedPrompt,
   PromptImprovement,
   PromptClarity,
@@ -29,5 +30,4 @@ export type {
   RiskAssessment,
   Alternative,
   DecisionMatrix,
-  ActionPlan from './AdvisorAgent'
-}
+  ActionPlan from './AdvisorAgent';

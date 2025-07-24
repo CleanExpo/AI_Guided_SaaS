@@ -1,9 +1,9 @@
+/* BREADCRUMB: app - Application page or route */;
 import React from 'react';
 
 export default function AdminLoginLayout({
   children
 }: {
-  children: React.ReactNode;
-}) {
-  return <React.Fragment>{children}</React.Fragment>;
-}
+  children: React.ReactNode}) {
+  return <React.Fragment>{children}</React.Fragment>
+};

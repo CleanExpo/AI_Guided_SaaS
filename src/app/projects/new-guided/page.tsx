@@ -1,3 +1,4 @@
+/* BREADCRUMB: app - Application page or route */
 'use client';
 import React from 'react';
 import { useState } from 'react';
@@ -5,114 +6,91 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';/export default function NewGuidedProjectPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [completedData, setCompletedData] = useState(
-  return (
-    name: '',
+  const [completedData, setCompletedData] = useState(, return (;
+name: '';
     description: ''
     , type: 'web'}
   });
-  const _handleGenerateProject = async () => {setIsLoading(true);
-    try {
-      
-               Send to API to generate project
-                    const response = await fetch('
+  
+const _handleGenerateProject = async () => {setIsLoading(true), try {;
+               Send to API to generate project, const response = await fetch(';
               api
               projects/generate', {/        method: 'POST'}
-        headers: { 'Content-Type': 'application/json' },/    body: JSON.stringify({...completedData,
+        headers: { 'Content-Type': 'application/json' },/    body: JSON.stringify({...completedData;
           guided: true}
         })};
-      if(response.ok) {const project = await response.json()
-        console.log('Project, created:', project)}
-}} catch (error) {console.error('Error creating, project:', error)}
-    } finally {setIsLoading(false)}
+      if (response.ok) {const project = await response.json(), console.log('Project, created:', project)}} catch (error) {console.error('Error creating, project:', error)} finally {setIsLoading(false)}
   return (
-    <div className="min-h-screen bg-gray-50 py-8">;<
-              div>
-                    <div className="container mx-auto px-4 max-w-4xl mb-8"><
-              div>
+    <div className="min-h-screen bg-gray-50 py-8">;</div>
+                    <div className="container mx-auto px-4 max-w-4xl mb-8"   />
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Create New Guided Project
-<
-              h1>
+</h1>
                         <p className="text-gray-600">
             Let AI guide you through creating your perfect project.
-<
-              p>
+</p>
                       <Card>
           <CardHeader>
-            <CardTitle>Project Details<
-              CardTitle>
+            <CardTitle>Project Details</CardTitle>
                         <CardContent>
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Project Name
-<
-              label>
+</label>
                               <Input
-                  type="text"
-                  value={completedData.name}
-                  onChange={(e) => setCompletedData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Enter project name"
+type="text";
+
+const value  = {completedData.name}
+                  const onChange = {(e) => setCompletedData(prev => ({ ...prev, name: e.target.value }))};
+                  placeholder="Enter project name";
                 
               >
-              <
-              div>
+              </div>
                             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                     Description
-<
-              label>
-                              <textarea
-                  value={completedData.description}
-                  onChange={(e) => setCompletedData(prev => ({ ...prev, description: e.target.value }))}
-                  placeholder="Describe your project"
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                  rows={3}
+</label>
+                              <textarea;
+
+const value = {completedData.description}
+                  const onChange = {(e) => setCompletedData(prev => ({ ...prev, description: e.target.value }))};
+                  placeholder="Describe your project";
+className="w-full px-3 py-2 border border-gray-300 rounded";
+
+const rows  = {3}
                 
               >
-              <
-              div>
+              </div>
                             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Project Type
-<
-              label>
-                              <select
-                  value={completedData.type}
-                  onChange={(e) => setCompletedData(prev => ({ ...prev: type: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
+</label>;
+                              <select;
+
+const value = {completedData.type}
+                  const onChange  = {(e) => setCompletedData(prev => ({ ...prev: type: e.target.value }))};
+                  className="w-full px-3 py-2 border border-gray-300 rounded";
                 >
-                  <option value="web">Web Application<
-              option>
-                                <option value="mobile">Mobile App<
-              option>
-                                <option value="api">API Service<
-              option>
-              <
-              div>
+                  <option value="web">Web Application</option>
+                                <option value="mobile">Mobile App</option>
+                                <option value="api">API Service</option>
+              </div>
                             <Button
-                onClick={handleGenerateProject}
-                disabled={isLoading || !completedData.name}
-                className="w-full"
+
+const onClick = {handleGenerateProject}
+                const disabled = {isLoading || !completedData.name};
+                className="w-full";
               >
                 {isLoading ? 'Creating Project...' : 'Create Guided Project'}
-<
-              Button>
-              <
-              CardContent>
-              <
-              div>
+</Button>
+              </CardContent>
+              </div>
                 );
-<
-              textarea>
-              <
-              any>
+</textarea>
+              </any>
                   
-    <
-              select>
-                  <
-              CardHeader>
-                  <
-              Card>
+    </select>
+                  </CardHeader>
+                  </Card>
                 }

@@ -12,43 +12,45 @@ import { cn } from '@/lib/utils';
 export default function LandingPageProduction() {
   const [appIdea, setAppIdea] = useState<any>('');
   const [isLoading, setIsLoading] = useState<any>(false);
-  const [selectedTier, setSelectedTier] = useState<'no-code' | 'pro-code'>('no-code');
-  const [scrolled, setScrolled] = useState<any>(false);
-  const router = useRouter()
+  const [selectedTier, setSelectedTier]  = useState<'no-code' | 'pro-code'>('no-code');
+
+const [scrolled, setScrolled] = useState<any>(false);
+  
+const router = useRouter();
   useEffect(() => {
     const _handleScroll = (): void => {
-      setScrolled(window.scrollY > 20)
-    };
+      setScrolled(window.scrollY > 20);
+};
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, []);
-  const _handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!appIdea.trim()) return;
-    setIsLoading(true)
+    return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+  
+const _handleSubmit = async (e: React.FormEvent) => {;
+    e.preventDefault(), if (!appIdea.trim()) return null, setIsLoading(true);
     setTimeout(() => {
       router.push(`/analyze?idea=${encodeURIComponent(appIdea)}`);`
   }, 1500)
   };
-  const features = [
-  {
-  icon: Bot,
-    title: 'AI-Powered Development',
+  
+const features = [
+  {;
+  icon: Bot;
+    title: 'AI-Powered Development';
   description: 'Intelligent code generation that understands your requirements'
-    },
+    };
     {
-      icon: Zap,
-    title: '10x Faster',
+      icon: Zap;
+    title: '10x Faster';
   description: 'Build production-ready apps in minutes, not months'
     },
     {
-      icon: Shield,
-    title: 'Enterprise Ready',
+      icon: Shield;
+    title: 'Enterprise Ready';
   description: 'Built-in security, scalability, and best practices'
     },
     {
-      icon: Globe,
-    title: 'Deploy Anywhere',
+      icon: Globe;
+    title: 'Deploy Anywhere';
   description: 'One-click deployment to Vercel, AWS, or any cloud'
 }
   ];
@@ -60,7 +62,7 @@ export default function LandingPageProduction() {
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-6 h-6 text-orange-500" />
+              <Sparkles className="w-6 h-6 text-orange-500"   />
               <span className="text-xl font-semibold">AI Guided SaaS</span>
             <div className="flex items-center gap-4">
               <Link href="/auth/signin">
@@ -76,10 +78,11 @@ export default function LandingPageProduction() {
           <div className="text-center space-y-6">
             <Badge className="bg-orange-100 text-orange-700, dark:bg-orange-900/30 dark:text-orange-400">
               🚀 Trusted by 10,000+ developers
-</Badge>
-            <h1 className="text-5xl, md: text-7xl font-bold bg-gradient-to-r from-gray-900 via-orange-600 to-gray-900, dark: from-white; dark:via-orange-400 dark:to-white bg-clip-text text-transparent">
+</Badge>;
+            <h1 className="text-5xl, md: text-7xl font-bold bg-gradient-to-r from-gray-900 via-orange-600 to-gray-900, dark: from-white;
+  dark:via-orange-400 dark:to-white bg-clip-text text-transparent">
               From Idea to Production
-              <br><span className="text-4xl md:text-6xl">in Minutes</span>
+              <br><span className="text-4xl md:text-6xl">in Minutes</span></br>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               The revolutionary AI-powered platform that transforms your ideas into
               production-ready applications. No coding experience? No problem.
@@ -88,24 +91,27 @@ export default function LandingPageProduction() {
             <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mt-8">
               <div className="relative">
                 <Input
-                  type="text"
-                  value={appIdea}
-                  onChange={(e) => setAppIdea(e.target.value)}
-                  placeholder="Describe your app idea..."
-                  className="w-full h-16 text-lg px-6 pr-32 rounded-full border-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl"
-                  disabled={isLoading}
+type="text";
+
+const value = {appIdea}
+                  const onChange = {(e) => setAppIdea(e.target.value)};
+                  placeholder="Describe your app idea...";
+className="w-full h-16 text-lg px-6 pr-32 rounded-full border-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl";
+
+const disabled = {isLoading}
                 />
-                <Button
-                  type="submit"
-                  disabled={!appIdea.trim() || isLoading}
-                  className="absolute right-2 top-2 h-12 px-6 rounded-full bg-orange-500 hover:bg-orange-600"
+                <Button;
+type="submit";
+
+const disabled = {!appIdea.trim() || isLoading};
+                  className="absolute right-2 top-2 h-12 px-6 rounded-full bg-orange-500 hover:bg-orange-600";
                 >
                   {isLoading ? (
-                    <div className="flex items-center gap-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /></div>
+                    <div className="flex items-center gap-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /   />
                       <span>Building...</span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Build Now <ArrowRight className="w-4 h-4" />
+                      Build Now <ArrowRight className="w-4 h-4"   />
 </span>
       )}
 </Button>
@@ -122,9 +128,9 @@ export default function LandingPageProduction() {
           <div className="grid, md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (\n    </div>
               <Card key={index} className="p-6, hover:shadow-lg transition-all hover:-translate-y-1">
-                <feature.icon className="w-12 h-12 text-orange-500 mb-4" />
+                <feature.icon className="w-12 h-12 text-orange-500 mb-4"   />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-          <p className="{feature.description}"></p>
+          <p className="{feature.description}"   />
         </div>
     );)}
       </div>
@@ -152,7 +158,7 @@ export default function LandingPageProduction() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-4 gap-8" >></div>
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-6 h-6 text-orange-500" />
+                <Sparkles className="w-6 h-6 text-orange-500"   />
                 <span className="text-xl font-semibold">AI Guided SaaS</span>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Building the future of software development
@@ -166,16 +172,16 @@ export default function LandingPageProduction() {
             <div>
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <li><Link href="/docs" className="hover:text-orange-500">Documentation</Link>
-                <li><Link href="/blog" className="hover:text-orange-500">Blog</Link>
+                <li><Link href="/docs" className="hover:text-orange-500">Documentation</Link></Link>
+                <li><Link href="/blog" className="hover:text-orange-500">Blog</Link></Link>
 </ul>
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <li><Link href="/about" className="hover:text-orange-500">About</Link>
-                <li><Link href="/contact" className="hover:text-orange-500">Contact</Link>
+                <li><Link href="/about" className="hover:text-orange-500">About</Link></Link>
+                <li><Link href="/contact" className="hover:text-orange-500">Contact</Link></Link>
 </ul>
-          <div className="mt-12 pt-8 border-t text-center text-sm text-gray-600 dark:text-gray-400">
+          <div className="mt-12 pt-8 border-t text-center text-sm text-gray-600 dark:text-gray-400"></div>
             © 2025 AI Guided SaaS. All rights reserved.</div>
   );
 </div>

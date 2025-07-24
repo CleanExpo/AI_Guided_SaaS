@@ -1,20 +1,21 @@
-// Core project types
+/* BREADCRUMB: unknown - Purpose to be determined */
+// Core project types;
 export interface ProjectConfig {
-  name: string,
-  description: string,
-  features: string[],
-  techStack: string[],
-  framework: string,
-  styling: string,
+  name: string;
+  description: string;
+  features: string[];
+  techStack: string[];
+  framework: string;
+  styling: string;
   database?: string,
   authentication?: string,
   deployment?: string,
   apiIntegration?: boolean,
   realTimeFeatures?: boolean,
   technology?: {
-    frontend: string,
-  backend: string,
-  database: string,
+    frontend: string;
+  backend: string;
+  database: string;
   hosting: string
   };
   targetAudience?: string;
@@ -22,9 +23,9 @@ export interface ProjectConfig {
   persona?: Persona
 };
 export interface ProjectFile {
-  name: string,
-  path: string,
-  content: string,
+  name: string;
+  path: string;
+  content: string;
   type: | 'component'| 'page'
     | 'api'
     | 'config'
@@ -33,61 +34,61 @@ export interface ProjectFile {
     | 'documentation'
 };
 export interface Persona {
-  id: string,
-  name: string,
-  role: string,
-  description: string,
-  expertise: string[],
-  avatar: string,
-  color: string,
+  id: string;
+  name: string;
+  role: string;
+  description: string;
+  expertise: string[];
+  avatar: string;
+  color: string;
   tone?: string
 };
 export interface ChatMessage {
-  id: string,
-  content: string,
-  sender: 'user' | 'assistant',
-  timestamp: Date,
+  id: string;
+  content: string;
+  sender: 'user' | 'assistant';
+  timestamp: Date;
   type?: 'text' | 'code' | 'file',
   role?: 'user' | 'assistant'
 }
-// Analytics types
+// Analytics types;
 export interface RevenueMetrics {
-  totalRevenue: number,
-  monthlyRevenue: number,
-  yearlyRevenue: number,
+  totalRevenue: number;
+  monthlyRevenue: number;
+  yearlyRevenue: number;
   growth: number
 };
 export interface UserMetrics {
-  totalUsers: number,
-  activeUsers: number,
-  newUsers: number,
+  totalUsers: number;
+  activeUsers: number;
+  newUsers: number;
   retention: number
 };
 export interface SystemMetrics {
-  uptime: number,
-  responseTime: number,
-  errorRate: number,
+  uptime: number;
+  responseTime: number;
+  errorRate: number;
   throughput: number
 }
-// Admin types
+// Admin types;
 export interface SystemCheck {
-  name: string,
-  status: 'pass' | 'warn' | 'fail',
-  message: string,
+  name: string;
+  status: 'pass' | 'warn' | 'fail';
+  message: string;
   details?: string
 }
-// Collaboration types
+// Collaboration types;
 export interface CollaborationRoom {
-  id: string,
-  name: string,
-  participants: string[],
-  createdAt: Date,
+  id: string;
+  name: string;
+  participants: string[];
+  createdAt: Date;
   updatedAt: Date
 };
 export interface CollaborationUser {
-  id: string,
-  name: string,
-  email: string,
+  id: string;
+  name: string;
+  email: string;
   avatar?: string,
     isOnline: boolean
 }

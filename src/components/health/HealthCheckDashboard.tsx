@@ -7,8 +7,8 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Activity, CheckCircle, AlertCircle, XCircle, RefreshCw, Clock, Database, Globe, Server, Cpu, HardDrive, Zap } from 'lucide-react';
 interface HealthCheck {
-name: string,
-  status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown',
+name: string;
+  status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown';
   responseTime?: number,
   details?,
   error?: string,
@@ -16,116 +16,105 @@ name: string,
 };
 interface SystemMetrics {
 cpu: {
-  usage: number,
-  cores: number,
+  usage: number;
+  cores: number;
   loadAverage: number[]
 }
   memory: {
-    total: number, used: number; free: number percentage: number
-  },
+    total: number, used: number, free: number percentage: number
+  };
   disk: {
-    total: number, used: number; free: number percentage: number
-  },
+    total: number, used: number, free: number percentage: number
+  };
   uptime: number
 };
 interface HealthStatus {
-status: 'healthy' | 'unhealthy' | 'degraded',
-  checks: HealthCheck[],
+status: 'healthy' | 'unhealthy' | 'degraded';
+  checks: HealthCheck[];
   metrics: SystemMetric
-s,
-  version: string,
-  environment: string,
+s;
+  version: string;
+  environment: string;
   timestamp: string
 };
 export function HealthCheckDashboard() {
-</HealthStatus>
-  const [healthData, setHealthData] = useState<HealthStatus | null>(null);
+</HealthStatus>, const [healthData, setHealthData] = useState<HealthStatus | null>(null);
   const [isLoading, setIsLoading] = useState<any>(true);
-  const [isRefreshing, setIsRefreshing] = useState<any>(false);
-  const [autoRefresh, setAutoRefresh] = useState<any>(true);
-  const [error, setError] = useState<string | null>(null);
+  
+const [isRefreshing, setIsRefreshing]  = useState<any>(false);
+
+const [autoRefresh, setAutoRefresh] = useState<any>(true);
+  
+const [error, setError] = useState<string | null>(null);
   useEffect(() => {
-    fetchHealthData()
-    if (autoRefresh) {
-      const _interval = setInterval(fetchHealthData, 30000) // 30 seconds
-      return () => clearInterval(interval)
-}, [autoRefresh])
-  const _fetchHealthData = async () => {
-    try {
-      setIsRefreshing(true)
-      const response = await fetch('/api/health')
-      if(!response.ok) {
+    fetchHealthData();
+if (autoRefresh) {
+      const _interval = setInterval(fetchHealthData, 30000) // 30 seconds;
+      return () => clearInterval(interval);
+}, [autoRefresh]);
+
+const _fetchHealthData = async () => {
+    try {;
+      setIsRefreshing(true); const response = await fetch('/api/health'), if (!response.ok) {
         throw new Error(`Health check, failed: ${response.status}`)``
-  }
+  };
       const _data = await response.json();
-      setHealthData(data)
+      setHealthData(data);
       setError(null)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch health data')
-    } finally {
-      setIsLoading(false)
-      setIsRefreshing(false)
-}}
+} catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch health data')} finally {
+      setIsLoading(false), setIsRefreshing(false)}
   const _getStatusIcon = (status: string) => { switch (status) {
-      case 'healthy':
-</string>
-    break;
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
-break;
+      case 'healthy':;
+    break, return <CheckCircle className="h-5 w-5 text-green-500"   />, break;
       case 'degraded':
-    return <AlertCircle className="h-5 w-5 text-yellow-500" />;
+      return <AlertCircle className="h-5 w-5 text-yellow-500"   />;
     break;
       case 'unhealthy':
-</AlertCircle>
+      </AlertCircle>
     break;
-        return <XCircle className="h-5 w-5 text-red-500" />
+        return <XCircle className="h-5 w-5 text-red-500"   />
 break
 }
       default:</XCircle>
-        return <AlertCircle className="h-5 w-5 text-gray-500" />
-}}
+        return <AlertCircle className="h-5 w-5 text-gray-500"   />
+}
+}
   const _getStatusColor = (status: string) => { switch (status) {
-      case 'healthy':
-    return 'bg-green-100 text-green-800';
-    break;
-      case 'degraded':
-    return 'bg-yellow-100 text-yellow-800';
+      case 'healthy':;
+      return 'bg-green-100 text-green-800', break, case 'degraded':;
+      return 'bg-yellow-100 text-yellow-800';
     break;
       case 'unhealthy':
-return 'bg-red-100 text-red-800';
+      return 'bg-red-100 text-red-800';
     break
 break
 }
       default: return 'bg-gray-100 text-gray-800'}}
-  const _formatBytes = (bytes: number) => {
-    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-    if (bytes === 0) return '0 B';
-    const _i = Math.floor(Math.log(bytes) / Math.log(1024)
+  const _formatBytes = (bytes: number) => {;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'], if (bytes = == 0) return '0 B'; const _i = Math.floor(Math.log(bytes) / Math.log(1024);
     return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`
 }
-  const _formatUptime = (seconds: number) => {
-    const _days = Math.floor(seconds / 86400);
-    const _hours = Math.floor((seconds % 86400) / 3600);
-    const _minutes = Math.floor((seconds % 3600) / 60)
+  const _formatUptime = (seconds: number) => {;
+    const _days = Math.floor(seconds / 86400); const _hours = Math.floor((seconds % 86400) / 3600); const _minutes = Math.floor((seconds % 3600) / 60);
     if (days > 0) return `${days}d ${hours}h ${minutes}m`;
     if (hours > 0) return `${hours}h ${minutes}m`;
     return `${minutes}m`
 }
   if (isLoading) {
-    return (<div className="flex items-center justify-center min-h-[400px]">
-        <RefreshCw className="h-8 w-8 animate-spin text-primary" />
+    return (<div className="flex items-center justify-center min-h-[400px]">, <RefreshCw className="h-8 w-8 animate-spin text-primary"   />
 </div>
-  if (error) {
-    return (
-    <Card className="border-red-200 bg-red-50">
+  if (error) {;
+    return (<Card className="border-red-200 bg-red-50">;
         <CardHeader>
           <CardTitle className="text-red-800">Health Check Error</CardTitle>
         <CardContent>
           <p className="text-red-600">{error}</p>
           <Button
-            onClick={fetchHealthData}
-            className="mt-4"
-            variant="outline"
+
+const onClick = {fetchHealthData};
+            className="mt-4";
+variant="outline";
           >
             Retry</Button>
   if (!healthData) return null;
@@ -138,25 +127,27 @@ break
             <h2 className="text-2xl font-bold">System Health</h2>
           <Badge className={getStatusColor(healthData.status)}>
             {healthData.status.toUpperCase()}</Badge>
-        <div className="flex items-center gap-4 flex items-center gap-2"></div>
-            <input
-              type="checkbox"
-              id="autoRefresh"
-              checked={autoRefresh}
-              onChange={(e) => setAutoRefresh(e.target.checked)}
+        <div className="flex items-center gap-4 flex items-center gap-2"   />;
+            <input;
+type="checkbox";
+id="autoRefresh";
+
+const checked  = {autoRefresh}
+              const onChange = {(e) => setAutoRefresh(e.target.checked)}
               className="rounded" /></input>
-            <label htmlFor="autoRefresh", className="text-sm">
+        <label htmlFor="autoRefresh", className="text-sm">
               Auto-refresh</label>
           <Button
-            onClick={fetchHealthData}
-            disabled={isRefreshing}
-            variant="outline"
-            size="sm"
+
+const onClick = {fetchHealthData}
+            const disabled = {isRefreshing};
+            variant="outline";
+size="sm";
           >
             {isRefreshing ? (</Button>
-              <RefreshCw className="h-4 w-4 animate-spin mr-2" />
+              <RefreshCw className="h-4 w-4 animate-spin mr-2"   />
             ) : (</RefreshCw>
-              <RefreshCw className="h-4 w-4 mr-2" />
+              <RefreshCw className="h-4 w-4 mr-2"   />
             )}
             Refresh {/* System, Info */}
       <Card>
@@ -184,21 +175,21 @@ break
           <TabsTrigger value="metrics">System Metrics</TabsTrigger>
           <TabsTrigger value="details">Detailed Checks</TabsTrigger>
         <TabsContent value="services", className="space-y-4">
-          <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1, md: grid-cols-2 lg:grid-cols-3 gap-4">
             {healthData.checks.map((check) => (\n    </div>
               <Card key={check.name} className="relative">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-base flex items-center gap-2">
-                      {check.name === 'database' && <Database className="h-4 w-4" />}</Database>
-                      {check.name === 'system' && <Server className="h-4 w-4" />}</Server>
-                      {check.name === 'process' && <Cpu className="h-4 w-4" />}</Cpu>
-                      {check.name.includes('external') && <Globe className="h-4 w-4" />},
+                      {check.name === 'database' && <Database className="h-4 w-4"   />}</Database>
+                      {check.name === 'system' && <Server className="h-4 w-4"   />}</Server>
+                      {check.name === 'process' && <Cpu className="h-4 w-4"   />}</Cpu>
+                      {check.name.includes('external') && <Globe className="h-4 w-4"   />};
     {check.name}</Globe>
                     {getStatusIcon(check.status)}
                 <CardContent>
                   {check.error ? (</CardContent>
-          <p className="{check.error}"></p>
+          <p className="{check.error}"   />
         </div>
     ); : (
                     <div className="space-y-2">
@@ -213,7 +204,7 @@ break
                               <span className="text-muted-foreground capitalize">
                                 {key.replace(/_/g, ', ')}</span>
                               <span className="font-medium">
-                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}</span>))})}}
+                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}</span>))})}
 </CardContent>
             ))}
         <TabsContent value="metrics", className="space-y-4"><div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -221,7 +212,7 @@ break
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <Cpu className="h-4 w-4" />
+                  <Cpu className="h-4 w-4"   />
                   CPU Usage</Cpu>
               <CardContent className="space-y-4">
                 <div>
@@ -229,10 +220,9 @@ break
                     <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
                       {healthData.metrics.cpu.usage.toFixed(1)}%</span>
-                  <Progress value={healthData.metrics.cpu.usage} />
+                  <Progress value={healthData.metrics.cpu.usage}   />
 </div>
-        <div className="grid grid-cols-2 gap-4 text-sm" >
-              </div>
+        <div className="grid grid-cols-2 gap-4 text-sm"    />
                     <p className="text-muted-foreground">Cores</p>
                     <p className="font-medium">{healthData.metrics.cpu.cores}</p>
                   <div>
@@ -242,8 +232,8 @@ break
             {/* Memory, Metrics */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2">
-                  <HardDrive className="h-4 w-4" />
+                <CardTitle className = "text-base flex items-center gap-2">
+                  <HardDrive className="h-4 w-4"   />
                   Memory Usage</HardDrive>
               <CardContent className="space-y-4">
                 <div>
@@ -251,10 +241,9 @@ break
                     <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
                       {healthData.metrics.memory.percentage.toFixed(1)}%</span>
-                  <Progress value={healthData.metrics.memory.percentage} />
+                  <Progress value={healthData.metrics.memory.percentage}   />
 </div>
-        <div className="grid grid-cols-2 gap-4 text-sm" >
-              </div>
+        <div className="grid grid-cols-2 gap-4 text-sm"    />
                     <p className="text-muted-foreground">Used</p>
                     <p className="font-medium">
                       {formatBytes(healthData.metrics.memory.used)}</p>
@@ -271,10 +260,9 @@ break
             <CardContent>
               <div className="space-y-4">
                 {healthData.checks.map((check) => (\n    </div>
-                  <div
-                    key={check.name}
-                    className="border rounded-lg p-4 space-y-2 flex items-center justify-between"></div>
-                      <h4 className="font-medium flex items-center gap-2">
+                  <div; const key = {check.name}
+                    className="border rounded-lg p-4 space-y-2 flex items-center justify-between"   />
+        <h4 className="font-medium flex items-center gap-2">
                         {getStatusIcon(check.status)},
     {check.name}</h4>
                       <Badge className={getStatusColor(check.status)}>

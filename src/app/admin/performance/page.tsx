@@ -1,21 +1,14 @@
-import React from 'react';
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Performance Admin Panel | AI Guided SaaS',
-  description: 'Advanced system performance monitoring and safe mode health checks'
-};
-
-export default function PerformanceAdminPage() {
+export default function PerformancePage() {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Performance Monitoring</h1>
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto py-8">
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">System Performance</h2>
-          <p className="text-gray-600">Performance monitoring dashboard will be displayed here.</p>
+          <h1 className="text-2xl font-bold mb-4">Performance Monitoring</h1>
+          <p className="text-gray-600">Performance monitoring dashboard is currently under construction.</p>
         </div>
       </div>
-    </div>
+    </div>;
   );
 }

@@ -1,12 +1,13 @@
+/* BREADCRUMB: app - Application page or route */
 'use client';
 import React from 'react';
 
 export default function AdminDebugPage() {
-  const debugInfo = {
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
+  const debugInfo = {;
+    timestamp: new Date().toISOString();
+    environment: process.env.NODE_ENV;
     urls: {
-      api: '/api',
+      api: '/api';
       admin: '/admin'
     }
   };
@@ -18,5 +19,5 @@ export default function AdminDebugPage() {
         {JSON.stringify(debugInfo, null, 2)}
       </pre>
     </div>
-  );
-}
+  )
+};

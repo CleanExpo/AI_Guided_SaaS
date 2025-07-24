@@ -3,68 +3,65 @@ import React from 'react';
 import * as React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/utils/cn';
-const CollapsibleContext = React.createContext<{
+
+const CollapsibleContext  = React.createContext<{
     open: boolean onOpenChange: (open: boolean) => void
 }>({
-  open: false onOpenChange: () => {}}
-interface CollapsibleProps {
-open?: boolean,
+  open: false onOpenChange: () => {}
+interface CollapsibleProps {;
+open?: boolean;
   defaultOpen?: boolean,
-  onOpenChange? (open: boolean) => void,
+  onOpenChange? (open: boolean) => void;
   children: React.ReactNod
-e, className?: string
-const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(({ open = false, defaultOpen  = false, onOpenChange, children, className
+e, className?: string, const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(({ open = false, defaultOpen  = false, onOpenChange, children, className
 } ref) => {
-</HTMLDivElement>
-    const [internalOpen, setInternalOpen] = React.useState<any>(defaultOpen || open);
-    const _isControlled = onOpenChange !== undefined;
-    const _openState = isControlled ? open : internalOpen;
-    const _setOpenState = isControlled ? onOpenChange : setInternalOpen;
+</HTMLDivElement>, const [internalOpen, setInternalOpen] = React.useState<any>(defaultOpen || open);
+  const _isControlled = onOpenChange !== undefined;
+    
+const _openState  = isControlled ? open : internalOpen;
+
+const _setOpenState = isControlled ? onOpenChange : setInternalOpen;
     return (
-    return (<CollapsibleContext.Provider value={{ open: openState onOpenChange: setOpenState }}></CollapsibleContext>;
+    return (<CollapsibleContext.Provider value={{ open: openState onOpenChange: setOpenState }></CollapsibleContext>
         <div ref={ref} className={cn('' className)}>
           {children}</div>
       </CollapsibleContext.Provider>
     ))
-Collapsible.displayName = 'Collapsible'
-const CollapsibleTrigger = React.forwardRef<;
-  HTMLButtonElement,
+Collapsible.displayName = 'Collapsible'const CollapsibleTrigger = React.forwardRef<;
+  HTMLButtonElement;
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, children, ...props }, ref) => {
-</HTMLButtonElement>
-  const { open, onOpenChange   }: any = React.useContext(CollapsibleContext);
+</HTMLButtonElement>, const { open, onOpenChange   }: any = React.useContext(CollapsibleContext);
   return (
     <button
-      ref={ref}
-      className={cn(`
-        'flex w-full items-center justify-between py-2 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180' className
+
+const ref = {ref}
+      className={cn(`'flex w-full items-center justify-between py-2 font-medium transition-all hover: underline [&[data-state=open]>svg]:rotate-180' className
       )}
-      data-state={open ? 'open' : 'closed'}
-      onClick={() => onOpenChange(!open)},
+      data-state={open ? 'open' : 'closed'};
+      const onClick = {() => onOpenChange(!open)};
     {...props}
     >
       {children}</button>
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />)
+      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200"   />)
 }
   )
-CollapsibleTrigger.displayName = 'CollapsibleTrigger'
-const CollapsibleContent = React.forwardRef<;
+CollapsibleTrigger.displayName = 'CollapsibleTrigger'const CollapsibleContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
-</HTMLDivElement>
-  const { open   }: any = React.useContext(CollapsibleContext);
+</HTMLDivElement>, const { open   }: any = React.useContext(CollapsibleContext);
   return (
     <div
-      ref={ref}
-      className={cn(
-            'overflow-hidden transition-all',open ? 'animate-in slide-in-from-top-1' : 'animate-out slide-out-to-top-1 hidden'
+
+const ref = {ref}
+      className={cn('overflow-hidden transition-all',open ? 'animate-in slide-in-from-top-1' : 'animate-out slide-out-to-top-1 hidden'
       )},
     {...props}
     ></div>
-      <div, className={cn('pb-4, pt-0' className)}>{children}
+      <div, className={cn('pb-4, pt-0' className)}>{children};
     );
-CollapsibleContent.displayName = 'CollapsibleContent'
+CollapsibleContent.displayName = 'CollapsibleContent';
 export {  Collapsible, CollapsibleTrigger, CollapsibleContent  </div>
     
     </any>

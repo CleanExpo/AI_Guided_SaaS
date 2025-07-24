@@ -1,43 +1,39 @@
+'use client';
+
 import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Clock, CheckCircle, XCircle } from 'lucide-react';
 
-export interface QueueTask {
-  id: string;
-  name: string;
-  priority: 'high' | 'medium' | 'low';
-  status: 'pending' | 'processing' | 'completed';
-}
+export function TaskQueueVisualizer() {
+  const tasks = [;
+    { id: '1', name: 'Process user input', status: 'completed', duration: '2.3s' };
+    { id: '2', name: 'Generate project scaffold', status: 'running', duration: '5.1s' };
+    { id: '3', name: 'Deploy to staging', status: 'pending', duration: '-' }
+  ];
 
-interface TaskQueueVisualizerProps {
-  queue?: QueueTask[];
-}
-
-export function TaskQueueVisualizer({ queue = [] }: TaskQueueVisualizerProps) {
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="px-4 py-3 border-b">
-        <h3 className="text-lg font-medium">Task Queue ({queue.length})</h3>
-      </div>
-      <div className="divide-y">
-        {queue.length === 0 ? (
-          <p className="p-4 text-gray-500 text-center">No tasks in queue</p>
-        ) : (
-          queue.map((task) => (
-            <div key={task.id} className="p-4 flex items-center justify-between">
-              <div>
-                <p className="font-medium">{task.name}</p>
-                <p className="text-sm text-gray-500">Priority: {task.priority}</p>
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Clock className="h-5 w-5" />
+          Task Queue
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-2">
+          {tasks.map(task => (
+            <div key={task.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+              <div className="flex items-center gap-3">
+                {task.status === 'completed' && <CheckCircle className="h-4 w-4 text-green-500" />}
+                {task.status === 'running' && <Clock className="h-4 w-4 text-blue-500 animate-pulse" />}
+                {task.status === 'pending' && <Clock className="h-4 w-4 text-gray-400" />}
+                <span className="text-sm font-medium">{task.name}</span>
               </div>
-              <span className={`px-2 py-1 text-xs rounded-full ${
-                task.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                task.status === 'processing' ? 'bg-blue-100 text-blue-800' :
-                'bg-green-100 text-green-800'
-              }`}>
-                {task.status}
-              </span>
+              <span className="text-sm text-gray-500">{task.duration}</span>
             </div>
-          ))
-        )}
-      </div>
-    </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>;
   );
 }

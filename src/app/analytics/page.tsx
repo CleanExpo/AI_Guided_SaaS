@@ -1,3 +1,4 @@
+/* BREADCRUMB: pages - Application pages and routes */
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
@@ -12,12 +13,11 @@ interface AnalyticsData {
   topPages: Array<{
     path: string;
     views: number;
-    percentage: number;
+    percentage: number
   }>;
   userActivity: Array<{
     date: string;
-    users: number;
-  }>;
+    users: number}>
 }
 
 export default function AnalyticsPage() {
@@ -28,33 +28,31 @@ export default function AnalyticsPage() {
     // Simulate loading analytics data
     setTimeout(() => {
       setData({
-        totalUsers: 1247,
-        activeUsers: 89,
-        pageViews: 5643,
-        bounceRate: 34.2,
+        totalUsers: 1247;
+        activeUsers: 89;
+        pageViews: 5643;
+        bounceRate: 34.2;
         topPages: [
-          { path: '/', views: 1543, percentage: 27.3 },
-          { path: '/features', views: 987, percentage: 17.5 },
+          { path: '/', views: 1543, percentage: 27.3 };
+          { path: '/features', views: 987, percentage: 17.5 };
           { path: '/pricing', views: 543, percentage: 9.6 }
-        ],
+        ];
         userActivity: [
-          { date: '2025-01-01', users: 45 },
-          { date: '2025-01-02', users: 52 },
+          { date: '2025-01-01', users: 45 };
+          { date: '2025-01-02', users: 52 };
           { date: '2025-01-03', users: 48 }
         ]
       });
-      setIsLoading(false);
-    }, 1000);
-  }, []);
+      setIsLoading(false)
+}, 1000)
+}, []);
 
   if (isLoading) {
-    return (
-      <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
+    return (<div className="container mx-auto p-6">, <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
         <div>Loading analytics data...</div>
-      </div>
-    );
-  }
+    </div>;
+  );
+}
 
   return (
     <div className="container mx-auto p-6 space-y-6">
@@ -64,7 +62,7 @@ export default function AnalyticsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-muted-foreground"   />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{data?.totalUsers}</div>
@@ -75,7 +73,7 @@ export default function AnalyticsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <Activity className="h-4 w-4 text-muted-foreground"   />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{data?.activeUsers}</div>
@@ -83,6 +81,6 @@ export default function AnalyticsPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </div>;
   );
 }

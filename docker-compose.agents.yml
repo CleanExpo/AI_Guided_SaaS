@@ -169,6 +169,56 @@ services:
           memory: 256M
     restart: unless-stopped
 
+  # TypeScript Specialist Agent - Critical Error Resolution
+  typescript-specialist:
+    build:
+      context: .
+      dockerfile: docker/agents/Dockerfile.agent
+    container_name: ai-saas-typescript-specialist
+    environment:
+      - NODE_ENV=production
+      - AGENT_TYPE=typescript_specialist
+      - AGENT_ID=typescript_specialist_001
+      - ORCHESTRATOR_URL=http://orchestrator:3000
+      - ERROR_BATCH_SIZE=5
+      - TYPE_SAFETY_TARGET=100
+    volumes:
+      - ./src:/app/src:rw
+      - ./scripts:/app/scripts:rw
+      - ./agent-data/typescript:/app/agent-data
+      - ./logs:/app/logs:rw
+    networks:
+      - agent-network
+    depends_on:
+      - orchestrator
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 768M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    restart: unless-stopped
+
+  # Agent Redis for Communication
+  agent-redis:
+    image: redis:7-alpine
+    container_name: ai-saas-agent-redis
+    ports:
+      - "6380:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - agent-redis-data:/data
+    networks:
+      - agent-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
   # Resource Monitor (Prometheus)
   prometheus:
     image: prom/prometheus:latest
@@ -210,7 +260,8 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 172.30.0.0/16
 
 volumes:
   prometheus-data:
+  agent-redis-data:

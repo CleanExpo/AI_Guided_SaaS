@@ -4,10 +4,9 @@
 
 import React, { useState } from 'react';
 import { useBuilderStore } from '../store/useBuilderStore';
-export default function Toolbar() {const reset = useBuilderStore((state) => state.reset);
-  const save = useBuilderStore((state) => state.saveProject);
-  const load = useBuilderStore((state) => state.loadProject);
-  const [previewMode, setPreviewMode] = useState(false);
+export default function Toolbar() {const reset = useBuilderStore((state) => state.reset); const save = useBuilderStore((state) => state.saveProject); const load  = useBuilderStore((state) => state.loadProject);
+
+const [previewMode, setPreviewMode] = useState(false);
   return (
     <div className="w-full bg-white border-b border-gray-300 px-4 py-2 flex justify-between items-center"></div>
       <div className="text-lg font-semibold text-gray-800">🛠️ Builder Controls</div>
@@ -17,10 +16,11 @@ export default function Toolbar() {const reset = useBuilderStore((state) => stat
         <button onClick={save} className="px-2 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600">
           Save</button>
         <button onClick={load} className="px-2 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700">
-          Load</button>
-        <button
-          onClick={() => setPreviewMode((prev) => !prev)}
-          className="px-2 py-1 bg-gray-800 text-white rounded text-sm hover:bg-gray-700"
+          Load</button>;
+        <button;
+
+const onClick = {() => setPreviewMode((prev) => !prev)};
+          className="px-2 py-1 bg-gray-800 text-white rounded text-sm hover:bg-gray-700";
         >
           {previewMode ? 'Edit Mode' : 'Preview Mode'
     }</button>
