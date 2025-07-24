@@ -51,6 +51,22 @@ A production-ready starter template for building modern SaaS applications with A
 
 ### Installation
 
+#### Option 1: Quick Start (Recommended) 🚀
+```bash
+git clone https://github.com/CleanExpo/The-Starter-Pack.git
+cd The-Starter-Pack
+npm run setup
+```
+
+This interactive setup will:
+- Check your Node.js version
+- Create `.env.local` with sensible defaults
+- Install all dependencies
+- Set up your database (optional)
+- Get you ready to code!
+
+#### Option 2: Manual Setup
+
 1. **Clone the repository**
    ```bash
    git clone https://github.com/CleanExpo/The-Starter-Pack.git
@@ -67,24 +83,11 @@ A production-ready starter template for building modern SaaS applications with A
    cp .env.example .env.local
    ```
    
-   Edit `.env.local` with your values:
-   ```env
-   # Database
-   DATABASE_URL="postgresql://..."
-   
-   # NextAuth
-   NEXTAUTH_URL="http://localhost:3000"
-   NEXTAUTH_SECRET="your-secret-key"
-   
-   # AI Providers (optional)
-   OPENAI_API_KEY="sk-..."
-   ANTHROPIC_API_KEY="sk-ant-..."
-   ```
+   Update `.env.local` with your values (see [Environment Variables](#environment-variables) section)
 
 4. **Set up the database**
    ```bash
-   npx prisma generate
-   npx prisma db push
+   npm run setup:db
    ```
 
 5. **Run the development server**
@@ -161,6 +164,51 @@ const users = await prisma.user.findMany({
   include: { profile: true }
 });
 ```
+
+## 🔧 Environment Variables
+
+The Starter Pack uses environment variables for configuration. Here's what each one does:
+
+### Required Variables
+```env
+# Database Connection
+DATABASE_URL="postgresql://user:pass@localhost:5432/dbname"
+
+# NextAuth Configuration  
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="min-32-character-secret"
+```
+
+### Optional Integrations
+```env
+# AI Providers
+OPENAI_API_KEY="sk-..."          # OpenAI GPT models
+ANTHROPIC_API_KEY="sk-ant-..."   # Claude models
+
+# OAuth Providers
+GOOGLE_CLIENT_ID=""               # Google Sign-in
+GOOGLE_CLIENT_SECRET=""
+GITHUB_CLIENT_ID=""               # GitHub Sign-in
+GITHUB_CLIENT_SECRET=""
+
+# Email Service
+RESEND_API_KEY=""                 # Transactional emails
+EMAIL_FROM="noreply@yourdomain.com"
+
+# Analytics & Monitoring
+SENTRY_DSN=""                     # Error tracking
+NEXT_PUBLIC_GA_ID=""              # Google Analytics
+```
+
+### Feature Flags
+```env
+ENABLE_AI_FEATURES="true"         # AI chat and generation
+ENABLE_ANALYTICS="false"          # Usage analytics
+ENABLE_EMAIL_AUTH="true"          # Email/password auth
+ENABLE_ADMIN_PANEL="false"        # Admin dashboard
+```
+
+See `.env.example` for a complete list with descriptions.
 
 ## 🚢 Deployment
 
