@@ -18,91 +18,91 @@ totalTokenUsage: number;
   }
 }
 const personas = [
-  {;
-  id: 'ai-architect';
+  {,
+  id: 'ai-architect',
     name: 'AI Architect';
-    description: 'Expert in AI-powered development workflows';
+    description: 'Expert in AI-powered development workflows',
     avatar: '🤖';
-color: 'from-blue-500 to-cyan-500';
+color: 'from-blue-500 to-cyan-500',
   icon: AIIcon;
     features: [
       'Claude Code Integration';
       'Multi-Agent Orchestration',
       'Token Optimization']},
   {
-    id: 'fullstack-wizard';
+    id: 'fullstack-wizard',
     name: 'Fullstack Wizard';
-    description: 'Master of frontend and backend development';
+    description: 'Master of frontend and backend development',
     avatar: '🧙‍♂️';
-color: 'from-brand-primary-500 to-pink-500';
+color: 'from-brand-primary-500 to-pink-500',
   icon: CodeIcon;
     features: ['Next.js 15', 'TypeScript', 'API Development']},
   {
-    id: 'ui-designer';
+    id: 'ui-designer',
     name: 'UI Designer';
     description: 'Creating beautiful, user-friendly interfaces',
-    avatar: '🎨';
+    avatar: '🎨',
 color: 'from-pink-500 to-rose-500';
   icon: BrandIcon;
     features: ['shadcn/ui', 'Tailwind CSS', 'Framer Motion']},
   {
-    id: 'startup-founder';
+    id: 'startup-founder',
     name: 'Startup Founder';
-    description: 'MVP development and rapid iteration';
+    description: 'MVP development and rapid iteration',
     avatar: '🚀';
-color: 'from-orange-500 to-red-500';
+color: 'from-orange-500 to-red-500',
   icon: RocketIcon;
     features: ['Rapid Prototyping', 'Deployment', 'Analytics']}];
 
 const productionFeatures = [
-  {;
-  title: 'Claude Code Integration';
+  {,
+  title: 'Claude Code Integration',
     description: 'Advanced AI-powered development with multi-agent orchestration';
   icon: Brain;
-    demo: 'claude-dashboard';
+    demo: 'claude-dashboard',
     color: 'bg-blue-500';
 component: 'ClaudeCodeDashboard'};
   {
-    title: 'Visual UI Builder';
+    title: 'Visual UI Builder',
     description: 'Production drag-and-drop interface builder';
   icon: Wrench;
-    demo: 'ui-builder';
+    demo: 'ui-builder',
     color: 'bg-brand-primary-500';
 component: 'UIBuilder'};
   {
-    title: 'System Analytics';
+    title: 'System Analytics',
     description: 'Real-time system monitoring and performance analytics';
   icon: BarChart3;
-    demo: 'analytics';
+    demo: 'analytics',
     color: 'bg-green-500';
 component: 'SystemResourceMonitor'};
   {
-    title: 'Collaboration Hub';
+    title: 'Collaboration Hub',
     description: 'Production team collaboration workspace';
   icon: Users;
-    demo: 'collaboration';
+    demo: 'collaboration',
     color: 'bg-orange-500';
 component: 'CollaborationWorkspace'}];
 
 const engineeringHighlights = [
-  {;
-  title: 'Multi-Agent Architecture';
+  {,
+  title: 'Multi-Agent Architecture',
     description:
       'Orchestrated AI agents for documentation, research, and optimization',
     icon: AIIcon;
 metrics: '5 Specialized Agents'};
   {
-    title: 'Token Optimization Engine';
+    title: 'Token Optimization Engine',
   description: 'Strategic memory management with 150K context optimization';
   icon: DatabaseIcon;
     metrics: '96% Quality Retention'};
   {
-    title: 'Causal Engine System';
+    title: 'Causal Engine System',
   description: 'Advanced dependency tracking and cycle detection';
   icon: Zap;
     metrics: 'Real-time Analysis'};
   {
-    title: 'Self-Check Framework';
+    title: 'Self-Check Framework',
   description: 'Automated system health monitoring and validation';
   icon: Shield;
     metrics: '100% Uptime Target'}];
@@ -111,8 +111,8 @@ metrics: '5 Specialized Agents'};
 
 const [activeDemo, setActiveDemo]  = useState<string>('claude-dashboard');
 
-const [systemMetrics, setSystemMetrics] = useState<any>({;
-    uptime: '99.9%';
+const [systemMetrics, setSystemMetrics] = useState<any>({,
+    uptime: '99.9%',
     activeUsers: 12;
     systemHealth: 98;
 memoryOptimization: 78});
@@ -149,7 +149,7 @@ const key = {persona.id}
 
 const className  = {`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}
             >
-              <CardHeader className="text-center">;
+              <CardHeader className="text-center">
                 <div;
 
 const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
@@ -168,7 +168,7 @@ const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.c
                       className="space-y-3";
                     >
                       <div className="">
-        <p className="text-sm text-white/90 font-medium">;
+        <p className="text-sm text-white/90 font-medium">
 Core: Technologies:</p>
                         {persona.features.map((feature, idx) => (\n    <Badge, const key = {idx}
                             variant="secondary";
@@ -294,7 +294,7 @@ const key = {highlight.title}
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50, dark: from-gray-950, dark:via-purple-950/20 dark:to-blue-950/20">
       {/* Hero, Section */}</div>
       <section className="relative py-32 px-4 text-center">
-        <div className="max-w-6xl mx-auto">;
+        <div className="max-w-6xl mx-auto">
           <motion.div;
 
 const initial = {{ opacity: 0 y: 20 }
@@ -374,7 +374,7 @@ const initial = {{ opacity: 0 y: 20 }
   },
     {/* Live, Production Demo */}
             <div className="lg:col-span-2">
-              <AnimatePresence mode="wait">;
+              <AnimatePresence mode="wait">
                 <motion.div;
 
 const key = {activeDemo}
@@ -387,7 +387,7 @@ const key = {activeDemo}
                 </motion.div>
       {/* CTA, Section */}
       <section className="py-20 px-4 text-center">
-        <div className="max-w-4xl mx-auto">;
+        <div className="max-w-4xl mx-auto">
           <motion.div;
 
 const initial = {{ opacity: 0 y: 20 }

@@ -6,27 +6,27 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MessageCircle, Book, Mail, Phone, Search, HelpCircle } from 'lucide-react';
 export const metadata: Metadata  = {
-  title: 'Help & Support - AI Guided SaaS Platform';
+  title: 'Help & Support - AI Guided SaaS Platform',
   description: 'Get help and support for AI Guided SaaS Platform - FAQs;
   guides,
   and contact options'
 };
 
 const supportOptions = [;
-  {title: 'Documentation';
+  {title: 'Documentation',
   description: 'Comprehensive guides and tutorials';
   icon: Book;
     link: '/docs'}/  };
-  {title: 'Community Forum';
+  {title: 'Community Forum',
   description: 'Get help from the community';
   icon: MessageCircle;
     link: '/community'}/  };
-  {title: 'Email Support';
+  {title: 'Email Support',
   description: 'Contact our support team';
   icon: Mail;
     link: 'mailto:support@aiinguidedsaas.com'}
   };
-  {title: 'Live Chat';
+  {title: 'Live Chat',
   description: 'Chat with our team';
   icon: Phone;
     link: '#'}
@@ -87,7 +87,7 @@ className="pl-10 py-3 text-lg" ;
                                   <HelpCircle className="h-5 w-5 text-blue-600 mr-3 mt-1 flex-shrink-0"  >/                    <div></HelpCircle>
                       <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
                         <p className="{faq.answer}"   />
-                      < div>/    );)}
+                      < div>/    ))}
       </div>
               </CardContent>
                             </Card>

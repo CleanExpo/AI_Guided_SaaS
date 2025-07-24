@@ -170,7 +170,7 @@ export const _EnvSchema = z.object({
 })
 // Validation utilities;
 export function validate<T>(
-    schema: z.ZodSchema<T>;
+    schema: z.ZodSchema<T>
     data: unknown
 ): { success: true, data: T } | { success: false, error: z.ZodError } {
   try {
@@ -182,7 +182,7 @@ export function validate<T>(
 }
 
 export function validateAsync<T>(;
-    schema: z.ZodSchema<T>;
+    schema: z.ZodSchema<T>
     data: unknown
 ): Promise<any> {
   return new Promise((resolve) => {
@@ -195,17 +195,17 @@ export function validateAsync<T>(;
        })
 };
 // Type inference helpers;
-export type User = z.infer<typeof UserSchema>;
-export type CreateUser = z.infer<typeof CreateUserSchema>;
-export type UpdateUser = z.infer<typeof UpdateUserSchema>;
-export type Project = z.infer<typeof ProjectSchema>;
-export type CreateProject = z.infer<typeof CreateProjectSchema>;
-export type UpdateProject = z.infer<typeof UpdateProjectSchema>;
-export type Message = z.infer<typeof MessageSchema>;
-export type ChatRequest = z.infer<typeof ChatRequestSchema>;
-export type ChatResponse = z.infer<typeof ChatResponseSchema>;
-export type AgentTask = z.infer<typeof AgentTaskSchema>;
-export type AgentResult = z.infer<typeof AgentResultSchema>;
-export type ApiError = z.infer<typeof ApiErrorSchema>;
-export type Pagination = z.infer<typeof PaginationSchema>;
-export type ListRequest = z.infer<typeof ListRequestSchema>;
+export type User = z.infer<typeof UserSchema>
+export type CreateUser = z.infer<typeof CreateUserSchema>
+export type UpdateUser = z.infer<typeof UpdateUserSchema>
+export type Project = z.infer<typeof ProjectSchema>
+export type CreateProject = z.infer<typeof CreateProjectSchema>
+export type UpdateProject = z.infer<typeof UpdateProjectSchema>
+export type Message = z.infer<typeof MessageSchema>
+export type ChatRequest = z.infer<typeof ChatRequestSchema>
+export type ChatResponse = z.infer<typeof ChatResponseSchema>
+export type AgentTask = z.infer<typeof AgentTaskSchema>
+export type AgentResult = z.infer<typeof AgentResultSchema>
+export type ApiError = z.infer<typeof ApiErrorSchema>
+export type Pagination = z.infer<typeof PaginationSchema>
+export type ListRequest = z.infer<typeof ListRequestSchema>

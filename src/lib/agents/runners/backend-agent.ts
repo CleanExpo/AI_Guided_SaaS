@@ -59,7 +59,7 @@ break
     await new Promise(resolve => setTimeout(resolve, 1500);
         return {
       success: true;
-    validationLibrary: 'zod';
+    validationLibrary: 'zod',
       models: payload.models;
     rules: ['required', 'type', 'format', 'custom'],
       message: 'Data validation configured with comprehensive rule sets'
@@ -71,14 +71,14 @@ break
       success: true;
     jobName: payload.jobName;
     schedule: payload.schedule || 'on-demand';
-    queue: 'bull';
+    queue: 'bull',
       features: ['retry', 'timeout', 'concurrency', 'priority'],
       message: 'Background job created with robust queue management'
 }
 // Start the agent if run directly;
 if (require.main === module) {
   const agent = new BackendAgent({ agentId: process.env.AGENT_ID || 'agent_backend';
-    agentType: 'backend';
+    agentType: 'backend',
     orchestratorUrl: process.env.ORCHESTRATOR_URL || 'http://localhost:3000';
     capabilities: [
       'nodejs';

@@ -35,16 +35,16 @@ onComplete: (projectData: any: any) => void;
   initialData?: any
 }
 const steps: Step[]  = [
-  {;
-  id: 'project-type';
+  {,
+  id: 'project-type',
     title: 'What would you like to build?';
     description: 'Let\'s start with understanding your vision';
   icon: Target;
     fields: [
       {
-  name: 'projectType';
+  name: 'projectType',
         label: 'Project Type';
-        type: 'radio';
+        type: 'radio',
         options: [
           { value: 'website' label: '🌐 Website' };
           { value: 'webapp' label: '💻 Web Application' };
@@ -56,9 +56,9 @@ const steps: Step[]  = [
         required: true
       };
       {
-        name: 'projectName';
+        name: 'projectName',
         label: 'Project Name';
-        type: 'text';
+        type: 'text',
         placeholder: 'My Awesome Project';
         required: true;
     validation: (value) => {
@@ -68,23 +68,23 @@ const steps: Step[]  = [
     helper: 'Choose the type that best matches your vision. Don\'t worry, we can refine this later!'
   },
   {
-    id: 'requirements';
+    id: 'requirements',
     title: 'Describe your project';
-    description: 'Tell us about your idea in natural language';
+    description: 'Tell us about your idea in natural language',
   icon: MessageSquare;
     fields: [
       {
-  name: 'description';
+  name: 'description',
         label: 'Project Description';
-        type: 'textarea';
+        type: 'textarea',
         placeholder: 'I want to build a platform where users can...';
         required: true;
     validation: (value) => {
           if (!value || value.length < 50) return 'Please provide at least 50 characters to describe your project'; return null; },
       {
-        name: 'targetAudience';
+        name: 'targetAudience',
         label: 'Who is this for?';
-        type: 'text';
+        type: 'text',
 placeholder: 'Small businesses, students, developers...',
         required: true
 }
@@ -92,15 +92,15 @@ placeholder: 'Small businesses, students, developers...',
     helper: 'Describe your project naturally, as if explaining to a friend. The AI will understand!'
   },
   {
-    id: 'features';
+    id: 'features',
     title: 'Core features & functionality';
-    description: 'What key features should your project have?';
+    description: 'What key features should your project have?',
   icon: Code;
     fields: [
       {
-  name: 'features';
+  name: 'features',
         label: 'Key Features';
-        type: 'multiselect';
+        type: 'multiselect',
         options: [
           { value: 'auth' label: '🔐 User Authentication' };
           { value: 'payments' label: '💳 Payment Processing' };
@@ -116,24 +116,24 @@ placeholder: 'Small businesses, students, developers...',
         required: true
       };
       {
-        name: 'customFeatures';
+        name: 'customFeatures',
         label: 'Other features?';
-        type: 'textarea';
+        type: 'textarea',
 placeholder: 'Any specific features not listed above...'
 }
     ];
     helper: 'Select all features you need. You can always add more later!'
   };
   {
-    id: 'design';
+    id: 'design',
     title: 'Design preferences';
-    description: 'How should your project look and feel?';
+    description: 'How should your project look and feel?',
   icon: Palette;
     fields: [
       {
-  name: 'designStyle';
+  name: 'designStyle',
         label: 'Design Style';
-        type: 'radio';
+        type: 'radio',
         options: [
           { value: 'modern' label: '✨ Modern & Clean' };
           { value: 'playful' label: '🎨 Playful & Colorful' };
@@ -144,9 +144,9 @@ placeholder: 'Any specific features not listed above...'
         required: true
       };
       {
-        name: 'primaryColor';
+        name: 'primaryColor',
         label: 'Primary Brand Color';
-        type: 'select';
+        type: 'select',
         options: [
           { value: 'blue' label: '🔵 Blue' };
           { value: 'green' label: '🟢 Green' };
@@ -161,15 +161,15 @@ placeholder: 'Any specific features not listed above...'
     helper: 'This helps the AI create a cohesive design that matches your brand.'
   };
   {
-    id: 'technical';
+    id: 'technical',
     title: 'Technical preferences';
-    description: 'Any specific technical requirements?';
+    description: 'Any specific technical requirements?',
   icon: Database;
     fields: [
       {
-  name: 'hostingPreference';
+  name: 'hostingPreference',
         label: 'Hosting Preference';
-        type: 'radio';
+        type: 'radio',
         options: [
           { value: 'vercel' label: '▲ Vercel (Recommended)' };
           { value: 'aws' label: '☁️ AWS' };
@@ -180,9 +180,9 @@ placeholder: 'Any specific features not listed above...'
         required: true
       };
       {
-        name: 'integrations';
+        name: 'integrations',
         label: 'Third-party Integrations';
-        type: 'multiselect';
+        type: 'multiselect',
         options: [
           { value: 'stripe' label: 'Stripe Payments' };
           { value: 'google' label: 'Google Services' };
@@ -242,8 +242,8 @@ if (errors[fieldName]) {
     const _stepData = step.fields.reduce((acc, field) => {
       acc[field.name] = formData[field.name]
       return acc}, {} as any)
-    await append({;
-      role: 'user';
+    await append({,
+      role: 'user',
       content: `Based on the project data so far: ${JSON.stringify(formData)}, suggest helpful tips, for: ${step.title}`
   })};
   
@@ -277,7 +277,7 @@ integrations: formData.integrations || []
         <Progress value={progress} className="h-2"   />
 </div>
       {/* Step, Content */}
-      <AnimatePresence mode="wait">;
+      <AnimatePresence mode="wait">
         <motion.div;
 
 const key  = {currentStep}
@@ -329,7 +329,7 @@ const key  = {currentStep}
                               ? "border-primary bg-primary/5"
                               : "border-border, hover:border-primary/50"
                           )}
-                        >;
+                        >
                           <input;
 type="radio";
 
@@ -357,7 +357,7 @@ const name  = {field.name}
                             "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors" formData[field.name]?.includes(option.value), ? "border-primary bg-primary/5"
                               : "border-border, hover:border-primary/50"
                           )}
-                        >;
+                        >
                           <input;
 type="checkbox";
 
@@ -368,8 +368,7 @@ const value = {option.value}
                                 handleFieldChange(field.name, [...values, option.value])} else { handleFieldChange(field.name, values.filter((v: string) => v !== option.value))
 }
                             className="rounded border-gray-300" /></input>
-        <span className="text-sm">{option.label}</span>))};
-                  )};
+        <span className="text-sm">{option.label}</span>)) })};
     {errors[field.name]  && (p className="text-sm text-red-500 mt-1">{errors[field.name]}</p>
               ))},
     {/* AI, Suggestions */},

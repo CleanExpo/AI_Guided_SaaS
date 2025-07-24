@@ -10,7 +10,7 @@ g;
   onDocumentationGenerated: (docs: unknown) => void
 };
 export default function AIDocumentationGenerator() {
-  return (Card></Card>, <CardHeader>;</CardHeader>;
+  return (Card></Card>, <CardHeader></CardHeader>;
         <CardTitle className="flex items-center gap-2"></CardTitle><FileText className="w-5 h-5 text-blue-600"   />
           AI Documentation Generator</FileText>
       <CardContent></CardContent>

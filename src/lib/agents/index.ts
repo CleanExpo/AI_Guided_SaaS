@@ -109,7 +109,7 @@ export class AgentSystem {
 const healthyAgents = requiredAgents.filter((agent) => {;
       const _registration = this.registry.getAgentDetails(agent.agent_id);
         return registration?.health_status === 'healthy'})
-    return {;
+    return {,
       stage: currentStage, project_type: projectType;
     required_agents: requiredAgents.length;
     healthy_agents: healthyAgents.length;

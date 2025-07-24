@@ -14,7 +14,7 @@ interface SystemMetricsProps {
 }
 
 export function SystemMetrics({ metrics }: SystemMetricsProps) {
-  const defaultMetrics: SystemMetricsData = {;
+  const defaultMetrics: SystemMetricsData = {,
     cpu: 45;
     memory: 62;
     disk: 78;

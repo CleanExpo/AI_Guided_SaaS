@@ -137,7 +137,7 @@ const { data: recentActivityData }  = await supabase;
         .order('created_at', { ascending: false });
         .limit(10);
 
-const recentActivity = (recentActivityData || []).map((activity: any) => ({;
+const recentActivity = (recentActivityData || []).map((activity: any) => ({,
         type: activity.action;
         message: this.formatActivityMessage(activity);
         timestamp: activity.created_at
@@ -194,7 +194,7 @@ const revenueMetrics = await this.getRevenueMetrics();
 
 const platformHealth = await this.getPlatformHealth();
       return {
-        overview: {;
+        overview: {,
   totalUsers: userMetrics.totalUsers;
     totalProjects: projectMetrics.totalProjects;
     totalApiCalls: apiMetrics.totalCalls;
@@ -293,8 +293,8 @@ const isActive =;
             id: user.id;
     email: user.email;
     name: user.name || 'Unnamed User';
-    status: isActive ? 'active' : 'inactive';
-            role: subscription?.status === 'active' ? 'premium' : 'free';
+    status: isActive ? 'active' : 'inactive',
+            role: subscription?.status === 'active' ? 'premium' : 'free',
             createdAt: user.created_at;
     lastLogin: sessionData?.expires || user.created_at;
     projectsCount: projectsCount || 0;
@@ -352,14 +352,14 @@ const { count: totalApiCalls   }: any = await supabase;
         .eq('action', 'api_call');
       return {
         ...user,
-            profile: {;
+            profile: {,
             bio: user.bio || 'No bio provided';
               avatar: user.image;
               location: user.location || 'Not specified';
               company: user.company || 'Not specified'
             };
         subscription: subscription?.data || {
-          plan: 'free';
+          plan: 'free',
           status: 'active';
           expiresAt: null
         };
@@ -373,12 +373,12 @@ const { count: totalApiCalls   }: any = await supabase;
 }
   // Helper methods
   private static formatActivityMessage(activity: ActivityLog) {
-    const messages: Record<string, string> = {;
-      user_signup: 'New user signed up';
+    const messages: Record<string, string> = {,
+      user_signup: 'New user signed up',
       project_created: 'Created a new project';
-      api_call: 'Made an API call';
+      api_call: 'Made an API call',
       subscription_updated: 'Updated subscription';
-      project_exported: 'Exported a project';
+      project_exported: 'Exported a project',
       template_used: 'Used a template'
     };
     return messages[activity.action] || activity.action;
@@ -414,14 +414,14 @@ const activeCount = new Set(sessions?.map((s) => s.user_id) || []).size;
       dates.push(dateStr);
       newUsersByDate.push({
         date: date.toLocaleDateString('en-US', {
-          month: 'short';
+          month: 'short',
           day: 'numeric'
         });
         count: newUsers || 0
       });
       activeUsersByDate.push({
         date: date.toLocaleDateString('en-US', {
-          month: 'short';
+          month: 'short',
           day: 'numeric'
         });
         count: activeCount
@@ -463,7 +463,7 @@ const { count   }: any = await supabase!;
         .lt('created_at', nextDate.toISOString();
       projectsByDate.push({
         date: date.toLocaleDateString('en-US', {
-          month: 'short';
+          month: 'short',
           day: 'numeric'
         });
         count: count || 0
@@ -520,7 +520,7 @@ const callCount = count || 0;
       totalCalls += callCount;
       callsByDate.push({
         date: date.toLocaleDateString('en-US', {
-          month: 'short';
+          month: 'short',
           day: 'numeric'
         });
         count: callCount
@@ -528,7 +528,7 @@ const callCount = count || 0;
       // Mock latency data for now
       latencyByDate.push({
         date: date.toLocaleDateString('en-US', {
-          month: 'short';
+          month: 'short',
           day: 'numeric'
 };
         avg: Math.floor(Math.random() * 50) + 100;
@@ -539,28 +539,28 @@ const callCount = count || 0;
     // Get top endpoints (mock for now);
 
 const topEndpoints = [
-  {;
-  endpoint: '/api/chat';
+  {,
+  endpoint: '/api/chat',
         calls: Math.floor(totalCalls * 0.4);
     avgTime: 145
       };
       {
-        endpoint: '/api/generate';
+        endpoint: '/api/generate',
         calls: Math.floor(totalCalls * 0.25);
     avgTime: 2340
       };
       {
-        endpoint: '/api/projects';
+        endpoint: '/api/projects',
         calls: Math.floor(totalCalls * 0.15);
     avgTime: 89
       };
       {
-        endpoint: '/api/auth';
+        endpoint: '/api/auth',
         calls: Math.floor(totalCalls * 0.12);
     avgTime: 56
       };
       {
-        endpoint: '/api/export';
+        endpoint: '/api/export',
         calls: Math.floor(totalCalls * 0.08);
     avgTime: 1240
       }}];

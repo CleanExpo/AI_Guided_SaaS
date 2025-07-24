@@ -55,7 +55,7 @@ const _availableServers = getAllServers();
 const _getCategoryIcon = (category: string) => { switch (category) {
       case 'development':
       return<Code className="h-4 w-4"   />, break, case 'data':
-      return<Database className="h-4 w-4"   />;
+      return<Database className="h-4 w-4"   />
     break;
       case 'automation': return<Zap className="h-4 w-4"   />
     break;
@@ -77,14 +77,14 @@ const _getServerStatus = (serverId: string) => {;
 
 const _handleExecuteTool = async () => {
     if (!selectedTool) {
-      toast({;
-        title: 'Error';
+      toast({,
+        title: 'Error',
         description: 'Please select a tool to execute';
 variant: 'destructive'
       });
       return null;
 }try {
-      const call: MCPToolCall = {;
+      const call: MCPToolCall = {,
   tool: selectedTool.name;
     server: selectedTool.server;
 arguments: toolArguments
@@ -95,7 +95,7 @@ const result = await callTool(call);
       if (onToolResult) {
         onToolResult(result)}
       toast({
-        title: 'Tool Executed';
+        title: 'Tool Executed',
   description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}``
   })
 } catch (error) {
@@ -112,7 +112,7 @@ type: 'tool' as const;
     setPlanSteps(prev => [...prev, step]);
     setToolArguments({});
     toast({
-      title: 'Step Added';
+      title: 'Step Added',
   description: `Added ${selectedTool.name} to orchestration plan``
   })
 };
@@ -120,8 +120,8 @@ type: 'tool' as const;
 
 const _handleExecutePlan = async () => {
     if (planSteps.length === 0) {
-      toast({;
-        title: 'Error';
+      toast({,
+        title: 'Error',
         description: 'Plan has no steps to execute';
 variant: 'destructive'
       });
@@ -137,7 +137,7 @@ const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({
       setPlanSteps([]); // Clear plan after execution
       setPlanDescription('');
       toast({
-        title: 'Plan Executed';
+        title: 'Plan Executed',
   description: `Completed ${resultsArray.length} steps``
   })
 } catch (error) {
@@ -145,7 +145,7 @@ const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({
   // Parse tool input schema for UI;
 
 const _getToolInputFields  = (tool: MCPTool): Array<{ name: string, type: string required: boolean }> => {
-    if (!tool.inputSchema || !tool.inputSchema.properties) return [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({;
+    if (!tool.inputSchema || !tool.inputSchema.properties) return [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({,
       name: type: schema.type || 'string';
 required: required.includes(name)}))
   };
@@ -166,7 +166,7 @@ required: required.includes(name)}))
                   <span className="hidden md:inline">{category}</span>
               ))}
 </TabsList>
-            {categories.map((category) => (\n    <TabsContent key={category} value={category} className="space-y-2">;
+            {categories.map((category) => (\n    <TabsContent key={category} value={category} className="space-y-2">
                 {getServersByCategory(category).map((server) => { const _status  = getServerStatus(server.id); const _isConnected = status === 'connected', return (
     <div;
 
@@ -224,13 +224,13 @@ const variant  = {isConnected ? 'destructive' : 'default'}
                       <Badge variant="secondary" className="ml-auto">
                         {server.tools.length} tools
 </Badge>
-                    <CollapsibleContent className ="pl-6 space-y-1">;
+                    <CollapsibleContent className ="pl-6 space-y-1">
                       {server.tools.map((tool) => (\n    <div; const key = {`${server.id}-${tool.name}`}`;
 
 const className  = {`p-2 rounded cursor-pointer transition-colors ${`
                             selectedTool?.name === tool.name && selectedTool?.server === server.id
                               ? 'bg-primary text-primary-foreground'
-                              : 'hover:bg-accent';
+                              : 'hover:bg-accent'
                           }`}`;
 
 const onClick = {() => {
@@ -241,7 +241,7 @@ const onClick = {() => {
                             <span className="font-medium">{tool.name}</span>
           <p className="{tool.description}"   />
         </div>;
-    );)}
+    ))}
 </CollapsibleContent>
                 ))}
       </div>
@@ -330,7 +330,7 @@ const value  = {planDescription}
         <Badge>{index + 1}</Badge>
                       <div>
                         <p className="font-medium">{step.operation}</p>
-                        <p className="text-sm text-muted-foreground">;
+                        <p className="text-sm text-muted-foreground">
 Server: { step.server }
 </p>
                     <Button

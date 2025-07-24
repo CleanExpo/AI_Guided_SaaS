@@ -59,9 +59,9 @@ const data = await response.json();
   
 const updateConfig = async (updates: Record<string, any>) => {
     try {
-      const response = await fetch('/api/agents/pulse-config', {;
-        method: 'POST';
-        headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/agents/pulse-config', {,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
         body: JSON.stringify(updates)
       });
       if (!response.ok) throw new Error('Failed to update config');

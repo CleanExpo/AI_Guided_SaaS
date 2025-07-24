@@ -19,137 +19,137 @@ export interface MCPServerConfig {
 };
 export const MCPServerRegistry: MCPServerConfig[] = [// Development Tools;
   {
-  id: 'github';
+  id: 'github',
     name: 'GitHub';
-    description: 'GitHub API integration for repository management';
+    description: 'GitHub API integration for repository management',
     url: 'npx -y @modelcontextprotocol/server-github';
-    category: 'development';
+    category: 'development',
     requiredEnv: ['GITHUB_TOKEN'];
     documentation: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github'
 };
   {
-    id: 'gitlab';
+    id: 'gitlab',
     name: 'GitLab';
-    description: 'GitLab API integration for project management';
+    description: 'GitLab API integration for project management',
     url: 'npx -y @modelcontextprotocol/server-gitlab';
-    category: 'development';
+    category: 'development',
     requiredEnv: ['GITLAB_TOKEN', 'GITLAB_URL'],
   {
-    id: 'filesystem';
+    id: 'filesystem',
     name: 'Filesystem';
-    description: 'Local filesystem operations';
+    description: 'Local filesystem operations',
     url: 'npx -y @modelcontextprotocol/server-filesystem';
-    category: 'development';
+    category: 'development',
     documentation: 'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem'
 };
   // Data Tools
   {
-    id: 'postgres';
+    id: 'postgres',
     name: 'PostgreSQL';
-    description: 'PostgreSQL database operations';
+    description: 'PostgreSQL database operations',
     url: 'npx -y @modelcontextprotocol/server-postgres';
-    category: 'data';
+    category: 'data',
     requiredEnv: ['POSTGRES_URL']
   };
   {
-    id: 'sqlite';
+    id: 'sqlite',
     name: 'SQLite';
-    description: 'SQLite database operations';
+    description: 'SQLite database operations',
     url: 'npx -y @modelcontextprotocol/server-sqlite';
     category: 'data'
 };
   {
-    id: 'mysql';
+    id: 'mysql',
     name: 'MySQL';
-    description: 'MySQL database operations';
+    description: 'MySQL database operations',
     url: 'npx -y @modelcontextprotocol/server-mysql';
-    category: 'data';
+    category: 'data',
     requiredEnv: ['MYSQL_URL']
   };
   // AI & ML Tools
   {
-    id: 'brave-search';
+    id: 'brave-search',
     name: 'Brave Search';
-    description: 'Web search using Brave Search API';
+    description: 'Web search using Brave Search API',
     url: 'npx -y @modelcontextprotocol/server-brave-search';
-    category: 'ai';
+    category: 'ai',
     requiredEnv: ['BRAVE_API_KEY']
   };
   {
-    id: 'anthropic';
+    id: 'anthropic',
     name: 'Anthropic';
-    description: 'Anthropic Claude API integration';
+    description: 'Anthropic Claude API integration',
     url: 'npx -y @modelcontextprotocol/server-anthropic';
-    category: 'ai';
+    category: 'ai',
     requiredEnv: ['ANTHROPIC_API_KEY']
   };
   {
-    id: 'openai';
+    id: 'openai',
     name: 'OpenAI';
-    description: 'OpenAI API integration';
+    description: 'OpenAI API integration',
     url: 'npx -y @modelcontextprotocol/server-openai';
-    category: 'ai';
+    category: 'ai',
     requiredEnv: ['OPENAI_API_KEY']
   };
   // Automation Tools
   {
-    id: 'puppeteer';
+    id: 'puppeteer',
     name: 'Puppeteer';
-    description: 'Browser automation with Puppeteer';
+    description: 'Browser automation with Puppeteer',
     url: 'npx -y @modelcontextprotocol/server-puppeteer';
     category: 'automation'
 };
   {
-    id: 'playwright';
+    id: 'playwright',
     name: 'Playwright';
-    description: 'Cross-browser automation';
+    description: 'Cross-browser automation',
     url: 'npx -y @modelcontextprotocol/server-playwright';
     category: 'automation'
 };
   {
-    id: 'selenium';
+    id: 'selenium',
     name: 'Selenium';
-    description: 'Web browser automation';
+    description: 'Web browser automation',
     url: 'npx -y @modelcontextprotocol/server-selenium';
     category: 'automation'
 };
   // Integration Tools
   {
-    id: 'slack';
+    id: 'slack',
     name: 'Slack';
-    description: 'Slack messaging integration';
+    description: 'Slack messaging integration',
     url: 'npx -y @modelcontextprotocol/server-slack';
-    category: 'integration';
+    category: 'integration',
     requiredEnv: ['SLACK_TOKEN']
   };
   {
-    id: 'discord';
+    id: 'discord',
     name: 'Discord';
-    description: 'Discord bot integration';
+    description: 'Discord bot integration',
     url: 'npx -y @modelcontextprotocol/server-discord';
-    category: 'integration';
+    category: 'integration',
     requiredEnv: ['DISCORD_TOKEN']
   };
   {
-    id: 'email';
+    id: 'email',
     name: 'Email';
-    description: 'Email sending and receiving';
+    description: 'Email sending and receiving',
     url: 'npx -y @modelcontextprotocol/server-email';
-    category: 'integration';
+    category: 'integration',
     requiredEnv: ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'],
   {
-    id: 'aws';
+    id: 'aws',
     name: 'AWS';
-    description: 'Amazon Web Services integration';
+    description: 'Amazon Web Services integration',
     url: 'npx -y @modelcontextprotocol/server-aws';
-    category: 'integration';
+    category: 'integration',
     requiredEnv: ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY'],
   {
-    id: 'gcp';
+    id: 'gcp',
     name: 'Google Cloud';
-    description: 'Google Cloud Platform integration';
+    description: 'Google Cloud Platform integration',
     url: 'npx -y @modelcontextprotocol/server-gcp';
-    category: 'integration';
+    category: 'integration',
     requiredEnv: ['GOOGLE_APPLICATION_CREDENTIALS']
   }}];
 /**
@@ -184,11 +184,11 @@ export function checkServerEnvironment(server: MCPServerConfig): {
  */;
 export const CustomMCPServers: MCPServerConfig[] = [
   {
-  id: 'ai-guided-saas';
+  id: 'ai-guided-saas',
     name: 'AI Guided SaaS';
-    description: 'Custom MCP server for AI Guided SaaS platform';
+    description: 'Custom MCP server for AI Guided SaaS platform',
     url: 'ws://localhost: 3001/mcp';
-  category: 'development';
+  category: 'development',
     setupInstructions: ```
 1. Install, dependencies: npm install
 2. Start the MCP, server: npm run;
@@ -197,18 +197,18 @@ export const CustomMCPServers: MCPServerConfig[] = [
     `,``
   },
   {
-    id: 'agent-orchestrator';
+    id: 'agent-orchestrator',
     name: 'Agent Orchestrator';
-    description: 'MCP server for multi-agent coordination';
+    description: 'MCP server for multi-agent coordination',
     url: 'ws://localhost: 3002/mcp';
-  category: 'ai';
+  category: 'ai',
     requiredEnv: ['OPENAI_API_KEY', 'ANTHROPIC_API_KEY'],
   {
-    id: 'knowledge-base';
+    id: 'knowledge-base',
     name: 'Knowledge Base';
-    description: 'RAG knowledge system MCP server';
+    description: 'RAG knowledge system MCP server',
     url: 'ws://localhost: 3003/mcp';
-  category: 'data';
+  category: 'data',
     requiredEnv: ['VECTOR_DB_URL', 'EMBEDDING_API_KEY']], /**
  * Get all available servers (registry + custom)
  */, export function getAllServers(): MCPServerConfig[] {

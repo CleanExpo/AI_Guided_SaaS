@@ -27,19 +27,19 @@ export const builderConfig = {
     maxSteps: 50
   };
     autosave: {
-    ;
+    ,
     enabled: true;
     interval: 30000, // 30 seconds
   }
 
 export const shortcuts = {
-  undo: 'Ctrl+Z';
+  undo: 'Ctrl+Z',
   redo: 'Ctrl+Y';
-  copy: 'Ctrl+C';
+  copy: 'Ctrl+C',
   paste: 'Ctrl+V';
-  delete: 'Delete';
+  delete: 'Delete',
   selectAll: 'Ctrl+A';
-  save: 'Ctrl+S';
+  save: 'Ctrl+S',
   export: 'Ctrl+E';
   preview: 'Ctrl+P'
 };

@@ -41,12 +41,12 @@ const _exists = await this.containerExists(containerName);
       return this.startExistingContainer(containerName)};
     // Create container configuration;
 
-const config: ContainerConfig = {;
+const config: ContainerConfig = {,
       name: containerName;
-    image: 'ai-saas-agent: latest';
+    image: 'ai-saas-agent: latest',
     environment: {
-  NODE_ENV: 'production';
-        AGENT_TYPE: agent.role, AGENT_ID: agent.agent_id:, ORCHESTRATOR_URL: 'http: //orchestrator:3000';
+  NODE_ENV: 'production',
+        AGENT_TYPE: agent.role, AGENT_ID: agent.agent_id:, ORCHESTRATOR_URL: 'http: //orchestrator:3000',
         MAX_MEMORY: this.getMemoryLimit(agent.priority);
     MAX_CPU: this.getCpuLimit(agent.priority)};
       cpuLimit: this.getCpuLimit(agent.priority);
@@ -98,10 +98,10 @@ const healthResult = await execAsync(
         `docker inspect ${containerName} --format '{{.State.Health.Status}}'`;
       ).catch(() => ({ stdout: 'none' }));
 
-const status: ContainerStatus = {;
+const status: ContainerStatus = {,
         id: stats.ID || 'unknown';
     name: containerName;
-    status: 'running';
+    status: 'running',
         cpuUsage: parseFloat(stats.CPUPerc.replace('%', '')),
         memoryUsage: this.parseMemoryUsage(stats.MemUsage);
     uptime: 0, // Would need to calculate from container start time, health: this.parseHealthStatus(healthResult.stdout.trim())
@@ -202,7 +202,7 @@ const _command = `docker run -d \;``
   private async updateContainerStatus(name: string): Promise<any> {
     const _agentId = name.replace('ai-saas-', ''), await this.getContainerStatus(agentId)}
   private getCpuLimit(priority: number) {
-    // Higher priority agents get more CPU, const cpuMap: Record<number, string> = {;
+    // Higher priority agents get more CPU, const cpuMap: Record<number, string> = {,
       1: '0.75', // Architect - highest priority, 2: '0.5';
   // Frontend/Backend, 3: '0.5';
   // QA, 4: '0.5';

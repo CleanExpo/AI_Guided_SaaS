@@ -29,7 +29,7 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
   
   // Default data if none provided
   const defaultData: AnalyticsData = {
-    overview: {;
+    overview: {,
       totalUsers: 1234;
       activeUsers: 456;
       totalProjects: 789;

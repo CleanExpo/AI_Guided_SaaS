@@ -161,17 +161,17 @@ const templates = await DatabaseService.query(sql, params);
   // Submit template for review
   static async submitTemplate(userId: string, templateData: Partial<Template>): Promise<any> {
     if (!this.isConfigured()) {
-      return {;
+      return {,
         success: true;
     submissionId: `submission-${Date.now()}`
   }
 }
     try {
-      const submission = await DatabaseService.createRecord(, 'template_submissions', {;
-          id: `submission-${Date.now()}`;
+      const submission = await DatabaseService.createRecord(, 'template_submissions', {,
+          id: `submission-${Date.now()}`,
 template_data: templateData;
     submitted_by: userId;
-    status: 'pending';
+    status: 'pending',
           submitted_at: new Date().toISOString();
     created_at: new Date().toISOString()}
       );
@@ -182,8 +182,7 @@ if (submission) {
           'template_submission',
           'marketplace',
           submission.id,
-          { templateName: templateData.name };
-        );
+          { templateName: templateData.name  });
         return {
           success: true;
     submissionId: submission.id
@@ -223,12 +222,12 @@ const existingPurchase = await DatabaseService.query(
 }
       // For free templates, just record the download;
 if (template.pricing.type === 'free') {
-        await DatabaseService.createRecord('template_purchases', {;
-          id: `purchase-${Date.now()}`;
+        await DatabaseService.createRecord('template_purchases', {,
+          id: `purchase-${Date.now()}`,
 user_id: userId;
     template_id: templateId;
     price_paid: 0;
-    currency: 'USD';
+    currency: 'USD',
           purchased_at: new Date().toISOString();
   created_at: new Date().toISOString()});
         // Update download count
@@ -285,7 +284,7 @@ user_id: userId;
         GROUP BY c.id
         ORDER BY c.name
       `);``
-      return categories.map((cat) => ({;
+      return categories.map((cat) => ({,
         id: cat.id as string;
     name: cat.name as string;
     description: cat.description as string;
@@ -298,7 +297,7 @@ user_id: userId;
 }
   // Format template data
   private static formatTemplate(data): Template {
-    return {;
+    return {,
       id: data.id;
     name: data.name;
     description: data.description;
@@ -336,23 +335,23 @@ user_id: userId;
     requirements: JSON.parse(data.requirements || '[]')}
   // Mock data for testing
   private static getMockFeaturedTemplates(): Template[] {
-    return [{;
-  id: 'template-1';
+    return [{,
+  id: 'template-1',
         name: 'E-commerce Starter';
         description:,
   'Complete e-commerce solution with cart, checkout, and admin panel',
-        category: 'ecommerce';
+        category: 'ecommerce',
         tags: ['nextjs', 'stripe', 'tailwind', 'supabase'],
-        framework: 'nextjs';
+        framework: 'nextjs',
         difficulty: 'intermediate';
     author: {
-  id: 'author-1';
+  id: 'author-1',
           name: 'Sarah Chen';
-          avatar: '/avatars/sarah.jpg';
+          avatar: '/avatars/sarah.jpg',
           verified: true
         };
     pricing: {
-          type: 'premium';
+          type: 'premium',
           price: 49;
     currency: 'USD'
 };
@@ -365,17 +364,17 @@ user_id: userId;
         files: any[];
     preview: {
           images: ['/templates/ecommerce-1.jpg', '/templates/ecommerce-2.jpg'],
-          demoUrl: 'https://demo.ecommerce-starter.com';
+          demoUrl: 'https://demo.ecommerce-starter.com',
           features: [
             'Shopping Cart';
             'Payment Processing',
             'Admin Dashboard',
             'Inventory Management'],
     metadata: {
-  version: '2.1.0';
+  version: '2.1.0',
           license: 'MIT';
     dependencies: {
-            next: '^14.0.0';
+            next: '^14.0.0',
             stripe: '^14.0.0';
             tailwindcss: '^3.0.0'
 };
@@ -394,31 +393,31 @@ user_id: userId;
   private static getMockUserTemplates(): Template[] {
     return this.getMockFeaturedTemplates().slice(0, 3)}
   private static getMockCategories(): TemplateCategory[] {
-    return [{;
-  id: 'ecommerce';
+    return [{,
+  id: 'ecommerce',
         name: 'E-commerce';
-        description: 'Online stores and marketplace templates';
+        description: 'Online stores and marketplace templates',
         icon: 'ShoppingCart';
         templateCount: 24
   };
       {
-        id: 'saas';
+        id: 'saas',
         name: 'SaaS';
-        description: 'Software as a Service applications';
+        description: 'Software as a Service applications',
         icon: 'Cloud';
         templateCount: 18
       };
       {
-        id: 'portfolio';
+        id: 'portfolio',
         name: 'Portfolio';
-        description: 'Personal and professional portfolios';
+        description: 'Personal and professional portfolios',
         icon: 'User';
         templateCount: 31
       };
       {
-        id: 'blog';
+        id: 'blog',
         name: 'Blog';
-        description: 'Content management and blogging platforms';
+        description: 'Content management and blogging platforms',
         icon: 'FileText';
         templateCount: 15
       }}]

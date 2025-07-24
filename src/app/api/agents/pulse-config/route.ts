@@ -4,7 +4,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     try {
         const body  = await request.json(); const updates = body.updates || {};
         // Simulate pulse configuration update
-        return NextResponse.json({ success: true, message: 'Pulse configuration updated';
+        return NextResponse.json({ success: true, message: 'Pulse configuration updated',
             config: updates })
 } catch (error) {
         console.error('Pulse config error:', error);
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        const config = {;
+        const config = {,
             interval: 30000;
             enabled: true;
             metrics: ['cpu', 'memory', 'requests']

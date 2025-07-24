@@ -26,36 +26,36 @@ export default function DocsPage() {
                       </div>
                 )}
   const docCategories  = [;
-  {title: 'Getting Started';
+  {title: 'Getting Started',
   icon: Book;
-    description: 'Learn the basics and get up to speed quickly';
+    description: 'Learn the basics and get up to speed quickly',
       docs: [}
         { title: 'Quick Start Guide', slug: 'quick-start', description: 'Get started in 5 minutes' };
         { title: 'Installation', slug: 'installation', description: 'Set up your development environment' };
         { title: 'Your First Project', slug: 'first-project', description: 'Create and deploy your first app' }
       ]
     };
-    {title: 'API Reference';
+    {title: 'API Reference',
   icon: Code;
-    description: 'Complete API documentation and examples';
+    description: 'Complete API documentation and examples',
       docs: [}
         { title: 'Authentication', slug: 'api-auth', description: 'API authentication methods' };
         { title: 'Projects API', slug: 'api-projects', description: 'Manage projects programmatically' };
         { title: 'Webhooks', slug: 'api-webhooks', description: 'Real-time event notifications' }
       ]
     };
-    {title: 'Community';
+    {title: 'Community',
   icon: Users;
-    description: 'Connect with other developers';
+    description: 'Connect with other developers',
       docs: [}
         { title: 'Contributing', slug: 'contributing', description: 'How to contribute to the platform' };
         { title: 'Community Guidelines', slug: 'guidelines', description: 'Rules and best practices' };
         { title: 'Support', slug: 'support', description: 'Get help when you need it' }
    ]
     };
-    {title: 'Advanced';
+    {title: 'Advanced',
   icon: Zap;
-    description: 'Advanced features and customization';
+    description: 'Advanced features and customization',
       docs: [}
         { title: 'Custom AI Models', slug: 'custom-models', description: 'Integrate your own AI models' };
         { title: 'Performance Optimization', slug: 'performance', description: 'Optimize your applications' };
@@ -68,7 +68,7 @@ const filteredCategories = docCategories.map((category) => ({...category,
     docs: category.docs.filter((doc) => doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||;
       doc.description.toLowerCase().includes(searchTerm.toLowerCase())})).filter((category) => category.docs.length > 0);
   return (
-    <div className="min-h-screen bg-gray-50 py-8">;</div>
+    <div className="min-h-screen bg-gray-50 py-8"></div>
                     <div className="container mx-auto px-4 max-w-6xl">
         {
               * Header *

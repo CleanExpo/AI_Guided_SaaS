@@ -25,53 +25,53 @@ interface LearningPath {
 }   />
 
 const learningPaths: LearningPath[]  = [;
-  {id: 'beginner';
+  {id: 'beginner',
     title: 'Complete Beginner Path';
-    description: 'Perfect for developers new to AI-powered development platforms';
+    description: 'Perfect for developers new to AI-powered development platforms',
     totalDuration: '2 hours';
-    difficulty: 'beginner';
+    difficulty: 'beginner',
     tutorials: [
       {
-  id: '1';
+  id: '1',
         title: 'Introduction to AI Guided SaaS';
-        description: 'Learn the basics of our platform';
+        description: 'Learn the basics of our platform',
         duration: '15 min';
-        difficulty: 'beginner';
+        difficulty: 'beginner',
 completed: true}
   };
-      {id: '2';
+      {id: '2',
         title: 'Your First Project';
-        description: 'Create and deploy your first application';
+        description: 'Create and deploy your first application',
         duration: '30 min';
-        difficulty: 'beginner';
+        difficulty: 'beginner',
 completed: false}
       };
-      {id: '3';
+      {id: '3',
         title: 'Understanding AI Features';
-        description: 'Explore AI-powered code generation';
+        description: 'Explore AI-powered code generation',
         duration: '45 min';
-        difficulty: 'beginner';
+        difficulty: 'beginner',
 completed: false}
     ]
   };
-  {id: 'intermediate';
+  {id: 'intermediate',
     title: 'Intermediate Development';
-    description: 'Advanced features and best practices';
+    description: 'Advanced features and best practices',
     totalDuration: '4 hours';
-    difficulty: 'intermediate';
+    difficulty: 'intermediate',
     tutorials: [{
-  id: '4';
+  id: '4',
         title: 'Advanced Project Configuration';
-        description: 'Configure complex project settings';
+        description: 'Configure complex project settings',
         duration: '1 hour';
-        difficulty: 'intermediate';
+        difficulty: 'intermediate',
 completed: false}
 };
-      {id: '5';
+      {id: '5',
         title: 'Team Collaboration';
-        description: 'Work with teams effectively';
+        description: 'Work with teams effectively',
         duration: '45 min';
-        difficulty: 'intermediate';
+        difficulty: 'intermediate',
 completed: false}
     ]
 }
@@ -93,7 +93,7 @@ break}
   const _getProgressPercentage = (path: LearningPath) => {const _completed = path.tutorials.filter((t) => t.completed).length;
     return (completed, path.tutorials.length) * 100};
   return (
-    <div className="min-h-screen bg-gray-50 py-8">;</div>
+    <div className="min-h-screen bg-gray-50 py-8"></div>
                     <div className="container mx-auto px-4 max-w-6xl mb-8"   />
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">Learning Paths</h1>
                         <p className="text-gray-600">
@@ -129,7 +129,7 @@ break}
                           isCompleted ? 'bg-green-50 border-green-200' :
                           isLocked ? 'bg-gray-50 border-gray-200 opacity-50' :;
                           'bg-white border-gray-200, hover:bg-gray-50'}`}`;
-className="flex-shrink-0 mr-3">;
+className="flex-shrink-0 mr-3">
                           {isCompleted ? (</div>
                                           <CheckCircle className="h-5 w-5 text-green-600" 
               >

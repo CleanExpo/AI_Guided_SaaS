@@ -10,7 +10,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 const roomId  = 'room_' + Math.random().toString(36).substr(2, 9);
 
-const room = {;
+const room = {,
       id: roomId;
       projectId,
       settings: settings || {};
@@ -25,8 +25,8 @@ const room = {;
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    // Simulate getting active rooms, const rooms = [, {;
-        id: 'room_1';
+    // Simulate getting active rooms, const rooms = [, {,
+        id: 'room_1',
         projectId: 'proj_1';
         participants: 3;
         active: true;

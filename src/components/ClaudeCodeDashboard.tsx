@@ -46,11 +46,11 @@ const [currentCommand, setCurrentCommand] = useState<string | null>(null);
 
 const [commandHistory, setCommandHistory]  = useState<CommandExecution[]>([]);</CommandExecution>
 
-const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({;
+const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({,
     currentTokens: 42000;
     maxTokens: 200000;
     utilizationRate: 0.21;
-    optimizationLevel: 'Strategic - High Capacity Available';
+    optimizationLevel: 'Strategic - High Capacity Available',
     lastCompaction: null;
         </MemoryStatus>;
 efficiency: 78});
@@ -59,13 +59,13 @@ const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(
     // null;
 </WorkflowResult>;
 
-const claudeCommands  = [ { command: '/init-docs', description: 'Initialize comprehensive documentation system';
+const claudeCommands  = [ { command: '/init-docs', description: 'Initialize comprehensive documentation system',
   icon: Sparkles, category: 'initialization', tokenImpact: 8000 estimatedTime: 12000}, {
-      command: '/sync-docs', description: 'Synchronize documentation with project state';
+      command: '/sync-docs', description: 'Synchronize documentation with project state',
   icon: GitBranch, category: 'maintenance', tokenImpact: 2000 estimatedTime: 5000}, {
-      command: '/compact-docs', description: 'Optimize context window with strategic compression';
+      command: '/compact-docs', description: 'Optimize context window with strategic compression',
   icon: Database, category: 'optimization', tokenImpact: -15000 estimatedTime: 8000}, {
-      command: '/docs:status', description: 'Check documentation health and optimization status';
+      command: '/docs:status', description: 'Check documentation health and optimization status',
   icon: BarChart3, category: 'monitoring', tokenImpact: 500 estimatedTime: 2000}];
 
 const _executeCommand = async (commandName: string) => {;
@@ -75,9 +75,9 @@ const command = claudeCommands.find(cmd => cmd.command === commandName);
     if (!command) return null;
     // Add command to history;
 
-const execution: CommandExecution = {;
+const execution: CommandExecution = {,
   command: commandName;
-    status: 'executing';
+    status: 'executing',
       output: '';
     tokenImpact: command.tokenImpact;
 executionTime: 0};
@@ -104,7 +104,7 @@ efficiency: Math.min(
 index === 0;
             ? {
                 ...cmd,
-                status: 'completed';
+                status: 'completed',
                 output: generateCommandOutput(commandName);
                 executionTime}
             : cmd
@@ -128,7 +128,7 @@ integrationCommands: [
       setCommandHistory(prev =>
         prev.map((cmd, index) =>, index === 0, ? {
                 ...cmd,
-                status: 'error';
+                status: 'error',
                 output: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`}
             : cmd
         ))
@@ -308,7 +308,7 @@ div className="bg-muted p-2 rounded text-xs font-mono">
                       {execution.output}
             )}</span>
                   <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                    <span>;
+                    <span>
 Token: Impact: {execution.tokenImpact > 0 ? '+' : ''},</span>
     {execution.tokenImpact}</span>
                     <span>Status: {execution.status}</span>
@@ -343,8 +343,7 @@ const _renderWorkflowResults = (): void => {
                     className="font-mono text-sm bg-muted p-2 rounded";
                   >
                     {cmd}
-    );
-              )}</div>
+    ))}</div>
           <div>
             <p className="text-sm text-muted-foreground mb-2">Next Steps</p>
             <ul className="space-y-1">

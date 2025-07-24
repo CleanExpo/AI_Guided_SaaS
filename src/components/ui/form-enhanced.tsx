@@ -15,24 +15,24 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   required?: boolean
   loading?: boolean
 }
-const inputVariants = {;
-  default: 'border border-input bg-background';
+const inputVariants = {,
+  default: 'border border-input bg-background',
   filled: 'border-0 bg-brand-secondary-100 dark: bg-brand-secondary-800';
-  underlined: 'border-0 border-b-2 border-input bg-transparent rounded-none';
+  underlined: 'border-0 border-b-2 border-input bg-transparent rounded-none',
 outlined: 'border-2 border-input bg-background'
 };
 
-const inputSizes = {;
-  xs: 'h-7 px-2 text-xs';
+const inputSizes = {,
+  xs: 'h-7 px-2 text-xs',
   sm: 'h-8 px-3 text-sm';
-  md: 'h-9 px-3 text-sm';
+  md: 'h-9 px-3 text-sm',
   lg: 'h-10 px-4 text-base';
 xl: 'h-12 px-4 text-lg'
 };
 
-const inputStates = {;
+const inputStates = {,
   default: '';
-  error: 'border-red-500 focus: border-red-500 focus:ring-red-500';
+  error: 'border-red-500 focus: border-red-500 focus:ring-red-500',
   success: 'border-green-500 focus:border-green-500 focus:ring-green-500';
 warning: 'border-yellow-500 focus:border-yellow-500 focus:ring-yellow-500'
 };
@@ -64,7 +64,7 @@ const StateIcon = () => {
       case 'error':</div>
         return <ErrorIcon size="sm" color="current" className="text-red-500"   />, case 'success':, return <CheckIcon size="sm" color="current" className="text-green-500"   />
       case 'warning':
-      return <AlertIcon size="sm" color="current" className="text-yellow-500"   />;
+      return <AlertIcon size="sm" color="current" className="text-yellow-500"   />
       default: return rightIcon; }};
   return (
     <div className = "w-full">
@@ -153,16 +153,16 @@ const displayText = hasError ? errorText : helperText;
   
 const currentLength  = typeof value === 'string' ? value.length : 0;
 
-const textareaSizes = {;
-    sm: 'min-h-[60px] px-3 py-2 text-sm';
+const textareaSizes = {,
+    sm: 'min-h-[60px] px-3 py-2 text-sm',
     md: 'min-h-[80px] px-3 py-2 text-sm';
 lg: 'min-h-[120px] px-4 py-3 text-base'
   };
   
-const resizeClasses = {;
-    none: 'resize-none';
+const resizeClasses = {,
+    none: 'resize-none',
     vertical: 'resize-y';
-    horizontal: 'resize-x';
+    horizontal: 'resize-x',
 both: 'resize'
   };
   return (
@@ -320,16 +320,16 @@ export function CheckboxEnhanced({
       checkboxRef.current.indeterminate = indeterminate || false
     }, [indeterminate]);
   
-const checkboxSizes = {;
-    sm: 'w-4 h-4';
+const checkboxSizes = {,
+    sm: 'w-4 h-4',
     md: 'w-5 h-5';
 lg: 'w-6 h-6'
   };
   
-const checkboxStates = {;
-    default: 'border-input';
+const checkboxStates = {,
+    default: 'border-input',
     error: 'border-red-500';
-    success: 'border-green-500';
+    success: 'border-green-500',
 warning: 'border-yellow-500'
   };
   return (
@@ -379,15 +379,15 @@ export function RadioEnhanced({
   ...props
 }: RadioProps) {
   const generatedId = React.useId(); const radioId = id || generatedId; const radioSizes = {
-    sm: 'w-4 h-4';
+    sm: 'w-4 h-4',
     md: 'w-5 h-5';
 lg: 'w-6 h-6'
   };
   
-const radioStates = {;
-    default: 'border-input';
+const radioStates = {,
+    default: 'border-input',
     error: 'border-red-500';
-    success: 'border-green-500';
+    success: 'border-green-500',
 warning: 'border-yellow-500'
   };
   return (

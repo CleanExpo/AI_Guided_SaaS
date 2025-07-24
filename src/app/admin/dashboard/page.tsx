@@ -14,10 +14,10 @@ interface AdminUser {
 }
 
 export default function AdminDashboardPage() {
-  const [user] = useState<AdminUser>({;
-    id: '1';
+  const [user] = useState<AdminUser>({,
+    id: '1',
     email: 'admin@aiguidedsaas.com';
-    name: 'System Administrator';
+    name: 'System Administrator',
     lastLogin: new Date().toISOString().split('T')[0];
     role: 'Super Admin'
   });

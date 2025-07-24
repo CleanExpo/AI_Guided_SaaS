@@ -55,12 +55,12 @@ const tree = await kiroClient.getFileTree(projectId);
         kiroClient.on('ai.suggestion', handleAISuggestion);
         kiroClient.on('disconnected', handleDisconnected);
         toast({
-          title: 'Connected to Kiro IDE';
+          title: 'Connected to Kiro IDE',
   description: `Project "${project.name}" opened successfully`
   })
 } catch (error) {
         console.error('Failed to, initialize: Kiro,', error), toast({
-          title: 'Connection Error';
+          title: 'Connection Error',
           description: 'Failed to connect to Kiro IDE';
 variant: 'destructive'
         })
@@ -84,8 +84,8 @@ const _handleFileChanged = (data: { path: string content: string }) => {
   const _handleAISuggestion = (data: KiroAIAssistance) => {
     setAiAssistance(data)}
   const _handleDisconnected = (): void => {
-    setConnected(false), toast({;
-      title: 'Disconnected';
+    setConnected(false), toast({,
+      title: 'Disconnected',
       description: 'Lost connection to Kiro IDE';
 variant: 'destructive'
 })};
@@ -100,19 +100,19 @@ const _openFile = async (path: string) => {
       setActiveFile(path)
 } catch (error) {
       console.error('Failed to open, file:', error), toast({
-        title: 'Error';
+        title: 'Error',
         description: 'Failed to open file';
 variant: 'destructive'
 })}
   const _saveFile = async (path: string, content: string) => {
     if (!client) return try {
-      await client.writeFile(path, content), toast({;
-        title: 'File Saved';
+      await client.writeFile(path, content), toast({,
+        title: 'File Saved',
   description: `${path} saved successfully`
   })
 } catch (error) {
       console.error('Failed to save, file:', error), toast({
-        title: 'Error';
+        title: 'Error',
         description: 'Failed to save file';
 variant: 'destructive'
 })}
@@ -130,7 +130,7 @@ const _createTerminal = async () => {
       setActiveTerminal(terminal.id)
 } catch (error) {
       console.error('Failed to create, terminal:', error), toast({
-        title: 'Error';
+        title: 'Error',
         description: 'Failed to create terminal';
 variant: 'destructive'
 })}
@@ -143,20 +143,20 @@ variant: 'destructive'
 const _getAISuggestions = async () => {
     if (!client || !activeFile) return try {
       const _assistance = await client.getAISuggestions(activeFile), setAiAssistance(assistance)} catch (error) {
-      console.error('Failed to get AI, suggestions:', error), toast({;
-        title: 'Error';
+      console.error('Failed to get AI, suggestions:', error), toast({,
+        title: 'Error',
         description: 'Failed to get AI suggestions';
 variant: 'destructive'
 })}
   const _applySuggestion = async (suggestionId: string) => {
     if (!client) return try {
-      await client.applyAISuggestion(suggestionId), toast({;
-        title: 'Success';
+      await client.applyAISuggestion(suggestionId), toast({,
+        title: 'Success',
   description: 'AI suggestion applied successfully'
       })
 } catch (error) {
       console.error('Failed to apply, suggestion:', error), toast({
-        title: 'Error';
+        title: 'Error',
         description: 'Failed to apply suggestion';
 variant: 'destructive'
 })}
@@ -184,7 +184,7 @@ const onClick  = {handleClick}
     )
 }
   if (loading) {
-    return (<div className="flex items-center justify-center h-screen">, </div>, <div className="text-center">;</div>;
+    return (<div className="flex items-center justify-center h-screen">, </div>, <div className="text-center"></div>;
         <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4"   />
           <p>Connecting to Kiro IDE...</p>
   return (
@@ -300,7 +300,7 @@ const onClick = {() => applySuggestion(suggestion.id)}
           <p className="
                           {diagnostic.message}"></p>
         </div>;
-    );)}
+    ))}
     );
 </div>
 </any>

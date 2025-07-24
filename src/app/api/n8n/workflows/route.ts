@@ -16,7 +16,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 const workflow = {
       id: 'workflow_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,;
-      status: 'created';
+      status: 'created',
       createdAt: new Date().toISOString();
       active: true
     };
@@ -30,16 +30,16 @@ const workflow = {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    // Simulate getting workflows, const workflows = [, {;
-        id: 'workflow_1';
+    // Simulate getting workflows, const workflows = [, {,
+        id: 'workflow_1',
         type: 'deployment';
-        name: 'Auto Deploy';
+        name: 'Auto Deploy',
         status: 'active';
         createdAt: new Date().toISOString()};
       {
-        id: 'workflow_2';
+        id: 'workflow_2',
         type: 'testing';
-        name: 'Test Suite';
+        name: 'Test Suite',
         status: 'active';
         createdAt: new Date().toISOString()}
     ];

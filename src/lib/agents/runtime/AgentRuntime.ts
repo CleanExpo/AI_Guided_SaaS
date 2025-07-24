@@ -210,7 +210,7 @@ if (result.success) {
 
 const _endTime  = Date.now();
 
-const taskResult: TaskResult = {;
+const taskResult: TaskResult = {,
     taskId: task.id, agentType: task.agentType;
           result,
           startTime,
@@ -232,7 +232,7 @@ const taskResult: TaskResult = {;
 
 const _endTime  = Date.now();
 
-const failedResult: TaskResult = {;
+const failedResult: TaskResult = {,
     taskId: task.id, agentType: task.agentType;
     result: {
   success: false;
@@ -348,7 +348,7 @@ const deps = dependencies.get(task.id) || [];
    * Execute with timeout
    */
   private async executeWithTimeout<T>(
-promise: Promise<T>;
+promise: Promise<T>
     timeoutMs: number
   ): Promise<any> {
     const _timeout = new Promise<never>((_, reject) => {

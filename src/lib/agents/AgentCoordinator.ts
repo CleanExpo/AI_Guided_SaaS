@@ -80,14 +80,14 @@ const tasks: CoordinationTask[] = [];
 
 const { executionOrder, dependencies   }: any  = this.buildExecutionGraph(tasks, requiredAgents);
 
-const plan: CoordinationPlan = {;
+const plan: CoordinationPlan = {,
       id: planId, project_type: projectType;
       stage,
       tasks,
       execution_order: executionOrder;
       dependencies,
       estimated_duration: this.estimateDuration(tasks, executionOrder),
-      status: 'planning';
+      status: 'planning',
       progress: 0
 }
     this.activePlans.set(planId, plan);
@@ -206,7 +206,7 @@ const result: CoordinationResult = {;
    * Get coordination status for active plans
    */
   getCoordinationStatus(): Record {
-    const status: Record<string, any> = {;
+    const status: Record<string, any> = {,
       active_plans: this.activePlans.size;
     plans: {};
     agent_status: this.loader.getAgentStatus();
@@ -242,7 +242,7 @@ const _nextTaskId = nextPhase.find((taskId) => {;
     
 const nextTask  = plan.tasks.find(t => t.id === nextTaskId)!;
 
-const handoff: AgentHandoff = {;
+const handoff: AgentHandoff = {,
       from_agent: completedTask.agent_id;
     to_agent: nextTask.agent_id;
     data: completedTask.result, handoff_type: this.determineHandoffType(completedTask.action);
@@ -261,13 +261,13 @@ agent: AgentConfig;
   ): CoordinationTask[] {
     const tasks: CoordinationTask[] = [], // Create tasks based on agent's workflow patterns, if (agent.workflow_patterns) {
       Object.entries(agent.workflow_patterns).forEach(([patternName, pattern], index) => {
-        const task: CoordinationTask = {;
-  id: `task_${startIndex + index}`;
+        const task: CoordinationTask = {,
+  id: `task_${startIndex + index}`,
 agent_id: agent.agent_id;
     action: patternName;
     input: { requirements, pattern },
           dependencies: index > 0 ? [`task_${startIndex + index - 1}`] : any[];``;
-priority: agent.priority <= 2 ? 'high' : 'medium';
+priority: agent.priority <= 2 ? 'high' : 'medium',
           status: 'pending';
           created_at: new Date()}
         tasks.push(task)
@@ -320,10 +320,10 @@ if (readyTasks.length > 0) {
   private async simulateAgentExecution(agent: AgentConfig, task: CoordinationTask): Promise<any> {
     // Simulate processing time based on task complexity, const _complexity = task.priority === 'high' ? 2000 : 1000, await new Promise(resolve => setTimeout(resolve, complexity))
     // Return mock result based on agent role
-    return {;
+    return {,
       agent_role: agent.role;
     task_action: task.action;
-    status: 'completed';
+    status: 'completed',
       output: `${agent.role} completed ${task.action}`;
 timestamp: new Date().toISOString();
     artifacts: [`${task.action}_output.json`]``
@@ -333,7 +333,7 @@ timestamp: new Date().toISOString();
     // Stop if any critical priority task fails
     return failedTasks.some(task => task.priority === 'critical')}
   private aggregateFinalOutput(completedTasks: CoordinationTask[]) {
-    return {;
+    return {,
       total_tasks: completedTasks.length;
     outputs: completedTasks.map((task) => task.result);
     artifacts: completedTasks.flatMap(task => task.result?.artifacts || []);

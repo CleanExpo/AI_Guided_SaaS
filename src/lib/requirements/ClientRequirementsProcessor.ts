@@ -75,9 +75,9 @@ Focus on, identifying:
 6. Security needs
 `;
 
-const response = await this.aiService.generateResponse({;
+const response = await this.aiService.generateResponse({,
     message: prompt;
-    persona: 'architect';
+    persona: 'architect',
       context: 'requirement_extraction'
     })
     try {
@@ -87,7 +87,7 @@ const response = await this.aiService.generateResponse({;
         return this.fallbackExtraction(input)}
 }
   private enrichRequirements(requirements: any[]): ExtractedRequirement[] {
-    return requirements.map((req, index) => ({;
+    return requirements.map((req, index) => ({,
       id: req.id || `req_${String(index + 1).padStart(3, '0')}`,``;
 category: this.validateCategory(req.category);
     description: req.description || 'No description provided';
@@ -138,7 +138,7 @@ const phases = this.createPhases(requirements, complexity);
 
 const _estimatedDuration = this.estimateDuration(phases, complexity);
     return {
-      id: `roadmap_${Date.now()}`;
+      id: `roadmap_${Date.now()}`,
 projectName: this.extractProjectName(originalInput);
       requirements,
       phases,
@@ -169,8 +169,8 @@ requirements: ExtractedRequirement[];
     complexity: DevelopmentRoadmap['complexity']
   ): RoadmapPhase[] {
     const phases: RoadmapPhase[] = [], // Phase, 1: Architecture & Planning, if (complexity !== 'simple') {
-      phases.push({;
-        id: 'phase_1';
+      phases.push({,
+        id: 'phase_1',
         name: 'Architecture & Planning';
         agents: ['agent_architect'];
     tasks: [
@@ -180,7 +180,7 @@ requirements: ExtractedRequirement[];
           'API specification'
    ],
         dependencies: [];
-    duration: complexity === 'enterprise' ? '2 weeks' : '1 week';
+    duration: complexity === 'enterprise' ? '2 weeks' : '1 week',
         parallel: false
       })
 }
@@ -191,7 +191,7 @@ const coreAgents = new Set<string>();
       .filter((req) => req.priority === 'high')
       .forEach((req) => req.agents.forEach((agent) => coreAgents.add(agent))
     phases.push({
-      id: 'phase_2';
+      id: 'phase_2',
       name: 'Core Development';
       agents: Array.from(coreAgents);
 tasks: requirements
@@ -206,7 +206,7 @@ tasks: requirements
 const featureReqs = requirements.filter((req) => req.priority === 'medium');
     if (featureReqs.length > 0) {
       phases.push({
-        id: 'phase_3';
+        id: 'phase_3',
         name: 'Feature Development';
         agents: Array.from(new Set(featureReqs.flatMap(req => req.agents));
     tasks: featureReqs.map((req) => req.description);
@@ -217,7 +217,7 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
 }
     // Phase, 4: Testing & QA
     phases.push({
-      id: 'phase_4';
+      id: 'phase_4',
       name: 'Testing & Quality Assurance';
       agents: ['agent_qa'];
     tasks: [
@@ -227,12 +227,12 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
         'Security audit'
    ],
       dependencies: featureReqs.length > 0 ? ['phase_3'] : ['phase_2'];
-    duration: complexity === 'simple' ? '3 days' : '1 week';
+    duration: complexity === 'simple' ? '3 days' : '1 week',
       parallel: false
     });
     // Phase, 5: Deployment
     phases.push({
-      id: 'phase_5';
+      id: 'phase_5',
       name: 'Deployment & Launch';
       agents: ['agent_devops'];
     tasks: [
@@ -242,7 +242,7 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
         'Monitoring setup'
    ],
       dependencies: ['phase_4'];
-    duration: '3-5 days';
+    duration: '3-5 days',
       parallel: false
     });
     return phases;
@@ -262,7 +262,7 @@ phases: RoadmapPhase[];
     complexity: DevelopmentRoadmap['complexity']
   ) {
     // Simple estimation based on complexity
-        const baseWeeks = {;
+        const baseWeeks = {,
       simple: 2;
     moderate: 4;
     complex: 8;
@@ -309,11 +309,11 @@ const _hasBackend = requirements.some(r => r.agents.includes('agent_backend');
   private fallbackExtraction(input: string): ExtractedRequirement[] {
     // Simple fallback extraction if AI fails
     console.warn('Using fallback extraction method');
-        return [{;
-  id: 'req_001';
+        return [{,
+  id: 'req_001',
       category: 'functional';
       description: input.substring(0, 200),
-      priority: 'high';
+      priority: 'high',
       agents: ['agent_architect'];
     keywords: this.extractKeywords(input);
     constraints: any[]

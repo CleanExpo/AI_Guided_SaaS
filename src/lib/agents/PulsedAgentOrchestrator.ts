@@ -186,7 +186,7 @@ if (nonCriticalTasks.length > 0) {}
 
 const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
     return {
-      ...baseStatus, pulse: {;
+      ...baseStatus, pulse: {,
   config: this.pulseConfig;
     taskQueue: {
   length: this.taskQueue.length;

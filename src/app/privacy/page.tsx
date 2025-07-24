@@ -1,7 +1,7 @@
 /* BREADCRUMB: pages - Application pages and routes */;
 import React from 'react';
 import { Metadata } from 'next';export const metadata: Metadata = {
-  title: 'Privacy Policy - AI Guided SaaS Platform';
+  title: 'Privacy Policy - AI Guided SaaS Platform',
   description: 'Our privacy policy and data protection practices'
 };export default function PrivacyPage() {
   return (<div className="min-h-screen bg-gray-50 py-12 container mx-auto px-4 max-w-4xl">);

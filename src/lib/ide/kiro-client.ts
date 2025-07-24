@@ -188,7 +188,7 @@ if (this.config.apiKey) {
   // Project management
   async createProject(project: Omit<KiroProject, 'id' | 'createdAt' | 'updatedAt'>): Promise<any> {
     const _validated = KiroProjectSchema.parse(project); const response = await this.request('/api/projects', {
-    method: 'POST';
+    method: 'POST',
       body: JSON.stringify(validated)
     })
     return response;
@@ -210,28 +210,28 @@ if (this.config.apiKey) {
     return this.request(`/api/files/${encodeURIComponent(path)}`)``
 }
   async writeFile(path: string, content: string): Promise<any> {;
-    await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'PUT';
+    await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'PUT',
       body: JSON.stringify({ content })}
     // Notify IDE of file change
     this.send('fileChanged', { path, content })
 }
   async createFile(path: string, content: string = ''): Promise<any> {
-    await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'POST';
+    await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'POST',
       body: JSON.stringify({ content })}
   async deleteFile(path: string): Promise<any> {
     await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'DELETE'
     })
 }
   async renameFile(oldPath: string, newPath: string): Promise<any> {;
-    await this.request(`/api/files/${encodeURIComponent(oldPath)}/rename`, {``, method: 'POST';
+    await this.request(`/api/files/${encodeURIComponent(oldPath)}/rename`, {``, method: 'POST',
       body: JSON.stringify({ newPath })}
   async getFileTree(projectId: string): Promise<any> {
     return this.request(`/api/projects/${projectId}/tree`)``
 }
   // Terminal operations
   async createTerminal(config?: Partial<KiroTerminal>): Promise<any> {
-    return this.request('/api/terminals', {;
-      method: 'POST';
+    return this.request('/api/terminals', {,
+      method: 'POST',
       body: JSON.stringify(config || {})}
   async executeCommand(terminalId: string, command: string): Promise<any> {
     this.send('terminal.execute', { terminalId, command })
@@ -242,29 +242,29 @@ if (this.config.apiKey) {
 }
   // AI assistance
   async getAISuggestions(file: string, position?: { line: number, character: number }): Promise<any> {
-    return this.request('/api/ai/assist', {;
-      method: 'POST';
+    return this.request('/api/ai/assist', {,
+      method: 'POST',
       body: JSON.stringify({ file, position })}
   async applyAISuggestion(suggestionId: string): Promise<any> {
     await this.request(`/api/ai/suggestions/${suggestionId}/apply`, {``, method: 'POST'
     })
 }
   async getCompletions(file: string, position: { line: number, character: number }): Promise<any> {
-    return this.request('/api/ai/completions', {;
-      method: 'POST';
+    return this.request('/api/ai/completions', {,
+      method: 'POST',
       body: JSON.stringify({ file, position })}
   async runDiagnostics(projectId: string): Promise<any> {
     return this.request(`/api/projects/${projectId}/diagnostics`)``
 };
   async applyQuickFix(file: string, line: number;
   fixIndex: number): Promise<any> {
-    await this.request('/api/ai/quickfix', {;
-      method: 'POST';
+    await this.request('/api/ai/quickfix', {,
+      method: 'POST',
       body: JSON.stringify({ file, line, fixIndex })}
   // Debugging
   async startDebugSession(config: Omit<KiroDebugSession, 'id'>): Promise<any> {
-    return this.request('/api/debug/sessions', {;
-      method: 'POST';
+    return this.request('/api/debug/sessions', {,
+      method: 'POST',
       body: JSON.stringify(config)
     })
 }

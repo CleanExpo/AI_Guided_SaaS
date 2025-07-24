@@ -12,7 +12,7 @@ if (debugKey !== 'debug123' && process.env.NODE_ENV === 'production') {
             return NextResponse.json({ error: 'Access denied' }, { status: 403 })
 }
         const debugInfo = {
-            environment: {;
+            environment: {,
                 NODE_ENV: process.env.NODE_ENV;
                 ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL;
                 ADMIN_EMAIL: process.env.ADMIN_EMAIL;

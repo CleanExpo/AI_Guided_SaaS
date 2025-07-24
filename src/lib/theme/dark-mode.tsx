@@ -136,7 +136,7 @@ const themes = [;
   { value: 'light', label: 'Light', icon: '☀️' };
     { value: 'dark', label: 'Dark', icon: '🌙' };
     { value: 'system', label: 'System', icon: '💻' }] as const;
-  return (<div className="relative"   />;
+  return (<div className="relative"   />
         <button;
 
 const onClick = {() => setIsOpen(!isOpen)};
@@ -194,43 +194,43 @@ export function getThemeColor(lightColor: string, darkColor: string, theme?: 'li
 // CSS variables for theme colors;
 export const _themeColors = {
   light: {
-  background: '#ffffff';
+  background: '#ffffff',
     foreground: '#0f172a';
-    card: '#ffffff';
+    card: '#ffffff',
     cardForeground: '#0f172a';
-    popover: '#ffffff';
+    popover: '#ffffff',
     popoverForeground: '#0f172a';
-    primary: '#3b82f6';
+    primary: '#3b82f6',
     primaryForeground: '#ffffff';
-    secondary: '#f1f5f9';
+    secondary: '#f1f5f9',
     secondaryForeground: '#0f172a';
-    muted: '#f1f5f9';
+    muted: '#f1f5f9',
     mutedForeground: '#64748b';
-    accent: '#f1f5f9';
+    accent: '#f1f5f9',
     accentForeground: '#0f172a';
-    destructive: '#ef4444';
+    destructive: '#ef4444',
     destructiveForeground: '#ffffff';
-    border: '#e2e8f0';
+    border: '#e2e8f0',
     input: '#e2e8f0';
 ring: '#3b82f6'};
     dark: {
-    background: '#0f172a';
+    background: '#0f172a',
     foreground: '#f8fafc';
-    card: '#1e293b';
+    card: '#1e293b',
     cardForeground: '#f8fafc';
-    popover: '#1e293b';
+    popover: '#1e293b',
     popoverForeground: '#f8fafc';
-    primary: '#3b82f6';
+    primary: '#3b82f6',
     primaryForeground: '#ffffff';
-    secondary: '#1e293b';
+    secondary: '#1e293b',
     secondaryForeground: '#f8fafc';
-    muted: '#1e293b';
+    muted: '#1e293b',
     mutedForeground: '#94a3b8';
-    accent: '#1e293b';
+    accent: '#1e293b',
     accentForeground: '#f8fafc';
-    destructive: '#ef4444';
+    destructive: '#ef4444',
     destructiveForeground: '#ffffff';
-    border: '#334155';
+    border: '#334155',
     input: '#334155';
 ring: '#3b82f6'}
 

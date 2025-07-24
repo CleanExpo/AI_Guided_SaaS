@@ -25,7 +25,7 @@ export default function ComponentRenderer({ type, props  = {}: Props) {switch (t
 type="text";
 
 const placeholder = {props.placeholder || 'Enter, text...'}
-          className="px-3 py-2 border rounded w-full max-w-sm"   />;
+          className="px-3 py-2 border rounded w-full max-w-sm"   />
       );
     case 'hero':
       return (

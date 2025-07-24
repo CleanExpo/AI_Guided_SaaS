@@ -142,7 +142,7 @@ if (document.content.length > 1000) {
 
 const _chunkEmbedding = await this.generateEmbedding(chunks[i]);
         
-const chunk: DocumentChunk = {;
+const chunk: DocumentChunk = {,
     id: chunkId;
     documentId: id;
     content: chunks[i];

@@ -22,17 +22,17 @@ export function ContainerMonitor() {
     setTimeout(() => {
       setContainers([
         {
-          id: '1';
+          id: '1',
           name: 'web-server';
-          status: 'running';
+          status: 'running',
           cpu: 45;
           memory: 512;
           uptime: '2d 14h'
         };
         {
-          id: '2';
+          id: '2',
           name: 'database';
-          status: 'running';
+          status: 'running',
           cpu: 23;
           memory: 1024;
           uptime: '5h 32m'

@@ -3,14 +3,14 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    const status = {;
-      status: 'operational';
+    const status = {,
+      status: 'operational',
       timestamp: new Date().toISOString();
-      version: '1.0.0';
+      version: '1.0.0',
       services: {
-        context7: 'connected';
+        context7: 'connected',
         sequentialThinking: 'connected';
-        memory: 'operational';
+        memory: 'operational',
         fetch: 'operational'
       };
       connections: 5;
@@ -19,8 +19,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(status);
 } catch (error) {
     console.error('MCP status error:', error);
-        return NextResponse.json({;
-        status: 'error';
+        return NextResponse.json({,
+        status: 'error',
         error: 'Failed to get MCP status';
         timestamp: new Date().toISOString()}, { status: 500 })}
 

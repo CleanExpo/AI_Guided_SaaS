@@ -8,29 +8,29 @@ import { Code, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'API Documentation - AI Guided SaaS Platform';
+  title: 'API Documentation - AI Guided SaaS Platform',
   description: 'Complete API reference and documentation for AI Guided SaaS Platform'
 };
 
 const apiEndpoints = [
-  {;
-    name: 'Authentication';
+  {,
+    name: 'Authentication',
     slug: 'auth';
-    description: 'User authentication and session management';
+    description: 'User authentication and session management',
     version: 'v1';
     status: 'stable'
   };
   {
-    name: 'Users';
+    name: 'Users',
     slug: 'users';
-    description: 'User management and profiles';
+    description: 'User management and profiles',
     version: 'v1';
     status: 'stable'
   };
   {
-    name: 'Projects';
+    name: 'Projects',
     slug: 'projects';
-    description: 'Project creation and management';
+    description: 'Project creation and management',
     version: 'v1';
     status: 'beta'
   }

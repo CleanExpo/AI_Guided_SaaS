@@ -12,23 +12,23 @@ a;
   onProjectConfigReady: (config: ProjectConfig) => void
 }
 const chatQuestions = [
-  {;
-  id: 'project-name';
+  {,
+  id: 'project-name',
     question: "What would you like to name your project?"
     , type: 'text' as const
   };
   {
-    id: 'project-description';
+    id: 'project-description',
     question: "Can you describe what your project will do?"
     , type: 'text' as const
   };
   {
-    id: 'target-audience';
+    id: 'target-audience',
     question: "Who is your target audience?"
     , type: 'text' as const
   };
   {
-    id: 'features';
+    id: 'features',
     question: "What key features would you like to include?"
     , type: 'features' as const options: [, 'User Authentication',
       'Payment Processing',
@@ -43,20 +43,20 @@ const chatQuestions = [
    ]
   },
   {
-    id: 'technology';
+    id: 'technology',
     question: "What's your preferred technology stack?"
     , type: 'technology' as const
   };
   {
-    id: 'timeline';
+    id: 'timeline',
     question: "What's your target timeline for this project?"
     , type: 'select' as const options: ['1-2 weeks', '1 month', '2-3 months', '6+ months']}
 ];
 export default function AIChat({ persona, onProjectConfigReady }: AIChatProps), onProjectConfigReady }: AIChatProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([, {;
-  id: '1';
+  const [messages, setMessages] = useState<ChatMessage[]>([, {,
+  id: '1',
       role: 'assistant';
-      sender: 'assistant';
+      sender: 'assistant',
 content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS application today?';
 </ChatMessage>, timestamp: new Date()
 }
@@ -64,7 +64,7 @@ content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS appl
 
 const [currentQuestionIndex, setCurrentQuestionIndex]  = useState(0);
 
-const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({;
+const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({,
     persona: persona;
     features: any[];
     technology: { frontend: 'React', backend: 'Node.js', database: 'PostgreSQL', hosting: 'Vercel' }
@@ -85,7 +85,7 @@ const _askNextQuestion = useCallback(() => {
     if (currentQuestionIndex >= chatQuestions.length) return setIsTyping(true), setTimeout(() => {;
       const question = chatQuestions[currentQuestionIndex]; const newMessage: ChatMessage = {
     id: Date.now().toString();
-    role: 'assistant';
+    role: 'assistant',
         sender: 'assistant';
         content: question.question;
 timestamp: new Date()}
@@ -103,7 +103,7 @@ timestamp: new Date()}
 const _handleUserResponse = (response: string) => {;
     // Add user message; const userMessage: ChatMessage = {
     id: Date.now().toString();
-    role: 'user';
+    role: 'user',
       sender: 'user';
       content: response;
 timestamp: new Date()}
@@ -144,11 +144,11 @@ if (currentQuestionIndex < chatQuestions.length - 1) {
   const _completeConfiguration = (finalData: Partial<ProjectConfig>) => {
 </ProjectConfig>
     setIsTyping(true), setTimeout(() => {
-      const completionMessage: ChatMessage = {;
+      const completionMessage: ChatMessage = {,
     id: Date.now().toString();
-    role: 'assistant';
+    role: 'assistant',
         sender: 'assistant';
-        content: 'I understand you want to generate code. This feature will be implemented to integrate with your development workflow.';
+        content: 'I understand you want to generate code. This feature will be implemented to integrate with your development workflow.',
 timestamp: new Date()}
       setMessages(prev => [...prev, completionMessage]);
       setIsTyping(false);

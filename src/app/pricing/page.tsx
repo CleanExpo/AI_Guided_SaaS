@@ -6,14 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 export const metadata: Metadata  = {
-  title: 'Pricing - AI Guided SaaS Platform';
+  title: 'Pricing - AI Guided SaaS Platform',
   description: 'Choose the perfect plan for your development needs'
 };
 
 const plans = [;
-  {name: 'Starter';
+  {name: 'Starter',
     price: '$0';
-    period: 'month';
+    period: 'month',
     description: 'Perfect for getting started';
     features: [
       '3 projects';
@@ -25,9 +25,9 @@ const plans = [;
     popular: false;
 cta: 'Get Started Free'}
   };
-  {name: 'Professional';
+  {name: 'Professional',
     price: '$29';
-    period: 'month';
+    period: 'month',
     description: 'For professional developers';
     features: [
       'Unlimited projects';
@@ -41,9 +41,9 @@ cta: 'Get Started Free'}
     popular: true;
 cta: 'Start Free Trial'}
   };
-  {name: 'Enterprise';
+  {name: 'Enterprise',
     price: '$99';
-    period: 'month';
+    period: 'month',
     description: 'For large organizations';
     features: [
       'Everything in Professional';

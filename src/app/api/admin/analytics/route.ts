@@ -5,7 +5,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         const url = new URL(request.url); const range = url.searchParams.get('range') || '7d';
         // Simulate analytics data
-        const analyticsData = {;
+        const analyticsData = {,
             totalUsers: 1247;
             activeUsers: 89;
             pageViews: 5643;

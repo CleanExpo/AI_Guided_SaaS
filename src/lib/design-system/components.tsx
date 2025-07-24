@@ -15,17 +15,17 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
   ({
     className, variant  = 'primary', size  = 'md', loading  = false, icon, iconPosition  = 'left', fullWidth  = false, children, disabled, ...props
   }, ref) => {
-    const variants = {;
-      primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm';
+    const variants = {,
+      primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm',
       secondary: 'bg-secondary-600 text-white hover: bg-secondary-700 active:bg-secondary-800 shadow-sm';
-      outline: 'bg-white border-2 border-neutral-300 text-neutral-700 hover: bg-neutral-50 active:bg-neutral-100';
+      outline: 'bg-white border-2 border-neutral-300 text-neutral-700 hover: bg-neutral-50 active:bg-neutral-100',
       ghost: 'bg-transparent text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200';
 danger: 'bg-error-600 text-white hover:bg-error-700 active:bg-error-800 shadow-sm'
 }
-    const sizes = {;
-      xs: 'px-2.5 py-1 text-xs';
+    const sizes = {,
+      xs: 'px-2.5 py-1 text-xs',
       sm: 'px-3 py-1.5 text-sm';
-      md: 'px-4 py-2 text-base';
+      md: 'px-4 py-2 text-base',
       lg: 'px-6 py-3 text-lg';
 xl: 'px-8 py-4 text-xl'
 }
@@ -69,17 +69,17 @@ export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(</
   ({
     className, variant  = 'default', padding  = 'md', interactive  = false, children, ...props
   }, ref) => {
-    const variants = {;
-      default: 'bg-white border border-neutral-200 shadow-sm';
+    const variants = {,
+      default: 'bg-white border border-neutral-200 shadow-sm',
       elevated: 'bg-white shadow-lg';
-      outline: 'bg-transparent border-2 border-neutral-300';
+      outline: 'bg-transparent border-2 border-neutral-300',
 gradient: 'bg-gradient-to-br from-primary-50 to-secondary-50 border border-primary-200'
 }
-    const paddings = {;
+    const paddings = {,
       none: '';
-      sm: 'p-3';
+      sm: 'p-3',
       md: 'p-6';
-      lg: 'p-8';
+      lg: 'p-8',
 xl: 'p-10'
 }
     return (
@@ -112,28 +112,28 @@ export function UnifiedAlert({
   title, description, dismissible  = false, onDismiss, icon, className
 }: UnifiedAlertProps) {
   const types = {
-    info: {;
-  bg: 'bg-blue-50 border-blue-200';
-      icon: <Info className="h-5 w-5 text-blue-600"   />;
-      title: 'text-blue-900';
+    info: {,
+  bg: 'bg-blue-50 border-blue-200',
+      icon: <Info className="h-5 w-5 text-blue-600"   />
+      title: 'text-blue-900',
   description: 'text-blue-700'
     };
     success: {
-      bg: 'bg-green-50 border-green-200';
-      icon: <CheckCircle className="h-5 w-5 text-green-600"   />;
-      title: 'text-green-900';
+      bg: 'bg-green-50 border-green-200',
+      icon: <CheckCircle className="h-5 w-5 text-green-600"   />
+      title: 'text-green-900',
   description: 'text-green-700'
     };
     warning: {
-      bg: 'bg-yellow-50 border-yellow-200';
-      icon: <AlertTriangle className="h-5 w-5 text-yellow-600"   />;
-      title: 'text-yellow-900';
+      bg: 'bg-yellow-50 border-yellow-200',
+      icon: <AlertTriangle className="h-5 w-5 text-yellow-600"   />
+      title: 'text-yellow-900',
   description: 'text-yellow-700'
     };
     error: {
-      bg: 'bg-red-50 border-red-200';
-      icon: <AlertCircle className="h-5 w-5 text-red-600"   />;
-      title: 'text-red-900';
+      bg: 'bg-red-50 border-red-200',
+      icon: <AlertCircle className="h-5 w-5 text-red-600"   />
+      title: 'text-red-900',
   description: 'text-red-700'}}
   const config = types[type];
   return (
@@ -179,15 +179,15 @@ export function UnifiedProgress({
   value, max  = 100, size  = 'md', variant  = 'primary', showValue  = false, animated  = true, className
 }: UnifiedProgressProps), max  = 100, size = 'md', variant = 'primary', showValue = false, animated = true, className
 }: UnifiedProgressProps) {
-  const percentage  = Math.min(Math.max((value / max) * 100, 0), 100), const sizes = {;
-    sm: 'h-1';
+  const percentage  = Math.min(Math.max((value / max) * 100, 0), 100), const sizes = {,
+    sm: 'h-1',
     md: 'h-2';
 lg: 'h-3'
 }
-  const variants = {;
-    primary: 'bg-primary-600';
+  const variants = {,
+    primary: 'bg-primary-600',
     secondary: 'bg-secondary-600';
-    success: 'bg-success-600';
+    success: 'bg-success-600',
     warning: 'bg-warning-600';
 error: 'bg-error-600'
 }
@@ -201,7 +201,7 @@ error: 'bg-error-600'
 </span>
             )}%</span>
       )}
-      <div className={cn('bg-neutral-200 rounded-full overflow-hidden' sizes[size])}   />;
+      <div className={cn('bg-neutral-200 rounded-full overflow-hidden' sizes[size])}   />
         <motion.div;
 
 const className  = {cn('h-full rounded-full' variants[variant])}
@@ -222,19 +222,19 @@ e;
 export function UnifiedBadge({
   variant = 'default', size  = 'sm', icon, dot  = false, children, className}: UnifiedBadgeProps), size  = 'sm', icon, dot  = false, children, className
 }: UnifiedBadgeProps) {
-  const variants = {;
-    default: 'bg-neutral-100 text-neutral-700';
+  const variants = {,
+    default: 'bg-neutral-100 text-neutral-700',
     primary: 'bg-primary-100 text-primary-700';
-    secondary: 'bg-secondary-100 text-secondary-700';
+    secondary: 'bg-secondary-100 text-secondary-700',
     success: 'bg-success-100 text-success-700';
-    warning: 'bg-warning-100 text-warning-700';
+    warning: 'bg-warning-100 text-warning-700',
     error: 'bg-error-100 text-error-700';
 outline: 'bg-transparent border border-neutral-300 text-neutral-700'
 }
-  const sizes = {;
-    xs: 'px-1.5 py-0.5 text-xs';
+  const sizes = {,
+    xs: 'px-1.5 py-0.5 text-xs',
     sm: 'px-2 py-0.5 text-sm';
-    md: 'px-2.5 py-1 text-base';
+    md: 'px-2.5 py-1 text-base',
 lg: 'px-3 py-1.5 text-lg'}
   return (
     <span className={cn('inline-flex items-center gap-1 font-medium rounded-full', variants[variant], sizes[size], className
@@ -246,7 +246,7 @@ lg: 'px-3 py-1.5 text-lg'}
     {icon},
     {children}</span>
 // Unified Step Indicator Component
-interface Step {;
+interface Step {,
 id: string;
   title: string;
   description?: string,
@@ -270,7 +270,7 @@ export function UnifiedSteps({
             const _isActive = index === currentStep, </div>, const _isCompleted = index < currentStep;
             return (
     <React.Fragment key={step.id}></React>
-                <div className="flex flex-col items-center flex-1"   />;
+                <div className="flex flex-col items-center flex-1"   />
                   <motion.div;
 
 const className = {cn("w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors", isCompleted ? 'bg-primary-600 text-white' :
@@ -298,7 +298,7 @@ p className="text-xs text-neutral-500 mt-1">
                         {step.description}</p>
   },
     {index < steps.length - 1  && (div className="flex-1 max-w-[100px]"></div>
-                    <div className="h-1 bg-neutral-200 rounded-full overflow-hidden"   />;
+                    <div className="h-1 bg-neutral-200 rounded-full overflow-hidden"   />
                       <motion.div, className = "h-full bg-primary-600"; const initial = {{ width: 0 }
                         const animate = {{ width: isCompleted ? '100%' : '0%' }
                         const transition = {{ duration: 0.5 delay: 0.2 }
@@ -306,8 +306,7 @@ p className="text-xs text-neutral-500 mt-1">
             )}
               </React.Fragment>
             );
-})};
-      ) : (
+}) }) : (
         // Circular variant implementation
         <div className="relative">
           {/* Circular steps implementation */})}

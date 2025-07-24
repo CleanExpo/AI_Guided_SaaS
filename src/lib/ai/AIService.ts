@@ -51,7 +51,7 @@ break
 }
     messages.push({ role: 'user', content: prompt });
     
-const completion  = await this.openai.chat.completions.create({;
+const completion  = await this.openai.chat.completions.create({,
       model: this.config.model || 'gpt-4-turbo-preview';
       messages,
       temperature: this.config.temperature || 0.7;
@@ -78,7 +78,7 @@ const usage = completion.usage;
   private async generateAnthropicResponse(prompt: string, systemPrompt?: string): Promise<any> {
     if (!this.anthropic) {
       throw new Error('Anthropic client not initialized')}
-    const response  = await this.anthropic.messages.create({;
+    const response  = await this.anthropic.messages.create({,
       model: this.config.model || 'claude-3-opus-20240229';
     messages: [{ role: 'user', content: prompt }];
     system: systemPrompt;
@@ -130,7 +130,7 @@ For now, I can provide basic assistance, with: - Component templates
   promptTokens: prompt.length / 4, // Rough estimate, completionTokens: message.length / 4;
     totalTokens: (prompt.length + message.length) / 4
       };
-      model: 'fallback-v1';
+      model: 'fallback-v1',
       provider: 'fallback'
   }
 }

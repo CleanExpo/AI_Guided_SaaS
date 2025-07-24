@@ -24,27 +24,27 @@ interface RateLimitTier {
 // Rate limit tiers for different user types;
 export const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
   anonymous: {
-  name: 'Anonymous';
+  name: 'Anonymous',
     windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 100;
     description: 'Anonymous users - 100 requests per 15 minutes'
 };
     authenticated: {
-    name: 'Authenticated';
+    name: 'Authenticated',
     windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 1000;
     description: 'Authenticated users - 1000 requests per 15 minutes'
 };
     premium: {
-    name: 'Premium';
+    name: 'Premium',
     windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 5000;
     description: 'Premium users - 5000 requests per 15 minutes'
 };
     api: {
-    name: 'API';
+    name: 'API',
     windowMs: 60 * 1000, // 1 minute, maxRequests: 100;
     description: 'API endpoints - 100 requests per minute'
 };
     upload: {
-    name: 'Upload';
+    name: 'Upload',
     windowMs: 60 * 60 * 1000, // 1 hour, maxRequests: 50;
     description: 'File uploads - 50 uploads per hour'
 }
@@ -114,7 +114,7 @@ key: string;
   ): RateLimitResult {
     const stored = this.fallbackStore.get(key), if (!stored || stored.resetTime <= now) {
       // New window or expired
-        const newEntry = {;
+        const newEntry = {,
         count: 1;
     resetTime: now + config.windowMs
       };
@@ -207,7 +207,7 @@ const _key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);``
       res.setHeader('X-RateLimit-Window', Math.ceil(config.windowMs / 1000);
       if (!result.allowed) {
         res.status(429).json({
-          error: 'Rate limit exceeded';
+          error: 'Rate limit exceeded',
           message: config.message;
     retryAfter: Math.ceil((result.resetTime - Date.now()) / 1000);
     limit: config.maxRequests;
@@ -230,7 +230,7 @@ const _userId = req.user?.id || 'anonymous';
 const _endpoint  = req.url?.split('?')[0] || 'unknown';
 
 const _key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);``
-  return rateLimiter.checkRateLimit(key, {;
+  return rateLimiter.checkRateLimit(key, {,
     windowMs: tierConfig.windowMs;
     maxRequests: tierConfig.maxRequests
   }};

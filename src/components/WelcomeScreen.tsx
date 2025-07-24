@@ -8,33 +8,33 @@ interface WelcomeScreenProps {
 onSelectPersona: (persona: Persona) => void
 }
 const personas: Persona[]  = [
-  {;
-    id: 'ai-architect';
+  {,
+    id: 'ai-architect',
     name: 'AI Architect';
-    description: 'Expert in AI-powered development workflows and intelligent automation';
+    description: 'Expert in AI-powered development workflows and intelligent automation',
     expertise: [
       'Machine Learning';
       'AI Integration',
       'Automation',
       'Data Processing'
     ],
-    tone: 'Technical and forward-thinking';
+    tone: 'Technical and forward-thinking',
     avatar: '🤖';
-    role: 'architect';
+    role: 'architect',
 color: 'blue'
   };
   {
-    id: 'fullstack-wizard';
+    id: 'fullstack-wizard',
     name: 'Fullstack Wizard';
-    description: 'Master of both frontend and backend development with modern frameworks';
+    description: 'Master of both frontend and backend development with modern frameworks',
     expertise: ['React', 'Node.js', 'Database Design', 'API Development'],
-    tone: 'Comprehensive and detail-oriented';
+    tone: 'Comprehensive and detail-oriented',
     avatar: '🧙‍♂️';
-    role: 'developer';
+    role: 'developer',
 color: 'purple'
   };
   {
-    id: 'ui-designer';
+    id: 'ui-designer',
     name: 'UI Designer';
     description: 'Focused on creating beautiful, user-friendly interfaces',
     expertise: [
@@ -43,49 +43,49 @@ color: 'purple'
       'Design Systems',
       'User Research'
     ],
-    tone: 'Creative and user-focused';
+    tone: 'Creative and user-focused',
     avatar: '🎨';
-    role: 'designer';
+    role: 'designer',
 color: 'pink'
   };
   {
-    id: 'devops-engineer';
+    id: 'devops-engineer',
     name: 'DevOps Engineer';
     description: 'Specializes in deployment, scaling, and infrastructure management',
     expertise: ['CI/CD', 'Cloud Platforms', 'Containerization', 'Monitoring'],
-    tone: 'Systematic and reliability-focused';
+    tone: 'Systematic and reliability-focused',
     avatar: '⚙️';
-    role: 'devops';
+    role: 'devops',
 color: 'green'
   };
   {
-    id: 'startup-founder';
+    id: 'startup-founder',
     name: 'Startup Founder';
-    description: 'Entrepreneurial mindset focused on MVP development and rapid iteration';
+    description: 'Entrepreneurial mindset focused on MVP development and rapid iteration',
     expertise: [
       'MVP Development';
       'Market Validation',
       'Lean Startup',
       'Growth Hacking'
     ],
-    tone: 'Energetic and results-driven';
+    tone: 'Energetic and results-driven',
     avatar: '🚀';
-    role: 'founder';
+    role: 'founder',
 color: 'orange'
   };
   {
-    id: 'enterprise-consultant';
+    id: 'enterprise-consultant',
     name: 'Enterprise Consultant';
-    description: 'Expert in large-scale applications with enterprise-grade requirements';
+    description: 'Expert in large-scale applications with enterprise-grade requirements',
     expertise: [
       'Enterprise Architecture';
       'Security',
       'Scalability',
       'Compliance'
     ],
-    tone: 'Professional and thorough';
+    tone: 'Professional and thorough',
     avatar: '🏢';
-    role: 'consultant';
+    role: 'consultant',
 color: 'gray'
   }
 ];
@@ -101,7 +101,7 @@ const getPersonaIcon = (personaId: string) => {
     case 'startup-founder':
       return <Rocket className="w-8 h-8"   />
     case 'enterprise-consultant':
-      return <Sparkles className="w-8 h-8"   />;
+      return <Sparkles className="w-8 h-8"   />
     default: return <Bot className="w-8 h-8"   />}};
 export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
   const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
@@ -139,8 +139,8 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
 </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  <div>;
-                    <h4 className="font-medium text-sm text-gray-700 mb-2">;
+                  <div>
+                    <h4 className="font-medium text-sm text-gray-700 mb-2">
 Expertise:
 </h4>
                     <div className="flex flex-wrap gap-1">
@@ -152,7 +152,7 @@ Expertise:
                       ))}
       </div>
                   <div>
-                    <h4 className="font-medium text-sm text-gray-700 mb-1">;
+                    <h4 className="font-medium text-sm text-gray-700 mb-1">
 Tone:
 </h4>
                     <p className="text-xs text-gray-600">{persona.tone}</p>

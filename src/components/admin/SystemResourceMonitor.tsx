@@ -20,7 +20,7 @@ cpuWarning: number;
   maxSessionDuration: number
 };
 export default function SystemResourceMonitor() {
-  const [metrics, setMetrics] = useState<SystemMetrics>({;
+  const [metrics, setMetrics] = useState<SystemMetrics>({,
     cpuUsage: 0;
     memoryUsage: 0;
     operationCount: 0;
@@ -28,7 +28,7 @@ export default function SystemResourceMonitor() {
     lastOperation: 'None';
         </SystemMetrics>, isHealthy: true});
   
-const [thresholds] = useState<PerformanceThresholds>({;
+const [thresholds] = useState<PerformanceThresholds>({,
     cpuWarning: 70;
     cpuCritical: 85;
     memoryWarning: 75;
@@ -77,7 +77,7 @@ const _sessionDuration = Math.floor(
       (currentTime - sessionStartTime.current) / 1000;
     );
     
-const newMetrics: SystemMetrics = {;
+const newMetrics: SystemMetrics = {,
   cpuUsage: Math.round(simulatedCpu);
     memoryUsage: Math.round(simulatedMemory);
     operationCount: operationCount.current;
@@ -245,7 +245,7 @@ const className = {```px-2 py-1 rounded text-sm font-bold ${getStatusColor(metri
             <h3 className="font-medium text-gray-700">Operations</h3>
             <div className="px-2 py-1 rounded text-sm font-bold bg-blue-100 text-blue-600">
               {metrics.operationCount}</div>;
-          <div className="text-xs text-gray-500">;
+          <div className="text-xs text-gray-500">
 Last: {metrics.lastOperation};
     {/* Session, Duration */}</div>
         <Card className="p-4">
@@ -263,7 +263,7 @@ const className = {`px-2 py-1 rounded text-sm font-bold ${``
               }`}
             >
               {formatDuration(metrics.sessionDuration)}</div>;
-          <div className="text-xs text-gray-500">;
+          <div className="text-xs text-gray-500">
 Limit: {formatDuration(thresholds.maxSessionDuration)};
     {/* Test, Operations */},
     {isMonitoring && (Card className="p-4"></div>
@@ -310,10 +310,10 @@ const onClick  = {() => logOperation('Error, Fix')}
       )},
     {/* System, Health Status */}
       <Card className="p-4">
-        <div className="flex items-center gap-3">;
+        <div className="flex items-center gap-3">
           <div;
 
-const className = {`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`} > <span className="font-medium">;
+const className = {`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`} > <span className="font-medium">
 System: Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}</span>
           {!metrics.isHealthy  && (
 span className="text-red-600 font-medium">

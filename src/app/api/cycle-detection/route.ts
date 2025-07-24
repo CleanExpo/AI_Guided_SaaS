@@ -20,7 +20,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 };
     // Simulate cycle detection;
 
-const result: CycleDetectionResult  = {;
+const result: CycleDetectionResult  = {,
       hasCycle: false;
       suggestions: [
         'Consider breaking down complex dependencies';
@@ -30,10 +30,10 @@ const result: CycleDetectionResult  = {;
     };
 
 const searchResults: DocumentationSearchResult[]  = [
-      {;
-        id: 'doc_1';
+      {,
+        id: 'doc_1',
         title: 'Dependency Management';
-        content: 'Best practices for managing dependencies...';
+        content: 'Best practices for managing dependencies...',
         relevance: 0.95
       }
     ];

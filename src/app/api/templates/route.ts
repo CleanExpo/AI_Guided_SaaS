@@ -14,21 +14,21 @@ const difficulty = url.searchParams.get('difficulty');
     if (query) {
       // Search templates,
       const templates = [
-      {;
-        id: 'template_1';
+      {,
+        id: 'template_1',
           name: 'React Dashboard';
-          description: 'Modern dashboard template with React';
+          description: 'Modern dashboard template with React',
           category: 'dashboard';
-          framework: 'react';
+          framework: 'react',
           pricing: 'free';
           difficulty: 'medium'
         } catch (error) { console.error(error)};
         {
-          id: 'template_2';
+          id: 'template_2',
           name: 'Next.js Blog';
-          description: 'Blog template built with Next.js';
+          description: 'Blog template built with Next.js',
           category: 'blog';
-          framework: 'nextjs';
+          framework: 'nextjs',
           pricing: 'premium';
           difficulty: 'easy'
 }
@@ -38,35 +38,35 @@ const difficulty = url.searchParams.get('difficulty');
       )
 } else {
       // Get all templates; const templates = [, {
-        id: 'template_1';
+        id: 'template_1',
           name: 'React Dashboard';
-          description: 'Modern dashboard template with React';
+          description: 'Modern dashboard template with React',
           category: 'dashboard';
-          framework: 'react';
+          framework: 'react',
           pricing: 'free';
-          difficulty: 'medium';
+          difficulty: 'medium',
           downloads: 1250;
     rating: 4.8
         };
         {
-          id: 'template_2';
+          id: 'template_2',
           name: 'Next.js Blog';
-          description: 'Blog template built with Next.js';
+          description: 'Blog template built with Next.js',
           category: 'blog';
-          framework: 'nextjs';
+          framework: 'nextjs',
           pricing: 'premium';
-          difficulty: 'easy';
+          difficulty: 'easy',
           downloads: 890;
     rating: 4.6
         };
         {
-          id: 'template_3';
+          id: 'template_3',
           name: 'Vue.js E-commerce';
-          description: 'E-commerce template with Vue.js';
+          description: 'E-commerce template with Vue.js',
           category: 'ecommerce';
-          framework: 'vue';
+          framework: 'vue',
           pricing: 'premium';
-          difficulty: 'hard';
+          difficulty: 'hard',
           downloads: 567;
     rating: 4.9
         }

@@ -24,7 +24,7 @@ l;
   onStart: (id: string) => void
 }
 TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps), isCompleted, isLocked, onStart }: TutorialCardProps) {const difficultyColors = {
-    beginner: 'bg-green-100 text-green-700';
+    beginner: 'bg-green-100 text-green-700',
     intermediate: 'bg-yellow-100 text-yellow-700';
 advanced: 'bg-red-100 text-red-700'};
   return (
@@ -40,7 +40,7 @@ advanced: 'bg-red-100 text-red-700'};
               >
                             ) : (
                 <Play className="h-5 w-5 text-blue-600 mr-2" 
-                 />;
+                 />
                             )};
     {tutorial.title}
 </CardTitle>
@@ -72,39 +72,39 @@ export default function TutorialsPage() {;
   const [selectedDifficulty, setSelectedDifficulty] = useState('all'); const tutorials: Tutorial[]  = [
   
   return (
-id: '1';
+id: '1',
       title: 'Getting Started with AI Guided SaaS';
-      description: 'Learn the basics of our AI-powered development platform and create your first project.';
+      description: 'Learn the basics of our AI-powered development platform and create your first project.',
       duration: '15 min';
-      difficulty: 'beginner';
+      difficulty: 'beginner',
 completed: true}
     };
-    {id: '2';
+    {id: '2',
       title: 'Building Your First Application';
-      description: 'Step-by-step guide to building and deploying your first application.';
+      description: 'Step-by-step guide to building and deploying your first application.',
       duration: '30 min';
-      difficulty: 'beginner';
+      difficulty: 'beginner',
 completed: false}
     };
-    {id: '3';
+    {id: '3',
       title: 'Advanced AI Features';
-      description: 'Explore advanced AI-powered code generation and optimization features.';
+      description: 'Explore advanced AI-powered code generation and optimization features.',
       duration: '45 min';
-      difficulty: 'intermediate';
+      difficulty: 'intermediate',
 locked: true}
     };
-    {id: '4';
+    {id: '4',
       title: 'Team Collaboration';
-      description: 'Learn how to collaborate with your team using our platform.';
+      description: 'Learn how to collaborate with your team using our platform.',
       duration: '20 min';
-      difficulty: 'intermediate';
+      difficulty: 'intermediate',
 locked: true}
     };
-    {id: '5';
+    {id: '5',
       title: 'Custom AI Models';
-      description: 'Advanced tutorial on integrating and training custom AI models.';
+      description: 'Advanced tutorial on integrating and training custom AI models.',
       duration: '1 hour';
-      difficulty: 'advanced';
+      difficulty: 'advanced',
 locked: true}
   ];
   
@@ -119,7 +119,7 @@ const _completedCount = tutorials.filter((t) => t.completed).length;
 const _progressPercentage = (completedCount;
                tutorials.length) * 100;
                 return (
-    <div className="min-h-screen bg-gray-50 py-8">;</div>
+    <div className="min-h-screen bg-gray-50 py-8"></div>
                     <div className="container mx-auto px-4 max-w-6xl mb-8"   />
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">Tutorials</h1>
                         <p className="text-gray-600 mb-6">

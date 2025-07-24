@@ -9,7 +9,7 @@ import SystemResourceMonitor from './SystemResourceMonitor';
 import SafeModeHealthCheck from './SafeModeHealthCheck';
 export default function EnhancedAdminPanel() {
   const [activeTab, setActiveTab] = useState<any>('overview');
-        return (<div className="min-h-screen bg-gray-50">;
+        return (<div className="min-h-screen bg-gray-50">
       {/* Header */}</div>
       <div className="bg-white border-b max-w-7xl mx-auto px-4, sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 flex items-center space-x-4"   />

@@ -100,18 +100,18 @@ const healthCheck = await this.performSingleHealthCheck(agentDetails);
         this.healthChecks.set(agentId, healthCheck);
         // Update agent status based on health check;
 if (healthCheck.status !== agentDetails.health_status) {
-          await this.createAlert({;
+          await this.createAlert({,
             agent_id: agentId;
     severity: this.getAlertSeverity(healthCheck.status);
-    type: 'health';
+    type: 'health',
             message: `Agent health status changed from ${agentDetails.health_status} to ${healthCheck.status}`;
 metadata: { previous_status: agentDetails.health_status, new_status: healthCheck.status }})} catch (error) {
         console.error(`❌ Health check failed for agent ${agentId}:`, error)``;
 
-const failedCheck: HealthCheck = {;
+const failedCheck: HealthCheck = {,
           agent_id: agentId;
     timestamp: currentTime;
-    status: 'critical';
+    status: 'critical',
           response_time: -1;
     error_rate: 100;
     last_activity: new Date(0);
@@ -171,7 +171,7 @@ if (agent.status === 'ERROR') {
     } else {
       checksPasssed++
 }
-    const healthCheck: HealthCheck = {;
+    const healthCheck: HealthCheck = {,
       agent_id: agent.agent_id;
     timestamp: new Date();
       status,
@@ -198,7 +198,7 @@ if (agent.status === 'ERROR') {
       const agentDetails = this.registry.getAgentDetails(agentId);
       if (!agentDetails) continue;
 
-const metrics: MonitoringMetrics = {;
+const metrics: MonitoringMetrics = {,
   agent_id: agentId;
     timestamp: new Date();
     metrics: {
@@ -226,38 +226,38 @@ if (this.metricsHistory.length > 1000) {
   async checkAlertConditions(): Promise<any> {
     for (const [agentId, healthCheck] of this.healthChecks) {
       // Critical response time, if (healthCheck.response_time > 2000) {
-        await this.createAlert({;
+        await this.createAlert({,
           agent_id: agentId;
-    severity: 'critical';
+    severity: 'critical',
           type: 'performance';
-          message: `Agent response time exceeded, threshold: ${healthCheck.response_time}ms`;
+          message: `Agent response time exceeded, threshold: ${healthCheck.response_time}ms`,
 metadata: { response_time: healthCheck.response_time, threshold: 2000 }})
 }
       // High error rate;
 if (healthCheck.error_rate > 30) {
-        await this.createAlert({;
+        await this.createAlert({,
           agent_id: agentId;
-    severity: 'critical';
+    severity: 'critical',
           type: 'error';
-          message: `Agent error rate exceeded, threshold: ${healthCheck.error_rate.toFixed(1)}%`;
+          message: `Agent error rate exceeded, threshold: ${healthCheck.error_rate.toFixed(1)}%`,
 metadata: { error_rate: healthCheck.error_rate, threshold: 30 }})
 }
       // Agent offline;
 if (healthCheck.status === 'offline') {
-        await this.createAlert({;
+        await this.createAlert({,
           agent_id: agentId;
-    severity: 'emergency';
+    severity: 'emergency',
           type: 'availability';
           message: `Agent is offline and unresponsive`, ``,
   metadata: { last_activity: healthCheck.last_activity }})
 }
       // Memory usage warning;
 if (healthCheck.memory_usage && healthCheck.memory_usage > 80) {
-        await this.createAlert({;
+        await this.createAlert({,
           agent_id: agentId;
-    severity: 'warning';
+    severity: 'warning',
           type: 'performance';
-          message: `Agent memory usage, high: ${healthCheck.memory_usage.toFixed(1)}%`;
+          message: `Agent memory usage, high: ${healthCheck.memory_usage.toFixed(1)}%`,
 metadata: { memory_usage: healthCheck.memory_usage, threshold: 80 }})}
   /**
    * Create monitoring alert
@@ -265,7 +265,7 @@ metadata: { memory_usage: healthCheck.memory_usage, threshold: 80 }})}
   async createAlert(alertData: Partial<MonitoringAlert>): Promise<any> {
     const, alertId = `alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-const alert: MonitoringAlert = {;
+const alert: MonitoringAlert = {,
       id: alertId;
     agent_id: alertData.agent_id || 'unknown';
     severity: alertData.severity || 'info';
@@ -285,8 +285,8 @@ if (alert.severity === 'critical' || alert.severity === 'emergency') {
     // Store alert in memory system
     try {
       await mcp__memory__add_observations({
-        observations: [{;
-  entityName: `Agent_${alert.agent_id}`;
+        observations: [{,
+  entityName: `Agent_${alert.agent_id}`,
   contents: [
             `Alert: ${alert.severity} - ${alert.type}`,``,
   `Message: ${alert.message}`,``,
@@ -330,7 +330,7 @@ const _totalCount = this.healthChecks.size;
     
 const _systemHealthScore  = totalCount > 0 ? (healthyCount / totalCount) * 100 : 100;
 
-const _overview = {;
+const _overview = {,
       total_agents: totalCount;
     healthy_agents: Array.from(this.healthChecks.values()).filter((hc) => hc.status === 'healthy').length;
     warning_agents: Array.from(this.healthChecks.values()).filter((hc) => hc.status === 'warning').length;

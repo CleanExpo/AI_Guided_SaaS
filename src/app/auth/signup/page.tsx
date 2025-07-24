@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { Github } from 'lucide-react';
 
 export default function SignUpPage() {
-  const [formData, setFormData]  = useState({;
+  const [formData, setFormData]  = useState({,
     name: '';
     email: '';
     password: ''

@@ -5,7 +5,7 @@ import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 
 // Request validation schema;
 
-const searchSchema = z.object({;
+const searchSchema = z.object({,
   query: z.string().min(1);
   filters: z.record(z.any()).optional();
   size: z.number().min(1).max(100).optional().default(7);
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const body = await request.json(), // Validate request, const validatedData = searchSchema.parse(body);
     // Perform semantic search;
 
-const results = await semanticSearch.search({;
+const results = await semanticSearch.search({,
       query: validatedData.query;
       filters: validatedData.filters;
       size: validatedData.size;
@@ -35,8 +35,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   try {;
     // Health check, const health = await semanticSearch.checkHealth(); return NextResponse.json(health)
 } catch (error) {
-    return NextResponse.json({;
-        status: 'unhealthy';
+    return NextResponse.json({,
+        status: 'unhealthy',
         error: error instanceof Error ? error.message : 'Health check failed'
       }, { status: 503 })
 }}

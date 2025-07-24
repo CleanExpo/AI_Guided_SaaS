@@ -30,7 +30,7 @@ const steps = [;
               <h3 className="text-sm font-medium capitalize mb-3">{colorName}</h3>
               <div className="space-y-2"   />
                 {Object.entries(shades as Record<string, string>).slice(2, 7).map(([shade, value]) => (\n    
-                  <div key={shade} className="flex items-center gap-2"   />;
+                  <div key={shade} className="flex items-center gap-2"   />
                     <div;
 className="w-12 h-12 rounded-lg shadow-sm border";
 
@@ -38,7 +38,7 @@ const style = {{ backgroundColor: value }  > <div   />
                       <p className="text-xs font-medium">{shade}</p>
           <p className="{value}"   />
         </div>;
-    );)}
+    ))}
           ))},
     {/* Buttons */}
       <UnifiedCard padding="lg"   />
@@ -233,11 +233,10 @@ const onClick  = {() => setCurrentStep(Math.min(steps.length - 1, currentStep + 
               Small text for secondary information and helper content.</p>
             <p className="text-xs text-muted-foreground">
               Extra small text for timestamps and metadata.</p>
-          <div className="p-4 bg-neutral-100 rounded-lg"   />;
-            <code className="font-mono text-sm">;
+          <div className="p-4 bg-neutral-100 rounded-lg"   />
+            <code className="font-mono text-sm">
 
-const _unifiedDesign = combineStrengths(lovable, vscode);
-    )
+const _unifiedDesign = combineStrengths(lovable, vscode))
 }
 </code>
 </any>

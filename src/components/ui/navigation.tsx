@@ -92,7 +92,7 @@ current: isLast
 };
   return <Breadcrumb items={generateBreadcrumbs()} className={className}   />}
 // Navigation Menu Components
-interface NavItem {;
+interface NavItem {,
 label: string;
   href?: string,
   icon?: React.ReactNode,
@@ -130,22 +130,22 @@ const isActive = (href?: string) => {;
     if (!href) return false, return pathname === href || (href !== '/' && pathname.startsWith(href))};
   
 const variantClasses = {
-    default: {;
+    default: {,
       container: '';
-      item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors';
+      item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
       active: 'bg-brand-primary-100 text-brand-primary-900 dark:bg-brand-primary-900 dark:text-brand-primary-100';
 inactive: 'text-muted-foreground hover:text-foreground hover:bg-accent'
     };
     pills: {
-      container: 'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg';
+      container: 'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg',
       item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors';
-      active: 'bg-background text-foreground shadow-sm';
+      active: 'bg-background text-foreground shadow-sm',
 inactive: 'text-muted-foreground hover:text-foreground'
     };
     underline: {
-      container: 'border-b border-border';
+      container: 'border-b border-border',
       item: 'px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent';
-      active: 'text-brand-primary-600 border-brand-primary-600';
+      active: 'text-brand-primary-600 border-brand-primary-600',
 inactive: 'text-muted-foreground hover:text-foreground hover:border-border'
     }};
   
@@ -222,7 +222,7 @@ className={itemClasses}
 </nav>
       )}
 // Mobile Navigation
-interface MobileNavigationProps {;
+interface MobileNavigationProps {,
 items: NavItem[];
   trigger?: React.ReactNode,
   className?: string,
@@ -277,7 +277,7 @@ const onItemClick = {handleItemClick}   />
 </div>
       )}
 // Pagination Component
-interface PaginationProps {;
+interface PaginationProps {,
 currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
@@ -377,7 +377,7 @@ const onClick = {() => onPageChange(totalPages)}
 </nav>
       )}
 // Tabs Component
-interface TabItem {;
+interface TabItem {,
 id: string;
   label: string;
   icon?: React.ReactNode,
@@ -410,21 +410,21 @@ const handleTabChange = (tabId: string) => {;
   };
   
 const variantClasses = {
-    default: {;
-      container: 'border-b border-border';
+    default: {,
+      container: 'border-b border-border',
       tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent';
-      active: 'text-brand-primary-600 border-brand-primary-600';
+      active: 'text-brand-primary-600 border-brand-primary-600',
 inactive: 'text-muted-foreground hover:text-foreground hover:border-border'
     };
     pills: {
-      container: 'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg';
+      container: 'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg',
       tab: 'px-4 py-2 text-sm font-medium transition-colors rounded-md';
-      active: 'bg-background text-foreground shadow-sm';
+      active: 'bg-background text-foreground shadow-sm',
 inactive: 'text-muted-foreground hover:text-foreground'
     };
     underline: {
       container: '';
-      tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent';
+      tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent',
       active: 'text-brand-primary-600 border-brand-primary-600';
 inactive: 'text-muted-foreground hover:text-foreground'
     }};

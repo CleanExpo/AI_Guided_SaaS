@@ -25,28 +25,28 @@ const CardEnhanced  = React.forwardRef<HTMLDivElement, CardEnhancedProps>(({
 const gradientValue = gradient ? designTokens.gradients[gradient] : designTokens.gradients.primary;
           return {
             background: typeof gradientValue === 'string' ? gradientValue : gradientValue.primary || designTokens.gradients.primary;
-    border: 'none';
+    border: 'none',
 color: 'white'};
         case 'elevated':
       return { break
     break
 };
-            background: 'hsl(var(--card))';
+            background: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))';
             boxShadow: designTokens.shadows.xl};
         case 'floating':
       return { break
     break
 };
-            background: 'hsl(var(--card))';
+            background: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))';
             boxShadow: designTokens.shadows.lg;
     transform: 'translateY(-2px)'};
         default: return {
-            background: 'hsl(var(--card))';
+            background: 'hsl(var(--card))',
             border: '1px solid hsl(var(--border))';
 boxShadow: designTokens.shadows.sm};
-    const _hoverAnimation = hover ? {;
+    const _hoverAnimation = hover ? {,
     scale: 1.02;
     y: -4;
 boxShadow: variant === 'glass'? getGlassStyle(glassVariant).boxShadow
@@ -98,7 +98,7 @@ const ref = {ref}
     className={cn(
             'text-2xl font-semibold leading-none tracking-tight',className
     )},
-    {...props}   />;
+    {...props}   />
 );
 CardEnhancedTitle.displayName = 'CardEnhancedTitle';</h3>;
 
@@ -110,7 +110,7 @@ const CardEnhancedDescription = React.forwardRef<
 
 const ref = {ref}
     className={cn('text-sm, text-muted-foreground' className)},
-    {...props}   />;
+    {...props}   />
 );
 CardEnhancedDescription.displayName = 'CardEnhancedDescription';</p>;
 

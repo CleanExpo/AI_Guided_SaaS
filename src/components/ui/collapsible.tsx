@@ -59,8 +59,7 @@ const ref = {ref}
       )},
     {...props}
     ></div>
-      <div, className={cn('pb-4, pt-0' className)}>{children};
-    );
+      <div, className={cn('pb-4, pt-0' className)}>{children });
 CollapsibleContent.displayName = 'CollapsibleContent';
 export {  Collapsible, CollapsibleTrigger, CollapsibleContent  </div>
     

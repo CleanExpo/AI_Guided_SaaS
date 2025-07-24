@@ -37,49 +37,49 @@ class CycleDetectionEngine {
   private readonly SIMILARITY_THRESHOLD = 0.7;
   private documentationSources: DocumentationSource[] = [
     {
-  name: 'OpenAI Cookbook';
+  name: 'OpenAI Cookbook',
       baseUrl: 'https://cookbook.openai.com/';
       priority: 1;
     categories: ['ai', 'openai', 'gpt', 'embeddings', 'fine-tuning', 'api']
     },
     {
-      name: 'Anthropic Documentation';
+      name: 'Anthropic Documentation',
       baseUrl: 'https://docs.anthropic.com/en/home';
       priority: 1;
     categories: ['claude', 'anthropic', 'ai', 'safety', 'constitutional-ai']
     },
     {
-      name: 'Jina AI Reader';
+      name: 'Jina AI Reader',
       baseUrl: 'https://jina.ai/reader/';
       priority: 2;
     categories: ['document-processing', 'text-extraction', 'content-parsing']
     },
     {
-      name: 'Next.js Documentation';
+      name: 'Next.js Documentation',
       baseUrl: 'https://nextjs.org/docs';
       priority: 1;
     categories: ['nextjs', 'react', 'ssr', 'routing', 'api-routes']
     },
     {
-      name: 'Vercel Documentation';
+      name: 'Vercel Documentation',
       baseUrl: 'https://vercel.com/docs';
       priority: 2;
     categories: ['deployment', 'serverless', 'edge-functions', 'hosting']
     },
     {
-      name: 'Supabase Documentation';
+      name: 'Supabase Documentation',
       baseUrl: 'https://supabase.com/docs';
       priority: 1;
     categories: ['database', 'auth', 'realtime', 'storage', 'edge-functions']
     },
     {
-      name: 'Stripe Documentation';
+      name: 'Stripe Documentation',
       baseUrl: 'https://stripe.com/docs';
       priority: 1;
     categories: ['payments', 'billing', 'subscriptions', 'webhooks']
     },
     {
-      name: 'TypeScript Handbook';
+      name: 'TypeScript Handbook',
       baseUrl: 'https://www.typescriptlang.org/docs/';
       priority: 2;
     categories: ['typescript', 'types', 'interfaces', 'generics']
@@ -108,7 +108,7 @@ const sessionAttempts = this.attempts.get(attempt.sessionId) || [];
    */
   detectCycle(sessionId: string): CycleDetectionResult {
     const sessionAttempts = this.attempts.get(sessionId) || [], if (sessionAttempts.length < this.CYCLE_THRESHOLD) {
-      return {;
+      return {,
         isCyclic: false;
     cycleLength: 0;
     confidence: 0;
@@ -286,7 +286,7 @@ const keyTerms = this.extractKeyTerms(problemDescription);
         {
   title: `Solution, for: ${queries[0].substring(0, 50)}...`,``;
 url: searchUrl;
-    snippet: "Relevant documentation content would be extracted here...";
+    snippet: "Relevant documentation content would be extracted here...",
           relevance: 0.8
 }
       ]

@@ -31,7 +31,7 @@ const handleExportProject = (): void => {
     <section className="bg-black text-green-300 font-mono p-4 overflow-auto max-h-64">
       <div className="flex justify-between items-center mb-2">
         <h2 className="text-white text-lg font-semibold">Generated Code</h2>
-        <div className="flex gap-2">;
+        <div className="flex gap-2">
           <button;
 
 const onClick  = {handleCopy};

@@ -197,7 +197,7 @@ const project = await getProject(projectId);
     throw new Error('Project not found or access denied')};
   // Save each artifact as a project file;
 for (const [path, content] of artifacts) {
-    await saveProjectFile({;
+    await saveProjectFile({,
       project_id: projectId;
       path,
       content: typeof content === 'string' ? content : JSON.stringify(content, null, 2),
@@ -207,7 +207,7 @@ for (const [path, content] of artifacts) {
             path.endsWith('.tsx') ? 'typescript-react' :
             path.endsWith('.js') ? 'javascript' :
             path.endsWith('.jsx') ? 'javascript-react' :
-            'text';
+            'text',
       size: new Blob([typeof content === 'string' ? content : JSON.stringify(content)]).size
     })
 }

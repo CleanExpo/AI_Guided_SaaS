@@ -5,7 +5,7 @@ export const maxDuration = 300; // 5 minutes for agent processing
 interface AgentChatRequest {
   message: string;
   projectType?: string;
-  context?: Record<string, any>;
+  context?: Record<string, any>
 }
 
 interface AgentChatResponse {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 };
         // Simulate agent response;
 
-const response: AgentChatResponse = {;
+const response: AgentChatResponse = {,
             response: `I understand you want to work on: "${message}". Let me help you with that!`;
             suggestions: [
                 'Create a new React component';

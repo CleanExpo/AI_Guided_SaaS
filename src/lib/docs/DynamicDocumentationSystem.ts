@@ -96,7 +96,7 @@ export class DynamicDocumentationSystem extends EventEmitter {
         .order('category', { ascending: true });
       if (error) throw error;
       docs?.forEach((doc) => {
-        const section: DocumentationSection = {;
+        const section: DocumentationSection = {,
           id: doc.id;
           title: doc.title;
           content: doc.content;
@@ -124,14 +124,14 @@ export class DynamicDocumentationSystem extends EventEmitter {
         .from('api_endpoints');
         .select('*');
 
-const apiDoc: DocumentationSection = {;
-        id: 'api-reference';
+const apiDoc: DocumentationSection = {,
+        id: 'api-reference',
         title: 'API Reference';
         content: this.buildAPIDocumentationContent(endpoints || []);
         metadata: {
-          category: 'reference';
+          category: 'reference',
           tags: ['api', 'endpoints', 'integration'],
-          difficulty: 'intermediate';
+          difficulty: 'intermediate',
           estimatedTime: '30 minutes';
           lastUpdated: new Date();
           version: process.env.NEXT_PUBLIC_APP_VERSION || '1.0.0'
@@ -139,9 +139,9 @@ const apiDoc: DocumentationSection = {;
         relatedSections: ['authentication', 'rate-limiting', 'error-handling'],
         interactiveElements: [
           {
-            id: 'api-playground';
+            id: 'api-playground',
             type: 'playground';
-            title: 'API Playground';
+            title: 'API Playground',
             description: 'Test API endpoints interactively';
             config: {
               baseUrl: process.env.NEXT_PUBLIC_API_URL;
@@ -184,7 +184,7 @@ const grouped = endpoints.reduce((acc, endpoint) => {;
   private generateAPIExamples(endpoints: any[]): CodeExample[] {
     return endpoints.map((endpoint) => ({
       id: `example-${endpoint.path.replace(/\//g, '-')}`,;
-      title: `${endpoint.method} ${endpoint.path} Example`;
+      title: `${endpoint.method} ${endpoint.path} Example`,
       language: 'javascript';
       code: this.generateAPIExampleCode(endpoint);
       runnable: true;
@@ -193,8 +193,8 @@ const grouped = endpoints.reduce((acc, endpoint) => {;
   }
   private generateAPIExampleCode(endpoint: any): string {
     return `// ${endpoint.description}
-const response  = await fetch('${process.env.NEXT_PUBLIC_API_URL}${endpoint.path}', {;
-  method: '${endpoint.method}';
+const response  = await fetch('${process.env.NEXT_PUBLIC_API_URL}${endpoint.path}', {,
+  method: '${endpoint.method}',
   headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_API_KEY' }${endpoint.method !== 'GET' ? `,
   body: JSON.stringify(${JSON.stringify(endpoint.exampleBody || {}, null, 2)})` : ''}});
 
@@ -203,13 +203,13 @@ console.log(data);`
   }
   private async generateComponentDocumentation(): Promise<void> {
     // Auto-generate documentation for UI components, const componentDoc: DocumentationSection = {
-      id: 'component-library';
+      id: 'component-library',
       title: 'Component Library';
       content: await this.scanAndDocumentComponents();
       metadata: {
-        category: 'reference';
+        category: 'reference',
         tags: ['components', 'ui', 'design-system'],
-        difficulty: 'beginner';
+        difficulty: 'beginner',
         estimatedTime: '20 minutes';
         lastUpdated: new Date();
         version: '1.0.0'
@@ -217,9 +217,9 @@ console.log(data);`
       relatedSections: ['styling-guide', 'accessibility'],
       interactiveElements: [
         {
-          id: 'component-playground';
+          id: 'component-playground',
           type: 'playground';
-          title: 'Component Playground';
+          title: 'Component Playground',
           description: 'Interact with components and see live code';
           config: {
             components: ['Button', 'Card', 'Modal', 'Form']
@@ -249,14 +249,14 @@ A comprehensive form system with validation.`
       .order('count', { ascending: false });
       .limit(20);
 
-const troubleshootingDoc: DocumentationSection = {;
-      id: 'troubleshooting';
+const troubleshootingDoc: DocumentationSection = {,
+      id: 'troubleshooting',
       title: 'Troubleshooting Guide';
       content: this.buildTroubleshootingContent(errors || []);
       metadata: {
-        category: 'guide';
+        category: 'guide',
         tags: ['troubleshooting', 'errors', 'debugging'],
-        difficulty: 'intermediate';
+        difficulty: 'intermediate',
         estimatedTime: '15 minutes';
         lastUpdated: new Date();
         version: '1.0.0'
@@ -264,9 +264,9 @@ const troubleshootingDoc: DocumentationSection = {;
       relatedSections: ['error-codes', 'debugging-tips'],
       interactiveElements: [
         {
-          id: 'error-diagnosis';
+          id: 'error-diagnosis',
           type: 'demo';
-          title: 'Error Diagnosis Tool';
+          title: 'Error Diagnosis Tool',
           description: 'Paste your error message for instant solutions';
           config: {
             aiPowered: true
@@ -293,19 +293,19 @@ const troubleshootingDoc: DocumentationSection = {;
       'RATE_LIMIT_EXCEEDED': 'You have exceeded the rate limit. Please wait before making more requests.',
       'INVALID_REQUEST': 'Review the request format and ensure all required fields are provided.',
       'DATABASE_CONNECTION': 'Check database credentials and ensure the database server is running.',
-      'TIMEOUT': 'The request took too long. Try again or contact support if the issue persists.';
+      'TIMEOUT': 'The request took too long. Try again or contact support if the issue persists.'
     };
     return solutions[errorType] || 'Please contact support for assistance with this error.';
 }
   private async generatePerformanceGuide(): Promise<void> {
-    const performanceDoc: DocumentationSection = {;
-      id: 'performance-optimization';
+    const performanceDoc: DocumentationSection = {,
+      id: 'performance-optimization',
       title: 'Performance Optimization Guide';
       content: await this.buildPerformanceContent();
       metadata: {
-        category: 'guide';
+        category: 'guide',
         tags: ['performance', 'optimization', 'best-practices'],
-        difficulty: 'advanced';
+        difficulty: 'advanced',
         estimatedTime: '45 minutes';
         lastUpdated: new Date();
         version: '1.0.0'
@@ -313,9 +313,9 @@ const troubleshootingDoc: DocumentationSection = {;
       relatedSections: ['caching', 'database-optimization', 'cdn-setup'],
       interactiveElements: [
         {
-          id: 'performance-analyzer';
+          id: 'performance-analyzer',
           type: 'demo';
-          title: 'Performance Analyzer';
+          title: 'Performance Analyzer',
           description: 'Analyze your application performance in real-time';
           config: {
             metrics: ['response-time', 'throughput', 'error-rate']
@@ -357,10 +357,10 @@ const troubleshootingDoc: DocumentationSection = {;
   }
 }
   private generatePerformanceExamples(): CodeExample[] {
-    return [, {;
-        id: 'caching-example';
+    return [, {,
+        id: 'caching-example',
         title: 'Implementing Response Caching';
-        language: 'typescript';
+        language: 'typescript',
         code: `import { redis } from '@/lib/redis';
 export async function getCachedData(key: string): Promise<any> {
   // Check cache first, const cached = await redis.get(key); if (cached) return JSON.parse(cached);
@@ -374,9 +374,9 @@ const data = await fetchDataFromDB(key);
         runnable: false
       };
       {
-        id: 'query-optimization';
+        id: 'query-optimization',
         title: 'Optimized Database Query';
-        language: 'sql';
+        language: 'sql',
         code: `-- Before: Slow query
 SELECT * FROM projects
 WHERE user_id = $1
@@ -433,8 +433,8 @@ const words = searchableText.split(/\s+/).filter((word) => word.length > 2);
     return ['ai-chat', 'project-generation', 'deployment', 'monitoring']}
   private async getConfiguration(): Promise<Record<string, any>> {
     // Get current configuration values
-    return {;
-      apiVersion: 'v1';
+    return {,
+      apiVersion: 'v1',
       maxRequestSize: '10MB';
       rateLimitPerMinute: 100;
       cacheEnabled: true
@@ -531,7 +531,7 @@ const snippet = this.extractSnippet(section.content, queryWords);
         totalPoints: 0;
         currentPath: any[];
         preferences: {
-          difficulty: 'beginner';
+          difficulty: 'beginner',
           learningStyle: 'interactive';
           topics: any[]
         }};
@@ -567,7 +567,7 @@ const snippet = this.extractSnippet(section.content, queryWords);
   private async saveUserProgress(progress: UserProgress): Promise<void> {
     try {
       await supabase
-        .from('user_documentation_progress'), .upsert({;
+        .from('user_documentation_progress'), .upsert({,
           user_id: progress.userId;
           sections_completed: progress.sectionsCompleted;
           interactive_elements_completed: progress.interactiveElementsCompleted;

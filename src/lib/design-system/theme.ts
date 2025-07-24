@@ -3,70 +3,70 @@
 // Combines Lovable.dev's friendly aesthetics with VS Code's professional powerexport const theme = {
   // Brand Colors, colors: {
   primary: {
-  50: '#f0f9ff';
+  50: '#f0f9ff',
       100: '#e0f2fe';
-      200: '#bae6fd';
+      200: '#bae6fd',
       300: '#7dd3fc';
-      400: '#38bdf8';
+      400: '#38bdf8',
       500: '#0ea5e9';
-      600: '#0284c7';
+      600: '#0284c7',
       700: '#0369a1';
-      800: '#075985';
+      800: '#075985',
       900: '#0c4a6e'};
     secondary: {
-      50: '#fdf4ff';
+      50: '#fdf4ff',
       100: '#fae8ff';
-      200: '#f5d0fe';
+      200: '#f5d0fe',
       300: '#f0abfc';
-      400: '#e879f9';
+      400: '#e879f9',
       500: '#d946ef';
-      600: '#c026d3';
+      600: '#c026d3',
       700: '#a21caf';
-      800: '#86198f';
+      800: '#86198f',
       900: '#701a75'};
     success: {
-      50: '#f0fdf4';
+      50: '#f0fdf4',
       100: '#dcfce7';
-      200: '#bbf7d0';
+      200: '#bbf7d0',
       300: '#86efac';
-      400: '#4ade80';
+      400: '#4ade80',
       500: '#22c55e';
-      600: '#16a34a';
+      600: '#16a34a',
       700: '#15803d';
-      800: '#166534';
+      800: '#166534',
       900: '#14532d'};
     warning: {
-      50: '#fffbeb';
+      50: '#fffbeb',
       100: '#fef3c7';
-      200: '#fde68a';
+      200: '#fde68a',
       300: '#fcd34d';
-      400: '#fbbf24';
+      400: '#fbbf24',
       500: '#f59e0b';
-      600: '#d97706';
+      600: '#d97706',
       700: '#b45309';
-      800: '#92400e';
+      800: '#92400e',
       900: '#78350f'};
     error: {
-      50: '#fef2f2';
+      50: '#fef2f2',
       100: '#fee2e2';
-      200: '#fecaca';
+      200: '#fecaca',
       300: '#fca5a5';
-      400: '#f87171';
+      400: '#f87171',
       500: '#ef4444';
-      600: '#dc2626';
+      600: '#dc2626',
       700: '#b91c1c';
-      800: '#991b1b';
+      800: '#991b1b',
       900: '#7f1d1d'};
     neutral: {
-      50: '#fafafa';
+      50: '#fafafa',
       100: '#f5f5f5';
-      200: '#e5e5e5';
+      200: '#e5e5e5',
       300: '#d4d4d4';
-      400: '#a3a3a3';
+      400: '#a3a3a3',
       500: '#737373';
-      600: '#525252';
+      600: '#525252',
       700: '#404040';
-      800: '#262626';
+      800: '#262626',
       900: '#171717'};
   // Typography, typography: {
     fonts: {
@@ -74,9 +74,9 @@
       body: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       mono: "'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace"},
     sizes: {
-      xs: '0.75rem';
+      xs: '0.75rem',
       sm: '0.875rem';
-      base: '1rem';
+      base: '1rem',
       lg: '1.125rem';
       xl: '1.25rem';
       '2xl': '1.5rem',
@@ -96,42 +96,42 @@
     relaxed: 1.625;
     loose: 2};
   // Spacing, spacing: {
-    0: '0px';
+    0: '0px',
     1: '0.25rem';
-    2: '0.5rem';
+    2: '0.5rem',
     3: '0.75rem';
-    4: '1rem';
+    4: '1rem',
     5: '1.25rem';
-    6: '1.5rem';
+    6: '1.5rem',
     8: '2rem';
-    10: '2.5rem';
+    10: '2.5rem',
     12: '3rem';
-    16: '4rem';
+    16: '4rem',
     20: '5rem';
     24: '6rem'};
   // Border Radius, borderRadius: {
-    none: '0px';
+    none: '0px',
     sm: '0.125rem';
-    base: '0.25rem';
+    base: '0.25rem',
     md: '0.375rem';
-    lg: '0.5rem';
+    lg: '0.5rem',
     xl: '0.75rem';
     '2xl': '1rem',
     '3xl': '1.5rem',
     full: '9999px'};
   // Shadows, shadows: {
-    sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)';
+    sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
     base: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
     md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
     lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
     xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
     '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
-    inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)';
+    inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
     none: 'none'};
   // Transitions, transitions: {
-    fast: '150ms';
+    fast: '150ms',
     base: '250ms';
-    slow: '350ms';
+    slow: '350ms',
     slower: '500ms'};
   // Z-index, zIndex: {
     0: 0;
@@ -153,50 +153,50 @@
     popover: 1060;
     tooltip: 1070};
   // Breakpoints, breakpoints: {
-    sm: '640px';
+    sm: '640px',
     md: '768px';
-    lg: '1024px';
+    lg: '1024px',
     xl: '1280px';
     '2xl': '1536px'},
   // Component Variants, components: {
     button: {
   primary: {
-  bg: 'primary.600';
+  bg: 'primary.600',
         color: 'white';
-        hover: 'primary.700';
+        hover: 'primary.700',
         active: 'primary.800'};
     secondary: {
-        bg: 'secondary.600';
+        bg: 'secondary.600',
         color: 'white';
-        hover: 'secondary.700';
+        hover: 'secondary.700',
         active: 'secondary.800'};
     outline: {
-        bg: 'transparent';
+        bg: 'transparent',
         color: 'neutral.700';
-        border: 'neutral.300';
+        border: 'neutral.300',
         hover: 'neutral.50';
         active: 'neutral.100'};
     ghost: {
-        bg: 'transparent';
+        bg: 'transparent',
         color: 'neutral.700';
-        hover: 'neutral.100';
+        hover: 'neutral.100',
         active: 'neutral.200'};
     card: {
       default: {
-  bg: 'white';
+  bg: 'white',
         border: 'neutral.200';
-        shadow: 'base';
+        shadow: 'base',
         radius: 'lg'};
     elevated: {
-        bg: 'white';
+        bg: 'white',
         border: 'transparent';
-        shadow: 'lg';
+        shadow: 'lg',
         radius: 'xl'};
     input: {
       default: {
-  bg: 'white';
+  bg: 'white',
         border: 'neutral.300';
-        focus: 'primary.500';
+        focus: 'primary.500',
         radius: 'md' }}
 // Helper functions;
 export const _getColor = (path: string): string: (any) => {const _keys = path.split('.'); let value = theme.colors, for (const key of keys) {

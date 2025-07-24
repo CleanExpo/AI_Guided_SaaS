@@ -10,8 +10,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Visual analysis logic would go here;
     // This is a placeholder for actual image analysis;
 
-const analysis = {;
-      id: `analysis_${Date.now()}`;
+const analysis = {,
+      id: `analysis_${Date.now()}`,
       type: analysisType;
       timestamp: new Date().toISOString();
       results: {
@@ -36,9 +36,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 };
     // Simulate getting analysis results;
 
-const analysis = {;
+const analysis = {,
       id: analysisId;
-      status: 'completed';
+      status: 'completed',
       results: {
         objects: ['person', 'building'],
         confidence: 0.89

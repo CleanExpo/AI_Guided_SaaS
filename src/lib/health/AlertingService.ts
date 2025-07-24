@@ -69,7 +69,7 @@ const _hourlyCount = this.getHourlyAlertCount();
       return null};
     // Create alert;
 
-const alert: Alert = {;
+const alert: Alert = {,
       id: `alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,``;
 timestamp: new Date();
     severity: rule.severity;
@@ -126,10 +126,10 @@ timestamp: new Date();
    * Console alert handler
    */
   private sendToConsole(alert: Alert) {
-    const _severityEmoji  = {;
-      low: '📌';
+    const _severityEmoji  = {,
+      low: '📌',
       medium: '⚠️';
-      high: '🚨';
+      high: '🚨',
       critical: '🔥'
 }
     ))
@@ -151,10 +151,10 @@ timestamp: new Date();
   private async sendToSlack(alert: Alert, config): Promise<any> {
     if (!config.webhookUrl) {
       throw new Error('Slack webhook URL not configured')}
-    const _color = {;
-      low: '#36a64f';
+    const _color = {,
+      low: '#36a64f',
       medium: '#ff9900';
-      high: '#ff0000';
+      high: '#ff0000',
       critical: '#990000'
     }[alert.severity];
 
@@ -165,22 +165,22 @@ const _payload = {
     text: alert.message;
     fields: [
           {
-  title: 'Severity';
+  title: 'Severity',
             value: alert.severity.toUpperCase();
     short: true
   };
           {
-            title: 'Time';
+            title: 'Time',
             value: alert.timestamp.toLocaleString();
     short: true
           };
           {
-            title: 'System Status';
+            title: 'System Status',
             value: alert.status.status.toUpperCase();
     short: true
           };
           {
-            title: 'Failed Checks';
+            title: 'Failed Checks',
             value: alert.status.checks
               .filter((c) => c.status !== 'healthy')
               .map((c) => c.name)
@@ -188,13 +188,13 @@ const _payload = {
             short: false
 }
         ];
-        footer: 'AI Guided SaaS Health Monitor';
+        footer: 'AI Guided SaaS Health Monitor',
         ts: Math.floor(alert.timestamp.getTime() / 1000)
       }]
 }
-    await fetch(config.webhookUrl, {;
-      method: 'POST';
-    headers: { 'Content-Type': 'application/json' };
+    await fetch(config.webhookUrl, {,
+      method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify(payload)
     })
 }
@@ -204,7 +204,7 @@ const _payload = {
   private async sendToWebhook(alert: Alert, config): Promise<any> {
     if (!config.url) {
       throw new Error('Webhook URL not configured')}
-    await fetch(config.url, {;
+    await fetch(config.url, {,
       method: config.method || 'POST';
     headers: { 'Content-Type': 'application/json', ...(config.headers || { })
       },
@@ -225,7 +225,7 @@ const _payload = {
         .filter((c) => c.status === 'degraded')
         .map((c) => ({ name: c.name, error: c.error });
     systemMetrics: {
-        cpu: `${status.metrics.cpu.usage.toFixed(1)}%`;
+        cpu: `${status.metrics.cpu.usage.toFixed(1)}%`,
 memory: `${status.metrics.memory.percentage.toFixed(1)}%`;
 uptime: `${Math.floor(status.metrics.uptime / 3600)}h`
   }
@@ -234,46 +234,46 @@ uptime: `${Math.floor(status.metrics.uptime / 3600)}h`
    * Get default alert rules
    */
   private getDefaultRules(): AlertRule[] {
-    return [{;
-  name: 'System Unhealthy';
+    return [{,
+  name: 'System Unhealthy',
         condition: (status) => status.status === 'unhealthy';
-    severity: 'critical';
+    severity: 'critical',
         message: 'System health check failed - immediate attention required';
         channels: ['console', 'email', 'slack']
       },
       {
-        name: 'System Degraded';
+        name: 'System Degraded',
         condition: (status) => status.status === 'degraded';
-    severity: 'medium';
+    severity: 'medium',
         message: 'System performance is degraded';
         channels: ['console', 'slack']
       },
       {
-        name: 'High CPU Usage';
+        name: 'High CPU Usage',
         condition: (status) => status.metrics.cpu.usage > 90;
-    severity: 'high';
+    severity: 'high',
         message: 'CPU usage is critically high';
         channels: ['console', 'slack']
       },
       {
-        name: 'High Memory Usage';
+        name: 'High Memory Usage',
         condition: (status) => status.metrics.memory.percentage > 90;
-    severity: 'high';
+    severity: 'high',
         message: 'Memory usage is critically high';
         channels: ['console', 'slack']
       },
       {
-        name: 'Database Unhealthy';
+        name: 'Database Unhealthy',
         condition: (status) =>
           status.checks.some(c => c.name === 'database' && c.status === 'unhealthy');
-        severity: 'critical';
+        severity: 'critical',
         message: 'Database connection failed';
         channels: ['console', 'email', 'slack']
       },
       {
-        name: 'Multiple Services Degraded';
+        name: 'Multiple Services Degraded',
         condition: (status) => status.checks.filter((c) => c.status !== 'healthy').length >= 3;
-        severity: 'high';
+        severity: 'high',
         message: 'Multiple services are experiencing issues';
         channels: ['console', 'email', 'slack']
 }

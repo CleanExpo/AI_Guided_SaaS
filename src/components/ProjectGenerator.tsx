@@ -10,24 +10,24 @@ g;
   onFilesGenerated: (files: ProjectFile[]) => void
 }
 const _generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
-  const files: ProjectFile[] = [], // Generate package.json, files.push({;
-    name: 'package.json';
+  const files: ProjectFile[] = [], // Generate package.json, files.push({,
+    name: 'package.json',
     path: 'package.json';
-    type: 'config';
+    type: 'config',
     content: JSON.stringify({
   name: config.name.toLowerCase().replace(/\s+/g, '-'),
-      version: '1.0.0';
+      version: '1.0.0',
       description: config.description;
-    main: 'index.js';
-    scripts: { dev: 'next dev', build: 'next build', start: 'next start';
+    main: 'index.js',
+    scripts: { dev: 'next dev', build: 'next build', start: 'next start',
   lint: 'next lint' };
     dependencies: { 'react': '^18.0.0', 'react-dom': '^18.0.0', 'next': '^14.0.0', 'typescript': '^5.0.0', '@types/react': '^18.0.0', '@types/node': '^20.0.0' }, null, 2)
   })
   // Generate README.md
   files.push({
-    name: 'README.md';
+    name: 'README.md',
     path: 'README.md';
-    type: 'documentation';
+    type: 'documentation',
 content: `# ${config.name}``
 ${config.description}
 ## Features
@@ -52,9 +52,9 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
   })
   // Generate main page component
   files.push({
-    name: 'page.tsx';
+    name: 'page.tsx',
     path: 'app/page.tsx';
-    type: 'page';
+    type: 'page',
 content: `export default function Home() {``
   return (<main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"   />);
         <div className="text-center"   />
@@ -72,26 +72,26 @@ content: `export default function Home() {``
   })
   // Generate layout component
   files.push({
-    name: 'layout.tsx';
+    name: 'layout.tsx',
     path: 'app/layout.tsx';
-    type: 'component';
+    type: 'component',
 content: `import type {  Metadata  } from 'next'``;
 import { Inter } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
-    title: '${config.name}';
+    title: '${config.name}',
   description: '${config.description}'};
     export default function RootLayout() {
   return (html lang="en"   />, <body className={inter.className}>{children}</body>
   }`
   })
   // Generate global CSS
-  files.push({;
-    name: 'globals.css';
+  files.push({,
+    name: 'globals.css',
     path: 'app/globals.css';
-    type: 'style';
+    type: 'style',
     content: `@tailwind base, ``
 @tailwind components, @tailwind utilities;
 :root {
@@ -119,20 +119,20 @@ background: linear-gradient(
   // Generate API route if backend features are selected
   if (config.features.some(f => f.includes('API') || f.includes('Authentication')) {
     files.push({
-      name: 'route.ts';
+      name: 'route.ts',
       path: 'app/api/hello/route.ts';
-      type: 'api';
+      type: 'api',
 content: `import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest): Promise<any> {
-  return NextResponse.json({;
-    message: 'Hello from ${config.name} API!';
+  return NextResponse.json({,
+    message: 'Hello from ${config.name} API!',
     timestamp: new Date().toISOString()
 })};
 export async function POST(request: NextRequest): Promise<any> {
   const body = await request.json();
-  return NextResponse.json({;
-    message: 'Data received successfully';
+  return NextResponse.json({,
+    message: 'Data received successfully',
     data: body;
 timestamp: new Date().toISOString()})
 }`
@@ -211,7 +211,7 @@ const key  = {step.id}
                       ? 'bg-blue-50 border border-blue-200'
                       : 'bg-gray-50 border border-gray-200'
                   }`}
-                   />;
+                   />
                   <div;
 
 const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${``
@@ -227,7 +227,7 @@ const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify
                     ) : (
                       <IconComponent className="w-4 h-4"   />
                     )}</IconComponent>
-                  <div className="flex-1"   />;
+                  <div className="flex-1"   />
                     <p;
 
 const className = {`font-medium ${``

@@ -50,10 +50,10 @@ export class SelfHealingAgent {
    * Analyze issues and create healing plan
    */
   async analyzeAndHeal(epcResult): Promise<any> {
-    const plan: HealingPlan = {;
+    const plan: HealingPlan = {,
   issues: any[];
     actions: any[];
-    estimatedTime: '1-2 minutes';
+    estimatedTime: '1-2 minutes',
       confidence: 0
     };
     // Collect all issues
@@ -89,23 +89,23 @@ const _automatedCount = plan.actions.filter((a) => a.automated).length;
                       What's the most likely reason and solution? Keep response concise.`;``
       try {
         const response = await this.aiService.generateResponse(prompt); const _suggestion = response.message, return {
-          type: 'suggest_fix';
+          type: 'suggest_fix',
           description: `${varName}: ${suggestion}`;
 automated: false;
-    risk: 'medium';
+    risk: 'medium',
           command: `npm run, env: setup`;``;
 suggestedValue: this.getDefaultValue(varName)} catch (error) {
         // Fallback if AI fails
         return {
-          type: 'manual_fix';
+          type: 'manual_fix',
           description: `Add ${varName} to .env.local file`;
 automated: false;
-    risk: 'low';
+    risk: 'low',
           command: `echo "${varName}=your_value_here" >> .env.local`
   }
 }
     return {
-      type: 'manual_fix';
+      type: 'manual_fix',
       description: `Configure ${varName}`;
 automated: false;
     risk: 'low'
@@ -116,16 +116,16 @@ automated: false;
    */
   private async generateInvalidVarAction(varName: string): Promise<any> {
     const config = this.getVariableConfig(varName), if (config?.pattern) {
-      return {;
-        type: 'suggest_fix';
+      return {,
+        type: 'suggest_fix',
         description: `Fix ${varName} format to match; pattern: ${config.pattern}`;
 automated: false;
-    risk: 'low';
+    risk: 'low',
         suggestedValue: config.example || 'Check documentation for correct format'
   }
 }
     return {
-      type: 'manual_fix';
+      type: 'manual_fix',
       description: `Validate and fix ${varName} value`;
 automated: false;
     risk: 'low'
@@ -137,20 +137,20 @@ automated: false;
   private async generateOutdatedVarAction(varName: string): Promise<any> {
     // Check recent changes, const _recentChange = this.checkRecentChanges(varName), if (recentChange) {
       return {
-        type: 'sync_config';
+        type: 'sync_config',
         description: `Sync ${varName} with latest configuration`;
 automated: true;
-    risk: 'low';
+    risk: 'low',
         command: 'npm run, env: sync'
   }
 }
     // Suggest key rotation for sensitive vars
     if (varName.includes('SECRET') || varName.includes('KEY')) {
       return {
-        type: 'rotate_key';
+        type: 'rotate_key',
         description: `Consider rotating ${varName} for security`;
 automated: false;
-    risk: 'medium';
+    risk: 'medium',
         command: `Visit provider dashboard to regenerate ${varName}`
   }
 }
@@ -160,7 +160,7 @@ automated: false;
    * Execute healing plan
    */
   async executeHealing(plan: HealingPlan, autoApprove: boolean = false): Promise<any> {
-    const result = {;
+    const result = {,
       success: true;
     applied: any[];
     failed: any[];
@@ -174,7 +174,7 @@ automated: false;
 }} else {
         result.manual.push(action.description)}
     // Log healing attempt
-    this.healingHistory.push({;
+    this.healingHistory.push({,
       timestamp: new Date().toISOString();
       plan,
       result,
@@ -204,14 +204,14 @@ automated: false;
    * Identify service from variable name
    */
   private identifyService(varName: string) {
-    const patterns: Record<string, string> = {;
-      OPENAI: 'OpenAI';
+    const patterns: Record<string, string> = {,
+      OPENAI: 'OpenAI',
       CLAUDE: 'Anthropic Claude';
-      ANTHROPIC: 'Anthropic Claude';
+      ANTHROPIC: 'Anthropic Claude',
       SUPABASE: 'Supabase';
-      REDIS: 'Redis';
+      REDIS: 'Redis',
       STRIPE: 'Stripe';
-      GOOGLE: 'Google';
+      GOOGLE: 'Google',
       GITHUB: 'GitHub';
       VERCEL: 'Vercel'
 };

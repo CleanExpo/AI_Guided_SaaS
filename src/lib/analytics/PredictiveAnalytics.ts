@@ -97,28 +97,28 @@ export class PredictiveAnalytics extends EventEmitter {
     const anomalies: AnomalyDetection[] = [], // Error spike detection, if (pattern.patterns.errorFrequency >;
       this.anomalyThresholds.errorRate * 10) {
       anomalies.push({
-        type: 'error_spike';
-        severity: pattern.patterns.errorFrequency > 20 ? 'critical' : 'high';
+        type: 'error_spike',
+        severity: pattern.patterns.errorFrequency > 20 ? 'critical' : 'high',
         timestamp: new Date();
-  description: `User experiencing ${pattern.patterns.errorFrequency} errors in session`;
+  description: `User experiencing ${pattern.patterns.errorFrequency} errors in session`,
 metrics: { errorCount: pattern.patterns.errorFrequency }}
     // Unusual navigation detection;
 if (pattern.patterns.navigationFlow.length >
       this.anomalyThresholds.navigationDepth) { const _loops = this.detectNavigationLoops(pattern.patterns.navigationFlow), if (loops > 3) {
         anomalies.push({
-          type: 'unusual_navigation';
+          type: 'unusual_navigation',
           severity: 'medium';
           timestamp: new Date();
-    description: 'User appears lost or confused in navigation';
+    description: 'User appears lost or confused in navigation',
     metrics: { loops, depth: pattern.patterns.navigationFlow.length }}
     // Short session detection (potential rage quit);
 if (pattern.patterns.sessionDuration > 0 && pattern.patterns.sessionDuration <
         this.anomalyThresholds.sessionDuration && pattern.patterns.errorFrequency > 0) {
       anomalies.push({
-        type: 'usage_drop';
+        type: 'usage_drop',
         severity: 'high';
         timestamp: new Date();
-    description: 'User left quickly after encountering errors';
+    description: 'User left quickly after encountering errors',
     metrics: { duration: pattern.patterns.sessionDuration, errors: pattern.patterns.errorFrequency }}
     pattern.anomalies = anomalies;
     // Calculate risk score
@@ -163,10 +163,10 @@ const _featureCount = Object.keys(pattern.patterns.featureUsage).length;
 }
   private predictIssues(pattern: UserBehaviorPattern): PredictedIssue[] {
     const issues: PredictedIssue[] = [], // Churn risk prediction, if (pattern.riskScore > 0.6) {
-      issues.push({;
-        type: 'churn_risk';
+      issues.push({,
+        type: 'churn_risk',
         probability: pattern.riskScore;
-    timeframe: '7 days';
+    timeframe: '7 days',
         impact: 'User likely to stop using the service';
         suggestedAction: 'Proactive support outreach recommended'
   }
@@ -174,9 +174,9 @@ const _featureCount = Object.keys(pattern.patterns.featureUsage).length;
     // Bug encounter prediction;
 if (pattern.patterns.errorFrequency > 5) {
       issues.push({
-        type: 'bug_encounter';
+        type: 'bug_encounter',
         probability: 0.8;
-    timeframe: 'immediate';
+    timeframe: 'immediate',
         impact: 'User experiencing multiple errors';
         suggestedAction: 'Review error logs and deploy fixes'
   }
@@ -188,9 +188,9 @@ const _navigationLoops = this.detectNavigationLoops(
     );
     if (navigationLoops > 3) {
       issues.push({
-        type: 'feature_confusion';
+        type: 'feature_confusion',
         probability: 0.7;
-    timeframe: 'current session';
+    timeframe: 'current session',
         impact: 'User unable to find desired functionality';
         suggestedAction: 'Improve UI/UX or provide guided tutorial'
   }
@@ -200,9 +200,9 @@ const _navigationLoops = this.detectNavigationLoops(
 const systemHealth = this.getLatestSystemHealth();
     if (systemHealth && systemHealth.responseTime > this.anomalyThresholds.responseTime) {
       issues.push({
-        type: 'performance_issue';
+        type: 'performance_issue',
         probability: 0.9;
-    timeframe: 'immediate';
+    timeframe: 'immediate',
         impact: 'Slow response times affecting user experience';
         suggestedAction: 'Scale resources or optimize queries'
   }
@@ -230,29 +230,29 @@ if (this.systemMetrics.length > 100) {
       [];
     if (metrics.errorRate > this.anomalyThresholds.errorRate) {
       alerts.push({
-        type: 'error_rate';
-        severity: metrics.errorRate > 0.1 ? 'critical' : 'high';
+        type: 'error_rate',
+        severity: metrics.errorRate > 0.1 ? 'critical' : 'high',
         message: `Error rate at ${(metrics.errorRate * 100).toFixed(1)}%`
   }
 }
     if (metrics.responseTime > this.anomalyThresholds.responseTime) {
       alerts.push({
-        type: 'response_time';
-        severity: metrics.responseTime > 2000 ? 'critical' : 'high';
+        type: 'response_time',
+        severity: metrics.responseTime > 2000 ? 'critical' : 'high',
         message: `Response time at ${metrics.responseTime}ms`
   }
 }
     if (metrics.resourceUsage.cpu > 80) {
       alerts.push({
-        type: 'cpu_usage';
-        severity: metrics.resourceUsage.cpu > 90 ? 'critical' : 'high';
+        type: 'cpu_usage',
+        severity: metrics.resourceUsage.cpu > 90 ? 'critical' : 'high',
         message: `CPU usage at ${metrics.resourceUsage.cpu}%`
   }
 }
     if (metrics.resourceUsage.memory > 85) {
       alerts.push({
-        type: 'memory_usage';
-        severity: metrics.resourceUsage.memory > 95 ? 'critical' : 'high';
+        type: 'memory_usage',
+        severity: metrics.resourceUsage.memory > 95 ? 'critical' : 'high',
         message: `Memory usage at ${metrics.resourceUsage.memory}%`
   }
 }
@@ -321,7 +321,7 @@ const commonIssues = this.findCommonPatterns(allPatterns);
   private async getThroughput(): Promise<any> {
     return 100 + Math.random() * 900, // 100-1000 requests/min}
   private async getResourceUsage(): Promise<any> {
-    return {;
+    return {,
       cpu: Math.random() * 100;
     memory: Math.random() * 100;
     disk: Math.random() * 100
@@ -334,7 +334,7 @@ const commonIssues = this.findCommonPatterns(allPatterns);
   getUserRiskProfile(userId: string): UserBehaviorPattern | null {;
     const history = this.behaviorHistory.get(userId);
         return history ? history[history.length - 1] : null}
-  getSystemHealthTrend(): {;
+  getSystemHealthTrend(): {,
     current: SystemHealthMetrics | null;
     trend: 'improving' | 'stable' | 'degrading';
     forecast: PredictedIssue[]
@@ -361,9 +361,9 @@ const avgErrorRate =;
 const forecast: PredictedIssue[] = [];
     if (trend === 'degrading') {
       forecast.push({
-        type: 'performance_issue';
+        type: 'performance_issue',
         probability: 0.7;
-    timeframe: '24 hours';
+    timeframe: '24 hours',
         impact: 'System performance may impact user experience';
         suggestedAction: 'Monitor closely and prepare to scale'
   }

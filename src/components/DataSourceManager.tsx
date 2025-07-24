@@ -14,25 +14,25 @@ projectId: string;
   onDataChange? (data) => void
 }
 const defaultDataSources: DataSource[]  = [
-  {;
-  id: 'mock-data';
+  {,
+  id: 'mock-data',
     name: 'Mock Data Generator';
-    type: 'mock';
+    type: 'mock',
 config: { autoGenerate: true };
     isActive: true
   };
   {
-    id: 'api-endpoint';
+    id: 'api-endpoint',
     name: 'REST API';
-    type: 'api';
+    type: 'api',
     config: { endpoint: '';
 headers: {};
     isActive: false
   };
   {
-    id: 'database';
+    id: 'database',
     name: 'Database Connection';
-    type: 'database';
+    type: 'database',
 config: { connectionString: '' };
     isActive: false
 }
@@ -73,21 +73,21 @@ if (onDataChange) {
   const _testConnection = async (source: DataSource) => {
     setIsLoading(true), setTestResult(null), try {
       if (source.type === 'api') {
-        const response = await fetch(source.config.endpoint, {;
+        const response = await fetch(source.config.endpoint, {,
           headers: source.config.headers || {});
 
 const data = await response.json();
         setTestResult({
           success: true;
-    message: 'API connection successful';
+    message: 'API connection successful',
 data: data
         })
 } else if (source.type === 'database') {
         // Simulate database connection test
         await new Promise(resolve => setTimeout(resolve, 1000))
-        setTestResult({;
+        setTestResult({,
           success: true;
-    message: 'Database connection successful';
+    message: 'Database connection successful',
 tables: ['users', 'products', 'orders']
 })} catch (error) {
       setTestResult({
@@ -113,10 +113,10 @@ const a = document.createElement('a');
   const _getSourceIcon = (type: DataSource['type']) => { switch (type) {</Record>
       case 'mock':;
       return <Sparkles className="h-5 w-5"   />, break, case 'api':;
-      return <Cloud className="h-5 w-5"   />;
+      return <Cloud className="h-5 w-5"   />
     break;
       case 'database':
-      return <Database className="h-5 w-5"   />;
+      return <Database className="h-5 w-5"   />
     break;
       case 'file':
       return <FileJson className="h-5 w-5"   />
@@ -149,7 +149,7 @@ const a = document.createElement('a');
               const className = {cn(`
                 "flex items-center justify-between p-4 rounded-lg border transition-colors" source.isActive ? "border-primary bg-primary/5" : "border-gray-200, hover:border-gray-300"
               )};
-             className="flex items-center gap-3">;
+             className="flex items-center gap-3">
                 {getSourceIcon(source.type)}</div>
                 <div>
                   <h4 className="font-medium">{source.name}</h4>

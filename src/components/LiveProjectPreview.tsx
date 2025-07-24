@@ -22,20 +22,20 @@ id: string;
   preview: React.ReactNod
 e
 }
-const colorMap: Record<string, string> = {;
-  blue: 'bg-blue-500';
+const colorMap: Record<string, string> = {,
+  blue: 'bg-blue-500',
   green: 'bg-green-500';
-  purple: 'bg-purple-500';
+  purple: 'bg-purple-500',
   red: 'bg-red-500';
-  orange: 'bg-orange-500';
+  orange: 'bg-orange-500',
 teal: 'bg-teal-500'
 }
 ;
 
-const styleMap: Record<string, string> = {;
-  modern: 'rounded-lg shadow-lg';
+const styleMap: Record<string, string> = {,
+  modern: 'rounded-lg shadow-lg',
   playful: 'rounded-2xl shadow-xl';
-  professional: 'rounded shadow';
+  professional: 'rounded shadow',
   minimal: 'rounded-sm';
 dark: 'rounded-lg shadow-2xl bg-gray-900 text-white'
 };
@@ -225,8 +225,8 @@ switch (projectType) { case 'website':
           <p className="text-gray-600">Start building something amazing</p>
     `
   }
-  const deviceSizes = {;
-    desktop: 'w-full';
+  const deviceSizes = {,
+    desktop: 'w-full',
     tablet: 'w-[768px]';
 mobile: 'w-[375px]'
 }
@@ -250,7 +250,7 @@ const disabled = {isGenerating}
             <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")}   />
 </button>
         {/* Device, Selector */}
-        <div className="flex gap-2">;
+        <div className="flex gap-2">
           <button;
 
 const onClick  = {() => setDevice('desktop')}

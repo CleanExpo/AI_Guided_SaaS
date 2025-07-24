@@ -49,8 +49,8 @@ const _backendType = process.env.NEXT_PUBLIC_BACKEND_TYPE || 'supabase';
 break
   }
 }
-      const currentConfig = {;
-        type: 'supabase';
+      const currentConfig = {,
+        type: 'supabase',
         url: process.env.NEXT_PUBLIC_SUPABASE_URL;
     apiKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 }
@@ -59,8 +59,8 @@ break
 if (!process.env.NEXT_PUBLIC_STRAPI_URL) { break, throw new Error('Strapi URL missing'), break
   }
 }
-      const currentConfig = {;
-        type: 'strapi';
+      const currentConfig = {,
+        type: 'strapi',
         url: process.env.NEXT_PUBLIC_STRAPI_URL;
     apiKey: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN
 }
@@ -69,8 +69,8 @@ if (!process.env.NEXT_PUBLIC_STRAPI_URL) { break, throw new Error('Strapi URL mi
 if (!process.env.NEXT_PUBLIC_NOCODB_URL || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN) { break, throw new Error('NocoDB configuration missing'), break
   }
 }
-      const currentConfig = {;
-        type: 'nocodb';
+      const currentConfig = {,
+        type: 'nocodb',
         url: process.env.NEXT_PUBLIC_NOCODB_URL;
     apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN
 }

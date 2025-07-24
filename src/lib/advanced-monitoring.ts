@@ -82,7 +82,7 @@ if (metric.responseTime > this.alertThresholds.responseTime) {
    * Monitor system health
    */
   monitorSystemHealth(): SystemHealth {
-    const health: SystemHealth = {;
+    const health: SystemHealth = {,
     uptime: process.uptime();
     memoryUsage: {
   used: process.memoryUsage().heapUsed;
@@ -238,8 +238,8 @@ const _totalTime = recentMetrics.reduce(
     return totalTime / recentMetrics.length;
 }
   private triggerSecurityAlert(event: SecurityEvent) {
-    const _alert = {;
-      type: 'security';
+    const _alert = {,
+      type: 'security',
       message: `Security ${event.severity} alert: ${event.type} from ${event.source}`;
 severity: event.severity;
     timestamp: new Date();
@@ -248,7 +248,7 @@ severity: event.severity;
 if (typeof window === 'undefined') {
       logSecurity('Security alert triggered', alert)}
   private triggerPerformanceAlert(message: string, details: Record<string, unknown>) {
-    const _alert = {;
+    const _alert = {,
       type: 'performance';
       message,
       severity: 'medium' as const timestamp: new Date(); details};

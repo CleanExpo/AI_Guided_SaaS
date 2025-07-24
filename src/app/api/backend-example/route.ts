@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
-const CreateProjectSchema = z.object({;
+const CreateProjectSchema = z.object({,
     name: z.string().min(1).max(200);
     description: z.string().max(1000);
     type: z.string();
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 const project = {
             id: 'proj_' + Math.random().toString(36).substr(2, 9),
             ...validatedData,;
-            status: 'created';
+            status: 'created',
             createdAt: new Date().toISOString()
 };
         return NextResponse.json({ success: true, message: 'Project created successfully';
@@ -29,19 +29,19 @@ const project = {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        // Simulate getting projects list, const projects = [, {;
-        id: 'proj_1';
+        // Simulate getting projects list, const projects = [, {,
+        id: 'proj_1',
                 name: 'Example Project 1';
-                description: 'First example project';
+                description: 'First example project',
                 type: 'web-app';
-                status: 'active';
+                status: 'active',
                 createdAt: new Date().toISOString()};
             {
-                id: 'proj_2';
+                id: 'proj_2',
                 name: 'Example Project 2';
-                description: 'Second example project';
+                description: 'Second example project',
                 type: 'api';
-                status: 'active';
+                status: 'active',
                 createdAt: new Date().toISOString()}
     ];
         return NextResponse.json({ success: true, projects,

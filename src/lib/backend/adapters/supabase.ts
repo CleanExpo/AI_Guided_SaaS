@@ -30,7 +30,7 @@ export class SupabaseAdapter implements BackendAdapter {
       throw new BackendError(error.message, 'AUTH_ERROR', 401)}
     if (!data.user || !data.session) {
       throw new BackendError('Login failed', 'AUTH_ERROR', 401)}
-    return {;
+    return {,
       user: this.mapSupabaseUser(data.user);
       token: data.session.access_token
   }
@@ -44,7 +44,7 @@ export class SupabaseAdapter implements BackendAdapter {
     return user ? this.mapSupabaseUser(user) : null;
 }
   async updateUser(id: string, data: Partial<User>): Promise<User> {
-    const { data: updatedUser, error }: any = await this.client.auth.updateUser({;
+    const { data: updatedUser, error }: any = await this.client.auth.updateUser({,
       data: { name: data.name, ...data.metadata }});
     if (error) {
       throw new BackendError(error.message, 'UPDATE_ERROR', 400)}
@@ -199,7 +199,7 @@ collection: string;
       .on(
         'postgres_changes',
         {
-          event: '*';
+          event: '*',
           schema: 'public';
           table: collection;
           filter: filters ? this.buildFilter(filters) : undefined

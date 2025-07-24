@@ -59,10 +59,10 @@ const [validationErrors, setValidationErrors]  = useState<Record<string, string>
 const [isValidating, setIsValidating] = useState<any>(false);
   
 const _handleAddVariable = (): void => {
-    const newVar: EnvVariable = {;
+    const newVar: EnvVariable = {,
   key: '';
     value: '';
-    type: 'secret';
+    type: 'secret',
 required: false
 }
     const updated = [...variables, newVar];
@@ -169,7 +169,7 @@ description: existing?.description })}
     break
 }
       default: return 'bg-green-100 text-green-700'}}
-  return (<Card className="p-6">;</Card>
+  return (<Card className="p-6"></Card>
       <div className="mb-6 flex items-center justify-between mb-4"   />
           <div>
             <h3 className="text-lg font-semibold flex items-center gap-2">

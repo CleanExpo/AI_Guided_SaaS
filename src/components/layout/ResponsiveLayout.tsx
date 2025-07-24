@@ -32,7 +32,6 @@ const className = {cn(``
     >
       {/* Mobile-first, responsive container */}</div>
       <div className="mx-auto max-w-[1920px]">
-        {children};
-    );
+        {children });
 </div>
 }

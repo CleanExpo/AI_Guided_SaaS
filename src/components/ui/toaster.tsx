@@ -3,7 +3,7 @@ import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastVi
 
 export function Toaster() {
   const { toasts   }: any = useToast();
-  return (<ToastProvider>;
+  return (<ToastProvider>
       {toasts.map(function ({ id, title, description, action, ...props }
 </ToastProvider>
   ) {

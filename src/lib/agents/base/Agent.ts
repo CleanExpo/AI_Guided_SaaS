@@ -84,7 +84,7 @@ type: AgentMessage['type'];
     content: string;
     metadata?: Record<string, any>
   ): AgentMessage {
-    const message: AgentMessage = {;
+    const message: AgentMessage = {,
       id: uuidv4();
       agentId: this.config.id;
       type,
@@ -128,7 +128,7 @@ type: AgentMessage['type'];
       this.isProcessing = false
   }
 }
-  protected abstract execute(input: string): Promise<AgentResult>;
+  protected abstract execute(input: string): Promise<AgentResult>
   public async collaborate(targetAgentId: string, message: string): Promise<any> {
     this.emit('collaboration:request', { targetAgentId, message });
     // Collaboration logic will be implemented by the orchestrator

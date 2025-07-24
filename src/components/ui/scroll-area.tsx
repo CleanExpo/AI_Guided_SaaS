@@ -4,7 +4,7 @@ import React from 'react';
 import { cn } from '@/utils/cn';
 
 const ScrollArea = React.forwardRef<
-  React.ElementRef<typeof ScrollAreaPrimitive.Root>,React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>;
+  React.ElementRef<typeof ScrollAreaPrimitive.Root>,React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
 >(({ className, children, ...props }, ref) => (\n    <ScrollAreaPrimitive.Root;
 
 const ref  = {ref}
@@ -19,7 +19,7 @@ const ref  = {ref}
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 
 const ScrollBar = React.forwardRef<
-  React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>;
+  React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
 >(({ className, orientation = "vertical", ...props }, ref) => (\n    <ScrollAreaPrimitive.ScrollAreaScrollbar;
 
 const ref = {ref}

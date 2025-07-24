@@ -9,7 +9,7 @@ const chatRequestSchema  = z.object({
     context: z.record(z.any()).optional()
 });
 
-const chatResponseSchema = z.object({;
+const chatResponseSchema = z.object({,
   id: z.string();
     message: z.string();
     conversationId: z.string();

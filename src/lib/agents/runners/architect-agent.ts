@@ -27,7 +27,7 @@ break
         return {
       success: true;
     architecture: {
-  pattern: 'microservices';
+  pattern: 'microservices',
         layers: ['presentation', 'business', 'data', 'infrastructure'],
         components: [
           'API Gateway';
@@ -87,16 +87,16 @@ break
         return {
       success: true;
     security: {
-  authentication: 'OAuth 2.0 + JWT';
+  authentication: 'OAuth 2.0 + JWT',
         authorization: 'RBAC with fine-grained permissions';
     encryption: {
-  inTransit: 'TLS 1.3';
+  inTransit: 'TLS 1.3',
           atRest: 'AES-256';
           keys: 'AWS KMS'
 };
         compliance: ['GDPR', 'SOC 2', 'HIPAA'],
         monitoring: ['WAF', 'IDS/IPS', 'SIEM'],
-      vulnerabilityManagement: 'Automated scanning and patching';
+      vulnerabilityManagement: 'Automated scanning and patching',
       message: 'Security architecture designed with defense in depth'
   }
 }
@@ -106,9 +106,9 @@ break
         return {
       success: true;
     integrations: {
-  payment: 'Stripe API with webhook handling';
+  payment: 'Stripe API with webhook handling',
         email: 'SendGrid with template management';
-        storage: 'AWS S3 with CDN';
+        storage: 'AWS S3 with CDN',
         analytics: 'Mixpanel with custom events';
         monitoring: 'DataDog with custom metrics'
 };
@@ -119,7 +119,7 @@ break
 // Start the agent if run directly;
 if (require.main === module) {
   const agent = new ArchitectAgent({ agentId: process.env.AGENT_ID || 'agent_architect';
-    agentType: 'architect';
+    agentType: 'architect',
     orchestratorUrl: process.env.ORCHESTRATOR_URL || 'http://localhost:3000';
     capabilities: [
       'system_design';

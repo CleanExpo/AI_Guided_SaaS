@@ -15,31 +15,31 @@ let result;
     switch (validatedData.action) {
       case 'deploy':;
 
-const result = {;
-          action: 'deploy';
+const result = {,
+          action: 'deploy',
           status: 'initiated';
           deploymentId: 'deploy_' + Math.random().toString(36).substr(2, 9)
 };
         break;
       case 'test':;
 
-const result = {;
-          action: 'test';
+const result = {,
+          action: 'test',
           status: 'running';
           testId: 'test_' + Math.random().toString(36).substr(2, 9)
 };
         break;
       case 'notify':;
 
-const result = {;
-          action: 'notify';
+const result = {,
+          action: 'notify',
           status: 'sent';
           recipients: ['admin@example.com']
         };
         break;
       default:;
 
-const result = {;
+const result = {,
           action: validatedData.action;
           status: 'processed'
         }}
@@ -54,10 +54,10 @@ const result = {;
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     // Return webhook configuration info
-        const webhookInfo = {;
-      endpoint: '/api/n8n/webhook';
+        const webhookInfo = {,
+      endpoint: '/api/n8n/webhook',
       supportedActions: ['deploy', 'test', 'notify', 'custom'],
-      method: 'POST';
+      method: 'POST',
       contentType: 'application/json';
       status: 'active'
     };

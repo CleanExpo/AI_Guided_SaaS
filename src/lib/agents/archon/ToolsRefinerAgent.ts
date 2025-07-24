@@ -88,9 +88,9 @@ export interface ToolPerformanceAnalysis {
 export class ToolsRefinerAgent extends Agent {
   private toolLibrary: Map<string, Tool>, constructor() {
     super({
-      id: 'tools-refiner-agent';
+      id: 'tools-refiner-agent',
       name: 'Tools Refiner';
-      role: 'Optimize tool selection and configuration for agents';
+      role: 'Optimize tool selection and configuration for agents',
       description:
         'Expert in tool analysis, selection, and optimization. Refines tool sets to maximize agent capabilities while minimizing complexity and cost.',
       capabilities: [
@@ -193,7 +193,7 @@ const _refinedTools = this.compileRefinedTools(
         // removals;
       );
       
-const result: ToolRefinement = {;
+const result: ToolRefinement = {,
         originalTools: currentTools;
         refinedTools,
         additions,
@@ -223,10 +223,10 @@ const result: ToolRefinement = {;
 }
   private initializeToolLibrary(): Map {
     const library = new Map<string, Tool>(), // Add common development tools, const commonTools: Tool[]  = [
-  {;
-  id: 'code-generator';
+  {,
+  id: 'code-generator',
         name: 'Code Generator';
-        description: 'Generates code based on specifications';
+        description: 'Generates code based on specifications',
         category: 'development';
         capabilities: [
           'code generation';
@@ -239,14 +239,14 @@ const result: ToolRefinement = {;
     cost: { type: 'free', estimatedMonthly: 0;
   scalingFactors: any[] };
     performance: {
-          speed: 'fast';
+          speed: 'fast',
           reliability: 85;
-    scalability: 'high';
+    scalability: 'high',
     resourceUsage: { cpu: 'low', memory: 'low', network: 'low'  };
       {
-        id: 'api-tester';
+        id: 'api-tester',
         name: 'API Tester';
-        description: 'Tests API endpoints and validates responses';
+        description: 'Tests API endpoints and validates responses',
         category: 'testing';
         capabilities: [
           'endpoint testing';
@@ -256,9 +256,9 @@ const result: ToolRefinement = {;
         dependencies: [];
     cost: { type: 'free', estimatedMonthly: 0, scalingFactors: any[] };
     performance: {
-          speed: 'fast';
+          speed: 'fast',
           reliability: 95;
-    scalability: 'high';
+    scalability: 'high',
     resourceUsage: { cpu: 'low', memory: 'low', network: 'medium'  };
       // Add more tools as needed
     ];
@@ -266,14 +266,14 @@ const result: ToolRefinement = {;
     return library;
 }
   private async parseInput(input: string): Promise<any> {
-    const _parsePrompt = `Parse this input to extract current tools, requirements, and, constraints: ``, Input: "${input}";
+    const _parsePrompt = `Parse this input to extract current tools, requirements, and, constraints: ``, Input: "${input}",
   Extract:
 1. Current tools being used (if any)
 2. Requirements for the tools
 3. Constraints (budget, performance, compatibility)
 Format as JSON with arrays for each category.`;
 
-const response  = await generateAIResponse(parsePrompt, {;
+const response  = await generateAIResponse(parsePrompt, {,
       model: this.config.model;
     temperature: 0.2;
     responseFormat: 'json'
@@ -287,7 +287,7 @@ const currentTools =;
           this.toolLibrary.get(toolName) || {
             id: toolName.toLowerCase().replace(/\s+/g, '-'),
             name: toolName;
-    description: 'User-specified tool';
+    description: 'User-specified tool',
             category: 'unknown';
             capabilities: any[];
     limitations: any[];
@@ -324,7 +324,7 @@ Evaluate:
 5. Cost efficiency;
 Format as detailed JSON analysis.`;
 
-const response = await generateAIResponse(analysisPrompt, {;
+const response = await generateAIResponse(analysisPrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -339,7 +339,7 @@ Analysis, insights:
 ${JSON.stringify(analysis, null, 2)}
 List specific capabilities that are missing or insufficient.`;
 
-const response = await generateAIResponse(gapPrompt, {;
+const response = await generateAIResponse(gapPrompt, {,
       model: this.config.model;
     temperature: 0.3
     }};
@@ -359,7 +359,7 @@ For each, recommendation:
 Consider compatibility, cost, and performance.;
 Format as JSON array of ToolAddition objects.`;
 
-const response  = await generateAIResponse(recommendPrompt, {;
+const response  = await generateAIResponse(recommendPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -378,14 +378,14 @@ const additions = JSON.parse(response);
     limitations: addition.tool.limitations || [];
     dependencies: addition.tool.dependencies || [];
     cost: addition.tool.cost || {
-  type: 'unknown';
+  type: 'unknown',
           estimatedMonthly: 0;
     scalingFactors: any[]
         };
         performance: addition.tool.performance || {
-          speed: 'moderate';
+          speed: 'moderate',
           reliability: 80;
-    scalability: 'medium';
+    scalability: 'medium',
     resourceUsage: { cpu: 'medium', memory: 'medium', network: 'medium' }}
       return {
         tool;
@@ -407,7 +407,7 @@ Suggest configuration changes, to:
 4. Better meet requirements;
 Format as JSON array of ToolModification objects.`;
 
-const response = await generateAIResponse(optimizePrompt, {;
+const response = await generateAIResponse(optimizePrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -428,7 +428,7 @@ Identify tools, that:
 4. Have poor performance/cost ratio
 Format as JSON array of ToolRemoval objects.`;
 
-const response = await generateAIResponse(redundancyPrompt, {;
+const response = await generateAIResponse(redundancyPrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -447,7 +447,7 @@ Design integrations, that:
 Consider sequential, parallel, conditional, and fallback patterns.
 Format as JSON array of ToolIntegration objects.`;
 
-const response = await generateAIResponse(integrationPrompt, {;
+const response = await generateAIResponse(integrationPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -480,7 +480,7 @@ Calculate:
 4. Cost effectiveness (0-100)
 Format as JSON ToolPerformanceAnalysis object.`;
 
-const response = await generateAIResponse(performancePrompt, {;
+const response = await generateAIResponse(performancePrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -498,7 +498,7 @@ Performance, analysis:
 ${JSON.stringify(performance, null, 2)};
 Provide 5-7 specific, actionable recommendations prioritized by impact.`;
 
-const response = await generateAIResponse(recommendPrompt, {;
+const response = await generateAIResponse(recommendPrompt, {,
       model: this.config.model;
     temperature: 0.4
     }};

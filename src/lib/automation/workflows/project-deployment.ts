@@ -5,27 +5,27 @@ import { N8nWorkflow, N8nNode } from '../n8n-client';/**
 export function createProjectDeploymentWorkflow(
     projectName: string, webhookPath: string = 'deploy-project'): string;
   webhookPath: string = 'deploy-project'): N8nWorkflow {
-  const nodes: N8nNode[] = [// 1. Webhook trigger, {;
-  id: 'webhook_1';
+  const nodes: N8nNode[] = [// 1. Webhook trigger, {,
+  id: 'webhook_1',
       name: 'Deploy Webhook';
-      type: 'n8n-nodes-base.webhook';
+      type: 'n8n-nodes-base.webhook',
       typeVersion: 1;
     position: [250, 300],
     parameters: {
-  httpMethod: 'POST';
+  httpMethod: 'POST',
         path: webhookPath;
-    responseMode: 'lastNode';
+    responseMode: 'lastNode',
         responseData: 'allEntries'
 };
     // 2. Extract project data
     {
-      id: 'code_1';
+      id: 'code_1',
       name: 'Extract Project Data';
-      type: 'n8n-nodes-base.code';
+      type: 'n8n-nodes-base.code',
       typeVersion: 2;
     position: [450, 300],
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
         jsCode: ```, const _projectId = $input.item.json.projectId; const _deploymentType = $input.item.json.deploymentType || 'production';
 
 const _config = $input.item.json.config || {};
@@ -42,41 +42,41 @@ return {
 },
     // 3. Build project
     {
-      id: 'http_1';
+      id: 'http_1',
       name: 'Trigger Build';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [650, 200],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.API_URL }}/api/build';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendHeaders: true;
     headerParameters: {
           parameters: [
             {
-  name: 'Content-Type';
+  name: 'Content-Type',
               value: 'application/json'
 }
    ]
         };
         sendBody: true;
-    bodyParametersJson: '={{ JSON.stringify($json)}';
+    bodyParametersJson: '={{ JSON.stringify($json)}',
     options: {
           timeout: 300000 // 5 minutes
          };
     // 4. Run tests
     {
-      id: 'http_2';
+      id: 'http_2',
       name: 'Run Tests';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [850, 200],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.API_URL }}/api/test';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendBody: true;
     bodyParametersJson: '={{ JSON.stringify({ projectId: $json.projectId: type, "all" })}',
@@ -85,21 +85,21 @@ return {
          };
     // 5. Deploy to staging
     {
-      id: 'http_3';
+      id: 'http_3',
       name: 'Deploy to Staging';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [1050, 200],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.VERCEL_API_URL }}/v13/deployments';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendHeaders: true;
     headerParameters: {
           parameters: [
             {
-  name: 'Authorization';
+  name: 'Authorization',
               value: 'Bearer {{ $env.VERCEL_TOKEN }}'
 }
    ]
@@ -110,9 +110,9 @@ return {
     options: {};
     // 6. Health check
     {
-      id: 'wait_1';
+      id: 'wait_1',
       name: 'Wait for Deployment';
-      type: 'n8n-nodes-base.wait';
+      type: 'n8n-nodes-base.wait',
       typeVersion: 1;
     position: [1250, 200],
     parameters: {
@@ -120,13 +120,13 @@ return {
     unit: 'seconds'
 };
     {
-      id: 'http_4';
+      id: 'http_4',
       name: 'Health Check';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [1450, 200],
     parameters: {
-  method: 'GET';
+  method: 'GET',
         url: '={{ $node["Deploy to Staging"].json.url }}/api/health';
     options: {
           timeout: 10000;
@@ -135,36 +135,36 @@ return {
     waitBetweenRetries: 5000
 };
     // 7. Deploy to production (if health check passes) {
-      id: 'if_1';
+      id: 'if_1',
       name: 'Check Health Status';
-      type: 'n8n-nodes-base.if';
+      type: 'n8n-nodes-base.if',
       typeVersion: 1;
     position: [1650, 300],
     parameters: {
   conditions: {
   boolean: [
             {
-  value1: '={{ $json.status }}';
+  value1: '={{ $json.status }}',
               value2: 'healthy'
 }
    ]
 }};
     {
-      id: 'http_5';
+      id: 'http_5',
       name: 'Deploy to Production';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [1850, 200],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.VERCEL_API_URL }}/v13/deployments';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendHeaders: true;
     headerParameters: {
           parameters: [
             {
-  name: 'Authorization';
+  name: 'Authorization',
               value: 'Bearer {{ $env.VERCEL_TOKEN }}'
 }
    ]
@@ -176,13 +176,13 @@ return {
     options: {};
     // 8. Send notifications
     {
-      id: 'code_2';
+      id: 'code_2',
       name: 'Prepare Success Notification';
-      type: 'n8n-nodes-base.code';
+      type: 'n8n-nodes-base.code',
       typeVersion: 2;
     position: [2050, 200],
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
         jsCode: ```, const _deploymentUrl = $node["Deploy to Production"].json.url; const _projectId = $node["Extract Project Data"].json.projectId;
 return {
   success: true;
@@ -198,13 +198,13 @@ details: {
   }```
 };
     {
-      id: 'code_3';
+      id: 'code_3',
       name: 'Prepare Failure Notification';
-      type: 'n8n-nodes-base.code';
+      type: 'n8n-nodes-base.code',
       typeVersion: 2;
     position: [1850, 400],
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
         jsCode: ```, const _projectId = $node["Extract Project Data"].json.projectId; const healthStatus = $node["Health Check"].json;
 return {
   success: false;
@@ -220,16 +220,16 @@ error: healthStatus.error || 'Health check failed';
 };
     // 9. Send email/Slack notification
     {
-      id: 'email_1';
+      id: 'email_1',
       name: 'Send Email Notification';
-      type: 'n8n-nodes-base.emailSend';
+      type: 'n8n-nodes-base.emailSend',
       typeVersion: 2;
     position: [2250, 300],
     parameters: {
-  fromEmail: '={{ $env.NOTIFICATION_EMAIL }}';
+  fromEmail: '={{ $env.NOTIFICATION_EMAIL }}',
         toEmail: '={{ $env.ADMIN_EMAIL }}';
         subject: 'Deployment {{ $json.success ? "Successful" : "Failed" }} - {{ $json.projectId }}';
-        emailFormat: 'html';
+        emailFormat: 'html',
         htmlBody: ```
 <h2>Deployment {{ $json.success ? "Successful" : "Failed" }}</h2>
 <p><strong>Project:</strong> {{ $json.projectId }}</p>
@@ -284,14 +284,14 @@ const _connections = {'webhook_1': {
   }
 }
   return {
-    name: `Deploy ${projectName}`;
+    name: `Deploy ${projectName}`,
 active: false;
     nodes,
     connections,
     settings: {
-      executionOrder: 'v1';
+      executionOrder: 'v1',
       saveManualExecutions: true;
-    callerPolicy: 'workflowsFromSameOwner';
+    callerPolicy: 'workflowsFromSameOwner',
       errorWorkflow: '{{ $env.ERROR_WORKFLOW_ID }}'
     };
     tags: ['deployment', 'automation', 'ci-cd']

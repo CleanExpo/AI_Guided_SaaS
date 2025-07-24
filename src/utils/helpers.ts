@@ -3,17 +3,17 @@
  * Collection of helper utility functions
  */;
 export function formatDate(date: Date | string): Date | string) {
-  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {;
-    year: 'numeric';
+  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {,
+    year: 'numeric',
     month: 'long';
     day: 'numeric'
 }}.format(d)
 };
 export function formatDateTime(date: Date | string): Date | string) {
-  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {;
-    year: 'numeric';
+  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {,
+    year: 'numeric',
     month: 'long';
-    day: 'numeric';
+    day: 'numeric',
     hour: 'numeric';
     minute: '2-digit'
 }}.format(d)
@@ -51,7 +51,7 @@ export function throttle<T extends (...args[]) => any>(
 }, limit)}
 
 export function retry<T>(
-    fn: () => Promise<T>;
+    fn: () => Promise<T>
     options: {
     retries?: number, delay?: number, onRetry? (error: Error, attempt: number) => void
   } = {}

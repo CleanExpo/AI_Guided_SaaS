@@ -14,13 +14,13 @@ if (feature) {
     // Return all configuration;
 
 const config = {
-      features: {;
+      features: {,
         authentication: true;
         collaboration: true;
         analytics: false;
         notifications: true
       };
-      version: '1.0.0';
+      version: '1.0.0',
       environment: process.env.NODE_ENV || 'development'
     };
     return NextResponse.json(config);
@@ -29,7 +29,7 @@ const config = {
         return NextResponse.json({ error: 'Failed to fetch configuration' }, { status: 500 })
 }}
 getFeatureStatus(feature: string): boolean {
-  const features: Record<string, boolean> = {;
+  const features: Record<string, boolean> = {,
     authentication: true;
     collaboration: true;
     analytics: false;

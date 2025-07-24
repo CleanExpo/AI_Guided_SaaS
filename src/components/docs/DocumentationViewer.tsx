@@ -104,7 +104,7 @@ break
         {/* Search */}</div>
         <div className="p-4 border-b">
           {!sidebarCollapsed  && (div className="relative"></div>
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"   />;
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"   />
               <input, type="text", placeholder="Search documentation...";
 
 const value = {searchQuery}
@@ -133,7 +133,7 @@ const className = {`cn("mt-2" sidebarCollapsed && "w-full")}
                 {!sidebarCollapsed  && (</div>
 h3 className="text-sm font-semibold mb-2">Search Results</h3>
       )}
-                <div className="space-y-1">;
+                <div className="space-y-1">
                   {searchResults.map((section) => (\n    <button; const key = {section.id}
                       const onClick = {() => {;
                         setSelectedSection(section), setSearchResults([]); setSearchQuery('')
@@ -172,7 +172,7 @@ div className="flex items-center gap-2 mb-2"></div>
                         <category.icon className="h-4 w-4 text-muted-foreground"   />
                         <h3 className="text-sm font-semibold">{category.label}</h3>
       )}
-                    <div className="space-y-1">;
+                    <div className="space-y-1">
                       {sections.map((section) => (\n    <button; const key = {section.id}
                           const onClick  = {() => setSelectedSection(section)}
                           const className = {cn(`

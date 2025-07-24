@@ -94,9 +94,9 @@ export class EnvManager {
         isValid: false;
     errors: [
           {
-  service: 'system';
+  service: 'system',
             variable: 'config';
-            message: 'Configuration not loaded';
+            message: 'Configuration not loaded',
             severity: 'error'
   }}];
     summary: { total: 0, valid: 0, missing: 0, invalid: 0, warnings: 0  }
@@ -170,10 +170,10 @@ if (this.config.validation.strictMode &&
 }
       for (const envVar of Object.keys(env)) {
         if (!definedVars.has(envVar) && envVar.startsWith('NEXT_PUBLIC_')) {
-          errors.push({;
-            service: 'unknown';
+          errors.push({,
+            service: 'unknown',
             variable: envVar;
-    message: 'Variable not defined in configuration';
+    message: 'Variable not defined in configuration',
             severity: 'warning'
 }};
           summary.warnings++
@@ -205,11 +205,11 @@ if (this.config) {
 const _serviceKey = this.guessService(key);
           if (!this.config.services[serviceKey]) { this.config.services[serviceKey] = {
               name: serviceKey;
-    category: 'unknown';
+    category: 'unknown',
               status: 'active';
     variables: { }
           this.config.services[serviceKey].variables[key] = { required: false;
-    type: 'string';
+    type: 'string',
             description: `Auto-detected variable`, ``,
   sensitive:
               key.includes('SECRET') ||
@@ -220,7 +220,7 @@ const _serviceKey = this.guessService(key);
         this.logChange('SYNC', changes.join(', '))
 }
   private guessService(varName: string) {
-    const _patterns = {;
+    const _patterns = {,
       supabase: /SUPABASE/i;
     redis: /REDIS/i;
     openai: /OPENAI/i;

@@ -35,7 +35,7 @@ break,
 }
   size: 10 })
 }
-  return (<div className="w-full max-w-6xl mx-auto p-6 space-y-6">;</div>
+  return (<div className="w-full max-w-6xl mx-auto p-6 space-y-6"></div>
       <Card className="p-6">
         <h2 className="text-2xl font-bold mb-4">Semantic Search Demo</h2>
         <p className="text-muted-foreground mb-6">
@@ -93,7 +93,7 @@ Button variant="outline" onClick={clearResults}>
                   <h3 className="text-lg font-semibold">
                     Results ({searchResults.total})
 </h3>;
-                  <Badge variant="secondary">;
+                  <Badge variant="secondary">
 Context7: {context7.length} chunks
 </Badge>
                 <ScrollArea className="h-[400px] rounded-md border p-4">
@@ -135,7 +135,7 @@ Context7: {context7.length} chunks
                               <Badge className="mb-1">Chunk {index + 1}</Badge>
           <p className="{chunk}"   />
         </div>
-    );)}
+    ))}
       </div>
 </Card>
       )}

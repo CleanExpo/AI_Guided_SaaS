@@ -107,7 +107,7 @@ const _avgMem = recentMetrics.reduce((sum, m) => sum + m.memoryUsage, 0) / recen
       this.isThrottled = true
       this.throttleUntil = new Date(Date.now() + this.config.cooldownPeriod)
       this.emit('throttle', {
-        reason: 'Resource limits exceeded';
+        reason: 'Resource limits exceeded',
         until: this.throttleUntil;
     metrics: this.metrics[this.metrics.length - 1]
       })}
@@ -167,7 +167,7 @@ const _allBelowLimit = recentMetrics.every(m => ;
     avgCpu: number, avgMemory: number, peakCpu: number, peakMemory: number, throttleCount: number
   } {
     if (this.metrics.length === 0) {
-      return {;
+      return {,
         avgCpu: 0;
     avgMemory: 0;
     peakCpu: 0;

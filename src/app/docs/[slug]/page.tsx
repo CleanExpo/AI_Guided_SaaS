@@ -8,9 +8,9 @@ interface DocPage {
   category: string
 }
   lastUpdated: string}
-const docPages: Record<string, DocPage> = {'quick-start': {slug: 'quick-start';
+const docPages: Record<string, DocPage> = {'quick-start': {slug: 'quick-start',
     title: 'Quick Start Guide';
-    description: 'Get up and running with AI Guided SaaS in minutes';
+    description: 'Get up and running with AI Guided SaaS in minutes',
     content: `# Quick Start Guide
 
 Welcome to AI Guided SaaS! This guide will help you get started quickly.
@@ -34,9 +34,9 @@ Use our AI-powered tools to build your application:
     category: 'Getting Started' }
     lastUpdated: '2025-01-15'}
   };
-  'api-reference': {slug: 'api-reference';
+  'api-reference': {slug: 'api-reference',
     title: 'API Reference';
-    description: 'Complete API documentation for developers';
+    description: 'Complete API documentation for developers',
     content: `# API Reference
 
 ## Authentication

@@ -42,8 +42,8 @@ if (options.cacheResults) {
         cache.set(cacheKey, response)}
       return response;
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Search failed', setError(errorMessage), toast({;
-        title: 'Search Error';
+      const _errorMessage = err instanceof Error ? err.message : 'Search failed', setError(errorMessage), toast({,
+        title: 'Search Error',
         description: errorMessage;
         variant: 'destructive'
       });
@@ -71,13 +71,13 @@ const _indexDocument = useCallback(async (request: IndexRequest) => { setIsIndex
       cache.clear()
 }
       toast({
-        title: 'Document Indexed';
+        title: 'Document Indexed',
         description: `Successfully indexed document: ${request.id}`
       });
       return result;
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed', setError(errorMessage), toast({;
-        title: 'Indexing Error';
+      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed', setError(errorMessage), toast({,
+        title: 'Indexing Error',
         description: errorMessage;
         variant: 'destructive'
       });
@@ -94,13 +94,13 @@ const _indexBatch = useCallback(async (requests: IndexRequest[]) => { setIsIndex
       cache.clear()
 }
       toast({
-        title: 'Batch Indexed';
+        title: 'Batch Indexed',
         description: `Successfully indexed ${requests.length} documents`
       });
       return result;
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed', setError(errorMessage), toast({;
-        title: 'Indexing Error';
+      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed', setError(errorMessage), toast({,
+        title: 'Indexing Error',
         description: errorMessage;
         variant: 'destructive'
       });
@@ -122,7 +122,7 @@ const _clearResults = useCallback(() => {;
       const _indexCurrentPage = async () => {;
         const _content = document.body.innerText; const _path = window.location.pathname}
         try {
-          await indexDocument({;
+          await indexDocument({,
             id: path;
             content,
             metadata: { url: window.location.href, title: document.title, timestamp: new Date().toISOString() };

@@ -14,11 +14,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 const processed = {
       id: 'req_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,;
-      status: 'processed';
+      status: 'processed',
       analysisResult: {
-        feasibility: 'high';
+        feasibility: 'high',
         estimatedHours: 40;
-        complexity: 'medium';
+        complexity: 'medium',
         recommendations: [
           'Use React for frontend';
           'Implement proper authentication',
@@ -37,10 +37,10 @@ const processed = {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    // Simulate getting processed requirements, const requirements = [, {;
-        id: 'req_1';
+    // Simulate getting processed requirements, const requirements = [, {,
+        id: 'req_1',
         requirements: 'Build a todo app';
-        projectType: 'web-app';
+        projectType: 'web-app',
         status: 'processed';
         createdAt: new Date().toISOString()}
     ];

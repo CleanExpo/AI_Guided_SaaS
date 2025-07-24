@@ -19,7 +19,7 @@ export function Navigation() {
   const pathname  = usePathname(); const { data: session   }: any = useSession();
   
 const { theme, setTheme   }: any = useTheme();
-  return (<nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">;</nav>
+  return (<nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"></nav>
         <div className="container mx-auto px-4"></div>
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}</div>
@@ -43,8 +43,7 @@ const key = {item.name}
                 ></Link>
                   <item.icon className="h-4 w-4"   />
                   <span>{item.name}</span>
-      )};
-    );
+      ) });
           {/* Right, side actions */}
           <div className="flex items-center space-x-2">
             {/* Theme, toggle */}</div>
@@ -72,7 +71,6 @@ const onClick = {() => signOut()}
               <Link href="/auth/signin"></Link>
                 <Button variant="default" size="sm">
                   Sign In</Button>
-      )};
-      );
+      ) });
 </div>
 }

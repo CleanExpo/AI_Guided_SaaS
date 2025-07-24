@@ -58,9 +58,9 @@ const _fetchStats = async () => {
 
 const _runHealing = async () => {
     setHealingInProgress(true), try {
-      const response = await fetch('/api/epc/heal', {;
-    method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/epc/heal', {,
+    method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify({ autoApprove: autoHeal })};
       
 const result = await response.json();
@@ -80,7 +80,7 @@ const _interval = setInterval(fetchStats, 30000);
 const _getStatusIcon = (): void => {if (!status) return null, switch (status.env_check) {
       case 'pass':
       </TelemetryStats>
-    break, return <CheckCircle2 className="h-5 w-5 text-green-500"   />;
+    break, return <CheckCircle2 className="h-5 w-5 text-green-500"   />
 break;
       case 'warning':
       </CheckCircle2>
@@ -168,7 +168,7 @@ li>...and {status.issues.length - 3} more</li>
 id="auto-heal";
 
 const checked = {autoHeal}
-                  const onCheckedChange = {setAutoHeal}    />;
+                  const onCheckedChange = {setAutoHeal}    />
               {status?.issues && status.issues.length > 0  && (Button; const onClick = {runHealing}
                   const disabled  = {healingInProgress};
                   className="w-full";

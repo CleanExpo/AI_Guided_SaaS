@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         // Simulate stats data
-        const stats = {;
+        const stats = {,
             totalUsers: 1247;
             activeUsers: 89;
             totalProjects: 456;

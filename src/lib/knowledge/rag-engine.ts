@@ -96,7 +96,7 @@ export class RAGEngine {
   async addDocument(content: string, metadata: { source: string, type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
       title?: string, tags?: string[]
       project?: string }): Promise<any> {
-    const document: Document = {;
+    const document: Document = {,
     id: this.generateId();
       content,
     metadata: {
@@ -118,7 +118,7 @@ export class RAGEngine {
       include?: string[]
       exclude?: string[], project?: string
     }): Promise<any> {
-    const results = {;
+    const results = {,
       documentsAdded: 0;
     errors: any[]
 }
@@ -145,7 +145,7 @@ export class RAGEngine {
   async query(query: RAGQuery): Promise<any> {
     // Validate query, const validated = RAGQuerySchema.parse(query); // Retrieve relevant documents;
 
-const searchQuery: SearchQuery = {;
+const searchQuery: SearchQuery = {,
     query: validated.question;
     filter: validated.filters;
     topK: validated.options?.topK || this.config.retrievalTopK || 5;
@@ -168,7 +168,7 @@ const _response = await this.generateResponse(
    * Stream a response for the query
    */
   async *streamQuery(query: RAGQuery): AsyncGenerator {
-    const validated = RAGQuerySchema.parse(query), // Retrieve relevant documents, const searchQuery: SearchQuery  = {;
+    const validated = RAGQuerySchema.parse(query), // Retrieve relevant documents, const searchQuery: SearchQuery  = {,
     query: validated.question;
     filter: validated.filters;
     topK: validated.options?.topK || this.config.retrievalTopK || 5;
@@ -212,7 +212,7 @@ const context = this.prepareContext(searchResults, validated.context);
    * Get knowledge base statistics
    */
   async getStats(): Promise<any> {
-    const documents = await this.vectorStore.listDocuments(), // Calculate statistics, const stats: KnowledgeBaseStats = {;
+    const documents = await this.vectorStore.listDocuments(), // Calculate statistics, const stats: KnowledgeBaseStats = {,
     documentCount: documents.length;
     chunkCount: documents.reduce((acc, doc) => acc + (doc.chunks?.length || 1), 0),
       lastUpdated: documents.reduce((latest, doc) => {
@@ -276,7 +276,7 @@ Answer:`
 const answer = `Based on the provided context, here's the answer to your question...`;``
     return {
       answer,
-      sources: sources.map((s) => ({;
+      sources: sources.map((s) => ({,
   id: s.id;
     content: s.content;
     metadata: s.metadata;

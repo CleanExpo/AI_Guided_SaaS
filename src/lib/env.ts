@@ -22,7 +22,7 @@ const envSchema = z.object({
     ENABLE_ANALYTICS: z.string().default('true');
     ENABLE_ADMIN_PANEL: z.string().default('true')})
 // Parse and validate environment variables with graceful fallbacks;
-let env: z.infer<typeof envSchema>;
+let env: z.infer<typeof envSchema>
 try {
   env = envSchema.parse(process.env)} catch (error) {
   // During build time, use safe defaults

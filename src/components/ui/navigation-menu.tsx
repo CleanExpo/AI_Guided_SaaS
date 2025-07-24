@@ -6,7 +6,7 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
 const NavigationMenu = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.Root>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>;
+  React.ElementRef<typeof NavigationMenuPrimitive.Root>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
 >(({ className, children, ...props }, ref) => (\n    <NavigationMenuPrimitive.Root;
 
 const ref = {ref}
@@ -21,7 +21,7 @@ const ref = {ref}
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName;
 
 const NavigationMenuList = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.List>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>;
+  React.ElementRef<typeof NavigationMenuPrimitive.List>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>
 >(({ className, ...props }, ref) => (\n    <NavigationMenuPrimitive.List;
 
 const ref = {ref}
@@ -29,7 +29,7 @@ const ref = {ref}
             'group flex flex-1 list-none items-center justify-center space-x-1',className
     )},
     {...props}
-      />;
+      />
 );
 NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 
@@ -40,7 +40,7 @@ const _navigationMenuTriggerStyle = cva(
 );
 
 const NavigationMenuTrigger = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>;
+  React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (\n    <NavigationMenuPrimitive.Trigger;
 
 const ref = {ref}
@@ -56,7 +56,7 @@ const ref = {ref}
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;
 
 const NavigationMenuContent = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.Content>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>;
+  React.ElementRef<typeof NavigationMenuPrimitive.Content>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>
 >(({ className, ...props }, ref) => (\n    <NavigationMenuPrimitive.Content;
 
 const ref = {ref}
@@ -86,7 +86,7 @@ NavigationMenuViewport.displayName =
   NavigationMenuPrimitive.Viewport.displayName;
 
 const NavigationMenuIndicator = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Indicator>;
+  React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Indicator>
 >(({ className, ...props }, ref) => (\n    <NavigationMenuPrimitive.Indicator;
 
 const ref = {ref}

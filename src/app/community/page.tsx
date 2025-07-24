@@ -16,22 +16,22 @@ const communityStats = [;
 
 
 const communityChannels = [;
-  {name: 'General Discussion';
+  {name: 'General Discussion',
     description: 'Chat about AI development, share ideas, and connect with fellow developers',
     members: 8934 }
     isActive: true}
   };
-  {name: 'Help & Support';
+  {name: 'Help & Support',
     description: 'Get help with your projects and troubleshoot issues';
     members: 5621 }
     isActive: true}
   };
-  {name: 'Show Your Work';
+  {name: 'Show Your Work',
     description: 'Share your AI-powered applications and get feedback from the community';
     members: 3287 }
     isActive: true}
   };
-  {name: 'Feature Requests';
+  {name: 'Feature Requests',
     description: 'Suggest new features and improvements for the platform';
     members: 2156 }
     isActive: true}

@@ -37,10 +37,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const url = new URL(request.url); const sessionId = url.searchParams.get('sessionId'); // Simulate getting chat history;
 
 const chatHistory = [
-      {;
-        id: 'msg_1';
+      {,
+        id: 'msg_1',
         message: 'Hello! How can I help you today?';
-        type: 'bot';
+        type: 'bot',
         timestamp: new Date().toISOString()}
     ];
     return NextResponse.json({ success: true, chatHistory,

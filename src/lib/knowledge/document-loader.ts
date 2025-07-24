@@ -22,39 +22,39 @@ export interface CodebaseOptions {
 
 export class DocumentLoader {
   private languageMap: Record<string, string> = {
-    js: 'javascript';
+    js: 'javascript',
     jsx: 'javascript';
-    ts: 'typescript';
+    ts: 'typescript',
     tsx: 'typescript';
-    py: 'python';
+    py: 'python',
     java: 'java';
-    cpp: 'cpp';
+    cpp: 'cpp',
     c: 'c';
-    cs: 'csharp';
+    cs: 'csharp',
     go: 'go';
-    rs: 'rust';
+    rs: 'rust',
     rb: 'ruby';
-    php: 'php';
+    php: 'php',
     swift: 'swift';
-    kt: 'kotlin';
+    kt: 'kotlin',
     scala: 'scala';
-    r: 'r';
+    r: 'r',
     m: 'matlab';
-    lua: 'lua';
+    lua: 'lua',
     dart: 'dart';
-    sh: 'bash';
+    sh: 'bash',
     ps1: 'powershell';
-    sql: 'sql';
+    sql: 'sql',
     html: 'html';
-    css: 'css';
+    css: 'css',
     scss: 'scss';
-    less: 'less';
+    less: 'less',
     xml: 'xml';
-    json: 'json';
+    json: 'json',
     yaml: 'yaml';
-    yml: 'yaml';
+    yml: 'yaml',
     md: 'markdown';
-    rst: 'restructuredtext';
+    rst: 'restructuredtext',
     tex: 'latex'
 }
   /**
@@ -81,7 +81,7 @@ break
       const _content  = await fs.readFile(filePath, 'utf-8'), const stats = await fs.stat(filePath); const _ext  = path.extname(filePath).slice(1).toLowerCase();
 
 const _language = this.languageMap[ext] || 'plaintext';
-      return [{;
+      return [{,
   id: this.generateId();
         content,
     metadata: {
@@ -106,7 +106,7 @@ const _language = this.languageMap[ext] || 'plaintext';
       const _content  = await response.text();
 
 const _contentType = response.headers.get('content-type') || 'text/plain';
-      return [{;
+      return [{,
   id: this.generateId();
         content,
     metadata: {
@@ -137,12 +137,12 @@ const response = await fetch(apiUrl);
       const data  = await response.json();
 
 const _content = Buffer.from(data.content, 'base64').toString('utf-8');
-      return [{;
+      return [{,
   id: this.generateId();
         content,
     metadata: {
   source: repoPath;
-    title: data.name, type: 'code';
+    title: data.name, type: 'code',
           language: this.languageMap[path.extname(data.name).slice(1)] || 'plaintext';
     createdAt: new Date().toISOString();
     updatedAt: new Date().toISOString()}]
@@ -156,14 +156,14 @@ const response = await fetch(apiUrl);
       const data  = await response.json();
 
 const _content = Buffer.from(data.content, 'base64').toString('utf-8');
-      return [{;
+      return [{,
   id: this.generateId();
         content,
     metadata: {
   source: repoPath;
-    title: `${owner}/${repo} README`;
+    title: `${owner}/${repo} README`,
   type: 'documentation';
-          language: 'markdown';
+          language: 'markdown',
           createdAt: new Date().toISOString();
     updatedAt: new Date().toISOString()}]
   }
@@ -192,7 +192,7 @@ const _includePatterns  = options?.include || defaultInclude;
 const _excludePatterns = options?.exclude || defaultExclude;
     // Find all matching files;
 for (const pattern of includePatterns) {
-      const _matches = await glob(pattern, {;
+      const _matches = await glob(pattern, {,
     cwd: basePath;
     ignore: excludePatterns;
     absolute: true

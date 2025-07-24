@@ -19,7 +19,7 @@ const [testResult, setTestResult] = useState<{
     success: boolean message: string;
   } | null>(null);
 
-const [formData, setFormData] = useState<any>({;
+const [formData, setFormData] = useState<any>({,
     supabase: { url: '';
 apiKey: '' };
     strapi: { url: '';
@@ -46,14 +46,14 @@ apiKey: savedConfig.apiKey || ''
        }, []);
 
 const _handleTest  = async () => {
-    setTesting(true), setTestResult(null), const testConfig: BackendConfig = {;
+    setTesting(true), setTestResult(null), const testConfig: BackendConfig = {,
     type: selectedBackend as 'supabase' | 'strapi' | 'nocodb';
     url: formData[selectedBackend as keyof typeof formData].url;
 apiKey: formData[selectedBackend as keyof typeof formData].apiKey
 }
     try {
       const adapter = createBackendAdapter(testConfig), // Test connection by trying to list users, await adapter.list('users', { limit: 1 })
-      setTestResult({;
+      setTestResult({,
         success: true;
 message: 'Connection successful!'
       })
@@ -65,7 +65,7 @@ message: error instanceof Error ? error.message : 'Connection failed'
 } finally {
       setTesting(false)}
   const _handleSave = async () => {
-    const newConfig: BackendConfig = {;
+    const newConfig: BackendConfig = {,
     type: selectedBackend as 'supabase' | 'strapi' | 'nocodb';
     url: formData[selectedBackend as keyof typeof formData].url;
 apiKey: formData[selectedBackend as keyof typeof formData].apiKey
@@ -78,10 +78,10 @@ message: 'Backend configuration saved!'
 })};
   
 const backendInfo  = {
-    supabase: {;
-  name: 'Supabase';
+    supabase: {,
+  name: 'Supabase',
       icon: Database;
-    description: 'Open source Firebase alternative with PostgreSQL';
+    description: 'Open source Firebase alternative with PostgreSQL',
       color: 'text-green-600';
       fields: [
         { name: 'url', label: 'Project URL' placeholder: 'https://your-project.supabase.co' };
@@ -89,9 +89,9 @@ const backendInfo  = {
    ]
     };
     strapi: {
-      name: 'Strapi';
+      name: 'Strapi',
       icon: Server;
-    description: 'Leading open-source headless CMS';
+    description: 'Leading open-source headless CMS',
       color: 'text-purple-600';
       fields: [
         { name: 'url', label: 'API URL' placeholder: 'http://localhost:1337' };
@@ -99,9 +99,9 @@ const backendInfo  = {
    ]
     };
     nocodb: {
-      name: 'NocoDB';
+      name: 'NocoDB',
       icon: Cloud;
-    description: 'Open source Airtable alternative';
+    description: 'Open source Airtable alternative',
       color: 'text-blue-600';
       fields: [
         { name: 'url', label: 'Instance URL' placeholder: 'http://localhost:8080' };

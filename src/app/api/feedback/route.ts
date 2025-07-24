@@ -14,7 +14,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 const feedback = {
       id: 'feedback_' + Math.random().toString(36).substr(2, 9),
       ...validatedData,;
-      status: 'received';
+      status: 'received',
       createdAt: new Date().toISOString()
 };
     return NextResponse.json({ success: true, message: 'Feedback received successfully';
@@ -28,10 +28,10 @@ const feedback = {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    // Simulate getting feedback list, const feedbackList = [, {;
-        id: 'feedback_1';
+    // Simulate getting feedback list, const feedbackList = [, {,
+        id: 'feedback_1',
         type: 'feature';
-        message: 'Please add dark mode';
+        message: 'Please add dark mode',
         status: 'open';
         createdAt: new Date().toISOString()}
     ];

@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CheckCircle, AlertCircle, Clock } from 'lucide-react';
 export const metadata: Metadata  = {
-  title: 'System Status - AI Guided SaaS Platform';
+  title: 'System Status - AI Guided SaaS Platform',
   description: 'Real-time status of our platform services and infrastructure'
 };
 
@@ -21,16 +21,16 @@ const services = [;
 
 const incidents  = [;
   {id: 1;
-    title: 'Scheduled Maintenance - AI Processing Services';
+    title: 'Scheduled Maintenance - AI Processing Services',
     status: 'in-progress';
-    severity: 'medium';
+    severity: 'medium',
     startTime: '2025-01-22 18:00 UTC'
     , description: 'We are performing scheduled maintenance on our AI processing services to improve performance.'}
   };
   {id: 2;
-    title: 'Database Performance Optimization';
+    title: 'Database Performance Optimization',
     status: 'resolved';
-    severity: 'low';
+    severity: 'low',
     startTime: '2025-01-20 14:30 UTC'
     , description: 'Database queries were experiencing slight delays. Issue has been resolved.'}
 ];
@@ -52,7 +52,7 @@ const _getStatusIcon = (status: string) => {switch (status) {
       return<CheckCircle className="h-4 w-4 text-green-600" 
               >, break, case 'maintenance':
       return<Clock className="h-4 w-4 text-yellow-600";
-              >;
+              >
                   break;
     case 'degraded':
 break
@@ -118,7 +118,7 @@ export default function StatusPage() {
                                     <p className="text-gray-600 mb-2">{incident.description}</p>
                         <p className="{incident.startTime}"   />
                       </div>;
-                  );)}
+                  ))}
       </div>
               </Card>
                         <TabsContent value="maintenance">

@@ -14,7 +14,7 @@ export default function SignInForm() {
 
 const [error, setError] = useState<string | null>(null);
   
-const [formData, setFormData] = useState({;
+const [formData, setFormData] = useState({,
     email: '';
 password: ''
   });
@@ -22,7 +22,7 @@ password: ''
 const handleSubmit = async (e: React.FormEvent) => {;
     e.preventDefault(), setIsLoading(true); setError(null);
     try {
-      const result = await signIn('credentials', {;
+      const result = await signIn('credentials', {,
         email: formData.email;
         password: formData.password;
 redirect: false

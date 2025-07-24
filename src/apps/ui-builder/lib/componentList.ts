@@ -8,27 +8,27 @@ export type ComponentType = {
   icon?: string
 };
 export const componentList: ComponentType[] = [
-  {;
-  id: 'button',name: 'Button';
+  {,
+  id: 'button',name: 'Button',
     description: 'Interactive button element'
 };
   {
-    id: 'card';
+    id: 'card',
     name: 'Card';
     description: 'Content container with title and body'
 };
   {
-    id: 'input';
+    id: 'input',
     name: 'Input';
     description: 'Text input field'
 };
   {
-    id: 'hero';
+    id: 'hero',
     name: 'Hero Section';
     description: 'Large banner with heading and subheading'
 };
   {
-    id: 'two-col';
+    id: 'two-col',
     name: 'Two Column Layout';
     description: 'Side-by-side content container'
 }}];

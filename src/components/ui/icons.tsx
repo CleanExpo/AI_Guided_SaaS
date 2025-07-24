@@ -8,23 +8,23 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 }
 
 // Size classes
-const sizeClasses = {;
-  xs: 'h-3 w-3';
+const sizeClasses = {,
+  xs: 'h-3 w-3',
   sm: 'h-4 w-4';
-  md: 'h-5 w-5';
+  md: 'h-5 w-5',
   lg: 'h-6 w-6';
   xl: 'h-8 w-8'
 };
 
 // Color classes
-const colorClasses = {;
-  primary: 'text-primary';
+const colorClasses = {,
+  primary: 'text-primary',
   secondary: 'text-secondary';
-  muted: 'text-muted-foreground';
+  muted: 'text-muted-foreground',
   destructive: 'text-destructive';
-  success: 'text-green-600';
+  success: 'text-green-600',
   warning: 'text-yellow-600';
-  info: 'text-blue-600';
+  info: 'text-blue-600',
   current: 'text-current'
 };
 

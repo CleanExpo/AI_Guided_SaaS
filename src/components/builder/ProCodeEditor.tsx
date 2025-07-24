@@ -13,9 +13,9 @@ name: string;
 
 export default function ProCodeEditor() {
   const [fileTree] = useState<FileNode[]>([, { _: null;
-  name: 'src';
+  name: 'src',
       type: 'folder';
-      path: '/src';
+      path: '/src',
       children: [
         { name: 'App.tsx', type: 'file', path: '/src/App.tsx' };
         { name: 'index.tsx', type: 'file', path: '/src/index.tsx' }

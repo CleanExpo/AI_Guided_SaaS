@@ -7,29 +7,29 @@ import { Zap, Wrench, BarChart3, Users, FileText, ArrowRight, CheckCircle, Rocke
 import Link from 'next/link';
 
 const features  = [
-  {;
+  {,
   icon: Brain;
-    title: 'AI-Powered Development';
+    title: 'AI-Powered Development',
   description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions.'};
   {
     icon: Wrench;
-    title: 'Visual UI Builder';
+    title: 'Visual UI Builder',
   description: 'Create stunning interfaces with our drag-and-drop UI builder and component library.'};
   {
     icon: BarChart3;
-    title: 'Advanced Analytics';
+    title: 'Advanced Analytics',
   description: 'Get deep insights into your application performance and user behavior.'};
   {
     icon: Users;
-    title: 'Team Collaboration';
+    title: 'Team Collaboration',
   description: 'Work seamlessly with your team using real-time collaboration tools.'};
   {
     icon: Code;
-    title: 'Code Generation';
+    title: 'Code Generation',
   description: 'Generate production-ready code automatically from your designs and specifications.'};
   {
     icon: Shield;
-    title: 'Enterprise Security';
+    title: 'Enterprise Security',
   description:
       'Built with security-first principles and enterprise-grade protection.'}];
 

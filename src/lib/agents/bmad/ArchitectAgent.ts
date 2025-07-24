@@ -294,9 +294,9 @@ export interface TechnicalDecision {
 export class ArchitectAgent extends Agent {
   constructor() {
     super({
-      id: 'architect-agent';
+      id: 'architect-agent',
       name: 'System Architect';
-      role: 'Design system architecture and technical solutions';
+      role: 'Design system architecture and technical solutions',
       description:
         'Expert in system design, architectural patterns, technology selection, and infrastructure planning. Creates comprehensive technical architectures.',
       capabilities: [
@@ -466,7 +466,7 @@ Provide:
 5. High-level architecture description;
 Format as JSON ArchitectureOverview object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -491,7 +491,7 @@ Create components, with:
 Include frontend, backend, services, and data components as needed.
 Format as JSON array of Component objects.`;
 
-const _response  = await generateAIResponse(prompt, {;
+const _response  = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -519,7 +519,7 @@ Design:
 Consider scalability, performance, and data integrity.;
 Format as JSON DataModel object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -531,7 +531,7 @@ const _response = await generateAIResponse(prompt, {;
     const _prompt = `Design comprehensive API, architecture: Components with, APIs:``, ${JSON.stringify(
   // components
     .filter((c) => c.interfaces.length > 0)
-    .map((c) => ({;
+    .map((c) => ({,
       name: c.name;
     interfaces: c.interfaces
     });
@@ -552,7 +552,7 @@ Design:
 5. Rate limiting approach
 Format as JSON APIDesign object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -575,7 +575,7 @@ Design:
 Consider cost, scalability, and operational complexity.
 Format as JSON Infrastructure object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -607,7 +607,7 @@ Include:
 5. Data protection strategy;
 Format as JSON SecurityArchitecture object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -628,7 +628,7 @@ Identify potential integrations, for:
 - Monitoring services;
 Format as JSON array of Integration objects.`;``;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -649,7 +649,7 @@ Design:
 5. Blue-green deployment feasibility
 Format as JSON DeploymentStrategy object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -671,7 +671,7 @@ For each major decision, document:
 Focus on decisions that will significantly impact the project.
 Format as JSON array of TechnicalDecision objects.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -702,7 +702,7 @@ t: any =>
     return [...new Set(patterns)];
 }
   private extractTechStack(components: Component[]): Record {
-    const techStack: Record<string, string[]> = {;
+    const techStack: Record<string, string[]> = {,
       frontend: any[];
     backend: any[];
     database: any[];

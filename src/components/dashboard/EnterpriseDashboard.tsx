@@ -60,8 +60,8 @@ const _loadDashboardData = async () => {
       console.error('Error loading dashboard, data:', error)} finally {
     setLoading(false)}
   const _formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {;
-      style: 'currency';
+    return new Intl.NumberFormat('en-US', {,
+      style: 'currency',
 currency: 'USD'}).format(amount)
 };
   
@@ -87,7 +87,7 @@ const _formatPercentage = (num: number) => {
             <h1 className="text-3xl font-bold">Enterprise Dashboard</h1>
             <p className="text-gray-600">
               Comprehensive analytics and system monitoring</p>
-          <div className="flex items-center space-x-2">;
+          <div className="flex items-center space-x-2">
             <select;
 
 const value = {timeRange}
@@ -199,16 +199,16 @@ const value = {systemMetrics.errorRate * 100}
                 <div className="text-xs text-gray-500">
                   Average API response</div>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 flex items-center space-x-2"   />
-                <Server className="h-4 w-4 text-blue-500"   />;
-                <span className="text-sm">;
+                <Server className="h-4 w-4 text-blue-500"   />
+                <span className="text-sm">
 Active: Connections: {systemMetrics.activeConnections}</span>
               <div className="flex items-center space-x-2">
                 <Database className="h-4 w-4 text-green-500"   />
-                <span className="text-sm">;
+                <span className="text-sm">
 DB: Connections: {systemMetrics.databaseConnections}</span>
               <div className="flex items-center space-x-2">
                 <Zap className="h-4 w-4 text-brand-primary-500"   />
-                <span className="text-sm">;
+                <span className="text-sm">
 Storage: {systemMetrics.storageUsed}GB used</span>
       )};
     {/* Revenue, Analytics */},
@@ -400,8 +400,7 @@ Card>
               <Button variant="outline", className="justify-start">
                 <BarChart3 className="h-4 w-4 mr-2"   />
                 Export Analytics</BarChart3>
-      )};
-    );
+      ) });
 </Button>
 </CardContent>
 </Card></CardContent>

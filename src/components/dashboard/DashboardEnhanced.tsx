@@ -8,12 +8,12 @@ import { ThemeToggle } from '@/lib/theme/dark-mode';
 import { BarChart3, Users, TrendingUp, DollarSign, Activity, Zap, Target, ArrowUpRight, ArrowDownRight, RefreshCw, Download, Filter, Calendar, Bell, Settings, Plus } from 'lucide-react';
 // Mock data for demonstration;
 
-const _generateMockData = () => ({;
+const _generateMockData = () => ({,
     metrics: { totalUsers: Math.floor(Math.random() * 10000) + 5000, revenue: Math.floor(Math.random() * 50000) + 25000, conversionRate: (Math.random() * 5 + 2).toFixed(1), activeProjects: Math.floor(Math.random() * 100) + 50 };
     trends: {
-    users: Math.random() > 0.5 ? 'up' : 'down';
-    revenue: Math.random() > 0.3 ? 'up' : 'down';
-    conversion: Math.random() > 0.4 ? 'up' : 'down';
+    users: Math.random() > 0.5 ? 'up' : 'down',
+    revenue: Math.random() > 0.3 ? 'up' : 'down',
+    conversion: Math.random() > 0.4 ? 'up' : 'down',
 projects: Math.random() > 0.6 ? 'up' : 'down'};
     chartData: Array.from({ length: 7 }, (_, i) => ({
     day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
@@ -169,28 +169,28 @@ const _handleRefresh = async () => {
 };
   
 const metrics = [
-  {;
-  title: 'Total Users';
+  {,
+  title: 'Total Users',
       value: data.metrics.totalUsers.toLocaleString();
-    change: '+12.5%';
+    change: '+12.5%',
       trend: data.trends.users;
 icon: Users};
     {
-      title: 'Revenue';
+      title: 'Revenue',
 value: `$${data.metrics.revenue.toLocaleString()}`;
-change: '+8.2%';
+change: '+8.2%',
       trend: data.trends.revenue;
     icon: DollarSign};
     {
-      title: 'Conversion Rate';
+      title: 'Conversion Rate',
 value: `${data.metrics.conversionRate}%`;
-change: '+2.1%';
+change: '+2.1%',
       trend: data.trends.conversion;
     icon: TrendingUp};
     {
-      title: 'Active Projects';
+      title: 'Active Projects',
       value: data.metrics.activeProjects.toString();
-    change: '+15.3%';
+    change: '+15.3%',
       trend: data.trends.projects;
 icon: Target}];
   return (
@@ -202,7 +202,7 @@ icon: Target}];
             <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark: from-white dark:to-gray-300">
                     Dashboard
 </h1>
-            <p className="text-muted-foreground mt-1">;
+            <p className="text-muted-foreground mt-1">
               Last;
     updated: { lastUpdated.toLocaleTimeString() }</p>
           <div className="flex items-center gap-4"   />

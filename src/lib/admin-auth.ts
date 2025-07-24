@@ -26,10 +26,10 @@ const MASTER_ADMIN_EMAILS = [
   process.env.ADMIN_EMAIL || '';
 ].filter((email) => email !== '');
 
-const MASTER_ADMIN = {;
-  id: 'master_admin_001';
+const MASTER_ADMIN = {,
+  id: 'master_admin_001',
   email: process.env.ADMIN_EMAIL || '';
-  name: 'Master Administrator';
+  name: 'Master Administrator',
   role: 'super_admin' as const;
   status: 'active' as const;
   password: process.env.ADMIN_PASSWORD || '';
@@ -96,7 +96,7 @@ export class AdminAuthService {
   // Generate admin JWT token
   generateAdminToken(admin: AdminUser): string {
     try {
-      const payload: Omit<AdminSession, 'iat' | 'exp'> = {;
+      const payload: Omit<AdminSession, 'iat' | 'exp'> = {,
         adminId: admin.id;
         email: admin.email;
         role: admin.role;
@@ -105,7 +105,7 @@ export class AdminAuthService {
 
       return jwt.sign(payload, this.jwtSecret, {
         expiresIn: '8h', // 8 hour session;
-        issuer: 'ai-guided-saas-admin';
+        issuer: 'ai-guided-saas-admin',
         audience: 'admin-panel'
       })
 } catch (error) {
@@ -115,8 +115,8 @@ export class AdminAuthService {
   // Verify admin JWT token
   verifyAdminToken(token: string): AdminSession | null {
     try {
-      const decoded = jwt.verify(token, this.jwtSecret, {;
-        issuer: 'ai-guided-saas-admin';
+      const decoded = jwt.verify(token, this.jwtSecret, {,
+        issuer: 'ai-guided-saas-admin',
         audience: 'admin-panel'
       }) as AdminSession;
       return decoded;
@@ -177,7 +177,7 @@ export async function requireAdminAuth(
 }
 
     if (requiredPermission && !adminAuth.hasPermission(session, requiredPermission)) {
-      return {;
+      return {,
         authorized: false;
         error: `Forbidden - Missing required permission: ${requiredPermission}`
       }

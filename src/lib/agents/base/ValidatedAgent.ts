@@ -66,9 +66,9 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
   constructor() {
     super(
       {
-        id: 'validated-analyst-agent';
+        id: 'validated-analyst-agent',
         name: 'Validated Requirements Analyst';
-        role: 'Analyze and document project requirements with validation';
+        role: 'Analyze and document project requirements with validation',
         description: 'Expert in requirement gathering with built-in validation.';
         capabilities: [
           'Requirement extraction';
@@ -112,7 +112,7 @@ const _validatedAnalysis = this.validateOutput(analysis);
   private async analyzeRequirements(input: string): Promise<any> {
     // Simplified for example - implement your actual logic, const _prompt  = `Analyze these requirements and provide a structured, analysis: ${input}`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
     model: this.config.model;
     temperature: this.config.temperature;
     responseFormat: 'json'
@@ -148,8 +148,8 @@ export const _AgentConfigSchema = z.object({
  */;
 export function createValidatedAgent<TInput, TOutput>(
     config: AgentConfig;
-    inputSchema: z.ZodSchema<TInput>;
-    outputSchema: z.ZodSchema<TOutput>;
+    inputSchema: z.ZodSchema<TInput>
+    outputSchema: z.ZodSchema<TOutput>
     executeFunction: (input: TInput) => Promise<TOutput>
 ): ValidatedAgent {
   return new (class extends ValidatedAgent {

@@ -1,7 +1,7 @@
 /* BREADCRUMB: pages - Application pages and routes */;
 import React from 'react';
 import { Metadata } from 'next';export const metadata: Metadata = {
-  title: 'Terms of Service - AI Guided SaaS Platform';
+  title: 'Terms of Service - AI Guided SaaS Platform',
   description: 'Terms and conditions for using our platform'
 };export default function TermsPage() {
   return (<div className="min-h-screen bg-gray-50 py-12 container mx-auto px-4 max-w-4xl">);

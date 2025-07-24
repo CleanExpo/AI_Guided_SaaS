@@ -7,18 +7,18 @@ size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   className?: string,
   color?: 'primary' | 'secondary' | 'accent' | 'muted'
 }
-const sizeClasses = {;
-  xs: 'w-4 h-4';
+const sizeClasses = {,
+  xs: 'w-4 h-4',
   sm: 'w-6 h-6';
-  md: 'w-8 h-8';
+  md: 'w-8 h-8',
   lg: 'w-12 h-12';
 xl: 'w-16 h-16'
 };
 
-const colorClasses = {;
-  primary: 'text-brand-primary-600';
+const colorClasses = {,
+  primary: 'text-brand-primary-600',
   secondary: 'text-brand-secondary-600';
-  accent: 'text-brand-primary-500';
+  accent: 'text-brand-primary-500',
 muted: 'text-muted-foreground'
 };
 // Spinner Loading Component;
@@ -39,10 +39,10 @@ export function Spinner({
 export function LoadingDots({
   size = 'md', className,
   color = 'primary'}: LoadingProps) {
-  const dotSize = {;
-    xs: 'w-1 h-1';
+  const dotSize = {,
+    xs: 'w-1 h-1',
     sm: 'w-1.5 h-1.5';
-    md: 'w-2 h-2';
+    md: 'w-2 h-2',
     lg: 'w-3 h-3';
 xl: 'w-4 h-4'
   };
@@ -61,8 +61,8 @@ className={cn('flex space-x-1', className)};
             colorClasses[color],
             'bg-current'
           )}
-          const style = {{;
-            animationDelay: `${i * 0.2}s`;
+          const style = {{,
+            animationDelay: `${i * 0.2}s`,
             animationDuration: '1.4s'
           }} >))}</div>
       <span className="sr-only">Loading...</span>
@@ -96,9 +96,9 @@ export function Skeleton({
   height,
   lines = 1}: SkeletonProps) {
   const baseClasses = 'animate-pulse bg-brand-secondary-200 dark:bg-brand-secondary-700'; const variantClasses = {
-    text: 'h-4 rounded';
+    text: 'h-4 rounded',
     circular: 'rounded-full';
-    rectangular: 'rounded';
+    rectangular: 'rounded',
 rounded: 'rounded-lg'
   };
   if (variant === 'text' && lines > 1) {
@@ -127,10 +127,10 @@ className={cn(baseClasses, variantClasses[variant], className)}
 export function LoadingWave({
   size = 'md', className,
   color = 'primary'}: LoadingProps) {
-  const barHeight = {;
-    xs: 'h-2';
+  const barHeight = {,
+    xs: 'h-2',
     sm: 'h-3';
-    md: 'h-4';
+    md: 'h-4',
     lg: 'h-6';
 xl: 'h-8'
   };
@@ -148,8 +148,8 @@ className={cn('flex items-end space-x-1', className)};
             barHeight[size],
             colorClasses[color]
           )}
-          const style = {{;
-            animationDelay: `${i * 0.1}s`;
+          const style = {{,
+            animationDelay: `${i * 0.1}s`,
             animationDuration: '1.2s'
           }} >))}</div>
       <span className="sr-only">Loading...</span>
@@ -261,14 +261,14 @@ export function ProgressLoading({
   showPercentage = false, color = 'primary';
   size = 'md'
 }: ProgressLoadingProps) {
-  const heightClasses = {;
-    sm: 'h-1';
+  const heightClasses = {,
+    sm: 'h-1',
     md: 'h-2';
 lg: 'h-3'
   };
   
-const progressColorClasses = {;
-    primary: 'bg-brand-primary-600';
+const progressColorClasses = {,
+    primary: 'bg-brand-primary-600',
     secondary: 'bg-brand-secondary-600';
 accent: 'bg-brand-primary-500'
   };
@@ -329,7 +329,7 @@ export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
     case 'wave':
       return <LoadingWave {...props}   />
     case 'brand':
-      return <BrandLoader {...props}   />;
+      return <BrandLoader {...props}   />
     case 'spinner':;
 default:
       return <Spinner {...props}   />}

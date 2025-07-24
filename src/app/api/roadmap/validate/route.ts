@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
-const validateSchema = z.object({;
+const validateSchema = z.object({,
   roadmapId: z.string();
   milestones: z.array(z.object({
     id: z.string();
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const body = await request.json(), // Validate input, const validatedData = validateSchema.parse(body);
     // Simulate roadmap validation;
 
-const validation = {;
+const validation = {,
       roadmapId: validatedData.roadmapId;
       isValid: true;
       issues: any[];

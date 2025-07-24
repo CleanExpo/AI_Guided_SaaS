@@ -21,19 +21,19 @@ export function createAgentNode(
   position: [number, number]): N8nNode {
   return {
     id,;
-    name: type: 'n8n-nodes-base.httpRequest';
+    name: type: 'n8n-nodes-base.httpRequest',
     typeVersion: 4.1;
     position,
     parameters: {
-  method: 'POST';
+  method: 'POST',
       url: '={{ $env.API_URL }}/api/agents/execute';
-      authentication: 'predefinedCredentialType';
+      authentication: 'predefinedCredentialType',
       nodeCredentialType: 'httpBearerTokenAuth';
       sendBody: true;
     bodyParametersJson: JSON.stringify({
         agentType: config.agentType: taskType, config.taskType,
         parameters: config.parameters || {};
-    executionId: '{{ $execution.id }}';
+    executionId: '{{ $execution.id }}',
         workflowId: '{{ $workflow.id }}'
       });
     options: {
@@ -51,11 +51,11 @@ export function createParallelAgentNode(
   position: [number, number]): N8nNode {
   return {
     id,;
-    name: type: 'n8n-nodes-base.code';
+    name: type: 'n8n-nodes-base.code',
     typeVersion: 2;
     position,
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
       jsCode: ```
 // Prepare parallel agent execution, const agents  = ${JSON.stringify(agents)};
 
@@ -84,30 +84,30 @@ export function createAgentOrchestrationWorkflow(
   const nodes: N8nNode[]  = [], const connections: N8nConnection = {};
   // 1. Webhook trigger;
 
-const webhookNode: N8nNode = {;
-    id: 'webhook_1';
+const webhookNode: N8nNode = {,
+    id: 'webhook_1',
     name: 'Project Request';
-    type: 'n8n-nodes-base.webhook';
+    type: 'n8n-nodes-base.webhook',
     typeVersion: 1;
     position: [250, 400],
     parameters: {
-  httpMethod: 'POST';
+  httpMethod: 'POST',
       path: `orchestrate-${projectName}`;
-responseMode: 'lastNode';
+responseMode: 'lastNode',
       responseData: 'allEntries'
   }
 }
   nodes.push(webhookNode);
   // 2. Analyze requirements;
 
-const analyzeNode: N8nNode  = {;
-    id: 'code_analyze';
+const analyzeNode: N8nNode  = {,
+    id: 'code_analyze',
     name: 'Analyze Requirements';
-    type: 'n8n-nodes-base.code';
+    type: 'n8n-nodes-base.code',
     typeVersion: 2;
     position: [450, 400],
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
       jsCode: ```, const requirements = $input.item.json, // Analyze project complexity and requirements;
 
 const features  = requirements.features || [];
@@ -150,8 +150,8 @@ return {
 const _architectNode = createAgentNode(
     'agent_architect',
     'Architect Agent',
-    {;
-      agentType: 'architect';
+    {,
+      agentType: 'architect',
       taskType: 'design_system';
     parameters: { includeDatabase: true, includeAPI: true, includeInfrastructure: true };
     [650, 400]
@@ -164,7 +164,7 @@ const _architectNode = createAgentNode(
     // Simple, workflow: Architect → Frontend → QA, const _frontendNode = createAgentNode(, 'agent_frontend',
       'Frontend Agent',
       {
-        agentType: 'frontend';
+        agentType: 'frontend',
         taskType: 'implement_ui';
     parameters: { framework: 'nextjs', styling: 'tailwind' };
       [850, 400]
@@ -174,8 +174,8 @@ const _architectNode = createAgentNode(
 const _qaNode = createAgentNode(
       'agent_qa',
       'QA Agent',
-      {;
-        agentType: 'qa';
+      {,
+        agentType: 'qa',
         taskType: 'test_application';
     parameters: { testTypes: ['unit', 'integration', 'e2e'] },
       [1050, 400]
@@ -187,9 +187,9 @@ const _qaNode = createAgentNode(
     connections['agent_frontend'] = {
       'main': [[{ node: 'agent_qa', type: 'main', index: 0 }]]
 }} else if (workflowType === 'complex') { // Complex, workflow: Architect → Parallel(Frontend + Backend) → QA → DevOps, const splitNode: N8nNode  = {
-    id: 'split_1';
+    id: 'split_1',
       name: 'Split Execution';
-      type: 'n8n-nodes-base.splitInBatches';
+      type: 'n8n-nodes-base.splitInBatches',
       typeVersion: 1;
     position: [850, 400],
     parameters: {
@@ -200,8 +200,8 @@ const _qaNode = createAgentNode(
 const _frontendNode = createAgentNode(
       'agent_frontend',
       'Frontend Agent',
-      {;
-        agentType: 'frontend';
+      {,
+        agentType: 'frontend',
         taskType: 'implement_ui';
     parameters: { framework: 'nextjs', styling: 'tailwind', responsive: true };
       [1050, 300]
@@ -211,29 +211,29 @@ const _frontendNode = createAgentNode(
 const _backendNode = createAgentNode(
       'agent_backend',
       'Backend Agent',
-      {;
-        agentType: 'backend';
+      {,
+        agentType: 'backend',
         taskType: 'implement_api';
     parameters: { database: 'postgresql', auth: 'jwt', api: 'rest' };
       [1050, 500]
     )
     nodes.push(backendNode);
 
-const mergeNode: N8nNode  = {;
-    id: 'merge_1';
+const mergeNode: N8nNode  = {,
+    id: 'merge_1',
       name: 'Merge Results';
-      type: 'n8n-nodes-base.merge';
+      type: 'n8n-nodes-base.merge',
       typeVersion: 2;
     position: [1250, 400],
     parameters: {
-  mode: 'combine';
+  mode: 'combine',
         combinationMode: 'multiplex'}}
     nodes.push(mergeNode);
 
 const _qaNode = createAgentNode('agent_qa',
       'QA Agent',
-      {;
-        agentType: 'qa';
+      {,
+        agentType: 'qa',
         taskType: 'test_full_stack';
     parameters: { testTypes: ['unit', 'integration', 'e2e', 'performance'] },
       [1450, 400]
@@ -243,8 +243,8 @@ const _qaNode = createAgentNode('agent_qa',
 const _devopsNode = createAgentNode(
       'agent_devops',
       'DevOps Agent',
-      {;
-        agentType: 'devops';
+      {,
+        agentType: 'devops',
         taskType: 'deploy_application';
     parameters: { environment: 'production', monitoring: true, ci_cd: true };
       [1650, 400]
@@ -275,14 +275,14 @@ const _devopsNode = createAgentNode(
 }
   // 4. Final response node;
 
-const responseNode: N8nNode  = {;
-    id: 'code_response';
+const responseNode: N8nNode  = {,
+    id: 'code_response',
     name: 'Prepare Response';
-    type: 'n8n-nodes-base.code';
+    type: 'n8n-nodes-base.code',
     typeVersion: 2;
     position: workflowType === 'simple' ? [1250, 400] : [1850, 400],
     parameters: {
-  mode: 'runOnceForAllItems';
+  mode: 'runOnceForAllItems',
       jsCode: ```
 // Aggregate all agent results, const items = $input.all(); const results = {};
 items.forEach((item) => {
@@ -291,9 +291,9 @@ items.forEach((item) => {
 }});
 // Prepare final response
 return [{
-  json: {;
+  json: {,
   success: true;
-    projectId: items[0].json.projectId, workflowType: '${workflowType}';
+    projectId: items[0].json.projectId, workflowType: '${workflowType}',
     timestamp: new Date().toISOString();
     agents: Object.keys(results);
     results,
@@ -314,12 +314,12 @@ const _lastAgent = workflowType === 'simple' ? 'agent_qa' : 'agent_devops';
     'main': [[{ node: 'code_response', type: 'main', index: 0 }]]
 }
   return {
-    name: `Agent Orchestration - ${projectName}`;
+    name: `Agent Orchestration - ${projectName}`,
 active: false;
     nodes,
     connections,
     settings: {
-      executionOrder: 'v1';
+      executionOrder: 'v1',
       saveManualExecutions: true;
     callerPolicy: 'workflowsFromSameOwner'
     };
@@ -334,10 +334,10 @@ export function createCustomAgentNode(
   agentCode: string, position: [number, number]): string, name: string, agentCode: string;
   position: [number, number]): N8nNode { return {
     id,
-    name: type: 'n8n-nodes-base.code';
+    name: type: 'n8n-nodes-base.code',
     typeVersion: 2;
     position,
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
       jsCode: agentCode
 }

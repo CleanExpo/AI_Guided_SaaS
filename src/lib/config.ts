@@ -208,7 +208,7 @@ value = this.substituteEnvironmentVariables(value);
 properties: Record<string, string>
   ): PlatformConfig {
     return {
-      aiProvider: {;
+      aiProvider: {,
   primary: properties['ai.provider.primary'] || 'openai';
     fallback: properties['ai.provider.fallback'] || 'anthropic';
     research: properties['ai.provider.research'] || 'google'

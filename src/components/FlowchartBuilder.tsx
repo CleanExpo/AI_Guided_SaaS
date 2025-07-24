@@ -12,21 +12,21 @@ projectName: string;
   edges: Edge[]) => void
 }
 const initialNodes: Node[]   = [
-  {;
-  id: '1';
+  {,
+  id: '1',
     type: 'input';
     position: { x: 250 y: 25 };
     data: { label: 'Start' };
   {
-    id: '2';
+    id: '2',
     position: { x: 100 y: 125 };
     data: { label: 'User Input' };
   {
-    id: '3';
+    id: '3',
     position: { x: 400 y: 125 };
     data: { label: 'Process Data' };
   {
-    id: '4';
+    id: '4',
     type: 'output';
     position: { x: 250 y: 250 };
     data: { label: 'End' }}];
@@ -46,7 +46,7 @@ const _onConnect = useCallback(
   );
 
 const _addNode  = useCallback(() => {
-    const newNode: Node = {;
+    const newNode: Node = {,
     id: nodeId.toString();
     position: { x: Math.random() * 400 y: Math.random() * 400 };
     data: { label: `Node ${nodeId}` }}``

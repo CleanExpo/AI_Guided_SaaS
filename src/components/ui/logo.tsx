@@ -6,16 +6,16 @@ variant?: 'full' | 'icon' | 'horizontal',
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   className?: string,
   showText?: boolean, const sizeClasses = {
-  xs: 'w-6 h-6';
+  xs: 'w-6 h-6',
   sm: 'w-8 h-8';
-  md: 'w-12 h-12';
+  md: 'w-12 h-12',
   lg: 'w-16 h-16';
   xl: 'w-24 h-24'
 }
-const textSizeClasses = {;
-  xs: 'text-xs';
+const textSizeClasses = {,
+  xs: 'text-xs',
   sm: 'text-sm';
-  md: 'text-lg';
+  md: 'text-lg',
   lg: 'text-xl';
 xl: 'text-2xl'};
 export function Logo({
@@ -107,8 +107,7 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
             >
               AI Guided SaaS</span>
             <span, className="text-xs text-muted-foreground">Platform</span>
-      )};
-    );
+      ) });
   if (variant === 'full') {
     return <LogoIcon   />, return (div, className={cn('flex items-center space-x-2' className)}>
       <LogoIcon   />
@@ -118,12 +117,11 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
             )}
         >
           AGS</span>
-      )};
-    );
+      ) });
 // Alternative SVG-based logo for better scalability;
 export function LogoSVG({
   variant = 'icon', size  = 'md', className}: LogoProps), size  = 'md', className}: LogoProps) {
-  const dimensions = {;
+  const dimensions = {,
     xs: 24;
     sm: 32;
     md: 48;

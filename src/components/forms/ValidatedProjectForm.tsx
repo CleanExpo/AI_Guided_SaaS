@@ -13,7 +13,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, AlertCircle } from 'lucide-react';
 
 const _ExtendedProjectSchema = CreateProjectSchema.extend({
-    config: z.object({;
+    config: z.object({,
   database: z.string().optional();
     hosting: z.string().optional();
     authentication: z.string().optional();
@@ -24,7 +24,7 @@ features: z.array(z.string()).optional()
 }).optional()
 });
 // Type-safe form data
-type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>;
+type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>
 export function ValidatedProjectForm() {
 </typeof>, const router = useRouter(); const [isSubmitting, setIsSubmitting] = useState<any>(false);
   
@@ -32,11 +32,11 @@ const [errors, setErrors]  = useState<Record<string, string>>({});</Record>
 
 const [generalError, setGeneralError] = useState<string | null>(null);
   
-const [formData, setFormData]  = useState<CreateProjectForm>({;
+const [formData, setFormData]  = useState<CreateProjectForm>({,
     name: '';
     description: '';
     type: "fullstack"
-    , status: 'planning';
+    , status: 'planning',
     config: { features: any[] }
 </CreateProjectForm>
   });
@@ -57,9 +57,9 @@ const validation = validateSafe(ExtendedProjectSchema, formData);
 };
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/projects', {;
-    method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/projects', {,
+    method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify(validation.data)
       });
 if (!response.ok) {
@@ -213,7 +213,7 @@ const value = {formData.config?.database || ''}
                 'Email',
                 'Analytics'
    ].map((feature) => (\n    </div>
-                <label key={feature} className="flex items-center space-x-2"   />;
+                <label key={feature} className="flex items-center space-x-2"   />
                   <input;
 type="checkbox";
 

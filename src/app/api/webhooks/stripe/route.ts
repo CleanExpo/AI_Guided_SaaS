@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2023-08-16';
+  apiVersion: '2023-08-16'
 });
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -14,12 +14,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 const event = {
       id: 'evt_' + Math.random().toString(36).substr(2, 9),;
-      type: 'payment_intent.succeeded';
+      type: 'payment_intent.succeeded',
       data: {
         object: {
           id: 'pi_' + Math.random().toString(36).substr(2, 9),
           amount: 2000;
-          currency: 'usd';
+          currency: 'usd',
           status: 'succeeded'
         }};
       created: Math.floor(Date.now() / 1000)

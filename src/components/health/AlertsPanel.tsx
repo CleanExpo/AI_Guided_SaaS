@@ -17,9 +17,9 @@ export function AlertsPanel() {
     // Simulate loading alerts
     setAlerts([
       {
-        id: '1';
+        id: '1',
         type: 'info';
-        message: 'System running normally';
+        message: 'System running normally',
         timestamp: new Date()
       }
     ]);

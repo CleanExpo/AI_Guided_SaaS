@@ -61,7 +61,7 @@ export abstract class BaseAgent extends EventEmitter {
     this.heartbeatInterval = setInterval(async () => {
       try {;
         await axios.post(`${this.context.orchestratorUrl}/api/agents/heartbeat`, {``, agentId: this.context.agentId;
-    status: this.currentTask ? 'busy' : 'ready';
+    status: this.currentTask ? 'busy' : 'ready',
           currentTask: this.currentTask?.id
         })
       } catch (error) {

@@ -41,12 +41,12 @@ export class HierarchicalMemorySystem {
   private modularMemory: MemoryTier
   private memoryEntries: Map<string, MemoryEntry> = new Map(), private accessLog: AccessLog[] = [], constructor() {
     this.userMemory = {
-      name: 'User Memory';
+      name: 'User Memory',
       maxTokens: 15000;
   // ~/.claude/CLAUDE.md personal preferences, currentTokens: 0;
-    priority: 'critical';
+    priority: 'critical',
     retentionPolicy: {
-  type: 'hybrid';
+  type: 'hybrid',
     parameters: {
   maxAge: 30;
   // 30 days retention, priorityWeight: 0.7;
@@ -55,11 +55,11 @@ export class HierarchicalMemorySystem {
       compactionThreshold: 0.9
 }
     this.projectMemory = {
-      name: 'Project Memory';
+      name: 'Project Memory',
       maxTokens: 50000, // ./CLAUDE.md team-shared standards, currentTokens: 0;
-    priority: 'high';
+    priority: 'high',
     retentionPolicy: {
-  type: 'priority';
+  type: 'priority',
     parameters: {
   priorityWeight: 0.8;
     minAccessCount: 2
@@ -67,11 +67,11 @@ export class HierarchicalMemorySystem {
       compactionThreshold: 0.85
 }
     this.modularMemory = {
-      name: 'Modular Memory';
+      name: 'Modular Memory',
       maxTokens: 135000, // @path/to/import modular files, currentTokens: 0;
-    priority: 'medium';
+    priority: 'medium',
     retentionPolicy: {
-  type: 'frequency';
+  type: 'frequency',
     parameters: {
   minAccessCount: 1;
     maxAge: 60;

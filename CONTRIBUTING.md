@@ -1,331 +1,166 @@
-# Contributing to AI-Guided SaaS Platform
+# Contributing to The Starter Pack
 
-Thank you for your interest in contributing to the AI-Guided SaaS Platform! This document provides guidelines and information for contributors.
+First off, thank you for considering contributing to The Starter Pack! It's people like you that make this project better for everyone.
 
-## 🚀 Quick Start
+## Code of Conduct
 
-1. **Fork the repository** and clone your fork
-2. **Install dependencies**: `npm install`
-3. **Set up environment**: Copy `.env.local.example` to `.env.local` and configure
-4. **Run the development server**: `npm run dev`
-5. **Run tests**: `npm run test`
+By participating in this project, you are expected to uphold our Code of Conduct:
+- Be respectful and inclusive
+- Welcome newcomers and help them get started
+- Focus on what is best for the community
+- Show empathy towards other community members
 
-## 📋 Development Workflow
+## How Can I Contribute?
 
-### 1. Branch Strategy
+### Reporting Bugs
 
-We use a **feature branch workflow**:
+Before creating bug reports, please check existing issues to avoid duplicates. When you create a bug report, include as many details as possible using the issue template.
 
-- `main` - Production-ready code
-- `develop` - Integration branch (if needed)
-- `feature/feature-name` - New features
-- `fix/bug-description` - Bug fixes
-- `hotfix/critical-fix` - Critical production fixes
-- `docs/documentation-update` - Documentation changes
+**Great Bug Reports** tend to have:
+- A quick summary and/or background
+- Steps to reproduce
+- What you expected would happen
+- What actually happens
+- Notes (possibly including why you think this might be happening)
 
-### 2. Branch Naming Convention
+### Suggesting Enhancements
 
-```
-type/short-description
+Enhancement suggestions are tracked as GitHub issues. Create an issue and provide:
+- A clear and descriptive title
+- A detailed description of the proposed enhancement
+- Explain why this enhancement would be useful
+- List any alternatives you've considered
 
-Examples:
-- feature/user-authentication
-- fix/payment-processing-error
-- docs/api-documentation
-- refactor/database-queries
-- test/e2e-checkout-flow
-```
+### Your First Code Contribution
 
-### 3. Commit Message Format
+Unsure where to begin? Look for issues labeled:
+- `good first issue` - Simple fixes to get you started
+- `help wanted` - More involved issues perfect for contributing
 
-We use [Conventional Commits](https://www.conventionalcommits.org/):
+### Pull Requests
 
-```
-type(scope): description
+1. Fork the repo and create your branch from `main`
+2. If you've added code that should be tested, add tests
+3. Ensure the test suite passes
+4. Make sure your code follows the existing style
+5. Issue that pull request!
 
-Examples:
-- feat(auth): add Google OAuth integration
-- fix(payment): resolve Stripe webhook timeout
-- docs(readme): update installation instructions
-- test(api): add user registration tests
-- refactor(database): optimize query performance
-```
+## Development Setup
 
-**Commit Types:**
-- `feat` - New feature
-- `fix` - Bug fix
-- `docs` - Documentation changes
-- `style` - Code style changes (formatting, etc.)
-- `refactor` - Code refactoring
-- `perf` - Performance improvements
-- `test` - Adding or updating tests
-- `chore` - Maintenance tasks
-- `ci` - CI/CD changes
-- `build` - Build system changes
-- `revert` - Reverting changes
-- `security` - Security fixes
-- `deps` - Dependency updates
+1. **Prerequisites**
+   - Node.js 20+
+   - Git
+   - PostgreSQL (for database features)
 
-## 🛠 Development Setup
+2. **Setup**
+   ```bash
+   # Clone your fork
+   git clone https://github.com/your-username/The-Starter-Pack.git
+   cd The-Starter-Pack
 
-### Prerequisites
+   # Install dependencies
+   npm install
 
-- Node.js 18+
-- npm or yarn
-- Git
+   # Copy environment variables
+   cp .env.example .env.local
 
-### Environment Variables
+   # Run development server
+   npm run dev
+   ```
 
-Copy `.env.local.example` to `.env.local` and configure:
+3. **Making Changes**
+   ```bash
+   # Create a new branch
+   git checkout -b feature/your-feature-name
 
-```env
-# Authentication
-NEXTAUTH_SECRET=your-secret-here
-NEXTAUTH_URL=http://localhost:3000
+   # Make your changes
+   # Run tests
+   npm test
 
-# Database
-SUPABASE_URL=your-supabase-url
-SUPABASE_ANON_KEY=your-supabase-anon-key
+   # Check types
+   npm run typecheck
 
-# External Services
-OPENAI_API_KEY=your-openai-key
-STRIPE_SECRET_KEY=your-stripe-secret-key
-```
+   # Lint code
+   npm run lint
 
-### Available Scripts
+   # Commit changes
+   git commit -m "feat: add amazing feature"
 
-```bash
-# Development
-npm run dev              # Start development server
-npm run build           # Build for production
-npm run start           # Start production server
+   # Push to your fork
+   git push origin feature/your-feature-name
+   ```
 
-# Code Quality
-npm run lint            # Run ESLint
-npm run lint:fix        # Fix ESLint issues
-npm run typecheck       # Run TypeScript checks
+## Style Guide
 
-# Testing
-npm run test            # Run unit tests
-npm run test:watch      # Run tests in watch mode
-npm run test:coverage   # Run tests with coverage
-npm run test:e2e        # Run end-to-end tests
-npm run test:accessibility # Run accessibility tests
+### Git Commit Messages
 
-# Validation
-npm run validate        # Run all checks (lint, typecheck, test)
-npm run validate:full   # Run comprehensive validation
-```
+We use conventional commits:
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation only changes
+- `style:` Code style changes (formatting, etc)
+- `refactor:` Code change that neither fixes a bug nor adds a feature
+- `perf:` Performance improvement
+- `test:` Adding missing tests
+- `chore:` Changes to the build process or auxiliary tools
 
-## 🧪 Testing Guidelines
-
-### Test Structure
-
-```
-__tests__/
-├── components/         # Component tests
-├── pages/             # Page tests
-├── api/               # API route tests
-├── utils/             # Utility function tests
-└── e2e/               # End-to-end tests
-```
-
-### Writing Tests
-
-1. **Unit Tests** - Test individual functions and components
-2. **Integration Tests** - Test component interactions
-3. **E2E Tests** - Test complete user workflows
-4. **Accessibility Tests** - Ensure WCAG compliance
-
-### Test Requirements
-
-- All new features must include tests
-- Bug fixes must include regression tests
-- Maintain minimum 80% test coverage
-- Tests must pass before merging
-
-## 📝 Code Style Guidelines
-
-### TypeScript
+### JavaScript/TypeScript Style Guide
 
 - Use TypeScript for all new code
-- Define proper types and interfaces
-- Avoid `any` type unless absolutely necessary
-- Use strict TypeScript configuration
+- Follow the existing code style
+- Use meaningful variable names
+- Add comments for complex logic
+- Keep functions small and focused
 
-### React Components
+### Component Guidelines
 
-```tsx
-// Preferred component structure
-interface ComponentProps {
-  title: string;
-  optional?: boolean;
+- Use functional components with hooks
+- Keep components small and reusable
+- Use TypeScript interfaces for props
+- Document complex components
+
+Example:
+```typescript
+interface ButtonProps {
+  variant?: 'primary' | 'secondary';
+  onClick?: () => void;
+  children: React.ReactNode;
 }
 
-export function Component({ title, optional = false }: ComponentProps) {
-  // Component logic here
-  
+export function Button({ variant = 'primary', onClick, children }: ButtonProps) {
   return (
-    <div>
-      <h1>{title}</h1>
-      {optional && <p>Optional content</p>}
-    </div>
+    <button
+      className={`btn btn-${variant}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   );
 }
 ```
 
-### File Organization
+## Testing
 
-```
-src/
-├── components/        # Reusable UI components
-│   ├── ui/           # Base UI components
-│   └── feature/      # Feature-specific components
-├── pages/            # Next.js pages
-├── lib/              # Utility functions and configurations
-├── hooks/            # Custom React hooks
-├── types/            # TypeScript type definitions
-└── styles/           # Global styles
-```
+- Write tests for new features
+- Ensure all tests pass before submitting PR
+- Aim for good test coverage
+- Test edge cases
 
-### Naming Conventions
+## Documentation
 
-- **Files**: `kebab-case.tsx`
-- **Components**: `PascalCase`
-- **Functions**: `camelCase`
-- **Constants**: `UPPER_SNAKE_CASE`
-- **Types/Interfaces**: `PascalCase`
+- Update README.md if needed
+- Add JSDoc comments for functions
+- Update TypeScript types
+- Include examples for new features
 
-## 🔒 Security Guidelines
+## Questions?
 
-### Code Security
+Feel free to open an issue with your question or reach out to the maintainers.
 
-- Validate all user inputs
-- Sanitize data before database operations
-- Use environment variables for sensitive data
-- Implement proper authentication and authorization
-- Follow OWASP security guidelines
+## Recognition
 
-### API Security
-
-- Implement rate limiting
-- Use HTTPS in production
-- Validate request payloads
-- Implement proper error handling
-- Log security events
-
-## 📚 Documentation
-
-### Code Documentation
-
-- Add JSDoc comments for functions and classes
-- Document complex business logic
-- Include examples in documentation
-- Keep README.md updated
-
-### API Documentation
-
-- Document all API endpoints
-- Include request/response examples
-- Document error codes and messages
-- Maintain OpenAPI/Swagger specs
-
-## 🚀 Pull Request Process
-
-### Before Submitting
-
-1. **Run validation**: `npm run validate:full`
-2. **Update documentation** if needed
-3. **Add/update tests** for your changes
-4. **Test manually** in development environment
-5. **Check for breaking changes**
-
-### PR Requirements
-
-- [ ] Descriptive title and description
-- [ ] Link to related issues
-- [ ] All tests passing
-- [ ] Code review completed
-- [ ] Documentation updated
-- [ ] No merge conflicts
-
-### Review Process
-
-1. **Automated Checks** - CI/CD pipeline runs
-2. **Code Review** - Team member reviews code
-3. **Testing** - Manual testing if needed
-4. **Approval** - Maintainer approves changes
-5. **Merge** - Changes merged to main branch
-
-## 🐛 Bug Reports
-
-When reporting bugs, please include:
-
-- Clear description of the issue
-- Steps to reproduce
-- Expected vs actual behavior
-- Environment details (browser, OS, etc.)
-- Screenshots or videos if applicable
-
-Use our [bug report template](.github/ISSUE_TEMPLATE/bug_report.yml).
-
-## ✨ Feature Requests
-
-When requesting features, please include:
-
-- Clear description of the feature
-- Problem it solves
-- Proposed solution
-- Use cases and examples
-- Priority level
-
-Use our [feature request template](.github/ISSUE_TEMPLATE/feature_request.yml).
-
-## 🤝 Code of Conduct
-
-### Our Standards
-
-- Be respectful and inclusive
-- Welcome newcomers and help them learn
-- Focus on constructive feedback
-- Respect different viewpoints and experiences
-- Show empathy towards other community members
-
-### Unacceptable Behavior
-
-- Harassment or discrimination
-- Trolling or insulting comments
-- Personal or political attacks
-- Publishing private information
-- Other unprofessional conduct
-
-## 📞 Getting Help
-
-### Community Support
-
-- **GitHub Discussions** - General questions and discussions
-- **GitHub Issues** - Bug reports and feature requests
-- **Documentation** - Check existing docs first
-
-### Development Questions
-
-- Check existing issues and discussions
-- Review the codebase and tests
-- Ask specific, detailed questions
-- Provide context and examples
-
-## 🏆 Recognition
-
-We appreciate all contributions! Contributors will be:
-
-- Listed in our contributors section
-- Mentioned in release notes for significant contributions
-- Invited to join our contributor community
-
-## 📄 License
-
-By contributing to this project, you agree that your contributions will be licensed under the same license as the project (MIT License).
+Contributors will be recognized in our README. Thank you for your contributions!
 
 ---
 
-Thank you for contributing to the AI-Guided SaaS Platform! 🚀
+Happy coding! 🚀

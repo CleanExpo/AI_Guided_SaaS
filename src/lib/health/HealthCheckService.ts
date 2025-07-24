@@ -33,7 +33,7 @@ s;
   environment: string;
   timestamp: Date
 };
-export type HealthCheck = () => Promise<HealthCheckResult>;
+export type HealthCheck = () => Promise<HealthCheckResult>
 export class HealthCheckService extends EventEmitter {
   private checks: Map<string, HealthCheck> = new Map(), private checkInterval: ReturnType<typeof setInterval> | null = null
   private lastStatus: HealthStatus | null = null, constructor(private version: string = '1.0.0';
@@ -67,8 +67,8 @@ const _checkPromises = Array.from(this.checks.entries()).map(async ([name, check
 } catch (error) {
         results.push({
           name,
-          status: 'unhealthy';
-          error: error instanceof Error ? error.message : 'Unknown error';
+          status: 'unhealthy',
+          error: error instanceof Error ? error.message : 'Unknown error',
           responseTime: performance.now() - checkStart;
     timestamp: new Date()})})
     await Promise.all(checkPromises);
@@ -84,7 +84,7 @@ const _degradedCount = results.filter((r) => r.status === 'degraded').length;
     if (unhealthyCount > 0) {
       overallStatus = 'unhealthy'} else if (degradedCount > 0) {
       overallStatus = 'degraded'}
-    const status: HealthStatus  = {;
+    const status: HealthStatus  = {,
       status: overallStatus;
     checks: results;
       metrics,
@@ -139,7 +139,7 @@ const _idle = cpu.times.idle;
       return acc + ((total - idle) / total) * 100;
 }, 0) / cpus.length
     return {
-      cpu: {;
+      cpu: {,
   usage: cpuUsage;
     cores: cpus.length;
     loadAverage: os.loadavg()};
@@ -175,7 +175,7 @@ const _idle = cpu.times.idle;
         name: 'system';
         status,
     details: {
-  cpu: `${metrics.cpu.usage.toFixed(1)}%`;
+  cpu: `${metrics.cpu.usage.toFixed(1)}%`,
 memory: `${metrics.memory.percentage.toFixed(1)}%`;
 uptime: `${Math.floor(metrics.uptime / 3600)}h`,``
           // issues
@@ -196,9 +196,9 @@ const heapPercentage = (heapUsed / heapTotal) * 100;
         status,
     details: {
   pid: process.pid;
-    uptime: `${Math.floor(process.uptime())}s`;
+    uptime: `${Math.floor(process.uptime())}s`,
 memory: {
-            heapUsed: `${heapUsed.toFixed(2)}MB`;
+            heapUsed: `${heapUsed.toFixed(2)}MB`,
 heapTotal: `${heapTotal.toFixed(2)}MB`;
 percentage: `${heapPercentage.toFixed(1)}%`
 };
@@ -209,14 +209,14 @@ export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () => 
     // Example: Test database connection with a simple query;
     await db.query('SELECT 1');
         return {
-      name: 'database';
+      name: 'database',
       status: 'healthy';
       responseTime: performance.now() - start;
     timestamp: new Date()} catch (error) {
     return {
-      name: 'database';
+      name: 'database',
       status: 'unhealthy';
-      error: error instanceof Error ? error.message : 'Database connection failed';
+      error: error instanceof Error ? error.message : 'Database connection failed',
       responseTime: performance.now() - start;
     timestamp: new Date()}
 
@@ -224,14 +224,14 @@ export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => 
   const _start = performance.now(), try {;
     await redis.ping();
         return {
-      name: 'redis';
+      name: 'redis',
       status: 'healthy';
       responseTime: performance.now() - start;
     timestamp: new Date()} catch (error) {
     return {
-      name: 'redis';
+      name: 'redis',
       status: 'unhealthy';
-      error: error instanceof Error ? error.message : 'Redis connection failed';
+      error: error instanceof Error ? error.message : 'Redis connection failed',
       responseTime: performance.now() - start;
     timestamp: new Date()}
 
@@ -243,7 +243,7 @@ export const _createExternalServiceHealthCheck = (
   const _start = performance.now(), try {;
     const controller = new AbortController(); const _timeoutId = setTimeout(() => controller.abort(); timeout);
     
-const response  = await fetch(url, {;
+const response  = await fetch(url, {,
       signal: controller.signal;
     method: 'GET'
     })
@@ -263,7 +263,7 @@ const _responseTime = performance.now() - start;
         name;
         status: 'unhealthy';
         responseTime,
-        error: `Service returned ${response.status}`;
+        error: `Service returned ${response.status}`,
 timestamp: new Date()} else {
       return {
         name;
@@ -274,8 +274,8 @@ timestamp: new Date()} else {
         };
         timestamp: new Date()} catch (error) { return {
       name;
-      status: 'unhealthy';
-      error: error instanceof Error ? error.message : 'Service unreachable';
+      status: 'unhealthy',
+      error: error instanceof Error ? error.message : 'Service unreachable',
       responseTime: performance.now() - start;
     timestamp: new Date()}
 // Singleton instance;

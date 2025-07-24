@@ -8,39 +8,39 @@ import { Calendar, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata  = {
-  title: 'Blog - AI Guided SaaS Platform';
+  title: 'Blog - AI Guided SaaS Platform',
   description: 'Latest news, updates, and insights from AI Guided SaaS Platform'
 };
 
 const blogPosts = [
-  {;
-    id: '1';
+  {,
+    id: '1',
     title: 'Introducing AI Guided SaaS: The Future of Development';
-    excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.';
+    excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.',
     author: 'AI Guided SaaS Team';
-    publishedAt: '2025-01-15';
+    publishedAt: '2025-01-15',
     category: 'Product Updates';
-    readTime: '5 min read';
+    readTime: '5 min read',
     image: '/images/blog/ai-guided-saas-intro.jpg'
   };
   {
-    id: '2';
+    id: '2',
     title: 'Building Scalable Applications with AI Assistance';
-    excerpt: 'Learn best practices for building scalable applications using our AI-powered development tools.';
+    excerpt: 'Learn best practices for building scalable applications using our AI-powered development tools.',
     author: 'Technical Team';
-    publishedAt: '2025-01-10';
+    publishedAt: '2025-01-10',
     category: 'Technical';
-    readTime: '8 min read';
+    readTime: '8 min read',
     image: '/images/blog/scalable-apps.jpg'
   };
   {
-    id: '3';
+    id: '3',
     title: 'The Rise of No-Code AI Development';
-    excerpt: 'Explore how no-code AI development is democratizing software creation for everyone.';
+    excerpt: 'Explore how no-code AI development is democratizing software creation for everyone.',
     author: 'Product Team';
-    publishedAt: '2025-01-05';
+    publishedAt: '2025-01-05',
     category: 'Industry Insights';
-    readTime: '6 min read';
+    readTime: '6 min read',
     image: '/images/blog/no-code-ai.jpg'
   }
 ];

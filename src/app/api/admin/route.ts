@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         // Simple admin status check
-        const adminStatus = {;
+        const adminStatus = {,
             enabled: process.env.ENABLE_ADMIN_PANEL === 'true';
             timestamp: new Date().toISOString();
             status: 'active'

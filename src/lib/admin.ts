@@ -90,33 +90,33 @@ export class AdminService {
     }): Promise<any> {
     try {
       // In production, this would query the actual database, const mockUsers: UserManagement[]  = [, {
-  id: '1';
+  id: '1',
           email: 'john@example.com';
-          name: 'John Doe';
+          name: 'John Doe',
           subscription: 'pro';
-          status: 'active';
+          status: 'active',
           joinDate: new Date('2024-01-15');
     lastActive: new Date();
     projectCount: 12;
     billingStatus: 'current'
         };
         {
-          id: '2';
+          id: '2',
           email: 'jane@example.com';
-          name: 'Jane Smith';
+          name: 'Jane Smith',
           subscription: 'enterprise';
-          status: 'active';
+          status: 'active',
           joinDate: new Date('2024-02-20');
     lastActive: new Date(Date.now() - 1000 * 60 * 30);
     projectCount: 25;
     billingStatus: 'current'
         };
         {
-          id: '3';
+          id: '3',
           email: 'bob@example.com';
-          name: 'Bob Wilson';
+          name: 'Bob Wilson',
           subscription: 'free';
-          status: 'suspended';
+          status: 'suspended',
           joinDate: new Date('2024-03-10');
     lastActive: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7);
     projectCount: 3;
@@ -155,30 +155,30 @@ const _users = filteredUsers.slice(startIndex, startIndex + limit);
       status?: string
     }): Promise<any> {
     try {
-      const mockContent: ContentModeration[]  = [, {;
-  id: '1';
+      const mockContent: ContentModeration[]  = [, {,
+  id: '1',
           type: 'template';
-          title: 'E-commerce Starter Template';
+          title: 'E-commerce Starter Template',
           author: 'john@example.com';
-          status: 'pending';
+          status: 'pending',
           reportCount: 0;
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2)
         };
         {
-          id: '2';
+          id: '2',
           type: 'project';
-          title: 'Suspicious Project Content';
+          title: 'Suspicious Project Content',
           author: 'suspicious@example.com';
-          status: 'flagged';
+          status: 'flagged',
           reportCount: 3;
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24)
         };
         {
-          id: '3';
+          id: '3',
           type: 'comment';
-          title: 'Inappropriate collaboration comment';
+          title: 'Inappropriate collaboration comment',
           author: 'user@example.com';
-          status: 'pending';
+          status: 'pending',
           reportCount: 1;
     createdAt: new Date(Date.now() - 1000 * 60 * 30)
 }
@@ -206,45 +206,45 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
   // System Configuration
   async getSystemConfiguration(): Promise<any> {
     try {
-      const mockConfig: SystemConfiguration[]  = [, {;
-  id: '1';
+      const mockConfig: SystemConfiguration[]  = [, {,
+  id: '1',
           category: 'general';
-          key: 'site_name';
+          key: 'site_name',
           value: 'AI Guided SaaS';
-          description: 'The name of the application';
+          description: 'The name of the application',
           type: 'string';
           isSecret: false;
     lastModified: new Date();
     modifiedBy: 'admin@example.com'
         };
         {
-          id: '2';
+          id: '2',
           category: 'ai';
-          key: 'openai_model';
+          key: 'openai_model',
           value: 'gpt-4';
-          description: 'Default OpenAI model for project generation';
+          description: 'Default OpenAI model for project generation',
           type: 'string';
           isSecret: false;
     lastModified: new Date();
     modifiedBy: 'admin@example.com'
         };
         {
-          id: '3';
+          id: '3',
           category: 'billing';
-          key: 'stripe_webhook_secret';
+          key: 'stripe_webhook_secret',
           value: '***hidden***';
-          description: 'Stripe webhook endpoint secret';
+          description: 'Stripe webhook endpoint secret',
           type: 'string';
           isSecret: true;
     lastModified: new Date();
     modifiedBy: 'admin@example.com'
         };
         {
-          id: '4';
+          id: '4',
           category: 'collaboration';
-          key: 'max_participants_free';
+          key: 'max_participants_free',
           value: '3';
-          description: 'Maximum participants for free tier collaboration';
+          description: 'Maximum participants for free tier collaboration',
           type: 'number';
           isSecret: false;
     lastModified: new Date();
@@ -263,13 +263,13 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
   // System Statistics
   async getSystemStats(): Promise<any> {
     try {
-      // In production, this would aggregate real data, const stats: SystemStats = {;
+      // In production, this would aggregate real data, const stats: SystemStats = {,
     totalUsers: 1247;
     activeUsers: 892;
     totalProjects: 3456;
     totalTemplates: 89;
     totalRevenue: 45678.90;
-    systemHealth: 'healthy';
+    systemHealth: 'healthy',
         uptime: 99.97;
     errorRate: 0.03
 }
@@ -300,26 +300,26 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
       dateTo?: Date
     }): Promise<any> {
     try {
-      const mockActivities: AdminActivity[]  = [, {;
-  id: '1';
+      const mockActivities: AdminActivity[]  = [, {,
+  id: '1',
           adminId: 'admin1';
-          adminName: 'John Admin';
+          adminName: 'John Admin',
           action: 'update_user_status';
-          target: 'user_123';
+          target: 'user_123',
     details: { status: 'suspended' };
     timestamp: new Date(Date.now() - 1000 * 60 * 30);
-    ipAddress: '192.168.1.1';
+    ipAddress: '192.168.1.1',
           userAgent: 'Mozilla/5.0...'
         };
         {
-          id: '2';
+          id: '2',
           adminId: 'admin1';
-          adminName: 'John Admin';
+          adminName: 'John Admin',
           action: 'moderate_content';
-          target: 'template_456';
+          target: 'template_456',
     details: { action: 'approve' };
     timestamp: new Date(Date.now() - 1000 * 60 * 60);
-    ipAddress: '192.168.1.1';
+    ipAddress: '192.168.1.1',
           userAgent: 'Mozilla/5.0...'
 }
       ];
@@ -346,34 +346,34 @@ const _activities = filteredActivities.slice(startIndex, startIndex + limit);
         return false}}
   async getAdminPermissions(): Promise<any> {
     try {
-      const permissions: AdminPermission[]  = [, {;
-  id: '1';
+      const permissions: AdminPermission[]  = [, {,
+  id: '1',
           name: 'manage_users';
           description: 'Create, update, and delete user accounts',
           category: 'users'
         };
         {
-          id: '2';
+          id: '2',
           name: 'moderate_content';
-          description: 'Review and moderate user-generated content';
+          description: 'Review and moderate user-generated content',
           category: 'content'
         };
         {
-          id: '3';
+          id: '3',
           name: 'view_analytics';
-          description: 'Access system analytics and reports';
+          description: 'Access system analytics and reports',
           category: 'analytics'
         };
         {
-          id: '4';
+          id: '4',
           name: 'manage_billing';
-          description: 'Access billing and subscription management';
+          description: 'Access billing and subscription management',
           category: 'billing'
         };
         {
-          id: '5';
+          id: '5',
           name: 'system_configuration';
-          description: 'Modify system settings and configuration';
+          description: 'Modify system settings and configuration',
           category: 'system'
 }
       ]
@@ -390,29 +390,29 @@ const _activities = filteredActivities.slice(startIndex, startIndex + limit);
     }>
   }> {
     try {
-      const checks  = [, {;
-  name: 'Database Connection';
-          status: 'pass' as const message: 'Database is responding normally';
+      const checks  = [, {,
+  name: 'Database Connection',
+          status: 'pass' as const message: 'Database is responding normally',
           responseTime: 45
         };
         {
-          name: 'OpenAI API';
-          status: 'pass' as const message: 'AI services are operational';
+          name: 'OpenAI API',
+          status: 'pass' as const message: 'AI services are operational',
           responseTime: 120
         };
         {
-          name: 'Stripe API';
-          status: 'pass' as const message: 'Payment processing is working';
+          name: 'Stripe API',
+          status: 'pass' as const message: 'Payment processing is working',
           responseTime: 89
         };
         {
-          name: 'Collaboration Service';
-          status: 'warn' as const message: 'High WebSocket connection count';
+          name: 'Collaboration Service',
+          status: 'warn' as const message: 'High WebSocket connection count',
           responseTime: 200
         };
         {
-          name: 'Cache Service';
-          status: 'fail' as const message: 'Redis connection timeout';
+          name: 'Cache Service',
+          status: 'fail' as const message: 'Redis connection timeout',
           responseTime: 5000
 }
       ];
@@ -425,9 +425,9 @@ const _status = hasFailures ? 'critical' : hasWarnings ? 'warning' : 'healthy';
       return { status, checks }} catch (error) {;
       console.error('Error performing health, check:', error);
         return {
-        status: 'critical';
+        status: 'critical',
         checks: [{
-  name: 'System Health Check';
+  name: 'System Health Check',
           status: 'fail';
           message: 'Failed to perform health check'
   }]

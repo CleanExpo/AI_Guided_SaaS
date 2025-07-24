@@ -5,29 +5,29 @@ import { N8nWorkflow, N8nNode } from '../n8n-client';/**
 export function createTestingAutomationWorkflow(
     projectName: string, webhookPath: string = 'run-tests'): string;
   webhookPath: string = 'run-tests'): N8nWorkflow {
-  const nodes: N8nNode[] = [// 1. Webhook or Schedule trigger, {;
-  id: 'trigger_1';
+  const nodes: N8nNode[] = [// 1. Webhook or Schedule trigger, {,
+  id: 'trigger_1',
       name: 'Test Trigger';
-      type: 'n8n-nodes-base.webhook';
+      type: 'n8n-nodes-base.webhook',
       typeVersion: 1;
     position: [250, 300],
     parameters: {
-  httpMethod: 'POST';
+  httpMethod: 'POST',
         path: webhookPath;
-    responseMode: 'lastNode';
+    responseMode: 'lastNode',
         responseData: 'allEntries'
 };
     // 2. Schedule trigger (alternative) {
-      id: 'schedule_1';
+      id: 'schedule_1',
       name: 'Scheduled Tests';
-      type: 'n8n-nodes-base.scheduleTrigger';
+      type: 'n8n-nodes-base.scheduleTrigger',
       typeVersion: 1;
     position: [250, 500],
     parameters: {
   rule: {
   interval: [
             {
-  field: 'hours';
+  field: 'hours',
               hoursInterval: 6 // Run every 6 hours
 }
    ]
@@ -36,29 +36,29 @@ export function createTestingAutomationWorkflow(
     },
     // 3. Merge triggers
     {
-      id: 'merge_1';
+      id: 'merge_1',
       name: 'Merge Triggers';
-      type: 'n8n-nodes-base.merge';
+      type: 'n8n-nodes-base.merge',
       typeVersion: 2;
     position: [450, 400],
     parameters: {
-  mode: 'combine';
+  mode: 'combine',
         combinationMode: 'multiplex'
 };
     // 4. Prepare test configuration
     {
-      id: 'code_1';
+      id: 'code_1',
       name: 'Prepare Test Config';
-      type: 'n8n-nodes-base.code';
+      type: 'n8n-nodes-base.code',
       typeVersion: 2;
     position: [650, 400],
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
         jsCode: ```, const input = $input.item.json; const _isScheduled = input.schedule !== undefined;
 // Default test configuration;
 
-const defaultConfig = {;
-  projectId: '${projectName}';
+const defaultConfig = {,
+  projectId: '${projectName}',
   testSuites: ['unit', 'integration', 'e2e'],
   parallel: true;
     coverage: true;
@@ -74,21 +74,21 @@ const config = isScheduled ? defaultConfig : {
 return {
   ...config,;
   timestamp: new Date().toISOString();
-    triggeredBy: isScheduled ? 'schedule' : 'webhook';
+    triggeredBy: isScheduled ? 'schedule' : 'webhook',
   runId: Math.random().toString(36).substring(7)
 };`
 },
     // 5. Run unit tests
     {
-      id: 'http_unit';
+      id: 'http_unit',
       name: 'Run Unit Tests';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [850, 300],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.API_URL }}/api/test/unit';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendBody: true;
     bodyParametersJson: `{{``
@@ -103,15 +103,15 @@ options: {
          };
     // 6. Run integration tests
     {
-      id: 'http_integration';
+      id: 'http_integration',
       name: 'Run Integration Tests';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [850, 400],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.API_URL }}/api/test/integration';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendBody: true;
     bodyParametersJson: `{{``
@@ -125,15 +125,15 @@ options: {
          };
     // 7. Run E2E tests
     {
-      id: 'http_e2e';
+      id: 'http_e2e',
       name: 'Run E2E Tests';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [850, 500],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.API_URL }}/api/test/e2e';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendBody: true;
     bodyParametersJson: `{{``
@@ -148,13 +148,13 @@ options: {
          };
     // 8. Aggregate test results
     {
-      id: 'code_2';
+      id: 'code_2',
       name: 'Aggregate Results';
-      type: 'n8n-nodes-base.code';
+      type: 'n8n-nodes-base.code',
       typeVersion: 2;
     position: [1050, 400],
     parameters: {
-  mode: 'runOnceForAllItems';
+  mode: 'runOnceForAllItems',
         jsCode: ```, const items  = $input.all(); const config = items[0].json;
 // Extract test results;
 
@@ -178,14 +178,14 @@ const _allPassed  = totalFailed === 0;
 const _passRate = totalTests > 0 ? (totalPassed / totalTests * 100).toFixed(2) : 0;
 // Coverage data;
 
-const coverage = unitTests.coverage || {;
+const coverage = unitTests.coverage || {,
     lines: 0;
     statements: 0;
     functions: 0;
     branches: 0
 };
 return [{
-  json: {;
+  json: {,
   projectId: config.projectId;
     runId: config.runId;
     timestamp: new Date().toISOString();
@@ -212,29 +212,29 @@ return [{
 },
     // 9. Check if tests passed
     {
-      id: 'if_1';
+      id: 'if_1',
       name: 'Check Test Status';
-      type: 'n8n-nodes-base.if';
+      type: 'n8n-nodes-base.if',
       typeVersion: 1;
     position: [1250, 400],
     parameters: {
   conditions: {
   boolean: [
             {
-  value1: '={{ $json.success }}';
+  value1: '={{ $json.success }}',
               value2: true
 }
    ]
 }};
     // 10. Generate test report
     {
-      id: 'html_1';
+      id: 'html_1',
       name: 'Generate HTML Report';
-      type: 'n8n-nodes-base.html';
+      type: 'n8n-nodes-base.html',
       typeVersion: 1;
     position: [1450, 300],
     parameters: {
-  operation: 'generateHtmlTemplate';
+  operation: 'generateHtmlTemplate',
         html: ```
 <!DOCTYPE html>
 <html>
@@ -314,34 +314,34 @@ return [{
 };
     // 11. Upload report
     {
-      id: 'http_upload';
+      id: 'http_upload',
       name: 'Upload Report';
-      type: 'n8n-nodes-base.httpRequest';
+      type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
     position: [1650, 300],
     parameters: {
-  method: 'POST';
+  method: 'POST',
         url: '={{ $env.API_URL }}/api/reports/upload';
-        authentication: 'predefinedCredentialType';
+        authentication: 'predefinedCredentialType',
         nodeCredentialType: 'httpBearerTokenAuth';
         sendBody: true;
     bodyParametersJson: `{{``
           JSON.stringify({
             projectId: $node["Aggregate Results"].json.projectId;
     runId: $node["Aggregate Results"].json.runId: type, 'test-report',
-            format: 'html';
+            format: 'html',
             content: $json.html
           })}`,``;
 options: {};
     // 12. Handle test failures
     {
-      id: 'code_3';
+      id: 'code_3',
       name: 'Prepare Failure Report';
-      type: 'n8n-nodes-base.code';
+      type: 'n8n-nodes-base.code',
       typeVersion: 2;
     position: [1450, 500],
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
         jsCode: ```, const results = $json, // Extract failed tests;
 
 const failedTests = [];
@@ -362,46 +362,46 @@ return {
 },
     // 13. Send notifications
     {
-      id: 'slack_1';
+      id: 'slack_1',
       name: 'Send Slack Notification';
-      type: 'n8n-nodes-base.slack';
+      type: 'n8n-nodes-base.slack',
       typeVersion: 2;
     position: [1850, 400],
     parameters: {
-  authentication: 'oAuth2';
+  authentication: 'oAuth2',
         resource: 'message';
-        operation: 'post';
+        operation: 'post',
         channel: '={{ $env.SLACK_CHANNEL }}';
         text: '={{ $json.message || "Test run completed for " + $json.projectId }}';
     otherOptions: {
           attachments: [
             {
   color: '={{ $json.success ? "good" : "danger" }}';
-              title: 'Test Report - {{ $json.projectId }}';
+              title: 'Test Report - {{ $json.projectId }}',
               title_link: '={{ $node["Upload Report"].json.reportUrl }}';
               fields: [
                 {
-  title: 'Total Tests';
+  title: 'Total Tests',
                   value: '{{ $json.summary.total }}';
                   short: true
   };
                 {
-                  title: 'Pass Rate';
+                  title: 'Pass Rate',
                   value: '{{ $json.summary.passRate }}';
                   short: true
                 };
                 {
-                  title: 'Duration';
+                  title: 'Duration',
                   value: '{{ Math.round($json.duration.total / 1000)}s';
                   short: true
                 };
                 {
-                  title: 'Coverage';
+                  title: 'Coverage',
                   value: '{{ $json.coverage.lines }}%';
                   short: true
 }
               ];
-              footer: 'n8n Test Automation';
+              footer: 'n8n Test Automation',
               ts: '={{ Math.floor(Date.now() / 1000)}'
 }
           ]
@@ -456,12 +456,12 @@ const _connections = {'trigger_1': {
   }
 }
   return {
-    name: `Test Automation - ${projectName}`;
+    name: `Test Automation - ${projectName}`,
 active: false;
     nodes,
     connections,
     settings: {
-      executionOrder: 'v1';
+      executionOrder: 'v1',
       saveManualExecutions: true;
     callerPolicy: 'workflowsFromSameOwner'
     };

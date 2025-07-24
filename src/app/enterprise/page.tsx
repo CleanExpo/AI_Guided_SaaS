@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Enterprise Solutions - AI Guided SaaS Platform';
+  title: 'Enterprise Solutions - AI Guided SaaS Platform',
   description: 'Enterprise-grade AI development platform for large organizations'
 };export default function EnterprisePage() {
   return (<div className="min-h-screen bg-gray-50 py-12">);

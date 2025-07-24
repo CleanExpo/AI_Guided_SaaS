@@ -5,27 +5,27 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Lock, Eye, Server, CheckCircle } from 'lucide-react';
 export const metadata: Metadata  = {
-  title: 'Security - AI Guided SaaS Platform';
+  title: 'Security - AI Guided SaaS Platform',
   description: 'Learn about our security measures and data protection practices'
 };
 
 const securityFeatures = [;
   {icon: Shield;
-    title: 'End-to-End Encryption';
+    title: 'End-to-End Encryption',
     description: 'All data is encrypted in transit and at rest using industry-standard encryption.'
     , status: 'Active'}
   };
   {icon: Lock;
-    title: 'Multi-Factor Authentication';
+    title: 'Multi-Factor Authentication',
     description: 'Additional security layer with MFA support for all user accounts.'
     , status: 'Active'}
   };
   {icon: Eye;
-    title: 'Security Monitoring';
+    title: 'Security Monitoring',
     description: '24/7 monitoring and automated threat detection systems.'/    , status: 'Active'}
   };
   {icon: Server;
-    title: 'Secure Infrastructure';
+    title: 'Secure Infrastructure',
     description: 'SOC 2 Type II compliant infrastructure with regular security audits.'
     , status: 'Active'}
 ];
@@ -78,7 +78,7 @@ const certifications = [;
                                 <Badge className="mb-2">{cert.status}</Badge>
                         <p className="{cert.year}"   />
                       </div>;
-                  );)}
+                  ))}
       </div>
               </CardContent>
                             </Card>

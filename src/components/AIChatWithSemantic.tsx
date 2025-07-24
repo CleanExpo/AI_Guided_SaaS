@@ -44,8 +44,8 @@ const messagesEndRef = useRef<HTMLDivElement>(null);
   // Index conversation for future retrieval;
 
 const _indexConversation = useCallback(async (message: ChatMessage) => { if (!enableSemanticSearch) return null}try {
-      await indexDocument({;
-        id: `conversation-${message.id}`;
+      await indexDocument({,
+        id: `conversation-${message.id}`,
         content: message.content;
         metadata: { role: message.role, timestamp: message.timestamp.toISOString(), conversationId: 'current' // In production, use actual conversation ID },
         type: 'conversation'
@@ -53,9 +53,9 @@ const _indexConversation = useCallback(async (message: ChatMessage) => { if (!en
     } catch (error) {
       console.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
   
-const _sendMessage = async () => { if (!input.trim() || isLoading) return null}const userMessage: ChatMessage = {;
+const _sendMessage = async () => { if (!input.trim() || isLoading) return null}const userMessage: ChatMessage = {,
   id: Date.now().toString();
-      role: 'user';
+      role: 'user',
       content: input;
 timestamp: new Date()
 };
@@ -71,19 +71,19 @@ if (relevantContext.length > 0) {
 }
           // Add system message showing context retrieval;
 
-const contextMessage: ChatMessage = {;
-  id: `context-${Date.now()}`;
+const contextMessage: ChatMessage = {,
+  id: `context-${Date.now()}`,
             role: 'system';
-            content: `Retrieved ${relevantContext.length} relevant context chunks`;
+            content: `Retrieved ${relevantContext.length} relevant context chunks`,
             context: relevantContext;
             timestamp: new Date()
 };
           setMessages(prev => [...prev, contextMessage])}
       // Send to AI with context;
 
-const response = await fetch('/api/validated-chat', {;
-        method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+const response = await fetch('/api/validated-chat', {,
+        method: 'POST',
+headers: { 'Content-Type': 'application/json' }
         body: JSON.stringify({
           message: input;
           context: relevantContext.slice(0, maxContextSize), // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
@@ -92,9 +92,9 @@ headers: { 'Content-Type': 'application/json' };
       
 const data  = await response.json();
 
-const assistantMessage: ChatMessage = {;
+const assistantMessage: ChatMessage = {,
         id: Date.now().toString();
-        role: 'assistant';
+        role: 'assistant',
         content: data.response;
 timestamp: new Date()
 };
@@ -102,8 +102,8 @@ timestamp: new Date()
       // Index assistant response
       await indexConversation(assistantMessage)
 } catch (error) {
-      console.error('Chat error:', error), toast({;
-        title: 'Error';
+      console.error('Chat error:', error), toast({,
+        title: 'Error',
         description: 'Failed to send message. Please try again.';
 variant: 'destructive'
 })

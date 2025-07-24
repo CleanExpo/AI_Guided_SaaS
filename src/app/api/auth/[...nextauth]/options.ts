@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
         });
         function CredentialsProvider({
-            name: 'credentials';
+            name: 'credentials',
             credentials: { email: { label: 'Email', type: 'email' };
                 password: { label: 'Password', type: 'password' }
             };
@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
                 // In a real app, verify against database, if (credentials?.email === 'demo@example.com' &&
                     credentials?.password === 'demo') {
                     return {
-                        id: '1';
+                        id: '1',
                         email: 'demo@example.com';
                         name: 'Demo User'
   }
@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     pages: {
-        signIn: '/auth/signin';
+        signIn: '/auth/signin',
         error: '/auth/error'
     };
     callbacks: {

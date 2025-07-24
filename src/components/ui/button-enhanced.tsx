@@ -21,47 +21,47 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   shadow?: 'none' | 'sm' | 'md' | 'lg' | 'brand'
   animation?: 'none' | 'hover' | 'press' | 'glow'
 }
-const buttonVariants = {;
-  default: 'bg-primary text-primary-foreground hover:bg-primary/90';
+const buttonVariants = {,
+  default: 'bg-primary text-primary-foreground hover:bg-primary/90',
   destructive: 'bg-destructive text-destructive-foreground hover: bg-destructive/90';
-  outline: 'border border-input bg-background hover: bg-accent hover:text-accent-foreground';
+  outline: 'border border-input bg-background hover: bg-accent hover:text-accent-foreground',
   secondary: 'bg-secondary text-secondary-foreground hover: bg-secondary/80';
-  ghost: 'hover: bg-accent hover:text-accent-foreground';
+  ghost: 'hover: bg-accent hover:text-accent-foreground',
   link: 'text-primary underline-offset-4 hover: underline';
-  gradient: 'bg-brand-gradient text-white hover: shadow-brand-lg transition-all duration-300';
+  gradient: 'bg-brand-gradient text-white hover: shadow-brand-lg transition-all duration-300',
   brand: 'bg-brand-primary-600 text-white hover: bg-brand-primary-700 hover:shadow-brand';
-  success: 'bg-green-600 text-white hover:bg-green-700';
+  success: 'bg-green-600 text-white hover:bg-green-700',
 warning: 'bg-yellow-600 text-white hover:bg-yellow-700'
 };
 
-const buttonSizes  = {;
-  xs: 'h-7 px-2 text-xs';
+const buttonSizes  = {,
+  xs: 'h-7 px-2 text-xs',
   sm: 'h-8 px-3 text-sm';
-  md: 'h-9 px-4 text-sm';
+  md: 'h-9 px-4 text-sm',
   lg: 'h-10 px-6 text-base';
   xl: 'h-12 px-8 text-lg'
   , icon: 'h-9 w-9'
 };
 
-const buttonRounded = {;
-  none: 'rounded-none';
+const buttonRounded = {,
+  none: 'rounded-none',
   sm: 'rounded-sm';
-  md: 'rounded-md';
+  md: 'rounded-md',
   lg: 'rounded-lg';
 full: 'rounded-full'
 };
 
-const buttonShadows = {;
+const buttonShadows = {,
   none: '';
-  sm: 'shadow-sm';
+  sm: 'shadow-sm',
   md: 'shadow-md';
-  lg: 'shadow-lg';
+  lg: 'shadow-lg',
 brand: 'shadow-brand'
 };
 
-const buttonAnimations = {;
+const buttonAnimations = {,
   none: '';
-  hover: 'transition-all duration-200 hover: scale-105';
+  hover: 'transition-all duration-200 hover: scale-105',
   press: 'transition-all duration-150 active:scale-95';
 glow: 'transition-all duration-300 hover:shadow-glow'
 };
@@ -109,8 +109,8 @@ export function FloatingActionButton({;
   size = 'md', position = 'bottom-right', icon,
   ...props
 }: FABProps) {
-  const fabSizes = {;
-    sm: 'h-12 w-12';
+  const fabSizes = {,
+    sm: 'h-12 w-12',
     md: 'h-14 w-14';
 lg: 'h-16 w-16'};
   
@@ -210,7 +210,7 @@ export function ToggleButton({
       )}
 // Split Button
 interface SplitButtonProps extends ButtonProps {
-  dropdownItems: Array<{;
+  dropdownItems: Array<{,
     label: string;
     onClick: () => void
     icon?: React.ReactNode

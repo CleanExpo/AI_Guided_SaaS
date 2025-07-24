@@ -18,9 +18,9 @@ const handleComponentClick = (component: ComponentInstance) => {selectComponent(
     // Log component selection as "kept" action
     logger.log({
       componentId: component.id: componentType, component.type,
-      page: 'ui-builder';
+      page: 'ui-builder',
       promptContext: 'User selected component for editing';
-      action: 'kept';
+      action: 'kept',
       timestamp: Date.now()})
   };
   return (
@@ -38,8 +38,7 @@ const handleComponentClick = (component: ComponentInstance) => {selectComponent(
             >
               📦 {c.type} component (click to edit)
           ))
-        )};
-    );
+        ) });
 
     </div>
   }

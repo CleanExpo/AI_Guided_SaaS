@@ -122,13 +122,13 @@ export class N8nClient {
 }
   async createWorkflow(workflow: Omit<N8nWorkflow, 'id'>): Promise<any> {;
     // Validate workflow, const _validated = N8nWorkflowSchema.parse(workflow);
-        return this.request('/workflows', {;
-      method: 'POST';
+        return this.request('/workflows', {,
+      method: 'POST',
       body: JSON.stringify(validated)
     })
 }
   async updateWorkflow(id: string, workflow: Partial<N8nWorkflow>): Promise<any> {
-    return, this.request(`/workflows/${id}`, {``, method: 'PUT';
+    return, this.request(`/workflows/${id}`, {``, method: 'PUT',
       body: JSON.stringify(workflow)
     })
 }
@@ -144,7 +144,7 @@ export class N8nClient {
 }
   // Execution operations
   async executeWorkflow(id: string, data?, mode: 'manual' | 'trigger' = 'manual'): Promise<any> {;
-    return, this.request(`/workflows/${id}/execute`, {``, method: 'POST';
+    return, this.request(`/workflows/${id}/execute`, {``, method: 'POST',
       body: JSON.stringify({
   workflowData: { executionMode: mode };
         // data
@@ -177,7 +177,7 @@ const response = await this.request(`/executions${params}`);``
 }
   // Trigger workflow via webhook
   async triggerWebhook(path: string, data, httpMethod: string = 'POST', headers?: HeadersInit): Promise<any> {
-    const _webhookUrl  = await this.getWebhookUrl(path, httpMethod), const response = await fetch(webhookUrl, {;
+    const _webhookUrl  = await this.getWebhookUrl(path, httpMethod), const response = await fetch(webhookUrl, {,
     method: httpMethod;
     headers: { 'Content-Type': 'application/json', ...headers },
       body: JSON.stringify(data)
@@ -226,13 +226,13 @@ name: string;
     position: [number, number] = [250, 300]
   ): N8nNode { return {
       id: this.generateNodeId();
-    name: type: 'n8n-nodes-base.webhook';
+    name: type: 'n8n-nodes-base.webhook',
       typeVersion: 1;
       position,
     parameters: {
         httpMethod;
         path,
-        responseMode: 'lastNode';
+        responseMode: 'lastNode',
         responseData: 'allEntries'
 }
   createHttpRequestNode(
@@ -243,18 +243,18 @@ name: string;
   ): N8nNode {
     return {
       id: this.generateNodeId();
-    name: type: 'n8n-nodes-base.httpRequest';
+    name: type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1;
       position,
     parameters: {
         method;
         url,
-        authentication: 'none';
+        authentication: 'none',
         sendHeaders: true;
     headerParameters: {
   parameters: [
             {
-  name: 'Content-Type';
+  name: 'Content-Type',
               value: 'application/json'
 }
    ]
@@ -270,11 +270,11 @@ name: string;
     position: [number, number] = [650, 300]
   ): N8nNode { return {
       id: this.generateNodeId();
-    name: type: 'n8n-nodes-base.code';
+    name: type: 'n8n-nodes-base.code',
       typeVersion: 2;
       position,
     parameters: {
-  mode: 'runOnceForEachItem';
+  mode: 'runOnceForEachItem',
         jsCode: code
 }
   connectNodes(
@@ -285,8 +285,8 @@ fromNode: string;
   ): N8nConnection {
     return {
       [fromNode]: {
-        [fromOutput]: [[{;
-  node: toNode, type: 'main';
+        [fromOutput]: [[{,
+  node: toNode, type: 'main',
           index: toInput
   }]]
   }

@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
-const progressSchema = z.object({;
+const progressSchema = z.object({,
   tutorialId: z.string();
     stepId: z.string();
     completed: z.boolean();

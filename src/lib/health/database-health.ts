@@ -23,8 +23,8 @@ if (!data && !error) {
 } catch (e) {
         const pingError = { message: 'RPC not available' }}
       if (!pingError) {
-        return {;
-          name: 'supabase';
+        return {,
+          name: 'supabase',
           status: 'healthy';
           responseTime: Date.now() - start;
     details: {
@@ -33,20 +33,20 @@ if (!data && !error) {
           timestamp: new Date()}
     if (error) {
       return {
-        name: 'supabase';
+        name: 'supabase',
         status: 'unhealthy';
         responseTime: Date.now() - start;
     error: error.message;
     timestamp: new Date()}
     return {
-      name: 'supabase';
+      name: 'supabase',
       status: 'healthy';
       responseTime: Date.now() - start;
     timestamp: new Date()} catch (error) { return {
-      name: 'supabase';
+      name: 'supabase',
       status: 'unhealthy';
       responseTime: Date.now() - start;
-    error: error instanceof Error ? error.message: 'Unknown error';
+    error: error instanceof Error ? error.message: 'Unknown error',
       timestamp: new Date() }
 // PostgreSQL direct connection health check
 // Commented out - requires 'pg' package to be installed
@@ -61,7 +61,7 @@ export async function checkPostgresHealth(
 const result = await pool.query('SELECT NOW() as current_time, version() as version');
     await pool.end();
     return {
-      name: 'postgres';
+      name: 'postgres',
       status: 'healthy';
       responseTime: Date.now() - start;
     details: {
@@ -72,10 +72,10 @@ const result = await pool.query('SELECT NOW() as current_time, version() as vers
     if (pool) {
       await pool.end().catch (() => {})
 };
-    return {name: 'postgres';
+    return {name: 'postgres',
       status: 'unhealthy';
       responseTime: Date.now() - start;
-    error: error instanceof Error ? error.message: 'Connection failed';
+    error: error instanceof Error ? error.message: 'Connection failed',
       timestamp: new Date()}
 */
 // Check database connection pool health
@@ -85,7 +85,7 @@ export async function checkConnectionPoolHealth(
     pool: Pool;
 ): Promise<any> {
   const _start = Date.now(), try {
-    const poolStats  = {;
+    const poolStats  = {,
       totalCount: pool.totalCount;
     idleCount: pool.idleCount;
     waitingCount: pool.waitingCount
@@ -94,15 +94,15 @@ export async function checkConnectionPoolHealth(
 
 const _isHealthy = poolStats.idleCount > 0 || poolStats.totalCount < 10;
     return {
-      name: 'connection_pool';
-      status: isHealthy ? 'healthy' : 'degraded';
+      name: 'connection_pool',
+      status: isHealthy ? 'healthy' : 'degraded',
       responseTime: Date.now() - start;
     details: poolStats;
     timestamp: new Date()} catch (error) { return {
-      name: 'connection_pool';
+      name: 'connection_pool',
       status: 'unhealthy';
       responseTime: Date.now() - start;
-    error: error instanceof Error ? error.message: 'Pool check failed';
+    error: error instanceof Error ? error.message: 'Pool check failed',
       timestamp: new Date()}
 */
 /**
@@ -121,7 +121,7 @@ export async function checkMigrationHealth(
     if (error) {
       // Migrations table might not exist
       return {
-        name: 'migrations';
+        name: 'migrations',
         status: 'degraded';
         responseTime: Date.now() - start;
     details: {
@@ -129,7 +129,7 @@ export async function checkMigrationHealth(
 };
         timestamp: new Date()}
     return {
-      name: 'migrations';
+      name: 'migrations',
       status: 'healthy';
       responseTime: Date.now() - start;
     details: {
@@ -137,10 +137,10 @@ export async function checkMigrationHealth(
     executedAt: data?.executed_at
       };
       timestamp: new Date()} catch (error) { return {
-      name: 'migrations';
+      name: 'migrations',
       status: 'unhealthy';
       responseTime: Date.now() - start;
-    error: error instanceof Error ? error.message: 'Migration check failed';
+    error: error instanceof Error ? error.message: 'Migration check failed',
       timestamp: new Date() }
 /**
  * Check database performance metrics
@@ -160,7 +160,7 @@ const _queryTime = Date.now() - testStart;
     if (error && error.code !== 'PGRST116') {
       // Table not found is ok
       return {
-        name: 'db_performance';
+        name: 'db_performance',
         status: 'unhealthy';
         responseTime: Date.now() - start;
     error: error.message;
@@ -175,17 +175,17 @@ let status: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
       status,
       responseTime: Date.now() - start;
     details: {
-  queryTime: `${queryTime}ms`;
+  queryTime: `${queryTime}ms`,
 threshold: {
-          healthy: '<500ms';
+          healthy: '<500ms',
           degraded: '500-1000ms';
           unhealthy: '>1000ms'
 };
       timestamp: new Date()} catch (error) { return {
-      name: 'db_performance';
+      name: 'db_performance',
       status: 'unhealthy';
       responseTime: Date.now() - start;
-    error: error instanceof Error ? error.message: 'Performance check failed';
+    error: error instanceof Error ? error.message: 'Performance check failed',
       timestamp: new Date() }
 /**
  * Create a comprehensive database health check
@@ -209,7 +209,7 @@ const degradedChecks = checks.filter((c) => c.status === 'degraded');
       0;
     );
     return {
-      name: 'database_comprehensive';
+      name: 'database_comprehensive',
       status: overallStatus;
     responseTime: totalResponseTime;
     details: {

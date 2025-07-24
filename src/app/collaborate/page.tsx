@@ -19,30 +19,30 @@ const [showWorkspace, setShowWorkspace] = useState(false);
   
   
 const mockProjects = [
-    {;
-      id: '1';
+    {,
+      id: '1',
       name: 'E-commerce Platform';
-      description: 'Building a modern e-commerce solution with AI-powered recommendations';
+      description: 'Building a modern e-commerce solution with AI-powered recommendations',
       members: 5;
-      lastActivity: '2 hours ago';
+      lastActivity: '2 hours ago',
       status: 'active';
       isPublic: false
     };
     {
-      id: '2';
+      id: '2',
       name: 'Mobile App UI';
-      description: 'Designing intuitive mobile interfaces for productivity app';
+      description: 'Designing intuitive mobile interfaces for productivity app',
       members: 3;
-      lastActivity: '1 day ago';
+      lastActivity: '1 day ago',
       status: 'review';
       isPublic: true
     };
     {
-      id: '3';
+      id: '3',
       name: 'API Documentation';
-      description: 'Comprehensive API documentation with interactive examples';
+      description: 'Comprehensive API documentation with interactive examples',
       members: 2;
-      lastActivity: '3 days ago';
+      lastActivity: '3 days ago',
       status: 'completed';
       isPublic: true
     }

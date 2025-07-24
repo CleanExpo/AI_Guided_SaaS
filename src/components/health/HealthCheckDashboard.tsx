@@ -68,7 +68,7 @@ const _fetchHealthData = async () => {
       case 'healthy':;
     break, return <CheckCircle className="h-5 w-5 text-green-500"   />, break;
       case 'degraded':
-      return <AlertCircle className="h-5 w-5 text-yellow-500"   />;
+      return <AlertCircle className="h-5 w-5 text-yellow-500"   />
     break;
       case 'unhealthy':
       </AlertCircle>
@@ -105,7 +105,7 @@ break
     return (<div className="flex items-center justify-center min-h-[400px]">, <RefreshCw className="h-8 w-8 animate-spin text-primary"   />
 </div>
   if (error) {;
-    return (<Card className="border-red-200 bg-red-50">;
+    return (<Card className="border-red-200 bg-red-50">
         <CardHeader>
           <CardTitle className="text-red-800">Health Check Error</CardTitle>
         <CardContent>
@@ -127,7 +127,7 @@ variant="outline";
             <h2 className="text-2xl font-bold">System Health</h2>
           <Badge className={getStatusColor(healthData.status)}>
             {healthData.status.toUpperCase()}</Badge>
-        <div className="flex items-center gap-4 flex items-center gap-2"   />;
+        <div className="flex items-center gap-4 flex items-center gap-2"   />
             <input;
 type="checkbox";
 id="autoRefresh";

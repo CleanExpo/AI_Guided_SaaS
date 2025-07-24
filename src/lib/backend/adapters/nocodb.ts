@@ -67,8 +67,8 @@ const data = await response.json();
   async signUp(email: string, password: string, metadata?: any): Promise<User> {;
     // Hash password, const hashedPassword = await bcrypt.hash(password, 10); // Create user in users table;
 
-const user = await this.request<any>(this.getTableEndpoint('users'), {;
-      method: 'POST';
+const user = await this.request<any>(this.getTableEndpoint('users'), {,
+      method: 'POST',
       body: JSON.stringify({
         id: uuidv4();
         email,
@@ -128,16 +128,16 @@ const user = await this.request<any>(
     
 const user = await this.request<any>(
       `${this.getTableEndpoint('users')}/${id}`,
-      {;
-        method: 'PATCH';
+      {,
+        method: 'PATCH',
         body: JSON.stringify(updateData)}
     );
     return this.mapNocoDBUser(user);
 }
   // Projects
   async createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
-    const project = await this.request<any>(this.getTableEndpoint('projects'), {;
-      method: 'POST';
+    const project = await this.request<any>(this.getTableEndpoint('projects'), {,
+      method: 'POST',
       body: JSON.stringify({
         id: uuidv4();
         user_id: data.userId;
@@ -174,8 +174,8 @@ const user = await this.request<any>(
     
 const project = await this.request<any>(
       `${this.getTableEndpoint('projects')}/${id}`,
-      {;
-        method: 'PATCH';
+      {,
+        method: 'PATCH',
         body: JSON.stringify(updateData)}
     );
     return this.mapNocoDBProject(project);
@@ -198,7 +198,7 @@ if (options?.limit) {
     if (options?.offset) {
       params.append('offset', options.offset.toString())
     }
-    const response  = await this.request<{;
+    const response  = await this.request<{,
       list: any[];
       pageInfo: {
         totalRows: number;
@@ -229,8 +229,8 @@ const pageSize = options?.limit || 25;
       updated_at: new Date().toISOString()
 };
 
-const result = await this.request<any>(this.getTableEndpoint(collection), {;
-      method: 'POST';
+const result = await this.request<any>(this.getTableEndpoint(collection), {,
+      method: 'POST',
       body: JSON.stringify(createData)
 });
     return this.mapNocoDBRecord(result) as T;
@@ -255,8 +255,8 @@ const result = await this.request<any>(this.getTableEndpoint(collection), {;
 
 const result = await this.request<any>(
       `${this.getTableEndpoint(collection)}/${id}`,
-      {;
-        method: 'PATCH';
+      {,
+        method: 'PATCH',
         body: JSON.stringify(updateData)}
     );
     return this.mapNocoDBRecord(result) as T;
@@ -284,7 +284,7 @@ if (options?.limit) {
     if (options?.offset) {
       params.append('offset', options.offset.toString())
     }
-    const response  = await this.request<{;
+    const response  = await this.request<{,
       list: any[];
       pageInfo: {
         totalRows: number;
@@ -321,8 +321,8 @@ collection: string;
   file: File): Promise<string> {
     const formData = new FormData(), formData.append('file', file), formData.append('path', path);
     
-const response = await fetch(`${this.baseUrl}/api/v1/db/storage/upload`, {;
-      method: 'POST';
+const response = await fetch(`${this.baseUrl}/api/v1/db/storage/upload`, {,
+      method: 'POST',
       headers: { 'xc-token': this.apiToken };
       body: formData
     });
@@ -343,7 +343,7 @@ const response = await fetch(`${this.baseUrl}/api/v1/db/storage/upload`, {;
   }
   // Helper methods
   private mapNocoDBUser(user: any): User {
-    return {;
+    return {,
       id: user.id;
       email: user.email;
       name: user.name;
@@ -386,7 +386,7 @@ const mapped = {};
 collection: string;
     params: URLSearchParams
   ): Promise<{ list: T[], pageInfo: any }> {
-    const response = await this.request<{;
+    const response = await this.request<{,
       list: any[];
       pageInfo: any
     }>(`${this.getTableEndpoint(collection)}?${params.toString()}`);
@@ -415,7 +415,7 @@ class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
       '<': 'lt',
       '<=': 'lte',
       'in': 'in',
-      'like': 'like';
+      'like': 'like'
     };
 
 const nocoOperator = operatorMap[operator];

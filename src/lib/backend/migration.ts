@@ -68,7 +68,7 @@ for (const collection of this.options.includeCustomCollections || []) {
         await this.migrateCollection(collection, this.migrateGenericRecord.bind(this))
 }
       this.progress.status = 'completed'
-      return {;
+      return {,
         success: true;
     totalRecords: this.progress.totalRecords;
     migratedRecords: this.progress.processedRecords;
@@ -106,7 +106,7 @@ collection: string;
     while (hasMore) {
       // Fetch batch from source;
 
-const batch = await this.sourceAdapter.list<T>(collection, {;
+const batch = await this.sourceAdapter.list<T>(collection, {,
     limit: this.options.batchSize;
         // offset
       })
@@ -196,7 +196,7 @@ export async function exportBackendData(
   for (const collection of collections) {
     const records = []; let offset = 0; let hasMore = true;
     while (hasMore) {
-      const batch = await adapter.list<any>(collection, {;
+      const batch = await adapter.list<any>(collection, {,
     limit: 100;
         // offset
       })

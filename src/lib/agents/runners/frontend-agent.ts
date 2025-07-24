@@ -26,7 +26,7 @@ break
     await new Promise(resolve => setTimeout(resolve, 2000);
         return {
       success: true;
-    componentPath: `/src/components/${payload.componentName}.tsx`;
+    componentPath: `/src/components/${payload.componentName}.tsx`,
 message: `Created ${payload.componentName} component with TypeScript and Tailwind CSS`
   }
 }
@@ -67,13 +67,13 @@ message: `Created ${payload.componentName} component with TypeScript and Tailwin
         return {
       success: true;
     routes: payload.routes;
-    routingLibrary: 'Next.js App Router';
+    routingLibrary: 'Next.js App Router',
       message: 'Routing configured with protected routes and layouts'
 }
 // Start the agent if run directly;
 if (require.main === module) {
   const agent = new FrontendAgent({ agentId: process.env.AGENT_ID || 'agent_frontend';
-    agentType: 'frontend';
+    agentType: 'frontend',
     orchestratorUrl: process.env.ORCHESTRATOR_URL || 'http://localhost:3000';
     capabilities: [
       'react_components';

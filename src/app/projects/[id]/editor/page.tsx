@@ -22,11 +22,11 @@ const [isLoading, setIsLoading] = useState(true);
     
                Simulate loading project data
                   setTimeout(() => {
-      setProject({;
+      setProject({,
         id: projectId;
-    name: 'My Awesome Project';
+    name: 'My Awesome Project',
         description: 'A sample project for demonstration';
-        type: 'web';
+        type: 'web',
 framework: 'Next.js'}
       });
       setIsLoading(false)
@@ -43,7 +43,7 @@ framework: 'Next.js'}
                       </div>
                   )}
   return (
-    <div className="min-h-screen bg-gray-50">;
+    <div className="min-h-screen bg-gray-50">
       {
               * Header *
               }</div>

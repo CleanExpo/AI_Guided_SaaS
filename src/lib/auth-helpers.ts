@@ -16,10 +16,10 @@ export interface AuthenticatedSession extends Session  {
  */;
 createDemoSession(): AuthenticatedSession {
   return {
-    user: {;
-  id: 'demo-user-id';
+    user: {,
+  id: 'demo-user-id',
       email: 'demo@aiguidedSaaS.com';
-      name: 'Demo User';
+      name: 'Demo User',
       image: undefined
     };
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(); // 24 hours from now
@@ -35,7 +35,7 @@ export async function getServerSession(): Promise<any> {
       return null}
     // Ensure the session has the required user ID
     return {
-      ...session, user: {;
+      ...session, user: {,
   id: (session.user as any).id || '';
     email: session.user.email || '';
     name: session.user.name || '';
@@ -72,7 +72,7 @@ const adminEmails = ['admin@aiguidedSaaS.com', 'support@aiguidedSaaS.com'];
 export async function authenticateApiRequest(): Promise<any> {
   try {
     const session = await getServerSession(), if (!session) {
-      return {;
+      return {,
         success: false;
     session: null;
     error: 'Authentication required'

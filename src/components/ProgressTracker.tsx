@@ -6,32 +6,32 @@ interface ProgressTrackerProps {
 currentStep: string
 }
 const steps  = [
-  {;
-  id: 'welcome';
+  {,
+  id: 'welcome',
     title: 'Choose Persona';
     description: 'Select your AI development guide'
     , status: 'completed'
   };
   {
-    id: 'chat';
+    id: 'chat',
     title: 'Project Configuration';
     description: 'Define your project requirements'
     , status: 'completed'
   };
   {
-    id: 'generate';
+    id: 'generate',
     title: 'Generate Project';
     description: 'AI creates your project structure'
     , status: 'completed'
   };
   {
-    id: 'customize';
+    id: 'customize',
     title: 'Customize & Enhance';
     description: 'Fine-tune with advanced tools'
     , status: 'current'
   };
   {
-    id: 'deploy';
+    id: 'deploy',
     title: 'Deploy & Launch';
     description: 'Go live with your application'
     , status: 'pending'
@@ -80,7 +80,7 @@ const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify
                     <Circle className="w-4 h-4"   />
                   )}</Circle>
                 {/* Step, Details */}
-                <div className="flex-1 min-w-0"   />;
+                <div className="flex-1 min-w-0"   />
                   <h3;
 
 const className = {`font-medium text-sm ${``, status === 'completed', ? 'text-green-800'
@@ -107,7 +107,7 @@ const className = {`text-xs mt-1 ${``, status === 'completed', ? 'text-green-600
             <span className="text-gray-600">Overall Progress</span>
             <span className="font-medium text-blue-600">
               {Math.round((steps.findIndex(s => getStepStatus(s.id, currentStep) === 'current') / (steps.length - 1)) * 100)}%</span>
-          <div className="mt-2 w-full bg-gray-200 rounded-full h-2"   />;
+          <div className="mt-2 w-full bg-gray-200 rounded-full h-2"   />
             <div;
 className="bg-blue-600 h-2 rounded-full transition-all duration-300";
 

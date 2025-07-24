@@ -4,11 +4,11 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     try {
         const userId = params.id;
         // Simulate user data
-        const user = {;
+        const user = {,
             id: userId;
-            email: `user${userId}@example.com`;
+            email: `user${userId}@example.com`,
             name: `User ${userId}`;
-            status: 'active';
+            status: 'active',
             createdAt: new Date().toISOString();
             lastLogin: new Date().toISOString()
 };
@@ -23,7 +23,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     try {;
         const userId = params.id; const body = await request.json(); // Simulate user update;
 
-const updatedUser = {;
+const updatedUser = {,
             id: userId;
             ...body,
             updatedAt: new Date().toISOString()

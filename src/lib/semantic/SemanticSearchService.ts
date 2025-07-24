@@ -44,8 +44,8 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async indexDocument(request: IndexRequest): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/index`, {;
-        method: 'POST';
+      const response = await fetch(`${this.baseUrl}/index`, {,
+        method: 'POST',
         headers: this.headers;
         body: JSON.stringify({
   id: request.id;
@@ -66,8 +66,8 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async indexBatch(requests: IndexRequest[]): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/index/batch`, {;
-        method: 'POST';
+      const response = await fetch(`${this.baseUrl}/index/batch`, {,
+        method: 'POST',
         headers: this.headers;
         body: JSON.stringify(requests)
 });
@@ -84,8 +84,8 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async search(request: SearchRequest): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/search`, {;
-        method: 'POST';
+      const response = await fetch(`${this.baseUrl}/search`, {,
+        method: 'POST',
         headers: this.headers;
         body: JSON.stringify({
   query: request.query;
@@ -106,8 +106,8 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async deleteDocument(docId: string): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/index/${docId}`, {;
-        method: 'DELETE';
+      const response = await fetch(`${this.baseUrl}/index/${docId}`, {,
+        method: 'DELETE',
         headers: this.headers
 });
       if (!response.ok) {
@@ -136,7 +136,7 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    * Helper method to index project files for semantic search
    */
   async indexProjectFiles(files: Array<{ path: string, content: string, type: string }>): Promise<any> {
-    const requests: IndexRequest[] = files.map((file) => ({;
+    const requests: IndexRequest[] = files.map((file) => ({,
   id: file.path;
       content: file.content;
       metadata: { path: file.path, extension: file.path.split('.').pop(), lastModified: new Date().toISOString() };

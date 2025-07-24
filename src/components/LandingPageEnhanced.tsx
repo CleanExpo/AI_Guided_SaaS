@@ -9,34 +9,34 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const features = [
-  {;
+  {,
   icon: Brain;
-    title: 'AI-Powered Development';
+    title: 'AI-Powered Development',
     description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions with intelligent code generation.';
 gradient: 'primary'};
   {
     icon: Wrench;
-    title: 'Visual UI Builder';
+    title: 'Visual UI Builder',
     description: 'Create stunning interfaces with our drag-and-drop UI builder and comprehensive component library.';
 gradient: 'secondary'};
   {
     icon: BarChart3;
-    title: 'Advanced Analytics';
+    title: 'Advanced Analytics',
     description: 'Get deep insights into your application performance and user behavior with real-time dashboards.';
 gradient: 'success'};
   {
     icon: Users;
-    title: 'Team Collaboration';
+    title: 'Team Collaboration',
     description: 'Work seamlessly with your team using real-time collaboration tools and shared workspaces.';
 gradient: 'warning'};
   {
     icon: Code;
-    title: 'Code Generation';
+    title: 'Code Generation',
     description: 'Generate production-ready code automatically from your designs and specifications with AI assistance.';
 gradient: 'primary'};
   {
     icon: Shield;
-    title: 'Enterprise Security';
+    title: 'Enterprise Security',
     description: 'Built with security-first principles and enterprise-grade protection for your applications.';
 gradient: 'error'}];
 
@@ -61,7 +61,7 @@ const [featuresRef, featuresInView] = useInView({ threshold: 0.1 triggerOnce: tr
 const [benefitsRef, benefitsInView]  = useInView({ threshold: 0.1 triggerOnce: true });
 
 const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true });
-  return (<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900">;
+  return (<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900">
       {/* Animated, Background Elements */}</div>
       <div className="fixed inset-0 overflow-hidden pointer-events-none"   />
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float" > <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }  > <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse-slow" >{/* Hero, Section */}
@@ -144,7 +144,7 @@ const initial = {{ opacity: 0 y: 30 }
           </motion.div>
       {/* Features, Section */}
       <section ref={featuresRef} className="py-20 px-4"   />
-        <div className="max-w-6xl mx-auto"   />;
+        <div className="max-w-6xl mx-auto"   />
           <motion.div;
 
 const initial = {{ opacity: 0 y: 30 }
@@ -179,7 +179,7 @@ const initial = {{ opacity: 0 y: 30 }
     {/* Benefits, Section */}
       <section ref={benefitsRef} className="py-20 px-4"   />
         <div className="max-w-6xl mx-auto"   />
-          <div className="grid lg:grid-cols-2 gap-12 items-center"   />;
+          <div className="grid lg:grid-cols-2 gap-12 items-center"   />
             <motion.div;
 
 const initial = {{ opacity: 0 x: -30 }

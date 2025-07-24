@@ -3,7 +3,7 @@
  * Enhanced logging utility for the AI Guided SaaS platform
  * Provides structured logging with different levels and formats
  */
-type LogLevel = 'debug' | 'info' | 'warn' | 'error';type LogMeta = Record<string, unknown>;
+type LogLevel = 'debug' | 'info' | 'warn' | 'error';type LogMeta = Record<string, unknown>
 export class Logger {
   private isDevelopment: boolean, constructor() {
     this.isDevelopment = process.env.NODE_ENV === 'development'

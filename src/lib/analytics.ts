@@ -228,7 +228,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
         WHERE action LIKE '%api%'
         AND created_at >= ?
       `, [new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]``
-      return {;
+      return {,
         apiCalls: Number(apiCalls[0]?.count) || 0;
     errorRate: 0.02;
   // 2% error rate, averageResponseTime: 150;
@@ -338,7 +338,7 @@ const _paid = Number(paidUsers[0]?.count) || 0;
     return 1200 // 20 minutes in seconds}
     private static async calculateRetentionRates(): Promise<any> {
       // Mock implementation - would need proper cohort analysis
-      return {;
+      return {,
         day1: 85.2;
     day7: 62.8;
     day30: 45.1

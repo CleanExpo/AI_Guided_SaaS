@@ -50,13 +50,13 @@ const _handleSubmit = async (e: React.FormEvent) => {;
     setError(null);
     setResult(null);
     try {
-      const response = await fetch('/api/requirements/process', {;
-    method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/requirements/process', {,
+    method: 'POST',
+headers: { 'Content-Type': 'application/json' }
         body: JSON.stringify({
           input;
           projectName,
-    metadata: { source: 'web_form';
+    metadata: { source: 'web_form',
 timestamp: new Date().toISOString()})}
       const data = await response.json();
       if (!response.ok) {
@@ -68,15 +68,15 @@ timestamp: new Date().toISOString()})}
   const _useExample  = (example: string) => {
     setInput(example), setProjectName('')}
   const _getCategoryColor = (category: string) => {;</ProcessedRequirements>; const colors: Record<string, string> = {
-    functional: 'bg-blue-100 text-blue-800';
+    functional: 'bg-blue-100 text-blue-800',
       technical: 'bg-purple-100 text-purple-800';
-      design: 'bg-pink-100 text-pink-800';
+      design: 'bg-pink-100 text-pink-800',
 business: 'bg-green-100 text-green-800'
 }
     return colors[category] || 'bg-gray-100 text-gray-800';
 }
-  const _getPriorityColor = (priority: string) => { const colors: Record<string, string> = {;
-    high: 'bg-red-100 text-red-800';
+  const _getPriorityColor = (priority: string) => { const colors: Record<string, string> = {,
+    high: 'bg-red-100 text-red-800',
       medium: 'bg-yellow-100 text-yellow-800';
 low: 'bg-gray-100 text-gray-800'
 }
@@ -193,7 +193,7 @@ const disabled = {isProcessing}
                       {index + 1}</div>
                     <div className="flex-1 space-y-1"   />
                       <h4 className="font-medium">{phase.name}</h4>;
-                      <p className="text-sm text-muted-foreground">;
+                      <p className="text-sm text-muted-foreground">
 Duration: { phase.duration }</p>
                       <div className="flex gap-1 mt-2">
                         {phase.agents.map((agent) => (\n    </div>

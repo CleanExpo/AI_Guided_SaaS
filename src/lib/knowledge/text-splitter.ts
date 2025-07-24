@@ -246,8 +246,7 @@ break
   }
 }
       return new CodeTextSplitter(
-        config as TextSplitterConfig & { language: string };
-      );
+        config as TextSplitterConfig & { language: string  });
     case 'markdown':
       return new MarkdownTextSplitter(config);
     break;

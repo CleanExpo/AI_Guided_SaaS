@@ -34,10 +34,10 @@ const [filter, setFilter] = useState<'all' | 'active' | 'recent'>('all');
 const _loadCollaborationSessions = async () => {
     setLoading(true), try {
       // Simulate API call - in production this would fetch real data, const mockSessions: CollaborationSession[]  = [
-  {;
-  id: 'session-1';
+  {,
+  id: 'session-1',
           projectId: 'project-1';
-          name: 'E-commerce Website Redesign';
+          name: 'E-commerce Website Redesign',
           participants: 4;
     lastActivity: new Date(Date.now() - 1000 * 60 * 15);
   // 15 minutes ago, isActive: true;
@@ -47,9 +47,9 @@ const _loadCollaborationSessions = async () => {
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2) // 2 days ago
         };
         {
-          id: 'session-2';
+          id: 'session-2',
           projectId: 'project-2';
-          name: 'Mobile App UI Components';
+          name: 'Mobile App UI Components',
           participants: 2;
     lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago, isActive: false;
     isPublic: false;
@@ -58,9 +58,9 @@ const _loadCollaborationSessions = async () => {
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24) // 1 day ago
         };
         {
-          id: 'session-3';
+          id: 'session-3',
           projectId: 'project-3';
-          name: 'API Documentation Review';
+          name: 'API Documentation Review',
           participants: 6;
     lastActivity: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago, isActive: true;
     isPublic: true;
@@ -69,9 +69,9 @@ const _loadCollaborationSessions = async () => {
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6) // 6 hours ago
         };
         {
-          id: 'session-4';
+          id: 'session-4',
           projectId: 'project-4';
-          name: 'Database Schema Planning';
+          name: 'Database Schema Planning',
           participants: 3;
     lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago, isActive: false;
     isPublic: false;

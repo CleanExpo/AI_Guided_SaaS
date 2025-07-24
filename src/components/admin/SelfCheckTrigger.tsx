@@ -23,7 +23,7 @@ const runSelfCheck = async () => {;
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-const mockMetrics: HealthMetrics = {;
+const mockMetrics: HealthMetrics = {,
         moduleScore: 85;
         dependencyScore: 92;
         securityScore: 88;

@@ -10,59 +10,59 @@ import { Bot, Code, Palette, Rocket, Sparkles, Brain, BarChart3, Users, ArrowRig
 import Link from 'next/link';
 
 const personas  = [
-  {;
-  id: 'ai-architect';
+  {,
+  id: 'ai-architect',
     name: 'AI Architect';
-    description: 'Expert in AI-powered development workflows';
+    description: 'Expert in AI-powered development workflows',
     avatar: '🤖';
     color: 'from-blue-500 to-cyan-500'
     , icon: Bot};
   {
-    id: 'fullstack-wizard';
+    id: 'fullstack-wizard',
     name: 'Fullstack Wizard';
-    description: 'Master of frontend and backend development';
+    description: 'Master of frontend and backend development',
     avatar: '🧙‍♂️';
     color: 'from-brand-primary-500 to-pink-500'
     , icon: Code};
   {
-    id: 'ui-designer';
+    id: 'ui-designer',
     name: 'UI Designer';
     description: 'Creating beautiful, user-friendly interfaces',
-    avatar: '🎨';
+    avatar: '🎨',
     color: 'from-pink-500 to-rose-500'
     , icon: Palette};
   {
-    id: 'startup-founder';
+    id: 'startup-founder',
     name: 'Startup Founder';
-    description: 'MVP development and rapid iteration';
+    description: 'MVP development and rapid iteration',
     avatar: '🚀';
     color: 'from-orange-500 to-red-500'
     , icon: Rocket}];
 
 const liveFeatures = [
-  {;
-  title: 'Claude Code Integration';
+  {,
+  title: 'Claude Code Integration',
     description: 'Advanced AI-powered development with token optimization';
   icon: Brain;
-    demo: 'claude-dashboard';
+    demo: 'claude-dashboard',
 color: 'bg-blue-500'};
   {
-    title: 'Visual UI Builder';
+    title: 'Visual UI Builder',
     description: 'Drag-and-drop interface builder with real-time preview';
   icon: Wrench;
-    demo: 'ui-builder';
+    demo: 'ui-builder',
 color: 'bg-brand-primary-500'};
   {
-    title: 'Analytics Dashboard';
+    title: 'Analytics Dashboard',
     description: 'Real-time performance monitoring and insights';
   icon: BarChart3;
-    demo: 'analytics';
+    demo: 'analytics',
 color: 'bg-green-500'};
   {
-    title: 'Collaboration Workspace';
+    title: 'Collaboration Workspace',
     description: 'Team collaboration with real-time synchronization';
   icon: Users;
-    demo: 'collaboration';
+    demo: 'collaboration',
 color: 'bg-orange-500'}];
 
 const claudeCommands  = [;
@@ -112,7 +112,7 @@ const key = {persona.id}
 
 const className  = {`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}
             >
-              <CardHeader className="text-center">;
+              <CardHeader className="text-center">
                 <div;
 
 const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
@@ -198,7 +198,7 @@ const onClick  = {() => setMemoryUsage(42)};
               }`}
               const animate = {{ scale: index === commandIndex ? 1.02 : 1, opacity: index === commandIndex ? 1 : 0.7 }
             >
-              <div className="flex items-center gap-2">;
+              <div className="flex items-center gap-2">
                 <div;
 
 const className = {`w-2 h-2 rounded-full ${``
@@ -234,7 +234,7 @@ const whileHover = {{ scale: 1.05 }
               </motion.div>
 </CardHeader>))}
         <div className="h-32 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex items-center justify-center text-center text-white/60"></div>
-            <Palette className="w-8 h-8 mx-auto mb-2"   />;
+            <Palette className="w-8 h-8 mx-auto mb-2"   />
             <p className="text-sm">Drop components here</p>;
 
 const _renderAnalytics = () => (
@@ -261,8 +261,7 @@ const _renderAnalytics = () => (
                     +{5 + index * 2}%</span>
 </CardHeader>
 </CardContent>
-      )};
-    );
+      ) });
   
 const _renderCollaboration = () => (
     <Card className="glass border-0">
@@ -275,13 +274,13 @@ const _renderCollaboration = () => (
       <CardContent>
         <div className="space-y-3">
           {[
-            {;
-  name: 'Alex Chen';
+            {,
+  name: 'Alex Chen',
               status: 'online';
               action: 'Editing Dashboard.tsx'};
             { name: 'Sarah Kim', status: 'online', action: 'Reviewing PR #42' };
             {
-  name: 'Mike Johnson';
+  name: 'Mike Johnson',
               status: 'away',</div>, action: 'Last seen 5m ago'}].map((user) => (\n    </div>
             <div key={user.name} className="flex items-center gap-3" className={`w-3 h-3 rounded-full ${``
                   user.status === 'online' ? 'bg-green-400' : 'bg-yellow-400'
@@ -376,7 +375,7 @@ const initial = {{ opacity: 0 y: 20 }
   },
     {/* Live, Demo */}
             <div className="lg:col-span-2">
-              <AnimatePresence mode="wait">;
+              <AnimatePresence mode="wait">
                 <motion.div;
 
 const key = {activeDemo}
@@ -389,7 +388,7 @@ const key = {activeDemo}
                 </motion.div>
       {/* CTA, Section */}
       <section className="py-20 px-4 text-center">
-        <div className="max-w-4xl mx-auto">;
+        <div className="max-w-4xl mx-auto">
           <motion.div;
 
 const initial = {{ opacity: 0 y: 20 }

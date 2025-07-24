@@ -36,11 +36,11 @@ const data = await response.json();
 }
   // Authentication
   async signUp(email: string, password: string, metadata?: any): Promise<User> {
-    const response = await this.request<{;
+    const response = await this.request<{,
       jwt: string;
       user: any
     }>('/auth/local/register', {
-      method: 'POST';
+      method: 'POST',
       body: JSON.stringify({
         username: email;
         email,
@@ -51,11 +51,11 @@ const data = await response.json();
     return this.mapStrapiUser(response.user);
 }
   async signIn(email: string, password: string): Promise<{ user: User, token: string }> {
-    const response = await this.request<{;
+    const response = await this.request<{,
       jwt: string;
       user: any
     }>('/auth/local', {
-      method: 'POST';
+      method: 'POST',
       body: JSON.stringify({
         identifier: email;
         password
@@ -77,8 +77,8 @@ const data = await response.json();
       return null}
 }
   async updateUser(id: string, data: Partial<User>): Promise<User> {
-    const response = await this.request<any>(`/users/${id}`, {;
-      method: 'PUT';
+    const response = await this.request<any>(`/users/${id}`, {,
+      method: 'PUT',
       body: JSON.stringify({
         username: data.email;
         email: data.email;
@@ -88,8 +88,8 @@ const data = await response.json();
 }
   // Projects
   async createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
-    const response = await this.request<{ data: any }>('/projects', {;
-      method: 'POST';
+    const response = await this.request<{ data: any }>('/projects', {,
+      method: 'POST',
       body: JSON.stringify({
         data: { name: data.name, description: data.description, type: data.type, status: data.status, config: data.config, user: data.userId }})};
     return this.mapStrapiProject((response as any).data);
@@ -105,8 +105,8 @@ const data = await response.json();
 }
 }
   async updateProject(id: string, data: Partial<Project>): Promise<Project> {
-    const response = await this.request<{ data: any }>(`/projects/${id}`, {;
-      method: 'PUT';
+    const response = await this.request<{ data: any }>(`/projects/${id}`, {,
+      method: 'PUT',
       body: JSON.stringify({
         data: { name: data.name, description: data.description, type: data.type, status: data.status, config: data.config }})};
     return this.mapStrapiProject((response as any).data);
@@ -133,7 +133,7 @@ if (options?.orderBy) {
     // Include user relation
     params.append('populate', 'user');
     
-const response = await this.request<{;
+const response = await this.request<{,
       data: any[];
       meta: {
         pagination: {
@@ -152,8 +152,8 @@ const response = await this.request<{;
 }
   // Generic CRUD
   async create<T>(collection: string, data: any): Promise<T> {
-    const response = await this.request<{ data: any }>(`/${collection}`, {;
-      method: 'POST';
+    const response = await this.request<{ data: any }>(`/${collection}`, {,
+      method: 'POST',
       body: JSON.stringify({ data })};
     return this.mapStrapiRecord((response as any).data) as T;
 }
@@ -169,8 +169,8 @@ const response = await this.request<{;
 };
   async update<T>(collection: string, id: string;
   data: any): Promise<T> {
-    const response = await this.request<{ data: any }>(`/${collection}/${id}`, {;
-      method: 'PUT';
+    const response = await this.request<{ data: any }>(`/${collection}/${id}`, {,
+      method: 'PUT',
       body: JSON.stringify({ data })};
     return this.mapStrapiRecord((response as any).data) as T;
 }
@@ -197,7 +197,7 @@ if (options?.orderBy) {
       const sort = `${options.orderBy}:${options.order || 'asc'}`;
       params.append('sort', sort)
 }
-    const response = await this.request<{;
+    const response = await this.request<{,
       data: any[];
       meta: {
         pagination: {
@@ -232,8 +232,8 @@ collection: string;
     const formData = new FormData(), formData.append('files', file), formData.append('path', path);
     formData.append('folder', bucket);
     
-const response = await fetch(`${this.baseUrl}/api/upload`, {;
-      method: 'POST';
+const response = await fetch(`${this.baseUrl}/api/upload`, {,
+      method: 'POST',
       headers: { ...(this.jwt ? { Authorization: `Bearer ${this.jwt }` } : {}); ...(this.apiToken ? { Authorization: `Bearer ${this.apiToken}` } : {})
 };
       body: formData
@@ -257,7 +257,7 @@ const response = await fetch(`${this.baseUrl}/api/upload`, {;
   }
   // Helper methods
   private mapStrapiUser(user: any): User {
-    return {;
+    return {,
       id: user.id.toString();
       email: user.email;
       name: user.username || user.name;
@@ -271,7 +271,7 @@ const response = await fetch(`${this.baseUrl}/api/upload`, {;
   }
 }
   private mapStrapiProject(data: any): Project {
-    const attributes = data.attributes || data, return {;
+    const attributes = data.attributes || data, return {,
       id: data.id.toString();
       userId: attributes.user?.data?.id?.toString() || attributes.user;
       name: attributes.name;
@@ -296,7 +296,7 @@ const response = await fetch(`${this.baseUrl}/api/upload`, {;
 collection: string;
     params: URLSearchParams
   ): Promise<{ data: T[], meta: any }> {
-    const response = await this.request<{;
+    const response = await this.request<{,
       data: any[];
       meta: any
     }>(`/${collection}?${params.toString()}`);
@@ -325,7 +325,7 @@ class StrapiQueryBuilder<T> implements QueryBuilder<T> {
       '<': '$lt',
       '<=': '$lte',
       'in': '$in',
-      'like': '$contains';
+      'like': '$contains'
     };
 
 const strapiOperator = operatorMap[operator];

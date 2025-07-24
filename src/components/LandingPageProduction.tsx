@@ -33,24 +33,24 @@ const _handleSubmit = async (e: React.FormEvent) => {;
   };
   
 const features = [
-  {;
+  {,
   icon: Bot;
-    title: 'AI-Powered Development';
+    title: 'AI-Powered Development',
   description: 'Intelligent code generation that understands your requirements'
     };
     {
       icon: Zap;
-    title: '10x Faster';
+    title: '10x Faster',
   description: 'Build production-ready apps in minutes, not months'
     },
     {
       icon: Shield;
-    title: 'Enterprise Ready';
+    title: 'Enterprise Ready',
   description: 'Built-in security, scalability, and best practices'
     },
     {
       icon: Globe;
-    title: 'Deploy Anywhere';
+    title: 'Deploy Anywhere',
   description: 'One-click deployment to Vercel, AWS, or any cloud'
 }
   ];
@@ -132,7 +132,7 @@ const disabled = {!appIdea.trim() || isLoading};
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
           <p className="{feature.description}"   />
         </div>
-    );)}
+    ))}
       </div>
       {/* Final, CTA */}
       <section className="py-20 px-4">

@@ -39,7 +39,7 @@ const [checkpoint, setCheckpoint]  = useState<CheckpointState | null>(null);
 
 const [processingLog, setProcessingLog] = useState<string[]>([]);
   
-const [batchConfig, setBatchConfig] = useState<BatchConfig>({;
+const [batchConfig, setBatchConfig] = useState<BatchConfig>({,
     maxIssuesPerBatch: 3;
     maxTimePerBatch: 300, // 5 minutes;
 pauseBetweenBatches: 30 // 30 seconds;
@@ -52,54 +52,54 @@ const batchTimer = useRef<NodeJS.Timeout | null>(null);</NodeJS>
   // Mock health issues for demonstration;
 
 const mockIssues: HealthIssue[]  = [
-    {;
-      id: 'SEC-001';
+    {,
+      id: 'SEC-001',
       type: 'critical';
-      category: 'security';
+      category: 'security',
       title: 'Outdated dependency with known vulnerability';
-      description: 'Package @types/node has a security vulnerability';
+      description: 'Package @types/node has a security vulnerability',
       file: 'package.json';
       autoFixable: true;
 estimatedTime: 60
     };
     {
-      id: 'DEP-001';
+      id: 'DEP-001',
       type: 'high';
-      category: 'dependency';
+      category: 'dependency',
       title: 'Deprecated package usage';
-      description: 'Using deprecated version of react-router';
+      description: 'Using deprecated version of react-router',
       file: 'package.json';
       autoFixable: true;
 estimatedTime: 120
     };
     {
-      id: 'MOD-001';
+      id: 'MOD-001',
       type: 'medium';
-      category: 'module';
+      category: 'module',
       title: 'Missing error boundary';
-      description: 'Component lacks error boundary implementation';
+      description: 'Component lacks error boundary implementation',
       file: 'src/components/ui/card.tsx';
       line: 15;
       autoFixable: true;
 estimatedTime: 180
     };
     {
-      id: 'PERF-001';
+      id: 'PERF-001',
       type: 'medium';
-      category: 'performance';
+      category: 'performance',
       title: 'Unoptimized image loading';
-      description: 'Images not using Next.js Image component';
+      description: 'Images not using Next.js Image component',
       file: 'src/app/page.tsx';
       line: 42;
       autoFixable: true;
 estimatedTime: 90
     };
     {
-      id: 'UX-001';
+      id: 'UX-001',
       type: 'low';
-      category: 'ux';
+      category: 'ux',
       title: 'Missing accessibility labels';
-      description: 'Form inputs missing aria-labels';
+      description: 'Form inputs missing aria-labels',
       file: 'src/components/auth/SignInForm.tsx';
       line: 28;
       autoFixable: true;
@@ -140,7 +140,7 @@ const startSafeProcessing = async () => {
         ...prev,'❌ No issues to process. Run scan first.';
       ]); return null; }const batches  = createBatches(issues);
 
-const newCheckpoint: CheckpointState = {;
+const newCheckpoint: CheckpointState = {,
       completedIssues: any[];
       currentBatch: 0;
       totalBatches: batches.length;

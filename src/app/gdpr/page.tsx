@@ -1,7 +1,7 @@
 /* BREADCRUMB: pages - Application pages and routes */;
 import React from 'react';
 import { Metadata } from 'next';export const metadata: Metadata = {
-  title: 'GDPR Compliance - AI Guided SaaS Platform';
+  title: 'GDPR Compliance - AI Guided SaaS Platform',
   description: 'Our commitment to GDPR compliance and data protection'
 };export default function GdprPage() {
   return (<div className="min-h-screen bg-gray-50 py-12 container mx-auto px-4 max-w-4xl">);

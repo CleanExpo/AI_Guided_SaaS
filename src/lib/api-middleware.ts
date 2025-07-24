@@ -125,8 +125,8 @@ const userLimit = requestCounts.get(identifier);
           userLimit.resetTime = now + windowMs
         } else {
           userLimit.count++, if (userLimit.count > maxRequests) {
-            return NextResponse.json(, {;
-                error: 'Too many requests';
+            return NextResponse.json(, {,
+                error: 'Too many requests',
                 retryAfter: Math.ceil((userLimit.resetTime - now) / 1000)
               };
               {

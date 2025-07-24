@@ -22,7 +22,7 @@ onClick: () => void
 
 const illustrations = {
   search: (
-    <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">;
+    <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle, cx="100", cy="100";
 r="80";
 stroke="currentColor";
@@ -163,22 +163,22 @@ opacity="0.4"   />
 export function EmptyState({
   title, description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps), description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps) {
   const sizeClasses = {
-    sm: {;
-  container: 'py-8 px-4';
+    sm: {,
+  container: 'py-8 px-4',
       illustration: 'w-24 h-24 mb-4';
-      title: 'text-lg font-semibold';
+      title: 'text-lg font-semibold',
       description: 'text-sm';
 spacing: 'space-y-3'};
     md: {
-      container: 'py-12 px-6';
+      container: 'py-12 px-6',
       illustration: 'w-32 h-32 mb-6';
-      title: 'text-xl font-semibold';
+      title: 'text-xl font-semibold',
       description: 'text-base';
 spacing: 'space-y-4'};
     lg: {
-      container: 'py-16 px-8';
+      container: 'py-16 px-8',
       illustration: 'w-40 h-40 mb-8';
-      title: 'text-2xl font-semibold';
+      title: 'text-2xl font-semibold',
       description: 'text-lg';
 spacing: 'space-y-6'};
   const currentSize = sizeClasses[size];
@@ -233,16 +233,16 @@ export function NoDataFound({
 
 const action = {
         // onCreate
-          ? {;
-              label: 'Create New';
+          ? {,
+              label: 'Create New',
               onClick: onCreate;
 variant: 'brand'}
           : undefined;
 
 const secondaryAction = {
         // onRefresh
-          ? {;
-              label: 'Refresh';
+          ? {,
+              label: 'Refresh',
 onClick: onRefresh}
           : undefined;
 
@@ -269,16 +269,16 @@ illustration="search";
 
 const action = {
         // onClear
-          ? {;
-              label: 'Clear Search';
+          ? {,
+              label: 'Clear Search',
               onClick: onClear;
 variant: 'outline'}
           : undefined;
 
 const secondaryAction = {
         // onTryAgain
-          ? {;
-              label: 'Try Again';
+          ? {,
+              label: 'Try Again',
 onClick: onTryAgain}
           : undefined;
 
@@ -300,16 +300,16 @@ export function ErrorState({
 
 const action = {
         // onRetry
-          ? {;
-              label: 'Try Again';
+          ? {,
+              label: 'Try Again',
               onClick: onRetry;
 variant: 'brand'}
           : undefined;
 
 const secondaryAction = {
         // onGoBack
-          ? {;
-              label: 'Go Back';
+          ? {,
+              label: 'Go Back',
 onClick: onGoBack}
           : undefined;
 
@@ -334,8 +334,8 @@ illustration="maintenance";
 
 const action = {
         // onNotifyMe
-          ? {;
-              label: 'Notify Me';
+          ? {,
+              label: 'Notify Me',
               onClick: onNotifyMe;
 variant: 'brand'}
           : undefined;
@@ -359,16 +359,16 @@ export function ComingSoon({
 
 const action = {
         // onNotifyMe
-          ? {;
-              label: 'Notify Me';
+          ? {,
+              label: 'Notify Me',
               onClick: onNotifyMe;
 variant: 'brand'}
           : undefined;
 
 const secondaryAction = {
         // onLearnMore
-          ? {;
-              label: 'Learn More';
+          ? {,
+              label: 'Learn More',
 onClick: onLearnMore}
           : undefined;
 
@@ -426,8 +426,8 @@ size="sm";
 
 const action = {
           // onCreate
-            ? {;
-                label: 'Create First Item';
+            ? {,
+                label: 'Create First Item',
                 onClick: onCreate;
 variant: 'brand'}
             : undefined   />

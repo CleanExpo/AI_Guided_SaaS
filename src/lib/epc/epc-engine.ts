@@ -41,13 +41,13 @@ export class EPCEngine {
       Date.now() - this.lastCheckTime < this.cacheExpiry
     ) {
       return this.cachedResult}
-    const result: EPCCheckResult = {;
-      env_check: 'pass';
+    const result: EPCCheckResult = {,
+      env_check: 'pass',
       missing: any[];
     outdated: any[];
     invalid: any[];
     mismatched: any[];
-    action: 'allow_inference';
+    action: 'allow_inference',
       recommendations: any[];
     score: 100
     };
@@ -92,12 +92,12 @@ if (result.missing.length > 0 || result.invalid.length > 0) {
       return result;
 } catch (error) { console.error('EPC Engine, error:', error);
         return {
-        env_check: 'fail';
+        env_check: 'fail',
         missing: any[];
     outdated: any[];
     invalid: any[];
     mismatched: any[];
-    action: 'block_inference';
+    action: 'block_inference',
         recommendations: [
           'Failed to perform environment check. Please check your configuration.'];
         score: 0
@@ -226,12 +226,12 @@ key: string;
   async quickCheck(): Promise<any> {
     const result = await this.performPreflightCheck(), if (result.env_check === 'pass') {
       return { status: 'ready', message: 'Environment ready for inference' }} else if (result.env_check === 'warning') {
-      return {;
-        status: 'warning';
+      return {,
+        status: 'warning',
         message: `${result.outdated.length + result.mismatched.length} warnings`
 }} else {
       return {
-        status: 'error';
+        status: 'error',
         message: `${result.missing.length + result.invalid.length} errors`
   }
 }

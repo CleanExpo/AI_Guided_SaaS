@@ -96,9 +96,9 @@ export interface PerformanceMetrics {
 export class AgentRefinerAgent extends Agent {
   constructor() {
     super({
-      id: 'agent-refiner-agent';
+      id: 'agent-refiner-agent',
       name: 'Agent Refiner';
-      role: 'Optimize and refine AI agent configurations and collaboration';
+      role: 'Optimize and refine AI agent configurations and collaboration',
       description:
         'Expert in agent design, specialization, and multi-agent orchestration. Refines agent teams for optimal performance and collaboration.',
       capabilities: [
@@ -180,7 +180,7 @@ const _recommendations = await this.generateRecommendations(
         // performanceMetrics;
       );
       
-const result: AgentRefinement = {;
+const result: AgentRefinement = {,
         originalAgents: currentAgents;
         refinedAgents,
         improvements,
@@ -207,7 +207,7 @@ const result: AgentRefinement = {;
 }
 }
   private async parseInput(input: string): Promise<any> {;
-    const _parsePrompt = `Parse this input to extract current agent configurations and, requirements: ``, Input: "${input}";
+    const _parsePrompt = `Parse this input to extract current agent configurations and, requirements: ``, Input: "${input}",
   Extract:
 1. Current agents with their configurations
 2. Requirements for the agent system
@@ -215,7 +215,7 @@ const result: AgentRefinement = {;
 If agents are not explicitly defined, infer reasonable defaults.
 Format as JSON with arrays for each category.`;
 
-const response = await generateAIResponse(parsePrompt, {;
+const response = await generateAIResponse(parsePrompt, {,
       model: this.config.model;
     temperature: 0.2;
     responseFormat: 'json'
@@ -235,7 +235,7 @@ Evaluate:
 6. Specialization opportunities;
 Format as detailed JSON analysis.`;
 
-const response = await generateAIResponse(analysisPrompt, {;
+const response = await generateAIResponse(analysisPrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -259,7 +259,7 @@ Determine:
 Consider the agent's role, capabilities, and tools.;
 Format as JSON PerformanceProfile.`;
 
-const response = await generateAIResponse(profilePrompt, {;
+const response = await generateAIResponse(profilePrompt, {,
         model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -284,7 +284,7 @@ Suggest improvements, for:
 5. Specialization opportunities;
 Format as JSON array of AgentImprovement objects.`;
 
-const response = await generateAIResponse(improvementPrompt, {;
+const response = await generateAIResponse(improvementPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -313,7 +313,7 @@ Create a refined version, with:
 5. Refined system prompt
 Format as JSON RefinedAgent object.`;
 
-const response = await generateAIResponse(refinePrompt, {;
+const response = await generateAIResponse(refinePrompt, {,
         model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -325,7 +325,7 @@ const response = await generateAIResponse(refinePrompt, {;
   private async designCollaboration(agents: RefinedAgent[], requirements: string[];
   constraints: string[]): Promise<any> {
     const _collaborationPrompt = `Design optimal collaboration strategy for these, agents: Refined, Agents:``, ${JSON.stringify(
-  agents.map((a) => ({;
+  agents.map((a) => ({,
     id: a.id;
     name: a.name;
     role: a.role;
@@ -347,7 +347,7 @@ Design:
 Consider efficiency, scalability, and fault tolerance.
 Format as JSON CollaborationStrategy object.`;
 
-const response = await generateAIResponse(collaborationPrompt, {;
+const response = await generateAIResponse(collaborationPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -371,7 +371,7 @@ Calculate:
 5. Scalability assessment;
 Format as JSON PerformanceMetrics object.`;
 
-const response = await generateAIResponse(metricsPrompt, {;
+const response = await generateAIResponse(metricsPrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -391,7 +391,7 @@ Provide 5-7 specific recommendations, for:
 4. Optimization opportunities
 5. Future enhancements`;
 
-const response = await generateAIResponse(recommendPrompt, {;
+const response = await generateAIResponse(recommendPrompt, {,
       model: this.config.model;
     temperature: 0.4
     }};

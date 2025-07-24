@@ -104,17 +104,17 @@ const getStatusColor = (status: string) => {
       default: return 'bg-gray-100 text-gray-800'}};
   
 const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {;
-      style: 'currency';
+    return new Intl.NumberFormat('en-US', {,
+      style: 'currency',
 currency: 'USD'
     }).format(amount)
 };
   
 const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {;
-      year: 'numeric';
+    return new Intl.DateTimeFormat('en-US', {,
+      year: 'numeric',
       month: 'short';
-      day: 'numeric';
+      day: 'numeric',
       hour: '2-digit';
 minute: '2-digit'
     }).format(new Date(date))
@@ -290,7 +290,7 @@ const value = {userFilter}
                             <div className="flex items-center ml-4">
         <div className="text-sm font-medium text-gray-900">
                                   {user.name}</div>
-                                <div className="text-sm text-gray-500">;
+                                <div className="text-sm text-gray-500">
 ID: { user.id }</div>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="text-sm text-gray-900">{user.email}</div>

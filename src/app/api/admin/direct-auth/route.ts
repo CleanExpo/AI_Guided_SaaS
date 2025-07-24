@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        const authStatus = {;
+        const authStatus = {,
             adminEnabled: process.env.ENABLE_ADMIN_PANEL === 'true';
             hasAdminPassword: !!process.env.ADMIN_PASSWORD;
             timestamp: new Date().toISOString()

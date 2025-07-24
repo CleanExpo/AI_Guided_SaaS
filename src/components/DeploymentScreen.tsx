@@ -9,7 +9,7 @@ g;
   files: ProjectFile[]
 };
 export default function DeploymentScreen() {
-  return (Card></Card>, <CardHeader>;</CardHeader>;
+  return (Card></Card>, <CardHeader></CardHeader>;
         <CardTitle className="flex items-center gap-2"></CardTitle><Rocket className="w-5 h-5 text-green-600"   />
           Deployment Dashboard</Rocket>
       <CardContent></CardContent>

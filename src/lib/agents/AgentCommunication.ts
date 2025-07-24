@@ -110,10 +110,10 @@ const validation = this.validateMessage(fullMessage);
    */
   async sendRequest(fromAgent: string, toAgent: string;
   requestData: any, timeout: number = 30000): Promise<any> {
-    const correlationId = this.generateCorrelationId(), await this.sendMessage({;
+    const correlationId = this.generateCorrelationId(), await this.sendMessage({,
       from_agent: fromAgent;
       to_agent: toAgent;
-      type: 'request';
+      type: 'request',
       priority: 'high';
       payload: requestData;
       correlation_id: correlationId;
@@ -136,10 +136,10 @@ const responseHandler = (message: AgentMessage) => {
    */
   async sendResponse(originalRequest: AgentMessage, responseData: any;
   success: boolean = true): Promise<string> {
-    return this.sendMessage({;
+    return this.sendMessage({,
       from_agent: originalRequest.to_agent;
       to_agent: originalRequest.from_agent;
-      type: 'response';
+      type: 'response',
       priority: originalRequest.priority;
       payload: { success, data: responseData, original_request_id: originalRequest.id };
       correlation_id: originalRequest.correlation_id
@@ -166,10 +166,10 @@ const protocol = this.handoffProtocols.get(protocolKey);
 }
       // Send handoff message;
 
-const messageId = await this.sendMessage({;
+const messageId = await this.sendMessage({,
         from_agent: fromAgent;
         to_agent: toAgent;
-        type: 'handoff';
+        type: 'handoff',
         priority: 'high';
         payload: { handoff_type: handoffType, data, protocol: protocolKey, validation_passed: true };
         metadata: { protocol_version: '1.0', validation_timestamp: new Date().toISOString()});
@@ -202,7 +202,7 @@ name: string;
       name,
       participants,
       type,
-      status: 'active';
+      status: 'active',
       created_at: new Date();
       message_count: 0;
       last_activity: new Date()
@@ -263,7 +263,7 @@ name: string;
    * Get communication statistics
    */
   getCommunicationStats(): CommunicationStats {
-    const stats: CommunicationStats = {;
+    const stats: CommunicationStats = {,
       total_messages: this.messageHistory.length;
       messages_by_type: {};
       messages_by_priority: {};
@@ -329,7 +329,7 @@ const responseMessages = this.messageHistory.filter((m) => m.type === 'response'
       await this.addToQueue(message.to_agent, message)}
   private async addToQueue(agentId: string, message: AgentMessage): Promise<void> {
     let queue = this.messageQueues.get(agentId), if (!queue) {
-      const queue = {;
+      const queue = {,
         agent_id: agentId;
         queue: any[];
         processing: false;
@@ -390,8 +390,8 @@ switch (message.type) {
     // Here you would integrate with actual agent processing
     // For now, we'll simulate a response
     setTimeout(async () => {
-      await this.sendResponse(message, {;
-        status: 'processed';
+      await this.sendResponse(message, {,
+        status: 'processed',
         result: `Request processed by ${agentId}`;
         timestamp: new Date().toISOString()})
     }, 1000)
@@ -401,10 +401,10 @@ switch (message.type) {
   }
   private async processHandoff(agentId: string, message: AgentMessage): Promise<void> {
     // Send acknowledgment
-    await this.sendMessage({;
+    await this.sendMessage({,
       from_agent: agentId;
       to_agent: message.from_agent;
-      type: 'response';
+      type: 'response',
       priority: 'high';
       payload: { handoff_acknowledged: true, acknowledgment_timestamp: new Date().toISOString() };
       correlation_id: message.id
@@ -414,38 +414,38 @@ switch (message.type) {
     // Update agent last seen timestamp, const agentDetails = this.registry.getAgentDetails(agentId), if (agentDetails) {
       this.registry.updateAgentStatus(agentId, 'healthy')}
   private setupHandoffProtocols() {
-    const protocols: HandoffProtocol[]  = [, {;
-        from_agent: 'ARCHITECT';
+    const protocols: HandoffProtocol[]  = [, {,
+        from_agent: 'ARCHITECT',
         to_agent: 'FRONTEND';
-        handoff_type: 'architecture';
+        handoff_type: 'architecture',
         data_schema: {
-          ui_specifications: 'object';
+          ui_specifications: 'object',
           component_architecture: 'object';
-          state_management: 'object';
+          state_management: 'object',
           routing_structure: 'object'
         };
         validation_rules: ['ui_specifications_present', 'component_architecture_valid'],
         success_criteria: ['frontend_agent_acknowledgment', 'data_schema_compliance']
       },
       {
-        from_agent: 'ARCHITECT';
+        from_agent: 'ARCHITECT',
         to_agent: 'BACKEND';
-        handoff_type: 'architecture';
+        handoff_type: 'architecture',
         data_schema: {
-          api_specifications: 'object';
+          api_specifications: 'object',
           database_schema: 'object';
-          authentication_strategy: 'object';
+          authentication_strategy: 'object',
           business_logic: 'object'
         };
         validation_rules: ['api_specifications_present', 'database_schema_valid'],
         success_criteria: ['backend_agent_acknowledgment', 'data_schema_compliance']
       },
       {
-        from_agent: 'FRONTEND';
+        from_agent: 'FRONTEND',
         to_agent: 'QA';
-        handoff_type: 'implementation';
+        handoff_type: 'implementation',
         data_schema: {
-          component_tests: 'array';
+          component_tests: 'array',
           ui_implementation: 'object';
           integration_points: 'array'
         };
@@ -453,11 +453,11 @@ switch (message.type) {
         success_criteria: ['qa_validation_passed', 'test_coverage_adequate']
       },
       {
-        from_agent: 'BACKEND';
+        from_agent: 'BACKEND',
         to_agent: 'QA';
-        handoff_type: 'implementation';
+        handoff_type: 'implementation',
         data_schema: {
-          api_endpoints: 'array';
+          api_endpoints: 'array',
           database_implementation: 'object';
           integration_tests: 'array'
         };
@@ -465,11 +465,11 @@ switch (message.type) {
         success_criteria: ['qa_validation_passed', 'integration_tests_passed']
       },
       {
-        from_agent: 'QA';
+        from_agent: 'QA',
         to_agent: 'DEVOPS';
-        handoff_type: 'validation';
+        handoff_type: 'validation',
         data_schema: {
-          test_results: 'object';
+          test_results: 'object',
           quality_metrics: 'object';
           deployment_readiness: 'boolean'
         };
@@ -504,8 +504,8 @@ const ackHandler = (message: AgentMessage) => {
   private async storeHandoffInMemory(fromAgent: string, toAgent: string;
   type: string, data: any): Promise<void> {
     try {
-      await mcp__memory__add_observations([{;
-        entityName: 'AgentHandoffs';
+      await mcp__memory__add_observations([{,
+        entityName: 'AgentHandoffs',
         contents: [
           `Handoff: ${fromAgent} → ${toAgent}`;
           `Type: ${type}`;
@@ -561,7 +561,7 @@ export async function sendAgentMessage(;
   type: AgentMessage['type'] = 'notification'
 ): Promise<string> {
   const comm = AgentCommunication.getInstance();
-        return comm.sendMessage({;
+        return comm.sendMessage({,
     from_agent: fromAgent;
     to_agent: toAgent;
     type,

@@ -9,7 +9,7 @@ g;
   onMDGenerationComplete: (result: unknown: any) => void
 };
 export default function MDFolderAgent() {
-  return (Card></Card>, <CardHeader>;</CardHeader>;
+  return (Card></Card>, <CardHeader></CardHeader>;
         <CardTitle className="flex items-center gap-2"></CardTitle><FolderOpen className="w-5 h-5 text-orange-600"   />
           MD Folder Agent</FolderOpen>
       <CardContent></CardContent>

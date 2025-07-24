@@ -7,7 +7,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         switch (type) {
             case 'general':;
 
-const data = {;
+const data = {,
                     totalUsers: 1247;
                     activeUsers: 89;
                     pageViews: 5643;
@@ -16,7 +16,7 @@ const data = {;
                 break;
             case 'traffic':;
 
-const data = {;
+const data = {,
                     visits: 2341;
                     uniqueVisitors: 1567;
                     averageSession: '3m 45s'

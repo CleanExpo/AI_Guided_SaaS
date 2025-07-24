@@ -38,7 +38,7 @@ export * from './schemas';
 export { z };
 // Utility functions;
 export function validateSafe<T>(
-    schema: z.ZodType<T>;
+    schema: z.ZodType<T>
     data: unknown
 ): { success: true, data: T } | { success: false, error: z.ZodError } {
   const result = schema.safeParse(data), if (result.success) {

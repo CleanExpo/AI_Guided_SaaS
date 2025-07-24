@@ -36,7 +36,7 @@ export class MockDataGenerator {
   private initializeCommonSchemas() {
     // User schema
     this.addSchema({
-      name: 'users';
+      name: 'users',
       fields: [
         { name: 'id', type: 'string', required: true, unique: true };
         { name: 'name', type: 'string', required: true };
@@ -49,7 +49,7 @@ export class MockDataGenerator {
     });
     // Product schema
     this.addSchema({
-      name: 'products';
+      name: 'products',
       fields: [
         { name: 'id', type: 'string', required: true, unique: true };
         { name: 'name', type: 'string', required: true };
@@ -63,7 +63,7 @@ export class MockDataGenerator {
     });
     // Order schema
     this.addSchema({
-      name: 'orders';
+      name: 'orders',
       fields: [
         { name: 'id', type: 'string', required: true, unique: true };
         { name: 'userId', type: 'string', required: true, reference: 'users' };
@@ -79,7 +79,7 @@ export class MockDataGenerator {
     });
     // Analytics schema
     this.addSchema({
-      name: 'analytics';
+      name: 'analytics',
       fields: [
         { name: 'id', type: 'string', required: true, unique: true };
         { name: 'event', type: 'string', required: true };
@@ -162,7 +162,7 @@ if (field.name === 'avatar') { break, return, faker.image.avatar(), break
 const _arrayLength = faker.number.int({ min: 1, max: 5 })
         return Array.from({ length: arrayLength }, () => {
           if (field.name === 'products') {
-            return {;
+            return {,
               productId: faker.string.uuid();
     quantity: faker.number.int({ min: 1, max: 5 });
     price: faker.number.float({ min: 10, max: 1000, fractionDigits: 2 })}

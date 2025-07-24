@@ -21,12 +21,12 @@ if (file.size > maxSize) {
     // File upload logic would go here;
     // This is a placeholder for actual file upload to storage;
 
-const upload = {;
-      id: `upload_${Date.now()}`;
+const upload = {,
+      id: `upload_${Date.now()}`,
       filename: file.name;
       size: file.size;
       type: file.type;
-      url: `https://example.com/uploads/${Date.now()}_${file.name}`;
+      url: `https://example.com/uploads/${Date.now()}_${file.name}`,
       timestamp: new Date().toISOString();
       status: 'completed'
     };
@@ -43,9 +43,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 };
     // Simulate getting upload status;
 
-const upload = {;
+const upload = {,
       id: uploadId;
-      status: 'completed';
+      status: 'completed',
       url: `https://example.com/uploads/${uploadId}.png`;
       timestamp: new Date().toISOString()
 };

@@ -96,9 +96,9 @@ export interface QualityPlan {
 export class ProjectManagerAgent extends Agent {
   constructor() {
     super({
-      id: 'project-manager-agent';
+      id: 'project-manager-agent',
       name: 'Project Manager';
-      role: 'Create and manage project plans';
+      role: 'Create and manage project plans',
       description:
         'Expert in project planning, resource allocation, timeline management, and risk mitigation. Creates comprehensive project plans from requirements.',
       capabilities: [
@@ -181,7 +181,7 @@ const qualityPlan = await this.defineQualityPlan(
       this.observe('Defined quality assurance plan', qualityPlan);
       // Compile final project plan;
 
-const projectPlan: ProjectPlan = {;
+const projectPlan: ProjectPlan = {,
         projectName: projectScope.name;
     projectDescription: projectScope.description;
         timeline,
@@ -225,7 +225,7 @@ Provide:
 3. 3-5 specific, measurable objectives;
 Format as JSON.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -245,7 +245,7 @@ Consider:
 - Project phases with dates and deliverables
 Format as JSON with a Timeline structure.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -265,7 +265,7 @@ Create 4-6 major milestones, with:
 - Target dates aligned with phases;
 Format as JSON array of Milestone objects.`;
 
-const _response  = await generateAIResponse(prompt, {;
+const _response  = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -289,7 +289,7 @@ Break down the work into packages, that:
 - Assign to appropriate team roles;
 Format as JSON array of WorkPackage objects.`;
 
-const _response  = await generateAIResponse(prompt, {;
+const _response  = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -303,7 +303,7 @@ const packages = JSON.parse(response);
 }
   private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise<any> {
     const _prompt = `Plan resource allocation for the, project: Work, Packages:``, ${JSON.stringify(
-  workPackages.map((wp) => ({;
+  workPackages.map((wp) => ({,
     name: wp.name;
     estimatedHours: wp.estimatedHours;
     skills: wp.assignedTo
@@ -320,7 +320,7 @@ Define:
 Consider optimal team size and skill distribution.
 Format as JSON ResourcePlan object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -339,7 +339,7 @@ For each risk, provide:
 - Owner (role responsible);
 Format as JSON array of RiskMitigation objects.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -357,7 +357,7 @@ Define:
 4. Escalation path;
 Format as JSON CommunicationPlan object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -378,7 +378,7 @@ Include:
 5. Quality metrics to track;
 Format as JSON QualityPlan object.`;
 
-const _response = await generateAIResponse(prompt, {;
+const _response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'

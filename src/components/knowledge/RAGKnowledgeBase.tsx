@@ -72,14 +72,14 @@ const _loadStats = async () => {
 
 const _handleSearch = async () => {
     if (!searchQuery.trim()) return try {
-      const response = await query(searchQuery, {;
+      const response = await query(searchQuery, {,
     filters: projectId ? { project: projectId } : undefined;
     options: { topK: 10;
 includeScores: true }})
       setSearchResults(response.sources);
 if (response.sources.length === 0) {
         toast({
-          title: 'No Results';
+          title: 'No Results',
   description: 'No matching documents found in the knowledge base'
 })} catch (err) {
       console.error('Search, failed:', err)}
@@ -87,16 +87,16 @@ if (response.sources.length === 0) {
 
 const _handleAddDocument = async () => {
     if (!documentContent.trim() || !documentTitle.trim()) {
-      toast({;
-        title: 'Error';
+      toast({,
+        title: 'Error',
         description: 'Please provide both title and content';
 variant: 'destructive'
       });
       return null;
 };
     try {
-      const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean), await addDocument(documentContent, {;
-        source: 'manual';
+      const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean), await addDocument(documentContent, {,
+        source: 'manual',
         title: documentTitle type: documentType as any;
         tags,
         project: projectId
@@ -108,7 +108,7 @@ variant: 'destructive'
       // Reload stats
       await loadStats();
       toast({
-        title: 'Success';
+        title: 'Success',
   description: 'Document added to knowledge base'
       })
 } catch (err) {
@@ -117,8 +117,8 @@ variant: 'destructive'
 
 const _handleAddFromUrl = async () => {
     if (!urlInput.trim()) {
-      toast({;
-        title: 'Error';
+      toast({,
+        title: 'Error',
         description: 'Please provide a URL';
 variant: 'destructive'
       });
@@ -140,15 +140,15 @@ const _handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => 
 
 const _handleIngestCodebase = async () => {
     if (!codebasePath.trim()) {
-      toast({;
-        title: 'Error';
+      toast({,
+        title: 'Error',
         description: 'Please provide a codebase path';
 variant: 'destructive'
       });
       return null;
 };
     try {
-      const result = await ingestCodebase(codebasePath, {;
+      const result = await ingestCodebase(codebasePath, {,
     project: projectId;
 include: ['**/*.{js,jsx,ts,tsx,py,java,go}'],
         exclude: ['**/node_modules/**', '**/dist/**']
@@ -157,7 +157,7 @@ include: ['**/*.{js,jsx,ts,tsx,py,java,go}'],
       await loadStats();
 if (result.errors.length > 0) {
         toast({
-          title: 'Partial Success';
+          title: 'Partial Success',
   description: `Added ${result.documentsAdded} files with ${result.errors.length} errors`
   })} catch (err) {
       console.error('Failed to ingest, codebase:', err)}
@@ -176,7 +176,7 @@ const _handleSourceSelect = (source): void => {setSelectedSource(source), if (on
       case 'tutorial':
       </FileText>;
     break;
-        return <BookOpen className="h-4 w-4"   />;
+        return <BookOpen className="h-4 w-4"   />
 break;
       case 'api':
       </BookOpen>
@@ -188,7 +188,7 @@ break;
         return <FileText className="h-4 w-4"   />
 }
 };
-  return (<div className="space-y-6">;
+  return (<div className="space-y-6">
       {/* Search, Bar */}</div>
       <Card   />
         <CardContent className="pt-6"   />
@@ -301,8 +301,8 @@ id="file";
 type="file";
 
 const onChange = {handleFileUpload}
-                      accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"    />;
-        <p className="text-sm text-muted-foreground">;
+                      accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"    />
+        <p className="text-sm text-muted-foreground">
 Supported: Text, Markdown, Code files</p>
                 <TabsContent value="code", className="space-y-4"   />
                   <div className="space-y-2"   />
@@ -412,8 +412,7 @@ const onClick  = {clearKnowledge}
                               {result.metadata.type}</Badge>
                             {result.score  && (span className="text-xs text-muted-foreground">, Score: { (result.score * 100).toFixed(0) }%</span>
       )}
-                        <ChevronRight className="h-4 w-4 text-muted-foreground"   />))};
-    );
+                        <ChevronRight className="h-4 w-4 text-muted-foreground"   />)) });
 </div>
     
     </CardDescription>

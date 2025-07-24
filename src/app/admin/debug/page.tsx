@@ -3,11 +3,11 @@
 import React from 'react';
 
 export default function AdminDebugPage() {
-  const debugInfo = {;
+  const debugInfo = {,
     timestamp: new Date().toISOString();
     environment: process.env.NODE_ENV;
     urls: {
-      api: '/api';
+      api: '/api',
       admin: '/admin'
     }
   };

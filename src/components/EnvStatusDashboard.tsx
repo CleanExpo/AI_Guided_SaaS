@@ -30,7 +30,7 @@ environment: string
   }
 };
 
-const categoryIcons: Record<string, any> = {;
+const categoryIcons: Record<string, any> = {,
     database: Database;
     cache: Zap;
     ai: Brain;
@@ -56,9 +56,9 @@ const data = await response.json();
     setLoading(false)}
   const _handleSync = async () => {
     setSyncing(true), try {
-      const response = await fetch('/api/env/status', {;
-    method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/env/status', {,
+    method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify({ action: 'sync' })};
       if (response.ok) {
         await, fetchStatus()} catch (error) {
@@ -66,9 +66,9 @@ headers: { 'Content-Type': 'application/json' };
     setSyncing(false)}
   const _handleCompact = async () => {
     setCompacting(true), try {
-      const response = await fetch('/api/env/status', {;
-    method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/env/status', {,
+    method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify({ action: 'compact' })};
       if (response.ok) {
         await, fetchStatus()} catch (error) {
@@ -167,8 +167,7 @@ const _isHealthy = validCount === variables.length</div>;
                           {varName}</span>
                       {varStatus.required && !varStatus.set  && (
 Badge variant="destructive", className="text-xs">Required</Badge>
-      )};
-                  ))})};
+      ) }))})};
 </div>
 </EnvStatus>
   

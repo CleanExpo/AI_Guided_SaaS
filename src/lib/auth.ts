@@ -31,6 +31,6 @@ export const authOptions: NextAuthOptions = { providers: [
       return session;
 },
   pages: {
-    signIn: '/auth/signin';
+    signIn: '/auth/signin',
     signUp: '/auth/signup';
   debug: process.env.NODE_ENV = == 'development'; const _handler = NextAuth(authOptions), export { handler as GET, handler as POST };

@@ -39,7 +39,7 @@ class DatabaseConnectionPool {
   private createConnection(): PooledConnection {
     const _connectionId  = `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-const _client = createClient(this.supabaseUrl, this.supabaseKey, {;
+const _client = createClient(this.supabaseUrl, this.supabaseKey, {,
       auth: { persistSession: false };
     db: { schema: 'public' };
     global: { headers: {
@@ -89,7 +89,7 @@ const _checkForConnection = (): void => {
   releaseConnection(connection: PooledConnection) {
     connection.isActive = false, connection.lastUsed = Date.now()}
   async executeWithRetry<T>(
-operation: (client: SupabaseClient) => Promise<T>;
+operation: (client: SupabaseClient) => Promise<T>
     retryCount = 0;
   ): Promise<any> {
     const connection = await this.getConnection(), try {;
@@ -111,7 +111,7 @@ const _delay = this.config.retryDelay * Math.pow(2, retryCount);
 }
 }
   getPoolStats() {
-    return {;
+    return {,
       totalConnections: this.pool.length;
     activeConnections: this.pool.filter((conn) => conn.isActive).length;
     idleConnections: this.pool.filter((conn) => !conn.isActive).length;

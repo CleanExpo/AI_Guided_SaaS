@@ -36,8 +36,8 @@ export function AISupportChat({
   const [isOpen, setIsOpen] = useState<any>(false);
   const [isMinimized, setIsMinimized] = useState<any>(false);
   const [messages, setMessages] = useState<Message[]>([
-  {;
-  id: '1';
+  {,
+  id: '1',
       role: 'system';
 content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?',
 </Message>;
@@ -61,9 +61,9 @@ const _chatContainerRef = useRef<HTMLDivElement>(null);
 const _scrollToBottom  = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })};
 
 const _handleSendMessage = async () => {
-    if (!input.trim() || isLoading) return const userMessage: Message = {;
+    if (!input.trim() || isLoading) return const userMessage: Message = {,
   id: Date.now().toString();
-    role: 'user';
+    role: 'user',
       content: input;
 timestamp: new Date()}
     setMessages(prev => [...prev, userMessage]);
@@ -76,18 +76,18 @@ timestamp: new Date()}
 const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
       // Send to AI for enhanced response;
 
-const response = await fetch('/api/support/chat', {;
-        method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+const response = await fetch('/api/support/chat', {,
+        method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify({
           message: input;
     context: { userId, projectId, documentationResults: docResults.slice(0, 3); availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title });
     conversationHistory: messages.slice(-5)})}
       const data  = await response.json();
 
-const assistantMessage: Message = {;
+const assistantMessage: Message = {,
         id: (Date.now() + 1).toString();
-    role: 'assistant';
+    role: 'assistant',
         content: data.response;
     timestamp: new Date();
     metadata: {
@@ -101,7 +101,7 @@ actionButtons: data.actionButtons
 } catch (error) {
       console.error('Failed to get AI, response:', error), const errorMessage: Message = {
   id: (Date.now() + 1).toString();
-    role: 'assistant';
+    role: 'assistant',
 content: 'I apologize, but I encountered an error. Please try again or check the documentation.',
         timestamp: new Date()}
       setMessages(prev => [...prev, errorMessage])
@@ -116,15 +116,15 @@ content: 'I apologize, but I encountered an error. Please try again or check the
 
 const categories = ['getting-started', 'api-reference', 'tutorials', 'troubleshooting'];
         
-const docsMessage: Message = {;
+const docsMessage: Message = {,
   id: Date.now().toString();
-    role: 'assistant';
+    role: 'assistant',
           content: 'Here are the main documentation, categories: ';
           timestamp: new Date();
     metadata: {
   actionButtons: categories.map((cat) => ({
   label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase();
-              action: 'browse-category';
+              action: 'browse-category',
 data: { category: cat }}))}
         setMessages(prev => [...prev, docsMessage]);
         // break
@@ -133,15 +133,15 @@ data: { category: cat }}))}
 const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
     break;
         
-const tutorialMessage: Message = {;
+const tutorialMessage: Message = {,
           id: Date.now().toString();
-    role: 'assistant';
+    role: 'assistant',
           content: 'Here are some recommended tutorials for, you: ';
           timestamp: new Date();
 metadata: {
   suggestedTutorials: tutorials.slice(0, 3).map((t) => t.id),
             actionButtons: tutorials.slice(0, 3).map((t) => ({
-              label: `Start: ${t.title}`;
+              label: `Start: ${t.title}`,
 action: 'start-tutorial';
     data: { tutorialId: t.id }}))}
         setMessages(prev => [...prev, tutorialMessage]);
@@ -152,9 +152,9 @@ action: 'start-tutorial';
         // break
       case 'get-help':;
 
-const helpMessage: Message = {;
+const helpMessage: Message = {,
           id: Date.now().toString();
-    role: 'assistant';
+    role: 'assistant',
           content: 'I can help you, with: \n\n• Finding documentation\n• Starting tutorials\n• Troubleshooting errors\n• Understanding features\n• Getting code examples\n\nWhat would you like help with?', timestamp: new Date()}
         setMessages(prev => [...prev, helpMessage]);
         // break
@@ -164,16 +164,16 @@ const helpMessage: Message = {;
       case 'browse-category':, const sections = documentationSystem.getSectionsByCategory(data.category), break
     break
 }
-        const categoryMessage: Message = {;
+        const categoryMessage: Message = {,
   id: Date.now().toString();
-    role: 'assistant';
+    role: 'assistant',
 content: `Here are the ${data.category} documentation; sections: `;
   timestamp: new Date();
     metadata: {
             suggestedDocs: sections.map((s) => s.id);
     actionButtons: sections.slice(0, 5).map((s) => ({
               label: s.title;
-    action: 'open-doc';
+    action: 'open-doc',
 data: { sectionId: s.id }}))}
         setMessages(prev => [...prev, categoryMessage]);
         // break
@@ -201,14 +201,14 @@ const _section = documentationSystem.getSection(data.sectionId);
   const _handleSearch = async () => {;
     if (!searchQuery.trim()) return null; const results = await documentationSystem.searchDocumentation(searchQuery); const searchMessage: Message = {
   id: Date.now().toString();
-    role: 'assistant';
+    role: 'assistant',
 content: `Found ${results.length} results for "${searchQuery}":`;
 timestamp: new Date();
     metadata: {
         suggestedDocs: results.slice(0, 5).map((r) => r.sectionId),
         actionButtons: results.slice(0, 5).map((r) => ({
           label: r.title;
-    action: 'open-doc';
+    action: 'open-doc',
 data: { sectionId: r.sectionId }}))}
     setMessages(prev => [...prev, searchMessage]);
     setSearchQuery('')
@@ -241,7 +241,7 @@ const ref = {chatContainerRef}
 </div>
             <div>
               <h3 className="font-semibold text-sm">AI Support {!isMinimized  && (p className="text-xs text-muted-foreground">Always here to help</p>
-          <div className="flex gap-1">;
+          <div className="flex gap-1">
             <Button, size="sm", variant="ghost";
 
 const onClick = {() => setIsMinimized(!isMinimized)}
@@ -261,7 +261,7 @@ const onClick = {() => setIsOpen(false)}
         {!isMinimized  && (React.Fragment>{/* Search Bar */}
             <div className="p-3 border-b flex gap-2">
         <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"   />;
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"   />
                   <input;
 type="text";
 placeholder="Search documentation...";
@@ -310,8 +310,7 @@ const value  = {searchQuery}
                               ></button>
                                 📄 {doc.title}</button>
                             ) : null
-})};
-                      )},
+}) })},
     {/* Action, buttons */},
     {message.metadata?.actionButtons && message.metadata.actionButtons.length > 0  && (div className="flex flex-wrap gap-2 max-w-[85%]">
                           {message.metadata.actionButtons.map((button, index) => (\n    <Button, const key = {index}

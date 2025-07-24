@@ -9,7 +9,7 @@ g;
   onDocumentationComplete: (result: unknown: any) => void
 };
 export default function AdvancedDocumentationDashboard() {
-  return (Card></Card>, <CardHeader>;</CardHeader>;
+  return (Card></Card>, <CardHeader></CardHeader>;
         <CardTitle className="flex items-center gap-2"></CardTitle><BookOpen className="w-5 h-5 text-green-600"   />
           Advanced Documentation Dashboard</BookOpen>
       <CardContent></CardContent>

@@ -127,7 +127,7 @@ logInferenceComplete(requestId: string;
    * Log specific events
    */
   private logEvent(eventType: string, entry: TelemetryEntry) {
-    const _event = {;
+    const _event = {,
       event: eventType;
     timestamp: new Date().toISOString();
     requestId: entry.requestId;
@@ -159,7 +159,7 @@ const _eventLog = path.join(
    * Get telemetry statistics
    */
   async getStatistics(timeRange?: { start: Date, end: Date }): Promise<any> {
-    const stats = {;
+    const stats = {,
       totalInferences: 0;
     blocked: 0;
     failed: 0;

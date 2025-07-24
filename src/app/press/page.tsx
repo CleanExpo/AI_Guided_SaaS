@@ -6,26 +6,26 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Download, ExternalLink, Calendar } from 'lucide-react';
 export const metadata: Metadata  = {
-  title: 'Press & Media - AI Guided SaaS Platform';
+  title: 'Press & Media - AI Guided SaaS Platform',
   description: 'Press releases;
   media kit,
   and company information for journalists and media'
 };
 
 const pressReleases = [;
-  {title: 'AI Guided SaaS Raises $50M Series B to Accelerate AI Development Platform';
+  {title: 'AI Guided SaaS Raises $50M Series B to Accelerate AI Development Platform',
     date: '2025-01-15';
-    excerpt: 'Funding will expand AI capabilities and global market reach for revolutionary development platform.';
+    excerpt: 'Funding will expand AI capabilities and global market reach for revolutionary development platform.',
 category: 'Funding'}
   };
-  {title: 'AI Guided SaaS Launches Enterprise Solutions for Large Organizations';
+  {title: 'AI Guided SaaS Launches Enterprise Solutions for Large Organizations',
     date: '2025-01-10';
 excerpt: 'New enterprise features include advanced security, team management, and custom integrations.',
     category: 'Product'}
   };
-  {title: 'AI Guided SaaS Wins Best AI Development Tool Award 2025';
+  {title: 'AI Guided SaaS Wins Best AI Development Tool Award 2025',
     date: '2025-01-05';
-    excerpt: 'Recognition from TechCrunch highlights innovation in AI-powered application development.';
+    excerpt: 'Recognition from TechCrunch highlights innovation in AI-powered application development.',
 category: 'Awards'}
 ];
 

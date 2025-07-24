@@ -36,7 +36,7 @@ class EmailService {
     if (!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' }}
     try {;
-      const response = await fetch(`${this.baseUrl}/emails`, {`, `, method: 'POST';
+      const response = await fetch(`${this.baseUrl}/emails`, {`, `, method: 'POST',
     headers: { Authorization: `Bearer ${this.apiKey }`,``
           'Content-Type': 'application/json',
         body: JSON.stringify({
@@ -72,7 +72,7 @@ class EmailService {
         <head>
           <meta charset="utf-8" /> name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Welcome to AI Guided SaaS Builder</title>
-          <style>;
+          <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6, color: #333 }
             .container { max-width: 600px, margin: 0 auto, padding: 20px }
             .header { text-align: center, margin-bottom: 30px }
@@ -172,7 +172,7 @@ const _text = `;``
         <head>
           <meta charset="utf-8" /> name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Reset Your Password</title>
-          <style>;
+          <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6, color: #333 }
             .container { max-width: 600px, margin: 0 auto, padding: 20px }
             .header { text-align: center, margin-bottom: 30px }
@@ -229,12 +229,12 @@ const _text = `;``
     if (!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' }}
     try {;
-      // Test with a simple API call to verify the key, const response = await fetch(`${this.baseUrl}/domains`, {`, `, method: 'GET';
+      // Test with a simple API call to verify the key, const response = await fetch(`${this.baseUrl}/domains`, {`, `, method: 'GET',
     headers: { Authorization: `Bearer ${this.apiKey }`,``
           'Content-Type': 'application/json');
       if (response.ok) {
         return { success: true }} else {
-        return {;
+        return {,
           success: false;
     error: `API key validation, failed: ${response.status}`
 }} catch (error) { return {

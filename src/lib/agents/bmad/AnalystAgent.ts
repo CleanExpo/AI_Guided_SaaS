@@ -24,9 +24,9 @@ export interface UserStory {
 export class AnalystAgent extends Agent {
   constructor() {
     super({
-      id: 'analyst-agent';
+      id: 'analyst-agent',
       name: 'Requirements Analyst';
-      role: 'Analyze and document project requirements';
+      role: 'Analyze and document project requirements',
       description:
         'Expert in requirement gathering, analysis, and documentation. Creates comprehensive requirement specifications from user input.',
       capabilities: [
@@ -78,7 +78,7 @@ const _technicalConsiderations = await this.analyzeTechnicalAspects(
       this.observe('Technical considerations', technicalConsiderations);
       // Compile final analysis;
 
-const analysis: RequirementAnalysis = {;
+const analysis: RequirementAnalysis = {,
   functionalRequirements: categorizedReqs.functionalRequirements;
     nonFunctionalRequirements: categorizedReqs.nonFunctionalRequirements;
         constraints,
@@ -115,7 +115,7 @@ const analysis: RequirementAnalysis = {;
     const _prompt = `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions: Project, Description:``, ${input};
 Provide a comprehensive list of all requirements found.`;
 
-const response = await generateAIResponse(prompt, {;
+const response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: this.config.temperature
     }};
@@ -128,7 +128,7 @@ Requirements:
 ${rawRequirements}
 Format the response as JSON with arrays for each category.`;
 
-const response = await generateAIResponse(prompt, {;
+const response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.1;
     responseFormat: 'json'
@@ -150,7 +150,7 @@ For each user story, provide:
 - Estimated effort (small/medium/large)
 Format as JSON array of user story objects.`;
 
-const response  = await generateAIResponse(prompt, {;
+const response  = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -170,7 +170,7 @@ Requirements: Summary:
 ${JSON.stringify(requirements, null, 2)}
 List technical risks, business risks, timeline risks, and any other concerns. Be specific and actionable.`;
 
-const response = await generateAIResponse(prompt, {;
+const response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.4
     }};
@@ -185,7 +185,7 @@ Include:
 - Operational constraints (performance, scalability needs);
 List each constraint clearly.`;
 
-const response = await generateAIResponse(prompt, {;
+const response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.2
     }};
@@ -199,7 +199,7 @@ ${userStories
   .join('\n')}
 Provide specific, measurable, achievable, relevant, and time-bound (SMART) criteria.`;
 
-const response = await generateAIResponse(prompt, {;
+const response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3
     }};
@@ -217,7 +217,7 @@ Identify:
 - Scalability needs;
 - Development complexity areas`;
 
-const response = await generateAIResponse(prompt, {;
+const response = await generateAIResponse(prompt, {,
       model: this.config.model;
     temperature: 0.3
     }};

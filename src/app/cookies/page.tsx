@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - AI Guided SaaS Platform';
+  title: 'Cookie Policy - AI Guided SaaS Platform',
   description: 'Our cookie policy and how we use cookies on our platform'
 };
 

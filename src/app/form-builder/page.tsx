@@ -40,7 +40,7 @@ const removeField = (id: string) => {setFields(fields.filter((field) => field.id
           <div className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Field Types</h3>
-                            <div className="space-y-2">;
+                            <div className="space-y-2">
                 <button;
 
 const onClick  = {() => addField('text')};

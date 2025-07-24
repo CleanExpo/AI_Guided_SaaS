@@ -46,24 +46,24 @@ export interface BackendAdapter {
   password: string): Promise<{ user: Use
 r;
   token: string }>;
-  signOut(): Promise<void>;
-  getCurrentUser(): Promise<User | null>;
-  updateUser(id: string, data: Partial<User>): Promise<User>;
+  signOut(): Promise<void>
+  getCurrentUser(): Promise<User | null>
+  updateUser(id: string, data: Partial<User>): Promise<User>
   // Projects
-  createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project>;
-  getProject(id: string): Promise<Project | null>;
-  updateProject(id: string, data: Partial<Project>): Promise<Project>;
-  deleteProject(id: string): Promise<void>;
+  createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project>
+  getProject(id: string): Promise<Project | null>
+  updateProject(id: string, data: Partial<Project>): Promise<Project>
+  deleteProject(id: string): Promise<void>
   listProjects(userId: string, options?: QueryOptions): Promise<PaginatedResponse<Project>>;
   // Generic CRUD operations
-  create<T>(collection: string, data: any): Promise<T>;
-  read<T>(collection: string, id: string): Promise<T | null>;
+  create<T>(collection: string, data: any): Promise<T>
+  read<T>(collection: string, id: string): Promise<T | null>
   update<T>(collection: string, id: string;
-  data: any): Promise<T>;
-  delete(collection: string, id: string): Promise<void>;
+  data: any): Promise<T>
+  delete(collection: string, id: string): Promise<void>
   list<T>(collection: string, options?: QueryOptions): Promise<PaginatedResponse<T>>;
   // Query builder
-  query<T>(collection: string): QueryBuilder<T>;
+  query<T>(collection: string): QueryBuilder<T>
   // Real-time subscriptions
   subscribe<T>(
 collection: string;
@@ -72,19 +72,19 @@ collection: string;
   ): () => void
   // File storage
   uploadFile(bucket: string, path: string;
-  file: File): Promise<string>;
-  deleteFile(bucket: string, path: string): Promise<void>;
+  file: File): Promise<string>
+  deleteFile(bucket: string, path: string): Promise<void>
   getFileUrl(bucket: string, path: string): string
 }
 
 export interface QueryBuilder<T> {
   select(fields: string[]): QueryBuilder<T>, where(field: string;
   operator: string;
-  value: any): QueryBuilder<T>, orderBy(field: string, direction?: 'asc' | 'desc'): QueryBuilder<T>;
-  limit(count: number): QueryBuilder<T>;
-  offset(count: number): QueryBuilder<T>;
-  execute(): Promise<T[]>;
-  single(): Promise<T | null>;
+  value: any): QueryBuilder<T>, orderBy(field: string, direction?: 'asc' | 'desc'): QueryBuilder<T>
+  limit(count: number): QueryBuilder<T>
+  offset(count: number): QueryBuilder<T>
+  execute(): Promise<T[]>
+  single(): Promise<T | null>
   count(): Promise<number />
 export interface DatabaseEvent<T> {
   type: 'INSERT' | 'UPDATE' | 'DELETE';

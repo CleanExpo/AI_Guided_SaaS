@@ -26,17 +26,17 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
 
 const { createProject, connect, connected, loading   }: any = useKiroIDE();
   
-const [projectData, setProjectData] = useState<any>({;
+const [projectData, setProjectData] = useState<any>({,
     name: initialData?.name || '';
     description: initialData?.description || '';
     type: initialData?.type || 'web';
     framework: initialData?.framework || '';
-    language: 'typescript';
+    language: 'typescript',
     settings: { buildCommand: '', startCommand: '', testCommand: '', outputDirectory: '', environment: {} as Record<string, string   />
 dependencies: {} as Record<string, string /   />
   });
 
-const [features, setFeatures] = useState<any>({;
+const [features, setFeatures] = useState<any>({,
     typescript: true;
     eslint: true;
     prettier: true;
@@ -64,8 +64,8 @@ const frameworks = {
 }
   const _handleCreateProject = async () => {
     if (!projectData.name) {
-      toast({;
-        title: 'Error';
+      toast({,
+        title: 'Error',
         description: 'Project name is required';
 variant: 'destructive'
       });
@@ -83,15 +83,15 @@ const project = await createProject({
         ...projectData,
         structure: projectStructure
       })
-      toast({;
-        title: 'Project Created';
+      toast({,
+        title: 'Project Created',
   description: `Successfully created project "${project.name}"`
   });
       // Callback with project ID;
 if (onProjectCreated) {
         onProjectCreated(project.id)} catch (error) {
       console.error('Failed to create, project:', error), toast({
-        title: 'Error';
+        title: 'Error',
         description: 'Failed to create project';
 variant: 'destructive'
 })}
@@ -106,13 +106,13 @@ variant: 'destructive'
     )
     // Package.json for JS projects
     if (['web', 'mobile', 'api'].includes(data.type)) {
-      structure.children.push({;
-        name: 'package.json';
+      structure.children.push({,
+        name: 'package.json',
         type: 'file';
-        path: '/package.json';
+        path: '/package.json',
         content: JSON.stringify({
   name: data.name.toLowerCase().replace(/\s+/g, '-'),
-          version: '1.0.0';
+          version: '1.0.0',
           description: data.description;
     scripts: { dev: data.settings.startCommand || 'npm run dev', build: data.settings.buildCommand || 'npm run build', test: data.settings.testCommand || 'npm test' };
           dependencies: data.settings.dependencies || {}, null, 2)
@@ -120,17 +120,17 @@ variant: 'destructive'
     // TypeScript config;
 if (features.typescript) {
       structure.children.push({
-        name: 'tsconfig.json';
+        name: 'tsconfig.json',
         type: 'file';
-        path: '/tsconfig.json';
+        path: '/tsconfig.json',
 content: generateTsConfig(data.type)
 })};
     // ESLint config;
 if (features.eslint) {
       structure.children.push({
-        name: '.eslintrc.json';
+        name: '.eslintrc.json',
         type: 'file';
-        path: '/.eslintrc.json';
+        path: '/.eslintrc.json',
 content: generateEslintConfig(data.type, features.typescript)
 })};
     // Framework-specific structure;
@@ -181,17 +181,17 @@ if (features.docker) {
     // CI/CD files;
 if (features.ci_cd) {
       structure.children.push({
-        name: '.github';
+        name: '.github',
         type: 'directory';
-        path: '/.github';
+        path: '/.github',
         children: [{
-  name: 'workflows';
+  name: 'workflows',
           type: 'directory';
-          path: '/.github/workflows';
+          path: '/.github/workflows',
           children: [{
-  name: 'ci.yml';
+  name: 'ci.yml',
             type: 'file';
-            path: '/.github/workflows/ci.yml';
+            path: '/.github/workflows/ci.yml',
 content: generateGithubWorkflow(data.name)}]
         }]
 })};
@@ -268,7 +268,7 @@ const value  = {projectData.framework}
 
 const id = {key}
                       const checked = {value}
-                      const onCheckedChange = {(checked) =>;
+                      const onCheckedChange = {(checked) =>
                         setFeatures({ ...features, [key]: checked})};
                     /></Switch>))}
             <TabsContent value="settings", className="space-y-4"   />
@@ -357,8 +357,8 @@ yarn-error.log*
 *.swo
 ```;
 
-const typeSpecific: Record<string, string> = {;
-    web: '\n# Next.js\n.next/\n*.tsbuildinfo\nnext-env.d.ts';
+const typeSpecific: Record<string, string> = {,
+    web: '\n# Next.js\n.next/\n*.tsbuildinfo\nnext-env.d.ts',
     api: '\n# Logs\nlogs/\n*.log';
 mobile: '\n# React Native\n.expo/\n*.jks\n*.p8\n*.p12\n*.key\n*.mobileprovision'
 }
@@ -368,7 +368,7 @@ mobile: '\n# React Native\n.expo/\n*.jks\n*.p8\n*.p12\n*.key\n*.mobileprovision'
 generateTsConfig(projectType: string): string) {, const configs: Record<string, any> = {
     web: {
   compilerOptions: {
-  target: 'es5';
+  target: 'es5',
         lib: ['dom', 'dom.iterable', 'esnext'],
         allowJs: true;
     skipLibCheck: true;
@@ -376,11 +376,11 @@ generateTsConfig(projectType: string): string) {, const configs: Record<string,
     forceConsistentCasingInFileNames: true;
     noEmit: true;
     esModuleInterop: true;
-    module: 'esnext';
+    module: 'esnext',
         moduleResolution: 'node';
         resolveJsonModule: true;
     isolatedModules: true;
-    jsx: 'preserve';
+    jsx: 'preserve',
 incremental: true
       };
       include: ['src'];
@@ -388,10 +388,10 @@ incremental: true
     };
     api: {
       compilerOptions: {
-  target: 'ES2020';
+  target: 'ES2020',
         module: 'commonjs';
         lib: ['ES2020'];
-    outDir: './dist';
+    outDir: './dist',
         rootDir: './src';
         strict: true;
     esModuleInterop: true;
@@ -428,7 +428,7 @@ rules: {
 generateNextLayout(name: string): string) {
   return `import, type {  Metadata  } from 'next'``;
 export const metadata: Metadata = {
-    title: '${name}';
+    title: '${name}',
   description: 'Generated by Kiro IDE'};
     export default function RootLayout() {
   return (html lang="en"   />, <body>{children}</body>
@@ -483,7 +483,7 @@ generateHtmlTemplate(name: string): string) {
     <title>${name}</title>
   <body   />
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"   />;
+    <div id="root"   />
 generateDockerfile(projectType: string, framework: string): string;
   framework: string) {
   if (projectType === 'web' && framework === 'nextjs') {
@@ -532,7 +532,7 @@ generateGithubWorkflow(name: string): string) {
   test: runs-on: ubuntu-latest, steps: -;
   uses: actions/checkout@v3
     -, name: Use Node.js, uses: actions/setup-node@v3;
-  with: node-version: '18';
+  with: node-version: '18',
   cache: 'npm'
     - run: npm ci
     -, run: npm run build --if-present

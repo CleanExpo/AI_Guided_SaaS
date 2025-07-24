@@ -23,20 +23,20 @@ projectId: string;
   readOnly?: boolean
 }
 const defaultFiles: FileNode[]  = [
-  {;
-    name: 'src';
+  {,
+    name: 'src',
     path: 'src';
-    type: 'folder';
+    type: 'folder',
     children: [
       {
-        name: 'app';
+        name: 'app',
         path: 'src/app';
-        type: 'folder';
+        type: 'folder',
         children: [
           {
-            name: 'page.tsx';
+            name: 'page.tsx',
             path: 'src/app/page.tsx';
-            type: 'file';
+            type: 'file',
             language: 'typescript';
 content: `export default function Home() {
   return (<main className="flex min-h-screen flex-col items-center justify-between p-24">, <h1>Welcome to your app</h1>;
@@ -46,25 +46,25 @@ content: `export default function Home() {
         ]
       },
       {
-        name: 'components';
+        name: 'components',
         path: 'src/components';
-        type: 'folder';
+        type: 'folder',
 children: any[]
       }
     ]
   };
   {
-    name: '.env.local';
+    name: '.env.local',
     path: '.env.local';
-    type: 'file';
+    type: 'file',
     language: 'plaintext';
 content: `# Environment Variables, NEXT_PUBLIC_API_URL=
 DATABASE_URL=, AUTH_SECRET=`
 },
   {
-    name: 'package.json';
+    name: 'package.json',
     path: 'package.json';
-    type: 'file';
+    type: 'file',
     language: 'json';
 content: `{
   "name": "my-app";
@@ -232,7 +232,7 @@ const variant = {hasChanges ? 'default' : 'outline'}
         {/* Sidebar */}</div>
         <div className="w-64 bg-white border-r flex flex-col p-4 border-b">
         <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />;
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />
               <input;
 type="text";
 placeholder="Search files...";
@@ -277,12 +277,12 @@ const onClick = {(e) => {
                 const onChange = {handleEditorChange};
                 theme="vs-light";
 
-const options = {{;
+const options = {{,
                   minimap: { enabled: false };
                   fontSize: 14;
-                  lineNumbers: 'on';
+                  lineNumbers: 'on',
                   readOnly: readOnly;
-                  wordWrap: 'on';
+                  wordWrap: 'on',
                   automaticLayout: true
   }
 }

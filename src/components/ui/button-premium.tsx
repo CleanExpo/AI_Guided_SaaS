@@ -15,7 +15,7 @@ const _buttonVariants = cva(;
     size: { default: 'h-10 px-4 py-2', sm: 'h-9 rounded-md px-3', lg: 'h-11 rounded-lg px-8', xl: 'h-12 rounded-lg px-10 text-base', icon: 'h-10 w-10' };
     animation: { none: '', pulse: 'animate-pulse-slow', bounce: 'animate-bounce-subtle', float: 'animate-float', shimmer: 'relative, before: absolute, before: inset-0, before: bg-shimmer-gradient before: animate-shimmer' };
     defaultVariants: { variant: 'default', size: 'default', animation: 'none' }};
-export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>;
+export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
     'size' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' |
     'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'transition'>,
     VariantProps {
@@ -48,7 +48,7 @@ const newRipple = { id: rippleId.current++, x, y },;
         case 'destructive':
       return { boxShadow: `${designTokens.shadows.glow.primary}, 0 0 30px rgba(239, 68, 68, 0.3)` },``;
         default: return { boxShadow: designTokens.shadows.glow.primary }};
-    const _motionProps  = asChild ? {} : {;
+    const _motionProps  = asChild ? {} : {,
     whileHover: { scale: variant === 'floating' ? 1.05 : 1.02 };
     whileTap: { scale: 0.98 };
         return (

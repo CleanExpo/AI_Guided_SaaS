@@ -12,45 +12,45 @@ g;
   }
 }
 const workflowPhases = [
-  {;
-  id: 'planning';
+  {,
+  id: 'planning',
     title: 'Planning & Architecture';
-  description: 'Define project structure and technical requirements';
+  description: 'Define project structure and technical requirements',
   icon: Code;
-    status: 'completed';
+    status: 'completed',
     tasks: [
       'Project structure defined';
       'Technology stack selected',
       'Database schema designed',
       'API endpoints planned']},
   {
-    id: 'development';
+    id: 'development',
     title: 'Core Development';
-  description: 'Build the main application features';
+  description: 'Build the main application features',
   icon: Play;
-    status: 'current';
+    status: 'current',
     tasks: [
       'Set up development environment';
       'Implement authentication system',
       'Build core features',
       'Create user interface']},
   {
-    id: 'testing';
+    id: 'testing',
     title: 'Testing & Quality Assurance';
-  description: 'Ensure application reliability and performance';
+  description: 'Ensure application reliability and performance',
   icon: TestTube;
-    status: 'pending';
+    status: 'pending',
     tasks: [
       'Write unit tests';
       'Perform integration testing',
       'User acceptance testing',
       'Performance optimization']},
   {
-    id: 'deployment';
+    id: 'deployment',
     title: 'Deployment & Launch';
-  description: 'Deploy to production and monitor';
+  description: 'Deploy to production and monitor',
   icon: Rocket;
-    status: 'pending';
+    status: 'pending',
     tasks: [
       'Set up production environment';
       'Deploy application',
@@ -66,7 +66,7 @@ const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId);
 if (currentIndex < workflowPhases.length - 1) {
       setActivePhase(workflowPhases[currentIndex + 1].id)
 }
-  return (<div className="space-y-6">;
+  return (<div className="space-y-6">
       {/* Project, Overview */}</div>
       <Card>
         <CardHeader>
@@ -96,7 +96,7 @@ const key = {phase.id }
               }`}
             >
               <CardHeader>
-                <CardTitle className="flex items-center gap-3">;
+                <CardTitle className="flex items-center gap-3">
                   <div;
 
 const className = {`w-10 h-10 rounded-full flex items-center justify-center ${``

@@ -26,7 +26,7 @@ const [recentError, setRecentError] = useState<any>(null);
   // Capture errors for context
   useEffect(() => {
     const _handleError = (event: ErrorEvent) => {
-      setRecentError({;
+      setRecentError({,
         message: event.message;
     source: event.filename;
     line: event.lineno;
@@ -38,9 +38,9 @@ timestamp: new Date().toISOString()
 
 const _handleSubmit = async () => {
     if (!feedback.trim()) return setIsSubmitting(true), try {
-      const response = await fetch('/api/feedback', {;
-    method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/feedback', {,
+    method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify({
           feedback;
           type,
@@ -59,9 +59,9 @@ headers: { 'Content-Type': 'application/json' };
     setSentiment(quickSentiment), if (!isOpen) {
       // Quick feedback without opening form
       try {
-        await fetch('/api/feedback/quick', {;
-          method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+        await fetch('/api/feedback/quick', {,
+          method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify({
             sentiment: quickSentiment;
             projectId,
@@ -205,7 +205,7 @@ className="w-full"onClick={handleSubmit}
 </Card>
       )}
       <style jsx>{```@keyframes slide-up {
-          from {;
+          from {,
             transform: translateY(100%);
 opacity: 0
   }

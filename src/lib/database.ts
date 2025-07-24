@@ -149,13 +149,13 @@ export class DatabaseService {
     if (!this.checkDatabase()) {
       // Return mock user for development
       return {
-        id: `user-${Date.now()}`;
+        id: `user-${Date.now()}`,
 email: userData.email || 'demo@example.com';
   full_name: userData.full_name || 'Demo User';
     avatar_url: userData.avatar_url;
   provider: userData.provider || 'credentials';
     provider_id: userData.provider_id;
-  subscription_tier: 'free';
+  subscription_tier: 'free',
         subscription_status: 'active';
   created_at: new Date().toISOString();
     updated_at: new Date().toISOString()}
@@ -174,9 +174,9 @@ if (error) {
   static async getUserById(id: string): Promise { if (!this.checkDatabase()) {
       return {
         id;
-        email: 'demo@example.com';
+        email: 'demo@example.com',
   full_name: 'Demo User';
-        provider: 'credentials';
+        provider: 'credentials',
   subscription_tier: 'free';
         subscription_status: 'active'
 }
@@ -197,11 +197,11 @@ if (error) {
   static async getUserByEmail(email: string): Promise { if (!this.checkDatabase()) {
       // For demo purposes, return a user for demo@example.com, if (email === 'demo@example.com') {
         return {
-          id: 'demo-user-id';
+          id: 'demo-user-id',
   email: 'demo@example.com';
-          full_name: 'Demo User';
+          full_name: 'Demo User',
   provider: 'credentials';
-          subscription_tier: 'free';
+          subscription_tier: 'free',
   subscription_status: 'active';
           created_at: new Date().toISOString()}
   updated_at: new Date().toISOString()}
@@ -241,12 +241,12 @@ if (error) {
   static async createProject(projectData: Partial<Project>): Promise<any> {
     if (!this.checkDatabase()) {
       return {
-        id: `project-${Date.now()}`;
+        id: `project-${Date.now()}`,
 user_id: projectData.user_id || 'demo-user';
   name: projectData.name || 'Demo Project';
     description: projectData.description;
   framework: projectData.framework || 'nextjs';
-    status: 'completed';
+    status: 'completed',
   config: projectData.config || {};
     created_at: new Date().toISOString();
   updated_at: new Date().toISOString()}
@@ -263,24 +263,24 @@ if (error) {
       console.error('Database, error:', error); return null; }
 }
   static async getUserProjects(userId: string): Promise { if (!this.checkDatabase()) {
-      return [{;
-  id: 'demo-project-1';
+      return [{,
+  id: 'demo-project-1',
   user_id: userId;
-    name: 'E-commerce Store';
+    name: 'E-commerce Store',
   description: 'A modern e-commerce platform';
           framework: 'nextjs'
 }
-  status: 'completed';
+  status: 'completed',
     config: {};
     created_at: new Date().toISOString();
   updated_at: new Date().toISOString()};
-        { id: 'demo-project-2';
+        { id: 'demo-project-2',
   user_id: userId;
-    name: 'Portfolio Website';
+    name: 'Portfolio Website',
   description: 'Personal portfolio with blog';
           framework: 'react'
 }
-  status: 'completed';
+  status: 'completed',
     config: {};
     created_at: new Date().toISOString();
   updated_at: new Date().toISOString()}
@@ -462,11 +462,11 @@ if (error) {
       console.error('Database error recording, payment:', error)}
   static async getUserSubscription(userId: string): Promise { if (!this.checkDatabase()) {
       return {
-        id: 'mock-subscription';
+        id: 'mock-subscription',
   user_id: userId;
-    stripe_subscription_id: 'mock-stripe-sub';
+    stripe_subscription_id: 'mock-stripe-sub',
   stripe_customer_id: 'mock-stripe-customer';
-        tier: 'free';
+        tier: 'free',
   status: 'active';
         current_period_start: new Date().toISOString();
   current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
@@ -525,7 +525,7 @@ if (error) {
         return { projects: 0;
    aiGenerations: 0;
   storage: '0MB' }}
-      const usage = (usageData || []).reduce((acc: Record<string, any>;
+      const usage = (usageData || []).reduce((acc: Record<string, any>
     record: { resource_type: string, quantity: number }) => {
         acc[record.resource_type] = (acc[record.resource_type] || 0) + record.quantity
         return acc}, {} as Record<string, any>);

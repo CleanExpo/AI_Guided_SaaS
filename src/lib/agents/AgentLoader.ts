@@ -57,7 +57,7 @@ export class AgentLoader {
    * Discover and load all available agents
    */
   async discoverAgents(): Promise<any> {
-    const result: AgentDiscoveryResult  = {;
+    const result: AgentDiscoveryResult  = {,
   total_agents: 0;
     core_agents: any[];
     orchestration_agents: any[];
@@ -106,7 +106,7 @@ const _agentFiles = this.getAgentFiles();
             agent.name.toLowerCase().includes(identifier.toLowerCase()) {
           this.loadedAgents.set(agent.agent_id, agent);
           return { success: true, agent }}
-    return {;
+    return {,
       success: false;
     error: `Agent not, found: ${identifier}`
   }
@@ -158,7 +158,7 @@ const orchestratorResult = await this.loadAgentByIdentifier('ORCHESTRATOR');
    * Get agent status and health information
    */
   getAgentStatus(): Record {
-    const status: Record<string, any> = {;
+    const status: Record<string, any> = {,
       total_loaded: this.loadedAgents.size;
     agents_by_status: {};
     agents_by_role: {};
@@ -229,7 +229,7 @@ if (!agent.agent_id || !agent.name || !agent.role) {
   }
 }
       return { success: true, agent }} catch (error) {
-      return {;
+      return {,
         success: false;
     error: `Parse, error: ${error}`
   }
@@ -266,8 +266,8 @@ if (!agent.agent_id || !agent.name || !agent.role) {
   private async storeInMemory(result: AgentDiscoveryResult): Promise<any> {
     try {
       // Store agent discovery results in memory system
-      await mcp__memory__create_entities([{;
-  name: 'AgentDiscoverySession';
+      await mcp__memory__create_entities([{,
+  name: 'AgentDiscoverySession',
           entityType: 'session';
           observations: [
             `Discovered ${result.total_agents} agents`,``,

@@ -56,12 +56,12 @@ export class RoadmapValidator {
 
 const _durationDays  = this.parseDurationToDays(phase.duration);
 
-const milestone: RoadmapMilestone = {;
-    id: `milestone_${phase.id}`;
+const milestone: RoadmapMilestone = {,
+    id: `milestone_${phase.id}`,
 phaseId: phase.id;
     name: phase.name;
     expectedDate: new Date(startDate.getTime() + cumulativeDays * 24 * 60 * 60 * 1000);
-    status: 'pending';
+    status: 'pending',
         completionCriteria: this.generateCompletionCriteria(phase);
     dependencies: phase.dependencies;
     deliverables: phase.tasks
@@ -90,9 +90,9 @@ break
 default: return 7}}
   private generateCompletionCriteria(phase: RoadmapPhase): CompletionCriterion[] {
     const criteria: CompletionCriterion[] = [], // Feature completion criteria, phase.tasks.forEach((task, index) => {
-      criteria.push({;
-        id: `${phase.id}_feature_${index}`;
-description: task, type: 'feature';
+      criteria.push({,
+        id: `${phase.id}_feature_${index}`,
+description: task, type: 'feature',
     validation: { method: 'automated', script: `validate_feature_${phase.id }_${index}`
         };
         status: 'pending'
@@ -100,9 +100,9 @@ description: task, type: 'feature';
     // Test criteria based on phase type
     if (phase.name.toLowerCase().includes('development')) {
       criteria.push({
-        id: `${phase.id}_test_coverage`;
+        id: `${phase.id}_test_coverage`,
 description: 'Unit test coverage > 80%';
-        type: 'test';
+        type: 'test',
     validation: { method: 'automated', threshold: 80 };
         status: 'pending'
       })
@@ -110,28 +110,28 @@ description: 'Unit test coverage > 80%';
     // Performance criteria for certain phases
     if (phase.agents.includes('agent_backend') || phase.agents.includes('agent_frontend')) {
       criteria.push({
-        id: `${phase.id}_performance`;
+        id: `${phase.id}_performance`,
 description: 'API response time < 200ms';
-        type: 'performance';
+        type: 'performance',
     validation: { method: 'automated', threshold: 200 };
         status: 'pending'
       })
 }
     // Documentation criteria
     criteria.push({
-      id: `${phase.id}_documentation`;
+      id: `${phase.id}_documentation`,
 description: 'Technical documentation complete';
-      type: 'documentation';
+      type: 'documentation',
     validation: { method: 'manual' };
       status: 'pending'
     });
     return criteria;
 }
   async validateRoadmap(): Promise<any> {
-    const result: RoadmapValidationResult = {;
+    const result: RoadmapValidationResult = {,
     roadmapId: this.roadmap.id;
     validationDate: new Date();
-    overallStatus: 'on_track';
+    overallStatus: 'on_track',
       completionPercentage: 0;
     milestones: {
   total: this.milestones.size;
@@ -273,20 +273,20 @@ break;
   private createDelayDeviation(milestone: RoadmapMilestone): RoadmapDeviation {;
     const _delayDays = Math.ceil(, (new Date().getTime() - milestone.expectedDate.getTime()) / (24 * 60 * 60 * 1000));
         return {
-      type: 'delay';
-      severity: delayDays > 14 ? 'high' : delayDays > 7 ? 'medium' : 'low';
+      type: 'delay',
+      severity: delayDays > 14 ? 'high' : delayDays > 7 ? 'medium' : 'low',
       milestoneId: milestone.id;
-    description: `${milestone.name} is delayed by ${delayDays} days`;
+    description: `${milestone.name} is delayed by ${delayDays} days`,
 impact: `Project completion may be delayed by approximately ${delayDays} days`;
 suggestedAction: 'Allocate additional resources or adjust scope'
   }
 }
   private createBlockedDeviation(milestone: RoadmapMilestone): RoadmapDeviation {
     return {
-      type: 'blocker';
+      type: 'blocker',
       severity: 'critical';
       milestoneId: milestone.id;
-    description: `${milestone.name} is blocked by incomplete dependencies`;
+    description: `${milestone.name} is blocked by incomplete dependencies`,
 impact: 'Cannot proceed until dependencies are resolved';
       suggestedAction: 'Prioritize completion of blocking dependencies'
   }

@@ -12,12 +12,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Visual generation logic would go here;
     // This is a placeholder for actual image generation;
 
-const generation = {;
+const generation = {,
       id: `gen_${Date.now()}`;
       prompt,
       style,
       dimensions,
-      status: 'completed';
+      status: 'completed',
       imageUrl: `https://example.com/generated/${Date.now()}.png`;
       timestamp: new Date().toISOString();
       processingTime: '3.5s'
@@ -35,9 +35,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 };
     // Simulate getting generation status;
 
-const generation = {;
+const generation = {,
       id: generationId;
-      status: 'completed';
+      status: 'completed',
       imageUrl: `https://example.com/generated/${generationId}.png`;
       timestamp: new Date().toISOString()
 };

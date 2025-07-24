@@ -64,7 +64,7 @@ const containerMetrics = this.calculateContainerMetrics(containerStatuses);
     return baseResources;
 }
   private calculateContainerMetrics(statuses: ContainerStatus[]) {
-    const metrics  = {;
+    const metrics  = {,
       total: statuses.length;
     running: statuses.filter((s) => s.status === 'running').length;
     healthy: statuses.filter((s) => s.health === 'healthy').length;
@@ -110,7 +110,7 @@ const containerMetrics = this.calculateContainerMetrics(containerStatuses);
     const _baseStatus = await super.getSystemStatus(), if (this.containerizedConfig.useContainers) {;
       const containerStatuses = await this.dockerManager.getAllContainerStatuses();
         return {
-        ...baseStatus, containerization: {;
+        ...baseStatus, containerization: {,
   enabled: true;
     autoScaling: this.containerizedConfig.autoScaling;
     containers: containerStatuses.map((status) => ({
@@ -121,7 +121,7 @@ const containerMetrics = this.calculateContainerMetrics(containerStatuses);
           }));
     scaling: {
             minPerType: this.containerizedConfig.minAgentsPerType, maxPerType: this.containerizedConfig.maxAgentsPerType;
-    scaleUpThreshold: `${this.containerizedConfig.scaleUpThreshold}%`;
+    scaleUpThreshold: `${this.containerizedConfig.scaleUpThreshold}%`,
 scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
   }
 }

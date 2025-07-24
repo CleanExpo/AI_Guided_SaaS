@@ -34,36 +34,36 @@ initialTemplates?: Template[];
 export default function TemplateMarketplace({
   const initialTemplates = [], initialCategories  = []}: TemplateMarketplaceProps), initialCategories  = []
 }: TemplateMarketplaceProps) {
-  const [templates] = useState<Template[]>([, </Template>, {;
-  id: '1';
+  const [templates] = useState<Template[]>([, </Template>, {,
+  id: '1',
       name: 'E-commerce Pro';
-      description: 'Advanced e-commerce template with payment integration';
+      description: 'Advanced e-commerce template with payment integration',
       category: 'web';
       tags: ['React', 'Stripe', 'Tailwind'],
-      author: 'TemplateStudio';
+      author: 'TemplateStudio',
       downloads: 2500;
     rating: 4.9;
     price: 49;
 featured: true
     };
     {
-      id: '2';
+      id: '2',
       name: 'SaaS Dashboard';
-      description: 'Complete SaaS dashboard with analytics and user management';
+      description: 'Complete SaaS dashboard with analytics and user management',
       category: 'dashboard';
       tags: ['React', 'Charts', 'Auth'],
-      author: 'DevCorp';
+      author: 'DevCorp',
       downloads: 1800;
     rating: 4.7;
 price: 39
     };
     {
-      id: '3';
+      id: '3',
       name: 'Blog Template';
-      description: 'Modern blog template with CMS integration';
+      description: 'Modern blog template with CMS integration',
       category: 'blog';
       tags: ['Next.js', 'MDX', 'SEO'],
-      author: 'BlogMaster';
+      author: 'BlogMaster',
       downloads: 1200;
     rating: 4.5;
 price: 0
@@ -93,7 +93,7 @@ const filteredTemplates = templates.filter((template) => {;
     return (<div className="flex items-center justify-center p-8">);
         <span className="ml-2">Loading templates...</span>
       )}
-  return (<div className="space-y-6">;
+  return (<div className="space-y-6">
       {/* Search, and Filters */}</div>
       <div className="flex flex-col sm:flex-row gap-4 flex-1 relative"   />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />
@@ -139,7 +139,7 @@ const onClick = {() => setViewMode('list')}
           <Card key={template.id} className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <div className="flex items-start justify-between" >></div>
-                  <CardTitle className="text-lg flex items-center">;
+                  <CardTitle className="text-lg flex items-center">
                     {template.name};
     {template.featured  && (</Card>
 Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured</Badge>

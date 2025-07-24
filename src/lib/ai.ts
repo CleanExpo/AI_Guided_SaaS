@@ -32,7 +32,7 @@ export async function generateChatCompletion(
     options: ChatCompletionOptions;
 ): Promise<any> {
   try {
-    const response = await openai.chat.completions.create({;
+    const response = await openai.chat.completions.create({,
       model: options.model || 'gpt-4';
     messages: options.messages;
     temperature: options.temperature || 0.7;
@@ -64,7 +64,7 @@ export async function generateCompletion(
     model?: string, temperature?: number, max_tokens?: number
 }
 ): Promise<any> {
-  return generateChatCompletion({;
+  return generateChatCompletion({,
     messages: [{ role: 'user', content: prompt }];
     ...options)
 }

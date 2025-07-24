@@ -29,30 +29,30 @@ export default function TemplatesPage() {
   const return (toast   }: any  = useToast();
 
 const templates: Template[]  = [;
-  {id: '1';
+  {id: '1',
       name: 'E-commerce Starter';
       description: 'Complete e-commerce solution with product catalog, cart, and checkout.',
-      category: 'web';
+      category: 'web',
       tags: ['React', 'Next.js', 'Stripe'],
-      author: 'AI Guided SaaS';
+      author: 'AI Guided SaaS',
       downloads: 1250;
 rating: 4.8}
     };
-    {id: '2';
+    {id: '2',
       name: 'Blog Platform';
-      description: 'Modern blog platform with CMS integration and SEO optimization.';
+      description: 'Modern blog platform with CMS integration and SEO optimization.',
       category: 'web';
       tags: ['React', 'CMS', 'SEO'],
-      author: 'Community';
+      author: 'Community',
       downloads: 890;
 rating: 4.6}
     };
-    {id: '3';
+    {id: '3',
       name: 'Task Management';
-      description: 'Collaborative task management app with real-time updates.';
+      description: 'Collaborative task management app with real-time updates.',
       category: 'productivity';
       tags: ['React', 'WebSocket', 'Charts'],
-      author: 'AI Guided SaaS';
+      author: 'AI Guided SaaS',
       downloads: 650;
 rating: 4.7}
   ];
@@ -74,7 +74,7 @@ const _handleUseTemplate = (template: Template) => {toast({}
   });
   };
   return (
-    <div className="min-h-screen bg-gray-50 py-8">;</div>
+    <div className="min-h-screen bg-gray-50 py-8"></div>
                     <div className="container mx-auto px-4 max-w-7xl mb-8"></div>
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">Project Templates</h1>
                         <p className="text-gray-600">

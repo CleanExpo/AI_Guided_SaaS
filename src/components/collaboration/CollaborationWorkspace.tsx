@@ -114,9 +114,9 @@ if (!roomId && onRoomCreated) {
   
 const _createNewRoom = async (socket: Socket) => {
     try {
-      const response = await fetch('/api/collaboration/rooms', {;
-    method: 'POST';
-headers: { 'Content-Type': 'application/json' };
+      const response = await fetch('/api/collaboration/rooms', {,
+    method: 'POST',
+headers: { 'Content-Type': 'application/json' }
     body: JSON.stringify({ projectId;
     settings: { allowGuests: true, maxParticipants: 10, permissions: {
   canEdit: true, canComment: true, canInvite: true, canExport: true })}
@@ -255,8 +255,7 @@ const style = {{ left: comment.position.x, top: comment.position.y }
                 <div className="text-xs font-medium text-yellow-800 mb-1">
                     Comment</div>
                 <div className="text-sm text-yellow-700">
-                  {comment.content};
-          ))};
+                  {comment.content }))};
     {/* Project, workspace content */}</div>
           <div className="p-8"   />
             <div className="max-w-4xl mx-auto"   />
@@ -356,8 +355,7 @@ div className="text-sm text-gray-500">No participants yet</div>
               ))},
     {comments.length === 0  && (</div>
 div className="text-sm text-gray-500">No comments yet</div>
-      )};
-)};
+      ) })};
 </div>
 </CollaborationRoom>
   

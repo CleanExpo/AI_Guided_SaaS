@@ -15,7 +15,7 @@ export class ValidationError extends Error {
   }
   toApiError(): ApiError {
     return {
-      error: 'VALIDATION_ERROR';
+      error: 'VALIDATION_ERROR',
       message: this.message;
       statusCode: 400;
       details: this.errors.format()}
@@ -38,7 +38,7 @@ export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = 
 }
           if (throwOnError) {
             throw new ValidationError(error)}
-          return {;
+          return {,
             success: false;
             error: new ValidationError(error).toApiError()}
         throw error;
@@ -65,7 +65,7 @@ const validatedOutput = schema.parse(result);
 }
           if (throwOnError) {
             throw new ValidationError(error, 'Output validation failed')}
-          return {;
+          return {,
             success: false;
             error: new ValidationError(error).toApiError()}
         throw error;
@@ -98,7 +98,7 @@ if (outputSchema) {
 }
           if (throwOnError) {
             throw new ValidationError(error)}
-          return {;
+          return {,
             success: false;
             error: new ValidationError(error).toApiError()}
         throw error;
@@ -176,7 +176,7 @@ export function createTypeGuard<T>(schema: z.ZodSchema<T>) {
       return false}};
 // Async validation wrapper;
 export async validateAsync<T>(
-    schema: z.ZodSchema<T>;
+    schema: z.ZodSchema<T>
     data: unknown
 ): Promise<T> {
   try {
@@ -187,11 +187,11 @@ export async validateAsync<T>(
 }};
 // Safe parsing wrapper;
 export function safeParse<T>(
-    schema: z.ZodSchema<T>;
+    schema: z.ZodSchema<T>
     data: unknown
 ): { success: true, data: T } | { success: false, error: ValidationError } {
   const result = schema.safeParse(data), if (result.success) {
     return { success: true, data: result.data }}
-  return {;
+  return {,
     success: false;
     error: new ValidationError(result.error)}

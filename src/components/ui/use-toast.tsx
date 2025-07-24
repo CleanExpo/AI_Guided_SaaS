@@ -12,10 +12,10 @@ type ToasterToast = ToastProps & {
   id: string, title?: React.ReactNode, description?: React.ReactNode
   action?: ToastActionElement
 },
-const _actionTypes = {;
-  ADD_TOAST: "ADD_TOAST";
+const _actionTypes = {,
+  ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST";
-  DISMISS_TOAST: "DISMISS_TOAST";
+  DISMISS_TOAST: "DISMISS_TOAST",
 REMOVE_TOAST: "REMOVE_TOAST"
 } as const;
 let count = 0;
@@ -47,7 +47,7 @@ const _addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {;
     return null; }const _timeout = setTimeout(() => {
     toastTimeouts.delete(toastId), dispatch({
-      type: "REMOVE_TOAST";
+      type: "REMOVE_TOAST",
 toastId: toastId
 }
   )
@@ -111,15 +111,14 @@ dispatch(action: Action): Action) {
     listener(memoryState)}
   )
 }
-type Toast = Omit<ToasterToast, "id">;
+type Toast = Omit<ToasterToast, "id">
 toast({ ...props }: Toast): Toast) {
   const _id = genId(); const _update = (props: ToasterToast) => , dispatch({
-      type: "UPDATE_TOAST";
+      type: "UPDATE_TOAST",
 toast: { ...props, id }}
   );
   
-const _dismiss = () => dispatch({ type: "DISMISS_TOAST" toastId: id };
-  );
+const _dismiss = () => dispatch({ type: "DISMISS_TOAST" toastId: id  });
   dispatch({ type: "ADD_TOAST", toast: { ...props, id, open: true onOpenChange: (open) => {
         if (!open) dismiss() }
   );

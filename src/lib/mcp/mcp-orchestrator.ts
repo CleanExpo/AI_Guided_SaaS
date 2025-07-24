@@ -219,7 +219,7 @@ const result = await this.executeToolCall(
         tool: validated.tool;
         server: validated.server;
         result: null;
-        error: error instanceof Error ? error.message : 'Unknown error';
+        error: error instanceof Error ? error.message : 'Unknown error',
         duration: Date.now() - startTime;
         timestamp: new Date().toISOString()}
 }
@@ -236,7 +236,7 @@ const result = await this.executeToolCall(
 description: string;
     steps: MCPExecutionStep[]
   ): MCPOrchestrationPlan {
-    const plan: MCPOrchestrationPlan = {;
+    const plan: MCPOrchestrationPlan = {,
       id: this.generateId();
       description,
       steps,
@@ -260,7 +260,7 @@ plan: MCPOrchestrationPlan
     const validated = MCPOrchestrationPlanSchema.parse(plan); const results = new Map<string, MCPToolResult>(), if (validated.parallel && Object.keys(plan.dependencies).length === 0) {
       // Execute all steps in parallel;
 
-const calls  = validated.steps.map((step) => ({;
+const calls  = validated.steps.map((step) => ({,
         tool: step.operation;
         server: step.server;
         arguments: step.arguments || {}));
@@ -286,7 +286,7 @@ if (step.dependsOn) {
           throw new Error('Circular dependency detected in orchestration plan')};
         // Execute ready steps;
 for (const step of readySteps) {
-          const promise = this.callTool({;
+          const promise = this.callTool({,
             tool: step.operation;
             server: step.server;
             arguments: step.arguments || {});
@@ -372,26 +372,26 @@ if (executing.size > 0) {
 }
   private async discoverCapabilities(serverId: string): Promise<MCPCapability[]> {
     try {
-      const response  = await this.sendRequest(serverId, 'initialize', {;
-        protocolVersion: '2024-11-05';
+      const response  = await this.sendRequest(serverId, 'initialize', {,
+        protocolVersion: '2024-11-05',
         capabilities: {});
 
 const capabilities: MCPCapability[] = [];
       if (response.capabilities?.tools) {
         capabilities.push({
-          type: 'tools';
+          type: 'tools',
           version: response.protocolVersion || '2024-11-05'
         })
 }
       if (response.capabilities?.resources) {
         capabilities.push({
-          type: 'resources';
+          type: 'resources',
           version: response.protocolVersion || '2024-11-05'
         })
 }
       if (response.capabilities?.prompts) {
         capabilities.push({
-          type: 'prompts';
+          type: 'prompts',
           version: response.protocolVersion || '2024-11-05'
         })
 }
@@ -428,7 +428,7 @@ const capabilities: MCPCapability[] = [];
 };
     const id  = this.generateId();
 
-const request = {;
+const request = {,
       jsonrpc: '2.0';
       id,
       method,

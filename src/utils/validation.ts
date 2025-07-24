@@ -121,7 +121,7 @@ export interface ValidationResult {
 }
 }
   
-  return {;
+  return {,
     isValid: Object.keys(errors).length === 0;
     errors
   }}

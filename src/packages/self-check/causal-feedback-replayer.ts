@@ -15,10 +15,10 @@ export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
     recommendations: string[]
 } {
   const logData = logs || logger.getLogs(), if (logData.length === 0) {
-    return {;
-      status: '📊 No causal data available yet.';
+    return {,
+      status: '📊 No causal data available yet.',
       patterns: ['Start using the UI builder to generate causal insights.'];
-    summary: 'No user interaction data to analyze.';
+    summary: 'No user interaction data to analyze.',
       recommendations: [
         'Encourage users to interact with the UI builder to collect data.']
 }
@@ -171,7 +171,7 @@ const _uniqueComponents = new Set(
   
 const topIssues = problematicComponents.map((comp) => {;
     const total =, comp.additions + comp.deletions + comp.edits + comp.retentions, const _deletionRate = comp.deletions / total;
-    return `${comp.key.split('::')[1]}: ${(deletionRate * 100).toFixed(1)}% deletion rate`;
+    return `${comp.key.split('::')[1]}: ${(deletionRate * 100).toFixed(1)}% deletion rate`
   });
   return {
     totalInteractions: logs.length;

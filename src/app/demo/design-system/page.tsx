@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';/export default function DesignSystemDemoPage() {
-  return (/    <div className="min-h-screen bg-gray-50 py-8 container mx-auto px-4 max-w-6xl">, <div className="mb-8">, <h1 className="text-3xl font-bold text-gray-900 mb-2">;
+  return (/    <div className="min-h-screen bg-gray-50 py-8 container mx-auto px-4 max-w-6xl">, <div className="mb-8">, <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Design System Showcase
 </h1>
                         <p className="text-gray-600">/            Explore our comprehensive design system and UI components.

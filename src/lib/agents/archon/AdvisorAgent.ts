@@ -134,9 +134,9 @@ export interface ContingencyPlan {
 export class AdvisorAgent extends Agent {
   constructor() {
     super({
-      id: 'advisor-agent';
+      id: 'advisor-agent',
       name: 'Strategic Advisor';
-      role: 'Provide strategic advice and decision support';
+      role: 'Provide strategic advice and decision support',
       description:
         'Expert in strategic analysis, decision-making, and advisory services. Provides comprehensive recommendations and action plans based on thorough analysis.',
       capabilities: [
@@ -275,7 +275,7 @@ const result: AdvisoryReport = {;
 };
   private async analyzeSituation(input: string, projectContext, requirements: string[], constraints: string[];
   challenges: string[]): Promise<any> {
-    const _analysisPrompt = `Analyze the current situation based on this, input: ``, Request: "${input}";
+    const _analysisPrompt = `Analyze the current situation based on this, input: ``, Request: "${input}",
   Project: Context:
 ${JSON.stringify(projectContext, null, 2)}
 Requirements:
@@ -293,7 +293,7 @@ Provide a comprehensive situation analysis, including:
 6. Challenges
 Format as JSON SituationAnalysis object.`;
 
-const _response = await generateAIResponse(analysisPrompt, {;
+const _response = await generateAIResponse(analysisPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -303,7 +303,7 @@ const _response = await generateAIResponse(analysisPrompt, {;
   private async generateRecommendations(situation: SituationAnalysis, input: string;
   requirements: string[]): Promise<any> {
     const _recommendPrompt = `Generate strategic recommendations based on this, analysis: ``, Situation:, ${JSON.stringify(situation, null, 2)};
-Original: Request: "${input}";
+Original: Request: "${input}",
   Requirements:
 ${requirements.join('\n')}
 Create 4-6 actionable recommendations, that:
@@ -321,7 +321,7 @@ For each recommendation, include:
 - Required resources
 Format as JSON array of Recommendation objects.`;
 
-const _response  = await generateAIResponse(recommendPrompt, {;
+const _response  = await generateAIResponse(recommendPrompt, {,
       model: this.config.model;
     temperature: 0.5;
     responseFormat: 'json'
@@ -348,7 +348,7 @@ Create 2-3 comprehensive strategies, that:
 5. Consider dependencies
 Format as JSON array of Strategy objects.`;
 
-const _response = await generateAIResponse(strategyPrompt, {;
+const _response = await generateAIResponse(strategyPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -376,7 +376,7 @@ For each, risk:
 - Assign ownership;
 Format as JSON array of RiskAssessment objects.`;
 
-const _response  = await generateAIResponse(riskPrompt, {;
+const _response  = await generateAIResponse(riskPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -410,7 +410,7 @@ For each, alternative:
 - Provide recommendation on when to use
 Format as JSON array of Alternative objects.`;
 
-const _response = await generateAIResponse(alternativePrompt, {;
+const _response = await generateAIResponse(alternativePrompt, {,
       model: this.config.model;
     temperature: 0.5;
     responseFormat: 'json'
@@ -440,7 +440,7 @@ Create a decision matrix, with:
 5. Final recommendation
 Format as JSON DecisionMatrix object.`;``;
 
-const _response  = await generateAIResponse(matrixPrompt, {;
+const _response  = await generateAIResponse(matrixPrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -484,7 +484,7 @@ Create an action plan, with:
 6. Review schedule
 Format as JSON ActionPlan object.`;
 
-const _response  = await generateAIResponse(actionPrompt, {;
+const _response  = await generateAIResponse(actionPrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'

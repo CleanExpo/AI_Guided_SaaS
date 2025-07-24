@@ -113,7 +113,7 @@ export class TokenOptimizationEngine {
   private initializeTokenBudget(): TokenBudget {
     const _targetTokens = this.maxTokens * this.targetUtilization // 150K tokens, return {
       total: this.maxTokens
-   , allocated: {;
+   , allocated: {,
   coreMemory: Math.floor(targetTokens * 0.15), // 22.5K - Essential project info, workingContext: Math.floor(targetTokens * 0.30);
   // 45K - Active development, documentation: Math.floor(targetTokens * 0.25);
   // 37.5K - Documentation, codeContext: Math.floor(targetTokens * 0.20);
@@ -129,25 +129,25 @@ export class TokenOptimizationEngine {
   private initializeOptimizationStrategies() {
     // Conservative Strategy - Minimal compression, high preservation
     this.optimizationStrategies.set('conservative', {
-      name: 'Conservative Optimization';
+      name: 'Conservative Optimization',
       description: 'Minimal compression with maximum preservation of context';
       targetUtilization: 0.7;
     compressionRatio: 0.1;
     preservationRules: [
         {
-  type: 'always_preserve';
+  type: 'always_preserve',
           pattern: /CLAUDE\.md|PROJECT_CONTEXT\.md|DEVELOPMENT_STATUS\.md/;
     priority: 10;
     reason: 'Core memory files essential for project continuity'
   };
         {
-          type: 'always_preserve';
+          type: 'always_preserve',
           pattern: /## 🎯 CORE CAPABILITIES|## 📊 CURRENT STATE/;
     priority: 9;
     reason: 'Critical project status information'
         };
         {
-          type: 'conditionally_preserve';
+          type: 'conditionally_preserve',
           pattern: /### \*\*.*\*\*/;
     priority: 7;
     reason: 'Major section headers provide important structure'
@@ -160,31 +160,31 @@ export class TokenOptimizationEngine {
     });
     // Balanced Strategy - Moderate compression with smart preservation
     this.optimizationStrategies.set('balanced', {
-      name: 'Balanced Optimization';
+      name: 'Balanced Optimization',
       description: 'Balanced approach with intelligent compression and preservation';
       targetUtilization: 0.75;
     compressionRatio: 0.25;
     preservationRules: [
         {
-  type: 'always_preserve';
+  type: 'always_preserve',
           pattern: /CLAUDE\.md|PROJECT_CONTEXT\.md/;
     priority: 10;
     reason: 'Essential memory files'
   };
         {
-          type: 'conditionally_preserve';
+          type: 'conditionally_preserve',
           pattern: /✅|🚀|🧠|📊/;
     priority: 8;
     reason: 'Status indicators and key achievements'
         };
         {
-          type: 'compressible';
+          type: 'compressible',
           pattern: /### \*\*Implementation.*\*\*|### \*\*Technical.*\*\*/;
     priority: 5;
     reason: 'Technical details can be compressed while preserving key points'
         };
         {
-          type: 'archivable';
+          type: 'archivable',
           pattern: /Historical|Deprecated|Legacy/;
     priority: 2;
     reason: 'Historical information can be archived'
@@ -198,25 +198,25 @@ export class TokenOptimizationEngine {
     });
     // Aggressive Strategy - Maximum compression with strategic preservation
     this.optimizationStrategies.set('aggressive', {
-      name: 'Aggressive Optimization';
+      name: 'Aggressive Optimization',
       description: 'Maximum compression while preserving absolutely critical information';
       targetUtilization: 0.6;
     compressionRatio: 0.4;
     preservationRules: [
         {
-  type: 'always_preserve';
+  type: 'always_preserve',
           pattern: /CLAUDE\.md/;
     priority: 10;
     reason: 'Core memory file is absolutely essential'
   };
         {
-          type: 'always_preserve';
+          type: 'always_preserve',
           pattern: /## 🧠 PROJECT IDENTITY|## 🎯 CORE CAPABILITIES/;
     priority: 9;
     reason: 'Project identity and core capabilities must be preserved'
         };
         {
-          type: 'compressible';
+          type: 'compressible',
           pattern: /.*/;
     priority: 3;
     reason: 'Most content can be compressed in aggressive mode'
@@ -482,31 +482,31 @@ distribution: TokenDistribution;
     fragmentation: FragmentationAnalysis
   ): OptimizationRecommendation[] {
     const recommendations: OptimizationRecommendation[] = [], // High token usage recommendations, if (efficiency.utilizationScore > 0.8) {
-      recommendations.push({;
-        type: 'compress';
+      recommendations.push({,
+        type: 'compress',
         target: 'Implementation documentation';
         estimatedSavings: Math.floor((distribution.categories['implementation'] || 0) * 0.3);
-    riskLevel: 'low';
+    riskLevel: 'low',
         description: 'Compress implementation details while preserving key information'
       })
 }
     // High redundancy recommendations;
 if (efficiency.redundancyLevel > 0.3) {
       recommendations.push({
-        type: 'merge';
+        type: 'merge',
         target: 'Duplicate content';
         estimatedSavings: Math.floor(Object.values(distribution.files).reduce((sum, tokens) => sum + tokens, 0) * efficiency.redundancyLevel * 0.5),
-        riskLevel: 'medium';
+        riskLevel: 'medium',
         description: 'Merge or deduplicate repeated content across files'
       })
 }
     // Fragmentation recommendations;
 if (fragmentation.score > 0.6) {
       recommendations.push({
-        type: 'consolidate';
+        type: 'consolidate',
         target: 'Small scattered files';
         estimatedSavings: Math.floor(fragmentation.score * 1000);
-    riskLevel: 'low';
+    riskLevel: 'low',
         description: 'Consolidate small files to reduce overhead and improve coherence'
       })
 }
@@ -553,7 +553,7 @@ switch (op.operation) {
     return [...this.analysisHistory]}
 }
 // Supporting Interfaces
-interface OptimizationResult {;
+interface OptimizationResult {,
     originalTokens: number;
   optimizedTokens: number;
   tokensSaved: number;

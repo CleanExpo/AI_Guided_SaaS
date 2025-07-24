@@ -26,7 +26,7 @@ const _method  = request.method;
 const _statusCode = response.status;
       // Prepare metadata;
 
-const metadata: Record<string, unknown> = {;
+const metadata: Record<string, unknown> = {,
         userAgent: request.headers.get('user-agent') || 'unknown';
     ip: request.headers.get('x-forwarded-for') || 'unknown';
     queryParams: Object.fromEntries(url.searchParams);
@@ -52,9 +52,9 @@ if (userId) {
   private static async logApiActivity(userId: string, endpoint: string;
   method: string, statusCode: number): Promise<any> {
     if (!supabase) return null, try {
-      const { error    }: any = await supabase.from('activity_logs').insert({;
+      const { error    }: any = await supabase.from('activity_logs').insert({,
         user_id: userId;
-    action: 'api_call';
+    action: 'api_call',
         resource_type: 'api';
         resource_id: endpoint;
     metadata: { method, statusCode, endpoint, created_at: new Date().toISOString() });
@@ -69,7 +69,7 @@ if (userId) {
       | 'template_use', quantity: number = 1, metadata?: Record<string, unknown>): Promise<any> {
     if (!supabase) {
       return null}try {
-      const { error    }: any = await supabase.from('usage_records').insert({;
+      const { error    }: any = await supabase.from('usage_records').insert({,
         user_id: userId;
     resource_type: resourceType;
         quantity,

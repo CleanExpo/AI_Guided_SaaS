@@ -62,7 +62,7 @@ export class AgentRegistry {
         registered_at: new Date();
     last_heartbeat: new Date();
     metrics: this.initializeMetrics();
-    health_status: 'healthy';
+    health_status: 'healthy',
         tags: [...tags, agent.role.toLowerCase()],
         capabilities_verified: false
 }
@@ -70,8 +70,8 @@ export class AgentRegistry {
       // Verify agent capabilities
       registration.capabilities_verified = await this.verifyAgentCapabilities(agent);
       // Log registration event
-      await this.logEvent({;
-        type: 'registration';
+      await this.logEvent({,
+        type: 'registration',
         agent_id: agent.agent_id;
     timestamp: new Date();
     data: { role: agent.role, capabilities: agent.capabilities.length };
@@ -203,7 +203,7 @@ if (taskResult.execution_time) {
     // Update health status based on recent performance
     this.updateHealthStatus(registration);
     this.logEvent({
-      type: 'metric_update';
+      type: 'metric_update',
       agent_id: agentId;
     timestamp: new Date();
     data: { success_rate: metrics.success_rate, total_tasks: metrics.total_tasks };
@@ -214,7 +214,7 @@ if (taskResult.execution_time) {
    * Get registry status and statistics
    */
   getRegistryStatus(): Record {
-    const status = {;
+    const status = {,
       total_agents: this.registrations.size;
     agents_by_health: {};
     agents_by_role: {};
@@ -228,7 +228,7 @@ if (taskResult.execution_time) {
       const health = registration.health_status, if (!status.agents_by_health[health]) {
         status.agents_by_health[health] = []
 }
-      status.agents_by_health[health].push({;
+      status.agents_by_health[health].push({,
         id: registration.agent.agent_id;
     name: registration.agent.name;
     role: registration.agent.role
@@ -253,8 +253,8 @@ const role = registration.agent.role;
    */
   async deregisterAgent(agentId: string): Promise<any> {
     const registration = this.registrations.get(agentId), if (!registration) return false, this.registrations.delete(agentId);
-    await this.logEvent({;
-      type: 'deregistration';
+    await this.logEvent({,
+      type: 'deregistration',
       agent_id: agentId;
     timestamp: new Date();
     data: { reason: 'manual_deregistration' };
@@ -328,8 +328,8 @@ const _totalExecutionTime = allMetrics.reduce((sum, m) => sum + m.average_execut
   private async storeAgentInMemory(registration: AgentRegistration): Promise<any> {
     try {
       await mcp__memory__create_entities({
-        entities: [{;
-  name: `Agent_${registration.agent.agent_id}`;
+        entities: [{,
+  name: `Agent_${registration.agent.agent_id}`,
   entityType: 'agent';
           observations: [
             `Role: ${registration.agent.role}`,``,
@@ -360,8 +360,8 @@ if (event.severity === 'error' || event.type === 'registration') {
   private performHealthChecks() {
     for (const registration of Array.from(this.registrations.values()) {
       const _oldStatus = registration.health_status, this.updateHealthStatus(registration), if (oldStatus !== registration.health_status) {
-        this.logEvent({;
-          type: 'health_check';
+        this.logEvent({,
+          type: 'health_check',
           agent_id: registration.agent.agent_id;
     timestamp: new Date();
     data: { old_status: oldStatus, new_status: registration.health_status };

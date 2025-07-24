@@ -20,18 +20,18 @@ export default function CausalExplorerUI() {
     // Simulate loading causal insights
     setTimeout(() => {
       const mockInsights: CausalInsight[]  = [
-        {;
-          id: '1';
+        {,
+          id: '1',
           title: 'User Engagement Driver';
-          description: 'The dashboard layout significantly impacts user engagement';
+          description: 'The dashboard layout significantly impacts user engagement',
           impact: 85;
           confidence: 92;
           page: '/dashboard'
         };
         {
-          id: '2';
+          id: '2',
           title: 'Conversion Optimization';
-          description: 'Button color and placement affects conversion rates';
+          description: 'Button color and placement affects conversion rates',
           impact: 78;
           confidence: 87;
           page: '/pricing'
@@ -71,11 +71,11 @@ export default function CausalExplorerUI() {
                 <div key={insight.id} className="border-l-4 border-blue-500 pl-4">
                   <h3 className="font-semibold text-gray-900">{insight.title}</h3>
                   <p className="text-gray-600 text-sm">{insight.description}</p>
-                  <div className="flex items-center mt-2 space-x-4">;
-                    <span className="text-xs text-gray-500">;
+                  <div className="flex items-center mt-2 space-x-4">
+                    <span className="text-xs text-gray-500">
 Impact: { insight.impact }%
                     </span>
-                    <span className="text-xs text-gray-500">;
+                    <span className="text-xs text-gray-500">
 Confidence: { insight.confidence }%
                     </span>
                   </div>

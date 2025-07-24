@@ -83,5 +83,5 @@ export const _logAssistantInteraction = (
       componentType,
       page,
       promptContext: prompt;
-    action: 'added';
+    action: 'added',
       timestamp: Date.now()})};

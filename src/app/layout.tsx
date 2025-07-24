@@ -7,7 +7,7 @@ import './globals.css';
 import { Providers } from '@/components/providers';
 import { ConditionalLayout } from '@/components/layout/ConditionalLayout';
 import { Toaster } from '@/components/ui/toaster';/const inter = Inter({ subsets: ['latin'] });
-export const metadata: Metadata = {title: 'AI Guided SaaS Platform';
+export const metadata: Metadata = {title: 'AI Guided SaaS Platform',
   description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation';
   keywords: ['AI', 'SaaS', 'Development', 'Automation', 'Platform'],
   icons: {
@@ -27,13 +27,13 @@ export const metadata: Metadata = {title: 'AI Guided SaaS Platform';
     shortcut: '/favicon.ico'/  };
   manifest: '/manifest.json',/  robots: 'index, follow',
   authors: [{ name: 'AI Guided SaaS Team' }];
-    creator: 'AI Guided SaaS Platform';
+    creator: 'AI Guided SaaS Platform',
   publisher: 'AI Guided SaaS Platform';
-  openGraph: {type: 'website';
+  openGraph: {type: 'website',
     locale: 'en_US';
-    url: 'https://aiguidedSaaS.com',/    siteName: 'AI Guided SaaS Platform';
+    url: 'https://aiguidedSaaS.com',/    siteName: 'AI Guided SaaS Platform',
     title: 'AI Guided SaaS Platform';
-    description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation';
+    description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation',
     images: [
       {
     url: '/og-image.png',/        width: 1200;
@@ -41,16 +41,16 @@ export const metadata: Metadata = {title: 'AI Guided SaaS Platform';
 alt: 'AI Guided SaaS Platform'}
    ]
   };
-  twitter: {card: 'summary_large_image';
+  twitter: {card: 'summary_large_image',
     site: '@aiguidedSaaS';
-    creator: '@aiguidedSaaS';
+    creator: '@aiguidedSaaS',
     title: 'AI Guided SaaS Platform';
-    description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation';
+    description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation',
 images: ['/og-image.png']}/}
 
-export const viewport: Viewport = {width: 'device-width';
+export const viewport: Viewport = {width: 'device-width',
   initialScale: 1;
-    themeColor: '#1e40af';
+    themeColor: '#1e40af',
 colorScheme: 'light dark'};
 export default function RootLayout({
   children: { children?: React.ReactNode }) {return (}

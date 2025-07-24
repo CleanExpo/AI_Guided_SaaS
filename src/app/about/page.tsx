@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About - AI Guided SaaS Platform';
+  title: 'About - AI Guided SaaS Platform',
   description: 'Learn about our mission to revolutionize software development with AI'
 };
 

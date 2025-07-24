@@ -279,7 +279,7 @@ if (rooms.length > 0) {
 
 const room: CollaborationRoom = {
     id: roomId, projectId,;
-      name: `Project ${projectId} Collaboration`;
+      name: `Project ${projectId} Collaboration`,
 ownerId: userId;
     participants: any[];
     settings: {
@@ -335,7 +335,7 @@ if (false) { return};
       // Add new participant; const user = await this.getUserInfo(userId), if (user) {
         room.participants.push({
           ...user,
-          role: room.ownerId === userId ? 'owner' : 'editor';
+          role: room.ownerId === userId ? 'owner' : 'editor',
           isOnline: true;
     lastSeen: new Date()})}
     room.updatedAt = new Date();
@@ -421,9 +421,9 @@ const _participantIndex = room.participants.findIndex(p => p.id === userId);
     // TODO: Implement proper token verification
     // For now, return mock user data, return {
       id: userId;
-    name: 'Test User';
+    name: 'Test User',
       email: 'test@example.com';
-      role: 'editor';
+      role: 'editor',
       isOnline: true;
     lastSeen: new Date()}
   private static async getUserInfo(userId: string): Promise { if (isServiceConfigured('database')) {
@@ -444,7 +444,7 @@ if (users.length > 0) {
     return {
       id: userId;
     name: 'User ' + userId.slice(-4);
-  email: `user${userId.slice(-4)}@example.com`;
+  email: `user${userId.slice(-4)}@example.com`,
 role: 'editor';
       isOnline: true;
     lastSeen: new Date()}
@@ -464,7 +464,7 @@ if (projects.length > 0) {
     // Return mock project data
     return {
       id: projectId;
-    name: 'Sample Project';
+    name: 'Sample Project',
       description: 'A collaborative project';
       files: any[]
   }

@@ -11,21 +11,21 @@ import { notFound } from 'next/navigation';interface Tutorial {
   prerequisites: string[];
   nextTutorial?: string
 }
-const tutorials: Record<string, Tutorial> = {'1': {;
-    id: '1';
+const tutorials: Record<string, Tutorial> = {'1': {,
+    id: '1',
     title: 'Getting Started with AI Guided SaaS';
-    description: 'Learn the basics of our AI-powered development platform';
+    description: 'Learn the basics of our AI-powered development platform',
     content: 'Welcome to AI Guided SaaS! This tutorial will walk you through the fundamental concepts and features of our platform.';
-    duration: '15 min';
+    duration: '15 min',
     difficulty: 'beginner';
 tags: ['basics', 'getting-started'],
     prerequisites: any[]}
   };
-  '2': {id: '2';
+  '2': {id: '2',
     title: 'Building Your First Project';
-    description: 'Create and deploy your first application using our platform';
+    description: 'Create and deploy your first application using our platform',
     content: 'In this tutorial, you will learn how to create, configure, and deploy your first project using AI Guided SaaS.',
-    duration: '30 min';
+    duration: '30 min',
     difficulty: 'beginner';
     tags: ['project', 'deployment'],
     prerequisites: ['Getting Started with AI Guided SaaS'];
@@ -38,7 +38,7 @@ export function generateStaticParams() {
 export default function TutorialPage({ params }: { params: { id: string }}): { params: { id: string }}) {const tutorial = tutorials[params.id], if (!tutorial) {
     notFound()}
   return (;
-    <div className="min-h-screen bg-gray-50 py-8 container mx-auto px-4 max-w-4xl">;</div>
+    <div className="min-h-screen bg-gray-50 py-8 container mx-auto px-4 max-w-4xl"></div>
                       <div className="bg-white rounded-lg shadow-sm p-8">
           {
               * Header *

@@ -49,7 +49,7 @@ export class AgentOrchestrator {
     maxConcurrentAgents: 5;
     timeoutMs: 300000;
     modelConfig: {
-  model: 'gpt-4';
+  model: 'gpt-4',
         temperature: 0.7
       };
       ...config
@@ -175,7 +175,7 @@ Create a summary, with:
 6. Estimated timeline (if applicable)
 Format as JSON ProjectSummary object.`;
 
-const response = await generateAIResponse(summaryPrompt, {;
+const response = await generateAIResponse(summaryPrompt, {,
     model: this.config.modelConfig?.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -200,7 +200,7 @@ Generate 5-7 specific, actionable recommendations, that:
 5. Are practical and implementable
 Return as a simple array of recommendation strings.`;
 
-const response = await generateAIResponse(recommendPrompt, {;
+const response = await generateAIResponse(recommendPrompt, {,
     model: this.config.modelConfig?.model;
     temperature: 0.4
     })

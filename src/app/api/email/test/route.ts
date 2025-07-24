@@ -5,12 +5,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Simulate email configuration test
         const configTest = { success: true };
     if (!configTest.success) {
-      return NextResponse.json({;
+      return NextResponse.json({,
           success: false;
           error: 'Email configuration test failed'
         }, { status: 500 })
 }
-    return NextResponse.json({ success: true, message: 'Email configuration test passed';
+    return NextResponse.json({ success: true, message: 'Email configuration test passed',
       timestamp: new Date().toISOString() })
   } catch (error) {
     console.error('Email test error:', error);
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    const status = {;
+    const status = {,
       configured: !!process.env.SMTP_HOST;
       provider: process.env.EMAIL_PROVIDER || 'none';
       lastTest: new Date().toISOString()

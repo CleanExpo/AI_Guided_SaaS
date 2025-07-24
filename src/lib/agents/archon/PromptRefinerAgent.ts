@@ -38,9 +38,9 @@ export interface OutputSpecification {
 export class PromptRefinerAgent extends Agent {
   constructor() {
     super({
-      id: 'prompt-refiner-agent';
+      id: 'prompt-refiner-agent',
       name: 'Prompt Refiner';
-      role: 'Optimize and clarify prompts for better AI responses';
+      role: 'Optimize and clarify prompts for better AI responses',
       description:
         'Expert in prompt engineering, specializing in clarity, specificity, and structure. Refines prompts to maximize AI understanding and output quality.',
       capabilities: [
@@ -88,7 +88,7 @@ const clarity = await this.assessClarity(refinedPrompt);
 const confidence = this.calculateConfidence(clarity, improvements);
       // Compile refined prompt package;
 
-const result: RefinedPrompt = {;
+const result: RefinedPrompt = {,
         originalPrompt: input;
         refinedPrompt,
         improvements,
@@ -126,7 +126,7 @@ Evaluate:
 6. Missing information (what else might be needed?)
 Provide detailed analysis in JSON format.`;
 
-const response = await generateAIResponse(analysisPrompt, {;
+const response = await generateAIResponse(analysisPrompt, {,
       model: this.config.model;
     temperature: 0.2;
     responseFormat: 'json'
@@ -144,7 +144,7 @@ For each, improvement:
 4. Explain the rationale
 Format as JSON array of improvements.`;
 
-const response = await generateAIResponse(improvementPrompt, {;
+const response = await generateAIResponse(improvementPrompt, {,
       model: this.config.model;
     temperature: 0.3;
     responseFormat: 'json'
@@ -161,7 +161,7 @@ Create a clear, specific, well-structured prompt, that:
 - Includes relevant constraints
 - Maintains the original intent
 Provide only the refined prompt text.`
-    return await generateAIResponse(refinePrompt, {;
+    return await generateAIResponse(refinePrompt, {,
       model: this.config.model;
     temperature: 0.2
   }
@@ -176,7 +176,7 @@ For each, example:
 3. Explain why this output is correct;
 Format as JSON array of examples.`;
 
-const response = await generateAIResponse(examplePrompt, {;
+const response = await generateAIResponse(examplePrompt, {,
       model: this.config.model;
     temperature: 0.4;
     responseFormat: 'json'
@@ -193,7 +193,7 @@ Consider:
 - Technical limitations
 List clear, actionable constraints.`;
 
-const response = await generateAIResponse(constraintPrompt, {;
+const response = await generateAIResponse(constraintPrompt, {,
       model: this.config.model;
     temperature: 0.2
     }};
@@ -207,7 +207,7 @@ Define:
 4. Required elements
 Format as JSON OutputSpecification.`;
 
-const response = await generateAIResponse(outputPrompt, {;
+const response = await generateAIResponse(outputPrompt, {,
       model: this.config.model;
     temperature: 0.2;
     responseFormat: 'json'
@@ -222,7 +222,7 @@ Evaluate:
 3. Suggestions for further improvement
 Format as JSON PromptClarity object.`;
 
-const response = await generateAIResponse(clarityPrompt, {;
+const response = await generateAIResponse(clarityPrompt, {,
       model: this.config.model;
     temperature: 0.2;
     responseFormat: 'json'

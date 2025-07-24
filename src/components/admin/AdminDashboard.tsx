@@ -57,7 +57,7 @@ const getActivityIcon = (type: string) => {
       case 'user_signup':
       return <Users className="h-4 w-4 text-blue-500"   />, case 'project_created':, return <BarChart3 className="h-4 w-4 text-purple-500"   />
       case 'api_call':
-      return <Activity className="h-4 w-4 text-green-500"   />;
+      return <Activity className="h-4 w-4 text-green-500"   />
       default: return <AlertCircle className="h-4 w-4 text-gray-500"   />}};
   
 const timeAgo = (timestamp: string) => {;
@@ -175,7 +175,7 @@ const value = {(stats.activeUsers / stats.totalUsers) * 100}
 </p>
           <p className="{timeAgo(activity.timestamp)}"   />
         </div>;
-    );)}
+    ))}
               <Button
 variant="ghost";
 className="w-full mt-4";
@@ -233,7 +233,7 @@ const onClick = {() => onNavigate('logs')}
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Check</p>
                 <p className="text-xl font-semibold">Logs</p>
-              <Activity className="h-8 w-8 text-orange-500" /   />;
+              <Activity className="h-8 w-8 text-orange-500" /   />
   );
 </div>
 

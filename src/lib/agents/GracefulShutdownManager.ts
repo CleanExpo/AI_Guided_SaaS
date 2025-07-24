@@ -122,7 +122,7 @@ export const _createHttpServerShutdownHandler = (server): ShutdownHandler: any =
         resolve();
 })});
 export const _createAgentShutdownHandler = (agent): ShutdownHandler: any => ({
-  name: `agent-${agent.id}`;
+  name: `agent-${agent.id}`,
 priority: 40, timeout: 10000;
   handler: async () => {
     await, agent.stop()});
