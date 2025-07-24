@@ -12,9 +12,9 @@ type ToasterToast = ToastProps & {
   id: string, title?: React.ReactNode, description?: React.ReactNode
   action?: ToastActionElement
 },
-const _actionTypes = {,
+const _actionTypes = {
   ADD_TOAST: "ADD_TOAST",
-  UPDATE_TOAST: "UPDATE_TOAST";
+  UPDATE_TOAST: "UPDATE_TOAST",
   DISMISS_TOAST: "DISMISS_TOAST",
 REMOVE_TOAST: "REMOVE_TOAST"
 } as const;
@@ -24,11 +24,11 @@ genId() {
 type ActionType = typeof actionTypes;
 type Action =;
   | {
-      type: ActionType["ADD_TOAST"];
+      type: ActionType["ADD_TOAST"],
 toast: ToasterToast
 }
   | {
-      type: ActionType["UPDATE_TOAST"];
+      type: ActionType["UPDATE_TOAST"],
 toast: Partial<ToasterToast   />
   | {
       type: ActionType["DISMISS_TOAST"]
@@ -130,7 +130,7 @@ const _dismiss = () => dispatch({ type: "DISMISS_TOAST" toastId: id  });
 }
 useToast() { const [state, setState]: any[] = React.useState<State>(memoryState), React.useEffect(() => {
     listeners.push(setState);
-        return () => {;
+        return () => {
       const _index = listeners.indexOf(setState);
       if (index > -1) {
         listeners.splice(index, 1)

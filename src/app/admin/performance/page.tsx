@@ -9,6 +9,6 @@ export default function PerformancePage() {
           <p className="text-gray-600">Performance monitoring dashboard is currently under construction.</p>
         </div>
       </div>
-    </div>;
+    </div>
   );
 }

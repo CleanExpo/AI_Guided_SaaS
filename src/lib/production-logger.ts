@@ -7,9 +7,9 @@ export enum LogLevel {
   ERROR = 0, WARN = 1, INFO = 2;
   DEBUG = 3;
 interface LogEntry {
-  timestamp: string;
+  timestamp: string,
   level: LogLeve
-l;
+l,
     message: string;
   context?: Record<string, unknown>,
   userId?: string,
@@ -24,7 +24,7 @@ constructor() {
   private shouldLog(level: LogLevel): boolean {
     return level <= this.logLevel}
   private createLogEntry(;
-level: LogLevel;
+level: LogLevel,
     message: string;
     context?: Record<string, unknown>
   ): LogEntry {
@@ -77,13 +77,13 @@ if (!this.isDevelopment && entry.level <= LogLevel.WARN) {
 securityEvent(event: string, context?: Record<string, unknown>) {
     this.warn(`SECURITY: ${event}`, context);``
 }
-  adminActivity(activity: string;
+  adminActivity(activity: string,
     adminId: string;
     context?: Record<string, unknown>
   ) {
     this.info(`ADMIN: ${activity}`, { adminId, ...context });``
 }
-  userActivity(activity: string;
+  userActivity(activity: string,
     userId: string;
     context?: Record<string, unknown>
   ) {
@@ -112,12 +112,12 @@ export const _logDebug = (message: string, context?: Record<string, unknown>) =>
 export const _logSecurity = (event: string, context?: Record<string, unknown>) => ;
   logger.securityEvent(event, context);
 export const _logAdmin = (
-    activity: string;
+    activity: string,
     adminId: string;
   context?: Record<string, unknown>
 ) => logger.adminActivity(activity, adminId, context);
 export const _logUser = (
-    activity: string;
+    activity: string,
     userId: string;
   context?: Record<string, unknown>
 ) => logger.userActivity(activity, userId, context);

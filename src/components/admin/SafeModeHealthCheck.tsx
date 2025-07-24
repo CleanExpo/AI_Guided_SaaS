@@ -4,26 +4,26 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Progress } from '../ui/progress';
 interface HealthIssue {
-id: string;
-  type: 'critical' | 'high' | 'medium' | 'low';
-  category: 'security' | 'dependency' | 'module' | 'performance' | 'ux';
-  title: string;
+id: string,
+  type: 'critical' | 'high' | 'medium' | 'low',
+  category: 'security' | 'dependency' | 'module' | 'performance' | 'ux',
+  title: string,
   description: string;
   file?: string,
   line?: number,
-  autoFixable: boolean;
+  autoFixable: boolean,
   estimatedTime: number // seconds
 }
 interface BatchConfig {
-maxIssuesPerBatch: number;
-  maxTimePerBatch: number, // seconds, pauseBetweenBatches: number // seconds;
+maxIssuesPerBatch: number,
+  maxTimePerBatch: number, // seconds, pauseBetweenBatches: number // seconds,
 requireConfirmation: boolean
 }
 interface CheckpointState {
-completedIssues: string[];
-  currentBatch: number;
-  totalBatches: number;
-  startTime: number;
+completedIssues: string[],
+  currentBatch: number,
+  totalBatches: number,
+  startTime: number,
   lastCheckpoint: number
 }
 
@@ -39,10 +39,10 @@ const [checkpoint, setCheckpoint]  = useState<CheckpointState | null>(null);
 
 const [processingLog, setProcessingLog] = useState<string[]>([]);
   
-const [batchConfig, setBatchConfig] = useState<BatchConfig>({,
-    maxIssuesPerBatch: 3;
-    maxTimePerBatch: 300, // 5 minutes;
-pauseBetweenBatches: 30 // 30 seconds;
+const [batchConfig, setBatchConfig] = useState<BatchConfig>({
+    maxIssuesPerBatch: 3,
+    maxTimePerBatch: 300, // 5 minutes,
+pauseBetweenBatches: 30 // 30 seconds,
 requireConfirmation: true
   });
   
@@ -52,57 +52,57 @@ const batchTimer = useRef<NodeJS.Timeout | null>(null);</NodeJS>
   // Mock health issues for demonstration;
 
 const mockIssues: HealthIssue[]  = [
-    {,
+    {
       id: 'SEC-001',
-      type: 'critical';
+      type: 'critical',
       category: 'security',
-      title: 'Outdated dependency with known vulnerability';
+      title: 'Outdated dependency with known vulnerability',
       description: 'Package @types/node has a security vulnerability',
-      file: 'package.json';
-      autoFixable: true;
+      file: 'package.json',
+      autoFixable: true,
 estimatedTime: 60
-    };
+    },
     {
       id: 'DEP-001',
-      type: 'high';
+      type: 'high',
       category: 'dependency',
-      title: 'Deprecated package usage';
+      title: 'Deprecated package usage',
       description: 'Using deprecated version of react-router',
-      file: 'package.json';
-      autoFixable: true;
+      file: 'package.json',
+      autoFixable: true,
 estimatedTime: 120
-    };
+    },
     {
       id: 'MOD-001',
-      type: 'medium';
+      type: 'medium',
       category: 'module',
-      title: 'Missing error boundary';
+      title: 'Missing error boundary',
       description: 'Component lacks error boundary implementation',
-      file: 'src/components/ui/card.tsx';
-      line: 15;
-      autoFixable: true;
+      file: 'src/components/ui/card.tsx',
+      line: 15,
+      autoFixable: true,
 estimatedTime: 180
-    };
+    },
     {
       id: 'PERF-001',
-      type: 'medium';
+      type: 'medium',
       category: 'performance',
-      title: 'Unoptimized image loading';
+      title: 'Unoptimized image loading',
       description: 'Images not using Next.js Image component',
-      file: 'src/app/page.tsx';
-      line: 42;
-      autoFixable: true;
+      file: 'src/app/page.tsx',
+      line: 42,
+      autoFixable: true,
 estimatedTime: 90
-    };
+    },
     {
       id: 'UX-001',
-      type: 'low';
+      type: 'low',
       category: 'ux',
-      title: 'Missing accessibility labels';
+      title: 'Missing accessibility labels',
       description: 'Form inputs missing aria-labels',
-      file: 'src/components/auth/SignInForm.tsx';
-      line: 28;
-      autoFixable: true;
+      file: 'src/components/auth/SignInForm.tsx',
+      line: 28,
+      autoFixable: true,
 estimatedTime: 45
     }
   ];
@@ -120,8 +120,8 @@ const scanForIssues = async () => {
     setIsScanning(false)
 };
   
-const createBatches = (allIssues: HealthIssue[]): HealthIssue[][] => {;
-    // Sort by priority: critical > high > medium > low; const priorityOrder = { critical: 0, high: 1, medium: 2 low: 3 };
+const createBatches = (allIssues: HealthIssue[]): HealthIssue[][] => {
+    // Sort by priority: critical > high > medium > low; const priorityOrder = { critical: 0, high: 1, medium: 2 low: 3 }
     
 const sortedIssues = [...allIssues].sort(
       (a, b) => priorityOrder[a.type] - priorityOrder[b.type];
@@ -140,11 +140,11 @@ const startSafeProcessing = async () => {
         ...prev,'❌ No issues to process. Run scan first.';
       ]); return null; }const batches  = createBatches(issues);
 
-const newCheckpoint: CheckpointState = {,
-      completedIssues: any[];
-      currentBatch: 0;
-      totalBatches: batches.length;
-      startTime: Date.now();
+const newCheckpoint: CheckpointState = {
+      completedIssues: [] as any[],
+      currentBatch: 0,
+      totalBatches: batches.length,
+      startTime: Date.now(),
 lastCheckpoint: Date.now()
 };
     setCheckpoint(newCheckpoint);
@@ -157,8 +157,8 @@ lastCheckpoint: Date.now()
 };
   
 const processBatch = async (;
-    batch: HealthIssue[];
-    batchIndex: number;
+    batch: HealthIssue[],
+    batchIndex: number,
     allBatches: HealthIssue[][]
   ) => {
     setCurrentBatch(batch), setProcessingLog(prev => [
@@ -214,7 +214,7 @@ const nextBatchIndex = batchIndex + 1;
       ])};
   
 const showBatchConfirmation = (;
-    batch: HealthIssue[];
+    batch: HealthIssue[],
     batchIndex: number
   ): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -238,14 +238,14 @@ const pauseProcessing = () => {
     setProcessingLog(prev => [...prev, '⏸️ Processing paused'])
 };
   
-const resumeProcessing = () => {;
+const resumeProcessing = () => {
     if (!checkpoint) return null; const batches = createBatches(issues); const remainingBatches = batches.slice(checkpoint.currentBatch);
     if (remainingBatches.length > 0) {
       setIsProcessing(true);
       setProcessingLog(prev => [...prev, '▶️ Resuming processing...']);
       processBatch(remainingBatches[0], checkpoint.currentBatch, batches)};
   
-const resetProcessing = () => {;
+const resetProcessing = () => {
     pauseProcessing(), setCheckpoint(null); setCurrentBatch([]);
     setProcessingLog([]);
     setIssues([])
@@ -261,8 +261,7 @@ const getIssueTypeColor = (type: HealthIssue['type']) => {
       return 'text-red-600 bg-red-100', case 'high':, return 'text-orange-600 bg-orange-100';
       case 'medium':
       return 'text-yellow-600 bg-yellow-100';
-      case 'low':
-      return 'text-blue-600 bg-blue-100';
+      case 'low': return 'text-blue-600 bg-blue-100',
       default: return 'text-gray-600 bg-gray-100'}};
   
 const getCategoryIcon = (category: HealthIssue['category']) => {
@@ -273,8 +272,7 @@ const getCategoryIcon = (category: HealthIssue['category']) => {
       return '🧩';
       case 'performance':
       return '⚡';
-      case 'ux':
-      return '👤';
+      case 'ux': return '👤',
       default: return '🔧'}};
   return (
     <div className="space-y-6">
@@ -347,7 +345,7 @@ const value  = {batchConfig.maxIssuesPerBatch}
               };
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm";
 
-const disabled = {isProcessing};
+    const disabled = {isProcessing};
               aria-label="Issues per batch";
 title="Number of issues to process in each batch";
             />
@@ -370,7 +368,7 @@ const value  = {Math.round(batchConfig.maxTimePerBatch / 60)}
               };
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm";
 
-const disabled = {isProcessing};
+    const disabled = {isProcessing};
               aria-label="Max time per batch in minutes";
 title="Maximum time to spend on each batch in minutes";
             />
@@ -393,7 +391,7 @@ const value  = {batchConfig.pauseBetweenBatches}
               };
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm";
 
-const disabled = {isProcessing};
+    const disabled = {isProcessing};
               aria-label="Pause between batches in seconds";
 title="Time to pause between processing batches in seconds";
             />
@@ -412,7 +410,7 @@ const checked  = {batchConfig.requireConfirmation}
                 };
                 className="mr-2";
 
-const disabled = {isProcessing}
+    const disabled = {isProcessing}
               />
               <span className="text-sm font-medium text-gray-700">
                 Require confirmation</span>
@@ -448,7 +446,7 @@ const disabled = {isProcessing}
                     {issue.description}</div>
                 <div;
 
-const className = {`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
+    const className = {`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
                 >
                   {issue.type.toUpperCase()}</div>
             ))}
@@ -481,7 +479,7 @@ const className = {`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(is
       </div>;
                 <div;
 
-const className = {`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
+    const className = {`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
                 >
                   {issue.type.toUpperCase()}</div>
                 {checkpoint?.completedIssues.includes(issue.id) && (

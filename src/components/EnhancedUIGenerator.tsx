@@ -6,7 +6,7 @@ import { ProjectConfig } from '@/types';
 import { Palette, Sparkles, Wand2, Eye } from 'lucide-react';
 interface EnhancedUIGeneratorProps {
 projectConfig: ProjectConfi
-g;
+g,
   onUIGenerated: (ui: unknown) => void
 };
 export default function EnhancedUIGenerator() {

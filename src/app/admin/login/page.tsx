@@ -15,16 +15,17 @@ export default function AdminLoginPage() {
 const router = useRouter();
 
   
-const handleSubmit = async (e: React.FormEvent) => {;
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const response = await fetch('/api/admin/auth', {,
+      const response = await fetch('/api/admin/auth', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-        body: JSON.stringify({ password }) });
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
 
       if (response.ok) {
         router.push('/admin/dashboard');

@@ -16,12 +16,12 @@ export class ValidationError extends Error {
   toApiError(): ApiError {
     return {
       error: 'VALIDATION_ERROR',
-      message: this.message;
-      statusCode: 400;
+      message: this.message,
+      statusCode: 400,
       details: this.errors.format()}
 // Input validation decorator;
 export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = {}) {
-  return function (, target, propertyKey: string;
+  return function (, target, propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
@@ -38,8 +38,8 @@ export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = 
 }
           if (throwOnError) {
             throw new ValidationError(error)}
-          return {,
-            success: false;
+          return {
+            success: false,
             error: new ValidationError(error).toApiError()}
         throw error;
 }};
@@ -47,7 +47,7 @@ export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = 
 }}
 // Output validation decorator;
 export function ValidateOutput(schema: z.ZodSchema, options: ValidationOptions = {}) {
-  return function (, target, propertyKey: string;
+  return function (, target, propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
@@ -65,8 +65,8 @@ const validatedOutput = schema.parse(result);
 }
           if (throwOnError) {
             throw new ValidationError(error, 'Output validation failed')}
-          return {,
-            success: false;
+          return {
+            success: false,
             error: new ValidationError(error).toApiError()}
         throw error;
 }};
@@ -74,7 +74,7 @@ const validatedOutput = schema.parse(result);
 }}
 // Combined input/output validation decorator;
 export function Validate(inputSchema: z.ZodSchema, outputSchema?: z.ZodSchema, options: ValidationOptions = {}) {
-  return function (, target, propertyKey: string;
+  return function (, target, propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
@@ -98,8 +98,8 @@ if (outputSchema) {
 }
           if (throwOnError) {
             throw new ValidationError(error)}
-          return {,
-            success: false;
+          return {
+            success: false,
             error: new ValidationError(error).toApiError()}
         throw error;
 }};
@@ -107,7 +107,7 @@ if (outputSchema) {
 }}
 // Parameter validation decorator (for multiple parameters);
 export function ValidateParams(...schemas: z.ZodSchema[]): z.ZodSchema[]) {
-  return function (, target, propertyKey: string;
+  return function (, target, propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
@@ -141,7 +141,7 @@ export function ValidateEnv(schema: z.ZodSchema): z.ZodSchema) {
 }};
 // Middleware for API routes;
 export function createValidationMiddleware(_;
-    schema: z.ZodSchema, target: 'body' | 'query' | 'params' = 'body'): z.ZodSchema;
+    schema: z.ZodSchema, target: 'body' | 'query' | 'params' = 'body'): z.ZodSchema,
   target: 'body' | 'query' | 'params' = 'body') {
   return async (req, res, next?) => {
     try {;
@@ -192,6 +192,6 @@ export function safeParse<T>(
 ): { success: true, data: T } | { success: false, error: ValidationError } {
   const result = schema.safeParse(data), if (result.success) {
     return { success: true, data: result.data }}
-  return {,
-    success: false;
+  return {
+    success: false,
     error: new ValidationError(result.error)}

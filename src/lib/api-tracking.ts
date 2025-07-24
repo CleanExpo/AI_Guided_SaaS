@@ -2,9 +2,9 @@
 import { NextRequest } from 'next/server';
 import { supabase } from './database';
 export interface ApiMetric {
-  endpoint: string;
-  method: string;
-  statusCode: number;
+  endpoint: string,
+  method: string,
+  statusCode: number,
   responseTime: number;
   userId?: string,
   errorMessage?: string,
@@ -26,19 +26,19 @@ const _method  = request.method;
 const _statusCode = response.status;
       // Prepare metadata;
 
-const metadata: Record<string, unknown> = {,
-        userAgent: request.headers.get('user-agent') || 'unknown';
-    ip: request.headers.get('x-forwarded-for') || 'unknown';
-    queryParams: Object.fromEntries(url.searchParams);
+const metadata: Record<string, unknown> = {
+        userAgent: request.headers.get('user-agent') || 'unknown',
+    ip: request.headers.get('x-forwarded-for') || 'unknown',
+    queryParams: Object.fromEntries(url.searchParams),
   timestamp: new Date().toISOString()};
       // Insert into api_metrics table;
 
 const { error    }: any = await supabase.from('api_metrics').insert({
         endpoint,
         method,;
-        status_code: statusCode;
-    response_time: responseTime;
-    user_id: userId;
+        status_code: statusCode,
+    response_time: responseTime,
+    user_id: userId,
     error_message: errorMessage;
         metadata,
         created_at: new Date().toISOString()});
@@ -49,14 +49,14 @@ if (userId) {
         await this.logApiActivity(userId, endpoint, method, statusCode)} catch (error) {
       console.error('Error in API, tracking:', error)}
   // Log API activity for user tracking;
-  private static async logApiActivity(userId: string, endpoint: string;
+  private static async logApiActivity(userId: string, endpoint: string,
   method: string, statusCode: number): Promise<any> {
     if (!supabase) return null, try {
-      const { error    }: any = await supabase.from('activity_logs').insert({,
-        user_id: userId;
+      const { error    }: any = await supabase.from('activity_logs').insert({
+        user_id: userId,
     action: 'api_call',
-        resource_type: 'api';
-        resource_id: endpoint;
+        resource_type: 'api',
+        resource_id: endpoint,
     metadata: { method, statusCode, endpoint, created_at: new Date().toISOString() });
       if (error) {
         console.error('Error logging API, activity:', error)} catch (error) {
@@ -69,11 +69,11 @@ if (userId) {
       | 'template_use', quantity: number = 1, metadata?: Record<string, unknown>): Promise<any> {
     if (!supabase) {
       return null}try {
-      const { error    }: any = await supabase.from('usage_records').insert({,
-        user_id: userId;
+      const { error    }: any = await supabase.from('usage_records').insert({
+        user_id: userId,
     resource_type: resourceType;
         quantity,
-    metadata: { ...metadata, timestamp: new Date().toISOString() };
+    metadata: { ...metadata, timestamp: new Date().toISOString() },
     created_at: new Date().toISOString()});
       if (error) {
         console.error('Error tracking resource, usage:', error)} catch (error) {
@@ -82,9 +82,9 @@ if (userId) {
   static async getApiPerformanceSummary(
 timeRange: '1h' | '24h' | '7d' | '30d' = '24h'
   ): Promise<{
-    totalCalls: number;
-    avgResponseTime: number;
-    errorRate: number;
+    totalCalls: number,
+    avgResponseTime: number,
+    errorRate: number,
     topEndpoints: Array<{ endpoint: string, calls: number, avgTime: number }>
   } | null> { if (!supabase) return null, try {
       // Calculate start time based on range, const now  = new Date();
@@ -141,12 +141,12 @@ const endpointStats: Record<;
 const _topEndpoints = Object.entries(endpointStats);
         .map(([endpoint, stats]) => ({
           endpoint,
-          calls: stats.calls;
+          calls: stats.calls,
     avgTime: Math.round(stats.totalTime / stats.calls)})).sort((a, b) => b.calls - a.calls)
         .slice(0, 10);
       return {
         totalCalls,;
-        avgResponseTime: Math.round(avgResponseTime);
+        avgResponseTime: Math.round(avgResponseTime),
     errorRate: Math.round(errorRate * 100) / 100;
         topEndpoints
     } catch (error) {

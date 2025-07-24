@@ -9,49 +9,49 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const features = [
-  {,
-  icon: Brain;
+  {
+  icon: Brain,
     title: 'AI-Powered Development',
-    description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions with intelligent code generation.';
-gradient: 'primary'};
+    description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions with intelligent code generation.',
+gradient: 'primary'},
   {
-    icon: Wrench;
+    icon: Wrench,
     title: 'Visual UI Builder',
-    description: 'Create stunning interfaces with our drag-and-drop UI builder and comprehensive component library.';
-gradient: 'secondary'};
+    description: 'Create stunning interfaces with our drag-and-drop UI builder and comprehensive component library.',
+gradient: 'secondary'},
   {
-    icon: BarChart3;
+    icon: BarChart3,
     title: 'Advanced Analytics',
-    description: 'Get deep insights into your application performance and user behavior with real-time dashboards.';
+    description: 'Get deep insights into your application performance and user behavior with real-time dashboards.',
 gradient: 'success'};
   {
-    icon: Users;
+    icon: Users,
     title: 'Team Collaboration',
-    description: 'Work seamlessly with your team using real-time collaboration tools and shared workspaces.';
-gradient: 'warning'};
+    description: 'Work seamlessly with your team using real-time collaboration tools and shared workspaces.',
+gradient: 'warning'},
   {
-    icon: Code;
+    icon: Code,
     title: 'Code Generation',
-    description: 'Generate production-ready code automatically from your designs and specifications with AI assistance.';
-gradient: 'primary'};
+    description: 'Generate production-ready code automatically from your designs and specifications with AI assistance.',
+gradient: 'primary'},
   {
-    icon: Shield;
+    icon: Shield,
     title: 'Enterprise Security',
-    description: 'Built with security-first principles and enterprise-grade protection for your applications.';
+    description: 'Built with security-first principles and enterprise-grade protection for your applications.',
 gradient: 'error'}];
 
-const benefits  = [;
-  { text: 'Reduce development time by 70%' , icon: Clock };
-  { text: 'AI-assisted code generation' , icon: Brain };
+const benefits  = [
+  { text: 'Reduce development time by 70%' , icon: Clock },
+  { text: 'AI-assisted code generation' , icon: Brain },
   { text: 'Real-time team collaboration' , icon: Users };
-  { text: 'Enterprise-grade security' , icon: Shield };
-  { text: 'Scalable cloud infrastructure' , icon: Globe };
+  { text: 'Enterprise-grade security' , icon: Shield },
+  { text: 'Scalable cloud infrastructure' , icon: Globe },
   { text: 'Comprehensive analytics dashboard' , icon: BarChart3 }];
 
-const stats = [;
-  { value: '10,000+', label: 'Developers', icon: Users };
-  { value: '99.9%', label: 'Uptime', icon: TrendingUp };
-  { value: '70%', label: 'Faster Development', icon: Rocket };
+const stats = [
+  { value: '10,000+', label: 'Developers', icon: Users },
+  { value: '99.9%', label: 'Uptime', icon: TrendingUp },
+  { value: '70%', label: 'Faster Development', icon: Rocket },
   { value: '24/7', label: 'Support', icon: Shield }];
     export default function LandingPageEnhanced() {
   const [heroRef, heroInView]  = useInView({ threshold: 0.1 triggerOnce: true });
@@ -69,14 +69,14 @@ const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true });
         <div className="max-w-6xl mx-auto relative z-10"   />
           <motion.div;
 
-const initial = {{ opacity: 0 y: 30 }
+    const initial = {{ opacity: 0 y: 30 }
             const animate = {heroInView ? { opacity: 1 y: 0 } : {}
             const transition = {{ duration: 0.8 ease: 'easeOut' }
           >
             <Badge variant="outline", className="mb-6 bg-white/50 backdrop-blur-sm border-white/20"   />
               <Sparkles className="w-3 h-3 mr-1"   />
               AI-Powered SaaS Platform</Sparkles>;
-            <h1 className="text-4xl, md: text-6xl, lg: text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent;
+            <h1 className="text-4xl, md: text-6xl, lg: text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent,
   dark: from-white, dark:via-blue-100 dark:to-purple-100">
               Build Better Software</h1>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
@@ -91,7 +91,7 @@ variant="gradient";
                 // glow;
 animation="shimmer";
 
-const icon = {<ArrowRight className="w-5 h-5"   />};
+    const icon = {<ArrowRight className="w-5 h-5"   />};
                 iconPosition="right";
                 // asChild
               ></ButtonPremium>
@@ -123,7 +123,7 @@ const icon  = {<Palette className="w-5 h-5"   />};
         <div className="max-w-6xl mx-auto"   />
           <motion.div;
 
-const initial = {{ opacity: 0 y: 30 }
+    const initial = {{ opacity: 0 y: 30 }
             const animate  = {statsInView ? { opacity: 1 y: 0 } : {}
             const transition = {{ duration: 0.8 ease: 'easeOut' };
             className="grid grid-cols-2 md:grid-cols-4 gap-6";
@@ -147,7 +147,7 @@ const initial = {{ opacity: 0 y: 30 }
         <div className="max-w-6xl mx-auto"   />
           <motion.div;
 
-const initial = {{ opacity: 0 y: 30 }
+    const initial = {{ opacity: 0 y: 30 }
             const animate  = {featuresInView ? { opacity: 1 y: 0 } : {}
             const transition = {{ duration: 0.8 ease: 'easeOut' };
             className="text-center mb-16";
@@ -182,7 +182,7 @@ const initial = {{ opacity: 0 y: 30 }
           <div className="grid lg:grid-cols-2 gap-12 items-center"   />
             <motion.div;
 
-const initial = {{ opacity: 0 x: -30 }
+    const initial = {{ opacity: 0 x: -30 }
               const animate  = {benefitsInView ? { opacity: 1 x: 0 } : {}
               const transition = {{ duration: 0.8 ease: 'easeOut' }
             >
@@ -218,18 +218,18 @@ const icon  = {<Rocket className="w-5 h-5"   />};
             </motion.div>
             <motion.div;
 
-const initial = {{ opacity: 0 x: 30 }
+    const initial = {{ opacity: 0 x: 30 }
               const animate  = {benefitsInView ? { opacity: 1 x: 0 } : {}
-              const transition = {{ duration: 0.8, ease: 'easeOut' delay: 0.2 };
+              const transition = {{ duration: 0.8, ease: 'easeOut' delay: 0.2 }
               className="relative";
             >
               <CardEnhanced variant="glass", className="p-8"   />
                 <div className="space-y-6"   />
                   <motion.div;
 
-const initial = {{ opacity: 0 scale: 0.8 }
+    const initial = {{ opacity: 0 scale: 0.8 }
                     const animate  = {benefitsInView ? { opacity: 1 scale: 1 } : {}
-                    const transition = {{ duration: 0.6 delay: 0.4 };
+                    const transition = {{ duration: 0.6 delay: 0.4 }
                     className="flex items-center justify-between";
                   >
                     <div className="flex items-center gap-3"   />
@@ -240,9 +240,9 @@ const initial = {{ opacity: 0 scale: 0.8 }
                   </motion.div>
                   <motion.div;
 
-const initial = {{ opacity: 0 scale: 0.8 }
+    const initial = {{ opacity: 0 scale: 0.8 }
                     const animate  = {benefitsInView ? { opacity: 1 scale: 1 } : {}
-                    const transition = {{ duration: 0.6 delay: 0.6 };
+                    const transition = {{ duration: 0.6 delay: 0.6 }
                     className="flex items-center justify-between";
                   >
                     <div className="flex items-center gap-3"   />
@@ -253,9 +253,9 @@ const initial = {{ opacity: 0 scale: 0.8 }
                   </motion.div>
                   <motion.div;
 
-const initial = {{ opacity: 0 scale: 0.8 }
+    const initial = {{ opacity: 0 scale: 0.8 }
                     const animate  = {benefitsInView ? { opacity: 1 scale: 1 } : {}
-                    const transition = {{ duration: 0.6 delay: 0.8 };
+                    const transition = {{ duration: 0.6 delay: 0.8 }
                     className="flex items-center justify-between";
                   >
                     <div className="flex items-center gap-3"   />
@@ -271,7 +271,7 @@ const initial = {{ opacity: 0 scale: 0.8 }
         <div className="max-w-4xl mx-auto"   />
           <motion.div;
 
-const initial = {{ opacity: 0 y: 30 }
+    const initial = {{ opacity: 0 y: 30 }
             const whileInView = {{ opacity: 1 y: 0 }
             const transition = {{ duration: 0.8 ease: 'easeOut' }
             const viewport = {{ once: true }
@@ -285,7 +285,7 @@ size="xl";
 variant="gradient";
                 // glow;
 
-const icon = {<ArrowRight className="w-5 h-5"   />};
+    const icon = {<ArrowRight className="w-5 h-5"   />};
                 iconPosition="right";
                 // asChild
               ></ButtonPremium>

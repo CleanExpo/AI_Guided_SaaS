@@ -9,8 +9,8 @@ import { Code, FileCode, Settings, Terminal, GitBranch, Save, Play, Search, Fold
 import { cn } from '@/utils/cn';
 import Editor from '@monaco-editor/react';
 interface FileNode {
-name: string;
-  path: string;
+name: string,
+  path: string,
   type: 'file' | 'folder';
   children?: FileNode[],
   content?: string,
@@ -23,23 +23,23 @@ projectId: string;
   readOnly?: boolean
 }
 const defaultFiles: FileNode[]  = [
-  {,
+  {
     name: 'src',
-    path: 'src';
+    path: 'src',
     type: 'folder',
     children: [
       {
         name: 'app',
-        path: 'src/app';
+        path: 'src/app',
         type: 'folder',
         children: [
           {
             name: 'page.tsx',
-            path: 'src/app/page.tsx';
+            path: 'src/app/page.tsx',
             type: 'file',
-            language: 'typescript';
+            language: 'typescript',
 content: `export default function Home() {
-  return (<main className="flex min-h-screen flex-col items-center justify-between p-24">, <h1>Welcome to your app</h1>;
+  return (<main className="flex min-h-screen flex-col items-center justify-between p-24">, <h1>Welcome to your app</h1>
   )
 }`
   }
@@ -47,7 +47,7 @@ content: `export default function Home() {
       },
       {
         name: 'components',
-        path: 'src/components';
+        path: 'src/components',
         type: 'folder',
 children: any[]
       }
@@ -55,17 +55,17 @@ children: any[]
   };
   {
     name: '.env.local',
-    path: '.env.local';
+    path: '.env.local',
     type: 'file',
-    language: 'plaintext';
+    language: 'plaintext',
 content: `# Environment Variables, NEXT_PUBLIC_API_URL=
 DATABASE_URL=, AUTH_SECRET=`
 },
   {
     name: 'package.json',
-    path: 'package.json';
+    path: 'package.json',
     type: 'file',
-    language: 'json';
+    language: 'json',
 content: `{
   "name": "my-app";
   "version": "0.1.0",
@@ -131,7 +131,7 @@ const handleCloseFile = (file: FileNode) => {
     const newOpenFiles = openFiles.filter((f) => f.path !== file.path), setOpenFiles(newOpenFiles), if (activeFile?.path === file.path) {;
       setActiveFile(newOpenFiles[newOpenFiles.length - 1] || null)};
   
-const handleEditorChange = (value: string | undefined) => {;
+const handleEditorChange = (value: string | undefined) => {
     if (!activeFile || readOnly) return // Update file content; const updateFileContent = (nodes: FileNode[]): FileNode[] => {
       return nodes.map((node) => {
         if (node.path === activeFile.path) {
@@ -167,7 +167,7 @@ const addTerminalOutput  = (line: string) => {
   };
 
 const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
-    return nodes.map((node) => (\n    <div key={node.path} className={cn(;
+    return nodes.map((node) => (\n    <div key={node.path} className={cn(
             "flex items-center gap-2 px-2 py-1 hover: bg-gray-100 cursor-pointer text-sm";
             activeFile?.path === node.path && "bg-primary/10 text-primary"
           )}
@@ -209,7 +209,7 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
 size="sm";
 variant="outline";
 
-const onClick = {handleRun}
+    const onClick = {handleRun}
           >
             <Play className="h-4 w-4 mr-1"   />
             Run
@@ -217,7 +217,7 @@ const onClick = {handleRun}
           <Button;
 size="sm";
 
-const variant = {hasChanges ? 'default' : 'outline'}
+    const variant = {hasChanges ? 'default' : 'outline'}
             const onClick = {handleSave}
             const disabled = {readOnly || isSaving}
           >
@@ -238,7 +238,7 @@ type="text";
 placeholder="Search files...";
 className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
 
-const value = {searchQuery}
+    const value = {searchQuery}
                 const onChange = {(e) => setSearchQuery(e.target.value)}
               />
 </div>
@@ -263,7 +263,7 @@ const value = {searchQuery}
                 <button;
 className="ml-2 hover:bg-gray-300 rounded p-0.5";
 
-const onClick = {(e) => {
+    const onClick = {(e) => {
                     e.stopPropagation(), handleCloseFile(file)}
                 ></button>
                   <X className="h-3 w-3"   />
@@ -277,11 +277,11 @@ const onClick = {(e) => {
                 const onChange = {handleEditorChange};
                 theme="vs-light";
 
-const options = {{,
-                  minimap: { enabled: false };
-                  fontSize: 14;
+    const options = {{
+                  minimap: { enabled: false },
+                  fontSize: 14,
                   lineNumbers: 'on',
-                  readOnly: readOnly;
+                  readOnly: readOnly,
                   wordWrap: 'on',
                   automaticLayout: true
   }
@@ -305,7 +305,7 @@ size="sm";
 variant="ghost";
 className="text-gray-400 hover:text-gray-100";
 
-const onClick = {() => setTerminalOutput([])}
+    const onClick = {() => setTerminalOutput([])}
           >
             Clear
 </Button>
@@ -314,7 +314,7 @@ const onClick = {() => setTerminalOutput([])}
             <div key={index} className="mb-1">
               {line}</div>
           ))}
-      </div>;
+      </div>
 );
 </Editor>
 </any>

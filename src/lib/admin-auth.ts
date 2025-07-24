@@ -6,19 +6,19 @@ import { NextRequest } from 'next/server';
 import { logAdmin, logWarn } from './production-logger';
 
 export interface AdminUser {
-  id: string;
-  email: string, name: string;
-  role: 'super_admin' | 'admin' | 'moderator';
-  status: 'active' | 'suspended' | 'pending';
-  lastLogin: Date;
-  createdAt: Date;
+  id: string,
+  email: string, name: string,
+  role: 'super_admin' | 'admin' | 'moderator',
+  status: 'active' | 'suspended' | 'pending',
+  lastLogin: Date,
+  createdAt: Date,
   permissions: string[]}
 
 export interface AdminSession {
-  adminId: string;
-  email: string, role: string;
-  permissions: string[];
-  iat: number;
+  adminId: string,
+  email: string, role: string,
+  permissions: string[],
+  iat: number,
   exp: number}
 
 // Master admin credentials from environment
@@ -26,13 +26,13 @@ const MASTER_ADMIN_EMAILS = [
   process.env.ADMIN_EMAIL || '';
 ].filter((email) => email !== '');
 
-const MASTER_ADMIN = {,
+    const MASTER_ADMIN = {
   id: 'master_admin_001',
-  email: process.env.ADMIN_EMAIL || '';
+  email: process.env.ADMIN_EMAIL || '',
   name: 'Master Administrator',
-  role: 'super_admin' as const;
-  status: 'active' as const;
-  password: process.env.ADMIN_PASSWORD || '';
+  role: 'super_admin' as const,
+  status: 'active' as const,
+  password: process.env.ADMIN_PASSWORD || '',
   permissions: [
     'manage_users';
     'moderate_content',
@@ -74,13 +74,13 @@ export class AdminAuthService {
 
       if (MASTER_ADMIN_EMAILS.includes(email) && password === MASTER_ADMIN.password) {
         return {
-          id: MASTER_ADMIN.id;
+          id: MASTER_ADMIN.id,
           email: email, // Use the email they logged in with
-          name: MASTER_ADMIN.name;
-          role: MASTER_ADMIN.role;
-          status: MASTER_ADMIN.status;
-          lastLogin: new Date();
-          createdAt: new Date('2024-01-01');
+          name: MASTER_ADMIN.name,
+          role: MASTER_ADMIN.role,
+          status: MASTER_ADMIN.status,
+          lastLogin: new Date(),
+          createdAt: new Date('2024-01-01'),
           permissions: MASTER_ADMIN.permissions
         }
 }
@@ -96,15 +96,15 @@ export class AdminAuthService {
   // Generate admin JWT token
   generateAdminToken(admin: AdminUser): string {
     try {
-      const payload: Omit<AdminSession, 'iat' | 'exp'> = {,
-        adminId: admin.id;
-        email: admin.email;
-        role: admin.role;
+      const payload: Omit<AdminSession, 'iat' | 'exp'> = {
+        adminId: admin.id,
+        email: admin.email,
+        role: admin.role,
         permissions: admin.permissions
       };
 
       return jwt.sign(payload, this.jwtSecret, {
-        expiresIn: '8h', // 8 hour session;
+        expiresIn: '8h', // 8 hour session,
         issuer: 'ai-guided-saas-admin',
         audience: 'admin-panel'
       })
@@ -115,7 +115,7 @@ export class AdminAuthService {
   // Verify admin JWT token
   verifyAdminToken(token: string): AdminSession | null {
     try {
-      const decoded = jwt.verify(token, this.jwtSecret, {,
+      const decoded = jwt.verify(token, this.jwtSecret, {
         issuer: 'ai-guided-saas-admin',
         audience: 'admin-panel'
       }) as AdminSession;
@@ -177,15 +177,14 @@ export async function requireAdminAuth(
 }
 
     if (requiredPermission && !adminAuth.hasPermission(session, requiredPermission)) {
-      return {,
-        authorized: false;
+      return {
+        authorized: false,
         error: `Forbidden - Missing required permission: ${requiredPermission}`
       }
 }
 
     return { authorized: true, session }
-} catch (error) {;
+} catch (error) {
     console.error('Error in requireAdminAuth:', error);
-        return { authorized: false, error: 'Internal server error' }
-}
+        return { authorized: false, error: 'Internal server error'   }
 };

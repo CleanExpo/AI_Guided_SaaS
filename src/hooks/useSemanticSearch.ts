@@ -23,7 +23,7 @@ const [cache]: any[] = useState(new Map<string, SearchResponse>();
    * Perform semantic search
    */;
 
-const _search = useCallback(async (request: SearchRequest) => {;
+const _search = useCallback(async (request: SearchRequest) => {
     setIsSearching(true);
     setError(null)
 }
@@ -42,9 +42,9 @@ if (options.cacheResults) {
         cache.set(cacheKey, response)}
       return response;
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Search failed', setError(errorMessage), toast({,
+      const _errorMessage = err instanceof Error ? err.message : 'Search failed', setError(errorMessage), toast({
         title: 'Search Error',
-        description: errorMessage;
+        description: errorMessage,
         variant: 'destructive'
       });
       throw err
@@ -76,9 +76,9 @@ const _indexDocument = useCallback(async (request: IndexRequest) => { setIsIndex
       });
       return result;
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed', setError(errorMessage), toast({,
+      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed', setError(errorMessage), toast({
         title: 'Indexing Error',
-        description: errorMessage;
+        description: errorMessage,
         variant: 'destructive'
       });
       throw err
@@ -99,9 +99,9 @@ const _indexBatch = useCallback(async (requests: IndexRequest[]) => { setIsIndex
       });
       return result;
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed', setError(errorMessage), toast({,
+      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed', setError(errorMessage), toast({
         title: 'Indexing Error',
-        description: errorMessage;
+        description: errorMessage,
         variant: 'destructive'
       });
       throw err
@@ -111,7 +111,7 @@ const _indexBatch = useCallback(async (requests: IndexRequest[]) => { setIsIndex
    * Clear search results and cache
    */;
 
-const _clearResults = useCallback(() => {;
+const _clearResults = useCallback(() => {
     setSearchResults(null), setContext7([]); setError(null);
     cache.clear()
 }, [cache]);
@@ -119,13 +119,13 @@ const _clearResults = useCallback(() => {;
    * Auto-index current page content if enabled
    */
   useEffect(() => { if(options.autoIndex && typeof window !== 'undefined') {
-      const _indexCurrentPage = async () => {;
+      const _indexCurrentPage = async () => {
         const _content = document.body.innerText; const _path = window.location.pathname}
         try {
-          await indexDocument({,
+          await indexDocument({
             id: path;
             content,
-            metadata: { url: window.location.href, title: document.title, timestamp: new Date().toISOString() };
+            metadata: { url: window.location.href, title: document.title, timestamp: new Date().toISOString() },
             type: 'document'
           })
         } catch (err) {

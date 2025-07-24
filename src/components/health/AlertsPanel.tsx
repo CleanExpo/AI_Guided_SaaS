@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { AlertCircle, AlertTriangle, Info } from 'lucide-react';
 
 interface Alert {
-  id: string;
-  type: 'error' | 'warning' | 'info';
-  message: string;
+  id: string,
+  type: 'error' | 'warning' | 'info',
+  message: string,
   timestamp: Date;
 }
 
@@ -18,7 +18,7 @@ export function AlertsPanel() {
     setAlerts([
       {
         id: '1',
-        type: 'info';
+        type: 'info',
         message: 'System running normally',
         timestamp: new Date()
       }
@@ -49,6 +49,6 @@ export function AlertsPanel() {
           ))
         )}
       </div>
-    </div>;
+    </div>
   );
 }

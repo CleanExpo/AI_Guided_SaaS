@@ -3,25 +3,25 @@ import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated testing
  */;
 export function createTestingAutomationWorkflow(
-    projectName: string, webhookPath: string = 'run-tests'): string;
+    projectName: string, webhookPath: string = 'run-tests'): string,
   webhookPath: string = 'run-tests'): N8nWorkflow {
-  const nodes: N8nNode[] = [// 1. Webhook or Schedule trigger, {,
+  const nodes: N8nNode[] = [// 1. Webhook or Schedule trigger, {
   id: 'trigger_1',
-      name: 'Test Trigger';
+      name: 'Test Trigger',
       type: 'n8n-nodes-base.webhook',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [250, 300],
     parameters: {
   httpMethod: 'POST',
-        path: webhookPath;
+        path: webhookPath,
     responseMode: 'lastNode',
         responseData: 'allEntries'
 };
     // 2. Schedule trigger (alternative) {
       id: 'schedule_1',
-      name: 'Scheduled Tests';
+      name: 'Scheduled Tests',
       type: 'n8n-nodes-base.scheduleTrigger',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [250, 500],
     parameters: {
   rule: {
@@ -31,15 +31,15 @@ export function createTestingAutomationWorkflow(
               hoursInterval: 6 // Run every 6 hours
 }
    ]
-};
+},
       disabled: true // Disabled by default, user can enable
     },
     // 3. Merge triggers
     {
       id: 'merge_1',
-      name: 'Merge Triggers';
+      name: 'Merge Triggers',
       type: 'n8n-nodes-base.merge',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [450, 400],
     parameters: {
   mode: 'combine',
@@ -48,20 +48,20 @@ export function createTestingAutomationWorkflow(
     // 4. Prepare test configuration
     {
       id: 'code_1',
-      name: 'Prepare Test Config';
+      name: 'Prepare Test Config',
       type: 'n8n-nodes-base.code',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [650, 400],
     parameters: {
   mode: 'runOnceForEachItem',
         jsCode: ```, const input = $input.item.json; const _isScheduled = input.schedule !== undefined;
 // Default test configuration;
 
-const defaultConfig = {,
+    const defaultConfig = {
   projectId: '${projectName}',
   testSuites: ['unit', 'integration', 'e2e'],
-  parallel: true;
-    coverage: true;
+  parallel: true,
+    coverage: true,
     reporters: ['json', 'html', 'junit']
 };
 // Merge with webhook data if available;
@@ -73,7 +73,7 @@ const config = isScheduled ? defaultConfig : {
 };
 return {
   ...config,;
-  timestamp: new Date().toISOString();
+  timestamp: new Date().toISOString(),
     triggeredBy: isScheduled ? 'schedule' : 'webhook',
   runId: Math.random().toString(36).substring(7)
 };`
@@ -81,77 +81,77 @@ return {
     // 5. Run unit tests
     {
       id: 'http_unit',
-      name: 'Run Unit Tests';
+      name: 'Run Unit Tests',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [850, 300],
     parameters: {
   method: 'POST',
-        url: '={{ $env.API_URL }}/api/test/unit';
+        url: '={{ $env.API_URL }}/api/test/unit',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendBody: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendBody: true,
     bodyParametersJson: `{{``
           JSON.stringify({
-            projectId: $json.projectId;
-    coverage: $json.coverage;
-    reporters: $json.reporters;
+            projectId: $json.projectId,
+    coverage: $json.coverage,
+    reporters: $json.reporters,
     runId: $json.runId
-          })}`,``;
+          })}`, ``,
 options: {
           timeout: 120000 // 2 minutes
          };
     // 6. Run integration tests
     {
       id: 'http_integration',
-      name: 'Run Integration Tests';
+      name: 'Run Integration Tests',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [850, 400],
     parameters: {
   method: 'POST',
-        url: '={{ $env.API_URL }}/api/test/integration';
+        url: '={{ $env.API_URL }}/api/test/integration',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendBody: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendBody: true,
     bodyParametersJson: `{{``
           JSON.stringify({
-            projectId: $json.projectId;
-    reporters: $json.reporters;
+            projectId: $json.projectId,
+    reporters: $json.reporters,
     runId: $json.runId
-          })}`,``;
+          })}`, ``,
 options: {
           timeout: 180000 // 3 minutes
          };
     // 7. Run E2E tests
     {
       id: 'http_e2e',
-      name: 'Run E2E Tests';
+      name: 'Run E2E Tests',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [850, 500],
     parameters: {
   method: 'POST',
-        url: '={{ $env.API_URL }}/api/test/e2e';
+        url: '={{ $env.API_URL }}/api/test/e2e',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendBody: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendBody: true,
     bodyParametersJson: `{{``
           JSON.stringify({
-            projectId: $json.projectId;
-    baseUrl: $json.baseUrl || $env.STAGING_URL;
+            projectId: $json.projectId,
+    baseUrl: $json.baseUrl || $env.STAGING_URL,
     browsers: $json.browsers || ['chromium', 'firefox'],
             runId: $json.runId
-          })}`,``;
+          })}`, ``,
 options: {
           timeout: 300000 // 5 minutes
          };
     // 8. Aggregate test results
     {
       id: 'code_2',
-      name: 'Aggregate Results';
+      name: 'Aggregate Results',
       type: 'n8n-nodes-base.code',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [1050, 400],
     parameters: {
   mode: 'runOnceForAllItems',
@@ -178,44 +178,43 @@ const _allPassed  = totalFailed === 0;
 const _passRate = totalTests > 0 ? (totalPassed / totalTests * 100).toFixed(2) : 0;
 // Coverage data;
 
-const coverage = unitTests.coverage || {,
-    lines: 0;
-    statements: 0;
-    functions: 0;
-    branches: 0
-};
+const coverage = unitTests.coverage || {
+    lines: 0,
+    statements: 0,
+    functions: 0,
+    branches: 0 }
 return [{
-  json: {,
-  projectId: config.projectId;
-    runId: config.runId;
-    timestamp: new Date().toISOString();
-    success: allPassed;
+  json: {
+  projectId: config.projectId,
+    runId: config.runId,
+    timestamp: new Date().toISOString(),
+    success: allPassed,
     summary: {
-  total: totalTests;
-    passed: totalPassed;
-    failed: totalFailed;
-    skipped: totalSkipped;
+  total: totalTests,
+    passed: totalPassed,
+    failed: totalFailed,
+    skipped: totalSkipped,
     passRate: \`\${passRate}%\`
-    };
+    },
     suites: {
-      unit: unitTests;
-    integration: integrationTests;
+      unit: unitTests,
+    integration: integrationTests,
     e2e: e2eTests
     };
     coverage,
     duration: {
-      unit: unitTests.duration || 0;
-    integration: integrationTests.duration || 0;
-    e2e: e2eTests.duration || 0;
+      unit: unitTests.duration || 0,
+    integration: integrationTests.duration || 0,
+    e2e: e2eTests.duration || 0,
     total: (unitTests.duration || 0) + (integrationTests.duration || 0) + (e2eTests.duration || 0)
      }];```
 },
     // 9. Check if tests passed
     {
       id: 'if_1',
-      name: 'Check Test Status';
+      name: 'Check Test Status',
       type: 'n8n-nodes-base.if',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [1250, 400],
     parameters: {
   conditions: {
@@ -229,9 +228,9 @@ return [{
     // 10. Generate test report
     {
       id: 'html_1',
-      name: 'Generate HTML Report';
+      name: 'Generate HTML Report',
       type: 'n8n-nodes-base.html',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [1450, 300],
     parameters: {
   operation: 'generateHtmlTemplate',
@@ -315,30 +314,30 @@ return [{
     // 11. Upload report
     {
       id: 'http_upload',
-      name: 'Upload Report';
+      name: 'Upload Report',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [1650, 300],
     parameters: {
   method: 'POST',
-        url: '={{ $env.API_URL }}/api/reports/upload';
+        url: '={{ $env.API_URL }}/api/reports/upload',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendBody: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendBody: true,
     bodyParametersJson: `{{``
           JSON.stringify({
-            projectId: $node["Aggregate Results"].json.projectId;
+            projectId: $node["Aggregate Results"].json.projectId,
     runId: $node["Aggregate Results"].json.runId: type, 'test-report',
             format: 'html',
             content: $json.html
-          })}`,``;
+          })}`, ``,
 options: {};
     // 12. Handle test failures
     {
       id: 'code_3',
-      name: 'Prepare Failure Report';
+      name: 'Prepare Failure Report',
       type: 'n8n-nodes-base.code',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [1450, 500],
     parameters: {
   mode: 'runOnceForEachItem',
@@ -352,66 +351,66 @@ Object.entries(results.suites).forEach(([suite, data]) => {
       failures: data.failures
     })});
 return {
-  projectId: results.projectId;
-    runId: results.runId;
+  projectId: results.projectId,
+    runId: results.runId,
     timestamp: results.timestamp;
   failedTests,
-  summary: results.summary;
+  summary: results.summary,
     message: \`Tests failed for \${results.projectId}: \${results.summary.failed} tests failed out of \${results.summary.total}\`
 };```
 },
     // 13. Send notifications
     {
       id: 'slack_1',
-      name: 'Send Slack Notification';
+      name: 'Send Slack Notification',
       type: 'n8n-nodes-base.slack',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [1850, 400],
     parameters: {
   authentication: 'oAuth2',
-        resource: 'message';
+        resource: 'message',
         operation: 'post',
-        channel: '={{ $env.SLACK_CHANNEL }}';
+        channel: '={{ $env.SLACK_CHANNEL }}',
         text: '={{ $json.message || "Test run completed for " + $json.projectId }}';
     otherOptions: {
           attachments: [
             {
-  color: '={{ $json.success ? "good" : "danger" }}';
+  color: '={{ $json.success ? "good" : "danger" }}',
               title: 'Test Report - {{ $json.projectId }}',
-              title_link: '={{ $node["Upload Report"].json.reportUrl }}';
+              title_link: '={{ $node["Upload Report"].json.reportUrl }}',
               fields: [
                 {
   title: 'Total Tests',
-                  value: '{{ $json.summary.total }}';
+                  value: '{{ $json.summary.total }}',
                   short: true
   };
                 {
                   title: 'Pass Rate',
-                  value: '{{ $json.summary.passRate }}';
+                  value: '{{ $json.summary.passRate }}',
                   short: true
                 };
                 {
                   title: 'Duration',
-                  value: '{{ Math.round($json.duration.total / 1000)}s';
+                  value: '{{ Math.round($json.duration.total / 1000)}s',
                   short: true
                 };
                 {
                   title: 'Coverage',
-                  value: '{{ $json.coverage.lines }}%';
+                  value: '{{ $json.coverage.lines }}%',
                   short: true
 }
-              ];
+              ],
               footer: 'n8n Test Automation',
               ts: '={{ Math.floor(Date.now() / 1000)}'
 }
           ]
-};
+},
     credentials: {
         slackOAuth2Api: 'Slack OAuth2'}}
   ]
   // Define connections;
 
-const _connections = {'trigger_1': {
+    const _connections = {'trigger_1': {
       'main': [[{ node: 'merge_1', type: 'main' as const index: 0 }]];
     };
     'schedule_1': {
@@ -422,8 +421,8 @@ const _connections = {'trigger_1': {
     };
     'code_1': {
       'main': [[
-        { node: 'http_unit', type: 'main' as const index: 0 };
-        { node: 'http_integration', type: 'main' as const index: 0 };
+        { node: 'http_unit', type: 'main' as const index: 0 },
+        { node: 'http_integration', type: 'main' as const index: 0 },
         { node: 'http_e2e', type: 'main' as const index: 0 }
    ]]
     };
@@ -462,8 +461,8 @@ active: false;
     connections,
     settings: {
       executionOrder: 'v1',
-      saveManualExecutions: true;
+      saveManualExecutions: true,
     callerPolicy: 'workflowsFromSameOwner'
-    };
+    },
     tags: ['testing', 'automation', 'ci-cd', 'quality']
 }

@@ -16,24 +16,25 @@ const sortBy = url.searchParams.get('sortBy') || 'createdAt';
 const sortOrder = (url.searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc';
         // Simulate users data;
 
-const users  = Array.from({ length: limit }, (_, i) => ({,
+const users  = Array.from({ length: limit }, (_, i) => ({
             id: `user_${page}_${i + 1}`,
-            email: `user${page}_${i + 1}@example.com`;
+            email: `user${page}_${i + 1}@example.com`,
             name: `User ${page} ${i + 1}`,
             status: i % 2 === 0 ? 'active' : 'inactive',
-            createdAt: new Date().toISOString();
+            createdAt: new Date().toISOString(),
             lastLogin: new Date().toISOString()
 }));
 
-const response = {
+    const response = {
             users,
-            pagination: {;
-                page;
+            pagination: {
+                page,
                 limit,
-                total: 1247;
-                pages: Math.ceil(1247 / limit)};
+                total: 1247,
+                pages: Math.ceil(1247 / limit)
+            },
             filters: {
-                search;
+                search,
                 status,
                 sortBy,
                 sortOrder

@@ -2,33 +2,33 @@
 import React from 'react';
 import { notFound } from 'next/navigation';interface Tutorial {
   id: string;
-  /  title: string;
-  description: string;
-  content: string;
-  duration: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  tags: string[];
+  /  title: string,
+  description: string,
+  content: string,
+  duration: string,
+  difficulty: 'beginner' | 'intermediate' | 'advanced',
+  tags: string[],
   prerequisites: string[];
   nextTutorial?: string
 }
-const tutorials: Record<string, Tutorial> = {'1': {,
+const tutorials: Record<string, Tutorial> = {'1': {
     id: '1',
-    title: 'Getting Started with AI Guided SaaS';
+    title: 'Getting Started with AI Guided SaaS',
     description: 'Learn the basics of our AI-powered development platform',
-    content: 'Welcome to AI Guided SaaS! This tutorial will walk you through the fundamental concepts and features of our platform.';
+    content: 'Welcome to AI Guided SaaS! This tutorial will walk you through the fundamental concepts and features of our platform.',
     duration: '15 min',
-    difficulty: 'beginner';
+    difficulty: 'beginner',
 tags: ['basics', 'getting-started'],
     prerequisites: any[]}
   };
   '2': {id: '2',
-    title: 'Building Your First Project';
+    title: 'Building Your First Project',
     description: 'Create and deploy your first application using our platform',
     content: 'In this tutorial, you will learn how to create, configure, and deploy your first project using AI Guided SaaS.',
     duration: '30 min',
-    difficulty: 'beginner';
+    difficulty: 'beginner',
     tags: ['project', 'deployment'],
-    prerequisites: ['Getting Started with AI Guided SaaS'];
+    prerequisites: ['Getting Started with AI Guided SaaS'],
 nextTutorial: '3'}
 
 export function generateStaticParams() {

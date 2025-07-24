@@ -11,8 +11,8 @@ import { Send, Bot, User, Search, Sparkles } from 'lucide-react';
 import { useSemanticSearch } from '@/hooks/useSemanticSearch';
 import { toast } from '@/components/ui/use-toast';
 interface ChatMessage {
-id: string;
-  role: 'user' | 'assistant' | 'system';
+id: string,
+  role: 'user' | 'assistant' | 'system',
   content: string;
   context?: string[],
   timestamp: Date
@@ -44,19 +44,19 @@ const messagesEndRef = useRef<HTMLDivElement>(null);
   // Index conversation for future retrieval;
 
 const _indexConversation = useCallback(async (message: ChatMessage) => { if (!enableSemanticSearch) return null}try {
-      await indexDocument({,
+      await indexDocument({
         id: `conversation-${message.id}`,
-        content: message.content;
+        content: message.content,
         metadata: { role: message.role, timestamp: message.timestamp.toISOString(), conversationId: 'current' // In production, use actual conversation ID },
         type: 'conversation'
 })
     } catch (error) {
       console.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
   
-const _sendMessage = async () => { if (!input.trim() || isLoading) return null}const userMessage: ChatMessage = {,
-  id: Date.now().toString();
+const _sendMessage = async () => { if (!input.trim() || isLoading) return null}const userMessage: ChatMessage = {
+  id: Date.now().toString(),
       role: 'user',
-      content: input;
+      content: input,
 timestamp: new Date()
 };
     setMessages(prev => [...prev, userMessage]);
@@ -71,40 +71,40 @@ if (relevantContext.length > 0) {
 }
           // Add system message showing context retrieval;
 
-const contextMessage: ChatMessage = {,
+const contextMessage: ChatMessage = {
   id: `context-${Date.now()}`,
-            role: 'system';
+            role: 'system',
             content: `Retrieved ${relevantContext.length} relevant context chunks`,
-            context: relevantContext;
+            context: relevantContext,
             timestamp: new Date()
 };
           setMessages(prev => [...prev, contextMessage])}
       // Send to AI with context;
 
-const response = await fetch('/api/validated-chat', {,
+const response = await fetch('/api/admin/auth', {
         method: 'POST',
-headers: { 'Content-Type': 'application/json' }
+headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: input;
+          message: input,
           context: relevantContext.slice(0, maxContextSize), // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
         })};
       if (!response.ok) throw new Error('Failed to get AI response');
       
 const data  = await response.json();
 
-const assistantMessage: ChatMessage = {,
-        id: Date.now().toString();
+const assistantMessage: ChatMessage = {
+        id: Date.now().toString(),
         role: 'assistant',
-        content: data.response;
+        content: data.response,
 timestamp: new Date()
 };
       setMessages(prev => [...prev, assistantMessage]);
       // Index assistant response
       await indexConversation(assistantMessage)
 } catch (error) {
-      console.error('Chat error:', error), toast({,
+      console.error('Chat error:', error), toast({
         title: 'Error',
-        description: 'Failed to send message. Please try again.';
+        description: 'Failed to send message. Please try again.',
 variant: 'destructive'
 })
 } finally {

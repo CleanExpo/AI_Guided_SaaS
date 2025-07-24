@@ -14,17 +14,17 @@ export default function SignInForm() {
 
 const [error, setError] = useState<string | null>(null);
   
-const [formData, setFormData] = useState({,
-    email: '';
+const [formData, setFormData] = useState({
+    email: '',
 password: ''
   });
   
-const handleSubmit = async (e: React.FormEvent) => {;
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(), setIsLoading(true); setError(null);
     try {
-      const result = await signIn('credentials', {,
-        email: formData.email;
-        password: formData.password;
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
 redirect: false
       });
       if (result?.error) {
@@ -56,7 +56,7 @@ const handleGoogleSignIn = async () => {
 variant="outline";
 className="w-full";
 
-const onClick = {handleGoogleSignIn}
+    const onClick = {handleGoogleSignIn}
             const disabled = {isGoogleLoading}
           >
             {isGoogleLoading ? (
@@ -82,7 +82,7 @@ id="email";
 type="email";
 placeholder="Enter your email";
 
-const value = {formData.email}
+    const value = {formData.email}
                   const onChange = {(e) => setFormData({ ...formData, email: e.target.value })};
                   className="pl-10";
                   required
@@ -97,7 +97,7 @@ id="password";
 type="password";
 placeholder="Enter your password";
 
-const value = {formData.password}
+    const value = {formData.password}
                   const onChange = {(e) => setFormData({ ...formData, password: e.target.value })};
                   className="pl-10";
                   required
@@ -115,12 +115,12 @@ const value = {formData.password}
 variant="link";
 className="p-0 h-auto font-normal";
 
-const onClick = {() => router.push('/auth/signup')}
+    const onClick = {() => router.push('/auth/signup')}
             >
               Sign up
 </Button>
 </CardContent>
-</div>;
+</div>
   );
 </div>
   

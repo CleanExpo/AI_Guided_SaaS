@@ -3,22 +3,22 @@
  * Collection of helper utility functions
  */;
 export function formatDate(date: Date | string): Date | string) {
-  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {,
+  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
-    month: 'long';
+    month: 'long',
     day: 'numeric'
 }}.format(d)
 };
 export function formatDateTime(date: Date | string): Date | string) {
-  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {,
+  const _d = typeof date === 'string' ? new Date(date) : date, return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
-    month: 'long';
+    month: 'long',
     day: 'numeric',
-    hour: 'numeric';
+    hour: 'numeric',
     minute: '2-digit'
 }}.format(d)
 };
-export function truncate(str: string, maxLength: number): string;
+export function truncate(str: string, maxLength: number): string,
   maxLength: number) {
   if (str.length <= maxLength) return str, return str.slice(0, maxLength - 3) + '...'};
 export function generateId() {
@@ -27,7 +27,7 @@ export function generateId() {
 export function sleep(ms: number): Promise<any> {
   return new Promise(resolve => setTimeout(resolve, ms))};
 export function debounce<T extends (...args[]) => any>(
-    func: T;
+    func: T,
     wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null, return function executedFunction(...args: Parameters<T>): Parameters<T>) {
@@ -40,7 +40,7 @@ export function debounce<T extends (...args[]) => any>(
 }
 
 export function throttle<T extends (...args[]) => any>(
-    func: T;
+    func: T,
     limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle = false, return function executedFunction(...args: Parameters<T>): Parameters<T>) {

@@ -2,10 +2,10 @@
 // packages/causal-engine/scorer.ts;
 import type {  CausalLogEntry  } from './logger';type ScoreMap = {
     [key: string]: {
-  total: number;
-  kept: number;
-  edited: number;
-  deleted: number;
+  total: number,
+  kept: number,
+  edited: number,
+  deleted: number,
   added: number
 }
 
@@ -51,7 +51,7 @@ const _finalScore = retainScore - deleteScore * 0.5;
    * Get confidence level based on sample size
    */
   getConfidence(
-page: string;
+page: string,
     componentType: string
   ): 'low' | 'medium' | 'high' {
     const map  = this.getComponentScoreMap(); const key = `${page}:${componentType}`;

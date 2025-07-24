@@ -9,7 +9,7 @@ import { AgentResultSchema } from '@/lib/validation/agent-schemas';
 export abstract class ValidatedAgent extends Agent {
   protected, inputSchema: z.ZodSchema
   protected, outputSchema: z.ZodSchema, constructor(config: AgentConfig, inputSchema: z.ZodSchema, outputSchema: z.ZodSchema) {
-    super(config);
+    super(config)
     this.inputSchema = inputSchema
     this.outputSchema = outputSchema
 }
@@ -29,10 +29,10 @@ export abstract class ValidatedAgent extends Agent {
 } catch (error) {
         this.think(`Input validation, failed: ${error}`)``
         return {
-          success: false;
-    output: null;
-    messages: this.messages;
-    artifacts: this.context.artifacts;
+          success: false,
+    output: null,
+    messages: this.messages,
+    artifacts: this.context.artifacts,
     error: `Input validation, failed: ${error instanceof Error ? error.message : 'Unknown error'}`
   }
 }
@@ -67,9 +67,9 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
     super(
       {
         id: 'validated-analyst-agent',
-        name: 'Validated Requirements Analyst';
+        name: 'Validated Requirements Analyst',
         role: 'Analyze and document project requirements with validation',
-        description: 'Expert in requirement gathering with built-in validation.';
+        description: 'Expert in requirement gathering with built-in validation.',
         capabilities: [
           'Requirement extraction';
           'User story creation',
@@ -77,8 +77,7 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
           'Input/output validation'
    ],
         tools: ['requirement-parser', 'user-story-generator'],
-        temperature: 0.3
-      };
+        temperature: 0.3 }
       z.string().min(10), // Input must be at least 10 characters
       RequirementAnalysisSchema // Output must match RequirementAnalysis schema
     )
@@ -91,10 +90,10 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
 
 const _validatedAnalysis = this.validateOutput(analysis);
       return {
-        success: true;
-    output: validatedAnalysis;
-    messages: this.messages;
-    artifacts: this.context.artifacts;
+        success: true,
+    output: validatedAnalysis,
+    messages: this.messages,
+    artifacts: this.context.artifacts,
     nextSteps: [
           'Review validated requirements';
           'Create project plan',
@@ -103,18 +102,18 @@ const _validatedAnalysis = this.validateOutput(analysis);
         confidence: 0.95
 }} catch (error) {
       this.think(`Error during, analysis: ${error}`)``
-      return {success: false;
-    output: null;
-    messages: this.messages;
-    artifacts: this.context.artifacts;
+      return {success: false,
+    output: null,
+    messages: this.messages,
+    artifacts: this.context.artifacts,
     error: error instanceof Error ? error.message : 'Unknown error'
 }
   private async analyzeRequirements(input: string): Promise<any> {
     // Simplified for example - implement your actual logic, const _prompt  = `Analyze these requirements and provide a structured, analysis: ${input}`;
 
-const _response = await generateAIResponse(prompt, {,
-    model: this.config.model;
-    temperature: this.config.temperature;
+const _response = await generateAIResponse(prompt, {
+    model: this.config.model,
+    temperature: this.config.temperature,
     responseFormat: 'json'
     })
     return JSON.parse(response);
@@ -133,21 +132,21 @@ export function ValidatedAgentConfig(schema: z.ZodSchema): z.ZodSchema) {
  * Agent configuration schema
  */;
 export const _AgentConfigSchema = z.object({
-    id: z.string();
-    name: z.string();
-    role: z.string();
-    description: z.string().optional();
-    capabilities: z.array(z.string()).optional();
-    tools: z.array(z.string()).optional();
-    model: z.string().optional();
-    temperature: z.number().min(0).max(2).optional();
-    maxTokens: z.number().positive().optional();
+    id: z.string(),
+    name: z.string(),
+    role: z.string(),
+    description: z.string().optional(),
+    capabilities: z.array(z.string()).optional(),
+    tools: z.array(z.string()).optional(),
+    model: z.string().optional(),
+    temperature: z.number().min(0).max(2).optional(),
+    maxTokens: z.number().positive().optional(),
     systemPrompt: z.string().optional()})
 /**
  * Create a validated agent factory
  */;
 export function createValidatedAgent<TInput, TOutput>(
-    config: AgentConfig;
+    config: AgentConfig,
     inputSchema: z.ZodSchema<TInput>
     outputSchema: z.ZodSchema<TOutput>
     executeFunction: (input: TInput) => Promise<TOutput>
@@ -159,16 +158,16 @@ export function createValidatedAgent<TInput, TOutput>(
       try {;
         const _output = await executeFunction(input); const _validatedOutput = this.validateOutput(output);
         return {
-          success: true;
-    output: validatedOutput;
-    messages: this.messages;
-    artifacts: this.context.artifacts;
+          success: true,
+    output: validatedOutput,
+    messages: this.messages,
+    artifacts: this.context.artifacts,
     confidence: 0.9
 }} catch (error) { return {
-          success: false;
-    output: null;
-    messages: this.messages;
-    artifacts: this.context.artifacts;
+          success: false,
+    output: null,
+    messages: this.messages,
+    artifacts: this.context.artifacts,
     error: error instanceof Error ? error.message : 'Unknown error'
 }})()
 }

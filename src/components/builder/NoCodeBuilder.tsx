@@ -4,12 +4,12 @@
 import React, { useState, useRef } from 'react';
 import { Layout, Type, Square } from 'lucide-react';
 interface Component {
-id: string;
-    type: string;
-    label: string;
-    x: number;
-    y: number;
-    width: number;
+id: string,
+    type: string,
+    label: string,
+    x: number,
+    y: number,
+    width: number,
     height: number
 
 }
@@ -18,9 +18,9 @@ export default function NoCodeBuilder() {
   const [components, setComponents]  = useState<Component[]>([]);
   const canvasRef = useRef<HTMLDivElement>(null);
   
-const componentLibrary = [;
-  { icon: Layout, label: 'Container', type: 'container' };
-    { icon: Type, label: 'Text', type: 'text' };
+const componentLibrary = [
+  { icon: Layout, label: 'Container', type: 'container' },
+    { icon: Type, label: 'Text', type: 'text' },
     { icon: Square, label: 'Button', type: 'button' }
    ];
   return (
@@ -42,7 +42,7 @@ const key  = {type};
       <div className="flex-1 p-4">
         <div;
 
-const ref = {canvasRef};
+    const ref = {canvasRef};
           className="min-h-[600px] bg-white border-2 border-dashed border-gray-300 rounded";
         >
           <div className="">

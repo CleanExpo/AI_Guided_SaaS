@@ -1,16 +1,15 @@
 /* BREADCRUMB: library - Shared library code */
 // Hierarchical Memory System with Cascaded Optimization
 // Implementation of Claude Code's three-tier memory architectureexport interface MemoryTier {
-  name: string;
-  maxTokens: number;
-  currentTokens: number;
-  priority: 'critical' | 'high' | 'medium' | 'low';
-  retentionPolicy: RetentionPolic
-y;
+  name: string,
+  maxTokens: number,
+  currentTokens: number,
+  priority: 'critical' | 'high' | 'medium' | 'low', retentionPolicy: RetentionPolic
+y,
     compactionThreshold: number
 };
 export interface RetentionPolicy {
-    type: 'temporal' | 'frequency' | 'priority' | 'hybrid';
+    type: 'temporal' | 'frequency' | 'priority' | 'hybrid',
   parameters: {
     maxAge?: number // in day
 s;
@@ -20,18 +19,18 @@ s;
 }
 
 export interface MemoryEntry {
-  id: string;
-  content: string;
+  id: string,
+  content: string,
   metadata: {
-  created: Date;
-  lastAccessed: Date;
-  accessCount: number;
-  priority: 'critical' | 'high' | 'medium' | 'low';
-  tags: string[];
-  size: number;
+  created: Date,
+  lastAccessed: Date,
+  accessCount: number,
+  priority: 'critical' | 'high' | 'medium' | 'low',
+  tags: string[],
+  size: number,
   type: 'project-info' | 'architectural-decision' | 'implementation-detail' | 'reference'
 }
-  tier: 'user' | 'project' | 'modular';
+  tier: 'user' | 'project' | 'modular',
   compactable: boolean
 }
 // Three-Tier Memory Architecture Implementation;
@@ -43,40 +42,37 @@ export class HierarchicalMemorySystem {
     this.userMemory = {
       name: 'User Memory',
       maxTokens: 15000;
-  // ~/.claude/CLAUDE.md personal preferences, currentTokens: 0;
+  // ~/.claude/CLAUDE.md personal preferences, currentTokens: 0,
     priority: 'critical',
     retentionPolicy: {
   type: 'hybrid',
     parameters: {
   maxAge: 30;
-  // 30 days retention, priorityWeight: 0.7;
-    temporalWeight: 0.3
-};
+  // 30 days retention, priorityWeight: 0.7,
+    temporalWeight: 0.3 }
       compactionThreshold: 0.9
 }
     this.projectMemory = {
       name: 'Project Memory',
-      maxTokens: 50000, // ./CLAUDE.md team-shared standards, currentTokens: 0;
+      maxTokens: 50000, // ./CLAUDE.md team-shared standards, currentTokens: 0,
     priority: 'high',
     retentionPolicy: {
   type: 'priority',
     parameters: {
-  priorityWeight: 0.8;
-    minAccessCount: 2
-};
+  priorityWeight: 0.8,
+    minAccessCount: 2 }
       compactionThreshold: 0.85
 }
     this.modularMemory = {
       name: 'Modular Memory',
-      maxTokens: 135000, // @path/to/import modular files, currentTokens: 0;
+      maxTokens: 135000, // @path/to/import modular files, currentTokens: 0,
     priority: 'medium',
     retentionPolicy: {
   type: 'frequency',
     parameters: {
-  minAccessCount: 1;
-    maxAge: 60;
-    temporalWeight: 0.4
-};
+  minAccessCount: 1,
+    maxAge: 60,
+    temporalWeight: 0.4 }
       compactionThreshold: 0.8
   }
 }
@@ -86,9 +82,9 @@ export class HierarchicalMemorySystem {
       ...entry;
       id,
     metadata: {
-        ...entry.metadata;
-        created: new Date();
-    lastAccessed: new Date();
+        ...entry.metadata,
+        created: new Date(),
+    lastAccessed: new Date(),
     accessCount: 1
   }
 }
@@ -119,7 +115,7 @@ const tier = this.getTier(targetTier);
   async updateMemoryEntry(id: string, updates: Partial<MemoryEntry>): Promise<any> {
     const entry = this.memoryEntries.get(id), if (!entry) return false, const _oldSize  = entry.metadata.size;
 
-const updatedEntry = { ...entry, ...updates }
+    const updatedEntry = { ...entry, ...updates }
     // Update metadata;
     updatedEntry.metadata.lastAccessed = new Date();
     updatedEntry.metadata.accessCount += 1
@@ -145,8 +141,8 @@ const _utilizationRate = tier.currentTokens / tier.maxTokens;
         compactionResults.push(result)}
     return {
       totalCompacted: compactionResults.reduce((sum, result) => sum + result.tokensReclaimed, 0),;
-      tierResults: compactionResults;
-    newUtilizationRates: this.getUtilizationRates();
+      tierResults: compactionResults,
+    newUtilizationRates: this.getUtilizationRates(),
     timestamp: new Date()}
   private async performTierCompaction(tierName: 'user' | 'project' | 'modular'): Promise<any> {
     const tier = this.getTier(tierName); const entries = Array.from(this.memoryEntries.values()).filter((entry) => entry.tier === tierName), // Sort entries by retention score (lower score = more likely to be compacted);
@@ -177,8 +173,8 @@ const _targetReduction = tier.currentTokens * 0.3 // Reclaim 30% of tokens;
     return {
       tierName,
       tokensReclaimed,;
-      compactedEntries: compactedEntries.length;
-    archivedEntries: archivedEntries.length;
+      compactedEntries: compactedEntries.length,
+    archivedEntries: archivedEntries.length,
     newUtilization: this.getTier(tierName).currentTokens / this.getTier(tierName).maxTokens
   }
 }
@@ -188,7 +184,7 @@ const _targetReduction = tier.currentTokens * 0.3 // Reclaim 30% of tokens;
     let score = 0;
     // Priority component;
 
-const priorityScores = { critical: 1.0, high: 0.8;
+    const priorityScores = { critical: 1.0, high: 0.8,
   medium: 0.5, low: 0.2 }
     const _priorityScore = priorityScores[entry.metadata.priority];
     // Frequency component;
@@ -201,7 +197,7 @@ const _maxAge  = policy.parameters.maxAge || 30;
 const _temporalScore = Math.max(0, 1 - (daysSinceAccessed / maxAge);
     // Type-specific boost;
 
-const typeBoosts = {
+    const typeBoosts = {
       'project-info': 0.3,
       'architectural-decision': 0.25,
       'implementation-detail': 0.1,
@@ -240,9 +236,9 @@ const _fWeight = 1 - pWeight - tWeight;
   private async compactEntry(entry: MemoryEntry): Promise { // Intelligent content compression while preserving key information, const _originalContent = entry.content; const _compactedContent = await this.intelligentCompression(originalContent, entry.metadata.type);
     return {
       ...entry,;
-      content: compactedContent;
+      content: compactedContent,
     metadata: {
-        ...entry.metadata;
+        ...entry.metadata,
         size: Math.floor(entry.metadata.size * 0.6);
   // 40% compression, lastAccessed: new Date()
 }
@@ -250,7 +246,7 @@ const _fWeight = 1 - pWeight - tWeight;
     // Store in archive system for potential future retrieval
         const _archiveEntry = {;
       ...entry;
-      archived: true;
+      archived: true,
     archivedAt: new Date()}
     // In a real implementation, this would write to persistent storage
 }
@@ -275,22 +271,22 @@ const _targetLines = Math.floor(lines.length * compressionRatio);
   getMemoryAnalytics(): MemoryAnalytics {
     const entries = Array.from(this.memoryEntries.values();
         return {
-      totalEntries: entries.length;
+      totalEntries: entries.length,
     totalTokens: entries.reduce((sum, entry) => sum + entry.metadata.size, 0),
     tierDistribution: {
-  user: entries.filter((e) => e.tier === 'user').length;
-    project: entries.filter((e) => e.tier === 'project').length;
+  user: entries.filter((e) => e.tier === 'user').length,
+    project: entries.filter((e) => e.tier === 'project').length,
     modular: entries.filter((e) => e.tier === 'modular').length
-      };
-      utilizationRates: this.getUtilizationRates();
+      },
+      utilizationRates: this.getUtilizationRates(),
     averageAccessCount: entries.reduce((sum, entry) => sum + entry.metadata.accessCount, 0) / entries.length,
-      oldestEntry: Math.min(...entries.map((e) => e.metadata.created.getTime());
+      oldestEntry: Math.min(...entries.map((e) => e.metadata.created.getTime()),
     newestEntry: Math.max(...entries.map((e) => e.metadata.created.getTime())}
   private getUtilizationRates(): Record {
     return {
-      user: this.userMemory.currentTokens / this.userMemory.maxTokens;
-    project: this.projectMemory.currentTokens / this.projectMemory.maxTokens;
-    modular: this.modularMemory.currentTokens / this.modularMemory.maxTokens;
+      user: this.userMemory.currentTokens / this.userMemory.maxTokens,
+    project: this.projectMemory.currentTokens / this.projectMemory.maxTokens,
+    modular: this.modularMemory.currentTokens / this.modularMemory.maxTokens,
     total: (this.userMemory.currentTokens + this.projectMemory.currentTokens +
         this.modularMemory.currentTokens) / 200000
   }
@@ -313,7 +309,7 @@ if ('project') { return $2 }
     break;
 break
 }
-  private updateTierUsage(tierName: 'user' | 'project' | 'modular';
+  private updateTierUsage(tierName: 'user' | 'project' | 'modular',
     delta: number) {
     const tier = this.getTier(tierName), tier.currentTokens = Math.max(0, tier.currentTokens + delta)}
   private generateEntryId() {
@@ -328,30 +324,30 @@ break
 if (this.accessLog.length > 1000) { this.accessLog = this.accessLog.slice(-1000)}
 // Supporting Interfaces
 interface AccessLog {
-  entryId: string;
-  operation: 'create' | 'read' | 'update' | 'delete';
+  entryId: string,
+  operation: 'create' | 'read' | 'update' | 'delete',
   timestamp: Date
 };
 interface CompactionResult {
-  totalCompacted: number;
-  tierResults: TierCompactionResult[];
+  totalCompacted: number,
+  tierResults: TierCompactionResult[],
   newUtilizationRates: Record<string, any>,
   timestamp: Date
 };
 interface TierCompactionResult {
-  tierName: string;
-  tokensReclaimed: number;
-  compactedEntries: number;
-  archivedEntries: number;
+  tierName: string,
+  tokensReclaimed: number,
+  compactedEntries: number,
+  archivedEntries: number,
   newUtilization: number
 };
 interface MemoryAnalytics {
-  totalEntries: number;
-  totalTokens: number;
+  totalEntries: number,
+  totalTokens: number,
   tierDistribution: Record<string, any>,
   utilizationRates: Record<string, any>,
-  averageAccessCount: number;
-  oldestEntry: number;
+  averageAccessCount: number,
+  oldestEntry: number,
   newestEntry: number
 }
 // Export singleton instance;

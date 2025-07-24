@@ -3,101 +3,99 @@ import { Agent, AgentConfig, AgentResult } from '../base/Agent';
 import { generateAIResponse } from '@/lib/ai';
 import { RequirementAnalysis, UserStory } from './AnalystAgent';
 export interface ProjectPlan {
-  projectName: string;
-  projectDescription: string;
-  timeline: Timelin
-e;
-    milestones: Milestone[];
-  workBreakdown: WorkPackage[];
-  resourceAllocation: ResourcePla
-n;
-    riskMitigation: RiskMitigation[];
+  projectName: string,
+  projectDescription: string, timeline: Timelin
+e,
+    milestones: Milestone[],
+  workBreakdown: WorkPackage[], resourceAllocation: ResourcePla
+n,
+    riskMitigation: RiskMitigation[],
   communicationPlan: CommunicationPla
-n;
+n,
     qualityAssurance: QualityPla
 n
 };
 export interface Timeline {
-  startDate: string;
-  endDate: string;
-  totalDuration: string;
+  startDate: string,
+  endDate: string,
+  totalDuration: string,
   phases: Phase[]
 };
 export interface Phase {
-  name: string;
-  startDate: string;
-  endDate: string;
-  deliverables: string[];
+  name: string,
+  startDate: string,
+  endDate: string,
+  deliverables: string[],
   dependencies: string[]
 };
 export interface Milestone {
-  id: string;
-  name: string;
-  date: string;
-  criteria: string[];
+  id: string,
+  name: string,
+  date: string,
+  criteria: string[],
   deliverables: string[]
 };
 export interface WorkPackage {
-  id: string;
-  name: string;
-  description: string;
-  assignedTo: string[];
-  estimatedHours: number;
-  dependencies: string[];
-  deliverables: string[];
+  id: string,
+  name: string,
+  description: string,
+  assignedTo: string[],
+  estimatedHours: number,
+  dependencies: string[],
+  deliverables: string[],
   priority: 'critical' | 'high' | 'medium' | 'low'
 };
 export interface ResourcePlan {
-  teamStructure: TeamMember[];
-  skillsRequired: string[];
-  toolsRequired: string[];
+  teamStructure: TeamMember[],
+  skillsRequired: string[],
+  toolsRequired: string[],
   externalDependencies: string[]
 };
 export interface TeamMember {
-  role: string;
-  responsibilities: string[];
-  skillsNeeded: string[];
+  role: string,
+  responsibilities: string[],
+  skillsNeeded: string[],
   allocation: number, // percentage
 };
 export interface RiskMitigation {
-  risk: string;
-  probability: 'high' | 'medium' | 'low';
-  impact: 'high' | 'medium' | 'low';
-  mitigationStrategy: string;
-  contingencyPlan: string;
+  risk: string,
+  probability: 'high' | 'medium' | 'low',
+  impact: 'high' | 'medium' | 'low',
+  mitigationStrategy: string,
+  contingencyPlan: string,
   owner: string
 };
 export interface CommunicationPlan {
-  stakeholders: Stakeholder[];
-  meetings: Meeting[];
-  reportingSchedule: string;
+  stakeholders: Stakeholder[],
+  meetings: Meeting[],
+  reportingSchedule: string,
   escalationPath: string[]
 };
 export interface Stakeholder {
-  name: string;
-  role: string;
-  interest: 'high' | 'medium' | 'low';
-  influence: 'high' | 'medium' | 'low';
+  name: string,
+  role: string,
+  interest: 'high' | 'medium' | 'low',
+  influence: 'high' | 'medium' | 'low',
   communicationNeeds: string[]
 };
 export interface Meeting {
-  type: string;
-  frequency: string;
-  participants: string[];
+  type: string,
+  frequency: string,
+  participants: string[],
   purpose: string
 };
 export interface QualityPlan {
-  standards: string[];
-  reviewProcess: string[];
-  testingStrategy: string[];
-  acceptanceCriteria: string[];
+  standards: string[],
+  reviewProcess: string[],
+  testingStrategy: string[],
+  acceptanceCriteria: string[],
   metrics: string[]
 };
 export class ProjectManagerAgent extends Agent {
   constructor() {
     super({
       id: 'project-manager-agent',
-      name: 'Project Manager';
+      name: 'Project Manager',
       role: 'Create and manage project plans',
       description:
         'Expert in project planning, resource allocation, timeline management, and risk mitigation. Creates comprehensive project plans from requirements.',
@@ -125,7 +123,7 @@ const userStories = this.getSharedMemory('user-stories') || [];
       
 const constraints = this.getSharedMemory('technical-constraints') || [];
       this.observe('Retrieved requirements from Analyst', {
-        requirementCount: requirements.length;
+        requirementCount: requirements.length,
     userStoryCount: userStories.length
       }};
       // Step, 1: Define project scope and objectives;
@@ -181,8 +179,8 @@ const qualityPlan = await this.defineQualityPlan(
       this.observe('Defined quality assurance plan', qualityPlan);
       // Compile final project plan;
 
-const projectPlan: ProjectPlan = {,
-        projectName: projectScope.name;
+const projectPlan: ProjectPlan = {
+        projectName: projectScope.name,
     projectDescription: projectScope.description;
         timeline,
         milestones,
@@ -200,10 +198,10 @@ const projectPlan: ProjectPlan = {,
       this.setSharedMemory('team-structure', resourcePlan.teamStructure);
       this.setSharedMemory('quality-standards', qualityPlan.standards);
       return {
-        success: true;
-    output: projectPlan;
-    messages: this.messages;
-    artifacts: this.context.artifacts;
+        success: true,
+    output: projectPlan,
+    messages: this.messages,
+    artifacts: this.context.artifacts,
     nextSteps: [
           'Architect to design technical architecture';
           'Development team to start implementation',
@@ -225,16 +223,16 @@ Provide:
 3. 3-5 specific, measurable objectives;
 Format as JSON.`;
 
-const _response = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.3;
+const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
     responseFormat: 'json'
 }};
     return JSON.parse(response);
 }
   private async createTimeline(projectScope, userStories: UserStory[], constraints: string[]): Promise<any> {
-    const _prompt = `Create a realistic project timeline based, on: ``, Project: ${projectScope.name};
-User: Stories: ${userStories.length} stories; Constraints: ${constraints.join(', ')}
+    const _prompt = `Create a realistic project timeline based, on: ``, Project: ${projectScope.name},
+User: Stories: ${userStories.length} stories, Constraints: ${constraints.join(', ')}
 Consider:
 - Complexity of user stories
 - Dependencies between features
@@ -245,9 +243,9 @@ Consider:
 - Project phases with dates and deliverables
 Format as JSON with a Timeline structure.`;
 
-const _response = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.3;
+const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
     responseFormat: 'json'
 }};
     return JSON.parse(response);
@@ -265,9 +263,9 @@ Create 4-6 major milestones, with:
 - Target dates aligned with phases;
 Format as JSON array of Milestone objects.`;
 
-const _response  = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.3;
+const _response  = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
     responseFormat: 'json'
 }};
 
@@ -289,9 +287,9 @@ Break down the work into packages, that:
 - Assign to appropriate team roles;
 Format as JSON array of WorkPackage objects.`;
 
-const _response  = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.3;
+const _response  = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
     responseFormat: 'json'
 }};
 
@@ -303,9 +301,9 @@ const packages = JSON.parse(response);
 }
   private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise<any> {
     const _prompt = `Plan resource allocation for the, project: Work, Packages:``, ${JSON.stringify(
-  workPackages.map((wp) => ({,
-    name: wp.name;
-    estimatedHours: wp.estimatedHours;
+  workPackages.map((wp) => ({
+    name: wp.name,
+    estimatedHours: wp.estimatedHours,
     skills: wp.assignedTo
   });
   null,
@@ -320,9 +318,9 @@ Define:
 Consider optimal team size and skill distribution.
 Format as JSON ResourcePlan object.`;
 
-const _response = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.4;
+const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.4,
     responseFormat: 'json'
 }};
     return JSON.parse(response);
@@ -339,9 +337,9 @@ For each risk, provide:
 - Owner (role responsible);
 Format as JSON array of RiskMitigation objects.`;
 
-const _response = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.4;
+const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.4,
     responseFormat: 'json'
 }};
     return JSON.parse(response);
@@ -357,9 +355,9 @@ Define:
 4. Escalation path;
 Format as JSON CommunicationPlan object.`;
 
-const _response = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.3;
+const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
     responseFormat: 'json'
 }};
     return JSON.parse(response);
@@ -378,9 +376,9 @@ Include:
 5. Quality metrics to track;
 Format as JSON QualityPlan object.`;
 
-const _response = await generateAIResponse(prompt, {,
-      model: this.config.model;
-    temperature: 0.3;
+const _response = await generateAIResponse(prompt, {
+      model: this.config.model,
+    temperature: 0.3,
     responseFormat: 'json'
 }};
     return JSON.parse(response);

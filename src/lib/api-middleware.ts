@@ -6,7 +6,7 @@ import { ApiTracking } from './api-tracking';
 export type ApiHandler = (, request: NextRequest, context?) => Promise<Response> | Response;
 // Middleware wrapper for API routes;
 export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
-  return async (request: NextRequest, context?) => {;
+  return async (request: NextRequest, context?) => {
     const _startTime = Date.now(); let response: Response; let userId: string | undefined;
     let errorMessage: string | undefined;
     try {
@@ -57,37 +57,37 @@ let metadata: Record<string, unknown> = { };
 switch (resourceType) {
                 case 'ai_generation':;
 
-const metadata = {;
+    const metadata = {;
     break;
     break
 }
-                    model: body.model;
-    tokens: body.usage?.total_tokens;
+                    model: body.model,
+    tokens: body.usage?.total_tokens,
     prompt: body.prompt?.substring(0, 100) // First 100 chars
 }
                   // break
                 case 'project_creation':;
 
-const metadata = { break, break
-};
-                    projectId: body.data?.id;
-    projectName: body.data?.name;
+    const metadata = { break, break
+},
+                    projectId: body.data?.id,
+    projectName: body.data?.name,
     framework: body.data?.framework
 }
                   // break
                 case 'export':;
 
-const metadata = { break, break
-};
-exportType: body.type;
+    const metadata = { break, break
+},
+exportType: body.type,
     fileCount: body.files?.length
 }
                   // break
                 case 'template_use':;
 
-const metadata = { break, break
-};
-                    templateId: body.templateId;
+    const metadata = { break, break
+},
+                    templateId: body.templateId,
     templateName: body.templateName
 }
                   // break
@@ -106,11 +106,11 @@ const metadata = { break, break
 }
 // Rate limiting middleware;
 export function withRateLimit(
-    maxRequests: number = 100, windowMs: number = 60000 // 1 minute): number = 100;
+    maxRequests: number = 100, windowMs: number = 60000 // 1 minute): number = 100,
   windowMs: number = 60000 // 1 minute) {
   const requestCounts  = new Map<string, { count: number, resetTime: number }>()
   return (handler: ApiHandler): ApiHandler: (any) => {
-    return async (request: NextRequest, context?) => {;
+    return async (request: NextRequest, context?) => {
       // Get client identifier (IP or user ID), const session = await getServerSession(authOptions); const _identifier = session?.user?.id || ;
         request.headers.get('x-forwarded-for') ||
         'anonymous';
@@ -125,19 +125,19 @@ const userLimit = requestCounts.get(identifier);
           userLimit.resetTime = now + windowMs
         } else {
           userLimit.count++, if (userLimit.count > maxRequests) {
-            return NextResponse.json(, {,
+            return NextResponse.json(, {
                 error: 'Too many requests',
                 retryAfter: Math.ceil((userLimit.resetTime - now) / 1000)
-              };
+              },
               {
-                status: 429;
+                status: 429,
     headers: {
                   'X-RateLimit-Limit': maxRequests.toString();
                   'X-RateLimit-Remaining': '0',
                   'X-RateLimit-Reset': new Date(userLimit.resetTime).toISOString()}
             )} else {
         requestCounts.set(identifier, {
-          count: 1;
+          count: 1,
     resetTime: now + windowMs
         })
 }

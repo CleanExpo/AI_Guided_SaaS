@@ -2,31 +2,31 @@
 import fs from 'fs';import path from 'path';
 import { EPCEngine } from './epc-engine';
 interface TelemetryEntry {
-  timestamp: string;
-  requestId: string;
-  inferenceType: 'openai' | 'anthropic' | 'local' | 'other';
+  timestamp: string,
+  requestId: string,
+  inferenceType: 'openai' | 'anthropic' | 'local' | 'other',
   preflightCheck: {
-  passed: boolean;
-  score: number;
+  passed: boolean,
+  score: number,
   issues: string[]
 }
     environmentSnapshot: {
-    nodeEnv: string;
-    activeServices: string[];
-    memoryUsage: NodeJS.MemoryUsage;
+    nodeEnv: string,
+    activeServices: string[],
+    memoryUsage: NodeJS.MemoryUsage,
     uptime: number
-  };
+  },
     inference: {
-    started: boolean;
+    started: boolean,
     completed: boolean;
     duration?: number, tokensUsed?: number, cost?: number;
     error?: string
   };
   agentContext?: {
-    agentId: string;
-    agentType: string;
+    agentId: string,
+    agentType: string,
     taskType: string
-  };
+  },
     outcome: 'success' | 'failed' | 'blocked' | 'warning'
 };
 export class InferenceTelemetry {
@@ -60,8 +60,8 @@ export class InferenceTelemetry {
       requestId,
       inferenceType,
     preflightCheck: {
-  passed: preflightResult.env_check === 'pass';
-    score: preflightResult.score;
+  passed: preflightResult.env_check === 'pass',
+    score: preflightResult.score,
     issues: [
           ...preflightResult.missing.map((v) => `missing: ${v}`),``,
   ...preflightResult.invalid.map((v) => `invalid: ${v}`),``,
@@ -69,12 +69,12 @@ export class InferenceTelemetry {
           ...preflightResult.mismatched.map((v) => `mismatched: ${v}`),``
         ],
     environmentSnapshot: {
-        nodeEnv: process.env.NODE_ENV || 'development';
-    activeServices: this.getActiveServices();
-    memoryUsage: process.memoryUsage();
+        nodeEnv: process.env.NODE_ENV || 'development',
+    activeServices: this.getActiveServices(),
+    memoryUsage: process.memoryUsage(),
     uptime: process.uptime()};
     inference: {
-        started: false;
+        started: false,
     completed: false
       };
       agentContext,
@@ -85,7 +85,7 @@ export class InferenceTelemetry {
       entry.inference.error =
         'Blocked, by: EPC: ' + preflightResult.recommendations?.join(', '), this.logEvent('inference_blocked', entry)}
     return {
-      allowed: preflightResult.action !== 'block_inference';
+      allowed: preflightResult.action !== 'block_inference',
     telemetryId: requestId
   }
 }
@@ -98,7 +98,7 @@ logInferenceStart(requestId: string) {
   /**
    * Log inference completion;
    */;
-logInferenceComplete(requestId: string;
+logInferenceComplete(requestId: string,
     success: boolean;
     metadata?: {
       tokensUsed?: number, cost?: number, error?: string
@@ -127,10 +127,10 @@ logInferenceComplete(requestId: string;
    * Log specific events
    */
   private logEvent(eventType: string, entry: TelemetryEntry) {
-    const _event = {,
-      event: eventType;
-    timestamp: new Date().toISOString();
-    requestId: entry.requestId;
+    const _event = {
+      event: eventType,
+    timestamp: new Date().toISOString(),
+    requestId: entry.requestId,
     details: entry
     };
     // Write to event log;
@@ -159,13 +159,13 @@ const _eventLog = path.join(
    * Get telemetry statistics
    */
   async getStatistics(timeRange?: { start: Date, end: Date }): Promise<any> {
-    const stats = {,
-      totalInferences: 0;
-    blocked: 0;
-    failed: 0;
-    successful: 0;
-    averageDuration: 0;
-    totalCost: 0;
+    const stats = {
+      totalInferences: 0,
+    blocked: 0,
+    failed: 0,
+    successful: 0,
+    averageDuration: 0,
+    totalCost: 0,
     topIssues: any[]
     };
     try {

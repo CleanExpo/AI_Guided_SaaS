@@ -10,22 +10,22 @@ export interface MigrationOptions {
   dryRun?: boolean
 };
 export interface MigrationProgress {
-  totalRecords: number;
-  processedRecords: number;
-  currentCollection: string;
-  errors: MigrationError[];
+  totalRecords: number,
+  processedRecords: number,
+  currentCollection: string,
+  errors: MigrationError[],
   status: 'running' | 'completed' | 'failed'
 };
 export interface MigrationError {
-  collection: string;
-  recordId: string;
+  collection: string,
+  recordId: string,
   error: string
 };
 export interface MigrationResult {
-  success: boolean;
-  totalRecords: number;
-  migratedRecords: number;
-  errors: MigrationError[];
+  success: boolean,
+  totalRecords: number,
+  migratedRecords: number,
+  errors: MigrationError[],
   duration: number
 };
 export class BackendMigrator {
@@ -37,18 +37,18 @@ export class BackendMigrator {
     options: MigrationOptions = {}
   ) {
     this.sourceAdapter = createBackendAdapter(sourceConfig), this.targetAdapter = createBackendAdapter(targetConfig), this.options = {
-      batchSize: 100;
-    includeUsers: true;
-    includeProjects: true;
-    includeCustomCollections: any[];
-    dryRun: false;
+      batchSize: 100,
+    includeUsers: true,
+    includeProjects: true,
+    includeCustomCollections: [] as any[],
+    dryRun: false,
       ...options
 }
     this.progress = {
-      totalRecords: 0;
-    processedRecords: 0;
-    currentCollection: '';
-    errors: any[];
+      totalRecords: 0,
+    processedRecords: 0,
+    currentCollection: '',
+    errors: [] as any[],
     status: 'running'
   }
 }
@@ -68,18 +68,18 @@ for (const collection of this.options.includeCustomCollections || []) {
         await this.migrateCollection(collection, this.migrateGenericRecord.bind(this))
 }
       this.progress.status = 'completed'
-      return {,
-        success: true;
-    totalRecords: this.progress.totalRecords;
-    migratedRecords: this.progress.processedRecords;
-    errors: this.progress.errors;
+      return {
+        success: true,
+    totalRecords: this.progress.totalRecords,
+    migratedRecords: this.progress.processedRecords,
+    errors: this.progress.errors,
     duration: Date.now() - startTime
 }} catch (error) { this.progress.status = 'failed'
       return {
-        success: false;
-    totalRecords: this.progress.totalRecords;
-    migratedRecords: this.progress.processedRecords;
-    errors: this.progress.errors;
+        success: false,
+    totalRecords: this.progress.totalRecords,
+    migratedRecords: this.progress.processedRecords,
+    errors: this.progress.errors,
     duration: Date.now() - startTime
 }
   private async countRecords(): Promise<any> {
@@ -98,7 +98,7 @@ for (const collection of this.options.includeCustomCollections || []) {
     this.progress.totalRecords = total
 }
   private async migrateCollection<T>(
-collection: string;
+collection: string,
     migrator: (record: T) => Promise<T>
   ): Promise<any> {
     this.progress.currentCollection = collection
@@ -106,7 +106,7 @@ collection: string;
     while (hasMore) {
       // Fetch batch from source;
 
-const batch = await this.sourceAdapter.list<T>(collection, {,
+const batch = await this.sourceAdapter.list<T>(collection, {
     limit: this.options.batchSize;
         // offset
       })
@@ -119,7 +119,7 @@ for (const record of batch.data) {
         } catch (error) {
           this.progress.errors.push({
             collection,;
-            recordId: (record as any).id || 'unknown';
+            recordId: (record as any).id || 'unknown',
     error: error instanceof Error ? error.message : 'Unknown error'
           })
 }
@@ -196,7 +196,7 @@ export async function exportBackendData(
   for (const collection of collections) {
     const records = []; let offset = 0; let hasMore = true;
     while (hasMore) {
-      const batch = await adapter.list<any>(collection, {,
+      const batch = await adapter.list<any>(collection, {
     limit: 100;
         // offset
       })
@@ -238,7 +238,7 @@ const existing = await adapter.read(collection, record.id);
       } catch (error) {
         errors.push({
           collection,;
-          recordId: record.id || 'unknown';
+          recordId: record.id || 'unknown',
     error: error instanceof Error ? error.message : 'Unknown error'
         })}
   return {

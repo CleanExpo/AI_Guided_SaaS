@@ -4,12 +4,12 @@ import path from 'path';
 import { glob } from 'glob';
 
 interface ClientVision {
-  project_name: string;
-  vision: string, goal: string;
-  core_features: string[];
+  project_name: string,
+  vision: string, goal: string,
+  core_features: string[],
   modules: Array<{
-    name: string;
-    purpose: string;
+    name: string,
+    purpose: string,
     priority: string}>;
   target_users?: string[];
   success_metrics?: string[];
@@ -17,16 +17,16 @@ interface ClientVision {
 }
 
 interface FileMapping {
-  purpose: string;
-  linked_to: string[], critical: boolean;
+  purpose: string,
+  linked_to: string[], critical: boolean,
   dependencies: string[]}
 
 interface ValidationResult {
-  isValid: boolean;
+  isValid: boolean,
   issues: Array<{
-    type: 'missing_purpose' | 'not_linked' | 'orphaned' | 'duplicate_purpose' | 'misaligned', file?: string, message: string;
+    type: 'missing_purpose' | 'not_linked' | 'orphaned' | 'duplicate_purpose' | 'misaligned', file?: string, message: string,
     severity: 'error' | 'warning'}>;
-  suggestions: string[];
+  suggestions: string[],
   alignmentScore: number}
 
 export class BreadcrumbAgent {
@@ -52,17 +52,16 @@ export class BreadcrumbAgent {
    * Validate alignment between current state and client vision
    */
   async validateAlignment(): Promise<ValidationResult> {
-    const result: ValidationResult = {,
-      isValid: true;
-      issues: any[];
-      suggestions: any[];
-      alignmentScore: 100
-    };
+    const result: ValidationResult = {
+      isValid: true,
+      issues: [] as any[],
+      suggestions: [] as any[],
+      alignmentScore: 100 }
 
     if (!this.vision || !this.index) {
       result.isValid = false, result.issues.push({
         type: 'missing_purpose',
-        message: 'Breadcrumb configuration files not found';
+        message: 'Breadcrumb configuration files not found',
         severity: 'error'
       });
       result.alignmentScore = 0;
@@ -95,7 +94,7 @@ export class BreadcrumbAgent {
     // Check if file exists, const absolutePath = path.join(process.cwd(), filePath), if (!fs.existsSync(absolutePath)) {
       result.issues.push({
         type: 'orphaned',
-        file: filePath;
+        file: filePath,
         message: `File ${filePath} is mapped but doesn't exist`;
         severity: 'error'
       });
@@ -107,7 +106,7 @@ export class BreadcrumbAgent {
 if (!mapping.purpose) {
       result.issues.push({
         type: 'missing_purpose',
-        file: filePath;
+        file: filePath,
         message: `File ${filePath} has no defined purpose`,
         severity: 'error'
       });
@@ -118,7 +117,7 @@ if (!mapping.purpose) {
 if (!mapping.linked_to || mapping.linked_to.length === 0) {
       result.issues.push({
         type: 'not_linked',
-        file: filePath;
+        file: filePath,
         message: `File ${filePath} is not linked to any goal or module`,
         severity: 'warning'
       })
@@ -130,13 +129,12 @@ if (mapping.linked_to) {
         if (!this.isValidLink(link)) {
           result.issues.push({
             type: 'misaligned',
-            file: filePath;
+            file: filePath,
             message: `File ${filePath} has invalid link: ${link}`,
             severity: 'warning'
           })
-}
-}
   }
+}
 }
   /**
    * Check if a link reference is valid
@@ -165,8 +163,7 @@ const value = valueParts.join(':').trim();
       case 'success_metric':
       return this.vision.success_metrics ? this.vision.success_metrics.some(m => value.includes(m)) : false;
 
-      case 'constraint':
-      return this.vision.constraints ? this.vision.constraints.some(c => value.includes(c)) : false;
+      case 'constraint': return this.vision.constraints ? this.vision.constraints.some(c => value.includes(c)) : false,
 
       default:
       return false;
@@ -194,12 +191,11 @@ const indexedFiles = new Set(
 
         result.issues.push({
           type: 'orphaned',
-          file: relativePath;
+          file: relativePath,
           message: `File ${relativePath} exists but is not mapped to any goal`,
           severity: 'warning'
         })
-}
-}
+  }
 }
 
   /**
@@ -212,18 +208,17 @@ const indexedFiles = new Set(
       if (!hasImplementation && module.priority === 'high') {
         result.issues.push({
           type: 'misaligned',
-          message: `High priority module "${module.name}" has no implementation`;
+          message: `High priority module "${module.name}" has no implementation`,
           severity: 'error'
         });
         result.isValid = false
 } else if (!hasImplementation) {
         result.issues.push({
           type: 'misaligned',
-          message: `Module "${module.name}" has no implementation`;
+          message: `Module "${module.name}" has no implementation`,
           severity: 'warning'
         })
-}
-}
+  }
 }
 
   /**
@@ -280,9 +275,9 @@ const indexedFiles = new Set(
    * Check if a specific feature is being fulfilled
    */
   async checkFeatureFulfillment(featureName: string): Promise<any> {
-    const result = {,
-      isFulfilled: false;
-      implementedIn: any[];
+    const result = {
+      isFulfilled: false,
+      implementedIn: [] as any[],
       gaps: any[]
     };
 
@@ -324,8 +319,8 @@ const currentFiles = new Set(Object.keys(this.index.files));
         // Add new file with placeholder
         this.index.files[relativePath] = {
           purpose: 'TODO: Define purpose',
-          linked_to: [];
-          critical: false;
+          linked_to: [],
+          critical: false,
           dependencies: []
         };
         updated = true

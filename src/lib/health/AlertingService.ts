@@ -2,33 +2,32 @@
 import { EventEmitter } from 'events';
 import { HealthStatus, HealthCheckResult } from './HealthCheckService';
 export interface AlertConfig {
-  enabled: boolean;
-  channels: AlertChannel[];
-  rules: AlertRule[];
+  enabled: boolean,
+  channels: AlertChannel[],
+  rules: AlertRule[],
   cooldownPeriod: number // millisecond
-s;
+s,
     maxAlertsPerHour: number
 };
 export interface AlertChannel {
   type: 'email' | 'slack' | 'webhook' | 'console'
-  config;
+  config,
     enabled: boolean
 };
 export interface AlertRule {
-  name: string;
-  condition: (status: HealthStatus) => boolean;
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  message: string;
+  name: string,
+  condition: (status: HealthStatus) => boolean,
+  severity: 'low' | 'medium' | 'high' | 'critical',
+  message: string,
   channels: string[] // channel types to us
 e
 };
 export interface Alert {
-  id: string;
-  timestamp: Date;
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  title: string;
-  message: string
-  details;
+  id: string,
+  timestamp: Date,
+  severity: 'low' | 'medium' | 'high' | 'critical',
+  title: string, message: string
+  details,
     status: HealthStatu
 s;
     acknowledged: boolean
@@ -38,10 +37,10 @@ export class AlertingService extends EventEmitter {
   private alerts: Alert[] = []
   private lastAlertTime: Map<string, Date> = new Map(), private alertCounts: Map<string, number> = new Map(), constructor(config: Partial<AlertConfig> = {}) {
     super(), this.config = {
-      enabled: true;
-    channels: any[];
-    rules: this.getDefaultRules();
-    cooldownPeriod: 5 * 60 * 1000, // 5 minutes, maxAlertsPerHour: 10;
+      enabled: true,
+    channels: [] as any[],
+    rules: this.getDefaultRules(),
+    cooldownPeriod: 5 * 60 * 1000, // 5 minutes, maxAlertsPerHour: 10,
       ...config
   }
 }
@@ -69,12 +68,12 @@ const _hourlyCount = this.getHourlyAlertCount();
       return null};
     // Create alert;
 
-const alert: Alert = {,
-      id: `alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,``;
-timestamp: new Date();
-    severity: rule.severity;
-    title: rule.name;
-    message: rule.message;
+const alert: Alert = {
+      id: `alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`, ``,
+timestamp: new Date(),
+    severity: rule.severity,
+    title: rule.name,
+    message: rule.message,
     details: this.extractAlertDetails(status);
       status,
       acknowledged: false
@@ -126,9 +125,9 @@ timestamp: new Date();
    * Console alert handler
    */
   private sendToConsole(alert: Alert) {
-    const _severityEmoji  = {,
+    const _severityEmoji  = {
       low: '📌',
-      medium: '⚠️';
+      medium: '⚠️',
       high: '🚨',
       critical: '🔥'
 }
@@ -151,34 +150,34 @@ timestamp: new Date();
   private async sendToSlack(alert: Alert, config): Promise<any> {
     if (!config.webhookUrl) {
       throw new Error('Slack webhook URL not configured')}
-    const _color = {,
+    const _color = {
       low: '#36a64f',
-      medium: '#ff9900';
+      medium: '#ff9900',
       high: '#ff0000',
       critical: '#990000'
     }[alert.severity];
 
-const _payload = {
+    const _payload = {
       attachments: [{;
   color;
-        title: alert.title;
-    text: alert.message;
+        title: alert.title,
+    text: alert.message,
     fields: [
           {
   title: 'Severity',
-            value: alert.severity.toUpperCase();
+            value: alert.severity.toUpperCase(),
     short: true
-  };
+  },
           {
             title: 'Time',
-            value: alert.timestamp.toLocaleString();
+            value: alert.timestamp.toLocaleString(),
     short: true
-          };
+          },
           {
             title: 'System Status',
-            value: alert.status.status.toUpperCase();
+            value: alert.status.status.toUpperCase(),
     short: true
-          };
+          },
           {
             title: 'Failed Checks',
             value: alert.status.checks
@@ -187,15 +186,15 @@ const _payload = {
               .join(', ') || 'None',
             short: false
 }
-        ];
+        ],
         footer: 'AI Guided SaaS Health Monitor',
         ts: Math.floor(alert.timestamp.getTime() / 1000)
       }]
 }
-    await fetch(config.webhookUrl, {,
+    await fetch('/api/admin/auth', {
       method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify(payload)
+    headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
     })
 }
   /**
@@ -204,13 +203,13 @@ const _payload = {
   private async sendToWebhook(alert: Alert, config): Promise<any> {
     if (!config.url) {
       throw new Error('Webhook URL not configured')}
-    await fetch(config.url, {,
-      method: config.method || 'POST';
+    await fetch('/api/admin/auth', {
+      method: config.method || 'POST',
     headers: { 'Content-Type': 'application/json', ...(config.headers || { })
       },
       body: JSON.stringify({
-        alert;
-        timestamp: alert.timestamp.toISOString();
+        alert,
+        timestamp: alert.timestamp.toISOString(),
     source: 'ai-guided-saas-health-monitor'
       })}
   /**
@@ -220,13 +219,13 @@ const _payload = {
     return {
       failedChecks: status.checks
         .filter((c) => c.status === 'unhealthy');
-        .map((c) => ({ name: c.name, error: c.error });
+        .map((c) => ({ name: c.name, error: c.error }),
     degradedChecks: status.checks
         .filter((c) => c.status === 'degraded')
-        .map((c) => ({ name: c.name, error: c.error });
+        .map((c) => ({ name: c.name, error: c.error }),
     systemMetrics: {
         cpu: `${status.metrics.cpu.usage.toFixed(1)}%`,
-memory: `${status.metrics.memory.percentage.toFixed(1)}%`;
+memory: `${status.metrics.memory.percentage.toFixed(1)}%`,
 uptime: `${Math.floor(status.metrics.uptime / 3600)}h`
   }
 }
@@ -234,47 +233,47 @@ uptime: `${Math.floor(status.metrics.uptime / 3600)}h`
    * Get default alert rules
    */
   private getDefaultRules(): AlertRule[] {
-    return [{,
+    return [{
   name: 'System Unhealthy',
-        condition: (status) => status.status === 'unhealthy';
+        condition: (status) => status.status === 'unhealthy',
     severity: 'critical',
-        message: 'System health check failed - immediate attention required';
+        message: 'System health check failed - immediate attention required',
         channels: ['console', 'email', 'slack']
       },
       {
         name: 'System Degraded',
-        condition: (status) => status.status === 'degraded';
+        condition: (status) => status.status === 'degraded',
     severity: 'medium',
-        message: 'System performance is degraded';
+        message: 'System performance is degraded',
         channels: ['console', 'slack']
       },
       {
         name: 'High CPU Usage',
-        condition: (status) => status.metrics.cpu.usage > 90;
+        condition: (status) => status.metrics.cpu.usage > 90,
     severity: 'high',
-        message: 'CPU usage is critically high';
+        message: 'CPU usage is critically high',
         channels: ['console', 'slack']
       },
       {
         name: 'High Memory Usage',
-        condition: (status) => status.metrics.memory.percentage > 90;
+        condition: (status) => status.metrics.memory.percentage > 90,
     severity: 'high',
-        message: 'Memory usage is critically high';
+        message: 'Memory usage is critically high',
         channels: ['console', 'slack']
       },
       {
         name: 'Database Unhealthy',
         condition: (status) =>
-          status.checks.some(c => c.name === 'database' && c.status === 'unhealthy');
+          status.checks.some(c => c.name === 'database' && c.status === 'unhealthy'),
         severity: 'critical',
-        message: 'Database connection failed';
+        message: 'Database connection failed',
         channels: ['console', 'email', 'slack']
       },
       {
         name: 'Multiple Services Degraded',
-        condition: (status) => status.checks.filter((c) => c.status !== 'healthy').length >= 3;
+        condition: (status) => status.checks.filter((c) => c.status !== 'healthy').length >= 3,
         severity: 'high',
-        message: 'Multiple services are experiencing issues';
+        message: 'Multiple services are experiencing issues',
         channels: ['console', 'email', 'slack']
 }
     ]

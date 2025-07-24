@@ -7,32 +7,32 @@ import { Button } from '@/components/ui/button';
 import { Activity, Cpu, HardDrive, Users, Clock, AlertCircle } from 'lucide-react';
 
 interface AgentMetrics {
-  agentId: string;
-  isAvailable: boolean;
-  executionCount: number;
-  averageExecutionTime: number;
+  agentId: string,
+  isAvailable: boolean,
+  executionCount: number,
+  averageExecutionTime: number,
   cooldownRemaining: number
 }
 
 interface PulseStatus {
   pulse: {
     config: {
-      maxConcurrentAgents: number;
-      pulseInterval: number;
-      cooldownPeriod: number;
-      maxMemoryUsage: number;
+      maxConcurrentAgents: number,
+      pulseInterval: number,
+      cooldownPeriod: number,
+      maxMemoryUsage: number,
       maxCpuUsage: number
-    };
+    },
     taskQueue: {
-      length: number;
+      length: number,
       priorities: {
         low?: number, medium?: number, high?: number;
         critical?: number
 }};
     resources: {
-      cpuUsage: number;
+      cpuUsage: number,
       memoryUsage: number};
-    activeAgents: string[]};
+    activeAgents: string[]},
   agents: AgentMetrics[]}
 
 export function AgentPulseMonitor() {
@@ -59,14 +59,14 @@ const data = await response.json();
   
 const updateConfig = async (updates: Record<string, any>) => {
     try {
-      const response = await fetch('/api/agents/pulse-config', {,
+      const response = await fetch('/api/agents/pulse-config', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
       });
       if (!response.ok) throw new Error('Failed to update config');
-      await fetchStatus()
-} catch (err) {;
+      await fetchStatus();
+    } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update');
     }
   };

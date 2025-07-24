@@ -1,31 +1,58 @@
 'use client';
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { SessionProvider } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+
 interface ClientOnlyAuthProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function ClientOnlyAuth({ children }: ClientOnlyAuthProps) {
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
-    setMounted(true)}, []);
+    setMounted(true);
+  }, []);
+  
   if (!mounted) {
-    return <React.Fragment>{children}</React.Fragment>
-}
-  return (<SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
+    return null;
+  }
+  
+  return (
+    <SessionProvider>
       {children}
     </SessionProvider>
-  
-};
-// Separate component for session-dependent features;
+  );
+}
+
+// Separate component for session-dependent features
 export function SessionGuard({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
+  const { data: session, status } = useSession();
   
   useEffect(() => {
-    setMounted(true)}, []);
+    setMounted(true);
+  }, []);
+  
   if (!mounted) {
-    return null}
-  return <React.Fragment>{children}</React.Fragment>
-};
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+  
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+  
+  return <>{children}</>;
+}

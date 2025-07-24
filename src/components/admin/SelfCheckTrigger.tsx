@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 
 interface HealthMetrics {
-  moduleScore: number;
-  dependencyScore: number;
-  securityScore: number;
-  performanceScore: number;
+  moduleScore: number,
+  dependencyScore: number,
+  securityScore: number,
+  performanceScore: number,
   overallHealth: number
 }
 
@@ -18,18 +18,17 @@ const SelfCheckTrigger: React.FC<SelfCheckTriggerProps>  = ({ onReportGenerated 
   const [metrics, setMetrics] = useState<HealthMetrics | null>(null);
   
   
-const runSelfCheck = async () => {;
+const runSelfCheck = async () => {
     setIsRunning(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-const mockMetrics: HealthMetrics = {,
-        moduleScore: 85;
-        dependencyScore: 92;
-        securityScore: 88;
-        performanceScore: 90;
-        overallHealth: 89
-      };
+const mockMetrics: HealthMetrics = {
+        moduleScore: 85,
+        dependencyScore: 92,
+        securityScore: 88,
+        performanceScore: 90,
+        overallHealth: 89 }
       setMetrics(mockMetrics);
       onReportGenerated?.(mockMetrics)
 } catch (error) {
@@ -45,7 +44,7 @@ const mockMetrics: HealthMetrics = {,
       </div>;
       <button;
 
-const onClick = {runSelfCheck}
+    const onClick = {runSelfCheck}
         const disabled = {isRunning};
         className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50";
       >

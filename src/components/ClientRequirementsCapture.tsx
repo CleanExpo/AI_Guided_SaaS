@@ -10,10 +10,10 @@ import { Loader2, Send, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react
 import { Badge } from '@/components/ui/badge';
 interface ProcessedRequirements {
 requirements: Array<{
-  id: string;
-  category: string;
-  description: string;
-  priority: string;
+  id: string,
+  category: string,
+  description: string,
+  priority: string,
   agents: string[]
 }>;
   roadmap: {
@@ -40,7 +40,7 @@ const examplePrompts = [
     "Develop a project management tool with kanban boards, team collaboration, and time tracking";
    ];
 
-const _handleSubmit = async (e: React.FormEvent) => {;
+const _handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) {
       setError('Please describe your project requirements');
@@ -50,9 +50,9 @@ const _handleSubmit = async (e: React.FormEvent) => {;
     setError(null);
     setResult(null);
     try {
-      const response = await fetch('/api/requirements/process', {,
+      const response = await fetch('/api/admin/auth', {
     method: 'POST',
-headers: { 'Content-Type': 'application/json' }
+headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           input;
           projectName,
@@ -67,17 +67,17 @@ timestamp: new Date().toISOString()})}
       setIsProcessing(false)}
   const _useExample  = (example: string) => {
     setInput(example), setProjectName('')}
-  const _getCategoryColor = (category: string) => {;</ProcessedRequirements>; const colors: Record<string, string> = {
+  const _getCategoryColor = (category: string) => {</ProcessedRequirements>; const colors: Record<string, string> = {
     functional: 'bg-blue-100 text-blue-800',
-      technical: 'bg-purple-100 text-purple-800';
+      technical: 'bg-purple-100 text-purple-800',
       design: 'bg-pink-100 text-pink-800',
 business: 'bg-green-100 text-green-800'
 }
     return colors[category] || 'bg-gray-100 text-gray-800';
 }
-  const _getPriorityColor = (priority: string) => { const colors: Record<string, string> = {,
+  const _getPriorityColor = (priority: string) => { const colors: Record<string, string> = {
     high: 'bg-red-100 text-red-800',
-      medium: 'bg-yellow-100 text-yellow-800';
+      medium: 'bg-yellow-100 text-yellow-800',
 low: 'bg-gray-100 text-gray-800'
 }
     return colors[priority] || 'bg-gray-100 text-gray-800';
@@ -97,7 +97,7 @@ low: 'bg-gray-100 text-gray-800'
 id="projectName";
 placeholder="My Awesome Project";
 
-const value = {projectName}
+    const value = {projectName}
                 const onChange = {(e) => setProjectName(e.target.value)}
                 const disabled = {isProcessing}
               /></Input>
@@ -107,7 +107,7 @@ const value = {projectName}
 id="requirements";
 placeholder="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints...";
 
-const value = {input}
+    const value = {input}
                 const onChange = {(e) => setInput(e.target.value)}
                 const disabled = {isProcessing}
                 const rows = {8}
@@ -141,7 +141,7 @@ const disabled  = {isProcessing || !input.trim()};
                   const onClick  = {() => useExample(example)};
                   className="text-left text-sm p-3 rounded-lg border hover:bg-accent transition-colors w-full";
 
-const disabled = {isProcessing}
+    const disabled = {isProcessing}
                 >
                   {example}</button>
               ))},

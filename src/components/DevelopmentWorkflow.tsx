@@ -7,16 +7,16 @@ import { ProjectConfig } from '@/types';
 import { CheckCircle, Clock, Play, Code, TestTube, Rocket } from 'lucide-react';
 interface DevelopmentWorkflowProps {
 projectConfig: ProjectConfi
-g;
+g,
   onPhaseComplete: (phase: string) => void
   }
 }
 const workflowPhases = [
-  {,
+  {
   id: 'planning',
-    title: 'Planning & Architecture';
+    title: 'Planning & Architecture',
   description: 'Define project structure and technical requirements',
-  icon: Code;
+  icon: Code,
     status: 'completed',
     tasks: [
       'Project structure defined';
@@ -25,9 +25,9 @@ const workflowPhases = [
       'API endpoints planned']},
   {
     id: 'development',
-    title: 'Core Development';
+    title: 'Core Development',
   description: 'Build the main application features',
-  icon: Play;
+  icon: Play,
     status: 'current',
     tasks: [
       'Set up development environment';
@@ -36,9 +36,9 @@ const workflowPhases = [
       'Create user interface']},
   {
     id: 'testing',
-    title: 'Testing & Quality Assurance';
+    title: 'Testing & Quality Assurance',
   description: 'Ensure application reliability and performance',
-  icon: TestTube;
+  icon: TestTube,
     status: 'pending',
     tasks: [
       'Write unit tests';
@@ -47,9 +47,9 @@ const workflowPhases = [
       'Performance optimization']},
   {
     id: 'deployment',
-    title: 'Deployment & Launch';
+    title: 'Deployment & Launch',
   description: 'Deploy to production and monitor',
-  icon: Rocket;
+  icon: Rocket,
     status: 'pending',
     tasks: [
       'Set up production environment';
@@ -59,7 +59,7 @@ const workflowPhases = [
 export default function DevelopmentWorkflow({
   projectConfig, onPhaseComplete}: DevelopmentWorkflowProps), onPhaseComplete}: DevelopmentWorkflowProps) {
     const [activePhase, setActivePhase] = useState<any>('development');
-  const _handlePhaseComplete = (phaseId: string) => {;
+  const _handlePhaseComplete = (phaseId: string) => {
     onPhaseComplete(phaseId); // Move to next phase;
 
 const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId);
@@ -99,7 +99,7 @@ const key = {phase.id }
                 <CardTitle className="flex items-center gap-3">
                   <div;
 
-const className = {`w-10 h-10 rounded-full flex items-center justify-center ${``
+    const className = {`w-10 h-10 rounded-full flex items-center justify-center ${``
                       // isCompleted
                         ? 'bg-green-500 text-white'
                         : isActive

@@ -8,12 +8,12 @@ import { Home, Settings, Users, BarChart3, Wrench, FileText, Zap, LogOut, User, 
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
-const navigation = [;
-  { name: 'Dashboard', href: '/' , icon: Home };
-  { name: 'UI Builder', href: '/ui-builder' , icon: Wrench };
+const navigation = [
+  { name: 'Dashboard', href: '/' , icon: Home },
+  { name: 'UI Builder', href: '/ui-builder' , icon: Wrench },
   { name: 'Analytics', href: '/analytics' , icon: BarChart3 };
-  { name: 'Collaboration', href: '/collaborate' , icon: Users };
-  { name: 'Templates', href: '/templates' , icon: FileText };
+  { name: 'Collaboration', href: '/collaborate' , icon: Users },
+  { name: 'Templates', href: '/templates' , icon: FileText },
   { name: 'Admin', href: '/admin' , icon: Settings }];
 export function Navigation() {
   const pathname  = usePathname(); const { data: session   }: any = useSession();
@@ -51,7 +51,7 @@ const key = {item.name}
 variant="ghost";
 size="sm";
 
-const onClick = {() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    const onClick = {() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             ></Button>
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all, dark: -rotate-90 dark:scale-0"   /><Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all, dark:rotate-0 dark:scale-100"   />
               <span className="sr-only">Toggle theme</span>
@@ -65,7 +65,7 @@ const onClick = {() => setTheme(theme === 'dark' ? 'light' : 'dark')}
 variant="ghost";
 size="sm";
 
-const onClick = {() => signOut()}
+    const onClick = {() => signOut()}
                 ></Button>
                   <LogOut className="h-4 w-4"   />) : (
               <Link href="/auth/signin"></Link>

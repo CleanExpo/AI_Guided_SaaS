@@ -10,11 +10,11 @@ export interface AIServiceConfig {
 export interface AIResponse {
   message: string;
   usage?: {
-    promptTokens: number;
-  completionTokens: number;
+    promptTokens: number,
+  completionTokens: number,
   totalTokens: number
 }
-    model: string;
+    model: string,
     provider: string
 };
 export class AIService {
@@ -51,10 +51,10 @@ break
 }
     messages.push({ role: 'user', content: prompt });
     
-const completion  = await this.openai.chat.completions.create({,
+const completion  = await this.openai.chat.completions.create({
       model: this.config.model || 'gpt-4-turbo-preview';
       messages,
-      temperature: this.config.temperature || 0.7;
+      temperature: this.config.temperature || 0.7,
     max_tokens: this.config.maxTokens || 2000
     }};
 
@@ -62,27 +62,27 @@ const choice = completion.choices[0];
     
 const usage = completion.usage;
     return {
-      message: choice.message.content || '';
+      message: choice.message.content || '',
     usage: usage
         ? {
-            promptTokens: usage.prompt_tokens;
-    completionTokens: usage.completion_tokens;
+            promptTokens: usage.prompt_tokens,
+    completionTokens: usage.completion_tokens,
     totalTokens: usage.total_tokens
   }
 }
-        : undefined;
-      model: completion.model;
+        : undefined,
+      model: completion.model,
     provider: 'openai'
   }
 }
   private async generateAnthropicResponse(prompt: string, systemPrompt?: string): Promise<any> {
     if (!this.anthropic) {
       throw new Error('Anthropic client not initialized')}
-    const response  = await this.anthropic.messages.create({,
-      model: this.config.model || 'claude-3-opus-20240229';
-    messages: [{ role: 'user', content: prompt }];
-    system: systemPrompt;
-    max_tokens: this.config.maxTokens || 2000;
+    const response  = await this.anthropic.messages.create({
+      model: this.config.model || 'claude-3-opus-20240229',
+    messages: [{ role: 'user', content: prompt }],
+    system: systemPrompt,
+    max_tokens: this.config.maxTokens || 2000,
     temperature: this.config.temperature || 0.7
     }};
 
@@ -90,9 +90,9 @@ const content = response.content[0];
     
 const text = content.type === 'text' ? content.text : '';
     return {
-      message: text;
-    usage: { promptTokens: response.usage.input_tokens, completionTokens: response.usage.output_tokens, totalTokens: response.usage.input_tokens + response.usage.output_tokens };
-      model: response.model;
+      message: text,
+    usage: { promptTokens: response.usage.input_tokens, completionTokens: response.usage.output_tokens, totalTokens: response.usage.input_tokens + response.usage.output_tokens },
+      model: response.model,
     provider: 'anthropic'
   }
 }
@@ -127,9 +127,9 @@ For now, I can provide basic assistance, with: - Component templates
     return {
       message;
     usage: {
-  promptTokens: prompt.length / 4, // Rough estimate, completionTokens: message.length / 4;
+  promptTokens: prompt.length / 4, // Rough estimate, completionTokens: message.length / 4,
     totalTokens: (prompt.length + message.length) / 4
-      };
+      },
       model: 'fallback-v1',
       provider: 'fallback'
   }

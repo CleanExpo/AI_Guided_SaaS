@@ -5,7 +5,7 @@
  */;
 import { logger } from '@/lib/logger';
 export interface IndexRequest {
-  id: string;
+  id: string,
   content: string;
   metadata?: Record<string, any>,
   type?: 'document' | 'code' | 'log' | 'config' | 'memory' | 'conversation'
@@ -19,17 +19,17 @@ export interface SearchRequest {
 }
 
 export interface SearchResult {
-  id: string;
-  score: number;
-  content: string;
+  id: string,
+  score: number,
+  content: string,
   metadata: Record<string, any>,
     type: string
 }
 
 export interface SearchResponse {
-  results: SearchResult[];
-  total: number;
-  query: string;
+  results: SearchResult[],
+  total: number,
+  query: string,
   context7: string[], // Top 7 most relevant content chunks
 }
 
@@ -44,13 +44,13 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async indexDocument(request: IndexRequest): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/index`, {,
+      const response = await fetch('/api/admin/auth', {
         method: 'POST',
-        headers: this.headers;
+        headers: this.headers,
         body: JSON.stringify({
-  id: request.id;
-          content: request.content;
-          metadata: request.metadata || {};
+  id: request.id,
+          content: request.content,
+          metadata: request.metadata || {},
           type: request.type || 'document'
 })};
       if (!response.ok) {
@@ -66,9 +66,9 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async indexBatch(requests: IndexRequest[]): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/index/batch`, {,
+      const response = await fetch('/api/admin/auth', {
         method: 'POST',
-        headers: this.headers;
+        headers: this.headers,
         body: JSON.stringify(requests)
 });
       if (!response.ok) {
@@ -84,13 +84,13 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async search(request: SearchRequest): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/search`, {,
+      const response = await fetch('/api/admin/auth', {
         method: 'POST',
-        headers: this.headers;
+        headers: this.headers,
         body: JSON.stringify({
-  query: request.query;
+  query: request.query,
           filters: request.filters || {};
-          size: request.size || 7;
+          size: request.size || 7,
           include_source: request.includeSource !== false
 })};
       if (!response.ok) {
@@ -106,7 +106,7 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    */
   async deleteDocument(docId: string): Promise<any> {
     try {
-      const response = await fetch(`${this.baseUrl}/index/${docId}`, {,
+      const response = await fetch('/api/admin/auth', {
         method: 'DELETE',
         headers: this.headers
 });
@@ -136,10 +136,10 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
    * Helper method to index project files for semantic search
    */
   async indexProjectFiles(files: Array<{ path: string, content: string, type: string }>): Promise<any> {
-    const requests: IndexRequest[] = files.map((file) => ({,
-  id: file.path;
-      content: file.content;
-      metadata: { path: file.path, extension: file.path.split('.').pop(), lastModified: new Date().toISOString() };
+    const requests: IndexRequest[] = files.map((file) => ({
+  id: file.path,
+      content: file.content,
+      metadata: { path: file.path, extension: file.path.split('.').pop(), lastModified: new Date().toISOString() },
       type: file.type as any
 });
     await this.indexBatch(requests);
@@ -151,7 +151,7 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
   async searchContext7(query: string, type?: string): Promise<any> {
     const searchRequest: SearchRequest = {;
       query;
-      size: 7;
+      size: 7,
       filters: type ? { type } : {}
     const response = await this.search(searchRequest);
     return response.context7;
@@ -176,7 +176,7 @@ export class SemanticSearchService { private baseUrl: string, private headers: H
   async searchDocumentation(query: string): Promise<any> {
     return this.search({;
       query;
-      filters: { type: 'document' };
+      filters: { type: 'document' },
       size: 5
 })
 }

@@ -30,8 +30,8 @@ export class SupabaseAdapter implements BackendAdapter {
       throw new BackendError(error.message, 'AUTH_ERROR', 401)}
     if (!data.user || !data.session) {
       throw new BackendError('Login failed', 'AUTH_ERROR', 401)}
-    return {,
-      user: this.mapSupabaseUser(data.user);
+    return {
+      user: this.mapSupabaseUser(data.user),
       token: data.session.access_token
   }
 }
@@ -44,7 +44,7 @@ export class SupabaseAdapter implements BackendAdapter {
     return user ? this.mapSupabaseUser(user) : null;
 }
   async updateUser(id: string, data: Partial<User>): Promise<User> {
-    const { data: updatedUser, error }: any = await this.client.auth.updateUser({,
+    const { data: updatedUser, error }: any = await this.client.auth.updateUser({
       data: { name: data.name, ...data.metadata }});
     if (error) {
       throw new BackendError(error.message, 'UPDATE_ERROR', 400)}
@@ -138,7 +138,7 @@ const total = count || 0;
       throw new BackendError(error.message, 'FETCH_ERROR', 400)};
     return data;
 }
-  async update<T>(collection: string, id: string;
+  async update<T>(collection: string, id: string,
   data: any): Promise<T> {
     const { data: result, error }: any = await this.client;
       .from(collection);
@@ -191,7 +191,7 @@ const total = count || 0;
     return new SupabaseQueryBuilder<T>(this.client, collection)}
   // Real-time subscriptions
   subscribe<T>(;
-collection: string;
+collection: string,
     callback: (event: DatabaseEvent<T>) => void;
     filters?: Record<string, any>
   ): () => void {
@@ -200,22 +200,22 @@ collection: string;
         'postgres_changes',
         {
           event: '*',
-          schema: 'public';
-          table: collection;
+          schema: 'public',
+          table: collection,
           filter: filters ? this.buildFilter(filters) : undefined
         };
         (payload) => {
           callback({
-            type: payload.eventType as any;
-            table: collection;
-            record: payload.new as T;
+            type: payload.eventType as any,
+            table: collection,
+            record: payload.new as T,
             oldRecord: payload.old as T
           })}
       .subscribe();
     return () => {
       channel.unsubscribe()}
   // File storage;
-  async uploadFile(bucket: string, path: string;
+  async uploadFile(bucket: string, path: string,
   file: File): Promise<string> {
     const { data, error }: any = await this.client.storage;
       .from(bucket);
@@ -239,12 +239,12 @@ collection: string;
   // Helper methods
   private mapSupabaseUser(user: any): User {
     return {
-      id: user.id;
-      email: user.email!;
-      name: user.user_metadata?.name;
-      role: user.user_metadata?.role || 'user';
-      createdAt: user.created_at;
-      updatedAt: user.updated_at;
+      id: user.id,
+      email: user.email!,
+      name: user.user_metadata?.name,
+      role: user.user_metadata?.role || 'user',
+      createdAt: user.created_at,
+      updatedAt: user.updated_at,
       metadata: user.user_metadata
   }
 }
@@ -258,7 +258,7 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {
   select(fields: string[]): QueryBuilder<T> {
     this.query = this.client.from(this.query.table).select(fields.join(',');
         return this};
-  where(field: string, operator: string;
+  where(field: string, operator: string,
   value: any): QueryBuilder<T> {
     switch (operator) {
       case '=':

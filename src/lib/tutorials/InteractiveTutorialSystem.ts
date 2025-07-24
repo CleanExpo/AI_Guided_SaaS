@@ -2,62 +2,62 @@
 import { EventEmitter } from 'events';
 import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
 export interface Tutorial {
-  id: string;
-  title: string;
-  description: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  estimatedTime: string;
-  prerequisites: string[];
-  steps: TutorialStep[];
+  id: string,
+  title: string,
+  description: string,
+  difficulty: 'beginner' | 'intermediate' | 'advanced',
+  estimatedTime: string,
+  prerequisites: string[],
+  steps: TutorialStep[],
   completionRewards: {
     points: number;
   badges?: string[],
   unlocks?: string[]
   },
-  category: string;
+  category: string,
   tags: string[]
 }
 
 export interface TutorialStep {
-  id: string;
-  title: string;
-  content: string;
+  id: string,
+  title: string,
+  content: string,
   type: 'instruction' | 'action' | 'validation' | 'quiz';
   action?: {
-    component: string;
+    component: string,
   method: string;
   parameters?: any,
   expectedResult?: any
   };
   validation?: {
-    type: 'automatic' | 'manual' | 'quiz';
+    type: 'automatic' | 'manual' | 'quiz',
     criteria: ValidationCriteria[]
   };
-  hints?: string[];
+  hints?: string[],
   skipAllowed: boolean
 }
 
 export interface ValidationCriteria {
-  type: 'element_exists' | 'value_equals' | 'api_call' | 'custom';
+  type: 'element_exists' | 'value_equals' | 'api_call' | 'custom',
   target: string;
   expected?: any,
   errorMessage: string
 }
 
 export interface TutorialProgress {
-tutorialId: string;
-  userId: string;
-  currentStep: number;
-  completedSteps: string[];
+tutorialId: string,
+  userId: string,
+  currentStep: number,
+  completedSteps: string[],
   startedAt: Date;
   completedAt?: Date,
-  score: number;
-  hints_used: number;
+  score: number,
+  hints_used: number,
   attempts: Record<string, any />, export
 }
 
 interface TutorialHighlight {
-  element: string;
+  element: string,
   type: 'highlight' | 'tooltip' | 'arrow' | 'mask';
   content?: string,
   position?: 'top' | 'bottom' | 'left' | 'right'
@@ -84,71 +84,71 @@ export class InteractiveTutorialSystem extends EventEmitter {
   private createGettingStartedTutorial(): Tutorial {
     return {
       id: 'getting-started',
-      title: 'Getting Started with AI Guided SaaS';
+      title: 'Getting Started with AI Guided SaaS',
       description: 'Learn the basics of the platform in this interactive walkthrough',
-      difficulty: 'beginner';
+      difficulty: 'beginner',
       estimatedTime: '10 minutes',
-      prerequisites: any[];
+      prerequisites: [] as any[],
       category: 'basics',
       tags: ['onboarding', 'introduction', 'basics'],
       completionRewards: {
-        points: 100;
-        badges: ['first-steps'];
+        points: 100,
+        badges: ['first-steps'],
         unlocks: ['project-creation']
-      };
+      },
       steps: [
         {
           id: 'welcome',
-          title: 'Welcome to AI Guided SaaS';
-          content: 'Welcome! This tutorial will guide you through the basic features of our platform. Let\'s start by exploring the dashboard.';
+          title: 'Welcome to AI Guided SaaS',
+          content: 'Welcome! This tutorial will guide you through the basic features of our platform. Let\'s start by exploring the dashboard.',
           type: 'instruction',
           skipAllowed: false
-        };
+        },
         {
           id: 'navigate-dashboard',
-          title: 'Navigate to Dashboard';
+          title: 'Navigate to Dashboard',
           content: 'Click on the Dashboard link in the navigation menu.',
-          type: 'action';
+          type: 'action',
           action: {
             component: 'navigation',
-            method: 'click';
-            parameters: { target: 'dashboard-link' };
+            method: 'click',
+            parameters: { target: 'dashboard-link' },
           validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'element_exists',
-                target: '.dashboard-container';
+                target: '.dashboard-container',
                 errorMessage: 'Please click on the Dashboard link to continue'
               }
             ]
-          };
-          hints: ['Look for the Dashboard link in the top navigation bar'];
+          },
+          hints: ['Look for the Dashboard link in the top navigation bar'],
           skipAllowed: false
         };
         {
           id: 'explore-metrics',
-          title: 'Explore Your Metrics';
+          title: 'Explore Your Metrics',
           content: 'Great! This is your dashboard. Here you can see an overview of your projects, recent activity, and system metrics.',
           type: 'instruction',
           skipAllowed: true
-        };
+        },
         {
           id: 'quiz-basics',
-          title: 'Quick Check';
+          title: 'Quick Check',
           content: 'What is the main purpose of the dashboard?',
-          type: 'quiz';
+          type: 'quiz',
           validation: {
             type: 'quiz',
             criteria: [
               {
                 type: 'value_equals',
-                target: 'answer';
+                target: 'answer',
                 expected: 'overview',
                 errorMessage: 'The dashboard provides an overview of your projects and activity'
               }
             ]
-          };
+          },
           skipAllowed: false
         }
       ]
@@ -157,49 +157,49 @@ export class InteractiveTutorialSystem extends EventEmitter {
   private createProjectCreationTutorial(): Tutorial {
     return {
       id: 'project-creation',
-      title: 'Creating Your First Project';
+      title: 'Creating Your First Project',
       description: 'Learn how to create and configure a new project using AI assistance',
-      difficulty: 'beginner';
+      difficulty: 'beginner',
       estimatedTime: '15 minutes',
-      prerequisites: ['getting-started'];
+      prerequisites: ['getting-started'],
       category: 'projects',
       tags: ['projects', 'ai', 'creation'],
       completionRewards: {
-        points: 150;
-        badges: ['project-creator'];
+        points: 150,
+        badges: ['project-creator'],
         unlocks: ['ai-assistant', 'deployment']
       },
       steps: [
         {
           id: 'start-project',
-          title: 'Start a New Project';
-          content: 'Let\'s create your first project. Click the "New Project" button.';
+          title: 'Start a New Project',
+          content: 'Let\'s create your first project. Click the "New Project" button.',
           type: 'action',
           action: {
             component: 'projects',
-            method: 'click';
-            parameters: { target: 'new-project-button' };
+            method: 'click',
+            parameters: { target: 'new-project-button' },
           validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'element_exists',
-                target: '.project-creation-modal';
+                target: '.project-creation-modal',
                 errorMessage: 'Please click the New Project button'
               }
             ]
-          };
-          hints: ['The New Project button is usually in the top right corner'];
+          },
+          hints: ['The New Project button is usually in the top right corner'],
           skipAllowed: false
         };
         {
           id: 'describe-project',
-          title: 'Describe Your Project';
+          title: 'Describe Your Project',
           content: 'In the text area, describe what kind of application you want to build. Be specific about features and functionality.',
           type: 'action',
           action: {
             component: 'project-form',
-            method: 'fill';
+            method: 'fill',
             parameters: {
               field: 'requirements',
               exampleValue: 'I need a task management app with user authentication, project boards, and real-time collaboration'
@@ -209,39 +209,39 @@ export class InteractiveTutorialSystem extends EventEmitter {
             criteria: [
               {
                 type: 'value_equals',
-                target: 'requirements-field-length';
+                target: 'requirements-field-length',
                 expected: 50, // Minimum characters, errorMessage: 'Please provide a detailed description (at least 50 characters)'
               }
             ]
-          };
+          },
           skipAllowed: false
         };
         {
           id: 'select-ai-model',
-          title: 'Choose AI Model';
+          title: 'Choose AI Model',
           content: 'Select the AI model that will help generate your project. Each model has different strengths.',
-          type: 'instruction';
+          type: 'instruction',
           skipAllowed: true
-        };
+        },
         {
           id: 'generate-project',
-          title: 'Generate Project';
+          title: 'Generate Project',
           content: 'Click "Generate Project" and watch as the AI creates your project structure, code, and documentation.',
           type: 'action',
           action: {
             component: 'project-form',
-            method: 'submit';
-            parameters: { action: 'generate' };
+            method: 'submit',
+            parameters: { action: 'generate' },
           validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'api_call',
-                target: '/api/projects/generate';
+                target: '/api/projects/generate',
                 errorMessage: 'Project generation failed. Please try again.'
               }
             ]
-          };
+          },
           skipAllowed: false
         }
       ]
@@ -250,90 +250,90 @@ export class InteractiveTutorialSystem extends EventEmitter {
   private createAIAssistantTutorial(): Tutorial {
     return {
       id: 'ai-assistant',
-      title: 'Working with the AI Assistant';
+      title: 'Working with the AI Assistant',
       description: 'Master the AI chat interface to get help with coding, debugging, and design decisions',
       difficulty: 'intermediate',
-      estimatedTime: '20 minutes';
-      prerequisites: ['project-creation'];
+      estimatedTime: '20 minutes',
+      prerequisites: ['project-creation'],
       category: 'ai',
       tags: ['ai', 'chat', 'assistant', 'productivity'],
       completionRewards: {
-        points: 200;
-        badges: ['ai-master'];
+        points: 200,
+        badges: ['ai-master'],
         unlocks: ['advanced-features']
-      };
+      },
       steps: [
         {
           id: 'open-ai-chat',
-          title: 'Open AI Assistant';
+          title: 'Open AI Assistant',
           content: 'Click on the AI Assistant icon to open the chat interface.',
-          type: 'action';
+          type: 'action',
           action: {
             component: 'ui',
-            method: 'click';
-            parameters: { target: 'ai-chat-button' };
+            method: 'click',
+            parameters: { target: 'ai-chat-button' },
           validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'element_exists',
-                target: '.ai-chat-container';
+                target: '.ai-chat-container',
                 errorMessage: 'Please open the AI chat interface'
               }
             ]
-          };
+          },
           skipAllowed: false
         };
         {
           id: 'ask-question',
-          title: 'Ask a Question';
-          content: 'Try asking the AI a question about your project. For example: "How can I add user authentication to my app?"';
+          title: 'Ask a Question',
+          content: 'Try asking the AI a question about your project. For example: "How can I add user authentication to my app?"',
           type: 'action',
           action: {
             component: 'ai-chat',
-            method: 'send-message';
+            method: 'send-message',
             parameters: {
               exampleMessage: 'How can I add user authentication to my app?'
-            };
+            },
           validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'api_call',
-                target: '/api/chat';
+                target: '/api/chat',
                 errorMessage: 'Please send a message to the AI assistant'
               }
             ]
-          };
+          },
           skipAllowed: false
         };
         {
           id: 'use-suggestions',
-          title: 'Use AI Suggestions';
+          title: 'Use AI Suggestions',
           content: 'The AI provides suggestions below the chat. Click on any suggestion to quickly ask related questions.',
-          type: 'instruction';
+          type: 'instruction',
           skipAllowed: true
-        };
+        },
         {
           id: 'code-generation',
-          title: 'Generate Code';
-          content: 'Ask the AI to generate specific code. Try: "Generate a React component for a user profile page"';
+          title: 'Generate Code',
+          content: 'Ask the AI to generate specific code. Try: "Generate a React component for a user profile page"',
           type: 'action',
           action: {
             component: 'ai-chat',
-            method: 'send-message';
+            method: 'send-message',
             parameters: {
               messageType: 'code-generation'
-            };
+            },
           validation: {
             type: 'manual',
             criteria: [
               {
                 type: 'custom',
-                target: 'code-block-exists';
+                target: 'code-block-exists',
                 errorMessage: 'Try asking for specific code generation'}
             ]
-          };
+          },
           hints: ['Be specific about what code you need';
             'Mention the framework or language',
             'Include any special requirements'
@@ -346,55 +346,55 @@ export class InteractiveTutorialSystem extends EventEmitter {
   private createDeploymentTutorial(): Tutorial {
     return {
       id: 'deployment',
-      title: 'Deploying Your Application';
+      title: 'Deploying Your Application',
       description: 'Learn how to deploy your application to production with monitoring and scaling',
-      difficulty: 'intermediate';
+      difficulty: 'intermediate',
       estimatedTime: '25 minutes',
-      prerequisites: ['project-creation'];
+      prerequisites: ['project-creation'],
       category: 'deployment',
       tags: ['deployment', 'production', 'devops'],
       completionRewards: {
-        points: 250;
-        badges: ['deployment-expert'];
+        points: 250,
+        badges: ['deployment-expert'],
         unlocks: ['advanced-monitoring']
-      };
+      },
       steps: [
         {
           id: 'open-deployment',
-          title: 'Open Deployment Panel';
+          title: 'Open Deployment Panel',
           content: 'Navigate to the deployment section of your project.',
-          type: 'action';
+          type: 'action',
           action: {
             component: 'project',
-            method: 'navigate';
-            parameters: { section: 'deployment' };
+            method: 'navigate',
+            parameters: { section: 'deployment' },
           validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'element_exists',
-                target: '.deployment-panel';
+                target: '.deployment-panel',
                 errorMessage: 'Please navigate to the deployment section'
               }
             ]
-          };
+          },
           skipAllowed: false
         };
         {
           id: 'configure-environment',
-          title: 'Configure Environment';
-          content: 'Set up your environment variables. These are crucial for your app\'s configuration in production.';
+          title: 'Configure Environment',
+          content: 'Set up your environment variables. These are crucial for your app\'s configuration in production.',
           type: 'instruction',
           skipAllowed: true
-        };
+        },
         {
           id: 'select-provider',
-          title: 'Select Deployment Provider';
+          title: 'Select Deployment Provider',
           content: 'Choose where to deploy your application. We support Vercel, AWS, and Google Cloud.',
           type: 'action',
           action: {
             component: 'deployment',
-            method: 'select-provider';
+            method: 'select-provider',
             parameters: {
               providers: ['vercel', 'aws', 'gcp']
             },
@@ -403,40 +403,40 @@ export class InteractiveTutorialSystem extends EventEmitter {
             criteria: [
               {
                 type: 'value_equals',
-                target: 'selected-provider';
+                target: 'selected-provider',
                 expected: ['vercel', 'aws', 'gcp'],
                 errorMessage: 'Please select a deployment provider'
               }
             ]
-          };
+          },
           skipAllowed: false
         };
         {
           id: 'deploy-app',
-          title: 'Deploy Application';
-          content: 'Click "Deploy" to start the deployment process. This may take a few minutes.';
+          title: 'Deploy Application',
+          content: 'Click "Deploy" to start the deployment process. This may take a few minutes.',
           type: 'action',
           action: {
             component: 'deployment',
-            method: 'deploy';
+            method: 'deploy',
             parameters: {
               action: 'start-deployment'
-            };
+            },
           validation: {
             type: 'automatic',
             criteria: [
               {
                 type: 'api_call',
-                target: '/api/deploy';
+                target: '/api/deploy',
                 errorMessage: 'Deployment initiation failed'
               }
             ]
-          };
+          },
           skipAllowed: false
         };
         {
           id: 'monitor-deployment',
-          title: 'Monitor Deployment';
+          title: 'Monitor Deployment',
           content: 'Watch the deployment progress. You can see logs, build steps, and any errors in real-time.',
           type: 'instruction',
           skipAllowed: true
@@ -447,34 +447,34 @@ export class InteractiveTutorialSystem extends EventEmitter {
   private createAdvancedFeaturesTutorial(): Tutorial {
     return {
       id: 'advanced-features',
-      title: 'Advanced Platform Features';
+      title: 'Advanced Platform Features',
       description: 'Explore advanced features including custom agents, monitoring, and optimization',
       difficulty: 'advanced',
-      estimatedTime: '30 minutes';
+      estimatedTime: '30 minutes',
       prerequisites: ['ai-assistant', 'deployment'],
       category: 'advanced',
       tags: ['advanced', 'monitoring', 'optimization', 'agents'],
       completionRewards: {
-        points: 300;
+        points: 300,
         badges: ['platform-expert', 'power-user'],
         unlocks: ['beta-features']
-      };
+      },
       steps: [
         {
           id: 'custom-agents',
-          title: 'Configure Custom Agents';
+          title: 'Configure Custom Agents',
           content: 'Learn how to configure specialized AI agents for different aspects of your project.',
-          type: 'instruction';
+          type: 'instruction',
           skipAllowed: true
-        };
+        },
         {
           id: 'monitoring-setup',
-          title: 'Set Up Monitoring';
-          content: 'Configure monitoring alerts for your application\'s performance and errors.';
+          title: 'Set Up Monitoring',
+          content: 'Configure monitoring alerts for your application\'s performance and errors.',
           type: 'action',
           action: {
             component: 'monitoring',
-            method: 'configure';
+            method: 'configure',
             parameters: {
               metrics: ['response-time', 'error-rate', 'cpu-usage']
             },
@@ -483,35 +483,35 @@ export class InteractiveTutorialSystem extends EventEmitter {
             criteria: [
               {
                 type: 'custom',
-                target: 'monitoring-configured';
+                target: 'monitoring-configured',
                 errorMessage: 'Please configure at least one monitoring metric'
               }
             ]
-          };
+          },
           skipAllowed: false
         };
         {
           id: 'performance-optimization',
-          title: 'Optimize Performance';
+          title: 'Optimize Performance',
           content: 'Use the performance analyzer to identify and fix bottlenecks in your application.',
-          type: 'instruction';
+          type: 'instruction',
           skipAllowed: true
-        };
+        },
         {
           id: 'advanced-quiz',
-          title: 'Advanced Features Quiz';
+          title: 'Advanced Features Quiz',
           content: 'Test your knowledge of advanced platform features.',
-          type: 'quiz';
+          type: 'quiz',
           validation: {
             type: 'quiz',
             criteria: [
               {
                 type: 'custom',
-                target: 'quiz-score';
+                target: 'quiz-score',
                 expected: 70, // 70% pass rate, errorMessage: 'Please review the advanced features and try again'
               }
             ]
-          };
+          },
           skipAllowed: false
         }
       ]
@@ -535,11 +535,11 @@ const completedTutorials = userProgress.map((p) => p.tutorialId);
 const progress: TutorialProgress = {;
       tutorialId;
       userId,
-      currentStep: 0;
-      completedSteps: any[];
-      startedAt: new Date();
-      score: 0;
-      hints_used: 0;
+      currentStep: 0,
+      completedSteps: [] as any[],
+      startedAt: new Date(),
+      score: 0,
+      hints_used: 0,
       attempts: {};
     this.activeProgress.set(`${userId}-${tutorialId}`, progress);
     // Save to database
@@ -619,15 +619,15 @@ const hint = currentStep.hints[hintIndex];
     this.emit('hint-used', { tutorialId, userId, step: currentStep.id, hint });
     return hint;
 }
-  private async showStep(tutorial: Tutorial, progress: TutorialProgress;
+  private async showStep(tutorial: Tutorial, progress: TutorialProgress,
   stepIndex: number): Promise<void> {
     const step = tutorial.steps[stepIndex], // Clear previous highlights, this.clearHighlights();
     // Add highlights for this step;
 if (step.type === 'action' && step.action) {
       this.addHighlight({
-        element: step.action.parameters?.target || step.action.component;
+        element: step.action.parameters?.target || step.action.component,
         type: 'highlight',
-        content: step.content;
+        content: step.content,
         position: 'top'
       })
 }
@@ -662,7 +662,7 @@ if (step.type === 'action' && step.action) {
         return this.checkApiCall(criterion.target, userId);
       case 'custom':
       // Custom validation logic
-        return this.customValidation(criterion.target, criterion.expected);
+        return this.customValidation(criterion.target, criterion.expected),
       default: return false}
 }
   private checkElementExists(selector: string): boolean {
@@ -684,9 +684,8 @@ if (step.type === 'action' && step.action) {
         return true, case 'monitoring-configured':;
       // Check if monitoring is set up
         return true;
-      case 'quiz-score':
-      // Check quiz score
-        return Math.random() * 100 > (expected || 70);
+      case 'quiz-score': // Check quiz score
+        return Math.random() * 100 > (expected || 70),
       default: return true}
 }
   private calculateStepScore(step: TutorialStep, attempts: number): number {
@@ -706,9 +705,9 @@ if (step.type === 'action' && step.action) {
     this.activeProgress.delete(`${progress.userId}-${tutorial.id}`);
     // Emit completion event
     this.emit('tutorial-completed', {
-      tutorialId: tutorial.id;
-      userId: progress.userId;
-      score: progress.score;
+      tutorialId: tutorial.id,
+      userId: progress.userId,
+      score: progress.score,
       duration: progress.completedAt.getTime() - progress.startedAt.getTime();
       rewards
     })
@@ -720,9 +719,9 @@ if (step.type === 'action' && step.action) {
   private async saveProgress(progress: TutorialProgress): Promise<void> {
     // Save to database
     try {
-      await fetch('/api/tutorials/progress', {,
+      await fetch('/api/admin/auth', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(progress)
       })
     } catch (error) {
@@ -764,8 +763,8 @@ const data = await response.json();
         if (prereqsMet) {
           recommendations.push(tutorial)});
     // Sort by difficulty
-    return recommendations.sort((a, b) => {;
-      const difficultyOrder = { beginner: 1, intermediate: 2, advanced: 3 };
+    return recommendations.sort((a, b) => {
+      const difficultyOrder = { beginner: 1, intermediate: 2, advanced: 3 }
       return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
 })
   }

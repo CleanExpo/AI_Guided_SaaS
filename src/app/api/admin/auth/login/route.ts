@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
-const loginSchema = z.object({,
-    email: z.string().email('Invalid email format');
+const loginSchema = z.object({
+    email: z.string().email('Invalid email format'),
     password: z.string().min(1, 'Password is required')
 });
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -17,7 +17,7 @@ const isValid = validatedData.password === process.env.ADMIN_PASSWORD;
             return NextResponse.json({ success: true, message: 'Login successful' })
 } else {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
-}} catch (error) {;
+}} catch (error) {
         console.error('Admin login error:', error);
         return NextResponse.json({ error: 'Authentication failed' }, { status: 500 })
 }};

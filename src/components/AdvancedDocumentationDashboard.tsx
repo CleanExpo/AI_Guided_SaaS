@@ -5,7 +5,7 @@ import { ProjectConfig } from '@/types';
 import { BookOpen } from 'lucide-react';
 interface AdvancedDocumentationDashboardProps {
 projectConfig: ProjectConfi
-g;
+g,
   onDocumentationComplete: (result: unknown: any) => void
 };
 export default function AdvancedDocumentationDashboard() {

@@ -27,7 +27,7 @@ const urlMatch = config.url.match(/\/api\/v1\/db\/data\/noco\/([^/]+)/);
 }
   // Helper method for API requests
   private async request<T>(
-endpoint: string;
+endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
     const headers: Record<string, string> = {
@@ -67,16 +67,16 @@ const data = await response.json();
   async signUp(email: string, password: string, metadata?: any): Promise<User> {;
     // Hash password, const hashedPassword = await bcrypt.hash(password, 10); // Create user in users table;
 
-const user = await this.request<any>(this.getTableEndpoint('users'), {,
+const user = await this.request<any>(this.getTableEndpoint('users'), {
       method: 'POST',
       body: JSON.stringify({
         id: uuidv4();
         email,
-        password: hashedPassword;
-        name: metadata?.name;
-        role: metadata?.role || 'user';
+        password: hashedPassword,
+        name: metadata?.name,
+        role: metadata?.role || 'user',
         metadata: JSON.stringify(metadata || {});
-        created_at: new Date().toISOString();
+        created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
 })};
     return this.mapNocoDBUser(user);
@@ -128,7 +128,7 @@ const user = await this.request<any>(
     
 const user = await this.request<any>(
       `${this.getTableEndpoint('users')}/${id}`,
-      {,
+      {
         method: 'PATCH',
         body: JSON.stringify(updateData)}
     );
@@ -136,17 +136,17 @@ const user = await this.request<any>(
 }
   // Projects
   async createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
-    const project = await this.request<any>(this.getTableEndpoint('projects'), {,
+    const project = await this.request<any>(this.getTableEndpoint('projects'), {
       method: 'POST',
       body: JSON.stringify({
-        id: uuidv4();
-        user_id: data.userId;
-        name: data.name;
-        description: data.description;
-        type: data.type;
-        status: data.status;
-        config: JSON.stringify(data.config || {});
-        created_at: new Date().toISOString();
+        id: uuidv4(),
+        user_id: data.userId,
+        name: data.name,
+        description: data.description,
+        type: data.type,
+        status: data.status,
+        config: JSON.stringify(data.config || {}),
+        created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
 })};
     return this.mapNocoDBProject(project);
@@ -174,7 +174,7 @@ const user = await this.request<any>(
     
 const project = await this.request<any>(
       `${this.getTableEndpoint('projects')}/${id}`,
-      {,
+      {
         method: 'PATCH',
         body: JSON.stringify(updateData)}
     );
@@ -198,13 +198,13 @@ if (options?.limit) {
     if (options?.offset) {
       params.append('offset', options.offset.toString())
     }
-    const response  = await this.request<{,
-      list: any[];
+    const response  = await this.request<{
+      list: [] as any[],
       pageInfo: {
-        totalRows: number;
-        page: number;
-        pageSize: number;
-        isFirstPage: boolean;
+        totalRows: number,
+        page: number,
+        pageSize: number,
+        isFirstPage: boolean,
         isLastPage: boolean
       }}>(`${this.getTableEndpoint('projects')}?${params.toString()}`);
 
@@ -212,7 +212,7 @@ const page = Math.floor((options?.offset || 0) / (options?.limit || 25)) + 1;
     
 const pageSize = options?.limit || 25;
     return {
-      data: response.list.map(this.mapNocoDBProject);
+      data: response.list.map(this.mapNocoDBProject),
       total: response.pageInfo.totalRows;
       page,
       pageSize,
@@ -224,12 +224,12 @@ const pageSize = options?.limit || 25;
     // Add metadata fields
         const createData = {;
       ...data;
-      id: data.id || uuidv4();
-      created_at: new Date().toISOString();
+      id: data.id || uuidv4(),
+      created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
 };
 
-const result = await this.request<any>(this.getTableEndpoint(collection), {,
+const result = await this.request<any>(this.getTableEndpoint(collection), {
       method: 'POST',
       body: JSON.stringify(createData)
 });
@@ -246,7 +246,7 @@ const result = await this.request<any>(this.getTableEndpoint(collection), {,
       throw error
 }
 };
-  async update<T>(collection: string, id: string;
+  async update<T>(collection: string, id: string,
   data: any): Promise<T> {
     const updateData  = {;
       ...data;
@@ -255,7 +255,7 @@ const result = await this.request<any>(this.getTableEndpoint(collection), {,
 
 const result = await this.request<any>(
       `${this.getTableEndpoint(collection)}/${id}`,
-      {,
+      {
         method: 'PATCH',
         body: JSON.stringify(updateData)}
     );
@@ -284,13 +284,13 @@ if (options?.limit) {
     if (options?.offset) {
       params.append('offset', options.offset.toString())
     }
-    const response  = await this.request<{,
-      list: any[];
+    const response  = await this.request<{
+      list: [] as any[],
       pageInfo: {
-        totalRows: number;
-        page: number;
-        pageSize: number;
-        isFirstPage: boolean;
+        totalRows: number,
+        page: number,
+        pageSize: number,
+        isFirstPage: boolean,
         isLastPage: boolean
       }}>(`${this.getTableEndpoint(collection)}?${params.toString()}`);
 
@@ -298,7 +298,7 @@ const page = Math.floor((options?.offset || 0) / (options?.limit || 25)) + 1;
     
 const pageSize = options?.limit || 25;
     return {
-      data: response.list.map(this.mapNocoDBRecord) as T[];
+      data: response.list.map(this.mapNocoDBRecord) as T[],
       total: response.pageInfo.totalRows;
       page,
       pageSize,
@@ -310,20 +310,20 @@ const pageSize = options?.limit || 25;
     return new NocoDBQueryBuilder<T>(this, collection)}
   // Real-time subscriptions (NocoDB doesn't have built-in real-time)
   subscribe<T>(;
-collection: string;
+collection: string,
     callback: (event: DatabaseEvent<T>) => void;
     filters?: Record<string, any>
   ): () => void {
     console.warn('Real-time subscriptions not supported in NocoDB');
         return () => {}
   // File storage;
-  async uploadFile(bucket: string, path: string;
+  async uploadFile(bucket: string, path: string,
   file: File): Promise<string> {
     const formData = new FormData(), formData.append('file', file), formData.append('path', path);
     
-const response = await fetch(`${this.baseUrl}/api/v1/db/storage/upload`, {,
+const response = await fetch('/api/admin/auth', {
       method: 'POST',
-      headers: { 'xc-token': this.apiToken };
+      headers: { 'xc-token': this.apiToken },
       body: formData
     });
     if (!response.ok) {
@@ -343,24 +343,24 @@ const response = await fetch(`${this.baseUrl}/api/v1/db/storage/upload`, {,
   }
   // Helper methods
   private mapNocoDBUser(user: any): User {
-    return {,
-      id: user.id;
-      email: user.email;
-      name: user.name;
-      role: user.role;
-      createdAt: user.created_at;
-      updatedAt: user.updated_at;
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      createdAt: user.created_at,
+      updatedAt: user.updated_at,
       metadata: user.metadata ? JSON.parse(user.metadata) : {}
   private mapNocoDBProject(project: any): Project {
     return {
-      id: project.id;
-      userId: project.user_id;
-      name: project.name;
-      description: project.description;
-      type: project.type;
-      status: project.status;
-      config: project.config ? JSON.parse(project.config) : {};
-      createdAt: project.created_at;
+      id: project.id,
+      userId: project.user_id,
+      name: project.name,
+      description: project.description,
+      type: project.type,
+      status: project.status,
+      config: project.config ? JSON.parse(project.config) : {},
+      createdAt: project.created_at,
       updatedAt: project.updated_at
   }
 }
@@ -376,22 +376,22 @@ const response = await fetch(`${this.baseUrl}/api/v1/db/storage/upload`, {,
         }});
     // Map snake_case to camelCase;
 
-const mapped = {};
+    const mapped = {};
     for (const [key, value] of Object.entries(parsed)) {
       const camelKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase(), mapped[camelKey] = value};
     return mapped;
 }
   // Internal method for query builder
   async executeQuery<T>(
-collection: string;
+collection: string,
     params: URLSearchParams
   ): Promise<{ list: T[], pageInfo: any }> {
-    const response = await this.request<{,
-      list: any[];
+    const response = await this.request<{
+      list: [] as any[],
       pageInfo: any
     }>(`${this.getTableEndpoint(collection)}?${params.toString()}`);
     return {
-      list: response.list.map(this.mapNocoDBRecord) as T[];
+      list: response.list.map(this.mapNocoDBRecord) as T[],
       pageInfo: response.pageInfo
   }
 }
@@ -405,7 +405,7 @@ class NocoDBQueryBuilder<T> implements QueryBuilder<T> {
   select(fields: string[]): QueryBuilder<T> {
     this.params.append('fields', fields.join(',');
         return this};
-  where(field: string, operator: string;
+  where(field: string, operator: string,
   value: any): QueryBuilder<T> {
     const operatorMap: Record<string, string>  = {
       '=': 'eq',

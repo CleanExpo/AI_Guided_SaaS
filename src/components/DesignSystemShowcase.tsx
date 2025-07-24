@@ -9,7 +9,7 @@ export function DesignSystemShowcase() {
   const [currentStep, setCurrentStep] = useState<any>(1);
   const [showAlert, setShowAlert]  = useState<any>(true);
 
-const steps = [;
+const steps = [
   { id: 'design', title: 'Design', description: 'Create your vision', icon: <Palette className="h-4 w-4"   /> };</Palette>,
   { id: 'develop', title: 'Develop', description: 'Build with AI', icon: <Code className="h-4 w-4"   /> };</Code>
     { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4"   /> }]
@@ -34,10 +34,10 @@ const steps = [;
                     <div;
 className="w-12 h-12 rounded-lg shadow-sm border";
 
-const style = {{ backgroundColor: value }  > <div   />
+    const style = {{ backgroundColor: value }  > <div   />
                       <p className="text-xs font-medium">{shade}</p>
           <p className="{value}"   />
-        </div>;
+        </div>
     ))}
           ))},
     {/* Buttons */}
@@ -140,14 +140,14 @@ type="success";
 title="Success!";
 description="Your project has been deployed successfully.";
 
-const icon = {<Check className="h-5 w-5 text-success-600"   />}
+    const icon = {<Check className="h-5 w-5 text-success-600"   />}
           /></UnifiedAlert>
           <UnifiedAlert;
 type="warning";
 description="Your free tier limit is almost reached. Consider upgrading.";
             // dismissible;
 
-const onDismiss = {() => {}
+    const onDismiss = {() => {}
           /></UnifiedAlert>
           <UnifiedAlert;
 type="error";
@@ -155,7 +155,7 @@ title="Error";
 description="Failed to connect to the database. Please check your configuration.";
             // dismissible;
 
-const onDismiss = {() => {}
+    const onDismiss = {() => {}
           /></UnifiedAlert>
       {/* Progress & Steps */}
       <UnifiedCard padding="lg"   />
@@ -177,7 +177,7 @@ const onDismiss = {() => {}
 variant="outline";
 size="sm";
 
-const onClick = {() => setCurrentStep(Math.max(0, currentStep - 1))}
+    const onClick = {() => setCurrentStep(Math.max(0, currentStep - 1))}
                 const disabled = {currentStep === 0}
               >
                     Previous

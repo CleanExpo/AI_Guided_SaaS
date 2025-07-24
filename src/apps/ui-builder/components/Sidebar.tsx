@@ -8,7 +8,7 @@ export default function Sidebar() {const addComponent = useBuilderStore((state) 
         {componentList.map((comp) => (</ul>;
           <li;
 
-const key = {comp.id}
+    const key = {comp.id}
             const onClick = {() => addComponent(comp.id)};
             className="mb-3 p-2 rounded hover:bg-gray-700 cursor-pointer transition";
           ></li>

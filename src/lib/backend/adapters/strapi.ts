@@ -8,7 +8,7 @@ export class StrapiAdapter implements BackendAdapter {
   }
   // Helper method for API requests
   private async request<T>(
-endpoint: string;
+endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
     const headers: Record<string, string> = {
@@ -36,8 +36,8 @@ const data = await response.json();
 }
   // Authentication
   async signUp(email: string, password: string, metadata?: any): Promise<User> {
-    const response = await this.request<{,
-      jwt: string;
+    const response = await this.request<{
+      jwt: string,
       user: any
     }>('/auth/local/register', {
       method: 'POST',
@@ -51,8 +51,8 @@ const data = await response.json();
     return this.mapStrapiUser(response.user);
 }
   async signIn(email: string, password: string): Promise<{ user: User, token: string }> {
-    const response = await this.request<{,
-      jwt: string;
+    const response = await this.request<{
+      jwt: string,
       user: any
     }>('/auth/local', {
       method: 'POST',
@@ -62,7 +62,7 @@ const data = await response.json();
       })};
     this.jwt = response.jwt;
     return {
-      user: this.mapStrapiUser(response.user);
+      user: this.mapStrapiUser(response.user),
       token: response.jwt
   }
 }
@@ -77,10 +77,10 @@ const data = await response.json();
       return null}
 }
   async updateUser(id: string, data: Partial<User>): Promise<User> {
-    const response = await this.request<any>(`/users/${id}`, {,
+    const response = await this.request<any>(`/users/${id}`, {
       method: 'PUT',
       body: JSON.stringify({
-        username: data.email;
+        username: data.email,
         email: data.email;
         ...data.metadata
       })};
@@ -88,7 +88,7 @@ const data = await response.json();
 }
   // Projects
   async createProject(data: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
-    const response = await this.request<{ data: any }>('/projects', {,
+    const response = await this.request<{ data: any }>('/projects', {
       method: 'POST',
       body: JSON.stringify({
         data: { name: data.name, description: data.description, type: data.type, status: data.status, config: data.config, user: data.userId }})};
@@ -105,7 +105,7 @@ const data = await response.json();
 }
 }
   async updateProject(id: string, data: Partial<Project>): Promise<Project> {
-    const response = await this.request<{ data: any }>(`/projects/${id}`, {,
+    const response = await this.request<{ data: any }>(`/projects/${id}`, {
       method: 'PUT',
       body: JSON.stringify({
         data: { name: data.name, description: data.description, type: data.type, status: data.status, config: data.config }})};
@@ -133,26 +133,26 @@ if (options?.orderBy) {
     // Include user relation
     params.append('populate', 'user');
     
-const response = await this.request<{,
-      data: any[];
+const response = await this.request<{
+      data: [] as any[],
       meta: {
         pagination: {
-          page: number;
-          pageSize: number;
-          pageCount: number;
+          page: number,
+          pageSize: number,
+          pageCount: number,
           total: number
         }}>(`/projects?${params.toString()}`);
     return {
-      data: (response as any).data.map(this.mapStrapiProject);
-      total: response.meta.pagination.total;
-      page: response.meta.pagination.page;
-      pageSize: response.meta.pagination.pageSize;
+      data: (response as any).data.map(this.mapStrapiProject),
+      total: response.meta.pagination.total,
+      page: response.meta.pagination.page,
+      pageSize: response.meta.pagination.pageSize,
       hasMore: response.meta.pagination.page < response.meta.pagination.pageCount
   }
 }
   // Generic CRUD
   async create<T>(collection: string, data: any): Promise<T> {
-    const response = await this.request<{ data: any }>(`/${collection}`, {,
+    const response = await this.request<{ data: any }>(`/${collection}`, {
       method: 'POST',
       body: JSON.stringify({ data })};
     return this.mapStrapiRecord((response as any).data) as T;
@@ -167,9 +167,9 @@ const response = await this.request<{,
       throw error
 }
 };
-  async update<T>(collection: string, id: string;
+  async update<T>(collection: string, id: string,
   data: any): Promise<T> {
-    const response = await this.request<{ data: any }>(`/${collection}/${id}`, {,
+    const response = await this.request<{ data: any }>(`/${collection}/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ data })};
     return this.mapStrapiRecord((response as any).data) as T;
@@ -197,20 +197,20 @@ if (options?.orderBy) {
       const sort = `${options.orderBy}:${options.order || 'asc'}`;
       params.append('sort', sort)
 }
-    const response = await this.request<{,
-      data: any[];
+    const response = await this.request<{
+      data: [] as any[],
       meta: {
         pagination: {
-          page: number;
-          pageSize: number;
-          pageCount: number;
+          page: number,
+          pageSize: number,
+          pageCount: number,
           total: number
         }}>(`/${collection}?${params.toString()}`);
     return {
-      data: (response as any).data.map(this.mapStrapiRecord) as T[];
-      total: response.meta.pagination.total;
-      page: response.meta.pagination.page;
-      pageSize: response.meta.pagination.pageSize;
+      data: (response as any).data.map(this.mapStrapiRecord) as T[],
+      total: response.meta.pagination.total,
+      page: response.meta.pagination.page,
+      pageSize: response.meta.pagination.pageSize,
       hasMore: response.meta.pagination.page < response.meta.pagination.pageCount
   }
 }
@@ -219,7 +219,7 @@ if (options?.orderBy) {
     return new StrapiQueryBuilder<T>(this, collection)}
   // Real-time subscriptions (requires Strapi with WebSocket plugin)
   subscribe<T>(;
-collection: string;
+collection: string,
     callback: (event: DatabaseEvent<T>) => void;
     filters?: Record<string, any>
   ): () => void {
@@ -227,15 +227,15 @@ collection: string;
     console.warn('Real-time subscriptions require WebSocket plugin in Strapi'), // Return empty unsubscribe function
     return () => {}
   // File storage;
-  async uploadFile(bucket: string, path: string;
+  async uploadFile(bucket: string, path: string,
   file: File): Promise<string> {
     const formData = new FormData(), formData.append('files', file), formData.append('path', path);
     formData.append('folder', bucket);
     
-const response = await fetch(`${this.baseUrl}/api/upload`, {,
+const response = await fetch('/api/admin/auth', {
       method: 'POST',
       headers: { ...(this.jwt ? { Authorization: `Bearer ${this.jwt }` } : {}); ...(this.apiToken ? { Authorization: `Bearer ${this.apiToken}` } : {})
-};
+},
       body: formData
     });
     if (!response.ok) {
@@ -257,29 +257,29 @@ const response = await fetch(`${this.baseUrl}/api/upload`, {,
   }
   // Helper methods
   private mapStrapiUser(user: any): User {
-    return {,
-      id: user.id.toString();
-      email: user.email;
-      name: user.username || user.name;
-      role: user.role?.type || 'authenticated';
-      createdAt: user.createdAt;
-      updatedAt: user.updatedAt;
+    return {
+      id: user.id.toString(),
+      email: user.email,
+      name: user.username || user.name,
+      role: user.role?.type || 'authenticated',
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
       metadata: {
-        blocked: user.blocked;
-        confirmed: user.confirmed;
+        blocked: user.blocked,
+        confirmed: user.confirmed,
         provider: user.provider
   }
 }
   private mapStrapiProject(data: any): Project {
-    const attributes = data.attributes || data, return {,
-      id: data.id.toString();
-      userId: attributes.user?.data?.id?.toString() || attributes.user;
-      name: attributes.name;
-      description: attributes.description;
-      type: attributes.type;
-      status: attributes.status;
-      config: attributes.config;
-      createdAt: attributes.createdAt;
+    const attributes = data.attributes || data, return {
+      id: data.id.toString(),
+      userId: attributes.user?.data?.id?.toString() || attributes.user,
+      name: attributes.name,
+      description: attributes.description,
+      type: attributes.type,
+      status: attributes.status,
+      config: attributes.config,
+      createdAt: attributes.createdAt,
       updatedAt: attributes.updatedAt
   }
 }
@@ -287,21 +287,21 @@ const response = await fetch(`${this.baseUrl}/api/upload`, {,
     if (!data) return data, const attributes = data.attributes || data, return {
       id: data.id?.toString();
       ...attributes,
-      createdAt: attributes.createdAt;
+      createdAt: attributes.createdAt,
       updatedAt: attributes.updatedAt
   }
 }
   // Internal method for query builder
   async executeQuery<T>(
-collection: string;
+collection: string,
     params: URLSearchParams
   ): Promise<{ data: T[], meta: any }> {
-    const response = await this.request<{,
-      data: any[];
+    const response = await this.request<{
+      data: [] as any[],
       meta: any
     }>(`/${collection}?${params.toString()}`);
     return {
-      data: (response as any).data.map(this.mapStrapiRecord) as T[];
+      data: (response as any).data.map(this.mapStrapiRecord) as T[],
       meta: response.meta
   }
 }
@@ -315,7 +315,7 @@ class StrapiQueryBuilder<T> implements QueryBuilder<T> {
   select(fields: string[]): QueryBuilder<T> {
     this.selectedFields = fields, this.params.append('fields', fields.join(','); return this
 }
-  where(field: string, operator: string;
+  where(field: string, operator: string,
   value: any): QueryBuilder<T> {
     const operatorMap: Record<string, string>  = {
       '=': '$eq',

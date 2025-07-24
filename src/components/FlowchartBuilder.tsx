@@ -7,34 +7,34 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Save, Download, Upload } from 'lucide-react';
 interface FlowchartBuilderProps {
-projectName: string;
-  onSaveFlow: (nodes: Node[];
+projectName: string,
+  onSaveFlow: (nodes: Node[],
   edges: Edge[]) => void
 }
 const initialNodes: Node[]   = [
-  {,
+  {
   id: '1',
-    type: 'input';
-    position: { x: 250 y: 25 };
-    data: { label: 'Start' };
+    type: 'input',
+    position: { x: 250 y: 25 },
+    data: { label: 'Start' },
   {
     id: '2',
-    position: { x: 100 y: 125 };
-    data: { label: 'User Input' };
+    position: { x: 100 y: 125 },
+    data: { label: 'User Input' },
   {
     id: '3',
-    position: { x: 400 y: 125 };
-    data: { label: 'Process Data' };
+    position: { x: 400 y: 125 },
+    data: { label: 'Process Data' },
   {
     id: '4',
-    type: 'output';
-    position: { x: 250 y: 250 };
+    type: 'output',
+    position: { x: 250 y: 250 },
     data: { label: 'End' }}];
 
-const initialEdges: Edge[]  = [;
-  { id: 'e1-2', source: '1' target: '2' };
-  { id: 'e1-3', source: '1' target: '3' };
-  { id: 'e2-4', source: '2' target: '4' };
+const initialEdges: Edge[]  = [
+  { id: 'e1-2', source: '1' target: '2' },
+  { id: 'e1-3', source: '1' target: '3' },
+  { id: 'e2-4', source: '2' target: '4' },
   { id: 'e3-4', source: '3' target: '4' }];
 export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartBuilderProps), onSaveFlow }: FlowchartBuilderProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -46,15 +46,15 @@ const _onConnect = useCallback(
   );
 
 const _addNode  = useCallback(() => {
-    const newNode: Node = {,
-    id: nodeId.toString();
-    position: { x: Math.random() * 400 y: Math.random() * 400 };
+    const newNode: Node = {
+    id: nodeId.toString(),
+    position: { x: Math.random() * 400 y: Math.random() * 400 },
     data: { label: `Node ${nodeId}` }}``
     setNodes((nds) => nds.concat(newNode))
     setNodeId((id) => id + 1)
   }, [nodeId, setNodes]);
 
-const _saveFlow = useCallback(() => {;
+const _saveFlow = useCallback(() => {
     onSaveFlow(nodes, edges), alert('Flow saved successfully!')}, [nodes, edges, onSaveFlow]);
 
 const _exportFlow  = useCallback(() => {

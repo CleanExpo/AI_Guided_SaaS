@@ -7,17 +7,17 @@ size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   className?: string,
   color?: 'primary' | 'secondary' | 'accent' | 'muted'
 }
-const sizeClasses = {,
+const sizeClasses = {
   xs: 'w-4 h-4',
-  sm: 'w-6 h-6';
+  sm: 'w-6 h-6',
   md: 'w-8 h-8',
-  lg: 'w-12 h-12';
+  lg: 'w-12 h-12',
 xl: 'w-16 h-16'
 };
 
-const colorClasses = {,
+    const colorClasses = {
   primary: 'text-brand-primary-600',
-  secondary: 'text-brand-secondary-600';
+  secondary: 'text-brand-secondary-600',
   accent: 'text-brand-primary-500',
 muted: 'text-muted-foreground'
 };
@@ -39,11 +39,11 @@ export function Spinner({
 export function LoadingDots({
   size = 'md', className,
   color = 'primary'}: LoadingProps) {
-  const dotSize = {,
+  const dotSize = {
     xs: 'w-1 h-1',
-    sm: 'w-1.5 h-1.5';
+    sm: 'w-1.5 h-1.5',
     md: 'w-2 h-2',
-    lg: 'w-3 h-3';
+    lg: 'w-3 h-3',
 xl: 'w-4 h-4'
   };
   return (
@@ -61,7 +61,7 @@ className={cn('flex space-x-1', className)};
             colorClasses[color],
             'bg-current'
           )}
-          const style = {{,
+          const style = {{
             animationDelay: `${i * 0.2}s`,
             animationDuration: '1.4s'
           }} >))}</div>
@@ -97,7 +97,7 @@ export function Skeleton({
   lines = 1}: SkeletonProps) {
   const baseClasses = 'animate-pulse bg-brand-secondary-200 dark:bg-brand-secondary-700'; const variantClasses = {
     text: 'h-4 rounded',
-    circular: 'rounded-full';
+    circular: 'rounded-full',
     rectangular: 'rounded',
 rounded: 'rounded-lg'
   };
@@ -127,11 +127,11 @@ className={cn(baseClasses, variantClasses[variant], className)}
 export function LoadingWave({
   size = 'md', className,
   color = 'primary'}: LoadingProps) {
-  const barHeight = {,
+  const barHeight = {
     xs: 'h-2',
-    sm: 'h-3';
+    sm: 'h-3',
     md: 'h-4',
-    lg: 'h-6';
+    lg: 'h-6',
 xl: 'h-8'
   };
   return (
@@ -148,7 +148,7 @@ className={cn('flex items-end space-x-1', className)};
             barHeight[size],
             colorClasses[color]
           )}
-          const style = {{,
+          const style = {{
             animationDelay: `${i * 0.1}s`,
             animationDuration: '1.2s'
           }} >))}</div>
@@ -261,15 +261,15 @@ export function ProgressLoading({
   showPercentage = false, color = 'primary';
   size = 'md'
 }: ProgressLoadingProps) {
-  const heightClasses = {,
+  const heightClasses = {
     sm: 'h-1',
-    md: 'h-2';
+    md: 'h-2',
 lg: 'h-3'
   };
-  
-const progressColorClasses = {,
+
+    const progressColorClasses = {
     primary: 'bg-brand-primary-600',
-    secondary: 'bg-brand-secondary-600';
+    secondary: 'bg-brand-secondary-600',
 accent: 'bg-brand-primary-500'
   };
   return (
@@ -292,14 +292,14 @@ accent: 'bg-brand-primary-500'
       )};
 // Shimmer Effect;
 export function ShimmerEffect({ className }: { className?: string }) {
-  return (<div className={cn(;
+  return (<div className={cn(
       'relative overflow-hidden bg-brand-secondary-100 dark: bg-brand-secondary-800';
       className
     )} className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" /   />
       )}
 // Loading Container
 interface LoadingContainerProps {
-loading: boolean;
+loading: boolean,
   children: React.ReactNod
 e;
   fallback?: React.ReactNode,

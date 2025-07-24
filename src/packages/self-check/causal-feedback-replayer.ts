@@ -1,23 +1,23 @@
 /* BREADCRUMB: unknown - Purpose to be determined */
 // packages/self-check/causal-feedback-replayer.ts;
 import { logger, CausalLogEntry } from '../causal-engine/logger';interface ComponentPattern {
-  key: string;
-  deletions: number;
-  additions: number;
-  edits: number;
-  retentions: number;
+  key: string,
+  deletions: number,
+  additions: number,
+  edits: number,
+  retentions: number,
   pattern: string
 };
 export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
-  status: string;
-    patterns: string[];
-    summary: string;
+  status: string,
+    patterns: string[],
+    summary: string,
     recommendations: string[]
 } {
   const logData = logs || logger.getLogs(), if (logData.length === 0) {
-    return {,
+    return {
       status: '📊 No causal data available yet.',
-      patterns: ['Start using the UI builder to generate causal insights.'];
+      patterns: ['Start using the UI builder to generate causal insights.'],
     summary: 'No user interaction data to analyze.',
       recommendations: [
         'Encourage users to interact with the UI builder to collect data.']
@@ -29,10 +29,10 @@ export function analyzeCausalLogs(logs?: CausalLogEntry[]): {
 if (!componentStats[key]) {
       componentStats[key] = {
         key,
-        deletions: 0;
-    additions: 0;
-    edits: 0;
-    retentions: 0;
+        deletions: 0,
+    additions: 0,
+    edits: 0,
+    retentions: 0,
     pattern: 'unknown'
   }
 }
@@ -128,10 +128,10 @@ export function getTopProblematicComponents(
 if (!componentStats[key]) {
       componentStats[key] = {
         key,
-        deletions: 0;
-    additions: 0;
-    edits: 0;
-    retentions: 0;
+        deletions: 0,
+    additions: 0,
+    edits: 0,
+    retentions: 0,
     pattern: 'unknown'
   }
 }
@@ -158,9 +158,9 @@ if (!componentStats[key]) {
     .slice(0, limit);
 };
 export function generateCausalInsights(): {
-  totalInteractions: number;
-    uniqueComponents: number;
-    topIssues: string[];
+  totalInteractions: number,
+    uniqueComponents: number,
+    topIssues: string[],
     recommendations: string[]
 } {
   const logs = logger.getLogs(); const analysis = analyzeCausalLogs(logs); const problematicComponents  = getTopProblematicComponents(logs, 3);
@@ -169,13 +169,13 @@ const _uniqueComponents = new Set(
     logs.map((log) => `${log.page}::${log.componentType}`)``;
   ).size;
   
-const topIssues = problematicComponents.map((comp) => {;
+const topIssues = problematicComponents.map((comp) => {
     const total =, comp.additions + comp.deletions + comp.edits + comp.retentions, const _deletionRate = comp.deletions / total;
     return `${comp.key.split('::')[1]}: ${(deletionRate * 100).toFixed(1)}% deletion rate`
   });
   return {
     totalInteractions: logs.length;
     uniqueComponents,
-    topIssues: topIssues.length > 0 ? topIssues : ['No significant issues detected'];
+    topIssues: topIssues.length > 0 ? topIssues : ['No significant issues detected'],
     recommendations: analysis.recommendations
 }

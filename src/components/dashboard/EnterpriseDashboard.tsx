@@ -60,12 +60,12 @@ const _loadDashboardData = async () => {
       console.error('Error loading dashboard, data:', error)} finally {
     setLoading(false)}
   const _formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {,
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
 currency: 'USD'}).format(amount)
 };
   
-const _formatNumber = (num: number) => {;
+const _formatNumber = (num: number) => {
     return new Intl.NumberFormat('en-US').format(num);
 };
   
@@ -90,7 +90,7 @@ const _formatPercentage = (num: number) => {
           <div className="flex items-center space-x-2">
             <select;
 
-const value = {timeRange}
+    const value = {timeRange}
               const onChange = {e => setTimeRange(e.target.value)};
               className="px-3 py-2 border rounded-md";
             ></select>

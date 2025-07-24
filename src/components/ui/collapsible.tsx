@@ -11,7 +11,7 @@ const CollapsibleContext  = React.createContext<{
 interface CollapsibleProps {;
 open?: boolean;
   defaultOpen?: boolean,
-  onOpenChange? (open: boolean) => void;
+  onOpenChange? (open: boolean) => void,
   children: React.ReactNod
 e, className?: string, const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(({ open = false, defaultOpen  = false, onOpenChange, children, className
 } ref) => {
@@ -39,7 +39,8 @@ const ref = {ref}
       className={cn(`'flex w-full items-center justify-between py-2 font-medium transition-all hover: underline [&[data-state=open]>svg]:rotate-180' className
       )}
       data-state={open ? 'open' : 'closed'};
-      const onClick = {() => onOpenChange(!open)};
+
+    const onClick = {() => onOpenChange(!open)},
     {...props}
     >
       {children}</button>

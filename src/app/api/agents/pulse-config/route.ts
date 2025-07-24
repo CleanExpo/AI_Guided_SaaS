@@ -14,9 +14,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        const config = {,
-            interval: 30000;
-            enabled: true;
+        const config = {
+            interval: 30000,
+            enabled: true,
             metrics: ['cpu', 'memory', 'requests']
         };
         return NextResponse.json(config);

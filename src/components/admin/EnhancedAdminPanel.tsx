@@ -49,7 +49,7 @@ export default function EnhancedAdminPanel() {
 className="w-full mt-4";
 variant="outline";
 
-const onClick = {() => setActiveTab('performance')}
+    const onClick = {() => setActiveTab('performance')}
                 >
                   View Details {/* Safe, Mode Status */}
               <Card className="p-6">
@@ -70,7 +70,7 @@ const onClick = {() => setActiveTab('performance')}
 className="w-full mt-4";
 variant="outline";
 
-const onClick = {() => setActiveTab('safe-mode')}
+    const onClick = {() => setActiveTab('safe-mode')}
                 >
                   Start Safe Check {/* System, Health */}
               <Card className="p-6">
@@ -90,7 +90,7 @@ const onClick = {() => setActiveTab('safe-mode')}
 className="w-full mt-4";
 variant="outline";
 
-const onClick = {() => setActiveTab('system-check')}
+    const onClick = {() => setActiveTab('system-check')}
                 >
                   Run Health Check {/* Quick, Actions */}
             <Card className="p-6">
@@ -100,7 +100,7 @@ const onClick = {() => setActiveTab('system-check')}
 variant="outline";
 className="h-20 flex flex-col items-center justify-center";
 
-const onClick = {() => setActiveTab('performance')}
+    const onClick = {() => setActiveTab('performance')}
                 ></Button>
                   <span className="text-2xl mb-1">📊</span>
                   <span className="text-sm">Monitor Resources</span>
@@ -108,7 +108,7 @@ const onClick = {() => setActiveTab('performance')}
 variant="outline";
 className="h-20 flex flex-col items-center justify-center";
 
-const onClick = {() => setActiveTab('safe-mode')}
+    const onClick = {() => setActiveTab('safe-mode')}
                 ></Button>
                   <span className="text-2xl mb-1">🛡️</span>
                   <span className="text-sm">Safe Processing</span>
@@ -116,7 +116,7 @@ const onClick = {() => setActiveTab('safe-mode')}
 variant="outline";
 className="h-20 flex flex-col items-center justify-center";
 
-const onClick = {() => setActiveTab('system-check')}
+    const onClick = {() => setActiveTab('system-check')}
                 ></Button>
                   <span className="text-2xl mb-1">🔍</span><span className="text-sm">System Check</span>
                 <Button;

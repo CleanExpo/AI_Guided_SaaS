@@ -3,17 +3,17 @@ import { useState, useCallback } from 'react';
 import { toast } from '@/components/ui/use-toast';
 export interface N8nWorkflow {
   id?: string,
-    name: string;
+    name: string,
   active: boolean;
   tags?: string[]
 };
 export interface N8nExecution {
-  id: string;
-  workflowId: string;
-  mode: string;
+  id: string,
+  workflowId: string,
+  mode: string,
   startedAt: string;
   stoppedAt?: string,
-    finished: boolean;
+    finished: boolean,
   status: 'running' | 'success' | 'error'
 };
 export interface UseN8nAutomationReturn {
@@ -27,10 +27,10 @@ export interface UseN8nAutomationReturn {
   getExecutionStatus: (executionId: string) => Promise<N8nExecution;>,
   retryExecution: (executionId: string) => Promise<N8nExecution;>
   // Webhook triggers,
-    triggerWebhook: (action: string;
+    triggerWebhook: (action: string,
   projectId: string, data?) => Promise<any>
   // State,
-    loading: boolean;
+    loading: boolean,
   error: string | nul
 l
 };
@@ -38,7 +38,7 @@ export function useN8nAutomation(): UseN8nAutomationReturn {
   const [loading, setLoading] = useState<any>(false);
   const [error, setError] = useState<string | null>(null), // List all workflows;
 
-const _listWorkflows = useCallback(async () => {;
+const _listWorkflows = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -48,9 +48,9 @@ const _listWorkflows = useCallback(async () => {;
 const data = await response.json();
       return data.workflows;
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to list workflows', setError(message), toast({,
+      const _message = err instanceof Error ? err.message : 'Failed to list workflows', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -60,10 +60,10 @@ const data = await response.json();
 
 const _createWorkflow  = useCallback(async (type: string, config) => {
     setLoading(true), setError(null), try {
-      const response = await fetch('/api/n8n/workflows', {,
+      const response = await fetch('/api/admin/auth', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({ type, ...config })}
+    headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, ...config })}
       if (!response.ok) throw new Error('Failed to create workflow');
 
 const data = await response.json();
@@ -73,9 +73,9 @@ const data = await response.json();
       });
       return data.workflow;
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to create workflow', setError(message), toast({,
+      const _message = err instanceof Error ? err.message : 'Failed to create workflow', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -93,9 +93,9 @@ const _deleteWorkflow = useCallback(async (id: string) => {
         description: 'Workflow deleted successfully'
       })
 } catch (err) {
-      const _message  = err instanceof Error ? err.message : 'Failed to delete workflow', setError(message), toast({,
+      const _message  = err instanceof Error ? err.message : 'Failed to delete workflow', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -106,17 +106,17 @@ const _deleteWorkflow = useCallback(async (id: string) => {
 const _toggleWorkflow = useCallback(async (id: string active: boolean) => {
     setLoading(true), setError(null), try {;
       const response = await fetch(`/api/n8n/workflows?id=${id}`, {`, `, method: 'PUT',
-    headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({ active })}
+    headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ active })}
       if (!response.ok) throw new Error('Failed to update workflow');
       toast({
         title: 'Success',
         description: `Workflow ${active ? 'activated' : 'deactivated'} successfully`
       })
 } catch (err) {
-      const _message  = err instanceof Error ? err.message : 'Failed to update workflow', setError(message), toast({,
+      const _message  = err instanceof Error ? err.message : 'Failed to update workflow', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -126,10 +126,10 @@ const _toggleWorkflow = useCallback(async (id: string active: boolean) => {
 
 const _executeWorkflow = useCallback(async (workflowId: string, data?) => {
     setLoading(true), setError(null), try {
-      const response  = await fetch('/api/n8n/execute', {,
+      const response  = await fetch('/api/admin/auth', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({ workflowId, data })}
+    headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ workflowId, data })}
       if (!response.ok) throw new Error('Failed to execute workflow');
 
 const result = await response.json();
@@ -139,9 +139,9 @@ const result = await response.json();
       });
       return result.execution;
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to execute workflow', setError(message), toast({,
+      const _message = err instanceof Error ? err.message : 'Failed to execute workflow', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -159,9 +159,9 @@ const response = await fetch(`/api/n8n/execute${params}`);``
 const data = await response.json();
       return data.executions;
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to list executions', setError(message), toast({,
+      const _message = err instanceof Error ? err.message : 'Failed to list executions', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -178,9 +178,9 @@ const _getExecutionStatus = useCallback(async (executionId: string) => {
 const data = await response.json();
       return data.execution;
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to get execution status', setError(message), toast({,
+      const _message = err instanceof Error ? err.message : 'Failed to get execution status', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -201,9 +201,9 @@ const data = await response.json();
       });
       return data.execution;
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to retry execution', setError(message), toast({,
+      const _message = err instanceof Error ? err.message : 'Failed to retry execution', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err
@@ -213,10 +213,10 @@ const data = await response.json();
 
 const _triggerWebhook  = useCallback(async (action: string, projectId: string, data?) => {
     setLoading(true), setError(null), try {
-      const response = await fetch('/api/n8n/webhook', {,
+      const response = await fetch('/api/admin/auth', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({ action, projectId, data })}
+    headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, projectId, data })}
       if (!response.ok) throw new Error('Failed to trigger webhook');
 
 const result = await response.json();
@@ -226,9 +226,9 @@ const result = await response.json();
       });
       return result;
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to trigger webhook', setError(message), toast({,
+      const _message = err instanceof Error ? err.message : 'Failed to trigger webhook', setError(message), toast({
         title: 'Error',
-        description: message;
+        description: message,
     variant: 'destructive'
       });
       throw err

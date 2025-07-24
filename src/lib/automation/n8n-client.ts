@@ -9,9 +9,9 @@ export interface N8nConfig {
 
 export interface N8nWorkflow {
     id?: string,
-    name: string;
-  active: boolean;
-  nodes: N8nNode[];
+    name: string,
+  active: boolean,
+  nodes: N8nNode[],
   connections: N8nConnectio
 n;
   settings?: N8nWorkflowSettings,
@@ -21,10 +21,10 @@ n;
 }
 
 export interface N8nNode {
-    id: string;
-  name: string;
-  type: string;
-  typeVersion: number;
+    id: string,
+  name: string,
+  type: string,
+  typeVersion: number,
   position: [number, number],
   parameters: Record<string, any>
   credentials?: Record<string, string>
@@ -33,8 +33,8 @@ export interface N8nNode {
 
 export interface N8nConnection { [nodeId: string]: {
     [outputName: string]: Array<{
-  node: string;
-  type: 'main' | 'ai_agent' | 'ai_tool' | 'ai_document' | 'ai_memory' | 'ai_outputParser';
+  node: string,
+  type: 'main' | 'ai_agent' | 'ai_tool' | 'ai_document' | 'ai_memory' | 'ai_outputParser',
   index: number
 }}>[]
 }
@@ -48,8 +48,8 @@ export interface N8nWorkflowSettings {
 }
 
 export interface N8nExecution {
-    id: string;
-  finished: boolean;
+    id: string,
+  finished: boolean,
   mode: 'manual' | 'trigger' | 'webhook' | 'internal' | 'retry' | 'integrated' | 'cli';
   retryOf?: string,
   retrySuccessId?: string,
@@ -68,39 +68,39 @@ export interface N8nExecutionData { startData?,
 }
   executionData?: {
     contextData: Record<string, any>,
-  nodeExecutionStack: any[], waitingExecution: Record<string, any />, export interface N8nWebhook { httpMethod: string;
-  path: string;
-  webhookId: string;
-  node: string;
+  nodeExecutionStack: [] as any[], waitingExecution: Record<string, any />, export interface N8nWebhook { httpMethod: string,
+  path: string,
+  webhookId: string,
+  node: string,
   workflowId: string
   }
 }
 // Validation schemas;
 export const N8nWorkflowSchema = z.object({
-    id: z.string().optional();
-    name: z.string();
-    active: z.boolean();
+    id: z.string().optional(),
+    name: z.string(),
+    active: z.boolean(),
     nodes: z.array(z.object({
-  id: z.string();
-    name: z.string();
-    type: z.string();
-    typeVersion: z.number();
+  id: z.string(),
+    name: z.string(),
+    type: z.string(),
+    typeVersion: z.number(),
     position: z.tuple([z.number(), z.number()]),
-    parameters: z.record(z.any();
-    credentials: z.record(z.string()).optional();
-    disabled: z.boolean().optional()}));
+    parameters: z.record(z.any(),
+    credentials: z.record(z.string()).optional(),
+    disabled: z.boolean().optional()})),
   connections: z.record(z.record(z.array(z.array(z.object({
-    node: z.string();
+    node: z.string(),
     type: z.enum(['main', 'ai_agent', 'ai_tool', 'ai_document', 'ai_memory', 'ai_outputParser']),
-    index: z.number()})));
+    index: z.number()}))),
   settings: z.object({
-    executionOrder: z.literal('v1').optional();
-    saveManualExecutions: z.boolean().optional();
+    executionOrder: z.literal('v1').optional(),
+    saveManualExecutions: z.boolean().optional(),
     callerPolicy: z.enum(['any', 'none', 'workflowsFromAList', 'workflowsFromSameOwner']).optional(),
-    errorWorkflow: z.string().optional();
-    timezone: z.string().optional()}).optional();
+    errorWorkflow: z.string().optional(),
+    timezone: z.string().optional()}).optional()
   tags: z.array(z.string()).optional()
-});
+})
 export class N8nClient {
   private baseUrl: string
   private headers: Record<string, string> = {}
@@ -122,7 +122,7 @@ export class N8nClient {
 }
   async createWorkflow(workflow: Omit<N8nWorkflow, 'id'>): Promise<any> {;
     // Validate workflow, const _validated = N8nWorkflowSchema.parse(workflow);
-        return this.request('/workflows', {,
+        return this.request('/workflows', {
       method: 'POST',
       body: JSON.stringify(validated)
     })
@@ -177,8 +177,8 @@ const response = await this.request(`/executions${params}`);``
 }
   // Trigger workflow via webhook
   async triggerWebhook(path: string, data, httpMethod: string = 'POST', headers?: HeadersInit): Promise<any> {
-    const _webhookUrl  = await this.getWebhookUrl(path, httpMethod), const response = await fetch(webhookUrl, {,
-    method: httpMethod;
+    const _webhookUrl  = await this.getWebhookUrl(path, httpMethod), const response = await fetch('/api/admin/auth', {
+    method: httpMethod,
     headers: { 'Content-Type': 'application/json', ...headers },
       body: JSON.stringify(data)
     });
@@ -202,7 +202,7 @@ if (!response.ok) {
 }
   // Helper method for API requests
   private async request<T = any>(
-endpoint: string;
+endpoint: string,
     options: RequestInit = {}
   ): Promise<any> {
     const url  = `${this.baseUrl}/api/v1${endpoint}`;
@@ -220,14 +220,14 @@ const data = await response.json();
 }
   // Workflow builder helpers
   createWebhookNode(
-name: string;
-    path: string;
-    httpMethod: string = 'POST';
+name: string,
+    path: string,
+    httpMethod: string = 'POST',
     position: [number, number] = [250, 300]
   ): N8nNode { return {
-      id: this.generateNodeId();
+      id: this.generateNodeId(),
     name: type: 'n8n-nodes-base.webhook',
-      typeVersion: 1;
+      typeVersion: 1,
       position,
     parameters: {
         httpMethod;
@@ -236,21 +236,21 @@ name: string;
         responseData: 'allEntries'
 }
   createHttpRequestNode(
-name: string;
-    url: string;
-    method: string = 'POST';
+name: string,
+    url: string,
+    method: string = 'POST',
     position: [number, number] = [450, 300]
   ): N8nNode {
     return {
-      id: this.generateNodeId();
+      id: this.generateNodeId(),
     name: type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
       position,
     parameters: {
         method;
         url,
         authentication: 'none',
-        sendHeaders: true;
+        sendHeaders: true,
     headerParameters: {
   parameters: [
             {
@@ -258,34 +258,34 @@ name: string;
               value: 'application/json'
 }
    ]
-        };
-        sendBody: true;
+        },
+        sendBody: true,
     bodyParameters: {
           parameters: any[]
-        };
+        },
     options: {}
   createCodeNode(
-name: string;
-    code: string;
+name: string,
+    code: string,
     position: [number, number] = [650, 300]
   ): N8nNode { return {
-      id: this.generateNodeId();
+      id: this.generateNodeId(),
     name: type: 'n8n-nodes-base.code',
-      typeVersion: 2;
+      typeVersion: 2,
       position,
     parameters: {
   mode: 'runOnceForEachItem',
         jsCode: code
 }
   connectNodes(
-fromNode: string;
-    toNode: string;
-    fromOutput: string = 'main';
+fromNode: string,
+    toNode: string,
+    fromOutput: string = 'main',
     toInput: number = 0
   ): N8nConnection {
     return {
       [fromNode]: {
-        [fromOutput]: [[{,
+        [fromOutput]: [[{
   node: toNode, type: 'main',
           index: toInput
   }]]
@@ -301,7 +301,7 @@ export function getN8nClient(config?: N8nConfig): N8nConfig): N8nClient {
     n8nClient = new N8nClient(config)}
   if (!n8nClient) {
     // Try to get from environment, const envConfig: N8nConfig = {
-    url: process.env.N8N_URL || 'http://localhost:5678';
+    url: process.env.N8N_URL || 'http://localhost:5678',
     apiKey: process.env.N8N_API_KEY
 }
     n8nClient = new N8nClient(envConfig)

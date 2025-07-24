@@ -3,26 +3,26 @@ import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated project deployment
  */;
 export function createProjectDeploymentWorkflow(
-    projectName: string, webhookPath: string = 'deploy-project'): string;
+    projectName: string, webhookPath: string = 'deploy-project'): string,
   webhookPath: string = 'deploy-project'): N8nWorkflow {
-  const nodes: N8nNode[] = [// 1. Webhook trigger, {,
+  const nodes: N8nNode[] = [// 1. Webhook trigger, {
   id: 'webhook_1',
-      name: 'Deploy Webhook';
+      name: 'Deploy Webhook',
       type: 'n8n-nodes-base.webhook',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [250, 300],
     parameters: {
   httpMethod: 'POST',
-        path: webhookPath;
+        path: webhookPath,
     responseMode: 'lastNode',
         responseData: 'allEntries'
 };
     // 2. Extract project data
     {
       id: 'code_1',
-      name: 'Extract Project Data';
+      name: 'Extract Project Data',
       type: 'n8n-nodes-base.code',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [450, 300],
     parameters: {
   mode: 'runOnceForEachItem',
@@ -36,23 +36,23 @@ return {
   projectId,
   deploymentType,
   config,;
-  timestamp: new Date().toISOString();
+  timestamp: new Date().toISOString(),
     webhookData: $input.item.json
 };```
 },
     // 3. Build project
     {
       id: 'http_1',
-      name: 'Trigger Build';
+      name: 'Trigger Build',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [650, 200],
     parameters: {
   method: 'POST',
-        url: '={{ $env.API_URL }}/api/build';
+        url: '={{ $env.API_URL }}/api/build',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendHeaders: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendHeaders: true,
     headerParameters: {
           parameters: [
             {
@@ -60,8 +60,8 @@ return {
               value: 'application/json'
 }
    ]
-        };
-        sendBody: true;
+        },
+        sendBody: true,
     bodyParametersJson: '={{ JSON.stringify($json)}',
     options: {
           timeout: 300000 // 5 minutes
@@ -69,16 +69,16 @@ return {
     // 4. Run tests
     {
       id: 'http_2',
-      name: 'Run Tests';
+      name: 'Run Tests',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [850, 200],
     parameters: {
   method: 'POST',
-        url: '={{ $env.API_URL }}/api/test';
+        url: '={{ $env.API_URL }}/api/test',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendBody: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendBody: true,
     bodyParametersJson: '={{ JSON.stringify({ projectId: $json.projectId: type, "all" })}',
     options: {
           timeout: 180000 // 3 minutes
@@ -86,16 +86,16 @@ return {
     // 5. Deploy to staging
     {
       id: 'http_3',
-      name: 'Deploy to Staging';
+      name: 'Deploy to Staging',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [1050, 200],
     parameters: {
   method: 'POST',
-        url: '={{ $env.VERCEL_API_URL }}/v13/deployments';
+        url: '={{ $env.VERCEL_API_URL }}/v13/deployments',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendHeaders: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendHeaders: true,
     headerParameters: {
           parameters: [
             {
@@ -103,42 +103,41 @@ return {
               value: 'Bearer {{ $env.VERCEL_TOKEN }}'
 }
    ]
-        };
-        sendBody: true;
-    bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId;
-    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" }})}';
+        },
+        sendBody: true,
+    bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
+    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" }})}',
     options: {};
     // 6. Health check
     {
       id: 'wait_1',
-      name: 'Wait for Deployment';
+      name: 'Wait for Deployment',
       type: 'n8n-nodes-base.wait',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [1250, 200],
     parameters: {
-  amount: 30;
+  amount: 30,
     unit: 'seconds'
-};
+},
     {
       id: 'http_4',
-      name: 'Health Check';
+      name: 'Health Check',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [1450, 200],
     parameters: {
   method: 'GET',
-        url: '={{ $node["Deploy to Staging"].json.url }}/api/health';
+        url: '={{ $node["Deploy to Staging"].json.url }}/api/health',
     options: {
-          timeout: 10000;
+          timeout: 10000,
     retry: {
-  maxRetries: 3;
-    waitBetweenRetries: 5000
-};
+  maxRetries: 3,
+    waitBetweenRetries: 5000 }
     // 7. Deploy to production (if health check passes) {
       id: 'if_1',
-      name: 'Check Health Status';
+      name: 'Check Health Status',
       type: 'n8n-nodes-base.if',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [1650, 300],
     parameters: {
   conditions: {
@@ -151,16 +150,16 @@ return {
 }};
     {
       id: 'http_5',
-      name: 'Deploy to Production';
+      name: 'Deploy to Production',
       type: 'n8n-nodes-base.httpRequest',
-      typeVersion: 4.1;
+      typeVersion: 4.1,
     position: [1850, 200],
     parameters: {
   method: 'POST',
-        url: '={{ $env.VERCEL_API_URL }}/v13/deployments';
+        url: '={{ $env.VERCEL_API_URL }}/v13/deployments',
         authentication: 'predefinedCredentialType',
-        nodeCredentialType: 'httpBearerTokenAuth';
-        sendHeaders: true;
+        nodeCredentialType: 'httpBearerTokenAuth',
+        sendHeaders: true,
     headerParameters: {
           parameters: [
             {
@@ -168,18 +167,18 @@ return {
               value: 'Bearer {{ $env.VERCEL_TOKEN }}'
 }
    ]
-        };
-        sendBody: true;
-    bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId;
-    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" };
+        },
+        sendBody: true,
+    bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
+    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" },
     target: "production" })}';
     options: {};
     // 8. Send notifications
     {
       id: 'code_2',
-      name: 'Prepare Success Notification';
+      name: 'Prepare Success Notification',
       type: 'n8n-nodes-base.code',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [2050, 200],
     parameters: {
   mode: 'runOnceForEachItem',
@@ -188,20 +187,20 @@ return {
   success: true;
   projectId,
   deploymentUrl,
-  stagingUrl: $node["Deploy to Staging"].json.url;
-    timestamp: new Date().toISOString();
-  message: \`Project \${projectId} successfully deployed to production!\`;
+  stagingUrl: $node["Deploy to Staging"].json.url,
+    timestamp: new Date().toISOString(),
+  message: \`Project \${projectId} successfully deployed to production!\`,
 details: {
-    buildDuration: $node["Trigger Build"].json.duration;
-    testsPassed: $node["Run Tests"].json.passed;
+    buildDuration: $node["Trigger Build"].json.duration,
+    testsPassed: $node["Run Tests"].json.passed,
     healthCheckStatus: $node["Health Check"].json.status
   }```
 };
     {
       id: 'code_3',
-      name: 'Prepare Failure Notification';
+      name: 'Prepare Failure Notification',
       type: 'n8n-nodes-base.code',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [1850, 400],
     parameters: {
   mode: 'runOnceForEachItem',
@@ -209,25 +208,25 @@ details: {
 return {
   success: false;
   projectId,
-  timestamp: new Date().toISOString();
+  timestamp: new Date().toISOString(),
   message: \`Deployment failed for project \${projectId}\`;
-error: healthStatus.error || 'Health check failed';
-    stagingUrl: $node["Deploy to Staging"].json.url;
+error: healthStatus.error || 'Health check failed',
+    stagingUrl: $node["Deploy to Staging"].json.url,
     details: {
-    healthCheckStatus: healthStatus.status;
+    healthCheckStatus: healthStatus.status,
     healthCheckMessage: healthStatus.message
   }```
 };
     // 9. Send email/Slack notification
     {
       id: 'email_1',
-      name: 'Send Email Notification';
+      name: 'Send Email Notification',
       type: 'n8n-nodes-base.emailSend',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [2250, 300],
     parameters: {
   fromEmail: '={{ $env.NOTIFICATION_EMAIL }}',
-        toEmail: '={{ $env.ADMIN_EMAIL }}';
+        toEmail: '={{ $env.ADMIN_EMAIL }}',
         subject: 'Deployment {{ $json.success ? "Successful" : "Failed" }} - {{ $json.projectId }}';
         emailFormat: 'html',
         htmlBody: ```
@@ -239,14 +238,14 @@ error: healthStatus.error || 'Health check failed';
 <p><strong>Staging: URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}</a>
 <h3>Details</h3>
 <pre>{{ JSON.stringify($json.details, null, 2)}</pre>
-`,``;
-options: {};
+`, ``,
+options: {},
     credentials: {
         smtp: 'SMTP Credentials'}}
   ]
   // Define connections;
 
-const _connections = {'webhook_1': {
+    const _connections = {'webhook_1': {
       'main': [[{ node: 'code_1', type: 'main' as const index: 0 }]];
     };
     'code_1': {
@@ -290,9 +289,9 @@ active: false;
     connections,
     settings: {
       executionOrder: 'v1',
-      saveManualExecutions: true;
+      saveManualExecutions: true,
     callerPolicy: 'workflowsFromSameOwner',
       errorWorkflow: '{{ $env.ERROR_WORKFLOW_ID }}'
-    };
+    },
     tags: ['deployment', 'automation', 'ci-cd']
 }

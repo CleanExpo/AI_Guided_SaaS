@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface CausalInsight {
-  id: string;
-  title: string;
-  description: string;
-  impact: number;
-  confidence: number;
+  id: string,
+  title: string,
+  description: string,
+  impact: number,
+  confidence: number,
   page: string
 }
 
@@ -20,20 +20,20 @@ export default function CausalExplorerUI() {
     // Simulate loading causal insights
     setTimeout(() => {
       const mockInsights: CausalInsight[]  = [
-        {,
+        {
           id: '1',
-          title: 'User Engagement Driver';
+          title: 'User Engagement Driver',
           description: 'The dashboard layout significantly impacts user engagement',
-          impact: 85;
-          confidence: 92;
+          impact: 85,
+          confidence: 92,
           page: '/dashboard'
-        };
+        },
         {
           id: '2',
-          title: 'Conversion Optimization';
+          title: 'Conversion Optimization',
           description: 'Button color and placement affects conversion rates',
-          impact: 78;
-          confidence: 87;
+          impact: 78,
+          confidence: 87,
           page: '/pricing'
         }
       ];
@@ -49,7 +49,7 @@ export default function CausalExplorerUI() {
           <div className="h-24 bg-gray-200 rounded"></div>
           <div className="h-24 bg-gray-200 rounded"></div>
         </div>
-    </div>;
+    </div>
   );
 }
   

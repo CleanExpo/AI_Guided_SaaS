@@ -2,17 +2,17 @@
 // Database Connection Pooling for AI Guided SaaS
 // Optimizes database connections and implements retry logic;
 import { createClient, SupabaseClient } from '@supabase/supabase-js';interface ConnectionPoolConfig {
-  maxConnections: number;
-  idleTimeout: number;
-  connectionTimeout: number;
-  retryAttempts: number;
+  maxConnections: number,
+  idleTimeout: number,
+  connectionTimeout: number,
+  retryAttempts: number,
   retryDelay: number
 };
 interface PooledConnection {
   client: SupabaseClien
-t;
-    isActive: boolean;
-  lastUsed: number;
+t,
+    isActive: boolean,
+  lastUsed: number,
   connectionId: string
 }
 class DatabaseConnectionPool {
@@ -20,8 +20,8 @@ class DatabaseConnectionPool {
   private supabaseKey: string;
   constructor(config: Partial<ConnectionPoolConfig> = {}) {
     this.config = {
-      maxConnections: config.maxConnections || 10;
-    idleTimeout: config.idleTimeout || 30000, // 30 seconds, connectionTimeout: config.connectionTimeout || 5000, // 5 seconds, retryAttempts: config.retryAttempts || 3;
+      maxConnections: config.maxConnections || 10,
+    idleTimeout: config.idleTimeout || 30000, // 30 seconds, connectionTimeout: config.connectionTimeout || 5000, // 5 seconds, retryAttempts: config.retryAttempts || 3,
     retryDelay: config.retryDelay || 1000; // 1 second
     };
     this.supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -39,9 +39,9 @@ class DatabaseConnectionPool {
   private createConnection(): PooledConnection {
     const _connectionId  = `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-const _client = createClient(this.supabaseUrl, this.supabaseKey, {,
-      auth: { persistSession: false };
-    db: { schema: 'public' };
+const _client = createClient(this.supabaseUrl, this.supabaseKey, {
+      auth: { persistSession: false },
+    db: { schema: 'public' },
     global: { headers: {
           'x-connection-id': connectionId), const connection: PooledConnection  = {
       client, isActive: false, lastUsed: Date.now(), connectionId, this.pool.push(connection);
@@ -111,11 +111,11 @@ const _delay = this.config.retryDelay * Math.pow(2, retryCount);
 }
 }
   getPoolStats() {
-    return {,
-      totalConnections: this.pool.length;
-    activeConnections: this.pool.filter((conn) => conn.isActive).length;
-    idleConnections: this.pool.filter((conn) => !conn.isActive).length;
-    maxConnections: this.config.maxConnections;
+    return {
+      totalConnections: this.pool.length,
+    activeConnections: this.pool.filter((conn) => conn.isActive).length,
+    idleConnections: this.pool.filter((conn) => !conn.isActive).length,
+    maxConnections: this.config.maxConnections,
     poolUtilization: (this.pool.filter((conn) => conn.isActive).length /
           this.config.maxConnections) *
         100

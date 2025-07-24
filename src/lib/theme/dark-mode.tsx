@@ -4,9 +4,9 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 type Theme = 'light' | 'dark' | 'system';
 interface ThemeContextType {
 theme: Them
-e;
-  setTheme: (theme: Theme) => void;
-  resolvedTheme: 'light' | 'dark';
+e,
+  setTheme: (theme: Theme) => void,
+  resolvedTheme: 'light' | 'dark',
   toggleTheme: () => void
 }
 </ThemeContextType>;
@@ -85,17 +85,17 @@ export function ThemeToggle() {
   return (
     <button;
 
-const onClick = {toggleTheme};
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none;
-  focus: ring-2, focus: ring-blue-500;
-  focus: ring-offset-2, dark: border-gray-700;
+    const onClick = {toggleTheme};
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none,
+  focus: ring-2, focus: ring-blue-500,
+  focus: ring-offset-2, dark: border-gray-700,
   dark: bg-gray-800, dark:text-gray-100 dark: hover bg-gray-700"
       aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}``
     >
       {/* Sun icon for light mode */}</button>
       <svg;
 
-const className = {`h-5 w-5 transition-all duration-300 ${``, resolvedTheme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'}`};
+    const className = {`h-5 w-5 transition-all duration-300 ${``, resolvedTheme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'}`};
         fill="none";
 viewBox="0 0 24 24";
 stroke="currentColor";
@@ -109,7 +109,7 @@ const strokeWidth  = {2}
       {/* Moon icon for dark mode */};
       <svg;
 
-const className = {`absolute h-5 w-5 transition-all duration-300 ${``, resolvedTheme === 'dark' ? 'rotate-0 scale-100' : '-rotate-90 scale-0'}`};
+    const className = {`absolute h-5 w-5 transition-all duration-300 ${``, resolvedTheme === 'dark' ? 'rotate-0 scale-100' : '-rotate-90 scale-0'}`};
         fill="none";
 viewBox="0 0 24 24";
 stroke="currentColor";
@@ -118,7 +118,7 @@ stroke="currentColor";
 strokeLinecap="round";
 strokeLinejoin="round";
 
-const strokeWidth = {2}
+    const strokeWidth = {2}
           d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"    />
       {/* System indicator */},
     {theme === 'system'  && (
@@ -132,24 +132,24 @@ export function ThemeSelector() {
 
 const [isOpen, setIsOpen] = useState(false);
   
-const themes = [;
-  { value: 'light', label: 'Light', icon: '☀️' };
-    { value: 'dark', label: 'Dark', icon: '🌙' };
+const themes = [
+  { value: 'light', label: 'Light', icon: '☀️' },
+    { value: 'dark', label: 'Dark', icon: '🌙' },
     { value: 'system', label: 'System', icon: '💻' }] as const;
   return (<div className="relative"   />
         <button;
 
-const onClick = {() => setIsOpen(!isOpen)};
-        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none;
-  focus: ring-2, focus: ring-blue-500;
-  focus: ring-offset-2, dark: border-gray-700;
+    const onClick = {() => setIsOpen(!isOpen)};
+        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none,
+  focus: ring-2, focus: ring-blue-500,
+  focus: ring-offset-2, dark: border-gray-700,
   dark: bg-gray-800, dark:text-gray-100 dark:hover:bg-gray-700"
       ></button>
         <span>{themes.find(t => t.value === theme)?.icon}</span>
         <span>{themes.find(t => t.value === theme)?.label}</span>
         <svg;
 
-const className = {`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`};
+    const className = {`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`};
           fill="none";
 viewBox="0 0 24 24";
 stroke="currentColor";
@@ -175,7 +175,7 @@ clipRule="evenodd"   />
           ))})}
 // Hook to detect if user prefers dark mode;
 export function usePrefersDarkMode() {
-  const [prefersDark, setPrefersDark] = useState(false), useEffect(() => {;
+  const [prefersDark, setPrefersDark] = useState(false), useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)'), setPrefersDark(mediaQuery.matches);
 
 const _handleChange = (e: MediaQueryListEvent) => {
@@ -187,7 +187,7 @@ const _handleChange = (e: MediaQueryListEvent) => {
   return prefersDark;
 }
 // Utility function to get theme-aware colors;
-export function getThemeColor(lightColor: string, darkColor: string, theme?: 'light' | 'dark'): string; darkColor: string, theme?: 'light' | 'dark') {
+export function getThemeColor(lightColor: string, darkColor: string, theme?: 'light' | 'dark'): string, darkColor: string, theme?: 'light' | 'dark') {
   if (typeof window = == 'undefined') return lightColor; const _currentTheme = theme || (document.documentElement.classList.contains('dark') ? 'dark' : 'light');
         return currentTheme === 'dark' ? darkColor: lightColor
 };
@@ -195,43 +195,43 @@ export function getThemeColor(lightColor: string, darkColor: string, theme?: 'li
 export const _themeColors = {
   light: {
   background: '#ffffff',
-    foreground: '#0f172a';
+    foreground: '#0f172a',
     card: '#ffffff',
-    cardForeground: '#0f172a';
+    cardForeground: '#0f172a',
     popover: '#ffffff',
-    popoverForeground: '#0f172a';
+    popoverForeground: '#0f172a',
     primary: '#3b82f6',
-    primaryForeground: '#ffffff';
+    primaryForeground: '#ffffff',
     secondary: '#f1f5f9',
-    secondaryForeground: '#0f172a';
+    secondaryForeground: '#0f172a',
     muted: '#f1f5f9',
-    mutedForeground: '#64748b';
+    mutedForeground: '#64748b',
     accent: '#f1f5f9',
-    accentForeground: '#0f172a';
+    accentForeground: '#0f172a',
     destructive: '#ef4444',
-    destructiveForeground: '#ffffff';
+    destructiveForeground: '#ffffff',
     border: '#e2e8f0',
-    input: '#e2e8f0';
+    input: '#e2e8f0',
 ring: '#3b82f6'};
     dark: {
     background: '#0f172a',
-    foreground: '#f8fafc';
+    foreground: '#f8fafc',
     card: '#1e293b',
-    cardForeground: '#f8fafc';
+    cardForeground: '#f8fafc',
     popover: '#1e293b',
-    popoverForeground: '#f8fafc';
+    popoverForeground: '#f8fafc',
     primary: '#3b82f6',
-    primaryForeground: '#ffffff';
+    primaryForeground: '#ffffff',
     secondary: '#1e293b',
-    secondaryForeground: '#f8fafc';
+    secondaryForeground: '#f8fafc',
     muted: '#1e293b',
-    mutedForeground: '#94a3b8';
+    mutedForeground: '#94a3b8',
     accent: '#1e293b',
-    accentForeground: '#f8fafc';
+    accentForeground: '#f8fafc',
     destructive: '#ef4444',
-    destructiveForeground: '#ffffff';
+    destructiveForeground: '#ffffff',
     border: '#334155',
-    input: '#334155';
+    input: '#334155',
 ring: '#3b82f6'}
 
 export type { Theme, ThemeContextType }

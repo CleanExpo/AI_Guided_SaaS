@@ -5,8 +5,8 @@ import { AgentConfig } from './AgentLoader';
 
 const _execAsync = promisify(exec);
 export interface ContainerConfig {
-  name: string;
-  image: string;
+  name: string,
+  image: string,
   environment: Record<string, string>,
   cpuLimit: string // e.g, ., "0.5" for 50% of one CPU,
   memoryLimit: string // e.g, ., "512m" for 512MB
@@ -14,12 +14,12 @@ export interface ContainerConfig {
   network?: string
 };
 export interface ContainerStatus {
-  id: string;
-  name: string;
-  status: 'running' | 'stopped' | 'error';
-  cpuUsage: number;
-  memoryUsage: number;
-  uptime: number;
+  id: string,
+  name: string,
+  status: 'running' | 'stopped' | 'error',
+  cpuUsage: number,
+  memoryUsage: number,
+  uptime: number,
   health: 'healthy' | 'unhealthy' | 'unknown'
 };
 export class DockerAgentManager {
@@ -41,16 +41,16 @@ const _exists = await this.containerExists(containerName);
       return this.startExistingContainer(containerName)};
     // Create container configuration;
 
-const config: ContainerConfig = {,
-      name: containerName;
+const config: ContainerConfig = {
+      name: containerName,
     image: 'ai-saas-agent: latest',
     environment: {
   NODE_ENV: 'production',
         AGENT_TYPE: agent.role, AGENT_ID: agent.agent_id:, ORCHESTRATOR_URL: 'http: //orchestrator:3000',
-        MAX_MEMORY: this.getMemoryLimit(agent.priority);
+        MAX_MEMORY: this.getMemoryLimit(agent.priority),
     MAX_CPU: this.getCpuLimit(agent.priority)};
-      cpuLimit: this.getCpuLimit(agent.priority);
-    memoryLimit: this.getMemoryLimit(agent.priority);
+      cpuLimit: this.getCpuLimit(agent.priority),
+    memoryLimit: this.getMemoryLimit(agent.priority),
     volumes: [
         `${process.cwd()}/src:/app/src:ro`,``
         `${process.cwd()}/agent-data/${agent.role}:/app/agent-data`
@@ -98,12 +98,12 @@ const healthResult = await execAsync(
         `docker inspect ${containerName} --format '{{.State.Health.Status}}'`;
       ).catch(() => ({ stdout: 'none' }));
 
-const status: ContainerStatus = {,
-        id: stats.ID || 'unknown';
-    name: containerName;
+const status: ContainerStatus = {
+        id: stats.ID || 'unknown',
+    name: containerName,
     status: 'running',
         cpuUsage: parseFloat(stats.CPUPerc.replace('%', '')),
-        memoryUsage: this.parseMemoryUsage(stats.MemUsage);
+        memoryUsage: this.parseMemoryUsage(stats.MemUsage),
     uptime: 0, // Would need to calculate from container start time, health: this.parseHealthStatus(healthResult.stdout.trim())
 }
       this.containerMap.set(containerName, status);
@@ -202,7 +202,7 @@ const _command = `docker run -d \;``
   private async updateContainerStatus(name: string): Promise<any> {
     const _agentId = name.replace('ai-saas-', ''), await this.getContainerStatus(agentId)}
   private getCpuLimit(priority: number) {
-    // Higher priority agents get more CPU, const cpuMap: Record<number, string> = {,
+    // Higher priority agents get more CPU, const cpuMap: Record<number, string> = {
       1: '0.75', // Architect - highest priority, 2: '0.5';
   // Frontend/Backend, 3: '0.5';
   // QA, 4: '0.5';

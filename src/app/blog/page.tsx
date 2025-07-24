@@ -1,4 +1,4 @@
-/* BREADCRUMB: pages - Application pages and routes */;
+/* BREADCRUMB: pages - Application pages and routes */
 import React from 'react';
 import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,46 +7,48 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-export const metadata: Metadata  = {
+export const metadata: Metadata = {
   title: 'Blog - AI Guided SaaS Platform',
   description: 'Latest news, updates, and insights from AI Guided SaaS Platform'
 };
 
 const blogPosts = [
-  {,
+  {
     id: '1',
-    title: 'Introducing AI Guided SaaS: The Future of Development';
+    title: 'Introducing AI Guided SaaS: The Future of Development',
     excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.',
-    author: 'AI Guided SaaS Team';
+    author: 'AI Guided SaaS Team',
     publishedAt: '2025-01-15',
-    category: 'Product Updates';
+    category: 'Product Updates',
     readTime: '5 min read',
     image: '/images/blog/ai-guided-saas-intro.jpg'
-  };
+  },
   {
     id: '2',
-    title: 'Building Scalable Applications with AI Assistance';
+    title: 'Building Scalable Applications with AI Assistance',
     excerpt: 'Learn best practices for building scalable applications using our AI-powered development tools.',
-    author: 'Technical Team';
+    author: 'Technical Team',
     publishedAt: '2025-01-10',
-    category: 'Technical';
+    category: 'Technical',
     readTime: '8 min read',
     image: '/images/blog/scalable-apps.jpg'
-  };
+  },
   {
     id: '3',
-    title: 'The Rise of No-Code AI Development';
+    title: 'The Rise of No-Code AI Development',
     excerpt: 'Explore how no-code AI development is democratizing software creation for everyone.',
-    author: 'Product Team';
+    author: 'Product Team',
     publishedAt: '2025-01-05',
-    category: 'Industry Insights';
+    category: 'Industry Insights',
     readTime: '6 min read',
     image: '/images/blog/no-code-ai.jpg'
   }
 ];
 
 export default function BlogPage() {
-  return (<div className="min-h-screen bg-gray-50 py-12">);
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Blog</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -70,15 +72,15 @@ export default function BlogPage() {
               <CardContent>
                 <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
                 <div className="flex items-center text-sm text-gray-500 mb-4">
-                  <User className="h-4 w-4 mr-1"   />
+                  <User className="h-4 w-4 mr-1" />
                   <span className="mr-3">{post.author}</span>
-                  <Calendar className="h-4 w-4 mr-1"   />
+                  <Calendar className="h-4 w-4 mr-1" />
                   <span>{post.publishedAt}</span>
                 </div>
                 <Link href={`/blog/${post.id}`}>
                   <Button variant="ghost" size="sm" className="p-0">
                     Read More
-                    <ArrowRight className="ml-1 h-4 w-4"   />
+                    <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>

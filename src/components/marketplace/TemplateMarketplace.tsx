@@ -10,20 +10,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Search, Filter, Star, Download, Eye, ShoppingCart, Grid, List, Loader2, ExternalLink, Heart, Share2 } from 'lucide-react';
 interface Template {
-id: string;
-  name: string;
-  description: string;
-  category: string;
-  tags: string[];
-  author: string;
-  downloads: number;
+id: string,
+  name: string,
+  description: string,
+  category: string,
+  tags: string[],
+  author: string,
+  downloads: number,
   rating: number;
   price?: number,
   featured?: boolean
 }
 interface TemplateCategory {
-id: string;
-  name: string;
+id: string,
+  name: string,
   count: number
 }
 interface TemplateMarketplaceProps {
@@ -34,38 +34,37 @@ initialTemplates?: Template[];
 export default function TemplateMarketplace({
   const initialTemplates = [], initialCategories  = []}: TemplateMarketplaceProps), initialCategories  = []
 }: TemplateMarketplaceProps) {
-  const [templates] = useState<Template[]>([, </Template>, {,
+  const [templates] = useState<Template[]>([, </Template>, {
   id: '1',
-      name: 'E-commerce Pro';
+      name: 'E-commerce Pro',
       description: 'Advanced e-commerce template with payment integration',
-      category: 'web';
+      category: 'web',
       tags: ['React', 'Stripe', 'Tailwind'],
       author: 'TemplateStudio',
-      downloads: 2500;
-    rating: 4.9;
-    price: 49;
+      downloads: 2500,
+    rating: 4.9,
+    price: 49,
 featured: true
-    };
+    },
     {
       id: '2',
-      name: 'SaaS Dashboard';
+      name: 'SaaS Dashboard',
       description: 'Complete SaaS dashboard with analytics and user management',
-      category: 'dashboard';
+      category: 'dashboard',
       tags: ['React', 'Charts', 'Auth'],
       author: 'DevCorp',
-      downloads: 1800;
-    rating: 4.7;
-price: 39
-    };
+      downloads: 1800,
+    rating: 4.7,
+price: 39 }
     {
       id: '3',
-      name: 'Blog Template';
+      name: 'Blog Template',
       description: 'Modern blog template with CMS integration',
-      category: 'blog';
+      category: 'blog',
       tags: ['Next.js', 'MDX', 'SEO'],
       author: 'BlogMaster',
-      downloads: 1200;
-    rating: 4.5;
+      downloads: 1200,
+    rating: 4.5,
 price: 0
 }
   ]);
@@ -78,14 +77,14 @@ const [viewMode, setViewMode]  = useState<'grid' | 'list'>('grid');
 
 const [isLoading] = useState<any>(false);
   
-const categories: TemplateCategory[]   = [;
-  { id: 'all' , name: 'All Templates', count: templates.length };
-    { id: 'web' , name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length };
-    { id: 'dashboard' , name: 'Dashboards', count: templates.filter((t) => t.category === 'dashboard').length };
+const categories: TemplateCategory[]   = [
+  { id: 'all' , name: 'All Templates', count: templates.length },
+    { id: 'web' , name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length },
+    { id: 'dashboard' , name: 'Dashboards', count: templates.filter((t) => t.category === 'dashboard').length },
     { id: 'blog' , name: 'Blogs', count: templates.filter((t) => t.category === 'blog').length }
    ];
 
-const filteredTemplates = templates.filter((template) => {;
+const filteredTemplates = templates.filter((template) => {
     const _matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||, template.description.toLowerCase().includes(searchQuery.toLowerCase(); const _matchesCategory = selectedCategory === 'all' || template.category === selectedCategory;
     return matchesSearch && matchesCategory;
 });
@@ -130,7 +129,7 @@ const onClick  = {() => setViewMode('grid')}
 const variant = {viewMode === 'list' ? 'default' : 'ghost'};
             size="sm";
 
-const onClick = {() => setViewMode('list')}
+    const onClick = {() => setViewMode('list')}
           >
             <List className="h-4 w-4"   />
       {/* Templates */}
@@ -140,7 +139,7 @@ const onClick = {() => setViewMode('list')}
             <CardHeader>
               <div className="flex items-start justify-between" >></div>
                   <CardTitle className="text-lg flex items-center">
-                    {template.name};
+                    {template.name},
     {template.featured  && (</Card>
 Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured</Badge>
       )}

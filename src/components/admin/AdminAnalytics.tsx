@@ -6,16 +6,16 @@ import { BarChart3, TrendingUp, Users, DollarSign } from 'lucide-react';
 
 interface AnalyticsData {
   overview: {
-    totalUsers: number;
-    activeUsers: number;
-    totalProjects: number;
-    totalApiCalls: number;
-    revenue: number;
+    totalUsers: number,
+    activeUsers: number,
+    totalProjects: number,
+    totalApiCalls: number,
+    revenue: number,
     activeSubscriptions: number;
   };
   userMetrics: {
-    newUsers: Array<{ date: string; count: number }>;
-    activeUsers: Array<{ date: string; count: number }>;
+    newUsers: Array<{ date: string, count: number }>,
+    activeUsers: Array<{ date: string, count: number }>;
   };
 }
 
@@ -29,31 +29,31 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
   
   // Default data if none provided
   const defaultData: AnalyticsData = {
-    overview: {,
-      totalUsers: 1234;
-      activeUsers: 456;
-      totalProjects: 789;
-      totalApiCalls: 123456;
-      revenue: 9876;
+    overview: {
+      totalUsers: 1234,
+      activeUsers: 456,
+      totalProjects: 789,
+      totalApiCalls: 123456,
+      revenue: 9876,
       activeSubscriptions: 234
-    };
+    },
     userMetrics: {
       newUsers: [
-        { date: 'Mon', count: 10 };
-        { date: 'Tue', count: 15 };
-        { date: 'Wed', count: 12 };
-        { date: 'Thu', count: 18 };
-        { date: 'Fri', count: 25 };
-        { date: 'Sat', count: 20 };
+        { date: 'Mon', count: 10 },
+        { date: 'Tue', count: 15 },
+        { date: 'Wed', count: 12 },
+        { date: 'Thu', count: 18 },
+        { date: 'Fri', count: 25 },
+        { date: 'Sat', count: 20 },
         { date: 'Sun', count: 15 }
-      ];
+      ],
       activeUsers: [
-        { date: 'Mon', count: 100 };
-        { date: 'Tue', count: 120 };
-        { date: 'Wed', count: 110 };
-        { date: 'Thu', count: 130 };
-        { date: 'Fri', count: 140 };
-        { date: 'Sat', count: 125 };
+        { date: 'Mon', count: 100 },
+        { date: 'Tue', count: 120 },
+        { date: 'Wed', count: 110 },
+        { date: 'Thu', count: 130 },
+        { date: 'Fri', count: 140 },
+        { date: 'Sat', count: 125 },
         { date: 'Sun', count: 115 }
       ]
     }
@@ -129,6 +129,6 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
           </div>
         </CardContent>
       </Card>
-    </div>;
+    </div>
   );
 }

@@ -12,15 +12,15 @@ export default function AdminDirectPage() {
   const [error, setError] = useState('');
   const router = useRouter();
   
-  const handleDirectAuth = async (e: React.FormEvent) => {;
+  const handleDirectAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
     
     try {
-      const response = await fetch('/api/admin/direct-auth', {,
+      const response = await fetch('/api/admin/direct-auth', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
       });
       
@@ -78,6 +78,6 @@ export default function AdminDirectPage() {
           </form>
         </CardContent>
       </Card>
-    </div>;
+    </div>
   );
 }

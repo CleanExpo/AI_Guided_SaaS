@@ -8,24 +8,24 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Clock, Play, CheckCircle, Lock, Search, BookOpen } from 'lucide-react';
 interface Tutorial {
-  id: string;
-  title: string;
-  description: string;
-  duration: string;
+  id: string,
+  title: string,
+  description: string,
+  duration: string,
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   completed?: boolean,
   locked?: boolean
 }
 interface TutorialCardProps {
   tutorial: Tutoria
-l;
-  isCompleted: boolean;
-  isLocked: boolean;
+l,
+  isCompleted: boolean,
+  isLocked: boolean,
   onStart: (id: string) => void
 }
 TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps), isCompleted, isLocked, onStart }: TutorialCardProps) {const difficultyColors = {
     beginner: 'bg-green-100 text-green-700',
-    intermediate: 'bg-yellow-100 text-yellow-700';
+    intermediate: 'bg-yellow-100 text-yellow-700',
 advanced: 'bg-red-100 text-red-700'};
   return (
     <Card className={`hover: shadow-md transition-shadow ${isLocked ? 'opacity-50' : ''}`}>
@@ -41,7 +41,7 @@ advanced: 'bg-red-100 text-red-700'};
                             ) : (
                 <Play className="h-5 w-5 text-blue-600 mr-2" 
                  />
-                            )};
+                            )},
     {tutorial.title}
 </CardTitle>
                           <p className="text-gray-600 text-sm mb-3">{tutorial.description}</p>
@@ -73,37 +73,37 @@ export default function TutorialsPage() {;
   
   return (
 id: '1',
-      title: 'Getting Started with AI Guided SaaS';
+      title: 'Getting Started with AI Guided SaaS',
       description: 'Learn the basics of our AI-powered development platform and create your first project.',
-      duration: '15 min';
+      duration: '15 min',
       difficulty: 'beginner',
 completed: true}
     };
     {id: '2',
-      title: 'Building Your First Application';
+      title: 'Building Your First Application',
       description: 'Step-by-step guide to building and deploying your first application.',
-      duration: '30 min';
+      duration: '30 min',
       difficulty: 'beginner',
 completed: false}
     };
     {id: '3',
-      title: 'Advanced AI Features';
+      title: 'Advanced AI Features',
       description: 'Explore advanced AI-powered code generation and optimization features.',
-      duration: '45 min';
+      duration: '45 min',
       difficulty: 'intermediate',
 locked: true}
     };
     {id: '4',
-      title: 'Team Collaboration';
+      title: 'Team Collaboration',
       description: 'Learn how to collaborate with your team using our platform.',
-      duration: '20 min';
+      duration: '20 min',
       difficulty: 'intermediate',
 locked: true}
     };
     {id: '5',
-      title: 'Custom AI Models';
+      title: 'Custom AI Models',
       description: 'Advanced tutorial on integrating and training custom AI models.',
-      duration: '1 hour';
+      duration: '1 hour',
       difficulty: 'advanced',
 locked: true}
   ];
@@ -148,7 +148,7 @@ const value  = {searchQuery}
               </div>
                           <select;
 
-const value = {selectedDifficulty}
+    const value = {selectedDifficulty}
               const onChange = {(e) => setSelectedDifficulty(e.target.value)};
               className="px-3 py-2 border border-gray-300 rounded-md";
             >

@@ -9,7 +9,7 @@ export class Logger {
     this.isDevelopment = process.env.NODE_ENV === 'development'
 }
   private formatMessage(
-level: LogLevel;
+level: LogLevel,
     message: string;
     meta?: LogMeta
   ) {
@@ -60,9 +60,9 @@ debug(message: string, meta?: LogMeta) {
   /**
    * Log API requests
    */;
-logApiRequest(method: string;
-    url: string;
-    statusCode: number;
+logApiRequest(method: string,
+    url: string,
+    statusCode: number,
     duration: number
   ) {
     this.info('API Request', {
@@ -126,7 +126,7 @@ export const _logWarn = (message: string, meta?: LogMeta) => ;
 export const _logDebug = (message: string, meta?: LogMeta) => ;
   logger.debug(message, meta);
 export const _logApiRequest = (_;
-    method: string, url: string;
+    method: string, url: string,
   statusCode: number, duration: number) => logger.logApiRequest(method, url, statusCode, duration);
 export const _logUserAction = (_;
     userId: string, action: string, details?: LogMeta) => logger.logUserAction(userId, action, details);

@@ -3,12 +3,12 @@
 import React from 'react';import { useBuilderStore } from '../store/useBuilderStore';
 import { logger } from '../../../packages/causal-engine/logger';
 type ComponentInstance = {
-  id: string;
-    type: string;
+  id: string,
+    type: string,
     props: Record<string, string>
   schema?: Array<{
-    key: string;
-    label: string;
+    key: string,
+    label: string,
     type: 'text' | 'textarea'
   }>
 };
@@ -19,7 +19,7 @@ const handleComponentClick = (component: ComponentInstance) => {selectComponent(
     logger.log({
       componentId: component.id: componentType, component.type,
       page: 'ui-builder',
-      promptContext: 'User selected component for editing';
+      promptContext: 'User selected component for editing',
       action: 'kept',
       timestamp: Date.now()})
   };

@@ -6,27 +6,27 @@ import { ProjectConfig, ProjectFile } from '@/types';
 import { CheckCircle, FileText, Folder, Code, Settings, Palette, Database, Globe } from 'lucide-react';
 interface ProjectGeneratorProps {
 config: ProjectConfi
-g;
+g,
   onFilesGenerated: (files: ProjectFile[]) => void
 }
 const _generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
-  const files: ProjectFile[] = [], // Generate package.json, files.push({,
+  const files: ProjectFile[] = [], // Generate package.json, files.push({
     name: 'package.json',
-    path: 'package.json';
+    path: 'package.json',
     type: 'config',
     content: JSON.stringify({
   name: config.name.toLowerCase().replace(/\s+/g, '-'),
       version: '1.0.0',
-      description: config.description;
+      description: config.description,
     main: 'index.js',
     scripts: { dev: 'next dev', build: 'next build', start: 'next start',
-  lint: 'next lint' };
+  lint: 'next lint' },
     dependencies: { 'react': '^18.0.0', 'react-dom': '^18.0.0', 'next': '^14.0.0', 'typescript': '^5.0.0', '@types/react': '^18.0.0', '@types/node': '^20.0.0' }, null, 2)
   })
   // Generate README.md
   files.push({
     name: 'README.md',
-    path: 'README.md';
+    path: 'README.md',
     type: 'documentation',
 content: `# ${config.name}``
 ${config.description}
@@ -53,7 +53,7 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
   // Generate main page component
   files.push({
     name: 'page.tsx',
-    path: 'app/page.tsx';
+    path: 'app/page.tsx',
     type: 'page',
 content: `export default function Home() {``
   return (<main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"   />);
@@ -73,7 +73,7 @@ content: `export default function Home() {``
   // Generate layout component
   files.push({
     name: 'layout.tsx',
-    path: 'app/layout.tsx';
+    path: 'app/layout.tsx',
     type: 'component',
 content: `import type {  Metadata  } from 'next'``;
 import { Inter } from 'next/font/google';
@@ -88,9 +88,9 @@ export const metadata: Metadata = {
   }`
   })
   // Generate global CSS
-  files.push({,
+  files.push({
     name: 'globals.css',
-    path: 'app/globals.css';
+    path: 'app/globals.css',
     type: 'style',
     content: `@tailwind base, ``
 @tailwind components, @tailwind utilities;
@@ -105,7 +105,7 @@ export const metadata: Metadata = {
   }
 }
 body {
-  color: rgb(var(--foreground-rgb);
+  color: rgb(var(--foreground-rgb),
 background: linear-gradient(
       to bottom;
       transparent,
@@ -120,32 +120,32 @@ background: linear-gradient(
   if (config.features.some(f => f.includes('API') || f.includes('Authentication')) {
     files.push({
       name: 'route.ts',
-      path: 'app/api/hello/route.ts';
+      path: 'app/api/hello/route.ts',
       type: 'api',
 content: `import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest): Promise<any> {
-  return NextResponse.json({,
+  return NextResponse.json({
     message: 'Hello from ${config.name} API!',
     timestamp: new Date().toISOString()
 })};
 export async function POST(request: NextRequest): Promise<any> {
   const body = await request.json();
-  return NextResponse.json({,
+  return NextResponse.json({
     message: 'Data received successfully',
-    data: body;
+    data: body,
 timestamp: new Date().toISOString()})
 }`
   })};
   return files;
 }
-const generationSteps = [;
-  { id: 'structure', label: 'Creating project structure', icon: Folder };
-  { id: 'config', label: 'Generating configuration files', icon: Settings };
+const generationSteps = [
+  { id: 'structure', label: 'Creating project structure', icon: Folder },
+  { id: 'config', label: 'Generating configuration files', icon: Settings },
   { id: 'components', label: 'Building React components', icon: Code };
-  { id: 'styles', label: 'Setting up styling', icon: Palette };
-  { id: 'api', label: 'Creating API endpoints', icon: Database };
-  { id: 'docs', label: 'Writing documentation', icon: FileText };
+  { id: 'styles', label: 'Setting up styling', icon: Palette },
+  { id: 'api', label: 'Creating API endpoints', icon: Database },
+  { id: 'docs', label: 'Writing documentation', icon: FileText },
   { id: 'deploy', label: 'Preparing for deployment', icon: Globe }
 ];
 export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGeneratorProps), onFilesGenerated }: ProjectGeneratorProps) {
@@ -153,7 +153,7 @@ export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGe
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState<any>(true);
   useEffect(() => {
-    const _generateFiles = async () => {;
+    const _generateFiles = async () => {
       for (let i = 0; i < generationSteps.length, i++) {
         const step = generationSteps[i];
         setCurrentStep(i);
@@ -198,7 +198,7 @@ const files = generateProjectFiles(config);
                 <span className ="ml-2">{config.technology?.hosting || 'Vercel'}</span>
           {/* Generation, Steps */}
           <div className="space-y-3">
-            {generationSteps.map((step, index) => {;
+            {generationSteps.map((step, index) => {
               const _isCompleted = completedSteps.includes(step.id); const _isCurrent = currentStep === index && isGenerating; const _IconComponent = step.icon;
               return (</div>;
         <div;
@@ -214,7 +214,7 @@ const key  = {step.id}
                    />
                   <div;
 
-const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${``
+    const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${``
                       // isCompleted
                         ? 'bg-green-500 text-white'
                         : isCurrent
@@ -230,7 +230,7 @@ const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify
                   <div className="flex-1"   />
                     <p;
 
-const className = {`font-medium ${``
+    const className = {`font-medium ${``
                         // isCompleted
                           ? 'text-green-800'
                           : isCurrent

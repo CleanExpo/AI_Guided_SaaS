@@ -25,7 +25,7 @@ const router = useRouter();
     return () => window.removeEventListener('scroll', handleScroll);
 }, []);
   
-const _handleSubmit = async (e: React.FormEvent) => {;
+const _handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(), if (!appIdea.trim()) return null, setIsLoading(true);
     setTimeout(() => {
       router.push(`/analyze?idea=${encodeURIComponent(appIdea)}`);`
@@ -33,23 +33,23 @@ const _handleSubmit = async (e: React.FormEvent) => {;
   };
   
 const features = [
-  {,
-  icon: Bot;
+  {
+  icon: Bot,
     title: 'AI-Powered Development',
   description: 'Intelligent code generation that understands your requirements'
-    };
+    },
     {
-      icon: Zap;
+      icon: Zap,
     title: '10x Faster',
   description: 'Build production-ready apps in minutes, not months'
     },
     {
-      icon: Shield;
+      icon: Shield,
     title: 'Enterprise Ready',
   description: 'Built-in security, scalability, and best practices'
     },
     {
-      icon: Globe;
+      icon: Globe,
     title: 'Deploy Anywhere',
   description: 'One-click deployment to Vercel, AWS, or any cloud'
 }
@@ -79,7 +79,7 @@ const features = [
             <Badge className="bg-orange-100 text-orange-700, dark:bg-orange-900/30 dark:text-orange-400">
               🚀 Trusted by 10,000+ developers
 </Badge>;
-            <h1 className="text-5xl, md: text-7xl font-bold bg-gradient-to-r from-gray-900 via-orange-600 to-gray-900, dark: from-white;
+            <h1 className="text-5xl, md: text-7xl font-bold bg-gradient-to-r from-gray-900 via-orange-600 to-gray-900, dark: from-white,
   dark:via-orange-400 dark:to-white bg-clip-text text-transparent">
               From Idea to Production
               <br><span className="text-4xl md:text-6xl">in Minutes</span></br>
@@ -93,17 +93,17 @@ const features = [
                 <Input
 type="text";
 
-const value = {appIdea}
+    const value = {appIdea}
                   const onChange = {(e) => setAppIdea(e.target.value)};
                   placeholder="Describe your app idea...";
 className="w-full h-16 text-lg px-6 pr-32 rounded-full border-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl";
 
-const disabled = {isLoading}
+    const disabled = {isLoading}
                 />
                 <Button;
 type="submit";
 
-const disabled = {!appIdea.trim() || isLoading};
+    const disabled = {!appIdea.trim() || isLoading};
                   className="absolute right-2 top-2 h-12 px-6 rounded-full bg-orange-500 hover:bg-orange-600";
                 >
                   {isLoading ? (

@@ -72,9 +72,9 @@ const _loadStats = async () => {
 
 const _handleSearch = async () => {
     if (!searchQuery.trim()) return try {
-      const response = await query(searchQuery, {,
-    filters: projectId ? { project: projectId } : undefined;
-    options: { topK: 10;
+      const response = await query(searchQuery, {
+    filters: projectId ? { project: projectId } : undefined,
+    options: { topK: 10,
 includeScores: true }})
       setSearchResults(response.sources);
 if (response.sources.length === 0) {
@@ -87,15 +87,15 @@ if (response.sources.length === 0) {
 
 const _handleAddDocument = async () => {
     if (!documentContent.trim() || !documentTitle.trim()) {
-      toast({,
+      toast({
         title: 'Error',
-        description: 'Please provide both title and content';
+        description: 'Please provide both title and content',
 variant: 'destructive'
       });
       return null;
 };
     try {
-      const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean), await addDocument(documentContent, {,
+      const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean), await addDocument(documentContent, {
         source: 'manual',
         title: documentTitle type: documentType as any;
         tags,
@@ -117,9 +117,9 @@ variant: 'destructive'
 
 const _handleAddFromUrl = async () => {
     if (!urlInput.trim()) {
-      toast({,
+      toast({
         title: 'Error',
-        description: 'Please provide a URL';
+        description: 'Please provide a URL',
 variant: 'destructive'
       });
       return null;
@@ -140,16 +140,16 @@ const _handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => 
 
 const _handleIngestCodebase = async () => {
     if (!codebasePath.trim()) {
-      toast({,
+      toast({
         title: 'Error',
-        description: 'Please provide a codebase path';
+        description: 'Please provide a codebase path',
 variant: 'destructive'
       });
       return null;
 };
     try {
-      const result = await ingestCodebase(codebasePath, {,
-    project: projectId;
+      const result = await ingestCodebase(codebasePath, {
+    project: projectId,
 include: ['**/*.{js,jsx,ts,tsx,py,java,go}'],
         exclude: ['**/node_modules/**', '**/dist/**']
       })
@@ -198,7 +198,7 @@ break;
               <Input
 placeholder="Search knowledge base...";
 
-const value = {searchQuery}
+    const value = {searchQuery}
                 const onChange = {(e) => setSearchQuery(e.target.value)}
                 const onKeyPress = {(e) => e.key === 'Enter' && handleSearch()}
                 className="pl-10" /></Input>
@@ -227,7 +227,7 @@ const value = {searchQuery}
                     <Input;
 id="title";
 
-const value = {documentTitle}
+    const value = {documentTitle}
                       const onChange = {(e) => setDocumentTitle(e.target.value)};
                       placeholder="Document title";
                     /></Input>
@@ -236,7 +236,7 @@ const value = {documentTitle}
                     <select;
 id="type";
 
-const value = {documentType}
+    const value = {documentType}
                       const onChange = {(e) => setDocumentType(e.target.value)};
                       className="w-full px-3 py-2 border rounded-md";
                     ></select>
@@ -255,7 +255,7 @@ const value  = {documentContent}
                       const onChange = {(e) => setDocumentContent(e.target.value)};
                       placeholder="Enter document content...";
 
-const rows = {6}
+    const rows = {6}
                     /></Textarea>
                   <div className="space-y-2"   />
                     <Label htmlFor="tags">Tags (comma-separated)</Label>
@@ -300,7 +300,7 @@ const onClick = {handleAddFromUrl}
 id="file";
 type="file";
 
-const onChange = {handleFileUpload}
+    const onChange = {handleFileUpload}
                       accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"    />
         <p className="text-sm text-muted-foreground">
 Supported: Text, Markdown, Code files</p>
@@ -354,7 +354,7 @@ const onClick = {handleIngestCodebase}
 size="sm";
 variant="outline";
 
-const onClick = {() => exportKnowledge('json')}
+    const onClick = {() => exportKnowledge('json')}
                   ></Button>
                     <Download className="h-4 w-4 mr-2"   />
                     Export
@@ -363,7 +363,7 @@ const onClick = {() => exportKnowledge('json')}
 size="sm";
 variant="outline";
 
-const onClick = {loadStats}
+    const onClick = {loadStats}
                      />
                     <RefreshCw className="h-4 w-4 mr-2"   />
                     Refresh

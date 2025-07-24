@@ -3,17 +3,17 @@ import { createClient } from '@supabase/supabase-js';
 import { env, isServiceConfigured } from './env';
 // Database type definitions;
 export interface User {
-    id: string;
+    id: string,
   email: string;
   full_name?: string,
   avatar_url?: string,
   provider: string;
   provider_id?: string,
-  subscription_tier: 'free' | 'pro' | 'enterprise';
+  subscription_tier: 'free' | 'pro' | 'enterprise',
   subscription_status: 'active' | 'canceled' | 'past_due';
   password_hash?: string,
   stripe_customer_id?: string,
-  created_at: string;
+  created_at: string,
   updated_at: string
 }
 
@@ -38,16 +38,16 @@ export interface ProjectFiles { [path: string]: {
 }
 
 export interface Project {
-    id: string;
-  user_id: string;
+    id: string,
+  user_id: string,
   name: string;
   description?: string,
-  framework: string;
-  status: 'draft' | 'generating' | 'completed' | 'error';
+  framework: string,
+  status: 'draft' | 'generating' | 'completed' | 'error',
   config: ProjectConfi
 g;
   files?: ProjectFiles,
-  created_at: string;
+  created_at: string,
   updated_at: string
 }
 
@@ -61,9 +61,9 @@ n
 }
 
 export interface ActivityLog {
-    id: string;
-  user_id: string;
-  action: string;
+    id: string,
+  user_id: string,
+  action: string,
   resource_type: string;
   resource_id?: string,
   metadata?: ActivityMetadata,
@@ -79,22 +79,22 @@ n
 }
 
 export interface UsageRecord {
-    id: string;
-  user_id: string;
-  resource_type: string;
+    id: string,
+  user_id: string,
+  resource_type: string,
   quantity: number;
   metadata?: UsageMetadata,
   created_at: string
 }
 
 export interface FeatureFlag {
-    id: string;
-  name: string;
-  description: string;
-  enabled: boolean;
+    id: string,
+  name: string,
+  description: string,
+  enabled: boolean,
   rollout_percentage: number;
   target_users?: string[],
-  created_at: string;
+  created_at: string,
   updated_at: string
 }
 
@@ -108,16 +108,16 @@ n
 }
 
 export interface Subscription {
-    id: string;
-  user_id: string;
-  stripe_subscription_id: string;
-  stripe_customer_id: string;
-  status: 'active' | 'canceled' | 'past_due' | 'unpaid';
-  tier: 'free' | 'pro' | 'enterprise';
-  current_period_start: string;
-  current_period_end: string;
-  cancel_at_period_end: boolean;
-  created_at: string;
+    id: string,
+  user_id: string,
+  stripe_subscription_id: string,
+  stripe_customer_id: string,
+  status: 'active' | 'canceled' | 'past_due' | 'unpaid',
+  tier: 'free' | 'pro' | 'enterprise',
+  current_period_start: string,
+  current_period_end: string,
+  cancel_at_period_end: boolean,
+  created_at: string,
   updated_at: string
 }
 
@@ -150,14 +150,14 @@ export class DatabaseService {
       // Return mock user for development
       return {
         id: `user-${Date.now()}`,
-email: userData.email || 'demo@example.com';
-  full_name: userData.full_name || 'Demo User';
-    avatar_url: userData.avatar_url;
-  provider: userData.provider || 'credentials';
-    provider_id: userData.provider_id;
+email: userData.email || 'demo@example.com',
+  full_name: userData.full_name || 'Demo User',
+    avatar_url: userData.avatar_url,
+  provider: userData.provider || 'credentials',
+    provider_id: userData.provider_id,
   subscription_tier: 'free',
-        subscription_status: 'active';
-  created_at: new Date().toISOString();
+        subscription_status: 'active',
+  created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()}
     try {
       const { data, error   }: any = await supabase!;
@@ -175,12 +175,12 @@ if (error) {
       return {
         id;
         email: 'demo@example.com',
-  full_name: 'Demo User';
+  full_name: 'Demo User',
         provider: 'credentials',
-  subscription_tier: 'free';
+  subscription_tier: 'free',
         subscription_status: 'active'
 }
-  created_at: new Date().toISOString();
+  created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()}
     try {
       const { data, error   }: any = await supabase!;
@@ -198,11 +198,11 @@ if (error) {
       // For demo purposes, return a user for demo@example.com, if (email === 'demo@example.com') {
         return {
           id: 'demo-user-id',
-  email: 'demo@example.com';
+  email: 'demo@example.com',
           full_name: 'Demo User',
-  provider: 'credentials';
+  provider: 'credentials',
           subscription_tier: 'free',
-  subscription_status: 'active';
+  subscription_status: 'active',
           created_at: new Date().toISOString()}
   updated_at: new Date().toISOString()}
       return null;
@@ -242,13 +242,13 @@ if (error) {
     if (!this.checkDatabase()) {
       return {
         id: `project-${Date.now()}`,
-user_id: projectData.user_id || 'demo-user';
-  name: projectData.name || 'Demo Project';
-    description: projectData.description;
-  framework: projectData.framework || 'nextjs';
+user_id: projectData.user_id || 'demo-user',
+  name: projectData.name || 'Demo Project',
+    description: projectData.description,
+  framework: projectData.framework || 'nextjs',
     status: 'completed',
-  config: projectData.config || {};
-    created_at: new Date().toISOString();
+  config: projectData.config || {},
+    created_at: new Date().toISOString(),
   updated_at: new Date().toISOString()}
     try {
       const { data, error   }: any = await supabase!;
@@ -263,26 +263,26 @@ if (error) {
       console.error('Database, error:', error); return null; }
 }
   static async getUserProjects(userId: string): Promise { if (!this.checkDatabase()) {
-      return [{,
+      return [{
   id: 'demo-project-1',
-  user_id: userId;
+  user_id: userId,
     name: 'E-commerce Store',
-  description: 'A modern e-commerce platform';
+  description: 'A modern e-commerce platform',
           framework: 'nextjs'
 }
   status: 'completed',
-    config: {};
-    created_at: new Date().toISOString();
+    config: {},
+    created_at: new Date().toISOString(),
   updated_at: new Date().toISOString()};
         { id: 'demo-project-2',
-  user_id: userId;
+  user_id: userId,
     name: 'Portfolio Website',
-  description: 'Personal portfolio with blog';
+  description: 'Personal portfolio with blog',
           framework: 'react'
 }
   status: 'completed',
-    config: {};
-    created_at: new Date().toISOString();
+    config: {},
+    created_at: new Date().toISOString(),
   updated_at: new Date().toISOString()}
     try {
       const { data, error   }: any = await supabase!;
@@ -317,7 +317,7 @@ if (error) {
       console.error('Database, error:', error); return null; }
 }
   // Activity logging
-  static async logActivity(userId: string, action: string;
+  static async logActivity(userId: string, action: string,
   resourceType: string, resourceId?: string, metadata?: ActivityMetadata): Promise<any> {
     if (!this.checkDatabase()) {
       :', { userId, action, resourceType, resourceId, metadata })
@@ -337,7 +337,7 @@ if (error) {
         console.error('Error logging, activity:', error)} catch (error) {
       console.error('Database error logging, activity:', error)}
   // Usage tracking
-  static async recordUsage(userId: string, resourceType: string;
+  static async recordUsage(userId: string, resourceType: string,
   quantity: number, metadata?: UsageMetadata): Promise<any> {
     if (!this.checkDatabase()) {
       :', { userId, resourceType, quantity, metadata })
@@ -347,7 +347,7 @@ if (error) {
       const { error   }: any = await supabase!;
         .from('usage_records');
         .insert({
-          user_id: userId;
+          user_id: userId,
    resource_type: resourceType;
           quantity,
           metadata,
@@ -401,7 +401,7 @@ if (data.target_users && userId) {
     try {
       // This would use a proper SQL query method in production
       // For now, we'll use Supabase's query builder
-      return []} catch (error) {;
+      return []} catch (error) {
       console.error('Database query, error:', error);
         return []}
 }
@@ -447,12 +447,12 @@ if (error) {
     try {
       const { error   }: any = await supabase!;
         .from('payments');
-        .insert({ user_id: paymentData.user_id;
-  stripe_payment_intent_id: paymentData.stripe_payment_intent_id;
-    amount: paymentData.amount;
-  currency: paymentData.currency;
-    status: paymentData.status;
-  description: paymentData.description;
+        .insert({ user_id: paymentData.user_id,
+  stripe_payment_intent_id: paymentData.stripe_payment_intent_id,
+    amount: paymentData.amount,
+  currency: paymentData.currency,
+    status: paymentData.status,
+  description: paymentData.description,
     metadata: paymentData.metadata
 }
   created_at: new Date().toISOString()
@@ -463,16 +463,16 @@ if (error) {
   static async getUserSubscription(userId: string): Promise { if (!this.checkDatabase()) {
       return {
         id: 'mock-subscription',
-  user_id: userId;
+  user_id: userId,
     stripe_subscription_id: 'mock-stripe-sub',
-  stripe_customer_id: 'mock-stripe-customer';
+  stripe_customer_id: 'mock-stripe-customer',
         tier: 'free',
-  status: 'active';
-        current_period_start: new Date().toISOString();
-  current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+  status: 'active',
+        current_period_start: new Date().toISOString(),
+  current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     cancel_at_period_end: false
 }
-  created_at: new Date().toISOString();
+  created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()}
     try {
       const { data, error   }: any = await supabase!;
@@ -499,7 +499,7 @@ if (error) {
         .from('subscriptions');
         .upsert({
           ...subscriptionData,
-          updated_at: new Date().toISOString();
+          updated_at: new Date().toISOString(),
           onConflict: 'stripe_subscription_id'
          });
 if (error) {
@@ -507,9 +507,8 @@ if (error) {
       console.error('Database error updating, subscription:', error)}
   static async getUserUsage(userId: string, month?: Date): Promise { if (!this.checkDatabase()) {
       return {
-        projects: 2
-};
-  aiGenerations: 15;
+        projects: 2 }
+  aiGenerations: 15,
     storage: '125MB'
   }
 }
@@ -522,8 +521,8 @@ if (error) {
         .lte('created_at', endOfMonth.toISOString());
 if (error) {
         console.error('Error fetching, usage:', error);
-        return { projects: 0;
-   aiGenerations: 0;
+        return { projects: 0,
+   aiGenerations: 0,
   storage: '0MB' }}
       const usage = (usageData || []).reduce((acc: Record<string, any>
     record: { resource_type: string, quantity: number }) => {
@@ -532,12 +531,12 @@ if (error) {
       // Get project count;
 
 const projectCount = await this.getUserProjects(userId);
-      return { projects: projectCount.length};
-  aiGenerations: usage['ai_generations'] || 0;
+      return { projects: projectCount.length},
+  aiGenerations: usage['ai_generations'] || 0,
     storage: '0MB' // TODO: Calculate actual storage usage
 }} catch (error) { console.error('Database, error:', error);
-        return { projects: 0;
-   aiGenerations: 0;
+        return { projects: 0,
+   aiGenerations: 0,
   storage: '0MB'  }
   // Helper function to hash user ID for feature flag rollouts
   private static hashUserId(userId: string): number {

@@ -8,19 +8,19 @@ title: string;
   icon?: React.ReactNode,
   illustration?: 'search' | 'data' | 'error' | 'maintenance' | 'construction',
   action?: {
-    label: string;
+    label: string,
   onClick: () => void;
   variant?: 'default' | 'outline' | 'brand'
 }
   secondaryAction?: {
-    label: string;
+    label: string,
 onClick: () => void
   };
   className?: string;
   size?: 'sm' | 'md' | 'lg';
 // Built-in illustrations;
 
-const illustrations = {
+    const illustrations = {
   search: (
     <svg, className="w-full h-full" viewBox="0 0 200 200" fill="none">
       <circle, cx="100", cy="100";
@@ -163,23 +163,23 @@ opacity="0.4"   />
 export function EmptyState({
   title, description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps), description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps) {
   const sizeClasses = {
-    sm: {,
+    sm: {
   container: 'py-8 px-4',
-      illustration: 'w-24 h-24 mb-4';
+      illustration: 'w-24 h-24 mb-4',
       title: 'text-lg font-semibold',
-      description: 'text-sm';
+      description: 'text-sm',
 spacing: 'space-y-3'};
     md: {
       container: 'py-12 px-6',
-      illustration: 'w-32 h-32 mb-6';
+      illustration: 'w-32 h-32 mb-6',
       title: 'text-xl font-semibold',
-      description: 'text-base';
+      description: 'text-base',
 spacing: 'space-y-4'};
     lg: {
       container: 'py-16 px-8',
-      illustration: 'w-40 h-40 mb-8';
+      illustration: 'w-40 h-40 mb-8',
       title: 'text-2xl font-semibold',
-      description: 'text-lg';
+      description: 'text-lg',
 spacing: 'space-y-6'};
   const currentSize = sizeClasses[size];
   return (
@@ -207,15 +207,15 @@ p, className={cn(
               const variant = {action.variant || 'brand'}
               const size = {size === 'sm' ? 'sm' : 'md'}
             >
-              {action.label}</ButtonEnhanced>;
+              {action.label}</ButtonEnhanced>
             )};
     {secondaryAction && (
 ButtonEnhanced, const onClick = {secondaryAction.onClick}
               variant="outline";
 
-const size = {size === 'sm' ? 'sm' : 'md'}
+    const size = {size === 'sm' ? 'sm' : 'md'}
             >
-              {secondaryAction.label}</ButtonEnhanced>;
+              {secondaryAction.label}</ButtonEnhanced>
             )})};
 // Specialized Empty State Components;
 export function NoDataFound({
@@ -231,17 +231,17 @@ export function NoDataFound({
       const description  = {description};
       illustration="data";
 
-const action = {
+    const action = {
         // onCreate
-          ? {,
+          ? {
               label: 'Create New',
-              onClick: onCreate;
+              onClick: onCreate,
 variant: 'brand'}
           : undefined;
 
-const secondaryAction = {
+    const secondaryAction = {
         // onRefresh
-          ? {,
+          ? {
               label: 'Refresh',
 onClick: onRefresh}
           : undefined;
@@ -261,23 +261,23 @@ export function SearchNotFound({
   ) {
   return (EmptyState, title="No results found";
 
-const description = {
+    const description = {
         // query
           ? `No results found for "${query}". Try adjusting your search terms.`;
           : 'No results found. Try adjusting your search terms.';
 illustration="search";
 
-const action = {
+    const action = {
         // onClear
-          ? {,
+          ? {
               label: 'Clear Search',
-              onClick: onClear;
+              onClick: onClear,
 variant: 'outline'}
           : undefined;
 
-const secondaryAction = {
+    const secondaryAction = {
         // onTryAgain
-          ? {,
+          ? {
               label: 'Try Again',
 onClick: onTryAgain}
           : undefined;
@@ -298,17 +298,17 @@ export function ErrorState({
       const description  = {description};
       illustration="error";
 
-const action = {
+    const action = {
         // onRetry
-          ? {,
+          ? {
               label: 'Try Again',
-              onClick: onRetry;
+              onClick: onRetry,
 variant: 'brand'}
           : undefined;
 
-const secondaryAction = {
+    const secondaryAction = {
         // onGoBack
-          ? {,
+          ? {
               label: 'Go Back',
 onClick: onGoBack}
           : undefined;
@@ -332,11 +332,11 @@ export function MaintenanceMode({
           : description;
 illustration="maintenance";
 
-const action = {
+    const action = {
         // onNotifyMe
-          ? {,
+          ? {
               label: 'Notify Me',
-              onClick: onNotifyMe;
+              onClick: onNotifyMe,
 variant: 'brand'}
           : undefined;
 
@@ -357,17 +357,17 @@ export function ComingSoon({
       const description  = {description};
       illustration="construction";
 
-const action = {
+    const action = {
         // onNotifyMe
-          ? {,
+          ? {
               label: 'Notify Me',
-              onClick: onNotifyMe;
+              onClick: onNotifyMe,
 variant: 'brand'}
           : undefined;
 
-const secondaryAction = {
+    const secondaryAction = {
         // onLearnMore
-          ? {,
+          ? {
               label: 'Learn More',
 onClick: onLearnMore}
           : undefined;
@@ -406,7 +406,7 @@ export function EmptyStateCard({ children, className }: EmptyStateCardProps), cl
     </div, className={cn(`
         'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className
       )}
-    >;
+    >
   );
 // Grid Empty State (for when showing empty grid/list items);
 export function GridEmptyState({
@@ -424,11 +424,11 @@ const title = {title}
         illustration="data";
 size="sm";
 
-const action = {
+    const action = {
           // onCreate
-            ? {,
+            ? {
                 label: 'Create First Item',
-                onClick: onCreate;
+                onClick: onCreate,
 variant: 'brand'}
             : undefined   />
 </EmptyStateCard>

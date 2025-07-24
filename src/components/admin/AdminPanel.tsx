@@ -62,7 +62,7 @@ const [statsData, usersData, contentData, configData, activityData] = ;
       setLoading(false)};
   
 const handleUserStatusUpdate = async (;
-    userId: string;
+    userId: string,
     status: 'active' | 'suspended' | 'deleted'
   ) => {
     try {
@@ -75,7 +75,7 @@ const handleUserStatusUpdate = async (;
       console.error('Error updating user status:', error)};
   
 const handleContentModeration = async (;
-    contentId: string;
+    contentId: string,
     action: 'approve' | 'reject' | 'flag'
   ) => {
     try {
@@ -99,35 +99,34 @@ const getStatusColor = (status: string) => {
       case 'rejected':
       case 'critical':
       return 'bg-red-100 text-red-800';
-      case 'pending':
-      return 'bg-blue-100 text-blue-800';
+      case 'pending': return 'bg-blue-100 text-blue-800',
       default: return 'bg-gray-100 text-gray-800'}};
   
 const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {,
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
 currency: 'USD'
     }).format(amount)
 };
   
 const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {,
+    return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
-      month: 'short';
+      month: 'short',
       day: 'numeric',
-      hour: '2-digit';
+      hour: '2-digit',
 minute: '2-digit'
     }).format(new Date(date))
   };
   
-const filteredUsers = users.filter((user) => {;
+const filteredUsers = users.filter((user) => {
     const matchesSearch = , user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||, user.email.toLowerCase().includes(searchTerm.toLowerCase();
     
 const matchesFilter = userFilter === 'all' || user.status === userFilter;
     return matchesSearch && matchesFilter;
 });
   
-const filteredContent = content.filter((item) => {;
+const filteredContent = content.filter((item) => {
     const matchesSearch = , item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||, item.author.toLowerCase().includes(searchTerm.toLowerCase();
     
 const matchesFilter = ;
@@ -253,7 +252,7 @@ const value  = {searchTerm}
         </div>;
                 <select;
 
-const value = {userFilter}
+    const value = {userFilter}
                   const onChange = {e => setUserFilter(e.target.value)};
                   className="px-3 py-2 border border-gray-300 rounded-md text-sm";
                 >
@@ -307,7 +306,7 @@ ID: { user.id }</div>
 size="sm";
 variant="ghost";
 
-const onClick = {() => {/* View user details */}
+    const onClick = {() => {/* View user details */}
                               >
                                 <Eye className="h-4 w-4"   />
 </Button>
@@ -315,14 +314,14 @@ const onClick = {() => {/* View user details */}
 size="sm";
 variant="ghost";
 
-const onClick = {() => {/* Edit user */}
+    const onClick = {() => {/* Edit user */}
                               >
                                 <Edit className="h-4 w-4"   />
 </Button>
                               {user.status === 'active' ? (;
                                 <Button, size="sm", variant="ghost";
 
-const onClick = {() => handleUserStatusUpdate(user.id, 'suspended')}
+    const onClick = {() => handleUserStatusUpdate(user.id, 'suspended')}
                                 >
                                   <UserX className="h-4 w-4 text-yellow-600"   />
 </Button>
@@ -349,7 +348,7 @@ const onClick  = {() => handleUserStatusUpdate(user.id, 'active')}
               <h2 className="text-2xl font-bold">Content Moderation</h2>;
               <select;
 
-const value = {contentFilter}
+    const value = {contentFilter}
                 const onChange = {e => setContentFilter(e.target.value)};
                 className="px-3 py-2 border border-gray-300 rounded-md text-sm";
               >
@@ -376,7 +375,7 @@ const value = {contentFilter}
 size="sm";
 variant="outline";
 
-const onClick = {() => handleContentModeration(item.id, 'approve')}
+    const onClick = {() => handleContentModeration(item.id, 'approve')}
                         >
                           <ThumbsUp className="h-4 w-4 mr-1"   />
                           Approve
@@ -385,7 +384,7 @@ const onClick = {() => handleContentModeration(item.id, 'approve')}
 size="sm";
 variant="outline";
 
-const onClick = {() => handleContentModeration(item.id, 'reject')}
+    const onClick = {() => handleContentModeration(item.id, 'reject')}
                         >
                           <ThumbsDown className="h-4 w-4 mr-1"   />
                           Reject
@@ -394,7 +393,7 @@ const onClick = {() => handleContentModeration(item.id, 'reject')}
 size="sm";
 variant="outline";
 
-const onClick = {() => handleContentModeration(item.id, 'flag')}
+    const onClick = {() => handleContentModeration(item.id, 'flag')}
                         >
                           <Flag className="h-4 w-4 mr-1"   />
                           Flag

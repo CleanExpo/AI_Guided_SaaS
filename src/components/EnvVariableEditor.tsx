@@ -9,41 +9,41 @@ import { Badge } from '@/components/ui/badge';
 import { Key, Lock, Eye, EyeOff, Plus, Trash2, AlertTriangle, CheckCircle, Copy, Download, Upload, Shield, Info } from 'lucide-react';
 import { cn } from '@/utils/cn';
 interface EnvVariable {
-key: string;
+key: string,
   value: string;
   description?: string,
-  type: 'public' | 'secret' | 'api_key';
+  type: 'public' | 'secret' | 'api_key',
   required: boolean;
   validated?: boolean
 };
 interface EnvVariableEditorProps {
-variables: EnvVariable[];
+variables: EnvVariable[],
   onChange: (variables: EnvVariable[]: any) => void;
   projectType?: string,
   readOnly?: boolean
 }
 const commonVariables: Record<string, EnvVariable[]> = {
-  default: [;
-    { key: 'DATABASE_URL', value: '';
-    type: 'secret', required: true description: 'PostgreSQL connection string' };
-    { key: 'NEXTAUTH_SECRET', value: '';
-    type: 'secret', required: true description: 'Secret for NextAuth.js' };
+  default: [
+    { key: 'DATABASE_URL', value: '',
+    type: 'secret', required: true description: 'PostgreSQL connection string' },
+    { key: 'NEXTAUTH_SECRET', value: '',
+    type: 'secret', required: true description: 'Secret for NextAuth.js' },
     { key: 'NEXTAUTH_URL', value: 'http: //localhost:3000', type: 'public', required: true description: 'App URL' }
-   ];
+   ],
   ecommerce: [
-    { key: 'STRIPE_SECRET_KEY', value: '';
-    type: 'api_key', required: true description: 'Stripe secret key' };
-    { key: 'STRIPE_WEBHOOK_SECRET', value: '';
-    type: 'secret', required: true description: 'Stripe webhook secret' };
-    { key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', value: '';
+    { key: 'STRIPE_SECRET_KEY', value: '',
+    type: 'api_key', required: true description: 'Stripe secret key' },
+    { key: 'STRIPE_WEBHOOK_SECRET', value: '',
+    type: 'secret', required: true description: 'Stripe webhook secret' },
+    { key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', value: '',
     type: 'public', required: true description: 'Stripe public key' }
-   ];
+   ],
   ai: [
-    { key: 'OPENAI_API_KEY', value: '';
-    type: 'api_key', required: true description: 'OpenAI API key' };
-    { key: 'ANTHROPIC_API_KEY', value: '';
-    type: 'api_key', required: false description: 'Anthropic Claude API key' };
-    { key: 'GOOGLE_AI_API_KEY', value: '';
+    { key: 'OPENAI_API_KEY', value: '',
+    type: 'api_key', required: true description: 'OpenAI API key' },
+    { key: 'ANTHROPIC_API_KEY', value: '',
+    type: 'api_key', required: false description: 'Anthropic Claude API key' },
+    { key: 'GOOGLE_AI_API_KEY', value: '',
     type: 'api_key', required: false description: 'Google AI API key' }
    ]
 };
@@ -59,9 +59,9 @@ const [validationErrors, setValidationErrors]  = useState<Record<string, string>
 const [isValidating, setIsValidating] = useState<any>(false);
   
 const _handleAddVariable = (): void => {
-    const newVar: EnvVariable = {,
-  key: '';
-    value: '';
+    const newVar: EnvVariable = {
+  key: '',
+    value: '',
     type: 'secret',
 required: false
 }
@@ -69,7 +69,7 @@ required: false
     setVariables(updated);
     onChange(updated)
 }
-  const _handleRemoveVariable = (index: number) => {;
+  const _handleRemoveVariable = (index: number) => {
     const updated = variables.filter((_, i) => i !== index), setVariables(updated); onChange(updated)
 }
   const _handleUpdateVariable = (index: number, field: keyof EnvVariable, value) => {
@@ -84,7 +84,7 @@ if (validationErrors[updated[index].key]) {
   const _toggleShowSecret  = (key: string) => {
     setShowSecrets(prev => ({ ...prev, [key]: !prev[key] }))
 }
-  const _validateVariables = async () => {;
+  const _validateVariables = async () => {
     setIsValidating(true)</Record>; const errors: Record<string, string> = {}
     for (const variable of variables) {
       if (variable.required && !variable.value) {
@@ -124,7 +124,7 @@ const a = document.createElement('a');
 }
 ;
 
-const _importEnvFile = (event: React.ChangeEvent<HTMLInputElement>) => {;
+const _importEnvFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const _file = event.target.files?.[0], if (!file) return </HTMLInputElement>, const reader = new FileReader();
     reader.onload = (e) => {
       const content  = e.target?.result as string;
@@ -141,7 +141,7 @@ const _existing = variables.find(v => v.key === key);
             key,
             value: type, key.includes('SECRET') || key.includes('PRIVATE') ? 'secret' :
                   key.includes('API_KEY') || key.includes('TOKEN') ? 'api_key' : 'public',
-            required: existing?.required || false;
+            required: existing?.required || false,
 description: existing?.description })}
       setVariables(imported);
       onChange(imported)
@@ -182,7 +182,7 @@ description: existing?.description })}
 size="sm";
 variant="outline";
 
-const onClick = {addSuggestedVariables}
+    const onClick = {addSuggestedVariables}
               const disabled = {readOnly}
             >
               <Plus className="h-4 w-4 mr-2"   />
@@ -191,7 +191,7 @@ const onClick = {addSuggestedVariables}
 size="sm";
 variant="outline";
 
-const onClick = {exportEnvFile}
+    const onClick = {exportEnvFile}
             >
               <Download className="h-4 w-4 mr-2"   />
               Export</Download>
@@ -200,7 +200,7 @@ const onClick = {exportEnvFile}
 size="sm";
 variant="outline";
 
-const disabled = {readOnly}
+    const disabled = {readOnly}
                 // asChild
               >
                 <span>
@@ -230,7 +230,7 @@ const value = {variable.key}
                   const onChange  = {(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))};
                   placeholder="VARIABLE_NAME";
 
-const disabled = {readOnly}
+    const disabled = {readOnly}
                   const className  = {cn(
                     validationErrors[variable.key] && "border-red-500"
                   )}
@@ -264,7 +264,7 @@ const type = {showSecrets[variable.key] || variable.type === 'public' ? 'text' :
               <div className="col-span-2 flex items-end gap-2">
                 <select;
 
-const value = {variable.type}
+    const value = {variable.type}
                   const onChange = {(e) => handleUpdateVariable(index, 'type', e.target.value)}
                   const disabled = {readOnly};
                   className="flex-1 px-2 py-2 border rounded-md text-sm";
@@ -273,7 +273,7 @@ const value = {variable.type}
                   <option value="secret">Secret</option>
                   <option value="api_key">API Key {!readOnly  && (Button, size="sm", variant="ghost";
 
-const onClick = {() => handleRemoveVariable(index)}
+    const onClick = {() => handleRemoveVariable(index)}
                   ></Button>
                     <Trash2 className="h-4 w-4 text-red-500"   />
 </Button>

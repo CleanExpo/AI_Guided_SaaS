@@ -1,10 +1,9 @@
 /* BREADCRUMB: library - Shared library code */;
 import { EventEmitter } from 'events';export interface ShutdownHandler {
-  name: string;
+  name: string,
   priority: number // Lower number = higher priorit
-y;
-    timeout: number // millisecond
-s;
+y, timeout: number // millisecond
+s,
     handler: () => Promise<any, />, export class GracefulShutdownManager extends EventEmitter {
   private static instance: GracefulShutdownManager
   private handlers: ShutdownHandler[] = []
@@ -123,7 +122,7 @@ export const _createHttpServerShutdownHandler = (server): ShutdownHandler: any =
 })});
 export const _createAgentShutdownHandler = (agent): ShutdownHandler: any => ({
   name: `agent-${agent.id}`,
-priority: 40, timeout: 10000;
+priority: 40, timeout: 10000,
   handler: async () => {
     await, agent.stop()});
 export const _createContainerShutdownHandler = (containerManager): ShutdownHandler: any => ({

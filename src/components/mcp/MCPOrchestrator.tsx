@@ -70,23 +70,23 @@ break
 }
   // Get server status;
 
-const _getServerStatus = (serverId: string) => {;
+const _getServerStatus = (serverId: string) => {
     const server = servers.find(s => s.id === serverId);
         return server?.status || 'disconnected'};
   // Execute single tool;
 
 const _handleExecuteTool = async () => {
     if (!selectedTool) {
-      toast({,
+      toast({
         title: 'Error',
-        description: 'Please select a tool to execute';
+        description: 'Please select a tool to execute',
 variant: 'destructive'
       });
       return null;
 }try {
-      const call: MCPToolCall = {,
-  tool: selectedTool.name;
-    server: selectedTool.server;
+      const call: MCPToolCall = {
+  tool: selectedTool.name,
+    server: selectedTool.server,
 arguments: toolArguments
       };
       
@@ -102,12 +102,12 @@ const result = await callTool(call);
     console.error('Tool execution, failed:', error)}
   // Add step to plan;
 
-const _addPlanStep = (): void => {;
+const _addPlanStep = (): void => {
     if (!selectedTool) return null; const step = {
-      id: `step_${planSteps.length + 1}`;`;
-type: 'tool' as const;
-    server: selectedTool.server;
-    operation: selectedTool.name;
+      id: `step_${planSteps.length + 1}`;`,
+type: 'tool' as const,
+    server: selectedTool.server,
+    operation: selectedTool.name,
     arguments: { ...toolArguments }
     setPlanSteps(prev => [...prev, step]);
     setToolArguments({});
@@ -120,9 +120,9 @@ type: 'tool' as const;
 
 const _handleExecutePlan = async () => {
     if (planSteps.length === 0) {
-      toast({,
+      toast({
         title: 'Error',
-        description: 'Plan has no steps to execute';
+        description: 'Plan has no steps to execute',
 variant: 'destructive'
       });
       return null;
@@ -145,8 +145,8 @@ const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({
   // Parse tool input schema for UI;
 
 const _getToolInputFields  = (tool: MCPTool): Array<{ name: string, type: string required: boolean }> => {
-    if (!tool.inputSchema || !tool.inputSchema.properties) return [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({,
-      name: type: schema.type || 'string';
+    if (!tool.inputSchema || !tool.inputSchema.properties) return [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({
+      name: type: schema.type || 'string',
 required: required.includes(name)}))
   };
   return (
@@ -233,14 +233,14 @@ const className  = {`p-2 rounded cursor-pointer transition-colors ${`
                               : 'hover:bg-accent'
                           }`}`;
 
-const onClick = {() => {
+    const onClick = {() => {
                             setSelectedTool(tool), setToolArguments({})}
                         ></div>
                           <div className="flex items-center gap-2">
                             <Settings className="h-4 w-4"   />
                             <span className="font-medium">{tool.name}</span>
           <p className="{tool.description}"   />
-        </div>;
+        </div>
     ))}
 </CollapsibleContent>
                 ))}
@@ -293,7 +293,7 @@ const onClick = {handleExecuteTool}
                   <Button
 variant="outline";
 
-const onClick = {addPlanStep}
+    const onClick = {addPlanStep}
                     const disabled = {loading}
                   >
                     Add to Plan

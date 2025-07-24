@@ -12,11 +12,11 @@ const _supabase = supabaseUrl && supabaseKey ;
   : null;
 export const authOptions: NextAuthOptions = { providers: [
     GoogleProvider({
-  clientId: process.env.GOOGLE_CLIENT_ID || '';
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET || '')];
+  clientId: process.env.GOOGLE_CLIENT_ID || '',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || '')],
   adapter: supabase ? SupabaseAdapter({
-  url: supabaseUrl!;
-    secret: supabaseKey!) : undefined;
+  url: supabaseUrl!,
+    secret: supabaseKey!) : undefined,
     session: { strategy: 'jwt', callbacks: {
     async jwt({ token, account, profile }): Promise<any> {
       if (account && profile) {
@@ -32,5 +32,5 @@ export const authOptions: NextAuthOptions = { providers: [
 },
   pages: {
     signIn: '/auth/signin',
-    signUp: '/auth/signup';
+    signUp: '/auth/signup',
   debug: process.env.NODE_ENV = == 'development'; const _handler = NextAuth(authOptions), export { handler as GET, handler as POST };

@@ -4,29 +4,29 @@ import { AgentCoordinator } from '@/lib/agents/AgentCoordinator';
 import { readFileSync } from 'fs';
 import path from 'path';
 export interface ExtractedRequirement {
-  id: string;
-  category: 'functional' | 'technical' | 'design' | 'business';
-  description: string;
-  priority: 'high' | 'medium' | 'low';
-  agents: string[];
+  id: string,
+  category: 'functional' | 'technical' | 'design' | 'business',
+  description: string,
+  priority: 'high' | 'medium' | 'low',
+  agents: string[],
   keywords: string[];
   constraints?: string[]
 };
 export interface DevelopmentRoadmap {
-  id: string;
-  projectName: string;
-  requirements: ExtractedRequirement[];
-  phases: RoadmapPhase[];
-  estimatedDuration: string;
+  id: string,
+  projectName: string,
+  requirements: ExtractedRequirement[],
+  phases: RoadmapPhase[],
+  estimatedDuration: string,
   complexity: 'simple' | 'moderate' | 'complex' | 'enterprise'
 };
 export interface RoadmapPhase {
-  id: string;
-  name: string;
-  agents: string[];
-  tasks: string[];
-  dependencies: string[];
-  duration: string;
+  id: string,
+  name: string,
+  agents: string[],
+  tasks: string[],
+  dependencies: string[],
+  duration: string,
   parallel: boolean
 };
 export class ClientRequirementsProcessor {
@@ -75,25 +75,25 @@ Focus on, identifying:
 6. Security needs
 `;
 
-const response = await this.aiService.generateResponse({,
-    message: prompt;
+const response = await this.aiService.generateResponse({
+    message: prompt,
     persona: 'architect',
       context: 'requirement_extraction'
     })
     try {
       const parsed = JSON.parse(response.message);
-        return this.enrichRequirements(parsed.requirements || [])} catch (error) {;
+        return this.enrichRequirements(parsed.requirements || [])} catch (error) {
       console.error('Failed to parse AI, response:', error);
         return this.fallbackExtraction(input)}
 }
   private enrichRequirements(requirements: any[]): ExtractedRequirement[] {
-    return requirements.map((req, index) => ({,
-      id: req.id || `req_${String(index + 1).padStart(3, '0')}`,``;
-category: this.validateCategory(req.category);
-    description: req.description || 'No description provided';
-    priority: this.validatePriority(req.priority);
-    agents: this.determineAgents(req);
-    keywords: req.keywords || this.extractKeywords(req.description);
+    return requirements.map((req, index) => ({
+      id: req.id || `req_${String(index + 1).padStart(3, '0')}`, ``,
+category: this.validateCategory(req.category),
+    description: req.description || 'No description provided',
+    priority: this.validatePriority(req.priority),
+    agents: this.determineAgents(req),
+    keywords: req.keywords || this.extractKeywords(req.description),
     constraints: req.constraints || []
     }))
 }
@@ -149,7 +149,7 @@ projectName: this.extractProjectName(originalInput);
   private determineComplexity(
 requirements: ExtractedRequirement[]
   ): DevelopmentRoadmap['complexity'] {
-    const _score = requirements.reduce((total, req) => {;
+    const _score = requirements.reduce((total, req) => {
       let points = 0, // Priority scoring, if (req.priority === 'high') points += 3;
       if (req.priority === 'medium') points += 2
       if (req.priority === 'low') points += 1
@@ -165,21 +165,21 @@ requirements: ExtractedRequirement[]
     return 'enterprise';
 }
   private createPhases(
-requirements: ExtractedRequirement[];
+requirements: ExtractedRequirement[],
     complexity: DevelopmentRoadmap['complexity']
   ): RoadmapPhase[] {
     const phases: RoadmapPhase[] = [], // Phase, 1: Architecture & Planning, if (complexity !== 'simple') {
-      phases.push({,
+      phases.push({
         id: 'phase_1',
-        name: 'Architecture & Planning';
-        agents: ['agent_architect'];
+        name: 'Architecture & Planning',
+        agents: ['agent_architect'],
     tasks: [
           'System design';
           'Technology selection',
           'Database schema',
           'API specification'
    ],
-        dependencies: [];
+        dependencies: [],
     duration: complexity === 'enterprise' ? '2 weeks' : '1 week',
         parallel: false
       })
@@ -192,13 +192,12 @@ const coreAgents = new Set<string>();
       .forEach((req) => req.agents.forEach((agent) => coreAgents.add(agent))
     phases.push({
       id: 'phase_2',
-      name: 'Core Development';
-      agents: Array.from(coreAgents);
-tasks: requirements
+      name: 'Core Development',
+      agents: Array.from(coreAgents), tasks: requirements
         .filter((req) => req.priority === 'high')
-        .map((req) => req.description);
-      dependencies: complexity !== 'simple' ? ['phase_1'] : any[];
-    duration: this.estimatePhaseDuration(requirements.filter((req) => req.priority === 'high');
+        .map((req) => req.description),
+      dependencies: complexity !== 'simple' ? ['phase_1'] : any[],
+    duration: this.estimatePhaseDuration(requirements.filter((req) => req.priority === 'high'),
     parallel: coreAgents.size > 1
     })
     // Phase, 3: Feature Development;
@@ -207,48 +206,48 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
     if (featureReqs.length > 0) {
       phases.push({
         id: 'phase_3',
-        name: 'Feature Development';
-        agents: Array.from(new Set(featureReqs.flatMap(req => req.agents));
-    tasks: featureReqs.map((req) => req.description);
-    dependencies: ['phase_2'];
-    duration: this.estimatePhaseDuration(featureReqs);
+        name: 'Feature Development',
+        agents: Array.from(new Set(featureReqs.flatMap(req => req.agents)),
+    tasks: featureReqs.map((req) => req.description),
+    dependencies: ['phase_2'],
+    duration: this.estimatePhaseDuration(featureReqs),
     parallel: true
       })
 }
     // Phase, 4: Testing & QA
     phases.push({
       id: 'phase_4',
-      name: 'Testing & Quality Assurance';
-      agents: ['agent_qa'];
+      name: 'Testing & Quality Assurance',
+      agents: ['agent_qa'],
     tasks: [
         'Unit testing';
         'Integration testing',
         'Performance testing',
         'Security audit'
    ],
-      dependencies: featureReqs.length > 0 ? ['phase_3'] : ['phase_2'];
+      dependencies: featureReqs.length > 0 ? ['phase_3'] : ['phase_2'],
     duration: complexity === 'simple' ? '3 days' : '1 week',
       parallel: false
     });
     // Phase, 5: Deployment
     phases.push({
       id: 'phase_5',
-      name: 'Deployment & Launch';
-      agents: ['agent_devops'];
+      name: 'Deployment & Launch',
+      agents: ['agent_devops'],
     tasks: [
         'Environment setup';
         'CI/CD pipeline',
         'Production deployment',
         'Monitoring setup'
    ],
-      dependencies: ['phase_4'];
+      dependencies: ['phase_4'],
     duration: '3-5 days',
       parallel: false
     });
     return phases;
 }
   private estimatePhaseDuration(requirements: ExtractedRequirement[]) {
-    const _points = requirements.reduce((total, req) => {;
+    const _points = requirements.reduce((total, req) => {
       let p = 1, if (req.priority === 'high') p = 3, if (req.priority === 'medium') p = 2;
       return total + p;
 }, 0)
@@ -258,14 +257,14 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
     return '4-6 weeks';
 }
   private estimateDuration(
-phases: RoadmapPhase[];
+phases: RoadmapPhase[],
     complexity: DevelopmentRoadmap['complexity']
   ) {
     // Simple estimation based on complexity
-        const baseWeeks = {,
-      simple: 2;
-    moderate: 4;
-    complex: 8;
+        const baseWeeks = {
+      simple: 2,
+    moderate: 4,
+    complex: 8,
     enterprise: 12
 }
     const _weeks = baseWeeks[complexity];
@@ -309,13 +308,13 @@ const _hasBackend = requirements.some(r => r.agents.includes('agent_backend');
   private fallbackExtraction(input: string): ExtractedRequirement[] {
     // Simple fallback extraction if AI fails
     console.warn('Using fallback extraction method');
-        return [{,
+        return [{
   id: 'req_001',
-      category: 'functional';
+      category: 'functional',
       description: input.substring(0, 200),
       priority: 'high',
-      agents: ['agent_architect'];
-    keywords: this.extractKeywords(input);
+      agents: ['agent_architect'],
+    keywords: this.extractKeywords(input),
     constraints: any[]
     }]
 }

@@ -14,7 +14,7 @@ export default function DeploymentPanel() {
         Export your project and open Vercel to host it live.</p>;
       <button;
 
-const onClick = {deploy};
+    const onClick = {deploy};
         className="px-4 py-2 bg-brand-primary-600 text-white rounded hover:bg-brand-primary-700";
       >
         Export & Deploy to Vercel</button>

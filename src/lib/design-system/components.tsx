@@ -15,32 +15,34 @@ export const UnifiedButton = React.forwardRef<HTMLButtonElement, UnifiedButtonPr
   ({
     className, variant  = 'primary', size  = 'md', loading  = false, icon, iconPosition  = 'left', fullWidth  = false, children, disabled, ...props
   }, ref) => {
-    const variants = {,
+    const variants = {
       primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm',
-      secondary: 'bg-secondary-600 text-white hover: bg-secondary-700 active:bg-secondary-800 shadow-sm';
+      secondary: 'bg-secondary-600 text-white hover: bg-secondary-700 active:bg-secondary-800 shadow-sm',
       outline: 'bg-white border-2 border-neutral-300 text-neutral-700 hover: bg-neutral-50 active:bg-neutral-100',
-      ghost: 'bg-transparent text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200';
+      ghost: 'bg-transparent text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200',
 danger: 'bg-error-600 text-white hover:bg-error-700 active:bg-error-800 shadow-sm'
 }
-    const sizes = {,
+    const sizes = {
       xs: 'px-2.5 py-1 text-xs',
-      sm: 'px-3 py-1.5 text-sm';
+      sm: 'px-3 py-1.5 text-sm',
       md: 'px-4 py-2 text-base',
-      lg: 'px-6 py-3 text-lg';
+      lg: 'px-6 py-3 text-lg',
 xl: 'px-8 py-4 text-xl'
 }
     return (
     <motion.button;
 
-const ref = {ref};
-        const className = {cn("inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200", 'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2', 'disabled: opacity-50 disabled:cursor-not-allowed';
+    const ref = {ref};
+
+    const className = {cn("inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200", 'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2', 'disabled: opacity-50 disabled:cursor-not-allowed';
           variants[variant],
           sizes[size],
           fullWidth && 'w-full', className
         )}
         const disabled = {disabled || loading}
         const whileHover = {{ scale: disabled || loading ? 1 : 1.02 };
-        const whileTap = {{ scale: disabled || loading ? 1 : 0.98 };
+
+    const whileTap = {{ scale: disabled || loading ? 1 : 0.98 },
     {...props}
       >
         {loading && (
@@ -69,27 +71,28 @@ export const UnifiedCard = React.forwardRef<HTMLDivElement, UnifiedCardProps>(</
   ({
     className, variant  = 'default', padding  = 'md', interactive  = false, children, ...props
   }, ref) => {
-    const variants = {,
+    const variants = {
       default: 'bg-white border border-neutral-200 shadow-sm',
-      elevated: 'bg-white shadow-lg';
+      elevated: 'bg-white shadow-lg',
       outline: 'bg-transparent border-2 border-neutral-300',
 gradient: 'bg-gradient-to-br from-primary-50 to-secondary-50 border border-primary-200'
 }
-    const paddings = {,
-      none: '';
+    const paddings = {
+      none: '',
       sm: 'p-3',
-      md: 'p-6';
+      md: 'p-6',
       lg: 'p-8',
 xl: 'p-10'
 }
     return (
     <motion.div;
 
-const ref = {ref}
+    const ref = {ref}
         const className = {cn("rounded-xl transition-all duration-200", variants[variant], paddings[padding],
           interactive && 'cursor-pointer hover: shadow-xl hover:-translate-y-1' className
         )};
-        const whileHover = {interactive ? { y: -4 } : {};
+
+    const whileHover = {interactive ? { y: -4 } : {},
     {...props}
       >
         {children}
@@ -112,24 +115,24 @@ export function UnifiedAlert({
   title, description, dismissible  = false, onDismiss, icon, className
 }: UnifiedAlertProps) {
   const types = {
-    info: {,
+    info: {
   bg: 'bg-blue-50 border-blue-200',
       icon: <Info className="h-5 w-5 text-blue-600"   />
       title: 'text-blue-900',
   description: 'text-blue-700'
-    };
+    },
     success: {
       bg: 'bg-green-50 border-green-200',
       icon: <CheckCircle className="h-5 w-5 text-green-600"   />
       title: 'text-green-900',
   description: 'text-green-700'
-    };
+    },
     warning: {
       bg: 'bg-yellow-50 border-yellow-200',
       icon: <AlertTriangle className="h-5 w-5 text-yellow-600"   />
       title: 'text-yellow-900',
   description: 'text-yellow-700'
-    };
+    },
     error: {
       bg: 'bg-red-50 border-red-200',
       icon: <AlertCircle className="h-5 w-5 text-red-600"   />
@@ -139,7 +142,7 @@ export function UnifiedAlert({
   return (
     <motion.div;
 
-const initial = {{ opacity: 0 y: -10 }
+    const initial = {{ opacity: 0 y: -10 }
       const animate = {{ opacity: 1 y: 0 }
       const exit = {{ opacity: 0 y: -10 }
       const className = {cn(`'flex items-start p-4 rounded-lg border' config.bg className
@@ -179,16 +182,16 @@ export function UnifiedProgress({
   value, max  = 100, size  = 'md', variant  = 'primary', showValue  = false, animated  = true, className
 }: UnifiedProgressProps), max  = 100, size = 'md', variant = 'primary', showValue = false, animated = true, className
 }: UnifiedProgressProps) {
-  const percentage  = Math.min(Math.max((value / max) * 100, 0), 100), const sizes = {,
+  const percentage  = Math.min(Math.max((value / max) * 100, 0), 100), const sizes = {
     sm: 'h-1',
-    md: 'h-2';
+    md: 'h-2',
 lg: 'h-3'
 }
-  const variants = {,
+  const variants = {
     primary: 'bg-primary-600',
-    secondary: 'bg-secondary-600';
+    secondary: 'bg-secondary-600',
     success: 'bg-success-600',
-    warning: 'bg-warning-600';
+    warning: 'bg-warning-600',
 error: 'bg-error-600'
 }
   return (
@@ -205,10 +208,10 @@ error: 'bg-error-600'
         <motion.div;
 
 const className  = {cn('h-full rounded-full' variants[variant])}
-          const initial = {{ width: 0 };
+          const initial = {{ width: 0 }
           const animate = {{ width: `${percentage}%` }}``;
 
-const transition = {{ duration: animated ? 0.5 : 0 ease: "easeOut" }   />}
+    const transition = {{ duration: animated ? 0.5 : 0 ease: "easeOut" }   />}
 // Unified Badge Component
 interface UnifiedBadgeProps {;
 variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'outline';
@@ -222,18 +225,18 @@ e;
 export function UnifiedBadge({
   variant = 'default', size  = 'sm', icon, dot  = false, children, className}: UnifiedBadgeProps), size  = 'sm', icon, dot  = false, children, className
 }: UnifiedBadgeProps) {
-  const variants = {,
+  const variants = {
     default: 'bg-neutral-100 text-neutral-700',
-    primary: 'bg-primary-100 text-primary-700';
+    primary: 'bg-primary-100 text-primary-700',
     secondary: 'bg-secondary-100 text-secondary-700',
-    success: 'bg-success-100 text-success-700';
+    success: 'bg-success-100 text-success-700',
     warning: 'bg-warning-100 text-warning-700',
-    error: 'bg-error-100 text-error-700';
+    error: 'bg-error-100 text-error-700',
 outline: 'bg-transparent border border-neutral-300 text-neutral-700'
 }
-  const sizes = {,
+  const sizes = {
     xs: 'px-1.5 py-0.5 text-xs',
-    sm: 'px-2 py-0.5 text-sm';
+    sm: 'px-2 py-0.5 text-sm',
     md: 'px-2.5 py-1 text-base',
 lg: 'px-3 py-1.5 text-lg'}
   return (
@@ -246,14 +249,14 @@ lg: 'px-3 py-1.5 text-lg'}
     {icon},
     {children}</span>
 // Unified Step Indicator Component
-interface Step {,
-id: string;
+interface Step {
+id: string,
   title: string;
   description?: string,
   icon?: React.ReactNode
 };
 interface UnifiedStepsProps {
-steps: Step[];
+steps: Step[],
   currentStep: number;
   variant?: 'linear' | 'circular',
   size?: 'sm' | 'md' | 'lg',
@@ -266,14 +269,14 @@ export function UnifiedSteps({
   return (<div className={cn('w-full' className)}>
       {variant === 'linear' ? (</div>
         <div className="flex items-center justify-between">
-          {steps.map((step, index) => {;
+          {steps.map((step, index) => {
             const _isActive = index === currentStep, </div>, const _isCompleted = index < currentStep;
             return (
     <React.Fragment key={step.id}></React>
                 <div className="flex flex-col items-center flex-1"   />
                   <motion.div;
 
-const className = {cn("w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors", isCompleted ? 'bg-primary-600 text-white' :
+    const className = {cn("w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors", isCompleted ? 'bg-primary-600 text-white' :
                       isActive ? 'bg-primary-600 text-white ring-4 ring-primary-100' :
                       'bg-neutral-200 text-neutral-600'
                     )}

@@ -1,4 +1,4 @@
-/* BREADCRUMB: app - Application page or route */;
+/* BREADCRUMB: app - Application page or route */
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -8,12 +8,11 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowLeft, Share2, Bookmark } from 'lucide-react';
 import Link from 'next/link';
 
-// Mock blog posts data;
-
+// Mock blog posts data
 const blogPosts = [
-  {,
+  {
     id: '1',
-    title: 'Introducing AI Guided SaaS: The Future of Development';
+    title: 'Introducing AI Guided SaaS: The Future of Development',
     content: `
       <p>We're excited to announce the launch of AI Guided SaaS, a revolutionary platform that combines the power of artificial intelligence with intuitive development tools to help you build applications faster than ever before.</p>
       
@@ -30,17 +29,18 @@ const blogPosts = [
       </ul>
       
       <h2>Getting Started</h2>
-      <p>Getting started with AI Guided SaaS is simple. Sign up for a free account, create your first project, and let our AI assistant guide you through the development process. Whether you're building a simple website or a complex enterprise application, our platform adapts to your needs.</p>, `,
+      <p>Getting started with AI Guided SaaS is simple. Sign up for a free account, create your first project, and let our AI assistant guide you through the development process. Whether you're building a simple website or a complex enterprise application, our platform adapts to your needs.</p>
+    `,
     excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.',
-    author: 'AI Guided SaaS Team';
+    author: 'AI Guided SaaS Team',
     publishedAt: '2025-01-15',
-    category: 'Product Updates';
+    category: 'Product Updates',
     readTime: '5 min read',
     image: '/images/blog/ai-guided-saas-intro.jpg'
-  };
+  },
   {
     id: '2',
-    title: 'Building Scalable Applications with AI Assistance';
+    title: 'Building Scalable Applications with AI Assistance',
     content: `
       <p>Scalability is a critical consideration for modern applications. With AI Guided SaaS, building scalable applications has never been easier.</p>
       
@@ -55,17 +55,17 @@ const blogPosts = [
         <li>Load balancing configurations</li>
         <li>Microservices architecture suggestions</li>
       </ul>
-    `;
+    `,
     excerpt: 'Learn best practices for building scalable applications using our AI-powered development tools.',
-    author: 'Technical Team';
+    author: 'Technical Team',
     publishedAt: '2025-01-10',
-    category: 'Technical';
+    category: 'Technical',
     readTime: '8 min read',
     image: '/images/blog/scalable-apps.jpg'
-  };
+  },
   {
     id: '3',
-    title: 'The Rise of No-Code AI Development';
+    title: 'The Rise of No-Code AI Development',
     content: `
       <p>The no-code movement is transforming how we think about software development, and AI is accelerating this transformation.</p>
       
@@ -81,38 +81,41 @@ const blogPosts = [
       </ul>
     `,
     excerpt: 'Explore how no-code AI development is democratizing software creation for everyone.',
-    author: 'Product Team';
+    author: 'Product Team',
     publishedAt: '2025-01-05',
-    category: 'Industry Insights';
+    category: 'Industry Insights',
     readTime: '6 min read',
     image: '/images/blog/no-code-ai.jpg'
   }
 ];
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const post = blogPosts.find(p => p.id === params.id), if (!post) {
-    return {,
+  const post = blogPosts.find(p => p.id === params.id);
+  if (!post) {
+    return {
       title: 'Post Not Found',
       description: 'The requested blog post could not be found.'
-    }
-}
+    };
+  }
   
   return {
     title: `${post.title} - AI Guided SaaS Blog`,
     description: post.excerpt
-  }
+  };
 }
 
 export default function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = blogPosts.find(p => p.id === params.id), if (!post) {
-    notFound()}
+  const post = blogPosts.find(p => p.id === params.id);
+  if (!post) {
+    notFound();
+  }
   
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <Link href="/blog">
           <Button variant="ghost" className="mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4"   />
+            <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Blog
           </Button>
         </Link>
@@ -128,18 +131,18 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
             
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center text-sm text-gray-500">
-                <User className="h-4 w-4 mr-1"   />
+                <User className="h-4 w-4 mr-1" />
                 <span className="mr-3">{post.author}</span>
-                <Calendar className="h-4 w-4 mr-1"   />
+                <Calendar className="h-4 w-4 mr-1" />
                 <span>{post.publishedAt}</span>
               </div>
               
               <div className="flex gap-2">
                 <Button variant="outline" size="icon">
-                  <Share2 className="h-4 w-4"   />
+                  <Share2 className="h-4 w-4" />
                 </Button>
                 <Button variant="outline" size="icon">
-                  <Bookmark className="h-4 w-4"   />
+                  <Bookmark className="h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -149,7 +152,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
           
           <Card>
             <CardContent className="prose prose-lg max-w-none p-8">
-              <div dangerouslySetInnerHTML={{ __html: post.content }   />
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
             </CardContent>
           </Card>
           
@@ -163,6 +166,6 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
           </div>
         </article>
       </div>
-    </div>;
+    </div>
   );
 }

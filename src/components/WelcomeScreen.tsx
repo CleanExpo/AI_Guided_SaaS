@@ -8,9 +8,9 @@ interface WelcomeScreenProps {
 onSelectPersona: (persona: Persona) => void
 }
 const personas: Persona[]  = [
-  {,
+  {
     id: 'ai-architect',
-    name: 'AI Architect';
+    name: 'AI Architect',
     description: 'Expert in AI-powered development workflows and intelligent automation',
     expertise: [
       'Machine Learning';
@@ -19,23 +19,23 @@ const personas: Persona[]  = [
       'Data Processing'
     ],
     tone: 'Technical and forward-thinking',
-    avatar: '🤖';
+    avatar: '🤖',
     role: 'architect',
 color: 'blue'
-  };
+  },
   {
     id: 'fullstack-wizard',
-    name: 'Fullstack Wizard';
+    name: 'Fullstack Wizard',
     description: 'Master of both frontend and backend development with modern frameworks',
     expertise: ['React', 'Node.js', 'Database Design', 'API Development'],
     tone: 'Comprehensive and detail-oriented',
-    avatar: '🧙‍♂️';
+    avatar: '🧙‍♂️',
     role: 'developer',
 color: 'purple'
-  };
+  },
   {
     id: 'ui-designer',
-    name: 'UI Designer';
+    name: 'UI Designer',
     description: 'Focused on creating beautiful, user-friendly interfaces',
     expertise: [
       'UI/UX Design';
@@ -44,23 +44,23 @@ color: 'purple'
       'User Research'
     ],
     tone: 'Creative and user-focused',
-    avatar: '🎨';
+    avatar: '🎨',
     role: 'designer',
 color: 'pink'
   };
   {
     id: 'devops-engineer',
-    name: 'DevOps Engineer';
+    name: 'DevOps Engineer',
     description: 'Specializes in deployment, scaling, and infrastructure management',
     expertise: ['CI/CD', 'Cloud Platforms', 'Containerization', 'Monitoring'],
     tone: 'Systematic and reliability-focused',
-    avatar: '⚙️';
+    avatar: '⚙️',
     role: 'devops',
 color: 'green'
-  };
+  },
   {
     id: 'startup-founder',
-    name: 'Startup Founder';
+    name: 'Startup Founder',
     description: 'Entrepreneurial mindset focused on MVP development and rapid iteration',
     expertise: [
       'MVP Development';
@@ -69,13 +69,13 @@ color: 'green'
       'Growth Hacking'
     ],
     tone: 'Energetic and results-driven',
-    avatar: '🚀';
+    avatar: '🚀',
     role: 'founder',
 color: 'orange'
   };
   {
     id: 'enterprise-consultant',
-    name: 'Enterprise Consultant';
+    name: 'Enterprise Consultant',
     description: 'Expert in large-scale applications with enterprise-grade requirements',
     expertise: [
       'Enterprise Architecture';
@@ -84,7 +84,7 @@ color: 'orange'
       'Compliance'
     ],
     tone: 'Professional and thorough',
-    avatar: '🏢';
+    avatar: '🏢',
     role: 'consultant',
 color: 'gray'
   }
@@ -159,7 +159,7 @@ Tone:
                   <Button
 className="w-full mt-4";
 
-const variant = {
+    const variant = {
                       selectedPersona === persona.id ? 'default' : 'outline'}
                   >
                     {selectedPersona === persona.id
@@ -172,7 +172,7 @@ const variant = {
         <div className="">
         <p className="Each persona provides specialized guidance and recommendations based
             on their expertise area."   />
-        </div>;
+        </div>
     );</div>
   
     </CardDescription>

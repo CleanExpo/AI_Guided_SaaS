@@ -4,12 +4,12 @@ import { mcp__memory__create_entities, mcp__memory__add_observations } from '@/l
 import { writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
 export interface CoordinationTask {
-  id: string;
-  agent_id: string;
+  id: string,
+  agent_id: string,
   action: string, input,
-  dependencies: string[];
-  priority: 'low' | 'medium' | 'high' | 'critical';
-  status: 'pending' | 'ready' | 'in_progress' | 'completed' | 'failed' | 'blocked';
+  dependencies: string[],
+  priority: 'low' | 'medium' | 'high' | 'critical',
+  status: 'pending' | 'ready' | 'in_progress' | 'completed' | 'failed' | 'blocked',
   created_at: Date;
   started_at?: Date,
   completed_at?: Date,
@@ -17,32 +17,31 @@ export interface CoordinationTask {
   error?: string
 };
 export interface CoordinationPlan {
-  id: string;
-  project_type: string;
-  stage: string;
-  tasks: CoordinationTask[];
-  execution_order: string[][]  // Array of task groups that can run in paralle
-l;
+  id: string,
+  project_type: string,
+  stage: string,
+  tasks: CoordinationTask[], execution_order: string[][]  // Array of task groups that can run in paralle
+l,
     dependencies: Map<string, string[]>,
-  estimated_duration: number;
-  status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed';
+  estimated_duration: number,
+  status: 'planning' | 'ready' | 'executing' | 'completed' | 'failed',
   progress: number
 };
 export interface AgentHandoff {
-  from_agent: string;
-  to_agent: string;
-  data: handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment';
-  timestamp: Date;
+  from_agent: string,
+  to_agent: string,
+  data: handoff_type: 'architecture' | 'implementation' | 'validation' | 'deployment',
+  timestamp: Date,
   success: boolean;
   notes?: string
 };
 export interface CoordinationResult {
   plan: CoordinationPla
-n;
-    completed_tasks: CoordinationTask[];
-  failed_tasks: CoordinationTask[];
-  handoffs: AgentHandoff[];
-  total_duration: number;
+n,
+    completed_tasks: CoordinationTask[],
+  failed_tasks: CoordinationTask[],
+  handoffs: AgentHandoff[],
+  total_duration: number,
   success_rate: number, final_output};
 export class AgentCoordinator {
   private static instance: AgentCoordinator
@@ -62,7 +61,7 @@ export class AgentCoordinator {
   /**
    * Create coordination plan for project execution
    */
-  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform';
+  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform',
   stage: string = 'full_stack'): Promise<any> {
     const, planId = `plan_${Date.now()}`;
 
@@ -80,7 +79,7 @@ const tasks: CoordinationTask[] = [];
 
 const { executionOrder, dependencies   }: any  = this.buildExecutionGraph(tasks, requiredAgents);
 
-const plan: CoordinationPlan = {,
+const plan: CoordinationPlan = {
       id: planId, project_type: projectType;
       stage,
       tasks,
@@ -152,11 +151,11 @@ const _successRate = (completedTasks.length / plan.tasks.length) * 100;
 
 const result: CoordinationResult = {;
         plan;
-        completed_tasks: completedTasks;
+        completed_tasks: completedTasks,
     failed_tasks: failedTasks;
         handoffs,
-        total_duration: totalDuration;
-    success_rate: successRate;
+        total_duration: totalDuration,
+    success_rate: successRate,
     final_output: this.aggregateFinalOutput(completedTasks)}
       await this.logExecutionCompletion(result)
 }% success rate`)``;
@@ -206,19 +205,19 @@ const result: CoordinationResult = {;
    * Get coordination status for active plans
    */
   getCoordinationStatus(): Record {
-    const status: Record<string, any> = {,
-      active_plans: this.activePlans.size;
+    const status: Record<string, any> = {
+      active_plans: this.activePlans.size,
     plans: {};
-    agent_status: this.loader.getAgentStatus();
-    recent_handoffs: this.handoffHistory.slice(-10);
+    agent_status: this.loader.getAgentStatus(),
+    recent_handoffs: this.handoffHistory.slice(-10),
     coordination_metrics: this.calculateCoordinationMetrics()}
     for (const [planId, plan] of this.activePlans) {
       status.plans[planId] = {
-        stage: plan.stage;
-    status: plan.status;
-    progress: plan.progress;
-    tasks_total: plan.tasks.length;
-    tasks_completed: plan.tasks.filter((t) => t.status === 'completed').length;
+        stage: plan.stage,
+    status: plan.status,
+    progress: plan.progress,
+    tasks_total: plan.tasks.length,
+    tasks_completed: plan.tasks.filter((t) => t.status === 'completed').length,
     tasks_failed: plan.tasks.filter((t) => t.status === 'failed').length
   }
 }
@@ -228,13 +227,13 @@ const result: CoordinationResult = {;
    * Handle agent-to-agent handoffs
    */
   private createHandoff(
-completedTask: CoordinationTask;
-    plan: CoordinationPlan;
+completedTask: CoordinationTask,
+    plan: CoordinationPlan,
     phaseIndex: number
   ): AgentHandoff | null {
     const nextPhase = plan.execution_order[phaseIndex + 1], if (!nextPhase || nextPhase.length === 0) return null, // Find the next task that depends on this one;
 
-const _nextTaskId = nextPhase.find((taskId) => {;
+const _nextTaskId = nextPhase.find((taskId) => {
       const task = plan.tasks.find(t => t.id === taskId);
       return task?.dependencies.includes(completedTask.id);
 })
@@ -242,12 +241,12 @@ const _nextTaskId = nextPhase.find((taskId) => {;
     
 const nextTask  = plan.tasks.find(t => t.id === nextTaskId)!;
 
-const handoff: AgentHandoff = {,
-      from_agent: completedTask.agent_id;
-    to_agent: nextTask.agent_id;
-    data: completedTask.result, handoff_type: this.determineHandoffType(completedTask.action);
-    timestamp: new Date();
-    success: true;
+const handoff: AgentHandoff = {
+      from_agent: completedTask.agent_id,
+    to_agent: nextTask.agent_id,
+    data: completedTask.result, handoff_type: this.determineHandoffType(completedTask.action),
+    timestamp: new Date(),
+    success: true,
     notes: `Handoff from ${completedTask.action} to ${nextTask.action}`
 }
     this.handoffHistory.push(handoff);
@@ -255,20 +254,20 @@ const handoff: AgentHandoff = {,
 }
   // Private helper methods
   private createTasksForAgent(
-agent: AgentConfig;
-    requirements: string;
+agent: AgentConfig,
+    requirements: string,
     startIndex: number
   ): CoordinationTask[] {
     const tasks: CoordinationTask[] = [], // Create tasks based on agent's workflow patterns, if (agent.workflow_patterns) {
       Object.entries(agent.workflow_patterns).forEach(([patternName, pattern], index) => {
-        const task: CoordinationTask = {,
+        const task: CoordinationTask = {
   id: `task_${startIndex + index}`,
-agent_id: agent.agent_id;
-    action: patternName;
+agent_id: agent.agent_id,
+    action: patternName,
     input: { requirements, pattern },
-          dependencies: index > 0 ? [`task_${startIndex + index - 1}`] : any[];``;
+          dependencies: index > 0 ? [`task_${startIndex + index - 1}`] : any[];``,
 priority: agent.priority <= 2 ? 'high' : 'medium',
-          status: 'pending';
+          status: 'pending',
           created_at: new Date()}
         tasks.push(task)
 })
@@ -276,7 +275,7 @@ priority: agent.priority <= 2 ? 'high' : 'medium',
     return tasks;
 }
   private buildExecutionGraph(
-tasks: CoordinationTask[];
+tasks: CoordinationTask[],
     agents: AgentConfig[]
   ): { executionOrder: string[][], dependencies: Map<string, string[] /> {
     const dependencies = new Map<string, string[]>(), // Build dependency map, tasks.forEach((task) => { if (task.dependencies.length > 0) {
@@ -313,19 +312,19 @@ if (readyTasks.length > 0) {
     return phaseDurations.reduce((total, duration) => total + duration, 0);
 }
   private areTaskDependenciesMet(task: CoordinationTask, plan: CoordinationPlan): boolean {
-    return task.dependencies.every((depId) => {;
+    return task.dependencies.every((depId) => {
       const _depTask = plan.tasks.find(t => t.id === depId);
         return depTask?.status === 'completed'})
 }
   private async simulateAgentExecution(agent: AgentConfig, task: CoordinationTask): Promise<any> {
     // Simulate processing time based on task complexity, const _complexity = task.priority === 'high' ? 2000 : 1000, await new Promise(resolve => setTimeout(resolve, complexity))
     // Return mock result based on agent role
-    return {,
-      agent_role: agent.role;
-    task_action: task.action;
+    return {
+      agent_role: agent.role,
+    task_action: task.action,
     status: 'completed',
-      output: `${agent.role} completed ${task.action}`;
-timestamp: new Date().toISOString();
+      output: `${agent.role} completed ${task.action}`,
+timestamp: new Date().toISOString(),
     artifacts: [`${task.action}_output.json`]``
   }
 }
@@ -333,10 +332,10 @@ timestamp: new Date().toISOString();
     // Stop if any critical priority task fails
     return failedTasks.some(task => task.priority === 'critical')}
   private aggregateFinalOutput(completedTasks: CoordinationTask[]) {
-    return {,
-      total_tasks: completedTasks.length;
-    outputs: completedTasks.map((task) => task.result);
-    artifacts: completedTasks.flatMap(task => task.result?.artifacts || []);
+    return {
+      total_tasks: completedTasks.length,
+    outputs: completedTasks.map((task) => task.result),
+    artifacts: completedTasks.flatMap(task => task.result?.artifacts || []),
     summary: `Completed ${completedTasks.length} coordination tasks successfully`
   }
 }
@@ -348,11 +347,11 @@ timestamp: new Date().toISOString();
   private calculateCoordinationMetrics(): Record {
     const allPlans = Array.from(this.activePlans.values(); const completedPlans = allPlans.filter((p) => p.status === 'completed');
         return {
-      total_plans: allPlans.length;
-    completed_plans: completedPlans.length;
-    success_rate: allPlans.length > 0 ? (completedPlans.length / allPlans.length) * 100 : 0;
-    total_handoffs: this.handoffHistory.length;
-    successful_handoffs: this.handoffHistory.filter((h) => h.success).length;
+      total_plans: allPlans.length,
+    completed_plans: completedPlans.length,
+    success_rate: allPlans.length > 0 ? (completedPlans.length / allPlans.length) * 100 : 0,
+    total_handoffs: this.handoffHistory.length,
+    successful_handoffs: this.handoffHistory.filter((h) => h.success).length,
     average_plan_duration: completedPlans.length > 0
         ? completedPlans.reduce((sum, p) => sum + (p.estimated_duration || 0), 0) / completedPlans.length
         : 0

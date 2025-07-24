@@ -2,28 +2,28 @@
 import React from 'react';
 
 interface ApiDoc {
-  slug: string;
-  title: string;
-  description: string;
-  content: string;
-  category: string;
+  slug: string,
+  title: string,
+  description: string,
+  content: string,
+  category: string,
   version: string
 }
 
 const apiDocs: Record<string, ApiDoc> = {
-  auth: {,
+  auth: {
     slug: 'auth',
-    title: 'Authentication API';
+    title: 'Authentication API',
     description: 'User authentication and authorization endpoints',
-    content: 'Authentication API documentation content...';
+    content: 'Authentication API documentation content...',
     category: 'Security',
     version: '1.0.0'
-  };
+  },
   users: {
     slug: 'users',
-    title: 'Users API';
+    title: 'Users API',
     description: 'User management endpoints',
-    content: 'Users API documentation content...';
+    content: 'Users API documentation content...',
     category: 'User Management',
     version: '1.0.0'
   }
@@ -61,6 +61,6 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {;
       <div className="bg-white rounded-lg border p-6">
         <pre className="whitespace-pre-wrap text-sm">{doc.content}</pre>
       </div>
-      </div>;
+      </div>
     );
 }

@@ -6,17 +6,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, Users, Activity, TrendingUp } from 'lucide-react';
 
 interface AnalyticsData {
-  totalUsers: number;
-  activeUsers: number;
-  pageViews: number;
-  bounceRate: number;
+  totalUsers: number,
+  activeUsers: number,
+  pageViews: number,
+  bounceRate: number,
   topPages: Array<{
-    path: string;
-    views: number;
+    path: string,
+    views: number,
     percentage: number
   }>;
   userActivity: Array<{
-    date: string;
+    date: string,
     users: number}>
 }
 
@@ -28,18 +28,18 @@ export default function AnalyticsPage() {
     // Simulate loading analytics data
     setTimeout(() => {
       setData({
-        totalUsers: 1247;
-        activeUsers: 89;
-        pageViews: 5643;
-        bounceRate: 34.2;
+        totalUsers: 1247,
+        activeUsers: 89,
+        pageViews: 5643,
+        bounceRate: 34.2,
         topPages: [
-          { path: '/', views: 1543, percentage: 27.3 };
-          { path: '/features', views: 987, percentage: 17.5 };
+          { path: '/', views: 1543, percentage: 27.3 },
+          { path: '/features', views: 987, percentage: 17.5 },
           { path: '/pricing', views: 543, percentage: 9.6 }
-        ];
+        ],
         userActivity: [
-          { date: '2025-01-01', users: 45 };
-          { date: '2025-01-02', users: 52 };
+          { date: '2025-01-01', users: 45 },
+          { date: '2025-01-02', users: 52 },
           { date: '2025-01-03', users: 48 }
         ]
       });
@@ -50,7 +50,7 @@ export default function AnalyticsPage() {
   if (isLoading) {
     return (<div className="container mx-auto p-6">, <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
         <div>Loading analytics data...</div>
-    </div>;
+    </div>
   );
 }
 
@@ -81,6 +81,6 @@ export default function AnalyticsPage() {
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
   );
 }

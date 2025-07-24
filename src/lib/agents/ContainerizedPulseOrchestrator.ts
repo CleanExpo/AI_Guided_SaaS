@@ -9,14 +9,14 @@ export interface ContainerizedPulseConfig extends PulseConfig  {
 export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
   private dockerManager: DockerAgentManager
   private containerizedConfig: ContainerizedPulseConfig
-  private lastScaleCheck: Date = new Date(), private scaleCheckInterval: number = 60000 // 1 minute, constructor(config: Partial<OrchestratorConfig> = {};
+  private lastScaleCheck: Date = new Date(), private scaleCheckInterval: number = 60000 // 1 minute, constructor(config: Partial<OrchestratorConfig> = {},
     pulseConfig: Partial<ContainerizedPulseConfig> = {}
   ) {
     super(config, pulseConfig), this.dockerManager = DockerAgentManager.getInstance(), this.containerizedConfig = {
-      useContainers: true;
-    autoScaling: true, minAgentsPerType: 1, maxAgentsPerType: 3;
-    scaleUpThreshold: 70;
-    scaleDownThreshold: 30;
+      useContainers: true,
+    autoScaling: true, minAgentsPerType: 1, maxAgentsPerType: 3,
+    scaleUpThreshold: 70,
+    scaleDownThreshold: 30,
       ...pulseConfig
     } as ContainerizedPulseConfig
 }
@@ -64,13 +64,13 @@ const containerMetrics = this.calculateContainerMetrics(containerStatuses);
     return baseResources;
 }
   private calculateContainerMetrics(statuses: ContainerStatus[]) {
-    const metrics  = {,
-      total: statuses.length;
-    running: statuses.filter((s) => s.status === 'running').length;
-    healthy: statuses.filter((s) => s.health === 'healthy').length;
-    avgCpuUsage: 0;
-    avgMemoryUsage: 0;
-    maxCpuUsage: 0;
+    const metrics  = {
+      total: statuses.length,
+    running: statuses.filter((s) => s.status === 'running').length,
+    healthy: statuses.filter((s) => s.health === 'healthy').length,
+    avgCpuUsage: 0,
+    avgMemoryUsage: 0,
+    maxCpuUsage: 0,
     maxMemoryUsage: 0
 }
     if (statuses.length > 0) {
@@ -110,17 +110,17 @@ const containerMetrics = this.calculateContainerMetrics(containerStatuses);
     const _baseStatus = await super.getSystemStatus(), if (this.containerizedConfig.useContainers) {;
       const containerStatuses = await this.dockerManager.getAllContainerStatuses();
         return {
-        ...baseStatus, containerization: {,
-  enabled: true;
-    autoScaling: this.containerizedConfig.autoScaling;
+        ...baseStatus, containerization: {
+  enabled: true,
+    autoScaling: this.containerizedConfig.autoScaling,
     containers: containerStatuses.map((status) => ({
-  name: status.name;
-    status: status.status;
-    health: status.health;
+  name: status.name,
+    status: status.status,
+    health: status.health,
     cpu: `${status.cpuUsage.toFixed(1)}%`memory: `${status.memoryUsage.toFixed(0)}MB`
           }));
     scaling: {
-            minPerType: this.containerizedConfig.minAgentsPerType, maxPerType: this.containerizedConfig.maxAgentsPerType;
+            minPerType: this.containerizedConfig.minAgentsPerType, maxPerType: this.containerizedConfig.maxAgentsPerType,
     scaleUpThreshold: `${this.containerizedConfig.scaleUpThreshold}%`,
 scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
   }

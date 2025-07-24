@@ -106,19 +106,19 @@ export class AgentSystem {
       throw new Error('Agent system not initialized')};
     const requiredAgents  = await this.loader.getRequiredAgentsForStage(currentStage, projectType);
 
-const healthyAgents = requiredAgents.filter((agent) => {;
+const healthyAgents = requiredAgents.filter((agent) => {
       const _registration = this.registry.getAgentDetails(agent.agent_id);
         return registration?.health_status === 'healthy'})
-    return {,
-      stage: currentStage, project_type: projectType;
-    required_agents: requiredAgents.length;
-    healthy_agents: healthyAgents.length;
+    return {
+      stage: currentStage, project_type: projectType,
+    required_agents: requiredAgents.length,
+    healthy_agents: healthyAgents.length,
     agents: healthyAgents.map((agent) => ({
-  id: agent.agent_id;
-    name: agent.name;
-    role: agent.role;
-    priority: agent.priority;
-    capabilities: agent.capabilities;
+  id: agent.agent_id,
+    name: agent.name,
+    role: agent.role,
+    priority: agent.priority,
+    capabilities: agent.capabilities,
     status: agent.status
       }));
       readiness: healthyAgents.length >= requiredAgents.length * 0.8
@@ -133,24 +133,24 @@ const dashboard = this.monitor.getMonitoringDashboard();
     
 const commStats = this.communication.getCommunicationStats();
     return {
-      initialized: this.initialized;
-    timestamp: new Date().toISOString();
+      initialized: this.initialized,
+    timestamp: new Date().toISOString(),
     agents: {
-  total: registryStatus.total_agents;
-    healthy: dashboard.overview.healthy_agents;
-    warning: dashboard.overview.warning_agents;
-    critical: dashboard.overview.critical_agents;
+  total: registryStatus.total_agents,
+    healthy: dashboard.overview.healthy_agents,
+    warning: dashboard.overview.warning_agents,
+    critical: dashboard.overview.critical_agents,
     offline: dashboard.overview.offline_agents
-      };
+      },
     system_health: {
-        overall_score: dashboard.overview.system_health_score;
+        overall_score: dashboard.overview.system_health_score,
     status: dashboard.overview.system_health_score >= 90 ? 'excellent' :
                 dashboard.overview.system_health_score >= 75 ? 'good' :
                 dashboard.overview.system_health_score >= 50 ? 'fair' : 'poor'
-      };
+      },
     communication: {
-        total_messages: commStats.total_messages;
-    success_rate: commStats.success_rate;
+        total_messages: commStats.total_messages,
+    success_rate: commStats.success_rate,
     active_channels: commStats.active_channels
 }
   async performHealthCheck(): Promise<any> {

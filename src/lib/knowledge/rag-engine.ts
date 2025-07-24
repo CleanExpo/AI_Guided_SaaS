@@ -34,45 +34,45 @@ export interface RAGQuery {
 }
 
 export interface RAGResponse {
-    answer: string;
-  sources: RAGSource[];
+    answer: string,
+  sources: RAGSource[],
   confidence: number;
   tokens?: {
-    prompt: number;
-  completion: number;
+    prompt: number,
+  completion: number,
   total: number
 }
 
 export interface RAGSource {
-  id: string;
+  id: string,
   content: string
-  metadata;
+  metadata,
     score: number;
   highlights?: string[]
 }
 // Knowledge base operations;
 export interface KnowledgeBaseStats {
-  documentCount: number;
-  chunkCount: number;
-  lastUpdated: string;
-  size: number;
-  topics: Array<{ topic: string;
+  documentCount: number,
+  chunkCount: number,
+  lastUpdated: string,
+  size: number,
+  topics: Array<{ topic: string,
   count: number }>
 }
 // Validation schemas;
 export const RAGQuerySchema = z.object({
-    question: z.string().min(1);
-    context: z.string().optional();
+    question: z.string().min(1),
+    context: z.string().optional(),
     filters: z.object({
-  type: z.array(z.string()).optional();
-    tags: z.array(z.string()).optional();
-    project: z.string().optional()}).optional();
+  type: z.array(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+    project: z.string().optional()}).optional(),
   options: z.object({
-    topK: z.number().min(1).max(100).optional();
-    includeScores: z.boolean().optional();
+    topK: z.number().min(1).max(100).optional(),
+    includeScores: z.boolean().optional(),
     stream: z.boolean().optional()
 }).optional()
-});
+})
 export class RAGEngine {
   private config: RAGConfig
   private vectorStore: VectorStore
@@ -81,7 +81,7 @@ export class RAGEngine {
     this.config = config
     this.vectorStore = config.vectorStore
     this.documentLoader = new DocumentLoader(), this.textSplitter = new RecursiveCharacterTextSplitter({
-      chunkSize: config.chunkSize || 1000;
+      chunkSize: config.chunkSize || 1000,
     chunkOverlap: config.chunkOverlap || 200
     })
 }
@@ -96,12 +96,12 @@ export class RAGEngine {
   async addDocument(content: string, metadata: { source: string, type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
       title?: string, tags?: string[]
       project?: string }): Promise<any> {
-    const document: Document = {,
+    const document: Document = {
     id: this.generateId();
       content,
     metadata: {
-        ...metadata;
-        createdAt: new Date().toISOString();
+        ...metadata,
+        createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()}
     return this.vectorStore.addDocument(document);
 }
@@ -118,8 +118,8 @@ export class RAGEngine {
       include?: string[]
       exclude?: string[], project?: string
     }): Promise<any> {
-    const results = {,
-      documentsAdded: 0;
+    const results = {
+      documentsAdded: 0,
     errors: any[]
 }
     try {
@@ -127,8 +127,8 @@ export class RAGEngine {
         try {
           await this.addDocument(file.content, {
             source: file.path: type, 'code',;
-            title: file.name;
-    tags: [file.language || 'unknown'];
+            title: file.name,
+    tags: [file.language || 'unknown'],
     project: options?.project
           })
           results.documentsAdded++
@@ -145,10 +145,10 @@ export class RAGEngine {
   async query(query: RAGQuery): Promise<any> {
     // Validate query, const validated = RAGQuerySchema.parse(query); // Retrieve relevant documents;
 
-const searchQuery: SearchQuery = {,
-    query: validated.question;
-    filter: validated.filters;
-    topK: validated.options?.topK || this.config.retrievalTopK || 5;
+const searchQuery: SearchQuery = {
+    query: validated.question,
+    filter: validated.filters,
+    topK: validated.options?.topK || this.config.retrievalTopK || 5,
     includeScores: true
 }
     const _searchResults = await this.vectorStore.search(searchQuery);
@@ -168,10 +168,10 @@ const _response = await this.generateResponse(
    * Stream a response for the query
    */
   async *streamQuery(query: RAGQuery): AsyncGenerator {
-    const validated = RAGQuerySchema.parse(query), // Retrieve relevant documents, const searchQuery: SearchQuery  = {,
-    query: validated.question;
-    filter: validated.filters;
-    topK: validated.options?.topK || this.config.retrievalTopK || 5;
+    const validated = RAGQuerySchema.parse(query), // Retrieve relevant documents, const searchQuery: SearchQuery  = {
+    query: validated.question,
+    filter: validated.filters,
+    topK: validated.options?.topK || this.config.retrievalTopK || 5,
     includeScores: true
 }
     const _searchResults = await this.vectorStore.search(searchQuery);
@@ -212,8 +212,8 @@ const context = this.prepareContext(searchResults, validated.context);
    * Get knowledge base statistics
    */
   async getStats(): Promise<any> {
-    const documents = await this.vectorStore.listDocuments(), // Calculate statistics, const stats: KnowledgeBaseStats = {,
-    documentCount: documents.length;
+    const documents = await this.vectorStore.listDocuments(), // Calculate statistics, const stats: KnowledgeBaseStats = {
+    documentCount: documents.length,
     chunkCount: documents.reduce((acc, doc) => acc + (doc.chunks?.length || 1), 0),
       lastUpdated: documents.reduce((latest, doc) => {
         const _updated = new Date(doc.metadata.updatedAt);
@@ -262,11 +262,11 @@ if (additionalContext) {
 }
     return context.trim();
 }
-  private async generateResponse(question: string, context: string;
+  private async generateResponse(question: string, context: string,
   sources: SearchResult[]): Promise<any> {
     // This would integrate with your AI model (OpenAI, Claude, etc.)
     // For now, return a mock response, const prompt = `, ``
-Based on the following context, answer the question. If the answer cannot be found in the context, say so.;
+Based on the following context, answer the question. If the answer cannot be found in the context, say so.,
 Context:
 ${context}
 Question: ${question}
@@ -276,21 +276,21 @@ Answer:`
 const answer = `Based on the provided context, here's the answer to your question...`;``
     return {
       answer,
-      sources: sources.map((s) => ({,
-  id: s.id;
-    content: s.content;
-    metadata: s.metadata;
-    score: s.score;
+      sources: sources.map((s) => ({
+  id: s.id,
+    content: s.content,
+    metadata: s.metadata,
+    score: s.score,
     highlights: s.highlights
       }));
-      confidence: 0.85;
+      confidence: 0.85,
     tokens: {
-        prompt: prompt.length / 4;
-    completion: answer.length / 4;
+        prompt: prompt.length / 4,
+    completion: answer.length / 4,
     total: (prompt.length + answer.length) / 4
 }
   private async *streamResponse(
-question: string;
+question: string,
     context: string
   ): AsyncGenerator {
     // Mock streaming response, const _words = 'This is a streaming response based on the context provided.'.split(', '), for (const word of words) {

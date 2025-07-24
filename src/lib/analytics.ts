@@ -9,74 +9,74 @@ interface SumResult {
   total: number
 };
 interface SubscriptionBreakdownResult {
-  tier: string;
-  count: number;
+  tier: string,
+  count: number,
   revenue: number
 };
 interface CategoryResult {
-  category: string;
+  category: string,
   count: number
 };
 interface FrameworkResult {
-  framework: string;
+  framework: string,
   count: number
 };
 interface StatusResult {
-  status: string;
+  status: string,
   count: number
 }
 // Analytics interfaces;
 export interface PlatformMetrics {
-  totalUsers: number;
-  activeUsers: number;
-  totalProjects: number;
-  totalTemplates: number;
-  totalRevenue: number;
-  monthlyRevenue: number;
-  conversionRate: number;
+  totalUsers: number,
+  activeUsers: number,
+  totalProjects: number,
+  totalTemplates: number,
+  totalRevenue: number,
+  monthlyRevenue: number,
+  conversionRate: number,
   averageSessionTime: number
 };
 export interface UserMetrics {
-  newUsers: number;
-  activeUsers: number;
-  churned: number;
+  newUsers: number,
+  activeUsers: number,
+  churned: number,
   retention: {
-  day1: number;
-  day7: number;
+  day1: number,
+  day7: number,
   day30: number
 }
-  topCountries: Array<{ country: string, users: number }>;
+  topCountries: Array<{ country: string, users: number }>,
   userGrowth: Array<{ date: string, users: number }>
 };
 export interface RevenueMetrics {
-  totalRevenue: number;
-  monthlyRecurringRevenue: number;
-  averageRevenuePerUser: number;
-  churnRate: number;
-  lifetimeValue: number;
-  revenueGrowth: Array<{ date: string;
+  totalRevenue: number,
+  monthlyRecurringRevenue: number,
+  averageRevenuePerUser: number,
+  churnRate: number,
+  lifetimeValue: number,
+  revenueGrowth: Array<{ date: string,
   revenue: number }>;
-  subscriptionBreakdown: Array<{ tier: string, count: number, revenue: number }>;
+  subscriptionBreakdown: Array<{ tier: string, count: number, revenue: number }>,
   templateRevenue: Array<{ templateId: string, name: string, revenue: number }>
 };
 export interface SystemMetrics {
-  apiCalls: number;
-  errorRate: number;
-  averageResponseTime: number;
-  uptime: number;
-  activeConnections: number;
-  databaseConnections: number;
-  cacheHitRate: number;
+  apiCalls: number,
+  errorRate: number,
+  averageResponseTime: number,
+  uptime: number,
+  activeConnections: number,
+  databaseConnections: number,
+  cacheHitRate: number,
   storageUsed: number
 };
 export interface ContentMetrics {
-  totalTemplates: number;
-  pendingReviews: number;
-  approvedTemplates: number;
-  rejectedTemplates: number;
-  topCategories: Array<{ category: string;
+  totalTemplates: number,
+  pendingReviews: number,
+  approvedTemplates: number,
+  rejectedTemplates: number,
+  topCategories: Array<{ category: string,
   count: number }>;
-  topFrameworks: Array<{ framework: string, count: number }>;
+  topFrameworks: Array<{ framework: string, count: number }>,
   averageRating: number, totalDownloads: number
 }
 // Analytics service;
@@ -118,7 +118,7 @@ const _averageSessionTime = await this.getAverageSessionTime();
         monthlyRevenue,
         conversionRate,
         // averageSessionTime
-}} catch (error) {;
+}} catch (error) {
       console.error('Error fetching platform, metrics:', error);
         return this.getMockPlatformMetrics()}
 }
@@ -140,8 +140,7 @@ const _averageSessionTime = await this.getAverageSessionTime();
     break;
     break
 }
-          break,
-break;
+          break, break,
  default:
       startDate.setDate(endDate.getDate() - 30)
 }
@@ -164,11 +163,11 @@ const _retention = await this.calculateRetentionRates();
 
 const _userGrowth = await this.getUserGrowthData(startDate, endDate);
       return {
-        newUsers: newUsers[0]?.count || 0;
-    activeUsers: activeUsers[0]?.count || 0;
+        newUsers: newUsers[0]?.count || 0,
+    activeUsers: activeUsers[0]?.count || 0,
     churned: 0, // TODO: Calculate churned users
-        retention;
-        topCountries: any[], // TODO: Implement geo analytics
+        retention,
+        topCountries: [] as any[], // TODO: Implement geo analytics
         // userGrowth
 }} catch (error) {
       console.error('Error fetching user, metrics:', error);
@@ -202,8 +201,8 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
         GROUP BY tier
       `) as unknown as SubscriptionBreakdownResult[]``
       return {
-        totalRevenue: Number(totalRevenue[0]?.total) || 0;
-    monthlyRecurringRevenue: Number(monthlyRevenue[0]?.total) || 0;
+        totalRevenue: Number(totalRevenue[0]?.total) || 0,
+    monthlyRecurringRevenue: Number(monthlyRevenue[0]?.total) || 0,
     averageRevenuePerUser: 0;
   // TODO: Calculate ARPU
  , churnRate: 0;
@@ -212,7 +211,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
   // TODO: Calculate LTV
  , revenueGrowth: any[];
   // TODO: Get revenue growth data
- , subscriptionBreakdown: subscriptionBreakdown || [];
+ , subscriptionBreakdown: subscriptionBreakdown || [],
     templateRevenue: any[] // TODO: Get template revenue data
 }} catch (error) {
       console.error('Error fetching revenue, metrics:', error);
@@ -228,14 +227,14 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
         WHERE action LIKE '%api%'
         AND created_at >= ?
       `, [new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]``
-      return {,
-        apiCalls: Number(apiCalls[0]?.count) || 0;
+      return {
+        apiCalls: Number(apiCalls[0]?.count) || 0,
     errorRate: 0.02;
   // 2% error rate, averageResponseTime: 150;
-  // 150ms, uptime: 99.9;
-    activeConnections: 45;
-    databaseConnections: 12;
-    cacheHitRate: 85.5;
+  // 150ms, uptime: 99.9,
+    activeConnections: 45,
+    databaseConnections: 12,
+    cacheHitRate: 85.5,
     storageUsed: 2.4 // GB
 }} catch (error) {
       console.error('Error fetching system, metrics:', error);
@@ -290,9 +289,9 @@ const _rejectedTemplates = Number(templateStats.find(s => s.status === 'rejected
         pendingReviews,
         approvedTemplates,
         rejectedTemplates,;
-        topCategories: categoryStats || [];
-    topFrameworks: frameworkStats || [];
-    averageRating: 4.2;
+        topCategories: categoryStats || [],
+    topFrameworks: frameworkStats || [],
+    averageRating: 4.2,
     totalDownloads: 15420
 }} catch (error) {
       console.error('Error fetching content, metrics:', error);
@@ -320,7 +319,7 @@ const monthlyResult = await DatabaseService.query(`;``
       WHERE status = 'succeeded' AND created_at >= ?
     `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as SumResult[]``
     return {
-      totalRevenue: Number(totalResult[0]?.total) || 0;
+      totalRevenue: Number(totalResult[0]?.total) || 0,
     monthlyRevenue: Number(monthlyResult[0]?.total) || 0
   }
 }
@@ -338,16 +337,16 @@ const _paid = Number(paidUsers[0]?.count) || 0;
     return 1200 // 20 minutes in seconds}
     private static async calculateRetentionRates(): Promise<any> {
       // Mock implementation - would need proper cohort analysis
-      return {,
-        day1: 85.2;
-    day7: 62.8;
+      return {
+        day1: 85.2,
+    day7: 62.8,
     day30: 45.1
       } as const }
   private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string, users: number }>> {
     // Mock implementation - would generate daily user counts, const data = []; const current = new Date(startDate);
     while (current <= endDate) {
       data.push({
-        date: current.toISOString().split('T')[0];
+        date: current.toISOString().split('T')[0],
     users: Math.floor(Math.random() * 50) + 100
       })
       current.setDate(current.getDate() + 1)
@@ -357,93 +356,92 @@ const _paid = Number(paidUsers[0]?.count) || 0;
   // Mock data for testing
   private static getMockPlatformMetrics(): PlatformMetrics {
     return {
-      totalUsers: 12847;
-    activeUsers: 8934;
-    totalProjects: 45621;
-    totalTemplates: 342;
-    totalRevenue: 89420.50;
-    monthlyRevenue: 15680.25;
-    conversionRate: 12.4;
+      totalUsers: 12847,
+    activeUsers: 8934,
+    totalProjects: 45621,
+    totalTemplates: 342,
+    totalRevenue: 89420.50,
+    monthlyRevenue: 15680.25,
+    conversionRate: 12.4,
     averageSessionTime: 1380
   }
 }
   private static getMockUserMetrics(): UserMetrics {
     return {
-      newUsers: 234;
-    activeUsers: 8934;
-    churned: 45;
+      newUsers: 234,
+    activeUsers: 8934,
+    churned: 45,
     retention: {
-  day1: 85.2;
-    day7: 62.8;
-    day30: 45.1
-      };
+  day1: 85.2,
+    day7: 62.8,
+    day30: 45.1 }
       topCountries: [
-        { country: 'United States', users: 3421 };
-        { country: 'United Kingdom', users: 1876 };
-        { country: 'Germany', users: 1234 };
-        { country: 'Canada', users: 987 };
+        { country: 'United States', users: 3421 },
+        { country: 'United Kingdom', users: 1876 },
+        { country: 'Germany', users: 1234 },
+        { country: 'Canada', users: 987 },
         { country: 'Australia', users: 654 }
-   ];
+   ],
       userGrowth: Array.from({ length: 30 }, (_, i) => ({
-        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     users: Math.floor(Math.random() * 50) + 100
       }))}
   private static getMockRevenueMetrics(): RevenueMetrics {
     return {
-      totalRevenue: 89420.50;
-    monthlyRecurringRevenue: 15680.25;
-    averageRevenuePerUser: 28.50;
-    churnRate: 3.2;
-    lifetimeValue: 340.80;
+      totalRevenue: 89420.50,
+    monthlyRecurringRevenue: 15680.25,
+    averageRevenuePerUser: 28.50,
+    churnRate: 3.2,
+    lifetimeValue: 340.80,
     revenueGrowth: Array.from({ length: 12 }, (_, i) => ({
-        date: new Date(Date.now() - (11 - i) * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        date: new Date(Date.now() - (11 - i) * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     revenue: Math.floor(Math.random() * 5000) + 10000
       }));
       subscriptionBreakdown: [
-        { tier: 'free', count: 8934, revenue: 0 };
-        { tier: 'pro', count: 1245, revenue: 36105 };
+        { tier: 'free', count: 8934, revenue: 0 },
+        { tier: 'pro', count: 1245, revenue: 36105 },
         { tier: 'enterprise', count: 234, revenue: 23166 }
-   ];
+   ],
       templateRevenue: [
-        { templateId: 'template-1', name: 'E-commerce Starter', revenue: 2450.00 };
-        { templateId: 'template-2', name: 'SaaS Dashboard', revenue: 1890.50 };
+        { templateId: 'template-1', name: 'E-commerce Starter', revenue: 2450.00 },
+        { templateId: 'template-2', name: 'SaaS Dashboard', revenue: 1890.50 },
         { templateId: 'template-3', name: 'Portfolio Pro', revenue: 1234.75 }
    ]
   }
 }
   private static getMockSystemMetrics(): SystemMetrics {
     return {
-      apiCalls: 145623;
-    errorRate: 0.02;
-    averageResponseTime: 150;
-    uptime: 99.9;
-    activeConnections: 45;
-    databaseConnections: 12;
-    cacheHitRate: 85.5;
+      apiCalls: 145623,
+    errorRate: 0.02,
+    averageResponseTime: 150,
+    uptime: 99.9,
+    activeConnections: 45,
+    databaseConnections: 12,
+    cacheHitRate: 85.5,
     storageUsed: 2.4
   }
 }
   private static getMockContentMetrics(): ContentMetrics {
     return {
-      totalTemplates: 342;
-    pendingReviews: 23;
-    approvedTemplates: 298;
-    rejectedTemplates: 21;
+      totalTemplates: 342,
+    pendingReviews: 23,
+    approvedTemplates: 298,
+    rejectedTemplates: 21,
     topCategories: [
-        { category: 'web-app', count: 89 };
-        { category: 'e-commerce', count: 67 };
-        { category: 'portfolio', count: 54 };
-        { category: 'dashboard', count: 43 };
+        { category: 'web-app', count: 89 },
+        { category: 'e-commerce', count: 67 },
+        { category: 'portfolio', count: 54 },
+        { category: 'dashboard', count: 43 },
         { category: 'landing-page', count: 45 }
-   ];
+   ],
       topFrameworks: [
-        { framework: 'next', count: 134 };
-        { framework: 'react', count: 98 };
-        { framework: 'vue', count: 67 };
-        { framework: 'angular', count: 32 };
+        { framework: 'next', count: 134 },
+        { framework: 'react', count: 98 },
+        { framework: 'vue', count: 67 },
+        { framework: 'angular', count: 32 },
         { framework: 'svelte', count: 11 }
-   ];
-      averageRating: 4.2;
+   ],
+      averageRating: 4.2,
     totalDownloads: 15420
   }
 }

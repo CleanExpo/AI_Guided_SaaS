@@ -4,8 +4,8 @@
 import JSZip from 'jszip';import { saveAs } from 'file-saver';
 import { generateCodeFromComponent } from './generateCode';
 type ComponentInstance = {
-  id: string;
-    type: string;
+  id: string,
+    type: string,
     props: { [key: string]: string }
     };
 export const exportProjectAsZip = (components: ComponentInstance[]) => {

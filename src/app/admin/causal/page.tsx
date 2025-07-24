@@ -9,6 +9,6 @@ export default function CausalPage() {
           <p className="text-gray-600">Causal analysis dashboard is currently under construction.</p>
         </div>
       </div>
-    </div>;
+    </div>
   );
 }

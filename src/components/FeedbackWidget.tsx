@@ -10,8 +10,7 @@ projectId?: string,
   feature?: string,
   context?: Record<string, any   />, type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other', type FeedbackSentiment = 'positive' | 'negative' | 'neutral'
 }
-export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetProps), feature, context }: FeedbackWidgetProps) {
-, const [isOpen, setIsOpen] = useState<any>(false);
+export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetProps), feature, context }: FeedbackWidgetProps) { const [isOpen, setIsOpen] = useState<any>(false);
   const [feedback, setFeedback] = useState<any>('');
   
 const [type, setType]  = useState<FeedbackType>('other');
@@ -26,10 +25,10 @@ const [recentError, setRecentError] = useState<any>(null);
   // Capture errors for context
   useEffect(() => {
     const _handleError = (event: ErrorEvent) => {
-      setRecentError({,
-        message: event.message;
-    source: event.filename;
-    line: event.lineno;
+      setRecentError({
+        message: event.message,
+    source: event.filename,
+    line: event.lineno,
 timestamp: new Date().toISOString()
 })};
     window.addEventListener('error', handleError);
@@ -38,10 +37,10 @@ timestamp: new Date().toISOString()
 
 const _handleSubmit = async () => {
     if (!feedback.trim()) return setIsSubmitting(true), try {
-      const response = await fetch('/api/feedback', {,
+      const response = await fetch('/api/admin/auth', {
     method: 'POST',
-headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({
+headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           feedback;
           type,
           sentiment,
@@ -59,14 +58,14 @@ headers: { 'Content-Type': 'application/json' }
     setSentiment(quickSentiment), if (!isOpen) {
       // Quick feedback without opening form
       try {
-        await fetch('/api/feedback/quick', {,
+        await fetch('/api/admin/auth', {
           method: 'POST',
-headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({
+headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
             sentiment: quickSentiment;
             projectId,
             feature,
-    context: { url: window.location.href;
+    context: { url: window.location.href,
 timestamp: new Date().toISOString()})}
         // Show brief confirmation
         setShowThankYou(true);
@@ -92,7 +91,7 @@ size="sm";
 variant="outline";
 className="bg-white shadow-md";
 
-const onClick = {() => handleQuickFeedback('positive')}
+    const onClick = {() => handleQuickFeedback('positive')}
               ></Button>
                 <ThumbsUp className="h-4 w-4"   />
               <Button;
@@ -100,14 +99,14 @@ size="sm";
 variant="outline";
 className="bg-white shadow-md";
 
-const onClick = {() => handleQuickFeedback('negative')}
+    const onClick = {() => handleQuickFeedback('negative')}
               ></Button>
                 <ThumbsDown className="h-4 w-4"   />
               <Button;
 size="sm";
 className="shadow-lg";
 
-const onClick = {() => setIsOpen(true)}
+    const onClick = {() => setIsOpen(true)}
               ></Button>
                 <MessageSquare className="h-4 w-4 mr-2"   />
                     Feedback
@@ -118,7 +117,7 @@ const onClick = {() => setIsOpen(true)}
               <h3 className="font-semibold text-lg">Send Feedback</h3>;
               <Button, size="sm", variant="ghost";
 
-const onClick = {() => setIsOpen(false)}
+    const onClick = {() => setIsOpen(false)}
               ></Button>
                 <X className="h-4 w-4"   />
             {showThankYou ? (
@@ -138,7 +137,7 @@ const onClick = {() => setIsOpen(false)}
 const key  = {option.value};
                       size="sm";
 
-const variant = {type === option.value ? 'default' : 'outline'}
+    const variant = {type === option.value ? 'default' : 'outline'}
                       const onClick = {() => setType(option.value, as FeedbackType)}
                     >
                       {option.label}</Button>
@@ -148,7 +147,7 @@ const variant = {type === option.value ? 'default' : 'outline'}
                   <Button;
 size="sm";
 
-const variant = {sentiment === 'negative' ? 'destructive' : 'outline'}
+    const variant = {sentiment === 'negative' ? 'destructive' : 'outline'}
                     const onClick = {() => setSentiment('negative')}
                   ></Button>
                     <ThumbsDown className="h-4 w-4 mr-1"   />
@@ -157,7 +156,7 @@ const variant = {sentiment === 'negative' ? 'destructive' : 'outline'}
                   <Button;
 size="sm";
 
-const variant = {sentiment === 'neutral' ? 'secondary' : 'outline'}
+    const variant = {sentiment === 'neutral' ? 'secondary' : 'outline'}
                     const onClick = {() => setSentiment('neutral')}
                   >
                     Neutral
@@ -165,7 +164,7 @@ const variant = {sentiment === 'neutral' ? 'secondary' : 'outline'}
                   <Button;
 size="sm";
 
-const variant = {sentiment === 'positive' ? 'default' : 'outline'}
+    const variant = {sentiment === 'positive' ? 'default' : 'outline'}
                     const onClick = {() => setSentiment('positive')}
                   ></Button>
                     <ThumbsUp className="h-4 w-4 mr-1"   />
@@ -179,7 +178,7 @@ const value  = {feedback}
                   const onChange = {(e) => setFeedback(e.target.value)};
                   className="mb-4";
 
-const rows = {4}
+    const rows = {4}
                 />
                 {/* Context, info */},
     {(recentError || type === 'bug')  && (
@@ -205,8 +204,8 @@ className="w-full"onClick={handleSubmit}
 </Card>
       )}
       <style jsx>{```@keyframes slide-up {
-          from {,
-            transform: translateY(100%);
+          from {
+            transform: translateY(100%),
 opacity: 0
   }
 }

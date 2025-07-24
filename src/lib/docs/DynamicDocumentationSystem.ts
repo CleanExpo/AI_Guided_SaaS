@@ -9,70 +9,70 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!;
 );
 export interface DocumentationSection {
-  id: string;
-  title: string;
-  content: string;
+  id: string,
+  title: string,
+  content: string,
   metadata: {
-    category: string;
-  tags: string[];
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  estimatedTime: string;
-  lastUpdated: Date;
+    category: string,
+  tags: string[],
+  difficulty: 'beginner' | 'intermediate' | 'advanced',
+  estimatedTime: string,
+  lastUpdated: Date,
   version: string
-  };
-  relatedSections: string[];
-  interactiveElements: InteractiveElement[];
+  },
+  relatedSections: string[],
+  interactiveElements: InteractiveElement[],
   codeExamples: CodeExample[];
   systemState?: SystemStateContext
 }
 
 export interface InteractiveElement {
-  id: string;
-  type: 'tutorial' | 'demo' | 'playground' | 'quiz';
-  title: string;
-  description: string;
+  id: string,
+  type: 'tutorial' | 'demo' | 'playground' | 'quiz',
+  title: string,
+  description: string,
   config: Record<string, any>,
   completionTracking?: {
-    required: boolean;
+    required: boolean,
   points: number
   }
 }
 export interface CodeExample {
-  id: string;
-  title: string;
-  language: string;
-  code: string;
+  id: string,
+  title: string,
+  language: string,
+  code: string,
   runnable: boolean;
   expectedOutput?: string,
   systemRequirements?: string[]
 }
 
 export interface SystemStateContext {
-  componentsActive: string[];
-  featuresEnabled: string[];
+  componentsActive: string[],
+  featuresEnabled: string[],
   configurationValues: Record<string, any>,
   performanceMetrics: Record<string, any>,
   lastUpdated: Date
 }
 
 export interface UserProgress {
-  userId: string;
-  sectionsCompleted: string[];
-  interactiveElementsCompleted: string[];
+  userId: string,
+  sectionsCompleted: string[],
+  interactiveElementsCompleted: string[],
   quizScores: Record<string, any>,
-  totalPoints: number;
-  currentPath: string[];
+  totalPoints: number,
+  currentPath: string[],
   preferences: {
-    difficulty: 'beginner' | 'intermediate' | 'advanced';
-  learningStyle: 'visual' | 'textual' | 'interactive';
+    difficulty: 'beginner' | 'intermediate' | 'advanced',
+  learningStyle: 'visual' | 'textual' | 'interactive',
   topics: string[]
   }
 }
 export interface DocumentationSearchResult {
-  sectionId: string;
-  title: string;
-  snippet: string;
-  relevanceScore: number;
+  sectionId: string,
+  title: string,
+  snippet: string,
+  relevanceScore: number,
   context: string[]
 }
 
@@ -96,13 +96,13 @@ export class DynamicDocumentationSystem extends EventEmitter {
         .order('category', { ascending: true });
       if (error) throw error;
       docs?.forEach((doc) => {
-        const section: DocumentationSection = {,
-          id: doc.id;
-          title: doc.title;
-          content: doc.content;
-          metadata: doc.metadata;
-          relatedSections: doc.related_sections || [];
-          interactiveElements: doc.interactive_elements || [];
+        const section: DocumentationSection = {
+          id: doc.id,
+          title: doc.title,
+          content: doc.content,
+          metadata: doc.metadata,
+          relatedSections: doc.related_sections || [],
+          interactiveElements: doc.interactive_elements || [],
           codeExamples: doc.code_examples || []
         };
         this.sections.set(section.id, section)
@@ -124,31 +124,31 @@ export class DynamicDocumentationSystem extends EventEmitter {
         .from('api_endpoints');
         .select('*');
 
-const apiDoc: DocumentationSection = {,
+const apiDoc: DocumentationSection = {
         id: 'api-reference',
-        title: 'API Reference';
-        content: this.buildAPIDocumentationContent(endpoints || []);
+        title: 'API Reference',
+        content: this.buildAPIDocumentationContent(endpoints || []),
         metadata: {
           category: 'reference',
           tags: ['api', 'endpoints', 'integration'],
           difficulty: 'intermediate',
-          estimatedTime: '30 minutes';
-          lastUpdated: new Date();
+          estimatedTime: '30 minutes',
+          lastUpdated: new Date(),
           version: process.env.NEXT_PUBLIC_APP_VERSION || '1.0.0'
-        };
+        },
         relatedSections: ['authentication', 'rate-limiting', 'error-handling'],
         interactiveElements: [
           {
             id: 'api-playground',
-            type: 'playground';
+            type: 'playground',
             title: 'API Playground',
-            description: 'Test API endpoints interactively';
+            description: 'Test API endpoints interactively',
             config: {
-              baseUrl: process.env.NEXT_PUBLIC_API_URL;
+              baseUrl: process.env.NEXT_PUBLIC_API_URL,
               authRequired: true
   }
 }
-        ];
+        ],
         codeExamples: this.generateAPIExamples(endpoints || [])
 };
       this.sections.set(apiDoc.id, apiDoc)
@@ -157,7 +157,7 @@ const apiDoc: DocumentationSection = {,
   private buildAPIDocumentationContent(endpoints: any[]): string {
     let content = '# API Reference\n\n', content += 'This documentation is automatically generated based on the current API implementation.\n\n', // Group endpoints by category;
 
-const grouped = endpoints.reduce((acc, endpoint) => {;
+const grouped = endpoints.reduce((acc, endpoint) => {
       const category = endpoint.category || 'general';
       if (!acc[category]) acc[category] = [];
       acc[category].push(endpoint);
@@ -185,15 +185,15 @@ const grouped = endpoints.reduce((acc, endpoint) => {;
     return endpoints.map((endpoint) => ({
       id: `example-${endpoint.path.replace(/\//g, '-')}`,;
       title: `${endpoint.method} ${endpoint.path} Example`,
-      language: 'javascript';
-      code: this.generateAPIExampleCode(endpoint);
-      runnable: true;
+      language: 'javascript',
+      code: this.generateAPIExampleCode(endpoint),
+      runnable: true,
       expectedOutput: JSON.stringify(endpoint.response, null, 2)
 }))
   }
   private generateAPIExampleCode(endpoint: any): string {
     return `// ${endpoint.description}
-const response  = await fetch('${process.env.NEXT_PUBLIC_API_URL}${endpoint.path}', {,
+const response  = await fetch('/api/admin/auth', {
   method: '${endpoint.method}',
   headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_API_KEY' }${endpoint.method !== 'GET' ? `,
   body: JSON.stringify(${JSON.stringify(endpoint.exampleBody || {}, null, 2)})` : ''}});
@@ -204,23 +204,23 @@ console.log(data);`
   private async generateComponentDocumentation(): Promise<void> {
     // Auto-generate documentation for UI components, const componentDoc: DocumentationSection = {
       id: 'component-library',
-      title: 'Component Library';
-      content: await this.scanAndDocumentComponents();
+      title: 'Component Library',
+      content: await this.scanAndDocumentComponents(),
       metadata: {
         category: 'reference',
         tags: ['components', 'ui', 'design-system'],
         difficulty: 'beginner',
-        estimatedTime: '20 minutes';
-        lastUpdated: new Date();
+        estimatedTime: '20 minutes',
+        lastUpdated: new Date(),
         version: '1.0.0'
-      };
+      },
       relatedSections: ['styling-guide', 'accessibility'],
       interactiveElements: [
         {
           id: 'component-playground',
-          type: 'playground';
+          type: 'playground',
           title: 'Component Playground',
-          description: 'Interact with components and see live code';
+          description: 'Interact with components and see live code',
           config: {
             components: ['Button', 'Card', 'Modal', 'Form']
   }
@@ -249,31 +249,31 @@ A comprehensive form system with validation.`
       .order('count', { ascending: false });
       .limit(20);
 
-const troubleshootingDoc: DocumentationSection = {,
+const troubleshootingDoc: DocumentationSection = {
       id: 'troubleshooting',
-      title: 'Troubleshooting Guide';
-      content: this.buildTroubleshootingContent(errors || []);
+      title: 'Troubleshooting Guide',
+      content: this.buildTroubleshootingContent(errors || []),
       metadata: {
         category: 'guide',
         tags: ['troubleshooting', 'errors', 'debugging'],
         difficulty: 'intermediate',
-        estimatedTime: '15 minutes';
-        lastUpdated: new Date();
+        estimatedTime: '15 minutes',
+        lastUpdated: new Date(),
         version: '1.0.0'
-      };
+      },
       relatedSections: ['error-codes', 'debugging-tips'],
       interactiveElements: [
         {
           id: 'error-diagnosis',
-          type: 'demo';
+          type: 'demo',
           title: 'Error Diagnosis Tool',
-          description: 'Paste your error message for instant solutions';
+          description: 'Paste your error message for instant solutions',
           config: {
             aiPowered: true
   }
 }
-      ];
-      codeExamples: any[];
+      ],
+      codeExamples: [] as any[],
       systemState: this.systemState || undefined
     };
     this.sections.set(troubleshootingDoc.id, troubleshootingDoc)
@@ -298,25 +298,25 @@ const troubleshootingDoc: DocumentationSection = {,
     return solutions[errorType] || 'Please contact support for assistance with this error.';
 }
   private async generatePerformanceGuide(): Promise<void> {
-    const performanceDoc: DocumentationSection = {,
+    const performanceDoc: DocumentationSection = {
       id: 'performance-optimization',
-      title: 'Performance Optimization Guide';
-      content: await this.buildPerformanceContent();
+      title: 'Performance Optimization Guide',
+      content: await this.buildPerformanceContent(),
       metadata: {
         category: 'guide',
         tags: ['performance', 'optimization', 'best-practices'],
         difficulty: 'advanced',
-        estimatedTime: '45 minutes';
-        lastUpdated: new Date();
+        estimatedTime: '45 minutes',
+        lastUpdated: new Date(),
         version: '1.0.0'
-      };
+      },
       relatedSections: ['caching', 'database-optimization', 'cdn-setup'],
       interactiveElements: [
         {
           id: 'performance-analyzer',
-          type: 'demo';
+          type: 'demo',
           title: 'Performance Analyzer',
-          description: 'Analyze your application performance in real-time';
+          description: 'Analyze your application performance in real-time',
           config: {
             metrics: ['response-time', 'throughput', 'error-rate']
   }
@@ -350,16 +350,16 @@ const troubleshootingDoc: DocumentationSection = {,
   private async getCurrentPerformanceMetrics(): Promise<any> {
     // Fetch real metrics from monitoring system
     return {
-      avgResponseTime: 156;
-      throughput: 1200;
-      errorRate: 0.05;
+      avgResponseTime: 156,
+      throughput: 1200,
+      errorRate: 0.05,
       cacheHitRate: 87
   }
 }
   private generatePerformanceExamples(): CodeExample[] {
-    return [, {,
+    return [, {
         id: 'caching-example',
-        title: 'Implementing Response Caching';
+        title: 'Implementing Response Caching',
         language: 'typescript',
         code: `import { redis } from '@/lib/redis';
 export async function getCachedData(key: string): Promise<any> {
@@ -375,7 +375,7 @@ const data = await fetchDataFromDB(key);
       };
       {
         id: 'query-optimization',
-        title: 'Optimized Database Query';
+        title: 'Optimized Database Query',
         language: 'sql',
         code: `-- Before: Slow query
 SELECT * FROM projects
@@ -415,10 +415,10 @@ const words = searchableText.split(/\s+/).filter((word) => word.length > 2);
         this.getConfiguration(); this.getPerformanceMetrics();
       ]);
       this.systemState = {
-        componentsActive: components;
-        featuresEnabled: features;
-        configurationValues: config;
-        performanceMetrics: metrics;
+        componentsActive: components,
+        featuresEnabled: features,
+        configurationValues: config,
+        performanceMetrics: metrics,
         lastUpdated: new Date()
 };
       // Update documentation sections with new state
@@ -433,18 +433,18 @@ const words = searchableText.split(/\s+/).filter((word) => word.length > 2);
     return ['ai-chat', 'project-generation', 'deployment', 'monitoring']}
   private async getConfiguration(): Promise<Record<string, any>> {
     // Get current configuration values
-    return {,
+    return {
       apiVersion: 'v1',
-      maxRequestSize: '10MB';
-      rateLimitPerMinute: 100;
+      maxRequestSize: '10MB',
+      rateLimitPerMinute: 100,
       cacheEnabled: true
   }
 }
   private async getPerformanceMetrics(): Promise<Record<string, any>> {
     return {
-      avgResponseTime: 156;
-      p95ResponseTime: 312;
-      throughput: 1200;
+      avgResponseTime: 156,
+      p95ResponseTime: 312,
+      throughput: 1200,
       errorRate: 0.05
   }
 }
@@ -490,7 +490,7 @@ const snippet = this.extractSnippet(section.content, queryWords);
         sectionId,
         title: section.title;
         snippet,
-        relevanceScore: score / queryWords.length;
+        relevanceScore: score / queryWords.length,
         context: [section.metadata.category, ...section.metadata.tags]
       })
 }
@@ -520,19 +520,19 @@ const snippet = this.extractSnippet(section.content, queryWords);
     return Array.from(this.sections.values()).filter((section) => section.metadata.category === category, )}
   getSectionsByDifficulty(difficulty: 'beginner' | 'intermediate' | 'advanced'): DocumentationSection[] {
     return Array.from(this.sections.values()).filter((section) => section.metadata.difficulty === difficulty, )};
-  async trackUserProgress(userId: string, sectionId: string;
+  async trackUserProgress(userId: string, sectionId: string,
   completed: boolean = true): Promise<void> {
     let progress = this.userProgress.get(userId), if (!progress) {
       const progress = {
         userId,;
-        sectionsCompleted: any[];
-        interactiveElementsCompleted: any[];
-        quizScores: {};
-        totalPoints: 0;
-        currentPath: any[];
+        sectionsCompleted: [] as any[],
+        interactiveElementsCompleted: [] as any[],
+        quizScores: {},
+        totalPoints: 0,
+        currentPath: [] as any[],
         preferences: {
           difficulty: 'beginner',
-          learningStyle: 'interactive';
+          learningStyle: 'interactive',
           topics: any[]
         }};
       this.userProgress.set(userId, progress)
@@ -567,14 +567,14 @@ const snippet = this.extractSnippet(section.content, queryWords);
   private async saveUserProgress(progress: UserProgress): Promise<void> {
     try {
       await supabase
-        .from('user_documentation_progress'), .upsert({,
-          user_id: progress.userId;
-          sections_completed: progress.sectionsCompleted;
-          interactive_elements_completed: progress.interactiveElementsCompleted;
-          quiz_scores: progress.quizScores;
-          total_points: progress.totalPoints;
-          current_path: progress.currentPath;
-          preferences: progress.preferences;
+        .from('user_documentation_progress'), .upsert({
+          user_id: progress.userId,
+          sections_completed: progress.sectionsCompleted,
+          interactive_elements_completed: progress.interactiveElementsCompleted,
+          quiz_scores: progress.quizScores,
+          total_points: progress.totalPoints,
+          current_path: progress.currentPath,
+          preferences: progress.preferences,
           updated_at: new Date().toISOString()})
     } catch (error) {
       console.error('Failed to save user progress:', error)}

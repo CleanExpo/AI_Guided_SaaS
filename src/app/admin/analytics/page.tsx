@@ -5,10 +5,10 @@ import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface AdminUser {
-  id: string;
-  email: string;
-  name: string;
-  lastActive: Date;
+  id: string,
+  email: string,
+  name: string,
+  lastActive: Date,
   role: string;
 }
 
@@ -22,9 +22,9 @@ export default function AdminAnalyticsPage() {
       setUsers([
         { 
           id: '1',
-          email: 'admin@example.com';
+          email: 'admin@example.com',
           name: 'Admin User',
-          lastActive: new Date();
+          lastActive: new Date(),
           role: 'admin' 
         }
       ]);
@@ -64,6 +64,6 @@ export default function AdminAnalyticsPage() {
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
   );
 }

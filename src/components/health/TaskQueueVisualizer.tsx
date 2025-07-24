@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Clock, CheckCircle, XCircle } from 'lucide-react';
 
 export function TaskQueueVisualizer() {
-  const tasks = [;
-    { id: '1', name: 'Process user input', status: 'completed', duration: '2.3s' };
-    { id: '2', name: 'Generate project scaffold', status: 'running', duration: '5.1s' };
+  const tasks = [
+    { id: '1', name: 'Process user input', status: 'completed', duration: '2.3s' },
+    { id: '2', name: 'Generate project scaffold', status: 'running', duration: '5.1s' },
     { id: '3', name: 'Deploy to staging', status: 'pending', duration: '-' }
   ];
 
@@ -34,6 +34,6 @@ export function TaskQueueVisualizer() {
           ))}
         </div>
       </CardContent>
-    </Card>;
+    </Card>
   );
 }

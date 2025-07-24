@@ -10,17 +10,17 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Shield, AlertTriangle, CheckCircle2, XCircle, RefreshCw, Zap, Activity, Settings, Info } from 'lucide-react';
 interface EPCStatus {
-env_check: 'pass' | 'fail' | 'warning';
-  score: number;
+env_check: 'pass' | 'fail' | 'warning',
+  score: number,
   issues: string[];
   recommendations?: string[]
 };
 interface TelemetryStats {
-totalInferences: number;
-  blocked: number;
-  failed: number;
-  successful: number;
-  averageDuration: number;
+totalInferences: number,
+  blocked: number,
+  failed: number,
+  successful: number,
+  averageDuration: number,
   totalCost: number
 };
 export function InferenceSafeMode() {
@@ -37,7 +37,7 @@ const [autoHeal, setAutoHeal]  = useState<any>(false);
 const [healingInProgress, setHealingInProgress] = useState<any>(false);
   // Fetch EPC status;
 
-const _checkEnvironment = async () => {;
+const _checkEnvironment = async () => {
     setChecking(true);
     try {
       const response  = await fetch('/api/epc/check');
@@ -58,10 +58,10 @@ const _fetchStats = async () => {
 
 const _runHealing = async () => {
     setHealingInProgress(true), try {
-      const response = await fetch('/api/epc/heal', {,
+      const response = await fetch('/api/admin/auth', {
     method: 'POST',
-headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({ autoApprove: autoHeal })};
+headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ autoApprove: autoHeal })};
       
 const result = await response.json();
       // Show results;
@@ -70,7 +70,7 @@ if (result.success) {
 }} catch (error) {
       console.error('Failed to run, healing:', error)} finally {
     setHealingInProgress(false)}
-  useEffect(() => {;
+  useEffect(() => {
     checkEnvironment(), fetchStats(); // Refresh stats every 30 seconds;
 
 const _interval = setInterval(fetchStats, 30000);
@@ -139,7 +139,7 @@ const checked = {enabled}
 variant="outline";
 size="sm";
 
-const onClick = {checkEnvironment}
+    const onClick = {checkEnvironment}
                   const disabled = {checking}
                    />
                   <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`}   />``</RefreshCw>
@@ -167,13 +167,13 @@ li>...and {status.issues.length - 3} more</li>
                 <Switch;
 id="auto-heal";
 
-const checked = {autoHeal}
+    const checked = {autoHeal}
                   const onCheckedChange = {setAutoHeal}    />
               {status?.issues && status.issues.length > 0  && (Button; const onClick = {runHealing}
                   const disabled  = {healingInProgress};
                   className="w-full";
 
-const variant = {autoHeal ? 'default' : 'outline'}
+    const variant = {autoHeal ? 'default' : 'outline'}
                 >
                   {healingInProgress ? (</Button>
                     <React.Fragment>RefreshCw className="h-4 w-4 mr-2 animate-spin" />Healing in progress...</RefreshCw></React>

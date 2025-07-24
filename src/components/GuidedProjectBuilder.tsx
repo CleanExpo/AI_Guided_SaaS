@@ -11,20 +11,20 @@ import { Sparkles, ArrowRight, ArrowLeft, CheckCircle, Target, Code, Palette, Da
 import { cn } from '@/utils/cn';
 import { useChat } from 'ai/react';
 interface Step {
-id: string;
-  title: string;
-  description: string;
+id: string,
+  title: string,
+  description: string,
   icon: React.ElementType
-e;
+e,
   fields: Field[];
   helper?: string
 };
 interface Field {
-name: string;
-  label: string;
+name: string,
+  label: string,
   type: 'text' | 'textarea' | 'select' | 'multiselect' | 'radio';
   placeholder?: string,
-  options?: { value: string;
+  options?: { value: string,
   label: string
 }[]
   required?: boolean;
@@ -35,32 +35,32 @@ onComplete: (projectData: any: any) => void;
   initialData?: any
 }
 const steps: Step[]  = [
-  {,
+  {
   id: 'project-type',
-    title: 'What would you like to build?';
-    description: 'Let\'s start with understanding your vision';
-  icon: Target;
+    title: 'What would you like to build?',
+    description: 'Let\'s start with understanding your vision',
+  icon: Target,
     fields: [
       {
   name: 'projectType',
-        label: 'Project Type';
+        label: 'Project Type',
         type: 'radio',
         options: [
-          { value: 'website' label: '🌐 Website' };
-          { value: 'webapp' label: '💻 Web Application' };
+          { value: 'website' label: '🌐 Website' },
+          { value: 'webapp' label: '💻 Web Application' },
           { value: 'mobile' label: '📱 Mobile App' };
-          { value: 'api' label: '🔌 API Service' };
-          { value: 'dashboard' label: '📊 Dashboard' };
+          { value: 'api' label: '🔌 API Service' },
+          { value: 'dashboard' label: '📊 Dashboard' },
           { value: 'ecommerce' label: '🛒 E-commerce' }
-   ];
+   ],
         required: true
       };
       {
         name: 'projectName',
-        label: 'Project Name';
+        label: 'Project Name',
         type: 'text',
-        placeholder: 'My Awesome Project';
-        required: true;
+        placeholder: 'My Awesome Project',
+        required: true,
     validation: (value) => {
           if (!value || value.length < 3) return 'Project name must be at least 3 characters'; return null; }
 }
@@ -69,130 +69,130 @@ const steps: Step[]  = [
   },
   {
     id: 'requirements',
-    title: 'Describe your project';
+    title: 'Describe your project',
     description: 'Tell us about your idea in natural language',
-  icon: MessageSquare;
+  icon: MessageSquare,
     fields: [
       {
   name: 'description',
-        label: 'Project Description';
+        label: 'Project Description',
         type: 'textarea',
-        placeholder: 'I want to build a platform where users can...';
-        required: true;
+        placeholder: 'I want to build a platform where users can...',
+        required: true,
     validation: (value) => {
-          if (!value || value.length < 50) return 'Please provide at least 50 characters to describe your project'; return null; },
+          if (!value || value.length < 50) return 'Please provide at least 50 characters to describe your project'; return null, },
       {
         name: 'targetAudience',
-        label: 'Who is this for?';
+        label: 'Who is this for?',
         type: 'text',
 placeholder: 'Small businesses, students, developers...',
         required: true
 }
-    ];
+    ],
     helper: 'Describe your project naturally, as if explaining to a friend. The AI will understand!'
   },
   {
     id: 'features',
-    title: 'Core features & functionality';
+    title: 'Core features & functionality',
     description: 'What key features should your project have?',
-  icon: Code;
+  icon: Code,
     fields: [
       {
   name: 'features',
-        label: 'Key Features';
+        label: 'Key Features',
         type: 'multiselect',
         options: [
-          { value: 'auth' label: '🔐 User Authentication' };
-          { value: 'payments' label: '💳 Payment Processing' };
+          { value: 'auth' label: '🔐 User Authentication' },
+          { value: 'payments' label: '💳 Payment Processing' },
           { value: 'realtime' label: '⚡ Real-time Updates' };
-          { value: 'notifications' label: '🔔 Notifications' };
+          { value: 'notifications' label: '🔔 Notifications' },
           { value: 'analytics' label: '📈 Analytics & Reports' };
-          { value: 'social' label: '👥 Social Features' };
+          { value: 'social' label: '👥 Social Features' },
           { value: 'search' label: '🔍 Search & Filters' };
-          { value: 'media' label: '🖼️ Media Upload' };
-          { value: 'chat' label: '💬 Chat/Messaging' };
+          { value: 'media' label: '🖼️ Media Upload' },
+          { value: 'chat' label: '💬 Chat/Messaging' },
           { value: 'calendar' label: '📅 Calendar/Scheduling' }
-   ];
+   ],
         required: true
       };
       {
         name: 'customFeatures',
-        label: 'Other features?';
+        label: 'Other features?',
         type: 'textarea',
 placeholder: 'Any specific features not listed above...'
 }
-    ];
+    ],
     helper: 'Select all features you need. You can always add more later!'
   };
   {
     id: 'design',
-    title: 'Design preferences';
+    title: 'Design preferences',
     description: 'How should your project look and feel?',
-  icon: Palette;
+  icon: Palette,
     fields: [
       {
   name: 'designStyle',
-        label: 'Design Style';
+        label: 'Design Style',
         type: 'radio',
         options: [
-          { value: 'modern' label: '✨ Modern & Clean' };
-          { value: 'playful' label: '🎨 Playful & Colorful' };
-          { value: 'professional' label: '💼 Professional & Corporate' };
-          { value: 'minimal' label: '⚪ Minimal & Simple' };
+          { value: 'modern' label: '✨ Modern & Clean' },
+          { value: 'playful' label: '🎨 Playful & Colorful' },
+          { value: 'professional' label: '💼 Professional & Corporate' },
+          { value: 'minimal' label: '⚪ Minimal & Simple' },
           { value: 'dark' label: '🌙 Dark & Elegant' }
-   ];
+   ],
         required: true
       };
       {
         name: 'primaryColor',
-        label: 'Primary Brand Color';
+        label: 'Primary Brand Color',
         type: 'select',
         options: [
-          { value: 'blue' label: '🔵 Blue' };
-          { value: 'green' label: '🟢 Green' };
+          { value: 'blue' label: '🔵 Blue' },
+          { value: 'green' label: '🟢 Green' },
           { value: 'purple' label: '🟣 Purple' };
-          { value: 'red' label: '🔴 Red' };
-          { value: 'orange' label: '🟠 Orange' };
+          { value: 'red' label: '🔴 Red' },
+          { value: 'orange' label: '🟠 Orange' },
           { value: 'teal' label: '🟦 Teal' }
-   ];
+   ],
         required: true
 }
-    ];
+    ],
     helper: 'This helps the AI create a cohesive design that matches your brand.'
   };
   {
     id: 'technical',
-    title: 'Technical preferences';
+    title: 'Technical preferences',
     description: 'Any specific technical requirements?',
-  icon: Database;
+  icon: Database,
     fields: [
       {
   name: 'hostingPreference',
-        label: 'Hosting Preference';
+        label: 'Hosting Preference',
         type: 'radio',
         options: [
-          { value: 'vercel' label: '▲ Vercel (Recommended)' };
-          { value: 'aws' label: '☁️ AWS' };
-          { value: 'gcp' label: '🌐 Google Cloud' };
-          { value: 'selfhost' label: '🖥️ Self-hosted' };
+          { value: 'vercel' label: '▲ Vercel (Recommended)' },
+          { value: 'aws' label: '☁️ AWS' },
+          { value: 'gcp' label: '🌐 Google Cloud' },
+          { value: 'selfhost' label: '🖥️ Self-hosted' },
           { value: 'unsure' label: '🤷 Not sure yet' }
-   ];
+   ],
         required: true
       };
       {
         name: 'integrations',
-        label: 'Third-party Integrations';
+        label: 'Third-party Integrations',
         type: 'multiselect',
         options: [
-          { value: 'stripe' label: 'Stripe Payments' };
-          { value: 'google' label: 'Google Services' };
+          { value: 'stripe' label: 'Stripe Payments' },
+          { value: 'google' label: 'Google Services' },
           { value: 'slack' label: 'Slack' };
-          { value: 'email' label: 'Email Service' };
-          { value: 'sms' label: 'SMS/Twilio' };
+          { value: 'email' label: 'Email Service' },
+          { value: 'sms' label: 'SMS/Twilio' },
           { value: 'ai' label: 'AI/ML Services' }
    ]
 }
-    ];
+    ],
     helper: 'Don\'t worry if you\'re unsure - we can help you decide!'
 }
 ];
@@ -219,8 +219,7 @@ const _validateStep = (): void => { const stepErrors: Record<string, string> = {
       if (field.required && !formData[field.name]) {
         stepErrors[field.name] = `${field.label} is required`
   }
-      if (field.validation) {
-, const _error = field.validation(formData[field.name]), if (error) stepErrors[field.name] = error
+      if (field.validation) { const _error = field.validation(formData[field.name]), if (error) stepErrors[field.name] = error
 }});
     setErrors(stepErrors);
     return Object.keys(stepErrors).length === 0;
@@ -242,7 +241,7 @@ if (errors[fieldName]) {
     const _stepData = step.fields.reduce((acc, field) => {
       acc[field.name] = formData[field.name]
       return acc}, {} as any)
-    await append({,
+    await append({
       role: 'user',
       content: `Based on the project data so far: ${JSON.stringify(formData)}, suggest helpful tips, for: ${step.title}`
   })};
@@ -250,18 +249,18 @@ if (errors[fieldName]) {
 const _processProjectData = async () => {
     try {;
       // Transform guided data into project requirements; const _projectRequirements = {
-        name: formData.projectName, type: formData.projectType;
-    description: formData.description;
-    targetAudience: formData.targetAudience;
+        name: formData.projectName, type: formData.projectType,
+    description: formData.description,
+    targetAudience: formData.targetAudience,
     features: [...(formData.features || []), ...(formData.customFeatures ? [formData.customFeatures] : any[])],
     design: {
-  style: formData.designStyle;
+  style: formData.designStyle,
 primaryColor: formData.primaryColor
-        };
+        },
     technical: {
-          hosting: formData.hostingPreference;
+          hosting: formData.hostingPreference,
 integrations: formData.integrations || []
-        };
+        },
         aiGenerated: true
 }
       onComplete(projectRequirements)
@@ -361,7 +360,7 @@ const name  = {field.name}
                           <input;
 type="checkbox";
 
-const value = {option.value}
+    const value = {option.value}
                             const checked = {formData[field.name]?.includes(option.value) || false}
                             const onChange = {(e) =   /> {
                               const values = formData[field.name] || [], if (e.target.checked) {
@@ -421,7 +420,7 @@ const onClick = {handleNext}
     </any>
   }
 </Button>
-        </motion.div>;
+        </motion.div>
     );
 </div>
 </AnimatePresence>

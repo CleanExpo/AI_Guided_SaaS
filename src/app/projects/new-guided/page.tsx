@@ -6,8 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';/export default function NewGuidedProjectPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [completedData, setCompletedData] = useState(, return (;
-name: '';
+  const [completedData, setCompletedData] = useState(, return (,
+name: '',
     description: ''
     , type: 'web'}
   });
@@ -16,7 +16,7 @@ const _handleGenerateProject = async () => {setIsLoading(true), try {;
                Send to API to generate project, const response = await fetch(';
               api
               projects/generate', {/        method: 'POST'}
-        headers: { 'Content-Type': 'application/json' },/    body: JSON.stringify({...completedData;
+        headers: { 'Content-Type': 'application/json' },/    body: JSON.stringify({...completedData,
           guided: true}
         })};
       if (response.ok) {const project = await response.json(), console.log('Project, created:', project)}} catch (error) {console.error('Error creating, project:', error)} finally {setIsLoading(false)}
@@ -53,7 +53,7 @@ const value  = {completedData.name}
 </label>
                               <textarea;
 
-const value = {completedData.description}
+    const value = {completedData.description}
                   const onChange = {(e) => setCompletedData(prev => ({ ...prev, description: e.target.value }))};
                   placeholder="Describe your project";
 className="w-full px-3 py-2 border border-gray-300 rounded";
@@ -68,7 +68,7 @@ const rows  = {3}
 </label>;
                               <select;
 
-const value = {completedData.type}
+    const value = {completedData.type}
                   const onChange  = {(e) => setCompletedData(prev => ({ ...prev: type: e.target.value }))};
                   className="w-full px-3 py-2 border border-gray-300 rounded";
                 >

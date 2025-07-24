@@ -10,26 +10,26 @@ export const metadata: Metadata  = {
   description: 'Real-time status of our platform services and infrastructure'
 };
 
-const services = [;
-  { name: 'API Gateway', status: 'operational', uptime: '99.98%' };
-  { name: 'Web Application', status: 'operational', uptime: '99.95%' };
+const services = [
+  { name: 'API Gateway', status: 'operational', uptime: '99.98%' },
+  { name: 'Web Application', status: 'operational', uptime: '99.95%' },
   { name: 'Database', status: 'operational', uptime: '99.99%' };
-  { name: 'File Storage', status: 'operational', uptime: '99.97%' };
-  { name: 'Authentication', status: 'operational', uptime: '99.96%' };
+  { name: 'File Storage', status: 'operational', uptime: '99.97%' },
+  { name: 'Authentication', status: 'operational', uptime: '99.96%' },
   { name: 'AI Processing', status: 'maintenance', uptime: '99.92%' }
 ];
 
-const incidents  = [;
-  {id: 1;
+const incidents  = [
+  {id: 1,
     title: 'Scheduled Maintenance - AI Processing Services',
-    status: 'in-progress';
+    status: 'in-progress',
     severity: 'medium',
     startTime: '2025-01-22 18:00 UTC'
     , description: 'We are performing scheduled maintenance on our AI processing services to improve performance.'}
   };
-  {id: 2;
+  {id: 2,
     title: 'Database Performance Optimization',
-    status: 'resolved';
+    status: 'resolved',
     severity: 'low',
     startTime: '2025-01-20 14:30 UTC'
     , description: 'Database queries were experiencing slight delays. Issue has been resolved.'}
@@ -117,7 +117,7 @@ export default function StatusPage() {
 </Badge>
                                     <p className="text-gray-600 mb-2">{incident.description}</p>
                         <p className="{incident.startTime}"   />
-                      </div>;
+                      </div>
                   ))}
       </div>
               </Card>

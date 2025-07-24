@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 import os from 'os';
 import { performance } from 'perf_hooks';
 export interface HealthCheckResult {
-  name: string;
+  name: string,
   status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown';
   responseTime?: number,
   details?,
@@ -12,25 +12,24 @@ export interface HealthCheckResult {
 };
 export interface SystemMetrics {
   cpu: {
-  usage: number;
-  cores: number;
+  usage: number,
+  cores: number,
   loadAverage: number[]
 }
   memory: {
     total: number, used: number, free: number, percentage: number
-  };
+  },
   disk: {
     total: number, used: number, free: number, percentage: number
-  };
+  },
   uptime: number
 };
 export interface HealthStatus {
-  status: 'healthy' | 'unhealthy' | 'degraded';
-  checks: HealthCheckResult[];
-  metrics: SystemMetric
-s;
-    version: string;
-  environment: string;
+  status: 'healthy' | 'unhealthy' | 'degraded',
+  checks: HealthCheckResult[], metrics: SystemMetric
+s,
+    version: string,
+  environment: string,
   timestamp: Date
 };
 export type HealthCheck = () => Promise<HealthCheckResult>
@@ -58,7 +57,7 @@ unregisterCheck(name: string) {
   async runAllChecks(): Promise<any> {
     const _startTime = performance.now(); const results: HealthCheckResult[] = [], // Run all checks in parallel;
 
-const _checkPromises = Array.from(this.checks.entries()).map(async ([name, check]) => {;
+const _checkPromises = Array.from(this.checks.entries()).map(async ([name, check]) => {
       const _checkStart = performance.now();
       try {
         const result = await check();
@@ -69,7 +68,7 @@ const _checkPromises = Array.from(this.checks.entries()).map(async ([name, check
           name,
           status: 'unhealthy',
           error: error instanceof Error ? error.message : 'Unknown error',
-          responseTime: performance.now() - checkStart;
+          responseTime: performance.now() - checkStart,
     timestamp: new Date()})})
     await Promise.all(checkPromises);
     // Get system metrics;
@@ -84,12 +83,12 @@ const _degradedCount = results.filter((r) => r.status === 'degraded').length;
     if (unhealthyCount > 0) {
       overallStatus = 'unhealthy'} else if (degradedCount > 0) {
       overallStatus = 'degraded'}
-    const status: HealthStatus  = {,
-      status: overallStatus;
+    const status: HealthStatus  = {
+      status: overallStatus,
     checks: results;
       metrics,
-      version: this.version;
-    environment: this.environment;
+      version: this.version,
+    environment: this.environment,
     timestamp: new Date()}
     this.lastStatus = status
     this.emit('health:checked', status);
@@ -132,29 +131,28 @@ stopPeriodicChecks() {
 const _usedMemory = totalMemory - freeMemory;
     // Calculate CPU usage;
 
-const _cpuUsage  = cpus.reduce((acc, cpu) => {;
+const _cpuUsage  = cpus.reduce((acc, cpu) => {
       const _total = Object.values(cpu.times).reduce((a, b) => a + b, 0);
 
 const _idle = cpu.times.idle;
       return acc + ((total - idle) / total) * 100;
 }, 0) / cpus.length
     return {
-      cpu: {,
-  usage: cpuUsage;
-    cores: cpus.length;
-    loadAverage: os.loadavg()};
+      cpu: {
+  usage: cpuUsage,
+    cores: cpus.length,
+    loadAverage: os.loadavg()},
     memory: {
-        total: totalMemory;
-    used: usedMemory;
-    free: freeMemory;
+        total: totalMemory,
+    used: usedMemory,
+    free: freeMemory,
     percentage: (usedMemory / totalMemory) * 100
-      };
+      },
     disk: {
-        // This is a placeholder - real disk usage would require additional dependencies, total: 0;
-    used: 0;
-    free: 0;
-    percentage: 0
-      };
+        // This is a placeholder - real disk usage would require additional dependencies, total: 0,
+    used: 0,
+    free: 0,
+    percentage: 0 }
       uptime: os.uptime()}
   /**
    * Setup default health checks
@@ -176,7 +174,7 @@ const _idle = cpu.times.idle;
         status,
     details: {
   cpu: `${metrics.cpu.usage.toFixed(1)}%`,
-memory: `${metrics.memory.percentage.toFixed(1)}%`;
+memory: `${metrics.memory.percentage.toFixed(1)}%`,
 uptime: `${Math.floor(metrics.uptime / 3600)}h`,``
           // issues
         },
@@ -195,13 +193,13 @@ const heapPercentage = (heapUsed / heapTotal) * 100;
         name: 'process';
         status,
     details: {
-  pid: process.pid;
+  pid: process.pid,
     uptime: `${Math.floor(process.uptime())}s`,
 memory: {
             heapUsed: `${heapUsed.toFixed(2)}MB`,
-heapTotal: `${heapTotal.toFixed(2)}MB`;
+heapTotal: `${heapTotal.toFixed(2)}MB`,
 percentage: `${heapPercentage.toFixed(1)}%`
-};
+},
         timestamp: new Date()})}
 // Pre-configured health checks for common services;
 export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () => {
@@ -210,14 +208,14 @@ export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () => 
     await db.query('SELECT 1');
         return {
       name: 'database',
-      status: 'healthy';
-      responseTime: performance.now() - start;
+      status: 'healthy',
+      responseTime: performance.now() - start,
     timestamp: new Date()} catch (error) {
     return {
       name: 'database',
-      status: 'unhealthy';
+      status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Database connection failed',
-      responseTime: performance.now() - start;
+      responseTime: performance.now() - start,
     timestamp: new Date()}
 
 export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => {
@@ -225,26 +223,26 @@ export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => 
     await redis.ping();
         return {
       name: 'redis',
-      status: 'healthy';
-      responseTime: performance.now() - start;
+      status: 'healthy',
+      responseTime: performance.now() - start,
     timestamp: new Date()} catch (error) {
     return {
       name: 'redis',
-      status: 'unhealthy';
+      status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Redis connection failed',
-      responseTime: performance.now() - start;
+      responseTime: performance.now() - start,
     timestamp: new Date()}
 
 export const _createExternalServiceHealthCheck = (
-    name: string;
-    url: string;
+    name: string,
+    url: string,
     timeout: number = 5000
 ): HealthCheck: any => async () => {
   const _start = performance.now(), try {;
     const controller = new AbortController(); const _timeoutId = setTimeout(() => controller.abort(); timeout);
     
-const response  = await fetch(url, {,
-      signal: controller.signal;
+const response  = await fetch('/api/admin/auth', {
+      signal: controller.signal,
     method: 'GET'
     })
     clearTimeout(timeoutId);
@@ -257,7 +255,7 @@ const _responseTime = performance.now() - start;
         responseTime,
     details: {
   statusCode: response.status
-        };
+        },
         timestamp: new Date()} else if (response.status >= 500) {
       return {
         name;
@@ -271,12 +269,12 @@ timestamp: new Date()} else {
         responseTime,
     details: {
   statusCode: response.status
-        };
+        },
         timestamp: new Date()} catch (error) { return {
       name;
       status: 'unhealthy',
       error: error instanceof Error ? error.message : 'Service unreachable',
-      responseTime: performance.now() - start;
+      responseTime: performance.now() - start,
     timestamp: new Date()}
 // Singleton instance;
 let healthCheckService: HealthCheckService | null = null;

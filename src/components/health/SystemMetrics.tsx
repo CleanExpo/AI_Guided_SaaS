@@ -3,9 +3,9 @@
 import React from 'react';
 
 interface SystemMetricsData {
-  cpu: number;
-  memory: number;
-  disk: number;
+  cpu: number,
+  memory: number,
+  disk: number,
   network: number;
 }
 
@@ -14,10 +14,10 @@ interface SystemMetricsProps {
 }
 
 export function SystemMetrics({ metrics }: SystemMetricsProps) {
-  const defaultMetrics: SystemMetricsData = {,
-    cpu: 45;
-    memory: 62;
-    disk: 78;
+  const defaultMetrics: SystemMetricsData = {
+    cpu: 45,
+    memory: 62,
+    disk: 78,
     network: 23
   };
   
@@ -41,6 +41,6 @@ export function SystemMetrics({ metrics }: SystemMetricsProps) {
         <h3 className="text-sm font-medium text-gray-500">Network I/O</h3>
         <p className="mt-1 text-2xl font-semibold">{data.network.toFixed(1)} MB/s</p>
       </div>
-    </div>;
+    </div>
   );
 }

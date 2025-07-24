@@ -85,14 +85,14 @@ const label =;
         segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
       breadcrumbs.push({
         label,
-        href: isLast ? undefined : currentPath;
+        href: isLast ? undefined : currentPath,
 current: isLast
       })};
     return breadcrumbs;
 };
   return <Breadcrumb items={generateBreadcrumbs()} className={className}   />}
 // Navigation Menu Components
-interface NavItem {,
+interface NavItem {
 label: string;
   href?: string,
   icon?: React.ReactNode,
@@ -117,7 +117,7 @@ export function NavigationMenu({
   const pathname = usePathname(); const [openDropdowns, setOpenDropdowns] = React.useState<Set<string>>(, </Set>;
     new Set();
   
-const toggleDropdown = (label: string) => {;
+const toggleDropdown = (label: string) => {
     const newOpenDropdowns = new Set(openDropdowns);
     if (newOpenDropdowns.has(label)) {
       newOpenDropdowns.delete(label)
@@ -126,32 +126,32 @@ const toggleDropdown = (label: string) => {;
     setOpenDropdowns(newOpenDropdowns)
 };
   
-const isActive = (href?: string) => {;
+const isActive = (href?: string) => {
     if (!href) return false, return pathname === href || (href !== '/' && pathname.startsWith(href))};
-  
-const variantClasses = {
-    default: {,
-      container: '';
+
+    const variantClasses = {
+    default: {
+      container: '',
       item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
-      active: 'bg-brand-primary-100 text-brand-primary-900 dark:bg-brand-primary-900 dark:text-brand-primary-100';
+      active: 'bg-brand-primary-100 text-brand-primary-900 dark:bg-brand-primary-900 dark:text-brand-primary-100',
 inactive: 'text-muted-foreground hover:text-foreground hover:bg-accent'
-    };
+    },
     pills: {
       container: 'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg',
-      item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors';
+      item: 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
       active: 'bg-background text-foreground shadow-sm',
 inactive: 'text-muted-foreground hover:text-foreground'
-    };
+    },
     underline: {
       container: 'border-b border-border',
-      item: 'px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent';
+      item: 'px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent',
       active: 'text-brand-primary-600 border-brand-primary-600',
 inactive: 'text-muted-foreground hover:text-foreground hover:border-border'
     }};
   
 const currentVariant  = variantClasses[variant];
 
-const renderNavItem = (item: NavItem, level = 0) => {;
+const renderNavItem = (item: NavItem, level = 0) => {
     const hasChildren  = item.children && item.children.length > 0; const isDropdownOpen = openDropdowns.has(item.label); const active  = isActive(item.href);
 
 const itemContent = (
@@ -222,7 +222,7 @@ className={itemClasses}
 </nav>
       )}
 // Mobile Navigation
-interface MobileNavigationProps {,
+interface MobileNavigationProps {
 items: NavItem[];
   trigger?: React.ReactNode,
   className?: string,
@@ -273,13 +273,13 @@ const onClick = {() => setIsOpen(false)};
 const items  = {items};
             orientation="vertical";
 
-const onItemClick = {handleItemClick}   />
+    const onItemClick = {handleItemClick}   />
 </div>
       )}
 // Pagination Component
-interface PaginationProps {,
-currentPage: number;
-  totalPages: number;
+interface PaginationProps {
+currentPage: number,
+  totalPages: number,
   onPageChange: (page: number) => void;
   showFirstLast?: boolean,
   showPrevNext?: boolean,
@@ -294,7 +294,7 @@ export function Pagination({
   showFirstLast = true, showPrevNext = true, maxVisiblePages = 5;
   className
 }: PaginationProps) {
-  const getVisiblePages = (): (number | string)[] => {;
+  const getVisiblePages = (): (number | string)[] => {
     const pages: (number | string)[] = []; const halfVisible = Math.floor(maxVisiblePages / 2); let start = Math.max(1, currentPage - halfVisible);
     let end = Math.min(totalPages, currentPage + halfVisible);
     // Adjust if we're near the beginning or end;
@@ -326,7 +326,7 @@ const visiblePages = getVisiblePages();
       {showFirstLast && currentPage > 1 && (;
         <ButtonEnhanced, variant="outline", size="sm";
 
-const onClick = {() => onPageChange(1)}
+    const onClick = {() => onPageChange(1)}
         >
           First
 </ButtonEnhanced>
@@ -346,7 +346,7 @@ const onClick  = {() => onPageChange(currentPage - 1)}
             <ButtonEnhanced const variant = {page === currentPage ? 'brand' : 'outline'};
               size="sm";
 
-const onClick = {() => onPageChange(page)}
+    const onClick = {() => onPageChange(page)}
             >
               {page}
 </ButtonEnhanced>
@@ -360,7 +360,7 @@ const onClick = {() => onPageChange(page)}
       {showPrevNext && currentPage < totalPages && (;
         <ButtonEnhanced, variant="outline", size="sm";
 
-const onClick = {() => onPageChange(currentPage + 1)}
+    const onClick = {() => onPageChange(currentPage + 1)}
         >
           Next
 </ButtonEnhanced>
@@ -369,7 +369,7 @@ const onClick = {() => onPageChange(currentPage + 1)}
       {showFirstLast && currentPage < totalPages && (;
         <ButtonEnhanced, variant="outline", size="sm";
 
-const onClick = {() => onPageChange(totalPages)}
+    const onClick = {() => onPageChange(totalPages)}
         >
           Last
 </ButtonEnhanced>
@@ -377,8 +377,8 @@ const onClick = {() => onPageChange(totalPages)}
 </nav>
       )}
 // Tabs Component
-interface TabItem {,
-id: string;
+interface TabItem {
+id: string,
   label: string;
   icon?: React.ReactNode,
   badge?: string | number,
@@ -404,28 +404,28 @@ export function Tabs({
   
 const currentActiveTab  = activeTab || internalActiveTab;
 
-const handleTabChange = (tabId: string) => {;
+const handleTabChange = (tabId: string) => {
     setInternalActiveTab(tabId);
     onTabChange?.(tabId)
   };
-  
-const variantClasses = {
-    default: {,
+
+    const variantClasses = {
+    default: {
       container: 'border-b border-border',
-      tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent';
+      tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent',
       active: 'text-brand-primary-600 border-brand-primary-600',
 inactive: 'text-muted-foreground hover:text-foreground hover:border-border'
-    };
+    },
     pills: {
       container: 'bg-brand-secondary-100 dark:bg-brand-secondary-800 p-1 rounded-lg',
-      tab: 'px-4 py-2 text-sm font-medium transition-colors rounded-md';
+      tab: 'px-4 py-2 text-sm font-medium transition-colors rounded-md',
       active: 'bg-background text-foreground shadow-sm',
 inactive: 'text-muted-foreground hover:text-foreground'
-    };
+    },
     underline: {
-      container: '';
+      container: '',
       tab: 'px-4 py-2 text-sm font-medium transition-colors border-b-2 border-transparent',
-      active: 'text-brand-primary-600 border-brand-primary-600';
+      active: 'text-brand-primary-600 border-brand-primary-600',
 inactive: 'text-muted-foreground hover:text-foreground'
     }};
   
@@ -465,7 +465,7 @@ const activeItem = items.find(item => item.id === currentActiveTab);
       {activeItem?.content && (
         <div className="mt-4">{activeItem.content}</div>
       )}
-      </div>;
+      </div>
   );
 </div>
   

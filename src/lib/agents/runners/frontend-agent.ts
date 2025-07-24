@@ -25,7 +25,7 @@ break
     // Simulate component creation
     await new Promise(resolve => setTimeout(resolve, 2000);
         return {
-      success: true;
+      success: true,
     componentPath: `/src/components/${payload.componentName}.tsx`,
 message: `Created ${payload.componentName} component with TypeScript and Tailwind CSS`
   }
@@ -34,7 +34,7 @@ message: `Created ${payload.componentName} component with TypeScript and Tailwin
     // Simulate UI enhancement
     await new Promise(resolve => setTimeout(resolve, 3000);
         return {
-      success: true;
+      success: true,
     enhancements: [
         'Added loading states';
         'Implemented skeleton screens',
@@ -47,7 +47,7 @@ message: `Created ${payload.componentName} component with TypeScript and Tailwin
     // Simulate responsive design implementation
     await new Promise(resolve => setTimeout(resolve, 2500);
         return {
-      success: true;
+      success: true,
     breakpoints: ['mobile', 'tablet', 'desktop', 'wide'],
       message: 'Responsive design implemented across all specified pages'
   }
@@ -56,8 +56,8 @@ message: `Created ${payload.componentName} component with TypeScript and Tailwin
     // Simulate state management setup
     await new Promise(resolve => setTimeout(resolve, 2000);
         return {
-      success: true;
-    stateLibrary: payload.stateLibrary || 'Context API';
+      success: true,
+    stateLibrary: payload.stateLibrary || 'Context API',
     stores: ['user', 'app', 'ui'],
       message: 'State management configured successfully'
   }
@@ -65,16 +65,16 @@ message: `Created ${payload.componentName} component with TypeScript and Tailwin
   private async configureRouting(payload): Promise { // Simulate routing configuration
     await new Promise(resolve => setTimeout(resolve, 1500);
         return {
-      success: true;
-    routes: payload.routes;
+      success: true,
+    routes: payload.routes,
     routingLibrary: 'Next.js App Router',
       message: 'Routing configured with protected routes and layouts'
 }
 // Start the agent if run directly;
 if (require.main === module) {
-  const agent = new FrontendAgent({ agentId: process.env.AGENT_ID || 'agent_frontend';
+  const agent = new FrontendAgent({ agentId: process.env.AGENT_ID || 'agent_frontend',
     agentType: 'frontend',
-    orchestratorUrl: process.env.ORCHESTRATOR_URL || 'http://localhost:3000';
+    orchestratorUrl: process.env.ORCHESTRATOR_URL || 'http://localhost:3000',
     capabilities: [
       'react_components';
       'typescript',

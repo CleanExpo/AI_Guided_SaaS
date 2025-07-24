@@ -2,11 +2,11 @@
 import fs from 'fs';import path from 'path';
 import { EnvManager } from '@/lib/env/EnvManager';
 interface EPCCheckResult {
-  env_check: 'pass' | 'fail' | 'warning';
-  missing: string[];
-  outdated: string[];
-  invalid: string[];
-  mismatched: string[];
+  env_check: 'pass' | 'fail' | 'warning',
+  missing: string[],
+  outdated: string[],
+  invalid: string[],
+  mismatched: string[],
   action: 'allow_inference' | 'block_inference' | 'warn_proceed';
   recommendations?: string[],
     score: number, // 0-100 confidence score
@@ -41,16 +41,15 @@ export class EPCEngine {
       Date.now() - this.lastCheckTime < this.cacheExpiry
     ) {
       return this.cachedResult}
-    const result: EPCCheckResult = {,
+    const result: EPCCheckResult = {
       env_check: 'pass',
-      missing: any[];
-    outdated: any[];
-    invalid: any[];
-    mismatched: any[];
+      missing: [] as any[],
+    outdated: [] as any[],
+    invalid: [] as any[],
+    mismatched: [] as any[],
     action: 'allow_inference',
-      recommendations: any[];
-    score: 100
-    };
+      recommendations: [] as any[],
+    score: 100 }
     try {
       // Run validation, const validation = this.envManager.validate(); // Check for missing required variables;
 for (const error of validation.errors) {
@@ -93,13 +92,13 @@ if (result.missing.length > 0 || result.invalid.length > 0) {
 } catch (error) { console.error('EPC Engine, error:', error);
         return {
         env_check: 'fail',
-        missing: any[];
-    outdated: any[];
-    invalid: any[];
-    mismatched: any[];
+        missing: [] as any[],
+    outdated: [] as any[],
+    invalid: [] as any[],
+    mismatched: [] as any[],
     action: 'block_inference',
         recommendations: [
-          'Failed to perform environment check. Please check your configuration.'];
+          'Failed to perform environment check. Please check your configuration.'],
         score: 0
 }
   /**
@@ -166,8 +165,8 @@ const prodOverrides = envOverrides.production?.overrides || {};
    * Check if environment difference is expected
    */
   private isExpectedEnvironmentDifference(
-key: string;
-    devValue: string;
+key: string,
+    devValue: string,
     prodValue: string
   ): boolean {
     // Expected differences
@@ -226,7 +225,7 @@ key: string;
   async quickCheck(): Promise<any> {
     const result = await this.performPreflightCheck(), if (result.env_check === 'pass') {
       return { status: 'ready', message: 'Environment ready for inference' }} else if (result.env_check === 'warning') {
-      return {,
+      return {
         status: 'warning',
         message: `${result.outdated.length + result.mismatched.length} warnings`
 }} else {

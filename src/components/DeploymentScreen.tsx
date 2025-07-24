@@ -5,7 +5,7 @@ import { ProjectConfig, ProjectFile } from '@/types';
 import { Rocket } from 'lucide-react';
 interface DeploymentScreenProps {
 config: ProjectConfi
-g;
+g,
   files: ProjectFile[]
 };
 export default function DeploymentScreen() {

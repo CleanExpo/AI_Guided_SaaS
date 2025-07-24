@@ -14,9 +14,8 @@ import { Prism, as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 interface DocumentationViewerProps {
 documentationSystem: DynamicDocumentationSyste
-m;
-  tutorialSystem: InteractiveTutorialSyste
-m;
+m, tutorialSystem: InteractiveTutorialSyste
+m,
   userId: string;
   initialSectionId?: string
 }
@@ -74,11 +73,11 @@ const sections = results;
       window.location.href = `/tutorials/${tutorialId}`
   } catch (error) {
       console.error('Failed to start, tutorial:', error)}
-  const categories = [;
-  { id: 'getting-started', label: 'Getting Started', icon: BookOpen };
-    { id: 'reference', label: 'Reference', icon: Book };
-    { id: 'guide', label: 'Guides', icon: ChevronRight };
-    { id: 'api', label: 'API', icon: Code };
+  const categories = [
+  { id: 'getting-started', label: 'Getting Started', icon: BookOpen },
+    { id: 'reference', label: 'Reference', icon: Book },
+    { id: 'guide', label: 'Guides', icon: ChevronRight },
+    { id: 'api', label: 'API', icon: Code },
     { id: 'troubleshooting', label: 'Troubleshooting', icon: Hash }
    ];
 
@@ -107,7 +106,7 @@ break
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"   />
               <input, type="text", placeholder="Search documentation...";
 
-const value = {searchQuery}
+    const value = {searchQuery}
                 const onChange = {(e) => setSearchQuery(e.target.value)}
                 const onKeyPress = {(e) => e.key === 'Enter' && handleSearch()}
                 className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20" />
@@ -117,7 +116,7 @@ const value = {searchQuery}
 variant="ghost";
 size="sm";
 
-const className = {`cn("mt-2" sidebarCollapsed && "w-full")}
+    const className = {`cn("mt-2" sidebarCollapsed && "w-full")}
             const onClick = {() => setSidebarCollapsed(!sidebarCollapsed)}
           >
             {sidebarCollapsed ? <ChevronRight className="h-4 w-4"   /> : <ChevronLeft className="h-4 w-4"   />}
@@ -135,7 +134,7 @@ h3 className="text-sm font-semibold mb-2">Search Results</h3>
       )}
                 <div className="space-y-1">
                   {searchResults.map((section) => (\n    <button; const key = {section.id}
-                      const onClick = {() => {;
+                      const onClick = {() => {
                         setSelectedSection(section), setSearchResults([]); setSearchQuery('')
 }
                       const className = {cn(`
@@ -166,7 +165,7 @@ h3 className="text-sm font-semibold mb-2">Search Results</h3>
                 const sections = documentationSystem.getSectionsByCategory(category.id), if (sections.length === 0) return null, return (;
     <div;
 
-const key = {category.id}>
+    const key = {category.id}>
                     {!sidebarCollapsed  && (
 div className="flex items-center gap-2 mb-2"></div>
                         <category.icon className="h-4 w-4 text-muted-foreground"   />
@@ -202,7 +201,7 @@ div className="flex items-center gap-2 mb-2"></div>
       )}
             )}
       </div>;
-        {/* Progress */};
+        {/* Progress */},
     {!sidebarCollapsed && userProgress  && (div className="p-4 border-t">
             <div className="space-y-2 flex items-center justify-between text-sm"   />
                 <span className="text-muted-foreground">Progress</span>
@@ -210,7 +209,7 @@ div className="flex items-center gap-2 mb-2"></div>
                   {userProgress.sectionsCompleted?.length || 0} / {documentationSystem.getAllSections().length}</span>
               <div className="w-full bg-muted rounded-full h-2 bg-primary rounded-full h-2 transition-all duration-300";
 
-const style = {{
+    const style = {{
                     width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%`
   }} /   />
               <div className="flex items-center gap-1 text-xs text-muted-foreground">

@@ -4,34 +4,34 @@
  * Enterprise-grade monitoring with real-time alerts and comprehensive metrics
  */;
 import { logSecurity, logWarn } from './production-logger';interface SecurityEvent {
-  type: 'attack' | 'breach' | 'suspicious' | 'rate_limit' | 'auth_failure';
-  severity: 'critical' | 'high' | 'medium' | 'low';
-  source: string;
+  type: 'attack' | 'breach' | 'suspicious' | 'rate_limit' | 'auth_failure',
+  severity: 'critical' | 'high' | 'medium' | 'low',
+  source: string,
   details: Record<string, unknown>,
   timestamp: Date;
   ip?: string,
   userAgent?: string
 };
 interface PerformanceMetric {
-  endpoint: string;
-  method: string;
-  responseTime: number;
-  statusCode: number;
-  timestamp: Date;
-  memoryUsage: number;
+  endpoint: string,
+  method: string,
+  responseTime: number,
+  statusCode: number,
+  timestamp: Date,
+  memoryUsage: number,
   cpuUsage: number
 };
 interface SystemHealth {
-  uptime: number;
+  uptime: number,
   memoryUsage: {
-  used: number;
-  total: number;
+  used: number,
+  total: number,
   percentage: number
 }
-    cpuUsage: number;
-    activeConnections: number;
-    errorRate: number;
-    responseTime: number;
+    cpuUsage: number,
+    activeConnections: number,
+    errorRate: number,
+    responseTime: number,
     timestamp: Date
 }
 class AdvancedMonitoringSystem {
@@ -57,9 +57,9 @@ if (event.severity === 'critical' || event.severity === 'high') {
     // Log to production logger;
 if (typeof window === 'undefined') {
       logSecurity('Security event detected', {
-        type: event.type;
-    severity: event.severity;
-    source: event.source;
+        type: event.type,
+    severity: event.severity,
+    source: event.source,
     details: event.details})}
   /**
    * Track performance metrics
@@ -67,31 +67,31 @@ if (typeof window === 'undefined') {
 trackPerformance(metric: Omit<PerformanceMetric, 'timestamp' | 'memoryUsage' | 'cpuUsage'>) {
     const performanceMetric: PerformanceMetric = {;
       ...metric;
-      timestamp: new Date();
-    memoryUsage: this.getMemoryUsage();
+      timestamp: new Date(),
+    memoryUsage: this.getMemoryUsage(),
   cpuUsage: this.getCpuUsage()};
     this.performanceMetrics.push(performanceMetric);
     this.trimPerformanceHistory();
     // Check for performance alerts;
 if (metric.responseTime > this.alertThresholds.responseTime) {
       this.triggerPerformanceAlert('High response time detected', {
-        endpoint: metric.endpoint;
-    responseTime: metric.responseTime;
+        endpoint: metric.endpoint,
+    responseTime: metric.responseTime,
     threshold: this.alertThresholds.responseTime})}
   /**
    * Monitor system health
    */
   monitorSystemHealth(): SystemHealth {
-    const health: SystemHealth = {,
-    uptime: process.uptime();
+    const health: SystemHealth = {
+    uptime: process.uptime(),
     memoryUsage: {
-  used: process.memoryUsage().heapUsed;
-    total: process.memoryUsage().heapTotal;
-    percentage: process.memoryUsage().heapUsed / process.memoryUsage().heapTotal};
-    cpuUsage: this.getCpuUsage();
-    activeConnections: this.getActiveConnections();
-    errorRate: this.calculateErrorRate();
-    responseTime: this.calculateAverageResponseTime();
+  used: process.memoryUsage().heapUsed,
+    total: process.memoryUsage().heapTotal,
+    percentage: process.memoryUsage().heapUsed / process.memoryUsage().heapTotal},
+    cpuUsage: this.getCpuUsage(),
+    activeConnections: this.getActiveConnections(),
+    errorRate: this.calculateErrorRate(),
+    responseTime: this.calculateAverageResponseTime(),
   timestamp: new Date()};
     this.systemHealth.push(health);
     this.trimHealthHistory();
@@ -103,16 +103,16 @@ if (metric.responseTime > this.alertThresholds.responseTime) {
    * Get security analytics
    */
   getSecurityAnalytics(): {
-    totalEvents: number;
-    criticalEvents: number;
-    attackAttempts: number;
-    topAttackTypes: Array<{ type: string, count: number }>;
+    totalEvents: number,
+    criticalEvents: number,
+    attackAttempts: number,
+    topAttackTypes: Array<{ type: string, count: number }>,
     recentEvents: SecurityEvent[]
   } {
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentEvents = this.securityEvents.filter(, event: any => event.timestamp > last24Hours;
     );
     
-const _attackTypes = recentEvents.reduce((acc: Record<string, any>, event) => {;
+const _attackTypes = recentEvents.reduce((acc: Record<string, any>, event) => {
       acc[event.type] = (acc[event.type] || 0) + 1;
       return acc;
 }, {} as Record<string, any>);
@@ -121,8 +121,8 @@ const _topAttackTypes = Object.entries(attackTypes);
       .map(([type, count]) => ({ type, count })).sort((a, b) => b.count - a.count)
       .slice(0, 5);
     return {
-      totalEvents: recentEvents.length;
-    criticalEvents: recentEvents.filter((e) => e.severity === 'critical').length;
+      totalEvents: recentEvents.length,
+    criticalEvents: recentEvents.filter((e) => e.severity === 'critical').length,
     attackAttempts: recentEvents.filter((e) => e.type === 'attack').length;
       topAttackTypes,
       recentEvents: recentEvents.slice(-10)}
@@ -130,10 +130,10 @@ const _topAttackTypes = Object.entries(attackTypes);
    * Get performance analytics
    */
   getPerformanceAnalytics(): {
-    averageResponseTime: number;
-    slowestEndpoints: Array<{ endpoint: string, avgTime: number }>;
-    errorRate: number;
-    throughput: number;
+    averageResponseTime: number,
+    slowestEndpoints: Array<{ endpoint: string, avgTime: number }>,
+    errorRate: number,
+    throughput: number,
     memoryTrend: Array<{ timestamp: Date, usage: number }>
   } {
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;
@@ -155,35 +155,35 @@ const _slowestEndpoints = Object.entries(endpointTimes);
 const _memoryTrend = this.systemHealth;
       .filter((health) => health.timestamp > last24Hours)
       .map((health) => ({
-        timestamp: health.timestamp;
+        timestamp: health.timestamp,
     usage: health.memoryUsage.percentage});
     return {
       averageResponseTime: this.calculateAverageResponseTime();
       slowestEndpoints,
-      errorRate: this.calculateErrorRate();
+      errorRate: this.calculateErrorRate(),
     throughput: recentMetrics.length / 24, // requests per hour
       memoryTrend}}
   /**
    * Generate comprehensive monitoring report
    */
   generateMonitoringReport(): {
-    timestamp: Date;
-    systemHealth: SystemHealth;
+    timestamp: Date,
+    systemHealth: SystemHealth,
     securityAnalytics: {
-  totalEvents: number;
-    criticalEvents: number;
-    attackAttempts: number;
-    topAttackTypes: Array<{ type: string, count: number }>;
+  totalEvents: number,
+    criticalEvents: number,
+    attackAttempts: number,
+    topAttackTypes: Array<{ type: string, count: number }>,
     recentEvents: SecurityEvent[]
-    };
+    },
     performanceAnalytics: {
-      averageResponseTime: number;
-    slowestEndpoints: Array<{ endpoint: string, avgTime: number }>;
-    errorRate: number;
-    throughput: number;
+      averageResponseTime: number,
+    slowestEndpoints: Array<{ endpoint: string, avgTime: number }>,
+    errorRate: number,
+    throughput: number,
     memoryTrend: Array<{ timestamp: Date, usage: number }>
-    };
-    alerts: Array<{ type: string, message: string, severity: string, timestamp: Date }>;
+    },
+    alerts: Array<{ type: string, message: string, severity: string, timestamp: Date }>,
     recommendations: string[]
   } {
     const _currentHealth = this.monitorSystemHealth(); const _securityAnalytics = this.getSecurityAnalytics(); const _performanceAnalytics  = this.getPerformanceAnalytics();
@@ -194,7 +194,7 @@ const recommendations = this.generateRecommendations(
       // performanceAnalytics;
     );
     return {
-      timestamp: new Date();
+      timestamp: new Date(),
     systemHealth: currentHealth;
       securityAnalytics,
       performanceAnalytics,
@@ -238,17 +238,17 @@ const _totalTime = recentMetrics.reduce(
     return totalTime / recentMetrics.length;
 }
   private triggerSecurityAlert(event: SecurityEvent) {
-    const _alert = {,
+    const _alert = {
       type: 'security',
-      message: `Security ${event.severity} alert: ${event.type} from ${event.source}`;
-severity: event.severity;
-    timestamp: new Date();
+      message: `Security ${event.severity} alert: ${event.type} from ${event.source}`,
+severity: event.severity,
+    timestamp: new Date(),
   details: event};
     // In production, this would send to external monitoring services;
 if (typeof window === 'undefined') {
       logSecurity('Security alert triggered', alert)}
   private triggerPerformanceAlert(message: string, details: Record<string, unknown>) {
-    const _alert = {,
+    const _alert = {
       type: 'performance';
       message,
       severity: 'medium' as const timestamp: new Date(); details};
@@ -257,21 +257,21 @@ if (typeof window === 'undefined') {
   private checkHealthAlerts(health: SystemHealth) {
     if (health.memoryUsage.percentage > this.alertThresholds.memoryUsage) {
       this.triggerPerformanceAlert('High memory usage detected', {
-        usage: health.memoryUsage.percentage;
+        usage: health.memoryUsage.percentage,
     threshold: this.alertThresholds.memoryUsage})
 }
     if (health.errorRate > this.alertThresholds.errorRate) {
       this.triggerPerformanceAlert('High error rate detected', {
-        errorRate: health.errorRate;
+        errorRate: health.errorRate,
     threshold: this.alertThresholds.errorRate})}
   private generateRecommendations(
-health: SystemHealth;
-    security: { totalEvents: number, criticalEvents: number, attackAttempts: number, topAttackTypes: Array<{ type: string, count: number }>;
+health: SystemHealth,
+    security: { totalEvents: number, criticalEvents: number, attackAttempts: number, topAttackTypes: Array<{ type: string, count: number }>,
     recentEvents: SecurityEvent[]
-    };
-    performance: { averageResponseTime: number, slowestEndpoints: Array<{ endpoint: string, avgTime: number }>;
-    errorRate: number;
-    throughput: number;
+    },
+    performance: { averageResponseTime: number, slowestEndpoints: Array<{ endpoint: string, avgTime: number }>,
+    errorRate: number,
+    throughput: number,
     memoryTrend: Array<{ timestamp: Date, usage: number }>
 }
   ): string[] {

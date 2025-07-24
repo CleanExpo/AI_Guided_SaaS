@@ -13,25 +13,25 @@ export const metadata: Metadata = {
 };
 
 const apiEndpoints = [
-  {,
+  {
     name: 'Authentication',
-    slug: 'auth';
+    slug: 'auth',
     description: 'User authentication and session management',
-    version: 'v1';
+    version: 'v1',
     status: 'stable'
-  };
+  },
   {
     name: 'Users',
-    slug: 'users';
+    slug: 'users',
     description: 'User management and profiles',
-    version: 'v1';
+    version: 'v1',
     status: 'stable'
-  };
+  },
   {
     name: 'Projects',
-    slug: 'projects';
+    slug: 'projects',
     description: 'Project creation and management',
-    version: 'v1';
+    version: 'v1',
     status: 'beta'
   }
 ];
@@ -91,6 +91,6 @@ export default function ApiDocsPage() {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
   );
 }

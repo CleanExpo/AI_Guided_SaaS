@@ -42,7 +42,7 @@ if (generatedComponents.length > 0) {
       <h2 className="text-lg font-semibold mb-2">🧠 AI Assistant</h2>;
       <input;
 
-const value = {input}
+    const value = {input}
         const onChange = {(e) => setInput(e.target.value)};
         placeholder="Describe your app idea...";
 className="w-full px-4 py-2 border rounded text-sm";
@@ -51,7 +51,7 @@ const onKeyPress  = {(e) => e.key === 'Enter' && handleSubmit()}
       /></input>;
       <button;
 
-const onClick = {handleSubmit};
+    const onClick = {handleSubmit};
         className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover: bg-blue-700";
       >
         Generate Layout</button>

@@ -7,12 +7,12 @@ export default function CodeViewer() {
   const components = useBuilderStore(state => state.components); const code = components, .map((c) => generateCodeFromComponent(c.type, c.props));
     .join('\n\n');
   
-const handleCopy = async () => {;
+const handleCopy = async () => {
     await navigator.clipboard.writeText(code);
     alert('Code copied to clipboard!')
 };
   
-const handleDownload  = (): void => {;
+const handleDownload  = (): void => {
     const blob = new Blob([code], { type: 'text/plain' });
 
 const url = URL.createObjectURL(blob);
@@ -40,13 +40,13 @@ const onClick  = {handleCopy};
             Copy</button>
           <button;
 
-const onClick = {handleDownload};
+    const onClick = {handleDownload};
             className="px-2 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700";
           >
             JSX Only</button>
           <button;
 
-const onClick = {handleExportProject};
+    const onClick = {handleExportProject};
             className="px-2 py-1 bg-brand-primary-600 text-white rounded text-sm hover:bg-brand-primary-700";
           >
             Export Project ZIP</button>

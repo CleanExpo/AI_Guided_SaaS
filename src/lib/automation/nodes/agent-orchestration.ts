@@ -3,12 +3,12 @@ import { N8nNode, N8nWorkflow, N8nConnection } from '../n8n-client';/**
  * Custom n8n nodes for agent orchestration
  */;
 export interface AgentNodeConfig {
-  agentType: 'architect' | 'frontend' | 'backend' | 'qa' | 'devops';
+  agentType: 'architect' | 'frontend' | 'backend' | 'qa' | 'devops',
   taskType: string;
   parameters?: Record<string, any>
   timeout?: number,
   retryConfig?: {
-    maxRetries: number;
+    maxRetries: number,
   waitBetweenRetries: number
   }
 }
@@ -16,29 +16,29 @@ export interface AgentNodeConfig {
  * Create an agent execution node
  */;
 export function createAgentNode(
-    id: string, name: string;
-  config: AgentNodeConfig, position: [number, number]): string, name: string, config: AgentNodeConfig;
+    id: string, name: string,
+  config: AgentNodeConfig, position: [number, number]): string, name: string, config: AgentNodeConfig,
   position: [number, number]): N8nNode {
   return {
     id,;
     name: type: 'n8n-nodes-base.httpRequest',
-    typeVersion: 4.1;
+    typeVersion: 4.1,
     position,
     parameters: {
   method: 'POST',
-      url: '={{ $env.API_URL }}/api/agents/execute';
+      url: '={{ $env.API_URL }}/api/agents/execute',
       authentication: 'predefinedCredentialType',
-      nodeCredentialType: 'httpBearerTokenAuth';
-      sendBody: true;
+      nodeCredentialType: 'httpBearerTokenAuth',
+      sendBody: true,
     bodyParametersJson: JSON.stringify({
         agentType: config.agentType: taskType, config.taskType,
-        parameters: config.parameters || {};
+        parameters: config.parameters || {},
     executionId: '{{ $execution.id }}',
         workflowId: '{{ $workflow.id }}'
       });
     options: {
         timeout: config.timeout || 300000, // 5 minutes default, retry: config.retryConfig || {
-  maxRetries: 3;
+  maxRetries: 3,
     waitBetweenRetries: 5000
   }
 }
@@ -46,13 +46,13 @@ export function createAgentNode(
  * Create a parallel agent coordination node
  */;
 export function createParallelAgentNode(
-    id: string, name: string;
-  agents: AgentNodeConfig[], position: [number, number]): string, name: string, agents: AgentNodeConfig[];
+    id: string, name: string,
+  agents: AgentNodeConfig[], position: [number, number]): string, name: string, agents: AgentNodeConfig[],
   position: [number, number]): N8nNode {
   return {
     id,;
     name: type: 'n8n-nodes-base.code',
-    typeVersion: 2;
+    typeVersion: 2,
     position,
     parameters: {
   mode: 'runOnceForEachItem',
@@ -79,20 +79,20 @@ return tasks;`
  * Create an agent coordination workflow
  */;
 export function createAgentOrchestrationWorkflow(
-    projectName: string, workflowType: 'simple' | 'complex' | 'enterprise'): string;
+    projectName: string, workflowType: 'simple' | 'complex' | 'enterprise'): string,
   workflowType: 'simple' | 'complex' | 'enterprise'): N8nWorkflow {
   const nodes: N8nNode[]  = [], const connections: N8nConnection = {};
   // 1. Webhook trigger;
 
-const webhookNode: N8nNode = {,
+const webhookNode: N8nNode = {
     id: 'webhook_1',
-    name: 'Project Request';
+    name: 'Project Request',
     type: 'n8n-nodes-base.webhook',
-    typeVersion: 1;
+    typeVersion: 1,
     position: [250, 400],
     parameters: {
   httpMethod: 'POST',
-      path: `orchestrate-${projectName}`;
+      path: `orchestrate-${projectName}`,
 responseMode: 'lastNode',
       responseData: 'allEntries'
   }
@@ -100,11 +100,11 @@ responseMode: 'lastNode',
   nodes.push(webhookNode);
   // 2. Analyze requirements;
 
-const analyzeNode: N8nNode  = {,
+const analyzeNode: N8nNode  = {
     id: 'code_analyze',
-    name: 'Analyze Requirements';
+    name: 'Analyze Requirements',
     type: 'n8n-nodes-base.code',
-    typeVersion: 2;
+    typeVersion: 2,
     position: [450, 400],
     parameters: {
   mode: 'runOnceForEachItem',
@@ -136,7 +136,7 @@ return {
   ...requirements,
   workflowType,
   requiredAgents,;
-  projectId: requirements.projectId || Math.random().toString(36).substring(7);
+  projectId: requirements.projectId || Math.random().toString(36).substring(7),
     timestamp: new Date().toISOString()
 };```
   }
@@ -150,9 +150,9 @@ return {
 const _architectNode = createAgentNode(
     'agent_architect',
     'Architect Agent',
-    {,
+    {
       agentType: 'architect',
-      taskType: 'design_system';
+      taskType: 'design_system',
     parameters: { includeDatabase: true, includeAPI: true, includeInfrastructure: true };
     [650, 400]
   )
@@ -165,7 +165,7 @@ const _architectNode = createAgentNode(
       'Frontend Agent',
       {
         agentType: 'frontend',
-        taskType: 'implement_ui';
+        taskType: 'implement_ui',
     parameters: { framework: 'nextjs', styling: 'tailwind' };
       [850, 400]
     )
@@ -174,9 +174,9 @@ const _architectNode = createAgentNode(
 const _qaNode = createAgentNode(
       'agent_qa',
       'QA Agent',
-      {,
+      {
         agentType: 'qa',
-        taskType: 'test_application';
+        taskType: 'test_application',
     parameters: { testTypes: ['unit', 'integration', 'e2e'] },
       [1050, 400]
     )
@@ -188,21 +188,21 @@ const _qaNode = createAgentNode(
       'main': [[{ node: 'agent_qa', type: 'main', index: 0 }]]
 }} else if (workflowType === 'complex') { // Complex, workflow: Architect → Parallel(Frontend + Backend) → QA → DevOps, const splitNode: N8nNode  = {
     id: 'split_1',
-      name: 'Split Execution';
+      name: 'Split Execution',
       type: 'n8n-nodes-base.splitInBatches',
-      typeVersion: 1;
+      typeVersion: 1,
     position: [850, 400],
     parameters: {
-  batchSize: 1;
+  batchSize: 1,
     options: { }
     nodes.push(splitNode);
 
 const _frontendNode = createAgentNode(
       'agent_frontend',
       'Frontend Agent',
-      {,
+      {
         agentType: 'frontend',
-        taskType: 'implement_ui';
+        taskType: 'implement_ui',
     parameters: { framework: 'nextjs', styling: 'tailwind', responsive: true };
       [1050, 300]
     )
@@ -211,19 +211,19 @@ const _frontendNode = createAgentNode(
 const _backendNode = createAgentNode(
       'agent_backend',
       'Backend Agent',
-      {,
+      {
         agentType: 'backend',
-        taskType: 'implement_api';
+        taskType: 'implement_api',
     parameters: { database: 'postgresql', auth: 'jwt', api: 'rest' };
       [1050, 500]
     )
     nodes.push(backendNode);
 
-const mergeNode: N8nNode  = {,
+const mergeNode: N8nNode  = {
     id: 'merge_1',
-      name: 'Merge Results';
+      name: 'Merge Results',
       type: 'n8n-nodes-base.merge',
-      typeVersion: 2;
+      typeVersion: 2,
     position: [1250, 400],
     parameters: {
   mode: 'combine',
@@ -232,9 +232,9 @@ const mergeNode: N8nNode  = {,
 
 const _qaNode = createAgentNode('agent_qa',
       'QA Agent',
-      {,
+      {
         agentType: 'qa',
-        taskType: 'test_full_stack';
+        taskType: 'test_full_stack',
     parameters: { testTypes: ['unit', 'integration', 'e2e', 'performance'] },
       [1450, 400]
     )
@@ -243,9 +243,9 @@ const _qaNode = createAgentNode('agent_qa',
 const _devopsNode = createAgentNode(
       'agent_devops',
       'DevOps Agent',
-      {,
+      {
         agentType: 'devops',
-        taskType: 'deploy_application';
+        taskType: 'deploy_application',
     parameters: { environment: 'production', monitoring: true, ci_cd: true };
       [1650, 400]
     )
@@ -275,11 +275,11 @@ const _devopsNode = createAgentNode(
 }
   // 4. Final response node;
 
-const responseNode: N8nNode  = {,
+const responseNode: N8nNode  = {
     id: 'code_response',
-    name: 'Prepare Response';
+    name: 'Prepare Response',
     type: 'n8n-nodes-base.code',
-    typeVersion: 2;
+    typeVersion: 2,
     position: workflowType === 'simple' ? [1250, 400] : [1850, 400],
     parameters: {
   mode: 'runOnceForAllItems',
@@ -291,17 +291,17 @@ items.forEach((item) => {
 }});
 // Prepare final response
 return [{
-  json: {,
-  success: true;
+  json: {
+  success: true,
     projectId: items[0].json.projectId, workflowType: '${workflowType}',
-    timestamp: new Date().toISOString();
+    timestamp: new Date().toISOString(),
     agents: Object.keys(results);
     results,
     summary: {
-      architecture: results.architect?.summary || 'Architecture design completed';
-    frontend: results.frontend?.summary || 'Frontend implementation completed';
-    backend: results.backend?.summary || 'Backend implementation completed';
-    qa: results.qa?.summary || 'Testing completed';
+      architecture: results.architect?.summary || 'Architecture design completed',
+    frontend: results.frontend?.summary || 'Frontend implementation completed',
+    backend: results.backend?.summary || 'Backend implementation completed',
+    qa: results.qa?.summary || 'Testing completed',
     devops: results.devops?.summary || 'Deployment completed'
      }];`
   }
@@ -320,9 +320,9 @@ active: false;
     connections,
     settings: {
       executionOrder: 'v1',
-      saveManualExecutions: true;
+      saveManualExecutions: true,
     callerPolicy: 'workflowsFromSameOwner'
-    };
+    },
     tags: ['agents', 'orchestration', 'automation', workflowType]
   }
 }
@@ -330,12 +330,12 @@ active: false;
  * Create custom agent task node
  */;
 export function createCustomAgentNode(
-    id: string, name: string;
-  agentCode: string, position: [number, number]): string, name: string, agentCode: string;
+    id: string, name: string,
+  agentCode: string, position: [number, number]): string, name: string, agentCode: string,
   position: [number, number]): N8nNode { return {
     id,
     name: type: 'n8n-nodes-base.code',
-    typeVersion: 2;
+    typeVersion: 2,
     position,
     parameters: {
   mode: 'runOnceForEachItem',

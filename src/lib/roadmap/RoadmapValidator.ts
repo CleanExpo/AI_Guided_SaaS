@@ -1,19 +1,19 @@
 /* BREADCRUMB: library - Shared library code */;
 import { DevelopmentRoadmap, RoadmapPhase } from '@/lib/requirements/ClientRequirementsProcessor';export interface RoadmapMilestone {
-  id: string;
-  phaseId: string;
-  name: string;
+  id: string,
+  phaseId: string,
+  name: string,
   expectedDate: Date;
   actualDate?: Date,
-    status: 'pending' | 'in_progress' | 'completed' | 'delayed' | 'blocked';
-  completionCriteria: CompletionCriterion[];
-  dependencies: string[];
+    status: 'pending' | 'in_progress' | 'completed' | 'delayed' | 'blocked',
+  completionCriteria: CompletionCriterion[],
+  dependencies: string[],
   deliverables: string[]
 };
 export interface CompletionCriterion {
-  id: string;
-  description: string;
-  type: 'feature' | 'test' | 'performance' | 'documentation';
+  id: string,
+  description: string,
+  type: 'feature' | 'test' | 'performance' | 'documentation',
   validation: {
   method: 'automated' | 'manual' | 'hybrid';
   script?: string,
@@ -24,26 +24,26 @@ export interface CompletionCriterion {
   result?
 };
 export interface RoadmapValidationResult {
-  roadmapId: string;
-  validationDate: Date;
-  overallStatus: 'on_track' | 'at_risk' | 'delayed' | 'blocked';
-  completionPercentage: number;
+  roadmapId: string,
+  validationDate: Date,
+  overallStatus: 'on_track' | 'at_risk' | 'delayed' | 'blocked',
+  completionPercentage: number,
   milestones: {
-  total: number;
-  completed: number;
-  inProgress: number;
-  delayed: number;
+  total: number,
+  completed: number,
+  inProgress: number,
+  delayed: number,
   blocked: number
 }
   deviations: RoadmapDeviation[], recommendations: string[]
   nextMilestone?: RoadmapMilestone, estimatedCompletionDate: Date
 };
 export interface RoadmapDeviation {
-  type: 'delay' | 'scope_change' | 'blocker' | 'resource_issue';
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  milestoneId: string;
-  description: string;
-  impact: string;
+  type: 'delay' | 'scope_change' | 'blocker' | 'resource_issue',
+  severity: 'low' | 'medium' | 'high' | 'critical',
+  milestoneId: string,
+  description: string,
+  impact: string,
   suggestedAction: string
 };
 export class RoadmapValidator {
@@ -56,14 +56,14 @@ export class RoadmapValidator {
 
 const _durationDays  = this.parseDurationToDays(phase.duration);
 
-const milestone: RoadmapMilestone = {,
+const milestone: RoadmapMilestone = {
     id: `milestone_${phase.id}`,
-phaseId: phase.id;
-    name: phase.name;
-    expectedDate: new Date(startDate.getTime() + cumulativeDays * 24 * 60 * 60 * 1000);
+phaseId: phase.id,
+    name: phase.name,
+    expectedDate: new Date(startDate.getTime() + cumulativeDays * 24 * 60 * 60 * 1000),
     status: 'pending',
-        completionCriteria: this.generateCompletionCriteria(phase);
-    dependencies: phase.dependencies;
+        completionCriteria: this.generateCompletionCriteria(phase),
+    dependencies: phase.dependencies,
     deliverables: phase.tasks
 }
       this.milestones.set(milestone.id, milestone);
@@ -90,20 +90,20 @@ break
 default: return 7}}
   private generateCompletionCriteria(phase: RoadmapPhase): CompletionCriterion[] {
     const criteria: CompletionCriterion[] = [], // Feature completion criteria, phase.tasks.forEach((task, index) => {
-      criteria.push({,
+      criteria.push({
         id: `${phase.id}_feature_${index}`,
 description: task, type: 'feature',
     validation: { method: 'automated', script: `validate_feature_${phase.id }_${index}`
-        };
+        },
         status: 'pending'
       })}
     // Test criteria based on phase type
     if (phase.name.toLowerCase().includes('development')) {
       criteria.push({
         id: `${phase.id}_test_coverage`,
-description: 'Unit test coverage > 80%';
+description: 'Unit test coverage > 80%',
         type: 'test',
-    validation: { method: 'automated', threshold: 80 };
+    validation: { method: 'automated', threshold: 80 },
         status: 'pending'
       })
 }
@@ -111,37 +111,36 @@ description: 'Unit test coverage > 80%';
     if (phase.agents.includes('agent_backend') || phase.agents.includes('agent_frontend')) {
       criteria.push({
         id: `${phase.id}_performance`,
-description: 'API response time < 200ms';
+description: 'API response time < 200ms',
         type: 'performance',
-    validation: { method: 'automated', threshold: 200 };
+    validation: { method: 'automated', threshold: 200 },
         status: 'pending'
       })
 }
     // Documentation criteria
     criteria.push({
       id: `${phase.id}_documentation`,
-description: 'Technical documentation complete';
+description: 'Technical documentation complete',
       type: 'documentation',
-    validation: { method: 'manual' };
+    validation: { method: 'manual' },
       status: 'pending'
     });
     return criteria;
 }
   async validateRoadmap(): Promise<any> {
-    const result: RoadmapValidationResult = {,
-    roadmapId: this.roadmap.id;
-    validationDate: new Date();
+    const result: RoadmapValidationResult = {
+    roadmapId: this.roadmap.id,
+    validationDate: new Date(),
     overallStatus: 'on_track',
-      completionPercentage: 0;
+      completionPercentage: 0,
     milestones: {
-  total: this.milestones.size;
-    completed: 0;
-    inProgress: 0;
-    delayed: 0;
-    blocked: 0
-      };
-      deviations: any[];
-    recommendations: any[];
+  total: this.milestones.size,
+    completed: 0,
+    inProgress: 0,
+    delayed: 0,
+    blocked: 0 }
+      deviations: [] as any[],
+    recommendations: [] as any[],
     estimatedCompletionDate: new Date()}
     // Validate each milestone;
 for (const [id, milestone] of this.milestones) { await this.validateMilestone(milestone), // Update counts, switch (milestone.status) {
@@ -211,7 +210,7 @@ if (passedCriteria === milestone.completionCriteria.length) {
 }
     // Check for blockers;
 if (milestone.dependencies.length > 0) {
-      const _blockedByIncomplete = milestone.dependencies.some((dep) => {;
+      const _blockedByIncomplete = milestone.dependencies.some((dep) => {
         const depMilestone = Array.from(this.milestones.values()).find(m => m.phaseId === dep);
         return depMilestone && depMilestone.status !== 'completed'});
 if (blockedByIncomplete) { milestone.status = 'blocked'
@@ -275,19 +274,19 @@ break;
         return {
       type: 'delay',
       severity: delayDays > 14 ? 'high' : delayDays > 7 ? 'medium' : 'low',
-      milestoneId: milestone.id;
+      milestoneId: milestone.id,
     description: `${milestone.name} is delayed by ${delayDays} days`,
-impact: `Project completion may be delayed by approximately ${delayDays} days`;
+impact: `Project completion may be delayed by approximately ${delayDays} days`,
 suggestedAction: 'Allocate additional resources or adjust scope'
   }
 }
   private createBlockedDeviation(milestone: RoadmapMilestone): RoadmapDeviation {
     return {
       type: 'blocker',
-      severity: 'critical';
-      milestoneId: milestone.id;
+      severity: 'critical',
+      milestoneId: milestone.id,
     description: `${milestone.name} is blocked by incomplete dependencies`,
-impact: 'Cannot proceed until dependencies are resolved';
+impact: 'Cannot proceed until dependencies are resolved',
       suggestedAction: 'Prioritize completion of blocking dependencies'
   }
 }
@@ -317,7 +316,7 @@ const estimatedDate = new Date(lastMilestone.expectedDate);
     const delayedMilestones = Array.from(this.milestones.values()).filter(, m: any => m.status === 'delayed' && m.actualDate, );
     if (delayedMilestones.length === 0) return 0;
     
-const _totalDelayDays = delayedMilestones.reduce((sum, m) => {;
+const _totalDelayDays = delayedMilestones.reduce((sum, m) => {
       const _delay = (m.actualDate!.getTime() - m.expectedDate.getTime()) / (24 * 60 * 60 * 1000);
       return sum + delay;
 }, 0)

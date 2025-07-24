@@ -7,7 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Activity, CheckCircle, AlertCircle, XCircle, RefreshCw, Clock, Database, Globe, Server, Cpu, HardDrive, Zap } from 'lucide-react';
 interface HealthCheck {
-name: string;
+name: string,
   status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown';
   responseTime?: number,
   details?,
@@ -16,25 +16,24 @@ name: string;
 };
 interface SystemMetrics {
 cpu: {
-  usage: number;
-  cores: number;
+  usage: number,
+  cores: number,
   loadAverage: number[]
 }
   memory: {
     total: number, used: number, free: number percentage: number
-  };
+  },
   disk: {
     total: number, used: number, free: number percentage: number
-  };
+  },
   uptime: number
 };
 interface HealthStatus {
-status: 'healthy' | 'unhealthy' | 'degraded';
-  checks: HealthCheck[];
-  metrics: SystemMetric
-s;
-  version: string;
-  environment: string;
+status: 'healthy' | 'unhealthy' | 'degraded',
+  checks: HealthCheck[], metrics: SystemMetric
+s,
+  version: string,
+  environment: string,
   timestamp: string
 };
 export function HealthCheckDashboard() {
@@ -91,11 +90,11 @@ break
 break
 }
       default: return 'bg-gray-100 text-gray-800'}}
-  const _formatBytes = (bytes: number) => {;
+  const _formatBytes = (bytes: number) => {
     const sizes = ['B', 'KB', 'MB', 'GB', 'TB'], if (bytes = == 0) return '0 B'; const _i = Math.floor(Math.log(bytes) / Math.log(1024);
     return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`
 }
-  const _formatUptime = (seconds: number) => {;
+  const _formatUptime = (seconds: number) => {
     const _days = Math.floor(seconds / 86400); const _hours = Math.floor((seconds % 86400) / 3600); const _minutes = Math.floor((seconds % 3600) / 60);
     if (days > 0) return `${days}d ${hours}h ${minutes}m`;
     if (hours > 0) return `${hours}h ${minutes}m`;
@@ -184,7 +183,7 @@ size="sm";
                       {check.name === 'database' && <Database className="h-4 w-4"   />}</Database>
                       {check.name === 'system' && <Server className="h-4 w-4"   />}</Server>
                       {check.name === 'process' && <Cpu className="h-4 w-4"   />}</Cpu>
-                      {check.name.includes('external') && <Globe className="h-4 w-4"   />};
+                      {check.name.includes('external') && <Globe className="h-4 w-4"   />},
     {check.name}</Globe>
                     {getStatusIcon(check.status)}
                 <CardContent>

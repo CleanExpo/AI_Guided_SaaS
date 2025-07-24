@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
 interface ProjectData {
-  id: string;
-  name: string;
-  description: string;
-  type: 'web' | 'mobile' | 'api';
+  id: string,
+  name: string,
+  description: string,
+  type: 'web' | 'mobile' | 'api',
   framework: string
 }
 
@@ -22,10 +22,10 @@ const [isLoading, setIsLoading] = useState(true);
     
                Simulate loading project data
                   setTimeout(() => {
-      setProject({,
-        id: projectId;
+      setProject({
+        id: projectId,
     name: 'My Awesome Project',
-        description: 'A sample project for demonstration';
+        description: 'A sample project for demonstration',
         type: 'web',
 framework: 'Next.js'}
       });
@@ -55,14 +55,14 @@ framework: 'Next.js'}
                         <div className="flex items-center space-x-2">
             <button;
 
-const onClick = {() => setActiveMode('simple')}
+    const onClick = {() => setActiveMode('simple')}
               const className = {`px-3 py-1 rounded text-sm ${`, activeMode === 'simple', ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-700, hover:bg-gray-300'}`}`
             >
               Simple Mode</button>;
                           <button;
 
-const onClick = {() => setActiveMode('advanced')}
+    const onClick = {() => setActiveMode('advanced')}
               const className = {`px-3 py-1 rounded text-sm ${`, activeMode === 'advanced', ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-700, hover:bg-gray-300'}`}`
             >
@@ -115,7 +115,7 @@ export default App;`}`
                             <input;
 type="text";
 
-const value = {project.name};
+    const value = {project.name};
                 className="w-full px-3 py-2 border border-gray-300 rounded text-sm";
                 
                readOnly 
@@ -125,7 +125,7 @@ const value = {project.name};
                             <input;
 type="text";
 
-const value = {project.framework};
+    const value = {project.framework};
                 className="w-full px-3 py-2 border border-gray-300 rounded text-sm";
                 
                readOnly 

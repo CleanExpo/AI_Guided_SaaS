@@ -17,29 +17,29 @@ projectData: {
   mockData?
 };
 interface MockTemplate {
-id: string;
-  name: string;
+id: string,
+  name: string,
   preview: React.ReactNod
 e
 }
-const colorMap: Record<string, string> = {,
+const colorMap: Record<string, string> = {
   blue: 'bg-blue-500',
-  green: 'bg-green-500';
+  green: 'bg-green-500',
   purple: 'bg-purple-500',
-  red: 'bg-red-500';
+  red: 'bg-red-500',
   orange: 'bg-orange-500',
 teal: 'bg-teal-500'
 }
 ;
 
-const styleMap: Record<string, string> = {,
+const styleMap: Record<string, string> = {
   modern: 'rounded-lg shadow-lg',
-  playful: 'rounded-2xl shadow-xl';
+  playful: 'rounded-2xl shadow-xl',
   professional: 'rounded shadow',
-  minimal: 'rounded-sm';
+  minimal: 'rounded-sm',
 dark: 'rounded-lg shadow-2xl bg-gray-900 text-white'
 };
-export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreviewProps), mockData }: LiveProjectPreviewProps) {, const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreviewProps), mockData }: LiveProjectPreviewProps) { const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [isGenerating, setIsGenerating] = useState<any>(false);
   
 const [previewHtml, setPreviewHtml]  = useState<any>('');
@@ -58,7 +58,7 @@ const _generatePreview = async () => {
       setPreviewHtml(generateMockHtml())
       setIsGenerating(false)}, 1000)
 }
-  const _generateMockHtml = (): void => {;
+  const _generateMockHtml = (): void => {
     const { projectType, projectName, features = [], designStyle   }: any = projectData;
     // Generate different templates based on project type;
 switch (projectType) { case 'website':
@@ -73,7 +73,7 @@ switch (projectType) { case 'website':
     break
 }
       default: return generateDefaultTemplate()}
-  const _generateWebsiteTemplate = (): void => {;
+  const _generateWebsiteTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div className="${designStyle} overflow-hidden">
@@ -107,7 +107,7 @@ switch (projectType) { case 'website':
         ` : ''}``
     ```
   }
-  const _generateWebAppTemplate = (): void => {;
+  const _generateWebAppTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div className="${designStyle} h-full">
@@ -152,7 +152,7 @@ switch (projectType) { case 'website':
               ` : ''}``
     ```
   }
-  const _generateEcommerceTemplate = (): void => {;
+  const _generateEcommerceTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div className="${designStyle}">
@@ -186,7 +186,7 @@ switch (projectType) { case 'website':
         ` : ''}``
     ```
   }
-  const _generateDashboardTemplate = (): void => {;
+  const _generateDashboardTemplate = (): void => {
     const { projectName, features = []   }: any = projectData;
     return ```;
       <div className="${designStyle} bg-gray-50 h-full">
@@ -225,9 +225,9 @@ switch (projectType) { case 'website':
           <p className="text-gray-600">Start building something amazing</p>
     `
   }
-  const deviceSizes = {,
+  const deviceSizes = {
     desktop: 'w-full',
-    tablet: 'w-[768px]';
+    tablet: 'w-[768px]',
 mobile: 'w-[375px]'
 }
   return (
@@ -245,7 +245,7 @@ Badge variant="secondary", className="animate-pulse">
 const onClick  = {generatePreview};
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors";
 
-const disabled = {isGenerating}
+    const disabled = {isGenerating}
           >
             <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")}   />
 </button>
@@ -262,7 +262,7 @@ const onClick  = {() => setDevice('desktop')}
             <span className="text-sm">Desktop</span>;
           <button;
 
-const onClick = {() => setDevice('tablet')}
+    const onClick = {() => setDevice('tablet')}
             const className  = {cn(
             'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'tablet' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}</button>
@@ -271,7 +271,7 @@ const onClick = {() => setDevice('tablet')}
             <span className="text-sm">Tablet</span>;
           <button;
 
-const onClick = {() => setDevice('mobile')}
+    const onClick = {() => setDevice('mobile')}
             const className = {cn(
             'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'mobile' ? "bg-primary text-white" : "hover:bg-gray-100"
             )}</button>
@@ -290,7 +290,7 @@ const onClick = {() => setDevice('mobile')}
     ), : (;
             <div, className="h-[600px] overflow-auto";
 
-const dangerouslySetInnerHTML = {{ __html: previewHtml } >)};
+    const dangerouslySetInnerHTML = {{ __html: previewHtml } >)};
     {/* Code, View Tab */}</div>
       <Tabs defaultValue="preview", className="border-t">
         <TabsList className="grid w-full grid-cols-2">

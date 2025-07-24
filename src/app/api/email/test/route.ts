@@ -5,8 +5,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Simulate email configuration test
         const configTest = { success: true };
     if (!configTest.success) {
-      return NextResponse.json({,
-          success: false;
+      return NextResponse.json({
+          success: false,
           error: 'Email configuration test failed'
         }, { status: 500 })
 }
@@ -19,13 +19,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    const status = {,
-      configured: !!process.env.SMTP_HOST;
-      provider: process.env.EMAIL_PROVIDER || 'none';
+    const status = {
+      configured: !!process.env.SMTP_HOST,
+      provider: process.env.EMAIL_PROVIDER || 'none',
       lastTest: new Date().toISOString()
 };
     return NextResponse.json({ success: true, status })
-} catch (error) {;
+} catch (error) {
     console.error('Email status error:', error);
         return NextResponse.json({ error: 'Failed to get email status' }, { status: 500 })
 }};

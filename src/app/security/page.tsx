@@ -9,31 +9,31 @@ export const metadata: Metadata  = {
   description: 'Learn about our security measures and data protection practices'
 };
 
-const securityFeatures = [;
-  {icon: Shield;
+const securityFeatures = [
+  {icon: Shield,
     title: 'End-to-End Encryption',
     description: 'All data is encrypted in transit and at rest using industry-standard encryption.'
     , status: 'Active'}
   };
-  {icon: Lock;
+  {icon: Lock,
     title: 'Multi-Factor Authentication',
     description: 'Additional security layer with MFA support for all user accounts.'
     , status: 'Active'}
   };
-  {icon: Eye;
+  {icon: Eye,
     title: 'Security Monitoring',
     description: '24/7 monitoring and automated threat detection systems.'/    , status: 'Active'}
   };
-  {icon: Server;
+  {icon: Server,
     title: 'Secure Infrastructure',
     description: 'SOC 2 Type II compliant infrastructure with regular security audits.'
     , status: 'Active'}
 ];
 
-const certifications = [;
-  { name: 'SOC 2 Type II', status: 'Certified', year: '2024' };
-  { name: 'ISO 27001', status: 'Certified', year: '2024' };
-  { name: 'GDPR Compliant', status: 'Compliant', year: '2024' };
+const certifications = [
+  { name: 'SOC 2 Type II', status: 'Certified', year: '2024' },
+  { name: 'ISO 27001', status: 'Certified', year: '2024' },
+  { name: 'GDPR Compliant', status: 'Compliant', year: '2024' },
   { name: 'HIPAA Ready', status: 'Available', year: '2024' }
 ];
     export default function SecurityPage() {
@@ -77,7 +77,7 @@ const certifications = [;
                   <h3 className="font-semibold text-gray-900 mb-2">{cert.name}</h3>
                                 <Badge className="mb-2">{cert.status}</Badge>
                         <p className="{cert.year}"   />
-                      </div>;
+                      </div>
                   ))}
       </div>
               </CardContent>

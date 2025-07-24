@@ -27,7 +27,7 @@ const handleChange = (key: string, value: string) => {
               <input;
 className="w-full px-3 py-1 border rounded text-sm";
 
-const value = {props[key] || ''}
+    const value = {props[key] || ''}
                 const onChange = {(e) =   /> handleChange(key, e.target.value)}
               />
             )}</input>

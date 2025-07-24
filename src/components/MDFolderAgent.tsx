@@ -5,7 +5,7 @@ import { ProjectConfig } from '@/types';
 import { FolderOpen } from 'lucide-react';
 interface MDFolderAgentProps {
 projectConfig: ProjectConfi
-g;
+g,
   onMDGenerationComplete: (result: unknown: any) => void
 };
 export default function MDFolderAgent() {

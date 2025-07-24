@@ -3,9 +3,9 @@
 import React from 'react';
 
 export default function AdminDebugPage() {
-  const debugInfo = {,
-    timestamp: new Date().toISOString();
-    environment: process.env.NODE_ENV;
+  const debugInfo = {
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV,
     urls: {
       api: '/api',
       admin: '/admin'

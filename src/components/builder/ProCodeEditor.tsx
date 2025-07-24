@@ -4,20 +4,20 @@
 import React, { useState } from 'react';
 import { File, Folder, Settings, Play } from 'lucide-react';
 interface FileNode {
-name: string;
-    type: 'file' | 'folder';
+name: string,
+    type: 'file' | 'folder',
     path: string;
   children?: FileNode[]
 
 }
 
 export default function ProCodeEditor() {
-  const [fileTree] = useState<FileNode[]>([, { _: null;
+  const [fileTree] = useState<FileNode[]>([, { _: null,
   name: 'src',
-      type: 'folder';
+      type: 'folder',
       path: '/src',
       children: [
-        { name: 'App.tsx', type: 'file', path: '/src/App.tsx' };
+        { name: 'App.tsx', type: 'file', path: '/src/App.tsx' },
         { name: 'index.tsx', type: 'file', path: '/src/index.tsx' }
    ]
     };
@@ -68,7 +68,7 @@ div className="ml-4">
           <div className="text-center">
             <File className="h-16 w-16 mx-auto mb-4 text-gray-600"   />
             <p>Select a file to start editing</p>
-                </div>;
+                </div>
 );
 
           </div>

@@ -2,7 +2,7 @@
 // @ts-nocheck
 // apps/ui-builder/utils/generateCode.ts;
 export const generateCodeFromComponent = (
-    type: string;
+    type: string,
     props: Record<string, string>
 ): string: (any) => { switch (type) {
     case 'button':return `<button className="px-4 py-2 bg-blue-600 text-white rounded, hover:bg-blue-700">``, ${props.label || 'Click Me' }

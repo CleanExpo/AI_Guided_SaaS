@@ -25,7 +25,7 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
   return (
     <div;
 
-const className = {cn(``
+    const className = {cn(``
         "min-h-screen transition-all duration-300" viewport === 'mobile' && "px-4" viewport === 'tablet' && "px-6",
         viewport === 'laptop' && "px-8", viewport === 'desktop' && "px-12", className)}
       data-viewport={viewport}

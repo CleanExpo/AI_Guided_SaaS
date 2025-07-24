@@ -7,77 +7,77 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 interface ConfigurationData {
-status: string;
+status: string,
   features: {
-  enabled: string[];
+  enabled: string[],
   total: number
 }
     aiProviders: {
-    primary: string;
-    fallback: string;
+    primary: string,
+    fallback: string,
 research: string
-  };
+  },
     timestamp: string
 };
 interface FeatureFlags {
-aiGeneration: boolean;
-  collaboration: boolean;
-  templateMarketplace: boolean;
-  analyticsDashboard: boolean;
-  adminPanel: boolean;
-  experimentalAiAgents: boolean;
-  experimentalRealTimeCollaboration: boolean;
-  experimentalAdvancedAnalytics: boolean;
-  betaVoiceCommands: boolean;
+aiGeneration: boolean,
+  collaboration: boolean,
+  templateMarketplace: boolean,
+  analyticsDashboard: boolean,
+  adminPanel: boolean,
+  experimentalAiAgents: boolean,
+  experimentalRealTimeCollaboration: boolean,
+  experimentalAdvancedAnalytics: boolean,
+  betaVoiceCommands: boolean,
   betaAiDebugging: boolean
 };
 interface FullConfig {
 aiProvider: {
-  primary: string;
-  fallback: string;
+  primary: string,
+  fallback: string,
   research: string
 }
     openai: {
-    displayName: string;
-    primary: string;
-    codeGeneration: string;
-    tokensMax: number;
-    temperatureCode: number;
+    displayName: string,
+    primary: string,
+    codeGeneration: string,
+    tokensMax: number,
+    temperatureCode: number,
 rateLimitRequestsPerMinute: number
-  };
+  },
     anthropic: {
-    displayName: string;
-    primary: string;
-    codeGeneration: string;
-    tokensMax: number;
-    temperatureCode: number;
+    displayName: string,
+    primary: string,
+    codeGeneration: string,
+    tokensMax: number,
+    temperatureCode: number,
 rateLimitRequestsPerMinute: number
-  };
+  },
     google: {
-    displayName: string;
-    primary: string;
-    tokensMax: number;
-    temperatureDefault: number;
+    displayName: string,
+    primary: string,
+    tokensMax: number,
+    temperatureDefault: number,
 rateLimitRequestsPerMinute: number
-  };
+  },
     framework: {
-    primary: string;
-    version: string;
-    typescript: boolean;
+    primary: string,
+    version: string,
+    typescript: boolean,
 tailwind: boolean
-  };
+  },
     security: {
-    rateLimitEnabled: boolean;
-    authProvider: string;
-    cspEnabled: boolean;
+    rateLimitEnabled: boolean,
+    authProvider: string,
+    cspEnabled: boolean,
 ddosProtection: boolean
-  };
+  },
     performance: {
-    cacheStrategy: string;
-    cdnEnabled: boolean;
-    apmEnabled: boolean;
+    cacheStrategy: string,
+    cdnEnabled: boolean,
+    apmEnabled: boolean,
 analyticsEnabled: boolean
-  };
+  },
     features: FeatureFlags
 };
 export default function ConfigurationDashboard() {
@@ -132,7 +132,7 @@ const fullData = await fullResponse.json();
 } catch (err) {
       setError(err instanceof Error ? err.message: 'Failed to reload configuration')} finally {
     setReloading(false)}
-  useEffect(() => {;
+  useEffect(() => {
     fetchConfiguration()}, []);
   if (loading) {
     return (<div className="flex items-center justify-center p-8"   />

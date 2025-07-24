@@ -1,64 +1,167 @@
-/* BREADCRUMB: pages - Application pages and routes */;
+/* BREADCRUMB: pages - Application pages and routes */
 import React from 'react';
 import { Metadata } from 'next';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Shield, 
+  Users, 
+  Clock, 
+  Phone,
+  CheckCircle,
+  Star,
+  Building
+} from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Enterprise Solutions - AI Guided SaaS Platform',
-  description: 'Enterprise-grade AI development platform for large organizations'
-};export default function EnterprisePage() {
-  return (<div className="min-h-screen bg-gray-50 py-12">);
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Enterprise Solutions</h1>
-                        <p className="text-xl text-gray-600">
-            Scale your AI development across your organization with enterprise-grade security and support.
-          </p>
-                      </div>
-                      
-        <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Enterprise Features</h2>
-                        <div className="grid gap-6 md:grid-cols-2">
-            <div className="flex items-start">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"   />
-                            <div>
-                <h3 className="font-semibold text-gray-900">Advanced Security</h3>
-                              <p className="text-gray-600 text-sm">SOC 2 compliance and enterprise-grade security.</p>
-                            </div>
-                          
-            <div className="flex items-start">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"   />
-                            <div>
-                <h3 className="font-semibold text-gray-900">Team Management</h3>
-                              <p className="text-gray-600 text-sm">Comprehensive tools for large development teams.</p>
-                            </div>
-                          
-            <div className="flex items-start">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"   />
-                            <div>
-                <h3 className="font-semibold text-gray-900">Custom Integrations</h3>
-                              <p className="text-gray-600 text-sm">Integrate with your existing enterprise systems.</p>
-                            </div>
-                          
-            <div className="flex items-start">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"   />
-                            <div>
-                <h3 className="font-semibold text-gray-900">24
-              7 Support</h3>/                <p className="text-gray-600 text-sm">Dedicated support for mission-critical applications.< p></p>
-                            </div>
-                        </div>
-        <div className="text-center">
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors mr-4">
-            Schedule Demo
-          </button>
-                        <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors">
-            Contact Sales
-          </button>
-                      </div>
-                  </div>
-                );
+  title: 'Enterprise - AI Guided SaaS Platform',
+  description: 'Enterprise-grade AI development platform with advanced security, compliance, and support'
+};
 
+export default function EnterprisePage() {
+  const enterpriseFeatures = [
+    {
+      icon: Shield,
+      title: 'Advanced Security',
+      description: 'Enterprise-grade security with SOC 2 compliance, encryption, and audit trails.'
+    },
+    {
+      icon: Users,
+      title: 'Team Management',
+      description: 'Advanced user management, role-based access control, and team collaboration tools.'
+    },
+    {
+      icon: Clock,
+      title: '24/7 Support',
+      description: 'Dedicated support for mission-critical applications.'
+    },
+    {
+      icon: Phone,
+      title: 'Priority Support',
+      description: 'Direct phone support and dedicated customer success manager.'
+    }
+  ];
+
+  const pricingTiers = [
+    {
+      name: 'Professional',
+      price: '$99',
+      period: 'per user/month',
+      features: [
+        'Advanced AI features',
+        'Priority support',
+        'Custom integrations',
+        'Enhanced security'
+      ],
+      recommended: false
+    },
+    {
+      name: 'Enterprise',
+      price: '$299',
+      period: 'per user/month',
+      features: [
+        'All Professional features',
+        'Dedicated support',
+        'Custom deployment',
+        'SLA guarantee',
+        'Advanced analytics'
+      ],
+      recommended: true
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-6xl">
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <Badge className="mb-4">Enterprise Solution</Badge>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Scale Your Development with Enterprise AI
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Get the advanced features, security, and support your enterprise needs 
+            to build and deploy AI-powered applications at scale.
+          </p>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">
+          {enterpriseFeatures.map((feature) => (
+            <Card key={feature.title}>
+              <CardContent className="p-6 text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-600 text-sm">{feature.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Pricing */}
+        <div className="mb-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Enterprise Pricing</h2>
+            <p className="text-gray-600">Choose the plan that fits your organization's needs</p>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+            {pricingTiers.map((tier) => (
+              <Card key={tier.name} className={tier.recommended ? 'ring-2 ring-blue-600' : ''}>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>{tier.name}</CardTitle>
+                    {tier.recommended && <Badge>Recommended</Badge>}
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className="text-3xl font-bold">{tier.price}</span>
+                    <span className="text-gray-500 ml-2">{tier.period}</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    {tier.features.map((feature) => (
+                      <li key={feature} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-600 mr-3" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button 
+                    className="w-full" 
+                    variant={tier.recommended ? 'default' : 'outline'}
+                  >
+                    Contact Sales
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <Card className="bg-blue-600 text-white">
+          <CardContent className="p-12 text-center">
+            <Building className="h-12 w-12 mx-auto mb-6 text-blue-100" />
+            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Development?</h3>
+            <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+              Join hundreds of enterprises already using AI Guided SaaS to accelerate 
+              their development processes and deliver better applications faster.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <Button variant="secondary" size="lg">
+                Schedule Demo
+              </Button>
+              <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-blue-600">
+                Contact Sales
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
-                  </div>
-                  </div>
-                  </div>
-                  </div>
-                  </div>}
+  );
+}

@@ -22,10 +22,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 };
         // Simulate agent response;
 
-const response: AgentChatResponse = {,
-            response: `I understand you want to work on: "${message}". Let me help you with that!`;
+const response: AgentChatResponse = {
+            response: `I understand you want to work on: "${message}". Let me help you with that!`,
             suggestions: [
-                'Create a new React component';
+                'Create a new React component',
                 'Set up database schema',
                 'Configure authentication',
                 'Deploy to Vercel'

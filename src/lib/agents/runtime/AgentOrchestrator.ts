@@ -18,26 +18,26 @@ export interface ProjectRequest {
 };
 export interface ProjectResult {
   request: ProjectReques
-t;
+t,
     plan: ExecutionPla
-n;
-    results: TaskResult[];
+n,
+    results: TaskResult[],
   summary: ProjectSummar
-y;
+y,
     artifacts: Map<string, any>,
   recommendations: string[]
 };
 export interface ProjectSummary {
-  overview: string;
-  keyFindings: string[];
-  deliverables: Deliverable[];
-  nextSteps: string[];
+  overview: string,
+  keyFindings: string[],
+  deliverables: Deliverable[],
+  nextSteps: string[],
   risks: string[];
   timeline?: string
 };
 export interface Deliverable {
-  name: string;
-  type: string;
+  name: string,
+  type: string,
   description: string;
   location?: string
 };
@@ -45,18 +45,17 @@ export class AgentOrchestrator {
   private runtime: AgentRuntime
   private config: OrchestratorConfig, constructor(config: OrchestratorConfig = {}) {
     this.config = {
-      enableLogging: true;
-    maxConcurrentAgents: 5;
-    timeoutMs: 300000;
+      enableLogging: true,
+    maxConcurrentAgents: 5,
+    timeoutMs: 300000,
     modelConfig: {
   model: 'gpt-4',
-        temperature: 0.7
-      };
+        temperature: 0.7 }
       ...config
 }
     this.runtime = new AgentRuntime({
-      enableLogging: this.config.enableLogging;
-    maxConcurrentAgents: this.config.maxConcurrentAgents;
+      enableLogging: this.config.enableLogging,
+    maxConcurrentAgents: this.config.maxConcurrentAgents,
     timeoutMs: this.config.timeoutMs
     })
 }
@@ -90,7 +89,7 @@ const _recommendations = await this.generateRecommendations(
     )
     return {
       request,;
-      plan: executionResult;
+      plan: executionResult,
     results: executionResult.results;
       summary,
       artifacts,
@@ -113,7 +112,7 @@ const plan: ExecutionPlan = {;
       dependencies: new Map(
         tasks.filter((t) => t.dependencies!.length > 0)
           .map((t) => [t.id, t.dependencies!])),
-      executionOrder: tasks.map((t) => [t.id]);
+      executionOrder: tasks.map((t) => [t.id]),
     estimatedDuration: tasks.length * 30000
 }
     const results = await this.runtime.executePlan(plan);
@@ -160,7 +159,7 @@ if (request.constraints && request.constraints.length > 0) {
   /**
    * Generate project summary
    */
-  private async generateSummary(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }; artifacts: Map<string, any>): Promise<any> {
+  private async generateSummary(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, artifacts: Map<string, any>): Promise<any> {
     const _successfulResults = execution.results.filter((r) => r.result.success); const outputs = this.extractOutputs(successfulResults); const _summaryPrompt = `Generate a comprehensive project summary based on these agent, outputs: Original, Request:``;
 ${JSON.stringify(request, null, 2)}
 Agent: Outputs:
@@ -175,9 +174,9 @@ Create a summary, with:
 6. Estimated timeline (if applicable)
 Format as JSON ProjectSummary object.`;
 
-const response = await generateAIResponse(summaryPrompt, {,
-    model: this.config.modelConfig?.model;
-    temperature: 0.3;
+const response = await generateAIResponse(summaryPrompt, {
+    model: this.config.modelConfig?.model,
+    temperature: 0.3,
     responseFormat: 'json'
     })
     return JSON.parse(response);
@@ -185,8 +184,8 @@ const response = await generateAIResponse(summaryPrompt, {,
   /**
    * Generate recommendations
    */
-  private async generateRecommendations(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }; summary: ProjectSummary): Promise<any> {
-    const _recommendPrompt = `Based on the project analysis, generate actionable, recommendations: Project, Type: ${request.type}``;
+  private async generateRecommendations(request: ProjectRequest, execution: ExecutionPlan & { results: TaskResult[] }, summary: ProjectSummary): Promise<any> {
+    const _recommendPrompt = `Based on the project analysis, generate actionable, recommendations: Project, Type: ${request.type}``,
 Summary: ${summary.overview}
 Key: Findings:
 ${summary.keyFindings.join('\n')}
@@ -200,8 +199,8 @@ Generate 5-7 specific, actionable recommendations, that:
 5. Are practical and implementable
 Return as a simple array of recommendation strings.`;
 
-const response = await generateAIResponse(recommendPrompt, {,
-    model: this.config.modelConfig?.model;
+const response = await generateAIResponse(recommendPrompt, {
+    model: this.config.modelConfig?.model,
     temperature: 0.4
     })
     return response.message.split('\n').filter((line: string) => line.trim().length > 0);

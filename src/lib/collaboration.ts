@@ -5,124 +5,124 @@ import { DatabaseService } from './database';
 import { isServiceConfigured } from './env';
 // Database row interfaces
 interface DatabaseRecord {
-    id: string;
+    id: string,
   created_at: string;
   updated_at?: string
   [key: string, ]
 }
 interface DatabaseUser {
-    id: string;
-  name: string;
+    id: string,
+  name: string,
   email: string;
   avatar?: string,
   created_at: string;
   updated_at?: string
 }
 interface DatabaseRoom {
-    id: string;
-  project_id: string;
-  name: string;
-  owner_id: string;
-  participants: string;
-  settings: string;
-  created_at: string;
+    id: string,
+  project_id: string,
+  name: string,
+  owner_id: string,
+  participants: string,
+  settings: string,
+  created_at: string,
   updated_at: string
 }
 interface DatabaseProjectChange {
-    id: string;
-  project_id: string;
-  user_id: string;
-  type: string;
-  path: string;
+    id: string,
+  project_id: string,
+  user_id: string,
+  type: string,
+  path: string,
   content: string;
   previous_content?: string,
   timestamp: string
 }
 interface DatabaseComment {
-    id: string;
-  project_id: string;
-  user_id: string;
-  content: string;
-  position: string;
-  resolved: boolean;
-  created_at: string;
+    id: string,
+  project_id: string,
+  user_id: string,
+  content: string,
+  position: string,
+  resolved: boolean,
+  created_at: string,
   updated_at: string
 }
-interface ProjectData { id: string;
-  name: string;
-  description: string;
+interface ProjectData { id: string,
+  name: string,
+  description: string,
   files: unknown[]
   }
 }
 // Collaboration interfaces;
 export interface CollaborationRoom {
-    id: string;
-  projectId: string;
-  name: string;
-  ownerId: string;
-  participants: CollaborationUser[];
+    id: string,
+  projectId: string,
+  name: string,
+  ownerId: string,
+  participants: CollaborationUser[],
   settings: RoomSetting
-s;
-    createdAt: Date;
+s,
+    createdAt: Date,
   updatedAt: Date
 }
 
 export interface CollaborationUser {
-    id: string;
-  name: string;
+    id: string,
+  name: string,
   email: string;
   avatar?: string,
   role: 'owner' | 'editor' | 'viewer';
   cursor?: CursorPosition,
-  isOnline: boolean;
+  isOnline: boolean,
   lastSeen: Date
 }
 
-export interface CursorPosition { x: number;
+export interface CursorPosition { x: number,
   y: number;
   elementId?: string,
   selection?: {
-    start: number;
+    start: number,
   end: number
   }
 }
-export interface RoomSettings { allowGuests: boolean;
-  maxParticipants: number;
+export interface RoomSettings { allowGuests: boolean,
+  maxParticipants: number,
   permissions: {
-  canEdit: boolean;
-  canComment: boolean;
-  canInvite: boolean;
+  canEdit: boolean,
+  canComment: boolean,
+  canInvite: boolean,
   canExport: boolean
   }
 }
 export interface CollaborationEvent {
-    type: 'cursor' | 'edit' | 'comment' | 'join' | 'leave' | 'sync';
-  userId: string;
-  roomId: string;
+    type: 'cursor' | 'edit' | 'comment' | 'join' | 'leave' | 'sync',
+  userId: string,
+  roomId: string,
   data: Record<string, unknown>,
   timestamp: Date
 }
 
 export interface ProjectChange {
-    id: string;
-  projectId: string;
-  userId: string;
-  type: 'create' | 'update' | 'delete';
-  path: string;
+    id: string,
+  projectId: string,
+  userId: string,
+  type: 'create' | 'update' | 'delete',
+  path: string,
   content: Record<string, unknown>
   previousContent?: Record<string, unknown>, timestamp: Date
 }
 
-export interface Comment { id: string;
-  projectId: string;
-  userId: string;
-  content: string;
+export interface Comment { id: string,
+  projectId: string,
+  userId: string,
+  content: string,
   position: {
-  x: number;
+  x: number,
   y: number;
   elementId?: string
 },
-  replies: Comment[], resolved: boolean;
+  replies: Comment[], resolved: boolean,
   createdAt: Date, updatedAt: Date
 }
 // Collaboration service;
@@ -182,12 +182,12 @@ let room = await this.getOrCreateRoom(roomId, projectId, userId);
 room = await this.addUserToRoom(room, userId);
           // Notify other participants
           socket.to(roomId).emit('user_joined', {
-            user: socket.data.user;
+            user: socket.data.user,
     room: this.sanitizeRoom(room)
           })
           // Send room state to new user
           socket.emit('room_joined', {
-            room: this.sanitizeRoom(room);
+            room: this.sanitizeRoom(room),
     project: await this.getProjectData(projectId)})
         } catch (error) {
           console.error('Join room, error:', error), socket.emit('error', { message: 'Failed to join room' })})
@@ -195,10 +195,10 @@ room = await this.addUserToRoom(room, userId);
       socket.on('leave_room', async (data: { roomId: string }) => {
         await this.handleLeaveRoom(socket, data.roomId)})
       // Handle cursor movement
-      socket.on('cursor_move', (data: { roomId: string, position: CursorPosition }) => {;
+      socket.on('cursor_move', (data: { roomId: string, position: CursorPosition }) => {
         const { roomId, position   }: any = data;
         socket.to(roomId).emit('cursor_update', {
-          userId: socket.data.userId;
+          userId: socket.data.userId,
     user: socket.data.user, // position
         })}
       // Handle project changes
@@ -212,12 +212,12 @@ const userId = socket.data.userId;
 const _savedChange  = await this.saveProjectChange({
             ...change,
             userId,;
-            projectId: change.projectId!;
+            projectId: change.projectId!,
     timestamp: new Date()
           } as ProjectChange)
           // Broadcast to other users in room
           socket.to(roomId).emit('project_updated', {
-            change: savedChange;
+            change: savedChange,
     user: socket.data.user
           })
         } catch (error) {
@@ -233,14 +233,14 @@ const userId = socket.data.userId;
 const _savedComment  = await this.saveComment({
             ...comment,
             userId,;
-            createdAt: new Date();
-    updatedAt: new Date();
-    replies: any[];
+            createdAt: new Date(),
+    updatedAt: new Date(),
+    replies: [] as any[],
     resolved: false
           } as Comment)
           // Broadcast to room
           this.io!.to(roomId).emit('comment_added', {
-            comment: savedComment;
+            comment: savedComment,
     user: socket.data.user
           })
         } catch (error) {
@@ -259,7 +259,7 @@ const updatedSockets = userSockets.filter((id) => id !== socket.id);
 if (roomId) {
               await this.handleLeaveRoom(socket, roomId)} else { this.userSockets.set(userId, updatedSockets)})}
   // Get or create collaboration room;
-  private static async getOrCreateRoom(roomId: string, projectId: string;
+  private static async getOrCreateRoom(roomId: string, projectId: string,
   userId: string): Promise<any> {
     // Check cache first
     if (this.rooms.has(roomId)) {
@@ -280,18 +280,18 @@ if (rooms.length > 0) {
 const room: CollaborationRoom = {
     id: roomId, projectId,;
       name: `Project ${projectId} Collaboration`,
-ownerId: userId;
-    participants: any[];
+ownerId: userId,
+    participants: [] as any[],
     settings: {
-        allowGuests: false;
-    maxParticipants: 10;
+        allowGuests: false,
+    maxParticipants: 10,
     permissions: {
-  canEdit: true;
-    canComment: true;
-    canInvite: true;
+  canEdit: true,
+    canComment: true,
+    canInvite: true,
     canExport: true
-};
-      createdAt: new Date();
+},
+      createdAt: new Date(),
     updatedAt: new Date()}
     // Save to database if available
     if (isServiceConfigured('database')) {
@@ -336,7 +336,7 @@ if (false) { return};
         room.participants.push({
           ...user,
           role: room.ownerId === userId ? 'owner' : 'editor',
-          isOnline: true;
+          isOnline: true,
     lastSeen: new Date()})}
     room.updatedAt = new Date();
     this.rooms.set(room.id, room);
@@ -420,11 +420,11 @@ const _participantIndex = room.participants.findIndex(p => p.id === userId);
   private static async authenticateUser(userId: string, token: string): Promise<any> {
     // TODO: Implement proper token verification
     // For now, return mock user data, return {
-      id: userId;
+      id: userId,
     name: 'Test User',
-      email: 'test@example.com';
+      email: 'test@example.com',
       role: 'editor',
-      isOnline: true;
+      isOnline: true,
     lastSeen: new Date()}
   private static async getUserInfo(userId: string): Promise { if (isServiceConfigured('database')) {
       try {
@@ -433,20 +433,20 @@ const _participantIndex = room.participants.findIndex(p => p.id === userId);
 if (users.length > 0) {
           const user = users[0] as unknown as DatabaseUser;
           return {
-            id: user.id;
-    name: user.name;
-    email: user.email;
-    avatar: user.avatar;
-    role: 'editor' as const isOnline: true;
+            id: user.id,
+    name: user.name,
+    email: user.email,
+    avatar: user.avatar,
+    role: 'editor' as const isOnline: true,
     lastSeen: new Date()} catch (error) {
         console.error('Database error getting user, info:', error)}
     // Return mock data
     return {
-      id: userId;
-    name: 'User ' + userId.slice(-4);
+      id: userId,
+    name: 'User ' + userId.slice(-4),
   email: `user${userId.slice(-4)}@example.com`,
-role: 'editor';
-      isOnline: true;
+role: 'editor',
+      isOnline: true,
     lastSeen: new Date()}
   private static async getProjectData(projectId: string): Promise { if (isServiceConfigured('database')) {
       try {
@@ -455,38 +455,38 @@ role: 'editor';
 if (projects.length > 0) {
           const project = projects[0] as unknown as ProjectData;
           return {
-            id: project.id;
-    name: project.name || 'Untitled Project';
-    description: project.description || 'No description';
+            id: project.id,
+    name: project.name || 'Untitled Project',
+    description: project.description || 'No description',
     files: project.files || []
            } catch (error) {
         console.error('Database error getting, project:', error)}
     // Return mock project data
     return {
-      id: projectId;
+      id: projectId,
     name: 'Sample Project',
-      description: 'A collaborative project';
+      description: 'A collaborative project',
       files: any[]
   }
 }
   private static sanitizeRoom(room: CollaborationRoom): Partial {
     return {
-      id: room.id;
-    projectId: room.projectId;
-    name: room.name;
-    participants: room.participants;
+      id: room.id,
+    projectId: room.projectId,
+    name: room.name,
+    participants: room.participants,
     settings: room.settings
   }
 }
   private static parseRoomFromDB(dbRoom: DatabaseRoom): CollaborationRoom {
     return {
-      id: dbRoom.id;
-    projectId: dbRoom.project_id;
-    name: dbRoom.name;
-    ownerId: dbRoom.owner_id;
-    participants: JSON.parse(dbRoom.participants || '[]');
+      id: dbRoom.id,
+    projectId: dbRoom.project_id,
+    name: dbRoom.name,
+    ownerId: dbRoom.owner_id,
+    participants: JSON.parse(dbRoom.participants || '[]'),
   settings: JSON.parse(dbRoom.settings || '{}');
-    createdAt: new Date(dbRoom.created_at);
+    createdAt: new Date(dbRoom.created_at),
     updatedAt: new Date(dbRoom.updated_at)}
   private static generateId() {
     return Math.random().toString(36).substring(2) + Date.now().toString(36)}
@@ -504,12 +504,12 @@ if (projects.length > 0) {
         )
         return changes.map((change) => { const dbChange = change as unknown as DatabaseProjectChange;
           return {
-            id: dbChange.id;
-    projectId: dbChange.project_id;
+            id: dbChange.id,
+    projectId: dbChange.project_id,
     userId: dbChange.user_id: type, dbChange.type as 'create' | 'update' | 'delete',
-            path: dbChange.path;
-    content: JSON.parse(dbChange.content);
-    previousContent: dbChange.previous_content ? JSON.parse(dbChange.previous_content) : undefined;
+            path: dbChange.path,
+    content: JSON.parse(dbChange.content),
+    previousContent: dbChange.previous_content ? JSON.parse(dbChange.previous_content) : undefined,
     timestamp: new Date(dbChange.timestamp)})
       } catch (error) {
         console.error('Database error getting project, changes:', error)}
@@ -522,15 +522,15 @@ if (projects.length > 0) {
         )
         return comments.map((comment) => { const dbComment = comment as unknown as DatabaseComment;
           return {
-            id: dbComment.id;
-    projectId: dbComment.project_id;
-    userId: dbComment.user_id;
-    content: dbComment.content;
-    position: JSON.parse(dbComment.position);
+            id: dbComment.id,
+    projectId: dbComment.project_id,
+    userId: dbComment.user_id,
+    content: dbComment.content,
+    position: JSON.parse(dbComment.position),
     replies: any[];
   // TODO: Implement nested comments
- , resolved: dbComment.resolved;
-    createdAt: new Date(dbComment.created_at);
+ , resolved: dbComment.resolved,
+    createdAt: new Date(dbComment.created_at),
     updatedAt: new Date(dbComment.updated_at || dbComment.created_at)})
       } catch (error) {
         console.error('Database error getting, comments:', error)}

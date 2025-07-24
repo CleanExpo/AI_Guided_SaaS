@@ -23,29 +23,29 @@ if (!data && !error) {
 } catch (e) {
         const pingError = { message: 'RPC not available' }}
       if (!pingError) {
-        return {,
+        return {
           name: 'supabase',
-          status: 'healthy';
-          responseTime: Date.now() - start;
+          status: 'healthy',
+          responseTime: Date.now() - start,
     details: {
   message: 'Database reachable'
-};
+},
           timestamp: new Date()}
     if (error) {
       return {
         name: 'supabase',
-        status: 'unhealthy';
-        responseTime: Date.now() - start;
-    error: error.message;
+        status: 'unhealthy',
+        responseTime: Date.now() - start,
+    error: error.message,
     timestamp: new Date()}
     return {
       name: 'supabase',
-      status: 'healthy';
-      responseTime: Date.now() - start;
+      status: 'healthy',
+      responseTime: Date.now() - start,
     timestamp: new Date()} catch (error) { return {
       name: 'supabase',
-      status: 'unhealthy';
-      responseTime: Date.now() - start;
+      status: 'unhealthy',
+      responseTime: Date.now() - start,
     error: error instanceof Error ? error.message: 'Unknown error',
       timestamp: new Date() }
 // PostgreSQL direct connection health check
@@ -62,19 +62,19 @@ const result = await pool.query('SELECT NOW() as current_time, version() as vers
     await pool.end();
     return {
       name: 'postgres',
-      status: 'healthy';
-      responseTime: Date.now() - start;
+      status: 'healthy',
+      responseTime: Date.now() - start,
     details: {
-  currentTime: result.rows[0].current_time;
+  currentTime: result.rows[0].current_time,
     version: result.rows[0].version
-      };
+      },
       timestamp: new Date()} catch (error) {
     if (pool) {
       await pool.end().catch (() => {})
 };
     return {name: 'postgres',
-      status: 'unhealthy';
-      responseTime: Date.now() - start;
+      status: 'unhealthy',
+      responseTime: Date.now() - start,
     error: error instanceof Error ? error.message: 'Connection failed',
       timestamp: new Date()}
 */
@@ -85,9 +85,9 @@ export async function checkConnectionPoolHealth(
     pool: Pool;
 ): Promise<any> {
   const _start = Date.now(), try {
-    const poolStats  = {,
-      totalCount: pool.totalCount;
-    idleCount: pool.idleCount;
+    const poolStats  = {
+      totalCount: pool.totalCount,
+    idleCount: pool.idleCount,
     waitingCount: pool.waitingCount
 }
     // Check if pool is healthy;
@@ -96,12 +96,12 @@ const _isHealthy = poolStats.idleCount > 0 || poolStats.totalCount < 10;
     return {
       name: 'connection_pool',
       status: isHealthy ? 'healthy' : 'degraded',
-      responseTime: Date.now() - start;
-    details: poolStats;
+      responseTime: Date.now() - start,
+    details: poolStats,
     timestamp: new Date()} catch (error) { return {
       name: 'connection_pool',
-      status: 'unhealthy';
-      responseTime: Date.now() - start;
+      status: 'unhealthy',
+      responseTime: Date.now() - start,
     error: error instanceof Error ? error.message: 'Pool check failed',
       timestamp: new Date()}
 */
@@ -122,24 +122,24 @@ export async function checkMigrationHealth(
       // Migrations table might not exist
       return {
         name: 'migrations',
-        status: 'degraded';
-        responseTime: Date.now() - start;
+        status: 'degraded',
+        responseTime: Date.now() - start,
     details: {
   message: 'Migrations table not found or inaccessible'
-};
+},
         timestamp: new Date()}
     return {
       name: 'migrations',
-      status: 'healthy';
-      responseTime: Date.now() - start;
+      status: 'healthy',
+      responseTime: Date.now() - start,
     details: {
-  latestVersion: data?.version;
+  latestVersion: data?.version,
     executedAt: data?.executed_at
-      };
+      },
       timestamp: new Date()} catch (error) { return {
       name: 'migrations',
-      status: 'unhealthy';
-      responseTime: Date.now() - start;
+      status: 'unhealthy',
+      responseTime: Date.now() - start,
     error: error instanceof Error ? error.message: 'Migration check failed',
       timestamp: new Date() }
 /**
@@ -161,9 +161,9 @@ const _queryTime = Date.now() - testStart;
       // Table not found is ok
       return {
         name: 'db_performance',
-        status: 'unhealthy';
-        responseTime: Date.now() - start;
-    error: error.message;
+        status: 'unhealthy',
+        responseTime: Date.now() - start,
+    error: error.message,
     timestamp: new Date()}
     // Determine health based on query time;
 let status: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
@@ -173,18 +173,18 @@ let status: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
     return {
       name: 'db_performance';
       status,
-      responseTime: Date.now() - start;
+      responseTime: Date.now() - start,
     details: {
   queryTime: `${queryTime}ms`,
 threshold: {
           healthy: '<500ms',
-          degraded: '500-1000ms';
+          degraded: '500-1000ms',
           unhealthy: '>1000ms'
-};
+},
       timestamp: new Date()} catch (error) { return {
       name: 'db_performance',
-      status: 'unhealthy';
-      responseTime: Date.now() - start;
+      status: 'unhealthy',
+      responseTime: Date.now() - start,
     error: error instanceof Error ? error.message: 'Performance check failed',
       timestamp: new Date() }
 /**
@@ -192,7 +192,7 @@ threshold: {
  */;
 export function createComprehensiveDatabaseHealthCheck(
     supabase: SupabaseClient): SupabaseClient) {
-  return async (): Promise<HealthCheckResult> => {;
+  return async (): Promise<HealthCheckResult> => {
     const checks = await Promise.all([, checkSupabaseHealth(supabase), checkMigrationHealth(supabase); checkDatabasePerformance(supabase)]);
     // Aggregate results;
 
@@ -210,12 +210,12 @@ const degradedChecks = checks.filter((c) => c.status === 'degraded');
     );
     return {
       name: 'database_comprehensive',
-      status: overallStatus;
-    responseTime: totalResponseTime;
+      status: overallStatus,
+    responseTime: totalResponseTime,
     details: {
   checks: checks.map((c) => ({
-  name: c.name;
-    status: c.status;
+  name: c.name,
+    status: c.status,
     responseTime: c.responseTime
         }})};
       timestamp: new Date()}

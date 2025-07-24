@@ -15,25 +15,25 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   required?: boolean
   loading?: boolean
 }
-const inputVariants = {,
+const inputVariants = {
   default: 'border border-input bg-background',
-  filled: 'border-0 bg-brand-secondary-100 dark: bg-brand-secondary-800';
+  filled: 'border-0 bg-brand-secondary-100 dark: bg-brand-secondary-800',
   underlined: 'border-0 border-b-2 border-input bg-transparent rounded-none',
 outlined: 'border-2 border-input bg-background'
 };
 
-const inputSizes = {,
+    const inputSizes = {
   xs: 'h-7 px-2 text-xs',
-  sm: 'h-8 px-3 text-sm';
+  sm: 'h-8 px-3 text-sm',
   md: 'h-9 px-3 text-sm',
-  lg: 'h-10 px-4 text-base';
+  lg: 'h-10 px-4 text-base',
 xl: 'h-12 px-4 text-lg'
 };
 
-const inputStates = {,
-  default: '';
+    const inputStates = {
+  default: '',
   error: 'border-red-500 focus: border-red-500 focus:ring-red-500',
-  success: 'border-green-500 focus:border-green-500 focus:ring-green-500';
+  success: 'border-green-500 focus:border-green-500 focus:ring-green-500',
 warning: 'border-yellow-500 focus:border-yellow-500 focus:ring-yellow-500'
 };
 export function InputEnhanced({
@@ -89,7 +89,7 @@ const StateIcon = () => {
           <input
 
 const id = {inputId}
-            className={cn(;
+            className={cn(
               'flex w-full rounded-md font-medium ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
               inputVariants[variant],
               inputSizes[inputSize],
@@ -153,15 +153,15 @@ const displayText = hasError ? errorText : helperText;
   
 const currentLength  = typeof value === 'string' ? value.length : 0;
 
-const textareaSizes = {,
+    const textareaSizes = {
     sm: 'min-h-[60px] px-3 py-2 text-sm',
-    md: 'min-h-[80px] px-3 py-2 text-sm';
+    md: 'min-h-[80px] px-3 py-2 text-sm',
 lg: 'min-h-[120px] px-4 py-3 text-base'
   };
-  
-const resizeClasses = {,
+
+    const resizeClasses = {
     none: 'resize-none',
-    vertical: 'resize-y';
+    vertical: 'resize-y',
     horizontal: 'resize-x',
 both: 'resize'
   };
@@ -178,7 +178,7 @@ both: 'resize'
       <textarea
 
 const id = {textareaId}
-        className={cn(;
+        className={cn(
           'flex w-full rounded-md border border-input bg-background font-medium ring-offset-background placeholder: text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
           inputVariants[variant],
           textareaSizes[textareaSize],
@@ -214,7 +214,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {;
   required?: boolean;
   placeholder?: string,
   options: Array<{
-    value: string;
+    value: string,
     label: string
     disabled?: boolean
   }>
@@ -251,8 +251,8 @@ const htmlFor  = {selectId};
         <select
 
 const id = {selectId}
-          className={cn(;
-            'flex w-full rounded-md border border-input bg-background font-medium ring-offset-background focus-visible: outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none';
+          className={cn(
+            'flex w-full rounded-md border border-input bg-background font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none';
             inputVariants[variant],
             inputSizes[selectSize],
             inputStates[hasError ? 'error' : state],
@@ -285,7 +285,7 @@ viewBox="0 0 24 24";
 strokeLinecap="round";
 strokeLinejoin="round";
 
-const strokeWidth = {2}
+    const strokeWidth = {2}
               d="M19 9l-7 7-7-7"   />
       {displayText && (
         <p className={cn(
@@ -319,16 +319,16 @@ export function CheckboxEnhanced({
     if (checkboxRef.current) {
       checkboxRef.current.indeterminate = indeterminate || false
     }, [indeterminate]);
-  
-const checkboxSizes = {,
+
+    const checkboxSizes = {
     sm: 'w-4 h-4',
-    md: 'w-5 h-5';
+    md: 'w-5 h-5',
 lg: 'w-6 h-6'
   };
-  
-const checkboxStates = {,
+
+    const checkboxStates = {
     default: 'border-input',
-    error: 'border-red-500';
+    error: 'border-red-500',
     success: 'border-green-500',
 warning: 'border-yellow-500'
   };
@@ -339,8 +339,8 @@ warning: 'border-yellow-500'
 const ref  = {checkboxRef};
           type="checkbox";
 
-const id = {checkboxId}
-          className={cn(;
+    const id = {checkboxId}
+          className={cn(
             'rounded border-2 text-brand-primary-600 focus: ring-brand-primary-500 focus:ring-2 focus:ring-offset-2';
             checkboxSizes[checkboxSize],
             checkboxStates[state],
@@ -380,13 +380,13 @@ export function RadioEnhanced({
 }: RadioProps) {
   const generatedId = React.useId(); const radioId = id || generatedId; const radioSizes = {
     sm: 'w-4 h-4',
-    md: 'w-5 h-5';
+    md: 'w-5 h-5',
 lg: 'w-6 h-6'
   };
-  
-const radioStates = {,
+
+    const radioStates = {
     default: 'border-input',
-    error: 'border-red-500';
+    error: 'border-red-500',
     success: 'border-green-500',
 warning: 'border-yellow-500'
   };
@@ -396,7 +396,7 @@ warning: 'border-yellow-500'
 type="radio";
 
 const id  = {radioId}
-          className={cn(;
+          className={cn(
             'border-2 text-brand-primary-600 focus: ring-brand-primary-500 focus:ring-2 focus:ring-offset-2';
             radioSizes[radioSize],
             radioStates[state],
@@ -424,9 +424,9 @@ const id  = {radioId}
 interface RadioGroupProps {
 name: string;
   value?: string,
-  onChange?: (value: string) => void;
+  onChange?: (value: string) => void,
   options: Array<{
-    value: string;
+    value: string,
   label: string;
   description?: string,
   disabled?: boolean
@@ -550,7 +550,7 @@ export function FormGroup({
       )}
       </div>
       )}
-      <div className="space-y-4">{children}</div>;
+      <div className="space-y-4">{children}</div>
   );
 </div>
 </HTMLInputElement>

@@ -11,24 +11,25 @@ import { Github } from 'lucide-react';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false); const router  = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-const handleEmailSignIn = async (e: React.FormEvent) => {;
+  const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
       await signIn('email', {
         email,
         callbackUrl: '/dashboard'
-      })
-} finally {
-      setIsLoading(false)};
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  
-const handleGithubSignIn = () => {
+  const handleGithubSignIn = () => {
     signIn('github', { callbackUrl: '/dashboard' });
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -39,12 +40,11 @@ const handleGithubSignIn = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleEmailSignIn} className="space-y-4">
-            <Input;
-type="email";
-placeholder="Enter your email";
-
-const value = {email}
-              const onChange = {(e) => setEmail(e.target.value)}
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <Button type="submit" disabled={isLoading} className="w-full">
@@ -61,12 +61,11 @@ const value = {email}
             </div>
           </div>
           
-          <Button;
-type="button";
-variant="outline";
-
-const onClick = {handleGithubSignIn};
-            className="w-full";
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleGithubSignIn}
+            className="w-full"
           >
             <Github className="w-4 h-4 mr-2"   />
             GitHub
@@ -81,5 +80,5 @@ const onClick = {handleGithubSignIn};
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

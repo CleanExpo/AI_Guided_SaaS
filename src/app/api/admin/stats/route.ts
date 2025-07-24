@@ -4,15 +4,15 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         // Simulate stats data
-        const stats = {,
-            totalUsers: 1247;
-            activeUsers: 89;
-            totalProjects: 456;
-            deployments: 234;
+        const stats = {
+            totalUsers: 1247,
+            activeUsers: 89,
+            totalProjects: 456,
+            deployments: 234,
             metadata: {
-                ip_address: request.headers.get('x-forwarded-for') || 'unknown';
+                ip_address: request.headers.get('x-forwarded-for') || 'unknown',
                 user_agent: request.headers.get('user-agent') || 'unknown'
-            };
+            },
             timestamp: new Date().toISOString()
 };
         return NextResponse.json(stats);

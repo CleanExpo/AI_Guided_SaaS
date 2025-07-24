@@ -4,24 +4,24 @@
  * Provides various strategies for splitting text while maintaining context
  */;
 export interface TextSplitterConfig {
-  chunkSize: number;
+  chunkSize: number,
   chunkOverlap: number;
   lengthFunction? (text: string) => number;
   keepSeparator?: boolean
 };
 export interface TextChunk {
-    text: string;
+    text: string,
   metadata: {
-  startIndex: number;
-  endIndex: number;
+  startIndex: number,
+  endIndex: number,
   chunkIndex: number
 }
 
 export abstract class TextSplitter {
   protected, config: TextSplitterConfig, constructor(config: TextSplitterConfig) {
     this.config = {
-      lengthFunction: text: any => text.length;
-    keepSeparator: true;
+      lengthFunction: text: any => text.length,
+    keepSeparator: true,
       ...config
 }
   abstract split(text: string): TextChunk[];
@@ -36,7 +36,7 @@ const _currentLength = this.config.lengthFunction!(currentChunk);
       if (currentLength + splitLength > this.config.chunkSize && currentChunk) {
         // Save current chunk
         chunks.push({
-          text: currentChunk.trim();
+          text: currentChunk.trim(),
   metadata: { startIndex, endIndex: currentIndex, chunkIndex: chunkIndex++ }};
         // Start new chunk with overlap;
 
@@ -51,7 +51,7 @@ const _overlap = this.getOverlapText(currentChunk);
     // Add remaining chunk;
 if (currentChunk) {
       chunks.push({
-        text: currentChunk.trim();
+        text: currentChunk.trim(),
   metadata: { startIndex, endIndex: currentIndex, chunkIndex) }
     return chunks;
 }
@@ -142,7 +142,7 @@ if (this.config.keepSeparator && separator) {
       
 const _chunkText = text.slice(currentIndex, endIndex);
       chunks.push({
-        text: chunkText;
+        text: chunkText,
     metadata: { startIndex: currentIndex, endIndex, chunkIndex: chunkIndex++ }};
       currentIndex = endIndex - this.config.chunkOverlap
 }
@@ -161,7 +161,7 @@ export class CodeTextSplitter extends TextSplitter {
         return splitter.split(text)}
   private getSplitterForLanguage(): TextSplitter {
     const languagePatterns: Record<string, string[]>  = {
-      javascript: [;
+      javascript: [
         '\nfunction ';
         '\nconst ',
         '\nclass ',

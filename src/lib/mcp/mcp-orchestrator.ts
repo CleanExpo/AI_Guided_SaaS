@@ -8,25 +8,25 @@ import { z } from 'zod';
 
 // MCP types;
 export interface MCPServer {
-id: string;
-  name: string;
+id: string,
+  name: string,
   url: string;
   description?: string,
-  capabilities: MCPCapability[];
-  tools: MCPTool[];
+  capabilities: MCPCapability[],
+  tools: MCPTool[],
   status: 'connected' | 'disconnected' | 'error';
   metadata?: Record<string, any />, export
 }
 
 interface MCPCapability {
-type: 'tools' | 'resources' | 'prompts' | 'memory';
+type: 'tools' | 'resources' | 'prompts' | 'memory',
   version: string;
   features?: string[]
 }
 
 export interface MCPTool {
-name: string;
-  description: string;
+name: string,
+  description: string,
   inputSchema: any;
   outputSchema?: any,
   server: string;
@@ -35,7 +35,7 @@ name: string;
 }
 
 export interface MCPResource {
-uri: string;
+uri: string,
   name: string;
   description?: string,
   mimeType?: string,
@@ -54,67 +54,67 @@ name: string;
 }
 // Execution types;
 export interface MCPToolCall {
-tool: string;
-  server: string;
+tool: string,
+  server: string,
   arguments: Record<string, any>,
   timeout?: number
 }
 
 export interface MCPToolResult {
-tool: string;
-  server: string;
+tool: string,
+  server: string,
   result: any;
   error?: string,
-  duration: number;
+  duration: number,
   timestamp: string
 }
 
 export interface MCPOrchestrationPlan {
-id: string;
-  description: string;
-  steps: MCPExecutionStep[];
+id: string,
+  description: string,
+  steps: MCPExecutionStep[],
   dependencies: Record<string, string[]>,
   parallel: boolean
 }
 
 export interface MCPExecutionStep {
-id: string;
-  type: 'tool' | 'resource' | 'prompt';
-  server: string;
+id: string,
+  type: 'tool' | 'resource' | 'prompt',
+  server: string,
   operation: string;
   arguments?: Record<string, any>,
   dependsOn?: string[],
   retryPolicy?: {
-    maxRetries: number;
+    maxRetries: number,
     backoffMs: number
   }
 }
 // Validation schemas;
 export const MCPToolCallSchema = z.object({
-  tool: z.string();
-  server: z.string();
-  arguments: z.record(z.any());
+  tool: z.string(),
+  server: z.string(),
+  arguments: z.record(z.any()),
   timeout: z.number().optional()
-});
+})
 export const MCPOrchestrationPlanSchema = z.object({
-  description: z.string();
+  description: z.string(),
   steps: z.array(
     z.object({
-      id: z.string();
+      id: z.string(),
       type: z.enum(['tool', 'resource', 'prompt']),
-      server: z.string();
-      operation: z.string();
-      arguments: z.record(z.any()).optional();
+      server: z.string(),
+      operation: z.string(),
+      arguments: z.record(z.any()).optional(),
       dependsOn: z.array(z.string()).optional()})
-  );
+  )
   parallel: z.boolean().default(true)
-});
+})
 export class MCPOrchestrator {
   private servers: Map<string, MCPServer> = new Map(), private connections: Map<string, WebSocket> = new Map(), private pendingRequests: Map<
     string;
     {
-      resolve: (value: any) => void;
-      reject: (error: any) => void;
+      resolve: (value: any) => void,
+      reject: (error: any) => void,
       timeout: NodeJS.Timeout
     }
   > = new Map();
@@ -144,8 +144,8 @@ const tools = await this.discoverTools(server.id);
     } catch (error) {
       this.servers.set(server.id, {
         ...server,
-        capabilities: any[];
-        tools: any[];
+        capabilities: [] as any[],
+        tools: [] as any[],
         status: 'error'
       } as MCPServer);
       throw error
@@ -210,17 +210,17 @@ const result = await this.executeToolCall(
         validated.timeout;
       );
       return {
-        tool: validated.tool;
+        tool: validated.tool,
         server: validated.server;
         result,
-        duration: Date.now() - startTime;
+        duration: Date.now() - startTime,
         timestamp: new Date().toISOString()} catch (error) {
       return {
-        tool: validated.tool;
-        server: validated.server;
-        result: null;
+        tool: validated.tool,
+        server: validated.server,
+        result: null,
         error: error instanceof Error ? error.message : 'Unknown error',
-        duration: Date.now() - startTime;
+        duration: Date.now() - startTime,
         timestamp: new Date().toISOString()}
 }
   /**
@@ -233,14 +233,14 @@ const result = await this.executeToolCall(
    * Create an orchestration plan
    */
   createPlan(;
-description: string;
+description: string,
     steps: MCPExecutionStep[]
   ): MCPOrchestrationPlan {
-    const plan: MCPOrchestrationPlan = {,
+    const plan: MCPOrchestrationPlan = {
       id: this.generateId();
       description,
       steps,
-      dependencies: {};
+      dependencies: {},
       parallel: true
     };
     // Build dependency graph;
@@ -260,9 +260,9 @@ plan: MCPOrchestrationPlan
     const validated = MCPOrchestrationPlanSchema.parse(plan); const results = new Map<string, MCPToolResult>(), if (validated.parallel && Object.keys(plan.dependencies).length === 0) {
       // Execute all steps in parallel;
 
-const calls  = validated.steps.map((step) => ({,
-        tool: step.operation;
-        server: step.server;
+const calls  = validated.steps.map((step) => ({
+        tool: step.operation,
+        server: step.server,
         arguments: step.arguments || {}));
 
 const parallelResults = await this.callToolsParallel(calls);
@@ -274,7 +274,7 @@ const parallelResults = await this.callToolsParallel(calls);
       while (completed.size < validated.steps.length) {
         // Find steps that can be executed;
 
-const readySteps = validated.steps.filter((step) => {;
+const readySteps = validated.steps.filter((step) => {
           if (completed.has(step.id) || executing.has(step.id)) return false;
           // Check if dependencies are satisfied;
 if (step.dependsOn) {
@@ -286,9 +286,9 @@ if (step.dependsOn) {
           throw new Error('Circular dependency detected in orchestration plan')};
         // Execute ready steps;
 for (const step of readySteps) {
-          const promise = this.callTool({,
-            tool: step.operation;
-            server: step.server;
+          const promise = this.callTool({
+            tool: step.operation,
+            server: step.server,
             arguments: step.arguments || {});
           executing.set(step.id, promise);
           // Handle completion
@@ -298,11 +298,11 @@ for (const step of readySteps) {
 })
             .catch((error) => {
               results.set(step.id, {
-                tool: step.operation;
-                server: step.server;
-                result: null;
-                error: error.message;
-                duration: 0;
+                tool: step.operation,
+                server: step.server,
+                result: null,
+                error: error.message,
+                duration: 0,
                 timestamp: new Date().toISOString()
 });
               completed.add(step.id);
@@ -311,8 +311,7 @@ for (const step of readySteps) {
 }
         // Wait for at least one to complete;
 if (executing.size > 0) {
-          await Promise.race(Array.from(executing.values()))}
-}
+          await Promise.race(Array.from(executing.values()))  }
 };
     return results;
 }
@@ -355,7 +354,7 @@ if (executing.size > 0) {
   // Private methods
   private async connectToServer(serverId: string, url: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const ws = new WebSocket(url), ws.onopen = () => {;
+      const ws = new WebSocket(url), ws.onopen = () => {
         this.connections.set(serverId, ws); resolve(undefined)
 };
       ws.onerror = (error: Event) => {
@@ -367,12 +366,12 @@ if (executing.size > 0) {
       ws.onclose = () => {
         this.connections.delete(serverId); const server = this.servers.get(serverId), if (server) {
           server.status = 'disconnected'
-}
-      }})
+  }
+})
 }
   private async discoverCapabilities(serverId: string): Promise<MCPCapability[]> {
     try {
-      const response  = await this.sendRequest(serverId, 'initialize', {,
+      const response  = await this.sendRequest(serverId, 'initialize', {
         protocolVersion: '2024-11-05',
         capabilities: {});
 
@@ -416,7 +415,7 @@ const capabilities: MCPCapability[] = [];
   private async executeToolCall(serverId: string, toolName: string, args: Record<string, any>, timeout?: number): Promise<any> {
     return this.sendRequest(, serverId, 'tools/call';
       {
-        name: toolName;
+        name: toolName,
         arguments: args
       };
       timeout
@@ -428,13 +427,13 @@ const capabilities: MCPCapability[] = [];
 };
     const id  = this.generateId();
 
-const request = {,
+    const request = {
       jsonrpc: '2.0';
       id,
       method,
       params
     };
-    return new Promise((resolve, reject) => {;
+    return new Promise((resolve, reject) => {
       const timeoutMs = timeout || this.config?.defaultTimeout || 30000; const timer = setTimeout(() => {
         this.pendingRequests.delete(id); reject(new Error(`Request timeout after ${timeoutMs}ms`))
 }, timeoutMs);
@@ -452,9 +451,8 @@ const request = {,
         this.pendingRequests.delete(message.id);
         if (message.error) {
           reject(new Error(message.error.message || 'Unknown error'))} else {
-          resolve(message.result)}
-}
-    } catch (error) {
+          resolve(message.result)  }
+} catch (error) {
       console.error(`Failed to parse message from ${serverId}:`, error)
 }
 }

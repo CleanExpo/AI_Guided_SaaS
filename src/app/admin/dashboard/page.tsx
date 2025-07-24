@@ -6,19 +6,19 @@ import { Button } from '@/components/ui/button';
 import { Shield, LogOut } from 'lucide-react';
 
 interface AdminUser {
-  id: string;
-  email: string;
-  name: string;
-  lastLogin: string;
+  id: string,
+  email: string,
+  name: string,
+  lastLogin: string,
   role: string
 }
 
 export default function AdminDashboardPage() {
-  const [user] = useState<AdminUser>({,
+  const [user] = useState<AdminUser>({
     id: '1',
-    email: 'admin@aiguidedsaas.com';
+    email: 'admin@aiguidedsaas.com',
     name: 'System Administrator',
-    lastLogin: new Date().toISOString().split('T')[0];
+    lastLogin: new Date().toISOString().split('T')[0],
     role: 'Super Admin'
   });
 
@@ -48,6 +48,6 @@ export default function AdminDashboardPage() {
           </Card>
         </div>
       </div>
-    </div>;
+    </div>
   );
 }

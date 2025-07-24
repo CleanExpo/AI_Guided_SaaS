@@ -6,47 +6,46 @@ import { auditDependencies, getSecurityAudit } from './dependency-auditor';
 import { analyzeCausalLogs, generateCausalInsights } from './causal-feedback-replayer';
 // Type definitions for self-check report system;
 export interface ModuleReport {
-  status: string;
-  present: string[];
+  status: string,
+  present: string[],
   missing: string[]
 };
 export interface DependencyReport {
-  status: string;
-  summary: string;
+  status: string,
+  summary: string,
   outdated: string[]
 };
 export interface SecurityReport {
-  status: string;
-  summary: string;
+  status: string,
+  summary: string,
   vulnerabilities: string[]
 };
 export interface CausalAnalysis {
-  status: string;
-  summary: string;
-  patterns: string[];
+  status: string,
+  summary: string,
+  patterns: string[],
   recommendations: string[]
 };
 export interface CausalInsights {
-  totalInteractions: number;
-  uniqueComponents: number;
+  totalInteractions: number,
+  uniqueComponents: number,
   topIssues: string[]
 };
 export interface HealthMetrics {
-  moduleScore: number;
-  dependencyScore: number;
-  securityScore: number;
-  uxScore: number;
+  moduleScore: number,
+  dependencyScore: number,
+  securityScore: number,
+  uxScore: number,
   overallScore: number
 };
 export interface ReportData {
   moduleReport: ModuleRepor
-t;
-    depReport: DependencyRepor
-t;
+t, depReport: DependencyRepor
+t,
     securityReport: SecurityRepor
 t;
     causalAnalysis: CausalAnalysi
-s;
+s,
     causalInsights: CausalInsight
 s
 };
@@ -138,10 +137,10 @@ const _reportsDir = path.resolve(__dirname, '../../../reports');
   fs.writeFileSync(reportPath, report.trim();
   return report;
 }
-getOverallHealthStatus(, moduleReport: ModuleReport, depReport: DependencyReport;
-  securityReport: SecurityReport, causalAnalysis: CausalAnalysis): ModuleReport;
-    depReport: DependencyReport;
-    securityReport: SecurityReport;
+getOverallHealthStatus(, moduleReport: ModuleReport, depReport: DependencyReport,
+  securityReport: SecurityReport, causalAnalysis: CausalAnalysis): ModuleReport,
+    depReport: DependencyReport,
+    securityReport: SecurityReport,
     causalAnalysis: CausalAnalysis
 ) {
   const issues = [], if (moduleReport.missing.length > 0) issues.push('missing modules'); if (depReport.outdated.length > 0) issues.push('outdated dependencies');
@@ -155,9 +154,9 @@ getOverallHealthStatus(, moduleReport: ModuleReport, depReport: DependencyReport
   return `❌ Needs Attention - Multiple, issues: ${issues.join(', ')}`
 }
 getImmediateActions(,;
-    moduleReport: ModuleReport;
-    depReport: DependencyReport;
-    securityReport: SecurityReport;
+    moduleReport: ModuleReport,
+    depReport: DependencyReport,
+    securityReport: SecurityReport,
     causalAnalysis: CausalAnalysis
 ): string[] {
   const actions = [], if (securityReport.vulnerabilities.length > 0) {
@@ -182,7 +181,7 @@ getImmediateActions(,;
   return actions;
 }
 getSystemRecommendations(,
-    depReport: DependencyReport;
+    depReport: DependencyReport,
     securityReport: SecurityReport
 ): string[] {
   const recommendations = [], if (depReport.outdated.length > 0) {
@@ -218,9 +217,9 @@ getUXScore(causalInsights: CausalInsights): CausalInsights): number {
   if (causalInsights.topIssues.length <= 3) return 70;
   return 50;
 }
-getOverallScore(, moduleReport: ModuleReport, depReport: DependencyReport;
-  securityReport: SecurityReport, causalInsights: CausalInsights): ModuleReport;
-  depReport: DependencyReport, securityReport: SecurityReport;
+getOverallScore(, moduleReport: ModuleReport, depReport: DependencyReport,
+  securityReport: SecurityReport, causalInsights: CausalInsights): ModuleReport,
+  depReport: DependencyReport, securityReport: SecurityReport,
   causalInsights: CausalInsights): number {
   const _moduleScore = getModuleScore(moduleReport); const _depScore = getDependencyScore(depReport); const _securityScore  = getSecurityScore(securityReport);
 

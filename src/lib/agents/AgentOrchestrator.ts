@@ -1,15 +1,15 @@
 /* BREADCRUMB: library - Shared library code */;
 export interface AgentConfig {
-  id: string;
-  name: string;
-  type: string;
-  enabled: boolean;
+  id: string,
+  name: string,
+  type: string,
+  enabled: boolean,
   priority: number
 }
 
 export interface AgentStatus {
-  id: string;
-  status: 'active' | 'idle' | 'error';
+  id: string,
+  status: 'active' | 'idle' | 'error',
   lastActivity: Date
 }
 

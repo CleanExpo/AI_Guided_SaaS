@@ -16,12 +16,12 @@ export interface AuthenticatedSession extends Session  {
  */;
 createDemoSession(): AuthenticatedSession {
   return {
-    user: {,
+    user: {
   id: 'demo-user-id',
-      email: 'demo@aiguidedSaaS.com';
+      email: 'demo@aiguidedSaaS.com',
       name: 'Demo User',
       image: undefined
-    };
+    },
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(); // 24 hours from now
 }}
 /**
@@ -35,10 +35,10 @@ export async function getServerSession(): Promise<any> {
       return null}
     // Ensure the session has the required user ID
     return {
-      ...session, user: {,
-  id: (session.user as any).id || '';
-    email: session.user.email || '';
-    name: session.user.name || '';
+      ...session, user: {
+  id: (session.user as any).id || '',
+    email: session.user.email || '',
+    name: session.user.name || '',
     image: session.user.image || undefined
       }} as AuthenticatedSession
   } catch (error) {
@@ -72,17 +72,17 @@ const adminEmails = ['admin@aiguidedSaaS.com', 'support@aiguidedSaaS.com'];
 export async function authenticateApiRequest(): Promise<any> {
   try {
     const session = await getServerSession(), if (!session) {
-      return {,
-        success: false;
-    session: null;
+      return {
+        success: false,
+    session: null,
     error: 'Authentication required'
 }}
     return {
       success: true;
       session
   } catch { return {
-      success: false;
-    session: null;
+      success: false,
+    session: null,
     error: 'Authentication error'
 }
 /**
@@ -95,13 +95,13 @@ export async function authenticateAdminRequest(): Promise<any> {
     const _adminCheck = await isAdmin();
     if (!adminCheck) {
       return {
-        success: false;
-    session: null;
+        success: false,
+    session: null,
     error: 'Admin access required'
 }}
     return authResult;
 } catch { return {
-      success: false;
-    session: null;
+      success: false,
+    session: null,
     error: 'Admin authentication error'
 }

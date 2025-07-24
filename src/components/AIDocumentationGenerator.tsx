@@ -6,7 +6,7 @@ import { ProjectConfig } from '@/types';
 import { FileText, BookOpen } from 'lucide-react';
 interface AIDocumentationGeneratorProps {
 projectConfig: ProjectConfi
-g;
+g,
   onDocumentationGenerated: (docs: unknown) => void
 };
 export default function AIDocumentationGenerator() {

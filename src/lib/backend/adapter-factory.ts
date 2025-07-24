@@ -49,9 +49,9 @@ const _backendType = process.env.NEXT_PUBLIC_BACKEND_TYPE || 'supabase';
 break
   }
 }
-      const currentConfig = {,
+      const currentConfig = {
         type: 'supabase',
-        url: process.env.NEXT_PUBLIC_SUPABASE_URL;
+        url: process.env.NEXT_PUBLIC_SUPABASE_URL,
     apiKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 }
       // break
@@ -59,9 +59,9 @@ break
 if (!process.env.NEXT_PUBLIC_STRAPI_URL) { break, throw new Error('Strapi URL missing'), break
   }
 }
-      const currentConfig = {,
+      const currentConfig = {
         type: 'strapi',
-        url: process.env.NEXT_PUBLIC_STRAPI_URL;
+        url: process.env.NEXT_PUBLIC_STRAPI_URL,
     apiKey: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN
 }
       // break
@@ -69,9 +69,9 @@ if (!process.env.NEXT_PUBLIC_STRAPI_URL) { break, throw new Error('Strapi URL mi
 if (!process.env.NEXT_PUBLIC_NOCODB_URL || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN) { break, throw new Error('NocoDB configuration missing'), break
   }
 }
-      const currentConfig = {,
+      const currentConfig = {
         type: 'nocodb',
-        url: process.env.NEXT_PUBLIC_NOCODB_URL;
+        url: process.env.NEXT_PUBLIC_NOCODB_URL,
     apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN
 }
       break, default: throw new Error(`Unsupported, backend: type, ${backendType}`)``

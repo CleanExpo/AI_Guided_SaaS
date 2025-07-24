@@ -3,20 +3,20 @@ import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { mcp__memory__create_entities, mcp__memory__search_nodes } from '@/lib/mcp';
 export interface AgentConfig {
-  agent_id: string;
-  name: string;
-  version: string;
-  description: string;
-  role: string;
-  priority: number;
-  capabilities: string[];
+  agent_id: string,
+  name: string,
+  version: string,
+  description: string,
+  role: string,
+  priority: number,
+  capabilities: string[],
   specializations: Record<string, any>,
   coordination_protocols: {
-  initiates_with: string[];
-  coordinates_with: string[];
-  provides_to: string[];
-  depends_on: string[];
-  escalates_to: string[];
+  initiates_with: string[],
+  coordinates_with: string[],
+  provides_to: string[],
+  depends_on: string[],
+  escalates_to: string[],
   reports_to: string[]
 }
   workflow_patterns: Record<string, any>,
@@ -34,11 +34,11 @@ export interface AgentLoadResult {
   error?: string
 };
 export interface AgentDiscoveryResult {
-  total_agents: number;
-  core_agents: AgentConfig[];
-  orchestration_agents: AgentConfig[];
-  specialist_agents: AgentConfig[];
-  missing_agents: string[];
+  total_agents: number,
+  core_agents: AgentConfig[],
+  orchestration_agents: AgentConfig[],
+  specialist_agents: AgentConfig[],
+  missing_agents: string[],
   load_errors: string[]
 };
 export class AgentLoader {
@@ -57,12 +57,12 @@ export class AgentLoader {
    * Discover and load all available agents
    */
   async discoverAgents(): Promise<any> {
-    const result: AgentDiscoveryResult  = {,
-  total_agents: 0;
-    core_agents: any[];
-    orchestration_agents: any[];
-    specialist_agents: any[];
-    missing_agents: any[];
+    const result: AgentDiscoveryResult  = {
+  total_agents: 0,
+    core_agents: [] as any[],
+    orchestration_agents: [] as any[],
+    specialist_agents: [] as any[],
+    missing_agents: [] as any[],
     load_errors: any[]
 }
     try {
@@ -106,8 +106,8 @@ const _agentFiles = this.getAgentFiles();
             agent.name.toLowerCase().includes(identifier.toLowerCase()) {
           this.loadedAgents.set(agent.agent_id, agent);
           return { success: true, agent }}
-    return {,
-      success: false;
+    return {
+      success: false,
     error: `Agent not, found: ${identifier}`
   }
 }
@@ -158,11 +158,11 @@ const orchestratorResult = await this.loadAgentByIdentifier('ORCHESTRATOR');
    * Get agent status and health information
    */
   getAgentStatus(): Record {
-    const status: Record<string, any> = {,
-      total_loaded: this.loadedAgents.size;
+    const status: Record<string, any> = {
+      total_loaded: this.loadedAgents.size,
     agents_by_status: {};
-    agents_by_role: {};
-    dependency_graph: Object.fromEntries(this.agentDependencies);
+    agents_by_role: {},
+    dependency_graph: Object.fromEntries(this.agentDependencies),
     last_updated: new Date().toISOString()}
     // Group by status
     for (const agent of Array.from(this.loadedAgents.values()) {
@@ -172,9 +172,9 @@ const orchestratorResult = await this.loadAgentByIdentifier('ORCHESTRATOR');
       status.agents_by_status[agentStatus].push(agent.agent_id);
       // Group by role
       status.agents_by_role[agent.role] = {
-        id: agent.agent_id;
-    name: agent.name;
-    status: agentStatus;
+        id: agent.agent_id,
+    name: agent.name,
+    status: agentStatus,
     priority: agent.priority
   }
 }
@@ -224,13 +224,13 @@ break
       // Validate required fields;
 if (!agent.agent_id || !agent.name || !agent.role) {
         return {
-          success: false;
+          success: false,
     error: 'Missing required fields (agent_id, name, role)'
   }
 }
       return { success: true, agent }} catch (error) {
-      return {,
-        success: false;
+      return {
+        success: false,
     error: `Parse, error: ${error}`
   }
 }
@@ -266,9 +266,9 @@ if (!agent.agent_id || !agent.name || !agent.role) {
   private async storeInMemory(result: AgentDiscoveryResult): Promise<any> {
     try {
       // Store agent discovery results in memory system
-      await mcp__memory__create_entities([{,
+      await mcp__memory__create_entities([{
   name: 'AgentDiscoverySession',
-          entityType: 'session';
+          entityType: 'session',
           observations: [
             `Discovered ${result.total_agents} agents`,``,
   `Core, agents: ${result.core_agents.length}`,``,

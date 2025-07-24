@@ -4,20 +4,19 @@ export interface RateLimiterConfig {
   maxCpuUsage: number // percentage (0-100, ),
   maxMemoryUsage: number // percentage (0-100, ),
   checkInterval: number // millisecond
-s;
-    cooldownPeriod: number // millisecond
-s;
+s, cooldownPeriod: number // millisecond
+s,
     burstAllowance: number // percentage above limit for short burst
 s;
     adaptiveScaling: boolean
 };
 export interface ResourceMetrics {
-  cpuUsage: number;
-  memoryUsage: number;
-  cpuCount: number;
-  totalMemory: number;
-  freeMemory: number;
-  loadAverage: number[];
+  cpuUsage: number,
+  memoryUsage: number,
+  cpuCount: number,
+  totalMemory: number,
+  freeMemory: number,
+  loadAverage: number[],
   timestamp: Date
 };
 export class CPURateLimiter extends EventEmitter {
@@ -28,12 +27,12 @@ export class CPURateLimiter extends EventEmitter {
   private checkTimer?: NodeJS.Timer
   private cpuHistory: number[] = [], constructor(config: Partial<RateLimiterConfig> = {}) {
     super(), this.config = {
-      maxCpuUsage: 70;
-    maxMemoryUsage: 80;
-    checkInterval: 1000;
-    cooldownPeriod: 5000;
-    burstAllowance: 10;
-    adaptiveScaling: true;
+      maxCpuUsage: 70,
+    maxMemoryUsage: 80,
+    checkInterval: 1000,
+    cooldownPeriod: 5000,
+    burstAllowance: 10,
+    adaptiveScaling: true,
       ...config
 }
     this.startMonitoring()
@@ -65,7 +64,7 @@ const _memoryUsage = ((totalMemory - freeMemory) / totalMemory) * 100;
       cpuCount: cpus.length;
       totalMemory,
       freeMemory,
-      loadAverage: os.loadavg();
+      loadAverage: os.loadavg(),
     timestamp: new Date()}
   private calculateCPUUsage(cpus: os.CpuInfo[]): number {
     let totalIdle = 0; let totalTick = 0, cpus.forEach((cpu) => { for (const type in cpu.times) {
@@ -108,7 +107,7 @@ const _avgMem = recentMetrics.reduce((sum, m) => sum + m.memoryUsage, 0) / recen
       this.throttleUntil = new Date(Date.now() + this.config.cooldownPeriod)
       this.emit('throttle', {
         reason: 'Resource limits exceeded',
-        until: this.throttleUntil;
+        until: this.throttleUntil,
     metrics: this.metrics[this.metrics.length - 1]
       })}
   private canRelease(): boolean {
@@ -138,15 +137,15 @@ const _allBelowLimit = recentMetrics.every(m => ;
   public getThrottleStatus(): {
     throttled: boolean, until?: Date, currentMetrics: ResourceMetrics
   } { return {
-      throttled: this.isThrottled;
-    until: this.throttleUntil;
+      throttled: this.isThrottled,
+    until: this.throttleUntil,
     currentMetrics: this.metrics[this.metrics.length - 1] || {
-  cpuUsage: 0;
-    memoryUsage: 0;
-    cpuCount: os.cpus().length;
-    totalMemory: os.totalmem();
-    freeMemory: os.freemem();
-    loadAverage: os.loadavg();
+  cpuUsage: 0,
+    memoryUsage: 0,
+    cpuCount: os.cpus().length,
+    totalMemory: os.totalmem(),
+    freeMemory: os.freemem(),
+    loadAverage: os.loadavg(),
     timestamp: new Date()}
   public updateConfig(newConfig: Partial<RateLimiterConfig>) {
     this.config = {
@@ -167,11 +166,11 @@ const _allBelowLimit = recentMetrics.every(m => ;
     avgCpu: number, avgMemory: number, peakCpu: number, peakMemory: number, throttleCount: number
   } {
     if (this.metrics.length === 0) {
-      return {,
-        avgCpu: 0;
-    avgMemory: 0;
-    peakCpu: 0;
-    peakMemory: 0;
+      return {
+        avgCpu: 0,
+    avgMemory: 0,
+    peakCpu: 0,
+    peakMemory: 0,
     throttleCount: 0
   }
 }

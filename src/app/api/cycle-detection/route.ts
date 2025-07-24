@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 interface DocumentationSearchResult {
-  id: string;
-  title: string;
-  content: string;
+  id: string,
+  title: string,
+  content: string,
   relevance: number
 }
 interface CycleDetectionResult {
@@ -20,19 +20,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 };
     // Simulate cycle detection;
 
-const result: CycleDetectionResult  = {,
-      hasCycle: false;
+const result: CycleDetectionResult  = {
+      hasCycle: false,
       suggestions: [
-        'Consider breaking down complex dependencies';
+        'Consider breaking down complex dependencies',
         'Use dependency injection patterns',
         'Implement lazy loading where appropriate'
       ]
     };
 
 const searchResults: DocumentationSearchResult[]  = [
-      {,
+      {
         id: 'doc_1',
-        title: 'Dependency Management';
+        title: 'Dependency Management',
         content: 'Best practices for managing dependencies...',
         relevance: 0.95
       }
@@ -41,7 +41,7 @@ const searchResults: DocumentationSearchResult[]  = [
       searchResults,
       query,
       timestamp: new Date().toISOString() })
-  } catch (error) {;
+  } catch (error) {
     console.error('Cycle detection error:', error);
         return NextResponse.json({ error: 'Cycle detection failed' }, { status: 500 })
 }};

@@ -7,8 +7,8 @@ import { glob } from 'glob';
  * Document Loader for various file types and sources
  */;
 export interface LoadedFile {
-    path: string;
-  name: string;
+    path: string,
+  name: string,
   content: string;
   language?: string,
     size: number
@@ -23,37 +23,37 @@ export interface CodebaseOptions {
 export class DocumentLoader {
   private languageMap: Record<string, string> = {
     js: 'javascript',
-    jsx: 'javascript';
+    jsx: 'javascript',
     ts: 'typescript',
-    tsx: 'typescript';
+    tsx: 'typescript',
     py: 'python',
-    java: 'java';
+    java: 'java',
     cpp: 'cpp',
-    c: 'c';
+    c: 'c',
     cs: 'csharp',
-    go: 'go';
+    go: 'go',
     rs: 'rust',
-    rb: 'ruby';
+    rb: 'ruby',
     php: 'php',
-    swift: 'swift';
+    swift: 'swift',
     kt: 'kotlin',
-    scala: 'scala';
+    scala: 'scala',
     r: 'r',
-    m: 'matlab';
+    m: 'matlab',
     lua: 'lua',
-    dart: 'dart';
+    dart: 'dart',
     sh: 'bash',
-    ps1: 'powershell';
+    ps1: 'powershell',
     sql: 'sql',
-    html: 'html';
+    html: 'html',
     css: 'css',
-    scss: 'scss';
+    scss: 'scss',
     less: 'less',
-    xml: 'xml';
+    xml: 'xml',
     json: 'json',
-    yaml: 'yaml';
+    yaml: 'yaml',
     yml: 'yaml',
-    md: 'markdown';
+    md: 'markdown',
     rst: 'restructuredtext',
     tex: 'latex'
 }
@@ -81,15 +81,15 @@ break
       const _content  = await fs.readFile(filePath, 'utf-8'), const stats = await fs.stat(filePath); const _ext  = path.extname(filePath).slice(1).toLowerCase();
 
 const _language = this.languageMap[ext] || 'plaintext';
-      return [{,
+      return [{
   id: this.generateId();
         content,
     metadata: {
-  source: filePath;
-    title: path.basename(filePath);
+  source: filePath,
+    title: path.basename(filePath),
     type: this.getDocumentType(ext);
           language,
-          createdAt: stats.birthtime.toISOString();
+          createdAt: stats.birthtime.toISOString(),
     updatedAt: stats.mtime.toISOString()}]
     } catch (error) {
       throw new Error(`Failed to load file ${filePath}: ${error}`)``
@@ -106,14 +106,14 @@ const _language = this.languageMap[ext] || 'plaintext';
       const _content  = await response.text();
 
 const _contentType = response.headers.get('content-type') || 'text/plain';
-      return [{,
+      return [{
   id: this.generateId();
         content,
     metadata: {
-  source: url;
-    title: this.extractTitleFromUrl(url);
-    type: this.getDocumentTypeFromMime(contentType);
-    createdAt: new Date().toISOString();
+  source: url,
+    title: this.extractTitleFromUrl(url),
+    type: this.getDocumentTypeFromMime(contentType),
+    createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()}]
     } catch (error) {
       throw new Error(`Failed to load URL ${url}: ${error}`)``
@@ -137,14 +137,14 @@ const response = await fetch(apiUrl);
       const data  = await response.json();
 
 const _content = Buffer.from(data.content, 'base64').toString('utf-8');
-      return [{,
+      return [{
   id: this.generateId();
         content,
     metadata: {
-  source: repoPath;
+  source: repoPath,
     title: data.name, type: 'code',
-          language: this.languageMap[path.extname(data.name).slice(1)] || 'plaintext';
-    createdAt: new Date().toISOString();
+          language: this.languageMap[path.extname(data.name).slice(1)] || 'plaintext',
+    createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()}]
     } else {
       // Load repository README, const _apiUrl  = `https://api.github.com/repos/${owner}/${repo}/readme`;
@@ -156,15 +156,15 @@ const response = await fetch(apiUrl);
       const data  = await response.json();
 
 const _content = Buffer.from(data.content, 'base64').toString('utf-8');
-      return [{,
+      return [{
   id: this.generateId();
         content,
     metadata: {
-  source: repoPath;
+  source: repoPath,
     title: `${owner}/${repo} README`,
-  type: 'documentation';
+  type: 'documentation',
           language: 'markdown',
-          createdAt: new Date().toISOString();
+          createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()}]
   }
 }
@@ -192,9 +192,9 @@ const _includePatterns  = options?.include || defaultInclude;
 const _excludePatterns = options?.exclude || defaultExclude;
     // Find all matching files;
 for (const pattern of includePatterns) {
-      const _matches = await glob(pattern, {,
-    cwd: basePath;
-    ignore: excludePatterns;
+      const _matches = await glob(pattern, {
+    cwd: basePath,
+    ignore: excludePatterns,
     absolute: true
       });
 for (const filePath of matches) {
@@ -206,10 +206,10 @@ for (const filePath of matches) {
 
 const _ext = path.extname(filePath).slice(1).toLowerCase();
           files.push({
-            path: filePath;
+            path: filePath,
     name: path.basename(filePath);
             content,
-            language: this.languageMap[ext] || 'plaintext';
+            language: this.languageMap[ext] || 'plaintext',
     size: stats.size
           })
         } catch (error) {

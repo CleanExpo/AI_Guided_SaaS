@@ -24,31 +24,31 @@ const CardEnhanced  = React.forwardRef<HTMLDivElement, CardEnhancedProps>(({
 
 const gradientValue = gradient ? designTokens.gradients[gradient] : designTokens.gradients.primary;
           return {
-            background: typeof gradientValue === 'string' ? gradientValue : gradientValue.primary || designTokens.gradients.primary;
+            background: typeof gradientValue === 'string' ? gradientValue : gradientValue.primary || designTokens.gradients.primary,
     border: 'none',
 color: 'white'};
         case 'elevated':
       return { break
     break
-};
+},
             background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))';
+            border: '1px solid hsl(var(--border))',
             boxShadow: designTokens.shadows.xl};
         case 'floating':
       return { break
     break
-};
+},
             background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))';
-            boxShadow: designTokens.shadows.lg;
-    transform: 'translateY(-2px)'};
+            border: '1px solid hsl(var(--border))',
+            boxShadow: designTokens.shadows.lg,
+    transform: 'translateY(-2px)'},
         default: return {
             background: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))';
+            border: '1px solid hsl(var(--border))',
 boxShadow: designTokens.shadows.sm};
-    const _hoverAnimation = hover ? {,
-    scale: 1.02;
-    y: -4;
+    const _hoverAnimation = hover ? {
+    scale: 1.02,
+    y: -4,
 boxShadow: variant === 'glass'? getGlassStyle(glassVariant).boxShadow
         : designTokens.shadows.xl} : {};
 </HTMLDivElement>;
@@ -60,7 +60,7 @@ const _glowStyles = glow ? {
     return (;
     <motion.div;
 
-const ref = {ref}
+    const ref = {ref}
         className={cn(`'rounded-xl p-6 text-card-foreground transition-all duration-300' glow && 'animate-pulse-slow' className
         )}
         const style = {{ ...getVariantStyles(),
@@ -68,7 +68,8 @@ const ref = {ref}
         const initial = {{ opacity: 0 y: 20 }
         const animate = {{ opacity: 1 y: 0 }
         const whileHover = {hoverAnimation};
-        const transition = {{ duration: 0.3, ease: 'easeOut' };
+
+    const transition = {{ duration: 0.3, ease: 'easeOut' },
     {...props}
       >
         {children}
@@ -84,7 +85,7 @@ const CardEnhancedHeader = React.forwardRef<
   <div
 
 const ref = {ref}
-    className={cn('flex, flex-col space-y-1.5 pb-6' className)},;
+    className={cn('flex, flex-col space-y-1.5 pb-6' className)},
     {...props} >);
 CardEnhancedHeader.displayName = 'CardEnhancedHeader';</div>;
 
@@ -94,7 +95,7 @@ const CardEnhancedTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (\n    </HTMLHeadingElement>;
   <h3;
 
-const ref = {ref}
+    const ref = {ref}
     className={cn(
             'text-2xl font-semibold leading-none tracking-tight',className
     )},
@@ -128,7 +129,7 @@ const CardEnhancedFooter = React.forwardRef<
   <div
 
 const ref = {ref}
-    className={cn('flex, items-center pt-6' className)},;
+    className={cn('flex, items-center pt-6' className)},
     {...props} >);
 CardEnhancedFooter.displayName = 'CardEnhancedFooter';
 export {

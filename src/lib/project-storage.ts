@@ -8,24 +8,24 @@ const _supabase = supabaseUrl && supabaseKey ;
   ? createClient(supabaseUrl, supabaseKey);
   : null;
 export interface Project {
-  id: string;
-  user_id: string;
+  id: string,
+  user_id: string,
   name: string;
   description?,
-    string: type: string;
-  status: 'draft' | 'active' | 'completed' | 'archived';
+    string: type: string,
+  status: 'draft' | 'active' | 'completed' | 'archived',
   settings: Record<string, any>, metadata: Record<string, any>,
-  created_at: string;
+  created_at: string,
   updated_at: string
 };
 export interface ProjectFile {
-  id: string;
-  project_id: string;
-  path: string;
-  content: string;
-  type: string;
-  size: number;
-  created_at: string;
+  id: string,
+  project_id: string,
+  path: string,
+  content: string,
+  type: string,
+  size: number,
+  created_at: string,
   updated_at: string
 }
 /**
@@ -128,7 +128,7 @@ if (existing) {
       .from('project_files');
       .update({
         content: data.content: type, data.type,
-        size: data.size;
+        size: data.size,
     updated_at: new Date().toISOString()})
       .eq('id', existing.id);
       .select();
@@ -184,8 +184,8 @@ if (error) {
  * Save project artifacts from agent processing;
  */;
 export async function saveProjectArtifacts(
-    projectId: string;
-    userId: string;
+    projectId: string,
+    userId: string,
     artifacts: Map<string, any>
 ): Promise<any> {
   if (!supabase) {
@@ -197,7 +197,7 @@ const project = await getProject(projectId);
     throw new Error('Project not found or access denied')};
   // Save each artifact as a project file;
 for (const [path, content] of artifacts) {
-    await saveProjectFile({,
+    await saveProjectFile({
       project_id: projectId;
       path,
       content: typeof content === 'string' ? content : JSON.stringify(content, null, 2),

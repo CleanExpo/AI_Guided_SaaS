@@ -8,15 +8,15 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Plus, Clock, MessageCircle, Settings, Share2, Trash2, Edit, Eye, Calendar, Activity, Globe, Lock } from 'lucide-react';
 interface CollaborationSession {
-id: string;
-  projectId: string;
-  name: string;
-  participants: number;
-  lastActivity: Date;
-  isActive: boolean;
-  isPublic: boolean;
-  comments: number;
-  changes: number;
+id: string,
+  projectId: string,
+  name: string,
+  participants: number,
+  lastActivity: Date,
+  isActive: boolean,
+  isPublic: boolean,
+  comments: number,
+  changes: number,
   createdAt: Date
 };
 export default function CollaborationDashboard() {
@@ -34,49 +34,49 @@ const [filter, setFilter] = useState<'all' | 'active' | 'recent'>('all');
 const _loadCollaborationSessions = async () => {
     setLoading(true), try {
       // Simulate API call - in production this would fetch real data, const mockSessions: CollaborationSession[]  = [
-  {,
+  {
   id: 'session-1',
-          projectId: 'project-1';
+          projectId: 'project-1',
           name: 'E-commerce Website Redesign',
-          participants: 4;
+          participants: 4,
     lastActivity: new Date(Date.now() - 1000 * 60 * 15);
-  // 15 minutes ago, isActive: true;
-    isPublic: true;
-    comments: 23;
-    changes: 47;
+  // 15 minutes ago, isActive: true,
+    isPublic: true,
+    comments: 23,
+    changes: 47,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2) // 2 days ago
-        };
+        },
         {
           id: 'session-2',
-          projectId: 'project-2';
+          projectId: 'project-2',
           name: 'Mobile App UI Components',
-          participants: 2;
-    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago, isActive: false;
-    isPublic: false;
-    comments: 8;
-    changes: 12;
+          participants: 2,
+    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago, isActive: false,
+    isPublic: false,
+    comments: 8,
+    changes: 12,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24) // 1 day ago
-        };
+        },
         {
           id: 'session-3',
-          projectId: 'project-3';
+          projectId: 'project-3',
           name: 'API Documentation Review',
-          participants: 6;
-    lastActivity: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago, isActive: true;
-    isPublic: true;
-    comments: 15;
-    changes: 8;
+          participants: 6,
+    lastActivity: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago, isActive: true,
+    isPublic: true,
+    comments: 15,
+    changes: 8,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6) // 6 hours ago
-        };
+        },
         {
           id: 'session-4',
-          projectId: 'project-4';
+          projectId: 'project-4',
           name: 'Database Schema Planning',
-          participants: 3;
-    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago, isActive: false;
-    isPublic: false;
-    comments: 31;
-    changes: 19;
+          participants: 3,
+    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago, isActive: false,
+    isPublic: false,
+    comments: 31,
+    changes: 19,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3) // 3 days ago
         }}];
       setSessions(mockSessions)
@@ -96,7 +96,7 @@ const _oneDayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24);
         return matchesSearch && session.lastActivity > oneDayAgo;
     default: return matchesSearch}});
   
-const _formatTimeAgo = (date: Date) => {;
+const _formatTimeAgo = (date: Date) => {
     const now = new Date(); const _diffInMinutes = Math.floor(, (now.getTime() - date.getTime()) / (1000 * 60);
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
@@ -108,7 +108,7 @@ const _diffInDays = Math.floor(diffInHours / 24);
     return `${diffInDays}d ago`;
   };
   
-const _getActivityLevel = (session: CollaborationSession) => {;
+const _getActivityLevel = (session: CollaborationSession) => {
     const _totalActivity = session.comments + session.changes, if (totalActivity > 30) return { level: 'High' color: 'bg-green-500' };
     if (totalActivity > 15) return { level: 'Medium' color: 'bg-yellow-500' };
     return { level: 'Low' color: 'bg-gray-400' }};
@@ -209,7 +209,7 @@ const variant = {filter === 'recent' ? 'default' : 'outline'}
         ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session);
         return (Card;
 
-const key = {session.id };
+    const key = {session.id };
                 className="hover:shadow-md transition-shadow";
               >
                 <CardContent className="p-6">
@@ -244,7 +244,7 @@ Badge, variant="default", className="bg-green-100 text-green-800";
                       <div className="flex items-center space-x-4 flex items-center space-x-2"   />
                           <div;
 
-const className = {`w-2, h-2 rounded-full ${activity.color}`}
+    const className = {`w-2, h-2 rounded-full ${activity.color}`}
                              />
                           <span className="text-xs text-gray-500">
                             {activity.level} Activity</span>

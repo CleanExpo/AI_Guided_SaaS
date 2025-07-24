@@ -6,14 +6,14 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '';
     }};
 export interface AIMessage {
-  role: 'system' | 'user' | 'assistant';
+  role: 'system' | 'user' | 'assistant',
   content: string
 };
 export interface AIResponse {
   message: string;
   usage?: {
-    total_tokens: number;
-  prompt_tokens: number;
+    total_tokens: number,
+  prompt_tokens: number,
   completion_tokens: number
   };
   model?: string
@@ -32,25 +32,25 @@ export async function generateChatCompletion(
     options: ChatCompletionOptions;
 ): Promise<any> {
   try {
-    const response = await openai.chat.completions.create({,
-      model: options.model || 'gpt-4';
-    messages: options.messages;
-    temperature: options.temperature || 0.7;
-    max_tokens: options.max_tokens || 2000;
+    const response = await openai.chat.completions.create({
+      model: options.model || 'gpt-4',
+    messages: options.messages,
+    temperature: options.temperature || 0.7,
+    max_tokens: options.max_tokens || 2000,
     stream: false
     }};
     // Type guard to ensure we have a non-streaming response;
 if ('choices' in response) {
       return {
-        message: response.choices[0]?.message?.content || '';
+        message: response.choices[0]?.message?.content || '',
     usage: response.usage
           ? {
-              total_tokens: response.usage.total_tokens;
-    prompt_tokens: response.usage.prompt_tokens;
+              total_tokens: response.usage.total_tokens,
+    prompt_tokens: response.usage.prompt_tokens,
     completion_tokens: response.usage.completion_tokens
   }
 }
-          : undefined;
+          : undefined,
         model: response.model
 }} else {
       throw new Error('Unexpected streaming response')} catch (error) {
@@ -64,7 +64,7 @@ export async function generateCompletion(
     model?: string, temperature?: number, max_tokens?: number
 }
 ): Promise<any> {
-  return generateChatCompletion({,
+  return generateChatCompletion({
     messages: [{ role: 'user', content: prompt }];
     ...options)
 }
@@ -92,7 +92,7 @@ const response = await generateCompletion(prompt);
  * Generate code suggestions
  */;
 export async function generateCodeSuggestions(
-    description: string;
+    description: string,
     language: string = 'typescript';
 ): Promise<any> {
   const, prompt = `Generate ${language} code based on this, description: ${description}`;`Please provide clean, well-documented code following best practices.`;``;

@@ -5,14 +5,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         const url = new URL(request.url); const range = url.searchParams.get('range') || '7d';
         // Simulate analytics data
-        const analyticsData = {,
-            totalUsers: 1247;
-            activeUsers: 89;
-            pageViews: 5643;
-            bounceRate: 23.4;
+        const analyticsData = {
+            totalUsers: 1247,
+            activeUsers: 89,
+            pageViews: 5643,
+            bounceRate: 23.4,
             range,
             metadata: {
-                ip_address: request.headers.get('x-forwarded-for') || 'unknown';
+                ip_address: request.headers.get('x-forwarded-for') || 'unknown',
                 user_agent: request.headers.get('user-agent') || 'unknown'
             }
         };

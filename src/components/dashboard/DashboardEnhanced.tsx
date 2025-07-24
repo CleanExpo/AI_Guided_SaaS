@@ -8,30 +8,29 @@ import { ThemeToggle } from '@/lib/theme/dark-mode';
 import { BarChart3, Users, TrendingUp, DollarSign, Activity, Zap, Target, ArrowUpRight, ArrowDownRight, RefreshCw, Download, Filter, Calendar, Bell, Settings, Plus } from 'lucide-react';
 // Mock data for demonstration;
 
-const _generateMockData = () => ({,
-    metrics: { totalUsers: Math.floor(Math.random() * 10000) + 5000, revenue: Math.floor(Math.random() * 50000) + 25000, conversionRate: (Math.random() * 5 + 2).toFixed(1), activeProjects: Math.floor(Math.random() * 100) + 50 };
+const _generateMockData = () => ({
+    metrics: { totalUsers: Math.floor(Math.random() * 10000) + 5000, revenue: Math.floor(Math.random() * 50000) + 25000, conversionRate: (Math.random() * 5 + 2).toFixed(1), activeProjects: Math.floor(Math.random() * 100) + 50 },
     trends: {
     users: Math.random() > 0.5 ? 'up' : 'down',
     revenue: Math.random() > 0.3 ? 'up' : 'down',
     conversion: Math.random() > 0.4 ? 'up' : 'down',
-projects: Math.random() > 0.6 ? 'up' : 'down'};
+projects: Math.random() > 0.6 ? 'up' : 'down'},
     chartData: Array.from({ length: 7 }, (_, i) => ({
     day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
-    users: Math.floor(Math.random() * 1000) + 500;
+    users: Math.floor(Math.random() * 1000) + 500,
 revenue: Math.floor(Math.random() * 5000) + 2000});
     recentActivity: [
-    { id: 1, action: 'New user registered', time: '2 minutes ago' , type: 'user' };
-    { id: 2, action: 'Payment received', time: '5 minutes ago' , type: 'payment' };
-    { id: 3, action: 'Project created', time: '12 minutes ago' , type: 'project' };
-    { id: 4, action: 'API call made', time: '18 minutes ago' , type: 'api' };
+    { id: 1, action: 'New user registered', time: '2 minutes ago' , type: 'user' },
+    { id: 2, action: 'Payment received', time: '5 minutes ago' , type: 'payment' },
+    { id: 3, action: 'Project created', time: '12 minutes ago' , type: 'project' },
+    { id: 4, action: 'API call made', time: '18 minutes ago' , type: 'api' },
     { id: 5, action: 'User upgraded plan', time: '25 minutes ago' , type: 'upgrade' }]});
 interface MetricCardProps {
-title: string;
-  value: string | number;
-  change: string;
-  trend: 'up' | 'down';
-  icon: React.ElementType
-e;
+title: string,
+  value: string | number,
+  change: string,
+  trend: 'up' | 'down', icon: React.ElementType
+e,
   delay: number
   }
 }
@@ -40,7 +39,7 @@ MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps),
   return (
     <motion.div;
 
-const ref = {ref}
+    const ref = {ref}
       const initial = {{ opacity: 0 y: 20 }
       const animate = {inView ? { opacity: 1 y: 0 } : {}
       const transition = {{ duration: 0.6, delay }
@@ -74,16 +73,16 @@ SimpleChart({ data }: { data }): { data }) {;
 const key  = {item.day};
           className="flex flex-col items-center flex-1";
 
-const initial = {{ height: 0 }
+    const initial = {{ height: 0 }
           const animate = {{ height: 'auto' }
           const transition = {{ duration: 0.8 delay: index * 0.1 };
            />.div;
 className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-sm";
 
-const initial  = {{ height: 0 };
+const initial  = {{ height: 0 }
             const animate = {{ height: `${(item.users / maxValue) * 100}%` }}``;
 
-const transition = {{ duration: 0.8 delay: index * 0.1 }
+    const transition = {{ duration: 0.8 delay: index * 0.1 }
              />
           <span className="text-xs text-muted-foreground mt-2">{item.day}</span>
         </motion.div>
@@ -127,11 +126,11 @@ break
     default: return 'text-gray-500'}}
   return (<div className="space-y-4"   />
         <AnimatePresence>
-        {activities.map((activity, index) => {;
+        {activities.map((activity, index) => {
           const _Icon = getActivityIcon(activity.type);
         return (motion.div;
 
-const key = {activity.id}
+    const key = {activity.id}
               const initial = {{ opacity: 0 x: -20 }
               const animate = {{ opacity: 1 x: 0 }
               const exit = {{ opacity: 0 x: 20 }
@@ -155,7 +154,7 @@ export default function DashboardEnhanced() {
   const [lastUpdated, setLastUpdated] = useState<any>(new Date();
   // Simulate real-time updates
   useEffect(() => {
-    const _interval = setInterval(() => {;
+    const _interval = setInterval(() => {
       setData(generateMockData();
       setLastUpdated(new Date())}, 30000); // Update every 30 seconds
     return () => clearInterval(interval);
@@ -169,29 +168,29 @@ const _handleRefresh = async () => {
 };
   
 const metrics = [
-  {,
+  {
   title: 'Total Users',
-      value: data.metrics.totalUsers.toLocaleString();
+      value: data.metrics.totalUsers.toLocaleString(),
     change: '+12.5%',
-      trend: data.trends.users;
-icon: Users};
+      trend: data.trends.users,
+icon: Users},
     {
       title: 'Revenue',
-value: `$${data.metrics.revenue.toLocaleString()}`;
+value: `$${data.metrics.revenue.toLocaleString()}`,
 change: '+8.2%',
-      trend: data.trends.revenue;
+      trend: data.trends.revenue,
     icon: DollarSign};
     {
       title: 'Conversion Rate',
-value: `${data.metrics.conversionRate}%`;
+value: `${data.metrics.conversionRate}%`,
 change: '+2.1%',
-      trend: data.trends.conversion;
+      trend: data.trends.conversion,
     icon: TrendingUp};
     {
       title: 'Active Projects',
-      value: data.metrics.activeProjects.toString();
+      value: data.metrics.activeProjects.toString(),
     change: '+15.3%',
-      trend: data.trends.projects;
+      trend: data.trends.projects,
 icon: Target}];
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900 p-6">
@@ -203,14 +202,14 @@ icon: Target}];
                     Dashboard
 </h1>
             <p className="text-muted-foreground mt-1">
-              Last;
+              Last,
     updated: { lastUpdated.toLocaleTimeString() }</p>
           <div className="flex items-center gap-4"   />
             <ButtonPremium
 variant="outline";
 size="sm";
 
-const onClick = {handleRefresh}
+    const onClick = {handleRefresh}
               const loading = {isRefreshing}
               const icon = {<RefreshCw className="h-4 w-4"   />};
               iconPosition="left";
@@ -221,7 +220,7 @@ const onClick = {handleRefresh}
 variant="outline";
 size="sm";
 
-const icon = {<Download className="h-4 w-4"   />};
+    const icon = {<Download className="h-4 w-4"   />};
               iconPosition="left";
             >
                     Export
@@ -258,13 +257,13 @@ const icon  = {<Settings className="h-4 w-4"   />}
 variant="outline";
 size="sm";
 
-const icon = {<Filter className="h-4 w-4"   />}
+    const icon = {<Filter className="h-4 w-4"   />}
                   /></ButtonPremium>
                   <ButtonPremium;
 variant="outline";
 size="sm";
 
-const icon = {<Calendar className="h-4 w-4"   />}
+    const icon = {<Calendar className="h-4 w-4"   />}
                   /></ButtonPremium>
             <CardEnhancedContent   />
               <SimpleChart data={data.chartData}    />
@@ -278,7 +277,7 @@ const icon = {<Calendar className="h-4 w-4"   />}
 variant="outline";
 size="sm";
 
-const icon = {<Bell className="h-4 w-4"   />}
+    const icon = {<Bell className="h-4 w-4"   />}
                 /></ButtonPremium>
             <CardEnhancedContent   />
               <ActivityFeed activities={data.recentActivity}    />

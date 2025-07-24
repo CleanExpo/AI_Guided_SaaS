@@ -2,7 +2,7 @@
 // API Rate Limiting with Redis for AI Guided SaaS
 // Implements sliding window rate limiting with different tiers;
 import { NextRequest } from 'next/server';interface RateLimitConfig {
-  windowMs: number;
+  windowMs: number,
   maxRequests: number;
   keyGenerator? (req: NextRequest) => string;
   skipSuccessfulRequests?: boolean,
@@ -10,42 +10,42 @@ import { NextRequest } from 'next/server';interface RateLimitConfig {
   message?: string
 };
 interface RateLimitResult {
-  allowed: boolean;
-  remaining: number;
-  resetTime: number;
+  allowed: boolean,
+  remaining: number,
+  resetTime: number,
   totalHits: number
 };
 interface RateLimitTier {
-  name: string;
-  windowMs: number;
-  maxRequests: number;
+  name: string,
+  windowMs: number,
+  maxRequests: number,
   description: string
 }
 // Rate limit tiers for different user types;
 export const RATE_LIMIT_TIERS: Record<string, RateLimitTier> = {
   anonymous: {
   name: 'Anonymous',
-    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 100;
+    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 100,
     description: 'Anonymous users - 100 requests per 15 minutes'
-};
+},
     authenticated: {
     name: 'Authenticated',
-    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 1000;
+    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 1000,
     description: 'Authenticated users - 1000 requests per 15 minutes'
-};
+},
     premium: {
     name: 'Premium',
-    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 5000;
+    windowMs: 15 * 60 * 1000, // 15 minutes, maxRequests: 5000,
     description: 'Premium users - 5000 requests per 15 minutes'
-};
+},
     api: {
     name: 'API',
-    windowMs: 60 * 1000, // 1 minute, maxRequests: 100;
+    windowMs: 60 * 1000, // 1 minute, maxRequests: 100,
     description: 'API endpoints - 100 requests per minute'
-};
+},
     upload: {
     name: 'Upload',
-    windowMs: 60 * 60 * 1000, // 1 hour, maxRequests: 50;
+    windowMs: 60 * 60 * 1000, // 1 hour, maxRequests: 50,
     description: 'File uploads - 50 uploads per hour'
 }
 class RateLimiter {
@@ -63,7 +63,7 @@ class RateLimiter {
         await this.redisClient.connect()
       } else {
         console.warn(
-          'Redis not available, using in-memory fallback for rate limiting')} catch (error) {;
+          'Redis not available, using in-memory fallback for rate limiting')} catch (error) {
       console.warn('Failed to connect to Redis, using in-memory, fallback: ';
         // error
       ), this.redisClient = null
@@ -75,7 +75,7 @@ class RateLimiter {
 } else {
       return this.checkRateLimitMemory(key, config, now, windowStart)}
 };
-  private async checkRateLimitRedis(key: string, config: RateLimitConfig;
+  private async checkRateLimitRedis(key: string, config: RateLimitConfig,
   now: number, windowStart: number): Promise<any> {
     const _redisKey = `rate_limit:${key}`
     try {;
@@ -107,22 +107,22 @@ const _resetTime = now + config.windowMs;
       return this.checkRateLimitMemory(key, config, now, windowStart)}
 }
   private checkRateLimitMemory(;
-key: string;
-    config: RateLimitConfig;
-    now: number;
+key: string,
+    config: RateLimitConfig,
+    now: number,
     windowStart: number
   ): RateLimitResult {
     const stored = this.fallbackStore.get(key), if (!stored || stored.resetTime <= now) {
       // New window or expired
-        const newEntry = {,
-        count: 1;
+        const newEntry = {
+        count: 1,
     resetTime: now + config.windowMs
       };
       this.fallbackStore.set(key, newEntry);
       return {
-        allowed: true;
-    remaining: config.maxRequests - 1;
-    resetTime: newEntry.resetTime;
+        allowed: true,
+    remaining: config.maxRequests - 1,
+    resetTime: newEntry.resetTime,
     totalHits: 1
   }
 }
@@ -135,7 +135,7 @@ const _remaining = Math.max(0, config.maxRequests - stored.count);
     return {
       allowed,
       remaining,;
-      resetTime: stored.resetTime;
+      resetTime: stored.resetTime,
     totalHits: stored.count
   }
 }
@@ -159,7 +159,7 @@ const _requests = await this.redisClient.zCard(redisKey);
 
 const stored = this.fallbackStore.get(key);
     return {
-      requests: stored?.count || 0;
+      requests: stored?.count || 0,
     resetTime: stored?.resetTime || Date.now() + windowMs
   }
 }
@@ -187,8 +187,8 @@ export function createRateLimitMiddleware(
     tier: keyof typeof RATE_LIMIT_TIERS, customConfig?: Partial<RateLimitConfig>): keyof typeof RATE_LIMIT_TIERS, customConfig?: Partial<RateLimitConfig>) {
   return async rateLimitMiddleware(req, res, next? () => void) {;
     const rateLimiter = getRateLimiter(); const tierConfig = RATE_LIMIT_TIERS[tier]; const config: RateLimitConfig = {
-  windowMs: tierConfig.windowMs;
-    maxRequests: tierConfig.maxRequests;
+  windowMs: tierConfig.windowMs,
+    maxRequests: tierConfig.maxRequests,
     message: `Rate limit exceeded. ${tierConfig.description}`,``
       ...customConfig;
     // Generate key based on IP and user ID;
@@ -208,10 +208,10 @@ const _key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);``
       if (!result.allowed) {
         res.status(429).json({
           error: 'Rate limit exceeded',
-          message: config.message;
-    retryAfter: Math.ceil((result.resetTime - Date.now()) / 1000);
-    limit: config.maxRequests;
-    remaining: result.remaining;
+          message: config.message,
+    retryAfter: Math.ceil((result.resetTime - Date.now()) / 1000),
+    limit: config.maxRequests,
+    remaining: result.remaining,
     resetTime: result.resetTime
         }};
         return null;
@@ -230,8 +230,8 @@ const _userId = req.user?.id || 'anonymous';
 const _endpoint  = req.url?.split('?')[0] || 'unknown';
 
 const _key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);``
-  return rateLimiter.checkRateLimit(key, {,
-    windowMs: tierConfig.windowMs;
+  return rateLimiter.checkRateLimit(key, {
+    windowMs: tierConfig.windowMs,
     maxRequests: tierConfig.maxRequests
   }};
 export type { RateLimitConfig, RateLimitResult, RateLimitTier };

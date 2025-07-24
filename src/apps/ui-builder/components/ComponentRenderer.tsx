@@ -24,7 +24,7 @@ export default function ComponentRenderer({ type, props  = {}: Props) {switch (t
     <input;
 type="text";
 
-const placeholder = {props.placeholder || 'Enter, text...'}
+    const placeholder = {props.placeholder || 'Enter, text...'}
           className="px-3 py-2 border rounded w-full max-w-sm"   />
       );
     case 'hero':
@@ -45,7 +45,7 @@ const placeholder = {props.placeholder || 'Enter, text...'}
             {props.right || 'Right, side content'}
     ),
     default:
-      return (<div className="text-red-500 font-mono">Unknown;
+      return (<div className="text-red-500 font-mono">Unknown,
     component: { type }
     )
 }

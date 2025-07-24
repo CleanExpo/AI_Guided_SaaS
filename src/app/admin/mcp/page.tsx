@@ -8,9 +8,9 @@ import { Badge } from '@/components/ui/badge';
 import { Settings, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
 
 interface MCPStatus {
-  status: string;
-  name: string;
-  version: string;
+  status: string,
+  name: string,
+  version: string,
   lastHealthCheck: string
 }
 
@@ -22,8 +22,8 @@ export default function AdminMCPPage() {
     // Simulate loading MCP server status
     setTimeout(() => {
       setMcpServers([
-        { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() };
-        { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() };
+        { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() },
+        { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'sequential-thinking', version: '1.2.0', lastHealthCheck: new Date().toISOString() }
       ]);
       setLoading(false)
@@ -67,6 +67,6 @@ export default function AdminMCPPage() {
           ))
         )}
       </div>
-    </div>;
+    </div>
   );
 }

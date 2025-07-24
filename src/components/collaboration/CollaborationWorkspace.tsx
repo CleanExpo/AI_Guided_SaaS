@@ -60,7 +60,7 @@ const _initializeCollaboration = useCallback(async () => {
       setupSocketListeners(newSocket);
       // Authenticate with the server
       newSocket.emit('authenticate', {
-        userId: session?.user?.email || 'anonymous';
+        userId: session?.user?.email || 'anonymous',
 token: 'mock-token' // TODO: Use real JWT token
       });
       setSocket(newSocket)
@@ -114,19 +114,19 @@ if (!roomId && onRoomCreated) {
   
 const _createNewRoom = async (socket: Socket) => {
     try {
-      const response = await fetch('/api/collaboration/rooms', {,
+      const response = await fetch('/api/admin/auth', {
     method: 'POST',
-headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({ projectId;
+headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ projectId,
     settings: { allowGuests: true, maxParticipants: 10, permissions: {
   canEdit: true, canComment: true, canInvite: true, canExport: true })}
       const data = await response.json();
       if (data.success) {
         socket.emit('join_room', { roomId: data.roomId, projectId })} catch (error) {
       console.error('Error creating, room:', error)}
-  const _handleMouseMove = (e: React.MouseEvent) => {;
+  const _handleMouseMove = (e: React.MouseEvent) => {
     if (!socket || !room) return null; const rect = workspaceRef.current?.getBoundingClientRect(), if (!rect) return const position: CursorPosition = {
-    x: e.clientX - rect.left;
+    x: e.clientX - rect.left,
 y: e.clientY - rect.top
 }
     mousePosition.current = position
@@ -139,9 +139,9 @@ y: e.clientY - rect.top
   const _handleAddComment = (): void => {
     if (!socket || !room || !newComment.trim()) return const comment = {;
       projectId;
-      content: newComment;
+      content: newComment,
     position: {
-  x: mousePosition.current.x;
+  x: mousePosition.current.x,
 y: mousePosition.current.y
   }
 }
@@ -196,7 +196,7 @@ Badge variant="outline">
 variant="outline";
 size="sm";
 
-const onClick = {() => setShowParticipants(!showParticipants)}
+    const onClick = {() => setShowParticipants(!showParticipants)}
           ></Button>
             <Users className="h-4 w-4 mr-1"   />
                     Participants
@@ -223,7 +223,7 @@ Alert className="m-4"></Alert>
         {/* Main, workspace */}</div>;
         <div;
 
-const ref = {workspaceRef};
+    const ref = {workspaceRef};
           className="flex-1 relative bg-gray-50 overflow-hidden";
 
 const onMouseMove  = {handleMouseMove}
@@ -232,11 +232,11 @@ const onMouseMove  = {handleMouseMove}
     {Array.from(cursors.entries()).map(([userId, { user, position }]) => (\n    </div>;
             <div;
 
-const key = {userId};
+    const key = {userId};
               className="absolute pointer-events-none z-50";
 
-const style = {{ left: position.x;
-    top: position.y;
+    const style = {{ left: position.x,
+    top: position.y,
 transform: 'translate(-2px, -2px)' }
                />
               <div className="flex items-center space-x-1"   />
@@ -249,7 +249,7 @@ transform: 'translate(-2px, -2px)' }
             <div, const key  = {comment.id}
               className="absolute z-40";
 
-const style = {{ left: comment.position.x, top: comment.position.y }
+    const style = {{ left: comment.position.x, top: comment.position.y }
                />
               <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-2 shadow-lg max-w-xs"   />
                 <div className="text-xs font-medium text-yellow-800 mb-1">
@@ -329,7 +329,7 @@ const value  = {newComment}
       )};
                     <div;
 
-const className = {`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`}
+    const className = {`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`}
                        />
                   <div className="flex-1"   />
                     <div className="flex items-center space-x-1"   />

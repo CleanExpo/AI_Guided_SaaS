@@ -7,16 +7,16 @@ variant?: 'full' | 'icon' | 'horizontal',
   className?: string,
   showText?: boolean, const sizeClasses = {
   xs: 'w-6 h-6',
-  sm: 'w-8 h-8';
+  sm: 'w-8 h-8',
   md: 'w-12 h-12',
-  lg: 'w-16 h-16';
+  lg: 'w-16 h-16',
   xl: 'w-24 h-24'
 }
-const textSizeClasses = {,
+const textSizeClasses = {
   xs: 'text-xs',
-  sm: 'text-sm';
+  sm: 'text-sm',
   md: 'text-lg',
-  lg: 'text-xl';
+  lg: 'text-xl',
 xl: 'text-2xl'};
 export function Logo({
   variant = 'icon', size  = 'md', className, showText  = false}: LogoProps), size  = 'md', className, showText  = false}: LogoProps) {
@@ -28,7 +28,7 @@ export function Logo({
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-slate-600 to-slate-800" >{/* Top, diamond element */}</div>;
       <div, className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-sm";
 
-const style = {{ width:, size === 'xs', ? '6px'
+    const style = {{ width:, size === 'xs', ? '6px'
                 : size === 'sm'
                   ? '8px'
                   : size === 'md'
@@ -50,7 +50,7 @@ size === 'xs';
       {/* Bottom, diamond element */}
       <div, className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-500 to-blue-700 transform rotate-45 rounded-sm";
 
-const style = {{ width:, size === 'xs', ? '6px'
+    const style = {{ width:, size === 'xs', ? '6px'
                 : size === 'sm'
                   ? '8px'
                   : size === 'md'
@@ -72,7 +72,7 @@ size === 'xs';
       {/* AGS, Text */}
       <div, className="relative z-10 text-white font-bold tracking-tight";
 
-const style = {{ fontSize:, size === 'xs', ? '6px'
+    const style = {{ fontSize:, size === 'xs', ? '6px'
               : size === 'sm'
                 ? '8px'
                 : size === 'md'
@@ -121,12 +121,12 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
 // Alternative SVG-based logo for better scalability;
 export function LogoSVG({
   variant = 'icon', size  = 'md', className}: LogoProps), size  = 'md', className}: LogoProps) {
-  const dimensions = {,
-    xs: 24;
-    sm: 32;
-    md: 48;
-    lg: 64;
-xl: 96};
+  const dimensions = {
+    xs: 24,
+    sm: 32,
+    md: 48,
+    lg: 64,
+xl: 96 }
   const _dim = dimensions[size];
   return (
     <svg

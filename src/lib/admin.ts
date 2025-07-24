@@ -1,72 +1,72 @@
 /* BREADCRUMB: library - Shared library code */
 // Admin panel service for system management;
 export interface AdminUser {
-  id: string;
-  email: string;
-  name: string;
-  role: 'super_admin' | 'admin' | 'moderator', status: 'active' | 'suspended' | 'pending';
-  lastLogin: Date;
-  createdAt: Date;
+  id: string,
+  email: string,
+  name: string,
+  role: 'super_admin' | 'admin' | 'moderator', status: 'active' | 'suspended' | 'pending',
+  lastLogin: Date,
+  createdAt: Date,
   permissions: AdminPermission[]
 };
 export interface AdminPermission {
-  id: string;
-  name: string;
-  description: string;
+  id: string,
+  name: string,
+  description: string,
   category: 'users' | 'content' | 'system' | 'analytics' | 'billing'
 };
 export interface SystemStats {
-  totalUsers: number;
-  activeUsers: number;
-  totalProjects: number;
-  totalTemplates: number;
-  totalRevenue: number;
-  systemHealth: 'healthy' | 'warning' | 'critical';
-  uptime: number;
+  totalUsers: number,
+  activeUsers: number,
+  totalProjects: number,
+  totalTemplates: number,
+  totalRevenue: number,
+  systemHealth: 'healthy' | 'warning' | 'critical',
+  uptime: number,
   errorRate: number
 };
 export interface UserManagement {
-  id: string;
-  email: string;
-  name: string;
-  subscription: 'free' | 'pro' | 'enterprise';
-  status: 'active' | 'suspended' | 'deleted';
-  joinDate: Date;
-  lastActive: Date;
-  projectCount: number;
+  id: string,
+  email: string,
+  name: string,
+  subscription: 'free' | 'pro' | 'enterprise',
+  status: 'active' | 'suspended' | 'deleted',
+  joinDate: Date,
+  lastActive: Date,
+  projectCount: number,
   billingStatus: 'current' | 'past_due' | 'canceled'
 };
 export interface ContentModeration {
-  id: string;
-  type: 'template' | 'project' | 'comment' | 'collaboration';
-  title: string;
-  author: string;
-  status: 'pending' | 'approved' | 'rejected' | 'flagged';
-  reportCount: number;
+  id: string,
+  type: 'template' | 'project' | 'comment' | 'collaboration',
+  title: string,
+  author: string,
+  status: 'pending' | 'approved' | 'rejected' | 'flagged',
+  reportCount: number,
   createdAt: Date;
   reviewedAt?: Date,
   reviewedBy?: string
 };
 export interface SystemConfiguration {
-  id: string;
-  category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security';
-  key: string;
-  value: string;
-  description: string;
-  type: 'string' | 'number' | 'boolean' | 'json';
-  isSecret: boolean;
-  lastModified: Date;
+  id: string,
+  category: 'general' | 'ai' | 'billing' | 'collaboration' | 'security',
+  key: string,
+  value: string,
+  description: string,
+  type: 'string' | 'number' | 'boolean' | 'json',
+  isSecret: boolean,
+  lastModified: Date,
   modifiedBy: string
 };
 export interface AdminActivity {
-  id: string;
-  adminId: string;
-  adminName: string;
-  action: string;
-  target: string;
+  id: string,
+  adminId: string,
+  adminName: string,
+  action: string,
+  target: string,
   details: Record<string, unknown>,
-  timestamp: Date;
-  ipAddress: string;
+  timestamp: Date,
+  ipAddress: string,
   userAgent: string
 };
 export class AdminService {
@@ -91,35 +91,35 @@ export class AdminService {
     try {
       // In production, this would query the actual database, const mockUsers: UserManagement[]  = [, {
   id: '1',
-          email: 'john@example.com';
+          email: 'john@example.com',
           name: 'John Doe',
-          subscription: 'pro';
+          subscription: 'pro',
           status: 'active',
-          joinDate: new Date('2024-01-15');
-    lastActive: new Date();
-    projectCount: 12;
+          joinDate: new Date('2024-01-15'),
+    lastActive: new Date(),
+    projectCount: 12,
     billingStatus: 'current'
-        };
+        },
         {
           id: '2',
-          email: 'jane@example.com';
+          email: 'jane@example.com',
           name: 'Jane Smith',
-          subscription: 'enterprise';
+          subscription: 'enterprise',
           status: 'active',
-          joinDate: new Date('2024-02-20');
-    lastActive: new Date(Date.now() - 1000 * 60 * 30);
-    projectCount: 25;
+          joinDate: new Date('2024-02-20'),
+    lastActive: new Date(Date.now() - 1000 * 60 * 30),
+    projectCount: 25,
     billingStatus: 'current'
-        };
+        },
         {
           id: '3',
-          email: 'bob@example.com';
+          email: 'bob@example.com',
           name: 'Bob Wilson',
-          subscription: 'free';
+          subscription: 'free',
           status: 'suspended',
-          joinDate: new Date('2024-03-10');
-    lastActive: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7);
-    projectCount: 3;
+          joinDate: new Date('2024-03-10'),
+    lastActive: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
+    projectCount: 3,
     billingStatus: 'past_due'
 }
       ];
@@ -141,7 +141,7 @@ const _startIndex  = (page - 1) * limit;
 const _users = filteredUsers.slice(startIndex, startIndex + limit);
       return { users, total, pages }} catch (error) {
       console.error('Error fetching, users:', error), throw error}};
-  async updateUserStatus(userId: string, status: 'active' | 'suspended' | 'deleted';
+  async updateUserStatus(userId: string, status: 'active' | 'suspended' | 'deleted',
   adminId: string): Promise<any> {
     try {
       // Log admin activity
@@ -155,31 +155,31 @@ const _users = filteredUsers.slice(startIndex, startIndex + limit);
       status?: string
     }): Promise<any> {
     try {
-      const mockContent: ContentModeration[]  = [, {,
+      const mockContent: ContentModeration[]  = [, {
   id: '1',
-          type: 'template';
+          type: 'template',
           title: 'E-commerce Starter Template',
-          author: 'john@example.com';
+          author: 'john@example.com',
           status: 'pending',
-          reportCount: 0;
+          reportCount: 0,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2)
-        };
+        },
         {
           id: '2',
-          type: 'project';
+          type: 'project',
           title: 'Suspicious Project Content',
-          author: 'suspicious@example.com';
+          author: 'suspicious@example.com',
           status: 'flagged',
-          reportCount: 3;
+          reportCount: 3,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24)
-        };
+        },
         {
           id: '3',
-          type: 'comment';
+          type: 'comment',
           title: 'Inappropriate collaboration comment',
-          author: 'user@example.com';
+          author: 'user@example.com',
           status: 'pending',
-          reportCount: 1;
+          reportCount: 1,
     createdAt: new Date(Date.now() - 1000 * 60 * 30)
 }
       ];
@@ -197,7 +197,7 @@ const _startIndex  = (page - 1) * limit;
 const _content = filteredContent.slice(startIndex, startIndex + limit);
       return { content, total, pages }} catch (error) {
       console.error('Error fetching content for, moderation:', error), throw error}};
-  async moderateContent(contentId: string, action: 'approve' | 'reject' | 'flag';
+  async moderateContent(contentId: string, action: 'approve' | 'reject' | 'flag',
   adminId: string, reason?: string): Promise<any> {
     try {
       await this.logAdminActivity(adminId, 'moderate_content', contentId, { action, reason })
@@ -206,55 +206,55 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
   // System Configuration
   async getSystemConfiguration(): Promise<any> {
     try {
-      const mockConfig: SystemConfiguration[]  = [, {,
+      const mockConfig: SystemConfiguration[]  = [, {
   id: '1',
-          category: 'general';
+          category: 'general',
           key: 'site_name',
-          value: 'AI Guided SaaS';
+          value: 'AI Guided SaaS',
           description: 'The name of the application',
-          type: 'string';
-          isSecret: false;
-    lastModified: new Date();
+          type: 'string',
+          isSecret: false,
+    lastModified: new Date(),
     modifiedBy: 'admin@example.com'
-        };
+        },
         {
           id: '2',
-          category: 'ai';
+          category: 'ai',
           key: 'openai_model',
-          value: 'gpt-4';
+          value: 'gpt-4',
           description: 'Default OpenAI model for project generation',
-          type: 'string';
-          isSecret: false;
-    lastModified: new Date();
+          type: 'string',
+          isSecret: false,
+    lastModified: new Date(),
     modifiedBy: 'admin@example.com'
-        };
+        },
         {
           id: '3',
-          category: 'billing';
+          category: 'billing',
           key: 'stripe_webhook_secret',
-          value: '***hidden***';
+          value: '***hidden***',
           description: 'Stripe webhook endpoint secret',
-          type: 'string';
-          isSecret: true;
-    lastModified: new Date();
+          type: 'string',
+          isSecret: true,
+    lastModified: new Date(),
     modifiedBy: 'admin@example.com'
-        };
+        },
         {
           id: '4',
-          category: 'collaboration';
+          category: 'collaboration',
           key: 'max_participants_free',
-          value: '3';
+          value: '3',
           description: 'Maximum participants for free tier collaboration',
-          type: 'number';
-          isSecret: false;
-    lastModified: new Date();
+          type: 'number',
+          isSecret: false,
+    lastModified: new Date(),
     modifiedBy: 'admin@example.com'
 }
       ]
       return mockConfig;
 } catch (error) {
       console.error('Error fetching system, configuration:', error), throw error}}
-  async updateConfiguration(configId: string, value: string;
+  async updateConfiguration(configId: string, value: string,
   adminId: string): Promise<any> {
     try {
       await this.logAdminActivity(adminId, 'update_configuration', configId, { value })
@@ -263,21 +263,21 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
   // System Statistics
   async getSystemStats(): Promise<any> {
     try {
-      // In production, this would aggregate real data, const stats: SystemStats = {,
-    totalUsers: 1247;
-    activeUsers: 892;
-    totalProjects: 3456;
-    totalTemplates: 89;
-    totalRevenue: 45678.90;
+      // In production, this would aggregate real data, const stats: SystemStats = {
+    totalUsers: 1247,
+    activeUsers: 892,
+    totalProjects: 3456,
+    totalTemplates: 89,
+    totalRevenue: 45678.90,
     systemHealth: 'healthy',
-        uptime: 99.97;
+        uptime: 99.97,
     errorRate: 0.03
 }
       return stats;
 } catch (error) {
       console.error('Error fetching system, stats:', error), throw error}}
   // Admin Activity Logging
-  async logAdminActivity(adminId: string, action: string;
+  async logAdminActivity(adminId: string, action: string,
   target: string, details: Record<string, unknown>, ipAddress: string = 'unknown', userAgent: string = 'unknown'): Promise<any> {
     try {
       const activity: AdminActivity = {
@@ -300,25 +300,25 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
       dateTo?: Date
     }): Promise<any> {
     try {
-      const mockActivities: AdminActivity[]  = [, {,
+      const mockActivities: AdminActivity[]  = [, {
   id: '1',
-          adminId: 'admin1';
+          adminId: 'admin1',
           adminName: 'John Admin',
-          action: 'update_user_status';
+          action: 'update_user_status',
           target: 'user_123',
-    details: { status: 'suspended' };
-    timestamp: new Date(Date.now() - 1000 * 60 * 30);
+    details: { status: 'suspended' },
+    timestamp: new Date(Date.now() - 1000 * 60 * 30),
     ipAddress: '192.168.1.1',
           userAgent: 'Mozilla/5.0...'
         };
         {
           id: '2',
-          adminId: 'admin1';
+          adminId: 'admin1',
           adminName: 'John Admin',
-          action: 'moderate_content';
+          action: 'moderate_content',
           target: 'template_456',
-    details: { action: 'approve' };
-    timestamp: new Date(Date.now() - 1000 * 60 * 60);
+    details: { action: 'approve' },
+    timestamp: new Date(Date.now() - 1000 * 60 * 60),
     ipAddress: '192.168.1.1',
           userAgent: 'Mozilla/5.0...'
 }
@@ -341,38 +341,38 @@ const _activities = filteredActivities.slice(startIndex, startIndex + limit);
   async checkAdminPermission(_adminId: string, _permission: string): Promise<any> {
     try {
       // In production, check against database
-      // For now, return true for demo purposes, return true} catch (error) {;
+      // For now, return true for demo purposes, return true} catch (error) {
       console.error('Error checking admin, permission:', error);
         return false}}
   async getAdminPermissions(): Promise<any> {
     try {
-      const permissions: AdminPermission[]  = [, {,
+      const permissions: AdminPermission[]  = [, {
   id: '1',
-          name: 'manage_users';
+          name: 'manage_users',
           description: 'Create, update, and delete user accounts',
           category: 'users'
-        };
+        },
         {
           id: '2',
-          name: 'moderate_content';
+          name: 'moderate_content',
           description: 'Review and moderate user-generated content',
           category: 'content'
         };
         {
           id: '3',
-          name: 'view_analytics';
+          name: 'view_analytics',
           description: 'Access system analytics and reports',
           category: 'analytics'
-        };
+        },
         {
           id: '4',
-          name: 'manage_billing';
+          name: 'manage_billing',
           description: 'Access billing and subscription management',
           category: 'billing'
-        };
+        },
         {
           id: '5',
-          name: 'system_configuration';
+          name: 'system_configuration',
           description: 'Modify system settings and configuration',
           category: 'system'
 }
@@ -383,33 +383,32 @@ const _activities = filteredActivities.slice(startIndex, startIndex + limit);
 }}
   // Health Checks
   async performSystemHealthCheck(): Promise<{
-    status: 'healthy' | 'warning' | 'critical';
+    status: 'healthy' | 'warning' | 'critical',
   checks: Array<{
-  name: string, status: 'pass' | 'fail' | 'warn';
+  name: string, status: 'pass' | 'fail' | 'warn',
   message: string, responseTime?: number
     }>
   }> {
     try {
-      const checks  = [, {,
+      const checks  = [, {
   name: 'Database Connection',
           status: 'pass' as const message: 'Database is responding normally',
           responseTime: 45
-        };
+        },
         {
           name: 'OpenAI API',
           status: 'pass' as const message: 'AI services are operational',
-          responseTime: 120
-        };
+          responseTime: 120 }
         {
           name: 'Stripe API',
           status: 'pass' as const message: 'Payment processing is working',
           responseTime: 89
-        };
+        },
         {
           name: 'Collaboration Service',
           status: 'warn' as const message: 'High WebSocket connection count',
           responseTime: 200
-        };
+        },
         {
           name: 'Cache Service',
           status: 'fail' as const message: 'Redis connection timeout',
@@ -422,13 +421,13 @@ const _hasFailures = checks.some(check => check.status === 'fail');
 const _hasWarnings  = checks.some(check => check.status === 'warn');
 
 const _status = hasFailures ? 'critical' : hasWarnings ? 'warning' : 'healthy';
-      return { status, checks }} catch (error) {;
+      return { status, checks }} catch (error) {
       console.error('Error performing health, check:', error);
         return {
         status: 'critical',
         checks: [{
   name: 'System Health Check',
-          status: 'fail';
+          status: 'fail',
           message: 'Failed to perform health check'
   }]
 }}

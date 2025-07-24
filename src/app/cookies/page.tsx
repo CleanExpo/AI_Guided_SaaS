@@ -1,60 +1,99 @@
-/* BREADCRUMB: pages - Application pages and routes */;
+/* BREADCRUMB: pages - Application pages and routes */
 import React from 'react';
 import { Metadata } from 'next';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const metadata: Metadata = {
   title: 'Cookie Policy - AI Guided SaaS Platform',
-  description: 'Our cookie policy and how we use cookies on our platform'
+  description: 'Our cookie policy and how we use cookies to improve your experience'
 };
 
 export default function CookiesPage() {
-  return (<div className="min-h-screen bg-gray-50 py-8">);
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Cookie Policy</h1>
+  return (
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Cookie Policy</h1>
+          <p className="text-lg text-gray-600">
+            Last updated: January 2025
+          </p>
+        </div>
+        
+        <div className="space-y-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>What are cookies?</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                Cookies are small text files that are placed on your device when you visit our website. 
+                They help us provide you with a better experience by remembering your preferences and 
+                improving our service.
+              </p>
+            </CardContent>
+          </Card>
           
-          <div className="space-y-6">
-            <p className="text-lg">
-              This Cookie Policy explains how AI Guided SaaS ("we", "us", or "our") uses cookies and similar technologies when you visit our website.
-            </p>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">What Are Cookies?</h2>
-              <p>
-                Cookies are small text files that are placed on your device when you visit a website. They are widely used to make websites work more efficiently and provide information to website owners.
+          <Card>
+            <CardHeader>
+              <CardTitle>How we use cookies</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900">Essential Cookies</h3>
+                  <p className="text-gray-600">
+                    These cookies are necessary for the website to function properly. They enable 
+                    basic functions like page navigation and access to secure areas.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Analytics Cookies</h3>
+                  <p className="text-gray-600">
+                    We use these cookies to understand how visitors interact with our website, 
+                    helping us improve our service and user experience.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Functional Cookies</h3>
+                  <p className="text-gray-600">
+                    These cookies remember your preferences and settings to provide a more 
+                    personalized experience.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Managing cookies</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">
+                You can control and manage cookies in various ways. Please note that removing or 
+                blocking cookies can impact your user experience and parts of our website may no 
+                longer be fully accessible.
               </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">How We Use Cookies</h2>
-              <p>We use cookies for the following purposes:</p>
-              <ul className="list-disc ml-6 space-y-2">
-                <li><strong>Essential Cookies:</strong> These are necessary for the website to function properly</li>
-                <li><strong>Analytics Cookies:</strong> These help us understand how visitors interact with our website</li>
-                <li><strong>Functional Cookies:</strong> These enable enhanced functionality and personalization</li>
-                <li><strong>Marketing Cookies:</strong> These are used to deliver relevant advertisements</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Managing Cookies</h2>
-              <p>
-                You can control cookies through your browser settings. Most browsers allow you to view, block, and delete cookies.
+              <p className="text-gray-600">
+                Most web browsers allow you to manage cookie settings. These can usually be found 
+                in the 'Settings' or 'Preferences' menu of your browser.
               </p>
-              <p className="mt-4">
-                Please note that blocking all cookies may affect the functionality of our website.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contact Us</h2>
-              <p>
-                If you have any questions about our Cookie Policy, please contact us at{' '}
-                <a href="mailto:privacy@aiguidedsaas.com" className="text-blue-600 hover:text-blue-700">
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Contact us</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                If you have any questions about our use of cookies, please contact us at{' '}
+                <a href="mailto:privacy@aiguidedsaas.com" className="text-blue-600 hover:underline">
                   privacy@aiguidedsaas.com
                 </a>
               </p>
-            </section>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

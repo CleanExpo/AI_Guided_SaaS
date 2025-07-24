@@ -4,7 +4,7 @@
  * Handles transactional emails for the AI Guided SaaS platform
  */
 interface EmailOptions {
-  to: string | string[];
+  to: string | string[],
   subject: string;
   html?: string,
   text?: string,
@@ -12,13 +12,13 @@ interface EmailOptions {
   replyTo?: string
 };
 interface WelcomeEmailData {
-  userName: string;
-  userEmail: string;
+  userName: string,
+  userEmail: string,
   loginUrl: string
 };
 interface NotificationEmailData {
-  userName: string;
-  title: string;
+  userName: string,
+  title: string,
   message: string;
   actionUrl?: string,
   actionText?: string
@@ -40,27 +40,27 @@ class EmailService {
     headers: { Authorization: `Bearer ${this.apiKey }`,``
           'Content-Type': 'application/json',
         body: JSON.stringify({
-          from: options.from || this.defaultFrom;
-    to: Array.isArray(options.to) ? options.to: [options.to];
-    subject: options.subject;
-    html: options.html;
-    text: options.text;
+          from: options.from || this.defaultFrom,
+    to: Array.isArray(options.to) ? options.to: [options.to],
+    subject: options.subject,
+    html: options.html,
+    text: options.text,
     reply_to: options.replyTo
          });
       if (!response.ok) {
         const errorData = await response.json();
         return {
-          success: false;
+          success: false,
     error: errorData.message || `HTTP ${response.status}`
   }
 }
       const data = await response.json();
       return {
-        success: true;
+        success: true,
     messageId: data.id
 }} catch (error) { console.error('Email sending, failed:', error);
         return {
-        success: false;
+        success: false,
     error: error instanceof Error ? error.message : 'Unknown error'
 }
   /**
@@ -109,7 +109,7 @@ const _text = `;``
       If you have any questions, feel free to reach out to our support team.
       Happy building!
     `
-    return this.sendEmail({ to: data.userEmail;
+    return this.sendEmail({ to: data.userEmail,
     subject: 'Welcome to AI Guided SaaS Builder! 🚀';
       html,
       text })
@@ -165,7 +165,7 @@ const _text = `;``
   /**
    * Send password reset email
    */
-  async sendPasswordResetEmail(email: string, resetUrl: string;
+  async sendPasswordResetEmail(email: string, resetUrl: string,
   userName: string): Promise<any> {
     const _html = `, ``, <!DOCTYPE html>
         <html>
@@ -217,7 +217,7 @@ const _text = `;``
       If you didn't request this password reset, please contact our support team immediately.
       Stay secure!
     `
-    return this.sendEmail({ to: email;
+    return this.sendEmail({ to: email,
     subject: 'Reset Your Password - AI Guided SaaS Builder';
       html,
       text })
@@ -234,11 +234,11 @@ const _text = `;``
           'Content-Type': 'application/json');
       if (response.ok) {
         return { success: true }} else {
-        return {,
-          success: false;
+        return {
+          success: false,
     error: `API key validation, failed: ${response.status}`
 }} catch (error) { return {
-        success: false;
+        success: false,
     error: error instanceof Error ? error.message : 'Unknown error'
   }
 }
@@ -256,8 +256,8 @@ export const _sendWelcomeEmail = (data: WelcomeEmailData) => ;
 export const _sendNotificationEmail = (data: NotificationEmailData) => ;
   emailService.sendNotificationEmail(data);
 export const _sendPasswordResetEmail = (
-    email: string;
-    resetUrl: string;
+    email: string,
+    resetUrl: string,
     userName: string
 ) => emailService.sendPasswordResetEmail(email, resetUrl, userName);
 export const _testEmailConfiguration = () => emailService.testConfiguration();

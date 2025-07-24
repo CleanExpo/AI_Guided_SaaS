@@ -6,39 +6,39 @@ interface ProgressTrackerProps {
 currentStep: string
 }
 const steps  = [
-  {,
+  {
   id: 'welcome',
-    title: 'Choose Persona';
+    title: 'Choose Persona',
     description: 'Select your AI development guide'
     , status: 'completed'
-  };
+  },
   {
     id: 'chat',
-    title: 'Project Configuration';
+    title: 'Project Configuration',
     description: 'Define your project requirements'
     , status: 'completed'
-  };
+  },
   {
     id: 'generate',
-    title: 'Generate Project';
+    title: 'Generate Project',
     description: 'AI creates your project structure'
     , status: 'completed'
-  };
+  },
   {
     id: 'customize',
-    title: 'Customize & Enhance';
+    title: 'Customize & Enhance',
     description: 'Fine-tune with advanced tools'
     , status: 'current'
-  };
+  },
   {
     id: 'deploy',
-    title: 'Deploy & Launch';
+    title: 'Deploy & Launch',
     description: 'Go live with your application'
     , status: 'pending'
 }
 ];
 
-const _getStepStatus = (stepId: string, currentStep: string) => {;
+const _getStepStatus = (stepId: string, currentStep: string) => {
   const stepOrder  = ['welcome', 'chat', 'generate', 'customize', 'deploy'], const _currentIndex = stepOrder.indexOf(currentStep); const _stepIndex = stepOrder.indexOf(stepId);
   if (stepIndex < currentIndex) return 'completed';
   if (stepIndex === currentIndex) return 'current';
@@ -49,7 +49,7 @@ export default function ProgressTracker() {
         <Sparkles className="w-5 h-5 text-blue-600"   />
           Progress Tracker</Sparkles>
       <CardContent className="space-y-4">
-        {steps.map((step, index) => {;
+        {steps.map((step, index) => {
           const _status = getStepStatus(step.id, currentStep);
           return (</Card>;
         <div;
@@ -66,7 +66,7 @@ div, const className = {`absolute left-4 top-8 w-0.5 h-12 ${``, status === 'comp
                 {/* Step, Icon */}</div>;
                 <div;
 
-const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border-2 ${``, status === 'completed', ? 'bg-green-500 border-green-500 text-white'
+    const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border-2 ${``, status === 'completed', ? 'bg-green-500 border-green-500 text-white'
                       : status === 'current'
                       ? 'bg-blue-500 border-blue-500 text-white'
                       : 'bg-white border-gray-300 text-gray-400'
@@ -83,7 +83,7 @@ const className = {`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify
                 <div className="flex-1 min-w-0"   />
                   <h3;
 
-const className = {`font-medium text-sm ${``, status === 'completed', ? 'text-green-800'
+    const className = {`font-medium text-sm ${``, status === 'completed', ? 'text-green-800'
                         : status === 'current'
                         ? 'text-blue-800'
                         : 'text-gray-500'
@@ -92,7 +92,7 @@ const className = {`font-medium text-sm ${``, status === 'completed', ? 'text-gr
                     {step.title}</h3>;
                   <p;
 
-const className = {`text-xs mt-1 ${``, status === 'completed', ? 'text-green-600'
+    const className = {`text-xs mt-1 ${``, status === 'completed', ? 'text-green-600'
                         : status === 'current'
                         ? 'text-blue-600'
                         : 'text-gray-400'
@@ -111,7 +111,7 @@ const className = {`text-xs mt-1 ${``, status === 'completed', ? 'text-green-600
             <div;
 className="bg-blue-600 h-2 rounded-full transition-all duration-300";
 
-const style = {{
+    const style = {{
                 width: `${(steps.findIndex(s => getStepStatus(s.id, currentStep) === 'current') / (steps.length - 1)) * 100}%`
   }
 }

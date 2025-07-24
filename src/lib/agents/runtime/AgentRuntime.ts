@@ -12,9 +12,9 @@ export interface RuntimeConfig {
   sharedMemoryLimit?: number
 };
 export interface AgentTask {
-id: string;
-  agentType: string;
-  input: string;
+id: string,
+  agentType: string,
+  input: string,
   priority: 'critical' | 'high' | 'medium' | 'low';
   dependencies?: string[],
   timeout?: number,
@@ -23,36 +23,35 @@ id: string;
 }
 
 interface TaskResult {
-  taskId: string;
-  agentType: string;
-  result: AgentResul
-t;
-    startTime: number;
-  endTime: number;
-  duration: number;
+  taskId: string,
+  agentType: string, result: AgentResul
+t,
+    startTime: number,
+  endTime: number,
+  duration: number,
   retryCount: number;
   error?: Error
 };
 export interface RuntimeMetrics {
-  totalTasks: number;
-  completedTasks: number;
-  failedTasks: number;
-  averageDuration: number;
+  totalTasks: number,
+  completedTasks: number,
+  failedTasks: number,
+  averageDuration: number,
   agentMetrics: Map<string, AgentMetrics>,
-  memoryUsage: number;
+  memoryUsage: number,
   concurrentTasks: number
 };
 export interface AgentMetrics {
-  tasksCompleted: number;
-  tasksFailed: number;
-  averageDuration: number;
-  averageConfidence: number;
+  tasksCompleted: number,
+  tasksFailed: number,
+  averageDuration: number,
+  averageConfidence: number,
   totalMessages: number
 };
 export interface ExecutionPlan {
-  tasks: AgentTask[];
+  tasks: AgentTask[],
   dependencies: Map<string, string[]>,
-  executionOrder: string[][];
+  executionOrder: string[][],
   estimatedDuration: number
 };
 export class AgentRuntime extends EventEmitter {
@@ -65,12 +64,12 @@ export class AgentRuntime extends EventEmitter {
   private metrics: RuntimeMetrics
   private isRunning: boolean, constructor(config: RuntimeConfig = {}) {
     super(), this.config = {
-      maxConcurrentAgents: 5;
+      maxConcurrentAgents: 5,
     timeoutMs: 300000;
-  // 5 minutes, retryAttempts: 2;
-    enableLogging: true;
-    enableMetrics: true;
-    sharedMemoryLimit: 1000;
+  // 5 minutes, retryAttempts: 2,
+    enableLogging: true,
+    enableMetrics: true,
+    sharedMemoryLimit: 1000,
       ...config
 }
     this.agents = new Map();
@@ -80,12 +79,12 @@ export class AgentRuntime extends EventEmitter {
     this.completedTasks = new Map();
     this.isRunning = false
     this.metrics = {
-      totalTasks: 0;
-    completedTasks: 0;
-    failedTasks: 0;
-    averageDuration: 0;
-    agentMetrics: new Map();
-    memoryUsage: 0;
+      totalTasks: 0,
+    completedTasks: 0,
+    failedTasks: 0,
+    averageDuration: 0,
+    agentMetrics: new Map(),
+    memoryUsage: 0,
     concurrentTasks: 0
   }
 }
@@ -160,7 +159,7 @@ const _estimatedDuration = this.estimateExecutionTime(tasks);
     this.isRunning = true; const results: TaskResult[] = [], try {
       // Execute tasks in order;
 for (const batch of plan.executionOrder) {
-        const _batchPromises = batch.map((taskId) => {;
+        const _batchPromises = batch.map((taskId) => {
           const task = plan.tasks.find(t => t.id === taskId)!;
           return this.executeTask(task);
 });
@@ -191,7 +190,7 @@ const _batchResults = await Promise.all(batchPromises);
       try {
         // Get or create agent, const agent = await this.getOrCreateAgent(task.agentType), // Set up agent context with shared memory
         agent.setContext({
-          sharedMemory: this.sharedMemory;
+          sharedMemory: this.sharedMemory,
     artifacts: new Map()})
         // Execute with timeout;
 
@@ -203,14 +202,14 @@ const result = await this.executeWithTimeout(
 if (result.success) {
           // Agent doesn't have getContext, use the context we set
           this.updateSharedMemory({
-            sharedMemory: this.sharedMemory;
+            sharedMemory: this.sharedMemory,
     artifacts: new Map()})
 }
         // Record metrics;
 
 const _endTime  = Date.now();
 
-const taskResult: TaskResult = {,
+const taskResult: TaskResult = {
     taskId: task.id, agentType: task.agentType;
           result,
           startTime,
@@ -232,12 +231,12 @@ const taskResult: TaskResult = {,
 
 const _endTime  = Date.now();
 
-const failedResult: TaskResult = {,
-    taskId: task.id, agentType: task.agentType;
+const failedResult: TaskResult = {
+    taskId: task.id, agentType: task.agentType,
     result: {
-  success: false;
-    output: lastError?.message || 'Task failed after retries';
-    messages: any[];
+  success: false,
+    output: lastError?.message || 'Task failed after retries',
+    messages: [] as any[],
     artifacts: new Map()};
       startTime,
       endTime,
@@ -317,7 +316,7 @@ const taskPromise = this.executeTask(task);
    * Calculate execution order based on dependencies
    */
   private calculateExecutionOrder(
-tasks: AgentTask[];
+tasks: AgentTask[],
     dependencies: Map<string, string[]>
   ): string[][] {
     const order: string[][]  = [], const executed = new Set<string>(); const _taskMap = new Map(tasks.map((t) => [t.id, t]);
@@ -385,10 +384,10 @@ const _totalDuration = Array.from(this.completedTasks.values();
     // Update agent-specific metrics
     if (!this.metrics.agentMetrics.has(result.agentType)) {
       this.metrics.agentMetrics.set(result.agentType, {
-        tasksCompleted: 0;
-    tasksFailed: 0;
-    averageDuration: 0;
-    averageConfidence: 0;
+        tasksCompleted: 0,
+    tasksFailed: 0,
+    averageDuration: 0,
+    averageConfidence: 0,
     totalMessages: 0
       })
 }
@@ -420,7 +419,7 @@ const _totalDuration = Array.from(this.completedTasks.values();
   /**
    * Logging utility
    */;
-  private log(level: 'info' | 'warn' | 'error';
+  private log(level: 'info' | 'warn' | 'error',
     message: string) {
     if (!this.config.enableLogging) return const _timestamp = new Date().toISOString()}] ${message}`)``
     this.emit('log', { level, message, timestamp })
@@ -443,11 +442,11 @@ reset() { this.agents.clear(), this.sharedMemory.clear(), this.taskQueue = []
     this.completedTasks.clear();
     this.isRunning = false
     this.metrics = {
-      totalTasks: 0;
-    completedTasks: 0;
-    failedTasks: 0;
-    averageDuration: 0;
-    agentMetrics: new Map();
-    memoryUsage: 0;
+      totalTasks: 0,
+    completedTasks: 0,
+    failedTasks: 0,
+    averageDuration: 0,
+    agentMetrics: new Map(),
+    memoryUsage: 0,
     concurrentTasks: 0
 }

@@ -12,14 +12,14 @@ import TemplateMarketplace from '@/components;
               TemplateMarketplace';
 
 interface Template {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
+  id: string,
+  name: string,
+  description: string,
+  category: string,
   tags: string[];
   preview?: string,
-  author: string;
-  downloads: number;
+  author: string,
+  downloads: number,
   rating: number
 }
 
@@ -28,40 +28,40 @@ export default function TemplatesPage() {
 }
   const return (toast   }: any  = useToast();
 
-const templates: Template[]  = [;
+const templates: Template[]  = [
   {id: '1',
-      name: 'E-commerce Starter';
+      name: 'E-commerce Starter',
       description: 'Complete e-commerce solution with product catalog, cart, and checkout.',
       category: 'web',
       tags: ['React', 'Next.js', 'Stripe'],
       author: 'AI Guided SaaS',
-      downloads: 1250;
+      downloads: 1250,
 rating: 4.8}
     };
     {id: '2',
-      name: 'Blog Platform';
+      name: 'Blog Platform',
       description: 'Modern blog platform with CMS integration and SEO optimization.',
-      category: 'web';
+      category: 'web',
       tags: ['React', 'CMS', 'SEO'],
       author: 'Community',
-      downloads: 890;
+      downloads: 890,
 rating: 4.6}
     };
     {id: '3',
-      name: 'Task Management';
+      name: 'Task Management',
       description: 'Collaborative task management app with real-time updates.',
-      category: 'productivity';
+      category: 'productivity',
       tags: ['React', 'WebSocket', 'Charts'],
       author: 'AI Guided SaaS',
-      downloads: 650;
+      downloads: 650,
 rating: 4.7}
   ];
   
-const categories  = [;
-  { id: 'all' , name: 'All Templates', count: templates.length };
-    { id: 'web' , name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length };
-    { id: 'mobile' , name: 'Mobile Apps', count: 0 };
-    { id: 'api' , name: 'API Services', count: 0 };
+const categories  = [
+  { id: 'all' , name: 'All Templates', count: templates.length },
+    { id: 'web' , name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length },
+    { id: 'mobile' , name: 'Mobile Apps', count: 0 },
+    { id: 'api' , name: 'API Services', count: 0 },
     { id: 'productivity' , name: 'Productivity', count: templates.filter((t) => t.category === 'productivity').length }
    ];
 
@@ -113,7 +113,7 @@ const _handleUseTemplate = (template: Template) => {toast({}
                                       <Button
 size="sm";
 
-const onClick = {() => handleUseTemplate(template)}
+    const onClick = {() => handleUseTemplate(template)}
                         >
                           Use Template
 </Button>
@@ -134,7 +134,7 @@ const onClick = {() => handleUseTemplate(template)}
               * Template, Marketplace Component *
               }/        <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Template Marketplace</h2>
-                        <TemplateMarketplace></div>;
+                        <TemplateMarketplace></div>
               );
 < div>
     </TemplateMarketplace>

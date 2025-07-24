@@ -12,39 +12,39 @@ const mockFiles: Map<string, Map<string, KiroFile>> = new Map();
 const mockTerminals: Map<string, KiroTerminal> = new Map();
 // Initialize with sample project;
 
-const sampleProject: KiroProject = {,
+const sampleProject: KiroProject = {
   id: 'sample-project',
-  name: 'Sample Project';
+  name: 'Sample Project',
   description: 'A sample Next.js project',
-  type: 'web';
+  type: 'web',
   framework: 'nextjs',
-  language: 'typescript';
+  language: 'typescript',
     structure: {
   name: 'sample-project',
-    type: 'directory';
+    type: 'directory',
     path: '/',
     children: [
       {
   name: 'src',
-        type: 'directory';
+        type: 'directory',
         path: '/src',
         children: [
           {
   name: 'app',
-            type: 'directory';
+            type: 'directory',
             path: '/src/app',
             children: [
-              { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx' };
+              { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx' },
               { name: 'layout.tsx', type: 'file', path: '/src/app/layout.tsx' }];
           {
             name: 'components',
-            type: 'directory';
+            type: 'directory',
             path: '/src/components',
             children: any[]
           }}];
-      { name: 'package.json', type: 'file', path: '/package.json' };
-      { name: 'README.md', type: 'file', path: '/README.md' }];
-  createdAt: new Date().toISOString();
+      { name: 'package.json', type: 'file', path: '/package.json' },
+      { name: 'README.md', type: 'file', path: '/README.md' }],
+  createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString()};
 mockProjects.set(sampleProject.id, sampleProject);
 // Mock file contents;
@@ -52,12 +52,12 @@ mockProjects.set(sampleProject.id, sampleProject);
 const _sampleFiles = new Map([
    [
     '/src/app/page.tsx',
-    {,
+    {
   path: '/src/app/page.tsx',
       content: `export default function Home() {``
   return (<main className="flex min-h-screen flex-col items-center justify-between p-24">, <h1 className="text-4xl font-bold">Welcome to Sample Project</h1>
         <p>Edit src/app/page.tsx to get started</p>);
-  }`,``;
+  }`, ``,
 language: 'typescript'}}];
   ['/src/app/layout.tsx',
     {
@@ -73,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (html lang="en">, <body>{children}</body>);
-}`,``;
+}`, ``,
 language: 'typescript'}}];
   ['/package.json',
     {
@@ -81,9 +81,9 @@ language: 'typescript'}}];
       content: JSON.stringify(
         {
   name: 'sample-project',
-          version: '0.1.0';
-          private: true;
-    scripts: { dev: 'next dev', build: 'next build', start: 'next start', lint: 'next lint' };
+          version: '0.1.0',
+          private: true,
+    scripts: { dev: 'next dev', build: 'next build', start: 'next start', lint: 'next lint' },
     dependencies: { next: '14.0.0', react: '^18.2.0', 'react-dom': '^18.2.0', devDependencies: {
             '@types/node': '^20', '@types/react': '^18', '@types/react-dom': '^18', typescript: '^5' };
         null,
@@ -98,7 +98,7 @@ export class KiroServerMock {
     const _id = Math.random().toString(36).substring(7); const newProject: KiroProject = {
       ...project;
       id,
-      createdAt: new Date().toISOString();
+      createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString()};
     mockProjects.set(id, newProject);
     mockFiles.set(id, new Map();
@@ -127,18 +127,18 @@ export class KiroServerMock {
       throw new Error('File not found')};
     return file;
 }
-  static async writeFile(projectId: string, path: string;
+  static async writeFile(projectId: string, path: string,
   content: string): Promise<any> {
     const projectFiles = mockFiles.get(projectId), if (!projectFiles) {
       throw new Error('Project not found')}
     const file = projectFiles.get(path) || {
       path,;
-      content: '';
+      content: '',
     language: this.getLanguageFromPath(path)};
     file.content = content;
     projectFiles.set(path, file)
 }
-  static async createFile(projectId: string, path: string;
+  static async createFile(projectId: string, path: string,
   content: string = ''): Promise<any> {
     const projectFiles = mockFiles.get(projectId), if (!projectFiles) {
       throw new Error('Project not found')}
@@ -152,7 +152,7 @@ export class KiroServerMock {
       throw new Error('Project not found')}
     projectFiles.delete(path)
 };
-  static async renameFile(projectId: string, oldPath: string;
+  static async renameFile(projectId: string, oldPath: string,
   newPath: string): Promise<any> {
     const projectFiles = mockFiles.get(projectId), if (!projectFiles) {
       throw new Error('Project not found')};
@@ -167,9 +167,9 @@ export class KiroServerMock {
   static async createTerminal(config?: Partial<KiroTerminal>): Promise<any> {
     const _id = Math.random().toString(36).substring(7); const terminal: KiroTerminal = {
       id;
-      name: config?.name || `Terminal ${mockTerminals.size + 1}`;
-shell: config?.shell || '/bin/bash';
-    cwd: config?.cwd || '/';
+      name: config?.name || `Terminal ${mockTerminals.size + 1}`,
+shell: config?.shell || '/bin/bash',
+    cwd: config?.cwd || '/',
     env: config?.env || {}
     mockTerminals.set(id, terminal);
     return terminal;
@@ -181,57 +181,57 @@ shell: config?.shell || '/bin/bash';
     // Mock AI suggestions
     return {
       suggestions: [
-        {,
+        {
   id: 'suggest-1',
-          type: 'code';
+          type: 'code',
           title: 'Add Error Boundary',
-          description: 'Wrap your component with an error boundary to handle runtime errors gracefully';
+          description: 'Wrap your component with an error boundary to handle runtime errors gracefully',
           priority: 'medium',
           changes: [
             {
-  file;
+  file,
               changes: [
                 {
   range: {
-  start: { line: 0, character: 0 };
-    end: { line: 0, character: 0  };
+  start: { line: 0, character: 0 },
+    end: { line: 0, character: 0  },
                   newText: "import { ErrorBoundary } from 'react-error-boundary'\n\n"
 }}]];
         {
           id: 'suggest-2',
-          type: 'performance';
+          type: 'performance',
           title: 'Optimize Re-renders',
-          description: 'Use React.memo to prevent unnecessary re-renders';
+          description: 'Use React.memo to prevent unnecessary re-renders',
           priority: 'low',
           changes: any[]
         }}];
       diagnostics: [
         {
   file;
-          line: 10;
-    column: 5;
+          line: 10,
+    column: 5,
     severity: 'warning',
-          message: 'Missing dependency in useEffect';
+          message: 'Missing dependency in useEffect',
           code: 'react-hooks/exhaustive-deps',
           fixes: [
             {
   title: 'Add missing dependency',
               changes: [
                 {
-  file;
+  file,
                   changes: [
                     {
   range: {
-  start: { line: 10, character: 20 };
-    end: { line: 10, character: 22  };
+  start: { line: 10, character: 20 },
+    end: { line: 10, character: 22  },
                       newText: '[dependency]'
 }}]]]];
       refactorings: [
         {
   id: 'refactor-1',
-          name: 'Extract Component';
+          name: 'Extract Component',
           description: 'Extract this JSX into a separate component',
-          scope: 'function';
+          scope: 'function',
           preview: any[]
         }}];
       completions: any[]
@@ -239,16 +239,16 @@ shell: config?.shell || '/bin/bash';
 }
   static async getCompletions(file: string, position: { line: number, character: number }): Promise<any> {
     // Mock code completions
-    return [{,
+    return [{
   label: 'useState',
-        kind: 'function';
+        kind: 'function',
         detail: 'React Hook',
         documentation: 'Returns a stateful value, and a function to update it.',
         insertText: 'useState<any>(${1:initialState})'
   };
       {
         label: 'useEffect',
-        kind: 'function';
+        kind: 'function',
         detail: 'React Hook',
         documentation:
           'Accepts a function that contains imperative, possibly effectful code.',
@@ -256,25 +256,25 @@ shell: config?.shell || '/bin/bash';
 }
   static async runDiagnostics(projectId: string): Promise<any> {
     // Mock diagnostics
-    return [{,
+    return [{
   file: '/src/app/page.tsx',
-        line: 5;
-    column: 10;
+        line: 5,
+    column: 10,
     severity: 'info',
-        message: 'Consider using semantic HTML elements';
+        message: 'Consider using semantic HTML elements',
         code: 'a11y-semantic'
   }}]
 }
   // Helper methods
   private static createFilesFromStructure(
-projectId: string;
+projectId: string,
     structure: KiroFileTree
   ) {
     const projectFiles = mockFiles.get(projectId) || new Map(); const _traverse = (node: KiroFileTree) => {
       if (node.type === 'file') {
         projectFiles.set(node.path, {
-          path: node.path;
-    content: node.content || '';
+          path: node.path,
+    content: node.content || '',
     language: this.getLanguageFromPath(node.path)})
       } else if (node.children) {
     node.children.forEach(traverse)}
@@ -284,21 +284,21 @@ projectId: string;
   private static getLanguageFromPath(path: string) {
     const ext = path.split('.').pop()?.toLowerCase(); const languageMap: Record<string, string> = {
       ts: 'typescript',
-      tsx: 'typescript';
+      tsx: 'typescript',
       js: 'javascript',
-      jsx: 'javascript';
+      jsx: 'javascript',
       json: 'json',
-      md: 'markdown';
+      md: 'markdown',
       css: 'css',
-      scss: 'scss';
+      scss: 'scss',
       html: 'html',
-      py: 'python';
+      py: 'python',
       go: 'go',
-      rs: 'rust';
+      rs: 'rust',
       java: 'java',
-      cpp: 'cpp';
+      cpp: 'cpp',
       c: 'c',
-      yaml: 'yaml';
+      yaml: 'yaml',
       yml: 'yaml',
       xml: 'xml'
 };

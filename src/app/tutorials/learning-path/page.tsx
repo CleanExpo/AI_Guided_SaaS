@@ -7,70 +7,70 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Clock, Lock, Play } from 'lucide-react';
 interface Tutorial {
-  id: string;
-  title: string;
-  description: string;
-  duration: string;
+  id: string,
+  title: string,
+  description: string,
+  duration: string,
   difficulty: 'beginner' | 'intermediate' | 'advanced'
 }
 interface LearningPath {
-  id: string;
-  title: string;
-  description: string;
-  totalDuration: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  id: string,
+  title: string,
+  description: string,
+  totalDuration: string,
+  difficulty: 'beginner' | 'intermediate' | 'advanced',
   tutorials: Array<Tutorial & {
     completed?: boolean
 }
 }   />
 
-const learningPaths: LearningPath[]  = [;
+const learningPaths: LearningPath[]  = [
   {id: 'beginner',
-    title: 'Complete Beginner Path';
+    title: 'Complete Beginner Path',
     description: 'Perfect for developers new to AI-powered development platforms',
-    totalDuration: '2 hours';
+    totalDuration: '2 hours',
     difficulty: 'beginner',
     tutorials: [
       {
   id: '1',
-        title: 'Introduction to AI Guided SaaS';
+        title: 'Introduction to AI Guided SaaS',
         description: 'Learn the basics of our platform',
-        duration: '15 min';
+        duration: '15 min',
         difficulty: 'beginner',
 completed: true}
   };
       {id: '2',
-        title: 'Your First Project';
+        title: 'Your First Project',
         description: 'Create and deploy your first application',
-        duration: '30 min';
+        duration: '30 min',
         difficulty: 'beginner',
 completed: false}
       };
       {id: '3',
-        title: 'Understanding AI Features';
+        title: 'Understanding AI Features',
         description: 'Explore AI-powered code generation',
-        duration: '45 min';
+        duration: '45 min',
         difficulty: 'beginner',
 completed: false}
     ]
   };
   {id: 'intermediate',
-    title: 'Intermediate Development';
+    title: 'Intermediate Development',
     description: 'Advanced features and best practices',
-    totalDuration: '4 hours';
+    totalDuration: '4 hours',
     difficulty: 'intermediate',
     tutorials: [{
   id: '4',
-        title: 'Advanced Project Configuration';
+        title: 'Advanced Project Configuration',
         description: 'Configure complex project settings',
-        duration: '1 hour';
+        duration: '1 hour',
         difficulty: 'intermediate',
 completed: false}
 };
       {id: '5',
-        title: 'Team Collaboration';
+        title: 'Team Collaboration',
         description: 'Work with teams effectively',
-        duration: '45 min';
+        duration: '45 min',
         difficulty: 'intermediate',
 completed: false}
     ]
@@ -150,13 +150,13 @@ className="flex-shrink-0 mr-3">
                               <Button
 className="w-full";
 
-const onClick = {() => setSelectedPath(path.id)}
+    const onClick = {() => setSelectedPath(path.id)}
                 >
                   {getProgressPercentage(path) > 0 ? 'Continue Path' : 'Start Learning Path'}
 </Button>
               </Card>
                         ))}
-      </div>;
+      </div>
               );
 </div>
               </Tutorial>

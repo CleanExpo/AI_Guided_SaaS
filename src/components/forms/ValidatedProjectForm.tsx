@@ -13,16 +13,16 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, AlertCircle } from 'lucide-react';
 
 const _ExtendedProjectSchema = CreateProjectSchema.extend({
-    config: z.object({,
-  database: z.string().optional();
-    hosting: z.string().optional();
-    authentication: z.string().optional();
-    api_style: z.string().optional();
-    framework: z.string().optional();
-    language: z.string().optional();
+    config: z.object({
+  database: z.string().optional(),
+    hosting: z.string().optional(),
+    authentication: z.string().optional(),
+    api_style: z.string().optional(),
+    framework: z.string().optional(),
+    language: z.string().optional(),
 features: z.array(z.string()).optional()
 }).optional()
-});
+})
 // Type-safe form data
 type CreateProjectForm = z.infer<typeof ExtendedProjectSchema>
 export function ValidatedProjectForm() {
@@ -32,16 +32,16 @@ const [errors, setErrors]  = useState<Record<string, string>>({});</Record>
 
 const [generalError, setGeneralError] = useState<string | null>(null);
   
-const [formData, setFormData]  = useState<CreateProjectForm>({,
-    name: '';
-    description: '';
+const [formData, setFormData]  = useState<CreateProjectForm>({
+    name: '',
+    description: '',
     type: "fullstack"
     , status: 'planning',
     config: { features: any[] }
 </CreateProjectForm>
   });
 
-const _handleSubmit = async (e: React.FormEvent) => {;
+const _handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); setErrors({});
     setGeneralError(null);
     // Validate form data;
@@ -49,18 +49,17 @@ const _handleSubmit = async (e: React.FormEvent) => {;
 const validation = validateSafe(ExtendedProjectSchema, formData);
     if (!validation.success) {
       // Map validation errors to form fields</CreateProjectForm>, const fieldErrors: Record<string, string>  = {}
-      (validation.error.errors as any[]).forEach((err) => {
-, const _field = err.path.join('.'), fieldErrors[field] = err.message
+      (validation.error.errors as any[]).forEach((err) => { const _field = err.path.join('.'), fieldErrors[field] = err.message
       })
       setErrors(fieldErrors);
       return null;
 };
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/projects', {,
+      const response = await fetch('/api/admin/auth', {
     method: 'POST',
-headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify(validation.data)
+headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(validation.data)
       });
 if (!response.ok) {
         const error = await response.json(), throw new Error(error.message || 'Failed to create project')};
@@ -104,7 +103,7 @@ const _updateConfig = (key: string, value) => {
             <Input;
 id="name";
 
-const value = {formData.name}
+    const value = {formData.name}
               const onChange = {(e) => updateField('name', e.target.value)};
               placeholder="My Awesome Project";
               aria-invalid={!!errors.name}
@@ -122,7 +121,7 @@ const value  = {formData.description}
               const onChange = {(e) => updateField('description', e.target.value)};
               placeholder="Describe your project...";
 
-const rows = {4}
+    const rows = {4}
               aria-invalid={!!errors.description}
               aria-describedby={errors.description ? 'description-error' : undefined}
             />
@@ -217,7 +216,7 @@ const value = {formData.config?.database || ''}
                   <input;
 type="checkbox";
 
-const checked = {formData.config?.features?.includes(feature) || false}
+    const checked = {formData.config?.features?.includes(feature) || false}
                     const onChange = {(e) =   /> {
                       const features = formData.config?.features || [], if (e.target.checked) {
                         updateConfig('features', [...features, feature])} else { updateConfig('features', features.filter((f) => f !== feature))
@@ -229,7 +228,7 @@ const checked = {formData.config?.features?.includes(feature) || false}
 type="button";
 variant="outline";
 
-const onClick = {() => router.back()}
+    const onClick = {() => router.back()}
               const disabled = {isSubmitting}
             >
                     Cancel
@@ -271,8 +270,7 @@ const fieldSchema = (schema as any).shape[field as string];
 </T>
 }
   const _validate = (): void => {const result = schema.safeParse(data), if (!result.success) {</K>, const fieldErrors: Record<string, string>  = {}
-      (result.error.errors as any[]).forEach((err) => {
-, const _field = err.path.join('.'), fieldErrors[field] = err.message
+      (result.error.errors as any[]).forEach((err) => { const _field = err.path.join('.'), fieldErrors[field] = err.message
       });
       setErrors(fieldErrors);
       return false;
@@ -280,7 +278,7 @@ const fieldSchema = (schema as any).shape[field as string];
     setErrors({});
     return true;
 }
-  const _reset = (): void => {;
+  const _reset = (): void => {
     setData(initialData); setErrors({});
     setTouched(new Set())
 }

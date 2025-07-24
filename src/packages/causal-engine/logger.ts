@@ -1,12 +1,11 @@
 /* BREADCRUMB: unknown - Purpose to be determined */
 // packages/causal-engine/logger.ts;
 export type LogActionType = 'added' | 'edited' | 'deleted' | 'kept';export interface CausalLogEntry {
-  componentId: string;
-  componentType: string;
-  page: string;
-  promptContext: string;
-  action: LogActionTyp
-e;
+  componentId: string,
+  componentType: string,
+  page: string,
+  promptContext: string, action: LogActionTyp
+e,
     timestamp: number
 }
 /**

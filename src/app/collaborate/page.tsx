@@ -19,38 +19,38 @@ const [showWorkspace, setShowWorkspace] = useState(false);
   
   
 const mockProjects = [
-    {,
+    {
       id: '1',
-      name: 'E-commerce Platform';
+      name: 'E-commerce Platform',
       description: 'Building a modern e-commerce solution with AI-powered recommendations',
-      members: 5;
+      members: 5,
       lastActivity: '2 hours ago',
-      status: 'active';
+      status: 'active',
       isPublic: false
-    };
+    },
     {
       id: '2',
-      name: 'Mobile App UI';
+      name: 'Mobile App UI',
       description: 'Designing intuitive mobile interfaces for productivity app',
-      members: 3;
+      members: 3,
       lastActivity: '1 day ago',
-      status: 'review';
+      status: 'review',
       isPublic: true
-    };
+    },
     {
       id: '3',
-      name: 'API Documentation';
+      name: 'API Documentation',
       description: 'Comprehensive API documentation with interactive examples',
-      members: 2;
+      members: 2,
       lastActivity: '3 days ago',
-      status: 'completed';
+      status: 'completed',
       isPublic: true
     }
   ];
   
   if (status === 'loading') {
     return (<div className="flex items-center justify-center min-h-screen">, <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-    </div>;
+    </div>
   );
 }
   

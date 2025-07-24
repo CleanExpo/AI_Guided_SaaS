@@ -13,21 +13,21 @@ export interface KiroConfig { apiUrl: string;
 }
 // Project structure types;
 export interface KiroProject {
-    id: string;
+    id: string,
   name: string;
   description?,
   string: type: 'web' | 'mobile' | 'desktop' | 'api' | 'library';
   framework?: string,
-  language: string;
+  language: string,
   structure: KiroFileTre
 e;
   settings?: KiroProjectSettings,
-  createdAt: string;
+  createdAt: string,
   updatedAt: string
 }
 
-export interface KiroFileTree { name: string;
-  type: 'file' | 'directory';
+export interface KiroFileTree { name: string,
+  type: 'file' | 'directory',
   path: string;
   children?: KiroFileTree[],
   content?: string,
@@ -46,7 +46,7 @@ export interface KiroProjectSettings { buildCommand?: string,
   dependencies?: Record<string, string />}
 // IDE features;
 export interface KiroFile {
-    path: string;
+    path: string,
   content: string;
   language?: string,
   readOnly?: boolean,
@@ -54,65 +54,65 @@ export interface KiroFile {
 }
 
 export interface KiroMarker {
-    severity: 'error' | 'warning' | 'info' | 'hint';
-  message: string;
-  startLine: number;
-  startColumn: number;
-  endLine: number;
+    severity: 'error' | 'warning' | 'info' | 'hint',
+  message: string,
+  startLine: number,
+  startColumn: number,
+  endLine: number,
   endColumn: number;
   source?: string
 }
 
 export interface KiroTerminal {
-id: string;
+id: string,
   name: string;
   shell?: string,
   cwd?: string,
   env?: Record<string, string />, export
 }
 
-interface KiroDebugSession { id: string;
-  name: string;
-  type: string;
-  request: 'launch' | 'attach';
+interface KiroDebugSession { id: string,
+  name: string,
+  type: string,
+  request: 'launch' | 'attach',
   configuration: Record<string, any />}
 // AI assistance types;
 export interface KiroAIAssistance {
-    suggestions: KiroSuggestion[];
-  diagnostics: KiroDiagnostic[];
-  refactorings: KiroRefactoring[];
+    suggestions: KiroSuggestion[],
+  diagnostics: KiroDiagnostic[],
+  refactorings: KiroRefactoring[],
   completions: KiroCompletion[]
 }
 
 export interface KiroSuggestion {
-    id: string;
-  type: 'code' | 'architecture' | 'performance' | 'security';
-  title: string;
-  description: string;
+    id: string,
+  type: 'code' | 'architecture' | 'performance' | 'security',
+  title: string,
+  description: string,
   priority: 'high' | 'medium' | 'low';
   changes?: KiroCodeChange[]
 }
 
 export interface KiroDiagnostic {
-    file: string;
-  line: number;
-  column: number;
-  severity: 'error' | 'warning' | 'info';
+    file: string,
+  line: number,
+  column: number,
+  severity: 'error' | 'warning' | 'info',
   message: string;
   code?: string,
   fixes?: KiroQuickFix[]
 }
 
 export interface KiroRefactoring {
-    id: string;
-  name: string;
-  description: string;
-  scope: 'file' | 'function' | 'class' | 'project';
+    id: string,
+  name: string,
+  description: string,
+  scope: 'file' | 'function' | 'class' | 'project',
   preview: KiroCodeChange[]
 }
 
 export interface KiroCompletion {
-label: string;
+label: string,
   kind: 'text' | 'method' | 'function' | 'constructor' | 'field' | 'variable' | 'class' | '
 }
 
@@ -121,42 +121,42 @@ interface' | 'module' | 'property';
   documentation?: string,
   insertText: string;
   range?: {
-    start: { line: number;
+    start: { line: number,
   character: number
 }
   end: { line: number, character: number }}
 
 export interface KiroCodeChange {
-file: string;
+file: string,
   changes: Array<{
   range: {
-  start: { line: number;
+  start: { line: number,
   character: number
 }
   end: { line: number, character: number }}
     newText: string
   }>
 };
-export interface KiroQuickFix { title: string;
+export interface KiroQuickFix { title: string,
   changes: KiroCodeChange[]
   }
 }
 // Validation schemas;
 export const KiroProjectSchema = z.object({
-    name: z.string().min(1).max(100);
-    description: z.string().optional();
+    name: z.string().min(1).max(100),
+    description: z.string().optional(),
     type: z.enum(['web', 'mobile', 'desktop', 'api', 'library']),
-  framework: z.string().optional();
-    language: z.string();
+  framework: z.string().optional(),
+    language: z.string(),
     settings: z.object({
-  buildCommand: z.string().optional();
-    startCommand: z.string().optional();
-    testCommand: z.string().optional();
-    outputDirectory: z.string().optional();
-    environment: z.record(z.string()).optional();
+  buildCommand: z.string().optional(),
+    startCommand: z.string().optional(),
+    testCommand: z.string().optional(),
+    outputDirectory: z.string().optional(),
+    environment: z.record(z.string()).optional(),
     dependencies: z.record(z.string()).optional()
 }).optional()
-});
+})
 export class KiroClient {
   private config: KiroConfig
   private ws: WebSocket | null = null
@@ -166,7 +166,7 @@ export class KiroClient {
   // Connection management
   async connect(): Promise<any> {
     const _wsUrl = this.config.apiUrl.replace(/^https?:/, 'ws:') + '/ws', return new Promise((resolve, reject) => {
-      this.ws = new WebSocket(wsUrl), this.ws.onopen = () => {;
+      this.ws = new WebSocket(wsUrl), this.ws.onopen = () => {
         // Send authentication;
 if (this.config.apiKey) {
           this.send('auth', { apiKey: this.config.apiKey })
@@ -230,7 +230,7 @@ if (this.config.apiKey) {
 }
   // Terminal operations
   async createTerminal(config?: Partial<KiroTerminal>): Promise<any> {
-    return this.request('/api/terminals', {,
+    return this.request('/api/terminals', {
       method: 'POST',
       body: JSON.stringify(config || {})}
   async executeCommand(terminalId: string, command: string): Promise<any> {
@@ -242,7 +242,7 @@ if (this.config.apiKey) {
 }
   // AI assistance
   async getAISuggestions(file: string, position?: { line: number, character: number }): Promise<any> {
-    return this.request('/api/ai/assist', {,
+    return this.request('/api/ai/assist', {
       method: 'POST',
       body: JSON.stringify({ file, position })}
   async applyAISuggestion(suggestionId: string): Promise<any> {
@@ -250,20 +250,20 @@ if (this.config.apiKey) {
     })
 }
   async getCompletions(file: string, position: { line: number, character: number }): Promise<any> {
-    return this.request('/api/ai/completions', {,
+    return this.request('/api/ai/completions', {
       method: 'POST',
       body: JSON.stringify({ file, position })}
   async runDiagnostics(projectId: string): Promise<any> {
     return this.request(`/api/projects/${projectId}/diagnostics`)``
 };
-  async applyQuickFix(file: string, line: number;
+  async applyQuickFix(file: string, line: number,
   fixIndex: number): Promise<any> {
-    await this.request('/api/ai/quickfix', {,
+    await this.request('/api/ai/quickfix', {
       method: 'POST',
       body: JSON.stringify({ file, line, fixIndex })}
   // Debugging
   async startDebugSession(config: Omit<KiroDebugSession, 'id'>): Promise<any> {
-    return this.request('/api/debug/sessions', {,
+    return this.request('/api/debug/sessions', {
       method: 'POST',
       body: JSON.stringify(config)
     })
@@ -339,8 +339,8 @@ export function getKiroClient(config?: KiroConfig): KiroConfig): KiroClient {
     kiroClient = new KiroClient(config)}
   if (!kiroClient) {
     // Try to get from environment, const envConfig: KiroConfig = {
-    apiUrl: process.env.NEXT_PUBLIC_KIRO_API_URL || 'http://localhost:8080';
-    apiKey: process.env.KIRO_API_KEY;
+    apiUrl: process.env.NEXT_PUBLIC_KIRO_API_URL || 'http://localhost:8080',
+    apiKey: process.env.KIRO_API_KEY,
     theme: 'auto'
 }
     kiroClient = new KiroClient(envConfig)

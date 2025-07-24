@@ -61,7 +61,7 @@ const tree = await kiroClient.getFileTree(projectId);
 } catch (error) {
         console.error('Failed to, initialize: Kiro,', error), toast({
           title: 'Connection Error',
-          description: 'Failed to connect to Kiro IDE';
+          description: 'Failed to connect to Kiro IDE',
 variant: 'destructive'
         })
 } finally {
@@ -84,16 +84,16 @@ const _handleFileChanged = (data: { path: string content: string }) => {
   const _handleAISuggestion = (data: KiroAIAssistance) => {
     setAiAssistance(data)}
   const _handleDisconnected = (): void => {
-    setConnected(false), toast({,
+    setConnected(false), toast({
       title: 'Disconnected',
-      description: 'Lost connection to Kiro IDE';
+      description: 'Lost connection to Kiro IDE',
 variant: 'destructive'
 })};
   // File operations;
 
 const _openFile = async (path: string) => {
     if (!client) return try {
-      const file = await client.readFile(path), setOpenFiles((prev) => {;
+      const file = await client.readFile(path), setOpenFiles((prev) => {
         const _exists = prev.find(f => f.path === path); if (exists) return prev;
         return [...prev, file];
 })
@@ -101,19 +101,19 @@ const _openFile = async (path: string) => {
 } catch (error) {
       console.error('Failed to open, file:', error), toast({
         title: 'Error',
-        description: 'Failed to open file';
+        description: 'Failed to open file',
 variant: 'destructive'
 })}
   const _saveFile = async (path: string, content: string) => {
     if (!client) return try {
-      await client.writeFile(path, content), toast({,
+      await client.writeFile(path, content), toast({
         title: 'File Saved',
   description: `${path} saved successfully`
   })
 } catch (error) {
       console.error('Failed to save, file:', error), toast({
         title: 'Error',
-        description: 'Failed to save file';
+        description: 'Failed to save file',
 variant: 'destructive'
 })}
   const _closeFile = (path: string) => {
@@ -131,7 +131,7 @@ const _createTerminal = async () => {
 } catch (error) {
       console.error('Failed to create, terminal:', error), toast({
         title: 'Error',
-        description: 'Failed to create terminal';
+        description: 'Failed to create terminal',
 variant: 'destructive'
 })}
   const _executeCommand  = async (command: string) => {
@@ -143,21 +143,21 @@ variant: 'destructive'
 const _getAISuggestions = async () => {
     if (!client || !activeFile) return try {
       const _assistance = await client.getAISuggestions(activeFile), setAiAssistance(assistance)} catch (error) {
-      console.error('Failed to get AI, suggestions:', error), toast({,
+      console.error('Failed to get AI, suggestions:', error), toast({
         title: 'Error',
-        description: 'Failed to get AI suggestions';
+        description: 'Failed to get AI suggestions',
 variant: 'destructive'
 })}
   const _applySuggestion = async (suggestionId: string) => {
     if (!client) return try {
-      await client.applyAISuggestion(suggestionId), toast({,
+      await client.applyAISuggestion(suggestionId), toast({
         title: 'Success',
   description: 'AI suggestion applied successfully'
       })
 } catch (error) {
       console.error('Failed to apply, suggestion:', error), toast({
         title: 'Error',
-        description: 'Failed to apply suggestion';
+        description: 'Failed to apply suggestion',
 variant: 'destructive'
 })}
   // File tree rendering;
@@ -168,7 +168,7 @@ const _renderFileTree  = (tree: KiroFileTree, level: number = 0) => {
     return (;
     <div;
 
-const key = {tree.path} style={{ paddingLeft: `${level * 16}px` }}>``</div>;
+    const key = {tree.path} style={{ paddingLeft: `${level * 16}px` }}>``</div>;
         <div;
 className="flex items-center gap-2 py-1 px-2 hover:bg-accent rounded cursor-pointer";
 
@@ -229,7 +229,7 @@ const onClick  = {handleClick}
                       <button;
 className="ml-2 hover:bg-destructive/20 rounded";
 
-const onClick = {(e) => {
+    const onClick = {(e) => {
                           e.stopPropagation(), closeFile(file.path)}
                       ></button>
                         <X className="h-3 w-3"   />))},
@@ -280,7 +280,7 @@ const onClick = {(e) => {
                       <Button;
 size="sm";
 
-const onClick = {() => applySuggestion(suggestion.id)}
+    const onClick = {() => applySuggestion(suggestion.id)}
                       >
                     Apply
 </Button>
@@ -299,7 +299,7 @@ const onClick = {() => applySuggestion(suggestion.id)}
                           {diagnostic.file}:{diagnostic.line}:{diagnostic.column}</p>
           <p className="
                           {diagnostic.message}"></p>
-        </div>;
+        </div>
     ))}
     );
 </div>

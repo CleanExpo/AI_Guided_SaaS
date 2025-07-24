@@ -9,23 +9,22 @@ import { cn } from '@/utils/cn';
 import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
 import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
 interface Message {
-id: string;
-  role: 'user' | 'assistant' | 'system';
-  content: string;
+id: string,
+  role: 'user' | 'assistant' | 'system',
+  content: string,
   timestamp: Date;
   metadata?: {
     suggestedDocs?: string[],
   suggestedTutorials?: string[],
-  codeBlocks?: Array<{ language: string;
+  codeBlocks?: Array<{ language: string,
   code: string
 }>
     actionButtons?: Array<{ label: string, action: string data?}>
 }
 interface AISupportChatProps {
 documentationSystem: DynamicDocumentationSyste
-m;
-  tutorialSystem: InteractiveTutorialSyste
-m;
+m, tutorialSystem: InteractiveTutorialSyste
+m,
   userId: string;
   projectId?: string
 };
@@ -36,11 +35,10 @@ export function AISupportChat({
   const [isOpen, setIsOpen] = useState<any>(false);
   const [isMinimized, setIsMinimized] = useState<any>(false);
   const [messages, setMessages] = useState<Message[]>([
-  {,
+  {
   id: '1',
-      role: 'system';
-content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?',
-</Message>;
+      role: 'system',
+content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?', </Message>,
 timestamp: new Date()}
   ]);
 
@@ -61,10 +59,10 @@ const _chatContainerRef = useRef<HTMLDivElement>(null);
 const _scrollToBottom  = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })};
 
 const _handleSendMessage = async () => {
-    if (!input.trim() || isLoading) return const userMessage: Message = {,
-  id: Date.now().toString();
+    if (!input.trim() || isLoading) return const userMessage: Message = {
+  id: Date.now().toString(),
     role: 'user',
-      content: input;
+      content: input,
 timestamp: new Date()}
     setMessages(prev => [...prev, userMessage]);
     setInput('');
@@ -76,31 +74,31 @@ timestamp: new Date()}
 const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
       // Send to AI for enhanced response;
 
-const response = await fetch('/api/support/chat', {,
+const response = await fetch('/api/admin/auth', {
         method: 'POST',
-headers: { 'Content-Type': 'application/json' }
-    body: JSON.stringify({
-          message: input;
-    context: { userId, projectId, documentationResults: docResults.slice(0, 3); availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title });
+headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: input,
+    context: { userId, projectId, documentationResults: docResults.slice(0, 3), availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title }),
     conversationHistory: messages.slice(-5)})}
       const data  = await response.json();
 
-const assistantMessage: Message = {,
-        id: (Date.now() + 1).toString();
+const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
     role: 'assistant',
-        content: data.response;
-    timestamp: new Date();
+        content: data.response,
+    timestamp: new Date(),
     metadata: {
-  suggestedDocs: data.suggestedDocs;
-    suggestedTutorials: data.suggestedTutorials;
-    codeBlocks: data.codeBlocks;
+  suggestedDocs: data.suggestedDocs,
+    suggestedTutorials: data.suggestedTutorials,
+    codeBlocks: data.codeBlocks,
 actionButtons: data.actionButtons
   }
 }
       setMessages(prev => [...prev, assistantMessage])
 } catch (error) {
       console.error('Failed to get AI, response:', error), const errorMessage: Message = {
-  id: (Date.now() + 1).toString();
+  id: (Date.now() + 1).toString(),
     role: 'assistant',
 content: 'I apologize, but I encountered an error. Please try again or check the documentation.',
         timestamp: new Date()}
@@ -116,14 +114,14 @@ content: 'I apologize, but I encountered an error. Please try again or check the
 
 const categories = ['getting-started', 'api-reference', 'tutorials', 'troubleshooting'];
         
-const docsMessage: Message = {,
-  id: Date.now().toString();
+const docsMessage: Message = {
+  id: Date.now().toString(),
     role: 'assistant',
-          content: 'Here are the main documentation, categories: ';
-          timestamp: new Date();
+          content: 'Here are the main documentation, categories: ',
+          timestamp: new Date(),
     metadata: {
   actionButtons: categories.map((cat) => ({
-  label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase();
+  label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase(),
               action: 'browse-category',
 data: { category: cat }}))}
         setMessages(prev => [...prev, docsMessage]);
@@ -133,16 +131,16 @@ data: { category: cat }}))}
 const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
     break;
         
-const tutorialMessage: Message = {,
-          id: Date.now().toString();
+const tutorialMessage: Message = {
+          id: Date.now().toString(),
     role: 'assistant',
-          content: 'Here are some recommended tutorials for, you: ';
-          timestamp: new Date();
+          content: 'Here are some recommended tutorials for, you: ',
+          timestamp: new Date(),
 metadata: {
   suggestedTutorials: tutorials.slice(0, 3).map((t) => t.id),
             actionButtons: tutorials.slice(0, 3).map((t) => ({
               label: `Start: ${t.title}`,
-action: 'start-tutorial';
+action: 'start-tutorial',
     data: { tutorialId: t.id }}))}
         setMessages(prev => [...prev, tutorialMessage]);
         // break
@@ -152,8 +150,8 @@ action: 'start-tutorial';
         // break
       case 'get-help':;
 
-const helpMessage: Message = {,
-          id: Date.now().toString();
+const helpMessage: Message = {
+          id: Date.now().toString(),
     role: 'assistant',
           content: 'I can help you, with: \n\n• Finding documentation\n• Starting tutorials\n• Troubleshooting errors\n• Understanding features\n• Getting code examples\n\nWhat would you like help with?', timestamp: new Date()}
         setMessages(prev => [...prev, helpMessage]);
@@ -164,15 +162,15 @@ const helpMessage: Message = {,
       case 'browse-category':, const sections = documentationSystem.getSectionsByCategory(data.category), break
     break
 }
-        const categoryMessage: Message = {,
-  id: Date.now().toString();
+        const categoryMessage: Message = {
+  id: Date.now().toString(),
     role: 'assistant',
-content: `Here are the ${data.category} documentation; sections: `;
-  timestamp: new Date();
+content: `Here are the ${data.category} documentation; sections: `,
+  timestamp: new Date(),
     metadata: {
-            suggestedDocs: sections.map((s) => s.id);
+            suggestedDocs: sections.map((s) => s.id),
     actionButtons: sections.slice(0, 5).map((s) => ({
-              label: s.title;
+              label: s.title,
     action: 'open-doc',
 data: { sectionId: s.id }}))}
         setMessages(prev => [...prev, categoryMessage]);
@@ -198,24 +196,24 @@ const _section = documentationSystem.getSection(data.sectionId);
         // break
   }
 }
-  const _handleSearch = async () => {;
+  const _handleSearch = async () => {
     if (!searchQuery.trim()) return null; const results = await documentationSystem.searchDocumentation(searchQuery); const searchMessage: Message = {
-  id: Date.now().toString();
+  id: Date.now().toString(),
     role: 'assistant',
-content: `Found ${results.length} results for "${searchQuery}":`;
-timestamp: new Date();
+content: `Found ${results.length} results for "${searchQuery}":`,
+timestamp: new Date(),
     metadata: {
         suggestedDocs: results.slice(0, 5).map((r) => r.sectionId),
         actionButtons: results.slice(0, 5).map((r) => ({
-          label: r.title;
+          label: r.title,
     action: 'open-doc',
 data: { sectionId: r.sectionId }}))}
     setMessages(prev => [...prev, searchMessage]);
     setSearchQuery('')
 }
-  const quickActions = [;
-  { icon: Book, label: 'Browse Docs' action: 'browse-docs' };
-    { icon: Play, label: 'Start Tutorial' action: 'start-tutorial' };
+  const quickActions = [
+  { icon: Book, label: 'Browse Docs' action: 'browse-docs' },
+    { icon: Play, label: 'Start Tutorial' action: 'start-tutorial' },
     { icon: HelpCircle, label: 'Get Help' action: 'get-help' }
    ];
 if (!isOpen) {
@@ -226,7 +224,7 @@ if (!isOpen) {
   return (
     <div;
 
-const ref = {chatContainerRef}
+    const ref = {chatContainerRef}
       const className = {cn(
             'fixed bottom-6 right-6 z-50 transition-all duration-300',isMinimized ? "h-14" : "h-[600px]"
       )}
@@ -244,7 +242,7 @@ const ref = {chatContainerRef}
           <div className="flex gap-1">
             <Button, size="sm", variant="ghost";
 
-const onClick = {() => setIsMinimized(!isMinimized)}
+    const onClick = {() => setIsMinimized(!isMinimized)}
             ></Button>
               <ChevronDown className={cn(
             'h-4 w-4 transition-transform',isMinimized && "rotate-180"
@@ -254,7 +252,7 @@ const onClick = {() => setIsMinimized(!isMinimized)}
 size="sm";
 variant="ghost";
 
-const onClick = {() => setIsOpen(false)}
+    const onClick = {() => setIsOpen(false)}
             ></Button>
               <X className="h-4 w-4"   />
 </Button>
@@ -302,10 +300,11 @@ const value  = {searchQuery}
     {/* Suggested, docs */},
     {message.metadata?.suggestedDocs && message.metadata.suggestedDocs.length > 0  && (div className="max-w-[85%] space-y-1">
                           <p className="text-xs text-muted-foreground">Related, documentation:</p>
-                          {message.metadata.suggestedDocs.map((docId) => {;
+                          {message.metadata.suggestedDocs.map((docId) => {
                             const doc = documentationSystem.getSection(docId);
         return doc ? (<button, const key = {docId};
-                                const onClick = {() => handleActionButton('open-doc', { sectionId: docId})};
+
+    const onClick = {() => handleActionButton('open-doc', { sectionId: docId})};
                                 className="text-xs text-primary hover:underline block text-left";
                               ></button>
                                 📄 {doc.title}</button>
@@ -356,7 +355,7 @@ const value = {input}
                       e.preventDefault(), handleSendMessage()};
                   placeholder="Ask me anything..."className="min-h-[40px] max-h-[120px] resize-none";
 
-const rows = {1}
+    const rows = {1}
                 /></Textarea>
                 <Button
 

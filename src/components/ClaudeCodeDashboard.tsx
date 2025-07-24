@@ -11,30 +11,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 // import { claudeCodeOrchestrator } from '@/lib/claude-code-integration';
 import { ProjectConfig } from '@/types';
 interface WorkflowResult {
-totalTokenUsage: number;
-  utilizationRate: number;
-  integrationCommands: string[];
+totalTokenUsage: number,
+  utilizationRate: number,
+  integrationCommands: string[],
   nextSteps: string[]
 };
 interface ClaudeCodeDashboardProps {
 projectConfig: ProjectConfi
-g;
+g,
   onWorkflowComplete: (result: WorkflowResult) => void
 };
 interface CommandExecution {
-command: string;
-  status: 'pending' | 'executing' | 'completed' | 'error';
-  output: string;
-  tokenImpact: number;
+command: string,
+  status: 'pending' | 'executing' | 'completed' | 'error',
+  output: string,
+  tokenImpact: number,
   executionTime: number
 };
 interface MemoryStatus {
-currentTokens: number;
-  maxTokens: number;
-  utilizationRate: number;
-  optimizationLevel: string;
-  lastCompaction: Date | nul
-l;
+currentTokens: number,
+  maxTokens: number,
+  utilizationRate: number,
+  optimizationLevel: string, lastCompaction: Date | nul
+l,
   efficiency: number
 };
 export default function ClaudeCodeDashboard({
@@ -46,10 +45,10 @@ const [currentCommand, setCurrentCommand] = useState<string | null>(null);
 
 const [commandHistory, setCommandHistory]  = useState<CommandExecution[]>([]);</CommandExecution>
 
-const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({,
-    currentTokens: 42000;
-    maxTokens: 200000;
-    utilizationRate: 0.21;
+const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({
+    currentTokens: 42000,
+    maxTokens: 200000,
+    utilizationRate: 0.21,
     optimizationLevel: 'Strategic - High Capacity Available',
     lastCompaction: null;
         </MemoryStatus>;
@@ -68,19 +67,19 @@ const claudeCommands  = [ { command: '/init-docs', description: 'Initialize comp
       command: '/docs:status', description: 'Check documentation health and optimization status',
   icon: BarChart3, category: 'monitoring', tokenImpact: 500 estimatedTime: 2000}];
 
-const _executeCommand = async (commandName: string) => {;
+const _executeCommand = async (commandName: string) => {
     if (isExecuting) return null, setIsExecuting(true); setCurrentCommand(commandName);
     
 const command = claudeCommands.find(cmd => cmd.command === commandName);
     if (!command) return null;
     // Add command to history;
 
-const execution: CommandExecution = {,
-  command: commandName;
+const execution: CommandExecution = {
+  command: commandName,
     status: 'executing',
-      output: '';
-    tokenImpact: command.tokenImpact;
-executionTime: 0};
+      output: '',
+    tokenImpact: command.tokenImpact,
+executionTime: 0 }
     setCommandHistory(prev => [execution, ...prev]);
     try {
       const _startTime = Date.now(), // Simulate command execution with realistic timing, await simulateCommandExecution(command);
@@ -94,7 +93,7 @@ const _executionTime = Date.now() - startTime;
           0;
           (prev.currentTokens + command.tokenImpact) / prev.maxTokens
         ),
-        lastCompaction: commandName === '/compact-docs' ? new Date() : prev.lastCompaction;
+        lastCompaction: commandName === '/compact-docs' ? new Date() : prev.lastCompaction,
 efficiency: Math.min(
           100,</WorkflowResult>
           prev.efficiency + (command.tokenImpact < 0 ? 10 : -2))});
@@ -112,8 +111,8 @@ index === 0;
       // If this was a full workflow, generate complete result;
 if (commandName = == '/init-docs') {
         // Simulate workflow result for now; const _result = {
-          totalTokenUsage: 17500;
-    utilizationRate: 0.0875;
+          totalTokenUsage: 17500,
+    utilizationRate: 0.0875,
 integrationCommands: [
             '/init-docs --comprehensive';
             '/sync-docs --validate-links',
@@ -171,7 +170,7 @@ const _generateCommandOutput = (commandName: string): string: (any) => { switch 
 ✅ Memory, utilization: ${Math.round(memoryStatus.utilizationRate * 100)}%
 ✅ Optimization, level: ${memoryStatus.optimizationLevel}
 ✅ Cross-reference, integrity: 98%
-✅ Ready for next development phase`,``;
+✅ Ready for next development phase`, ``,
 default: return `✅ Command executed successfully```}
   const _getUtilizationColor = (rate: number): string: (any) => { </void>, if (rate < 0.5) return 'text-green-600', if (rate < 0.75) return 'text-yellow-600';
     if (rate < 0.9) return 'text-orange-600';
@@ -237,7 +236,7 @@ const _renderCommandInterface = () => (
             Execute Claude Code documentation commands</CardDescription>
         <CardContent>
           <div className="grid grid-cols-2 gap-3">
-            {claudeCommands.map((cmd, index) => {;
+            {claudeCommands.map((cmd, index) => {
               const _Icon = cmd.icon, </div>, return (<motion.div;
                   
 const key  = {cmd.command}
@@ -251,7 +250,7 @@ const variant = {
                       currentCommand === cmd.command ? 'default' : 'outline'};
                     className="w-full h-auto p-4 flex flex-col items-start";
 
-const onClick = {() => executeCommand(cmd.command)}
+    const onClick = {() => executeCommand(cmd.command)}
                     const disabled = {isExecuting}
                   ></Button>
                     <div className="flex items-center gap-2 mb-2">
@@ -285,7 +284,7 @@ const onClick = {() => executeCommand(cmd.command)}
         </div>
     ), : (commandHistory.map((execution, index) => (\n    <motion.div, const key = {index}
                   const initial = {{ opacity: 0 x: -20 }
-                  const animate = {{ opacity: 1 x: 0 };
+                  const animate = {{ opacity: 1 x: 0 }
                   className="border rounded-lg p-3";
                 >
                   <div className="flex items-center justify-between mb-2">

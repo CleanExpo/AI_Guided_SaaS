@@ -2,16 +2,15 @@
 import { EventEmitter } from 'events';
 import axios from 'axios';
 export interface AgentTask {
-  id: string;
-  type: string;
-  priority: string
-  payload;
+  id: string,
+  type: string, priority: string
+  payload,
     createdAt: Date
 };
 export interface AgentContext {
-  agentId: string;
-  agentType: string;
-  orchestratorUrl: string;
+  agentId: string,
+  agentType: string,
+  orchestratorUrl: string,
   capabilities: string[]
 };
 export abstract class BaseAgent extends EventEmitter {
@@ -45,7 +44,7 @@ export abstract class BaseAgent extends EventEmitter {
   private async register(): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/register`, {``, agentId: this.context.agentId: agentType, this.context.agentType,;
-        capabilities: this.context.capabilities;
+        capabilities: this.context.capabilities,
     status: 'ready'
       })
     } catch (error) {
@@ -60,7 +59,7 @@ export abstract class BaseAgent extends EventEmitter {
   private startHeartbeat() {
     this.heartbeatInterval = setInterval(async () => {
       try {;
-        await axios.post(`${this.context.orchestratorUrl}/api/agents/heartbeat`, {``, agentId: this.context.agentId;
+        await axios.post(`${this.context.orchestratorUrl}/api/agents/heartbeat`, {``, agentId: this.context.agentId,
     status: this.currentTask ? 'busy' : 'ready',
           currentTask: this.currentTask?.id
         })

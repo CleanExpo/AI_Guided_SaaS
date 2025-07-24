@@ -14,8 +14,8 @@ export interface VectorStoreConfig {
 }
 // Document types;
 export interface Document {
-  id: string;
-  content: string;
+  id: string,
+  content: string,
   metadata: DocumentMetadat
 a;
   embedding?: number[],
@@ -25,16 +25,16 @@ export interface DocumentMetadata {
   source: string;
   title?: string,
   author?: string,
-    createdAt: string;
-  updatedAt: string;
+    createdAt: string,
+  updatedAt: string,
   type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other';
   language?: string,
   tags?: string[],
   project?: string
 };
 export interface DocumentChunk {
-  id: string;
-  documentId: string;
+  id: string,
+  documentId: string,
   content: string;
   embedding?: number[],
   metadata: ChunkMetadat
@@ -60,28 +60,28 @@ export interface SearchFilter {
   tags?: string[],
   project?: string,
   dateRange?: {
-    start: string;
+    start: string,
   end: string
 }
 
 export interface SearchResult {
-  id: string;
-  score: number;
-  content: string;
+  id: string,
+  score: number,
+  content: string,
   metadata: DocumentMetadat
 a;
   highlights?: string[]
 }
 // Validation schemas;
 export const _DocumentSchema = z.object({
-    content: z.string().min(1);
+    content: z.string().min(1),
     metadata: z.object({
-  source: z.string();
-    title: z.string().optional();
-    author: z.string().optional();
+  source: z.string(),
+    title: z.string().optional(),
+    author: z.string().optional(),
     type: z.enum(['code', 'documentation', 'tutorial', 'api', 'article', 'other']),
-    language: z.string().optional();
-    tags: z.array(z.string()).optional();
+    language: z.string().optional(),
+    tags: z.array(z.string()).optional(),
     project: z.string().optional()})}
 
 export abstract class VectorStore {
@@ -100,7 +100,7 @@ export abstract class VectorStore {
   abstract listDocuments(filter?: SearchFilter): Promise<Document[]>
   abstract clear(): Promise<any>
   // Common helper methods
-  protected chunkDocument(content: string, chunkSize: number = 1000;
+  protected chunkDocument(content: string, chunkSize: number = 1000,
   overlap: number = 200): string[] {
     const chunks: string[] = []; let start = 0, while (start < content.length) {
       const _end = Math.min(start + chunkSize, content.length);
@@ -132,7 +132,7 @@ export class MemoryVectorStore extends VectorStore {
     const id = document.id || this.generateId(), // Generate embedding for document, const _embedding = await this.generateEmbedding(document.content);
     // Store document and embedding;
 
-const docWithId = { ...document, id };
+    const docWithId = { ...document, id };
     this.documents.set(id, docWithId);
     this.embeddings.set(id, embedding);
     // Also store chunks if content is large;
@@ -142,11 +142,11 @@ if (document.content.length > 1000) {
 
 const _chunkEmbedding = await this.generateEmbedding(chunks[i]);
         
-const chunk: DocumentChunk = {,
-    id: chunkId;
-    documentId: id;
-    content: chunks[i];
-    embedding: chunkEmbedding;
+const chunk: DocumentChunk = {
+    id: chunkId,
+    documentId: id,
+    content: chunks[i],
+    embedding: chunkEmbedding,
     metadata: {
   position: i
   }
@@ -217,16 +217,16 @@ const results: SearchResult[] = [];
             results.push({
               id: documentId;
               score,
-              content: chunk.content;
-    metadata: doc.metadata;
+              content: chunk.content,
+    metadata: doc.metadata,
     highlights: [chunk.content.substring(0, 100) + '...']
             })} else {
         // Handle full document results, const doc = this.documents.get(id), if (doc) {
           results.push({
             id,
             score,
-            content: doc.content;
-    metadata: doc.metadata;
+            content: doc.content,
+    metadata: doc.metadata,
     highlights: [doc.content.substring(0, 100) + '...']
           })}
     return results;

@@ -28,8 +28,8 @@ export function validateRequired(value: any, fieldName: string): string | null {
 }
 
 export function validateMinLength(
-value: string;
-  minLength: number;
+value: string,
+  minLength: number,
   fieldName: string
 ): string | null {
   if (value.length < minLength) {
@@ -39,8 +39,8 @@ value: string;
 }
 
 export function validateMaxLength(
-value: string;
-  maxLength: number;
+value: string,
+  maxLength: number,
   fieldName: string
 ): string | null {
   if (value.length > maxLength) {
@@ -50,9 +50,9 @@ value: string;
 }
 
 export function validateRange(
-value: number;
-  min: number;
-  max: number;
+value: number,
+  min: number,
+  max: number,
   fieldName: string
 ): string | null {
   if (value < min || value > max) {
@@ -62,7 +62,7 @@ value: number;
 }
 
 export interface ValidationResult {
-  isValid: boolean;
+  isValid: boolean,
   errors: Record<string, string />, export function validateForm(, data: Record<string, any>,
   rules: Record<string, any>
 ): ValidationResult {
@@ -117,11 +117,10 @@ export interface ValidationResult {
     
     if (rule.custom && typeof rule.custom === 'function') {
       const error = rule.custom(value, data), if (error) {
-        errors[field] = error}
-}
+        errors[field] = error  }
 }
   
-  return {,
+  return {
     isValid: Object.keys(errors).length === 0;
     errors
   }}

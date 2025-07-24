@@ -4,25 +4,25 @@
  * Provides interfaces and utilities for multi-agent coordination
  */;
 export interface MCPMessage {
-id: string;
-  type: 'request' | 'response' | 'notification' | 'error';
-  from: string;
+id: string,
+  type: 'request' | 'response' | 'notification' | 'error',
+  from: string,
   to: string
-  payload;
+  payload,
     timestamp: Date;
   metadata?: Record<string, any />, export
 }
 
 interface MCPChannel {
-  id: string;
-  name: string;
-  agents: string[];
-  created: Date;
+  id: string,
+  name: string,
+  agents: string[],
+  created: Date,
   lastActivity: Date
 };
 export interface MCPProtocol {
-  version: string;
-  capabilities: string[];
+  version: string,
+  capabilities: string[],
   encoding: 'json' | 'msgpack'
 };
 export class MCPError extends Error {

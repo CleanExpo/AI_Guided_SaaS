@@ -26,36 +26,36 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
 
 const { createProject, connect, connected, loading   }: any = useKiroIDE();
   
-const [projectData, setProjectData] = useState<any>({,
-    name: initialData?.name || '';
-    description: initialData?.description || '';
-    type: initialData?.type || 'web';
-    framework: initialData?.framework || '';
+const [projectData, setProjectData] = useState<any>({
+    name: initialData?.name || '',
+    description: initialData?.description || '',
+    type: initialData?.type || 'web',
+    framework: initialData?.framework || '',
     language: 'typescript',
     settings: { buildCommand: '', startCommand: '', testCommand: '', outputDirectory: '', environment: {} as Record<string, string   />
 dependencies: {} as Record<string, string /   />
   });
 
-const [features, setFeatures] = useState<any>({,
-    typescript: true;
-    eslint: true;
-    prettier: true;
-    testing: true;
-    docker: false;
-    ci_cd: false;
-    authentication: false;
+const [features, setFeatures] = useState<any>({
+    typescript: true,
+    eslint: true,
+    prettier: true,
+    testing: true,
+    docker: false,
+    ci_cd: false,
+    authentication: false,
 database: false
   });
 
-const projectTypes  = [;
-  { value: 'web', label: 'Web Application', icon: Monitor };
-    { value: 'mobile', label: 'Mobile App', icon: Smartphone };
-    { value: 'desktop', label: 'Desktop Application', icon: Monitor };
-    { value: 'api', label: 'API Service', icon: Server };
+const projectTypes  = [
+  { value: 'web', label: 'Web Application', icon: Monitor },
+    { value: 'mobile', label: 'Mobile App', icon: Smartphone },
+    { value: 'desktop', label: 'Desktop Application', icon: Monitor },
+    { value: 'api', label: 'API Service', icon: Server },
     { value: 'library', label: 'Library/Package', icon: Package }
    ];
 
-const frameworks = {
+    const frameworks = {
     web: ['nextjs', 'react', 'vue', 'angular', 'svelte', 'vanilla'],
     mobile: ['react-native', 'flutter', 'ionic', 'nativescript'],
     desktop: ['electron', 'tauri', 'qt', 'gtk'],
@@ -64,9 +64,9 @@ const frameworks = {
 }
   const _handleCreateProject = async () => {
     if (!projectData.name) {
-      toast({,
+      toast({
         title: 'Error',
-        description: 'Project name is required';
+        description: 'Project name is required',
 variant: 'destructive'
       });
       return null;
@@ -83,7 +83,7 @@ const project = await createProject({
         ...projectData,
         structure: projectStructure
       })
-      toast({,
+      toast({
         title: 'Project Created',
   description: `Successfully created project "${project.name}"`
   });
@@ -92,7 +92,7 @@ if (onProjectCreated) {
         onProjectCreated(project.id)} catch (error) {
       console.error('Failed to create, project:', error), toast({
         title: 'Error',
-        description: 'Failed to create project';
+        description: 'Failed to create project',
 variant: 'destructive'
 })}
   const _generateProjectStructure = (data: typeof projectData, features) => {
@@ -106,22 +106,22 @@ variant: 'destructive'
     )
     // Package.json for JS projects
     if (['web', 'mobile', 'api'].includes(data.type)) {
-      structure.children.push({,
+      structure.children.push({
         name: 'package.json',
-        type: 'file';
+        type: 'file',
         path: '/package.json',
         content: JSON.stringify({
   name: data.name.toLowerCase().replace(/\s+/g, '-'),
           version: '1.0.0',
-          description: data.description;
-    scripts: { dev: data.settings.startCommand || 'npm run dev', build: data.settings.buildCommand || 'npm run build', test: data.settings.testCommand || 'npm test' };
+          description: data.description,
+    scripts: { dev: data.settings.startCommand || 'npm run dev', build: data.settings.buildCommand || 'npm run build', test: data.settings.testCommand || 'npm test' },
           dependencies: data.settings.dependencies || {}, null, 2)
 })};
     // TypeScript config;
 if (features.typescript) {
       structure.children.push({
         name: 'tsconfig.json',
-        type: 'file';
+        type: 'file',
         path: '/tsconfig.json',
 content: generateTsConfig(data.type)
 })};
@@ -129,7 +129,7 @@ content: generateTsConfig(data.type)
 if (features.eslint) {
       structure.children.push({
         name: '.eslintrc.json',
-        type: 'file';
+        type: 'file',
         path: '/.eslintrc.json',
 content: generateEslintConfig(data.type, features.typescript)
 })};
@@ -139,14 +139,14 @@ switch (data.framework) { case 'nextjs':
     break
     break}
           { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'app', type: 'directory', path: '/src/app', children: [;
+            { name: 'app', type: 'directory', path: '/src/app', children: [
   { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx' content: 'export default function Home() {\n  return <h1>Welcome to ' + data.name + '</h1>\n}' };
               { name: 'layout.tsx', type: 'file', path: '/src/app/layout.tsx' content: generateNextLayout(data.name) }
    ]};
-            { name: 'components', type: 'directory', path: '/src/components' children: any[] };
+            { name: 'components', type: 'directory', path: '/src/components' children: any[] },
             { name: 'lib', type: 'directory', path: '/src/lib' children: any[] }
           ]};
-          { name: 'public', type: 'directory', path: '/public' children: any[] };
+          { name: 'public', type: 'directory', path: '/public' children: any[] },
           { name: 'next.config.js', type: 'file', path: '/next.config.js' content: '/** @type {import(\'next\').NextConfig} */\nconst nextConfig = {}\n\nmodule.exports = nextConfig' }
         )
         // break
@@ -154,8 +154,8 @@ switch (data.framework) { case 'nextjs':
       structure.children.push(
     break;
           { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'App.tsx', type: 'file', path: '/src/App.tsx' content: generateReactApp(data.name) };
-            { name: 'index.tsx', type: 'file', path: '/src/index.tsx' content: generateReactIndex() };
+            { name: 'App.tsx', type: 'file', path: '/src/App.tsx' content: generateReactApp(data.name) },
+            { name: 'index.tsx', type: 'file', path: '/src/index.tsx' content: generateReactIndex() },
             { name: 'components', type: 'directory', path: '/src/components' children: any[] }
           ]};
           { name: 'public', type: 'directory', path: '/public', children: [
@@ -167,8 +167,8 @@ switch (data.framework) { case 'nextjs':
       structure.children.push(
     break;
           { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'index.ts', type: 'file', path: '/src/index.ts' content: generateExpressServer() };
-            { name: 'routes', type: 'directory', path: '/src/routes' children: any[] };
+            { name: 'index.ts', type: 'file', path: '/src/index.ts' content: generateExpressServer() },
+            { name: 'routes', type: 'directory', path: '/src/routes' children: any[] },
             { name: 'middleware', type: 'directory', path: '/src/middleware' children: any[] };
             { name: 'models', type: 'directory', path: '/src/models' children: any[] }
           ]}
@@ -182,15 +182,15 @@ if (features.docker) {
 if (features.ci_cd) {
       structure.children.push({
         name: '.github',
-        type: 'directory';
+        type: 'directory',
         path: '/.github',
         children: [{
   name: 'workflows',
-          type: 'directory';
+          type: 'directory',
           path: '/.github/workflows',
           children: [{
   name: 'ci.yml',
-            type: 'file';
+            type: 'file',
             path: '/.github/workflows/ci.yml',
 content: generateGithubWorkflow(data.name)}]
         }]
@@ -210,8 +210,9 @@ content: generateGithubWorkflow(data.name)}]
               <Input;
 id="name";
 
-const value = {projectData.name};
-                const onChange = {(e) => setProjectData({ ...projectData, name: e.target.value})};
+    const value = {projectData.name};
+
+    const onChange = {(e) => setProjectData({ ...projectData, name: e.target.value})};
                 placeholder="My Awesome Project";
               /></Input>
             <div className="space-y-2"   />
@@ -219,11 +220,12 @@ const value = {projectData.name};
               <Textarea
 id="description";
 
-const value = {projectData.description};
-                const onChange = {(e) => setProjectData({ ...projectData, description: e.target.value})};
+    const value = {projectData.description};
+
+    const onChange = {(e) => setProjectData({ ...projectData, description: e.target.value})};
                 placeholder="A brief description of your project...";
 
-const rows = {3}
+    const rows = {3}
               /></Textarea>
             <div className="space-y-2"   />
               <Label>Project Type</Label>
@@ -233,7 +235,7 @@ const rows = {3}
                     const variant  = {projectData.type === type.value ? 'default' : 'outline'};
                     size="sm";
 
-const onClick = {() => setProjectData({ ...projectData: type, type.value})};
+    const onClick = {() => setProjectData({ ...projectData: type, type.value})};
                     className="flex flex-col items-center gap-1 h-auto py-3";
                   ></Button>
                     <type.icon className="h-5 w-5"   />
@@ -278,7 +280,7 @@ const id = {key}
                   <Input
 id="buildCommand";
 
-const value = {projectData.settings.buildCommand}
+    const value = {projectData.settings.buildCommand}
                     const onChange = {(e) => setProjectData({
                       ...projectData,;
     settings: { ...projectData.settings buildCommand: e.target.value })};
@@ -289,7 +291,7 @@ const value = {projectData.settings.buildCommand}
                   <Input
 id="startCommand";
 
-const value = {projectData.settings.startCommand}
+    const value = {projectData.settings.startCommand}
                     const onChange = {(e) => setProjectData({
                       ...projectData,;
     settings: { ...projectData.settings startCommand: e.target.value })};
@@ -300,7 +302,7 @@ const value = {projectData.settings.startCommand}
                   <Input
 id="testCommand";
 
-const value = {projectData.settings.testCommand}
+    const value = {projectData.settings.testCommand}
                     const onChange = {(e) => setProjectData({
                       ...projectData,;
     settings: { ...projectData.settings testCommand: e.target.value })};
@@ -357,65 +359,65 @@ yarn-error.log*
 *.swo
 ```;
 
-const typeSpecific: Record<string, string> = {,
+const typeSpecific: Record<string, string> = {
     web: '\n# Next.js\n.next/\n*.tsbuildinfo\nnext-env.d.ts',
-    api: '\n# Logs\nlogs/\n*.log';
+    api: '\n# Logs\nlogs/\n*.log',
 mobile: '\n# React Native\n.expo/\n*.jks\n*.p8\n*.p12\n*.key\n*.mobileprovision'
 }
 
   return common + (typeSpecific[projectType] || '');
 }
-generateTsConfig(projectType: string): string) {, const configs: Record<string, any> = {
+generateTsConfig(projectType: string): string) { const configs: Record<string, any> = {
     web: {
   compilerOptions: {
   target: 'es5',
         lib: ['dom', 'dom.iterable', 'esnext'],
-        allowJs: true;
-    skipLibCheck: true;
-    strict: true;
-    forceConsistentCasingInFileNames: true;
-    noEmit: true;
-    esModuleInterop: true;
+        allowJs: true,
+    skipLibCheck: true,
+    strict: true,
+    forceConsistentCasingInFileNames: true,
+    noEmit: true,
+    esModuleInterop: true,
     module: 'esnext',
-        moduleResolution: 'node';
-        resolveJsonModule: true;
-    isolatedModules: true;
+        moduleResolution: 'node',
+        resolveJsonModule: true,
+    isolatedModules: true,
     jsx: 'preserve',
 incremental: true
-      };
-      include: ['src'];
+      },
+      include: ['src'],
     exclude: ['node_modules']
-    };
+    },
     api: {
       compilerOptions: {
   target: 'ES2020',
-        module: 'commonjs';
-        lib: ['ES2020'];
+        module: 'commonjs',
+        lib: ['ES2020'],
     outDir: './dist',
-        rootDir: './src';
-        strict: true;
-    esModuleInterop: true;
-    skipLibCheck: true;
-    forceConsistentCasingInFileNames: true;
-    resolveJsonModule: true;
+        rootDir: './src',
+        strict: true,
+    esModuleInterop: true,
+    skipLibCheck: true,
+    forceConsistentCasingInFileNames: true,
+    resolveJsonModule: true,
 moduleResolution: 'node'
-      };
-      include: ['src/**/*'];
+      },
+      include: ['src/**/*'],
     exclude: ['node_modules', 'dist']
   }
 }
 
   return JSON.stringify(configs[projectType] || configs.web, null, 2);
 }
-generateEslintConfig(projectType: string, typescript: boolean): string;
+generateEslintConfig(projectType: string, typescript: boolean): string,
   typescript: boolean) {
   const base = {
-    extends: [;
+    extends: [
       'eslint:recommended';
       typescript && 'plugin: @typescript-eslint/recommended'
-   ].filter(Boolean);
-    parser: typescript ? '@typescript-eslint/parser' : undefined;
-    plugins: typescript ? ['@typescript-eslint'] : any[];
+   ].filter(Boolean),
+    parser: typescript ? '@typescript-eslint/parser' : undefined,
+    plugins: typescript ? ['@typescript-eslint'] : any[],
 rules: {
       'no-console': 'warn';
       'no-unused-vars': 'warn'
@@ -468,7 +470,7 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   res.json({ message: 'API is running!' })}
 // Error handling
-app.use((err: Error, req: express.Request;
+app.use((err: Error, req: express.Request,
   res: express.Response, next: express.NextFunction) => {
   console.error(err.stack), res.status(500).send('Something broke!')})
 // Start server
@@ -484,7 +486,7 @@ generateHtmlTemplate(name: string): string) {
   <body   />
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"   />
-generateDockerfile(projectType: string, framework: string): string;
+generateDockerfile(projectType: string, framework: string): string,
   framework: string) {
   if (projectType === 'web' && framework === 'nextjs') {
     return `FROM, node:18-alpine AS base``, # Install dependencies only when needed, FROM base AS deps;
@@ -522,16 +524,16 @@ CMD ["npm", "start"]```
   }
 generateDockerCompose(name: string): string) {
   return `version: '3.8',``, services: app build: ., container_name: ${name.toLowerCase().replace(/\s+/g, '-')};
-    ports: - "3000:3000";
-    environment: - NODE_ENV=production;
+    ports: - "3000:3000",
+    environment: - NODE_ENV=production,
   restart: unless-stopped`
   }
 generateGithubWorkflow(name: string): string) {
-  return `name: CI, on: push, branches: [ main ]``, pull_request, branches: [ main ];
-  jobs:  ;
-  test: runs-on: ubuntu-latest, steps: -;
+  return `name: CI, on: push, branches: [ main ]``, pull_request, branches: [ main ],
+  jobs:  ,
+  test: runs-on: ubuntu-latest, steps: -,
   uses: actions/checkout@v3
-    -, name: Use Node.js, uses: actions/setup-node@v3;
+    -, name: Use Node.js, uses: actions/setup-node@v3,
   with: node-version: '18',
   cache: 'npm'
     - run: npm ci

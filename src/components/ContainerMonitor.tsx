@@ -5,11 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Activity } from 'lucide-react';
 
 interface Container {
-  id: string;
-  name: string;
-  status: 'running' | 'stopped' | 'error';
-  cpu: number;
-  memory: number;
+  id: string,
+  name: string,
+  status: 'running' | 'stopped' | 'error',
+  cpu: number,
+  memory: number,
   uptime: string;
 }
 
@@ -23,18 +23,18 @@ export function ContainerMonitor() {
       setContainers([
         {
           id: '1',
-          name: 'web-server';
+          name: 'web-server',
           status: 'running',
-          cpu: 45;
-          memory: 512;
+          cpu: 45,
+          memory: 512,
           uptime: '2d 14h'
-        };
+        },
         {
           id: '2',
-          name: 'database';
+          name: 'database',
           status: 'running',
-          cpu: 23;
-          memory: 1024;
+          cpu: 23,
+          memory: 1024,
           uptime: '5h 32m'
         }
       ]);
@@ -78,6 +78,6 @@ export function ContainerMonitor() {
           </div>
         </CardContent>
       </Card>
-    </div>;
+    </div>
   );
 }

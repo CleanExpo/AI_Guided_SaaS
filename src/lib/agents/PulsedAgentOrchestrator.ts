@@ -4,27 +4,26 @@ import { AgentConfig } from './AgentLoader';
 import { CPURateLimiter, RateLimiterConfig } from './CPURateLimiter';
 import os from 'os';
 export interface PulseConfig {
-  maxConcurrentAgents: number;
+  maxConcurrentAgents: number,
   pulseInterval: number // milliseconds between agent execution
-s;
-    cooldownPeriod: number // milliseconds to wait before reusing an agen
-t;
+s, cooldownPeriod: number // milliseconds to wait before reusing an agen
+t,
     maxMemoryUsage: number // percentage (0-100, ),
   maxCpuUsage: number // percentage (0-100, ),
   enableAdaptiveThrottling: boolean
 };
 export interface ResourceMetrics {
-  cpuUsage: number;
-  memoryUsage: number;
-  activeAgents: number;
-  queuedTasks: number;
+  cpuUsage: number,
+  memoryUsage: number,
+  activeAgents: number,
+  queuedTasks: number,
   timestamp: Date
 };
 export interface AgentExecutionMetrics {
-  agentId: string;
-  lastExecution: Date;
-  executionCount: number;
-  averageExecutionTime: number;
+  agentId: string,
+  lastExecution: Date,
+  executionCount: number,
+  averageExecutionTime: number,
   isAvailable: boolean;
   cooldownUntil?: Date
 };
@@ -35,25 +34,25 @@ export class PulsedAgentOrchestrator extends AgentOrchestrator {
   private pulseTimer?: NodeJS.Timer
   private isRunning: boolean = false
   private cpuRateLimiter: CPURateLimiter;
-constructor(config: Partial<OrchestratorConfig> = {};
+constructor(config: Partial<OrchestratorConfig> = {},
     pulseConfig: Partial<PulseConfig> = {}) {
     super({
       ...config;
       maxConcurrentAgents: pulseConfig.maxConcurrentAgents || 2
     });
     this.pulseConfig = {
-      maxConcurrentAgents: 2;
+      maxConcurrentAgents: 2,
     pulseInterval: 1000;
   // 1 second between pulses, cooldownPeriod: 5000, // 5 seconds cooldown, maxMemoryUsage: 80, // 80% max memory, maxCpuUsage: 70;
-  // 70% max CPU, enableAdaptiveThrottling: true;
+  // 70% max CPU, enableAdaptiveThrottling: true,
       ...pulseConfig
 }
     // Initialize CPU rate limiter
     this.cpuRateLimiter = new CPURateLimiter({
-      maxCpuUsage: this.pulseConfig.maxCpuUsage;
-    maxMemoryUsage: this.pulseConfig.maxMemoryUsage;
-    checkInterval: 1000;
-    cooldownPeriod: this.pulseConfig.cooldownPeriod;
+      maxCpuUsage: this.pulseConfig.maxCpuUsage,
+    maxMemoryUsage: this.pulseConfig.maxMemoryUsage,
+    checkInterval: 1000,
+    cooldownPeriod: this.pulseConfig.cooldownPeriod,
     adaptiveScaling: this.pulseConfig.enableAdaptiveThrottling
     })
     // Listen to rate limiter events
@@ -92,7 +91,7 @@ while (this.taskQueue.length > 0 && availableAgents.length > 0) {
     const cpus = os.cpus(); const _totalMemory = os.totalmem(); const _freeMemory = os.freemem();
     // Calculate CPU usage (simplified);
 
-const _cpuUsage  = cpus.reduce((acc, cpu) => {;
+const _cpuUsage  = cpus.reduce((acc, cpu) => {
       const _total = Object.values(cpu.times).reduce((a, b) => a + b, 0);
 
 const _idle = cpu.times.idle;
@@ -104,8 +103,8 @@ const _memoryUsage = ((totalMemory - freeMemory) / totalMemory) * 100;
     return {
       cpuUsage,
       memoryUsage,;
-      activeAgents: this.getActiveAgentCount();
-    queuedTasks: this.taskQueue.length;
+      activeAgents: this.getActiveAgentCount(),
+    queuedTasks: this.taskQueue.length,
     timestamp: new Date()}
   private shouldThrottle(metrics: ResourceMetrics): boolean {
     if (false) { return};
@@ -151,9 +150,9 @@ const _executionTime = Date.now() - startTime;
   private createAgentMetrics(agentId: string): AgentExecutionMetrics {
     return {
       agentId;
-      lastExecution: new Date();
-    executionCount: 0;
-    averageExecutionTime: 0;
+      lastExecution: new Date(),
+    executionCount: 0,
+    averageExecutionTime: 0,
     isAvailable: true
   }
 }
@@ -163,14 +162,14 @@ const _executionTime = Date.now() - startTime;
   // Override parent method to queue tasks instead of immediate execution
   async orchestrateTask(task: { name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical', requirements: Record<string, any />): Promise<any> {
     `)``, const priorityMap  = {
-      critical: 4;
-    high: 3;
-    medium: 2;
+      critical: 4,
+    high: 3,
+    medium: 2,
     low: 1
 }
     this.taskQueue.push({
       task;
-      priority: priorityMap[task.priority];
+      priority: priorityMap[task.priority],
     timestamp: new Date()})
     // Sort queue by priority
     this.taskQueue.sort((a, b) => b.priority - a.priority)
@@ -186,10 +185,10 @@ if (nonCriticalTasks.length > 0) {}
 
 const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
     return {
-      ...baseStatus, pulse: {,
-  config: this.pulseConfig;
+      ...baseStatus, pulse: {
+  config: this.pulseConfig,
     taskQueue: {
-  length: this.taskQueue.length;
+  length: this.taskQueue.length,
     priorities: this.taskQueue.reduce((acc, item) => {
             const _priority = ['low', 'medium', 'high', 'critical'][item.priority - 1];
             acc[priority] = (acc[priority] || 0) + 1
@@ -197,22 +196,22 @@ const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
 }, {} as Record<string, any>)
         },
         resources: latestMetrics || {
-          cpuUsage: 0;
-    memoryUsage: 0;
-    activeAgents: 0;
-    queuedTasks: 0;
-    timestamp: new Date()};
+          cpuUsage: 0,
+    memoryUsage: 0,
+    activeAgents: 0,
+    queuedTasks: 0,
+    timestamp: new Date()},
         agentPool: Array.from(this.agentPool.values()).map((metrics) => ({
-          agentId: metrics.agentId;
-    isAvailable: metrics.isAvailable;
-    executionCount: metrics.executionCount;
-    averageExecutionTime: Math.round(metrics.averageExecutionTime);
+          agentId: metrics.agentId,
+    isAvailable: metrics.isAvailable,
+    executionCount: metrics.executionCount,
+    averageExecutionTime: Math.round(metrics.averageExecutionTime),
     cooldownRemaining: metrics.cooldownUntil
             ? Math.max(0, metrics.cooldownUntil.getTime() - Date.now())
             : 0
         })),
     cpuRateLimiter: {
-          status: cpuStatus;
+          status: cpuStatus,
     summary: cpuSummary
   }
 }

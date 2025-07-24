@@ -1,17 +1,17 @@
 /* BREADCRUMB: unknown - Purpose to be determined */
 // @ts-nocheck;
 export interface Position {
-  x: number;
+  x: number,
     y: number
 };
 export interface Size {
-  width: number;
+  width: number,
     height: number
 };
 export interface ComponentConfig {
-  id: string;
-    type: string;
-    name: string;
+  id: string,
+    type: string,
+    name: string,
     position: Positio,n,
     size: Siz, e,
     props: Record<string, unknown>,
@@ -20,20 +20,20 @@ export interface ComponentConfig {
   className?: string
 };
 export interface BuilderState {
-  components: ComponentConfig[];
+  components: ComponentConfig[],
     selectedComponent: string | nul, l,
-    history: ComponentConfig[][];
-    historyIndex: number;
-    zoom: number;
-    gridEnabled: boolean;
+    history: ComponentConfig[][],
+    historyIndex: number,
+    zoom: number,
+    gridEnabled: boolean,
     previewMode: boolean
 };
 export interface MotiaComponent {
-  type: string;
-    name: string;
-    category: string;
-    description: string;
-    icon: string;
+  type: string,
+    name: string,
+    category: string,
+    description: string,
+    icon: string,
     defaultProps: Record<string, unknown>,
     propTypes: Record<string, PropType>,
     preview: string
@@ -51,7 +51,7 @@ export interface PropType {
   description?: string
 };
 export interface DragItem {
-  type: string;
+  type: string,
     componentType: string;
   config?: ComponentConfig
 };

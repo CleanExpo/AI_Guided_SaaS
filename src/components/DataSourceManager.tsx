@@ -14,26 +14,26 @@ projectId: string;
   onDataChange? (data) => void
 }
 const defaultDataSources: DataSource[]  = [
-  {,
+  {
   id: 'mock-data',
-    name: 'Mock Data Generator';
+    name: 'Mock Data Generator',
     type: 'mock',
-config: { autoGenerate: true };
+config: { autoGenerate: true },
     isActive: true
   };
   {
     id: 'api-endpoint',
-    name: 'REST API';
+    name: 'REST API',
     type: 'api',
-    config: { endpoint: '';
+    config: { endpoint: '',
 headers: {};
     isActive: false
   };
   {
     id: 'database',
-    name: 'Database Connection';
+    name: 'Database Connection',
     type: 'database',
-config: { connectionString: '' };
+config: { connectionString: '' },
     isActive: false
 }
 ];
@@ -73,31 +73,31 @@ if (onDataChange) {
   const _testConnection = async (source: DataSource) => {
     setIsLoading(true), setTestResult(null), try {
       if (source.type === 'api') {
-        const response = await fetch(source.config.endpoint, {,
+        const response = await fetch('/api/admin/auth', {
           headers: source.config.headers || {});
 
 const data = await response.json();
         setTestResult({
-          success: true;
+          success: true,
     message: 'API connection successful',
 data: data
         })
 } else if (source.type === 'database') {
         // Simulate database connection test
         await new Promise(resolve => setTimeout(resolve, 1000))
-        setTestResult({,
-          success: true;
+        setTestResult({
+          success: true,
     message: 'Database connection successful',
 tables: ['users', 'products', 'orders']
 })} catch (error) {
       setTestResult({
-        success: false;
+        success: false,
     message: `Connection failed: ${error}`,``
         // error
       })
 } finally {
       setIsLoading(false)}
-  const _exportData = (format: 'json' | 'csv' | 'sql') => {;
+  const _exportData = (format: 'json' | 'csv' | 'sql') => {
     const data = generatedData[selectedSchema] || []; const _exported = mockGenerator.exportData(data, format), const _blob  = new Blob([exported], {
     type: format === 'json' ? 'application/json' : 'text/plain'
     });

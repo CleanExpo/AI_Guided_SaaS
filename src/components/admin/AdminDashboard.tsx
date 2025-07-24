@@ -6,32 +6,31 @@ import { Progress } from '@/components/ui/progress';
 import { Users, Activity, BarChart3, Database, TrendingUp, TrendingDown, Clock, AlertCircle, CheckCircle2, XCircle, ArrowUpRight, Server, Cpu, HardDrive, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 interface DashboardStats {
-totalUsers: number;
-  activeUsers: number;
-  newUsersToday: number;
-  newUsersThisWeek: number;
-  systemHealth: string;
-  uptime: string;
-  cpuUsage: string;
-  memoryUsage: string;
-  totalProjects: number;
-  activeProjects: number;
+totalUsers: number,
+  activeUsers: number,
+  newUsersToday: number,
+  newUsersThisWeek: number,
+  systemHealth: string,
+  uptime: string,
+  cpuUsage: string,
+  memoryUsage: string,
+  totalProjects: number,
+  activeProjects: number,
   apiCalls: {
-    today: number;
-  thisWeek: number;
+    today: number,
+  thisWeek: number,
   thisMonth: number
-};
+},
   recentActivity: Array<{
-    type: string;
-    message: string;
+    type: string,
+    message: string,
 timestamp: string
   }>
 }
 interface AdminDashboardProps {
 stats: DashboardStat
-s;
-  adminUser: an
-y;
+s, adminUser: an
+y,
   onNavigate: (section: string) => void
 }
 
@@ -48,8 +47,7 @@ const getHealthColor = (health: string) => {
     switch (health.toLowerCase()) {
       case 'healthy':;
       return 'text-green-600', case 'warning':, return 'text-yellow-600';
-      case 'critical':
-      return 'text-red-600';
+      case 'critical': return 'text-red-600',
       default: return 'text-gray-600'}};
   
 const getActivityIcon = (type: string) => {
@@ -60,7 +58,7 @@ const getActivityIcon = (type: string) => {
       return <Activity className="h-4 w-4 text-green-500"   />
       default: return <AlertCircle className="h-4 w-4 text-gray-500"   />}};
   
-const timeAgo = (timestamp: string) => {;
+const timeAgo = (timestamp: string) => {
     const seconds = Math.floor((new Date().getTime() - new Date(timestamp).getTime()) / 1000), if (seconds < 60) return 'Just now', const minutes = Math.floor(seconds / 60);
     if (minutes < 60) return `${minutes}m ago`;
     
@@ -174,13 +172,13 @@ const value = {(stats.activeUsers / stats.totalUsers) * 100}
                       {activity.message}
 </p>
           <p className="{timeAgo(activity.timestamp)}"   />
-        </div>;
+        </div>
     ))}
               <Button
 variant="ghost";
 className="w-full mt-4";
 
-const onClick = {() => onNavigate('activity')}
+    const onClick = {() => onNavigate('activity')}
               >
                 View All Activity
                 <ArrowUpRight className="h-4 w-4 ml-2" /   />
@@ -190,7 +188,7 @@ const onClick = {() => onNavigate('activity')}
         <Card;
 className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-blue-500";
 
-const onClick = {() => onNavigate('users')}
+    const onClick = {() => onNavigate('users')}
         ></Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -202,7 +200,7 @@ const onClick = {() => onNavigate('users')}
         <Card;
 className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-purple-500";
 
-const onClick = {() => onNavigate('analytics')}
+    const onClick = {() => onNavigate('analytics')}
         ></Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -214,7 +212,7 @@ const onClick = {() => onNavigate('analytics')}
         <Card;
 className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-green-500";
 
-const onClick = {() => onNavigate('database')}
+    const onClick = {() => onNavigate('database')}
         ></Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -226,7 +224,7 @@ const onClick = {() => onNavigate('database')}
         <Card;
 className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-orange-500";
 
-const onClick = {() => onNavigate('logs')}
+    const onClick = {() => onNavigate('logs')}
         ></Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">

@@ -11,117 +11,116 @@ import Link from 'next/link';
 // Import your actual production components;
 import ClaudeCodeDashboard from '@/components/ClaudeCodeDashboard';
 interface WorkflowResult {
-totalTokenUsage: number;
-  utilizationRate: number;
-  integrationCommands: string[];
+totalTokenUsage: number,
+  utilizationRate: number,
+  integrationCommands: string[],
   nextSteps: string[]
   }
 }
 const personas = [
-  {,
+  {
   id: 'ai-architect',
-    name: 'AI Architect';
+    name: 'AI Architect',
     description: 'Expert in AI-powered development workflows',
-    avatar: '🤖';
+    avatar: '🤖',
 color: 'from-blue-500 to-cyan-500',
-  icon: AIIcon;
+  icon: AIIcon,
     features: [
       'Claude Code Integration';
       'Multi-Agent Orchestration',
       'Token Optimization']},
   {
     id: 'fullstack-wizard',
-    name: 'Fullstack Wizard';
+    name: 'Fullstack Wizard',
     description: 'Master of frontend and backend development',
-    avatar: '🧙‍♂️';
+    avatar: '🧙‍♂️',
 color: 'from-brand-primary-500 to-pink-500',
-  icon: CodeIcon;
+  icon: CodeIcon,
     features: ['Next.js 15', 'TypeScript', 'API Development']},
   {
     id: 'ui-designer',
-    name: 'UI Designer';
+    name: 'UI Designer',
     description: 'Creating beautiful, user-friendly interfaces',
     avatar: '🎨',
-color: 'from-pink-500 to-rose-500';
-  icon: BrandIcon;
+color: 'from-pink-500 to-rose-500',
+  icon: BrandIcon,
     features: ['shadcn/ui', 'Tailwind CSS', 'Framer Motion']},
   {
     id: 'startup-founder',
-    name: 'Startup Founder';
+    name: 'Startup Founder',
     description: 'MVP development and rapid iteration',
-    avatar: '🚀';
+    avatar: '🚀',
 color: 'from-orange-500 to-red-500',
-  icon: RocketIcon;
+  icon: RocketIcon,
     features: ['Rapid Prototyping', 'Deployment', 'Analytics']}];
 
 const productionFeatures = [
-  {,
+  {
   title: 'Claude Code Integration',
-    description: 'Advanced AI-powered development with multi-agent orchestration';
-  icon: Brain;
+    description: 'Advanced AI-powered development with multi-agent orchestration',
+  icon: Brain,
     demo: 'claude-dashboard',
-    color: 'bg-blue-500';
-component: 'ClaudeCodeDashboard'};
+    color: 'bg-blue-500',
+component: 'ClaudeCodeDashboard'},
   {
     title: 'Visual UI Builder',
-    description: 'Production drag-and-drop interface builder';
-  icon: Wrench;
+    description: 'Production drag-and-drop interface builder',
+  icon: Wrench,
     demo: 'ui-builder',
-    color: 'bg-brand-primary-500';
-component: 'UIBuilder'};
+    color: 'bg-brand-primary-500',
+component: 'UIBuilder'},
   {
     title: 'System Analytics',
-    description: 'Real-time system monitoring and performance analytics';
-  icon: BarChart3;
+    description: 'Real-time system monitoring and performance analytics',
+  icon: BarChart3,
     demo: 'analytics',
-    color: 'bg-green-500';
-component: 'SystemResourceMonitor'};
+    color: 'bg-green-500',
+component: 'SystemResourceMonitor'},
   {
     title: 'Collaboration Hub',
-    description: 'Production team collaboration workspace';
-  icon: Users;
+    description: 'Production team collaboration workspace',
+  icon: Users,
     demo: 'collaboration',
-    color: 'bg-orange-500';
+    color: 'bg-orange-500',
 component: 'CollaborationWorkspace'}];
 
 const engineeringHighlights = [
-  {,
+  {
   title: 'Multi-Agent Architecture',
     description:
       'Orchestrated AI agents for documentation, research, and optimization',
-    icon: AIIcon;
-metrics: '5 Specialized Agents'};
+    icon: AIIcon,
+metrics: '5 Specialized Agents'},
   {
     title: 'Token Optimization Engine',
-  description: 'Strategic memory management with 150K context optimization';
-  icon: DatabaseIcon;
-    metrics: '96% Quality Retention'};
+  description: 'Strategic memory management with 150K context optimization',
+  icon: DatabaseIcon,
+    metrics: '96% Quality Retention'},
   {
     title: 'Causal Engine System',
-  description: 'Advanced dependency tracking and cycle detection';
-  icon: Zap;
-    metrics: 'Real-time Analysis'};
+  description: 'Advanced dependency tracking and cycle detection',
+  icon: Zap,
+    metrics: 'Real-time Analysis'},
   {
     title: 'Self-Check Framework',
-  description: 'Automated system health monitoring and validation';
-  icon: Shield;
+  description: 'Automated system health monitoring and validation',
+  icon: Shield,
     metrics: '100% Uptime Target'}];
-    export default function ProductionShowcasePage() {
-, const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
+    export default function ProductionShowcasePage() { const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
 
 const [activeDemo, setActiveDemo]  = useState<string>('claude-dashboard');
 
-const [systemMetrics, setSystemMetrics] = useState<any>({,
+const [systemMetrics, setSystemMetrics] = useState<any>({
     uptime: '99.9%',
-    activeUsers: 12;
-    systemHealth: 98;
+    activeUsers: 12,
+    systemHealth: 98,
 memoryOptimization: 78});
   // Simulate real-time system updates
   useEffect(() => {
     const _interval = setInterval(() => {
       setSystemMetrics(prev => ({
         ...prev,;
-        activeUsers: prev.activeUsers + Math.floor(Math.random() * 3) - 1;
+        activeUsers: prev.activeUsers + Math.floor(Math.random() * 3) - 1,
 systemHealth: Math.max(
           95;
           Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2)),
@@ -135,8 +134,8 @@ const _renderPersonaShowcase = () => (\n    ;
         <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const _Icon = persona.icon, </div>, return (<motion.div;
-            
-const key = {persona.id}
+
+    const key = {persona.id}
             const initial = {{ opacity: 0 y: 20 }
             const animate = {{ opacity: 1 y: 0 }
             const transition = {{ delay: index * 0.1 }
@@ -152,7 +151,7 @@ const className  = {`glass border-0 ${selectedPersona === persona.id ? 'ring-2 r
               <CardHeader className="text-center">
                 <div;
 
-const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
+    const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
                 >
                   <Icon className="w-8 h-8 text-white"   />
 </div>
@@ -164,7 +163,7 @@ const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.c
                   {selectedPersona === persona.id  && (/AnimatePresence>;
                     <motion.div; const initial = {{ opacity: 0 height: 0 }
                       const animate = {{ opacity: 1 height: 'auto' }
-                      const exit = {{ opacity: 0 height: 0 };
+                      const exit = {{ opacity: 0 height: 0 }
                       className="space-y-3";
                     >
                       <div className="">
@@ -261,14 +260,14 @@ className="bg-brand-primary-600 hover:bg-brand-primary-700";
                     <ArrowRight className="ml-2 h-4 w-4"   />
 </Link>
                 <p className="text-white/60 text-sm mt-4">
-                  Access real-time team collaboration features</p>;
+                  Access real-time team collaboration features</p>,
 default: return null}
   const _renderEngineeringHighlights = () => (
     <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {engineeringHighlights.map((highlight, index) => {;
+      {engineeringHighlights.map((highlight, index) => {
         const _Icon = highlight.icon, return (</div>, <motion.div;
 
-const key = {highlight.title}
+    const key = {highlight.title}
             const initial = {{ opacity: 0 y: 20 }
             const animate = {{ opacity: 1 y: 0 }
             const transition = {{ delay: index * 0.1 }
@@ -297,7 +296,7 @@ const key = {highlight.title}
         <div className="max-w-6xl mx-auto">
           <motion.div;
 
-const initial = {{ opacity: 0 y: 20 }
+    const initial = {{ opacity: 0 y: 20 }
             const animate = {{ opacity: 1 y: 0 }
             const transition = {{ duration: 0.8 }
           >
@@ -319,7 +318,7 @@ className="mb-6 border-purple-200, dark: border-purple-800 text-purple-700, dark
 
 const initial  = {{ opacity: 0 y: 40 }
             const animate = {{ opacity: 1 y: 0 }
-            const transition = {{ duration: 0.8 delay: 0.2 };
+            const transition = {{ duration: 0.8 delay: 0.2 }
             className="mb-16";
           >
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
@@ -328,9 +327,9 @@ const initial  = {{ opacity: 0 y: 40 }
           {/* Persona, Selection */}
           <motion.div;
 
-const initial = {{ opacity: 0 y: 40 }
+    const initial = {{ opacity: 0 y: 40 }
             const animate  = {{ opacity: 1 y: 0 }
-            const transition = {{ duration: 0.8 delay: 0.4 };
+            const transition = {{ duration: 0.8 delay: 0.4 }
             className="mb-16";
           >
             <h2 className="text-2xl font-bold text-white mb-8">
@@ -341,9 +340,9 @@ const initial = {{ opacity: 0 y: 40 }
         <div className="max-w-6xl mx-auto">
           <motion.div;
 
-const initial = {{ opacity: 0 y: 20 }
+    const initial = {{ opacity: 0 y: 20 }
             const animate  = {{ opacity: 1 y: 0 }
-            const transition = {{ duration: 0.8 };
+            const transition = {{ duration: 0.8 }
             className="text-center mb-12";
           >
             <h2 className="text-4xl font-bold text-white mb-4">
@@ -377,7 +376,7 @@ const initial = {{ opacity: 0 y: 20 }
               <AnimatePresence mode="wait">
                 <motion.div;
 
-const key = {activeDemo}
+    const key = {activeDemo}
                   const initial  = {{ opacity: 0 x: 20 }
                   const animate = {{ opacity: 1 x: 0 }
                   const exit = {{ opacity: 0 x: -20 }
@@ -390,7 +389,7 @@ const key = {activeDemo}
         <div className="max-w-4xl mx-auto">
           <motion.div;
 
-const initial = {{ opacity: 0 y: 20 }
+    const initial = {{ opacity: 0 y: 20 }
             const animate = {{ opacity: 1 y: 0 }
             const transition = {{ duration: 0.8 }
 </Button   />

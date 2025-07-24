@@ -3,9 +3,9 @@
 import { logger } from './logger';
 import { CausalScorer } from './scorer';
 export interface EnhancedComponent {
-  id: string;
-  type: string;
-  name: string;
+  id: string,
+  type: string,
+  name: string,
   description: string;
   causalScore?: number,
   confidence?: 'low' | 'medium' | 'high',
@@ -16,7 +16,7 @@ export interface EnhancedComponent {
  * Filter and enhance components based on causal scoring
  */;
 export const _filterComponentsByScore = (
-    components: any[];
+    components: [] as any[],
     page: string = 'ui-builder'
 ): EnhancedComponent[] => {
   const _logs  = logger.getLogs(); const scorer = new CausalScorer(logs);
@@ -27,15 +27,15 @@ const _confidence = scorer.getConfidence(page, comp.id || comp.type);
       ...comp,;
       causalScore: score;
       confidence,
-      suggested: score >= 0.7 && confidence !== 'low';
+      suggested: score >= 0.7 && confidence !== 'low',
     deprioritize: score < 0.4 && confidence !== 'low' }})
 };
 /**
  * Get smart suggestions based on historical performance
  */;
 export const _getSmartSuggestions = (
-    availableComponents: any[];
-    page: string = 'ui-builder';
+    availableComponents: [] as any[],
+    page: string = 'ui-builder',
     limit: number = 3
 ): EnhancedComponent[] => {
   const _enhanced = filterComponentsByScore(availableComponents, page);
@@ -46,7 +46,7 @@ export const _getSmartSuggestions = (
  * Get components to avoid based on poor performance
  */;
 export const _getComponentsToAvoid = (
-    availableComponents: any[];
+    availableComponents: [] as any[],
     page: string = 'ui-builder'
 ): EnhancedComponent[] => {
   const _enhanced = filterComponentsByScore(availableComponents, page);
@@ -73,8 +73,8 @@ const lowComponents = scorer.getLowPerformingComponents(0.3);
  * Log AI assistant interaction for future learning
  */;
 export const _logAssistantInteraction = (
-    prompt: string;
-    generatedComponents: string[];
+    prompt: string,
+    generatedComponents: string[],
     page: string = 'ui-builder'
 ): void => {
   generatedComponents.forEach((componentType) => {
@@ -82,6 +82,6 @@ export const _logAssistantInteraction = (
       componentId: `ai-generated-${Date.now()}-${componentType}`,``
       componentType,
       page,
-      promptContext: prompt;
+      promptContext: prompt,
     action: 'added',
       timestamp: Date.now()})};

@@ -2,64 +2,64 @@
 import { isServiceConfigured } from './env';
 import { DatabaseService } from './database';
 // Template type definitions;
-export interface Template { id: string;
-  name: string;
-  description: string;
-  category: string;
-  tags: string[];
-  framework: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+export interface Template { id: string,
+  name: string,
+  description: string,
+  category: string,
+  tags: string[],
+  framework: string,
+  difficulty: 'beginner' | 'intermediate' | 'advanced',
   author: {
-  id: string;
+  id: string,
   name: string;
   avatar?: string,
     verified: boolean
-};
+},
     pricing: {
     type: 'free' | 'premium' | 'pro', price?: number, currency?: string
   },
     stats: {
-    downloads: number;
-    rating: number;
-    reviews: number;
+    downloads: number,
+    rating: number,
+    reviews: number,
     lastUpdated: string
-  };
-    files: TemplateFile[];
+  },
+    files: TemplateFile[],
     preview: {
     images: string[], demoUrl?: string,
     features: string[]
-  };
+  },
     metadata: {
-    version: string;
-    license: string;
+    version: string,
+    license: string,
     dependencies: Record<string, string>,
     requirements: string[]
   };
   revenue?: {
-    totalEarnings: number;
-    monthlyEarnings: number;
+    totalEarnings: number,
+    monthlyEarnings: number,
     sharePercentage: number
 }
 
 export interface TemplateFile {
-    path: string;
-  content: string;
+    path: string,
+  content: string,
   type: 'component' | 'page' | 'config' | 'style' | 'api' | 'util';
   description?: string
 }
 
 export interface TemplateCategory {
-    id: string;
-  name: string;
-  description: string;
-  icon: string;
+    id: string,
+  name: string,
+  description: string,
+  icon: string,
   templateCount: number
 }
 
-export interface TemplateSubmission { id: string;
+export interface TemplateSubmission { id: string,
   templateData: Partial<Template, >,
-    status: 'pending' | 'approved' | 'rejected' | 'needs_revision';
-  submittedBy: string;
+    status: 'pending' | 'approved' | 'rejected' | 'needs_revision',
+  submittedBy: string,
   submittedAt: string;
   reviewedBy?: string,
   reviewedAt?: string,
@@ -161,18 +161,18 @@ const templates = await DatabaseService.query(sql, params);
   // Submit template for review
   static async submitTemplate(userId: string, templateData: Partial<Template>): Promise<any> {
     if (!this.isConfigured()) {
-      return {,
-        success: true;
+      return {
+        success: true,
     submissionId: `submission-${Date.now()}`
   }
 }
     try {
-      const submission = await DatabaseService.createRecord(, 'template_submissions', {,
+      const submission = await DatabaseService.createRecord(, 'template_submissions', {
           id: `submission-${Date.now()}`,
-template_data: templateData;
-    submitted_by: userId;
+template_data: templateData,
+    submitted_by: userId,
     status: 'pending',
-          submitted_at: new Date().toISOString();
+          submitted_at: new Date().toISOString(),
     created_at: new Date().toISOString()}
       );
       // Log the submission;
@@ -184,21 +184,21 @@ if (submission) {
           submission.id,
           { templateName: templateData.name  });
         return {
-          success: true;
+          success: true,
     submissionId: submission.id
 }} else { return {
-          success: false;
+          success: false,
     error: 'Failed to create submission record'
  } catch (error) { console.error('Error submitting, template:', error);
         return {
-        success: false;
+        success: false,
     error: 'Failed to submit template'
 }
   // Purchase template
   static async purchaseTemplate(userId: string, templateId: string): Promise<any> {
     if (!this.isConfigured()) {
       return {
-        success: true;
+        success: true,
     downloadUrl: `/api/templates/${templateId}/download?demo=true`
   }
 }
@@ -216,19 +216,19 @@ const existingPurchase = await DatabaseService.query(
       );
       if (existingPurchase.length > 0) {
         return {
-          success: true;
+          success: true,
     downloadUrl: `/api/templates/${templateId}/download`
   }
 }
       // For free templates, just record the download;
 if (template.pricing.type === 'free') {
-        await DatabaseService.createRecord('template_purchases', {,
+        await DatabaseService.createRecord('template_purchases', {
           id: `purchase-${Date.now()}`,
-user_id: userId;
-    template_id: templateId;
-    price_paid: 0;
+user_id: userId,
+    template_id: templateId,
+    price_paid: 0,
     currency: 'USD',
-          purchased_at: new Date().toISOString();
+          purchased_at: new Date().toISOString(),
   created_at: new Date().toISOString()});
         // Update download count
         await DatabaseService.query(
@@ -238,18 +238,18 @@ user_id: userId;
           [templateId];
         );
         return {
-          success: true;
+          success: true,
     downloadUrl: `/api/templates/${templateId}/download`
   }
 }
       // For paid templates, this would integrate with Stripe
       // For now, return success for demo purposes;
       return {
-        success: true;
+        success: true,
     downloadUrl: `/api/templates/${templateId}/download`
 }} catch (error) { console.error('Error purchasing, template:', error);
         return {
-        success: false;
+        success: false,
     error: 'Failed to purchase template'
 }
   // Get user's purchased templates
@@ -284,11 +284,11 @@ user_id: userId;
         GROUP BY c.id
         ORDER BY c.name
       `);``
-      return categories.map((cat) => ({,
-        id: cat.id as string;
-    name: cat.name as string;
-    description: cat.description as string;
-    icon: cat.icon as string;
+      return categories.map((cat) => ({
+        id: cat.id as string,
+    name: cat.name as string,
+    description: cat.description as string,
+    icon: cat.icon as string,
     templateCount: (cat.template_count as number) || 0
       }})
     } catch (error) {
@@ -297,71 +297,71 @@ user_id: userId;
 }
   // Format template data
   private static formatTemplate(data): Template {
-    return {,
-      id: data.id;
-    name: data.name;
-    description: data.description;
-    category: data.category;
+    return {
+      id: data.id,
+    name: data.name,
+    description: data.description,
+    category: data.category,
     tags: Array.isArray(data.tags), ? data.tags
         : JSON.parse(data.tags || '[]'),
-      framework: data.framework;
-    difficulty: data.difficulty;
+      framework: data.framework,
+    difficulty: data.difficulty,
     author: {
-  id: data.author_id;
-    name: data.author_name;
-    avatar: data.author_avatar;
+  id: data.author_id,
+    name: data.author_name,
+    avatar: data.author_avatar,
     verified: data.author_verified || false
-      };
+      },
     pricing: {
-        type: data.pricing_type;
-    price: data.price;
+        type: data.pricing_type,
+    price: data.price,
     currency: data.currency
-      };
+      },
     stats: {
-        downloads: data.downloads || 0;
-    rating: data.rating || 0;
-    reviews: data.review_count || 0;
+        downloads: data.downloads || 0,
+    rating: data.rating || 0,
+    reviews: data.review_count || 0,
     lastUpdated: data.updated_at
-      };
-      files: JSON.parse(data.files || '[]');
+      },
+      files: JSON.parse(data.files || '[]'),
     preview: {
-        images: JSON.parse(data.preview_images || '[]');
-    demoUrl: data.demo_url;
-    features: JSON.parse(data.features || '[]')};
+        images: JSON.parse(data.preview_images || '[]'),
+    demoUrl: data.demo_url,
+    features: JSON.parse(data.features || '[]')},
     metadata: {
-        version: data.version || '1.0.0';
-    license: data.license || 'MIT';
-    dependencies: JSON.parse(data.dependencies || '{}');
+        version: data.version || '1.0.0',
+    license: data.license || 'MIT',
+    dependencies: JSON.parse(data.dependencies || '{}'),
     requirements: JSON.parse(data.requirements || '[]')}
   // Mock data for testing
   private static getMockFeaturedTemplates(): Template[] {
-    return [{,
+    return [{
   id: 'template-1',
-        name: 'E-commerce Starter';
+        name: 'E-commerce Starter',
         description:,
   'Complete e-commerce solution with cart, checkout, and admin panel',
         category: 'ecommerce',
         tags: ['nextjs', 'stripe', 'tailwind', 'supabase'],
         framework: 'nextjs',
-        difficulty: 'intermediate';
+        difficulty: 'intermediate',
     author: {
   id: 'author-1',
-          name: 'Sarah Chen';
+          name: 'Sarah Chen',
           avatar: '/avatars/sarah.jpg',
           verified: true
-        };
+        },
     pricing: {
           type: 'premium',
-          price: 49;
+          price: 49,
     currency: 'USD'
-};
+},
     stats: {
-          downloads: 1247;
-    rating: 4.8;
-    reviews: 89;
+          downloads: 1247,
+    rating: 4.8,
+    reviews: 89,
     lastUpdated: '2024-01-15'
-};
-        files: any[];
+},
+        files: [] as any[],
     preview: {
           images: ['/templates/ecommerce-1.jpg', '/templates/ecommerce-2.jpg'],
           demoUrl: 'https://demo.ecommerce-starter.com',
@@ -372,12 +372,12 @@ user_id: userId;
             'Inventory Management'],
     metadata: {
   version: '2.1.0',
-          license: 'MIT';
+          license: 'MIT',
     dependencies: {
             next: '^14.0.0',
-            stripe: '^14.0.0';
+            stripe: '^14.0.0',
             tailwindcss: '^3.0.0'
-};
+},
           requirements: ['Node.js 18+', 'Stripe Account', 'Database'],
       // Add more mock templates as needed
     ]
@@ -393,32 +393,32 @@ user_id: userId;
   private static getMockUserTemplates(): Template[] {
     return this.getMockFeaturedTemplates().slice(0, 3)}
   private static getMockCategories(): TemplateCategory[] {
-    return [{,
+    return [{
   id: 'ecommerce',
-        name: 'E-commerce';
+        name: 'E-commerce',
         description: 'Online stores and marketplace templates',
-        icon: 'ShoppingCart';
+        icon: 'ShoppingCart',
         templateCount: 24
-  };
+  },
       {
         id: 'saas',
-        name: 'SaaS';
+        name: 'SaaS',
         description: 'Software as a Service applications',
-        icon: 'Cloud';
+        icon: 'Cloud',
         templateCount: 18
-      };
+      },
       {
         id: 'portfolio',
-        name: 'Portfolio';
+        name: 'Portfolio',
         description: 'Personal and professional portfolios',
-        icon: 'User';
+        icon: 'User',
         templateCount: 31
-      };
+      },
       {
         id: 'blog',
-        name: 'Blog';
+        name: 'Blog',
         description: 'Content management and blogging platforms',
-        icon: 'FileText';
+        icon: 'FileText',
         templateCount: 15
       }}]
 }

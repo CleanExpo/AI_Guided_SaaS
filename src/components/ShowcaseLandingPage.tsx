@@ -10,68 +10,67 @@ import { Bot, Code, Palette, Rocket, Sparkles, Brain, BarChart3, Users, ArrowRig
 import Link from 'next/link';
 
 const personas  = [
-  {,
+  {
   id: 'ai-architect',
-    name: 'AI Architect';
+    name: 'AI Architect',
     description: 'Expert in AI-powered development workflows',
-    avatar: '🤖';
+    avatar: '🤖',
     color: 'from-blue-500 to-cyan-500'
-    , icon: Bot};
+    , icon: Bot},
   {
     id: 'fullstack-wizard',
-    name: 'Fullstack Wizard';
+    name: 'Fullstack Wizard',
     description: 'Master of frontend and backend development',
-    avatar: '🧙‍♂️';
+    avatar: '🧙‍♂️',
     color: 'from-brand-primary-500 to-pink-500'
-    , icon: Code};
+    , icon: Code},
   {
     id: 'ui-designer',
-    name: 'UI Designer';
+    name: 'UI Designer',
     description: 'Creating beautiful, user-friendly interfaces',
     avatar: '🎨',
     color: 'from-pink-500 to-rose-500'
-    , icon: Palette};
+    , icon: Palette},
   {
     id: 'startup-founder',
-    name: 'Startup Founder';
+    name: 'Startup Founder',
     description: 'MVP development and rapid iteration',
-    avatar: '🚀';
+    avatar: '🚀',
     color: 'from-orange-500 to-red-500'
     , icon: Rocket}];
 
 const liveFeatures = [
-  {,
+  {
   title: 'Claude Code Integration',
-    description: 'Advanced AI-powered development with token optimization';
-  icon: Brain;
+    description: 'Advanced AI-powered development with token optimization',
+  icon: Brain,
     demo: 'claude-dashboard',
-color: 'bg-blue-500'};
+color: 'bg-blue-500'},
   {
     title: 'Visual UI Builder',
-    description: 'Drag-and-drop interface builder with real-time preview';
-  icon: Wrench;
+    description: 'Drag-and-drop interface builder with real-time preview',
+  icon: Wrench,
     demo: 'ui-builder',
-color: 'bg-brand-primary-500'};
+color: 'bg-brand-primary-500'},
   {
     title: 'Analytics Dashboard',
-    description: 'Real-time performance monitoring and insights';
-  icon: BarChart3;
+    description: 'Real-time performance monitoring and insights',
+  icon: BarChart3,
     demo: 'analytics',
-color: 'bg-green-500'};
+color: 'bg-green-500'},
   {
     title: 'Collaboration Workspace',
-    description: 'Team collaboration with real-time synchronization';
-  icon: Users;
+    description: 'Team collaboration with real-time synchronization',
+  icon: Users,
     demo: 'collaboration',
 color: 'bg-orange-500'}];
 
-const claudeCommands  = [;
-  { command: '/init-docs' , status: 'completed', tokens: '+8K' };
-  { command: '/sync-docs' , status: 'executing', tokens: '+2K' };
-  { command: '/compact-docs' , status: 'pending', tokens: '-15K' };
+const claudeCommands  = [
+  { command: '/init-docs' , status: 'completed', tokens: '+8K' },
+  { command: '/sync-docs' , status: 'executing', tokens: '+2K' },
+  { command: '/compact-docs' , status: 'pending', tokens: '-15K' },
   { command: '/docs:status' , status: 'pending', tokens: '+500' }];
-    export default function ShowcaseLandingPage() {
-, const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
+    export default function ShowcaseLandingPage() { const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
 
 const [activeDemo, setActiveDemo]  = useState<string>('claude-dashboard');
 
@@ -85,7 +84,7 @@ const [commandIndex, setCommandIndex] = useState<any>(0);
     if (!isPlaying) return null;
     
 const _interval = setInterval(() => {
-      setMemoryUsage((prev) => {;
+      setMemoryUsage((prev) => {
         const _newValue = prev + (Math.random() - 0.5) * 5;
         return Math.max(20, Math.min(80, newValue));
 };
@@ -98,8 +97,8 @@ const _renderPersonaShowcase = () => (\n    ;
         <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const _Icon = persona.icon, </div>, return (<motion.div;
-            
-const key = {persona.id}
+
+    const key = {persona.id}
             const initial = {{ opacity: 0 y: 20 }
             const animate = {{ opacity: 1 y: 0 }
             const transition = {{ delay: index * 0.1 }
@@ -115,7 +114,7 @@ const className  = {`glass border-0 ${selectedPersona === persona.id ? 'ring-2 r
               <CardHeader className="text-center">
                 <div;
 
-const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
+    const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
                 >
                   <Icon className="w-8 h-8 text-white"   />
 </div>
@@ -128,7 +127,7 @@ const className = {`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.c
 /AnimatePresence>;
                     <motion.div; const initial = {{ opacity: 0 height: 0 }
                       const animate = {{ opacity: 1 height: 'auto' }
-                      const exit = {{ opacity: 0 height: 0 };
+                      const exit = {{ opacity: 0 height: 0 }
                       className="space-y-2";
                     >
                       <Badge
@@ -160,7 +159,7 @@ className="w-full justify-center";
 size="sm";
 variant="ghost";
 
-const onClick = {() => setIsPlaying(!isPlaying)};
+    const onClick = {() => setIsPlaying(!isPlaying)};
               className="text-white hover:bg-white/10";
             >
               {isPlaying ? (</Button>
@@ -201,7 +200,7 @@ const onClick  = {() => setMemoryUsage(42)};
               <div className="flex items-center gap-2">
                 <div;
 
-const className = {`w-2 h-2 rounded-full ${``
+    const className = {`w-2 h-2 rounded-full ${``
                     cmd.status === 'completed'
                       ? 'bg-green-400'
                       : cmd.status === 'executing'
@@ -227,7 +226,7 @@ const className = {`w-2 h-2 rounded-full ${``
               <motion.div; const key  = {component}
                 className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer hover:bg-white/20 transition-colors";
 
-const whileHover = {{ scale: 1.05 }
+    const whileHover = {{ scale: 1.05 }
                 const whileTap  = {{ scale: 0.95 }
               >
                 {component}
@@ -274,11 +273,11 @@ const _renderCollaboration = () => (
       <CardContent>
         <div className="space-y-3">
           {[
-            {,
+            {
   name: 'Alex Chen',
-              status: 'online';
-              action: 'Editing Dashboard.tsx'};
-            { name: 'Sarah Kim', status: 'online', action: 'Reviewing PR #42' };
+              status: 'online',
+              action: 'Editing Dashboard.tsx'},
+            { name: 'Sarah Kim', status: 'online', action: 'Reviewing PR #42' },
             {
   name: 'Mike Johnson',
               status: 'away',</div>, action: 'Last seen 5m ago'}].map((user) => (\n    </div>
@@ -309,7 +308,7 @@ const _renderCollaboration = () => (
         <div className="max-w-6xl mx-auto">
           <motion.div;
 
-const initial = {{ opacity: 0 y: 20 }
+    const initial = {{ opacity: 0 y: 20 }
             const animate = {{ opacity: 1 y: 0 }
             const transition = {{ duration: 0.8 }
           >
@@ -331,7 +330,7 @@ className="mb-6 glass border-white/20 text-white";
 
 const initial  = {{ opacity: 0 y: 40 }
             const animate = {{ opacity: 1 y: 0 }
-            const transition = {{ duration: 0.8 delay: 0.2 };
+            const transition = {{ duration: 0.8 delay: 0.2 }
             className="mb-16";
           >
             <h2 className="text-2xl font-bold text-white mb-8">
@@ -342,9 +341,9 @@ const initial  = {{ opacity: 0 y: 40 }
         <div className="max-w-6xl mx-auto">
           <motion.div;
 
-const initial = {{ opacity: 0 y: 20 }
+    const initial = {{ opacity: 0 y: 20 }
             const animate  = {{ opacity: 1 y: 0 }
-            const transition = {{ duration: 0.8 };
+            const transition = {{ duration: 0.8 }
             className="text-center mb-12";
           >
             <h2 className="text-4xl font-bold text-white mb-4">
@@ -378,7 +377,7 @@ const initial = {{ opacity: 0 y: 20 }
               <AnimatePresence mode="wait">
                 <motion.div;
 
-const key = {activeDemo}
+    const key = {activeDemo}
                   const initial  = {{ opacity: 0 x: 20 }
                   const animate = {{ opacity: 1 x: 0 }
                   const exit = {{ opacity: 0 x: -20 }
@@ -391,7 +390,7 @@ const key = {activeDemo}
         <div className="max-w-4xl mx-auto">
           <motion.div;
 
-const initial = {{ opacity: 0 y: 20 }
+    const initial = {{ opacity: 0 y: 20 }
             const animate = {{ opacity: 1 y: 0 }
             const transition = {{ duration: 0.8 }
 </Button   />
