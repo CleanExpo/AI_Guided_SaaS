@@ -6,261 +6,208 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 import { exec } from 'child_process';
 import { promisify } from 'util';
 
-const _execAsync = promisify(exec);
+const execAsync = promisify(exec);
 
 interface DeploymentPlan {
-    // environment: string;
-  steps: string[];
-  thinking: ThoughtStep[];
+    environment: string;
+    steps: string[];
+    thinking: ThoughtStep[];
     hypotheses: string[];
-    revisions: strin,
-    g[];,
+    revisions: string[];
 }
+
 interface ThoughtStep {
     number: number;
-  content: string;
-  timestamp: Date;
+    content: string;
+    timestamp: Date;
     confidence: number;
     needsMoreThoughts?: boolean;
     shouldRevise?: boolean;
     shouldBranch?: boolean;
-    generatesHypothesis?: boolea,
-    n;,
+    generatesHypothesis?: boolean;
 }
+
 interface ValidationResult {
     wslDistro: {
-  available: boolean;
-  distributions: string;
-        defaultDistro: strin,
-    g;
-    ,
-} | null;
+        available: boolean;
+        distributions: string;
+        defaultDistro: string;
+    } | null;
     windowsIntegration: {
         available: boolean;
         userProfile?: string;
-        error?: strin,
-    g;
-    ,
-} | null;
+        error?: string;
+    } | null;
     projectPaths: {
         windowsPath: string;
-  wslPath: string;
-  accessible: boolea,
-    n;
-    ,
-} | null;
+        wslPath: string;
+        accessible: boolean;
+    } | null;
     permissions: unknown;
-    recommendations: strin,
-    g[];,
+    recommendations: string[];
 }
+
 interface GitStatus {
     porcelainStatus: string;
-  currentBranch: string;
-  remoteStatus: {
+    currentBranch: string;
+    remoteStatus: {
         upToDate?: boolean;
         localCommit?: string;
         remoteCommit?: string;
         error?: string;
-        details?: strin,
-    g;
-    ,
-} | null;
+        details?: string;
+    } | null;
     isClean: boolean;
-    recommendations: strin,
-    g[];,
+    recommendations: string[];
 }
+
 interface SyncOperation {
     direction: string;
-  excludePatterns: string[];
-  dryRun: boolean;
+    excludePatterns: string[];
+    dryRun: boolean;
     filesProcessed: number;
     errors: string[];
-    summary: strin,
-    g;,
+    summary: string;
 }
+
 class WSLSequentialThinkingMCP extends Server {
     constructor() {
         super(
             {
-                name: 'wsl-sequential-thinking-mcp'
-                // versio,
-    n: '1.0.0',
-}
-            { capabilities: {
-  // tool,
-    s: { ,
-};
+                name: 'wsl-sequential-thinking-mcp',
+                version: '1.0.0'
+            },
+            { capabilities: { tools: {} } }
+        );
 
-        this.setupToolHandlers();}
+        this.setupToolHandlers();
+    }
+
     private setupToolHandlers() {
         this.setRequestHandler(ListToolsRequestSchema, async () => ({
-            // tools: [
-  {
-  name: 'sequential-deploy'
-                    // description: 'Execute deployment with sequential thinking'
-                    // inputSchema: {
-  type: 'object'
-                        // properties: {
-  environment: {
-  type: 'string'
-                                enum: ['developmen,
-    t', 'production'],
-                                // description: 'Target deployment environmen,
-    t'
-                            ,
-}
-                            // complexity: { 
-                                type: 'string'
-                                enum: ['simpl,
-    e', 'moderate', 'complex'],
-                                // description: 'Expected complexity leve,
-    l'
-                            ,
-}
-                            // enableRevisions: { 
-                                type: 'boolean'
-                                // default: true
-                                // description: 'Enable thought revision capabilitie,
-    s'
-                            ,
-}
-                            // maxThoughts: { 
-                                type: 'number'
-                                // default: 15
-                                // description: 'Maximum number of thinking step,
-    s',
-}
-                        }
-                        // required: ['environmen,
-    t'],
-}
-                }
+            tools: [
                 {
-                    // name: 'validate-wsl-environment'
-                    // description: 'Validate WSL Ubuntu environment configuration'
-                    // inputSchema: {
-  type: 'object'
-                        // properties: {
-  checkPaths: { type: 'boolea,
-    n', default: tru,
-    e ,
-},
-                            checkPermissions: { type: 'boolea,
-    n', default: tru,
-    e ,
-},
-                            checkIntegration: { type: 'boolea,
-    n', default: tru,
-    e  ,
-}
-                },
-                {
-                    // name: 'analyze-git-status'
-                    // description: 'Analyze git status with sequential thinking'
-                    // inputSchema: {
-  type: 'object'
-                        // properties: {
-  checkRemote: { type: 'boolea,
-    n', default: tru,
-    e ,
-},
-                            validateBranch: { type: 'boolea,
-    n', default: tru,
-    e  ,
-}
-                },
-                {
-                    // name: 'sync-wsl-windows'
-                    // description: 'Synchronize files between WSL and Windows'
-                    // inputSchema: {
-  type: 'object'
-                        // properties: {
-  direction: {
-  type: 'string'
-                                enum: ['wsl-to-window,
-    s', 'windows-to-wsl', 'bidirectional'],
-                                // default: 'wsl-to-window,
-    s'
-                            ,
-}
-                            // excludePatterns: { 
-                                type: 'array'
-                                // items: { type: 'strin,
-    g' ,
-}
-                                default: ['node_module,
-    s', '.git', '.next']
+                    name: 'sequential-deploy',
+                    description: 'Execute deployment with sequential thinking',
+                    inputSchema: {
+                        type: 'object',
+                        properties: {
+                            environment: {
+                                type: 'string',
+                                enum: ['development', 'production'],
+                                description: 'Target deployment environment'
                             },
-                            dryRun: { type: 'boolea,
-    n', default: fals,
-    e  ,
-}}
+                            complexity: { 
+                                type: 'string',
+                                enum: ['simple', 'moderate', 'complex'],
+                                description: 'Expected complexity level'
+                            },
+                            enableRevisions: { 
+                                type: 'boolean',
+                                default: true,
+                                description: 'Enable thought revision capabilities'
+                            },
+                            maxThoughts: { 
+                                type: 'number',
+                                default: 15,
+                                description: 'Maximum number of thinking steps'
+                            }
+                        },
+                        required: ['environment']
+                    }
+                },
+                {
+                    name: 'validate-wsl-environment',
+                    description: 'Validate WSL Ubuntu environment configuration',
+                    inputSchema: {
+                        type: 'object',
+                        properties: {
+                            checkPaths: { type: 'boolean', default: true },
+                            checkPermissions: { type: 'boolean', default: true },
+                            checkIntegration: { type: 'boolean', default: true }
+                        }
+                    }
+                },
+                {
+                    name: 'analyze-git-status',
+                    description: 'Analyze git status with sequential thinking',
+                    inputSchema: {
+                        type: 'object',
+                        properties: {
+                            checkRemote: { type: 'boolean', default: true },
+                            validateBranch: { type: 'boolean', default: true }
+                        }
+                    }
+                },
+                {
+                    name: 'sync-wsl-windows',
+                    description: 'Synchronize files between WSL and Windows',
+                    inputSchema: {
+                        type: 'object',
+                        properties: {
+                            direction: {
+                                type: 'string',
+                                enum: ['wsl-to-windows', 'windows-to-wsl', 'bidirectional'],
+                                default: 'wsl-to-windows'
+                            },
+                            excludePatterns: { 
+                                type: 'array',
+                                items: { type: 'string' },
+                                default: ['node_modules', '.git', '.next']
+                            },
+                            dryRun: { type: 'boolean', default: false }
+                        }
+                    }
+                }
             ]
         }));
 
-        this.setRequestHandler(CallToolRequestSchema: an,
-    y, async (request: any) => {
-            const { nam,
-    e, arguments: arg,
-    s  ,
-}: any = request.params;
+        this.setRequestHandler(CallToolRequestSchema, async (request: any) => {
+            const { name, arguments: args } = request.params;
 
             try {
-                switch (name: any) {
+                switch (name) {
                     case 'sequential-deploy':
-    return await this.executeSequentialDeployment(arg,
-    s || {,
-});
-    break;
-
-    break;
+                        return await this.executeSequentialDeployment(args || {});
 
                     case 'validate-wsl-environment':
-    return await this.validateWSLEnvironment(args || {});
-    break;
+                        return await this.validateWSLEnvironment(args || {});
 
                     case 'analyze-git-status':
-    return await this.analyzeGitStatus(args || {});
-    break;
+                        return await this.analyzeGitStatus(args || {});
 
                     case 'sync-wsl-windows':
-    return await this.syncWSLWindows(args || {});
-    break;
+                        return await this.syncWSLWindows(args || {});
 
-                    // default: throw new Error(`Unknow,
-    n, tool: ${nam,
-    e,
-}`);}
-            } catch (error: any) {
-                const _errorMessage = error instanceof Error ? error.message : String(error);
+                    default: 
+                        throw new Error(`Unknown tool: ${name}`);
+                }
+            } catch (error) {
+                const errorMessage = error instanceof Error ? error.message : String(error);
                 return {
-                    // content: [{
-  type: 'text'
-                        // text: `Error executing ${nam,
-    e,
-}: ${errorMessage}`
-  }]
-                    // isError: tru,
-    e
-                ,
-};}
-        });}
-    async executeSequentialDeployment(args: Record<strin,
-    g, unknown>: any): Promise<any> {
-        const { environment = 'development', complexity = 'moderate', enableRevisions = true, maxThoughts = 15  }: any = args;
+                    content: [{
+                        type: 'text',
+                        text: `Error executing ${name}: ${errorMessage}`
+                    }],
+                    isError: true
+                };
+            }
+        });
+    }
+
+    async executeSequentialDeployment(args: Record<string, unknown>): Promise<any> {
+        const { environment = 'development', complexity = 'moderate', enableRevisions = true, maxThoughts = 15 } = args;
         
         const deploymentPlan: DeploymentPlan = {
-            // environment: String(environment)
-            // steps: []
-            // thinking: []
-            // hypotheses: []
-            // revision,
-    s: []
-        ,
-};
+            environment: String(environment),
+            steps: [],
+            thinking: [],
+            hypotheses: [],
+            revisions: []
+        };
 
-        const _thoughtCount = this.estimateInitialThoughts(String(complexity));
-        const _maxThoughtLimit = Number(maxThoughts);
+        const thoughtCount = this.estimateInitialThoughts(String(complexity));
+        const maxThoughtLimit = Number(maxThoughts);
 
         // Sequential thinking loop
         for (let thoughtNumber = 1; thoughtNumber <= Math.min(thoughtCount, maxThoughtLimit); thoughtNumber++) {
@@ -268,206 +215,176 @@ class WSLSequentialThinkingMCP extends Server {
             deploymentPlan.thinking.push(thinkingStep);
 
             if (Boolean(enableRevisions) && thinkingStep.shouldRevise) {
-                deploymentPlan.revisions.push(`Revision for thought ${thoughtNumber}: Enhanced analysis`);}
-            if(thinkingStep.generatesHypothesis: any): any {
-                deploymentPlan.hypotheses.push(`Hypothesis ${thoughtNumbe,
-    r,
-}: Deployment optimization required`);}}
-        const _finalStrategy = this.synthesizeDeploymentStrategy(deploymentPlan);
+                deploymentPlan.revisions.push(`Revision for thought ${thoughtNumber}: Enhanced analysis`);
+            }
+            
+            if (thinkingStep.generatesHypothesis) {
+                deploymentPlan.hypotheses.push(`Hypothesis ${thoughtNumber}: Deployment optimization required`);
+            }
+        }
+
+        const finalStrategy = this.synthesizeDeploymentStrategy(deploymentPlan);
         
         return {
-            // content: [{
-  type: 'text'
-  // text: JSON.stringify({
-  success: true
-                    // strategy: finalStrategy
-                    // thinkingProcess: deploymentPlan.thinking
-                    // totalThoughts: deploymentPlan.thinking.length
-                    // revisions: deploymentPlan.revisions.length
-                    // hypotheses: deploymentPlan.hypotheses.length
-                    // summary: `Deployment strategy generated through ${deploymentPlan.thinking.lengt,
-    h,
-} sequential thoughts with ${deploymentPlan.revisions.length} revisions and ${deploymentPlan.hypotheses.length} hypotheses tested.`
+            content: [{
+                type: 'text',
+                text: JSON.stringify({
+                    success: true,
+                    strategy: finalStrategy,
+                    thinkingProcess: deploymentPlan.thinking,
+                    totalThoughts: deploymentPlan.thinking.length,
+                    revisions: deploymentPlan.revisions.length,
+                    hypotheses: deploymentPlan.hypotheses.length,
+                    summary: `Deployment strategy generated through ${deploymentPlan.thinking.length} sequential thoughts with ${deploymentPlan.revisions.length} revisions and ${deploymentPlan.hypotheses.length} hypotheses tested.`
                 }, null, 2)
             }]
-        };}
+        };
+    }
+
     private estimateInitialThoughts(complexity: string): number {
-        const complexityMap: Record<strin,
-    g, number> = {
+        const complexityMap: Record<string, number> = {
             'simple': 6,
             'moderate': 8,
             'complex': 12
         };
-        return complexityMap[complexity] || 8;}
-    private processThought(thoughtNumber: numbe,
-    r, environment: strin,
-    g, plan: DeploymentPlan): ThoughtStep {
-        const thought = this.generateDeploymentThought(thoughtNumbe,
-    r, environment, plan);
+        return complexityMap[complexity] || 8;
+    }
+
+    private processThought(thoughtNumber: number, environment: string, plan: DeploymentPlan): ThoughtStep {
+        const thought = this.generateDeploymentThought(thoughtNumber, environment, plan);
         
         return {
-            // number: thoughtNumber
-            // content: thought
-            // timestamp: new Date()
-            // confidence: 0.8
-            // needsMoreThoughts: thought.includes('complex')
-            // shouldRevise: thought.includes('reconsider')
-            // shouldBranch: thought.includes('alternative')
-            // generatesHypothesis: thought.includes('hypothesi,
-    s')
-        ,
-};}
-    private generateDeploymentThought(thoughtNumber: numbe,
-    r, environment: strin,
-    g, _plan: DeploymentPlan): string {
-        const thoughtTemplates: Record<numbe,
-    r, () => string> = {
-            1: () => `Initia,
-    l, assessment: Deploying to ${environmen,
-    t,
-} environment requires analyzing WSL Ubuntu configuration, git status, security requirements, and file synchronization needs.`,
-            2: () => `Environment configuratio,
-    n, analysis: WSL Ubuntu requires specific .env.local settings with WSL_DISTRO_NAM,
-    E, WINDOWS_USER_PROFILE paths, and PROJECT_ROOT configuration.`,
-            3: () => `Git strateg,
-    y, evaluation: Must implement porcelain status checking (git status --porcelain) to ensure clean deployment stat,
-    e.`,
-            4: () => `Securit,
-    y, assessment: Multi-layered security validation required including environment variable validatio,
-    n, dependency audit, and file permissions.`,
-            5: () => `File synchronizatio,
-    n, strategy: WSL to Windows sync requires careful handling of node_modules exclusion and .git directory preservatio,
-    n.`,
-            6: () => `Deployment pipelin,
-    e, design: Sequential validation pipeline needed with pre-deployment checks and build verificatio,
-    n.`,
-            7: () => `Verce,
-    l, optimization: vercel.json configuration must be optimized for WSL Ubuntu deploymen,
-    t.`,
-            8: () => `Final validation an,
-    d, execution: All previous steps must be validated before executing deploymen,
-    t.`
-        ,
-};
+            number: thoughtNumber,
+            content: thought,
+            timestamp: new Date(),
+            confidence: 0.8,
+            needsMoreThoughts: thought.includes('complex'),
+            shouldRevise: thought.includes('reconsider'),
+            shouldBranch: thought.includes('alternative'),
+            generatesHypothesis: thought.includes('hypothesis')
+        };
+    }
 
-        const _template = thoughtTemplates[thoughtNumber];
-        return template ? template() : `Advanced analysis step ${thoughtNumber}: Continuing deployment optimization based on previous discoveries.`;}
+    private generateDeploymentThought(thoughtNumber: number, environment: string, _plan: DeploymentPlan): string {
+        const thoughtTemplates: Record<number, () => string> = {
+            1: () => `Initial assessment: Deploying to ${environment} environment requires analyzing WSL Ubuntu configuration, git status, security requirements, and file synchronization needs.`,
+            2: () => `Environment configuration analysis: WSL Ubuntu requires specific .env.local settings with WSL_DISTRO_NAME, WINDOWS_USER_PROFILE paths, and PROJECT_ROOT configuration.`,
+            3: () => `Git strategy evaluation: Must implement porcelain status checking (git status --porcelain) to ensure clean deployment state.`,
+            4: () => `Security assessment: Multi-layered security validation required including environment variable validation, dependency audit, and file permissions.`,
+            5: () => `File synchronization strategy: WSL to Windows sync requires careful handling of node_modules exclusion and .git directory preservation.`,
+            6: () => `Deployment pipeline design: Sequential validation pipeline needed with pre-deployment checks and build verification.`,
+            7: () => `Vercel optimization: vercel.json configuration must be optimized for WSL Ubuntu deployment.`,
+            8: () => `Final validation and execution: All previous steps must be validated before executing deployment.`
+        };
+
+        const template = thoughtTemplates[thoughtNumber];
+        return template ? template() : `Advanced analysis step ${thoughtNumber}: Continuing deployment optimization based on previous discoveries.`;
+    }
+
     private synthesizeDeploymentStrategy(plan: DeploymentPlan) {
         return {
-            // environment: plan.environment
-            // steps: [
-  'Environment Validation'
-  'Git Status Chec,
-    k', 
+            environment: plan.environment,
+            steps: [
+                'Environment Validation',
+                'Git Status Check', 
                 'Security Validation',
                 'File Synchronization',
                 'Pre-deployment Checks',
                 'Deployment Execution'
             ],
-            // thinkingSteps: plan.thinking.length
-            // revisions: plan.revisions.length
-            // hypotheses: plan.hypotheses.lengt,
-    h
-        ,
-};}
-    async validateWSLEnvironment(args: Record<strin,
-    g, unknown>: any): Promise<any> {
-        const { checkPaths = true, checkIntegration = true  }: any = args;
+            thinkingSteps: plan.thinking.length,
+            revisions: plan.revisions.length,
+            hypotheses: plan.hypotheses.length
+        };
+    }
+
+    async validateWSLEnvironment(_args: Record<string, unknown>): Promise<any> {
+        const { checkPaths = true, checkIntegration = true } = _args;
         
         const validationResults: ValidationResult = {
-            // wslDistro: null
-            // windowsIntegration: null
-            // projectPaths: null
-            // permissions: null
-            // recommendation,
-    s: []
-        ,
-};
+            wslDistro: null,
+            windowsIntegration: null,
+            projectPaths: null,
+            permissions: null,
+            recommendations: []
+        };
 
         try {
             // Check WSL distribution
             const wslInfo = await execAsync('wsl -l -v');
             validationResults.wslDistro = {
-                available: true
-                // distributions: wslInfo.stdout.trim()
-                // defaultDistro: 'Ubunt,
-    u'
-            ,
-};
+                available: true,
+                distributions: wslInfo.stdout.trim(),
+                defaultDistro: 'Ubuntu'
+            };
 
             // Check Windows integration
-            if (checkIntegration: any) {
+            if (checkIntegration) {
                 try {
                     const windowsPath = await execAsync('wsl -e cmd.exe /c echo %USERPROFILE%');
                     validationResults.windowsIntegration = {
-                        available: true
-                        // userProfile: windowsPath.stdout.tri,
-    m()
-                    ,
-};
-                } catch (error: any) {
-                    const _errorMessage = error instanceof Error ? error.message : 'Unknown error';
+                        available: true,
+                        userProfile: windowsPath.stdout.trim()
+                    };
+                } catch (error) {
+                    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
                     validationResults.windowsIntegration = {
-                        available: false
-                        // error: errorMessag,
-    e
-                    ,
-};}}
+                        available: false,
+                        error: errorMessage
+                    };
+                }
+            }
+
             // Check project paths
-            if (checkPaths: any) {
-                const _projectRoot = process.cwd();
-                const _wslProjectPath = `/mnt/d/AI Guided SaaS`;
+            if (checkPaths) {
+                const projectRoot = process.cwd();
+                const wslProjectPath = `/mnt/d/AI Guided SaaS`;
                 
                 validationResults.projectPaths = {
-                    windowsPath: projectRoot
-                    // wslPath: wslProjectPath
-                    // accessible: tru,
-    e
-                ,
-};}
+                    windowsPath: projectRoot,
+                    wslPath: wslProjectPath,
+                    accessible: true
+                };
+            }
+
             // Generate recommendations
             validationResults.recommendations = [
-  'Ensure WSL2 is being used for better performance'
-  'Configure .wslconfig for optimal resource allocation',
+                'Ensure WSL2 is being used for better performance',
+                'Configure .wslconfig for optimal resource allocation',
                 'Set up proper file permissions for cross-platform development',
                 'Use Windows Terminal for better WSL integration'
             ];
 
-        } catch (error: any) {
-            const _errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
             return {
-                // content: [{
-  type: 'text'
-  text: `WSL Environment validatio,
-    n, failed: ${errorMessag,
-    e,
-}`
+                content: [{
+                    type: 'text',
+                    text: `WSL Environment validation failed: ${errorMessage}`
                 }],
-                // isError: tru,
-    e
-            ,
-};}
+                isError: true
+            };
+        }
+
         return {
             content: [{
-  type: 'text'
-  text: JSON.stringify(validationResult,
-    s, null, 2)
+                type: 'text',
+                text: JSON.stringify(validationResults, null, 2)
             }]
-        };}
-    async analyzeGitStatus(args: Record<strin,
-    g, unknown>: any): Promise<any> {
-        const { checkRemote = true, validateBranch = true  }: any = args;
+        };
+    }
+
+    async analyzeGitStatus(args: Record<string, unknown>): Promise<any> {
+        const { checkRemote = true, validateBranch = true } = args;
         
         try {
             const gitAnalysis: GitStatus = {
-  // porcelainStatus: ''
-                // currentBranch: ''
-                // remoteStatus: null
-                // isClean: false
-                // recommendation,
-    s: []
-            ,
-};
+                porcelainStatus: '',
+                currentBranch: '',
+                remoteStatus: null,
+                isClean: false,
+                recommendations: []
+            };
 
             // Get porcelain status
             const porcelainResult = await execAsync('git status --porcelain');
@@ -475,156 +392,131 @@ class WSLSequentialThinkingMCP extends Server {
             gitAnalysis.isClean = gitAnalysis.porcelainStatus === '';
 
             // Get current branch
-            if (validateBranch: any) {
+            if (validateBranch) {
                 const branchResult = await execAsync('git rev-parse --abbrev-ref HEAD');
-                gitAnalysis.currentBranch = branchResult.stdout.tri,
-    m();,
-}
+                gitAnalysis.currentBranch = branchResult.stdout.trim();
+            }
+
             // Check remote status
-            if (checkRemote: any) {
+            if (checkRemote) {
                 try {
                     await execAsync('git fetch origin');
                     const localCommit = await execAsync('git rev-parse HEAD');
-                    const remoteCommit = await execAsync('git rev-parse @{,
-    u,
-}');
+                    const remoteCommit = await execAsync('git rev-parse @{u}');
                     
                     gitAnalysis.remoteStatus = {
-                        upToDate: localCommit.stdout.trim() === remoteCommit.stdout.trim()
-                        // localCommit: localCommit.stdout.trim()
-                        // remoteCommit: remoteCommit.stdout.tri,
-    m()
-                    ,
-};
-                } catch (error: any) {
-                    const _errorMessage = error instanceof Error ? error.message : 'Unknown error';
+                        upToDate: localCommit.stdout.trim() === remoteCommit.stdout.trim(),
+                        localCommit: localCommit.stdout.trim(),
+                        remoteCommit: remoteCommit.stdout.trim()
+                    };
+                } catch (error) {
+                    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
                     gitAnalysis.remoteStatus = {
-                        error: 'Unable to check remote status'
-                        // details: errorMessag,
-    e
-                    ,
-};}}
+                        error: 'Unable to check remote status',
+                        details: errorMessage
+                    };
+                }
+            }
+
             // Generate recommendations
-            if(!gitAnalysis.isClean: any): any {
-                gitAnalysis.recommendations.push('Commit or stash uncommitted changes before deploymen,
-    t');,
-}
-            if(gitAnalysis.currentBranch !== 'main': any): any {
-                gitAnalysis.recommendations.push(`Consider deploying from main branch instead of ${gitAnalysis.currentBranch}`);}
-            if(gitAnalysis.remoteStatus && gitAnalysis.remoteStatus.upToDate === false: any): any {
-                gitAnalysis.recommendations.push('Pull latest changes from remote before deploymen,
-    t');,
-}
+            if (!gitAnalysis.isClean) {
+                gitAnalysis.recommendations.push('Commit or stash uncommitted changes before deployment');
+            }
+            
+            if (gitAnalysis.currentBranch !== 'main') {
+                gitAnalysis.recommendations.push(`Consider deploying from main branch instead of ${gitAnalysis.currentBranch}`);
+            }
+            
+            if (gitAnalysis.remoteStatus && gitAnalysis.remoteStatus.upToDate === false) {
+                gitAnalysis.recommendations.push('Pull latest changes from remote before deployment');
+            }
+
             return {
                 content: [{
-  type: 'text'
-  text: JSON.stringify(gitAnalysi,
-    s, null, 2)
+                    type: 'text',
+                    text: JSON.stringify(gitAnalysis, null, 2)
                 }]
             };
 
-        } catch (error: any) {
-            const _errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
             return {
-                // content: [{
-  type: 'text'
-  text: `Git analysi,
-    s, failed: ${errorMessag,
-    e,
-}`
+                content: [{
+                    type: 'text',
+                    text: `Git analysis failed: ${errorMessage}`
                 }],
-                // isError: tru,
-    e
-            ,
-};}}
-    async syncWSLWindows(args: Record<strin,
-    g, unknown>: any): Promise<any> {
-        const { direction = 'wsl-to-windows', excludePatterns = ['node_modules', '.git', '.next'], dryRun = false  }: any = args;
+                isError: true
+            };
+        }
+    }
+
+    async syncWSLWindows(args: Record<string, unknown>): Promise<any> {
+        const { direction = 'wsl-to-windows', excludePatterns = ['node_modules', '.git', '.next'], dryRun = false } = args;
         
         const syncResult: SyncOperation = {
-            // direction: String(direction)
-            excludePatterns: Array.isArray(excludePatterns) ? excludePatterns.map(String) : ['node_module,
-    s', '.git', '.next'],
-            // dryRun: Boolean(dryRun)
-            // filesProcessed: 0
-            // errors: []
-            // summar,
-    y: ''
-        ,
-};
+            direction: String(direction),
+            excludePatterns: Array.isArray(excludePatterns) ? excludePatterns.map(String) : ['node_modules', '.git', '.next'],
+            dryRun: Boolean(dryRun),
+            filesProcessed: 0,
+            errors: [],
+            summary: ''
+        };
 
         try {
-            const _currentDir = process.cwd();
-            const _wslPath = `/mnt/d/AI Guided SaaS`;
+            const currentDir = process.cwd();
+            const wslPath = `/mnt/d/AI Guided SaaS`;
             
             // Build rsync command
-            const _excludeArgs = syncResult.excludePatterns.map((pattern: any) => `--exclude='${patter,
-    n,
-}'`).join(' ');
-            const _dryRunFlag = syncResult.dryRun ? '--dry-run' : '';
+            const excludeArgs = syncResult.excludePatterns.map((pattern) => `--exclude='${pattern}'`).join(' ');
+            const dryRunFlag = syncResult.dryRun ? '--dry-run' : '';
             
             let syncCommand = '';
             
-            switch(syncResult.direction: any): any {
+            switch (syncResult.direction) {
                 case 'wsl-to-windows':
-    syncCommand = `wsl -e rsync -av ${dryRunFla,
-    g,
-} ${excludeArgs} "${wslPath}/" "${currentDir}/"`;
-    break;
-
-    break;
-
+                    syncCommand = `wsl -e rsync -av ${dryRunFlag} ${excludeArgs} "${wslPath}/" "${currentDir}/"`;
                     break;
                 case 'windows-to-wsl':
-    syncCommand = `wsl -e rsync -av ${dryRunFlag} ${excludeArgs} "${currentDir}/" "${wslPath}/"`;
-    break;
-
-    break;
-
+                    syncCommand = `wsl -e rsync -av ${dryRunFlag} ${excludeArgs} "${currentDir}/" "${wslPath}/"`;
                     break;
                 case 'bidirectional':
-    syncCommand = `wsl -e rsync -av ${dryRunFlag} ${excludeArgs} "${wslPath}/" "${currentDir}/"`;
-    break;
+                    syncCommand = `wsl -e rsync -av ${dryRunFlag} ${excludeArgs} "${wslPath}/" "${currentDir}/"`;
+                    break;
+            }
 
-    break;
-
-                    break;}
             const result = await execAsync(syncCommand);
             
             // Parse rsync output to count files
-            const lines = result.stdout.split('\n').filter((line: any) => ;
+            const lines = result.stdout.split('\n').filter((line) => 
                 line.trim() && 
                 !line.startsWith('sending') && 
                 !line.startsWith('sent')
             );
             syncResult.filesProcessed = lines.length;
-            syncResult.summary = `Synchronized ${syncResult.filesProcesse,
-    d,
-} files from ${syncResult.direction}`;
+            syncResult.summary = `Synchronized ${syncResult.filesProcessed} files from ${syncResult.direction}`;
 
-            if(syncResult.dryRun: any): any {
-                syncResult.summary += ' (dry run - no files actually copie,
-    d)';,
-}
-        } catch (error: any) {
-            const _errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            if (syncResult.dryRun) {
+                syncResult.summary += ' (dry run - no files actually copied)';
+            }
+
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
             syncResult.errors.push(errorMessage);
-            syncResult.summary = `Synchronizatio,
-    n, failed: ${errorMessag,
-    e,
-}`;}
+            syncResult.summary = `Synchronization failed: ${errorMessage}`;
+        }
+
         return {
-            // content: [{
-  type: 'text'
-  text: JSON.stringify(syncResul,
-    t, null, 2)
+            content: [{
+                type: 'text',
+                text: JSON.stringify(syncResult, null, 2)
             }]
-        };}}
+        };
+    }
+}
+
 // Start the server
 const server = new WSLSequentialThinkingMCP();
-const _transport = new StdioServerTransport();
+const transport = new StdioServerTransport();
 server.connect(transport);
 
 console.error('WSL Sequential Thinking MCP Server running on stdio');
-
-}}}}}}}}

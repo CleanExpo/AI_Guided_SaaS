@@ -3,7 +3,7 @@
   "framework": "nextjs",
   "buildCommand": "next build",
   "outputDirectory": ".next",
-  "installCommand": "npm install",
+  "installCommand": "npm install --legacy-peer-deps",
   "devCommand": "next dev --port $PORT",
   "regions": ["iad1"],
   "headers": [

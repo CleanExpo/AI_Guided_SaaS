@@ -145,7 +145,7 @@ if (fs.existsSync('jest.config.js') || fs.existsSync('vitest.config.ts')) {
   console.log('⚠️  Tests: No test configuration found');}
 // 6. Build check
 console.log('\n🏗️  Build Check...');
-const _buildStart = Date.now();
+const buildStart = Date.now();
 const buildResult = runCommand('npm run build 2>&1', true);
 results.performance.buildTime = (Date.now() - buildStart) / 1000; // seconds
 
