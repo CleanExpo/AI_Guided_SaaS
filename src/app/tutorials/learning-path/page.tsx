@@ -1,167 +1,136 @@
-/* BREADCRUMB: app - Application page or route */
 'use client';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Clock, Lock, Play } from 'lucide-react';
-interface Tutorial {
-  id: string,
-  title: string,
-  description: string,
-  duration: string,
-  difficulty: 'beginner' | 'intermediate' | 'advanced'
-}
-interface LearningPath {
-  id: string,
-  title: string,
-  description: string,
-  totalDuration: string,
-  difficulty: 'beginner' | 'intermediate' | 'advanced',
-  tutorials: Array<Tutorial & {
-    completed?: boolean
-}
-}   />
+import { CheckCircle, Lock, Play } from 'lucide-react';
 
-const learningPaths: LearningPath[]  = [
-  {id: 'beginner',
-    title: 'Complete Beginner Path',
-    description: 'Perfect for developers new to AI-powered development platforms',
-    totalDuration: '2 hours',
-    difficulty: 'beginner',
+interface Tutorial {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  completed?: boolean;
+}
+
+interface LearningPath {
+  id: string;
+  title: string;
+  description: string;
+  tutorials: Tutorial[];
+}
+
+const learningPaths: LearningPath[] = [
+  {
+    id: 'beginner',
+    title: 'Getting Started',
+    description: 'Perfect for newcomers to AI-guided development',
     tutorials: [
       {
-  id: '1',
-        title: 'Introduction to AI Guided SaaS',
-        description: 'Learn the basics of our platform',
-        duration: '15 min',
+        id: '1',
+        title: 'Platform Overview',
+        description: 'Learn the basics of AI Guided SaaS',
+        duration: '10 min',
         difficulty: 'beginner',
-completed: true}
-  };
-      {id: '2',
+        completed: true
+      },
+      {
+        id: '2',
         title: 'Your First Project',
-        description: 'Create and deploy your first application',
+        description: 'Create your first AI-powered application',
+        duration: '20 min',
+        difficulty: 'beginner'
+      }
+    ]
+  },
+  {
+    id: 'intermediate',
+    title: 'Advanced Features',
+    description: 'Deep dive into powerful development tools',
+    tutorials: [
+      {
+        id: '3',
+        title: 'Advanced Configuration',
+        description: 'Customize your development environment',
         duration: '30 min',
-        difficulty: 'beginner',
-completed: false}
-      };
-      {id: '3',
-        title: 'Understanding AI Features',
-        description: 'Explore AI-powered code generation',
-        duration: '45 min',
-        difficulty: 'beginner',
-completed: false}
+        difficulty: 'intermediate'
+      }
     ]
-  };
-  {id: 'intermediate',
-    title: 'Intermediate Development',
-    description: 'Advanced features and best practices',
-    totalDuration: '4 hours',
-    difficulty: 'intermediate',
-    tutorials: [{
-  id: '4',
-        title: 'Advanced Project Configuration',
-        description: 'Configure complex project settings',
-        duration: '1 hour',
-        difficulty: 'intermediate',
-completed: false}
-};
-      {id: '5',
-        title: 'Team Collaboration',
-        description: 'Work with teams effectively',
-        duration: '45 min',
-        difficulty: 'intermediate',
-completed: false}
-    ]
-}
+  }
 ];
-export default function LearningPathPage() {
-  const [selectedPath, setSelectedPath] = useState<string | null>(null);
-  const _getDifficultyColor = (difficulty: string) =>, return (switch (difficulty) {
-      case 'beginner':;
-      return 'bg-green-100 text-green-800';
-    break;
-      case 'intermediate':
-      return 'bg-yellow-100 text-yellow-800';
-    break;
-      case 'advanced':
-      return 'bg-red-100 text-red-800';
-    break
-break}
-    default: return 'bg-gray-100 text-gray-800'}
-  const _getProgressPercentage = (path: LearningPath) => {const _completed = path.tutorials.filter((t) => t.completed).length;
-    return (completed, path.tutorials.length) * 100};
-  return (
-    <div className="min-h-screen bg-gray-50 py-8"></div>
-                    <div className="container mx-auto px-4 max-w-6xl mb-8"   />
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">Learning Paths</h1>
-                        <p className="text-gray-600">
-            Structured learning journeys to master AI Guided SaaS development.
-</p>
-                      <div className="grid gap-6 lg:grid-cols-2">
-          {learningPaths.map((path) => (\n    </div>}
-                          <Card key={path.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex items-start justify-between" >></div>
-                                  <CardTitle className="text-xl mb-2">{path.title}</CardTitle>
-                                  <p className="text-gray-600 mb-4">{path.description}</p>
-                                  <div className="flex items-center gap-4">
-                      <Badge className={`${getDifficultyColor(path.difficulty)} border-0`}>
-                        {path.difficulty}
-</Badge>
-                                    <div className="flex items-center text-gray-500">
-                        <Clock className="h-4 w-4 mr-1" 
-              >
-                                      {path.totalDuration}
-</div>
-              <div className="text-right text-2xl font-bold text-blue-600">
-                      {Math.round(getProgressPercentage(path))}%</div>
-                                  <div className="text-sm text-gray-500">Complete      </div>
-                            <CardContent>
-                <div className="space-y-3 mb-6">
-                  {path.tutorials.map((tutorial, index) => {
-                    const _isCompleted = tutorial.completed; const _isLocked = index > 0 && !path.tutorials[index - 1].completed, return (
-    </div>
-                  <div}
-                        const key = {tutorial.id}
-                        const className = {`flex items-center p-3 rounded border ${`
-                          isCompleted ? 'bg-green-50 border-green-200' :
-                          isLocked ? 'bg-gray-50 border-gray-200 opacity-50' :;
-                          'bg-white border-gray-200, hover:bg-gray-50'}`}`;
-className="flex-shrink-0 mr-3">
-                          {isCompleted ? (</div>
-                                          <CheckCircle className="h-5 w-5 text-green-600" 
-              >
-                                        ) : isLocked ? (
-                            <Lock className="h-5 w-5 text-gray-400" 
-              >
-                                        ) : (
-                            <Play className="h-5 w-5 text-blue-600" 
-                 />
-                                        )}
-      </div>
-                                      <div className="flex-1 font-medium text-gray-900">{tutorial.title}</div>
-                                        <div className="text-sm text-gray-600">{tutorial.description}</div>
-                                      <div className="text-sm text-gray-500">{tutorial.duration}</div>
-                    )}
-)}
-      </div>
-                              <Button
-className="w-full";
 
-    const onClick = {() => setSelectedPath(path.id)}
-                >
-                  {getProgressPercentage(path) > 0 ? 'Continue Path' : 'Start Learning Path'}
-</Button>
-              </Card>
-                        ))}
+export default function LearningPathPage() {
+  const [selectedPath, setSelectedPath] = useState<string>('beginner');
+  
+  const currentPath = learningPaths.find(path => path.id === selectedPath);
+
+  return (
+    <div className="container mx-auto max-w-6xl py-12 px-4">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold mb-4">Learning Paths</h1>
+        <p className="text-xl text-gray-600">Structured learning journeys to master AI-guided development</p>
       </div>
-              );
-</div>
-              </Tutorial>
-                
-    </CardContent>
-                  </CardHeader>
-                  
-                }
+
+      <div className="grid md:grid-cols-3 gap-8">
+        <div className="md:col-span-1">
+          <div className="space-y-4">
+            {learningPaths.map((path) => (
+              <Card 
+                key={path.id} 
+                className={selectedPath === path.id ? 'ring-2 ring-orange-500' : ''}
+              >
+                <CardHeader className="cursor-pointer" onClick={() => setSelectedPath(path.id)}>
+                  <CardTitle className="text-lg">{path.title}</CardTitle>
+                  <p className="text-sm text-gray-600">{path.description}</p>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <div className="md:col-span-2">
+          {currentPath && (
+            <Card>
+              <CardHeader>
+                <CardTitle>{currentPath.title}</CardTitle>
+                <p className="text-gray-600">{currentPath.description}</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {currentPath.tutorials.map((tutorial, index) => (
+                    <div key={tutorial.id} className="flex items-center p-4 border rounded-lg">
+                      <div className="mr-4">
+                        {tutorial.completed ? (
+                          <CheckCircle className="w-6 h-6 text-green-600" />
+                        ) : index === 0 || currentPath.tutorials[index - 1]?.completed ? (
+                          <Play className="w-6 h-6 text-orange-500" />
+                        ) : (
+                          <Lock className="w-6 h-6 text-gray-400" />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold">{tutorial.title}</h3>
+                        <p className="text-sm text-gray-600">{tutorial.description}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <Badge variant="secondary">{tutorial.duration}</Badge>
+                          <Badge variant="outline">{tutorial.difficulty}</Badge>
+                        </div>
+                      </div>
+                      <Button 
+                        disabled={!tutorial.completed && index > 0 && !currentPath.tutorials[index - 1]?.completed}
+                        className="ml-4"
+                      >
+                        {tutorial.completed ? 'Review' : 'Start'}
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,89 +1,79 @@
-/* BREADCRUMB: app - Application page or route */;
+'use client';
 import React from 'react';
-import { notFound } from 'next/navigation';interface Tutorial {
+import { notFound } from 'next/navigation';
+
+interface Tutorial {
   id: string;
-  /  title: string,
-  description: string,
-  content: string,
-  duration: string,
-  difficulty: 'beginner' | 'intermediate' | 'advanced',
-  tags: string[],
-  prerequisites: string[];
-  nextTutorial?: string
+  title: string;
+  description: string;
+  content: string;
+  duration: string;
+  difficulty: string;
 }
-const tutorials: Record<string, Tutorial> = {'1': {
+
+const tutorials: Tutorial[] = [
+  {
     id: '1',
     title: 'Getting Started with AI Guided SaaS',
-    description: 'Learn the basics of our AI-powered development platform',
-    content: 'Welcome to AI Guided SaaS! This tutorial will walk you through the fundamental concepts and features of our platform.',
-    duration: '15 min',
-    difficulty: 'beginner',
-tags: ['basics', 'getting-started'],
-    prerequisites: any[]}
-  };
-  '2': {id: '2',
-    title: 'Building Your First Project',
-    description: 'Create and deploy your first application using our platform',
-    content: 'In this tutorial, you will learn how to create, configure, and deploy your first project using AI Guided SaaS.',
-    duration: '30 min',
-    difficulty: 'beginner',
-    tags: ['project', 'deployment'],
-    prerequisites: ['Getting Started with AI Guided SaaS'],
-nextTutorial: '3'}
+    description: 'Learn the basics of using our platform',
+    content: 'This tutorial will guide you through the fundamentals...',
+    duration: '10 min',
+    difficulty: 'Beginner'
+  },
+  {
+    id: '2',
+    title: 'Advanced Project Configuration',
+    description: 'Deep dive into project settings and customization',
+    content: 'Advanced configuration options allow you to...',
+    duration: '25 min',
+    difficulty: 'Advanced'
+  }
+];
 
-export function generateStaticParams() {
-  return Object.keys(tutorials).map((id) => ({ id }))
+interface TutorialPageProps {
+  params: {
+    id: string;
+  };
 }
 
-export default function TutorialPage({ params }: { params: { id: string }}): { params: { id: string }}) {const tutorial = tutorials[params.id], if (!tutorial) {
-    notFound()}
-  return (;
-    <div className="min-h-screen bg-gray-50 py-8 container mx-auto px-4 max-w-4xl"></div>
-                      <div className="bg-white rounded-lg shadow-sm p-8">
-          {
-              * Header *
-              }</div>
-                        <div className="mb-8 flex items-center gap-2 mb-4"   />
-                            <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                {tutorial.difficulty}</span>
-                            <span className="text-gray-500">•</span>
-                            <span className="text-gray-600">{tutorial.duration}</span>
-                          <h1 className="text-3xl font-bold text-gray-900 mb-4">{tutorial.title}</h1>
-                          <p className="text-xl text-gray-600">{tutorial.description}</p>
-                        {
-              * Prerequisites *
-              }, {tutorial.prerequisites.length > 0  && (div className="mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">/              <h3 className="font-semibold text-gray-900 mb-2">Prerequisites< h3>/              <ul className="list-disc list-inside space-y-1"   /></h3>
-                {tutorial.prerequisites.map((prereq, index) => (\n    <li key={index} className="text-gray-700">{prereq}</li>
-                              ))}
-</ul>
-                    )}
+export default function TutorialPage({ params }: TutorialPageProps) {
+  const tutorial = tutorials.find(t => t.id === params.id);
 
-    {
-              * Content *
-              }/          <div className="prose max-w-none mb-8 whitespace-pre-wrap">{tutorial.content}< div>
-                        {
-              * Tags *
-              }
-                        <div className="flex flex-wrap gap-2 mb-8">
-            {tutorial.tags.map((tag) => (\n    </div>
-                            <span}
-                const key = {tag};
-                className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full";
-              >
-                #{tag}</span>
-                          ))}
+  if (!tutorial) {
+    notFound();
+  }
+
+  return (
+    <div className="container mx-auto max-w-4xl py-12 px-4">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-4">{tutorial.title}</h1>
+        <p className="text-xl text-gray-600 mb-4">{tutorial.description}</p>
+        <div className="flex gap-4">
+          <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+            {tutorial.difficulty}
+          </span>
+          <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+            {tutorial.duration}
+          </span>
+        </div>
       </div>
-                        {
-              * Navigation *
-              }/          <div className="flex justify-between">
-            <button className="px-4 py-2 text-gray-600 hover:text-gray-800">
-              ← Back to Tutorials</button>
-                          {tutorial.nextTutorial  && (
-button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                Next Tutorial →
-</button>}
-                    )}
+
+      <div className="prose max-w-none">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-2xl font-semibold mb-4">Tutorial Content</h2>
+          <p>{tutorial.content}</p>
+          
+          <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+            <h3 className="text-lg font-semibold mb-2">What you will learn:</h3>
+            <ul className="list-disc ml-6 space-y-1">
+              <li>Platform navigation and basic features</li>
+              <li>Creating your first project</li>
+              <li>Understanding the development workflow</li>
+              <li>Best practices and tips</li>
+            </ul>
+          </div>
+        </div>
       </div>
-              );
-</div>
-              }
+    </div>
+  );
+}
