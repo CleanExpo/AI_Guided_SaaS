@@ -5,48 +5,59 @@ import { ThemeProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-export function Providers({ children }: { children: React.ReactNode }): { children: React.ReactNode }) { const [queryClient]  = useState<any>(() => new QueryClient({
-    defaultOptions: { queries: {
-  staleTime: 60 * 1000 // 1 minute, refetchOnWindowFocus: false });
 
-const [mounted, setMounted] = useState<any>(false);
-  
-const _pathname = usePathname();
+export function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000, // 1 minute
+        refetchOnWindowFocus: false
+      }
+    }
+  }));
+
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+
   // Prevent hydration mismatches
   useEffect(() => {
-    setMounted(true)}, []);
+    setMounted(true);
+  }, []);
+
   if (!mounted) {
-    return <React.Fragment>{children}</React.Fragment></React>
-}
-  // CRITICAL, FIX: Exclude admin routes from SessionProvider to prevent auth conflicts
+    return <React.Fragment>{children}</React.Fragment>;
+  }
+
+  // CRITICAL FIX: Exclude admin routes from SessionProvider to prevent auth conflicts
   // Admin routes use custom admin-token authentication, NOT NextAuth
   if (pathname?.startsWith('/admin')) {
-    return (QueryClientProvider client={queryClient}>
-        <ThemeProvider;
-attribute="class"defaultTheme="system";
-          // enableSystem
-          // disableTransitionOnChange
+    return (
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
           {children}
-</ThemeProvider>
-      )}
+        </ThemeProvider>
+      </QueryClientProvider>
+    );
+  }
+
   // Regular user routes use NextAuth SessionProvider
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider;
-attribute="class";
-defaultTheme="system";
-          // enableSystem
-          // disableTransitionOnChange
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
           {children}
-</ThemeProvider>
-</SessionProvider>
-  
-</any>
-    
-    </QueryClientProvider>
-    </QueryClientProvider>
-    </any>
-  }
+        </ThemeProvider>
+      </QueryClientProvider>
+    </SessionProvider>
+  );
+}
