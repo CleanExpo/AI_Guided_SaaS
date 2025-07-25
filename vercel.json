@@ -1,14 +1,4 @@
 {
-  "functions": {
-    "src/app/api/health/route.ts": {
-      "runtime": "edge",
-      "maxDuration": 10
-    },
-    "src/app/api/monitoring/vitals/route.ts": {
-      "runtime": "edge",
-      "maxDuration": 10
-    }
-  },
   "regions": [
     "iad1",
     "cdg1",
