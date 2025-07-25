@@ -1,12 +1,13 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy - AI Guided SaaS Platform',
-  description: 'Our cookie policy and how we use cookies to improve your experience'
-};
+
 
 export default function CookiesPage() {
   return (

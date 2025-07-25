@@ -1,4 +1,9 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';

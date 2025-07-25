@@ -1,12 +1,14 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
-export const metadata: Metadata = { title: 'Features - AI Guided SaaS',
-  description: 'Explore the powerful features of AI Guided SaaS platform for building production-ready applications.'
-};
+
 
 export default function FeaturesPage() {
   const features = [

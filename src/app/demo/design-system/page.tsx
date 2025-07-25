@@ -1,16 +1,17 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Palette, Type, Layout, Zap } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Design System Demo - AI Guided SaaS Platform',
-  description: 'Explore our comprehensive design system and UI components'
-};
+
 
 export default function DesignSystemDemoPage() {
   return (

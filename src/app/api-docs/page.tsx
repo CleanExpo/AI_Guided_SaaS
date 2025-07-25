@@ -1,15 +1,17 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Code, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'API Documentation - AI Guided SaaS Platform',
-  description: 'Complete API reference and documentation for AI Guided SaaS Platform'
-};
+
 
 const apiEndpoints = [
   { name: 'Authentication',
@@ -88,5 +90,5 @@ export default function ApiDocsPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

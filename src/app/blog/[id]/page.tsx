@@ -1,4 +1,9 @@
 /* BREADCRUMB: app - Application page or route */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';

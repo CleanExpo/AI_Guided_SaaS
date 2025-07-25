@@ -1,6 +1,10 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -14,9 +18,7 @@ import {
   Building
 } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'Enterprise - AI Guided SaaS Platform',
-  description: 'Enterprise-grade AI development platform with advanced security, compliance, and support'
-};
+
 
 export default function EnterprisePage() {
   const enterpriseFeatures = [

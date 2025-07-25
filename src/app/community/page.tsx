@@ -1,15 +1,16 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageSquare, Users, Github, Twitter, Hash, ExternalLink } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Community - AI Guided SaaS Platform',
-  description: 'Join our vibrant community of developers building the future with AI'
-};
+
 
 const communityStats = [
   { label: 'Active Members', value: '12,453', icon: Users },

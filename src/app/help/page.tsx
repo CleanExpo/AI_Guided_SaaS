@@ -1,14 +1,16 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MessageCircle, Book, Mail, Phone, Search, HelpCircle } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'Help & Support - AI Guided SaaS Platform',
-  description: 'Get help and support for AI Guided SaaS Platform - FAQs, guides, and contact options'
-};
+
 
 export default function HelpPage() {
   const faqs = [

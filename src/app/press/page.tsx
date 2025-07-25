@@ -1,14 +1,16 @@
 /* BREADCRUMB: pages - Application pages and routes */
+'use client';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
-import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Download, ExternalLink, Calendar } from 'lucide-react';
 
-export const metadata: Metadata = { title: 'Press & Media - AI Guided SaaS Platform',
-  description: 'Press releases, media kit, and company information for journalists and media'
-};
+
 
 export default function PressPage() {
   const pressReleases = [
