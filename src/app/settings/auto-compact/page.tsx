@@ -397,7 +397,7 @@ export default function AutoCompactPage() {
               <p className="text-sm text-blue-700 mt-1">
                 Auto-Compact automatically optimizes your JavaScript, CSS, SVG, and JSON files by removing 
                 unnecessary whitespace, comments, and redundant code. Files are only modified if the 
-                reduction is significant (>1%). Original functionality is always preserved.
+                reduction is significant (&gt;1%). Original functionality is always preserved.
               </p>
             </div>
           </div>
