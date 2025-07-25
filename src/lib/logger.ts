@@ -5,26 +5,26 @@
  */
 
 type LogLevel = 'debug' | 'info' | 'warn' | 'error';
-type LogMeta = Record<string unknown></string>
+type LogMeta = Record<string, unknown>;
 
 export class Logger {
   private isDevelopment: boolean;
   
   constructor() {
-    this.isDevelopment = process.env.NODE_ENV === 'development'
-}
+    this.isDevelopment = process.env.NODE_ENV === 'development';
+  }
 
   private formatMessage(
-    level: LogLevel;
-    message: string;
-    meta? null : LogMeta
+    level: LogLevel,
+    message: string,
+    meta?: LogMeta
   ): string {
     const timestamp = new Date().toISOString();
     const metaStr = meta ? ` ${JSON.stringify(meta)}` : '';
-    return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr}`
-}
+    return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr}`;
+  }
 
-  private log(level: LogLevel, message: string, meta? null : LogMeta): void {
+  private log(level: LogLevel, message: string, meta?: LogMeta): void {
     const formattedMessage = this.formatMessage(level, message, meta);
     
     switch (level) {
@@ -36,29 +36,29 @@ export class Logger {
         break;
       case 'debug':
         if (this.isDevelopment) {
-          console.debug(formattedMessage)
-}
+          console.debug(formattedMessage);
+        }
         break;
       default:
-        console.log(formattedMessage)
-}
+        console.log(formattedMessage);
+    }
   }
 
-  debug(message: string, meta? null : LogMeta): void {
-    this.log('debug', message, meta)
-}
+  debug(message: string, meta?: LogMeta): void {
+    this.log('debug', message, meta);
+  }
 
-  info(message: string, meta? null : LogMeta): void {
-    this.log('info', message, meta)
-}
+  info(message: string, meta?: LogMeta): void {
+    this.log('info', message, meta);
+  }
 
-  warn(message: string, meta? null : LogMeta): void {
-    this.log('warn', message, meta)
-}
+  warn(message: string, meta?: LogMeta): void {
+    this.log('warn', message, meta);
+  }
 
-  error(message: string, meta? null : LogMeta): void {
-    this.log('error', message, meta)
-}
+  error(message: string, meta?: LogMeta): void {
+    this.log('error', message, meta);
+  }
 }
 
 // Export singleton instance
