@@ -66,14 +66,12 @@ npm run agents:monitor         # Monitor running agents
 
 ### MCP Integration
 ```bash
-npm run mcp:start              # Start MCP servers (serena + sequential-thinking)
-npm run serena:start           # Start serena semantic search server
+npm run mcp:start              # Start MCP servers (sequential-thinking)
 ```
 
 **MCP Resources**:
 - **ESLint MCP**: https://eslint.org/docs/latest/use/mcp
 - **Model Context Protocol**: https://github.com/modelcontextprotocol
-- **Serena MCP Server**: https://github.com/CleanExpo/serena.git
 - **Awesome MCP Servers**: https://github.com/punkpeye/awesome-mcp-servers
 - **Vercel Documentation**: https://vercel.com/docs
 - **Context7**: https://github.com/upstash/context7.git
@@ -143,7 +141,6 @@ The system combines three paradigms:
 - **Sequential Thinking**: Complex reasoning chains
 - **GitHub**: Repository management
 - **Context7**: Documentation lookup
-- **Serena**: Semantic search and code navigation
 
 ### Key Integration Points
 - **AI Services**: Multi-provider (OpenAI, Anthropic) with fallback

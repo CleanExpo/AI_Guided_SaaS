@@ -1,13 +1,6 @@
 {
   "servers": [
     {
-      "name": "Serena Semantic Search",
-      "transport": "sse",
-      "port": 9121,
-      "command": "python -m serena_mcp_server --transport sse --port 9121",
-      "enabled": true
-    },
-    {
       "name": "Sequential Thinking",
       "transport": "stdio",
       "command": "node wsl-sequential-thinking-server.cjs",

@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-07-25T09:05:42.742Z",
+  "scores": {
+    "dashboard": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    },
+    "prompts": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    },
+    "folders": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    }
+  },
+  "overall": 0,
+  "recommendations": [
+    "[CRITICAL] Folders requires immediate attention",
+    "[Dashboard] Improve core functionality - ensure all metrics load correctly",
+    "[Dashboard] Optimize performance - reduce initial load time",
+    "[Prompts] Enhance usability - simplify the prompt creation workflow",
+    "[Prompts] Fix search functionality and form validation",
+    "[Folders] Implement drag-and-drop functionality properly",
+    "[Folders] Improve visual hierarchy and folder nesting indicators"
+  ]
+}

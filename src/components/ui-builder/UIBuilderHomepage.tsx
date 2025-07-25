@@ -28,5 +28,6 @@ export default function UIBuilderHomepage() {
           </CardContent>
         </Card>
       </div>
+    </div>
   )
 }

@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+
+// Force dynamic rendering to avoid SSG errors
+export const dynamic = 'force-dynamic';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';

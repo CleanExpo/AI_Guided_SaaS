@@ -47,14 +47,16 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">{tutorial.duration}</span>
           <Button 
-            onClick={() => onStart(tutorial.id)}</Button>
+            onClick={() => onStart(tutorial.id)}
             disabled={isLocked}
             variant={isCompleted ? "outline" : "default"}
           >
-            {isCompleted ? 'Review' ?: isLocked 'Locked' : 'Start'}
+            {isCompleted ? 'Review' : isLocked ? 'Locked' : 'Start'}
           </Button>
         </div>
-  )
+      </CardContent>
+    </Card>
+  );
 }
 
 const tutorials: Tutorial[] = [

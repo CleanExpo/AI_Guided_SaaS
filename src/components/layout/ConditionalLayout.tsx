@@ -20,8 +20,8 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
   const shouldHaveNoLayout = noLayoutPages.some(page => pathname?.startsWith(page));
 
   if (shouldHaveNoLayout) {
-    return <any>{children}</>
-}
+    return <>{children}</>;
+  }
 
   // Default layout wrapper
   return (

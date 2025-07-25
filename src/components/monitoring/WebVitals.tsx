@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import { onCLS, onFCP, onFID, onLCP, onTTFB, onINP } from 'web-vitals';
+import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
 
 export interface WebVitalsMetric {
-  name: 'CLS' | 'FCP' | 'FID' | 'LCP' | 'TTFB' | 'INP';
+  name: 'CLS' | 'FCP' | 'LCP' | 'TTFB' | 'INP';
   value: number;
   rating: 'good' | 'needs-improvement' | 'poor';
   delta: number;
@@ -18,7 +18,6 @@ interface WebVitalsConfig {
   thresholds?: {
     CLS?: { good: number; poor: number };
     FCP?: { good: number; poor: number };
-    FID?: { good: number; poor: number };
     LCP?: { good: number; poor: number };
     TTFB?: { good: number; poor: number };
     INP?: { good: number; poor: number };
@@ -28,7 +27,6 @@ interface WebVitalsConfig {
 const defaultThresholds = {
   CLS: { good: 0.1, poor: 0.25 },
   FCP: { good: 1800, poor: 3000 },
-  FID: { good: 100, poor: 300 },
   LCP: { good: 2500, poor: 4000 },
   TTFB: { good: 800, poor: 1800 },
   INP: { good: 200, poor: 500 },
@@ -83,7 +81,6 @@ export function WebVitalsMonitor({
     // Register all Web Vitals
     onCLS(reportMetric);
     onFCP(reportMetric);
-    onFID(reportMetric);
     onLCP(reportMetric);
     onTTFB(reportMetric);
     onINP(reportMetric);
@@ -158,7 +155,6 @@ export function useWebVitals(callback: (metric: WebVitalsMetric) => void) {
 
     onCLS(handleMetric);
     onFCP(handleMetric);
-    onFID(handleMetric);
     onLCP(handleMetric);
     onTTFB(handleMetric);
     onINP(handleMetric);

@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import { notFound } from 'next/navigation';
 
@@ -56,19 +55,18 @@ export default function TutorialPage({ params }: TutorialPageProps) {
       </div>
 
       <div className="prose max-w-none">
-          <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-2xl font-semibold mb-4">Tutorial Content</h2>
           <p>{tutorial.content}</p>
           
           <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-          <h3 className="text-lg font-semibold mb-2">What you will learn:</h3>
+            <h3 className="text-lg font-semibold mb-2">What you will learn:</h3>
             <ul className="list-disc ml-6 space-y-1">
-          <li>Platform navigation and basic features</li>
+              <li>Platform navigation and basic features</li>
               <li>Creating your first project</li>
               <li>Understanding the development workflow</li>
               <li>Best practices and tips</li>
             </ul>
-          </div>
           </div>
         </div>
       </div>
