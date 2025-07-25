@@ -50,6 +50,12 @@ const nextConfig = {
     // Use SWC instead of Babel for better compatibility
     forceSwcTransforms: true,
   },
+  // Add React 19 compatibility settings
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  // Disable static optimization for problematic pages
+  generateStaticParams: async () => [],
 };
 
 export default nextConfig;

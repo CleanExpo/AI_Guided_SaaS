@@ -4,6 +4,10 @@ import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, Lock, Eye, Users } from 'lucide-react';
 
+// Force dynamic rendering to avoid React 19 SSG errors
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata: Metadata = { title: 'GDPR Compliance - AI Guided SaaS Platform',
   description: 'Learn about our GDPR compliance and data protection measures'
 };

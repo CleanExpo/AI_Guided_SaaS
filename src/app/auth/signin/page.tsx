@@ -3,6 +3,7 @@
 
 // Force dynamic rendering to avoid SSG errors
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 import React from 'react';
 import { useState } from 'react';

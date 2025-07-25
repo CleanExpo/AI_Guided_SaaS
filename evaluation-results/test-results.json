@@ -78,7 +78,7 @@
           "specs": [
             {
               "title": "Dashboard Evaluation",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -91,12 +91,20 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 19968,
-                      "errors": [],
+                      "status": "timedOut",
+                      "duration": 30935,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
                       "stdout": [
                         {
-                          "text": "Dashboard Score: 8.2/10\n"
+                          "text": "Dashboard Score: 7.8/10\n"
                         },
                         {
                           "text": "\n🎯 EVALUATION REPORT\n"
@@ -108,7 +116,7 @@
                           "text": "🎯 COMPONENT SCORES:\n"
                         },
                         {
-                          "text": "✅ Dashboard: 8.2/10\n"
+                          "text": "✅ Dashboard: 7.8/10\n"
                         },
                         {
                           "text": "⚠️ Prompts:   0/10\n"
@@ -117,13 +125,16 @@
                           "text": "❌ Folders:   0/10\n"
                         },
                         {
-                          "text": "\n🏆 Overall: 2.7/10\n\n"
+                          "text": "\n🏆 Overall: 2.6/10\n\n"
                         },
                         {
                           "text": "🚨 PRIORITY IMPROVEMENTS:\n"
                         },
                         {
                           "text": "   [CRITICAL] Folders requires immediate attention\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Improve core functionality - ensure all metrics load correctly\n"
                         },
                         {
                           "text": "   [Prompts] Enhance usability - simplify the prompt creation workflow\n"
@@ -138,14 +149,34 @@
                           "text": "   [Folders] Improve visual hierarchy and folder nesting indicators\n"
                         }
                       ],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "Navigation error for /dashboard: page.goto: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"networkidle\"\u001b[22m\n\n    at \u001b[90mD:\\AI Guided SaaS\\\u001b[39mtests\\evaluation-suite.spec.ts:354:16 {\n  name: \u001b[32m'TimeoutError'\u001b[39m,\n  [\u001b[32mSymbol(step)\u001b[39m]: {\n    stepId: \u001b[32m'pw:api@9'\u001b[39m,\n    location: {\n      file: \u001b[32m'D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts'\u001b[39m,\n      line: \u001b[33m354\u001b[39m,\n      column: \u001b[33m16\u001b[39m\n    },\n    category: \u001b[32m'pw:api'\u001b[39m,\n    title: \u001b[32m'Navigate to \"/dashboard\"'\u001b[39m,\n    apiName: \u001b[32m'page.goto'\u001b[39m,\n    params: { url: \u001b[32m'/dashboard'\u001b[39m, waitUntil: \u001b[32m'networkidle'\u001b[39m, timeout: \u001b[33m15000\u001b[39m },\n    boxedStack: \u001b[90mundefined\u001b[39m,\n    steps: [],\n    attachmentIndices: [],\n    info: TestStepInfoImpl {\n      annotations: [],\n      _testInfo: \u001b[36m[TestInfoImpl]\u001b[39m,\n      _stepId: \u001b[32m'pw:api@9'\u001b[39m,\n      skip: \u001b[36m[Function (anonymous)]\u001b[39m\n    },\n    complete: \u001b[36m[Function: complete]\u001b[39m,\n    endWallTime: \u001b[33m1753441573137\u001b[39m,\n    error: {\n      message: \u001b[32m'TimeoutError: page.goto: Timeout 15000ms exceeded.\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m,\n      stack: \u001b[32m'TimeoutError: page.goto: Timeout 15000ms exceeded.\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m +\n        \u001b[32m'\\n'\u001b[39m +\n        \u001b[32m'    at D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts:354:16'\u001b[39m,\n      cause: \u001b[90mundefined\u001b[39m\n    }\n  }\n}\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2025-07-25T10:36:14.428Z",
+                      "startTime": "2025-07-25T11:05:56.392Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-87afa--Suite-Dashboard-Evaluation-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-87afa--Suite-Dashboard-Evaluation-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-87afa--Suite-Dashboard-Evaluation-chromium\\error-context.md"
+                        }
+                      ]
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "000052f312f9a49b259e-21ba7fb98a2c3dfed254",
@@ -169,7 +200,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 15225,
+                      "duration": 24747,
                       "errors": [],
                       "stdout": [
                         {
@@ -217,7 +248,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-25T10:36:14.445Z",
+                      "startTime": "2025-07-25T11:05:56.389Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -232,7 +263,7 @@
             },
             {
               "title": "Folders Evaluation",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -245,9 +276,17 @@
                     {
                       "workerIndex": 2,
                       "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 7449,
-                      "errors": [],
+                      "status": "timedOut",
+                      "duration": 30926,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
                       "stdout": [
                         {
                           "text": "Folders Score: 8.2/10\n"
@@ -292,14 +331,34 @@
                           "text": "   [Prompts] Fix search functionality and form validation\n"
                         }
                       ],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "Navigation error for /folders: page.goto: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"networkidle\"\u001b[22m\n\n    at \u001b[90mD:\\AI Guided SaaS\\\u001b[39mtests\\evaluation-suite.spec.ts:388:16 {\n  name: \u001b[32m'TimeoutError'\u001b[39m,\n  [\u001b[32mSymbol(step)\u001b[39m]: {\n    stepId: \u001b[32m'pw:api@9'\u001b[39m,\n    location: {\n      file: \u001b[32m'D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts'\u001b[39m,\n      line: \u001b[33m388\u001b[39m,\n      column: \u001b[33m16\u001b[39m\n    },\n    category: \u001b[32m'pw:api'\u001b[39m,\n    title: \u001b[32m'Navigate to \"/folders\"'\u001b[39m,\n    apiName: \u001b[32m'page.goto'\u001b[39m,\n    params: { url: \u001b[32m'/folders'\u001b[39m, waitUntil: \u001b[32m'networkidle'\u001b[39m, timeout: \u001b[33m15000\u001b[39m },\n    boxedStack: \u001b[90mundefined\u001b[39m,\n    steps: [],\n    attachmentIndices: [],\n    info: TestStepInfoImpl {\n      annotations: [],\n      _testInfo: \u001b[36m[TestInfoImpl]\u001b[39m,\n      _stepId: \u001b[32m'pw:api@9'\u001b[39m,\n      skip: \u001b[36m[Function (anonymous)]\u001b[39m\n    },\n    complete: \u001b[36m[Function: complete]\u001b[39m,\n    endWallTime: \u001b[33m1753441573137\u001b[39m,\n    error: {\n      message: \u001b[32m'TimeoutError: page.goto: Timeout 15000ms exceeded.\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m,\n      stack: \u001b[32m'TimeoutError: page.goto: Timeout 15000ms exceeded.\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m +\n        \u001b[32m'\\n'\u001b[39m +\n        \u001b[32m'    at D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts:388:16'\u001b[39m,\n      cause: \u001b[90mundefined\u001b[39m\n    }\n  }\n}\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2025-07-25T10:36:14.429Z",
+                      "startTime": "2025-07-25T11:05:56.391Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-05eb0-on-Suite-Folders-Evaluation-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-05eb0-on-Suite-Folders-Evaluation-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-05eb0-on-Suite-Folders-Evaluation-chromium\\error-context.md"
+                        }
+                      ]
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "000052f312f9a49b259e-2dff75f461ac626b2842",
@@ -314,11 +373,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-07-25T10:36:13.624Z",
-    "duration": 21370.014,
-    "expected": 3,
+    "startTime": "2025-07-25T11:05:53.602Z",
+    "duration": 36111.41,
+    "expected": 1,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 2,
     "flaky": 0
   }
 }
