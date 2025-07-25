@@ -92,7 +92,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 12227,
+                      "duration": 12069,
                       "errors": [],
                       "stdout": [
                         {
@@ -140,7 +140,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-25T03:05:23.875Z",
+                      "startTime": "2025-07-25T03:05:54.655Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -169,7 +169,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 7013,
+                      "duration": 6618,
                       "errors": [],
                       "stdout": [
                         {
@@ -217,7 +217,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-25T03:05:23.891Z",
+                      "startTime": "2025-07-25T03:05:54.668Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -246,7 +246,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 6983,
+                      "duration": 6696,
                       "errors": [],
                       "stdout": [
                         {
@@ -294,7 +294,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-07-25T03:05:23.909Z",
+                      "startTime": "2025-07-25T03:05:54.665Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -314,8 +314,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-07-25T03:05:23.152Z",
-    "duration": 13131.358,
+    "startTime": "2025-07-25T03:05:53.953Z",
+    "duration": 12947.34,
     "expected": 3,
     "skipped": 0,
     "unexpected": 0,
