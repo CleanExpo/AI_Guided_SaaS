@@ -174,8 +174,6 @@ function PromptsPageContent() {
   );
 }
 
-}
-
 export default function PromptsPage() {
   return (
     <PageErrorBoundary>
