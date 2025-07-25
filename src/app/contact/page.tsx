@@ -37,7 +37,7 @@ export default function ContactPage() {
                   </div>
                   <Input placeholder="Email Address" type="email" />
                   <Input placeholder="Company" />
-                  <Textarea placeholder="How can we help you?" rows={4/>
+                  <Textarea placeholder="How can we help you?" rows={4} />
                   <Button className="w-full">Send Message</Button>
                 </form>
               </CardContent>

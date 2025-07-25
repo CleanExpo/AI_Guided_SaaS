@@ -124,7 +124,7 @@ export default function DocPage({ params }: { params: { slug: string } }) {
         
         <Card>
           <CardContent className="prose prose-lg max-w-none p-8">
-            <div dangerouslySetInnerHTML={{ __html: doc.content }/>
+            <div dangerouslySetInnerHTML={{ __html: doc.content }} />
           </CardContent>
         </Card>
         

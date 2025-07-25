@@ -7,6 +7,8 @@ import { Providers } from '@/components/providers';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
 import { Toaster } from '@/components/ui/toaster';
 import { WhiteLabelProvider, WhiteLabelHead } from '@/components/white-label/WhiteLabelProvider';
+import { ErrorBoundary } from '@/components/error/ErrorBoundary';
+import { WebVitalsMonitor } from '@/components/monitoring/WebVitals';
 
 const inter = Inter({ subsets: ['latin']
     });
@@ -86,12 +88,15 @@ export default function RootLayout({
         <WhiteLabelProvider>
           <WhiteLabelHead />
           <Providers>
-            <div className="min-h-screen bg-background flex flex-col">
-              <ConditionalLayout>
-                {children}
-              </ConditionalLayout>
-              <Toaster />
-            </div>
+            <ErrorBoundary>
+              <WebVitalsMonitor />
+              <div className="min-h-screen bg-background flex flex-col">
+                <ConditionalLayout>
+                  {children}
+                </ConditionalLayout>
+                <Toaster />
+              </div>
+            </ErrorBoundary>
           </Providers>
         </WhiteLabelProvider>
       </body>

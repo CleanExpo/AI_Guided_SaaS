@@ -51,7 +51,7 @@ export default function HelpPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-          <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Help & Support</h1>
@@ -67,6 +67,7 @@ export default function HelpPage() {
               className="pl-10"
             />
           </div>
+        </div>
 
         {/* Support Options */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
@@ -88,20 +89,24 @@ export default function HelpPage() {
 
         {/* FAQ Section */}
         <Card>
-          <CardHeader></CardHeader>
+          <CardHeader>
             <CardTitle className="flex items-center">
-          <HelpCircle className="h-6 w-6 mr-2"   />
+              <HelpCircle className="h-6 w-6 mr-2" />
               Frequently Asked Questions
             </CardTitle>
           </CardHeader>
           <CardContent>
-          <div className="space-y-6">
+            <div className="space-y-6">
               {faqs.map((faq, index) => (
                 <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
-          <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
                   <p className="text-gray-600">{faq.answer}</p>
                 </div>
               ))}
             </div>
-  )
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
 }

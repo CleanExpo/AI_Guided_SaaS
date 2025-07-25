@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: 'GDPR Compliance - AI Guided SaaS Pla
 export default function GDPRPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-          <div className="container mx-auto px-4 max-w-4xl">
+      <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">GDPR Compliance</h1>
           <p className="text-lg text-gray-600">
@@ -20,7 +20,7 @@ export default function GDPRPage() {
         </div>
 
         <div className="space-y-8">
-          <Card></Card>
+          <Card>
             <CardHeader>
           <CardTitle className="flex items-center">
                 <Shield className="h-6 w-6 mr-2 text-blue-600"   />
@@ -65,9 +65,9 @@ export default function GDPRPage() {
           </Card>
 
           <Card>
-          <CardHeader></CardHeader>
+            <CardHeader>
               <CardTitle className="flex items-center">
-          <Lock className="h-6 w-6 mr-2 text-blue-600"   />
+                <Lock className="h-6 w-6 mr-2 text-blue-600" />
                 Data Security
               </CardTitle>
             </CardHeader>
@@ -86,9 +86,9 @@ export default function GDPRPage() {
           </Card>
 
           <Card>
-          <CardHeader></CardHeader>
+            <CardHeader>
               <CardTitle className="flex items-center">
-          <Eye className="h-6 w-6 mr-2 text-blue-600"   />
+                <Eye className="h-6 w-6 mr-2 text-blue-600" />
                 Data Processing
               </CardTitle>
             </CardHeader>
@@ -108,7 +108,7 @@ export default function GDPRPage() {
           </Card>
 
           <Card>
-          <CardContent className="p-6">
+            <CardContent className="p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Contact Our Data Protection Officer</h3>
               <p className="text-gray-600 mb-4">
                 If you have any questions about our GDPR compliance or wish to exercise your rights, 
@@ -119,5 +119,10 @@ export default function GDPRPage() {
                   dpo@aiguidedsaas.com
                 </a>
               </p>
-  )
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
 }

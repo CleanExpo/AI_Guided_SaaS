@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FolderPlus, Folder, File, ChevronRight, ChevronDown } from 'lucide-react';
+import { PageErrorBoundary } from '@/components/error/ErrorBoundary';
 
 interface FolderItem {
   id: string;
@@ -14,7 +15,7 @@ interface FolderItem {
   children?: FolderItem[];
 }
 
-function FoldersPage() {
+function FoldersPageContent() {
   const [folders, setFolders] = useState<FolderItem[]>([
     { 
       id: '1', 
@@ -203,4 +204,12 @@ function FoldersPage() {
   );
 }
 
-export default React.memo(FoldersPage);
+}
+
+export default function FoldersPage() {
+  return (
+    <PageErrorBoundary>
+      <FoldersPageContent />
+    </PageErrorBoundary>
+  );
+}

@@ -90,11 +90,11 @@ export default function FormBuilderPage() {
                           <textarea 
                             className="w-full p-2 border rounded" 
                             placeholder={`Enter ${element.label.toLowerCase()}`}
-                            rows={3/>
+                            rows={3} />
                         ) : (
                           <Input 
                             type={element.type} 
-                            placeholder={`Enter ${element.label.toLowerCase()}`/>
+                            placeholder={`Enter ${element.label.toLowerCase()}`} />
                         )}
                       </div>
                     ))
@@ -121,7 +121,7 @@ export default function FormBuilderPage() {
                     <textarea 
                       className="w-full p-2 border rounded" 
                       placeholder="Form description"
-                      rows={3/>
+                      rows={3} />
                   </div>
                   <Button className="w-full">Generate Form Code</Button>
                 </div>

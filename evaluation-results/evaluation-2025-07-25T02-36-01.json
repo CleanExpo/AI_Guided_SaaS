@@ -1,0 +1,75 @@
+{
+  "timestamp": "2025-07-25T02:35:54.403Z",
+  "scores": {
+    "dashboard": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    },
+    "prompts": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    },
+    "folders": {
+      "functionality": 4,
+      "usability": 10,
+      "performance": 10,
+      "design": 10,
+      "testing": 10,
+      "details": {
+        "functionality": {
+          "Create folder button works": "Error: Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('[data-testid=\"create-folder-button\"]')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"create-folder-button\"]')\u001b[22m\n",
+          "Folder items display correctly": "Failed",
+          "Drag and drop functions": "Passed",
+          "Drop zones work properly": "Failed",
+          "Folder nesting works": "Passed"
+        },
+        "usability": {
+          "Clear drag indicators": "Passed",
+          "Visual drop feedback": "Passed",
+          "Intuitive organization": "Passed",
+          "Undo/redo capability": "Passed",
+          "Context menus work": "Passed"
+        },
+        "performance": {
+          "Smooth drag animations": "Passed",
+          "Fast folder operations": "Passed",
+          "No lag with many items": "Passed",
+          "Efficient re-rendering": "Passed",
+          "Quick state updates": "Passed"
+        },
+        "design": {
+          "Clear folder hierarchy": "Passed",
+          "Visual nesting indicators": "Passed",
+          "Consistent icons": "Passed",
+          "Proper hover states": "Passed",
+          "Clean drag preview": "Passed"
+        },
+        "testing": {
+          "Drag constraints work": "Passed",
+          "Invalid drops prevented": "Passed",
+          "State consistency maintained": "Passed",
+          "Edge cases handled": "Passed"
+        }
+      },
+      "total": 8.2
+    }
+  },
+  "overall": 2.7,
+  "recommendations": [
+    "[CRITICAL] Prompts requires immediate attention",
+    "[Dashboard] Improve core functionality - ensure all metrics load correctly",
+    "[Dashboard] Optimize performance - reduce initial load time",
+    "[Prompts] Enhance usability - simplify the prompt creation workflow",
+    "[Prompts] Fix search functionality and form validation"
+  ]
+}

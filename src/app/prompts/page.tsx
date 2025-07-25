@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
+import { PageErrorBoundary } from '@/components/error/ErrorBoundary';
 
 interface Prompt {
   id: string;
@@ -14,7 +15,7 @@ interface Prompt {
   createdAt: Date;
 }
 
-function PromptsPage() {
+function PromptsPageContent() {
   const [prompts, setPrompts] = useState<Prompt[]>([
     { id: '1', title: 'Welcome Message', content: 'Hello! How can I help you today?', createdAt: new Date() },
     { id: '2', title: 'Error Handler', content: 'I apologize for the error. Let me help you resolve this.', createdAt: new Date() }
@@ -173,4 +174,12 @@ function PromptsPage() {
   );
 }
 
-export default React.memo(PromptsPage);
+}
+
+export default function PromptsPage() {
+  return (
+    <PageErrorBoundary>
+      <PromptsPageContent />
+    </PageErrorBoundary>
+  );
+}

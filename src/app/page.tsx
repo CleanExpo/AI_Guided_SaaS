@@ -5,6 +5,7 @@ import React from 'react';
 import { useSession } from 'next-auth/react';
 import LandingPageProduction from '@/components/LandingPageProduction';
 import Dashboard from '@/components/Dashboard';
+import { PageErrorBoundary } from '@/components/error/ErrorBoundary';
 import { useEffect, useState } from 'react';
 
 export default function HomePage() {
@@ -12,8 +13,8 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-}, []);
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
     return (
@@ -34,9 +35,9 @@ export default function HomePage() {
     );
   }
 
-  if (session) {
-    return <Dashboard />;
-  }
-
-  return <LandingPageProduction />;
+  return (
+    <PageErrorBoundary>
+      {session ? <Dashboard /> : <LandingPageProduction />}
+    </PageErrorBoundary>
+  );
 }

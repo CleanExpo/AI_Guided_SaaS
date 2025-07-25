@@ -38,7 +38,7 @@ export default function PressPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-          <div className="container mx-auto px-4 max-w-6xl">
+      <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Press & Media</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -49,69 +49,81 @@ export default function PressPage() {
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Press Releases */}
           <div className="lg:col-span-2">
-          <Card></Card>
+            <Card>
               <CardHeader>
-          <CardTitle>Latest Press Releases</CardTitle>
+                <CardTitle>Latest Press Releases</CardTitle>
               </CardHeader>
               <CardContent>
-          <div className="space-y-6">
+                <div className="space-y-6">
                   {pressReleases.map((release, index) => (
                     <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
-          <div className="flex items-start justify-between mb-2">
+                      <div className="flex items-start justify-between mb-2">
                         <Badge variant="outline">{release.category}</Badge>
                         <div className="flex items-center text-sm text-gray-500">
-          <Calendar className="h-4 w-4 mr-1"   />
+                          <Calendar className="h-4 w-4 mr-1" />
                           {release.date}
                         </div>
+                      </div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">
                         {release.title}
                       </h3>
                       <p className="text-gray-600 mb-3">{release.excerpt}</p>
-                      <Button variant="outline" size="sm"></Button>
+                      <Button variant="outline" size="sm">
                         Read Full Release
-                        <ExternalLink className="ml-2 h-4 w-4"  />
-          </Button>
+                        <ExternalLink className="ml-2 h-4 w-4" />
+                      </Button>
                     </div>
                   ))}
                 </div>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Media Kit */}
           <div>
-          <Card></Card>
+            <Card>
               <CardHeader>
-          <CardTitle>Media Kit</CardTitle>
+                <CardTitle>Media Kit</CardTitle>
               </CardHeader>
               <CardContent>
-          <div className="space-y-4">
+                <div className="space-y-4">
                   {mediaKit.map((item, index) => (
                     <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
-          <div></div>
+                      <div>
                         <p className="font-medium text-gray-900">{item.name}</p>
                         <p className="text-sm text-gray-500">{item.type} • {item.size}</p>
                       </div>
                       <Button variant="outline" size="sm">
-          <Download className="h-4 w-4"   />
+                        <Download className="h-4 w-4" />
                       </Button>
                     </div>
                   ))}
                 </div>
                 <div className="mt-6 pt-4 border-t">
-          <Button className="w-full">
+                  <Button className="w-full">
                     Download Complete Media Kit
                   </Button>
                 </div>
+              </CardContent>
+            </Card>
 
             {/* Contact */}
             <Card className="mt-6">
-          <CardHeader></CardHeader>
+              <CardHeader>
                 <CardTitle>Media Contact</CardTitle>
               </CardHeader>
               <CardContent>
-          <div className="space-y-2">
+                <div className="space-y-2">
                   <p className="font-medium">Sarah Johnson</p>
                   <p className="text-gray-600">Head of Communications</p>
                   <p className="text-gray-600">press@aiguidedsaas.com</p>
                   <p className="text-gray-600">+1 (555) 123-4567</p>
                 </div>
-  )
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
