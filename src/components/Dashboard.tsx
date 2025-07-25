@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { usePWA } from '@/hooks/usePWA';
+import MobileDashboard from '@/components/MobileDashboard';
+import { useAnalytics, usePerformanceTracking } from '@/hooks/useAnalytics';
 import { 
   BarChart3, 
   Users, 
@@ -37,6 +40,14 @@ export default function Dashboard() {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [lastRefresh, setLastRefresh] = useState(new Date());
   const [deploymentStatus, setDeploymentStatus] = useState('ready');
+  const { isMobile } = usePWA();
+  const { trackFeature, trackConversion } = useAnalytics();
+  usePerformanceTracking('Dashboard');
+
+  // Use mobile dashboard for mobile devices
+  if (isMobile) {
+    return <MobileDashboard />;
+  }
 
   // Speed-focused metrics for Sam
   const stats = [
@@ -144,8 +155,10 @@ export default function Dashboard() {
 
   const handleQuickDeploy = () => {
     setDeploymentStatus('deploying');
+    trackFeature('dashboard', 'quick_deploy', 'initiated');
     setTimeout(() => {
       setDeploymentStatus('deployed');
+      trackConversion('quick_deploy_success');
     }, 3000);
   };
 
@@ -263,7 +276,7 @@ export default function Dashboard() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {quickActions.map((action) => (
-                    <Link href={action.action} key={action.title}>
+                    <Link href={action.action} key={action.title} onClick={() => trackFeature('dashboard', 'quick_action', action.title)}>
                       <div className="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
                         <div className="flex items-start justify-between mb-2">
                           <div className={`w-10 h-10 ${action.color} rounded-lg flex items-center justify-center`}>

@@ -1,11 +1,11 @@
 {
-  "name": "AI Guided SaaS Platform",
-  "short_name": "AGS Platform",
-  "description": "Complete AI-powered SaaS development platform with intelligent guidance and automation",
+  "name": "AI Guided SaaS - Ship Fast",
+  "short_name": "AI SaaS",
+  "description": "Ship Your AI SaaS This Weekend - Production-ready boilerplate with zero vendor lock-in",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
   "orientation": "portrait-primary",
   "categories": ["productivity", "developer", "business"],
   "lang": "en",
@@ -32,10 +32,10 @@
   ],
   "shortcuts": [
     {
-      "name": "UI Builder",
-      "short_name": "Builder",
-      "description": "Build and customize components",
-      "url": "/ui-builder",
+      "name": "Quick Deploy",
+      "short_name": "Deploy",
+      "description": "Deploy to production instantly",
+      "url": "/deploy",
       "icons": [
         {
           "src": "/icon-192.png",
@@ -44,10 +44,10 @@
       ]
     },
     {
-      "name": "Analytics",
-      "short_name": "Analytics",
-      "description": "View performance insights",
-      "url": "/analytics",
+      "name": "Speed Dashboard",
+      "short_name": "Dashboard",
+      "description": "Monitor your SaaS metrics",
+      "url": "/dashboard",
       "icons": [
         {
           "src": "/icon-192.png",
@@ -56,10 +56,22 @@
       ]
     },
     {
-      "name": "Templates",
-      "short_name": "Templates",
-      "description": "Browse project templates",
-      "url": "/templates",
+      "name": "AI Chat",
+      "short_name": "AI Chat",
+      "description": "Access AI assistant",
+      "url": "/chat",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "API Keys",
+      "short_name": "API Keys",
+      "description": "Manage your API keys",
+      "url": "/settings/api-keys",
       "icons": [
         {
           "src": "/icon-192.png",
@@ -67,5 +79,27 @@
         }
       ]
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "label": "Speed Dashboard - Desktop view"
+    },
+    {
+      "src": "/screenshots/dashboard-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "label": "Speed Dashboard - Mobile view"
+    },
+    {
+      "src": "/screenshots/deploy-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "label": "Quick Deploy - Mobile view"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
 }

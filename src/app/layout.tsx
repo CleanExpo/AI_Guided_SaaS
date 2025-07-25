@@ -6,13 +6,15 @@ import './globals.css';
 import { Providers } from '@/components/providers';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
 import { Toaster } from '@/components/ui/toaster';
+import { WhiteLabelProvider, WhiteLabelHead } from '@/components/white-label/WhiteLabelProvider';
 
 const inter = Inter({ subsets: ['latin']
     });
 
-export const metadata: Metadata={ title: 'AI Guided SaaS Platform',
-  description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation',
-  keywords: ['AI', 'SaaS', 'Development', 'Automation', 'Platform'],
+export const metadata: Metadata = {
+  title: 'AI Guided SaaS - Ship Your AI SaaS This Weekend',
+  description: 'Production-ready Next.js boilerplate with AI hooks. Zero vendor lock-in. Ship in hours, not months.',
+  keywords: ['AI', 'SaaS', 'Boilerplate', 'Next.js', 'Ship Fast', 'MVP', 'Starter Kit'],
   icons: { icon: [
       {
         url: '/favicon.ico',
@@ -64,24 +66,35 @@ export const metadata: Metadata={ title: 'AI Guided SaaS Platform',
   }
 };
 
-export const viewport: Viewport={ width: 'device-width',
-  initialScale: 1
-  themeColor: '#1e40af',
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#f97316',
   colorScheme: 'light dark'
 };
 
 export default function RootLayout({
-  children }: { children: React.ReactNode
-    }) {
+  children
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-          <body className={inter.className}></body>
-        <Providers>
-          <div className="min-h-screen bg-background flex flex-col">
-            <ConditionalLayout></ConditionalLayout>
-              {children}
-            </ConditionalLayout>
-            <Toaster  />
-          </div>
-  )
+      <body className={inter.className}>
+        <WhiteLabelProvider>
+          <WhiteLabelHead />
+          <Providers>
+            <div className="min-h-screen bg-background flex flex-col">
+              <ConditionalLayout>
+                {children}
+              </ConditionalLayout>
+              <Toaster />
+            </div>
+          </Providers>
+        </WhiteLabelProvider>
+      </body>
+    </html>
+  );
 }
