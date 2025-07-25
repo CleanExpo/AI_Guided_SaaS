@@ -202,7 +202,7 @@
     "react-is": "^18.2.0",
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^3.0.3",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-syntax-highlighter": "^5.8.0",
     "recharts": "^3.1.0",
     "redis": "^5.6.1",
     "socket.io": "^4.8.1",
@@ -211,6 +211,10 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.8.3",
+    "@types/node": "^20.19.9",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "uuid": "^11.1.0",
     "web-vitals": "^5.0.3",
     "winston": "^3.17.0",
@@ -232,9 +236,6 @@
     "@types/inquirer": "^9.0.8",
     "@types/jest": "^30.0.0",
     "@types/next-auth": "^3.13.0",
-    "@types/node": "^20.19.9",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
@@ -255,8 +256,7 @@
     "prismjs": "^1.30.0",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
-    "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "tsx": "^4.20.3"
   },
   "engines": {
     "node": ">=20.0.0"
