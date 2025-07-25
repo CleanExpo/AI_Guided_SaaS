@@ -87,6 +87,9 @@ npm run serena:start           # Start serena semantic search server
 
 ### Tmux Session Management
 ```bash
+# IMPORTANT: Enable permissions for MCP servers in Tmux
+# Add --dangerously-skip-permissions flag when starting MCP servers
+
 # Frontend Team Session
 tmux new-session -d -s Task-frontend
 tmux rename-window -t Task-frontend:0 'Frontend-PM'
@@ -98,6 +101,10 @@ tmux new-session -d -s Task-backend
 tmux rename-window -t Task-backend:0 'Backend-PM'
 tmux new-window -t Task-backend:1 'Backend-Dev'
 tmux new-window -t Task-backend:2 'Backend-Server'
+
+# MCP Server Sessions with permissions
+tmux new-session -d -s mcp-servers
+tmux send-keys -t mcp-servers:0 'npm run mcp:start -- --dangerously-skip-permissions' C-m
 ```
 
 ## 🏛️ Architecture Overview
@@ -144,15 +151,18 @@ The system combines three paradigms:
 
 ## 🚨 Critical Issues & Solutions
 
-### Vercel Deployment Issues (RESOLVED)
+### Vercel Deployment Issues (IN PROGRESS)
 **Common Build Failures**:
 1. **Module Resolution Errors**: UI components exist but fail to resolve
    - Solution: Created UI component index file (`src/components/ui/index.ts`)
    - Fixed syntax errors in `toast.tsx`, `SemanticSearchService.ts`, `logger.ts`, `middleware.ts`
+   - CURRENT ISSUE: "@/components/ui/button" modules not found despite index.ts existing
+   - Moved tailwindcss from devDependencies to dependencies
 
 2. **Missing Dependencies**:
    - Added `@babel/runtime` for next-auth compatibility
    - Added `@supabase/supabase-js` for Supabase adapter
+   - Moved `tailwindcss` to runtime dependencies
 
 3. **Node Version Mismatch**:
    - Vercel requires Node 20+ (local may be using v18)
