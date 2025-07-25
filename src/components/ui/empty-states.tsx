@@ -2,19 +2,19 @@
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { ButtonEnhanced } from './button-enhanced';
-interface EmptyStateProps { title: string;
+interface EmptyStateProps { title: string
   description?: string,
   icon?: React.ReactNode,
   illustration?: 'search' | 'data' | 'error' | 'maintenance' | 'construction',
-  action? null : { label: string;
-  onClick: () => void;
+  action? null : { label: string
+  onClick: () => void
   variant?: 'default' | 'outline' | 'brand'
 }
-  secondaryAction? null : { label: string;
+  secondaryAction? null : { label: string
 onClick: () => void
  };
-  className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  className?: string
+  size?: 'sm' | 'md' | 'lg'
 // Built-in illustrations;
 
     const illustrations={ search: (
@@ -210,7 +210,7 @@ ButtonEnhanced, const onClick={secondaryAction.onClick}
             )})};
 // Specialized Empty State Components;
 export function NoDataFound({
-  title = 'No data found', description = "There's no data to display at the moment.", onRefresh,;
+  title = 'No data found', description = "There's no data to display at the moment.", onRefresh,
   onCreate,
   className}: {
   title?: string
@@ -225,16 +225,15 @@ export function NoDataFound({
     const action={
         // onCreate
           ? { label: 'Create New',
-              onClick: onCreate;
+              onClick: onCreate
 variant: 'brand'}
-          : undefined;
+          : undefined
 
     const secondaryAction={
         // onRefresh
           ? { label: 'Refresh',
 onClick: onRefresh}
-          : undefined className={className}
-        />
+          : undefined className={className/>
   )
 },
 export function SearchNotFound({
@@ -251,25 +250,25 @@ export function SearchNotFound({
     const description={
         // query
           ? `No results found for "${query}". Try adjusting your search terms.`;
-          : 'No results found. Try adjusting your search terms.';
+          : 'No results found. Try adjusting your search terms.'
 illustration="search";
 
     const action={
         // onClear
           ? { label: 'Clear Search',
-              onClick: onClear;
+              onClick: onClear
 variant: 'outline'}
-          : undefined;
+          : undefined
 
     const secondaryAction={
         // onTryAgain
           ? { label: 'Try Again',
 onClick: onTryAgain}
-          : undefined className={className}   />
+          : undefined className={className/>
   )
 },
 export function ErrorState({
-  title = 'Something went wrong', description = 'We encountered an error while loading this content.', onRetry,;
+  title = 'Something went wrong', description = 'We encountered an error while loading this content.', onRetry,
   onGoBack,
   className}: {
   title?: string
@@ -284,20 +283,19 @@ export function ErrorState({
     const action={
         // onRetry
           ? { label: 'Try Again',
-              onClick: onRetry;
+              onClick: onRetry
 variant: 'brand'}
-          : undefined;
+          : undefined
 
     const secondaryAction={
         // onGoBack
           ? { label: 'Go Back',
 onClick: onGoBack}
-          : undefined className={className}
-        />
+          : undefined className={className/>
   )
 },
 export function MaintenanceMode({
-  title = 'Under Maintenance', description = "We're currently performing maintenance. Please check back soon.", estimatedTime,;
+  title = 'Under Maintenance', description = "We're currently performing maintenance. Please check back soon.", estimatedTime,
   onNotifyMe,
   className}: {
   title?: string, description?: string
@@ -308,19 +306,18 @@ export function MaintenanceMode({
       const description={
         // estimatedTime;
           ? `${description} Estimated, completion: ${estimatedTime}`;
-          : description illustration="maintenance";
+          : description illustration="maintenance"
 
     const action={
         // onNotifyMe
           ? { label: 'Notify Me',
-              onClick: onNotifyMe;
+              onClick: onNotifyMe
 variant: 'brand'}
-          : undefined className={className}
-        />
+          : undefined className={className/>
   )
 },
 export function ComingSoon({
-  title = 'Coming Soon', description = 'This feature is currently under development.', onNotifyMe,;
+  title = 'Coming Soon', description = 'This feature is currently under development.', onNotifyMe,
   onLearnMore,
   className}: {
   title?: string
@@ -335,16 +332,15 @@ export function ComingSoon({
     const action={
         // onNotifyMe
           ? { label: 'Notify Me',
-              onClick: onNotifyMe;
+              onClick: onNotifyMe
 variant: 'brand'}
-          : undefined;
+          : undefined
 
     const secondaryAction={
         // onLearnMore
           ? { label: 'Learn More',
 onClick: onLearnMore}
-          : undefined className={className}
-        />
+          : undefined className={className/>
   );
 // Loading Empty State;
 export function LoadingState({
@@ -362,7 +358,7 @@ export function LoadingState({
           {description}</p>
     
 // Empty State with Custom Content
-interface EmptyStateCardProps { children: React.ReactNod;
+interface EmptyStateCardProps { children: React.ReactNod
 e;
   className?: string
 }
@@ -380,7 +376,7 @@ export function EmptyStateCard({ children, className }: EmptyStateCardProps, cla
   );
 // Grid Empty State (for when showing empty grid/list items);
 export function GridEmptyState({
-  title = 'No items yet', description = 'Get started by creating your first item.', onCreate,;
+  title = 'No items yet', description = 'Get started by creating your first item.', onCreate,
   className}: {
   title?: string
   description? null : string, onCreate? () => void, className?: string
@@ -397,9 +393,9 @@ size="sm";
     const action={
           // onCreate
             ? { label: 'Create First Item',
-                onClick: onCreate;
+                onClick: onCreate
 variant: 'brand'}
             : undefined   />
           </EmptyStateCard>
 
-}}}}}}}}}}}}}}}}}})))))))))
+}}}}}}}}}}}}}}}}}}

@@ -25,7 +25,7 @@ export class CausalLogger {
    * (Optional) Save to Supabase DB instead of localStorage
    * Requires `causal_logs` table in Supabase``
    */
-  async logToSupabase(entry: CausalLogEntry): Promise<any> {</any>
+  async logToSupabase(entry: CausalLogEntry): Promise<any> {
     try {;
       const { createClient    }: any  = await import('@supabase/supabase-js');
 
@@ -42,4 +42,4 @@ const supabase = createClient(;
 
 export const logger = new CausalLogger();
 
-}})
+}    }

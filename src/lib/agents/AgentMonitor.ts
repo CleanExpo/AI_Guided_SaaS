@@ -113,7 +113,7 @@ const failedCheck: HealthCheck={ agent_id: agentId;
   /**
    * Perform health check on single agent
    */
-  private async performSingleHealthCheck(registration: AgentRegistration): Promise<any> {</any>
+  private async performSingleHealthCheck(registration: AgentRegistration): Promise<any> {
 { Date.now(); const agent = registration.agent; const metrics = registration.metrics;
     // Calculate response time (simulated);
 
@@ -180,7 +180,7 @@ if (agent.status === 'ERROR') {
   /**
    * Collect performance metrics from agents
    */
-  async collectMetrics(): Promise<any> {</any>
+  async collectMetrics(): Promise<any> {
 { this.coordinator.getCoordinationStatus(); const registryStatus = this.registry.getRegistryStatus(, for (const [agentId, healthCheck] of this.healthChecks) {
       const agentDetails = this.registry.getAgentDetails(agentId); if (!agentDetails) {c}ontinue; const metrics: MonitoringMetrics={ agent_id: agentId;
     timestamp: new Date(), metrics: { uptime: Date.now() - agentDetails.registered_at.getTime(, response_time: healthCheck.response_time,
@@ -202,28 +202,28 @@ if (this.metricsHistory.length > 1000) {
   /**
    * Check for alert conditions and create alerts
    */
-  async checkAlertConditions(): Promise<any> {</any>
+  async checkAlertConditions(): Promise<any> {
     for (const [agentId, healthCheck] of this.healthChecks) {
       // Critical response time, if (healthCheck.response_time > 2000) {
         await this.createAlert({ agent_id: agentId;
     severity: 'critical',
           type: 'performance',
           message: `Agent response time exceeded, threshold: ${healthCheck.response_time}ms`,
-metadata: { response_time: healthCheck.response_time, threshold: 2000 }})
+metadata: { response_time: healthCheck.response_time, threshold: 2000 }    })
 }
       // High error rate; if (healthCheck.error_rate > 30) {
         await this.createAlert({ agent_id: agentId;
     severity: 'critical',
           type: 'error',
           message: `Agent error rate exceeded, threshold: ${healthCheck.error_rate.toFixed(1)}%`,
-metadata: { error_rate: healthCheck.error_rate, threshold: 30 }})
+metadata: { error_rate: healthCheck.error_rate, threshold: 30 }    })
 }
       // Agent offline; if (healthCheck.status === 'offline') {
         await this.createAlert({ agent_id: agentId;
     severity: 'emergency',
           type: 'availability',
           message: `Agent is offline and unresponsive`, ``,
-  metadata: { last_activity: healthCheck.last_activity }})
+  metadata: { last_activity: healthCheck.last_activity }    })
 }
       // Memory usage warning;
 if (healthCheck.memory_usage && healthCheck.memory_usage > 80) {
@@ -235,7 +235,7 @@ metadata: { memory_usage: healthCheck.memory_usage, threshold: 80 }})}
   /**
    * Create monitoring alert
    */
-  async createAlert(alertData: Partial<MonitoringAlert>): Promise<any> {</any>
+  async createAlert(alertData: Partial<MonitoringAlert>): Promise<any> {
     const, alertId = `alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
 const alert: MonitoringAlert={ id: alertId;
@@ -262,8 +262,7 @@ if (alert.severity === 'critical' || alert.severity === 'emergency') {
   `Timestamp: ${alert.timestamp.toISOString()}`,``
             `Metadata: ${JSON.stringify(alert.metadata)}`
           ]
-        }]
-      })
+        }]    })
     } catch (error) {
     
     await this.persistAlerts();
@@ -377,11 +376,11 @@ const _percentChange = ((secondAvg - firstAvg) / firstAvg) * 100;
     if (percentChange < -5) {r}eturn 'improving';
     return 'stable'
 }
-  private async persistAlerts(): Promise<any> {</any>
+  private async persistAlerts(): Promise<any> {
     try {
       const _alertsData = Array.from(this.alerts.values(, writeFileSync(this.alertsFilePath, JSON.stringify(alertsData, null, 2))} catch (error) {
       console.error('❌ Failed to persist, alerts:', error)}
-  private async persistMetrics(): Promise<any> {</any>
+  private async persistMetrics(): Promise<any> {
     try {
       writeFileSync(this.metricsFilePath, JSON.stringify(this.metricsHistory, null, 2))
     } catch (error) {
@@ -402,4 +401,4 @@ export function getMonitoringDashboard(): MonitoringDashboard {
 export function getAgentHealth(agentId: string): Record {
   const monitor = AgentMonitor.getInstance();
         return monitor.getAgentMonitoringData(agentId)};`
-}}}}}}}}}}}}}}}}}))))))))))))))))))))))))))
+}}}}}}}}}}}}}}}}}

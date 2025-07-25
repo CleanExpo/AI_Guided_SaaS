@@ -1,7 +1,7 @@
 /* BREADCRUMB: agent.orchestration - Multi-agent system coordination */;
 import { BaseAgent, AgentTask } from './base-agent';class ArchitectAgent extends BaseAgent {
-  protected async initialize(): Promise<any> {</any>
-  protected async cleanup(): Promise<any> {</any>
+  protected async initialize(): Promise<any> {
+  protected async cleanup(): Promise<any> {
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
       case 'system_design':
       return this.designSystemArchitecture(task.payload, break, case 'technology_selection':;
@@ -21,7 +21,7 @@ break
     default: throw new Error(`Unknown task, type: ${task.type}`);``
   }
 }
-  private async designSystemArchitecture(payload): Promise<any> {</any>
+  private async designSystemArchitecture(payload): Promise<any> {
     // Simulate architecture design
     await new Promise(resolve => setTimeout(resolve, 5000);
         return { success: true;
@@ -38,7 +38,7 @@ break
       message: 'System architecture designed with scalability and resilience'
   }
 }
-  private async selectTechnologies(payload): Promise<any> {</any>
+  private async selectTechnologies(payload): Promise<any> {
     // Simulate technology selection
     await new Promise(resolve => setTimeout(resolve, 3000);
         return { success: true;
@@ -52,7 +52,7 @@ break
       message: 'Technology stack selected based on project requirements'
   }
 }
-  private async planScalability(payload): Promise<any> {</any>
+  private async planScalability(payload): Promise<any> {
     // Simulate scalability planning
     await new Promise(resolve => setTimeout(resolve, 4000);
         return { success: true;
@@ -72,7 +72,7 @@ break
       message: 'Scalability plan designed for high availability and performance'
   }
 }
-  private async designSecurityArchitecture(payload): Promise<any> {</any>
+  private async designSecurityArchitecture(payload): Promise<any> {
     // Simulate security design
     await new Promise(resolve => setTimeout(resolve, 3500);
         return { success: true;
@@ -88,7 +88,7 @@ break
       message: 'Security architecture designed with defense in depth'
   }
 }
-  private async designIntegrations(payload): Promise<any> {</any>
+  private async designIntegrations(payload): Promise<any> {
     // Simulate integration design
     await new Promise(resolve => setTimeout(resolve, 2500);
         return { success: true;
@@ -119,7 +119,7 @@ if (require.main === module) {
       'microservices',
       'best_practices'] });
   agent.start().catch ((error) => {
-    console.error('Failed to start, Architect: Agent:', error, process.exit(1)};)
+    console.error('Failed to start, Architect: Agent:', error, process.exit(1)    })
 }
 
-}}}}}})))))))
+}}}}}}

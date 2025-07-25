@@ -78,10 +78,12 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({</BuilderSto
   loadProject: () =>  {
     if (typeof window !== 'undefined') {;
       const saved = localStorage.getItem('ai_builder_project', if (saved) {;
-        const parsed = JSON.parse(saved, set({ components: parsed, selectedId: null };);
+        const parsed = JSON.parse(saved, set({ components: parsed, selectedId: null
+    });
         alert('Project loaded successfully!')
 } else {
         alert('No saved project found!')},
-  reset: () => set({ components: [] as any[], selectedId: null })}));
+  reset: () => set({ components: [] as any[], selectedId: null
+    })}));
 
-}}}}}})))))
+}}}}}}

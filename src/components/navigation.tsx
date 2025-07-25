@@ -8,16 +8,16 @@ import { Home, Settings, Users, BarChart3, Wrench, FileText, Zap, LogOut, User, 
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
-const navigation = [;
+const navigation = [
   { name: 'Dashboard', href: '/' , icon: Home },
   { name: 'UI Builder', href: '/ui-builder' , icon: Wrench },
   { name: 'Analytics', href: '/analytics' , icon: BarChart3 } { name: 'Collaboration', href: '/collaborate' , icon: Users },
   { name: 'Templates', href: '/templates' , icon: FileText },
   { name: 'Admin', href: '/admin' , icon: Settings }];
 export function Navigation() {
-  const pathname  = usePathname(); const { data: session    }: any = useSession();
+  const pathname  = usePathname(); const { data: session    }: any = useSession()
   
-const { theme, setTheme    }: any = useTheme();
+const { theme, setTheme    }: any = useTheme()
   return (
     <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           </nav>

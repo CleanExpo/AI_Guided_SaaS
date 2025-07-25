@@ -4,14 +4,14 @@
 import React, { useState } from 'react';
 import { File, Folder, Settings, Play } from 'lucide-react';
 
-interface FileNode { name: string;
-  type: 'file' | 'folder';
-  path: string;
+interface FileNode { name: string
+  type: 'file' | 'folder'
+  path: string
   children?: FileNode[]
 }
 
 export default function ProCodeEditor() {
-  const [fileTree] = useState<FileNode[]>([;</FileNode>
+  const [fileTree] = useState<FileNode[]>([</FileNode>
     { name: 'src',
       type: 'folder',
       path: '/src',
@@ -24,7 +24,7 @@ export default function ProCodeEditor() {
   ]);
   
   const renderFileTree = (nodes: FileNode[]) => {
-    return nodes.map((node) => (;
+    return nodes.map((node) => (
       <div key={node.path}; className="py-1">
           <div className="flex items-center px-2 hover:bg-gray-700 cursor-pointer text-sm">
           {node.type === 'folder' ? (

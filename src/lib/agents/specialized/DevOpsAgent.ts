@@ -39,8 +39,7 @@ export class DevOpsAgent extends Agent {
     super({ id: 'devops-agent',
       name: 'DevOps Agent',
       type: 'specialist',
-      ...config
-    })
+      ...config    })
 }
 
   protected defineCapabilities(): AgentCapability[] {
@@ -70,7 +69,7 @@ export class DevOpsAgent extends Agent {
     ]
 }
 
-  async processMessage(message: AgentMessage): Promise<void> {</void>
+  async processMessage(message: AgentMessage): Promise<void> {
     this.logger.info(`Processing DevOps task: ${message.type}`);
 
     try {
@@ -99,12 +98,11 @@ export class DevOpsAgent extends Agent {
         type: 'error',
         payload: { error: error.message,
           task: message.type
-        }
-      })
+        }    })
 }
   }
 
-  private async handleDeployment(payload: DeploymentConfig): Promise<void> {</void>
+  private async handleDeployment(payload: DeploymentConfig): Promise<void> {
     this.logger.info(`Starting deployment to ${payload.environment} on ${payload.platform}`);
     
     // Pre-deployment checks
@@ -137,6 +135,7 @@ export class DevOpsAgent extends Agent {
     await this.sendMessage({ to: 'orchestrator',
       type: 'deployment-complete',
       payload: result
+   
     });
     
     // If deployment failed, trigger rollback consideration
@@ -145,7 +144,8 @@ export class DevOpsAgent extends Agent {
 }
   }
 
-  private async handleRollback(payload: { deploymentId: string }): Promise<void> {</void>
+  private async handleRollback(payload: { deploymentId: string
+    }): Promise<void> {
     this.logger.info(`Initiating rollback to deployment ${payload.deploymentId}`);
     
     const previousDeployment = this.deploymentHistory.find(d => d.deploymentId === payload.deploymentId);
@@ -159,11 +159,11 @@ export class DevOpsAgent extends Agent {
     
     await this.sendMessage({ to: 'orchestrator',
       type: 'rollback-complete',
-      payload: rollbackResult
+      payload: rollbackResult   
     })
 }
 
-  private async handleMonitoring(payload: any): Promise<void> {</void>
+  private async handleMonitoring(payload: any): Promise<void> {
 { await this.checkSystemHealth(payload.services);
     
     // Alert if issues detected
@@ -171,25 +171,27 @@ export class DevOpsAgent extends Agent {
       await this.sendMessage({ to: 'orchestrator',
         type: 'health-alert',
         payload: health
-      });
+     
+    });
       
       // Trigger self-healing if critical
       if (health.status === 'down') {
         await this.sendMessage({ to: 'self-healing-agent',
           type: 'critical-failure',
-          payload: health
-        })
+          payload: health   
+    })
 }
     }
     
     // Regular health report
     await this.sendMessage({ to: 'orchestrator',
       type: 'health-report',
-      payload: health
+      payload: health   
     })
 }
 
-  private async handleScaling(payload: { service: string, instances: number }): Promise<void> {</void>
+  private async handleScaling(payload: { service: string, instances: number
+    }): Promise<void> {
     this.logger.info(`Scaling ${payload.service} to ${payload.instances} instances`);
     
     // Platform-specific scaling logic
@@ -197,12 +199,12 @@ export class DevOpsAgent extends Agent {
     
     await this.sendMessage({ to: 'orchestrator',
       type: 'scaling-complete',
-      payload: scalingResult
+      payload: scalingResult   
     })
 }
 
   private async runPreDeploymentChecks(config: DeploymentConfig): Promise<{ passed: boolean; reason?: string }> {
-    const checks = [;
+    const checks = [
       { name: 'Git Status', check: () => this.checkGitStatus() },
       { name: 'Branch Protection', check: () => this.checkBranchProtection(config.branch) },
       { name: 'Environment Variables', check: () => this.checkEnvVars(config.environment) },
@@ -222,7 +224,7 @@ export class DevOpsAgent extends Agent {
     return { passed: true }
 }
 
-  private async executeDeploy(config: DeploymentConfig): Promise<DeploymentResult> {</DeploymentResult>
+  private async executeDeploy(config: DeploymentConfig): Promise<DeploymentResult> {
 { Date.now();
     const logs: string[] = [];
     
@@ -266,7 +268,8 @@ export class DevOpsAgent extends Agent {
     
     const command = `vercel deploy ${config.environment === 'production' ? '--prod' : ''} ${envVars}`;
     
-    const output = execSync(command, { encoding: 'utf8' });
+    const output = execSync(command, { encoding: 'utf8'
+    });
     
     // Parse deployment URL from output
     const urlMatch = output.match(/https:\/\/[^\s]+/);
@@ -281,7 +284,8 @@ export class DevOpsAgent extends Agent {
     // Railway deployment logic
     const command = `railway up -e ${config.environment}`;
     
-    execSync(command, { encoding: 'utf8' });
+    execSync(command, { encoding: 'utf8'
+    });
     
     return { deploymentId: `railway-${Date.now()}`,
       url: `https://${config.environment}.railway.app`
@@ -304,7 +308,7 @@ export class DevOpsAgent extends Agent {
     }
 }
 
-  private async verifyDeployment(healthCheckUrl: string): Promise<boolean> {</boolean>
+  private async verifyDeployment(healthCheckUrl: string): Promise<boolean> {
     // Simple health check - in production would be more sophisticated
     try {
       const response = await fetch(healthCheckUrl);
@@ -315,7 +319,7 @@ export class DevOpsAgent extends Agent {
 }
   }
 
-  private async executeRollback(deployment: DeploymentResult): Promise<any> {</any>
+  private async executeRollback(deployment: DeploymentResult): Promise<any> {
     // Platform-specific rollback logic
     this.logger.info(`Executing rollback to ${deployment.deploymentId}`);
     
@@ -325,7 +329,7 @@ export class DevOpsAgent extends Agent {
     }
 }
 
-  private async checkSystemHealth(services? null : string[]): Promise<SystemHealth> {</SystemHealth>
+  private async checkSystemHealth(services? null : string[]): Promise<SystemHealth> {
     const health: SystemHealth={ status: 'healthy',
       services: [],
       metrics: { cpu: 0;
@@ -355,7 +359,7 @@ export class DevOpsAgent extends Agent {
     return health
 }
 
-  private async checkServiceHealth(service: string): Promise<any> {</any>
+  private async checkServiceHealth(service: string): Promise<any> {
     // Service-specific health checks
     const healthEndpoints: Record<string string> = {</string>
       web: 'http://localhost:3000/api/health',
@@ -391,7 +395,7 @@ export class DevOpsAgent extends Agent {
 }
   }
 
-  private async getSystemMetrics(): Promise<any> {</any>
+  private async getSystemMetrics(): Promise<any> {
     // Get system resource usage
     // In production, would use proper monitoring tools
     return { cpu: Math.random() * 100,
@@ -401,7 +405,7 @@ export class DevOpsAgent extends Agent {
     }
 }
 
-  private async considerRollback(environment: string): Promise<void> {</void>
+  private async considerRollback(environment: string): Promise<void> {
     // Analyze if automatic rollback should be triggered
     const lastSuccessful = this.deploymentHistory;
       .filter(d => d.success)
@@ -413,12 +417,11 @@ export class DevOpsAgent extends Agent {
         payload: {
           environment,
           recommendedDeployment: lastSuccessful.deploymentId
-        }
-      })
+        }    })
 }
   }
 
-  private async scaleService(service: string, instances: number): Promise<any> {</any>
+  private async scaleService(service: string, instances: number): Promise<any> {
     // Platform-specific scaling
     this.logger.info(`Scaling ${service} to ${instances} instances`);
     
@@ -432,7 +435,8 @@ export class DevOpsAgent extends Agent {
 
   private checkGitStatus(): boolean {
     try {
-      const status = execSync('git status --porcelain', { encoding: 'utf8' });
+      const status = execSync('git status --porcelain', { encoding: 'utf8'
+    });
       return status.trim() === ''
 } catch {
       return false
@@ -441,7 +445,8 @@ export class DevOpsAgent extends Agent {
 
   private checkBranchProtection(branch? null : string): boolean {
     // Check if deploying from protected branch
-    const currentBranch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
+    const currentBranch = execSync('git branch --show-current', { encoding: 'utf8'
+    }).trim();
     const protectedBranches = ['main', 'master', 'production'];
     
     return !branch || protectedBranches.includes(currentBranch)
@@ -465,12 +470,12 @@ export class DevOpsAgent extends Agent {
     return true
 }
 
-  private async performHealthCheck(payload: any): Promise<void> {</void>
+  private async performHealthCheck(payload: any): Promise<void> {
 { await this.checkSystemHealth(payload.services);
     
     await this.sendMessage({ to: payload.from || 'orchestrator',
       type: 'health-status',
-      payload: health
+      payload: health   
     })
 }
 }

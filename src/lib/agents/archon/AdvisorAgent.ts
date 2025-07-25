@@ -137,7 +137,7 @@ export class AdvisorAgent extends Agent {
       temperature: 0.5
   }
 }
-  protected async execute(input: string): Promise<any> {</any>
+  protected async execute(input: string): Promise<any> {
     try {
       this.think('Beginning strategic advisory analysis...', // Get context from other agents if available, const _projectContext  = this.getSharedMemory('project-context') || {};
 
@@ -176,7 +176,8 @@ const strategies = await this.developStrategies(;
         recommendations,
         // constraints;
       );
-      this.observe('Developed strategies', { count: strategies.length });
+      this.observe('Developed strategies', { count: strategies.length
+    });
       // Step, 4: Assess risks;
 
 const risks = await this.assessRisks(;
@@ -184,7 +185,8 @@ const risks = await this.assessRisks(;
         recommendations,
         // strategies;
       );
-      this.observe('Risk assessment complete', { riskCount: risks.length });
+      this.observe('Risk assessment complete', { riskCount: risks.length
+    });
       // Step, 5: Evaluate alternatives;
 
 const alternatives = await this.evaluateAlternatives(;
@@ -192,7 +194,8 @@ const alternatives = await this.evaluateAlternatives(;
         situation,
         // recommendations;
       );
-      this.observe('Evaluated alternatives', { count: alternatives.length });
+      this.observe('Evaluated alternatives', { count: alternatives.length
+    });
       // Step, 6: Create decision matrix;
 
 const decisionMatrix = await this.createDecisionMatrix(;
@@ -251,7 +254,7 @@ const result: AdvisoryReport={;
 }
 };
   private async analyzeSituation(input: string, projectContext, requirements: string[], constraints: string[],
-  challenges: string[]): Promise<any> {</any>
+  challenges: string[]): Promise<any> {
 { `Analyze the current situation based on this, input: ``, Request: "${input}",
   Project: Context:
 ${JSON.stringify(projectContext, null, 2)}
@@ -277,7 +280,7 @@ const _response = await generateAIResponse(analysisPrompt, { model: this.config.
     return JSON.parse(response)
 }
   private async generateRecommendations(situation: SituationAnalysis, input: string;
-  requirements: string[]): Promise<any> {</any>
+  requirements: string[]): Promise<any> {
 { `Generate strategic recommendations based on this, analysis: ``, Situation:, ${JSON.stringify(situation, null, 2)};
 Original: Request: "${input}",
   Requirements:
@@ -306,10 +309,10 @@ const recommendations = JSON.parse(response);
     return recommendations.map((r, index: number) => ({;
       ...r;
       id: `REC-${index + 1}`
-    }})
+    }    })
 }
   private async developStrategies(situation: SituationAnalysis, recommendations: Recommendation[],
-  constraints: string[]): Promise<any> {</any>
+  constraints: string[]): Promise<any> {
 { `Develop implementation strategies for these, recommendations: Situation, Summary:``, ${situation.summary}
 Key: Recommendations:;
 ${recommendations.map((r) => `${r.title}: ${r.description}`).join('\n')}``;
@@ -330,7 +333,7 @@ const _response = await generateAIResponse(strategyPrompt, { model: this.config.
     return JSON.parse(response)
 }
   private async assessRisks(situation: SituationAnalysis, recommendations: Recommendation[],
-  strategies: Strategy[]): Promise<any> {</any>
+  strategies: Strategy[]): Promise<any> {
 { `Assess risks associated with the recommendations and, strategies: Situation, Challenges:``, ${situation.challenges.join('\n')}
 Recommendations:
 ${recommendations.map((r) => r.title).join('\n')}
@@ -359,10 +362,10 @@ const risks = JSON.parse(response);
     return risks.map((r) => ({
       ...r,
       riskScore: r.likelihood * r.impact
-    }})
+    }    })
 };
   private async evaluateAlternatives(input: string, situation: SituationAnalysis;
-  recommendations: Recommendation[]): Promise<any> {</any>
+  recommendations: Recommendation[]): Promise<any> {
 { `Evaluate alternative approaches to the, recommendations: Original, Request:``, "${input}";
 Current: Situation:
 ${situation.summary}
@@ -390,7 +393,7 @@ const _response = await generateAIResponse(alternativePrompt, { model: this.conf
     return JSON.parse(response)
 }
   private async createDecisionMatrix(recommendations: Recommendation[], alternatives: Alternative[],
-  situation: SituationAnalysis): Promise<any> {</any>
+  situation: SituationAnalysis): Promise<any> {
 { `Create a decision matrix to evaluate, options: ``, Primary Options (from recommendations):, ${recommendations;
   .slice(0, 3);
   .map((r) => r.title)
@@ -432,7 +435,7 @@ const _weightedScores = matrix.options.map((_, optionIndex: number) => {
       weightedScores
 };
   private async developActionPlan(recommendations: Recommendation[], strategies: Strategy[],
-  risks: RiskAssessment[], decisionMatrix: DecisionMatrix): Promise<any> {</any>
+  risks: RiskAssessment[], decisionMatrix: DecisionMatrix): Promise<any> {
 { `Develop a comprehensive action, plan: Selected, Option: ${decisionMatrix.recommendation}``,
 Key: Recommendations:
 ${recommendations
@@ -502,4 +505,3 @@ const _highRiskCount = risks.filter((r) => r.riskScore >= 15).length;
 confidence = Math.max(0.5, Math.min(0.95, confidence);
     return Number(confidence.toFixed(2))
 }
-)))))))))))))))))))))

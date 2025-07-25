@@ -87,7 +87,7 @@ export class TypeScriptAgent extends Agent {
 }
   }
 
-  async processMessage(message: AgentMessage): Promise<void> {</void>
+  async processMessage(message: AgentMessage): Promise<void> {
     this.logger.info(`Processing TypeScript task: ${message.type}`);
 
     try {
@@ -113,12 +113,11 @@ export class TypeScriptAgent extends Agent {
         type: 'error',
         payload: { error: error.message,
           task: message.type
-        }
-      })
+        }    })
 }
   }
 
-  private async analyzeTypeScript(payload: any): Promise<void> {</void>
+  private async analyzeTypeScript(payload: any): Promise<void> {
     const { targetPath } = payload;
     
     this.logger.info(`Analyzing TypeScript in ${targetPath}...`);
@@ -136,6 +135,7 @@ export class TypeScriptAgent extends Agent {
     await this.sendMessage({ to: 'orchestrator',
       type: 'type-analysis',
       payload: analysis
+   
     });
     
     // If critical errors exist, notify other agents
@@ -144,12 +144,11 @@ export class TypeScriptAgent extends Agent {
         type: 'critical-type-issues',
         payload: { errorCount: analysis.totalErrors,
           topIssues: analysis.errorsByType
-        }
-      })
+        }    })
 }
   }
 
-  private async fixTypeErrors(payload: any): Promise<void> {</void>
+  private async fixTypeErrors(payload: any): Promise<void> {
     const { files, errorCodes } = payload;
     
     this.logger.info('Fixing TypeScript errors...');
@@ -170,11 +169,10 @@ export class TypeScriptAgent extends Agent {
       payload: { totalFixes: appliedFixes.length,
         filesModified: new Set(appliedFixes.map(f => f.file)).size,
         fixes: appliedFixes
-      }
-    })
+      }    })
 }
 
-  private async generateTypes(payload: any): Promise<void> {</void>
+  private async generateTypes(payload: any): Promise<void> {
     const { source, outputPath } = payload;
     
     this.logger.info(`Generating types from ${source}...`);
@@ -194,11 +192,10 @@ export class TypeScriptAgent extends Agent {
         source,
         outputPath,
         typeCount: inferredTypes.length
-      }
-    })
+      }    })
 }
 
-  private async refactorForTypeSafety(payload: any): Promise<void> {</void>
+  private async refactorForTypeSafety(payload: any): Promise<void> {
     const { targetPath, strict = true } = payload;
     
     this.logger.info(`Refactoring ${targetPath} for type safety...`);
@@ -224,8 +221,7 @@ export class TypeScriptAgent extends Agent {
       payload: { path: targetPath;
         refactoringsApplied: applied.length,
         strict
-      }
-    })
+      }    })
 }
 
   private runTypeScriptDiagnostics(targetPath: string): TypeScriptError[] {
@@ -249,8 +245,8 @@ export class TypeScriptAgent extends Agent {
           line: parseInt(match[2], column: parseInt(match[3]),
           code: match[4],
           message: match[5],
-          category: 'error'
-        })
+          category: 'error'   
+    })
 }
     }
     
@@ -359,8 +355,7 @@ export class TypeScriptAgent extends Agent {
       while ((match = functionRegex.exec(content)) !== null) {
         inferredTypes.push({ name: match[1],
           kind: 'function',
-          parameters: match[2].split(',').map(p => p.trim())
-        })
+          parameters: match[2].split(',').map(p => p.trim())    })
 }
     }
     
@@ -455,8 +450,7 @@ export class TypeScriptAgent extends Agent {
           walkDir(fullPath)
 }; else if (stat.isFile() {&}& (item.endsWith('.ts') || item.endsWith('.tsx'))) {
           files.push(fullPath)
-}
-      })
+}    })
 };
     
     walkDir('src');
@@ -484,4 +478,4 @@ export class TypeScriptAgent extends Agent {
     return []
 }
 }
-}}}}}))
+}}}}}

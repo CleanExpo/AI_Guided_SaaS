@@ -30,13 +30,13 @@ export class MCPError extends Error {
 }
 
 export class MCPClient {
-  private channels: Map<string MCPChannel> = new Map(), async connect(channelId: string): Promise<any> {</any>
+  private channels: Map<string MCPChannel> = new Map(), async connect(channelId: string): Promise<any> {
     // Implementation
 }
-  async send(message: MCPMessage): Promise<any> {</any>
+  async send(message: MCPMessage): Promise<any> {
     // Implementation
 }
-  async receive(channelId: string): Promise<any> {</any>
+  async receive(channelId: string): Promise<any> {
     // Implementation
     return null}
 };
@@ -57,6 +57,4 @@ export default { MCPClient,
   mcp__memory__create_entities,
   mcp__memory__add_observations,
   mcp__memory__search_nodes
-}
-
-})
+}    }

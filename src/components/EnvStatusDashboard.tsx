@@ -8,31 +8,31 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle2, XCircle, AlertTriangle, RefreshCw, Database, Key, Cloud, CreditCard, Shield, Brain, Zap } from 'lucide-react';
 interface EnvStatus { summary: {
-  total: number;
-  valid: number;
-  missing: number;
-  invalid: number;
+  total: number
+  valid: number
+  missing: number
+  invalid: number
   warnings: number
 }
-    isValid: boolean;
-    services: Record<string { name: string;
-    category: string;
-    status: string;
-    variables: Record<string { set: boolean;
-    required: boolean;
-    status: string;
+    isValid: boolean
+    services: Record<string { name: string
+    category: string
+    status: string
+    variables: Record<string { set: boolean
+    required: boolean
+    status: string
 message: string
-    }}    />></string>
+    }/>></string>
 environment: string
   }
 };
 
 const categoryIcons: Record<string any> = { </string>
-    database: Database;
-    cache: Zap;
-    ai: Brain;
-    auth: Shield;
-    deployment: Cloud;
+    database: Database
+    cache: Zap
+    ai: Brain
+    auth: Shield
+    deployment: Cloud
 payments: CreditCard };
     export function EnvStatusDashboard() {
 </EnvStatus>, const [status, setStatus] = useState<EnvStatus | null>(null);</EnvStatus>
@@ -52,18 +52,20 @@ const data = await response.json();
     setLoading(false)}
   const _handleSync = async () =>  {
     setSyncing(true, try {
-      const response = await fetch('/api/admin/auth', { method: 'POST',;
+      const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ action: 'sync' })};
+        body: JSON.stringify({ action: 'sync'
+    })};
       if (response.ok) {
         await, fetchStatus()} catch (error) {
       console.error('Failed to, sync:', error)} finally {
     setSyncing(false)}
   const _handleCompact = async () =>  {
     setCompacting(true, try {
-      const response = await fetch('/api/admin/auth', { method: 'POST',;
+      const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ action: 'compact' })};
+        body: JSON.stringify({ action: 'compact'
+    })};
       if (response.ok) {
         await, fetchStatus()} catch (error) {
       console.error('Failed to, compact:', error)} finally {
@@ -93,9 +95,8 @@ headers: { 'Content-Type': 'application/json'  },
           <Button variant="outline";
 size="sm";
 
-    onClick={handleSync} disabled={syncing}
-                   />
-                <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`}    />``</RefreshCw>
+    onClick={handleSync} disabled={syncing/>
+                <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`/>``</RefreshCw>
                 // Sync</RefreshCw>
               <Button variant="outline";
 size="sm";
@@ -115,8 +116,8 @@ onClick={handleCompact} disabled={compacting}
                 )}</XCircle>
                 <span className="font-medium">
                   {status.isValid ? 'Configuration Valid' : 'Configuration Has Issues'}</span>
-              <Badge variant={status.isValid ? 'default' : 'destructive'}></Badge>
-                {healthPercentage.toFixed(0)}% Healthy</Badge>
+              <Badge variant={status.isValid ? 'default' : 'destructive'}>/>
+                {healthPercentage.toFixed(0)}% Healthy/>
             <Progress value={healthPercentage} className="h-2"    />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm"     />
               <div className="text-center"    />
@@ -138,14 +139,14 @@ onClick={handleCompact} disabled={compacting}
 
 const _isHealthy = validCount === variables.length</div>
           return (
-    <Card key={key}; className={service.status === 'disabled' ? 'opacity-50' : ''}    />
+    <Card key={key}; className={service.status === 'disabled' ? 'opacity-50' : ''/>
           <CardHeader     />
                 <div className="flex items-center justify-between"    />
           <div className="flex items-center gap-2"     />
                     <Icon className="h-5 w-5 text-muted-foreground"    />
           <CardTitle className="text-base">{service.name}</CardTitle>
-                  <Badge variant={isHealthy ? 'default' : 'secondary'}></Badge>
-                    {validCount}/{variables.length}</Badge>
+                  <Badge variant={isHealthy ? 'default' : 'secondary'}>/>
+                    {validCount}/{variables.length}/>
               <CardContent    />
           <div className="space-y-2">
                   {variables.map(([varName, varStatus]) => (\n    </div>
@@ -157,7 +158,7 @@ const _isHealthy = validCount === variables.length</div>
                         <span className={`${varStatus.required ? 'font-medium' : ''} ${varStatus.set ? '' : 'text-muted-foreground'}`}>``</span>
                           {varName}</span>
                       {varStatus.required && !varStatus.set  && (
-Badge variant="destructive", className="text-xs">Required</Badge>
+Badge variant="destructive", className="text-xs">Required/>
       ) }))})};
 </div>
   
@@ -166,4 +167,4 @@ Badge variant="destructive", className="text-xs">Required</Badge>
     </any>
   }
 
-}}}}}}}}}}))))))))
+}}}}}}}}}}

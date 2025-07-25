@@ -8,51 +8,55 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const features = [;
-  { icon: Brain;
+const features = [
+  { icon: Brain
     title: 'AI-Powered Development',
     description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions with intelligent code generation.',
 gradient: 'primary'},
-  { icon: Wrench;
+  { icon: Wrench
     title: 'Visual UI Builder',
     description: 'Create stunning interfaces with our drag-and-drop UI builder and comprehensive component library.',
 gradient: 'secondary'},
-  { icon: BarChart3;
+  { icon: BarChart3
     title: 'Advanced Analytics',
     description: 'Get deep insights into your application performance and user behavior with real-time dashboards.',
-gradient: 'success'} { icon: Users;
+gradient: 'success'} { icon: Users
     title: 'Team Collaboration',
     description: 'Work seamlessly with your team using real-time collaboration tools and shared workspaces.',
 gradient: 'warning'},
-  { icon: Code;
+  { icon: Code
     title: 'Code Generation',
     description: 'Generate production-ready code automatically from your designs and specifications with AI assistance.',
 gradient: 'primary'},
-  { icon: Shield;
+  { icon: Shield
     title: 'Enterprise Security',
     description: 'Built with security-first principles and enterprise-grade protection for your applications.',
 gradient: 'error'}];
 
-const benefits  = [;
+const benefits  = [
   { text: 'Reduce development time by 70%' , icon: Clock },
   { text: 'AI-assisted code generation' , icon: Brain },
   { text: 'Real-time team collaboration' , icon: Users } { text: 'Enterprise-grade security' , icon: Shield },
   { text: 'Scalable cloud infrastructure' , icon: Globe },
   { text: 'Comprehensive analytics dashboard' , icon: BarChart3 }];
 
-const stats = [;
+const stats = [
   { value: '10,000+', label: 'Developers', icon: Users },
   { value: '99.9%', label: 'Uptime', icon: TrendingUp },
   { value: '70%', label: 'Faster Development', icon: Rocket },
   { value: '24/7', label: 'Support', icon: Shield }];
     export default function LandingPageEnhanced() {
-  const [heroRef, heroInView]  = useInView({ threshold: 0.1 triggerOnce: true });
+  const [heroRef, heroInView]  = useInView({ threshold: 0.1 triggerOnce: true
+    });
 
-const [featuresRef, featuresInView] = useInView({ threshold: 0.1 triggerOnce: true });
+const [featuresRef, featuresInView] = useInView({ threshold: 0.1 triggerOnce: true
+    });
   
-const [benefitsRef, benefitsInView]  = useInView({ threshold: 0.1 triggerOnce: true });
+const [benefitsRef, benefitsInView]  = useInView({ threshold: 0.1 triggerOnce: true
+    });
 
-const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true });
+const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true
+    });
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900">
       {/* Animated, Background Elements */}</div>
@@ -82,7 +86,7 @@ size="xl";
 variant="gradient";
                 // glow animation="shimmer";
 
-    const icon={<ArrowRight className="w-5 h-5"    />};</ButtonPremium>
+    const icon={<ArrowRight className="w-5 h-5" />
                 iconPosition="right";
                 // asChild
               ></ButtonPremium>
@@ -92,7 +96,7 @@ variant="gradient";
 size="xl";
 variant="glass";
 
-const icon={<Palette className="w-5 h-5"    />};</ButtonPremium>
+const icon={<Palette className="w-5 h-5" />
                 iconPosition="left";
                 // asChild
               ></ButtonPremium>
@@ -116,7 +120,7 @@ const icon={<Palette className="w-5 h-5"    />};</ButtonPremium>
 
     initial={{ opacity: 0, y: 30 } animate={statsInView ? { opacity: 1, y: 0 } : { }
             const transition={{ duration: 0.8 ease: 'easeOut'  };
-            className="grid grid-cols-2 md:grid-cols-4 gap-6";
+            className="grid grid-cols-2 md: grid-cols-4 gap-6"
           ></motion>
             {stats.map((stat, index) => (\n    <motion.div, key={index} initial={{ opacity: 0, scale: 0.8 }
                 const animate={statsInView ? { opacity: 1, scale: 1 } : {}
@@ -182,7 +186,7 @@ const icon={<Palette className="w-5 h-5"    />};</ButtonPremium>
                   <motion.div, key={index} initial={{ opacity: 0, x: -20 }
                     const animate={benefitsInView ? { opacity: 1, x: 0 } : { };
                     const transition={{ duration: 0.6 delay: index * 0.1  };
-                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm";
+                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50 dark: bg-gray-800/50 backdrop-blur-sm"
                   >
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0"     />
                       <benefit.icon className="h-4 w-4 text-white"    />
@@ -194,7 +198,7 @@ const icon={<Palette className="w-5 h-5"    />};</ButtonPremium>
 size="lg";
 variant="gradient";
 
-const icon={<Rocket className="w-5 h-5"    />};</ButtonPremium>
+const icon={<Rocket className="w-5 h-5" />
                 iconPosition="right";
                 // asChild
               ></ButtonPremium>
@@ -219,7 +223,7 @@ const icon={<Rocket className="w-5 h-5"    />};</ButtonPremium>
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"     />
                         <CheckCircle className="h-5 w-5 text-white"    />
           <span className="font-semibold text-gray-900 dark:text-white">Project Created</span>
-                    <Badge variant="secondary">2 min ago</Badge>
+                    <Badge variant="secondary">2 min ago/>
                   </motion.div>
                   <motion.div;
 
@@ -231,7 +235,7 @@ const icon={<Rocket className="w-5 h-5"    />};</ButtonPremium>
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center"    />
           <Code className="h-5 w-5 text-white"     />
                       <span className="font-semibold text-gray-900 dark:text-white">AI Code Generated</span>
-                    <Badge variant="secondary">1 min ago</Badge>
+                    <Badge variant="secondary">1 min ago/>
                   </motion.div>
                   <motion.div;
 
@@ -244,7 +248,7 @@ const icon={<Rocket className="w-5 h-5"    />};</ButtonPremium>
           <Globe className="h-5 w-5 text-white"     />
                       <span className="font-semibold text-gray-900 dark:text-white">
                         Deployed to Production</span>
-                    <Badge variant="secondary">Just now</Badge>
+                    <Badge variant="secondary">Just now/>
                   </motion.div>
             </motion.div>
       {/* CTA, Section */}
@@ -263,7 +267,7 @@ const icon={<Rocket className="w-5 h-5"    />};</ButtonPremium>
 variant="gradient";
                 // glow;
 
-    const icon={<ArrowRight className="w-5 h-5"    />};</ButtonPremium>
+    const icon={<ArrowRight className="w-5 h-5" />
                 iconPosition="right";
                 // asChild
               ></ButtonPremium>
@@ -273,7 +277,7 @@ variant="gradient";
 size="xl";
 variant="outline";
 
-const icon={<FileText className="w-5 h-5"    />};</ButtonPremium>
+const icon={<FileText className="w-5 h-5" />
                 iconPosition="left";
                 // asChild
               ></ButtonPremium>

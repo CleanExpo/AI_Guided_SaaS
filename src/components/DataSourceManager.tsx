@@ -9,10 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Database, Cloud, FileJson, Sparkles, RefreshCw, Settings, CheckCircle, AlertCircle, AlertTriangle, Loader2, ToggleLeft, ToggleRight, Download, Upload, Link, Unlink, Play, Pause } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { MockDataGenerator, DataSource, DataSchema } from '@/lib/data/MockDataGenerator';
-interface DataSourceManagerProps { projectId: string;
+interface DataSourceManagerProps { projectId: string
   onDataChange? (data) => void
  };
-const defaultDataSources: DataSource[]  = [;
+const defaultDataSources: DataSource[]  = [
   { id: 'mock-data',
     name: 'Mock Data Generator',
     type: 'mock',
@@ -55,7 +55,8 @@ if (onDataChange) {
     const _updated = dataSources.map((s) => ({;
       ...s;
       isActive: s.id === source.id
-     };))
+    
+    }))
     setDataSources(updated);
     setActiveSource(source)
 }
@@ -67,28 +68,28 @@ if (onDataChange) {
   const _testConnection = async (source: DataSource) =>  { setIsLoading(true, setTestResult(null), try {
       if (source.type === 'api') {
         const response = await fetch('/api/admin/auth', {;
-          headers: source.config.headers || { };);
+          headers: source.config.headers || { });
 
 const data = await response.json();
-        setTestResult({ success: true;
+        setTestResult({ success: true
     message: 'API connection successful',
-data: data
-        })
+data: data   
+    })
 } else if (source.type === 'database') {
         // Simulate database connection test
         await new Promise(resolve => setTimeout(resolve, 1000))
-        setTestResult({ success: true;
+        setTestResult({ success: true
     message: 'Database connection successful',
 tables: ['users', 'products', 'orders']
 })} catch (error) {
-      setTestResult({ success: false;
+      setTestResult({ success: false
     message: `Connection failed: ${error}`,``
-        // error
-      })
+        // error    })
 } finally {
       setIsLoading(false)}
   const _exportData = (format: 'json' | 'csv' | 'sql') => { const data = generatedData[selectedSchema] || []; const _exported = mockGenerator.exportData(data, format, const _blob  = new Blob([exported], { type: format === 'json' ? 'application/json' : 'text/plain'
-     };);
+    
+    });
 
 const _url = URL.createObjectURL(blob);
     
@@ -113,16 +114,14 @@ const a = document.createElement('a');
       default: return<Database className="h-5 w-5"     />
   }
 }
-  const _getSourceBadgeColor = (type: DataSource['type']) =>  { switch (type) {;
+  const _getSourceBadgeColor = (type: DataSource['type']) =>  { switch (type) {
       case 'mock':;
       return 'bg-purple-100 text-purple-700', break, case 'api':;
       return 'bg-blue-100 text-blue-700';
     break;
-      case 'database':
-      return 'bg-green-100 text-green-700';
+      case 'database': return 'bg-green-100 text-green-700'
     break;
-      case 'file':
-      return 'bg-yellow-100 text-yellow-700';
+      case 'file': return 'bg-yellow-100 text-yellow-700'
     break
 };
       default: return 'bg-gray-100 text-gray-700'}}
@@ -141,8 +140,8 @@ const a = document.createElement('a');
                 <div>
           <h4 className="font-medium">{source.name}</h4>
                   <div className="flex items-center gap-2 mt-1">
-          <Badge className={cn("text-xs" getSourceBadgeColor(source.type))}></Badge>
-                      {source.type}</Badge>
+          <Badge className={cn("text-xs" getSourceBadgeColor(source.type))}>/>
+                      {source.type}/>
                     {source.lastSync  && (
 span className="text-xs text-muted-foreground">
                         Last,
@@ -165,8 +164,8 @@ const onClick={() => handleSourceToggle(source)}</Button>
       <Card className="p-6">
           <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Configure {activeSource.name}</h3>
-          <Badge className={getSourceBadgeColor(activeSource.type)}></Badge>
-            {getSourceIcon(activeSource.type)}</Badge>
+          <Badge className={getSourceBadgeColor(activeSource.type)}>/>
+            {getSourceIcon(activeSource.type)}/>
             <span className="ml-1">{activeSource.type}</span>
         {activeSource.type === 'mock'  && (div className="space-y-4">
             <Alert>
@@ -218,12 +217,12 @@ const onClick={() => handleSourceToggle(source)}</Button>
     {activeSource.type = == 'api'  && (div className="space-y-4">
             <div>
           <label className="text-sm font-medium">API Endpoint</label>
-              <Input value={activeSource.config.endpoint || ''} onChange={(e) => handleConfigUpdate(activeSource.id, {</Input>
-                  ...activeSource.config,;
+              <Input value={activeSource.config.endpoint || ''} onChange={(e) => handleConfigUpdate(activeSource.id, {/>
+                  ...activeSource.config,
                   endpoint: e.target.value
-})};
-                placeholder="https://api.example.com/data";
-className="mt-1" /></Input>
+    })};
+                placeholder="https: //api.example.com/data"
+className="mt-1" />/>
         <div>
           <label className="text-sm font-medium">Headers (JSON)</label>
               <Textarea
@@ -233,14 +232,12 @@ const value={JSON.stringify(activeSource.config.headers || {} null, 2)}
                   try {
                     const _headers = JSON.parse(e.target.value, handleConfigUpdate(activeSource.id, {
                       ...activeSource.config,
-                      // headers
-};)
+                      // headers    })
 } catch {};
                 placeholder='{ "Authorization": "Bearer token" }';
 className="mt-1 font-mono text-sm";
 
-const rows={4}
-              /></Textarea>
+const rows={4/></Textarea>
             <Button
 
 const onClick={() => testConnection(activeSource)}</Button>
@@ -267,12 +264,12 @@ const onClick={() => testConnection(activeSource)}</Button>
     {activeSource.type === 'database'  && (div className="space-y-4">
             <div>
           <label className="text-sm font-medium">Connection String</label>
-              <Input type = "password"; value={activeSource.config.connectionString || ''} onChange={(e) => handleConfigUpdate(activeSource.id, {</Input>
-                  ...activeSource.config,;
+              <Input type = "password"; value={activeSource.config.connectionString || ''} onChange={(e) => handleConfigUpdate(activeSource.id, {/>
+                  ...activeSource.config,
                   connectionString: e.target.value
-})};
-                placeholder="postgresql://user:password@host:port/database";
-className="mt-1" /></Input>
+    })};
+                placeholder="postgresql: //user:password@host:port/database"
+className="mt-1" />/>
         <Alert>
           <AlertTriangle className="h-4 w-4"     />
               <AlertDescription></AlertDescription>
@@ -306,4 +303,4 @@ import { Textarea } from '@/components/ui/textarea';
     </div>
   }
 `
-}}}}}}))))
+}}}}}}

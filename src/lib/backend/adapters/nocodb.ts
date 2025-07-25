@@ -5,8 +5,7 @@ import * as bcrypt from 'bcryptjs';
 uuidv4(): string {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {;
     const r = Math.random() * 16 | 0; const v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16)
-})
+        return v.toString(16)    })
 }
 
 export class NocoDBAdapter implements BackendAdapter {
@@ -29,7 +28,7 @@ const urlMatch = config.url.match(/\/api\/v1\/db\/data\/noco\/([^/]+)/);
   private async request<T>(</T>
 endpoint: string;
     options: RequestInit = {}
-  ): Promise<T> {</T>
+  ): Promise<T> {
     const headers: Record<string string> = {</string>
       'Content-Type': 'application/json',
       'xc-token': this.apiToken,
@@ -76,7 +75,7 @@ const user = await this.request<any>(this.getTableEndpoint('users', {</any>
         role?: metadata.role || 'user',
         metadata: JSON.stringify(metadata || {});
         created_at: new Date().toISOString(, updated_at: new Date().toISOString()
-})};
+    })};
     return this.mapNocoDBUser(user)
 }
   async signIn(email: string, password: string): Promise<{ user: User, token: string }> {
@@ -98,7 +97,7 @@ const token = Buffer.from(`${user.id}:${Date.now()}`).toString('base64');
       token
   }
 }
-  async signOut(): Promise<void> {</void>
+  async signOut(): Promise<void> {
     this.authToken = undefined
   }
   async getCurrentUser(): Promise<User | null> {</User>
@@ -130,7 +129,7 @@ const user = await this.request<any>(;</any>
     return this.mapNocoDBUser(user)
 }
   // Projects
-  async createProject(data: Omit<Project 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {</Project>
+  async createProject(data: Omit<Project 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
 { await this.request<any>(this.getTableEndpoint('projects', {</any>
       method: 'POST',
       body: JSON.stringify({ id: uuidv4(),
@@ -140,7 +139,7 @@ const user = await this.request<any>(;</any>
         type: data.type,
         status: data.status,
         config: JSON.stringify(data.config || {}, created_at: new Date().toISOString(, updated_at: new Date().toISOString()
-})};
+    })};
     return this.mapNocoDBProject(project)
 }
   async getProject(id: string): Promise<Project | null> {</Project>
@@ -170,8 +169,8 @@ const project = await this.request<any>(;</any>
     );
     return this.mapNocoDBProject(project)
 }
-  async deleteProject(id: string): Promise<void> {</void>
-    await this.request(`${this.getTableEndpoint('projects')}/${id}`, { method: 'DELETE'
+  async deleteProject(id: string): Promise<void> {
+    await this.request(`${this.getTableEndpoint('projects')}/${id}`, { method: 'DELETE'   
     })
   }
   async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project>> {</PaginatedResponse>
@@ -205,7 +204,7 @@ const pageSize = options?.limit || 25;
   }
 }
   // Generic CRUD
-  async create<T>(collection: string, data: any): Promise<T> {</T>
+  async create<T>(collection: string, data: any): Promise<T> {
     // Add metadata fields
         const createData={;
       ...data;
@@ -215,7 +214,7 @@ const pageSize = options?.limit || 25;
 const result = await this.request<any>(this.getTableEndpoint(collection, {</any>
       method: 'POST',
       body: JSON.stringify(createData)
-});
+    });
     return this.mapNocoDBRecord(result) as T
 }
   async read<T>(collection: string, id: string): Promise<T | null> {</T>
@@ -243,8 +242,8 @@ const result = await this.request<any>(;</any>
     );
     return this.mapNocoDBRecord(result) as T
 }
-  async delete(collection: string, id: string): Promise<void> {</void>
-    await this.request(`${this.getTableEndpoint(collection)}/${id}`, { method: 'DELETE'
+  async delete(collection: string, id: string): Promise<void> {
+    await this.request(`${this.getTableEndpoint(collection)}/${id}`, { method: 'DELETE'   
     })
   }
   async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T>> {</PaginatedResponse>
@@ -296,12 +295,13 @@ collection: string;
         return () => {};
   // File storage;
   async uploadFile(bucket: string, path: string;
-  file: File): Promise<string> {</string>
+  file: File): Promise<string> {
 { new FormData(, formData.append('file', file), formData.append('path', path);
     
 const response = await fetch('/api/admin/auth', { method: 'POST',
       headers: { 'xc-token': this.apiToken },
       body: formData
+   
     });
     if (!response.ok) {
       const error = await response.json(, throw new BackendError(, error.msg || 'Upload failed';
@@ -312,7 +312,7 @@ const response = await fetch('/api/admin/auth', { method: 'POST',
     const data = await response.json();
     return data.url || data.path
 }
-  async deleteFile(bucket: string, path: string): Promise<void> {</void>
+  async deleteFile(bucket: string, path: string): Promise<void> {
     // NocoDB file deletion would need to be implemented
     console.warn('File deletion not implemented for NocoDB')}
   getFileUrl(bucket: string, path: string): string {
@@ -420,7 +420,7 @@ const nocoOperator = operatorMap[operator];
   async single(): Promise<T | null> {</T>
     this.limit(1, const results = await this.execute(); return results[0] || null
 }
-  async count(): Promise<number> {</number>
+  async count(): Promise<number> {
     // Apply where conditions, if (this.whereConditions.length > 0) {
       this.params.append('where', this.whereConditions.join('~and'))
     }
@@ -431,4 +431,4 @@ const nocoOperator = operatorMap[operator];
     return pageInfo.totalRows
 }
 
-}}}}}}}}}}}}}})))))))))))))))))))))
+}}}}}}}}}}}}}}

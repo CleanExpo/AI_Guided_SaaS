@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: 'Help & Support - AI Guided SaaS Plat
 };
 
 export default function HelpPage() {
-  const faqs = [;
+  const faqs = [
     { question: 'How do I get started with AI Guided SaaS?',
       answer: 'Create an account, choose a template or start from scratch, and follow our guided setup wizard.'
     },
@@ -26,23 +26,23 @@ export default function HelpPage() {
     }
   ];
 
-  const supportOptions = [;
-    { icon: MessageCircle;
+  const supportOptions = [
+    { icon: MessageCircle,
       title: 'Live Chat',
       description: 'Get instant help from our support team',
       action: 'Start Chat'
     },
-    { icon: Mail;
+    { icon: Mail,
       title: 'Email Support',
       description: 'Send us a detailed message',
       action: 'Send Email'
     },
-    { icon: Phone;
+    { icon: Phone,
       title: 'Phone Support',
       description: 'Call us during business hours',
       action: 'Call Now'
     },
-    { icon: Book;
+    { icon: Book,
       title: 'Documentation',
       description: 'Browse our comprehensive guides',
       action: 'View Docs'
@@ -63,9 +63,9 @@ export default function HelpPage() {
           <div className="max-w-md mx-auto relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"  />
             <Input
-              placeholder="Search for help...";
-              className="pl-10";
-             />
+              placeholder="Search for help..."
+              className="pl-10"
+            />
           </div>
 
         {/* Support Options */}

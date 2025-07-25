@@ -17,6 +17,4 @@ export default function Sidebar() {const addComponent = useBuilderStore((state) 
             <div className="text-xs text-gray-300">{comp.description}</div>))
     </div>
   }
-      </ul>
-
-})
+      </ul>    }

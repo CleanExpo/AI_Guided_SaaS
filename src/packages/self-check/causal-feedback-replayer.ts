@@ -148,8 +148,7 @@ if (!componentStats[key]) {
 }});
   return Object.values(componentStats);
     .filter((stat) => {
-      const total =, stat.additions + stat.deletions + stat.edits + stat.retentions, return total >= 3; // Only consider components with sufficient data
-    };)
+      const total =, stat.additions + stat.deletions + stat.edits + stat.retentions, return total >= 3; // Only consider components with sufficient data    })
     .map((stat) => { const total =, stat.additions + stat.deletions + stat.edits + stat.retentions, const _deletionRate = stat.deletions / total;
       return { ...stat, deletionRate }
 }).sort((a, b) => (b as any).deletionRate - (a as any).deletionRate);
@@ -176,4 +175,4 @@ const topIssues = problematicComponents.map((comp) => {
     recommendations: analysis.recommendations
 }
 
-})))
+}

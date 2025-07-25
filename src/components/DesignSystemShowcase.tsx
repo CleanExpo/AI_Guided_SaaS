@@ -8,9 +8,9 @@ export function DesignSystemShowcase() {
   const [progress, setProgress] = useState<any>([])
   const [currentStep, setCurrentStep] = useState<any>([])
   const [showAlert, setShowAlert]  = useState<any>([])
-{ [;
-  { id: 'design', title: 'Design', description: 'Create your vision', icon: <Palette className="h-4 w-4"    /> };</Palette>,
-  { id: 'develop', title: 'Develop', description: 'Build with AI', icon: <Code className="h-4 w-4"    /> };</Code>
+{ [
+  { id: 'design', title: 'Design', description: 'Create your vision', icon: <Palette className="h-4 w-4" />,
+  { id: 'develop', title: 'Develop', description: 'Build with AI', icon: <Code className="h-4 w-4" />
     { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4"    /> }]</Zap>
   return (
     <div className="max-w-7xl mx-auto p-8 space-y-12">
@@ -25,7 +25,7 @@ export function DesignSystemShowcase() {
           Color Palette</Palette>
         <div className="grid grid-cols-5 gap-6">
           {Object.entries(theme.colors).map(([colorName, shades]) => (\n    </div>
-            <div key={colorName}    />
+            <div key={colorName/>
           <h3 className="text-sm font-medium capitalize mb-3">{colorName}</h3>
               <div className="space-y-2"     />
                 {Object.entries(shades as Record<string string>).slice(2, 7).map(([shade, value]) => (\n    </string>
@@ -130,23 +130,23 @@ export function DesignSystemShowcase() {
           <h2 className="text-2xl font-semibold mb-6">Alerts & Notifications</h2>
         <div className="space-y-4"    />
           <UnifiedAlert
-type="info";
+type="info"
 title="Information";
 description="This is an informational message to keep users updated."      />
         <UnifiedAlert
-type="success";
+type="success"
 title="Success!";
 description="Your project has been deployed successfully.";
 
     const icon={<Check className="h-5 w-5 text-success-600"    />}</UnifiedAlert>
           /></UnifiedAlert>
-          <UnifiedAlert type="warning";
+          <UnifiedAlert type="warning"
 description="Your free tier limit is almost reached. Consider upgrading.";
             // dismissible;
 
     const onDismiss={() => {};</UnifiedAlert>
           /></UnifiedAlert>
-          <UnifiedAlert type="error";
+          <UnifiedAlert type="error"
 title="Error";
 description="Failed to connect to the database. Please check your configuration.";
             // dismissible;
@@ -167,7 +167,7 @@ description="Failed to connect to the database. Please check your configuration.
           {/* Step, Indicator */}
           <div    />
           <h3 className="text-lg font-medium mb-6">Step Progress</h3>
-            <UnifiedSteps steps={steps} currentStep={currentStep}     />
+            <UnifiedSteps steps={steps} currentStep={currentStep/>
           <div className="flex justify-center gap-4 mt-6"     />
               <UnifiedButton variant="outline";
 size="sm";

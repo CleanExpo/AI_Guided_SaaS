@@ -1,15 +1,15 @@
-/* BREADCRUMB: app - Application page or route */;
+/* BREADCRUMB: app - Application page or route */
 import React from 'react';
 
-interface ApiDoc { slug: string;
-  title: string;
-  description: string;
-  content: string;
-  category: string;
+interface ApiDoc { slug: string
+  title: string
+  description: string
+  content: string
+  category: string
   version: string
 }
 
-const apiDocs: Record<string ApiDoc> = {</string>
+const apiDocs: Record<string, ApiDoc> = {
   auth: { slug: 'auth',
     title: 'Authentication API',
     description: 'User authentication and authorization endpoints',
@@ -29,8 +29,8 @@ const apiDocs: Record<string ApiDoc> = {</string>
 export function generateStaticParams() {
   return Object.keys(apiDocs).map((slug) => ({ slug }))
 }
-;
-export default function ApiDocPage({ params }: { params: { slug: string } }) {;
+
+export default function ApiDocPage({ params }: { params: { slug: string } }) {
   const doc = apiDocs[params.slug];
   if (!doc) {
     return (
@@ -53,8 +53,11 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {;
           <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm">
             {doc.version}
           </span>
-        <div className="bg-white rounded-lg border p-6">
-          <pre className="whitespace-pre-wrap text-sm">{doc.content}</pre>
+        </div>
       </div>
-    )
+      <div className="bg-white rounded-lg border p-6">
+        <pre className="whitespace-pre-wrap text-sm">{doc.content}</pre>
+      </div>
+    </div>
+  )
 }

@@ -98,4 +98,4 @@ threshold: number = 0.3;
         return Object.entries(scores, .map(([key, data]) => ({ key, ...data }))
       .filter((item) => item.score < threshold && item.confidence !== 'low').sort((a, b) => a.score - b.score)
 }
-}}}))))
+}}}

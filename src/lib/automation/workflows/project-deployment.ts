@@ -144,7 +144,8 @@ return {
         sendBody: true;
     bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
     gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" },
-    target: "production" })}';
+    target: "production"
+    })}';
     options: {};
     // 8. Send notifications
     { id: 'code_2',
@@ -253,4 +254,4 @@ active: false;
     tags: ['deployment', 'automation', 'ci-cd']
 }
 
-}}}}}}}}}}}}}}}}}}}}}}}}}}))
+}}}}}}}}}}}}}}}}}}}}}}}}}}

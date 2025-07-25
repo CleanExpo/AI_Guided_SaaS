@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: 'Features - AI Guided SaaS',
 };
 
 export default function FeaturesPage() {
-  const features = [;
+  const features = [
     { title: 'AI-Powered Code Generation',
       description: 'Generate production-ready code from natural language descriptions.',
       icon: '🤖'
@@ -48,21 +48,24 @@ export default function FeaturesPage() {
             Our comprehensive platform provides all the tools and features you need 
             to build, test, and deploy production-ready applications.
           </p>
+        </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
             <Card key={feature.title} className="hover:shadow-lg transition-shadow">
-          <CardHeader></CardHeader>
+              <CardHeader>
                 <div className="flex items-center mb-4">
-          <span className="text-3xl mr-4">{feature.icon}</span>
+                  <span className="text-3xl mr-4">{feature.icon}</span>
                   <CardTitle className="text-lg">{feature.title}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-          <p className="text-gray-600">{feature.description}</p>
+                <p className="text-gray-600">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
-  )
+      </div>
+    </div>
+  );
 }

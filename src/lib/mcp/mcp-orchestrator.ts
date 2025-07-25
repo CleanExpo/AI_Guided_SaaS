@@ -79,15 +79,16 @@ export interface MCPExecutionStep { id: string;
    }
 // Validation schemas;
 export const MCPToolCallSchema = z.object({ tool: z.string(, server: z.string(),
-  arguments: z.record(z.any(), timeout: z.number().optional()
-})
+  arguments: z.record(z.any(), timeout: z.number().optional()   
+    })
 export const MCPOrchestrationPlanSchema = z.object({ description: z.string(, steps: z.array(
     z.object({ id: z.string(),
       type: z.enum(['tool', 'resource', 'prompt'], server: z.string(),
-      operation: z.string(, arguments: z.record(z.any()).optional(, dependsOn: z.array(z.string()).optional()})
+      operation: z.string(, arguments: z.record(z.any()).optional(, dependsOn: z.array(z.string()).optional()   
+    })
   )
-  parallel: z.boolean().default(true)
-})
+  parallel: z.boolean().default(true)   
+    })
 export class MCPOrchestrator {
   private servers: Map<string MCPServer> = new Map(, private connections: Map<string WebSocket> = new Map(), private pendingRequests: Map<
     string;
@@ -103,7 +104,7 @@ export class MCPOrchestrator {
   /**
    * Register a new MCP server
    */
-  async registerServer(server: Omit<MCPServer 'status' | 'tools'>): Promise<any> {</any>
+  async registerServer(server: Omit<MCPServer 'status' | 'tools'>): Promise<any> {
     try {
       // Connect to server
       await this.connectToServer(server.id, server.url, // Discover capabilities, const capabilities  = await this.discoverCapabilities(server.id);
@@ -115,7 +116,8 @@ const tools = await this.discoverTools(server.id);
         capabilities,
         tools,
         status: 'connected'
-      });
+     
+    });
       if (this.config?.debug) {
         console.log(`Connected to server ${server.id}`)
 }
@@ -132,7 +134,7 @@ const tools = await this.discoverTools(server.id);
   /**
    * Disconnect from a server
    */
-  async disconnectServer(serverId: string): Promise<any> {</any>
+  async disconnectServer(serverId: string): Promise<any> {
 { this.connections.get(serverId, if (connection) {;
       connection.close(); this.connections.delete(serverId)
 }
@@ -159,7 +161,7 @@ const tools = await this.discoverTools(server.id);
   /**
    * Call a tool on a specific server
    */
-  async callTool(call: MCPToolCall): Promise<any> {</any>
+  async callTool(call: MCPToolCall): Promise<any> {
 { MCPToolCallSchema.parse(call); const _startTime = Date.now(, try {
       // Check if server exists and is connected;
 
@@ -200,7 +202,7 @@ const result = await this.executeToolCall(;
   /**
    * Execute multiple tools in parallel
    */
-  async callToolsParallel(calls: MCPToolCall[]): Promise<any> {</any>
+  async callToolsParallel(calls: MCPToolCall[]): Promise<any> {
 { calls.map((call) => this.callTool(call));
         return Promise.all(promises)}
   /**
@@ -239,8 +241,7 @@ const calls  = validated.steps.map((step) => ({ tool: step.operation,
 
 const parallelResults = await this.callToolsParallel(calls);
       validated.steps.forEach((step, index) =>  {
-        results.set(step.id, parallelResults[index])
-};)
+        results.set(step.id, parallelResults[index])    })
 } else {
       // Execute with dependency resolution, const completed = new Set<string>(); const executing = new Map<string Promise<MCPToolResult>>();</string>
       while (completed.size < validated.steps.length) {
@@ -263,8 +264,7 @@ for (const step of readySteps) {
             arguments: step.arguments || {}); executing.set(step.id, promise); // Handle completion
           promise
             .then((result) => {
-              results.set(step.id, result, completed.add(step.id); executing.delete(step.id)
-};)
+              results.set(step.id, result, completed.add(step.id); executing.delete(step.id)    })
             .catch((error) =>  {
               results.set(step.id, { tool: step.operation,
                 server: step.server,
@@ -272,10 +272,9 @@ for (const step of readySteps) {
                 error: error.message,
                 duration: 0;
                 timestamp: new Date().toISOString()
-};);
+    });
               completed.add(step.id);
-              executing.delete(step.id)
-})
+              executing.delete(step.id)    })
 }
         // Wait for at least one to complete;
 if (executing.size > 0) {
@@ -286,38 +285,39 @@ if (executing.size > 0) {
   /**
    * Get resources from a server
    */
-  async listResources(serverId: string): Promise<any> {</any>
+  async listResources(serverId: string): Promise<any> {
 { this.servers.get(serverId, if (!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`)
 }
-    return this.sendRequest(serverId, 'resources/list', {})
+    return this.sendRequest(serverId, 'resources/list', {    })
 }
   /**
    * Read a resource
    */
-  async readResource(serverId: string, uri: string): Promise<any> {</any>
+  async readResource(serverId: string, uri: string): Promise<any> {
 { this.servers.get(serverId, if (!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`)
 }
-    return this.sendRequest(serverId, 'resources/read', { uri })
+    return this.sendRequest(serverId, 'resources/read', { uri    })
 }
   /**
    * List prompts from a server
    */
-  async listPrompts(serverId: string): Promise<any> {</any>
+  async listPrompts(serverId: string): Promise<any> {
 { this.servers.get(serverId, if (!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`)
 }
-    return this.sendRequest(serverId, 'prompts/list', {})
+    return this.sendRequest(serverId, 'prompts/list', {    })
 }
   /**
    * Get a prompt
    */
-  async getPrompt(serverId: string, name: string, args?: Record<string any>): Promise<any> {</any>
+  async getPrompt(serverId: string, name: string, args?: Record<string any>): Promise<any> {
 { this.servers.get(serverId, if (!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`)
 }
-    return this.sendRequest(serverId, 'prompts/get', { name, arguments: args })
+    return this.sendRequest(serverId, 'prompts/get', { name, arguments: args   
+    })
 }
   // Private methods
   private async connectToServer(serverId: string, url: string): Promise<any> { </any>
@@ -334,8 +334,7 @@ if (executing.size > 0) {
       ws.onclose = () => {
         this.connections.delete(serverId); const server = this.servers.get(serverId, if (server) {
           server.status = 'disconnected'
-  }
-})
+  }    })
 }
   private async discoverCapabilities(serverId: string): Promise<MCPCapability[]> {</MCPCapability>
     try {
@@ -345,18 +344,18 @@ if (executing.size > 0) {
 const capabilities: MCPCapability[] = [];
       if (response.capabilities?.tools) {
         capabilities.push({ type: 'tools',
-          version: response.protocolVersion || '2024-11-05'
-        })
+          version: response.protocolVersion || '2024-11-05'   
+    })
 }
       if (response.capabilities?.resources) {
         capabilities.push({ type: 'resources',
-          version: response.protocolVersion || '2024-11-05'
-        })
+          version: response.protocolVersion || '2024-11-05'   
+    })
 }
       if (response.capabilities?.prompts) {
         capabilities.push({ type: 'prompts',
-          version: response.protocolVersion || '2024-11-05'
-        })
+          version: response.protocolVersion || '2024-11-05'   
+    })
 }
       return capabilities
 } catch (error) {
@@ -364,13 +363,14 @@ const capabilities: MCPCapability[] = [];
       return []
 }
 }
-  private async discoverTools(serverId: string): Promise<any> {</any>
+  private async discoverTools(serverId: string): Promise<any> {
     try {
       const response = await this.sendRequest(serverId, 'tools/list', {});
       return response.tools.map((tool: any) => ({;
         ...tool;
         server: serverId
-      }))
+     
+    }))
 } catch (error) {
       console.error(`Failed to discover tools for ${serverId}:`, error);
       return []
@@ -384,7 +384,7 @@ const capabilities: MCPCapability[] = [];
       timeout
     )
 }
-  private async sendRequest(serverId: string, method: string, params: any, timeout? null : number): Promise<any> {</any>
+  private async sendRequest(serverId: string, method: string, params: any, timeout? null : number): Promise<any> {
 { this.connections.get(serverId, if (!connection || connection.readyState !== WebSocket.OPEN) {
       throw new Error(`Not connected to server ${serverId}`)
 };
@@ -399,9 +399,9 @@ const capabilities: MCPCapability[] = [];
       const timeoutMs = timeout || this.config?.defaultTimeout || 30000; const timer = setTimeout(() => {
         this.pendingRequests.delete(id); reject(new Error(`Request timeout after ${timeoutMs};ms`))
 }, timeoutMs);
-      this.pendingRequests.set(id, { resolve, reject, timeout: timer });
-      connection.send(JSON.stringify(request))
-})
+      this.pendingRequests.set(id, { resolve, reject, timeout: timer
+    });
+      connection.send(JSON.stringify(request))    })
 }
   private handleMessage(serverId: string, data: string) {
     try {
@@ -421,4 +421,4 @@ const capabilities: MCPCapability[] = [];
   private generateId() {
     return Math.random().toString(36).substring(2, 15)}
 }
-}}}}}}}}}}}}}}}}}})))))))))))))))))))))
+}}}}}}}}}}}}}}}}}}

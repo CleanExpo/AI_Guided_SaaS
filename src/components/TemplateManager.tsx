@@ -18,6 +18,4 @@ export default function TemplateManager() {
       <CardContent>
           </CardContent>
         <p className="text-gray-600">
-          Template management for {currentConfig.name} coming soon...</p>
-
-})
+          Template management for {currentConfig.name} coming soon...</p>    }

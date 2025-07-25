@@ -159,5 +159,5 @@ export interface AgentRegistry {
   get(agentId: string): AgentConfig | undefined;
   getByRole(role: AgentRole): AgentConfig[];
   getAll(): AgentConfig[];
-  isRegistered(agentId: string): boolean
-})
+  isRegistered(agentId: string): boolean   
+    }

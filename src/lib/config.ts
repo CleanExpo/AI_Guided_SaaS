@@ -151,7 +151,7 @@ class ConfigurationManager {
   /**
    * Load configuration from .prp file
    */
-  async loadConfig(): Promise<any> {</any>
+  async loadConfig(): Promise<any> {
     if (this.config) {
       return this.config}
     try {;
@@ -180,7 +180,7 @@ value = this.substituteEnvironmentVariables(value);
    */
   private substituteEnvironmentVariables(value: string) {
     return value.replace(/\$\{([^}]+)\}/g, (match, envVar) => {
-      return process.env[envVar] || match};)
+      return process.env[envVar] || match    })
 }
   /**
    * Transform flat properties to typed configuration object
@@ -345,7 +345,7 @@ properties: Record<string string></string>
   /**
    * Get specific configuration section
    */
-  async getAIProviderConfig(): Promise<any> {</any>
+  async getAIProviderConfig(): Promise<any> {
 { await this.loadConfig();
         return config.aiProvider}
   async getModelConfig(provider: string): Promise { const config = await this.loadConfig(, switch (provider.toLowerCase()) {
@@ -362,7 +362,7 @@ break
     default: throw new Error(`Unknown AI, provider: ${provider}`);``
   }
 }
-  async getAgentConfig(): Promise<any> {</any>
+  async getAgentConfig(): Promise<any> {
 { await this.loadConfig();
         return config.agents}
   async getFeatureFlags(): Promise<any> {;</any>
@@ -418,4 +418,4 @@ export const _isFeatureEnabled = (feature: keyof FeatureFlagsConfig) =>
   configManager.isFeatureEnabled(feature);
 export const _getPrimaryModelForTask = (
     task: 'code_generation' | 'documentation' | 'analysis' | 'review') => configManager.getPrimaryModelForTask(task);
-}}}}}}}}})))))))))))))))))))))))))
+}}}}}}}}}

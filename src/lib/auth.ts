@@ -15,23 +15,24 @@ export const authOptions: NextAuthOptions={ providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+   
     });
   ],
   adapter?: supabase SupabaseAdapter({ url: supabaseUrl!,
-        secret: supabaseKey!
-      }) 
+        secret: supabaseKey!   
+    })
     : undefined,
   session: { strategy: 'jwt'
   },
   callbacks: {
-    async jwt({ token, account, profile }): Promise<any> {</any>
+    async jwt({ token, account, profile }): Promise<any> {
       if (account && profile) {
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token
 }
       return token
 },
-    async session({ session, token }): Promise<any> {</any>
+    async session({ session, token }): Promise<any> {
       if (token) {
         session.accessToken = token.accessToken as string;
         session.refreshToken = token.refreshToken as string

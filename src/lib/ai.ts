@@ -26,7 +26,7 @@ export interface ChatCompletionOptions { messages: AIMessage[];
  */;
 export async function generateChatCompletion(
     options: ChatCompletionOptions;
-): Promise<any> {</any>
+): Promise<any> {
   try {
     const response = await openai.chat.completions.create({ model: options.model || 'gpt-4',
     messages: options.messages,
@@ -56,7 +56,7 @@ export async function generateCompletion(
   options? null : {
     model?: string, temperature?: number, max_tokens?: number
 }
-): Promise<any> {</any>
+): Promise<any> {
   return generateChatCompletion({ messages: [{ role: 'user', content: prompt }];
     ...options)
 }
@@ -66,7 +66,7 @@ export async function generateCompletion(
 export async function analyzeCode(
     code: string;
   language?: string;
-): Promise<any> {</any>
+): Promise<any> {
 { `Analyze the following ${language || 'code'} and provide, insights: ``
 \`\`\`${language || ''}``
 ${code}
@@ -86,7 +86,7 @@ const response = await generateCompletion(prompt);
 export async function generateCodeSuggestions(
     description: string;
     language: string = 'typescript';
-): Promise<any> {</any>
+): Promise<any> {
   const, prompt = `Generate ${language} code based on this, description: ${description}`;`Please provide clean, well-documented code following best practices.`;``;
 
 const response = await generateCompletion(prompt);
@@ -103,4 +103,4 @@ export default { generateChatCompletion,
   generateCodeSuggestions
 }
 
-})))
+}

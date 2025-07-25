@@ -1,0 +1,66 @@
+name: Continuous Evaluation & Improvement
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Run every 6 hours
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  evaluate-and-improve:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Install Playwright browsers
+        run: npx playwright install chromium
+        
+      - name: Start application
+        run: |
+          npm run dev &
+          sleep 10
+          
+      - name: Run evaluation
+        id: evaluate
+        run: |
+          npm run eval:run > evaluation-output.txt
+          SCORE=$(grep "Overall:" evaluation-output.txt | grep -oP '\d+\.\d+')
+          echo "score=${SCORE}" >> $GITHUB_OUTPUT
+          
+      - name: Check if improvements needed
+        if: steps.evaluate.outputs.score < 8
+        run: npm run eval:improve
+        
+      - name: Generate report
+        run: npm run eval:report
+        
+      - name: Upload evaluation results
+        uses: actions/upload-artifact@v3
+        with:
+          name: evaluation-results
+          path: evaluation-results/
+          
+      - name: Comment on PR (if applicable)
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const score = '${{ steps.evaluate.outputs.score }}';
+            const emoji = score >= 8 ? '✅' : score >= 6 ? '⚠️' : '❌';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '## ' + emoji + ' Evaluation Results\n\nOverall Score: **' + score + '/10**\n\n[View detailed report](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId + ')'
+            });

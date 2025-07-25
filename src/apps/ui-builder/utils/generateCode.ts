@@ -9,7 +9,7 @@ export const generateCodeFromComponent = (
 </button>`
     case 'input':
       return `<input``;
-    break type="text";
+    break type="text"
 placeholder="${props.placeholder || 'Enter, text...'}";
 className="px-3 py-2 border rounded w-full max-w-sm";
     />`</input>

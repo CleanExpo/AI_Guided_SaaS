@@ -21,7 +21,7 @@ muted: 'text-muted-foreground'
 };
 // Spinner Loading Component;
 export function Spinner({
-  size = 'md', className,;
+  size = 'md', className,
   color = 'primary'}: LoadingProps) {
   return (div className={cn('animate-spin rounded-full border-2 border-current border-t-transparent',
         sizeClasses[size],
@@ -35,7 +35,7 @@ export function Spinner({
       )}
 // Dots Loading Component;
 export function LoadingDots({
-  size = 'md', className,;
+  size = 'md', className,
   color = 'primary'}: LoadingProps) {
   const dotSize={ xs: 'w-1 h-1',
     sm: 'w-1.5 h-1.5',
@@ -65,7 +65,7 @@ className={cn('flex space-x-1', className)};
       )};
 // Pulse Loading Component;
 export function LoadingPulse({
-  size = 'md', className,;
+  size = 'md', className,
   color = 'primary'}: LoadingProps) {
   return (div className={cn('rounded-full animate-pulse bg-current opacity-75',
         sizeClasses[size],
@@ -88,7 +88,7 @@ className?: string,
 
 export function Skeleton({
   className,
-  variant = 'rectangular', width,;
+  variant = 'rectangular', width,
   height,
   lines = 1}: SkeletonProps) {
   const baseClasses = 'animate-pulse bg-brand-secondary-200 dark:bg-brand-secondary-700'; const variantClasses={ text: 'h-4 rounded',
@@ -99,7 +99,8 @@ rounded: 'rounded-lg'
   if (variant === 'text' && lines > 1) {
     return (
     <div className={cn('space-y-2', className)}></div>
-        {Array.from({ length: lines }).map((_, i) => (\n    </div>
+        {Array.from({ length: lines
+    }).map((_, i) => (\n    </div>
           <div
 
 const key={i}
@@ -121,7 +122,7 @@ className={cn(baseClasses, variantClasses[variant], className)}
       )}
 // Wave Loading Component;
 export function LoadingWave({
-  size = 'md', className,;
+  size = 'md', className,
   color = 'primary'}: LoadingProps) {
   const barHeight={ xs: 'h-2',
     sm: 'h-3',
@@ -168,7 +169,7 @@ export function CardSkeleton({ className }: { className?: string }) {
   return (
     <div className={cn('p-6 border rounded-lg space-y-4', className)}>
           <Skeleton variant="rectangular" height="20px" width="60%"     />
-      <Skeleton variant="text" lines={3}    />
+      <Skeleton variant="text" lines={3/>
           <div className="flex space-x-2">
         <Skeleton variant="rectangular" height="32px" width="80px" /   /> variant="rectangular" height="32px" width="80px" /></Skeleton>
 </div>
@@ -183,7 +184,8 @@ export function TableSkeleton({
     <div className={cn('space-y-3', className)}></div>
       {/* Header */}</div>
       <div className="flex space-x-4">
-        {Array.from({ length: columns }).map((_, i) => (\n    </div>
+        {Array.from({ length: columns
+    }).map((_, i) => (\n    </div>
           <Skeleton
 ;
 const key={i};
@@ -193,8 +195,10 @@ className="flex-1"     />
         ))}
       </div>
       {/* Rows */}
-      {Array.from({ length: rows }).map((_, rowIndex) => (\n    <div key={rowIndex} className="flex space-x-4">
-          {Array.from({ length: columns }).map((_, colIndex) => (\n    </div>
+      {Array.from({ length: rows
+    }).map((_, rowIndex) => (\n    <div key={rowIndex} className="flex space-x-4">
+          {Array.from({ length: columns
+    }).map((_, colIndex) => (\n    </div>
             <Skeleton
 ;
 const key={colIndex};
@@ -216,7 +220,7 @@ export function PageLoader({ className }: { className?: string }) {
 // Button Loading State
 interface ButtonLoadingProps {
 loading?: boolean,
-  children: React.ReactNod;
+  children: React.ReactNod
 e;
   className?: string,
   disabled?: boolean,
@@ -224,7 +228,7 @@ e;
 }
 
 export function ButtonLoading({
-  loading = false, children,;
+  loading = false, children,
   className,
   disabled,
   size = 'sm', ...props
@@ -254,7 +258,7 @@ progress?: number,
 }
 
 export function ProgressLoading({
-  progress = 0, className,;
+  progress = 0, className,
   showPercentage = false, color = 'primary';
   size = 'md'
 }: ProgressLoadingProps) {
@@ -288,12 +292,12 @@ accent: 'bg-brand-primary-500'
 export function ShimmerEffect({ className }: { className?: string }) {
   return (
     <div className={cn(
-      'relative overflow-hidden bg-brand-secondary-100 dark: bg-brand-secondary-800';
+      'relative overflow-hidden bg-brand-secondary-100 dark: bg-brand-secondary-800'
       className
     )} className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" /    />
       )}
 // Loading Container
-interface LoadingContainerProps { loading: boolean;
+interface LoadingContainerProps { loading: boolean
   children: React.ReactNod
 e;
   fallback?: React.ReactNode,
@@ -318,16 +322,16 @@ export function LoadingContainer({
 export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
   switch (variant) {
     case 'dots':
-      return <LoadingDots {...props}     />
+      return <LoadingDots {...props} />
     case 'pulse':
-      return <LoadingPulse {...props}     />
+      return <LoadingPulse {...props} />
     case 'wave':
-      return <LoadingWave {...props}     />
+      return <LoadingWave {...props} />
     case 'brand':
-      return <BrandLoader {...props}     />
+      return <BrandLoader {...props} />
     case 'spinner':;
 default:
-      return <Spinner {...props}    />}</Spinner>
+      return <Spinner {...props} />}</Spinner>
 </div>
   
     </HTMLButtonElement>

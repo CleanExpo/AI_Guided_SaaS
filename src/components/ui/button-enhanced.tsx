@@ -12,11 +12,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {</H
     | 'gradient'
     | 'brand'
     | 'success'
-    | 'warning', size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'icon', loading?: boolean;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
-  fullWidth?: boolean;
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+    | 'warning', size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'icon', loading?: boolean
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
+  fullWidth?: boolean
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
   shadow?: 'none' | 'sm' | 'md' | 'lg' | 'brand'
   animation? null : 'none' | 'hover' | 'press' | 'glow'
 }
@@ -73,7 +73,7 @@ export function ButtonEnhanced({
   ...props
 }: ButtonProps) {
   return (button, className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+        'inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible: outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
         buttonVariants[variant],
         buttonSizes[size],
         buttonRounded[rounded],
@@ -100,7 +100,7 @@ interface FABProps extends Omit<ButtonProps 'size'> {</ButtonProps>
 
 export function FloatingActionButton({;
   className;
-  size = 'md', position = 'bottom-right', icon,;
+  size = 'md', position = 'bottom-right', icon,
   ...props
 }: FABProps) {
   const fabSizes={ sm: 'h-12 w-12',
@@ -109,14 +109,14 @@ lg: 'h-16 w-16'};
 
     const fabPositions={'bottom-right': 'fixed bottom-6 right-6',
     'bottom-left': 'fixed bottom-6 left-6',
-    'top-right': 'fixed top-6 right-6',;
+    'top-right': 'fixed top-6 right-6',
     'top-left': 'fixed top-6 left-6'};
   return (
     <ButtonEnhanced
 
 className={cn(
-        fabSizes[size],;
-        fabPositions[position],'rounded-full shadow-lg hover: shadow-xl z-50';
+        fabSizes[size],
+        fabPositions[position],'rounded-full shadow-lg hover: shadow-xl z-50'
         className
       )}
       variant="brand";
@@ -138,18 +138,18 @@ e;
 export function ButtonGroup({
   children,
   className,
-  orientation = 'horizontal', size,;
+  orientation = 'horizontal', size,
   variant
 }: ButtonGroupProps) {
   return (div, className={cn(
-        'inline-flex',;
-        orientation === 'horizontal' ? 'flex-row' : 'flex-col';
-        '[&>button]:rounded-none [&>button: first-child]:rounded-l-md [&>button:last-child]:rounded-r-md';
+        'inline-flex',
+        orientation === 'horizontal' ? 'flex-row' : 'flex-col'
+        '[&>button]: rounded-none [&>button: first-child]:rounded-l-md [&>button:last-child]:rounded-r-md'
         orientation === 'vertical' &&;
-          '[&>button: first-child]:rounded-t-md [&>button:first-child]:rounded-l-none [&>button:last-child]:rounded-b-md [&>button:last-child]:rounded-r-none';
-        '[&>button: not(:first-child)]:border-l-0';
+          '[&>button: first-child]:rounded-t-md [&>button:first-child]:rounded-l-none [&>button:last-child]:rounded-b-md [&>button:last-child]:rounded-r-none'
+        '[&>button: not(:first-child)]:border-l-0'
         orientation === 'vertical' &&;
-          '[&>button: not(:first-child)]:border-l [&>button:not(:first-child)]:border-t-0';
+          '[&>button: not(:first-child)]:border-l [&>button:not(:first-child)]:border-t-0'
         className
       )}
     >
@@ -157,8 +157,8 @@ export function ButtonGroup({
         if (React.isValidElement(child) {)} {</div>
           return React.cloneElement(child as React.ReactElement<ButtonProps>, {</ButtonProps>
             size: size || (child.props as ButtonProps)?.size,
-variant: variant || (child.props as ButtonProps)?.variant
-          };)
+variant: variant || (child.props as ButtonProps)?.variant   
+    })
         }
         return child
 })}
@@ -187,7 +187,7 @@ interface ToggleButtonProps extends Omit<ButtonProps 'onClick'> {</ButtonProps>
 }
 
 export function ToggleButton({;
-  pressed = false, onPressedChange,;
+  pressed = false, onPressedChange,
   className,
   children,
   ...props
@@ -202,19 +202,19 @@ export function ToggleButton({;
       )}
 // Split Button
 interface SplitButtonProps extends ButtonProps { dropdownItems: Array<{
-    label: string;
+    label: string
     onClick: () => void
     icon?: React.ReactNode
     disabled? null : boolean
 }>
-  dropdownOpen?: boolean;
+  dropdownOpen?: boolean
   onDropdownToggle?: (open: boolean) => void
 }
 
 export function SplitButton({;
   children;
   dropdownItems,
-  dropdownOpen = false, onDropdownToggle,;
+  dropdownOpen = false, onDropdownToggle,
   className,
   ...props
 }: SplitButtonProps) {
@@ -245,7 +245,7 @@ const strokeWidth={2}
         <div className="absolute top-full left-0 mt-1 w-full min-w-48 bg-background border rounded-md shadow-lg z-50">
           {dropdownItems.map((item, index) => (\n    </div>
             <button const key={index};
-              className="w-full px-3 py-2 text-left text-sm hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center";
+              className="w-full px-3 py-2 text-left text-sm hover: bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
 
 onClick={ item.onClick} disabled={item.disabled}
             ></button>
@@ -355,4 +355,4 @@ const config = providerConfig[provider];
     </ButtonEnhanced>
     </HTMLButtonElement>
   }
-})))))
+}

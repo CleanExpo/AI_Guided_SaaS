@@ -6,16 +6,16 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Activity, CheckCircle, AlertCircle, XCircle, RefreshCw, Clock, Database, Globe, Server, Cpu, HardDrive, Zap } from 'lucide-react';
-interface HealthCheck { name: string;
-  status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown';
+interface HealthCheck { name: string
+  status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown'
   responseTime?: number,
   details?,
   error?: string,
   timestamp: string
 };
 interface SystemMetrics { cpu: {
-  usage: number;
-  cores: number;
+  usage: number
+  cores: number
   loadAverage: number[]
 }
   memory: { total: number, used: number, free: number, percentage: number
@@ -27,8 +27,8 @@ interface SystemMetrics { cpu: {
 interface HealthStatus { status: 'healthy' | 'unhealthy' | 'degraded',
   checks: HealthCheck[], metrics: SystemMetric
 s,
-  version: string;
-  environment: string;
+  version: string
+  environment: string
   timestamp: string
 };
 export function HealthCheckDashboard() { </HealthStatus>, const [healthData, setHealthData] = useState<HealthStatus | null>(null);</HealthStatus>
@@ -57,7 +57,7 @@ const _fetchHealthData = async () => {
 } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch health data')} finally {
       setIsLoading(false, setIsRefreshing(false)}
-  const _getStatusIcon = (status: string) =>  { switch (status) {;
+  const _getStatusIcon = (status: string) =>  { switch (status) {
       case 'healthy':;
     break, return <CheckCircle className="h-5 w-5 text-green-500"    />, break;</CheckCircle>
       case 'degraded':
@@ -73,13 +73,12 @@ break
         return <AlertCircle className="h-5 w-5 text-gray-500"     />
 }
 }
-  const _getStatusColor = (status: string) =>  { switch (status) {;
+  const _getStatusColor = (status: string) =>  { switch (status) {
       case 'healthy':;
       return 'bg-green-100 text-green-800', break, case 'degraded':;
       return 'bg-yellow-100 text-yellow-800';
     break;
-      case 'unhealthy':
-      return 'bg-red-100 text-red-800';
+      case 'unhealthy': return 'bg-red-100 text-red-800'
     break
 break
 };
@@ -120,10 +119,10 @@ variant="outline";
           <div className="flex items-center gap-2">
             {getStatusIcon(healthData.status)}</div>
             <h2 className="text-2xl font-bold">System Health</h2>
-          <Badge className={getStatusColor(healthData.status)}></Badge>
-            {healthData.status.toUpperCase()}</Badge>
+          <Badge className={getStatusColor(healthData.status)}>/>
+            {healthData.status.toUpperCase()}/>
         <div className="flex items-center gap-4 flex items-center gap-2"    />
-          <input type="checkbox";
+          <input type="checkbox"
 id="autoRefresh";
 
 checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)}</input>
@@ -212,7 +211,7 @@ size="sm";
           <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
                       {healthData.metrics.cpu.usage.toFixed(1)}%</span>
-                  <Progress value={healthData.metrics.cpu.usage}    />
+                  <Progress value={healthData.metrics.cpu.usage/>
           </div>
         <div className="grid grid-cols-2 gap-4 text-sm"     />
           <p className="text-muted-foreground">Cores</p>
@@ -233,7 +232,7 @@ size="sm";
           <span className="text-sm">Usage</span>
                     <span className="text-sm font-medium">
                       {healthData.metrics.memory.percentage.toFixed(1)}%</span>
-                  <Progress value={healthData.metrics.memory.percentage}    />
+                  <Progress value={healthData.metrics.memory.percentage/>
           </div>
         <div className="grid grid-cols-2 gap-4 text-sm"     />
           <p className="text-muted-foreground">Used</p>
@@ -257,8 +256,8 @@ size="sm";
           <h4 className="font-medium flex items-center gap-2">
                         {getStatusIcon(check.status)},
     {check.name}</h4>
-                      <Badge className={getStatusColor(check.status)}></Badge>
-                        {check.status}</Badge>
+                      <Badge className={getStatusColor(check.status)}>/>
+                        {check.status}/>
                     {check.error  && (
 p className="text-sm text-red-600 mt-2">{check.error}</p>
   },
@@ -277,4 +276,4 @@ p className="text-sm text-red-600 mt-2">{check.error}</p>
     </div>
   }
 
-}}})))))))
+}}}

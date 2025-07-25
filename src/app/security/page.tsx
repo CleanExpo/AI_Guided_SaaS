@@ -4,23 +4,23 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, Lock, Eye, Server } from 'lucide-react';
 
 export default function SecurityPage() {
-  const securityFeatures = [;
-    { icon: Shield;
+  const securityFeatures = [
+    { icon: Shield
       title: 'End-to-End Encryption',
       description: 'All data is encrypted in transit and at rest using industry-standard encryption.',
       status: 'Active'
     },
-    { icon: Lock;
+    { icon: Lock
       title: 'Multi-Factor Authentication',
       description: 'Additional security layer with MFA support for all user accounts.',
       status: 'Active'
     },
-    { icon: Eye;
+    { icon: Eye
       title: 'Privacy Controls',
       description: 'Comprehensive privacy settings to control data sharing and visibility.',
       status: 'Active'
     },
-    { icon: Server;
+    { icon: Server
       title: 'Secure Infrastructure',
       description: 'SOC 2 compliant infrastructure with regular security audits.',
       status: 'Active'

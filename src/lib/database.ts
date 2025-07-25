@@ -138,7 +138,7 @@ export class DatabaseService {
     return true
 }
   // User operations
-  static async createUser(userData: Partial<User>): Promise<any> {</any>
+  static async createUser(userData: Partial<User>): Promise<any> {
     if (!this.checkDatabase() {)} {
       // Return mock user for development
       return { id: `user-${Date.now()}`,
@@ -212,15 +212,16 @@ if (error) {
       console.error('Database, error:', error); return null
 }
 }
-  static async updateUser(id: string, updates: Partial<User>): Promise<any> {</any>
+  static async updateUser(id: string, updates: Partial<User>): Promise<any> {
     if (!this.checkDatabase() {)} {
-      :', { id, updates })
+      :', { id, updates    })
       return null
 }
     try {
       const { data, error    }: any = await supabase!;
         .from('users');
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...updates, updated_at: new Date().toISOString()   
+    })
         .eq('id', id);
         .select();
         .single();
@@ -233,7 +234,7 @@ if (error) {
 }
 }
   // Project operations
-  static async createProject(projectData: Partial<Project>): Promise<any> {</any>
+  static async createProject(projectData: Partial<Project>): Promise<any> {
     if (!this.checkDatabase() {)} {
       return { id: `project-${Date.now()}`,
 user_id: projectData.user_id || 'demo-user',
@@ -280,7 +281,8 @@ if (error) {
         .from('projects');
         .select('*');
         .eq('user_id', userId);
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false
+    });
 if (error) {
         console.error('Error fetching user, projects:', error);
         return []};
@@ -289,7 +291,7 @@ if (error) {
       console.error('Database, error:', error);
         return []}
 }
-  static async updateProject(id: string, updates: Partial<Project>): Promise<any> {</any>
+  static async updateProject(id: string, updates: Partial<Project>): Promise<any> {
     if (!this.checkDatabase() {)} {
       :', { id, updates });
       return null
@@ -297,7 +299,8 @@ if (error) {
     try {
       const { data, error    }: any = await supabase!;
         .from('projects');
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...updates, updated_at: new Date().toISOString()   
+    })
         .eq('id', id);
         .select();
         .single();
@@ -311,9 +314,9 @@ if (error) {
 }
   // Activity logging
   static async logActivity(userId: string, action: string;
-  resourceType: string, resourceId?: string, metadata? null : ActivityMetadata): Promise<any> {</any>
+  resourceType: string, resourceId?: string, metadata? null : ActivityMetadata): Promise<any> {
     if (!this.checkDatabase() {)} {
-      :', { userId, action, resourceType, resourceId, metadata })
+      :', { userId, action, resourceType, resourceId, metadata    })
       return null
 };
     try {
@@ -325,15 +328,15 @@ if (error) {
           resource_id: resourceId;
           metadata,
           created_at: new Date().toISOString()
-});
+    });
 if (error) {
         console.error('Error logging, activity:', error)} catch (error) {
       console.error('Database error logging, activity:', error)}
   // Usage tracking
   static async recordUsage(userId: string, resourceType: string;
-  quantity: number, metadata? null : UsageMetadata): Promise<any> {</any>
+  quantity: number, metadata? null : UsageMetadata): Promise<any> {
     if (!this.checkDatabase() {)} {
-      :', { userId, resourceType, quantity, metadata })
+      :', { userId, resourceType, quantity, metadata    })
       return null
 };
     try {
@@ -344,12 +347,12 @@ if (error) {
           quantity,
           metadata,
           created_at: new Date().toISOString()
-});
+    });
 if (error) {
         console.error('Error recording, usage:', error)} catch (error) {
       console.error('Database error recording, usage:', error)}
   // Feature flags
-  static async getFeatureFlag(name: string, userId? null : string): Promise<any> {</any>
+  static async getFeatureFlag(name: string, userId? null : string): Promise<any> {
     if (!this.checkDatabase() {)} {
       // Default feature flags for development, const defaultFlags: Record<string boolean> = {</string>
         'ai_chat_enabled': true,
@@ -385,7 +388,7 @@ if (data.target_users && userId) {
         return false}
 }
   // Generic query method for complex operations
-  static async query(sql: string, params? null : unknown[]): Promise<any> {</any>
+  static async query(sql: string, params? null : unknown[]): Promise<any> {
     if (!this.checkDatabase() {)} {
       :', { sql, params });
       return []
@@ -398,7 +401,7 @@ if (data.target_users && userId) {
         return []}
 }
   // Generic record creation
-  static async createRecord(table: string, data: DatabaseRecord): Promise<any> {</any>
+  static async createRecord(table: string, data: DatabaseRecord): Promise<any> {
     if (!this.checkDatabase() {)} {
       return { ...data, id: `${table}-${Date.now()}` }``
 }
@@ -418,7 +421,7 @@ if (error) {
 }
 }
   // Billing-specific methods
-  static async getUserByStripeCustomerId(customerId: string): Promise<any> {</any>
+  static async getUserByStripeCustomerId(customerId: string): Promise<any> {
     if (!this.checkDatabase() {)} { return null }
     try {
       const { data, error    }: any = await supabase!;
@@ -435,7 +438,7 @@ if (error) {
 }
 }
   static async recordPayment(paymentData: { user_id: string, stripe_payment_intent_id: string, amount: number, currency: string, status: string
-    description?: string, metadata?: PaymentMetadata }): Promise<any> {</any>
+    description?: string, metadata?: PaymentMetadata }): Promise<any> {
     if (!this.checkDatabase() {)} {
       :', paymentData)
       return null};
@@ -451,7 +454,7 @@ if (error) {
     metadata: paymentData.metadata
 }
   created_at: new Date().toISOString()
-});
+    });
 if (error) {
         console.error('Error recording, payment:', error)} catch (error) {
       console.error('Database error recording, payment:', error)}
@@ -483,7 +486,7 @@ if (error) {
   static async updateSubscription(subscriptionData: { user_id?: string, stripe_subscription_id?: string
     stripe_customer_id? null : string, status?: string
     tier? null : string, current_period_start?: string
-    current_period_end? null : string, cancel_at_period_end?: boolean }): Promise<any> {</any>
+    current_period_end? null : string, cancel_at_period_end?: boolean }): Promise<any> {
     if (!this.checkDatabase() {)} {
       :', subscriptionData)
       return null};
@@ -493,7 +496,8 @@ if (error) {
         .upsert({
           ...subscriptionData,
           updated_at: new Date().toISOString(, onConflict: 'stripe_subscription_id'
-         });
+        
+    });
 if (error) {
         console.error('Error updating, subscription:', error)} catch (error) {
       console.error('Database error updating, subscription:', error)}
@@ -516,7 +520,8 @@ if (error) {
    aiGenerations: 0;
   storage: '0MB' }}
       const usage = (usageData || []).reduce((acc: Record<string any></string>
-    record: { resource_type: string, quantity: number }) =>  {
+    record: { resource_type: string, quantity: number
+    }) =>  {
         acc[record.resource_type] = (acc[record.resource_type] || 0) + record.quantity;
         return acc}, {} as Record<string any>);</string>
       // Get project count;
@@ -538,4 +543,4 @@ hash = hash & hash // Convert to 32-bit integer
     return Math.abs(hash) % 100
 }
 
-}}}}}}}})))))))
+}}}}}}}}

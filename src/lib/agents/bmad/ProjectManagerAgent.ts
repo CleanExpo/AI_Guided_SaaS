@@ -102,7 +102,7 @@ export class ProjectManagerAgent extends Agent {
       temperature: 0.4
   }
 }
-  protected async execute(input: string): Promise<any> {</any>
+  protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting project planning process...', // Get requirements from shared memory or artifacts, const requirements  = this.getSharedMemory('primary-requirements') || [];
 
@@ -195,7 +195,7 @@ const projectPlan: ProjectPlan={ projectName: projectScope.name,
       throw error
 }
 }
-  private async defineProjectScope(input: string, requirements: string[]): Promise<any> {</any>
+  private async defineProjectScope(input: string, requirements: string[]): Promise<any> {
 { `Based on the project description and requirements, define the project, scope: Project, Description:``, ${input}
 Key: Requirements:
 ${requirements.join('\n')}
@@ -211,7 +211,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async createTimeline(projectScope, userStories: UserStory[], constraints: string[]): Promise<any> {</any>
+  private async createTimeline(projectScope, userStories: UserStory[], constraints: string[]): Promise<any> {
 { `Create a realistic project timeline based, on: ``, Project: ${projectScope.name},
 User: Stories: ${userStories.length} stories, Constraints: ${constraints.join(', ')}
 Consider:
@@ -230,7 +230,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async defineMilestones(timeline: Timeline, userStories: UserStory[]): Promise<any> {</any>
+  private async defineMilestones(timeline: Timeline, userStories: UserStory[]): Promise<any> {
 { `Define project milestones based on the timeline and user, stories: Timeline, Phases:``, ${JSON.stringify(timeline.phases, null, 2)}
 High-Priority, User: Stories:
 ${userStories
@@ -252,9 +252,9 @@ const milestones = JSON.parse(response);
     return milestones.map((m, index: number) => ({;
       ...m;
       id: `M${index + 1}`
-    }})
+    }    })
 }
-  private async createWorkBreakdown(userStories: UserStory[], milestones: Milestone[]): Promise<any> {</any>
+  private async createWorkBreakdown(userStories: UserStory[], milestones: Milestone[]): Promise<any> {
 { `Create a work breakdown structure for the, project: User, Stories:``, ${JSON.stringify(userStories, null, 2)}
 Milestones:
 ${JSON.stringify(milestones, null, 2)}
@@ -275,14 +275,14 @@ const packages = JSON.parse(response);
     return packages.map((p, index: number) => ({;
       ...p;
       id: `WP-${index + 1}`
-    }})
+    }    })
 }
-  private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise<any> {</any>
+  private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise<any> {
 { `Plan resource allocation for the, project: Work, Packages:``, ${JSON.stringify(
   workPackages.map((wp) => ({ name: wp.name,
     estimatedHours: wp.estimatedHours,
     skills: wp.assignedTo
-});
+    });
   null,
   2
 )}
@@ -301,7 +301,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async planRiskMitigation(risks: string[], projectScope): Promise<any> {</any>
+  private async planRiskMitigation(risks: string[], projectScope): Promise<any> {
 { `Create risk mitigation plans for identified, risks: ``, Project: ${projectScope.name}
 Identified: Risks:
 ${risks.join('\n')}
@@ -319,7 +319,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async createCommunicationPlan(projectScope, resourcePlan: ResourcePlan): Promise<any> {</any>
+  private async createCommunicationPlan(projectScope, resourcePlan: ResourcePlan): Promise<any> {
 { `Create a communication plan for the, project: ``, Project: ${projectScope.name}
 Team: Structure:
 ${JSON.stringify(resourcePlan.teamStructure, null, 2)}
@@ -336,7 +336,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async defineQualityPlan(requirements: string[], userStories: UserStory[]): Promise<any> {</any>
+  private async defineQualityPlan(requirements: string[], userStories: UserStory[]): Promise<any> {
 { `Define a quality assurance, plan: Key, Requirements:``, ${requirements.slice(0, 10).join('\n')}
 Acceptance Criteria from, User: Stories:
 ${userStories
@@ -356,4 +356,3 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-)))))))))))))))))

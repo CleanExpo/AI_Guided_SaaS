@@ -24,6 +24,4 @@ const [previewMode, setPreviewMode] = useState(false);
           className="px-2 py-1 bg-gray-800 text-white rounded text-sm hover:bg-gray-700";
         >
           {previewMode ? 'Edit Mode' : 'Preview Mode'
-    }</button>
-
-})
+    }</button>    }

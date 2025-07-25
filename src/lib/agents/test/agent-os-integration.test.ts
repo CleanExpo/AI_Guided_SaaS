@@ -133,7 +133,8 @@ export async function exampleAgentOSUsage() {
   const deploymentResult = await agentSystem.deployToProduction('v1.0.0', { environment: 'production',
     runTests: true,
     backup: true
-  });
+ 
+    });
   console.log('Deployment result:', deploymentResult);
 
   // Example 4: Monitor system health

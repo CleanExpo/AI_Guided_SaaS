@@ -70,7 +70,7 @@ export class AdminService {
       AdminService.instance = new AdminService()}
     return AdminService.instance
 }
-  async initialize(): Promise<any> {</any>
+  async initialize(): Promise<any> {
     if (this.initialized) {r}eturn try {
       // Initialize admin service
       this.initialized = true
@@ -80,7 +80,7 @@ export class AdminService {
   async getUsers(page: number = 1, limit: number = 50, filters? null : {
       status?: string
       subscription? null : string, search?: string
-    }): Promise<any> {</any>
+    }): Promise<any> {
     try {
       // In production, this would query the actual database, const mockUsers: UserManagement[]  = [ { id: '1',
           email: 'john@example.com',
@@ -128,10 +128,10 @@ const _users = filteredUsers.slice(startIndex, startIndex + limit);
       return { users, total, pages }} catch (error) {
       console.error('Error fetching, users:', error, throw error}};
   async updateUserStatus(userId: string, status: 'active' | 'suspended' | 'deleted',
-  adminId: string): Promise<any> {</any>
+  adminId: string): Promise<any> {
     try {
       // Log admin activity
-      await this.logAdminActivity(adminId, 'update_user_status', userId, { status })
+      await this.logAdminActivity(adminId, 'update_user_status', userId, { status    })
       // In production, update the database
     } catch (error) {
       console.error('Error updating user, status:', error, throw error}}
@@ -139,7 +139,7 @@ const _users = filteredUsers.slice(startIndex, startIndex + limit);
   async getContentForModeration(page: number = 1, limit: number = 20, filters? null : {
       type?: string
       status? null : string
-    }): Promise<any> {</any>
+    }): Promise<any> {
     try {
       const mockContent: ContentModeration[]  = [ { id: '1',
           type: 'template',
@@ -181,13 +181,13 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
       return { content, total, pages }} catch (error) {
       console.error('Error fetching content for, moderation:', error, throw error}};
   async moderateContent(contentId: string, action: 'approve' | 'reject' | 'flag',
-  adminId: string, reason? null : string): Promise<any> {</any>
+  adminId: string, reason? null : string): Promise<any> {
     try {
-      await this.logAdminActivity(adminId, 'moderate_content', contentId, { action, reason })
+      await this.logAdminActivity(adminId, 'moderate_content', contentId, { action, reason    })
     } catch (error) {
       console.error('Error moderating, content:', error, throw error}}
   // System Configuration
-  async getSystemConfiguration(): Promise<any> {</any>
+  async getSystemConfiguration(): Promise<any> {
     try {
       const mockConfig: SystemConfiguration[]  = [ { id: '1',
           category: 'general',
@@ -232,13 +232,13 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
 } catch (error) {
       console.error('Error fetching system, configuration:', error, throw error}}
   async updateConfiguration(configId: string, value: string;
-  adminId: string): Promise<any> {</any>
+  adminId: string): Promise<any> {
     try {
-      await this.logAdminActivity(adminId, 'update_configuration', configId, { value })
+      await this.logAdminActivity(adminId, 'update_configuration', configId, { value    })
     } catch (error) {
       console.error('Error updating, configuration:', error, throw error}}
   // System Statistics
-  async getSystemStats(): Promise<any> {</any>
+  async getSystemStats(): Promise<any> {
     try {
       // In production, this would aggregate real data, const stats: SystemStats={ totalUsers: 1247;
     activeUsers: 892;
@@ -254,7 +254,7 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
       console.error('Error fetching system, stats:', error, throw error}}
   // Admin Activity Logging
   async logAdminActivity(adminId: string, action: string;
-  target: string, details: Record<string unknown>, ipAddress: string = 'unknown', userAgent: string = 'unknown'): Promise<any> {</any>
+  target: string, details: Record<string unknown>, ipAddress: string = 'unknown', userAgent: string = 'unknown'): Promise<any> {
     try {
       const activity: AdminActivity={ id: `activity_${Date.now()}`,``
         adminId,
@@ -273,7 +273,7 @@ const _content = filteredContent.slice(startIndex, startIndex + limit);
       adminId?: string
       action? null : string, dateFrom?: Date
       dateTo? null : Date
-    }): Promise<any> {</any>
+    }): Promise<any> {
     try {
       const mockActivities: AdminActivity[]  = [ { id: '1',
           adminId: 'admin1',
@@ -308,13 +308,13 @@ const _activities = filteredActivities.slice(startIndex, startIndex + limit);
       return { activities, total, pages }} catch (error) {
       console.error('Error fetching admin, activity:', error, throw error}}
   // Permission Management
-  async checkAdminPermission(_adminId: string, _permission: string): Promise<any> {</any>
+  async checkAdminPermission(_adminId: string, _permission: string): Promise<any> {
     try {
       // In production, check against database
       // For now, return true for demo purposes, return true} catch (error) {
       console.error('Error checking admin, permission:', error);
         return false}}
-  async getAdminPermissions(): Promise<any> {</any>
+  async getAdminPermissions(): Promise<any> {
     try {
       const permissions: AdminPermission[]  = [ { id: '1',
           name: 'manage_users',
@@ -389,4 +389,4 @@ const _status = hasFailures ? 'critical' ?: hasWarnings 'warning' : 'healthy';
 // Export singleton instance;
 export const _adminService = AdminService.getInstance();
 
-}}}))))))))))))))))))
+}}}

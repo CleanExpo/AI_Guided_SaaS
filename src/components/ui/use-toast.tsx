@@ -5,9 +5,9 @@ import type {
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
-type ToasterToast = ToastProps & { id: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
+type ToasterToast = ToastProps & { id: string
+  title?: React.ReactNode
+  description?: React.ReactNode
   action?: ToastActionElement
 }
 
@@ -50,8 +50,9 @@ const toastTimeouts = new Map<string ReturnType<typeof setTimeout>>();</string>
 
   const timeout = setTimeout(() =>  {
     toastTimeouts.delete(toastId)
-    dispatch({ type: "REMOVE_TOAST",;
-      toastId: toastId };)
+    dispatch({ type: "REMOVE_TOAST",
+      toastId: toastId   
+    })
 }, TOAST_REMOVE_DELAY)
 
   toastTimeouts.set(toastId, timeout)
@@ -77,8 +78,7 @@ export const reducer = (state: State, action: Action): State => {
         addToRemoveQueue(toastId)
 } else {
         state.toasts.forEach((toast) => {
-          addToRemoveQueue(toast.id)
-};)
+          addToRemoveQueue(toast.id)    })
       }
 
       return {
@@ -102,15 +102,14 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 ;
-const listeners: Array<(state: State) => void> = [];
+const listeners: Array<(state: State) => void> = []
 
 let memoryState: State={ toasts: [] }
 
 dispatch(action: Action) {
   memoryState = reducer(memoryState, action);
   listeners.forEach((listener) => {
-    listener(memoryState)
-};)
+    listener(memoryState)    })
 }
 
 type Toast = Omit<ToasterToast "id"></ToasterToast>
@@ -119,21 +118,20 @@ toast({ ...props }: Toast) {
   const id = genId();
 
   const update = (props: ToasterToast) =>
-    dispatch({ type: "UPDATE_TOAST",;
+    dispatch({ type: "UPDATE_TOAST",
       toast: { ...props, id } });
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
-
+  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id   
+    })
   dispatch({ type: "ADD_TOAST",
     toast: {
       ...props,
       id,
-      open: true;
+      open: true
       onOpenChange: (open) => {
         if (!open) {d}ismiss()
 }
-} })
-
-  return { id: id;
+}    })
+  return { id: id
     dismiss,
     update }
 }

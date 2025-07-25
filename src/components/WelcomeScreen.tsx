@@ -6,7 +6,7 @@ import { Persona } from '@/types';
 import { Bot, Code, Palette, Rocket, Sparkles, Zap } from 'lucide-react';
 interface WelcomeScreenProps { onSelectPersona: (persona: Persona) => void
  };
-const personas: Persona[]  = [;
+const personas: Persona[]  = [
   { id: 'ai-architect',
     name: 'AI Architect',
     description: 'Expert in AI-powered development workflows and intelligent automation',
@@ -114,7 +114,7 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
 </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {personas.map((persona) => (\n    </div>
-            <Card key={persona.id} className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${;
+            <Card key={persona.id} className={`cursor-pointer transition-all duration-300 hover: shadow-lg hover:scale-105 ${
                 selectedPersona === persona.id, ? 'ring-2 ring-blue-500 shadow-lg scale-105';
                   : 'hover:shadow-md'
               }`}
@@ -170,6 +170,4 @@ className="w-full mt-4";
     </CardTitle>
     </div>
     
-  }
-
-})
+  }    }

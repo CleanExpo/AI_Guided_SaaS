@@ -9,7 +9,7 @@ import { Progress } from '@/components/ui/progress';
 import { Bot, Code, Palette, Rocket, Sparkles, Brain, BarChart3, Users, ArrowRight, Play, Pause, RefreshCw, TrendingUp, Wrench } from 'lucide-react';
 import Link from 'next/link';
 
-const personas  = [;
+const personas  = [
   { id: 'ai-architect',
     name: 'AI Architect',
     description: 'Expert in AI-powered development workflows',
@@ -35,29 +35,29 @@ const personas  = [;
     color: 'from-orange-500 to-red-500'
     , icon: Rocket}];
 
-const liveFeatures = [;
+const liveFeatures = [
   { title: 'Claude Code Integration',
     description: 'Advanced AI-powered development with token optimization',
-  icon: Brain;
+  icon: Brain
     demo: 'claude-dashboard',
 color: 'bg-blue-500'},
   { title: 'Visual UI Builder',
     description: 'Drag-and-drop interface builder with real-time preview',
-  icon: Wrench;
+  icon: Wrench
     demo: 'ui-builder',
 color: 'bg-brand-primary-500'},
   { title: 'Analytics Dashboard',
     description: 'Real-time performance monitoring and insights',
-  icon: BarChart3;
+  icon: BarChart3
     demo: 'analytics',
 color: 'bg-green-500'},
   { title: 'Collaboration Workspace',
     description: 'Team collaboration with real-time synchronization',
-  icon: Users;
+  icon: Users
     demo: 'collaboration',
 color: 'bg-orange-500'}];
 
-const claudeCommands  = [;
+const claudeCommands  = [
   { command: '/init-docs' , status: 'completed', tokens: '+8K' },
   { command: '/sync-docs' , status: 'executing', tokens: '+2K' },
   { command: '/compact-docs' , status: 'pending', tokens: '-15K' },
@@ -85,7 +85,7 @@ const _interval = setInterval(() =>  {
     return () => clearInterval(interval)
 }, [isPlaying]);
   
-const _renderPersonaShowcase = () => (\n    ;:
+const _renderPersonaShowcase = () => (\n:
         <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const _Icon = persona.icon, </div>, return (
@@ -123,8 +123,8 @@ const className={`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring
           <Badge
 variant="secondary";
 className="w-full justify-center";
-                      ></Badge>
-                        Active Persona</Badge>
+                      >/>
+                        Active Persona/>
                       <Button size="sm", className="w-full" asChild>
           <Link href="/auth/signin"></Link>
                           Start with {persona.name}</Link>
@@ -137,7 +137,7 @@ className="w-full justify-center";
 }
 </div>
       )}
-  const _renderClaudeDashboard = () => (;
+  const _renderClaudeDashboard = () => (
     <Card className="glass border-0">
           <CardHeader></CardHeader>
         <div className="flex items-center justify-between flex items-center gap-2">
@@ -149,7 +149,7 @@ className="w-full justify-center";
 variant="ghost";
 
     const onClick={() => setIsPlaying(!isPlaying)};</Button>
-              className="text-white hover:bg-white/10";
+              className="text-white hover: bg-white/10"
             >
               {isPlaying ? (</Button>
                 <Pause className="w-4 h-4"     />
@@ -161,7 +161,7 @@ size="sm";
 variant="ghost";
 
 const onClick={() => setMemoryUsage(42)};</Button>
-              className="text-white hover:bg-white/10";
+              className="text-white hover: bg-white/10"
             ></Button>
               <RefreshCw className="w-4 h-4"    />
           </Button>
@@ -197,10 +197,10 @@ const onClick={() => setMemoryUsage(42)};</Button>
                   }`} > <span className="font-mono text-sm text-white">
                   {cmd.command}</span>
               <Badge variant="outline", className="text-xs">
-                {cmd.tokens}</Badge>
+                {cmd.tokens}/>
             </motion.div>
           ))}
-  const _renderUIBuilder = () => (;
+  const _renderUIBuilder = () => (
     <Card className="glass border-0">
           <CardHeader></CardHeader>
         <div className="flex items-center gap-2">
@@ -212,7 +212,7 @@ const onClick={() => setMemoryUsage(42)};</Button>
           <div className="grid grid-cols-3 gap-2 mb-4">
           {['Button', 'Card', 'Input', 'Modal', 'Chart', 'Table'].map(</div>, component: any = > (\n    </div>
               <motion.div; const key={component}
-                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer hover:bg-white/20 transition-colors";
+                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer hover: bg-white/20 transition-colors"
 
     whileHover={{ scale: 1.05 } whileTap={{ scale: 0.95 }
               ></motion>
@@ -222,7 +222,7 @@ const onClick={() => setMemoryUsage(42)};</Button>
         <div className="h-32 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex items-center justify-center text-center text-white/60">
           <Palette className="w-8 h-8 mx-auto mb-2"     />
             <p className="text-sm">Drop components here</p>
-{ () => (;
+{ () => (
     <Card className="glass border-0">
           <CardHeader></CardHeader>
         <div className="flex items-center gap-2">
@@ -246,7 +246,7 @@ const onClick={() => setMemoryUsage(42)};</Button>
                     +{5 + index * 2}%</span>
       ) });
   
-const _renderCollaboration = () => (;
+const _renderCollaboration = () => (
     <Card className="glass border-0">
           <CardHeader></CardHeader>
         <div className="flex items-center gap-2">
@@ -265,18 +265,17 @@ const _renderCollaboration = () => (;
               status: 'away',</div>, action: 'Last seen 5m ago'}].map((user) => (\n    </div>
             <div key={user.name} className="flex items-center gap-3" className={`w-3 h-3 rounded-full ${``
                   user.status === 'online' ? 'bg-green-400' : 'bg-yellow-400'
-                }`}    />
+                }`/>
           <div className="flex-1 text-sm font-medium text-white">
                   {user.name}</div>
                 <div className="text-xs text-white/60">{user.action}</div>
           ))}
-  const _renderDemo = (): void => { switch (activeDemo) {;
+  const _renderDemo = (): void => { switch (activeDemo) {
       case 'claude-dashboard':;
       return renderClaudeDashboard(, break, case 'ui-builder':;
       return renderUIBuilder();
     break;
-      case 'analytics':
-      return renderAnalytics();
+      case 'analytics': return renderAnalytics()
     break
       case 'collaboration':;
       return renderCollaboration();
@@ -296,7 +295,7 @@ const _renderCollaboration = () => (;
           >
           <Badge variant="outline";
 className="mb-6 glass border-white/20 text-white";
-            ></Badge>
+            >/>
               <Sparkles className="w-3 h-3 mr-1"     />
               AI-Powered SaaS Platform</Sparkles>
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
@@ -307,8 +306,7 @@ className="mb-6 glass border-white/20 text-white";
               sophisticated platform.</p>
           </motion.div>
           {/* Persona, Selection Showcase */}
-          <motion.div;
-:
+          <motion.div:
 initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
             const transition={{ duration: 0.8 delay: 0.2 }
             className="mb-16";
@@ -383,7 +381,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
               Join the next generation of AI-powered development</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg";
-className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600 hover:to-brand-primary-600";
+className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue-600 hover:to-brand-primary-600"
                 // asChild
               ></Button>
                 <Link href="/auth/signin"></Link>
@@ -393,7 +391,7 @@ className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-
               <Button
 size="lg";
 variant="outline";
-className="border-white/20 text-white hover:bg-white/10";
+className="border-white/20 text-white hover: bg-white/10"
                 // asChild
               >
           <Link href="/ui-builder"></Link>
@@ -402,4 +400,4 @@ className="border-white/20 text-white hover:bg-white/10";
           </motion.div>
 </div>
 
-}}}}}}}}}}}}}}}}}}}}}}}}}}}}}})))))))))
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}

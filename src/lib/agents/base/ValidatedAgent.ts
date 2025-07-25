@@ -17,12 +17,12 @@ export abstract class ValidatedAgent extends Agent {
    * Process input with validation
    */
   @Validate(z.string(, AgentResultSchema)
-  async process(input: string): Promise<any> {</any>
+  async process(input: string): Promise<any> {
     return, super.process(input)}
   /**
    * Execute with input validation
    */
-  protected async execute(input: string): Promise<any> {</any>
+  protected async execute(input: string): Promise<any> {
     // Validate specific input if schema is provided, if (this.inputSchema) {
       try {
         const _validatedInput = this.inputSchema.parse(input); return this.executeValidated(validatedInput)
@@ -81,7 +81,7 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
     )
 }
   @ValidateOutput(RequirementAnalysisSchema);
-  protected async executeValidated(input: string): Promise<any> {</any>
+  protected async executeValidated(input: string): Promise<any> {
     try {
       this.think('Starting validated requirement analysis...', // Your analysis logic here, const analysis = await this.analyzeRequirements(input);
       // Validate output;
@@ -105,12 +105,12 @@ const _validatedAnalysis = this.validateOutput(analysis);
     artifacts: this.context.artifacts,
     error: error instanceof Error ? error.message : 'Unknown error'
 }
-  private async analyzeRequirements(input: string): Promise<any> {</any>
+  private async analyzeRequirements(input: string): Promise<any> {
     // Simplified for example - implement your actual logic, const _prompt  = `Analyze these requirements and provide a structured, analysis: ${input}`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
     temperature: this.config.temperature,
-    responseFormat: 'json'
+    responseFormat: 'json'   
     })
     return JSON.parse(response)
 }
@@ -128,7 +128,8 @@ export function ValidatedAgentConfig(schema: z.ZodSchema): z.ZodSchema) {
  * Agent configuration schema
  */;
 export const _AgentConfigSchema = z.object({ id: z.string(, name: z.string(),
-    role: z.string(, description: z.string().optional(, capabilities: z.array(z.string()).optional(, tools: z.array(z.string()).optional(, model: z.string().optional(, temperature: z.number().min(0).max(2).optional(, maxTokens: z.number().positive().optional(, systemPrompt: z.string().optional()})
+    role: z.string(, description: z.string().optional(, capabilities: z.array(z.string()).optional(, tools: z.array(z.string()).optional(, model: z.string().optional(, temperature: z.number().min(0).max(2).optional(, maxTokens: z.number().positive().optional(, systemPrompt: z.string().optional()   
+    })
 /**
  * Create a validated agent factory
  */;
@@ -141,7 +142,7 @@ export function createValidatedAgent<TInput TOutput>(</TInput>
   return new (class extends ValidatedAgent {
     constructor() {
       super(config, inputSchema, outputSchema)}
-    protected async executeValidated(input: TInput): Promise<any> {</any>
+    protected async executeValidated(input: TInput): Promise<any> {
       try {;
         const _output = await executeFunction(input); const _validatedOutput = this.validateOutput(output);
         return { success: true;
@@ -157,4 +158,4 @@ export function createValidatedAgent<TInput TOutput>(</TInput>
 }})()
 }
 
-}}}}}}}}}))))))))))
+}}}}}}}}}

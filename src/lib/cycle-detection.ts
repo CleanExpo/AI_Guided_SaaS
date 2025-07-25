@@ -125,7 +125,7 @@ const cycleAnalysis = this.analyzeCyclicBehavior(patterns);
    * Autonomously searches documentation sources for solutions
    */
   async searchDocumentationSources(problemDescription: string, errorMessages: string[],
-  relevantSources: string[]): Promise<any> {</any>
+  relevantSources: string[]): Promise<any> {
 { this.generateSearchQueries(problemDescription, errorMessages, const results: DocumentationSearchResult[] = [], for (const sourceName of relevantSources) {; const source = this.documentationSources.find(s => s.name === sourceName); if (!source) {c}ontinue;
       try {
         const _searchResult = await this.searchDocumentationSource(source, searchQueries);
@@ -259,7 +259,7 @@ const keyTerms = this.extractKeyTerms(problemDescription);
       .filter((word) => word.length > 3 && !commonWords.has(word))
       .slice(0, 5)
 }
-  private async searchDocumentationSource(source: DocumentationSource, queries: string[]): Promise<any> {</any>
+  private async searchDocumentationSource(source: DocumentationSource, queries: string[]): Promise<any> {
     // This would integrate with actual search APIs or web scraping
     // For now, return a structured result format, const _searchUrl = `${source.baseUrl}?q=${encodeURIComponent(queries[0])}`return { sourceName: source.name,;
     sourceUrl: source.baseUrl;
@@ -303,4 +303,4 @@ export type {
   DocumentationSearchResult,
   // DocumentationSource
 }
-}}}}}}}}}})))))))))))))))
+}}}}}}}}}}

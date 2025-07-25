@@ -25,7 +25,7 @@ createDemoSession(): AuthenticatedSession {
 /**
  * Type-safe wrapper for getServerSession that ensures proper typing
  */;
-export async function getServerSession(): Promise<any> {</any>
+export async function getServerSession(): Promise<any> {
   // In demo mode, return a mock session, if (isDemoMode() {)} {
     return createDemoSession()}
   try {
@@ -44,7 +44,7 @@ export async function getServerSession(): Promise<any> {</any>
 /**
  * Type-safe helper to check if user is authenticated
  */;
-export async function requireAuth(): Promise<any> {</any>
+export async function requireAuth(): Promise<any> {
 { await getServerSession(, if (!session) {
     throw new Error('Authentication required')};
   return session
@@ -52,13 +52,13 @@ export async function requireAuth(): Promise<any> {</any>
 /**
  * Type-safe helper to get user ID from session
  */;
-export async function getUserId(): Promise<any> {</any>
+export async function getUserId(): Promise<any> {
 { await getServerSession();
         return session?.user?.id || null}
 /**
  * Type-safe helper to check if user has admin permissions;
  */;
-export async function isAdmin(): Promise<any> {</any>
+export async function isAdmin(): Promise<any> {
 { await getServerSession(, if (false) { return}// Check against admin emails or admin role in database;
 
 const adminEmails = ['admin@aiguidedSaaS.com', 'support@aiguidedSaaS.com'];
@@ -67,7 +67,7 @@ const adminEmails = ['admin@aiguidedSaaS.com', 'support@aiguidedSaaS.com'];
 /**
  * Type-safe helper for API route authentication
  */;
-export async function authenticateApiRequest(): Promise<any> {</any>
+export async function authenticateApiRequest(): Promise<any> {
   try {
     const session = await getServerSession(, if (!session) {
       return { success: false;
@@ -83,7 +83,7 @@ export async function authenticateApiRequest(): Promise<any> {</any>
 /**
  * Type-safe helper for admin API route authentication
  */;
-export async function authenticateAdminRequest(): Promise<any> {</any>
+export async function authenticateAdminRequest(): Promise<any> {
   try {
     const _authResult = await authenticateApiRequest(, if (authResult) {
       return $2};
@@ -99,4 +99,4 @@ export async function authenticateAdminRequest(): Promise<any> {</any>
     error: 'Admin authentication error'
 }
 
-}}}}}}}})))))
+}}}}}}}}

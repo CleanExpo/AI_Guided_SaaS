@@ -121,7 +121,7 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
   /**
    * Start the container orchestrator
    */
-  public async start(): Promise<void> {</void>
+  public async start(): Promise<void> {
     // Start resource monitoring
     this.resourceMonitor.start();
     
@@ -139,7 +139,7 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
   /**
    * Stop the container orchestrator
    */
-  public async stop(): Promise<void> {</void>
+  public async stop(): Promise<void> {
     // Stop health checks
     this.stopHealthChecks();
     
@@ -159,7 +159,7 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
   /**
    * Deploy an agent in a container
    */
-  public async deployAgent(agent: Agent, customConfig? null : Partial<ContainerConfig>): Promise<void> {</void>
+  public async deployAgent(agent: Agent, customConfig? null : Partial<ContainerConfig>): Promise<void> {
 { agent.getConfig();
     const agentId = agentConfig.id;
     
@@ -215,7 +215,7 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
       await container.start();
       containerizedAgent.status = 'running';
       
-      this.emit('agent:deployed', { agentId })
+      this.emit('agent:deployed', { agentId    })
 } catch (error) {
       this.emit('agent:deploy:error', { agentId, error });
       throw error
@@ -225,7 +225,7 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
   /**
    * Stop a containerized agent
    */
-  public async stopContainer(agentId: string): Promise<void> {</void>
+  public async stopContainer(agentId: string): Promise<void> {
 { this.containers.get(agentId);
     if (!containerizedAgent) {
       throw new Error(`Agent ${agentId} is not deployed`)
@@ -236,7 +236,7 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
       containerizedAgent.status = 'stopped';
       this.containers.delete(agentId);
       
-      this.emit('agent:stopped', { agentId })
+      this.emit('agent:stopped', { agentId    })
 } catch (error) {
       this.emit('agent:stop:error', { agentId, error });
       throw error
@@ -267,13 +267,13 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
       await this.deployAgent(scaledAgent, scaledConfig)
 }
     
-    this.emit('agent:scaled', { agentId, instances })
+    this.emit('agent:scaled', { agentId, instances    })
 }
 
   /**
    * Build Docker image for an agent
    */
-  private async buildAgentImage(agent: Agent): Promise<string> {</string>
+  private async buildAgentImage(agent: Agent): Promise<string> {
 { agent.getConfig().type;
     const imageName = `agent-${agent.getConfig().id}:latest`;
     
@@ -283,7 +283,8 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
     
     // Create temporary build directory
     const buildDir = path.join(process.cwd(, '.docker-build', agent.getConfig().id);
-    await fs.mkdir(buildDir, { recursive: true });
+    await fs.mkdir(buildDir, { recursive: true
+    });
     
     try {
       // Write Dockerfile
@@ -298,21 +299,23 @@ CMD ["node", "dist/agents/specialized/DevOpsAgent.js"]
       return imageName
 } finally {
       // Clean up build directory
-      await fs.rm(buildDir, { recursive: true, force: true })
+      await fs.rm(buildDir, { recursive: true, force: true   
+    })
 }
   }
 
   /**
    * Copy agent files to build directory
    */
-  private async copyAgentFiles(buildDir: string): Promise<void> {</void>
+  private async copyAgentFiles(buildDir: string): Promise<void> {
     // Copy package files
     await fs.copyFile('package.json', path.join(buildDir, 'package.json'));
     await fs.copyFile('package-lock.json', path.join(buildDir, 'package-lock.json'));
     
     // Copy agent source files
     const srcDir = path.join(buildDir, 'src', 'lib', 'agents');
-    await fs.mkdir(srcDir, { recursive: true });
+    await fs.mkdir(srcDir, { recursive: true
+    });
     await this.copyDirectory(path.join('src', 'lib', 'agents', srcDir);
     
     // Create health check script
@@ -333,9 +336,11 @@ server.listen(3000);
   /**
    * Copy directory recursively
    */
-  private async copyDirectory(src: string, dest: string): Promise<void> {</void>
-    await fs.mkdir(dest, { recursive: true });
-    const entries = await fs.readdir(src, { withFileTypes: true });
+  private async copyDirectory(src: string, dest: string): Promise<void> {
+    await fs.mkdir(dest, { recursive: true
+    });
+    const entries = await fs.readdir(src, { withFileTypes: true
+    });
     
     for (const entry of entries) {
       const srcPath = path.join(src, entry.name); const destPath = path.join(dest, entry.name); if (entry.isDirectory() {)} {
@@ -354,22 +359,21 @@ server.listen(3000);
     return new Promise((resolve, reject) =>  {
       const process = spawn('docker', ['build', '-t', imageName, '.'], { cwd: buildDir;
         stdio: 'inherit'
- };);
+
+    });
       
       process.on('exit', (code) =>  {
         if (code === 0) {;
           resolve()
 }; else {
           reject(new Error(`Docker build failed with code ${code}`))
-}
-      })
-})
+}    })    })
 }
 
   /**
    * Create Docker network
    */
-  private async createNetwork(): Promise<void> {</void>
+  private async createNetwork(): Promise<void> {
     const { spawn } = await import('child_process');
     
     return new Promise((resolve) => {
@@ -379,9 +383,7 @@ server.listen(3000);
       
       process.on('exit', () =>  {
         // Ignore errors (network might already exist);
-        resolve()
-};)
-})
+        resolve()    })    })
 }
 
   /**
@@ -389,7 +391,7 @@ server.listen(3000);
    */
   private setupContainerEventHandlers(container: AgentContainer, agentId: string): void {
     container.on('container:started', (data) => {
-      this.emit('container:started', { agentId, ...data };)
+      this.emit('container:started', { agentId, ...data    })
 });
     
     container.on('container:stopped', (data) => {
@@ -411,12 +413,11 @@ server.listen(3000);
     });
     
     container.on('stats', (stats) => {
-      this.emit('container:stats', { agentId, stats };)
+      this.emit('container:stats', { agentId, stats    })
 });
     
     container.on('resource:warning', (data) => {
-      this.emit('resource:warning', { agentId, ...data };)
-})
+      this.emit('resource:warning', { agentId, ...data    })    })
 }
 
   /**
@@ -437,7 +438,7 @@ server.listen(3000);
 }
           } catch (error) {
             containerizedAgent.healthStatus = 'unknown';
-            this.emit('health:check:error', { agentId, error })
+            this.emit('health:check:error', { agentId, error    })
 }
 }
     }, this.config.healthCheckInterval!)
@@ -470,7 +471,7 @@ server.listen(3000);
     
     return new AgentClass({
       ...config,
-      id: newId
+      id: newId   
     })
 }
 
@@ -517,4 +518,4 @@ server.listen(3000);
     }
 }
 }
-}}}}}}}}})))))
+}}}}}}}}}

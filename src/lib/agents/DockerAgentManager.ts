@@ -30,7 +30,7 @@ export class DockerAgentManager {
   /**
    * Start an agent in a Docker container
    */
-  async startAgentContainer(agent: AgentConfig): Promise<any> {</any>
+  async startAgentContainer(agent: AgentConfig): Promise<any> {
 { `ai-saas-${agent.agent_id}`;
     // Check if container already exists;
 
@@ -61,7 +61,7 @@ const _containerId = await this.createContainer(config);
   /**
    * Stop an agent container
    */
-  async stopAgentContainer(agentId: string): Promise<any> {</any>
+  async stopAgentContainer(agentId: string): Promise<any> {
     const, containerName = `ai-saas-${agentId}`
     try {
       await execAsync(`docker stop ${containerName} --time 10`)``;
@@ -78,7 +78,7 @@ const status = this.containerMap.get(containerName);
   /**
    * Get container status for an agent
    */
-  async getContainerStatus(agentId: string): Promise<any> {</any>
+  async getContainerStatus(agentId: string): Promise<any> {
     const, containerName = `ai-saas-${agentId}`
     try {;
       // Get container stats; const { stdout    }: any  = await execAsync(
@@ -90,7 +90,8 @@ const stats = JSON.parse(stdout.trim();
 
 const healthResult = await execAsync(;
         `docker inspect ${containerName} --format '{{.State.Health.Status}}'`;
-      ).catch(() => ({ stdout: 'none' }));
+      ).catch(() => ({ stdout: 'none'
+    }));
 
 const status: ContainerStatus={ id: stats.ID || 'unknown',
     name: containerName;
@@ -108,7 +109,7 @@ const status: ContainerStatus={ id: stats.ID || 'unknown',
   /**
    * Get all container statuses
    */
-  async getAllContainerStatuses(): Promise<any> {</any>
+  async getAllContainerStatuses(): Promise<any> {
     try {
       const { stdout    }: any  = await execAsync(
         `docker ps --filter "name=ai-saas-" --format "{{.Names}}"```;
@@ -143,7 +144,7 @@ const _containersToStop = currentContainers.slice(-toRemove);
   /**
    * Clean up stopped containers
    */
-  async cleanupStoppedContainers(): Promise<any> {</any>
+  async cleanupStoppedContainers(): Promise<any> {
     try {
       const { stdout    }: any  = await execAsync(
         `docker ps -a --filter "name=ai-saas-" --filter "status=exited" --format "{{.Names}}"```; ); const _stoppedContainers = stdout.trim().split('\n').filter(Boolean);
@@ -152,14 +153,14 @@ const _containersToStop = currentContainers.slice(-toRemove);
 }} catch (error) {
       console.error('Failed to cleanup, containers:', error)}
   // Private helper methods
-  private async containerExists(name: string): Promise<any> {</any>
+  private async containerExists(name: string): Promise<any> {
     try {
       await execAsync(`docker inspect ${name}`)``; return true
 } catch {
       return, false
   }
 }
-  private async startExistingContainer(name: string): Promise<any> {</any>
+  private async startExistingContainer(name: string): Promise<any> {
     try {
       await execAsync(`docker start ${name}`)``;
 
@@ -169,7 +170,7 @@ const { stdout    }: any = await execAsync(`docker inspect ${name} --format '{{.
       throw new Error(`Failed to start container ${name}: ${error}`)``
   }
 }
-  private async createContainer(config: ContainerConfig): Promise<any> {</any>
+  private async createContainer(config: ContainerConfig): Promise<any> {
 { Object.entries(config.environment, .map(([key, value]) => `-e ${key}="${value}"`)``;
       .join(', ');
 
@@ -186,7 +187,7 @@ const _command = `docker run -d \;``
       throw new Error(`Failed to create, container: ${error}`)``
   }
 }
-  private async updateContainerStatus(name: string): Promise<any> {</any>
+  private async updateContainerStatus(name: string): Promise<any> {
 { name.replace('ai-saas-', '', await this.getContainerStatus(agentId)}
   private getCpuLimit(priority: number) {
     // Higher priority agents get more CPU, const cpuMap: Record<number string> = {</number>
@@ -224,7 +225,7 @@ const _command = `docker run -d \;``
     break
 }
       default: return 'unknown'}}
-  private async getContainersByType(agentType: string): Promise<any> {</any>
+  private async getContainersByType(agentType: string): Promise<any> {
     try {
       const { stdout    }: any = await execAsync(
         `docker ps --filter "name=ai-saas-${agentType}" --format "{{json .}}"`
@@ -241,7 +242,7 @@ const _command = `docker run -d \;``
   }
 };
 // Export convenience functions;
-export async function startAgentInContainer(agent: AgentConfig): Promise<any> {</any>
+export async function startAgentInContainer(agent: AgentConfig): Promise<any> {
 { DockerAgentManager.getInstance();
         return manager.startAgentContainer(agent)
  };
@@ -249,11 +250,11 @@ export async function stopAgentContainer(agentId: string): Promise<any> { </any>
 { DockerAgentManager.getInstance();
         return manager.stopAgentContainer(agentId)
 };
-export async function getAgentContainerStatus(agentId: string): Promise<any> {</any>
+export async function getAgentContainerStatus(agentId: string): Promise<any> {
 { DockerAgentManager.getInstance();
         return manager.getContainerStatus(agentId)
  };
-export async function getAllAgentStatuses(): Promise<any> {</any>
+export async function getAllAgentStatuses(): Promise<any> {
 { DockerAgentManager.getInstance();
         return manager.getAllContainerStatuses()};`
-}}}}}}}}}}}}})))))))
+}}}}}}}}}}}}}

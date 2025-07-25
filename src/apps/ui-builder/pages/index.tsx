@@ -25,5 +25,4 @@ export default function UIBuilderHome() {
         <PreviewPane     />
         <ComponentPropsEditor     />
         <CodeViewer     />
-        <DeploymentPanel     />
-})
+        <DeploymentPanel     />    }

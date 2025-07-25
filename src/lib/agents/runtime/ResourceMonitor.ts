@@ -215,16 +215,16 @@ export class ResourceMonitor extends EventEmitter {
         message: `CPU usage critical: ${snapshot.cpu.usage.toFixed(1)}%`,
         value: snapshot.cpu.usage,
         threshold: this.thresholds.cpu.critical,
-        timestamp: new Date()
-      })
+        timestamp: new Date()   
+    })
 } else if (snapshot.cpu.usage >= this.thresholds.cpu.warning) {
       alerts.push({ type: 'cpu',
         level: 'warning',
         message: `CPU usage high: ${snapshot.cpu.usage.toFixed(1)}%`,
         value: snapshot.cpu.usage,
         threshold: this.thresholds.cpu.warning,
-        timestamp: new Date()
-      })
+        timestamp: new Date()   
+    })
 }
     
     // Check Memory
@@ -234,16 +234,16 @@ export class ResourceMonitor extends EventEmitter {
         message: `Memory usage critical: ${snapshot.memory.percentage.toFixed(1)}%`,
         value: snapshot.memory.percentage,
         threshold: this.thresholds.memory.critical,
-        timestamp: new Date()
-      })
+        timestamp: new Date()   
+    })
 } else if (snapshot.memory.percentage >= this.thresholds.memory.warning) {
       alerts.push({ type: 'memory',
         level: 'warning',
         message: `Memory usage high: ${snapshot.memory.percentage.toFixed(1)}%`,
         value: snapshot.memory.percentage,
         threshold: this.thresholds.memory.warning,
-        timestamp: new Date()
-      })
+        timestamp: new Date()   
+    })
 }
     
     // Add alerts to snapshot
@@ -251,8 +251,7 @@ export class ResourceMonitor extends EventEmitter {
     
     // Emit alerts
     alerts.forEach(alert => {
-      this.emit('alert', alert)
-};)
+      this.emit('alert', alert)    })
 }
 
   /**
@@ -288,7 +287,8 @@ export class ResourceMonitor extends EventEmitter {
     const totals = relevantSnapshots.reduce((acc, snapshot) => ({ cpu: acc.cpu + snapshot.cpu.usage,
       memory: acc.memory + snapshot.memory.percentage,
       loadAverage: acc.loadAverage + snapshot.cpu.loadAverage[0]
-}, { cpu: 0, memory: 0, loadAverage: 0 });
+}, { cpu: 0, memory: 0, loadAverage: 0
+    });
     
     return { cpu: totals.cpu / relevantSnapshots.length,
       memory: totals.memory / relevantSnapshots.length,
@@ -360,4 +360,4 @@ export class ResourceMonitor extends EventEmitter {
       recommendations: this.getRecommendations()
     }
 }
-})))
+}

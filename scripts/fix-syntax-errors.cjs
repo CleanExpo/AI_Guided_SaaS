@@ -1,132 +1,78 @@
-#!/usr/bin/env node
-
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-console.log('🔧 Starting Syntax Error Auto-Fix...\n');
+// Function to fix common syntax errors in TypeScript files
+function fixSyntaxErrors(filePath) {
+  let content = fs.readFileSync(filePath, 'utf8');
+  let modified = false;
+  const originalContent = content;
 
-let totalFiles = 0;
-let totalFixes = 0;
-const fixPatterns = new Map();
-
-// Common syntax error patterns to fix
-const syntaxFixes = [
-  // Fix semicolons after object literals in function calls
-  {
-    pattern: /(\{\s*);(\s*\w+\s*:)/g,
-    replacement: '$1,$2',
-    description: 'Fix semicolon after object literal opening'
-  },
-  {
-    pattern: /(:\s*['"`][^'"`]+['"`]\s*);(\s*\})/g,
-    replacement: '$1$2',
-    description: 'Fix semicolon before object closing'
-  },
-  {
-    pattern: /(:\s*['"`][^'"`]+['"`]\s*);(\s*\w+\s*:)/g,
-    replacement: '$1,$2',
-    description: 'Fix semicolon instead of comma in objects'
-  },
-  // Fix missing commas in metadata and objects
-  {
-    pattern: /(title:\s*['"`][^'"`]+['"`])\s*\n(\s*description:)/g,
-    replacement: '$1,\n$2',
-    description: 'Add missing comma after title'
-  },
-  {
-    pattern: /(description:\s*['"`][^'"`]+['"`])\s*\n(\s*\w+:)/g,
-    replacement: '$1,\n$2',
-    description: 'Add missing comma after description'
-  },
-  // Fix function call syntax
-  {
-    pattern: /\)\s*;\s*\)/g,
-    replacement: '))',
-    description: 'Remove extra semicolon in nested function calls'
-  },
-  // Fix array/object destructuring
-  {
-    pattern: /const\s+\{\s*([^}]+)\s*\}\s*;\s*=/g,
-    replacement: 'const { $1 } =',
-    description: 'Fix destructuring syntax'
-  },
-  // Fix JSX syntax
-  {
-    pattern: /(<\w+[^>]*>)\s*;/g,
-    replacement: '$1',
-    description: 'Remove semicolon after JSX opening tag'
-  },
-  // Fix export syntax
-  {
-    pattern: /export\s+default\s+(\w+)\s*;(\s*;)/g,
-    replacement: 'export default $1;',
-    description: 'Fix double semicolon in export'
+  // Fix 1: Replace {</NextResponse> with {
+  if (content.includes('{</NextResponse>')) {
+    content = content.replace(/{<\/NextResponse>/g, '{');
+    modified = true;
   }
-];
 
-function fixFile(filePath) {
-  try {
-    let content = fs.readFileSync(filePath, 'utf8');
-    const originalContent = content;
-    let fileFixCount = 0;
-
-    // Apply each fix pattern
-    syntaxFixes.forEach(({ pattern, replacement, description }) => {
-      const matches = content.match(pattern);
-      if (matches) {
-        content = content.replace(pattern, replacement);
-        const fixCount = matches.length;
-        fileFixCount += fixCount;
-        
-        const key = description;
-        fixPatterns.set(key, (fixPatterns.get(key) || 0) + fixCount);
-      }
-    });
-
-    // Additional specific fixes
-    // Fix fetch API calls with semicolons
-    content = content.replace(/fetch\([^)]+,\s*\{;/g, 'fetch($1, {');
-    content = content.replace(/'Content-Type':\s*'application\/json'\s*};/g, "'Content-Type': 'application/json' }");
-    
-    // Fix React component props
-    content = content.replace(/\}\s*;\s*\)/g, ' })');
-    
-    // Fix import statements
-    content = content.replace(/import\s+{([^}]+)}\s*;\s*from/g, 'import {$1} from');
-
-    if (content !== originalContent) {
-      fs.writeFileSync(filePath, content, 'utf8');
-      console.log(`✅ Fixed ${fileFixCount} syntax errors in: ${path.relative(process.cwd(), filePath)}`);
-      totalFixes += fileFixCount;
-      totalFiles++;
-    }
-  } catch (error) {
-    console.error(`❌ Error processing ${filePath}:`, error.message);
+  // Fix 2: Replace {</string> with {
+  if (content.includes('{</string>')) {
+    content = content.replace(/{<\/string>/g, '{');
+    modified = true;
   }
+
+  // Fix 3: Replace {</typeof> with {
+  if (content.includes('{</typeof>')) {
+    content = content.replace(/{<\/typeof>/g, '{');
+    modified = true;
+  }
+
+  // Fix 4: Fix object property syntax - replace ; with ,
+  content = content.replace(/(\w+):\s*([^,;{}]+);(\s*\w+:)/g, '$1: $2,$3');
+  if (content !== originalContent) modified = true;
+
+  // Fix 5: Fix object literal syntax - replace ={ with = {
+  content = content.replace(/=\{(\s*\w+:)/g, '= {$1');
+  if (content !== originalContent) modified = true;
+
+  // Fix 6: Fix missing commas in function parameters
+  content = content.replace(/(\w+):\s*z\.string\(\)\.[\w]+\([^)]+\)\s+(\w+:)/g, '$1: z.string().$2');
+  if (content !== originalContent) modified = true;
+
+  // Fix 7: Fix Record<string type> syntax
+  content = content.replace(/Record<string\s+(\w+)>/g, 'Record<string, $1>');
+  if (content !== originalContent) modified = true;
+
+  // Fix 8: Fix function declaration syntax
+  content = content.replace(/^(\s*)(\w+)\(([^)]+)\)\s*\{/gm, '$1function $2($3) {');
+  if (content !== originalContent) modified = true;
+
+  // Fix 9: Fix closing braces at end of file
+  content = content.replace(/\}\};(\s*\))*$/g, '    }\n}');
+  if (content !== originalContent) modified = true;
+
+  // Fix 10: Remove trailing semicolons after comments
+  content = content.replace(/\/\/[^;]+;$/gm, (match) => match.slice(0, -1));
+  if (content !== originalContent) modified = true;
+
+  if (modified) {
+    fs.writeFileSync(filePath, content, 'utf8');
+    console.log(`Fixed syntax errors in: ${filePath}`);
+    return true;
+  }
+  return false;
 }
 
-// Find all TypeScript and TSX files
-const files = glob.sync('src/**/*.{ts,tsx}', {
-  ignore: ['**/node_modules/**', '**/*.d.ts']
+// Find all TypeScript files in src/app/api
+const files = glob.sync('src/app/api/**/*.ts', { cwd: process.cwd() });
+
+console.log(`Found ${files.length} TypeScript files to check...`);
+
+let fixedCount = 0;
+files.forEach(file => {
+  const fullPath = path.join(process.cwd(), file);
+  if (fixSyntaxErrors(fullPath)) {
+    fixedCount++;
+  }
 });
 
-console.log(`Found ${files.length} files to check...\n`);
-
-// Process each file
-files.forEach(fixFile);
-
-// Summary
-console.log('\n📊 Fix Summary:');
-console.log(`Total files modified: ${totalFiles}`);
-console.log(`Total fixes applied: ${totalFixes}`);
-
-if (fixPatterns.size > 0) {
-  console.log('\nFixes by type:');
-  for (const [pattern, count] of fixPatterns) {
-    console.log(`  - ${pattern}: ${count}`);
-  }
-}
-
-console.log('\n✨ Syntax error fix complete!');
-console.log('Run "npm run typecheck" to see remaining errors.');
+console.log(`\nFixed syntax errors in ${fixedCount} files.`);

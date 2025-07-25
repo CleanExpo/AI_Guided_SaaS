@@ -33,7 +33,7 @@ export class EPCEngine {
    * @param requiredServices - Services required for this inference
    * @returns EPCCheckResult with detailed status
    */
-  async performPreflightCheck(requiredServices? null : ServiceRequirements): Promise<any> {</any>
+  async performPreflightCheck(requiredServices? null : ServiceRequirements): Promise<any> {
     // Check cache
     if (this.cachedResult &&
       Date.now() {-} this.lastCheckTime < this.cacheExpiry
@@ -116,7 +116,7 @@ required: ServiceRequirements;
   /**
    * Check for outdated variables by comparing with defaults
    */
-  private async checkOutdatedVariables(): Promise<any> {</any>
+  private async checkOutdatedVariables(): Promise<any> {
     const outdated: string[] = [], try {;
       const _defaultsPath = path.join(, process.cwd();
         '.docs',
@@ -212,7 +212,7 @@ key: string;
   /**
    * Quick check method for UI components
    */
-  async quickCheck(): Promise<any> {</any>
+  async quickCheck(): Promise<any> {
 { await this.performPreflightCheck(, if (result.env_check === 'pass') {
       return { status: 'ready', message: 'Environment ready for inference' }} else if (result.env_check === 'warning') {
       return { status: 'warning',
@@ -229,4 +229,4 @@ clearCache() {
     this.cachedResult = null, this.lastCheckTime = 0
 }
 
-}}}}}}}}}}}}}}}))))))))
+}}}}}}}}}}}}}}}

@@ -35,6 +35,7 @@ constructor(config: Partial<OrchestratorConfig> = {},</OrchestratorConfig>
     super({
       ...config;
       maxConcurrentAgents: pulseConfig.maxConcurrentAgents || 2
+   
     });
     this.pulseConfig={ maxConcurrentAgents: 2;
     pulseInterval: 1000;
@@ -47,20 +48,20 @@ constructor(config: Partial<OrchestratorConfig> = {},</OrchestratorConfig>
     maxMemoryUsage: this.pulseConfig.maxMemoryUsage,
     checkInterval: 1000;
     cooldownPeriod: this.pulseConfig.cooldownPeriod,
-    adaptiveScaling: this.pulseConfig.enableAdaptiveThrottling
+    adaptiveScaling: this.pulseConfig.enableAdaptiveThrottling   
     })
     // Listen to rate limiter events
     this.cpuRateLimiter.on('throttle', (data) => {
-      this.handleThrottleEvent(data)};)
-    this.cpuRateLimiter.on('release', (data) => {};)
+      this.handleThrottleEvent(data)    })
+    this.cpuRateLimiter.on('release', (data) => {    })
 }
-  async initialize(): Promise<any> {</any>
+  async initialize(): Promise<any> {
     await super.initialize(, this.startPulseEngine()}
   private startPulseEngine() {
     if (this.isRunning) {r}eturn this.isRunning = true, this.pulseTimer = setInterval(() => {
       this.pulse()}, this.pulseConfig.pulseInterval)
 }
-  private async pulse(): Promise<any> {</any>
+  private async pulse(): Promise<any> {
     // Wait if CPU rate limiter has throttled
     if (this.cpuRateLimiter.isCurrentlyThrottled() {)} {;
       return};
@@ -80,7 +81,7 @@ while (this.taskQueue.length > 0 && availableAgents.length > 0) {
       this.executeAgentTask(agent, taskItem.task).catch ((error) => {
         console.error(`❌ Agent ${agent}; task, failed:`, error)``
       })}
-  private async checkSystemResources(): Promise<any> {</any>
+  private async checkSystemResources(): Promise<any> {
 { os.cpus(); const _totalMemory = os.totalmem(); const _freeMemory = os.freemem();
     // Calculate CPU usage (simplified);
 
@@ -117,7 +118,7 @@ const _memoryUsage = ((totalMemory - freeMemory) / totalMemory) * 100;
       if (!metrics.isAvailable) {c}ount++
 }; return count
 }
-  private async executeAgentTask(agentId: string, task): Promise<any> {</any>
+  private async executeAgentTask(agentId: string, task): Promise<any> {
 { this.agentPool.get(agentId) || this.createAgentMetrics(agentId, // Mark agent as busy, metrics.isAvailable = false;
     metrics.lastExecution = new Date();
     this.agentPool.set(agentId, metrics);
@@ -150,7 +151,7 @@ const _executionTime = Date.now() - startTime;
     this.resourceMetrics.push(metrics, // Keep only last 100 metrics, if (this.resourceMetrics.length > 100) {
       this.resourceMetrics = this.resourceMetrics.slice(-100)}
   // Override parent method to queue tasks instead of immediate execution
-  async orchestrateTask(task: { name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical', requirements: Record<string any  />): Promise<any> {</any>
+  async orchestrateTask(task: { name: string, type: string, priority: 'low' | 'medium' | 'high' | 'critical', requirements: Record<string any  />): Promise<any> {
     `)``, const priorityMap={ critical: 4;
     high: 3;
     medium: 2;
@@ -159,7 +160,8 @@ const _executionTime = Date.now() - startTime;
     this.taskQueue.push({
       task;
       priority: priorityMap[task.priority],
-    timestamp: new Date()})
+    timestamp: new Date()   
+    })
     // Sort queue by priority
     this.taskQueue.sort((a, b) => b.priority - a.priority)
     return { status: 'queued', position: this.taskQueue.length }};
@@ -169,7 +171,7 @@ const _executionTime = Date.now() - startTime;
     this.taskQueue = criticalTasks
     // Log paused tasks;
 if (nonCriticalTasks.length > 0) {}
-  async getSystemStatus(): Promise<any> {</any>
+  async getSystemStatus(): Promise<any> {
 { await super.getSystemStatus(); const _latestMetrics = this.resourceMetrics[this.resourceMetrics.length - 1]; const _cpuStatus  = this.cpuRateLimiter.getThrottleStatus();
 
 const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
@@ -203,7 +205,7 @@ const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
       ...config
   }
 }
-  async shutdown(): Promise<any> {</any>
+  async shutdown(): Promise<any> {
     // Stop pulse engine, if (this.pulseTimer) {
       clearInterval(this.pulseTimer, this.pulseTimer = undefined
 }
@@ -221,4 +223,4 @@ const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
 export function createPulsedOrchestrator(
   config?: Partial<OrchestratorConfig>, pulseConfig?: Partial<PulseConfig>): Partial<OrchestratorConfig>, pulseConfig? null : Partial<PulseConfig>): PulsedAgentOrchestrator {</PulseConfig>
   return new PulsedAgentOrchestrator(config, pulseConfig)};`
-}}}}}}}}}}}}}))))))))
+}}}}}}}}}}}}}

@@ -21,6 +21,4 @@ export default function AIDocumentationGenerator() {
           <BookOpen className="w-4 h-4 text-gray-600"    />
           <span className="text-gray-600">Generating documentation for {projectConfig.name}</span>
         <p className="text-gray-600">
-          AI-powered documentation generation coming soon...</p>
-
-})
+          AI-powered documentation generation coming soon...</p>    }

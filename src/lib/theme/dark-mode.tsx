@@ -127,7 +127,7 @@ export function ThemeSelector() {
 
 const [isOpen, setIsOpen] = useState(false);
   
-const themes = [;
+const themes = [
   { value: 'light', label: 'Light', icon: '☀️' },
     { value: 'dark', label: 'Dark', icon: '🌙' },
     { value: 'system', label: 'System', icon: '💻' }] as const;
@@ -231,4 +231,4 @@ export type { Theme, ThemeContextType }
     }
 </Theme>
 `
-}}}}}))))
+}}}}}

@@ -16,7 +16,8 @@ const [error, setError] = useState<string | null>(null);</string>
   
 const [formData, setFormData] = useState({ email: '',
 password: ''
-  });
+ 
+    });
   
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(, setIsLoading(true); setError(null);
@@ -24,7 +25,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       const result = await signIn('credentials', { email: formData.email,
         password: formData.password,
 redirect: false
-      };);
+     
+    });
       if (result?.error) { setError('Invalid email or password')} else {
         const session = await getSession(, if (session) {
           router.push('/dashboard')} catch {
@@ -33,7 +35,8 @@ redirect: false
   
 const handleGoogleSignIn = async () =>  {
     setIsGoogleLoading(true, setError(null), try {;
-      await signIn('google', { callbackUrl: '/dashboard'  };)
+      await signIn('google', { callbackUrl: '/dashboard'   
+    })
     } catch {;
       setError('Failed to sign in with Google'); setIsGoogleLoading(false)};
   return (
@@ -73,10 +76,11 @@ className="w-full";
               <div className="relative">
           <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400"     />
                 <Input id="email";
-type="email";
+type="email"
 placeholder="Enter your email";
 
-    value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })};</Input>
+    value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value
+    })};/>
                   className="pl-10";
                   required
                 />
@@ -87,10 +91,11 @@ placeholder="Enter your email";
           <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400"     />
                 <Input
 id="password";
-type="password";
+type="password"
 placeholder="Enter your password";
 
-    value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })};</Input>
+    value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value
+    })};/>
                   className="pl-10";
                   required
                 />
@@ -118,4 +123,4 @@ className="p-0 h-auto font-normal";
     
   }
 
-}}}})))
+}}}}

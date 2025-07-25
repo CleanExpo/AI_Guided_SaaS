@@ -194,11 +194,10 @@ export class TokenOptimizationEngine {
       triggers: [
         { condition: 'token_threshold', threshold: 0.9 },
         { condition: 'manual' }
-   ]
-    })
+   ]    })
 }
   // Main Optimization Methods
-  async analyzeTokenUsage(content: Map<string string>): Promise<any> {</any>
+  async analyzeTokenUsage(content: Map<string string>): Promise<any> {
 { this.calculateTotalTokens(content); const distribution = this.analyzeTokenDistribution(content); const efficiency  = this.calculateEfficiencyMetrics(content, distribution);
 
 const fragmentation = this.analyzeFragmentation(content);
@@ -220,7 +219,7 @@ if (this.analysisHistory.length > 10) {
     this.updateTokenBudget(analysis);
     return analysis
 }
-  async optimizeTokenUsage(content: Map<string string>, strategyName: string = 'balanced'): Promise<any> {</any>
+  async optimizeTokenUsage(content: Map<string string>, strategyName: string = 'balanced'): Promise<any> {
 { this.optimizationStrategies.get(strategyName, if (!strategy) {
       throw new Error(`Optimization strategy '${strategyName}' not found`)``
 };
@@ -244,7 +243,8 @@ const optimizationLog: OptimizationOperation[] = [];
             originalTokens,
             newTokens: originalTokens;
     reason: 'Always preserve rule applied'
-          });
+         
+    });
           // break
         case 'conditionally_preserve':
       // Light compression while preserving structure
@@ -259,7 +259,8 @@ const _lightTokens = this.estimateTokens(processedContent);
             originalTokens,
             newTokens: lightTokens;
     reason: 'Conditional preservation with light compression'
-          });
+         
+    });
           // break
         case 'compressible':
       // Moderate compression preserving key information
@@ -274,7 +275,8 @@ const _moderateTokens = this.estimateTokens(processedContent);
             originalTokens,
             newTokens: moderateTokens;
     reason: 'Applied moderate compression'
-          });
+         
+    });
           // break
         case 'archivable':
       // Archive or heavily compress
@@ -289,7 +291,8 @@ const _heavyTokens = this.estimateTokens(processedContent);
             originalTokens,
             newTokens: heavyTokens;
     reason: 'Applied heavy compression or archival'
-          });
+         
+    });
           // break
 }
       optimizedContent.set(filename, processedContent)
@@ -444,24 +447,24 @@ distribution: TokenDistribution;
       recommendations.push({ type: 'compress',
         target: 'Implementation documentation',
         estimatedSavings: Math.floor((distribution.categories['implementation'] || 0) * 0.3, riskLevel: 'low',
-        description: 'Compress implementation details while preserving key information'
-      })
+        description: 'Compress implementation details while preserving key information'   
+    })
 }
     // High redundancy recommendations;
 if (efficiency.redundancyLevel > 0.3) {
       recommendations.push({ type: 'merge',
         target: 'Duplicate content',
         estimatedSavings: Math.floor(Object.values(distribution.files).reduce((sum, tokens) => sum + tokens, 0) * efficiency.redundancyLevel * 0.5, riskLevel: 'medium',
-        description: 'Merge or deduplicate repeated content across files'
-      })
+        description: 'Merge or deduplicate repeated content across files'   
+    })
 };
     // Fragmentation recommendations;
 if (fragmentation.score > 0.6) {
       recommendations.push({ type: 'consolidate',
         target: 'Small scattered files',
         estimatedSavings: Math.floor(fragmentation.score * 1000, riskLevel: 'low',
-        description: 'Consolidate small files to reduce overhead and improve coherence'
-      })
+        description: 'Consolidate small files to reduce overhead and improve coherence'   
+    })
 }
     return recommendations
 }
@@ -494,7 +497,7 @@ if (fragmentation.score > 0.6) {
     this.currentBudget.utilizationRate = analysis.currentUsage / this.maxTokens
 }
   // Public API Methods
-  async recommendOptimizationStrategy(content: Map<string string>): Promise<any> {</any>
+  async recommendOptimizationStrategy(content: Map<string string>): Promise<any> {
 { await this.analyzeTokenUsage(content, if ('conservative') { return $2 } else if ('balanced' ) { return $2 } else { return: 'aggressive' }}
   getTokenBudget(): TokenBudget {
     return { ...this.currentBudget }}
@@ -524,4 +527,4 @@ interface OptimizationOperation { filename: string;
 // Export singleton instance;
 export const _tokenOptimizationEngine = new TokenOptimizationEngine();
 `
-}}}}}}}}})))))))))))))))
+}}}}}}}}}

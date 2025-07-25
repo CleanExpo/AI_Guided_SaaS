@@ -3,35 +3,35 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Alert } from '../ui/alert';
-interface SystemMetrics { cpuUsage: number;
-  memoryUsage: number;
-  operationCount: number;
-  sessionDuration: number;
-  lastOperation: string;
+interface SystemMetrics { cpuUsage: number
+  memoryUsage: number
+  operationCount: number
+  sessionDuration: number
+  lastOperation: string
   isHealthy: boolean
  };
-interface PerformanceThresholds { cpuWarning: number;
-  cpuCritical: number;
-  memoryWarning: number;
-  memoryCritical: number;
-  maxOperationsPerMinute: number;
+interface PerformanceThresholds { cpuWarning: number
+  cpuCritical: number
+  memoryWarning: number
+  memoryCritical: number
+  maxOperationsPerMinute: number
   maxSessionDuration: number
  };
 export default function SystemResourceMonitor() {
   const [metrics, setMetrics] = useState<SystemMetrics>({</SystemMetrics>
-    cpuUsage: 0;
-    memoryUsage: 0;
-    operationCount: 0;
-    sessionDuration: 0;
-    lastOperation: 'None';
+    cpuUsage: 0
+    memoryUsage: 0
+    operationCount: 0
+    sessionDuration: 0
+    lastOperation: 'None'
         </SystemMetrics>, isHealthy: true});
   
 const [thresholds] = useState<PerformanceThresholds>({</PerformanceThresholds>
-    cpuWarning: 70;
-    cpuCritical: 85;
-    memoryWarning: 75;
-    memoryCritical: 90;
-    maxOperationsPerMinute: 10;
+    cpuWarning: 70
+    cpuCritical: 85
+    memoryWarning: 75
+    memoryCritical: 90
+    maxOperationsPerMinute: 10
 maxSessionDuration: 5400, // 90 minutes
 </PerformanceThresholds>
   });
@@ -41,8 +41,8 @@ const [isMonitoring, setIsMonitoring] = useState<any>([])
 const [alerts, setAlerts]  = useState<string[]>([]);</string>
 
 const [operationHistory, setOperationHistory] = useState<;
-    Array<{ timestamp: number;
-    operation: string;
+    Array<{ timestamp: number
+    operation: string
 duration: number
     }}>
   >([]);
@@ -58,19 +58,17 @@ const _updateMetrics = (): void => { // Simulate CPU usage based on recent opera
     
 const _simulatedCpu  = Math.min(95, 15 + recentOps * 8 + Math.random() * 10);
 
-const _simulatedMemory = Math.min(;
+const _simulatedMemory = Math.min(
       95,
-      25 + operationCount.current * 2 + Math.random() * 15;
-    );
+      25 + operationCount.current * 2 + Math.random() * 15);
     
 const _currentTime  = Date.now();
 
-const _sessionDuration = Math.floor(;
-      (currentTime - sessionStartTime.current) / 1000;
-    );
+const _sessionDuration = Math.floor(
+      (currentTime - sessionStartTime.current) / 1000);
     
 const newMetrics: SystemMetrics={ cpuUsage: Math.round(simulatedCpu, memoryUsage: Math.round(simulatedMemory),
-    operationCount: operationCount.current;
+    operationCount: operationCount.current
       sessionDuration,
       lastOperation: operationHistory[operationHistory.length - 1]?.operation || 'None',
 isHealthy: simulatedCpu < thresholds.cpuCritical && simulatedMemory < thresholds.memoryCritical };
@@ -79,7 +77,7 @@ isHealthy: simulatedCpu < thresholds.cpuCritical && simulatedMemory < thresholds
 };
   
 const _checkThresholds = (currentMetrics: SystemMetrics) =>  {
-    const newAlerts: string[] = [], // CPU Alerts, if (currentMetrics.cpuUsage >= thresholds.cpuCritical) { newAlerts.push(;
+    const newAlerts: string[] = [], // CPU Alerts, if (currentMetrics.cpuUsage >= thresholds.cpuCritical) { newAlerts.push(
         `🔴 CRITICAL: CPU usage at ${currentMetrics.cpuUsage };% - STOP OPERATIONS IMMEDIATELY`
       )
 } else if (currentMetrics.cpuUsage >= thresholds.cpuWarning) {
@@ -105,8 +103,8 @@ if (currentMetrics.sessionDuration >= thresholds.maxSessionDuration) {
 }
     // Operation Rate Alert;
 
-const _recentOps = operationHistory.filter(;
-      op: any => Date.now() - op.timestamp < 60000;
+const _recentOps = operationHistory.filter(
+      op: any => Date.now() - op.timestamp < 60000
     ).length;
     if (recentOps >= thresholds.maxOperationsPerMinute) {
       newAlerts.push(
@@ -128,7 +126,7 @@ const _stopMonitoring = (): void => {
       clearInterval(monitoringInterval.current, monitoringInterval.current = null
 };
   const _logOperation = (operation: string) => {
-    const _timestamp = Date.now(, operationCount.current += 1, setOperationHistory(prev => [;
+    const _timestamp = Date.now(, operationCount.current += 1, setOperationHistory(prev => [
       ...prev.slice(-19),
       {
   timestamp,
@@ -142,7 +140,7 @@ const _emergencyStop = (): void => { stopMonitoring(, setAlerts(['🚨 EMERGENCY
     // - Save current state
     // - Clear memory caches
     // - Reset system resources  };
-  const _getStatusColor = (value: number, warning: number,;
+  const _getStatusColor = (value: number, warning: number,
   critical: number) =>  {
     if (value >= critical) {r}eturn 'text-red-600 bg-red-100', if (value >= warning) {r}eturn 'text-yellow-600 bg-yellow-100', return 'text-green-600 bg-green-100'
 };
@@ -166,7 +164,7 @@ const _formatDuration = (seconds: number) => {
         <div className="flex gap-3">
           {!isMonitoring ? (</div>
             <Button const onClick={startMonitoring};
-              className="bg-green-600 hover:bg-green-700";
+              className="bg-green-600 hover: bg-green-700"
             ></Button>
               ▶️ Start Monitoring</Button>
           ) : (
@@ -175,7 +173,7 @@ const _formatDuration = (seconds: number) => {
               <Button
 
 const onClick={emergencyStop};
-                className="bg-red-600 hover:bg-red-700";
+                className="bg-red-600 hover: bg-red-700"
               ></Button>
                 🚨 Emergency Stop</Button>
           )},
@@ -317,4 +315,4 @@ span className="text-red-600 font-medium">
     </any>
   }
 
-}}}))))))))
+}}}

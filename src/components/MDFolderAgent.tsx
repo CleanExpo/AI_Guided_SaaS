@@ -16,6 +16,4 @@ export default function MDFolderAgent() {
       <CardContent>
           </CardContent>
         <p className="text-gray-600">
-          Markdown folder management for {projectConfig.name} coming soon...</p>
-
-})
+          Markdown folder management for {projectConfig.name} coming soon...</p>    }

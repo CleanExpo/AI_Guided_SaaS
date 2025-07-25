@@ -23,7 +23,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     try {
       const response = await fetch('/api/admin/auth', { method: 'POST',
         headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ password })
+        body: JSON.stringify({ password    })
       });
 
       if (response.ok) {
@@ -50,10 +50,10 @@ const handleSubmit = async (e: React.FormEvent) => {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              type="password";
-              placeholder="Admin Password";
+              type="password"
+              placeholder="Admin Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}</Input>
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
             {error && (

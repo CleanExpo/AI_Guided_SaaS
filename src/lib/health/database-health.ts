@@ -6,7 +6,7 @@ import { HealthCheckResult } from './HealthCheckService';
  */;
 export async function checkSupabaseHealth(
     supabase: SupabaseClient;
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, try {;
     // Try to execute a simple query; let data = null;
       error = null;
@@ -48,9 +48,9 @@ if (!data && !error) {
 /*;
 export async function checkPostgresHealth(
     connectionString: string;
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(); let pool: Pool | null = null, try {
-    pool = new Pool({ connectionString })
+    pool = new Pool({ connectionString    })
     // Execute a simple query;
 
 const result = await pool.query('SELECT NOW() as current_time, version() as version');
@@ -63,7 +63,7 @@ const result = await pool.query('SELECT NOW() as current_time, version() as vers
       },
       timestamp: new Date()} catch (error) {
     if (pool) {
-      await pool.end().catch (() => {};)
+      await pool.end().catch (() => {    })
 };
     return { name: 'postgres',
       status: 'unhealthy',
@@ -76,7 +76,7 @@ const result = await pool.query('SELECT NOW() as current_time, version() as vers
 /*;
 export async function checkConnectionPoolHealth(
     pool: Pool;
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, try {
     const poolStats={ totalCount: pool.totalCount,
     idleCount: pool.idleCount,
@@ -100,12 +100,13 @@ const _isHealthy = poolStats.idleCount > 0 || poolStats.totalCount < 10;
  */;
 export async function checkMigrationHealth(
     supabase: SupabaseClient;
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, try {;
     // Check if migrations table exists and get latest migration, const { data, error    }: any = await supabase;
       .from('schema_migrations');
       .select('version, executed_at');
-      .order('version', { ascending: false });
+      .order('version', { ascending: false
+    });
       .limit(1);
       .single();
     if (error) {
@@ -133,14 +134,15 @@ export async function checkMigrationHealth(
  */;
 export async function checkDatabasePerformance(
     supabase: SupabaseClient;
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, try {;
     // Run a performance test query, const _testStart = Date.now();
     // Simple count query on a system table;
 
 const { count, error    }: any = await supabase;
       .from('_health_check');
-      .select('*', { count: 'exact', head: true });
+      .select('*', { count: 'exact', head: true
+    });
     
 const _queryTime = Date.now() - testStart;
     if (error && error.code !== 'PGRST116') {
@@ -199,4 +201,4 @@ const degradedChecks = checks.filter((c) => c.status === 'degraded');
 }})};
       timestamp: new Date()}
 
-}}}}}}}}}}}}}}}}}}}}}}}}}}}}))))))
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}

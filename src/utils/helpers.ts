@@ -22,7 +22,7 @@ export function truncate(str: string, maxLength: number): string,
 export function generateId() {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 };
-export function sleep(ms: number): Promise<any> {</any>
+export function sleep(ms: number): Promise<any> {
   return new Promise(resolve => setTimeout(resolve, ms))};
 export function debounce<T extends (...args[]) => any>(</T>
     func: T;
@@ -53,7 +53,7 @@ export function retry<T>(</T>
     options: {
     retries?: number, delay?: number, onRetry? (error: Error, attempt: number) => void
   } = {}
-): Promise<any> {</any>
+): Promise<any> {
   const { retries = 3, delay = 1000, onRetry    }: any = options;
   return new Promise((resolve, reject) =>  {
     const _attempt = async (attemptNumber: number) => {
@@ -65,7 +65,6 @@ export function retry<T>(</T>
         setTimeout(() => {
           attempt(attemptNumber + 1)}, delay * attemptNumber)
 }
-    attempt(1)
-})
+    attempt(1)    })
 }
 }}}

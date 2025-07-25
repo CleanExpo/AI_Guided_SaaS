@@ -7,15 +7,15 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Plus, Clock, MessageCircle, Settings, Share2, Trash2, Edit, Eye, Calendar, Activity, Globe, Lock } from 'lucide-react';
-interface CollaborationSession { id: string;
-  projectId: string;
-  name: string;
-  participants: number;
-  lastActivity: Date;
-  isActive: boolean;
-  isPublic: boolean;
-  comments: number;
-  changes: number;
+interface CollaborationSession { id: string
+  projectId: string
+  name: string
+  participants: number
+  lastActivity: Date
+  isActive: boolean
+  isPublic: boolean
+  comments: number
+  changes: number
   createdAt: Date
  };
 export default function CollaborationDashboard() {
@@ -36,42 +36,42 @@ const _loadCollaborationSessions = async () =>  {
   { id: 'session-1',
           projectId: 'project-1',
           name: 'E-commerce Website Redesign',
-          participants: 4,;
-    lastActivity: new Date(Date.now() - 1000 * 60 * 15);
-  // 15 minutes ago, isActive: true;
-    isPublic: true;
-    comments: 23;
-    changes: 47;
+          participants: 4,
+    lastActivity: new Date(Date.now() - 1000 * 60 * 15)
+  // 15 minutes ago, isActive: true
+    isPublic: true
+    comments: 23
+    changes: 47
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2) // 2 days ago
         },
         { id: 'session-2',
           projectId: 'project-2',
           name: 'Mobile App UI Components',
-          participants: 2;
-    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2, // 2 hours ago, isActive: false;
-    isPublic: false;
-    comments: 8;
-    changes: 12;
+          participants: 2
+    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 2, // 2 hours ago, isActive: false
+    isPublic: false
+    comments: 8
+    changes: 12
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24) // 1 day ago
         },
         { id: 'session-3',
           projectId: 'project-3',
           name: 'API Documentation Review',
-          participants: 6;
-    lastActivity: new Date(Date.now() - 1000 * 60 * 30, // 30 minutes ago, isActive: true;
-    isPublic: true;
-    comments: 15;
-    changes: 8;
+          participants: 6
+    lastActivity: new Date(Date.now() - 1000 * 60 * 30, // 30 minutes ago, isActive: true
+    isPublic: true
+    comments: 15
+    changes: 8
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6) // 6 hours ago
         },
         { id: 'session-4',
           projectId: 'project-4',
           name: 'Database Schema Planning',
-          participants: 3;
-    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24, // 1 day ago, isActive: false;
-    isPublic: false;
-    comments: 31;
-    changes: 19;
+          participants: 3
+    lastActivity: new Date(Date.now() - 1000 * 60 * 60 * 24, // 1 day ago, isActive: false
+    isPublic: false
+    comments: 31
+    changes: 19
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3) // 3 days ago
         }}];
       setSessions(mockSessions)
@@ -79,7 +79,7 @@ const _loadCollaborationSessions = async () =>  {
       console.error('Error loading collaboration, sessions:', error)} finally { setLoading(false)}
   const filteredSessions = sessions.filter((session) => { const _matchesSearch = session.name, .toLowerCase(); .includes(searchTerm.toLowerCase();
     switch (filter) {
-      case 'active': return matchesSearch && session.isActive;
+      case 'active': return matchesSearch && session.isActive
     break;
       case 'recent':;
 
@@ -160,8 +160,8 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
       <div className="flex flex-col sm:flex-row gap-4 flex-1"    />
           <Input placeholder="Search collaboration sessions...";
 
-value={searchTerm} onChange={e => setSearchTerm(e.target.value)}</Input>
-          /></Input>
+value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+          />/>
         <div className="flex space-x-2">
           <Button
 
@@ -194,11 +194,11 @@ variant={filter === 'recent' ? 'default' : 'outline'} onClick={() => setFilter('
                   : 'Create your first collaboration session to get started.'}</p>
               <Button>
           <Plus className="h-4 w-4 mr-2"    />Create Session</Plus>
-        ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session);
+        ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session)
         return (Card;
 
     const key={session.id };
-                className="hover:shadow-md transition-shadow";
+                className="hover: shadow-md transition-shadow"
               >
                 <CardContent className="p-6">
           <div className="flex items-start justify-between flex-1">
@@ -232,8 +232,7 @@ Badge, variant="default", className="bg-green-100 text-green-800";
                       <div className="flex items-center space-x-4 flex items-center space-x-2"    />
           <div;
 
-    const className={`w-2, h-2 rounded-full ${activity.color}`}
-                               />
+    const className={`w-2, h-2 rounded-full ${activity.color}`/>
                           <span className="text-xs text-gray-500">
                             {activity.level} Activity</span>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
@@ -252,7 +251,7 @@ Badge, variant="default", className="bg-green-100 text-green-800";
 </Button>
                       <Button variant="outline";
 size="sm";
-className="text-red-600 hover:text-red-700";
+className="text-red-600 hover: text-red-700"
                       >
           <Trash2 className="h-4 w-4" /    />
 </CardContent>
@@ -277,4 +276,4 @@ className="text-red-600 hover:text-red-700";
 </Card></CardContent>
 </div>
 
-}))))))))
+}

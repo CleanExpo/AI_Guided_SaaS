@@ -10,14 +10,14 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Send, Bot, User, Search, Sparkles } from 'lucide-react';
 import { useSemanticSearch } from '@/hooks/useSemanticSearch';
 import { toast } from '@/components/ui/use-toast';
-interface ChatMessage { id: string;
+interface ChatMessage { id: string
   role: 'user' | 'assistant' | 'system',
-  content: string;
+  content: string
   context?: string[],
   timestamp: Date
 }
 interface AIChatWithSemanticProps {
-enableSemanticSearch?: boolean;
+enableSemanticSearch?: boolean
   maxContextSize?: number,
   onContextRetrieved? (context: string[]) => void
 }
@@ -33,9 +33,11 @@ const [input, setInput] = useState<any>([])
     isSearching,
     context7,
     // indexDocument
-}: any = useSemanticSearch({ cacheResults: true });
+}: any = useSemanticSearch({ cacheResults: true
+    });
   // Scroll to bottom when new messages arrive
-  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'  };)
+  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'   
+    })
   }, [messages]);
   // Index conversation for future retrieval;
 
@@ -43,13 +45,13 @@ const _indexConversation = useCallback(async (message: ChatMessage) => { if (!en
       await indexDocument({ id: `conversation-${message.id}`,
         content: message.content,
         metadata: { role: message.role, timestamp: message.timestamp.toISOString(, conversationId: 'current' // In production, use actual conversation ID },
-        type: 'conversation'
-})
+        type: 'conversation'   
+    })
     } catch (error) {
       console.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
   
 const _sendMessage = async () => { if (!input.trim() {|}| isLoading) return null};const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user',
-      content: input;
+      content: input
 timestamp: new Date()
 };
     setMessages(prev => [...prev, userMessage]);
@@ -67,7 +69,7 @@ if (relevantContext.length > 0) {
 const contextMessage: ChatMessage={ id: `context-${Date.now()}`,
             role: 'system',
             content: `Retrieved ${ relevantContext.length} relevant context chunks`,
-            context: relevantContext;
+            context: relevantContext
             timestamp: new Date()
  };
           setMessages(prev => [...prev, contextMessage])}
@@ -75,9 +77,10 @@ const contextMessage: ChatMessage={ id: `context-${Date.now()}`,
 
 const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input;
+        body: JSON.stringify({ message: input
           context: relevantContext.slice(0, maxContextSize, // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
-        })};
+       
+    })};
       if (!response.ok) {t}hrow new Error('Failed to get AI response');
       
 const data  = await response.json();
@@ -92,8 +95,8 @@ timestamp: new Date()
 } catch (error) {
       console.error('Chat error:', error, toast({ title: 'Error',
         description: 'Failed to send message. Please try again.',
-variant: 'destructive'
-})
+variant: 'destructive'   
+    })
 } finally {
     setIsLoading(false)}
   return (
@@ -108,7 +111,7 @@ variant: 'destructive'
 Badge variant="secondary" className="flex items-center gap-1">
               <Search className="h-3 w-3"     />
               Context7 Active
-</Badge>
+/>
       )}
 </CardTitle>
       <CardContent>
@@ -122,8 +125,7 @@ Badge variant="secondary" className="flex items-center gap-1">
                       : message.role === 'system'
                       ? 'bg-muted text-muted-foreground'
                       : 'bg-secondary'
-                  }`}
-                    />
+                  }`/>
           <div className="flex items-center gap-2 mb-1">
                     {message.role === 'user' ? (</div>
                       <User className="h-4 w-4"     />
@@ -160,7 +162,7 @@ div className="flex justify-start">
         <div className="flex gap-2">
           <Input
 
-value={input} onChange={(e) => setInput(e.target.value)}</Input>
+value={input} onChange={(e) => setInput(e.target.value)} />
 {{(e) => e.key === 'Enter' && sendMessage()}
             placeholder={
               // isSearching
@@ -180,7 +182,7 @@ onClick={sendMessage} disabled={isLoading || isSearching || !input.trim()};
               {context7.map((_, idx) => (\n    </div>
                 <Badge key={idx} variant="outline" className="text-xs">
                   Chunk {idx + 1}
-</Badge>
+/>
               ))}
       </div>
       )}
@@ -194,4 +196,4 @@ onClick={sendMessage} disabled={isLoading || isSearching || !input.trim()};
     </HTMLDivElement>
     </any>
   }
-;)))))))
+)))))))

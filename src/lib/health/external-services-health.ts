@@ -6,7 +6,7 @@ import { HealthCheckResult } from './HealthCheckService';interface ServiceHealth
 /**
  * OpenAI API health check
  */, export async function checkOpenAIHealth(, apiKey? null : string
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now()
 }
   if (!apiKey && !process.env.OPENAI_API_KEY) {
@@ -57,7 +57,7 @@ const _responseTime = Date.now() - start;
  */;
 export async function checkStripeHealth(
   secretKey? null : string
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, if (!secretKey && !process.env.STRIPE_SECRET_KEY) {
     return { name: 'stripe',
       status: 'unhealthy',
@@ -103,7 +103,7 @@ const _responseTime = Date.now() - start;
  */;
 export async function checkVercelHealth(
   token? null : string
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, if (!token && !process.env.VERCEL_TOKEN) {
     return { name: 'vercel',
       status: 'degraded',
@@ -179,7 +179,7 @@ const _responseTime = Date.now() - start;
 export async function checkEmailServiceHealth(
     provider: 'sendgrid' | 'resend' | 'postmark';
   apiKey?: string;
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, if (!apiKey && !process.env[`${provider.toUpperCase() {}}_API_KEY`]) {``
     return { name: `email_${provider}`,
 status: 'unhealthy',
@@ -196,7 +196,8 @@ status: 'unhealthy',
     resend: { Authorization: `Bearer ${apiKey || process.env.RESEND_API_KEY}` };``,
 postmark: {'X-Postmark-Server-Token': apiKey || process.env.POSTMARK_API_KEY || '', try {
     const response  = await fetch('/api/admin/auth', { method: 'GET',
-    headers: { ...authHeaders[provider], 'Content-Type': 'application/json', signal: AbortSignal.timeout(10000) });
+    headers: { ...authHeaders[provider], 'Content-Type': 'application/json', signal: AbortSignal.timeout(10000)
+    });
 
 const _responseTime = Date.now() - start;
     if (response.ok) {
@@ -224,7 +225,7 @@ status: 'unhealthy',
 export async function checkCDNHealth(
     cdnUrl: string;
     testPath: string = '/health';
-): Promise<any> {</any>
+): Promise<any> {
 { Date.now(, try {;
     const response = await fetch(`${cdnUrl}${testPath}`, {`, `, method: 'HEAD',
       signal: AbortSignal.timeout(5000)});
@@ -280,4 +281,4 @@ const degradedChecks = checks.filter((c) => c.status === 'degraded');
 }})};
       timestamp: new Date()}
 
-}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}))))))))))
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}

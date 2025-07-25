@@ -18,22 +18,22 @@ export function SemanticSearchDemo() {
     searchDocumentation,
     searchConversations,
     // clearResults
-}: any = useSemanticSearch({ cacheResults: true });
+}: any = useSemanticSearch({ cacheResults: true
+    });
   
 const _handleSearch = async (type? null : string) =>  { if (!query.trim() {)} return null, switch (type) {;
       case 'code':;
       await searchCode(query); break;
-      case 'docs':
-      await searchDocumentation(query);
+      case 'docs': await searchDocumentation(query)
     break;
-      case 'conversations':
-      await searchConversations(query);
+      case 'conversations': await searchConversations(query)
     break
         break;
 break,
   default: await search({ query
 };
-  size: 10 })
+  size: 10   
+    })
 }
   return (
     <div className="w-full max-w-6xl mx-auto p-6 space-y-6">
@@ -45,10 +45,10 @@ break,
         {/* Search Input */}
         <div className="flex gap-2 mb-6">
           <Input
-type="text";
+type="text"
 placeholder="Search for anything...";
 
-value={query} onChange={(e) => setQuery(e.target.value)}</Input>
+value={query} onChange={(e) => setQuery(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleSearch()};
             className="flex-1" />
         <Button
@@ -93,9 +93,9 @@ Button variant="outline" onClick={clearResults}>
           <h3 className="text-lg font-semibold">
                     Results ({searchResults.total});
 </h3>
-                  <Badge variant="secondary"></Badge>
+                  <Badge variant="secondary">/>
 Context7: {context7.length} chunks
-</Badge>
+/>
                 <ScrollArea className="h-[400px] rounded-md border p-4">
           <div className="space-y-4">
                     {searchResults.results.map((result) => (\n    </div>
@@ -105,15 +105,15 @@ Context7: {context7.length} chunks
                             {result.id}
 </h4>
                           <div className="flex items-center gap-2">
-          <Badge variant="outline">{result.type}</Badge>
-                            <Badge>{(result.score * 100).toFixed(1)}%</Badge>
+          <Badge variant="outline">{result.type}/>
+                            <Badge>{(result.score * 100).toFixed(1)}%/>
                         <p className="text-sm text-muted-foreground line-clamp-3">
                           {result.content}
 </p>
                         {result.metadata && Object.keys(result.metadata).length > 0  && (div className="mt-2 flex gap-2 flex-wrap">
                             {Object.entries(result.metadata).map(([key, value]) => (\n    <Badge key={key} variant="secondary" className="text-xs">
                                 {key}: {String(value)}
-</Badge>
+/>
                             ))}
       </div>
       )}
@@ -130,9 +130,9 @@ Context7: {context7.length} chunks
                         <div className="space-y-2">
                           {context7.map((chunk, index) => (\n    </div>
                             <div const key={index};
-                              className="pb-2 border-b last:border-0";
+                              className="pb-2 border-b last: border-0"
                             >
-          <Badge className="mb-1">Chunk {index + 1}</Badge>
+          <Badge className="mb-1">Chunk {index + 1}/>
           <p className="{chunk}"    />
           </div>
     ))}

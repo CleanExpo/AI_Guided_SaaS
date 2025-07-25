@@ -1,150 +1,104 @@
-#!/usr/bin/env node
+#\!/usr/bin/env node
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
-class FinalSyntaxFixer {
-  constructor() {
-    this.fixesApplied = 0;
-    this.filesProcessed = 0;}
-  async fixRemainingErrors() {
-    console.log('🔧 Final Syntax Error Fixer\n');
-    console.log('===========================\n');
+console.log('🔧 Final Syntax Fix - Targeting specific remaining errors...\n');
 
+const fixes = [
+    {
+        file: 'src/components/AgentPulseMonitor.tsx',
+        line: 123,
+        fix: (content) => {
+            // Fix missing closing tag on Progress component
+            return content.replace(
+                /className=\{pulse\.resources\.memoryUsage\s*>\s*pulse\.config\.maxMemoryUsage\s*\?\s*'bg-red-100'\s*:\s*''\}\/>/g,
+                "className={pulse.resources.memoryUsage > pulse.config.maxMemoryUsage ? 'bg-red-100' : ''} />"
+            );
+        }
+    },
+    {
+        file: 'src/components/Dashboard.tsx',
+        line: 121,
+        fix: (content) => {
+            // Fix Badge with children on separate line
+            return content.replace(
+                /variant=\{project\.status === 'active' \? 'default' : 'secondary'\}\s*>\s*\n/g,
+                "variant={project.status === 'active' ? 'default' : 'secondary'}>\n"
+            );
+        }
+    },
+    {
+        file: 'src/components/LandingPageProduction.tsx',
+        line: 62,
+        fix: (content) => {
+            // Fix Badge self-closing with text
+            return content.replace(
+                /<Badge className="bg-orange-100 text-orange-700">🚀 Trusted by 10,000\+ developers\/>/g,
+                '<Badge className="bg-orange-100 text-orange-700">🚀 Trusted by 10,000+ developers</Badge>'
+            );
+        }
+    },
+    {
+        file: 'src/components/admin/AdminAnalytics.tsx',
+        line: 121,
+        fix: (content) => {
+            // Fix div with style prop
+            return content.replace(
+                /style=\{\{ height: `\$\{[^}]+\}%` \}\/>/g,
+                (match) => match.replace('/>', '} />')
+            );
+        }
+    },
+    {
+        file: 'src/app/blog/[id]/page.tsx',
+        line: 152,
+        fix: (content) => {
+            // Fix dangerouslySetInnerHTML
+            return content.replace(
+                /<div dangerouslySetInnerHTML=\{\{ __html: [^}]+ \}\/>/g,
+                (match) => match.replace('/>', '} />')
+            );
+        }
+    }
+];
+
+async function fixFile(filePath, fixFunction) {
     try {
-      // Get all TypeScript files
-      const files = this.getAllTypeScriptFiles();
-      console.log(`Scanning ${files.length} TypeScript files...\n`);
-
-      // Apply targeted fixes
-      for (const file of files) {
-        await this.fixFile(file);}
-      console.log(`\n✅ Processing complete!`);
-      console.log(`📊 Files processed: ${this.filesProcessed}`);
-      console.log(`🔧 Fixes applied: ${this.fixesApplied}`);
-
-      // Verify fixes
-      await this.verifyFixes();
-
+        const fullPath = path.join(process.cwd(), filePath);
+        let content = fs.readFileSync(fullPath, 'utf8');
+        const originalContent = content;
+        
+        content = fixFunction(content);
+        
+        if (content \!== originalContent) {
+            fs.writeFileSync(fullPath, content, 'utf8');
+            console.log(`✅ Fixed ${filePath}`);
+            return true;
+        }
+        
+        console.log(`⚠️  No changes needed for ${filePath}`);
+        return false;
     } catch (error) {
-      console.error('❌ Error during fixing:', error);}}
-  async fixFile(filePath) {
-    try {
-      if (!fs.existsSync(filePath)) {
-        return;}
-      let content = fs.readFileSync(filePath, 'utf-8');
-      const _originalContent = content;
-      let fileFixCount = 0;
+        console.error(`❌ Error fixing ${filePath}: ${error.message}`);
+        return false;
+    }
+}
 
-      // Fix 1: Remove erroneous commas from variable declarations
-      // Pattern: const, variableName → const variableName
-      const _wrongCommaInDeclaration = /\b(const|let|var),\s+(\w+)/g;
-      content = content.replace(wrongCommaInDeclaration, (match, keyword, variable) => {
-        fileFixCount++;
-        return `${keyword} ${variable}`;
-      });
-
-      // Fix 2: Remove commas before object properties in destructuring
-      // Pattern: const { prop1, prop2 } but sometimes it becomes const, { prop1, prop2 }
-      const _wrongCommaBeforeBrace = /\b(const|let|var),\s*{/g;
-      content = content.replace(wrongCommaBeforeBrace, (match, keyword) => {
-        fileFixCount++;
-        return `${keyword} {`;
-      });
-
-      // Fix 3: Fix function parameter syntax errors
-      // Pattern: function(param1, param2,) → function(param1, param2)
-      content = content.replace(/,\s*\)/g, ')');
-      if (content !== originalContent) fileFixCount++;
-
-      // Fix 4: Fix array/object literal trailing commas that break syntax
-      content = content.replace(/,\s*([}\]])/g, '$1');
-      if (content !== originalContent) fileFixCount++;
-
-      // Fix 5: Fix specific pattern seen in errors
-      // Pattern: "word, word:" should be "word: word:"
-      const _wrongCommaBeforeColon = /(\w+),\s*(\w+):/g;
-      content = content.replace(wrongCommaBeforeColon, (match, word1, word2) => {
-        // Only fix if it looks like a type annotation
-        if (word2.includes('type') || word2.includes('Type') || /^[A-Z]/.test(word2)) {
-          fileFixCount++;
-          return `${word1}: ${word2}:`;}
-        return match;
-      });
-
-      // Fix 6: Remove invalid syntax patterns from previous fixes
-      // Pattern: ".:" should be ":"
-      content = content.replace(/\.\s*:/g, ':');
-      if (content !== originalContent) fileFixCount++;
-
-      // Fix 7: Fix missing commas that should exist (reverse of overcorrection)
-      // This pattern finds cases where we might have removed legitimate commas
-      const _needsCommaPattern = /(\w+)\s+(\w+\s*:)/g;
-      content = content.replace(needsCommaPattern, (match, word1, word2) => {
-        // Only add comma if it looks like object properties
-        if (word2.includes(':') && !word1.includes('const') && !word1.includes('let') && !word1.includes('var')) {
-          fileFixCount++;
-          return `${word1}, ${word2}`;}
-        return match;
-      });
-
-      // Save file if changes were made
-      if (content !== originalContent) {
-        fs.writeFileSync(filePath, content);
-        this.filesProcessed++;
-        this.fixesApplied += fileFixCount;
-        console.log(`📝 Fixed ${filePath} (${fileFixCount} fixes)`);}
-    } catch (error) {
-      console.log(`⚠️  Error processing ${filePath}: ${error.message}`);}}
-  getAllTypeScriptFiles() {
-    const files = [];
-    
-    function walkDir(dir) {
-      try {
-        const _items = fs.readdirSync(dir);
-        for (const item of items) {
-          const _fullPath = path.join(dir, item);
-          const stat = fs.statSync(fullPath);
-          
-          if (stat.isDirectory() && !item.includes('node_modules') && !item.includes('.git') && !item.includes('.next')) {
-            walkDir(fullPath);
-          } else if (item.endsWith('.ts') || item.endsWith('.tsx')) { files.push(fullPath);
-           } catch (error) {
-        // Skip directories we can't read}}
-    walkDir(process.cwd());
-    return files;}
-  async verifyFixes() {
-    console.log('\n🔍 Verifying fixes...');
-    
-    try {
-      execSync('npx tsc --noEmit', { stdio: 'pipe' });
-      console.log('✅ No TypeScript errors found!');
-    } catch (error) {
-      const output = error.stdout?.toString() || '';
-      const _errorCount = (output.match(/error TS/g) || []).length;
-      console.log(`📊 TypeScript errors remaining: ${errorCount}`);
-      
-      if (errorCount > 0) {
-        console.log('\nFirst 10 remaining errors:');
-        const lines = output.split('\n').filter(line => line.includes('error TS')).slice(0, 10);
-        lines.forEach(line => console.log(`  ${line}`));}}
-    // Generate report
-    const report = {
-      timestamp: new Date().toISOString(),
-      filesProcessed: this.filesProcessed,
-      fixesApplied: this.fixesApplied,
-      success: true
-    };
-    
-    fs.writeFileSync(
-      path.join(process.cwd(), 'final-syntax-fix-report.json'),
-      JSON.stringify(report, null, 2)
-    );
-    
-    console.log('\n📄 Report saved to final-syntax-fix-report.json');}}
-// Run the fixer
 async function main() {
-  const fixer = new FinalSyntaxFixer();
-  await fixer.fixRemainingErrors();}
+    console.log('Applying targeted fixes...\n');
+    
+    let fixedCount = 0;
+    
+    for (const { file, fix } of fixes) {
+        if (await fixFile(file, fix)) {
+            fixedCount++;
+        }
+    }
+    
+    console.log(`\n✨ Fixed ${fixedCount} files`);
+    console.log('\nRun npm run build to verify all syntax errors are resolved.');
+}
+
 main().catch(console.error);
+EOF < /dev/null

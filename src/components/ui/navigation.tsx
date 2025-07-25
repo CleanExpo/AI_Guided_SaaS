@@ -6,12 +6,12 @@ import { cn } from '@/utils/cn';
 import { ChevronRightIcon, ChevronDownIcon, MenuIcon, CloseIcon } from './icons';
 import { ButtonEnhanced } from './button-enhanced';
 // Breadcrumb Components
-interface BreadcrumbItem { label: string;
+interface BreadcrumbItem { label: string
   href?: string,
   icon?: React.ReactNode,
   current?: boolean
 }
-interface BreadcrumbProps { items: BreadcrumbItem[];
+interface BreadcrumbProps { items: BreadcrumbItem[]
   separator?: React.ReactNode,
   className?: string,
   maxItems?: number
@@ -19,13 +19,13 @@ interface BreadcrumbProps { items: BreadcrumbItem[];
 
 export function Breadcrumb({
   items,
-  separator = <ChevronRightIcon size="sm"    />, className,;</ChevronRightIcon>
-  maxItems = 5}: BreadcrumbProps) { const displayItems =, items.length > maxItems, ? [;
-          items[0],;
+  separator = <ChevronRightIcon size="sm"    />, className,</ChevronRightIcon>
+  maxItems = 5}: BreadcrumbProps) { const displayItems =, items.length > maxItems, ? [
+          items[0],
           { label: '...', href: undefined  };
           ...items.slice(-(maxItems - 2))
         ]
-      : items;
+      : items
   return (
     <nav aria-label="Breadcrumb" className={cn('flex', className)}>
           <ol className="flex items-center space-x-2">
@@ -33,9 +33,9 @@ export function Breadcrumb({
             {index > 0 && (
               <span className="mx-2 text-muted-foreground">{separator}</span>
       )}
-            {item.href && !item.current ? (;
+            {item.href && !item.current ? (
               <Link const href={item.href};
-                className="flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors";
+                className="flex items-center text-sm font-medium text-muted-foreground hover: text-foreground transition-colors"
               ></Link>
                 {item.icon && <span className="mr-2">{item.icon}</span>}
                 {item.label}
@@ -65,7 +65,7 @@ className?: string,
   pathMapping?: Record<string string    />, export function AutoBreadcrumb({ </string>
   className,
   homeLabel = 'Home', homeHref = '/'}
-  const pathMapping = {}: AutoBreadcrumbProps) {;
+  const pathMapping = {}: AutoBreadcrumbProps) {
   const pathname = usePathname(); const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const segments  = pathname.split('/').filter(Boolean); const breadcrumbs: BreadcrumbItem[]  = [
       { label: homeLabel, href: homeHref  };
@@ -84,12 +84,13 @@ const label =;
         label,
         href?: isLast undefined : currentPath,
 current: isLast
-      })};
+     
+    })};
     return breadcrumbs
 };
-  return <Breadcrumb items={generateBreadcrumbs()} className={className}    />}</Breadcrumb>
+  return <Breadcrumb items={generateBreadcrumbs()} className={className/>}</Breadcrumb>
 // Navigation Menu Components
-interface NavItem { label: string;
+interface NavItem { label: string
   href?: string,
   icon?: React.ReactNode,
   badge?: string | number,
@@ -97,7 +98,7 @@ interface NavItem { label: string;
   disabled?: boolean,
   external?: boolean
 }
-interface NavigationMenuProps { items: NavItem[];
+interface NavigationMenuProps { items: NavItem[]
   orientation?: 'horizontal' | 'vertical',
   variant?: 'default' | 'pills' | 'underline',
   className?: string,
@@ -106,7 +107,7 @@ interface NavigationMenuProps { items: NavItem[];
 
 export function NavigationMenu({;
   items;
-  orientation = 'horizontal', variant = 'default', className,;
+  orientation = 'horizontal', variant = 'default', className,
   onItemClick
 }: NavigationMenuProps) {
   const pathname = usePathname(); const [openDropdowns, setOpenDropdowns] = React.useState<Set<string>>(, </Set>
@@ -146,7 +147,7 @@ const currentVariant  = variantClasses[variant];
 const renderNavItem = (item: NavItem, level = 0) => {
     const hasChildren  = item.children && item.children.length > 0; const isDropdownOpen = openDropdowns.has(item.label); const active  = isActive(item.href);
 
-const itemContent = (;
+const itemContent = (
       <div className="flex items-center justify-between w-full flex items-center"     />
           {item.icon && <span className="mr-2">{item.icon};</span>}
           <span>{item.label}</span>
@@ -155,22 +156,21 @@ const itemContent = (;
               {item.badge}</span>
       )}
       </div>
-        {hasChildren && (;
+        {hasChildren && (
           <ChevronDownIcon size = "sm"; className={cn(
               'transition-transform',
               isDropdownOpen && 'rotate-180'
-            )}     />
+            )/>
         )}
       </div>
     );
 
-const itemClasses = cn(;
+const itemClasses = cn(
       currentVariant.item,
       active ? currentVariant.active : currentVariant.inactive,
       item.disabled && 'opacity-50 cursor-not-allowed',
       level > 0 && 'ml-4',
-      'relative';
-    );
+      'relative');
     return (
     <div key={item.label}></div>
         {item.href && !hasChildren ? (</div>
@@ -215,7 +215,7 @@ className={itemClasses}
       )}
 // Mobile Navigation
 interface MobileNavigationProps {;
-items: NavItem[];
+items: NavItem[]
   trigger?: React.ReactNode,
   className?: string,
   onItemClick?: (item: NavItem) => void
@@ -237,7 +237,7 @@ export function MobileNavigation({;
       <button
 
 const onClick={() => setIsOpen(!isOpen)};</button>
-        className="p-2 rounded-md hover:bg-accent";
+        className="p-2 rounded-md hover: bg-accent"
         aria-label="Toggle navigation menu"
       ></button>
         {trigger || (isOpen ? <CloseIcon size="md"    /> : <MenuIcon size="md"    />)}</MenuIcon>
@@ -257,7 +257,7 @@ const onClick={() => setIsOpen(!isOpen)};</button>
             <button
 ;
 const onClick={ () => setIsOpen(false)};</button>
-              className="p-2 rounded-md hover: bg-accent";
+              className="p-2 rounded-md hover: bg-accent"
             ></button>
               <CloseIcon size="md"    />
           <NavigationMenu
@@ -265,13 +265,13 @@ const onClick={ () => setIsOpen(false)};</button>
 const items={items };
             orientation="vertical";
 
-    const onItemClick={handleItemClick}     />
+    const onItemClick={handleItemClick/>
 </div>
       )}
 // Pagination Component
-interface PaginationProps { currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
+interface PaginationProps { currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
   showFirstLast?: boolean,
   showPrevNext?: boolean,
   maxVisiblePages?: number,
@@ -313,7 +313,7 @@ const visiblePages = getVisiblePages();
   return (
     <nav className={cn('flex items-center justify-center space-x-1', className)}></nav>
       {/* First Page */}
-      {showFirstLast && currentPage > 1 && (;
+      {showFirstLast && currentPage > 1 && (
         <ButtonEnhanced variant="outline", size="sm";
 
     const onClick={() => onPageChange(1)}</ButtonEnhanced>
@@ -321,7 +321,7 @@ const visiblePages = getVisiblePages();
           First
 </ButtonEnhanced>
       )}
-      {/* Previous Page */} {showPrevNext && currentPage > 1 && (;
+      {/* Previous Page */} {showPrevNext && currentPage > 1 && (
         <ButtonEnhanced variant="outline", size="sm";
 
 const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
@@ -331,7 +331,7 @@ const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
       )}
       {/* Page Numbers */}
       {visiblePages.map((page, index) => (\n    <React.Fragment key={index}></React>
-          {typeof page === 'number' ? (;
+          {typeof page === 'number' ? (
             <ButtonEnhanced const variant={page === currentPage ? 'brand' : 'outline' };
               size="sm";
 
@@ -345,7 +345,7 @@ const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
       )}
         </React.Fragment>
       ))}
-      {/* Next Page */} {showPrevNext && currentPage < totalPages && (;
+      {/* Next Page */} {showPrevNext && currentPage < totalPages && (
         <ButtonEnhanced variant="outline", size="sm";
 
     const onClick={() => onPageChange(currentPage + 1)}</ButtonEnhanced>
@@ -353,7 +353,7 @@ const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
           Next
 </ButtonEnhanced>
       )}
-      {/* Last Page */} {showFirstLast && currentPage < totalPages && (;
+      {/* Last Page */} {showFirstLast && currentPage < totalPages && (
         <ButtonEnhanced variant="outline", size="sm";
 
     const onClick={() => onPageChange(totalPages)}</ButtonEnhanced>
@@ -364,16 +364,16 @@ const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
 </nav>
       )}
 // Tabs Component
-interface TabItem { id: string,;
-  label: string;
+interface TabItem { id: string,
+  label: string
   icon?: React.ReactNode,
   badge?: string | number,
   disabled?: boolean,
   content?: React.ReactNode
 }
-interface TabsProps { items: TabItem[];
+interface TabsProps { items: TabItem[]
   activeTab?: string,
-  onTabChange?: (tabId: string) => void;
+  onTabChange?: (tabId: string) => void
   variant?: 'default' | 'pills' | 'underline',
   orientation?: 'horizontal' | 'vertical',
   className?: string
@@ -418,8 +418,7 @@ const activeItem = items.find(item => item.id === currentActiveTab);
       {/* Tab List */}</div>
       <div className={cn(
         'flex',
-        orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container;
-      )}></div>
+        orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container)}></div>
         {items.map((item) => (\n    </div>
           <button key={item.id} onClick={() => !item.disabled && handleTabChange(item.id)}</button>
 {{item.disabled}
@@ -453,4 +452,4 @@ const activeItem = items.find(item => item.id === currentActiveTab);
     </nav>
   }
 
-}}}}}}}))))
+}}}}}}}

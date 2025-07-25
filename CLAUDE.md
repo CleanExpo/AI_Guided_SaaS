@@ -75,6 +75,30 @@ npm run serena:start           # Start serena semantic search server
 - **Serena MCP Server**: https://github.com/CleanExpo/serena.git
 - **Awesome MCP Servers**: https://github.com/punkpeye/awesome-mcp-servers
 - **Vercel Documentation**: https://vercel.com/docs
+- **Context7**: https://github.com/upstash/context7.git
+- **TypeScript SDK**: https://github.com/modelcontextprotocol/typescript-sdk.git
+- **Tmux MCP**: https://github.com/nickgnd/tmux-mcp.git
+- **Tmux Orchestrator**: https://github.com/Jedward23/Tmux-Orchestrator.git
+- **Ref Tools MCP**: https://github.com/ref-tools/ref-tools-mcp.git
+- **Semgrep MCP**: https://github.com/semgrep/mcp.git
+- **Pieces MCP**: https://pieces.app/features/mcp
+- **Exa MCP Server**: https://github.com/exa-labs/exa-mcp-server.git
+- **Playwright MCP**: https://github.com/microsoft/playwright-mcp.git
+
+### Tmux Session Management
+```bash
+# Frontend Team Session
+tmux new-session -d -s Task-frontend
+tmux rename-window -t Task-frontend:0 'Frontend-PM'
+tmux new-window -t Task-frontend:1 -n 'Frontend-Dev'
+tmux new-window -t Task-frontend:2 -n 'Frontend-Server'
+
+# Backend Team Session  
+tmux new-session -d -s Task-backend
+tmux rename-window -t Task-backend:0 'Backend-PM'
+tmux new-window -t Task-backend:1 'Backend-Dev'
+tmux new-window -t Task-backend:2 'Backend-Server'
+```
 
 ## 🏛️ Architecture Overview
 

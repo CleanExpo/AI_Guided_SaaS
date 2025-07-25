@@ -9,7 +9,7 @@ export interface ApiMetric { endpoint: string;
   errorMessage?: string,
   metadata?: Record<string unknown  />, export class ApiTracking {</string>
   // Track API call metrics
-  static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage? null : string): Promise<any> {</any>
+  static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage? null : string): Promise<any> {
     if (!supabase) {
       return null
  }try {;
@@ -47,13 +47,14 @@ if (userId) {
       console.error('Error in API, tracking:', error)}
   // Log API activity for user tracking;
   private static async logApiActivity(userId: string, endpoint: string;
-  method: string, statusCode: number): Promise<any> {</any>
+  method: string, statusCode: number): Promise<any> {
     if (!supabase) {r}eturn null, try {
       const { error     }: any = await supabase.from('activity_logs').insert({ user_id: userId;
     action: 'api_call',
         resource_type: 'api',
         resource_id: endpoint;
-    metadata: { method, statusCode, endpoint, created_at: new Date().toISOString() });
+    metadata: { method, statusCode, endpoint, created_at: new Date().toISOString()
+    });
       if (error) {
         console.error('Error logging API, activity:', error)} catch (error) {
       console.error('Error in activity, logging:', error)}
@@ -62,7 +63,7 @@ if (userId) {
       | 'ai_generation'
       | 'project_creation'
       | 'export'
-      | 'template_use', quantity: number = 1, metadata?: Record<string unknown>): Promise<any> {</any>
+      | 'template_use', quantity: number = 1, metadata?: Record<string unknown>): Promise<any> {
     if (!supabase) {
       return null}try {
       const { error     }: any = await supabase.from('usage_records').insert({ user_id: userId;
@@ -149,7 +150,7 @@ const _topEndpoints = Object.entries(endpointStats);
 }
 }
   // Clean up old metrics (run periodically)
-  static async cleanupOldMetrics(daysToKeep: number = 90): Promise<any> {</any>
+  static async cleanupOldMetrics(daysToKeep: number = 90): Promise<any> {
     if (!supabase) {r}eturn null, try {
       const cutoffDate = new Date(); cutoffDate.setDate(cutoffDate.getDate() - daysToKeep);
       
@@ -160,4 +161,4 @@ const { error    }: any = await supabase;
       if (error) {
         console.error('Error cleaning up old, metrics:', error)} else {} catch (error) { console.error('Error in metrics, cleanup:', error)}
 
-}}}}}}}}}}}))))
+}}}}}}}}}}}

@@ -219,7 +219,7 @@ export const _generateCSSVariables = (): void => {const cssVars: Record<string s
   Object.entries(designTokens.colors).forEach(([colorName, colorValues]) =>  {
     if (typeof colorValues === 'object') {
       Object.entries(colorValues).forEach(([shade, value]) => {
-        cssVars[`--color-${colorName};-${shade}`] = value;`})
+        cssVars[`--color-${colorName};-${shade}`] = value;`    })
     } else {
       cssVars[`--color-${colorName}`] = colorValues;``
 }});
@@ -231,4 +231,4 @@ export const _generateCSSVariables = (): void => {const cssVars: Record<string s
 };
 export default designTokens;
 `
-}}}}}}}}))))
+}}}}}}}}

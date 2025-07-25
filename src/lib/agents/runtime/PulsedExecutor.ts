@@ -51,7 +51,7 @@ export class PulsedExecutor extends EventEmitter {
       this.startAgentPulse(agentId)
 }
     
-    this.emit('agent:registered', { agentId })
+    this.emit('agent:registered', { agentId    })
 }
 
   /**
@@ -118,11 +118,11 @@ export class PulsedExecutor extends EventEmitter {
             this.pulseIntervals.set(agentId, setInterval(pulseFunction, newInterval))
 }
 } catch (error) {
-        this.emit('pulse:error', { agentId, error })
+        this.emit('pulse:error', { agentId, error    })
 }
       
       const executionTime = Date.now() - startTime;
-      this.emit('pulse:completed', { agentId, executionTime })
+      this.emit('pulse:completed', { agentId, executionTime    })
 };
     
     // Set up interval
@@ -136,7 +136,7 @@ export class PulsedExecutor extends EventEmitter {
   /**
    * Execute a single pulse for an agent
    */
-  private async executePulse(agent: Agent): Promise<void> {</void>
+  private async executePulse(agent: Agent): Promise<void> {
 { agent.getConfig().id;
     const startTime = Date.now();
     
@@ -267,7 +267,7 @@ export class PulsedExecutor extends EventEmitter {
     if (!agent) {r}eturn;
     
     agent.updateMetrics({ lastPulseTime: executionTime;
-      averageResponseTime: executionTime // Agent will calculate rolling average
+      averageResponseTime: executionTime // Agent will calculate rolling average   
     })
 }
 
@@ -298,4 +298,4 @@ export class PulsedExecutor extends EventEmitter {
       this.start()
 }
 }
-}}}))
+}}}

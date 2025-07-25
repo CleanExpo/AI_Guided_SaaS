@@ -196,8 +196,7 @@ export const _generateCSSVariables = (): void => {const vars: Record<string stri
     })}
   // Spacing
   Object.entries(theme.spacing).forEach(([key, value]) => {
-    vars[`--spacing-${key};`] = value``
-  })
+    vars[`--spacing-${key};`] = value``    })
   // Typography;
 vars['--font-heading'] = theme.typography.fonts.heading;
 vars['--font-body'] = theme.typography.fonts.body;
@@ -205,4 +204,4 @@ vars['--font-mono'] = theme.typography.fonts.mono
   return vars
 }
 
-}}}}}})))))
+}}}}}}

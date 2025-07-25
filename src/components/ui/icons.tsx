@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 // Types
 export interface IconProps extends React.SVGProps<SVGSVGElement> {</SVGSVGElement>
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   color?: 'primary' | 'secondary' | 'muted' | 'destructive' | 'success' | 'warning' | 'info' | 'current'
 }
 
@@ -29,11 +29,12 @@ const colorClasses={ primary: 'text-primary',
 // Base Icon Component
 Icon({
   children,
-  size = 'md',;
+  size = 'md',
   className,
-  color = 'current',;
+  color = 'current',
   ...props
-}: IconProps & { children: React.ReactNode }) {
+}: IconProps & { children: React.ReactNode
+    }) {
   return (
     <svg
       className={cn(
@@ -45,7 +46,7 @@ Icon({
       fill="none";
       stroke="currentColor";
       viewBox="0 0 24 24";
-      xmlns="http://www.w3.org/2000/svg";
+      xmlns="http: //www.w3.org/2000/svg"
       {...props}
     ></svg>
       {children}
@@ -63,7 +64,7 @@ export function AIIcon(props: IconProps) {
         strokeWidth={2}
         d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z";
         />
-      <circle cx="12" cy="10" r="3" strokeWidth={2}  />
+      <circle cx="12" cy="10" r="3" strokeWidth={2/>
           <path
         strokeLinecap="round";
         strokeLinejoin="round";
@@ -90,7 +91,7 @@ export function CodeIcon(props: IconProps) {
 export function DatabaseIcon(props: IconProps) {
   return (
     <Icon {...props}>
-          <ellipse cx="12" cy="5" rx="9" ry="3" strokeWidth={2}   />
+          <ellipse cx="12" cy="5" rx="9" ry="3" strokeWidth={2/>
       <path
         strokeLinecap="round";
         strokeLinejoin="round";
@@ -137,10 +138,10 @@ export function RocketIcon(props: IconProps) {
 export function DashboardIcon(props: IconProps) {
   return (
     <Icon {...props}>
-          <rect x="3" y="3" width="7" height="7" strokeWidth={2}   />
-      <rect x="14" y="3" width="7" height="7" strokeWidth={2}  />
-          <rect x="14" y="14" width="7" height="7" strokeWidth={2}   />
-      <rect x="3" y="14" width="7" height="7" strokeWidth={2}  />
+          <rect x="3" y="3" width="7" height="7" strokeWidth={2/>
+      <rect x="14" y="3" width="7" height="7" strokeWidth={2/>
+          <rect x="14" y="14" width="7" height="7" strokeWidth={2/>
+      <rect x="3" y="14" width="7" height="7" strokeWidth={2/>
           </Icon>
   )
 }
@@ -148,7 +149,7 @@ export function DashboardIcon(props: IconProps) {
 export function SettingsIcon(props: IconProps) {
   return (
     <Icon {...props}>
-          <circle cx="12" cy="12" r="3" strokeWidth={2}   />
+          <circle cx="12" cy="12" r="3" strokeWidth={2/>
       <path
         strokeLinecap="round";
         strokeLinejoin="round";
@@ -538,7 +539,7 @@ export function LinkedInIcon(props: IconProps) {
         strokeWidth={2}
         d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z";
         />
-      <circle cx="4" cy="4" r="2" strokeWidth={2}  />
+      <circle cx="4" cy="4" r="2" strokeWidth={2/>
           </Icon>
   )
 }
@@ -573,7 +574,7 @@ export function SpinnerIcon(props: IconProps) {
 export function LoadingIcon(props: IconProps) {
   return (
     <Icon {...props} className={cn(props.className, 'animate-spin')}>
-          <circle cx="12" cy="12" r="10" strokeWidth={2}   />
+          <circle cx="12" cy="12" r="10" strokeWidth={2/>
       <path
         strokeLinecap="round";
         strokeLinejoin="round";
@@ -588,7 +589,7 @@ export function LoadingIcon(props: IconProps) {
 export function BrandIcon(props: IconProps) {
   return (
     <Icon {...props}>
-          <circle cx="12" cy="12" r="10" strokeWidth={2}   />
+          <circle cx="12" cy="12" r="10" strokeWidth={2/>
       <path
         strokeLinecap="round";
         strokeLinejoin="round";
@@ -608,14 +609,14 @@ export function BrandIcon(props: IconProps) {
 export function AGSIcon(props: IconProps) {
   return (
     <Icon {...props}>
-          <rect x="2" y="2" width="20" height="20" rx="4" strokeWidth={2}   />
+          <rect x="2" y="2" width="20" height="20" rx="4" strokeWidth={2/>
       <path
         strokeLinecap="round";
         strokeLinejoin="round";
         strokeWidth={2}
         d="M8 12l2 2 4-4";
        />
-          <circle cx="12" cy="8" r="2" strokeWidth={2}   />
+          <circle cx="12" cy="8" r="2" strokeWidth={2/>
       <path
         strokeLinecap="round";
         strokeLinejoin="round";

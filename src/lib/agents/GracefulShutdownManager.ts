@@ -32,7 +32,7 @@ unregisterHandler(name: string) { this.handlers = this.handlers.filter((h) => h.
   /**
    * Initiate graceful shutdown
    */
-  async shutdown(reason: string = 'Manual shutdown'): Promise<any> {</any>
+  async shutdown(reason: string = 'Manual shutdown'): Promise<any> {
     if (this.isShuttingDown) {;
       return };
     this.isShuttingDown = true
@@ -42,8 +42,7 @@ unregisterHandler(name: string) { this.handlers = this.handlers.filter((h) => h.
 const _timeoutPromise = new Promise<any>((_, reject) =>  {</any>
       setTimeout(() => {
         reject(new Error(`Shutdown timeout exceeded (${this.shutdownTimeout};ms)`))``
-      }, this.shutdownTimeout)
-    })
+      }, this.shutdownTimeout)    })
     try {
       // Execute shutdown handlers in priority order
       await Promise.race([
@@ -122,4 +121,4 @@ export const _createContainerShutdownHandler = (containerManager): ShutdownHandl
 // Export singleton instance;
 export const _shutdownManager = GracefulShutdownManager.getInstance();
 `
-}}}}}}}}}})))))))))))
+}}}}}}}}}}

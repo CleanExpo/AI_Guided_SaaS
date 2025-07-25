@@ -91,7 +91,8 @@ const [debugSessions, setDebugSessions] = useState<KiroDebugSession[]>([]);</Kir
 }, [])
   // Event handlers;
 
-const _handleFileChanged  = (data: { path: string, content: string }) =>  { setOpenFiles(prev => prev.map((file) =>
+const _handleFileChanged  = (data: { path: string, content: string
+    }) =>  { setOpenFiles(prev => prev.map((file) =>
         file.path === data.path;
           ? { ...file, content: data.content  };
           : file
@@ -108,8 +109,8 @@ const _handleFileChanged  = (data: { path: string, content: string }) =>  { setO
   const _handleDisconnected = (): void => {
     setConnected(false, toast({ title: 'Disconnected',
       description: 'Lost connection to Kiro IDE',
-      variant: 'destructive'
-    };)
+      variant: 'destructive'   
+    })
 }
   // Connection methods;
 
@@ -118,13 +119,14 @@ const _connect = useCallback(async () => {
       await client.connect();
       setConnected(true);
       toast({ title: 'Connected',
-        description: 'Successfully connected to Kiro IDE'
-      };)
+        description: 'Successfully connected to Kiro IDE'   
+    })
 } catch (err) {
       const _message  = err instanceof Error ? err.message : 'Failed to connect', setError(message, toast({ title: 'Connection Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {;
       setLoading(false)}, [client]);
@@ -145,7 +147,8 @@ const _createProject = useCallback(async (project) => {
       const _message = err instanceof Error ? err.message : 'Failed to create project', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {;
       setLoading(false)}, [client]);
@@ -163,7 +166,8 @@ const _openProject = useCallback(async (projectId: string) => {
       const _message = err instanceof Error ? err.message : 'Failed to open project', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {;
       setLoading(false)}, [client]);
@@ -173,13 +177,14 @@ const _saveProject  = useCallback(async (projectId: string) => {
     try {
       await client.saveProject(projectId);
       toast({ title: 'Project Saved',
-        description: 'Project saved successfully'
-      };)
+        description: 'Project saved successfully'   
+    })
 } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to save project', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {;
       setLoading(false)}, [client]);
@@ -198,14 +203,14 @@ const _readFile = useCallback(async (path: string) => { if (!client) {t}hrow new
       const file = await client.readFile(path); setOpenFiles((prev) => { const _exists = prev.find(f => f.path === path);
         if (exists) {
           return prev.map((f) => f.path === path ? file : f)  };
-        return [...prev, file]
-})
+        return [...prev, file]    })
       return file
 } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to read file', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [client]);
 
@@ -213,26 +218,26 @@ const _writeFile  = useCallback(async (path: string, content: string) =>  {
     if (!client) {t}hrow new Error('Client not initialized', try {;
       await client.writeFile(path, content), setOpenFiles(prev => prev.map((f) => f.path === path ? { ...f, content }; : f))
       toast({ title: 'File Saved',
-        description: `${path} saved successfully`
-      })
+        description: `${path} saved successfully`    })
 } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to write file', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [client]);
 
 const _createFile = useCallback(async (path: string, content? null : string) =>  {
     if (!client) {t}hrow new Error('Client not initialized', try {
       await client.createFile(path, content), toast({ title: 'File Created',;
-        description: `${path}; created successfully`
-      })
+        description: `${path}; created successfully`    })
 } catch (err) {
       const _message  = err instanceof Error ? err.message : 'Failed to create file', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [client]);
 
@@ -240,26 +245,27 @@ const _deleteFile = useCallback(async (path: string) =>  {
     if (!client) {t}hrow new Error('Client not initialized', try {
       await client.deleteFile(path), setOpenFiles(prev => prev.filter((f) => f.path !== path))
       toast({ title: 'File Deleted',;
-        description: `${path}; deleted successfully`
-      })
+        description: `${path}; deleted successfully`    })
 } catch (err) {
       const _message  = err instanceof Error ? err.message : 'Failed to delete file', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [client]);
 
 const _renameFile = useCallback(async (oldPath: string, newPath: string) =>  { if (!client) {t}hrow new Error('Client not initialized', try {;
       await client.renameFile(oldPath, newPath), setOpenFiles(prev => prev.map((f) => f.path === oldPath ? { ...f, path: newPath  }; : f))
       toast({ title: 'File Renamed',
-        description: 'File renamed successfully'
-      })
+        description: 'File renamed successfully'   
+    })
 } catch (err) {
       const _message  = err instanceof Error ? err.message : 'Failed to rename file', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [client]);
 
@@ -277,7 +283,8 @@ const _createTerminal = useCallback(async (config? null : Partial<KiroTerminal>)
       const _message = err instanceof Error ? err.message : 'Failed to create terminal', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [client]);
 
@@ -300,13 +307,14 @@ const _getAISuggestions = useCallback(async (file: string, position?) => {
 const _applyAISuggestion  = useCallback(async (suggestionId: string) =>  {
     if (!client) {t}hrow new Error('Client not initialized', try {
       await client.applyAISuggestion(suggestionId), toast({ title: 'Success',
-        description: 'AI suggestion applied successfully'
-};)
+        description: 'AI suggestion applied successfully'   
+    })
 } catch (err) {
       const _message = err instanceof Error ? err.message : 'Failed to apply suggestion', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [client]);
 
@@ -396,4 +404,4 @@ const _stopDebugSession = useCallback(async (sessionId: string) =>  {
     // debugSessions
 }
 
-}}}}}}}}}}}}}}}}))))))))))))))))))))))))
+}}}}}}}}}}}}}}}}

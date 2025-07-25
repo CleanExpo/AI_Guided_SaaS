@@ -8,15 +8,15 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Key, Lock, Eye, EyeOff, Plus, Trash2, AlertTriangle, CheckCircle, Copy, Download, Upload, Shield, Info } from 'lucide-react';
 import { cn } from '@/utils/cn';
-interface EnvVariable { key: string;
-  value: string;
+interface EnvVariable { key: string
+  value: string
   description?: string,
   type: 'public' | 'secret' | 'api_key',
-  required: boolean;
+  required: boolean
   validated?: boolean
 };
 interface EnvVariableEditorProps { variables: EnvVariable[],
-  onChange: (variables: EnvVariable[]: any) => void;
+  onChange: (variables: EnvVariable[]: any) => void
   projectType?: string,
   readOnly?: boolean
 }
@@ -75,7 +75,7 @@ if (validationErrors[updated[index].key]) {
       const, newErrors={ ...validationErrors }
       delete newErrors[updated[index].key]
       setValidationErrors(newErrors)}
-  const _toggleShowSecret  = (key: string) => { setShowSecrets(prev => ({ ...prev, [key]: !prev[key]  };))
+  const _toggleShowSecret  = (key: string) => { setShowSecrets(prev => ({ ...prev, [key]: !prev[key]  }))
 }
   const _validateVariables = async () => { setIsValidating(true)</Record> const errors: Record<string string> = { };</string>
     for (const variable of variables) {
@@ -102,7 +102,8 @@ if (validationErrors[updated[index].key]) {
     const content = variables, .filter((v) => v.key && v.value, .map((v) => `${v.key};="${v.value}"`)``;
       .join('\n');
 
-const _blob  = new Blob([content], { type: 'text/plain' });
+const _blob  = new Blob([content], { type: 'text/plain'
+    });
 
 const _url = URL.createObjectURL(blob);
     
@@ -121,7 +122,7 @@ const _importEnvFile = (event: React.ChangeEvent<HTMLInputElement>) =>  {</HTMLI
 
 const lines = content.split('\n');
       
-const imported: EnvVariable[] = [];
+const imported: EnvVariable[] = []
       lines.forEach((line) => { const _match = line.match(/^([A-Z_]+)="?([^"]+)"?$/);
         if (match) {
           const [ key, value]  = match;
@@ -132,13 +133,13 @@ const _existing = variables.find(v => v.key === key);
             value: type, key.includes('SECRET') || key.includes('PRIVATE') ? 'secret'  : null
                   key.includes('API_KEY') || key.includes('TOKEN') ? 'api_key' : 'public',
             required?: existing.required || false,
-description?: existing.description };)}
+description?: existing.description })}
       setVariables(imported);
       onChange(imported)
 }
     reader.readAsText(file)
 }
-  const _addSuggestedVariables = (): void => { const suggested = commonVariables[projectType] || commonVariables.default; const existingKeys = new Set(variables.map((v) => v.key); const toAdd = suggested.filter((v) => !existingKeys.has(v.key);
+  const _addSuggestedVariables = (): void => { const suggested = commonVariables[projectType] || commonVariables.default; const existingKeys = new Set(variables.map((v) => v.key); const toAdd = suggested.filter((v) => !existingKeys.has(v.key)
     if (toAdd.length > 0) {
       const updated = [...variables, ...toAdd];
       setVariables(updated);
@@ -152,7 +153,7 @@ description?: existing.description };)}
       default: return<Eye className="h-4 w-4"     />
   }
 }
-  const _getTypeBadgeColor = (type: EnvVariable['type']) =>  { switch (type) {;
+  const _getTypeBadgeColor = (type: EnvVariable['type']) =>  { switch (type) {
       case 'secret':;
       return 'bg-red-100 text-red-700', break, case 'api_key':;
       return 'bg-yellow-100 text-yellow-700';
@@ -194,7 +195,7 @@ variant="outline";
                 <span>
           <Upload className="h-4 w-4 mr-2"     />
                   Import</Upload>
-              <input type="file";
+              <input type="file"
 accept=".env, .env.local";
 
 const onChange={importEnvFile}
@@ -214,13 +215,12 @@ const onChange={importEnvFile}
                 <Input
 
 const value={variable.key};
-                  const onChange={(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))};</Input>
+                  const onChange={(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))};/>
                   placeholder="VARIABLE_NAME";
 
     disabled={readOnly} className={cn(
                     validationErrors[variable.key] && "border-red-500"
-                  )}
-                /></Input>
+                  )/>/>
               {/* Value */}
               <div className="col-span-6">
           <label className="text-sm font-medium mb-1 block">Value</label>
@@ -228,15 +228,14 @@ const value={variable.key};
           <Input
 
 type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'password'} value={variable.value}
-                    const onChange={(e) => handleUpdateVariable(index, 'value', e.target.value)}</Input>
+                    const onChange={(e) => handleUpdateVariable(index, 'value', e.target.value)} />
 {{variable.type === 'api_key' ? 'sk-...' : 'Enter value'}
                     disabled={readOnly} className={cn(
             'pr-10',validationErrors[variable.key] && "border-red-500"
-                    )}
-                  />
+                    )/>
                   {variable.type !== 'public'  && (/Input>
                     <button type = "button"; const onClick={() => toggleShowSecret(variable.key)}</button>
-                      className="absolute right-2 top-2.5 text-gray-400 hover:text-gray-600";
+                      className="absolute right-2 top-2.5 text-gray-400 hover: text-gray-600"
                     ></button>
                       {showSecrets[variable.key] ? (</button>
                         <EyeOff className="h-4 w-4"     />
@@ -267,18 +266,18 @@ type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'passwo
   },
     {validationErrors[variable.key]  && (p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}</p>
               <div className="flex items-center gap-2">
-          <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))}></Badge>
-                  {getTypeIcon(variable.type)}</Badge>
+          <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))}>/>
+                  {getTypeIcon(variable.type)}/>
                   <span className="ml-1">{variable.type}</span>
                 {variable.required  && (
 Badge variant="outline", className="text-xs">
-                    Required</Badge>
+                    Required/>
             )},
     {variable.validated  && (
 CheckCircle className="h-4 w-4 text-green-500" />
             )}))},
-    {/* Add, Variable Button */},;
-    {!readOnly  && (;
+    {/* Add, Variable Button */},
+    {!readOnly  && (
 Button, variant="outline", className="w-full";
 
 const onClick={handleAddVariable}
@@ -304,4 +303,4 @@ onClick={validateVariables} disabled={isValidating}
     
     </div>
   }
-}}}}}))))))
+}}}}}

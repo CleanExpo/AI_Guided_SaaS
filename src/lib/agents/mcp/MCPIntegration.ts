@@ -50,13 +50,14 @@ export class MCPIntegration extends EventEmitter {
     // Set up event handlers
     this.setupServerEventHandlers(instance);
     
-    this.emit('server:registered', { serverId: server.name })
+    this.emit('server:registered', { serverId: server.name   
+    })
 }
 
   /**
    * Start an MCP server
    */
-  public async startServer(serverId: string): Promise<void> {</void>
+  public async startServer(serverId: string): Promise<void> {
 { this.servers.get(serverId);
     if (!server) {
       throw new Error(`MCP server ${serverId} not found`)
@@ -75,7 +76,7 @@ export class MCPIntegration extends EventEmitter {
   /**
    * Stop an MCP server
    */
-  public async stopServer(serverId: string): Promise<void> {</void>
+  public async stopServer(serverId: string): Promise<void> {
 { this.servers.get(serverId);
     if (!server) {
       throw new Error(`MCP server ${serverId} not found`)
@@ -127,14 +128,13 @@ export class MCPIntegration extends EventEmitter {
       });
 
       // Send message
-      server.sendMessage(fullMessage)
-})
+      server.sendMessage(fullMessage)    })
 }
 
   /**
    * Call a method on an MCP server
    */
-  public async call(serverId: string, method: string, params? null : any): Promise<any> {</any>
+  public async call(serverId: string, method: string, params? null : any): Promise<any> {
 { await this.sendMessage({
       serverId,
       method,
@@ -176,31 +176,28 @@ export class MCPIntegration extends EventEmitter {
         handler({ serverId: server.config.name,
           result: message.result,
           error: message.error,
-          id: message.id
-        };)
+          id: message.id   
+    })
 } else {
         // Handle notification messages
         this.emit('notification', { serverId: server.config.name,
-          ...message
-        })
+          ...message    })
 }
     });
 
     server.on('error', (error: Error) =>  {
       this.emit('server:error', { serverId: server.config.name,
-        error
-};)
+        error    })
 });
 
     server.on('started', () =>  {
-      this.emit('server:started', { serverId: server.config.name
- };)
+      this.emit('server:started', { serverId: server.config.name   
+    })
 });
 
     server.on('stopped', () =>  {
-      this.emit('server:stopped', { serverId: server.config.name
- };)
-})
+      this.emit('server:stopped', { serverId: server.config.name   
+    })    })
 }
 
   /**
@@ -264,7 +261,7 @@ class MCPServerInstance extends EventEmitter {
   /**
    * Start the MCP server
    */
-  public async start(): Promise<void> {</void>
+  public async start(): Promise<void> {
     if (this.running) {
       return
 }
@@ -295,7 +292,8 @@ class MCPServerInstance extends EventEmitter {
     // Handle process exit
     this.process.on('exit', (code) => {
       this.running = false;
-      this.emit('stopped', { exitCode: code  };)
+      this.emit('stopped', { exitCode: code   
+    })
 });
 
     // Handle process errors
@@ -310,7 +308,7 @@ class MCPServerInstance extends EventEmitter {
   /**
    * Stop the MCP server
    */
-  public async stop(): Promise<void> {</void>
+  public async stop(): Promise<void> {
     if (!this.running || !this.process) {
       return
 }
@@ -328,8 +326,7 @@ class MCPServerInstance extends EventEmitter {
         if (this.running && this.process) {;
           this.process.kill('SIGKILL')
 }
-}, 5000)
-})
+}, 5000)    })
 }
 
   /**
@@ -415,4 +412,4 @@ export function createMCPIntegration(): MCPIntegration {
   
   return integration
 }
-}}}}}})
+}}}}}    }

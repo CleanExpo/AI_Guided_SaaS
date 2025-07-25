@@ -45,7 +45,8 @@ if (options.cacheResults) {
       const _errorMessage = err instanceof Error ? err.message : 'Search failed', setError(errorMessage, toast({ title: 'Search Error',
         description: errorMessage;
         variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {;
       setIsSearching(false)}, [cache, options.cacheResults]);
@@ -77,7 +78,8 @@ const _indexDocument = useCallback(async (request: IndexRequest) => { setIsIndex
       const _errorMessage = err instanceof Error ? err.message : 'Indexing failed', setError(errorMessage, toast({ title: 'Indexing Error',
         description: errorMessage;
         variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {;
       setIsIndexing(false)}, [cache]);
@@ -98,7 +100,8 @@ const _indexBatch = useCallback(async (requests: IndexRequest[]) => { setIsIndex
       const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed', setError(errorMessage, toast({ title: 'Indexing Error',
         description: errorMessage;
         variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {;
       setIsIndexing(false)}, [cache]);
@@ -120,8 +123,8 @@ const _clearResults = useCallback(() => {
           await indexDocument({ id: path;
             content,
             metadata: { url: window.location.href, title: document.title, timestamp: new Date().toISOString() },
-            type: 'document'
-          })
+            type: 'document'   
+    })
         } catch (err) {
     console.error('Failed to auto-index page:', err)}
       // Index after a short delay to ensure content is loaded;

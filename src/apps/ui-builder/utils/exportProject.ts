@@ -27,6 +27,7 @@ ${componentBlocks};
 const styleCSS = `@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');`;``
   zip.file('index.html', indexHTML);
   zip.file('style.css', styleCSS);
-  zip.generateAsync({ type: 'blob' }).then((blob) => {
-    saveAs(blob, 'ai-builder-export.zip')};)
+  zip.generateAsync({ type: 'blob'
+    }).then((blob) => {
+    saveAs(blob, 'ai-builder-export.zip')    })
 };

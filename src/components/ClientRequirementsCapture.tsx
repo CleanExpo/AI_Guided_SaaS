@@ -9,10 +9,10 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Send, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 interface ProcessedRequirements { requirements: Array<{
-  id: string;
-  category: string;
-  description: string;
-  priority: string;
+  id: string
+  category: string
+  description: string
+  priority: string
   agents: string[]
 }>
   roadmap: { complexity: string, estimatedDuration: string, phases: Array<{ name: string, duration: string, agents: string[]
@@ -28,7 +28,7 @@ interface ProcessedRequirements { requirements: Array<{
 const [error, setError] = useState<string | null>(null);</string>
   
 const [result, setResult]  = useState<ProcessedRequirements | null>(null);</ProcessedRequirements>
-{ [;
+{ [
   "I need an e-commerce platform with user authentication, product catalog, shopping cart, and Stripe payment integration",
     "Build a real-time dashboard with analytics, charts, dark mode, and export functionality",
     "Create a blog platform with markdown editor, SEO optimization, and social media integration",
@@ -90,9 +90,8 @@ low: 'bg-gray-100 text-gray-800'
               <Input id="projectName";
 placeholder="My Awesome Project";
 
-    value={projectName} onChange={(e) => setProjectName(e.target.value)}</Input>
-{{isProcessing}
-              /></Input>
+    value={projectName} onChange={(e) => setProjectName(e.target.value)} />
+{{isProcessing/>/>
             <div className="space-y-2"    />
           <Label htmlFor="requirements">Project Requirements</Label>
               <Textarea id="requirements";
@@ -108,7 +107,7 @@ Alert variant="destructive"></Alert>
           <AlertDescription>{error}</AlertDescription>
       )}
             <Button
-type="submit";
+type="submit"
 
 const disabled={isProcessing || !input.trim()};
               className="w-full";
@@ -129,7 +128,7 @@ const disabled={isProcessing || !input.trim()};
               {examplePrompts.map((example, index) => (\n    </div>
                 <button const key={index};
                   const onClick={() => useExample(example)};</button>
-                  className="text-left text-sm p-3 rounded-lg border hover:bg-accent transition-colors w-full";
+                  className="text-left text-sm p-3 rounded-lg border hover: bg-accent transition-colors w-full"
 
     const disabled={isProcessing}
                 >
@@ -163,13 +162,13 @@ const disabled={isProcessing || !input.trim()};
                   <div key={req.id} className="p-4 border rounded-lg space-y-2"    />
           <div className="flex items-start justify-between"     />
                       <p className="font-medium">{req.description}</p>
-                      <Badge className={getPriorityColor(req.priority)}></Badge>
-                        {req.priority}</Badge>
+                      <Badge className={getPriorityColor(req.priority)}>/>
+                        {req.priority}/>
                     <div className="flex items-center gap-2"    />
-          <Badge className={getCategoryColor(req.category)}></Badge>
-                        {req.category}</Badge>
+          <Badge className={getCategoryColor(req.category)}>/>
+                        {req.category}/>
                       {req.agents.map((agent) => (\n    <Badge key={agent} variant="outline", className="text-xs">
-                          {agent.replace('agent_', '')}</Badge>
+                          {agent.replace('agent_', '')}/>
                   ))}
                 ))}
           <Card    />
@@ -188,7 +187,7 @@ Duration: { phase.duration }</p>
                       <div className="flex gap-1 mt-2">
                         {phase.agents.map((agent) => (\n    </div>
                           <Badge key={agent} variant="secondary", className="text-xs">
-                            {agent.replace('agent_', '')}</Badge>
+                            {agent.replace('agent_', '')}/>
                   ))}
                 ))}</React.Fragment>
       )}
@@ -198,4 +197,4 @@ Duration: { phase.duration }</p>
     </any>
     </any>
   }
-}}}}}))
+}}}}}

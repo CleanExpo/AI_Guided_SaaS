@@ -55,7 +55,8 @@ export class EnvManager {
     if (!fs.existsSync(this.envPath) {)} {
       this.envPath = path.join(projectRoot, '.env')
 }
-    this.ajv = new Ajv({ allErrors: true });
+    this.ajv = new Ajv({ allErrors: true
+    });
     this.loadConfig()
 }
   private loadConfig() {
@@ -144,7 +145,8 @@ if (varConfig.minLength && value.length < varConfig.minLength) {
     message: errorMessage;
     severity: this.config.validation.errorOnInvalid
                 ? 'error'
-                : 'warning' });
+                : 'warning'
+    });
             summary.invalid++
   }
 }
@@ -167,7 +169,7 @@ if (this.config.validation.strictMode &&
       errors,
       summary
 }
-  public async sync(): Promise<any> {</any>
+  public async sync(): Promise<any> {
 { this.loadEnvFile(); const _timestamp = new Date().toISOString(); const changes: string[] = [];
     // Update config with current environment;
 if (this.config) {
@@ -280,4 +282,4 @@ if (history.length > 100) {
   }
 }
 
-}}}}}}}}}}}}}}}}}}}}}}})))))))))))))))
+}}}}}}}}}}}}}}}}}}}}}}}

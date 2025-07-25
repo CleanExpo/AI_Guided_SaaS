@@ -279,7 +279,7 @@ export class ArchitectAgent extends Agent {
       temperature: 0.4
   }
 }
-  protected async execute(input: string): Promise<any> {</any>
+  protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting architecture design process...', // Get inputs from other agents, const requirements  = this.getSharedMemory('primary-requirements') || [];
 
@@ -404,7 +404,7 @@ const architecture: SystemArchitecture={;
 }
 };
   private async defineArchitectureOverview(input: string, requirements: string[],
-  constraints: string[], qualityStandards: string[]): Promise<any> {</any>
+  constraints: string[], qualityStandards: string[]): Promise<any> {
 { `Design the high-level architecture for this, project: Project, Description:``, ${input}
 Key: Requirements:
 ${requirements.slice(0, 10).join('\n')}
@@ -427,7 +427,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
     return JSON.parse(response)
 }
   private async designComponents(requirements: string[], userStories: [] as any[],
-  architectureStyle: string): Promise<any> {</any>
+  architectureStyle: string): Promise<any> {
 { `Design system components based, on: Architecture, Style: ${architectureStyle}``,
 Requirements:
 ${requirements.slice(0, 15).join('\n')}
@@ -453,10 +453,10 @@ const components = JSON.parse(response);
     return components.map((c, index: number) => ({;
       ...c;
       id: `comp-${index + 1}`
-    }})
+    }    })
 }
   private async createDataModel(requirements: string[], userStories: [] as any[],
-  components: Component[]): Promise<any> {</any>
+  components: Component[]): Promise<any> {
 { `Create a comprehensive data, model: ``, Requirements:, ${requirements.slice(0, 15).join('\n')}
 Components needing, data:
 ${components
@@ -478,13 +478,13 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
     return JSON.parse(response)
 }
   private async designAPIs(components: Component[], dataModel: DataModel;
-  userStories: any[]): Promise<any> {</any>
+  userStories: any[]): Promise<any> {
 { `Design comprehensive API, architecture: Components with, APIs:``, ${JSON.stringify(
   // components
     .filter((c) => c.interfaces.length > 0)
     .map((c) => ({ name: c.name,
     interfaces: c.interfaces
-});
+    });
   null,
   2
 )}
@@ -508,7 +508,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async planInfrastructure(components: Component[], overview: ArchitectureOverview, timeline): Promise<any> {</any>
+  private async planInfrastructure(components: Component[], overview: ArchitectureOverview, timeline): Promise<any> {
 { `Plan infrastructure for the, system: Architecture, Style: ${overview.style}``,
 Components:
 ${components.map((c) => `${c.name} (${c.type})`).join('\n')}``;
@@ -531,7 +531,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
     return JSON.parse(response)
 }
   private async designSecurity(requirements: string[], components: Component[],
-  dataModel: DataModel): Promise<any> {</any>
+  dataModel: DataModel): Promise<any> {
 { `Design comprehensive security, architecture: Security-related, Requirements:``, ${requirements
   .filter(, r: any =>
       r.toLowerCase().includes('security') ||
@@ -561,7 +561,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async planIntegrations(input: string, components: Component[]): Promise<any> {</any>
+  private async planIntegrations(input: string, components: Component[]): Promise<any> {
 { `Identify and plan external, integrations: Project, Description:``, ${input}
 System: Components:
 ${components.map((c) => `${c.name}: ${c.responsibility}`).join('\n')}``
@@ -581,7 +581,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
 }};
     return JSON.parse(response)
 }
-  private async defineDeploymentStrategy(infrastructure: Infrastructure, components: Component[], timeline): Promise<any> {</any>
+  private async defineDeploymentStrategy(infrastructure: Infrastructure, components: Component[], timeline): Promise<any> {
 { `Define deployment, strategy: ``, Infrastructure:, ${JSON.stringify(infrastructure.hostingPlatform)}
 Components, to: Deploy:;
 ${components.map((c) => `${c.name} (${c.type})`).join('\n')}``;
@@ -602,7 +602,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
     return JSON.parse(response)
 }
   private async documentDecisions(overview: ArchitectureOverview, components: Component[],
-  infrastructure: Infrastructure): Promise<any> {</any>
+  infrastructure: Infrastructure): Promise<any> {
 { `Document key technical decisions, made: Architecture, Style: ${overview.style}``,
 Key: Technologies:
 ${[...new Set(components.flatMap(c => c.technology))].join(', ')}
@@ -661,4 +661,3 @@ t: any =>
 };);
     return techStack
 }
-)))))))))))))))))))))))))

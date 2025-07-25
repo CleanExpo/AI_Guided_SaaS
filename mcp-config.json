@@ -1,0 +1,43 @@
+{
+  "servers": [
+    {
+      "name": "Serena Semantic Search",
+      "transport": "sse",
+      "port": 9121,
+      "command": "python -m serena_mcp_server --transport sse --port 9121",
+      "enabled": true
+    },
+    {
+      "name": "Sequential Thinking",
+      "transport": "stdio",
+      "command": "node wsl-sequential-thinking-server.cjs",
+      "enabled": true
+    },
+    {
+      "name": "Context7",
+      "transport": "http",
+      "port": 9122,
+      "command": "npx @upstash/context7-mcp",
+      "enabled": true
+    },
+    {
+      "name": "ESLint MCP",
+      "transport": "http",
+      "port": 9123,
+      "command": "npx @eslint/mcp",
+      "enabled": true
+    },
+    {
+      "name": "Memory Server",
+      "transport": "websocket",
+      "port": 9124,
+      "command": "tsx mcp/memory-server.ts",
+      "enabled": true
+    }
+  ],
+  "settings": {
+    "retryAttempts": 3,
+    "retryDelay": 1000,
+    "healthCheckInterval": 30000
+  }
+}

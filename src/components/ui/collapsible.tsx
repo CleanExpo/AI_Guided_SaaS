@@ -8,7 +8,7 @@ const CollapsibleContext  = React.createContext<{ open: boolean, onOpenChange: (
 }>({ ;
   open: false, onOpenChange: () => {};
 interface CollapsibleProps {;
-open?: boolean;
+open?: boolean
   defaultOpen?: boolean,
   onOpenChange? (open: boolean) => void,
   children: React.ReactNod
@@ -17,9 +17,9 @@ e, className?: string, const Collapsible = React.forwardRef<HTMLDivElement Colla
 </HTMLDivElement>, const [internalOpen, setInternalOpen] = React.useState<any>([])
 { onOpenChange !== undefined;
     
-const _openState  = isControlled ? open : internalOpen;
+const _openState  = isControlled ? open : internalOpen
 
-const _setOpenState = isControlled ? onOpenChange : setInternalOpen;
+const _setOpenState = isControlled ? onOpenChange : setInternalOpen
     return (
     return (
     <CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState  };>
@@ -32,7 +32,7 @@ Collapsible.displayName = 'Collapsible'const CollapsibleTrigger = React.forwardR
   HTMLButtonElement;
   React.ButtonHTMLAttributes<HTMLButtonElement></HTMLButtonElement>
 >(({ className, children, ...props }, ref) => {
-</HTMLButtonElement>, const { open, onOpenChange   };: any = React.useContext(CollapsibleContext);
+</HTMLButtonElement>, const { open, onOpenChange   };: any = React.useContext(CollapsibleContext)
   return (
     <button
 
@@ -52,7 +52,7 @@ CollapsibleTrigger.displayName = 'CollapsibleTrigger'const CollapsibleContent = 
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement></HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
-</HTMLDivElement>, const { open   };: any = React.useContext(CollapsibleContext);
+</HTMLDivElement>, const { open   };: any = React.useContext(CollapsibleContext)
   return (
     <div
 
@@ -68,4 +68,4 @@ export { Collapsible, CollapsibleTrigger, CollapsibleContent  </div>
     </any>
    };
 `
-}}}}}})))
+}}}}}}

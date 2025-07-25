@@ -42,7 +42,7 @@ s,
     causalInsights: CausalInsight
 s
 };
-export async function generateSelfCheckReport(): Promise<any> {</any>
+export async function generateSelfCheckReport(): Promise<any> {
 { new Date().toISOString(, // Gather all diagnostic data, const moduleReport  = checkModules();
 
 const depReport = auditDependencies();
@@ -124,7 +124,8 @@ ${getSystemRecommendations(depReport, securityReport, .map((rec) => `- ${rec}`)`
 
 const _reportsDir = path.resolve(__dirname, '../../../reports');
   if (!fs.existsSync(reportsDir) {)} {
-    fs.mkdirSync(reportsDir, { recursive: true })
+    fs.mkdirSync(reportsDir, { recursive: true   
+    })
 }
   const _reportPath = path.join(reportsDir, 'self-health-check.md');
   fs.writeFileSync(reportPath, report.trim();
@@ -219,4 +220,4 @@ const _uxScore = getUXScore(causalInsights);
     securityScore * 0.4 + moduleScore * 0.3 + depScore * 0.2 + uxScore * 0.1
   )
 }
-}))))
+}

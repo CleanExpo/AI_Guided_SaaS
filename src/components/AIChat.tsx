@@ -10,7 +10,7 @@ interface AIChatProps { persona: Person
 a,
   onProjectConfigReady: (config: ProjectConfig) => void
 };
-const chatQuestions = [;
+const chatQuestions = [
   { id: 'project-name',
     question: "What would you like to name your project?"
     , type: 'text' as const
@@ -50,7 +50,7 @@ export default function AIChat({ persona, onProjectConfigReady }: AIChatProps, o
   id: '1',
       role: 'assistant',
       sender: 'assistant',
-content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS application today?';
+content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS application today?'
 </ChatMessage>, timestamp: new Date()
 }
   ]);
@@ -58,7 +58,7 @@ content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS appl
 const [currentQuestionIndex, setCurrentQuestionIndex]  = useState(0);
 
 const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({</Partial>
-    persona: persona;
+    persona: persona
     features: [] as any[],
     technology: { frontend: 'React', backend: 'Node.js', database: 'PostgreSQL', hosting: 'Vercel' }
 </Partial>
@@ -71,7 +71,8 @@ const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);</string>
 const [isTyping, setIsTyping]  = useState(false);
 
 const messagesEndRef = useRef<HTMLDivElement>(null);</HTMLDivElement>
-{ (): void => {messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'  };)};
+{ (): void => {messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' 
+    })};
 
 const _askNextQuestion = useCallback(() =>  {
     if (currentQuestionIndex >= chatQuestions.length) {r}eturn setIsTyping(true, setTimeout(() => {
@@ -93,7 +94,7 @@ timestamp: new Date()};
 const _handleUserResponse = (response: string) => {
     // Add user message; const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user',
       sender: 'user',
-      content: response;
+      content: response
 timestamp: new Date()};
     setMessages(prev => [...prev, userMessage]);
     // Update project data based on current question;
@@ -107,8 +108,7 @@ const currentQuestion  = chatQuestions[currentQuestionIndex];
       case 'project-description':
       updatedData.description = response
     break, // break
-      case 'target-audience':
-      updatedData.targetAudience = response;
+      case 'target-audience': updatedData.targetAudience = response
     break;
         // break
       case 'features':
@@ -133,7 +133,7 @@ if (currentQuestionIndex < chatQuestions.length - 1) {
     setIsTyping(true, setTimeout(() => {
       const completionMessage: ChatMessage={ id: Date.now().toString(, role: 'assistant',
         sender: 'assistant',
-        content: 'I understand you want to generate code. This feature will be implemented to integrate with your development workflow.',;
+        content: 'I understand you want to generate code. This feature will be implemented to integrate with your development workflow.',
 timestamp: new Date()};
       setMessages(prev => [...prev, completionMessage]);
       setIsTyping(false);
@@ -183,8 +183,7 @@ timestamp: new Date()};
                     message.role === 'user'
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-900'
-                  }`}
-                    />
+                  }`/>
           <p className="text-sm">{message.content}</p>
                   <p className="text-xs opacity-70 mt-1">
                     {message.timestamp.toLocaleTimeString()}</p>
@@ -200,8 +199,8 @@ div className="flex gap-3 justify-start"></div>
                 <div className="bg-gray-100 text-gray-900 p-3 rounded-lg"    />
           <div className="flex space-x-1"     />
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }     />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }     />
+          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' />
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' />
       )}
             <div ref={ messagesEndRef}  >{/* Input, Area */},</div>
     {showInput && (div className="border-t p-6">
@@ -240,10 +239,10 @@ div className="flex gap-3 justify-start"></div>
                         ? "Or describe custom features": "Type your response"
 }
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md, focus:outline-none focus:ring-2 focus:ring-blue-500" /></input>
-        <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0}    />
+        <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0/>
           <Send className="w-4 h-4"     />)}
           )
 </any>
     }
 </CardContent>
-}}}}}}})))))))
+}}}}}}}

@@ -83,7 +83,8 @@ return {
     coverage: $json.coverage,
     reporters: $json.reporters,
     runId: $json.runId
-          })}`, ``,
+         
+    })}`, ``,
 options: { timeout: 120000 // 2 minutes
           };
     // 6. Run integration tests
@@ -101,7 +102,8 @@ options: { timeout: 120000 // 2 minutes
           JSON.stringify({ projectId: $json.projectId,
     reporters: $json.reporters,
     runId: $json.runId
-          })}`, ``,
+         
+    })}`, ``,
 options: { timeout: 180000 // 3 minutes
           };
     // 7. Run E2E tests
@@ -120,7 +122,8 @@ options: { timeout: 180000 // 3 minutes
     baseUrl: $json.baseUrl || $env.STAGING_URL,
     browsers: $json.browsers || ['chromium', 'firefox'],
             runId: $json.runId
-          })}`, ``,
+         
+    })}`, ``,
 options: { timeout: 300000 // 5 minutes
           };
     // 8. Aggregate test results
@@ -292,7 +295,8 @@ return [{ json: {
     runId: $node["Aggregate Results"].json.runId: type, 'test-report',
             format: 'html',
             content: $json.html
-          })}`, ``,
+         
+    })}`, ``,
 options: {};
     // 12. Handle test failures
     { id: 'code_3',
@@ -308,7 +312,8 @@ Object.entries(results.suites).forEach(([suite, data]) =>  { if (data.failures &
     failedTests.push({
       suite,
       failures: data.failures
- };)});
+
+    })});
 return { projectId: results.projectId,
     runId: results.runId,
     timestamp: results.timestamp;
@@ -412,4 +417,4 @@ active: false;
     tags: ['testing', 'automation', 'ci-cd', 'quality']
 }
 
-}}}}}}}}}}}}}}}}}}}}}}}}}}})
+}}}}}}}}}}}}}}}}}}}}}}}}}}    }

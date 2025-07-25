@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: 'Press & Media - AI Guided SaaS Platf
 };
 
 export default function PressPage() {
-  const pressReleases = [;
+  const pressReleases = [
     { title: 'AI Guided SaaS Raises $10M Series A',
       date: '2025-01-15',
       category: 'Funding',
@@ -29,7 +29,7 @@ export default function PressPage() {
     }
   ];
 
-  const mediaKit = [;
+  const mediaKit = [
     { name: 'Company Logo Pack', type: 'ZIP', size: '2.3 MB' },
     { name: 'Product Screenshots', type: 'ZIP', size: '15.7 MB' },
     { name: 'Executive Photos', type: 'ZIP', size: '8.2 MB' },

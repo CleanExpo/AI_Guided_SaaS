@@ -5,11 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, TrendingUp, Users, DollarSign } from 'lucide-react';
 
 interface AnalyticsData { overview: {
-    totalUsers: number;
-    activeUsers: number;
-    totalProjects: number;
-    totalApiCalls: number;
-    revenue: number;
+    totalUsers: number
+    activeUsers: number
+    totalProjects: number
+    totalApiCalls: number
+    revenue: number
     activeSubscriptions: number
  };
   userMetrics: { newUsers: Array<{ date: string, count: number }>;
@@ -18,22 +18,23 @@ interface AnalyticsData { overview: {
 }
 
 interface AdminAnalyticsProps {
-  data?: AnalyticsData;
+  data?: AnalyticsData
   timeRange?: string
 }
 
 export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps = {}) {
-  const [selectedMetric, setSelectedMetric] = useState<string>([])
+  const [selectedMetric, setSelectedMetric] = useState<string>('users')
   
   // Default data if none provided
-  const defaultData: AnalyticsData={ overview: {
-      totalUsers: 1234;
-      activeUsers: 456;
-      totalProjects: 789;
-      totalApiCalls: 123456;
-      revenue: 9876;
+  const defaultData: AnalyticsData = { 
+    overview: {
+      totalUsers: 1234,
+      activeUsers: 456,
+      totalProjects: 789,
+      totalApiCalls: 123456,
+      revenue: 9876,
       activeSubscriptions: 234
-    }
+    },
     userMetrics: { newUsers: [
         { date: 'Mon', count: 10 },
         { date: 'Tue', count: 15 },
@@ -61,7 +62,7 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
     <div className="space-y-6">
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card></Card>
+          <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground"  />
@@ -108,20 +109,23 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
       
       {/* User Activity Chart */}
       <Card>
-          <CardHeader></CardHeader>
+          <CardHeader>
           <CardTitle>User Activity - Last 7 Days</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="h-[200px] flex items-end justify-between gap-2">
             {analyticsData.userMetrics.activeUsers.map((day, index) => (
               <div key={index} className="flex-1 flex flex-col items-center gap-2">
-          <div ;
-                  className="w-full bg-blue-500 rounded-t";
+                <div 
+                  className="w-full bg-blue-500 rounded-t"
                   style={{ height: `${(day.count / 150) * 100}%` }}
-                 />
+                />
                 <span className="text-xs text-gray-600">{day.date}</span>
               </div>
             ))}
           </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

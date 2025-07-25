@@ -1,0 +1,324 @@
+{
+  "config": {
+    "configFile": "D:\\AI Guided SaaS\\playwright-eval.config.ts",
+    "rootDir": "D:/AI Guided SaaS/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "evaluation-results/html-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evaluation-results/test-results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "D:/AI Guided SaaS/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/AI Guided SaaS/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.1",
+    "workers": 10,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "evaluation-suite.spec.ts",
+      "file": "evaluation-suite.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Senior Product Developer Evaluation Suite",
+          "file": "evaluation-suite.spec.ts",
+          "line": 335,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Dashboard Evaluation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12040,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Dashboard Score: 8.2/10\n"
+                        },
+                        {
+                          "text": "\n🎯 EVALUATION REPORT\n"
+                        },
+                        {
+                          "text": "============================================\n\n"
+                        },
+                        {
+                          "text": "🎯 COMPONENT SCORES:\n"
+                        },
+                        {
+                          "text": "✅ Dashboard: 8.2/10\n"
+                        },
+                        {
+                          "text": "⚠️ Prompts:   0/10\n"
+                        },
+                        {
+                          "text": "❌ Folders:   0/10\n"
+                        },
+                        {
+                          "text": "\n🏆 Overall: 2.7/10\n\n"
+                        },
+                        {
+                          "text": "🚨 PRIORITY IMPROVEMENTS:\n"
+                        },
+                        {
+                          "text": "   [CRITICAL] Folders requires immediate attention\n"
+                        },
+                        {
+                          "text": "   [Prompts] Enhance usability - simplify the prompt creation workflow\n"
+                        },
+                        {
+                          "text": "   [Prompts] Fix search functionality and form validation\n"
+                        },
+                        {
+                          "text": "   [Folders] Implement drag-and-drop functionality properly\n"
+                        },
+                        {
+                          "text": "   [Folders] Improve visual hierarchy and folder nesting indicators\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-25T00:35:54.179Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "000052f312f9a49b259e-21ba7fb98a2c3dfed254",
+              "file": "evaluation-suite.spec.ts",
+              "line": 351,
+              "column": 3
+            },
+            {
+              "title": "Prompts Evaluation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6458,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Prompts Score: 8.2/10\n"
+                        },
+                        {
+                          "text": "\n🎯 EVALUATION REPORT\n"
+                        },
+                        {
+                          "text": "============================================\n\n"
+                        },
+                        {
+                          "text": "🎯 COMPONENT SCORES:\n"
+                        },
+                        {
+                          "text": "✅ Dashboard: 0/10\n"
+                        },
+                        {
+                          "text": "⚠️ Prompts:   8.2/10\n"
+                        },
+                        {
+                          "text": "❌ Folders:   0/10\n"
+                        },
+                        {
+                          "text": "\n🏆 Overall: 2.7/10\n\n"
+                        },
+                        {
+                          "text": "🚨 PRIORITY IMPROVEMENTS:\n"
+                        },
+                        {
+                          "text": "   [CRITICAL] Folders requires immediate attention\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Improve core functionality - ensure all metrics load correctly\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Optimize performance - reduce initial load time\n"
+                        },
+                        {
+                          "text": "   [Folders] Implement drag-and-drop functionality properly\n"
+                        },
+                        {
+                          "text": "   [Folders] Improve visual hierarchy and folder nesting indicators\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-25T00:35:54.200Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "000052f312f9a49b259e-6add3a97122099813e78",
+              "file": "evaluation-suite.spec.ts",
+              "line": 368,
+              "column": 3
+            },
+            {
+              "title": "Folders Evaluation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 6372,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Folders Score: 8.2/10\n"
+                        },
+                        {
+                          "text": "\n🎯 EVALUATION REPORT\n"
+                        },
+                        {
+                          "text": "============================================\n\n"
+                        },
+                        {
+                          "text": "🎯 COMPONENT SCORES:\n"
+                        },
+                        {
+                          "text": "✅ Dashboard: 0/10\n"
+                        },
+                        {
+                          "text": "⚠️ Prompts:   0/10\n"
+                        },
+                        {
+                          "text": "❌ Folders:   8.2/10\n"
+                        },
+                        {
+                          "text": "\n🏆 Overall: 2.7/10\n\n"
+                        },
+                        {
+                          "text": "🚨 PRIORITY IMPROVEMENTS:\n"
+                        },
+                        {
+                          "text": "   [CRITICAL] Prompts requires immediate attention\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Improve core functionality - ensure all metrics load correctly\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Optimize performance - reduce initial load time\n"
+                        },
+                        {
+                          "text": "   [Prompts] Enhance usability - simplify the prompt creation workflow\n"
+                        },
+                        {
+                          "text": "   [Prompts] Fix search functionality and form validation\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-25T00:35:54.215Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "000052f312f9a49b259e-2dff75f461ac626b2842",
+              "file": "evaluation-suite.spec.ts",
+              "line": 385,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-07-25T00:35:53.443Z",
+    "duration": 12968.708999999999,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

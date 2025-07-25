@@ -1,4 +1,4 @@
-/* BREADCRUMB: app - Application page or route */;
+/* BREADCRUMB: app - Application page or route */
 import React from 'react';
 
 export default function AdminLoginLayout({

@@ -73,7 +73,7 @@ export class AgentCommunication extends EventEmitter {
   /**
    * Send message between agents
    */
-  async sendMessage(message: Partial<AgentMessage>): Promise<string> {</string>
+  async sendMessage(message: Partial<AgentMessage>): Promise<string> {
 { this.generateMessageId(); const fullMessage: AgentMessage={ id: messageId;
       from_agent: message.from_agent || 'system',
       to_agent: message.to_agent || 'broadcast',
@@ -102,7 +102,7 @@ const validation = this.validateMessage(fullMessage);
    * Send request and wait for response
    */
   async sendRequest(fromAgent: string, toAgent: string;
-  requestData: any, timeout: number = 30000): Promise<any> {</any>
+  requestData: any, timeout: number = 30000): Promise<any> {
 { this.generateCorrelationId(, await this.sendMessage({ from_agent: fromAgent;
       to_agent: toAgent;
       type: 'request',
@@ -110,6 +110,7 @@ const validation = this.validateMessage(fullMessage);
       payload: requestData;
       correlation_id: correlationId;
       expires_at: new Date(Date.now() + timeout)
+   
     });
     // Wait for response
     return new Promise((resolve, reject) =>  { const timeoutHandle  = setTimeout(() => {
@@ -119,27 +120,26 @@ const validation = this.validateMessage(fullMessage);
 const responseHandler = (message: AgentMessage) => {
         if (message.correlation_id === correlationId && message.type === 'response') {;
           clearTimeout(timeoutHandle, this.removeListener('message_received', responseHandler); resolve(message.payload)};
-      this.on('message_received', responseHandler)
-})
+      this.on('message_received', responseHandler)    })
   }
   /**
    * Send response to a request
    */
   async sendResponse(originalRequest: AgentMessage, responseData: any;
-  success: boolean = true): Promise<string> {</string>
+  success: boolean = true): Promise<string> {
     return this.sendMessage({ from_agent: originalRequest.to_agent,
       to_agent: originalRequest.from_agent,
       type: 'response',
       priority: originalRequest.priority,
       payload: { success, data: responseData, original_request_id: originalRequest.id },
-      correlation_id: originalRequest.correlation_id
+      correlation_id: originalRequest.correlation_id   
     })
   }
   /**
    * Perform agent handoff with protocol validation
    */
   async performHandoff(fromAgent: string, toAgent: string;
-  handoffType: HandoffProtocol['handoff_type'], data: any): Promise<boolean> {</boolean>
+  handoffType: HandoffProtocol['handoff_type'], data: any): Promise<boolean> {
     console.log(`🤝 Performing handoff: ${fromAgent} → ${toAgent} (${handoffType})`);
     
 const protocolKey  = `${fromAgent}_to_${toAgent}_${handoffType}`;
@@ -297,14 +297,14 @@ const responseMessages = this.messageHistory.filter((m) => m.type === 'response'
     if (message.expires_at && message.expires_at <= new Date() {)} {
       return { valid: false, error: 'Message already expired' }}
     return { valid: true }}
-  private async routeMessage(message: AgentMessage): Promise<void> {</void>
+  private async routeMessage(message: AgentMessage): Promise<void> {
     if (message.to_agent = == 'broadcast') {;
       // Broadcast to all agents; const registryStatus = this.registry.getRegistryStatus(, for (const agentId of Object.keys(registryStatus.agents_by_role)) {
         if (agentId !== message.from_agent) {
           await this.addToQueue(agentId, message)} else {
       // Direct message
       await this.addToQueue(message.to_agent, message)}
-  private async addToQueue(agentId: string, message: AgentMessage): Promise<void> {</void>
+  private async addToQueue(agentId: string, message: AgentMessage): Promise<void> {
     let queue = this.messageQueues.get(agentId, if (!queue) {
       const queue={ agent_id: agentId;
         queue: [] as any[],
@@ -317,14 +317,14 @@ const responseMessages = this.messageHistory.filter((m) => m.type === 'response'
       // Remove oldest message
       queue.queue.shift()}
     queue.queue.push(message);
-    this.emit('message_queued', { agentId, message })
+    this.emit('message_queued', { agentId, message    })
 }
   private startMessageProcessing() {
     // Process message queues every 5 seconds
     this.processingInterval = setInterval(() => {
       this.processMessageQueues()}, 5000)
   }
-  private async processMessageQueues(): Promise<void> {</void>
+  private async processMessageQueues(): Promise<void> {
     for (const [agentId, queue] of this.messageQueues) {
       if (queue.processing || queue.queue.length === 0) {c}ontinue, queue.processing = true, try {
         // Process one message at a time; const message = queue.queue.shift(); if (message) {
@@ -336,7 +336,7 @@ const responseMessages = this.messageHistory.filter((m) => m.type === 'response'
         queue.processing = false
   }
 }
-  private async processMessage(agentId: string, message: AgentMessage): Promise<void> {</void>
+  private async processMessage(agentId: string, message: AgentMessage): Promise<void> {
     // Check if message expired
     if (message.expires_at && message.expires_at <= new Date() {)} {
       return null}// Process based on message type;
@@ -357,29 +357,30 @@ switch (message.type) {
     }
     this.emit('message_received', message)
 }
-  private async processRequest(agentId: string, message: AgentMessage): Promise<void> {</void>
+  private async processRequest(agentId: string, message: AgentMessage): Promise<void> {
     // Here you would integrate with actual agent processing
     // For now, we'll simulate a response
     setTimeout(async () =>  {
       await this.sendResponse(message, { status: 'processed',;
         result: `Request processed by ${agentId};`,
-        timestamp: new Date().toISOString()})
+        timestamp: new Date().toISOString()   
+    })
     }, 1000)
   }
-  private async processResponse(agentId: string, message: AgentMessage): Promise<void> {</void>
+  private async processResponse(agentId: string, message: AgentMessage): Promise<void> {
     // Response processing is handled by the sendRequest promise resolution
   }
-  private async processHandoff(agentId: string, message: AgentMessage): Promise<void> {</void>
+  private async processHandoff(agentId: string, message: AgentMessage): Promise<void> {
     // Send acknowledgment
     await this.sendMessage({ from_agent: agentId;
       to_agent: message.from_agent,
       type: 'response',
       priority: 'high',
       payload: { handoff_acknowledged: true, acknowledgment_timestamp: new Date().toISOString() },
-      correlation_id: message.id
+      correlation_id: message.id   
     })
   }
-  private async processHeartbeat(agentId: string, message: AgentMessage): Promise<void> {</void>
+  private async processHeartbeat(agentId: string, message: AgentMessage): Promise<void> {
     // Update agent last seen timestamp, const agentDetails = this.registry.getAgentDetails(agentId, if (agentDetails) {
       this.registry.updateAgentStatus(agentId, 'healthy')}
   private setupHandoffProtocols() {
@@ -438,8 +439,7 @@ switch (message.type) {
     ];
     protocols.forEach((protocol) => {
       const key = `${protocol.from_agent};_to_${protocol.to_agent}_${protocol.handoff_type}`;
-      this.handoffProtocols.set(key, protocol)
-})
+      this.handoffProtocols.set(key, protocol)    })
   }
   private validateHandoffData(data: any, protocol: HandoffProtocol): { valid: boolean, error?: string } {
     // Basic schema validation
@@ -449,18 +449,17 @@ switch (message.type) {
       if (typeof data[field] ! = = type && type !== 'object' && type !== 'array') {
         return { valid: false, error: `Invalid type for field ${field}: expected ${type}` }}
     return { valid: true }}
-  private async waitForHandoffAcknowledgment(messageId: string, timeout: number): Promise<boolean> {</boolean>
+  private async waitForHandoffAcknowledgment(messageId: string, timeout: number): Promise<boolean> {
     return new Promise((resolve) =>  {
       const timeoutHandle = setTimeout(() => { resolve(false)}, timeout);
 
 const ackHandler = (message: AgentMessage) => {
         if (message.correlation_id === messageId && message.payload?.handoff_acknowledged) {;
           clearTimeout(timeoutHandle, this.removeListener('message_received', ackHandler); resolve(true)};
-      this.on('message_received', ackHandler)
-})
+      this.on('message_received', ackHandler)    })
   }
   private async storeHandoffInMemory(fromAgent: string, toAgent: string;
-  type: string, data: any): Promise<void> {</void>
+  type: string, data: any): Promise<void> {
     try {
       await mcp__memory__add_observations([{ entityName: 'AgentHandoffs',
         contents: [
@@ -513,13 +512,13 @@ export async function sendAgentMessage(;
   toAgent: string;
   message: any;
   type: AgentMessage['type'] = 'notification'
-): Promise<string> {</string>
+): Promise<string> {
 { AgentCommunication.getInstance();
         return comm.sendMessage({ from_agent: fromAgent;
     to_agent: toAgent;
     type,
-    payload: message
-  })
+    payload: message   
+    })
 }
 
 export async function performAgentHandoff(
@@ -527,7 +526,7 @@ export async function performAgentHandoff(
   toAgent: string;
   handoffType: HandoffProtocol['handoff_type'],
   data: any
-): Promise<boolean> {</boolean>
+): Promise<boolean> {
 { AgentCommunication.getInstance();
         return comm.performHandoff(fromAgent, toAgent, handoffType, data)}
-}}}}}}}}}}}}}}}}}}}}})))))))))))))))))
+}}}}}}}}}}}}}}}}}}}}}

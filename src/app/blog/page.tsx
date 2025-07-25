@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: 'Blog - AI Guided SaaS Platform',
   description: 'Latest news, updates, and insights from AI Guided SaaS Platform'
 };
 
-const blogPosts = [;
+const blogPosts = [
   { id: '1',
     title: 'Introducing AI Guided SaaS: The Future of Development',
     excerpt: 'Discover how our AI-powered platform is revolutionizing the way developers build and deploy applications.',
@@ -55,7 +55,7 @@ export default function BlogPage() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
             <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-          <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600">
+              <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600"></div>
               <CardHeader>
           <div className="flex items-center justify-between mb-2">
                   <Badge variant="secondary">{post.category}</Badge>
@@ -85,9 +85,11 @@ export default function BlogPage() {
         </div>
         
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg"></Button>
+          <Button variant="outline" size="lg">
             Load More Posts
           </Button>
         </div>
-  )
+      </div>
+    </div>
+  );
 }

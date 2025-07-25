@@ -77,8 +77,7 @@ export class MockDataGenerator {
         { name: 'timestamp', type: 'date', required: true },
         { name: 'sessionId', type: 'string', required: true },
         { name: 'pageUrl', type: 'string', required: true }
-   ]
-    })
+   ]    })
 }
   addSchema(schema: DataSchema) {
     this.schemas.set(schema.name, schema)}
@@ -90,7 +89,7 @@ export class MockDataGenerator {
     for (let i = 0; i < count; i++) {
       const record: Record<string any> = {}</string>
       schema.fields.forEach((field) =>  { if (field.required || Math.random() {>} 0.3) { // 70% chance for optional fields;
-          record[field.name] = this.generateFieldValue(field, i)};)
+          record[field.name] = this.generateFieldValue(field, i)    })
       data.push(record)
 }
     // Cache the generated data;
@@ -116,17 +115,18 @@ const _min = field.min || 0;
     break;
         
 const _max = field.max || 1000;
-        return faker.number.int({ min, max, break
- })
+        return faker.number.int({ min, max, break    })
       case 'boolean':;
       return faker.datatype.boolean();
     break;
       case 'date':;
 if (field.name === 'createdAt') { break
 }
-          return faker.date.past({ years: 2 })
+          return faker.date.past({ years: 2   
+    })
 };
-        return faker.date.recent({ days: 30 });
+        return faker.date.recent({ days: 30
+    });
       case 'email':
       return faker.internet.email();
     break;
@@ -146,14 +146,16 @@ if (field.name === 'avatar') { break, return, faker.image.avatar(, break
         return faker.image.url();
       case 'array':;
 
-const _arrayLength = faker.number.int({ min: 1, max: 5 })
+const _arrayLength = faker.number.int({ min: 1, max: 5   
+    })
         return Array.from({ length: arrayLength }, () =>  {
           if (field.name === 'products') {
             return { productId: faker.string.uuid(, ;
-    quantity: faker.number.int({ min: 1, max: 5 };),
-    price: faker.number.float({ min: 10, max: 1000, fractionDigits: 2 })}
-          return faker.lorem.word()
-})
+    quantity: faker.number.int({ min: 1, max: 5
+    }),
+    price: faker.number.float({ min: 10, max: 1000, fractionDigits: 2
+    })}
+          return faker.lorem.word()    })
       case 'object':
       return { break, break
 },
@@ -170,7 +172,7 @@ if (field.unique && field.name === 'id') {
     const result: Record<string any[]> = {}</string>
     // First, pass: generate all data
     schemas.forEach((schemaName) => {
-      result[schemaName] = this.generateMockData(schemaName, recordsPerSchema)};)
+      result[schemaName] = this.generateMockData(schemaName, recordsPerSchema)    })
     // Second, pass: fix relationships
     schemas.forEach((schemaName) =>  { const schema = this.schemas.get(schemaName, if (!schema?.relationships) {r}eturn schema.relationships.forEach((rel) => {
         const fromData = result[rel.from]; const _toData = result[rel.to];
@@ -178,7 +180,7 @@ if (field.unique && field.name === 'id') {
           if (rel.type === 'one-to-one' || rel.type === 'many-to-many') {;
             const randomToRecord = faker.helpers.arrayElement(toData);
             record[rel.field] = randomToRecord.id }
-})})
+})    })
     return result
 }
   // Convert mock data to realistic format for preview
@@ -196,8 +198,7 @@ if (field.unique && field.name === 'id') {
 }
           else { formatted[field.name] = record[field.name]
            });
-      return formatted
-})
+      return formatted    })
 }
   // Export data in various formats;
 exportData(data: [] as any[], format: 'json' | 'csv' | 'sql' = 'json') { switch (format) {
@@ -230,10 +231,8 @@ const sqlStatements = data.map((record) =>  {
           const values = columns.map((col) => {
             const value = record[col], if (value === null || value === undefined) {r}eturn 'NULL', if (typeof value === 'string' || value instanceof Date) {r}eturn `'${value};'`;
             if (typeof value === 'boolean') {r}eturn value ? '1' : '0';
-            return value
-})
-          return `INSERT INTO ${tableName} (${columns.join(', ')}) VALUES (${values.join(', ')});`
-        })
+            return value    })
+          return `INSERT INTO ${tableName} (${columns.join(', ')}) VALUES (${values.join(', ')});`    })
         return sqlStatements.join('\n');
       default: return JSON.stringify(data)}
   // Clear cached data;
@@ -245,4 +244,4 @@ clearCache(schemaName? null : string) {
   getCachedData(schemaName: string): any[] | undefined {
     return, this.cache.get(schemaName)}
 
-}})))))))))))
+}}

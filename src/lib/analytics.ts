@@ -73,7 +73,7 @@ export class AnalyticsService {
   static isConfigured(): boolean {
     return isServiceConfigured('database')}
   // Get platform overview metrics
-  static async getPlatformMetrics(): Promise<any> {</any>
+  static async getPlatformMetrics(): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockPlatformMetrics()}
     try {;
@@ -111,7 +111,7 @@ const _averageSessionTime = await this.getAverageSessionTime();
         return this.getMockPlatformMetrics()}
 }
   // Get user analytics
-  static async getUserMetrics(timeRange: string = '30d'): Promise<any> {</any>
+  static async getUserMetrics(timeRange: string = '30d'): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockUserMetrics()};
     try { const endDate = new Date(); const startDate = new Date(), switch (timeRange) {
@@ -161,7 +161,7 @@ const _userGrowth = await this.getUserGrowthData(startDate, endDate);
         return this.getMockUserMetrics()}
 }
   // Get revenue analytics
-  static async getRevenueMetrics(_timeRange: string = '30d'): Promise<any> {</any>
+  static async getRevenueMetrics(_timeRange: string = '30d'): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockRevenueMetrics()}
     try {
@@ -204,7 +204,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
         return this.getMockRevenueMetrics()}
 }
   // Get system health metrics
-  static async getSystemMetrics(): Promise<any> {</any>
+  static async getSystemMetrics(): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockSystemMetrics()}
     try {
@@ -226,7 +226,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
         return this.getMockSystemMetrics()}
 }
   // Get content analytics
-  static async getContentMetrics(): Promise<any> {</any>
+  static async getContentMetrics(): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockContentMetrics()}
     try {
@@ -283,7 +283,7 @@ const _rejectedTemplates = Number(templateStats.find(s => s.status === 'rejected
         return this.getMockContentMetrics()}
 }
   // Helper methods
-  private static async getTotalUsers(): Promise<any> {</any>
+  private static async getTotalUsers(): Promise<any> {
 { await DatabaseService.query('SELECT COUNT(*) as count FROM users') as unknown as CountResult[], return Number(result[0]?.count) || 0}
   private static async getActiveUsers(): Promise<any> {;</any>
 { await DatabaseService.query(`, ``, SELECT COUNT(DISTINCT user_id) as count FROM activity_logs;
@@ -291,9 +291,9 @@ const _rejectedTemplates = Number(templateStats.find(s => s.status === 'rejected
     `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]``
     return Number(result[0]?.count) || 0
 }
-  private static async getTotalProjects(): Promise<any> {</any>
+  private static async getTotalProjects(): Promise<any> {
 { await DatabaseService.query('SELECT COUNT(*) as count FROM projects') as unknown as CountResult[], return Number(result[0]?.count) || 0}
-  private static async getTotalTemplates(): Promise<any> {</any>
+  private static async getTotalTemplates(): Promise<any> {
 { await DatabaseService.query('SELECT COUNT(*) as count FROM templates WHERE status = "approved"') as unknown as CountResult[], return Number(result[0]?.count) || 0}
   private static async getBasicRevenueMetrics(): Promise<any> {;</any>
 { await DatabaseService.query(`, ``, SELECT SUM(amount) as total FROM payments WHERE status = 'succeeded';
@@ -307,7 +307,7 @@ const monthlyResult = await DatabaseService.query(`;``
     monthlyRevenue: Number(monthlyResult[0]?.total) || 0
   }
 }
-  private static async getConversionRate(): Promise<any> {</any>
+  private static async getConversionRate(): Promise<any> {
     // Calculate conversion from free to paid users, const _totalUsers  = await this.getTotalUsers(); const paidUsers = await DatabaseService.query(`;``
       SELECT COUNT(DISTINCT user_id) as count FROM subscriptions
       WHERE status = 'active' AND tier != 'free'
@@ -316,10 +316,10 @@ const monthlyResult = await DatabaseService.query(`;``
 const _paid = Number(paidUsers[0]?.count) || 0;
     return totalUsers > 0 ? (paid / totalUsers) * 100: 0
 }
-  private static async getAverageSessionTime(): Promise<any> {</any>
+  private static async getAverageSessionTime(): Promise<any> {
     // Mock implementation - would need session tracking
     return 1200 // 20 minutes in seconds}
-    private static async calculateRetentionRates(): Promise<any> {</any>
+    private static async calculateRetentionRates(): Promise<any> {
       // Mock implementation - would need proper cohort analysis
       return { day1: 85.2,
     day7: 62.8,
@@ -329,8 +329,8 @@ const _paid = Number(paidUsers[0]?.count) || 0;
     // Mock implementation - would generate daily user counts, const data = []; const current = new Date(startDate);
     while (current <= endDate) {
       data.push({ date: current.toISOString().split('T')[0],
-    users: Math.floor(Math.random() * 50) + 100
-      })
+    users: Math.floor(Math.random() * 50) + 100   
+    })
       current.setDate(current.getDate() + 1)
 }
     return data
@@ -363,7 +363,8 @@ const _paid = Number(paidUsers[0]?.count) || 0;
    ],
       userGrowth: Array.from({ length: 30 }, (_, i) => ({ date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     users: Math.floor(Math.random() * 50) + 100
-      }))}
+     
+    }))}
   private static getMockRevenueMetrics(): RevenueMetrics {
     return { totalRevenue: 89420.50,
     monthlyRecurringRevenue: 15680.25,
@@ -372,7 +373,7 @@ const _paid = Number(paidUsers[0]?.count) || 0;
     lifetimeValue: 340.80,
     revenueGrowth: Array.from({ length: 12 }, (_, i) => ({ date: new Date(Date.now() - (11 - i) * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     revenue: Math.floor(Math.random() * 5000) + 10000
-}));
+    }));
       subscriptionBreakdown: [
         { tier: 'free', count: 8934, revenue: 0 },
         { tier: 'pro', count: 1245, revenue: 36105 },
@@ -420,4 +421,4 @@ const _paid = Number(paidUsers[0]?.count) || 0;
   }
 }
 
-}}}}}}))
+}}}}}}

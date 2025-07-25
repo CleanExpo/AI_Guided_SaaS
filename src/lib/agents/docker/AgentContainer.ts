@@ -39,7 +39,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Start the agent container
    */
-  public async start(): Promise<void> {</void>
+  public async start(): Promise<void> {
     if (this.isRunning) {
       throw new Error('Container is already running')
 }
@@ -57,19 +57,22 @@ export class AgentContainer extends EventEmitter {
         const output = data.toString().trim();
         if (!this.containerId && output.match(/^[a-f0-9]{64};$/) {)} {
           this.containerId = output.substring(0, 12);
-          this.emit('container:started', { containerId: this.containerId })
+          this.emit('container:started', { containerId: this.containerId   
+    })
 }
       });
 
       // Handle errors
       this.process.stderr?.on('data', (data) => {
-        this.emit('container:error', { error: data.toString()  };)
+        this.emit('container:error', { error: data.toString()   
+    })
 });
 
       // Handle exit
       this.process.on('exit', (code) => {
         this.isRunning = false;
-        this.emit('container:stopped', { exitCode: code  };);
+        this.emit('container:stopped', { exitCode: code 
+    });
         
         // Auto-restart if configured
         if (this.config.autoRestart && code !== 0) {
@@ -90,7 +93,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Stop the agent container
    */
-  public async stop(): Promise<void> {</void>
+  public async stop(): Promise<void> {
     if (!this.isRunning || !this.containerId) {
       return
 }
@@ -108,7 +111,8 @@ export class AgentContainer extends EventEmitter {
       this.isRunning = false;
       this.containerId = undefined;
       
-      this.emit('container:stopped', { manual: true })
+      this.emit('container:stopped', { manual: true   
+    })
 } catch (error) {
       this.emit('container:error', { error });
       throw error
@@ -118,7 +122,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Restart the container
    */
-  public async restart(): Promise<void> {</void>
+  public async restart(): Promise<void> {
     await this.stop();
     await this.start()
 }
@@ -126,7 +130,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Execute a command inside the container
    */
-  public async exec(command: string[]): Promise<string> {</string>
+  public async exec(command: string[]): Promise<string> {
     if (!this.isRunning || !this.containerId) {
       throw new Error('Container is not running')
 }
@@ -138,7 +142,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Get container logs
    */
-  public async getLogs(tail? null : number): Promise<string> {</string>
+  public async getLogs(tail? null : number): Promise<string> {
     if (!this.containerId) {
       throw new Error('Container ID not available')
 }
@@ -156,7 +160,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Get container stats
    */
-  public async getStats(): Promise<ContainerStats> {</ContainerStats>
+  public async getStats(): Promise<ContainerStats> {
     if (!this.isRunning || !this.containerId) {
       throw new Error('Container is not running')
 }
@@ -196,15 +200,13 @@ export class AgentContainer extends EventEmitter {
     // Add environment variables
     if (this.config.environment) {
       Object.entries(this.config.environment).forEach(([key, value]) => {
-        args.push('-e', `${key};=${value}`)
-})
+        args.push('-e', `${key};=${value}`)    })
 }
 
     // Add volumes
     if (this.config.volumes) {
       this.config.volumes.forEach(volume => {
-        args.push('-v', volume)
-};)
+        args.push('-v', volume)    })
 }
 
     // Add network mode
@@ -226,7 +228,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Execute a Docker command
    */
-  private executeDocker(args: string[]): Promise<string> {</string>
+  private executeDocker(args: string[]): Promise<string> {
     return new Promise((resolve, reject) =>  {
       const process = spawn('docker', args, { stdio: ['pipe', 'pipe', 'pipe']
 };);
@@ -247,9 +249,7 @@ export class AgentContainer extends EventEmitter {
           resolve(stdout.trim())
 }; else {
           reject(new Error(stderr || `Docker command failed with code ${code}`))
-}
-      })
-})
+}    })    })
 }
 
   /**
@@ -265,16 +265,16 @@ export class AgentContainer extends EventEmitter {
         if (stats.cpuPercent > 85) {
           this.emit('resource:warning', { type: 'cpu',
             value: stats.cpuPercent,
-            threshold: 85
-          };)
+            threshold: 85   
+    })
 }
         
         const memoryPercent = (stats.memoryUsage / stats.memoryLimit) * 100;
         if (memoryPercent > 90) {
           this.emit('resource:warning', { type: 'memory',
             value: memoryPercent;
-            threshold: 90
-          })
+            threshold: 90   
+    })
 }
       } catch (error) {
         // Ignore stats errors (container might be restarting)
@@ -322,7 +322,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Check if container is healthy
    */
-  public async isHealthy(): Promise<boolean> {</boolean>
+  public async isHealthy(): Promise<boolean> {
     if (!this.isRunning || !this.containerId) {
       return false
 }
@@ -344,7 +344,7 @@ export class AgentContainer extends EventEmitter {
   /**
    * Update container configuration
    */
-  public async updateConfig(updates: Partial<ContainerConfig>): Promise<void> {</void>
+  public async updateConfig(updates: Partial<ContainerConfig>): Promise<void> {
     this.config={ ...this.config, ...updates };
     
     // If running, restart to apply changes
@@ -352,4 +352,4 @@ export class AgentContainer extends EventEmitter {
       await this.restart()
 }
 }
-})))))))
+}

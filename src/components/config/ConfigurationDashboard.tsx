@@ -6,65 +6,65 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
-interface ConfigurationData { status: string;
+interface ConfigurationData { status: string
   features: { enabled: string[],
   total: number
 }
-    aiProviders: { primary: string;
-    fallback: string;
+    aiProviders: { primary: string
+    fallback: string
 research: string
   },
     timestamp: string
 };
-interface FeatureFlags { aiGeneration: boolean;
-  collaboration: boolean;
-  templateMarketplace: boolean;
-  analyticsDashboard: boolean;
-  adminPanel: boolean;
-  experimentalAiAgents: boolean;
-  experimentalRealTimeCollaboration: boolean;
-  experimentalAdvancedAnalytics: boolean;
-  betaVoiceCommands: boolean;
+interface FeatureFlags { aiGeneration: boolean
+  collaboration: boolean
+  templateMarketplace: boolean
+  analyticsDashboard: boolean
+  adminPanel: boolean
+  experimentalAiAgents: boolean
+  experimentalRealTimeCollaboration: boolean
+  experimentalAdvancedAnalytics: boolean
+  betaVoiceCommands: boolean
   betaAiDebugging: boolean
  };
 interface FullConfig { aiProvider: {
-  primary: string;
-  fallback: string;
+  primary: string
+  fallback: string
   research: string
 }
-    openai: { displayName: string;
-    primary: string;
-    codeGeneration: string;
-    tokensMax: number;
-    temperatureCode: number;
+    openai: { displayName: string
+    primary: string
+    codeGeneration: string
+    tokensMax: number
+    temperatureCode: number
 rateLimitRequestsPerMinute: number
   },
-    anthropic: { displayName: string;
-    primary: string;
-    codeGeneration: string;
-    tokensMax: number;
-    temperatureCode: number;
+    anthropic: { displayName: string
+    primary: string
+    codeGeneration: string
+    tokensMax: number
+    temperatureCode: number
 rateLimitRequestsPerMinute: number
   },
-    google: { displayName: string;
-    primary: string;
-    tokensMax: number;
-    temperatureDefault: number;
+    google: { displayName: string
+    primary: string
+    tokensMax: number
+    temperatureDefault: number
 rateLimitRequestsPerMinute: number
   },
-    framework: { primary: string;
-    version: string;
-    typescript: boolean;
+    framework: { primary: string
+    version: string
+    typescript: boolean
 tailwind: boolean
   },
-    security: { rateLimitEnabled: boolean;
-    authProvider: string;
-    cspEnabled: boolean;
+    security: { rateLimitEnabled: boolean
+    authProvider: string
+    cspEnabled: boolean
 ddosProtection: boolean
   },
-    performance: { cacheStrategy: string;
-    cdnEnabled: boolean;
-    apmEnabled: boolean;
+    performance: { cacheStrategy: string
+    cdnEnabled: boolean
+    apmEnabled: boolean
 analyticsEnabled: boolean
   },
     features: FeatureFlags
@@ -111,7 +111,8 @@ const fullData = await fullResponse.json();
       setError(err instanceof Error ? err.message: 'Unknown error occurred')} finally { setLoading(false)}
   const _reloadConfiguration = async () => {
     try {;
-      setReloading(true); const response = await fetch('/api/config/reload', { method: 'POST'  };);
+      setReloading(true); const response = await fetch('/api/config/reload', { method: 'POST' 
+    });
       if (!response.ok) {t}hrow new Error('Failed to reload configuration');
       // Refresh data after reload
       await fetchConfiguration()
@@ -140,11 +141,11 @@ className="ml-4";
           ></Button>
                     Retry
 </Button>
-{ features ? Object.values(features).filter(Boolean).length : 0;
+{ features ? Object.values(features).filter(Boolean).length : 0
 
-const _totalFeaturesCount = features ? Object.keys(features).length : 0;
+const _totalFeaturesCount = features ? Object.keys(features).length : 0
   
-const _featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCount / totalFeaturesCount) * 100 : 0;
+const _featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCount / totalFeaturesCount) * 100 : 0
   return (
     <div className = "container mx-auto p-6 space-y-6"    />
           <div className="flex justify-between items-center"     />
@@ -152,7 +153,7 @@ const _featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCo
           <h1 className="text-3xl font-bold">Platform Configuration</h1>
           <p className="text-muted-foreground">
             AI-Guided SaaS Platform Configuration Dashboard</p>
-        {process.env.NODE_ENV === 'development'  && (;
+        {process.env.NODE_ENV === 'development'  && (
 Button; onClick={reloadConfiguration} disabled={reloading};
             variant="outline";
           >
@@ -164,8 +165,8 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <CardHeader className="pb-2"    />
           <CardTitle className="text-sm font-medium">Status</CardTitle>
           <CardContent    />
-          <Badge variant={configData?.status === 'active' ? 'default' : 'destructive'}></Badge>
-              {configData?.status || 'Unknown'}</Badge>
+          <Badge variant={configData?.status === 'active' ? 'default' : 'destructive'}>/>
+              {configData?.status || 'Unknown'}/>
         <Card    />
           <CardHeader className="pb-2"     />
             <CardTitle className="text-sm font-medium">Features Enabled</CardTitle>
@@ -177,8 +178,8 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <CardHeader className="pb-2"    />
           <CardTitle className="text-sm font-medium">Primary AI Provider</CardTitle>
           <CardContent    />
-          <Badge variant="outline"></Badge>
-              {configData?.aiProviders.primary || 'Not configured'}</Badge>
+          <Badge variant="outline">/>
+              {configData?.aiProviders.primary || 'Not configured'}/>
         <Card    />
           <CardHeader className="pb-2"     />
             <CardTitle className="text-sm font-medium">Last Updated</CardTitle>
@@ -206,8 +207,8 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                     <div key={feature} className="flex items-center justify-between p-3 border rounded-lg"    />
           <span className="font-medium">
                         {feature.replace(/([A-Z])/g, ' $1').replace(/^./, str: any => str.toUpperCase())}</span>
-                      <Badge variant={enabled ? 'default' : 'secondary'}></Badge>
-                        {enabled ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={enabled ? 'default' : 'secondary'}>/>
+                        {enabled ? 'Enabled' : 'Disabled'}/>
                   ))}
               )}
 </CardContent>
@@ -222,10 +223,10 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                   <CardContent className="space-y-2"    />
           <div className="flex justify-between"     />
                       <span className="text-sm">Primary: Model,</span>
-                      <Badge variant="outline">{fullConfig.openai.primary}</Badge>
+                      <Badge variant="outline">{fullConfig.openai.primary}/>
                     <div className="flex justify-between"    />
           <span className="text-sm">Code: Generation,</span>
-                      <Badge variant="outline">{fullConfig.openai.codeGeneration}</Badge>
+                      <Badge variant="outline">{fullConfig.openai.codeGeneration}/>
                     <div className="flex justify-between"    />
           <span className="text-sm">Max: Tokens,</span>
                       <span className="text-sm">{fullConfig.openai.tokensMax}</span>
@@ -239,10 +240,10 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                   <CardContent className="space-y-2"    />
           <div className="flex justify-between"     />
                       <span className="text-sm">Primary: Model,</span>
-                      <Badge variant="outline">{fullConfig.anthropic.primary}</Badge>
+                      <Badge variant="outline">{fullConfig.anthropic.primary}/>
                     <div className="flex justify-between"    />
           <span className="text-sm">Code: Generation,</span>
-                      <Badge variant="outline">{fullConfig.anthropic.codeGeneration}</Badge>
+                      <Badge variant="outline">{fullConfig.anthropic.codeGeneration}/>
                     <div className="flex justify-between"    />
           <span className="text-sm">Max: Tokens,</span>
                       <span className="text-sm">{fullConfig.anthropic.tokensMax}</span>
@@ -256,7 +257,7 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                   <CardContent className="space-y-2"    />
           <div className="flex justify-between"     />
                       <span className="text-sm">Primary: Model,</span>
-                      <Badge variant="outline">{fullConfig.google.primary}</Badge>
+                      <Badge variant="outline">{fullConfig.google.primary}/>
                     <div className="flex justify-between"    />
           <span className="text-sm">Max: Tokens,</span>
                       <span className="text-sm">{fullConfig.google.tokensMax}</span>
@@ -279,19 +280,19 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <div className="space-y-3"     />
                     <div className="flex justify-between"    />
           <span className="font-medium">Framework:</span>
-                      <Badge>{fullConfig.framework.primary}</Badge>
+                      <Badge>{fullConfig.framework.primary}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">Version:</span>
                       <span>{fullConfig.framework.version}</span>
                   <div className="space-y-3"    />
           <div className="flex justify-between"     />
                       <span className="font-medium">TypeScript:</span>
-                      <Badge variant={fullConfig.framework.typescript ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.framework.typescript ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={fullConfig.framework.typescript ? 'default' : 'secondary'}>/>
+                        {fullConfig.framework.typescript ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">Tailwind: CSS,</span>
-                      <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'}>/>
+                        {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}/>
       )}
         <TabsContent value="security", className="space-y-4"    />
           <Card     />
@@ -305,20 +306,20 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <div className="space-y-3"     />
                     <div className="flex justify-between"    />
           <span className="font-medium">Rate: Limiting,</span>
-                      <Badge variant={fullConfig.security.rateLimitEnabled ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.security.rateLimitEnabled ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={fullConfig.security.rateLimitEnabled ? 'default' : 'secondary'}>/>
+                        {fullConfig.security.rateLimitEnabled ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">Auth: Provider,</span>
-                      <Badge variant="outline">{fullConfig.security.authProvider}</Badge>
+                      <Badge variant="outline">{fullConfig.security.authProvider}/>
                   <div className="space-y-3"    />
           <div className="flex justify-between"     />
                       <span className="font-medium">CSP:</span>
-                      <Badge variant={fullConfig.security.cspEnabled ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.security.cspEnabled ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={fullConfig.security.cspEnabled ? 'default' : 'secondary'}>/>
+                        {fullConfig.security.cspEnabled ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">DDoS: Protection,</span>
-                      <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'}>/>
+                        {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}/>
       )}
         <TabsContent value="performance", className="space-y-4"    />
           <Card     />
@@ -332,22 +333,21 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <div className="space-y-3"     />
                     <div className="flex justify-between"    />
           <span className="font-medium">Cache: Strategy,</span>
-                      <Badge variant="outline">{fullConfig.performance.cacheStrategy}</Badge>
+                      <Badge variant="outline">{fullConfig.performance.cacheStrategy}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">CDN:</span>
-                      <Badge variant={fullConfig.performance.cdnEnabled ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.performance.cdnEnabled ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={fullConfig.performance.cdnEnabled ? 'default' : 'secondary'}>/>
+                        {fullConfig.performance.cdnEnabled ? 'Enabled' : 'Disabled'}/>
                   <div className="space-y-3"    />
           <div className="flex justify-between"     />
                       <span className="font-medium">APM:</span>
-                      <Badge variant={fullConfig.performance.apmEnabled ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.performance.apmEnabled ? 'Enabled' : 'Disabled'}</Badge>
+                      <Badge variant={fullConfig.performance.apmEnabled ? 'default' : 'secondary'}>/>
+                        {fullConfig.performance.apmEnabled ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">Analytics:</span>
-                      <Badge variant={fullConfig.performance.analyticsEnabled ? 'default' : 'secondary'}></Badge>
-                        {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}</Badge>
-      )};
-    );
+                      <Badge variant={fullConfig.performance.analyticsEnabled ? 'default' : 'secondary'}>/>
+                        {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}/>
+      )});
 </CardContent>
 
     
@@ -358,4 +358,4 @@ Button; onClick={reloadConfiguration} disabled={reloading};
 </FeatureFlags>
 </ConfigurationData>
 
-}}}}}})
+}}}}}    }

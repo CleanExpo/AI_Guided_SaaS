@@ -5,11 +5,11 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Activity } from 'lucide-react';
 
-interface Container { id: string;
-  name: string;
+interface Container { id: string
+  name: string
   status: 'running' | 'stopped' | 'error',
-  cpu: number;
-  memory: number;
+  cpu: number
+  memory: number
   uptime: string
 }
 
@@ -41,8 +41,8 @@ export function ContainerMonitor() {
 }, []);
   
   if (isLoading) {
-    return <div>Loading container information...
-}
+    return <div>Loading container information...</div>
+  }
   
   return (
     <div className="space-y-4">
@@ -51,8 +51,8 @@ export function ContainerMonitor() {
           <CardTitle className="flex items-center gap-2">
             <Activity className="h-5 w-5"   />
             Container Status
-          
-        
+          </CardTitle>
+        </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {containers.map((container) => (
@@ -61,16 +61,21 @@ export function ContainerMonitor() {
                   <div className={`w-3 h-3 rounded-full ${
                     container.status === 'running' ? 'bg-green-500' : 
                     container.status === 'stopped' ? 'bg-gray-500' : 'bg-red-500'
-                  }`}  />
-          <div>
-                    <p className="font-medium">{container.name}
-                    <p className="text-sm text-gray-500">Uptime: {container.uptime}
-                  
-        <div className="text-right">
-          <p className="text-sm">CPU: {container.cpu}%
-                  <p className="text-sm">Memory: {container.memory}MB
-                
+                  }`} />
+                  <div>
+                    <p className="font-medium">{container.name}</p>
+                    <p className="text-sm text-gray-500">Uptime: {container.uptime}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm">CPU: {container.cpu}%</p>
+                  <p className="text-sm">Memory: {container.memory}MB</p>
+                </div>
+              </div>
             ))}
-          
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

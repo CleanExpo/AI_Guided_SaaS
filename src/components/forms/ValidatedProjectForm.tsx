@@ -14,8 +14,7 @@ import { Loader2, AlertCircle } from 'lucide-react';
 
 const _ExtendedProjectSchema = CreateProjectSchema.extend({ config: z.object({
   database: z.string().optional(, hosting: z.string().optional(, authentication: z.string().optional(, api_style: z.string().optional(, framework: z.string().optional(, language: z.string().optional(, features: z.array(z.string()).optional()
-}).optional()
-})
+    }).optional()    })
 // Type-safe form data
 type CreateProjectForm = z.infer<typeof ExtendedProjectSchema></typeof>
 export function ValidatedProjectForm() {
@@ -35,15 +34,14 @@ const [formData, setFormData]  = useState<CreateProjectForm>({</CreateProjectFor
   });
 
 const _handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); setErrors({};);
+    e.preventDefault(); setErrors({});
     setGeneralError(null);
     // Validate form data;
 
 const validation = validateSafe(ExtendedProjectSchema, formData);
     if (!validation.success) {
       // Map validation errors to form fields</CreateProjectForm>, const fieldErrors: Record<string string>  = {}</string>
-      (validation.error.errors as any[]).forEach((err) =>  { const _field = err.path.join('.', fieldErrors[field] = err.message
-};)
+      (validation.error.errors as any[]).forEach((err) =>  { const _field = err.path.join('.', fieldErrors[field] = err.message    })
       setErrors(fieldErrors);
       return null
 };
@@ -52,7 +50,8 @@ const validation = validateSafe(ExtendedProjectSchema, formData);
       const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(validation.data)
-      });
+     
+    });
 if (!response.ok) {
         const error = await response.json(, throw new Error(error.message || 'Failed to create project')};
       const project = await response.json();
@@ -63,7 +62,7 @@ if (!response.ok) {
 
 const _updateField = <K extends keyof CreateProjectForm>(_;</K>
     field: K, value: CreateProjectForm[K]) =>  { </K>
-    setFormData(prev => ({ ...prev, [field]: value  };))
+    setFormData(prev => ({ ...prev, [field]: value  }))
     // Clear error for this field
     setErrors((prev) => { const, newErrors={ ...prev };
       delete newErrors[field]
@@ -72,7 +71,7 @@ const _updateField = <K extends keyof CreateProjectForm>(_;</K>
   
 const _updateConfig = (key: string, value) =>  {
     setFormData(prev => ({
-      ...prev,;
+      ...prev,
     config: { ...prev.config, [key]: value }
 }))
 }
@@ -94,11 +93,10 @@ const _updateConfig = (key: string, value) =>  {
           <Label htmlFor="name">Project Name *</Label>
             <Input id="name";
 
-    value={formData.name} onChange={(e) => updateField('name', e.target.value)};</Input>
+    value={formData.name} onChange={(e) => updateField('name', e.target.value)};/>
               placeholder="My Awesome Project";
               aria-invalid={!!errors.name}
-              aria-describedby={errors.name ? 'name-error' : undefined}
-            />
+              aria-describedby={errors.name ? 'name-error' : undefined/>
             {errors.name  && (/Input>
               <p id="name-error", className="text-sm text-destructive">
                 {errors.name}</p>
@@ -112,8 +110,7 @@ value={formData.description} onChange={(e) => updateField('description', e.targe
 
     const rows={4}
               aria-invalid={!!errors.description}
-              aria-describedby={errors.description ? 'description-error' : undefined}
-            />
+              aria-describedby={errors.description ? 'description-error' : undefined/>
             {errors.description  && (/Textarea>
               <p id="description-error", className="text-sm text-destructive">
                 {errors.description}</p>
@@ -198,7 +195,7 @@ value={formData.config?.database || ''} onValueChange={(value) => updateConfig('
                 'Analytics'
    ].map((feature) => (\n    </div>
                 <label key={feature} className="flex items-center space-x-2"    />
-          <input type="checkbox";
+          <input type="checkbox"
 
     checked={formData.config?.features?.includes(feature) || false} onChange={(e) =    /> {</input>
 { formData.config?.features || [], if (e.target.checked) {
@@ -207,7 +204,7 @@ value={formData.config?.database || ''} onValueChange={(value) => updateConfig('
                     className="rounded border-gray-300" /></input>
         <span className="text-sm">{feature}</span>))}
           <div className="flex justify-end space-x-4"    />
-          <Button type="button";
+          <Button type="button"
 variant="outline";
 
     const onClick={() => router.back()}</Button>
@@ -231,7 +228,7 @@ export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</T
   
 const [touched, setTouched] = useState<Set<string>>(new Set();</Set>
 { <K extends keyof T>(field: K, value: T[K]) =>  { </K>
-    setData(prev => ({ ...prev, [field]: value  };))
+    setData(prev => ({ ...prev, [field]: value  }))
     setTouched(prev => new Set(prev).add(String(field));
     // Validate single field;
 
@@ -252,7 +249,7 @@ const fieldSchema = (schema as any).shape[field as string];
 }
   const _validate = (): void => { const result = schema.safeParse(data, if (!result.success) {</K>, const fieldErrors: Record<string string>  = { };</string>
       (result.error.errors as any[]).forEach((err) =>  { const _field = err.path.join('.', fieldErrors[field] = err.message
-};);
+});
       setErrors(fieldErrors);
       return false
 }
@@ -260,7 +257,7 @@ const fieldSchema = (schema as any).shape[field as string];
     return true
 }
   const _reset = (): void => {
-    setData(initialData); setErrors({ };);
+    setData(initialData); setErrors({ });
     setTouched(new Set())
 }
   return {
@@ -280,4 +277,4 @@ const fieldSchema = (schema as any).shape[field as string];
     </CardDescription>
     </any>
   }
-}}}}}}}}}}})))))))))))))))))
+}}}}}}}}}}}

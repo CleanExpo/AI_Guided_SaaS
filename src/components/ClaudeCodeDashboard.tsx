@@ -10,8 +10,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 // import { claudeCodeOrchestrator } from '@/lib/claude-code-integration';
 import { ProjectConfig } from '@/types';
-interface WorkflowResult { totalTokenUsage: number;
-  utilizationRate: number;
+interface WorkflowResult { totalTokenUsage: number
+  utilizationRate: number
   integrationCommands: string[],
   nextSteps: string[]
 };
@@ -19,15 +19,15 @@ interface ClaudeCodeDashboardProps { projectConfig: ProjectConfi
 g,
   onWorkflowComplete: (result: WorkflowResult) => void
 };
-interface CommandExecution { command: string;
+interface CommandExecution { command: string
   status: 'pending' | 'executing' | 'completed' | 'error',
-  output: string;
-  tokenImpact: number;
+  output: string
+  tokenImpact: number
   executionTime: number
 };
-interface MemoryStatus { currentTokens: number;
-  maxTokens: number;
-  utilizationRate: number;
+interface MemoryStatus { currentTokens: number
+  maxTokens: number
+  utilizationRate: number
   optimizationLevel: string, lastCompaction: Date | nul
 l,
   efficiency: number
@@ -41,15 +41,15 @@ const [currentCommand, setCurrentCommand] = useState<string | null>(null);</stri
 const [commandHistory, setCommandHistory]  = useState<CommandExecution[]>([]);</CommandExecution>
 
 const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({</MemoryStatus>
-    currentTokens: 42000;
-    maxTokens: 200000;
+    currentTokens: 42000
+    maxTokens: 200000
     utilizationRate: 0.21,
     optimizationLevel: 'Strategic - High Capacity Available',
-    lastCompaction: null;
+    lastCompaction: null
         </MemoryStatus>
 efficiency: 78});
   
-const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(;</WorkflowResult>
+const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(</WorkflowResult>
     // null;
 </WorkflowResult>
 { [ { command: '/init-docs', description: 'Initialize comprehensive documentation system',
@@ -65,7 +65,7 @@ const command = claudeCommands.find(cmd => cmd.command === commandName);
     if (!command) {r}eturn null;
     // Add command to history;
 
-const execution: CommandExecution={ command: commandName;
+const execution: CommandExecution={ command: commandName
     status: 'executing',
       output: '',
     tokenImpact: command.tokenImpact,
@@ -92,13 +92,13 @@ index === 0;
             ? {
                 ...cmd,
                 status: 'completed',
-                output: generateCommandOutput(commandName);
+                output: generateCommandOutput(commandName)
                 executionTime}
             : cmd
         );
       // If this was a full workflow, generate complete result;
 if (commandName = == '/init-docs') {
-        // Simulate workflow result for now; const _result={ totalTokenUsage: 17500;
+        // Simulate workflow result for now; const _result={ totalTokenUsage: 17500
     utilizationRate: 0.0875,
 integrationCommands: [
             '/init-docs --comprehensive';
@@ -129,28 +129,25 @@ const _simulateCommandExecution  = async (command: { estimatedTime: number }}: P
     await new Promise(resolve => setTimeout(resolve, command.estimatedTime))
 };
 
-const _generateCommandOutput = (commandName: string): string: (any) =>  { switch (commandName) {;
+const _generateCommandOutput = (commandName: string): string: (any) =>  { switch (commandName) {
       case '/init-docs':;
       return `📁 Documentation Hierarchy Created``, break, ✅ Core memory file (CLAUDE.md) generated;
 ✅ 11 specialized documentation files created
 ✅ Cross-reference system established
 🧠 Token usage, optimized: 42K/200K (21% utilization)`;``
-      case '/sync-docs':
-      return `🔄 Documentation Synchronized``;
+      case '/sync-docs': return `🔄 Documentation Synchronized``
     break;
 ✅ Project state analysis complete
 ✅ 8 files updated with latest changes
 ✅ Cross-references validated and updated
 🎯 Documentation, coherence: 98%`;``
-      case '/compact-docs':
-      return `🗜️ Context Optimization Complete``;
+      case '/compact-docs': return `🗜️ Context Optimization Complete``
     break;
 ✅ 14,000 tokens saved (33% compression)
 ✅ Quality, preserved: 96%
 ✅ Critical information retained
 💾 New, utilization: 28K/200K (14%)`;``
-      case '/docs:status':
-    return `📊 Documentation Health Report``;
+      case '/docs:status': return `📊 Documentation Health Report``
     break
     break
 };
@@ -169,7 +166,7 @@ default: return `✅ Command executed successfully```}
         return 'Good capacity - Monitor token usage';
     if (memoryStatus.utilizationRate < 0.9) {r}eturn 'Consider /compact-docs optimization';
     return 'Immediate /compact-docs recommended' };
-  const _renderMemoryStatus = () => (;
+  const _renderMemoryStatus = () => (
     <Card>
           <CardHeader></CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -214,7 +211,7 @@ const className={`font-medium ${getUtilizationColor(memoryStatus.utilizationRate
               {getOptimizationRecommendation()}</AlertDescription>
 };
 
-const _renderCommandInterface = () => (;
+const _renderCommandInterface = () => (
     <Card>
           <CardHeader></CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -255,7 +252,7 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
 }
 </div>
       )};
-  const _renderCommandHistory = () => (;
+  const _renderCommandHistory = () => (
     <Card>
           <CardHeader></CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -372,4 +369,4 @@ const _renderWorkflowResults = (): void => {
     
     </any>
   }
-}}}})))))))))))
+}}}}

@@ -27,8 +27,7 @@ const _confidence = scorer.getConfidence(page, comp.id || comp.type);
       causalScore: score;
       confidence,
       suggested: score >= 0.7 && confidence !== 'low',
-    deprioritize: score < 0.4 && confidence !== 'low' }
-})
+    deprioritize: score < 0.4 && confidence !== 'low' }    })
 };
 /**
  * Get smart suggestions based on historical performance
@@ -84,4 +83,4 @@ export const _logAssistantInteraction = (
       promptContext: prompt;
     action: 'added',
       timestamp: Date.now()})}
-}))
+}

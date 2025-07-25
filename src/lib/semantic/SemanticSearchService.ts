@@ -44,15 +44,15 @@ export class SemanticSearchService {
   /**
    * Index a document with semantic embeddings
    */
-  async indexDocument(request: IndexRequest): Promise<any> {</any>
+  async indexDocument(request: IndexRequest): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/api/index`, { method: 'POST',
         headers: this.headers,
         body: JSON.stringify({ id: request.id,
           content: request.content,
           metadata: request.metadata || {},
-          type: request.type || 'document'
-        })
+          type: request.type || 'document'   
+    })
       });
       
       if (!response.ok) {
@@ -69,12 +69,13 @@ export class SemanticSearchService {
   /**
    * Index multiple documents in batch
    */
-  async indexBatch(requests: IndexRequest[]): Promise<any> {</any>
+  async indexBatch(requests: IndexRequest[]): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/api/index/batch`, { method: 'POST',
         headers: this.headers,
         body: JSON.stringify(requests)
-      });
+     
+    });
       
       if (!response.ok) {
         throw new Error(`Failed to index batch: ${response.statusText}`)
@@ -82,7 +83,8 @@ export class SemanticSearchService {
       
       return await response.json()
 } catch (error) {
-      logger.error('Failed to index batch', { error, count: requests.length });
+      logger.error('Failed to index batch', { error, count: requests.length
+    });
       throw error
 }
   }
@@ -90,15 +92,15 @@ export class SemanticSearchService {
   /**
    * Perform semantic search with context7 workflow
    */
-  async search(request: SearchRequest): Promise<SearchResponse> {</SearchResponse>
+  async search(request: SearchRequest): Promise<SearchResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/search`, { method: 'POST',
         headers: this.headers,
         body: JSON.stringify({ query: request.query,
           filters: request.filters || {},
           size: request.size || 7,
-          include_source: request.includeSource !== false
-        })
+          include_source: request.includeSource !== false   
+    })
       });
       
       if (!response.ok) {
@@ -107,7 +109,8 @@ export class SemanticSearchService {
       
       return await response.json()
 } catch (error) {
-      logger.error('Search failed', { error, query: request.query });
+      logger.error('Search failed', { error, query: request.query
+    });
       throw error
 }
   }
@@ -115,11 +118,12 @@ export class SemanticSearchService {
   /**
    * Delete a document from the index
    */
-  async deleteDocument(docId: string): Promise<any> {</any>
+  async deleteDocument(docId: string): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/api/index/${docId}`, { method: 'DELETE',
         headers: this.headers
-      });
+     
+    });
       
       if (!response.ok) {
         throw new Error(`Failed to delete document: ${response.statusText}`)
@@ -135,7 +139,7 @@ export class SemanticSearchService {
   /**
    * Check service health
    */
-  async checkHealth(): Promise<any> {</any>
+  async checkHealth(): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/health`);
       
@@ -153,14 +157,14 @@ export class SemanticSearchService {
   /**
    * Helper method to index project files for semantic search
    */
-  async indexProjectFiles(files: Array<{ path: string; content: string; type: string }>): Promise<void> {</void>
+  async indexProjectFiles(files: Array<{ path: string; content: string; type: string }>): Promise<void> {
     const requests: IndexRequest[] = files.map((file) => ({ id: file.path,
       content: file.content,
       metadata: { path: file.path, 
         extension: file.path.split('.').pop(, lastModified: new Date().toISOString() 
       },
       type: file.type as any
-}));
+    }));
     
     await this.indexBatch(requests);
     logger.info(`Indexed ${files.length} project files`)
@@ -193,18 +197,18 @@ export class SemanticSearchService {
     return this.search({
       query,
       filters,
-      size: 10
+      size: 10   
     })
 }
 
   /**
    * Search project documentation and memories
    */
-  async searchDocumentation(query: string): Promise<SearchResponse> {</SearchResponse>
+  async searchDocumentation(query: string): Promise<SearchResponse> {
     return this.search({
       query,
       filters: { type: 'document' },
-      size: 5
+      size: 5   
     })
 }
 
@@ -221,7 +225,7 @@ export class SemanticSearchService {
     return this.search({
       query,
       filters,
-      size: 5
+      size: 5   
     })
 }
 }

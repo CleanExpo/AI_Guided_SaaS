@@ -53,6 +53,7 @@ export class AgentSystem extends EventEmitter {
     this.orchestrator = new EnhancedAgentOrchestrator({ maxConcurrentTasks: this.config.maxConcurrentTasks || 5,
       enableMonitoring: this.config.enableMonitoring ?? true,
       enableSelfHealing: this.config.enableSelfHealing ?? true
+   
     });
 
     this.setupWorkflows();
@@ -222,8 +223,7 @@ export class AgentSystem extends EventEmitter {
           task: 'test',
           dependsOn: ['refactor']
         }
-      ]
-    })
+      ]    })
 }
 
   private setupEventHandlers(): void {
@@ -244,8 +244,7 @@ export class AgentSystem extends EventEmitter {
 };);
 
     this.orchestrator.on('resources:throttled', (data) => {
-      this.emit('system:throttled', data)
-};)
+      this.emit('system:throttled', data)    })
 }
 
   public registerWorkflow(workflow: AgentWorkflow): void {
@@ -253,7 +252,7 @@ export class AgentSystem extends EventEmitter {
     this.emit('workflow:registered', workflow)
 }
 
-  public async executeWorkflow(workflowId: string, context: any = {}): Promise<any> {</any>
+  public async executeWorkflow(workflowId: string, context: any = {}): Promise<any> {
     if (!this.isInitialized) {
       throw new Error('Agent system is not initialized')
 }
@@ -266,7 +265,7 @@ export class AgentSystem extends EventEmitter {
     return this.orchestrator.executeWorkflow(workflow, context)
 }
 
-  public async executeTask(agentId: string, taskType: string, payload: any): Promise<any> {</any>
+  public async executeTask(agentId: string, taskType: string, payload: any): Promise<any> {
     if (!this.isInitialized) {
       throw new Error('Agent system is not initialized')
 }
@@ -277,7 +276,7 @@ export class AgentSystem extends EventEmitter {
       status: 'pending',
       priority: 'medium',
       payload,
-      createdAt: new Date()
+      createdAt: new Date()   
     })
 }
 
@@ -293,7 +292,7 @@ export class AgentSystem extends EventEmitter {
     return new Map(this.workflows)
 }
 
-  public async shutdown(): Promise<void> {</void>
+  public async shutdown(): Promise<void> {
     if (this.orchestrator) {
       await this.orchestrator.shutdown()
 }
@@ -302,33 +301,33 @@ export class AgentSystem extends EventEmitter {
 }
 
   // Convenience methods for common operations
-  public async developFeature(description: string, requirements: any = {}): Promise<any> {</any>
+  public async developFeature(description: string, requirements: any = {}): Promise<any> {
     return this.executeWorkflow('feature-development', {
       description,
       requirements,
-      timestamp: new Date()
+      timestamp: new Date()   
     })
 }
 
-  public async fixBug(bugReport: any): Promise<any> {</any>
+  public async fixBug(bugReport: any): Promise<any> {
     return this.executeWorkflow('bug-fix', {
       bugReport,
-      timestamp: new Date()
+      timestamp: new Date()   
     })
 }
 
-  public async deployToProduction(version: string, config: any = {}): Promise<any> {</any>
+  public async deployToProduction(version: string, config: any = {}): Promise<any> {
     return this.executeWorkflow('deployment', {
       version,
       config,
-      timestamp: new Date()
+      timestamp: new Date()   
     })
 }
 
-  public async improveCodeQuality(targetPath: string = 'src'): Promise<any> {</any>
+  public async improveCodeQuality(targetPath: string = 'src'): Promise<any> {
     return this.executeWorkflow('code-quality', {
       targetPath,
-      timestamp: new Date()
+      timestamp: new Date()   
     })
 }
 
@@ -338,6 +337,7 @@ export class AgentSystem extends EventEmitter {
     this.mcpBridge = new AgentMCPBridge(this.mcpIntegration, { enabledServers: this.config.mcp?.servers || ['context7', 'sequential-thinking', 'serena'],
       autoConnect: true;
       cacheResponses: true
+   
     });
     
     // Enhance agents with MCP capabilities
@@ -374,6 +374,7 @@ export class AgentSystem extends EventEmitter {
       maxInterval: 3000;
       adaptiveScaling: true;
       maxExecutionTime: 500
+   
     });
     
     // Register all agents with pulsed executor
@@ -411,11 +412,12 @@ export class AgentSystem extends EventEmitter {
 }
   
   // Initialize containerization
-  private async initializeContainerization(): Promise<void> {</void>
+  private async initializeContainerization(): Promise<void> {
     this.containerOrchestrator = new ContainerOrchestrator({ maxContainers: 10;
       baseImage: 'node:20-alpine',
       networkName: 'agent-network',
       enableHealthChecks: true
+   
     });
     
     await this.containerOrchestrator.start();
@@ -428,8 +430,8 @@ export class AgentSystem extends EventEmitter {
     if (alert.type === 'cpu' && this.pulsedExecutor) {
       // Increase pulse intervals to reduce CPU load
       this.pulsedExecutor.updateConfig({ minInterval: 2000;
-        maxInterval: 5000
-      })
+        maxInterval: 5000   
+    })
 }
     
     if (alert.type === 'memory') {
@@ -445,7 +447,7 @@ export class AgentSystem extends EventEmitter {
 }
   
   // Deploy agent in container
-  public async deployAgentInContainer(agentId: string): Promise<void> {</void>
+  public async deployAgentInContainer(agentId: string): Promise<void> {
     if (!this.containerOrchestrator) {
       throw new Error('Containerization is not enabled')
 }
@@ -466,7 +468,7 @@ export class AgentSystem extends EventEmitter {
 }
   
   // MCP Integration
-  public async connectMCP(servers: string[]): Promise<void> {</void>
+  public async connectMCP(servers: string[]): Promise<void> {
     if (!this.config.mcp?.enabled) {
       throw new Error('MCP is not enabled in configuration')
 }
@@ -488,4 +490,4 @@ export class AgentSystem extends EventEmitter {
 export function getAgentSystem(config? null : AgentSystemConfig): AgentSystem {
   return AgentSystem.getInstance(config)
 }
-}}))
+}}

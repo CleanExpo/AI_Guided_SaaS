@@ -15,7 +15,8 @@ const envSchema = z.object({
   OPENAI_API_KEY: z.string().optional(, ANTHROPIC_API_KEY: z.string().optional(, // Supabase (optional)
   NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(, NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(, SUPABASE_SERVICE_ROLE_KEY: z.string().optional(, // Other services (optional)
   REDIS_URL: z.string().optional(, RESEND_API_KEY: z.string().optional(, EMAIL_FROM: z.string().email().optional(, SENTRY_DSN: z.string().optional(, NEXT_PUBLIC_GA_ID: z.string().optional(, // Vercel specific
-  VERCEL: z.string().optional(, VERCEL_ENV: z.enum(['production', 'preview', 'development']).optional(, VERCEL_URL: z.string().optional() });
+  VERCEL: z.string().optional(, VERCEL_ENV: z.enum(['production', 'preview', 'development']).optional(, VERCEL_URL: z.string().optional()
+    });
 
 // Type for validated environment
 export type Env = z.infer<typeof envSchema></typeof>
@@ -137,4 +138,4 @@ export function getEnv<K extends keyof Env>(key: K): Env[K] {</K>
 
 // Re-export the type
 export type { EnvironmentConfig }
-}))))))))))))))))))))))
+}

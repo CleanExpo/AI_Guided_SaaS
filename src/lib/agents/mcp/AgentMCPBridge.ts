@@ -39,7 +39,7 @@ export class AgentMCPBridge extends EventEmitter {
   /**
    * Register an agent with MCP capabilities
    */
-  public async registerAgent(agent: Agent, capabilities? null : string[]): Promise<void> {</void>
+  public async registerAgent(agent: Agent, capabilities? null : string[]): Promise<void> {
 { agent.getConfig().id;
     this.agents.set(agentId, agent);
     
@@ -58,13 +58,13 @@ export class AgentMCPBridge extends EventEmitter {
       await this.connectEnabledServers()
 }
     
-    this.emit('agent:registered', { agentId, capabilities })
+    this.emit('agent:registered', { agentId, capabilities    })
 }
 
   /**
    * Handle MCP request from an agent
    */
-  private async handleAgentMCPRequest(agent: Agent, request: any): Promise<void> {</void>
+  private async handleAgentMCPRequest(agent: Agent, request: any): Promise<void> {
     const { capability, method, params } = request;
     
     try {
@@ -82,7 +82,8 @@ export class AgentMCPBridge extends EventEmitter {
           capability,
           result: cachedResult;
           cached: true
-        });
+       
+    });
         return
 }
       
@@ -102,20 +103,20 @@ export class AgentMCPBridge extends EventEmitter {
       agent.emit('mcp:response', {
         capability,
         result,
-        cached: false
-      })
+        cached: false   
+    })
 } catch (error) {
       agent.emit('mcp:error', {
         capability,
-        error: error.message
-      })
+        error: error.message   
+    })
 }
   }
 
   /**
    * Map agent capabilities to MCP servers
    */
-  private async mapCapabilities(agentId: string, capabilities: string[]): Promise<void> {</void>
+  private async mapCapabilities(agentId: string, capabilities: string[]): Promise<void> {
     const mappedCapabilities: MCPCapability[] = [];
     
     for (const capability of capabilities) {
@@ -125,8 +126,7 @@ export class AgentMCPBridge extends EventEmitter {
           mappedCapabilities.push({
             serverId,
             capability,
-            description: `${capability} provided by ${serverId}`
-          })
+            description: `${capability} provided by ${serverId}`    })
 }
 }
     
@@ -146,12 +146,12 @@ export class AgentMCPBridge extends EventEmitter {
   /**
    * Connect to enabled MCP servers
    */
-  private async connectEnabledServers(): Promise<void> {</void>
+  private async connectEnabledServers(): Promise<void> {
     for (const serverId of this.config.enabledServers) {
       try {
         await this.mcpIntegration.startServer(serverId)
 } catch (error) {
-        this.emit('server:connection:error', { serverId, error })
+        this.emit('server:connection:error', { serverId, error    })
 }
 }
 
@@ -174,8 +174,7 @@ export class AgentMCPBridge extends EventEmitter {
 };);
     
     this.mcpIntegration.on('server:error', (data) => {
-      this.emit('mcp:server:error', data)
-};)
+      this.emit('mcp:server:error', data)    })
 }
 
   /**
@@ -191,7 +190,7 @@ export class AgentMCPBridge extends EventEmitter {
   /**
    * Enable MCP capability for an agent
    */
-  public async enableCapability(agentId: string, capability: string, serverId: string): Promise<void> {</void>
+  public async enableCapability(agentId: string, capability: string, serverId: string): Promise<void> {
 { this.agents.get(agentId); if (!agent) {
       throw new Error(`Agent ${agentId} not found`)
 }
@@ -209,7 +208,7 @@ export class AgentMCPBridge extends EventEmitter {
     // Ensure server is started
     await this.mcpIntegration.startServer(serverId);
     
-    this.emit('capability:enabled', { agentId, capability, serverId })
+    this.emit('capability:enabled', { agentId, capability, serverId    })
 }
 
   /**
@@ -250,8 +249,7 @@ export class AgentMCPBridge extends EventEmitter {
           this.removeListener('mcp:response', responseHandler);
           this.removeListener('mcp:error', errorHandler);
           reject(new Error('MCP request timeout'))
-}, 30000)
-})
+}, 30000)    })
 }
 }
 
@@ -285,6 +283,7 @@ export class AgentMCPBridge extends EventEmitter {
     this.responseCache.set(key, {
       result,
       timestamp: Date.now()
+   
     });
     
     // Clean old cache entries

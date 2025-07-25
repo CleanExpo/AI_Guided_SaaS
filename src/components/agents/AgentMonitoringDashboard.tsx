@@ -22,19 +22,19 @@ import {
 import { getAgentSystem } from '@/lib/agents/AgentSystem';
 import { AgentMetrics } from '@/lib/agents/types';
 
-interface AgentStatus { id: string;
-  name: string;
-  status: 'idle' | 'busy' | 'error' | 'offline';
+interface AgentStatus { id: string
+  name: string
+  status: 'idle' | 'busy' | 'error' | 'offline'
   currentTask?: string,
   metrics: AgentMetrics
 }
 
-interface SystemMetrics { totalTasks: number;
-  completedTasks: number;
-  failedTasks: number;
-  activeAgents: number;
-  queueLength: number;
-  averageTaskTime: number;
+interface SystemMetrics { totalTasks: number
+  completedTasks: number
+  failedTasks: number
+  activeAgents: number
+  queueLength: number
+  averageTaskTime: number
   systemHealth: 'healthy' | 'degraded' | 'critical'
 }
 
@@ -61,14 +61,14 @@ export function AgentMonitoringDashboard() {
           name: agent.getConfig().name,
           status: agent.getStatus(, currentTask: agent.getCurrentTask()?.type,
           metrics: agent.getMetrics()
-}));
+    }));
         setAgents(agentStatuses)
 }
     };
     
     updateMetrics();
     
-    let interval: NodeJS.Timeout;
+    let interval: NodeJS.Timeout
     if (autoRefresh) {
       interval = setInterval(updateMetrics, 2000)
 }
@@ -94,9 +94,9 @@ export function AgentMonitoringDashboard() {
 
   const getStatusColor = (status: string) =>  {
     switch (status) {;
-      case 'idle': return 'bg-green-500';
-      case 'busy': return 'bg-blue-500';
-      case 'error': return 'bg-red-500';
+      case 'idle': return 'bg-green-500'
+      case 'busy': return 'bg-blue-500'
+      case 'error': return 'bg-red-500'
       case 'offline': return 'bg-gray-500',
       default: return 'bg-gray-400'
 }
@@ -104,8 +104,8 @@ export function AgentMonitoringDashboard() {
 
   const getHealthColor = (health: string) =>  {
     switch (health) {;
-      case 'healthy': return 'text-green-500';
-      case 'degraded': return 'text-yellow-500';
+      case 'healthy': return 'text-green-500'
+      case 'degraded': return 'text-yellow-500'
       case 'critical': return 'text-red-500',
       default: return 'text-gray-500'
 }
@@ -119,7 +119,7 @@ export function AgentMonitoringDashboard() {
         <div className="flex items-center gap-4">
           <label className="flex items-center gap-2">
             <input
-              type="checkbox";
+              type="checkbox"
               checked={autoRefresh}
               onChange={(e) => setAutoRefresh(e.target.checked)}</input>
               className="rounded";
@@ -131,7 +131,7 @@ export function AgentMonitoringDashboard() {
             onClick={handleRefresh}
             disabled={isRefreshing}
           >
-          <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`}   />
+          <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`/>
             Refresh
           </Button>
         </div>
@@ -235,15 +235,15 @@ export function AgentMonitoringDashboard() {
                 <CardHeader>
           <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{agent.name}</CardTitle>
-                    <div className={`w-3 h-3 rounded-full ${getStatusColor(agent.status)}`}   />
+                    <div className={`w-3 h-3 rounded-full ${getStatusColor(agent.status)}`/>
                 </CardHeader>
                 <CardContent>
           <div className="space-y-2">
                     <div className="flex items-center justify-between">
           <span className="text-sm">Status</span>
-                      <Badge variant={agent.status === 'busy' ? 'default' : 'secondary'}></Badge>
+                      <Badge variant={agent.status === 'busy' ? 'default' : 'secondary'}>/>
                         {agent.status}
-                      </Badge>
+                      />
                     </div>
                     {agent.currentTask && (
                       <div className="flex items-center justify-between">
@@ -279,7 +279,7 @@ export function AgentMonitoringDashboard() {
                         <span className="text-sm font-medium">
                           {agent.metrics?.cpuUsage || 0}%
                         </span>
-                      <Progress value={agent.metrics?.cpuUsage || 0}  />
+                      <Progress value={agent.metrics?.cpuUsage || 0/>
           </div>
                     <div>
           <div className="flex items-center justify-between mb-2">
@@ -290,7 +290,7 @@ export function AgentMonitoringDashboard() {
                         <span className="text-sm font-medium">
                           {agent.metrics?.memoryUsage || 0}%
                         </span>
-                      <Progress value={agent.metrics?.memoryUsage || 0}  />
+                      <Progress value={agent.metrics?.memoryUsage || 0/>
           </div>
                     <div className="flex items-center justify-between">
           <span className="text-sm">Avg Response Time</span>
@@ -360,4 +360,4 @@ export function AgentMonitoringDashboard() {
       )}
     </div>
   )
-}))
+}

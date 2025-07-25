@@ -46,14 +46,15 @@ level: LogLevel;
     // In production, send to logging service (e.g., Winston, Pino, or cloud logging);
 if (!this.isDevelopment && entry.level <= LogLevel.WARN) {
       this.sendToLoggingService(entry)}
-  private async sendToLoggingService(entry: LogEntry): Promise<any> {</any>
+  private async sendToLoggingService(entry: LogEntry): Promise<any> {
     // In a real production environment, this would send, to:
     // - CloudWatch, DataDog, Splunk, etc.
     // - Database logging table
     // - External monitoring service
     // For now, we'll just ensure it doesn't expose sensitive data
     try {
-      // Example: await fetch('/api/logs', { method: 'POST', body: JSON.stringify(entry) });
+      // Example: await fetch('/api/logs', { method: 'POST', body: JSON.stringify(entry)
+    });
       void entry; // Use entry to avoid unused variable warning
     } catch {
       // Fail silently to avoid logging loops
@@ -120,4 +121,4 @@ export const _logUser = (
   context?: Record<string unknown></string>
 ) => logger.userActivity(activity, userId, context);
 
-}}}}}}})
+}}}}}}    }

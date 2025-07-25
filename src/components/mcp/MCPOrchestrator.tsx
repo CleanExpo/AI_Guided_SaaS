@@ -19,8 +19,8 @@ projectId?: string,
   onToolResult? (result) => void
 }
 
-export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProps, onToolResult }: MCPOrchestratorProps) {;
-  const { toast    }: any  = useToast();
+export function MCPOrchestrator({ projectId, onToolResult }: MCPOrchestratorProps, onToolResult }: MCPOrchestratorProps) {
+  const { toast    }: any  = useToast()
 
 const { servers,
     tools,
@@ -33,7 +33,7 @@ const { servers,
     loading,
     // initialized
       }: any = useMCP({ autoConnect: ['filesystem'] // Auto-connect filesystem by default
-});
+    });
   
 const [selectedTool, setSelectedTool]  = useState<MCPTool | null>(null);</MCPTool>
 
@@ -79,7 +79,7 @@ const _handleExecuteTool = async () =>  {
       toast({ title: 'Error',
         description: 'Please select a tool to execute',
 variant: 'destructive'
-};);
+    });
       return null
 }try {
       const call: MCPToolCall={ tool: selectedTool.name,
@@ -92,8 +92,7 @@ const result = await callTool(call);
       if (onToolResult) {
         onToolResult(result)}
       toast({ title: 'Tool Executed',
-  description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}``
-  })
+  description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}``    })
 } catch (error) {
     console.error('Tool execution, failed:', error)}
   // Add step to plan;
@@ -106,8 +105,7 @@ type: 'tool' as const,
     setPlanSteps(prev => [...prev, step]);
     setToolArguments({});
     toast({ title: 'Step Added',
-  description: `Added ${selectedTool.name} to orchestration plan``
-  })
+  description: `Added ${selectedTool.name} to orchestration plan``    })
 };
   // Execute orchestration plan;
 
@@ -116,28 +114,27 @@ const _handleExecutePlan = async () =>  {
       toast({ title: 'Error',
         description: 'Plan has no steps to execute',
 variant: 'destructive'
-};);
+    });
       return null
 }try {
       const _plan  = createPlan(planDescription || 'Custom orchestration plan', planSteps, const results = await executePlan(plan); // Convert results to array for display;
 
 const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({
-        stepId,;
+        stepId,
         ...result
 });
       setExecutionResults(prev => [...resultsArray, ...prev]);
       setPlanSteps([]); // Clear plan after execution
       setPlanDescription('');
       toast({ title: 'Plan Executed',
-  description: `Completed ${resultsArray.length} steps``
-  })
+  description: `Completed ${resultsArray.length} steps``    })
 } catch (error) {
     console.error('Plan execution, failed:', error)}
   // Parse tool input schema for UI;
 
 const _getToolInputFields  = (tool: MCPTool): Array<{ name: string, type: string, required: boolean }> => {
-    if (!tool.inputSchema || !tool.inputSchema.properties) {r}eturn [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({ name: type: schema.type || 'string',;
-required: required.includes(name)};))
+    if (!tool.inputSchema || !tool.inputSchema.properties) {r}eturn [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({ name: type: schema.type || 'string',
+required: required.includes(name)}))
   };
   return (
     <div className="space-y-6">
@@ -173,9 +170,9 @@ const key={server.id };
 
 const variant={isConnected ? 'default' : 'secondary' };
                           className="capitalize";
-                        ></Badge>
+                        >/>
                           {status}
-</Badge>
+/>
                         <Button
 size="sm";
 
@@ -212,7 +209,7 @@ variant={isConnected ? 'destructive' : 'default'} onClick={() => </Button>
                       <span className="font-medium">{server.name}</span>
                       <Badge variant="secondary" className="ml-auto">
                         {server.tools.length} tools
-</Badge>
+/>
                     <CollapsibleContent className ="pl-6 space-y-1"></CollapsibleContent>
                       {server.tools.map((tool) => (\n    <div; const key={`${server.id}-${tool.name}`}`;
 
@@ -223,7 +220,7 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                           }`}`;
 
     const onClick={() =>  {</div>
-                            setSelectedTool(tool, setToolArguments({};)}
+                            setSelectedTool(tool, setToolArguments({})}
                         ></div>
                           <div className="flex items-center gap-2">
           <Settings className="h-4 w-4"     />
@@ -254,14 +251,13 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                           })}
                           const placeholder={`Enter ${field.name}`}`
                         />
-                      )},;
+                      )},
     {field.type = == 'object'  && (Textarea; id={field.name} value={toolArguments[field.name] || '{}'}
                           const onChange={(e) => setToolArguments({
                             ...toolArguments,
                             [field.name]: e.target.value
                           })}
-                          placeholder="Enter JSON object"rows={3}
-                        />
+                          placeholder="Enter JSON object"rows={3/>
                       )}
       </div>
                   ))}
@@ -301,7 +297,7 @@ variant="outline";
             <Label htmlFor="plan-description">Plan Description</Label>
             <Input id="plan-description";
 
-value={planDescription} onChange={(e) => setPlanDescription(e.target.value)};</Input>
+value={planDescription} onChange={(e) => setPlanDescription(e.target.value)};/>
               placeholder="Describe what this plan does...";
             />
 </div>
@@ -310,7 +306,7 @@ value={planDescription} onChange={(e) => setPlanDescription(e.target.value)};</I
               <div className="space-y-2">
                 {planSteps.map((step, index) => (\n    <div const key={step.id};
                     className="flex items-center justify-between p-3 border rounded-lg flex items-center gap-3"    />
-          <Badge>{index + 1}</Badge>
+          <Badge>{index + 1}/>
                       <div>
           <p className="font-medium">{step.operation}</p>
                         <p className="text-sm text-muted-foreground">
@@ -358,7 +354,7 @@ const onClick={handleExecutePlan};
                           <CheckCircle2 className="h-4 w-4 text-green-500"     />
                         )}
                         <span className="font-medium">{result.tool}</span>
-                        <Badge variant="outline">{result.server}</Badge>
+                        <Badge variant="outline">{result.server}/>
                       <span className="text-sm text-muted-foreground">
                         {result.duration}ms</span>
                     {result.error  && (
@@ -397,4 +393,4 @@ div className="text-sm bg-muted p-2 rounded">
     </MCPTool>
   }
 `
-}}}}))))
+}}}}

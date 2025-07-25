@@ -52,7 +52,7 @@ export class AgentLoader {
   /**
    * Discover and load all available agents
    */
-  async discoverAgents(): Promise<any> {</any>
+  async discoverAgents(): Promise<any> {
     const result: AgentDiscoveryResult={ total_agents: 0;
     core_agents: [] as any[],
     orchestration_agents: [] as any[],
@@ -87,7 +87,7 @@ for (const file of agentFiles) {
   /**
    * Load a specific agent by ID or role
    */
-  async loadAgentByIdentifier(identifier: string): Promise<any> {</any>
+  async loadAgentByIdentifier(identifier: string): Promise<any> {
     // First check if already loaded, const _existingAgent = this.findLoadedAgent(identifier, if (existingAgent) {
       return { success: true, agent: existingAgent }};
     // Try to load from file;
@@ -104,7 +104,7 @@ const _agentFiles = this.getAgentFiles();
   /**
    * Get agents required for next stage based on current project state
    */
-  async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise<any> {</any>
+  async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise<any> {
     const stageAgentMap: Record<string string[]>  = {</string>
       'requirements': ['ARCHITECT'],
       'architecture': ['ARCHITECT', 'FRONTEND', 'BACKEND'],
@@ -127,7 +127,7 @@ const requiredAgents: AgentConfig[] = [];
   /**
    * Load agent coordination chain for full project execution
    */
-  async loadExecutionChain(projectRequirements: string): Promise<any> {</any>
+  async loadExecutionChain(projectRequirements: string): Promise<any> {
     // Load all core agents, const executionChain: AgentConfig[]  = [], const coreRoles = ['ARCHITECT', 'FRONTEND', 'BACKEND', 'QA', 'DEVOPS'];
     for (const role of coreRoles) {
       const loadResult = await this.loadAgentByIdentifier(role); if (loadResult.success && loadResult.agent) {
@@ -188,7 +188,7 @@ updateAgentStatus(agentId: string, status: AgentConfig['status'], lastAction?: s
     break;
 break
  };
-        default: return false }})
+        default: return false }    })
 }
   // Private methods
   private getAgentFiles(): string[] {
@@ -199,7 +199,7 @@ break
       return []
 }
 }
-  private async loadAgent(filename: string): Promise<any> {</any>
+  private async loadAgent(filename: string): Promise<any> {
     try {
       const _filePath  = join(this.agentsPath, filename, const _fileContent = readFileSync(filePath, 'utf-8'); const agent: AgentConfig = JSON.parse(fileContent);
       // Validate required fields;
@@ -241,7 +241,7 @@ if (!agent.agent_id || !agent.name || !agent.role) {
           agent.agent_id,
           agent.coordination_protocols.coordinates_with
         )}
-  private async storeInMemory(result: AgentDiscoveryResult): Promise<any> {</any>
+  private async storeInMemory(result: AgentDiscoveryResult): Promise<any> {
     try {
       // Store agent discovery results in memory system
       await mcp__memory__create_entities([{ name: 'AgentDiscoverySession',
@@ -260,7 +260,7 @@ if (!agent.agent_id || !agent.name || !agent.role) {
    * Reset all loaded agents
    */; reset() {
     this.loadedAgents.clear(, this.agentDependencies.clear()}
-// Convenience functions; export async function discoverAllAgents(): Promise<any> {</any>
+// Convenience functions; export async function discoverAllAgents(): Promise<any> {
 { AgentLoader.getInstance();
         return loader.discoverAgents()
  };
@@ -268,11 +268,11 @@ export async function loadRequiredAgents(stage: string, projectType? null : stri
 { AgentLoader.getInstance();
         return loader.getRequiredAgentsForStage(stage, projectType)
 };
-export async function loadExecutionChain(requirements: string): Promise<any> {</any>
+export async function loadExecutionChain(requirements: string): Promise<any> {
 { AgentLoader.getInstance();
         return loader.loadExecutionChain(requirements)
  };
 export function getAgentStatus(): Record {
   const loader = AgentLoader.getInstance();
         return loader.getAgentStatus()};`
-}}}}}}}}}}}}))))))))))))))))
+}}}}}}}}}}}}

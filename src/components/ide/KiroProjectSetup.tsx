@@ -13,7 +13,7 @@ import { Code2, Smartphone, Monitor, Server, Package, FileCode2, Settings, Rocke
 import { useKiroIDE } from '@/hooks/useKiroIDE';
 import { useToast } from '@/components/ui/use-toast';
 interface KiroProjectSetupProps {
-onProjectCreated? (projectId: string) => void;
+onProjectCreated? (projectId: string) => void
   initialData? null : {
     name?: string,
   description?: string,
@@ -22,9 +22,9 @@ onProjectCreated? (projectId: string) => void;
 }
 
 export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectSetupProps, initialData }: KiroProjectSetupProps) {
-  const { toast    }: any  = useToast();
+  const { toast    }: any  = useToast()
 
-const { createProject, connect, connected, loading    }: any = useKiroIDE();
+const { createProject, connect, connected, loading    }: any = useKiroIDE()
   
 const [projectData, setProjectData] = useState<any>({</any>
     name?: initialData.name || '',
@@ -37,17 +37,18 @@ dependencies: {} as Record<string string /    />
   });
 
 const [features, setFeatures] = useState<any>({</any>
-    typescript: true;
-    eslint: true;
-    prettier: true;
-    testing: true;
-    docker: false;
-    ci_cd: false;
-    authentication: false;
+    typescript: true
+    eslint: true
+    prettier: true
+    testing: true
+    docker: false
+    ci_cd: false
+    authentication: false
 database: false
-  });
+ 
+    });
 
-const projectTypes  = [;
+const projectTypes  = [
   { value: 'web', label: 'Web Application', icon: Monitor },
     { value: 'mobile', label: 'Mobile App', icon: Smartphone },
     { value: 'desktop', label: 'Desktop Application', icon: Monitor },
@@ -66,7 +67,7 @@ const projectTypes  = [;
       toast({ title: 'Error',
         description: 'Project name is required',
 variant: 'destructive'
-};);
+    });
       return null
 };
     try {
@@ -79,8 +80,8 @@ const _projectStructure = generateProjectStructure(projectData, features);
 
 const project = await createProject({
         ...projectData,
-        structure: projectStructure
-      })
+        structure: projectStructure   
+    })
       toast({ title: 'Project Created',
   description: `Successfully created project "${project.name}"`
   });
@@ -90,7 +91,7 @@ if (onProjectCreated) {
       console.error('Failed to create, project:', error, toast({ title: 'Error',
         description: 'Failed to create project',
 variant: 'destructive'
-})}
+    })}
   const _generateProjectStructure = (data: typeof projectData, features) =>  {
     const structure={ name: data.name, type: 'directory' as const path: '/', children: any[]
 };
@@ -115,7 +116,7 @@ if (features.typescript) {
         type: 'file',
         path: '/tsconfig.json',
 content: generateTsConfig(data.type)
-})};
+    })};
     // ESLint config;
 if (features.eslint) {
       structure.children.push({ name: '.eslintrc.json',
@@ -162,7 +163,8 @@ switch (data.framework) { case 'nextjs':
 }
     // Docker files;
 if (features.docker) {
-      structure.children.push({ name: 'Dockerfile', type: 'file', path: '/Dockerfile', content: generateDockerfile(data.type, data.framework, name: 'docker-compose.yml', type: 'file', path: '/docker-compose.yml', content: generateDockerCompose(data.name)  })};
+      structure.children.push({ name: 'Dockerfile', type: 'file', path: '/Dockerfile', content: generateDockerfile(data.type, data.framework, name: 'docker-compose.yml', type: 'file', path: '/docker-compose.yml', content: generateDockerCompose(data.name) 
+    })};
     // CI/CD files;
 if (features.ci_cd) {
       structure.children.push({ name: '.github',
@@ -194,9 +196,9 @@ content: generateGithubWorkflow(data.name)}]
 
     const value={projectData.name};
 
-    const onChange={(e) => setProjectData({ ...projectData, name: e.target.value})};</Input>
+    const onChange={(e) => setProjectData({ ...projectData, name: e.target.value})};/>
                 placeholder="My Awesome Project";
-              /></Input>
+              />/>
             <div className="space-y-2"    />
           <Label htmlFor="description">Description</Label>
               <Textarea
@@ -207,8 +209,7 @@ id="description";
     const onChange={(e) => setProjectData({ ...projectData, description: e.target.value})};</Textarea>
                 placeholder="A brief description of your project...";
 
-    const rows={ 3}
-              /></Textarea>
+    const rows={ 3/></Textarea>
             <div className="space-y-2"    />
           <Label>Project Type</Label>
               <div className="grid grid-cols-2 md: grid-cols-5 gap-2">
@@ -260,31 +261,34 @@ id={key} checked={value}
                   <Input
 id="buildCommand";
 
-    value={projectData.settings.buildCommand} onChange={(e) => setProjectData({</Input>
-                      ...projectData,;
-    settings: { ...projectData.settings buildCommand: e.target.value })};
+    value={projectData.settings.buildCommand} onChange={(e) => setProjectData({/>
+                      ...projectData,
+    settings: { ...projectData.settings buildCommand: e.target.value
+    })};
                     placeholder="npm run build";
-                  /></Input>
+                  />/>
                 <div className="space-y-2"    />
           <Label htmlFor="startCommand">Start Command</Label>
                   <Input
 id="startCommand";
 
-    value={projectData.settings.startCommand} onChange={(e) => setProjectData({</Input>
-                      ...projectData,;
-    settings: { ...projectData.settings startCommand: e.target.value })};
+    value={projectData.settings.startCommand} onChange={(e) => setProjectData({/>
+                      ...projectData,
+    settings: { ...projectData.settings startCommand: e.target.value
+    })};
                     placeholder="npm run dev";
-                  /></Input>
+                  />/>
                 <div className="space-y-2"    />
           <Label htmlFor="testCommand">Test Command</Label>
                   <Input
 id="testCommand";
 
-    value={projectData.settings.testCommand} onChange={(e) => setProjectData({</Input>
-                      ...projectData,;
-    settings: { ...projectData.settings testCommand: e.target.value })};
+    value={projectData.settings.testCommand} onChange={(e) => setProjectData({/>
+                      ...projectData,
+    settings: { ...projectData.settings testCommand: e.target.value
+    })};
                     placeholder="npm test";
-                  /></Input>
+                  />/>
             <TabsContent value="environment", className="space-y-4"    />
           <div className="space-y-2"     />
                 <Label>Environment Variables</Label>
@@ -301,12 +305,11 @@ id="testCommand";
               ) : (
                 <Badge variant="outline", className="text-yellow-500">
                     Disconnected
-</Badge>
+/>
       )}
             <Button
 
-onClick={handleCreateProject} disabled={loading || !projectData.name}
-                />
+onClick={handleCreateProject} disabled={loading || !projectData.name/>
           <Rocket className="h-4 w-4 mr-2"     />
               Create Project</Rocket>
 // Helper functions for generating file contents;
@@ -347,16 +350,16 @@ generateTsConfig(projectType: string): string) { const configs: Record<string an
     web: { compilerOptions: {
   target: 'es5',
         lib: ['dom', 'dom.iterable', 'esnext'],
-        allowJs: true;
-    skipLibCheck: true;
-    strict: true;
-    forceConsistentCasingInFileNames: true;
-    noEmit: true;
-    esModuleInterop: true;
+        allowJs: true
+    skipLibCheck: true
+    strict: true
+    forceConsistentCasingInFileNames: true
+    noEmit: true
+    esModuleInterop: true
     module: 'esnext',
         moduleResolution: 'node',
-        resolveJsonModule: true;
-    isolatedModules: true;
+        resolveJsonModule: true
+    isolatedModules: true
     jsx: 'preserve',
 incremental: true
       },
@@ -369,11 +372,11 @@ incremental: true
         lib: ['ES2020'],
     outDir: './dist',
         rootDir: './src',
-        strict: true;
-    esModuleInterop: true;
-    skipLibCheck: true;
-    forceConsistentCasingInFileNames: true;
-    resolveJsonModule: true;
+        strict: true
+    esModuleInterop: true
+    skipLibCheck: true
+    forceConsistentCasingInFileNames: true
+    resolveJsonModule: true
 moduleResolution: 'node'
       },
       include: ['src/**/*'],
@@ -386,12 +389,12 @@ moduleResolution: 'node'
 generateEslintConfig(projectType: string, typescript: boolean): string,
   typescript: boolean) {
   const base={ extends: [
-      'eslint:recommended';
+      'eslint: recommended'
       typescript && 'plugin: @typescript-eslint/recommended'
    ].filter(Boolean, parser?: typescript '@typescript-eslint/parser' : undefined,
     plugins?: typescript ['@typescript-eslint'] : any[],
 rules: {
-      'no-console': 'warn';
+      'no-console': 'warn'
       'no-unused-vars': 'warn'
   }
 }
@@ -419,7 +422,7 @@ export default App`
 generateReactIndex() {
   return `import React from 'react'``, import ReactDOM from 'react-dom/client', import App from './App';
 
-const root = ReactDOM.createRoot(;
+const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 )
 root.render(
@@ -437,15 +440,17 @@ const _PORT = process.env.PORT || 3000;
 app.use(helmet())
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true
+    }))
 // Routes
-app.get('/', (req, res) => { res.json({ message: 'API is running!'  };)}
+app.get('/', (req, res) => { res.json({ message: 'API is running!' 
+    })}
 // Error handling
 app.use((err: Error, req: express.Request,
   res: express.Response, next: express.NextFunction) => {
-  console.error(err.stack, res.status(500).send('Something broke!')};)
+  console.error(err.stack, res.status(500).send('Something broke!')    })
 // Start server
-app.listen(PORT, () => {};)```
+app.listen(PORT, () => {})```
   }
 generateHtmlTemplate(name: string): string) {
   return `<!DOCTYPE html>``, <html lang="en"    />, <head    />
@@ -485,7 +490,7 @@ EXPOSE 3000
 ENV PORT 3000
 CMD ["node", "server.js"]```
   }
-  return `FROM, node:18-alpine``;
+  return `FROM, node: 18-alpine``
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
@@ -500,7 +505,7 @@ generateDockerCompose(name: string): string) {
   restart: unless-stopped`
   }
 generateGithubWorkflow(name: string): string) {
-  return `name: CI, on: push, branches: [ main ]``, pull_request, branches: [ main ],;
+  return `name: CI, on: push, branches: [ main ]``, pull_request, branches: [ main ],
   jobs:  ,
   test: runs-on: ubuntu-latest, steps: -,
   uses: actions/checkout@v3

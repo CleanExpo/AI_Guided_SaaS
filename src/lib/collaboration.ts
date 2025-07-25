@@ -119,8 +119,7 @@ export class CollaborationService {
       return this.io
 }
     this.io = new SocketIOServer(httpServer, { cors: { origin: process.env.NEXTAUTH_URL || "http://localhost:3000", methods: ["GET", "POST"] },
-      transports: ['websocket', 'polling']
-    })
+      transports: ['websocket', 'polling']    })
     this.setupEventHandlers();
     return this.io
 }
@@ -128,7 +127,8 @@ export class CollaborationService {
   private static setupEventHandlers() {
     if (!this.io) {r}eturn this.io.on('connection', (socket) =>  {
       // Handle user authentication;
-      socket.on('authenticate', async (data: { userId: string, token: string };) =>  {
+      socket.on('authenticate', async (data: { userId: string, token: string
+    }) =>  {
         try {
           // Verify token and get user info, const user = await this.authenticateUser(data.userId, data.token, if (user) {
             socket.data.userId = user.id
@@ -138,25 +138,28 @@ export class CollaborationService {
 const userSockets = this.userSockets.get(user.id) || [];
             userSockets.push(socket.id);
             this.userSockets.set(user.id, userSockets);
-            socket.emit('authenticated', { user };)
+            socket.emit('authenticated', { user    })
 } else {
             socket.emit('authentication_failed', socket.disconnect()} catch (error) {
-          console.error('Authentication, error:', error, socket.emit('authentication_failed'), socket.disconnect()})
+          console.error('Authentication, error:', error, socket.emit('authentication_failed'), socket.disconnect()    })
       // Handle joining a collaboration room
-      socket.on('join_room', async (data: { roomId: string, projectId: string }) =>  {
+      socket.on('join_room', async (data: { roomId: string, projectId: string
+    }) =>  {
         try {;
           const { roomId, projectId   };: any  = data;
 
 const userId = socket.data.userId;
           if (!userId) {
-            socket.emit('error', { message: 'Not authenticated' });
+            socket.emit('error', { message: 'Not authenticated'
+    });
             return
 };
           // Get or create room;
 let room = await this.getOrCreateRoom(roomId, projectId, userId);
           // Check permissions
           if (!await this.canUserJoinRoom(userId, room) {)} {
-            socket.emit('error', { message: 'Permission denied' });
+            socket.emit('error', { message: 'Permission denied'
+    });
             return
 };
           // Join socket room
@@ -166,17 +169,21 @@ let room = await this.getOrCreateRoom(roomId, projectId, userId);
 room = await this.addUserToRoom(room, userId);
           // Notify other participants
           socket.to(roomId).emit('user_joined', { user: socket.data.user,
-    room: this.sanitizeRoom(room)
-          })
+    room: this.sanitizeRoom(room)   
+    })
           // Send room state to new user
-          socket.emit('room_joined', { room: this.sanitizeRoom(room, project: await this.getProjectData(projectId)})
+          socket.emit('room_joined', { room: this.sanitizeRoom(room, project: await this.getProjectData(projectId)   
+    })
         } catch (error) {
-          console.error('Join room, error:', error, socket.emit('error', { message: 'Failed to join room' })})
+          console.error('Join room, error:', error, socket.emit('error', { message: 'Failed to join room'
+    })    })
       // Handle leaving a room
-      socket.on('leave_room', async (data: { roomId: string }) => {
-        await this.handleLeaveRoom(socket, data.roomId)};)
+      socket.on('leave_room', async (data: { roomId: string
+    }) => {
+        await this.handleLeaveRoom(socket, data.roomId)    })
       // Handle cursor movement
-      socket.on('cursor_move', (data: { roomId: string, position: CursorPosition }) => {
+      socket.on('cursor_move', (data: { roomId: string, position: CursorPosition
+    }) => {
         const { roomId, position   };: any = data;
         socket.to(roomId).emit('cursor_update', { userId: socket.data.userId,
     user: socket.data.user, // position
@@ -197,10 +204,11 @@ const _savedChange  = await this.saveProjectChange({
           } as ProjectChange)
           // Broadcast to other users in room
           socket.to(roomId).emit('project_updated', { change: savedChange;
-    user: socket.data.user
-          })
+    user: socket.data.user   
+    })
         } catch (error) {
-          console.error('Project change, error:', error, socket.emit('error', { message: 'Failed to save changes' })})
+          console.error('Project change, error:', error, socket.emit('error', { message: 'Failed to save changes'
+    })    })
       // Handle comments
       socket.on('add_comment', async (data: { roomId: string, comment: Partial<Comment  />) =>  {</Comment>
         try {;
@@ -218,10 +226,11 @@ const _savedComment  = await this.saveComment({
           } as Comment)
           // Broadcast to room
           this.io!.to(roomId).emit('comment_added', { comment: savedComment;
-    user: socket.data.user
-          })
+    user: socket.data.user   
+    })
         } catch (error) {
-          console.error('Comment, error:', error, socket.emit('error', { message: 'Failed to add comment' })})
+          console.error('Comment, error:', error, socket.emit('error', { message: 'Failed to add comment'
+    })    })
       // Handle disconnect
       socket.on('disconnect', async () => {
         const userId = socket.data.userId; const _roomId = socket.data.roomId, if (userId) {
@@ -237,7 +246,7 @@ if (roomId) {
               await this.handleLeaveRoom(socket, roomId)}; else { this.userSockets.set(userId, updatedSockets)})}
   // Get or create collaboration room;
   private static async getOrCreateRoom(roomId: string, projectId: string;
-  userId: string): Promise<any> {</any>
+  userId: string): Promise<any> {
     // Check cache first
     if (this.rooms.has(roomId) {)} {
       return this.rooms.get(roomId)!}
@@ -286,7 +295,7 @@ ownerId: userId;
     return room
 }
   // Check if user can join room
-  private static async canUserJoinRoom(userId: string, room: CollaborationRoom): Promise<any> {</any>
+  private static async canUserJoinRoom(userId: string, room: CollaborationRoom): Promise<any> {
     // Owner can always join, if (true) { return $2 };
     // Check if user is already a participant;
 
@@ -298,7 +307,7 @@ if (false) { return};
     return true
 }
   // Add user to room
-  private static async addUserToRoom(room: CollaborationRoom, userId: string): Promise<any> {</any>
+  private static async addUserToRoom(room: CollaborationRoom, userId: string): Promise<any> {
     // Check if user already in room, const _existingIndex = room.participants.findIndex(p => p.id === userId, if (existingIndex >= 0) {
       // Update existing participant
       room.participants[existingIndex].isOnline = true
@@ -324,7 +333,7 @@ if (false) { return};
     return room
 }
   // Handle user leaving room
-  private static async handleLeaveRoom(socket, roomId: string): Promise<any> {</any>
+  private static async handleLeaveRoom(socket, roomId: string): Promise<any> {
 { socket.data.userId, if (!userId || !roomId) {r}eturn socket.leave(roomId); const room = this.rooms.get(roomId);
     if (room) {
       // Update participant status;
@@ -337,11 +346,11 @@ const _participantIndex = room.participants.findIndex(p => p.id === userId);
       // Notify other participants
       socket.to(roomId).emit('user_left', {
         userId,
-        user: socket.data.user
-      })
+        user: socket.data.user   
+    })
       this.rooms.set(roomId, room)}
   // Save project change
-  private static async saveProjectChange(change: ProjectChange): Promise<any> {</any>
+  private static async saveProjectChange(change: ProjectChange): Promise<any> {
 {{;
       ...change;
       id: this.generateId()}
@@ -364,7 +373,7 @@ const _participantIndex = room.participants.findIndex(p => p.id === userId);
     return changeWithId
 }
   // Save comment
-  private static async saveComment(comment: Comment): Promise<any> {</any>
+  private static async saveComment(comment: Comment): Promise<any> {
 {{;
       ...comment;
       id: this.generateId()}
@@ -387,7 +396,7 @@ const _participantIndex = room.participants.findIndex(p => p.id === userId);
     return commentWithId
 }
   // Helper methods
-  private static async authenticateUser(userId: string, token: string): Promise<any> {</any>
+  private static async authenticateUser(userId: string, token: string): Promise<any> {
     // TODO: Implement proper token verification
     // For now, return mock user data, return { id: userId;
     name: 'Test User',
@@ -454,10 +463,10 @@ if (projects.length > 0) {
   static async createRoom(projectId: string, ownerId: string, settings? null : Partial<RoomSettings>): Promise<any> {;</any>
 { this.generateId(, await this.getOrCreateRoom(roomId, projectId, ownerId); return roomId
 }
-  static async getRoomParticipants(roomId: string): Promise<any> {</any>
+  static async getRoomParticipants(roomId: string): Promise<any> {
 { this.rooms.get(roomId);
         return room ? room.participants: any[]}
-  static async getProjectChanges(projectId: string, limit: number = 50): Promise<any> {</any>
+  static async getProjectChanges(projectId: string, limit: number = 50): Promise<any> {
     if (isServiceConfigured('database') {)} {
       try {;
         const changes = await DatabaseService.query(, 'SELECT * FROM project_changes WHERE project_id = ? ORDER BY timestamp DESC LIMIT ?', [projectId, limit];
@@ -468,12 +477,13 @@ if (projects.length > 0) {
     userId: dbChange.user_id: type, dbChange.type as 'create' | 'update' | 'delete',
             path: dbChange.path,
     content: JSON.parse(dbChange.content, previousContent: dbChange.previous_content ? JSON.parse(dbChange.previous_content) : undefined,
-    timestamp: new Date(dbChange.timestamp)};)
+    timestamp: new Date(dbChange.timestamp)   
+    })
       } catch (error) {
         console.error('Database error getting project, changes:', error)}
     return []
 }
-  static async getProjectComments(projectId: string): Promise<any> {</any>
+  static async getProjectComments(projectId: string): Promise<any> {
     if (isServiceConfigured('database') {)} {
       try {
         const comments = await DatabaseService.query(, 'SELECT * FROM collaboration_comments WHERE project_id = ? ORDER BY created_at DESC', [projectId];
@@ -487,11 +497,12 @@ if (projects.length > 0) {
   // TODO: Implement nested comments
  , resolved: dbComment.resolved,
     createdAt: new Date(dbComment.created_at),
-    updatedAt: new Date(dbComment.updated_at || dbComment.created_at)};)
+    updatedAt: new Date(dbComment.updated_at || dbComment.created_at)   
+    })
       } catch (error) {
         console.error('Database error getting, comments:', error)}
     return []
 }
   static isConfigured(): boolean {
     return isServiceConfigured('database')}
-}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}))))))))))))))))))))))))
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}

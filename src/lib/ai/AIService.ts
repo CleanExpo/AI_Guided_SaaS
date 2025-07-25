@@ -20,10 +20,12 @@ export class AIService {
   constructor(config: AIServiceConfig) {
     this.config = config;
     if (config.provider === 'openai' && config.apiKey) {
-      this.openai = new OpenAI({ apiKey: config.apiKey })
+      this.openai = new OpenAI({ apiKey: config.apiKey   
+    })
 }
     if (config.provider === 'anthropic' && config.apiKey) {
-      this.anthropic = new Anthropic({ apiKey: config.apiKey })}
+      this.anthropic = new Anthropic({ apiKey: config.apiKey
+    })}
   async generateResponse(prompt: string, systemPrompt? null : string): Promise { try {
       switch (this.config.provider) {
         case 'openai':
@@ -40,14 +42,16 @@ break
       // Fallback to local response if API fails
       return await this.generateFallbackResponse(prompt, systemPrompt)}
 }
-  private async generateOpenAIResponse(prompt: string, systemPrompt? null : string): Promise<any> {</any>
+  private async generateOpenAIResponse(prompt: string, systemPrompt? null : string): Promise<any> {
     if (!this.openai) {
       throw new Error('OpenAI client not initialized')};
     const messages = [];
     if (systemPrompt) {
-      messages.push({ role: 'system', content: systemPrompt })
+      messages.push({ role: 'system', content: systemPrompt   
+    })
 }
-    messages.push({ role: 'user', content: prompt });
+    messages.push({ role: 'user', content: prompt
+    });
     
 const completion  = await this.openai.chat.completions.create({ model: this.config.model || 'gpt-4-turbo-preview';
       messages,
@@ -69,7 +73,7 @@ const usage = completion.usage;
     provider: 'openai'
   }
 }
-  private async generateAnthropicResponse(prompt: string, systemPrompt? null : string): Promise<any> {</any>
+  private async generateAnthropicResponse(prompt: string, systemPrompt? null : string): Promise<any> {
     if (!this.anthropic) {
       throw new Error('Anthropic client not initialized')}
     const response  = await this.anthropic.messages.create({ model: this.config.model || 'claude-3-opus-20240229',
@@ -126,9 +130,9 @@ For now, I can provide basic assistance, with: - Component templates
   }
 }
   // Utility method to switch providers dynamically
-  async switchProvider(provider: AIServiceConfig['provider'], apiKey? null : string): Promise<any> {</any>
+  async switchProvider(provider: AIServiceConfig['provider'], apiKey? null : string): Promise<any> {
     this.config.provider = provider, if (provider === 'openai' && apiKey) {
-      this.config.apiKey = apiKey, this.openai = new OpenAI({ apiKey })
+      this.config.apiKey = apiKey, this.openai = new OpenAI({ apiKey    })
 }
     if (provider === 'anthropic' && apiKey) {
       this.config.apiKey = apiKey, this.anthropic = new Anthropic({ apiKey })}
@@ -137,4 +141,5 @@ For now, I can provide basic assistance, with: - Component templates
     return { ...this.config }}
   // Estimate token usage for a prompt
   estimateTokens(text: string): number { // Rough, estimation: 1 token ≈ 4 characters
-    return Math.ceil(text.length / 4) };))
+    return Math.ceil(text.length / 4)
+    }

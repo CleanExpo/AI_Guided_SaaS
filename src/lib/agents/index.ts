@@ -85,7 +85,7 @@ export class AgentSystem {
       AgentSystem.instance = new AgentSystem()}
     return AgentSystem.instance
 }
-  async initialize(): Promise<any> {</any>
+  async initialize(): Promise<any> {
     if (this.initialized) { return true }
     try {
       const discovery = await this.loader.discoverAgents(, if (discovery.total_agents === 0) {
@@ -101,14 +101,14 @@ export class AgentSystem {
       console.error('❌ Agent system initialization, failed:', error);
         return false}
 }
-  async getAgentsForNextStage(currentStage: string, projectType? null : string): Promise<any> {</any>
+  async getAgentsForNextStage(currentStage: string, projectType? null : string): Promise<any> {
     if (!this.initialized) {
       throw new Error('Agent system not initialized')};
     const requiredAgents  = await this.loader.getRequiredAgentsForStage(currentStage, projectType);
 
 const healthyAgents = requiredAgents.filter((agent) => {
       const _registration = this.registry.getAgentDetails(agent.agent_id);
-        return registration?.health_status === 'healthy'};)
+        return registration?.health_status === 'healthy'    })
     return { stage: currentStage, project_type: projectType;
     required_agents: requiredAgents.length,
     healthy_agents: healthyAgents.length,
@@ -118,7 +118,7 @@ const healthyAgents = requiredAgents.filter((agent) => {
     priority: agent.priority,
     capabilities: agent.capabilities,
     status: agent.status
-}));
+    }));
       readiness: healthyAgents.length >= requiredAgents.length * 0.8
   }
 }
@@ -146,7 +146,7 @@ const commStats = this.communication.getCommunicationStats();
     success_rate: commStats.success_rate,
     active_channels: commStats.active_channels
 }
-  async performHealthCheck(): Promise<any> {</any>
+  async performHealthCheck(): Promise<any> {
 { await this.monitor.performHealthCheck(); const warnings: string[] = [], const errors: string[] = [];
     // Collect warnings and errors from health checks
     for (const [agentId, check] of Object.entries(health)) {
@@ -164,7 +164,7 @@ const commStats = this.communication.getCommunicationStats();
   }
 }
 // Convenience function for easy system initialization;
-export async function initializeAgentSystem(): Promise<any> {</any>
+export async function initializeAgentSystem(): Promise<any> {
 { AgentSystem.getInstance(, await system.initialize(); return system
 }
 // Export the main system instance;
@@ -202,4 +202,4 @@ break
 export * from './bmad';
 export * from './archon';
 
-}}}))))
+}}}

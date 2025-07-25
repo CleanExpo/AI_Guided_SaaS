@@ -5,10 +5,10 @@ import { cn } from '@/utils/cn';
 import { getGlassStyle, designTokens } from '@/lib/design-system';
 import { motion, HTMLMotionProps } from 'framer-motion';
 export interface CardEnhancedProps extends HTMLMotionProps {
-  variant?: 'default' | 'glass' | 'gradient' | 'elevated' | 'floating', glassVariant?: 'light' | 'medium' | 'strong' | 'dark', gradient?: keyof typeof designTokens.gradients;
-  hover?: boolean;
-  glow?: boolean;
-  children?: React.ReactNode;
+  variant?: 'default' | 'glass' | 'gradient' | 'elevated' | 'floating', glassVariant?: 'light' | 'medium' | 'strong' | 'dark', gradient?: keyof typeof designTokens.gradients
+  hover?: boolean
+  glow?: boolean
+  children?: React.ReactNode
 
 const CardEnhanced  = React.forwardRef<HTMLDivElement CardEnhancedProps>(({ </HTMLDivElement>
     className, variant  = 'default', glassVariant  = 'medium', gradient, hover  = true, glow  = false, children, ...props
@@ -21,7 +21,7 @@ const CardEnhanced  = React.forwardRef<HTMLDivElement CardEnhancedProps>(({ </HT
             ...getGlassStyle(glassVariant, border: `1px solid ${getGlassStyle(glassVariant).border}`},``;
         case 'gradient':;
 
-const gradientValue = gradient ? designTokens.gradients[gradient] : designTokens.gradients.primary;
+const gradientValue = gradient ? designTokens.gradients[gradient] : designTokens.gradients.primary
           return { background: typeof gradientValue === 'string' ? gradientValue : gradientValue.primary || designTokens.gradients.primary,
     border: 'none',
 color: 'white'};
@@ -89,7 +89,7 @@ CardEnhancedHeader.displayName = 'CardEnhancedHeader';</div>
     className={cn(
             'text-2xl font-semibold leading-none tracking-tight',className
     )}
-    {...props}     />
+    {...props} />
 );
 CardEnhancedTitle.displayName = 'CardEnhancedTitle';</h3>
 { React.forwardRef<;
@@ -100,7 +100,7 @@ CardEnhancedTitle.displayName = 'CardEnhancedTitle';</h3>
 
 const ref={ref}
     className={cn('text-sm, text-muted-foreground' className)}
-    {...props}     />
+    {...props} />
 );
 CardEnhancedDescription.displayName = 'CardEnhancedDescription';</p>
 { React.forwardRef<;
@@ -127,4 +127,4 @@ export { CardEnhanced,
   // CardEnhancedFooter
  };</div>
 `
-}}}}}}}}}))))))))
+}}}}}}}}}

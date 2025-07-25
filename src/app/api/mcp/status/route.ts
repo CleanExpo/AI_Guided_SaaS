@@ -2,16 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = "force-dynamic";
 
-export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
+export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        const status={ status: 'operational',
-            timestamp: new Date().toISOString(, version: '1.0.0',
+        const status = { status: 'operational',
+            timestamp: new Date().toISOString(), version: '1.0.0',
             services: { context7: 'connected',
                 sequentialThinking: 'connected',
                 memory: 'operational',
                 fetch: 'operational'
-            }
-            connections: 5;
+            },
+            connections: 5,
             lastUpdate: new Date().toISOString()
         };
         
@@ -21,6 +21,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {</NextRe
         return NextResponse.json({ status: 'error',
             error: 'Failed to get MCP status',
             timestamp: new Date().toISOString()
-        }, { status: 500 })
+        }, { status: 500   
+    })
+    }
 }
-})

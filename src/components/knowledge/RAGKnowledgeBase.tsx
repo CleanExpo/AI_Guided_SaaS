@@ -17,7 +17,7 @@ projectId?: string,
   onSourceSelected? (source) => void
 };
 export function RAGKnowledgeBase({ projectId, onSourceSelected }: RAGKnowledgeBaseProps, onSourceSelected }: RAGKnowledgeBaseProps) {
-  const { toast    }: any  = useToast();
+  const { toast    }: any  = useToast()
 
 const {}
     query,
@@ -34,7 +34,7 @@ const {}
     // initialized
   } = useRAG({ provider: 'memory'
   // Use memory provider for demo, retrievalTopK: 5
-});
+    });
 
 const [searchQuery, setSearchQuery]  = useState<any>([])
 
@@ -72,13 +72,13 @@ const _loadStats = async () =>  {
 const _handleSearch = async () =>  { if (!searchQuery.trim() {)} return try {
       const response = await query(searchQuery, {;
     filters?: projectId { project: projectId  }; : undefined,
-    options: { topK: 10;
-includeScores: true }})
+    options: { topK: 10
+includeScores: true }    })
       setSearchResults(response.sources);
 if (response.sources.length === 0) {
         toast({ title: 'No Results',
   description: 'No matching documents found in the knowledge base'
-})} catch (err) {
+    })} catch (err) {
       console.error('Search, failed:', err)}
   // Add document manually;
 
@@ -87,15 +87,15 @@ const _handleAddDocument = async () =>  {
       toast({ title: 'Error',
         description: 'Please provide both title and content',
 variant: 'destructive'
-};);
+    });
       return null
 };
     try {
-      const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean, await addDocument(documentContent, { source: 'manual',;
-        title: documentTitle, type: documentType as any;
+      const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean, await addDocument(documentContent, { source: 'manual',
+        title: documentTitle, type: documentType as any
         tags,
-        project: projectId
-      })
+        project: projectId   
+    })
       // Clear form
       setDocumentContent('');
       setDocumentTitle('');
@@ -103,8 +103,8 @@ variant: 'destructive'
       // Reload stats
       await loadStats();
       toast({ title: 'Success',
-  description: 'Document added to knowledge base'
-      })
+  description: 'Document added to knowledge base'   
+    })
 } catch (err) {
       console.error('Failed to add, document:', err)}
   // Add from URL;
@@ -114,7 +114,7 @@ const _handleAddFromUrl = async () =>  {
       toast({ title: 'Error',
         description: 'Please provide a URL',
 variant: 'destructive'
-};);
+    });
       return null
 };
     try {
@@ -136,14 +136,13 @@ const _handleIngestCodebase = async () =>  {
       toast({ title: 'Error',
         description: 'Please provide a codebase path',
 variant: 'destructive'
-};);
+    });
       return null
 };
     try {
-      const result = await ingestCodebase(codebasePath, { project: projectId;
+      const result = await ingestCodebase(codebasePath, { project: projectId
 include: ['**/*.{js,jsx,ts,tsx,py,java,go}'],
-        exclude: ['**/node_modules/**', '**/dist/**']
-      })
+        exclude: ['**/node_modules/**', '**/dist/**']    })
       setCodebasePath('');
       await loadStats();
 if (result.errors.length > 0) {
@@ -189,9 +188,9 @@ break;
           <Input
 placeholder="Search knowledge base...";
 
-    value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</Input>
+    value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleSearch()}
-                className="pl-10" /></Input>
+                className="pl-10" />/>
         <Button onClick={handleSearch} disabled={loading}></Button>
                     Search
 </Button>
@@ -216,9 +215,9 @@ placeholder="Search knowledge base...";
                     <Label htmlFor="title">Title</Label>
                     <Input id="title";
 
-    value={documentTitle} onChange={(e) => setDocumentTitle(e.target.value)};</Input>
+    value={documentTitle} onChange={(e) => setDocumentTitle(e.target.value)};/>
                       placeholder="Document title";
-                    /></Input>
+                    />/>
                   <div className="space-y-2"    />
           <Label htmlFor="type">Type</Label>
                     <select id="type";
@@ -240,15 +239,14 @@ id="content";
 value={documentContent} onChange={(e) => setDocumentContent(e.target.value)};</Textarea>
                       placeholder="Enter document content...";
 
-    const rows={6}
-                    /></Textarea>
+    const rows={6/></Textarea>
                   <div className="space-y-2"    />
           <Label htmlFor="tags">Tags (comma-separated)</Label>
                     <Input id="tags";
 
-value={documentTags} onChange={(e) => setDocumentTags(e.target.value)};</Input>
+value={documentTags} onChange={(e) => setDocumentTags(e.target.value)};/>
                       placeholder="react, hooks, performance";
-                    /></Input>
+                    />/>
                   <Button
 
 onClick={handleAddDocument} disabled={loading};
@@ -261,11 +259,11 @@ onClick={handleAddDocument} disabled={loading};
                     <Label htmlFor="url">URL</Label>
                     <Input
 id="url";
-type="url";
+type="url"
 
-value={urlInput} onChange={(e) => setUrlInput(e.target.value)};</Input>
-                      placeholder="https://example.com/docs";
-                    /></Input>
+value={urlInput} onChange={(e) => setUrlInput(e.target.value)};/>
+                      placeholder="https: //example.com/docs"
+                    />/>
                   <Button
 
 onClick={handleAddFromUrl} disabled={loading};
@@ -278,7 +276,7 @@ onClick={handleAddFromUrl} disabled={loading};
                     <Label htmlFor="file">Upload File</Label>
                     <Input
 id="file";
-type="file";
+type="file"
 
     const onChange={handleFileUpload}
                       accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"     />
@@ -290,9 +288,9 @@ Supported: Text, Markdown, Code files</p>
                     <Input
 id="path";
 
-value={codebasePath} onChange={(e) => setCodebasePath(e.target.value)};</Input>
+value={codebasePath} onChange={(e) => setCodebasePath(e.target.value)};/>
                       placeholder="/path/to/codebase";
-                    /></Input>
+                    />/>
                   <Button
 
 onClick={handleIngestCodebase} disabled={loading};
@@ -323,8 +321,8 @@ onClick={handleIngestCodebase} disabled={loading};
                     <p className="text-sm text-muted-foreground mb-2">Top Topics</p>
                     <div className="flex flex-wrap gap-2">
                       {stats.topics.slice(0, 5).map((topic) => (\n    </div>
-                        <Badge key={topic.topic} variant="secondary"></Badge>
-                          {topic.topic} ({topic.count})</Badge>
+                        <Badge key={topic.topic} variant="secondary">/>
+                          {topic.topic} ({topic.count    })/>
                   ))}
                 )}
                 <div className="flex gap-2 pt-4"    />
@@ -339,16 +337,14 @@ variant="outline";
                   <Button size="sm";
 variant="outline";
 
-    const onClick={loadStats}
-                      />
+    const onClick={loadStats/>
           <RefreshCw className="h-4 w-4 mr-2"     />
                     Refresh
 </RefreshCw>
                   <Button size="sm";
 variant="destructive";
 
-const onClick={clearKnowledge}
-                      />
+const onClick={clearKnowledge/>
           <Trash2 className="h-4 w-4 mr-2"     />
                     Clear
 </Trash2>
@@ -383,7 +379,7 @@ const onClick={clearKnowledge}
                             {result.highlights?.[0] || result.content.substring(0, 150)}...</p>
                           <div className="flex items-center gap-4 mt-2"    />
           <Badge variant="outline", className="text-xs">
-                              {result.metadata.type}</Badge>
+                              {result.metadata.type}/>
                             {result.score  && (span className="text-xs text-muted-foreground">, Score: { (result.score * 100).toFixed(0) }%</span>
       )};
                         <ChevronRight className="h-4 w-4 text-muted-foreground"    />)) });</ChevronRight>
@@ -396,4 +392,4 @@ const onClick={clearKnowledge}
     </any>
   }
 
-}}}}}}}}}))))
+}}}}}}}}}

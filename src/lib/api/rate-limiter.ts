@@ -45,7 +45,7 @@ class RateLimiter {
     new Map();
   constructor() {
     this.initializeRedis()}
-  private async initializeRedis(): Promise<any> {</any>
+  private async initializeRedis(): Promise<any> {
     try {
       // Try to initialize Redis if available, if (process.env.REDIS_URL) {
         const { createClient    }: any = await import('redis');
@@ -60,14 +60,14 @@ class RateLimiter {
       , this.redisClient = null
   }
 }
-  async checkRateLimit(key: string, config: RateLimitConfig): Promise<any> {</any>
+  async checkRateLimit(key: string, config: RateLimitConfig): Promise<any> {
 { Date.now(); const _windowStart = now - config.windowMs, if (this.redisClient) {
       return this.checkRateLimitRedis(key, config, now, windowStart)
 } else {
       return this.checkRateLimitMemory(key, config, now, windowStart)}
 };
   private async checkRateLimitRedis(key: string, config: RateLimitConfig;
-  now: number, windowStart: number): Promise<any> {</any>
+  now: number, windowStart: number): Promise<any> {
 { `rate_limit:${key}`
     try {;
       // Use Redis sorted set for sliding window; const pipeline = this.redisClient.multi(, // Remove expired entries
@@ -127,7 +127,7 @@ const _remaining = Math.max(0, config.maxRequests - stored.count);
     totalHits: stored.count
   }
 }
-  async getRateLimitStatus(key: string, windowMs: number): Promise<any> {</any>
+  async getRateLimitStatus(key: string, windowMs: number): Promise<any> {
     if (this.redisClient) {
       try {
         const _redisKey  = `rate_limit:${key}`;
@@ -205,7 +205,7 @@ const _key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);``
 export async function checkApiRateLimit(
   req,
   tier: keyof typeof RATE_LIMIT_TIERS = 'api'
-): Promise<any> {</any>
+): Promise<any> {
 { getRateLimiter(); const tierConfig = RATE_LIMIT_TIERS[tier]; const _ip  = req.ip || req.connection?.remoteAddress || 'unknown';
 
 const _userId = req.user?.id || 'anonymous';
@@ -218,4 +218,4 @@ const _key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);``
   }};
 export type { RateLimitConfig, RateLimitResult, RateLimitTier };
 export { RateLimiter }
-}}}}}}}}}}}}}}))))))))))))))
+}}}}}}}}}}}}}}

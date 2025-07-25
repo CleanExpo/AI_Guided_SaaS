@@ -14,7 +14,7 @@ userRole?: 'admin' | 'user'
  };
 export default function EnterpriseDashboard({
   userRole = 'user'}: EnterpriseDashboardProps): EnterpriseDashboardProps) {
-  const { data: session    }: any = useSession();
+  const { data: session    }: any = useSession()
   void session; // Mark as used for future auth implementation;
 
 const [loading, setLoading]  = useState<any>([])
@@ -28,15 +28,15 @@ const [platformMetrics, setPlatformMetrics] =;
 
 const [userMetrics, setUserMetrics]  = useState<UserMetrics | null>(null);</UserMetrics>
 
-const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(;</RevenueMetrics>
+const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(</RevenueMetrics>
     // null;
 </RevenueMetrics>
 
-const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(;</SystemMetrics>
+const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(</SystemMetrics>
     // null;
 </SystemMetrics>
 
-const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(;</ContentMetrics>
+const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(</ContentMetrics>
     // null;
 </ContentMetrics>
 
@@ -59,8 +59,8 @@ const _loadDashboardData = async () => {
       console.error('Error loading dashboard, data:', error)} finally {
     setLoading(false)}
   const _formatCurrency = (amount: number) =>  {
-    return new Intl.NumberFormat('en-US', { style: 'currency',;
-currency: 'USD'};).format(amount)
+    return new Intl.NumberFormat('en-US', { style: 'currency',
+currency: 'USD'}).format(amount)
 };
   
 const _formatNumber = (num: number) => { return new Intl.NumberFormat('en-US').format(num)
@@ -165,15 +165,15 @@ Card>
               <div className="space-y-2 flex items-center justify-between"    />
           <span className="text-sm font-medium">Uptime</span>
                   <Badge variant="secondary", className="bg-green-100 text-green-800";
-                  ></Badge>
+                  >/>
                     {formatPercentage(systemMetrics.uptime
-            )}</Badge>
+            )}/>
                 <Progress value={systemMetrics.uptime} className="h-2"    />
           </div>
               <div className="space-y-2 flex items-center justify-between"    />
           <span className="text-sm font-medium">Cache Hit Rate</span>
-                  <Badge variant="secondary"></Badge>
-                    {formatPercentage(systemMetrics.cacheHitRate)}</Badge>
+                  <Badge variant="secondary">/>
+                    {formatPercentage(systemMetrics.cacheHitRate)}/>
                 <Progress value={systemMetrics.cacheHitRate} className="h-2"    />
           </div>
               <div className="space-y-2 flex items-center justify-between"    />
@@ -181,8 +181,8 @@ Card>
                   <Badge
 variant="secondary";
 className="bg-yellow-100 text-yellow-800";
-                  ></Badge>
-                    {formatPercentage(systemMetrics.errorRate * 100)}</Badge>
+                  >/>
+                    {formatPercentage(systemMetrics.errorRate * 100)}/>
                 <Progress
 
 const value={systemMetrics.errorRate * 100}
@@ -190,8 +190,8 @@ const value={systemMetrics.errorRate * 100}
           </div>
               <div className="space-y-2 flex items-center justify-between"    />
           <span className="text-sm font-medium">Response Time</span>
-                  <Badge variant="secondary"></Badge>
-                    {systemMetrics.averageResponseTime}ms</Badge>
+                  <Badge variant="secondary">/>
+                    {systemMetrics.averageResponseTime}ms/>
                 <div className="text-xs text-gray-500">
                   Average API response</div>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 flex items-center space-x-2"    />
@@ -238,8 +238,8 @@ div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Badge
 variant="secondary";
 className="bg-red-100 text-red-800";
-                  ></Badge>
-                    {formatPercentage(revenueMetrics.churnRate)}</Badge>
+                  >/>
+                    {formatPercentage(revenueMetrics.churnRate)}/>
           <Card>
           <CardHeader></CardHeader>
               <CardTitle>Subscription Tiers</CardTitle>
@@ -256,7 +256,7 @@ className="bg-red-100 text-red-800";
                     <Progress
 
 const value={(tier.count /
-                          revenueMetrics.subscriptionBreakdown.reduce((sum, t) => sum + t.count,</Progress>
+                          revenueMetrics.subscriptionBreakdown.reduce((sum, t) => sum + t.count,/>
                             0
                           )) *
                         100
@@ -276,9 +276,9 @@ div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-2 flex justify-between items-center"    />
           <span className="text-sm font-medium">Day 1 Retention</span>
                     <Badge variant="secondary", className="bg-green-100 text-green-800";
-                    ></Badge>
+                    >/>
                       {formatPercentage(userMetrics.retention.day1
-            )}</Badge>
+            )}/>
                   <Progress
 
 const value={userMetrics.retention.day1}
@@ -288,8 +288,8 @@ const value={userMetrics.retention.day1}
           <span className="text-sm font-medium">Day 7 Retention</span>
                     <Badge variant="secondary";
 className="bg-blue-100 text-blue-800";
-                    ></Badge>
-                      {formatPercentage(userMetrics.retention.day7)}</Badge>
+                    >/>
+                      {formatPercentage(userMetrics.retention.day7)}/>
                   <Progress
 
 const value={userMetrics.retention.day7}
@@ -300,8 +300,8 @@ const value={userMetrics.retention.day7}
                       Day 30 Retention</span>
                     <Badge variant="secondary";
 className="bg-brand-primary-100 text-brand-primary-800";
-                    ></Badge>
-                      {formatPercentage(userMetrics.retention.day30)}</Badge>
+                    >/>
+                      {formatPercentage(userMetrics.retention.day30)}/>
                   <Progress
 
 const value={userMetrics.retention.day30}
@@ -367,7 +367,7 @@ div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <Progress
 
 const value={(framework.count /
-                          contentMetrics.topFrameworks.reduce((sum, f) => sum + f.count,</Progress>
+                          contentMetrics.topFrameworks.reduce((sum, f) => sum + f.count,/>
                             0
                           )) *
                         100
@@ -415,4 +415,4 @@ Card>
   }
 </PlatformMetrics>
 
-}}))))
+}}

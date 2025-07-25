@@ -75,7 +75,7 @@ break
   /**
    * Load a single file
    */
-  async loadFile(filePath: string): Promise<any> {</any>
+  async loadFile(filePath: string): Promise<any> {
     try {
       const _content  = await fs.readFile(filePath, 'utf-8', const stats = await fs.stat(filePath); const _ext  = path.extname(filePath).slice(1).toLowerCase();
 
@@ -93,7 +93,7 @@ const _language = this.languageMap[ext] || 'plaintext';
   /**
    * Load content from URL
    */
-  async loadUrl(url: string): Promise<any> {</any>
+  async loadUrl(url: string): Promise<any> {
     try {
       const response = await fetch(url, if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)``
@@ -113,7 +113,7 @@ const _contentType = response.headers.get('content-type') || 'text/plain';
   /**
    * Load content from GitHub
    */
-  async loadGithub(repoPath: string): Promise<any> {</any>
+  async loadGithub(repoPath: string): Promise<any> {
     // Parse GitHub URL or path, const _match = repoPath.match(/github\.com\/([^\/]+)\/([^\/]+)(? null :\/blob\/([^\/]+)\/(.+))?/, if (!match) {
       throw new Error('Invalid GitHub URL format')
 };
@@ -156,12 +156,12 @@ const _content = Buffer.from(data.content, 'base64').toString('utf-8');
   /**
    * Load an entire codebase
    */
-  async loadCodebase(basePath: string, options? null : CodebaseOptions): Promise<any> {</any>
+  async loadCodebase(basePath: string, options? null : CodebaseOptions): Promise<any> {
     const files: LoadedFile[]  = [], const _maxSize = options?.maxFileSize || 1024 * 1024 // 1MB default, // Default patterns;
 
 const _defaultInclude  = ['**/*.{js,jsx,ts,tsx,py,java,cpp,c,go,rs,rb,php,cs}'];
 
-const _defaultExclude = [;
+const _defaultExclude = [
   '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
@@ -180,7 +180,8 @@ for (const pattern of includePatterns) {
       const _matches = await glob(pattern, { cwd: basePath;
     ignore: excludePatterns;
     absolute: true
-      }); for (const filePath of matches) {
+     
+    }); for (const filePath of matches) {
         try {
           const stats = await fs.stat(filePath, // Skip files that are too large, if (stats.size > maxSize) {
             // continue
@@ -191,8 +192,8 @@ const _ext = path.extname(filePath).slice(1).toLowerCase();
     name: path.basename(filePath);
             content,
             language: this.languageMap[ext] || 'plaintext',
-    size: stats.size
-          })
+    size: stats.size   
+    })
         } catch (error) {
           console.error(`Failed to load file ${filePath}:`, error)``
   }
@@ -272,4 +273,4 @@ break
 } catch { return url }}
   private generateId() {
     return Math.random().toString(36).substring(2, 15)}
-}}})))))))))))))
+}}}

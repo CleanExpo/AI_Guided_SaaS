@@ -10,15 +10,15 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Shield, AlertTriangle, CheckCircle2, XCircle, RefreshCw, Zap, Activity, Settings, Info } from 'lucide-react';
 interface EPCStatus { env_check: 'pass' | 'fail' | 'warning',
-  score: number;
-  issues: string[];
+  score: number
+  issues: string[]
   recommendations?: string[]
 };
-interface TelemetryStats { totalInferences: number;
-  blocked: number;
-  failed: number;
-  successful: number;
-  averageDuration: number;
+interface TelemetryStats { totalInferences: number
+  blocked: number
+  failed: number
+  successful: number
+  averageDuration: number
   totalCost: number
  };
 export function InferenceSafeMode() {
@@ -56,9 +56,10 @@ const _fetchStats = async () => {
 
 const _runHealing = async () =>  {
     setHealingInProgress(true, try {
-      const response = await fetch('/api/admin/auth', { method: 'POST',;
+      const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ autoApprove: autoHeal })};
+        body: JSON.stringify({ autoApprove: autoHeal
+    })};
       
 const result = await response.json();
       // Show results;
@@ -94,11 +95,9 @@ break
       return ', break;
 default';
     break;
-      case 'warning':
-      return 'secondary';
+      case 'warning': return 'secondary'
     break;
-      case 'fail':
-      return 'destructive';
+      case 'fail': return 'destructive'
     break
     break
 }
@@ -129,14 +128,13 @@ checked={enabled} onCheckedChange={setEnabled}
                   <p className="text-sm text-muted-foreground">
                     {status?.score ? `${status.score}% confidence` : 'Checking...'}``</p>
               <div className="flex items-center gap-2"    />
-          <Badge variant={getStatusColor()}></Badge>
-                  {status?.env_check || 'Unknown'}</Badge>
+          <Badge variant={getStatusColor()}>/>
+                  {status?.env_check || 'Unknown'}/>
                 <Button variant="outline";
 size="sm";
 
-    onClick={checkEnvironment} disabled={checking}
-                    />
-          <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`}    />``</RefreshCw>
+    onClick={checkEnvironment} disabled={checking/>
+          <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`/>``</RefreshCw>
             {/* Issues, Display */},
     {status?.issues && status.issues.length > 0  && (Alert></Alert>
                 <AlertTriangle className="h-4 w-4"    />
@@ -160,7 +158,7 @@ li>...and {status.issues.length - 3} more</li>
                   Auto-heal environment issues</Zap>
                 <Switch id="auto-heal";
 
-    checked={autoHeal} onCheckedChange={setAutoHeal}      />
+    checked={autoHeal} onCheckedChange={setAutoHeal/>
               {status?.issues && status.issues.length > 0  && (Button; onClick={runHealing} disabled={healingInProgress};
                   className="w-full";
 
@@ -205,7 +203,7 @@ li>...and {status.issues.length - 3} more</li>
                 <Progress
 
 const value={(stats.successful / stats.totalInferences) * 100}
-                  className="h-2"   />)}</Progress>
+                  className="h-2"   />)}/>
       )},
     {/* Info, Card */
 </div>
@@ -229,4 +227,4 @@ const value={(stats.successful / stats.totalInferences) * 100}
               <p></p>
                 Enable Auto-heal to automatically fix common issues like missing
                 API keys or outdated configurations.</p>
-}}}}))))
+}}}}

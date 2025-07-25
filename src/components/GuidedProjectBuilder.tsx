@@ -10,32 +10,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ArrowRight, ArrowLeft, CheckCircle, Target, Code, Palette, Database, Rocket, MessageSquare, Loader2, Lightbulb } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { useChat } from 'ai/react';
-interface Step { id: string;
-  title: string;
-  description: string;
+interface Step { id: string
+  title: string
+  description: string
   icon: React.ElementType
 e,
-  fields: Field[];
+  fields: Field[]
   helper?: string
 };
-interface Field { name: string;
-  label: string;
-  type: 'text' | 'textarea' | 'select' | 'multiselect' | 'radio';
+interface Field { name: string
+  label: string
+  type: 'text' | 'textarea' | 'select' | 'multiselect' | 'radio'
   placeholder?: string,
-  options? null: { value: string;
+  options? null: { value: string
   label: string
 }[]
-  required?: boolean;
+  required?: boolean
   validation? (value): string | null
 };
-interface GuidedProjectBuilderProps { onComplete: (projectData: any: any) => void;
+interface GuidedProjectBuilderProps { onComplete: (projectData: any: any) => void
   initialData?: any
 }
-const steps: Step[]  = [;
+const steps: Step[]  = [
   { id: 'project-type',
     title: 'What would you like to build?',
     description: 'Let\'s start with understanding your vision',
-  icon: Target;
+  icon: Target
     fields: [
       { name: 'projectType',
         label: 'Project Type',
@@ -52,7 +52,7 @@ const steps: Step[]  = [;
         label: 'Project Name',
         type: 'text',
         placeholder: 'My Awesome Project',
-        required: true;
+        required: true
     validation: (value) => {
           if (!value || value.length < 3) {r}eturn 'Project name must be at least 3 characters'; return null
 }
@@ -63,13 +63,13 @@ const steps: Step[]  = [;
   { id: 'requirements',
     title: 'Describe your project',
     description: 'Tell us about your idea in natural language',
-  icon: MessageSquare;
+  icon: MessageSquare
     fields: [
       { name: 'description',
         label: 'Project Description',
         type: 'textarea',
         placeholder: 'I want to build a platform where users can...',
-        required: true;
+        required: true
     validation: (value) => {
           if (!value || value.length < 50) {r}eturn 'Please provide at least 50 characters to describe your project'; return null },
       { name: 'targetAudience',
@@ -84,7 +84,7 @@ placeholder: 'Small businesses, students, developers...',
   { id: 'features',
     title: 'Core features & functionality',
     description: 'What key features should your project have?',
-  icon: Code;
+  icon: Code
     fields: [
       { name: 'features',
         label: 'Key Features',
@@ -109,7 +109,7 @@ placeholder: 'Any specific features not listed above...'
   } { id: 'design',
     title: 'Design preferences',
     description: 'How should your project look and feel?',
-  icon: Palette;
+  icon: Palette
     fields: [
       { name: 'designStyle',
         label: 'Design Style',
@@ -139,7 +139,7 @@ placeholder: 'Any specific features not listed above...'
   } { id: 'technical',
     title: 'Technical preferences',
     description: 'Any specific technical requirements?',
-  icon: Database;
+  icon: Database
     fields: [
       { name: 'hostingPreference',
         label: 'Hosting Preference',
@@ -201,8 +201,8 @@ const _validateStep = (): void => { const stepErrors: Record<string string> = { 
       setCurrentStep(prev => prev + 1, // Get AI suggestions for next step
       await getAiSuggestions()}
   const _handleBack = (): void => { if (currentStep > 0) {
-      setCurrentStep(prev => prev - 1, setErrors({};)}
-  const _handleFieldChange = (fieldName: string, value) => { setFormData((prev) => ({ ...prev, [fieldName]: value  };));
+      setCurrentStep(prev => prev - 1, setErrors({})}
+  const _handleFieldChange = (fieldName: string, value) => { setFormData((prev) => ({ ...prev, [fieldName]: value  }));
     // Clear error for this field;
 if (errors[fieldName]) {
       setErrors(prev => ({ ...prev, [fieldName]: '' }))}
@@ -269,14 +269,12 @@ key={currentStep} initial={{ opacity: 0, x: 20 }
                     {field.label}</label>
                     {field.required && <span className="text-red-500 ml-1">*</span>
                   {field.type === 'text'  && (Input; value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}
-                      placeholder={field.placeholder} className={cn(errors[field.name] && 'border-red-500')}
-                    />
+                      placeholder={field.placeholder} className={cn(errors[field.name] && 'border-red-500')/>
                   )},
     {field.type = == 'textarea'  && (/Input>
                     <Textarea value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}</Textarea>
 {{field.placeholder}
-                      rows={4} className={cn(errors[field.name] && 'border-red-500')}
-                    />
+                      rows={4} className={cn(errors[field.name] && 'border-red-500')/>
                   )},
     {field.type = == 'radio'  && (/Textarea>
                     <div className="grid grid-cols-2 gap-3">
@@ -287,13 +285,13 @@ key={currentStep} initial={{ opacity: 0, x: 20 }
                               : "border-border, hover:border-primary/50"
                           )}
                         >
-          <input type="radio";
+          <input type="radio"
 
 name={field.name} value={option.value}
                             checked={formData[field.name] === option.value} onChange={() =    /> handleFieldChange(field.name, option.value)}</input>
                             className="sr-only" /></input>
         <span className="text-sm font-medium">{option.label}</span>))}
-                  )},;
+                  )},
     {field.type = == 'select'  && (select; value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}
                       const className={cn(
             'w-full p-2 border rounded-md',errors[field.name] && 'border-red-500'
@@ -303,14 +301,14 @@ name={field.name} value={option.value}
                           {option.label}</option>
                       ))}
 </select>
-                  )},;
+                  )},
     {field.type = == 'multiselect'  && (div className="grid grid-cols-2 gap-3">{field.options?.map((option) => (\n    </div>
                         <label; key={option.value} className={cn(`
                             "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors" formData[field.name]?.includes(option.value, ? "border-primary bg-primary/5"
                               : "border-border, hover:border-primary/50"
                           )}
                         >
-          <input type="checkbox";
+          <input type="checkbox"
 
     value={ option.value} checked={formData[field.name]?.includes(option.value) || false}
                             const onChange={(e) =    /> {</input>
@@ -367,4 +365,4 @@ onClick={handleNext} disabled={isProcessing || isLoading}
     );
 </div>
 
-}}}}}}}}}}}}}}}}}))))))))
+}}}}}}}}}}}}}}}}}

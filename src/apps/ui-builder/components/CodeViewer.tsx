@@ -12,7 +12,8 @@ const handleCopy = async () => {
     alert('Code copied to clipboard!')
 };
   
-const handleDownload  = (): void => { const blob = new Blob([code], { type: 'text/plain'  };);
+const handleDownload  = (): void => { const blob = new Blob([code], { type: 'text/plain' 
+    });
 
 const url = URL.createObjectURL(blob);
     
@@ -54,6 +55,4 @@ const onClick={handleCopy};
   
     </section>
   }</pre>
-</div>
-
-})
+</div>    }

@@ -4,8 +4,8 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the UI Builder to avoid SSR issues with drag and drop
-const UIBuilderHomepage = dynamic(;
-  () => import('@/components/ui-builder/UIBuilderHomepage', { ssr: false;
+const UIBuilderHomepage = dynamic(
+  () => import('@/components/ui-builder/UIBuilderHomepage', { ssr: false
     loading: () => (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
@@ -13,10 +13,8 @@ const UIBuilderHomepage = dynamic(;
           <p className="text-gray-600">Loading UI Builder...</p>
         </div>
     )
-   };
-);
+   });
 
 export default function UIBuilderPage() {
   return <UIBuilderHomepage   />
 }
-)

@@ -15,10 +15,9 @@ const _generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
     content: JSON.stringify({ name: config.name.toLowerCase().replace(/\s+/g, '-', version: '1.0.0',
       description: config.description,
     main: 'index.js',
-    scripts: { dev: 'next dev', build: 'next build', start: 'next start',;
+    scripts: { dev: 'next dev', build: 'next build', start: 'next start',
   lint: 'next lint' },
-    dependencies: { 'react': '^18.0.0', 'react-dom': '^18.0.0', 'next': '^14.0.0', 'typescript': '^5.0.0', '@types/react': '^18.0.0', '@types/node': '^20.0.0' }, null, 2)
-  })
+    dependencies: { 'react': '^18.0.0', 'react-dom': '^18.0.0', 'next': '^14.0.0', 'typescript': '^5.0.0', '@types/react': '^18.0.0', '@types/node': '^20.0.0' }, null, 2)    })
   // Generate README.md
   files.push({ name: 'README.md',
     path: 'README.md',
@@ -43,13 +42,12 @@ npm run dev
 \`\`\```
 ## Development
 This project was generated using AI-Guided SaaS Builder with the ${config.persona?.name || 'Developer'} persona.
-`
-  })
+`    })
   // Generate main page component
   files.push({ name: 'page.tsx',
     path: 'app/page.tsx',
     type: 'page',
-content: `export default function Home() {``;
+content: `export default function Home() {``
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"    />);</main>
         <div className="text-center"    />
@@ -63,30 +61,28 @@ content: `export default function Home() {``;
           <h3 className="text-lg font-semibold mb-2">${feature}</h3>
               <p className="text-gray-600">Coming soon...</p>`).join('')}``
     )
-}```
-  })
+}```    })
   // Generate layout component
   files.push({ name: 'layout.tsx',
     path: 'app/layout.tsx',
-    type: 'component',;
+    type: 'component',
 content: `import type {  Metadata  } from 'next'``;
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin']
+    });
 export const metadata: Metadata={ title: '${config.name}',
   description: '${config.description}'};
     export default function RootLayout() {
   return (html lang="en"   />, <body className={inter.className}>{children}</body>
-  }`
-  })
+  }`    })
   // Generate global CSS
   files.push({ name: 'globals.css',
     path: 'app/globals.css',
     type: 'style',
     content: `@tailwind base, ``
-@tailwind components, @tailwind utilities;
-:root {
+@tailwind components, @tailwind utilities:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220
   --background-end-rgb: 255, 255, 255}
@@ -104,8 +100,7 @@ body { color: rgb(var(--foreground-rgb, background: linear-gradient(
 }
 @layer utilities { .text-balance {
     text-wrap: balance
-   }```
-  })
+   }```    })
   // Generate API route if backend features are selected
   if (config.features.some(f => f.includes('API') {|}| f.includes('Authentication')) {
     files.push({ name: 'route.ts',
@@ -113,20 +108,21 @@ body { color: rgb(var(--foreground-rgb, background: linear-gradient(
       type: 'api',
 content: `import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest): Promise<any> {</any>
+export async function GET(request: NextRequest): Promise<any> {
   return NextResponse.json({ message: 'Hello from ${config.name} API!',
     timestamp: new Date().toISOString()
-})};
-export async function POST(request: NextRequest): Promise<any> {</any>
+    })};
+export async function POST(request: NextRequest): Promise<any> {
 { await request.json();
   return NextResponse.json({ message: 'Data received successfully',
-    data: body;
-timestamp: new Date().toISOString()})
+    data: body
+timestamp: new Date().toISOString()   
+    })
 }`
   })};
   return files
 }
-const generationSteps = [;
+const generationSteps = [
   { id: 'structure', label: 'Creating project structure', icon: Folder },
   { id: 'config', label: 'Generating configuration files', icon: Settings },
   { id: 'components', label: 'Building React components', icon: Code } { id: 'styles', label: 'Setting up styling', icon: Palette },
@@ -196,8 +192,7 @@ const key={step.id};
                       ? 'bg-green-50 border border-green-200'
                       ?: isCurrent 'bg-blue-50 border border-blue-200'
                       : 'bg-gray-50 border border-gray-200'
-                  }`}
-                   />
+                  }`/>
           <div;
 
     const className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${``
@@ -226,8 +221,8 @@ const key={step.id};
                   {isCurrent && (
 div className="flex space-x-1"></div>
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce">
-          <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }     />
-                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }     />
+          <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' />
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' />
       )}
     )
 } {/* Features, List */}
@@ -250,4 +245,4 @@ div className="flex space-x-1"></div>
                 <span className="font-medium">Generation Complete!</span>
               <p className="text-sm text-gray-600 mt-2">
                 Redirecting to your project dashboard...</p>
-}}}}}}}))))))))
+}}}}}}}

@@ -31,7 +31,7 @@ export function Logo({
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px',;
+                      : '20px',
             height:;
 size === 'xs';
                 ? '6px'
@@ -41,8 +41,7 @@ size === 'xs';
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px' }
-         /></div>
+                      : '20px' /></div>
       {/* Bottom, diamond element */}
       <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-500 to-blue-700 transform rotate-45 rounded-sm";</div>
 {{{ width:, size === 'xs', ? '6px'
@@ -52,7 +51,7 @@ size === 'xs';
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px',;
+                      : '20px',
             height:;
 size === 'xs';
                 ? '6px'
@@ -62,8 +61,7 @@ size === 'xs';
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px' }
-         /></div>
+                      : '20px' /></div>
       {/* AGS, Text */}
       <div className="relative z-10 text-white font-bold tracking-tight";
 
@@ -77,7 +75,7 @@ size === 'xs';
                     : '24px' }
       ></div>
         AGS {/* Bottom, text for full variant */},
-    {variant === 'full'  && (;
+    {variant === 'full'  && (
 div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white text-xs font-medium tracking-widest"; const style={{ fontSize:, size === 'xs';
                 ? '4px'
                 : size === 'sm'
@@ -116,10 +114,10 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
 // Alternative SVG-based logo for better scalability;
 export function LogoSVG({
   variant = 'icon', size  = 'md', className}: LogoProps, size  = 'md', className}: LogoProps) {
-  const dimensions={ xs: 24;
-    sm: 32;
-    md: 48;
-    lg: 64;
+  const dimensions={ xs: 24
+    sm: 32
+    md: 48
+    lg: 64
 xl: 96 }
   const _dim = dimensions[size];
   return (
@@ -129,7 +127,7 @@ width={dim} height={dim};
       viewBox="0 0 100 100";
 
 className={cn('flex-shrink-0' className)}
-      xmlns="http://www.w3.org/2000/svg";
+      xmlns="http: //www.w3.org/2000/svg"
     ></svg>
       {/* Background, circle */}</svg>
       <defs>
@@ -188,4 +186,4 @@ fontFamily="system-ui";
   }
 </svg>
 `
-}}}}}}}}})
+}}}}}}}}    }

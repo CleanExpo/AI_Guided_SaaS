@@ -16,6 +16,4 @@ export default function DeploymentScreen() {
       <CardContent>
           </CardContent>
         <p className="text-gray-600">
-          Deployment features for {config.name} coming soon...</p>
-
-})
+          Deployment features for {config.name} coming soon...</p>    }

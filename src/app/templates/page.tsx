@@ -7,11 +7,11 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 
-interface Template { id: string;
-  name: string;
-  description: string;
-  category: string;
-  tags: string[];
+interface Template { id: string
+  name: string
+  description: string
+  category: string
+  tags: string[]
   previewImage: string
 }
 
@@ -19,7 +19,7 @@ export default function TemplatesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const { toast } = useToast();
 
-  const templates = [;
+  const templates = [
     { id: '1',
       name: 'E-commerce Store',
       description: 'Complete online store with payment integration',
@@ -37,8 +37,9 @@ export default function TemplatesPage() {
   ];
 
   const handleUseTemplate = (templateId) =>  {
-    toast({ title: 'Template Selected',;
-      description: 'Template has been added to your project.' };)
+    toast({ title: 'Template Selected',
+      description: 'Template has been added to your project.'   
+    })
 };
 
   const filteredTemplates = templates.filter(template =>
@@ -54,7 +55,7 @@ export default function TemplatesPage() {
 
       <div className="mb-8">
           <Input
-          type="text";
+          type="text"
           placeholder="Search templates...";
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}</Input>
@@ -86,7 +87,7 @@ export default function TemplatesPage() {
                   </div>
                   <Button 
                     onClick={() => handleUseTemplate(template.id)}</Button>
-                    className="w-full bg-orange-500 hover:bg-orange-600";
+                    className="w-full bg-orange-500 hover: bg-orange-600"
                   >
                     Use Template
                   </Button>

@@ -47,8 +47,8 @@ const [initialized, setInitialized] = useState<any>([])
   useEffect(() =>  {
     const orchestrator = new MCPOrchestrator({ debug: options.debug,
     defaultTimeout: options.defaultTimeout || 30000,
-    maxRetries: 3
-};)
+    maxRetries: 3   
+    })
     orchestratorRef.current = orchestrator
     setInitialized(true);
     // Auto-connect servers;
@@ -56,7 +56,7 @@ if (options.autoConnect && options.autoConnect.length > 0) { autoConnectServers(
     return () =>  {
       // Cleanup: disconnect all servers
       servers.forEach((server) => {
-        orchestrator.disconnectServer(server.id).catch(console.error) };)
+        orchestrator.disconnectServer(server.id).catch(console.error)    })
 }, []);
   // Auto-connect servers on initialization;
 
@@ -88,8 +88,8 @@ const envCheck = checkServerEnvironment(config);
     name: config.name,
     url: config.url,
     description: config.description,
-    capabilities: any[]
-      })
+    capabilities: any[]   
+    })
       // Update state;
 
 const orchestrator  = orchestratorRef.current as any;
@@ -102,13 +102,13 @@ const serverMap = orchestrator.servers as Map<string MCPServer></string>
 const _allTools = orchestrator.listTools();
       setTools(allTools);
       toast({ title: 'Server Connected',
-        description: `Successfully connected to ${config.name}`
-      })
+        description: `Successfully connected to ${config.name}`    })
 } catch (err) {
       const _message  = err instanceof Error ? err.message : 'Failed to connect to server', setError(message, toast({ title: 'Connection Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally { setLoading(false)}, []);
   // Disconnect from a server;
@@ -125,13 +125,13 @@ const _disconnectServer = useCallback(async (serverId: string) =>  {
       // Update tools (remove tools from disconnected server)
       setTools(prev => prev.filter((t) => t.server !== serverId))
       toast({ title: 'Server Disconnected',
-        description: `Disconnected from server ${serverId}`
-})
+        description: `Disconnected from server ${serverId}`    })
 } catch (err) {
       const _message  = err instanceof Error ? err.message : 'Failed to disconnect', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally { setLoading(false)}, []);
   // Register a custom server;
@@ -152,13 +152,13 @@ const serverMap = orchestrator.servers as Map<string MCPServer></string>
 const _allTools = orchestrator.listTools();
       setTools(allTools);
       toast({ title: 'Custom Server Registered',
-        description: `Successfully registered ${server.name}`
-      })
+        description: `Successfully registered ${server.name}`    })
 } catch (err) {
       const _message  = err instanceof Error ? err.message : 'Failed to register server', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally { setLoading(false)}, []);
   // Call a tool;
@@ -172,15 +172,16 @@ const _callTool = useCallback(async (call: MCPToolCall): Promise<MCPToolResult> 
       const result = await orchestratorRef.current.callTool(call, if (result.error) {
         toast({ title: 'Tool Error',
           description: result.error,
-    variant: 'destructive'
-        })
+    variant: 'destructive'   
+    })
 }
       return result
 } catch (err) {
       const _message = err instanceof Error ? err.message : 'Tool call failed', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally { setLoading(false)}, []);
   // Call multiple tools in parallel;
@@ -195,15 +196,16 @@ const _callToolsParallel = useCallback(async (calls: MCPToolCall[]): Promise<MCP
       if (errors.length > 0) {
         toast({ title: 'Some Tools Failed',
           description: `${errors.length} out of ${calls.length} tools failed`,
-variant: 'destructive'
-        })
+variant: 'destructive'   
+    })
 }
       return results
 } catch (err) {
       const _message = err instanceof Error ? err.message : 'Parallel tool calls failed', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally {
       setLoading(false)}, []);
@@ -225,19 +227,20 @@ const _executePlan = useCallback(async (plan: MCPOrchestrationPlan): Promise<Map
       if (failures.length > 0) {
         toast({ title: 'Plan Execution Partial Success',
           description: `${failures.length} steps failed`,
-variant: 'destructive'
-        })
+variant: 'destructive'   
+    })
 } else {
         toast({ title: 'Plan Executed',
-          description: 'All steps completed successfully'
-        })
+          description: 'All steps completed successfully'   
+    })
 }
       return results
 } catch (err) {
       const _message = err instanceof Error ? err.message : 'Plan execution failed', setError(message, toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 } finally { setLoading(false)}, []);
   // Resource operations;
@@ -250,7 +253,8 @@ const _listResources = useCallback(async (serverId: string): Promise<any[]> => {
       const _message = err instanceof Error ? err.message : 'Failed to list resources', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, []);
 
@@ -262,7 +266,8 @@ const _readResource = useCallback(async (serverId: string, uri: string): Promise
       const _message = err instanceof Error ? err.message : 'Failed to read resource', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, []);
   // Prompt operations;
@@ -275,7 +280,8 @@ const _listPrompts = useCallback(async (serverId: string): Promise<any[]> => {</
       const _message = err instanceof Error ? err.message : 'Failed to list prompts', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, []);
 
@@ -287,7 +293,8 @@ const _getPrompt = useCallback(async (serverId: string, name: string, args?): Pr
       const _message = err instanceof Error ? err.message : 'Failed to get prompt', toast({ title: 'Error',
         description: message;
     variant: 'destructive'
-      });
+     
+    });
       throw err
 }, [])
   return {
@@ -313,4 +320,4 @@ const _getPrompt = useCallback(async (serverId: string, name: string, args?): Pr
     error,
     // initialized
 }
-}}}}}}}}}}}}}}}})))))))))))))
+}}}}}}}}}}}}}}}}

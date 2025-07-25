@@ -37,7 +37,7 @@ export class ClientRequirementsProcessor {
       const _templatePath = path.join(process.cwd(, 'prp_templates', 'ClientSpecExtraction.prp'), this.extractionTemplate = readFileSync(templatePath, 'utf-8')
 } catch (error) {
       console.error('Failed to load ClientSpecExtraction.prp, template:', error, this.extractionTemplate = this.getDefaultTemplate()}
-  async processClientInput(input: string): Promise<any> {</any>
+  async processClientInput(input: string): Promise<any> {
     // Extract requirements using AI; const requirements = await this.extractRequirements(input); // Generate development roadmap;
 
 const roadmap = await this.generateRoadmap(requirements, input);
@@ -74,7 +74,7 @@ Focus on, identifying:
 
 const response = await this.aiService.generateResponse({ message: prompt;
     persona: 'architect',
-      context: 'requirement_extraction'
+      context: 'requirement_extraction'   
     })
     try {
       const parsed = JSON.parse(response.message);
@@ -88,6 +88,7 @@ category: this.validateCategory(req.category, description: req.description || 'N
     priority: this.validatePriority(req.priority),
     agents: this.determineAgents(req, keywords: req.keywords || this.extractKeywords(req.description),
     constraints: req.constraints || []
+   
     }))
 }
   private validateCategory(category: string): ExtractedRequirement['category'] {
@@ -122,7 +123,7 @@ if (agents.size === 0) {
       .filter((word) => word.length > 3 && !stopWords.has(word))
       .slice(0, 5)
 }
-  private async generateRoadmap(requirements: ExtractedRequirement[], originalInput: string): Promise<any> {</any>
+  private async generateRoadmap(requirements: ExtractedRequirement[], originalInput: string): Promise<any> {
     // Determine project complexity, const _complexity = this.determineComplexity(requirements); // Group requirements by phase;
 
 const phases = this.createPhases(requirements, complexity);
@@ -171,8 +172,8 @@ requirements: ExtractedRequirement[],
    ],
         dependencies: [],
     duration: complexity === 'enterprise' ? '2 weeks' : '1 week',
-        parallel: false
-      })
+        parallel: false   
+    })
 }
     // Phase, 2: Core Development;
 
@@ -186,6 +187,7 @@ const coreAgents = new Set<string>();</string>
         .filter((req) => req.priority === 'high')
         .map((req) => req.description, dependencies: complexity !== 'simple' ? ['phase_1'] : any[],
     duration: this.estimatePhaseDuration(requirements.filter((req) => req.priority === 'high', parallel: coreAgents.size > 1
+   
     });
     // Phase, 3: Feature Development;
 
@@ -195,8 +197,8 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
         name: 'Feature Development',
         agents: Array.from(new Set(featureReqs.flatMap(req => req.agents), tasks: featureReqs.map((req) => req.description, dependencies: ['phase_2'],
     duration: this.estimatePhaseDuration(featureReqs),
-    parallel: true
-      })
+    parallel: true   
+    })
 }
     // Phase, 4: Testing & QA
     phases.push({ id: 'phase_4',
@@ -211,6 +213,7 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
       dependencies: featureReqs.length > 0 ? ['phase_3'] : ['phase_2'],
     duration: complexity === 'simple' ? '3 days' : '1 week',
       parallel: false
+   
     });
     // Phase, 5: Deployment
     phases.push({ id: 'phase_5',
@@ -225,6 +228,7 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
       dependencies: ['phase_4'],
     duration: '3-5 days',
       parallel: false
+   
     });
     return phases
 }
@@ -261,7 +265,7 @@ const typeMatch = input.match(/(? null :e-commerce|dashboard|crm|cms|blog|portfo
     if (typeMatch) {r}eturn typeMatch[0].trim();
     return 'New Project'
 }
-  private async validateRequirements(requirements: ExtractedRequirement[]): Promise<any> {</any>
+  private async validateRequirements(requirements: ExtractedRequirement[]): Promise<any> {
     // Check for conflicts, const conflicts = this.findConflicts(requirements, if (conflicts.length > 0) {
       console.warn('⚠️ Potential requirement conflicts, detected:', conflicts)
 }
@@ -310,7 +314,7 @@ const _hasBackend = requirements.some(r => r.agents.includes('agent_backend');
 - Deployment keywords -> agent_devops
 ```
 }
-  async convertToAgentWorkflow(roadmap: DevelopmentRoadmap): Promise<any> {</any>
+  async convertToAgentWorkflow(roadmap: DevelopmentRoadmap): Promise<any> {
     // Convert roadmap to agent coordinator workflow
     return this.agentCoordinator.createCoordinationPlan(, JSON.stringify(roadmap.requirements))}
-}}}})))))))))))))))))
+}}}}

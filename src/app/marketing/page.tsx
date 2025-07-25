@@ -1,0 +1,288 @@
+'use client';
+
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { 
+  TrendingUp, 
+  Users, 
+  Mail, 
+  Target,
+  Zap,
+  BarChart3,
+  ArrowRight,
+  CheckCircle,
+  Clock,
+  DollarSign
+} from 'lucide-react';
+
+interface FunnelStage {
+  name: string;
+  visitors: number;
+  conversion: number;
+  icon: React.ElementType;
+}
+
+interface Campaign {
+  id: string;
+  name: string;
+  status: 'active' | 'paused' | 'completed';
+  leads: number;
+  conversions: number;
+  revenue: number;
+  startDate: Date;
+  endDate?: Date;
+}
+
+export default function MarketingPage() {
+  const [campaigns, setCampaigns] = useState<Campaign[]>([
+    {
+      id: '1',
+      name: 'Launch Campaign',
+      status: 'active',
+      leads: 2543,
+      conversions: 187,
+      revenue: 45680,
+      startDate: new Date('2025-01-01')
+    },
+    {
+      id: '2',
+      name: 'Product Hunt Feature',
+      status: 'active',
+      leads: 1876,
+      conversions: 134,
+      revenue: 32450,
+      startDate: new Date('2025-01-15')
+    },
+    {
+      id: '3',
+      name: 'Black Friday Sale',
+      status: 'completed',
+      leads: 5432,
+      conversions: 421,
+      revenue: 98760,
+      startDate: new Date('2024-11-24'),
+      endDate: new Date('2024-11-30')
+    }
+  ]);
+
+  const funnelStages: FunnelStage[] = [
+    { name: 'Visitors', visitors: 50000, conversion: 100, icon: Users },
+    { name: 'Sign-ups', visitors: 5000, conversion: 10, icon: Mail },
+    { name: 'Trial Users', visitors: 2000, conversion: 4, icon: Zap },
+    { name: 'Paid Customers', visitors: 400, conversion: 0.8, icon: DollarSign }
+  ];
+
+  const [emailCapture, setEmailCapture] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!emailCapture) return;
+    
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setEmailCapture('');
+      alert('Thank you for subscribing!');
+    }, 1000);
+  };
+
+  const calculateConversionRate = (campaign: Campaign) => {
+    return campaign.leads > 0 ? ((campaign.conversions / campaign.leads) * 100).toFixed(1) : '0';
+  };
+
+  const calculateROI = (campaign: Campaign) => {
+    const cost = 5000; // Assumed campaign cost
+    return ((campaign.revenue - cost) / cost * 100).toFixed(0);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Sales Funnel & Marketing</h1>
+          <p className="text-gray-600">Track conversions and optimize your marketing campaigns</p>
+        </div>
+
+        {/* Funnel Visualization */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Target className="h-5 w-5" />
+              Conversion Funnel
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {funnelStages.map((stage, index) => (
+                <div key={stage.name}>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <stage.icon className="h-5 w-5 text-blue-600" />
+                      <span className="font-medium">{stage.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-2xl font-bold">{stage.visitors.toLocaleString()}</span>
+                      <span className="text-sm text-gray-500 ml-2">({stage.conversion}%)</span>
+                    </div>
+                  </div>
+                  <Progress value={stage.conversion} className="h-3" />
+                  {index < funnelStages.length - 1 && (
+                    <div className="flex justify-center my-4">
+                      <ArrowRight className="h-5 w-5 text-gray-400" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Campaign Performance */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Active Campaigns</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {campaigns.filter(c => c.status === 'active').map(campaign => (
+                  <div key={campaign.id} className="border rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-medium">{campaign.name}</h3>
+                      <Badge variant="default">Active</Badge>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <p className="text-gray-500">Leads</p>
+                        <p className="font-bold">{campaign.leads.toLocaleString()}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Conversion</p>
+                        <p className="font-bold">{calculateConversionRate(campaign)}%</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Revenue</p>
+                        <p className="font-bold">${campaign.revenue.toLocaleString()}</p>
+                      </div>
+                    </div>
+                    <div className="mt-3 flex items-center justify-between">
+                      <span className="text-xs text-gray-500">
+                        ROI: <span className="font-medium text-green-600">+{calculateROI(campaign)}%</span>
+                      </span>
+                      <Button size="sm" variant="outline">View Details</Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Email Capture Widget</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-6 text-white">
+                <h3 className="text-xl font-bold mb-2">Start Building Faster</h3>
+                <p className="mb-4 text-blue-100">Join 10,000+ developers using AI Guided SaaS</p>
+                <form onSubmit={handleEmailSubmit} className="space-y-3">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={emailCapture}
+                    onChange={(e) => setEmailCapture(e.target.value)}
+                    className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                    required
+                  />
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-white text-blue-600 hover:bg-gray-100"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Subscribing...' : 'Get Early Access'}
+                  </Button>
+                </form>
+                <div className="mt-4 space-y-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>Free tier with 3 projects</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>No credit card required</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>Cancel anytime</span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Marketing Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-500">Total Leads</p>
+                  <p className="text-2xl font-bold">9,851</p>
+                </div>
+                <Users className="h-8 w-8 text-blue-600" />
+              </div>
+              <p className="text-xs text-green-600 mt-2">+23% this month</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-500">Conversion Rate</p>
+                  <p className="text-2xl font-bold">7.4%</p>
+                </div>
+                <TrendingUp className="h-8 w-8 text-green-600" />
+              </div>
+              <p className="text-xs text-green-600 mt-2">+1.2% improvement</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-500">Avg. Deal Size</p>
+                  <p className="text-2xl font-bold">$243</p>
+                </div>
+                <DollarSign className="h-8 w-8 text-purple-600" />
+              </div>
+              <p className="text-xs text-green-600 mt-2">+$12 increase</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-500">CAC Payback</p>
+                  <p className="text-2xl font-bold">4.2mo</p>
+                </div>
+                <Clock className="h-8 w-8 text-orange-600" />
+              </div>
+              <p className="text-xs text-green-600 mt-2">-0.8mo faster</p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}

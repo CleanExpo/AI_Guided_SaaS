@@ -19,26 +19,26 @@ export const metadata: Metadata = { title: 'Enterprise - AI Guided SaaS Platform
 };
 
 export default function EnterprisePage() {
-  const enterpriseFeatures = [;
-    { icon: Shield;
+  const enterpriseFeatures = [
+    { icon: Shield,
       title: 'Advanced Security',
       description: 'Enterprise-grade security with SOC 2 compliance, encryption, and audit trails.'
     },
-    { icon: Users;
+    { icon: Users,
       title: 'Team Management',
       description: 'Advanced user management, role-based access control, and team collaboration tools.'
     },
-    { icon: Clock;
+    { icon: Clock,
       title: '24/7 Support',
       description: 'Dedicated support for mission-critical applications.'
     },
-    { icon: Phone;
+    { icon: Phone,
       title: 'Priority Support',
       description: 'Direct phone support and dedicated customer success manager.'
     }
   ];
 
-  const pricingTiers = [;
+  const pricingTiers = [
     { name: 'Professional',
       price: '$99',
       period: 'per user/month',
@@ -77,17 +77,20 @@ export default function EnterprisePage() {
             Get the advanced features, security, and support your enterprise needs 
             to build and deploy AI-powered applications at scale.
           </p>
+        </div>
 
         {/* Features Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">
           {enterpriseFeatures.map((feature) => (
             <Card key={feature.title}>
-          <CardContent className="p-6 text-center">
+              <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-          <feature.icon className="h-6 w-6 text-blue-600"   />
+                  <feature.icon className="h-6 w-6 text-blue-600" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
                 <p className="text-gray-600 text-sm">{feature.description}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
@@ -101,51 +104,57 @@ export default function EnterprisePage() {
           <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
             {pricingTiers.map((tier) => (
               <Card key={tier.name} className={tier.recommended ? 'ring-2 ring-blue-600' : ''}>
-          <CardHeader></CardHeader>
+                <CardHeader>
                   <div className="flex items-center justify-between">
-          <CardTitle>{tier.name}</CardTitle>
+                    <CardTitle>{tier.name}</CardTitle>
                     {tier.recommended && <Badge>Recommended</Badge>}
                   </div>
                   <div className="flex items-baseline">
-          <span className="text-3xl font-bold">{tier.price}</span>
+                    <span className="text-3xl font-bold">{tier.price}</span>
                     <span className="text-gray-500 ml-2">{tier.period}</span>
                   </div>
+                </CardHeader>
                 <CardContent>
-          <ul className="space-y-3 mb-6">
+                  <ul className="space-y-3 mb-6">
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex items-center">
-          <CheckCircle className="h-5 w-5 text-green-600 mr-3"   />
+                        <CheckCircle className="h-5 w-5 text-green-600 mr-3" />
                         <span className="text-gray-700">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button ;
-                    className="w-full" ;
+                  <Button 
+                    className="w-full" 
                     variant={tier.recommended ? 'default' : 'outline'}
-                  ></Button>
+                  >
                     Contact Sales
                   </Button>
                 </CardContent>
               </Card>
             ))}
           </div>
+        </div>
 
         {/* CTA Section */}
         <Card className="bg-blue-600 text-white">
           <CardContent className="p-12 text-center">
-            <Building className="h-12 w-12 mx-auto mb-6 text-blue-100"  />
-          <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Development?</h3>
+            <Building className="h-12 w-12 mx-auto mb-6 text-blue-100" />
+            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Development?</h3>
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
               Join hundreds of enterprises already using AI Guided SaaS to accelerate 
               their development processes and deliver better applications faster.
             </p>
             <div className="flex justify-center space-x-4">
-          <Button variant="secondary" size="lg"></Button>
+              <Button variant="secondary" size="lg">
                 Schedule Demo
               </Button>
               <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-blue-600">
                 Contact Sales
               </Button>
             </div>
-  )
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
 }

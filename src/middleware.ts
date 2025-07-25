@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const PROTECTED_PATHS = [;
+const PROTECTED_PATHS = [
   '/dashboard',
   '/admin',
   '/api/admin',
@@ -11,12 +11,12 @@ const PROTECTED_PATHS = [;
   '/settings'
 ];
 
-const ADMIN_PATHS = [;
+const ADMIN_PATHS = [
   '/admin',
   '/api/admin'
 ];
 
-const PUBLIC_PATHS = [;
+const PUBLIC_PATHS = [
   '/',
   '/auth',
   '/api/auth',
@@ -25,7 +25,7 @@ const PUBLIC_PATHS = [;
   '/contact'
 ];
 
-export async function middleware(request: NextRequest): Promise<any> {</any>
+export async function middleware(request: NextRequest): Promise<any> {
   const { pathname } = request.nextUrl;
   
   // Skip middleware for static files and API routes that don't need auth
@@ -59,7 +59,8 @@ export async function middleware(request: NextRequest): Promise<any> {</any>
   
   // Handle regular protected routes with NextAuth
   if (PROTECTED_PATHS.some(path => pathname.startsWith(path) {)}) {
-    const token = await getToken({ req: request });
+    const token = await getToken({ req: request
+    });
     
     if (!token) { // User routes ALWAYS redirect to /auth/signin
       const loginUrl = new URL('/auth/signin', request.url);

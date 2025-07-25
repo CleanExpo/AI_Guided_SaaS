@@ -59,8 +59,7 @@ phaseId: phase.id,
     deliverables: phase.tasks
 }
       this.milestones.set(milestone.id, milestone);
-      cumulativeDays += durationDays
-    })
+      cumulativeDays += durationDays    })
 }
   private parseDurationToDays(duration: string): number { const match = duration.match(/(\d+)(? null :-(\d+))?\s*(day|week|month)/, if (!match) {r}eturn 7 // Default to 1 week, const _min  = parseInt(match[1]);
 
@@ -87,15 +86,16 @@ description: task, type: 'feature',
     validation: { method: 'automated', script: `validate_feature_${phase.id }_${index}`
         },
         status: 'pending'
-      })}
+     
+    })}
     // Test criteria based on phase type
     if (phase.name.toLowerCase() {.}includes('development')) {
       criteria.push({ id: `${phase.id}_test_coverage`,
 description: 'Unit test coverage > 80%',
         type: 'test',
     validation: { method: 'automated', threshold: 80 },
-        status: 'pending'
-      })
+        status: 'pending'   
+    })
 }
     // Performance criteria for certain phases
     if (phase.agents.includes('agent_backend') {|}| phase.agents.includes('agent_frontend')) {
@@ -103,8 +103,8 @@ description: 'Unit test coverage > 80%',
 description: 'API response time < 200ms',
         type: 'performance',
     validation: { method: 'automated', threshold: 200 },
-        status: 'pending'
-      })
+        status: 'pending'   
+    })
 }
     // Documentation criteria
     criteria.push({ id: `${phase.id}_documentation`,
@@ -112,10 +112,11 @@ description: 'Technical documentation complete',
       type: 'documentation',
     validation: { method: 'manual' },
       status: 'pending'
+   
     });
     return criteria
 }
-  async validateRoadmap(): Promise<any> {</any>
+  async validateRoadmap(): Promise<any> {
     const result: RoadmapValidationResult={ roadmapId: this.roadmap.id,
     validationDate: new Date(), overallStatus: 'on_track',
       completionPercentage: 0;
@@ -170,7 +171,7 @@ if (result.milestones.blocked > 0) {
     this.validationHistory.push(result);
     return result
 }
-  private async validateMilestone(milestone: RoadmapMilestone): Promise<any> {</any>
+  private async validateMilestone(milestone: RoadmapMilestone): Promise<any> {
 { new Date(), // Check if milestone is overdue, if (now > milestone.expectedDate && milestone.status !== 'completed') {
       milestone.status = 'delayed'
 };
@@ -237,17 +238,17 @@ break;
       return false
 }
 }
-  private async checkManualValidation(criterion: CompletionCriterion): Promise<any> {</any>
+  private async checkManualValidation(criterion: CompletionCriterion): Promise<any> {
     // In a real system, this would check a database or external system
     // For now, simulate manual validation
     return Math.random() > 0.2 // 80% pass rate}
-  private async getTestCoverage(): Promise<any> {</any>
+  private async getTestCoverage(): Promise<any> {
     // In reality, this would run coverage tools
     return 75 + Math.random() * 20 // 75-95%}
-  private async getAverageResponseTime(): Promise<any> {</any>
+  private async getAverageResponseTime(): Promise<any> {
     // In reality, this would query monitoring system
     return 100 + Math.random() * 150 // 100-250ms}
-  private async checkFeatureEndpoint(feature: string): Promise<any> {</any>
+  private async checkFeatureEndpoint(feature: string): Promise<any> {
     // In reality, this would make actual API calls
     return Math.random() > 0.1 // 90% success rate}
   private createDelayDeviation(milestone: RoadmapMilestone): RoadmapDeviation {;
@@ -323,4 +324,4 @@ if (decliningPerformance) {
 }
   getMilestoneDetails(milestoneId: string): RoadmapMilestone | undefined {
     return this.milestones.get(milestoneId) }
-})))))))))))
+}

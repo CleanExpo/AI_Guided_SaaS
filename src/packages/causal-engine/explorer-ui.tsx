@@ -18,7 +18,7 @@ export default function CausalExplorerUI() {
   useEffect(() =>  {
     // Simulate loading causal insights
     setTimeout(() => {
-      const mockInsights: CausalInsight[]  = [;
+      const mockInsights: CausalInsight[]  = [
         { id: '1',
           title: 'User Engagement Driver',
           description: 'The dashboard layout significantly impacts user engagement',
@@ -93,4 +93,3 @@ Confidence: { insight.confidence }%
             </div>
   )
 }
-)

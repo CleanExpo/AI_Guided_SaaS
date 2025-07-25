@@ -14,7 +14,7 @@ const _generateMockData = () => ({ metrics: { totalUsers: Math.floor(Math.random
     conversion: Math.random() > 0.4 ? 'up' : 'down',
 projects: Math.random() > 0.6 ? 'up' : 'down'},
     chartData: Array.from({ length: 7 }, (_, i) => ({ day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
-    users: Math.floor(Math.random() * 1000) + 500,;
+    users: Math.floor(Math.random() * 1000) + 500,
 revenue: Math.floor(Math.random() * 5000) + 2000});
     recentActivity: [
     { id: 1, action: 'New user registered', time: '2 minutes ago' , type: 'user' },
@@ -22,15 +22,16 @@ revenue: Math.floor(Math.random() * 5000) + 2000});
     { id: 3, action: 'Project created', time: '12 minutes ago' , type: 'project' },
     { id: 4, action: 'API call made', time: '18 minutes ago' , type: 'api' },
     { id: 5, action: 'User upgraded plan', time: '25 minutes ago' , type: 'upgrade' }]});
-interface MetricCardProps { title: string;
+interface MetricCardProps { title: string
   value: string | number,
-  change: string;
+  change: string
   trend: 'up' | 'down', icon: React.ElementType
 e,
   delay: number
    }
 MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps, value, change, trend, icon: Icon, delay }: MetricCardProps) {
-  const [ref, inView] = useInView({ threshold: 0.1 triggerOnce: true });
+  const [ref, inView] = useInView({ threshold: 0.1 triggerOnce: true
+    });
   return (
     <motion.div;
 
@@ -75,8 +76,7 @@ className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-sm";
 
 initial={{ height: 0 } animate={{ height: `${(item.users / maxValue) * 100}%` }}``;
 
-    const transition={{ duration: 0.8 delay: index * 0.1 }
-             />
+    const transition={{ duration: 0.8 delay: index * 0.1 />
           <span className="text-xs text-muted-foreground mt-2">{item.day}</span>
         </motion.div>
       ))}
@@ -88,31 +88,25 @@ ActivityFeed({ activities }: { activities }): { activities }) {const _getActivit
       return Users, break, case 'payment':;
       return DollarSign;
     break;
-      case 'project':
-      return Target;
+      case 'project': return Target
     break;
-      case 'api':
-      return Zap;
+      case 'api': return Zap
     break;
-      case 'upgrade':
-      return TrendingUp;
+      case 'upgrade': return TrendingUp
     break
 break
 };
     default: return Activity}}
-  const _getActivityColor = (type: string) =>  {switch (type) {;
+  const _getActivityColor = (type: string) =>  {switch (type) {
       case 'user':;
       return 'text-blue-500', break, case 'payment':;
       return 'text-green-500';
     break;
-      case 'project':
-      return 'text-purple-500';
+      case 'project': return 'text-purple-500'
     break;
-      case 'api':
-      return 'text-yellow-500';
+      case 'api': return 'text-yellow-500'
     break;
-      case 'upgrade':
-      return 'text-orange-500';
+      case 'upgrade': return 'text-orange-500'
     break
 break
 };
@@ -127,7 +121,7 @@ break
     const key={activity.id};
               initial={{ opacity: 0, x: -20 } animate={{ opacity: 1, x: 0 }
               exit={{ opacity: 0, x: 20 } transition={ { duration: 0.3 delay: index * 0.1  };
-              className="flex items-center space-x-3 p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm";
+              className="flex items-center space-x-3 p-3 rounded-lg bg-white/50 dark: bg-gray-800/50 backdrop-blur-sm"
             >
               <div className={`p-2 rounded-full bg-gray-100, dark:bg-gray-700 ${getActivityColor(activity.type)}`}>``</div>
                 <Icon className="h-4 w-4"    />
@@ -159,7 +153,7 @@ const _handleRefresh = async () => {
     setIsRefreshing(false)
 };
   
-const metrics = [;
+const metrics = [
   { title: 'Total Users',
       value: data.metrics.totalUsers.toLocaleString(, change: '+12.5%',
       trend: data.trends.users,
@@ -194,7 +188,7 @@ variant="outline";
 size="sm";
 
     onClick={handleRefresh} loading={isRefreshing}
-              const icon={<RefreshCw className="h-4 w-4"    />};</ButtonPremium>
+              const icon={<RefreshCw className="h-4 w-4" />
               iconPosition="left";
             >
                     Refresh
@@ -203,7 +197,7 @@ size="sm";
 variant="outline";
 size="sm";
 
-    const icon={<Download className="h-4 w-4"    />};</ButtonPremium>
+    const icon={<Download className="h-4 w-4" />
               iconPosition="left";
             >
                     Export
@@ -220,7 +214,7 @@ const icon={<Settings className="h-4 w-4"    />}</ButtonPremium>
           <MetricCard key={metric.title} title={metric.title}
             value={metric.value} change={metric.change}
             trend={metric.trend, as 'up' | 'down'} icon={metric.icon}
-            const delay={index * 0.1}     />
+            const delay={index * 0.1/>
         ))}</MetricCard>
       {/* Charts, and Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">{/* Chart */}</div>
@@ -244,7 +238,7 @@ size="sm";
     const icon={<Calendar className="h-4 w-4"    />}</ButtonPremium>
                   /></ButtonPremium>
             <CardEnhancedContent    />
-          <SimpleChart data={data.chartData}      />
+          <SimpleChart data={data.chartData/>
         {/* Activity, Feed */}
         <div    />
           <CardEnhanced variant="glass"     />
@@ -257,7 +251,7 @@ size="sm";
     const icon={<Bell className="h-4 w-4"    />}</ButtonPremium>
                 /></ButtonPremium>
             <CardEnhancedContent    />
-          <ActivityFeed activities={data.recentActivity}      />
+          <ActivityFeed activities={data.recentActivity/>
       {/* Quick, Actions */
 </div>
   
@@ -296,4 +290,4 @@ size="sm";
                 <Zap className="h-6 w-6 text-white"    />
           <h3 className="font-semibold">API Keys</h3>
               <p className="text-sm text-muted-foreground">Manage integrations</p>
-}}}}}}}}}}}))))))))))
+}}}}}}}}}}}

@@ -59,32 +59,33 @@ export abstract class BaseAgent extends EventEmitter {
     
     return { info: (message: string, data? null : any) => {
         console.log(`${prefix}; INFO: ${message}`, data || '');
-        this.emit('log:info', { message, data })
+        this.emit('log:info', { message, data    })
 },
       warn: (message: string, data? null : any) => {
         console.warn(`${prefix}; WARN: ${message}`, data || '');
-        this.emit('log:warn', { message, data })
+        this.emit('log:warn', { message, data    })
 },
       error: (message: string, error? null : any) => {
         console.error(`${prefix}; ERROR: ${message}`, error || '');
-        this.emit('log:error', { message, error })
+        this.emit('log:error', { message, error    })
 },
       debug: (message: string, data? null : any) =>  {
         if (process.env.DEBUG) {;
           console.debug(`${prefix}; DEBUG: ${message}`, data || '')
 }
-        this.emit('log:debug', { message, data })
+        this.emit('log:debug', { message, data    })
 }
     }
 }
   
-  public async initialize(): Promise<void> {</void>
+  public async initialize(): Promise<void> {
     this.logger.info('Initializing agent');
     
     try {
       await this.onInitialize();
       this.state.status = 'ready';
-      this.emit('agent:ready', { agentId: this.config.id })
+      this.emit('agent:ready', { agentId: this.config.id   
+    })
 } catch (error) {
       this.state.status = 'error';
       this.state.lastError = error instanceof Error ? error.message : 'Unknown error';
@@ -95,7 +96,7 @@ export abstract class BaseAgent extends EventEmitter {
   
   protected abstract onInitialize(): Promise<void></void>
   
-  public async processMessage(message: AgentMessage): Promise<any> {</any>
+  public async processMessage(message: AgentMessage): Promise<any> {
     this.logger.debug('Processing message', message);
     
     try {
@@ -110,7 +111,7 @@ export abstract class BaseAgent extends EventEmitter {
   
   protected abstract onMessage(message: AgentMessage): Promise<any></any>
   
-  public async executeTask(task: AgentTask): Promise<void> {</void>
+  public async executeTask(task: AgentTask): Promise<void> {
     if (this.state.status !== 'ready') {
       throw new Error(`Agent is not ready (status: ${this.state.status})`)
 }
@@ -131,7 +132,7 @@ export abstract class BaseAgent extends EventEmitter {
       
       this.updateTaskMetrics(task, true);
       
-      this.emit('task:complete', { task, result })
+      this.emit('task:complete', { task, result    })
 } catch (error) {
       task.status = 'failed';
       task.error = error instanceof Error ? error.message : 'Unknown error';
@@ -174,9 +175,10 @@ export abstract class BaseAgent extends EventEmitter {
     this.state.metrics.currentTask = task.type
 }
   
-  public async stop(): Promise<void> {</void>
+  public async stop(): Promise<void> {
     this.state.status = 'shutting_down';
-    this.emit('agent:stopping', { agentId: this.config.id });
+    this.emit('agent:stopping', { agentId: this.config.id
+    });
     
     // Clear task queue
     this.state.taskQueue = [];
@@ -190,7 +192,8 @@ export abstract class BaseAgent extends EventEmitter {
     await this.onStop();
     
     this.state.status = 'offline';
-    this.emit('agent:stopped', { agentId: this.config.id })
+    this.emit('agent:stopped', { agentId: this.config.id   
+    })
 }
   
   protected abstract onStop(): Promise<void></void>
@@ -198,7 +201,7 @@ export abstract class BaseAgent extends EventEmitter {
   /**
    * Execute a pulse - used by PulsedExecutor
    */
-  public async pulse(): Promise<void> {</void>
+  public async pulse(): Promise<void> {
     if (this.state.status !== 'ready' && this.state.status !== 'busy') {
       return
 }
@@ -210,14 +213,14 @@ export abstract class BaseAgent extends EventEmitter {
 }
     
     // Update heartbeat
-    this.updateMetrics({ lastHeartbeat: new Date()
+    this.updateMetrics({ lastHeartbeat: new Date()   
     })
 }
   
   /**
    * Interrupt current execution - used by PulsedExecutor
    */
-  public async interrupt(): Promise<void> {</void>
+  public async interrupt(): Promise<void> {
     if (this.state.currentTask) {
       this.logger.warn(`Interrupting task ${this.state.currentTask.id}`);
       // Implementation depends on specific agent type
@@ -225,7 +228,7 @@ export abstract class BaseAgent extends EventEmitter {
 }
   }
   
-  protected async onInterrupt(): Promise<void> {</void>
+  protected async onInterrupt(): Promise<void> {
     // Override in specific agents
   }
   
@@ -234,7 +237,7 @@ export abstract class BaseAgent extends EventEmitter {
    */
   public queueTask(task: AgentTask): void {
     this.state.taskQueue.push(task);
-    this.emit('task:queued', { task })
+    this.emit('task:queued', { task    })
 }
   
   /**
@@ -280,7 +283,7 @@ export abstract class BaseAgent extends EventEmitter {
   /**
    * Send message via communication channel
    */
-  protected async sendMessage(to: string | string[], type: string, payload: any): Promise<void> {</void>
+  protected async sendMessage(to: string | string[], type: string, payload: any): Promise<void> {
     if (!this.communication) {
       throw new Error('Communication channel not set')
 }
@@ -318,4 +321,4 @@ export abstract class BaseAgent extends EventEmitter {
       taskQueue: [...this.state.taskQueue]
     }
 }
-})))
+}

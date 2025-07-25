@@ -64,7 +64,7 @@ export class HierarchicalMemorySystem {
   }
 }
   // Core Memory Management Operations
-  async addMemoryEntry(entry: Omit<MemoryEntry 'id'>): Promise<any> {</any>
+  async addMemoryEntry(entry: Omit<MemoryEntry 'id'>): Promise<any> {
 { this.generateEntryId(); const fullEntry: MemoryEntry={
       ...entry;
       id,
@@ -90,7 +90,7 @@ const tier = this.getTier(targetTier);
     this.logAccess(id, 'create');
     return id
 }
-  async accessMemoryEntry(id: string): Promise<any> {</any>
+  async accessMemoryEntry(id: string): Promise<any> {
 { this.memoryEntries.get(id, if (!entry) {r}eturn null, // Update access metadata;
     entry.metadata.lastAccessed = new Date();
     entry.metadata.accessCount += 1
@@ -98,7 +98,7 @@ const tier = this.getTier(targetTier);
     this.logAccess(id, 'read');
     return entry
 }
-  async updateMemoryEntry(id: string, updates: Partial<MemoryEntry>): Promise<any> {</any>
+  async updateMemoryEntry(id: string, updates: Partial<MemoryEntry>): Promise<any> {
 { this.memoryEntries.get(id, if (!entry) {r}eturn false, const _oldSize  = entry.metadata.size;
 
     const updatedEntry={ ...entry, ...updates }
@@ -117,7 +117,7 @@ if (updates.metadata?.size && updates.metadata.size !== oldSize) {
     return true
 }
   // Strategic Compaction Implementation
-  async performStrategicCompaction(): Promise<any> {</any>
+  async performStrategicCompaction(): Promise<any> {
     const compactionResults: TierCompactionResult[] = [], // Check each tier for compaction needs, for (const tierName of ['user', 'project', 'modular'] as const) {; const tier  = this.getTier(tierName); const _utilizationRate = tier.currentTokens / tier.maxTokens;
       if (utilizationRate >= tier.compactionThreshold) {
         const result = await this.performTierCompaction(tierName);
@@ -126,7 +126,7 @@ if (updates.metadata?.size && updates.metadata.size !== oldSize) {
       tierResults: compactionResults;
     newUtilizationRates: this.getUtilizationRates(),
     timestamp: new Date()}
-  private async performTierCompaction(tierName: 'user' | 'project' | 'modular'): Promise<any> {</any>
+  private async performTierCompaction(tierName: 'user' | 'project' | 'modular'): Promise<any> {
 { this.getTier(tierName); const entries = Array.from(this.memoryEntries.values()).filter((entry) => entry.tier === tierName, // Sort entries by retention score (lower score = more likely to be compacted);
 
 const _scoredEntries = entries.map((entry) => ({
@@ -223,7 +223,7 @@ const _fWeight = 1 - pWeight - tWeight;
         size: Math.floor(entry.metadata.size * 0.6);
   // 40% compression, lastAccessed: new Date()
 }
-  private async archiveEntry(entry: MemoryEntry): Promise<any> {</any>
+  private async archiveEntry(entry: MemoryEntry): Promise<any> {
     // Store in archive system for potential future retrieval
         const _archiveEntry={;
       ...entry;
@@ -231,7 +231,7 @@ const _fWeight = 1 - pWeight - tWeight;
     archivedAt: new Date()}
     // In a real implementation, this would write to persistent storage
 }
-  private async intelligentCompression(content: string, type: string): Promise<any> {</any>
+  private async intelligentCompression(content: string, type: string): Promise<any> {
     // Preserve essential information based on content type, const lines = content.split('\n'); const essentialLines = lines.filter((line) =>  {
       // Keep headers, critical markers, and key decisions;
       return line.includes('#') ||;
@@ -239,8 +239,7 @@ const _fWeight = 1 - pWeight - tWeight;
              line.includes('IMPORTANT') ||
              line.includes('TODO') ||
              line.includes('DECISION') ||
-             line.trim().length > 50 // Keep substantial content
-    };)
+             line.trim().length > 50 // Keep substantial content    })
     // Ensure minimum content retention;
 
 const _compressionRatio  = Math.max(0.4, essentialLines.length / lines.length);
@@ -294,7 +293,8 @@ break
     this.accessLog.push({;
       entryId;
       operation,
-      timestamp: new Date()})
+      timestamp: new Date()   
+    })
     // Keep only recent access logs (last 1000 operations);
 if (this.accessLog.length > 1000) { this.accessLog = this.accessLog.slice(-1000)}
 // Supporting Interfaces
@@ -324,4 +324,4 @@ interface MemoryAnalytics { totalEntries: number;
 // Export singleton instance;
 export const _hierarchicalMemorySystem = new HierarchicalMemorySystem();
 
-}}}}}}}}}}}}}}}})))))))))))))))
+}}}}}}}}}}}}}}}}

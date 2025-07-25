@@ -130,8 +130,7 @@ export interface KiroQuickFix { title: string;
 export const KiroProjectSchema = z.object({ name: z.string().min(1).max(100, description: z.string().optional(, type: z.enum(['web', 'mobile', 'desktop', 'api', 'library']),
   framework: z.string().optional(, language: z.string(),
     settings: z.object({ buildCommand: z.string().optional(, startCommand: z.string().optional(, testCommand: z.string().optional(, outputDirectory: z.string().optional(, environment: z.record(z.string()).optional(, dependencies: z.record(z.string()).optional()
-}).optional()
-})
+    }).optional()    })
 export class KiroClient {
   private config: KiroConfig
   private ws: WebSocket | null = null
@@ -139,11 +138,12 @@ export class KiroClient {
     this.config = config
 }
   // Connection management
-  async connect(): Promise<any> {</any>
+  async connect(): Promise<any> {
 { this.config.apiUrl.replace(/^https?: /, 'ws:') + '/ws', return new Promise((resolve, reject) =>  { this.ws = new WebSocket(wsUrl, this.ws.onopen = () => {
         // Send authentication;
 if (this.config.apiKey) {
-          this.send('auth', { apiKey: this.config.apiKey  };)
+          this.send('auth', { apiKey: this.config.apiKey   
+    })
 }
         resolve()
 }
@@ -152,7 +152,7 @@ if (this.config.apiKey) {
       this.ws.onmessage = (event) => {
         this.handleMessage(event.data)};
       this.ws.onclose = () => {
-        this.emit('disconnected', {};)})
+        this.emit('disconnected', {};)    })
 }
   disconnect() {
     if (this.ws) {
@@ -160,99 +160,101 @@ if (this.config.apiKey) {
   }
 }
   // Project management
-  async createProject(project: Omit<KiroProject 'id' | 'createdAt' | 'updatedAt'>): Promise<any> {</any>
+  async createProject(project: Omit<KiroProject 'id' | 'createdAt' | 'updatedAt'>): Promise<any> {
 { KiroProjectSchema.parse(project); const response = await this.request('/api/projects', { method: 'POST',
-      body: JSON.stringify(validated)
+      body: JSON.stringify(validated)   
     })
     return response
 }
-  async openProject(projectId: string): Promise<any> {</any>
+  async openProject(projectId: string): Promise<any> {
 { await this.request(`/api/projects/${projectId}`);``
     // Connect to project workspace
     this.send('openProject', { projectId });
     return project
 }
-  async saveProject(projectId: string): Promise<any> {</any>
-    await this.request(`/api/projects/${projectId}/save`, {``, method: 'POST'
+  async saveProject(projectId: string): Promise<any> {
+    await this.request(`/api/projects/${projectId}/save`, {``, method: 'POST'   
     })
 }
-  async listProjects(): Promise<any> {</any>
+  async listProjects(): Promise<any> {
     return, this.request('/api/projects')}
   // File operations
-  async readFile(path: string): Promise<any> {</any>
+  async readFile(path: string): Promise<any> {
     return this.request(`/api/files/${encodeURIComponent(path)}`)``
 }
   async writeFile(path: string, content: string): Promise<any> {;</any>
     await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'PUT',
       body: JSON.stringify({ content })}
     // Notify IDE of file change
-    this.send('fileChanged', { path, content })
+    this.send('fileChanged', { path, content    })
 }
-  async createFile(path: string, content: string = ''): Promise<any> {</any>
+  async createFile(path: string, content: string = ''): Promise<any> {
     await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'POST',
       body: JSON.stringify({ content })}
-  async deleteFile(path: string): Promise<any> {</any>
-    await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'DELETE'
+  async deleteFile(path: string): Promise<any> {
+    await this.request(`/api/files/${encodeURIComponent(path)}`, {``, method: 'DELETE'   
     })
 }
   async renameFile(oldPath: string, newPath: string): Promise<any> {;</any>
     await this.request(`/api/files/${encodeURIComponent(oldPath)}/rename`, {``, method: 'POST',
       body: JSON.stringify({ newPath })}
-  async getFileTree(projectId: string): Promise<any> {</any>
+  async getFileTree(projectId: string): Promise<any> {
     return this.request(`/api/projects/${projectId}/tree`)``
 }
   // Terminal operations
-  async createTerminal(config? null : Partial<KiroTerminal>): Promise<any> {</any>
+  async createTerminal(config? null : Partial<KiroTerminal>): Promise<any> {
     return this.request('/api/terminals', { method: 'POST',
       body: JSON.stringify(config || {})}
-  async executeCommand(terminalId: string, command: string): Promise<any> {</any>
-    this.send('terminal.execute', { terminalId, command })
+  async executeCommand(terminalId: string, command: string): Promise<any> {
+    this.send('terminal.execute', { terminalId, command    })
 }
-  async closeTerminal(terminalId: string): Promise<any> {</any>
-    await this.request(`/api/terminals/${terminalId}`, {``, method: 'DELETE'
+  async closeTerminal(terminalId: string): Promise<any> {
+    await this.request(`/api/terminals/${terminalId}`, {``, method: 'DELETE'   
     })
 }
   // AI assistance
-  async getAISuggestions(file: string, position? null : { line: number, character: number }): Promise<any> {</any>
+  async getAISuggestions(file: string, position? null : { line: number, character: number
+    }): Promise<any> {
     return this.request('/api/ai/assist', { method: 'POST',
       body: JSON.stringify({ file, position })}
-  async applyAISuggestion(suggestionId: string): Promise<any> {</any>
-    await this.request(`/api/ai/suggestions/${suggestionId}/apply`, {``, method: 'POST'
+  async applyAISuggestion(suggestionId: string): Promise<any> {
+    await this.request(`/api/ai/suggestions/${suggestionId}/apply`, {``, method: 'POST'   
     })
 }
-  async getCompletions(file: string, position: { line: number, character: number }): Promise<any> {</any>
+  async getCompletions(file: string, position: { line: number, character: number
+    }): Promise<any> {
     return this.request('/api/ai/completions', { method: 'POST',
       body: JSON.stringify({ file, position })}
-  async runDiagnostics(projectId: string): Promise<any> {</any>
+  async runDiagnostics(projectId: string): Promise<any> {
     return this.request(`/api/projects/${projectId}/diagnostics`)``
 };
   async applyQuickFix(file: string, line: number;
-  fixIndex: number): Promise<any> {</any>
+  fixIndex: number): Promise<any> {
     await this.request('/api/ai/quickfix', { method: 'POST',
       body: JSON.stringify({ file, line, fixIndex })}
   // Debugging
-  async startDebugSession(config: Omit<KiroDebugSession 'id'>): Promise<any> {</any>
+  async startDebugSession(config: Omit<KiroDebugSession 'id'>): Promise<any> {
     return this.request('/api/debug/sessions', { method: 'POST',
-      body: JSON.stringify(config)
+      body: JSON.stringify(config)   
     })
 }
-  async setBreakpoint(file: string, line: number, condition? null : string): Promise<any> {</any>
-    this.send('debug.setBreakpoint', { file, line, condition })
+  async setBreakpoint(file: string, line: number, condition? null : string): Promise<any> {
+    this.send('debug.setBreakpoint', { file, line, condition    })
 }
-  async stepOver(sessionId: string): Promise<any> {</any>
-    this.send('debug.stepOver', { sessionId })
+  async stepOver(sessionId: string): Promise<any> {
+    this.send('debug.stepOver', { sessionId    })
 }
-  async stepInto(sessionId: string): Promise<any> {</any>
-    this.send('debug.stepInto', { sessionId })
+  async stepInto(sessionId: string): Promise<any> {
+    this.send('debug.stepInto', { sessionId    })
 }
-  async stepOut(sessionId: string): Promise<any> {</any>
-    this.send('debug.stepOut', { sessionId })
+  async stepOut(sessionId: string): Promise<any> {
+    this.send('debug.stepOut', { sessionId    })
 }
-  async continue(sessionId: string): Promise<any> {</any>
-    this.send('debug.continue', { sessionId })
+  async continue(sessionId: string): Promise<any> {
+    this.send('debug.continue', { sessionId    })
 }
-  async stopDebugSession(sessionId: string): Promise<any> {</any>
-    await this.request(`/api/debug/sessions/${sessionId}`, {``, method: 'DELETE'
+  async stopDebugSession(sessionId: string): Promise<any> {
+    await this.request(`/api/debug/sessions/${sessionId}`, {``, method: 'DELETE'   
     })
 };
   // Event handling;
@@ -279,7 +281,7 @@ on(event: string, handler: Function) {
 } catch (error) {
       console.error('Failed to parse WebSocket, message:', error)}
   // HTTP requests
-  private async request<T = any>(endpoint: string, options: RequestInit = {}): Promise<any> {</any>
+  private async request<T = any>(endpoint: string, options: RequestInit = {}): Promise<any> {
 { `${this.config.apiUrl}${endpoint}`;
 
 const headers: Record<string string> = {</string>
@@ -294,7 +296,8 @@ const headers: Record<string string> = {</string>
       // headers
 });
 if (!response.ok) {
-      const error = await response.json().catch(() => ({ message: response.statusText });
+      const error = await response.json().catch(() => ({ message: response.statusText
+    });
       throw new Error(error.message || `Request, failed: ${response.statusText}`)``
 };
     return response.json()
@@ -315,4 +318,4 @@ export function getKiroClient(config? null : KiroConfig): KiroConfig): KiroClien
   return kiroClient
 }
 
-}}}}}}}}}}}}}}}}))))))))))))))))))))
+}}}}}}}}}}}}}}}}

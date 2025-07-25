@@ -8,6 +8,7 @@ export default function PerformancePage() {
           <h1 className="text-2xl font-bold mb-4">Performance Monitoring</h1>
           <p className="text-gray-600">Performance monitoring dashboard is currently under construction.</p>
         </div>
+      </div>
     </div>
   )
 }

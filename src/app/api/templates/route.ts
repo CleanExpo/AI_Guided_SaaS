@@ -1,8 +1,8 @@
 // Mark as dynamic to prevent static generation
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
+export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         const url = new URL(request.url);
         const query = url.searchParams.get('query');
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {</NextRe
         const difficulty = url.searchParams.get('difficulty');
         
         // Define all templates
-        const allTemplates = [;
+        const allTemplates = [
             { id: 'template_1',
                 name: 'React Dashboard',
                 description: 'Modern dashboard template with React',
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {</NextRe
                 framework: 'react',
                 pricing: 'free',
                 difficulty: 'medium',
-                downloads: 1250;
+                downloads: 1250,
                 rating: 4.8
             },
             { id: 'template_2',
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {</NextRe
                 framework: 'nextjs',
                 pricing: 'premium',
                 difficulty: 'easy',
-                downloads: 890;
+                downloads: 890,
                 rating: 4.6
             },
             { id: 'template_3',
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {</NextRe
                 framework: 'vue',
                 pricing: 'premium',
                 difficulty: 'hard',
-                downloads: 567;
+                downloads: 567,
                 rating: 4.9
             }
         ];
@@ -69,13 +69,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {</NextRe
             templates = templates.filter(t => t.difficulty === difficulty)
 }
         
-        return NextResponse.json({ success: true;
+        return NextResponse.json({ success: true,
             templates,
             total: templates.length,
-            filters: { query, category, framework, pricing, difficulty }
-        })
+            filters: { query, category, framework, pricing, difficulty }    })
 } catch (error) {
         console.error('Templates API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500 })
+        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500   
+    })
 }
 }

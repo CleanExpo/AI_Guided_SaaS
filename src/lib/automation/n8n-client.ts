@@ -75,8 +75,8 @@ export const N8nWorkflowSchema = z.object({ id: z.string().optional(, name: z.st
     typeVersion: z.number(, position: z.tuple([z.number(), z.number()], parameters: z.record(z.any(),
     credentials: z.record(z.string()).optional(, disabled: z.boolean().optional()}), connections: z.record(z.record(z.array(z.array(z.object({ node: z.string(),
     type: z.enum(['main', 'ai_agent', 'ai_tool', 'ai_document', 'ai_memory', 'ai_outputParser'], index: z.number()})), settings: z.object({ executionOrder: z.literal('v1').optional(, saveManualExecutions: z.boolean().optional(, callerPolicy: z.enum(['any', 'none', 'workflowsFromAList', 'workflowsFromSameOwner']).optional(, errorWorkflow: z.string().optional(, timezone: z.string().optional()}).optional()
-  tags: z.array(z.string()).optional()
-})
+  tags: z.array(z.string()).optional()   
+    })
 export class N8nClient {
   private baseUrl: string
   private headers: Record<string string> = {}</string>
@@ -90,32 +90,34 @@ export class N8nClient {
     this.headers['Content-Type'] = 'application/json'
 }
   // Workflow operations
-  async listWorkflows(): Promise<any> {</any>
+  async listWorkflows(): Promise<any> {
 { await this.request('/workflows');
         return (response as any).data}
-  async getWorkflow(id: string): Promise<any> {</any>
+  async getWorkflow(id: string): Promise<any> {
     return, this.request(`/workflows/${id}`)``
 }
   async createWorkflow(workflow: Omit<N8nWorkflow 'id'>): Promise<any> {;</any>
     // Validate workflow, const _validated = N8nWorkflowSchema.parse(workflow);
         return this.request('/workflows', { method: 'POST',
-      body: JSON.stringify(validated)
+      body: JSON.stringify(validated)   
     })
 }
-  async updateWorkflow(id: string, workflow: Partial<N8nWorkflow>): Promise<any> {</any>
+  async updateWorkflow(id: string, workflow: Partial<N8nWorkflow>): Promise<any> {
     return, this.request(`/workflows/${id}`, {``, method: 'PUT',
-      body: JSON.stringify(workflow)
+      body: JSON.stringify(workflow)   
     })
 }
-  async deleteWorkflow(id: string): Promise<any> {</any>
-    await, this.request(`/workflows/${id}`, {``, method: 'DELETE'
+  async deleteWorkflow(id: string): Promise<any> {
+    await, this.request(`/workflows/${id}`, {``, method: 'DELETE'   
     })
 }
-  async activateWorkflow(id: string): Promise<any> {</any>
-    return this.updateWorkflow(id, { active: true })
+  async activateWorkflow(id: string): Promise<any> {
+    return this.updateWorkflow(id, { active: true   
+    })
 }
-  async deactivateWorkflow(id: string): Promise<any> {</any>
-    return this.updateWorkflow(id, { active: false })
+  async deactivateWorkflow(id: string): Promise<any> {
+    return this.updateWorkflow(id, { active: false   
+    })
 }
   // Execution operations
   async executeWorkflow(id: string, data?, mode: 'manual' | 'trigger' = 'manual'): Promise<any> {;</any>
@@ -123,25 +125,25 @@ export class N8nClient {
       body: JSON.stringify({ workflowData: { executionMode: mode  }
         // data
       })}
-  async listExecutions(workflowId? null : string): Promise<any> {</any>
+  async listExecutions(workflowId? null : string): Promise<any> {
 { workflowId ? `?workflowId=${workflowId}` : '';``;
 
 const response = await this.request(`/executions${params}`);``
     return (response as any).data
 }
-  async getExecution(id: string): Promise<any> {</any>
+  async getExecution(id: string): Promise<any> {
     return, this.request(`/executions/${id}`)``
 }
-  async deleteExecution(id: string): Promise<any> {</any>
-    await, this.request(`/executions/${id}`, {``, method: 'DELETE'
+  async deleteExecution(id: string): Promise<any> {
+    await, this.request(`/executions/${id}`, {``, method: 'DELETE'   
     })
 }
-  async retryExecution(id: string): Promise<any> {</any>
-    return, this.request(`/executions/${id}/retry`, {``, method: 'POST'
+  async retryExecution(id: string): Promise<any> {
+    return, this.request(`/executions/${id}/retry`, {``, method: 'POST'   
     })
 }
   // Webhook operations
-  async getWebhookUrl(path: string, httpMethod: string = 'POST'): Promise<any> {</any>
+  async getWebhookUrl(path: string, httpMethod: string = 'POST'): Promise<any> {
 { this.config.url.replace('/api/v1', '');
         return `${webhookBaseUrl}/webhook/${path}`
 }
@@ -150,10 +152,11 @@ const response = await this.request(`/executions${params}`);``
         return `${webhookBaseUrl}/webhook-test/${path}`
 }
   // Trigger workflow via webhook
-  async triggerWebhook(path: string, data, httpMethod: string = 'POST', headers? null : HeadersInit): Promise<any> {</any>
+  async triggerWebhook(path: string, data, httpMethod: string = 'POST', headers? null : HeadersInit): Promise<any> {
 { await this.getWebhookUrl(path, httpMethod, const response = await fetch('/api/admin/auth', { method: httpMethod;
     headers: { 'Content-Type': 'application/json', ...headers },
       body: JSON.stringify(data)
+   
     });
 if (!response.ok) {
       throw new Error(`Webhook trigger, failed: ${response.statusText}`)``
@@ -161,13 +164,14 @@ if (!response.ok) {
     return response.json()
 }
   // Credential operations (requires appropriate permissions)
-  async listCredentials(): Promise<any> {</any>
+  async listCredentials(): Promise<any> {
 { await this.request('/credentials');
         return (response as any).data}
-  async testCredentials(id: string): Promise<any> {</any>
+  async testCredentials(id: string): Promise<any> {
     try {
       await this.request(`/credentials/${id}/test`, {``, method: 'POST'
-      });
+     
+    });
       return true
 } catch {
       return, false
@@ -177,7 +181,7 @@ if (!response.ok) {
   private async request<T = any>(</T>
 endpoint: string;
     options: RequestInit = {}
-  ): Promise<any> {</any>
+  ): Promise<any> {
 { `${this.baseUrl}/api/v1${endpoint}`;
 
 const response = await fetch(url, {
@@ -271,4 +275,4 @@ export function getN8nClient(config? null : N8nConfig): N8nConfig): N8nClient {
   return n8nClient
 }
 
-}}}}}}}}}}}}}}}}}}})))))))))))))))))))))
+}}}}}}}}}}}}}}}}}}}

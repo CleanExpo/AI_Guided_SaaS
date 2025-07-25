@@ -81,7 +81,7 @@ export class SelfHealingAgent extends Agent {
         }
       ],
       maxAttempts: 3
-});
+    });
 
     // Build failures
     this.strategies.set('build-failure', { issueType: 'build-failure',
@@ -97,7 +97,7 @@ export class SelfHealingAgent extends Agent {
         }
       ],
       maxAttempts: 5
-});
+    });
 
     // Test failures
     this.strategies.set('test-failure', { issueType: 'test-failure',
@@ -113,7 +113,7 @@ export class SelfHealingAgent extends Agent {
         }
       ],
       maxAttempts: 3
-});
+    });
 
     // Performance degradation
     this.strategies.set('performance', { issueType: 'performance',
@@ -129,7 +129,7 @@ export class SelfHealingAgent extends Agent {
         }
       ],
       maxAttempts: 3
-});
+    });
 
     // Security vulnerabilities
     this.strategies.set('security', { issueType: 'security',
@@ -144,11 +144,11 @@ export class SelfHealingAgent extends Agent {
           execute: async () => this.rotateSecrets()
         }
       ],
-      maxAttempts: 2
-})
+      maxAttempts: 2   
+    })
 }
 
-  async processMessage(message: AgentMessage): Promise<void> {</void>
+  async processMessage(message: AgentMessage): Promise<void> {
     this.logger.info(`Processing self-healing task: ${message.type}`);
 
     try {
@@ -177,7 +177,7 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async handleHealthIssue(payload: any): Promise<void> {</void>
+  private async handleHealthIssue(payload: any): Promise<void> {
     const issue: HealthIssue={ id: `issue-${Date.now()}`,
       type: payload.type || 'error',
       severity: payload.severity || 'medium',
@@ -191,11 +191,11 @@ export class SelfHealingAgent extends Agent {
     await this.attemptHealing(issue)
 }
 
-  private async handleCriticalFailure(payload: any): Promise<void> {</void>
+  private async handleCriticalFailure(payload: any): Promise<void> {
     this.logger.error('Critical failure detected:', payload);
     
     // Immediate actions for critical failures
-    const actions = [;
+    const actions = [
       this.isolateFailedComponent(payload.component, this.activateFailover(),
       this.notifyOnCall()
     ];
@@ -213,7 +213,7 @@ export class SelfHealingAgent extends Agent {
     await this.attemptHealing(issue)
 }
 
-  private async handleTestFailures(payload: any): Promise<void> {</void>
+  private async handleTestFailures(payload: any): Promise<void> {
     const { failures } = payload;
     
     for (const failure of failures) {
@@ -229,7 +229,7 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async handlePerformanceAlert(payload: any): Promise<void> {</void>
+  private async handlePerformanceAlert(payload: any): Promise<void> {
     const issue: HealthIssue={ id: `perf-${Date.now()}`,
       type: 'performance',
       severity: payload.severity || 'medium',
@@ -240,7 +240,7 @@ export class SelfHealingAgent extends Agent {
     await this.healWithStrategy(issue, 'performance')
 }
 
-  private async handleSecurityAlert(payload: any): Promise<void> {</void>
+  private async handleSecurityAlert(payload: any): Promise<void> {
     const issue: HealthIssue={ id: `sec-${Date.now()}`,
       type: 'security',
       severity: 'high', // Security issues are always high priority
@@ -251,7 +251,7 @@ export class SelfHealingAgent extends Agent {
     await this.healWithStrategy(issue, 'security')
 }
 
-  private async attemptHealing(issue: HealthIssue): Promise<void> {</void>
+  private async attemptHealing(issue: HealthIssue): Promise<void> {
     this.logger.info(`Attempting to heal issue: ${issue.id}`);
     
     // Find appropriate strategy
@@ -265,7 +265,7 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async healWithStrategy(issue: HealthIssue, strategyName: string): Promise<void> {</void>
+  private async healWithStrategy(issue: HealthIssue, strategyName: string): Promise<void> {
 { this.strategies.get(strategyName);
     
     if (!strategy) {
@@ -305,9 +305,9 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async genericHealing(issue: HealthIssue): Promise<void> {</void>
+  private async genericHealing(issue: HealthIssue): Promise<void> {
     // Generic healing attempts
-    const actions = [;
+    const actions = [
       { name: 'restart', fn: () => this.restartService(issue.component) },
       { name: 'clear-cache', fn: () => this.clearCache() },
       { name: 'reset-state', fn: () => this.resetComponentState(issue.component) };
@@ -327,13 +327,14 @@ export class SelfHealingAgent extends Agent {
 }
 
   // Healing action implementations
-  private async restartService(component: string): Promise<boolean> {</boolean>
+  private async restartService(component: string): Promise<boolean> {
     try {
       this.logger.info(`Restarting service: ${component}`);
       
       // Service restart logic
       if (component === 'web') {
-        execSync('pm2 restart web', { stdio: 'pipe' })
+        execSync('pm2 restart web', { stdio: 'pipe'   
+    })
 }
       
       // Wait for service to come up
@@ -345,16 +346,18 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async clearCache(): Promise<boolean> {</boolean>
+  private async clearCache(): Promise<boolean> {
     try {
       // Clear various caches
       if (fs.existsSync('.next/cache') {)} {
-        fs.rmSync('.next/cache', { recursive: true })
+        fs.rmSync('.next/cache', { recursive: true   
+    })
 }
       
       // Clear Redis cache if available
       try {
-        execSync('redis-cli FLUSHALL', { stdio: 'pipe' })
+        execSync('redis-cli FLUSHALL', { stdio: 'pipe'   
+    })
 } catch {
         // Redis might not be available
       }
@@ -365,7 +368,7 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async forceGarbageCollection(): Promise<boolean> {</boolean>
+  private async forceGarbageCollection(): Promise<boolean> {
     if (global.gc) {
       global.gc();
       return true
@@ -373,35 +376,39 @@ export class SelfHealingAgent extends Agent {
     return false
 }
 
-  private async cleanBuild(): Promise<boolean> {</boolean>
+  private async cleanBuild(): Promise<boolean> {
     try {
-      execSync('rm -rf .next node_modules/.cache', { stdio: 'pipe' });
-      execSync('npm run build', { stdio: 'pipe' });
+      execSync('rm -rf .next node_modules/.cache', { stdio: 'pipe'
+    });
+      execSync('npm run build', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async fixDependencies(): Promise<boolean> {</boolean>
+  private async fixDependencies(): Promise<boolean> {
     try {
-      execSync('npm ci', { stdio: 'pipe' });
+      execSync('npm ci', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async fixSyntaxErrors(): Promise<boolean> {</boolean>
+  private async fixSyntaxErrors(): Promise<boolean> {
     try {
-      execSync('npm run fix:syntax', { stdio: 'pipe' });
+      execSync('npm run fix:syntax', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async analyzeTestFailure(issue: HealthIssue): Promise<boolean> {</boolean>
+  private async analyzeTestFailure(issue: HealthIssue): Promise<boolean> {
     // Analyze test failure patterns
     await this.sendMessage({ to: 'qa-agent',
       type: 'analyze',
@@ -411,31 +418,32 @@ export class SelfHealingAgent extends Agent {
     return true
 }
 
-  private async updateTestSnapshots(): Promise<boolean> {</boolean>
+  private async updateTestSnapshots(): Promise<boolean> {
     try {
-      execSync('npm test -- -u', { stdio: 'pipe' });
+      execSync('npm test -- -u', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async fixAsyncTestIssues(): Promise<boolean> {</boolean>
+  private async fixAsyncTestIssues(): Promise<boolean> {
     // Add proper async handling to tests
     return false; // Would implement actual fix logic
   }
 
-  private async optimizeDatabaseQueries(): Promise<boolean> {</boolean>
+  private async optimizeDatabaseQueries(): Promise<boolean> {
     // Database optimization logic
     return false
 }
 
-  private async enableCaching(): Promise<boolean> {</boolean>
+  private async enableCaching(): Promise<boolean> {
     // Enable caching layers
     return true
 }
 
-  private async requestResourceScaling(): Promise<boolean> {</boolean>
+  private async requestResourceScaling(): Promise<boolean> {
     await this.sendMessage({ to: 'devops-agent',
       type: 'scale',
       payload: { service: 'web',
@@ -446,21 +454,22 @@ export class SelfHealingAgent extends Agent {
     return true
 }
 
-  private async updateVulnerableDependencies(): Promise<boolean> {</boolean>
+  private async updateVulnerableDependencies(): Promise<boolean> {
     try {
-      execSync('npm audit fix --force', { stdio: 'pipe' });
+      execSync('npm audit fix --force', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async applySecurityPatches(): Promise<boolean> {</boolean>
+  private async applySecurityPatches(): Promise<boolean> {
     // Apply security patches
     return true
 }
 
-  private async rotateSecrets(): Promise<boolean> {</boolean>
+  private async rotateSecrets(): Promise<boolean> {
     // Rotate API keys and secrets
     this.logger.info('Rotating secrets...');
     
@@ -472,23 +481,22 @@ export class SelfHealingAgent extends Agent {
     return true
 }
 
-  private async isolateFailedComponent(component: string): Promise<void> {</void>
+  private async isolateFailedComponent(component: string): Promise<void> {
     this.logger.info(`Isolating failed component: ${component}`);
     // Component isolation logic
   }
 
-  private async activateFailover(): Promise<void> {</void>
+  private async activateFailover(): Promise<void> {
     this.logger.info('Activating failover systems...');
     // Failover activation
   }
 
-  private async notifyOnCall(): Promise<void> {</void>
+  private async notifyOnCall(): Promise<void> {
     // Notify on-call personnel
     await this.sendMessage({ to: 'notification-service',
       type: 'critical-alert',
       payload: { message: 'Critical system failure - immediate attention required'
-      }
-    })
+      }    })
 }
 
   private findStrategy(issue: HealthIssue): string | null {
@@ -504,7 +512,7 @@ export class SelfHealingAgent extends Agent {
     return strategyMap[issue.type] || null
 }
 
-  private async verifyResolution(issue: HealthIssue): Promise<boolean> {</boolean>
+  private async verifyResolution(issue: HealthIssue): Promise<boolean> {
     // Verify the issue has been resolved
     this.logger.info(`Verifying resolution of issue: ${issue.id}`);
     
@@ -519,7 +527,7 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async checkWebHealth(): Promise<boolean> {</boolean>
+  private async checkWebHealth(): Promise<boolean> {
     try {
       const response = await fetch('http://localhost:3000/api/health');
       return response.ok
@@ -528,17 +536,17 @@ export class SelfHealingAgent extends Agent {
 }
   }
 
-  private async checkApiHealth(): Promise<boolean> {</boolean>
+  private async checkApiHealth(): Promise<boolean> {
     // API health check
     return true
 }
 
-  private async checkDatabaseHealth(): Promise<boolean> {</boolean>
+  private async checkDatabaseHealth(): Promise<boolean> {
     // Database health check
     return true
 }
 
-  private async reportSuccess(issue: HealthIssue, action: HealingAction): Promise<void> {</void>
+  private async reportSuccess(issue: HealthIssue, action: HealingAction): Promise<void> {
     this.logger.info(`Successfully healed issue: ${issue.id}`);
     
     await this.sendMessage({ to: 'orchestrator',
@@ -547,11 +555,10 @@ export class SelfHealingAgent extends Agent {
         issue,
         action,
         duration: Date.now() - issue.detectedAt.getTime()
-      }
-    })
+      }    })
 }
 
-  private async escalateIssue(issue: HealthIssue): Promise<void> {</void>
+  private async escalateIssue(issue: HealthIssue): Promise<void> {
     this.logger.error(`Failed to heal issue: ${issue.id}, escalating...`);
     
     await this.sendMessage({ to: 'orchestrator',
@@ -560,11 +567,10 @@ export class SelfHealingAgent extends Agent {
         issue,
         attempts: issue.attempts,
         requiresHumanIntervention: true
-      }
-    })
+      }    })
 }
 
-  private async escalateToHuman(error: any): Promise<void> {</void>
+  private async escalateToHuman(error: any): Promise<void> {
     this.logger.error('Critical error in self-healing agent:', error);
     
     await this.sendMessage({ to: 'notification-service',
@@ -572,14 +578,13 @@ export class SelfHealingAgent extends Agent {
       payload: { error: error.message,
         component: 'self-healing-agent',
         severity: 'critical'
-      }
-    })
+      }    })
 }
 
-  private async resetComponentState(component: string): Promise<boolean> {</boolean>
+  private async resetComponentState(component: string): Promise<boolean> {
     // Reset component to default state
     this.logger.info(`Resetting state for component: ${component}`);
     return true
 }
 }
-}}}}}})))))))
+}}}}}}

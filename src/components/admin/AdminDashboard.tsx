@@ -5,22 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Users, Activity, BarChart3, Database, TrendingUp, TrendingDown, Clock, AlertCircle, CheckCircle2, XCircle, ArrowUpRight, Server, Cpu, HardDrive, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
-interface DashboardStats { totalUsers: number;
-  activeUsers: number;
-  newUsersToday: number;
-  newUsersThisWeek: number;
-  systemHealth: string;
-  uptime: string;
-  cpuUsage: string;
-  memoryUsage: string;
-  totalProjects: number;
-  activeProjects: number;
-  apiCalls: { today: number;
-  thisWeek: number;
+interface DashboardStats { totalUsers: number
+  activeUsers: number
+  newUsersToday: number
+  newUsersThisWeek: number
+  systemHealth: string
+  uptime: string
+  cpuUsage: string
+  memoryUsage: string
+  totalProjects: number
+  activeProjects: number
+  apiCalls: { today: number
+  thisWeek: number
   thisMonth: number
 },
-  recentActivity: Array<{ type: string;
-    message: string;
+  recentActivity: Array<{ type: string
+    message: string
 timestamp: string
   }>
 }
@@ -30,7 +30,7 @@ y,
   onNavigate: (section: string) => void
 }
 
-export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardProps) { ;
+export function AdminDashboard({ stats, adminUser, onNavigate }: AdminDashboardProps) { 
   const [refreshing, setRefreshing] = useState(false);
   const formatNumber = (num: number) =>  {
     if (num >= 1000000) {;
@@ -179,7 +179,7 @@ className="w-full mt-4";
           </div>
       {/* Quick Actions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-blue-500";
+          <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-blue-500"
 
     const onClick={() => onNavigate('users')}</Card>
         ></Card>
@@ -190,7 +190,7 @@ className="w-full mt-4";
                 <p className="text-xl font-semibold">Users</p>
               <Users className="h-8 w-8 text-blue-500"    />
           </Card>
-        <Card className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-purple-500";
+        <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-purple-500"
 
     const onClick={() => onNavigate('analytics')}</Card>
         ></Card>
@@ -201,7 +201,7 @@ className="w-full mt-4";
                 <p className="text-xl font-semibold">Analytics</p>
               <BarChart3 className="h-8 w-8 text-purple-500"    />
           </Card>
-        <Card className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-green-500";
+        <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-green-500"
 
     const onClick={() => onNavigate('database')}</Card>
         ></Card>
@@ -212,7 +212,7 @@ className="w-full mt-4";
                 <p className="text-xl font-semibold">Database</p>
               <Database className="h-8 w-8 text-green-500"    />
           </Card>
-        <Card className="hover:shadow-md transition-all cursor-pointer border-l-4 border-l-orange-500";
+        <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-orange-500"
 
     const onClick={() => onNavigate('logs')}</Card>
         ></Card>
@@ -224,6 +224,4 @@ className="w-full mt-4";
               <Activity className="h-8 w-8 text-orange-500" /    />
   );
 </div>
-  }
-
-})
+  }    }

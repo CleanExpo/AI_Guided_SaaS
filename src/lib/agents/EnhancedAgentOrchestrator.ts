@@ -61,6 +61,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     this.communication = new AgentCommunication();
     this.rateLimiter = new CPURateLimiter({ maxCpuUsage: this.config.resourceLimits.maxCpu,
       maxMemoryUsage: this.config.resourceLimits.maxMemory
+   
     });
     
     this.metrics={ totalTasks: 0;
@@ -78,13 +79,13 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
 
   private initializeAgents(): void {
     // Initialize core agents
-    const coreAgents = [;
+    const coreAgents = [
       new ArchitectAgent(, new BackendAgent(),
       new FrontendAgent()
     ];
     
     // Initialize specialized agents
-    const specializedAgents = [;
+    const specializedAgents = [
       new QAAgent(, new DevOpsAgent(),
       new TypeScriptAgent()
     ];
@@ -101,7 +102,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
 };);
     
     this.emit('orchestrator:initialized', { agentCount: this.agents.size,
-      config: this.config
+      config: this.config   
     })
 }
 
@@ -123,8 +124,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     this.agents.forEach(agent => {
       agent.on('task:complete', (result) => this.handleTaskComplete(result));
       agent.on('task:failed', (error) => this.handleTaskFailed(error));
-      agent.on('status:changed', (status) => this.handleAgentStatusChange(status))
-};)
+      agent.on('status:changed', (status) => this.handleAgentStatusChange(status))    })
 }
 
   public registerAgent(agent: Agent): void {
@@ -143,12 +143,13 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     this.emit('agent:registered', config)
 }
 
-  public async executeWorkflow(workflow: AgentWorkflow, context: any = {}): Promise<any> {</any>
+  public async executeWorkflow(workflow: AgentWorkflow, context: any = {}): Promise<any> {
 { new WorkflowExecution(workflow, context);
     this.activeWorkflows.set(workflow.id, execution);
     
     try {
-      this.emit('workflow:started', { workflow: workflow.id });
+      this.emit('workflow:started', { workflow: workflow.id
+    });
       
       // Execute workflow steps
       const result = await this.executeWorkflowSteps(execution);
@@ -167,8 +168,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
         await this.selfHealingAgent.processMessage({ from: 'orchestrator',
           to: 'self-healing-agent',
           type: 'workflow-failure',
-          payload: { workflow, error }
-        })
+          payload: { workflow, error }    })
 }
       
       throw error
@@ -177,7 +177,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
 }
   }
 
-  private async executeWorkflowSteps(execution: WorkflowExecution): Promise<any> {</any>
+  private async executeWorkflowSteps(execution: WorkflowExecution): Promise<any> {
     const results: Map<string any> = new Map();</string>
     
     for (const step of execution.workflow.steps) {
@@ -239,7 +239,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     return results
 }
 
-  private async executeStep(step: WorkflowStep, context: any): Promise<any> {</any>
+  private async executeStep(step: WorkflowStep, context: any): Promise<any> {
 { this.agents.get(step.agent);
     
     if (!agent) {
@@ -258,15 +258,14 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     return this.executeTask(task)
 }
 
-  public async executeTask(task: AgentTask): Promise<any> {</any>
+  public async executeTask(task: AgentTask): Promise<any> {
     // Check resource limits
     if (this.rateLimiter.isCurrentlyThrottled() {)} {
       this.taskQueue.push(task);
       this.metrics.queueLength++;
       return new Promise((resolve, reject) => {
         task.resolve = resolve;
-        task.reject = reject
-};)
+        task.reject = reject    })
 }
     
     const agent = this.agents.get(task.assignedTo!);
@@ -284,7 +283,8 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
         to: task.assignedTo!,
         type: task.type,
         payload: task.payload
-      });
+     
+    });
       
       task.status = 'completed';
       task.result = result;
@@ -305,8 +305,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
         await this.selfHealingAgent.processMessage({ from: 'orchestrator',
           to: 'self-healing-agent',
           type: 'task-failure',
-          payload: { task, error }
-        })
+          payload: { task, error }    })
 }
       
       throw error
@@ -329,8 +328,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
       // Broadcast to multiple agents
       message.to.forEach(agentId => {
         const agent = this.agents.get(agentId);
-        agent?.processMessage(message)
-};)
+        agent?.processMessage(message)    })
 } else if (message.to === 'orchestrator') {
       // Handle orchestrator messages
       this.handleOrchestratorMessage(message)
@@ -428,7 +426,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     return new Map(this.agents)
 }
 
-  public async shutdown(): Promise<void> {</void>
+  public async shutdown(): Promise<void> {
     this.emit('orchestrator:shutting_down');
     
     // Stop all agents
@@ -460,4 +458,4 @@ declare module './types' {
   interface AgentTask { resolve?: (value: any) => void;
     reject?: (reason: any) => void
  }
-}}}}}}))
+}}}}}}

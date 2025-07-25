@@ -7,7 +7,8 @@ import { Providers } from '@/components/providers';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
 import { Toaster } from '@/components/ui/toaster';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin']
+    });
 
 export const metadata: Metadata={ title: 'AI Guided SaaS Platform',
   description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation',
@@ -17,7 +18,7 @@ export const metadata: Metadata={ title: 'AI Guided SaaS Platform',
         url: '/favicon.ico',
         sizes: '16x16 32x32',
         type: 'image/x-icon'
-      }
+      },
       { url: '/icon-192.png',
         sizes: '192x192',
         type: 'image/png'
@@ -48,8 +49,8 @@ export const metadata: Metadata={ title: 'AI Guided SaaS Platform',
     description: 'Complete AI-powered SaaS development platform with intelligent guidance and automation',
     images: [
       { url: '/og-image.png',
-        width: 1200;
-        height: 630;
+        width: 1200,
+        height: 630,
         alt: 'AI Guided SaaS Platform'
       }
     ]
@@ -64,14 +65,14 @@ export const metadata: Metadata={ title: 'AI Guided SaaS Platform',
 };
 
 export const viewport: Viewport={ width: 'device-width',
-  initialScale: 1;
+  initialScale: 1
   themeColor: '#1e40af',
   colorScheme: 'light dark'
 };
 
 export default function RootLayout({
   children }: { children: React.ReactNode
-}) {
+    }) {
   return (
     <html lang="en" suppressHydrationWarning>
           <body className={inter.className}></body>

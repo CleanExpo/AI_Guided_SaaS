@@ -9,14 +9,16 @@ export default function CollaborateDashboardPage() {
   
   if (status === 'loading') {
     return (
-    <div className="flex items-center justify-center min-h-screen">, <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600">
-          </div>
-  )
-}
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
   
   if (!session) {
-    redirect('/auth/signin'); return null
-}
+    redirect('/auth/signin');
+    return null;
+  }
   
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -28,7 +30,7 @@ export default function CollaborateDashboardPage() {
           <p className="text-gray-600">
             Manage your collaborative projects and team activities.
           </p>
-        
+        </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h3 className="font-semibold text-gray-900 mb-2">Active Projects</h3>
@@ -47,6 +49,8 @@ export default function CollaborateDashboardPage() {
             <div className="text-3xl font-bold text-purple-600">24</div>
             <p className="text-sm text-gray-600 mt-1">Actions this week</p>
           </div>
+        </div>
+        
         <div className="bg-white rounded-lg shadow-sm border">
           <div className="p-6 border-b">
             <h2 className="text-xl font-semibold text-gray-900">Recent Projects</h2>
@@ -63,8 +67,10 @@ export default function CollaborateDashboardPage() {
                 </span>
                 <span className="text-sm text-gray-500">5 members</span>
               </div>
-        <div className="flex items-center justify-between py-4 border-b border-gray-100 last:border-b-0">
-          <div></div>
+            </div>
+            
+            <div className="flex items-center justify-between py-4 border-b border-gray-100 last:border-b-0">
+              <div>
                 <h3 className="font-medium text-gray-900">Mobile App UI</h3>
                 <p className="text-sm text-gray-600">Last updated 1 day ago</p>
               </div>
@@ -74,5 +80,10 @@ export default function CollaborateDashboardPage() {
                 </span>
                 <span className="text-sm text-gray-500">3 members</span>
               </div>
-  )
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

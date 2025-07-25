@@ -20,7 +20,7 @@ export interface AdminSession { adminId: string;
   exp: number}
 
 // Master admin credentials from environment
-const MASTER_ADMIN_EMAILS = [;
+const MASTER_ADMIN_EMAILS = [
   process.env.ADMIN_EMAIL || '';
 ].filter((email) => email !== '');
 
@@ -102,8 +102,8 @@ export class AdminAuthService {
 
       return jwt.sign(payload, this.jwtSecret, { expiresIn: '8h', // 8 hour session,
         issuer: 'ai-guided-saas-admin',
-        audience: 'admin-panel'
-      })
+        audience: 'admin-panel'   
+    })
 } catch (error) {
       console.error('Error generating admin token:', error, throw new Error('Failed to generate admin token')}
   }
@@ -113,7 +113,8 @@ export class AdminAuthService {
     try {
       const decoded = jwt.verify(token, this.jwtSecret, { issuer: 'ai-guided-saas-admin',
         audience: 'admin-panel'
-      }) as AdminSession;
+     
+    }) as AdminSession;
       return decoded
 } catch (error) {
       console.error('Error verifying admin token:', error); return null
@@ -148,7 +149,8 @@ export class AdminAuthService {
 
       // Additional security checks
       if (session.role !== 'super_admin' && session.role !== 'admin' && session.role !== 'moderator') {;
-        logWarn('Invalid admin role in session', { role: session.role });
+        logWarn('Invalid admin role in session', { role: session.role
+    });
         return null
 }
 
@@ -185,4 +187,4 @@ export async function requireAdminAuth(
     console.error('Error in requireAdminAuth:', error);
         return { authorized: false, error: 'Internal server error'   }
 }
-})))))
+}

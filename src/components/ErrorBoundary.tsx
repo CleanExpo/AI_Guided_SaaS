@@ -4,7 +4,7 @@ interface ErrorBoundaryProps { children: React.ReactNod
 e;
   fallback?: React.ReactNode
 }
-interface ErrorBoundaryState { hasError: boolean;
+interface ErrorBoundaryState { hasError: boolean
   error?: Error
 }
 
@@ -26,4 +26,3 @@ export class ErrorBoundary extends React.Component {
 }
 </div>
   }
-)

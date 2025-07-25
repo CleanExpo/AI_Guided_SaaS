@@ -8,19 +8,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Code, FileCode, Settings, Terminal, GitBranch, Save, Play, Search, FolderOpen, ChevronRight, ChevronDown, File, AlertCircle, CheckCircle, X, Plus, Loader2 } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import Editor from '@monaco-editor/react';
-interface FileNode { name: string;
-  path: string;
-  type: 'file' | 'folder';
+interface FileNode { name: string
+  path: string
+  type: 'file' | 'folder'
   children?: FileNode[],
   content?: string,
   language?: string
 }
-interface AdvancedCodeEditorProps { projectId: string;
+interface AdvancedCodeEditorProps { projectId: string
   initialFiles?: FileNode[],
-  onSave?: (files: FileNode[]) => void;
+  onSave?: (files: FileNode[]) => void
   readOnly?: boolean
 }
-const defaultFiles: FileNode[]  = [;
+const defaultFiles: FileNode[]  = [
   { name: 'src',
     path: 'src',
     type: 'folder',
@@ -59,7 +59,7 @@ DATABASE_URL=, AUTH_SECRET=`
     type: 'file',
     language: 'json',
 content: `{
-  "name": "my-app";
+  "name": "my-app"
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -71,7 +71,7 @@ content: `{
 ];
 export function AdvancedCodeEditor({
   projectId,
-  initialFiles = defaultFiles, onSave,;
+  initialFiles = defaultFiles, onSave,
   readOnly = false}: AdvancedCodeEditorProps) {
   const [files, setFiles] = useState<FileNode[]>(initialFiles);</FileNode>
   const [activeFile, setActiveFile] = useState<FileNode | null>(null);</FileNode>
@@ -129,8 +129,7 @@ const handleEditorChange = (value: string | undefined) => {
           return { ...node, content: value || '' }
 }
         if (node.children) { return { ...node, children: updateFileContent(node.children) };
-        return node
-})
+        return node    })
     };
     setFiles(updateFileContent(files);
     setHasChanges(true)
@@ -158,7 +157,7 @@ const addTerminalOutput  = (line: string) => {
 
 const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
     return nodes.map((node) => (\n    <div key={node.path}; className={cn(
-            "flex items-center gap-2 px-2 py-1 hover: bg-gray-100 cursor-pointer text-sm";
+            "flex items-center gap-2 px-2 py-1 hover: bg-gray-100 cursor-pointer text-sm"
             activeFile?.path === node.path && "bg-primary/10 text-primary"
           )}
           const style={{ paddingLeft: `${level * 16 + 8}px` }}
@@ -192,7 +191,7 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
             <Code className="h-5 w-5"     />
             Advanced Code Editor
 </h2>
-          <Badge variant="outline">Project: { projectId }</Badge>
+          <Badge variant="outline">Project: { projectId }/>
         <div className="flex items-center gap-2">
           <Button size="sm";
 variant="outline";
@@ -219,7 +218,7 @@ variant="outline";
         <div className="w-64 bg-white border-r flex flex-col p-4 border-b">
           <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />
-          <input type="text";
+          <input type="text"
 placeholder="Search files...";
 className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
 
@@ -243,7 +242,7 @@ className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
               ></div>
                 <FileCode className="h-3 w-3"    />
           <span>{file.name}</span>
-                <button className="ml-2 hover:bg-gray-300 rounded p-0.5";
+                <button className="ml-2 hover: bg-gray-300 rounded p-0.5"
 
     const onClick={(e) =>  {</button>
                     e.stopPropagation(, handleCloseFile(file)};
@@ -259,9 +258,9 @@ className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
                 theme="vs-light";
 
     const options={{ minimap: { enabled: false }
-                  fontSize: 14;
+                  fontSize: 14
                   lineNumbers: 'on',
-                  readOnly: readOnly;
+                  readOnly: readOnly
                   wordWrap: 'on',
                   automaticLayout: true
   }
@@ -282,7 +281,7 @@ className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
           <span className="text-sm font-medium">Terminal</span>
           <Button size="sm";
 variant="ghost";
-className="text-gray-400 hover:text-gray-100";
+className="text-gray-400 hover: text-gray-100"
 
     const onClick={() => setTerminalOutput([])}</Button>
           >
@@ -304,4 +303,4 @@ className="text-gray-400 hover:text-gray-100";
     </main>
   }
 
-}}}}}}}}))))))))
+}}}}}}}}

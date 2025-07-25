@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, AlertCircle, Clock } from 'lucide-react';
 
 export default function StatusPage() {
-  const services = [;
+  const services = [
     { name: 'API Gateway', status: 'operational', uptime: '99.98%' },
     { name: 'Web Application', status: 'operational', uptime: '99.95%' },
     { name: 'Database', status: 'operational', uptime: '99.99%' },

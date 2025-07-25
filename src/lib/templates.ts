@@ -63,7 +63,7 @@ export class TemplateMarketplace {
   static isConfigured(): boolean {
     return isServiceConfigured('database')}
   // Get featured templates
-  static async getFeaturedTemplates(): Promise<any> {</any>
+  static async getFeaturedTemplates(): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockFeaturedTemplates()}
     try {
@@ -81,7 +81,7 @@ export class TemplateMarketplace {
         return this.getMockFeaturedTemplates()}
 }
   // Get templates by category
-  static async getTemplatesByCategory(category: string, limit = 20): Promise<any> {</any>
+  static async getTemplatesByCategory(category: string, limit = 20): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockTemplatesByCategory(category)}
     try {;
@@ -103,7 +103,7 @@ export class TemplateMarketplace {
   static async searchTemplates(query: string, filters? null : {;
       category?: string, framework?: string, pricing?: string;
       difficulty?: string
-    }): Promise<any> {</any>
+    }): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockSearchResults(query)}
     try {;
@@ -132,7 +132,7 @@ const templates = await DatabaseService.query(sql, params);
         return this.getMockSearchResults(query)}
 }
   // Get template by ID
-  static async getTemplate(id: string): Promise<any> {</any>
+  static async getTemplate(id: string): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockTemplate(id)}
     try {;
@@ -150,7 +150,7 @@ const templates = await DatabaseService.query(sql, params);
         return this.getMockTemplate(id)}
 }
   // Submit template for review
-  static async submitTemplate(userId: string, templateData: Partial<Template>): Promise<any> {</any>
+  static async submitTemplate(userId: string, templateData: Partial<Template>): Promise<any> {
     if (!this.isConfigured() {)} {
       return { success: true;
     submissionId: `submission-${Date.now()}`
@@ -170,7 +170,8 @@ if (submission) {
           'template_submission',
           'marketplace',
           submission.id,
-          { templateName: templateData.name  });
+          { templateName: templateData.name 
+    });
         return { success: true;
     submissionId: submission.id
 }} else { return { success: false;
@@ -180,7 +181,7 @@ if (submission) {
     error: 'Failed to submit template'
 }
   // Purchase template
-  static async purchaseTemplate(userId: string, templateId: string): Promise<any> {</any>
+  static async purchaseTemplate(userId: string, templateId: string): Promise<any> {
     if (!this.isConfigured() {)} {
       return { success: true;
     downloadUrl: `/api/templates/${templateId}/download?demo=true`
@@ -231,7 +232,7 @@ user_id: userId;
     error: 'Failed to purchase template'
 }
   // Get user's purchased templates
-  static async getUserTemplates(userId: string): Promise<any> {</any>
+  static async getUserTemplates(userId: string): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockUserTemplates()}
     try {;
@@ -250,7 +251,7 @@ user_id: userId;
         return this.getMockUserTemplates()}
 }
   // Get template categories
-  static async getCategories(): Promise<any> {</any>
+  static async getCategories(): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockCategories()}
     try {;
@@ -267,7 +268,7 @@ user_id: userId;
     description: cat.description as string,
     icon: cat.icon as string,
     templateCount: (cat.template_count as number) || 0
-      }})
+      }    })
     } catch (error) {;
       console.error('Error fetching, categories:', error);
         return this.getMockCategories()}
@@ -381,4 +382,4 @@ user_id: userId;
       }}]
 }
 
-}}}}}}}}}}}))))))))
+}}}}}}}}}}}

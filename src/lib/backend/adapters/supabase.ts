@@ -10,7 +10,7 @@ export class SupabaseAdapter implements BackendAdapter {
     this.client = createClient(config.url, config.apiKey)
 }
   // Authentication
-  async signUp(email: string, password: string, metadata? null : any): Promise<User> {</User>
+  async signUp(email: string, password: string, metadata? null : any): Promise<User> {
     const { data, error  }: any = await this.client.auth.signUp({
       email,
       password,;
@@ -33,7 +33,7 @@ export class SupabaseAdapter implements BackendAdapter {
     return { user: this.mapSupabaseUser(data.user, token: data.session.access_token
   }
 }
-  async signOut(): Promise<void> {</void>
+  async signOut(): Promise<void> {
     const { error  }: any = await this.client.auth.signOut();
     if (error) {
       throw new BackendError(error.message, 'AUTH_ERROR', 400)}
@@ -41,7 +41,7 @@ export class SupabaseAdapter implements BackendAdapter {
     const { data: { user }} = await this.client.auth.getUser();
     return user ? this.mapSupabaseUser(user) : null
 }
-  async updateUser(id: string, data: Partial<User>): Promise<User> {</User>
+  async updateUser(id: string, data: Partial<User>): Promise<User> {
     const { data: updatedUser, error  }: any = await this.client.auth.updateUser({ data: { name: data.name, ...data.metadata }});
     if (error) {
       throw new BackendError(error.message, 'UPDATE_ERROR', 400)}
@@ -50,7 +50,7 @@ export class SupabaseAdapter implements BackendAdapter {
     return this.mapSupabaseUser(updatedUser.user)
 }
   // Projects
-  async createProject(data: Omit<Project 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {</Project>
+  async createProject(data: Omit<Project 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
     const { data: project, error  }: any = await this.client;
       .from('projects');
       .insert(data);
@@ -70,7 +70,7 @@ export class SupabaseAdapter implements BackendAdapter {
       throw new BackendError(error.message, 'FETCH_ERROR', 400)};
     return data
 }
-  async updateProject(id: string, data: Partial<Project>): Promise<Project> {</Project>
+  async updateProject(id: string, data: Partial<Project>): Promise<Project> {
     const { data: project, error  }: any = await this.client;
       .from('projects');
       .update(data);
@@ -81,7 +81,7 @@ export class SupabaseAdapter implements BackendAdapter {
       throw new BackendError(error.message, 'UPDATE_ERROR', 400)};
     return project
 }
-  async deleteProject(id: string): Promise<void> {</void>
+  async deleteProject(id: string): Promise<void> {
     const { error  }: any = await this.client;
       .from('projects');
       .delete();
@@ -89,10 +89,12 @@ export class SupabaseAdapter implements BackendAdapter {
     if (error) {
       throw new BackendError(error.message, 'DELETE_ERROR', 400)}
   async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project>> {;</PaginatedResponse>
-    let query = this.client, .from('projects', .select('*', { count: 'exact' });
+    let query = this.client, .from('projects', .select('*', { count: 'exact'
+    });
       .eq('userId', userId);
     if (options?.orderBy) {
-      query = query.order(options.orderBy, { ascending: options.order === 'asc' })
+      query = query.order(options.orderBy, { ascending: options.order === 'asc'   
+    })
     }
     if (options?.limit) {
       query = query.limit(options.limit)}
@@ -114,7 +116,7 @@ const total = count || 0;
   }
 }
   // Generic CRUD
-  async create<T>(collection: string, data: any): Promise<T> {</T>
+  async create<T>(collection: string, data: any): Promise<T> {
     const { data: result, error  }: any = await this.client;
       .from(collection);
       .insert(data);
@@ -135,7 +137,7 @@ const total = count || 0;
     return data
 }
   async update<T>(collection: string, id: string,</T>
-  data: any): Promise<T> {</T>
+  data: any): Promise<T> {
     const { data: result, error  }: any = await this.client;
       .from(collection);
       .update(data);
@@ -146,7 +148,7 @@ const total = count || 0;
       throw new BackendError(error.message, 'UPDATE_ERROR', 400)};
     return result
 }
-  async delete(collection: string, id: string): Promise<void> {</void>
+  async delete(collection: string, id: string): Promise<void> {
     const { error  }: any = await this.client;
       .from(collection);
       .delete();
@@ -154,13 +156,15 @@ const total = count || 0;
     if (error) {
       throw new BackendError(error.message, 'DELETE_ERROR', 400)}
   async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T>> {;</PaginatedResponse>
-    let query = this.client, .from(collection, .select('*', { count: 'exact' });
+    let query = this.client, .from(collection, .select('*', { count: 'exact'
+    });
     if (options?.filters) {
       Object.entries(options.filters).forEach(([key, value]) => {
-        query = query.eq(key, value)};)
+        query = query.eq(key, value)    })
     }
     if (options?.orderBy) {
-      query = query.order(options.orderBy, { ascending: options.order === 'asc' })
+      query = query.order(options.orderBy, { ascending: options.order === 'asc'   
+    })
     }
     if (options?.limit) {
       query = query.limit(options.limit)}
@@ -203,13 +207,13 @@ collection: string;
             table: collection;
             record: payload.new as T,
             oldRecord: payload.old as T
-};)}
+    })}
       .subscribe();
     return () => {
       channel.unsubscribe()};
   // File storage;
   async uploadFile(bucket: string, path: string;
-  file: File): Promise<string> {</string>
+  file: File): Promise<string> {
     const { data, error  }: any = await this.client.storage;
       .from(bucket);
       .upload(path, file);
@@ -217,7 +221,7 @@ collection: string;
       throw new BackendError(error.message, 'UPLOAD_ERROR', 400)};
     return this.getFileUrl(bucket, path)
 }
-  async deleteFile(bucket: string, path: string): Promise<void> {</void>
+  async deleteFile(bucket: string, path: string): Promise<void> {
     const { error  }: any = await this.client.storage;
       .from(bucket);
       .remove([path]);
@@ -281,7 +285,8 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {</T>
     return this
 }
   orderBy(field: string, direction: 'asc' | 'desc' = 'asc'): QueryBuilder<T> {</T>
-    this.query = this.query.order(field, { ascending: direction === 'asc' });
+    this.query = this.query.order(field, { ascending: direction === 'asc'
+    });
     return this
 }
   limit(count: number): QueryBuilder<T> {</T>
@@ -302,11 +307,12 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {</T>
       throw new BackendError(error.message, 'QUERY_ERROR', 400)};
     return data
 }
-  async count(): Promise<number> {</number>
-    const { count, error  }: any = await this.query.select('*', { count: 'exact', head: true });
+  async count(): Promise<number> {
+    const { count, error  }: any = await this.query.select('*', { count: 'exact', head: true
+    });
     if (error) {
       throw new BackendError(error.message, 'QUERY_ERROR', 400)};
     return count || 0
 }
 
-}}}}}}}))))))))
+}}}}}}}

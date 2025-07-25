@@ -18,7 +18,8 @@ const handleComponentClick = (component: ComponentInstance) => {selectComponent(
       page: 'ui-builder',
       promptContext: 'User selected component for editing',
       action: 'kept',
-      timestamp: Date.now()};)
+      timestamp: Date.now()   
+    })
   };
   return (
     <main className = "flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto">

@@ -24,18 +24,18 @@ export default function DocsPage() {
   const [docSystem, setDocSystem] = useState(null);
   const [tutorialSystem, setTutorialSystem] = useState(null);
 
-  useEffect(() =>  {
+  useEffect(() => {
     // Simulate loading documentation systems
     setTimeout(() => {
       setDocSystem('loaded');
-      setTutorialSystem('loaded')
-}, 1000)
-}, []);
+      setTutorialSystem('loaded');
+    }, 1000);
+  }, []);
 
-  const docCategories = [;
+  const docCategories = [
     { title: 'Getting Started',
       description: 'Learn the basics and get up and running quickly',
-      icon: Play;
+      icon: Play,
       docs: [
         { title: 'Quick Start Guide', slug: 'quick-start', description: 'Get started in 5 minutes' },
         { title: 'Installation', slug: 'installation', description: 'Set up your development environment' },
@@ -44,7 +44,7 @@ export default function DocsPage() {
     },
     { title: 'API Reference',
       description: 'Complete API documentation for developers',
-      icon: Code;
+      icon: Code,
       docs: [
         { title: 'Authentication', slug: 'auth', description: 'API key management and security' },
         { title: 'Endpoints', slug: 'endpoints', description: 'All available API endpoints' },
@@ -53,7 +53,7 @@ export default function DocsPage() {
     },
     { title: 'Features',
       description: 'Explore all platform capabilities',
-      icon: Zap;
+      icon: Zap,
       docs: [
         { title: 'AI Assistant', slug: 'ai-assistant', description: 'Using the AI coding assistant' },
         { title: 'Project Templates', slug: 'templates', description: 'Pre-built project templates' },
@@ -62,7 +62,7 @@ export default function DocsPage() {
     },
     { title: 'Deployment',
       description: 'Deploy your applications to production',
-      icon: Globe;
+      icon: Globe,
       docs: [
         { title: 'Deployment Guide', slug: 'deployment', description: 'Deploy to various platforms' },
         { title: 'Environment Setup', slug: 'env-setup', description: 'Configure production environments' },
@@ -71,7 +71,7 @@ export default function DocsPage() {
     },
     { title: 'Security',
       description: 'Security best practices and guidelines',
-      icon: Shield;
+      icon: Shield,
       docs: [
         { title: 'Security Overview', slug: 'security', description: 'Platform security features' },
         { title: 'Data Privacy', slug: 'privacy', description: 'How we protect your data' },
@@ -80,7 +80,7 @@ export default function DocsPage() {
     }
   ];
 
-  const quickLinks = [;
+  const quickLinks = [
     { title: 'API Reference', href: '/docs/api-reference', icon: Code },
     { title: 'Quick Start', href: '/docs/quick-start', icon: Play },
     { title: 'Deployment', href: '/docs/deployment', icon: Globe },
@@ -101,25 +101,29 @@ export default function DocsPage() {
           <div className="max-w-md mx-auto relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"  />
             <Input
-              placeholder="Search documentation...";
+              placeholder="Search documentation..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}</Input>
-              className="pl-10";
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
             />
           </div>
+        </div>
 
         {/* Quick Links */}
         <div className="grid gap-4 md:grid-cols-4 mb-12">
           {quickLinks.map((link) => (
             <Link key={link.title} href={link.href}>
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="flex items-center p-6">
-          <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                    <link.icon className="h-6 w-6 text-blue-600"  />
-          </div>
-                  <div>
-          <h3 className="font-semibold text-gray-900">{link.title}</h3>
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                    <link.icon className="h-6 w-6 text-blue-600" />
                   </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{link.title}</h3>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 
@@ -127,38 +131,44 @@ export default function DocsPage() {
         <div className="space-y-8">
           {docCategories.map((category) => (
             <Card key={category.title}>
-          <CardHeader></CardHeader>
+              <CardHeader>
                 <CardTitle className="flex items-center">
-          <category.icon className="h-6 w-6 mr-3 text-blue-600"   />
+                  <category.icon className="h-6 w-6 mr-3 text-blue-600" />
                   {category.title}
                 </CardTitle>
                 <p className="text-gray-600">{category.description}</p>
+              </CardHeader>
               <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
+                <div className="grid gap-4 md:grid-cols-3">
                   {category.docs.map((doc) => (
                     <Link key={doc.slug} href={`/docs/${doc.slug}`}>
-          <div className="p-4 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
+                      <div className="p-4 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
                         <h4 className="font-semibold text-gray-900 mb-2">{doc.title}</h4>
                         <p className="text-sm text-gray-600">{doc.description}</p>
                       </div>
                     </Link>
                   ))}
                 </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
         {/* Help Section */}
         <Card className="mt-12">
           <CardContent className="p-8 text-center">
-            <Book className="h-12 w-12 text-blue-600 mx-auto mb-4"  />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">Need more help?</h3>
+            <Book className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Need more help?</h3>
             <p className="text-gray-600 mb-6">
               Can't find what you're looking for? Our support team is here to help.
             </p>
             <div className="flex justify-center space-x-4">
-          <Button variant="outline">Contact Support</Button>
+              <Button variant="outline">Contact Support</Button>
               <Button>Join Community</Button>
             </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
-  )
+  );
 }

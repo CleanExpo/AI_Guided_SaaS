@@ -139,7 +139,8 @@ const _chunkText = text.slice(currentIndex, endIndex);
  * Splits code files intelligently by functions/classes
  */;
 export class CodeTextSplitter extends TextSplitter {
-  private language: string, constructor(config: TextSplitterConfig & { language: string }) {
+  private language: string, constructor(config: TextSplitterConfig & { language: string
+    }) {
     super(config, this.language = config.language.toLowerCase()}
   split(text: string): TextChunk[] {
     const splitter = this.getSplitterForLanguage();
@@ -229,11 +230,12 @@ break
   }
 }
       return new CodeTextSplitter(;
-        config as TextSplitterConfig & { language: string  });
+        config as TextSplitterConfig & { language: string 
+    });
     case 'markdown':
       return new MarkdownTextSplitter(config);
     break;
     default: throw new Error(`Unknown text, splitter: type, ${type}`);``
 }
 
-}}}}}}}))))))))))
+}}}}}}}

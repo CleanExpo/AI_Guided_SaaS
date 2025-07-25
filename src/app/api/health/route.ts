@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // Mark as dynamic to prevent static generation
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'
 
-export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
+export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        const healthStatus={ status: 'healthy',
-            timestamp: new Date().toISOString(, version: process.env.npm_package_version || '1.0.0',
+        const healthStatus = { status: 'healthy',
+            timestamp: new Date().toISOString(), version: process.env.npm_package_version || '1.0.0',
             environment: process.env.NODE_ENV || 'development',
             services: { database: 'connected',
                 cache: 'operational',
                 external_apis: 'healthy'
-            }
+            },
             uptime: process.uptime(),
             memory: { used: process.memoryUsage().heapUsed,
                 total: process.memoryUsage().heapTotal
@@ -24,23 +24,25 @@ export async function GET(request: NextRequest): Promise<NextResponse> {</NextRe
         return NextResponse.json({ status: 'unhealthy',
             error: 'Health check failed',
             timestamp: new Date().toISOString()
-        }, { status: 500 })
+        }, { status: 500   
+    })
 }
 }
 
-export async function POST(request: NextRequest): Promise<NextResponse> {</NextResponse>
+export async function POST(request: NextRequest): Promise<NextResponse> {
     try {
         const body = await request.json();
         const { service, action } = body;
         
         // Simulate service health action
-        return NextResponse.json({ success: true;
+        return NextResponse.json({ success: true,
             message: `Health check action ${action} performed on ${service}`,
-            timestamp: new Date().toISOString()
-        })
+            timestamp: new Date().toISOString()   
+    })
 } catch (error) {
-        console.error('Health action error:', error);
+        console.error('Health action error:', error)
         return NextResponse.json({ error: 'Health action failed' 
-        }, { status: 500 })
+        }, { status: 500   
+    })
+    }
 }
-})

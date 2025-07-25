@@ -24,7 +24,7 @@ apiKey: '' },
     strapi: { url: '',
 apiKey: '' },
     nocodb: { url: '',
-apiKey: '' }})
+apiKey: '' }    })
   useEffect(() => {
     // Load saved config;
   const savedConfig = loadBackendConfig(, if (savedConfig) {;
@@ -50,14 +50,15 @@ const _handleTest  = async () =>  {
 apiKey: formData[selectedBackend as keyof typeof formData].apiKey
 };
     try {
-      const adapter = createBackendAdapter(testConfig, // Test connection by trying to list users, await adapter.list('users', { limit: 1 })
-      setTestResult({ success: true;
-message: 'Connection successful!'
-      })
+      const adapter = createBackendAdapter(testConfig, // Test connection by trying to list users, await adapter.list('users', { limit: 1   
+    })
+      setTestResult({ success: true
+message: 'Connection successful!'   
+    })
 } catch (error) {
-      setTestResult({ success: false;
-message: error instanceof Error ? error.message : 'Connection failed'
-      })
+      setTestResult({ success: false
+message: error instanceof Error ? error.message : 'Connection failed'   
+    })
 } finally {
       setTesting(false)}
   const _handleSave = async () =>  {
@@ -67,13 +68,13 @@ apiKey: formData[selectedBackend as keyof typeof formData].apiKey
 };
     await switchBackend(newConfig);
     setConfig(newConfig);
-    setTestResult({ success: true;
+    setTestResult({ success: true
 message: 'Backend configuration saved!'
-})};
+    })};
   
 const backendInfo={ supabase: {
   name: 'Supabase',
-      icon: Database;
+      icon: Database
     description: 'Open source Firebase alternative with PostgreSQL',
       color: 'text-green-600',
       fields: [
@@ -82,7 +83,7 @@ const backendInfo={ supabase: {
    ]
     },
     strapi: { name: 'Strapi',
-      icon: Server;
+      icon: Server
     description: 'Leading open-source headless CMS',
       color: 'text-purple-600',
       fields: [
@@ -91,7 +92,7 @@ const backendInfo={ supabase: {
    ]
     },
     nocodb: { name: 'NocoDB',
-      icon: Cloud;
+      icon: Cloud
     description: 'Open source Airtable alternative',
       color: 'text-blue-600',
       fields: [
@@ -112,17 +113,17 @@ const backendInfo={ supabase: {
           <RadioGroup
 
 value={selectedBackend} onValueChange={setSelectedBackend};
-            className="grid grid-cols-1 md:grid-cols-3 gap-4";
+            className="grid grid-cols-1 md: grid-cols-3 gap-4"
           ></RadioGroup>
             {Object.entries(backendInfo).map(([key, info]) => {
               const _Icon = info.icon, return (Label;
 
     const key={key};
                   const htmlFor={key};
-                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer hover:bg-accent";
+                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer hover: bg-accent"
                    />
                   <RadioGroupItem value={key} id={key} className="sr-only"    />
-          <Icon className={`h-8, w-8 ${info.color}`}    />``</Icon>
+          <Icon className={`h-8, w-8 ${info.color}`/>``</Icon>
                   <span className="font-semibold">{info.name}</span>
                   <span className="text-sm text-muted-foreground text-center">
                     {info.description}</span>
@@ -146,13 +147,12 @@ span className="text-xs text-green-600 flex items-center"></span>
 const id={field.name};
 
     type={field.name.includes('key') || field.name.includes('token') ? 'password' : 'text'} placeholder={field.placeholder}
-                  value={formData[selectedBackend as keyof typeof formData][field.name as 'url' | 'apiKey']} onChange={(e) => setFormData(prev => ({</Input>
+                  value={formData[selectedBackend as keyof typeof formData][field.name as 'url' | 'apiKey']} onChange={(e) => setFormData(prev => ({/>
                     ...prev,
                     [selectedBackend]: {
                       ...prev[selectedBackend as keyof typeof formData],
                       [field.name]: e.target.value
-}))}
-                /></Input>))},
+}))/></Input>))},
     {/* Test, Result */},
     {testResult && (Alert variant={testResult.success ? 'default' : 'destructive'}>
               {testResult.success ? (</Alert>
@@ -234,4 +234,4 @@ div className="space-y-2"></div><h4 className="font-semibold">NocoDB: Setup:</h
     
   }
 
-}}}}}))))
+}}}}}

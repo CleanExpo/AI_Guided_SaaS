@@ -11,9 +11,9 @@ export const metadata: Metadata = { title: 'Pricing - AI Guided SaaS Platform',
 };
 
 export default function PricingPage() {
-  const plans = [;
+  const plans = [
     { name: 'Free',
-      price: 0;
+      price: 0
       period: 'month',
       description: 'Perfect for getting started',
       features: [
@@ -23,11 +23,11 @@ export default function PricingPage() {
         '1GB storage',
         'Basic templates'
       ],
-      popular: false;
+      popular: false
       buttonText: 'Get Started Free'
     },
     { name: 'Pro',
-      price: 29;
+      price: 29
       period: 'month',
       description: 'For professional developers',
       features: [
@@ -39,11 +39,11 @@ export default function PricingPage() {
         'Team collaboration',
         'Advanced analytics'
       ],
-      popular: true;
+      popular: true
       buttonText: 'Start Pro Trial'
     },
     { name: 'Enterprise',
-      price: 99;
+      price: 99
       period: 'month',
       description: 'For large teams and organizations',
       features: [
@@ -55,7 +55,7 @@ export default function PricingPage() {
         'SLA guarantee',
         'Custom training'
       ],
-      popular: false;
+      popular: false
       buttonText: 'Contact Sales'
     }
   ];

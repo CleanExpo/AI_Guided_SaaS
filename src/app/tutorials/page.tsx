@@ -5,17 +5,17 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Clock, Play } from 'lucide-react';
 
-interface Tutorial { id: string;
-  title: string;
-  description: string;
-  duration: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+interface Tutorial { id: string
+  title: string
+  description: string
+  duration: string
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
   completed?: boolean
 }
 
-interface TutorialCardProps { tutorial: Tutorial;
-  isCompleted: boolean;
-  isLocked: boolean;
+interface TutorialCardProps { tutorial: Tutorial
+  isCompleted: boolean
+  isLocked: boolean
   onStart: (id: string) => void
 }
 
@@ -57,7 +57,7 @@ TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
   )
 }
 
-const tutorials: Tutorial[] = [;
+const tutorials: Tutorial[] = [
   { id: '1',
     title: 'Getting Started with AI Guided SaaS',
     description: 'Learn the fundamentals of our platform and how to build your first application.',
@@ -107,8 +107,7 @@ export default function TutorialsPage() {
               tutorial={tutorial}
               isCompleted={isCompleted}
               isLocked={isLocked}
-              onStart={handleStartTutorial}
-              />
+              onStart={handleStartTutorial/>
           )
 })}
       </div>

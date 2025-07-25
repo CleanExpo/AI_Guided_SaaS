@@ -18,10 +18,10 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
       ...pulseConfig
     } as ContainerizedPulseConfig
 }
-  async initialize(): Promise<any> {</any>
+  async initialize(): Promise<any> {
     await super.initialize(, if (this.containerizedConfig.useContainers) {
       await this.initializeContainers()}
-  private async initializeContainers(): Promise<any> {</any>
+  private async initializeContainers(): Promise<any> {
     // Clean up any stopped containers first;
     await this.dockerManager.cleanupStoppedContainers(, // Get loaded agents, const _agents = this.loader.getLoadedAgents();
     // Start containers for each agent type;
@@ -32,7 +32,7 @@ for (const agent of agents) {
         console.error(`Failed to start container for ${agent.name}:`, error)``
   }
 }
-  protected async executeAgentTask(agentId: string, task): Promise<any> {</any>
+  protected async executeAgentTask(agentId: string, task): Promise<any> {
     if (this.containerizedConfig.useContainers) {
       // Check if agent container is healthy, const status = await this.dockerManager.getContainerStatus(agentId, if (!status || status.status !== 'running' || status.health !== 'healthy') {; console.warn(`Agent ${agentId} container not healthy, attempting to start...`)``; const agent = this.loader.getLoadedAgents().find(a => a.agent_id === agentId);
         if (agent) { await this.dockerManager.startAgentContainer(agent, // Wait for container to be ready
@@ -41,7 +41,7 @@ for (const agent of agents) {
     // Execute task using parent method
     await super.executeAgentTask(agentId, task)
 }
-  protected async checkSystemResources(): Promise<any> {</any>
+  protected async checkSystemResources(): Promise<any> {
 { await super.checkSystemResources(, if (this.containerizedConfig.useContainers) {;
       // Get container-specific metrics, const containerStatuses = await this.dockerManager.getAllContainerStatuses();
       // Calculate aggregate container resource usage;
@@ -92,14 +92,14 @@ const containerMetrics = this.calculateContainerMetrics(containerStatuses);
     else if (containerMetrics.avgCpuUsage < this.containerizedConfig.scaleDownThreshold && containerMetrics.avgMemoryUsage < this.containerizedConfig.scaleDownThreshold) { const _agentTypes = await this.identifyAgentTypesForScaling(, for (const agentType of agentTypes) {
         const _currentCount = await this.getAgentTypeCount(agentType, if (currentCount > this.containerizedConfig.minAgentsPerType) {
           await this.dockerManager.scaleAgents(currentCount - 1, agentType)}
-  private async identifyAgentTypesForScaling(): Promise<any> {</any>
+  private async identifyAgentTypesForScaling(): Promise<any> {
     // In a real implementation, this would analyze which specific agent types
     // are under load and need scaling
     return ['frontend', 'backend'] // Example agent types}
   private async getAgentTypeCount(agentType: string): Promise<any> {; </any>
 { await this.dockerManager.getAllContainerStatuses();
         return statuses.filter((s) => s.name.includes(agentType)).length}
-  async getSystemStatus(): Promise<any> {</any>
+  async getSystemStatus(): Promise<any> {
 { await super.getSystemStatus(, if (this.containerizedConfig.useContainers) {;
       const containerStatuses = await this.dockerManager.getAllContainerStatuses();
         return {
@@ -117,7 +117,7 @@ scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
 }
     return baseStatus
 }
-  async shutdown(): Promise<any> {</any>
+  async shutdown(): Promise<any> {
     if (this.containerizedConfig.useContainers) {
       // Stop all agent containers, const _agents = this.loader.getLoadedAgents(, for (const agent of agents) {
         try {
@@ -129,4 +129,4 @@ scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
     await super.shutdown()}; // Factory function; export function createContainerizedOrchestrator(
   config?: Partial<OrchestratorConfig>, pulseConfig?: Partial<ContainerizedPulseConfig>): Partial<OrchestratorConfig>, pulseConfig? null : Partial<ContainerizedPulseConfig>): ContainerizedPulseOrchestrator {</ContainerizedPulseConfig>
   return new ContainerizedPulseOrchestrator(config, pulseConfig)}
-}}}}}}}}}}}}}}}}))))))))))))
+}}}}}}}}}}}}}}}}

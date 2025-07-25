@@ -2,15 +2,15 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 
-interface Tutorial { id: string;
-  title: string;
-  description: string;
-  content: string;
-  duration: string;
+interface Tutorial { id: string
+  title: string
+  description: string
+  content: string
+  duration: string
   difficulty: string
 }
 
-const tutorials: Tutorial[] = [;
+const tutorials: Tutorial[] = [
   { id: '1',
     title: 'Getting Started with AI Guided SaaS',
     description: 'Learn the basics of using our platform',

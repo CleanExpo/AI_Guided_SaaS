@@ -4,19 +4,19 @@
 import React, { useState, useRef } from 'react';
 import { Layout, Type, Square } from 'lucide-react';
 
-interface Component { id: string;
-  type: string;
-  label: string;
-  x: number;
-  y: number;
-  width: number;
+interface Component { id: string
+  type: string
+  label: string
+  x: number
+  y: number
+  width: number
   height: number
 }
 
 export default function NoCodeBuilder() {
   const [components, setComponents] = useState<Component[]>([]);</Component>
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
-{ [;
+{ [
     { icon: Layout, label: 'Container', type: 'container' },
     { icon: Type, label: 'Text', type: 'text' },
     { icon: Square, label: 'Button', type: 'button' }
@@ -34,7 +34,7 @@ export default function NoCodeBuilder() {
           {componentLibrary.map(({ icon: Icon, label, type }) => (
             <div
               key={type};
-              className="flex items-center p-3 border border-gray-200 rounded cursor-grab hover:bg-gray-50";
+              className="flex items-center p-3 border border-gray-200 rounded cursor-grab hover: bg-gray-50"
               draggable
               onDragStart={() => handleDragStart(type)}</div>
             >

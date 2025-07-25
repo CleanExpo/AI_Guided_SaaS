@@ -16,6 +16,4 @@ export default function AdvancedDocumentationDashboard() {
       <CardContent>
           </CardContent>
         <p className="text-gray-600">
-          Advanced documentation features for {projectConfig.name} coming soon...</p>
-
-})
+          Advanced documentation features for {projectConfig.name} coming soon...</p>    }

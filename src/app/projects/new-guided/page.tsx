@@ -10,7 +10,8 @@ export default function NewGuidedProjectPage() {
   const [formData, setFormData] = useState({ name: '',
     description: '',
     type: 'web-app'
-  });
+ 
+    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +35,7 @@ export default function NewGuidedProjectPage() {
               <div>
           <label className="block text-sm font-medium mb-2">Project Name</label>
                 <Input
-                  type="text";
+                  type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}</Input>
                   placeholder="Enter project name";
@@ -44,7 +45,7 @@ export default function NewGuidedProjectPage() {
               <div>
           <label className="block text-sm font-medium mb-2">Description</label>
                 <Input
-                  type="text";
+                  type="text"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}</Input>
                   placeholder="Describe your project";

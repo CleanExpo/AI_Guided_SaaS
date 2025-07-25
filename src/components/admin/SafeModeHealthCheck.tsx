@@ -3,24 +3,24 @@ import React, { useState, useRef } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Progress } from '../ui/progress';
-interface HealthIssue { id: string;
+interface HealthIssue { id: string
   type: 'critical' | 'high' | 'medium' | 'low',
   category: 'security' | 'dependency' | 'module' | 'performance' | 'ux',
-  title: string;
-  description: string;
+  title: string
+  description: string
   file?: string,
   line?: number,
-  autoFixable: boolean;
+  autoFixable: boolean
   estimatedTime: number // seconds
 }
-interface BatchConfig { maxIssuesPerBatch: number;
+interface BatchConfig { maxIssuesPerBatch: number
   maxTimePerBatch: number, // seconds, pauseBetweenBatches: number // seconds,
 requireConfirmation: boolean
 }
 interface CheckpointState { completedIssues: string[],
-  currentBatch: number;
-  totalBatches: number;
-  startTime: number;
+  currentBatch: number
+  totalBatches: number
+  startTime: number
   lastCheckpoint: number
 }
 
@@ -37,24 +37,25 @@ const [checkpoint, setCheckpoint]  = useState<CheckpointState | null>(null);</Ch
 const [processingLog, setProcessingLog] = useState<string[]>([]);</string>
   
 const [batchConfig, setBatchConfig] = useState<BatchConfig>({</BatchConfig>
-    maxIssuesPerBatch: 3;
+    maxIssuesPerBatch: 3
     maxTimePerBatch: 300, // 5 minutes,
 pauseBetweenBatches: 30 // 30 seconds,
 requireConfirmation: true
-  });
+ 
+    });
   
 const pauseTimer  = useRef<NodeJS.Timeout | null>(null);</NodeJS>
 { useRef<NodeJS.Timeout | null>(null);</NodeJS>
   // Mock health issues for demonstration;
 
-const mockIssues: HealthIssue[]  = [;
+const mockIssues: HealthIssue[]  = [
     { id: 'SEC-001',
       type: 'critical',
       category: 'security',
       title: 'Outdated dependency with known vulnerability',
       description: 'Package @types/node has a security vulnerability',
       file: 'package.json',
-      autoFixable: true;
+      autoFixable: true
 estimatedTime: 60
     },
     { id: 'DEP-001',
@@ -63,7 +64,7 @@ estimatedTime: 60
       title: 'Deprecated package usage',
       description: 'Using deprecated version of react-router',
       file: 'package.json',
-      autoFixable: true;
+      autoFixable: true
 estimatedTime: 120
     },
     { id: 'MOD-001',
@@ -72,8 +73,8 @@ estimatedTime: 120
       title: 'Missing error boundary',
       description: 'Component lacks error boundary implementation',
       file: 'src/components/ui/card.tsx',
-      line: 15;
-      autoFixable: true;
+      line: 15
+      autoFixable: true
 estimatedTime: 180
     },
     { id: 'PERF-001',
@@ -82,8 +83,8 @@ estimatedTime: 180
       title: 'Unoptimized image loading',
       description: 'Images not using Next.js Image component',
       file: 'src/app/page.tsx',
-      line: 42;
-      autoFixable: true;
+      line: 42
+      autoFixable: true
 estimatedTime: 90
     },
     { id: 'UX-001',
@@ -92,14 +93,14 @@ estimatedTime: 90
       title: 'Missing accessibility labels',
       description: 'Form inputs missing aria-labels',
       file: 'src/components/auth/SignInForm.tsx',
-      line: 28;
-      autoFixable: true;
+      line: 28
+      autoFixable: true
 estimatedTime: 45
     }
   ];
   
 const scanForIssues = async () =>  { setIsScanning(true, setProcessingLog(prev => [
-      ...prev,;
+      ...prev,
       '🔍 Starting comprehensive health scan...']), // Simulate scanning delay;
     await new Promise(resolve => setTimeout(resolve, 2000);
     setIssues(mockIssues);
@@ -113,11 +114,10 @@ const scanForIssues = async () =>  { setIsScanning(true, setProcessingLog(prev =
 const createBatches = (allIssues: HealthIssue[]): HealthIssue[][] => {
     // Sort by priority: critical > high > medium > low; const priorityOrder={ critical: 0, high: 1, medium: 2, low: 3 };
     
-const sortedIssues = [...allIssues].sort(;
-      (a, b) => priorityOrder[a.type] - priorityOrder[b.type];
-    );
+const sortedIssues = [...allIssues].sort(
+      (a, b) => priorityOrder[a.type] - priorityOrder[b.type]);
     
-const batches: HealthIssue[][] = [];
+const batches: HealthIssue[][] = []
     for (let i = 0; i < sortedIssues.length; i += batchConfig.maxIssuesPerBatch) {
       batches.push(sortedIssues.slice(i, i + batchConfig.maxIssuesPerBatch))
     }
@@ -126,13 +126,13 @@ const batches: HealthIssue[][] = [];
   
 const startSafeProcessing = async () =>  {
     if (issues.length === 0) {
-      setProcessingLog(prev => [;
+      setProcessingLog(prev => [
         ...prev,'❌ No issues to process. Run scan first.';
       ]); return null
 };const batches  = createBatches(issues);
 
 const newCheckpoint: CheckpointState={ completedIssues: [] as any[],
-      currentBatch: 0;
+      currentBatch: 0
       totalBatches: batches.length,
       startTime: Date.now(, lastCheckpoint: Date.now()
 };
@@ -145,13 +145,13 @@ const newCheckpoint: CheckpointState={ completedIssues: [] as any[],
     await processBatch(batches[0], 0, batches)
 };
   
-const processBatch = async (;
+const processBatch = async (
     batch: HealthIssue[],
-    batchIndex: number;
+    batchIndex: number
     allBatches: HealthIssue[][]
   ) =>  {
     setCurrentBatch(batch, setProcessingLog(prev => [
-      ...prev,;
+      ...prev,
       `📦 Processing batch ${batchIndex + 1};/${allBatches.length} (${batch.length} issues)`
     ]);
     // Show batch confirmation if required;
@@ -190,8 +190,8 @@ const nextBatchIndex = batchIndex + 1;
         if (checkpoint) {
           setCheckpoint({
             ...checkpoint,
-            currentBatch: nextBatchIndex
- };)
+            currentBatch: nextBatchIndex   
+    })
 }
         processBatch(allBatches[nextBatchIndex], nextBatchIndex, allBatches)
 }, batchConfig.pauseBetweenBatches * 1000)
@@ -202,7 +202,7 @@ const nextBatchIndex = batchIndex + 1;
         '🎉 All issues processed successfully!'
       ])};
   
-const showBatchConfirmation = (;
+const showBatchConfirmation = (
     batch: HealthIssue[],
     batchIndex: number
   ): Promise<boolean> => {</boolean>
@@ -210,10 +210,8 @@ const showBatchConfirmation = (;
       const confirmed = window.confirm(, `Ready to process batch ${batchIndex + 1};?\n\n` +
         `Issues to fix:\n${batch.map((issue) => `• ${issue.title}`).join('\n')}\n\n` +
         `Estimated time: ${Math.round(batch.reduce((sum, issue) => sum + issue.estimatedTime, 0) / 60)} minutes\n\n` +;
-        `Click OK to continue or Cancel to pause.`;
-      );
-      resolve(confirmed)
-})
+        `Click OK to continue or Cancel to pause.`);
+      resolve(confirmed)    })
   };
   
 const pauseProcessing = () =>  {
@@ -248,8 +246,7 @@ const getIssueTypeColor = (type: HealthIssue['type']) =>  {
     switch (type) {;
       case 'critical':;
       return 'text-red-600 bg-red-100', case 'high':, return 'text-orange-600 bg-orange-100';
-      case 'medium':
-      return 'text-yellow-600 bg-yellow-100';
+      case 'medium': return 'text-yellow-600 bg-yellow-100'
       case 'low': return 'text-blue-600 bg-blue-100',
       default: return 'text-gray-600 bg-gray-100'}
 };
@@ -258,10 +255,8 @@ const getCategoryIcon = (category: HealthIssue['category']) =>  {
     switch (category) {;
       case 'security':;
       return '🔒', case 'dependency':, return '📦';
-      case 'module':
-      return '🧩';
-      case 'performance':
-      return '⚡';
+      case 'module': return '🧩'
+      case 'performance': return '⚡'
       case 'ux': return '👤',
       default: return '🔧'}
 };
@@ -279,13 +274,13 @@ const getCategoryIcon = (category: HealthIssue['category']) =>  {
           <Button
 
 onClick={scanForIssues} disabled={isScanning || isProcessing};
-            className="bg-blue-600 hover:bg-blue-700";
+            className="bg-blue-600 hover: bg-blue-700"
           ></Button>
             {isScanning ? '🔍 Scanning...' : '🔍 Scan for Issues'}
 </Button>
           {issues.length > 0 && !isProcessing && (
             <Button const onClick={startSafeProcessing}
-              className="bg-green-600 hover:bg-green-700";
+              className="bg-green-600 hover: bg-green-700"
             ></Button>
               🚀 Start Safe Processing
 </Button>
@@ -297,14 +292,14 @@ onClick={scanForIssues} disabled={isScanning || isProcessing};
               <Button
 
 const onClick={pauseProcessing};
-                className="bg-red-600 hover:bg-red-700";
+                className="bg-red-600 hover: bg-red-700"
               ></Button>
                 🛑 Stop
 </Button>
             )}
           {checkpoint && !isProcessing && (
             <Button const onClick={resumeProcessing}
-              className="bg-orange-600 hover:bg-orange-700";
+              className="bg-orange-600 hover: bg-orange-700"
             ></Button>
               ▶️ Resume
 </Button>
@@ -321,7 +316,7 @@ const onClick={pauseProcessing};
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Issues per batch
 </label>
-            <input type="number";
+            <input type="number"
 min="1";
 max="10";
 
@@ -329,7 +324,8 @@ value={batchConfig.maxIssuesPerBatch} onChange={e =></input>
                 setBatchConfig(prev => ({
                   ...prev,
                   maxIssuesPerBatch: parseInt(e.target.value) || 3
-                }))
+               
+    }))
               };
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm";
 
@@ -342,7 +338,7 @@ title="Number of issues to process in each batch";
           <label className="block text-sm font-medium text-gray-700 mb-1">
               Max time per batch (min)
 </label>
-            <input type="number";
+            <input type="number"
 min="1";
 max="30";
 
@@ -350,7 +346,8 @@ value={Math.round(batchConfig.maxTimePerBatch / 60)} onChange={e =></input>
                 setBatchConfig(prev => ({
                   ...prev,
                   maxTimePerBatch: (parseInt(e.target.value) || 5) * 60
-                }))
+               
+    }))
               };
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm";
 
@@ -363,7 +360,7 @@ title="Maximum time to spend on each batch in minutes";
           <label className="block text-sm font-medium text-gray-700 mb-1">
               Pause between batches (s)
 </label>
-            <input type="number";
+            <input type="number"
 min="10";
 max="300";
 
@@ -371,7 +368,8 @@ value={batchConfig.pauseBetweenBatches} onChange={e =></input>
                 setBatchConfig(prev => ({
                   ...prev,
                   pauseBetweenBatches: parseInt(e.target.value) || 30
-                }))
+               
+    }))
               };
               className="w-full px-3 py-1 border border-gray-300 rounded text-sm";
 
@@ -382,18 +380,18 @@ title="Time to pause between processing batches in seconds";
 </div>
           <div className="flex items-center">
           <label className="flex items-center">
-              <input type="checkbox";
+              <input type="checkbox"
 
 checked={batchConfig.requireConfirmation} onChange={e =></input>
                   setBatchConfig(prev => ({
                     ...prev,
                     requireConfirmation: e.target.checked
-                  }))
+                 
+    }))
                 };
                 className="mr-2";
 
-    const disabled={isProcessing}
-              />
+    const disabled={isProcessing/>
               <span className="text-sm font-medium text-gray-700">
                 Require confirmation</span>
       {/* Progress */}
@@ -437,7 +435,7 @@ checked={batchConfig.requireConfirmation} onChange={e =></input>
       {issues.length > 0 && (
         <Card className="p-4">
           <h3 className="font-medium text-gray-700 mb-3">
-            📋 Detected Issues ({issues.length})
+            📋 Detected Issues ({issues.length    })
 </h3>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {issues.map((issue) => (\n    </div>
@@ -516,4 +514,4 @@ checked={batchConfig.requireConfirmation} onChange={e =></input>
     </boolean>
     </BatchConfig>
  }
-}}})))))))))))))
+}}}

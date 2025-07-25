@@ -9,11 +9,11 @@ interface DevelopmentWorkflowProps { projectConfig: ProjectConfi
 g,
   onPhaseComplete: (phase: string) => void
    };
-const workflowPhases = [;
+const workflowPhases = [
   { id: 'planning',
     title: 'Planning & Architecture',
   description: 'Define project structure and technical requirements',
-  icon: Code;
+  icon: Code
     status: 'completed',
     tasks: [
       'Project structure defined';
@@ -23,7 +23,7 @@ const workflowPhases = [;
   { id: 'development',
     title: 'Core Development',
   description: 'Build the main application features',
-  icon: Play;
+  icon: Play
     status: 'current',
     tasks: [
       'Set up development environment';
@@ -33,7 +33,7 @@ const workflowPhases = [;
   { id: 'testing',
     title: 'Testing & Quality Assurance',
   description: 'Ensure application reliability and performance',
-  icon: TestTube;
+  icon: TestTube
     status: 'pending',
     tasks: [
       'Write unit tests';
@@ -43,7 +43,7 @@ const workflowPhases = [;
   { id: 'deployment',
     title: 'Deployment & Launch',
   description: 'Deploy to production and monitor',
-  icon: Rocket;
+  icon: Rocket
     status: 'pending',
     tasks: [
       'Set up production environment';
@@ -178,4 +178,4 @@ div className="mt-4 pt-4 border-t">
 </CardHeader>
 </div>
 
-}}}))
+}}}

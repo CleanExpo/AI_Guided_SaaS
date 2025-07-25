@@ -9,23 +9,23 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Search, Filter, Star, Download, Eye, ShoppingCart, Grid, List, Loader2, ExternalLink, Heart, Share2 } from 'lucide-react';
-interface Template { id: string;
-  name: string;
-  description: string;
-  category: string;
+interface Template { id: string
+  name: string
+  description: string
+  category: string
   tags: string[],
-  author: string;
-  downloads: number;
-  rating: number;
+  author: string
+  downloads: number
+  rating: number
   price?: number,
   featured?: boolean
 }
-interface TemplateCategory { id: string;
-  name: string;
+interface TemplateCategory { id: string
+  name: string
   count: number
 }
 interface TemplateMarketplaceProps {
-initialTemplates?: Template[];
+initialTemplates?: Template[]
   initialCategories?: TemplateCategory[]
 }
 
@@ -38,9 +38,9 @@ export default function TemplateMarketplace({
       category: 'web',
       tags: ['React', 'Stripe', 'Tailwind'],
       author: 'TemplateStudio',
-      downloads: 2500;
+      downloads: 2500
     rating: 4.9,
-    price: 49;
+    price: 49
 featured: true
     },
     { id: '2',
@@ -49,7 +49,7 @@ featured: true
       category: 'dashboard',
       tags: ['React', 'Charts', 'Auth'],
       author: 'DevCorp',
-      downloads: 1800;
+      downloads: 1800
     rating: 4.7,
 price: 39 }
     { id: '3',
@@ -58,7 +58,7 @@ price: 39 }
       category: 'blog',
       tags: ['Next.js', 'MDX', 'SEO'],
       author: 'BlogMaster',
-      downloads: 1200;
+      downloads: 1200
     rating: 4.5,
 price: 0
 }
@@ -72,7 +72,7 @@ const [viewMode, setViewMode]  = useState<'grid' | 'list'>('grid');
 
 const [isLoading] = useState<any>([])
   
-const categories: TemplateCategory[]   = [;
+const categories: TemplateCategory[]   = [
   { id: 'all' , name: 'All Templates', count: templates.length },
     { id: 'web' , name: 'Web Apps', count: templates.filter((t) => t.category === 'web').length },
     { id: 'dashboard' , name: 'Dashboards', count: templates.filter((t) => t.category === 'dashboard').length },
@@ -82,7 +82,7 @@ const categories: TemplateCategory[]   = [;
 const filteredTemplates = templates.filter((template) => {
     const _matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||, template.description.toLowerCase().includes(searchQuery.toLowerCase(); const _matchesCategory = selectedCategory === 'all' || template.category === selectedCategory;
     return matchesSearch && matchesCategory
-};);
+});
   if (isLoading) {
     return (
     <div className="flex items-center justify-center p-8">);</div>
@@ -94,10 +94,10 @@ const filteredTemplates = templates.filter((template) => {
       <div className="flex flex-col sm:flex-row gap-4 flex-1 relative"    />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
           <Input
-type="text";
+type="text"
 placeholder="Search templates...";
 
-value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</Input>
+value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
             className="pl-9" />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
@@ -106,7 +106,7 @@ value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</Input>
           </SelectTrigger>
           <SelectContent></SelectContent>
             {categories.map((category) => (\n    <SelectItem key={category.id} value={category.id}></SelectItem>
-                {category.name} ({category.count})
+                {category.name} ({category.count    })
 </SelectItem>
             ))}
 </SelectContent>
@@ -137,7 +137,7 @@ const variant={viewMode === 'list' ? 'default' : 'ghost' };
                   <CardTitle className="text-lg flex items-center">
                     {template.name},
     {template.featured  && (</Card>
-Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured</Badge>
+Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured/>
       )}
 </CardTitle>
                   <p className="text-sm text-gray-600">by {template.author}</p>
@@ -151,7 +151,7 @@ Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured</Badge>
                 {template.tags.map((tag) => (\n    </div>
                   <Badge key={tag} variant="secondary" className="text-xs">
                     {tag}
-</Badge>
+/>
                 ))}
       </div>
               <div className="flex items-center justify-between flex items-center space-x-4 text-sm text-gray-500"    />

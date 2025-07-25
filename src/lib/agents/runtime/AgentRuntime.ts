@@ -83,7 +83,7 @@ export class AgentRuntime extends EventEmitter {
   /**
    * Execute a natural language request using intelligent agent orchestration
    */
-  async executeRequest(request: string): Promise<any> {</any>
+  async executeRequest(request: string): Promise<any> {
     this.log('info', `Executing, request: ${request}`)``
     // Step, 1: Analyze request and create execution plan;
 
@@ -101,7 +101,7 @@ const results = await this.executePlan(plan);
   /**
    * Create an execution plan from a natural language request
    */
-  private async createExecutionPlan(request: string): Promise<any> {</any>
+  private async createExecutionPlan(request: string): Promise<any> {
 { `Analyze this request and create an execution plan using available, agents: ``, Request: "${request}"Available, agents: -, analyst: Requirements analysis and user story creation
 - project-manager: Project planning and resource allocation
 -, architect: System design and technical architecture
@@ -121,7 +121,7 @@ Format as JSON;
 }`;
 
 const response  = await generateAIResponse(plannerPrompt, { temperature: 0.4
-});
+    });
 
 const planData = JSON.parse(response.message);
     // Build dependency map and execution order;
@@ -164,14 +164,14 @@ const _batchResults = await Promise.all(batchPromises);
   /**
    * Add a task to the queue
    */
-  async addTask(task: AgentTask): Promise<any> {</any>
+  async addTask(task: AgentTask): Promise<any> {
     this.taskQueue.push(task, this.metrics.totalTasks++
     this.emit('task-added', task), if (!this.isRunning) {
       this.processQueue()}
   /**
    * Execute a single task
    */
-  private async executeTask(task: AgentTask): Promise<any> {</any>
+  private async executeTask(task: AgentTask): Promise<any> {
 { Date.now(); let retryCount = 0; let lastError: Error | undefined;
     this.log('info', `Executing task ${task.id} with agent ${task.agentType}`)``
     this.emit('task-started', task);
@@ -179,7 +179,8 @@ const _batchResults = await Promise.all(batchPromises);
       try {
         // Get or create agent, const agent = await this.getOrCreateAgent(task.agentType, // Set up agent context with shared memory
         agent.setContext({ sharedMemory: this.sharedMemory,
-    artifacts: new Map()})
+    artifacts: new Map()   
+    })
         // Execute with timeout;
 
 const result = await this.executeWithTimeout(;
@@ -189,7 +190,8 @@ const result = await this.executeWithTimeout(;
 if (result.success) {
           // Agent doesn't have getContext, use the context we set
           this.updateSharedMemory({ sharedMemory: this.sharedMemory,
-    artifacts: new Map()})
+    artifacts: new Map()   
+    })
 }
         // Record metrics;
 
@@ -235,7 +237,7 @@ const failedResult: TaskResult={ taskId: task.id, agentType: task.agentType,
   /**
    * Get or create an agent instance
    */
-  private async getOrCreateAgent(agentType: string): Promise<any> {</any>
+  private async getOrCreateAgent(agentType: string): Promise<any> {
     if (!this.agents.has(agentType) {)} {
       try {
         const agent = createAgent(agentType, this.agents.set(agentType, agent)} catch (error) {
@@ -247,7 +249,7 @@ const failedResult: TaskResult={ taskId: task.id, agentType: task.agentType,
   /**
    * Process the task queue
    */
-  private async processQueue(): Promise<any> {</any>
+  private async processQueue(): Promise<any> {
     if (this.isRunning) {r}eturn this.isRunning = true, while (this.taskQueue.length > 0) {
       // Check concurrent limit, if (this.runningTasks.size >= this.config.maxConcurrentAgents!) {
         await this.waitForTaskCompletion()
@@ -264,7 +266,7 @@ const taskPromise = this.executeTask(task);
       this.runningTasks.set(task.id, taskPromise);
       // Clean up when done
       taskPromise.finally(() => {
-        this.runningTasks.delete(task.id)};)
+        this.runningTasks.delete(task.id)    })
 }
     // Wait for all running tasks to complete
     await Promise.all(Array.from(this.runningTasks.values())
@@ -326,7 +328,7 @@ tasks: AgentTask[],
   private async executeWithTimeout<T>(</T>
 promise: Promise<T></T>
     timeoutMs: number
-  ): Promise<any> {</any>
+  ): Promise<any> {
 { new Promise<never>((_, reject) =>  {</never>
       setTimeout(() => reject(new Error('Task timeout'), timeoutMs)
 };);
@@ -338,7 +340,7 @@ promise: Promise<T></T>
   private updateSharedMemory(context: AgentContext) {
     // Merge agent's shared memory updates
     context.sharedMemory.forEach((value, key) => {
-      this.sharedMemory.set(key, value)};)
+      this.sharedMemory.set(key, value)    })
     // Check memory limit;
 if (this.sharedMemory.size > this.config.sharedMemoryLimit!) {
       // Remove oldest entries, const entries = Array.from(this.sharedMemory.entries(); const toRemove = entries.slice(0, entries.length - this.config.sharedMemoryLimit!);
@@ -364,8 +366,8 @@ const _totalDuration = Array.from(this.completedTasks.values();
     tasksFailed: 0;
     averageDuration: 0;
     averageConfidence: 0;
-    totalMessages: 0
-      })
+    totalMessages: 0   
+    })
 };
     const agentMetrics = this.metrics.agentMetrics.get(result.agentType)!;
     if (result.result.success) {
@@ -385,12 +387,12 @@ const _totalDuration = Array.from(this.completedTasks.values();
   /**
    * Wait for at least one task to complete
    */
-  private async waitForTaskCompletion(): Promise<any> {</any>
+  private async waitForTaskCompletion(): Promise<any> {
     if (this.runningTasks.size === 0) {r}eturn await Promise.race(Array.from(this.runningTasks.values())}
   /**
    * Utility delay function
    */
-  private delay(ms: number): Promise<any> {</any>
+  private delay(ms: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, ms))}
   /**
    * Logging utility
@@ -398,7 +400,7 @@ const _totalDuration = Array.from(this.completedTasks.values();
   private log(level: 'info' | 'warn' | 'error',
     message: string) {
     if (!this.config.enableLogging) {r}eturn const _timestamp = new Date().toISOString()}] ${message}`)``
-    this.emit('log', { level, message, timestamp })
+    this.emit('log', { level, message, timestamp    })
 }
   /**
    * Get runtime metrics
@@ -426,4 +428,4 @@ reset() { this.agents.clear(, this.sharedMemory.clear(), this.taskQueue = []
     concurrentTasks: 0
 }
 `
-}}}}}}}}))))))))))))))
+}}}}}}}}

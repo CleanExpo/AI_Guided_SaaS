@@ -5,21 +5,22 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Shield, LogOut } from 'lucide-react';
 
-interface AdminUser { id: string;
-  email: string;
-  name: string;
-  lastLogin: string;
+interface AdminUser { id: string
+  email: string
+  name: string
+  lastLogin: string
   role: string
 }
 
 export default function AdminDashboardPage() {
-  const [user] = useState<AdminUser>({</AdminUser>
+  const [user] = useState<AdminUser>({
     id: '1',
     email: 'admin@aiguidedsaas.com',
     name: 'System Administrator',
     lastLogin: new Date().toISOString().split('T')[0],
     role: 'Super Admin'
-  });
+ 
+    });
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -33,7 +34,7 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Card></Card>
+          <Card>
             <CardHeader>
           <CardTitle className="flex items-center">
                 <Shield className="w-5 h-5 mr-2"     />
@@ -46,5 +47,7 @@ export default function AdminDashboardPage() {
             </CardContent>
           </Card>
         </div>
+      </div>
+    </div>
   )
 }

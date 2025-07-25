@@ -47,7 +47,7 @@ const loadAdminData = async () => {
 const [statsData, usersData, contentData, configData, activityData] = ;
         await Promise.all([
           adminService.getSystemStats(, adminService.getUsers(1, 50),
-          adminService.getContentForModeration(1, 20, adminService.getSystemConfiguration(),;
+          adminService.getContentForModeration(1, 20, adminService.getSystemConfiguration(),
           adminService.getAdminActivity(1, 50);
         ]);
       setSystemStats(statsData);
@@ -59,12 +59,12 @@ const [statsData, usersData, contentData, configData, activityData] = ;
       console.error('Error loading admin data:', error)} finally {
       setLoading(false)};
   
-const handleUserStatusUpdate = async (;
-    userId: string;
+const handleUserStatusUpdate = async (
+    userId: string
     status: 'active' | 'suspended' | 'deleted'
   ) =>  {
     try {;
-      await adminService.updateUserStatus(;
+      await adminService.updateUserStatus(
         userId;
         status,
         adminUser?.email || 'admin'
@@ -72,12 +72,12 @@ const handleUserStatusUpdate = async (;
     }; catch (error) {
       console.error('Error updating user status:', error)};
   
-const handleContentModeration = async (;
-    contentId: string;
+const handleContentModeration = async (
+    contentId: string
     action: 'approve' | 'reject' | 'flag'
   ) =>  {
     try {;
-      await adminService.moderateContent(;
+      await adminService.moderateContent(
         contentId;
         action,
         adminUser?.email || 'admin'
@@ -87,16 +87,13 @@ const handleContentModeration = async (;
   
 const getStatusColor = (status: string) =>  {
     switch (status) {
-      case 'active':
-      case 'approved':;
+      case 'active': case 'approved':
       case 'healthy':;
       return 'bg-green-100 text-green-800', case 'suspended':, case 'flagged':;
-      case 'warning':
-      return 'bg-yellow-100 text-yellow-800';
+      case 'warning': return 'bg-yellow-100 text-yellow-800'
       case 'deleted':
       case 'rejected':
-      case 'critical':
-      return 'bg-red-100 text-red-800';
+      case 'critical': return 'bg-red-100 text-red-800'
       case 'pending': return 'bg-blue-100 text-blue-800',
       default: return 'bg-gray-100 text-gray-800'}
 };
@@ -104,7 +101,7 @@ const getStatusColor = (status: string) =>  {
 const formatCurrency = (amount: number) =>  {
     return new Intl.NumberFormat('en-US', { style: 'currency',
 currency: 'USD'
-};).format(amount)
+    }).format(amount)
 };
   
 const formatDate = (date: Date) =>  {
@@ -113,7 +110,7 @@ const formatDate = (date: Date) =>  {
       day: 'numeric',
       hour: '2-digit',
 minute: '2-digit'
-};).format(new Date(date))
+    }).format(new Date(date))
   };
   
 const filteredUsers = users.filter((user) => {
@@ -121,7 +118,7 @@ const filteredUsers = users.filter((user) => {
     
 const matchesFilter = userFilter === 'all' || user.status === userFilter;
     return matchesSearch && matchesFilter
-};);
+});
   
 const filteredContent = content.filter((item) => {
     const matchesSearch = , item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||, item.author.toLowerCase().includes(searchTerm.toLowerCase();
@@ -129,7 +126,7 @@ const filteredContent = content.filter((item) => {
 const matchesFilter = ;
       contentFilter === 'all' || item.status === contentFilter;
     return matchesSearch && matchesFilter
-};);
+});
   if (loading) {
     return (
     <div className="flex items-center justify-center min-h-screen text-center">);</div>
@@ -144,7 +141,7 @@ const matchesFilter = ;
           <div className="flex items-center justify-between h-16 flex items-center space-x-4"     />
               <Shield className="h-6 w-6 text-blue-600"    />
           <h1 className="text-xl font-semibold">Admin Panel</h1>
-              <Badge variant="outline">System Management</Badge>
+              <Badge variant="outline">System Management/>
             <div className="flex items-center space-x-2">
           <span className="text-sm text-gray-600">
                 Welcome, {adminUser?.name || 'Admin'}</span>
@@ -239,7 +236,7 @@ const className={
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
                   <Input placeholder="Search users...";
 
-value={searchTerm} onChange={e => setSearchTerm(e.target.value)}</Input>
+value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                     className="pl-10 w-64" />
         </div>
                 <select;
@@ -285,9 +282,9 @@ ID: { user.id }</div>
                           <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-gray-900">{user.email}</div>
                           <td className="px-6 py-4 whitespace-nowrap">
-          <Badge className={getStatusColor(user.status)}></Badge>
+          <Badge className={getStatusColor(user.status)}>/>
                               {user.status}
-</Badge>
+/>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {formatDate(user.createdAt)}
 </td>
@@ -307,14 +304,14 @@ variant="ghost";
                               >
                                 <Edit className="h-4 w-4"    />
           </Button>
-                              {user.status === 'active' ? (;
+                              {user.status === 'active' ? (
                                 <Button size="sm", variant="ghost";
 
     const onClick={() => handleUserStatusUpdate(user.id, 'suspended')}</Button>
                                 >
                                   <UserX className="h-4 w-4 text-yellow-600"    />
           </Button>
-                              ) : (;
+                              ) : (
                                 <Button size="sm";
 variant="ghost";
 
@@ -351,9 +348,9 @@ const onClick={() => handleUserStatusUpdate(user.id, 'active')}</Button>
                         <p className="text-sm text-gray-600">
                           By {item.author} • {formatDate(item.createdAt)}
 </p>
-                        <Badge className={getStatusColor(item.status)}></Badge>
+                        <Badge className={getStatusColor(item.status)}>/>
                           {item.status}
-</Badge>
+/>
                       <div className="flex space-x-2">
           <Button size="sm";
 variant="outline";
@@ -430,7 +427,7 @@ variant="outline";
                             {activity.adminName}
 </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-          <Badge variant="outline">{activity.action}</Badge>
+          <Badge variant="outline">{activity.action}/>
                           <td className="px-6 py-4 text-sm text-gray-500">
                             {activity.details}
 </td>
@@ -466,4 +463,4 @@ variant="outline";
     </TabsList>
     </div>
 };:
-}}}}}}})))))))
+}}}}}}}

@@ -10,7 +10,7 @@ export class StrapiAdapter implements BackendAdapter {
   private async request<T>(</T>
 endpoint: string;
     options: RequestInit = {}
-  ): Promise<T> {</T>
+  ): Promise<T> {
     const headers: Record<string string> = {</string>
       'Content-Type': 'application/json',
       ...(options.headers as Record<string string> || {});</string>
@@ -35,7 +35,7 @@ const data = await response.json();
     return data
 }
   // Authentication
-  async signUp(email: string, password: string, metadata? null : any): Promise<User> {</User>
+  async signUp(email: string, password: string, metadata? null : any): Promise<User> {
 { await this.request<{ jwt: string;
       user: any
     }>('/auth/local/register', { method: 'POST',
@@ -58,7 +58,7 @@ const data = await response.json();
     return { user: this.mapStrapiUser(response.user, token: response.jwt
   }
 }
-  async signOut(): Promise<void> {</void>
+  async signOut(): Promise<void> {
     this.jwt = undefined
   }
   async getCurrentUser(): Promise<User | null> {</User>
@@ -68,7 +68,7 @@ const data = await response.json();
 } catch {
       return null}
 }
-  async updateUser(id: string, data: Partial<User>): Promise<User> {</User>
+  async updateUser(id: string, data: Partial<User>): Promise<User> {
 { await this.request<any>(`/users/${id}`, {</any>
       method: 'PUT',
       body: JSON.stringify({ username: data.email,
@@ -78,7 +78,7 @@ const data = await response.json();
     return this.mapStrapiUser(response)
 }
   // Projects
-  async createProject(data: Omit<Project 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {</Project>
+  async createProject(data: Omit<Project 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
 { await this.request<{ data: any }>('/projects', { method: 'POST',
       body: JSON.stringify({ data: { name: data.name, description: data.description, type: data.type, status: data.status, config: data.config, user: data.userId }})};
     return this.mapStrapiProject((response as any).data)
@@ -93,13 +93,13 @@ const data = await response.json();
       throw error
 }
 }
-  async updateProject(id: string, data: Partial<Project>): Promise<Project> {</Project>
+  async updateProject(id: string, data: Partial<Project>): Promise<Project> {
 { await this.request<{ data: any }>(`/projects/${id}`, { method: 'PUT',
       body: JSON.stringify({ data: { name: data.name, description: data.description, type: data.type, status: data.status, config: data.config }})};
     return this.mapStrapiProject((response as any).data)
 }
-  async deleteProject(id: string): Promise<void> {</void>
-    await this.request(`/projects/${id}`, { method: 'DELETE'
+  async deleteProject(id: string): Promise<void> {
+    await this.request(`/projects/${id}`, { method: 'DELETE'   
     })
   }
   async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project>> {;</PaginatedResponse>
@@ -133,7 +133,7 @@ const response = await this.request<{ data: [] as any[],
   }
 }
   // Generic CRUD
-  async create<T>(collection: string, data: any): Promise<T> {</T>
+  async create<T>(collection: string, data: any): Promise<T> {
 { await this.request<{ data: any }>(`/${collection}`, { method: 'POST',
       body: JSON.stringify({ data })};
     return this.mapStrapiRecord((response as any).data) as T
@@ -149,20 +149,19 @@ const response = await this.request<{ data: [] as any[],
 }
 };
   async update<T>(collection: string, id: string,</T>
-  data: any): Promise<T> {</T>
+  data: any): Promise<T> {
 { await this.request<{ data: any }>(`/${collection}/${id}`, { method: 'PUT',
       body: JSON.stringify({ data })};
     return this.mapStrapiRecord((response as any).data) as T
 }
-  async delete(collection: string, id: string): Promise<void> {</void>
-    await this.request(`/${collection}/${id}`, { method: 'DELETE'
+  async delete(collection: string, id: string): Promise<void> {
+    await this.request(`/${collection}/${id}`, { method: 'DELETE'   
     })
   }
   async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T>> {</PaginatedResponse>
 { new URLSearchParams(, // Filters, if (options?.filters) {
       Object.entries(options.filters).forEach(([key, value]) => {
-        params.append(`filters[${key};][$eq]`, value.toString())
-      })
+        params.append(`filters[${key};][$eq]`, value.toString())    })
     };
     // Pagination;
 
@@ -204,14 +203,15 @@ collection: string;
     return () => {};
   // File storage;
   async uploadFile(bucket: string, path: string;
-  file: File): Promise<string> {</string>
+  file: File): Promise<string> {
 { new FormData(, formData.append('files', file), formData.append('path', path);
     formData.append('folder', bucket);
     
 const response = await fetch('/api/admin/auth', { method: 'POST',
-      headers: { ...(this.jwt ? { Authorization: `Bearer ${this.jwt }` } : {}); ...(this.apiToken ? { Authorization: `Bearer ${this.apiToken}` } : {})
+      headers: { ...(this.jwt ? { Authorization: `Bearer ${this.jwt }` } : {}); ...(this.apiToken ? { Authorization: `Bearer ${this.apiToken}` } : {    })
 },
       body: formData
+   
     });
     if (!response.ok) {
       const error = await response.json(, throw new BackendError(, error.error?.message || 'Upload failed';
@@ -222,7 +222,7 @@ const response = await fetch('/api/admin/auth', { method: 'POST',
     const data = await response.json();
     return data[0].url
 }
-  async deleteFile(bucket: string, path: string): Promise<void> {</void>
+  async deleteFile(bucket: string, path: string): Promise<void> {
     // Strapi doesn't have direct file deletion by path
     // You need to find the file ID first
     console.warn('File deletion by path not directly supported in Strapi')}
@@ -323,7 +323,7 @@ const strapiOperator = operatorMap[operator];
   async single(): Promise<T | null> {</T>
     this.limit(1, const results = await this.execute(); return results[0] || null
 }
-  async count(): Promise<number> {</number>
+  async count(): Promise<number> {
     this.params.append('pagination[withCount]', 'true', const { meta } = await (this.adapter as any).executeQuery(
       this.collection,
       this.params
@@ -331,4 +331,4 @@ const strapiOperator = operatorMap[operator];
     return meta.pagination.total
 }
 
-}}}}}}}}}}}}}}}}))))))))))))))))))))))))))
+}}}}}}}}}}}}}}}}

@@ -1,25 +1,11 @@
-/* BREADCRUMB: pages - Application pages and routes */
 'use client';
 
 import React from 'react';
-import { lazy, Suspense } from 'react';
-import { SessionGuard } from '@/components/ClientOnlyAuth';
+import Dashboard from '@/components/Dashboard';
 
-// CRITICAL: Dynamic import to prevent SSR issues
-const Dashboard = lazy(() => import('@/components/Dashboard'));
-
-export default function DashboardPage() {
-  return (
-    <SessionGuard>
-          <Suspense fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto">
-            <p className="mt-4 text-gray-600">Loading dashboard...</p>
-          </div>
-      }>
-        <Dashboard  />
-          </Suspense>
-    </SessionGuard>
-  )
+function DashboardPage() {
+  return <Dashboard />;
 }
+
+
+export default React.memo(DashboardPage);

@@ -42,7 +42,7 @@ export class AlertingService extends EventEmitter {
   /**
    * Process health status and trigger alerts if needed
    */
-  async processHealthStatus(status: HealthStatus): Promise<any> {</any>
+  async processHealthStatus(status: HealthStatus): Promise<any> {
     if (!this.config.enabled) {r}eturn // Check each rule, for (const rule of this.config.rules) {
       if (rule.condition(status) {)} {
         await this.triggerAlert(rule, status)}
@@ -52,7 +52,7 @@ export class AlertingService extends EventEmitter {
   /**
    * Trigger an alert
    */
-  private async triggerAlert(rule: AlertRule, status: HealthStatus): Promise<any> {</any>
+  private async triggerAlert(rule: AlertRule, status: HealthStatus): Promise<any> {
     // Check cooldown, const lastAlert = this.lastAlertTime.get(rule.name, if (lastAlert && Date.now() {-} lastAlert.getTime() < this.config.cooldownPeriod) {; return null
 };
     // Check rate limit;
@@ -83,7 +83,7 @@ timestamp: new Date(), severity: rule.severity,
   /**
    * Send alert to specified channels
    */
-  private async sendAlert(alert: Alert, channelTypes: string[]): Promise<any> {</any>
+  private async sendAlert(alert: Alert, channelTypes: string[]): Promise<any> {
 { this.config.channels.filter(, ch: any => ch.enabled && channelTypes.includes(ch.type), for (const channel of channels) {
       try {
         await this.sendToChannel(alert, channel)
@@ -129,14 +129,14 @@ timestamp: new Date(), severity: rule.severity,
   /**
    * Email alert handler
    */
-  private async sendEmail(alert: Alert, config): Promise<any> {</any>
+  private async sendEmail(alert: Alert, config): Promise<any> {
     // Implementation would depend on email service
     // Example with SendGrid, Resend, etc.
 }
   /**
    * Slack alert handler
    */
-  private async sendToSlack(alert: Alert, config): Promise<any> {</any>
+  private async sendToSlack(alert: Alert, config): Promise<any> {
     if (!config.webhookUrl) {
       throw new Error('Slack webhook URL not configured')}
     const _color={ low: '#36a64f',
@@ -174,22 +174,23 @@ timestamp: new Date(), severity: rule.severity,
 }
     await fetch('/api/admin/auth', { method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload)   
     })
 }
   /**
    * Generic webhook handler
    */
-  private async sendToWebhook(alert: Alert, config): Promise<any> {</any>
+  private async sendToWebhook(alert: Alert, config): Promise<any> {
     if (!config.url) {
       throw new Error('Webhook URL not configured')}
     await fetch('/api/admin/auth', { method: config.method || 'POST',
-    headers: { 'Content-Type': 'application/json', ...(config.headers || {})
+    headers: { 'Content-Type': 'application/json', ...(config.headers || {    })
       },
       body: JSON.stringify({
         alert,
         timestamp: alert.timestamp.toISOString(, source: 'ai-guided-saas-health-monitor'
-      })}
+     
+    })}
   /**
    * Extract relevant details from health status
    */
@@ -292,4 +293,4 @@ addRule(rule: AlertRule) { this.config.rules.push(rule)}
 removeRule(ruleName: string) {
     this.config.rules = this.config.rules.filter((r) => r.name !== ruleName)
  };`
-}}})))))))))))
+}}}

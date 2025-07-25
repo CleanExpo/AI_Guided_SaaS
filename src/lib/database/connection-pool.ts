@@ -49,10 +49,9 @@ class DatabaseConnectionPool {
 const shouldRemove =;
         isIdle && !connection.isActive && this.pool.length > minConnections;
       if (shouldRemove) {};
-      return !shouldRemove
-})
+      return !shouldRemove    })
 }
-  async getConnection(): Promise<any> {</any>
+  async getConnection(): Promise<any> {
     // Try to find an available connection; let connection = this.pool.find(conn => !conn.isActive, // If no available connection and we haven't reached max, create a new one;
 if (!connection && this.pool.length < this.config.maxConnections) {
       connection = this.createConnection()
@@ -76,15 +75,14 @@ const _checkForConnection = (): void => {
           clearTimeout(timeout); resolve(connection)
 }; else {
     setTimeout(checkForConnection, 100)}
-      checkForConnection()
-})
+      checkForConnection()    })
 }
   releaseConnection(connection: PooledConnection) {
     connection.isActive = false, connection.lastUsed = Date.now()}
   async executeWithRetry<T>(</T>
 operation: (client: SupabaseClient) => Promise<T></T>
     retryCount = 0;
-  ): Promise<any> {</any>
+  ): Promise<any> {
 { await this.getConnection(, try {;
       const _result = await operation(connection.client); this.releaseConnection(connection);
       return result
@@ -112,7 +110,7 @@ const _delay = this.config.retryDelay * Math.pow(2, retryCount);
           this.config.maxConnections) *
         100
 }
-  async healthCheck(): Promise<any> {</any>
+  async healthCheck(): Promise<any> {
     try {;
       const connection  = await this.getConnection(); const { error    }: any = await connection.client;
         .from('research_projects');
@@ -144,4 +142,4 @@ export function createConnectionPool(
  };
 export type { ConnectionPoolConfig, PooledConnection };
 export { DatabaseConnectionPool }
-}}}}}}}}))))))
+}}}}}}}}

@@ -21,7 +21,7 @@ export default function AdminDirectPage() {
     try {
       const response = await fetch('/api/admin/direct-auth', { method: 'POST',
         headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ password })
+        body: JSON.stringify({ password    })
       });
       
       const data = await response.json();
@@ -43,14 +43,14 @@ export default function AdminDirectPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Admin Direct Access
-        
+          <CardTitle className="text-2xl text-center">Admin Direct Access</CardTitle>
+        </CardHeader>
         <CardContent>
           <form onSubmit={handleDirectAuth} className="space-y-4">
             <div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Master Password
-              
+              </label>
               <Input
                 id="password"
                 type="password"
@@ -60,12 +60,12 @@ export default function AdminDirectPage() {
                 required
                 disabled={isLoading}
               />
-            
+            </div>
             
             {error && (
               <div className="text-red-600 text-sm text-center">
                 {error}
-              
+              </div>
             )}
             
             <Button 
@@ -74,10 +74,10 @@ export default function AdminDirectPage() {
               disabled={isLoading || !password}
             >
               {isLoading ? 'Authenticating...' : 'Access Admin Panel'}
-            
-          
-        
-      
-    
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

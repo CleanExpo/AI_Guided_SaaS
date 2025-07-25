@@ -121,4 +121,3 @@ export function initializeBackend(): BackendAdapter {
     setBackendConfig(storedConfig)};
   return getBackendAdapter()
 }
-)))

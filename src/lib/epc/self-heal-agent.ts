@@ -47,7 +47,7 @@ export class SelfHealingAgent {
   /**
    * Analyze issues and create healing plan
    */
-  async analyzeAndHeal(epcResult): Promise<any> {</any>
+  async analyzeAndHeal(epcResult): Promise<any> {
     const plan: HealingPlan={ issues: [] as any[],
     actions: [] as any[],
     estimatedTime: '1-2 minutes',
@@ -75,7 +75,7 @@ for (const missing of epcResult.missing) {
   /**
    * Generate action for missing variable
    */
-  private async generateMissingVarAction(varName: string): Promise<any> {</any>
+  private async generateMissingVarAction(varName: string): Promise<any> {
     // Check if it's a known pattern
     if (varName.includes('API_KEY') {)} {
       const _service = this.identifyService(varName, // Use AI to suggest solution, const _prompt = `The environment variable ${varName} is missing. This appears to be an API key for ${service}. ;``
@@ -104,7 +104,7 @@ automated: false;
   /**
    * Generate action for invalid variable
    */
-  private async generateInvalidVarAction(varName: string): Promise<any> {</any>
+  private async generateInvalidVarAction(varName: string): Promise<any> {
 { this.getVariableConfig(varName, if (config?.pattern) {
       return { type: 'suggest_fix',
         description: `Fix ${varName} format to match; pattern: ${config.pattern}`,
@@ -122,7 +122,7 @@ automated: false;
   /**
    * Generate action for outdated variable
    */
-  private async generateOutdatedVarAction(varName: string): Promise<any> {</any>
+  private async generateOutdatedVarAction(varName: string): Promise<any> {
     // Check recent changes, const _recentChange = this.checkRecentChanges(varName, if (recentChange) {
       return { type: 'sync_config',
         description: `Sync ${varName} with latest configuration`,
@@ -145,7 +145,7 @@ automated: false;
   /**
    * Execute healing plan
    */
-  async executeHealing(plan: HealingPlan, autoApprove: boolean = false): Promise<any> {</any>
+  async executeHealing(plan: HealingPlan, autoApprove: boolean = false): Promise<any> {
 {{ success: true;
     applied: [] as any[],
     failed: [] as any[],
@@ -252,7 +252,7 @@ h: any =>
   /**
    * Get healing suggestions using AI
    */
-  async getAISuggestions(issues: string[]): Promise<any> {</any>
+  async getAISuggestions(issues: string[]): Promise<any> {
 { `As a DevOps expert, analyze these environment configuration issues and suggest, fixes: ``, ${issues.join('\n')}
 Provide concise, actionable suggestions for each issue. Focus, on:
 1. Most likely cause
@@ -262,4 +262,4 @@ Provide concise, actionable suggestions for each issue. Focus, on:
       const response = await this.aiService.generateResponse(prompt);
         return response.message.split('\n').filter((s) => s.trim())} catch (error) { console.error('Failed to get AI, suggestions:', error);
         return ['Unable to get AI suggestions. Please check documentation.']}
-}}}}}}}}}}}}}}))))))))))))))))))))
+}}}}}}}}}}}}}}

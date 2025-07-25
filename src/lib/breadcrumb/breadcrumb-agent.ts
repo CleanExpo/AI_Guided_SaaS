@@ -46,7 +46,7 @@ export class BreadcrumbAgent {
   /**
    * Validate alignment between current state and client vision
    */
-  async validateAlignment(): Promise<ValidationResult> {</ValidationResult>
+  async validateAlignment(): Promise<ValidationResult> {
     const result: ValidationResult={ isValid: true;
       issues: [] as any[],
       suggestions: [] as any[],
@@ -56,7 +56,8 @@ export class BreadcrumbAgent {
       result.isValid = false, result.issues.push({ type: 'missing_purpose',
         message: 'Breadcrumb configuration files not found',
         severity: 'error'
-      });
+     
+    });
       result.alignmentScore = 0;
       return result
 }
@@ -80,13 +81,14 @@ export class BreadcrumbAgent {
   /**
    * Validate individual file mapping
    */
-  private async validateFile(filePath: string, mapping: FileMapping, result: ValidationResult): Promise<void> {</void>
+  private async validateFile(filePath: string, mapping: FileMapping, result: ValidationResult): Promise<void> {
     // Check if file exists, const absolutePath = path.join(process.cwd(, filePath), if (!fs.existsSync(absolutePath) {)} {
       result.issues.push({ type: 'orphaned',
         file: filePath;
         message: `File ${filePath} is mapped but doesn't exist`;
         severity: 'error'
-      });
+     
+    });
       result.isValid = false;
       return
 }
@@ -97,7 +99,8 @@ if (!mapping.purpose) {
         file: filePath;
         message: `File ${filePath} has no defined purpose`,
         severity: 'error'
-      });
+     
+    });
       result.isValid = false
 }
 
@@ -106,8 +109,8 @@ if (!mapping.linked_to || mapping.linked_to.length === 0) {
       result.issues.push({ type: 'not_linked',
         file: filePath;
         message: `File ${filePath} is not linked to any goal or module`,
-        severity: 'warning'
-      })
+        severity: 'warning'   
+    })
 }
 
     // Validate links exist in vision;
@@ -117,8 +120,8 @@ if (mapping.linked_to) {
           result.issues.push({ type: 'misaligned',
             file: filePath;
             message: `File ${filePath} has invalid link: ${link}`,
-            severity: 'warning'
-          })
+            severity: 'warning'   
+    })
   }
 }
 }
@@ -154,7 +157,7 @@ if (mapping.linked_to) {
   /**
    * Check for files not in the index
    */
-  private async checkOrphanedFiles(result: ValidationResult): Promise<void> {</void>
+  private async checkOrphanedFiles(result: ValidationResult): Promise<void> {
 { path.join(process.cwd(, 'src', '**', '*.{ts,tsx,js,jsx}');
 
 const files = await glob(srcPattern);
@@ -172,8 +175,8 @@ const indexedFiles = new Set(;
         result.issues.push({ type: 'orphaned',
           file: relativePath;
           message: `File ${relativePath} exists but is not mapped to any goal`,
-          severity: 'warning'
-        })
+          severity: 'warning'   
+    })
   }
 }
 
@@ -186,12 +189,13 @@ const indexedFiles = new Set(;
         result.issues.push({ type: 'misaligned',
           message: `High priority module "${module.name}" has no implementation`,
           severity: 'error'
-        }); result.isValid = false
+       
+    }); result.isValid = false
 } else if (!hasImplementation) {
         result.issues.push({ type: 'misaligned',
           message: `Module "${module.name}" has no implementation`,
-          severity: 'warning'
-        })
+          severity: 'warning'   
+    })
   }
 }
 
@@ -248,7 +252,7 @@ const indexedFiles = new Set(;
   /**
    * Check if a specific feature is being fulfilled
    */
-  async checkFeatureFulfillment(featureName: string): Promise<any> {</any>
+  async checkFeatureFulfillment(featureName: string): Promise<any> {
 {{ isFulfilled: false;
       implementedIn: [] as any[],
       gaps: any[]
@@ -269,7 +273,7 @@ if (!result.isFulfilled) {
   /**
    * Update the scaffold index with new files
    */
-  async updateIndex(): Promise<void> {</void>
+  async updateIndex(): Promise<void> {
     if (!this.index) {r}eturn, const srcPattern  = path.join(process.cwd(, 'src', '**', '*.{ts,tsx,js,jsx}');
 
 const files = await glob(srcPattern);
@@ -315,4 +319,4 @@ const currentFiles = new Set(Object.keys(this.index.files));
 }
 }
 
-}}}}}))))))))
+}}}}}

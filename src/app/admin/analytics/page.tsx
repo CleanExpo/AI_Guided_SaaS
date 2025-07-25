@@ -5,10 +5,10 @@ import React, { useState, useEffect } from 'react';
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-interface AdminUser { id: string;
-  email: string;
-  name: string;
-  lastActive: Date;
+interface AdminUser { id: string
+  email: string
+  name: string
+  lastActive: Date
   role: string
 }
 
@@ -48,19 +48,20 @@ export default function AdminAnalyticsPage() {
               <div className="space-y-2">
                 {users.map(user => (
                   <div key={user.id} className="flex justify-between items-center p-3 bg-gray-50 rounded">
-          <div></div>
+                    <div>
                       <p className="font-medium">{user.name}</p>
                       <p className="text-sm text-gray-600">{user.email}</p>
                     </div>
                     <div className="text-sm text-gray-500">
                       Last active: {user.lastActive.toLocaleDateString()}
                     </div>
+                  </div>
                 ))}
               </div>
             )}
           </CardContent>
         </Card>
       </div>
+    </div>
   )
 }
-)

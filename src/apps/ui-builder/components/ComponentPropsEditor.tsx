@@ -8,7 +8,7 @@ const selectedComponent = components.find((c) => c.id === selectedId);
   
 const { type, props, schema    }: any  = selectedComponent;
 
-const handleChange = (key: string, value: string) => { updateProps(selectedComponent.id, { [key]: value  };)
+const handleChange = (key: string, value: string) => { updateProps(selectedComponent.id, { [key]: value    })
 };
   return (
     <div className="p-4 bg-white border-t border-gray-300">
@@ -31,4 +31,4 @@ const handleChange = (key: string, value: string) => { updateProps(selectedCompo
             )}</input>
         ))}
       </form>
-}})
+}    }

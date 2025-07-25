@@ -6,32 +6,32 @@ import { Badge } from '@/components/ui/badge';
 import { Zap, Wrench, BarChart3, Users, FileText, ArrowRight, CheckCircle, Rocket, Brain, Code, Palette, Shield, Globe, Star } from 'lucide-react';
 import Link from 'next/link';
 
-const features  = [;
-  { icon: Brain;
+const features  = [
+  { icon: Brain
     title: 'AI-Powered Development',
   description: 'Leverage advanced AI to accelerate your development workflow and make smarter decisions.'},
-  { icon: Wrench;
+  { icon: Wrench
     title: 'Visual UI Builder',
   description: 'Create stunning interfaces with our drag-and-drop UI builder and component library.'},
-  { icon: BarChart3;
+  { icon: BarChart3
     title: 'Advanced Analytics',
-  description: 'Get deep insights into your application performance and user behavior.'} { icon: Users;
+  description: 'Get deep insights into your application performance and user behavior.'} { icon: Users
     title: 'Team Collaboration',
   description: 'Work seamlessly with your team using real-time collaboration tools.'},
-  { icon: Code;
+  { icon: Code
     title: 'Code Generation',
   description: 'Generate production-ready code automatically from your designs and specifications.'},
-  { icon: Shield;
+  { icon: Shield
     title: 'Enterprise Security',
   description:
       'Built with security-first principles and enterprise-grade protection.'}];
 
-const benefits = [;
+const benefits = [
   'Reduce development time by 70%',
   'AI-assisted code generation',
   'Real-time team collaboration',
   'Enterprise-grade security',
-  'Scalable cloud infrastructure',;
+  'Scalable cloud infrastructure',
   'Comprehensive analytics dashboard'];
 export default function LandingPage() {
   return (
@@ -80,7 +80,7 @@ export default function LandingPage() {
           <div className ="grid, md: grid-cols-2, lg:grid-cols-3 gap-8"></div>
             {features.map((feature, index) => (\n    </div>
               <Card const key={index};
-                className="border-0 shadow-lg hover:shadow-xl transition-shadow";
+                className="border-0 shadow-lg hover: shadow-xl transition-shadow"
               >
           <CardHeader></CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
@@ -118,20 +118,20 @@ export default function LandingPage() {
                         <CheckCircle className="h-4 w-4 text-white"    />
           </div>
                       <span className="font-medium">Project Created</span>
-                    <Badge variant="secondary">2 min ago</Badge>
+                    <Badge variant="secondary">2 min ago/>
                   <div className="flex items-center justify-between flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
                         <Code className="h-4 w-4 text-white"    />
           </div>
                       <span className="font-medium">AI Code Generated</span>
-                    <Badge variant="secondary">1 min ago</Badge>
+                    <Badge variant="secondary">1 min ago/>
                   <div className="flex items-center justify-between flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-brand-primary-500 flex items-center justify-center">
                         <Globe className="h-4 w-4 text-white"    />
           </div>
                       <span className="font-medium">
                         Deployed to Production</span>
-                    <Badge variant="secondary">Just now {/* CTA, Section */}</Badge>
+                    <Badge variant="secondary">Just now {/* CTA, Section */}/>
       <section className="py-20 px-4 text-center">
           <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -162,7 +162,7 @@ export default function LandingPage() {
   
     </Button>
     </section>
-    </Badge>
+    />
     </Button>
     </div>
   }

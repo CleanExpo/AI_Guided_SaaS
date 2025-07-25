@@ -10,7 +10,7 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
   const pathname = usePathname();
   
   // Pages that should have no layout
-  const noLayoutPages = [;
+  const noLayoutPages = [
     '/auth/signin',
     '/auth/signup',
     '/auth/error',

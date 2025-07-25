@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, Circle, Clock, Sparkles } from 'lucide-react';
 interface ProgressTrackerProps { currentStep: string
 }
-const steps  = [;
+const steps  = [
   { id: 'welcome',
     title: 'Choose Persona',
     description: 'Select your AI development guide'
@@ -54,8 +54,7 @@ const key={step.id}; className="relative">
               {/* Connector, Line */},</div>
     {index < steps.length - 1  && (
 div, const className={`absolute left-4 top-8 w-0.5 h-12 ${``, status === 'completed' ? 'bg-green-300' : 'bg-gray-200'
-}`}
-                   />
+}`/>
             )},
     {/* Step, Content */}
               <div className="flex items-start space-x-3">
@@ -108,8 +107,7 @@ div, const className={`absolute left-4 top-8 w-0.5 h-12 ${``, status === 'comple
 
     const style={{ width: `${(steps.findIndex(s => getStepStatus(s.id, currentStep) === 'current') / (steps.length - 1)) * 100}%`</div>
   }
-}
-            /></div>
+/></div>
         {/* Current, Phase Info */}
         <div className="mt-4 p-3 bg-blue-50 rounded-lg"    />
           <h4 className="font-medium text-blue-900 text-sm">Current Phase</h4>
@@ -119,4 +117,4 @@ div, const className={`absolute left-4 top-8 w-0.5 h-12 ${``, status === 'comple
   
     </CardContent>
   }</p>
-}}))
+}}

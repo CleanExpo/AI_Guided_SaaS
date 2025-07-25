@@ -29,7 +29,7 @@ class EmailService {
   /**
    * Send a generic email
    */
-  async sendEmail(options: EmailOptions): Promise<any> {</any>
+  async sendEmail(options: EmailOptions): Promise<any> {
     if (!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' }}
     try {;
@@ -42,7 +42,8 @@ class EmailService {
     html: options.html,
     text: options.text,
     reply_to: options.replyTo
-         });
+        
+    });
       if (!response.ok) {
         const errorData = await response.json();
         return { success: false;
@@ -59,7 +60,7 @@ class EmailService {
   /**
    * Send welcome email to new users
    */
-  async sendWelcomeEmail(data: WelcomeEmailData): Promise<any> {</any>
+  async sendWelcomeEmail(data: WelcomeEmailData): Promise<any> {
 { `, ``, <!DOCTYPE html>
         <html></html>
         <head></head>
@@ -105,12 +106,12 @@ const _text = `;``
     return this.sendEmail({ to: data.userEmail,
     subject: 'Welcome to AI Guided SaaS Builder! 🚀';
       html,
-      text })
+      text    })
 }
   /**
    * Send notification email
    */
-  async sendNotificationEmail(data: NotificationEmailData): Promise<any> {</any>
+  async sendNotificationEmail(data: NotificationEmailData): Promise<any> {
 { `, ``, <!DOCTYPE html>
         <html></html>
         <head></head>
@@ -153,13 +154,13 @@ const _text = `;``
     `;``
     return this.sendEmail({ to: data.userName, // This should be the email address, subject: data.title;
       html,
-      text })
+      text    })
 }
   /**
    * Send password reset email
    */
   async sendPasswordResetEmail(email: string, resetUrl: string;
-  userName: string): Promise<any> {</any>
+  userName: string): Promise<any> {
 { `, ``, <!DOCTYPE html>
         <html></html>
         <head></head>
@@ -213,12 +214,12 @@ const _text = `;``
     return this.sendEmail({ to: email;
     subject: 'Reset Your Password - AI Guided SaaS Builder';
       html,
-      text })
+      text    })
 }
   /**
    * Test email configuration
    */
-  async testConfiguration(): Promise<any> {</any>
+  async testConfiguration(): Promise<any> {
     if (!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' }}
     try {;
@@ -253,4 +254,4 @@ export const _sendPasswordResetEmail = (
 ) => emailService.sendPasswordResetEmail(email, resetUrl, userName);
 export const _testEmailConfiguration = () => emailService.testConfiguration();
 
-}}}}}}}}}}}}})
+}}}}}}}}}}}}    }

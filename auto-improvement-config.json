@@ -1,0 +1,39 @@
+{
+  "enabled": true,
+  "schedule": {
+    "interval": "hourly",
+    "times": [
+      "09:00",
+      "15:00",
+      "21:00"
+    ]
+  },
+  "thresholds": {
+    "autoImprove": 7,
+    "alert": 5,
+    "target": 8.5
+  },
+  "improvements": {
+    "lowRisk": {
+      "enabled": true,
+      "maxPerRun": 5
+    },
+    "mediumRisk": {
+      "enabled": false,
+      "requiresApproval": true
+    },
+    "highRisk": {
+      "enabled": false,
+      "requiresManualIntervention": true
+    }
+  },
+  "notifications": {
+    "slack": {
+      "enabled": false
+    },
+    "email": {
+      "enabled": false,
+      "recipients": []
+    }
+  }
+}

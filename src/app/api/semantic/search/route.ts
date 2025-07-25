@@ -4,38 +4,44 @@ import { z } from 'zod';
 import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 
 // Request validation schema
-const searchSchema = z.object({ query: z.string().min(1, filters: z.record(z.any()).optional(, size: z.number().min(1).max(100).optional().default(7, includeSource: z.boolean().optional().default(true)
-});
-export async function POST(request: NextRequest): Promise<NextResponse> {</NextResponse>
+const searchSchema = z.object({ 
+    query: z.string().min(1),
+    filters: z.record(z.any()).optional(),
+    size: z.number().min(1).max(100).optional().default(7),
+    includeSource: z.boolean().optional().default(true)   
+    })
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
     // Validate input
-    const validatedData = searchSchema.parse(body);
+    const validatedData = searchSchema.parse(body)
     // Perform semantic search
     const results = await semanticSearch.search({ query: validatedData.query,
       filters: validatedData.filters,
       size: validatedData.size,
-      includeSource: validatedData.includeSource
-    });
+      includeSource: validatedData.includeSource   
+    })
     return NextResponse.json(results)
 } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400 })
+      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400   
+    })
 }
     console.error('Semantic search error:', error);
-    return NextResponse.json({ error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 })
+    return NextResponse.json({ error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   
+    })
 }
 }
 
-export async function GET(request: NextRequest): Promise<NextResponse> {</NextResponse>
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     // Health check
-    const health = await semanticSearch.checkHealth();
+    const health = await semanticSearch.checkHealth()
     return NextResponse.json(health)
 } catch (error) {
     return NextResponse.json({ status: 'unhealthy',
         error: error instanceof Error ? error.message : 'Health check failed'
-      }, { status: 503 })
+      }, { status: 503   
+    })
+  }
 }
-}
-)))

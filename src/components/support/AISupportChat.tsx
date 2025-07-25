@@ -8,14 +8,14 @@ import { MessageCircle, Send, Bot, User, Book, Play, HelpCircle, Loader2, X, Che
 import { cn } from '@/utils/cn';
 import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
 import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
-interface Message { id: string;
+interface Message { id: string
   role: 'user' | 'assistant' | 'system',
-  content: string;
-  timestamp: Date;
+  content: string
+  timestamp: Date
   metadata? null : {
     suggestedDocs?: string[],
   suggestedTutorials?: string[],
-  codeBlocks? null: Array<{ language: string;
+  codeBlocks? null: Array<{ language: string
   code: string
 }>
     actionButtons? null : Array<{ label: string, action: string data?}>
@@ -23,7 +23,7 @@ interface Message { id: string;
 interface AISupportChatProps { documentationSystem: DynamicDocumentationSyste
 m, tutorialSystem: InteractiveTutorialSyste
 m,
-  userId: string;
+  userId: string
   projectId?: string
 };
 export function AISupportChat({
@@ -32,7 +32,7 @@ export function AISupportChat({
 }: AISupportChatProps) {
   const [isOpen, setIsOpen] = useState<any>([])
   const [isMinimized, setIsMinimized] = useState<any>([])
-  const [messages, setMessages] = useState<Message[]>([;</Message>
+  const [messages, setMessages] = useState<Message[]>([</Message>
   { id: '1',
       role: 'system',
 content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?', </Message>,
@@ -51,11 +51,12 @@ const [showQuickActions, setShowQuickActions] = useState<any>([])
   useEffect(() => {
     scrollToBottom()}, [messages]);
 
-const _scrollToBottom  = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'  };)};
+const _scrollToBottom  = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' 
+    })};
 
 const _handleSendMessage = async () =>  {
     if (!input.trim() {|}| isLoading) return const userMessage: Message={ id: Date.now().toString(, role: 'user',
-      content: input,;
+      content: input,
 timestamp: new Date()};
     setMessages(prev => [...prev, userMessage]);
     setInput('');
@@ -69,7 +70,7 @@ const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
 
 const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input;
+        body: JSON.stringify({ message: input
     context: { userId, projectId, documentationResults: docResults.slice(0, 3, availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title }, conversationHistory: messages.slice(-5)})};
       const data  = await response.json();
 
@@ -120,8 +121,7 @@ action: 'start-tutorial',
     data: { tutorialId: t.id }}))};
         setMessages(prev => [...prev, tutorialMessage]);
         // break
-      case 'report-issue':
-      setInput('I\'m experiencing an issue with ');
+      case 'report-issue': setInput('I\'m experiencing an issue with ')
     break;
         // break
       case 'get-help':;
@@ -175,7 +175,7 @@ data: { sectionId: r.sectionId }}))};
     setMessages(prev => [...prev, searchMessage]);
     setSearchQuery('')
 }
-  const quickActions = [;
+  const quickActions = [
   { icon: Book, label: 'Browse Docs', action: 'browse-docs' },
     { icon: Play, label: 'Start Tutorial', action: 'start-tutorial' },
     { icon: HelpCircle, label: 'Get Help', action: 'get-help' }
@@ -210,7 +210,7 @@ if (!isOpen) {
             ></Button>
               <ChevronDown className={cn(
             'h-4 w-4 transition-transform',isMinimized && "rotate-180"
-              )}    />
+              )/>
           </Button>
             <Button size="sm";
 variant="ghost";
@@ -223,7 +223,7 @@ variant="ghost";
             <div className="p-3 border-b flex gap-2">
           <div className="flex-1 relative">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
-          <input type="text";
+          <input type="text"
 placeholder="Search documentation...";
 
 value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
@@ -239,7 +239,7 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
                     )}
                    const className={cn(
             'h-8 w-8 rounded-full flex items-center justify-center shrink-0',message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
-                    )}     />
+                    )/>
                       {message.role === 'user' ? (</div>
                         <User className="h-4 w-4"     />
                       ) : (</User>
@@ -251,7 +251,7 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
             'rounded-lg px-3 py-2 max-w-[85%] text-sm',message.role === 'user'
                           ? "bg-primary text-primary-foreground"
                           : "bg-muted"
-                      )}    />
+                      )/>
           <p className="whitespace-pre-wrap">{ message.content}</p>
                       {/* Code, blocks */},
     {message.metadata?.codeBlocks?.map((block, index) => (\n    <div key={index} className="max-w-[85%]">
@@ -265,7 +265,7 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
         return doc ? (<button const key={docId };
 
     const onClick={() => handleActionButton('open-doc', { sectionId: docId})};</button>
-                                className="text-xs text-primary hover:underline block text-left";
+                                className="text-xs text-primary hover: underline block text-left"
                               ></button>
                                 📄 {doc.title}</button>
                             ) : null
@@ -314,8 +314,7 @@ value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
                       e.preventDefault(, handleSendMessage()};
                   placeholder="Ask me anything..."className="min-h-[40px] max-h-[120px] resize-none";
 
-    const rows={1}
-                /></Textarea>
+    const rows={1/></Textarea>
                 <Button
 
 onClick={handleSendMessage} disabled={!input.trim() || isLoading};
@@ -337,4 +336,4 @@ onClick={handleSendMessage} disabled={!input.trim() || isLoading};
 </div>
   }
 
-}}}}}}}}}}}))))))))))))))))))))))))
+}}}}}}}}}}}

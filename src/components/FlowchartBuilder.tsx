@@ -6,11 +6,11 @@ import '@xyflow/react/dist/style.css';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Save, Download, Upload } from 'lucide-react';
-interface FlowchartBuilderProps { projectName: string;
+interface FlowchartBuilderProps { projectName: string
   onSaveFlow: (nodes: Node[],
   edges: Edge[]) => void
 };
-const initialNodes: Node[]   = [;
+const initialNodes: Node[]   = [
   { id: '1',
     type: 'input',
     position: { x: 250, y: 25 },
@@ -26,7 +26,7 @@ const initialNodes: Node[]   = [;
     position: { x: 250, y: 250 },
     data: { label: 'End' }}];
 
-const initialEdges: Edge[]  = [;
+const initialEdges: Edge[]  = [
   { id: 'e1-2', source: '1', target: '2' },
   { id: 'e1-3', source: '1', target: '3' },
   { id: 'e2-4', source: '2', target: '4' },
@@ -34,13 +34,12 @@ const initialEdges: Edge[]  = [;
 export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartBuilderProps, onSaveFlow }: FlowchartBuilderProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges, const [nodeId, setNodeId]  = useState<any>([])
-{ useCallback(;
-    (params: Connection) => setEdges((eds) => addEdge(params, eds), ;
-    [setEdges];
-  );
+{ useCallback(
+    (params: Connection) => setEdges((eds) => addEdge(params, eds),
+    [setEdges]);
 
 const _addNode  = useCallback(() =>  {
-    const newNode: Node={ id: nodeId.toString(, ;
+    const newNode: Node={ id: nodeId.toString(,
     position: { x: Math.random() * 400 y: Math.random() * 400  },
     data: { label: `Node ${ nodeId}` }}``
     setNodes((nds) => nds.concat(newNode))
@@ -54,7 +53,7 @@ const _exportFlow  = useCallback(() =>  {
     const flowData={
       nodes,
       edges,
-      projectName,;
+      projectName,
       timestamp: new Date().toISOString() };
     const _dataStr = JSON.stringify(flowData, null, 2);
 
@@ -104,7 +103,7 @@ const _importFlow = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
           <Upload className="w-4 h-4 mr-1"     />
                     Import
 </Upload>
-                <input type="file";
+                <input type="file"
 accept=".json";
 
 const onChange={importFlow}
@@ -127,7 +126,7 @@ nodes={nodes} edges={edges}
     </Controls></Background>
     </Button>
     </any>
-  }     />
+  />
       <Card className="mt-4"    />
           <CardContent className="pt-4"     />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"    />
@@ -141,4 +140,4 @@ nodes={nodes} edges={edges}
           <h4 className="font-medium text-gray-900 mb-1">Editing</h4>
               <p className="text-gray-600">Double-click nodes to edit labels</p>
 
-}}}}}}}})))))
+}}}}}}}}

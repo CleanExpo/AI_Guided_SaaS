@@ -144,7 +144,8 @@ if (!batched[key]) {
       batched[key].notifications.push(notification)
 })});
 // Convert to array for processing
-return Object.values(batched).map((batch) => ({ json: batch });```
+return Object.values(batched).map((batch) => ({ json: batch
+    });```
 },
     // 6. Merge all notification streams
     { id: 'merge_1',
@@ -309,7 +310,8 @@ return log;```
     message: 'Notification sent successfully',
             channels: [$json.channel],
     timestamp: $json.timestamp
-          })}`, ``,
+         
+    })}`, ``,
 responseHeaders: { entries: [
             {
   name: 'Content-Type',
@@ -403,4 +405,4 @@ responseHeaders: { entries: [
     tags: ['notifications', 'communication', 'alerts']
 }
 
-}}}}}}}}}}}}}}}}}}}}}}}}}}}}})))
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}

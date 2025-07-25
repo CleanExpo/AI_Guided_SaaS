@@ -21,7 +21,7 @@ export default function ComponentRenderer({ type, props  = {}: Props) {switch (t
       return (
     break;
 
-    <input type="text";
+    <input type="text"
 
     const placeholder={props.placeholder || 'Enter, text...'}
           className="px-3 py-2 border rounded w-full max-w-sm"     />
@@ -53,4 +53,4 @@ export default function ComponentRenderer({ type, props  = {}: Props) {switch (t
           </div>
   }
 
-}))))
+}

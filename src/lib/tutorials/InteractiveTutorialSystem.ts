@@ -68,8 +68,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       this.createAIAssistantTutorial(, this.createDeploymentTutorial(); this.createAdvancedFeaturesTutorial();
     ];
     tutorials.forEach((tutorial) =>  {
-      this.tutorials.set(tutorial.id, tutorial)
-};)
+      this.tutorials.set(tutorial.id, tutorial)    })
   }
   private createGettingStartedTutorial(): Tutorial {
     return { id: 'getting-started',
@@ -425,7 +424,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
   }
 }
   // Public API
-  async startTutorial(tutorialId: string, userId: string): Promise<TutorialProgress> {</TutorialProgress>
+  async startTutorial(tutorialId: string, userId: string): Promise<TutorialProgress> {
 { this.tutorials.get(tutorialId, if (!tutorial) {
       throw new Error(`Tutorial ${tutorialId} not found`)
     };
@@ -452,7 +451,7 @@ const completedTutorials = userProgress.map((p) => p.tutorialId);
     this.emit('tutorial-started', { tutorialId, userId, tutorial });
     return progress
 }
-  async nextStep(tutorialId: string, userId: string): Promise<boolean> {</boolean>
+  async nextStep(tutorialId: string, userId: string): Promise<boolean> {
 { `${userId}-${tutorialId}`;
 
 const progress = this.activeProgress.get(progressKey);
@@ -482,7 +481,7 @@ const isValid = await this.validateStep(currentStep, userId);
     await this.saveProgress(progress);
     return true
 }
-  async skipStep(tutorialId: string, userId: string): Promise<boolean> {</boolean>
+  async skipStep(tutorialId: string, userId: string): Promise<boolean> {
 { `${userId}-${tutorialId}`;
 
 const progress = this.activeProgress.get(progressKey);
@@ -523,25 +522,24 @@ const hint = currentStep.hints[hintIndex];
     return hint
 }
   private async showStep(tutorial: Tutorial, progress: TutorialProgress;
-  stepIndex: number): Promise<void> {</void>
+  stepIndex: number): Promise<void> {
 { tutorial.steps[stepIndex], // Clear previous highlights, this.clearHighlights();
     // Add highlights for this step;
 if (step.type === 'action' && step.action) {
       this.addHighlight({ element: step.action.parameters?.target || step.action.component,
         type: 'highlight',
         content: step.content,
-        position: 'top'
-      })
+        position: 'top'   
+    })
 }
     // Emit step event
     this.emit('step-shown', { tutorialId: tutorial.id;
       step,
       stepIndex,
       totalSteps: tutorial.steps.length;
-      progress
-    })
+      progress    })
 }
-  private async validateStep(step: TutorialStep, userId: string): Promise<boolean> {</boolean>
+  private async validateStep(step: TutorialStep, userId: string): Promise<boolean> {
     if (!step.validation) {
       return true}
     for (const criterion of step.validation.criteria) {
@@ -550,7 +548,7 @@ if (step.type === 'action' && step.action) {
 }
     return true
 }
-  private async validateCriterion(criterion: ValidationCriteria, userId: string): Promise<boolean> {</boolean>
+  private async validateCriterion(criterion: ValidationCriteria, userId: string): Promise<boolean> {
     switch (criterion.type) {
       case 'element_exists':
       // Check if element exists in DOM
@@ -572,7 +570,7 @@ if (step.type === 'action' && step.action) {
     // In a real implementation, this would check actual values
     // For now, simulate
     return Math.random() > 0.2}
-  private async checkApiCall(endpoint: string, userId: string): Promise<boolean> {</boolean>
+  private async checkApiCall(endpoint: string, userId: string): Promise<boolean> {
     // In a real implementation, check if the API was called by this user
     // For now, simulate
     return Math.random() > 0.1}
@@ -590,7 +588,7 @@ if (step.type === 'action' && step.action) {
   private calculateStepScore(step: TutorialStep, attempts: number): number {
     const baseScore = 10; const penalty = Math.max(0, attempts - 1) * 2, return Math.max(1, baseScore - penalty)
 }
-  private async completeTutorial(tutorial: Tutorial, progress: TutorialProgress): Promise<void> {</void>
+  private async completeTutorial(tutorial: Tutorial, progress: TutorialProgress): Promise<void> {
     progress.completedAt = new Date(), // Award completion rewards, const rewards = tutorial.completionRewards;
     // Update user progress in documentation system
     await this.documentationSystem.trackUserProgress(
@@ -607,20 +605,19 @@ if (step.type === 'action' && step.action) {
       userId: progress.userId,
       score: progress.score,
       duration: progress.completedAt.getTime() - progress.startedAt.getTime();
-      rewards
-    })
+      rewards    })
   }
   private addHighlight(highlight: TutorialHighlight) {
     this.currentHighlights.push(highlight, this.emit('highlight-added', highlight)}
   private clearHighlights() {
     this.currentHighlights = [], this.emit('highlights-cleared')}
-  private async saveProgress(progress: TutorialProgress): Promise<void> {</void>
+  private async saveProgress(progress: TutorialProgress): Promise<void> {
     // Save to database
     try {
       await fetch('/api/admin/auth', { method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(progress)
-      })
+        body: JSON.stringify(progress)   
+    })
     } catch (error) {
       console.error('Failed to save tutorial progress:', error)}
   private async getUserProgress(userId: string): Promise<TutorialProgress[]> {</TutorialProgress>
@@ -662,8 +659,7 @@ const data = await response.json();
     // Sort by difficulty
     return recommendations.sort((a, b) => {
       const difficultyOrder={ beginner: 1, intermediate: 2, advanced: 3 };
-      return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]
-})
+      return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]    })
   }
 
-}}}}}}}}}}}}}}}}}}}}}}}})))))))))))))
+}}}}}}}}}}}}}}}}}}}}}}}}

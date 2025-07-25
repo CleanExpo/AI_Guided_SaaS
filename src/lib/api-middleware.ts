@@ -26,7 +26,8 @@ if (response.status >= 400) {
           errorMessage = `HTTP ${response.status}`
 }} catch (error) {
       // Handler threw an error
-      console.error('API handler, error:', error, errorMessage = error instanceof Error ? error.message : 'Unknown error', response = NextResponse.json({ error: 'Internal server error' ,  status: 500  })
+      console.error('API handler, error:', error, errorMessage = error instanceof Error ? error.message : 'Unknown error', response = NextResponse.json({ error: 'Internal server error' ,  status: 500   
+    })
 }
     // Track the API call
     try {
@@ -133,8 +134,8 @@ const userLimit = requestCounts.get(identifier);
                   'X-RateLimit-Reset': new Date(userLimit.resetTime).toISOString()}
             )} else {
         requestCounts.set(identifier, { count: 1;
-    resetTime: now + windowMs
-        })
+    resetTime: now + windowMs   
+    })
 }
       // Clean up old entries periodically
       if (Math.random() {<} 0.01) { // 1% chance
@@ -149,4 +150,4 @@ const userLimit = requestCounts.get(identifier);
 }
 }
 
-}}}}}}))
+}}}}}}

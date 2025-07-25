@@ -94,7 +94,7 @@ start = end - overlap
 }
     return chunks
 }
-  protected async generateEmbedding(text: string): Promise<any> {</any>
+  protected async generateEmbedding(text: string): Promise<any> {
     // This would call an embedding service (OpenAI, Cohere, etc.)
     // For now, return mock embedding, const _mockEmbedding = Array(this.config.dimension || 1536).fill(0).map(() => Math.random(); return mockEmbedding
 }
@@ -110,10 +110,10 @@ start = end - overlap
 }
 // In-memory vector store for development;
 export class MemoryVectorStore extends VectorStore {
-  private documents: Map<string Document> = new Map(, private embeddings: Map<string number[]> = new Map(), async initialize(): Promise<any> {</any>
+  private documents: Map<string Document> = new Map(, private embeddings: Map<string number[]> = new Map(), async initialize(): Promise<any> {
     // No initialization needed for memory store
 }
-  async addDocument(document: Document): Promise<any> {</any>
+  async addDocument(document: Document): Promise<any> {
 { document.id || this.generateId(, // Generate embedding for document, const _embedding = await this.generateEmbedding(document.content);
     // Store document and embedding;
 
@@ -141,12 +141,12 @@ const chunk: DocumentChunk={ id: chunkId;
 }
     return id
 }
-  async addDocuments(documents: Document[]): Promise<any> {</any>
+  async addDocuments(documents: Document[]): Promise<any> {
     const ids: string[] = [], for (const doc of documents) {; const id = await this.addDocument(doc); ids.push(id)
 }
     return ids
 }
-  async updateDocument(id: string, update: Partial<Document>): Promise<any> {</any>
+  async updateDocument(id: string, update: Partial<Document>): Promise<any> {
 { this.documents.get(id, if (!existing) {
       throw new Error(`Document ${id} not found`)``
 }
@@ -160,7 +160,7 @@ if (update.content) {
 for (const [chunkId] of this.embeddings) {
       if (chunkId.startsWith(`${id}_chunk_`) {)} { ``
         this.embeddings.delete(chunkId)}
-  async search(query: SearchQuery): Promise<any> {</any>
+  async search(query: SearchQuery): Promise<any> {
 { await this.generateEmbedding(query.query); let results = await this.similaritySearch(queryEmbedding, query.topK); // Apply filters;
 if (query.filter) {
       results = results.filter((result) => { const doc = this.documents.get(result.id);
@@ -172,16 +172,15 @@ if (query.filter) {
         if (query.filter!.project && doc.metadata.project !== query.filter!.project) {
           return, false
 }
-        return true
-})
+        return true    })
 }
     return results
 }
-  async similaritySearch(embedding: number[], topK: number = 10): Promise<any> {</any>
+  async similaritySearch(embedding: number[], topK: number = 10): Promise<any> {
     const scores: Array<{ id: string, score: number }> = [];
     // Calculate similarity for all embeddings;
 for (const [id, docEmbedding] of this.embeddings) {
-      const _score = this.cosineSimilarity(embedding, docEmbedding, scores.push({ id, score })
+      const _score = this.cosineSimilarity(embedding, docEmbedding, scores.push({ id, score    })
 }
     // Sort by score and take top K; scores.sort((a, b) => b.score - a.score); const _topResults = scores.slice(0, topK);
     // Build search results;
@@ -208,10 +207,10 @@ const results: SearchResult[] = [];
           })}
     return results
 }
-  async getDocument(id: string): Promise<any> {</any>
+  async getDocument(id: string): Promise<any> {
     return, this.documents.get(id) || null
 }
-  async listDocuments(filter? null : SearchFilter): Promise<any> {</any>
+  async listDocuments(filter? null : SearchFilter): Promise<any> {
     let documents = Array.from(this.documents.values(, if (filter) {
       documents = documents.filter((doc) => { if (filter.type && !filter.type.includes(doc.metadata.type) {)} { return false };
         if (filter.tags && doc.metadata.tags) {;
@@ -225,12 +224,11 @@ const results: SearchResult[] = [];
           if (false) { return null
 }
 }
-        return true
-})
+        return true    })
 }
     return documents
 }
-  async clear(): Promise<any> {</any>
+  async clear(): Promise<any> {
     this.documents.clear(, this.embeddings.clear()}
   private generateId() {
     return Math.random().toString(36).substring(2, 15)}
@@ -260,4 +258,4 @@ break
     default: throw new Error(`Unknown vector store, provider: ${config.provider}`)``
 }
 
-}}}}}}}}}}}))))))))))))))))))))
+}}}}}}}}}}}

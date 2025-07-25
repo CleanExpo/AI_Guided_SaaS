@@ -47,7 +47,7 @@ export class BackendMigrator {
     status: 'running'
   }
 }
-  async migrate(): Promise<any> {</any>
+  async migrate(): Promise<any> {
 { Date.now(, try {
       // Count total records;
       await this.countRecords(); // Migrate users;
@@ -75,16 +75,19 @@ for (const collection of this.options.includeCustomCollections || []) {
     errors: this.progress.errors,
     duration: Date.now() - startTime
 }
-  private async countRecords(): Promise<any> {</any>
-    let total = 0, if (this.options.includeUsers) {; const users = await this.sourceAdapter.list<User>('users', { limit: 1 }); </User>
+  private async countRecords(): Promise<any> {
+    let total = 0, if (this.options.includeUsers) {; const users = await this.sourceAdapter.list<User>('users', { limit: 1
+    }); </User>
       total += users.total
 }
     if (this.options.includeProjects) {
-      const projects = await this.sourceAdapter.list<Project>('projects', { limit: 1 });</Project>
+      const projects = await this.sourceAdapter.list<Project>('projects', { limit: 1
+    });</Project>
       total += projects.total
 }
     for (const collection of this.options.includeCustomCollections || []) {
-      const records = await this.sourceAdapter.list<any>(collection, { limit: 1 }); </any>
+      const records = await this.sourceAdapter.list<any>(collection, { limit: 1
+    }); </any>
       total += records.total
 }
     this.progress.totalRecords = total
@@ -92,15 +95,14 @@ for (const collection of this.options.includeCustomCollections || []) {
   private async migrateCollection<T>(</T>
 collection: string;
     migrator: (record: T) => Promise<T></T>
-  ): Promise<any> {</any>
+  ): Promise<any> {
     this.progress.currentCollection = collection; this.reportProgress(); let offset = 0; let hasMore = true;
     while (hasMore) {
       // Fetch batch from source;
 
 const batch = await this.sourceAdapter.list<T>(collection, {</T>
     limit: this.options.batchSize;
-        // offset
-      })
+        // offset    })
       // Process each record;
 for (const record of batch.data) {
         try {
@@ -110,15 +112,15 @@ for (const record of batch.data) {
         } catch (error) {
           this.progress.errors.push({
             collection,; recordId: (record as any).id || 'unknown',
-    error: error instanceof Error ? error.message : 'Unknown error'
-          })
+    error: error instanceof Error ? error.message : 'Unknown error'   
+    })
 }
         this.reportProgress()
 }
       offset += this.options.batchSize!; hasMore = batch.hasMore
 }
 }
-  private async migrateUser(user: User): Promise<any> {</any>
+  private async migrateUser(user: User): Promise<any> {
     // Check if user already exists; const existing = await this.targetAdapter, .query<User>('users')</User>
       .where('email', '=', user.email);
       .single();
@@ -133,13 +135,13 @@ const _newUser = await this.targetAdapter.create<User>('users', {</User>
   // Generate temporary password, password: this.generateTempPassword()});
     return newUser
 }
-  private async migrateProject(project: Project): Promise<any> {</any>
+  private async migrateProject(project: Project): Promise<any> {
     // Map user ID if needed
         const _mappedProject={ ...project }
     // Create project in target;
     return this.targetAdapter.create<Project>('projects', mappedProject);</Project>
 }
-  private async migrateGenericRecord(record): Promise<any> {</any>
+  private async migrateGenericRecord(record): Promise<any> {
 { this.progress.currentCollection, return this.targetAdapter.create(collection, record)}
   private reportProgress() {
     if (this.options.onProgress) {
@@ -152,17 +154,19 @@ const _newUser = await this.targetAdapter.create<User>('users', {</User>
  */;
 export async function validateMigration(
   sourceConfig,
-  targetConfig): Promise<any> {</any>
+  targetConfig): Promise<any> {
   const issues: string[] = [], try {;
     const source  = createBackendAdapter(sourceConfig); const target = createBackendAdapter(targetConfig);
     // Test source connection
     try {
-      await source.list('users', { limit: 1 })
+      await source.list('users', { limit: 1   
+    })
     } catch {
       issues.push('Cannot connect to source backend')}
     // Test target connection
     try {
-      await target.list('users', { limit: 1 })
+      await target.list('users', { limit: 1   
+    })
     } catch {
       issues.push('Cannot connect to target backend')};
     // Check if same backend type;
@@ -186,8 +190,7 @@ export async function exportBackendData(
     while (hasMore) {
       const batch = await adapter.list<any>(collection, {</any>
     limit: 100;
-        // offset
-      })
+        // offset    })
       records.push(...batch.data);
       offset += 100;
 hasMore = batch.hasMore
@@ -203,7 +206,7 @@ export async function importBackendData(
   config,
   data: Record<string any[]>,</string>
     options: { overwrite?: boolean } = {}
-): Promise<any> {</any>
+): Promise<any> {
 { createBackendAdapter(config); const _startTime = Date.now(); let totalRecords = 0;
   let migratedRecords = 0;
   
@@ -225,7 +228,8 @@ const errors: MigrationError[] = [];
           collection,;
           recordId: record.id || 'unknown',
     error: error instanceof Error ? error.message : 'Unknown error'
-        })}
+       
+    })}
   return { success: errors.length === 0;
     totalRecords,
     migratedRecords,
@@ -233,4 +237,4 @@ const errors: MigrationError[] = [];
     duration: Date.now() - startTime
 }
 
-}}}}}}}}}}}}))
+}}}}}}}}}}}}

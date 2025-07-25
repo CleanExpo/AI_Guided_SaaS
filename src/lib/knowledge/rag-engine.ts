@@ -55,8 +55,7 @@ export interface KnowledgeBaseStats { documentCount: number;
 }
 // Validation schemas;
 export const RAGQuerySchema = z.object({ question: z.string().min(1, context: z.string().optional(, filters: z.object({ type: z.array(z.string()).optional(, tags: z.array(z.string()).optional(, project: z.string().optional()}).optional(, options: z.object({ topK: z.number().min(1).max(100).optional(, includeScores: z.boolean().optional(, stream: z.boolean().optional()
-}).optional()
-})
+    }).optional()    })
 export class RAGEngine {
   private config: RAGConfig
   private vectorStore: VectorStore
@@ -65,20 +64,20 @@ export class RAGEngine {
     this.config = config
     this.vectorStore = config.vectorStore
     this.documentLoader = new DocumentLoader(, this.textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: config.chunkSize || 1000,
-    chunkOverlap: config.chunkOverlap || 200
+    chunkOverlap: config.chunkOverlap || 200   
     })
 }
   /**
    * Initialize the RAG engine
    */
-  async initialize(): Promise<any> {</any>
+  async initialize(): Promise<any> {
     await this.vectorStore.initialize()}
   /**
    * Add a document to the knowledge base
    */
   async addDocument(content: string, metadata: { source: string, type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
       title?: string, tags?: string[]
-      project? null : string }): Promise<any> {</any>
+      project? null : string }): Promise<any> {
     const document: Document={ id: this.generateId();
       content,
     metadata: {
@@ -89,7 +88,7 @@ export class RAGEngine {
   /**
    * Add documents from various sources
    */
-  async addFromSource(source: string, type: 'file' | 'url' | 'github'): Promise<any> {</any>
+  async addFromSource(source: string, type: 'file' | 'url' | 'github'): Promise<any> {
 { await this.documentLoader.load(source, type);
         return this.vectorStore.addDocuments(documents)}
   /**
@@ -98,7 +97,7 @@ export class RAGEngine {
   async ingestCodebase(path: string, options? null : {
       include?: string[]
       exclude? null : string[], project?: string
-    }): Promise<any> {</any>
+    }): Promise<any> {
 {{ documentsAdded: 0;
     errors: any[]
 }
@@ -107,8 +106,7 @@ export class RAGEngine {
         try {
           await this.addDocument(file.content, { source: file.path: type, 'code',; title: file.name,
     tags: [file.language || 'unknown'],
-    project?: options.project
-          })
+    project?: options.project    })
           results.documentsAdded++
         } catch (error) {
           results.errors.push(`Failed to add ${file.path}: ${error}`)``
@@ -120,7 +118,7 @@ export class RAGEngine {
   /**
    * Query the knowledge base and generate a response
    */
-  async query(query: RAGQuery): Promise<any> {</any>
+  async query(query: RAGQuery): Promise<any> {
     // Validate query, const validated = RAGQuerySchema.parse(query); // Retrieve relevant documents;
 
 const searchQuery: SearchQuery={ query: validated.question,
@@ -159,7 +157,7 @@ const context = this.prepareContext(searchResults, validated.context);
   /**
    * Get similar documents
    */
-  async getSimilar(documentId: string, topK: number = 5): Promise<any> {</any>
+  async getSimilar(documentId: string, topK: number = 5): Promise<any> {
 { await this.vectorStore.getDocument(documentId, if (!document || !document.embedding) {
       throw new Error('Document not found or has no embedding')};
     return this.vectorStore.similaritySearch(document.embedding, topK)
@@ -167,7 +165,7 @@ const context = this.prepareContext(searchResults, validated.context);
   /**
    * Update a document in the knowledge base
    */
-  async updateDocument(id: string, content?: string, metadata? null : Partial<Document['metadata']>): Promise<any> {</any>
+  async updateDocument(id: string, content?: string, metadata? null : Partial<Document['metadata']>): Promise<any> {
     const update: Partial<Document> = {}</Document>
     if (content) {
       update.content = content
@@ -182,12 +180,12 @@ const context = this.prepareContext(searchResults, validated.context);
   /**
    * Delete a document from the knowledge base
    */
-  async deleteDocument(id: string): Promise<any> {</any>
+  async deleteDocument(id: string): Promise<any> {
     await this.vectorStore.deleteDocument(id)}
   /**
    * Get knowledge base statistics
    */
-  async getStats(): Promise<any> {</any>
+  async getStats(): Promise<any> {
 { await this.vectorStore.listDocuments(, // Calculate statistics, const stats: KnowledgeBaseStats={ documentCount: documents.length,
     chunkCount: documents.reduce((acc, doc) => acc + (doc.chunks?.length || 1, 0),
       lastUpdated: documents.reduce((latest, doc) => { const _updated = new Date(doc.metadata.updatedAt);
@@ -198,7 +196,7 @@ const context = this.prepareContext(searchResults, validated.context);
   /**
    * Export knowledge base
    */
-  async export(format: 'json' | 'markdown' = 'json'): Promise<any> {</any>
+  async export(format: 'json' | 'markdown' = 'json'): Promise<any> {
 { await this.vectorStore.listDocuments(, if (format === 'json') {
       return JSON.stringify(documents, null, 2)} else {;
       // Export as markdown; let markdown = '# Knowledge Base Export\n\n', for (const doc of documents) {
@@ -216,7 +214,7 @@ const context = this.prepareContext(searchResults, validated.context);
   /**
    * Clear the entire knowledge base
    */
-  async clear(): Promise<any> {</any>
+  async clear(): Promise<any> {
     await this.vectorStore.clear()}
   // Private helper methods
   private prepareContext(;
@@ -232,7 +230,7 @@ searchResults: SearchResult[];
     return context.trim()
 }
   private async generateResponse(question: string, context: string;
-  sources: SearchResult[]): Promise<any> {</any>
+  sources: SearchResult[]): Promise<any> {
     // This would integrate with your AI model (OpenAI, Claude, etc.)
     // For now, return a mock response, const prompt = `, ``
 Based on the following context, answer the question. If the answer cannot be found in the context, say so.,
@@ -250,7 +248,7 @@ const answer = `Based on the provided context, here's the answer to your questio
     metadata: s.metadata,
     score: s.score,
     highlights: s.highlights
-}));
+    }));
       confidence: 0.85,
     tokens: { prompt: prompt.length / 4,
     completion: answer.length / 4,
@@ -275,4 +273,4 @@ if (doc.metadata.tags) {
     return Array.from(topicCounts.entries(); .map(([topic, count]) => ({ topic, count })).sort((a, b) => b.count - a.count)
 }
   private generateId() {; return Math.random().toString(36).substring(2, 15)}
-}}}}}}}}}}}}}}}}})))))))))))))))))))))
+}}}}}}}}}}}}}}}}}

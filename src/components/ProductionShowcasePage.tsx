@@ -10,18 +10,18 @@ import { AIIcon, CodeIcon, RocketIcon, DatabaseIcon, BrandIcon } from '@/compone
 import Link from 'next/link';
 // Import your actual production components;
 import ClaudeCodeDashboard from '@/components/ClaudeCodeDashboard';
-interface WorkflowResult { totalTokenUsage: number;
-  utilizationRate: number;
+interface WorkflowResult { totalTokenUsage: number
+  utilizationRate: number
   integrationCommands: string[],
   nextSteps: string[]
    }
-const personas = [;
+const personas = [
   { id: 'ai-architect',
     name: 'AI Architect',
     description: 'Expert in AI-powered development workflows',
     avatar: '🤖',
 color: 'from-blue-500 to-cyan-500',
-  icon: AIIcon;
+  icon: AIIcon
     features: [
       'Claude Code Integration';
       'Multi-Agent Orchestration',
@@ -31,66 +31,66 @@ color: 'from-blue-500 to-cyan-500',
     description: 'Master of frontend and backend development',
     avatar: '🧙‍♂️',
 color: 'from-brand-primary-500 to-pink-500',
-  icon: CodeIcon;
+  icon: CodeIcon
     features: ['Next.js 15', 'TypeScript', 'API Development']},
   { id: 'ui-designer',
     name: 'UI Designer',
     description: 'Creating beautiful, user-friendly interfaces',
     avatar: '🎨',
 color: 'from-pink-500 to-rose-500',
-  icon: BrandIcon;
+  icon: BrandIcon
     features: ['shadcn/ui', 'Tailwind CSS', 'Framer Motion']},
   { id: 'startup-founder',
     name: 'Startup Founder',
     description: 'MVP development and rapid iteration',
     avatar: '🚀',
 color: 'from-orange-500 to-red-500',
-  icon: RocketIcon;
+  icon: RocketIcon
     features: ['Rapid Prototyping', 'Deployment', 'Analytics']}];
 
-const productionFeatures = [;
+const productionFeatures = [
   { title: 'Claude Code Integration',
     description: 'Advanced AI-powered development with multi-agent orchestration',
-  icon: Brain;
+  icon: Brain
     demo: 'claude-dashboard',
     color: 'bg-blue-500',
 component: 'ClaudeCodeDashboard'},
   { title: 'Visual UI Builder',
     description: 'Production drag-and-drop interface builder',
-  icon: Wrench;
+  icon: Wrench
     demo: 'ui-builder',
     color: 'bg-brand-primary-500',
 component: 'UIBuilder'},
   { title: 'System Analytics',
     description: 'Real-time system monitoring and performance analytics',
-  icon: BarChart3;
+  icon: BarChart3
     demo: 'analytics',
     color: 'bg-green-500',
 component: 'SystemResourceMonitor'},
   { title: 'Collaboration Hub',
     description: 'Production team collaboration workspace',
-  icon: Users;
+  icon: Users
     demo: 'collaboration',
     color: 'bg-orange-500',
 component: 'CollaborationWorkspace'}];
 
-const engineeringHighlights = [;
+const engineeringHighlights = [
   { title: 'Multi-Agent Architecture',
     description:
       'Orchestrated AI agents for documentation, research, and optimization',
-    icon: AIIcon;
+    icon: AIIcon
 metrics: '5 Specialized Agents'},
   { title: 'Token Optimization Engine',
   description: 'Strategic memory management with 150K context optimization',
-  icon: DatabaseIcon;
+  icon: DatabaseIcon
     metrics: '96% Quality Retention'},
   { title: 'Causal Engine System',
   description: 'Advanced dependency tracking and cycle detection',
-  icon: Zap;
+  icon: Zap
     metrics: 'Real-time Analysis'},
   { title: 'Self-Check Framework',
   description: 'Automated system health monitoring and validation',
-  icon: Shield;
+  icon: Shield
     metrics: '100% Uptime Target'}];
     export default function ProductionShowcasePage() { const [selectedPersona, setSelectedPersona] = useState<string | null>(null);</string>
 
@@ -98,24 +98,24 @@ const [activeDemo, setActiveDemo]  = useState<string>([])
 
 const [systemMetrics, setSystemMetrics] = useState<any>({</any>
     uptime: '99.9%',
-    activeUsers: 12;
-    systemHealth: 98;
+    activeUsers: 12
+    systemHealth: 98
 memoryOptimization: 78});
   // Simulate real-time system updates
   useEffect(() =>  {
     const _interval = setInterval(() => {
       setSystemMetrics(prev => ({;
-        ...prev,;
+        ...prev,
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 3) - 1,
 systemHealth: Math.max(
           95;
           Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2), memoryOptimization: Math.max(
           70;
-          Math.min(85, prev.memoryOptimization + (Math.random() - 0.5) * 3))};))}, 5000);
+          Math.min(85, prev.memoryOptimization + (Math.random() - 0.5) * 3))}))}, 5000);
     return () => clearInterval(interval)
 }, []);
   
-const _renderPersonaShowcase = () => (\n    ;:
+const _renderPersonaShowcase = () => (\n:
         <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const _Icon = persona.icon, </div>, return (
@@ -155,8 +155,8 @@ Core: Technologies:</p>
                         {persona.features.map((feature, idx) => (\n    <Badge const key={idx};
                             variant="secondary";
 className="text-xs mr-1 mb-1";
-                          ></Badge>
-                            {feature}</Badge>
+                          >/>
+                            {feature}/>
                   ))}
                       <Button size="sm", className="w-full" asChild>
           <Link href="/auth/signin"></Link>
@@ -191,7 +191,7 @@ const onWorkflowComplete={ (result: WorkflowResult) => {};</ClaudeCodeDashboard>
             <CardContent>
           <div className="text-center py-8">
                 <Button
-                  // asChild className="bg-brand-primary-600 hover:bg-brand-primary-700";
+                  // asChild className="bg-brand-primary-600 hover: bg-brand-primary-700"
                 >
           <Link href="/ui-builder"></Link>
                     Launch UI Builder</Link>
@@ -244,7 +244,7 @@ const onWorkflowComplete={ (result: WorkflowResult) => {};</ClaudeCodeDashboard>
                 <p className="text-white/60 text-sm mt-4">
                   Access real-time team collaboration features</p>,
 default: return null}
-  const _renderEngineeringHighlights = () => (;
+  const _renderEngineeringHighlights = () => (
     <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {engineeringHighlights.map((highlight, index) => {
         const _Icon = highlight.icon, return (
@@ -265,7 +265,7 @@ default: return null}
                   {highlight.description}</CardDescription>
               <CardContent className="text-center">
           <Badge variant="outline", className="text-white border-white/20">
-                  {highlight.metrics}</Badge>
+                  {highlight.metrics}/>
           </motion.div>
   )
 }
@@ -282,8 +282,8 @@ default: return null}
             const transition={{ duration: 0.8 }
           >
           <Badge variant="outline";
-className="mb-6 border-purple-200, dark: border-purple-800 text-purple-700, dark:text-purple-300 bg-purple-50/50 dark:bg-purple-950/50";
-            ></Badge>
+className="mb-6 border-purple-200, dark: border-purple-800 text-purple-700, dark: text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
+            >/>
               <Sparkles className="w-3 h-3 mr-1"     />
               Production-Ready AI Platform</Sparkles>
             <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
@@ -385,7 +385,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
               Join the next generation of sophisticated AI-powered development</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg";
-className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-600 hover:to-brand-primary-600";
+className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue-600 hover:to-brand-primary-600"
                 // asChild
               ></Button>
                 <Link href="/auth/signin"></Link>
@@ -395,7 +395,7 @@ className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover:from-blue-
               <Button
 size="lg";
 variant="outline";
-className="border-white/20 text-white hover:bg-white/10";
+className="border-white/20 text-white hover: bg-white/10"
                 // asChild
               >
           <Link href="/admin"></Link>
@@ -404,4 +404,4 @@ className="border-white/20 text-white hover:bg-white/10";
           </motion.div>
 </div>
 
-}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}})))))))))
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}

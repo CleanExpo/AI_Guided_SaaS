@@ -49,7 +49,7 @@ unregisterCheck(name: string) {
   /**
    * Run all health checks
    */
-  async runAllChecks(): Promise<any> {</any>
+  async runAllChecks(): Promise<any> {
 { performance.now(); const results: HealthCheckResult[] = [], // Run all checks in parallel;
 
 const _checkPromises = Array.from(this.checks.entries()).map(async ([name, check]) => {
@@ -64,7 +64,7 @@ const _checkPromises = Array.from(this.checks.entries()).map(async ([name, check
           status: 'unhealthy',
           error: error instanceof Error ? error.message : 'Unknown error',
           responseTime: performance.now() - checkStart,
-    timestamp: new Date()})})
+    timestamp: new Date()})    })
     await Promise.all(checkPromises);
     // Get system metrics;
 
@@ -119,7 +119,7 @@ stopPeriodicChecks() {
   /**
    * Get system metrics
    */
-  private async getSystemMetrics(): Promise<any> {</any>
+  private async getSystemMetrics(): Promise<any> {
 { os.cpus(); const _totalMemory = os.totalmem(); const _freeMemory  = os.freemem();
 
 const _usedMemory = totalMemory - freeMemory;
@@ -168,7 +168,8 @@ memory: `${metrics.memory.percentage.toFixed(1)}%`,
 uptime: `${Math.floor(metrics.uptime / 3600)}h`,``
           // issues
         },
-        timestamp: new Date()})
+        timestamp: new Date()   
+    })
     // Process health check
     this.registerCheck('process', async () => { const memoryUsage = process.memoryUsage(); const heapUsed = memoryUsage.heapUsed / 1024 / 1024 // MB; const heapTotal  = memoryUsage.heapTotal / 1024 / 1024 // MB;
 
@@ -224,8 +225,8 @@ export const _createExternalServiceHealthCheck = (
     const controller = new AbortController(); const _timeoutId = setTimeout(() => controller.abort(); timeout);
     
 const response  = await fetch('/api/admin/auth', { signal: controller.signal,
-    method: 'GET'
-    };)
+    method: 'GET'   
+    })
     clearTimeout(timeoutId);
 
 const _responseTime = performance.now() - start;
@@ -264,4 +265,4 @@ export function getHealthCheckService(
   return healthCheckService
 }
 `
-}}}}}}}}}}}}}}}}}}}})))
+}}}}}}}}}}}}}}}}}}}}

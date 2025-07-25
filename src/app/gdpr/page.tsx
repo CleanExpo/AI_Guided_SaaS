@@ -28,11 +28,11 @@ export default function GDPRPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-          <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4">
                 We adhere to the six key principles of GDPR:
               </p>
               <ul className="list-disc ml-6 space-y-2 text-gray-600">
-          <li>Lawfulness, fairness and transparency in processing</li>
+                <li>Lawfulness, fairness and transparency in processing</li>
                 <li>Purpose limitation - data collected for specific purposes</li>
                 <li>Data minimisation - only necessary data is collected</li>
                 <li>Accuracy of personal data</li>
@@ -43,14 +43,14 @@ export default function GDPRPage() {
           </Card>
 
           <Card>
-          <CardHeader></CardHeader>
+            <CardHeader>
               <CardTitle className="flex items-center">
-          <Users className="h-6 w-6 mr-2 text-blue-600"   />
+                <Users className="h-6 w-6 mr-2 text-blue-600" />
                 Your Rights
               </CardTitle>
             </CardHeader>
             <CardContent>
-          <p className="text-gray-600 mb-4">Under GDPR, you have the following rights:</p>
+              <p className="text-gray-600 mb-4">Under GDPR, you have the following rights:</p>
               <ul className="list-disc ml-6 space-y-2 text-gray-600">
           <li>Right to be informed about data processing</li>
                 <li>Right of access to your personal data</li>

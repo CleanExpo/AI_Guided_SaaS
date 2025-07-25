@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, MessageCircle, Copy, Crown, Eye, Edit3, Clock, Wifi, WifiOff } from 'lucide-react';
 import { CollaborationRoom, CollaborationUser, CursorPosition, Comment, ProjectChange } from '@/lib/collaboration';
-interface CollaborationWorkspaceProps { projectId: string;
+interface CollaborationWorkspaceProps { projectId: string
   roomId?: string,
   onRoomCreated? (roomId: string) => void
 }
@@ -19,7 +19,7 @@ export default function CollaborationWorkspace({
   projectId, roomId, onRoomCreated
 }: CollaborationWorkspaceProps, roomId, onRoomCreated
 }: CollaborationWorkspaceProps) {
-  const { data: session    }: any  = useSession();
+  const { data: session    }: any  = useSession()
 
 const [socket, setSocket] = useState<Socket | null>(null);</Socket>
   
@@ -47,19 +47,20 @@ const [inviteLink, setInviteLink]  = useState<any>([])
 
 const [testMode, setTestMode] = useState<any>([])
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
-{ useRef<{ x: number, y: number }>({ x: 0, y: 0 });
+{ useRef<{ x: number, y: number }>({ x: 0, y: 0
+    });
 
 const _initializeCollaboration = useCallback(async () =>  {
     setLoading(true, try {
-      // Initialize Socket.IO connection, const newSocket = io({ transports: ['websocket', 'polling']
-})
+      // Initialize Socket.IO connection, const newSocket = io({ transports: ['websocket', 'polling']    })
       // Set up event listeners;
       setupSocketListeners(newSocket);
       // Authenticate with the server
       newSocket.emit('authenticate', {
         userId?: session.user?.email || 'anonymous',
 token: 'mock-token' // TODO: Use real JWT token
-      });
+     
+    });
       setSocket(newSocket)
 } catch (error) {
       console.error('Error initializing, collaboration:', error)} finally {
@@ -72,48 +73,57 @@ token: 'mock-token' // TODO: Use real JWT token
 
 const _setupSocketListeners = (socket: Socket) =>  {
     socket.on('connect', () => {
-      setConnected(true)})
+      setConnected(true)    })
     socket.on('disconnect', () => {
-      setConnected(false)})
-    socket.on('authenticated', (data: { user: CollaborationUser }) =>  {
+      setConnected(false)    })
+    socket.on('authenticated', (data: { user: CollaborationUser
+    }) =>  {
       // Join or create room, if (roomId) {;
-        socket.emit('join_room', { roomId, projectId })
+        socket.emit('join_room', { roomId, projectId    })
 } else {
         // Create new room
-        createNewRoom(socket)})
-    socket.on('room_joined', (data: { room: CollaborationRoom, project: unknown }) => {
+        createNewRoom(socket)    })
+    socket.on('room_joined', (data: { room: CollaborationRoom, project: unknown
+    }) => {
       setRoom(data.room, setParticipants(data.room.participants || []), setInviteLink(`${window.location.origin}/collaborate/${data.room.id}`)``;
       setTestMode(true) // Since we're using mock data;
 if (!roomId && onRoomCreated) {
-        onRoomCreated(data.room.id)})
-    socket.on('user_joined', (data: { user: CollaborationUser, room: CollaborationRoom }) => {
-      setParticipants(data.room.participants || [])})
-    socket.on('user_left', (data: { userId: string, user: CollaborationUser }) =>  {
+        onRoomCreated(data.room.id)    })
+    socket.on('user_joined', (data: { user: CollaborationUser, room: CollaborationRoom
+    }) => {
+      setParticipants(data.room.participants || [])    })
+    socket.on('user_left', (data: { userId: string, user: CollaborationUser
+    }) =>  {
       setParticipants(prev => prev.filter((p) => p.id !== data.userId))
       // Remove cursor
       setCursors((prev) => {
         const newCursors = new Map(prev, newCursors.delete(data.userId); return newCursors
 })}
-    socket.on('cursor_update', (data: { userId: string, user: CollaborationUser, position: CursorPosition }) =>  { if (data.userId !== (session?.user as any) {?}.id) {
+    socket.on('cursor_update', (data: { userId: string, user: CollaborationUser, position: CursorPosition
+    }) =>  { if (data.userId !== (session?.user as any) {?}.id) {
         setCursors((prev) => {
-          const newCursors = new Map(prev, newCursors.set(data.userId, { user: data.user position: data.position  });
+          const newCursors = new Map(prev, newCursors.set(data.userId, { user: data.user position: data.position 
+    });
           return newCursors
 })}
-    socket.on('project_updated', (data: { change: ProjectChange, user: CollaborationUser }) =>  {
-      setChanges(prev => [data.change, ...prev.slice(0, 49)]) // Keep last 50 changes
-})
-    socket.on('comment_added', (data: { comment: Comment, user: CollaborationUser }) => {
-      setComments(prev => [data.comment, ...prev])})
-    socket.on('error', (data: { message: string }) =>  {
+    socket.on('project_updated', (data: { change: ProjectChange, user: CollaborationUser
+    }) =>  {
+      setChanges(prev => [data.change, ...prev.slice(0, 49)]) // Keep last 50 changes    })
+    socket.on('comment_added', (data: { comment: Comment, user: CollaborationUser
+    }) => {
+      setComments(prev => [data.comment, ...prev])    })
+    socket.on('error', (data: { message: string
+    }) =>  {
       console.error('Collaboration, error:', data.message)
 })}
   
 const _createNewRoom = async (socket: Socket) =>  {
     try {
-      const response = await fetch('/api/admin/auth', { method: 'POST',;
+      const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
         body: JSON.stringify({ projectId,
-    settings: { allowGuests: true, maxParticipants: 10, permissions: { canEdit: true, canComment: true, canInvite: true, canExport: true })}
+    settings: { allowGuests: true, maxParticipants: 10, permissions: { canEdit: true, canComment: true, canInvite: true, canExport: true
+    })}
       const data = await response.json();
       if (data.success) {
         socket.emit('join_room', { roomId: data.roomId, projectId })} catch (error) {
@@ -127,17 +137,18 @@ y: e.clientY - rect.top
     if (Date.now() {%} 100 === 0) {
       socket.emit('cursor_move', { roomId: room.id
         // position
-})}
+    })}
   const _handleAddComment = (): void => {
     if (!socket || !room || !newComment.trim() {)} return const comment={;
       projectId;
-      content: newComment;
+      content: newComment
     position: { x: mousePosition.current.x,
 y: mousePosition.current.y
   }
 }
     socket.emit('add_comment', { roomId: room.id
       // comment
+   
     });
     setNewComment('')
 }
@@ -147,7 +158,7 @@ y: mousePosition.current.y
       return 'bg-green-500' }
     return 'bg-gray-400'
 }
-  const _getRoleIcon = (role: string) =>  {switch (role) {;
+  const _getRoleIcon = (role: string) =>  {switch (role) {
       case 'owner':;
       return <Crown className="h-3 w-3" />, break, case 'editor':;</Crown>
     break;
@@ -178,7 +189,7 @@ break
               {connected ? 'Connected' : 'Disconnected'}</span>
           {room && (
 Badge variant="outline">
-              {participants.length} participant{participants.length !== 1 ? 's' : ''}</Badge>
+              {participants.length} participant{participants.length !== 1 ? 's' : ''}/>
       )}
         <div className="flex items-center space-x-2" />
           <Button variant="outline";
@@ -195,7 +206,7 @@ size="sm";
 const onClick={() => setShowComments(!showComments)}</Button>
           ></Button>
             <MessageCircle className="h-4 w-4 mr-1" />
-            Comments ({comments.length})</MessageCircle>
+            Comments ({comments.length    })</MessageCircle>
           {inviteLink && (
 Button variant="outline" size="sm" onClick={copyInviteLink}></Button>
               <Copy className="h-4 w-4 mr-1" />
@@ -224,7 +235,7 @@ const onMouseMove={handleMouseMove}
 
     const style={{ left: position.x,
     top: position.y,
-transform: 'translate(-2px, -2px)' } />
+transform: 'translate(-2px, -2px)' />
           <div className="flex items-center space-x-1" />
                 <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg">
           <div className="bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-lg">
@@ -235,7 +246,7 @@ transform: 'translate(-2px, -2px)' } />
             <div const key={comment.id}
               className="absolute z-40";
 
-    const style={{ left: comment.position.x, top: comment.position.y } />
+    const style={{ left: comment.position.x, top: comment.position.y />
           <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-2 shadow-lg max-w-xs" />
                 <div className="text-xs font-medium text-yellow-800 mb-1">
                     Comment</div>
@@ -287,9 +298,9 @@ div className="text-sm text-gray-500">No recent changes</div>
           <div className="flex space-x-2" />
                     <Input placeholder="Type your comment...";
 
-value={newComment} onChange={(e) => setNewComment(e.target.value)}</Input>
-{{(e) => e.key === 'Enter' && handleAddComment()} /></Input>
-                    <Button onClick={handleAddComment} disabled={!newComment.trim()} />
+value={newComment} onChange={(e) => setNewComment(e.target.value)} />
+{{(e) => e.key === 'Enter' && handleAddComment()/>/>
+                    <Button onClick={handleAddComment} disabled={!newComment.trim()/>
           <MessageCircle className="h-4 w-4 mr-1" />Comment</MessageCircle>
         {/* Participants, sidebar */},
     {showParticipants && (div className = "w-80 border-l bg-white"></div>
@@ -309,7 +320,7 @@ value={newComment} onChange={(e) => setNewComment(e.target.value)}</Input>
       )}
                     <div;
 
-    const className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`} />
+    const className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`/>
           <div className="flex-1" />
                     <div className="flex items-center space-x-1" />
           <span className="font-medium">{participant.name}</span>
@@ -346,4 +357,4 @@ div className="text-sm text-gray-500">No comments yet</div>
     </Socket>
   }
 
-}}}}}}}}}}}}}}})))))))))
+}}}}}}}}}}}}}}}

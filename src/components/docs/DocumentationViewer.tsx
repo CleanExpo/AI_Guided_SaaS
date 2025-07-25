@@ -15,7 +15,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 interface DocumentationViewerProps { documentationSystem: DynamicDocumentationSyste
 m, tutorialSystem: InteractiveTutorialSyste
 m,
-  userId: string;
+  userId: string
   initialSectionId?: string
 }
 
@@ -73,7 +73,7 @@ const sections = results;
       window.location.href = `/tutorials/${tutorialId};`
   } catch (error) {
       console.error('Failed to start, tutorial:', error)}
-  const categories = [;
+  const categories = [
   { id: 'getting-started', label: 'Getting Started', icon: BookOpen },
     { id: 'reference', label: 'Reference', icon: Book },
     { id: 'guide', label: 'Guides', icon: ChevronRight },
@@ -81,13 +81,12 @@ const sections = results;
     { id: 'troubleshooting', label: 'Troubleshooting', icon: Hash }
    ];
 
-const _getDifficultyColor = (difficulty: string) =>  { switch (difficulty) {;
+const _getDifficultyColor = (difficulty: string) =>  { switch (difficulty) {
       case 'beginner':;
       return 'text-green-600 bg-green-100', break, case 'intermediate':;
       return 'text-yellow-600 bg-yellow-100';
     break;
-      case 'advanced':
-      return 'text-red-600 bg-red-100';
+      case 'advanced': return 'text-red-600 bg-red-100'
     break
 break
 };
@@ -220,9 +219,9 @@ div className="flex items-center gap-2 mb-2">
           <div></div>
                   <h1 className="text-2xl font-bold mb-2">{selectedSection.title}</h1>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)}></Badge>
+          <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)}>/>
                       {selectedSection.metadata.difficulty}
-</Badge>
+/>
                     <div className="flex items-center gap-1">
           <Clock className="h-4 w-4"     />
                       <span>{selectedSection.metadata.estimatedTime}</span>
@@ -280,7 +279,7 @@ style={vscDarkPlus} language={match[1]};
                               
 const key={relatedId};
                               const onClick={() => setSelectedSection(related)};</button>
-                              className="text-sm text-primary hover:underline";
+                              className="text-sm text-primary hover: underline"
                             >
                               {related.title}</button>
                           ) : null
@@ -315,7 +314,7 @@ Button size="sm", className="mt-2">
                     {selectedSection.interactiveElements.map((element) => (\n    <Card key={element.id} className="p-4">
           <div className="flex items-center justify-between mb-2">
                           <h3 className="font-semibold">{element.title}</h3>
-                          <Badge variant="outline">{element.type}</Badge>
+                          <Badge variant="outline">{element.type}/>
                         <p className="text-sm text-muted-foreground mb-4">
                           {element.description}
 </p>
@@ -346,14 +345,14 @@ div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
           <span className="text-muted-foreground">Active, Components:</span>
                             <div className="flex flex-wrap gap-2 mt-1">
                               {selectedSection.systemState.componentsActive.map((comp) => (\n    </div>
-                                <Badge key={comp} variant="secondary">{comp}</Badge>
+                                <Badge key={comp} variant="secondary">{comp}/>
                               ))}
       </div>
                           <div>
           <span className="text-muted-foreground">Enabled, Features:</span>
                             <div className="flex flex-wrap gap-2 mt-1">
                               {selectedSection.systemState.featuresEnabled.map((feature) => (\n    </div>
-                                <Badge key={feature} variant="outline">{feature}</Badge>
+                                <Badge key={feature} variant="outline">{feature}/>
                               ))}
                       <Card className="p-4">
           <h3 className="font-semibold mb-3">Configuration Values</h3>
@@ -398,4 +397,4 @@ div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
     </any>
   }
 `
-}}}}}}}})))))))
+}}}}}}}}

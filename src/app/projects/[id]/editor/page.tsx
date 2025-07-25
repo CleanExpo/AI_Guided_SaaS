@@ -12,7 +12,8 @@ export default function ProjectEditorPage() {
     const loadProject = async () => {
       // Simulate loading project data
       setTimeout(() => {
-        setProject({ id: params.id, name: 'Sample Project' };);
+        setProject({ id: params.id, name: 'Sample Project'
+    });
         setIsLoading(false)
 }, 1000)
 };

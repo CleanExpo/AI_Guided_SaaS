@@ -7,20 +7,20 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Settings, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
 
-interface MCPStatus { status: string;
-  name: string;
-  version: string;
+interface MCPStatus { status: string
+  name: string
+  version: string
   lastHealthCheck: string
 }
 
 export default function AdminMCPPage() {
-  const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);</MCPStatus>
+  const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);
   const [loading, setLoading] = useState(true);
   
   useEffect(() =>  {
     // Simulate loading MCP server status
     setTimeout(() => {
-      setMcpServers([;
+      setMcpServers([
         { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'sequential-thinking', version: '1.2.0', lastHealthCheck: new Date().toISOString() }
@@ -45,10 +45,10 @@ export default function AdminMCPPage() {
         ) : (
           mcpServers.map(server => (
             <Card key={server.name}>
-          <CardHeader></CardHeader>
+              <CardHeader>
                 <CardTitle className="flex items-center justify-between">
           <span>{server.name}</span>
-                  <Badge variant={server.status === 'running' ? 'default' : 'destructive'}></Badge>
+                  <Badge variant={server.status === 'running' ? 'default' : 'destructive'}>
                     {server.status === 'running' ? (
                       <CheckCircle className="w-3 h-3 mr-1"     />
                     ) : (
@@ -66,5 +66,6 @@ export default function AdminMCPPage() {
           ))
         )}
       </div>
+    </div>
   )
 }

@@ -8,11 +8,11 @@ import { FileCode2, FolderTree, Terminal, Bug, Lightbulb, Play, Save, RefreshCw,
 import { getKiroClient, KiroClient, KiroFile, KiroFileTree, KiroTerminal, KiroAIAssistance } from '@/lib/ide/kiro-client';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
-interface KiroIDEProps { projectId: string;
+interface KiroIDEProps { projectId: string
   onClose? () => void
  };
 export function KiroIDE({ projectId, onClose }: KiroIDEProps, onClose }: KiroIDEProps) {
-  const { toast    }: any  = useToast();
+  const { toast    }: any  = useToast()
 
 const [client, setClient] = useState<KiroClient | null>(null);</KiroClient>
   
@@ -52,13 +52,12 @@ const tree = await kiroClient.getFileTree(projectId);
         kiroClient.on('ai.suggestion', handleAISuggestion);
         kiroClient.on('disconnected', handleDisconnected);
         toast({ title: 'Connected to Kiro IDE',
-  description: `Project "${project.name};" opened successfully`
-  })
+  description: `Project "${project.name};" opened successfully`    })
 } catch (error) {
         console.error('Failed to, initialize: Kiro,', error, toast({ title: 'Connection Error',
           description: 'Failed to connect to Kiro IDE',
-variant: 'destructive'
-        })
+variant: 'destructive'   
+    })
 } finally {
         setLoading(false)}
     initializeClient();
@@ -66,13 +65,15 @@ variant: 'destructive'
         client.disconnect()}, [projectId]);
   // Event handlers;
 
-const _handleFileChanged = (data: { path: string, content: string }) =>  { setOpenFiles(prev => prev.map((file) =>
+const _handleFileChanged = (data: { path: string, content: string
+    }) =>  { setOpenFiles(prev => prev.map((file) =>
         file.path === data.path;
           ? { ...file, content: data.content  };
           : file
       ))
 }
-  const _handleTerminalOutput = (data: { terminalId: string, output: string }) =>  { // Update, terminal output
+  const _handleTerminalOutput = (data: { terminalId: string, output: string
+    }) =>  { // Update, terminal output
 };
   const _handleAISuggestion = (data: KiroAIAssistance) => {
     setAiAssistance(data) };
@@ -80,31 +81,29 @@ const _handleFileChanged = (data: { path: string, content: string }) =>  { setOp
     setConnected(false, toast({ title: 'Disconnected',
       description: 'Lost connection to Kiro IDE',
 variant: 'destructive'
-};)};
+    })};
   // File operations;
 
 const _openFile = async (path: string) =>  {
     if (!client) {r}eturn try {
       const file = await client.readFile(path, setOpenFiles((prev) => {
         const _exists = prev.find(f => f.path === path); if (exists) {r}eturn prev;
-        return [...prev, file]
-};)
+        return [...prev, file]    })
       setActiveFile(path)
 } catch (error) {
       console.error('Failed to open, file:', error, toast({ title: 'Error',
         description: 'Failed to open file',
 variant: 'destructive'
-})}
+    })}
   const _saveFile = async (path: string, content: string) =>  {
     if (!client) {r}eturn try {
-      await client.writeFile(path, content, toast({ title: 'File Saved',;
-  description: `${path}; saved successfully`
-  })
+      await client.writeFile(path, content, toast({ title: 'File Saved',
+  description: `${path}; saved successfully`    })
 } catch (error) {
       console.error('Failed to save, file:', error, toast({ title: 'Error',
         description: 'Failed to save file',
 variant: 'destructive'
-})}
+    })}
   const _closeFile = (path: string) =>  { setOpenFiles(prev => prev.filter((f) => f.path !== path), if (activeFile === path) {;
       const remaining  = openFiles.filter((f) => f.path !== path, setActiveFile(remaining.length > 0 ? remaining[0].path : null) };
   // Terminal operations;
@@ -119,7 +118,7 @@ const _createTerminal = async () =>  { if (!client) {r}eturn try {
       console.error('Failed to create, terminal:', error, toast({ title: 'Error',
         description: 'Failed to create terminal',
 variant: 'destructive'
-})}
+    })}
   const _executeCommand  = async (command: string) =>  {
     if (!client || !activeTerminal) {r}eturn try {;
       await client.executeCommand(activeTerminal, command)}; catch (error) {
@@ -132,26 +131,26 @@ const _getAISuggestions = async () =>  {
       console.error('Failed to get AI, suggestions:', error, toast({ title: 'Error',
         description: 'Failed to get AI suggestions',
 variant: 'destructive'
-})}
+    })}
   const _applySuggestion = async (suggestionId: string) =>  {
     if (!client) {r}eturn try {
       await client.applyAISuggestion(suggestionId, toast({ title: 'Success',
-  description: 'AI suggestion applied successfully'
-};)
+  description: 'AI suggestion applied successfully'   
+    })
 } catch (error) {
       console.error('Failed to apply, suggestion:', error, toast({ title: 'Error',
         description: 'Failed to apply suggestion',
 variant: 'destructive'
-})}
+    })}
   // File tree rendering;
 
-const _renderFileTree  = (tree: KiroFileTree, level: number = 0) =>  { const _handleClick = (): void => {if (tree.type === 'file') {;
+const _renderFileTree  = (tree: KiroFileTree, level: number = 0) =>  { const _handleClick = (): void => {if (tree.type === 'file') {
         openFile(tree.path) };
     return (
     <div;
 
     const key={tree.path} style={{ paddingLeft: `${level * 16}px` }}>``</div>
-        <div className="flex items-center gap-2 py-1 px-2 hover:bg-accent rounded cursor-pointer";
+        <div className="flex items-center gap-2 py-1 px-2 hover: bg-accent rounded cursor-pointer"
 
 const onClick={handleClick}
         ></div>
@@ -213,7 +212,7 @@ const onClick={handleClick}
                     ></div>
                       <FileCode2 className="h-3 w-3"    />
           <span className="text-sm">{file.path.split('/').pop()}</span>
-                      <button className="ml-2 hover:bg-destructive/20 rounded";
+                      <button className="ml-2 hover: bg-destructive/20 rounded"
 
     const onClick={(e) =>  {</button>
                           e.stopPropagation(, closeFile(file.path)};
@@ -292,15 +291,14 @@ const onClick={handleClick}
                         diagnostic.severity === 'error' ? 'text-red-500'  : null
                         diagnostic.severity === 'warning' ? 'text-yellow-500'  : null
                         'text-blue-500'
-                      }`}    />``</Bug>
+                      }`/>``</Bug>
                       <div className="flex-1">
           </div><p className="text-sm font-medium">
                           {diagnostic.file}:{diagnostic.line}:{diagnostic.column}</p>
           <p className="
                           {diagnostic.message}">
           </div>
-    ))};
-    );
+    ))});
 </div>
 
 </KiroClient>
@@ -313,4 +311,4 @@ const onClick={handleClick}
     </KiroFileTree>
   }
 
-}}}}}}}}}}}}}}})))))))))))))))))
+}}}}}}}}}}}}}}}

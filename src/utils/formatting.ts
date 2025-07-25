@@ -37,7 +37,7 @@ export function capitalize(str: string): string) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
  };
 export function titleCase(str: string): string) { return str.replace(/\w\S*/g, txt: (any) => {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase() };)
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()    })
 };
 export function slugify(str: string): string) {
   return str, .toLowerCase(); .trim();

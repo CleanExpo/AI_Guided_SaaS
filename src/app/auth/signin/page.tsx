@@ -14,19 +14,21 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleEmailSignIn = async (e: React.FormEvent) => { e.preventDefault();
+  const handleEmailSignIn = async (e: React.FormEvent) => { e.preventDefault()
     setIsLoading(true);
     try {
       await signIn('email', {
         email,
-        callbackUrl: '/dashboard'
-       };)
-} finally { setIsLoading(false)
+        callbackUrl: '/dashboard'   
+    })
+    } finally { 
+      setIsLoading(false)
 }
   };
 
   const handleGithubSignIn = () => {
-    signIn('github', { callbackUrl: '/dashboard'  };)
+    signIn('github', { callbackUrl: '/dashboard'   
+    })
 };
 
   return (
@@ -39,10 +41,10 @@ export default function SignInPage() {
         <CardContent className="space-y-4">
           <form onSubmit={handleEmailSignIn} className="space-y-4">
             <Input
-              type="email";
-              placeholder="Enter your email";
+              type="email"
+              placeholder="Enter your email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}</Input>
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <Button type="submit" disabled={isLoading} className="w-full">
@@ -57,11 +59,11 @@ export default function SignInPage() {
             <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-gray-50 px-2 text-gray-500">Or continue with</span>
             </div>
-          
-          <Button type="button";
-            variant="outline";
+          </div>
+          <Button type="button"
+            variant="outline"
             onClick={handleGithubSignIn}
-            className="w-full";
+            className="w-full"
           >
           <Github className="w-4 h-4 mr-2"     />
             GitHub
@@ -73,5 +75,8 @@ export default function SignInPage() {
               Sign up
             </a>
           </p>
-  )
+        </CardContent>
+      </Card>
+    </div>
+  );
 }

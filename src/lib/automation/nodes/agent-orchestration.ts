@@ -62,7 +62,7 @@ const _tasks = agents.map((agent) => ({;
   executionId,
   workflowId,
   timestamp: new Date().toISOString()
-});
+    });
 // Return tasks for parallel execution
 return tasks;`
   }
@@ -311,4 +311,4 @@ export function createCustomAgentNode(
       jsCode: agentCode
 }
 
-}}}}}}}}}}}}}}}}}})
+}}}}}}}}}}}}}}}}}    }

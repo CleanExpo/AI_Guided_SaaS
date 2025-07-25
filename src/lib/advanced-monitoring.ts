@@ -228,7 +228,8 @@ if (typeof window === 'undefined') {
   private checkHealthAlerts(health: SystemHealth) {
     if (health.memoryUsage.percentage > this.alertThresholds.memoryUsage) {
       this.triggerPerformanceAlert('High memory usage detected', { usage: health.memoryUsage.percentage,
-    threshold: this.alertThresholds.memoryUsage})
+    threshold: this.alertThresholds.memoryUsage   
+    })
 }
     if (health.errorRate > this.alertThresholds.errorRate) {
       this.triggerPerformanceAlert('High error rate detected', { errorRate: health.errorRate,
@@ -272,4 +273,4 @@ const _advancedMonitoring = new AdvancedMonitoringSystem();
 export default advancedMonitoring;
 // Export types for use in other modules;
 export type { SecurityEvent, PerformanceMetric, SystemHealth }
-}}}}}}}}}}}}}))))))))
+}}}}}}}}}}}}}

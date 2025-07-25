@@ -24,7 +24,7 @@ export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = 
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {</any>
+    descriptor.value = async function(...args: any[]): Promise<any> {
       const { throwOnError = true, logErrors = true } = options;
       try {
         // Validate first argument, const validatedInput = schema.parse(args[0]); args[0] = validatedInput;
@@ -49,7 +49,7 @@ export function ValidateOutput(schema: z.ZodSchema, options: ValidationOptions =
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {</any>
+    descriptor.value = async function(...args: any[]): Promise<any> {
       const { throwOnError = true, logErrors = true } = options;
       try {
         // Call original method, const result = await originalMethod.apply(this, args); // Validate output;
@@ -75,7 +75,7 @@ export function Validate(inputSchema: z.ZodSchema, outputSchema?: z.ZodSchema, o
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {</any>
+    descriptor.value = async function(...args: any[]): Promise<any> {
       const { throwOnError = true, logErrors = true } = options;
       try {
         // Validate input, const validatedInput = inputSchema.parse(args[0]); args[0] = validatedInput;
@@ -107,7 +107,7 @@ export function ValidateParams(...schemas: z.ZodSchema[]): z.ZodSchema[]) {
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {</any>
+    descriptor.value = async function(...args: any[]): Promise<any> {
       try {
         // Validate each parameter;
 
@@ -115,8 +115,7 @@ const _validatedArgs = args.map((arg, index) => {
           if (schemas[index]) {;
             return schemas[index].parse(arg)
 };
-          return arg
-})
+          return arg    })
         // Call original method with validated args
         return await originalMethod.apply(this, validatedArgs)
 } catch (error) {
@@ -173,7 +172,7 @@ export function createTypeGuard<T>(schema: z.ZodSchema<T>) {</T>
 export async validateAsync<T>(</T>
     schema: z.ZodSchema<T></T>
     data: unknown
-): Promise<T> {</T>
+): Promise<T> {
   try {
     return await schema.parseAsync(data)} catch (error) {
     if (error instanceof z.ZodError) {
@@ -190,4 +189,4 @@ export function safeParse<T>(</T>
   return { success: false;
     error: new ValidationError(result.error)}
 
-}}}}}}}}}})
+}}}}}}}}}    }

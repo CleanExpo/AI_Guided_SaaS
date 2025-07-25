@@ -9,7 +9,7 @@ import { Calendar, User, ArrowLeft, Share2, Bookmark } from 'lucide-react';
 import Link from 'next/link';
 
 // Mock blog posts data
-const blogPosts = [;
+const blogPosts = [
   { id: '1',
     title: 'Introducing AI Guided SaaS: The Future of Development',
     content: `
@@ -86,24 +86,26 @@ const blogPosts = [;
   }
 ];
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {</Metadata>
-{ blogPosts.find(p => p.id === params.id);
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const post = blogPosts.find(p => p.id === params.id);
   if (!post) {
-    return { title: 'Post Not Found',
+    return {
+      title: 'Post Not Found',
       description: 'The requested blog post could not be found.'
-    }
-}
-  
-  return { title: `${post.title} - AI Guided SaaS Blog`,
-    description: post.excerpt
+    };
   }
+  
+  return {
+    title: `${post.title} - AI Guided SaaS Blog`,
+    description: post.excerpt
+  };
 }
 
 export default function BlogPostPage({ params }: { params: { id: string } }) {
   const post = blogPosts.find(p => p.id === params.id);
   if (!post) {
-    notFound()
-}
+    notFound();
+  }
   
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -133,30 +135,34 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
               </div>
               
               <div className="flex gap-2">
-          <Button variant="outline" size="icon"></Button>
-                  <Share2 className="h-4 w-4"  />
-          </Button>
                 <Button variant="outline" size="icon">
-          <Bookmark className="h-4 w-4"   />
+                  <Share2 className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon">
+                  <Bookmark className="h-4 w-4" />
                 </Button>
               </div>
-        <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mb-8">
+            </div>
+            
+            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mb-8"></div>
           </div>
           
           <Card>
-          <CardContent className="prose prose-lg max-w-none p-8">
-              <div dangerouslySetInnerHTML={{ __html: post.content }}  />
-          </CardContent>
+            <CardContent className="prose prose-lg max-w-none p-8">
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            </CardContent>
           </Card>
           
           <div className="mt-12 pt-8 border-t">
-          <h3 className="text-2xl font-bold mb-4">Share this article</h3>
+            <h3 className="text-2xl font-bold mb-4">Share this article</h3>
             <div className="flex gap-4">
-          <Button variant="outline">Share on Twitter</Button>
+              <Button variant="outline">Share on Twitter</Button>
               <Button variant="outline">Share on LinkedIn</Button>
               <Button variant="outline">Copy Link</Button>
             </div>
-  )
-}
-
+          </div>
+        </article>
+      </div>
+    </div>
+  );
 }

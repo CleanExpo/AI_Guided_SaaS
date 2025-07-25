@@ -8,7 +8,8 @@ const envSchema = z.object({
   // AI Services, OPENAI_API_KEY: z.string().optional(, ANTHROPIC_API_KEY: z.string().optional(, PERPLEXITY_API_KEY: z.string().optional()
   // Email Service, RESEND_API_KEY: z.string().optional()
   // Payment, STRIPE_SECRET_KEY: z.string().optional(, STRIPE_WEBHOOK_SECRET: z.string().optional(, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional()
-  // App Configuration, APP_URL: z.string().default('http://localhost:3000', APP_NAME: z.string().default('AI Guided SaaS Builder', // Feature Flags, ANALYTICS_ENABLED: z.string().default('true', ENABLE_COLLABORATION: z.string().default('true', ENABLE_TEMPLATES: z.string().default('true', ENABLE_ANALYTICS: z.string().default('true', ENABLE_ADMIN_PANEL: z.string().default('true')})
+  // App Configuration, APP_URL: z.string().default('http://localhost:3000', APP_NAME: z.string().default('AI Guided SaaS Builder', // Feature Flags, ANALYTICS_ENABLED: z.string().default('true', ENABLE_COLLABORATION: z.string().default('true', ENABLE_TEMPLATES: z.string().default('true', ENABLE_ANALYTICS: z.string().default('true', ENABLE_ADMIN_PANEL: z.string().default('true')   
+    })
 // Parse and validate environment variables with graceful fallbacks;
 let env: z.infer<typeof envSchema></typeof>
 try {
@@ -23,7 +24,8 @@ try {
     ENABLE_COLLABORATION: process.env.ENABLE_COLLABORATION || 'true',
     ENABLE_TEMPLATES: process.env.ENABLE_TEMPLATES || 'true',
     ENABLE_ANALYTICS: process.env.ENABLE_ANALYTICS || 'true',
-    ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL || 'true'})
+    ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL || 'true'   
+    })
 };
 export { env   };// Demo mode detection - checks if we're using placeholder/demo values;
 export function isDemoMode(): boolean {
@@ -70,4 +72,4 @@ export const _config={ isDevelopment: env.NODE_ENV === 'development',
   // Rate limiting, rateLimits: { api: env.NODE_ENV === 'production' ? 100 : 1000, // requests per minute, ai: env.NODE_ENV === 'production' ? 10 : 50, // AI requests per minute
 }
 
-})))))))))))))))))))
+}

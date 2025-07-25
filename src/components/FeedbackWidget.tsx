@@ -29,14 +29,14 @@ const [recentError, setRecentError] = useState<any>([])
     source: event.filename,
     line: event.lineno,
 timestamp: new Date().toISOString()
-};)};
+    })};
     window.addEventListener('error', handleError);
     return () => window.removeEventListener('error', handleError)
 }, []);
 
 const _handleSubmit = async () =>  {
     if (!feedback.trim() {)} return setIsSubmitting(true, try {
-      const response = await fetch('/api/admin/auth', { method: 'POST',;
+      const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
         body: JSON.stringify({
           feedback;
@@ -56,9 +56,9 @@ headers: { 'Content-Type': 'application/json'  },
     setSentiment(quickSentiment, if (!isOpen) {
       // Quick feedback without opening form
       try {
-        await fetch('/api/admin/auth', { method: 'POST',;
+        await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ sentiment: quickSentiment;
+        body: JSON.stringify({ sentiment: quickSentiment
             projectId,
             feature,
     context: { url: window.location.href,
@@ -162,8 +162,7 @@ const key={option.value};
 value={feedback} onChange={(e) => setFeedback(e.target.value)};</Textarea>
                   className="mb-4";
 
-    const rows={4}
-                />
+    const rows={4/>
                 {/* Context, info */},
     {(recentError || type === 'bug')  && (
 /Textarea>
@@ -218,4 +217,4 @@ className="w-full"onClick={handleSubmit}
     </any>
   }
 
-}})))))))))
+}}

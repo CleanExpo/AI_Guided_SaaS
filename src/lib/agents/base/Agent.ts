@@ -95,21 +95,21 @@ export abstract class Agent extends EventEmitter {
     
     return { info: (message: string, data? null : any) => {
         console.log(`${prefix}; INFO: ${message}`, data || '');
-        this.emit('log:info', { message, data })
+        this.emit('log:info', { message, data    })
 },
       warn: (message: string, data? null : any) => {
         console.warn(`${prefix}; WARN: ${message}`, data || '');
-        this.emit('log:warn', { message, data })
+        this.emit('log:warn', { message, data    })
 },
       error: (message: string, error? null : any) => {
         console.error(`${prefix}; ERROR: ${message}`, error || '');
-        this.emit('log:error', { message, error })
+        this.emit('log:error', { message, error    })
 },
       debug: (message: string, data? null : any) =>  {
         if (process.env.DEBUG) {;
           console.debug(`${prefix}; DEBUG: ${message}`, data || '')
 }
-        this.emit('log:debug', { message, data })
+        this.emit('log:debug', { message, data    })
 }
     }
 }
@@ -152,14 +152,14 @@ export abstract class Agent extends EventEmitter {
 }
   
   protected observe(observation: string, data? null : any): void {
-    this.addMessage('observation', observation, { data })
+    this.addMessage('observation', observation, { data    })
 }
   
   protected act(action: string, params? null : any): void {
-    this.addMessage('action', action, { params })
+    this.addMessage('action', action, { params    })
 }
   
-  public async process(input: string): Promise<AgentResult> {</AgentResult>
+  public async process(input: string): Promise<AgentResult> {
     if (this.isProcessing) {
       throw new Error(`Agent ${this.config.name} is already processing`)
 }
@@ -195,7 +195,7 @@ export abstract class Agent extends EventEmitter {
   
   protected abstract execute(input: string): Promise<AgentResult></AgentResult>
   
-  public async processMessage(message: AgentMessage): Promise<any> {</any>
+  public async processMessage(message: AgentMessage): Promise<any> {
     this.logger.debug('Processing message', message);
     
     try {
@@ -208,12 +208,12 @@ export abstract class Agent extends EventEmitter {
 }
   }
   
-  protected async onMessage(message: AgentMessage): Promise<any> {</any>
+  protected async onMessage(message: AgentMessage): Promise<any> {
     // Default implementation - can be overridden
     return this.process(message.payload)
 }
   
-  public async collaborate(targetAgentId: string, message: string): Promise<any> {</any>
+  public async collaborate(targetAgentId: string, message: string): Promise<any> {
     this.emit('collaboration:request', { targetAgentId, message });
     // Collaboration logic will be implemented by the orchestrator
     return null
@@ -225,7 +225,7 @@ export abstract class Agent extends EventEmitter {
   
   public setArtifact(key: string, value: any): void {
     this.context.artifacts.set(key, value);
-    this.emit('artifact:created', { key, value })
+    this.emit('artifact:created', { key, value    })
 }
   
   public getSharedMemory(key: string): any {
@@ -234,7 +234,7 @@ export abstract class Agent extends EventEmitter {
   
   public setSharedMemory(key: string, value: any): void {
     this.context.sharedMemory.set(key, value);
-    this.emit('memory:updated', { key, value })
+    this.emit('memory:updated', { key, value    })
 }
   
   public reset(): void {
@@ -247,7 +247,7 @@ export abstract class Agent extends EventEmitter {
   /**
    * Execute a pulse - used by PulsedExecutor
    */
-  public async pulse(): Promise<void> {</void>
+  public async pulse(): Promise<void> {
     if (this.state.status !== 'ready' && this.state.status !== 'busy') {
       return
 }
@@ -259,14 +259,14 @@ export abstract class Agent extends EventEmitter {
 }
     
     // Update heartbeat
-    this.updateMetrics({ lastHeartbeat: new Date()
+    this.updateMetrics({ lastHeartbeat: new Date()   
     })
 }
   
   /**
    * Interrupt current execution - used by PulsedExecutor
    */
-  public async interrupt(): Promise<void> {</void>
+  public async interrupt(): Promise<void> {
     if (this.state.currentTask) {
       this.logger.warn(`Interrupting task ${this.state.currentTask.id}`);
       // Implementation depends on specific agent type
@@ -276,7 +276,7 @@ export abstract class Agent extends EventEmitter {
   /**
    * Execute a task
    */
-  protected async executeTask(task: AgentTask): Promise<void> {</void>
+  protected async executeTask(task: AgentTask): Promise<void> {
     this.state.currentTask = task;
     this.state.status = 'busy';
     
@@ -291,21 +291,21 @@ export abstract class Agent extends EventEmitter {
       task.completedAt = new Date();
       
       this.updateTaskMetrics(task, true);
-      this.emit('task:complete', { task, result })
+      this.emit('task:complete', { task, result    })
 } catch (error) {
       task.status = 'failed';
       task.error = error instanceof Error ? error.message : 'Unknown error';
       task.completedAt = new Date();
       
       this.updateTaskMetrics(task, false);
-      this.emit('task:failed', { task, error })
+      this.emit('task:failed', { task, error    })
 } finally {
       this.state.currentTask = undefined;
       this.state.status = 'ready'
 }
   }
   
-  protected async onTask(task: AgentTask): Promise<any> {</any>
+  protected async onTask(task: AgentTask): Promise<any> {
     // Default implementation - can be overridden
     return this.process(task.payload)
 }
@@ -369,20 +369,23 @@ export abstract class Agent extends EventEmitter {
 }
   
   // Agent lifecycle methods
-  public async start(): Promise<void> {</void>
+  public async start(): Promise<void> {
     this.state.status = 'ready';
-    this.emit('agent:started', { agentId: this.config.id })
+    this.emit('agent:started', { agentId: this.config.id   
+    })
 }
   
-  public async stop(): Promise<void> {</void>
+  public async stop(): Promise<void> {
     this.state.status = 'shutting_down';
-    this.emit('agent:stopping', { agentId: this.config.id });
+    this.emit('agent:stopping', { agentId: this.config.id
+    });
     
     // Clear task queue
     this.state.taskQueue = [];
     
     this.state.status = 'offline';
-    this.emit('agent:stopped', { agentId: this.config.id })
+    this.emit('agent:stopped', { agentId: this.config.id   
+    })
 }
   
   // Getters
@@ -404,4 +407,4 @@ export abstract class Agent extends EventEmitter {
       taskQueue: [...this.state.taskQueue]
     }
 }
-})))))
+}

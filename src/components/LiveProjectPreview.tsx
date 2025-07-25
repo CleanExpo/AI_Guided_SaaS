@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Monitor, Smartphone, Tablet, Code, Eye, RefreshCw, Sparkles } from 'lucide-react';
 import { cn } from '@/utils/cn';
 interface LiveProjectPreviewProps { projectData: {
-    projectType?: string;
+    projectType?: string
   projectName?: string,
   description?: string,
   features?: string[],
@@ -15,8 +15,8 @@ interface LiveProjectPreviewProps { projectData: {
 }
   mockData?
 };
-interface MockTemplate { id: string;
-  name: string;
+interface MockTemplate { id: string
+  name: string
   preview: React.ReactNod
 e
 }
@@ -56,22 +56,20 @@ const _generatePreview = async () =>  {
       setIsGenerating(false)}, 1000)
 }
   const _generateMockHtml = (): void => {
-    const { projectType, projectName, features = [], designStyle   };: any = projectData;
+    const { projectType, projectName, features = [], designStyle   };: any = projectData
     // Generate different templates based on project type;
 switch (projectType) { case 'website':
       return generateWebsiteTemplate(, break, case 'webapp':;
       return generateWebAppTemplate();
     break;
-      case 'ecommerce':
-      return generateEcommerceTemplate();
+      case 'ecommerce': return generateEcommerceTemplate()
     break;
-      case 'dashboard':
-      return generateDashboardTemplate();
+      case 'dashboard': return generateDashboardTemplate()
     break
 }
       default: return generateDefaultTemplate()}
   const _generateWebsiteTemplate = (): void => {
-    const { projectName, features = []   };: any = projectData;
+    const { projectName, features = []   };: any = projectData
     return ```;
       <div className="${designStyle} overflow-hidden">
         <!-- Header -->
@@ -105,7 +103,7 @@ switch (projectType) { case 'website':
     ```
   }
   const _generateWebAppTemplate = (): void => {
-    const { projectName, features = []   };: any = projectData;
+    const { projectName, features = []   };: any = projectData
     return ```;
       <div className="${designStyle} h-full">
         <!-- App Bar -->
@@ -150,7 +148,7 @@ switch (projectType) { case 'website':
     ```
   }
   const _generateEcommerceTemplate = (): void => {
-    const { projectName, features = []   };: any = projectData;
+    const { projectName, features = []   };: any = projectData
     return ```;
       <div className="${designStyle}">
         <!-- Header -->
@@ -183,8 +181,8 @@ switch (projectType) { case 'website':
         ` : ''}``
     ```
   }
-  const _generateDashboardTemplate = (): void => {;
-    const { projectName, features = []   };: any = projectData;
+  const _generateDashboardTemplate = (): void => {
+    const { projectName, features = []   };: any = projectData
     return ```;
       <div className="${designStyle} bg-gray-50 h-full">
         <!-- Top Bar -->
@@ -215,7 +213,7 @@ switch (projectType) { case 'website':
             ` : ''}``
     ```
   }
-  const _generateDefaultTemplate = (): void => {;
+  const _generateDefaultTemplate = (): void => {
     return ```, <div className="${designStyle}; p-8 text-center" >className="mb-8">
           <div className="w-20 h-20 ${primaryColor} rounded-full mx-auto mb-4"    />
           <h1 className="text-3xl font-bold mb-2">${projectData.projectName || 'Your, Project'}</h1>
@@ -239,11 +237,11 @@ Badge variant="secondary", className="animate-pulse">
           <button;
 
 const onClick={generatePreview};
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors";
+            className="p-2 hover: bg-gray-100 rounded-lg transition-colors"
 
     const disabled={isGenerating}
           >
-          <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")}     />
+          <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")/>
 </button>
         {/* Device, Selector */}
         <div className="flex gap-2">
@@ -283,7 +281,7 @@ const onClick={() => setDevice('desktop')}</button>
           <div className=""></div>
         <p className="Generating preview..."    />
           </div>
-    , : (;
+    , : (
             <div className="h-[600px] overflow-auto";
 
     const dangerouslySetInnerHTML={{ __html: previewHtml } >)};</div>
@@ -311,4 +309,4 @@ const onClick={() => setDevice('desktop')}</button>
     </div>
   }
 `
-}}})))
+}}}

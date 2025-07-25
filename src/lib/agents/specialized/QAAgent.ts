@@ -35,8 +35,7 @@ export class QAAgent extends Agent {
     super({ id: 'qa-agent',
       name: 'QA Agent',
       type: 'specialist',
-      ...config
-    })
+      ...config    })
 }
 
   protected defineCapabilities(): AgentCapability[] {
@@ -61,7 +60,7 @@ export class QAAgent extends Agent {
     ]
 }
 
-  async processMessage(message: AgentMessage): Promise<void> {</void>
+  async processMessage(message: AgentMessage): Promise<void> {
     this.logger.info(`Processing QA task: ${message.type}`);
 
     try {
@@ -84,12 +83,11 @@ export class QAAgent extends Agent {
         type: 'error',
         payload: { error: error.message,
           task: message.type
-        }
-      })
+        }    })
 }
   }
 
-  private async runTests(payload: any): Promise<void> {</void>
+  private async runTests(payload: any): Promise<void> {
     const { testPath = 'src', coverage = true } = payload;
     
     this.logger.info(`Running tests for ${testPath}...`);
@@ -100,7 +98,8 @@ export class QAAgent extends Agent {
         ? `npm test -- --coverage --testPathPattern=${testPath}`
         : `npm test -- --testPathPattern=${testPath}`;
       
-      const output = execSync(testCommand, { encoding: 'utf8' });
+      const output = execSync(testCommand, { encoding: 'utf8'
+    });
       
       // Parse test results
       const results = this.parseTestResults(output);
@@ -124,7 +123,7 @@ export class QAAgent extends Agent {
 }
   }
 
-  private async analyzeCodeQuality(payload: any): Promise<void> {</void>
+  private async analyzeCodeQuality(payload: any): Promise<void> {
     const { targetPath } = payload;
     
     this.logger.info(`Analyzing code quality for ${targetPath}...`);
@@ -140,16 +139,16 @@ export class QAAgent extends Agent {
     // Send analysis results
     await this.sendMessage({ to: 'orchestrator',
       type: 'quality-analysis',
-      payload: analysis
+      payload: analysis   
     })
 }
 
-  private async validateDeployment(payload: any): Promise<void> {</void>
+  private async validateDeployment(payload: any): Promise<void> {
     const { environment } = payload;
     
     this.logger.info(`Validating deployment for ${environment}...`);
     
-    const validationChecks = [;
+    const validationChecks = [
       { name: 'Build Success', check: () => this.checkBuildSuccess() },
       { name: 'Tests Pass', check: () => this.checkTestsPass() },
       { name: 'No TypeScript Errors', check: () => this.checkTypeScript() },
@@ -165,8 +164,7 @@ export class QAAgent extends Agent {
           return { name, passed, error: null }
 } catch (error) {
           return { name, passed: false, error: error.message }
-}
-      })
+}    })
     );
     
     const allPassed = results.every(r => r.passed);
@@ -177,8 +175,7 @@ export class QAAgent extends Agent {
         environment,
         passed: allPassed;
         checks: results
-      }
-    })
+      }    })
 }
 
   private parseTestResults(output: string): QATestResult[] {
@@ -196,8 +193,8 @@ export class QAAgent extends Agent {
       results.push({ testSuite: 'All Tests',
         passed: parseInt(testMatch[1], failed: parseInt(testMatch[2]),
         skipped: parseInt(testMatch[3], duration: 0, // Would need to parse time
-        failures: []
-      })
+        failures: []   
+    })
 }
     
     return results
@@ -215,7 +212,7 @@ export class QAAgent extends Agent {
     return null
 }
 
-  private async getCodeCoverage(): Promise<any> {</any>
+  private async getCodeCoverage(): Promise<any> {
     return this.parseCoverage() || { lines: 0;
       branches: 0;
       functions: 0;
@@ -233,16 +230,15 @@ export class QAAgent extends Agent {
       // Run ESLint
       const eslintOutput = execSync(`npx eslint ${targetPath} --format json`, { encoding: 'utf8',
         stdio: 'pipe'
-      });
+     
+    });
       
       const eslintResults = JSON.parse(eslintOutput);
       eslintResults.forEach((file: any) => {
         issues.issues += file.messages.length;
         file.messages.forEach((msg: any) => {
           if (msg.severity === 2) {i}ssues.critical++;
-          else issues.warnings++
-};)
-})
+          else issues.warnings++    })    })
 } catch (error) {
       // ESLint returns non-zero exit code when issues found
       this.logger.warn('ESLint check completed with issues')
@@ -273,7 +269,7 @@ export class QAAgent extends Agent {
     return recommendations
 }
 
-  private async analyzeTestFailures(results: QATestResult[]): Promise<void> {</void>
+  private async analyzeTestFailures(results: QATestResult[]): Promise<void> {
 { results.flatMap(r => r.failures);
     
     if (failures.length > 0) {
@@ -282,50 +278,53 @@ export class QAAgent extends Agent {
         payload: {
           failures,
           request: 'analyze-and-fix'
-        }
-      })
+        }    })
 }
   }
 
-  private async checkBuildSuccess(): Promise<boolean> {</boolean>
+  private async checkBuildSuccess(): Promise<boolean> {
     try {
-      execSync('npm run build', { stdio: 'pipe' });
+      execSync('npm run build', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async checkTestsPass(): Promise<boolean> {</boolean>
+  private async checkTestsPass(): Promise<boolean> {
     try {
-      execSync('npm test -- --passWithNoTests', { stdio: 'pipe' });
+      execSync('npm test -- --passWithNoTests', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async checkTypeScript(): Promise<boolean> {</boolean>
+  private async checkTypeScript(): Promise<boolean> {
     try {
-      execSync('npx tsc --noEmit', { stdio: 'pipe' });
+      execSync('npx tsc --noEmit', { stdio: 'pipe'
+    });
       return true
 } catch {
       return false
 }
   }
 
-  private async checkDependencies(): Promise<boolean> {</boolean>
+  private async checkDependencies(): Promise<boolean> {
     try {
-      const output = execSync('npm audit --audit-level=high', { encoding: 'utf8' });
+      const output = execSync('npm audit --audit-level=high', { encoding: 'utf8'
+    });
       return !output.includes('found')
 } catch {
       return false
 }
   }
 
-  private async checkEnvVars(environment: string): Promise<boolean> {</boolean>
+  private async checkEnvVars(environment: string): Promise<boolean> {
     // Check if required environment variables are set
-    const requiredVars = [;
+    const requiredVars = [
       'DATABASE_URL',
       'NEXTAUTH_SECRET',
       'NEXTAUTH_URL'
@@ -343,10 +342,10 @@ export class QAAgent extends Agent {
     return false
 }
 
-  private async checkPerformance(): Promise<boolean> {</boolean>
+  private async checkPerformance(): Promise<boolean> {
     // Basic performance checks
     // In a real implementation, this would run Lighthouse or similar
     return true
 }
 }
-}}}}}}))))
+}}}}}}

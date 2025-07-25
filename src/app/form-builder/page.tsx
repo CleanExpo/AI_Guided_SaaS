@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 export default function FormBuilderPage() {
   const [formElements, setFormElements] = useState([]);
 
-  const elementTypes = [;
+  const elementTypes = [
     { type: 'text', label: 'Text Input', icon: '📝' },
     { type: 'email', label: 'Email Input', icon: '📧' },
     { type: 'select', label: 'Dropdown', icon: '📋' },
@@ -20,13 +20,15 @@ export default function FormBuilderPage() {
     { type: 'radio', label: 'Radio Button', icon: '🔘' }
   ];
 
-  const addElement = (type) =>  {
-    const newElement={ id: Date.now(, type,;
-      label: `${ type.charAt(0).toUpperCase() + type.slice(1)}; Field`,
+  const addElement = (type) => {
+    const newElement = { 
+      id: Date.now(), 
+      type,
+      label: `${type.charAt(0).toUpperCase() + type.slice(1)} Field`,
       required: false
-     };
-    setFormElements([...formElements, newElement])
-};
+    };
+    setFormElements([...formElements, newElement]);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -38,37 +40,41 @@ export default function FormBuilderPage() {
           <p className="text-gray-600">
             Create dynamic forms with AI assistance and real-time preview.
           </p>
+        </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Form Elements Panel */}
           <div>
-          <Card></Card>
+            <Card>
               <CardHeader>
-          <CardTitle>Form Elements</CardTitle>
+                <CardTitle>Form Elements</CardTitle>
               </CardHeader>
               <CardContent>
-          <div className="space-y-2">
+                <div className="space-y-2">
                   {elementTypes.map((element) => (
                     <Button
-                      key={element.type};
-                      variant="outline";
-                      className="w-full justify-start";
-                      onClick={() => addElement(element.type)}</Button>
+                      key={element.type}
+                      variant="outline"
+                      className="w-full justify-start"
+                      onClick={() => addElement(element.type)}
                     >
                       <span className="mr-2">{element.icon}</span>
                       {element.label}
                     </Button>
                   ))}
                 </div>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Form Builder */}
           <div>
-          <Card></Card>
+            <Card>
               <CardHeader>
-          <CardTitle>Form Builder</CardTitle>
+                <CardTitle>Form Builder</CardTitle>
               </CardHeader>
               <CardContent>
-          <div className="space-y-4">
+                <div className="space-y-4">
                   {formElements.length === 0 ? (
                     <div className="text-center py-8 text-gray-500">
                       Add elements from the panel to start building your form
@@ -76,49 +82,54 @@ export default function FormBuilderPage() {
                   ) : (
                     formElements.map((element) => (
                       <div key={element.id} className="p-3 border rounded-lg">
-          <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center justify-between mb-2">
                           <label className="font-medium">{element.label}</label>
                           <Badge variant="outline">{element.type}</Badge>
                         </div>
                         {element.type === 'textarea' ? (
-                          <textarea ;
-                            className="w-full p-2 border rounded" ;
+                          <textarea 
+                            className="w-full p-2 border rounded" 
                             placeholder={`Enter ${element.label.toLowerCase()}`}
-                            rows={3}
-                            />
+                            rows={3/>
                         ) : (
                           <Input 
                             type={element.type} 
-                            placeholder={`Enter ${element.label.toLowerCase()}`}
-                            />
+                            placeholder={`Enter ${element.label.toLowerCase()}`/>
                         )}
                       </div>
                     ))
                   )}
                 </div>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Settings Panel */}
           <div>
-          <Card></Card>
+            <Card>
               <CardHeader>
-          <CardTitle>Form Settings</CardTitle>
+                <CardTitle>Form Settings</CardTitle>
               </CardHeader>
               <CardContent>
-          <div className="space-y-4">
+                <div className="space-y-4">
                   <div>
-          <label className="block text-sm font-medium mb-1">Form Title</label>
-                    <Input placeholder="Contact Form"  />
-          </div>
+                    <label className="block text-sm font-medium mb-1">Form Title</label>
+                    <Input placeholder="Contact Form" />
+                  </div>
                   <div>
-          <label className="block text-sm font-medium mb-1">Description</label>
+                    <label className="block text-sm font-medium mb-1">Description</label>
                     <textarea 
-                      className="w-full p-2 border rounded" ;
-                      placeholder="Form description";
-                      rows={3}
-                     />
-          </div>
+                      className="w-full p-2 border rounded" 
+                      placeholder="Form description"
+                      rows={3/>
+                  </div>
                   <Button className="w-full">Generate Form Code</Button>
                 </div>
-  )
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-)

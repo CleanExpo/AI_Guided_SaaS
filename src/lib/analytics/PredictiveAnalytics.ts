@@ -113,7 +113,7 @@ if (pattern.patterns.sessionDuration > 0 && pattern.patterns.sessionDuration <
     pattern.predictedIssues = this.predictIssues(pattern);
     // Emit alerts for high-risk patterns;
 if (pattern.riskScore > 0.7) {
-      this.emit('high-risk-user', { userId, pattern })
+      this.emit('high-risk-user', { userId, pattern    })
 }
     if (anomalies.length > 0) {
       this.emit('anomaly-detected', { userId, anomalies })}
@@ -190,7 +190,7 @@ const systemHealth = this.getLatestSystemHealth();
 }
     return issues
 }
-  private async collectSystemMetrics(): Promise<any> {</any>
+  private async collectSystemMetrics(): Promise<any> {
     try {
       // In production, these would come from real monitoring, const metrics: SystemHealthMetrics={ errorRate: await this.getErrorRate(, responseTime: await this.getAverageResponseTime(),
     throughput: await this.getThroughput(, resourceUsage: await this.getResourceUsage(),
@@ -284,19 +284,19 @@ const commonIssues = this.findCommonPatterns(allPatterns);
     return [...new Set(recommendations)]; // Remove duplicates
 }
   // Mock methods for metrics (replace with real implementations)
-  private async getErrorRate(): Promise<any> {</any>
+  private async getErrorRate(): Promise<any> {
     return Math.random() * 0.1, // 0-10% error rate}
-  private async getAverageResponseTime(): Promise<any> {</any>
+  private async getAverageResponseTime(): Promise<any> {
     return 200 + Math.random() * 1000, // 200-1200ms}
-  private async getThroughput(): Promise<any> {</any>
+  private async getThroughput(): Promise<any> {
     return 100 + Math.random() * 900, // 100-1000 requests/min}
-  private async getResourceUsage(): Promise<any> {</any>
+  private async getResourceUsage(): Promise<any> {
     return { cpu: Math.random() * 100,
     memory: Math.random() * 100,
     disk: Math.random() * 100
   }
 }
-  private async getUserSatisfaction(): Promise<any> {</any>
+  private async getUserSatisfaction(): Promise<any> {
     return 3 + Math.random() * 2, // 3-5 score}
   private getLatestSystemHealth(): SystemHealthMetrics | null {
     return this.systemMetrics[this.systemMetrics.length - 1] || null}
@@ -335,4 +335,4 @@ const forecast: PredictedIssue[] = [];
   }
 }
     return { current, trend, forecast }}
-}}}}}}}}}}})))))))))))))))))))))))))
+}}}}}}}}}}}

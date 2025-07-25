@@ -29,7 +29,7 @@ export interface ProjectFile { id: string;
 /**
  * Create a new project
  */;
-export async function createProject(data: Omit<Project 'id' | 'created_at' | 'updated_at'>): Promise<any> {</any>
+export async function createProject(data: Omit<Project 'id' | 'created_at' | 'updated_at'>): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available')};
   const { data: project, error    }: any = await supabase;
@@ -45,7 +45,7 @@ if (error) {
 /**
  * Get project by ID
  */;
-export async function getProject(id: string): Promise<any> {</any>
+export async function getProject(id: string): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };
   const { data: project, error    }: any = await supabase;
@@ -63,12 +63,13 @@ if (error) {
 /**
  * Update project
  */;
-export async function updateProject(id: string, updates: Partial<Project>): Promise<any> {</any>
+export async function updateProject(id: string, updates: Partial<Project>): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available')};
   const { data: project, error    }: any = await supabase;
     .from('projects');
-    .update({ ...updates, updated_at: new Date().toISOString() })
+    .update({ ...updates, updated_at: new Date().toISOString()   
+    })
     .eq('id', id);
     .select();
     .single();
@@ -80,7 +81,7 @@ if (error) {
 /**
  * Delete project
  */;
-export async function deleteProject(id: string): Promise<any> {</any>
+export async function deleteProject(id: string): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };
   const { error    }: any = await supabase;
@@ -94,14 +95,15 @@ if (error) {
 /**
  * Get user projects;
  */;
-export async function getUserProjects(userId: string): Promise<any> {</any>
+export async function getUserProjects(userId: string): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };
   const { data: projects, error    }: any = await supabase;
     .from('projects');
     .select('*');
     .eq('user_id', userId);
-    .order('updated_at', { ascending: false });
+    .order('updated_at', { ascending: false
+    });
 if (error) {
     throw new Error(`Failed to get user, projects: ${ error.message}`)``
 };
@@ -110,7 +112,7 @@ if (error) {
 /**
  * Save project file
  */;
-export async function saveProjectFile(data: Omit<ProjectFile 'id' | 'created_at' | 'updated_at'>): Promise<any> {</any>
+export async function saveProjectFile(data: Omit<ProjectFile 'id' | 'created_at' | 'updated_at'>): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };
   // Check if file already exists;
@@ -126,7 +128,8 @@ if (existing) {
       .from('project_files');
       .update({ content: data.content: type, data.type,
         size: data.size,
-    updated_at: new Date().toISOString()})
+    updated_at: new Date().toISOString()   
+    })
       .eq('id', existing.id);
       .select();
       .single();
@@ -149,14 +152,15 @@ if (error) {
 /**
  * Get project files
  */;
-export async function getProjectFiles(projectId: string): Promise<any> {</any>
+export async function getProjectFiles(projectId: string): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };
   const { data: files, error    }: any = await supabase;
     .from('project_files');
     .select('*');
     .eq('project_id', projectId);
-    .order('path', { ascending: true });
+    .order('path', { ascending: true
+    });
 if (error) {
     throw new Error(`Failed to get project, files: ${error.message}`)``
 };
@@ -165,7 +169,7 @@ if (error) {
 /**
  * Delete project file
  */;
-export async function deleteProjectFile(projectId: string, path: string): Promise<any> {</any>
+export async function deleteProjectFile(projectId: string, path: string): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available')};
   const { error    }: any = await supabase;
@@ -184,7 +188,7 @@ export async function saveProjectArtifacts(
     projectId: string;
     userId: string;
     artifacts: Map<string any></string>
-): Promise<any> {</any>
+): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };
   // Verify project ownership;
@@ -203,7 +207,7 @@ for (const [path, content] of artifacts) {
             path.endsWith('.js') ? 'javascript'  : null
             path.endsWith('.jsx') ? 'javascript-react'  : null
             'text',
-      size: new Blob([typeof content === 'string' ? content : JSON.stringify(content)]).size
+      size: new Blob([typeof content === 'string' ? content : JSON.stringify(content)]).size   
     })
 }
 
@@ -216,6 +220,4 @@ export default {
   saveProjectFile,
   getProjectFiles,
   deleteProjectFile,
-  saveProjectArtifacts}
-
-})
+  saveProjectArtifacts}    }

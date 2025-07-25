@@ -40,7 +40,8 @@ export class InferenceTelemetry {
 }
   private ensureTelemetryDir() {
     if (!fs.existsSync(this.telemetryDir) {)} {
-      fs.mkdirSync(this.telemetryDir, { recursive: true })}
+      fs.mkdirSync(this.telemetryDir, { recursive: true
+    })}
   private startAutoFlush() {
     // Flush buffer every 30 seconds
     this.flushInterval = setInterval(() => {
@@ -49,7 +50,7 @@ export class InferenceTelemetry {
   /**
    * Log pre-inference check
    */
-  async logPreInference(requestId: string, inferenceType: TelemetryEntry['inferenceType'], agentContext? null : TelemetryEntry['agentContext']): Promise<any> {</any>
+  async logPreInference(requestId: string, inferenceType: TelemetryEntry['inferenceType'], agentContext? null : TelemetryEntry['agentContext']): Promise<any> {
 { await this.epcEngine.performPreflightCheck(); const entry: TelemetryEntry={ timestamp: new Date().toISOString();
       requestId,
       inferenceType,
@@ -146,7 +147,8 @@ const _eventLog = path.join(;
   /**
    * Get telemetry statistics
    */
-  async getStatistics(timeRange? null : { start: Date, end: Date }): Promise<any> { </any>
+  async getStatistics(timeRange? null : { start: Date, end: Date
+    }): Promise<any> { </any>
 {{ totalInferences: 0;
     blocked: 0;
     failed: 0;
@@ -206,4 +208,4 @@ cleanupOldFiles(daysToKeep: number = 30) {
     this.flushBuffer()
 }
 
-}}}}}}}}}}}}}}})))))))))))))))
+}}}}}}}}}}}}}}}
