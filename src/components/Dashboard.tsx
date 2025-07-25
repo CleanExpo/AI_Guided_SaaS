@@ -205,6 +205,21 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Filter Dropdown */}
+        <div className="mb-6">
+          <select
+            data-testid="filter-dropdown"
+            value={selectedFilter}
+            onChange={(e) => setSelectedFilter(e.target.value)}
+            className="px-4 py-2 border rounded-lg bg-white"
+          >
+            <option value="all">All Activities</option>
+            <option value="deployments">Deployments</option>
+            <option value="features">Features</option>
+            <option value="settings">Settings</option>
+          </select>
+        </div>
+
         {/* Loading Indicator */}
         {isLoading && (
           <div className="flex justify-center mb-4">

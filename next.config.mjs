@@ -22,12 +22,6 @@ const nextConfig = {
     APP_URL: process.env.NEXT_PUBLIC_APP_URL || process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000',
   },
   webpack: (config, { isServer }) => {
-    // Ignore lightningcss native module errors
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      'lightningcss': false,
-    };
-    
     // Ensure environment variables are available in webpack
     if (!isServer) {
       config.resolve.fallback = {
