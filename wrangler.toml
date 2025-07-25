@@ -1,0 +1,12 @@
+
+name = "ai-guided-saas"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = "aiguidedsaas.com/*"
+zone_id = ""
+
+[build]
+command = "npm run build"
+[build.upload]
+format = "service-worker"

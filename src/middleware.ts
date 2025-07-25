@@ -1,85 +1,45 @@
-/* BREADCRUMB: unknown - Purpose to be determined */
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { getToken } from 'next-auth/jwt';
 
-const PROTECTED_PATHS = [
-  '/dashboard',
-  '/admin',
-  '/api/admin',
-  '/projects',
-  '/settings'
-];
+import { NextRequest, NextResponse } from 'next/server';
 
-const ADMIN_PATHS = [
-  '/admin',
-  '/api/admin'
-];
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
+};
 
-const PUBLIC_PATHS = [
-  '/',
-  '/auth',
-  '/api/auth',
-  '/pricing',
-  '/about',
-  '/contact'
-];
-
-export async function middleware(request: NextRequest): Promise<any> {
-  const { pathname } = request.nextUrl;
-  
-  // Skip middleware for static files and API routes that don't need auth
-  if (pathname.startsWith('/_next/') {|}|
-      pathname.startsWith('/favicon.ico') ||
-      pathname.startsWith('/api/health')) {
-    return NextResponse.next()
-}
-  
-  // Allow public paths
-  if (PUBLIC_PATHS.some(path => pathname.startsWith(path) {)}) {
-    return NextResponse.next()
-}
-  
-  // CRITICAL FIX: Explicit route-based authentication to prevent Vercel conflicts
-  // Handle admin routes FIRST (highest priority)
-  if (ADMIN_PATHS.some(path => pathname.startsWith(path) {)}) {
-    // Admin routes use custom admin-token authentication, NOT NextAuth
-    const adminToken = request.cookies.get('admin-token');
-    
-    if (!adminToken) {
-      // Admin routes ALWAYS redirect to /admin/login
-      const loginUrl = new URL('/admin/login', request.url);
-      loginUrl.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(loginUrl)
-}
-    
-    // Admin authenticated - allow access
-    return NextResponse.next()
-}
-  
-  // Handle regular protected routes with NextAuth
-  if (PROTECTED_PATHS.some(path => pathname.startsWith(path) {)}) {
-    const token = await getToken({ req: request
-    });
-    
-    if (!token) { // User routes ALWAYS redirect to /auth/signin
-      const loginUrl = new URL('/auth/signin', request.url);
-      loginUrl.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(loginUrl)
-}
-  }
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
   
   // Add security headers
-  const response = NextResponse.next();
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
   response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-XSS-Protection', '1 mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   
-  return response
+  // Add performance headers
+  response.headers.set('X-DNS-Prefetch-Control', 'on');
+  response.headers.set('Connection', 'keep-alive');
+  
+  // Geo-based routing
+  const country = request.geo?.country || 'US';
+  response.headers.set('X-User-Country', country);
+  
+  // Cache control for static assets
+  const url = request.nextUrl;
+  if (url.pathname.startsWith('/images/') || 
+      url.pathname.startsWith('/fonts/') ||
+      url.pathname.startsWith('/_next/static/')) {
+    response.headers.set(
+      'Cache-Control',
+      'public, max-age=31536000, immutable'
+    );
+  }
+  
+  return response;
 }
-
-export const config={ matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)'
-  ]
- };
