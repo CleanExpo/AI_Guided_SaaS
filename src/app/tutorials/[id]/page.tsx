@@ -27,9 +27,11 @@ const tutorials: Tutorial[] = [
   }
 ];
 
-interface TutorialPageProps { params: {
+interface TutorialPageProps { 
+  params: {
     id: string
- }
+  }
+}
 
 export default function TutorialPage({ params }: TutorialPageProps) {
   const tutorial = tutorials.find(t => t.id === params.id);
@@ -50,7 +52,10 @@ export default function TutorialPage({ params }: TutorialPageProps) {
           <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
             {tutorial.duration}
           </span>
-        <div className="prose max-w-none">
+        </div>
+      </div>
+
+      <div className="prose max-w-none">
           <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-2xl font-semibold mb-4">Tutorial Content</h2>
           <p>{tutorial.content}</p>
@@ -64,6 +69,9 @@ export default function TutorialPage({ params }: TutorialPageProps) {
               <li>Best practices and tips</li>
             </ul>
           </div>
-  )
-}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

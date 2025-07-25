@@ -14,7 +14,7 @@ export default function StatusPage() {
   ];
 
   const getStatusIcon = (status) =>  {
-    switch (status) {;
+    switch (status) {
       case 'operational': return <CheckCircle className="w-5 h-5 text-green-600"   />
       case 'maintenance': return <Clock className="w-5 h-5 text-yellow-600"   />
       default: return <AlertCircle className="w-5 h-5 text-red-600"   />
@@ -37,7 +37,7 @@ export default function StatusPage() {
       </div>
 
       <Card>
-          <CardHeader></CardHeader>
+        <CardHeader>
           <CardTitle>Service Status</CardTitle>
         </CardHeader>
         <CardContent>
@@ -52,7 +52,11 @@ export default function StatusPage() {
           <span className="text-sm text-gray-600">{service.uptime}</span>
                   {getStatusBadge(service.status)}
                 </div>
+              </div>
             ))}
           </div>
-  )
+        </CardContent>
+      </Card>
+    </div>
+  );
 }

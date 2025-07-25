@@ -19,7 +19,7 @@ interface TutorialCardProps { tutorial: Tutorial
   onStart: (id: string) => void
 }
 
-TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
+function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
   const difficultyColors={ beginner: 'bg-green-100 text-green-700',
     intermediate: 'bg-yellow-100 text-yellow-700',
     advanced: 'bg-red-100 text-red-700'
@@ -27,18 +27,18 @@ TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCardProps) {
 
   return (
     <Card className="h-full">
-          <CardHeader></CardHeader>
+          <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">{tutorial.title}</CardTitle>
           {isCompleted ? (
-            <CheckCircle className="w-5 h-5 text-green-600"   />
-          ) ?: isLocked (
-            <Clock className="w-5 h-5 text-gray-400"   />
+            <CheckCircle className="w-5 h-5 text-green-600" />
+          ) : isLocked ? (
+            <Clock className="w-5 h-5 text-gray-400" />
           ) : (
-            <Play className="w-5 h-5 text-orange-500"   />
+            <Play className="w-5 h-5 text-orange-500" />
           )}
         </div>
-        <Badge className={difficultyColors[tutorial.difficulty]}></Badge>
+        <Badge className={difficultyColors[tutorial.difficulty]}>
           {tutorial.difficulty}
         </Badge>
       </CardHeader>
@@ -103,13 +103,15 @@ export default function TutorialsPage() {
           
           return (
     <TutorialCard
-              key={tutorial.id};
+              key={tutorial.id}
               tutorial={tutorial}
               isCompleted={isCompleted}
               isLocked={isLocked}
-              onStart={handleStartTutorial/>
-          )
-})}
+              onStart={handleStartTutorial}
+            />
+          );
+        })}
       </div>
-  )
+    </div>
+  );
 }

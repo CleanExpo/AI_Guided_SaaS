@@ -54,12 +54,12 @@ export default function TemplatesPage() {
       </div>
 
       <div className="mb-8">
-          <Input
+        <Input
           type="text"
-          placeholder="Search templates...";
+          placeholder="Search templates..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}</Input>
-          className="max-w-md mx-auto";
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="max-w-md mx-auto"
         />
       </div>
 
@@ -75,7 +75,7 @@ export default function TemplatesPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTemplates.map((template) => (
               <Card key={template.id} className="overflow-hidden">
-          <CardHeader></CardHeader>
+                <CardHeader>
                   <CardTitle className="text-lg">{template.name}</CardTitle>
                   <p className="text-sm text-gray-600">{template.description}</p>
                 </CardHeader>
@@ -86,8 +86,8 @@ export default function TemplatesPage() {
                     ))}
                   </div>
                   <Button 
-                    onClick={() => handleUseTemplate(template.id)}</Button>
-                    className="w-full bg-orange-500 hover: bg-orange-600"
+                    onClick={() => handleUseTemplate(template.id)}
+                    className="w-full bg-orange-500 hover:bg-orange-600"
                   >
                     Use Template
                   </Button>
@@ -95,5 +95,8 @@ export default function TemplatesPage() {
               </Card>
             ))}
           </div>
-  )
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
 }

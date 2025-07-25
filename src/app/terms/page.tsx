@@ -11,6 +11,7 @@ export default function TermsPage() {
             By accessing and using AI Guided SaaS, you accept and agree to be bound by the terms
             and provision of this agreement.
           </p>
+        </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Use License</h2>
@@ -40,6 +41,7 @@ export default function TermsPage() {
             Your privacy is important to us. Please review our Privacy Policy to understand
             how we collect and use your information.
           </p>
+        </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Contact Information</h2>
@@ -47,5 +49,8 @@ export default function TermsPage() {
             If you have any questions about these Terms of Service, please contact us at
             legal@aiguidedaas.com
           </p>
-  )
+        </section>
+      </div>
+    </div>
+  );
 }

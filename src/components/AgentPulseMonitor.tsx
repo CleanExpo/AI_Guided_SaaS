@@ -148,11 +148,11 @@ export function AgentPulseMonitor() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {agents.map((agent) => (
               <div key={agent.agentId} className="border rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-2">
                   <span className="font-medium">{agent.agentId}</span>
                   <Badge variant={agent.isAvailable ? "success" : "secondary"}>
                     {agent.isAvailable ? "Available" : "Busy"}
-                  />
+                  </Badge>
                 </div>
                 <div className="text-sm text-gray-600 space-y-1">
                   <div>Executions: {agent.executionCount}</div>
