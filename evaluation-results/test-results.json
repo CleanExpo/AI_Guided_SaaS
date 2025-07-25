@@ -78,7 +78,7 @@
           "specs": [
             {
               "title": "Dashboard Evaluation",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -91,13 +91,29 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 12059,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Dashboard Score: 8.2/10\n"
+                      "status": "failed",
+                      "duration": 3662,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/dashboard\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/dashboard\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts:357:16",
+                        "location": {
+                          "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                          "column": 16,
+                          "line": 357
                         },
+                        "snippet": "\u001b[0m \u001b[90m 355 |\u001b[39m   } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 356 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m'Navigation error for /dashboard:'\u001b[39m\u001b[33m,\u001b[39m error)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 357 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard'\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 358 |\u001b[39m   }\n \u001b[90m 359 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 360 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                            "column": 16,
+                            "line": 357
+                          },
+                          "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/dashboard\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  355 |   } catch (error) {\n  356 |     console.error('Navigation error for /dashboard:', error);\n> 357 |     await page.goto('/dashboard', { waitUntil: 'domcontentloaded', timeout: 15000 });\n      |                ^\n  358 |   }\n  359 |     await page.waitForLoadState('networkidle');\n  360 |\n    at D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts:357:16"
+                        }
+                      ],
+                      "stdout": [
                         {
                           "text": "\n🎯 EVALUATION REPORT\n"
                         },
@@ -108,7 +124,7 @@
                           "text": "🎯 COMPONENT SCORES:\n"
                         },
                         {
-                          "text": "✅ Dashboard: 8.2/10\n"
+                          "text": "✅ Dashboard: 0/10\n"
                         },
                         {
                           "text": "⚠️ Prompts:   0/10\n"
@@ -117,13 +133,19 @@
                           "text": "❌ Folders:   0/10\n"
                         },
                         {
-                          "text": "\n🏆 Overall: 2.7/10\n\n"
+                          "text": "\n🏆 Overall: 0/10\n\n"
                         },
                         {
                           "text": "🚨 PRIORITY IMPROVEMENTS:\n"
                         },
                         {
                           "text": "   [CRITICAL] Folders requires immediate attention\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Improve core functionality - ensure all metrics load correctly\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Optimize performance - reduce initial load time\n"
                         },
                         {
                           "text": "   [Prompts] Enhance usability - simplify the prompt creation workflow\n"
@@ -138,14 +160,34 @@
                           "text": "   [Folders] Improve visual hierarchy and folder nesting indicators\n"
                         }
                       ],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "Navigation error for /dashboard: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/dashboard\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"networkidle\"\u001b[22m\n\n    at \u001b[90mD:\\AI Guided SaaS\\\u001b[39mtests\\evaluation-suite.spec.ts:354:16 {\n  name: \u001b[32m'Error'\u001b[39m,\n  [\u001b[32mSymbol(step)\u001b[39m]: {\n    stepId: \u001b[32m'pw:api@9'\u001b[39m,\n    location: {\n      file: \u001b[32m'D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts'\u001b[39m,\n      line: \u001b[33m354\u001b[39m,\n      column: \u001b[33m16\u001b[39m\n    },\n    category: \u001b[32m'pw:api'\u001b[39m,\n    title: \u001b[32m'Navigate to \"/dashboard\"'\u001b[39m,\n    apiName: \u001b[32m'page.goto'\u001b[39m,\n    params: { url: \u001b[32m'/dashboard'\u001b[39m, waitUntil: \u001b[32m'networkidle'\u001b[39m, timeout: \u001b[33m15000\u001b[39m },\n    boxedStack: \u001b[90mundefined\u001b[39m,\n    steps: [],\n    attachmentIndices: [],\n    info: TestStepInfoImpl {\n      annotations: [],\n      _testInfo: \u001b[36m[TestInfoImpl]\u001b[39m,\n      _stepId: \u001b[32m'pw:api@9'\u001b[39m,\n      skip: \u001b[36m[Function (anonymous)]\u001b[39m\n    },\n    complete: \u001b[36m[Function: complete]\u001b[39m,\n    endWallTime: \u001b[33m1753421747075\u001b[39m,\n    error: {\n      message: \u001b[32m'Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/dashboard\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m,\n      stack: \u001b[32m'Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/dashboard\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/dashboard\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m +\n        \u001b[32m'\\n'\u001b[39m +\n        \u001b[32m'    at D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts:354:16'\u001b[39m,\n      cause: \u001b[90mundefined\u001b[39m\n    }\n  }\n}\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2025-07-25T05:06:02.478Z",
+                      "startTime": "2025-07-25T05:35:43.387Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-87afa--Suite-Dashboard-Evaluation-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-87afa--Suite-Dashboard-Evaluation-chromium\\video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                        "column": 16,
+                        "line": 357
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "000052f312f9a49b259e-21ba7fb98a2c3dfed254",
@@ -155,7 +197,7 @@
             },
             {
               "title": "Prompts Evaluation",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -168,90 +210,29 @@
                     {
                       "workerIndex": 1,
                       "parallelIndex": 1,
-                      "status": "passed",
-                      "duration": 6420,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Prompts Score: 8.2/10\n"
+                      "status": "failed",
+                      "duration": 3654,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/prompts\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/prompts\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/prompts\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/prompts\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts:374:16",
+                        "location": {
+                          "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                          "column": 16,
+                          "line": 374
                         },
+                        "snippet": "\u001b[0m \u001b[90m 372 |\u001b[39m   } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 373 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m'Navigation error for /prompts:'\u001b[39m\u001b[33m,\u001b[39m error)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 374 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/prompts'\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 375 |\u001b[39m   }\n \u001b[90m 376 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 377 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
                         {
-                          "text": "\n🎯 EVALUATION REPORT\n"
-                        },
-                        {
-                          "text": "============================================\n\n"
-                        },
-                        {
-                          "text": "🎯 COMPONENT SCORES:\n"
-                        },
-                        {
-                          "text": "✅ Dashboard: 0/10\n"
-                        },
-                        {
-                          "text": "⚠️ Prompts:   8.2/10\n"
-                        },
-                        {
-                          "text": "❌ Folders:   0/10\n"
-                        },
-                        {
-                          "text": "\n🏆 Overall: 2.7/10\n\n"
-                        },
-                        {
-                          "text": "🚨 PRIORITY IMPROVEMENTS:\n"
-                        },
-                        {
-                          "text": "   [CRITICAL] Folders requires immediate attention\n"
-                        },
-                        {
-                          "text": "   [Dashboard] Improve core functionality - ensure all metrics load correctly\n"
-                        },
-                        {
-                          "text": "   [Dashboard] Optimize performance - reduce initial load time\n"
-                        },
-                        {
-                          "text": "   [Folders] Implement drag-and-drop functionality properly\n"
-                        },
-                        {
-                          "text": "   [Folders] Improve visual hierarchy and folder nesting indicators\n"
+                          "location": {
+                            "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                            "column": 16,
+                            "line": 374
+                          },
+                          "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/prompts\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/prompts\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  372 |   } catch (error) {\n  373 |     console.error('Navigation error for /prompts:', error);\n> 374 |     await page.goto('/prompts', { waitUntil: 'domcontentloaded', timeout: 15000 });\n      |                ^\n  375 |   }\n  376 |     await page.waitForLoadState('networkidle');\n  377 |\n    at D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts:374:16"
                         }
                       ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-07-25T05:06:02.476Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "000052f312f9a49b259e-6add3a97122099813e78",
-              "file": "evaluation-suite.spec.ts",
-              "line": 368,
-              "column": 3
-            },
-            {
-              "title": "Folders Evaluation",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 6307,
-                      "errors": [],
                       "stdout": [
-                        {
-                          "text": "Folders Score: 8.2/10\n"
-                        },
                         {
                           "text": "\n🎯 EVALUATION REPORT\n"
                         },
@@ -268,16 +249,16 @@
                           "text": "⚠️ Prompts:   0/10\n"
                         },
                         {
-                          "text": "❌ Folders:   8.2/10\n"
+                          "text": "❌ Folders:   0/10\n"
                         },
                         {
-                          "text": "\n🏆 Overall: 2.7/10\n\n"
+                          "text": "\n🏆 Overall: 0/10\n\n"
                         },
                         {
                           "text": "🚨 PRIORITY IMPROVEMENTS:\n"
                         },
                         {
-                          "text": "   [CRITICAL] Prompts requires immediate attention\n"
+                          "text": "   [CRITICAL] Folders requires immediate attention\n"
                         },
                         {
                           "text": "   [Dashboard] Improve core functionality - ensure all metrics load correctly\n"
@@ -290,16 +271,161 @@
                         },
                         {
                           "text": "   [Prompts] Fix search functionality and form validation\n"
+                        },
+                        {
+                          "text": "   [Folders] Implement drag-and-drop functionality properly\n"
+                        },
+                        {
+                          "text": "   [Folders] Improve visual hierarchy and folder nesting indicators\n"
                         }
                       ],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "Navigation error for /prompts: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/prompts\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/prompts\", waiting until \"networkidle\"\u001b[22m\n\n    at \u001b[90mD:\\AI Guided SaaS\\\u001b[39mtests\\evaluation-suite.spec.ts:371:16 {\n  name: \u001b[32m'Error'\u001b[39m,\n  [\u001b[32mSymbol(step)\u001b[39m]: {\n    stepId: \u001b[32m'pw:api@9'\u001b[39m,\n    location: {\n      file: \u001b[32m'D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts'\u001b[39m,\n      line: \u001b[33m371\u001b[39m,\n      column: \u001b[33m16\u001b[39m\n    },\n    category: \u001b[32m'pw:api'\u001b[39m,\n    title: \u001b[32m'Navigate to \"/prompts\"'\u001b[39m,\n    apiName: \u001b[32m'page.goto'\u001b[39m,\n    params: { url: \u001b[32m'/prompts'\u001b[39m, waitUntil: \u001b[32m'networkidle'\u001b[39m, timeout: \u001b[33m15000\u001b[39m },\n    boxedStack: \u001b[90mundefined\u001b[39m,\n    steps: [],\n    attachmentIndices: [],\n    info: TestStepInfoImpl {\n      annotations: [],\n      _testInfo: \u001b[36m[TestInfoImpl]\u001b[39m,\n      _stepId: \u001b[32m'pw:api@9'\u001b[39m,\n      skip: \u001b[36m[Function (anonymous)]\u001b[39m\n    },\n    complete: \u001b[36m[Function: complete]\u001b[39m,\n    endWallTime: \u001b[33m1753421747099\u001b[39m,\n    error: {\n      message: \u001b[32m'Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/prompts\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/prompts\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m,\n      stack: \u001b[32m'Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/prompts\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/prompts\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m +\n        \u001b[32m'\\n'\u001b[39m +\n        \u001b[32m'    at D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts:371:16'\u001b[39m,\n      cause: \u001b[90mundefined\u001b[39m\n    }\n  }\n}\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2025-07-25T05:06:02.493Z",
+                      "startTime": "2025-07-25T05:35:43.387Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-2cd45-on-Suite-Prompts-Evaluation-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-2cd45-on-Suite-Prompts-Evaluation-chromium\\video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                        "column": 16,
+                        "line": 374
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
+                }
+              ],
+              "id": "000052f312f9a49b259e-6add3a97122099813e78",
+              "file": "evaluation-suite.spec.ts",
+              "line": 368,
+              "column": 3
+            },
+            {
+              "title": "Folders Evaluation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 3646,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/folders\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/folders\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts:391:16",
+                        "location": {
+                          "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                          "column": 16,
+                          "line": 391
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 389 |\u001b[39m   } \u001b[36mcatch\u001b[39m (error) {\n \u001b[90m 390 |\u001b[39m     console\u001b[33m.\u001b[39merror(\u001b[32m'Navigation error for /folders:'\u001b[39m\u001b[33m,\u001b[39m error)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 391 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/folders'\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 392 |\u001b[39m   }\n \u001b[90m 393 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 394 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                            "column": 16,
+                            "line": 391
+                          },
+                          "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/folders\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  389 |   } catch (error) {\n  390 |     console.error('Navigation error for /folders:', error);\n> 391 |     await page.goto('/folders', { waitUntil: 'domcontentloaded', timeout: 15000 });\n      |                ^\n  392 |   }\n  393 |     await page.waitForLoadState('networkidle');\n  394 |\n    at D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts:391:16"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n🎯 EVALUATION REPORT\n"
+                        },
+                        {
+                          "text": "============================================\n\n"
+                        },
+                        {
+                          "text": "🎯 COMPONENT SCORES:\n"
+                        },
+                        {
+                          "text": "✅ Dashboard: 0/10\n"
+                        },
+                        {
+                          "text": "⚠️ Prompts:   0/10\n"
+                        },
+                        {
+                          "text": "❌ Folders:   0/10\n"
+                        },
+                        {
+                          "text": "\n🏆 Overall: 0/10\n\n"
+                        },
+                        {
+                          "text": "🚨 PRIORITY IMPROVEMENTS:\n"
+                        },
+                        {
+                          "text": "   [CRITICAL] Folders requires immediate attention\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Improve core functionality - ensure all metrics load correctly\n"
+                        },
+                        {
+                          "text": "   [Dashboard] Optimize performance - reduce initial load time\n"
+                        },
+                        {
+                          "text": "   [Prompts] Enhance usability - simplify the prompt creation workflow\n"
+                        },
+                        {
+                          "text": "   [Prompts] Fix search functionality and form validation\n"
+                        },
+                        {
+                          "text": "   [Folders] Implement drag-and-drop functionality properly\n"
+                        },
+                        {
+                          "text": "   [Folders] Improve visual hierarchy and folder nesting indicators\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Navigation error for /folders: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/folders\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"networkidle\"\u001b[22m\n\n    at \u001b[90mD:\\AI Guided SaaS\\\u001b[39mtests\\evaluation-suite.spec.ts:388:16 {\n  name: \u001b[32m'Error'\u001b[39m,\n  [\u001b[32mSymbol(step)\u001b[39m]: {\n    stepId: \u001b[32m'pw:api@9'\u001b[39m,\n    location: {\n      file: \u001b[32m'D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts'\u001b[39m,\n      line: \u001b[33m388\u001b[39m,\n      column: \u001b[33m16\u001b[39m\n    },\n    category: \u001b[32m'pw:api'\u001b[39m,\n    title: \u001b[32m'Navigate to \"/folders\"'\u001b[39m,\n    apiName: \u001b[32m'page.goto'\u001b[39m,\n    params: { url: \u001b[32m'/folders'\u001b[39m, waitUntil: \u001b[32m'networkidle'\u001b[39m, timeout: \u001b[33m15000\u001b[39m },\n    boxedStack: \u001b[90mundefined\u001b[39m,\n    steps: [],\n    attachmentIndices: [],\n    info: TestStepInfoImpl {\n      annotations: [],\n      _testInfo: \u001b[36m[TestInfoImpl]\u001b[39m,\n      _stepId: \u001b[32m'pw:api@9'\u001b[39m,\n      skip: \u001b[36m[Function (anonymous)]\u001b[39m\n    },\n    complete: \u001b[36m[Function: complete]\u001b[39m,\n    endWallTime: \u001b[33m1753421747076\u001b[39m,\n    error: {\n      message: \u001b[32m'Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/folders\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m,\n      stack: \u001b[32m'Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/folders\\n'\u001b[39m +\n        \u001b[32m'Call log:\\n'\u001b[39m +\n        \u001b[32m'\\x1B[2m  - navigating to \"http://localhost:3000/folders\", waiting until \"networkidle\"\\x1B[22m\\n'\u001b[39m +\n        \u001b[32m'\\n'\u001b[39m +\n        \u001b[32m'    at D:\\\\AI Guided SaaS\\\\tests\\\\evaluation-suite.spec.ts:388:16'\u001b[39m,\n      cause: \u001b[90mundefined\u001b[39m\n    }\n  }\n}\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-07-25T05:35:43.405Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-05eb0-on-Suite-Folders-Evaluation-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\AI Guided SaaS\\test-results\\evaluation-suite-Senior-Pr-05eb0-on-Suite-Folders-Evaluation-chromium\\video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\AI Guided SaaS\\tests\\evaluation-suite.spec.ts",
+                        "column": 16,
+                        "line": 391
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
                 }
               ],
               "id": "000052f312f9a49b259e-2dff75f461ac626b2842",
@@ -314,11 +440,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-07-25T05:06:01.684Z",
-    "duration": 13160.874,
-    "expected": 3,
+    "startTime": "2025-07-25T05:35:42.469Z",
+    "duration": 5147.902,
+    "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 3,
     "flaky": 0
   }
 }

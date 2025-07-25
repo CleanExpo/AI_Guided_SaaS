@@ -204,8 +204,6 @@ function FoldersPageContent() {
   );
 }
 
-}
-
 export default function FoldersPage() {
   return (
     <PageErrorBoundary>

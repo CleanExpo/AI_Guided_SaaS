@@ -7,35 +7,44 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Activity, Cpu, HardDrive, Users, Clock, AlertCircle } from 'lucide-react';
 
-interface AgentMetrics { agentId: string
-  isAvailable: boolean
-  executionCount: number
-  averageExecutionTime: number
-  cooldownRemaining: number
+interface AgentMetrics {
+  agentId: string;
+  isAvailable: boolean;
+  executionCount: number;
+  averageExecutionTime: number;
+  cooldownRemaining: number;
 }
 
-interface PulseStatus { pulse: {
+interface PulseStatus {
+  pulse: {
     config: {
-      maxConcurrentAgents: number
-      pulseInterval: number
-      cooldownPeriod: number
-      maxMemoryUsage: number
-      maxCpuUsage: number
-    },
-    taskQueue: { length: number
+      maxConcurrentAgents: number;
+      pulseInterval: number;
+      cooldownPeriod: number;
+      maxMemoryUsage: number;
+      maxCpuUsage: number;
+    };
+    taskQueue: {
+      length: number;
       priorities: {
-        low?: number, medium?: number, high?: number
-        critical?: number
-}};
-    resources: { cpuUsage: number
-      memoryUsage: number };
-    activeAgents: string[]},
-  agents: AgentMetrics[]}
+        low?: number;
+        medium?: number;
+        high?: number;
+        critical?: number;
+      };
+    };
+    resources: {
+      cpuUsage: number;
+      memoryUsage: number;
+    };
+    activeAgents: string[];
+  };
+  agents: AgentMetrics[];
+}
 
 export function AgentPulseMonitor() {
-  const [pulseStatus, setPulseStatus] = useState<PulseStatus | null>(null)
+  const [pulseStatus, setPulseStatus] = useState<PulseStatus | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  
   const [error, setError] = useState<string | null>(null);
   
   const fetchStatus = async () => {
@@ -47,7 +56,7 @@ export function AgentPulseMonitor() {
       setPulseStatus(data);
       setError(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load pulse status')
+      setError(err instanceof Error ? err.message : 'Failed to load pulse status');
     } finally {
       setIsLoading(false);
     }
@@ -56,23 +65,23 @@ export function AgentPulseMonitor() {
   
   const updateConfig = async (updates: Record<string, any>) => {
     try {
-      const response = await fetch('/api/agents/pulse-config', { method: 'POST',
-        headers: { 'Content-Type': 'application/json'  },
+      const response = await fetch('/api/agents/pulse-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
-     
-    });
+      });
       if (!response.ok) throw new Error('Failed to update config');
-      await fetchStatus()
+      await fetchStatus();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update')
+      setError(err instanceof Error ? err.message : 'Failed to update');
     }
   };
 
   useEffect(() => {
     fetchStatus();
     const interval = setInterval(fetchStatus, 2000);
-    return () => clearInterval(interval)
-}, []);
+    return () => clearInterval(interval);
+  }, []);
 
   if (isLoading) return <div>Loading pulse monitor...</div>;
   if (error) return <div className="text-red-600">Error: {error}</div>;
@@ -87,9 +96,8 @@ export function AgentPulseMonitor() {
       <Card>
           <CardHeader>
           <CardTitle className="flex items-center gap-2">
-          <Activity className="h-5 w-5"     />
+            <Activity className="h-5 w-5" />
             System Resources
-          
           </CardTitle>
           <CardDescription>Real-time resource utilization</CardDescription>
         </CardHeader>
@@ -97,8 +105,8 @@ export function AgentPulseMonitor() {
           <div>
             <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-                <Cpu className="h-4 w-4"    />
-          <span className="text-sm">CPU Usage</span>
+                <Cpu className="h-4 w-4" />
+                <span className="text-sm">CPU Usage</span>
               </div>
               <span className="text-sm font-medium">
                 {pulse.resources.cpuUsage.toFixed(1)}%
@@ -113,7 +121,7 @@ export function AgentPulseMonitor() {
           <div>
           <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-          <HardDrive className="h-4 w-4"     />
+                <HardDrive className="h-4 w-4" />
                 <span className="text-sm">Memory Usage</span>
               </div>
               <span className="text-sm font-medium">
@@ -129,7 +137,7 @@ export function AgentPulseMonitor() {
       <Card>
           <CardHeader>
           <CardTitle className="flex items-center gap-2">
-          <Users className="h-5 w-5"     />
+            <Users className="h-5 w-5" />
             Agent Status
           </CardTitle>
           <CardDescription>
@@ -147,11 +155,12 @@ export function AgentPulseMonitor() {
                   />
                 </div>
                 <div className="text-sm text-gray-600 space-y-1">
-          <div>Executions: { agent.executionCount }</div>
-                  <div>Avg Time: { agent.averageExecutionTime.toFixed(0) }ms</div>
+                  <div>Executions: {agent.executionCount}</div>
+                  <div>Avg Time: {agent.averageExecutionTime.toFixed(0)}ms</div>
                   {agent.cooldownRemaining > 0 && (
                     <div className="flex items-center gap-1 text-amber-600">
-          <Clock className="h-3 w-3"    /> Cooldown: { agent.cooldownRemaining }ms
+                      <Clock className="h-3 w-3" />
+                      Cooldown: {agent.cooldownRemaining}ms
                     </div>
                   )}
                 </div>
@@ -173,8 +182,8 @@ export function AgentPulseMonitor() {
           <div className="space-y-2">
             {Object.entries(pulse.taskQueue.priorities).map(([priority, count]) => (
               <div key={priority} className="flex items-center justify-between">
-          <span className="capitalize">{priority}</span>
-                <Badge>{count || 0}/>
+                <span className="capitalize">{priority}</span>
+                <Badge>{count || 0}</Badge>
               </div>
             ))}
           </div>
@@ -189,25 +198,24 @@ export function AgentPulseMonitor() {
         <CardContent className="space-y-3">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-          <span className="text-gray-600">Max Concurrent:</span>
+              <span className="text-gray-600">Max Concurrent:</span>
               <span className="ml-2 font-medium">{pulse.config.maxConcurrentAgents}</span>
             </div>
             <div>
-          <span className="text-gray-600">Pulse Interval:</span>
+              <span className="text-gray-600">Pulse Interval:</span>
               <span className="ml-2 font-medium">{pulse.config.pulseInterval}ms</span>
             </div>
             <div>
-          <span className="text-gray-600">Cooldown Period:</span>
+              <span className="text-gray-600">Cooldown Period:</span>
               <span className="ml-2 font-medium">{pulse.config.cooldownPeriod}ms</span>
             </div>
             <div>
-          <span className="text-gray-600">CPU Limit:</span>
+              <span className="text-gray-600">CPU Limit:</span>
               <span className="ml-2 font-medium">{pulse.config.maxCpuUsage}%</span>
             </div>
           </div>
           <Button
-            onClick={() => updateConfig({ maxConcurrentAgents: pulse.config.maxConcurrentAgents + 1
-    })}
+            onClick={() => updateConfig({ maxConcurrentAgents: pulse.config.maxConcurrentAgents + 1 })}
             size="sm"
             className="mt-4"
           >
@@ -216,5 +224,5 @@ export function AgentPulseMonitor() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
