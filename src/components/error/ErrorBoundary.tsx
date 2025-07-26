@@ -141,21 +141,21 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
       const isDevelopment = (process.env.NODE_ENV || "development") === "development";
 
       return(<div className="min-h-screen glass flex items-center justify-center p-4">
-          <Card className="max-w-2xl w-full glass
-            <CardHeader className="glass"
+          <Card className="max-w-2xl w-full glass">
+            <CardHeader className="glass">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-red-100 rounded-xl-lg flex items-center justify-center">
                   <AlertTriangle className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl glassSomething went wrong</CardTitle>
+                  <CardTitle className="text-2xl glass">Something went wrong</CardTitle>
                   <p className="text-gray-600 text-sm mt-1">
                     We encountered an unexpected error. Please try again.
                   </p>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4 glass
+            <CardContent className="space-y-4 glass">
               {/* Error Message */}
               <Alert variant="destructive">
                 <AlertTriangle className="h-4 w-4" />
@@ -260,7 +260,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
 // Functional component wrapper for easier use with hooks
 export function ErrorBoundaryWrapper({ 
   children, 
-  fallback)
+  fallback,
   onError 
 }: { 
   children: ReactNode;
@@ -301,7 +301,7 @@ export function PageErrorBoundary({ children }: { children: ReactNode }) {
 
 // Component-level error boundary with inline fallback
 export function ComponentErrorBoundary({ 
-  children)
+  children,
   fallbackText = 'Unable to load this component'
 }: { 
   children: ReactNode;

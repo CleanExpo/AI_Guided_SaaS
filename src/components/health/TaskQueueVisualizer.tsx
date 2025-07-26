@@ -13,14 +13,14 @@ export function TaskQueueVisualizer() {
   ];
 
   return (
-    <Card className="glass"
-      <CardHeader className="glass"
-        <CardTitle className="flex items-center gap-2 glass
+    <Card className="glass">
+      <CardHeader className="glass">
+        <CardTitle className="flex items-center gap-2 glass">
           <Clock className="h-5 w-5" />
           Task Queue
         </CardTitle>
       </CardHeader>
-      <CardContent className="glass"
+      <CardContent className="glass">
         <div className="space-y-2">
           {tasks.map(task => (
             <div key={task.id} className="flex items-center justify-between p-3 glass rounded-lg">

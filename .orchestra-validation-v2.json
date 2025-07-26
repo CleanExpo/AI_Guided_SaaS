@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "score": 0,
+  "errors": [
+    "BLOCKING: Next.js compilation failed",
+    "SyntaxError: Unexpected non-whitespace character after JSON at position 83"
+  ],
+  "warnings": [],
+  "evidence": [
+    {
+      "step": "syntax_check",
+      "result": {
+        "passed": true,
+        "errors": []
+      }
+    },
+    {
+      "step": "production_build",
+      "result": {
+        "compilationPassed": false,
+        "buildCompleted": false,
+        "errors": [
+          "SyntaxError: Unexpected non-whitespace character after JSON at position 83"
+        ],
+        "output": "\n> ai-guided-saas@1.0.0 prebuild\n> node scripts/vercel-build-env.cjs\n\n🔧 Setting up Vercel build environment...\n📍 Not running in Vercel environment\n   Use \"npm run sync:env\" to pull variables from Vercel\n\n> ai-guided-saas@1.0.0 build\n> next build\n\n   ▲ Next.js 15.4.4\n   - Environments: .env.local, .env.production\n   - Experiments (use with caution):\n     ✓ forceSwcTransforms\n\n\n> Build error occurred\nSyntaxError: Unexpected non-whitespace character after JSON at position 83\n    at JSON.parse (<anonymous>)\n"
+      }
+    }
+  ]
+}

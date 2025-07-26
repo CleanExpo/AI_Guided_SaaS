@@ -267,7 +267,7 @@ export class LoadBalancer {
   private async geographicSelection(
     instances: ServerInstance[],
     request: NextRequest
-  ): ServerInstance {
+  ): Promise<ServerInstance> {
     const clientRegion = await this.getClientRegion(request);
 
     // Find instances in the same region
@@ -404,10 +404,18 @@ export class LoadBalancer {
     const start = Date.now();
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(
+        () => controller.abort(),
+        this.config.timeoutMs
+      );
+
       const response = await fetch(`${instance.url}/health`, {
         method: 'GET',
-        timeout: this.config.timeoutMs,
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const responseTime = Date.now() - start;
 
@@ -450,7 +458,16 @@ export class LoadBalancer {
       await this.evaluateAutoScaling();
     }, this.autoScalingConfig.metricsWindow);
 
-    logger.info('Auto-scaling monitoring started', this.autoScalingConfig);
+    logger.info('Auto-scaling monitoring started', {
+      enabled: this.autoScalingConfig.enabled,
+      minInstances: this.autoScalingConfig.minInstances,
+      maxInstances: this.autoScalingConfig.maxInstances,
+      targetCpuUtilization: this.autoScalingConfig.targetCpuUtilization,
+      targetMemoryUtilization: this.autoScalingConfig.targetMemoryUtilization,
+      scaleUpCooldown: this.autoScalingConfig.scaleUpCooldown,
+      scaleDownCooldown: this.autoScalingConfig.scaleDownCooldown,
+      metricsWindow: this.autoScalingConfig.metricsWindow,
+    });
   }
 
   /**
