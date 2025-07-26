@@ -1,13 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { usePWA } from '@/hooks/usePWA';
-import MobileDashboard from '@/components/MobileDashboard';
-import { useAnalytics, usePerformanceTracking } from '@/hooks/useAnalytics';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useSession, signOut } from 'next-auth/react';
 import { 
   BarChart3, 
   Users, 
@@ -31,404 +30,371 @@ import {
   Play,
   Database,
   Bot,
-  CreditCard
+  CreditCard,
+  LogOut,
+  Home,
+  FolderOpen,
+  MessageSquare,
+  FileCode,
+  Cpu,
+  HardDrive,
+  Layers,
+  Cloud
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState('all');
-  const [lastRefresh, setLastRefresh] = useState(new Date());
-  const [deploymentStatus, setDeploymentStatus] = useState('ready');
-  const [metrics, setMetrics] = useState<any>(null);
-  const { isMobile } = usePWA();
-  const { trackFeature, trackConversion } = useAnalytics();
-  usePerformanceTracking('Dashboard');
+  const [activeTab, setActiveTab] = useState('overview');
+  const [projects, setProjects] = useState<any[]>([]);
+  const [metrics, setMetrics] = useState({
+    apiCalls: 0,
+    deployments: 0,
+    activeProjects: 0,
+    teamMembers: 1
+  });
   
-  const handleRefresh = () => {
-    setIsLoading(true);
-    setLastRefresh(new Date());
-    setTimeout(() => setIsLoading(false), 1000);
-  };
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  // Real-time data updates
+  // Simulate real-time data updates
   useEffect(() => {
-    const updateData = () => {
+    const loadProjects = () => {
+      setProjects([
+        {
+          id: 1,
+          name: 'My First AI App',
+          status: 'active',
+          framework: 'Next.js',
+          lastDeploy: '2 hours ago',
+          url: 'https://my-first-app.vercel.app',
+          metrics: {
+            users: 248,
+            apiCalls: 12500,
+            uptime: 99.9
+          }
+        },
+        {
+          id: 2,
+          name: 'E-Commerce Platform',
+          status: 'building',
+          framework: 'React',
+          lastDeploy: 'In progress',
+          url: null,
+          metrics: {
+            users: 0,
+            apiCalls: 0,
+            uptime: 0
+          }
+        },
+        {
+          id: 3,
+          name: 'API Dashboard',
+          status: 'active',
+          framework: 'Vue.js',
+          lastDeploy: '1 day ago',
+          url: 'https://api-dashboard.netlify.app',
+          metrics: {
+            users: 1024,
+            apiCalls: 89000,
+            uptime: 99.7
+          }
+        }
+      ]);
+
       setMetrics({
-        deployTime: Math.floor(Math.random() * 2) + 3,
-        activeFeatures: 24,
-        apiLatency: Math.floor(Math.random() * 20) + 35,
-        devVelocity: 10
+        apiCalls: 101500,
+        deployments: 47,
+        activeProjects: 3,
+        teamMembers: 5
       });
     };
 
-    updateData(); // Initial load
-    const interval = setInterval(updateData, 5000); // Update every 5 seconds
+    loadProjects();
+    const interval = setInterval(() => {
+      setMetrics(prev => ({
+        ...prev,
+        apiCalls: prev.apiCalls + Math.floor(Math.random() * 100)
+      }));
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Use mobile dashboard for mobile devices
-  if (isMobile) {
-    return <MobileDashboard />;
-  }
+  const handleCreateProject = () => {
+    router.push('/projects/new');
+  };
 
-  // Speed-focused metrics for Sam
+  const handleSignOut = async () => {
+    await signOut({ redirect: true, callbackUrl: '/' });
+  };
+
   const stats = [
     { 
-      title: 'Time to Deploy',
-      value: metrics ? `< ${metrics.deployTime} min` : '< 5 min',
-      change: 'One-click ready',
-      trend: 'up',
-      icon: Rocket,
-      color: 'text-green-600'
-    },
-    { 
-      title: 'Active Features',
-      value: metrics ? `${metrics.activeFeatures}/24` : '24/24',
-      change: 'All systems go',
-      trend: 'up',
-      icon: CheckCircle,
-      color: 'text-green-600'
-    },
-    { 
-      title: 'API Latency',
-      value: metrics ? `${metrics.apiLatency}ms` : '45ms',
-      change: 'Blazing fast',
-      trend: 'up',
-      icon: Zap,
+      title: 'Total API Calls',
+      value: metrics.apiCalls.toLocaleString(),
+      change: '+12.5%',
+      icon: Activity,
       color: 'text-blue-600'
     },
     { 
-      title: 'Dev Velocity',
-      value: metrics ? `${metrics.devVelocity}x` : '10x',
-      change: 'vs traditional',
-      trend: 'up',
-      icon: TrendingUp,
-      color: 'text-purple-600'
-    }
-  ];
-
-  // Quick action cards for developers
-  const quickActions = [
-    {
-      title: 'Deploy to Production',
-      description: 'Push your app live in one click',
+      title: 'Deployments',
+      value: metrics.deployments,
+      change: '+8 this week',
       icon: Rocket,
-      action: '/deploy',
-      color: 'bg-green-500',
-      time: '< 1 min'
+      color: 'text-green-600'
     },
-    {
-      title: 'Add AI Chat',
-      description: 'Enable GPT-4 chat interface',
-      icon: Bot,
-      action: '/settings/ai',
-      color: 'bg-purple-500',
-      time: '2 mins'
+    { 
+      title: 'Active Projects',
+      value: metrics.activeProjects,
+      change: '2 building',
+      icon: FolderOpen,
+      color: 'text-purple-600'
     },
-    {
-      title: 'Setup Payments',
-      description: 'Connect Stripe checkout',
-      icon: CreditCard,
-      action: '/settings/payments',
-      color: 'bg-blue-500',
-      time: '5 mins'
-    },
-    {
-      title: 'Configure Auth',
-      description: 'Enable OAuth & magic links',
+    { 
+      title: 'Team Members',
+      value: metrics.teamMembers,
+      change: 'Pro plan',
       icon: Users,
-      action: '/settings/auth',
-      color: 'bg-orange-500',
-      time: '3 mins'
+      color: 'text-orange-600'
     }
   ];
 
-  // Recent activity focused on development speed
-  const recentActivity = [
+  const quickActions = [
     { 
-      id: 1, 
-      action: 'Database migrations completed',
-      time: '2 minutes ago',
-      icon: Database,
-      status: 'success'
+      title: 'Create New Project',
+      description: 'Start building with AI assistance',
+      icon: Plus,
+      action: () => router.push('/projects/new'),
+      color: 'bg-blue-600'
     },
     { 
-      id: 2, 
-      action: 'CI/CD pipeline configured',
-      time: '5 minutes ago',
-      icon: GitBranch,
-      status: 'success'
+      title: 'Deploy to Production',
+      description: 'One-click deployment',
+      icon: Cloud,
+      action: () => router.push('/deploy'),
+      color: 'bg-green-600'
     },
     { 
-      id: 3, 
-      action: 'Environment variables set',
-      time: '10 minutes ago',
-      icon: Settings,
-      status: 'success'
+      title: 'View Documentation',
+      description: 'Learn best practices',
+      icon: FileCode,
+      action: () => window.open('/docs', '_blank'),
+      color: 'bg-purple-600'
     },
     { 
-      id: 4, 
-      action: 'Dependencies installed (247 packages)',
-      time: '15 minutes ago',
-      icon: Package,
-      status: 'success'
+      title: 'Invite Team',
+      description: 'Collaborate with others',
+      icon: Users,
+      action: () => router.push('/team/invite'),
+      color: 'bg-orange-600'
     }
   ];
 
-  const handleQuickDeploy = () => {
-    setDeploymentStatus('deploying');
-    trackFeature('dashboard', 'quick_deploy', 'initiated');
-    setTimeout(() => {
-      setDeploymentStatus('deployed');
-      trackConversion('quick_deploy_success');
-    }, 3000);
-  };
-
-  return(<div className="min-h-screen glass">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header - Developer focused */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Speed Dashboard
-              </h1>
-              <p className="mt-1 text-sm text-gray-500">
-                Ship faster. Every boilerplate component is production-ready.
-              </p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Badge className="bg-green-100 text-green-700">
-                <Clock className="h-3 w-3 mr-1" />
-                Ready to ship
-              </Badge>
-              <Button variant="outline" size="sm">
-                <Terminal className="h-4 w-4 mr-2" />
-                Terminal
-              </Button>
-              <Button 
-                data-testid="refresh-button" )
-                variant="outline" >size="sm">onClick={() => {
-                  setIsLoading(true);
-                  setLastRefresh(new Date());
-                  // Refresh metrics data
-                  setMetrics({)
-                    deployTime: Math.floor(Math.random() * 2) + 3,
-                    activeFeatures: 24,
-                    apiLatency: Math.floor(Math.random() * 20) + 35,
-                    devVelocity: 10
-                  });
-                  setTimeout(() => setIsLoading(false), 1000);
-                }}
-              >
-                <Bell className="h-4 w-4" />
-              </Button>
-              <Button onClick={handleQuickDeploy} className="bg-green-600 hover:bg-green-700">
-                <Play className="h-4 w-4 mr-2" />
-                Quick Deploy
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Filter Dropdown */}
-        <div className="mb-6">
-          <select
-            data-testid="filter-dropdown"
-            value={selectedFilter}
-            onChange={(e) => setSelectedFilter(e.target.value)}
-            className="px-4 py-2  rounded-xl-lg glass"
-          >
-            <option value="all">All Activities</option>
-            <option value="deployments">Deployments</option>
-            <option value="features">Features</option>
-            <option value="settings">Settings</option>
-          </select>
-        </div>
-
-        {/* Loading Indicator */}
-        {isLoading && (
-          <div className="flex justify-center mb-4">
-            <div data-testid="loading-spinner" className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600"></div>
-          </div>
-        )}
-
-        {/* Deployment Status Banner */}
-        {deploymentStatus === 'deploying' && (
-          <Card className="mb-6 -blue-500 bg-blue-50 glass
-            <CardContent className="glass p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="animate-spin rounded-lg-full h-5 w-5 -b-2 -blue-600" />
-                  <span className="font-medium">Deploying to production...</span>
-                </div>
-                <span className="text-sm text-gray-600">This usually takes less than 60 seconds</span>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {deploymentStatus === 'deployed' && (
-          <Card className="mb-6 -green-500 bg-green-50 glass
-            <CardContent className="glass p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="font-medium">Successfully deployed!</span>
-                </div>
-                <Button variant="outline" size="sm">
-                  View Live Site →
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Speed Metrics */}
-        <div data-testid="dashboard-metrics" className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat) => (
-            <Card key={stat.title} className="glass"
-              <CardContent className="glass p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                  </div>
-                  <div className="w-12 h-12 glass rounded-xl-lg flex items-center justify-center">
-                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
-                  </div>
-                </div>
-                <div className="mt-4 flex items-center">
-                  <span className="text-sm font-medium text-gray-600">{stat.change}</span>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="glass grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Quick Actions */}
-          <div className="lg:col-span-2">
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Quick Setup Actions</CardTitle>
-                <p className="text-sm text-gray-600">Get your SaaS live in minutes, not months</p>
-              </CardHeader>
-              <CardContent className="glass"
-                <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {quickActions.map((action) => (
-                    <Link href={action.action} key={action.title} onClick={() => trackFeature('dashboard', 'quick_action', action.title)}>
-                      <div className="glass  rounded-xl-lg p-4 hover:shadow-md-md transition-shadow-md cursor-pointer">
-                        <div className="flex items-start justify-between mb-2">
-                          <div className={`w-10 h-10 ${action.color} rounded-lg flex items-center justify-center`}>
-                            <action.icon className="h-5 w-5 text-white" />
-                          </div>
-                          <Badge variant="secondary" className="text-xs">
-                            {action.time}
-                          </Badge>
-                        </div>
-                        <h3 className="font-medium text-gray-900 mb-1">{action.title}</h3>
-                        <p className="text-sm text-gray-600">{action.description}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Developer Resources */}
-          <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Developer Resources</CardTitle>
-              </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-3">
-                  <Link href="/docs" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
-                    <div className="flex items-center gap-3">
-                      <Code2 className="h-5 w-5 text-gray-600" />
-                      <span className="font-medium">Documentation</span>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-gray-400" />
-                  </Link>
-                  
-                  <Link href="https://github.com" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
-                    <div className="flex items-center gap-3">
-                      <Github className="h-5 w-5 text-gray-600" />
-                      <span className="font-medium">GitHub Repo</span>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-gray-400" />
-                  </Link>
-                  
-                  <Link href="/api/playground" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
-                    <div className="flex items-center gap-3">
-                      <Terminal className="h-5 w-5 text-gray-600" />
-                      <span className="font-medium">API Playground</span>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-gray-400" />
-                  </Link>
-                  
-                  <Link href="/discord" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
-                    <div className="flex items-center gap-3">
-                      <Users className="h-5 w-5 text-gray-600" />
-                      <span className="font-medium">Discord Community</span>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-gray-400" />
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <div className="flex items-center justify-between">
-              <CardTitle className="glass"Setup Progress</CardTitle>
-              <Badge variant="outline">4/4 Complete</Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="glass"
-            <div className="space-y-4">
-              {recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      activity.status === 'success' ? 'bg-green-100' : 'bg-gray-100'
-                    }`}>
-                      <activity.icon className={`h-4 w-4 ${
-                        activity.status === 'success' ? 'text-green-600' : 'text-gray-600'
-                      }`} />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">{activity.action}</p>
-                      <p className="text-sm text-gray-500">{activity.time}</p>
-                    </div>
-                  </div>
-                  {activity.status === 'success' && (
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                  )}
-                </div>
-              ))}
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b sticky top-0 z-50">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <Link href="/dashboard" className="flex items-center gap-2">
+                <Rocket className="w-6 h-6 text-blue-600" />
+                <span className="text-xl font-bold">AI Platform</span>
+              </Link>
             </div>
             
-            <div className="mt-6 pt-6 -t">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Overall Progress</span>
-                <span className="text-sm text-gray-600">100%</span>
+            <nav className="hidden md:flex items-center gap-6">
+              <Link href="/projects" className="text-gray-600 hover:text-gray-900">
+                Projects
+              </Link>
+              <Link href="/deployments" className="text-gray-600 hover:text-gray-900">
+                Deployments
+              </Link>
+              <Link href="/analytics" className="text-gray-600 hover:text-gray-900">
+                Analytics
+              </Link>
+              <Link href="/settings" className="text-gray-600 hover:text-gray-900">
+                Settings
+              </Link>
+            </nav>
+
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="icon">
+                <Search className="w-5 h-5" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <Bell className="w-5 h-5" />
+              </Button>
+              <div className="flex items-center gap-2">
+                <div className="text-right">
+                  <div className="text-sm font-medium">{session?.user?.name || 'User'}</div>
+                  <div className="text-xs text-gray-500">{session?.user?.email}</div>
+                </div>
+                <Button variant="ghost" size="icon" onClick={handleSignOut}>
+                  <LogOut className="w-5 h-5" />
+                </Button>
               </div>
-              <Progress value={100} className="h-2" />
-              <p className="text-sm text-gray-600 mt-2">
-                🎉 Your app is fully configured and ready to ship!
-              </p>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Welcome Section */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">Welcome back!</h1>
+            <p className="text-gray-600 mt-1">Here's what's happening with your projects today.</p>
+          </div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {stats.map((stat, index) => (
+              <Card key={index}>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    {stat.title}
+                  </CardTitle>
+                  <stat.icon className={cn("w-4 h-4", stat.color)} />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{stat.value}</div>
+                  <p className="text-xs text-gray-600 mt-1">{stat.change}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Quick Actions */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {quickActions.map((action, index) => (
+                <Card 
+                  key={index} 
+                  className="cursor-pointer hover:shadow-lg transition-all"
+                  onClick={action.action}>
+                  <CardContent className="p-6">
+                    <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", action.color)}>
+                      <action.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-semibold mb-1">{action.title}</h3>
+                    <p className="text-sm text-gray-600">{action.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Projects Section */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold">Your Projects</h2>
+              <Button onClick={handleCreateProject}>
+                <Plus className="w-4 h-4 mr-2" />
+                New Project
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {projects.map((project) => (
+                <Card key={project.id}>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg">{project.name}</CardTitle>
+                      <Badge variant={project.status === 'active' ? 'default' : 'secondary'}>
+                        {project.status}
+                      </Badge>
+                    </div>
+                    <CardDescription>{project.framework}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Last deploy:</span>
+                        <span className="font-medium">{project.lastDeploy}</span>
+                      </div>
+                      
+                      {project.status === 'active' && (
+                        <>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-gray-600">Users</span>
+                              <span className="font-medium">{project.metrics.users}</span>
+                            </div>
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-gray-600">API Calls</span>
+                              <span className="font-medium">{project.metrics.apiCalls.toLocaleString()}</span>
+                            </div>
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-gray-600">Uptime</span>
+                              <span className="font-medium">{project.metrics.uptime}%</span>
+                            </div>
+                          </div>
+                          
+                          <div className="flex gap-2">
+                            <Button size="sm" className="flex-1" onClick={() => window.open(project.url, '_blank')}>
+                              <Play className="w-4 h-4 mr-2" />
+                              View Live
+                            </Button>
+                            <Button size="sm" variant="outline" className="flex-1">
+                              <Settings className="w-4 h-4 mr-2" />
+                              Settings
+                            </Button>
+                          </div>
+                        </>
+                      )}
+                      
+                      {project.status === 'building' && (
+                        <div className="space-y-2">
+                          <Progress value={45} className="w-full" />
+                          <p className="text-sm text-gray-600 text-center">Building... 45%</p>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Resource Usage */}
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-4">Resource Usage</h2>
+            <Card>
+              <CardContent className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-600">CPU Usage</span>
+                      <span className="text-sm font-medium">32%</span>
+                    </div>
+                    <Progress value={32} className="w-full" />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-600">Memory</span>
+                      <span className="text-sm font-medium">2.4GB / 8GB</span>
+                    </div>
+                    <Progress value={30} className="w-full" />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-600">Storage</span>
+                      <span className="text-sm font-medium">45GB / 100GB</span>
+                    </div>
+                    <Progress value={45} className="w-full" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
